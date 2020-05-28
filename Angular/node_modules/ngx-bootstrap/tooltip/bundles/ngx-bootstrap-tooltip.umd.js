@@ -1,0 +1,954 @@
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('ngx-bootstrap/utils'), require('ngx-bootstrap/component-loader'), require('ngx-bootstrap/positioning'), require('rxjs'), require('@angular/common')) :
+    typeof define === 'function' && define.amd ? define('ngx-bootstrap/tooltip', ['exports', '@angular/core', 'ngx-bootstrap/utils', 'ngx-bootstrap/component-loader', 'ngx-bootstrap/positioning', 'rxjs', '@angular/common'], factory) :
+    (global = global || self, factory((global['ngx-bootstrap'] = global['ngx-bootstrap'] || {}, global['ngx-bootstrap'].tooltip = {}), global.ng.core, global.utils, global.componentLoader, global.positioning, global.rxjs, global.ng.common));
+}(this, (function (exports, core, utils, componentLoader, positioning, rxjs, common) { 'use strict';
+
+    /*! *****************************************************************************
+    Copyright (c) Microsoft Corporation. All rights reserved.
+    Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+    this file except in compliance with the License. You may obtain a copy of the
+    License at http://www.apache.org/licenses/LICENSE-2.0
+
+    THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+    WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+    MERCHANTABLITY OR NON-INFRINGEMENT.
+
+    See the Apache Version 2.0 License for specific language governing permissions
+    and limitations under the License.
+    ***************************************************************************** */
+    /* global Reflect, Promise */
+
+    var extendStatics = function(d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+
+    function __extends(d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    }
+
+    var __assign = function() {
+        __assign = Object.assign || function __assign(t) {
+            for (var s, i = 1, n = arguments.length; i < n; i++) {
+                s = arguments[i];
+                for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+            }
+            return t;
+        };
+        return __assign.apply(this, arguments);
+    };
+
+    function __rest(s, e) {
+        var t = {};
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+            t[p] = s[p];
+        if (s != null && typeof Object.getOwnPropertySymbols === "function")
+            for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
+                t[p[i]] = s[p[i]];
+        return t;
+    }
+
+    function __decorate(decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    }
+
+    function __param(paramIndex, decorator) {
+        return function (target, key) { decorator(target, key, paramIndex); }
+    }
+
+    function __metadata(metadataKey, metadataValue) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+    }
+
+    function __awaiter(thisArg, _arguments, P, generator) {
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+            function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    }
+
+    function __generator(thisArg, body) {
+        var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+        function verb(n) { return function (v) { return step([n, v]); }; }
+        function step(op) {
+            if (f) throw new TypeError("Generator is already executing.");
+            while (_) try {
+                if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+                if (y = 0, t) op = [op[0] & 2, t.value];
+                switch (op[0]) {
+                    case 0: case 1: t = op; break;
+                    case 4: _.label++; return { value: op[1], done: false };
+                    case 5: _.label++; y = op[1]; op = [0]; continue;
+                    case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                    default:
+                        if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                        if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                        if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                        if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                        if (t[2]) _.ops.pop();
+                        _.trys.pop(); continue;
+                }
+                op = body.call(thisArg, _);
+            } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+            if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+        }
+    }
+
+    function __exportStar(m, exports) {
+        for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+    }
+
+    function __values(o) {
+        var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+        if (m) return m.call(o);
+        return {
+            next: function () {
+                if (o && i >= o.length) o = void 0;
+                return { value: o && o[i++], done: !o };
+            }
+        };
+    }
+
+    function __read(o, n) {
+        var m = typeof Symbol === "function" && o[Symbol.iterator];
+        if (!m) return o;
+        var i = m.call(o), r, ar = [], e;
+        try {
+            while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+        }
+        catch (error) { e = { error: error }; }
+        finally {
+            try {
+                if (r && !r.done && (m = i["return"])) m.call(i);
+            }
+            finally { if (e) throw e.error; }
+        }
+        return ar;
+    }
+
+    function __spread() {
+        for (var ar = [], i = 0; i < arguments.length; i++)
+            ar = ar.concat(__read(arguments[i]));
+        return ar;
+    }
+
+    function __await(v) {
+        return this instanceof __await ? (this.v = v, this) : new __await(v);
+    }
+
+    function __asyncGenerator(thisArg, _arguments, generator) {
+        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+        var g = generator.apply(thisArg, _arguments || []), i, q = [];
+        return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
+        function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+        function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
+        function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
+        function fulfill(value) { resume("next", value); }
+        function reject(value) { resume("throw", value); }
+        function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
+    }
+
+    function __asyncDelegator(o) {
+        var i, p;
+        return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
+        function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
+    }
+
+    function __asyncValues(o) {
+        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+        var m = o[Symbol.asyncIterator], i;
+        return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
+        function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
+        function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
+    }
+
+    function __makeTemplateObject(cooked, raw) {
+        if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+        return cooked;
+    };
+
+    function __importStar(mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+        result.default = mod;
+        return result;
+    }
+
+    function __importDefault(mod) {
+        return (mod && mod.__esModule) ? mod : { default: mod };
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Default values provider for tooltip
+     */
+    var TooltipConfig = /** @class */ (function () {
+        function TooltipConfig() {
+            /**
+             * sets disable adaptive position
+             */
+            this.adaptivePosition = true;
+            /**
+             * tooltip placement, supported positions: 'top', 'bottom', 'left', 'right'
+             */
+            this.placement = 'top';
+            /**
+             * array of event names which triggers tooltip opening
+             */
+            this.triggers = 'hover focus';
+            /**
+             * delay before showing the tooltip
+             */
+            this.delay = 0;
+        }
+        TooltipConfig.decorators = [
+            { type: core.Injectable }
+        ];
+        return TooltipConfig;
+    }());
+    if (false) {
+        /**
+         * sets disable adaptive position
+         * @type {?}
+         */
+        TooltipConfig.prototype.adaptivePosition;
+        /**
+         * tooltip placement, supported positions: 'top', 'bottom', 'left', 'right'
+         * @type {?}
+         */
+        TooltipConfig.prototype.placement;
+        /**
+         * array of event names which triggers tooltip opening
+         * @type {?}
+         */
+        TooltipConfig.prototype.triggers;
+        /**
+         * a selector specifying the element the tooltip should be appended to.
+         * @type {?}
+         */
+        TooltipConfig.prototype.container;
+        /**
+         * delay before showing the tooltip
+         * @type {?}
+         */
+        TooltipConfig.prototype.delay;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var TooltipContainerComponent = /** @class */ (function () {
+        function TooltipContainerComponent(config) {
+            Object.assign(this, config);
+        }
+        Object.defineProperty(TooltipContainerComponent.prototype, "isBs3", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                return utils.isBs3();
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * @return {?}
+         */
+        TooltipContainerComponent.prototype.ngAfterViewInit = /**
+         * @return {?}
+         */
+        function () {
+            this.classMap = { in: false, fade: false };
+            this.classMap[this.placement] = true;
+            this.classMap["tooltip-" + this.placement] = true;
+            this.classMap.in = true;
+            if (this.animation) {
+                this.classMap.fade = true;
+            }
+            if (this.containerClass) {
+                this.classMap[this.containerClass] = true;
+            }
+        };
+        TooltipContainerComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'bs-tooltip-container',
+                        changeDetection: core.ChangeDetectionStrategy.OnPush,
+                        // tslint:disable-next-line
+                        host: {
+                            '[class]': '"tooltip in tooltip-" + placement + " " + "bs-tooltip-" + placement + " " + placement + " " + containerClass',
+                            '[class.show]': '!isBs3',
+                            '[class.bs3]': 'isBs3',
+                            '[attr.id]': 'this.id',
+                            role: 'tooltip'
+                        },
+                        template: "\n    <div class=\"tooltip-arrow arrow\"></div>\n    <div class=\"tooltip-inner\"><ng-content></ng-content></div>\n    ",
+                        styles: ["\n    :host.tooltip {\n      display: block;\n      pointer-events: none;\n    }\n    :host.bs3.tooltip.top>.arrow {\n      margin-left: -2px;\n    }\n    :host.bs3.tooltip.bottom {\n      margin-top: 0px;\n    }\n    :host.bs3.bs-tooltip-left, :host.bs3.bs-tooltip-right{\n      margin: 0px;\n    }\n    :host.bs3.bs-tooltip-right .arrow, :host.bs3.bs-tooltip-left .arrow {\n      margin: .3rem 0;\n    }\n  "]
+                    }] }
+        ];
+        /** @nocollapse */
+        TooltipContainerComponent.ctorParameters = function () { return [
+            { type: TooltipConfig }
+        ]; };
+        return TooltipContainerComponent;
+    }());
+    if (false) {
+        /** @type {?} */
+        TooltipContainerComponent.prototype.classMap;
+        /** @type {?} */
+        TooltipContainerComponent.prototype.placement;
+        /** @type {?} */
+        TooltipContainerComponent.prototype.containerClass;
+        /** @type {?} */
+        TooltipContainerComponent.prototype.animation;
+        /** @type {?} */
+        TooltipContainerComponent.prototype.id;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var id = 0;
+    var TooltipDirective = /** @class */ (function () {
+        function TooltipDirective(_viewContainerRef, cis, config, _elementRef, _renderer, _positionService) {
+            this._elementRef = _elementRef;
+            this._renderer = _renderer;
+            this._positionService = _positionService;
+            this.tooltipId = id++;
+            /**
+             * Fired when tooltip content changes
+             */
+            /* tslint:disable-next-line:no-any */
+            this.tooltipChange = new core.EventEmitter();
+            /**
+             * Css class for tooltip container
+             */
+            this.containerClass = '';
+            /**
+             * @deprecated - removed, will be added to configuration
+             */
+            this.tooltipAnimation = true;
+            /**
+             * @deprecated
+             */
+            this.tooltipFadeDuration = 150;
+            /**
+             * @deprecated
+             */
+            this.tooltipStateChanged = new core.EventEmitter();
+            this._tooltip = cis
+                .createLoader(this._elementRef, _viewContainerRef, this._renderer)
+                .provide({ provide: TooltipConfig, useValue: config });
+            Object.assign(this, config);
+            this.onShown = this._tooltip.onShown;
+            this.onHidden = this._tooltip.onHidden;
+        }
+        Object.defineProperty(TooltipDirective.prototype, "isOpen", {
+            /**
+             * Returns whether or not the tooltip is currently being shown
+             */
+            get: /**
+             * Returns whether or not the tooltip is currently being shown
+             * @return {?}
+             */
+            function () {
+                return this._tooltip.isShown;
+            },
+            set: /**
+             * @param {?} value
+             * @return {?}
+             */
+            function (value) {
+                if (value) {
+                    this.show();
+                }
+                else {
+                    this.hide();
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(TooltipDirective.prototype, "htmlContent", {
+            /** @deprecated - please use `tooltip` instead */
+            set: /**
+             * @deprecated - please use `tooltip` instead
+             * @param {?} value
+             * @return {?}
+             */
+            function (value) {
+                utils.warnOnce('tooltipHtml was deprecated, please use `tooltip` instead');
+                this.tooltip = value;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(TooltipDirective.prototype, "_placement", {
+            /** @deprecated - please use `placement` instead */
+            set: /**
+             * @deprecated - please use `placement` instead
+             * @param {?} value
+             * @return {?}
+             */
+            function (value) {
+                utils.warnOnce('tooltipPlacement was deprecated, please use `placement` instead');
+                this.placement = value;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(TooltipDirective.prototype, "_isOpen", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                utils.warnOnce('tooltipIsOpen was deprecated, please use `isOpen` instead');
+                return this.isOpen;
+            },
+            /** @deprecated - please use `isOpen` instead */
+            set: /**
+             * @deprecated - please use `isOpen` instead
+             * @param {?} value
+             * @return {?}
+             */
+            function (value) {
+                utils.warnOnce('tooltipIsOpen was deprecated, please use `isOpen` instead');
+                this.isOpen = value;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(TooltipDirective.prototype, "_enable", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                utils.warnOnce('tooltipEnable was deprecated, please use `isDisabled` instead');
+                return this.isDisabled;
+            },
+            /** @deprecated - please use `isDisabled` instead */
+            set: /**
+             * @deprecated - please use `isDisabled` instead
+             * @param {?} value
+             * @return {?}
+             */
+            function (value) {
+                utils.warnOnce('tooltipEnable was deprecated, please use `isDisabled` instead');
+                this.isDisabled = !value;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(TooltipDirective.prototype, "_appendToBody", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                utils.warnOnce('tooltipAppendToBody was deprecated, please use `container="body"` instead');
+                return this.container === 'body';
+            },
+            /** @deprecated - please use `container="body"` instead */
+            set: /**
+             * @deprecated - please use `container="body"` instead
+             * @param {?} value
+             * @return {?}
+             */
+            function (value) {
+                utils.warnOnce('tooltipAppendToBody was deprecated, please use `container="body"` instead');
+                this.container = value ? 'body' : this.container;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(TooltipDirective.prototype, "_popupClass", {
+            /** @deprecated - will replaced with customClass */
+            set: /**
+             * @deprecated - will replaced with customClass
+             * @param {?} value
+             * @return {?}
+             */
+            function (value) {
+                utils.warnOnce('tooltipClass deprecated');
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(TooltipDirective.prototype, "_tooltipContext", {
+            /** @deprecated - removed */
+            set: /**
+             * @deprecated - removed
+             * @param {?} value
+             * @return {?}
+             */
+            function (value) {
+                utils.warnOnce('tooltipContext deprecated');
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(TooltipDirective.prototype, "_tooltipPopupDelay", {
+            /** @deprecated */
+            set: /**
+             * @deprecated
+             * @param {?} value
+             * @return {?}
+             */
+            function (value) {
+                utils.warnOnce('tooltipPopupDelay is deprecated, use `delay` instead');
+                this.delay = value;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(TooltipDirective.prototype, "_tooltipTrigger", {
+            /** @deprecated -  please use `triggers` instead */
+            get: /**
+             * @deprecated -  please use `triggers` instead
+             * @return {?}
+             */
+            function () {
+                utils.warnOnce('tooltipTrigger was deprecated, please use `triggers` instead');
+                return this.triggers;
+            },
+            set: /**
+             * @param {?} value
+             * @return {?}
+             */
+            function (value) {
+                utils.warnOnce('tooltipTrigger was deprecated, please use `triggers` instead');
+                this.triggers = (value || '').toString();
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * @return {?}
+         */
+        TooltipDirective.prototype.ngOnInit = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            this._tooltip.listen({
+                triggers: this.triggers,
+                show: (/**
+                 * @return {?}
+                 */
+                function () { return _this.show(); })
+            });
+            /* tslint:disable-next-line:no-any */
+            this.tooltipChange.subscribe((/**
+             * @param {?} value
+             * @return {?}
+             */
+            function (value) {
+                if (!value) {
+                    _this._tooltip.hide();
+                }
+            }));
+            this.onShown.subscribe((/**
+             * @return {?}
+             */
+            function () {
+                _this.setAriaDescribedBy();
+            }));
+            this.onHidden.subscribe((/**
+             * @return {?}
+             */
+            function () {
+                _this.setAriaDescribedBy();
+            }));
+        };
+        /**
+         * @return {?}
+         */
+        TooltipDirective.prototype.setAriaDescribedBy = /**
+         * @return {?}
+         */
+        function () {
+            this._ariaDescribedby = this.isOpen ? "tooltip-" + this.tooltipId : null;
+            if (this._ariaDescribedby) {
+                this._renderer.setAttribute(this._elementRef.nativeElement, 'aria-describedby', this._ariaDescribedby);
+            }
+            else {
+                this._renderer.removeAttribute(this._elementRef.nativeElement, 'aria-describedby');
+            }
+        };
+        /**
+         * Toggles an element’s tooltip. This is considered a “manual” triggering of
+         * the tooltip.
+         */
+        /**
+         * Toggles an element’s tooltip. This is considered a “manual” triggering of
+         * the tooltip.
+         * @return {?}
+         */
+        TooltipDirective.prototype.toggle = /**
+         * Toggles an element’s tooltip. This is considered a “manual” triggering of
+         * the tooltip.
+         * @return {?}
+         */
+        function () {
+            if (this.isOpen) {
+                return this.hide();
+            }
+            this.show();
+        };
+        /**
+         * Opens an element’s tooltip. This is considered a “manual” triggering of
+         * the tooltip.
+         */
+        /**
+         * Opens an element’s tooltip. This is considered a “manual” triggering of
+         * the tooltip.
+         * @return {?}
+         */
+        TooltipDirective.prototype.show = /**
+         * Opens an element’s tooltip. This is considered a “manual” triggering of
+         * the tooltip.
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            this._positionService.setOptions({
+                modifiers: {
+                    flip: {
+                        enabled: this.adaptivePosition
+                    },
+                    preventOverflow: {
+                        enabled: this.adaptivePosition
+                    }
+                }
+            });
+            if (this.isOpen ||
+                this.isDisabled ||
+                this._delayTimeoutId ||
+                !this.tooltip) {
+                return;
+            }
+            /** @type {?} */
+            var showTooltip = (/**
+             * @return {?}
+             */
+            function () {
+                if (_this._delayTimeoutId) {
+                    _this._delayTimeoutId = undefined;
+                }
+                _this._tooltip
+                    .attach(TooltipContainerComponent)
+                    .to(_this.container)
+                    .position({ attachment: _this.placement })
+                    .show({
+                    content: _this.tooltip,
+                    placement: _this.placement,
+                    containerClass: _this.containerClass,
+                    id: "tooltip-" + _this.tooltipId
+                });
+            });
+            /** @type {?} */
+            var cancelDelayedTooltipShowing = (/**
+             * @return {?}
+             */
+            function () {
+                if (_this._tooltipCancelShowFn) {
+                    _this._tooltipCancelShowFn();
+                }
+            });
+            if (this.delay) {
+                if (this._delaySubscription) {
+                    this._delaySubscription.unsubscribe();
+                }
+                this._delaySubscription = rxjs.timer(this.delay).subscribe((/**
+                 * @return {?}
+                 */
+                function () {
+                    showTooltip();
+                    cancelDelayedTooltipShowing();
+                }));
+                if (this.triggers) {
+                    utils.parseTriggers(this.triggers)
+                        .forEach((/**
+                     * @param {?} trigger
+                     * @return {?}
+                     */
+                    function (trigger) {
+                        _this._tooltipCancelShowFn = _this._renderer.listen(_this._elementRef.nativeElement, trigger.close, (/**
+                         * @return {?}
+                         */
+                        function () {
+                            _this._delaySubscription.unsubscribe();
+                            cancelDelayedTooltipShowing();
+                        }));
+                    }));
+                }
+            }
+            else {
+                showTooltip();
+            }
+        };
+        /**
+         * Closes an element’s tooltip. This is considered a “manual” triggering of
+         * the tooltip.
+         */
+        /**
+         * Closes an element’s tooltip. This is considered a “manual” triggering of
+         * the tooltip.
+         * @return {?}
+         */
+        TooltipDirective.prototype.hide = /**
+         * Closes an element’s tooltip. This is considered a “manual” triggering of
+         * the tooltip.
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            if (this._delayTimeoutId) {
+                clearTimeout(this._delayTimeoutId);
+                this._delayTimeoutId = undefined;
+            }
+            if (!this._tooltip.isShown) {
+                return;
+            }
+            this._tooltip.instance.classMap.in = false;
+            setTimeout((/**
+             * @return {?}
+             */
+            function () {
+                _this._tooltip.hide();
+            }), this.tooltipFadeDuration);
+        };
+        /**
+         * @return {?}
+         */
+        TooltipDirective.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+        function () {
+            this._tooltip.dispose();
+            this.tooltipChange.unsubscribe();
+            if (this._delaySubscription) {
+                this._delaySubscription.unsubscribe();
+            }
+            this.onShown.unsubscribe();
+            this.onHidden.unsubscribe();
+        };
+        TooltipDirective.decorators = [
+            { type: core.Directive, args: [{
+                        selector: '[tooltip], [tooltipHtml]',
+                        exportAs: 'bs-tooltip'
+                    },] }
+        ];
+        /** @nocollapse */
+        TooltipDirective.ctorParameters = function () { return [
+            { type: core.ViewContainerRef },
+            { type: componentLoader.ComponentLoaderFactory },
+            { type: TooltipConfig },
+            { type: core.ElementRef },
+            { type: core.Renderer2 },
+            { type: positioning.PositioningService }
+        ]; };
+        TooltipDirective.propDecorators = {
+            adaptivePosition: [{ type: core.Input }],
+            tooltip: [{ type: core.Input }],
+            tooltipChange: [{ type: core.Output }],
+            placement: [{ type: core.Input }],
+            triggers: [{ type: core.Input }],
+            container: [{ type: core.Input }],
+            containerClass: [{ type: core.Input }],
+            isOpen: [{ type: core.Input }],
+            isDisabled: [{ type: core.Input }],
+            delay: [{ type: core.Input }],
+            onShown: [{ type: core.Output }],
+            onHidden: [{ type: core.Output }],
+            htmlContent: [{ type: core.Input, args: ['tooltipHtml',] }],
+            _placement: [{ type: core.Input, args: ['tooltipPlacement',] }],
+            _isOpen: [{ type: core.Input, args: ['tooltipIsOpen',] }],
+            _enable: [{ type: core.Input, args: ['tooltipEnable',] }],
+            _appendToBody: [{ type: core.Input, args: ['tooltipAppendToBody',] }],
+            tooltipAnimation: [{ type: core.Input }],
+            _popupClass: [{ type: core.Input, args: ['tooltipClass',] }],
+            _tooltipContext: [{ type: core.Input, args: ['tooltipContext',] }],
+            _tooltipPopupDelay: [{ type: core.Input, args: ['tooltipPopupDelay',] }],
+            tooltipFadeDuration: [{ type: core.Input }],
+            _tooltipTrigger: [{ type: core.Input, args: ['tooltipTrigger',] }],
+            tooltipStateChanged: [{ type: core.Output }]
+        };
+        __decorate([
+            utils.OnChange(),
+            __metadata("design:type", Object)
+        ], TooltipDirective.prototype, "tooltip", void 0);
+        return TooltipDirective;
+    }());
+    if (false) {
+        /** @type {?} */
+        TooltipDirective.prototype.tooltipId;
+        /**
+         * sets disable adaptive position
+         * @type {?}
+         */
+        TooltipDirective.prototype.adaptivePosition;
+        /**
+         * Content to be displayed as tooltip.
+         * @type {?}
+         */
+        TooltipDirective.prototype.tooltip;
+        /**
+         * Fired when tooltip content changes
+         * @type {?}
+         */
+        TooltipDirective.prototype.tooltipChange;
+        /**
+         * Placement of a tooltip. Accepts: "top", "bottom", "left", "right"
+         * @type {?}
+         */
+        TooltipDirective.prototype.placement;
+        /**
+         * Specifies events that should trigger. Supports a space separated list of
+         * event names.
+         * @type {?}
+         */
+        TooltipDirective.prototype.triggers;
+        /**
+         * A selector specifying the element the tooltip should be appended to.
+         * @type {?}
+         */
+        TooltipDirective.prototype.container;
+        /**
+         * Css class for tooltip container
+         * @type {?}
+         */
+        TooltipDirective.prototype.containerClass;
+        /**
+         * Allows to disable tooltip
+         * @type {?}
+         */
+        TooltipDirective.prototype.isDisabled;
+        /**
+         * Delay before showing the tooltip
+         * @type {?}
+         */
+        TooltipDirective.prototype.delay;
+        /**
+         * Emits an event when the tooltip is shown
+         * @type {?}
+         */
+        TooltipDirective.prototype.onShown;
+        /**
+         * Emits an event when the tooltip is hidden
+         * @type {?}
+         */
+        TooltipDirective.prototype.onHidden;
+        /**
+         * @deprecated - removed, will be added to configuration
+         * @type {?}
+         */
+        TooltipDirective.prototype.tooltipAnimation;
+        /**
+         * @deprecated
+         * @type {?}
+         */
+        TooltipDirective.prototype.tooltipFadeDuration;
+        /**
+         * @deprecated
+         * @type {?}
+         */
+        TooltipDirective.prototype.tooltipStateChanged;
+        /**
+         * @type {?}
+         * @protected
+         */
+        TooltipDirective.prototype._delayTimeoutId;
+        /**
+         * @type {?}
+         * @protected
+         */
+        TooltipDirective.prototype._tooltipCancelShowFn;
+        /**
+         * @type {?}
+         * @private
+         */
+        TooltipDirective.prototype._tooltip;
+        /**
+         * @type {?}
+         * @private
+         */
+        TooltipDirective.prototype._delaySubscription;
+        /**
+         * @type {?}
+         * @private
+         */
+        TooltipDirective.prototype._ariaDescribedby;
+        /**
+         * @type {?}
+         * @private
+         */
+        TooltipDirective.prototype._elementRef;
+        /**
+         * @type {?}
+         * @private
+         */
+        TooltipDirective.prototype._renderer;
+        /**
+         * @type {?}
+         * @private
+         */
+        TooltipDirective.prototype._positionService;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var TooltipModule = /** @class */ (function () {
+        function TooltipModule() {
+        }
+        /**
+         * @return {?}
+         */
+        TooltipModule.forRoot = /**
+         * @return {?}
+         */
+        function () {
+            return {
+                ngModule: TooltipModule,
+                providers: [TooltipConfig, componentLoader.ComponentLoaderFactory, positioning.PositioningService]
+            };
+        };
+        TooltipModule.decorators = [
+            { type: core.NgModule, args: [{
+                        imports: [common.CommonModule],
+                        declarations: [TooltipDirective, TooltipContainerComponent],
+                        exports: [TooltipDirective],
+                        entryComponents: [TooltipContainerComponent]
+                    },] }
+        ];
+        return TooltipModule;
+    }());
+
+    exports.TooltipConfig = TooltipConfig;
+    exports.TooltipContainerComponent = TooltipContainerComponent;
+    exports.TooltipDirective = TooltipDirective;
+    exports.TooltipModule = TooltipModule;
+
+    Object.defineProperty(exports, '__esModule', { value: true });
+
+})));
+//# sourceMappingURL=ngx-bootstrap-tooltip.umd.js.map

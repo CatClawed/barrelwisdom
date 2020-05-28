@@ -1,0 +1,1815 @@
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('rxjs')) :
+    typeof define === 'function' && define.amd ? define('ngx-bootstrap/positioning', ['exports', '@angular/core', '@angular/common', 'rxjs'], factory) :
+    (global = global || self, factory((global['ngx-bootstrap'] = global['ngx-bootstrap'] || {}, global['ngx-bootstrap'].positioning = {}), global.ng.core, global.ng.common, global.rxjs));
+}(this, (function (exports, core, common, rxjs) { 'use strict';
+
+    /*! *****************************************************************************
+    Copyright (c) Microsoft Corporation. All rights reserved.
+    Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+    this file except in compliance with the License. You may obtain a copy of the
+    License at http://www.apache.org/licenses/LICENSE-2.0
+
+    THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+    WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+    MERCHANTABLITY OR NON-INFRINGEMENT.
+
+    See the Apache Version 2.0 License for specific language governing permissions
+    and limitations under the License.
+    ***************************************************************************** */
+    /* global Reflect, Promise */
+
+    var extendStatics = function(d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+
+    function __extends(d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    }
+
+    var __assign = function() {
+        __assign = Object.assign || function __assign(t) {
+            for (var s, i = 1, n = arguments.length; i < n; i++) {
+                s = arguments[i];
+                for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+            }
+            return t;
+        };
+        return __assign.apply(this, arguments);
+    };
+
+    function __rest(s, e) {
+        var t = {};
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+            t[p] = s[p];
+        if (s != null && typeof Object.getOwnPropertySymbols === "function")
+            for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
+                t[p[i]] = s[p[i]];
+        return t;
+    }
+
+    function __decorate(decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    }
+
+    function __param(paramIndex, decorator) {
+        return function (target, key) { decorator(target, key, paramIndex); }
+    }
+
+    function __metadata(metadataKey, metadataValue) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+    }
+
+    function __awaiter(thisArg, _arguments, P, generator) {
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+            function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    }
+
+    function __generator(thisArg, body) {
+        var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+        function verb(n) { return function (v) { return step([n, v]); }; }
+        function step(op) {
+            if (f) throw new TypeError("Generator is already executing.");
+            while (_) try {
+                if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+                if (y = 0, t) op = [op[0] & 2, t.value];
+                switch (op[0]) {
+                    case 0: case 1: t = op; break;
+                    case 4: _.label++; return { value: op[1], done: false };
+                    case 5: _.label++; y = op[1]; op = [0]; continue;
+                    case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                    default:
+                        if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                        if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                        if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                        if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                        if (t[2]) _.ops.pop();
+                        _.trys.pop(); continue;
+                }
+                op = body.call(thisArg, _);
+            } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+            if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+        }
+    }
+
+    function __exportStar(m, exports) {
+        for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+    }
+
+    function __values(o) {
+        var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+        if (m) return m.call(o);
+        return {
+            next: function () {
+                if (o && i >= o.length) o = void 0;
+                return { value: o && o[i++], done: !o };
+            }
+        };
+    }
+
+    function __read(o, n) {
+        var m = typeof Symbol === "function" && o[Symbol.iterator];
+        if (!m) return o;
+        var i = m.call(o), r, ar = [], e;
+        try {
+            while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+        }
+        catch (error) { e = { error: error }; }
+        finally {
+            try {
+                if (r && !r.done && (m = i["return"])) m.call(i);
+            }
+            finally { if (e) throw e.error; }
+        }
+        return ar;
+    }
+
+    function __spread() {
+        for (var ar = [], i = 0; i < arguments.length; i++)
+            ar = ar.concat(__read(arguments[i]));
+        return ar;
+    }
+
+    function __await(v) {
+        return this instanceof __await ? (this.v = v, this) : new __await(v);
+    }
+
+    function __asyncGenerator(thisArg, _arguments, generator) {
+        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+        var g = generator.apply(thisArg, _arguments || []), i, q = [];
+        return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
+        function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+        function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
+        function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
+        function fulfill(value) { resume("next", value); }
+        function reject(value) { resume("throw", value); }
+        function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
+    }
+
+    function __asyncDelegator(o) {
+        var i, p;
+        return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
+        function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
+    }
+
+    function __asyncValues(o) {
+        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+        var m = o[Symbol.asyncIterator], i;
+        return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
+        function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
+        function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
+    }
+
+    function __makeTemplateObject(cooked, raw) {
+        if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+        return cooked;
+    };
+
+    function __importStar(mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+        result.default = mod;
+        return result;
+    }
+
+    function __importDefault(mod) {
+        return (mod && mod.__esModule) ? mod : { default: mod };
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Get CSS computed property of the given element
+     * @param {?} element
+     * @param {?=} property
+     * @return {?}
+     */
+    function getStyleComputedProperty(element, property) {
+        if (element.nodeType !== 1) {
+            return [];
+        }
+        // NOTE: 1 DOM access here
+        /** @type {?} */
+        var window = element.ownerDocument.defaultView;
+        /** @type {?} */
+        var css = window.getComputedStyle(element, null);
+        return property ? css[(/** @type {?} */ (property))] : css;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Returns the parentNode or the host of the element
+     * @param {?} element
+     * @return {?}
+     */
+    function getParentNode(element) {
+        if (element.nodeName === 'HTML') {
+            return element;
+        }
+        return element.parentNode || element.host;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    function getScrollParent(element) {
+        // Return body, `getScroll` will take care to get the correct `scrollTop` from it
+        if (!element) {
+            return document.body;
+        }
+        switch (element.nodeName) {
+            case 'HTML':
+            case 'BODY':
+                return element.ownerDocument.body;
+            case '#document':
+                return element.body;
+            default:
+        }
+        // Firefox want us to check `-x` and `-y` variations as well
+        var _a = getStyleComputedProperty(element), overflow = _a.overflow, overflowX = _a.overflowX, overflowY = _a.overflowY;
+        if (/(auto|scroll|overlay)/.test(String(overflow) + String(overflowY) + String(overflowX))) {
+            return element;
+        }
+        return getScrollParent(getParentNode(element));
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var isIE11 = isBrowser && !!(((/** @type {?} */ (window))).MSInputMethodContext && ((/** @type {?} */ (document))).documentMode);
+    /** @type {?} */
+    var isIE10 = isBrowser && !!(((/** @type {?} */ (window))).MSInputMethodContext && /MSIE 10/.test(((/** @type {?} */ (navigator))).userAgent));
+    /**
+     * @param {?=} version
+     * @return {?}
+     */
+    function isIE(version) {
+        if (version === 11) {
+            return isIE11;
+        }
+        if (version === 10) {
+            return isIE10;
+        }
+        return isIE11 || isIE10;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    function getOffsetParent(element) {
+        if (!element) {
+            return document.documentElement;
+        }
+        /** @type {?} */
+        var noOffsetParent = isIE(10) ? document.body : null;
+        // NOTE: 1 DOM access here
+        /** @type {?} */
+        var offsetParent = element.offsetParent || null;
+        // Skip hidden elements which don't have an offsetParent
+        /** @type {?} */
+        var sibling;
+        while (offsetParent === noOffsetParent
+            && element.nextElementSibling
+            && sibling !== element.nextElementSibling) {
+            sibling = element.nextElementSibling;
+            offsetParent = sibling.offsetParent;
+        }
+        /** @type {?} */
+        var nodeName = offsetParent && offsetParent.nodeName;
+        if (!nodeName || nodeName === 'BODY' || nodeName === 'HTML') {
+            return sibling ? sibling.ownerDocument.documentElement : document.documentElement;
+        }
+        // .offsetParent will return the closest TH, TD or TABLE in case
+        if (['TH', 'TD', 'TABLE'].indexOf(offsetParent.nodeName) !== -1 &&
+            getStyleComputedProperty(offsetParent, 'position') === 'static') {
+            return getOffsetParent(offsetParent);
+        }
+        return offsetParent;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    function isOffsetContainer(element) {
+        var nodeName = element.nodeName;
+        if (nodeName === 'BODY') {
+            return false;
+        }
+        return (nodeName === 'HTML' || getOffsetParent(element.firstElementChild) === element);
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Finds the root node (document, shadowDOM root) of the given element
+     * @param {?} node
+     * @return {?}
+     */
+    function getRoot(node) {
+        if (node.parentNode !== null) {
+            return getRoot(node.parentNode);
+        }
+        return node;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} element1
+     * @param {?} element2
+     * @return {?}
+     */
+    function findCommonOffsetParent(element1, element2) {
+        // This check is needed to avoid errors in case one of the elements isn't defined for any reason
+        if (!element1 || !element1.nodeType || !element2 || !element2.nodeType) {
+            return document.documentElement;
+        }
+        // Here we make sure to give as "start" the element that comes first in the DOM
+        /* tslint:disable-next-line: no-bitwise */
+        /** @type {?} */
+        var order = element1.compareDocumentPosition(element2) & Node.DOCUMENT_POSITION_FOLLOWING;
+        /** @type {?} */
+        var start = order ? element1 : element2;
+        /** @type {?} */
+        var end = order ? element2 : element1;
+        // Get common ancestor container
+        /** @type {?} */
+        var range = document.createRange();
+        range.setStart(start, 0);
+        range.setEnd(end, 0);
+        var commonAncestorContainer = range.commonAncestorContainer;
+        // Both nodes are inside #document
+        if ((element1 !== commonAncestorContainer &&
+            element2 !== commonAncestorContainer) ||
+            start.contains(end)) {
+            if (isOffsetContainer(commonAncestorContainer)) {
+                return commonAncestorContainer;
+            }
+            return getOffsetParent(commonAncestorContainer);
+        }
+        // one of the nodes is inside shadowDOM, find which one
+        /** @type {?} */
+        var element1root = getRoot(element1);
+        if (element1root.host) {
+            return findCommonOffsetParent(element1root.host, element2);
+        }
+        else {
+            return findCommonOffsetParent(element1, getRoot(element2).host);
+        }
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Helper to detect borders of a given element
+     */
+    /**
+     * @param {?} styles
+     * @param {?} axis
+     * @return {?}
+     */
+    function getBordersSize(styles, axis) {
+        /** @type {?} */
+        var sideA = axis === 'x' ? 'Left' : 'Top';
+        /** @type {?} */
+        var sideB = sideA === 'Left' ? 'Right' : 'Bottom';
+        return (parseFloat(styles[(/** @type {?} */ ("border" + sideA + "Width"))]) +
+            parseFloat(styles[(/** @type {?} */ ("border" + sideB + "Width"))]));
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} axis
+     * @param {?} body
+     * @param {?} html
+     * @param {?} computedStyle
+     * @return {?}
+     */
+    function getSize(axis, body, html, computedStyle) {
+        return Math.max(((/** @type {?} */ (body)))["offset" + axis], ((/** @type {?} */ (body)))["scroll" + axis], ((/** @type {?} */ (html)))["client" + axis], ((/** @type {?} */ (html)))["offset" + axis], ((/** @type {?} */ (html)))["scroll" + axis], isIE(10)
+            ? (parseInt(((/** @type {?} */ (html)))["offset" + axis], 10) +
+                parseInt(computedStyle[(/** @type {?} */ ("margin" + (axis === 'Height' ? 'Top' : 'Left')))], 10) +
+                parseInt(computedStyle[(/** @type {?} */ ("margin" + (axis === 'Height' ? 'Bottom' : 'Right')))], 10))
+            : 0);
+    }
+    /**
+     * @param {?} document
+     * @return {?}
+     */
+    function getWindowSizes(document) {
+        /** @type {?} */
+        var body = document.body;
+        /** @type {?} */
+        var html = document.documentElement;
+        /** @type {?} */
+        var computedStyle = isIE(10) && getComputedStyle(html);
+        return {
+            height: getSize('Height', body, html, computedStyle),
+            width: getSize('Width', body, html, computedStyle)
+        };
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Gets the scroll value of the given element in the given side (top and left)
+     * @param {?} element
+     * @param {?=} side
+     * @return {?}
+     */
+    function getScroll(element, side) {
+        if (side === void 0) { side = 'top'; }
+        /** @type {?} */
+        var upperSide = side === 'top' ? 'scrollTop' : 'scrollLeft';
+        /** @type {?} */
+        var nodeName = element.nodeName;
+        if (nodeName === 'BODY' || nodeName === 'HTML') {
+            /** @type {?} */
+            var html = element.ownerDocument.documentElement;
+            /** @type {?} */
+            var scrollingElement = element.ownerDocument.scrollingElement || html;
+            return scrollingElement[upperSide];
+        }
+        return element[upperSide];
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} offsets
+     * @return {?}
+     */
+    function getClientRect(offsets) {
+        return __assign({}, offsets, { right: offsets.left + offsets.width, bottom: offsets.top + offsets.height });
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    function getBoundingClientRect(element) {
+        /** @type {?} */
+        var rect = {};
+        // IE10 10 FIX: Please, don't ask, the element isn't
+        // considered in DOM in some circumstances...
+        // This isn't reproducible in IE10 compatibility mode of IE11
+        try {
+            if (isIE(10)) {
+                rect = element.getBoundingClientRect();
+                /** @type {?} */
+                var scrollTop = getScroll(element, 'top');
+                /** @type {?} */
+                var scrollLeft = getScroll(element, 'left');
+                rect.top += scrollTop;
+                rect.left += scrollLeft;
+                rect.bottom += scrollTop;
+                rect.right += scrollLeft;
+            }
+            else {
+                rect = element.getBoundingClientRect();
+            }
+        }
+        catch (e) {
+            return undefined;
+        }
+        /** @type {?} */
+        var result = {
+            left: rect.left,
+            top: rect.top,
+            width: rect.right - rect.left,
+            height: rect.bottom - rect.top
+        };
+        // subtract scrollbar size from sizes
+        /** @type {?} */
+        var sizes = element.nodeName === 'HTML' ? getWindowSizes(element.ownerDocument) : {};
+        /** @type {?} */
+        var width = sizes.width || element.clientWidth || result.right - result.left;
+        /** @type {?} */
+        var height = sizes.height || element.clientHeight || result.bottom - result.top;
+        /** @type {?} */
+        var horizScrollbar = element.offsetWidth - width;
+        /** @type {?} */
+        var vertScrollbar = element.offsetHeight - height;
+        // if an hypothetical scrollbar is detected, we must be sure it's not a `border`
+        // we make this check conditional for performance reasons
+        if (horizScrollbar || vertScrollbar) {
+            /** @type {?} */
+            var styles = getStyleComputedProperty(element);
+            horizScrollbar -= getBordersSize(styles, 'x');
+            vertScrollbar -= getBordersSize(styles, 'y');
+            result.width -= horizScrollbar;
+            result.height -= vertScrollbar;
+        }
+        return getClientRect(result);
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} rect
+     * @param {?} element
+     * @param {?=} subtract
+     * @return {?}
+     */
+    function includeScroll(rect, element, subtract) {
+        if (subtract === void 0) { subtract = false; }
+        /** @type {?} */
+        var scrollTop = getScroll(element, 'top');
+        /** @type {?} */
+        var scrollLeft = getScroll(element, 'left');
+        /** @type {?} */
+        var modifier = subtract ? -1 : 1;
+        rect.top += scrollTop * modifier;
+        rect.bottom += scrollTop * modifier;
+        rect.left += scrollLeft * modifier;
+        rect.right += scrollLeft * modifier;
+        return rect;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} children
+     * @param {?} parent
+     * @param {?=} fixedPosition
+     * @return {?}
+     */
+    function getOffsetRectRelativeToArbitraryNode(children, parent, fixedPosition) {
+        if (fixedPosition === void 0) { fixedPosition = false; }
+        /** @type {?} */
+        var isIE10 = isIE(10);
+        /** @type {?} */
+        var isHTML = parent.nodeName === 'HTML';
+        /** @type {?} */
+        var childrenRect = getBoundingClientRect(children);
+        /** @type {?} */
+        var parentRect = getBoundingClientRect(parent);
+        /** @type {?} */
+        var scrollParent = getScrollParent(children);
+        /** @type {?} */
+        var styles = getStyleComputedProperty(parent);
+        /** @type {?} */
+        var borderTopWidth = parseFloat(styles.borderTopWidth);
+        /** @type {?} */
+        var borderLeftWidth = parseFloat(styles.borderLeftWidth);
+        // In cases where the parent is fixed, we must ignore negative scroll in offset calc
+        if (fixedPosition && isHTML) {
+            parentRect.top = Math.max(parentRect.top, 0);
+            parentRect.left = Math.max(parentRect.left, 0);
+        }
+        /** @type {?} */
+        var offsets = getClientRect({
+            top: childrenRect.top - parentRect.top - borderTopWidth,
+            left: childrenRect.left - parentRect.left - borderLeftWidth,
+            width: childrenRect.width,
+            height: childrenRect.height
+        });
+        offsets.marginTop = 0;
+        offsets.marginLeft = 0;
+        // Subtract margins of documentElement in case it's being used as parent
+        // we do this only on HTML because it's the only element that behaves
+        // differently when margins are applied to it. The margins are included in
+        // the box of the documentElement, in the other cases not.
+        if (!isIE10 && isHTML) {
+            /** @type {?} */
+            var marginTop = parseFloat(styles.marginTop);
+            /** @type {?} */
+            var marginLeft = parseFloat(styles.marginLeft);
+            offsets.top -= borderTopWidth - marginTop;
+            offsets.bottom -= borderTopWidth - marginTop;
+            offsets.left -= borderLeftWidth - marginLeft;
+            offsets.right -= borderLeftWidth - marginLeft;
+            // Attach marginTop and marginLeft because in some circumstances we may need them
+            offsets.marginTop = marginTop;
+            offsets.marginLeft = marginLeft;
+        }
+        if (isIE10 && !fixedPosition
+            ? parent.contains(scrollParent)
+            : parent === scrollParent && scrollParent.nodeName !== 'BODY') {
+            offsets = includeScroll(offsets, parent);
+        }
+        return offsets;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} element
+     * @param {?=} excludeScroll
+     * @return {?}
+     */
+    function getViewportOffsetRectRelativeToArtbitraryNode(element, excludeScroll) {
+        if (excludeScroll === void 0) { excludeScroll = false; }
+        /** @type {?} */
+        var html = element.ownerDocument.documentElement;
+        /** @type {?} */
+        var relativeOffset = getOffsetRectRelativeToArbitraryNode(element, html);
+        /** @type {?} */
+        var width = Math.max(html.clientWidth, window.innerWidth || 0);
+        /** @type {?} */
+        var height = Math.max(html.clientHeight, window.innerHeight || 0);
+        /** @type {?} */
+        var scrollTop = !excludeScroll ? getScroll(html) : 0;
+        /** @type {?} */
+        var scrollLeft = !excludeScroll ? getScroll(html, 'left') : 0;
+        /** @type {?} */
+        var offset = {
+            top: scrollTop - Number(relativeOffset.top) + Number(relativeOffset.marginTop),
+            left: scrollLeft - Number(relativeOffset.left) + Number(relativeOffset.marginLeft),
+            width: width,
+            height: height
+        };
+        return getClientRect(offset);
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    function isFixed(element) {
+        /** @type {?} */
+        var nodeName = element.nodeName;
+        if (nodeName === 'BODY' || nodeName === 'HTML') {
+            return false;
+        }
+        if (getStyleComputedProperty(element, 'position') === 'fixed') {
+            return true;
+        }
+        return isFixed(getParentNode(element));
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    function getFixedPositionOffsetParent(element) {
+        // This check is needed to avoid errors in case one of the elements isn't defined for any reason
+        if (!element || !element.parentElement || isIE()) {
+            return document.documentElement;
+        }
+        /** @type {?} */
+        var el = element.parentElement;
+        while (el && getStyleComputedProperty(el, 'transform') === 'none') {
+            el = el.parentElement;
+        }
+        return el || document.documentElement;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} target
+     * @param {?} host
+     * @param {?=} padding
+     * @param {?=} boundariesElement
+     * @param {?=} fixedPosition
+     * @return {?}
+     */
+    function getBoundaries(target, host, padding, boundariesElement, fixedPosition) {
+        // NOTE: 1 DOM access here
+        if (padding === void 0) { padding = 0; }
+        if (fixedPosition === void 0) { fixedPosition = false; }
+        // NOTE: 1 DOM access here
+        /** @type {?} */
+        var boundaries = { top: 0, left: 0 };
+        /** @type {?} */
+        var offsetParent = fixedPosition ? getFixedPositionOffsetParent(target) : findCommonOffsetParent(target, host);
+        // Handle viewport case
+        if (boundariesElement === 'viewport') {
+            boundaries = getViewportOffsetRectRelativeToArtbitraryNode(offsetParent, fixedPosition);
+        }
+        else {
+            // Handle other cases based on DOM element used as boundaries
+            /** @type {?} */
+            var boundariesNode = void 0;
+            if (boundariesElement === 'scrollParent') {
+                boundariesNode = getScrollParent(getParentNode(host));
+                if (boundariesNode.nodeName === 'BODY') {
+                    boundariesNode = target.ownerDocument.documentElement;
+                }
+            }
+            else if (boundariesElement === 'window') {
+                boundariesNode = target.ownerDocument.documentElement;
+            }
+            else {
+                boundariesNode = boundariesElement;
+            }
+            /** @type {?} */
+            var offsets = getOffsetRectRelativeToArbitraryNode(boundariesNode, offsetParent, fixedPosition);
+            // In case of HTML, we need a different computation
+            if (boundariesNode.nodeName === 'HTML' && !isFixed(offsetParent)) {
+                var _a = getWindowSizes(target.ownerDocument), height = _a.height, width = _a.width;
+                boundaries.top += offsets.top - offsets.marginTop;
+                boundaries.bottom = Number(height) + Number(offsets.top);
+                boundaries.left += offsets.left - offsets.marginLeft;
+                boundaries.right = Number(width) + Number(offsets.left);
+            }
+            else {
+                // for all the other DOM elements, this one is good
+                boundaries = offsets;
+            }
+        }
+        // Add paddings
+        boundaries.left += padding;
+        boundaries.top += padding;
+        boundaries.right -= padding;
+        boundaries.bottom -= padding;
+        return boundaries;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} __0
+     * @return {?}
+     */
+    function getArea(_a) {
+        var width = _a.width, height = _a.height;
+        return width * height;
+    }
+    /**
+     * @param {?} placement
+     * @param {?} refRect
+     * @param {?} target
+     * @param {?} host
+     * @param {?=} allowedPositions
+     * @param {?=} boundariesElement
+     * @param {?=} padding
+     * @return {?}
+     */
+    function computeAutoPlacement(placement, refRect, target, host, allowedPositions, boundariesElement, padding) {
+        if (allowedPositions === void 0) { allowedPositions = ['top', 'bottom', 'right', 'left']; }
+        if (boundariesElement === void 0) { boundariesElement = 'viewport'; }
+        if (padding === void 0) { padding = 0; }
+        if (placement.indexOf('auto') === -1) {
+            return placement;
+        }
+        /** @type {?} */
+        var boundaries = getBoundaries(target, host, padding, boundariesElement);
+        /** @type {?} */
+        var rects = {
+            top: {
+                width: boundaries.width,
+                height: refRect.top - boundaries.top
+            },
+            right: {
+                width: boundaries.right - refRect.right,
+                height: boundaries.height
+            },
+            bottom: {
+                width: boundaries.width,
+                height: boundaries.bottom - refRect.bottom
+            },
+            left: {
+                width: refRect.left - boundaries.left,
+                height: boundaries.height
+            }
+        };
+        /** @type {?} */
+        var sortedAreas = Object.keys(rects)
+            .map((/**
+         * @param {?} key
+         * @return {?}
+         */
+        function (key) { return (__assign({ key: key }, rects[key], { area: getArea(rects[key]) })); }))
+            .sort((/**
+         * @param {?} a
+         * @param {?} b
+         * @return {?}
+         */
+        function (a, b) { return b.area - a.area; }));
+        /** @type {?} */
+        var filteredAreas = sortedAreas.filter((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var width = _a.width, height = _a.height;
+            return width >= target.clientWidth
+                && height >= target.clientHeight;
+        }));
+        filteredAreas = filteredAreas.filter((/**
+         * @param {?} position
+         * @return {?}
+         */
+        function (position) {
+            return allowedPositions
+                .some((/**
+             * @param {?} allowedPosition
+             * @return {?}
+             */
+            function (allowedPosition) {
+                return allowedPosition === position.key;
+            }));
+        }));
+        /** @type {?} */
+        var computedPlacement = filteredAreas.length > 0
+            ? filteredAreas[0].key
+            : sortedAreas[0].key;
+        /** @type {?} */
+        var variation = placement.split(' ')[1];
+        // for tooltip on auto position
+        target.className = target.className.replace(/bs-tooltip-auto/g, "bs-tooltip-" + computedPlacement);
+        return computedPlacement + (variation ? "-" + variation : '');
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} data
+     * @return {?}
+     */
+    function getOffsets(data) {
+        return {
+            width: data.offsets.target.width,
+            height: data.offsets.target.height,
+            left: Math.floor(data.offsets.target.left),
+            top: Math.round(data.offsets.target.top),
+            bottom: Math.round(data.offsets.target.bottom),
+            right: Math.floor(data.offsets.target.right)
+        };
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Get the opposite placement of the given one
+     * @param {?} placement
+     * @return {?}
+     */
+    function getOppositePlacement(placement) {
+        /** @type {?} */
+        var hash = { left: 'right', right: 'left', bottom: 'top', top: 'bottom' };
+        return placement.replace(/left|right|bottom|top/g, (/**
+         * @param {?} matched
+         * @return {?}
+         */
+        function (matched) { return ((/** @type {?} */ (hash)))[matched]; }));
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Get the opposite placement variation of the given one
+     * @param {?} variation
+     * @return {?}
+     */
+    function getOppositeVariation(variation) {
+        if (variation === 'right') {
+            return 'left';
+        }
+        else if (variation === 'left') {
+            return 'right';
+        }
+        return variation;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Get the outer sizes of the given element (offset size + margins)
+     * @param {?} element
+     * @return {?}
+     */
+    function getOuterSizes(element) {
+        /** @type {?} */
+        var window = element.ownerDocument.defaultView;
+        /** @type {?} */
+        var styles = window.getComputedStyle(element);
+        /** @type {?} */
+        var x = parseFloat(styles.marginTop || 0) + parseFloat(styles.marginBottom || 0);
+        /** @type {?} */
+        var y = parseFloat(styles.marginLeft || 0) + parseFloat(styles.marginRight || 0);
+        return {
+            width: Number(element.offsetWidth) + y,
+            height: Number(element.offsetHeight) + x
+        };
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} target
+     * @param {?} host
+     * @param {?=} fixedPosition
+     * @return {?}
+     */
+    function getReferenceOffsets(target, host, fixedPosition) {
+        if (fixedPosition === void 0) { fixedPosition = null; }
+        /** @type {?} */
+        var commonOffsetParent = fixedPosition
+            ? getFixedPositionOffsetParent(target)
+            : findCommonOffsetParent(target, host);
+        return getOffsetRectRelativeToArbitraryNode(host, commonOffsetParent, fixedPosition);
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} target
+     * @param {?} hostOffsets
+     * @param {?} position
+     * @return {?}
+     */
+    function getTargetOffsets(target, hostOffsets, position) {
+        /** @type {?} */
+        var placement = position.split(' ')[0];
+        // Get target node sizes
+        /** @type {?} */
+        var targetRect = getOuterSizes(target);
+        // Add position, width and height to our offsets object
+        /** @type {?} */
+        var targetOffsets = {
+            width: targetRect.width,
+            height: targetRect.height
+        };
+        // depending by the target placement we have to compute its offsets slightly differently
+        /** @type {?} */
+        var isHoriz = ['right', 'left'].indexOf(placement) !== -1;
+        /** @type {?} */
+        var mainSide = isHoriz ? 'top' : 'left';
+        /** @type {?} */
+        var secondarySide = isHoriz ? 'left' : 'top';
+        /** @type {?} */
+        var measurement = isHoriz ? 'height' : 'width';
+        /** @type {?} */
+        var secondaryMeasurement = !isHoriz ? 'height' : 'width';
+        ((/** @type {?} */ (targetOffsets)))[mainSide] =
+            hostOffsets[mainSide] +
+                hostOffsets[measurement] / 2 -
+                targetRect[measurement] / 2;
+        ((/** @type {?} */ (targetOffsets)))[secondarySide] = placement === secondarySide
+            ? hostOffsets[secondarySide] - targetRect[secondaryMeasurement]
+            : ((/** @type {?} */ (hostOffsets)))[getOppositePlacement(secondarySide)];
+        return targetOffsets;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Helper used to know if the given modifier is enabled.
+     * @param {?} options
+     * @param {?} modifierName
+     * @return {?}
+     */
+    function isModifierEnabled(options, modifierName) {
+        return options
+            && options.modifiers
+            && options.modifiers[modifierName]
+            && options.modifiers[modifierName].enabled;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Tells if a given input is a number
+     * @param {?} n
+     * @return {?}
+     */
+    function isNumeric(n) {
+        return n !== '' && !isNaN(parseFloat(n)) && isFinite(n);
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} data
+     * @param {?=} renderer
+     * @return {?}
+     */
+    function updateContainerClass(data, renderer) {
+        /** @type {?} */
+        var target = data.instance.target;
+        /** @type {?} */
+        var containerClass = target.className;
+        if (data.placementAuto) {
+            containerClass = containerClass.replace(/bs-popover-auto/g, "bs-popover-" + data.placement);
+            containerClass = containerClass.replace(/bs-tooltip-auto/g, "bs-tooltip-" + data.placement);
+            containerClass = containerClass.replace(/\sauto/g, " " + data.placement);
+            if (containerClass.indexOf('popover') !== -1 && containerClass.indexOf('popover-auto') === -1) {
+                containerClass += ' popover-auto';
+            }
+            if (containerClass.indexOf('tooltip') !== -1 && containerClass.indexOf('tooltip-auto') === -1) {
+                containerClass += ' tooltip-auto';
+            }
+        }
+        containerClass = containerClass.replace(/left|right|top|bottom/g, "" + data.placement.split(' ')[0]);
+        if (renderer) {
+            renderer.setAttribute(target, 'class', containerClass);
+            return;
+        }
+        target.className = containerClass;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} element
+     * @param {?} styles
+     * @param {?=} renderer
+     * @return {?}
+     */
+    function setStyles(element, styles, renderer) {
+        Object.keys(styles).forEach((/**
+         * @param {?} prop
+         * @return {?}
+         */
+        function (prop) {
+            /** @type {?} */
+            var unit = '';
+            // add unit if the value is numeric and is one of the following
+            if (['width', 'height', 'top', 'right', 'bottom', 'left'].indexOf(prop) !== -1 &&
+                isNumeric(styles[prop])) {
+                unit = 'px';
+            }
+            if (renderer) {
+                renderer.setStyle(element, prop, "" + String(styles[prop]) + unit);
+                return;
+            }
+            element.style[prop] = String(styles[prop]) + unit;
+        }));
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} data
+     * @return {?}
+     */
+    function arrow(data) {
+        var _a;
+        /** @type {?} */
+        var targetOffsets = data.offsets.target;
+        // if arrowElement is a string, suppose it's a CSS selector
+        /** @type {?} */
+        var arrowElement = data.instance.target.querySelector('.arrow');
+        // if arrowElement is not found, don't run the modifier
+        if (!arrowElement) {
+            return data;
+        }
+        /** @type {?} */
+        var isVertical = ['left', 'right'].indexOf(data.placement.split(' ')[0]) !== -1;
+        /** @type {?} */
+        var len = isVertical ? 'height' : 'width';
+        /** @type {?} */
+        var sideCapitalized = isVertical ? 'Top' : 'Left';
+        /** @type {?} */
+        var side = sideCapitalized.toLowerCase();
+        /** @type {?} */
+        var altSide = isVertical ? 'left' : 'top';
+        /** @type {?} */
+        var opSide = isVertical ? 'bottom' : 'right';
+        /** @type {?} */
+        var arrowElementSize = getOuterSizes(arrowElement)[len];
+        /** @type {?} */
+        var placementVariation = data.placement.split(' ')[1];
+        // top/left side
+        if (data.offsets.host[opSide] - arrowElementSize < ((/** @type {?} */ (targetOffsets)))[side]) {
+            ((/** @type {?} */ (targetOffsets)))[side] -=
+                ((/** @type {?} */ (targetOffsets)))[side] - (data.offsets.host[opSide] - arrowElementSize);
+        }
+        // bottom/right side
+        if (Number(((/** @type {?} */ (data))).offsets.host[side]) + Number(arrowElementSize) > ((/** @type {?} */ (targetOffsets)))[opSide]) {
+            ((/** @type {?} */ (targetOffsets)))[side] +=
+                Number(((/** @type {?} */ (data))).offsets.host[side]) + Number(arrowElementSize) - Number(((/** @type {?} */ (targetOffsets)))[opSide]);
+        }
+        targetOffsets = getClientRect(targetOffsets);
+        // Compute the sideValue using the updated target offsets
+        // take target margin in account because we don't have this info available
+        /** @type {?} */
+        var css = getStyleComputedProperty(data.instance.target);
+        /** @type {?} */
+        var targetMarginSide = parseFloat(css["margin" + sideCapitalized]);
+        /** @type {?} */
+        var targetBorderSide = parseFloat(css["border" + sideCapitalized + "Width"]);
+        // compute center of the target
+        /** @type {?} */
+        var center;
+        if (!placementVariation) {
+            center = Number(((/** @type {?} */ (data))).offsets.host[side]) + Number(data.offsets.host[len] / 2 - arrowElementSize / 2);
+        }
+        else {
+            /** @type {?} */
+            var targetBorderRadius = parseFloat(css.borderRadius);
+            /** @type {?} */
+            var targetSideArrowOffset = Number(targetMarginSide + targetBorderSide + targetBorderRadius);
+            center = side === placementVariation ?
+                Number(((/** @type {?} */ (data))).offsets.host[side]) + targetSideArrowOffset :
+                Number(((/** @type {?} */ (data))).offsets.host[side]) + Number(data.offsets.host[len] - targetSideArrowOffset);
+        }
+        /** @type {?} */
+        var sideValue = center - ((/** @type {?} */ (targetOffsets)))[side] - targetMarginSide - targetBorderSide;
+        // prevent arrowElement from being placed not contiguously to its target
+        sideValue = Math.max(Math.min(targetOffsets[len] - arrowElementSize, sideValue), 0);
+        data.offsets.arrow = (_a = {},
+            _a[side] = Math.round(sideValue),
+            _a[altSide] = '' // make sure to unset any eventual altSide value from the DOM node
+        ,
+            _a);
+        data.instance.arrow = arrowElement;
+        return data;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} data
+     * @return {?}
+     */
+    function flip(data) {
+        data.offsets.target = getClientRect(data.offsets.target);
+        if (!isModifierEnabled(data.options, 'flip')) {
+            data.offsets.target = __assign({}, data.offsets.target, getTargetOffsets(data.instance.target, data.offsets.host, data.placement));
+            return data;
+        }
+        /** @type {?} */
+        var boundaries = getBoundaries(data.instance.target, data.instance.host, 0, // padding
+        'viewport', false // positionFixed
+        );
+        /** @type {?} */
+        var placement = data.placement.split(' ')[0];
+        /** @type {?} */
+        var variation = data.placement.split(' ')[1] || '';
+        /** @type {?} */
+        var offsetsHost = data.offsets.host;
+        /** @type {?} */
+        var target = data.instance.target;
+        /** @type {?} */
+        var host = data.instance.host;
+        /** @type {?} */
+        var adaptivePosition = computeAutoPlacement('auto', offsetsHost, target, host, data.options.allowedPositions);
+        /** @type {?} */
+        var flipOrder = [placement, adaptivePosition];
+        /* tslint:disable-next-line: cyclomatic-complexity */
+        flipOrder.forEach((/**
+         * @param {?} step
+         * @param {?} index
+         * @return {?}
+         */
+        function (step, index) {
+            if (placement !== step || flipOrder.length === index + 1) {
+                return data;
+            }
+            placement = data.placement.split(' ')[0];
+            // using floor because the host offsets may contain decimals we are not going to consider here
+            /** @type {?} */
+            var overlapsRef = (placement === 'left' &&
+                Math.floor(data.offsets.target.right) > Math.floor(data.offsets.host.left)) ||
+                (placement === 'right' &&
+                    Math.floor(data.offsets.target.left) < Math.floor(data.offsets.host.right)) ||
+                (placement === 'top' &&
+                    Math.floor(data.offsets.target.bottom) > Math.floor(data.offsets.host.top)) ||
+                (placement === 'bottom' &&
+                    Math.floor(data.offsets.target.top) < Math.floor(data.offsets.host.bottom));
+            /** @type {?} */
+            var overflowsLeft = Math.floor(data.offsets.target.left) < Math.floor(boundaries.left);
+            /** @type {?} */
+            var overflowsRight = Math.floor(data.offsets.target.right) > Math.floor(boundaries.right);
+            /** @type {?} */
+            var overflowsTop = Math.floor(data.offsets.target.top) < Math.floor(boundaries.top);
+            /** @type {?} */
+            var overflowsBottom = Math.floor(data.offsets.target.bottom) > Math.floor(boundaries.bottom);
+            /** @type {?} */
+            var overflowsBoundaries = (placement === 'left' && overflowsLeft) ||
+                (placement === 'right' && overflowsRight) ||
+                (placement === 'top' && overflowsTop) ||
+                (placement === 'bottom' && overflowsBottom);
+            // flip the variation if required
+            /** @type {?} */
+            var isVertical = ['top', 'bottom'].indexOf(placement) !== -1;
+            /** @type {?} */
+            var flippedVariation = ((isVertical && variation === 'left' && overflowsLeft) ||
+                (isVertical && variation === 'right' && overflowsRight) ||
+                (!isVertical && variation === 'left' && overflowsTop) ||
+                (!isVertical && variation === 'right' && overflowsBottom));
+            if (overlapsRef || overflowsBoundaries || flippedVariation) {
+                if (overlapsRef || overflowsBoundaries) {
+                    placement = flipOrder[index + 1];
+                }
+                if (flippedVariation) {
+                    variation = getOppositeVariation(variation);
+                }
+                data.placement = placement + (variation ? " " + variation : '');
+                data.offsets.target = __assign({}, data.offsets.target, getTargetOffsets(data.instance.target, data.offsets.host, data.placement));
+            }
+        }));
+        return data;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} targetElement
+     * @param {?} hostElement
+     * @param {?} position
+     * @param {?} options
+     * @return {?}
+     */
+    function initData(targetElement, hostElement, position, options) {
+        /** @type {?} */
+        var hostElPosition = getReferenceOffsets(targetElement, hostElement);
+        if (!position.match(/^(auto)*\s*(left|right|top|bottom)*$/)
+            && !position.match(/^(left|right|top|bottom)*(?: (left|right|top|bottom))?\s*(start|end)*$/)) {
+            /* tslint:disable-next-line: no-parameter-reassignment */
+            position = 'auto';
+        }
+        /** @type {?} */
+        var placementAuto = !!position.match(/auto/g);
+        // support old placements 'auto left|right|top|bottom'
+        /** @type {?} */
+        var placement = position.match(/auto\s(left|right|top|bottom)/)
+            ? position.split(' ')[1] || 'auto'
+            : position;
+        // Normalize placements that have identical main placement and variation ("right right" => "right").
+        /** @type {?} */
+        var matches = placement.match(/^(left|right|top|bottom)* ?(?!\1)(left|right|top|bottom)?/);
+        if (matches) {
+            placement = matches[1] + (matches[2] ? " " + matches[2] : '');
+        }
+        // "left right", "top bottom" etc. placements also considered incorrect.
+        if (['left right', 'right left', 'top bottom', 'bottom top'].indexOf(placement) !== -1) {
+            placement = 'auto';
+        }
+        /** @type {?} */
+        var targetOffset = getTargetOffsets(targetElement, hostElPosition, placement);
+        placement = computeAutoPlacement(placement, hostElPosition, targetElement, hostElement, options ? options.allowedPositions : undefined);
+        return {
+            options: options,
+            instance: {
+                target: targetElement,
+                host: hostElement,
+                arrow: null
+            },
+            offsets: {
+                target: targetOffset,
+                host: hostElPosition,
+                arrow: null
+            },
+            positionFixed: false,
+            placement: placement,
+            placementAuto: placementAuto
+        };
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} data
+     * @return {?}
+     */
+    function preventOverflow(data) {
+        if (!isModifierEnabled(data.options, 'preventOverflow')) {
+            return data;
+        }
+        // NOTE: DOM access here
+        // resets the targetOffsets's position so that the document size can be calculated excluding
+        // the size of the targetOffsets element itself
+        /** @type {?} */
+        var transformProp = 'transform';
+        /** @type {?} */
+        var targetStyles = data.instance.target.style;
+        // assignment to help minification
+        var top = targetStyles.top, left = targetStyles.left, _a = transformProp, transform = targetStyles[_a];
+        targetStyles.top = '';
+        targetStyles.left = '';
+        targetStyles[transformProp] = '';
+        /** @type {?} */
+        var boundaries = getBoundaries(data.instance.target, data.instance.host, 0, // padding
+        'scrollParent', false // positionFixed
+        );
+        // NOTE: DOM access here
+        // restores the original style properties after the offsets have been computed
+        targetStyles.top = top;
+        targetStyles.left = left;
+        targetStyles[transformProp] = transform;
+        /** @type {?} */
+        var order = ['left', 'right', 'top', 'bottom'];
+        /** @type {?} */
+        var check = {
+            primary: /**
+             * @param {?} placement
+             * @return {?}
+             */
+            function (placement) {
+                var _a;
+                /** @type {?} */
+                var value = ((/** @type {?} */ (data))).offsets.target[placement];
+                if (((/** @type {?} */ (data))).offsets.target[placement] < boundaries[placement] &&
+                    !false // options.escapeWithReference
+                ) {
+                    value = Math.max(((/** @type {?} */ (data))).offsets.target[placement], boundaries[placement]);
+                }
+                return _a = {}, _a[placement] = value, _a;
+            },
+            secondary: /**
+             * @param {?} placement
+             * @return {?}
+             */
+            function (placement) {
+                var _a;
+                /** @type {?} */
+                var mainSide = placement === 'right' ? 'left' : 'top';
+                /** @type {?} */
+                var value = data.offsets.target[mainSide];
+                if (((/** @type {?} */ (data))).offsets.target[placement] > boundaries[placement] &&
+                    !false // escapeWithReference
+                ) {
+                    value = Math.min(data.offsets.target[mainSide], boundaries[placement] -
+                        (placement === 'right' ? data.offsets.target.width : data.offsets.target.height));
+                }
+                return _a = {}, _a[mainSide] = value, _a;
+            }
+        };
+        /** @type {?} */
+        var side;
+        order.forEach((/**
+         * @param {?} placement
+         * @return {?}
+         */
+        function (placement) {
+            side = ['left', 'top']
+                .indexOf(placement) !== -1
+                ? 'primary'
+                : 'secondary';
+            data.offsets.target = __assign({}, data.offsets.target, ((/** @type {?} */ (check)))[side](placement));
+        }));
+        return data;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} data
+     * @return {?}
+     */
+    function shift(data) {
+        var _a, _b, _c;
+        /** @type {?} */
+        var placement = data.placement;
+        /** @type {?} */
+        var basePlacement = placement.split(' ')[0];
+        /** @type {?} */
+        var shiftVariation = placement.split(' ')[1];
+        if (shiftVariation) {
+            var _d = data.offsets, host = _d.host, target = _d.target;
+            /** @type {?} */
+            var isVertical = ['bottom', 'top'].indexOf(basePlacement) !== -1;
+            /** @type {?} */
+            var side = isVertical ? 'left' : 'top';
+            /** @type {?} */
+            var measurement = isVertical ? 'width' : 'height';
+            /** @type {?} */
+            var shiftOffsets = {
+                start: (_a = {}, _a[side] = host[side], _a),
+                end: (_b = {},
+                    _b[side] = host[side] + host[measurement] - target[measurement],
+                    _b)
+            };
+            data.offsets.target = __assign({}, target, (_c = {},
+                _c[side] = (side === shiftVariation ? ((/** @type {?} */ (shiftOffsets))).start[side] : ((/** @type {?} */ (shiftOffsets))).end[side]),
+                _c));
+        }
+        return data;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var Positioning = /** @class */ (function () {
+        function Positioning() {
+        }
+        /**
+         * @param {?} hostElement
+         * @param {?} targetElement
+         * @param {?=} round
+         * @return {?}
+         */
+        Positioning.prototype.position = /**
+         * @param {?} hostElement
+         * @param {?} targetElement
+         * @param {?=} round
+         * @return {?}
+         */
+        function (hostElement, targetElement, round) {
+            if (round === void 0) { round = true; }
+            return this.offset(hostElement, targetElement, false);
+        };
+        /**
+         * @param {?} hostElement
+         * @param {?} targetElement
+         * @param {?=} round
+         * @return {?}
+         */
+        Positioning.prototype.offset = /**
+         * @param {?} hostElement
+         * @param {?} targetElement
+         * @param {?=} round
+         * @return {?}
+         */
+        function (hostElement, targetElement, round) {
+            if (round === void 0) { round = true; }
+            return getReferenceOffsets(targetElement, hostElement);
+        };
+        /**
+         * @param {?} hostElement
+         * @param {?} targetElement
+         * @param {?} position
+         * @param {?=} appendToBody
+         * @param {?=} options
+         * @return {?}
+         */
+        Positioning.prototype.positionElements = /**
+         * @param {?} hostElement
+         * @param {?} targetElement
+         * @param {?} position
+         * @param {?=} appendToBody
+         * @param {?=} options
+         * @return {?}
+         */
+        function (hostElement, targetElement, position, appendToBody, options) {
+            /** @type {?} */
+            var chainOfModifiers = [flip, shift, preventOverflow, arrow];
+            return chainOfModifiers.reduce((/**
+             * @param {?} modifiedData
+             * @param {?} modifier
+             * @return {?}
+             */
+            function (modifiedData, modifier) { return modifier(modifiedData); }), initData(targetElement, hostElement, position, options));
+        };
+        return Positioning;
+    }());
+    /** @type {?} */
+    var positionService = new Positioning();
+    /**
+     * @param {?} hostElement
+     * @param {?} targetElement
+     * @param {?} placement
+     * @param {?=} appendToBody
+     * @param {?=} options
+     * @param {?=} renderer
+     * @return {?}
+     */
+    function positionElements(hostElement, targetElement, placement, appendToBody, options, renderer) {
+        /** @type {?} */
+        var data = positionService.positionElements(hostElement, targetElement, placement, appendToBody, options);
+        /** @type {?} */
+        var offsets = getOffsets(data);
+        setStyles(targetElement, {
+            'will-change': 'transform',
+            top: '0px',
+            left: '0px',
+            transform: "translate3d(" + offsets.left + "px, " + offsets.top + "px, 0px)"
+        }, renderer);
+        if (data.instance.arrow) {
+            setStyles(data.instance.arrow, data.offsets.arrow, renderer);
+        }
+        updateContainerClass(data, renderer);
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @record
+     */
+    function PositioningOptions() { }
+    if (false) {
+        /**
+         * The DOM element, ElementRef, or a selector string of an element which will be moved
+         * @type {?|undefined}
+         */
+        PositioningOptions.prototype.element;
+        /**
+         * The DOM element, ElementRef, or a selector string of an element which the element will be attached to
+         * @type {?|undefined}
+         */
+        PositioningOptions.prototype.target;
+        /**
+         * A string of the form 'vert-attachment horiz-attachment' or 'placement'
+         * - placement can be "top", "bottom", "left", "right"
+         * not yet supported:
+         * - vert-attachment can be any of 'top', 'middle', 'bottom'
+         * - horiz-attachment can be any of 'left', 'center', 'right'
+         * @type {?|undefined}
+         */
+        PositioningOptions.prototype.attachment;
+        /**
+         * A string similar to `attachment`. The one difference is that, if it's not provided,
+         * `targetAttachment` will assume the mirror image of `attachment`.
+         * @type {?|undefined}
+         */
+        PositioningOptions.prototype.targetAttachment;
+        /**
+         * A string of the form 'vert-offset horiz-offset'
+         * - vert-offset and horiz-offset can be of the form "20px" or "55%"
+         * @type {?|undefined}
+         */
+        PositioningOptions.prototype.offset;
+        /**
+         * A string similar to `offset`, but referring to the offset of the target
+         * @type {?|undefined}
+         */
+        PositioningOptions.prototype.targetOffset;
+        /**
+         * If true component will be attached to body
+         * @type {?|undefined}
+         */
+        PositioningOptions.prototype.appendToBody;
+    }
+    var PositioningService = /** @class */ (function () {
+        function PositioningService(ngZone, rendererFactory, platformId) {
+            var _this = this;
+            this.update$$ = new rxjs.Subject();
+            this.positionElements = new Map();
+            this.isDisabled = false;
+            if (common.isPlatformBrowser(platformId)) {
+                ngZone.runOutsideAngular((/**
+                 * @return {?}
+                 */
+                function () {
+                    _this.triggerEvent$ = rxjs.merge(rxjs.fromEvent(window, 'scroll', { passive: true }), rxjs.fromEvent(window, 'resize', { passive: true }), 
+                    /* tslint:disable-next-line: deprecation */
+                    rxjs.of(0, rxjs.animationFrameScheduler), _this.update$$);
+                    _this.triggerEvent$.subscribe((/**
+                     * @return {?}
+                     */
+                    function () {
+                        if (_this.isDisabled) {
+                            return;
+                        }
+                        _this.positionElements
+                            /* tslint:disable-next-line: no-any */
+                            .forEach((/**
+                         * @param {?} positionElement
+                         * @return {?}
+                         */
+                        function (positionElement) {
+                            positionElements(_getHtmlElement(positionElement.target), _getHtmlElement(positionElement.element), positionElement.attachment, positionElement.appendToBody, _this.options, rendererFactory.createRenderer(null, null));
+                        }));
+                    }));
+                }));
+            }
+        }
+        /**
+         * @param {?} options
+         * @return {?}
+         */
+        PositioningService.prototype.position = /**
+         * @param {?} options
+         * @return {?}
+         */
+        function (options) {
+            this.addPositionElement(options);
+        };
+        Object.defineProperty(PositioningService.prototype, "event$", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                return this.triggerEvent$;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * @return {?}
+         */
+        PositioningService.prototype.disable = /**
+         * @return {?}
+         */
+        function () {
+            this.isDisabled = true;
+        };
+        /**
+         * @return {?}
+         */
+        PositioningService.prototype.enable = /**
+         * @return {?}
+         */
+        function () {
+            this.isDisabled = false;
+        };
+        /**
+         * @param {?} options
+         * @return {?}
+         */
+        PositioningService.prototype.addPositionElement = /**
+         * @param {?} options
+         * @return {?}
+         */
+        function (options) {
+            this.positionElements.set(_getHtmlElement(options.element), options);
+        };
+        /**
+         * @return {?}
+         */
+        PositioningService.prototype.calcPosition = /**
+         * @return {?}
+         */
+        function () {
+            this.update$$.next();
+        };
+        /**
+         * @param {?} elRef
+         * @return {?}
+         */
+        PositioningService.prototype.deletePositionElement = /**
+         * @param {?} elRef
+         * @return {?}
+         */
+        function (elRef) {
+            this.positionElements.delete(_getHtmlElement(elRef));
+        };
+        /**
+         * @param {?} options
+         * @return {?}
+         */
+        PositioningService.prototype.setOptions = /**
+         * @param {?} options
+         * @return {?}
+         */
+        function (options) {
+            this.options = options;
+        };
+        PositioningService.decorators = [
+            { type: core.Injectable }
+        ];
+        /** @nocollapse */
+        PositioningService.ctorParameters = function () { return [
+            { type: core.NgZone },
+            { type: core.RendererFactory2 },
+            { type: Number, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
+        ]; };
+        return PositioningService;
+    }());
+    if (false) {
+        /**
+         * @type {?}
+         * @private
+         */
+        PositioningService.prototype.options;
+        /**
+         * @type {?}
+         * @private
+         */
+        PositioningService.prototype.update$$;
+        /**
+         * @type {?}
+         * @private
+         */
+        PositioningService.prototype.positionElements;
+        /**
+         * @type {?}
+         * @private
+         */
+        PositioningService.prototype.triggerEvent$;
+        /**
+         * @type {?}
+         * @private
+         */
+        PositioningService.prototype.isDisabled;
+    }
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    function _getHtmlElement(element) {
+        // it means that we got a selector
+        if (typeof element === 'string') {
+            return document.querySelector(element);
+        }
+        if (element instanceof core.ElementRef) {
+            return element.nativeElement;
+        }
+        return element;
+    }
+
+    exports.Positioning = Positioning;
+    exports.PositioningService = PositioningService;
+    exports.positionElements = positionElements;
+
+    Object.defineProperty(exports, '__esModule', { value: true });
+
+})));
+//# sourceMappingURL=ngx-bootstrap-positioning.umd.js.map

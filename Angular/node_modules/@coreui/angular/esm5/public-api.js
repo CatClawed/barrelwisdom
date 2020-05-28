@@ -1,0 +1,11 @@
+/*
+ * Public API Surface of @coreui/angular
+ */
+export * from './lib/aside/index';
+export * from './lib/breadcrumb/index';
+export * from './lib/footer/index';
+export * from './lib/header/index';
+export * from './lib/sidebar/index';
+// export * from './lib/shared/index';
+// export * from './lib/coreui.module';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0Bjb3JldWkvYW5ndWxhci8iLCJzb3VyY2VzIjpbInB1YmxpYy1hcGkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0dBRUc7QUFFSCxjQUFjLG1CQUFtQixDQUFDO0FBQ2xDLGNBQWMsd0JBQXdCLENBQUM7QUFDdkMsY0FBYyxvQkFBb0IsQ0FBQztBQUNuQyxjQUFjLG9CQUFvQixDQUFDO0FBQ25DLGNBQWMscUJBQXFCLENBQUM7QUFDcEMsc0NBQXNDO0FBQ3RDLHVDQUF1QyIsInNvdXJjZXNDb250ZW50IjpbIi8qXHJcbiAqIFB1YmxpYyBBUEkgU3VyZmFjZSBvZiBAY29yZXVpL2FuZ3VsYXJcclxuICovXHJcblxyXG5leHBvcnQgKiBmcm9tICcuL2xpYi9hc2lkZS9pbmRleCc7XHJcbmV4cG9ydCAqIGZyb20gJy4vbGliL2JyZWFkY3J1bWIvaW5kZXgnO1xyXG5leHBvcnQgKiBmcm9tICcuL2xpYi9mb290ZXIvaW5kZXgnO1xyXG5leHBvcnQgKiBmcm9tICcuL2xpYi9oZWFkZXIvaW5kZXgnO1xyXG5leHBvcnQgKiBmcm9tICcuL2xpYi9zaWRlYmFyL2luZGV4JztcclxuLy8gZXhwb3J0ICogZnJvbSAnLi9saWIvc2hhcmVkL2luZGV4JztcclxuLy8gZXhwb3J0ICogZnJvbSAnLi9saWIvY29yZXVpLm1vZHVsZSc7XHJcbiJdfQ==

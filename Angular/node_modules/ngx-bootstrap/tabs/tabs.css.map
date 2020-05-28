@@ -1,0 +1,12 @@
+{
+	"version": 3,
+	"file": "tabs.css",
+	"sources": [
+		"../../src/tabs/tabs.scss"
+	],
+	"sourcesContent": [
+		":host {\n  .nav-tabs {\n    .nav-item {\n      &.disabled {\n        a {\n          &.disabled {\n            cursor: default;\n          }\n        }\n      }\n    }\n  }\n}\n"
+	],
+	"names": [],
+	"mappings": "AAAA,AAKU,KALL,CACH,SAAS,CACP,SAAS,AACN,SAAS,CACR,CAAC,AACE,SAAS,CAAC;EACT,MAAM,EAAE,OAAO,GAChB"
+}

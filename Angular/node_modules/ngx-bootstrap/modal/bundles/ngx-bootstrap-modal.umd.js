@@ -1,0 +1,1860 @@
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('ngx-bootstrap/utils'), require('ngx-bootstrap/component-loader'), require('ngx-bootstrap/positioning')) :
+    typeof define === 'function' && define.amd ? define('ngx-bootstrap/modal', ['exports', '@angular/core', 'ngx-bootstrap/utils', 'ngx-bootstrap/component-loader', 'ngx-bootstrap/positioning'], factory) :
+    (global = global || self, factory((global['ngx-bootstrap'] = global['ngx-bootstrap'] || {}, global['ngx-bootstrap'].modal = {}), global.ng.core, global.utils, global.componentLoader, global.positioning));
+}(this, (function (exports, core, utils, componentLoader, positioning) { 'use strict';
+
+    /*! *****************************************************************************
+    Copyright (c) Microsoft Corporation. All rights reserved.
+    Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+    this file except in compliance with the License. You may obtain a copy of the
+    License at http://www.apache.org/licenses/LICENSE-2.0
+
+    THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+    WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+    MERCHANTABLITY OR NON-INFRINGEMENT.
+
+    See the Apache Version 2.0 License for specific language governing permissions
+    and limitations under the License.
+    ***************************************************************************** */
+    /* global Reflect, Promise */
+
+    var extendStatics = function(d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+
+    function __extends(d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    }
+
+    var __assign = function() {
+        __assign = Object.assign || function __assign(t) {
+            for (var s, i = 1, n = arguments.length; i < n; i++) {
+                s = arguments[i];
+                for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+            }
+            return t;
+        };
+        return __assign.apply(this, arguments);
+    };
+
+    function __rest(s, e) {
+        var t = {};
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+            t[p] = s[p];
+        if (s != null && typeof Object.getOwnPropertySymbols === "function")
+            for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
+                t[p[i]] = s[p[i]];
+        return t;
+    }
+
+    function __decorate(decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    }
+
+    function __param(paramIndex, decorator) {
+        return function (target, key) { decorator(target, key, paramIndex); }
+    }
+
+    function __metadata(metadataKey, metadataValue) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+    }
+
+    function __awaiter(thisArg, _arguments, P, generator) {
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+            function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    }
+
+    function __generator(thisArg, body) {
+        var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+        function verb(n) { return function (v) { return step([n, v]); }; }
+        function step(op) {
+            if (f) throw new TypeError("Generator is already executing.");
+            while (_) try {
+                if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+                if (y = 0, t) op = [op[0] & 2, t.value];
+                switch (op[0]) {
+                    case 0: case 1: t = op; break;
+                    case 4: _.label++; return { value: op[1], done: false };
+                    case 5: _.label++; y = op[1]; op = [0]; continue;
+                    case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                    default:
+                        if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                        if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                        if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                        if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                        if (t[2]) _.ops.pop();
+                        _.trys.pop(); continue;
+                }
+                op = body.call(thisArg, _);
+            } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+            if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+        }
+    }
+
+    function __exportStar(m, exports) {
+        for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+    }
+
+    function __values(o) {
+        var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+        if (m) return m.call(o);
+        return {
+            next: function () {
+                if (o && i >= o.length) o = void 0;
+                return { value: o && o[i++], done: !o };
+            }
+        };
+    }
+
+    function __read(o, n) {
+        var m = typeof Symbol === "function" && o[Symbol.iterator];
+        if (!m) return o;
+        var i = m.call(o), r, ar = [], e;
+        try {
+            while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+        }
+        catch (error) { e = { error: error }; }
+        finally {
+            try {
+                if (r && !r.done && (m = i["return"])) m.call(i);
+            }
+            finally { if (e) throw e.error; }
+        }
+        return ar;
+    }
+
+    function __spread() {
+        for (var ar = [], i = 0; i < arguments.length; i++)
+            ar = ar.concat(__read(arguments[i]));
+        return ar;
+    }
+
+    function __await(v) {
+        return this instanceof __await ? (this.v = v, this) : new __await(v);
+    }
+
+    function __asyncGenerator(thisArg, _arguments, generator) {
+        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+        var g = generator.apply(thisArg, _arguments || []), i, q = [];
+        return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
+        function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+        function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
+        function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
+        function fulfill(value) { resume("next", value); }
+        function reject(value) { resume("throw", value); }
+        function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
+    }
+
+    function __asyncDelegator(o) {
+        var i, p;
+        return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
+        function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
+    }
+
+    function __asyncValues(o) {
+        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+        var m = o[Symbol.asyncIterator], i;
+        return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
+        function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
+        function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
+    }
+
+    function __makeTemplateObject(cooked, raw) {
+        if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+        return cooked;
+    };
+
+    function __importStar(mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+        result.default = mod;
+        return result;
+    }
+
+    function __importDefault(mod) {
+        return (mod && mod.__esModule) ? mod : { default: mod };
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var BsModalRef = /** @class */ (function () {
+        function BsModalRef() {
+            /**
+             * Hides the modal
+             */
+            this.hide = Function;
+            /**
+             * Sets new class to modal window
+             */
+            this.setClass = Function;
+        }
+        BsModalRef.decorators = [
+            { type: core.Injectable }
+        ];
+        return BsModalRef;
+    }());
+    if (false) {
+        /**
+         * Reference to a component inside the modal. Null if modal's been created with TemplateRef
+         * @type {?}
+         */
+        BsModalRef.prototype.content;
+        /**
+         * Hides the modal
+         * @type {?}
+         */
+        BsModalRef.prototype.hide;
+        /**
+         * Sets new class to modal window
+         * @type {?}
+         */
+        BsModalRef.prototype.setClass;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ModalBackdropOptions = /** @class */ (function () {
+        function ModalBackdropOptions(options) {
+            this.animate = true;
+            Object.assign(this, options);
+        }
+        return ModalBackdropOptions;
+    }());
+    if (false) {
+        /** @type {?} */
+        ModalBackdropOptions.prototype.animate;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ModalOptions = /** @class */ (function () {
+        function ModalOptions() {
+        }
+        ModalOptions.decorators = [
+            { type: core.Injectable }
+        ];
+        return ModalOptions;
+    }());
+    if (false) {
+        /**
+         *  Includes a modal-backdrop element. Alternatively,
+         *  specify static for a backdrop which doesn't close the modal on click.
+         * @type {?}
+         */
+        ModalOptions.prototype.backdrop;
+        /**
+         * Closes the modal when escape key is pressed.
+         * @type {?}
+         */
+        ModalOptions.prototype.keyboard;
+        /** @type {?} */
+        ModalOptions.prototype.focus;
+        /**
+         * Shows the modal when initialized.
+         * @type {?}
+         */
+        ModalOptions.prototype.show;
+        /**
+         * Ignore the backdrop click
+         * @type {?}
+         */
+        ModalOptions.prototype.ignoreBackdropClick;
+        /**
+         * Css class for opened modal
+         * @type {?}
+         */
+        ModalOptions.prototype.class;
+        /**
+         * Toggle animation
+         * @type {?}
+         */
+        ModalOptions.prototype.animated;
+        /**
+         * Modal data
+         * @type {?}
+         */
+        ModalOptions.prototype.initialState;
+        /**
+         * Modal providers
+         * @type {?}
+         */
+        ModalOptions.prototype.providers;
+        /**
+         * aria-labelledby attribute value to set on the modal window
+         * @type {?}
+         */
+        ModalOptions.prototype.ariaLabelledBy;
+        /**
+         * aria-describedby attribute value to set on the modal window
+         * @type {?}
+         */
+        ModalOptions.prototype.ariaDescribedby;
+    }
+    /** @type {?} */
+    var modalConfigDefaults = {
+        backdrop: true,
+        keyboard: true,
+        focus: true,
+        show: false,
+        ignoreBackdropClick: false,
+        class: '',
+        animated: true,
+        initialState: {}
+    };
+    /** @type {?} */
+    var CLASS_NAME = {
+        SCROLLBAR_MEASURER: 'modal-scrollbar-measure',
+        BACKDROP: 'modal-backdrop',
+        OPEN: 'modal-open',
+        FADE: 'fade',
+        IN: 'in',
+        // bs3
+        SHOW: 'show' // bs4
+    };
+    /** @type {?} */
+    var SELECTOR = {
+        DIALOG: '.modal-dialog',
+        DATA_TOGGLE: '[data-toggle="modal"]',
+        DATA_DISMISS: '[data-dismiss="modal"]',
+        FIXED_CONTENT: '.navbar-fixed-top, .navbar-fixed-bottom, .is-fixed'
+    };
+    /** @type {?} */
+    var TRANSITION_DURATIONS = {
+        MODAL: 300,
+        BACKDROP: 150
+    };
+    /** @type {?} */
+    var DISMISS_REASONS = {
+        BACKRDOP: 'backdrop-click',
+        ESC: 'esc'
+    };
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ModalContainerComponent = /** @class */ (function () {
+        function ModalContainerComponent(options, _element, _renderer) {
+            this._element = _element;
+            this._renderer = _renderer;
+            this.isShown = false;
+            this.isModalHiding = false;
+            this.clickStartedInContent = false;
+            this.config = Object.assign({}, options);
+        }
+        /**
+         * @return {?}
+         */
+        ModalContainerComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            if (this.isAnimated) {
+                this._renderer.addClass(this._element.nativeElement, CLASS_NAME.FADE);
+            }
+            this._renderer.setStyle(this._element.nativeElement, 'display', 'block');
+            setTimeout((/**
+             * @return {?}
+             */
+            function () {
+                _this.isShown = true;
+                _this._renderer.addClass(_this._element.nativeElement, utils.isBs3() ? CLASS_NAME.IN : CLASS_NAME.SHOW);
+            }), this.isAnimated ? TRANSITION_DURATIONS.BACKDROP : 0);
+            if (document && document.body) {
+                if (this.bsModalService.getModalsCount() === 1) {
+                    this.bsModalService.checkScrollbar();
+                    this.bsModalService.setScrollbar();
+                }
+                this._renderer.addClass(document.body, CLASS_NAME.OPEN);
+            }
+            if (this._element.nativeElement) {
+                this._element.nativeElement.focus();
+            }
+        };
+        /**
+         * @param {?} event
+         * @return {?}
+         */
+        ModalContainerComponent.prototype.onClickStarted = /**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
+            this.clickStartedInContent = event.target !== this._element.nativeElement;
+        };
+        /**
+         * @param {?} event
+         * @return {?}
+         */
+        ModalContainerComponent.prototype.onClickStop = /**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
+            /** @type {?} */
+            var clickedInBackdrop = event.target === this._element.nativeElement && !this.clickStartedInContent;
+            if (this.config.ignoreBackdropClick ||
+                this.config.backdrop === 'static' ||
+                !clickedInBackdrop) {
+                this.clickStartedInContent = false;
+                return;
+            }
+            this.bsModalService.setDismissReason(DISMISS_REASONS.BACKRDOP);
+            this.hide();
+        };
+        /**
+         * @param {?} event
+         * @return {?}
+         */
+        ModalContainerComponent.prototype.onEsc = /**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
+            if (!this.isShown) {
+                return;
+            }
+            // tslint:disable-next-line:deprecation
+            if (event.keyCode === 27 || event.key === 'Escape') {
+                event.preventDefault();
+            }
+            if (this.config.keyboard &&
+                this.level === this.bsModalService.getModalsCount()) {
+                this.bsModalService.setDismissReason(DISMISS_REASONS.ESC);
+                this.hide();
+            }
+        };
+        /**
+         * @return {?}
+         */
+        ModalContainerComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+        function () {
+            if (this.isShown) {
+                this.hide();
+            }
+        };
+        /**
+         * @return {?}
+         */
+        ModalContainerComponent.prototype.hide = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            if (this.isModalHiding || !this.isShown) {
+                return;
+            }
+            this.isModalHiding = true;
+            this._renderer.removeClass(this._element.nativeElement, utils.isBs3() ? CLASS_NAME.IN : CLASS_NAME.SHOW);
+            setTimeout((/**
+             * @return {?}
+             */
+            function () {
+                _this.isShown = false;
+                if (document &&
+                    document.body &&
+                    _this.bsModalService.getModalsCount() === 1) {
+                    _this._renderer.removeClass(document.body, CLASS_NAME.OPEN);
+                }
+                _this.bsModalService.hide(_this.level);
+                _this.isModalHiding = false;
+            }), this.isAnimated ? TRANSITION_DURATIONS.MODAL : 0);
+        };
+        ModalContainerComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'modal-container',
+                        template: "\n    <div [class]=\"'modal-dialog' + (config.class ? ' ' + config.class : '')\" role=\"document\">\n      <div class=\"modal-content\">\n        <ng-content></ng-content>\n      </div>\n    </div>\n  ",
+                        host: {
+                            class: 'modal',
+                            role: 'dialog',
+                            tabindex: '-1',
+                            '[attr.aria-modal]': 'true',
+                            '[attr.aria-labelledby]': 'config.ariaLabelledBy',
+                            '[attr.aria-describedby]': 'config.ariaDescribedby'
+                        }
+                    }] }
+        ];
+        /** @nocollapse */
+        ModalContainerComponent.ctorParameters = function () { return [
+            { type: ModalOptions },
+            { type: core.ElementRef },
+            { type: core.Renderer2 }
+        ]; };
+        ModalContainerComponent.propDecorators = {
+            onClickStarted: [{ type: core.HostListener, args: ['mousedown', ['$event'],] }],
+            onClickStop: [{ type: core.HostListener, args: ['mouseup', ['$event'],] }],
+            onEsc: [{ type: core.HostListener, args: ['window:keydown.esc', ['$event'],] }]
+        };
+        return ModalContainerComponent;
+    }());
+    if (false) {
+        /** @type {?} */
+        ModalContainerComponent.prototype.config;
+        /** @type {?} */
+        ModalContainerComponent.prototype.isShown;
+        /** @type {?} */
+        ModalContainerComponent.prototype.level;
+        /** @type {?} */
+        ModalContainerComponent.prototype.isAnimated;
+        /** @type {?} */
+        ModalContainerComponent.prototype.bsModalService;
+        /**
+         * @type {?}
+         * @private
+         */
+        ModalContainerComponent.prototype.isModalHiding;
+        /**
+         * @type {?}
+         * @private
+         */
+        ModalContainerComponent.prototype.clickStartedInContent;
+        /**
+         * @type {?}
+         * @protected
+         */
+        ModalContainerComponent.prototype._element;
+        /**
+         * @type {?}
+         * @private
+         */
+        ModalContainerComponent.prototype._renderer;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * This component will be added as background layout for modals if enabled
+     */
+    var ModalBackdropComponent = /** @class */ (function () {
+        function ModalBackdropComponent(element, renderer) {
+            this._isShown = false;
+            this.element = element;
+            this.renderer = renderer;
+        }
+        Object.defineProperty(ModalBackdropComponent.prototype, "isAnimated", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                return this._isAnimated;
+            },
+            set: /**
+             * @param {?} value
+             * @return {?}
+             */
+            function (value) {
+                this._isAnimated = value;
+                // this.renderer.setElementClass(this.element.nativeElement, `${ClassName.FADE}`, value);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(ModalBackdropComponent.prototype, "isShown", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                return this._isShown;
+            },
+            set: /**
+             * @param {?} value
+             * @return {?}
+             */
+            function (value) {
+                this._isShown = value;
+                if (value) {
+                    this.renderer.addClass(this.element.nativeElement, "" + CLASS_NAME.IN);
+                }
+                else {
+                    this.renderer.removeClass(this.element.nativeElement, "" + CLASS_NAME.IN);
+                }
+                if (!utils.isBs3()) {
+                    if (value) {
+                        this.renderer.addClass(this.element.nativeElement, "" + CLASS_NAME.SHOW);
+                    }
+                    else {
+                        this.renderer.removeClass(this.element.nativeElement, "" + CLASS_NAME.SHOW);
+                    }
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * @return {?}
+         */
+        ModalBackdropComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+        function () {
+            if (this.isAnimated) {
+                this.renderer.addClass(this.element.nativeElement, "" + CLASS_NAME.FADE);
+                utils.Utils.reflow(this.element.nativeElement);
+            }
+            this.isShown = true;
+        };
+        ModalBackdropComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'bs-modal-backdrop',
+                        template: ' ',
+                        host: { class: CLASS_NAME.BACKDROP }
+                    }] }
+        ];
+        /** @nocollapse */
+        ModalBackdropComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: core.Renderer2 }
+        ]; };
+        return ModalBackdropComponent;
+    }());
+    if (false) {
+        /** @type {?} */
+        ModalBackdropComponent.prototype.element;
+        /** @type {?} */
+        ModalBackdropComponent.prototype.renderer;
+        /**
+         * @type {?}
+         * @protected
+         */
+        ModalBackdropComponent.prototype._isAnimated;
+        /**
+         * @type {?}
+         * @protected
+         */
+        ModalBackdropComponent.prototype._isShown;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var TRANSITION_DURATION = 300;
+    /** @type {?} */
+    var BACKDROP_TRANSITION_DURATION = 150;
+    /**
+     * Mark any code with directive to show it's content in modal
+     */
+    var ModalDirective = /** @class */ (function () {
+        function ModalDirective(_element, _viewContainerRef, _renderer, clf) {
+            this._element = _element;
+            this._renderer = _renderer;
+            /**
+             * This event fires immediately when the `show` instance method is called.
+             */
+            this.onShow = new core.EventEmitter();
+            /**
+             * This event is fired when the modal has been made visible to the user
+             * (will wait for CSS transitions to complete)
+             */
+            this.onShown = new core.EventEmitter();
+            /**
+             * This event is fired immediately when
+             * the hide instance method has been called.
+             */
+            this.onHide = new core.EventEmitter();
+            /**
+             * This event is fired when the modal has finished being
+             * hidden from the user (will wait for CSS transitions to complete).
+             */
+            this.onHidden = new core.EventEmitter();
+            this._isShown = false;
+            this.isBodyOverflowing = false;
+            this.originalBodyPadding = 0;
+            this.scrollbarWidth = 0;
+            this.timerHideModal = 0;
+            this.timerRmBackDrop = 0;
+            this.isNested = false;
+            this.clickStartedInContent = false;
+            this._backdrop = clf.createLoader(_element, _viewContainerRef, _renderer);
+        }
+        Object.defineProperty(ModalDirective.prototype, "config", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                return this._config;
+            },
+            /** allows to set modal configuration via element property */
+            set: /**
+             * allows to set modal configuration via element property
+             * @param {?} conf
+             * @return {?}
+             */
+            function (conf) {
+                this._config = this.getConfig(conf);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(ModalDirective.prototype, "isShown", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                return this._isShown;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * @param {?} event
+         * @return {?}
+         */
+        ModalDirective.prototype.onClickStarted = /**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
+            this.clickStartedInContent = event.target !== this._element.nativeElement;
+        };
+        /**
+         * @param {?} event
+         * @return {?}
+         */
+        ModalDirective.prototype.onClickStop = /**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
+            /** @type {?} */
+            var clickedInBackdrop = event.target === this._element.nativeElement && !this.clickStartedInContent;
+            if (this.config.ignoreBackdropClick ||
+                this.config.backdrop === 'static' ||
+                !clickedInBackdrop) {
+                this.clickStartedInContent = false;
+                return;
+            }
+            this.dismissReason = DISMISS_REASONS.BACKRDOP;
+            this.hide(event);
+        };
+        // todo: consider preventing default and stopping propagation
+        // todo: consider preventing default and stopping propagation
+        /**
+         * @param {?} event
+         * @return {?}
+         */
+        ModalDirective.prototype.onEsc = 
+        // todo: consider preventing default and stopping propagation
+        /**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
+            if (!this._isShown) {
+                return;
+            }
+            // tslint:disable-next-line:deprecation
+            if (event.keyCode === 27 || event.key === 'Escape') {
+                event.preventDefault();
+            }
+            if (this.config.keyboard) {
+                this.dismissReason = DISMISS_REASONS.ESC;
+                this.hide();
+            }
+        };
+        /**
+         * @return {?}
+         */
+        ModalDirective.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+        function () {
+            this.config = void 0;
+            if (this._isShown) {
+                this._isShown = false;
+                this.hideModal();
+                this._backdrop.dispose();
+            }
+        };
+        /**
+         * @return {?}
+         */
+        ModalDirective.prototype.ngOnInit = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            this._config = this._config || this.getConfig();
+            setTimeout((/**
+             * @return {?}
+             */
+            function () {
+                if (_this._config.show) {
+                    _this.show();
+                }
+            }), 0);
+        };
+        /* Public methods */
+        /** Allows to manually toggle modal visibility */
+        /* Public methods */
+        /**
+         * Allows to manually toggle modal visibility
+         * @return {?}
+         */
+        ModalDirective.prototype.toggle = /* Public methods */
+        /**
+         * Allows to manually toggle modal visibility
+         * @return {?}
+         */
+        function () {
+            return this._isShown ? this.hide() : this.show();
+        };
+        /** Allows to manually open modal */
+        /**
+         * Allows to manually open modal
+         * @return {?}
+         */
+        ModalDirective.prototype.show = /**
+         * Allows to manually open modal
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            this.dismissReason = null;
+            this.onShow.emit(this);
+            if (this._isShown) {
+                return;
+            }
+            clearTimeout(this.timerHideModal);
+            clearTimeout(this.timerRmBackDrop);
+            this._isShown = true;
+            this.checkScrollbar();
+            this.setScrollbar();
+            if (utils.document && utils.document.body) {
+                if (utils.document.body.classList.contains(CLASS_NAME.OPEN)) {
+                    this.isNested = true;
+                }
+                else {
+                    this._renderer.addClass(utils.document.body, CLASS_NAME.OPEN);
+                }
+            }
+            this.showBackdrop((/**
+             * @return {?}
+             */
+            function () {
+                _this.showElement();
+            }));
+        };
+        /** Allows to manually close modal */
+        /**
+         * Allows to manually close modal
+         * @param {?=} event
+         * @return {?}
+         */
+        ModalDirective.prototype.hide = /**
+         * Allows to manually close modal
+         * @param {?=} event
+         * @return {?}
+         */
+        function (event) {
+            var _this = this;
+            if (event) {
+                event.preventDefault();
+            }
+            this.onHide.emit(this);
+            // todo: add an option to prevent hiding
+            if (!this._isShown) {
+                return;
+            }
+            utils.window.clearTimeout(this.timerHideModal);
+            utils.window.clearTimeout(this.timerRmBackDrop);
+            this._isShown = false;
+            this._renderer.removeClass(this._element.nativeElement, CLASS_NAME.IN);
+            if (!utils.isBs3()) {
+                this._renderer.removeClass(this._element.nativeElement, CLASS_NAME.SHOW);
+            }
+            // this._addClassIn = false;
+            if (this._config.animated) {
+                this.timerHideModal = utils.window.setTimeout((/**
+                 * @return {?}
+                 */
+                function () { return _this.hideModal(); }), TRANSITION_DURATION);
+            }
+            else {
+                this.hideModal();
+            }
+        };
+        /** Private methods @internal */
+        /**
+         * Private methods \@internal
+         * @protected
+         * @param {?=} config
+         * @return {?}
+         */
+        ModalDirective.prototype.getConfig = /**
+         * Private methods \@internal
+         * @protected
+         * @param {?=} config
+         * @return {?}
+         */
+        function (config) {
+            return Object.assign({}, modalConfigDefaults, config);
+        };
+        /**
+         *  Show dialog
+         *  @internal
+         */
+        /**
+         *  Show dialog
+         * \@internal
+         * @protected
+         * @return {?}
+         */
+        ModalDirective.prototype.showElement = /**
+         *  Show dialog
+         * \@internal
+         * @protected
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            // todo: replace this with component loader usage
+            if (!this._element.nativeElement.parentNode ||
+                this._element.nativeElement.parentNode.nodeType !== Node.ELEMENT_NODE) {
+                // don't move modals dom position
+                if (utils.document && utils.document.body) {
+                    utils.document.body.appendChild(this._element.nativeElement);
+                }
+            }
+            this._renderer.setAttribute(this._element.nativeElement, 'aria-hidden', 'false');
+            this._renderer.setAttribute(this._element.nativeElement, 'aria-modal', 'true');
+            this._renderer.setStyle(this._element.nativeElement, 'display', 'block');
+            this._renderer.setProperty(this._element.nativeElement, 'scrollTop', 0);
+            if (this._config.animated) {
+                utils.Utils.reflow(this._element.nativeElement);
+            }
+            // this._addClassIn = true;
+            this._renderer.addClass(this._element.nativeElement, CLASS_NAME.IN);
+            if (!utils.isBs3()) {
+                this._renderer.addClass(this._element.nativeElement, CLASS_NAME.SHOW);
+            }
+            /** @type {?} */
+            var transitionComplete = (/**
+             * @return {?}
+             */
+            function () {
+                if (_this._config.focus) {
+                    _this._element.nativeElement.focus();
+                }
+                _this.onShown.emit(_this);
+            });
+            if (this._config.animated) {
+                setTimeout(transitionComplete, TRANSITION_DURATION);
+            }
+            else {
+                transitionComplete();
+            }
+        };
+        /** @internal */
+        /**
+         * \@internal
+         * @protected
+         * @return {?}
+         */
+        ModalDirective.prototype.hideModal = /**
+         * \@internal
+         * @protected
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            this._renderer.setAttribute(this._element.nativeElement, 'aria-hidden', 'true');
+            this._renderer.setStyle(this._element.nativeElement, 'display', 'none');
+            this.showBackdrop((/**
+             * @return {?}
+             */
+            function () {
+                if (!_this.isNested) {
+                    if (utils.document && utils.document.body) {
+                        _this._renderer.removeClass(utils.document.body, CLASS_NAME.OPEN);
+                    }
+                    _this.resetScrollbar();
+                }
+                _this.resetAdjustments();
+                _this.focusOtherModal();
+                _this.onHidden.emit(_this);
+            }));
+        };
+        // todo: original show was calling a callback when done, but we can use
+        // promise
+        /** @internal */
+        // todo: original show was calling a callback when done, but we can use
+        // promise
+        /**
+         * \@internal
+         * @protected
+         * @param {?=} callback
+         * @return {?}
+         */
+        ModalDirective.prototype.showBackdrop = 
+        // todo: original show was calling a callback when done, but we can use
+        // promise
+        /**
+         * \@internal
+         * @protected
+         * @param {?=} callback
+         * @return {?}
+         */
+        function (callback) {
+            var _this = this;
+            if (this._isShown &&
+                this.config.backdrop &&
+                (!this.backdrop || !this.backdrop.instance.isShown)) {
+                this.removeBackdrop();
+                this._backdrop
+                    .attach(ModalBackdropComponent)
+                    .to('body')
+                    .show({ isAnimated: this._config.animated });
+                this.backdrop = this._backdrop._componentRef;
+                if (!callback) {
+                    return;
+                }
+                if (!this._config.animated) {
+                    callback();
+                    return;
+                }
+                setTimeout(callback, BACKDROP_TRANSITION_DURATION);
+            }
+            else if (!this._isShown && this.backdrop) {
+                this.backdrop.instance.isShown = false;
+                /** @type {?} */
+                var callbackRemove = (/**
+                 * @return {?}
+                 */
+                function () {
+                    _this.removeBackdrop();
+                    if (callback) {
+                        callback();
+                    }
+                });
+                if (this.backdrop.instance.isAnimated) {
+                    this.timerRmBackDrop = utils.window.setTimeout(callbackRemove, BACKDROP_TRANSITION_DURATION);
+                }
+                else {
+                    callbackRemove();
+                }
+            }
+            else if (callback) {
+                callback();
+            }
+        };
+        /** @internal */
+        /**
+         * \@internal
+         * @protected
+         * @return {?}
+         */
+        ModalDirective.prototype.removeBackdrop = /**
+         * \@internal
+         * @protected
+         * @return {?}
+         */
+        function () {
+            this._backdrop.hide();
+        };
+        /** Events tricks */
+        // no need for it
+        // protected setEscapeEvent():void {
+        //   if (this._isShown && this._config.keyboard) {
+        //     $(this._element).on(Event.KEYDOWN_DISMISS, (event) => {
+        //       if (event.which === 27) {
+        //         this.hide()
+        //       }
+        //     })
+        //
+        //   } else if (!this._isShown) {
+        //     $(this._element).off(Event.KEYDOWN_DISMISS)
+        //   }
+        // }
+        // protected setResizeEvent():void {
+        // console.log(this.renderer.listenGlobal('', Event.RESIZE));
+        // if (this._isShown) {
+        //   $(window).on(Event.RESIZE, $.proxy(this._handleUpdate, this))
+        // } else {
+        //   $(window).off(Event.RESIZE)
+        // }
+        // }
+        /**
+         * Events tricks
+         * @protected
+         * @return {?}
+         */
+        // no need for it
+        // protected setEscapeEvent():void {
+        //   if (this._isShown && this._config.keyboard) {
+        //     $(this._element).on(Event.KEYDOWN_DISMISS, (event) => {
+        //       if (event.which === 27) {
+        //         this.hide()
+        //       }
+        //     })
+        //
+        //   } else if (!this._isShown) {
+        //     $(this._element).off(Event.KEYDOWN_DISMISS)
+        //   }
+        // }
+        // protected setResizeEvent():void {
+        // console.log(this.renderer.listenGlobal('', Event.RESIZE));
+        // if (this._isShown) {
+        //   $(window).on(Event.RESIZE, $.proxy(this._handleUpdate, this))
+        // } else {
+        //   $(window).off(Event.RESIZE)
+        // }
+        // }
+        ModalDirective.prototype.focusOtherModal = /**
+         * Events tricks
+         * @protected
+         * @return {?}
+         */
+        // no need for it
+        // protected setEscapeEvent():void {
+        //   if (this._isShown && this._config.keyboard) {
+        //     $(this._element).on(Event.KEYDOWN_DISMISS, (event) => {
+        //       if (event.which === 27) {
+        //         this.hide()
+        //       }
+        //     })
+        //
+        //   } else if (!this._isShown) {
+        //     $(this._element).off(Event.KEYDOWN_DISMISS)
+        //   }
+        // }
+        // protected setResizeEvent():void {
+        // console.log(this.renderer.listenGlobal('', Event.RESIZE));
+        // if (this._isShown) {
+        //   $(window).on(Event.RESIZE, $.proxy(this._handleUpdate, this))
+        // } else {
+        //   $(window).off(Event.RESIZE)
+        // }
+        // }
+        function () {
+            if (this._element.nativeElement.parentElement == null) {
+                return;
+            }
+            /** @type {?} */
+            var otherOpenedModals = this._element.nativeElement.parentElement.querySelectorAll('.in[bsModal]');
+            if (!otherOpenedModals.length) {
+                return;
+            }
+            otherOpenedModals[otherOpenedModals.length - 1].focus();
+        };
+        /** @internal */
+        /**
+         * \@internal
+         * @protected
+         * @return {?}
+         */
+        ModalDirective.prototype.resetAdjustments = /**
+         * \@internal
+         * @protected
+         * @return {?}
+         */
+        function () {
+            this._renderer.setStyle(this._element.nativeElement, 'paddingLeft', '');
+            this._renderer.setStyle(this._element.nativeElement, 'paddingRight', '');
+        };
+        /** Scroll bar tricks */
+        /** @internal */
+        /** Scroll bar tricks */
+        /**
+         * \@internal
+         * @protected
+         * @return {?}
+         */
+        ModalDirective.prototype.checkScrollbar = /** Scroll bar tricks */
+        /**
+         * \@internal
+         * @protected
+         * @return {?}
+         */
+        function () {
+            this.isBodyOverflowing = utils.document.body.clientWidth < utils.window.innerWidth;
+            this.scrollbarWidth = this.getScrollbarWidth();
+        };
+        /**
+         * @protected
+         * @return {?}
+         */
+        ModalDirective.prototype.setScrollbar = /**
+         * @protected
+         * @return {?}
+         */
+        function () {
+            if (!utils.document) {
+                return;
+            }
+            this.originalBodyPadding = parseInt(utils.window
+                .getComputedStyle(utils.document.body)
+                .getPropertyValue('padding-right') || 0, 10);
+            if (this.isBodyOverflowing) {
+                utils.document.body.style.paddingRight = this.originalBodyPadding +
+                    this.scrollbarWidth + "px";
+            }
+        };
+        /**
+         * @protected
+         * @return {?}
+         */
+        ModalDirective.prototype.resetScrollbar = /**
+         * @protected
+         * @return {?}
+         */
+        function () {
+            utils.document.body.style.paddingRight = this.originalBodyPadding + "px";
+        };
+        // thx d.walsh
+        // thx d.walsh
+        /**
+         * @protected
+         * @return {?}
+         */
+        ModalDirective.prototype.getScrollbarWidth = 
+        // thx d.walsh
+        /**
+         * @protected
+         * @return {?}
+         */
+        function () {
+            /** @type {?} */
+            var scrollDiv = this._renderer.createElement('div');
+            this._renderer.addClass(scrollDiv, CLASS_NAME.SCROLLBAR_MEASURER);
+            this._renderer.appendChild(utils.document.body, scrollDiv);
+            /** @type {?} */
+            var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+            this._renderer.removeChild(utils.document.body, scrollDiv);
+            return scrollbarWidth;
+        };
+        ModalDirective.decorators = [
+            { type: core.Directive, args: [{
+                        selector: '[bsModal]',
+                        exportAs: 'bs-modal'
+                    },] }
+        ];
+        /** @nocollapse */
+        ModalDirective.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: core.ViewContainerRef },
+            { type: core.Renderer2 },
+            { type: componentLoader.ComponentLoaderFactory }
+        ]; };
+        ModalDirective.propDecorators = {
+            config: [{ type: core.Input }],
+            onShow: [{ type: core.Output }],
+            onShown: [{ type: core.Output }],
+            onHide: [{ type: core.Output }],
+            onHidden: [{ type: core.Output }],
+            onClickStarted: [{ type: core.HostListener, args: ['mousedown', ['$event'],] }],
+            onClickStop: [{ type: core.HostListener, args: ['mouseup', ['$event'],] }],
+            onEsc: [{ type: core.HostListener, args: ['keydown.esc', ['$event'],] }]
+        };
+        return ModalDirective;
+    }());
+    if (false) {
+        /**
+         * This event fires immediately when the `show` instance method is called.
+         * @type {?}
+         */
+        ModalDirective.prototype.onShow;
+        /**
+         * This event is fired when the modal has been made visible to the user
+         * (will wait for CSS transitions to complete)
+         * @type {?}
+         */
+        ModalDirective.prototype.onShown;
+        /**
+         * This event is fired immediately when
+         * the hide instance method has been called.
+         * @type {?}
+         */
+        ModalDirective.prototype.onHide;
+        /**
+         * This event is fired when the modal has finished being
+         * hidden from the user (will wait for CSS transitions to complete).
+         * @type {?}
+         */
+        ModalDirective.prototype.onHidden;
+        /**
+         * This field contains last dismiss reason.
+         * Possible values: `backdrop-click`, `esc` and `null`
+         * (if modal was closed by direct call of `.hide()`).
+         * @type {?}
+         */
+        ModalDirective.prototype.dismissReason;
+        /**
+         * @type {?}
+         * @protected
+         */
+        ModalDirective.prototype._config;
+        /**
+         * @type {?}
+         * @protected
+         */
+        ModalDirective.prototype._isShown;
+        /**
+         * @type {?}
+         * @protected
+         */
+        ModalDirective.prototype.isBodyOverflowing;
+        /**
+         * @type {?}
+         * @protected
+         */
+        ModalDirective.prototype.originalBodyPadding;
+        /**
+         * @type {?}
+         * @protected
+         */
+        ModalDirective.prototype.scrollbarWidth;
+        /**
+         * @type {?}
+         * @protected
+         */
+        ModalDirective.prototype.timerHideModal;
+        /**
+         * @type {?}
+         * @protected
+         */
+        ModalDirective.prototype.timerRmBackDrop;
+        /**
+         * @type {?}
+         * @protected
+         */
+        ModalDirective.prototype.backdrop;
+        /**
+         * @type {?}
+         * @private
+         */
+        ModalDirective.prototype._backdrop;
+        /**
+         * @type {?}
+         * @private
+         */
+        ModalDirective.prototype.isNested;
+        /**
+         * @type {?}
+         * @private
+         */
+        ModalDirective.prototype.clickStartedInContent;
+        /**
+         * @type {?}
+         * @private
+         */
+        ModalDirective.prototype._element;
+        /**
+         * @type {?}
+         * @private
+         */
+        ModalDirective.prototype._renderer;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var BsModalService = /** @class */ (function () {
+        function BsModalService(rendererFactory, clf) {
+            this.clf = clf;
+            // constructor props
+            this.config = modalConfigDefaults;
+            // tslint:disable-next-line:no-any
+            this.onShow = new core.EventEmitter();
+            // tslint:disable-next-line:no-any
+            this.onShown = new core.EventEmitter();
+            // tslint:disable-next-line:no-any
+            this.onHide = new core.EventEmitter();
+            // tslint:disable-next-line:no-any
+            this.onHidden = new core.EventEmitter();
+            this.isBodyOverflowing = false;
+            this.originalBodyPadding = 0;
+            this.scrollbarWidth = 0;
+            this.modalsCount = 0;
+            this.lastDismissReason = '';
+            this.loaders = [];
+            this._backdropLoader = this.clf.createLoader(null, null, null);
+            this._renderer = rendererFactory.createRenderer(null, null);
+        }
+        /** Shows a modal */
+        // tslint:disable-next-line:no-any
+        /**
+         * Shows a modal
+         * @param {?} content
+         * @param {?=} config
+         * @return {?}
+         */
+        // tslint:disable-next-line:no-any
+        BsModalService.prototype.show = /**
+         * Shows a modal
+         * @param {?} content
+         * @param {?=} config
+         * @return {?}
+         */
+        // tslint:disable-next-line:no-any
+        function (content, config) {
+            this.modalsCount++;
+            this._createLoaders();
+            this.config = Object.assign({}, modalConfigDefaults, config);
+            this._showBackdrop();
+            this.lastDismissReason = null;
+            return this._showModal(content);
+        };
+        /**
+         * @param {?} level
+         * @return {?}
+         */
+        BsModalService.prototype.hide = /**
+         * @param {?} level
+         * @return {?}
+         */
+        function (level) {
+            var _this = this;
+            if (this.modalsCount === 1) {
+                this._hideBackdrop();
+                this.resetScrollbar();
+            }
+            this.modalsCount = this.modalsCount >= 1 ? this.modalsCount - 1 : 0;
+            setTimeout((/**
+             * @return {?}
+             */
+            function () {
+                _this._hideModal(level);
+                _this.removeLoaders(level);
+            }), this.config.animated ? TRANSITION_DURATIONS.BACKDROP : 0);
+        };
+        /**
+         * @return {?}
+         */
+        BsModalService.prototype._showBackdrop = /**
+         * @return {?}
+         */
+        function () {
+            /** @type {?} */
+            var isBackdropEnabled = this.config.backdrop || this.config.backdrop === 'static';
+            /** @type {?} */
+            var isBackdropInDOM = !this.backdropRef || !this.backdropRef.instance.isShown;
+            if (this.modalsCount === 1) {
+                this.removeBackdrop();
+                if (isBackdropEnabled && isBackdropInDOM) {
+                    this._backdropLoader
+                        .attach(ModalBackdropComponent)
+                        .to('body')
+                        .show({ isAnimated: this.config.animated });
+                    this.backdropRef = this._backdropLoader._componentRef;
+                }
+            }
+        };
+        /**
+         * @return {?}
+         */
+        BsModalService.prototype._hideBackdrop = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            if (!this.backdropRef) {
+                return;
+            }
+            this.backdropRef.instance.isShown = false;
+            /** @type {?} */
+            var duration = this.config.animated ? TRANSITION_DURATIONS.BACKDROP : 0;
+            setTimeout((/**
+             * @return {?}
+             */
+            function () { return _this.removeBackdrop(); }), duration);
+        };
+        // tslint:disable-next-line:no-any
+        // tslint:disable-next-line:no-any
+        /**
+         * @param {?} content
+         * @return {?}
+         */
+        BsModalService.prototype._showModal = 
+        // tslint:disable-next-line:no-any
+        /**
+         * @param {?} content
+         * @return {?}
+         */
+        function (content) {
+            var e_1, _a;
+            var _this = this;
+            /** @type {?} */
+            var modalLoader = this.loaders[this.loaders.length - 1];
+            if (this.config && this.config.providers) {
+                try {
+                    for (var _b = __values(this.config.providers), _c = _b.next(); !_c.done; _c = _b.next()) {
+                        var provider = _c.value;
+                        modalLoader.provide(provider);
+                    }
+                }
+                catch (e_1_1) { e_1 = { error: e_1_1 }; }
+                finally {
+                    try {
+                        if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+                    }
+                    finally { if (e_1) throw e_1.error; }
+                }
+            }
+            /** @type {?} */
+            var bsModalRef = new BsModalRef();
+            /** @type {?} */
+            var modalContainerRef = modalLoader
+                .provide({ provide: ModalOptions, useValue: this.config })
+                .provide({ provide: BsModalRef, useValue: bsModalRef })
+                .attach(ModalContainerComponent)
+                .to('body')
+                .show({ content: content, isAnimated: this.config.animated, initialState: this.config.initialState, bsModalService: this });
+            modalContainerRef.instance.level = this.getModalsCount();
+            bsModalRef.hide = (/**
+             * @return {?}
+             */
+            function () {
+                /** @type {?} */
+                var duration = _this.config.animated ? TRANSITION_DURATIONS.MODAL : 0;
+                setTimeout((/**
+                 * @return {?}
+                 */
+                function () { return modalContainerRef.instance.hide(); }), duration);
+            });
+            bsModalRef.content = modalLoader.getInnerComponent() || null;
+            bsModalRef.setClass = (/**
+             * @param {?} newClass
+             * @return {?}
+             */
+            function (newClass) {
+                modalContainerRef.instance.config.class = newClass;
+            });
+            return bsModalRef;
+        };
+        /**
+         * @param {?} level
+         * @return {?}
+         */
+        BsModalService.prototype._hideModal = /**
+         * @param {?} level
+         * @return {?}
+         */
+        function (level) {
+            /** @type {?} */
+            var modalLoader = this.loaders[level - 1];
+            if (modalLoader) {
+                modalLoader.hide();
+            }
+        };
+        /**
+         * @return {?}
+         */
+        BsModalService.prototype.getModalsCount = /**
+         * @return {?}
+         */
+        function () {
+            return this.modalsCount;
+        };
+        /**
+         * @param {?} reason
+         * @return {?}
+         */
+        BsModalService.prototype.setDismissReason = /**
+         * @param {?} reason
+         * @return {?}
+         */
+        function (reason) {
+            this.lastDismissReason = reason;
+        };
+        /**
+         * @return {?}
+         */
+        BsModalService.prototype.removeBackdrop = /**
+         * @return {?}
+         */
+        function () {
+            this._backdropLoader.hide();
+            this.backdropRef = null;
+        };
+        /** Checks if the body is overflowing and sets scrollbar width */
+        /** @internal */
+        /** Checks if the body is overflowing and sets scrollbar width */
+        /**
+         * \@internal
+         * @return {?}
+         */
+        BsModalService.prototype.checkScrollbar = /** Checks if the body is overflowing and sets scrollbar width */
+        /**
+         * \@internal
+         * @return {?}
+         */
+        function () {
+            this.isBodyOverflowing = document.body.clientWidth < window.innerWidth;
+            this.scrollbarWidth = this.getScrollbarWidth();
+        };
+        /**
+         * @return {?}
+         */
+        BsModalService.prototype.setScrollbar = /**
+         * @return {?}
+         */
+        function () {
+            if (!document) {
+                return;
+            }
+            this.originalBodyPadding = parseInt(window
+                .getComputedStyle(document.body)
+                .getPropertyValue('padding-right') || '0', 10);
+            if (this.isBodyOverflowing) {
+                document.body.style.paddingRight = this.originalBodyPadding +
+                    this.scrollbarWidth + "px";
+            }
+        };
+        /**
+         * @private
+         * @return {?}
+         */
+        BsModalService.prototype.resetScrollbar = /**
+         * @private
+         * @return {?}
+         */
+        function () {
+            document.body.style.paddingRight = this.originalBodyPadding + "px";
+        };
+        // thx d.walsh
+        // thx d.walsh
+        /**
+         * @private
+         * @return {?}
+         */
+        BsModalService.prototype.getScrollbarWidth = 
+        // thx d.walsh
+        /**
+         * @private
+         * @return {?}
+         */
+        function () {
+            /** @type {?} */
+            var scrollDiv = this._renderer.createElement('div');
+            this._renderer.addClass(scrollDiv, CLASS_NAME.SCROLLBAR_MEASURER);
+            this._renderer.appendChild(document.body, scrollDiv);
+            /** @type {?} */
+            var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+            this._renderer.removeChild(document.body, scrollDiv);
+            return scrollbarWidth;
+        };
+        /**
+         * @private
+         * @return {?}
+         */
+        BsModalService.prototype._createLoaders = /**
+         * @private
+         * @return {?}
+         */
+        function () {
+            /** @type {?} */
+            var loader = this.clf.createLoader(null, null, null);
+            this.copyEvent(loader.onBeforeShow, this.onShow);
+            this.copyEvent(loader.onShown, this.onShown);
+            this.copyEvent(loader.onBeforeHide, this.onHide);
+            this.copyEvent(loader.onHidden, this.onHidden);
+            this.loaders.push(loader);
+        };
+        /**
+         * @private
+         * @param {?} level
+         * @return {?}
+         */
+        BsModalService.prototype.removeLoaders = /**
+         * @private
+         * @param {?} level
+         * @return {?}
+         */
+        function (level) {
+            this.loaders.splice(level - 1, 1);
+            this.loaders.forEach((/**
+             * @param {?} loader
+             * @param {?} i
+             * @return {?}
+             */
+            function (loader, i) {
+                loader.instance.level = i + 1;
+            }));
+        };
+        // tslint:disable-next-line:no-any
+        // tslint:disable-next-line:no-any
+        /**
+         * @private
+         * @param {?} from
+         * @param {?} to
+         * @return {?}
+         */
+        BsModalService.prototype.copyEvent = 
+        // tslint:disable-next-line:no-any
+        /**
+         * @private
+         * @param {?} from
+         * @param {?} to
+         * @return {?}
+         */
+        function (from, to) {
+            var _this = this;
+            from.subscribe((/**
+             * @return {?}
+             */
+            function () {
+                to.emit(_this.lastDismissReason);
+            }));
+        };
+        BsModalService.decorators = [
+            { type: core.Injectable }
+        ];
+        /** @nocollapse */
+        BsModalService.ctorParameters = function () { return [
+            { type: core.RendererFactory2 },
+            { type: componentLoader.ComponentLoaderFactory }
+        ]; };
+        return BsModalService;
+    }());
+    if (false) {
+        /** @type {?} */
+        BsModalService.prototype.config;
+        /** @type {?} */
+        BsModalService.prototype.onShow;
+        /** @type {?} */
+        BsModalService.prototype.onShown;
+        /** @type {?} */
+        BsModalService.prototype.onHide;
+        /** @type {?} */
+        BsModalService.prototype.onHidden;
+        /**
+         * @type {?}
+         * @protected
+         */
+        BsModalService.prototype.isBodyOverflowing;
+        /**
+         * @type {?}
+         * @protected
+         */
+        BsModalService.prototype.originalBodyPadding;
+        /**
+         * @type {?}
+         * @protected
+         */
+        BsModalService.prototype.scrollbarWidth;
+        /**
+         * @type {?}
+         * @protected
+         */
+        BsModalService.prototype.backdropRef;
+        /**
+         * @type {?}
+         * @private
+         */
+        BsModalService.prototype._backdropLoader;
+        /**
+         * @type {?}
+         * @private
+         */
+        BsModalService.prototype.modalsCount;
+        /**
+         * @type {?}
+         * @private
+         */
+        BsModalService.prototype.lastDismissReason;
+        /**
+         * @type {?}
+         * @private
+         */
+        BsModalService.prototype.loaders;
+        /**
+         * @type {?}
+         * @private
+         */
+        BsModalService.prototype._renderer;
+        /**
+         * @type {?}
+         * @private
+         */
+        BsModalService.prototype.clf;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ModalModule = /** @class */ (function () {
+        function ModalModule() {
+        }
+        /**
+         * @return {?}
+         */
+        ModalModule.forRoot = /**
+         * @return {?}
+         */
+        function () {
+            return {
+                ngModule: ModalModule,
+                providers: [BsModalService, componentLoader.ComponentLoaderFactory, positioning.PositioningService]
+            };
+        };
+        /**
+         * @return {?}
+         */
+        ModalModule.forChild = /**
+         * @return {?}
+         */
+        function () {
+            return {
+                ngModule: ModalModule,
+                providers: [BsModalService, componentLoader.ComponentLoaderFactory, positioning.PositioningService]
+            };
+        };
+        ModalModule.decorators = [
+            { type: core.NgModule, args: [{
+                        declarations: [
+                            ModalBackdropComponent,
+                            ModalDirective,
+                            ModalContainerComponent
+                        ],
+                        exports: [ModalBackdropComponent, ModalDirective],
+                        entryComponents: [ModalBackdropComponent, ModalContainerComponent]
+                    },] }
+        ];
+        return ModalModule;
+    }());
+
+    exports.BsModalRef = BsModalRef;
+    exports.BsModalService = BsModalService;
+    exports.ModalBackdropComponent = ModalBackdropComponent;
+    exports.ModalBackdropOptions = ModalBackdropOptions;
+    exports.ModalContainerComponent = ModalContainerComponent;
+    exports.ModalDirective = ModalDirective;
+    exports.ModalModule = ModalModule;
+    exports.ModalOptions = ModalOptions;
+    exports.ɵa = CLASS_NAME;
+
+    Object.defineProperty(exports, '__esModule', { value: true });
+
+})));
+//# sourceMappingURL=ngx-bootstrap-modal.umd.js.map
