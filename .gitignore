@@ -5,30 +5,30 @@
 /Database/bin
 /Database/Database/__pycache__
 
-/website/node_modules
-/website/package-lock.json
+/Angular/node_modules
+/Angular/package-lock.json
 
-/website/dist
-/website/dist-server
-/website/tmp
-/website/out-tsc
+/Angular/dist
+/Angular/dist-server
+/Angular/tmp
+/Angular/out-tsc
 
-/website/.sass-cache
-/website/connect.lock
-/website/coverage
-/website/libpeerconnection.log
-/website/npm-debug.log
-/website/yarn-error.log
-/website/testem.log
-/website/typings
+/Angular/.sass-cache
+/Angular/connect.lock
+/Angular/coverage
+/Angular/libpeerconnection.log
+/Angular/npm-debug.log
+/Angular/yarn-error.log
+/Angular/testem.log
+/Angular/typings
 
-/website/e2e/*.js
-/website/e2e/*.map
+/Angular/e2e/*.js
+/Angular/e2e/*.map
 
 .DS_Store
 Thumbs.db
 
-.vscode/*
+.vscode
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
