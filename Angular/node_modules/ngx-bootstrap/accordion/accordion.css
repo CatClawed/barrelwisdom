@@ -1,8 +1,0 @@
-:host .card-header.panel-enabled {
-  cursor: pointer; }
-
-:host .card-header.panel-disabled .btn.btn-link {
-  cursor: default;
-  text-decoration: none; }
-
-/*# sourceMappingURL=accordion.css.map */
