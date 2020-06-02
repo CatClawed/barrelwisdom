@@ -8,4 +8,6 @@ python manage.py migrate
 python manage.py runserver 0.0.0.0:8000
 python manage.py startapp blog
   add to installed apps
-ng serve --host 0.0.0.0
+ng serve --host 0.0.0.0 --liveReload=true
+npm install 
+  get dependencies

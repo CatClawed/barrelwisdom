@@ -5,25 +5,25 @@
 /Database/bin
 /Database/Database/__pycache__
 
-/Angular/node_modules
-/Angular/package-lock.json
+/frontend/node_modules
+/frontend/package-lock.json
 
-/Angular/dist
-/Angular/dist-server
-/Angular/tmp
-/Angular/out-tsc
+/frontend/dist
+/frontend/dist-server
+/frontend/tmp
+/frontend/out-tsc
 
-/Angular/.sass-cache
-/Angular/connect.lock
-/Angular/coverage
-/Angular/libpeerconnection.log
-/Angular/npm-debug.log
-/Angular/yarn-error.log
-/Angular/testem.log
-/Angular/typings
+/frontend/.sass-cache
+/frontend/connect.lock
+/frontend/coverage
+/frontend/libpeerconnection.log
+/frontend/npm-debug.log
+/frontend/yarn-error.log
+/frontend/testem.log
+/frontend/typings
 
-/Angular/e2e/*.js
-/Angular/e2e/*.map
+/frontend/e2e/*.js
+/frontend/e2e/*.map
 
 .DS_Store
 Thumbs.db
