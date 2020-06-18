@@ -3,30 +3,66 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { DefaultLayoutComponent } from './containers';
 import { P404Component } from './views/error/404.component';
+import { P500Component } from './views/error/500.component';
+//import { BlogComponent } from './views/blog/blog.component';
 
 
 const routes: Routes = [
   {
-    path: '404',
-    component: P404Component,
-    data: {
-      title: 'Page 404'
-    },
-  },
-  {
     path: '',
     component: DefaultLayoutComponent,
     data: {
-      title: 'Homo'
+      title: 'Main'
     },
     children: [
       {
-        path: '**', 
-        loadChildren: ()=> import('./views/error/404.module').then(m=>m.P404Module)
-      }
+        path: '', 
+        loadChildren: ()=> import('./views/home/home.module').then(m=>m.HomeModule),
+      },
+      {
+        path: '', 
+        component: P500Component,
+        outlet: 'aside'
+      },
     ]
   },
-  //{ path: '**', component: P404Component }
+  {
+    path: 'ryza',
+    component: DefaultLayoutComponent,
+    data: {
+      title: 'Home'
+    },
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('./views/error/error.module').then(m=>m.ErrorModule),
+      },
+      {
+        path: '', 
+        component: P500Component,
+        outlet: 'aside'
+      },
+    ]
+  },
+  {
+    path: 'ryzer/item',
+    component: DefaultLayoutComponent,
+    data: {
+      title: 'Home'
+    },
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('./views/error/error.module').then(m=>m.ErrorModule),
+        //component: P404Component,
+      },
+      {
+        path: '', 
+        component: P500Component,
+        outlet: 'aside'
+      },
+    ]
+  }, 
 ];
 
 @NgModule({

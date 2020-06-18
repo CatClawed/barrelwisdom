@@ -17,8 +17,10 @@ import { AppComponent } from './app.component';
 import { DefaultLayoutComponent } from './containers';
 import { P404Component } from './views/error/404.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
 const APP_CONTAINERS = [
-  DefaultLayoutComponent
+  DefaultLayoutComponent,
 ];
 
 import {
@@ -50,7 +52,8 @@ import { ChartsModule } from 'ng2-charts';
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    ChartsModule
+    ChartsModule, 
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -2,17 +2,17 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
-import { P404Component } from './404.component';
-import { ErrorRoutingModule } from './error-routing.module'
+import { HomeComponent } from './home.component';
+import { HomeRoutingModule } from './home-routing.module';
 
 @NgModule({
     imports: [
       CommonModule,
       FormsModule,
-      ErrorRoutingModule
+      HomeRoutingModule,
     ],
     declarations: [
-        P404Component,
+      HomeComponent,
     ]
   })
-  export class P404Module { }
+  export class HomeModule { }
