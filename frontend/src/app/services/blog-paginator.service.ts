@@ -4,12 +4,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { Blog, BlogPaginator } from './blog';
+import { BlogPaginator } from '../interfaces/blog';
 
 @Injectable({ providedIn: 'root' })
-export class BlogService {
+export class BlogPaginatorService {
 
-  private blogUrl = '/api/blog/?limit=1&offset=1';  // URL to web api
+  private blogUrl = '/api/blog/?ordering=-created'; 
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,8 +19,9 @@ export class BlogService {
     private http: HttpClient,
   ) { }
 
-  getBlog(): Observable<BlogPaginator> {
-    return this.http.get<BlogPaginator>(this.blogUrl)
+  getBlog(num: number, limit: number): Observable<BlogPaginator> {
+    var offset = num == 0 ?  1 : limit * (num-1);
+    return this.http.get<BlogPaginator>(this.blogUrl + '&limit=' + limit.toString(10) + '&offset=' + offset.toString(10))
   }
 
 }

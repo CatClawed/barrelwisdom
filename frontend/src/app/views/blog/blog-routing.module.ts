@@ -1,23 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, UrlSegment, UrlMatchResult } from '@angular/router';
 
-import { HomeComponent } from './home.component';
+import { BlogComponent } from './blog.component';
 import { P404Component } from '../error/404.component';
-
-export function NumberMatcher (url: UrlSegment[]): UrlMatchResult {
-  if (url.length == 0) {
-    return null;
-  }
-  const reg = /^\d+$/;
-  if (url[0].toString().match(reg)) {
-    return ({consumed: url})
-  }
-}
 
 const routes: Routes = [
   {
-    matcher: NumberMatcher,
-    component: HomeComponent,
+    path: ':title',
+    component: BlogComponent,
     children: [
       {
         path: '**',
@@ -27,7 +17,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: HomeComponent,
+    component: BlogComponent,
   },
 ];
 
@@ -35,4 +25,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class HomeRoutingModule {}
+export class BlogRoutingModule {}

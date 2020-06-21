@@ -15,6 +15,9 @@ import { ErrorRoutingModule } from './error-routing.module';
     declarations: [
         P404Component,
         P500Component,
+    ],
+    exports: [
+        P404Component,
     ]
   })
   export class ErrorModule { }

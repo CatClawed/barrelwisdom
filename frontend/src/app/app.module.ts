@@ -17,7 +17,9 @@ import { AppComponent } from './app.component';
 import { DefaultLayoutComponent } from './containers';
 import { P404Component } from './views/error/404.component';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpErrorInterceptor } from './interceptor/http-error.intercepter'
+
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 const APP_CONTAINERS = [
   DefaultLayoutComponent,
@@ -55,7 +57,13 @@ import { ChartsModule } from 'ng2-charts';
     ChartsModule, 
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

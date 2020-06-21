@@ -1,0 +1,5 @@
+<Error *ngIf="error; else elseBlock" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+
+<ng-template #elseBlock>
+    <p>{{blog.title}}</p>
+</ng-template>
