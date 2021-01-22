@@ -5,9 +5,28 @@ import { DefaultLayoutComponent } from './containers';
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { BlogComponent } from './views/blog/blog.component';
-
+import { LoginComponent } from './views/login/login.component';
+import { LoginModule } from './views/login/login.module';
 
 const routes: Routes = [
+  {
+    path: 'login',
+    component: DefaultLayoutComponent,
+    data: {
+      title: 'Blog'
+    },
+    children: [
+      {
+        path: '',
+        component: LoginComponent,
+      },
+      {
+        path: '', 
+        component: P500Component,
+        outlet: 'aside'
+      },
+    ]
+  },
   {
     path: 'blog',
     component: DefaultLayoutComponent,

@@ -55,7 +55,7 @@ import { ErrorCodeService } from "../../services/errorcode.service";
             },
             error => { 
               this.error = true,
-              this.errorCode = error.toString(),
+              this.errorCode = error.status.toString(),
               this.errorVars = this.errorService.getCodes(this.errorCode)
             }
           );

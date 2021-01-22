@@ -7,10 +7,6 @@ export interface Blog {
     //author: string;
     //display-author: boolean;
     //seo: string;
-    //num-comments: number;
-    //comments: Comment[];
-    //comments-allowed: boolean;
-    //comments-closed: boolean;
     //thumb-url: string;
     //tags: string[];
 }

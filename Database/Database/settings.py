@@ -54,8 +54,26 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'blog.apps.BlogConfig',
-    'django_filters'
+    'django_filters',
+    'knox',
+    'dj_rest_auth',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'dj_rest_auth.registration',
+    'djoser',
+    'allauth.socialaccount'
 ]
+
+SITE_ID = 1
+REST_AUTH_TOKEN_MODEL = 'knox.models.AuthToken'
+REST_AUTH_TOKEN_CREATOR = 'auth.utils.create_knox_token'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER' : 'auth.serializers.UserDetailsSerializer',
+    'TOKEN_SERIALIZER': 'auth.serializers.KnoxSerializer'
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -140,5 +158,16 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+DJOSER = {
+    'TOKEN_MODEL': 'knox.models.AuthToken',
+    'SOCIAL_AUTH_TOKEN_STRATEGY': 'djoser_auth.knox_token.TokenStrategy'
 }

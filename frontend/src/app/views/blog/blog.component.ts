@@ -37,12 +37,12 @@ import { throwError } from 'rxjs';
           .subscribe(blog => { 
               this.blog = blog[0],
               this.error = (this.blog == null) ? true : false,
-              this.errorCode = (this.blog == null) ? "404" : "THIS IS A BUG",
+              this.errorCode = (this.error) ? "404" : "THIS IS A BUG",
               this.errorVars = this.errorService.getCodes(this.errorCode)
             },
             error => { 
                 this.error = true,
-                this.errorCode = error.toString(),
+                this.errorCode = error.status.toString(),
                 this.errorVars = this.errorService.getCodes(this.errorCode)
               }
             );

@@ -19,6 +19,9 @@ from django.conf.urls import url, include
 from rest_framework import routers
 from blog.viewsets import BlogViewSet
 
+from knox import views as knox_views
+from auth.views import KnoxRegisterView, KnoxLoginView
+auth_urls = include('djoser_auth.urls')
 
 router = routers.DefaultRouter()
 router.register(r'blog', BlogViewSet)
@@ -26,5 +29,11 @@ router.register(r'blog', BlogViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'api/', include(router.urls)),
-    url(r'^api-auth/', include('rest_framework.urls'))
+    url(r'^api-auth/', include('knox.urls')),
+    url(r'^api-auth/login2/', KnoxLoginView.as_view()),
+    url(r'^api-auth/register/', KnoxRegisterView.as_view()),
+    path('dj-rest-auth/', include('dj_rest_auth.urls')),
+    path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+    #path('auth/', include('djoser.urls')),
+    path('auth/token/', include('djoser_auth.urls')),
 ]
