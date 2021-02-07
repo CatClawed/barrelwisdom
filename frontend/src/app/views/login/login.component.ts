@@ -56,13 +56,13 @@ export class LoginComponent {
             },
             error => {
                 this.loading = false;
-                if(error.status == 400) {
-                  this.errorMsg = error.error['non_field_errors'];
+                if(error.status == 401) {
+                  this.errorMsg = error.error['detail'];
                 }
                 else {
+                  //console.log(error);
                   this.errorMsg = "The server is on fire, bug admin."
                 }
-                //this.errorMsg = "Could not login.";
             });
     }
 }

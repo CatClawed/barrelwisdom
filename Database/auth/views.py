@@ -6,9 +6,12 @@ from dj_rest_auth.registration.views import RegisterView
 from allauth.account.utils import complete_signup
 from allauth.account import app_settings as allauth_settings
 
-from .serializers import KnoxSerializer2
+from .serializers import KnoxSerializer2, JWTSeralizer
 from .utils import create_knox_token
 
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework import permissions
 
 class KnoxLoginView(LoginView):
 
@@ -35,4 +38,5 @@ class KnoxRegisterView(RegisterView):
         complete_signup(self.request._request, user, allauth_settings.EMAIL_VERIFICATION, None)
         return user
 
-        
+class JWTObtainPairView(TokenObtainPairView):
+    serializer_class = JWTSeralizer

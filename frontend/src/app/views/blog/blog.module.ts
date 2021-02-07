@@ -17,4 +17,4 @@ import { ErrorModule } from '../error/error.module';
       BlogComponent,
     ]
   })
-  export class HomeModule { }
+  export class BlogModule { }

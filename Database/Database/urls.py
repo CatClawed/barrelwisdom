@@ -20,8 +20,8 @@ from rest_framework import routers
 from blog.viewsets import BlogViewSet
 
 from knox import views as knox_views
-from auth.views import KnoxRegisterView, KnoxLoginView
-auth_urls = include('djoser_auth.urls')
+from auth.views import KnoxRegisterView, KnoxLoginView, JWTObtainPairView
+from rest_framework_simplejwt import views as jwt_views
 
 router = routers.DefaultRouter()
 router.register(r'blog', BlogViewSet)
@@ -32,8 +32,8 @@ urlpatterns = [
     url(r'^api-auth/', include('knox.urls')),
     url(r'^api-auth/login2/', KnoxLoginView.as_view()),
     url(r'^api-auth/register/', KnoxRegisterView.as_view()),
+    path('api/token/', JWTObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
-    #path('auth/', include('djoser.urls')),
-    path('auth/token/', include('djoser_auth.urls')),
 ]
