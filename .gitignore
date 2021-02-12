@@ -5,6 +5,8 @@
 /Database/lib
 /Database/bin
 __pycache__/
+/Database/jwt-key
+/Database/jwt-key.pub
 
 # Angular Stuff
 

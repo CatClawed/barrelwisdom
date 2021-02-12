@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
 from rest_framework import routers
-from blog.viewsets import BlogViewSet
+from blog.viewsets import BlogViewSet, TagViewSet, SectionViewSet
 
 from knox import views as knox_views
 from auth.views import KnoxRegisterView, KnoxLoginView, JWTObtainPairView
@@ -25,6 +25,8 @@ from rest_framework_simplejwt import views as jwt_views
 
 router = routers.DefaultRouter()
 router.register(r'blog', BlogViewSet)
+router.register(r'tags', TagViewSet)
+router.register(r'section', SectionViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
