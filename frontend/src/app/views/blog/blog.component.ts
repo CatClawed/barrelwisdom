@@ -7,10 +7,11 @@ import { BlogService } from '../../services/blog.service';
 import { ErrorCodeService } from "../../services/errorcode.service";
 import { title } from 'process';
 import { throwError } from 'rxjs';
+import { SafeHtml } from '@angular/platform-browser';
 
 
 @Component({
-    templateUrl: 'blog.component.html'
+    templateUrl: 'blog.component.html',
   })
 
 
@@ -19,6 +20,7 @@ import { throwError } from 'rxjs';
       error: boolean = false;
       errorCode: string;
       errorVars: any[];
+      body: SafeHtml;
 
       constructor(
         private route: ActivatedRoute,

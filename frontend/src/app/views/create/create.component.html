@@ -2,66 +2,100 @@
 
 <form [formGroup]="pageForm" (ngSubmit)="onSubmit()" class="form-horizontal">
   <div class="form-group row">
-    <label class="col-md-3 col-form-label" for="text-input">Title</label>
-    <div class="col-md-9">
-      <input type="text" formControlName="title" class="form-control" placeholder="Shorter is better." [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+    <label class="col-md-2 col-form-label" for="text-input">Title</label>
+    <div class="col-md-10">
+      <input type="text" formControlName="title" class="form-control" placeholder="Shorter is better."
+        [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+      <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+        <div *ngIf="f.title.errors.maxlength">Title too long. 100 chars max.</div>
+      </div>
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-3 col-form-label" for="textarea-input">Body</label>
-    <div class="col-md-9">
-      <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control"
-        placeholder="Content." formControlName="body"></textarea>
-    </div>
-  </div>
-  <div class="form-group row">
-    <label class="col-md-3 col-form-label" for="textarea-input">SEO Description</label>
-    <div class="col-md-9">
+    <label class="col-md-2 col-form-label" for="textarea-input">SEO Description</label>
+    <div class="col-md-10">
       <textarea id="textarea-input" name="textarea-input" rows="2" class="form-control" formControlName="seoDesc"
+        [ngClass]="{ 'is-invalid': submitted && f.seoDesc.errors }"
         placeholder="This helps google describe the post. Shows on main page if blog."></textarea>
     </div>
-  </div>
-  <div class="form-group row">
-    <label class="col-md-3 col-form-label" for="text-input">Post Image URL</label>
-    <div class="col-md-9">
-      <textarea id="text-input" name="text-input" class="form-control" formControlName="imgURL"
-        placeholder="Required for blog posts. Shows on main page."></textarea>
+    <div *ngIf="submitted && f.imgURL.errors" class="invalid-feedback">
+      <div *ngIf="f.imgURL.errors.maxlength">Too long. 200 chars max.</div>
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-3 col-form-label" for="select1">Section</label>
-    <div class="col-md-9">
-      <select class="form-control" formControlName="section">
+    <label class="col-md-2 col-form-label" for="text-input">Post Image URL</label>
+    <div class="col-md-10">
+      <input type="text" class="form-control" formControlName="imgURL"
+        [ngClass]="{ 'is-invalid': submitted && f.imgURL.errors }"
+        placeholder="Required for blog posts. Shows on main page.">
+      <div *ngIf="submitted && f.imgURL.errors" class="invalid-feedback">
+        <div *ngIf="f.imgURL.errors.pattern">Image URL must be PNG/JPG using the url
+          https://media.barrelwisdom.com/file/barrelwisdom/*.</div>
+        <div *ngIf="f.imgURL.errors.maxlength">Too long. 255 chars max.</div>
+        <div *ngIf="f.imgURL.errors.required">Required for blog posts.</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-2 col-form-label" for="select1">Section</label>
+    <div class="col-md-10">
+      <select class="form-control" formControlName="section"
+        [ngClass]="{ 'is-invalid': submitted && f.section.errors }">
         <option>Please select</option>
-        <option *ngIf="true" value="blog" >Blog</option>
+        <option *ngIf="true" value="blog">Blog</option>
         <option value="escha">Escha & Logy</option>
         <option value="ryza">Ryza</option>
       </select>
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-3 col-form-label">Author Lock?</label>
-    <div class="col-md-9 col-form-label">
+    <label class="col-md-2 col-form-label">Author Lock?</label>
+    <div class="col-md-10 col-form-label">
       <div *ngIf="true" class="form-check">
-        <input class="form-check-input" type="radio" value="false" formControlName="authorLock" checked>
-        <label class="form-check-label" for="radio1">
-          No, I want others to be able to edit this post.
-        </label>
-      </div>
-      <div *ngIf="true" class="form-check">
-        <input class="form-check-input" type="radio" value="true" formControlName="authorLock">
-        <label class="form-check-label" for="radio2">
-          Yes, I want to be the sole author and credited as such on the page.<br />
-          (Generally do not do this without admin approval. Honor system y'all.)
-        </label>
+        <input type="checkbox" class="form-check-input" formControlName="authorLock" value="true">
+        <label class="form-check-label">Make me sole author. This disables others from editing the page.<br />This
+          option is preferred for blog posts, but you should have admin agreement otherwise.</label>
       </div>
     </div>
   </div>
-  <div *ngIf="true" class="form-group row">
-    <label class="col-md-3 col-form-label" for="text-input">Tags</label>
-    <div class="col-md-9">
-      <input type="text" formControlName="tags" class="form-control" placeholder="New tag... avoid making your own if you can help it." [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+  <div *ngIf="sectionIsBlog" class="form-group row">
+    <label class="col-md-2 col-form-label" for="text-input">Tags</label>
+    <div class="col-md-10">
+      <!--
+      <input type="text" formControlName="tags" class="form-control"
+        placeholder="New tag... avoid making your own if you can help it.">
+    -->
+
+      <mat-chip-list #chipList>
+        <mat-chip *ngFor="let tag of currentTags" [selectable]="selectable" [removable]="removable"
+          (removed)="remove(tag)">
+          {{tag}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          <i *ngIf="removable" class="cis-x-circle"></i> 
+        </mat-chip>
+        <input placeholder="pls don't add your own if you can avoid it" class="form-control" #tagInput [matAutocomplete]="auto" [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)">
+      </mat-chip-list>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+        <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+          {{tag}}
+        </mat-option>
+      </mat-autocomplete>
+
     </div>
   </div>
 
-<button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+  <h2>Content</h2>
+
+  <div class="form-group row">
+    <div class="col-md-6">
+      <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.body.errors }" placeholder="Content."
+        formControlName="body"></textarea>
+    </div>
+    <div class="col-md-6">
+      <ngx-dynamic-hooks [content]="preview"></ngx-dynamic-hooks>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-lg btn-primary">Submit</button>

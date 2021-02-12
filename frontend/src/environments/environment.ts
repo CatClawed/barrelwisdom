@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'api/',
+  imageRegex: 'https://media\\.barrelwisdom\\.com/file/barrelwisdom/',
+  imageURL: 'https://media.barrelwisdom.com/file/barrelwisdom/',
 };
 
 /*

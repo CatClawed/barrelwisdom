@@ -60,7 +60,7 @@ export class LoginComponent {
                   this.errorMsg = error.error['detail'];
                 }
                 else {
-                  //console.log(error);
+                  console.log(error);
                   this.errorMsg = "The server is on fire, bug admin."
                 }
             });

@@ -4,6 +4,7 @@ export class User {
     first_name: string;
     last_name: string;
     email: string;
+    group: string;
     /*
     password: string;
     groups: string[];

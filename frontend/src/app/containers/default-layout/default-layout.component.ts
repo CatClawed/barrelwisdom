@@ -1,7 +1,7 @@
 import { Component, ViewChild, ViewContainerRef } from '@angular/core';
-import { navItems } from '../../_nav';
-import { User } from '../../interfaces/user';
-import { AuthenticationService } from '../../services/authentication.service';
+import { navItems } from '@app/_nav';
+import { User } from '@app/interfaces/user';
+import { AuthenticationService } from '@app/services/authentication.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +13,6 @@ export class DefaultLayoutComponent {
   user: User;
 
   constructor(private authenticationService: AuthenticationService) {
-    //this.user = this.authenticationService.userValue;
     this.authenticationService.user.subscribe(x => this.user = x);
 }
 
