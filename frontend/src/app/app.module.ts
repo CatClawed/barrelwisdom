@@ -42,6 +42,7 @@ import { SecurityContext } from '@angular/core';
 
 import {MatInputModule} from '@angular/material/input';
 import { OverlayModule } from '@angular/cdk/overlay';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 @NgModule({
@@ -69,6 +70,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
     MarkdownModule.forRoot({sanitize: SecurityContext.NONE}),
     MatInputModule,
     OverlayModule,
+    MatAutocompleteModule,
     LoginModule
   ],
   providers: [

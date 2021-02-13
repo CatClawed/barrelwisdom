@@ -61,20 +61,23 @@
   <div *ngIf="sectionIsBlog" class="form-group row">
     <label class="col-md-2 col-form-label" for="text-input">Tags</label>
     <div class="col-md-10">
-      <!--
-      <input type="text" formControlName="tags" class="form-control"
-        placeholder="New tag... avoid making your own if you can help it.">
-    -->
-
       <mat-chip-list #chipList>
-        <mat-chip *ngFor="let tag of currentTags" [selectable]="selectable" [removable]="removable"
+        <mat-chip color="primary" 
+          *ngFor="let tag of currentTags" 
+          [selectable]="selectable"
+          [removable]="removable"
           (removed)="remove(tag)">
           {{tag}}
-          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-          <i *ngIf="removable" class="cis-x-circle"></i> 
+          <mat-icon matChipRemove *ngIf="removable"><i class="fas fa-times-circle"></i></mat-icon>
         </mat-chip>
-        <input placeholder="pls don't add your own if you can avoid it" class="form-control" #tagInput [matAutocomplete]="auto" [matChipInputFor]="chipList"
-          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)">
+        <input placeholder="pls don't add your own if you can avoid it"
+          class="form-control"
+          #tagInput 
+          formControlName="tags"
+          [matAutocomplete]="auto" 
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" 
+          (matChipInputTokenEnd)="add($event)">
       </mat-chip-list>
       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
         <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">

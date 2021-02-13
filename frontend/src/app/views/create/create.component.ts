@@ -64,9 +64,10 @@ export class CreateComponent {
   ) {
     this.authenticationService.user.subscribe(x => this.user = x);
     this.tagControl = new FormControl();
+    
     this.filteredTags = this.tagControl.valueChanges.pipe(
-      startWith(null),
-      map((tag: string | null) => tag ? this._filter(tag) : this.tagList.slice()));
+          startWith(null as Observable<string[]>),
+          map((tag: string | null) => tag ? this._filter(tag) : this.tagList.slice())); 
   }
 
   ngOnInit() {
@@ -77,7 +78,7 @@ export class CreateComponent {
       seoDesc: ['', Validators.required, Validators.maxLength(200)],
       imgURL: ['', this.imgValidators],
       authorLock: [''],
-      //tags: this.tagControl
+      tags: this.tagControl
     });
 
     this.pageForm.get('section').valueChanges
@@ -99,8 +100,6 @@ export class CreateComponent {
         .subscribe(value => {
           this.preview = this.markdownService.compile(<string>value); 
         });
-
-       
   }
 
   get f() { return this.pageForm.controls; }
@@ -121,14 +120,11 @@ export class CreateComponent {
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
-    console.log(value.trim());
-    console.log(this.currentTags.indexOf(value.trim()));
 
     if ((value || '').trim()) {
       if(this.currentTags.indexOf(value.trim()) == -1) {
         this.currentTags.push(value.trim());
       }
-      console.log(this.currentTags);
     }
 
     // Reset the input value
@@ -157,7 +153,6 @@ export class CreateComponent {
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-
     return this.tagList.filter(tag => tag.toLowerCase().indexOf(filterValue) === 0);
   }
 }
