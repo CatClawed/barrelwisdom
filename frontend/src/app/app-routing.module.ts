@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { DefaultLayoutComponent } from './containers';
-import { P500Component } from './views/error/500.component';
-import { LoginComponent } from './views/login/login.component';
-import { CreateComponent } from './views/create/create.component';
+import { DefaultLayoutComponent } from '@app/containers';
+import { P500Component } from '@app/views/error/500.component';
 
 const routes: Routes = [
   {
@@ -16,7 +14,43 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: LoginComponent,
+        loadChildren: ()=> import('@app/views/login/login.module').then(m=>m.LoginModule),
+      },
+      {
+        path: '', 
+        component: P500Component,
+        outlet: 'aside'
+      },
+    ]
+  },
+  {
+    path: 'settings',
+    component: DefaultLayoutComponent,
+    data: {
+      title: 'Settings'
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: ()=> import('@app/views/settings/settings.module').then(m=>m.SettingsModule),
+      },
+      {
+        path: '', 
+        component: P500Component,
+        outlet: 'aside'
+      },
+    ]
+  },
+  {
+    path: 'register',
+    component: DefaultLayoutComponent,
+    data: {
+      title: 'Register'
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: ()=> import('@app/views/register/register.module').then(m=>m.RegisterModule),
       },
       {
         path: '', 

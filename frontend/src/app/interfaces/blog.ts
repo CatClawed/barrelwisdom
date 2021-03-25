@@ -1,14 +1,16 @@
 export interface Blog {
     id: number
-    title: string;
-    body: string;
     created: Date;
     updated: Date;
-    //author: string;
-    //display-author: boolean;
-    //seo: string;
-    //thumb-url: string;
-    //tags: string[];
+    title: string;
+    slugtitle: string
+    body: string;
+    imgurl: string;
+    description: string;
+    author: number[];
+    authorlock: boolean;
+    tags: number[];
+    section: number;
 }
 
 export interface BlogPaginator {

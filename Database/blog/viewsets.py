@@ -10,8 +10,9 @@ class BlogViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
     search_fields = ['title','body']
     ordering_fields = ['created']
-    filterset_fields = ['title']
+    filterset_fields = ['slugtitle', 'section']
     pagination_class = LimitOffsetPagination
+    #lookup_url = slugtitle
 
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tags.objects.all()

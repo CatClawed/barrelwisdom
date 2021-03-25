@@ -17,7 +17,7 @@
     </li>
   </ul>
   <ul class="nav navbar-nav ml-auto">
-    <login *ngIf="!user; else loggedIn"></login>
+    <a *ngIf="!user; else loggedIn" class="nav-link" href="login">Login</a>
     <ng-template #loggedIn>
     <li class="nav-item dropdown" dropdown placement="bottom right">
       <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
@@ -48,10 +48,7 @@
   </app-aside>
 </div>
 <app-footer>
-  <router-outlet name='login'></router-outlet>
   <span class="ml-auto">
-    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
-      <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
-    </a>
+    Hello
   </span>
 </app-footer>

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule, UrlSegment, UrlMatchResult } from '@angular/router';
 
 import { HomeComponent } from './home.component';
-import { P404Component } from '../error/404.component';
+import { P404Component } from '@app/views/error/404.component';
 
 export function NumberMatcher (url: UrlSegment[]): UrlMatchResult {
   if (url.length == 0) {

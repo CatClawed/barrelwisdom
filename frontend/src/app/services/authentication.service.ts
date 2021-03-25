@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { User } from '../interfaces/user';
+import { User } from '@app/interfaces/user';
+import { environment } from "@environments/environment";
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     private userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
     public u: User = null;
-    public token: Observable<string>;
 
     constructor(private http: HttpClient) {
         let refresh = false;
@@ -34,7 +34,7 @@ export class AuthenticationService {
 
         if(refresh)
         {
-            this.refreshToken();
+            this.startRefreshTokenTimer();
         }
     }
 
@@ -43,7 +43,7 @@ export class AuthenticationService {
     }
 
     login(username, password) {
-        return this.http.post<any>(`/api/token/`, { username, password })
+        return this.http.post<any>(`${environment.apiUrl}/token/`, { username, password })
             .pipe(map(jwt => {
                 this.u = new User;
                 localStorage.setItem('refresh', jwt.refresh);
@@ -70,25 +70,47 @@ export class AuthenticationService {
     }
 
     refreshToken() {
-        return this.http.post<any>(`api/token/refresh`, {}, { withCredentials: true })
-            .pipe(map((jwt) => {
+        return this.http.post<any>(`${environment.apiUrl}/token/refresh/`, {refresh: localStorage.getItem('refresh')})
+            .pipe(map(jwt => {
                 localStorage.setItem('access', jwt.access);
                 this.startRefreshTokenTimer();
                 return jwt;
-            }));
+            }
+            ));
     }
 
     private refreshTokenTimeout;
 
     private startRefreshTokenTimer()
     {
-        const jwtToken = JSON.parse(atob(localStorage.getItem('refresh').split('.')[1]));
-        const expires = new Date(jwtToken.exp * 1000);
-        const timeout = expires.getTime() - Date.now() - (60 * 1000);
+        let timeout = Date.now(); // if something weird happens then the refresh will be attempted immediately
+        if(localStorage.getItem('access'))
+        {
+            const jwtToken = JSON.parse(atob(localStorage.getItem('access').split('.')[1]));
+            const expires = new Date(jwtToken.exp * 1000);
+            timeout = expires.getTime() - Date.now() - (60 * 1000);
+        }
         this.refreshTokenTimeout = setTimeout(() => this.refreshToken().subscribe(), timeout);
     }
 
     private stopRefreshTokenTimer() {
         clearTimeout(this.refreshTokenTimeout);
+    }
+
+    register(username, email, password, re_password) {
+        return this.http.post(`${environment.authUrl}/users/`, { email, username, password, re_password })
+        .pipe(map(jwt => {
+            return jwt;
+        }));
+    }
+
+    getInvite(code: string): Observable<any> {
+        return this.http.get<any>(`${environment.apiUrl}/invite/${code}/`);
+    }
+    
+    // this will only ever be updated to true
+    updateInvite(code: string) {
+        let used = true;
+        return this.http.put(`${environment.apiUrl}/invite/${code}/`, { used });
     }
 }

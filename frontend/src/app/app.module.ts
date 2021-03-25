@@ -13,14 +13,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { DefaultLayoutComponent } from './containers';
-import { HttpErrorInterceptor } from './interceptor/http-error.intercepter'
-import { LoginModule } from './views/login/login.module';
-
+import { AppRoutingModule } from '@app/app-routing.module';
+import { AppComponent } from '@app/app.component';
+import { DefaultLayoutComponent } from '@app/containers';
+import { HttpErrorInterceptor } from '@app/interceptor/http-error.intercepter';
+import { JwtInterceptor } from '@app/interceptor/jwt_interceptor';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-
 import { MarkdownModule } from 'ngx-markdown';
 
 const APP_CONTAINERS = [
@@ -43,6 +41,7 @@ import { SecurityContext } from '@angular/core';
 import {MatInputModule} from '@angular/material/input';
 import { OverlayModule } from '@angular/cdk/overlay';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
 
 
 @NgModule({
@@ -71,12 +70,16 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatInputModule,
     OverlayModule,
     MatAutocompleteModule,
-    LoginModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: HttpErrorInterceptor,
+      useClass: HttpErrorInterceptor, 
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
       multi: true
     },
   ],

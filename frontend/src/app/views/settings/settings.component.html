@@ -1,0 +1,136 @@
+<h1>Settings</h1>
+
+<tabset>
+  <tab heading="Profile">
+    <form [formGroup]="profileForm" (ngSubmit)="submitProfile()">
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="textarea-input">Bio</label>
+        <div class="col-md-10">
+         <textarea id="textarea-input" name="textarea-input" rows="3" class="form-control" formControlName="bio"
+        [ngClass]="{ 'is-invalid': submitted && profilef.bio.errors }"
+        placeholder="Tell us about you pls."></textarea>
+        <div *ngIf="submitted && profilef.bio.errors" class="invalid-feedback">
+          <div *ngIf="profilef.bio.errors.maxlength">Too long. 500 chars max.</div>
+        </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="text-input">Website</label>
+        <div class="col-md-10">
+          <input type="text" class="form-control" formControlName="website"
+            [ngClass]="{ 'is-invalid': submitted && profilef.website.errors }"
+            placeholder="Shows if sole author or on user page.">
+          <div *ngIf="submitted && profilef.website.errors" class="invalid-feedback">
+            <div *ngIf="profilef.website.errors.pattern">Doesn't look like a URL.</div>
+            <div *ngIf="profilef.website.errors.maxlength">Too long. 200 chars max.</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="text-input">Avatar URL</label>
+        <div class="col-md-10">
+          <input type="text" class="form-control" formControlName="avatar"
+            [ngClass]="{ 'is-invalid': submitted && profilef.avatar.errors }"
+            placeholder="Admin can help. Shows if sole author.">
+          <div *ngIf="submitted && profilef.avatar.errors" class="invalid-feedback">
+            <div *ngIf="profilef.avatar.errors.pattern">Image URL must be PNG/JPG using the url
+              https://media.barrelwisdom.com/file/barrelwisdom/*.</div>
+            <div *ngIf="profilef.avatar.errors.maxlength">Too long. 200 chars max.</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-6">
+            <button [disabled]="loading" class="btn btn-primary">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+              Save
+            </button>
+            <div *ngIf="errorMsg" class="text-danger">{{errorMsg}}</div>
+            <div *ngIf="successProfile" class="text-success">Success!</div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </tab>
+  <tab heading="Change Email">
+    <form [formGroup]="emailForm" (ngSubmit)="submitEmail()">
+      <div class="form-group">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">@</span>
+          </div>
+          <input type="text" formControlName="email" class="form-control" placeholder="Email" autocomplete="email"
+            [ngClass]="{ 'is-invalid': submittedEmail && emailf.email.errors }" />
+          <div *ngIf="submittedEmail && emailf.email.errors" class="invalid-feedback">
+            <div *ngIf="emailf.email.errors.email">Invalid email</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-6">
+            <button [disabled]="loading" class="btn btn-primary">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+              Save
+            </button>
+            <div *ngIf="erroEmail" class="text-danger">{{erroEmail}}</div>
+            <div *ngIf="successEmail" class="text-success">Success!</div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </tab>
+  <tab heading="Change Password">
+    <form [formGroup]="passwordForm" (ngSubmit)="submitPassword()">
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="text-input">New Password</label>
+        <div class="col-md-10">
+          <input type="password" formControlName="newPass" class="form-control" placeholder="New Password"
+            [ngClass]="{ 'is-invalid': submittedPass && passwordf.newPass.errors }" />
+          <div *ngIf="submittedPass && passwordf.newPass.errors" class="invalid-feedback">
+            <div *ngIf="passwordf.newPass.errors.minlength">At least 8 characters</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="text-input">Repeat Password</label>
+        <div class="col-md-10">
+          <input type="password" formControlName="repeatPass" class="form-control" placeholder="Repeat Password"
+            [ngClass]="{ 'is-invalid': submittedPass && passwordf.repeatPass.errors }" />
+          <div *ngIf="submittedPass && passwordf.repeatPass.errors" class="invalid-feedback">
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="text-input">Current Password</label>
+        <div class="col-md-10">
+          <input type="password" formControlName="currentPass" class="form-control" placeholder="Current Password"
+            [ngClass]="{ 'is-invalid': submittedPass && passwordf.currentPass.errors }" />
+          <div *ngIf="submittedPass && passwordf.currentPass.errors" class="invalid-feedback">
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-6">
+            <button [disabled]="loading" class="btn btn-primary">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+              Save
+            </button>
+            <div *ngIf="errorPass" class="text-danger">{{errorPass}}</div>
+            <div *ngIf="successPassword" class="text-success">Success!</div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </tab>
+  <tab *ngIf="user.group == 'admin'" heading="Create Invite">
+    <button (click)="createInvite()" [disabled]="loading" class="btn btn-primary">
+      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+      Create
+    </button>
+    <div *ngIf="errorInvite" class="text-danger">{{errorInvite}}</div>
+    <div *ngIf="invite" class="text-success">{{invite}}</div>
+  </tab>
+</tabset>

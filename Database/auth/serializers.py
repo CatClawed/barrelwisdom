@@ -33,6 +33,5 @@ class JWTSeralizer(TokenObtainPairSerializer):
         token = super().get_token(user)
         token['name'] = user.username
         groups = user.groups.all()
-        print(user.groups.get())
         token['group'] = str(user.groups.get())
         return token

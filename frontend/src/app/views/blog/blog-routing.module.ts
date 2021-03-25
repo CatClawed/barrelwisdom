@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule, UrlSegment, UrlMatchResult } from '@angular/router';
 
 import { BlogComponent } from './blog.component';
-import { P404Component } from '../error/404.component';
+import { P404Component } from '@app/views/error/404.component';
 
 const routes: Routes = [
   {

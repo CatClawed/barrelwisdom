@@ -1,17 +1,15 @@
 import { Component, TemplateRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthenticationService } from '../../services/authentication.service';
+import { AuthenticationService } from '@app/services/authentication.service';
 import { first } from 'rxjs/operators';
+import { ErrorCodeService } from '@app/services/errorcode.service';
 
 @Component({
   templateUrl: 'login.component.html',
   selector: 'login',
 })
 export class LoginComponent {
-  modalRef: BsModalRef;
-
   loginForm: FormGroup;
   loading = false;
   submitted = false;
@@ -19,11 +17,11 @@ export class LoginComponent {
   errorMsg: string;
 
   constructor(
-    private modalService: BsModalService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private errorCodeService: ErrorCodeService
     ) { }
 
     ngOnInit() {
@@ -31,11 +29,10 @@ export class LoginComponent {
           username: ['', Validators.required],
           password: ['', Validators.required]
       });
+
+      this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
-  }
 
   get f() { return this.loginForm.controls; }
 
@@ -52,17 +49,11 @@ export class LoginComponent {
         .pipe(first())
         .subscribe(
             data => {
-                this.modalRef.hide();
+              this.router.navigateByUrl(this.returnUrl);
             },
             error => {
                 this.loading = false;
-                if(error.status == 401) {
-                  this.errorMsg = error.error['detail'];
-                }
-                else {
-                  console.log(error);
-                  this.errorMsg = "The server is on fire, bug admin."
-                }
+                this.errorMsg = this.errorCodeService.errorMessage(error);
             });
     }
 }

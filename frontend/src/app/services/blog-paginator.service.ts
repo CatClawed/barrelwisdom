@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-
-import { BlogPaginator } from '../interfaces/blog';
+import { BlogPaginator } from '@app/interfaces/blog';
+import { environment } from '@environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class BlogPaginatorService {
 
-  private blogUrl = '/api/blog/?ordering=-created'; 
+  private blogUrl = `${environment.apiUrl}/blog/?ordering=-created`; 
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

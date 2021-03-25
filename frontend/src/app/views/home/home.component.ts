@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { BlogPaginator } from '../../interfaces/blog';
-import { BlogPaginatorService } from '../../services/blog-paginator.service';
-import { ErrorCodeService } from "../../services/errorcode.service";
+import { BlogPaginator } from '@app/interfaces/blog';
+import { BlogPaginatorService } from '@app/services/blog-paginator.service';
+import { ErrorCodeService } from "@app/services/errorcode.service";
 
 
 @Component({

@@ -6,6 +6,7 @@ export class ErrorCodeService {
   errorTitle: string;
   searchBar: boolean;
 
+  // Fancy pages for non-users
   getCodes(errorCode: string) {
     switch(+errorCode) {
         case 404:
@@ -20,6 +21,24 @@ export class ErrorCodeService {
           break;
       }
       return [this.errorTitle, this.errorDescription, this.searchBar];
+    }
+
+    // generic nobody loves you form error messages for users
+    errorMessage(error) {
+      if(error.status >= 400 && error.status < 500 ) {
+        if("detail" in error.error) {
+          return error.error['detail'];
+        }
+        else if("non_field_errors" in error.error) {
+          return error.error['non_field_errors'];
+        }
+        else {
+          return "Some 400 error message. Bug admin. Code: " + error.status;
+        }
+      }
+      else {
+        return "The server is on fire, bug admin.";
+      }
     }
 
 

@@ -55,6 +55,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'blog.apps.BlogConfig',
+    'invite.apps.InviteConfig',
+    'userprofile.apps.UserProfileConfig',
     'django_filters',
     'knox',
     'dj_rest_auth',
@@ -62,7 +64,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'dj_rest_auth.registration',
-    'allauth.socialaccount'
+    'allauth.socialaccount',
+    'djoser'
 ]
 
 SITE_ID = 1
@@ -173,4 +176,12 @@ SIMPLE_JWT = {
     'ALGORITHM': 'RS256',
     'SIGNING_KEY': open('jwt-key').read(),
     'VERIFYING_KEY': open('jwt-key.pub').read(),
+    'AUTH_HEADER_TYPES': ('Bearer',),
+}
+
+REST_USE_JWT = True
+
+DJOSER = {
+    'SET_PASSWORD_RETYPE': True,
+    'USER_CREATE_PASSWORD_RETYPE': True,
 }
