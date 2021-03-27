@@ -78,7 +78,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'blog',
+    path: ':section/:title',
     component: DefaultLayoutComponent,
     data: {
       title: 'Blog'

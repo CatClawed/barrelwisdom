@@ -1,4 +1,5 @@
 export interface Section {
     id: number;
-    name: string
+    name: string;
+    fullname: string;
 }

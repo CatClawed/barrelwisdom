@@ -10,8 +10,6 @@ import { Section } from '@app/interfaces/section';
 @Injectable({ providedIn: 'root' })
 export class SectionService {
 
-  private sectionUrl = `${environment.apiUrl}/section`; 
-
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -21,7 +19,11 @@ export class SectionService {
   ) { }
 
   getSections(): Observable<Section[]> {
-    return this.http.get<Section[]>(this.sectionUrl);
+    return this.http.get<Section[]>(`${environment.apiUrl}/section`);
+  }
+
+  getSectionByName(section: string): Observable<Section> {
+    return this.http.get<Section>(`${environment.apiUrl}/sectionname/${section}`);
   }
 
 }

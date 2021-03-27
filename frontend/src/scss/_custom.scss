@@ -4,3 +4,32 @@
     background-color: #20a8d8;
     color: white;
 }
+
+.main-thumb img {
+    width: 300px;
+}
+
+.main-thumb div.thumb {
+    background: white;
+    max-width: 300px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+}
+
+.main-thumb div.spacer {
+    margin-top: 2em;
+}
+
+.main-thumb p {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.main-thumb div.headline {
+    padding-right: 10px;
+    padding-left: 10px;
+    font-size: 1.5rem;
+    font-weight: 500;
+}

@@ -7,6 +7,11 @@ export class User {
     group: string;
 }
 
+export class SimpleUser {
+    id: number;
+    username: string;
+}
+
 export class UserLogin {
     user: User;
     token: string;

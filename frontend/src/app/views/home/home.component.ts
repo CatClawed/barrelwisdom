@@ -49,9 +49,6 @@ import { ErrorCodeService } from "@app/services/errorcode.service";
           .subscribe(blog =>
             {
               this.blog = blog;
-              this.error = (this.blog.results.length === 0) ? true : false,
-              this.errorCode = (this.error) ? "404" : "THIS IS A BUG",
-              this.errorVars = this.errorService.getCodes(this.errorCode)
             },
             error => { 
               this.error = true,

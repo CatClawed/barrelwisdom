@@ -5,7 +5,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from '@environments/environment';
 
-import { Blog } from '@app/interfaces/blog';
+import { Blog, EditBlog } from '@app/interfaces/blog';
 
 import slugify from 'slugify';
 
@@ -22,12 +22,13 @@ export class BlogService {
     private http: HttpClient,
   ) { }
 
-  getBlog(title: string): Observable<Blog> {
-    return this.http.get<Blog>(this.blogUrl + `?title=` + title)
+  // change to just ID?
+  getEditableBlog(slugtitle: string, section: string): Observable<Blog> {
+    return this.http.get<Blog>(`${environment.apiUrl}/editblog/?section=${section}&slugtitle=${slugtitle}`)
   }
 
-  getBlogByID(id: string): Observable<Blog> {
-    return this.http.get<Blog>(this.blogUrl + id + `/`)
+  getBlogByID(id: string): Observable<EditBlog> {
+    return this.http.get<EditBlog>(`${environment.apiUrl}/editblog/${id}/`)
   }
 
   createBlog(title: string, slugtitle: string, body: string, image: string, description: string, authorlock: boolean, author: number[], section: number, tags: number[]) {
@@ -35,7 +36,13 @@ export class BlogService {
   }
 
   updateBlog(id: string, title: string, slugtitle: string, body: string, image: string, description: string, authorlock: boolean, author: number[], section: number, tags: number[]) {
-    return this.http.put(this.blogUrl+id+'/', { title, slugtitle, body, image, description, authorlock, author, section, tags })
+    return this.http.put(this.blogUrl+slugtitle+'/', { title, slugtitle, body, image, description, authorlock, author, section, tags })
+  }
+
+  // Reader facing stuff
+
+  getBlog(slugtitle: string, section: Number): Observable<Blog[]> {
+    return this.http.get<Blog[]>(`${environment.apiUrl}/blog/?section=${section.toString(10)}&slugtitle=${slugtitle}`)
   }
 
 }

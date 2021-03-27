@@ -1,6 +1,36 @@
-<Error *ngIf="error; else elseBlock" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<ng-template #elseBlock>
-    <p>{{blog.title}}</p>
-    <p>{{blog.body}}</p>
-</ng-template>
+<head *ngIf="blog">
+    <title>{{blog.title}} - {{gameName}}Barrel Wisdom</title>
+    <meta name="description" content="{{blog.description}}" />
+    <meta name="robots" content="index, archive" />
+    <meta property="og:title" content="{{blog.title}} - {{gameName}}Barrel Wisdom" />
+    <meta property="og:description" content={{blog.description}} />
+    <meta property="og:type" content="article" />
+    <meta *ngIf="blog.authorlock" property="article:author" content="https://barrelwisdom.com/user/{{blog.author[0].username}}" />
+    <meta property="article:published_time" content="{{blog.created}}" />
+    <meta property="article:modified_time " content="{{blog.modified}}" />
+    <meta *ngIf="blog.image" property="og:image" content="{{blog.image}}" />
+</head>
+
+<header *ngIf="blog">
+    <h1>{{blog.title}}</h1>
+    <span class="author">
+        <i class="far fa-calendar-alt"></i>
+        <time class="updated" dateTime="{{blog.modified}}"> {{blog.modified | date:'longDate' }} </time>
+        <i class="fas fa-user"></i>
+        <a *ngIf="blog.authorlock" class="url" href="user/{{blog.author[0].username}}"> {{blog.author[0].username}} </a>
+        <i *ngIf="!blog.authorlock">Community Post </i>
+        <i *ngIf="allowedToEdit" class="fas fa-edit"></i>
+        <a *ngIf="allowedToEdit" href="create?id={{blog.id}}"> Edit</a>
+    </span>
+</header>
+<article *ngIf="blog">
+    <div *ngIf="blog.image" class="blog-image">
+        <img src="{{blog.image}}">
+    </div>
+    <ngx-dynamic-hooks [content]="body"></ngx-dynamic-hooks>
+    <div class="blog-tags clearfix">
+        <a *ngFor="let tag of blog.tags" rel="tag" href="tag?name={{tag.name}}">{{tag.name}} </a>
+    </div>
+</article>

@@ -8,8 +8,6 @@ import { environment } from '@environments/environment';
 @Injectable({ providedIn: 'root' })
 export class BlogPaginatorService {
 
-  private blogUrl = `${environment.apiUrl}/blog/?ordering=-created`; 
-
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -20,7 +18,7 @@ export class BlogPaginatorService {
 
   getBlog(num: number, limit: number): Observable<BlogPaginator> {
     var offset = num == 0 ?  1 : limit * (num-1);
-    return this.http.get<BlogPaginator>(this.blogUrl + '&limit=' + limit.toString(10) + '&offset=' + offset.toString(10))
+    return this.http.get<BlogPaginator>(`${environment.apiUrl}/blog/?ordering=-created&section=3&limit=${limit.toString(10)}&offset=${offset.toString(10)}`)
   }
 
 }

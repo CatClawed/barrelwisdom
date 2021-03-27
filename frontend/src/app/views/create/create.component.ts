@@ -6,7 +6,7 @@ import { environment } from '@environments/environment';
 import { ErrorCodeService } from "@app/services/errorcode.service";
 import { AuthenticationService } from "@app/services/authentication.service";
 import { User } from "@app/interfaces/user";
-import { Blog } from "@app/interfaces/blog";
+import { EditBlog } from "@app/interfaces/blog";
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 import { MarkdownService } from 'ngx-markdown';
 import { COMMA, ENTER}  from '@angular/cdk/keycodes';
@@ -36,7 +36,7 @@ export class CreateComponent {
   returnUrl: string;
   errorMsg: string;
   user: User;
-  blog: Blog;
+  blog: EditBlog;
   sectionIsBlog: boolean = false;
   preview: SafeHtml;
   currentTags: string[] = [];
@@ -168,8 +168,9 @@ export class CreateComponent {
       }
     }
     if(!this.editMode) {
-      let slugtitle = this.sectionList[this.sectionIDList.indexOf(this.pageForm.get("section").value)].name
-          + '/' + this.slug(this.pageForm.get("title").value);
+      let slugtitle = this.slug(this.pageForm.get("title").value);
+      let nextURL = this.sectionList[this.sectionIDList.indexOf(Number(this.pageForm.get("section").value))].name
+        + '/' + this.slug(this.pageForm.get("title").value);
 
       this.BlogService.createBlog(this.pageForm.get("title").value,
         slugtitle,
@@ -182,14 +183,13 @@ export class CreateComponent {
         idList // tags
         )
         .subscribe(data => {
-          this.router.navigateByUrl(`/${slugtitle}`);
+          this.router.navigateByUrl(`/${nextURL}`);
         },
         error => {
           this.loading = false;
           this.errorMsg = this.errorService.errorMessage(error);
           return;
-        }
-        );
+        });
     }
     else {
       if(this.blog) {
@@ -200,8 +200,9 @@ export class CreateComponent {
             authors.push(this.user.id);
           }
         }
-        let slugtitle = this.sectionList[this.sectionIDList.indexOf(this.pageForm.get("section").value)].name
-          + '/' + this.slug(this.pageForm.get("title").value);
+        let slugtitle = this.slug(this.pageForm.get("title").value);
+          let nextURL = this.sectionList[this.sectionIDList.indexOf(Number(this.pageForm.get("section").value))].name
+        + '/' + this.slug(this.pageForm.get("title").value);
 
         this.BlogService.updateBlog(this.route.snapshot.queryParamMap.get('id'),
           this.pageForm.get("title").value,
@@ -215,7 +216,7 @@ export class CreateComponent {
           idList // tags
           )
           .subscribe(data => {
-            this.router.navigateByUrl(`/${slugtitle}`);
+            this.router.navigateByUrl(`/${nextURL}`);
           },
           error => {
             this.loading = false;
@@ -315,6 +316,9 @@ export class CreateComponent {
         if(this.sectionIDList.indexOf(this.blog.section) < 0) {
           this.errorMsg = "Not allowed to edit this.";
           this.disableSubmit = true;
+          console.log(this.sectionIDList);
+          console.log(this.blog.section);
+          console.log(this.blog);
           return;
         }
 
@@ -325,7 +329,7 @@ export class CreateComponent {
           this.pageForm.get('body').setValue(this.blog.body);
           this.pageForm.get('section').setValue(this.blog.section);
           this.pageForm.get('seoDesc').setValue(this.blog.description);
-          this.pageForm.get('imgURL').setValue(this.blog.imgurl);
+          this.pageForm.get('imgURL').setValue(this.blog.image);
           this.pageForm.get('authorLock').setValue(this.blog.authorlock);
 
           for(let tag of this.blog.tags) {
@@ -356,7 +360,7 @@ export class CreateComponent {
     }
   }
 
-  slug(title: string) {
+  slug(title: string): string {
     return slugify(title, { 
       replacement: '-', 
       remove: undefined,
