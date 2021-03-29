@@ -10,9 +10,6 @@ import { environment } from '@environments/environment';
 @Injectable({ providedIn: 'root' })
 export class SettingService {
 
-  private authURL = `${environment.authUrl}/users/`;
-  private apiURL = `${environment.apiUrl}/`;  // todo: never change my enviromnent settings because lazy
-
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -22,32 +19,32 @@ export class SettingService {
   ) { }
 
   updateEmail(id: number, email: string) {
-    return this.http.put(this.authURL+`${id}/`, { email });
+    return this.http.put(`${environment.authUrl}/users/${id}/`, { email });
   }
 
   updatePassword(new_password: string, re_new_password: string, current_password: string) {
-      return this.http.post(this.authURL+'set_password/', { new_password, re_new_password, current_password })
+      return this.http.post(`${environment.authUrl}/users/set_password/`, { new_password, re_new_password, current_password })
   }
 
   createInvite() {
-    return this.http.post(this.apiURL+'invite/', {  });
+    return this.http.post(`${environment.apiUrl}/invite/`, {  });
   }
 
   getInvite(code: string): Observable<any> {
-    return this.http.get<any>(this.apiURL + `invite/${code}/`);
+    return this.http.get<any>(`${environment.apiUrl}/invite/${code}/`);
   }
 
   // this will only ever be updated to true
   updateInvite(code: string) {
       let used = true;
-      return this.http.put(this.apiURL + `invite/${code}/`, { used });
+      return this.http.put(`${environment.apiUrl}/invite/${code}/`, { used });
   }
 
   getProfile(user: number): Observable<any> {
-      return this.http.get<any>(this.apiURL + `profile/${user}/`);
+      return this.http.get<any>(`${environment.apiUrl}/profile/${user}/`);
   }
 
   updateProfile(user: number, bio: string, website: string, avatar: string) {
-    return this.http.put(this.apiURL + `profile/${user}/`, { user, bio, website, avatar });
+    return this.http.put(`${environment.apiUrl}/profile/${user}/`, { user, bio, website, avatar });
   }
 }

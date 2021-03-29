@@ -9,8 +9,6 @@ import { Tag } from '@app/interfaces/tag';
 @Injectable({ providedIn: 'root' })
 export class TagService {
 
-  private tagUrl = `${environment.apiUrl}/tags/`; 
-
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -20,11 +18,15 @@ export class TagService {
   ) { }
 
   getTags(): Observable<Tag[]> {
-    return this.http.get<Tag[]>(this.tagUrl)
+    return this.http.get<Tag[]>(`${environment.apiUrl}/tags/`)
   }
 
-  addTag(name: string): Observable<Tag> {
-    return this.http.post<any>(this.tagUrl, { name });
+  getTagByName(slugname: string): Observable<Tag> {
+    return this.http.get<Tag>(`${environment.apiUrl}/tags/${slugname}/`)
+  }
+
+  addTag(name: string, slugname: string): Observable<Tag> {
+    return this.http.post<any>(`${environment.apiUrl}/tags/`, { name, slugname });
   }
 
 }

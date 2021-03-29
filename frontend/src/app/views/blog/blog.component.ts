@@ -2,17 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Blog } from '@app/interfaces/blog';
-import { User, SimpleUser } from '@app/interfaces/user';
-import { Tag } from '@app/interfaces/tag';
+import { User } from '@app/interfaces/user';
 import { BlogService } from '@app/services/blog.service';
 import { ErrorCodeService } from "@app/services/errorcode.service";
 import { SafeHtml } from '@angular/platform-browser';
 import { AuthenticationService } from '@app/services/authentication.service';
 import { Section } from '@app/interfaces/section';
 import { SectionService } from '@app/services/section.service';
-import { UserService } from '@app/services/user.service';
 import { MarkdownService } from 'ngx-markdown';
-import { TagService } from '@app/services/tag.service';
 
 @Component({
     templateUrl: 'blog.component.html',
@@ -44,7 +41,6 @@ import { TagService } from '@app/services/tag.service';
         this.authenticationService.user.subscribe(x => this.user = x);
         this.sectionService.getSectionByName(this.route.snapshot.params.section).subscribe(x => {
           this.section = x;
-          console.log(this.section);
           this.gameName = (this.section.fullname) ? `${this.section.fullname} - ` : ""; // gotta make sure google sees the game name...
           this.getBlog(this.section.id, this.route.snapshot.params.title);
         });
@@ -55,6 +51,12 @@ import { TagService } from '@app/services/tag.service';
 
         this.blogService.getBlog(title, section)
           .subscribe(blog => { 
+            if(blog.length == 0) {
+              this.error = true;
+              this.errorCode = "404";
+              this.errorVars = this.errorService.getCodes(this.errorCode);
+            }
+            else {
               this.blog = blog[0];
               this.body = this.markdownService.compile(this.blog.body);
               if(this.user) {
@@ -70,6 +72,7 @@ import { TagService } from '@app/services/tag.service';
                   }
                 }
               }
+            }
             },
             error => { 
                 this.error = true,

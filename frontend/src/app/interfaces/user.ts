@@ -16,3 +16,10 @@ export class UserLogin {
     user: User;
     token: string;
 }
+
+export class UserProfile {
+    user: SimpleUser;
+    bio: string;
+    website: string;
+    avatar: string;
+}

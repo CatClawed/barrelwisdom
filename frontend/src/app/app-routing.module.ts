@@ -68,7 +68,43 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: ()=> import('./views/create/create.module').then(m=>m.CreateModule),
+        loadChildren: ()=> import('@app/views/create/create.module').then(m=>m.CreateModule),
+      },
+      {
+        path: '', 
+        component: P500Component,
+        outlet: 'aside'
+      },
+    ]
+  },
+  {
+    path: 'user/:username',
+    component: DefaultLayoutComponent,
+    data: {
+      title: 'Main'
+    },
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/user/user.module').then(m=>m.UserModule),
+      },
+      {
+        path: '', 
+        component: P500Component,
+        outlet: 'aside'
+      },
+    ]
+  },
+  {
+    path: 'tag/:tagname',
+    component: DefaultLayoutComponent,
+    data: {
+      title: 'Main'
+    },
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/home/home.module').then(m=>m.HomeModule),
       },
       {
         path: '', 
@@ -86,7 +122,7 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('./views/blog/blog.module').then(m=>m.BlogModule),
+        loadChildren: ()=> import('@app/views/blog/blog.module').then(m=>m.BlogModule),
       },
       {
         path: '', 
@@ -104,7 +140,7 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('./views/home/home.module').then(m=>m.HomeModule),
+        loadChildren: ()=> import('@app/views/home/home.module').then(m=>m.HomeModule),
       },
       {
         path: '', 

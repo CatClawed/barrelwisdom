@@ -1,0 +1,22 @@
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+
+<head *ngIf="userprofile">
+    <title>{{userprofile.user.username}} - Barrel Wisdom</title>
+    <meta *ngIf="userprofile.bio" name="description" content="{{userprofile.bio}}" />
+    <meta name="robots" content="index, archive" />
+    <meta property="og:title" content="{{userprofile.user.username}} - Barrel Wisdom" />
+    <meta property="og:description" content={{userprofile.bio}} />
+    <meta property="og:type" content="website" />
+    <meta *ngIf="userprofile.avatar" property="og:image" content="{{userprofile.avatar}}" />
+</head>
+
+<header *ngIf="userprofile">
+    <h1>User: {{userprofile.user.username}}</h1>
+</header>
+<article *ngIf="userprofile">
+    <div *ngIf="userprofile.avatar" class="blog-image">
+        <img src="{{userprofile.avatar}}">
+    </div>
+    <p *ngIf="userprofile.bio">{{userprofile.bio}}</p>
+    <a *ngIf="userprofile.website" href="{{userprofile.website}}" target="_blank">Website</a>
+</article>

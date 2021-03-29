@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
 from rest_framework import routers
-from blog.viewsets import BlogViewSet, TagViewSet, SectionViewSet, SectionFullnameViewSet, MainBlogViewSet
+from blog.viewsets import BlogViewSet, TagViewSet, SectionViewSet, MainBlogViewSet
 from invite.viewsets import InviteViewSet
 from userprofile.viewsets import UserProfileViewSet, UserViewSet, UserNameViewSet
 from auth.views import JWTObtainPairView
@@ -14,11 +14,9 @@ router.register(r'editblog', BlogViewSet)
 router.register(r'blog', MainBlogViewSet)
 router.register(r'tags', TagViewSet)
 router.register(r'section', SectionViewSet)
-router.register(r'sectionname', SectionFullnameViewSet)
 router.register(r'invite', InviteViewSet)
 router.register(r'profile', UserProfileViewSet)
-router.register(r'user/id', UserViewSet)
-router.register(r'user/name', UserNameViewSet)
+router.register(r'user', UserNameViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

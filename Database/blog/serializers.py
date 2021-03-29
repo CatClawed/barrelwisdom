@@ -5,7 +5,7 @@ from userprofile.serializers import UserSerializer
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tags
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'slugname']
 
 class SectionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,7 +16,6 @@ class BlogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blog
         fields = ['id', 'created', 'modified', 'title', 'slugtitle', 'body', 'image', 'description', 'authorlock', 'author', 'section', 'tags']
-
 
 class MainBlogSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True)

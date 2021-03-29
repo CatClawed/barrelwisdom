@@ -23,7 +23,7 @@ export class SectionService {
   }
 
   getSectionByName(section: string): Observable<Section> {
-    return this.http.get<Section>(`${environment.apiUrl}/sectionname/${section}`);
+    return this.http.get<Section>(`${environment.apiUrl}/section/${section}`);
   }
 
 }

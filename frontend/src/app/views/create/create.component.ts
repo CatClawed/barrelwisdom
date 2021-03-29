@@ -12,7 +12,7 @@ import { MarkdownService } from 'ngx-markdown';
 import { COMMA, ENTER}  from '@angular/cdk/keycodes';
 import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { map, startWith } from 'rxjs/operators';
+import { concatMap, map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Tag } from '@app/interfaces/tag';
 import { TagService } from '@app/services/tag.service';
@@ -20,6 +20,7 @@ import { Section } from '@app/interfaces/section';
 import { SectionService } from '@app/services/section.service';
 import { BlogService } from '@app/services/blog.service';
 import slugify from 'slugify';
+import { of } from 'rxjs';
 
 @Component({
   templateUrl: 'create.component.html'
@@ -134,7 +135,7 @@ export class CreateComponent {
 
   get f() { return this.pageForm.controls; }
 
-  onSubmit() {
+  async onSubmit() {
     this.submitted = true;
 
     if (this.disableSubmit) {
@@ -146,15 +147,33 @@ export class CreateComponent {
     }
 
     this.loading = true;
-    
-    // push new tags to database first, plop their IDs into a list
-    let idList = []
+    this.checkTags();
+    this.loading = false;
+  }
+
+  checkTags() {
+    let idList = [];
+    let newList = [];
     for (let tag of this.currentTags) {
       let index = this.tagList.indexOf(tag);
       if(index < 0) {
-        this.tagService.addTag(tag)
+        newList.push(tag);
+      }
+      else {
+        idList.push(this.tagIDList[index]);
+      }
+    }
+    this.updateTags(idList, newList);
+  }
+
+  // Recursion your sorrows away. Fixes the 'gotta wait for tags to create' problem.
+  updateTags(idList: number[], newList: string[]) {
+    if(newList.length > 0) {
+      let tag = newList.pop();
+      this.tagService.addTag(tag, this.slug(tag))
           .subscribe(data => {
             idList.push(data.id);
+            this.updateTags(idList, newList);
           },
           error => {
             this.loading = false;
@@ -162,34 +181,37 @@ export class CreateComponent {
             return;
           }
           );
-      }
-      else {
-        idList.push(this.tagIDList[index]);
-      }
     }
-    if(!this.editMode) {
-      let slugtitle = this.slug(this.pageForm.get("title").value);
-      let nextURL = this.sectionList[this.sectionIDList.indexOf(Number(this.pageForm.get("section").value))].name
-        + '/' + this.slug(this.pageForm.get("title").value);
+    else {
+      this.blogPost(idList);
+    }
+  }
 
+  blogPost(idList: number[]) {
+    let slugtitle = this.slug(this.pageForm.get("title").value);
+    let nextURL = this.sectionList[this.sectionIDList.indexOf(Number(this.pageForm.get("section").value))].name
+        + '/' + slugtitle;
+
+    if(!this.editMode) {
       this.BlogService.createBlog(this.pageForm.get("title").value,
-        slugtitle,
-        this.pageForm.get("body").value,
-        this.pageForm.get("imgURL").value,
-        this.pageForm.get("seoDesc").value,
-        this.pageForm.get("authorLock").value,
-        [this.user.id],
-        this.pageForm.get("section").value,
-        idList // tags
-        )
-        .subscribe(data => {
-          this.router.navigateByUrl(`/${nextURL}`);
-        },
-        error => {
-          this.loading = false;
-          this.errorMsg = this.errorService.errorMessage(error);
-          return;
-        });
+          slugtitle,
+          this.pageForm.get("body").value,
+          this.pageForm.get("imgURL").value,
+          this.pageForm.get("seoDesc").value,
+          this.pageForm.get("authorLock").value,
+          [this.user.id],
+          this.pageForm.get("section").value,
+          idList // tags
+          )
+          .subscribe(data => {
+            this.router.navigateByUrl(`/${nextURL}`);
+          },
+          error => {
+            this.loading = false;
+            this.errorMsg = this.errorService.errorMessage(error);
+            return;
+          }
+          );
     }
     else {
       if(this.blog) {
@@ -200,10 +222,6 @@ export class CreateComponent {
             authors.push(this.user.id);
           }
         }
-        let slugtitle = this.slug(this.pageForm.get("title").value);
-          let nextURL = this.sectionList[this.sectionIDList.indexOf(Number(this.pageForm.get("section").value))].name
-        + '/' + this.slug(this.pageForm.get("title").value);
-
         this.BlogService.updateBlog(this.route.snapshot.queryParamMap.get('id'),
           this.pageForm.get("title").value,
           slugtitle,
@@ -225,10 +243,8 @@ export class CreateComponent {
           }
           );
       }
-    }
-    
-    this.loading = false;
   }
+}
 
   // add to chip list
   add(event: MatChipInputEvent): void {

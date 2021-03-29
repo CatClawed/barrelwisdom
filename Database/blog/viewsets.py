@@ -26,14 +26,9 @@ class MainBlogViewSet(viewsets.ModelViewSet):
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tags.objects.all()
     serializer_class = TagSerializer
-    search_fields = ['name']
+    lookup_field = 'slugname'
 
 class SectionViewSet(viewsets.ModelViewSet):
-    queryset = Section.objects.all()
-    serializer_class = SectionSerializer
-    search_fields = ['name']
-
-class SectionFullnameViewSet(viewsets.ModelViewSet):
     queryset = Section.objects.all()
     serializer_class = SectionSerializer
     lookup_field = 'name'

@@ -31,6 +31,6 @@
     </div>
     <ngx-dynamic-hooks [content]="body"></ngx-dynamic-hooks>
     <div class="blog-tags clearfix">
-        <a *ngFor="let tag of blog.tags" rel="tag" href="tag?name={{tag.name}}">{{tag.name}} </a>
+        <a *ngFor="let tag of blog.tags" rel="tag" href="tag/{{tag.slugname}}">{{tag.name}} </a>
     </div>
 </article>
