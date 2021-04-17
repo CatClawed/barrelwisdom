@@ -46,6 +46,10 @@ def get_secret(setting, secrets=secrets):
 
 # Application definition
 
+DB_TABLES = [
+    
+]
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -54,9 +58,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'blog.apps.BlogConfig',
-    'invite.apps.InviteConfig',
-    'userprofile.apps.UserProfileConfig',
     'django_filters',
     'knox',
     'dj_rest_auth',
@@ -65,8 +66,22 @@ INSTALLED_APPS = [
     'allauth.account',
     'dj_rest_auth.registration',
     'allauth.socialaccount',
-    'djoser'
+    'djoser',
+    #'debug_toolbar',
+    # Major parts
+    'blog.apps.BlogConfig',
+    'invite.apps.InviteConfig',
+    'userprofile.apps.UserProfileConfig',
+    # A22
+    'games.A22.effects_a22.apps.A22EffectConfig',
+    'games.A22.traits_a22.apps.A22TraitConfig',
+    'games.A22.categories_a22.apps.A22CategoryConfig',
+    'games.A22.locations_a22.apps.A22LocationConfig',
+    'games.A22.items_a22.apps.A22ItemConfig',
+    'games.A22.monsters_a22.apps.A22MonsterConfig',
+    'games.A22.shops_a22.apps.A22ShopConfig',
 ]
+
 
 SITE_ID = 1
 REST_AUTH_TOKEN_MODEL = 'knox.models.AuthToken'
@@ -79,6 +94,7 @@ REST_AUTH_SERIALIZERS = {
 }
 
 MIDDLEWARE = [
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -87,6 +103,14 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
+
+DEBUG_TOOLBAR_CONFIG = {
+    "SHOW_TOOLBAR_CALLBACK": lambda request: True,
+}
 
 ROOT_URLCONF = 'Database.urls'
 

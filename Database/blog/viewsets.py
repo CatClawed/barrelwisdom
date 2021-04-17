@@ -1,4 +1,4 @@
-from rest_framework import viewsets, filters, generics
+from rest_framework import viewsets, filters
 from blog.serializers import BlogSerializer, TagSerializer, SectionSerializer, MainBlogSerializer
 from blog.models import Blog, Tags, Section
 from django_filters.rest_framework import DjangoFilterBackend
