@@ -1,3 +1,139 @@
+// Font
+
+@import "variables";
+
+@font-face {
+  font-family: 'Atelier';
+   src: url('#{$atelier-font-path}/Atelier.woff2') format('woff2'),
+    url('#{$atelier-font-path}/Atelier.woff') format('woff');
+
+  font-weight: normal;
+  font-style: normal;
+}
+
+.goshdarnedfonts {
+  font-family: inherit;
+}
+
+.iconAtelier {
+  font-family: Atelier !important;
+}
+
+// base clase
+
+.atelier {
+  display: inline-block;
+  font: normal normal normal 1.5em/1 'Atelier';
+  text-transform: none;
+  /* Better Font Rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-right: 0.4em;
+}
+
+//  change icon size
+.atelier-xs {
+  font-size: 0.5em;
+  padding-right: 0.3em;
+}
+
+.atelier-sm {
+  font-size: 1em;
+  padding-right: 0.3em;
+}
+.atelier-lg {
+  font-size: 2.4em;
+  padding-right: 0.5em;
+}
+.atelier-16 {
+  font-size: 16px;
+}
+.atelier-32 {
+  font-size: 32px;
+}
+
+// add backgrounds
+.atelier-bg-square,
+.atelier-bg-circle {
+  padding: 0.35em;
+  background-color: $atelier-background-color;
+}
+.atelier-bg-circle {
+  border-radius: 50%;
+}
+
+// use as list markers
+.atelier-ul {
+  padding-left: 0;
+  list-style-type: none;
+
+  > li {
+    display: flex;
+    align-items: flex-start;
+    line-height: 1.4;
+  }
+
+  > li > .atelier {
+    margin-right: $atelier-li-margin-right;
+    line-height: inherit;
+  }
+}
+
+@import "icons";
+
+// generic stuff
+
+@media only screen and (max-width: 600px) {
+  .main.container-fluid {
+    padding: 0 !important;
+    padding-left: 1em !important;
+    padding-right: 1em !important;
+  }
+  .container-fluid {
+    padding: 0 !important;
+    padding-left: 1em !important;
+    padding-right: 1em !important;
+  }
+}
+
+select {
+  font-family: Atelier;
+}
+
+.spacer {
+  margin-bottom: 1em;
+}
+
+.allheight {
+  height: 100%;
+}
+
+.griddisplay {
+  display: grid;
+}
+
+.bottom {
+  align-content: flex-end;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.right {
+  text-align: right;
+  position: relative;
+  float: right;
+}
+
+// Form stuff
+
+.mat-form-field-wrapper .mat-form-field-flex {
+  background-color: white;
+}
+
 // Main page
 
 .main-thumb img {
@@ -47,3 +183,5 @@ ul.pagination {
 // Settings page
 
 // User Pages
+
+

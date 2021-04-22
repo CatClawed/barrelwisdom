@@ -12,7 +12,7 @@ import { MarkdownService } from 'ngx-markdown';
 import { COMMA, ENTER}  from '@angular/cdk/keycodes';
 import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { concatMap, map, startWith } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Tag } from '@app/interfaces/tag';
 import { TagService } from '@app/services/tag.service';
@@ -20,7 +20,6 @@ import { Section } from '@app/interfaces/section';
 import { SectionService } from '@app/services/section.service';
 import { BlogService } from '@app/services/blog.service';
 import slugify from 'slugify';
-import { of } from 'rxjs';
 
 @Component({
   templateUrl: 'create.component.html'
@@ -57,6 +56,9 @@ export class CreateComponent {
   disableSubmit: boolean = false;
   disableAuthorLock: boolean = false;
   slugtitle = "";
+
+  trans_all = 1;
+  trans_wep = 2;
   
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;

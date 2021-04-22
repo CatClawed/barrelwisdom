@@ -15,7 +15,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
 import { AppRoutingModule } from '@app/app-routing.module';
 import { AppComponent } from '@app/app.component';
-import { DefaultLayoutComponent } from '@app/containers';
+import { DefaultLayoutComponent, ModalComponent } from '@app/containers';
 import { HttpErrorInterceptor } from '@app/interceptor/http-error.intercepter';
 import { JwtInterceptor } from '@app/interceptor/jwt_interceptor';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
@@ -41,6 +41,7 @@ import { SecurityContext } from '@angular/core';
 import {MatInputModule} from '@angular/material/input';
 import { OverlayModule } from '@angular/cdk/overlay';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { PairPipe } from './pipes/pair.pipe';
 
 
 

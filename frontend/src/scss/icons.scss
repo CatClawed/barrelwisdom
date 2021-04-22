@@ -1,0 +1,473 @@
+/*------------------------
+	icons
+-------------------------*/
+@function unicode($str) {
+  @return unquote("\"\\#{$str}\"");
+}
+
+$atelier-ryza2-book: unicode(ea01);
+$atelier-ryza2-boss-enemy: unicode(ea02);
+$atelier-ryza2-category-accessories: unicode(ea03);
+$atelier-ryza2-category-animal-products: unicode(ea04);
+$atelier-ryza2-category-armor: unicode(ea05);
+$atelier-ryza2-category-beehives: unicode(ea06);
+$atelier-ryza2-category-bombs: unicode(ea07);
+$atelier-ryza2-category-bugs: unicode(ea08);
+$atelier-ryza2-category-cloth: unicode(ea09);
+$atelier-ryza2-category-dragon-mat: unicode(ea0a);
+$atelier-ryza2-category-edibles: unicode(ea0b);
+$atelier-ryza2-category-elixirs: unicode(ea0c);
+$atelier-ryza2-category-essence: unicode(ea0d);
+$atelier-ryza2-category-flowers: unicode(ea0e);
+$atelier-ryza2-category-food: unicode(ea0f);
+$atelier-ryza2-category-fruit: unicode(ea10);
+$atelier-ryza2-category-fuel: unicode(ea11);
+$atelier-ryza2-category-furniture: unicode(ea12);
+$atelier-ryza2-category-gases: unicode(ea13);
+$atelier-ryza2-category-gemstones: unicode(ea14);
+$atelier-ryza2-category-general-goods: unicode(ea15);
+$atelier-ryza2-category-gunpowder: unicode(ea16);
+$atelier-ryza2-category-ingots: unicode(ea17);
+$atelier-ryza2-category-jewels: unicode(ea18);
+$atelier-ryza2-category-key-items: unicode(ea19);
+$atelier-ryza2-category-lumber: unicode(ea1a);
+$atelier-ryza2-category-magic-tools: unicode(ea1b);
+$atelier-ryza2-category-magical: unicode(ea1c);
+$atelier-ryza2-category-medicinal: unicode(ea1d);
+$atelier-ryza2-category-medicine: unicode(ea1e);
+$atelier-ryza2-category-metal: unicode(ea1f);
+$atelier-ryza2-category-mushrooms: unicode(ea20);
+$atelier-ryza2-category-neutralizers: unicode(ea21);
+$atelier-ryza2-category-ore: unicode(ea22);
+$atelier-ryza2-category-plants: unicode(ea23);
+$atelier-ryza2-category-poisons: unicode(ea24);
+$atelier-ryza2-category-puniballs: unicode(ea25);
+$atelier-ryza2-category-sand: unicode(ea26);
+$atelier-ryza2-category-seafood: unicode(ea27);
+$atelier-ryza2-category-seeds: unicode(ea28);
+$atelier-ryza2-category-spices: unicode(ea29);
+$atelier-ryza2-category-stone: unicode(ea2a);
+$atelier-ryza2-category-threads: unicode(ea2b);
+$atelier-ryza2-category-tools: unicode(ea2c);
+$atelier-ryza2-category-uni: unicode(ea2d);
+$atelier-ryza2-category-water: unicode(ea2e);
+$atelier-ryza2-category-weapons: unicode(ea2f);
+$atelier-ryza2-equipment: unicode(ea30);
+$atelier-ryza2-fire: unicode(ea31);
+$atelier-ryza2-forge: unicode(ea32);
+$atelier-ryza2-ice: unicode(ea33);
+$atelier-ryza2-large-enemy: unicode(ea34);
+$atelier-ryza2-lightning: unicode(ea35);
+$atelier-ryza2-magic: unicode(ea36);
+$atelier-ryza2-material: unicode(ea37);
+$atelier-ryza2-medium-enemy: unicode(ea38);
+$atelier-ryza2-physical: unicode(ea39);
+$atelier-ryza2-race-ancient-philuscha: unicode(ea3a);
+$atelier-ryza2-race-beetle: unicode(ea3b);
+$atelier-ryza2-race-demon-beast: unicode(ea3c);
+$atelier-ryza2-race-golem: unicode(ea3d);
+$atelier-ryza2-race-guardian: unicode(ea3e);
+$atelier-ryza2-race-hedgehog: unicode(ea3f);
+$atelier-ryza2-race-knight: unicode(ea40);
+$atelier-ryza2-race-puni: unicode(ea41);
+$atelier-ryza2-race-roadrunner: unicode(ea42);
+$atelier-ryza2-race-scorpion: unicode(ea43);
+$atelier-ryza2-race-shark: unicode(ea44);
+$atelier-ryza2-race-sheep: unicode(ea45);
+$atelier-ryza2-race-spirit: unicode(ea46);
+$atelier-ryza2-race-weasel-king: unicode(ea47);
+$atelier-ryza2-race-weasel: unicode(ea48);
+$atelier-ryza2-race-wyrm: unicode(ea49);
+$atelier-ryza2-shop: unicode(ea4a);
+$atelier-ryza2-small-enemy: unicode(ea4b);
+$atelier-ryza2-tool-axe: unicode(ea4c);
+$atelier-ryza2-tool-bomb-rod: unicode(ea4d);
+$atelier-ryza2-tool-bug-net: unicode(ea4e);
+$atelier-ryza2-tool-fishing-rod: unicode(ea4f);
+$atelier-ryza2-tool-gather: unicode(ea50);
+$atelier-ryza2-tool-hammer: unicode(ea51);
+$atelier-ryza2-tool-sickle: unicode(ea52);
+$atelier-ryza2-tool-staff: unicode(ea53);
+$atelier-ryza2-tool-water: unicode(ea54);
+$atelier-ryza2-type-accessory: unicode(ea55);
+$atelier-ryza2-type-armor: unicode(ea56);
+$atelier-ryza2-type-attack: unicode(ea57);
+$atelier-ryza2-type-buff: unicode(ea58);
+$atelier-ryza2-type-debuff: unicode(ea59);
+$atelier-ryza2-type-heal: unicode(ea5a);
+$atelier-ryza2-type-synthesis: unicode(ea5b);
+$atelier-ryza2-type-weapon: unicode(ea5c);
+$atelier-ryza2-wind: unicode(ea5d);
+
+.atelier-ryza2-book::before {
+  content: $atelier-ryza2-book;
+}
+
+.atelier-ryza2-boss-enemy::before {
+  content: $atelier-ryza2-boss-enemy;
+}
+
+.atelier-ryza2-category-accessories::before {
+  content: $atelier-ryza2-category-accessories;
+}
+
+.atelier-ryza2-category-animal-products::before {
+  content: $atelier-ryza2-category-animal-products;
+}
+
+.atelier-ryza2-category-armor::before {
+  content: $atelier-ryza2-category-armor;
+}
+
+.atelier-ryza2-category-beehives::before {
+  content: $atelier-ryza2-category-beehives;
+}
+
+.atelier-ryza2-category-bombs::before {
+  content: $atelier-ryza2-category-bombs;
+}
+
+.atelier-ryza2-category-bugs::before {
+  content: $atelier-ryza2-category-bugs;
+}
+
+.atelier-ryza2-category-cloth::before {
+  content: $atelier-ryza2-category-cloth;
+}
+
+.atelier-ryza2-category-dragon-mat::before {
+  content: $atelier-ryza2-category-dragon-mat;
+}
+
+.atelier-ryza2-category-edibles::before {
+  content: $atelier-ryza2-category-edibles;
+}
+
+.atelier-ryza2-category-elixirs::before {
+  content: $atelier-ryza2-category-elixirs;
+}
+
+.atelier-ryza2-category-essence::before {
+  content: $atelier-ryza2-category-essence;
+}
+
+.atelier-ryza2-category-flowers::before {
+  content: $atelier-ryza2-category-flowers;
+}
+
+.atelier-ryza2-category-food::before {
+  content: $atelier-ryza2-category-food;
+}
+
+.atelier-ryza2-category-fruit::before {
+  content: $atelier-ryza2-category-fruit;
+}
+
+.atelier-ryza2-category-fuel::before {
+  content: $atelier-ryza2-category-fuel;
+}
+
+.atelier-ryza2-category-furniture::before {
+  content: $atelier-ryza2-category-furniture;
+}
+
+.atelier-ryza2-category-gases::before {
+  content: $atelier-ryza2-category-gases;
+}
+
+.atelier-ryza2-category-gemstones::before {
+  content: $atelier-ryza2-category-gemstones;
+}
+
+.atelier-ryza2-category-general-goods::before {
+  content: $atelier-ryza2-category-general-goods;
+}
+
+.atelier-ryza2-category-gunpowder::before {
+  content: $atelier-ryza2-category-gunpowder;
+}
+
+.atelier-ryza2-category-ingots::before {
+  content: $atelier-ryza2-category-ingots;
+}
+
+.atelier-ryza2-category-jewels::before {
+  content: $atelier-ryza2-category-jewels;
+}
+
+.atelier-ryza2-category-key-items::before {
+  content: $atelier-ryza2-category-key-items;
+}
+
+.atelier-ryza2-category-lumber::before {
+  content: $atelier-ryza2-category-lumber;
+}
+
+.atelier-ryza2-category-magic-tools::before {
+  content: $atelier-ryza2-category-magic-tools;
+}
+
+.atelier-ryza2-category-magical::before {
+  content: $atelier-ryza2-category-magical;
+}
+
+.atelier-ryza2-category-medicinal::before {
+  content: $atelier-ryza2-category-medicinal;
+}
+
+.atelier-ryza2-category-medicine::before {
+  content: $atelier-ryza2-category-medicine;
+}
+
+.atelier-ryza2-category-metal::before {
+  content: $atelier-ryza2-category-metal;
+}
+
+.atelier-ryza2-category-mushrooms::before {
+  content: $atelier-ryza2-category-mushrooms;
+}
+
+.atelier-ryza2-category-neutralizers::before {
+  content: $atelier-ryza2-category-neutralizers;
+}
+
+.atelier-ryza2-category-ore::before {
+  content: $atelier-ryza2-category-ore;
+}
+
+.atelier-ryza2-category-plants::before {
+  content: $atelier-ryza2-category-plants;
+}
+
+.atelier-ryza2-category-poisons::before {
+  content: $atelier-ryza2-category-poisons;
+}
+
+.atelier-ryza2-category-puniballs::before {
+  content: $atelier-ryza2-category-puniballs;
+}
+
+.atelier-ryza2-category-sand::before {
+  content: $atelier-ryza2-category-sand;
+}
+
+.atelier-ryza2-category-seafood::before {
+  content: $atelier-ryza2-category-seafood;
+}
+
+.atelier-ryza2-category-seeds::before {
+  content: $atelier-ryza2-category-seeds;
+}
+
+.atelier-ryza2-category-spices::before {
+  content: $atelier-ryza2-category-spices;
+}
+
+.atelier-ryza2-category-stone::before {
+  content: $atelier-ryza2-category-stone;
+}
+
+.atelier-ryza2-category-threads::before {
+  content: $atelier-ryza2-category-threads;
+}
+
+.atelier-ryza2-category-tools::before {
+  content: $atelier-ryza2-category-tools;
+}
+
+.atelier-ryza2-category-uni::before {
+  content: $atelier-ryza2-category-uni;
+}
+
+.atelier-ryza2-category-water::before {
+  content: $atelier-ryza2-category-water;
+}
+
+.atelier-ryza2-category-weapons::before {
+  content: $atelier-ryza2-category-weapons;
+}
+
+.atelier-ryza2-equipment::before {
+  content: $atelier-ryza2-equipment;
+}
+
+.atelier-ryza2-fire::before {
+  content: $atelier-ryza2-fire;
+}
+
+.atelier-ryza2-forge::before {
+  content: $atelier-ryza2-forge;
+}
+
+.atelier-ryza2-ice::before {
+  content: $atelier-ryza2-ice;
+}
+
+.atelier-ryza2-large-enemy::before {
+  content: $atelier-ryza2-large-enemy;
+}
+
+.atelier-ryza2-lightning::before {
+  content: $atelier-ryza2-lightning;
+}
+
+.atelier-ryza2-magic::before {
+  content: $atelier-ryza2-magic;
+}
+
+.atelier-ryza2-material::before {
+  content: $atelier-ryza2-material;
+}
+
+.atelier-ryza2-medium-enemy::before {
+  content: $atelier-ryza2-medium-enemy;
+}
+
+.atelier-ryza2-physical::before {
+  content: $atelier-ryza2-physical;
+}
+
+.atelier-ryza2-race-ancient-philuscha::before {
+  content: $atelier-ryza2-race-ancient-philuscha;
+}
+
+.atelier-ryza2-race-beetle::before {
+  content: $atelier-ryza2-race-beetle;
+}
+
+.atelier-ryza2-race-demon-beast::before {
+  content: $atelier-ryza2-race-demon-beast;
+}
+
+.atelier-ryza2-race-golem::before {
+  content: $atelier-ryza2-race-golem;
+}
+
+.atelier-ryza2-race-guardian::before {
+  content: $atelier-ryza2-race-guardian;
+}
+
+.atelier-ryza2-race-hedgehog::before {
+  content: $atelier-ryza2-race-hedgehog;
+}
+
+.atelier-ryza2-race-knight::before {
+  content: $atelier-ryza2-race-knight;
+}
+
+.atelier-ryza2-race-puni::before {
+  content: $atelier-ryza2-race-puni;
+}
+
+.atelier-ryza2-race-roadrunner::before {
+  content: $atelier-ryza2-race-roadrunner;
+}
+
+.atelier-ryza2-race-scorpion::before {
+  content: $atelier-ryza2-race-scorpion;
+}
+
+.atelier-ryza2-race-shark::before {
+  content: $atelier-ryza2-race-shark;
+}
+
+.atelier-ryza2-race-sheep::before {
+  content: $atelier-ryza2-race-sheep;
+}
+
+.atelier-ryza2-race-spirit::before {
+  content: $atelier-ryza2-race-spirit;
+}
+
+.atelier-ryza2-race-weasel-king::before {
+  content: $atelier-ryza2-race-weasel-king;
+}
+
+.atelier-ryza2-race-weasel::before {
+  content: $atelier-ryza2-race-weasel;
+}
+
+.atelier-ryza2-race-wyrm::before {
+  content: $atelier-ryza2-race-wyrm;
+}
+
+.atelier-ryza2-shop::before {
+  content: $atelier-ryza2-shop;
+}
+
+.atelier-ryza2-small-enemy::before {
+  content: $atelier-ryza2-small-enemy;
+}
+
+.atelier-ryza2-tool-axe::before {
+  content: $atelier-ryza2-tool-axe;
+}
+
+.atelier-ryza2-tool-bomb-rod::before {
+  content: $atelier-ryza2-tool-bomb-rod;
+}
+
+.atelier-ryza2-tool-bug-net::before {
+  content: $atelier-ryza2-tool-bug-net;
+}
+
+.atelier-ryza2-tool-fishing-rod::before {
+  content: $atelier-ryza2-tool-fishing-rod;
+}
+
+.atelier-ryza2-tool-gather::before {
+  content: $atelier-ryza2-tool-gather;
+}
+
+.atelier-ryza2-tool-hammer::before {
+  content: $atelier-ryza2-tool-hammer;
+}
+
+.atelier-ryza2-tool-sickle::before {
+  content: $atelier-ryza2-tool-sickle;
+}
+
+.atelier-ryza2-tool-staff::before {
+  content: $atelier-ryza2-tool-staff;
+}
+
+.atelier-ryza2-tool-water::before {
+  content: $atelier-ryza2-tool-water;
+}
+
+.atelier-ryza2-type-accessory::before {
+  content: $atelier-ryza2-type-accessory;
+}
+
+.atelier-ryza2-type-armor::before {
+  content: $atelier-ryza2-type-armor;
+}
+
+.atelier-ryza2-type-attack::before {
+  content: $atelier-ryza2-type-attack;
+}
+
+.atelier-ryza2-type-buff::before {
+  content: $atelier-ryza2-type-buff;
+}
+
+.atelier-ryza2-type-debuff::before {
+  content: $atelier-ryza2-type-debuff;
+}
+
+.atelier-ryza2-type-heal::before {
+  content: $atelier-ryza2-type-heal;
+}
+
+.atelier-ryza2-type-synthesis::before {
+  content: $atelier-ryza2-type-synthesis;
+}
+
+.atelier-ryza2-type-weapon::before {
+  content: $atelier-ryza2-type-weapon;
+}
+
+.atelier-ryza2-wind::before {
+  content: $atelier-ryza2-wind;
+}
+

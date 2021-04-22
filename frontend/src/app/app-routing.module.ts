@@ -114,6 +114,24 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'ryza2/traits',
+    component: DefaultLayoutComponent,
+    data: {
+      title: 'Traits'
+    },
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A22/trait/a22-trait.module').then(m=>m.A22TraitModule),
+      },
+      {
+        path: '', 
+        component: P500Component,
+        outlet: 'aside'
+      },
+    ]
+  },
+  {
     path: ':section/:title',
     component: DefaultLayoutComponent,
     data: {

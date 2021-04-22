@@ -1,0 +1,6 @@
+<mat-form-field style="width: 10em;" appearance="fill">
+    <mat-label ><mat-icon style="font-size: 1.5em; vertical-align: middle;" fontSet="fas" fontIcon="fa-globe"></mat-icon> {{langName}}</mat-label>
+    <mat-select matNativeControl disableOptionCentering="true" (selectionChange)="changeLanguage($event)" class="mat-select-icon" [ngModel]="languages.key" [value]="currentLanguage">
+      <mat-option *ngFor="let l of languages | keyvalue" (selectionChange)="changeLanguage($event)" [value]="l.key">{{l.value}}</mat-option>
+    </mat-select>
+</mat-form-field>
