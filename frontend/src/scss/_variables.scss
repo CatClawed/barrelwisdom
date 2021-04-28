@@ -3,3 +3,21 @@
 $atelier-font-path:        "../font" !default;
 $atelier-background-color: #eee !default;
 $atelier-li-margin-right:  0.4em !default;
+
+$enable-responsive-font-sizes: true;
+
+$sidebar: #14293b;
+$navbar: #5e4c3f;
+
+$theme-colors: (
+    "secondary": #5e4c3f,
+);
+
+$font-family-sans-serif:
+  Lato,
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  "Roboto",
+  "Helvetica Neue", Arial, sans-serif,
+  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;

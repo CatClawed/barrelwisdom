@@ -11,15 +11,11 @@
   font-style: normal;
 }
 
-.goshdarnedfonts {
-  font-family: inherit;
-}
-
 .iconAtelier {
   font-family: Atelier !important;
 }
 
-// base clase
+// base class
 
 .atelier {
   display: inline-block;
@@ -128,9 +124,149 @@ select {
   float: right;
 }
 
+.modal-dialog {
+  max-width: 100% !important;
+  padding-left: 1em !important;
+  padding-right: 1em !important;
+}
+
+.modal-content {
+  background-color: transparent !important;
+  border: transparent !important;
+}
+
+.close {
+  text-shadow: none !important;
+}
+
+/* Background pattern from Toptal Subtle Patterns */
+.card {
+  border: 2px outset lightgray !important;
+  background-color: white;
+  background-image: url("https://media.barrelwisdom.com/file/barrelwisdom/main/images/clean_textile.png");
+}
+
+/* Background pattern from Toptal Subtle Patterns */
+.table {
+  background-color: white;
+  background-image: url("https://media.barrelwisdom.com/file/barrelwisdom/main/images/clean_textile.png");
+}
+
+/* Background pattern from Toptal Subtle Patterns */
+.main {
+  background: url("https://media.barrelwisdom.com/file/barrelwisdom/main/images/ricepaper2.jpg");
+  background-color: #faf6f5;
+  margin-left: 0 !important;
+  padding-left: 1em;
+  padding-right: 1em;
+  font-size: calc(1rem + 0.1vw)
+}
+
+h1 {
+  font-family: Merriweather;
+  font-size: calc(2.5rem + 0.1vw);
+  padding-top: 0.5em;
+  border-bottom: 1px dotted black;
+}
+
+h2 {
+  font-family: Merriweather;
+  font-size: calc(1.75rem + 0.1vw);
+  padding-top: 0.5em;
+  border-bottom: 1px dotted black;
+}
+
+h3 {
+  font-family: Merriweather;
+  font-size: calc(1.53125rem + 0.1vw);
+  padding-top: 0.5em;
+}
+
+h4 {
+  font-family: Merriweather;
+  font-size: calc(1.3125rem + 0.1vw);
+}
+
+.tab-content {
+  background-image: url("https://media.barrelwisdom.com/file/barrelwisdom/main/images/clean_textile.png") !important;
+}
+
+.nav-tabs .nav-link.active {
+  background-image: url("https://media.barrelwisdom.com/file/barrelwisdom/main/images/clean_textile.png") !important;
+  border-bottom-color: transparent !important;
+}
+
+.nav-tabs .nav-link {
+  background-color: #EBEBEB;
+  border: 1px solid darkgray !important;
+}
+
+.nav-tabs .nav-link:hover {
+  background-color: #F9F9F9;
+  border-color: darkgray !important;
+}
+
+
+// Major components (header, main, sidebar, etc.)
+
+.app-header {
+  background-color: $navbar !important;
+  border-bottom: transparent !important;
+  background: linear-gradient(0deg, rgba(71,58,48,1) 0%, rgba(94,76,63,0.8687675753895308) 100%);
+}
+
+.hi {
+  position: fixed;
+  z-index: 1000;
+  background-color: $navbar !important;
+  border-bottom: transparent !important;
+  background: linear-gradient(0deg, rgba(71,58,48,1) 0%, rgba(94,76,63,0.8687675753895308) 100%);
+}
+
+.sidebar {
+  background-color: $sidebar !important;
+}
+
+.sidebar .nav-link.active {
+  background-color: #3C4E5E !important;
+}
+
+.sidebar .nav-link.active:hover {
+  color: #fff !important;
+  background-color: #20a8d8 !important;
+}
+
+.sidebar .nav-link.active .nav-icon {
+  color: #73818f !important;
+}
+
+.sidebar .nav-link.active .nav-icon:hover {
+  color: #fff !important;
+}
+
+.navbar-nav .nav-link {
+  color: white !important;
+}
+
+.navbar-nav .nav-link:hover, .navbar-nav .nav-link:focus {
+  color: #999c9e !important;
+}
+
+.app-body {
+  margin-top: 55px;
+}
+
+.app-body .main {
+  overflow: hidden;
+}
+
+.bg-secondary {
+  color: white !important;
+}
+
 // Form stuff
 
-.mat-form-field-wrapper .mat-form-field-flex {
+.mat-form-field-appearance-outline .mat-form-field-outline {
   background-color: white;
 }
 
@@ -169,7 +305,73 @@ ul.pagination {
     margin-top: 2em;
 }
 
+.headline {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 0.5rem;
+}
+
+/* Position child elements relative to this element */
+.aspect-ratio-box {
+  position: relative;
+}
+
+/* Create a pseudo element that uses padding-bottom to take up space */
+.aspect-ratio-box::after {
+  display: block;
+  content: "";
+  /* 16:9 aspect ratio */
+  padding-bottom: 56.25%;
+}
+
+/* Image is positioned absolutely relative to the parent element */
+.aspect-ratio-box img {
+  /* Image should match parent box size */
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 // Blog Pages
+
+.blog-head-img {
+  max-height: 500px;
+  max-width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.right {
+  float: right;
+  margin-left: 1em;
+  text-align: left;
+}
+
+.left {
+  float: left;
+  margin-right: 1em;
+}
+
+.author {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.5em;
+}
+
+.blog-tags {
+  padding-bottom: 1em;
+  border-bottom: 1px dotted black;
+}
 
 // Game Data Pages
 

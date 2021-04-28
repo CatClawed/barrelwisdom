@@ -10,7 +10,7 @@ export class P404Component {
   errorCode: string = '404'
 
   @Input()
-  errorVars: any = ["Oops! You're lost.", "Our puni told us that the page you're looking for doesn't exist.", true];
+  errorVars: any = ["Oops! You're lost.", "Our puni told us that the page you're looking for doesn't exist."];
   
   constructor() {
   }

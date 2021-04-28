@@ -5,7 +5,8 @@ from django.conf.urls import url, include
 from rest_framework import routers
 from blog.viewsets import BlogViewSet, TagViewSet, SectionViewSet, MainBlogViewSet
 from invite.viewsets import InviteViewSet
-from userprofile.viewsets import UserProfileViewSet, UserViewSet, UserNameViewSet
+from navigation.viewsets import NavigationViewSet
+from userprofile.viewsets import UserProfileViewSet, UserViewSet, UserNameViewSet, RegView
 from auth.views import JWTObtainPairView
 from rest_framework_simplejwt import views as jwt_views
 from dj_rest_auth.registration.views import RegisterView
@@ -27,6 +28,7 @@ router.register(r'section', SectionViewSet)
 router.register(r'invite', InviteViewSet)
 router.register(r'profile', UserProfileViewSet)
 router.register(r'user', UserNameViewSet)
+router.register(r'nav', NavigationViewSet)
 
 # Atelier Ryza 2
 router.register(r'A22/effect', A22EffectViewSet)
@@ -46,7 +48,7 @@ urlpatterns = [
     url(r'^auth/register/', RegisterView.as_view()),
     path('api/token/', JWTObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
-    #path('dj-rest-auth/', include('dj_rest_auth.urls')),
     url(r'^auth/', include('djoser.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
+    url(r'auth/reg/', RegView.as_view(),)
 ]

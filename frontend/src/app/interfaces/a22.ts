@@ -7,6 +7,7 @@ export interface Trait {
     slugname: string;
     index: number;
     note: string;
+    grade: number;
     trans_atk: boolean;
     trans_heal: boolean;
     trans_dbf: boolean;

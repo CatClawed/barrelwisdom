@@ -13,24 +13,31 @@
     <meta *ngIf="blog.image" property="og:image" content="{{blog.image}}" />
 </head>
 
+
 <header *ngIf="blog">
     <h1>{{blog.title}}</h1>
-    <span class="author">
-        <i class="far fa-calendar-alt"></i>
-        <time class="updated" dateTime="{{blog.modified}}"> {{blog.modified | date:'longDate' }} </time>
-        <i class="fas fa-user"></i>
-        <a *ngIf="blog.authorlock" class="url" href="user/{{blog.author[0].username}}"> {{blog.author[0].username}} </a>
-        <i *ngIf="!blog.authorlock">Community Post </i>
-        <i *ngIf="allowedToEdit" class="fas fa-edit"></i>
-        <a *ngIf="allowedToEdit" href="create?id={{blog.id}}"> Edit</a>
-    </span>
+    <div class="author">
+        <span style="display: inline-block;">
+            <i class="far fa-calendar-alt"></i> <time class="updated" dateTime="{{blog.modified}}"> {{blog.modified | date:'longDate' }} </time>
+        </span>
+        <span style="display: inline-block;">
+            <i class="fas fa-user"></i>
+            <a *ngIf="blog.authorlock" class="url" href="user/{{blog.author[0].username}}"> {{blog.author[0].username}} </a>
+            <i *ngIf="!blog.authorlock"> Community Post</i>
+        </span>
+        <span *ngIf="allowedToEdit" style="display: inline-block;">
+            <i class="fas fa-edit"></i>
+            <a href="create?id={{blog.id}}"> Edit</a>
+        </span>
+    </div>
 </header>
 <article *ngIf="blog">
     <div *ngIf="blog.image" class="blog-image">
-        <img src="{{blog.image}}">
+        <img class="blog-head-img" src="{{blog.image}}">
     </div>
     <ngx-dynamic-hooks [content]="body"></ngx-dynamic-hooks>
     <div class="blog-tags clearfix">
-        <a *ngFor="let tag of blog.tags" rel="tag" href="tag/{{tag.slugname}}">{{tag.name}} </a>
+        <a style="margin-right: 1em; margin-top: 0.5em; font-size: 1rem;" class="badge bg-secondary"><i class="fas fa-tag"></i></a>
+        <a *ngFor="let tag of blog.tags" rel="tag" style="margin-right: 1em; margin-top: 0.5em; font-size: 1rem;" class="badge bg-primary" href="tag/{{tag.slugname}}">{{tag.name}} </a>
     </div>
 </article>

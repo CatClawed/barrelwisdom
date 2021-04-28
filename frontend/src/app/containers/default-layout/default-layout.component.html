@@ -1,27 +1,32 @@
-<app-header
-  [navbarBrandRouterLink]="['/dashboard']"
-  [fixed]="true"
-  [navbarBrandFull]="{src: 'assets/img/brand/logo.svg', width: 89, height: 25, alt: 'CoreUI Logo'}"
-  [navbarBrandMinimized]="{src: 'assets/img/brand/sygnet.svg', width: 30, height: 30, alt: 'CoreUI Logo'}"
-  [sidebarToggler]="'false'"
-  [asideMenuToggler]="'false'">
+<div class="hi col-12 mx-auto" style="height: 55px; position: fixed; padding-left: 0; padding-right: 0;">
+  <app-header
+  [navbarBrandRouterLink]="['/']"
+  [fixed]="false"
+  [navbarBrandFull]="{src: 'https://media.barrelwisdom.com/file/barrelwisdom/main/barrelwisdom.svg', height: 45, alt: 'Barrel Wisdom'}"
+  [navbarBrandMinimized]="{src: 'https://media.barrelwisdom.com/file/barrelwisdom/main/barrel.svg', height: 30, alt: 'Barrel Wisdom'}"
+  [sidebarToggler]="'lg'"
+  [asideMenuToggler]="false"
+  [mobileAsideMenuToggler]="false" class="col-xl-7 mx-auto">
   <ul class="nav navbar-nav d-md-down-none">
     <li class="nav-item px-3">
-      <a class="nav-link" href="#">Dashboard</a>
+      <a class="nav-link" href="#">Guide</a>
     </li>
     <li class="nav-item px-3">
-      <a class="nav-link" href="#">Users</a>
+      <a class="nav-link" href="#">Encyclopedia</a>
     </li>
     <li class="nav-item px-3">
-      <a class="nav-link" href="#">Settings</a>
+      <a class="nav-link" href="#">Areas</a>
+    </li>
+    <li class="nav-item px-3">
+      <a class="nav-link" href="#">Help</a>
     </li>
   </ul>
-  <ul class="nav navbar-nav ml-auto">
+  <ul style="padding-right: 1em" class="nav navbar-nav ml-auto">
     <a *ngIf="!user; else loggedIn" class="nav-link" href="login">Login</a>
     <ng-template #loggedIn>
     <li class="nav-item dropdown" dropdown placement="bottom right">
       <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
-        <img src="assets/img/avatars/6.jpg" class="img-avatar" alt="{{user.username}}"/>
+        {{user.username}}
       </a>
       <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
         <a class="dropdown-item" href="user/{{user.username}}"><i class="fa fa-user"></i> Profile</a>
@@ -33,22 +38,21 @@
   </ng-template>
   </ul>
 </app-header>
-<div class="app-body">
-  <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" [minimized]="false">
+</div>
+<div *ngIf="navService.nav" class="app-body">
+  <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" [minimized]="sidebarMinimized" (minimizedChange)="toggleMinimize($event)">
     <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] [disabled]="appSidebar.minimized"></app-sidebar-nav>
   </app-sidebar>
   <!-- Main content -->
   <main class="main">
-    <div class="container-fluid">
+    <div class="container-fluid col-xl-7">
       <router-outlet></router-outlet>
     </div>
   </main>
-  <app-aside [fixed]="true" [display]="'lg'" [ngClass]="'test'">
-    <router-outlet name='aside'></router-outlet>
-  </app-aside>
 </div>
 <app-footer>
   <span class="ml-auto">
     Hello
   </span>
 </app-footer>
+

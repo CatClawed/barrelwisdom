@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     # Major parts
     'blog.apps.BlogConfig',
     'invite.apps.InviteConfig',
+    'navigation.apps.NavigationConfig',
     'userprofile.apps.UserProfileConfig',
     # A22
     'games.A22.effects_a22.apps.A22EffectConfig',
@@ -185,7 +186,6 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
-    'DEFAULT_AUTHENTICATION_CLASSES':('rest_framework_simplejwt.authentication.JWTAuthentication', 'knox.auth.TokenAuthentication',),
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
@@ -208,4 +208,7 @@ REST_USE_JWT = True
 DJOSER = {
     'SET_PASSWORD_RETYPE': True,
     'USER_CREATE_PASSWORD_RETYPE': True,
+     'PERMISSIONS': {
+        'user_create': ['rest_framework.permissions.IsAdminUser'],
+    }
 }

@@ -1,2 +1,51 @@
-<h1>fucker</h1>
-<p>{{slugname}}</p>
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+
+<div *ngIf="!error">
+<head *ngIf="showNav">
+    <title>{{trait.name}} - Atelier Ryza 2 - Barrel Wisdom</title>
+    <meta name="description" content="{{trait.description}}" />
+    <meta name="robots" content="index, archive" />
+    <meta property="og:title" content="{{trait.name}} - Atelier Ryza 2 - Barrel Wisdom<" />
+    <meta property="og:description" content="{{trait.description}}" />
+    <meta property="og:type" content="webpage" />
+    <meta property="og:image" content="" />
+</head>
+
+<nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="#">Ryza 2</a></li>
+    <li class="breadcrumb-item"><a href="#">Traits</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{trait.name}}</li>
+  </ol>
+</nav>
+<div class="mx-auto row">
+<div style="margin-top: 1em;" class="{{colset}} card griddisplay card-body">
+      <div class="flex">
+        <h4 class="card-title">{{trait.name}}</h4>
+        <div *ngIf="trait.item_set.length == 0"><a href="javascript:void(0)"
+            tooltip="A measure of rarity. This number determines where traits appear." container="true">Grade:</a>
+          {{trait.grade}}
+          <br /><span class="badge bg-secondary" *ngIf="trait.grade > 50">DLC</span>
+        </div>
+        <div *ngIf="trait.item_set.length > 0">
+          <i class="atelier atelier-sm atelier-ryza2-material"></i><a href="/ryza2/item/{{trait.item_set[0].slugname}}/{{language}}">{{trait.item_set[0].name}}</a>
+        </div>
+      </div>
+      <div class="card-text">
+        <p>{{trait.description}}</p>
+        <p *ngIf="trait.note"><b>Note:</b> {{trait.note}}</p>
+        </div>
+      <div class="flex card-text bottom">
+        <div><i *ngIf="trait.trans_atk"  class="atelier atelier-ryza2-type-attack"></i>   <i style="color: lightgray;" *ngIf="!trait.trans_atk"  class="atelier atelier-ryza2-type-attack"></i></div>
+        <div><i *ngIf="trait.trans_heal" class="atelier atelier-ryza2-type-heal"></i>     <i style="color: lightgray;" *ngIf="!trait.trans_heal" class="atelier atelier-ryza2-type-heal"></i>     </div>
+        <div><i *ngIf="trait.trans_dbf"  class="atelier atelier-ryza2-type-debuff"></i>   <i style="color: lightgray;" *ngIf="!trait.trans_dbf"  class="atelier atelier-ryza2-type-debuff"></i>   </div>
+        <div><i *ngIf="trait.trans_buff" class="atelier atelier-ryza2-type-buff"></i>     <i style="color: lightgray;" *ngIf="!trait.trans_buff" class="atelier atelier-ryza2-type-buff"></i>     </div>
+        <div><i *ngIf="trait.trans_wpn"  class="atelier atelier-ryza2-type-weapon"></i>   <i style="color: lightgray;" *ngIf="!trait.trans_wpn"  class="atelier atelier-ryza2-type-weapon"></i>   </div>
+        <div><i *ngIf="trait.trans_arm"  class="atelier atelier-ryza2-type-armor"></i>    <i style="color: lightgray;" *ngIf="!trait.trans_arm"  class="atelier atelier-ryza2-type-armor"></i>    </div>
+        <div><i *ngIf="trait.trans_acc"  class="atelier atelier-ryza2-type-accessory"></i><i style="color: lightgray;" *ngIf="!trait.trans_acc"  class="atelier atelier-ryza2-type-accessory"></i></div>
+      </div>
+</div>
+<language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="ryza2"></language-settings>
+</div>
+</div>

@@ -38,17 +38,7 @@ export class RegisterComponent {
       });
 
       if(this.route.snapshot.queryParamMap.get('invite')) {
-        this.settingService.getInvite(this.route.snapshot.queryParamMap.get('invite'))
-        .pipe(first())
-        .subscribe(
-          data => {
-            if((Date.now() - Date.parse(data.date))/(1000*3600*24) < 3) {
-              this.hasInvite = true;
-            }
-          },
-          error => {
-            this.hasInvite = false;
-          });
+        this.hasInvite = true;
       }
 
       this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -65,25 +55,20 @@ export class RegisterComponent {
     }
     let success = false;
     this.loading = true;
-    this.authenticationService.register(this.f.username.value, this.f.email, this.f.password.value, this.f.confirmPassword.value)
+    this.authenticationService.register(this.f.username.value, this.f.email.value, this.f.password.value, this.f.confirmPassword.value, this.route.snapshot.queryParamMap.get('invite'))
         .pipe(first())
         .subscribe(
             data => {
               success = true;
+              this.authenticationService.login(this.f.username.value, this.f.password.value)
+                .subscribe(data => {
+                  this.router.navigateByUrl('/');
+                });
             },
             error => {
+                console.log(error);
                 this.loading = false;
                 this.errorMsg = this.errorCodeService.errorMessage(error);
             });
-      /** if(success) {
-        this.authenticationService.login(this.f.username.value, this.f.password.value)
-        .pipe(first())
-        .subscribe(
-            data => {
-              this.router.navigateByUrl(this.returnUrl);
-            },
-            error => {
-            });
-      } */
   }
 }

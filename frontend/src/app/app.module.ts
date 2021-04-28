@@ -15,11 +15,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
 import { AppRoutingModule } from '@app/app-routing.module';
 import { AppComponent } from '@app/app.component';
-import { DefaultLayoutComponent, ModalComponent } from '@app/containers';
+import { DefaultLayoutComponent } from '@app/containers';
 import { HttpErrorInterceptor } from '@app/interceptor/http-error.intercepter';
 import { JwtInterceptor } from '@app/interceptor/jwt_interceptor';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { MarkdownModule } from 'ngx-markdown';
+import { CookieService } from 'ngx-cookie-service';
 
 const APP_CONTAINERS = [
   DefaultLayoutComponent,
@@ -73,6 +74,7 @@ import { PairPipe } from './pipes/pair.pipe';
     MatAutocompleteModule,
   ],
   providers: [
+    CookieService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor, 

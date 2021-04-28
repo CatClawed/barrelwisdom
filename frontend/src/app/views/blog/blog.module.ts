@@ -6,6 +6,7 @@ import { BlogRoutingModule } from './blog-routing.module';
 import { ErrorModule } from '../error/error.module';
 import { DynamicHooksModule, HookParserEntry } from 'ngx-dynamic-hooks';
 import { P404Component } from '../error/404.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 const componentParsers: Array<HookParserEntry> = [
   {

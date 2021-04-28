@@ -11,34 +11,16 @@ export class LanguageGuard implements CanActivate {
     ) {}
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        const language = route.paramMap.get('language').toLowerCase();
+        const language = route.paramMap.get('language') ? route.paramMap.get('language').toLowerCase() : "";
         let segments = state.url.split('/');
         const section = segments[1];
 
-        // To ensure I can link from blog entries and direct to the correct version
-        if(route.queryParamMap.get('forward')) {
-            if(this.languageService.languageValue) {
-                segments.pop();
-                let newUrl = "";
-                for(let s of segments) {
-                    if(s) {
-                        newUrl += '/' + s;
-                    }
-                }
-                this.router.navigate([newUrl + "/" + this.languageService.languageValue]);
-                return false;
-            }
-            else {
-                this.languageService.setLanguage('en');
-            }
-        }
-
-        if(!language) {
+        if(!language || language.length >= 3) {
             if(!this.languageService.languageValue) {
                 this.languageService.setLanguage("en");
             }
             this.router.navigate([state.url + '/' + this.languageService.languageValue]);
-            return false;
+            return true;
         }
 
         if(!this.languageService.languageValue) {

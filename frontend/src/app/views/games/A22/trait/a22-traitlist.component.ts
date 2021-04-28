@@ -15,12 +15,8 @@ import { concatMap, map, startWith } from 'rxjs/operators';
 })
 export class A22TraitlistComponent implements OnInit {
   modalRef: BsModalRef;
-
   pageForm: FormGroup;
   traitControl: FormControl;
-  loading = false;
-  submitted = false;
-  returnUrl: string;
   error: boolean = false;
   errorCode: string;
   errorVars: any[];
@@ -28,18 +24,9 @@ export class A22TraitlistComponent implements OnInit {
   trait: string = "trait";
   traits: Trait[];
   filteredTraits: Observable<Trait[]>;
-  fTraits: Observable<Trait[]>;
   currentTransfer: string = "1";
-
-  transfer_any = 1;
-  transfer_attack = 2;
-  transfer_heal = 3;
-  transfer_debuff = 4;
-  transfer_buff = 5;
-  transfer_weapon = 6;
-  transfer_armor = 7;
-  transfer_accessory = 8;
   searchstring = "";
+  language = "";
 
   constructor(
     private modalService: BsModalService,
@@ -54,6 +41,8 @@ export class A22TraitlistComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.language = this.route.snapshot.params.language;
 
     this.getTraits();
 
@@ -73,7 +62,7 @@ export class A22TraitlistComponent implements OnInit {
   }
 
   getTraits() {
-    this.a22service.getTraitList(this.route.snapshot.params.language)
+    this.a22service.getTraitList(this.language)
     .subscribe(traits => {
       this.traits = traits;
       this.filteredTraits = this.pageForm.valueChanges.pipe(
@@ -83,17 +72,17 @@ export class A22TraitlistComponent implements OnInit {
     },
     error => {
       this.error = true,
-                this.errorCode = error.status.toString(),
-                this.errorVars = this.errorService.getCodes(this.errorCode)
+      this.errorCode = error.status.toString(),
+      this.errorVars = this.errorService.getCodes(this.errorCode)
     });
   }
 
-  openModal(template: TemplateRef<any>) {
-    this.trait = "trait";
-    this.location.go('ryza2/traits/trait');
+  openModal(template: TemplateRef<any>, slugname: string) {
+    this.trait = slugname;
+    this.location.go('ryza2/traits/' + slugname + "/" + this.language);
     this.modalRef = this.modalService.show(template);
     this.modalRef.onHide.subscribe((reason: string | any) => {
-        this.location.go('ryza2/traits');
+        this.location.go('ryza2/traits/' + this.language);
       })
   }
 
@@ -135,8 +124,6 @@ export class A22TraitlistComponent implements OnInit {
     return traitlist.filter(trait => trait.name.toLowerCase().includes(filterValue))
     && traitlist.filter(trait => trait.description.toLowerCase().includes(filterValue));
   } 
-
-
 
   get f() { return this.pageForm.controls; }
 

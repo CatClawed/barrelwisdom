@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '@app/interfaces/user';
 import { environment } from "@environments/environment";
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -11,11 +12,12 @@ export class AuthenticationService {
     public user: Observable<User>;
     public u: User = null;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient,
+        private cookieService: CookieService) {
         let refresh = false;
-        if(localStorage.getItem('refresh'))
+        if(this.cookieService.get('refresh'))
         {
-            const jwtToken = JSON.parse(atob(localStorage.getItem('refresh').split('.')[1]));
+            const jwtToken = JSON.parse(atob(this.cookieService.get('refresh').split('.')[1]));
             const expires = new Date(jwtToken.exp * 1000);
             if(expires.getTime() > Date.now())
             {
@@ -45,10 +47,12 @@ export class AuthenticationService {
     login(username, password) {
         return this.http.post<any>(`${environment.apiUrl}/token/`, { username, password })
             .pipe(map(jwt => {
-                this.u = new User;
-                localStorage.setItem('refresh', jwt.refresh);
-                localStorage.setItem('access', jwt.access);
                 const jwtToken = JSON.parse(atob(jwt.refresh.split('.')[1]));
+                const expires = new Date(jwtToken.exp * 1000);
+            
+                this.u = new User;
+                this.cookieService.set('refresh', jwt.refresh, {path: '/', expires: expires});
+                this.cookieService.set('access', jwt.access, {path: '/'});
                 this.u.username = jwtToken.name;
                 this.u.id = jwtToken.user_id;
                 this.u.group = jwtToken.group;
@@ -61,8 +65,8 @@ export class AuthenticationService {
 
     logout() {
         // yeah there are tokens still out there, so what?
-        localStorage.removeItem('refresh');
-        localStorage.removeItem('access');
+        this.cookieService.delete('refresh');
+        this.cookieService.delete('access');
         this.stopRefreshTokenTimer();
         if(this.userSubject) {
             this.userSubject.next(null);
@@ -70,9 +74,9 @@ export class AuthenticationService {
     }
 
     refreshToken() {
-        return this.http.post<any>(`${environment.apiUrl}/token/refresh/`, {refresh: localStorage.getItem('refresh')})
+        return this.http.post<any>(`${environment.apiUrl}/token/refresh/`, {refresh: this.cookieService.get('refresh')})
             .pipe(map(jwt => {
-                localStorage.setItem('access', jwt.access);
+                this.cookieService.set('access', jwt.access, {path: '/'});
                 this.startRefreshTokenTimer();
                 return jwt;
             }
@@ -84,9 +88,9 @@ export class AuthenticationService {
     private startRefreshTokenTimer()
     {
         let timeout = Date.now(); // if something weird happens then the refresh will be attempted immediately
-        if(localStorage.getItem('access'))
+        if(this.cookieService.get('access'))
         {
-            const jwtToken = JSON.parse(atob(localStorage.getItem('access').split('.')[1]));
+            const jwtToken = JSON.parse(atob(this.cookieService.get('access').split('.')[1]));
             const expires = new Date(jwtToken.exp * 1000);
             timeout = expires.getTime() - Date.now() - (60 * 1000);
         }
@@ -97,20 +101,7 @@ export class AuthenticationService {
         clearTimeout(this.refreshTokenTimeout);
     }
 
-    register(username, email, password, re_password) {
-        return this.http.post(`${environment.authUrl}/users/`, { email, username, password, re_password })
-        .pipe(map(jwt => {
-            return jwt;
-        }));
-    }
-
-    getInvite(code: string): Observable<any> {
-        return this.http.get<any>(`${environment.apiUrl}/invite/${code}/`);
-    }
-    
-    // this will only ever be updated to true
-    updateInvite(code: string) {
-        let used = true;
-        return this.http.put(`${environment.apiUrl}/invite/${code}/`, { used });
+    register(username, email, password, password2, code) {
+        return this.http.post(`${environment.authUrl}/reg/`, { username, email, password, password2, code });
     }
 }

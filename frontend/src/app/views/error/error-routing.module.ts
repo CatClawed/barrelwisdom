@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { P404Component } from './404.component';
-import { P500Component } from './500.component';
 
 const routes: Routes = [
   {

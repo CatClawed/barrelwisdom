@@ -1,0 +1,113 @@
+[
+  {
+    "name":"Donate",
+    "url":"/blog/donate",
+    "icon":"fas fa-donate"
+  },
+  {
+    "name":"Atelier Series Guide",
+    "url":"/blog/atelier-series-guide",
+    "icon":"icon-speedometer"
+  },
+  {
+    "title":true,
+    "name":"Ryza 2 Walkthrough"
+  },
+  {
+    "name":"Part 1",
+    "url":"/ryza2/walk1",
+    "icon":"icon-drop"
+  },
+  {
+    "name":"Part 1",
+    "url":"/ryza2/walk1",
+    "icon":"icon-drop"
+  },
+  {
+    "title":true,
+    "name":"Encyclopedia"
+  },
+  {
+    "name":"Items",
+    "url":"/ryza2/items",
+    "icon":"icon-puzzle"
+  },
+  {
+    "name":"Traits",
+    "url":"/ryza2/traits",
+    "icon":"icon-puzzle"
+  },
+  {
+    "name":"Effects",
+    "url":"/ryza2/effects",
+    "icon":"icon-puzzle"
+  },
+  {
+    "name":"Monsters",
+    "url":"/ryza2/monsters",
+    "icon":"icon-puzzle"
+  },
+  {
+    "name":"Charts",
+    "url":"/charts",
+    "icon":"icon-pie-chart"
+  },
+  {
+    "title":true,
+    "name":"Help"
+  },
+  {
+    "name":"Puni Raising",
+    "url":"/ryza2/puni-raising",
+    "icon":"icon-puzzle"
+  },
+  {
+    "name":"Fairy Statues",
+    "url":"/ryza2/fairy-statues",
+    "icon":"icon-puzzle"
+  },
+  {
+    "name":"Ultimate Builds",
+    "url":"/ryza2/ultimate-builds",
+    "icon":"icon-puzzle"
+  },
+  {
+    "name":"Monsters",
+    "url":"/ryza2/monsters",
+    "icon":"icon-puzzle"
+  },
+  {
+    "name":"Charts",
+    "url":"/charts",
+    "icon":"icon-pie-chart"
+  },
+  {
+    "title":true,
+    "name":"Areas"
+  },
+  {
+    "name":"Items",
+    "url":"/ryza2/items",
+    "icon":"icon-puzzle"
+  },
+  {
+    "name":"Place",
+    "url":"/ryza2/items",
+    "icon":"icon-puzzle"
+  },
+  {
+    "name":"Effects",
+    "url":"/ryza2/effects",
+    "icon":"icon-puzzle"
+  },
+  {
+    "name":"Monsters",
+    "url":"/ryza2/monsters",
+    "icon":"icon-puzzle"
+  },
+  {
+    "name":"Charts",
+    "url":"/charts",
+    "icon":"icon-pie-chart"
+  }
+]

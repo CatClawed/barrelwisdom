@@ -7,8 +7,8 @@ import { A22TraitlistComponent } from './a22-traitlist.component';
 import { A22TraitComponent } from './a22-trait.component';
 import { A22TraitRoutingModule } from './a22-trait-routing.module';
 import { LanguageModule } from '@app/views/language/language.module';
-import { ModalsModule } from '@app/containers/modal/modal.module';
 import { PipeModule } from '@app/pipes/pipes.module';
+import { ErrorModule } from '@app/views/error/error.module';
 
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import {MatInputModule} from '@angular/material/input';
@@ -26,7 +26,6 @@ import {MatSelectModule} from '@angular/material/select';
       FormsModule,
       ReactiveFormsModule,
       A22TraitRoutingModule,
-      ModalsModule,
       TooltipModule.forRoot(),
       PipeModule,
       MatInputModule,
@@ -36,7 +35,8 @@ import {MatSelectModule} from '@angular/material/select';
       OverlayModule,
       MatIconModule,
       MatSelectModule,
-      LanguageModule
+      LanguageModule,
+      ErrorModule,
     ],
     declarations: [
         A22TraitlistComponent,

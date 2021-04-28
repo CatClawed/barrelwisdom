@@ -43,12 +43,15 @@ import { MarkdownService } from 'ngx-markdown';
           this.section = x;
           this.gameName = (this.section.fullname) ? `${this.section.fullname} - ` : ""; // gotta make sure google sees the game name...
           this.getBlog(this.section.id, this.route.snapshot.params.title);
+        },
+        error => { 
+          this.error = true;
+          this.errorCode = error.status.toString();
+          this.errorVars = this.errorService.getCodes(this.errorCode);
         });
-        
       }
 
       getBlog(section: Number, title: string): void {
-
         this.blogService.getBlog(title, section)
           .subscribe(blog => { 
             if(blog.length == 0) {
@@ -57,6 +60,7 @@ import { MarkdownService } from 'ngx-markdown';
               this.errorVars = this.errorService.getCodes(this.errorCode);
             }
             else {
+
               this.blog = blog[0];
               this.body = this.markdownService.compile(this.blog.body);
               if(this.user) {
@@ -75,9 +79,9 @@ import { MarkdownService } from 'ngx-markdown';
             }
             },
             error => { 
-                this.error = true,
-                this.errorCode = error.status.toString(),
-                this.errorVars = this.errorService.getCodes(this.errorCode)
+                this.error = true;
+                this.errorCode = error.status.toString();
+                this.errorVars = this.errorService.getCodes(this.errorCode);
               }
             );
       }
