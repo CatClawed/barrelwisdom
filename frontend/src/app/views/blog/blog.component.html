@@ -1,20 +1,12 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<head *ngIf="blog">
-    <title>{{blog.title}} - {{gameName}}Barrel Wisdom</title>
-    <meta name="description" content="{{blog.description}}" />
-    <meta name="robots" content="index, archive" />
-    <meta property="og:title" content="{{blog.title}} - {{gameName}}Barrel Wisdom" />
-    <meta property="og:description" content={{blog.description}} />
-    <meta property="og:type" content="article" />
-    <meta *ngIf="blog.authorlock" property="article:author" content="https://barrelwisdom.com/user/{{blog.author[0].username}}" />
-    <meta property="article:published_time" content="{{blog.created}}" />
-    <meta property="article:modified_time " content="{{blog.modified}}" />
-    <meta *ngIf="blog.image" property="og:image" content="{{blog.image}}" />
-</head>
-
-
 <header *ngIf="blog">
+    <nav style="margin-top: 1em;" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li *ngFor="let crumb of breadcrumbs" class="breadcrumb-item"><a href="{{crumb[1]}}">{{crumb[0]}}</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{blog.title}}</li>
+        </ol>
+      </nav>
     <h1>{{blog.title}}</h1>
     <div class="author">
         <span style="display: inline-block;">
@@ -36,7 +28,7 @@
         <img class="blog-head-img" src="{{blog.image}}">
     </div>
     <ngx-dynamic-hooks [content]="body"></ngx-dynamic-hooks>
-    <div class="blog-tags clearfix">
+    <div *ngIf="blog.tags.length > 0" class="blog-tags clearfix">
         <a style="margin-right: 1em; margin-top: 0.5em; font-size: 1rem;" class="badge bg-secondary"><i class="fas fa-tag"></i></a>
         <a *ngFor="let tag of blog.tags" rel="tag" style="margin-right: 1em; margin-top: 0.5em; font-size: 1rem;" class="badge bg-primary" href="tag/{{tag.slugname}}">{{tag.name}} </a>
     </div>

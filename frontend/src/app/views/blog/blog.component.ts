@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 import { Blog } from '@app/interfaces/blog';
 import { User } from '@app/interfaces/user';
 import { BlogService } from '@app/services/blog.service';
 import { ErrorCodeService } from "@app/services/errorcode.service";
 import { SafeHtml } from '@angular/platform-browser';
 import { AuthenticationService } from '@app/services/authentication.service';
-import { Section } from '@app/interfaces/section';
-import { SectionService } from '@app/services/section.service';
 import { MarkdownService } from 'ngx-markdown';
+import { SeoService } from '@app/services/seo.service';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
     templateUrl: 'blog.component.html',
@@ -24,34 +23,30 @@ import { MarkdownService } from 'ngx-markdown';
       errorVars: any[];
       body: SafeHtml;
       allowedToEdit = false;
-      section: Section;
       gameName = "";
+      breadcrumbs = [["Barrel Wisdom", "/"]];
 
       constructor(
         private route: ActivatedRoute,
         private blogService: BlogService,
-        private location: Location,
         private errorService: ErrorCodeService,
         private authenticationService: AuthenticationService,
-        private sectionService: SectionService,
         private markdownService: MarkdownService,
-      ) {  }
+        private seoService: SeoService,
+        private metaService: Meta,
+        private titleService: Title) {
+
+      }
 
       ngOnInit(): void {
         this.authenticationService.user.subscribe(x => this.user = x);
-        this.sectionService.getSectionByName(this.route.snapshot.params.section).subscribe(x => {
-          this.section = x;
-          this.gameName = (this.section.fullname) ? `${this.section.fullname} - ` : ""; // gotta make sure google sees the game name...
-          this.getBlog(this.section.id, this.route.snapshot.params.title);
-        },
-        error => { 
-          this.error = true;
-          this.errorCode = error.status.toString();
-          this.errorVars = this.errorService.getCodes(this.errorCode);
-        });
+        this.route.paramMap.subscribe(params => {
+          this.getBlog(params.get('section'), params.get('title'));
+        })
+        
       }
 
-      getBlog(section: Number, title: string): void {
+      getBlog(section: string, title: string): void {
         this.blogService.getBlog(title, section)
           .subscribe(blog => { 
             if(blog.length == 0) {
@@ -60,8 +55,9 @@ import { MarkdownService } from 'ngx-markdown';
               this.errorVars = this.errorService.getCodes(this.errorCode);
             }
             else {
-
+              this.error = false;
               this.blog = blog[0];
+              this.gameName = (this.blog.section.fullname) ? `${this.blog.section.fullname} - ` : ""; // gotta make sure google sees the game name...
               this.body = this.markdownService.compile(this.blog.body);
               if(this.user) {
                 if(this.blog.authorlock && this.user.id == this.blog.author[0].id) {
@@ -71,10 +67,26 @@ import { MarkdownService } from 'ngx-markdown';
                   this.allowedToEdit = true;
                 }
                 else if(!this.blog.authorlock) {
-                  if(this.user.group == 'trusted' || this.section.name != 'blog') {
+                  if(this.user.group == 'trusted' || this.blog.section.name != 'blog') {
                     this.allowedToEdit = true;
                   }
                 }
+              }
+              if(section != "blog") {
+                this.breadcrumbs.push([this.blog.section.fullname, '/' + this.blog.section.name])
+              }
+              this.seoService.createCanonicalURL(`${this.blog.section.name}/${this.blog.slugtitle}`);
+              this.titleService.setTitle(`${this.blog.title} - ${this.blog.section.fullname} - Barrel Wisdom`);
+              this.metaService.updateTag({ name: `robots`, content: `index, archive` },`name="robots"`);
+              this.metaService.updateTag({ name: `description`, content: `${this.blog.description}` }, `name="description"`);
+              this.metaService.updateTag({ property: `og:title`, content: `${this.blog.title}` }, `property="og:title"`);
+              this.metaService.updateTag({ property: `og:description`, content: `${this.blog.description}` },`property="og:description"`);
+              this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
+              if(this.blog.image) {
+                this.metaService.updateTag({ property: `og:image`, content: `${this.blog.image}` }, `property="og:image"`);
+              }
+              else {
+                this.metaService.updateTag({ property: `og:image`, content: `https://media.barrelwisdom.com/file/barrelwisdom/main/barrel.png` }, `property="og:image"`);
               }
             }
             },

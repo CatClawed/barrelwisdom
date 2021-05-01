@@ -96,6 +96,19 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'ryza2/effects',
+    component: DefaultLayoutComponent,
+    data: {
+      title: 'Effects'
+    },
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A22/effect/a22-effect.module').then(m=>m.A22EffectModule),
+      },
+    ]
+  },
+  {
     path: ':section/:title',
     component: DefaultLayoutComponent,
     data: {

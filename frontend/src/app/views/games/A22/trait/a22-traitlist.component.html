@@ -1,16 +1,13 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
 <div *ngIf="!error">
-<head>
-    <title>Traits - Atelier Ryza 2 - Barrel Wisdom</title>
-    <meta name="description" content="The list of traits in Atelier Ryza 2." />
-    <meta name="robots" content="index, archive" />
-    <meta property="og:title" content="Traits - Atelier Ryza 2 - Barrel Wisdom" />
-    <meta property="og:description" content="The list of traits in Atelier Ryza 2." />
-    <meta property="og:type" content="webpage" />
-    <meta property="og:image" content="" />
-</head>
-
+<nav style="margin-top: 1em;" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/ryza2">Atelier Ryza 2</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Traits</li>
+  </ol>
+</nav>
 <h1>Traits</h1>
 <div class ="col-md-10 mx-auto">
     <form [formGroup]="pageForm" class="form-horizontal">
@@ -61,72 +58,41 @@
       </div>
     </form>
   </div>
-<div class="test" *ngFor="let trait of filteredTraits | async| pair " class="row">
-  <div class="spacer col-md-5 mx-auto">
+<div *ngFor="let trait of filteredTraits | async| pair " class="row">
+  <div *ngFor="let trt of trait" class="spacer col-md-5 mx-auto">
     <div class="card allheight">
       <div class="card-body griddisplay">
         <div class="flex">
-          <h4 class="card-title"><a style="color: black;" (click)="openModal(traitModal, trait[0].slugname); $event.preventDefault();" href="/ryza2/traits/{{trait[0].slugname}}/{{language}}">{{trait[0].name}}</a></h4>
-          <div *ngIf="trait[0].item_set.length == 0"><a href="javascript:void(0)"
+          <h4 class="card-title"><a style="color: black;" (click)="openModal(traitModal, trt.slugname); $event.preventDefault();" href="/ryza2/traits/{{trt.slugname}}/{{language}}">{{trt.name}}</a></h4>
+          <div *ngIf="trt.item_set.length == 0"><a href="javascript:void(0)"
               tooltip="A measure of rarity. This number determines where traits appear." container="true">Grade:</a>
-            {{trait[0].grade}}
-            <br /><span class="badge bg-secondary" *ngIf="trait[0].grade > 50">DLC</span>
+            {{trt.grade}}
+            <br /><span class="badge bg-secondary" *ngIf="trt.grade > 50">DLC</span>
           </div>
-          <div *ngIf="trait[0].item_set.length > 0">
-            <i class="atelier atelier-sm atelier-ryza2-material"></i><a href="/ryza2/item/{{trait[0].item_set[0].slugname}}/{{language}}">{{trait[0].item_set[0].name}}</a>
+          <div *ngIf="trt.item_set.length > 0">
+            <i class="atelier atelier-sm atelier-ryza2-material"></i><a href="/ryza2/item/{{trt.item_set[0].slugname}}/{{language}}">{{trt.item_set[0].name}}</a>
           </div>
         </div>
         <div class="card-text">
-          <p>{{trait[0].description}}</p>
-          <p *ngIf="trait[0].note"><b>Note:</b> {{trait[0].note}}</p>
+          <p>{{trt.description}}</p>
+          <p *ngIf="trt.note"><b>Note:</b> {{trt.note}}</p>
         </div>
         <div class="flex card-text bottom">
-          <div><i *ngIf="trait[0].trans_atk"  class="atelier atelier-ryza2-type-attack"></i>   <i style="color: lightgray;" *ngIf="!trait[0].trans_atk"  class="atelier atelier-ryza2-type-attack"></i></div>
-          <div><i *ngIf="trait[0].trans_heal" class="atelier atelier-ryza2-type-heal"></i>     <i style="color: lightgray;" *ngIf="!trait[0].trans_heal" class="atelier atelier-ryza2-type-heal"></i>     </div>
-          <div><i *ngIf="trait[0].trans_dbf"  class="atelier atelier-ryza2-type-debuff"></i>   <i style="color: lightgray;" *ngIf="!trait[0].trans_dbf"  class="atelier atelier-ryza2-type-debuff"></i>   </div>
-          <div><i *ngIf="trait[0].trans_buff" class="atelier atelier-ryza2-type-buff"></i>     <i style="color: lightgray;" *ngIf="!trait[0].trans_buff" class="atelier atelier-ryza2-type-buff"></i>     </div>
-          <div><i *ngIf="trait[0].trans_wpn"  class="atelier atelier-ryza2-type-weapon"></i>   <i style="color: lightgray;" *ngIf="!trait[0].trans_wpn"  class="atelier atelier-ryza2-type-weapon"></i>   </div>
-          <div><i *ngIf="trait[0].trans_arm"  class="atelier atelier-ryza2-type-armor"></i>    <i style="color: lightgray;" *ngIf="!trait[0].trans_arm"  class="atelier atelier-ryza2-type-armor"></i>    </div>
-          <div><i *ngIf="trait[0].trans_acc"  class="atelier atelier-ryza2-type-accessory"></i><i style="color: lightgray;" *ngIf="!trait[0].trans_acc"  class="atelier atelier-ryza2-type-accessory"></i></div>
+          <div><i *ngIf="trt.trans_atk"  class="atelier atelier-ryza2-type-attack"></i>   <i style="color: lightgray;" *ngIf="!trt.trans_atk"  class="atelier atelier-ryza2-type-attack"></i></div>
+          <div><i *ngIf="trt.trans_heal" class="atelier atelier-ryza2-type-heal"></i>     <i style="color: lightgray;" *ngIf="!trt.trans_heal" class="atelier atelier-ryza2-type-heal"></i>     </div>
+          <div><i *ngIf="trt.trans_dbf"  class="atelier atelier-ryza2-type-debuff"></i>   <i style="color: lightgray;" *ngIf="!trt.trans_dbf"  class="atelier atelier-ryza2-type-debuff"></i>   </div>
+          <div><i *ngIf="trt.trans_buff" class="atelier atelier-ryza2-type-buff"></i>     <i style="color: lightgray;" *ngIf="!trt.trans_buff" class="atelier atelier-ryza2-type-buff"></i>     </div>
+          <div><i *ngIf="trt.trans_wpn"  class="atelier atelier-ryza2-type-weapon"></i>   <i style="color: lightgray;" *ngIf="!trt.trans_wpn"  class="atelier atelier-ryza2-type-weapon"></i>   </div>
+          <div><i *ngIf="trt.trans_arm"  class="atelier atelier-ryza2-type-armor"></i>    <i style="color: lightgray;" *ngIf="!trt.trans_arm"  class="atelier atelier-ryza2-type-armor"></i>    </div>
+          <div><i *ngIf="trt.trans_acc"  class="atelier atelier-ryza2-type-accessory"></i><i style="color: lightgray;" *ngIf="!trt.trans_acc"  class="atelier atelier-ryza2-type-accessory"></i></div>
         </div>
       </div>
     </div>
   </div>
-  <div class="test" *ngIf="trait[1]" class="spacer col-md-5 mx-auto">
-    <div class="card allheight">
-      <div class="card-body griddisplay">
-        <div class="flex">
-          <h4 class="card-title"><a style="color: black;" (click)="openModal(traitModal, trait[1].slugname); $event.preventDefault();" href="/ryza2/traits/{{trait[1].slugname}}/{{language}}">{{trait[1].name}}</a></h4>
-          <div *ngIf="trait[1].item_set.length == 0"><a href="javascript:void(0)"
-              tooltip="A measure of rarity. This number determines where traits appear." container="true">Grade:</a>
-            {{trait[1].grade}}
-            <br /><span class="badge bg-secondary" *ngIf="trait[1].grade > 50">DLC</span>
-          </div>
-          <div *ngIf="trait[1].item_set.length > 0">
-            <i class="atelier atelier-sm atelier-ryza2-material"></i><a href="/ryza2/item/{{trait[1].item_set[0].slugname}}/{{language}}">{{trait[1].item_set[0].name}}</a>
-          </div>
-        </div>
-        <div class="card-text">
-          <p>{{trait[1].description}}</p>
-          <p *ngIf="trait[1].note"><b>Note:</b> {{trait[1].note}}</p>
-          </div>
-        <div class="flex card-text bottom">
-          <div><i *ngIf="trait[1].trans_atk"  class="atelier atelier-ryza2-type-attack"></i>   <i style="color: lightgray;" *ngIf="!trait[1].trans_atk"  class="atelier atelier-ryza2-type-attack"></i></div>
-          <div><i *ngIf="trait[1].trans_heal" class="atelier atelier-ryza2-type-heal"></i>     <i style="color: lightgray;" *ngIf="!trait[1].trans_heal" class="atelier atelier-ryza2-type-heal"></i>     </div>
-          <div><i *ngIf="trait[1].trans_dbf"  class="atelier atelier-ryza2-type-debuff"></i>   <i style="color: lightgray;" *ngIf="!trait[1].trans_dbf"  class="atelier atelier-ryza2-type-debuff"></i>   </div>
-          <div><i *ngIf="trait[1].trans_buff" class="atelier atelier-ryza2-type-buff"></i>     <i style="color: lightgray;" *ngIf="!trait[1].trans_buff" class="atelier atelier-ryza2-type-buff"></i>     </div>
-          <div><i *ngIf="trait[1].trans_wpn"  class="atelier atelier-ryza2-type-weapon"></i>   <i style="color: lightgray;" *ngIf="!trait[1].trans_wpn"  class="atelier atelier-ryza2-type-weapon"></i>   </div>
-          <div><i *ngIf="trait[1].trans_arm"  class="atelier atelier-ryza2-type-armor"></i>    <i style="color: lightgray;" *ngIf="!trait[1].trans_arm"  class="atelier atelier-ryza2-type-armor"></i>    </div>
-          <div><i *ngIf="trait[1].trans_acc"  class="atelier atelier-ryza2-type-accessory"></i><i style="color: lightgray;" *ngIf="!trait[1].trans_acc"  class="atelier atelier-ryza2-type-accessory"></i></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div *ngIf="!trait[1]" class="spacer col-md-5 mx-auto"></div>
 </div>
 
 <ng-template #traitModal>
-  <div class="modal-body col-md-5 mx-auto">
+  <div class="modal-body">
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <i class="fas fa-times-circle"></i>
     </button>

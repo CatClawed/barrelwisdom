@@ -1,5 +1,8 @@
+# python manage.py shell < scripts/import_a22_csv.py
+# write it here so I can't forget again
+
 from games.A22.items_a22.models import *
-from games.A22.effects_a22.models import Effect
+from games.A22.effects_a22.models import *
 from games.A22.locations_a22.models import Location
 from games.A22.categories_a22.models import Category
 from games.A22.shops_a22.models import Shop
@@ -12,6 +15,35 @@ import sys
 with open('scripts/data.txt', newline='', encoding='utf-8') as csvfile:
 	reader = csv.reader(csvfile, delimiter='\t')
 	for row in reader:
+		en = Effect_en(name=row[3],  description=row[4])
+		ja = Effect_ja(name=row[5],  description=row[6])
+		ko = Effect_ko(name=row[7],  description=row[8])
+		fr = Effect_fr(name=row[9],  description=row[10])
+		sc = Effect_sc(name=row[11], description=row[12])
+		tc = Effect_tc(name=row[13], description=row[14])
+
+		en.save()
+		ja.save()
+		ko.save()
+		fr.save()
+		sc.save()
+		tc.save()
+
+		obj = Effect(
+			slugname=row[0],
+			index=row[1],
+			efftype=row[2],
+			eff_en=en,
+			eff_ja=ja,
+			eff_ko=ko,
+			eff_fr=fr,
+			eff_sc=sc,
+			eff_tc=tc)
+
+		obj.save()
+
+
+		"""
 		area = Location.objects.get(slugname=row[0])
 		rank1 = (Item.objects.get(slugname=row[1]) if row[1] else None)
 		rank2 = (Item.objects.get(slugname=row[2]) if row[2] else None)
@@ -35,7 +67,7 @@ with open('scripts/data.txt', newline='', encoding='utf-8') as csvfile:
 		)
 		obj.save()
 
-		"""
+		
 		synthitem = Item.objects.get(slugname=row[0])
 		required = (True if (row[1] == "TRUE") else False)
 		isCategory = (True if (row[3] == "yes") else False)

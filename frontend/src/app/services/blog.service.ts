@@ -31,8 +31,8 @@ export class BlogService {
 
   // Reader facing stuff
 
-  getBlog(slugtitle: string, section: Number): Observable<Blog[]> {
-    return this.http.get<Blog[]>(`${environment.apiUrl}/blog/?section=${section.toString(10)}&slugtitle=${slugtitle}`)
+  getBlog(slugtitle: string, section: string): Observable<Blog[]> {
+    return this.http.get<Blog[]>(`${environment.apiUrl}/blog/?section__name=${section}&slugtitle=${slugtitle}`)
   }
 
   getMainPageBlogs(num: number, limit: number, tag: string): Observable<BlogPaginator> {

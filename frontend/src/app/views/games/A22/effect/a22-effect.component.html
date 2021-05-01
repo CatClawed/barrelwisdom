@@ -1,0 +1,47 @@
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+
+<div *ngIf="!error">
+<nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/ryza2">Atelier Ryza 2</a></li>
+    <li class="breadcrumb-item"><a href="/ryza2/effects">Effects</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{effect.name}}</li>
+  </ol>
+</nav>
+<div class="mx-auto row">
+<div class="{{colset}} card griddisplay card-body">
+    <div class="flex">
+        <h4 class="card-title  card-icon-space">{{effect.name}}</h4>
+        <div class="card-icon-position">
+          <i *ngIf="effect.efftype == 'Normal'" class="atelier atelier-ryza2-type-synthesis"></i>
+          <i *ngIf="effect.efftype == 'Weapon Forge'" class="atelier atelier-ryza2-type-weapon"></i> <i *ngIf="effect.efftype == 'Weapon Forge'" class="atelier atelier-ryza2-forge"></i>
+          <i *ngIf="effect.efftype == 'Armor Forge'" class="atelier atelier-ryza2-type-armor"></i> <i *ngIf="effect.efftype == 'Armor Forge'" class="atelier atelier-ryza2-forge"></i>
+          <i *ngIf="effect.efftype == 'Accessory Forge'" class="atelier atelier-ryza2-type-accessory"></i> <i *ngIf="effect.efftype == 'Accessory Forge'" class="atelier atelier-ryza2-forge"></i>
+          <i *ngIf="effect.efftype == 'Material'" class="atelier atelier-ryza2-material"></i>
+          <span *ngIf="effect.efftype == 'EV'" class="badge bg-secondary">EV</span>
+        </div>
+      </div>
+      <div class="card-text">
+        <p *ngIf="effect.description">{{effect.description}}</p>
+        <p *ngIf="effect.note"><b>Note:</b> {{effect.note}}</p>
+        <b *ngIf="effect.efftype == 'Normal' || effect.efftype == 'Material'">From Item:</b>
+        <ul *ngIf="effect.effectline_set">
+          <li *ngFor="let e of effect.effectline_set"><a href="/ryza2/items/{{e.itemslug}}">{{e.itemname}}</a></li>
+        </ul>
+        <b *ngIf="effect.efftype == 'EV'">Combines Effects:</b>
+        <ul *ngIf="effect.effects && effect.efftype == 'EV'">
+          <li *ngFor="let e of effect.effects">
+            <a href="javascript:void(0)" tooltip="{{e.desc}}" container="true">{{e.name}}</a>
+          </li>
+        </ul>
+        <b *ngIf="(effect.efftype == 'Normal' || effect.efftype == 'Material') && effect.parent">Child Effects:</b>
+        <b *ngIf="(effect.efftype != 'Normal' && effect.efftype != 'Material') && effect.parent">Parent Effects:</b>
+        <ul *ngIf="effect.parent">
+          <li *ngFor="let e of effect.parent"><a href="/ryza2/effects/{{e.slugname}}">{{e.name}}</a></li>
+        </ul>
+      </div>
+</div>
+<language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="ryza2"></language-settings>
+</div>
+</div>

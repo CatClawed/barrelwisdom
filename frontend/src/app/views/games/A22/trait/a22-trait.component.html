@@ -1,21 +1,11 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
 <div *ngIf="!error">
-<head *ngIf="showNav">
-    <title>{{trait.name}} - Atelier Ryza 2 - Barrel Wisdom</title>
-    <meta name="description" content="{{trait.description}}" />
-    <meta name="robots" content="index, archive" />
-    <meta property="og:title" content="{{trait.name}} - Atelier Ryza 2 - Barrel Wisdom<" />
-    <meta property="og:description" content="{{trait.description}}" />
-    <meta property="og:type" content="webpage" />
-    <meta property="og:image" content="" />
-</head>
-
 <nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="#">Ryza 2</a></li>
-    <li class="breadcrumb-item"><a href="#">Traits</a></li>
+    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/ryza2">Atelier Ryza 2</a></li>
+    <li class="breadcrumb-item"><a href="/ryza2/traits/">Traits</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{trait.name}}</li>
   </ol>
 </nav>

@@ -1,3 +1,4 @@
+from collections import OrderedDict
 from rest_framework import serializers
 from games.A22.effects_a22.models import Effect, Effect_en, Effect_ja, Effect_fr, Effect_ko, Effect_sc, Effect_tc
 from games.A22.items_a22.serializers import A22EffectLineSerializerEN, A22EffectLineSerializerJA, A22EffectLineSerializerKO, A22EffectLineSerializerFR, A22EffectLineSerializerSC, A22EffectLineSerializerTC
@@ -59,39 +60,81 @@ class A22EffectSerializer(serializers.ModelSerializer):
 # Parents and Effects
 class A22ExtraSerializerEN(serializers.ModelSerializer):
     name = serializers.CharField(source='eff_en.name')
+    desc = serializers.CharField(source='eff_en.description')
     class Meta:
         model = Effect
-        fields = ['slugname', 'name', 'efftype']
+        fields = ['slugname', 'name', 'efftype', 'desc']
+    def to_representation(self, instance):
+        result = super(A22ExtraSerializerEN, self).to_representation(instance)
+        if(result['efftype'] != 'EV'):
+            result['effects'] = []
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}])
 
 class A22ExtraSerializerJA(serializers.ModelSerializer):
     name = serializers.CharField(source='eff_ja.name')
+    desc = serializers.CharField(source='eff_ja.description')
     class Meta:
         model = Effect
-        fields = ['slugname', 'name', 'efftype']
+        fields = ['slugname', 'name', 'efftype', 'desc']
+    def to_representation(self, instance):
+        result = super(A22ExtraSerializerJA, self).to_representation(instance)
+        if(result['efftype'] != 'EV'):
+            result['effects'] = []
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}])
 
 class A22ExtraSerializerKO(serializers.ModelSerializer):
     name = serializers.CharField(source='eff_ko.name')
+    desc = serializers.CharField(source='eff_ko.description')
     class Meta:
         model = Effect
-        fields = ['slugname', 'name', 'efftype']
+        fields = ['slugname', 'name', 'efftype', 'desc']
+    def to_representation(self, instance):
+        result = super(A22ExtraSerializerKO, self).to_representation(instance)
+        if(result['efftype'] != 'EV'):
+            result['effects'] = []
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}])
 
 class A22ExtraSerializerFR(serializers.ModelSerializer):
     name = serializers.CharField(source='eff_fr.name')
+    desc = serializers.CharField(source='eff_fr.description')
     class Meta:
         model = Effect
-        fields = ['slugname', 'name', 'efftype']
+        fields = ['slugname', 'name', 'efftype', 'desc']
+    def to_representation(self, instance):
+        result = super(A22ExtraSerializerFR, self).to_representation(instance)
+        if(result['efftype'] != 'EV'):
+            result['effects'] = []
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}])
 
 class A22ExtraSerializerSC(serializers.ModelSerializer):
     name = serializers.CharField(source='eff_sc.name')
+    desc = serializers.CharField(source='eff_sc.description')
     class Meta:
         model = Effect
-        fields = ['slugname', 'name', 'efftype']
+        fields = ['slugname', 'name', 'efftype', 'desc']
+    def to_representation(self, instance):
+        result = super(A22ExtraSerializerSC, self).to_representation(instance)
+        if(result['efftype'] != 'EV'):
+            result['effects'] = []
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}])
 
 class A22ExtraSerializerTC(serializers.ModelSerializer):
     name = serializers.CharField(source='eff_tc.name')
+    desc = serializers.CharField(source='eff_tc.description')
     class Meta:
         model = Effect
-        fields = ['slugname', 'name', 'efftype']
+        fields = ['slugname', 'name', 'efftype', 'desc']
+    def to_representation(self, instance):
+        result = super(A22ExtraSerializerTC, self).to_representation(instance)
+        if(result['efftype'] != 'EV'):
+            result['effects'] = []
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}])
 
 # Simplified Data for single languages
 class A22EffectSerializerEN(serializers.ModelSerializer):
@@ -101,7 +144,14 @@ class A22EffectSerializerEN(serializers.ModelSerializer):
     class Meta:
         model = Effect
         fields = ['slugname', 'index', 'efftype', 'note', 'name', 'description', 'effects']
-    
+
+    def to_representation(self, instance):
+        result = super(A22EffectSerializerEN, self).to_representation(instance)
+        if(result['efftype'] != 'EV'):
+            result['effects'] = []
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}])
+
 class A22EffectSerializerJA(serializers.ModelSerializer):
     name = serializers.CharField(source='eff_ja.name')
     description = serializers.CharField(source='eff_ja.description')
@@ -109,6 +159,13 @@ class A22EffectSerializerJA(serializers.ModelSerializer):
     class Meta:
         model = Effect
         fields = ['slugname', 'index', 'efftype', 'note', 'name', 'description', 'effects']
+
+    def to_representation(self, instance):
+        result = super(A22EffectSerializerJA, self).to_representation(instance)
+        if(result['efftype'] != 'EV'):
+            result['effects'] = []
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}])
 
 class A22EffectSerializerKO(serializers.ModelSerializer):
     name = serializers.CharField(source='eff_ko.name')
@@ -118,6 +175,13 @@ class A22EffectSerializerKO(serializers.ModelSerializer):
         model = Effect
         fields = ['slugname', 'index', 'efftype', 'note', 'name', 'description', 'effects']
 
+    def to_representation(self, instance):
+        result = super(A22EffectSerializerKO, self).to_representation(instance)
+        if(result['efftype'] != 'EV'):
+            result['effects'] = []
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}])
+
 class A22EffectSerializerFR(serializers.ModelSerializer):
     name = serializers.CharField(source='eff_fr.name')
     description = serializers.CharField(source='eff_fr.description')
@@ -125,6 +189,13 @@ class A22EffectSerializerFR(serializers.ModelSerializer):
     class Meta:
         model = Effect
         fields = ['slugname', 'index', 'efftype', 'note', 'name', 'description', 'effects']
+
+    def to_representation(self, instance):
+        result = super(A22EffectSerializerFR, self).to_representation(instance)
+        if(result['efftype'] != 'EV'):
+            result['effects'] = []
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}])
 
 class A22EffectSerializerSC(serializers.ModelSerializer):
     name = serializers.CharField(source='eff_sc.name')
@@ -134,6 +205,13 @@ class A22EffectSerializerSC(serializers.ModelSerializer):
         model = Effect
         fields = ['slugname', 'index', 'efftype', 'note', 'name', 'description', 'effects']
 
+    def to_representation(self, instance):
+        result = super(A22EffectSerializerSC, self).to_representation(instance)
+        if(result['efftype'] != 'EV'):
+            result['effects'] = []
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}])
+
 class A22EffectSerializerTC(serializers.ModelSerializer):
     name = serializers.CharField(source='eff_tc.name')
     description = serializers.CharField(source='eff_tc.description')
@@ -141,6 +219,13 @@ class A22EffectSerializerTC(serializers.ModelSerializer):
     class Meta:
         model = Effect
         fields = ['slugname', 'index', 'efftype', 'note', 'name', 'description', 'effects']
+
+    def to_representation(self, instance):
+        result = super(A22EffectSerializerTC, self).to_representation(instance)
+        if(result['efftype'] != 'EV'):
+            result['effects'] = []
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}])
 
 
 # Full Data for single languages
@@ -154,6 +239,11 @@ class A22EffectSerializerENFull(serializers.ModelSerializer):
         model = Effect
         fields = ['slugname', 'index', 'efftype', 'note', 'name', 'description', 'effects', 'parent', 'effectline_set']
     
+    def to_representation(self, instance):
+        result = super(A22EffectSerializerENFull, self).to_representation(instance)
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}])
+
 class A22EffectSerializerJAFull(serializers.ModelSerializer):
     name = serializers.CharField(source='eff_ja.name')
     description = serializers.CharField(source='eff_ja.description')
@@ -163,6 +253,11 @@ class A22EffectSerializerJAFull(serializers.ModelSerializer):
     class Meta:
         model = Effect
         fields = ['slugname', 'index', 'efftype', 'note', 'name', 'description', 'effects', 'parent', 'effectline_set']
+    
+    def to_representation(self, instance):
+        result = super(A22EffectSerializerJAFull, self).to_representation(instance)
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}])
 
 class A22EffectSerializerKOFull(serializers.ModelSerializer):
     name = serializers.CharField(source='eff_ko.name')
@@ -174,6 +269,11 @@ class A22EffectSerializerKOFull(serializers.ModelSerializer):
         model = Effect
         fields = ['slugname', 'index', 'efftype', 'note', 'name', 'description', 'effects', 'parent', 'effectline_set']
 
+    def to_representation(self, instance):
+        result = super(A22EffectSerializerKOFull, self).to_representation(instance)
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}])
+
 class A22EffectSerializerFRFull(serializers.ModelSerializer):
     name = serializers.CharField(source='eff_fr.name')
     description = serializers.CharField(source='eff_fr.description')
@@ -184,6 +284,11 @@ class A22EffectSerializerFRFull(serializers.ModelSerializer):
         model = Effect
         fields = ['slugname', 'index', 'efftype', 'note', 'name', 'description', 'effects', 'parent', 'effectline_set']
 
+    def to_representation(self, instance):
+        result = super(A22EffectSerializerFRFull, self).to_representation(instance)
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}])
+
 class A22EffectSerializerSCFull(serializers.ModelSerializer):
     name = serializers.CharField(source='eff_sc.name')
     description = serializers.CharField(source='eff_sc.description')
@@ -193,6 +298,11 @@ class A22EffectSerializerSCFull(serializers.ModelSerializer):
     class Meta:
         model = Effect
         fields = ['slugname', 'index', 'efftype', 'note', 'name', 'description', 'effects', 'parent', 'effectline_set']
+  
+    def to_representation(self, instance):
+        result = super(A22EffectSerializerSCFull, self).to_representation(instance)
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}])
 
 class A22EffectSerializerTCFull(serializers.ModelSerializer):
     name = serializers.CharField(source='eff_tc.name')
@@ -203,3 +313,8 @@ class A22EffectSerializerTCFull(serializers.ModelSerializer):
     class Meta:
         model = Effect
         fields = ['slugname', 'index', 'efftype', 'note', 'name', 'description', 'effects', 'parent', 'effectline_set']
+
+    def to_representation(self, instance):
+        result = super(A22EffectSerializerTCFull, self).to_representation(instance)
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}])

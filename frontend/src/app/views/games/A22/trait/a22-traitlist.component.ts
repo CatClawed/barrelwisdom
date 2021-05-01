@@ -1,13 +1,15 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
-import { Trait, ItemName } from '@app/interfaces/a22';
+import { Trait } from '@app/interfaces/a22';
 import { A22Service } from '@app/services/a22.service';
 import { ErrorCodeService } from "@app/services/errorcode.service";
 import { Observable } from 'rxjs';
-import { concatMap, map, startWith } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
+import { SeoService } from '@app/services/seo.service';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   templateUrl: 'a22-traitlist.component.html',
@@ -32,11 +34,12 @@ export class A22TraitlistComponent implements OnInit {
     private modalService: BsModalService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router,
     private location: Location,
     private a22service: A22Service,
     private errorService: ErrorCodeService,
-  ) { 
+    private seoService: SeoService,
+    private metaService: Meta,
+    private titleService: Title) { 
     this.traitControl = new FormControl();
   }
 
@@ -45,6 +48,14 @@ export class A22TraitlistComponent implements OnInit {
     this.language = this.route.snapshot.params.language;
 
     this.getTraits();
+    this.seoService.createCanonicalURL(`ryza2/traits/${this.language}`);
+    this.titleService.setTitle(`Traits - Atelier Ryza 2 - Barrel Wisdom`);
+    this.metaService.updateTag({ name: `robots`, content: `index, archive` },`name="robots"`);
+    this.metaService.updateTag({ name: `description`, content: `The list of traits in Atelier Ryza 2.` }, `name="description"`);
+    this.metaService.updateTag({ property: `og:title`, content: `Traits` }, `property="og:title"`);
+    this.metaService.updateTag({ property: `og:description`, content: `The list of traits in Atelier Ryza 2.` },`property="og:description"`);
+    this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
+    this.metaService.updateTag({ property: `og:image`, content: `https://media.barrelwisdom.com/file/barrelwisdom/main/barrel.png` }, `property="og:image"`);
 
     this.pageForm = this.formBuilder.group({
       filtertext: this.traitControl,
@@ -88,7 +99,6 @@ export class A22TraitlistComponent implements OnInit {
 
   private filterT(value: string, transfer: string): Trait[] {
 
-    console.log(transfer + "\t" + value);
     const filterValue = value.toLowerCase();
     let traitlist: Trait[] = this.traits;
     switch(transfer) {
@@ -121,8 +131,9 @@ export class A22TraitlistComponent implements OnInit {
         break;
       }
     }
-    return traitlist.filter(trait => trait.name.toLowerCase().includes(filterValue))
-    && traitlist.filter(trait => trait.description.toLowerCase().includes(filterValue));
+    return traitlist.filter(trait => {
+      return trait.name.toLowerCase().includes(filterValue) || trait.description.toLowerCase().includes(filterValue)
+    });
   } 
 
   get f() { return this.pageForm.controls; }

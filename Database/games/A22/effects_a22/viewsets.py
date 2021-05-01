@@ -1,27 +1,22 @@
 from rest_framework import viewsets, filters
-from games.A22.effects_a22.models import Effect, Effect_en, Effect_ja, Effect_ko, Effect_fr, Effect_sc, Effect_tc
-from games.A22.effects_a22.serializers import *
+from games.A22.effects_a22.models import Effect
+from games.A22.effects_a22.serializers import A22EffectSerializerEN, A22EffectSerializerJA, A22EffectSerializerKO, A22EffectSerializerFR, A22EffectSerializerSC, A22EffectSerializerTC, A22EffectSerializerENFull, A22EffectSerializerJAFull, A22EffectSerializerKOFull, A22EffectSerializerFRFull, A22EffectSerializerSCFull, A22EffectSerializerTCFull
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 
-class A22Effect_enViewSet(viewsets.ModelViewSet):
-    queryset = Effect_en.objects.all()
-    serializer_class = A22Effect_enSerializer
-    filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    ordering_fields = ['index']
-
 class A22EffectViewSet(viewsets.ModelViewSet):
     queryset = Effect.objects.all()
-    serializer_class = A22EffectSerializer
+    serializer_class = A22EffectSerializerEN
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
     ordering_fields = ['index']
     lookup_field = 'slugname'
+    filterset_fields = ['efftype']
 
     # full effect list
     @action(detail=False)
     def en(self, request):
-        queryset = (
+        queryset = self.filter_queryset(
             Effect.objects
             .select_related(
                 'eff_en'
@@ -31,13 +26,13 @@ class A22EffectViewSet(viewsets.ModelViewSet):
                 'effects__eff_en'
             )
             .order_by('index')
-        )
+        ).exclude(efftype='Hidden').exclude(efftype='unused')
         serializer = A22EffectSerializerEN(queryset, many=True)
         return Response(serializer.data)
 
     @action(detail=False)
     def ja(self, request):
-        queryset = (
+        queryset = self.filter_queryset(
             Effect.objects
             .select_related(
                 'eff_ja'
@@ -47,13 +42,13 @@ class A22EffectViewSet(viewsets.ModelViewSet):
                 'effects__eff_ja'
             )
             .order_by('index')
-        )
+        ).exclude(efftype='Hidden').exclude(efftype='unused')
         serializer = A22EffectSerializerJA(queryset, many=True)
         return Response(serializer.data)
 
     @action(detail=False)
     def ko(self, request):
-        queryset = (
+        queryset = self.filter_queryset(
             Effect.objects
             .select_related(
                 'eff_ko'
@@ -63,13 +58,13 @@ class A22EffectViewSet(viewsets.ModelViewSet):
                 'effects__eff_ko'
             )
             .order_by('index')
-        )
+        ).exclude(efftype='Hidden').exclude(efftype='unused')
         serializer = A22EffectSerializerKO(queryset, many=True)
         return Response(serializer.data)
 
     @action(detail=False)
     def fr(self, request):
-        queryset = (
+        queryset = self.filter_queryset(
             Effect.objects
             .select_related(
                 'eff_fr'
@@ -79,13 +74,13 @@ class A22EffectViewSet(viewsets.ModelViewSet):
                 'effects__eff_fr'
             )
             .order_by('index')
-        )
+        ).exclude(efftype='Hidden').exclude(efftype='unused')
         serializer = A22EffectSerializerFR(queryset, many=True)
         return Response(serializer.data)
 
     @action(detail=False)
     def sc(self, request):
-        queryset = (
+        queryset = self.filter_queryset(
             Effect.objects
             .select_related(
                 'eff_sc'
@@ -95,13 +90,13 @@ class A22EffectViewSet(viewsets.ModelViewSet):
                 'effects__eff_sc'
             )
             .order_by('index')
-        )
+        ).exclude(efftype='Hidden').exclude(efftype='unused')
         serializer = A22EffectSerializerSC(queryset, many=True)
         return Response(serializer.data)
 
     @action(detail=False)
     def tc(self, request):
-        queryset = (
+        queryset = self.filter_queryset(
             Effect.objects
             .select_related(
                 'eff_tc'
@@ -111,7 +106,7 @@ class A22EffectViewSet(viewsets.ModelViewSet):
                 'effects__eff_tc'
             )
             .order_by('index')
-        )
+        ).exclude(efftype='Hidden').exclude(efftype='unused')
         serializer = A22EffectSerializerTC(queryset, many=True)
         return Response(serializer.data)
 

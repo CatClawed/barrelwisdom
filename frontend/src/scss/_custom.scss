@@ -128,13 +128,17 @@ select {
   max-width: 100% !important;
   padding-left: 1em !important;
   padding-right: 1em !important;
+  font-size: calc(1rem + 0.1vw) !important;
 }
 
 .modal-content {
   background-color: transparent !important;
   border: transparent !important;
+  max-width: max-content !important;
+  align-items: center;
+  margin: auto;
 }
-
+ 
 .close {
   text-shadow: none !important;
 }
@@ -144,6 +148,23 @@ select {
   border: 2px outset lightgray !important;
   background-color: white;
   background-image: url("https://media.barrelwisdom.com/file/barrelwisdom/main/images/clean_textile.png");
+}
+
+.card-icon-space {
+  margin-right: 1em;
+  padding-right: 2.5em;
+}
+
+.card-icon-position {
+  position:absolute;
+  top:1em;
+  right:1em;
+}
+
+.card-read-more-position {
+  position:absolute !important;
+  bottom:1.5em !important;
+  right:1.5em !important;
 }
 
 /* Background pattern from Toptal Subtle Patterns */
@@ -165,7 +186,7 @@ select {
 h1 {
   font-family: Merriweather;
   font-size: calc(2.5rem + 0.1vw);
-  padding-top: 0.5em;
+  padding-top: 0;
   border-bottom: 1px dotted black;
 }
 
@@ -184,7 +205,7 @@ h3 {
 
 h4 {
   font-family: Merriweather;
-  font-size: calc(1.3125rem + 0.1vw);
+  font-size: calc(1.3125rem + 0.1vw) !important;
 }
 
 .tab-content {
@@ -206,6 +227,23 @@ h4 {
   border-color: darkgray !important;
 }
 
+.breadcrumb {
+  padding: 0 !important;
+  background-color: transparent !important;
+  border-bottom: transparent !important;
+}
+
+.mat-flat-button.mat-accent, .mat-raised-button.mat-accent, .mat-fab.mat-accent, .mat-mini-fab.mat-accent {
+  background-color: $navbar !important;
+}
+
+.mat-flat-button.mat-accent, .mat-raised-button.mat-accent, .mat-fab.mat-accent, .mat-mini-fab.mat-accent:hover {
+  background-color: #B8947B !important;
+}
+
+.tooltip {
+  font-size: calc(1rem + 0.1vw) !important;
+}
 
 // Major components (header, main, sidebar, etc.)
 
