@@ -119,7 +119,6 @@ class ShopDevelop(models.Model):
 # Detailed Location Data
 
 class ItemLocations(models.Model):
-    area = models.ForeignKey(Location, on_delete=models.CASCADE)
     rank1 = models.ForeignKey(Item, on_delete=models.CASCADE, related_name="rank1")
     rank2 = models.ForeignKey(Item, on_delete=models.CASCADE, blank=True, null=True, related_name="rank2")
     rank3 = models.ForeignKey(Item, on_delete=models.CASCADE, blank=True, null=True, related_name="rank3")
@@ -127,3 +126,16 @@ class ItemLocations(models.Model):
     priority2 = models.IntegerField(blank=True, null=True)
     priority3 = models.IntegerField(blank=True, null=True)
     tool = models.CharField(max_length=15, blank=True, null=True)
+
+# tfw you think of how to implement things later
+class ItemRegions(models.Model):
+    region = models.ForeignKey(Location, on_delete=models.CASCADE)
+
+# patch your mistakes
+class ItemAreas(models.Model):
+    area = models.ForeignKey(Location, on_delete=models.CASCADE)
+    gatherdata = models.ManyToManyField(ItemLocations)
+    text = models.TextField(blank=True, null=True)
+    areas = models.ForeignKey(ItemRegions, related_name="areas", on_delete=models.CASCADE, blank=True, null=True)
+
+    

@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
+import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 import { DefaultLayoutComponent } from '@app/containers';
+
+const routerOptions: ExtraOptions = {
+  scrollPositionRestoration: 'enabled',
+  anchorScrolling: 'enabled',
+  scrollOffset: [0, 64],
+};
 
 const routes: Routes = [
   {
@@ -96,6 +101,19 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'ryza2/monsters',
+    component: DefaultLayoutComponent,
+    data: {
+      title: 'Monsters'
+    },
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A22/monster/a22-monster.module').then(m=>m.A22MonsterModule),
+      },
+    ]
+  },
+  {
     path: 'ryza2/effects',
     component: DefaultLayoutComponent,
     data: {
@@ -105,6 +123,19 @@ const routes: Routes = [
       {
         path: '', 
         loadChildren: ()=> import('@app/views/games/A22/effect/a22-effect.module').then(m=>m.A22EffectModule),
+      },
+    ]
+  },
+  {
+    path: 'ryza2/locations',
+    component: DefaultLayoutComponent,
+    data: {
+      title: 'Locations'
+    },
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A22/location/a22-location.module').then(m=>m.A22LocationModule),
       },
     ]
   },
@@ -137,7 +168,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, routerOptions)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

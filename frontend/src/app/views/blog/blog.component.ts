@@ -73,10 +73,13 @@ import { Meta, Title } from '@angular/platform-browser';
                 }
               }
               if(section != "blog") {
+                this.titleService.setTitle(`${this.blog.title} - ${this.blog.section.fullname} - Barrel Wisdom`);
                 this.breadcrumbs.push([this.blog.section.fullname, '/' + this.blog.section.name])
               }
+              else {
+                this.titleService.setTitle(`${this.blog.title} - Barrel Wisdom`);
+              }
               this.seoService.createCanonicalURL(`${this.blog.section.name}/${this.blog.slugtitle}`);
-              this.titleService.setTitle(`${this.blog.title} - ${this.blog.section.fullname} - Barrel Wisdom`);
               this.metaService.updateTag({ name: `robots`, content: `index, archive` },`name="robots"`);
               this.metaService.updateTag({ name: `description`, content: `${this.blog.description}` }, `name="description"`);
               this.metaService.updateTag({ property: `og:title`, content: `${this.blog.title}` }, `property="og:title"`);

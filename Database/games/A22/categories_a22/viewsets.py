@@ -4,6 +4,8 @@ from games.A22.categories_a22.serializers import A22CategorySerializerEN, A22Cat
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import Http404
 
 class A22CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
@@ -14,72 +16,90 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
     # allows easy access via catect/slugname/en
     @action(detail=True, methods=['get'], url_path="en")
     def en(self, request, slugname):
-        queryset = (
-            Category.objects
-            .select_related(
-                'cat_en'
+        try:
+            queryset = (
+                Category.objects
+                .select_related(
+                    'cat_en'
+                )
+                .get(slugname=slugname)
             )
-            .get(slugname=slugname)
-        )
+        except ObjectDoesNotExist:
+            raise Http404
         serializer = A22CategorySerializerEN(queryset)
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ja")
     def ja(self, request, slugname):
-        queryset = (
-            Category.objects
-            .select_related(
-                'cat_ja'
+        try:
+            queryset = (
+                Category.objects
+                .select_related(
+                    'cat_ja'
+                )
+                .get(slugname=slugname)
             )
-            .get(slugname=slugname)
-        )
+        except ObjectDoesNotExist:
+            raise Http404
         serializer = A22CategorySerializerJA(queryset)
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ko")
     def ko(self, request, slugname):
-        queryset = (
-            Category.objects
-            .select_related(
-                'cat_ko'
+        try:
+            queryset = (
+                Category.objects
+                .select_related(
+                    'cat_ko'
+                )
+                .get(slugname=slugname)
             )
-            .get(slugname=slugname)
-        )
+        except ObjectDoesNotExist:
+            raise Http404
         serializer = A22CategorySerializerKO(queryset)
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="fr")
     def fr(self, request, slugname):
-        queryset = (
-            Category.objects
-            .select_related(
-                'cat_fr'
+        try:
+            queryset = (
+                Category.objects
+                .select_related(
+                    'cat_fr'
+                )
+                .get(slugname=slugname)
             )
-            .get(slugname=slugname)
-        )
+        except ObjectDoesNotExist:
+            raise Http404
         serializer = A22CategorySerializerFR(queryset)
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="sc")
     def sc(self, request, slugname):
-        queryset = (
-            Category.objects
-            .select_related(
-                'cat_sc'
+        try:
+            queryset = (
+                Category.objects
+                .select_related(
+                    'cat_sc'
+                )
+                .get(slugname=slugname)
             )
-            .get(slugname=slugname)
-        )
+        except ObjectDoesNotExist:
+            raise Http404
         serializer = A22CategorySerializerSC(queryset)
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="tc")
     def tc(self, request, slugname):
-        queryset = (
-            Category.objects
-            .select_related(
-                'cat_tc'
+        try:
+            queryset = (
+                Category.objects
+                .select_related(
+                    'cat_tc'
+                )
+                .get(slugname=slugname)
             )
-            .get(slugname=slugname)
-        )
+        except ObjectDoesNotExist:
+            raise Http404
         serializer = A22CategorySerializerTC(queryset)
         return Response(serializer.data)

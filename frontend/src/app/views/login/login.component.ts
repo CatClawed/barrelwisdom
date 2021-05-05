@@ -1,9 +1,11 @@
-import { Component, TemplateRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '@app/services/authentication.service';
 import { first } from 'rxjs/operators';
 import { ErrorCodeService } from '@app/services/errorcode.service';
+import { SeoService } from '@app/services/seo.service';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   templateUrl: 'login.component.html',
@@ -21,10 +23,18 @@ export class LoginComponent {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private errorCodeService: ErrorCodeService
+    private errorCodeService: ErrorCodeService,
+    private seoService: SeoService,
+    private metaService: Meta,
+    private titleService: Title
     ) { }
 
     ngOnInit() {
+      // honestly I have no idea if I need this junk but I don't want this in search
+      this.titleService.setTitle(`Login - Barrel Wisdom`);
+      this.metaService.updateTag({ name: `robots`, content: `noindex` },`name="robots"`);
+      this.seoService.removeCanonicalURL();
+      
       this.loginForm = this.formBuilder.group({
           username: ['', Validators.required],
           password: ['', Validators.required]

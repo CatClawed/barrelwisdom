@@ -1,10 +1,11 @@
-import { Component, TemplateRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '@app/services/authentication.service';
-import { SettingService } from '@app/services/setting.service';
 import { ErrorCodeService } from '@app/services/errorcode.service';
 import { first } from 'rxjs/operators';
+import { SeoService } from '@app/services/seo.service';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   templateUrl: 'register.component.html',
@@ -24,12 +25,19 @@ export class RegisterComponent {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private settingService: SettingService,
-    private errorCodeService: ErrorCodeService
+    private errorCodeService: ErrorCodeService,
+    private seoService: SeoService,
+    private metaService: Meta,
+    private titleService: Title
     ) {
      }
 
     ngOnInit() {
+      // honestly I have no idea if I need this junk but I don't want this in search
+      this.titleService.setTitle(`Register - Barrel Wisdom`);
+      this.metaService.updateTag({ name: `robots`, content: `noindex` },`name="robots"`);
+      this.seoService.removeCanonicalURL();
+
       this.registerForm = this.formBuilder.group({
           username: ['', Validators.required],
           email: ['', [Validators.email, Validators.required]],

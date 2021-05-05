@@ -4,42 +4,23 @@
 <div *ngIf="!tagName" style="padding-top: 0.5em;"></div>
 
 <div *ngIf="blog">
-    <div *ngFor="let b of blog.results | pair" class="row spacer flex">
-        <div class="col-md-6 mx-auto">
-            <div class="card allheight">
+    <div *ngFor="let blg of blog.results | pair" class="row spacer flex">
+        <div *ngFor="let b of blg" class="col-md-6 mx-auto">
+            <div *ngIf="b" class="card allheight">
                 <div class="aspect-ratio-box">
-                    <a href="blog/{{b[0].slugtitle}}">
+                    <a href="blog/{{b.slugtitle}}">
                         <img src="https://media.barrelwisdom.com/file/barrelwisdom/test/test.png">
                     </a>
                 </div>
                 <div class=headline>
-                    <a href="blog/{{b[0].slugtitle}}">
-                        <h3>{{b[0].title}}</h3>
+                    <a href="blog/{{b.slugtitle}}">
+                        <h3>{{b.title}}</h3>
                     </a>
                     <span class="text-muted" style="font-size: calc(0.8rem + 0.1vw);">
-                        <i class="far fa-calendar-alt"></i> <time class="updated" dateTime="{{b[0].created}}">
-                            {{b[0].created | date:'longDate' }} </time>
+                        <i class="far fa-calendar-alt"></i> <time class="updated" dateTime="{{b.created}}">
+                            {{b.created | date:'longDate' }} </time>
                     </span>
-                    <p style="margin-top: 0.8em;">{{b[0].description}}</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 mx-auto">
-            <div class="card allheight">
-                <div class="aspect-ratio-box">
-                    <a href="blog/{{b[1].slugtitle}}">
-                        <img src="https://media.barrelwisdom.com/file/barrelwisdom/test/neat.png">
-                    </a>
-                </div>
-                <div class=headline>
-                    <a href="blog/{{b[1].slugtitle}}">
-                        <h3>{{b[1].title}}</h3>
-                    </a>
-                    <span class="text-muted" style="font-size: calc(0.8rem + 0.1vw);">
-                        <i class="far fa-calendar-alt"></i> <time class="updated" dateTime="{{b[1].created}}">
-                            {{b[1].created | date:'longDate' }} </time>
-                    </span>
-                    <p style="margin-top: 0.8em;">{{b[1].description}}</p>
+                    <p style="margin-top: 0.8em;">{{b.description}}</p>
                 </div>
             </div>
         </div>

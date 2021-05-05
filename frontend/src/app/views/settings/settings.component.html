@@ -133,4 +133,84 @@
     <div *ngIf="errorInvite" class="text-danger">{{errorInvite}}</div>
     <div *ngIf="invite" class="text-success">{{invite}}</div>
   </tab>
+  <tab *ngIf="user.group == 'admin'" heading="Create Section">
+    <form [formGroup]="sectionForm" (ngSubmit)="createSection()">
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="text-input">URL Name</label>
+        <div class="col-md-10">
+          <input type="text" formControlName="name" class="form-control"
+            [ngClass]="{ 'is-invalid': submittedSection && sectionf.name.errors }" />
+          <div *ngIf="submittedSection && sectionf.name.errors" class="invalid-feedback">
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="text-input">Game Name</label>
+        <div class="col-md-10">
+          <input type="text" formControlName="fullname" class="form-control"
+            [ngClass]="{ 'is-invalid': submittedSection && sectionf.fullname.errors }" />
+          <div *ngIf="submittedSection && sectionf.fullname.errors" class="invalid-feedback">
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-6">
+            <button [disabled]="loading" class="btn btn-primary">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+              Save
+            </button>
+            <div *ngIf="errorSection" class="text-danger">{{errorSection}}</div>
+            <div *ngIf="successSection" class="text-success">Success!</div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </tab>
+  <tab *ngIf="user.group == 'admin'" heading="Nav">
+    <div class="btn-group" dropdown>
+      <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+              aria-controls="dropdown-basic">
+        Section <span class="caret"></span>
+      </button>
+      <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+          role="menu" aria-labelledby="button-basic">
+        <li *ngFor="let section of sections" role="menuitem">
+          <a class="dropdown-item" (click)="loadNav(section.name); $event.preventDefault()">{{section.name}}</a>
+        </li>
+      </ul>
+    </div>
+    <form [formGroup]="navigationForm" (ngSubmit)="submitNav()">
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="text-input">Section</label>
+        <div class="col-md-10">
+          <input type="text" formControlName="section" class="form-control"
+            [ngClass]="{ 'is-invalid': submittedNavigation && navigationf.section.errors }" />
+          <div *ngIf="submittedNavigation && navigationf.section.errors" class="invalid-feedback">
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="text-input">Data</label>
+        <div class="col-md-10">
+          <textarea rows="10" class="form-control" formControlName="data"
+           [ngClass]="{ 'is-invalid': submittedNavigation && navigationf.data.errors }"></textarea>
+          <div *ngIf="submittedNavigation && navigationf.data.errors" class="invalid-feedback">
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-6">
+            <button [disabled]="loading" class="btn btn-primary">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+              Save
+            </button>
+            <div *ngIf="errorNavigation" class="text-danger">{{errorNavigation}}</div>
+            <div *ngIf="successNavigation" class="text-success">Success!</div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </tab>
 </tabset>

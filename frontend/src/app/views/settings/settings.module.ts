@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { SettingsComponent } from './settings.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { SettingsRoutingModule } from './setting-routing.module';
-
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
     imports: [
@@ -12,7 +12,8 @@ import { SettingsRoutingModule } from './setting-routing.module';
       FormsModule,
       ReactiveFormsModule,
       TabsModule,
-      SettingsRoutingModule
+      SettingsRoutingModule,
+      BsDropdownModule.forRoot()
     ],
     declarations: [
       SettingsComponent,

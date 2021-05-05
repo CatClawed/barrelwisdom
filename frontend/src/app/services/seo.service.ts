@@ -19,4 +19,11 @@ export class SeoService {
         element.setAttribute('rel','canonical')
         element.setAttribute('href',canURL)
     }
+
+    removeCanonicalURL() {
+        var element: HTMLLinkElement= this.dom.querySelector(`link[rel='canonical']`) || null
+        if (element) {
+            element.removeAttribute(`rel="canonical"`);
+        }
+    }
 }

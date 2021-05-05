@@ -4,6 +4,8 @@ from games.A22.traits_a22.serializers import A22TraitSerializer, A22TraitSeriali
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import Http404
 
 class A22TraitViewSet(viewsets.ModelViewSet):
     queryset = Trait.objects.all()
@@ -111,96 +113,114 @@ class A22TraitViewSet(viewsets.ModelViewSet):
 # Detailed View
     @action(detail=True, methods=['get'], url_path="en")
     def en_full(self, request, slugname):
-        queryset = (
-            Trait.objects
-            .select_related(
-                'trait_en'
+        try:
+            queryset = (
+                Trait.objects
+                .select_related(
+                    'trait_en'
+                )
+                .prefetch_related(
+                    'item_set',
+                    'item_set__item_en'
+                )
+                .get(slugname=slugname)
             )
-            .prefetch_related(
-                'item_set',
-                'item_set__item_en'
-            )
-            .get(slugname=slugname)
-        )
+        except ObjectDoesNotExist:
+            raise Http404
         serializer = A22TraitSerializerEN(queryset)
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ko")
     def ko_full(self, request, slugname):
-        queryset = (
-            Trait.objects
-            .select_related(
-                'trait_ko'
+        try:
+            queryset = (
+                Trait.objects
+                .select_related(
+                    'trait_ko'
+                )
+                .prefetch_related(
+                    'item_set',
+                    'item_set__item_ko'
+                )
+                .get(slugname=slugname)
             )
-            .prefetch_related(
-                'item_set',
-                'item_set__item_ko'
-            )
-            .get(slugname=slugname)
-        )
+        except ObjectDoesNotExist:
+            raise Http404
         serializer = A22TraitSerializerKO(queryset)
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ja")
     def ja_full(self, request, slugname):
-        queryset = (
-            Trait.objects
-            .select_related(
-                'trait_ja'
+        try:
+            queryset = (
+                Trait.objects
+                .select_related(
+                    'trait_ja'
+                )
+                .prefetch_related(
+                    'item_set',
+                    'item_set__item_ja'
+                )
+                .get(slugname=slugname)
             )
-            .prefetch_related(
-                'item_set',
-                'item_set__item_ja'
-            )
-            .get(slugname=slugname)
-        )
+        except ObjectDoesNotExist:
+            raise Http404
         serializer = A22TraitSerializerJA(queryset)
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="fr")
     def fr_full(self, request, slugname):
-        queryset = (
-            Trait.objects
-            .select_related(
-                'trait_fr'
+        try:
+            queryset = (
+                Trait.objects
+                .select_related(
+                    'trait_fr'
+                )
+                .prefetch_related(
+                    'item_set',
+                    'item_set__item_fr'
+                )
+                .get(slugname=slugname)
             )
-            .prefetch_related(
-                'item_set',
-                'item_set__item_fr'
-            )
-            .get(slugname=slugname)
-        )
+        except ObjectDoesNotExist:
+            raise Http404
         serializer = A22TraitSerializerFR(queryset)
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="sc")
     def sc_full(self, request, slugname):
-        queryset = (
-            Trait.objects
-            .select_related(
-                'trait_sc'
+        try:
+            queryset = (
+                Trait.objects
+                .select_related(
+                    'trait_sc'
+                )
+                .prefetch_related(
+                    'item_set',
+                    'item_set__item_sc'
+                )
+                .get(slugname=slugname)
             )
-            .prefetch_related(
-                'item_set',
-                'item_set__item_sc'
-            )
-            .get(slugname=slugname)
-        )
+        except ObjectDoesNotExist:
+            raise Http404
         serializer = A22TraitSerializerSC(queryset)
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="tc")
     def tc_full(self, request, slugname):
-        queryset = (
-            Trait.objects
-            .select_related(
-                'trait_tc'
+        try:
+            queryset = (
+                Trait.objects
+                .select_related(
+                    'trait_tc'
+                )
+                .prefetch_related(
+                    'item_set',
+                    'item_set__item_tc'
+                )
+                .get(slugname=slugname)
             )
-            .prefetch_related(
-                'item_set',
-                'item_set__item_tc'
-            )
-            .get(slugname=slugname)
-        )
+        except ObjectDoesNotExist:
+            raise Http404
         serializer = A22TraitSerializerTC(queryset)
         return Response(serializer.data)

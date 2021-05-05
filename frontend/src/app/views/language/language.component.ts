@@ -37,7 +37,7 @@ export class LanguageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.currentLanguage = this.router.url.split('/').pop();
+    this.currentLanguage = this.router.url.split('/').pop().split('#')[0];
     if(this.section == "ryza2"){
         this.languages = environment.ryza2_languages;
         this.langName = environment.ryza2_languages[this.currentLanguage];

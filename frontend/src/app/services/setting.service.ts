@@ -1,10 +1,9 @@
 // Catch all for the settings page
 
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Observable, of, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
 
 @Injectable({ providedIn: 'root' })
@@ -34,12 +33,6 @@ export class SettingService {
     return this.http.get<any>(`${environment.apiUrl}/invite/${code}/`);
   }
 
-  // this will only ever be updated to true
-  updateInvite(code: string) {
-      let used = true;
-      return this.http.put(`${environment.apiUrl}/invite/${code}/`, { used });
-  }
-
   getProfile(user: number): Observable<any> {
       return this.http.get<any>(`${environment.apiUrl}/profile/${user}/`);
   }
@@ -47,4 +40,21 @@ export class SettingService {
   updateProfile(user: number, bio: string, website: string, avatar: string) {
     return this.http.put(`${environment.apiUrl}/profile/${user}/`, { user, bio, website, avatar });
   }
+
+  getNavigation(section: string) {
+    return this.http.get<any>(`${environment.apiUrl}/nav/${section}/`);
+  }
+
+  updateNavigation(section: string, data: string) {
+    return this.http.put(`${environment.apiUrl}/nav/${section}/`, { section, data });
+  }
+
+  createSection(name: string, fullname: string) {
+    return this.http.post(`${environment.apiUrl}/section/`, { name, fullname });
+  }
+
+  getSections() {
+    return this.http.get<any>(`${environment.apiUrl}/section/`);
+  }
+
 }

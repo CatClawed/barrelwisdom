@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from games.A22.items_a22.models import Item, IngEffects, Ingredient, EffectLine, RecipeMorphs, EVLinkItems, UsableItem, ItemLocations, ShopDevelop
+from games.A22.items_a22.models import Item, IngEffects, Ingredient, EffectLine, RecipeMorphs, EVLinkItems, UsableItem, ItemLocations, ShopDevelop, ItemRegions, ItemAreas
 from games.A22.traits_a22.serializers import A22TraitSerializerSimpleEN, A22TraitSerializerSimpleJA, A22TraitSerializerSimpleKO, A22TraitSerializerSimpleFR, A22TraitSerializerSimpleSC, A22TraitSerializerSimpleTC, A22ItemSerializerSimpleEN, A22ItemSerializerSimpleJA, A22ItemSerializerSimpleKO, A22ItemSerializerSimpleFR, A22ItemSerializerSimpleSC, A22ItemSerializerSimpleTC
 from games.A22.locations_a22.serializers import A22LocationSerializerEN, A22LocationSerializerJA, A22LocationSerializerKO, A22LocationSerializerFR, A22LocationSerializerSC, A22LocationSerializerTC
 from games.A22.categories_a22.serializers import A22CategorySerializerEN, A22CategorySerializerJA, A22CategorySerializerKO, A22CategorySerializerFR, A22CategorySerializerSC, A22CategorySerializerTC
@@ -494,64 +494,151 @@ class A22ItemSerializerTCFull(serializers.ModelSerializer):
 
 # Item Locations
 class A22ItemLocationSerializerEN(serializers.ModelSerializer):
-    slug = serializers.CharField(source='area.slugname')
-    area = serializers.CharField(source='area.loc_en.name')
     rank1 = A22ItemSerializerSimpleEN()
     rank2 = A22ItemSerializerSimpleEN(read_only=True)
     rank3 = A22ItemSerializerSimpleEN(read_only=True)
     class Meta:
         model = ItemLocations
-        fields = ['slug', 'area', 'rank1', 'rank2', 'rank3', 'priority1', 'priority2', 'priority3', 'tool']
+        fields = ['rank1', 'rank2', 'rank3', 'priority1', 'priority2', 'priority3', 'tool']
 
 class A22ItemLocationSerializerJA(serializers.ModelSerializer):
-    slug = serializers.CharField(source='area.slugname')
-    area = serializers.CharField(source='area.loc_ja.name')
     rank1 = A22ItemSerializerSimpleJA()
     rank2 = A22ItemSerializerSimpleJA(read_only=True)
     rank3 = A22ItemSerializerSimpleJA(read_only=True)
     class Meta:
         model = ItemLocations
-        fields = ['slug', 'area', 'rank1', 'rank2', 'rank3', 'priority1', 'priority2', 'priority3', 'tool']
+        fields = ['rank1', 'rank2', 'rank3', 'priority1', 'priority2', 'priority3', 'tool']
 
 class A22ItemLocationSerializerKO(serializers.ModelSerializer):
-    slug = serializers.CharField(source='area.slugname')
-    area = serializers.CharField(source='area.loc_ko.name')
     rank1 = A22ItemSerializerSimpleKO()
     rank2 = A22ItemSerializerSimpleKO(read_only=True)
     rank3 = A22ItemSerializerSimpleKO(read_only=True)
     class Meta:
         model = ItemLocations
-        fields = ['slug', 'area', 'rank1', 'rank2', 'rank3', 'priority1', 'priority2', 'priority3', 'tool']
+        fields = ['rank1', 'rank2', 'rank3', 'priority1', 'priority2', 'priority3', 'tool']
 
 class A22ItemLocationSerializerFR(serializers.ModelSerializer):
-    slug = serializers.CharField(source='area.slugname')
-    area = serializers.CharField(source='area.loc_fr.name')
     rank1 = A22ItemSerializerSimpleFR()
     rank2 = A22ItemSerializerSimpleFR(read_only=True)
     rank3 = A22ItemSerializerSimpleFR(read_only=True)
     class Meta:
         model = ItemLocations
-        fields = ['slug', 'area', 'rank1', 'rank2', 'rank3', 'priority1', 'priority2', 'priority3', 'tool']
+        fields = ['rank1', 'rank2', 'rank3', 'priority1', 'priority2', 'priority3', 'tool']
 
 class A22ItemLocationSerializerSC(serializers.ModelSerializer):
-    slug = serializers.CharField(source='area.slugname')
-    area = serializers.CharField(source='area.loc_sc.name')
     rank1 = A22ItemSerializerSimpleSC()
     rank2 = A22ItemSerializerSimpleSC(read_only=True)
     rank3 = A22ItemSerializerSimpleSC(read_only=True)
     class Meta:
         model = ItemLocations
-        fields = ['slug', 'area', 'rank1', 'rank2', 'rank3', 'priority1', 'priority2', 'priority3', 'tool']
+        fields = ['rank1', 'rank2', 'rank3', 'priority1', 'priority2', 'priority3', 'tool']
 
 class A22ItemLocationSerializerTC(serializers.ModelSerializer):
-    slug = serializers.CharField(source='area.slugname')
-    area = serializers.CharField(source='area.loc_tc.name')
     rank1 = A22ItemSerializerSimpleTC()
     rank2 = A22ItemSerializerSimpleTC(read_only=True)
     rank3 = A22ItemSerializerSimpleTC(read_only=True)
     class Meta:
         model = ItemLocations
-        fields = ['slug', 'area', 'rank1', 'rank2', 'rank3', 'priority1', 'priority2', 'priority3', 'tool']
+        fields = ['rank1', 'rank2', 'rank3', 'priority1', 'priority2', 'priority3', 'tool']
+
+# Areas
+class A22ItemAreasSerlaizerEN(serializers.ModelSerializer):
+    slugname = serializers.CharField(source="area.slugname")
+    name = serializers.CharField(source="area.loc_en.name")
+    gatherdata = A22ItemLocationSerializerEN(many=True)
+    class Meta:
+        model = ItemAreas
+        fields = ['slugname', 'name', 'gatherdata', 'text']
+
+class A22ItemAreasSerlaizerJA(serializers.ModelSerializer):
+    slugname = serializers.CharField(source="area.slugname")
+    name = serializers.CharField(source="area.loc_ja.name")
+    gatherdata = A22ItemLocationSerializerJA(many=True)
+    class Meta:
+        model = ItemAreas
+        fields = ['slugname', 'name', 'gatherdata', 'text']
+
+class A22ItemAreasSerlaizerKO(serializers.ModelSerializer):
+    slugname = serializers.CharField(source="area.slugname")
+    name = serializers.CharField(source="area.loc_ko.name")
+    gatherdata = A22ItemLocationSerializerKO(many=True)
+    class Meta:
+        model = ItemAreas
+        fields = ['slugname', 'name', 'gatherdata', 'text']
+
+class A22ItemAreasSerlaizerFR(serializers.ModelSerializer):
+    slugname = serializers.CharField(source="area.slugname")
+    name = serializers.CharField(source="area.loc_fr.name")
+    gatherdata = A22ItemLocationSerializerFR(many=True)
+    class Meta:
+        model = ItemAreas
+        fields = ['slugname', 'name', 'gatherdata', 'text']
+
+class A22ItemAreasSerlaizerSC(serializers.ModelSerializer):
+    slugname = serializers.CharField(source="area.slugname")
+    name = serializers.CharField(source="area.loc_sc.name")
+    gatherdata = A22ItemLocationSerializerSC(many=True)
+    class Meta:
+        model = ItemAreas
+        fields = ['slugname', 'name', 'gatherdata', 'text']
+
+class A22ItemAreasSerlaizerTC(serializers.ModelSerializer):
+    slugname = serializers.CharField(source="area.slugname")
+    name = serializers.CharField(source="area.loc_tc.name")
+    gatherdata = A22ItemLocationSerializerTC(many=True)
+    class Meta:
+        model = ItemAreas
+        fields = ['slugname', 'name', 'gatherdata', 'text']
+
+# regions 
+
+class A22ItemRegionSerializerEN(serializers.ModelSerializer):
+    slugname = serializers.CharField(source="region.slugname")
+    name = serializers.CharField(source="region.loc_en.name")
+    areas = A22ItemAreasSerlaizerEN(many=True)
+    class Meta:
+        model = ItemRegions
+        fields = ['slugname', 'name', 'areas']
+
+class A22ItemRegionSerializerJA(serializers.ModelSerializer):
+    slugname = serializers.CharField(source="region.slugname")
+    name = serializers.CharField(source="region.loc_ja.name")
+    areas = A22ItemAreasSerlaizerJA(many=True)
+    class Meta:
+        model = ItemRegions
+        fields = ['slugname', 'name', 'areas']
+
+class A22ItemRegionSerializerKO(serializers.ModelSerializer):
+    slugname = serializers.CharField(source="region.slugname")
+    name = serializers.CharField(source="region.loc_ko.name")
+    areas = A22ItemAreasSerlaizerKO(many=True)
+    class Meta:
+        model = ItemRegions
+        fields = ['slugname', 'name', 'areas']
+
+class A22ItemRegionSerializerFR(serializers.ModelSerializer):
+    slugname = serializers.CharField(source="region.slugname")
+    name = serializers.CharField(source="region.loc_fr.name")
+    areas = A22ItemAreasSerlaizerFR(many=True)
+    class Meta:
+        model = ItemRegions
+        fields = ['slugname', 'name', 'areas']
+
+class A22ItemRegionSerializerSC(serializers.ModelSerializer):
+    slugname = serializers.CharField(source="region.slugname")
+    name = serializers.CharField(source="region.loc_sc.name")
+    areas = A22ItemAreasSerlaizerSC(many=True)
+    class Meta:
+        model = ItemRegions
+        fields = ['slugname', 'name', 'areas']
+
+class A22ItemRegionSerializerTC(serializers.ModelSerializer):
+    slugname = serializers.CharField(source="region.slugname")
+    name = serializers.CharField(source="region.loc_tc.name")
+    areas = A22ItemAreasSerlaizerTC(many=True)
+    class Meta:
+        model = ItemRegions
+        fields = ['slugname', 'name', 'areas']
 
 # Shop Develop 
 

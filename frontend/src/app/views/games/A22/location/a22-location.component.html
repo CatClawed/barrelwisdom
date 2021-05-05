@@ -1,0 +1,56 @@
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+<div *ngIf="!error">
+    <nav style="margin-top: 1em;" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
+            <li class="breadcrumb-item"><a href="/ryza2">Atelier Ryza 2</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{region.name}}</li>
+        </ol>
+    </nav>
+    <h1>{{region.name}}</h1>
+    <div style="justify-content: space-between; margin-left: 0.5em; margin-right: 0.5em;" class="row">
+    <div class="table-of-contents">
+        <b>Table of Contents</b>
+        <ol class="toc-list">
+            <li *ngFor="let area of region.areas">
+                <a [routerLink]='"."' [fragment]="area.slugname">{{area.name}}</a>
+            </li>
+        </ol>
+    </div>
+    <language-settings class="col-md-3" section="ryza2"></language-settings>
+    </div>
+    <div id="{{area.slugname}}" *ngFor="let area of region.areas">
+        <h2>{{area.name}}</h2>
+        <table class="table table-shrink table-bordered" >
+            <tr>
+                <th>Tool</th>
+                <th style="text-align: center;"><i class="fas fa-star"></i></th>
+                <th style="text-align: center;"><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
+                <th style="text-align: center;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
+            </tr>
+            <tr *ngFor="let node of area.gatherdata">
+                <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'All' || node.tool == 'Staff'"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-staff"></i></td>
+                <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'Hand' || !node.tool"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-gather"></i></td>
+                <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'Axe'"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-axe"></i></td>
+                <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'Sickle'"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-sickle"></i></td>
+                <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'Bomb Rod'"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-bomb-rod"></i></td>
+                <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'Bug Net'"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-bug-net"></i></td>
+                <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'Fishing Rod'"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-fishing-rod"></i></td>
+                <td *ngIf="node.tool != 'Dig'">               <a href="ryza2/items/{{node.rank1.slugname}}">{{node.rank1.name}}</a><br/>{{node.priority1}}</td>
+                <td *ngIf="node.rank2  && node.tool != 'Dig'"><a href="ryza2/items/{{node.rank2.slugname}}">{{node.rank2.name}}</a><br/>{{node.priority2}}</td>
+                <td *ngIf="node.rank3  && node.tool != 'Dig'"><a href="ryza2/items/{{node.rank3.slugname}}">{{node.rank3.name}}</a><br/>{{node.priority3}}</td>
+                <td *ngIf="!node.rank2 && node.tool != 'Dig'"></td>
+                <td *ngIf="!node.rank3 && node.tool != 'Dig'"></td>
+            </tr>
+            <tr *ngIf="dig">
+                <td style="text-align: center;vertical-align: middle;"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-race-weasel-king"></i></td>
+                <td colspan="3">
+                    <div style="column-count: 3;">
+                    <ul style="padding-left:1em;" *ngFor="let node of area.gatherdata">
+                        <li *ngIf="node.tool == 'Dig'"><a href="ryza2/items/{{node.rank1.slugname}}">{{node.rank1.name}}</a></li>
+                    </ul>
+                </div>
+            </tr>
+        </table>
+    </div>
+</div>

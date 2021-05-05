@@ -41,6 +41,14 @@
   font-size: 2.4em;
   padding-right: 0.5em;
 }
+
+@media screen and (max-width: 576px) {
+  .atelier-lg {
+    font-size: 4vw;
+  }
+}
+
+
 .atelier-16 {
   font-size: 16px;
 }
@@ -124,17 +132,43 @@ select {
   float: right;
 }
 
-.modal-dialog {
-  max-width: 100% !important;
-  padding-left: 1em !important;
-  padding-right: 1em !important;
-  font-size: calc(1rem + 0.1vw) !important;
+
+
+.modal-body {
+  position:absolute !important;
+  width: 55%;
+}
+
+@media screen and (max-width: 576px) {
+  .modal-body {
+    width:100% !important;
+    padding:0 !important;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .modal-dialogue {
+    max-width: 100% !important;
+    padding-left:0.2em !important;
+    padding-right:0 !important;
+    margin:0 !important;
+    font-size: calc(1rem + 0.1vw) !important;
+  }
+}
+
+@media screen and (min-width: 577px) {
+  .modal-dialog {
+    max-width: 100% !important;
+    padding-left: 1em !important;
+    padding-right: 1em !important;
+    font-size: calc(1rem + 0.1vw) !important;
+  }
 }
 
 .modal-content {
   background-color: transparent !important;
   border: transparent !important;
-  max-width: max-content !important;
+  //max-width: max-content !important;
   align-items: center;
   margin: auto;
 }
@@ -171,6 +205,12 @@ select {
 .table {
   background-color: white;
   background-image: url("https://media.barrelwisdom.com/file/barrelwisdom/main/images/clean_textile.png");
+}
+
+@media screen and (max-width: 576px) {
+  .table-shrink {
+    font-size: 2.5vw;
+  }
 }
 
 /* Background pattern from Toptal Subtle Patterns */
@@ -245,6 +285,15 @@ h4 {
   font-size: calc(1rem + 0.1vw) !important;
 }
 
+.table-of-contents {
+  border: 2px solid lightgray;
+  background-color: white;
+  background-image: url("https://media.barrelwisdom.com/file/barrelwisdom/main/images/clean_textile.png");
+  padding: 0.8em;
+  border-radius: 10px;
+  width: max-content;
+}
+
 // Major components (header, main, sidebar, etc.)
 
 .app-header {
@@ -263,6 +312,10 @@ h4 {
 
 .sidebar {
   background-color: $sidebar !important;
+}
+
+.sidebar-fixed .sidebar {
+  height: calc(100% - 55px) !important;
 }
 
 .sidebar .nav-link.active {
@@ -292,10 +345,7 @@ h4 {
 
 .app-body {
   margin-top: 55px;
-}
-
-.app-body .main {
-  overflow: hidden;
+  overflow-x: inherit !important;
 }
 
 .bg-secondary {
@@ -412,6 +462,18 @@ ul.pagination {
 }
 
 // Game Data Pages
+
+.card-display-bottom {
+  display:flex;
+  align-items: flex-end;
+}
+
+.image-display {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  display: block;
+}
 
 // Create page
 
