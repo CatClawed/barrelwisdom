@@ -1,12 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Location } from '@angular/common';
-import { Trait, ItemName } from '@app/interfaces/a22';
-import { ErrorCodeService } from "@app/services/errorcode.service";
-import { Observable } from 'rxjs';
-import { concatMap, map, startWith } from 'rxjs/operators';
+import { Router } from '@angular/router';
 import { environment } from '@environments/environment';
 import { LanguageService } from '@app/services/language.service';
 
@@ -25,10 +18,7 @@ export class LanguageComponent implements OnInit {
   languages;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
-    private location: Location,
     private languageService: LanguageService,
   ) { 
     this.router.routeReuseStrategy.shouldReuseRoute = function () {

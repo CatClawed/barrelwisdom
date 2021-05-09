@@ -1,0 +1,181 @@
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+
+<div *ngIf="!error">
+<nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/ryza2">Atelier Ryza 2</a></li>
+    <li class="breadcrumb-item"><a href="/ryza2/items">Items</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{item.name}}</li>
+  </ol>
+</nav>
+<div class="mx-auto row">
+<div class="{{colset}} card griddisplay">
+    <div class="card-body">
+        <div class="flex">
+            <h4 class="card-title card-icon-space">{{item.name}}</h4>
+            <div class="card-icon-position">
+                <b style="padding-right:0.5em;">LV {{item.level}}</b>
+                <i *ngIf="item.itemtype == 'Attack'" class="atelier atelier-ryza2-type-attack"></i>
+                <i *ngIf="item.itemtype == 'Heal'" class="atelier atelier-ryza2-type-heal"></i>
+                <i *ngIf="item.itemtype == 'Debuff'" class="atelier atelier-ryza2-type-debuff"></i>
+                <i *ngIf="item.itemtype == 'Buff'" class="atelier atelier-ryza2-type-buff"></i>
+                <i *ngIf="item.itemtype == 'Weapon'" class="atelier atelier-ryza2-type-weapon"></i>
+                <i *ngIf="item.itemtype == 'Armor'" class="atelier atelier-ryza2-type-armor"></i>
+                <i *ngIf="item.itemtype == 'Accessory'" class="atelier atelier-ryza2-type-accessory"></i>
+                <i *ngIf="item.itemtype == 'Rare Item'" class="atelier atelier-ryza2-category-key-items"></i>
+                <i *ngIf="item.itemtype == 'Synthesis'" class="atelier atelier-ryza2-type-synthesis"></i>
+                <i *ngIf="item.itemtype == 'Material'" class="atelier atelier-ryza2-material"></i>
+                <i *ngIf="item.itemtype == 'Essence'" class="atelier atelier-ryza2-category-essence"></i>
+                <i *ngIf="item.itemtype == 'Field'" class="atelier atelier-ryza2-category-tools"></i>
+                <br *ngIf="item.isDLC" /><span *ngIf="item.isDLC" style="float:right;margin-right:0.5em;" class="badge bg-secondary">DLC</span>
+            </div>
+          </div>
+          <div class="card-display-bottom">
+             <img class="image-display" loading="lazy" src="/media/games/ryza2/items/{{item.slugname}}.png">
+          </div>
+          <div class="card-text">
+              <p>{{item.description}}</p>
+              <p *ngIf="item.note"><b>Note:</b> {{item.note}}</p>
+              <div class="row" style="justify-content: space-between;margin: 0.5em;">
+                <table>
+                  <tr *ngFor="let cat of item.category">
+                      <td style="text-align: center;"><i class="atelier atelier-ryza2-category-{{cat.slugname}}"></i></td><td>{{cat.name}}</td>
+                  </tr>
+                </table>
+                <table>
+                  <tr>
+                      <td colspan=2>
+                          <i style="padding:0;color:#f03a02;" *ngIf="item.fire" class="atelier atelier-ryza2-fire"></i>
+                          <i style="padding:0;color:#04b5db;" *ngIf="item.ice" class="atelier atelier-ryza2-ice"></i>
+                          <i style="padding:0;color:#e3bb05;" *ngIf="item.lightning" class="atelier atelier-ryza2-lightning"></i>
+                          <i style="padding:0;color:#589b1d;" *ngIf="item.wind" class="atelier atelier-ryza2-wind"></i>
+                          {{item.elementvalue}}
+                      </td>
+                  </tr>
+                </table>
+              </div>
+              <p *ngIf="item.shop"><i class="atelier atelier-ryza2-shop"></i><b>Shop:</b> {{item.shop.name}}</p>
+              <b *ngIf="item.location" >Location:</b>
+              <div *ngIf="item.location" style="column-count: 2;">
+                <ul style="padding-left:1.1em;">
+                    <li *ngFor="let loc of item.location"><a *ngIf="loc.reg" href="/ryza2/locations/{{loc.reg}}">{{loc.name}}</a><a *ngIf="!loc.reg" href="/ryza2/locations/{{loc.slugname}}">{{loc.name}}</a></li>
+                </ul>
+              </div>
+              <b *ngIf="item.monster_set" >Dropped by:</b>
+              <div *ngIf="item.monster_set" style="column-count: 2;">
+                 <ul style="padding-left:1.1em;">
+                     <li *ngFor="let mon of item.monster_set"><a href="/ryza2/monsters/{{mon.slugname}}">{{mon.name}}</a></li>
+                 </ul>
+              </div>
+              <ng-container *ngIf="item.itemtype == 'Material'">
+                  <ng-container *ngIf="item.trait">
+                    <b>Trait:</b>
+                    <ul>
+                        <li *ngFor="let trait of item.trait"><a href="ryza2/traits/{{trait.slugname}}">{{trait.name}}</a></li>
+                    </ul>
+                  </ng-container>
+                  <p *ngIf="item.effectline_set">
+                    <b>Effect: </b> <a href="ryza2/effects/{{item.effectline_set[0].effslug}}">{{item.effectline_set[0].effname}}</a>
+                  </p>
+              </ng-container>
+              <ng-container *ngIf="item.itemtype != 'Material' && item.ingredient_set">
+                  <p *ngIf="item.skilltree"><b>Acquired from skill tree.</b></p>
+                  <p *ngIf="item.evlinkitems_set"><b>EV Link: <a href="ryza2/items/{{item.evlinkitems_set[0].item1.slugname}}">{{item.evlinkitems_set[0].item1.name}}</a> + <a href="ryza2/items/{{item.evlinkitems_set[0].item2.slugname}}">{{item.evlinkitems_set[0].item2.name}}</a></b></p>
+                  <ng-container *ngIf="item.recipemorphs_set">
+                    <b>Morph Chain:</b>
+                    <div style="column-count: 2;">
+                    <ol style="padding-left:1.1em;">
+                        <li *ngFor="let recipe of item.recipemorphs_set"><a href="ryza2/items/{{recipe.parent.slugname}}">{{recipe.parent.name}}</a></li>
+                    </ol>
+                    </div>
+                  </ng-container>
+                  <ng-container *ngIf="item.effectline_set">
+                      <table class="table">
+                        <tr><th colspan=2 style="text-align: center;background-color:rgba(211, 211, 211, 0.3);">Effects</th></tr>
+                        <tr>
+                          <td style="vertical-align: middle;"><b>1</b></td><td>
+                          <a *ngIf="default[0][1] != 'none'" href="ryza2/effects/{{default[0][1]}}" class="badge bg-secondary badge-list">{{default[0][0]}}</a> 
+                          <span *ngIf="default[0][1] == 'none'" class="badge bg-secondary badge-list">{{default[0][0]}}</span>
+                          <a *ngFor="let e of eff1" class="badge bg-primary badge-list" href="ryza2/effects/{{e[1]}}">{{e[0]}}</a>
+                        </td>
+                        </tr>
+                        <tr *ngIf="eff2.length > 0">
+                          <td style="vertical-align: middle;"><b>2</b></td><td>
+                          <a *ngIf="default[1][1] != 'none'" href="ryza2/effects/{{default[1][1]}}" class="badge bg-secondary badge-list">{{default[1][0]}}</a> 
+                          <span *ngIf="default[1][1] == 'none'" class="badge bg-secondary badge-list">{{default[1][0]}}</span>
+                          <a *ngFor="let e of eff2" class="badge bg-primary badge-list" href="ryza2/effects/{{e[1]}}">{{e[0]}}</a>
+                        </td>
+                        </tr>
+                        <tr *ngIf="eff3.length > 0">
+                          <td style="vertical-align: middle;"><b>3</b></td><td>
+                          <a *ngIf="default[2][1] != 'none'" href="ryza2/effects/{{default[2][1]}}" class="badge bg-secondary badge-list">{{default[2][0]}}</a> 
+                          <span *ngIf="default[2][1] == 'none'" class="badge bg-secondary badge-list">{{default[2][0]}}</span>
+                          <a *ngFor="let e of eff3" class="badge bg-primary badge-list" href="ryza2/effects/{{e[1]}}">{{e[0]}}</a>
+                        </td>
+                        </tr>
+                        <tr *ngIf="eff4.length > 0">
+                          <td style="vertical-align: middle;"><b>4</b></td><td>
+                          <a *ngIf="default[3][1] != 'none'" href="ryza2/effects/{{default[3][1]}}" class="badge bg-secondary badge-list">{{default[3][0]}}</a> 
+                          <span *ngIf="default[3][1] == 'none'" class="badge bg-secondary badge-list">{{default[3][0]}}</span>
+                          <a *ngFor="let e of eff4" class="badge bg-primary badge-list" href="ryza2/effects/{{e[1]}}">{{e[0]}}</a>
+                        </td>
+                        </tr>
+                      </table>
+                  </ng-container>
+                  <ng-container *ngIf="item.usableitem_set">
+                    <table class="table table-shrink">
+                      <tr style="background-color:rgba(211, 211, 211, 0.3);">
+                        <th style="text-align: center;">WT</th>
+                        <th style="text-align: center;">Stun</th>
+                        <th style="text-align: center;">CC</th>
+                        <th style="text-align: center;">Cool Time</th>
+                        <th style="text-align: center;">Range</th>
+                      </tr>
+                      <tr>
+                        <td style="text-align: center;">{{item.usableitem_set[0].wt}}</td>
+                        <td style="text-align: center;">{{item.usableitem_set[0].stun}}</td>
+                        <td style="text-align: center;">{{item.usableitem_set[0].cc}}</td>
+                        <td style="text-align: center;">{{item.usableitem_set[0].cooltime}}</td>
+                        <td style="text-align: center;">{{item.usableitem_set[0].effrange}}</td>
+                      </tr>
+                    </table>
+                  </ng-container>
+                  <ng-container *ngIf="item.ingredient_set">
+                    <table class="table table-shrink">
+                      <tr><th style="text-align: center;background-color:rgba(211, 211, 211, 0.3);" colspan=2>Synthesis</th></tr>
+                      <tr *ngFor="let ing of item.ingredient_set">
+                        <td style="text-align: center;">
+                          <a *ngIf="ing.item" href="/ryza2/items/{{ing.item.slugname}}">{{ing.item.name}}</a>
+                          <a *ngIf="ing.category" href="/ryza2/categories/{{ing.category.slugname}}">{{ing.category.name}}</a><br />
+                          <i style="color:#f03a02;" *ngIf="ing.fire"  class="atelier atelier-ryza2-fire"></i>
+                          <i style="color:#04b5db;" *ngIf="ing.ice"  class="atelier atelier-ryza2-ice"></i>
+                          <i style="color:#e3bb05;" *ngIf="ing.lightning"  class="atelier atelier-ryza2-lightning"></i>
+                          <i style="color:#589b1d;" *ngIf="ing.wind"  class="atelier atelier-ryza2-wind"></i>
+                        </td>
+                        <td>
+                          <ng-container *ngFor="let i of ing.ingeffects_set">
+                            <ng-template #effPopover>
+                              <ng-container *ngIf="ing.fire">     <i style="color:#f03a02;" class="atelier atelier-ryza2-fire"     ></i> x {{i.value}}</ng-container>
+                              <ng-container *ngIf="ing.ice">      <i style="color:#04b5db;" class="atelier atelier-ryza2-ice"      ></i> x {{i.value}}</ng-container>
+                              <ng-container *ngIf="ing.lightning"><i style="color:#e3bb05;" class="atelier atelier-ryza2-lightning"></i> x {{i.value}}</ng-container>
+                              <ng-container *ngIf="ing.wind">     <i style="color:#589b1d;" class="atelier atelier-ryza2-wind"     ></i> x {{i.value}}</ng-container>
+                              <ng-container *ngIf="i.essence"><br /><i class="atelier atelier-ryza2-category-essence"></i> Essence Required</ng-container>
+                            </ng-template>
+                            <a *ngIf="i.noneffect && !i.essence" href="javascript:void(0)" [popover]="effPopover" popoverTitle="Synth Data" class="badge bg-primary badge-list">{{i.noneffect}}</a>
+                            <a *ngIf="i.noneffect && i.essence"  href="javascript:void(0)" [popover]="effPopover" popoverTitle="Synth Data" class="badge bg-secondary badge-list">{{i.noneffect}}</a>
+                            <a *ngIf="i.effect    && !i.essence" href="javascript:void(0)" [popover]="effPopover" popoverTitle="Synth Data" class="badge bg-primary badge-list">{{i.effect}}</a>
+                            <a *ngIf="i.effect    && i.essence"  href="javascript:void(0)" [popover]="effPopover" popoverTitle="Synth Data" class="badge bg-secondary badge-list">{{i.effect}}</a>
+                            <a *ngIf="i.morph" class="badge bg-success badge-list" href="ryza2/items/{{i.morph.slugname}}">{{i.morph.name}}</a>
+                          </ng-container>
+                        </td>
+                      </tr>
+                    </table>
+                  </ng-container>
+
+              </ng-container>
+          </div>
+    </div>
+</div>
+<language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="ryza2"></language-settings>
+</div>

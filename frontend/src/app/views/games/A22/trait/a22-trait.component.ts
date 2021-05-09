@@ -59,7 +59,7 @@ export class A22TraitComponent implements OnInit {
       this.metaService.updateTag({ property: `og:title`, content: `${trait.name}` }, `property="og:title"`);
       this.metaService.updateTag({ property: `og:description`, content: `${trait.description}` },`property="og:description"`);
       this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
-      this.metaService.updateTag({ property: `og:image`, content: `https://media.barrelwisdom.com/file/barrelwisdom/main/barrel.png` }, `property="og:image"`);
+      this.metaService.updateTag({ property: `og:image`, content: `/media/main/barrel.png` }, `property="og:image"`);
     },
     error => {
       this.error = true,

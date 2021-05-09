@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from games.A22.items_a22.models import Item, IngEffects, Ingredient, EffectLine, RecipeMorphs, EVLinkItems, UsableItem, ItemLocations, ShopDevelop, ItemRegions, ItemAreas
+from games.A22.items_a22.models import Item, IngEffects, Ingredient, EffectLine, RecipeMorphs, EVLinkItems, UsableItem, ItemLocations, ShopDevelop, ItemRegions, ItemAreas, CategoryItems
 from games.A22.traits_a22.serializers import A22TraitSerializerSimpleEN, A22TraitSerializerSimpleJA, A22TraitSerializerSimpleKO, A22TraitSerializerSimpleFR, A22TraitSerializerSimpleSC, A22TraitSerializerSimpleTC, A22ItemSerializerSimpleEN, A22ItemSerializerSimpleJA, A22ItemSerializerSimpleKO, A22ItemSerializerSimpleFR, A22ItemSerializerSimpleSC, A22ItemSerializerSimpleTC
 from games.A22.locations_a22.serializers import A22LocationSerializerEN, A22LocationSerializerJA, A22LocationSerializerKO, A22LocationSerializerFR, A22LocationSerializerSC, A22LocationSerializerTC
 from games.A22.categories_a22.serializers import A22CategorySerializerEN, A22CategorySerializerJA, A22CategorySerializerKO, A22CategorySerializerFR, A22CategorySerializerSC, A22CategorySerializerTC
@@ -71,6 +71,8 @@ class A22EffectLineSerializerTC(serializers.ModelSerializer):
 
 # Simple Ingredient View, for filtering...
 
+
+
 class A22IngredientSerializerENSimple(serializers.ModelSerializer):
     item = serializers.CharField(source='item.item_en.name', read_only=True)
     category = serializers.CharField(source='category.cat_en.name', read_only=True)
@@ -97,7 +99,7 @@ class A22IngredientSerializerFRSimple(serializers.ModelSerializer):
     category = serializers.CharField(source='category.cat_fr.name', read_only=True)
     class Meta:
         model = Ingredient
-        fields = [ 'item', 'category']
+        fields = ['item', 'category']
 
 class A22IngredientSerializerSCSimple(serializers.ModelSerializer):
     item = serializers.CharField(source='item.item_sc.name', read_only=True)
@@ -342,6 +344,10 @@ class A22ItemSerializerEN(serializers.ModelSerializer):
     class Meta:
         model = Item
         fields = ['slugname', 'name', 'index', 'itemtype', 'isDLC', 'ice', 'wind', 'lightning', 'fire', 'elementvalue', 'category', 'ingredient_set']
+    def to_representation(self, instance):
+        result = super(A22ItemSerializerEN, self).to_representation(instance)
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}, False])
     
 class A22ItemSerializerJA(serializers.ModelSerializer):
     name = serializers.CharField(source='item_ja.name')
@@ -350,6 +356,10 @@ class A22ItemSerializerJA(serializers.ModelSerializer):
     class Meta:
         model = Item
         fields = ['slugname', 'name', 'index', 'itemtype', 'isDLC', 'ice', 'wind', 'lightning', 'fire', 'elementvalue', 'category', 'ingredient_set']
+    def to_representation(self, instance):
+        result = super(A22ItemSerializerJA, self).to_representation(instance)
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}, False])
 
 class A22ItemSerializerKO(serializers.ModelSerializer):
     name = serializers.CharField(source='item_ko.name')
@@ -358,6 +368,10 @@ class A22ItemSerializerKO(serializers.ModelSerializer):
     class Meta:
         model = Item
         fields = ['slugname', 'name', 'index', 'itemtype', 'isDLC', 'ice', 'wind', 'lightning', 'fire', 'elementvalue', 'category', 'ingredient_set']
+    def to_representation(self, instance):
+        result = super(A22ItemSerializerKO, self).to_representation(instance)
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}, False])
 
 class A22ItemSerializerFR(serializers.ModelSerializer):
     name = serializers.CharField(source='item_fr.name')
@@ -366,6 +380,10 @@ class A22ItemSerializerFR(serializers.ModelSerializer):
     class Meta:
         model = Item
         fields = ['slugname', 'name', 'index', 'itemtype', 'isDLC', 'ice', 'wind', 'lightning', 'fire', 'elementvalue', 'category', 'ingredient_set']
+    def to_representation(self, instance):
+        result = super(A22ItemSerializerFR, self).to_representation(instance)
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}, False])
 
 class A22ItemSerializerSC(serializers.ModelSerializer):
     name = serializers.CharField(source='item_sc.name')
@@ -374,6 +392,10 @@ class A22ItemSerializerSC(serializers.ModelSerializer):
     class Meta:
         model = Item
         fields = ['slugname', 'name', 'index', 'itemtype', 'isDLC', 'ice', 'wind', 'lightning', 'fire', 'elementvalue', 'category', 'ingredient_set']
+    def to_representation(self, instance):
+        result = super(A22ItemSerializerSC, self).to_representation(instance)
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}, False])
 
 class A22ItemSerializerTC(serializers.ModelSerializer):
     name = serializers.CharField(source='item_tc.name')
@@ -382,6 +404,10 @@ class A22ItemSerializerTC(serializers.ModelSerializer):
     class Meta:
         model = Item
         fields = ['slugname', 'name', 'index', 'itemtype', 'isDLC', 'ice', 'wind', 'lightning', 'fire', 'elementvalue', 'category', 'ingredient_set']
+    def to_representation(self, instance):
+        result = super(A22ItemSerializerTC, self).to_representation(instance)
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}, False])
 
 class A22UsableItemSerializer(serializers.ModelSerializer):
     class Meta:
@@ -404,7 +430,11 @@ class A22ItemSerializerENFull(serializers.ModelSerializer):
     monster_set = A22MonsterSerializerENName(many=True)
     class Meta:
         model = Item
-        fields = ['slugname', 'name', 'description', 'index', 'level', 'itemtype', 'isDLC', 'ice', 'wind', 'lightning', 'fire', 'elementvalue', 'category', 'shop', 'trait', 'skilltree', 'location', 'ingredient_set', 'usableitem_set', 'effectline_set', 'evlinkitems_set', 'recipemorphs_set', 'monster_set']
+        fields = ['slugname', 'name', 'description', 'index', 'level', 'itemtype', 'isDLC', 'ice', 'wind', 'lightning', 'fire', 'elementvalue', 'category', 'shop', 'trait', 'skilltree', 'location', 'ingredient_set', 'usableitem_set', 'effectline_set', 'evlinkitems_set', 'recipemorphs_set', 'monster_set', 'note']
+    def to_representation(self, instance):
+        result = super(A22ItemSerializerENFull, self).to_representation(instance)
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}, False])
 
 class A22ItemSerializerJAFull(serializers.ModelSerializer):
     name = serializers.CharField(source='item_ja.name')
@@ -421,7 +451,11 @@ class A22ItemSerializerJAFull(serializers.ModelSerializer):
     monster_set = A22MonsterSerializerJAName(many=True)
     class Meta:
         model = Item
-        fields = ['slugname', 'name', 'description', 'index', 'level', 'itemtype', 'isDLC', 'ice', 'wind', 'lightning', 'fire', 'elementvalue', 'category', 'shop', 'trait', 'skilltree', 'location', 'ingredient_set', 'usableitem_set', 'effectline_set', 'evlinkitems_set', 'recipemorphs_set', 'monster_set']
+        fields = ['slugname', 'name', 'description', 'index', 'level', 'itemtype', 'isDLC', 'ice', 'wind', 'lightning', 'fire', 'elementvalue', 'category', 'shop', 'trait', 'skilltree', 'location', 'ingredient_set', 'usableitem_set', 'effectline_set', 'evlinkitems_set', 'recipemorphs_set', 'monster_set', 'note']
+    def to_representation(self, instance):
+        result = super(A22ItemSerializerJAFull, self).to_representation(instance)
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}, False])
 
 class A22ItemSerializerKOFull(serializers.ModelSerializer):
     name = serializers.CharField(source='item_ko.name')
@@ -438,7 +472,11 @@ class A22ItemSerializerKOFull(serializers.ModelSerializer):
     monster_set = A22MonsterSerializerKOName(many=True)
     class Meta:
         model = Item
-        fields = ['slugname', 'name', 'description', 'index', 'level', 'itemtype', 'isDLC', 'ice', 'wind', 'lightning', 'fire', 'elementvalue', 'category', 'shop', 'trait', 'skilltree', 'location', 'ingredient_set', 'usableitem_set', 'effectline_set', 'evlinkitems_set', 'recipemorphs_set', 'monster_set']
+        fields = ['slugname', 'name', 'description', 'index', 'level', 'itemtype', 'isDLC', 'ice', 'wind', 'lightning', 'fire', 'elementvalue', 'category', 'shop', 'trait', 'skilltree', 'location', 'ingredient_set', 'usableitem_set', 'effectline_set', 'evlinkitems_set', 'recipemorphs_set', 'monster_set', 'note']
+    def to_representation(self, instance):
+        result = super(A22ItemSerializerKOFull, self).to_representation(instance)
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}, False])
 
 class A22ItemSerializerFRFull(serializers.ModelSerializer):
     name = serializers.CharField(source='item_fr.name')
@@ -455,7 +493,11 @@ class A22ItemSerializerFRFull(serializers.ModelSerializer):
     monster_set = A22MonsterSerializerFRName(many=True)
     class Meta:
         model = Item
-        fields = ['slugname', 'name', 'description', 'index', 'level', 'itemtype', 'isDLC', 'ice', 'wind', 'lightning', 'fire', 'elementvalue', 'category', 'shop', 'trait', 'skilltree', 'location', 'ingredient_set', 'usableitem_set', 'effectline_set', 'evlinkitems_set', 'recipemorphs_set', 'monster_set']
+        fields = ['slugname', 'name', 'description', 'index', 'level', 'itemtype', 'isDLC', 'ice', 'wind', 'lightning', 'fire', 'elementvalue', 'category', 'shop', 'trait', 'skilltree', 'location', 'ingredient_set', 'usableitem_set', 'effectline_set', 'evlinkitems_set', 'recipemorphs_set', 'monster_set', 'note']
+    def to_representation(self, instance):
+        result = super(A22ItemSerializerFRFull, self).to_representation(instance)
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}, False])
 
 class A22ItemSerializerSCFull(serializers.ModelSerializer):
     name = serializers.CharField(source='item_sc.name')
@@ -472,7 +514,11 @@ class A22ItemSerializerSCFull(serializers.ModelSerializer):
     monster_set = A22MonsterSerializerSCName(many=True)
     class Meta:
         model = Item
-        fields = ['slugname', 'name', 'description', 'index', 'level', 'itemtype', 'isDLC', 'ice', 'wind', 'lightning', 'fire', 'elementvalue', 'category', 'shop', 'trait', 'skilltree', 'location', 'ingredient_set', 'usableitem_set', 'effectline_set', 'evlinkitems_set', 'recipemorphs_set', 'monster_set']
+        fields = ['slugname', 'name', 'description', 'index', 'level', 'itemtype', 'isDLC', 'ice', 'wind', 'lightning', 'fire', 'elementvalue', 'category', 'shop', 'trait', 'skilltree', 'location', 'ingredient_set', 'usableitem_set', 'effectline_set', 'evlinkitems_set', 'recipemorphs_set', 'monster_set', 'note']
+    def to_representation(self, instance):
+        result = super(A22ItemSerializerSCFull, self).to_representation(instance)
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}, False])
 
 class A22ItemSerializerTCFull(serializers.ModelSerializer):
     name = serializers.CharField(source='item_tc.name')
@@ -489,7 +535,11 @@ class A22ItemSerializerTCFull(serializers.ModelSerializer):
     monster_set = A22MonsterSerializerTCName(many=True)
     class Meta:
         model = Item
-        fields = ['slugname', 'name', 'description', 'index', 'level', 'itemtype', 'isDLC', 'ice', 'wind', 'lightning', 'fire', 'elementvalue', 'category', 'shop', 'trait', 'skilltree', 'location', 'ingredient_set', 'usableitem_set', 'effectline_set', 'evlinkitems_set', 'recipemorphs_set', 'monster_set']
+        fields = ['slugname', 'name', 'description', 'index', 'level', 'itemtype', 'isDLC', 'ice', 'wind', 'lightning', 'fire', 'elementvalue', 'category', 'shop', 'trait', 'skilltree', 'location', 'ingredient_set', 'usableitem_set', 'effectline_set', 'evlinkitems_set', 'recipemorphs_set', 'monster_set', 'note']
+    def to_representation(self, instance):
+        result = super(A22ItemSerializerTCFull, self).to_representation(instance)
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}, False])
 
 
 # Item Locations
@@ -701,3 +751,58 @@ class A22ShopDevelopSerializerTC(serializers.ModelSerializer):
     class Meta:
         model = ShopDevelop
         fields = ['item', 'cat1', 'cat2', 'addProd', 'addCat']
+
+# Category info
+class A22ItemCatSerializerEN(serializers.ModelSerializer):
+    name = serializers.CharField(source='category.cat_en.name')
+    slugname = serializers.CharField(source='category.slugname')
+    items = A22ItemSerializerEN(many=True, read_only=True)
+    ingredients = A22ItemSerializerEN(many=True, read_only=True)
+    class Meta:
+        model = CategoryItems
+        fields = ['slugname', 'name', 'items', 'ingredients']
+
+class A22ItemCatSerializerJA(serializers.ModelSerializer):
+    name = serializers.CharField(source='category.cat_ja.name')
+    slugname = serializers.CharField(source='category.slugname')
+    items = A22ItemSerializerJA(many=True, read_only=True)
+    ingredients = A22ItemSerializerJA(many=True, read_only=True)
+    class Meta:
+        model = CategoryItems
+        fields = ['slugname', 'name', 'items', 'ingredients']
+
+class A22ItemCatSerializerKO(serializers.ModelSerializer):
+    name = serializers.CharField(source='category.cat_ko.name')
+    slugname = serializers.CharField(source='category.slugname')
+    items = A22ItemSerializerKO(many=True, read_only=True)
+    ingredients = A22ItemSerializerKO(many=True, read_only=True)
+    class Meta:
+        model = CategoryItems
+        fields = ['slugname', 'name', 'items', 'ingredients']
+
+class A22ItemCatSerializerFR(serializers.ModelSerializer):
+    name = serializers.CharField(source='category.cat_fr.name')
+    slugname = serializers.CharField(source='category.slugname')
+    items = A22ItemSerializerFR(many=True, read_only=True)
+    ingredients = A22ItemSerializerFR(many=True, read_only=True)
+    class Meta:
+        model = CategoryItems
+        fields = ['slugname', 'name', 'items', 'ingredients']
+
+class A22ItemCatSerializerSC(serializers.ModelSerializer):
+    name = serializers.CharField(source='category.cat_sc.name')
+    slugname = serializers.CharField(source='category.slugname')
+    items = A22ItemSerializerSC(many=True, read_only=True)
+    ingredients = A22ItemSerializerSC(many=True, read_only=True)
+    class Meta:
+        model = CategoryItems
+        fields = ['slugname', 'name', 'items', 'ingredients']
+
+class A22ItemCatSerializerTC(serializers.ModelSerializer):
+    name = serializers.CharField(source='category.cat_tc.name')
+    slugname = serializers.CharField(source='category.slugname')
+    items = A22ItemSerializerTC(many=True, read_only=True)
+    ingredients = A22ItemSerializerTC(many=True, read_only=True)
+    class Meta:
+        model = CategoryItems
+        fields = ['slugname', 'name', 'items', 'ingredients']

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders,  } from '@angular/common/http';
 import { Observable} from 'rxjs';
 import { environment } from '@environments/environment';
-import { Trait, Effect, EffectFull, Region, Monster, MonsterFull } from '@app/interfaces/a22';
+import { Trait, Effect, EffectFull, Region, Monster, MonsterFull, Item, ItemFull, Name, CategoryItem, ShopDevelop } from '@app/interfaces/a22';
 
 
 @Injectable({ providedIn: 'root' })
@@ -42,6 +42,26 @@ export class A22Service {
 
   getMonsterList(language: string): Observable<Monster[]> {
     return this.http.get<Monster[]>(`${environment.apiUrl}/A22/monster/${language}/`);
+  }
+
+  getItem(slugname: string, language: string): Observable<ItemFull> {
+    return this.http.get<ItemFull>(`${environment.apiUrl}/A22/item/${slugname}/${language}/`);
+  }
+
+  getItemList(language: string): Observable<Item[]> {
+    return this.http.get<Item[]>(`${environment.apiUrl}/A22/item/${language}/`);
+  }
+
+  getCategoryItem(slugname: string, language: string): Observable<CategoryItem> {
+    return this.http.get<CategoryItem>(`${environment.apiUrl}/A22/categoryitem/${slugname}/${language}/`);
+  }
+
+  getCategoryList(language: string): Observable<Name[]> {
+    return this.http.get<Name[]>(`${environment.apiUrl}/A22/category/${language}/`);
+  }
+
+  getShopDevList(language: string): Observable<ShopDevelop[]> {
+    return this.http.get<ShopDevelop[]>(`${environment.apiUrl}/A22/shopdevelop/${language}/`);
   }
 
 }

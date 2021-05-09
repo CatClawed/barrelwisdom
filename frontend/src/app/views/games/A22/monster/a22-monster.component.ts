@@ -91,12 +91,12 @@ export class A22MonsterComponent implements OnInit {
         this.metaService.updateTag({ property: `og:title`, content: `${this.monster.name}` }, `property="og:title"`);
         this.metaService.updateTag({ property: `og:description`, content: `${this.monster.description}` },`property="og:description"`);
         this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
-        this.metaService.updateTag({ property: `og:image`, content: `https://media.barrelwisdom.com/file/barrelwisdom/main/barrel.png` }, `property="og:image"`);
+        this.metaService.updateTag({ property: `og:image`, content: `/media/games/ryza2/monsters/${this.monster.slugname}.png` }, `property="og:image"`);
     },
     error => {
-      this.error = true,
-      this.errorCode = error.status.toString(),
-      this.errorVars = this.errorService.getCodes(this.errorCode)
+      this.error = true;
+      this.errorCode = error.status.toString();
+      this.errorVars = this.errorService.getCodes(this.errorCode);
     });
   }
 } 

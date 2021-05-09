@@ -143,7 +143,7 @@ class A22EffectSerializerEN(serializers.ModelSerializer):
     effects = A22ExtraSerializerEN(many=True)
     class Meta:
         model = Effect
-        fields = ['slugname', 'index', 'efftype', 'note', 'name', 'description', 'effects']
+        fields = ['slugname', 'efftype', 'note', 'name', 'description', 'effects']
 
     def to_representation(self, instance):
         result = super(A22EffectSerializerEN, self).to_representation(instance)
@@ -158,7 +158,7 @@ class A22EffectSerializerJA(serializers.ModelSerializer):
     effects = A22ExtraSerializerJA(many=True)
     class Meta:
         model = Effect
-        fields = ['slugname', 'index', 'efftype', 'note', 'name', 'description', 'effects']
+        fields = ['slugname', 'efftype', 'note', 'name', 'description', 'effects']
 
     def to_representation(self, instance):
         result = super(A22EffectSerializerJA, self).to_representation(instance)
@@ -173,7 +173,7 @@ class A22EffectSerializerKO(serializers.ModelSerializer):
     effects = A22ExtraSerializerKO(many=True)
     class Meta:
         model = Effect
-        fields = ['slugname', 'index', 'efftype', 'note', 'name', 'description', 'effects']
+        fields = ['slugname', 'efftype', 'note', 'name', 'description', 'effects']
 
     def to_representation(self, instance):
         result = super(A22EffectSerializerKO, self).to_representation(instance)
@@ -188,7 +188,7 @@ class A22EffectSerializerFR(serializers.ModelSerializer):
     effects = A22ExtraSerializerFR(many=True)
     class Meta:
         model = Effect
-        fields = ['slugname', 'index', 'efftype', 'note', 'name', 'description', 'effects']
+        fields = ['slugname', 'efftype', 'note', 'name', 'description', 'effects']
 
     def to_representation(self, instance):
         result = super(A22EffectSerializerFR, self).to_representation(instance)
@@ -203,7 +203,7 @@ class A22EffectSerializerSC(serializers.ModelSerializer):
     effects = A22ExtraSerializerSC(many=True)
     class Meta:
         model = Effect
-        fields = ['slugname', 'index', 'efftype', 'note', 'name', 'description', 'effects']
+        fields = ['slugname', 'efftype', 'note', 'name', 'description', 'effects']
 
     def to_representation(self, instance):
         result = super(A22EffectSerializerSC, self).to_representation(instance)
@@ -218,7 +218,7 @@ class A22EffectSerializerTC(serializers.ModelSerializer):
     effects = A22ExtraSerializerTC(many=True)
     class Meta:
         model = Effect
-        fields = ['slugname', 'index', 'efftype', 'note', 'name', 'description', 'effects']
+        fields = ['slugname', 'efftype', 'note', 'name', 'description', 'effects']
 
     def to_representation(self, instance):
         result = super(A22EffectSerializerTC, self).to_representation(instance)

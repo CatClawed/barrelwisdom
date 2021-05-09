@@ -12,9 +12,6 @@ const routes: Routes = [
   {
     path: 'login',
     component: DefaultLayoutComponent,
-    data: {
-      title: 'Login'
-    },
     children: [
       {
         path: '',
@@ -25,9 +22,6 @@ const routes: Routes = [
   {
     path: 'settings',
     component: DefaultLayoutComponent,
-    data: {
-      title: 'Settings'
-    },
     children: [
       {
         path: '',
@@ -38,9 +32,6 @@ const routes: Routes = [
   {
     path: 'register',
     component: DefaultLayoutComponent,
-    data: {
-      title: 'Register'
-    },
     children: [
       {
         path: '',
@@ -51,9 +42,6 @@ const routes: Routes = [
   {
     path: 'create',
     component: DefaultLayoutComponent,
-    data: {
-      title: 'Create Page'
-    },
     children: [
       {
         path: '',
@@ -64,9 +52,6 @@ const routes: Routes = [
   {
     path: 'user/:username',
     component: DefaultLayoutComponent,
-    data: {
-      title: 'Main'
-    },
     children: [
       {
         path: '', 
@@ -77,9 +62,6 @@ const routes: Routes = [
   {
     path: 'tag/:tagname',
     component: DefaultLayoutComponent,
-    data: {
-      title: 'Main'
-    },
     children: [
       {
         path: '', 
@@ -87,64 +69,20 @@ const routes: Routes = [
       },
     ]
   },
+
   {
-    path: 'ryza2/traits',
+    path: 'ryza2',
     component: DefaultLayoutComponent,
-    data: {
-      title: 'Traits'
-    },
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A22/trait/a22-trait.module').then(m=>m.A22TraitModule),
-      },
-    ]
-  },
-  {
-    path: 'ryza2/monsters',
-    component: DefaultLayoutComponent,
-    data: {
-      title: 'Monsters'
-    },
-    children: [
-      {
-        path: '', 
-        loadChildren: ()=> import('@app/views/games/A22/monster/a22-monster.module').then(m=>m.A22MonsterModule),
-      },
-    ]
-  },
-  {
-    path: 'ryza2/effects',
-    component: DefaultLayoutComponent,
-    data: {
-      title: 'Effects'
-    },
-    children: [
-      {
-        path: '', 
-        loadChildren: ()=> import('@app/views/games/A22/effect/a22-effect.module').then(m=>m.A22EffectModule),
-      },
-    ]
-  },
-  {
-    path: 'ryza2/locations',
-    component: DefaultLayoutComponent,
-    data: {
-      title: 'Locations'
-    },
-    children: [
-      {
-        path: '', 
-        loadChildren: ()=> import('@app/views/games/A22/location/a22-location.module').then(m=>m.A22LocationModule),
+        loadChildren: ()=> import('@app/views/games/A22/a22-routing.module').then(m=>m.A22RoutingModule),
       },
     ]
   },
   {
     path: ':section/:title',
     component: DefaultLayoutComponent,
-    data: {
-      title: 'Blog'
-    },
     children: [
       {
         path: '', 
@@ -155,9 +93,6 @@ const routes: Routes = [
   {
     path: '',
     component: DefaultLayoutComponent,
-    data: {
-      title: 'Main'
-    },
     children: [
       {
         path: '', 

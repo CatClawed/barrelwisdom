@@ -46,8 +46,10 @@
                 <td style="text-align: center;vertical-align: middle;"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-race-weasel-king"></i></td>
                 <td colspan="3">
                     <div style="column-count: 3;">
-                    <ul style="padding-left:1em;" *ngFor="let node of area.gatherdata">
-                        <li *ngIf="node.tool == 'Dig'"><a href="ryza2/items/{{node.rank1.slugname}}">{{node.rank1.name}}</a></li>
+                    <ul style="padding-left:1em;">
+                        <ng-container  *ngFor="let node of area.gatherdata">
+                            <li *ngIf="node.tool == 'Dig'"><a href="ryza2/items/{{node.rank1.slugname}}">{{node.rank1.name}}</a></li>
+                        </ng-container>
                     </ul>
                 </div>
             </tr>

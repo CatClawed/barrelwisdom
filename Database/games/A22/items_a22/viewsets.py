@@ -1,6 +1,6 @@
 from rest_framework import viewsets, filters
-from games.A22.items_a22.models import Item, ItemLocations, ShopDevelop, ItemRegions
-from games.A22.items_a22.serializers import A22ItemSerializerEN, A22ItemSerializerENFull, A22ItemSerializerJA, A22ItemSerializerJAFull, A22ItemSerializerKO, A22ItemSerializerKOFull, A22ItemSerializerFR, A22ItemSerializerFRFull, A22ItemSerializerSC, A22ItemSerializerSCFull, A22ItemSerializerTC, A22ItemSerializerTCFull, A22ShopDevelopSerializerEN, A22ShopDevelopSerializerJA, A22ShopDevelopSerializerKO, A22ShopDevelopSerializerFR, A22ShopDevelopSerializerSC, A22ShopDevelopSerializerTC, A22ItemRegionSerializerEN, A22ItemRegionSerializerJA, A22ItemRegionSerializerKO, A22ItemRegionSerializerFR, A22ItemRegionSerializerSC, A22ItemRegionSerializerTC
+from games.A22.items_a22.models import Item, ItemLocations, ShopDevelop, ItemRegions, CategoryItems
+from games.A22.items_a22.serializers import A22ItemSerializerEN, A22ItemSerializerENFull, A22ItemSerializerJA, A22ItemSerializerJAFull, A22ItemSerializerKO, A22ItemSerializerKOFull, A22ItemSerializerFR, A22ItemSerializerFRFull, A22ItemSerializerSC, A22ItemSerializerSCFull, A22ItemSerializerTC, A22ItemSerializerTCFull, A22ShopDevelopSerializerEN, A22ShopDevelopSerializerJA, A22ShopDevelopSerializerKO, A22ShopDevelopSerializerFR, A22ShopDevelopSerializerSC, A22ShopDevelopSerializerTC, A22ItemRegionSerializerEN, A22ItemRegionSerializerJA, A22ItemRegionSerializerKO, A22ItemRegionSerializerFR, A22ItemRegionSerializerSC, A22ItemRegionSerializerTC, A22ItemCatSerializerEN, A22ItemCatSerializerJA, A22ItemCatSerializerKO, A22ItemCatSerializerFR, A22ItemCatSerializerSC, A22ItemCatSerializerTC
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
@@ -26,7 +26,6 @@ class A22ItemViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
     ordering_fields = ['index']
     lookup_field = 'slugname'
-
 
     # Full item list (simplified data)
 
@@ -697,4 +696,231 @@ class A22ShopDevelopViewSet(viewsets.ModelViewSet):
             )
         )
         serializer = A22ShopDevelopSerializerTC(queryset, many=True)
+        return Response(serializer.data)
+
+class A22CategoryItemViewSet(viewsets.ModelViewSet):
+    queryset = (
+            CategoryItems.objects
+            .select_related(
+                'category',
+            )
+            .prefetch_related(
+                'category',
+                'category__cat_en',
+                'items',
+                'items__item_en',
+                'ingredients',
+                'ingredients__item_en',
+                'items__category',
+                'items__category__cat_en',
+                'items__ingredient_set',
+                'items__ingredient_set__category__cat_en',
+                'items__ingredient_set__item__item_en',
+                'ingredients__category',
+                'ingredients__category__cat_en',
+                'ingredients__ingredient_set',
+                'ingredients__ingredient_set__category__cat_en',
+                'ingredients__ingredient_set__item__item_en'
+            )
+        )
+    serializer_class = A22ItemCatSerializerEN
+    filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
+    lookup_field = 'slugname'
+
+    @action(detail=True, methods=['get'], url_path="en")
+    def en_full(self, request, slugname):
+        try:
+            queryset = (
+                CategoryItems.objects
+                .select_related(
+                    'category',
+                )
+                .prefetch_related(
+                    'category',
+                    'category__cat_en',
+                    'items',
+                    'items__item_en',
+                    'ingredients',
+                    'ingredients__item_en',
+                    'items__category',
+                    'items__category__cat_en',
+                    'items__ingredient_set',
+                    'items__ingredient_set__category__cat_en',
+                    'items__ingredient_set__item__item_en',
+                    'ingredients__category',
+                    'ingredients__category__cat_en',
+                    'ingredients__ingredient_set',
+                    'ingredients__ingredient_set__category__cat_en',
+                    'ingredients__ingredient_set__item__item_en'
+                )
+                .get(category__slugname=slugname)
+            )
+        except ObjectDoesNotExist:
+            raise Http404
+        serializer = A22ItemCatSerializerEN(queryset)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['get'], url_path="ja")
+    def ja_full(self, request, slugname):
+        try:
+            queryset = (
+                CategoryItems.objects
+                .select_related(
+                    'category',
+                )
+                .prefetch_related(
+                    'category',
+                    'category__cat_ja',
+                    'items',
+                    'items__item_ja',
+                    'ingredients',
+                    'ingredients__item_ja',
+                    'items__category',
+                    'items__category__cat_ja',
+                    'items__ingredient_set',
+                    'items__ingredient_set__category__cat_ja',
+                    'items__ingredient_set__item__item_ja',
+                    'ingredients__category',
+                    'ingredients__category__cat_ja',
+                    'ingredients__ingredient_set',
+                    'ingredients__ingredient_set__category__cat_ja',
+                    'ingredients__ingredient_set__item__item_ja'
+                )
+                .get(category__slugname=slugname)
+            )
+        except ObjectDoesNotExist:
+            raise Http404
+        serializer = A22ItemCatSerializerJA(queryset)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['get'], url_path="ko")
+    def ko_full(self, request, slugname):
+        try:
+            queryset = (
+                CategoryItems.objects
+                .select_related(
+                    'category',
+                )
+                .prefetch_related(
+                    'category',
+                    'category__cat_ko',
+                    'items',
+                    'items__item_ko',
+                    'ingredients',
+                    'ingredients__item_ko',
+                    'items__category',
+                    'items__category__cat_ko',
+                    'items__ingredient_set',
+                    'items__ingredient_set__category__cat_ko',
+                    'items__ingredient_set__item__item_ko',
+                    'ingredients__category',
+                    'ingredients__category__cat_ko',
+                    'ingredients__ingredient_set',
+                    'ingredients__ingredient_set__category__cat_ko',
+                    'ingredients__ingredient_set__item__item_ko'
+                )
+                .get(category__slugname=slugname)
+            )
+        except ObjectDoesNotExist:
+            raise Http404
+        serializer = A22ItemCatSerializerKO(queryset)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['get'], url_path="fr")
+    def fr_full(self, request, slugname):
+        try:
+            queryset = (
+                CategoryItems.objects
+                .select_related(
+                    'category',
+                )
+                .prefetch_related(
+                    'category',
+                    'category__cat_fr',
+                    'items',
+                    'items__item_fr',
+                    'ingredients',
+                    'ingredients__item_fr',
+                    'items__category',
+                    'items__category__cat_fr',
+                    'items__ingredient_set',
+                    'items__ingredient_set__category__cat_fr',
+                    'items__ingredient_set__item__item_fr',
+                    'ingredients__category',
+                    'ingredients__category__cat_fr',
+                    'ingredients__ingredient_set',
+                    'ingredients__ingredient_set__category__cat_fr',
+                    'ingredients__ingredient_set__item__item_fr'
+                )
+                .get(category__slugname=slugname)
+            )
+        except ObjectDoesNotExist:
+            raise Http404
+        serializer = A22ItemCatSerializerFR(queryset)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['get'], url_path="sc")
+    def sc_full(self, request, slugname):
+        try:
+            queryset = (
+                CategoryItems.objects
+                .select_related(
+                    'category',
+                )
+                .prefetch_related(
+                    'category',
+                    'category__cat_sc',
+                    'items',
+                    'items__item_sc',
+                    'ingredients',
+                    'ingredients__item_sc',
+                    'items__category',
+                    'items__category__cat_sc',
+                    'items__ingredient_set',
+                    'items__ingredient_set__category__cat_sc',
+                    'items__ingredient_set__item__item_sc',
+                    'ingredients__category',
+                    'ingredients__category__cat_sc',
+                    'ingredients__ingredient_set',
+                    'ingredients__ingredient_set__category__cat_sc',
+                    'ingredients__ingredient_set__item__item_sc'
+                )
+                .get(category__slugname=slugname)
+            )
+        except ObjectDoesNotExist:
+            raise Http404
+        serializer = A22ItemCatSerializerSC(queryset)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['get'], url_path="tc")
+    def tc_full(self, request, slugname):
+        try:
+            queryset = (
+                CategoryItems.objects
+                .select_related(
+                    'category',
+                )
+                .prefetch_related(
+                    'category',
+                    'category__cat_tc',
+                    'items',
+                    'items__item_tc',
+                    'ingredients',
+                    'ingredients__item_tc',
+                    'items__category',
+                    'items__category__cat_tc',
+                    'items__ingredient_set',
+                    'items__ingredient_set__category__cat_tc',
+                    'items__ingredient_set__item__item_tc',
+                    'ingredients__category',
+                    'ingredients__category__cat_tc',
+                    'ingredients__ingredient_set',
+                    'ingredients__ingredient_set__category__cat_tc',
+                    'ingredients__ingredient_set__item__item_tc'
+                )
+                .get(category__slugname=slugname)
+            )
+        except ObjectDoesNotExist:
+            raise Http404
+        serializer = A22ItemCatSerializerTC(queryset)
         return Response(serializer.data)

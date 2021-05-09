@@ -132,6 +132,17 @@ select {
   float: right;
 }
 
+.badge-list {
+  margin-right: 0.4em;
+  margin-top: 0.3em;
+  font-size: calc(0.9rem + 0.1vw) !important;
+}
+
+@media screen and (max-width: 576px) {
+  .badge-list {
+    font-size: 2.5vw !important;
+  }
+}
 
 
 .modal-body {
@@ -154,6 +165,14 @@ select {
     margin:0 !important;
     font-size: calc(1rem + 0.1vw) !important;
   }
+}
+
+.popover {
+  font-size: calc(1rem + 0.1vw) !important;
+}
+
+.popover-header {
+  font-size: calc(1.2rem + 0.1vw) !important;
 }
 
 @media screen and (min-width: 577px) {
@@ -181,7 +200,7 @@ select {
 .card {
   border: 2px outset lightgray !important;
   background-color: white;
-  background-image: url("https://media.barrelwisdom.com/file/barrelwisdom/main/images/clean_textile.png");
+  background-image: url("/media/main/images/clean_textile.png");
 }
 
 .card-icon-space {
@@ -204,7 +223,7 @@ select {
 /* Background pattern from Toptal Subtle Patterns */
 .table {
   background-color: white;
-  background-image: url("https://media.barrelwisdom.com/file/barrelwisdom/main/images/clean_textile.png");
+  background-image: url("/media/main/images/clean_textile.png");
 }
 
 @media screen and (max-width: 576px) {
@@ -215,7 +234,7 @@ select {
 
 /* Background pattern from Toptal Subtle Patterns */
 .main {
-  background: url("https://media.barrelwisdom.com/file/barrelwisdom/main/images/ricepaper2.jpg");
+  background: url("/media/main/images/ricepaper2.jpg");
   background-color: #faf6f5;
   margin-left: 0 !important;
   padding-left: 1em;
@@ -249,11 +268,11 @@ h4 {
 }
 
 .tab-content {
-  background-image: url("https://media.barrelwisdom.com/file/barrelwisdom/main/images/clean_textile.png") !important;
+  background-image: url("/media/main/images/clean_textile.png") !important;
 }
 
 .nav-tabs .nav-link.active {
-  background-image: url("https://media.barrelwisdom.com/file/barrelwisdom/main/images/clean_textile.png") !important;
+  background-image: url("/media/main/images/clean_textile.png") !important;
   border-bottom-color: transparent !important;
 }
 
@@ -288,10 +307,15 @@ h4 {
 .table-of-contents {
   border: 2px solid lightgray;
   background-color: white;
-  background-image: url("https://media.barrelwisdom.com/file/barrelwisdom/main/images/clean_textile.png");
+  background-image: url("/media/main/images/clean_textile.png");
   padding: 0.8em;
   border-radius: 10px;
   width: max-content;
+}
+
+.table-dark-center {
+  text-align: center;
+  background-color:rgba(211, 211, 211, 0.3);
 }
 
 // Major components (header, main, sidebar, etc.)

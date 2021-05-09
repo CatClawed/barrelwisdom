@@ -55,7 +55,7 @@ export class A22TraitlistComponent implements OnInit {
     this.metaService.updateTag({ property: `og:title`, content: `Traits` }, `property="og:title"`);
     this.metaService.updateTag({ property: `og:description`, content: `The list of traits in Atelier Ryza 2.` },`property="og:description"`);
     this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
-    this.metaService.updateTag({ property: `og:image`, content: `https://media.barrelwisdom.com/file/barrelwisdom/main/barrel.png` }, `property="og:image"`);
+    this.metaService.updateTag({ property: `og:image`, content: `/media/main/barrel.png` }, `property="og:image"`);
 
     this.pageForm = this.formBuilder.group({
       filtertext: this.traitControl,

@@ -1,0 +1,124 @@
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+
+<div *ngIf="!error">
+<nav style="margin-top: 1em;" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/ryza2">Atelier Ryza 2</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Items</li>
+  </ol>
+</nav>
+<h1>Items</h1>
+<div class ="col-md-10 mx-auto">
+    <form [formGroup]="pageForm" class="form-horizontal">
+      <div class="row">
+        <mat-form-field class="col-md-5" appearance="outline">
+          <mat-label>Filter...</mat-label>
+          <input style="height: 100%;" matInput formControlName="filtertext">
+          <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
+        </mat-form-field>
+        <mat-form-field class="col-md-4" appearance="outline">
+          <mat-label>Category</mat-label>
+          <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon" [(value)]="selected">
+            <mat-option value="Any" selected><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"   ></mat-icon> Any</mat-option>
+            <mat-option *ngFor="let cat of categories" value="{{cat.name}}">
+                <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-category-{{cat.slugname}}"></mat-icon>
+                {{cat.name}}
+            </mat-option>
+            <mat-select-trigger>
+               {{selected}}
+            </mat-select-trigger>
+          </mat-select>
+        </mat-form-field>
+        <language-settings class="col-md-3" section="ryza2"></language-settings>
+      </div>
+      <div class="row">
+        <mat-form-field class="col-md-5" appearance="outline">
+            <mat-label>Has ingredient...</mat-label>
+            <input style="height: 100%;" matInput formControlName="filtering">
+          </mat-form-field>
+        <mat-form-field class="col-md-3" appearance="outline">
+            <mat-label>Element</mat-label>
+            <mat-select matNativeControl formControlName="element" disableOptionCentering="true" class="mat-select-icon" [(value)]="selected">
+              <mat-option value="Any" selected>Any</mat-option>
+              <mat-option value="Fire">     <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-fire"></mat-icon>Fire</mat-option>
+              <mat-option value="Ice">      <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-ice"></mat-icon>Ice</mat-option>
+              <mat-option value="Lightning"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-lightning"></mat-icon>Lightning</mat-option>
+              <mat-option value="Wind">     <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-wind"></mat-icon>Wind</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="col-md-4" appearance="outline">
+            <mat-label>Element Value</mat-label>
+            <mat-select matNativeControl formControlName="elementval" disableOptionCentering="true" class="mat-select-icon" [(value)]="selected">
+              <mat-option value="1" type="number" selected>1+</mat-option>
+              <mat-option value="2" type="number">2+</mat-option>
+              <mat-option value="3" type="number">3+</mat-option>
+              <mat-option value="4" type="number">4+</mat-option>
+            </mat-select>
+          </mat-form-field>
+      </div>
+    </form>
+  </div>
+<div *ngFor="let item of filteredItems | async| pair " class="row">
+  <div *ngFor="let it of item" class="spacer col-md-5 mx-auto">
+    <div *ngIf="it" class="card allheight">
+      <div class="card-body griddisplay" style="position:relative">
+        <div class="flex">
+          <h4 class="card-title card-icon-space">
+              <a style="color: black;" (click)="openModal(itemModal, it.slugname); $event.preventDefault();" href="/ryza2/items/{{it.slugname}}/{{language}}">{{it.name}}</a>    
+          </h4>
+          <div class="card-icon-position">
+              <i *ngIf="it.itemtype == 'Attack'" class="atelier atelier-ryza2-type-attack"></i>
+              <i *ngIf="it.itemtype == 'Heal'" class="atelier atelier-ryza2-type-heal"></i>
+              <i *ngIf="it.itemtype == 'Debuff'" class="atelier atelier-ryza2-type-debuff"></i>
+              <i *ngIf="it.itemtype == 'Buff'" class="atelier atelier-ryza2-type-buff"></i>
+              <i *ngIf="it.itemtype == 'Weapon'" class="atelier atelier-ryza2-type-weapon"></i>
+              <i *ngIf="it.itemtype == 'Armor'" class="atelier atelier-ryza2-type-armor"></i>
+              <i *ngIf="it.itemtype == 'Accessory'" class="atelier atelier-ryza2-type-accessory"></i>
+              <i *ngIf="it.itemtype == 'Rare Item'" class="atelier atelier-ryza2-category-key-items"></i>
+              <i *ngIf="it.itemtype == 'Synthesis'" class="atelier atelier-ryza2-type-synthesis"></i>
+              <i *ngIf="it.itemtype == 'Material'" class="atelier atelier-ryza2-material"></i>
+              <i *ngIf="it.itemtype == 'Essence'" class="atelier atelier-ryza2-category-essence"></i>
+              <i *ngIf="it.itemtype == 'Field'" class="atelier atelier-ryza2-category-tools"></i>
+              <br *ngIf="it.isDLC" /><span *ngIf="it.isDLC" style="float:right;margin-right:0.5em;" class="badge bg-secondary">DLC</span>
+          </div>
+        </div>
+        <div class="card-display-bottom">
+            <a class="image-display" (click)="openModal(itemModal, it.slugname); $event.preventDefault();" href="/ryza2/items/{{it.slugname}}/{{language}}">
+              <img loading="lazy" src="/media/games/ryza2/items/{{it.slugname}}.png">
+            </a>
+        </div>
+        <div class="card-text">
+            <table>
+            <tr *ngFor="let cat of it.category">
+                <td style="text-align: center;"><i class="atelier atelier-ryza2-category-{{cat.slugname}}"></i></td><td>{{cat.name}}</td>
+            </tr>
+            <tr>
+                <td colspan=2>
+                    <i style="padding:0;color:#f03a02;" *ngIf="it.fire" class="atelier atelier-ryza2-fire"></i>
+                    <i style="padding:0;color:#04b5db;" *ngIf="it.ice" class="atelier atelier-ryza2-ice"></i>
+                    <i style="padding:0;color:#e3bb05;" *ngIf="it.lightning" class="atelier atelier-ryza2-lightning"></i>
+                    <i style="padding:0;color:#589b1d;" *ngIf="it.wind" class="atelier atelier-ryza2-wind"></i>
+                    {{it.elementvalue}}
+                </td>
+            </tr>
+            </table>
+        </div>
+        <div style="padding-right:1rem;margin-right:1rem;" class="card-text">
+          <button (click)="openModal(itemModal, it.slugname)" style="box-shadow: none;" class="card-read-more-position" mat-mini-fab color="accent">
+              <mat-icon style="font-size:20px;" fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+           </button>
+        </div>
+      </div>
+    </div>
+  </div></div>
+
+<ng-template #itemModal>
+  <div class="modal-body">
+    <button type="button" style="opacity:100;" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <i style="color:white" class="fas fa-times-circle"></i>
+    </button>
+      <a22-item slugname="{{item}}" [showNav]="false"></a22-item>
+  </div>
+</ng-template>
+</div>

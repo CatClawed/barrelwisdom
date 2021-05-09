@@ -13,9 +13,75 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
     lookup_field = 'slugname'
 
+    @action(detail=False)
+    def en(self, request):
+        queryset = (
+            Category.objects
+            .select_related(
+                'cat_en'
+            )
+        )
+        serializer = A22CategorySerializerEN(queryset, many=True)
+        return Response(serializer.data)
+
+    @action(detail=False)
+    def ja(self, request):
+        queryset = (
+            Category.objects
+            .select_related(
+                'cat_ja'
+            )
+        )
+        serializer = A22CategorySerializerJA(queryset, many=True)
+        return Response(serializer.data)
+
+    @action(detail=False)
+    def ko(self, request):
+        queryset = (
+            Category.objects
+            .select_related(
+                'cat_ko'
+            )
+        )
+        serializer = A22CategorySerializerKO(queryset, many=True)
+        return Response(serializer.data)
+
+    @action(detail=False)
+    def fr(self, request):
+        queryset = (
+            Category.objects
+            .select_related(
+                'cat_fr'
+            )
+        )
+        serializer = A22CategorySerializerFR(queryset, many=True)
+        return Response(serializer.data)
+
+    @action(detail=False)
+    def sc(self, request):
+        queryset = (
+            Category.objects
+            .select_related(
+                'cat_sc'
+            )
+        )
+        serializer = A22CategorySerializerSC(queryset, many=True)
+        return Response(serializer.data)
+
+    @action(detail=False)
+    def tc(self, request):
+        queryset = (
+            Category.objects
+            .select_related(
+                'cat_tc'
+            )
+        )
+        serializer = A22CategorySerializerTC(queryset, many=True)
+        return Response(serializer.data)
+
     # allows easy access via catect/slugname/en
     @action(detail=True, methods=['get'], url_path="en")
-    def en(self, request, slugname):
+    def en_full(self, request, slugname):
         try:
             queryset = (
                 Category.objects
@@ -29,8 +95,8 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
         serializer = A22CategorySerializerEN(queryset)
         return Response(serializer.data)
 
-    @action(detail=True, methods=['get'], url_path="ja")
-    def ja(self, request, slugname):
+    @action(detail=False)
+    def ja_full(self, request, slugname):
         try:
             queryset = (
                 Category.objects
@@ -45,7 +111,7 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ko")
-    def ko(self, request, slugname):
+    def ko_full(self, request, slugname):
         try:
             queryset = (
                 Category.objects
@@ -60,7 +126,7 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="fr")
-    def fr(self, request, slugname):
+    def fr_full(self, request, slugname):
         try:
             queryset = (
                 Category.objects
@@ -75,7 +141,7 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="sc")
-    def sc(self, request, slugname):
+    def sc_full(self, request, slugname):
         try:
             queryset = (
                 Category.objects
@@ -90,7 +156,7 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="tc")
-    def tc(self, request, slugname):
+    def tc_full(self, request, slugname):
         try:
             queryset = (
                 Category.objects

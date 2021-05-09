@@ -89,7 +89,7 @@ import { Meta, Title } from '@angular/platform-browser';
                 this.metaService.updateTag({ property: `og:image`, content: `${this.blog.image}` }, `property="og:image"`);
               }
               else {
-                this.metaService.updateTag({ property: `og:image`, content: `https://media.barrelwisdom.com/file/barrelwisdom/main/barrel.png` }, `property="og:image"`);
+                this.metaService.updateTag({ property: `og:image`, content: `/media/main/barrel.png` }, `property="og:image"`);
               }
             }
             },

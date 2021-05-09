@@ -88,12 +88,16 @@ class IngEffects(models.Model):
     essence = models.BooleanField(default=False)
     morph = models.ForeignKey(Item, on_delete=models.CASCADE, blank=True, null=True)
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    class Meta:
+        ordering = ['number']
 
 # there will be redundant data, it is okay, trees and dbs just aren't happy together
 class RecipeMorphs(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     parent = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='morphparent')
     order = models.IntegerField()
+    class Meta:
+        ordering = ['order']
 
 class EVLinkItems(models.Model):
     result = models.ForeignKey(Item, on_delete=models.CASCADE)
@@ -107,6 +111,8 @@ class EffectLine(models.Model):
     effect = models.ForeignKey(Effect, on_delete=models.CASCADE)
     line = models.IntegerField()
     number = models.IntegerField() # only defaults and material exclusives will be zero
+    class Meta:
+        ordering = ['line', 'number']
 
 # Don't generally need this data so into another table
 class ShopDevelop(models.Model):
@@ -138,4 +144,7 @@ class ItemAreas(models.Model):
     text = models.TextField(blank=True, null=True)
     areas = models.ForeignKey(ItemRegions, related_name="areas", on_delete=models.CASCADE, blank=True, null=True)
 
-    
+class CategoryItems(models.Model):
+    category = models.OneToOneField(Category, on_delete=models.CASCADE)
+    items = models.ManyToManyField(Item, related_name='catitems')
+    ingredients = models.ManyToManyField(Item, related_name='catings')

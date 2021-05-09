@@ -1,0 +1,35 @@
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+
+<div *ngIf="!error">
+<nav style="margin-top: 1em;" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/ryza2">Atelier Ryza 2</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Shop Development</li>
+  </ol>
+</nav>
+<h1>Shop Development</h1>
+<language-settings style="margin-top: 1em;" class="col-md-3" section="ryza2"></language-settings>
+<div class="mx-auto row">
+    <div class="col-md-6">
+        <table style="border:2px solid lightgray;" class="table table-shrink">
+            <tr>
+                <th>Item</th>
+                <th>Categories</th>
+                <th>Bonus</th>
+            </tr>
+            <tr *ngFor="let dev of shopdevelop">
+                <td><a href="/ryza2/items/{{dev.item.slugname}}">{{dev.item.name}}</a></td>
+                <td>
+                    <a href="/ryza2/categories/{{dev.cat1.slugname}}">{{dev.cat1.name}}</a>
+                    <br *ngIf="dev.cat2" /> <a *ngIf="dev.cat2" href="/ryza2/categories/{{dev.cat2.slugname}}">{{dev.cat2.name}}</a>
+                </td>
+                <td>
+                    <a *ngIf="dev.addProd" href="/ryza2/items/{{dev.addProd.slugname}}">{{dev.addProd.name}}</a>
+                    <a *ngIf="dev.addCat" href="/ryza2/categories/{{dev.addCat.slugname}}">{{dev.addCat.name}}</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</div>

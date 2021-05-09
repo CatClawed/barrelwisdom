@@ -1,8 +1,9 @@
 /* Traits */
 
-export interface ItemName {
+export interface TraitSimple {
     slugname: string;
     name: string;
+    description: string;
 }
 
 export interface Trait {
@@ -19,7 +20,7 @@ export interface Trait {
     trans_acc: boolean;
     name: string;
     description: string;
-    item_set: ItemName[];
+    item_set: Name[];
 }
 
 /* Effects */
@@ -69,6 +70,118 @@ export interface EffectFull {
 export interface Name {
     slugname: string;
     name: string;
+}
+
+export interface NameOnly {
+    item: string;
+    category: string;
+}
+
+export interface Item {
+    slugname: string;
+    name: string;
+    index: number;
+    itemtype: string;
+    isDLC: boolean;
+    fire: boolean;
+    ice: boolean;
+    lightning: boolean;
+    wind: boolean;
+    elementvalue: number;
+    category: Name[];
+    ingredient_set: NameOnly[];
+}
+
+export interface IngEff {
+    number: number;
+    value: number;
+    noneffect: string;
+    effect: string;
+    essence: boolean;
+}
+
+export interface Ingredient {
+    item: Name;
+    required: boolean;
+    fire: boolean;
+    ice: boolean;
+    lightning: boolean;
+    wind: boolean;
+    unlockelem: number;
+    ingeffects_set: IngEff[];
+}
+
+export interface Usable {
+    wt: number;
+    stun: number;
+    cc: number;
+    cooltime: number;
+    effrange: string;
+}
+
+export interface EffectLine {
+    itemslug: string;
+    itemname: string;
+    effslug: string;
+    effname: string;
+    effdescription: string;
+    line: number;
+    number: number;
+}
+
+export interface EVLink {
+    result: Name;
+    item1: Name;
+    item2: Name;
+}
+
+export interface RecipeMorph {
+    parent: Name;
+    order: number;
+}
+
+export interface ItemFull {
+    slugname: string;
+    name: string;
+    description: string;
+    index: number;
+    level: number;
+    itemtype: string;
+    isDLC: boolean;
+    fire: boolean;
+    ice: boolean;
+    lightning: boolean;
+    wind: boolean;
+    elementvalue: number;
+    category: Name[];
+    shop: Name;
+    trait: TraitSimple;
+    skilltree: boolean;
+    location: LocName[];
+    ingredient_set: Ingredient[];
+    usableitem_set: Usable[];
+    effectline_set: EffectLine[];
+    evlinkitems_set: EVLink[];
+    recipemorphs_set: RecipeMorph[];
+    monster_set: Name[];
+    note: string;
+}
+
+export interface CategoryItem {
+    slugname: string;
+    name: string;
+    items: Item[];
+    ingredients: Item[];
+}
+
+/* Shop Develop */
+
+export interface ShopDevelop {
+    item: Name;
+    cat1: Name;
+    cat2: Name;
+    addProd: Name;
+    addCat: Name;
 }
 
 /* Monsters */
