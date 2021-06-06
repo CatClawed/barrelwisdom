@@ -73,6 +73,12 @@ INSTALLED_APPS = [
     'invite.apps.InviteConfig',
     'navigation.apps.NavigationConfig',
     'userprofile.apps.UserProfileConfig',
+    # A15
+    'games.A15.categories_a15.apps.A15CategoryConfig',
+    'games.A15.properties_a15.apps.A15PropertyConfig',
+    'games.A15.effects_a15.apps.A15EffectConfig',
+    'games.A15.regions_a15.apps.A15RegionConfig',
+    'games.A15.monsters_a15.apps.A15MonsterConfig',
     # A22
     'games.A22.effects_a22.apps.A22EffectConfig',
     'games.A22.traits_a22.apps.A22TraitConfig',

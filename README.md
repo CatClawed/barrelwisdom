@@ -13,6 +13,6 @@ ng serve --host 0.0.0.0 --liveReload=true --proxy-config proxy.conf.json
 ng serve 
 npm install 
   get dependencies
-manage.py shell < myscript.py
+manage.py shell < scripts/myscript.py
 export NODE_OPTIONS="--max-old-space-size=5120"
 ```
