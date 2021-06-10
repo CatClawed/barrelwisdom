@@ -15,13 +15,5 @@ class Region(models.Model):
     grade = models.CharField(max_length=10, blank=True, null=True)
     parent = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE)
 
-"""
-class AreaData(models.Model):
-    area = models.ForeignKey(Region, on_delete=models.CASCADE)
-    subarea = models.Charfield(max_length=20, blank=True, null=True)
-    monsters = models.ManyToManyField(Monster, blank=True, null=True)
-    items = models.ManyToManyField(Item, blank=True, null=True)
-    rare = models.ManyToManyField(Item, blank=True, null=True, related_name='RareItem')
-    max = models.ManyToManyField(Item, blank=True, null=True, related_name='MaxItem')
-    fieldevent = Models.Charfield(max_length=30, blank=True, null=True)
-"""
+class FieldEvent(models.Model):
+    name = models.CharField(max_length=100, unique=True)

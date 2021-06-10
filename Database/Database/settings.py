@@ -73,12 +73,28 @@ INSTALLED_APPS = [
     'invite.apps.InviteConfig',
     'navigation.apps.NavigationConfig',
     'userprofile.apps.UserProfileConfig',
+    # A12
+    'games.A12.traits_a12.apps.A12TraitConfig',
+    'games.A12.effects_a12.apps.A12EffectConfig',
+    'games.A12.categories_a12.apps.A12CategoryConfig',
+    'games.A12.regions_a12.apps.A12RegionConfig',
+    'games.A12.monsters_a12.apps.A12MonsterConfig',
+    'games.A12.items_a12.apps.A12ItemConfig',
+    'games.A12.areadata_a12.apps.A12AreaDataConfig',
     # A15
     'games.A15.categories_a15.apps.A15CategoryConfig',
     'games.A15.properties_a15.apps.A15PropertyConfig',
     'games.A15.effects_a15.apps.A15EffectConfig',
     'games.A15.regions_a15.apps.A15RegionConfig',
     'games.A15.monsters_a15.apps.A15MonsterConfig',
+    'games.A15.items_a15.apps.A15ItemConfig',
+    # A16
+    'games.A16.categories_a16.apps.A16CategoryConfig',
+    'games.A16.regions_a16.apps.A16RegionConfig',
+    'games.A16.effects_a16.apps.A16EffectConfig',
+    'games.A16.properties_a16.apps.A16PropertyConfig',
+    'games.A16.monsters_a16.apps.A16MonsterConfig',
+    'games.A16.items_a16.apps.A16ItemConfig',
     # A22
     'games.A22.effects_a22.apps.A22EffectConfig',
     'games.A22.traits_a22.apps.A22TraitConfig',
@@ -87,6 +103,7 @@ INSTALLED_APPS = [
     'games.A22.items_a22.apps.A22ItemConfig',
     'games.A22.monsters_a22.apps.A22MonsterConfig',
     'games.A22.shops_a22.apps.A22ShopConfig',
+    # Blue Reflection
 ]
 
 
