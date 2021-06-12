@@ -4,6 +4,7 @@ from games.A16.effects_a16.models import *
 from games.A16.properties_a16.models import *
 from games.A16.monsters_a16.models import *
 from games.A16.items_a16.models import *
+from games.A16.areadata_a16.models import *
 
 import csv
 import codecs
@@ -12,14 +13,138 @@ import sys
 with open('scripts/data.txt', newline='', encoding='utf-8') as csvfile:
     reader = csv.reader(csvfile, delimiter='\t')
     for row in reader:
-        print(row[0])
-        en = Item_en(name=row[23], desc=row[24])
-        ja = Item_ja(name=row[25], desc=row[26])
+        print(row[1])
+        reg = Area.objects.get(region=Region.objects.get(slugname=row[0]))
+        obj = Field(
+            region= Region.objects.get(slugname=row[1]),
+            note=row[6]
+        )
+        obj.save()
+
+        if row[2]:
+            items = row[2].split(",")
+            for thing in items:
+                if thing:
+                    print(thing)
+                    o = Item.objects.get(slugname=thing)
+                    obj.ingredients.add(o)
+        if row[3]:
+            items = row[3].split(",")
+            for thing in items:
+                if thing:
+                    print(thing)
+                    o = Item.objects.get(slugname=thing)
+                    obj.rare.add(o)
+        if row[4]:
+            items = row[4].split(",")
+            for thing in items:
+                if thing:
+                    print(thing)
+                    o = Item.objects.get(slugname=thing)
+                    obj.relics.add(o)
+        if row[5]:
+            mons = row[5].split(",")
+            for thing in mons:
+                if thing:
+                    print(thing)
+                    o = Monster.objects.get(slugname=thing)
+                    obj.monsters.add(o)
+        reg.fields.add(obj)
+
+        """
+
+        if row[1]:
+            obj = Ingredient(
+                synthitem=Item.objects.get(slugname=row[0]),
+                item=(Item.objects.get(slugname=row[1]) if not row[2] else None),
+                category=(Category.objects.get(slugname=row[1]) if row[2] else None),
+                num=(row[3] if row[3] else None)
+            )
+            obj.save()
+
+
+        if row[2]:
+            obj = EffectLines(
+                item=Item.objects.get(slugname=row[1]),
+                order=row[0],
+                hidden=(True if row[3] else False),
+                elem=row[2]
+            )
+            obj.save()
+
+            if row[4]:
+                rng = row[7].split("-")
+                obj2 = EffectData(
+                    effect=Effect.objects.get(slugname=row[4]),
+                    number=1,
+                    min_elem=rng[0],
+                    max_elem=rng[1]
+                )
+                obj2.save()
+                obj.effects.add(obj2)
+            if row[5]:
+                rng = row[8].split("-")
+                obj2 = EffectData(
+                    effect=Effect.objects.get(slugname=row[5]),
+                    number=2,
+                    min_elem=rng[0],
+                    max_elem=rng[1]
+                )
+                obj2.save()
+                obj.effects.add(obj2)
+            if row[6]:
+                rng = row[9].split("-")
+                obj2 = EffectData(
+                    effect=Effect.objects.get(slugname=row[6]),
+                    number=3,
+                    min_elem=rng[0],
+                    max_elem=rng[1]
+                )
+                obj2.save()
+                obj.effects.add(obj2)
+
+
+        obj = Disassembly(
+            item=Item.objects.get(slugname=row[0])
+        )
+        obj.save()
+
+        items = row[1].split(",")
+        for thing in items:
+            if thing:
+                obj2 = None
+                it = Item.objects.get(slugname=thing)
+                obj.dis.add(it)
+                try:
+                    obj2 = Disassembled.objects.get(item=it)
+                except Disassembled.DoesNotExist:
+                    obj2 = Disassembled(
+                        item=it
+                    )
+                    obj2.save()
+                obj2.parent.add(Item.objects.get(slugname=row[0]))
+
+
+
+        en = Item_en(name=row[3], desc=row[4])
+        ja = Item_ja(name=row[5], desc=row[6])
         en.save()
         ja.save()
 
+        obj = Book(
+            slugname=row[0],
+            note=row[1],
+            index=row[2],
+            item_en=en,
+            item_ja=ja
+        )
+        obj.save()
 
-        """
+        items = row[7].split(",")
+        for thing in items:
+            if thing:
+                o = Item.objects.get(slugname=thing)
+                obj.items.add(o)
 
         obj = Item(
             slugname=row[0],

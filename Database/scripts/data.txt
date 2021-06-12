@@ -1,0 +1,224 @@
+recovery-increase		
+recovery-increase-1		
+recovery-increase-2		
+recovery-increase-3	Memory of Affection	1
+hp-recovery		
+hp-recovery-1		
+hp-recovery-2		
+hp-recovery-3	Memory of Love	1
+hp-percent-recovery		
+hp-percent-recovery-1		
+hp-percent-recovery-2		
+hp-percent-recovery-3	Memory of Love	1
+ether-recovery-50		
+ether-recovery-40		
+ether-recovery-30		
+ether-recovery-20		
+mp-recovery		
+mp-recovery-1		
+mp-recovery-2		
+mp-recovery-3	Memory of Love	1
+mp-percent-recovery		
+mp-percent-recovery-1		
+mp-percent-recovery-2		
+mp-percent-recovery-3	Memory of Love	1
+mp-use-reduction		
+mp-use-reduction-1		
+mp-use-reduction-2		
+mp-use-reduction-3	Memory of Affection	1
+revival		
+treatment		
+damage-increase		
+damage-increase-1		
+damage-increase-2		
+damage-increase-3		
+fixed-damage-increase		
+fixed-damage-increase-1		
+fixed-damage-increase-2		
+fixed-damage-increase-3		
+slash-damage-halved		
+pierce-damage-halved		
+impact-damage-halved		
+heart-damage-halved		
+hp-using-attack		
+hp-using-attack-1		
+hp-using-attack-2		
+hp-using-attack-3	Memory of Fear	1
+od-strength		
+od-strength-1		
+od-strength-2		
+od-strength-3		
+mortal-blow		
+mortal-blow-1		
+mortal-blow-2		
+mortal-blow-3	Memory of Hate	1
+ether-attack		
+ether-attack-1		
+ether-attack-2		
+ether-attack-3	Memory of Fear	1
+mental-attack		
+mental-attack-1		
+mental-attack-2		
+mental-attack-3	Memory of Fear	1
+ether-strike-50		
+ether-strike-40		
+ether-strike-30		
+ether-strike-20		
+strength-in-numbers		
+strength-in-numbers-1		
+strength-in-numbers-2		
+strength-in-numbers-3	Nullifying Powder	1
+strength-in-isolation		
+strength-in-isolation-1		
+strength-in-isolation-2		
+strength-in-isolation-3	Memory of Hate	1
+fragment-fighter		
+fragment-fighter-1		
+fragment-fighter-2		
+fragment-fighter-3	Nullifying Powder	1
+last-stand		
+last-stand-1		
+last-stand-2		
+last-stand-3	Nullifying Powder	1
+anti-sephirot		
+anti-sephirot-1		
+anti-sephirot-2	Onyx	3
+anti-sephirot-3	Memory of Birth	1
+solitary-struggle		
+time-card-strength		
+mega-hit		
+high-speed		
+high-speed-1		
+high-speed-2		
+high-speed-3	Memory of Affection	1
+skip		
+skip-1	Awe	1
+skip-2	Unknown Sleeve	2
+skip-3	Memory of Hate	1
+knockback-strike		
+knockback-strike-1		
+knockback-strike-2		
+knockback-strike-3	Nullifying Powder	1
+extra-ether		
+extra-ether-1		
+extra-ether-2		
+extra-ether-3		
+ether-absorption		
+ether-absorption-1		
+ether-absorption-2		
+ether-absorption-3	Nullifying Powder	1
+supporter-backup		
+critical-consistency		
+critical-consistency-1		
+critical-consistency-2		
+critical-consistency-3	Memory of Affection	1
+critical-strength		
+critical-strength-1		
+critical-strength-2		
+critical-strength-3	Memory of Affection	1
+critical-recovery		
+critical-recovery-1		
+critical-recovery-2		
+critical-recovery-3	Memory of Love	1
+timeline-advance		
+timeline-advance-1		
+timeline-advance-2	Silvery Stone	2
+timeline-advance-3	Memory of Affection	1
+timeline-delay		
+timeline-delay-1		
+timeline-delay-2		
+timeline-delay-3	Memory of Affection	1
+max-hp-increase		
+max-hp-increase-1		
+max-hp-increase-2		
+max-hp-increase-3	Rectifying Powder	1
+max-mp-increase		
+max-mp-increase-1		
+max-mp-increase-2		
+max-mp-increase-3	Rectifying Powder	1
+basic-attack-increase		
+basic-attack-increase-1		
+basic-attack-increase-2		
+basic-attack-increase-3	Rectifying Powder	1
+basic-defense-increase		
+basic-defense-increase-1		
+basic-defense-increase-2		
+basic-defense-increase-3	Rectifying Powder	1
+basic-speed-increase		
+basic-speed-increase-1		
+basic-speed-increase-2		
+basic-speed-increase-3	Rectifying Powder	1
+basic-luck-increase		
+basic-luck-increase-1		
+basic-luck-increase-2		
+basic-luck-increase-3	Rectifying Powder	1
+od-cost-reduction		
+od-cost-reduction-1	Decomposing Enzyme	2
+od-cost-reduction-2	Rapturous Trance	1
+od-cost-reduction-3	Memory of Envy	1
+absorb-attack		
+absorb-attack-1		
+absorb-attack-2		
+absorb-attack-3	Memory of Hate	1
+blind-attack		
+blind-attack-1		
+blind-attack-2		
+blind-attack-3	Nullifying Powder	1
+confusion-attack		
+confusion-attack-1		
+confusion-attack-2		
+confusion-attack-3		
+paralysis-attack		
+paralysis-attack-1		
+paralysis-attack-2		
+paralysis-attack-3		
+continuous-damage		
+continuous-damage-1		
+continuous-damage-2		
+continuous-damage-3		
+ailment-assailant		
+ailment-assailant-1		
+ailment-assailant-2		
+ailment-assailant-3		
+attack-boost		
+attack-boost-1		
+attack-boost-2		
+attack-boost-3	Memory of Love	1
+defense-boost		
+defense-boost-1		
+defense-boost-2		
+defense-boost-3		
+speed-boost		
+speed-boost-1		
+speed-boost-2		
+speed-boost-3		
+luck-boost		
+luck-boost-1		
+luck-boost-2		
+luck-boost-3		
+reinforcement		
+reinforcement-1	Blue Sap	2
+reinforcement-2	Mottled Sediment	2
+reinforcement-3	Memory of Affection	1
+blade-chip		
+blade-chip-1		
+blade-chip-2	Shackling Thorns	1
+blade-chip-3	Memory of Fear	1
+armor-melt		
+armor-melt-1	Creeping Leaf Veins	2
+armor-melt-2		
+armor-melt-3	Memory of Love	1
+foot-sprain		
+foot-sprain-1		
+foot-sprain-2		
+foot-sprain-3	Memory of Hate	1
+dream-dash		
+dream-dash-1		
+dream-dash-2		
+dream-dash-3		
+drop-increase		
+drop-increase-1		
+drop-increase-2		
+drop-increase-3	Memory of Hate	1
+ether-charger		
+rank-up		
