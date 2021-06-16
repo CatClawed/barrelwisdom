@@ -19,14 +19,14 @@
         </mat-form-field>
         <mat-form-field class="col-md-4" appearance="outline">
           <mat-label>Category</mat-label>
-          <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon" [(value)]="selected">
+          <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon" [(value)]="selectedCat">
             <mat-option value="Any" selected><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"   ></mat-icon> Any</mat-option>
             <mat-option *ngFor="let cat of categories" value="{{cat.name}}">
                 <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-category-{{cat.slugname}}"></mat-icon>
                 {{cat.name}}
             </mat-option>
             <mat-select-trigger>
-               {{selected}}
+               {{selectedCat}}
             </mat-select-trigger>
           </mat-select>
         </mat-form-field>
@@ -39,7 +39,7 @@
           </mat-form-field>
         <mat-form-field class="col-md-3" appearance="outline">
             <mat-label>Element</mat-label>
-            <mat-select matNativeControl formControlName="element" disableOptionCentering="true" class="mat-select-icon" [(value)]="selected">
+            <mat-select matNativeControl formControlName="element" disableOptionCentering="true" class="mat-select-icon" [(value)]="selectedElem">
               <mat-option value="Any" selected>Any</mat-option>
               <mat-option value="Fire">     <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-fire"></mat-icon>Fire</mat-option>
               <mat-option value="Ice">      <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-ice"></mat-icon>Ice</mat-option>
@@ -49,7 +49,7 @@
           </mat-form-field>
           <mat-form-field class="col-md-4" appearance="outline">
             <mat-label>Element Value</mat-label>
-            <mat-select matNativeControl formControlName="elementval" disableOptionCentering="true" class="mat-select-icon" [(value)]="selected">
+            <mat-select matNativeControl formControlName="elementval" disableOptionCentering="true" class="mat-select-icon" [(value)]="selectedElemV">
               <mat-option value="1" type="number" selected>1+</mat-option>
               <mat-option value="2" type="number">2+</mat-option>
               <mat-option value="3" type="number">3+</mat-option>

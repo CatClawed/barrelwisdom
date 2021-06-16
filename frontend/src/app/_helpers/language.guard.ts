@@ -27,8 +27,28 @@ export class LanguageGuard implements CanActivate {
             this.languageService.setLanguage(language); // doesn't matter if this is a bad value, EN is default
         }
         
+        if(section == "totori") {
+            if(environment.totori_languages[language]) {
+                return true;
+            }
+        }
+        if(section == "escha") {
+            if(environment.escha_languages[language]) {
+                return true;
+            }
+        }
+        if(section == "shallie") {
+            if(environment.shallie_languages[language]) {
+                return true;
+            }
+        }
         if(section == "ryza2") {
             if(environment.ryza2_languages[language]) {
+                return true;
+            }
+        }
+        if(section == "bluereflection") {
+            if(environment.bluereflection_languages[language]) {
                 return true;
             }
         }

@@ -28,10 +28,27 @@ export class LanguageComponent implements OnInit {
 
   ngOnInit() {
     this.currentLanguage = this.router.url.split('/').pop().split('#')[0];
+    if(this.section == "totori"){
+      this.languages = environment.totori_languages;
+      this.langName = environment.totori_languages[this.currentLanguage];
+    }
+    if(this.section == "escha"){
+      this.languages = environment.escha_languages;
+      this.langName = environment.escha_languages[this.currentLanguage];
+    }
+    if(this.section == "shallie"){
+      this.languages = environment.shallie_languages;
+      this.langName = environment.shallie_languages[this.currentLanguage];
+    }
     if(this.section == "ryza2"){
         this.languages = environment.ryza2_languages;
         this.langName = environment.ryza2_languages[this.currentLanguage];
-      }
+    }
+    if(this.section == "bluereflection"){
+      this.languages = environment.bluereflection_languages;
+      this.langName = environment.bluereflection_languages[this.currentLanguage];
+    }
+    
   }
 
 

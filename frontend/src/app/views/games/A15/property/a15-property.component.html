@@ -1,0 +1,46 @@
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+
+<div *ngIf="!error">
+<nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/escha">Atelier Escha &amp; Logy</a></li>
+    <li class="breadcrumb-item"><a href="/escha/properties/">Properties</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{property.name}}</li>
+  </ol>
+</nav>
+<div class="mx-auto row">
+<div style="margin-top: 1em;" class="{{colset}} card griddisplay card-body">
+    <div class="flex">
+      <h4 class="card-title">{{property.name}}</h4>
+      <div><b>PP: </b>{{property.points}}</div>
+    </div>
+    <div class="card-text">
+      <p *ngIf="property.combo1">
+        <a href="/escha/property.rties/{{property.combo1.slugname}}">{{property.combo1.name}}</a> <span> x </span>
+        <a href="/escha/property.rties/{{property.combo2.slugname}}">{{property.combo2.name}}</a>
+        <span *ngIf="property.combo3"> x </span> <a *ngIf="property.combo3" href="/escha/property.rties/{{property.combo3.slugname}}">{{property.combo3.name}}</a>
+      </p>
+      <p>{{property.desc}}</p>
+      <div *ngIf="property.item_set">
+        <b>Items:</b>
+          <ul>
+            <li *ngFor="let item of property.item_set"><a href="/escha/items/{{item.slugname}}">{{item.name}}</a></li>
+          </ul>
+        <p *ngIf="property.grade >= 0"><a href="javascript:void(0)"
+            tooltip="A measure of rarity. This number determines where property.rties appear." container="true">Grade:</a>
+          {{property.grade}}
+        </p>
+      </div>
+      <div class="flex card-text bottom">
+        <div><i *ngIf="property.bomb"      class="atelier atelier-escha-bomb"></i>     <i style="color: lightgray;" *ngIf="!property.bomb"      class="atelier atelier-escha-bomb"></i></div>
+        <div><i *ngIf="property.heal"      class="atelier atelier-escha-heal"></i>     <i style="color: lightgray;" *ngIf="!property.heal"      class="atelier atelier-escha-heal"></i>     </div>
+        <div><i *ngIf="property.buff"      class="atelier atelier-escha-buff"></i>     <i style="color: lightgray;" *ngIf="!property.buff"      class="atelier atelier-escha-buff"></i>   </div>
+        <div><i *ngIf="property.weapon"   class="atelier atelier-escha-weapon"></i>   <i style="color: lightgray;" *ngIf="!property.weapon"    class="atelier atelier-escha-weapon"></i>     </div>
+        <div><i *ngIf="property.armor"     class="atelier atelier-escha-armor"></i>    <i style="color: lightgray;" *ngIf="!property.armor"     class="atelier atelier-escha-armor"></i>   </div>
+        <div><i *ngIf="property.accessory" class="atelier atelier-escha-accessory"></i><i style="color: lightgray;" *ngIf="!property.accessory" class="atelier atelier-escha-accessory"></i>    </div>
+      </div>
+    </div>
+</div>
+<language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="escha"></language-settings>
+</div>

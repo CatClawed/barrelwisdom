@@ -69,7 +69,16 @@ const routes: Routes = [
       },
     ]
   },
-
+  {
+    path: 'escha',
+    component: DefaultLayoutComponent,
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A15/a15-routing.module').then(m=>m.A15RoutingModule),
+      },
+    ]
+  },
   {
     path: 'ryza2',
     component: DefaultLayoutComponent,

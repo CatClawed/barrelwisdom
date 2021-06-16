@@ -1,6 +1,6 @@
 from rest_framework import viewsets, filters
 from games.A15.categories_a15.models import Category
-from games.A15.categories_a15.serializers import A15CategorySerializer
+from games.A15.categories_a15.serializers import A15CategorySerializer, A15CategoryDataSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
@@ -48,7 +48,7 @@ class A15CategoryViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A15CategorySerializer(queryset, context={'language': 'en'})
+        serializer = A15CategoryDataSerializer(queryset, context={'language': 'en'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ja")
@@ -63,5 +63,5 @@ class A15CategoryViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A15CategorySerializer(queryset, context={'language': 'ja'})
+        serializer = A15CategoryDataSerializer(queryset, context={'language': 'ja'})
         return Response(serializer.data)

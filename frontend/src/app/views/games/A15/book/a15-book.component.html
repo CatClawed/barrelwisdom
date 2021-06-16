@@ -1,0 +1,29 @@
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+
+<div *ngIf="!error">
+<nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/escha">Atelier Escha &amp; Logy</a></li>
+    <li class="breadcrumb-item"><a href="/escha/recipe-books">Recipe Books</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{book.name}}</li>
+  </ol>
+</nav>
+<div class="mx-auto row">
+ <div class="{{colset}} card griddisplay card-body">
+    <div class="flex">
+        <h4 class="card-title  card-icon-space">{{book.name}}</h4>
+    </div>
+    <div class="card-text">
+        <img class="image-display" loading="lazy" src="/media/games/escha/items/{{book.slugname}}.png">
+        <p *ngIf="book.desc">{{book.desc}}</p>
+        <p><b>Acquisition: </b>{{book.acquisition}}</p>
+        <b>Items:</b>
+        <ul>
+          <li *ngFor="let item of book.items"><a href="/escha/items/{{item.slugname}}">{{item.name}}</a></li>
+        </ul>
+     </div>
+  </div>
+  <language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="escha"></language-settings>
+ </div>
+</div>

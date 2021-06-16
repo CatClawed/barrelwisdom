@@ -1,0 +1,56 @@
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+
+<div *ngIf="!error">
+<nav style="margin-top: 1em;" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/escha">Atelier Escha &amp; Logy</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Recipe Books</li>
+  </ol>
+</nav>
+<h1>Books</h1>
+<div class ="col-md-10 mx-auto">
+    <form [formGroup]="pageForm" class="form-horizontal">
+      <div class="row">
+        <mat-form-field class="col-md-5" appearance="outline">
+          <mat-label>Filter...</mat-label>
+          <input style="height: 100%;" matInput formControlName="filtertext">
+        </mat-form-field>
+        <language-settings class="col-md-3" section="escha"></language-settings>
+      </div>
+    </form>
+  </div>
+<div *ngFor="let book of filteredBooks | async| pair " class="row">
+  <div *ngFor="let bk of book" class="spacer col-md-5 mx-auto">
+    <div *ngIf="bk" class="card allheight">
+      <div class="card-body griddisplay" style="position:relative">
+        <div class="flex">
+          <h4 class="card-title card-icon-space">
+              <a style="color: black;" (click)="openModal(bookModal, bk.slugname); $event.preventDefault();" href="/escha/recipe-books/{{bk.slugname}}/{{language}}">{{bk.name}}</a>    
+          </h4>
+        </div>
+        <div class="card-display-bottom">
+            <a class="image-display" (click)="openModal(bookModal, bk.slugname); $event.preventDefault();" href="/escha/recipe-books/{{bk.slugname}}/{{language}}">
+              <img loading="lazy" src="/media/games/escha/items/{{bk.slugname}}.png">
+            </a>
+        </div>
+        <div style="padding-right:1rem;margin-right:1rem;" class="card-text">
+          <p><b>Acquisition: </b>{{bk.acquisition}}</p>
+          <b>Items:</b>
+          <ul>
+            <li *ngFor="let item of bk.items"><a href="/escha/items/{{item.slugname}}">{{item.name}}</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div></div>
+
+<ng-template #bookModal>
+  <div class="modal-body">
+    <button type="button" style="opacity:100;" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <i style="color:white" class="fas fa-times-circle"></i>
+    </button>
+     <a15-book slugname="{{book}}" [showNav]="false"></a15-book>
+  </div>
+</ng-template>
+</div>

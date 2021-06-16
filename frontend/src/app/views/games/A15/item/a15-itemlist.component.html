@@ -1,0 +1,113 @@
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+
+<div *ngIf="!error">
+<nav style="margin-top: 1em;" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/escha">Atelier Escha &amp; Logy</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Items</li>
+  </ol>
+</nav>
+<h1>Items</h1>
+<div class ="col-md-10 mx-auto">
+    <form [formGroup]="pageForm" class="form-horizontal">
+      <div class="row">
+        <mat-form-field class="col-md-5" appearance="outline">
+          <mat-label>Filter...</mat-label>
+          <input style="height: 100%;" matInput formControlName="filtertext">
+        </mat-form-field>
+        <mat-form-field class="col-md-4" appearance="outline">
+          <mat-label>Category</mat-label>
+          <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon" [(value)]="selectedCat">
+            <mat-option value="Any"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"   ></mat-icon> Any</mat-option>
+            <mat-option *ngFor="let cat of categories" value="{{cat.name}}">
+                <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-{{cat.icon_name}}"></mat-icon>
+                {{cat.name}}
+            </mat-option>
+            <mat-select-trigger>
+               {{selectedCat}}
+            </mat-select-trigger>
+          </mat-select>
+        </mat-form-field>
+        <language-settings class="col-md-3" section="escha"></language-settings>
+      </div>
+      <div class="row">
+        <mat-form-field class="col-md-5" appearance="outline">
+            <mat-label>Has ingredient...</mat-label>
+            <input style="height: 100%;" matInput formControlName="filtering">
+          </mat-form-field>
+        <mat-form-field class="col-md-3" appearance="outline">
+            <mat-label>Element</mat-label>
+            <mat-select matNativeControl formControlName="element" disableOptionCentering="true" class="mat-select-icon" [(value)]="selectedElem">
+              <mat-option value="Any">Any</mat-option>
+              <mat-option value="Fire"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-shallie-fire"></mat-icon>Fire</mat-option>
+              <mat-option value="Water"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-shallie-water"></mat-icon>Water</mat-option>
+              <mat-option value="Wind"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-shallie-wind"></mat-icon>Wind</mat-option>
+              <mat-option value="Earth"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-shallie-earth"></mat-icon>Earth</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="col-md-4" appearance="outline">
+            <mat-label>Element Value</mat-label>
+            <mat-select matNativeControl formControlName="elementval" disableOptionCentering="true" class="mat-select-icon" [(value)]="selectedElemV">
+              <mat-option value="0" type="number">Any</mat-option>
+              <mat-option value="20" type="number">20+</mat-option>
+              <mat-option value="30" type="number">30+</mat-option>
+              <mat-option value="40" type="number">40+</mat-option>
+            </mat-select>
+          </mat-form-field>
+      </div>
+    </form>
+  </div>
+<div *ngFor="let item of filteredItems | async| pair " class="row">
+  <div *ngFor="let it of item" class="spacer col-md-5 mx-auto">
+    <div *ngIf="it" class="card allheight">
+      <div class="card-body griddisplay" style="position:relative">
+        <div class="flex">
+          <h4 class="card-title card-icon-space">
+              <a style="color: black;" (click)="openModal(itemModal, it.slugname); $event.preventDefault();" href="/escha/items/{{it.slugname}}/{{language}}">{{it.name}}</a>    
+          </h4>
+          <div class="card-icon-position">
+              <b>LV: </b><span>{{it.level}}</span>
+              <br *ngIf="it.isDLC" /><span *ngIf="it.isDLC" style="float:right;margin-right:0.5em;" class="badge bg-secondary">DLC</span>
+              <br *ngIf="it.isDX" /><span *ngIf="it.isDX" style="float:right;margin-right:0.5em;" class="badge bg-secondary">DX</span>
+          </div>
+        </div>
+        <div class="card-display-bottom">
+            <a class="image-display" (click)="openModal(itemModal, it.slugname); $event.preventDefault();" href="/escha/items/{{it.slugname}}/{{language}}">
+              <img loading="lazy" src="/media/games/escha/items/{{it.slugname}}.png">
+            </a>
+        </div>
+        <div class="card-text">
+            <table>
+            <tr *ngFor="let cat of it.categories">
+                <td style="text-align: center;"><i class="atelier atelier-{{cat.icon_name}}"></i></td><td>{{cat.name}}</td>
+            </tr>
+            <tr>
+                <td colspan=2>
+                    <i style="padding:0;color:#ac504f;" *ngIf="it.fire" class="atelier atelier-shallie-fire"></i>
+                    <i style="padding:0;color:#427389;" *ngIf="it.water" class="atelier atelier-shallie-water"></i>
+                    <i style="padding:0;color:#5a843c;" *ngIf="it.wind" class="atelier atelier-shallie-wind"></i>
+                    <i style="padding:0;color:#8f7939;" *ngIf="it.earth" class="atelier atelier-shallie-earth"></i>
+                    {{it.evalue}}
+                </td>
+            </tr>
+            </table>
+        </div>
+        <div style="padding-right:1rem;margin-right:1rem;" class="card-text">
+          <button (click)="openModal(itemModal, it.slugname)" style="box-shadow: none;" class="card-read-more-position" mat-mini-fab color="accent">
+              <mat-icon style="font-size:20px;" fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+           </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #itemModal>
+  <div class="modal-body">
+    <button type="button" style="opacity:100;" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <i style="color:white" class="fas fa-times-circle"></i>
+    </button>
+      <a15-item slugname="{{item}}" [showNav]="false"></a15-item>
+  </div>
+</ng-template>

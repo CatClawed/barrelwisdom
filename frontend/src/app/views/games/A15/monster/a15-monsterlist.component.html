@@ -1,0 +1,61 @@
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+
+<div *ngIf="!error">
+<nav style="margin-top: 1em;" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/escha">Atelier Escha &amp; Logy</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Monsters</li>
+  </ol>
+</nav>
+<h1>Monsters</h1>
+<div class ="col-md-10 mx-auto">
+    <form [formGroup]="pageForm" class="form-horizontal">
+      <div class="row">
+        <mat-form-field class="col-md-5" appearance="outline">
+          <mat-label>Filter...</mat-label>
+          <input style="height: 100%;" matInput formControlName="filtertext">
+        </mat-form-field>
+        <language-settings class="col-md-3" section="escha"></language-settings>
+      </div>
+    </form>
+  </div>
+<div *ngFor="let monster of filteredMonsters | async| pair " class="row">
+  <div *ngFor="let mon of monster" class="spacer col-md-5 mx-auto">
+    <div *ngIf="mon" class="card allheight">
+      <div class="card-body griddisplay" style="position:relative">
+        <div class="flex">
+          <h4 class="card-title card-icon-space">
+              <a style="color: black;" (click)="openModal(monsterModal, mon.slugname); $event.preventDefault();" href="/escha/monsters/{{mon.slugname}}/{{language}}">{{mon.name}}</a>    
+          </h4>
+          <div class="card-icon-position">
+              <span>{{mon.race}}</span>
+              <br *ngIf="mon.isStrong || mon.isDLC || mon.isDX" />
+              <span *ngIf="mon.isDLC" style="float:right;margin-right:0.5em;" class="badge bg-secondary">DLC</span>
+              <span *ngIf="mon.isStrong" style="float:right;margin-right:0.5em;" class="badge bg-secondary">Strong</span>
+              <span *ngIf="mon.isDX" style="float:right;margin-right:0.5em;" class="badge bg-secondary">DX</span>
+          </div>
+        </div>
+        <div class="card-display-bottom">
+            <a class="image-display" (click)="openModal(monsterModal, mon.slugname); $event.preventDefault();" href="/escha/monsters/{{mon.slugname}}/{{language}}">
+              <img loading="lazy" src="/media/games/escha/monsters/{{mon.slugname}}.png">
+            </a>
+        </div>
+        <div style="padding-right:1rem;margin-right:1rem;" class="card-text">
+          <button (click)="openModal(monsterModal, mon.slugname)" style="box-shadow: none;" class="card-read-more-position" mat-mini-fab color="accent">
+              <mat-icon style="font-size:20px;" fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+           </button>
+        </div>
+      </div>
+    </div>
+  </div></div>
+
+<ng-template #monsterModal>
+  <div class="modal-body">
+    <button type="button" style="opacity:100;" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <i style="color:white" class="fas fa-times-circle"></i>
+    </button>
+     <a15-monster slugname="{{monster}}" [showNav]="false"></a15-monster>
+  </div>
+</ng-template>
+</div>

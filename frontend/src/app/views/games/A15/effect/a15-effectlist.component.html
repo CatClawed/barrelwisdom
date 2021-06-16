@@ -1,0 +1,56 @@
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+
+<div *ngIf="!error">
+<nav style="margin-top: 1em;" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/escha">Atelier Escha &amp; Logy</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Effects</li>
+  </ol>
+</nav>
+<h1>Effects</h1>
+<div class ="col-md-10 mx-auto">
+    <form [formGroup]="pageForm" class="form-horizontal">
+      <div class="row">
+        <mat-form-field class="col-md-5" appearance="outline">
+          <mat-label>Filter...</mat-label>
+          <input style="height: 100%;" matInput formControlName="filtertext">
+        </mat-form-field>
+        <language-settings class="col-md-3" section="escha"></language-settings>
+      </div>
+    </form>
+  </div>
+  <div *ngIf="!filteredEffects" class="d-flex justify-content-center">
+  <div class="spinner-border text-secondary m-5" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+<div *ngFor="let effect of filteredEffects | async| pair " class="row">
+  <div *ngFor="let eff of effect" class="spacer col-md-5 mx-auto">
+    <div *ngIf="eff" class="card allheight">
+      <div class="card-body">
+        <div class="flex">
+          <h4 class="card-title card-icon-space"><a style="color: black;" (click)="openModal(effectModal, eff.slugname); $event.preventDefault();" href="/escha/effects/{{eff.slugname}}/{{language}}">{{eff.name}}</a></h4>
+        </div>
+        <div style="padding-right:1rem;margin-right:1rem;" class="card-text">
+          <p *ngIf="eff.desc">{{eff.desc}}</p>
+          <ul *ngIf="eff.effectline_set">
+            <li *ngIf="eff.effectline_set.length >= 1"><a href="/escha/items/{{eff.effectline_set[0].slugname}}">{{eff.effectline_set[0].name}}</a></li>
+            <li *ngIf="eff.effectline_set.length >= 2"><a href="/escha/items/{{eff.effectline_set[1].slugname}}">{{eff.effectline_set[1].name}}</a></li>
+            <li *ngIf="eff.effectline_set.length >= 3"><a href="/escha/items/{{eff.effectline_set[2].slugname}}">{{eff.effectline_set[2].name}}</a></li>
+            <li *ngIf="eff.effectline_set.length >= 4"><a (click)="openModal(effectModal, eff.slugname); $event.preventDefault();" href="/escha/effects/{{eff.slugname}}/{{language}}">See more...</a></li>
+        </ul>
+        </div>
+      </div>
+    </div>
+  </div></div>
+
+<ng-template #effectModal>
+  <div class="modal-body">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <i class="fas fa-times-circle"></i>
+    </button>
+     <a15-effect slugname="{{effect}}" [showNav]="false"></a15-effect>
+  </div>
+</ng-template>
+</div>

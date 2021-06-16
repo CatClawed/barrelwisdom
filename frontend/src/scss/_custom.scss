@@ -499,6 +499,10 @@ ul.pagination {
   display: block;
 }
 
+.image-display img {
+  max-width: 100%;
+}
+
 // Create page
 
 .mat-chip.mat-primary {
@@ -510,4 +514,17 @@ ul.pagination {
 
 // User Pages
 
+// Game stuff
+
+.effect-bar {
+  background-color: lightgray;
+  border-radius: 5px;
+  height: 100%;
+}
+
+.elemental-bar {
+  border-radius: 5px;
+  height: 1rem;
+  position: relative;
+}
 

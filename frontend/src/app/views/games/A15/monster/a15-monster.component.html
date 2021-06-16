@@ -1,0 +1,66 @@
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+
+<div *ngIf="!error">
+<nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/escha">Atelier Escha &amp; Logy</a></li>
+    <li class="breadcrumb-item"><a href="/escha/monsters">Monsters</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{monster.name}}</li>
+  </ol>
+</nav>
+<div class="mx-auto row">
+ <div class="{{colset}} card griddisplay card-body">
+    <div class="flex">
+        <h4 class="card-title  card-icon-space">{{monster.name}}</h4>
+        <div class="card-icon-position">
+              <span>{{monster.race}}</span>
+              <br *ngIf="monster.isStrong || monster.isDLC || monster.isDX" />
+              <span *ngIf="monster.isDLC" style="float:right;margin-right:0.5em;" class="badge bg-secondary">DLC</span>
+              <span *ngIf="monster.isStrong" style="float:right;margin-right:0.5em;" class="badge bg-secondary">Strong</span>
+              <span *ngIf="monster.isDX" style="float:right;margin-right:0.5em;" class="badge bg-secondary">DX</span>
+          </div>
+      </div>
+      <div class="card-text">
+        <img class="image-display" loading="lazy" src="/media/games/escha/monsters/{{monster.slugname}}.png">
+        <p *ngIf="monster.desc">{{monster.desc}}</p>
+
+        <div class="row">
+          <div class="col-md-6">
+        <b *ngIf="monster.locations">Locations:</b>
+        <ul *ngIf="monster.locations">
+           <li *ngFor="let loc of monster.locations"><a href="escha/locations/{{loc.slugname}}">{{loc.name}}</a></li>
+        </ul>
+        <b *ngIf="monster.item_set">Drops:</b>
+        <ul *ngIf="monster.item_set">
+          <li *ngFor="let drop of monster.item_set"><a href="escha/items/{{drop.slugname}}">{{drop.name}}</a></li>
+        </ul>
+      </div>
+      <div class="col-md=6">
+        <table style="width:auto;" class="table" >
+        <tr>
+            <td style="border-top:transparent;padding:0;"><b>Level: </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.level}}</td>
+          </tr>
+          <tr>
+            <td style="border-top:transparent;padding:0;"><b>HP: </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.hp}}</td><td style="border-top:transparent;padding:0;padding-left:1em;"><i style="color:#ac504f;" class="atelier atelier-shallie-fire"></i></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.fire}}</td>
+          </tr>
+          <tr>
+            <td style="border-top:transparent;padding:0;"><b>ATK: </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.atk}}</td><td style="border-top:transparent;padding:0;padding-left:1em;"><i style="color:#427389;" class="atelier atelier-shallie-water"></i></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.water}}</td>
+          </tr>
+          <tr>
+            <td style="border-top:transparent;padding:0;"><b>DEF: </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.defen}}</td><td style="border-top:transparent;padding:0;padding-left:1em;"><i style="color:#5a843c;" class="atelier atelier-shallie-wind"></i></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.wind}}</td>
+          </tr>
+          <tr>
+            <td style="border-top:transparent;padding:0;"><b>SPD: </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.spd}}</td><td style="border-top:transparent;padding:0;padding-left:1em;"><i style="color:#8f7939;" class="atelier atelier-shallie-earth"></i></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.earth}}</td>
+          </tr>
+          <tr>
+            <td style="border-top:transparent;padding:0;"><b>Exp: </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.exp}}</td><td style="border-top:transparent;padding:0;padding-left:1em;"><b>Cole: </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.cole}}</td>
+          </tr>
+        </table>
+      </div>
+      </div>
+      </div>
+    </div>
+  <language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="escha"></language-settings>
+ </div>
+</div>

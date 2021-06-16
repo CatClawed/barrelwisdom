@@ -5,99 +5,261 @@
   @return unquote("\"\\#{$str}\"");
 }
 
-$atelier-ryza2-book: unicode(ea01);
-$atelier-ryza2-boss-enemy: unicode(ea02);
-$atelier-ryza2-category-accessories: unicode(ea03);
-$atelier-ryza2-category-animal-products: unicode(ea04);
-$atelier-ryza2-category-armor: unicode(ea05);
-$atelier-ryza2-category-beehives: unicode(ea06);
-$atelier-ryza2-category-bombs: unicode(ea07);
-$atelier-ryza2-category-bugs: unicode(ea08);
-$atelier-ryza2-category-cloth: unicode(ea09);
-$atelier-ryza2-category-dragon-mat: unicode(ea0a);
-$atelier-ryza2-category-edibles: unicode(ea0b);
-$atelier-ryza2-category-elixirs: unicode(ea0c);
-$atelier-ryza2-category-essence: unicode(ea0d);
-$atelier-ryza2-category-flowers: unicode(ea0e);
-$atelier-ryza2-category-food: unicode(ea0f);
-$atelier-ryza2-category-fruit: unicode(ea10);
-$atelier-ryza2-category-fuel: unicode(ea11);
-$atelier-ryza2-category-furniture: unicode(ea12);
-$atelier-ryza2-category-gases: unicode(ea13);
-$atelier-ryza2-category-gemstones: unicode(ea14);
-$atelier-ryza2-category-general-goods: unicode(ea15);
-$atelier-ryza2-category-gunpowder: unicode(ea16);
-$atelier-ryza2-category-ingots: unicode(ea17);
-$atelier-ryza2-category-jewels: unicode(ea18);
-$atelier-ryza2-category-key-items: unicode(ea19);
-$atelier-ryza2-category-lumber: unicode(ea1a);
-$atelier-ryza2-category-magic-tools: unicode(ea1b);
-$atelier-ryza2-category-magical: unicode(ea1c);
-$atelier-ryza2-category-medicinal: unicode(ea1d);
-$atelier-ryza2-category-medicine: unicode(ea1e);
-$atelier-ryza2-category-metal: unicode(ea1f);
-$atelier-ryza2-category-mushrooms: unicode(ea20);
-$atelier-ryza2-category-neutralizers: unicode(ea21);
-$atelier-ryza2-category-ore: unicode(ea22);
-$atelier-ryza2-category-plants: unicode(ea23);
-$atelier-ryza2-category-poisons: unicode(ea24);
-$atelier-ryza2-category-puniballs: unicode(ea25);
-$atelier-ryza2-category-sand: unicode(ea26);
-$atelier-ryza2-category-seafood: unicode(ea27);
-$atelier-ryza2-category-seeds: unicode(ea28);
-$atelier-ryza2-category-spices: unicode(ea29);
-$atelier-ryza2-category-stone: unicode(ea2a);
-$atelier-ryza2-category-threads: unicode(ea2b);
-$atelier-ryza2-category-tools: unicode(ea2c);
-$atelier-ryza2-category-uni: unicode(ea2d);
-$atelier-ryza2-category-water: unicode(ea2e);
-$atelier-ryza2-category-weapons: unicode(ea2f);
-$atelier-ryza2-equipment: unicode(ea30);
-$atelier-ryza2-fire: unicode(ea31);
-$atelier-ryza2-forge: unicode(ea32);
-$atelier-ryza2-ice: unicode(ea33);
-$atelier-ryza2-large-enemy: unicode(ea34);
-$atelier-ryza2-lightning: unicode(ea35);
-$atelier-ryza2-magic: unicode(ea36);
-$atelier-ryza2-material: unicode(ea37);
-$atelier-ryza2-medium-enemy: unicode(ea38);
-$atelier-ryza2-physical: unicode(ea39);
-$atelier-ryza2-race-ancient-philuscha: unicode(ea3a);
-$atelier-ryza2-race-beetle: unicode(ea3b);
-$atelier-ryza2-race-demon-beast: unicode(ea3c);
-$atelier-ryza2-race-golem: unicode(ea3d);
-$atelier-ryza2-race-guardian: unicode(ea3e);
-$atelier-ryza2-race-hedgehog: unicode(ea3f);
-$atelier-ryza2-race-knight: unicode(ea40);
-$atelier-ryza2-race-puni: unicode(ea41);
-$atelier-ryza2-race-roadrunner: unicode(ea42);
-$atelier-ryza2-race-scorpion: unicode(ea43);
-$atelier-ryza2-race-shark: unicode(ea44);
-$atelier-ryza2-race-sheep: unicode(ea45);
-$atelier-ryza2-race-spirit: unicode(ea46);
-$atelier-ryza2-race-weasel-king: unicode(ea47);
-$atelier-ryza2-race-weasel: unicode(ea48);
-$atelier-ryza2-race-wyrm: unicode(ea49);
-$atelier-ryza2-shop: unicode(ea4a);
-$atelier-ryza2-small-enemy: unicode(ea4b);
-$atelier-ryza2-tool-axe: unicode(ea4c);
-$atelier-ryza2-tool-bomb-rod: unicode(ea4d);
-$atelier-ryza2-tool-bug-net: unicode(ea4e);
-$atelier-ryza2-tool-fishing-rod: unicode(ea4f);
-$atelier-ryza2-tool-gather: unicode(ea50);
-$atelier-ryza2-tool-hammer: unicode(ea51);
-$atelier-ryza2-tool-sickle: unicode(ea52);
-$atelier-ryza2-tool-staff: unicode(ea53);
-$atelier-ryza2-tool-water: unicode(ea54);
-$atelier-ryza2-type-accessory: unicode(ea55);
-$atelier-ryza2-type-armor: unicode(ea56);
-$atelier-ryza2-type-attack: unicode(ea57);
-$atelier-ryza2-type-buff: unicode(ea58);
-$atelier-ryza2-type-debuff: unicode(ea59);
-$atelier-ryza2-type-heal: unicode(ea5a);
-$atelier-ryza2-type-synthesis: unicode(ea5b);
-$atelier-ryza2-type-weapon: unicode(ea5c);
-$atelier-ryza2-wind: unicode(ea5d);
+$atelier-escha-accessory: unicode(ea01);
+$atelier-escha-armor: unicode(ea02);
+$atelier-escha-bomb: unicode(ea04);
+$atelier-escha-buff: unicode(ea03);
+$atelier-escha-category-liquid: unicode(ea08);
+$atelier-escha-heal: unicode(ea05);
+$atelier-escha-weapon: unicode(ea06);
+$atelier-meruru-category-construction: unicode(ea07);
+$atelier-meruru-category-development: unicode(ea09);
+$atelier-meruru-category-farming: unicode(ea0a);
+$atelier-meruru-category-housing: unicode(ea0b);
+$atelier-meruru-category-mushroom: unicode(ea0c);
+$atelier-meruru-category-security: unicode(ea0d);
+$atelier-meruru-category-tourism: unicode(ea0e);
+$atelier-ryza2-book: unicode(ea0f);
+$atelier-ryza2-boss-enemy: unicode(ea10);
+$atelier-ryza2-category-accessories: unicode(ea11);
+$atelier-ryza2-category-animal-products: unicode(ea12);
+$atelier-ryza2-category-armor: unicode(ea13);
+$atelier-ryza2-category-beehives: unicode(ea14);
+$atelier-ryza2-category-bombs: unicode(ea18);
+$atelier-ryza2-category-bugs: unicode(ea15);
+$atelier-ryza2-category-cloth: unicode(ea16);
+$atelier-ryza2-category-dragon-mat: unicode(ea17);
+$atelier-ryza2-category-edibles: unicode(ea19);
+$atelier-ryza2-category-elixirs: unicode(ea1a);
+$atelier-ryza2-category-essence: unicode(ea1b);
+$atelier-ryza2-category-flowers: unicode(ea1c);
+$atelier-ryza2-category-food: unicode(ea1d);
+$atelier-ryza2-category-fruit: unicode(ea1e);
+$atelier-ryza2-category-fuel: unicode(ea1f);
+$atelier-ryza2-category-furniture: unicode(ea20);
+$atelier-ryza2-category-gases: unicode(ea21);
+$atelier-ryza2-category-gemstones: unicode(ea22);
+$atelier-ryza2-category-general-goods: unicode(ea23);
+$atelier-ryza2-category-gunpowder: unicode(ea24);
+$atelier-ryza2-category-ingots: unicode(ea25);
+$atelier-ryza2-category-jewels: unicode(ea26);
+$atelier-ryza2-category-key-items: unicode(ea27);
+$atelier-ryza2-category-lumber: unicode(ea28);
+$atelier-ryza2-category-magic-tools: unicode(ea29);
+$atelier-ryza2-category-magical: unicode(ea2a);
+$atelier-ryza2-category-medicinal: unicode(ea2b);
+$atelier-ryza2-category-medicine: unicode(ea2c);
+$atelier-ryza2-category-metal: unicode(ea2d);
+$atelier-ryza2-category-mushrooms: unicode(ea2e);
+$atelier-ryza2-category-neutralizers: unicode(ea2f);
+$atelier-ryza2-category-ore: unicode(ea30);
+$atelier-ryza2-category-plants: unicode(ea31);
+$atelier-ryza2-category-poisons: unicode(ea32);
+$atelier-ryza2-category-puniballs: unicode(ea33);
+$atelier-ryza2-category-sand: unicode(ea34);
+$atelier-ryza2-category-seafood: unicode(ea35);
+$atelier-ryza2-category-seeds: unicode(ea36);
+$atelier-ryza2-category-spices: unicode(ea37);
+$atelier-ryza2-category-stone: unicode(ea38);
+$atelier-ryza2-category-threads: unicode(ea39);
+$atelier-ryza2-category-tools: unicode(ea3a);
+$atelier-ryza2-category-uni: unicode(ea3b);
+$atelier-ryza2-category-water: unicode(ea3c);
+$atelier-ryza2-category-weapons: unicode(ea3d);
+$atelier-ryza2-equipment: unicode(ea3e);
+$atelier-ryza2-fire: unicode(ea3f);
+$atelier-ryza2-forge: unicode(ea40);
+$atelier-ryza2-ice: unicode(ea41);
+$atelier-ryza2-large-enemy: unicode(ea42);
+$atelier-ryza2-lightning: unicode(ea43);
+$atelier-ryza2-magic: unicode(ea44);
+$atelier-ryza2-material: unicode(ea46);
+$atelier-ryza2-medium-enemy: unicode(ea45);
+$atelier-ryza2-physical: unicode(ea47);
+$atelier-ryza2-race-ancient-philuscha: unicode(ea48);
+$atelier-ryza2-race-beetle: unicode(ea49);
+$atelier-ryza2-race-demon-beast: unicode(ea4a);
+$atelier-ryza2-race-golem: unicode(ea4b);
+$atelier-ryza2-race-guardian: unicode(ea4c);
+$atelier-ryza2-race-hedgehog: unicode(ea4d);
+$atelier-ryza2-race-knight: unicode(ea50);
+$atelier-ryza2-race-puni: unicode(ea4e);
+$atelier-ryza2-race-roadrunner: unicode(ea4f);
+$atelier-ryza2-race-scorpion: unicode(ea51);
+$atelier-ryza2-race-shark: unicode(ea52);
+$atelier-ryza2-race-sheep: unicode(ea54);
+$atelier-ryza2-race-spirit: unicode(ea53);
+$atelier-ryza2-race-weasel-king: unicode(ea55);
+$atelier-ryza2-race-weasel: unicode(ea56);
+$atelier-ryza2-race-wyrm: unicode(ea57);
+$atelier-ryza2-shop: unicode(ea58);
+$atelier-ryza2-small-enemy: unicode(ea5a);
+$atelier-ryza2-tool-axe: unicode(ea59);
+$atelier-ryza2-tool-bomb-rod: unicode(ea5b);
+$atelier-ryza2-tool-bug-net: unicode(ea5c);
+$atelier-ryza2-tool-fishing-rod: unicode(ea5d);
+$atelier-ryza2-tool-gather: unicode(ea5e);
+$atelier-ryza2-tool-hammer: unicode(ea5f);
+$atelier-ryza2-tool-sickle: unicode(ea60);
+$atelier-ryza2-tool-staff: unicode(ea61);
+$atelier-ryza2-tool-water: unicode(ea62);
+$atelier-ryza2-type-accessory: unicode(ea63);
+$atelier-ryza2-type-armor: unicode(ea64);
+$atelier-ryza2-type-attack: unicode(ea65);
+$atelier-ryza2-type-buff: unicode(ea66);
+$atelier-ryza2-type-debuff: unicode(ea67);
+$atelier-ryza2-type-heal: unicode(ea68);
+$atelier-ryza2-type-synthesis: unicode(ea69);
+$atelier-ryza2-type-weapon: unicode(ea6a);
+$atelier-ryza2-wind: unicode(ea6b);
+$atelier-shallie-category-a-light-armor: unicode(ea6c);
+$atelier-shallie-category-accessory: unicode(ea6d);
+$atelier-shallie-category-adventure: unicode(ea6e);
+$atelier-shallie-category-ancient-power: unicode(ea6f);
+$atelier-shallie-category-ancient-relic: unicode(ea70);
+$atelier-shallie-category-animal: unicode(ea71);
+$atelier-shallie-category-antique: unicode(ea72);
+$atelier-shallie-category-apple: unicode(ea73);
+$atelier-shallie-category-aroma: unicode(ea74);
+$atelier-shallie-category-bee-hive: unicode(ea75);
+$atelier-shallie-category-bomb: unicode(ea76);
+$atelier-shallie-category-book: unicode(ea77);
+$atelier-shallie-category-clay: unicode(ea78);
+$atelier-shallie-category-cloth: unicode(ea79);
+$atelier-shallie-category-dragon-material: unicode(ea7a);
+$atelier-shallie-category-elixir: unicode(ea7b);
+$atelier-shallie-category-feather: unicode(ea7c);
+$atelier-shallie-category-fish: unicode(ea7d);
+$atelier-shallie-category-food: unicode(ea7e);
+$atelier-shallie-category-fruit: unicode(ea7f);
+$atelier-shallie-category-fuel: unicode(ea80);
+$atelier-shallie-category-gas: unicode(ea81);
+$atelier-shallie-category-grain: unicode(ea82);
+$atelier-shallie-category-gunpowder: unicode(ea83);
+$atelier-shallie-category-ingot: unicode(ea84);
+$atelier-shallie-category-jewel: unicode(ea85);
+$atelier-shallie-category-key-item: unicode(ea86);
+$atelier-shallie-category-liquid: unicode(ea87);
+$atelier-shallie-category-lumber: unicode(ea88);
+$atelier-shallie-category-magic-herb: unicode(ea89);
+$atelier-shallie-category-magic-tool: unicode(ea8a);
+$atelier-shallie-category-meat: unicode(ea8b);
+$atelier-shallie-category-medicine: unicode(ea8c);
+$atelier-shallie-category-metal: unicode(ea8e);
+$atelier-shallie-category-mystery: unicode(ea8d);
+$atelier-shallie-category-natural: unicode(ea8f);
+$atelier-shallie-category-ore: unicode(ea90);
+$atelier-shallie-category-paper: unicode(ea91);
+$atelier-shallie-category-pelt: unicode(ea92);
+$atelier-shallie-category-plant: unicode(ea94);
+$atelier-shallie-category-poison: unicode(ea93);
+$atelier-shallie-category-sand: unicode(ea95);
+$atelier-shallie-category-seasoning: unicode(ea96);
+$atelier-shallie-category-slag-part: unicode(ea97);
+$atelier-shallie-category-snack: unicode(ea98);
+$atelier-shallie-category-sundry: unicode(ea99);
+$atelier-shallie-category-thread: unicode(ea9a);
+$atelier-shallie-category-vegetable: unicode(ea9b);
+$atelier-shallie-category-w-bell: unicode(ea9c);
+$atelier-shallie-category-wood: unicode(ea9d);
+$atelier-shallie-earth: unicode(ea9e);
+$atelier-shallie-fire: unicode(ea9f);
+$atelier-shallie-race-alchemic: unicode(eaa0);
+$atelier-shallie-race-animal: unicode(eaa1);
+$atelier-shallie-race-beast: unicode(eaa2);
+$atelier-shallie-race-dragon: unicode(eaa3);
+$atelier-shallie-race-elemental: unicode(eaa4);
+$atelier-shallie-race-humanoid: unicode(eaa5);
+$atelier-shallie-race-rare-slag: unicode(eaa6);
+$atelier-shallie-race-slag: unicode(eaa7);
+$atelier-shallie-water: unicode(eaa8);
+$atelier-shallie-wind: unicode(eaa9);
+$atelier-totori-category-accessory: unicode(eaaa);
+$atelier-totori-category-bomb: unicode(eaab);
+$atelier-totori-category-bug: unicode(eaac);
+$atelier-totori-category-cloth: unicode(eaad);
+$atelier-totori-category-cooking: unicode(eaae);
+$atelier-totori-category-dessert: unicode(eaaf);
+$atelier-totori-category-elixir: unicode(eab1);
+$atelier-totori-category-fish: unicode(eab0);
+$atelier-totori-category-fuel: unicode(eab3);
+$atelier-totori-category-gunpowder: unicode(eab2);
+$atelier-totori-category-healing: unicode(eab4);
+$atelier-totori-category-ingot: unicode(eab5);
+$atelier-totori-category-jewel: unicode(eab6);
+$atelier-totori-category-key-item: unicode(eab7);
+$atelier-totori-category-liquid: unicode(eab8);
+$atelier-totori-category-lumber: unicode(eab9);
+$atelier-totori-category-magic-tool: unicode(eabb);
+$atelier-totori-category-meat: unicode(eaba);
+$atelier-totori-category-medicine: unicode(eabd);
+$atelier-totori-category-mystery: unicode(eabc);
+$atelier-totori-category-ore: unicode(eabe);
+$atelier-totori-category-pie: unicode(eabf);
+$atelier-totori-category-plant: unicode(eac0);
+$atelier-totori-category-poison: unicode(eac1);
+$atelier-totori-category-seasoning: unicode(eac2);
+$atelier-totori-category-spice: unicode(eac3);
+$atelier-totori-category-sundry: unicode(eac4);
+$atelier-totori-category-supplement: unicode(eac5);
+$atelier-totori-category-threads: unicode(eac6);
+$atelier-totori-category-vegetable: unicode(eac7);
+
+.atelier-escha-accessory::before {
+  content: $atelier-escha-accessory;
+}
+
+.atelier-escha-armor::before {
+  content: $atelier-escha-armor;
+}
+
+.atelier-escha-bomb::before {
+  content: $atelier-escha-bomb;
+}
+
+.atelier-escha-buff::before {
+  content: $atelier-escha-buff;
+}
+
+.atelier-escha-category-liquid::before {
+  content: $atelier-escha-category-liquid;
+}
+
+.atelier-escha-heal::before {
+  content: $atelier-escha-heal;
+}
+
+.atelier-escha-weapon::before {
+  content: $atelier-escha-weapon;
+}
+
+.atelier-meruru-category-construction::before {
+  content: $atelier-meruru-category-construction;
+}
+
+.atelier-meruru-category-development::before {
+  content: $atelier-meruru-category-development;
+}
+
+.atelier-meruru-category-farming::before {
+  content: $atelier-meruru-category-farming;
+}
+
+.atelier-meruru-category-housing::before {
+  content: $atelier-meruru-category-housing;
+}
+
+.atelier-meruru-category-mushroom::before {
+  content: $atelier-meruru-category-mushroom;
+}
+
+.atelier-meruru-category-security::before {
+  content: $atelier-meruru-category-security;
+}
+
+.atelier-meruru-category-tourism::before {
+  content: $atelier-meruru-category-tourism;
+}
 
 .atelier-ryza2-book::before {
   content: $atelier-ryza2-book;
@@ -471,3 +633,370 @@ $atelier-ryza2-wind: unicode(ea5d);
   content: $atelier-ryza2-wind;
 }
 
+.atelier-shallie-category-a-light-armor::before {
+  content: $atelier-shallie-category-a-light-armor;
+}
+
+.atelier-shallie-category-accessory::before {
+  content: $atelier-shallie-category-accessory;
+}
+
+.atelier-shallie-category-adventure::before {
+  content: $atelier-shallie-category-adventure;
+}
+
+.atelier-shallie-category-ancient-power::before {
+  content: $atelier-shallie-category-ancient-power;
+}
+
+.atelier-shallie-category-ancient-relic::before {
+  content: $atelier-shallie-category-ancient-relic;
+}
+
+.atelier-shallie-category-animal::before {
+  content: $atelier-shallie-category-animal;
+}
+
+.atelier-shallie-category-antique::before {
+  content: $atelier-shallie-category-antique;
+}
+
+.atelier-shallie-category-apple::before {
+  content: $atelier-shallie-category-apple;
+}
+
+.atelier-shallie-category-aroma::before {
+  content: $atelier-shallie-category-aroma;
+}
+
+.atelier-shallie-category-bee-hive::before {
+  content: $atelier-shallie-category-bee-hive;
+}
+
+.atelier-shallie-category-bomb::before {
+  content: $atelier-shallie-category-bomb;
+}
+
+.atelier-shallie-category-book::before {
+  content: $atelier-shallie-category-book;
+}
+
+.atelier-shallie-category-clay::before {
+  content: $atelier-shallie-category-clay;
+}
+
+.atelier-shallie-category-cloth::before {
+  content: $atelier-shallie-category-cloth;
+}
+
+.atelier-shallie-category-dragon-material::before {
+  content: $atelier-shallie-category-dragon-material;
+}
+
+.atelier-shallie-category-elixir::before {
+  content: $atelier-shallie-category-elixir;
+}
+
+.atelier-shallie-category-feather::before {
+  content: $atelier-shallie-category-feather;
+}
+
+.atelier-shallie-category-fish::before {
+  content: $atelier-shallie-category-fish;
+}
+
+.atelier-shallie-category-food::before {
+  content: $atelier-shallie-category-food;
+}
+
+.atelier-shallie-category-fruit::before {
+  content: $atelier-shallie-category-fruit;
+}
+
+.atelier-shallie-category-fuel::before {
+  content: $atelier-shallie-category-fuel;
+}
+
+.atelier-shallie-category-gas::before {
+  content: $atelier-shallie-category-gas;
+}
+
+.atelier-shallie-category-grain::before {
+  content: $atelier-shallie-category-grain;
+}
+
+.atelier-shallie-category-gunpowder::before {
+  content: $atelier-shallie-category-gunpowder;
+}
+
+.atelier-shallie-category-ingot::before {
+  content: $atelier-shallie-category-ingot;
+}
+
+.atelier-shallie-category-jewel::before {
+  content: $atelier-shallie-category-jewel;
+}
+
+.atelier-shallie-category-key-item::before {
+  content: $atelier-shallie-category-key-item;
+}
+
+.atelier-shallie-category-liquid::before {
+  content: $atelier-shallie-category-liquid;
+}
+
+.atelier-shallie-category-lumber::before {
+  content: $atelier-shallie-category-lumber;
+}
+
+.atelier-shallie-category-magic-herb::before {
+  content: $atelier-shallie-category-magic-herb;
+}
+
+.atelier-shallie-category-magic-tool::before {
+  content: $atelier-shallie-category-magic-tool;
+}
+
+.atelier-shallie-category-meat::before {
+  content: $atelier-shallie-category-meat;
+}
+
+.atelier-shallie-category-medicine::before {
+  content: $atelier-shallie-category-medicine;
+}
+
+.atelier-shallie-category-metal::before {
+  content: $atelier-shallie-category-metal;
+}
+
+.atelier-shallie-category-mystery::before {
+  content: $atelier-shallie-category-mystery;
+}
+
+.atelier-shallie-category-natural::before {
+  content: $atelier-shallie-category-natural;
+}
+
+.atelier-shallie-category-ore::before {
+  content: $atelier-shallie-category-ore;
+}
+
+.atelier-shallie-category-paper::before {
+  content: $atelier-shallie-category-paper;
+}
+
+.atelier-shallie-category-pelt::before {
+  content: $atelier-shallie-category-pelt;
+}
+
+.atelier-shallie-category-plant::before {
+  content: $atelier-shallie-category-plant;
+}
+
+.atelier-shallie-category-poison::before {
+  content: $atelier-shallie-category-poison;
+}
+
+.atelier-shallie-category-sand::before {
+  content: $atelier-shallie-category-sand;
+}
+
+.atelier-shallie-category-seasoning::before {
+  content: $atelier-shallie-category-seasoning;
+}
+
+.atelier-shallie-category-slag-part::before {
+  content: $atelier-shallie-category-slag-part;
+}
+
+.atelier-shallie-category-snack::before {
+  content: $atelier-shallie-category-snack;
+}
+
+.atelier-shallie-category-sundry::before {
+  content: $atelier-shallie-category-sundry;
+}
+
+.atelier-shallie-category-thread::before {
+  content: $atelier-shallie-category-thread;
+}
+
+.atelier-shallie-category-vegetable::before {
+  content: $atelier-shallie-category-vegetable;
+}
+
+.atelier-shallie-category-w-bell::before {
+  content: $atelier-shallie-category-w-bell;
+}
+
+.atelier-shallie-category-wood::before {
+  content: $atelier-shallie-category-wood;
+}
+
+.atelier-shallie-earth::before {
+  content: $atelier-shallie-earth;
+}
+
+.atelier-shallie-fire::before {
+  content: $atelier-shallie-fire;
+}
+
+.atelier-shallie-race-alchemic::before {
+  content: $atelier-shallie-race-alchemic;
+}
+
+.atelier-shallie-race-animal::before {
+  content: $atelier-shallie-race-animal;
+}
+
+.atelier-shallie-race-beast::before {
+  content: $atelier-shallie-race-beast;
+}
+
+.atelier-shallie-race-dragon::before {
+  content: $atelier-shallie-race-dragon;
+}
+
+.atelier-shallie-race-elemental::before {
+  content: $atelier-shallie-race-elemental;
+}
+
+.atelier-shallie-race-humanoid::before {
+  content: $atelier-shallie-race-humanoid;
+}
+
+.atelier-shallie-race-rare-slag::before {
+  content: $atelier-shallie-race-rare-slag;
+}
+
+.atelier-shallie-race-slag::before {
+  content: $atelier-shallie-race-slag;
+}
+
+.atelier-shallie-water::before {
+  content: $atelier-shallie-water;
+}
+
+.atelier-shallie-wind::before {
+  content: $atelier-shallie-wind;
+}
+
+.atelier-totori-category-accessory::before {
+  content: $atelier-totori-category-accessory;
+}
+
+.atelier-totori-category-bomb::before {
+  content: $atelier-totori-category-bomb;
+}
+
+.atelier-totori-category-bug::before {
+  content: $atelier-totori-category-bug;
+}
+
+.atelier-totori-category-cloth::before {
+  content: $atelier-totori-category-cloth;
+}
+
+.atelier-totori-category-cooking::before {
+  content: $atelier-totori-category-cooking;
+}
+
+.atelier-totori-category-dessert::before {
+  content: $atelier-totori-category-dessert;
+}
+
+.atelier-totori-category-elixir::before {
+  content: $atelier-totori-category-elixir;
+}
+
+.atelier-totori-category-fish::before {
+  content: $atelier-totori-category-fish;
+}
+
+.atelier-totori-category-fuel::before {
+  content: $atelier-totori-category-fuel;
+}
+
+.atelier-totori-category-gunpowder::before {
+  content: $atelier-totori-category-gunpowder;
+}
+
+.atelier-totori-category-healing::before {
+  content: $atelier-totori-category-healing;
+}
+
+.atelier-totori-category-ingot::before {
+  content: $atelier-totori-category-ingot;
+}
+
+.atelier-totori-category-jewel::before {
+  content: $atelier-totori-category-jewel;
+}
+
+.atelier-totori-category-key-item::before {
+  content: $atelier-totori-category-key-item;
+}
+
+.atelier-totori-category-liquid::before {
+  content: $atelier-totori-category-liquid;
+}
+
+.atelier-totori-category-lumber::before {
+  content: $atelier-totori-category-lumber;
+}
+
+.atelier-totori-category-magic-tool::before {
+  content: $atelier-totori-category-magic-tool;
+}
+
+.atelier-totori-category-meat::before {
+  content: $atelier-totori-category-meat;
+}
+
+.atelier-totori-category-medicine::before {
+  content: $atelier-totori-category-medicine;
+}
+
+.atelier-totori-category-mystery::before {
+  content: $atelier-totori-category-mystery;
+}
+
+.atelier-totori-category-ore::before {
+  content: $atelier-totori-category-ore;
+}
+
+.atelier-totori-category-pie::before {
+  content: $atelier-totori-category-pie;
+}
+
+.atelier-totori-category-plant::before {
+  content: $atelier-totori-category-plant;
+}
+
+.atelier-totori-category-poison::before {
+  content: $atelier-totori-category-poison;
+}
+
+.atelier-totori-category-seasoning::before {
+  content: $atelier-totori-category-seasoning;
+}
+
+.atelier-totori-category-spice::before {
+  content: $atelier-totori-category-spice;
+}
+
+.atelier-totori-category-sundry::before {
+  content: $atelier-totori-category-sundry;
+}
+
+.atelier-totori-category-supplement::before {
+  content: $atelier-totori-category-supplement;
+}
+
+.atelier-totori-category-threads::before {
+  content: $atelier-totori-category-threads;
+}
+
+.atelier-totori-category-vegetable::before {
+  content: $atelier-totori-category-vegetable;
+}

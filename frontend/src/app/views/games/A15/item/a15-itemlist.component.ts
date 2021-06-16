@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
-import { Item, Name } from '@app/interfaces/a22';
-import { A22Service } from '@app/services/a22.service';
+import { ItemList, Category } from '@app/interfaces/a15';
+import { A15Service } from '@app/services/a15.service';
 import { ErrorCodeService } from "@app/services/errorcode.service";
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -12,11 +12,11 @@ import { SeoService } from '@app/services/seo.service';
 import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
-    templateUrl: 'a22-itemlist.component.html',
-    selector: 'a22-itemlist',
+    templateUrl: 'a15-itemlist.component.html',
+    selector: 'a15-itemlist',
   })
 
-  export class A22ItemlistComponent implements OnInit {
+  export class A15ItemlistComponent implements OnInit {
     modalRef: BsModalRef;
     pageForm: FormGroup;
     itemControl: FormControl;
@@ -26,8 +26,8 @@ import { Meta, Title } from '@angular/platform-browser';
     errorVars: any[];
     errorMsg: string;
     item: string = "items";
-    items: Item[];
-    filteredItems: Observable<Item[]>;
+    items: ItemList[];
+    filteredItems: Observable<ItemList[]>;
     currentType: string = "Any";
     currentElem: string = "Any";
     currentElemVal: number = 1;
@@ -35,7 +35,7 @@ import { Meta, Title } from '@angular/platform-browser';
     ingstring = "";
     language = "";
     config: ModalOptions = { class: "col-md-5 mx-auto" };
-    categories: Name[];
+    categories: Category[];
     selectedCat = "Any";
     selectedElem = "Any";
     selectedElemV = 0;
@@ -45,7 +45,7 @@ import { Meta, Title } from '@angular/platform-browser';
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private location: Location,
-      private a22service: A22Service,
+      private a15service: A15Service,
       private errorService: ErrorCodeService,
       private seoService: SeoService,
       private metaService: Meta,
@@ -61,12 +61,12 @@ import { Meta, Title } from '@angular/platform-browser';
   
       this.getItems();
       this.getCategories();
-      this.seoService.createCanonicalURL(`ryza2/items/${this.language}`);
-      this.titleService.setTitle(`Items - Atelier Ryza 2 - Barrel Wisdom`);
+      this.seoService.createCanonicalURL(`escha/items/${this.language}`);
+      this.titleService.setTitle(`Items - Atelier Escha & Logy - Barrel Wisdom`);
       this.metaService.updateTag({ name: `robots`, content: `index, archive` },`name="robots"`);
-      this.metaService.updateTag({ name: `description`, content: `The list of items in Atelier Ryza 2.` }, `name="description"`);
+      this.metaService.updateTag({ name: `description`, content: `The list of items in Atelier Escha & Logy.` }, `name="description"`);
       this.metaService.updateTag({ property: `og:title`, content: `Items` }, `property="og:title"`);
-      this.metaService.updateTag({ property: `og:description`, content: `The list of items in Atelier Ryza 2.` },`property="og:description"`);
+      this.metaService.updateTag({ property: `og:description`, content: `The list of items in Atelier Escha & Logy.` },`property="og:description"`);
       this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
       this.metaService.updateTag({ property: `og:image`, content: `/media/main/barrel.png` }, `property="og:image"`);
   
@@ -74,7 +74,7 @@ import { Meta, Title } from '@angular/platform-browser';
         filtertext: this.itemControl,
         filtering: this.ingControl,
         type: ['Any'],
-        elementval: [1],
+        elementval: [0],
         element: ["Any"]
       })
   
@@ -82,16 +82,16 @@ import { Meta, Title } from '@angular/platform-browser';
         .subscribe(type => {
           this.currentType = type;
         });
-
-        this.pageForm.get('elementval').valueChanges
+  
+      this.pageForm.get('elementval').valueChanges
         .subscribe(val => {
           this.currentElemVal = val;
-        });
+      });
 
-        this.pageForm.get('element').valueChanges
+      this.pageForm.get('element').valueChanges
         .subscribe(val => {
           this.currentElem = val;
-        });
+      });
   
       this.itemControl.valueChanges.subscribe(search => {
         this.searchstring = search;
@@ -100,14 +100,15 @@ import { Meta, Title } from '@angular/platform-browser';
       this.ingControl.valueChanges.subscribe(search => {
         this.ingstring = search;
       });
+  
     }
   
     getItems() {
-      this.a22service.getItemList(this.language)
+      this.a15service.getItemList(this.language)
       .subscribe(items => {
         this.items = items;
         this.filteredItems = this.pageForm.valueChanges.pipe(
-          startWith(null as Observable<Item[]>),
+          startWith(null as Observable<ItemList[]>),
           map((search: string | null) => search ? this.filterT(this.searchstring, this.currentType, this.currentElemVal, this.currentElem, this.ingstring) : this.items.slice())
         );
       },
@@ -119,37 +120,37 @@ import { Meta, Title } from '@angular/platform-browser';
     }
 
     getCategories() {
-        this.a22service.getCategoryList(this.language)
-        .subscribe(categories  => {
-            this.categories = categories;
-        },
-        error => {
-            this.error = true,
-            this.errorCode = error.status.toString(),
-            this.errorVars = this.errorService.getCodes(this.errorCode)
-        });
-    }
+      this.a15service.getCategories(this.language)
+      .subscribe(categories  => {
+          this.categories = categories;
+      },
+      error => {
+          this.error = true,
+          this.errorCode = error.status.toString(),
+          this.errorVars = this.errorService.getCodes(this.errorCode)
+      });
+  }
   
     openModal(template: TemplateRef<any>, slugname: string) {
       this.item = slugname;
-      this.location.go('ryza2/items/' + slugname + "/" + this.language);
+      this.location.go('escha/items/' + slugname + "/" + this.language);
       this.modalRef = this.modalService.show(template);
       this.modalRef.onHide.subscribe((reason: string | any) => {
-          this.location.go('ryza2/items/' + this.language);
+          this.location.go('escha/items/' + this.language);
         })
     }
   
-    private filterT(value: string, type: string, elementV: number, element: string, ing: string): Item[] {
+    private filterT(value: string, type: string, elementV: number, element: string, ing: string): ItemList[] {
   
       const filterValue = value.toLowerCase();
-      let list: Item[] = this.items;
+      let list: ItemList[] = this.items;
 
       if(type != 'Any') {
-          list = list.filter(item => item.category.some(c => c.name == type) );
+          list = list.filter(item => item.categories.some(c => c.name == type) );
       }
 
       if(elementV > 1) {
-          list = list.filter(item => item.elementvalue >= elementV);
+          list = list.filter(item => item.evalue >= elementV);
       }
 
       switch(element) {
@@ -157,22 +158,22 @@ import { Meta, Title } from '@angular/platform-browser';
               list = list.filter(item => item.fire)
               break;
           }
-          case "Ice": {
-            list = list.filter(item => item.ice)
+          case "Water": {
+            list = list.filter(item => item.water)
             break;
-          }
-          case "Lightning": {
-              list = list.filter(item => item.lightning)
-              break;
           }
           case "Wind": {
               list = list.filter(item => item.wind)
               break;
           }
+          case "Earth": {
+              list = list.filter(item => item.earth)
+              break;
+          }
       }
 
       if(ing.length > 0) {
-          list = list.filter(item => (item.ingredient_set) ? item.ingredient_set.some(i => (i.item) ? i.item.toLowerCase().includes(ing) : i.category.toLowerCase().includes(ing)) : false)
+          list = list.filter(item => (item.ingredient_set) ? item.ingredient_set.some(i => i.ing.toLowerCase().includes(ing.toLowerCase())) : false)
       }
 
       if(value.length > 0) {
