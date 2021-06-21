@@ -87,6 +87,12 @@ export interface MonsterList {
     isDLC: boolean;
 }
 
+export interface MonsterLevel {
+    slugname: string;
+    name: string;
+    level: number;
+}
+
 export interface Ingredient {
     ing: string;
 }
@@ -199,4 +205,32 @@ export interface CategoryData {
     icon_name: string;
     item_set: CategoryItem[];
     ingredientcat: IngCat[];
+}
+
+export interface Relic {
+    area: RegionName[];
+    item: NameLink;
+    disassembly_set: Disassembled[];
+}
+
+export interface AreaData {
+    slugname: string;
+    name: string;
+    subarea: string;
+    items: NameLink[];
+    rare: NameLink[];
+    maxitem: NameLink[];
+    monsters: NameLink[];
+    fieldevent: NameOnly[];
+    note: string;
+}
+
+export interface RegionData {
+    name: string;
+    slugname: string;
+    areas: AreaData[];
+    relic_set: Relic[];
+    strong: MonsterLevel[];
+    note: string;
+    grade: string;
 }

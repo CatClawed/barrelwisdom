@@ -57,6 +57,15 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'locations',
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A15/location/a15-location.module').then(m=>m.A15LocationModule),
+      },
+    ]
+  },
+  {
     path: '',
     redirectTo: '/escha/faq',
     pathMatch: 'full'

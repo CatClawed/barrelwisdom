@@ -1,15 +1,15 @@
 from rest_framework import viewsets, filters
-from games.A15.properties_a15.models import Property
-from games.A15.properties_a15.serializers import A15PropertySerializer
+from games.A16.properties_a16.models import Property
+from games.A16.properties_a16.serializers import A16PropertySerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 
-class A15PropertyViewSet(viewsets.ModelViewSet):
+class A16PropertyViewSet(viewsets.ModelViewSet):
     queryset = Property.objects.all()
-    serializer_class = A15PropertySerializer
+    serializer_class = A16PropertySerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
     lookup_field = 'slugname'
 
@@ -32,7 +32,7 @@ class A15PropertyViewSet(viewsets.ModelViewSet):
             )
             .order_by('index')
         )
-        serializer = A15PropertySerializer(queryset, many=True, context={'language': 'en'})
+        serializer = A16PropertySerializer(queryset, many=True, context={'language': 'en'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -54,7 +54,7 @@ class A15PropertyViewSet(viewsets.ModelViewSet):
             )
             .order_by('index')
         )
-        serializer = A15PropertySerializer(queryset, many=True, context={'language': 'ja'})
+        serializer = A16PropertySerializer(queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)
 
     # allows easy access via catect/slugname/en
@@ -80,7 +80,7 @@ class A15PropertyViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A15PropertySerializer(queryset, context={'language': 'en'})
+        serializer = A16PropertySerializer(queryset, context={'language': 'en'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ja")
@@ -105,5 +105,5 @@ class A15PropertyViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A15PropertySerializer(queryset, context={'language': 'ja'})
+        serializer = A16PropertySerializer(queryset, context={'language': 'ja'})
         return Response(serializer.data)

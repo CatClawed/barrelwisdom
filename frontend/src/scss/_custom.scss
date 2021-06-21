@@ -232,6 +232,15 @@ select {
   }
 }
 
+.border td, th {
+  border: 1px solid lightgray;
+}
+
+.hide-bullets {
+  list-style-type: none;
+  padding: 0;
+}
+
 /* Background pattern from Toptal Subtle Patterns */
 .main {
   background: url("/media/main/images/ricepaper2.jpg");
@@ -483,6 +492,30 @@ ul.pagination {
 .blog-tags {
   padding-bottom: 1em;
   border-bottom: 1px dotted black;
+}
+
+.spread-apart {
+  justify-content: space-around;
+}
+
+.table-compress {
+  background-color: white;
+  background-image: url("/media/main/images/clean_textile.png");
+  border: 1px lightgray solid;
+  margin-bottom: 1rem;
+}
+
+.table-compress th {
+  border: 1px lightgray solid;
+  padding: 0.5rem;
+  text-align: center;
+  background-color:rgba(211, 211, 211, 0.3);
+  height: 2rem;
+}
+
+.table-compress td {
+  border: 1px lightgray solid;
+  padding: 0.3rem;
 }
 
 // Game Data Pages

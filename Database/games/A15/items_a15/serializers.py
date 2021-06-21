@@ -1,8 +1,9 @@
 from rest_framework import serializers
 from collections import OrderedDict
 from games.A15.items_a15.models import *
+from games.A15.regions_a15.models import FieldEvent
 from games.A15.regions_a15.serializers import A15RegionNameSerializer, A15FieldEventSerializer
-from games.A15.monsters_a15.serializers import A15MonsterNameSerializer
+from games.A15.monsters_a15.serializers import A15MonsterNameSerializer, A15MonsterLevelSerializer
 from games.A15.properties_a15.serializers import A15PropertyNameSerializer
 from games.A15.categories_a15.serializers import A15CategorySerializerName, A15CategorySerializer, A15CategorySerializerLink
 from games.A15.effects_a15.serializers import A15EffectSerializerSimple
@@ -84,8 +85,23 @@ class A15DissasembledSerializer(serializers.ModelSerializer):
         model = Disassembled
         fields = ['parent']
 
+class A15ItemNameDisSerializer(serializers.ModelSerializer):
+    name = serializers.SerializerMethodField()
+    disassembly_set = A15DissasembleSerializer(many=True)
+    class Meta:
+        model = Item
+        fields = ['slugname', 'name', 'disassembly_set']
+
+    def get_name(self,obj):
+        if 'language' not in self.context:
+            return obj.item_en.name
+        if self.context['language'] == 'ja':
+            return obj.item_ja.name
+        else:
+            return obj.item_en.name
+
 class A15RelicSerializer(serializers.ModelSerializer):
-    item = A15ItemNameSerializer()
+    item = A15ItemNameDisSerializer()
     region = A15RegionNameSerializer()
     area = A15RegionNameSerializer(many=True)
     class Meta:
@@ -213,3 +229,68 @@ class A15BookSerializer(serializers.ModelSerializer):
             return obj.item_ja.desc
         else:
             return obj.item_en.desc
+
+class A15FieldEventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FieldEvent
+        fields = ['name']
+
+class A15AreaDataSerializer(serializers.ModelSerializer):
+    name = serializers.SerializerMethodField()
+    slugname = serializers.SerializerMethodField()
+    items = A15ItemNameSerializer(many=True)
+    rare = A15ItemNameSerializer(many=True)
+    maxitem = A15ItemNameSerializer(many=True)
+    fieldevent = A15FieldEventSerializer(many=True)
+    monsters = A15MonsterNameSerializer(many=True)
+    note = serializers.SerializerMethodField()
+    class Meta:
+        model = AreaData
+        fields = ['slugname', 'name', 'subarea', 'items', 'rare', 'maxitem', 'fieldevent', 'monsters', 'note']
+
+    def to_representation(self, instance):
+        result = super(A15AreaDataSerializer, self).to_representation(instance)
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', False, {}])
+    def get_name(self,obj):
+        if 'language' not in self.context:
+            return obj.area.reg_en.name
+        if self.context['language'] == 'ja':
+            return obj.area.reg_ja.name
+        else:
+            return obj.area.reg_en.name
+    def get_slugname(self,obj):
+        return obj.area.slugname
+    def get_note(self,obj):
+        return obj.area.note
+
+
+class A15RegionDataSerializer(serializers.ModelSerializer):
+    name = serializers.SerializerMethodField()
+    slugname = serializers.SerializerMethodField()
+    areas = A15AreaDataSerializer(many=True)
+    relic_set = A15RelicSerializer(many=True)
+    strong = A15MonsterLevelSerializer(many=True)
+    note = serializers.SerializerMethodField()
+    grade = serializers.SerializerMethodField()
+
+    class Meta:
+        model = RegionData
+        fields = ['slugname', 'name', 'areas', 'relic_set', 'strong', 'note', 'grade']
+    def to_representation(self, instance):
+        result = super(A15RegionDataSerializer, self).to_representation(instance)
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', False, {}])
+    def get_name(self,obj):
+        if 'language' not in self.context:
+            return obj.region.reg_en.name
+        if self.context['language'] == 'ja':
+            return obj.region.reg_ja.name
+        else:
+            return obj.region.reg_en.name
+    def get_slugname(self,obj):
+        return obj.region.slugname
+    def get_note(self,obj):
+        return obj.region.note
+    def get_grade(self,obj):
+        return obj.region.grade

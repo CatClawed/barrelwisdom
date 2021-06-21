@@ -1,13 +1,12 @@
 from rest_framework import serializers
-from games.A15.effects_a15.models import Effect
-from games.A15.items_a15.models import EffectLine
+from games.A16.effects_a16.models import Effect
+from games.A16.items_a16.models import EffectLines, EffectData
 
-
-class A15EffectLineerializer(serializers.ModelSerializer):
+class A16EffectLineSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     slugname = serializers.SerializerMethodField()
     class Meta:
-        model = EffectLine
+        model = EffectLines
         fields = ['name', 'slugname']
 
     def get_name(self,obj):
@@ -25,13 +24,20 @@ class A15EffectLineerializer(serializers.ModelSerializer):
         else:
             return obj.item.slugname
 
-class A15EffectSerializer(serializers.ModelSerializer):
+
+class A16EffectDataSerializer(serializers.ModelSerializer):
+    effectlines_set = A16EffectLineSerializer(many=True)
+    class Meta:
+        model = EffectData
+        fields = ['effectlines_set']
+
+class A16EffectSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     desc = serializers.SerializerMethodField()
-    effectline_set = A15EffectLineerializer(many=True)
+    effectdata_set = A16EffectDataSerializer(many=True)
     class Meta:
         model = Effect
-        fields = ['slugname', 'name', 'desc', "effectline_set"]
+        fields = ['slugname', 'name', 'desc', "effectdata_set"]
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -48,7 +54,7 @@ class A15EffectSerializer(serializers.ModelSerializer):
         else:
             return obj.eff_en.desc
 
-class A15EffectSerializerSimple(serializers.ModelSerializer):
+class A16EffectSerializerSimple(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Effect

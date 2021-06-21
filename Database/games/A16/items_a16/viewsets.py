@@ -1,15 +1,15 @@
 from rest_framework import viewsets, filters
-from games.A15.items_a15.models import Item, Book, RegionData
-from games.A15.items_a15.serializers import A15ItemSerializer, A15ItemFullSerializer, A15BookSerializer, A15RegionDataSerializer
+from games.A16.items_a16.models import Item, Book
+from games.A16.items_a16.serializers import A16ItemSerializer, A16ItemFullSerializer, A16BookSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 
-class A15ItemViewSet(viewsets.ModelViewSet):
+class A16ItemViewSet(viewsets.ModelViewSet):
     queryset = Item.objects.all()
-    serializer_class = A15ItemSerializer
+    serializer_class = A16ItemSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
     lookup_field = 'slugname'
 
@@ -28,7 +28,7 @@ class A15ItemViewSet(viewsets.ModelViewSet):
                 'ingredient_set__item__item_en'
             )
         )
-        serializer = A15ItemSerializer(queryset, many=True, context={'language': 'en'})
+        serializer = A16ItemSerializer(queryset, many=True, context={'language': 'en'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -46,7 +46,7 @@ class A15ItemViewSet(viewsets.ModelViewSet):
                 'ingredient_set__item__item_ja'
             )
         )
-        serializer = A15ItemSerializer(queryset, many=True, context={'language': 'ja'})
+        serializer = A16ItemSerializer(queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)
 
     # allows easy access via catect/slugname/en
@@ -74,20 +74,20 @@ class A15ItemViewSet(viewsets.ModelViewSet):
                     'equip_set',
                     'disassembly_set',
                     'disassembly_set__item__item_en',
-                    'relic_set',
-                    'relic_set__region__reg_en',
                     'disassembled_set',
                     'disassembled_set__item__item_en',
                     'book_set',
                     'book_set__item_en',
-                    'effectline_set',
-                    'effectline_set__effect__eff_en'
+                    'effectlines_set',
+                    'effectlines_set__effects',
+                    'effectlines_set__effects__effect',
+                    'effectlines_set__effects__effect__eff_en'
                 )
                 .get(slugname=slugname)
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A15ItemFullSerializer(queryset, context={'language': 'en'})
+        serializer = A16ItemFullSerializer(queryset, context={'language': 'en'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ja")
@@ -114,25 +114,25 @@ class A15ItemViewSet(viewsets.ModelViewSet):
                     'equip_set',
                     'disassembly_set',
                     'disassembly_set__item__item_ja',
-                    'relic_set',
-                    'relic_set__region__reg_ja',
                     'disassembled_set',
                     'disassembled_set__item__item_ja',
                     'book_set',
                     'book_set__item_ja',
-                    'effectline_set',
-                    'effectline_set__effect__eff_ja'
+                    'effectlines_set',
+                    'effectlines_set__effects',
+                    'effectlines_set__effects__effect',
+                    'effectlines_set__effects__effect__eff_ja'
                 )
                 .get(slugname=slugname)
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A15ItemFullSerializer(queryset, context={'language': 'ja'})
+        serializer = A16ItemFullSerializer(queryset, context={'language': 'ja'})
         return Response(serializer.data)
 
-class A15BookViewSet(viewsets.ModelViewSet):
+class A16BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
-    serializer_class = A15BookSerializer
+    serializer_class = A16BookSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
     lookup_field = 'slugname'
 
@@ -148,7 +148,7 @@ class A15BookViewSet(viewsets.ModelViewSet):
                 'items__item_en'
             )
         )
-        serializer = A15BookSerializer(queryset, many=True, context={'language': 'en'})
+        serializer = A16BookSerializer(queryset, many=True, context={'language': 'en'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -163,7 +163,7 @@ class A15BookViewSet(viewsets.ModelViewSet):
                 'items__item_ja'
             )
         )
-        serializer = A15BookSerializer(queryset, many=True, context={'language': 'ja'})
+        serializer = A16BookSerializer(queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)
 
     # allows easy access via catect/slugname/en
@@ -183,7 +183,7 @@ class A15BookViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A15BookSerializer(queryset, context={'language': 'en'})
+        serializer = A16BookSerializer(queryset, context={'language': 'en'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ja")
@@ -202,67 +202,5 @@ class A15BookViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A15BookSerializer(queryset, context={'language': 'ja'})
-        return Response(serializer.data)
-
-class A15RegionViewSet(viewsets.ModelViewSet):
-    queryset = RegionData.objects.all()
-    serializer_class = A15RegionDataSerializer
-    filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    lookup_field = 'slugname'
-
-    @action(detail=True, methods=['get'], url_path="en")
-    def en_full(self, request, slugname):
-        try:
-            queryset = (
-                RegionData.objects
-                .select_related(
-                    'region'
-                )
-                .prefetch_related(
-                    'region__reg_en',
-                    'areas',
-                    'areas__items',
-                    'areas__items__item_en',
-                    'areas__rare',
-                    'areas__rare__item_en',
-                    'areas__maxitem',
-                    'areas__maxitem__item_en',
-                    'areas__fieldevent',
-                    'areas__monsters',
-                    'areas__monsters__mon_en'
-                )
-                .get(region__slugname=slugname)
-            )
-        except ObjectDoesNotExist:
-            raise Http404
-        serializer = A15RegionDataSerializer(queryset, context={'language': 'en'})
-        return Response(serializer.data)
-
-    @action(detail=True, methods=['get'], url_path="ja")
-    def ja_full(self, request, slugname):
-        try:
-            queryset = (
-                RegionData.objects
-                .select_related(
-                    'region'
-                )
-                .prefetch_related(
-                    'region__reg_ja',
-                    'areas',
-                    'areas__items',
-                    'areas__items__item_ja',
-                    'areas__rare',
-                    'areas__rare__item_ja',
-                    'areas__maxitem',
-                    'areas__maxitem__item_ja',
-                    'areas__fieldevent',
-                    'areas__monsters',
-                    'areas__monsters__mon_ja'
-                )
-                .get(region__slugname=slugname)
-            )
-        except ObjectDoesNotExist:
-            raise Http404
-        serializer = A15RegionDataSerializer(queryset, context={'language': 'ja'})
+        serializer = A16BookSerializer(queryset, context={'language': 'ja'})
         return Response(serializer.data)

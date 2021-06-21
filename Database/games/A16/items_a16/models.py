@@ -75,7 +75,6 @@ class Ingredient(models.Model):
     category = models.ForeignKey(Category, blank=True, null=True, on_delete=models.CASCADE, related_name='ingredientcat')
     num = models.IntegerField(blank=True, null=True)
 
-
 class EffectData(models.Model):
     effect = models.ForeignKey(Effect, on_delete=models.CASCADE)
     min_elem = models.IntegerField()

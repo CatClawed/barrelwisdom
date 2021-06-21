@@ -48,7 +48,7 @@ class Book(models.Model):
     item_en = models.OneToOneField(Item_en, on_delete=models.CASCADE)
     item_ja = models.OneToOneField(Item_ja, on_delete=models.CASCADE)
     items = models.ManyToManyField(Item)
-    acquisition = models.CharField(max_length=200)
+    acquisition = models.CharField(max_length=200) 
     index = models.IntegerField()
     class Meta:
         ordering = ['index']
@@ -78,11 +78,6 @@ class Disassembled(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     parent = models.ManyToManyField(Item, related_name="disassembledparent")
 
-class Relic(models.Model):
-    item = models.ForeignKey(Item, on_delete=models.CASCADE)
-    region = models.ForeignKey(Region, on_delete=models.CASCADE)
-    area = models.ManyToManyField(Region, related_name="areas")
-
 class Ingredient(models.Model):
     synthitem = models.ForeignKey(Item, on_delete=models.CASCADE)
     item = models.ForeignKey(Item, blank=True, null=True, on_delete=models.CASCADE, related_name='ingredientitem')
@@ -107,3 +102,14 @@ class AreaData(models.Model):
     rare = models.ManyToManyField(Item, related_name='RareItem')
     maxitem = models.ManyToManyField(Item, related_name='MaxItem')
     fieldevent = models.ManyToManyField(FieldEvent)
+
+class RegionData(models.Model):
+    region = models.ForeignKey(Region, on_delete=models.CASCADE)
+    areas = models.ManyToManyField(AreaData)
+    strong = models.ManyToManyField(Monster)
+
+class Relic(models.Model):
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    region = models.ForeignKey(Region, on_delete=models.CASCADE)
+    area = models.ManyToManyField(Region, related_name="areas")
+    regiondata = models.ForeignKey(RegionData, on_delete=models.CASCADE, blank=True, null=True)

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders,  } from '@angular/common/http';
 import { Observable} from 'rxjs';
 import { environment } from '@environments/environment';
-import { Property, Effect, MonsterList, MonsterFull, Book, ItemList, ItemFull, Category, CategoryData } from '@app/interfaces/a15';
+import { Property, RegionData, Effect, MonsterList, MonsterFull, Book, ItemList, ItemFull, Category, CategoryData } from '@app/interfaces/a15';
 
 @Injectable({ providedIn: 'root' })
 export class A15Service {
@@ -60,6 +60,10 @@ export class A15Service {
 
     getCategory(slugname: string, language: string): Observable<CategoryData> {
       return this.http.get<CategoryData>(`${environment.apiUrl}/A15/category/${slugname}/${language}/`);
+    }
+
+    getRegion(slugname: string, language: string): Observable<RegionData> {
+      return this.http.get<RegionData>(`${environment.apiUrl}/A15/regiondata/${slugname}/${language}/`);
     }
     
 }

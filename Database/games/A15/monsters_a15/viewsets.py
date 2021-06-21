@@ -1,6 +1,6 @@
 from rest_framework import viewsets, filters
 from games.A15.monsters_a15.models import Monster
-from games.A15.monsters_a15.serializers import A15MonsterSerializer
+from games.A15.monsters_a15.serializers import A15MonsterSerializer, A15MonsterLevelSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
@@ -22,7 +22,7 @@ class A15MonsterViewSet(viewsets.ModelViewSet):
             )
             .order_by('index')
         )
-        serializer = A15MonsterSerializer(queryset, many=True, context={'language': 'en'})
+        serializer = A15MonsterLevelSerializer(queryset, many=True, context={'language': 'en'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -34,7 +34,7 @@ class A15MonsterViewSet(viewsets.ModelViewSet):
             )
             .order_by('index')
         )
-        serializer = A15MonsterSerializer(queryset, many=True, context={'language': 'ja'})
+        serializer = A15MonsterLevelSerializer(queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)
 
     # allows easy access via catect/slugname/en
@@ -45,6 +45,12 @@ class A15MonsterViewSet(viewsets.ModelViewSet):
                 Monster.objects
                 .select_related(
                     'mon_en'
+                )
+                .prefetch_related(
+                    'item_set',
+                    'item_set__item_en',
+                    'locations',
+                    'locations__reg_en'
                 )
                 .get(slugname=slugname)
             )
@@ -60,6 +66,12 @@ class A15MonsterViewSet(viewsets.ModelViewSet):
                 Monster.objects
                 .select_related(
                     'mon_ja'
+                )
+                .prefetch_related(
+                    'item_set',
+                    'item_set__item_ja',
+                    'locations',
+                    'locations__reg_ja'
                 )
                 .get(slugname=slugname)
             )

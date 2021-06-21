@@ -1,15 +1,15 @@
 from rest_framework import viewsets, filters
-from games.A15.categories_a15.models import Category
-from games.A15.categories_a15.serializers import A15CategorySerializer, A15CategoryDataSerializer
+from games.A16.categories_a16.models import Category
+from games.A16.categories_a16.serializers import A16CategorySerializer, A16CategoryDataSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 
-class A15CategoryViewSet(viewsets.ModelViewSet):
+class A16CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
-    serializer_class = A15CategorySerializer
+    serializer_class = A16CategorySerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
     lookup_field = 'slugname'
 
@@ -21,7 +21,7 @@ class A15CategoryViewSet(viewsets.ModelViewSet):
                 'cat_en'
             )
         )
-        serializer = A15CategorySerializer(queryset, many=True, context={'language': 'en'})
+        serializer = A16CategorySerializer(queryset, many=True, context={'language': 'en'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -32,7 +32,7 @@ class A15CategoryViewSet(viewsets.ModelViewSet):
                 'cat_ja'
             )
         )
-        serializer = A15CategorySerializer(queryset, many=True, context={'language': 'ja'})
+        serializer = A16CategorySerializer(queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="en")
@@ -54,7 +54,7 @@ class A15CategoryViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A15CategoryDataSerializer(queryset, context={'language': 'en'})
+        serializer = A16CategoryDataSerializer(queryset, context={'language': 'en'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ja")
@@ -76,5 +76,5 @@ class A15CategoryViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A15CategoryDataSerializer(queryset, context={'language': 'ja'})
+        serializer = A16CategoryDataSerializer(queryset, context={'language': 'ja'})
         return Response(serializer.data)

@@ -11,7 +11,42 @@ import sys
 
 with open('scripts/data.txt', newline='', encoding='utf-8') as csvfile:
     reader = csv.reader(csvfile, delimiter='\t')
+
+    reg = RegionData.objects.all()
+    mon = Monster.objects.all()
+
+    for r in reg:
+        for m in mon:
+            if m.isStrong:
+                if r.region in m.locations.all():
+                    print(r.region.slugname)
+                    print(m.slugname)
+                    r.strong.add(m)
+
+
+
+    """
+    rel = Relic.objects.all()
+
+    for r in rel:
+        data = RegionData.objects.get(region__slugname=r.region.slugname)
+        r.regiondata  = data
+        r.save()
+
+
     for row in reader:
+        
+        areas = AreaData.objects.all()
+        r = Region.objects.get(slugname=row[0])
+        obj = RegionData(region=r)
+        obj.save()
+
+        for area in areas:
+            if area.area.parent.slugname == r.slugname:
+                obj.areas.add(area)
+                print(area.area.slugname)
+
+
         it = Item.objects.get(slugname=row[1])
         parent = Item.objects.get(slugname=row[0])
 
@@ -43,7 +78,6 @@ with open('scripts/data.txt', newline='', encoding='utf-8') as csvfile:
             else:
                 i.parent.add(parent)
 
-        """
         obj = AreaData(
             area=Region.objects.get(slugname=row[1]),
             subarea=(row[2] if row[2] else None),
