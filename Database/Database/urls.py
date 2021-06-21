@@ -10,6 +10,7 @@ from userprofile.viewsets import UserProfileViewSet, UserNameViewSet, RegView
 from auth.views import JWTObtainPairView
 from rest_framework_simplejwt import views as jwt_views
 
+from games.A12 import urls as A12
 from games.A15 import urls as A15
 from games.A16 import urls as A16
 from games.A22 import urls as A22
@@ -25,6 +26,7 @@ router.register(r'user', UserNameViewSet)
 router.register(r'nav', NavigationViewSet)
 
 routeLists = [
+    A12.routes,
     A15.routes,
     A16.routes,
     A22.routes

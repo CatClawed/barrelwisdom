@@ -3,18 +3,7 @@ from games.A16.effects_a16.viewsets import A16EffectViewSet
 from games.A16.properties_a16.viewsets import A16PropertyViewSet
 from games.A16.monsters_a16.viewsets import A16MonsterViewSet
 from games.A16.items_a16.viewsets import A16ItemViewSet, A16BookViewSet
-from games.A16.areadata_a16.viewsets import A16AreaViewSet
-"""
-from games.A16.regions_a16.viewsets import A16RegionViewSet
- A16RegionViewSet
-    
-    (r'A16/region', A16RegionViewSet),
-    
-    
-    (r'A16/regiondata', A16RegionViewSet),
-"""
-
-    
+from games.A16.areadata_a16.viewsets import A16AreaViewSet  
 
 routes = (
     (r'A16/category', A16CategoryViewSet),
