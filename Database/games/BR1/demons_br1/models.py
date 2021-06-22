@@ -17,3 +17,5 @@ class Demon(models.Model):
     pierce = models.CharField(max_length=15, blank=True, null=True)
     heart  = models.CharField(max_length=15, blank=True, null=True)
     flavor = models.CharField(max_length=500)
+    class Meta:
+        ordering = ['index']

@@ -14,6 +14,8 @@ class Item(models.Model):
     demons = models.ManyToManyField(Demon)
     missions = models.ManyToManyField(Mission)
     locations = models.ManyToManyField(Area)
+    class Meta:
+        ordering = ['index']
 
 class Ingredient(models.Model):
     craftitem = models.ForeignKey(Item, on_delete=models.CASCADE)

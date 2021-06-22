@@ -1,0 +1,27 @@
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+
+<div *ngIf="!error">
+<nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/shallie">Atelier Shallie</a></li>
+    <li class="breadcrumb-item"><a href="/shallie/effects">Effects</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{effect.name}}</li>
+  </ol>
+</nav>
+<div class="mx-auto row">
+<div class="{{colset}} card griddisplay card-body">
+    <div class="flex">
+        <h4 class="card-title  card-icon-space">{{effect.name}}</h4>
+    </div>
+    <div class="card-text">
+        <p *ngIf="effect.desc">{{effect.desc}}</p>
+        <b *ngIf="effect.effectdata_set">From Item:</b>
+        <ul *ngIf="effect.effectdata_set">
+          <li *ngFor="let e of effect.effectdata_set"><a href="/shallie/items/{{e.effectlines_set[0].slugname}}">{{e.effectlines_set[0].name}}</a></li>
+        </ul>
+    </div>
+</div>
+<language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="shallie"></language-settings>
+</div>
+</div>

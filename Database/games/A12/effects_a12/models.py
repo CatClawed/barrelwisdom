@@ -13,3 +13,5 @@ class Effect(models.Model):
     eff_en = models.OneToOneField(Effect_en, on_delete=models.CASCADE)
     eff_ja = models.OneToOneField(Effect_ja, on_delete=models.CASCADE)
     index = models.IntegerField()
+    class Meta:
+        ordering = ['index']

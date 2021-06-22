@@ -23,3 +23,5 @@ class Monster(models.Model):
     hp = models.IntegerField()
     note = models.CharField(max_length=400)
     isDX = models.BooleanField(default=False)
+    class Meta:
+        ordering = ['index']

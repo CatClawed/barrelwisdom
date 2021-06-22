@@ -20,3 +20,5 @@ class Trait(models.Model):
     cloth = models.BooleanField()
     accessory = models.BooleanField()
     note = models.CharField(max_length=400)
+    class Meta:
+        ordering = ['index']

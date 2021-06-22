@@ -80,6 +80,16 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'shallie',
+    component: DefaultLayoutComponent,
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A16/a16-routing.module').then(m=>m.A16RoutingModule),
+      },
+    ]
+  },
+  {
     path: 'ryza2',
     component: DefaultLayoutComponent,
     children: [
