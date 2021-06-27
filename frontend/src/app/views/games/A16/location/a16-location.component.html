@@ -1,0 +1,58 @@
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+
+<div *ngIf="!error">
+<nav style="margin-top: 1em;" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/shallie">Atelier Shallie</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Location: {{location.name}}</li>
+  </ol>
+</nav>
+<h1>{{location.name}}</h1>
+    <div style="justify-content: space-between; margin-left: 0.5em; margin-right: 0.5em;margin-bottom:0.5em;" class="row">
+    <div class="table-of-contents">
+        <b>Table of Contents</b>
+        <ol>
+            <li *ngFor="let area of location.fields">
+                <a [routerLink]='"."' [fragment]="area.slugname">{{area.name}}</a>
+            </li>
+        </ol>
+    </div>
+    <language-settings class="col-md-3" section="shallie"></language-settings>
+    </div>
+
+<ng-container *ngFor="let area of location.fields">
+  <h2 id="{{area.slugname}}">{{area.name}}</h2>
+  <div [innerHTML]="area.note"></div>
+  <table class="table border table-shrink">
+    <tr>
+      <th *ngIf="area.ingredients" class="table-dark-center">Items</th>
+      <th *ngIf="area.rare" class="table-dark-center">Rare</th>
+      <th *ngIf="area.relics" class="table-dark-center">Relic</th>
+      <th *ngIf="area.monsters" class="table-dark-center">Monsters</th>
+    </tr>
+    <tr>
+      <td *ngIf="area.ingredients">
+        <ul class="hide-bullets">
+          <li *ngFor="let it of area.ingredients"><a href="/shallie/items/{{it.slugname}}">{{it.name}}</a></li>
+        </ul>
+      </td>
+      <td *ngIf="area.rare">
+        <ul class="hide-bullets">
+          <li *ngFor="let it of area.rare"><a href="/shallie/items/{{it.slugname}}">{{it.name}}</a></li>
+        </ul>
+      </td>
+      <td *ngIf="area.relics">
+        <ul class="hide-bullets">
+          <li *ngFor="let it of area.relics"><a href="/shallie/items/{{it.slugname}}">{{it.name}}</a></li>
+        </ul>
+      </td>
+      <td *ngIf="area.monsters">
+        <ul class="hide-bullets">
+          <li *ngFor="let it of area.monsters"><a href="/shallie/monsters/{{it.slugname}}">{{it.name}}</a></li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</ng-container>
+</div>

@@ -383,7 +383,7 @@ export class CreateComponent {
       replacement: '-', 
       remove: undefined,
       lower: true,
-      strict: false,
+      strict: true,
       locale: 'en'
     });
   }

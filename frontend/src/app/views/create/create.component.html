@@ -29,8 +29,8 @@
         [ngClass]="{ 'is-invalid': submitted && f.imgURL.errors }"
         placeholder="Required for blog posts. Shows on main page.">
       <div *ngIf="submitted && f.imgURL.errors" class="invalid-feedback">
-        <div *ngIf="f.imgURL.errors.pattern">Image URL must be PNG/JPG using the url
-          https://media.barrelwisdom.com/file/barrelwisdom/*.</div>
+        <div *ngIf="f.imgURL.errors.pattern">Image URL must be PNG/JPG using the format
+          /media/*.</div>
         <div *ngIf="f.imgURL.errors.maxlength">Too long. 255 chars max.</div>
         <div *ngIf="f.imgURL.errors.required">Required for blog posts.</div>
       </div>
@@ -81,25 +81,19 @@
           {{tag}}
         </mat-option>
       </mat-autocomplete>
-
     </div>
   </div>
 
-  <h2>Content</h2>
-
-  <div class="form-group row">
-    <div class="col-md-6">
-      <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control"
-        [ngClass]="{ 'is-invalid': submitted && f.body.errors }" placeholder="Content."
-        formControlName="body"></textarea>
-    </div>
-    <div class="col-md-6">
-      <ngx-dynamic-hooks [content]="preview"></ngx-dynamic-hooks>
-    </div>
-  </div>
-
-  <button *ngIf="!disableSubmit" [disabled]="loading" class="btn btn-lg btn-primary">
+  <h1>Content</h1>
+  <textarea id="textarea-input" name="textarea-input" rows="20" class="form-control"
+    [ngClass]="{ 'is-invalid': submitted && f.body.errors }" placeholder="Content."
+    formControlName="body"></textarea>
+    <button *ngIf="!disableSubmit" [disabled]="loading" class="btn btn-lg btn-primary">
     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
     Submit
   </button>
   <div *ngIf="errorMsg" class="text-danger">{{errorMsg}}</div>
+
+  <h1>Preview</h1>
+    
+  <ngx-dynamic-hooks [content]="preview"></ngx-dynamic-hooks>

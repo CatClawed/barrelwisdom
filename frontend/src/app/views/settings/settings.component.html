@@ -33,8 +33,8 @@
             [ngClass]="{ 'is-invalid': submitted && profilef.avatar.errors }"
             placeholder="Admin can help. Shows if sole author.">
           <div *ngIf="submitted && profilef.avatar.errors" class="invalid-feedback">
-            <div *ngIf="profilef.avatar.errors.pattern">Image URL must be PNG/JPG using the url
-              https://media.barrelwisdom.com/file/barrelwisdom/*.</div>
+            <div *ngIf="profilef.avatar.errors.pattern">Image URL must be PNG/JPG using the format
+              /media/*.</div>
             <div *ngIf="profilef.avatar.errors.maxlength">Too long. 200 chars max.</div>
           </div>
         </div>

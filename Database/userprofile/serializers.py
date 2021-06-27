@@ -1,15 +1,29 @@
+from rest_framework.fields import SerializerMethodField
 from rest_framework import serializers
 from userprofile.models import UserProfile
 from django.contrib.auth.models import User
+from blog.models import Blog
 from invite.models import Invite
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.hashers import make_password
 from django.utils import timezone
 
+class BlogSimpleSerializer(serializers.ModelSerializer):
+    secname = serializers.SerializerMethodField()
+    secfull = serializers.SerializerMethodField()
+    class Meta:
+        model = Blog
+        fields = ['title', 'slugtitle', 'secname', 'secfull']
+    def get_secname(self,obj):
+        return obj.section.name
+    def get_secfull(self,obj):
+        return obj.section.fullname
+
 class UserSerializer(serializers.ModelSerializer):
+    blog_set = BlogSimpleSerializer(many=True)
     class Meta:
         model = User
-        fields = ['id', 'username']
+        fields = ['id', 'username', 'blog_set']
 
 class UserProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer()

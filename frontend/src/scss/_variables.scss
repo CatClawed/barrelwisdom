@@ -1,6 +1,6 @@
 // Variable overrides
 
-$atelier-font-path:        "../font" !default;
+$atelier-font-path:        "/media/main/font/atelier" !default;
 $atelier-background-color: #eee !default;
 $atelier-li-margin-right:  0.4em !default;
 
@@ -21,3 +21,6 @@ $font-family-sans-serif:
   "Roboto",
   "Helvetica Neue", Arial, sans-serif,
   "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+
+$fa-font-path: "~/media/main/font/fa-5.15.3";
+

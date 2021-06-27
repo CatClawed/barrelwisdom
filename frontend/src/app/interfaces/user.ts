@@ -7,9 +7,22 @@ export class User {
     group: string;
 }
 
+export class EditedBlogs {
+    title: string;
+    slugtitle: string;
+    secname: string;
+    secfull: string;
+}
+
 export class SimpleUser {
     id: number;
     username: string;
+}
+
+export class UserData {
+    id: number;
+    username: string;
+    blog_set: EditedBlogs[];
 }
 
 export class UserLogin {
@@ -18,7 +31,7 @@ export class UserLogin {
 }
 
 export class UserProfile {
-    user: SimpleUser;
+    user: UserData;
     bio: string;
     website: string;
     avatar: string;

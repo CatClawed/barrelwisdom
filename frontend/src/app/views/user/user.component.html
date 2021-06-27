@@ -18,5 +18,14 @@
         <img src="{{userprofile.avatar}}">
     </div>
     <p *ngIf="userprofile.bio">{{userprofile.bio}}</p>
-    <a *ngIf="userprofile.website" href="{{userprofile.website}}" target="_blank">Website</a>
+    <p *ngIf="userprofile.website"><b>Website: </b><a href="{{userprofile.website}}" target="_blank">{{userprofile.website}}</a></p>
+    <div *ngIf="userprofile.user.blog_set">
+      <h2>Pages Edited ({{userprofile.user.blog_set.length}})</h2>
+      <ul>
+        <li *ngFor="let b of userprofile.user.blog_set">
+          <span *ngIf="b.secfull">{{b.secfull}}: </span><span *ngIf="!b.secfull">Main: </span>
+          <a href="/{{b.secname}}/{{b.slugtitle}}">{{b.title}}</a>
+        </li>
+      </ul>
+    </div>
 </article>

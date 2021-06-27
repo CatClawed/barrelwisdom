@@ -31,16 +31,16 @@ export class BlogService {
 
   // Reader facing stuff
 
-  getBlog(slugtitle: string, section: string): Observable<Blog[]> {
-    return this.http.get<Blog[]>(`${environment.apiUrl}/blog/?section__name=${section}&slugtitle=${slugtitle}`)
+  getBlog(slugtitle: string, section: string): Observable<Blog> {
+    return this.http.get<Blog>(`${environment.apiUrl}/blog/${slugtitle}/${section}`)
   }
 
   getMainPageBlogs(num: number, limit: number, tag: string): Observable<BlogPaginator> {
     var offset = num == 0 ?  1 : limit * (num-1);
     if(tag) {
-      return this.http.get<BlogPaginator>(`${environment.apiUrl}/blog/?ordering=-created&tags=${tag}&section=3&limit=${limit.toString(10)}&offset=${offset.toString(10)}`)
+      return this.http.get<BlogPaginator>(`${environment.apiUrl}/blog/?ordering=-created&tags=${tag}&limit=${limit.toString(10)}&offset=${offset.toString(10)}`)
     }
-    return this.http.get<BlogPaginator>(`${environment.apiUrl}/blog/?ordering=-created&section=3&limit=${limit.toString(10)}&offset=${offset.toString(10)}`)
+    return this.http.get<BlogPaginator>(`${environment.apiUrl}/blog/?ordering=-created&limit=${limit.toString(10)}&offset=${offset.toString(10)}`)
   }
 
 }

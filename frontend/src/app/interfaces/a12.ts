@@ -39,20 +39,16 @@ export interface Effect {
     effectdata_set: EffectDataSimple[];
 }
 
-export interface Property {
+export interface Trait {
     slugname: string;
     name: string;
     desc: string;
-    grade: Number;
-    points: Number;
-    bomb: boolean;
-    heal: boolean;
-    weapon: boolean;
-    armor: boolean;
+    cost: Number;
+    synth: boolean;
+    usable: boolean;
+    ingot: boolean;
+    cloth: boolean;
     accessory: boolean;
-    combo1: NameLink;
-    combo2: NameLink;
-    combo3: NameLink;
     item_set: NameLink[];
 }
 
@@ -61,24 +57,22 @@ export interface MonsterFull {
     name: string;
     desc: string;
     race: string;
-    kind: string;
-    note: string;
     hp: number;
     atk: number;
     defen: number;
     spd: number;
     level: number;
-    exp: number;
-    cole: number;
     locations: RegionName[];
     item_set: NameLink[];
+    isDX: boolean;
 }
 
 export interface MonsterList {
     slugname: string;
     name: string;
     level: number;
-    kind: string;
+    race: string;
+    isDX: boolean;
 }
 
 export interface Ingredient {
@@ -88,83 +82,60 @@ export interface Ingredient {
 export interface IngredientFull {
     item: NameLink;
     category: NameLink;
+    num: number;
 }
 
 export interface Character {
     chars: NameOnly[];
 }
 
-export interface EffLineData {
-    effect: NameLink;
-    number: number;
-    min_elem: number;
-    max_elem: number;
-}
-
 export interface EffectLine {
-    effects: EffLineData[];
-    elem: string;
-    hidden: boolean;
-    order: number;
+    effects: NameLink;
+    number: number;
+    itemnum: number;
 }
 
 export interface Equipment {
     hp: number;
     mp: number;
+    lp: number;
     atk: number;
     defen: number;
     spd: number;
+    chars: Character[];
+    material: NameLink[];
 }
 
 export interface ItemList {
     slugname: string;
     name: string;
-    kind: string;
     categories: CategoryIcon[];
     ingredient_set: Ingredient[];
     level: number;
-    evalue: number;
-    effect: number;
-    slots: number;
-    fire: boolean;
-    water: boolean;
-    wind: boolean;
-    earth: boolean;
-}
-
-export interface Disassembly {
-    dis: NameLink[];
-}
-
-export interface Disassembled {
-    parent: NameLink[];
+    item_type: string;
 }
 
 export interface ItemFull {
     slugname: string;
     name: string;
     desc: string;
-    kind: string;
+    item_type: string;
+    item_subtype: string;
     categories: NameLink[];
     level: number;
-    evalue: number;
-    effect: number;
-    slots: number;
-    fire: boolean;
-    water: boolean;
-    wind: boolean;
-    earth: boolean;
-    properties: NameLink[];
+    traits: NameLink;
     ingredient_set: IngredientFull[];
-    characterequip_set: Character[];
     equip_set: Equipment[];
     effectlines_set: EffectLine[];
-    size: number;
     locations: RegionName[];
     book_set: NameLink[];
     monsters: NameLink[];
-    disassembly_set: Disassembly[];
-    disassembled_set: Disassembled[];
+    isDX: boolean;
+    isDLC: boolean;
+    time: number;
+    mp: number;
+    price: number;
+    uses: number;
 }
 
 export interface Book {
@@ -173,18 +144,14 @@ export interface Book {
     desc: string;
     items: NameLink[];
     note: string;
+    isDX: boolean;
+    isDLC: boolean;
 }
 
 export interface CategoryItem {
     slugname: string;
     name: string;
     level: number;
-    evalue: number;
-    fire: boolean;
-    water: boolean;
-    wind: boolean;
-    earth: boolean;
-    slots: number;
 }
 
 export interface IngCat {
@@ -202,9 +169,8 @@ export interface CategoryData {
 export interface FieldData {
     slugname: string;
     name: string;
+    unlock: string;
     ingredients: NameLink[];
-    rare: NameLink[];
-    relic: NameLink[];
     monsters: NameLink[];
     note: string;
 }

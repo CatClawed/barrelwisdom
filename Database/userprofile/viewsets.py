@@ -25,10 +25,9 @@ class UserNameViewSet(viewsets.ReadOnlyModelViewSet):
     ordering_fields = ['created']
     lookup_field = 'username'
 
-    @action(detail=True, methods=['get'], )
+    @action(detail=True, methods=['get'])
     def profile(self, request, username):
-        user = self.get_object()
-        profile = UserProfile.objects.get(user=user.id)
+        profile = UserProfile.objects.prefetch_related('user', 'user__blog_set', 'user__blog_set__section').get(user__username=username)
         serializer = UserProfileSerializer(profile)
         return Response(serializer.data)
 

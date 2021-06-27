@@ -119,7 +119,7 @@ class A12ItemFullSerializer(serializers.ModelSerializer):
     desc = serializers.SerializerMethodField()
     locations = A12RegionNameSerializer(many=True)
     monsters = A12MonsterNameSerializer(many=True)
-    traits = A12TraitNameSerializer(many=True)
+    traits = A12TraitNameSerializer()
     categories = A12CategorySerializer(many=True)
     ingredient_set = A12IngredientSerializer(many=True)
     equip_set = A12EquipSerializer(many=True)

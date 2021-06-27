@@ -100,6 +100,16 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'totori',
+    component: DefaultLayoutComponent,
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A12/a12-routing.module').then(m=>m.A12RoutingModule),
+      },
+    ]
+  },
+  {
     path: ':section/:title',
     component: DefaultLayoutComponent,
     children: [

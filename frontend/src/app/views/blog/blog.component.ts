@@ -49,14 +49,8 @@ import { Meta, Title } from '@angular/platform-browser';
       getBlog(section: string, title: string): void {
         this.blogService.getBlog(title, section)
           .subscribe(blog => { 
-            if(blog.length == 0) {
-              this.error = true;
-              this.errorCode = "404";
-              this.errorVars = this.errorService.getCodes(this.errorCode);
-            }
-            else {
               this.error = false;
-              this.blog = blog[0];
+              this.blog = blog;
               this.gameName = (this.blog.section.fullname) ? `${this.blog.section.fullname} - ` : ""; // gotta make sure google sees the game name...
               this.body = this.markdownService.compile(this.blog.body);
               if(this.user) {
@@ -71,6 +65,9 @@ import { Meta, Title } from '@angular/platform-browser';
                     this.allowedToEdit = true;
                   }
                 }
+              }
+              if(this.breadcrumbs.length > 1) {
+                this.breadcrumbs.pop();
               }
               if(section != "blog") {
                 this.titleService.setTitle(`${this.blog.title} - ${this.blog.section.fullname} - Barrel Wisdom`);
@@ -91,7 +88,6 @@ import { Meta, Title } from '@angular/platform-browser';
               else {
                 this.metaService.updateTag({ property: `og:image`, content: `/media/main/barrel.png` }, `property="og:image"`);
               }
-            }
             },
             error => { 
                 this.error = true;
