@@ -4,7 +4,7 @@
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/shallie">Atelier Shallie</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">Recipe Books</li>
   </ol>
 </nav>
@@ -16,7 +16,7 @@
           <mat-label>Filter...</mat-label>
           <input style="height: 100%;" matInput formControlName="filtertext">
         </mat-form-field>
-        <language-settings class="col-md-3" section="shallie"></language-settings>
+        <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
       </div>
     </form>
   </div>
@@ -26,19 +26,19 @@
       <div class="card-body griddisplay" style="position:relative">
         <div class="flex">
           <h4 class="card-title card-icon-space">
-              <a style="color: black;" (click)="openModal(bookModal, bk.slugname); $event.preventDefault();" href="/shallie/recipe-books/{{bk.slugname}}/{{language}}">{{bk.name}}</a>    
+              <a style="color: black;" (click)="openModal(bookModal, bk.slugname); $event.preventDefault();" href="/{{gameURL}}/recipe-books/{{bk.slugname}}/{{language}}">{{bk.name}}</a>    
           </h4>
         </div>
         <div class="card-display-bottom">
-            <a class="image-display" (click)="openModal(bookModal, bk.slugname); $event.preventDefault();" href="/shallie/recipe-books/{{bk.slugname}}/{{language}}">
-              <img loading="lazy" src="/media/games/shallie/items/{{bk.slugname}}.png">
+            <a class="image-display" (click)="openModal(bookModal, bk.slugname); $event.preventDefault();" href="/{{gameURL}}/recipe-books/{{bk.slugname}}/{{language}}">
+              <img loading="lazy" src="{{imgURL}}items/{{bk.slugname}}.png">
             </a>
         </div>
         <div style="padding-right:1rem;margin-right:1rem;" class="card-text">
           <p><b>Acquisition: </b>{{bk.note}}</p>
           <b>Items:</b>
           <ul>
-            <li *ngFor="let item of bk.items"><a href="/shallie/items/{{item.slugname}}">{{item.name}}</a></li>
+            <li *ngFor="let item of bk.items"><a href="/{{gameURL}}/items/{{item.slugname}}">{{item.name}}</a></li>
           </ul>
         </div>
       </div>

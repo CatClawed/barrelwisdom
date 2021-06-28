@@ -9,7 +9,6 @@ import { ErrorCodeService } from "@app/services/errorcode.service";
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { SeoService } from '@app/services/seo.service';
-import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
     templateUrl: 'a22-monsterlist.component.html',
@@ -32,6 +31,15 @@ import { Meta, Title } from '@angular/platform-browser';
     language = "";
     config: ModalOptions = { class: "col-md-5 mx-auto" };
   
+    seoTitle: string;
+    seoDesc: string;
+    seoImage: string;
+    seoURL: string;
+
+    gameTitle: string;
+    gameURL: string;
+    imgURL: string;
+  
     constructor(
       private modalService: BsModalService,
       private formBuilder: FormBuilder,
@@ -39,9 +47,7 @@ import { Meta, Title } from '@angular/platform-browser';
       private location: Location,
       private a22service: A22Service,
       private errorService: ErrorCodeService,
-      private seoService: SeoService,
-      private metaService: Meta,
-      private titleService: Title
+      private seoService: SeoService
     ) { 
       this.monsterControl = new FormControl();
     }
@@ -51,14 +57,14 @@ import { Meta, Title } from '@angular/platform-browser';
       this.language = this.route.snapshot.params.language;
   
       this.getMonsters();
-      this.seoService.createCanonicalURL(`ryza2/monsters/${this.language}`);
-      this.titleService.setTitle(`Monsters - Atelier Ryza 2 - Barrel Wisdom`);
-      this.metaService.updateTag({ name: `robots`, content: `index, archive` },`name="robots"`);
-      this.metaService.updateTag({ name: `description`, content: `The list of monsters in Atelier Ryza 2.` }, `name="description"`);
-      this.metaService.updateTag({ property: `og:title`, content: `Monsters` }, `property="og:title"`);
-      this.metaService.updateTag({ property: `og:description`, content: `The list of monsters in Atelier Ryza 2.` },`property="og:description"`);
-      this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
-      this.metaService.updateTag({ property: `og:image`, content: `/media/main/barrel.png` }, `property="og:image"`);
+      this.gameTitle = this.a22service.gameTitle;
+      this.gameURL = this.a22service.gameURL;
+      this.imgURL = this.a22service.imgURL;
+
+      this.seoURL = `${this.gameURL}/monsters/${this.language}`;
+      this.seoTitle = `Monsters - ${this.gameTitle}`;
+      this.seoDesc = `The list of monsters in ${this.gameTitle}.`
+      this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
   
       this.pageForm = this.formBuilder.group({
         filtertext: this.monsterControl,
@@ -93,10 +99,11 @@ import { Meta, Title } from '@angular/platform-browser';
   
     openModal(template: TemplateRef<any>, slugname: string) {
       this.monster = slugname;
-      this.location.go('ryza2/monsters/' + slugname + "/" + this.language);
+      this.location.go(`${this.gameURL}/monsters/` + slugname + "/" + this.language);
       this.modalRef = this.modalService.show(template);
       this.modalRef.onHide.subscribe((reason: string | any) => {
-          this.location.go('ryza2/monsters/' + this.language);
+          this.location.go(`${this.gameURL}/monsters/` + this.language);
+          this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
         })
     }
   

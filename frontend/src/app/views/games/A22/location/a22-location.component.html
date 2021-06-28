@@ -3,7 +3,7 @@
     <nav style="margin-top: 1em;" aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-            <li class="breadcrumb-item"><a href="/ryza2">Atelier Ryza 2</a></li>
+            <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{region.name}}</li>
         </ol>
     </nav>
@@ -17,7 +17,7 @@
             </li>
         </ol>
     </div>
-    <language-settings class="col-md-3" section="ryza2"></language-settings>
+    <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
     </div>
     <div id="{{area.slugname}}" *ngFor="let area of region.areas">
         <h2>{{area.name}}</h2>

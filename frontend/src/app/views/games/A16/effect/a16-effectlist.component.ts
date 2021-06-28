@@ -9,7 +9,6 @@ import { ErrorCodeService } from "@app/services/errorcode.service";
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { SeoService } from '@app/services/seo.service';
-import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
     templateUrl: 'a16-effectlist.component.html',
@@ -32,6 +31,15 @@ import { Meta, Title } from '@angular/platform-browser';
     language = "";
     config: ModalOptions = { class: "col-md-5 mx-auto" };
   
+    seoTitle: string;
+    seoDesc: string;
+    seoImage: string;
+    seoURL: string;
+
+    gameTitle: string;
+    gameURL: string;
+    imgURL: string;
+  
     constructor(
       private modalService: BsModalService,
       private formBuilder: FormBuilder,
@@ -39,9 +47,7 @@ import { Meta, Title } from '@angular/platform-browser';
       private location: Location,
       private a16service: A16Service,
       private errorService: ErrorCodeService,
-      private seoService: SeoService,
-      private metaService: Meta,
-      private titleService: Title
+      private seoService: SeoService
     ) { 
       this.effectControl = new FormControl();
     }
@@ -51,14 +57,17 @@ import { Meta, Title } from '@angular/platform-browser';
       this.language = this.route.snapshot.params.language;
   
       this.getEffects();
-      this.seoService.createCanonicalURL(`shallie/effects/${this.language}`);
-      this.titleService.setTitle(`Effects - Atelier Shallie - Barrel Wisdom`);
-      this.metaService.updateTag({ name: `robots`, content: `index, archive` },`name="robots"`);
-      this.metaService.updateTag({ name: `description`, content: `The list of effects in Atelier Shallie.` }, `name="description"`);
-      this.metaService.updateTag({ property: `og:title`, content: `Effects` }, `property="og:title"`);
-      this.metaService.updateTag({ property: `og:description`, content: `The list of effects in Atelier Shallie.` },`property="og:description"`);
-      this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
-      this.metaService.updateTag({ property: `og:image`, content: `/media/main/barrel.png` }, `property="og:image"`);
+      
+      
+      this.gameTitle = this.a16service.gameTitle;
+      this.gameURL = this.a16service.gameURL;
+      this.imgURL = this.a16service.imgURL;
+
+      this.seoURL = `${this.gameURL}/effects/${this.language}`;
+      this.seoTitle = `Effects - ${this.gameTitle}`;
+      this.seoDesc = `The list of effects in ${this.gameTitle}.`
+      this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+      this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
   
       this.pageForm = this.formBuilder.group({
         filtertext: this.effectControl,
@@ -93,13 +102,13 @@ import { Meta, Title } from '@angular/platform-browser';
   
     openModal(template: TemplateRef<any>, slugname: string) {
       this.effect = slugname;
-      this.location.go('shallie/effects/' + slugname + "/" + this.language);
+      this.location.go(`${this.gameURL}/effects/` + slugname + "/" + this.language);
       this.modalRef = this.modalService.show(template);
       this.modalRef.onHide.subscribe((reason: string | any) => {
-          this.location.go('shallie/effects/' + this.language);
+          this.location.go(`${this.gameURL}/effects/` + this.language);
+          this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
         })
     }
-  
     private filterT(value: string, type: string): Effect[] {
   
       const filterValue = value.toLowerCase();

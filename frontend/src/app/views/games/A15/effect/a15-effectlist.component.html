@@ -4,7 +4,7 @@
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/escha">Atelier Escha &amp; Logy</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">Effects</li>
   </ol>
 </nav>
@@ -16,7 +16,7 @@
           <mat-label>Filter...</mat-label>
           <input style="height: 100%;" matInput formControlName="filtertext">
         </mat-form-field>
-        <language-settings class="col-md-3" section="escha"></language-settings>
+        <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
       </div>
     </form>
   </div>
@@ -30,15 +30,15 @@
     <div *ngIf="eff" class="card allheight">
       <div class="card-body">
         <div class="flex">
-          <h4 class="card-title card-icon-space"><a style="color: black;" (click)="openModal(effectModal, eff.slugname); $event.preventDefault();" href="/escha/effects/{{eff.slugname}}/{{language}}">{{eff.name}}</a></h4>
+          <h4 class="card-title card-icon-space"><a style="color: black;" (click)="openModal(effectModal, eff.slugname); $event.preventDefault();" href="/{{gameURL}}/effects/{{eff.slugname}}/{{language}}">{{eff.name}}</a></h4>
         </div>
         <div style="padding-right:1rem;margin-right:1rem;" class="card-text">
           <p *ngIf="eff.desc">{{eff.desc}}</p>
           <ul *ngIf="eff.effectline_set">
-            <li *ngIf="eff.effectline_set.length >= 1"><a href="/escha/items/{{eff.effectline_set[0].slugname}}">{{eff.effectline_set[0].name}}</a></li>
-            <li *ngIf="eff.effectline_set.length >= 2"><a href="/escha/items/{{eff.effectline_set[1].slugname}}">{{eff.effectline_set[1].name}}</a></li>
-            <li *ngIf="eff.effectline_set.length >= 3"><a href="/escha/items/{{eff.effectline_set[2].slugname}}">{{eff.effectline_set[2].name}}</a></li>
-            <li *ngIf="eff.effectline_set.length >= 4"><a (click)="openModal(effectModal, eff.slugname); $event.preventDefault();" href="/escha/effects/{{eff.slugname}}/{{language}}">See more...</a></li>
+            <li *ngIf="eff.effectline_set.length >= 1"><a href="/{{gameURL}}/items/{{eff.effectline_set[0].slugname}}">{{eff.effectline_set[0].name}}</a></li>
+            <li *ngIf="eff.effectline_set.length >= 2"><a href="/{{gameURL}}/items/{{eff.effectline_set[1].slugname}}">{{eff.effectline_set[1].name}}</a></li>
+            <li *ngIf="eff.effectline_set.length >= 3"><a href="/{{gameURL}}/items/{{eff.effectline_set[2].slugname}}">{{eff.effectline_set[2].name}}</a></li>
+            <li *ngIf="eff.effectline_set.length >= 4"><a (click)="openModal(effectModal, eff.slugname); $event.preventDefault();" href="/{{gameURL}}/effects/{{eff.slugname}}/{{language}}">See more...</a></li>
         </ul>
         </div>
       </div>

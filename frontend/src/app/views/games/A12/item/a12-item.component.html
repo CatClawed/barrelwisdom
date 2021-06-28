@@ -1,0 +1,100 @@
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+
+<div *ngIf="!error">
+<nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}/items">Items</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{item.name}}</li>
+  </ol>
+</nav>
+<div class="mx-auto row">
+ <div class="{{colset}} card griddisplay card-body">
+    <div class="flex">
+        <h4 class="card-title  card-icon-space">{{item.name}}</h4>
+        <div class="card-icon-position">
+          <b *ngIf="item.level" style="padding-right:0.5em;">LV {{item.level}}</b>
+        </div>
+    </div>
+    <div class="card-display-bottom">
+      <img class="image-display" loading="lazy" src="{{imgURL}}items/{{item.slugname}}.png">
+    </div>
+    <div class="card-text">
+      <p>{{item.desc}}</p>
+      <p *ngIf="item.book_set"><b>Recipe Book: </b><a href="/{{gameURL}}/recipe-books/{{item.book_set[0].slugname}}">{{item.book_set[0].name}}</a></p>
+          <table>
+            <tr *ngFor="let cat of item.categories">
+                <td style="text-align: center;"><i class="atelier atelier-{{cat.icon_name}}"></i></td><td><a href="/{{gameURL}}/categories/{{cat.slugname}}">{{cat.name}}</a></td>
+            </tr>
+          </table>
+      <b *ngIf="item.locations">Locations:</b>
+      <ul *ngIf="item.locations">
+        <li *ngFor="let loc of item.locations"><a href="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}/#{{loc.slugname}}">{{loc.name}}</a></li>
+      </ul>
+      <b *ngIf="item.monsters">Monsters:</b>
+      <ul *ngIf="item.monsters">
+        <li *ngFor="let mon of item.monsters"><a href="/{{gameURL}}/monsters/{{mon.slugname}}">{{mon.name}}</a></li>
+      </ul>
+      <b *ngIf="item.traits">Trait:</b>
+      <ul *ngIf="item.traits">
+        <li><a href="/{{gameURL}}/traits/{{item.traits.slugname}}">{{item.traits.name}}</a></li>
+      </ul>
+      <ul>
+        <li *ngIf="item.time">Time: {{item.time}}</li>
+        <li *ngIf="item.mp">MP Used: {{item.mp}}</li>
+        <li *ngIf="item.price">Selling Price: {{item.price}}</li>
+        <li *ngIf="item.uses">Uses: {{item.uses}}</li>
+      </ul>
+      <table *ngIf="item.ingredient_set" class="table">
+        <tr><th style="text-align: center;background-color:rgba(211, 211, 211, 0.3);">Ingredients</th></tr>
+        <tr><td>
+          <ul>
+           <li *ngFor="let ing of item.ingredient_set"><a *ngIf="ing.item" href="/{{gameURL}}/items/{{ing.item.slugname}}">{{ing.item.name}}</a><a *ngIf="ing.category" href="/{{gameURL}}/categories/{{ing.category.slugname}}">{{ing.category.name}}</a> x{{ing.num}}</li>
+          </ul>
+        </td></tr>
+      </table>
+      <table *ngIf="item.effectline_set" class="table">
+        <tr><th colspan=2 style="text-align: center;background-color:rgba(211, 211, 211, 0.3);">Effects</th></tr>
+        <tr *ngIf="itemone"><td>Item 1</td><td>
+          <ul>
+           <li *ngFor="let eff of item.effectline_set"><a *ngIf="eff.itemnum == 1" href="/{{gameURL}}/effects/{{eff.effect.slugname}}">{{eff.effect.name}}</a></li>
+          </ul>
+        </td></tr>
+        <tr *ngIf="itemtwo"><td>Item 2</td><td>
+          <ul>
+           <li *ngFor="let eff of item.effectline_set"><a *ngIf="eff.itemnum == 2" href="/{{gameURL}}/effects/{{eff.effect.slugname}}">{{eff.effect.name}}</a></li>
+          </ul>
+        </td></tr>
+        <tr *ngIf="itemthree"><td>Item 3</td><td>
+          <ul>
+           <li *ngFor="let eff of item.effectline_set"><a *ngIf="eff.itemnum == 3" href="/{{gameURL}}/effects/{{eff.effect.slugname}}">{{eff.effect.name}}</a></li>
+          </ul>
+        </td></tr>
+      </table>
+      <table *ngIf="item.equip_set" class="table">
+        <tr><th style="text-align: center;background-color:rgba(211, 211, 211, 0.3);">Materials</th></tr>
+        <tr><td>
+          <ul>
+           <li *ngFor="let item of item.equip_set[0].material"><a href="/{{gameURL}}/items/{{item.slugname}}">{{item.name}}</a></li>
+          </ul>
+        </td></tr>
+      </table>
+        <table *ngIf="item.equip_set" class="table">
+          <tr><th colspan=2 style="text-align: center;background-color:rgba(211, 211, 211, 0.3);">Stats</th></tr>
+          <tr><td style="padding-top:0.2rem;text-align:right;width:50%;"><b>HP </b></td> <td style="padding-top:0.2rem;padding-left:0.5em;">{{item.equip_set[0].hp}}<span *ngIf="!item.equip_set[0].hp">0</span></td></tr>
+          <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>MP </b></td> <td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].mp}}<span *ngIf="!item.equip_set[0].mp">0</span></td></tr>
+          <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>LP </b></td> <td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].lp}}<span *ngIf="!item.equip_set[0].lp">0</span></td></tr>
+          <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>ATK </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].atk}}<span *ngIf="!item.equip_set[0].atk">0</span></td></tr>
+          <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>DEF </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].defen}}<span *ngIf="!item.equip_set[0].defen">0</span></td></tr>
+          <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>SPD </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].spd}}<span *ngIf="!item.equip_set[0].spd">0</span></td></tr>
+        </table>
+        <table *ngIf="item.equip_set" class="table">
+          <tr><th style="text-align: center;background-color:rgba(211, 211, 211, 0.3);">Characters</th></tr>
+          <tr><td><img *ngFor="let char of item.equip_set[0].chars" src="{{imgURL}}resources/equip_{{char.name}}.png"></td></tr>
+        </table>
+     </div>
+  </div>
+  <language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="{{gameURL}}"></language-settings>
+ </div>
+</div>

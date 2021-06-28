@@ -1,0 +1,86 @@
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+
+<div *ngIf="!error">
+<nav style="margin-top: 1em;" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Traits</li>
+  </ol>
+</nav>
+<h1>Traits</h1>
+<div class ="col-md-10 mx-auto">
+    <form [formGroup]="pageForm" class="form-horizontal">
+      <div class="row">
+        <mat-form-field class="col-md-5" appearance="outline">
+          <mat-label>Filter...</mat-label>
+          <input style="height: 100%;" matInput formControlName="filtertext">
+        </mat-form-field>
+        <mat-form-field class="col-md-4" appearance="outline">
+          <mat-label>Transfers to...</mat-label>
+          <mat-select matNativeControl formControlName="transfers" disableOptionCentering="true" class="mat-select-icon">
+            <mat-option value="1" selected> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-synthesis"></mat-icon> Any</mat-option>
+            <mat-option value="3"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-escha-bomb"    ></mat-icon> Usable </mat-option>
+            <mat-option value="5"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-escha-weapon"    ></mat-icon> Weapon</mat-option>
+            <mat-option value="6"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-escha-armor"  ></mat-icon> Armor</mat-option>
+            <mat-option value="7"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-escha-accessory"   ></mat-icon> Accessory</mat-option>
+            <mat-select-trigger *ngIf="f.transfers.value == 1">
+               Any
+            </mat-select-trigger>
+            <mat-select-trigger *ngIf="f.transfers.value == 3">
+               Usable
+            </mat-select-trigger>
+            <mat-select-trigger *ngIf="f.transfers.value == 5">
+               Weapon
+            </mat-select-trigger>
+            <mat-select-trigger *ngIf="f.transfers.value == 6">
+               Armor
+            </mat-select-trigger>
+            <mat-select-trigger *ngIf="f.transfers.value == 7">
+               Accessory
+            </mat-select-trigger>
+          </mat-select>
+        </mat-form-field>
+        <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
+      </div>
+    </form>
+  </div>
+<div *ngFor="let traits of filteredTraits | async| pair " class="row">
+  <div *ngFor="let trait of traits" class="spacer col-md-5 mx-auto">
+   <div *ngIf="trait">
+    <div class="card allheight">
+      <div class="card-body griddisplay">
+        <div class="flex">
+          <h4 class="card-title"><a style="color: black;" (click)="openModal(traitModal, trait.slugname); $event.preventDefault();" href="/{{gameURL}}/traits/{{trait.slugname}}/{{language}}">{{trait.name}}</a></h4>
+          <div *ngIf="trait.cost"><b>Cost: </b>{{trait.cost}}</div>
+        </div>
+        <div class="card-text">
+          <p>{{trait.desc}}</p>
+          <div *ngIf="trait.item_set">
+            <b>Items:</b>
+              <ul>
+                <li *ngFor="let item of trait.item_set"><a href="/{{gameURL}}/items/{{item.slugname}}">{{item.name}}</a></li>
+              </ul>
+          </div>
+        <div class="flex card-text bottom">
+          <div><i *ngIf="trait.synth"      class="atelier atelier-ryza2-type-synthesis"></i>     <i style="color: lightgray;" *ngIf="!trait.synth"      class="atelier atelier-ryza2-type-synthesis"></i></div>
+          <div><i *ngIf="trait.usable"      class="atelier atelier-escha-bomb"></i>     <i style="color: lightgray;" *ngIf="!trait.usable"      class="atelier atelier-escha-bomb"></i>     </div>
+          <div><i *ngIf="trait.ingot"   class="atelier atelier-escha-weapon"></i>   <i style="color: lightgray;" *ngIf="!trait.ingot"    class="atelier atelier-escha-weapon"></i>     </div>
+          <div><i *ngIf="trait.cloth"     class="atelier atelier-escha-armor"></i>    <i style="color: lightgray;" *ngIf="!trait.cloth"     class="atelier atelier-escha-armor"></i>   </div>
+          <div><i *ngIf="trait.accessory" class="atelier atelier-escha-accessory"></i><i style="color: lightgray;" *ngIf="!trait.accessory" class="atelier atelier-escha-accessory"></i>    </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #traitModal>
+  <div class="modal-body">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <i class="fas fa-times-circle"></i>
+    </button>
+    <a12-trait slugname="{{trait}}" [showNav]="false"></a12-trait>
+  </div>
+</ng-template>
+</div>

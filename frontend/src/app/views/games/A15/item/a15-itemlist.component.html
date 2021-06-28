@@ -4,7 +4,7 @@
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/escha">Atelier Escha &amp; Logy</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">Items</li>
   </ol>
 </nav>
@@ -29,7 +29,7 @@
             </mat-select-trigger>
           </mat-select>
         </mat-form-field>
-        <language-settings class="col-md-3" section="escha"></language-settings>
+        <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
       </div>
       <div class="row">
         <mat-form-field class="col-md-5" appearance="outline">
@@ -64,7 +64,7 @@
       <div class="card-body griddisplay" style="position:relative">
         <div class="flex">
           <h4 class="card-title card-icon-space">
-              <a style="color: black;" (click)="openModal(itemModal, it.slugname); $event.preventDefault();" href="/escha/items/{{it.slugname}}/{{language}}">{{it.name}}</a>    
+              <a style="color: black;" (click)="openModal(itemModal, it.slugname); $event.preventDefault();" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a>    
           </h4>
           <div class="card-icon-position">
               <b>LV: </b><span>{{it.level}}</span>
@@ -73,8 +73,8 @@
           </div>
         </div>
         <div class="card-display-bottom">
-            <a class="image-display" (click)="openModal(itemModal, it.slugname); $event.preventDefault();" href="/escha/items/{{it.slugname}}/{{language}}">
-              <img loading="lazy" src="/media/games/escha/items/{{it.slugname}}.png">
+            <a class="image-display" (click)="openModal(itemModal, it.slugname); $event.preventDefault();" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">
+              <img loading="lazy" src="{{imgURL}}items/{{it.slugname}}.png">
             </a>
         </div>
         <div class="card-text">

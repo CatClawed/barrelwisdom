@@ -1,11 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import { Trait } from '@app/interfaces/a22';
 import { A22Service } from '@app/services/a22.service';
 import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
-import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   templateUrl: 'a22-trait.component.html',
@@ -23,6 +21,15 @@ export class A22TraitComponent implements OnInit {
   trait: Trait;
   colset: string;
 
+  seoTitle: string;
+  seoDesc: string;
+  seoImage: string;
+  seoURL: string;
+
+  gameTitle: string;
+  gameURL: string;
+  imgURL: string;
+
   @Input()
   slugname: string = "";
 
@@ -33,13 +40,9 @@ export class A22TraitComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
-    private location: Location,
     private a22service: A22Service,
     private errorService: ErrorCodeService,
-    private seoService: SeoService,
-    private metaService: Meta,
-    private titleService: Title) {
+    private seoService: SeoService) {
       if(this.route.snapshot.params.trait != null) {
       this.slugname = this.route.snapshot.params.trait;
     }
@@ -52,14 +55,15 @@ export class A22TraitComponent implements OnInit {
     this.a22service.getTrait(this.slugname, this.language)
     .subscribe(trait => {
       this.trait = trait;
-      this.seoService.createCanonicalURL(`ryza2/traits/${this.trait.slugname}/${this.language}`);
-      this.titleService.setTitle(`${trait.name} - Atelier Ryza 2 - Barrel Wisdom`);
-      this.metaService.updateTag({ name: `robots`, content: `index, archive` },`name="robots"`);
-      this.metaService.updateTag({ name: `description`, content: `${trait.description}` }, `name="description"`);
-      this.metaService.updateTag({ property: `og:title`, content: `${trait.name}` }, `property="og:title"`);
-      this.metaService.updateTag({ property: `og:description`, content: `${trait.description}` },`property="og:description"`);
-      this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
-      this.metaService.updateTag({ property: `og:image`, content: `/media/main/barrel.png` }, `property="og:image"`);
+      this.gameTitle = this.a22service.gameTitle;
+      this.gameURL = this.a22service.gameURL;
+      this.imgURL = this.a22service.imgURL;
+      
+      this.seoURL = `${this.gameURL}/traits/${this.trait.slugname}/${this.language}`;
+      this.seoTitle = `${this.trait.name} - ${this.gameTitle}`;
+      this.seoDesc = `${this.trait.description}`
+      this.seoImage = `${this.imgURL}traits/${this.trait.slugname}.png`
+      this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error => {
       this.error = true,

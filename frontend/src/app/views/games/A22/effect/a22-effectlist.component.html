@@ -4,7 +4,7 @@
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/ryza2">Atelier Ryza 2</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">Effects</li>
   </ol>
 </nav>
@@ -46,7 +46,7 @@
             </mat-select-trigger>
           </mat-select>
         </mat-form-field>
-        <language-settings class="col-md-3" section="ryza2"></language-settings>
+        <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
       </div>
     </form>
   </div>
@@ -60,7 +60,7 @@
     <div *ngIf="eff" class="card allheight">
       <div class="card-body griddisplay">
         <div class="flex">
-          <h4 class="card-title card-icon-space"><a style="color: black;" (click)="openModal(effectModal, eff.slugname); $event.preventDefault();" href="/ryza2/effects/{{eff.slugname}}/{{language}}">{{eff.name}}</a></h4>
+          <h4 class="card-title card-icon-space"><a style="color: black;" (click)="openModal(effectModal, eff.slugname); $event.preventDefault();" href="/{{gameURL}}/effects/{{eff.slugname}}/{{language}}">{{eff.name}}</a></h4>
           <div class="card-icon-position">
             <i *ngIf="eff.efftype == 'Normal'" class="atelier atelier-ryza2-type-synthesis"></i>
             <i *ngIf="eff.efftype == 'Weapon Forge'" class="atelier atelier-ryza2-type-weapon"></i> <i *ngIf="eff.efftype == 'Weapon Forge'" class="atelier atelier-ryza2-forge"></i>

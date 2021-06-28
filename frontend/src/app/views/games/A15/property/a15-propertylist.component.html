@@ -4,7 +4,7 @@
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/escha">Atelier Escha &amp; Logy</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">Properties</li>
   </ol>
 </nav>
@@ -49,7 +49,7 @@
             </mat-select-trigger>
           </mat-select>
         </mat-form-field>
-        <language-settings class="col-md-3" section="escha"></language-settings>
+        <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
       </div>
     </form>
   </div>
@@ -59,23 +59,23 @@
     <div class="card allheight">
       <div class="card-body griddisplay">
         <div class="flex">
-          <h4 class="card-title"><a style="color: black;" (click)="openModal(propertyModal, prop.slugname); $event.preventDefault();" href="/escha/properties/{{prop.slugname}}/{{language}}">{{prop.name}}</a></h4>
+          <h4 class="card-title"><a style="color: black;" (click)="openModal(propertyModal, prop.slugname); $event.preventDefault();" href="/{{gameURL}}/properties/{{prop.slugname}}/{{language}}">{{prop.name}}</a></h4>
           <div><b>PP: </b>{{prop.points}}</div>
         </div>
         <div class="card-text">
           <p *ngIf="prop.combo1">
-            <a href="/escha/properties/{{prop.combo1.slugname}}">{{prop.combo1.name}}</a> <span> x </span>
-            <a href="/escha/properties/{{prop.combo2.slugname}}">{{prop.combo2.name}}</a>
-            <span *ngIf="prop.combo3"> x </span> <a *ngIf="prop.combo3" href="/escha/properties/{{prop.combo3.slugname}}">{{prop.combo3.name}}</a>
+            <a href="/{{gameURL}}/properties/{{prop.combo1.slugname}}">{{prop.combo1.name}}</a> <span> x </span>
+            <a href="/{{gameURL}}/properties/{{prop.combo2.slugname}}">{{prop.combo2.name}}</a>
+            <span *ngIf="prop.combo3"> x </span> <a *ngIf="prop.combo3" href="/{{gameURL}}/properties/{{prop.combo3.slugname}}">{{prop.combo3.name}}</a>
           </p>
           <p>{{prop.desc}}</p>
           <div *ngIf="prop.item_set">
             <b>Items:</b>
             <ul>
-              <li *ngIf="prop.item_set.length >= 1"><a href="/escha/items/{{prop.item_set[0].slugname}}">{{prop.item_set[0].name}}</a></li>
-              <li *ngIf="prop.item_set.length >= 2"><a href="/escha/items/{{prop.item_set[1].slugname}}">{{prop.item_set[1].name}}</a></li>
-              <li *ngIf="prop.item_set.length >= 3"><a href="/escha/items/{{prop.item_set[2].slugname}}">{{prop.item_set[2].name}}</a></li>
-              <li *ngIf="prop.item_set.length >= 4"><a (click)="openModal(propertyModal, prop.slugname); $event.preventDefault();" href="/escha/properties/{{prop.slugname}}/{{language}}">See more...</a></li>
+              <li *ngIf="prop.item_set.length >= 1"><a href="/{{gameURL}}/items/{{prop.item_set[0].slugname}}">{{prop.item_set[0].name}}</a></li>
+              <li *ngIf="prop.item_set.length >= 2"><a href="/{{gameURL}}/items/{{prop.item_set[1].slugname}}">{{prop.item_set[1].name}}</a></li>
+              <li *ngIf="prop.item_set.length >= 3"><a href="/{{gameURL}}/items/{{prop.item_set[2].slugname}}">{{prop.item_set[2].name}}</a></li>
+              <li *ngIf="prop.item_set.length >= 4"><a (click)="openModal(propertyModal, prop.slugname); $event.preventDefault();" href="/{{gameURL}}/properties/{{prop.slugname}}/{{language}}">See more...</a></li>
             </ul>
           <p *ngIf="prop.grade >= 0"><a href="javascript:void(0)"
               tooltip="A measure of rarity. This number determines where properties appear." container="true">Grade:</a>

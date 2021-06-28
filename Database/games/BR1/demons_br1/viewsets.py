@@ -19,7 +19,7 @@ class BR1DemonViewSet(viewsets.ModelViewSet):
             Demon.objects
             .order_by('index')
         )
-        serializer = BR1DemonSerializerSimple(queryset, many=True)
+        serializer = BR1DemonSerializer(queryset, many=True)
         return Response(serializer.data)
 
     # allows easy access via catect/slugname/en

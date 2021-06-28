@@ -4,7 +4,7 @@
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/shallie">Atelier Shallie</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">Monsters</li>
   </ol>
 </nav>
@@ -16,7 +16,7 @@
           <mat-label>Filter...</mat-label>
           <input style="height: 100%;" matInput formControlName="filtertext">
         </mat-form-field>
-        <language-settings class="col-md-3" section="shallie"></language-settings>
+        <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
       </div>
     </form>
   </div>
@@ -26,15 +26,15 @@
       <div class="card-body griddisplay" style="position:relative">
         <div class="flex">
           <h4 class="card-title card-icon-space">
-              <a style="color: black;" (click)="openModal(monsterModal, mon.slugname); $event.preventDefault();" href="/shallie/monsters/{{mon.slugname}}/{{language}}">{{mon.name}}</a>    
+              <a style="color: black;" (click)="openModal(monsterModal, mon.slugname); $event.preventDefault();" href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">{{mon.name}}</a>    
           </h4>
           <div class="card-icon-position">
               <i class="atelier atelier-shallie-race-{{mon.kind}}"></i>
           </div>
         </div>
         <div class="card-display-bottom">
-            <a class="image-display" (click)="openModal(monsterModal, mon.slugname); $event.preventDefault();" href="/shallie/monsters/{{mon.slugname}}/{{language}}">
-              <img loading="lazy" src="/media/games/shallie/monsters/{{mon.slugname}}.png">
+            <a class="image-display" (click)="openModal(monsterModal, mon.slugname); $event.preventDefault();" href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">
+              <img loading="lazy" src="{{imgURL}}monsters/{{mon.slugname}}.png">
             </a>
         </div>
         <div style="padding-right:1rem;margin-right:1rem;" class="card-text">

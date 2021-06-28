@@ -4,8 +4,8 @@
 <nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/ryza2">Atelier Ryza 2</a></li>
-    <li class="breadcrumb-item"><a href="/ryza2/items">Items</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}/items">Items</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{item.name}}</li>
   </ol>
 </nav>
@@ -32,7 +32,7 @@
             </div>
           </div>
           <div class="card-display-bottom">
-             <img class="image-display" loading="lazy" src="/media/games/ryza2/items/{{item.slugname}}.png">
+             <img class="image-display" loading="lazy" src="{{imgURL}}items/{{item.slugname}}.png">
           </div>
           <div class="card-text">
               <p>{{item.description}}</p>
@@ -59,13 +59,13 @@
               <b *ngIf="item.location" >Location:</b>
               <div *ngIf="item.location" style="column-count: 2;">
                 <ul style="padding-left:1.1em;">
-                    <li *ngFor="let loc of item.location"><a *ngIf="loc.reg" href="/ryza2/locations/{{loc.reg}}">{{loc.name}}</a><a *ngIf="!loc.reg" href="/ryza2/locations/{{loc.slugname}}">{{loc.name}}</a></li>
+                    <li *ngFor="let loc of item.location"><a *ngIf="loc.reg" href="/{{gameURL}}/locations/{{loc.reg}}">{{loc.name}}</a><a *ngIf="!loc.reg" href="/{{gameURL}}/locations/{{loc.slugname}}">{{loc.name}}</a></li>
                 </ul>
               </div>
               <b *ngIf="item.monster_set" >Dropped by:</b>
               <div *ngIf="item.monster_set" style="column-count: 2;">
                  <ul style="padding-left:1.1em;">
-                     <li *ngFor="let mon of item.monster_set"><a href="/ryza2/monsters/{{mon.slugname}}">{{mon.name}}</a></li>
+                     <li *ngFor="let mon of item.monster_set"><a href="/{{gameURL}}/monsters/{{mon.slugname}}">{{mon.name}}</a></li>
                  </ul>
               </div>
               <ng-container *ngIf="item.itemtype == 'Material'">
@@ -146,8 +146,8 @@
                       <tr><th style="text-align: center;background-color:rgba(211, 211, 211, 0.3);" colspan=2>Synthesis</th></tr>
                       <tr *ngFor="let ing of item.ingredient_set">
                         <td style="text-align: center;">
-                          <a *ngIf="ing.item" href="/ryza2/items/{{ing.item.slugname}}">{{ing.item.name}}</a>
-                          <a *ngIf="ing.category" href="/ryza2/categories/{{ing.category.slugname}}">{{ing.category.name}}</a><br />
+                          <a *ngIf="ing.item" href="/{{gameURL}}/items/{{ing.item.slugname}}">{{ing.item.name}}</a>
+                          <a *ngIf="ing.category" href="/{{gameURL}}/categories/{{ing.category.slugname}}">{{ing.category.name}}</a><br />
                           <i style="color:#f03a02;" *ngIf="ing.fire"  class="atelier atelier-ryza2-fire"></i>
                           <i style="color:#04b5db;" *ngIf="ing.ice"  class="atelier atelier-ryza2-ice"></i>
                           <i style="color:#e3bb05;" *ngIf="ing.lightning"  class="atelier atelier-ryza2-lightning"></i>
@@ -177,5 +177,5 @@
           </div>
     </div>
 </div>
-<language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="ryza2"></language-settings>
+<language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="{{gameURL}}"></language-settings>
 </div>

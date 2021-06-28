@@ -4,7 +4,7 @@
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/ryza2">Atelier Ryza 2</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">Monsters</li>
   </ol>
 </nav>
@@ -90,7 +90,7 @@
              </mat-select-trigger>
           </mat-select>
         </mat-form-field>
-        <language-settings class="col-md-3" section="ryza2"></language-settings>
+        <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
       </div>
     </form>
   </div>
@@ -100,7 +100,7 @@
       <div class="card-body griddisplay" style="position:relative">
         <div class="flex">
           <h4 class="card-title card-icon-space">
-              <a style="color: black;" (click)="openModal(monsterModal, mon.slugname); $event.preventDefault();" href="/ryza2/monsters/{{mon.slugname}}/{{language}}">{{mon.name}}</a>    
+              <a style="color: black;" (click)="openModal(monsterModal, mon.slugname); $event.preventDefault();" href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">{{mon.name}}</a>    
           </h4>
           <div class="card-icon-position">
               <i *ngIf="mon.montype != 'boss'" class="atelier atelier-ryza2-race-{{mon.montype}}"></i>
@@ -112,8 +112,8 @@
           </div>
         </div>
         <div class="card-display-bottom">
-            <a class="image-display" (click)="openModal(monsterModal, mon.slugname); $event.preventDefault();" href="/ryza2/monsters/{{mon.slugname}}/{{language}}">
-              <img loading="lazy" src="/media/games/ryza2/monsters/{{mon.slugname}}.png">
+            <a class="image-display" (click)="openModal(monsterModal, mon.slugname); $event.preventDefault();" href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">
+              <img loading="lazy" src="{{imgURL}}monsters/{{mon.slugname}}.png">
             </a>
         </div>
         <div style="padding-right:1rem;margin-right:1rem;" class="card-text">

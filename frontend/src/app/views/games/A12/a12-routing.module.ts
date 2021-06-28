@@ -2,7 +2,34 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  /*{
+  {
+    path: 'items',
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A12/item/a12-item.module').then(m=>m.A12ItemModule),
+      },
+    ]
+  },
+  {
+    path: 'monsters',
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A12/monster/a12-monster.module').then(m=>m.A12MonsterModule),
+      },
+    ]
+  },
+  {
+    path: 'locations',
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A12/location/a12-location.module').then(m=>m.A12LocationModule),
+      },
+    ]
+  },
+  {
     path: 'traits',
     children: [ 
       {
@@ -21,11 +48,11 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'monsters',
+    path: 'categories',
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A12/monster/a12-monster.module').then(m=>m.A12MonsterModule),
+        loadChildren: ()=> import('@app/views/games/A12/category/a12-category.module').then(m=>m.A12CategoryModule),
       },
     ]
   },
@@ -38,33 +65,6 @@ const routes: Routes = [
       },
     ]
   },
-  {
-    path: 'items',
-    children: [
-      {
-        path: '', 
-        loadChildren: ()=> import('@app/views/games/A12/item/a12-item.module').then(m=>m.A12ItemModule),
-      },
-    ]
-  },
-  {
-    path: 'categories',
-    children: [
-      {
-        path: '', 
-        loadChildren: ()=> import('@app/views/games/A12/category/a12-category.module').then(m=>m.A12CategoryModule),
-      },
-    ]
-  },
-  {
-    path: 'locations',
-    children: [
-      {
-        path: '', 
-        loadChildren: ()=> import('@app/views/games/A12/location/a12-location.module').then(m=>m.A12LocationModule),
-      },
-    ]
-  },*/
   {
     path: '',
     redirectTo: '/totori/faq',

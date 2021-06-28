@@ -19,7 +19,7 @@ export class LanguageGuard implements CanActivate {
             if(!this.languageService.languageValue) {
                 this.languageService.setLanguage("en");
             }
-            this.router.navigateByUrl(state.url + '/' + this.languageService.languageValue, { replaceUrl: true });
+            this.router.navigateByUrl(state.url + `/` + this.languageService.languageValue, { replaceUrl: true });
             return true;
         }
 

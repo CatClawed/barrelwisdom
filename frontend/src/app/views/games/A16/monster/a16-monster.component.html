@@ -4,8 +4,8 @@
 <nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/shallie">Atelier Shallie</a></li>
-    <li class="breadcrumb-item"><a href="/shallie/monsters">Monsters</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}/monsters">Monsters</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{monster.name}}</li>
   </ol>
 </nav>
@@ -18,7 +18,7 @@
           </div>
       </div>
       <div class="card-text">
-        <img class="image-display" loading="lazy" src="/media/games/shallie/monsters/{{monster.slugname}}.png">
+        <img class="image-display" loading="lazy" src="{{imgURL}}monsters/{{monster.slugname}}.png">
         <p *ngIf="monster.desc">{{monster.desc}}</p>
         <p *ngIf="monster.note">{{monster.note}}</p>
 
@@ -61,6 +61,6 @@
       </div>
       </div>
     </div>
-  <language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="shallie"></language-settings>
+  <language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="{{gameURL}}"></language-settings>
  </div>
 </div>

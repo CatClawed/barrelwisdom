@@ -4,8 +4,8 @@
 <nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/shallie">Atelier Shallie</a></li>
-    <li class="breadcrumb-item"><a href="/shallie/items">Items</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}/items">Items</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{item.name}}</li>
   </ol>
 </nav>
@@ -18,16 +18,16 @@
         </div>
     </div>
     <div class="card-display-bottom">
-      <img class="image-display" loading="lazy" src="/media/games/shallie/items/{{item.slugname}}.png">
+      <img class="image-display" loading="lazy" src="{{imgURL}}items/{{item.slugname}}.png">
     </div>
     <div class="card-text">
       <p>{{item.desc}}</p>
-      <p *ngIf="item.book_set"><b>Recipe Book: </b><a href="/shallie/recipe-books/{{item.book_set[0].slugname}}">{{item.book_set[0].name}}</a></p>
+      <p *ngIf="item.book_set"><b>Recipe Book: </b><a href="/{{gameURL}}/recipe-books/{{item.book_set[0].slugname}}">{{item.book_set[0].name}}</a></p>
       <p *ngIf="item.size"><b>Size: </b>{{item.size}}</p>
       <div class="row" style="justify-content: space-between;margin: 0.5em;">
           <table>
             <tr *ngFor="let cat of item.categories">
-                <td style="text-align: center;"><i class="atelier atelier-{{cat.icon_name}}"></i></td><td><a href="/shallie/categories/{{cat.slugname}}">{{cat.name}}</a></td>
+                <td style="text-align: center;"><i class="atelier atelier-{{cat.icon_name}}"></i></td><td><a href="/{{gameURL}}/categories/{{cat.slugname}}">{{cat.name}}</a></td>
             </tr>
           </table>
           <table>
@@ -42,39 +42,39 @@
             </tr>
             <tr>
               <td *ngIf="item.slots > 0" colspan=2>
-                <img *ngIf="item.slots > 0" src="/media/games/shallie/slot.png">
-                <img *ngIf="item.slots > 1" src="/media/games/shallie/slot.png">
-                <img *ngIf="item.slots > 2" src="/media/games/shallie/slot.png">
-                <img *ngIf="item.slots > 3" src="/media/games/shallie/slot.png">
+                <img *ngIf="item.slots > 0" src="{{imgURL}}slot.png">
+                <img *ngIf="item.slots > 1" src="{{imgURL}}slot.png">
+                <img *ngIf="item.slots > 2" src="{{imgURL}}slot.png">
+                <img *ngIf="item.slots > 3" src="{{imgURL}}slot.png">
               </td>
             </tr>
           </table>
       </div>
       <b *ngIf="item.disassembly_set">Disassembles to:</b>
       <ul *ngIf="item.disassembly_set">
-        <li *ngFor="let it of item.disassembly_set[0].dis"><a href="/shallie/items/{{it.slugname}}">{{it.name}}</a></li>
+        <li *ngFor="let it of item.disassembly_set[0].dis"><a href="/{{gameURL}}/items/{{it.slugname}}">{{it.name}}</a></li>
       </ul>
       <b *ngIf="item.disassembled_set">Disassembled from:</b>
       <ul *ngIf="item.disassembled_set">
-        <li *ngFor="let it of item.disassembled_set[0].parent"><a href="/shallie/items/{{it.slugname}}">{{it.name}}</a></li>
+        <li *ngFor="let it of item.disassembled_set[0].parent"><a href="/{{gameURL}}/items/{{it.slugname}}">{{it.name}}</a></li>
       </ul>
       <b *ngIf="item.locations">Locations:</b>
       <ul *ngIf="item.locations">
-        <li *ngFor="let loc of item.locations"><a href="/shallie/locations/{{loc.parentslug}}/{{language}}/#{{loc.slugname}}">{{loc.name}}</a></li>
+        <li *ngFor="let loc of item.locations"><a href="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}/#{{loc.slugname}}">{{loc.name}}</a></li>
       </ul>
       <b *ngIf="item.monsters">Monsters:</b>
       <ul *ngIf="item.monsters">
-        <li *ngFor="let mon of item.monsters"><a href="/shallie/monsters/{{mon.slugname}}">{{mon.name}}</a></li>
+        <li *ngFor="let mon of item.monsters"><a href="/{{gameURL}}/monsters/{{mon.slugname}}">{{mon.name}}</a></li>
       </ul>
       <b *ngIf="item.properties">Properties:</b>
       <ul *ngIf="item.properties">
-        <li *ngFor="let prop of item.properties"><a href="/shallie/properties/{{prop.slugname}}">{{prop.name}}</a></li>
+        <li *ngFor="let prop of item.properties"><a href="/{{gameURL}}/properties/{{prop.slugname}}">{{prop.name}}</a></li>
       </ul>
       <table *ngIf="item.ingredient_set" class="table">
         <tr><th style="text-align: center;background-color:rgba(211, 211, 211, 0.3);">Ingredients</th></tr>
         <tr><td>
           <ul>
-           <li *ngFor="let ing of item.ingredient_set"><a *ngIf="ing.item" href="/shallie/items/{{ing.item.slugname}}">{{ing.item.name}}</a><a *ngIf="ing.category" href="/shallie/categories/{{ing.category.slugname}}">{{ing.category.name}}</a></li>
+           <li *ngFor="let ing of item.ingredient_set"><a *ngIf="ing.item" href="/{{gameURL}}/items/{{ing.item.slugname}}">{{ing.item.name}}</a><a *ngIf="ing.category" href="/{{gameURL}}/categories/{{ing.category.slugname}}">{{ing.category.name}}</a></li>
           </ul>
         </td></tr>
       </table>
@@ -93,7 +93,7 @@
            </td>
            <td>
              <ng-container *ngFor="let eff of effline.effects">
-               <a href="/shallie/effects/{{eff.effect.slugname}}">{{eff.effect.name}}</a><span> ({{eff.min_elem}}-{{eff.max_elem}})</span>
+               <a href="/{{gameURL}}/effects/{{eff.effect.slugname}}">{{eff.effect.name}}</a><span> ({{eff.min_elem}}-{{eff.max_elem}})</span>
                <div class="effect-bar">
                  <div *ngIf="effline.elem == 'fire'"  class="elemental-bar" style="background:#ac504f;left:{{eff.min_elem}}%;width:{{eff.max_elem-eff.min_elem}}%;"></div>
                  <div *ngIf="effline.elem == 'water'" class="elemental-bar" style="background:#427389;left:{{eff.min_elem}}%;width:{{eff.max_elem-eff.min_elem}}%;"></div>
@@ -114,10 +114,10 @@
         </table>
         <table *ngIf="item.characterequip_set" class="table">
           <tr><th style="text-align: center;background-color:rgba(211, 211, 211, 0.3);">Characters</th></tr>
-          <tr><td><img *ngFor="let char of item.characterequip_set[0].chars" src="/media/games/shallie/equip/equip-{{char.name}}.png"></td></tr>
+          <tr><td><img *ngFor="let char of item.characterequip_set[0].chars" src="{{imgURL}}equip/equip-{{char.name}}.png"></td></tr>
         </table>
      </div>
   </div>
-  <language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="shallie"></language-settings>
+  <language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="{{gameURL}}"></language-settings>
  </div>
 </div>

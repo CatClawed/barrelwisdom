@@ -4,7 +4,7 @@
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/ryza2">Atelier Ryza 2</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">Items</li>
   </ol>
 </nav>
@@ -30,7 +30,7 @@
             </mat-select-trigger>
           </mat-select>
         </mat-form-field>
-        <language-settings class="col-md-3" section="ryza2"></language-settings>
+        <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
       </div>
       <div class="row">
         <mat-form-field class="col-md-5" appearance="outline">
@@ -65,7 +65,7 @@
       <div class="card-body griddisplay" style="position:relative">
         <div class="flex">
           <h4 class="card-title card-icon-space">
-              <a style="color: black;" (click)="openModal(itemModal, it.slugname); $event.preventDefault();" href="/ryza2/items/{{it.slugname}}/{{language}}">{{it.name}}</a>    
+              <a style="color: black;" (click)="openModal(itemModal, it.slugname); $event.preventDefault();" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a>    
           </h4>
           <div class="card-icon-position">
               <i *ngIf="it.itemtype == 'Attack'" class="atelier atelier-ryza2-type-attack"></i>
@@ -84,8 +84,8 @@
           </div>
         </div>
         <div class="card-display-bottom">
-            <a class="image-display" (click)="openModal(itemModal, it.slugname); $event.preventDefault();" href="/ryza2/items/{{it.slugname}}/{{language}}">
-              <img loading="lazy" src="/media/games/ryza2/items/{{it.slugname}}.png">
+            <a class="image-display" (click)="openModal(itemModal, it.slugname); $event.preventDefault();" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">
+              <img loading="lazy" src="{{imgURL}}items/{{it.slugname}}.png">
             </a>
         </div>
         <div class="card-text">

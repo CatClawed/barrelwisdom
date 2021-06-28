@@ -9,7 +9,6 @@ import { ErrorCodeService } from "@app/services/errorcode.service";
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { SeoService } from '@app/services/seo.service';
-import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
     templateUrl: 'a22-itemlist.component.html',
@@ -40,6 +39,15 @@ import { Meta, Title } from '@angular/platform-browser';
     selectedElem = "Any";
     selectedElemV = 0;
   
+    seoTitle: string;
+    seoDesc: string;
+    seoImage: string;
+    seoURL: string;
+
+    gameTitle: string;
+    gameURL: string;
+    imgURL: string;
+  
     constructor(
       private modalService: BsModalService,
       private formBuilder: FormBuilder,
@@ -47,9 +55,7 @@ import { Meta, Title } from '@angular/platform-browser';
       private location: Location,
       private a22service: A22Service,
       private errorService: ErrorCodeService,
-      private seoService: SeoService,
-      private metaService: Meta,
-      private titleService: Title
+      private seoService: SeoService
     ) { 
       this.itemControl = new FormControl();
       this.ingControl = new FormControl();
@@ -61,14 +67,14 @@ import { Meta, Title } from '@angular/platform-browser';
   
       this.getItems();
       this.getCategories();
-      this.seoService.createCanonicalURL(`ryza2/items/${this.language}`);
-      this.titleService.setTitle(`Items - Atelier Ryza 2 - Barrel Wisdom`);
-      this.metaService.updateTag({ name: `robots`, content: `index, archive` },`name="robots"`);
-      this.metaService.updateTag({ name: `description`, content: `The list of items in Atelier Ryza 2.` }, `name="description"`);
-      this.metaService.updateTag({ property: `og:title`, content: `Items` }, `property="og:title"`);
-      this.metaService.updateTag({ property: `og:description`, content: `The list of items in Atelier Ryza 2.` },`property="og:description"`);
-      this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
-      this.metaService.updateTag({ property: `og:image`, content: `/media/main/barrel.png` }, `property="og:image"`);
+      this.gameTitle = this.a22service.gameTitle;
+      this.gameURL = this.a22service.gameURL;
+      this.imgURL = this.a22service.imgURL;
+
+      this.seoURL = `${this.gameURL}/items/${this.language}`;
+      this.seoTitle = `Items - ${this.gameTitle}`;
+      this.seoDesc = `The list of items in ${this.gameTitle}.`
+      this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
   
       this.pageForm = this.formBuilder.group({
         filtertext: this.itemControl,
@@ -132,13 +138,14 @@ import { Meta, Title } from '@angular/platform-browser';
   
     openModal(template: TemplateRef<any>, slugname: string) {
       this.item = slugname;
-      this.location.go('ryza2/items/' + slugname + "/" + this.language);
+      this.location.go(`${this.gameURL}/items/` + slugname + "/" + this.language);
       this.modalRef = this.modalService.show(template);
       this.modalRef.onHide.subscribe((reason: string | any) => {
-          this.location.go('ryza2/items/' + this.language);
+          this.location.go(`${this.gameURL}/items/` + this.language);
+          this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
         })
     }
-  
+
     private filterT(value: string, type: string, elementV: number, element: string, ing: string): Item[] {
   
       const filterValue = value.toLowerCase();

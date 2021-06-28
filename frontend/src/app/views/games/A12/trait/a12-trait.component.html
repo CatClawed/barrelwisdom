@@ -1,0 +1,36 @@
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+
+<div *ngIf="!error">
+<nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}/traits/">Traits</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{trait.name}}</li>
+  </ol>
+</nav>
+<div class="mx-auto row">
+<div style="margin-top: 1em;" class="{{colset}} card griddisplay card-body">
+    <div class="flex">
+      <h4 class="card-title">{{trait.name}}</h4>
+      <div><b>Cost: </b>{{trait.cost}}</div>
+    </div>
+    <div class="card-text">
+      <p>{{trait.desc}}</p>
+      <div *ngIf="trait.item_set">
+        <b>Items:</b>
+          <ul>
+            <li *ngFor="let item of trait.item_set"><a href="/{{gameURL}}/items/{{item.slugname}}">{{item.name}}</a></li>
+          </ul>
+      </div>
+      <div class="flex card-text bottom">
+        <div><i *ngIf="trait.synth"      class="atelier atelier-ryza2-type-synthesis"></i>     <i style="color: lightgray;" *ngIf="!trait.synth"      class="atelier atelier-ryza2-type-synthesis"></i></div>
+        <div><i *ngIf="trait.usable"      class="atelier atelier-escha-bomb"></i>     <i style="color: lightgray;" *ngIf="!trait.usable"      class="atelier atelier-escha-bomb"></i>     </div>
+        <div><i *ngIf="trait.ingot"   class="atelier atelier-escha-weapon"></i>   <i style="color: lightgray;" *ngIf="!trait.ingot"    class="atelier atelier-escha-weapon"></i>     </div>
+        <div><i *ngIf="trait.cloth"     class="atelier atelier-escha-armor"></i>    <i style="color: lightgray;" *ngIf="!trait.cloth"     class="atelier atelier-escha-armor"></i>   </div>
+        <div><i *ngIf="trait.accessory" class="atelier atelier-escha-accessory"></i><i style="color: lightgray;" *ngIf="!trait.accessory" class="atelier atelier-escha-accessory"></i>    </div>
+      </div>
+    </div>
+</div>
+<language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="{{gameURL}}"></language-settings>
+</div>

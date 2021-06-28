@@ -4,8 +4,8 @@
 <nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/ryza2">Atelier Ryza 2</a></li>
-    <li class="breadcrumb-item"><a href="/ryza2/effects">Effects</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}/effects">Effects</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{effect.name}}</li>
   </ol>
 </nav>
@@ -27,7 +27,7 @@
         <p *ngIf="effect.note"><b>Note:</b> {{effect.note}}</p>
         <b *ngIf="effect.efftype == 'Normal' || effect.efftype == 'Material'">From Item:</b>
         <ul *ngIf="effect.effectline_set">
-          <li *ngFor="let e of effect.effectline_set"><a href="/ryza2/items/{{e.itemslug}}">{{e.itemname}}</a></li>
+          <li *ngFor="let e of effect.effectline_set"><a href="/{{gameURL}}/items/{{e.itemslug}}">{{e.itemname}}</a></li>
         </ul>
         <b *ngIf="effect.efftype == 'EV'">Combines Effects:</b>
         <ul *ngIf="effect.effects && effect.efftype == 'EV'">
@@ -38,10 +38,10 @@
         <b *ngIf="(effect.efftype == 'Normal' || effect.efftype == 'Material') && effect.parent">Child Effects:</b>
         <b *ngIf="(effect.efftype != 'Normal' && effect.efftype != 'Material') && effect.parent">Parent Effects:</b>
         <ul *ngIf="effect.parent">
-          <li *ngFor="let e of effect.parent"><a href="/ryza2/effects/{{e.slugname}}">{{e.name}}</a></li>
+          <li *ngFor="let e of effect.parent"><a href="/{{gameURL}}/effects/{{e.slugname}}">{{e.name}}</a></li>
         </ul>
       </div>
 </div>
-<language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="ryza2"></language-settings>
+<language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="{{gameURL}}"></language-settings>
 </div>
 </div>

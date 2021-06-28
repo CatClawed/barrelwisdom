@@ -13,6 +13,10 @@ export class A15Service {
     constructor(
       private http: HttpClient,
     ) { }
+
+    public readonly gameTitle = "Atelier Escha & Logy";
+    public readonly gameURL = "escha";
+    public readonly imgURL = `${environment.mediaURL}games/${this.gameURL}/`;
     
     getPropertyList(language: string): Observable<Property[]> {
       return this.http.get<Property[]>(`${environment.apiUrl}/A15/property/${language}/`);

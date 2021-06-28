@@ -4,7 +4,7 @@
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/ryza2">Atelier Ryza 2</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">Traits</li>
   </ol>
 </nav>
@@ -54,7 +54,7 @@
             </mat-select-trigger>
           </mat-select>
         </mat-form-field>
-        <language-settings class="col-md-3" section="ryza2"></language-settings>
+        <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
       </div>
     </form>
   </div>
@@ -63,14 +63,14 @@
     <div class="card allheight">
       <div class="card-body griddisplay">
         <div class="flex">
-          <h4 class="card-title"><a style="color: black;" (click)="openModal(traitModal, trt.slugname); $event.preventDefault();" href="/ryza2/traits/{{trt.slugname}}/{{language}}">{{trt.name}}</a></h4>
+          <h4 class="card-title"><a style="color: black;" (click)="openModal(traitModal, trt.slugname); $event.preventDefault();" href="/{{gameURL}}/traits/{{trt.slugname}}/{{language}}">{{trt.name}}</a></h4>
           <div *ngIf="trt.item_set.length == 0"><a href="javascript:void(0)"
               tooltip="A measure of rarity. This number determines where traits appear." container="true">Grade:</a>
             {{trt.grade}}
             <br /><span class="badge bg-secondary" *ngIf="trt.grade > 50">DLC</span>
           </div>
           <div *ngIf="trt.item_set.length > 0">
-            <i class="atelier atelier-sm atelier-ryza2-material"></i><a href="/ryza2/item/{{trt.item_set[0].slugname}}/{{language}}">{{trt.item_set[0].name}}</a>
+            <i class="atelier atelier-sm atelier-ryza2-material"></i><a href="/{{gameURL}}/item/{{trt.item_set[0].slugname}}/{{language}}">{{trt.item_set[0].name}}</a>
           </div>
         </div>
         <div class="card-text">

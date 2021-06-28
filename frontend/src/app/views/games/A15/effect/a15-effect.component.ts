@@ -31,13 +31,20 @@ export class A15EffectComponent implements OnInit {
 
   language = "";
 
-  constructor(
+  seoTitle: string;
+  seoDesc: string;
+  seoImage: string;
+  seoURL: string;
+
+  gameTitle: string;
+  gameURL: string;
+  imgURL: string;
+
+constructor(
     private route: ActivatedRoute,
     private a15service: A15Service,
     private errorService: ErrorCodeService,
-    private seoService: SeoService,
-    private metaService: Meta,
-    private titleService: Title) {
+    private seoService: SeoService) {
       if(this.route.snapshot.params.effect != null) {
       this.slugname = this.route.snapshot.params.effect;
     }
@@ -51,14 +58,13 @@ export class A15EffectComponent implements OnInit {
     .subscribe(effect => {
       this.error = false;
       this.effect = effect;
-      this.seoService.createCanonicalURL(`escha/effects/${this.effect.slugname}/${this.language}`);
-      this.titleService.setTitle(`${this.effect.name} - Atelier Escha & Logy - Barrel Wisdom`);
-      this.metaService.updateTag({ name: `robots`, content: `index, archive` },`name="robots"`);
-      this.metaService.updateTag({ name: `description`, content: `${this.effect.desc}` }, `name="description"`);
-      this.metaService.updateTag({ property: `og:title`, content: `${this.effect.name}` }, `property="og:title"`);
-      this.metaService.updateTag({ property: `og:description`, content: `${this.effect.desc}` },`property="og:description"`);
-      this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
-      this.metaService.updateTag({ property: `og:image`, content: `media/main/barrel.png` }, `property="og:image"`);
+      this.gameTitle = this.a15service.gameTitle;
+      this.gameURL = this.a15service.gameURL;
+      this.imgURL = this.a15service.imgURL;
+
+      this.seoURL = `${this.gameURL}/effects/${this.effect.slugname}/${this.language}`;
+      this.seoTitle = `${this.effect.name} - ${this.gameTitle}`;
+      this.seoDesc = `${this.effect.desc}`;
     },
     error => {
       this.error = true,

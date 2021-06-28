@@ -28,15 +28,11 @@ export interface Region {
     region: NameLink;
 }
 
-export interface EffectDataSimple {
-    effectlines_set: NameLink[]
-}
-
 export interface Effect {
     slugname: string;
     name: string;
     desc: string;
-    effectdata_set: EffectDataSimple[];
+    effectline_set: NameLink[];
 }
 
 export interface Trait {
@@ -65,6 +61,7 @@ export interface MonsterFull {
     locations: RegionName[];
     item_set: NameLink[];
     isDX: boolean;
+    note: string;
 }
 
 export interface MonsterList {
@@ -126,7 +123,7 @@ export interface ItemFull {
     traits: NameLink;
     ingredient_set: IngredientFull[];
     equip_set: Equipment[];
-    effectlines_set: EffectLine[];
+    effectline_set: EffectLine[];
     locations: RegionName[];
     book_set: NameLink[];
     monsters: NameLink[];

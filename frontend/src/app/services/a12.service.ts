@@ -13,6 +13,10 @@ export class A12Service {
     constructor(
       private http: HttpClient,
     ) { }
+
+    public readonly gameTitle = "Atelier Totori";
+    public readonly gameURL = "totori";
+    public readonly imgURL = `${environment.mediaURL}games/${this.gameURL}/`;
     
     getTraitList(language: string): Observable<Trait[]> {
       return this.http.get<Trait[]>(`${environment.apiUrl}/A12/trait/${language}/`);

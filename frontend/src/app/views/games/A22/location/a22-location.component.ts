@@ -6,7 +6,6 @@ import { A22Service } from '@app/services/a22.service';
 import { ErrorCodeService } from "@app/services/errorcode.service";
 import { first } from 'rxjs/operators';
 import { SeoService } from '@app/services/seo.service';
-import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
     templateUrl: 'a22-location.component.html',
@@ -21,6 +20,15 @@ import { Meta, Title } from '@angular/platform-browser';
     region: Region;
     language: string;
     dig = true;
+
+    seoTitle: string;
+    seoDesc: string;
+    seoImage: string;
+    seoURL: string;
+  
+    gameTitle: string;
+    gameURL: string;
+    imgURL: string;
   
     constructor(
       private route: ActivatedRoute,
@@ -28,8 +36,6 @@ import { Meta, Title } from '@angular/platform-browser';
       private a22service: A22Service,
       private errorService: ErrorCodeService,
       private seoService: SeoService,
-      private metaService: Meta,
-      private titleService: Title,
       private viewportScroller: ViewportScroller
     ) { 
     }
@@ -61,14 +67,14 @@ import { Meta, Title } from '@angular/platform-browser';
                   }
                   this.dig = false;
                 }
-              this.seoService.createCanonicalURL(`ryza2/${this.region.slugname}/${this.language}`);
-              this.titleService.setTitle(`${this.region.name} - Atelier Ryza 2 - Barrel Wisdom`);
-              this.metaService.updateTag({ name: `robots`, content: `index, archive` },`name="robots"`);
-              this.metaService.updateTag({ name: `description`, content: `All gathering info about ${this.region.name}.` }, `name="description"`);
-              this.metaService.updateTag({ property: `og:title`, content: `${this.region.name}` }, `property="og:title"`);
-              this.metaService.updateTag({ property: `og:description`, content: `All gathering info about ${this.region.name}.` },`property="og:description"`);
-              this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
-              this.metaService.updateTag({ property: `og:image`, content: `/media/main/barrel.png` }, `property="og:image"`);
+                this.gameTitle = this.a22service.gameTitle;
+                this.gameURL = this.a22service.gameURL;
+                this.imgURL = this.a22service.imgURL;
+        
+                this.seoURL = `${this.gameURL}/locations/${this.region.slugname}/${this.language}`;
+                this.seoTitle = `${this.region.name} - ${this.gameTitle}`;
+                this.seoDesc = `All items in ${this.region.name}`
+                this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
             }
         },
         error => {

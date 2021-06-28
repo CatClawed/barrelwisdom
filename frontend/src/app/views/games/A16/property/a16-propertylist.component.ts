@@ -9,7 +9,6 @@ import { ErrorCodeService } from "@app/services/errorcode.service";
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { SeoService } from '@app/services/seo.service';
-import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   templateUrl: 'a16-propertylist.component.html',
@@ -30,6 +29,14 @@ export class A16PropertylistComponent implements OnInit {
   searchstring = "";
   language = "";
 
+  seoTitle: string;
+  seoDesc: string;
+  seoImage: string;
+  seoURL: string;
+  gameTitle: string;
+  gameURL: string;
+  imgURL: string;
+
   constructor(
     private modalService: BsModalService,
     private formBuilder: FormBuilder,
@@ -37,9 +44,7 @@ export class A16PropertylistComponent implements OnInit {
     private location: Location,
     private a16service: A16Service,
     private errorService: ErrorCodeService,
-    private seoService: SeoService,
-    private metaService: Meta,
-    private titleService: Title) { 
+    private seoService: SeoService) { 
     this.propertyControl = new FormControl();
   }
 
@@ -48,14 +53,14 @@ export class A16PropertylistComponent implements OnInit {
     this.language = this.route.snapshot.params.language;
 
     this.getProperties();
-    this.seoService.createCanonicalURL(`escha/properties/${this.language}`);
-    this.titleService.setTitle(`Properties - Atelier Shallie - Barrel Wisdom`);
-    this.metaService.updateTag({ name: `robots`, content: `index, archive` },`name="robots"`);
-    this.metaService.updateTag({ name: `description`, content: `The list of properties in Atelier Shallie.` }, `name="description"`);
-    this.metaService.updateTag({ property: `og:title`, content: `Properties` }, `property="og:title"`);
-    this.metaService.updateTag({ property: `og:description`, content: `The list of properties in Atelier Shallie.` },`property="og:description"`);
-    this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
-    this.metaService.updateTag({ property: `og:image`, content: `/media/main/barrel.png` }, `property="og:image"`);
+    this.gameTitle = this.a16service.gameTitle;
+    this.gameURL = this.a16service.gameURL;
+    this.imgURL = this.a16service.imgURL;
+    
+    this.seoURL = `${this.gameURL}/properties/${this.language}`;
+    this.seoTitle = `Properties - ${this.gameTitle}`;
+    this.seoDesc = `The list of properties in ${this.gameTitle}.`
+    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
 
     this.pageForm = this.formBuilder.group({
       filtertext: this.propertyControl,
@@ -90,10 +95,11 @@ export class A16PropertylistComponent implements OnInit {
 
   openModal(template: TemplateRef<any>, slugname: string) {
     this.property = slugname;
-    this.location.go('shallie/properties/' + slugname + "/" + this.language);
+    this.location.go(`${this.gameURL}/properties/` + slugname + "/" + this.language);
     this.modalRef = this.modalService.show(template);
     this.modalRef.onHide.subscribe((reason: string | any) => {
-        this.location.go('shallie/properties/' + this.language);
+        this.location.go(`${this.gameURL}/properties/` + this.language);
+        this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
       })
   }
 

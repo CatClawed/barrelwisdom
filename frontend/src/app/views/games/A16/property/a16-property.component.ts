@@ -1,11 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import { Property } from '@app/interfaces/a16';
 import { A16Service } from '@app/services/a16.service';
 import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
-import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   templateUrl: 'a16-property.component.html',
@@ -23,6 +21,15 @@ export class A16PropertyComponent implements OnInit {
   property: Property;
   colset: string;
 
+  seoTitle: string;
+  seoDesc: string;
+  seoImage: string;
+  seoURL: string;
+
+  gameTitle: string;
+  gameURL: string;
+  imgURL: string;
+
   @Input()
   slugname: string = "";
 
@@ -33,13 +40,9 @@ export class A16PropertyComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
-    private location: Location,
     private a16service: A16Service,
     private errorService: ErrorCodeService,
-    private seoService: SeoService,
-    private metaService: Meta,
-    private titleService: Title) {
+    private seoService: SeoService) {
       if(this.route.snapshot.params.property != null) {
       this.slugname = this.route.snapshot.params.property;
     }
@@ -52,14 +55,14 @@ export class A16PropertyComponent implements OnInit {
     this.a16service.getProperty(this.slugname, this.language)
     .subscribe(property => {
       this.property = property;
-      this.seoService.createCanonicalURL(`escha/properties/${this.property.slugname}/${this.language}`);
-      this.titleService.setTitle(`${property.name} - Atelier Shallie - Barrel Wisdom`);
-      this.metaService.updateTag({ name: `robots`, content: `index, archive` },`name="robots"`);
-      this.metaService.updateTag({ name: `description`, content: `${property.desc}` }, `name="description"`);
-      this.metaService.updateTag({ property: `og:title`, content: `${property.name}` }, `property="og:title"`);
-      this.metaService.updateTag({ property: `og:description`, content: `${property.desc}` },`property="og:description"`);
-      this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
-      this.metaService.updateTag({ property: `og:image`, content: `/media/main/barrel.png` }, `property="og:image"`);
+      this.gameTitle = this.a16service.gameTitle;
+      this.gameURL = this.a16service.gameURL;
+      this.imgURL = this.a16service.imgURL;
+
+      this.seoURL = `${this.gameURL}/properties/${this.property.slugname}/${this.language}`;
+      this.seoTitle = `${this.property.name} - ${this.gameTitle}`;
+      this.seoDesc = `${this.property.desc}`
+      this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error => {
       this.error = true,

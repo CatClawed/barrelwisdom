@@ -1,11 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import { MonsterFull } from '@app/interfaces/a22';
 import { A22Service } from '@app/services/a22.service';
 import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
-import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   templateUrl: 'a22-monster.component.html',
@@ -27,6 +25,15 @@ export class A22MonsterComponent implements OnInit {
   def: boolean[] = [];
   spd: boolean[] = [];
 
+  seoTitle: string;
+  seoDesc: string;
+  seoImage: string;
+  seoURL: string;
+
+  gameTitle: string;
+  gameURL: string;
+  imgURL: string;
+
   @Input()
   slugname: string = "";
 
@@ -37,13 +44,9 @@ export class A22MonsterComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
-    private location: Location,
     private a22service: A22Service,
     private errorService: ErrorCodeService,
-    private seoService: SeoService,
-    private metaService: Meta,
-    private titleService: Title) {
+    private seoService: SeoService) {
       if(this.route.snapshot.params.monster != null) {
       this.slugname = this.route.snapshot.params.monster;
     }
@@ -84,14 +87,15 @@ export class A22MonsterComponent implements OnInit {
           }
         }
 
-        this.seoService.createCanonicalURL(`ryza2/monsters/${this.monster.slugname}/${this.language}`);
-        this.titleService.setTitle(`${this.monster.name} - Atelier Ryza 2 - Barrel Wisdom`);
-        this.metaService.updateTag({ name: `robots`, content: `index, archive` },`name="robots"`);
-        this.metaService.updateTag({ name: `description`, content: `${this.monster.description}` }, `name="description"`);
-        this.metaService.updateTag({ property: `og:title`, content: `${this.monster.name}` }, `property="og:title"`);
-        this.metaService.updateTag({ property: `og:description`, content: `${this.monster.description}` },`property="og:description"`);
-        this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
-        this.metaService.updateTag({ property: `og:image`, content: `/media/games/ryza2/monsters/${this.monster.slugname}.png` }, `property="og:image"`);
+        this.gameTitle = this.a22service.gameTitle;
+        this.gameURL = this.a22service.gameURL;
+        this.imgURL = this.a22service.imgURL;
+
+        this.seoURL = `${this.gameURL}/monsters/${this.monster.slugname}/${this.language}`;
+        this.seoTitle = `${this.monster.name} - ${this.gameTitle}`;
+        this.seoDesc = `${this.monster.description}`
+        this.seoImage = `${this.imgURL}monsters/${this.monster.slugname}.png`
+        this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error => {
       this.error = true;

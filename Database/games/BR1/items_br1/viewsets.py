@@ -19,7 +19,7 @@ class BR1ItemViewSet(viewsets.ModelViewSet):
             Item.objects
             .order_by('index')
         )
-        serializer = BR1ItemSerializerSimple(queryset, many=True)
+        serializer = BR1ItemSerializer(queryset, many=True)
         return Response(serializer.data)
 
     # allows easy access via catect/slugname/en

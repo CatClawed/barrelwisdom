@@ -4,7 +4,6 @@ import { CategoryItem } from '@app/interfaces/a22';
 import { A22Service } from '@app/services/a22.service';
 import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
-import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   templateUrl: 'a22-category.component.html',
@@ -23,13 +22,20 @@ export class A22CategoryComponent implements OnInit {
   colset: string;
   language = "";
 
-  constructor(
+  seoTitle: string;
+  seoDesc: string;
+  seoImage: string;
+  seoURL: string;
+
+  gameTitle: string;
+  gameURL: string;
+  imgURL: string;
+
+constructor(
     private route: ActivatedRoute,
     private a22service: A22Service,
     private errorService: ErrorCodeService,
-    private seoService: SeoService,
-    private metaService: Meta,
-    private titleService: Title) {
+    private seoService: SeoService) {
   }
   ngOnInit(): void {
     this.slugname = this.route.snapshot.params.category;
@@ -40,14 +46,14 @@ export class A22CategoryComponent implements OnInit {
         this.error = false;
         this.category = category;
 
-        this.seoService.createCanonicalURL(`ryza2/categories/${this.category.slugname}/${this.language}`);
-        this.titleService.setTitle(`${this.category.name} - Atelier Ryza 2 - Barrel Wisdom`);
-        this.metaService.updateTag({ name: `robots`, content: `index, archive` },`name="robots"`);
-        this.metaService.updateTag({ name: `description`, content: `All items in ${this.category.name}` }, `name="description"`);
-        this.metaService.updateTag({ property: `og:title`, content: `${this.category.name}` }, `property="og:title"`);
-        this.metaService.updateTag({ property: `og:description`, content: `All items in ${this.category.name}` },`property="og:description"`);
-        this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
-        this.metaService.updateTag({ property: `og:image`, content: `/media/main/barrel.png` }, `property="og:image"`);
+        this.gameTitle = this.a22service.gameTitle;
+        this.gameURL = this.a22service.gameURL;
+        this.imgURL = this.a22service.imgURL;
+
+        this.seoURL = `${this.gameURL}/categories/${this.category.slugname}/${this.language}`;
+        this.seoTitle = `${this.category.name} - ${this.gameTitle}`;
+        this.seoDesc = `All items in ${this.category.name}`
+        this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error => {
       this.error = true,

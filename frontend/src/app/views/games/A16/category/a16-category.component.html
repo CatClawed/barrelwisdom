@@ -4,19 +4,19 @@
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/shallie">Atelier Shallie</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">Category: {{category.name}}</li>
   </ol>
 </nav>
 <h1>{{category.name}}</h1>
-<language-settings style="margin-top: 1em;" class="col-md-3" section="shallie"></language-settings>
+<language-settings style="margin-top: 1em;" class="col-md-3" section="{{gameURL}}"></language-settings>
 <div class="mx-auto row">
     <div class="col-md-6">
         <table style="border:2px solid lightgray;" class="table">
             <tr><th class="table-dark-center" colspan=2>Items in Category</th></tr>
             <tr *ngFor="let item of category.item_set">
                 <td>
-                    <a href="shallie/items/{{item.slugname}}">{{item.name}}</a>
+                    <a href="{{gameURL}}/items/{{item.slugname}}">{{item.name}}</a>
                     <br /><b>LV {{item.level}}</b><br />
                     <i style="color:#ac504f;" *ngIf="item.fire"  class="atelier atelier-shallie-fire"></i>
                     <i style="color:#427389;" *ngIf="item.water" class="atelier atelier-shallie-water"></i>
@@ -25,10 +25,10 @@
                     {{item.evalue}}
                 </td>
                 <td style="vertical-align:middle;">
-                  <img *ngIf="item.slots > 0" src="/media/games/shallie/slot.png">
-                  <img *ngIf="item.slots > 1" src="/media/games/shallie/slot.png">
-                  <img *ngIf="item.slots > 2" src="/media/games/shallie/slot.png">
-                  <img *ngIf="item.slots > 3" src="/media/games/shallie/slot.png">
+                  <img *ngIf="item.slots > 0" src="{{imgURL}}slot.png">
+                  <img *ngIf="item.slots > 1" src="{{imgURL}}slot.png">
+                  <img *ngIf="item.slots > 2" src="{{imgURL}}slot.png">
+                  <img *ngIf="item.slots > 3" src="{{imgURL}}slot.png">
                 </td>
             </tr>
         </table>
@@ -38,7 +38,7 @@
             <tr><th class="table-dark-center" colspan=2>Items Using Category</th></tr>
             <tr *ngFor="let item of category.ingredientcat">
                 <td>
-                    <a href="shallie/items/{{item.synthitem.slugname}}">{{item.synthitem.name}}</a>
+                    <a href="{{gameURL}}/items/{{item.synthitem.slugname}}">{{item.synthitem.name}}</a>
                     <br /><b>LV {{item.synthitem.level}}</b><br />
                     <i style="color:#ac504f;" *ngIf="item.synthitem.fire"  class="atelier atelier-shallie-fire"></i>
                     <i style="color:#427389;" *ngIf="item.synthitem.water" class="atelier atelier-shallie-water"></i>
@@ -47,10 +47,10 @@
                     {{item.synthitem.evalue}}
                 </td>
                 <td style="vertical-align:middle;">
-                  <img *ngIf="item.synthitem.slots > 0" src="/media/games/shallie/slot.png">
-                  <img *ngIf="item.synthitem.slots > 1" src="/media/games/shallie/slot.png">
-                  <img *ngIf="item.synthitem.slots > 2" src="/media/games/shallie/slot.png">
-                  <img *ngIf="item.synthitem.slots > 3" src="/media/games/shallie/slot.png">
+                  <img *ngIf="item.synthitem.slots > 0" src="{{imgURL}}slot.png">
+                  <img *ngIf="item.synthitem.slots > 1" src="{{imgURL}}slot.png">
+                  <img *ngIf="item.synthitem.slots > 2" src="{{imgURL}}slot.png">
+                  <img *ngIf="item.synthitem.slots > 3" src="{{imgURL}}slot.png">
                 </td>
             </tr>
         </table>

@@ -13,6 +13,10 @@ export class A16Service {
     constructor(
       private http: HttpClient,
     ) { }
+
+    public readonly gameTitle = "Atelier Shallie";
+    public readonly gameURL = "shallie";
+    public readonly imgURL = `${environment.mediaURL}games/${this.gameURL}/`;
     
     getPropertyList(language: string): Observable<Property[]> {
       return this.http.get<Property[]>(`${environment.apiUrl}/A16/property/${language}/`);

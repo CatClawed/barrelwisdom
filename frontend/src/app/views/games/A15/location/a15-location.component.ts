@@ -4,7 +4,6 @@ import { RegionData } from '@app/interfaces/a15';
 import { A15Service } from '@app/services/a15.service';
 import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
-import { Meta, Title } from '@angular/platform-browser';
 import { ViewportScroller } from '@angular/common';
 import { first } from 'rxjs/operators';
 
@@ -25,13 +24,20 @@ export class A15LocationComponent implements OnInit {
   colset: string;
   language = "";
 
-  constructor(
+  seoTitle: string;
+  seoDesc: string;
+  seoImage: string;
+  seoURL: string;
+
+  gameTitle: string;
+  gameURL: string;
+  imgURL: string;
+
+constructor(
     private route: ActivatedRoute,
     private a15service: A15Service,
     private errorService: ErrorCodeService,
     private seoService: SeoService,
-    private metaService: Meta,
-    private titleService: Title,
     private viewportScroller: ViewportScroller
     ) {
   }
@@ -44,14 +50,14 @@ export class A15LocationComponent implements OnInit {
         this.error = false;
         this.location = location;
 
-        this.seoService.createCanonicalURL(`escha/locations/${this.location.slugname}/${this.language}`);
-        this.titleService.setTitle(`${this.location.name} - Atelier Escha & Logy - Barrel Wisdom`);
-        this.metaService.updateTag({ name: `robots`, content: `index, archive` },`name="robots"`);
-        this.metaService.updateTag({ name: `description`, content: `All items in ${this.location.name}` }, `name="description"`);
-        this.metaService.updateTag({ property: `og:title`, content: `${this.location.name}` }, `property="og:title"`);
-        this.metaService.updateTag({ property: `og:description`, content: `All items in ${this.location.name}` },`property="og:description"`);
-        this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
-        this.metaService.updateTag({ property: `og:image`, content: `/media/main/barrel.png` }, `property="og:image"`);
+        this.gameTitle = this.a15service.gameTitle;
+        this.gameURL = this.a15service.gameURL;
+        this.imgURL = this.a15service.imgURL;
+
+        this.seoURL = `${this.gameURL}/locations/${this.location.slugname}/${this.language}`;
+        this.seoTitle = `${this.location.name} - ${this.gameTitle}`;
+        this.seoDesc = `All items in ${this.location.name}`
+        this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error => {
       this.error = true,

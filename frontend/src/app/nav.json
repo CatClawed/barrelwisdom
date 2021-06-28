@@ -15,12 +15,12 @@
   },
   {
     "name":"Part 1",
-    "url":"/ryza2/walk1",
+    "url":"/{{gameURL}}/walk1",
     "icon":"icon-drop"
   },
   {
     "name":"Part 1",
-    "url":"/ryza2/walk1",
+    "url":"/{{gameURL}}/walk1",
     "icon":"icon-drop"
   },
   {
@@ -29,22 +29,22 @@
   },
   {
     "name":"Items",
-    "url":"/ryza2/items",
+    "url":"/{{gameURL}}/items",
     "icon":"icon-puzzle"
   },
   {
     "name":"Traits",
-    "url":"/ryza2/traits",
+    "url":"/{{gameURL}}/traits",
     "icon":"icon-puzzle"
   },
   {
     "name":"Effects",
-    "url":"/ryza2/effects",
+    "url":"/{{gameURL}}/effects",
     "icon":"icon-puzzle"
   },
   {
     "name":"Monsters",
-    "url":"/ryza2/monsters",
+    "url":"/{{gameURL}}/monsters",
     "icon":"icon-puzzle"
   },
   {
@@ -58,22 +58,22 @@
   },
   {
     "name":"Puni Raising",
-    "url":"/ryza2/puni-raising",
+    "url":"/{{gameURL}}/puni-raising",
     "icon":"icon-puzzle"
   },
   {
     "name":"Fairy Statues",
-    "url":"/ryza2/fairy-statues",
+    "url":"/{{gameURL}}/fairy-statues",
     "icon":"icon-puzzle"
   },
   {
     "name":"Ultimate Builds",
-    "url":"/ryza2/ultimate-builds",
+    "url":"/{{gameURL}}/ultimate-builds",
     "icon":"icon-puzzle"
   },
   {
     "name":"Monsters",
-    "url":"/ryza2/monsters",
+    "url":"/{{gameURL}}/monsters",
     "icon":"icon-puzzle"
   },
   {
@@ -87,22 +87,22 @@
   },
   {
     "name":"Items",
-    "url":"/ryza2/items",
+    "url":"/{{gameURL}}/items",
     "icon":"icon-puzzle"
   },
   {
     "name":"Place",
-    "url":"/ryza2/items",
+    "url":"/{{gameURL}}/items",
     "icon":"icon-puzzle"
   },
   {
     "name":"Effects",
-    "url":"/ryza2/effects",
+    "url":"/{{gameURL}}/effects",
     "icon":"icon-puzzle"
   },
   {
     "name":"Monsters",
-    "url":"/ryza2/monsters",
+    "url":"/{{gameURL}}/monsters",
     "icon":"icon-puzzle"
   },
   {

@@ -4,8 +4,8 @@
 <nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/ryza2">Atelier Ryza 2</a></li>
-    <li class="breadcrumb-item"><a href="/ryza2/monsters">Monsters</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}/monsters">Monsters</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{monster.name}}</li>
   </ol>
 </nav>
@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="card-text">
-        <img class="image-display" loading="lazy" src="/media/games/ryza2/monsters/{{monster.slugname}}.png">
+        <img class="image-display" loading="lazy" src="{{imgURL}}monsters/{{monster.slugname}}.png">
         <p *ngIf="monster.description">{{monster.description}}</p>
         <p *ngIf="monster.note"><b>Note:</b> {{monster.note}}</p>
 
@@ -60,23 +60,23 @@
     </div>
       <table class="table table-shrink" >
         <tr>
-            <th style="text-align: center;padding-bottom:0;"><i style="padding:0;color:#c88401;" class="atelier atelier-lg atelier-ryza2-physical"></i></th>
-            <th style="text-align: center;padding-bottom:0;"><i style="padding:0;color:#5f49ec;" class="atelier atelier-lg atelier-ryza2-magic"></i></th>
-            <th style="text-align: center;padding-bottom:0;"><i style="padding:0;color:#f03a02;" class="atelier atelier-lg atelier-ryza2-fire"></i></th>
-            <th style="text-align: center;padding-bottom:0;"><i style="padding:0;color:#04b5db;" class="atelier atelier-lg atelier-ryza2-ice"></i></th>
-            <th style="text-align: center;padding-bottom:0;"><i style="padding:0;color:#e3bb05;" class="atelier atelier-lg atelier-ryza2-lightning"></i></th>
-            <th style="text-align: center;padding-bottom:0;"><i style="padding:0;color:#589b1d;" class="atelier atelier-lg atelier-ryza2-wind"></i></th>
+            <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;color:#c88401;" class="atelier atelier-lg atelier-ryza2-physical"></i></th>
+            <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;color:#5f49ec;" class="atelier atelier-lg atelier-ryza2-magic"></i></th>
+            <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;color:#f03a02;" class="atelier atelier-lg atelier-ryza2-fire"></i></th>
+            <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;color:#04b5db;" class="atelier atelier-lg atelier-ryza2-ice"></i></th>
+            <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;color:#e3bb05;" class="atelier atelier-lg atelier-ryza2-lightning"></i></th>
+            <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;color:#589b1d;" class="atelier atelier-lg atelier-ryza2-wind"></i></th>
         </tr>
         <tr>
-            <td style="text-align: center;border-top:transparent;padding:0;"><span *ngIf="monster.resist_phys == 'NOEFFECT'">0x</span><span *ngIf="monster.resist_phys == 'HALF'">0.5x</span><span *ngIf="monster.resist_phys  == 'WEAK'">2x</span></td>
-            <td style="text-align: center;border-top:transparent;padding:0;"><span *ngIf="monster.resist_mag  == 'NOEFFECT'">0x</span><span *ngIf="monster.resist_mag  == 'HALF'">0.5x</span><span *ngIf="monster.resist_mag   == 'WEAK'">2x</span></td>
-            <td style="text-align: center;border-top:transparent;padding:0;"><span *ngIf="monster.resist_fire == 'NOEFFECT'">0x</span><span *ngIf="monster.resist_fire == 'HALF'">0.5x</span><span *ngIf="monster.resist_fire  == 'WEAK'">2x</span></td>
-            <td style="text-align: center;border-top:transparent;padding:0;"><span *ngIf="monster.resist_ice  == 'NOEFFECT'">0x</span><span *ngIf="monster.resist_ice  == 'HALF'">0.5x</span><span *ngIf="monster.resist_ice   == 'WEAK'">2x</span></td>
-            <td style="text-align: center;border-top:transparent;padding:0;"><span *ngIf="monster.resist_light== 'NOEFFECT'">0x</span><span *ngIf="monster.resist_light== 'HALF'">0.5x</span><span *ngIf="monster.resist_light == 'WEAK'">2x</span> </td>
-            <td style="text-align: center;border-top:transparent;padding:0;"><span *ngIf="monster.resist_wind == 'NOEFFECT'">0x</span><span *ngIf="monster.resist_wind == 'HALF'">0.5x</span><span *ngIf="monster.resist_wind  == 'WEAK'">2x</span></td>
+            <td style="text-align: center;border:transparent;padding:0;"><span *ngIf="monster.resist_phys == 'NOEFFECT'">0x</span><span *ngIf="monster.resist_phys == 'HALF'">0.5x</span><span *ngIf="monster.resist_phys  == 'WEAK'">2x</span></td>
+            <td style="text-align: center;border:transparent;padding:0;"><span *ngIf="monster.resist_mag  == 'NOEFFECT'">0x</span><span *ngIf="monster.resist_mag  == 'HALF'">0.5x</span><span *ngIf="monster.resist_mag   == 'WEAK'">2x</span></td>
+            <td style="text-align: center;border:transparent;padding:0;"><span *ngIf="monster.resist_fire == 'NOEFFECT'">0x</span><span *ngIf="monster.resist_fire == 'HALF'">0.5x</span><span *ngIf="monster.resist_fire  == 'WEAK'">2x</span></td>
+            <td style="text-align: center;border:transparent;padding:0;"><span *ngIf="monster.resist_ice  == 'NOEFFECT'">0x</span><span *ngIf="monster.resist_ice  == 'HALF'">0.5x</span><span *ngIf="monster.resist_ice   == 'WEAK'">2x</span></td>
+            <td style="text-align: center;border:transparent;padding:0;"><span *ngIf="monster.resist_light== 'NOEFFECT'">0x</span><span *ngIf="monster.resist_light== 'HALF'">0.5x</span><span *ngIf="monster.resist_light == 'WEAK'">2x</span> </td>
+            <td style="text-align: center;border:transparent;padding:0;"><span *ngIf="monster.resist_wind == 'NOEFFECT'">0x</span><span *ngIf="monster.resist_wind == 'HALF'">0.5x</span><span *ngIf="monster.resist_wind  == 'WEAK'">2x</span></td>
         </tr>
     </table>
 </div>
-<language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="ryza2"></language-settings>
+<language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="{{gameURL}}"></language-settings>
 </div>
 </div>

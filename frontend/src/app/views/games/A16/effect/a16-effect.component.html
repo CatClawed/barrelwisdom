@@ -4,8 +4,8 @@
 <nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/shallie">Atelier Shallie</a></li>
-    <li class="breadcrumb-item"><a href="/shallie/effects">Effects</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}/effects">Effects</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{effect.name}}</li>
   </ol>
 </nav>
@@ -18,10 +18,10 @@
         <p *ngIf="effect.desc">{{effect.desc}}</p>
         <b *ngIf="effect.effectdata_set">From Item:</b>
         <ul *ngIf="effect.effectdata_set">
-          <li *ngFor="let e of effect.effectdata_set"><a href="/shallie/items/{{e.effectlines_set[0].slugname}}">{{e.effectlines_set[0].name}}</a></li>
+          <li *ngFor="let e of effect.effectdata_set"><a href="/{{gameURL}}/items/{{e.effectlines_set[0].slugname}}">{{e.effectlines_set[0].name}}</a></li>
         </ul>
     </div>
 </div>
-<language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="shallie"></language-settings>
+<language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="{{gameURL}}"></language-settings>
 </div>
 </div>

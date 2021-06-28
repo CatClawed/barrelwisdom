@@ -16,6 +16,10 @@ export class A22Service {
     private http: HttpClient,
   ) { }
 
+  public readonly gameTitle = "Atelier Ryza 2";
+  public readonly gameURL = "ryza2"; 
+  public readonly imgURL = `${environment.mediaURL}games/${this.gameURL}/`;
+
   getTraitList(language: string): Observable<Trait[]> {
       return this.http.get<Trait[]>(`${environment.apiUrl}/A22/trait/${language}/`);
   }

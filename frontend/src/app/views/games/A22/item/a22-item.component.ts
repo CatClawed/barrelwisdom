@@ -4,7 +4,6 @@ import { ItemFull } from '@app/interfaces/a22';
 import { A22Service } from '@app/services/a22.service';
 import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
-import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   templateUrl: 'a22-item.component.html',
@@ -35,13 +34,20 @@ export class A22ItemComponent implements OnInit {
 
   language = "";
 
-  constructor(
+  seoTitle: string;
+  seoDesc: string;
+  seoImage: string;
+  seoURL: string;
+
+  gameTitle: string;
+  gameURL: string;
+  imgURL: string;
+
+constructor(
     private route: ActivatedRoute,
     private a22service: A22Service,
     private errorService: ErrorCodeService,
-    private seoService: SeoService,
-    private metaService: Meta,
-    private titleService: Title) {
+    private seoService: SeoService) {
       if(this.route.snapshot.params.item != null) {
       this.slugname = this.route.snapshot.params.item;
     }
@@ -55,6 +61,16 @@ export class A22ItemComponent implements OnInit {
     .subscribe(item => {
         this.error = false;
         this.item = item;
+
+        this.gameTitle = this.a22service.gameTitle;
+        this.gameURL = this.a22service.gameURL;
+        this.imgURL = this.a22service.imgURL;
+
+        this.seoURL = `${this.gameURL}/items/${this.item.slugname}/${this.language}`;
+        this.seoTitle = `${this.item.name} - ${this.gameTitle}`;
+        this.seoDesc = `${this.item.description}`
+        this.seoImage = `${this.imgURL}items/${this.item.slugname}.png`
+        this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
 
         if(this.item.effectline_set) {
             if(this.item.effectline_set.length > 1) {
@@ -77,15 +93,6 @@ export class A22ItemComponent implements OnInit {
                 }
             }
         }
-
-        this.seoService.createCanonicalURL(`ryza2/items/${this.item.slugname}/${this.language}`);
-        this.titleService.setTitle(`${this.item.name} - Atelier Ryza 2 - Barrel Wisdom`);
-        this.metaService.updateTag({ name: `robots`, content: `index, archive` },`name="robots"`);
-        this.metaService.updateTag({ name: `description`, content: `${this.item.description}` }, `name="description"`);
-        this.metaService.updateTag({ property: `og:title`, content: `${this.item.name}` }, `property="og:title"`);
-        this.metaService.updateTag({ property: `og:description`, content: `${this.item.description}` },`property="og:description"`);
-        this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
-        this.metaService.updateTag({ property: `og:image`, content: `/media/games/ryza2/items/${this.item.slugname}.png` }, `property="og:image"`);
     },
     error => {
       this.error = true,

@@ -4,7 +4,6 @@ import { ItemFull } from '@app/interfaces/a16';
 import { A16Service } from '@app/services/a16.service';
 import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
-import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   templateUrl: 'a16-item.component.html',
@@ -30,13 +29,20 @@ export class A16ItemComponent implements OnInit {
 
   language = "";
 
-  constructor(
+  seoTitle: string;
+  seoDesc: string;
+  seoImage: string;
+  seoURL: string;
+
+  gameTitle: string;
+  gameURL: string;
+  imgURL: string;
+
+constructor(
     private route: ActivatedRoute,
     private a16service: A16Service,
     private errorService: ErrorCodeService,
-    private seoService: SeoService,
-    private metaService: Meta,
-    private titleService: Title) {
+    private seoService: SeoService) {
       if(this.route.snapshot.params.item != null) {
       this.slugname = this.route.snapshot.params.item;
     }
@@ -51,14 +57,15 @@ export class A16ItemComponent implements OnInit {
         this.error = false;
         this.item = item;
 
-        this.seoService.createCanonicalURL(`shallie/items/${this.item.slugname}/${this.language}`);
-        this.titleService.setTitle(`${this.item.name} - Atelier Shallie - Barrel Wisdom`);
-        this.metaService.updateTag({ name: `robots`, content: `index, archive` },`name="robots"`);
-        this.metaService.updateTag({ name: `description`, content: `${this.item.desc}` }, `name="description"`);
-        this.metaService.updateTag({ property: `og:title`, content: `${this.item.name}` }, `property="og:title"`);
-        this.metaService.updateTag({ property: `og:description`, content: `${this.item.desc}` },`property="og:description"`);
-        this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
-        this.metaService.updateTag({ property: `og:image`, content: `/media/games/shallie/items/${this.item.slugname}.png` }, `property="og:image"`);
+        this.gameTitle = this.a16service.gameTitle;
+        this.gameURL = this.a16service.gameURL;
+        this.imgURL = this.a16service.imgURL;
+
+        this.seoURL = `${this.gameURL}/items/${this.item.slugname}/${this.language}`;
+        this.seoTitle = `${this.item.name} - ${this.gameTitle}`;
+        this.seoDesc = `${this.item.desc}`
+        this.seoImage = `${this.imgURL}items/${this.item.slugname}.png`
+        this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error => {
       this.error = true;

@@ -4,7 +4,6 @@ import { ShopDevelop } from '@app/interfaces/a22';
 import { A22Service } from '@app/services/a22.service';
 import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
-import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   templateUrl: 'a22-shopdevelop.component.html',
@@ -23,30 +22,36 @@ export class A22ShopDevelopComponent implements OnInit {
   colset: string;
   language = "";
 
-  constructor(
+  seoTitle: string;
+  seoDesc: string;
+  seoImage: string;
+
+  seoURL: string;
+  gameTitle: string;
+  gameURL: string;
+  imgURL: string;
+
+constructor(
     private route: ActivatedRoute,
     private a22service: A22Service,
     private errorService: ErrorCodeService,
-    private seoService: SeoService,
-    private metaService: Meta,
-    private titleService: Title) {
+    private seoService: SeoService) {
   }
   ngOnInit(): void {
     this.language = this.route.snapshot.params.language;
+    this.gameTitle = this.a22service.gameTitle;
+    this.gameURL = this.a22service.gameURL;
+    this.imgURL = this.a22service.imgURL;
+
+    this.seoURL = `${this.gameURL}/shopdevelop/${this.language}`;
+    this.seoTitle = `Shop Development - ${this.gameTitle}`;
+    this.seoDesc = `The full shop develop list.`
+    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
 
     this.a22service.getShopDevList(this.language)
     .subscribe(shopdevelop => {
         this.error = false;
         this.shopdevelop = shopdevelop;
-
-        this.seoService.createCanonicalURL(`ryza2/shopdevelop/${this.language}`);
-        this.titleService.setTitle(`Shop Development - Atelier Ryza 2 - Barrel Wisdom`);
-        this.metaService.updateTag({ name: `robots`, content: `index, archive` },`name="robots"`);
-        this.metaService.updateTag({ name: `description`, content: `The full shop develop list.` }, `name="description"`);
-        this.metaService.updateTag({ property: `og:title`, content: `Shop Development` }, `property="og:title"`);
-        this.metaService.updateTag({ property: `og:description`, content: `The full shop develop list.` },`property="og:description"`);
-        this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
-        this.metaService.updateTag({ property: `og:image`, content: `/media/main/barrel.png` }, `property="og:image"`);
     },
     error => {
         console.log(error)

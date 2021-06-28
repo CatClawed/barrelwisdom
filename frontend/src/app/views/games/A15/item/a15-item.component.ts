@@ -4,7 +4,6 @@ import { ItemFull } from '@app/interfaces/a15';
 import { A15Service } from '@app/services/a15.service';
 import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
-import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   templateUrl: 'a15-item.component.html',
@@ -34,13 +33,20 @@ export class A15ItemComponent implements OnInit {
 
   language = "";
 
-  constructor(
+  seoTitle: string;
+  seoDesc: string;
+  seoImage: string;
+  seoURL: string;
+
+  gameTitle: string;
+  gameURL: string;
+  imgURL: string;
+
+constructor(
     private route: ActivatedRoute,
     private a15service: A15Service,
     private errorService: ErrorCodeService,
-    private seoService: SeoService,
-    private metaService: Meta,
-    private titleService: Title) {
+    private seoService: SeoService) {
       if(this.route.snapshot.params.item != null) {
       this.slugname = this.route.snapshot.params.item;
     }
@@ -54,6 +60,16 @@ export class A15ItemComponent implements OnInit {
     .subscribe(item => {
         this.error = false;
         this.item = item;
+
+        this.gameTitle = this.a15service.gameTitle;
+        this.gameURL = this.a15service.gameURL;
+        this.imgURL = this.a15service.imgURL;
+
+        this.seoURL = `${this.gameURL}/items/${this.item.slugname}/${this.language}`;
+        this.seoTitle = `${this.item.name} - ${this.gameTitle}`;
+        this.seoDesc = `${this.item.desc}`
+        this.seoImage = `${this.imgURL}items/${this.item.slugname}.png`
+        this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
 
         if(this.item.effectline_set) {
           for (let eff of this.item.effectline_set) {
@@ -71,15 +87,6 @@ export class A15ItemComponent implements OnInit {
             }
           }
         }
-
-        this.seoService.createCanonicalURL(`escha/items/${this.item.slugname}/${this.language}`);
-        this.titleService.setTitle(`${this.item.name} - Atelier Escha & Logy - Barrel Wisdom`);
-        this.metaService.updateTag({ name: `robots`, content: `index, archive` },`name="robots"`);
-        this.metaService.updateTag({ name: `description`, content: `${this.item.desc}` }, `name="description"`);
-        this.metaService.updateTag({ property: `og:title`, content: `${this.item.name}` }, `property="og:title"`);
-        this.metaService.updateTag({ property: `og:description`, content: `${this.item.desc}` },`property="og:description"`);
-        this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
-        this.metaService.updateTag({ property: `og:image`, content: `/media/games/escha/items/${this.item.slugname}.png` }, `property="og:image"`);
     },
     error => {
       this.error = true;

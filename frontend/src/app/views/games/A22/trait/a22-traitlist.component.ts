@@ -9,7 +9,6 @@ import { ErrorCodeService } from "@app/services/errorcode.service";
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { SeoService } from '@app/services/seo.service';
-import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   templateUrl: 'a22-traitlist.component.html',
@@ -30,6 +29,14 @@ export class A22TraitlistComponent implements OnInit {
   searchstring = "";
   language = "";
 
+  seoTitle: string;
+  seoDesc: string;
+  seoImage: string;
+  seoURL: string;
+  gameTitle: string;
+  gameURL: string;
+  imgURL: string;
+
   constructor(
     private modalService: BsModalService,
     private formBuilder: FormBuilder,
@@ -37,9 +44,7 @@ export class A22TraitlistComponent implements OnInit {
     private location: Location,
     private a22service: A22Service,
     private errorService: ErrorCodeService,
-    private seoService: SeoService,
-    private metaService: Meta,
-    private titleService: Title) { 
+    private seoService: SeoService) { 
     this.traitControl = new FormControl();
   }
 
@@ -48,14 +53,14 @@ export class A22TraitlistComponent implements OnInit {
     this.language = this.route.snapshot.params.language;
 
     this.getTraits();
-    this.seoService.createCanonicalURL(`ryza2/traits/${this.language}`);
-    this.titleService.setTitle(`Traits - Atelier Ryza 2 - Barrel Wisdom`);
-    this.metaService.updateTag({ name: `robots`, content: `index, archive` },`name="robots"`);
-    this.metaService.updateTag({ name: `description`, content: `The list of traits in Atelier Ryza 2.` }, `name="description"`);
-    this.metaService.updateTag({ property: `og:title`, content: `Traits` }, `property="og:title"`);
-    this.metaService.updateTag({ property: `og:description`, content: `The list of traits in Atelier Ryza 2.` },`property="og:description"`);
-    this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
-    this.metaService.updateTag({ property: `og:image`, content: `/media/main/barrel.png` }, `property="og:image"`);
+    this.gameTitle = this.a22service.gameTitle;
+    this.gameURL = this.a22service.gameURL;
+    this.imgURL = this.a22service.imgURL;
+    
+    this.seoURL = `${this.gameURL}/traits/${this.language}`;
+    this.seoTitle = `Traits - ${this.gameTitle}`;
+    this.seoDesc = `The list of traits in ${this.gameTitle}.`
+    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
 
     this.pageForm = this.formBuilder.group({
       filtertext: this.traitControl,
@@ -90,10 +95,11 @@ export class A22TraitlistComponent implements OnInit {
 
   openModal(template: TemplateRef<any>, slugname: string) {
     this.trait = slugname;
-    this.location.go('ryza2/traits/' + slugname + "/" + this.language);
+    this.location.go(`${this.gameURL}/traits/` + slugname + "/" + this.language);
     this.modalRef = this.modalService.show(template);
     this.modalRef.onHide.subscribe((reason: string | any) => {
-        this.location.go('ryza2/traits/' + this.language);
+        this.location.go(`${this.gameURL}/traits/` + this.language);
+        this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
       })
   }
 

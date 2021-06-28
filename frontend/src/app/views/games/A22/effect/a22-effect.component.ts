@@ -5,7 +5,6 @@ import { EffectFull } from '@app/interfaces/a22';
 import { A22Service } from '@app/services/a22.service';
 import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
-import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   templateUrl: 'a22-effect.component.html',
@@ -23,6 +22,15 @@ export class A22EffectComponent implements OnInit {
   effect: EffectFull;
   colset: string;
 
+  seoTitle: string;
+  seoDesc: string;
+  seoImage: string;
+  seoURL: string;
+
+  gameTitle: string;
+  gameURL: string;
+  imgURL: string;
+
   @Input()
   slugname: string = "";
 
@@ -33,13 +41,9 @@ export class A22EffectComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
-    private location: Location,
     private a22service: A22Service,
     private errorService: ErrorCodeService,
-    private seoService: SeoService,
-    private metaService: Meta,
-    private titleService: Title) {
+    private seoService: SeoService) {
       if(this.route.snapshot.params.effect != null) {
       this.slugname = this.route.snapshot.params.effect;
     }
@@ -59,14 +63,14 @@ export class A22EffectComponent implements OnInit {
       else {
           this.error = false;
           this.effect = effect;
-          this.seoService.createCanonicalURL(`ryza2/effects/${this.effect.slugname}/${this.language}`);
-          this.titleService.setTitle(`${this.effect.name} - Atelier Ryza 2 - Barrel Wisdom`);
-          this.metaService.updateTag({ name: `robots`, content: `index, archive` },`name="robots"`);
-          this.metaService.updateTag({ name: `description`, content: `${this.effect.description}` }, `name="description"`);
-          this.metaService.updateTag({ property: `og:title`, content: `${this.effect.name}` }, `property="og:title"`);
-          this.metaService.updateTag({ property: `og:description`, content: `${this.effect.description}` },`property="og:description"`);
-          this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
-          this.metaService.updateTag({ property: `og:image`, content: `media/main/barrel.png` }, `property="og:image"`);
+          this.gameTitle = this.a22service.gameTitle;
+          this.gameURL = this.a22service.gameURL;
+          this.imgURL = this.a22service.imgURL;
+
+          this.seoURL = `${this.gameURL}/effects/${this.effect.slugname}/${this.language}`;
+          this.seoTitle = `${this.effect.name} - ${this.gameTitle}`;
+          this.seoDesc = `${this.effect.description}`
+          this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
       }
     },
     error => {

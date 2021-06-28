@@ -4,7 +4,6 @@ import { Book } from '@app/interfaces/a15';
 import { A15Service } from '@app/services/a15.service';
 import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
-import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   templateUrl: 'a15-book.component.html',
@@ -22,6 +21,15 @@ export class A15BookComponent implements OnInit {
   book: Book;
   colset: string;
 
+  seoTitle: string;
+  seoDesc: string;
+  seoImage: string;
+  seoURL: string;
+
+  gameTitle: string;
+  gameURL: string;
+  imgURL: string;
+
   @Input()
   slugname: string = "";
 
@@ -30,13 +38,11 @@ export class A15BookComponent implements OnInit {
 
   language = "";
 
-  constructor(
+constructor(
     private route: ActivatedRoute,
     private a15service: A15Service,
     private errorService: ErrorCodeService,
-    private seoService: SeoService,
-    private metaService: Meta,
-    private titleService: Title) {
+    private seoService: SeoService) {
       if(this.route.snapshot.params.book != null) {
       this.slugname = this.route.snapshot.params.book;
     }
@@ -51,14 +57,15 @@ export class A15BookComponent implements OnInit {
         this.error = false;
         this.book = book;
 
-        this.seoService.createCanonicalURL(`escha/books/${this.book.slugname}/${this.language}`);
-        this.titleService.setTitle(`${this.book.name} - Atelier Escha & Logy - Barrel Wisdom`);
-        this.metaService.updateTag({ name: `robots`, content: `index, archive` },`name="robots"`);
-        this.metaService.updateTag({ name: `description`, content: `${this.book.desc}` }, `name="description"`);
-        this.metaService.updateTag({ property: `og:title`, content: `${this.book.name}` }, `property="og:title"`);
-        this.metaService.updateTag({ property: `og:description`, content: `${this.book.desc}` },`property="og:description"`);
-        this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
-        this.metaService.updateTag({ property: `og:image`, content: `/media/games/escha/recipe-books/${this.book.slugname}.png` }, `property="og:image"`);
+        this.gameTitle = this.a15service.gameTitle;
+        this.gameURL = this.a15service.gameURL;
+        this.imgURL = this.a15service.imgURL;
+
+        this.seoURL = `${this.gameURL}/recipe-books/${this.book.slugname}/${this.language}`;
+        this.seoTitle = `${this.book.name} - ${this.gameTitle}`;
+        this.seoDesc = `${this.book.desc}`
+        this.seoImage = `${this.imgURL}items/${this.book.slugname}.png`
+        this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error => {
       this.error = true;
