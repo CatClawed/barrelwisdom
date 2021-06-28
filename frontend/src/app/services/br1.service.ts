@@ -14,8 +14,8 @@ export class BR1Service {
       private http: HttpClient,
     ) { }
 
-    public readonly gameTitle = "Atelier Totori";
-    public readonly gameURL = "totori";
+    public readonly gameTitle = "Blue Reflection";
+    public readonly gameURL = "bluereflection";
     public readonly imgURL = `${environment.mediaURL}games/${this.gameURL}/`;
     
     getItemList(language: string): Observable<Item[]> {

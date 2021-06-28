@@ -1,0 +1,122 @@
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Location } from '@angular/common';
+import { Demon } from '@app/interfaces/br1';
+import { BR1Service } from '@app/services/br1.service';
+import { ErrorCodeService } from "@app/services/errorcode.service";
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { SeoService } from '@app/services/seo.service';
+
+@Component({
+    templateUrl: 'br1-demonlist.component.html',
+    selector: 'br1-demonlist',
+  })
+
+  export class BR1DemonlistComponent implements OnInit {
+    modalRef: BsModalRef;
+    pageForm: FormGroup;
+    demonControl: FormControl;
+    error: boolean = false;
+    errorCode: string;
+    errorVars: any[];
+    errorMsg: string;
+    demon: string = "demons";
+    demons: Demon[];
+    filteredDemons: Observable<Demon[]>;
+    searchstring = "";
+    language = "";
+    config: ModalOptions = { class: "col-md-5 mx-auto" };
+    
+
+    seoTitle: string;
+    seoDesc: string;
+    seoImage: string;
+    seoURL: string;
+
+    gameTitle: string;
+    gameURL: string;
+    imgURL: string;
+  
+    constructor(
+      private modalService: BsModalService,
+      private formBuilder: FormBuilder,
+      private route: ActivatedRoute,
+      private location: Location,
+      private br1service: BR1Service,
+      private errorService: ErrorCodeService,
+      private seoService: SeoService
+    ) { 
+      this.demonControl = new FormControl();
+    }
+  
+    ngOnInit(): void {
+  
+      this.language = this.route.snapshot.params.language;
+  
+      this.getDemons();
+
+      this.gameTitle = this.br1service.gameTitle;
+      this.gameURL = this.br1service.gameURL;
+      this.imgURL = this.br1service.imgURL;
+
+      this.seoURL = `${this.gameURL}/demons/${this.language}`;
+      this.seoTitle = `Demons - ${this.gameTitle}`;
+      this.seoDesc = `The list of demons in ${this.gameTitle}.`
+      this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+  
+      this.pageForm = this.formBuilder.group({
+        filtertext: this.demonControl
+      })
+  
+      this.demonControl.valueChanges.subscribe(search => {
+        this.searchstring = search;
+      });  
+    }
+  
+    getDemons() {
+      this.br1service.getDemonList(this.language)
+      .subscribe(demons => {
+        this.demons = demons;
+        this.filteredDemons = this.pageForm.valueChanges.pipe(
+          startWith(null as Observable<Demon[]>),
+          map((search: string | null) => search ? this.filterT(this.searchstring) : this.demons.slice())
+        );
+      },
+      error => {
+        this.error = true,
+        this.errorCode = error.status.toString(),
+        this.errorVars = this.errorService.getCodes(this.errorCode)
+      });
+    }
+
+
+    openModal(template: TemplateRef<any>, slugname: string) {
+      this.demon = slugname;
+      this.location.go(`${this.gameURL}/demons/` + slugname + "/" + this.language);
+      this.modalRef = this.modalService.show(template);
+      this.modalRef.onHide.subscribe((reason: string | any) => {
+          this.location.go(`${this.gameURL}/demons/` + this.language);
+          this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+        })
+    }
+  
+    private filterT(value: string): Demon[] {
+  
+      const filterValue = value.toLowerCase();
+      let list: Demon[] = this.demons;
+
+      if(value.length > 0) {
+        list = list.filter(demon => { 
+            return demon.name.toLowerCase().includes(filterValue);
+          });
+      }
+
+      return list;
+    } 
+  
+    get f() { return this.pageForm.controls; }
+  
+  }

@@ -41,7 +41,7 @@ export interface Item {
     name: string;
     description: string;
     effect: string;
-    acqusition: string;
+    acquisition: string;
     kind: string;
     ingredient_set: IngredientSet[];
     missions: NameLink[];

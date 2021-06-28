@@ -3,40 +3,33 @@ import { ActivatedRoute } from '@angular/router';
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
-import { ItemList, Category } from '@app/interfaces/a12';
-import { A12Service } from '@app/services/a12.service';
+import { Item } from '@app/interfaces/br1';
+import { BR1Service } from '@app/services/br1.service';
 import { ErrorCodeService } from "@app/services/errorcode.service";
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { SeoService } from '@app/services/seo.service';
 
 @Component({
-    templateUrl: 'a12-itemlist.component.html',
-    selector: 'a12-itemlist',
+    templateUrl: 'br1-itemlist.component.html',
+    selector: 'br1-itemlist',
   })
 
-  export class A12ItemlistComponent implements OnInit {
+  export class BR1ItemlistComponent implements OnInit {
     modalRef: BsModalRef;
     pageForm: FormGroup;
     itemControl: FormControl;
-    ingControl: FormControl;
     error: boolean = false;
     errorCode: string;
     errorVars: any[];
     errorMsg: string;
     item: string = "items";
-    items: ItemList[];
-    filteredItems: Observable<ItemList[]>;
-    currentType: string = "Any";
-    currentLevel: number = 0;
+    items: Item[];
+    filteredItems: Observable<Item[]>;
     searchstring = "";
-    ingstring = "";
     language = "";
     config: ModalOptions = { class: "col-md-5 mx-auto" };
-    categories: Category[];
-    selectedCat = "Any";
-    selectedElem = "Any";
-    selectedElemV = 0;
+    
 
     seoTitle: string;
     seoDesc: string;
@@ -52,12 +45,11 @@ import { SeoService } from '@app/services/seo.service';
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private location: Location,
-      private a12service: A12Service,
+      private br1service: BR1Service,
       private errorService: ErrorCodeService,
       private seoService: SeoService
     ) { 
       this.itemControl = new FormControl();
-      this.ingControl = new FormControl();
     }
   
     ngOnInit(): void {
@@ -65,11 +57,10 @@ import { SeoService } from '@app/services/seo.service';
       this.language = this.route.snapshot.params.language;
   
       this.getItems();
-      this.getCategories();
 
-      this.gameTitle = this.a12service.gameTitle;
-      this.gameURL = this.a12service.gameURL;
-      this.imgURL = this.a12service.imgURL;
+      this.gameTitle = this.br1service.gameTitle;
+      this.gameURL = this.br1service.gameURL;
+      this.imgURL = this.br1service.imgURL;
 
       this.seoURL = `${this.gameURL}/items/${this.language}`;
       this.seoTitle = `Items - ${this.gameTitle}`;
@@ -77,39 +68,21 @@ import { SeoService } from '@app/services/seo.service';
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
   
       this.pageForm = this.formBuilder.group({
-        filtertext: this.itemControl,
-        filtering: this.ingControl,
-        type: ['Any'],
-        level: [0],
+        filtertext: this.itemControl
       })
   
-      this.pageForm.get('type').valueChanges
-        .subscribe(type => {
-          this.currentType = type;
-        });
-  
-      this.pageForm.get('level').valueChanges
-        .subscribe(val => {
-          this.currentLevel = val;
-      });
-  
       this.itemControl.valueChanges.subscribe(search => {
-        this.searchstring = search;
-      });
-
-      this.ingControl.valueChanges.subscribe(search => {
-        this.ingstring = search;
-      });
-  
+        this.searchstring = search; 
+      });  
     }
   
     getItems() {
-      this.a12service.getItemList(this.language)
+      this.br1service.getItemList(this.language)
       .subscribe(items => {
         this.items = items;
         this.filteredItems = this.pageForm.valueChanges.pipe(
-          startWith(null as Observable<ItemList[]>),
-          map((search: string | null) => search ? this.filterT(this.searchstring, this.currentType, this.currentLevel, this.ingstring) : this.items.slice())
+          startWith(null as Observable<Item[]>),
+          map((search: string | null) => search ? this.filterT(this.searchstring) : this.items.slice())
         );
       },
       error => {
@@ -119,18 +92,7 @@ import { SeoService } from '@app/services/seo.service';
       });
     }
 
-    getCategories() {
-      this.a12service.getCategories(this.language)
-      .subscribe(categories  => {
-          this.categories = categories;
-      },
-      error => {
-          this.error = true,
-          this.errorCode = error.status.toString(),
-          this.errorVars = this.errorService.getCodes(this.errorCode)
-      });
-  }
-  
+
     openModal(template: TemplateRef<any>, slugname: string) {
       this.item = slugname;
       this.location.go(`${this.gameURL}/items/` + slugname + "/" + this.language);
@@ -141,23 +103,10 @@ import { SeoService } from '@app/services/seo.service';
         })
     }
   
-    private filterT(value: string, type: string, level: number, ing: string): ItemList[] {
+    private filterT(value: string): Item[] {
   
       const filterValue = value.toLowerCase();
-      let list: ItemList[] = this.items;
-
-      if(type != 'Any') {
-          list = list.filter(item => item.item_type != 'Equipment' );
-          list = list.filter(item => item.categories.some(c => c.name == type) );
-      }
-
-      if(level > 0) {
-          list = list.filter(item => item.level >= level);
-      }
-
-      if(ing.length > 0) {
-          list = list.filter(item => (item.ingredient_set) ? item.ingredient_set.some(i => i.ing.toLowerCase().includes(ing.toLowerCase())) : false)
-      }
+      let list: Item[] = this.items;
 
       if(value.length > 0) {
         list = list.filter(item => { 

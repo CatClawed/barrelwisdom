@@ -1,0 +1,146 @@
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+
+<div *ngIf="!error">
+<nav style="margin-top: 1em;" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Skills</li>
+  </ol>
+</nav>
+<h1>Skills</h1>
+<div class="table-of-contents">
+        <b>Table of Contents</b>
+        <ol>
+            <li><a [routerLink]='"."' fragment="hinako">Hinako</a></li>
+            <li><a [routerLink]='"."' fragment="yuzu">Yuzu</a></li>
+            <li><a [routerLink]='"."' fragment="lime">Lime</a></li>
+        </ol>
+    </div>
+<h2 id="hinako">Hinako</h2>
+<h3>Level Up</h3>
+<table class="table-compress table-shrink">
+  <tr><th>Name</th><th>Description</th></tr>
+  <ng-container *ngFor="let skill of skills">
+    <tr *ngIf="skill.lvl && skill.character == 'Hinako'">
+      <td><b>{{skill.name}}</b> (LV{{skill.lvl}})
+        <br *ngIf="skill.isRankUp" /><span *ngIf="skill.isRankUp">Rank Up</span>
+      </td>
+      <td>{{skill.effect}}<br />
+        <span style="margin-right:1.5rem"><b>MP: </b> {{skill.mp}}</span>
+        <span style="margin-right:1.5rem"><b>WT: </b> {{skill.wt}}</span>
+        <span style="margin-right:1.5rem"><b>Slots: </b> {{skill.slots}}</span>
+        <span><b>Range: </b>{{skill.rng}}</span>
+      </td>
+    </tr>
+  </ng-container>
+</table>
+
+<h3>Points</h3>
+
+<table class="table-compress table-shrink">
+  <tr><th>Name</th><th>Description</th><th>A</th><th>D</th><th>S</th><th>T</th></tr>
+  <ng-container *ngFor="let skill of skills">
+    <tr *ngIf="!skill.lvl && skill.character == 'Hinako'">
+      <td><b>{{skill.name}}</b>
+        <br *ngIf="skill.isRankUp" /><span *ngIf="skill.isRankUp">Rank Up</span>
+      </td>
+      <td>{{skill.effect}}<br />
+        <span style="margin-right:1.5rem"><b>MP: </b> {{skill.mp}}</span>
+        <span style="margin-right:1.5rem"><b>WT: </b> {{skill.wt}}</span>
+        <span style="margin-right:1.5rem"><b>Slots: </b> {{skill.slots}}</span>
+        <span><b>Range: </b>{{skill.rng}}</span>
+      </td>
+      <td style="background-color:rgba(227,143,183,0.3)">{{skill.atk}}</td>
+      <td style="background-color:rgba(151,191,230,0.3)">{{skill.dfn}}</td>
+      <td style="background-color:rgba(120,226,159,0.3)">{{skill.sup}}</td>
+      <td style="background-color:rgba(205,197,116,0.3)">{{skill.tec}}</td>
+    </tr>
+  </ng-container>
+</table>
+
+<h2 id="yuzu">Yuzu</h2>
+<h3>Level Up</h3>
+<table class="table-compress table-shrink">
+  <tr><th>Name</th><th>Description</th></tr>
+  <ng-container *ngFor="let skill of skills">
+    <tr *ngIf="skill.lvl && skill.character == 'Yuzu'">
+      <td><b>{{skill.name}}</b> (LV{{skill.lvl}})
+        <br *ngIf="skill.isRankUp" /><span *ngIf="skill.isRankUp">Rank Up</span>
+      </td>
+      <td>{{skill.effect}}<br />
+        <span style="margin-right:1.5rem"><b>MP: </b> {{skill.mp}}</span>
+        <span style="margin-right:1.5rem"><b>WT: </b> {{skill.wt}}</span>
+        <span style="margin-right:1.5rem"><b>Slots: </b> {{skill.slots}}</span>
+        <span><b>Range: </b>{{skill.rng}}</span>
+      </td>
+    </tr>
+  </ng-container>
+</table>
+
+<h3>Points</h3>
+
+<table class="table-compress table-shrink">
+  <tr><th>Name</th><th>Description</th><th>A</th><th>D</th><th>S</th><th>T</th></tr>
+  <ng-container *ngFor="let skill of skills">
+    <tr *ngIf="!skill.lvl && skill.character == 'Yuzu'">
+      <td><b>{{skill.name}}</b>
+        <br *ngIf="skill.isRankUp" /><span *ngIf="skill.isRankUp">Rank Up</span>
+      </td>
+      <td>{{skill.effect}}<br />
+        <span style="margin-right:1.5rem"><b>MP: </b> {{skill.mp}}</span>
+        <span style="margin-right:1.5rem"><b>WT: </b> {{skill.wt}}</span>
+        <span style="margin-right:1.5rem"><b>Slots: </b> {{skill.slots}}</span>
+        <span><b>Range: </b>{{skill.rng}}</span>
+      </td>
+      <td style="background-color:rgba(227,143,183,0.3)">{{skill.atk}}</td>
+      <td style="background-color:rgba(151,191,230,0.3)">{{skill.dfn}}</td>
+      <td style="background-color:rgba(120,226,159,0.3)">{{skill.sup}}</td>
+      <td style="background-color:rgba(205,197,116,0.3)">{{skill.tec}}</td>
+    </tr>
+  </ng-container>
+</table>
+
+<h2 id="lime">Lime</h2>
+<h3>Level Up</h3>
+<table class="table-compress table-shrink">
+  <tr><th>Name</th><th>Description</th></tr>
+  <ng-container *ngFor="let skill of skills">
+    <tr *ngIf="skill.lvl && skill.character == 'Lime'">
+      <td><b>{{skill.name}}</b> (LV{{skill.lvl}})
+        <br *ngIf="skill.isRankUp" /><span *ngIf="skill.isRankUp">Rank Up</span>
+      </td>
+      <td>{{skill.effect}}<br />
+        <span style="margin-right:1.5rem"><b>MP: </b> {{skill.mp}}</span>
+        <span style="margin-right:1.5rem"><b>WT: </b> {{skill.wt}}</span>
+        <span style="margin-right:1.5rem"><b>Slots: </b> {{skill.slots}}</span>
+        <span><b>Range: </b>{{skill.rng}}</span>
+      </td>
+    </tr>
+  </ng-container>
+</table>
+
+<h3>Points</h3>
+
+<table class="table-compress table-shrink">
+  <tr><th>Name</th><th>Description</th><th>A</th><th>D</th><th>S</th><th>T</th></tr>
+  <ng-container *ngFor="let skill of skills">
+    <tr *ngIf="!skill.lvl && skill.character == 'Lime'">
+      <td><b>{{skill.name}}</b>
+        <br *ngIf="skill.isRankUp" /><span *ngIf="skill.isRankUp">Rank Up</span>
+      </td>
+      <td>{{skill.effect}}<br />
+        <span style="margin-right:1.5rem"><b>MP: </b> {{skill.mp}}</span>
+        <span style="margin-right:1.5rem"><b>WT: </b> {{skill.wt}}</span>
+        <span style="margin-right:1.5rem"><b>Slots: </b> {{skill.slots}}</span>
+        <span><b>Range: </b>{{skill.rng}}</span>
+      </td>
+      <td style="background-color:rgba(227,143,183,0.3)">{{skill.atk}}</td>
+      <td style="background-color:rgba(151,191,230,0.3)">{{skill.dfn}}</td>
+      <td style="background-color:rgba(120,226,159,0.3)">{{skill.sup}}</td>
+      <td style="background-color:rgba(205,197,116,0.3)">{{skill.tec}}</td>
+    </tr>
+  </ng-container>
+</table>
+
+</div>

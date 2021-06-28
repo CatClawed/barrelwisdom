@@ -110,6 +110,16 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'bluereflection',
+    component: DefaultLayoutComponent,
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/BR1/br1-routing.module').then(m=>m.BR1RoutingModule),
+      },
+    ]
+  },
+  {
     path: ':section/:title',
     component: DefaultLayoutComponent,
     children: [
