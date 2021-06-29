@@ -52,7 +52,7 @@ import { PairPipe } from './pipes/pair.pipe';
     ...APP_CONTAINERS
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserAnimationsModule,
     AppRoutingModule,
     AppAsideModule,

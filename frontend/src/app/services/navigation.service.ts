@@ -40,9 +40,9 @@ export class NavigationService {
 
   getNav(section: string): Observable<any> {
     if(section && section != "tags" && section != "user" && section != "settings" && section != "create") {
-        return this.http.get<any>(`${environment.apiUrl}/nav/${section}/`);
+        return this.http.get<any>(`${environment.apiUrl}/nav/${section}/`, this.httpOptions);
     }
-    return this.http.get<any>(`${environment.apiUrl}/nav/blog/`);
+    return this.http.get<any>(`${environment.apiUrl}/nav/blog/`, this.httpOptions);
   }
 
 }

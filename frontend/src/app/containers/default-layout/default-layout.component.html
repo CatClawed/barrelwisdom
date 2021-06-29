@@ -6,21 +6,7 @@
   [navbarBrandMinimized]="{src: '/media/main/barrel.svg', height: 30, alt: 'Barrel Wisdom'}"
   [sidebarToggler]="'lg'"
   [asideMenuToggler]="false"
-  [mobileAsideMenuToggler]="false" class="col-xl-7 mx-auto">
-  <ul class="nav navbar-nav d-md-down-none">
-    <li class="nav-item px-3">
-      <a class="nav-link" href="#">Guide</a>
-    </li>
-    <li class="nav-item px-3">
-      <a class="nav-link" href="#">Encyclopedia</a>
-    </li>
-    <li class="nav-item px-3">
-      <a class="nav-link" href="#">Areas</a>
-    </li>
-    <li class="nav-item px-3">
-      <a class="nav-link" href="#">Help</a>
-    </li>
-  </ul>
+  [mobileAsideMenuToggler]="false" class="mx-auto"> <!-- col-xl-7 -->
   <ul style="padding-right: 1em" class="nav navbar-nav ml-auto">
     <a *ngIf="!user; else loggedIn" class="nav-link" href="login">Login</a>
     <ng-template #loggedIn>
