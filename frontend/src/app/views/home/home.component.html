@@ -8,12 +8,12 @@
         <div *ngFor="let b of blg" class="col-md-6 mx-auto">
             <div *ngIf="b" class="card allheight">
                 <div class="aspect-ratio-box">
-                    <a href="blog/{{b.slugtitle}}">
+                    <a routerLink="/blog/{{b.slugtitle}}">
                         <img src="{{b.image}}">
                     </a>
                 </div>
                 <div class=headline>
-                    <a href="blog/{{b.slugtitle}}">
+                    <a routerLink="/blog/{{b.slugtitle}}">
                         <h3>{{b.title}}</h3>
                     </a>
                     <span class="text-muted" style="font-size: calc(0.8rem + 0.1vw);">
@@ -29,24 +29,24 @@
 
 <div *ngIf="blog" >
     <ul class="pagination">
-        <li *ngIf="path >= 2" class="page-item"><a class="page-link" href="{{tagUrl}}{{path-1}}">Prevous</a></li>
-        <li *ngIf="path >  3" class="page-item"><a class="page-link" href="">1</a></li>
+        <li *ngIf="path >= 2" class="page-item"><a class="page-link" routerLink="/{{tagUrl}}{{path-1}}">Prevous</a></li>
+        <li *ngIf="path >  3" class="page-item"><a class="page-link" routerLink="/">1</a></li>
         <li *ngIf="path >  4" class="page-item"><a class="page-link">...</a></li>
 
-        <li *ngIf="path-2 > 0" class="page-item"><a class="page-link" href="{{tagUrl}}{{path-2}}">{{path-2}}</a></li>
-        <li *ngIf="path-1 > 0" class="page-item"><a class="page-link" href="{{tagUrl}}{{path-1}}">{{path-1}}</a></li>
+        <li *ngIf="path-2 > 0" class="page-item"><a class="page-link" routerLink="/{{tagUrl}}{{path-2}}">{{path-2}}</a></li>
+        <li *ngIf="path-1 > 0" class="page-item"><a class="page-link" routerLink="/{{tagUrl}}{{path-1}}">{{path-1}}</a></li>
         <li *ngIf="path > 0" class="page-item active"><a class="page-link">{{path}} <span
                     class="sr-only">(current)</span></a></li>
         <li *ngIf="path == 0" class="page-item active"><a class="page-link">1<span class="sr-only">(current)</span></a></li>
 
         <li *ngIf="path+1 <= (blog.count / limit | getCeil)" class="page-item"><a class="page-link"
-                href="{{tagUrl}}{{path+1}}">{{path+1}}</a></li>
+                routerLink="/{{tagUrl}}{{path+1}}">{{path+1}}</a></li>
         <li *ngIf="path+2 <= (blog.count / limit | getCeil)" class="page-item"><a class="page-link"
-                href="{{tagUrl}}{{path+2}}">{{path+2}}</a></li>
+                routerLink="/{{tagUrl}}{{path+2}}">{{path+2}}</a></li>
 
         <li *ngIf="path+4 <= (blog.count / limit | getCeil)" class="page-item disabled"><a class="page-link">...</a></li>
         <li *ngIf="path+3 <= (blog.count / limit | getCeil)" class="page-item"><a class="page-link"
-                href="{{ blog.count / limit | getCeil }}">{{ blog.count / limit | getCeil }}</a></li>
-        <li *ngIf="path < blog.count / limit" class="page-item"><a class="page-link" href="{{tagUrl}}{{path+1}}">Next</a></li>
+                routerLink="/{{ blog.count / limit | getCeil }}">{{ blog.count / limit | getCeil }}</a></li>
+        <li *ngIf="path < blog.count / limit" class="page-item"><a class="page-link" routerLink="/{{tagUrl}}{{path+1}}">Next</a></li>
     </ul>
 </div>

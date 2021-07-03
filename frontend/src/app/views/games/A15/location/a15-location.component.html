@@ -1,10 +1,10 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="!error">
+<div *ngIf="location">
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a href="/" (click)="historyService.history(); $event.preventDefault();">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.history(gameURL); $event.preventDefault();">{{gameTitle}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">Location: {{location.name}}</li>
   </ol>
 </nav>
@@ -33,9 +33,9 @@
     <th class="table-dark-center">Area</th>
   </tr>
   <tr *ngFor="let relic of location.relic_set">
-    <td><a href="/{{gameURL}}/items/{{relic.item.slugname}}">{{relic.item.name}}</a></td>
-    <td><ul class="hide-bullets"><li *ngFor="let d of relic.item.disassembly_set[0].dis"><a href="/{{gameURL}}/items/{{d.slugname}}">{{d.name}}</a></li></ul></td>
-    <td><ul class="hide-bullets"><li *ngFor="let a of relic.area"><a href="/{{gameURL}}/locations/{{location.slugname}}#{{a.slugname}}">{{a.name}}</a></li></ul></td>
+    <td><a href="/{{gameURL}}/items/{{relic.item.slugname}}/{{language}}" (click)="historyService.history(gameURL,'items',language,relic.item.slugname); $event.preventDefault();">{{relic.item.name}}</a></td>
+    <td><ul class="hide-bullets"><li *ngFor="let d of relic.item.disassembly_set[0].dis"><a href="/{{gameURL}}/items/{{d.slugname}}/{{language}}" (click)="historyService.history(gameURL,'items',language,d.slugname); $event.preventDefault();">{{d.name}}</a></li></ul></td>
+    <td><ul class="hide-bullets"><li *ngFor="let a of relic.area">{{a.name}}</li></ul></td>
   </tr>
 </table>
 
@@ -48,7 +48,7 @@
     <ul class="hide-bullets">
      <div style="column-count: 3;">
       <li *ngFor="let mon of location.strong">
-        <a href="/{{gameURL}}/monsters/{{mon.slugname}}">{{mon.name}}</a> ({{mon.level}})
+        <a href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}" (click)="historyService.history(gameURL,'monsters',language,mon.slugname); $event.preventDefault();">{{mon.name}}</a> ({{mon.level}})
       </li>
       </div>
     </ul>
@@ -69,14 +69,14 @@
     <tr>
       <td *ngIf="area.items">
         <ul class="hide-bullets">
-          <li *ngFor="let it of area.items"><a href="/{{gameURL}}/items/{{it.slugname}}">{{it.name}}</a></li>
-          <ng-container *ngIf="area.rare"><li *ngFor="let it of area.rare"><a href="/{{gameURL}}/items/{{it.slugname}}">{{it.name}}</a> (Rare)</li></ng-container>
-          <ng-container *ngIf="area.maxitem"><li *ngFor="let it of area.maxitem"><a href="/{{gameURL}}/items/{{it.slugname}}">{{it.name}}</a> (Max)</li></ng-container>
+          <li *ngFor="let it of area.items"><a href="/{{gameURL}}/items/{{it.slugname}}/{{language}}" (click)="historyService.history(gameURL,'items',language,it.slugname); $event.preventDefault();">{{it.name}}</a></li>
+          <ng-container *ngIf="area.rare"><li *ngFor="let it of area.rare"><a href="/{{gameURL}}/items/{{it.slugname}}/{{language}}" (click)="historyService.history(gameURL,'items',language,it.slugname); $event.preventDefault();">{{it.name}}</a> (Rare)</li></ng-container>
+          <ng-container *ngIf="area.maxitem"><li *ngFor="let it of area.maxitem"><a href="/{{gameURL}}/items/{{it.slugname}}/{{language}}" (click)="historyService.history(gameURL,'items',language,it.slugname); $event.preventDefault();">{{it.name}}</a> (Max)</li></ng-container>
         </ul>
       </td>
       <td *ngIf="area.monsters">
         <ul class="hide-bullets">
-          <li *ngFor="let it of area.monsters"><a href="/{{gameURL}}/monsters/{{it.slugname}}">{{it.name}}</a></li>
+          <li *ngFor="let it of area.monsters"><a href="/{{gameURL}}/monsters/{{it.slugname}}/{{language}}" (click)="historyService.history(gameURL,'monsters',language,it.slugname); $event.preventDefault();">{{it.name}}</a></li>
         </ul>
       </td>
       <td *ngIf="area.fieldevent">

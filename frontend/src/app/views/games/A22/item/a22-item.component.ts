@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ItemFull } from '@app/interfaces/a22';
 import { A22Service } from '@app/services/a22.service';
+import { HistoryService } from '@app/services/history.service';
 import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
 
@@ -45,6 +46,7 @@ export class A22ItemComponent implements OnInit {
 
 constructor(
     private route: ActivatedRoute,
+    public historyService: HistoryService,
     private a22service: A22Service,
     private errorService: ErrorCodeService,
     private seoService: SeoService) {
@@ -95,9 +97,9 @@ constructor(
         }
     },
     error => {
-      this.error = true,
-      this.errorCode = error.status.toString(),
-      this.errorVars = this.errorService.getCodes(this.errorCode)
+      this.error = true;
+      this.errorCode = `${error.status}`;
+      this.errorVars = this.errorService.getCodes(this.errorCode);
     });
   }
 } 

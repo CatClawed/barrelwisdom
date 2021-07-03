@@ -1,10 +1,11 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Book } from '@app/interfaces/a12';
 import { A12Service } from '@app/services/a12.service';
+import { HistoryService} from '@app/services/history.service';
 import { ErrorCodeService } from "@app/services/errorcode.service";
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -42,10 +43,12 @@ import { SeoService } from '@app/services/seo.service';
   
     constructor(
       private modalService: BsModalService,
+      private router: Router,
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private location: Location,
       private a12service: A12Service,
+      public historyService: HistoryService,
       private errorService: ErrorCodeService,
       private seoService: SeoService
     ) { 
@@ -80,6 +83,13 @@ import { SeoService } from '@app/services/seo.service';
       this.bookControl.valueChanges.subscribe(search => {
         this.searchstring = search;
       });
+
+      this.router.events.subscribe(event => {
+        if (event instanceof NavigationEnd) {
+          this.modalService.setDismissReason('link');
+          this.modalService.hide();
+        }
+      });
     }
   
     getBooks() {
@@ -92,9 +102,9 @@ import { SeoService } from '@app/services/seo.service';
         );
       },
       error => {
-        this.error = true,
-        this.errorCode = error.status.toString(),
-        this.errorVars = this.errorService.getCodes(this.errorCode)
+        this.error = true;
+        this.errorCode = `${error.status}`;
+        this.errorVars = this.errorService.getCodes(this.errorCode);
       });
     }
   
@@ -103,9 +113,10 @@ import { SeoService } from '@app/services/seo.service';
       this.location.go(`${this.gameURL}/recipe-books/` + slugname + "/" + this.language);
       this.modalRef = this.modalService.show(template);
       this.modalRef.onHide.subscribe((reason: string | any) => {
+        if(reason != "link") {
           this.location.go(`${this.gameURL}/recipe-books/` + this.language);
           this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-        })
+        }})
     }
   
     private filterT(value: string, type: string): Book[] {

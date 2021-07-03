@@ -1,10 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
@@ -21,6 +19,7 @@ import { JwtInterceptor } from '@app/interceptor/jwt_interceptor';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { MarkdownModule } from 'ngx-markdown';
 import { CookieService } from 'ngx-cookie-service';
+import {TransferHttpCacheModule} from '@nguniversal/common';
 
 const APP_CONTAINERS = [
   DefaultLayoutComponent,
@@ -42,8 +41,6 @@ import { SecurityContext } from '@angular/core';
 import {MatInputModule} from '@angular/material/input';
 import { OverlayModule } from '@angular/cdk/overlay';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import { PairPipe } from './pipes/pair.pipe';
-
 
 
 @NgModule({
@@ -52,7 +49,7 @@ import { PairPipe } from './pipes/pair.pipe';
     ...APP_CONTAINERS
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserModule.withServerTransition({ appId: 'frontend' }),
     BrowserAnimationsModule,
     AppRoutingModule,
     AppAsideModule,
@@ -72,6 +69,7 @@ import { PairPipe } from './pipes/pair.pipe';
     MatInputModule,
     OverlayModule,
     MatAutocompleteModule,
+    TransferHttpCacheModule,
   ],
   providers: [
     CookieService,

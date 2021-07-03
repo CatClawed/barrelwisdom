@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 import { Region } from '@app/interfaces/a22';
 import { A22Service } from '@app/services/a22.service';
+import { HistoryService } from '@app/services/history.service';
 import { ErrorCodeService } from "@app/services/errorcode.service";
 import { first } from 'rxjs/operators';
 import { SeoService } from '@app/services/seo.service';
@@ -34,6 +35,7 @@ import { SeoService } from '@app/services/seo.service';
       private route: ActivatedRoute,
       private router: Router,
       private a22service: A22Service,
+      public historyService: HistoryService,
       private errorService: ErrorCodeService,
       private seoService: SeoService,
       private viewportScroller: ViewportScroller
@@ -56,7 +58,7 @@ import { SeoService } from '@app/services/seo.service';
             if(location.areas.length == 0) {
               this.error = true;
               this.errorCode = '404',
-              this.errorVars = this.errorService.getCodes(this.errorCode)
+              this.errorVars = this.errorService.getCodes(this.errorCode);
             }
             else {
               this.region = location;
@@ -78,9 +80,9 @@ import { SeoService } from '@app/services/seo.service';
             }
         },
         error => {
-            this.error = true,
-            this.errorCode = error.status.toString(),
-            this.errorVars = this.errorService.getCodes(this.errorCode)
+            this.error = true;
+            this.errorCode = `${error.status}`;
+            this.errorVars = this.errorService.getCodes(this.errorCode);
         });
     }
 
@@ -90,5 +92,4 @@ import { SeoService } from '@app/services/seo.service';
           if (element != undefined) element.scrollIntoView();
         });
       }
-
 }

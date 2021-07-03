@@ -1,11 +1,11 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="!error">
+<div *ngIf="book">
 <nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}/recipe-books">Recipe Books</a></li>
+    <li class="breadcrumb-item"><a href="/" (click)="historyService.history(); $event.preventDefault();">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.history(gameURL); $event.preventDefault();">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}/recipe-books/{{language}}" (click)="historyService.history(gameURL,'recipe-books',language); $event.preventDefault();">Recipe Books</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{book.name}}</li>
   </ol>
 </nav>
@@ -20,7 +20,7 @@
         <p><b>Acquisition: </b>{{book.note}}</p>
         <b>Items:</b>
         <ul>
-          <li *ngFor="let item of book.items"><a href="/{{gameURL}}/items/{{item.slugname}}">{{item.name}}</a></li>
+          <li *ngFor="let item of book.items"><a href="/{{gameURL}}/items/{{item.slugname}}/{{language}}" (click)="historyService.history(gameURL,'items',language,item.slugname); $event.preventDefault();">{{item.name}}</a></li>
         </ul>
      </div>
   </div>

@@ -1,11 +1,11 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="!error">
+<div *ngIf="item">
 <nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}/items">Items</a></li>
+    <li class="breadcrumb-item"><a href="/" (click)="historyService.history(); $event.preventDefault();">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.history(gameURL); $event.preventDefault();">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}/items/{{language}}" (click)="historyService.history(gameURL,'items',language); $event.preventDefault();">Items</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{item.name}}</li>
   </ol>
 </nav>
@@ -22,23 +22,25 @@
     </div>
     <div class="card-text">
       <p>{{item.desc}}</p>
-      <p *ngIf="item.book_set"><b>Recipe Book: </b><a href="/{{gameURL}}/recipe-books/{{item.book_set[0].slugname}}">{{item.book_set[0].name}}</a></p>
+      <p *ngIf="item.book_set"><b>Recipe Book: </b><a href="/{{gameURL}}/recipe-books/{{item.book_set[0].slugname}}" (click)="historyService.history(gameURL,'recipe-books',language,item.book_set[0].slugname); $event.preventDefault();">{{item.book_set[0].name}}</a></p>
           <table>
             <tr *ngFor="let cat of item.categories">
-                <td style="text-align: center;"><i class="atelier atelier-{{cat.icon_name}}"></i></td><td><a href="/{{gameURL}}/categories/{{cat.slugname}}">{{cat.name}}</a></td>
+                <td style="text-align: center;"><i class="atelier atelier-{{cat.icon_name}}"></i></td><td><a href="/{{gameURL}}/categories/{{cat.slugname}}" (click)="historyService.history(gameURL,'categories',language,cat.slugname); $event.preventDefault();">{{cat.name}}</a></td>
             </tr>
           </table>
       <b *ngIf="item.locations">Locations:</b>
       <ul *ngIf="item.locations">
-        <li *ngFor="let loc of item.locations"><a href="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}/#{{loc.slugname}}">{{loc.name}}</a></li>
+        <li *ngFor="let loc of item.locations">
+         <a *ngIf="loc.parentslug" href="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}#{{loc.slugname}}" (click)="historyService.history(gameURL,'locations',language,loc.parentslug,loc.slugname); $event.preventDefault();">{{loc.name}}</a>
+         <a *ngIf="!loc.parentslug" href="/{{gameURL}}/locations/{{loc.slugname}}/{{language}}" (click)="historyService.history(gameURL,'locations',language,loc.slugname); $event.preventDefault();">{{loc.name}}</a></li>
       </ul>
       <b *ngIf="item.monsters">Monsters:</b>
       <ul *ngIf="item.monsters">
-        <li *ngFor="let mon of item.monsters"><a href="/{{gameURL}}/monsters/{{mon.slugname}}">{{mon.name}}</a></li>
+        <li *ngFor="let mon of item.monsters"><a href="/{{gameURL}}/monsters/{{mon.slugname}}" (click)="historyService.history(gameURL,'monsters',language,mon.slugname); $event.preventDefault();">{{mon.name}}</a></li>
       </ul>
       <b *ngIf="item.traits">Trait:</b>
       <ul *ngIf="item.traits">
-        <li><a href="/{{gameURL}}/traits/{{item.traits.slugname}}">{{item.traits.name}}</a></li>
+        <li><a href="/{{gameURL}}/traits/{{item.traits.slugname}}" (click)="historyService.history(gameURL,'traits',language,item.traits.slugname); $event.preventDefault();">{{item.traits.name}}</a></li>
       </ul>
       <ul>
         <li *ngIf="item.time">Time: {{item.time}}</li>
@@ -50,7 +52,7 @@
         <tr><th style="text-align: center;background-color:rgba(211, 211, 211, 0.3);">Ingredients</th></tr>
         <tr><td>
           <ul>
-           <li *ngFor="let ing of item.ingredient_set"><a *ngIf="ing.item" href="/{{gameURL}}/items/{{ing.item.slugname}}">{{ing.item.name}}</a><a *ngIf="ing.category" href="/{{gameURL}}/categories/{{ing.category.slugname}}">{{ing.category.name}}</a> x{{ing.num}}</li>
+           <li *ngFor="let ing of item.ingredient_set"><a *ngIf="ing.item" href="/{{gameURL}}/items/{{ing.item.slugname}}" (click)="historyService.history(gameURL,'items',language,ing.item.slugname); $event.preventDefault();">{{ing.item.name}}</a><a *ngIf="ing.category" href="/{{gameURL}}/categories/{{ing.category.slugname}}" (click)="historyService.history(gameURL,'categories',language,ing.category.slugname); $event.preventDefault();">{{ing.category.name}}</a> x{{ing.num}}</li>
           </ul>
         </td></tr>
       </table>
@@ -58,17 +60,23 @@
         <tr><th colspan=2 style="text-align: center;background-color:rgba(211, 211, 211, 0.3);">Effects</th></tr>
         <tr *ngIf="itemone"><td>Item 1</td><td>
           <ul>
-           <li *ngFor="let eff of item.effectline_set"><a *ngIf="eff.itemnum == 1" href="/{{gameURL}}/effects/{{eff.effect.slugname}}">{{eff.effect.name}}</a></li>
+           <ng-container *ngFor="let eff of item.effectline_set">
+           <li *ngIf="eff.itemnum == 1"><a href="/{{gameURL}}/effects/{{eff.effect.slugname}}" (click)="historyService.history(gameURL,'effects',language,eff.effect.slugname); $event.preventDefault();">{{eff.effect.name}}</a></li>
+           </ng-container>
           </ul>
         </td></tr>
         <tr *ngIf="itemtwo"><td>Item 2</td><td>
           <ul>
-           <li *ngFor="let eff of item.effectline_set"><a *ngIf="eff.itemnum == 2" href="/{{gameURL}}/effects/{{eff.effect.slugname}}">{{eff.effect.name}}</a></li>
+           <ng-container *ngFor="let eff of item.effectline_set">
+           <li *ngIf="eff.itemnum == 2"><a href="/{{gameURL}}/effects/{{eff.effect.slugname}}" (click)="historyService.history(gameURL,'effects',language,eff.effect.slugname); $event.preventDefault();">{{eff.effect.name}}</a></li>
+           </ng-container>
           </ul>
         </td></tr>
         <tr *ngIf="itemthree"><td>Item 3</td><td>
           <ul>
-           <li *ngFor="let eff of item.effectline_set"><a *ngIf="eff.itemnum == 3" href="/{{gameURL}}/effects/{{eff.effect.slugname}}">{{eff.effect.name}}</a></li>
+          <ng-container *ngFor="let eff of item.effectline_set">
+           <li *ngIf="eff.itemnum == 3"><a href="/{{gameURL}}/effects/{{eff.effect.slugname}}" (click)="historyService.history(gameURL,'effects',language,eff.effect.slugname); $event.preventDefault();">{{eff.effect.name}}</a></li>
+           </ng-container>
           </ul>
         </td></tr>
       </table>
@@ -76,7 +84,7 @@
         <tr><th style="text-align: center;background-color:rgba(211, 211, 211, 0.3);">Materials</th></tr>
         <tr><td>
           <ul>
-           <li *ngFor="let item of item.equip_set[0].material"><a href="/{{gameURL}}/items/{{item.slugname}}">{{item.name}}</a></li>
+           <li *ngFor="let item of item.equip_set[0].material"><a href="/{{gameURL}}/items/{{item.slugname}}" (click)="historyService.history(gameURL,'items',language,item.slugname); $event.preventDefault();">{{item.name}}</a></li>
           </ul>
         </td></tr>
       </table>

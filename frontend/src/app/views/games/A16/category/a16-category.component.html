@@ -1,10 +1,10 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="!error">
+<div *ngIf="category">
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a href="/" (click)="historyService.history(); $event.preventDefault();">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.history(gameURL); $event.preventDefault();">{{gameTitle}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">Category: {{category.name}}</li>
   </ol>
 </nav>
@@ -16,7 +16,7 @@
             <tr><th class="table-dark-center" colspan=2>Items in Category</th></tr>
             <tr *ngFor="let item of category.item_set">
                 <td>
-                    <a href="{{gameURL}}/items/{{item.slugname}}">{{item.name}}</a>
+                    <a href="/{{gameURL}}/items/{{item.slugname}}/{{language}}" (click)="historyService.history(gameURL,'items',language,item.slugname); $event.preventDefault();">{{item.name}}</a>
                     <br /><b>LV {{item.level}}</b><br />
                     <i style="color:#ac504f;" *ngIf="item.fire"  class="atelier atelier-shallie-fire"></i>
                     <i style="color:#427389;" *ngIf="item.water" class="atelier atelier-shallie-water"></i>
@@ -38,7 +38,7 @@
             <tr><th class="table-dark-center" colspan=2>Items Using Category</th></tr>
             <tr *ngFor="let item of category.ingredientcat">
                 <td>
-                    <a href="{{gameURL}}/items/{{item.synthitem.slugname}}">{{item.synthitem.name}}</a>
+                    <a href="/{{gameURL}}/items/{{item.synthitem.slugname}}/{{language}}" (click)="historyService.history(gameURL,'items',language,item.synthitem.slugname); $event.preventDefault();">{{item.synthitem.name}}</a>
                     <br /><b>LV {{item.synthitem.level}}</b><br />
                     <i style="color:#ac504f;" *ngIf="item.synthitem.fire"  class="atelier atelier-shallie-fire"></i>
                     <i style="color:#427389;" *ngIf="item.synthitem.water" class="atelier atelier-shallie-water"></i>

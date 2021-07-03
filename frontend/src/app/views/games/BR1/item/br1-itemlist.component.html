@@ -3,13 +3,13 @@
 <div *ngIf="!error">
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a routerLink="/">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a routerLink="/{{gameURL}}">{{gameTitle}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">Items</li>
   </ol>
 </nav>
 <h1>Items</h1>
-<div class ="col-md-10 mx-auto">
+<div class="col-md-10 mx-auto">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
         <mat-form-field class="col-md-8" appearance="outline">
@@ -37,7 +37,7 @@
            <p><b *ngIf="it.acquisition">Acquisition: </b>{{it.acquisition}}</p>
            <b *ngIf="it.missions">Missions:</b>
            <ul *ngIf="it.missions">
-             <li *ngFor="let miss of it.missions"><a href="/{{gameURL}}/missions/{{language}}/#{{miss.slugname}}">{{miss.name}}</a></li>
+             <li *ngFor="let miss of it.missions"><a routerLink="/{{gameURL}}/missions/{{language}}" fragment="{{miss.slugname}}">{{miss.name}}</a></li>
            </ul>
            <b *ngIf="it.locations">Locations:</b>
            <ul *ngIf="it.locations">
@@ -45,11 +45,11 @@
            </ul>
            <b *ngIf="it.demons">Demons:</b>
            <ul *ngIf="it.demons">
-             <li *ngFor="let demon of it.demons"><a href="/{{gameURL}}/demons/{{demon.slugname}}/{{language}}">{{demon.name}}</a></li>
+             <li *ngFor="let demon of it.demons"><a routerLink="/{{gameURL}}/demons/{{demon.slugname}}/{{language}}">{{demon.name}}</a></li>
            </ul>
            <b *ngIf="it.ingredient_set">Craft:</b>
            <ul *ngIf="it.ingredient_set">
-             <li *ngFor="let ing of it.ingredient_set"><a href="/{{gameURL}}/items/{{ing.item.slugname}}/{{language}}">{{ing.item.name}} x{{ing.num}}</a></li>
+             <li *ngFor="let ing of it.ingredient_set"><a routerLink="/{{gameURL}}/items/{{ing.item.slugname}}/{{language}}">{{ing.item.name}} x{{ing.num}}</a></li>
            </ul>
           </div>
        </div>

@@ -3,13 +3,13 @@
 <div *ngIf="!error">
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a href="/" (click)="historyService.history(); $event.preventDefault();">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.history(gameURL); $event.preventDefault();">{{gameTitle}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">Monsters</li>
   </ol>
 </nav>
 <h1>Monsters</h1>
-<div class ="col-md-10 mx-auto">
+<div class="col-md-10 mx-auto">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
         <mat-form-field class="col-md-5" appearance="outline">
@@ -20,6 +20,7 @@
       </div>
     </form>
   </div>
+<ng-container *ngIf="filteredMonsters">
 <div *ngFor="let monster of filteredMonsters | async| pair " class="row">
   <div *ngFor="let mon of monster" class="spacer col-md-5 mx-auto">
     <div *ngIf="mon" class="card allheight">
@@ -54,4 +55,5 @@
      <a16-monster slugname="{{monster}}" [showNav]="false"></a16-monster>
   </div>
 </ng-template>
+</ng-container>
 </div>

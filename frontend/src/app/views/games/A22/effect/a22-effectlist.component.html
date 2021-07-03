@@ -3,13 +3,13 @@
 <div *ngIf="!error">
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
+<li class="breadcrumb-item"><a href="/" (click)="historyService.history(); $event.preventDefault();">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.history(gameURL); $event.preventDefault();">{{gameTitle}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">Effects</li>
   </ol>
 </nav>
 <h1>Effects</h1>
-<div class ="col-md-10 mx-auto">
+<div class="col-md-10 mx-auto">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
         <mat-form-field class="col-md-5" appearance="outline">
@@ -50,6 +50,7 @@
       </div>
     </form>
   </div>
+  <ng-container *ngIf="filteredEffects">
   <div *ngIf="!filteredEffects" class="d-flex justify-content-center">
   <div class="spinner-border text-secondary m-5" role="status">
     <span class="sr-only">Loading...</span>
@@ -92,4 +93,5 @@
      <a22-effect slugname="{{effect}}" [showNav]="false"></a22-effect>
   </div>
 </ng-template>
+</ng-container>
 </div>

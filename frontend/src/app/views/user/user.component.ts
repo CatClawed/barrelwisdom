@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
 import { UserProfile } from '@app/interfaces/user';
 import { ErrorCodeService } from "@app/services/errorcode.service";
@@ -33,9 +33,9 @@ import { UserService } from '@app/services/user.service';
             this.userprofile = x
          },
          error => { 
-            this.error = true,
-            this.errorCode = error.status.toString(),
-            this.errorVars = this.errorService.getCodes(this.errorCode)
+            this.error = true;
+            this.errorCode = `${error.status}`;
+            this.errorVars = this.errorService.getCodes(this.errorCode);
           });
       }
   }

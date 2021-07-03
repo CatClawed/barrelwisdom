@@ -15,10 +15,10 @@
         {{user.username}}
       </a>
       <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
-        <a class="dropdown-item" href="user/{{user.username}}"><i class="fa fa-user"></i> Profile</a>
-        <a class="dropdown-item" href="settings"><i class="fa fa-wrench"></i> Settings</a>
-        <a class="dropdown-item" href="create"><i class="fa fa-file"></i> Create Page</a>
-        <a class="dropdown-item" href="#" (click)="logout()"><i class="fa fa-lock"></i> Logout</a>
+        <a class="dropdown-item" routerLink="/user/{{user.username}}"><i class="fa fa-user"></i> Profile</a>
+        <a class="dropdown-item" routerLink="/settings"><i class="fa fa-wrench"></i> Settings</a>
+        <a class="dropdown-item" routerLink="/create"><i class="fa fa-file"></i> Create Page</a>
+        <a class="dropdown-item" routerLink="/#" (click)="logout()"><i class="fa fa-lock"></i> Logout</a>
       </div>
     </li>
   </ng-template>

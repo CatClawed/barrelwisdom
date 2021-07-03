@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { LocalstorageService } from '@app/_helpers/local-storage';
 
 @Injectable({ providedIn: 'root' })
 export class LanguageService {
@@ -8,11 +9,11 @@ export class LanguageService {
     public language: Observable<string>;
     public l: string = "";
 
-
-    constructor(private http: HttpClient) {
-        this.l = localStorage.getItem('language');
-        if(localStorage.getItem('language')) {
-            this.l = localStorage.getItem('language');
+    constructor(private http: HttpClient,
+        private LocalStorage: LocalstorageService) {
+        this.l = this.LocalStorage.getItem('language');
+        if(this.LocalStorage.getItem('language')) {
+            this.l = LocalStorage.getItem('language');
         }
         this.languageSubject = new BehaviorSubject<string>(this.l)
         this.language = this.languageSubject.asObservable();
@@ -23,7 +24,7 @@ export class LanguageService {
     }
 
     setLanguage(language: string) {
-        localStorage.setItem('language', language);
+        this.LocalStorage.setItem('language', language);
         this.l = language;
         this.languageSubject.next(this.l);
     }

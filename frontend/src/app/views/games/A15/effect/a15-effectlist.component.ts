@@ -1,10 +1,11 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Effect } from '@app/interfaces/a15';
 import { A15Service } from '@app/services/a15.service';
+import { HistoryService} from '@app/services/history.service';
 import { ErrorCodeService } from "@app/services/errorcode.service";
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -42,7 +43,7 @@ import { Meta, Title } from '@angular/platform-browser';
     imgURL: string;
   
     constructor(
-      private modalService: BsModalService,
+      private modalService: BsModalService, private router: Router, public historyService: HistoryService,
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private location: Location,
@@ -68,7 +69,6 @@ import { Meta, Title } from '@angular/platform-browser';
       this.seoTitle = `Effects - ${this.gameTitle}`;
       this.seoDesc = `The list of effects in ${this.gameTitle}.`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-      this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
   
       this.pageForm = this.formBuilder.group({
         filtertext: this.effectControl,
@@ -83,6 +83,13 @@ import { Meta, Title } from '@angular/platform-browser';
       this.effectControl.valueChanges.subscribe(search => {
         this.searchstring = search;
       });
+
+      this.router.events.subscribe(event => {
+        if (event instanceof NavigationEnd) {
+          this.modalService.setDismissReason('link');
+          this.modalService.hide();
+        }
+      });
     }
   
     getEffects() {
@@ -95,9 +102,9 @@ import { Meta, Title } from '@angular/platform-browser';
         );
       },
       error => {
-        this.error = true,
-        this.errorCode = error.status.toString(),
-        this.errorVars = this.errorService.getCodes(this.errorCode)
+        this.error = true;
+        this.errorCode = `${error.status}`;
+        this.errorVars = this.errorService.getCodes(this.errorCode);
       });
     }
   
@@ -106,9 +113,10 @@ import { Meta, Title } from '@angular/platform-browser';
       this.location.go(`${this.gameURL}/effects/` + slugname + "/" + this.language);
       this.modalRef = this.modalService.show(template);
       this.modalRef.onHide.subscribe((reason: string | any) => {
+        if(reason != "link") {
           this.location.go(`${this.gameURL}/effects/` + this.language);
           this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-        })
+        }})
     }
   
     private filterT(value: string, type: string): Effect[] {

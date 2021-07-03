@@ -1,9 +1,9 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
-<div *ngIf="!error">
+<div *ngIf="region">
     <nav style="margin-top: 1em;" aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-            <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
+            <li class="breadcrumb-item"><a href="/" (click)="historyService.history(); $event.preventDefault();">Barrel Wisdom</a></li>
+            <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.history(gameURL); $event.preventDefault();">{{gameTitle}}</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{region.name}}</li>
         </ol>
     </nav>
@@ -36,9 +36,9 @@
                 <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'Bomb Rod'"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-bomb-rod"></i></td>
                 <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'Bug Net'"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-bug-net"></i></td>
                 <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'Fishing Rod'"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-fishing-rod"></i></td>
-                <td *ngIf="node.tool != 'Dig'">               <a href="ryza2/items/{{node.rank1.slugname}}">{{node.rank1.name}}</a><br/>{{node.priority1}}</td>
-                <td *ngIf="node.rank2  && node.tool != 'Dig'"><a href="ryza2/items/{{node.rank2.slugname}}">{{node.rank2.name}}</a><br/>{{node.priority2}}</td>
-                <td *ngIf="node.rank3  && node.tool != 'Dig'"><a href="ryza2/items/{{node.rank3.slugname}}">{{node.rank3.name}}</a><br/>{{node.priority3}}</td>
+                <td *ngIf="node.tool != 'Dig'">               <a href="/{{gameURL}}/items/{{node.rank1.slugname}}/{{language}}" (click)="historyService.history(gameURL,'items',language,node.rank1.slugname); $event.preventDefault();">{{node.rank1.name}}</a><br/>{{node.priority1}}</td>
+                <td *ngIf="node.rank2  && node.tool != 'Dig'"><a href="/{{gameURL}}/items/{{node.rank2.slugname}}/{{language}}" (click)="historyService.history(gameURL,'items',language,node.rank2.slugname); $event.preventDefault();">{{node.rank2.name}}</a><br/>{{node.priority2}}</td>
+                <td *ngIf="node.rank3  && node.tool != 'Dig'"><a href="/{{gameURL}}/items/{{node.rank3.slugname}}/{{language}}" (click)="historyService.history(gameURL,'items',language,node.rank3.slugname); $event.preventDefault();">{{node.rank3.name}}</a><br/>{{node.priority3}}</td>
                 <td *ngIf="!node.rank2 && node.tool != 'Dig'"></td>
                 <td *ngIf="!node.rank3 && node.tool != 'Dig'"></td>
             </tr>
@@ -48,7 +48,7 @@
                     <div style="column-count: 3;">
                     <ul style="padding-left:1em;">
                         <ng-container  *ngFor="let node of area.gatherdata">
-                            <li *ngIf="node.tool == 'Dig'"><a href="ryza2/items/{{node.rank1.slugname}}">{{node.rank1.name}}</a></li>
+                            <li *ngIf="node.tool == 'Dig'"><a href="/{{gameURL}}/items/{{node.rank1.slugname}}/{{language}}" (click)="historyService.history(gameURL,'items',language,node.rank1.slugname); $event.preventDefault();">{{node.rank1.name}}</a></li>
                         </ng-container>
                     </ul>
                 </div>

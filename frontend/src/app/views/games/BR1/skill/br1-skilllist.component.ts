@@ -1,13 +1,11 @@
 
 import { ViewportScroller } from '@angular/common';
 import { first } from 'rxjs/operators';
-
-
-
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute }from '@angular/router';
 import { Skill } from '@app/interfaces/br1';
 import { BR1Service } from '@app/services/br1.service';
+import { HistoryService} from '@app/services/history.service';
 import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
 
@@ -40,6 +38,7 @@ export class BR1SkilllistComponent implements OnInit {
 constructor(
     private route: ActivatedRoute,
     private br1service: BR1Service,
+    public historyService: HistoryService,
     private errorService: ErrorCodeService,
     private seoService: SeoService,
     private viewportScroller: ViewportScroller) {
@@ -62,9 +61,9 @@ constructor(
     },
     error => {
         console.log(error)
-      this.error = true,
-      this.errorCode = error.status.toString(),
-      this.errorVars = this.errorService.getCodes(this.errorCode)
+      this.error = true;
+      this.errorCode = `${error.status}`;
+      this.errorVars = this.errorService.getCodes(this.errorCode);
     });
   }
   ngAfterViewInit(): void {

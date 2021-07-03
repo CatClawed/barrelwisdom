@@ -1,4 +1,4 @@
-import 'zone.js/dist/zone-node';
+import 'zone.js/node';
 
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import * as express from 'express';
@@ -7,6 +7,9 @@ import { join } from 'path';
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
+import { createProxyMiddleware, Filter, Options, RequestHandler } from 'http-proxy-middleware';
+
+//import {LocalStorage} from '@app/_helpers/local-storage';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
@@ -17,7 +20,41 @@ export function app(): express.Express {
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
   server.engine('html', ngExpressEngine({
     bootstrap: AppServerModule,
+    //providers: [
+    //  UserService,
+    //{ provide: LocalStorage, useValue: window.localStorage}
+    //]
   }));
+
+  // proxy middleware options
+const optionsApi = {
+  target: 'http://localhost:8000', // target host
+  changeOrigin: false, // needed for virtual hosted sites
+  ws: true, // proxy websockets
+  router: {
+    // when request.headers.host == 'dev.localhost:3000',
+    // override target 'http://www.example.org' to 'http://localhost:8000'
+    'dev.localhost:4200': 'http://localhost:8000',
+  },
+};
+
+const options = {
+  target: 'https://media.barrelwisdom.com', // target host
+  changeOrigin: true, // needed for virtual hosted sites
+  ws: true, // proxy websockets
+  pathRewrite: {
+    '^/media': '/file/barrelwisdom', // rewrite path
+  },
+};
+
+
+// create the proxy (without context)
+const apiProxy = createProxyMiddleware(optionsApi);
+const mediaProxy = createProxyMiddleware(options);
+
+  server.use('/api', apiProxy);
+  server.use('/auth', apiProxy);
+  server.use('/media', mediaProxy);
 
   server.set('view engine', 'html');
   server.set('views', distFolder);

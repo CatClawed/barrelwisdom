@@ -18,7 +18,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                     if (error.status == 401) {
                         this.authenticationService.logout();
                     }
-                    if (error.error instanceof ErrorEvent) {
+                    if (error.error instanceof HttpErrorResponse) {
                         // client-side error
                         console.error(`${error.error.message}`);
                     }

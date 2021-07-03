@@ -1,10 +1,11 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
 import { ItemList, Category } from '@app/interfaces/a15';
 import { A15Service } from '@app/services/a15.service';
+import { HistoryService} from '@app/services/history.service';
 import { ErrorCodeService } from "@app/services/errorcode.service";
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -49,7 +50,7 @@ import { SeoService } from '@app/services/seo.service';
     imgURL: string;
   
     constructor(
-      private modalService: BsModalService,
+      private modalService: BsModalService, private router: Router, public historyService: HistoryService,
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private location: Location,
@@ -107,6 +108,13 @@ import { SeoService } from '@app/services/seo.service';
       this.ingControl.valueChanges.subscribe(search => {
         this.ingstring = search;
       });
+
+      this.router.events.subscribe(event => {
+        if (event instanceof NavigationEnd) {
+          this.modalService.setDismissReason('link');
+          this.modalService.hide();
+        }
+      });
   
     }
   
@@ -120,9 +128,9 @@ import { SeoService } from '@app/services/seo.service';
         );
       },
       error => {
-        this.error = true,
-        this.errorCode = error.status.toString(),
-        this.errorVars = this.errorService.getCodes(this.errorCode)
+        this.error = true;
+        this.errorCode = `${error.status}`;
+        this.errorVars = this.errorService.getCodes(this.errorCode);
       });
     }
 
@@ -132,9 +140,9 @@ import { SeoService } from '@app/services/seo.service';
           this.categories = categories;
       },
       error => {
-          this.error = true,
-          this.errorCode = error.status.toString(),
-          this.errorVars = this.errorService.getCodes(this.errorCode)
+          this.error = true;
+          this.errorCode = `${error.status}`;
+          this.errorVars = this.errorService.getCodes(this.errorCode);
       });
   }
   
@@ -143,9 +151,10 @@ import { SeoService } from '@app/services/seo.service';
       this.location.go(`${this.gameURL}/items/` + slugname + "/" + this.language);
       this.modalRef = this.modalService.show(template);
       this.modalRef.onHide.subscribe((reason: string | any) => {
+        if(reason != "link") {
           this.location.go(`${this.gameURL}/items/` + this.language);
           this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-        })
+        }})
     }
   
     private filterT(value: string, type: string, elementV: number, element: string, ing: string): ItemList[] {

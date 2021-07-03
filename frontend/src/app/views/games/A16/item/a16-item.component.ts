@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute }from '@angular/router';
 import { ItemFull } from '@app/interfaces/a16';
 import { A16Service } from '@app/services/a16.service';
+import { HistoryService} from '@app/services/history.service';
 import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
 
@@ -41,6 +42,7 @@ export class A16ItemComponent implements OnInit {
 constructor(
     private route: ActivatedRoute,
     private a16service: A16Service,
+    public historyService: HistoryService,
     private errorService: ErrorCodeService,
     private seoService: SeoService) {
       if(this.route.snapshot.params.item != null) {
@@ -69,7 +71,7 @@ constructor(
     },
     error => {
       this.error = true;
-      this.errorCode = error.status.toString();
+      this.errorCode = `${error.status}`;
       this.errorVars = this.errorService.getCodes(this.errorCode);
     });
   }

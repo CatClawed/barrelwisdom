@@ -1,11 +1,11 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="!error">
+<div *ngIf="monster">
 <nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}/monsters">Monsters</a></li>
+    <li class="breadcrumb-item"><a href="/" (click)="historyService.history(); $event.preventDefault();">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.history(gameURL); $event.preventDefault();">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}/monsters/{{language}}" (click)="historyService.history(gameURL,'monsters', language); $event.preventDefault();">Monsters</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{monster.name}}</li>
   </ol>
 </nav>
@@ -32,11 +32,11 @@
           <div class="col-md-6">
         <b *ngIf="monster.location">Locations:</b>
         <ul *ngIf="monster.location">
-          <li *ngFor="let loc of monster.location"><a *ngIf="loc.reg" href="ryza2/locations/{{loc.reg}}">{{loc.name}}</a><a *ngIf="!loc.reg" href="ryza2/locations/{{loc.slugname}}">{{loc.name}}</a></li>
+          <li *ngFor="let loc of monster.location"><a *ngIf="loc.reg" href="{{gameURL}}/locations/{{loc.reg}}/{{language}}" (click)="historyService.history(gameURL,'locations',language,loc.reg); $event.preventDefault();">{{loc.name}}</a><a *ngIf="!loc.reg" href="{{gameURL}}/locations/{{loc.slugname}}/{{language}}" (click)="historyService.history(gameURL,'locations',language,loc.slugname); $event.preventDefault();">{{loc.name}}</a></li>
         </ul>
         <b *ngIf="monster.drops">Drops:</b>
         <ul *ngIf="monster.drops">
-          <li *ngFor="let drop of monster.drops"><a href="ryza2/items/{{drop.slugname}}">{{drop.name}}</a></li>
+          <li *ngFor="let drop of monster.drops"><a href="{{gameURL}}/items/{{drop.slugname}}/{{language}}" (click)="historyService.history(gameURL,'items',language,drop.slugname); $event.preventDefault();">{{drop.name}}</a></li>
         </ul>
       </div>
       <div class="col-md=6">

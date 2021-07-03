@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Blog } from '@app/interfaces/blog';
 import { User } from '@app/interfaces/user';
 import { BlogService } from '@app/services/blog.service';
@@ -9,6 +9,7 @@ import { AuthenticationService } from '@app/services/authentication.service';
 import { MarkdownService } from 'ngx-markdown';
 import { SeoService } from '@app/services/seo.service';
 import { Meta, Title } from '@angular/platform-browser';
+import { HistoryService } from '@app/services/history.service';
 
 @Component({
     templateUrl: 'blog.component.html',
@@ -25,9 +26,11 @@ import { Meta, Title } from '@angular/platform-browser';
       allowedToEdit = false;
       gameName = "";
       breadcrumbs = [["Barrel Wisdom", "/"]];
+      blogParam = '';
 
       constructor(
         private route: ActivatedRoute,
+        public historyService: HistoryService,
         private blogService: BlogService,
         private errorService: ErrorCodeService,
         private authenticationService: AuthenticationService,
@@ -56,6 +59,7 @@ import { Meta, Title } from '@angular/platform-browser';
               if(this.user) {
                 if(this.blog.authorlock && this.user.id == this.blog.author[0].id) {
                   this.allowedToEdit = true;
+                  this.blogParam = `{ id : ${this.blog.id} }`;
                 }
                 else if(this.user.group == 'admin') {
                   this.allowedToEdit = true;
@@ -70,28 +74,29 @@ import { Meta, Title } from '@angular/platform-browser';
                 this.breadcrumbs.pop();
               }
               if(section != "blog") {
-                this.titleService.setTitle(`${this.blog.title} - ${this.blog.section.fullname} - Barrel Wisdom`);
+                this.seoService.SEOSettings(
+                  `${this.blog.section.name}/${this.blog.slugtitle}`,
+                  `${this.blog.title} - ${this.blog.section.fullname}`,
+                  this.blog.description,
+                  this.blog.image
+                );
                 this.breadcrumbs.push([this.blog.section.fullname, '/' + this.blog.section.name])
               }
               else {
-                this.titleService.setTitle(`${this.blog.title} - Barrel Wisdom`);
+                this.seoService.SEOSettings(
+                  `${this.blog.section.name}/${this.blog.slugtitle}`,
+                  this.blog.title,
+                  this.blog.description,
+                  this.blog.image
+                );
               }
-              this.seoService.createCanonicalURL(`${this.blog.section.name}/${this.blog.slugtitle}`);
-              this.metaService.updateTag({ name: `robots`, content: `index, archive` },`name="robots"`);
-              this.metaService.updateTag({ name: `description`, content: `${this.blog.description}` }, `name="description"`);
-              this.metaService.updateTag({ property: `og:title`, content: `${this.blog.title}` }, `property="og:title"`);
-              this.metaService.updateTag({ property: `og:description`, content: `${this.blog.description}` },`property="og:description"`);
-              this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
-              if(this.blog.image) {
-                this.metaService.updateTag({ property: `og:image`, content: `${this.blog.image}` }, `property="og:image"`);
-              }
-              else {
-                this.metaService.updateTag({ property: `og:image`, content: `/media/main/barrel.png` }, `property="og:image"`);
-              }
+
+              
+
             },
             error => { 
                 this.error = true;
-                this.errorCode = error.status.toString();
+                this.errorCode = `${error.status}`;
                 this.errorVars = this.errorService.getCodes(this.errorCode);
               }
             );

@@ -1,7 +1,7 @@
 // Probably shoulda put all these in components for simpler repeated code, oh well
 
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SettingService } from '@app/services/setting.service';
 import { ErrorCodeService } from '@app/services/errorcode.service';

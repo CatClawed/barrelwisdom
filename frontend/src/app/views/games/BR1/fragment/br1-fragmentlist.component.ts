@@ -1,8 +1,9 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute }from '@angular/router';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { FragmentEffect } from '@app/interfaces/br1';
 import { BR1Service } from '@app/services/br1.service';
+import { HistoryService} from '@app/services/history.service';
 import { ErrorCodeService } from "@app/services/errorcode.service";
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -41,6 +42,7 @@ import { first } from 'rxjs/operators';
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private br1service: BR1Service,
+      public historyService: HistoryService,
       private errorService: ErrorCodeService,
       private seoService: SeoService,
       private viewportScroller: ViewportScroller
@@ -88,9 +90,9 @@ import { first } from 'rxjs/operators';
         );
       },
       error => {
-        this.error = true,
-        this.errorCode = error.status.toString(),
-        this.errorVars = this.errorService.getCodes(this.errorCode)
+        this.error = true;
+        this.errorCode = `${error.status}`;
+        this.errorVars = this.errorService.getCodes(this.errorCode);
       });
     }
   

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { BlogPaginator } from '@app/interfaces/blog';
@@ -70,9 +70,10 @@ export class HomeComponent implements OnInit {
           this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
         },
         error => {
-          this.error = true,
-          this.errorCode = error.status.toString(),
-          this.errorVars = this.errorService.getCodes(this.errorCode)
+          this.error = true;
+          console.log("fuk")
+          this.errorCode = `${error.status}`;
+          this.errorVars = this.errorService.getCodes(this.errorCode);
         });
     }
     else {
@@ -90,7 +91,7 @@ export class HomeComponent implements OnInit {
   getBlog(num: number, limit: number): void {
     let tag;
     if(this.tagID) {
-      tag = this.tagID.toString(10);
+      tag = `${this.tagID}`;
     }
     this.blogService.getMainPageBlogs(num, limit, tag)
       .subscribe(blog => {
@@ -98,9 +99,10 @@ export class HomeComponent implements OnInit {
         
       },
         error => {
-          this.error = true,
-          this.errorCode = error.status.toString(),
-          this.errorVars = this.errorService.getCodes(this.errorCode)
+          this.error = true;
+          console.log("fukk");
+          this.errorCode = `${error.status}`;
+          this.errorVars = this.errorService.getCodes(this.errorCode);
         }
       );
   }

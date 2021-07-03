@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { AuthenticationService } from '../services/authentication.service';
+import { AuthenticationService } from '@app/services/authentication.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
@@ -22,8 +22,8 @@ export class AuthGuard implements CanActivate {
                 }
             }
         }
-
-        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
-        return false;
+        else {
+            return this.router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url }});
+        }
     }
 }

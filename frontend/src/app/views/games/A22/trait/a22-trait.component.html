@@ -1,11 +1,11 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="!error">
+<div *ngIf="trait">
 <nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}/traits/">Traits</a></li>
+    <li class="breadcrumb-item"><a href="/" (click)="historyService.history(); $event.preventDefault();">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.history(gameURL); $event.preventDefault();">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}/traits/{{language}}" (click)="historyService.history(gameURL,'traits',language); $event.preventDefault();">Traits</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{trait.name}}</li>
   </ol>
 </nav>
@@ -13,13 +13,13 @@
 <div style="margin-top: 1em;" class="{{colset}} card griddisplay card-body">
       <div class="flex">
         <h4 class="card-title">{{trait.name}}</h4>
-        <div *ngIf="trait.item_set.length == 0"><a href="javascript:void(0)"
+        <div *ngIf="trait.item_set.length == 0"><a href="javascript:void(0)" (click)="$event.preventDefault();"
             tooltip="A measure of rarity. This number determines where traits appear." container="true">Grade:</a>
           {{trait.grade}}
           <br /><span class="badge bg-secondary" *ngIf="trait.grade > 50">DLC</span>
         </div>
         <div *ngIf="trait.item_set.length > 0">
-          <i class="atelier atelier-sm atelier-ryza2-material"></i><a href="/{{gameURL}}/item/{{trait.item_set[0].slugname}}/{{language}}">{{trait.item_set[0].name}}</a>
+          <i class="atelier atelier-sm atelier-ryza2-material"></i><a href="/{{gameURL}}/items/{{trait.item_set[0].slugname}}/{{language}}" (click)="historyService.history(gameURL,'items',language,trait.item_set[0].slugname); $event.preventDefault();">{{trait.item_set[0].name}}</a>
         </div>
       </div>
       <div class="card-text">

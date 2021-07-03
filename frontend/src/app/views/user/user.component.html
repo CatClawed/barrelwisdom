@@ -24,7 +24,7 @@
       <ul>
         <li *ngFor="let b of userprofile.user.blog_set">
           <span *ngIf="b.secfull">{{b.secfull}}: </span><span *ngIf="!b.secfull">Main: </span>
-          <a href="/{{b.secname}}/{{b.slugtitle}}">{{b.title}}</a>
+          <a routerLink="/{{b.secname}}/{{b.slugtitle}}">{{b.title}}</a>
         </li>
       </ul>
     </div>

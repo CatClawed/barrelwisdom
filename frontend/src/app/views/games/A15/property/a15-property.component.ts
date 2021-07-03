@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute }from '@angular/router';
 import { Property } from '@app/interfaces/a15';
 import { A15Service } from '@app/services/a15.service';
+import { HistoryService} from '@app/services/history.service';
 import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
 
@@ -42,6 +43,7 @@ export class A15PropertyComponent implements OnInit {
     private route: ActivatedRoute,
     private a15service: A15Service,
     private errorService: ErrorCodeService,
+    public historyService: HistoryService,
     private seoService: SeoService) {
       if(this.route.snapshot.params.property != null) {
       this.slugname = this.route.snapshot.params.property;
@@ -65,9 +67,9 @@ export class A15PropertyComponent implements OnInit {
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error => {
-      this.error = true,
-      this.errorCode = error.status.toString(),
-      this.errorVars = this.errorService.getCodes(this.errorCode)
+      this.error = true;
+      this.errorCode = `${error.status}`;
+      this.errorVars = this.errorService.getCodes(this.errorCode);
     });
   }
 } 

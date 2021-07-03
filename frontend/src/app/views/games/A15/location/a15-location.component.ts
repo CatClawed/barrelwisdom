@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute }from '@angular/router';
 import { RegionData } from '@app/interfaces/a15';
 import { A15Service } from '@app/services/a15.service';
+import { HistoryService} from '@app/services/history.service';
 import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
 import { ViewportScroller } from '@angular/common';
@@ -36,6 +37,7 @@ export class A15LocationComponent implements OnInit {
 constructor(
     private route: ActivatedRoute,
     private a15service: A15Service,
+    public historyService: HistoryService,
     private errorService: ErrorCodeService,
     private seoService: SeoService,
     private viewportScroller: ViewportScroller
@@ -60,9 +62,9 @@ constructor(
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error => {
-      this.error = true,
-      this.errorCode = error.status.toString(),
-      this.errorVars = this.errorService.getCodes(this.errorCode)
+      this.error = true;
+      this.errorCode = `${error.status}`;
+      this.errorVars = this.errorService.getCodes(this.errorCode);
     });
   }
   ngAfterViewInit(): void {

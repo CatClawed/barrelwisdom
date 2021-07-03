@@ -1,10 +1,11 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Property } from '@app/interfaces/a15';
 import { A15Service } from '@app/services/a15.service';
+import { HistoryService} from '@app/services/history.service';
 import { ErrorCodeService } from "@app/services/errorcode.service";
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -39,7 +40,7 @@ export class A15PropertylistComponent implements OnInit {
   imgURL: string;
 
   constructor(
-    private modalService: BsModalService,
+    private modalService: BsModalService, private router: Router, public historyService: HistoryService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private location: Location,
@@ -76,6 +77,13 @@ export class A15PropertylistComponent implements OnInit {
     this.propertyControl.valueChanges.subscribe(search => {
       this.searchstring = search;
     });
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.modalService.setDismissReason('link');
+        this.modalService.hide();
+      }
+    });
   }
 
   getProperties() {
@@ -88,9 +96,9 @@ export class A15PropertylistComponent implements OnInit {
       );
     },
     error => {
-      this.error = true,
-      this.errorCode = error.status.toString(),
-      this.errorVars = this.errorService.getCodes(this.errorCode)
+      this.error = true;
+      this.errorCode = `${error.status}`;
+      this.errorVars = this.errorService.getCodes(this.errorCode);
     });
   }
 

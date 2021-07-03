@@ -97,6 +97,7 @@ const routes: Routes = [
         path: '', 
         loadChildren: ()=> import('@app/views/games/A22/a22-routing.module').then(m=>m.A22RoutingModule),
       },
+      
     ]
   },
   {
@@ -142,9 +143,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    initialNavigation: 'enabled'
-})],
+  imports: [RouterModule.forRoot(routes, routerOptions)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

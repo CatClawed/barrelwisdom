@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from '@app/interfaces/user';
 import { AuthenticationService } from '@app/services/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { NavigationService } from '@app/services/navigation.service';
   selector: 'app-dashboard',
   templateUrl: './default-layout.component.html'
 })
-export class DefaultLayoutComponent {
+export class DefaultLayoutComponent implements OnInit {
   public sidebarMinimized = false;
   public navItems;
   user: User;
@@ -19,11 +19,14 @@ export class DefaultLayoutComponent {
     public navService: NavigationService,
     private route: ActivatedRoute,
     private router: Router) {
-      this.authenticationService.user.subscribe(x => this.user = x);
-      this.navService.nav.subscribe(x => {
+    }
+    
+  ngOnInit(): void {
+    this.authenticationService.user.subscribe(x => this.user = x);
+    this.navService.nav.subscribe(x => {
       this.navItems = x;
     });
-}
+  }
 
 logout() {
   this.authenticationService.logout();

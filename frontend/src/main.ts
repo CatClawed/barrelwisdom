@@ -8,10 +8,8 @@ if (environment.production) {
   enableProdMode();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  platformBrowserDynamic().bootstrapModule(AppModule, {
-  useJit: true,
-  preserveWhitespaces: true
-})
-  .catch(err => console.log(err));
+document.addEventListener("DOMContentLoaded", () => {
+  platformBrowserDynamic()
+    .bootstrapModule(AppModule)
+    .catch(err => console.log(err));
 });

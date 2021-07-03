@@ -1,10 +1,11 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Effect } from '@app/interfaces/a22';
 import { A22Service } from '@app/services/a22.service';
+import { HistoryService } from '@app/services/history.service';
 import { ErrorCodeService } from "@app/services/errorcode.service";
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -42,6 +43,8 @@ import { SeoService } from '@app/services/seo.service';
   
     constructor(
       private modalService: BsModalService,
+      private router: Router,
+      public historyService: HistoryService,
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private location: Location,
@@ -80,6 +83,13 @@ import { SeoService } from '@app/services/seo.service';
       this.effectControl.valueChanges.subscribe(search => {
         this.searchstring = search;
       });
+
+      this.router.events.subscribe(event => {
+        if (event instanceof NavigationEnd) {
+          this.modalService.setDismissReason('link');
+          this.modalService.hide();
+        }
+      });
     }
   
     getEffects() {
@@ -92,9 +102,9 @@ import { SeoService } from '@app/services/seo.service';
         );
       },
       error => {
-        this.error = true,
-        this.errorCode = error.status.toString(),
-        this.errorVars = this.errorService.getCodes(this.errorCode)
+        this.error = true;
+        this.errorCode = `${error.status}`;
+        this.errorVars = this.errorService.getCodes(this.errorCode);
       });
     }
   
@@ -103,9 +113,10 @@ import { SeoService } from '@app/services/seo.service';
       this.location.go(`${this.gameURL}/effects/` + slugname + "/" + this.language);
       this.modalRef = this.modalService.show(template);
       this.modalRef.onHide.subscribe((reason: string | any) => {
+        if(reason != "link") {
           this.location.go(`${this.gameURL}/effects/` + this.language);
           this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-        })
+        }})
     }
   
     private filterT(value: string, type: string): Effect[] {
@@ -149,5 +160,6 @@ import { SeoService } from '@app/services/seo.service';
     } 
   
     get f() { return this.pageForm.controls; }
+
   
   }

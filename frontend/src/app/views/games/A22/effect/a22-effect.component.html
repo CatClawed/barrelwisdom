@@ -1,11 +1,11 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="!error">
+<div *ngIf="effect">
 <nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}/effects">Effects</a></li>
+<li class="breadcrumb-item"><a href="/" (click)="historyService.history(); $event.preventDefault();">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.history(gameURL); $event.preventDefault();">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}/effects/{{language}" (click)="historyService.history(gameURL,'effects',language); $event.preventDefault();">Effects</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{effect.name}}</li>
   </ol>
 </nav>
@@ -27,18 +27,18 @@
         <p *ngIf="effect.note"><b>Note:</b> {{effect.note}}</p>
         <b *ngIf="effect.efftype == 'Normal' || effect.efftype == 'Material'">From Item:</b>
         <ul *ngIf="effect.effectline_set">
-          <li *ngFor="let e of effect.effectline_set"><a href="/{{gameURL}}/items/{{e.itemslug}}">{{e.itemname}}</a></li>
+          <li *ngFor="let e of effect.effectline_set"><a href="/{{gameURL}}/items/{{e.itemslug}}/{{language}}" (click)="historyService.history(gameURL,'items',language,e.itemslug); $event.preventDefault();">{{e.itemname}}</a></li>
         </ul>
         <b *ngIf="effect.efftype == 'EV'">Combines Effects:</b>
         <ul *ngIf="effect.effects && effect.efftype == 'EV'">
           <li *ngFor="let e of effect.effects">
-            <a href="javascript:void(0)" tooltip="{{e.desc}}" container="true">{{e.name}}</a>
+            <a href="javascript:void(0)" (click)="$event.preventDefault();" tooltip="{{e.desc}}" container="true">{{e.name}}</a>
           </li>
         </ul>
         <b *ngIf="(effect.efftype == 'Normal' || effect.efftype == 'Material') && effect.parent">Child Effects:</b>
         <b *ngIf="(effect.efftype != 'Normal' && effect.efftype != 'Material') && effect.parent">Parent Effects:</b>
         <ul *ngIf="effect.parent">
-          <li *ngFor="let e of effect.parent"><a href="/{{gameURL}}/effects/{{e.slugname}}">{{e.name}}</a></li>
+          <li *ngFor="let e of effect.parent"><a href="/{{gameURL}}/effects/{{e.slugname}}/{{language}}" (click)="historyService.history(gameURL,'effects',language,e.slugname); $event.preventDefault();">{{e.name}}</a></li>
         </ul>
       </div>
 </div>

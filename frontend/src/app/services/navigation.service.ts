@@ -11,6 +11,8 @@ export class NavigationService {
   private navSubject: BehaviorSubject<INavData[]>;
   public nav: Observable<INavData[]>;
   public n: INavData[];
+  public blogNav = ['user', 'settings', 'tag', 'login', 'register'];
+  previousSection = "";
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -22,9 +24,14 @@ export class NavigationService {
       this.navSubject = new BehaviorSubject<INavData[]>(this.n);
       this.nav = this.navSubject.asObservable();
 
-      router.events.subscribe(val => {
+      this.router.events.subscribe(val => {
           if(val instanceof NavigationEnd) {
-            let section = router.url.split('/')[1];
+            let section = this.router.url.split('/')[1];
+            if(/^\d+/.test(section) || /^create.*/.test(section) || this.blogNav.includes(section) || !section) {
+              section = 'blog'
+            }
+            if(section != this.previousSection) {
+              this.previousSection = section;
             this.getNav(section).subscribe(data => {
               this.n = JSON.parse(data.data);
               this.navSubject.next(this.n);
@@ -35,8 +42,10 @@ export class NavigationService {
                 this.navSubject.next(this.n);
               });
             });
+          }
         }});
   }
+
 
   getNav(section: string): Observable<any> {
     if(section && section != "tags" && section != "user" && section != "settings" && section != "create") {

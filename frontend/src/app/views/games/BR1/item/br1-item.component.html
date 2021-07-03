@@ -3,9 +3,9 @@
 <div *ngIf="!error">
 <nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}/items">Items</a></li>
+    <li class="breadcrumb-item"><a routerLink="/">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a routerLink="/{{gameURL}}">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a routerLink="/{{gameURL}}/items">Items</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{item.name}}</li>
   </ol>
 </nav>
@@ -23,7 +23,7 @@
       <p><b *ngIf="item.acquisition">Acquisition: </b>{{item.acquisition}}</p>
       <b *ngIf="item.missions">Missions:</b>
       <ul *ngIf="item.missions">
-        <li *ngFor="let miss of item.missions"><a href="/{{gameURL}}/missions/{{language}}/#{{miss.slugname}}">{{miss.name}}</a></li>
+        <li *ngFor="let miss of item.missions"><a routerLink="/{{gameURL}}/missions/{{language}}" fragment="{{miss.slugname}}">{{miss.name}}</a></li>
       </ul>
       <b *ngIf="item.locations">Locations:</b>
       <ul *ngIf="item.locations">
@@ -31,11 +31,11 @@
       </ul>
       <b *ngIf="item.demons">Demons:</b>
       <ul *ngIf="item.demons">
-        <li *ngFor="let demon of item.demons"><a href="/{{gameURL}}/demons/{{demon.slugname}}/{{language}}">{{demon.name}}</a></li>
+        <li *ngFor="let demon of item.demons"><a routerLink="/{{gameURL}}/demons/{{demon.slugname}}/{{language}}">{{demon.name}}</a></li>
       </ul>
       <b *ngIf="item.ingredient_set">Craft:</b>
       <ul *ngIf="item.ingredient_set">
-        <li *ngFor="let ing of item.ingredient_set"><a href="/{{gameURL}}/items/{{ing.item.slugname}}/{{language}}">{{ing.item.name}}</a> x{{ing.num}}</li>
+        <li *ngFor="let ing of item.ingredient_set"><a routerLink="/{{gameURL}}/items/{{ing.item.slugname}}/{{language}}">{{ing.item.name}}</a> x{{ing.num}}</li>
       </ul>
      </div>
   </div>

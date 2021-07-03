@@ -3,13 +3,13 @@
 <div *ngIf="!error">
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a routerLink="/">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a routerLink="/{{gameURL}}">{{gameTitle}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">Demons</li>
   </ol>
 </nav>
 <h1>Demons</h1>
-<div class ="col-lg-10 mx-auto">
+<div class="col-lg-10 mx-auto">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
         <mat-form-field class="col-lg-8" appearance="outline">
@@ -38,7 +38,7 @@
            </ul>
            <b *ngIf="demon.item_set">Items:</b>
            <ul *ngIf="demon.item_set">
-             <li *ngFor="let item of demon.item_set"><a href="/{{gameURL}}/items/{{item.slugname}}/{{language}}">{{item.name}}</a></li>
+             <li *ngFor="let item of demon.item_set"><a routerLink="/{{gameURL}}/items/{{item.slugname}}/{{language}}">{{item.name}}</a></li>
            </ul>
            <table class="table table-shrink">
              <tr><td>HP</td><td>ATK</td><td>DEF</td><td>AGI</td><td>LUK</td></tr>

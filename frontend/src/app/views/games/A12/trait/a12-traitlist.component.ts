@@ -1,10 +1,11 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Trait } from '@app/interfaces/a12';
 import { A12Service } from '@app/services/a12.service';
+import { HistoryService} from '@app/services/history.service';
 import { ErrorCodeService } from "@app/services/errorcode.service";
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -40,10 +41,12 @@ export class A12TraitlistComponent implements OnInit {
 
   constructor(
     private modalService: BsModalService,
+    private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private location: Location,
     private a12service: A12Service,
+    public historyService: HistoryService,
     private errorService: ErrorCodeService,
     private seoService: SeoService) { 
     this.traitControl = new FormControl();
@@ -76,6 +79,13 @@ export class A12TraitlistComponent implements OnInit {
     this.traitControl.valueChanges.subscribe(search => {
       this.searchstring = search;
     });
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.modalService.setDismissReason('link');
+        this.modalService.hide();
+      }
+    });
   }
 
   getTraits() {
@@ -88,9 +98,9 @@ export class A12TraitlistComponent implements OnInit {
       );
     },
     error => {
-      this.error = true,
-      this.errorCode = error.status.toString(),
-      this.errorVars = this.errorService.getCodes(this.errorCode)
+      this.error = true;
+      this.errorCode = `${error.status}`;
+      this.errorVars = this.errorService.getCodes(this.errorCode);
     });
   }
 

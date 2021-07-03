@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute }from '@angular/router';
 import { MonsterFull } from '@app/interfaces/a15';
 import { A15Service } from '@app/services/a15.service';
+import { HistoryService} from '@app/services/history.service';
 import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
 
@@ -41,6 +42,7 @@ export class A15MonsterComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private a15service: A15Service,
+    public historyService: HistoryService,
     private errorService: ErrorCodeService,
     private seoService: SeoService) {
       if(this.route.snapshot.params.monster != null) {
@@ -69,7 +71,7 @@ export class A15MonsterComponent implements OnInit {
     },
     error => {
       this.error = true;
-      this.errorCode = error.status.toString();
+      this.errorCode = `${error.status}`;
       this.errorVars = this.errorService.getCodes(this.errorCode);
     });
   }

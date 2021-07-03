@@ -1,15 +1,15 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="!error">
+<div *ngIf="filteredProperties">
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a href="/" (click)="historyService.history(); $event.preventDefault();">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.history(gameURL); $event.preventDefault();">{{gameTitle}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">Properties</li>
   </ol>
 </nav>
 <h1>Properties</h1>
-<div class ="col-md-10 mx-auto">
+<div class="col-md-10 mx-auto">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
         <mat-form-field class="col-md-5" appearance="outline">
@@ -64,17 +64,17 @@
         </div>
         <div class="card-text">
           <p *ngIf="prop.combo1">
-            <a href="/{{gameURL}}/properties/{{prop.combo1.slugname}}">{{prop.combo1.name}}</a> <span> x </span>
-            <a href="/{{gameURL}}/properties/{{prop.combo2.slugname}}">{{prop.combo2.name}}</a>
-            <span *ngIf="prop.combo3"> x </span> <a *ngIf="prop.combo3" href="/{{gameURL}}/properties/{{prop.combo3.slugname}}">{{prop.combo3.name}}</a>
+            <a href="/{{gameURL}}/properties/{{prop.combo1.slugname}}/{{language}}" (click)="historyService.history(gameURL,'properties',language,prop.combo1.slugname); $event.preventDefault();">{{prop.combo1.name}}</a> <span> x </span>
+            <a href="/{{gameURL}}/properties/{{prop.combo2.slugname}}/{{language}}" (click)="historyService.history(gameURL,'properties',language,prop.combo2.slugname); $event.preventDefault();">{{prop.combo2.name}}</a>
+            <span *ngIf="prop.combo3"> x </span> <a *ngIf="prop.combo3" href="/{{gameURL}}/properties/{{prop.combo3.slugname}}/{{language}}" (click)="historyService.history(gameURL,'properties',language,prop.combo3.slugname); $event.preventDefault();">{{prop.combo3.name}}</a>
           </p>
           <p>{{prop.desc}}</p>
           <div *ngIf="prop.item_set">
             <b>Items:</b>
             <ul>
-              <li *ngIf="prop.item_set.length >= 1"><a href="/{{gameURL}}/items/{{prop.item_set[0].slugname}}">{{prop.item_set[0].name}}</a></li>
-              <li *ngIf="prop.item_set.length >= 2"><a href="/{{gameURL}}/items/{{prop.item_set[1].slugname}}">{{prop.item_set[1].name}}</a></li>
-              <li *ngIf="prop.item_set.length >= 3"><a href="/{{gameURL}}/items/{{prop.item_set[2].slugname}}">{{prop.item_set[2].name}}</a></li>
+              <li *ngIf="prop.item_set.length >= 1"><a href="/{{gameURL}}/items/{{prop.item_set[0].slugname}}/{{language}}" (click)="historyService.history(gameURL,'items',language,prop.item_set[0].slugname); $event.preventDefault();">{{prop.item_set[0].name}}</a></li>
+              <li *ngIf="prop.item_set.length >= 2"><a href="/{{gameURL}}/items/{{prop.item_set[1].slugname}}/{{language}}" (click)="historyService.history(gameURL,'items',language,prop.item_set[1].slugname); $event.preventDefault();">{{prop.item_set[1].name}}</a></li>
+              <li *ngIf="prop.item_set.length >= 3"><a href="/{{gameURL}}/items/{{prop.item_set[2].slugname}}/{{language}}" (click)="historyService.history(gameURL,'items',language,prop.item_set[2].slugname); $event.preventDefault();">{{prop.item_set[2].name}}</a></li>
               <li *ngIf="prop.item_set.length >= 4"><a (click)="openModal(propertyModal, prop.slugname); $event.preventDefault();" href="/{{gameURL}}/properties/{{prop.slugname}}/{{language}}">See more...</a></li>
             </ul>
           <p *ngIf="prop.grade >= 0"><a href="javascript:void(0)"

@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute }from '@angular/router';
 import { Effect } from '@app/interfaces/a12';
 import { A12Service } from '@app/services/a12.service';
+import { HistoryService} from '@app/services/history.service';
 import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
 
@@ -41,6 +42,7 @@ export class A12EffectComponent implements OnInit {
 constructor(
     private route: ActivatedRoute,
     private a12service: A12Service,
+    public historyService: HistoryService,
     private errorService: ErrorCodeService,
     private seoService: SeoService) {
       if(this.route.snapshot.params.effect != null) {
@@ -66,9 +68,9 @@ constructor(
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error => {
-      this.error = true,
-      this.errorCode = error.status.toString(),
-      this.errorVars = this.errorService.getCodes(this.errorCode)
+      this.error = true;
+      this.errorCode = `${error.status}`;
+      this.errorVars = this.errorService.getCodes(this.errorCode);
     });
   }
 } 

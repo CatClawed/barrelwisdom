@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute }from '@angular/router';
 import { Book } from '@app/interfaces/a16';
 import { A16Service } from '@app/services/a16.service';
+import { HistoryService} from '@app/services/history.service';
 import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
 
@@ -41,6 +42,7 @@ export class A16BookComponent implements OnInit {
 constructor(
     private route: ActivatedRoute,
     private a16service: A16Service,
+    public historyService: HistoryService,
     private errorService: ErrorCodeService,
     private seoService: SeoService) {
       if(this.route.snapshot.params.book != null) {
@@ -57,15 +59,19 @@ constructor(
         this.error = false;
         this.book = book;
 
-        this.seoURL = `shallie/recipe-books/${this.book.slugname}/${this.language}`;
-        this.seoTitle = `${this.book.name} - Atelier Shallie`;
+        this.gameTitle = this.a16service.gameTitle;
+        this.gameURL = this.a16service.gameURL;
+        this.imgURL = this.a16service.imgURL;
+
+        this.seoURL = `${this.gameURL}/recipe-books/${this.book.slugname}/${this.language}`;
+        this.seoTitle = `${this.book.name} - ${this.gameTitle}`;
         this.seoDesc = `${this.book.desc}`
-        this.seoImage = `/media/games/shallie/items/${this.book.slugname}.png`
+        this.seoImage = `${this.imgURL}items/${this.book.slugname}.png`
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error => {
       this.error = true;
-      this.errorCode = error.status.toString();
+      this.errorCode = `${error.status}`;
       this.errorVars = this.errorService.getCodes(this.errorCode);
     });
   }

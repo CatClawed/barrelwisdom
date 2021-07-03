@@ -3,14 +3,14 @@
 <div *ngIf="!error">
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a routerLink="/">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a routerLink="/{{gameURL}}">{{gameTitle}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">Fragment Effects</li>
   </ol>
 </nav>
 <h1>Fragment Effects</h1>
-<p>See <a href="/bluereflection/fragment-episodes">Fragment Episodes</a> for acqusition data.
-<div class ="col-md-10 mx-auto">
+<p>See <a routerLink="/bluereflection/fragment-episodes">Fragment Episodes</a> for acqusition data.
+<div class="col-md-10 mx-auto">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
         <mat-form-field class="col-md-8" appearance="outline">
@@ -33,7 +33,7 @@
            <p>{{frag.effect}}</p>
            <b *ngIf="frag.upgrades">Upgrade:</b>
            <ul *ngIf="frag.upgrades">
-             <li *ngFor="let up of frag.upgrades"><a href="/{{gameURL}}/items/{{up.item.slugname}}/{{language}}">{{up.item.name}}</a> x{{up.num}}</li>
+             <li *ngFor="let up of frag.upgrades"><a routerLink="/{{gameURL}}/items/{{up.item.slugname}}/{{language}}">{{up.item.name}}</a> x{{up.num}}</li>
            </ul>
           </div>
        </div>

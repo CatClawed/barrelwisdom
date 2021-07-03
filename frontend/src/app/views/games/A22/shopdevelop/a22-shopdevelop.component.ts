@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute }from '@angular/router';
 import { ShopDevelop } from '@app/interfaces/a22';
 import { A22Service } from '@app/services/a22.service';
+import { HistoryService } from '@app/services/history.service';
 import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
 
@@ -33,6 +34,7 @@ export class A22ShopDevelopComponent implements OnInit {
 
 constructor(
     private route: ActivatedRoute,
+    public historyService: HistoryService,
     private a22service: A22Service,
     private errorService: ErrorCodeService,
     private seoService: SeoService) {
@@ -55,9 +57,9 @@ constructor(
     },
     error => {
         console.log(error)
-      this.error = true,
-      this.errorCode = error.status.toString(),
-      this.errorVars = this.errorService.getCodes(this.errorCode)
+      this.error = true;
+      this.errorCode = `${error.status}`;
+      this.errorVars = this.errorService.getCodes(this.errorCode);
     });
   }
 } 
