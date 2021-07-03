@@ -1,15 +1,16 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
 <div *ngIf="!error">
-<nav style="margin-top: 1em;" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a routerLink="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a routerLink="/{{gameURL}}">{{gameTitle}}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Missions</li>
-  </ol>
-</nav>
-<h1>Missions</h1>
-<div *ngFor="let mission of missions " class="row">
+ <nav style="margin-top: 1em;" aria-label="breadcrumb">
+ <ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
+   <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.hrefClicked($event)">{{gameTitle}}</a></li>
+   <li class="breadcrumb-item active" aria-current="page">Missions</li>
+ </ol>
+ </nav>
+ <h1>Missions</h1>
+ <ng-container *ngIf="missions">
+ <div *ngFor="let mission of missions " class="row">
   <div class="spacer col-md-7 mx-auto">
     <div *ngIf="mission" class="card allheight">
        <div class="card-body">
@@ -21,19 +22,20 @@
             <b *ngIf="mission.character" style="padding-right:0.5em;">{{mission.character}}</b>
             <br *ngIf="mission.points" /><b *ngIf="mission.chapter" style="padding-right:0.5em;">Ch.{{mission.chapter}}</b>
           </div>
-         </div>
-         <div class="card-text">
-         <b *ngIf="mission.reward || mission.points">Reward:</b>
+          <div class="card-text">
+           <b *ngIf="mission.reward || mission.points">Reward:</b>
            <ul>
              <li *ngIf="mission.points">{{mission.points}} points</li>
              <li *ngIf="mission.reward">{{mission.reward}}</li>
            </ul>
            <p *ngIf="mission.location">{{mission.location}}</p>
            <b *ngIf="mission.details">Details:</b>
-           <div [innerHTML]="mission.details"></div>
+           <div (click)="historyService.hrefClicked($event);" [innerHTML]="mission.details"></div>
           </div>
+         </div>
        </div>
-      </div>
     </div>
   </div>
+ </div>
+ </ng-container>
 </div>

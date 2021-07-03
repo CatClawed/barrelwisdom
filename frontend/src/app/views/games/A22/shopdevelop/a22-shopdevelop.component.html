@@ -3,8 +3,8 @@
 <div *ngIf="shopdevelop">
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
-<li class="breadcrumb-item"><a href="/" (click)="historyService.history(); $event.preventDefault();">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.history(gameURL); $event.preventDefault();">{{gameTitle}}</a></li>
+<li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.hrefClicked($event)">{{gameTitle}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">Shop Development</li>
   </ol>
 </nav>
@@ -19,14 +19,14 @@
                 <th>Bonus</th>
             </tr>
             <tr *ngFor="let dev of shopdevelop">
-                <td><a href="/{{gameURL}}/items/{{dev.item.slugname}}/{{language}}" (click)="historyService.history(gameURL,'items',language,dev.item.slugname); $event.preventDefault();">{{dev.item.name}}</a></td>
+                <td><a href="/{{gameURL}}/items/{{dev.item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{dev.item.name}}</a></td>
                 <td>
-                    <a href="/{{gameURL}}/categories/{{dev.cat1.slugname}}/{{language}}" (click)="historyService.history(gameURL,'categories',language,dev.cat1.slugname); $event.preventDefault();">{{dev.cat1.name}}</a>
-                    <br *ngIf="dev.cat2" /> <a *ngIf="dev.cat2" href="/{{gameURL}}/categories/{{dev.cat2.slugname}}/{{language}}" (click)="historyService.history(gameURL,'categories',language,dev.cat2.slugname); $event.preventDefault();">{{dev.cat2.name}}</a>
+                    <a href="/{{gameURL}}/categories/{{dev.cat1.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{dev.cat1.name}}</a>
+                    <br *ngIf="dev.cat2" /> <a *ngIf="dev.cat2" href="/{{gameURL}}/categories/{{dev.cat2.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{dev.cat2.name}}</a>
                 </td>
                 <td>
-                    <a *ngIf="dev.addProd" href="/{{gameURL}}/items/{{dev.addProd.slugname}}/{{language}}" (click)="historyService.history(gameURL,'items',language,dev.addProd.slugname); $event.preventDefault();">{{dev.addProd.name}}</a>
-                    <a *ngIf="dev.addCat" href="/{{gameURL}}/categories/{{dev.addCat.slugname}}/{{language}}" (click)="historyService.history(gameURL,'categories',language,dev.addCat.slugname); $event.preventDefault();">{{dev.addCat.name}}</a>
+                    <a *ngIf="dev.addProd" href="/{{gameURL}}/items/{{dev.addProd.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{dev.addProd.name}}</a>
+                    <a *ngIf="dev.addCat" href="/{{gameURL}}/categories/{{dev.addCat.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{dev.addCat.name}}</a>
                 </td>
             </tr>
         </table>

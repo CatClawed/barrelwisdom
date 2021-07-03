@@ -3,8 +3,8 @@
 <div *ngIf="!error">
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/" (click)="historyService.history(); $event.preventDefault();">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.history(gameURL); $event.preventDefault();">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.hrefClicked($event)">{{gameTitle}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">Effects</li>
   </ol>
 </nav>
@@ -36,9 +36,9 @@
         <div style="padding-right:1rem;margin-right:1rem;" class="card-text">
           <p *ngIf="eff.desc">{{eff.desc}}</p>
           <ul *ngIf="eff.effectdata_set">
-            <li *ngIf="eff.effectdata_set.length >= 1"><a href="/{{gameURL}}/items/{{eff.effectdata_set[0].effectlines_set[0].slugname}}" (click)="historyService.history(gameURL,'items',language,eff.effectdata_set[0].effectlines_set[0].slugname); $event.preventDefault();">{{eff.effectdata_set[0].effectlines_set[0].name}}</a></li>
-            <li *ngIf="eff.effectdata_set.length >= 2"><a href="/{{gameURL}}/items/{{eff.effectdata_set[1].effectlines_set[0].slugname}}" (click)="historyService.history(gameURL,'items',language,eff.effectdata_set[1].effectlines_set[0].slugname); $event.preventDefault();">{{eff.effectdata_set[1].effectlines_set[0].name}}</a></li>
-            <li *ngIf="eff.effectdata_set.length >= 3"><a href="/{{gameURL}}/items/{{eff.effectdata_set[2].effectlines_set[0].slugname}}" (click)="historyService.history(gameURL,'items',language,eff.effectdata_set[2].effectlines_set[0].slugname); $event.preventDefault();">{{eff.effectdata_set[2].effectlines_set[0].name}}</a></li>
+            <li *ngIf="eff.effectdata_set.length >= 1"><a href="/{{gameURL}}/items/{{eff.effectdata_set[0].effectlines_set[0].slugname}}" (click)="historyService.hrefClicked($event)">{{eff.effectdata_set[0].effectlines_set[0].name}}</a></li>
+            <li *ngIf="eff.effectdata_set.length >= 2"><a href="/{{gameURL}}/items/{{eff.effectdata_set[1].effectlines_set[0].slugname}}" (click)="historyService.hrefClicked($event)">{{eff.effectdata_set[1].effectlines_set[0].name}}</a></li>
+            <li *ngIf="eff.effectdata_set.length >= 3"><a href="/{{gameURL}}/items/{{eff.effectdata_set[2].effectlines_set[0].slugname}}" (click)="historyService.hrefClicked($event)">{{eff.effectdata_set[2].effectlines_set[0].name}}</a></li>
             <li *ngIf="eff.effectdata_set.length >= 4"><a (click)="openModal(effectModal, eff.slugname); $event.preventDefault();" href="/{{gameURL}}/effects/{{eff.slugname}}/{{language}}">See more...</a></li>
         </ul>
         </div>

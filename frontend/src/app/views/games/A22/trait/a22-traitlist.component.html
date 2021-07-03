@@ -3,8 +3,8 @@
 <div *ngIf="!error">
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
-<li class="breadcrumb-item"><a href="/" (click)="historyService.history(); $event.preventDefault();">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.history(gameURL); $event.preventDefault();">{{gameTitle}}</a></li>
+<li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.hrefClicked($event)">{{gameTitle}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">Traits</li>
   </ol>
 </nav>
@@ -71,7 +71,7 @@
             <br /><span class="badge bg-secondary" *ngIf="trt.grade > 50">DLC</span>
           </div>
           <div *ngIf="trt.item_set.length > 0">
-            <i class="atelier atelier-sm atelier-ryza2-material"></i><a href="/{{gameURL}}/items/{{trt.item_set[0].slugname}}/{{language}}" (click)="historyService.history(gameURL,'items',language,trt.item_set[0].slugname); $event.preventDefault();">{{trt.item_set[0].name}}</a>
+            <i class="atelier atelier-sm atelier-ryza2-material"></i><a href="/{{gameURL}}/items/{{trt.item_set[0].slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{trt.item_set[0].name}}</a>
           </div>
         </div>
         <div class="card-text">

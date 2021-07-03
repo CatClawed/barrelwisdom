@@ -3,9 +3,9 @@
 <div *ngIf="property">
 <nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/" (click)="historyService.history(); $event.preventDefault();">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.history(gameURL); $event.preventDefault();">{{gameTitle}}</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}/properties/{{language}}" (click)="historyService.history(gameURL,'properties',language); $event.preventDefault();">Properties</a></li>
+    <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.hrefClicked($event)">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}/properties/{{language}}" (click)="historyService.hrefClicked($event)">Properties</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{property.name}}</li>
   </ol>
 </nav>
@@ -17,15 +17,15 @@
     </div>
     <div class="card-text">
       <p *ngIf="property.combo1">
-        <a href="/{{gameURL}}/properties/{{property.combo1.slugname}}/{{language}}" (click)="historyService.history(gameURL,'properties',language,property.combo1.slugname); $event.preventDefault();">{{property.combo1.name}}</a>
-        <span *ngIf="property.combo2"> x </span><a *ngIf="property.combo2" href="/{{gameURL}}/properties/{{property.combo2.slugname}}/{{language}}" (click)="historyService.history(gameURL,'properties',language,property.combo2.slugname); $event.preventDefault();">{{property.combo2.name}}</a>
-        <span *ngIf="property.combo3"> x </span><a *ngIf="property.combo3" href="/{{gameURL}}/properties/{{property.combo3.slugname}}/{{language}}" (click)="historyService.history(gameURL,'properties',language,property.combo3.slugname); $event.preventDefault();">{{property.combo3.name}}</a>
+        <a href="/{{gameURL}}/properties/{{property.combo1.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{property.combo1.name}}</a>
+        <span *ngIf="property.combo2"> x </span><a *ngIf="property.combo2" href="/{{gameURL}}/properties/{{property.combo2.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{property.combo2.name}}</a>
+        <span *ngIf="property.combo3"> x </span><a *ngIf="property.combo3" href="/{{gameURL}}/properties/{{property.combo3.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{property.combo3.name}}</a>
       </p>
       <p>{{property.desc}}</p>
       <div *ngIf="property.item_set">
         <b>Items:</b>
           <ul>
-            <li *ngFor="let item of property.item_set"><a href="/{{gameURL}}/items/{{item.slugname}}/{{language}}" (click)="historyService.history(gameURL,'items',language,item.slugname); $event.preventDefault();">{{item.name}}</a></li>
+            <li *ngFor="let item of property.item_set"><a href="/{{gameURL}}/items/{{item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.name}}</a></li>
           </ul>
       </div>
       <p *ngIf="property.grade != -1"><a href="javascript:void(0)"

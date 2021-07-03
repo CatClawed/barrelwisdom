@@ -1,63 +1,81 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
-
 <div *ngIf="!error">
-<nav style="margin-top: 1em;" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a routerLink="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a routerLink="/{{gameURL}}">{{gameTitle}}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Demons</li>
-  </ol>
-</nav>
-<h1>Demons</h1>
-<div class="col-lg-10 mx-auto">
-    <form [formGroup]="pageForm" class="form-horizontal">
-      <div class="row">
-        <mat-form-field class="col-lg-8" appearance="outline">
-          <mat-label>Filter...</mat-label>
-          <input style="height: 100%;" matInput formControlName="filtertext">
-        </mat-form-field>
-      </div>
-    </form>
-  </div>
-<div *ngFor="let demons of filteredDemons | async| pair " class="row">
-  <div *ngFor="let demon of demons" class="spacer col-lg-5 mx-auto">
-    <div *ngIf="demon" class="card allheight">
-       <div class="card-body">
-         <div class="flex">
-           <h4 style="margin-right:2em;" class="card-title  card-icon-space">
-             <a style="color: black;" (click)="openModal(demonModal, demon.slugname); $event.preventDefault();" href="/{{gameURL}}/demons/{{demon.slugname}}/{{language}}">{{demon.name}}</a>    
-           </h4>
-             <div class="card-icon-position">
-               <b *ngIf="demon.race" style="padding-right:0.5em;">{{demon.race}}</b>
-             </div>
+   <nav style="margin-top: 1em;" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
+         <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.hrefClicked($event)">{{gameTitle}}</a></li>
+         <li class="breadcrumb-item active" aria-current="page">Demons</li>
+      </ol>
+   </nav>
+   <h1>Demons</h1>
+   <div class="col-lg-10 mx-auto">
+      <form [formGroup]="pageForm" class="form-horizontal">
+         <div class="row">
+            <mat-form-field class="col-lg-8" appearance="outline">
+               <mat-label>Filter...</mat-label>
+               <input style="height: 100%;" matInput formControlName="filtertext">
+            </mat-form-field>
          </div>
-         <div class="card-text">
-           <b *ngIf="demon.locations">Locations:</b>
-           <ul *ngIf="demon.locations">
-             <li *ngFor="let loc of demon.locations">{{loc.name}}</li>
-           </ul>
-           <b *ngIf="demon.item_set">Items:</b>
-           <ul *ngIf="demon.item_set">
-             <li *ngFor="let item of demon.item_set"><a routerLink="/{{gameURL}}/items/{{item.slugname}}/{{language}}">{{item.name}}</a></li>
-           </ul>
-           <table class="table table-shrink">
-             <tr><td>HP</td><td>ATK</td><td>DEF</td><td>AGI</td><td>LUK</td></tr>
-             <tr><td>{{demon.hp}}</td><td>{{demon.atk}}</td><td>{{demon.dfn}}</td><td>{{demon.agi}}</td><td>{{demon.luk}}</td></tr>
-           </table>
-           <table class="table table-shrink">
-             <tr><td style="width:25%">Slash</td><td style="width:25%">Impact</td><td style="width:25%">Pierce</td><td style="width:25%">Heart</td></tr>
-             <tr>
-               <td style="width:25%"><span *ngIf="demon.slash" >{{demon.slash}} </span><span *ngIf="!demon.slash" >-</span></td>
-               <td style="width:25%"><span *ngIf="demon.impact">{{demon.impact}}</span><span *ngIf="!demon.impact">-</span></td>
-               <td style="width:25%"><span *ngIf="demon.pierce">{{demon.pierce}}</span><span *ngIf="!demon.pierce">-</span></td>
-               <td style="width:25%"><span *ngIf="demon.heart" >{{demon.heart}} </span><span *ngIf="!demon.heart" >-</span></td>
-            </tr>
-           </table>
+      </form>
+   </div>
+   <ng-container *ngIf="filteredDemons">
+      <div *ngFor="let demons of filteredDemons | async| pair " class="row">
+         <div *ngFor="let demon of demons" class="spacer col-lg-5 mx-auto">
+            <div *ngIf="demon" class="card allheight">
+               <div class="card-body">
+                  <div class="flex">
+                     <h4 style="margin-right:2em;" class="card-title  card-icon-space">
+                        <a style="color: black;" (click)="openModal(demonModal, demon.slugname); $event.preventDefault();" href="/{{gameURL}}/demons/{{demon.slugname}}/{{language}}">{{demon.name}}</a>    
+                     </h4>
+                     <div class="card-icon-position">
+                        <b *ngIf="demon.race" style="padding-right:0.5em;">{{demon.race}}</b>
+                     </div>
+                  </div>
+                  <div class="card-text">
+                     <b *ngIf="demon.locations">Locations:</b>
+                     <ul *ngIf="demon.locations">
+                        <li *ngFor="let loc of demon.locations">{{loc.name}}</li>
+                     </ul>
+                     <b *ngIf="demon.item_set">Items:</b>
+                     <ul *ngIf="demon.item_set">
+                        <li *ngFor="let item of demon.item_set"><a href="/{{gameURL}}/items/{{item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.name}}</a></li>
+                     </ul>
+                     <table class="table table-shrink">
+                        <tr>
+                           <td>HP</td>
+                           <td>ATK</td>
+                           <td>DEF</td>
+                           <td>AGI</td>
+                           <td>LUK</td>
+                        </tr>
+                        <tr>
+                           <td>{{demon.hp}}</td>
+                           <td>{{demon.atk}}</td>
+                           <td>{{demon.dfn}}</td>
+                           <td>{{demon.agi}}</td>
+                           <td>{{demon.luk}}</td>
+                        </tr>
+                     </table>
+                     <table class="table table-shrink">
+                        <tr>
+                           <td style="width:25%">Slash</td>
+                           <td style="width:25%">Impact</td>
+                           <td style="width:25%">Pierce</td>
+                           <td style="width:25%">Heart</td>
+                        </tr>
+                        <tr>
+                           <td style="width:25%"><span *ngIf="demon.slash" >{{demon.slash}} </span><span *ngIf="!demon.slash" >-</span></td>
+                           <td style="width:25%"><span *ngIf="demon.impact">{{demon.impact}}</span><span *ngIf="!demon.impact">-</span></td>
+                           <td style="width:25%"><span *ngIf="demon.pierce">{{demon.pierce}}</span><span *ngIf="!demon.pierce">-</span></td>
+                           <td style="width:25%"><span *ngIf="demon.heart" >{{demon.heart}} </span><span *ngIf="!demon.heart" >-</span></td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+            </div>
          </div>
-       </div>
       </div>
-    </div>
-  </div>
+   </ng-container>
 </div>
 
 <ng-template #demonModal>

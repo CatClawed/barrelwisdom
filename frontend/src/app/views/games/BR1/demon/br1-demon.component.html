@@ -1,11 +1,11 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="!error">
+<div *ngIf="demon">
 <nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a routerLink="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a routerLink="/{{gameURL}}">{{gameTitle}}</a></li>
-    <li class="breadcrumb-item"><a routerLink="/{{gameURL}}/demons">Demons</a></li>
+    <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.hrefClicked($event)">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}/demons/{{language}}" (click)="historyService.hrefClicked($event)">Demons</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{demon.name}}</li>
   </ol>
 </nav>
@@ -25,7 +25,7 @@
       </ul>
       <b *ngIf="demon.item_set">Items:</b>
       <ul *ngIf="demon.item_set">
-        <li *ngFor="let item of demon.item_set"><a routerLink="/{{gameURL}}/items/{{item.slugname}}/{{language}}">{{item.name}}</a></li>
+        <li *ngFor="let item of demon.item_set"><a href="/{{gameURL}}/items/{{item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.name}}</a></li>
       </ul>
       <table class="table table-shrink">
         <tr><td>HP</td><td>ATK</td><td>DEF</td><td>AGI</td><td>LUK</td></tr>

@@ -1,43 +1,45 @@
-<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 <div *ngIf="!error">
-<nav style="margin-top: 1em;" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a routerLink="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a routerLink="/{{gameURL}}">{{gameTitle}}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Fragment Effects</li>
-  </ol>
-</nav>
-<h1>Fragment Effects</h1>
-<p>See <a routerLink="/bluereflection/fragment-episodes">Fragment Episodes</a> for acqusition data.
-<div class="col-md-10 mx-auto">
-    <form [formGroup]="pageForm" class="form-horizontal">
-      <div class="row">
-        <mat-form-field class="col-md-8" appearance="outline">
-          <mat-label>Filter...</mat-label>
-          <input style="height: 100%;" matInput formControlName="filtertext">
-        </mat-form-field>
-      </div>
-    </form>
-  </div>
-<div *ngFor="let fragmenteffects of filteredFragmentEffects | async| pair " class="row">
-  <div *ngFor="let frag of fragmenteffects" class="spacer col-md-5 mx-auto">
-    <div *ngIf="frag" class="card allheight">
-       <div class="card-body">
-         <div class="flex">
-           <h4 style="margin-right:2em;" class="card-title  card-icon-space" id="{{frag.slugname}}">
-             {{frag.name}}
-           </h4>
+   <nav style="margin-top: 1em;" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
+         <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.hrefClicked($event)">{{gameTitle}}</a></li>
+         <li class="breadcrumb-item active" aria-current="page">Fragment Effects</li>
+      </ol>
+   </nav>
+   <h1>Fragment Effects</h1>
+   <p>See <a href="/{{gameURL}}/fragment-episodes" (click)="historyService.hrefClicked($event)">Fragment Episodes</a> for acqusition data.
+   <div class="col-md-10 mx-auto">
+      <form [formGroup]="pageForm" class="form-horizontal">
+         <div class="row">
+            <mat-form-field class="col-md-8" appearance="outline">
+               <mat-label>Filter...</mat-label>
+               <input style="height: 100%;" matInput formControlName="filtertext">
+            </mat-form-field>
          </div>
-         <div class="card-text">
-           <p>{{frag.effect}}</p>
-           <b *ngIf="frag.upgrades">Upgrade:</b>
-           <ul *ngIf="frag.upgrades">
-             <li *ngFor="let up of frag.upgrades"><a routerLink="/{{gameURL}}/items/{{up.item.slugname}}/{{language}}">{{up.item.name}}</a> x{{up.num}}</li>
-           </ul>
-          </div>
-       </div>
+      </form>
+   </div>
+   <ng-container *ngIf="filteredFragmentEffects">
+      <div *ngFor="let fragmenteffects of filteredFragmentEffects | async| pair " class="row">
+         <div *ngFor="let frag of fragmenteffects" class="spacer col-md-5 mx-auto">
+            <div *ngIf="frag" class="card allheight">
+               <div class="card-body">
+                  <div class="flex">
+                     <h4 style="margin-right:2em;" class="card-title  card-icon-space" id="{{frag.slugname}}">
+                        {{frag.name}}
+                     </h4>
+                  </div>
+                  <div class="card-text">
+                     <p>{{frag.effect}}</p>
+                     <b *ngIf="frag.upgrades">Upgrade:</b>
+                     <ul *ngIf="frag.upgrades">
+                        <li *ngFor="let up of frag.upgrades"><a href="/{{gameURL}}/items/{{up.item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{up.item.name}}</a> x{{up.num}}</li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
       </div>
-    </div>
-  </div>
+   </ng-container>
 </div>

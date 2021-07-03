@@ -20,11 +20,12 @@ export class HistoryService {
     		    return;
 
         if(targetElement.href && !this.isExternalURL(targetElement.href)) {
+          console.log('howdy')
           $event.preventDefault();
           if(targetElement.href.indexOf('#') > -1) {
             let url = targetElement.href.split('#');
             let links = url[0].split('/').splice(3);
-            this.router.navigate(links, { fragment : url[1] });
+            this.router.navigate(links, { fragment : `${url[1]}` });
           }
           else {
             let links = targetElement.href.split('/').splice(3);
@@ -36,30 +37,4 @@ export class HistoryService {
     isExternalURL(url) {
       return new URL(url).origin !== location.origin;
     }
-
-    public history(game?: string, type?: string, language?: string, item?: string, frag?: string) {
-        let url = [];
-        if(game) {
-          url.push(`${game}`);
-        }
-        if(!game){
-          url.push('')
-        }
-        if(type) {
-          url.push(`${type}`);
-        }
-        if(item) {
-          url.push(`${item}`);
-        }
-        if(language) {
-          url.push(`${language}`);
-        }
-        if(frag) {
-          this.router.navigate(url, { fragment : `${frag}` });
-        }
-        else {
-          this.router.navigate(url);
-        }
-      }
-    
 }

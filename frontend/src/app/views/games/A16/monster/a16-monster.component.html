@@ -3,9 +3,9 @@
 <div *ngIf="monster">
 <nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/" (click)="historyService.history(); $event.preventDefault();">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.history(gameURL); $event.preventDefault();">{{gameTitle}}</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}/monsters/{{language}}" (click)="historyService.history(gameURL,'monsters',language); $event.preventDefault();">Monsters</a></li>
+    <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.hrefClicked($event)">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}/monsters/{{language}}" (click)="historyService.hrefClicked($event)">Monsters</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{monster.name}}</li>
   </ol>
 </nav>
@@ -26,11 +26,11 @@
           <div class="col-md-6">
         <b *ngIf="monster.locations">Locations:</b>
         <ul *ngIf="monster.locations">
-           <li *ngFor="let loc of monster.locations"><a href="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}" (click)="historyService.history(gameURL,'locations',language,loc.parentslug, loc.slugname); $event.preventDefault();">{{loc.name}}</a></li>
+           <li *ngFor="let loc of monster.locations"><a href="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}#{{loc.slugname}}" (click)="historyService.hrefClicked($event)">{{loc.name}}</a></li>
         </ul>
         <b *ngIf="monster.item_set">Drops:</b>
         <ul *ngIf="monster.item_set">
-          <li *ngFor="let drop of monster.item_set"><a href="/{{gameURL}}/items/{{drop.slugname}}/{{language}}" (click)="historyService.history(gameURL,'items',language,drop.slugname); $event.preventDefault();">{{drop.name}}</a></li>
+          <li *ngFor="let drop of monster.item_set"><a href="/{{gameURL}}/items/{{drop.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{drop.name}}</a></li>
         </ul>
       </div>
       <div class="col-md=6">

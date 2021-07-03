@@ -3,9 +3,9 @@
 <div *ngIf="effect">
 <nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/" (click)="historyService.history(); $event.preventDefault();">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.history(gameURL); $event.preventDefault();">{{gameTitle}}</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}/effects/{{language}}" (click)="historyService.history(gameURL,'effects',language); $event.preventDefault();">Effects</a></li>
+    <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.hrefClicked($event)">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}/effects/{{language}}" (click)="historyService.hrefClicked($event)">Effects</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{effect.name}}</li>
   </ol>
 </nav>
@@ -19,7 +19,7 @@
         <b *ngIf="effect.effectdata_set">From Item:</b>
         <ul *ngIf="effect.effectdata_set">
           <li *ngFor="let e of effect.effectdata_set">
-            <a href="/{{gameURL}}/items/{{e.effectlines_set[0].slugname}}/{{language}}" (click)="historyService.history(gameURL,'items',language,e.effectlines_set[0].slugname); $event.preventDefault();">{{e.effectlines_set[0].name}}</a>
+            <a href="/{{gameURL}}/items/{{e.effectlines_set[0].slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{e.effectlines_set[0].name}}</a>
           </li>
         </ul>
     </div>

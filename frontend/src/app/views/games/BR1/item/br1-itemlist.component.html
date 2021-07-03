@@ -1,63 +1,63 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
-
 <div *ngIf="!error">
-<nav style="margin-top: 1em;" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a routerLink="/">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a routerLink="/{{gameURL}}">{{gameTitle}}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Items</li>
-  </ol>
-</nav>
-<h1>Items</h1>
-<div class="col-md-10 mx-auto">
-    <form [formGroup]="pageForm" class="form-horizontal">
-      <div class="row">
-        <mat-form-field class="col-md-8" appearance="outline">
-          <mat-label>Filter...</mat-label>
-          <input style="height: 100%;" matInput formControlName="filtertext">
-        </mat-form-field>
-      </div>
-    </form>
-  </div>
-<div *ngFor="let item of filteredItems | async| pair " class="row">
-  <div *ngFor="let it of item" class="spacer col-md-5 mx-auto">
-    <div *ngIf="it" class="card allheight">
-       <div class="card-body">
-         <div class="flex">
-           <h4 style="margin-right:2em;" class="card-title  card-icon-space">
-             <a style="color: black;" (click)="openModal(itemModal, it.slugname); $event.preventDefault();" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a>    
-           </h4>
-             <div class="card-icon-position">
-               <b *ngIf="it.kind" style="padding-right:0.5em;">{{it.kind}}</b>
-             </div>
+   <nav style="margin-top: 1em;" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
+         <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.hrefClicked($event)">{{gameTitle}}</a></li>
+         <li class="breadcrumb-item active" aria-current="page">Items</li>
+      </ol>
+   </nav>
+   <h1>Items</h1>
+   <div class="col-md-10 mx-auto">
+      <form [formGroup]="pageForm" class="form-horizontal">
+         <div class="row">
+            <mat-form-field class="col-md-8" appearance="outline">
+               <mat-label>Filter...</mat-label>
+               <input style="height: 100%;" matInput formControlName="filtertext">
+            </mat-form-field>
          </div>
-         <div class="card-text">
-           <p>{{it.description}}</p>
-           <p *ngIf="it.effect"><b>Effect: </b>{{it.effect}}</p>
-           <p><b *ngIf="it.acquisition">Acquisition: </b>{{it.acquisition}}</p>
-           <b *ngIf="it.missions">Missions:</b>
-           <ul *ngIf="it.missions">
-             <li *ngFor="let miss of it.missions"><a routerLink="/{{gameURL}}/missions/{{language}}" fragment="{{miss.slugname}}">{{miss.name}}</a></li>
-           </ul>
-           <b *ngIf="it.locations">Locations:</b>
-           <ul *ngIf="it.locations">
-             <li *ngFor="let loc of it.locations">{{loc.name}}</li>
-           </ul>
-           <b *ngIf="it.demons">Demons:</b>
-           <ul *ngIf="it.demons">
-             <li *ngFor="let demon of it.demons"><a routerLink="/{{gameURL}}/demons/{{demon.slugname}}/{{language}}">{{demon.name}}</a></li>
-           </ul>
-           <b *ngIf="it.ingredient_set">Craft:</b>
-           <ul *ngIf="it.ingredient_set">
-             <li *ngFor="let ing of it.ingredient_set"><a routerLink="/{{gameURL}}/items/{{ing.item.slugname}}/{{language}}">{{ing.item.name}} x{{ing.num}}</a></li>
-           </ul>
-          </div>
-       </div>
+      </form>
+   </div>
+   <ng-container *ngIf="filteredItems">
+      <div *ngFor="let item of filteredItems | async| pair " class="row">
+         <div *ngFor="let it of item" class="spacer col-md-5 mx-auto">
+            <div *ngIf="it" class="card allheight">
+               <div class="card-body">
+                  <div class="flex">
+                     <h4 style="margin-right:2em;" class="card-title  card-icon-space">
+                        <a style="color: black;" (click)="openModal(itemModal, it.slugname); $event.preventDefault();" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a>    
+                     </h4>
+                     <div class="card-icon-position">
+                        <b *ngIf="it.kind" style="padding-right:0.5em;">{{it.kind}}</b>
+                     </div>
+                  </div>
+                  <div class="card-text">
+                     <p>{{it.description}}</p>
+                     <p *ngIf="it.effect"><b>Effect: </b>{{it.effect}}</p>
+                     <p><b *ngIf="it.acquisition">Acquisition: </b>{{it.acquisition}}</p>
+                     <b *ngIf="it.missions">Missions:</b>
+                     <ul *ngIf="it.missions">
+                        <li *ngFor="let miss of it.missions"><a href="/{{gameURL}}/missions/{{language}}#{{miss.slugname}}" (click)="historyService.hrefClicked($event)">{{miss.name}}</a></li>
+                     </ul>
+                     <b *ngIf="it.locations">Locations:</b>
+                     <ul *ngIf="it.locations">
+                        <li *ngFor="let loc of it.locations">{{loc.name}}</li>
+                     </ul>
+                     <b *ngIf="it.demons">Demons:</b>
+                     <ul *ngIf="it.demons">
+                        <li *ngFor="let demon of it.demons"><a href="/{{gameURL}}/demons/{{demon.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{demon.name}}</a></li>
+                     </ul>
+                     <b *ngIf="it.ingredient_set">Craft:</b>
+                     <ul *ngIf="it.ingredient_set">
+                        <li *ngFor="let ing of it.ingredient_set"><a href="/{{gameURL}}/items/{{ing.item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{ing.item.name}} x{{ing.num}}</a></li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
       </div>
-    </div>
-  </div>
+    </ng-container>
 </div>
-
 <ng-template #itemModal>
   <div class="modal-body">
     <button type="button" style="opacity:100;" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
