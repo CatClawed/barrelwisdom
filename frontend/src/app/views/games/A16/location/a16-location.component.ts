@@ -7,6 +7,7 @@ import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
 import { ViewportScroller } from '@angular/common';
 import { first } from 'rxjs/operators';
+import { Location } from '@angular/common';
 
 @Component({
   templateUrl: 'a16-location.component.html',
@@ -36,6 +37,7 @@ export class A16LocationComponent implements OnInit {
 
 constructor(
     private route: ActivatedRoute,
+    private loc: Location,
     private a16service: A16Service,
     public historyService: HistoryService,
     private errorService: ErrorCodeService,
@@ -71,5 +73,10 @@ constructor(
     this.route.fragment.pipe(
       first()
     ).subscribe(fragment => this.viewportScroller.scrollToAnchor(fragment));
+  }
+
+  scroll(id: string) {
+    this.loc.replaceState(`${this.gameURL}/locations/${this.location.slugname}/${this.language}#${id}`);
+    this.viewportScroller.scrollToAnchor(id);
   }
 } 

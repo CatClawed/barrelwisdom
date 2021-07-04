@@ -7,6 +7,7 @@ import { HistoryService } from '@app/services/history.service';
 import { ErrorCodeService } from "@app/services/errorcode.service";
 import { first } from 'rxjs/operators';
 import { SeoService } from '@app/services/seo.service';
+import { Location } from '@angular/common';
 
 @Component({
     templateUrl: 'a22-location.component.html',
@@ -33,6 +34,7 @@ import { SeoService } from '@app/services/seo.service';
   
     constructor(
       private route: ActivatedRoute,
+      private loc: Location,
       private router: Router,
       private a22service: A22Service,
       public historyService: HistoryService,
@@ -51,7 +53,11 @@ import { SeoService } from '@app/services/seo.service';
         this.route.fragment.pipe(
           first()
         ).subscribe(fragment => this.viewportScroller.scrollToAnchor(fragment));
-      }
+     }
+     scroll(id: string) {
+        this.loc.replaceState(`${this.gameURL}/locations/${this.region.slugname}/${this.language}#${id}`);
+        this.viewportScroller.scrollToAnchor(id);
+     }
 
     getLocation() {
         this.a22service.getLocation(this.route.snapshot.params.location, this.language).subscribe(location => {

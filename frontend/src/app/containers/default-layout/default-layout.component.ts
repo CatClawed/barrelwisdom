@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '@app/interfaces/user';
 import { AuthenticationService } from '@app/services/authentication.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { NavigationService } from '@app/services/navigation.service';
+import { HistoryService } from '@app/services/history.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,8 +17,7 @@ export class DefaultLayoutComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService,
     public navService: NavigationService,
-    private route: ActivatedRoute,
-    private router: Router) {
+    public historyService: HistoryService) {
     }
     
   ngOnInit(): void {

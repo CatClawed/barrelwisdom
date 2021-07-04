@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from blog.models import Blog, Tags, Section
-from userprofile.serializers import UserSerializer
+from userprofile.serializers import UserSerializerSimple
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,8 +19,8 @@ class BlogSerializer(serializers.ModelSerializer):
 
 class MainBlogSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True)
-    author = UserSerializer(many=True)
+    author = UserSerializerSimple(many=True)
     section = SectionSerializer()
     class Meta:
         model = Blog
-        fields = ['id', 'created', 'modified', 'title', 'slugtitle', 'body', 'image', 'description', 'authorlock', 'author', 'section', 'tags']
+        fields = ['created', 'modified', 'title', 'slugtitle', 'body', 'image', 'description', 'authorlock', 'author', 'section', 'tags']

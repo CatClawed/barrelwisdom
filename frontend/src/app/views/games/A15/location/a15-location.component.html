@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="location">
+<div *ngIf="!error">
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
@@ -13,16 +13,17 @@
     <div class="table-of-contents">
         <b>Table of Contents</b>
         <ol>
-            <li *ngFor="let area of location.areas">
-                <a [routerLink]='"."' [fragment]="area.slugname">{{area.name}}</a>
+           <ng-container *ngFor="let area of location.areas">
+            <li *ngIf="!area.subarea" >
+                <a href="/{{gameURL}}/locations/{{location.slugname}}/{{language}}#{{area.slugname}}" (click)="$event.preventDefault();scroll(area.slugname)">{{area.name}}</a>
             </li>
+          </ng-container>
         </ol>
     </div>
     <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
     </div>
 
-
-<div [innerHTML]="location.note"></div>
+<div (click)="historyService.hrefClicked($event);" [innerHTML]="location.note"></div>
 
 <p *ngIf="location.grade"><b>Grade Values from Relic Farming:</b> {{location.grade}}</p>
 

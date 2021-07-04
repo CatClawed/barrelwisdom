@@ -9,18 +9,17 @@
  </ol>
  </nav>
  <h1>Missions</h1>
- <ng-container *ngIf="missions">
- <div *ngFor="let mission of missions " class="row">
+ <div *ngFor="let mission of missions" class="row">
   <div class="spacer col-md-7 mx-auto">
-    <div *ngIf="mission" class="card allheight">
+    <div class="card allheight">
        <div class="card-body">
          <div class="flex">
-           <h4 class="card-title  card-icon-space" id="{{mission.slugname}}">
+           <h4 class="card-title card-icon-space" id="{{mission.slugname}}">
              {{mission.name}}
            </h4>
            <div class="card-icon-position">
-            <b *ngIf="mission.character" style="padding-right:0.5em;">{{mission.character}}</b>
-            <br *ngIf="mission.points" /><b *ngIf="mission.chapter" style="padding-right:0.5em;">Ch.{{mission.chapter}}</b>
+            <b style="padding-right:0.7em;">{{mission.character}}</b>
+            <br *ngIf="mission.chapter" /><b style="padding-right:0.7em;">Ch.{{mission.chapter}}</b>
           </div>
           <div class="card-text">
            <b *ngIf="mission.reward || mission.points">Reward:</b>
@@ -37,5 +36,4 @@
     </div>
   </div>
  </div>
- </ng-container>
 </div>

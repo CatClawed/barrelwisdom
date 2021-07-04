@@ -20,7 +20,6 @@ export class HistoryService {
     		    return;
 
         if(targetElement.href && !this.isExternalURL(targetElement.href)) {
-          console.log('howdy')
           $event.preventDefault();
           if(targetElement.href.indexOf('#') > -1) {
             let url = targetElement.href.split('#');

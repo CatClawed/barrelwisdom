@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="location">
+<div *ngIf="!error">
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
@@ -14,7 +14,7 @@
         <b>Table of Contents</b>
         <ol>
             <li *ngFor="let area of location.fields">
-                <a [routerLink]='"."' [fragment]="area.slugname">{{area.name}}</a>
+                <a href="/{{gameURL}}/locations/{{location.slugname}}/{{language}}#{{area.slugname}}" (click)="$event.preventDefault();scroll(area.slugname)">{{area.name}}</a>
             </li>
         </ol>
     </div>

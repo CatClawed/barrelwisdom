@@ -74,7 +74,6 @@ export class RegisterComponent {
                 });
             },
             error => {
-                console.log(error);
                 this.loading = false;
                 this.errorMsg = this.errorCodeService.errorMessage(error);
             });

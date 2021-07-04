@@ -60,7 +60,6 @@ constructor(
         this.missions = mission;
     },
     error => {
-        console.log(error)
       this.error = true;
       this.errorCode = `${error.status}`;
       this.errorVars = this.errorService.getCodes(this.errorCode);

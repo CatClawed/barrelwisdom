@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Blog } from '@app/interfaces/blog';
 import { User } from '@app/interfaces/user';
 import { BlogService } from '@app/services/blog.service';
@@ -8,7 +8,6 @@ import { SafeHtml } from '@angular/platform-browser';
 import { AuthenticationService } from '@app/services/authentication.service';
 import { MarkdownService } from 'ngx-markdown';
 import { SeoService } from '@app/services/seo.service';
-import { Meta, Title } from '@angular/platform-browser';
 import { HistoryService } from '@app/services/history.service';
 
 @Component({
@@ -35,9 +34,7 @@ import { HistoryService } from '@app/services/history.service';
         private errorService: ErrorCodeService,
         private authenticationService: AuthenticationService,
         private markdownService: MarkdownService,
-        private seoService: SeoService,
-        private metaService: Meta,
-        private titleService: Title) {
+        private seoService: SeoService) {
 
       }
 

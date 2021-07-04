@@ -7,6 +7,7 @@ import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
 import { ViewportScroller } from '@angular/common';
 import { first } from 'rxjs/operators';
+import { Location } from '@angular/common';
 
 @Component({
   templateUrl: 'a12-location.component.html',
@@ -36,6 +37,7 @@ export class A12LocationComponent implements OnInit {
 
 constructor(
     private route: ActivatedRoute,
+    private loc: Location,
     private a12service: A12Service,
     public historyService: HistoryService,
     private errorService: ErrorCodeService,
@@ -60,6 +62,7 @@ constructor(
         this.seoTitle = `${this.location.name} - ${this.gameTitle}`;
         this.seoDesc = `All items in ${this.location.name}`
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+
     },
     error => {
       this.error = true;
@@ -71,5 +74,10 @@ constructor(
     this.route.fragment.pipe(
       first()
     ).subscribe(fragment => this.viewportScroller.scrollToAnchor(fragment));
+  }
+
+  scroll(id: string) {
+    this.loc.replaceState(`${this.gameURL}/locations/${this.location.slugname}/${this.language}#${id}`);
+    this.viewportScroller.scrollToAnchor(id);
   }
 } 

@@ -8,7 +8,7 @@
   [asideMenuToggler]="false"
   [mobileAsideMenuToggler]="false" class="mx-auto"> <!-- col-xl-7 -->
   <ul style="padding-right: 1em" class="nav navbar-nav ml-auto">
-    <a *ngIf="!user; else loggedIn" class="nav-link" href="login">Login</a>
+    <a *ngIf="!user; else loggedIn" class="nav-link" href="login" (click)="historyService.hrefClicked($event);">Login</a>
     <ng-template #loggedIn>
     <li class="nav-item dropdown" dropdown placement="bottom right">
       <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">

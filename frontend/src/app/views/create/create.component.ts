@@ -334,9 +334,6 @@ export class CreateComponent {
         if(this.sectionIDList.indexOf(this.blog.section) < 0) {
           this.errorMsg = "Not allowed to edit this.";
           this.disableSubmit = true;
-          console.log(this.sectionIDList);
-          console.log(this.blog.section);
-          console.log(this.blog);
           return;
         }
 

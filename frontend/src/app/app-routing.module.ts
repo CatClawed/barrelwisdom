@@ -6,6 +6,7 @@ const routerOptions: ExtraOptions = {
   scrollPositionRestoration: 'enabled',
   anchorScrolling: 'enabled',
   scrollOffset: [0, 64],
+  onSameUrlNavigation: 'ignore'
 };
 
 const routes: Routes = [
@@ -121,6 +122,21 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'ryza',
+    redirectTo: '/ryza/faq',
+    pathMatch: 'full'
+  },
+  {
+    path: 'firis',
+    redirectTo: '/firis/ultimate-setups',
+    pathMatch: 'full'
+  },
+  {
+    path: 'noa2',
+    redirectTo: '/noa2/maps',
+    pathMatch: 'full'
+  },
+  {
     path: ':section/:title',
     component: DefaultLayoutComponent,
     children: [
@@ -143,7 +159,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { anchorScrolling: 'enabled' })],
+  imports: [RouterModule.forRoot(routes, routerOptions)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

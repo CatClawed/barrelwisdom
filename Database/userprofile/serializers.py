@@ -19,6 +19,11 @@ class BlogSimpleSerializer(serializers.ModelSerializer):
     def get_secfull(self,obj):
         return obj.section.fullname
 
+class UserSerializerSimple(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username']
+
 class UserSerializer(serializers.ModelSerializer):
     blog_set = BlogSimpleSerializer(many=True)
     class Meta:

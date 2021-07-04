@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { BlogPaginator } from '@app/interfaces/blog';
@@ -71,7 +71,6 @@ export class HomeComponent implements OnInit {
         },
         error => {
           this.error = true;
-          console.log("fuk")
           this.errorCode = `${error.status}`;
           this.errorVars = this.errorService.getCodes(this.errorCode);
         });
@@ -100,7 +99,6 @@ export class HomeComponent implements OnInit {
       },
         error => {
           this.error = true;
-          console.log("fukk");
           this.errorCode = `${error.status}`;
           this.errorVars = this.errorService.getCodes(this.errorCode);
         }

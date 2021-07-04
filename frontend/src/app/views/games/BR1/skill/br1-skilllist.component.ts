@@ -8,6 +8,7 @@ import { BR1Service } from '@app/services/br1.service';
 import { HistoryService} from '@app/services/history.service';
 import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
+import { Location } from '@angular/common';
 
 @Component({
   templateUrl: 'br1-skilllist.component.html',
@@ -37,6 +38,7 @@ export class BR1SkilllistComponent implements OnInit {
 
 constructor(
     private route: ActivatedRoute,
+    private loc: Location,
     private br1service: BR1Service,
     public historyService: HistoryService,
     private errorService: ErrorCodeService,
@@ -70,5 +72,9 @@ constructor(
     this.route.fragment.pipe(
       first()
     ).subscribe(fragment => this.viewportScroller.scrollToAnchor(fragment));
+  }
+  scroll(id: string) {
+    this.loc.replaceState(`${this.gameURL}/skills/${this.language}#${id}`);
+    this.viewportScroller.scrollToAnchor(id);
   }
 } 

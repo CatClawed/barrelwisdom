@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import { UserProfile } from '@app/interfaces/user';
 import { ErrorCodeService } from "@app/services/errorcode.service";
-import { SectionService } from '@app/services/section.service';
-import { MarkdownService } from 'ngx-markdown';
 import { UserService } from '@app/services/user.service';
 
 @Component({
@@ -21,10 +18,7 @@ import { UserService } from '@app/services/user.service';
       constructor(
         private route: ActivatedRoute,
         private userService: UserService,
-        private location: Location,
         private errorService: ErrorCodeService,
-        private sectionService: SectionService,
-        private markdownService: MarkdownService,
       ) {  }
 
       ngOnInit(): void {

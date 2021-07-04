@@ -60,7 +60,7 @@
       </ul>
       <b *ngIf="item.locations">Locations:</b>
       <ul *ngIf="item.locations">
-        <li *ngFor="let loc of item.locations"><a href="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{loc.name}}</a></li>
+        <li *ngFor="let loc of item.locations"><a href="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}#{{loc.slugname}}" (click)="historyService.hrefClicked($event)">{{loc.name}}</a></li>
       </ul>
       <b *ngIf="item.monsters">Monsters:</b>
       <ul *ngIf="item.monsters">

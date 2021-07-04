@@ -20,7 +20,6 @@
          </div>
       </form>
    </div>
-   <ng-container *ngIf="filteredFragmentEffects">
       <div *ngFor="let fragmenteffects of filteredFragmentEffects | async| pair " class="row">
          <div *ngFor="let frag of fragmenteffects" class="spacer col-md-5 mx-auto">
             <div *ngIf="frag" class="card allheight">
@@ -41,5 +40,4 @@
             </div>
          </div>
       </div>
-   </ng-container>
 </div>
