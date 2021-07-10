@@ -54,10 +54,8 @@ import { environment } from '@environments/environment';
 
   ngAfterViewInit(): void {
     this.route.paramMap.subscribe(params => {
-      //console.log(this.comment.nativeElement.innerHtml);
       let element = this.dom.querySelector('div[id="comment"]')
       if (element) {
-        console.log('howdy howdy')
         let child = this.dom.querySelector('div[id="commento"]')
         this.renderer.removeChild(element, child);
         let d = this.renderer.createElement('div');
@@ -81,32 +79,9 @@ import { environment } from '@environments/environment';
           this.renderer.appendChild(this.dom.head, s);
         }
       });
-
     });
+  }
 
-          //const d = this.renderer.createElement('div');
-          //d.id = 'commento';
-          //console.log(this.comment)
-          //this.renderer.appendChild(this.comment, d);
-
-          
-              
-          
-      }/*
-
-      ngOnDestroy(): void {
-        setTimeout(() => {
-        let element = this.dom.querySelector('link[href="http://159.65.240.56:8090/css/commento.css"]')
-        if (element) {
-          //element.removeAttribute('href="http://159.65.240.56:8090/css/commento.css"]');
-          this.renderer.removeChild(this.dom.head, element);
-        }
-        element = this.dom.querySelector('script[src="/commento/js/commento.js"]');
-        if (element) {
-          this.renderer.removeChild(this.dom.head, element);
-        }
-      });
-      } */
 
       getBlog(section: string, title: string): void {
         this.blogService.getBlog(title, section)
