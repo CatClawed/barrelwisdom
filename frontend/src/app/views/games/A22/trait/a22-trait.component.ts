@@ -63,8 +63,8 @@ export class A22TraitComponent implements OnInit {
       
       this.seoURL = `${this.gameURL}/traits/${this.trait.slugname}/${this.language}`;
       this.seoTitle = `${this.trait.name} - ${this.gameTitle}`;
-      this.seoDesc = `${this.trait.description}`
-      this.seoImage = `${this.imgURL}traits/${this.trait.slugname}.png`
+      this.seoDesc = `${this.trait.description}`;
+      this.seoImage = ``;
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error => {

@@ -22,7 +22,7 @@ export class UserService {
   }
 
   getUserProfile(username: string): Observable<UserProfile> {
-    return this.http.get<UserProfile>(`${environment.apiUrl}/user/${username}/profile/`);
+    return this.http.get<UserProfile>(`${environment.dbUrl}${environment.apiUrl}/user/${username}/profile/`);
   }
 
 }

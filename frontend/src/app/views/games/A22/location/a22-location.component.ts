@@ -8,6 +8,7 @@ import { ErrorCodeService } from "@app/services/errorcode.service";
 import { first } from 'rxjs/operators';
 import { SeoService } from '@app/services/seo.service';
 import { Location } from '@angular/common';
+import {AppComponent} from '@app/app.component';
 
 @Component({
     templateUrl: 'a22-location.component.html',
@@ -46,7 +47,31 @@ import { Location } from '@angular/common';
 
     ngOnInit(): void {
         this.language = this.route.snapshot.params.language;
-        this.getLocation();
+        this.region = this.route.snapshot.data.loc;
+
+          if(this.region.areas.length == 0 || !this.region) {
+            this.error = true;
+            this.errorCode = '404',
+            this.errorVars = this.errorService.getCodes(this.errorCode);
+          }
+          else {
+              for(let g of this.region.areas[0].gatherdata) {
+                if(g.tool == 'Dig' ) {
+                  this.dig = true;
+                  break;
+                }
+                this.dig = false;
+              }
+              this.gameTitle = this.a22service.gameTitle;
+              this.gameURL = this.a22service.gameURL;
+              this.imgURL = this.a22service.imgURL;
+      
+              this.seoURL = `${this.gameURL}/locations/${this.region.slugname}/${this.language}`;
+              this.seoTitle = `${this.region.name} - ${this.gameTitle}`;
+              this.seoDesc = `All items in ${this.region.name}`
+              this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, '');
+          }
+
     }
 
     ngAfterViewInit(): void {

@@ -1,5 +1,5 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
-<div></div>
+
 <header *ngIf="blog">
     <nav style="margin-top: 1em;" aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -32,4 +32,7 @@
         <a style="margin-right: 1em; margin-top: 0.5em; font-size: 1rem;" class="badge bg-secondary"><i class="fas fa-tag"></i></a>
         <a *ngFor="let tag of blog.tags" rel="tag" style="margin-right: 1em; margin-top: 0.5em; font-size: 1rem;" class="badge bg-primary" routerLink="/tag/{{tag.slugname}}">{{tag.name}} </a>
     </div>
+<h2>Comments</h2>
+<div id="comment"><div id="commento"></div></div>
+<div ></div>
 </article>

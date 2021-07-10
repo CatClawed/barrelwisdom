@@ -1,11 +1,11 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { ModalModule } from 'ngx-bootstrap/modal';
-
+import { NgxCommentoModule } from 'ngx-commento';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -70,6 +70,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     OverlayModule,
     MatAutocompleteModule,
     TransferHttpCacheModule,
+    BrowserTransferStateModule,
   ],
   providers: [
     CookieService,

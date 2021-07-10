@@ -243,3 +243,10 @@ DJOSER = {
         'user_create': ['rest_framework.permissions.IsAdminUser'],
     }
 }
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}

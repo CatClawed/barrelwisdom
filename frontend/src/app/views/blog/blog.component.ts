@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ElementRef, Inject, ViewChild, Renderer2, RendererFactory2 } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Blog } from '@app/interfaces/blog';
 import { User } from '@app/interfaces/user';
 import { BlogService } from '@app/services/blog.service';
 import { ErrorCodeService } from "@app/services/errorcode.service";
-import { SafeHtml } from '@angular/platform-browser';
+import {  SafeHtml } from '@angular/platform-browser';
 import { AuthenticationService } from '@app/services/authentication.service';
 import { MarkdownService } from 'ngx-markdown';
 import { SeoService } from '@app/services/seo.service';
 import { HistoryService } from '@app/services/history.service';
+import { AppComponent } from '@app/app.component';
+import { DOCUMENT } from '@angular/common';
+import { environment } from '@environments/environment';
 
 @Component({
     templateUrl: 'blog.component.html',
@@ -26,6 +29,7 @@ import { HistoryService } from '@app/services/history.service';
       gameName = "";
       breadcrumbs = [["Barrel Wisdom", "/"]];
       blogParam = '';
+      renderer: Renderer2;
 
       constructor(
         private route: ActivatedRoute,
@@ -34,17 +38,75 @@ import { HistoryService } from '@app/services/history.service';
         private errorService: ErrorCodeService,
         private authenticationService: AuthenticationService,
         private markdownService: MarkdownService,
-        private seoService: SeoService) {
-
+        private seoService: SeoService,
+        private rendererFactory: RendererFactory2,
+        @Inject(DOCUMENT) private dom,) {
+          this.renderer = this.rendererFactory.createRenderer(null, null);
       }
+
 
       ngOnInit(): void {
-        this.authenticationService.user.subscribe(x => this.user = x);
+        this.authenticationService.user.subscribe(x => this.user = x);   
         this.route.paramMap.subscribe(params => {
           this.getBlog(params.get('section'), params.get('title'));
-        })
-        
+        }); 
       }
+
+  ngAfterViewInit(): void {
+    this.route.paramMap.subscribe(params => {
+      //console.log(this.comment.nativeElement.innerHtml);
+      let element = this.dom.querySelector('div[id="comment"]')
+      if (element) {
+        console.log('howdy howdy')
+        let child = this.dom.querySelector('div[id="commento"]')
+        this.renderer.removeChild(element, child);
+        let d = this.renderer.createElement('div');
+        d.id = "commento"
+        this.renderer.appendChild(element, d)
+      }
+      element = this.dom.querySelector(`script[src="${environment.commentoUrl}/js/commento.js"]`);
+      if (element) {
+        this.renderer.removeChild(this.dom.head, element);
+      }
+      element = this.dom.querySelector(`link[href="${environment.commentoUrl}/css/commento.css"]`)
+      if (element) {
+        this.renderer.removeChild(this.dom.head, element);
+      }
+
+      AppComponent.isBrowser.subscribe(isBrowser => {
+        if (isBrowser) {
+          let s = this.renderer.createElement('script');
+          s.src = `${environment.commentoUrl}/js/commento.js`;
+          s.defer = true;
+          this.renderer.appendChild(this.dom.head, s);
+        }
+      });
+
+    });
+
+          //const d = this.renderer.createElement('div');
+          //d.id = 'commento';
+          //console.log(this.comment)
+          //this.renderer.appendChild(this.comment, d);
+
+          
+              
+          
+      }/*
+
+      ngOnDestroy(): void {
+        setTimeout(() => {
+        let element = this.dom.querySelector('link[href="http://159.65.240.56:8090/css/commento.css"]')
+        if (element) {
+          //element.removeAttribute('href="http://159.65.240.56:8090/css/commento.css"]');
+          this.renderer.removeChild(this.dom.head, element);
+        }
+        element = this.dom.querySelector('script[src="/commento/js/commento.js"]');
+        if (element) {
+          this.renderer.removeChild(this.dom.head, element);
+        }
+      });
+      } */
 
       getBlog(section: string, title: string): void {
         this.blogService.getBlog(title, section)
@@ -87,9 +149,6 @@ import { HistoryService } from '@app/services/history.service';
                   this.blog.image
                 );
               }
-
-              
-
             },
             error => { 
                 this.error = true;

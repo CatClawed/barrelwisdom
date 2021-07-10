@@ -38,6 +38,19 @@ const optionsApi = {
   },
 };
 
+const optionsCom = {
+  target: 'http://159.65.240.56:8090', // target host
+  changeOrigin: false, // needed for virtual hosted sites
+  ws: true, // proxy websockets
+  router: {
+    // when request.headers.host == 'dev.localhost:3000',
+    // override target 'http://www.example.org' to 'http://localhost:8000'
+    'dev.localhost:4200': 'http://159.65.240.56:8090',
+  },pathRewrite: {
+    '^/commento': '', // rewrite path
+  },
+};
+
 const options = {
   target: 'https://media.barrelwisdom.com', // target host
   changeOrigin: true, // needed for virtual hosted sites
@@ -50,11 +63,13 @@ const options = {
 
 // create the proxy (without context)
 const apiProxy = createProxyMiddleware(optionsApi);
+const comProxy = createProxyMiddleware(optionsCom);
 const mediaProxy = createProxyMiddleware(options);
 
   server.use('/api', apiProxy);
   server.use('/auth', apiProxy);
   server.use('/media', mediaProxy);
+  server.use('/commento', comProxy);
 
   server.set('view engine', 'html');
   server.set('views', distFolder);

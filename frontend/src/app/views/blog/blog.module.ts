@@ -4,13 +4,15 @@ import { NgModule } from '@angular/core';
 import { BlogComponent } from './blog.component';
 import { BlogRoutingModule } from './blog-routing.module';
 import { ErrorModule } from '@app/views/error/error.module';
+import { NgxCommentoModule } from 'ngx-commento';
 
 @NgModule({
     imports: [
       CommonModule,
-      FormsModule,
+      //FormsModule,
       BlogRoutingModule,
       ErrorModule,
+      NgxCommentoModule,
     ],
     declarations: [
       BlogComponent,

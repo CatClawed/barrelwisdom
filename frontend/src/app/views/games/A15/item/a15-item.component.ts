@@ -55,11 +55,13 @@ constructor(
   }
   ngOnInit(): void {
     this.language = this.route.snapshot.params.language;
-    if(this.showNav) {
+    if (this.showNav) {
       this.colset = "col-md-9 mx-auto "
     }
+
+
     this.a15service.getItem(this.slugname, this.language)
-    .subscribe(item => {
+      .subscribe(item => {
         this.error = false;
         this.item = item;
 
@@ -73,27 +75,27 @@ constructor(
         this.seoImage = `${this.imgURL}items/${this.item.slugname}.png`
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
 
-        if(this.item.effectline_set) {
+        if (this.item.effectline_set) {
           for (let eff of this.item.effectline_set) {
-            if(eff.elem == "fire") {
+            if (eff.elem == "fire") {
               this.fire = true;
             }
-            if(eff.elem == "water") {
+            if (eff.elem == "water") {
               this.water = true;
             }
-            if(eff.elem == "wind") {
+            if (eff.elem == "wind") {
               this.wind = true;
             }
-            if(eff.elem == "earth") {
+            if (eff.elem == "earth") {
               this.earth = true;
             }
           }
         }
-    },
-    error => {
-      this.error = true;
-      this.errorCode = `${error.status}`;
-      this.errorVars = this.errorService.getCodes(this.errorCode);
-    });
+      },
+        error => {
+          this.error = true;
+          this.errorCode = `${error.status}`;
+          this.errorVars = this.errorService.getCodes(this.errorCode);
+        });
   }
 } 

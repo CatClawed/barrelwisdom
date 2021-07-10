@@ -4,6 +4,8 @@
 
 export const environment = {
   production: false,
+  dbUrl: 'http://159.65.240.56:4200',
+  commentoUrl: 'http://159.65.240.56:8090',
   apiUrl: '/api',
   authUrl: '/auth',
   imageRegex: '/media/',

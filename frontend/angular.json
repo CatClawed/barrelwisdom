@@ -27,9 +27,7 @@
             ],
             "styles": [
               "node_modules/@coreui/icons/css/free.css",
-              "node_modules/flag-icon-css/css/flag-icon.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.css",
-              "node_modules/simple-line-icons/css/simple-line-icons.css",
               "src/scss/style.scss"
             ],
             "stylePreprocessorOptions": {

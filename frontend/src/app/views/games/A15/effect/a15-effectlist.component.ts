@@ -57,19 +57,7 @@ import { Meta, Title } from '@angular/platform-browser';
     ngOnInit(): void {
   
       this.language = this.route.snapshot.params.language;
-  
-      this.getEffects();
-      
-      
-      this.gameTitle = this.a15service.gameTitle;
-      this.gameURL = this.a15service.gameURL;
-      this.imgURL = this.a15service.imgURL;
 
-      this.seoURL = `${this.gameURL}/effects/${this.language}`;
-      this.seoTitle = `Effects - ${this.gameTitle}`;
-      this.seoDesc = `The list of effects in ${this.gameTitle}.`
-      this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-  
       this.pageForm = this.formBuilder.group({
         filtertext: this.effectControl,
         type: ['']
@@ -83,7 +71,19 @@ import { Meta, Title } from '@angular/platform-browser';
       this.effectControl.valueChanges.subscribe(search => {
         this.searchstring = search;
       });
+  
+      this.getEffects();
+      
+      
+      this.gameTitle = this.a15service.gameTitle;
+      this.gameURL = this.a15service.gameURL;
+      this.imgURL = this.a15service.imgURL;
 
+      this.seoURL = `${this.gameURL}/effects/${this.language}`;
+      this.seoTitle = `Effects - ${this.gameTitle}`;
+      this.seoDesc = `The list of effects in ${this.gameTitle}.`
+      this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+  
       this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
           this.modalService.setDismissReason('link');

@@ -51,7 +51,7 @@ constructor(
 
     this.seoURL = `${this.gameURL}/mission/${this.language}`;
     this.seoTitle = `Missions - ${this.gameTitle}`;
-    this.seoDesc = `The full shop mission list.`
+    this.seoDesc = `The full mission list.`
     this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
 
     this.br1service.getMissionList(this.language)

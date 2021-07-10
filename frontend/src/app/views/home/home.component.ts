@@ -7,7 +7,6 @@ import { BlogService } from '@app/services/blog.service';
 import { ErrorCodeService } from "@app/services/errorcode.service";
 import { TagService } from '@app/services/tag.service';
 import { SeoService } from '@app/services/seo.service';
-import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   templateUrl: 'home.component.html'
@@ -32,13 +31,12 @@ export class HomeComponent implements OnInit {
     private location: Location,
     private errorService: ErrorCodeService,
     private tagService: TagService,
-    private seoService: SeoService,
-    private metaService: Meta,
-    private titleService: Title
+    private seoService: SeoService
   ) { }
 
   ngOnInit(): void {
 
+    this.seoService.SEOSettings('','','The source for all things Atelier.','/media/blog/placeholder.png');
     let url = this.location.path().split("/");
 
     if (url.length == 4) {
@@ -61,13 +59,6 @@ export class HomeComponent implements OnInit {
           this.tagName = tag.name;
           this.tagID = tag.id;
           this.getBlog(this.path, this.limit);
-          this.seoService.createCanonicalURL(`tag/${tag.slugname}`);
-          this.titleService.setTitle(`${this.tagName} - Barrel Wisdom`);
-          this.metaService.updateTag({ name: `robots`, content: `index, archive` },`name="robots"`);
-          this.metaService.updateTag({ name: `description`, content: `Archive of ${this.tagName}.` }, `name="description"`);
-          this.metaService.updateTag({ property: `og:title`, content: `${this.tagName}` }, `property="og:title"`);
-          this.metaService.updateTag({ property: `og:description`, content: `Archive of ${this.tagName}.` },`property="og:description"`);
-          this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
         },
         error => {
           this.error = true;
@@ -77,13 +68,6 @@ export class HomeComponent implements OnInit {
     }
     else {
       this.getBlog(this.path, this.limit);
-      this.seoService.createCanonicalURL(``);
-      this.titleService.setTitle(`Barrel Wisdom`);
-      this.metaService.updateTag({ name: `robots`, content: `index, archive` },`name="robots"`);
-      this.metaService.updateTag({ name: `description`, content: `The best source for the Atelier series.` }, `name="description"`);
-      this.metaService.updateTag({ property: `og:title`, content: `Barrel Wisdom` }, `property="og:title"`);
-      this.metaService.updateTag({ property: `og:description`, content: `The best source for the Atelier series.` },`property="og:description"`);
-      this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
     }
   }
 
@@ -95,7 +79,6 @@ export class HomeComponent implements OnInit {
     this.blogService.getMainPageBlogs(num, limit, tag)
       .subscribe(blog => {
         this.blog = blog;
-        
       },
         error => {
           this.error = true;

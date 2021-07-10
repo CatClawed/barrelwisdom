@@ -23,4 +23,4 @@ class MainBlogSerializer(serializers.ModelSerializer):
     section = SectionSerializer()
     class Meta:
         model = Blog
-        fields = ['created', 'modified', 'title', 'slugtitle', 'body', 'image', 'description', 'authorlock', 'author', 'section', 'tags']
+        fields = ['id', 'created', 'modified', 'title', 'slugtitle', 'body', 'image', 'description', 'authorlock', 'author', 'section', 'tags']

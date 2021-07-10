@@ -23,7 +23,7 @@ export class BR1Service {
     }
 
     getItem(slugname: string, language: string): Observable<Item> {
-      return this.http.get<Item>(`${environment.apiUrl}/BR1/item/${slugname}/${language}/`);
+      return this.http.get<Item>(`${environment.dbUrl}${environment.apiUrl}/BR1/item/${slugname}/${language}/`);
     }
 
     getDemonList(language: string): Observable<Demon[]> {
@@ -31,7 +31,7 @@ export class BR1Service {
     }
     
     getDemon(slugname: string, language: string): Observable<Demon> {
-      return this.http.get<Demon>(`${environment.apiUrl}/BR1/demon/${slugname}/${language}/`);
+      return this.http.get<Demon>(`${environment.dbUrl}${environment.apiUrl}/BR1/demon/${slugname}/${language}/`);
     }
 
     getMissionList(language: string): Observable<Mission[]> {

@@ -56,18 +56,7 @@ import { SeoService } from '@app/services/seo.service';
     ngOnInit(): void {
   
       this.language = this.route.snapshot.params.language;
-  
-      this.getBooks();
 
-      this.gameTitle = this.a15service.gameTitle;
-      this.gameURL = this.a15service.gameURL;
-      this.imgURL = this.a15service.imgURL;
-
-      this.seoURL = `${this.gameURL}/recipe-books/${this.language}`;
-      this.seoTitle = `Recipe Books - ${this.gameTitle}`;
-      this.seoDesc = `The list of recipe books in ${this.gameTitle}.`
-      this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-  
       this.pageForm = this.formBuilder.group({
         filtertext: this.bookControl,
         type: ['']
@@ -81,7 +70,18 @@ import { SeoService } from '@app/services/seo.service';
       this.bookControl.valueChanges.subscribe(search => {
         this.searchstring = search;
       });
+  
+      this.getBooks();
 
+      this.gameTitle = this.a15service.gameTitle;
+      this.gameURL = this.a15service.gameURL;
+      this.imgURL = this.a15service.imgURL;
+
+      this.seoURL = `${this.gameURL}/recipe-books/${this.language}`;
+      this.seoTitle = `Recipe Books - ${this.gameTitle}`;
+      this.seoDesc = `The list of recipe books in ${this.gameTitle}.`
+      this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+  
       this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
           this.modalService.setDismissReason('link');

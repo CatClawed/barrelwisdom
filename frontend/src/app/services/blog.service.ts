@@ -4,7 +4,6 @@ import { Observable} from 'rxjs';
 import { environment } from '@environments/environment';
 import { Blog, EditBlog, BlogPaginator } from '@app/interfaces/blog';
 
-
 @Injectable({ providedIn: 'root' })
 export class BlogService {
 
@@ -32,15 +31,15 @@ export class BlogService {
   // Reader facing stuff
 
   getBlog(slugtitle: string, section: string): Observable<Blog> {
-    return this.http.get<Blog>(`${environment.apiUrl}/blog/${slugtitle}/${section}`)
+    return this.http.get<Blog>(`${environment.dbUrl}${environment.apiUrl}/blog/${slugtitle}/${section}/`)
   }
 
   getMainPageBlogs(num: number, limit: number, tag: string): Observable<BlogPaginator> {
     var offset = num == 0 ?  1 : limit * (num-1);
     if(tag) {
-      return this.http.get<BlogPaginator>(`${environment.apiUrl}/blog/?ordering=-created&tags=${tag}&limit=${limit}&offset=${offset}`)
+      return this.http.get<BlogPaginator>(`${environment.dbUrl}${environment.apiUrl}/blog/?ordering=-created&tags=${tag}&limit=${limit}&offset=${offset}`)
     }
-    return this.http.get<BlogPaginator>(`${environment.apiUrl}/blog/?ordering=-created&limit=${limit}&offset=${offset}`)
+    return this.http.get<BlogPaginator>(`${environment.dbUrl}${environment.apiUrl}/blog/?ordering=-created&limit=${limit}&offset=${offset}`)
   }
 
 }

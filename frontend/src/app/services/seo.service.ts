@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
+import {AppComponent} from '@app/app.component';
 
 @Injectable({
     providedIn: 'root'
@@ -14,8 +15,6 @@ export class SeoService {
 
     SEOSettings(url: string, title: string, description: string, image:string) {
         this.createCanonicalURL(url);
-        this.metaService.updateTag({ name: `robots`, content: `index, archive` },`name="robots"`);
-        this.metaService.updateTag({ property: `og:type`, content: `webpage` }, `property="og:type"`);
 
         if(title) {
             this.titleService.setTitle(`${title} - Barrel Wisdom`);
@@ -23,17 +22,20 @@ export class SeoService {
         }
         else {
             this.titleService.setTitle('Barrel Wisdom');
-            this.metaService.removeTag("name='og:title");
+            this.metaService.updateTag({ property: `og:title`, content: `Barrel Wisdom` },`property="og:title"`);
+
         }
         if(description) {
             this.metaService.updateTag({ name: `description`, content: description }, `name="description"`);
             this.metaService.updateTag({ property: `og:description`, content: description },`property="og:description"`);
         }
         else {
-            this.metaService.removeTag("name='og:description");
-            this.metaService.removeTag("name='description");
+            this.metaService.updateTag({ name: `description`, content: "The source for all things Atelier." }, `name="description"`);
+            this.metaService.updateTag({ property: `og:description`, content: "The source for all things Atelier." },`property="og:description"`);
         }
         if(image) {
+            this.metaService.updateTag({ property: `twitter:card`, content: `summary_large_image` }, `property="twitter:card"`);
+            this.metaService.updateTag({ property: `twitter:image`, content: image }, `property="twitter:image"`);
             this.metaService.updateTag({ property: `og:image`, content: image }, `property="og:image"`);
         }
         else {
