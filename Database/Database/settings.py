@@ -59,13 +59,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'django_filters',
-    'knox',
-    'dj_rest_auth',
     'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'dj_rest_auth.registration',
-    'allauth.socialaccount',
     'djoser',
     #'debug_toolbar',
     # Major parts
@@ -115,8 +109,6 @@ INSTALLED_APPS = [
 
 
 SITE_ID = 1
-REST_AUTH_TOKEN_MODEL = 'knox.models.AuthToken'
-REST_AUTH_TOKEN_CREATOR = 'auth.utils.create_knox_token'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 REST_AUTH_SERIALIZERS = {
@@ -216,7 +208,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
-    'DEFAULT_AUTHENTICATION_CLASSES':('rest_framework_simplejwt.authentication.JWTAuthentication', 'knox.auth.TokenAuthentication',),
+    'DEFAULT_AUTHENTICATION_CLASSES':('rest_framework_simplejwt.authentication.JWTAuthentication',),
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
