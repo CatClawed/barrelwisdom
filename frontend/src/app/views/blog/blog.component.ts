@@ -71,14 +71,11 @@ import { environment } from '@environments/environment';
         this.renderer.removeChild(this.dom.head, element);
       }
 
-      AppComponent.isBrowser.subscribe(isBrowser => {
-        if (isBrowser) {
           let s = this.renderer.createElement('script');
           s.src = `${environment.commentoUrl}/js/commento.js`;
           s.defer = true;
           this.renderer.appendChild(this.dom.head, s);
-        }
-      });
+
     });
   }
 
