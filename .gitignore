@@ -7,6 +7,7 @@
 __pycache__/
 /Database/jwt-key
 /Database/jwt-key.pub
+/Database/dump.json.gz
 
 # Angular Stuff
 
