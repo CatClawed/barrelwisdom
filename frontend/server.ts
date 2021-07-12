@@ -20,6 +20,7 @@ export function app(): express.Express {
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
   server.engine('html', ngExpressEngine({
     bootstrap: AppServerModule,
+    inlineCriticalCss: false,
     //providers: [
     //  UserService,
     //{ provide: LocalStorage, useValue: window.localStorage}
@@ -37,7 +38,7 @@ const optionsApi = {
     'dev.localhost:4200': 'http://localhost:8000',
   },
 };
-
+/*
 const optionsCom = {
   target: 'http://159.65.240.56:8090', // target host
   changeOrigin: false, // needed for virtual hosted sites
@@ -49,7 +50,7 @@ const optionsCom = {
   },pathRewrite: {
     '^/commento': '', // rewrite path
   },
-};
+};*/
 
 const options = {
   target: 'https://media.barrelwisdom.com', // target host
@@ -63,13 +64,13 @@ const options = {
 
 // create the proxy (without context)
 const apiProxy = createProxyMiddleware(optionsApi);
-const comProxy = createProxyMiddleware(optionsCom);
+//const comProxy = createProxyMiddleware(optionsCom);
 const mediaProxy = createProxyMiddleware(options);
 
   server.use('/api', apiProxy);
   server.use('/auth', apiProxy);
   server.use('/media', mediaProxy);
-  server.use('/commento', comProxy);
+  //server.use('/commento', comProxy);
 
   server.set('view engine', 'html');
   server.set('views', distFolder);
