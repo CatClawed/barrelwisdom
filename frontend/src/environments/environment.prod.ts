@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  dbUrl: 'http://159.65.240.56:4000',
+  dbUrl: 'https://test.barrelwisdom.com',
   commentoUrl: 'https://commento.barrelwisdom.com',
   apiUrl: '/api',
   authUrl: '/auth',

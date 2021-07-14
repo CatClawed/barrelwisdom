@@ -14,12 +14,12 @@
         </span>
         <span style="display: inline-block;">
             <i class="fas fa-user"></i>
-            <a *ngIf="blog.authorlock" class="url" routerLink="/user/{{blog.author[0].username}}"> {{blog.author[0].username}} </a>
+            <a *ngIf="blog.authorlock" class="url" (click)="historyService.hrefClicked($event);"  href="/user/{{blog.author[0].username}}"> {{blog.author[0].username}} </a>
             <i *ngIf="!blog.authorlock"> Community Post</i>
         </span>
         <span *ngIf="allowedToEdit" style="display: inline-block;">
             <i class="fas fa-edit"></i>
-            <a routerLink="/create" [queryParams]="{ id: blog.id }"> Edit</a>
+            <a (click)="historyService.hrefClicked($event);"  routerLink="/create" [queryParams]="{ id: blog.id }"> Edit</a>
         </span>
     </div>
 </header>
@@ -30,7 +30,7 @@
     <div (click)="historyService.hrefClicked($event);" [innerHTML]="body"></div>
     <div *ngIf="blog.tags.length > 0" class="blog-tags clearfix">
         <a style="margin-right: 1em; margin-top: 0.5em; font-size: 1rem;" class="badge bg-secondary"><i class="fas fa-tag"></i></a>
-        <a *ngFor="let tag of blog.tags" rel="tag" style="margin-right: 1em; margin-top: 0.5em; font-size: 1rem;" class="badge bg-primary" routerLink="/tag/{{tag.slugname}}">{{tag.name}} </a>
+        <a *ngFor="let tag of blog.tags" rel="tag" style="margin-right: 1em; margin-top: 0.5em; font-size: 1rem;" class="badge bg-primary" href="/tag/{{tag.slugname}}">{{tag.name}} </a>
     </div>
 <h2>Comments</h2>
 <div id="comment"><div id="commento"></div></div>

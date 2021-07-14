@@ -7,6 +7,7 @@ import { BlogService } from '@app/services/blog.service';
 import { ErrorCodeService } from "@app/services/errorcode.service";
 import { TagService } from '@app/services/tag.service';
 import { SeoService } from '@app/services/seo.service';
+import { HistoryService} from '@app/services/history.service';
 
 @Component({
   templateUrl: 'home.component.html'
@@ -31,7 +32,8 @@ export class HomeComponent implements OnInit {
     private location: Location,
     private errorService: ErrorCodeService,
     private tagService: TagService,
-    private seoService: SeoService
+    private seoService: SeoService,
+    public historyService: HistoryService
   ) { }
 
   ngOnInit(): void {

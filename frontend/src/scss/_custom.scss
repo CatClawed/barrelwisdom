@@ -15,6 +15,33 @@
   font-family: Atelier !important;
 }
 
+// Commento
+
+.commento-footer, .commento-option-upvote, .commento-sort-policy-buttons-container, .commento-option-downvote , .commento-score, .commento-timeago::before {
+  display: none !important;
+}
+.commento-option-reply {
+  right: 32px !important;
+}
+.commento-option-edit {
+  right: 32px !important;
+}
+.commento-option-sticky {
+  right: 96px !important;
+}
+.commento-option-remove{
+  right: 64px !important;
+}
+.commento-moderator::after, .commento-submit-button {
+  background: #5e4c3f !important;
+}
+.commento-card {
+  background-image: url("/media/main/images/clean_textile.png") !important;
+}
+.commento-comments {
+  margin-bottom: 1.5rem !important;
+}
+
 // base class
 
 .atelier {
