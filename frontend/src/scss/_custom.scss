@@ -17,7 +17,7 @@
 
 // Commento
 
-.commento-footer, .commento-option-upvote, .commento-sort-policy-buttons-container, .commento-option-downvote , .commento-score, .commento-timeago::before {
+.commento-footer, .commento-avatar-img, .commento-avatar, .commento-option-upvote, .commento-sort-policy-buttons-container, .commento-option-downvote , .commento-score, .commento-timeago::before {
   display: none !important;
 }
 .commento-option-reply {
@@ -40,6 +40,9 @@
 }
 .commento-comments {
   margin-bottom: 1.5rem !important;
+}
+.commento-name, .commento-subtitle {
+  margin-left: 0 !important;
 }
 
 // base class
