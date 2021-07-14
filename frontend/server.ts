@@ -13,6 +13,7 @@ import { createProxyMiddleware, Filter, Options, RequestHandler } from 'http-pro
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
+  const compression = require('compression')
   const server = express();
   const distFolder = join(process.cwd(), 'dist/frontend/browser');
   const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
@@ -66,7 +67,7 @@ const options = {
 const apiProxy = createProxyMiddleware(optionsApi);
 //const comProxy = createProxyMiddleware(optionsCom);
 const mediaProxy = createProxyMiddleware(options);
-
+  server.use(compression());
   server.use('/api', apiProxy);
   server.use('/auth', apiProxy);
   server.use('/media', mediaProxy);
