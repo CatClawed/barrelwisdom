@@ -47,6 +47,11 @@ export class A16PropertylistComponent implements OnInit {
     private errorService: ErrorCodeService,
     private seoService: SeoService) { 
     this.propertyControl = new FormControl();
+
+    this.pageForm = this.formBuilder.group({
+      filtertext: this.propertyControl,
+      transfers: ['']
+    })
   }
 
   ngOnInit(): void {
@@ -62,11 +67,6 @@ export class A16PropertylistComponent implements OnInit {
     this.seoTitle = `Properties - ${this.gameTitle}`;
     this.seoDesc = `The list of properties in ${this.gameTitle}.`
     this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-
-    this.pageForm = this.formBuilder.group({
-      filtertext: this.propertyControl,
-      transfers: ['']
-    })
 
     this.pageForm.get('transfers').valueChanges
       .subscribe(trans => {

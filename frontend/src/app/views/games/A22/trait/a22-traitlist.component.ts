@@ -47,6 +47,11 @@ export class A22TraitlistComponent implements OnInit {
     private errorService: ErrorCodeService,
     private seoService: SeoService) { 
     this.traitControl = new FormControl();
+
+    this.pageForm = this.formBuilder.group({
+      filtertext: this.traitControl,
+      transfers: ['']
+    })
   }
 
   ngOnInit(): void {
@@ -62,11 +67,6 @@ export class A22TraitlistComponent implements OnInit {
     this.seoTitle = `Traits - ${this.gameTitle}`;
     this.seoDesc = `The list of traits in ${this.gameTitle}.`
     this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-
-    this.pageForm = this.formBuilder.group({
-      filtertext: this.traitControl,
-      transfers: ['']
-    })
 
     this.pageForm.get('transfers').valueChanges
       .subscribe(trans => {

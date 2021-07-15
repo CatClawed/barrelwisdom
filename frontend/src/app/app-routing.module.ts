@@ -137,6 +137,11 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'info/atelier-series-guide',
+    redirectTo: '/blog/atelier-series-guide',
+    pathMatch: 'full'
+  },
+  {
     path: ':section/:title',
     component: DefaultLayoutComponent,
     children: [

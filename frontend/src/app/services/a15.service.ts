@@ -23,7 +23,7 @@ export class A15Service {
     }
 
     getProperty(slugname: string, language: string): Observable<Property> {
-      return this.http.get<Property>(`${environment.dbUrl}${environment.apiUrl}/A15/property/${slugname}/${language}/`);
+      return this.http.get<Property>(`${environment.apiUrl}/A15/property/${slugname}/${language}/`);
     }
 
     getEffectList(language: string): Observable<Effect[]> {
@@ -31,7 +31,7 @@ export class A15Service {
     }
 
     getEffect(slugname: string, language: string): Observable<Effect> {
-      return this.http.get<Effect>(`${environment.dbUrl}${environment.apiUrl}/A15/effect/${slugname}/${language}/`);
+      return this.http.get<Effect>(`${environment.apiUrl}/A15/effect/${slugname}/${language}/`);
     }
 
     getMonsterList(language: string): Observable<MonsterList[]> {
@@ -39,7 +39,7 @@ export class A15Service {
     }
 
     getMonster(slugname: string, language: string): Observable<MonsterFull> {
-      return this.http.get<MonsterFull>(`${environment.dbUrl}${environment.apiUrl}/A15/monster/${slugname}/${language}/`);
+      return this.http.get<MonsterFull>(`${environment.apiUrl}/A15/monster/${slugname}/${language}/`);
     }
 
     getBookList(language: string): Observable<Book[]> {
@@ -47,7 +47,7 @@ export class A15Service {
     }
 
     getBook(slugname: string, language: string): Observable<Book> {
-      return this.http.get<Book>(`${environment.dbUrl}${environment.apiUrl}/A15/book/${slugname}/${language}/`);
+      return this.http.get<Book>(`${environment.apiUrl}/A15/book/${slugname}/${language}/`);
     }
 
     getItemList(language: string): Observable<ItemList[]> {
@@ -55,7 +55,7 @@ export class A15Service {
     }
 
     getItem(slugname: string, language: string): Observable<ItemFull> {
-      return this.http.get<ItemFull>(`${environment.dbUrl}${environment.apiUrl}/A15/item/${slugname}/${language}/`);
+      return this.http.get<ItemFull>(`${environment.apiUrl}/A15/item/${slugname}/${language}/`);
     }
 
     getCategories(language: string): Observable<Category[]> {
@@ -63,11 +63,11 @@ export class A15Service {
     }
 
     getCategory(slugname: string, language: string): Observable<CategoryData> {
-      return this.http.get<CategoryData>(`${environment.dbUrl}${environment.apiUrl}/A15/category/${slugname}/${language}/`);
+      return this.http.get<CategoryData>(`${environment.apiUrl}/A15/category/${slugname}/${language}/`);
     }
 
     getRegion(slugname: string, language: string): Observable<RegionData> {
-      return this.http.get<RegionData>(`${environment.dbUrl}${environment.apiUrl}/A15/regiondata/${slugname}/${language}/`);
+      return this.http.get<RegionData>(`${environment.apiUrl}/A15/regiondata/${slugname}/${language}/`);
     }
     
 }

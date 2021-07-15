@@ -26,7 +26,6 @@ FRONTEND
 
 install node https://github.com/nodesource/distributions/blob/master/README.md
 
-
 COMMENTO
 
 install https://docs.commento.io/installation/self-hosting/on-your-server/release-binaries.html
@@ -38,14 +37,13 @@ OTHER
 sudo apt install git
 certbot
 nginx
+supervisor
+pw2
+
+supervisor -> supervisorctl myproject_gunicorn because I am big whoops and did not fix the tutorial name
+pw2 stop
+pw2 list
+etc
 
 setup ssh (cyberduck, putty, git), disable root, config file, etc, heck putty keys
 sudo ufw allow port (ssh especially)
-
-STARTUP SCRIPTS
-gunicorn Database.wsgi
-node /dist/frontend/server/main.js
-
-commento
-export COMMENTO_CONFIG_FILE=commento_config
-./commento/commento

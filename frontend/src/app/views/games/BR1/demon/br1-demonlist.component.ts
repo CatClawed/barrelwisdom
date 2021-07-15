@@ -51,6 +51,10 @@ import { SeoService } from '@app/services/seo.service';
       private seoService: SeoService
     ) { 
       this.demonControl = new FormControl();
+
+      this.pageForm = this.formBuilder.group({
+        filtertext: this.demonControl
+      })
     }
   
     ngOnInit(): void {
@@ -67,10 +71,6 @@ import { SeoService } from '@app/services/seo.service';
       this.seoTitle = `Demons - ${this.gameTitle}`;
       this.seoDesc = `The list of demons in ${this.gameTitle}.`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-  
-      this.pageForm = this.formBuilder.group({
-        filtertext: this.demonControl
-      })
   
       this.demonControl.valueChanges.subscribe(search => {
         this.searchstring = search;

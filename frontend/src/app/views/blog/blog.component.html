@@ -19,7 +19,7 @@
         </span>
         <span *ngIf="allowedToEdit" style="display: inline-block;">
             <i class="fas fa-edit"></i>
-            <a (click)="historyService.hrefClicked($event);"  routerLink="/create" [queryParams]="{ id: blog.id }"> Edit</a>
+            <a routerLink="/create" [queryParams]="{ id: blog.id }"> Edit</a>
         </span>
     </div>
 </header>

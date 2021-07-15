@@ -51,17 +51,17 @@ import { SeoService } from '@app/services/seo.service';
       private seoService: SeoService
     ) { 
       this.bookControl = new FormControl();
+
+      this.pageForm = this.formBuilder.group({
+        filtertext: this.bookControl,
+        type: ['']
+      })
     }
   
     ngOnInit(): void {
   
       this.language = this.route.snapshot.params.language;
 
-      this.pageForm = this.formBuilder.group({
-        filtertext: this.bookControl,
-        type: ['']
-      })
-  
       this.pageForm.get('type').valueChanges
         .subscribe(type => {
           this.currentType = type;

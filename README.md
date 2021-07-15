@@ -17,4 +17,5 @@ manage.py shell < scripts/myscript.py
 export NODE_OPTIONS="--max-old-space-size=5120"
 npm run dev:ssr
 ng build --configuration production && ng run frontend:server
+ng build && ng run frontend:server
 ```

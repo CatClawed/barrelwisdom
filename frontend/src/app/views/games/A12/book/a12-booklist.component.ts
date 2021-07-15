@@ -53,6 +53,11 @@ import { SeoService } from '@app/services/seo.service';
       private seoService: SeoService
     ) { 
       this.bookControl = new FormControl();
+
+      this.pageForm = this.formBuilder.group({
+        filtertext: this.bookControl,
+        type: ['']
+      })
     }
   
     ngOnInit(): void {
@@ -69,11 +74,6 @@ import { SeoService } from '@app/services/seo.service';
       this.seoTitle = `Recipe Books - ${this.gameTitle}`;
       this.seoDesc = `The list of recipe books in ${this.gameTitle}.`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-  
-      this.pageForm = this.formBuilder.group({
-        filtertext: this.bookControl,
-        type: ['']
-      })
   
       this.pageForm.get('type').valueChanges
         .subscribe(type => {

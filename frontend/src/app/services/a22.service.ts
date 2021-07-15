@@ -25,7 +25,7 @@ export class A22Service {
   }
 
   getTrait(slugname: string, language: string): Observable<Trait> {
-    return this.http.get<Trait>(`${environment.dbUrl}${environment.apiUrl}/A22/trait/${slugname}/${language}/`);
+    return this.http.get<Trait>(`${environment.apiUrl}/A22/trait/${slugname}/${language}/`);
   }
 
   getEffectList(language: string): Observable<Effect[]> {
@@ -33,15 +33,15 @@ export class A22Service {
   }
 
   getEffect(slugname: string, language: string): Observable<EffectFull> {
-    return this.http.get<EffectFull>(`${environment.dbUrl}${environment.apiUrl}/A22/effect/${slugname}/${language}/`);
+    return this.http.get<EffectFull>(`${environment.apiUrl}/A22/effect/${slugname}/${language}/`);
   }
 
   getLocation(slugname: string, language: string): Observable<Region> {
-    return this.http.get<Region>(`${environment.dbUrl}${environment.apiUrl}/A22/region/${slugname}/${language}/`);
+    return this.http.get<Region>(`${environment.apiUrl}/A22/region/${slugname}/${language}/`);
   }
 
   getMonster(slugname: string, language: string): Observable<MonsterFull> {
-    return this.http.get<MonsterFull>(`${environment.dbUrl}${environment.apiUrl}/A22/monster/${slugname}/${language}/`);
+    return this.http.get<MonsterFull>(`${environment.apiUrl}/A22/monster/${slugname}/${language}/`);
   }
 
   getMonsterList(language: string): Observable<Monster[]> {
@@ -49,7 +49,7 @@ export class A22Service {
   }
 
   getItem(slugname: string, language: string): Observable<ItemFull> {
-    return this.http.get<ItemFull>(`${environment.dbUrl}${environment.apiUrl}/A22/item/${slugname}/${language}/`);
+    return this.http.get<ItemFull>(`${environment.apiUrl}/A22/item/${slugname}/${language}/`);
   }
 
   getItemList(language: string): Observable<Item[]> {
@@ -57,7 +57,7 @@ export class A22Service {
   }
 
   getCategoryItem(slugname: string, language: string): Observable<CategoryItem> {
-    return this.http.get<CategoryItem>(`${environment.dbUrl}${environment.apiUrl}/A22/categoryitem/${slugname}/${language}/`);
+    return this.http.get<CategoryItem>(`${environment.apiUrl}/A22/categoryitem/${slugname}/${language}/`);
   }
 
   getCategoryList(language: string): Observable<Name[]> {

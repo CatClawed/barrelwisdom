@@ -1,13 +1,12 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { environment } from '@environments/environment';
 import { ErrorCodeService } from "@app/services/errorcode.service";
 import { AuthenticationService } from "@app/services/authentication.service";
 import { User } from "@app/interfaces/user";
 import { EditBlog } from "@app/interfaces/blog";
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
+import { SafeHtml } from '@angular/platform-browser'
 import { MarkdownService } from 'ngx-markdown';
 import { COMMA, ENTER}  from '@angular/cdk/keycodes';
 import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
@@ -72,10 +71,8 @@ export class CreateComponent {
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
-    private location: Location,
     private errorService: ErrorCodeService,
     private authenticationService: AuthenticationService,
-    private sanitized: DomSanitizer,
     private markdownService: MarkdownService,
     private tagService: TagService,
     private sectionService: SectionService,
@@ -84,7 +81,19 @@ export class CreateComponent {
     this.getTags();
     this.authenticationService.user.subscribe(x => this.user = x);
     this.tagControl = new FormControl();
-    
+
+    this.pageForm = this.formBuilder.group({
+      title: ['', [Validators.required, Validators.maxLength(100)]],
+      body: ['', Validators.required],
+      section: ['', Validators.required],
+      seoDesc: ['', [Validators.required, Validators.maxLength(200)]],
+      imgURL: ['', this.imgValidators],
+      authorLock: [false],
+      tags: this.tagControl
+    });
+  }
+
+  ngOnInit() {
 
     this.filteredTags = this.tagControl.valueChanges.pipe(
       startWith(null as Observable<string[]>),
@@ -98,19 +107,6 @@ export class CreateComponent {
         this.currentTitle = "Create Page";
         this.editMode = false;
       }
-  }
-
-  ngOnInit() {
-
-      this.pageForm = this.formBuilder.group({
-        title: ['', [Validators.required, Validators.maxLength(100)]],
-        body: ['', Validators.required],
-        section: ['', Validators.required],
-        seoDesc: ['', [Validators.required, Validators.maxLength(200)]],
-        imgURL: ['', this.imgValidators],
-        authorLock: [false],
-        tags: this.tagControl
-      });
 
     this.pageForm.get('section').valueChanges
       .subscribe(value => {

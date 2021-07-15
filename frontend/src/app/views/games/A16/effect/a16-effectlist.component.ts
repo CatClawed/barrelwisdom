@@ -50,6 +50,10 @@ import { SeoService } from '@app/services/seo.service';
       private seoService: SeoService
     ) { 
       this.effectControl = new FormControl();
+
+      this.pageForm = this.formBuilder.group({
+        filtertext: this.effectControl
+      })
     }
   
     ngOnInit(): void {
@@ -68,10 +72,6 @@ import { SeoService } from '@app/services/seo.service';
       this.seoDesc = `The list of effects in ${this.gameTitle}.`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-  
-      this.pageForm = this.formBuilder.group({
-        filtertext: this.effectControl
-      })
   
       this.effectControl.valueChanges.subscribe(search => {
         this.searchstring = search;

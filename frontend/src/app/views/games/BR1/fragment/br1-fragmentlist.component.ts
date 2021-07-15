@@ -48,6 +48,10 @@ import { first } from 'rxjs/operators';
       private viewportScroller: ViewportScroller
     ) { 
       this.fragmenteffectControl = new FormControl();
+
+      this.pageForm = this.formBuilder.group({
+        filtertext: this.fragmenteffectControl
+      })
     }
   
     ngOnInit(): void {
@@ -64,10 +68,6 @@ import { first } from 'rxjs/operators';
       this.seoTitle = `Fragment Effects - ${this.gameTitle}`;
       this.seoDesc = `The list of fragment effects in ${this.gameTitle}.`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-  
-      this.pageForm = this.formBuilder.group({
-        filtertext: this.fragmenteffectControl
-      })
   
       this.fragmenteffectControl.valueChanges.subscribe(search => {
         this.searchstring = search; 

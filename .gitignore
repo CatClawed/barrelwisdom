@@ -27,6 +27,7 @@ __pycache__/
 /frontend/typings
 /frontend/e2e/*.js
 /frontend/e2e/*.map
+/frontend/dist.tar
 
 # Junky stuff
 

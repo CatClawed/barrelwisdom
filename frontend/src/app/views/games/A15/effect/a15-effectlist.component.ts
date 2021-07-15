@@ -52,17 +52,17 @@ import { Meta, Title } from '@angular/platform-browser';
       private seoService: SeoService
     ) { 
       this.effectControl = new FormControl();
+
+      this.pageForm = this.formBuilder.group({
+        filtertext: this.effectControl,
+        type: ['']
+      })
     }
   
     ngOnInit(): void {
   
       this.language = this.route.snapshot.params.language;
 
-      this.pageForm = this.formBuilder.group({
-        filtertext: this.effectControl,
-        type: ['']
-      })
-  
       this.pageForm.get('type').valueChanges
         .subscribe(type => {
           this.currentType = type;
