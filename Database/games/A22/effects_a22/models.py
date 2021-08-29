@@ -37,6 +37,7 @@ class Effect(models.Model):
     ]
     slugname = models.SlugField(max_length=50, unique=True)
     efftype = models.CharField(max_length=20, choices=types)
+    effsub = models.CharField(max_length=20, blank=True, default="")
     note = models.CharField(max_length=255, blank=True)
     index = models.IntegerField()
     eff_en = models.OneToOneField(Effect_en, on_delete=models.CASCADE)
@@ -47,3 +48,16 @@ class Effect(models.Model):
     eff_tc = models.OneToOneField(Effect_tc, on_delete=models.CASCADE)
     parent = models.ManyToManyField("self", blank=True, related_name='parent') # Forge and EV
     effects = models.ManyToManyField("self", blank=True, related_name='effects') # EV only
+    # Advanced Data, not interpreted
+    attTag0 = models.CharField(max_length=50, blank=True, null=True, default="")
+    actTag0 = models.CharField(max_length=50, blank=True, null=True, default="")
+    min_1_0 = models.CharField(max_length=50, blank=True, null=True, default="")
+    max_1_0 = models.CharField(max_length=50, blank=True, null=True, default="")
+    min_2_0 = models.CharField(max_length=50, blank=True, null=True, default="")
+    max_2_0 = models.CharField(max_length=50, blank=True, null=True, default="")
+    attTag1 = models.CharField(max_length=50, blank=True, null=True, default="")
+    actTag1 = models.CharField(max_length=50, blank=True, null=True, default="")
+    min_1_1 = models.CharField(max_length=50, blank=True, null=True, default="")
+    max_1_1 = models.CharField(max_length=50, blank=True, null=True, default="")
+    min_2_1 = models.CharField(max_length=50, blank=True, null=True, default="")
+    max_2_1 = models.CharField(max_length=50, blank=True, null=True, default="")

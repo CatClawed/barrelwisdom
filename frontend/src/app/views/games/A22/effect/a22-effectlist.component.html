@@ -80,6 +80,19 @@
           <ul *ngIf="eff.efftype == 'EV'">
             <li *ngFor="let e of eff.effects"><a href="javascript:void(0)" tooltip="{{e.desc}}" container="true">{{e.name}}</a></li>
           </ul>
+          <p *ngIf="eff.actTag0"><b>Advanced Data</b></p>
+          <ul *ngIf="eff.actTag0">
+            <li>
+              <span *ngIf="eff.attTag0">{{eff.attTag0}} /</span> {{eff.actTag0}}
+              <li *ngIf="eff.min_1_0"><b>Value 1: </b>{{eff.min_1_0}}<span *ngIf="eff.max_1_0">- {{eff.max_1_0}}</span></li>
+              <li *ngIf="eff.min_2_0"><b>Value 2: </b>{{eff.min_2_0}}<span *ngIf="eff.max_2_0">- {{eff.max_2_0}}</span></li>
+            </li>
+            <li *ngIf="eff.actTag1">
+              <span *ngIf="eff.attTag1">{{eff.attTag1}} /</span> {{eff.actTag1}}
+              <li *ngIf="eff.min_1_1"><b>Value 1: </b>{{eff.min_1_1}}<span *ngIf="eff.max_1_1">- {{eff.max_1_1}}</span></li>
+              <li *ngIf="eff.min_2_1"><b>Value 2: </b>{{eff.min_2_1}}<span *ngIf="eff.max_2_1">- {{eff.max_2_1}}</span></li>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

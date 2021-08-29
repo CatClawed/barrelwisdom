@@ -29,6 +29,7 @@ export interface ExtraEffs {
     slugname: string;
     name: string;
     efftype: string;
+    effsub: string;
     desc: string;
 }
 
@@ -49,6 +50,7 @@ export interface Effect {
     name: string;
     description: string;
     efftype: string;
+    effsub: string;
     effects: ExtraEffs[];
 }
 
@@ -59,9 +61,22 @@ export interface EffectFull {
     name: string;
     description: string;
     efftype: string;
+    effsub: string;
     effects: ExtraEffs[];
     parent: ExtraEffs[];
     effectline_set: EffectLine[];
+    attTag0: string;
+    actTag0: string;
+    min_1_0: string;
+    max_1_0: string;
+    min_2_0: string;
+    max_2_0: string;
+    attTag1: string;
+    actTag1: string;
+    min_1_1: string;
+    max_1_1: string;
+    min_2_1: string;
+    max_2_1: string;
 }
 
 /* Items */

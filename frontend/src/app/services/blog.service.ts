@@ -22,7 +22,7 @@ export class BlogService {
   }
 
   createBlog(title: string, slugtitle: string, body: string, image: string, description: string, authorlock: boolean, author: number[], section: number, tags: number[]) {
-    return this.http.post(`/editblog/`, { title, slugtitle, body, image, description, authorlock, author, section, tags })
+    return this.http.post(`${environment.apiUrl}/editblog/`, { title, slugtitle, body, image, description, authorlock, author, section, tags })
   }
 
   updateBlog(id: string, title: string, slugtitle: string, body: string, image: string, description: string, authorlock: boolean, author: number[], section: number, tags: number[]) {
