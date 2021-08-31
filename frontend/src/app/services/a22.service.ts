@@ -28,7 +28,13 @@ export class A22Service {
     return this.http.get<Trait>(`${environment.apiUrl}/A22/trait/${slugname}/${language}/`);
   }
 
-  getEffectList(language: string): Observable<Effect[]> {
+  getEffectList(language: string, ev: boolean, forge: boolean): Observable<Effect[]> {
+    if (ev) {
+      return this.http.get<Effect[]>(`${environment.apiUrl}/A22/eveffect/${language}/`);
+    }
+    if (forge) {
+      return this.http.get<Effect[]>(`${environment.apiUrl}/A22/forgeeffect/${language}/`);
+    }
     return this.http.get<Effect[]>(`${environment.apiUrl}/A22/effect/${language}/`);
   }
 

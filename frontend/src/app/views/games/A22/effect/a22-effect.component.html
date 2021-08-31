@@ -5,7 +5,9 @@
   <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
     <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.hrefClicked($event)">{{gameTitle}}</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}/effects/{{language}}" (click)="historyService.hrefClicked($event)">Effects</a></li>
+    <li class="breadcrumb-item" *ngIf="effect.efftype == 'Normal' || effect.efftype == 'Material'"><a href="/{{gameURL}}/effects/{{language}}" (click)="historyService.hrefClicked($event)">Effects</a></li>
+    <li class="breadcrumb-item" *ngIf="effect.efftype == 'Forge'"><a href="/{{gameURL}}/forge-effects/{{language}}" (click)="historyService.hrefClicked($event)">Forge Effects</a></li>
+    <li class="breadcrumb-item" *ngIf="effect.efftype == 'EV'"><a href="/{{gameURL}}/ev-effects/{{language}}" (click)="historyService.hrefClicked($event)">EV Effects</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{effect.name}}</li>
   </ol>
 </nav>
@@ -14,12 +16,9 @@
     <div class="flex">
         <h4 class="card-title  card-icon-space">{{effect.name}}</h4>
         <div class="card-icon-position">
-          <i *ngIf="effect.efftype == 'Normal'" class="atelier atelier-ryza2-type-synthesis"></i>
-          <i *ngIf="effect.efftype == 'Weapon Forge'" class="atelier atelier-ryza2-type-weapon"></i> <i *ngIf="effect.efftype == 'Weapon Forge'" class="atelier atelier-ryza2-forge"></i>
-          <i *ngIf="effect.efftype == 'Armor Forge'" class="atelier atelier-ryza2-type-armor"></i> <i *ngIf="effect.efftype == 'Armor Forge'" class="atelier atelier-ryza2-forge"></i>
-          <i *ngIf="effect.efftype == 'Accessory Forge'" class="atelier atelier-ryza2-type-accessory"></i> <i *ngIf="effect.efftype == 'Accessory Forge'" class="atelier atelier-ryza2-forge"></i>
-          <i *ngIf="effect.efftype == 'Material'" class="atelier atelier-ryza2-material"></i>
-          <span *ngIf="effect.efftype == 'EV'" class="badge bg-secondary">EV</span>
+          <i *ngIf="effect.efftype == 'Normal' && effect.effsub != 'Material'" class="atelier atelier-ryza2-type-synthesis"></i>
+          <i *ngIf="effect.effsub == 'Material'" class="atelier atelier-ryza2-material"></i>
+          <i *ngIf="effect.effsub == 'Weapon'" class="atelier atelier-ryza2-type-weapon"></i><i *ngIf="effect.effsub == 'Armor'" class="atelier atelier-ryza2-type-armor"></i><i *ngIf="effect.effsub == 'Accessory'" class="atelier atelier-ryza2-type-accessory"></i><i *ngIf="effect.effsub == 'Attack'" class="atelier atelier-ryza2-type-attack"></i><i *ngIf="effect.effsub == 'Heal'" class="atelier atelier-ryza2-type-heal"></i> <span *ngIf="effect.efftype == 'EV'" class="badge bg-secondary">EV</span><i *ngIf="effect.efftype == 'Forge'" class="atelier atelier-ryza2-forge"></i>
         </div>
       </div>
       <div class="card-text">
@@ -40,6 +39,23 @@
         <ul *ngIf="effect.parent">
           <li *ngFor="let e of effect.parent"><a href="/{{gameURL}}/effects/{{e.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{e.name}}</a></li>
         </ul>
+        <b *ngIf="effect.actTag0">Advanced Data:</b>
+          <ul *ngIf="effect.actTag0">
+            <li>
+              <span *ngIf="effect.attTag0">{{effect.attTag0}} /</span> {{effect.actTag0}}
+              <ul>
+                <li *ngIf="effect.min_1_0"><b>Value 1: </b>{{effect.min_1_0}}<span *ngIf="effect.max_1_0"> - {{effect.max_1_0}}</span></li>
+                <li *ngIf="effect.min_2_0"><b>Value 2: </b>{{effect.min_2_0}}<span *ngIf="effect.max_2_0"> - {{effect.max_2_0}}</span></li>
+              </ul>
+            </li>
+            <li *ngIf="effect.actTag1">
+              <span *ngIf="effect.attTag1">{{effect.attTag1}} /</span> {{effect.actTag1}}
+              <ul>
+                <li *ngIf="effect.min_1_1"><b>Value 1: </b>{{effect.min_1_1}}<span *ngIf="effect.max_1_1"> - {{effect.max_1_1}}</span></li>
+                <li *ngIf="effect.min_2_1"><b>Value 2: </b>{{effect.min_2_1}}<span *ngIf="effect.max_2_1"> - {{effect.max_2_1}}</span></li>
+              </ul>
+            </li>
+          </ul>
       </div>
 </div>
 <language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="{{gameURL}}"></language-settings>

@@ -31,6 +31,9 @@ import { SeoService } from '@app/services/seo.service';
     searchstring = "";
     language = "";
     config: ModalOptions = { class: "col-md-5 mx-auto" };
+    normal = false;
+    ev = false;
+    forge = false;
   
     seoTitle: string;
     seoDesc: string;
@@ -51,7 +54,10 @@ import { SeoService } from '@app/services/seo.service';
       private a22service: A22Service,
       private errorService: ErrorCodeService,
       private seoService: SeoService
-    ) { 
+    ) {
+
+      console.log(this.route.snapshot.params);
+
       this.effectControl = new FormControl();
 
       this.pageForm = this.formBuilder.group({
@@ -61,11 +67,16 @@ import { SeoService } from '@app/services/seo.service';
     }
   
     ngOnInit(): void {
-  
       this.language = this.route.snapshot.params.language;
-  
-      this.getEffects();
-      
+
+      this.route.data.subscribe(data => {
+        if(data.type == "normal") this.normal = true;
+        if(data.type == "forge") this.forge = true;
+        if(data.type == "ev") this.ev = true;
+
+        this.getEffects();
+      });
+        
       this.gameTitle = this.a22service.gameTitle;
       this.gameURL = this.a22service.gameURL;
       this.imgURL = this.a22service.imgURL;
@@ -93,7 +104,7 @@ import { SeoService } from '@app/services/seo.service';
     }
   
     getEffects() {
-      this.a22service.getEffectList(this.language)
+      this.a22service.getEffectList(this.language, this.ev, this.forge)
       .subscribe(effects => {
         this.effects = effects;
         this.filteredEffects = this.pageForm.valueChanges.pipe(
@@ -125,23 +136,27 @@ import { SeoService } from '@app/services/seo.service';
       let effectlist: Effect[];
       switch(type) {
         case "2": {
-          effectlist = this.effects.filter(effect => effect.efftype == 'Weapon Forge');
+          effectlist = this.effects.filter(effect => effect.effsub == 'Weapon');
           break;
         }
         case "3": {
-          effectlist = this.effects.filter(effect => effect.efftype == "Armor Forge");
+          effectlist = this.effects.filter(effect => effect.effsub == "Armor");
           break;
         }
         case "4": {
-          effectlist = this.effects.filter(effect => effect.efftype == "Accessory Forge");
+          effectlist = this.effects.filter(effect => effect.effsub == "Accessory");
           break;
         }
         case "5": {
-          effectlist = this.effects.filter(effect => effect.efftype == "EV");
+          effectlist = this.effects.filter(effect => effect.effsub == "Attack");
           break;
         }
         case "6": {
-          effectlist = this.effects.filter(effect => effect.efftype == "Material");
+          effectlist = this.effects.filter(effect => effect.effsub == "Material");
+          break;
+        }
+        case "7": {
+          effectlist = this.effects.filter(effect => effect.effsub == "Heal");
           break;
         }
         default: {

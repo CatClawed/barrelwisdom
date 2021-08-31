@@ -26,6 +26,27 @@ const routes: Routes = [
       {
         path: '', 
         loadChildren: ()=> import('@app/views/games/A22/effect/a22-effect.module').then(m=>m.A22EffectModule),
+        data: { type: "normal" }
+      },
+    ]
+  },
+  {
+    path: 'forge-effects',
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A22/effect/a22-effect.module').then(m=>m.A22EffectModule),
+        data: { type: "forge" }
+      },
+    ]
+  },
+  {
+    path: 'ev-effects',
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A22/effect/a22-effect.module').then(m=>m.A22EffectModule),
+        data: { type: "ev" }
       },
     ]
   },

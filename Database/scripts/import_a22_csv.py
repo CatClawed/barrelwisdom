@@ -12,9 +12,89 @@ import csv
 import codecs
 import sys
 
+effs = Effect.objects.all()
+
+for eff in effs:
+	if eff.efftype == 'Weapon Forge':
+		eff.efftype = 'Forge'
+		eff.effsub = 'Weapon'
+	if eff.efftype == 'Accessory Forge':
+		eff.efftype = 'Forge'
+		eff.effsub = 'Accessory'
+	if eff.efftype == 'Armor Forge':
+		eff.efftype = 'Forge'
+		eff.effsub = 'Armor'
+	if eff.efftype == 'EV':
+		if eff.slugname.endswith('-stamp'):
+			eff.effsub = 'Accessory'
+		if eff.slugname.endswith('-mark'):
+			eff.effsub = 'Accessory'
+		if eff.slugname.endswith('-charm'):
+			eff.effsub = 'Accessory'
+		if eff.slugname.endswith('-seal'):
+			eff.effsub = 'Attack'
+		if eff.slugname.endswith('-brand'):
+			eff.effsub = 'Attack'
+		if eff.slugname.endswith('-blessing'):
+			eff.effsub = 'Heal'
+		if eff.slugname.endswith('-protection'):
+			eff.effsub = 'Heal'
+	if eff.efftype == 'Material':
+		eff.efftype = 'Normal'
+		eff.effsub = 'Material'
+	eff.save()
+
+
 with open('scripts/data.txt', newline='', encoding='utf-8') as csvfile:
-	reader = csv.reader(csvfile, delimiter='\t')
-	for row in reader:
+	#reader = csv.reader(csvfile, delimiter='\t')
+	#for row in reader:
+
+		"""
+
+		obj = Effect.objects.get(slugname=row[0])
+		if row[1]:
+			obj.attTag0 = row[1]
+		if row[2]:
+			obj.actTag0 = row[2]
+		if row[3]:
+			obj.max_1_0 = ""
+			if row[4] != row[3]:
+				obj.max_1_0 = row[4]
+			obj.min_1_0 = row[3]
+		if row[5]:
+			obj.attTag1 = row[5]
+		if row[6]:
+			obj.actTag1 = row[6]
+		if row[7]:
+			obj.max_1_1 = ""
+			if row[8] != row[7]:
+				obj.max_1_1 = row[8]
+			obj.min_1_1 = row[7]
+		if row[9]:
+			obj.max_2_1 = ""
+			if row[10] != row[9]:
+				obj.max_2_1 = row[10]
+			obj.min_2_1 = row[9]
+		if row[11]:
+			obj.max_2_0 = ""
+			if row[12] != row[11]:
+				obj.max_2_0 = row[12]
+			obj.min_2_0 = row[11]
+		obj.save()
+
+
+		obj = Effect.objects.get(slugname=row[0])
+		print(row[0])
+		obj.parent.clear()
+		parents = row[1].split(',')
+		for p in parents:
+			if p:
+				print(p)
+				p1 = Effect.objects.get(slugname=p)
+				obj.parent.add(p1)
+		obj.save()
+
+
 		en = Effect_en(name=row[3],  description=row[4])
 		ja = Effect_ja(name=row[5],  description=row[6])
 		ko = Effect_ko(name=row[7],  description=row[8])
@@ -43,7 +123,6 @@ with open('scripts/data.txt', newline='', encoding='utf-8') as csvfile:
 		obj.save()
 
 
-		"""
 		area = Location.objects.get(slugname=row[0])
 		rank1 = (Item.objects.get(slugname=row[1]) if row[1] else None)
 		rank2 = (Item.objects.get(slugname=row[2]) if row[2] else None)

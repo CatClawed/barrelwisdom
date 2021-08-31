@@ -3,12 +3,16 @@
 <div *ngIf="!error">
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
-<li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
     <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.hrefClicked($event)">{{gameTitle}}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Effects</li>
+    <li *ngIf="normal" class="breadcrumb-item active" aria-current="page">Effects</li>
+    <li *ngIf="forge" class="breadcrumb-item active" aria-current="page">Forge Effects</li>
+    <li *ngIf="ev" class="breadcrumb-item active" aria-current="page">EV Effects</li>
   </ol>
 </nav>
-<h1>Effects</h1>
+<h1 *ngIf="normal">Effects</h1>
+<h1 *ngIf="forge">Forge Effects</h1>
+<h1 *ngIf="ev">EV Effects</h1>
 <div class="col-md-10 mx-auto">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
@@ -21,25 +25,29 @@
           <mat-label>Type</mat-label>
           <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
             <mat-option value="1" selected> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-synthesis"></mat-icon> Any</mat-option>
-            <mat-option value="2"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-weapon"  ></mat-icon> Weapon Forge</mat-option>
-            <mat-option value="3"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-armor"    ></mat-icon> Armor Forge</mat-option>
-            <mat-option value="4"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-accessory"  ></mat-icon> Accessory Forge</mat-option>
-            <mat-option value="5"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"    ></mat-icon> EV</mat-option>
-            <mat-option value="6"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-material"  ></mat-icon> Material</mat-option>
+            <mat-option value="2" *ngIf="forge"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-weapon"  ></mat-icon> Weapon</mat-option>
+            <mat-option value="3" *ngIf="forge"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-armor"    ></mat-icon> Armor</mat-option>
+            <mat-option value="5" *ngIf="ev"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-attack"    ></mat-icon> Attack</mat-option>
+            <mat-option value="7" *ngIf="ev"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-heal"    ></mat-icon> Heal</mat-option>
+            <mat-option value="4" *ngIf="forge || ev"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-accessory"  ></mat-icon> Accessory</mat-option>
+            <mat-option value="6" *ngIf="normal"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-material"  ></mat-icon> Material</mat-option>
             <mat-select-trigger *ngIf="f.type.value == 1">
                Any
             </mat-select-trigger>
             <mat-select-trigger *ngIf="f.type.value == 2">
-               Weapon Forge
+               Weapon
             </mat-select-trigger>
             <mat-select-trigger *ngIf="f.type.value == 3">
-               Armor Forge
-            </mat-select-trigger>
-            <mat-select-trigger *ngIf="f.type.value == 4">
-               Accessory Forge
+               Armor
             </mat-select-trigger>
             <mat-select-trigger *ngIf="f.type.value == 5">
-               EV
+               Attack
+            </mat-select-trigger>
+            <mat-select-trigger *ngIf="f.type.value == 7">
+               Heal
+            </mat-select-trigger>
+            <mat-select-trigger *ngIf="f.type.value == 4">
+               Accessory
             </mat-select-trigger>
             <mat-select-trigger *ngIf="f.type.value == 6">
                Material
@@ -63,12 +71,9 @@
         <div class="flex">
           <h4 class="card-title card-icon-space"><a style="color: black;" (click)="openModal(effectModal, eff.slugname); $event.preventDefault();" href="/{{gameURL}}/effects/{{eff.slugname}}/{{language}}">{{eff.name}}</a></h4>
           <div class="card-icon-position">
-            <i *ngIf="eff.efftype == 'Normal'" class="atelier atelier-ryza2-type-synthesis"></i>
-            <i *ngIf="eff.efftype == 'Weapon Forge'" class="atelier atelier-ryza2-type-weapon"></i> <i *ngIf="eff.efftype == 'Weapon Forge'" class="atelier atelier-ryza2-forge"></i>
-            <i *ngIf="eff.efftype == 'Armor Forge'" class="atelier atelier-ryza2-type-armor"></i> <i *ngIf="eff.efftype == 'Armor Forge'" class="atelier atelier-ryza2-forge"></i>
-            <i *ngIf="eff.efftype == 'Accessory Forge'" class="atelier atelier-ryza2-type-accessory"></i> <i *ngIf="eff.efftype == 'Accessory Forge'" class="atelier atelier-ryza2-forge"></i>
-            <i *ngIf="eff.efftype == 'Material'" class="atelier atelier-ryza2-material"></i>
-            <span *ngIf="eff.efftype == 'EV'" class="badge bg-secondary">EV</span>
+            <i *ngIf="eff.efftype == 'Normal' && eff.effsub != 'Material'" class="atelier atelier-ryza2-type-synthesis"></i>
+            <i *ngIf="eff.effsub == 'Material'" class="atelier atelier-ryza2-material"></i>
+            <i *ngIf="eff.effsub == 'Weapon'" class="atelier atelier-ryza2-type-weapon"></i><i *ngIf="eff.effsub == 'Armor'" class="atelier atelier-ryza2-type-armor"></i><i *ngIf="eff.effsub == 'Accessory'" class="atelier atelier-ryza2-type-accessory"></i><i *ngIf="eff.effsub == 'Attack'" class="atelier atelier-ryza2-type-attack"></i><i *ngIf="eff.effsub == 'Heal'" class="atelier atelier-ryza2-type-heal"></i> <span *ngIf="eff.efftype == 'EV'" class="badge bg-secondary">EV</span><i *ngIf="eff.efftype == 'Forge'" class="atelier atelier-ryza2-forge"></i>
           </div>
         </div>
         <div style="padding-right:1rem;margin-right:1rem;" class="card-text">
@@ -79,19 +84,6 @@
           <p *ngIf="eff.note"><b>Note:</b> {{eff.note}}</p>
           <ul *ngIf="eff.efftype == 'EV'">
             <li *ngFor="let e of eff.effects"><a href="javascript:void(0)" tooltip="{{e.desc}}" container="true">{{e.name}}</a></li>
-          </ul>
-          <p *ngIf="eff.actTag0"><b>Advanced Data</b></p>
-          <ul *ngIf="eff.actTag0">
-            <li>
-              <span *ngIf="eff.attTag0">{{eff.attTag0}} /</span> {{eff.actTag0}}
-              <li *ngIf="eff.min_1_0"><b>Value 1: </b>{{eff.min_1_0}}<span *ngIf="eff.max_1_0">- {{eff.max_1_0}}</span></li>
-              <li *ngIf="eff.min_2_0"><b>Value 2: </b>{{eff.min_2_0}}<span *ngIf="eff.max_2_0">- {{eff.max_2_0}}</span></li>
-            </li>
-            <li *ngIf="eff.actTag1">
-              <span *ngIf="eff.attTag1">{{eff.attTag1}} /</span> {{eff.actTag1}}
-              <li *ngIf="eff.min_1_1"><b>Value 1: </b>{{eff.min_1_1}}<span *ngIf="eff.max_1_1">- {{eff.max_1_1}}</span></li>
-              <li *ngIf="eff.min_2_1"><b>Value 2: </b>{{eff.min_2_1}}<span *ngIf="eff.max_2_1">- {{eff.max_2_1}}</span></li>
-            </li>
           </ul>
         </div>
       </div>
