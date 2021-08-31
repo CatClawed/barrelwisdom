@@ -56,8 +56,6 @@ import { SeoService } from '@app/services/seo.service';
       private seoService: SeoService
     ) {
 
-      console.log(this.route.snapshot.params);
-
       this.effectControl = new FormControl();
 
       this.pageForm = this.formBuilder.group({
@@ -69,23 +67,32 @@ import { SeoService } from '@app/services/seo.service';
     ngOnInit(): void {
       this.language = this.route.snapshot.params.language;
 
-      this.route.data.subscribe(data => {
-        if(data.type == "normal") this.normal = true;
-        if(data.type == "forge") this.forge = true;
-        if(data.type == "ev") this.ev = true;
-
-        this.getEffects();
-      });
-        
       this.gameTitle = this.a22service.gameTitle;
       this.gameURL = this.a22service.gameURL;
       this.imgURL = this.a22service.imgURL;
 
-      this.seoURL = `${this.gameURL}/effects/${this.language}`;
-      this.seoTitle = `Effects - ${this.gameTitle}`;
-      this.seoDesc = `The list of effects in ${this.gameTitle}.`
-      this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-  
+      this.route.data.subscribe(data => {
+        if(data.type == "normal") {
+          this.normal = true;
+          this.seoURL = `${this.gameURL}/effects/${this.language}`;
+          this.seoTitle = `Effects - ${this.gameTitle}`;
+          this.seoDesc = `The list of effects in ${this.gameTitle}.`
+        }
+        if(data.type == "forge") {
+          this.forge = true;
+          this.seoURL = `${this.gameURL}/forge-effects/${this.language}`;
+          this.seoTitle = `Forge Effects - ${this.gameTitle}`;
+          this.seoDesc = `The list of forge effects in ${this.gameTitle}.`
+        }
+        if(data.type == "ev") {
+          this.ev = true;
+          this.seoURL = `${this.gameURL}/ev-effects/${this.language}`;
+          this.seoTitle = `Effects - ${this.gameTitle}`;
+          this.seoDesc = `The list of EV effects in ${this.gameTitle}.`
+        }
+        this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+        this.getEffects();
+      });  
       this.pageForm.get('type').valueChanges
         .subscribe(type => {
           this.currentType = type;
@@ -125,7 +132,9 @@ import { SeoService } from '@app/services/seo.service';
       this.modalRef = this.modalService.show(template);
       this.modalRef.onHide.subscribe((reason: string | any) => {
         if(reason != "link") {
-          this.location.go(`${this.gameURL}/effects/` + this.language);
+          if(this.normal) this.location.go(`${this.gameURL}/effects/` + this.language);
+          if(this.forge) this.location.go(`${this.gameURL}/forge-effects/` + this.language);
+          if(this.ev) this.location.go(`${this.gameURL}/ev-effects/` + this.language);
           this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
         }})
     }
