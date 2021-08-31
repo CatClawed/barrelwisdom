@@ -61,7 +61,7 @@
 <ng-container *ngIf="filteredTraits">
 <div *ngFor="let trait of filteredTraits | async| pair " class="row">
   <div *ngFor="let trt of trait" class="spacer col-md-5 mx-auto">
-    <div class="card allheight">
+    <div *ngIf="trt" class="card allheight">
       <div class="card-body griddisplay">
         <div class="flex">
           <h4 class="card-title"><a style="color: black;" (click)="openModal(traitModal, trt.slugname); $event.preventDefault();" href="/{{gameURL}}/traits/{{trt.slugname}}/{{language}}">{{trt.name}}</a></h4>

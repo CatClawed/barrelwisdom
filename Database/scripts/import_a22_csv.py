@@ -6,48 +6,56 @@ from games.A22.effects_a22.models import *
 from games.A22.locations_a22.models import Location
 from games.A22.categories_a22.models import Category
 from games.A22.shops_a22.models import Shop
-from games.A22.traits_a22.models import Trait
+from games.A22.traits_a22.models import *
 from games.A22.monsters_a22.models import *
 import csv
 import codecs
 import sys
 
-effs = Effect.objects.all()
-
-for eff in effs:
-	if eff.efftype == 'Weapon Forge':
-		eff.efftype = 'Forge'
-		eff.effsub = 'Weapon'
-	if eff.efftype == 'Accessory Forge':
-		eff.efftype = 'Forge'
-		eff.effsub = 'Accessory'
-	if eff.efftype == 'Armor Forge':
-		eff.efftype = 'Forge'
-		eff.effsub = 'Armor'
-	if eff.efftype == 'EV':
-		if eff.slugname.endswith('-stamp'):
-			eff.effsub = 'Accessory'
-		if eff.slugname.endswith('-mark'):
-			eff.effsub = 'Accessory'
-		if eff.slugname.endswith('-charm'):
-			eff.effsub = 'Accessory'
-		if eff.slugname.endswith('-seal'):
-			eff.effsub = 'Attack'
-		if eff.slugname.endswith('-brand'):
-			eff.effsub = 'Attack'
-		if eff.slugname.endswith('-blessing'):
-			eff.effsub = 'Heal'
-		if eff.slugname.endswith('-protection'):
-			eff.effsub = 'Heal'
-	if eff.efftype == 'Material':
-		eff.efftype = 'Normal'
-		eff.effsub = 'Material'
-	eff.save()
-
 
 with open('scripts/data.txt', newline='', encoding='utf-8') as csvfile:
-	#reader = csv.reader(csvfile, delimiter='\t')
-	#for row in reader:
+	reader = csv.reader(csvfile, delimiter='\t')
+	for row in reader:
+		try:
+			obj = Trait.objects.get(slugname=row[0])
+			obj.index = row[1]
+			obj.save()
+		except:
+			print(row[0])
+
+			en = Trait_en(name=row[2],  description=row[3])
+			ja = Trait_ja(name=row[4],  description=row[5])
+			ko = Trait_ko(name=row[6],  description=row[7])
+			fr = Trait_fr(name=row[8],  description=row[9])
+			sc = Trait_sc(name=row[10], description=row[11])
+			tc = Trait_tc(name=row[12], description=row[13])
+
+			en.save()
+			ja.save()
+			ko.save()
+			fr.save()
+			sc.save()
+			tc.save()
+
+			obj = Trait(
+				slugname=row[0],
+				index=row[1],
+				grade=row[14],
+				trans_atk= (True if row[15] else False),
+				trans_heal=(True if row[16] else False),
+				trans_dbf= (True if row[17] else False),
+				trans_buff=(True if row[18] else False),
+				trans_wpn= (True if row[19] else False),
+				trans_arm= (True if row[20] else False),
+				trans_acc= (True if row[21] else False),
+				trait_en=en,
+				trait_ja=ja,
+				trait_ko=ko,
+				trait_fr=fr,
+				trait_sc=sc,
+				trait_tc=tc)
+			obj.save()
+
 
 		"""
 
