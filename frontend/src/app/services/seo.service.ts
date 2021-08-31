@@ -35,11 +35,11 @@ export class SeoService {
         }
         if(image) {
             this.metaService.updateTag({ property: `twitter:card`, content: `summary_large_image` }, `property="twitter:card"`);
-            this.metaService.updateTag({ property: `twitter:image`, content: image }, `property="twitter:image"`);
-            this.metaService.updateTag({ property: `og:image`, content: image }, `property="og:image"`);
+            this.metaService.updateTag({ property: `twitter:image`, content: `https://barrelwisdom.com${image}` }, `property="twitter:image"`);
+            this.metaService.updateTag({ property: `og:image`, content: `https://barrelwisdom.com${image}` }, `property="og:image"`);
         }
         else {
-            this.metaService.updateTag({ property: `og:image`, content: `/media/main/barrel.png` }, `property="og:image"`);
+            this.metaService.updateTag({ property: `og:image`, content: `https://barrelwisdom.com/media/main/barrel.png` }, `property="og:image"`);
         }
     }
 
