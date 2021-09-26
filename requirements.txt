@@ -1,0 +1,8 @@
+django[argon2]
+psycopg2
+djangorestframework
+djoser
+pylibmc
+gunicorn
+django-debug-toolbar
+django-filter
