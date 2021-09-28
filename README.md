@@ -3,6 +3,8 @@ Gust's Atelier fansite
 
 https://barrelwisdom.com
 
+![barrel](https://barrelwisdom.com/media/main/barrelwisdom.svg)
+
 ## Prerequisites
 
 - NodeJS (should be the latest LTS version). Install it from [official site](https://nodejs.org/en/) or use your package manager, such as [Homebrew](https://brew.sh/)
