@@ -120,7 +120,11 @@ ng serve
 ```
 ng serve:ssr
 
-# Or with custom config, e.g:
+```
+
+Or with custom config, e.g:
+
+```
 ng serve --host 0.0.0.0 --liveReload=true --proxy-config proxy.conf.json
 ```
 
