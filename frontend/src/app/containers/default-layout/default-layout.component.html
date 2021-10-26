@@ -2,7 +2,7 @@
   <app-header
   [navbarBrandRouterLink]="['/']"
   [fixed]="false"
-  [navbarBrandFull]="{src: '/media/main/barrelwisdom.svg', height: 45, alt: 'Barrel Wisdom'}"
+  [navbarBrandFull]="{src: '/media/main/barrelwisdom.svg', height: 45, width: 135, alt: 'Barrel Wisdom'}"
   [navbarBrandMinimized]="{src: '/media/main/barrel.svg', height: 30, alt: 'Barrel Wisdom'}"
   [sidebarToggler]="'lg'"
   [asideMenuToggler]="false"
@@ -32,6 +32,23 @@
   <!-- Main content -->
   <main class="main">
     <div class="container-fluid col-xl-7">
+    <!-- Linkbox here? -->
+      <div class="col-12 card" style="margin-top: 0.8em;">
+          <div class="row">
+            <div class="col-md-6" style="display:flex;align-items:center;justify-content:center">
+            <div class="col-md-8">
+              <img src="/media/main/soph2.webp">
+              </div>
+              <a href="https://amzn.to/3ApYBId" class="btn btn-md btn-secondary">Amazon</a>
+            </div>
+            <div class="col-md-6" style="display:flex;align-items:center;justify-content:center">
+            <div class="col-md-8">
+              <img src="/media/main/brsl.png">
+            </div>
+              <a href="https://amzn.to/3oOg1w8" class="btn btn-md btn-secondary">Amazon</a>
+            </div>
+          </div>
+      </div>
       <router-outlet></router-outlet>
     </div>
   </main>
@@ -42,7 +59,8 @@
     <a href="https://discord.gg/utRynRKxwh"><i class="fab fa-discord" style="color:gray;font-size:2em;padding-right:0.7em;"></i></a>
   </div>
   <div class="ml-auto">
-    <a routerLink="/blog/legal" style="color:gray;">Legal</a>
+    <a routerLink="/blog/legal" style="color:gray;">Legal</a><br />
+    <a routerLink="/blog/legal" style="color:gray;">Amazon Affiliate Statement</a>
   </div>
 </app-footer>
 
