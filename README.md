@@ -1,5 +1,5 @@
 # barrelwisdom
-Gust's Atelier fansite
+A fansite for the long running Atelier series, as well as other Gust games.
 
 https://barrelwisdom.com
 
@@ -30,7 +30,7 @@ pip3 install virtualenv
 
 3. Prepare a database
 
-Django supports many kinds of database. Let's take an example for PostgreSQL for now:
+Django supports many kinds of databases. Let's take PostgreSQL as an example:
 
 - Install [PostgreSQL](https://www.postgresql.org/download/). On MacOS I recommend to use [Postgres.app](https://postgresapp.com/) since it's much easier to get it up and running. For some Linux distro, you may have to build Postgres from source.
 
@@ -92,7 +92,7 @@ yarn install
 npm install -g @angular/cli
 ```
 
-4. Depends on the shell, you may have to set
+4. On low end machines, you may have to use:
 
 ```bash
 export NODE_OPTIONS="--max-old-space-size=5120"
@@ -118,25 +118,18 @@ ng serve
 - Begin development in server-side rendering mode
 
 ```
-ng serve:ssr
-
-```
-
-Or with custom config, e.g:
-
-```
-ng serve --host 0.0.0.0 --liveReload=true --proxy-config proxy.conf.json
+npm run dev:ssr
 ```
 
 - For production build
 
 ```
-ng build
+ng build --configuration production --build-optimizer && ng run frontend:server
 ```
 
-## Website comment module
+## Comment module
 
-Commento is used for comment feature on the site. It's a drop-in and open-source replacement for Disqus.
+Commento is used for commenting on the site. It's a drop-in and open-source replacement for Disqus.
 
 - Download the release [here](https://docs.commento.io/installation/self-hosting/on-your-server/release-binaries.html)
-- Read the instruction [here](https://bloggingfordevs.com/static-site-comments/)
+- Instructions [here](https://bloggingfordevs.com/static-site-comments/)
