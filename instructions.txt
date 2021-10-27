@@ -38,11 +38,11 @@ sudo apt install git
 certbot
 nginx
 supervisor
-pw2
+pm2
 
 supervisor -> supervisorctl myproject_gunicorn because I am big whoops and did not fix the tutorial name
-pw2 stop
-pw2 list
+pm2 stop
+pm2 list
 etc
 
 setup ssh (cyberduck, putty, git), disable root, config file, etc, heck putty keys
