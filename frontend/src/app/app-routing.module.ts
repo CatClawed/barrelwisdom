@@ -122,6 +122,16 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'second-light',
+    component: DefaultLayoutComponent,
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/BRSL/brsl-routing.module').then(m=>m.BRSLRoutingModule),
+      },
+    ]
+  },
+  {
     path: 'ryza',
     redirectTo: '/ryza/faq',
     pathMatch: 'full'

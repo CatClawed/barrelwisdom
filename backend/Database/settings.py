@@ -23,11 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['barrelwisdom.com', 'test.barrelwisdom.com', 'localhost', '127.0.0.1']
+#ALLOWED_HOSTS = ['barrelwisdom.com', 'test.barrelwisdom.com', 'localhost', '127.0.0.1']
 
-#ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*']
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
@@ -109,6 +109,8 @@ INSTALLED_APPS = [
     'games.BR1.skills_br1.apps.BR1SkillConfig',
     'games.BR1.fragments_br1.apps.BR1FragmentConfig',
     'games.BR1.items_br1.apps.BR1ItemConfig',
+    # Blue Reflection Second Light
+    'games.BRSL.fragments_brsl.apps.BRSLFragmentConfig',
 ]
 
 

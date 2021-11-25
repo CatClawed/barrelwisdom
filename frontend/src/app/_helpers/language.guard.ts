@@ -26,32 +26,28 @@ export class LanguageGuard implements CanActivate {
         if(!this.languageService.languageValue) {
             this.languageService.setLanguage(language); // doesn't matter if this is a bad value, EN is default
         }
+
+        switch(section) {
+            case "totori":
+                if(environment.totori_languages[language]) return true;
+                break;
+            case "escha":
+                if(environment.escha_languages[language]) return true;
+                break;
+            case "shallie":
+                if(environment.shallie_languages[language]) return true;
+                break;
+            case "ryza2":
+                if(environment.ryza2_languages[language]) return true;
+                break;
+            case "bluereflection":
+                if(environment.bluereflection_languages[language]) return true;
+                break;
+            case "second-light":
+                if(environment.secondlight_languages[language]) return true;
+                break;
+        }
         
-        if(section == "totori") {
-            if(environment.totori_languages[language]) {
-                return true;
-            }
-        }
-        if(section == "escha") {
-            if(environment.escha_languages[language]) {
-                return true;
-            }
-        }
-        if(section == "shallie") {
-            if(environment.shallie_languages[language]) {
-                return true;
-            }
-        }
-        if(section == "ryza2") {
-            if(environment.ryza2_languages[language]) {
-                return true;
-            }
-        }
-        if(section == "bluereflection") {
-            if(environment.bluereflection_languages[language]) {
-                return true;
-            }
-        }
         // go to the default EN page if all else fails
         segments.pop();
         let newUrl = "";

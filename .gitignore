@@ -1,13 +1,13 @@
-# Database/Python Stuff
+# backend/Python Stuff
 
-/Database/secrets.json
-/Database/include
-/Database/lib
-/Database/bin
+/backend/secrets.json
+/backend/include
+/backend/lib
+/backend/bin
 __pycache__/
-/Database/jwt-key
-/Database/jwt-key.pub
-/Database/dump.json.gz
+/backend/jwt-key
+/backend/jwt-key.pub
+/backend/dump.json.gz
 
 # Angular Stuff
 

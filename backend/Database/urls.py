@@ -15,6 +15,7 @@ from games.A15 import urls as A15
 from games.A16 import urls as A16
 from games.A22 import urls as A22
 from games.BR1 import urls as BR1
+from games.BRSL import urls as BRSL
 
 router = routers.DefaultRouter()
 router.register(r'editblog', BlogViewSet)
@@ -31,7 +32,8 @@ routeLists = [
     A15.routes,
     A16.routes,
     A22.routes,
-    BR1.routes
+    BR1.routes,
+    BRSL.routes,
 ]
 
 for routeList in routeLists:
