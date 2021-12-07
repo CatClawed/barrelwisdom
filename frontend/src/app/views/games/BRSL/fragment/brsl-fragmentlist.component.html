@@ -15,7 +15,7 @@
       <form [formGroup]="pageForm" class="form-horizontal">
          <div class="row">
             <mat-form-field class="col-md-8" appearance="outline">
-               <mat-label>Filter fragments and choices...</mat-label>
+               <mat-label>Filter any fragment data...</mat-label>
                <input style="height: 100%;" matInput formControlName="filtertext">
             </mat-form-field>
             <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
@@ -114,7 +114,7 @@
                                </li>
                              </ul>
                           </ng-template>
-                          <td>{{frag.name}} / <a href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="fragPopover" popoverTitle="{{frag.eff}}">{{frag.eff}}</a><br />Size: {{frag.size}}<br />Gear: {{frag.gear}}</td>
+                          <td>{{frag.name}}<br /><a href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="fragPopover" popoverTitle="{{frag.eff}}">{{frag.eff}}</a><br />Size: {{frag.size}}<br />Gear: {{frag.gear}}</td>
                         </tr>
                        </table>
                      </ng-container>

@@ -25,9 +25,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#ALLOWED_HOSTS = ['barrelwisdom.com', 'test.barrelwisdom.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['barrelwisdom.com', 'test.barrelwisdom.com', 'localhost', '127.0.0.1']
 
-ALLOWED_HOSTS = ['*']
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
@@ -111,6 +112,11 @@ INSTALLED_APPS = [
     'games.BR1.items_br1.apps.BR1ItemConfig',
     # Blue Reflection Second Light
     'games.BRSL.fragments_brsl.apps.BRSLFragmentConfig',
+    'games.BRSL.items_brsl.apps.BRSLItemConfig',
+    'games.BRSL.facilities_brsl.apps.BRSLFacilityConfig',
+    'games.BRSL.skills_brsl.apps.BRSLSkillConfig',
+    'games.BRSL.demons_brsl.apps.BRSLDemonConfig',
+    'games.BRSL.regions_brsl.apps.BRSLRegionConfig',
 ]
 
 
@@ -137,9 +143,9 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
-DEBUG_TOOLBAR_CONFIG = {
-    "SHOW_TOOLBAR_CALLBACK": lambda request: True,
-}
+#DEBUG_TOOLBAR_CONFIG = {
+#    "SHOW_TOOLBAR_CALLBACK": lambda request: True,
+#}
 
 ROOT_URLCONF = 'Database.urls'
 
