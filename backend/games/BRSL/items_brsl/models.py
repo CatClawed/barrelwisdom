@@ -112,11 +112,23 @@ class LineName(models.Model):
     line_ja = models.CharField(max_length=50, unique=True)
     line_sc = models.CharField(max_length=50, unique=True)
     line_tc = models.CharField(max_length=50, unique=True)
+    
+class EffData(models.Model):
+    effect = models.ForeignKey(Effect, on_delete=models.CASCADE)
+    number = models.IntegerField()
+    class Meta:
+        ordering = ['number']
+    
+class EffLine(models.Model):
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    effectdata = models.ManyToManyField(EffData)
+    linename = models.ForeignKey(LineName, on_delete=models.CASCADE)
+    class Meta:
+        ordering = ['linename']
 
 class EffectLine(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     effect = models.ForeignKey(Effect, on_delete=models.CASCADE)
-    #line = models.IntegerField()
     linename = models.ForeignKey(LineName, on_delete=models.CASCADE)
     number = models.IntegerField()
     class Meta:

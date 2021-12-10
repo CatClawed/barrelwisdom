@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from games.BRSL.items_brsl.models import EffectLine, Ingredient, Item, Effect, SkillLine, Unit, Category, UsableItem
+from games.BRSL.items_brsl.models import EffLine, EffData, Ingredient, Item, Effect, SkillLine, Unit, Category, UsableItem
 from games.BRSL.regions_brsl.models import Region, Area
 from games.BRSL.demons_brsl.models import Demon
 from collections import OrderedDict
@@ -137,17 +137,18 @@ class BRSLItemNameSerializer(serializers.ModelSerializer):
         else:
             return obj.item_en.name
         
-class BRSLUsableItemSerializer(serializers.ModelSerializer):
+class BRSLEffectDataSerializer(serializers.ModelSerializer):
+    effect = BRSLEffectSerializer()
     class Meta:
-        model = UsableItem
-        fields = ['wt', 'cc', 'cooltime', 'effrange']
+        model = EffData
+        fields = ['effect', 'number']
         
 class BRSLEffectLineSerializer(serializers.ModelSerializer):
-    effect = BRSLEffectSerializer()
+    effectdata = BRSLEffectDataSerializer(many=True)
     line = serializers.SerializerMethodField()
     class Meta:
-        model = EffectLine
-        fields = ['effect', 'line', 'number']
+        model = EffLine
+        fields = ['line', 'effectdata']
     def get_line(self,obj):
         if 'language' not in self.context:
             return obj.linename.line_en
@@ -213,14 +214,13 @@ class BRSLItemSerializer(serializers.ModelSerializer):
     desc = serializers.SerializerMethodField()
     region_set = BRSLRegionNameSerializer(many=True)
     category = BRSLCategorySerializer(many=True)
-    usableitem_set = BRSLUsableItemSerializer(many=True)
-    effectline_set = BRSLEffectLineSerializer(many=True)
+    effline_set = BRSLEffectLineSerializer(many=True)
     skillline_set = BRSLSkillLineSerializer(many=True)
     ingredient_set = BRSLIngredientSerializer(many=True)
     demon_set = BRSLDemonNameSerializer(many=True)
     class Meta:
         model = Item
-        fields = ['slug', 'name', 'desc', 'itemtype', 'char', 'isDLC', 'region_set', 'category', 'usableitem_set','ingredient_set','effectline_set','skillline_set', 'demon_set']
+        fields = ['slug', 'name', 'desc', 'itemtype', 'char', 'isDLC', 'region_set', 'category','ingredient_set','effline_set','skillline_set', 'demon_set']
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.item_en.name

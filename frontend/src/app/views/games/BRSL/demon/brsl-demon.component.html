@@ -1,0 +1,73 @@
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+
+<div *ngIf="demon">
+<nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.hrefClicked($event)">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}/demons/{{language}}" (click)="historyService.hrefClicked($event)">Demons</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{demon.name}}</li>
+  </ol>
+</nav>
+<div class="mx-auto row">
+ <div class="{{colset}} card griddisplay card-body">
+    <div class="flex">
+        <h4 class="card-title  card-icon-space">{{demon.name}}</h4>
+        <div *ngIf="demon.isDLC" class="card-icon-position">
+          <span style="float:right;margin-right:0.5em;" class="badge bg-secondary">DLC</span>
+        </div>
+      </div>
+      <div class="card-text">
+        <img class="image-display" loading="lazy" src="{{imgURL}}demons/{{demon.slug}}.webp">
+        <table class="table" style="margin-top:1rem;">
+          <tr>
+            <td style="vertical-align:middle; border-bottom:1px solid #c8c3d3;">{{demon.desc}}</td>
+            <td style="vertical-align:middle; padding:0;border-bottom:1px solid #c8c3d3;"><img src="/media/games/second-light/characters/{{demon.char}}.webp"></td>
+          </tr>
+        </table>
+        <div class="row">
+          <div class="col-md-6">
+        <b *ngIf="demon.region_set">Locations:</b>
+        <ul *ngIf="demon.region_set">
+           <li *ngFor="let loc of demon.region_set"><a href="/{{gameURL}}/locations/{{loc.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{loc.name}}</a></li>
+        </ul>
+        <b *ngIf="demon.drops">Drops:</b>
+        <ul *ngIf="demon.drops">
+          <li *ngFor="let drop of demon.drops"><a href="/{{gameURL}}/items/{{drop.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{drop.name}}</a></li>
+        </ul>
+      </div>
+      <div class="col-md=6">
+        <table style="width:auto;" class="table" >
+          <tr>
+            <td style="border-top:transparent;padding:0;"><b>Vitality: </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;"><i *ngFor="let i of [].constructor(demon.vit)" class="fas fa-square" style="padding-right:0.1rem"> </i><i *ngFor="let i of [].constructor(5-demon.vit)" class="far fa-square" style="padding-right:0.1rem"></i></td>
+          </tr>
+          <tr>
+            <td style="border-top:transparent;padding:0;"><b>Attack: </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;"><i    *ngFor="let i of [].constructor(demon.atk)" class="fas fa-square" style="padding-right:0.1rem"></i><i *ngFor="let i of [].constructor(5-demon.atk)" class="far fa-square" style="padding-right:0.1rem"></i></td>
+          </tr>
+          <tr>
+            <td style="border-top:transparent;padding:0;"><b>Defense: </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;"><i   *ngFor="let i of [].constructor(demon.dfn)" class="fas fa-square" style="padding-right:0.1rem"></i><i *ngFor="let i of [].constructor(5-demon.dfn)" class="far fa-square" style="padding-right:0.1rem"></i></td>
+          </tr>
+        </table>
+      </div>
+      <table class="table table-shrink" >
+        <tr>
+            <th style="text-align: center;border:transparent;padding-bottom:0;width:20%"><img src="/media/games/second-light/icons/slash.webp"  style="max-width:100%"></th>
+            <th style="text-align: center;border:transparent;padding-bottom:0;width:20%"><img src="/media/games/second-light/icons/pierce.webp" style="max-width:100%"></th>
+            <th style="text-align: center;border:transparent;padding-bottom:0;width:20%"><img src="/media/games/second-light/icons/shock.webp"  style="max-width:100%"></th>
+            <th style="text-align: center;border:transparent;padding-bottom:0;width:20%"><img src="/media/games/second-light/icons/tremor.webp" style="max-width:100%"></th>
+            <th style="text-align: center;border:transparent;padding-bottom:0;width:20%"><img src="/media/games/second-light/icons/warp.webp"   style="max-width:100%"></th>
+        </tr>
+        <tr>
+            <td style="text-align: center;border:transparent;padding:0;"><i class="fas fa-arrow-down" *ngIf="demon.slash   == 'HALF'"></i><i class="fas fa-arrow-up" *ngIf="demon.slash   == 'WEAK'"></i></td>
+            <td style="text-align: center;border:transparent;padding:0;"><i class="fas fa-arrow-down" *ngIf="demon.pierce  == 'HALF'"></i><i class="fas fa-arrow-up" *ngIf="demon.pierce  == 'WEAK'"></i></td>
+            <td style="text-align: center;border:transparent;padding:0;"><i class="fas fa-arrow-down" *ngIf="demon.shock   == 'HALF'"></i><i class="fas fa-arrow-up" *ngIf="demon.shock   == 'WEAK'"></i></td>
+            <td style="text-align: center;border:transparent;padding:0;"><i class="fas fa-arrow-down" *ngIf="demon.tremor  == 'HALF'"></i><i class="fas fa-arrow-up" *ngIf="demon.tremor  == 'WEAK'"></i></td>
+            <td style="text-align: center;border:transparent;padding:0;"><i class="fas fa-arrow-down" *ngIf="demon.warp    == 'HALF'"></i><i class="fas fa-arrow-up" *ngIf="demon.warp    == 'WEAK'"></i></td>
+        </tr>
+    </table>
+      </div>
+      </div>
+    </div>
+  <language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="{{gameURL}}"></language-settings>
+ </div>
+</div>

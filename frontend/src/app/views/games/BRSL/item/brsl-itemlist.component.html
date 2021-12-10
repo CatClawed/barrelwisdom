@@ -1,0 +1,83 @@
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+
+<div *ngIf="!error">
+<nav style="margin-top: 1em;" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.hrefClicked($event)">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Items</li>
+  </ol>
+</nav>
+<h1>Items</h1>
+<div class="col-md-10 mx-auto">
+    <form [formGroup]="pageForm" class="form-horizontal">
+      <div class="row">
+        <mat-form-field class="col-md-9" appearance="outline">
+          <mat-label>Filter...</mat-label>
+          <input style="height: 100%;" matInput formControlName="filtertext">
+        </mat-form-field>
+        <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
+      </div>
+      <div class="row">
+        <mat-form-field class="col-md-4" appearance="outline">
+          <mat-label>Category</mat-label>
+          <mat-select matNativeControl formControlName="category" disableOptionCentering="true" class="mat-select-icon">
+            <mat-option value="Any" selected>Any</mat-option>
+            <mat-option *ngFor="let cat of categories" value="{{cat.name}}">
+                {{cat.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-md-4" appearance="outline">
+          <mat-label>Type</mat-label>
+          <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
+            <mat-option value="Any" selected>Any</mat-option>
+            <mat-option value="Materials">Materials</mat-option>
+            <mat-option value="Use">Use</mat-option>
+            <mat-option value="Craft">Craft</mat-option>
+            <mat-option value="Key Items">Key Items</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+<ng-container *ngIf="filteredItems">
+<div *ngFor="let item of filteredItems | async| pair " class="row">
+  <div *ngFor="let item of item" class="spacer col-md-5 mx-auto">
+    <div *ngIf="item" class="card allheight">
+      <div class="card-body griddisplay" style="position:relative">
+        <div class="flex">
+          <h4 class="card-title card-icon-space">
+              <a style="color: black;" (click)="openModal(itemModal, item.slug); $event.preventDefault();" href="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>    
+          </h4>
+          <div *ngIf="item.isDLC" class="card-icon-position">
+            <span style="float:right;margin-right:0.5em;" class="badge bg-secondary">DLC</span>
+          </div>
+        </div>
+        <div class="card-display-bottom">
+            <a class="image-display" (click)="openModal(itemModal, item.slug); $event.preventDefault();" href="/{{gameURL}}/items/{{item.slug}}/{{language}}">
+              <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp">
+            </a>
+        </div>
+        <div style="padding-right:1rem;margin-right:1rem;" class="card-text">
+          <ul style="list-style-type:none;padding-left:0;">
+            <li *ngFor="let cat of item.category">{{cat.name}}</li>
+          </ul>
+          <button (click)="openModal(itemModal, item.slug)" style="box-shadow: none;" class="card-read-more-position" mat-mini-fab color="accent">
+              <mat-icon style="font-size:20px;" fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+           </button>
+        </div>
+      </div>
+    </div>
+  </div></div>
+
+<ng-template #itemModal>
+  <div class="modal-body">
+    <button type="button" style="opacity:100;" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <i style="color:white" class="fas fa-times-circle"></i>
+    </button>
+     <brsl-item slug="{{item}}" [showNav]="false"></brsl-item>
+  </div>
+</ng-template>
+</ng-container>
+</div>

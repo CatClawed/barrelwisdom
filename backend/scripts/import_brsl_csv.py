@@ -12,6 +12,11 @@ import sys
 with open('scripts/data.txt', newline='', encoding='utf-8') as csvfile:
     reader = csv.reader(csvfile, delimiter='\t')
     for row in reader:
+        
+
+    
+        
+        """
         print(row[1][:-2])
         
         ln = LineName(
@@ -48,7 +53,6 @@ with open('scripts/data.txt', newline='', encoding='utf-8') as csvfile:
         obj.save()
         
         
-        """
         n = AreaName(
             name_en=row[4],
             name_ja=row[5],
@@ -643,4 +647,25 @@ with open('scripts/data.txt', newline='', encoding='utf-8') as csvfile:
                 char_tc=row[4],
             )
             obj.save()
+            
+            
+    EffLine.objects.all().delete()
+    EffData.objects.all().delete()
+    efflines = EffectLine.objects.all()
+    for effline in efflines:
+        try:
+            eline = EffLine.objects.get(linename=effline.linename, item=effline.item)
+        except EffLine.DoesNotExist:
+            eline = EffLine(
+                linename=effline.linename,
+                item=effline.item
+            )
+        edata = EffData(
+            effect=effline.effect,
+            number=effline.number
+        )
+        eline.save()
+        edata.save()
+        eline.effectdata.add(edata)
+        eline.save()
             """
