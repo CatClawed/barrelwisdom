@@ -144,6 +144,102 @@ export interface Unit {
 
 // Facilities
 
+export interface FEffect {
+    name: string;
+    desc: string;
+}
+
+export interface FData {
+    num: number;
+    item: NameLink;
+    category: NameOnly;
+    effect: FEffect;
+}
+
+export interface FIngredient {
+    level: number;
+    data: FData;
+}
+
+export interface FEffData {
+    effect: FEffect;
+}
+
+export interface FEffectLine {
+    effectdata: FEffData;
+    line: string;
+}
+
+export interface FacilityList {
+    slug: string;
+    name: string;
+    size: number;
+    isDLC: boolean;
+}
+
+export interface FacilityFull {
+    slug: string;
+    name: string;
+    desc: string;
+    char: string;
+    size: number;
+    isDLC: boolean;
+    facilityeffline_set: FEffectLine[];
+    facilitying_set: FIngredient[];
+}
+
+// Facility Sets
+
+export interface FacilitySet {
+    effect: FEffect;
+    facilities: NameLink[];
+}
+
 // Skills
 
+export interface SkillData {
+    name: string;
+    desc: string;
+    level: string;
+    ether: number;
+    ether_rec: number;
+    knockback: number;
+    range: string;
+    actTag0: string;
+    attTag0: string;
+    min_1_0: string;
+    max_1_0: string;
+    min_1_1: string;
+    max_1_1: string;
+    actTag1: string;
+    attTag1: string;
+    min_2_0: string;
+    max_2_0: string;
+}
+
+export interface Skill {
+    name: string;
+    slug: string;
+    skill_set: SkillData[];
+}
+
 // Regions
+
+export interface DemonData {
+    demon: NameLink;
+    once: boolean;
+}
+
+export interface Area {
+    slug: string;
+    name: string;
+    map: string;
+    items: NameLink[];
+    demons: DemonData[];
+}
+
+export interface Region {
+    slug: string;
+    name: string;
+    areas: Area[];
+}

@@ -66,3 +66,6 @@ class Monster(models.Model):
     mon_fr = models.OneToOneField(Monster_fr, on_delete=models.CASCADE)
     mon_sc = models.OneToOneField(Monster_sc, on_delete=models.CASCADE)
     mon_tc = models.OneToOneField(Monster_tc, on_delete=models.CASCADE)
+    
+    class Meta:
+        ordering = ['index']

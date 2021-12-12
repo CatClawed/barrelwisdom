@@ -92,7 +92,7 @@ import { SeoService } from '@app/services/seo.service';
     getDemons() {
       this.brslservice.getDemonList(this.language)
       .subscribe(demons => {
-        this.demons = demons;
+        this.demons = demons.splice(0,103);
         this.filteredDemons = this.pageForm.valueChanges.pipe(
           startWith(null as Observable<DemonList[]>),
           map((search: string | null) => search ? this.filterT(this.searchstring, this.currentType) : this.demons.slice())

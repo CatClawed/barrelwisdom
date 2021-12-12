@@ -1,0 +1,74 @@
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+
+<div *ngIf="facility">
+<nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.hrefClicked($event)">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}/facilities/{{language}}" (click)="historyService.hrefClicked($event)">Facilities</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{facility.name}}</li>
+  </ol>
+</nav>
+<div class="mx-auto row">
+ <div class="{{colset}} card griddisplay card-body">
+    <div class="flex">
+      <h4 class="card-title  card-icon-space">{{facility.name}}</h4>
+      <div *ngIf="facility.isDLC" class="card-icon-position">
+        <span style="float:right;margin-right:0.5em;" class="badge bg-secondary">DLC</span>
+      </div>
+      <div class="card-text">
+        <img class="image-display" loading="lazy" src="{{imgURL}}facilities/{{facility.slug}}.webp">
+        <table class="table" style="margin-top:1rem;">
+          <tr>
+            <td style="vertical-align:middle; border-bottom:1px solid #c8c3d3;">{{facility.desc}}</td>
+            <td style="vertical-align:middle; padding:0;border-bottom:1px solid #c8c3d3;"><img src="/media/games/second-light/characters/{{facility.char}}.webp"></td>
+          </tr>
+        </table>
+        <!--
+        <span *ngIf="!facility.size"  >Small</span>
+        <span *ngIf="facility.size==2">Medium</span>
+        <span *ngIf="facility.size==3">Large</span>
+        <span *ngIf="facility.size>3" >Other</span>
+        -->
+        <ng-container *ngIf="facility.facilityeffline_set">
+          <table class="table table-shrink">
+            <tr><th colspan=2 style="text-align:center;background-color:rgba(211, 211, 211, 0.3);">Effects</th></tr>
+            <tr *ngFor="let eline of facility.facilityeffline_set">
+              <td>{{eline.line}}</td>
+              <td>
+                <ul>
+                  <li *ngFor="let data of eline.effectdata">
+                    <ng-template #effPopover>
+                      {{data.effect.desc}}
+                    </ng-template>
+                    <a href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="effPopover" popoverTitle="{{data.effect.name}}">{{data.effect.name}}</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </ng-container>
+        <ng-container *ngIf="facility.facilitying_set">
+          <table class="table table-shrink">
+            <tr><th colspan=2 style="text-align:center;background-color:rgba(211, 211, 211, 0.3);">Ingredients</th></tr>
+            <tr *ngFor="let line of facility.facilitying_set">
+              <td>{{line.level}}</td>
+              <td>
+                <ul>
+                  <li *ngFor="let data of line.data">
+                    <a *ngIf="data.item"  href="/{{gameURL}}/items/{{data.item.slug}}" (click)="historyService.hrefClicked($event)">{{data.item.name}}</a>
+                    <span *ngIf="data.category">{{data.category.name}}</span>
+                    x{{data.num}}
+                    <span *ngIf="data.effect"> ({{data.effect.name}})</span>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="{{gameURL}}"></language-settings>
+</div>
+</div>

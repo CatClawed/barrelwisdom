@@ -19,7 +19,7 @@ export class BRSLUnitComponent implements OnInit {
   errorCode: string;
   errorVars: any[];
   errorMsg: string;
-  unit: Unit;
+  units: Unit[];
   colset: string;
 
   seoTitle: string;
@@ -31,14 +31,6 @@ export class BRSLUnitComponent implements OnInit {
   gameURL: string;
   imgURL: string;
 
-  expand = false;
-
-  @Input()
-  slug: string = "";
-
-  @Input()
-  showNav: boolean = true;
-
   language = "";
 
   constructor(
@@ -47,28 +39,21 @@ export class BRSLUnitComponent implements OnInit {
     public historyService: HistoryService,
     private errorService: ErrorCodeService,
     private seoService: SeoService) {
-      if(this.route.snapshot.params.unit != null) {
-      this.slug = this.route.snapshot.params.unit;
-    }
   }
   ngOnInit(): void {
     this.language = this.route.snapshot.params.language;
-    if(this.showNav) {
-      this.colset = "col-md-9 mx-auto "
-    }
-    this.brslservice.getUnit(this.slug, this.language)
+    this.brslservice.getUnit(this.language)
     .subscribe(unit => {
         this.error = false;
-        this.unit = unit;
+        this.units = unit;
 
         this.gameTitle = this.brslservice.gameTitle;
         this.gameURL = this.brslservice.gameURL;
         this.imgURL = this.brslservice.imgURL;
 
-        this.seoURL = `${this.gameURL}/units/${this.unit.slug}/${this.language}`;
-        this.seoTitle = `${this.unit.name} - ${this.gameTitle}`;
-        this.seoDesc = `${this.unit.desc}`
-        this.seoImage = `${this.imgURL}units/${this.unit.slug}.webp`
+        this.seoURL = `${this.gameURL}/units/${this.language}`;
+        this.seoTitle = `Units - ${this.gameTitle}`;
+        this.seoDesc = `All crafting units in ${this.gameTitle}.`
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error => {

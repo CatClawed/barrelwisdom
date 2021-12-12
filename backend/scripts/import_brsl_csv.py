@@ -13,10 +13,31 @@ with open('scripts/data.txt', newline='', encoding='utf-8') as csvfile:
     reader = csv.reader(csvfile, delimiter='\t')
     for row in reader:
         
-
     
         
         """
+        #EffLine.objects.all().delete()
+    #EffData.objects.all().delete()
+        if row[5]:
+            it = Item.objects.get(slug=row[0])
+            for i in range(6,10):
+                if row[i]:
+                    try:
+                        obj = EffLine.objects.get(item=it, linename=LineName.objects.get(slug=row[5]))
+                    except EffLine.DoesNotExist:
+                        obj = EffLine(
+                            item=it,
+                            linename=LineName.objects.get(slug=row[5])
+                        )
+                        obj.save()
+                    obj2 = EffData(
+                        effect=Effect.objects.get(slug=row[i]),
+                        number=i-5
+                    )
+                    obj2.save()
+                    obj.effectdata.add(obj2)
+                    obj.save()
+
         print(row[1][:-2])
         
         ln = LineName(
@@ -649,23 +670,25 @@ with open('scripts/data.txt', newline='', encoding='utf-8') as csvfile:
             obj.save()
             
             
-    EffLine.objects.all().delete()
-    EffData.objects.all().delete()
-    efflines = EffectLine.objects.all()
-    for effline in efflines:
+    IngData.objects.all().delete()
+    FacilityIng.objects.all().delete()
+    oldingredients = FacilityIngredient.objects.all()
+    for old in oldingredients:
         try:
-            eline = EffLine.objects.get(linename=effline.linename, item=effline.item)
-        except EffLine.DoesNotExist:
-            eline = EffLine(
-                linename=effline.linename,
-                item=effline.item
+            line = FacilityIng.objects.get(level=old.level, facility=old.facility)
+        except FacilityIng.DoesNotExist:
+            line = FacilityIng(
+                level=old.level,
+                facility=old.facility
             )
-        edata = EffData(
-            effect=effline.effect,
-            number=effline.number
+        data = IngData(
+            num=old.num,
+            item=old.item,
+            category=old.category,
+            effect=old.effect
         )
-        eline.save()
-        edata.save()
-        eline.effectdata.add(edata)
-        eline.save()
+        line.save()
+        data.save()
+        line.data.add(data)
+        line.save()
             """

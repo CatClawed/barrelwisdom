@@ -39,6 +39,33 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'facilities',
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/BRSL/facility/brsl-facility.module').then(m=>m.BRSLFacilityModule),
+      },
+    ]
+  },
+  {
+    path: 'skills',
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/BRSL/skill/brsl-skill.module').then(m=>m.BRSLSkillModule),
+      },
+    ]
+  },
+  {
+    path: 'locations',
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/BRSL/location/brsl-location.module').then(m=>m.BRSLLocationModule),
+      },
+    ]
+  },
+  {
     path: '',
     redirectTo: '/second-light/faq',
     pathMatch: 'full'

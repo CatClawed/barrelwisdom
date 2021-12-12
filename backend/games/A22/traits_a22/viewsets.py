@@ -25,7 +25,7 @@ class A22TraitViewSet(viewsets.ModelViewSet):
                 'item_set',
                 'item_set__item_en'
             )
-            .order_by('index')
+
         )
         serializer = A22TraitSerializerEN(queryset, many=True)
         return Response(serializer.data)
@@ -41,7 +41,7 @@ class A22TraitViewSet(viewsets.ModelViewSet):
                 'item_set',
                 'item_set__item_ko'
             )
-            .order_by('index')
+
         )
         serializer = A22TraitSerializerKO(queryset, many=True)
         return Response(serializer.data)
@@ -57,7 +57,7 @@ class A22TraitViewSet(viewsets.ModelViewSet):
                 'item_set',
                 'item_set__item_ja'
             )
-            .order_by('index')
+
         )
         serializer = A22TraitSerializerJA(queryset, many=True)
         return Response(serializer.data)
@@ -73,7 +73,7 @@ class A22TraitViewSet(viewsets.ModelViewSet):
                 'item_set',
                 'item_set__item_fr'
             )
-            .order_by('index')
+
         )
         serializer = A22TraitSerializerFR(queryset, many=True)
         return Response(serializer.data)
@@ -89,7 +89,7 @@ class A22TraitViewSet(viewsets.ModelViewSet):
                 'item_set',
                 'item_set__item_sc'
             )
-            .order_by('index')
+
         )
         serializer = A22TraitSerializerSC(queryset, many=True)
         return Response(serializer.data)
@@ -105,7 +105,7 @@ class A22TraitViewSet(viewsets.ModelViewSet):
                 'item_set',
                 'item_set__item_tc'
             )
-            .order_by('index')
+
         )
         serializer = A22TraitSerializerTC(queryset, many=True)
         return Response(serializer.data)

@@ -24,3 +24,5 @@ class Property(models.Model):
     combo1 = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE)
     combo2 = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE, related_name="combo_2")
     combo3 = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE, related_name="combo_3")
+    class Meta:
+        ordering = ['index']

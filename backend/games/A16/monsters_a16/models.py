@@ -26,3 +26,5 @@ class Monster(models.Model):
     cole  = models.IntegerField()
     note = models.CharField(max_length=200)
     locations = models.ManyToManyField(Region)
+    class Meta:
+        ordering = ['index']

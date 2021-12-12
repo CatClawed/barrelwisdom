@@ -1,0 +1,66 @@
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+
+<div *ngIf="!error">
+<nav style="margin-top: 1em;" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
+    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.hrefClicked($event)">{{gameTitle}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Facilities</li>
+  </ol>
+</nav>
+<h1>Facilities</h1>
+<div class="col-md-10 mx-auto">
+    <form [formGroup]="pageForm" class="form-horizontal">
+      <div class="row">
+        <mat-form-field class="col-md-9" appearance="outline">
+          <mat-label>Filter...</mat-label>
+          <input style="height: 100%;" matInput formControlName="filtertext">
+        </mat-form-field>
+        <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
+      </div>
+    </form>
+  </div>
+<ng-container *ngIf="filteredFacilities">
+<div *ngFor="let facilities of filteredFacilities | async| pair " class="row">
+  <div *ngFor="let facility of facilities" class="spacer col-md-5 mx-auto">
+    <div *ngIf="facility" class="card allheight">
+      <div class="card-body griddisplay" style="position:relative">
+        <div class="flex">
+          <h4 class="card-title card-icon-space">
+              <a style="color: black;" (click)="openModal(facilityModal, facility.slug); $event.preventDefault();" href="/{{gameURL}}/facilities/{{facility.slug}}/{{language}}">{{facility.name}}</a>    
+          </h4>
+          <div *ngIf="facility.isDLC" class="card-icon-position">
+            <span style="float:right;margin-right:0.5em;" class="badge bg-secondary">DLC</span>
+          </div>
+        </div>
+        <div class="card-display-bottom">
+            <a class="image-display" (click)="openModal(facilityModal, facility.slug); $event.preventDefault();" href="/{{gameURL}}/facilities/{{facility.slug}}/{{language}}">
+              <img loading="lazy" src="{{imgURL}}facilities/{{facility.slug}}.webp">
+            </a>
+        </div>
+        <div style="padding-right:1rem;margin-right:1rem;" class="card-text">
+          <!-- 
+          <p *ngIf="!facility.size"  >Small </p>
+          <p *ngIf="facility.size==2">Medium</p>
+          <p *ngIf="facility.size==3">Large </p>
+          <p *ngIf="facility.size>3" >Other </p>
+          -->
+          <button (click)="openModal(facilityModal, facility.slug)" style="box-shadow: none;" class="card-read-more-position" mat-mini-fab color="accent">
+              <mat-icon style="font-size:20px;" fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+           </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #facilityModal>
+  <div class="modal-body">
+    <button type="button" style="opacity:100;" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <i style="color:white" class="fas fa-times-circle"></i>
+    </button>
+     <brsl-facility slug="{{facility}}" [showNav]="false"></brsl-facility>
+  </div>
+</ng-template>
+</ng-container>
+</div>

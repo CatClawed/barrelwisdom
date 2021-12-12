@@ -17,7 +17,6 @@ class BR1DemonViewSet(viewsets.ModelViewSet):
     def en(self, request):
         queryset = (
             Demon.objects
-            .order_by('index')
         )
         serializer = BR1DemonSerializer(queryset, many=True)
         return Response(serializer.data)

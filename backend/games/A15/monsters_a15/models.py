@@ -33,3 +33,5 @@ class Monster(models.Model):
     isDX = models.BooleanField(default=False)
     isStrong = models.BooleanField(default=False)
     locations = models.ManyToManyField(Region)
+    class Meta:
+        ordering = ['index']

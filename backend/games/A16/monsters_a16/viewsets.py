@@ -20,7 +20,6 @@ class A16MonsterViewSet(viewsets.ModelViewSet):
             .select_related(
                 'mon_en'
             )
-            .order_by('index')
         )
         serializer = A16MonsterLevelSerializer(queryset, many=True, context={'language': 'en'})
         return Response(serializer.data)
@@ -32,7 +31,6 @@ class A16MonsterViewSet(viewsets.ModelViewSet):
             .select_related(
                 'mon_ja'
             )
-            .order_by('index')
         )
         serializer = A16MonsterLevelSerializer(queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)

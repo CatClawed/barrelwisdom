@@ -1,151 +1,32 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="unit">
-<nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-unit"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
-    <li class="breadcrumb-unit"><a href="/{{gameURL}}" (click)="historyService.hrefClicked($event)">{{gameTitle}}</a></li>
-    <li class="breadcrumb-unit"><a href="/{{gameURL}}/units/{{language}}" (click)="historyService.hrefClicked($event)">Units</a></li>
-    <li class="breadcrumb-unit active" aria-current="page">{{unit.name}}</li>
-  </ol>
-</nav>
-<div class="mx-auto row">
- <div class="{{colset}} card griddisplay card-body">
-    <div class="flex">
-      <h4 class="card-title  card-icon-space">{{unit.name}}</h4>
-      <div *ngIf="unit.isDLC" class="card-icon-position">
-        <span style="float:right;margin-right:0.5em;" class="badge bg-secondary">DLC</span>
-      </div>
-      <div class="card-text">
-        <img class="image-display" loading="lazy" src="{{imgURL}}units/{{unit.slug}}.webp">
-        <table class="table" style="margin-top:1rem;">
-          <tr>
-            <td style="vertical-align:middle; border-bottom:1px solid #c8c3d3;">{{unit.desc}}</td>
-            <td style="vertical-align:middle; padding:0;border-bottom:1px solid #c8c3d3;"><img src="/media/games/second-light/characters/{{unit.char}}.webp"></td>
-          </tr>
-        </table>
-        <ul style="list-style-type:none;padding-left:0;">
-          <li *ngFor="let cat of unit.category">{{cat.name}}</li>
-        </ul>
-        <b *ngIf="unit.ingredient_set">Ingredients:</b>
-        <ul *ngIf="unit.ingredient_set">
-           <li *ngFor="let ing of unit.ingredient_set">
-             <ng-container *ngIf="ing.unit"><a href="/{{gameURL}}/units/{{ing.unit.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{ing.unit.name}} </a>x{{ing.num}}</ng-container>
-             <ng-container *ngIf="ing.category">{{ing.category.name}} x{{ing.num}}</ng-container>
-            </li>
-        </ul>
-        <b *ngIf="unit.region_set">Locations:</b>
-        <ul *ngIf="unit.region_set">
-           <li *ngFor="let loc of unit.region_set"><a href="/{{gameURL}}/locations/{{loc.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{loc.name}}</a></li>
-        </ul>
-        <b *ngIf="unit.demon_set">Demons:</b>
-        <ul *ngIf="unit.demon_set">
-          <li *ngFor="let drop of unit.demon_set"><a href="/{{gameURL}}/demons/{{drop.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{drop.name}}</a></li>
-        </ul>
-        <ng-container *ngIf="unit.effline_set">
-          <table class="table table-shrink">
-            <tr><th colspan=2 style="text-align:center;background-color:rgba(211, 211, 211, 0.3);">Effects</th></tr>
-            <tr *ngFor="let eline of unit.effline_set">
-              <td style="width:50%;">{{eline.line}}</td>
-              <td>
-                <ng-container *ngFor="let data of eline.effectdata">
-                  <ng-template #effPopover>
-                    {{data.effect.desc}}
-                    <ul *ngIf="data.effect.actTag0">
-                      <li>{{data.effect.actTag0}}<span *ngIf="data.effect.attTag0"> / {{data.effect.attTag0}}</span>
-                        <ul *ngIf="data.effect.min_1_0">
-                          <li>Value 1: {{data.effect.min_1_0}}<ng-container *ngIf="data.effect.max_1_0"> - {{data.effect.max_1_0}}</ng-container></li>
-                          <li *ngIf="data.effect.min_2_0">Value 2: {{data.effect.min_2_0}}<ng-container *ngIf="data.effect.max_2_0"> - {{data.effect.max_2_0}}</ng-container></li>
-                        </ul>
-                      </li>
-                      <li *ngIf="data.effect.actTag1">{{data.effect.actTag1}}
-                        <ul *ngIf="data.effect.min_1_1">
-                          <li>Value 1: {{data.effect.min_1_1}}<ng-container *ngIf="data.effect.max_1_1"> - {{data.effect.max_1_1}}</ng-container></li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </ng-template>
-                  <ol start="{{data.number}}" style="margin-bottom:0;">
-                    <li><a href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="effPopover" popoverTitle="{{data.effect.name}}">{{data.effect.name}}</a></li>
-                  </ol>
-                </ng-container>
-              </td>
-            </tr>
-          </table>
-        </ng-container>
-        <ng-container *ngIf="unit.skillline_set">
-          <table class="table table-shrink">
-            <tr>
-              <th colspan=2 style="position:relative;text-align: center;background-color:rgba(211, 211, 211, 0.3);">Skill Effects
-                <a *ngIf="!expand" href="javascript:void(0)" style="color:black;text-decoration:none;position:absolute;right:1rem;top:50%;transform: translate(-50%,-50%);" (click)="expand=!expand;$event.preventDefault();" class="fas fa-chevron-up"></a>
-                <a *ngIf="expand"  href="javascript:void(0)" style="color:black;text-decoration:none;position:absolute;right:1rem;top:50%;transform: translate(-50%,-50%);" (click)="expand=!expand;$event.preventDefault();" class="fas fa-chevron-down"></a>
-              </th>
-            </tr>
-            <ng-container *ngIf="expand">
-              <tr *ngFor="let eline of unit.skillline_set">
-                <ng-template #effOnePopover>
-                  {{eline.effect1.desc}}
-                  <ul *ngIf="eline.effect1.actTag0">
-                    <li>{{eline.effect1.actTag0}}<span *ngIf="eline.effect1.attTag0"> / {{eline.effect1.attTag0}}</span>
-                      <ul *ngIf="eline.effect1.min_1_0">
-                        <li>Value 1: {{eline.effect1.min_1_0}}<ng-container *ngIf="eline.effect1.max_1_0"> - {{eline.effect1.max_1_0}}</ng-container></li>
-                        <li *ngIf="eline.effect1.min_2_0">Value 2: {{eline.effect1.min_2_0}}<ng-container *ngIf="eline.effect1.max_2_0"> - {{eline.effect1.max_2_0}}</ng-container></li>
-                      </ul>
-                    </li>
-                    <li *ngIf="eline.effect1.actTag1">{{eline.effect1.actTag1}}
-                      <ul *ngIf="eline.effect1.min_1_1">
-                        <li>Value 1: {{eline.effect1.min_1_1}}<ng-container *ngIf="eline.effect1.max_1_1"> - {{eline.effect1.max_1_1}}</ng-container></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </ng-template>
-                <ng-template #effTwoPopover>
-                  {{eline.effect2.desc}}
-                  <ul *ngIf="eline.effect2.actTag0">
-                    <li>{{eline.effect2.actTag0}}<span *ngIf="eline.effect2.attTag0"> / {{eline.effect2.attTag0}}</span>
-                      <ul *ngIf="eline.effect2.min_1_0">
-                        <li>Value 1: {{eline.effect2.min_1_0}}<ng-container *ngIf="eline.effect2.max_1_0"> - {{eline.effect2.max_1_0}}</ng-container></li>
-                        <li *ngIf="eline.effect2.min_2_0">Value 2: {{eline.effect2.min_2_0}}<ng-container *ngIf="eline.effect2.max_2_0"> - {{eline.effect2.max_2_0}}</ng-container></li>
-                      </ul>
-                    </li>
-                    <li *ngIf="eline.effect2.actTag1">{{eline.effect2.actTag1}}
-                      <ul *ngIf="eline.effect2.min_1_1">
-                        <li>Value 1: {{eline.effect2.min_1_1}}<ng-container *ngIf="eline.effect2.max_1_1"> - {{eline.effect2.max_1_1}}</ng-container></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </ng-template>
-                <ng-template #effThreePopover>
-                  {{eline.effect3.desc}}
-                  <ul *ngIf="eline.effect3.actTag0">
-                    <li>{{eline.effect3.actTag0}}<span *ngIf="eline.effect3.attTag0"> / {{eline.effect3.attTag0}}</span>
-                      <ul *ngIf="eline.effect3.min_1_0">
-                        <li>Value 1: {{eline.effect3.min_1_0}}<ng-container *ngIf="eline.effect3.max_1_0"> - {{eline.effect3.max_1_0}}</ng-container></li>
-                        <li *ngIf="eline.effect3.min_2_0">Value 2: {{eline.effect3.min_2_0}}<ng-container *ngIf="eline.effect3.max_2_0"> - {{eline.effect3.max_2_0}}</ng-container></li>
-                      </ul>
-                    </li>
-                    <li *ngIf="eline.effect3.actTag1">{{eline.effect3.actTag1}}
-                      <ul *ngIf="eline.effect3.min_1_1">
-                        <li>Value 1: {{eline.effect3.min_1_1}}<ng-container *ngIf="eline.effect3.max_1_1"> - {{eline.effect3.max_1_1}}</ng-container></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </ng-template>
-                <td style="width:50%;">{{eline.line}}</td>
-                <td>
-                  <ol>
-                    <li><a href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="effOnePopover"   popoverTitle="{{eline.effect1.name}}">{{eline.effect1.name}}</a></li>
-                    <li><a href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="effTwoPopover"   popoverTitle="{{eline.effect2.name}}">{{eline.effect2.name}}</a></li>
-                    <li><a href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="effThreePopover" popoverTitle="{{eline.effect3.name}}">{{eline.effect3.name}}</a></li>
-                  </ol>
-                </td>
-              </tr>
-            </ng-container>
-          </table>
-        </ng-container>
+<div *ngIf="units">
+  <nav style="margin-top: 1em;" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
+      <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.hrefClicked($event)">{{gameTitle}}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Units</li>
+    </ol>
+  </nav>
+<h1>Units</h1>
+<div class="col-md-10 mx-auto">
+  <div class="row">
+    <div class="col-md-9"></div>
+    <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
+  </div>
+</div>
+<ng-container *ngIf="units">
+  <div *ngFor="let unit of units" class="row">
+    <div class="card card-body griddisplay col-md-8" style="margin-left:auto;margin-right:auto;">
+      <h4 class="flex">{{unit.name}}</h4>
+      <p>{{unit.desc}}</p>
+      <div class="row flex">
+        <img src="/media/games/second-light/characters/{{unit.char1}}.webp" style="max-width:25%">
+        <img src="/media/games/second-light/characters/{{unit.char2}}.webp" style="max-width:25%">
+        <img src="/media/games/second-light/characters/{{unit.char3}}.webp" style="max-width:25%">
+        <img src="/media/games/second-light/characters/{{unit.char4}}.webp" style="max-width:25%">
       </div>
     </div>
   </div>
-  <language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="{{gameURL}}"></language-settings>
-</div>
+</ng-container>
 </div>

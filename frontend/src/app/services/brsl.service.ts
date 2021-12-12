@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders,  } from '@angular/common/http';
 import { Observable} from 'rxjs';
 import { environment } from '@environments/environment';
-import { Event, Unit, NameLink, NameOnly, SchoolLocation, DemonList, DemonFull, ItemList, ItemFull } from '@app/interfaces/brsl';
+import { Event, Unit, NameLink, NameOnly, SchoolLocation, DemonList, DemonFull, ItemList, ItemFull, FacilityFull, FacilityList, FacilitySet, Skill, Region } from '@app/interfaces/brsl';
 
 @Injectable({ providedIn: 'root' })
 export class BRSLService {
@@ -53,4 +53,25 @@ export class BRSLService {
     getUnit(language: string): Observable<Unit[]> {
       return this.http.get<Unit[]>(`${environment.apiUrl}/BRSL/unit/${language}/`);
     }
+
+    getFacilityList(language: string): Observable<FacilityList[]> {
+      return this.http.get<FacilityList[]>(`${environment.apiUrl}/BRSL/facility/${language}/`);
+    }
+
+    getFacility(slugname: string, language: string): Observable<FacilityFull> {
+      return this.http.get<FacilityFull>(`${environment.apiUrl}/BRSL/facility/${slugname}/${language}/`);
+    }
+
+    getFacilitySetList(language: string): Observable<FacilitySet[]> {
+      return this.http.get<FacilitySet[]>(`${environment.apiUrl}/BRSL/facilityset/${language}/`);
+    }
+
+    getSkillList(language: string): Observable<Skill[]> {
+      return this.http.get<Skill[]>(`${environment.apiUrl}/BRSL/skill/${language}/`);
+    }
+
+    getRegion(slugname: string, language: string): Observable<Region> {
+      return this.http.get<Region>(`${environment.apiUrl}/BRSL/region/${slugname}/${language}/`);
+    }
+    
 }

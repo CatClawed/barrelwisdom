@@ -1,4 +1,4 @@
-from games.BRSL.facilities_brsl.models import Facility, FacilityEffect, FacilityEffectLine, FacilityIngredient, FacilitySet
+from games.BRSL.facilities_brsl.models import Facility, FacilityEffect, FacilityEffectLine, FacilityIngredient, FacilitySet, FacilityEffData, FacilityEffLine, FacilityIng, IngData
 from games.BRSL.items_brsl.serializers import BRSLEffectSerializer, BRSLCategorySerializer, BRSLItemNameSerializer
 from rest_framework import serializers
 from collections import OrderedDict
@@ -36,12 +36,26 @@ class BRSLFacilityEffectSerializer(serializers.ModelSerializer):
         return OrderedDict((k, v) for k, v in result.items() 
                            if v not in [None, [], '', False, {}])
 
+class BRSLFacilityEffDataSerializer(serializers.ModelSerializer):
+    effect = BRSLFacilityEffectSerializer()
+    class Meta:
+        model = FacilityEffData
+        fields = ['effect']
+
+class BRSLFacilityEffLineSerializer(serializers.ModelSerializer):
+    effectdata = BRSLFacilityEffDataSerializer(many=True)
+    class Meta:
+        model = FacilityEffLine
+        fields = ['effectdata', 'line']
+
+# destroy later
 class BRSLFacilityEffectLineSerializer(serializers.ModelSerializer):
     effect = BRSLFacilityEffectSerializer()
     class Meta:
         model = FacilityEffectLine
         fields = ['effect', 'line', 'num']
-        
+    
+# old, destroy later
 class BRSLFacilityIngredienteSerializer(serializers.ModelSerializer):
     effect = BRSLEffectSerializer()
     item = BRSLItemNameSerializer()
@@ -51,6 +65,28 @@ class BRSLFacilityIngredienteSerializer(serializers.ModelSerializer):
         fields = ['level', 'num', 'item', 'category', 'effect']
     def to_representation(self, instance):
         result = super(BRSLFacilityIngredienteSerializer, self).to_representation(instance)
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', False, {}])
+        
+class BRSLIngDatSerializer(serializers.ModelSerializer):
+    effect = BRSLEffectSerializer()
+    item = BRSLItemNameSerializer()
+    category = BRSLCategorySerializer()
+    class Meta:
+        model = IngData
+        fields = ['num', 'item', 'category', 'effect']
+    def to_representation(self, instance):
+        result = super(BRSLIngDatSerializer, self).to_representation(instance)
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', False, {}])
+        
+class BRSLFacilityIngSerializer(serializers.ModelSerializer):
+    data = BRSLIngDatSerializer(many=True)
+    class Meta:
+        model = FacilityIng
+        fields = ['level', 'data']
+    def to_representation(self, instance):
+        result = super(BRSLFacilityIngSerializer, self).to_representation(instance)
         return OrderedDict((k, v) for k, v in result.items() 
                            if v not in [None, [], '', False, {}])
         
@@ -96,11 +132,11 @@ class BRSLFacilitySimpleSerializer(serializers.ModelSerializer):
 class BRSLFacilitySerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     desc = serializers.SerializerMethodField()
-    facilityeffectline_set = BRSLFacilityEffectLineSerializer(many=True)
-    facilityingredient_set = BRSLFacilityIngredienteSerializer(many=True)
+    facilityeffline_set = BRSLFacilityEffLineSerializer(many=True)
+    facilitying_set = BRSLFacilityIngSerializer(many=True)
     class Meta:
         model = Facility
-        fields = ['slug', 'name', 'desc', 'char', 'size', 'isDLC', 'facilityeffectline_set', 'facilityingredient_set']
+        fields = ['slug', 'name', 'desc', 'char', 'size', 'isDLC', 'facilityeffline_set', 'facilitying_set']
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.facility_en.name

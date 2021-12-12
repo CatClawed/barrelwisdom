@@ -91,7 +91,7 @@ import { SeoService } from '@app/services/seo.service';
     getEvents() {
       this.brslservice.getCharacterList(this.language)
       .subscribe(f => {
-        this.character = f;
+        this.character = f.slice(2);
       },
       error => {
         this.error = true;

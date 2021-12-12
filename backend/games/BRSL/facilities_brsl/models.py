@@ -65,7 +65,20 @@ class FacilitySet(models.Model):
     effect = models.ForeignKey(FacilityEffect, on_delete=models.CASCADE)
     index = models.IntegerField()
 
-class FacilityEffectLine(models.Model):
+class FacilityEffData(models.Model): 
+    effect = models.ForeignKey(FacilityEffect, on_delete=models.CASCADE, related_name="facility_eff")
+    num = models.IntegerField()
+    class Meta:
+        ordering = ['num']
+
+class FacilityEffLine(models.Model): 
+    facility = models.ForeignKey(Facility, on_delete=models.CASCADE)
+    effectdata = models.ManyToManyField(FacilityEffData)
+    line = models.IntegerField()
+    class Meta:
+        ordering = ['line']
+# delete
+class FacilityEffectLine(models.Model): 
     facility = models.ForeignKey(Facility, on_delete=models.CASCADE)
     effect = models.ForeignKey(FacilityEffect, on_delete=models.CASCADE, related_name="facility_effect")
     line = models.IntegerField()
@@ -73,6 +86,20 @@ class FacilityEffectLine(models.Model):
     class Meta:
         ordering = ['line', 'num']
 
+class IngData(models.Model):
+    num = models.IntegerField()
+    item = models.ForeignKey(Item, blank=True, null=True, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, blank=True, null=True, on_delete=models.CASCADE)
+    effect = models.ForeignKey(Effect, blank=True, null=True, on_delete=models.CASCADE)
+
+class FacilityIng(models.Model):
+    facility = models.ForeignKey(Facility, on_delete=models.CASCADE)
+    data = models.ManyToManyField(IngData)
+    level = models.IntegerField()
+    class Meta:
+        ordering = ['level']
+        
+# delete
 class FacilityIngredient(models.Model):
     facility = models.ForeignKey(Facility, on_delete=models.CASCADE)
     level = models.IntegerField()

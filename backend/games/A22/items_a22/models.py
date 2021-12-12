@@ -52,6 +52,8 @@ class Item(models.Model):
     item_fr = models.OneToOneField(Item_fr, on_delete=models.CASCADE)
     item_sc = models.OneToOneField(Item_sc, on_delete=models.CASCADE)
     item_tc = models.OneToOneField(Item_tc, on_delete=models.CASCADE)
+    class Meta:
+        ordering = ['index']
 
 ## Usable Item Stuff
 
