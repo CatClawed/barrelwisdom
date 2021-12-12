@@ -220,7 +220,7 @@ class BRSLItemSerializer(serializers.ModelSerializer):
     demon_set = BRSLDemonNameSerializer(many=True)
     class Meta:
         model = Item
-        fields = ['slug', 'name', 'desc', 'itemtype', 'char', 'isDLC', 'region_set', 'category','ingredient_set','effline_set','skillline_set', 'demon_set']
+        fields = ['slug', 'name', 'desc', 'note', 'itemtype', 'char', 'isDLC', 'region_set', 'category','ingredient_set','effline_set','skillline_set', 'demon_set']
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.item_en.name
