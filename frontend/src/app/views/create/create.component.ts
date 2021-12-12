@@ -63,7 +63,7 @@ export class CreateComponent {
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
   private imgValidators = [
-    Validators.pattern(environment.imageRegex + '.+\\.(png|jpg)'),
+    Validators.pattern(environment.imageRegex + '.+\\.(png|jpg|webp)'),
     Validators.maxLength(255),
   ]
 

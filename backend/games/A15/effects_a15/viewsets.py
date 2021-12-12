@@ -25,7 +25,6 @@ class A15EffectViewSet(viewsets.ModelViewSet):
                 'effectline_set__item',
                 'effectline_set__item__item_en'
             )
-            .order_by('index')
         )
         serializer = A15EffectSerializer(queryset, many=True, context={'language': 'en'})
         return Response(serializer.data)
@@ -42,7 +41,6 @@ class A15EffectViewSet(viewsets.ModelViewSet):
                 'effectline_set__item',
                 'effectline_set__item__item_ja'
             )
-            .order_by('index')
         )
         serializer = A15EffectSerializer(queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)

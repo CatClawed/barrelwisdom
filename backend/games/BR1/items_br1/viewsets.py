@@ -17,7 +17,6 @@ class BR1ItemViewSet(viewsets.ModelViewSet):
     def en(self, request):
         queryset = (
             Item.objects
-            .order_by('index')
         )
         serializer = BR1ItemSerializer(queryset, many=True)
         return Response(serializer.data)

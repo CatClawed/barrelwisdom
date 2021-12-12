@@ -24,7 +24,6 @@ class A12TraitViewSet(viewsets.ModelViewSet):
                 'item_set',
                 'item_set__item_en'
             )
-            .order_by('index')
         )
         serializer = A12TraitSerializer(queryset, many=True, context={'language': 'en'})
         return Response(serializer.data)
@@ -40,7 +39,6 @@ class A12TraitViewSet(viewsets.ModelViewSet):
                 'item_set',
                 'item_set__item_ja'
             )
-            .order_by('index')
         )
         serializer = A12TraitSerializer(queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)

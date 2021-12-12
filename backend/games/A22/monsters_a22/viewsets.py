@@ -25,7 +25,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
                 'drops',
                 'drops__item_en',
             )
-            .order_by('index')
+
         )
         serializer = A22MonsterSerializerEN(queryset, many=True)
         return Response(serializer.data)
@@ -41,7 +41,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
                 'drops',
                 'drops__item_ja'
             )
-            .order_by('index')
+
         )
         serializer = A22MonsterSerializerJA(queryset, many=True)
         return Response(serializer.data)
@@ -57,7 +57,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
                 'drops',
                 'drops__item_ko'
             )
-            .order_by('index')
+
         )
         serializer = A22MonsterSerializerKO(queryset, many=True)
         return Response(serializer.data)
@@ -73,7 +73,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
                 'drops',
                 'drops__item_fr'
             )
-            .order_by('index')
+
         )
         serializer = A22MonsterSerializerFR(queryset, many=True)
         return Response(serializer.data)
@@ -89,7 +89,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
                 'drops',
                 'drops__item_sc'
             )
-            .order_by('index')
+
         )
         serializer = A22MonsterSerializerSC(queryset, many=True)
         return Response(serializer.data)
@@ -105,7 +105,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
                 'drops',
                 'drops__item_tc'
             )
-            .order_by('index')
+
         )
         serializer = A22MonsterSerializerTC(queryset, many=True)
         return Response(serializer.data)

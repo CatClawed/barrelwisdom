@@ -6,6 +6,9 @@ class Character(models.Model):
     char_ja = models.CharField(max_length=10)
     char_sc = models.CharField(max_length=10)
     char_tc = models.CharField(max_length=10)
+    index = models.IntegerField(default=0)
+    class Meta:
+        ordering = ['index']
 
 class Fragment_en(models.Model):
     name = models.CharField(max_length=50)

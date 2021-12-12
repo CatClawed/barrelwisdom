@@ -30,7 +30,6 @@ class A15PropertyViewSet(viewsets.ModelViewSet):
                 'combo3',
                 'combo3__prop_en'
             )
-            .order_by('index')
         )
         serializer = A15PropertySerializer(queryset, many=True, context={'language': 'en'})
         return Response(serializer.data)
@@ -52,7 +51,6 @@ class A15PropertyViewSet(viewsets.ModelViewSet):
                 'combo3',
                 'combo3__prop_ja'
             )
-            .order_by('index')
         )
         serializer = A15PropertySerializer(queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)

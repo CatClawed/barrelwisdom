@@ -61,3 +61,5 @@ class Effect(models.Model):
     max_1_1 = models.CharField(max_length=50, blank=True, null=True, default="")
     min_2_1 = models.CharField(max_length=50, blank=True, null=True, default="")
     max_2_1 = models.CharField(max_length=50, blank=True, null=True, default="")
+    class Meta:
+        ordering = ['index']

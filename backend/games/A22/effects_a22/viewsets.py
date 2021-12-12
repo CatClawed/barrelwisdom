@@ -27,7 +27,6 @@ class A22EffectViewSet(viewsets.ModelViewSet):
                 'effects',
                 'effects__eff_en'
             )
-            .order_by('index')
         ).filter(efftype='Normal')
         serializer = A22EffectSerializerEN(queryset, many=True)
         return Response(serializer.data)
@@ -43,7 +42,7 @@ class A22EffectViewSet(viewsets.ModelViewSet):
                 'effects',
                 'effects__eff_ja'
             )
-            .order_by('index')
+
         ).filter(efftype='Normal')
         serializer = A22EffectSerializerJA(queryset, many=True)
         return Response(serializer.data)
@@ -59,7 +58,7 @@ class A22EffectViewSet(viewsets.ModelViewSet):
                 'effects',
                 'effects__eff_ko'
             )
-            .order_by('index')
+
         ).filter(efftype='Normal')
         serializer = A22EffectSerializerKO(queryset, many=True)
         return Response(serializer.data)
@@ -75,7 +74,7 @@ class A22EffectViewSet(viewsets.ModelViewSet):
                 'effects',
                 'effects__eff_fr'
             )
-            .order_by('index')
+
         ).filter(efftype='Normal')
         serializer = A22EffectSerializerFR(queryset, many=True)
         return Response(serializer.data)
@@ -91,7 +90,7 @@ class A22EffectViewSet(viewsets.ModelViewSet):
                 'effects',
                 'effects__eff_sc'
             )
-            .order_by('index')
+
         ).filter(efftype='Normal')
         serializer = A22EffectSerializerSC(queryset, many=True)
         return Response(serializer.data)
@@ -107,7 +106,7 @@ class A22EffectViewSet(viewsets.ModelViewSet):
                 'effects',
                 'effects__eff_tc'
             )
-            .order_by('index')
+
         ).filter(efftype='Normal')
         serializer = A22EffectSerializerTC(queryset, many=True)
         return Response(serializer.data)
@@ -277,7 +276,7 @@ class A22EVEffectViewSet(viewsets.ModelViewSet):
                 'effects',
                 'effects__eff_en'
             )
-            .order_by('index')
+
         ).filter(efftype='EV')
         serializer = A22EffectSerializerEN(queryset, many=True)
         return Response(serializer.data)
@@ -293,7 +292,7 @@ class A22EVEffectViewSet(viewsets.ModelViewSet):
                 'effects',
                 'effects__eff_ja'
             )
-            .order_by('index')
+
         ).filter(efftype='EV')
         serializer = A22EffectSerializerJA(queryset, many=True)
         return Response(serializer.data)
@@ -309,7 +308,7 @@ class A22EVEffectViewSet(viewsets.ModelViewSet):
                 'effects',
                 'effects__eff_ko'
             )
-            .order_by('index')
+
         ).filter(efftype='EV')
         serializer = A22EffectSerializerKO(queryset, many=True)
         return Response(serializer.data)
@@ -325,7 +324,7 @@ class A22EVEffectViewSet(viewsets.ModelViewSet):
                 'effects',
                 'effects__eff_fr'
             )
-            .order_by('index')
+
         ).filter(efftype='EV')
         serializer = A22EffectSerializerFR(queryset, many=True)
         return Response(serializer.data)
@@ -341,7 +340,7 @@ class A22EVEffectViewSet(viewsets.ModelViewSet):
                 'effects',
                 'effects__eff_sc'
             )
-            .order_by('index')
+
         ).filter(efftype='EV')
         serializer = A22EffectSerializerSC(queryset, many=True)
         return Response(serializer.data)
@@ -357,7 +356,7 @@ class A22EVEffectViewSet(viewsets.ModelViewSet):
                 'effects',
                 'effects__eff_tc'
             )
-            .order_by('index')
+
         ).filter(efftype='EV')
         serializer = A22EffectSerializerTC(queryset, many=True)
         return Response(serializer.data)
@@ -382,7 +381,7 @@ class A22ForgeEffectViewSet(viewsets.ModelViewSet):
                 'effects',
                 'effects__eff_en'
             )
-            .order_by('index')
+
         ).filter(efftype='Forge')
         serializer = A22EffectSerializerEN(queryset, many=True)
         return Response(serializer.data)
@@ -398,7 +397,7 @@ class A22ForgeEffectViewSet(viewsets.ModelViewSet):
                 'effects',
                 'effects__eff_ja'
             )
-            .order_by('index')
+
         ).filter(efftype='Forge')
         serializer = A22EffectSerializerJA(queryset, many=True)
         return Response(serializer.data)
@@ -414,7 +413,7 @@ class A22ForgeEffectViewSet(viewsets.ModelViewSet):
                 'effects',
                 'effects__eff_ko'
             )
-            .order_by('index')
+
         ).filter(efftype='Forge')
         serializer = A22EffectSerializerKO(queryset, many=True)
         return Response(serializer.data)
@@ -430,7 +429,7 @@ class A22ForgeEffectViewSet(viewsets.ModelViewSet):
                 'effects',
                 'effects__eff_fr'
             )
-            .order_by('index')
+
         ).filter(efftype='Forge')
         serializer = A22EffectSerializerFR(queryset, many=True)
         return Response(serializer.data)
@@ -446,7 +445,7 @@ class A22ForgeEffectViewSet(viewsets.ModelViewSet):
                 'effects',
                 'effects__eff_sc'
             )
-            .order_by('index')
+
         ).filter(efftype='Forge')
         serializer = A22EffectSerializerSC(queryset, many=True)
         return Response(serializer.data)
@@ -462,7 +461,7 @@ class A22ForgeEffectViewSet(viewsets.ModelViewSet):
                 'effects',
                 'effects__eff_tc'
             )
-            .order_by('index')
+
         ).filter(efftype='Forge')
         serializer = A22EffectSerializerTC(queryset, many=True)
         return Response(serializer.data)

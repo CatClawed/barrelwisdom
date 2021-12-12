@@ -23,9 +23,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
+<<<<<<< HEAD
+DEBUG = False
+=======
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['barrelwisdom.com', 'test.barrelwisdom.com', 'localhost', '127.0.0.1']
+>>>>>>> dev
+
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
 
 if not DEBUG:
     ALLOWED_HOSTS = ['barrelwisdom.com', 'test.barrelwisdom.com', 'localhost', '127.0.0.1']
@@ -112,6 +119,11 @@ INSTALLED_APPS = [
     'games.BR1.items_br1.apps.BR1ItemConfig',
     # Blue Reflection Second Light
     'games.BRSL.fragments_brsl.apps.BRSLFragmentConfig',
+    'games.BRSL.items_brsl.apps.BRSLItemConfig',
+    'games.BRSL.facilities_brsl.apps.BRSLFacilityConfig',
+    'games.BRSL.skills_brsl.apps.BRSLSkillConfig',
+    'games.BRSL.demons_brsl.apps.BRSLDemonConfig',
+    'games.BRSL.regions_brsl.apps.BRSLRegionConfig',
 ]
 
 
@@ -138,9 +150,9 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
-DEBUG_TOOLBAR_CONFIG = {
-    "SHOW_TOOLBAR_CALLBACK": lambda request: True,
-}
+#DEBUG_TOOLBAR_CONFIG = {
+#    "SHOW_TOOLBAR_CALLBACK": lambda request: True,
+#}
 
 ROOT_URLCONF = 'Database.urls'
 

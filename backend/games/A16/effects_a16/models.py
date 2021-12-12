@@ -14,3 +14,5 @@ class Effect(models.Model):
     eff_ja = models.OneToOneField(Effect_ja, on_delete=models.CASCADE)
     index = models.IntegerField()
     note = models.CharField(max_length=500)
+    class Meta:
+        ordering = ['index']

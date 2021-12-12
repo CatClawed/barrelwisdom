@@ -1,0 +1,59 @@
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+
+<div *ngIf="skills">
+  <nav style="margin-top: 1em;" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
+      <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.hrefClicked($event)">{{gameTitle}}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Skills</li>
+    </ol>
+  </nav>
+<h1>Skills</h1>
+<ng-container *ngIf="skills">
+<div class="mx-auto">
+  <div class="row" style="justify-content:space-between;margin-left:0.5em;margin-right:0.5em;margin-bottom:0.5em;">
+    <div class="table-of-contents">
+      <b>Table of Contents</b>
+      <ol>
+        <ng-container *ngFor="let skill of skills">
+          <li *ngIf="skill.skill_set">
+            <a href="/{{gameURL}}/skills/{{language}}#{{skill.slug}}" (click)="$event.preventDefault();scroll(skill.slug)">{{skill.name}}</a>
+          </li>
+        </ng-container>
+      </ol>
+    </div>
+    <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
+  </div>
+</div>  
+  <div *ngFor="let skill of skills">
+    <h2 *ngIf="skill.skill_set" id="{{skill.slug}}">{{skill.name}}</h2>
+    <table *ngIf="skill.skill_set" class="table border table-shrink">
+      <tr *ngFor="let data of skill.skill_set">
+        <td><b>{{data.name}}</b></td>
+        <td>[{{data.range}}]<br />
+          <p *ngIf="data.desc">{{data.desc}}</p>
+          <div style="column-count:2;margin-bottom:1rem;">
+            <ng-container *ngIf="data.ether"><b>Ether: </b> {{data.ether}}<br /></ng-container>
+            <ng-container *ngIf="data.ether_rec"><b>Ether Recovery: </b> {{data.ether_rec}}<br /></ng-container>
+            <ng-container *ngIf="data.level"><b>Gear: </b> {{data.level}}<br /></ng-container>
+            <ng-container *ngIf="data.knockback"><b>Knockback: </b> {{data.knockback}}<br /></ng-container>
+          </div>
+          <ng-container *ngIf="data.actTag0">
+            {{data.actTag0}} <span *ngIf="data.attTag0">/ {{data.attTag0}}</span>
+            <ul *ngIf="data.actTag0">
+              <li *ngIf="data.min_1_0">Value 1: {{data.min_1_0}} <span *ngIf="data.max_1_0">- {{data.max_1_0}}</span></li>
+              <li *ngIf="data.min_2_0">Value 2: {{data.min_2_0}} <span *ngIf="data.max_2_0">- {{data.max_2_0}}</span></li>
+            </ul>
+          </ng-container>
+          <ng-container *ngIf="data.actTag1">
+            {{data.actTag1}} <span *ngIf="data.attTag1">/ {{data.attTag1}}</span>
+            <ul *ngIf="data.actTag1">
+              <li *ngIf="data.min_1_1">Value 1: {{data.min_1_1}} <span *ngIf="data.max_1_1">- {{data.max_1_1}}</span></li>
+            </ul>
+          </ng-container>
+        </td>
+      </tr>
+    </table>
+  </div>
+</ng-container>
+</div>

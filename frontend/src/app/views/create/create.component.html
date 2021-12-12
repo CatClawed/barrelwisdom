@@ -29,7 +29,7 @@
         [ngClass]="{ 'is-invalid': submitted && f.imgURL.errors }"
         placeholder="Required for blog posts. Shows on main page.">
       <div *ngIf="submitted && f.imgURL.errors" class="invalid-feedback">
-        <div *ngIf="f.imgURL.errors.pattern">Image URL must be PNG/JPG using the format
+        <div *ngIf="f.imgURL.errors.pattern">Image URL must be PNG/JPG/WebP using the format
           /media/*.</div>
         <div *ngIf="f.imgURL.errors.maxlength">Too long. 255 chars max.</div>
         <div *ngIf="f.imgURL.errors.required">Required for blog posts.</div>

@@ -21,7 +21,7 @@ class BRSLEventViewSet(viewsets.ModelViewSet):
                 'character',
                 'choices',
             )
-            .order_by('index')
+
         )
         serializer = BRSLEventSerializer(queryset, many=True, context={'language': 'en'})
         return Response(serializer.data)
@@ -37,7 +37,7 @@ class BRSLEventViewSet(viewsets.ModelViewSet):
                 'character',
                 'choices',
             )
-            .order_by('index')
+
         )
         serializer = BRSLEventSerializer(queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)
@@ -53,7 +53,7 @@ class BRSLEventViewSet(viewsets.ModelViewSet):
                 'character',
                 'choices',
             )
-            .order_by('index')
+
         )
         serializer = BRSLEventSerializer(queryset, many=True, context={'language': 'sc'})
         return Response(serializer.data)
@@ -69,7 +69,7 @@ class BRSLEventViewSet(viewsets.ModelViewSet):
                 'character',
                 'choices',
             )
-            .order_by('index')
+
         )
         serializer = BRSLEventSerializer(queryset, many=True, context={'language': 'tc'})
         return Response(serializer.data)

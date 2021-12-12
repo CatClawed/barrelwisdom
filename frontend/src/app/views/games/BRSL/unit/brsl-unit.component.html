@@ -1,0 +1,32 @@
+<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+
+<div *ngIf="units">
+  <nav style="margin-top: 1em;" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
+      <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.hrefClicked($event)">{{gameTitle}}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Units</li>
+    </ol>
+  </nav>
+<h1>Units</h1>
+<div class="col-md-10 mx-auto">
+  <div class="row">
+    <div class="col-md-9"></div>
+    <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
+  </div>
+</div>
+<ng-container *ngIf="units">
+  <div *ngFor="let unit of units" class="row">
+    <div class="card card-body griddisplay col-md-8" style="margin-left:auto;margin-right:auto;">
+      <h4 class="flex">{{unit.name}}</h4>
+      <p>{{unit.desc}}</p>
+      <div class="row flex">
+        <img src="/media/games/second-light/characters/{{unit.char1}}.webp" style="max-width:25%">
+        <img src="/media/games/second-light/characters/{{unit.char2}}.webp" style="max-width:25%">
+        <img src="/media/games/second-light/characters/{{unit.char3}}.webp" style="max-width:25%">
+        <img src="/media/games/second-light/characters/{{unit.char4}}.webp" style="max-width:25%">
+      </div>
+    </div>
+  </div>
+</ng-container>
+</div>

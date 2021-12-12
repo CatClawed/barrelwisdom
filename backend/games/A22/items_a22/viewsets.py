@@ -20,7 +20,7 @@ class A22ItemViewSet(viewsets.ModelViewSet):
                 'ingredient_set__category__cat_en',
                 'ingredient_set__item__item_en'
             )
-            .order_by('index')
+
         )
     serializer_class = A22ItemSerializerEN
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
@@ -43,7 +43,7 @@ class A22ItemViewSet(viewsets.ModelViewSet):
                 'ingredient_set__category__cat_en',
                 'ingredient_set__item__item_en'
             )
-            .order_by('index')
+
         )
         serializer = A22ItemSerializerEN(queryset, many=True)
         return Response(serializer.data)
@@ -62,7 +62,7 @@ class A22ItemViewSet(viewsets.ModelViewSet):
                 'ingredient_set__category__cat_ja',
                 'ingredient_set__item__item_ja'
             )
-            .order_by('index')
+
         )
         serializer = A22ItemSerializerJA(queryset, many=True)
         return Response(serializer.data)
@@ -81,7 +81,7 @@ class A22ItemViewSet(viewsets.ModelViewSet):
                 'ingredient_set__category__cat_ko',
                 'ingredient_set__item__item_ko'
             )
-            .order_by('index')
+
         )
         serializer = A22ItemSerializerKO(queryset, many=True)
         return Response(serializer.data)
@@ -100,7 +100,7 @@ class A22ItemViewSet(viewsets.ModelViewSet):
                 'ingredient_set__category__cat_fr',
                 'ingredient_set__item__item_fr'
             )
-            .order_by('index')
+
         )
         serializer = A22ItemSerializerFR(queryset, many=True)
         return Response(serializer.data)
@@ -119,7 +119,7 @@ class A22ItemViewSet(viewsets.ModelViewSet):
                 'ingredient_set__category__cat_sc',
                 'ingredient_set__item__item_sc'
             )
-            .order_by('index')
+
         )
         serializer = A22ItemSerializerSC(queryset, many=True)
         return Response(serializer.data)
@@ -138,7 +138,7 @@ class A22ItemViewSet(viewsets.ModelViewSet):
                 'ingredient_set__category__cat_tc',
                 'ingredient_set__item__item_tc'
             )
-            .order_by('index')
+
         )
         serializer = A22ItemSerializerTC(queryset, many=True)
         return Response(serializer.data)

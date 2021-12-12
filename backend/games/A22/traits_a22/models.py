@@ -42,3 +42,5 @@ class Trait(models.Model):
     trait_fr = models.OneToOneField(Trait_fr, on_delete=models.CASCADE)
     trait_sc = models.OneToOneField(Trait_sc, on_delete=models.CASCADE)
     trait_tc = models.OneToOneField(Trait_tc, on_delete=models.CASCADE)
+    class Meta:
+        ordering = ['index']
