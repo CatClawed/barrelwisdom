@@ -121,6 +121,7 @@ export interface ItemFull {
     name: string;
     desc: string;
     char: string;
+    note: string;
     itemtype: string;
     isDLC: boolean;
     category: NameOnly[];
