@@ -1,6 +1,6 @@
 from rest_framework import viewsets, filters
 from games.A22.traits_a22.models import Trait
-from games.A22.traits_a22.serializers import A22TraitSerializer, A22TraitSerializerEN, A22TraitSerializerJA, A22TraitSerializerKO, A22TraitSerializerFR, A22TraitSerializerSC, A22TraitSerializerTC
+from games.A22.traits_a22.serializers import A22TraitSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
@@ -25,9 +25,8 @@ class A22TraitViewSet(viewsets.ModelViewSet):
                 'item_set',
                 'item_set__item_en'
             )
-
         )
-        serializer = A22TraitSerializerEN(queryset, many=True)
+        serializer = A22TraitSerializer(queryset, many=True, context={'language': 'en'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -41,9 +40,8 @@ class A22TraitViewSet(viewsets.ModelViewSet):
                 'item_set',
                 'item_set__item_ko'
             )
-
         )
-        serializer = A22TraitSerializerKO(queryset, many=True)
+        serializer = A22TraitSerializer(queryset, many=True, context={'language': 'ko'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -57,9 +55,8 @@ class A22TraitViewSet(viewsets.ModelViewSet):
                 'item_set',
                 'item_set__item_ja'
             )
-
         )
-        serializer = A22TraitSerializerJA(queryset, many=True)
+        serializer = A22TraitSerializer(queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -73,9 +70,8 @@ class A22TraitViewSet(viewsets.ModelViewSet):
                 'item_set',
                 'item_set__item_fr'
             )
-
         )
-        serializer = A22TraitSerializerFR(queryset, many=True)
+        serializer = A22TraitSerializer(queryset, many=True, context={'language': 'fr'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -89,9 +85,8 @@ class A22TraitViewSet(viewsets.ModelViewSet):
                 'item_set',
                 'item_set__item_sc'
             )
-
         )
-        serializer = A22TraitSerializerSC(queryset, many=True)
+        serializer = A22TraitSerializer(queryset, many=True, context={'language': 'sc'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -105,9 +100,8 @@ class A22TraitViewSet(viewsets.ModelViewSet):
                 'item_set',
                 'item_set__item_tc'
             )
-
         )
-        serializer = A22TraitSerializerTC(queryset, many=True)
+        serializer = A22TraitSerializer(queryset, many=True, context={'language': 'tc'})
         return Response(serializer.data)
 
 # Detailed View
@@ -127,7 +121,7 @@ class A22TraitViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22TraitSerializerEN(queryset)
+        serializer = A22TraitSerializer(queryset, context={'language': 'en'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ko")
@@ -146,7 +140,7 @@ class A22TraitViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22TraitSerializerKO(queryset)
+        serializer = A22TraitSerializer(queryset, context={'language': 'ko'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ja")
@@ -165,7 +159,7 @@ class A22TraitViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22TraitSerializerJA(queryset)
+        serializer = A22TraitSerializer(queryset, context={'language': 'ja'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="fr")
@@ -184,7 +178,7 @@ class A22TraitViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22TraitSerializerFR(queryset)
+        serializer = A22TraitSerializer(queryset, context={'language': 'fr'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="sc")
@@ -203,7 +197,7 @@ class A22TraitViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22TraitSerializerSC(queryset)
+        serializer = A22TraitSerializer(queryset, context={'language': 'sc'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="tc")
@@ -222,5 +216,5 @@ class A22TraitViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22TraitSerializerTC(queryset)
+        serializer = A22TraitSerializer(queryset, context={'language': 'tc'})
         return Response(serializer.data)

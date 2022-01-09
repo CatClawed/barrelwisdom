@@ -63,7 +63,7 @@ export class A22Service {
   }
 
   getCategoryItem(slugname: string, language: string): Observable<CategoryItem> {
-    return this.http.get<CategoryItem>(`${environment.apiUrl}/A22/categoryitem/${slugname}/${language}/`);
+    return this.http.get<CategoryItem>(`${environment.apiUrl}/A22/category/${slugname}/${language}/`);
   }
 
   getCategoryList(language: string): Observable<Name[]> {

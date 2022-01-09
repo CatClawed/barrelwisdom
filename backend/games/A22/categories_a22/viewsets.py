@@ -1,6 +1,6 @@
 from rest_framework import viewsets, filters
 from games.A22.categories_a22.models import Category
-from games.A22.categories_a22.serializers import A22CategorySerializerEN, A22CategorySerializerJA, A22CategorySerializerKO, A22CategorySerializerFR, A22CategorySerializerSC, A22CategorySerializerTC
+from games.A22.categories_a22.serializers import A22CategorySerializer, A22CategoryDataSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
@@ -9,7 +9,7 @@ from django.http import Http404
 
 class A22CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
-    serializer_class = A22CategorySerializerEN
+    serializer_class = A22CategorySerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
     lookup_field = 'slugname'
 
@@ -21,7 +21,7 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
                 'cat_en'
             )
         )
-        serializer = A22CategorySerializerEN(queryset, many=True)
+        serializer = A22CategorySerializer(queryset, many=True, context={'language': 'en'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -32,7 +32,7 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
                 'cat_ja'
             )
         )
-        serializer = A22CategorySerializerJA(queryset, many=True)
+        serializer = A22CategorySerializer(queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -43,7 +43,7 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
                 'cat_ko'
             )
         )
-        serializer = A22CategorySerializerKO(queryset, many=True)
+        serializer = A22CategorySerializer(queryset, many=True, context={'language': 'ko'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -54,7 +54,7 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
                 'cat_fr'
             )
         )
-        serializer = A22CategorySerializerFR(queryset, many=True)
+        serializer = A22CategorySerializer(queryset, many=True, context={'language': 'fr'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -65,7 +65,7 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
                 'cat_sc'
             )
         )
-        serializer = A22CategorySerializerSC(queryset, many=True)
+        serializer = A22CategorySerializer(queryset, many=True, context={'language': 'sc'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -76,7 +76,7 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
                 'cat_tc'
             )
         )
-        serializer = A22CategorySerializerTC(queryset, many=True)
+        serializer = A22CategorySerializer(queryset, many=True, context={'language': 'tc'})
         return Response(serializer.data)
 
     # allows easy access via catect/slugname/en
@@ -88,11 +88,18 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
                 .select_related(
                     'cat_en'
                 )
+                .prefetch_related(
+                    'item_set',
+                    'item_set__item_en',
+                    'ingredientcat',
+                    'ingredientcat__synthitem',
+                    'ingredientcat__synthitem__item_en'
+                )
                 .get(slugname=slugname)
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22CategorySerializerEN(queryset)
+        serializer = A22CategoryDataSerializer(queryset, context={'language': 'en'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -103,11 +110,18 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
                 .select_related(
                     'cat_ja'
                 )
+                .prefetch_related(
+                    'item_set',
+                    'item_set__item_ja',
+                    'ingredientcat',
+                    'ingredientcat__synthitem',
+                    'ingredientcat__synthitem__item_ja'
+                )
                 .get(slugname=slugname)
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22CategorySerializerJA(queryset)
+        serializer = A22CategoryDataSerializer(queryset, context={'language': 'ja'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ko")
@@ -118,11 +132,18 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
                 .select_related(
                     'cat_ko'
                 )
+                .prefetch_related(
+                    'item_set',
+                    'item_set__item_ko',
+                    'ingredientcat',
+                    'ingredientcat__synthitem',
+                    'ingredientcat__synthitem__item_ko'
+                )
                 .get(slugname=slugname)
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22CategorySerializerKO(queryset)
+        serializer = A22CategoryDataSerializer(queryset, context={'language': 'ko'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="fr")
@@ -133,11 +154,18 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
                 .select_related(
                     'cat_fr'
                 )
+                .prefetch_related(
+                    'item_set',
+                    'item_set__item_fr',
+                    'ingredientcat',
+                    'ingredientcat__synthitem',
+                    'ingredientcat__synthitem__item_fr'
+                )
                 .get(slugname=slugname)
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22CategorySerializerFR(queryset)
+        serializer = A22CategoryDataSerializer(queryset, context={'language': 'fr'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="sc")
@@ -148,11 +176,18 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
                 .select_related(
                     'cat_sc'
                 )
+                .prefetch_related(
+                    'item_set',
+                    'item_set__item_sc',
+                    'ingredientcat',
+                    'ingredientcat__synthitem',
+                    'ingredientcat__synthitem__item_sc'
+                )
                 .get(slugname=slugname)
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22CategorySerializerSC(queryset)
+        serializer = A22CategoryDataSerializer(queryset, context={'language': 'sc'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="tc")
@@ -163,9 +198,16 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
                 .select_related(
                     'cat_tc'
                 )
+                .prefetch_related(
+                    'item_set',
+                    'item_set__item_tc',
+                    'ingredientcat',
+                    'ingredientcat__synthitem',
+                    'ingredientcat__synthitem__item_tc'
+                )
                 .get(slugname=slugname)
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22CategorySerializerTC(queryset)
+        serializer = A22CategoryDataSerializer(queryset, context={'language': 'tc'})
         return Response(serializer.data)

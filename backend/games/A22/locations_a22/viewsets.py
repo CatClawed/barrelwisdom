@@ -1,6 +1,6 @@
 from rest_framework import viewsets, filters
 from games.A22.locations_a22.models import Location
-from games.A22.locations_a22.serializers import A22LocationSerializerEN, A22LocationSerializerJA, A22LocationSerializerKO, A22LocationSerializerFR, A22LocationSerializerSC, A22LocationSerializerTC
+from games.A22.locations_a22.serializers import A22LocationSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
@@ -9,7 +9,7 @@ from django.http import Http404
 
 class A22LocationViewSet(viewsets.ModelViewSet):
     queryset = Location.objects.all()
-    serializer_class = A22LocationSerializerEN
+    serializer_class = A22LocationSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
     lookup_field = 'slugname'
 
@@ -26,7 +26,7 @@ class A22LocationViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22LocationSerializerEN(queryset)
+        serializer = A22LocationSerializer(queryset, context={'language': 'en'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ja")
@@ -41,7 +41,7 @@ class A22LocationViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22LocationSerializerJA(queryset)
+        serializer = A22LocationSerializer(queryset, context={'language': 'ja'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ko")
@@ -56,7 +56,7 @@ class A22LocationViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22LocationSerializerKO(queryset)
+        serializer = A22LocationSerializer(queryset, context={'language': 'ko'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="fr")
@@ -71,7 +71,7 @@ class A22LocationViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22LocationSerializerFR(queryset)
+        serializer = A22LocationSerializer(queryset, context={'language': 'fr'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="sc")
@@ -86,7 +86,7 @@ class A22LocationViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22LocationSerializerSC(queryset)
+        serializer = A22LocationSerializer(queryset, context={'language': 'sc'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="tc")
@@ -101,5 +101,5 @@ class A22LocationViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22LocationSerializerTC(queryset)
+        serializer = A22LocationSerializer(queryset, context={'language': 'tc'})
         return Response(serializer.data)

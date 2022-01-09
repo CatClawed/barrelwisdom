@@ -70,7 +70,7 @@ import { SeoService } from '@app/services/seo.service';
       this.imgURL = this.brslservice.imgURL;
 
       this.seoURL = `${this.gameURL}/facilities/sets/${this.language}`;
-      this.seoTitle = `Facilities - ${this.gameTitle}`;
+      this.seoTitle = `Facility Sets - ${this.gameTitle}`;
       this.seoDesc = `The list of facility sets in ${this.gameTitle}.`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
   

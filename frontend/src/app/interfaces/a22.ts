@@ -1,14 +1,22 @@
+export interface NameLink {
+    slug: string;
+    name: string;
+}
+
+export interface NameOnly {
+    ing: string;
+}
+
 /* Traits */
 
 export interface TraitSimple {
-    slugname: string;
+    slug: string;
     name: string;
-    description: string;
+    desc: string;
 }
 
 export interface Trait {
-    slugname: string;
-    index: number;
+    slug: string;
     note: string;
     grade: number;
     trans_atk: boolean;
@@ -19,14 +27,14 @@ export interface Trait {
     trans_arm: boolean;
     trans_acc: boolean;
     name: string;
-    description: string;
-    item_set: Name[];
+    desc: string;
+    item_set: NameLink[];
 }
 
 /* Effects */
 
 export interface ExtraEffs {
-    slugname: string;
+    slug: string;
     name: string;
     efftype: string;
     effsub: string;
@@ -38,33 +46,31 @@ export interface EffectLine {
     itemname: string;
     effslug: string;
     effname: string;
-    effdescription: string;
+    effdesc: string;
     line: number;
     number: number;
 }
 
 export interface Effect {
-    slugname: string;
-    index: number;
+    slug: string;
     note: string;
     name: string;
-    description: string;
+    desc: string;
     efftype: string;
     effsub: string;
     effects: ExtraEffs[];
 }
 
 export interface EffectFull {
-    slugname: string;
-    index: number;
+    slug: string;
     note: string;
     name: string;
-    description: string;
+    desc: string;
     efftype: string;
     effsub: string;
+    parent: NameLink[];
     effects: ExtraEffs[];
-    parent: ExtraEffs[];
-    effectline_set: EffectLine[];
+    effectline_set: NameLink[];
     attTag0: string;
     actTag0: string;
     min_1_0: string;
@@ -81,21 +87,9 @@ export interface EffectFull {
 
 /* Items */
 
-// generically named in case I reuse...
-export interface Name {
-    slugname: string;
-    name: string;
-}
-
-export interface NameOnly {
-    item: string;
-    category: string;
-}
-
 export interface Item {
-    slugname: string;
+    slug: string;
     name: string;
-    index: number;
     itemtype: string;
     isDLC: boolean;
     fire: boolean;
@@ -103,8 +97,23 @@ export interface Item {
     lightning: boolean;
     wind: boolean;
     elementvalue: number;
-    category: Name[];
+    category: NameLink[];
     ingredient_set: NameOnly[];
+}
+
+export interface ItemC {
+    slug: string;
+    name: string;
+    isDLC: boolean;
+    fire: boolean;
+    ice: boolean;
+    lightning: boolean;
+    wind: boolean;
+    elementvalue: number;
+}
+
+export interface ItemWrapper {
+    synthitem: ItemC;
 }
 
 export interface IngEff {
@@ -116,7 +125,7 @@ export interface IngEff {
 }
 
 export interface Ingredient {
-    item: Name;
+    item: NameLink;
     required: boolean;
     fire: boolean;
     ice: boolean;
@@ -139,27 +148,26 @@ export interface EffectLine {
     itemname: string;
     effslug: string;
     effname: string;
-    effdescription: string;
+    effdesc: string;
     line: number;
     number: number;
 }
 
 export interface EVLink {
-    result: Name;
-    item1: Name;
-    item2: Name;
+    result: NameLink;
+    item1: NameLink;
+    item2: NameLink;
 }
 
 export interface RecipeMorph {
-    parent: Name;
+    parent: NameLink;
     order: number;
 }
 
 export interface ItemFull {
-    slugname: string;
+    slug: string;
     name: string;
-    description: string;
-    index: number;
+    desc: string;
     level: number;
     itemtype: string;
     isDLC: boolean;
@@ -168,8 +176,8 @@ export interface ItemFull {
     lightning: boolean;
     wind: boolean;
     elementvalue: number;
-    category: Name[];
-    shop: Name;
+    category: NameLink[];
+    shop: NameLink;
     trait: TraitSimple;
     skilltree: boolean;
     location: LocName[];
@@ -178,45 +186,42 @@ export interface ItemFull {
     effectline_set: EffectLine[];
     evlinkitems_set: EVLink[];
     recipemorphs_set: RecipeMorph[];
-    monster_set: Name[];
+    monster_set: NameLink[];
     note: string;
 }
 
 export interface CategoryItem {
-    slugname: string;
+    slug: string;
     name: string;
-    items: Item[];
-    ingredients: Item[];
+    item_set: ItemC[];
+    ingredientcat: ItemWrapper[];
 }
 
 /* Shop Develop */
 
 export interface ShopDevelop {
-    item: Name;
-    cat1: Name;
-    cat2: Name;
-    addProd: Name;
-    addCat: Name;
+    item: NameLink;
+    cat1: NameLink;
+    cat2: NameLink;
+    addProd: NameLink;
+    addCat: NameLink;
 }
 
 /* Monsters */
 
 export interface Monster {
-    slugname: string;
+    slug: string;
     name: string;
-    index: number;
     isDLC: boolean;
-    drops: Name[];
     size: string;
     montype: string;
 }
 
 export interface MonsterFull {
-    slugname: string;
+    slug: string;
     name: string;
-    index: number;
     isDLC: boolean;
-    drops: Name[];
+    drops: NameLink[];
     size: string;
     montype: string;
     location: LocName[];
@@ -231,7 +236,7 @@ export interface MonsterFull {
     def_rank: number;
     spd_rank: number;
     note: string;
-    description: string;
+    desc: string;
     //ailment1: number;
     //ailment2: number;
     //ailment3: number;
@@ -247,15 +252,15 @@ export interface MonsterFull {
 /* Locations */
 
 export interface LocName {
-    slugname: string;
+    slug: string;
     name: string;
     reg: string;
 }
 
 export interface ItemNode {
-    rank1: Name;
-    rank2: Name;
-    rank3: Name;
+    rank1: NameLink;
+    rank2: NameLink;
+    rank3: NameLink;
     priority1: number;
     priority2: number;
     priority3: number;
@@ -263,7 +268,7 @@ export interface ItemNode {
 }
 
 export interface ItemArea {
-    slugname: string;
+    slug: string;
     name: string;
     gatherdata: ItemNode[];
     text: string;
@@ -271,6 +276,6 @@ export interface ItemArea {
 
 export interface Region {
     name: string;
-    slugname: string;
+    slug: string;
     areas: ItemArea[];
 }

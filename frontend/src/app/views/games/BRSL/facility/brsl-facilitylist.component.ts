@@ -103,7 +103,7 @@ import { SeoService } from '@app/services/seo.service';
     getFacilities() {
       this.brslservice.getFacilityList(this.language)
       .subscribe(facilities => {
-        this.facilities = facilities.splice(0,44);
+        this.facilities = facilities.slice(0,44);
         this.filteredFacilities = this.pageForm.valueChanges.pipe(
           startWith(null as Observable<FacilityList[]>),
           map((search: string | null) => search ? this.filterT(this.searchstring, this.currentType, this.currentCategory) : this.facilities.slice())

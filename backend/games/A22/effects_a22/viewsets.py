@@ -1,6 +1,6 @@
 from rest_framework import viewsets, filters
 from games.A22.effects_a22.models import Effect
-from games.A22.effects_a22.serializers import A22EffectSerializerEN, A22EffectSerializerJA, A22EffectSerializerKO, A22EffectSerializerFR, A22EffectSerializerSC, A22EffectSerializerTC, A22EffectSerializerENFull, A22EffectSerializerJAFull, A22EffectSerializerKOFull, A22EffectSerializerFRFull, A22EffectSerializerSCFull, A22EffectSerializerTCFull
+from games.A22.effects_a22.serializers import A22EffectSerializer, A22EVEffectSerializer, A22EffectSerializerFull
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
@@ -9,7 +9,7 @@ from django.http import Http404
 
 class A22EffectViewSet(viewsets.ModelViewSet):
     queryset = Effect.objects.filter(efftype='Normal')
-    serializer_class = A22EffectSerializerEN
+    serializer_class = A22EffectSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
     ordering_fields = ['index']
     lookup_field = 'slugname'
@@ -23,12 +23,8 @@ class A22EffectViewSet(viewsets.ModelViewSet):
             .select_related(
                 'eff_en'
             )
-            .prefetch_related(
-                'effects',
-                'effects__eff_en'
-            )
         ).filter(efftype='Normal')
-        serializer = A22EffectSerializerEN(queryset, many=True)
+        serializer = A22EffectSerializer(queryset, many=True, context={'language': 'en'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -38,13 +34,8 @@ class A22EffectViewSet(viewsets.ModelViewSet):
             .select_related(
                 'eff_ja'
             )
-            .prefetch_related(
-                'effects',
-                'effects__eff_ja'
-            )
-
         ).filter(efftype='Normal')
-        serializer = A22EffectSerializerJA(queryset, many=True)
+        serializer = A22EffectSerializer(queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -54,13 +45,8 @@ class A22EffectViewSet(viewsets.ModelViewSet):
             .select_related(
                 'eff_ko'
             )
-            .prefetch_related(
-                'effects',
-                'effects__eff_ko'
-            )
-
         ).filter(efftype='Normal')
-        serializer = A22EffectSerializerKO(queryset, many=True)
+        serializer = A22EffectSerializer(queryset, many=True, context={'language': 'ko'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -70,13 +56,8 @@ class A22EffectViewSet(viewsets.ModelViewSet):
             .select_related(
                 'eff_fr'
             )
-            .prefetch_related(
-                'effects',
-                'effects__eff_fr'
-            )
-
         ).filter(efftype='Normal')
-        serializer = A22EffectSerializerFR(queryset, many=True)
+        serializer = A22EffectSerializer(queryset, many=True, context={'language': 'fr'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -86,13 +67,8 @@ class A22EffectViewSet(viewsets.ModelViewSet):
             .select_related(
                 'eff_sc'
             )
-            .prefetch_related(
-                'effects',
-                'effects__eff_sc'
-            )
-
         ).filter(efftype='Normal')
-        serializer = A22EffectSerializerSC(queryset, many=True)
+        serializer = A22EffectSerializer(queryset, many=True, context={'language': 'sc'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -102,13 +78,8 @@ class A22EffectViewSet(viewsets.ModelViewSet):
             .select_related(
                 'eff_tc'
             )
-            .prefetch_related(
-                'effects',
-                'effects__eff_tc'
-            )
-
         ).filter(efftype='Normal')
-        serializer = A22EffectSerializerTC(queryset, many=True)
+        serializer = A22EffectSerializer(queryset, many=True, context={'language': 'tc'})
         return Response(serializer.data)
 
     # single effect view
@@ -133,7 +104,7 @@ class A22EffectViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22EffectSerializerENFull(queryset)
+        serializer = A22EffectSerializerFull(queryset, context={'language': 'en'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ja")
@@ -157,7 +128,7 @@ class A22EffectViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22EffectSerializerJAFull(queryset)
+        serializer = A22EffectSerializerFull(queryset, context={'language': 'ja'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ko")
@@ -181,7 +152,7 @@ class A22EffectViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22EffectSerializerKOFull(queryset)
+        serializer = A22EffectSerializerFull(queryset, context={'language': 'ko'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="fr")
@@ -205,7 +176,7 @@ class A22EffectViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22EffectSerializerFRFull(queryset)
+        serializer = A22EffectSerializerFull(queryset, context={'language': 'fr'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="sc")
@@ -229,7 +200,7 @@ class A22EffectViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22EffectSerializerSCFull(queryset)
+        serializer = A22EffectSerializerFull(queryset, context={'language': 'sc'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="tc")
@@ -253,12 +224,12 @@ class A22EffectViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22EffectSerializerTCFull(queryset)
+        serializer = A22EffectSerializerFull(queryset, context={'language': 'tc'})
         return Response(serializer.data)
 
 class A22EVEffectViewSet(viewsets.ModelViewSet):
     queryset = Effect.objects.filter(efftype='EV')
-    serializer_class = A22EffectSerializerEN
+    serializer_class = A22EVEffectSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
     ordering_fields = ['index']
     lookup_field = 'slugname'
@@ -278,7 +249,7 @@ class A22EVEffectViewSet(viewsets.ModelViewSet):
             )
 
         ).filter(efftype='EV')
-        serializer = A22EffectSerializerEN(queryset, many=True)
+        serializer = A22EVEffectSerializer(queryset, many=True, context={'language': 'en'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -294,7 +265,7 @@ class A22EVEffectViewSet(viewsets.ModelViewSet):
             )
 
         ).filter(efftype='EV')
-        serializer = A22EffectSerializerJA(queryset, many=True)
+        serializer = A22EVEffectSerializer(queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -310,7 +281,7 @@ class A22EVEffectViewSet(viewsets.ModelViewSet):
             )
 
         ).filter(efftype='EV')
-        serializer = A22EffectSerializerKO(queryset, many=True)
+        serializer = A22EVEffectSerializer(queryset, many=True, context={'language': 'ko'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -326,7 +297,7 @@ class A22EVEffectViewSet(viewsets.ModelViewSet):
             )
 
         ).filter(efftype='EV')
-        serializer = A22EffectSerializerFR(queryset, many=True)
+        serializer = A22EVEffectSerializer(queryset, many=True, context={'language': 'fr'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -342,7 +313,7 @@ class A22EVEffectViewSet(viewsets.ModelViewSet):
             )
 
         ).filter(efftype='EV')
-        serializer = A22EffectSerializerSC(queryset, many=True)
+        serializer = A22EVEffectSerializer(queryset, many=True, context={'language': 'sc'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -358,12 +329,12 @@ class A22EVEffectViewSet(viewsets.ModelViewSet):
             )
 
         ).filter(efftype='EV')
-        serializer = A22EffectSerializerTC(queryset, many=True)
+        serializer = A22EVEffectSerializer(queryset, many=True, context={'language': 'tc'})
         return Response(serializer.data)
 
 class A22ForgeEffectViewSet(viewsets.ModelViewSet):
     queryset = Effect.objects.filter(efftype='Forge')
-    serializer_class = A22EffectSerializerEN
+    serializer_class = A22EffectSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
     ordering_fields = ['index']
     lookup_field = 'slugname'
@@ -377,13 +348,8 @@ class A22ForgeEffectViewSet(viewsets.ModelViewSet):
             .select_related(
                 'eff_en'
             )
-            .prefetch_related(
-                'effects',
-                'effects__eff_en'
-            )
-
         ).filter(efftype='Forge')
-        serializer = A22EffectSerializerEN(queryset, many=True)
+        serializer = A22EffectSerializer(queryset, many=True, context={'language': 'en'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -393,13 +359,8 @@ class A22ForgeEffectViewSet(viewsets.ModelViewSet):
             .select_related(
                 'eff_ja'
             )
-            .prefetch_related(
-                'effects',
-                'effects__eff_ja'
-            )
-
         ).filter(efftype='Forge')
-        serializer = A22EffectSerializerJA(queryset, many=True)
+        serializer = A22EffectSerializer(queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -409,13 +370,8 @@ class A22ForgeEffectViewSet(viewsets.ModelViewSet):
             .select_related(
                 'eff_ko'
             )
-            .prefetch_related(
-                'effects',
-                'effects__eff_ko'
-            )
-
         ).filter(efftype='Forge')
-        serializer = A22EffectSerializerKO(queryset, many=True)
+        serializer = A22EffectSerializer(queryset, many=True, context={'language': 'ko'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -425,13 +381,8 @@ class A22ForgeEffectViewSet(viewsets.ModelViewSet):
             .select_related(
                 'eff_fr'
             )
-            .prefetch_related(
-                'effects',
-                'effects__eff_fr'
-            )
-
         ).filter(efftype='Forge')
-        serializer = A22EffectSerializerFR(queryset, many=True)
+        serializer = A22EffectSerializer(queryset, many=True, context={'language': 'fr'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -441,13 +392,8 @@ class A22ForgeEffectViewSet(viewsets.ModelViewSet):
             .select_related(
                 'eff_sc'
             )
-            .prefetch_related(
-                'effects',
-                'effects__eff_sc'
-            )
-
         ).filter(efftype='Forge')
-        serializer = A22EffectSerializerSC(queryset, many=True)
+        serializer = A22EffectSerializer(queryset, many=True, context={'language': 'sc'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -457,11 +403,6 @@ class A22ForgeEffectViewSet(viewsets.ModelViewSet):
             .select_related(
                 'eff_tc'
             )
-            .prefetch_related(
-                'effects',
-                'effects__eff_tc'
-            )
-
         ).filter(efftype='Forge')
-        serializer = A22EffectSerializerTC(queryset, many=True)
+        serializer = A22EffectSerializer(queryset, many=True, context={'language': 'tc'})
         return Response(serializer.data)

@@ -1,6 +1,6 @@
 from rest_framework import viewsets, filters
 from games.A22.monsters_a22.models import Monster
-from games.A22.monsters_a22.serializers import A22MonsterSerializerEN, A22MonsterSerializerENFull, A22MonsterSerializerJA, A22MonsterSerializerJAFull, A22MonsterSerializerKO, A22MonsterSerializerKOFull, A22MonsterSerializerFR, A22MonsterSerializerFRFull, A22MonsterSerializerSC, A22MonsterSerializerSCFull, A22MonsterSerializerTC, A22MonsterSerializerTCFull
+from games.A22.monsters_a22.serializers import A22MonsterSerializer, A22MonsterSerializerFull
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
@@ -9,7 +9,7 @@ from django.http import Http404
 
 class A22MonsterViewSet(viewsets.ModelViewSet):
     queryset = Monster.objects.all()
-    serializer_class = A22MonsterSerializerEN
+    serializer_class = A22MonsterSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
     lookup_field = 'slugname'
 
@@ -27,7 +27,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
             )
 
         )
-        serializer = A22MonsterSerializerEN(queryset, many=True)
+        serializer = A22MonsterSerializer(queryset, many=True, context={'language': 'en'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -43,7 +43,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
             )
 
         )
-        serializer = A22MonsterSerializerJA(queryset, many=True)
+        serializer = A22MonsterSerializer(queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -59,7 +59,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
             )
 
         )
-        serializer = A22MonsterSerializerKO(queryset, many=True)
+        serializer = A22MonsterSerializer(queryset, many=True, context={'language': 'ko'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -75,7 +75,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
             )
 
         )
-        serializer = A22MonsterSerializerFR(queryset, many=True)
+        serializer = A22MonsterSerializer(queryset, many=True, context={'language': 'fr'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -91,7 +91,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
             )
 
         )
-        serializer = A22MonsterSerializerSC(queryset, many=True)
+        serializer = A22MonsterSerializer(queryset, many=True, context={'language': 'sc'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -107,7 +107,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
             )
 
         )
-        serializer = A22MonsterSerializerTC(queryset, many=True)
+        serializer = A22MonsterSerializer(queryset, many=True, context={'language': 'tc'})
         return Response(serializer.data)
 
     # single monster view
@@ -129,7 +129,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22MonsterSerializerENFull(queryset)
+        serializer = A22MonsterSerializerFull(queryset, context={'language': 'en'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ja")
@@ -150,7 +150,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22MonsterSerializerJAFull(queryset)
+        serializer = A22MonsterSerializerFull(queryset, context={'language': 'ja'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ko")
@@ -171,7 +171,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22MonsterSerializerKOFull(queryset)
+        serializer = A22MonsterSerializerFull(queryset, context={'language': 'ko'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="fr")
@@ -192,7 +192,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22MonsterSerializerFRFull(queryset)
+        serializer = A22MonsterSerializerFull(queryset, context={'language': 'fr'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="sc")
@@ -213,7 +213,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22MonsterSerializerSCFull(queryset)
+        serializer = A22MonsterSerializerFull(queryset, context={'language': 'sc'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="tc")
@@ -234,5 +234,5 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22MonsterSerializerTCFull(queryset)
+        serializer = A22MonsterSerializerFull(queryset, context={'language': 'tc'})
         return Response(serializer.data)

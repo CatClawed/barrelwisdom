@@ -1,6 +1,6 @@
 from rest_framework import viewsets, filters
 from games.A22.shops_a22.models import Shop
-from games.A22.shops_a22.serializers import A22ShopSerializerEN, A22ShopSerializerJA, A22ShopSerializerKO, A22ShopSerializerFR, A22ShopSerializerSC, A22ShopSerializerTC
+from games.A22.shops_a22.serializers import A22ShopSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
@@ -9,7 +9,7 @@ from django.http import Http404
 
 class A22ShopViewSet(viewsets.ModelViewSet):
     queryset = Shop.objects.all()
-    serializer_class = A22ShopSerializerEN
+    serializer_class = A22ShopSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
     lookup_field = 'slugname'
 
@@ -26,7 +26,7 @@ class A22ShopViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22ShopSerializerEN(queryset)
+        serializer = A22ShopSerializer(queryset, context={'language': 'en'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ja")
@@ -41,7 +41,7 @@ class A22ShopViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22ShopSerializerJA(queryset)
+        serializer = A22ShopSerializer(queryset, context={'language': 'ja'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ko")
@@ -56,7 +56,7 @@ class A22ShopViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22ShopSerializerKO(queryset)
+        serializer = A22ShopSerializer(queryset, context={'language': 'ko'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="fr")
@@ -71,7 +71,7 @@ class A22ShopViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22ShopSerializerFR(queryset)
+        serializer = A22ShopSerializer(queryset, context={'language': 'fr'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="sc")
@@ -86,7 +86,7 @@ class A22ShopViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22ShopSerializerSC(queryset)
+        serializer = A22ShopSerializer(queryset, context={'language': 'sc'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="tc")
@@ -101,5 +101,5 @@ class A22ShopViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22ShopSerializerTC(queryset)
+        serializer = A22ShopSerializer(queryset, context={'language': 'tc'})
         return Response(serializer.data)

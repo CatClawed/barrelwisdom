@@ -1,128 +1,112 @@
 from rest_framework import serializers
-from games.A22.categories_a22.models import *
+from collections import OrderedDict
+from games.A22.categories_a22.models import Category
+from games.A22.items_a22.models import Item, Ingredient
 
-class A22Category_enSerializer(serializers.ModelSerializer):
+class A22ItemSerializer(serializers.ModelSerializer):
+    slug = serializers.CharField(source='slugname')
+    name = serializers.SerializerMethodField()
     class Meta:
-        model = Category_en
-        fields = ['name']
+        model = Item
+        fields = ['slug', 'name', 'isDLC', 'ice', 'wind', 'lightning', 'fire', 'elementvalue']
+    def get_name(self,obj):
+        if 'language' not in self.context:
+            return obj.item_en.name
+        if self.context['language'] == 'ja':
+            return obj.item_ja.name
+        if self.context['language'] == 'ko':
+            return obj.item_ko.name
+        if self.context['language'] == 'fr':
+            return obj.item_fr.name
+        if self.context['language'] == 'sc':
+            return obj.item_sc.name
+        if self.context['language'] == 'tc':
+            return obj.item_tc.name
+        else:
+            return obj.item_en.name
+    def to_representation(self, instance):
+        result = super(A22ItemSerializer, self).to_representation(instance)
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', False, {}])
 
-class A22Category_jaSerializer(serializers.ModelSerializer):
+class A22IngredientSerializer(serializers.ModelSerializer):
+    synthitem = A22ItemSerializer()
     class Meta:
-        model = Category_ja
-        fields = ['name']
-
-class A22Category_koSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category_ko
-        fields = ['name']
-
-class A22Category_frSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category_fr
-        fields = ['name']
-
-class A22Category_scSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category_sc
-        fields = ['name']
-
-class A22Category_tcSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category_tc
-        fields = ['name']
+        model = Ingredient
+        fields = ['synthitem']
 
 # Full Data
 class A22CategorySerializer(serializers.ModelSerializer):
-    cat_en = A22Category_enSerializer()
-    cat_ja = A22Category_jaSerializer()
-    cat_ko = A22Category_koSerializer()
-    cat_fr = A22Category_frSerializer()
-    cat_sc = A22Category_scSerializer()
-    cat_tc = A22Category_tcSerializer()
+    slug = serializers.CharField(source='slugname')
+    name = serializers.SerializerMethodField()
     class Meta:
         model = Category
-        fields = ['slugname', 'cat_en', 'cat_ja', 'cat_ko', 'cat_fr', 'cat_sc', 'cat_tc']
+        fields = ['slug', 'name']
     
-    def create(self, validated_data):
-        validated_data['cat_en'] = Category_en.objects.create(**validated_data.get('cat_en'))
-        validated_data['cat_ja'] = Category_ja.objects.create(**validated_data.get('cat_ja'))
-        validated_data['cat_ko'] = Category_ko.objects.create(**validated_data.get('cat_ko'))
-        validated_data['cat_fr'] = Category_fr.objects.create(**validated_data.get('cat_fr'))
-        validated_data['cat_sc'] = Category_sc.objects.create(**validated_data.get('cat_sc'))
-        validated_data['cat_tc'] = Category_tc.objects.create(**validated_data.get('cat_tc'))
-        cat = Category.objects.create(**validated_data)
-        return cat
-
-# Name Data for single languages
-class A22CategorySerializerENName(serializers.ModelSerializer):
-    name = serializers.CharField(source='cat_en.name')
+    def get_name(self,obj):
+        if 'language' not in self.context:
+            return obj.cat_en.name
+        if self.context['language'] == 'ja':
+            return obj.cat_ja.name
+        if self.context['language'] == 'ko':
+            return obj.cat_ko.name
+        if self.context['language'] == 'fr':
+            return obj.cat_fr.name
+        if self.context['language'] == 'sc':
+            return obj.cat_sc.name
+        if self.context['language'] == 'tc':
+            return obj.cat_tc.name
+        else:
+            return obj.cat_en.name
+        
+# Full Data
+class A22CategorySerializerName(serializers.ModelSerializer):
+    name = serializers.SerializerMethodField()
     class Meta:
         model = Category
         fields = ['name']
     
-class A22CategorySerializerJAName(serializers.ModelSerializer):
-    name = serializers.CharField(source='cat_ja.name')
+    def get_name(self,obj):
+        if 'language' not in self.context:
+            return obj.cat_en.name
+        if self.context['language'] == 'ja':
+            return obj.cat_ja.name
+        if self.context['language'] == 'ko':
+            return obj.cat_ko.name
+        if self.context['language'] == 'fr':
+            return obj.cat_fr.name
+        if self.context['language'] == 'sc':
+            return obj.cat_sc.name
+        if self.context['language'] == 'tc':
+            return obj.cat_tc.name
+        else:
+            return obj.cat_en.name
+        
+class A22CategoryDataSerializer(serializers.ModelSerializer):
+    slug = serializers.CharField(source='slugname')
+    name = serializers.SerializerMethodField()
+    item_set = A22ItemSerializer(many=True)
+    ingredientcat = A22IngredientSerializer(many=True, read_only=True)
     class Meta:
         model = Category
-        fields = ['name']
+        fields = ['slug', 'name', 'item_set', 'ingredientcat']
 
-class A22CategorySerializerKOName(serializers.ModelSerializer):
-    name = serializers.CharField(source='cat_ko.name')
-    class Meta:
-        model = Category
-        fields = ['name']
-
-class A22CategorySerializerFRName(serializers.ModelSerializer):
-    name = serializers.CharField(source='cat_fr.name')
-    class Meta:
-        model = Category
-        fields = ['name']
-
-class A22CategorySerializerSCName(serializers.ModelSerializer):
-    name = serializers.CharField(source='cat_sc.name')
-    class Meta:
-        model = Category
-        fields = ['name']
-
-class A22CategorySerializerTCName(serializers.ModelSerializer):
-    name = serializers.CharField(source='cat_tc.name')
-    class Meta:
-        model = Category
-        fields = ['name']
-
-# 'Complete' Data for single languages
-class A22CategorySerializerEN(serializers.ModelSerializer):
-    name = serializers.CharField(source='cat_en.name')
-    class Meta:
-        model = Category
-        fields = ['slugname', 'name']
-    
-class A22CategorySerializerJA(serializers.ModelSerializer):
-    name = serializers.CharField(source='cat_ja.name')
-    class Meta:
-        model = Category
-        fields = ['slugname', 'name']
-
-class A22CategorySerializerKO(serializers.ModelSerializer):
-    name = serializers.CharField(source='cat_ko.name')
-    class Meta:
-        model = Category
-        fields = ['slugname', 'name']
-
-class A22CategorySerializerFR(serializers.ModelSerializer):
-    name = serializers.CharField(source='cat_fr.name')
-    class Meta:
-        model = Category
-        fields = ['slugname', 'name']
-
-class A22CategorySerializerSC(serializers.ModelSerializer):
-    name = serializers.CharField(source='cat_sc.name')
-    class Meta:
-        model = Category
-        fields = ['slugname', 'name']
-
-class A22CategorySerializerTC(serializers.ModelSerializer):
-    name = serializers.CharField(source='cat_tc.name')
-    class Meta:
-        model = Category
-        fields = ['slugname', 'name']
+    def get_name(self,obj):
+        if 'language' not in self.context:
+            return obj.cat_en.name
+        if self.context['language'] == 'ja':
+            return obj.cat_ja.name
+        if self.context['language'] == 'ko':
+            return obj.cat_ko.name
+        if self.context['language'] == 'fr':
+            return obj.cat_fr.name
+        if self.context['language'] == 'sc':
+            return obj.cat_sc.name
+        if self.context['language'] == 'tc':
+            return obj.cat_tc.name
+        else:
+            return obj.cat_en.name
+    def to_representation(self, instance):
+        result = super(A22CategoryDataSerializer, self).to_representation(instance)
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', False, {}])

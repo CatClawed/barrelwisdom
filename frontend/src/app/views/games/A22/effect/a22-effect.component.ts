@@ -70,7 +70,7 @@ export class A22EffectComponent implements OnInit {
 
           this.seoURL = `${this.gameURL}/effects/${this.effect.slugname}/${this.language}`;
           this.seoTitle = `${this.effect.name} - ${this.gameTitle}`;
-          this.seoDesc = `${this.effect.description}`
+          this.seoDesc = this.effect.description ? `${this.effect.description}` : `EV Effect in ${this.gameTitle}.`
           this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
       }
     },

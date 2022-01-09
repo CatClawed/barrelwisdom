@@ -1,320 +1,230 @@
 from collections import OrderedDict
 from rest_framework import serializers
-from games.A22.effects_a22.models import Effect, Effect_en, Effect_ja, Effect_fr, Effect_ko, Effect_sc, Effect_tc
-from games.A22.items_a22.serializers import A22EffectLineSerializerEN, A22EffectLineSerializerJA, A22EffectLineSerializerKO, A22EffectLineSerializerFR, A22EffectLineSerializerSC, A22EffectLineSerializerTC
+from games.A22.effects_a22.models import Effect
+from games.A22.items_a22.models import EffectLine
 
-
-# Just effects + descriptions with no extra data
-class A22Effect_enSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Effect_en
-        fields = ['name', 'description']
-
-class A22Effect_jaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Effect_ja
-        fields = ['name', 'description']
-
-class A22Effect_koSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Effect_ko
-        fields = ['name', 'description']
-
-class A22Effect_frSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Effect_fr
-        fields = ['name', 'description']
-
-class A22Effect_scSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Effect_sc
-        fields = ['name', 'description']
-
-class A22Effect_tcSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Effect_tc
-        fields = ['name', 'description']
-
-# Full Data
-class A22EffectSerializer(serializers.ModelSerializer):
-    eff_en = A22Effect_enSerializer()
-    eff_ja = A22Effect_jaSerializer()
-    eff_ko = A22Effect_koSerializer()
-    eff_fr = A22Effect_frSerializer()
-    eff_sc = A22Effect_scSerializer()
-    eff_tc = A22Effect_tcSerializer()
+# parents and effects
+class A22ExtraSerializer(serializers.ModelSerializer):
+    slug = serializers.CharField(source='slugname')
+    name = serializers.SerializerMethodField()
+    desc = serializers.SerializerMethodField()
     class Meta:
         model = Effect
-        fields = ['slugname', 'index', 'efftype', 'effsub', 'note', 'eff_en', 'eff_ja', 'eff_ko', 'eff_fr', 'eff_sc', 'eff_tc']
-    
-    def create(self, validated_data):
-        validated_data['eff_en'] = Effect_en.objects.create(**validated_data.get('eff_en'))
-        validated_data['eff_ja'] = Effect_ja.objects.create(**validated_data.get('eff_ja'))
-        validated_data['eff_ko'] = Effect_ko.objects.create(**validated_data.get('eff_ko'))
-        validated_data['eff_fr'] = Effect_fr.objects.create(**validated_data.get('eff_fr'))
-        validated_data['eff_sc'] = Effect_sc.objects.create(**validated_data.get('eff_sc'))
-        validated_data['eff_tc'] = Effect_tc.objects.create(**validated_data.get('eff_tc'))
-        eff = Effect.objects.create(**validated_data)
-        return eff
-
-# Parents and Effects
-class A22ExtraSerializerEN(serializers.ModelSerializer):
-    name = serializers.CharField(source='eff_en.name')
-    desc = serializers.CharField(source='eff_en.description')
-    class Meta:
-        model = Effect
-        fields = ['slugname', 'name', 'efftype', 'effsub', 'desc']
+        fields = ['slug', 'name', 'efftype', 'effsub', 'desc']
+    def get_name(self,obj):
+        if 'language' not in self.context:
+            return obj.eff_en.name
+        if self.context['language'] == 'ja':
+            return obj.eff_ja.name
+        if self.context['language'] == 'ko':
+            return obj.eff_ko.name
+        if self.context['language'] == 'fr':
+            return obj.eff_fr.name
+        if self.context['language'] == 'sc':
+            return obj.eff_sc.name
+        if self.context['language'] == 'tc':
+            return obj.eff_tc.name
+        else:
+            return obj.eff_en.name
+    def get_desc(self,obj):
+        if 'language' not in self.context:
+            return obj.eff_en.description
+        if self.context['language'] == 'ja':
+            return obj.eff_ja.description
+        if self.context['language'] == 'ko':
+            return obj.eff_ko.description
+        if self.context['language'] == 'fr':
+            return obj.eff_fr.description
+        if self.context['language'] == 'sc':
+            return obj.eff_sc.description
+        if self.context['language'] == 'tc':
+            return obj.eff_tc.description
+        else:
+            return obj.eff_en.description
     def to_representation(self, instance):
-        result = super(A22ExtraSerializerEN, self).to_representation(instance)
+        result = super(A22ExtraSerializer, self).to_representation(instance)
         if(result['efftype'] != 'EV'):
             result['effects'] = []
         return OrderedDict((k, v) for k, v in result.items() 
                            if v not in [None, [], '', {}])
-
-class A22ExtraSerializerJA(serializers.ModelSerializer):
-    name = serializers.CharField(source='eff_ja.name')
-    desc = serializers.CharField(source='eff_ja.description')
+        
+# parents and effects
+class A22SimpleExtraSerializer(serializers.ModelSerializer):
+    slug = serializers.CharField(source='slugname')
+    name = serializers.SerializerMethodField()
     class Meta:
         model = Effect
-        fields = ['slugname', 'name', 'efftype', 'effsub', 'desc']
-    def to_representation(self, instance):
-        result = super(A22ExtraSerializerJA, self).to_representation(instance)
-        if(result['efftype'] != 'EV'):
-            result['effects'] = []
-        return OrderedDict((k, v) for k, v in result.items() 
-                           if v not in [None, [], '', {}])
-
-class A22ExtraSerializerKO(serializers.ModelSerializer):
-    name = serializers.CharField(source='eff_ko.name')
-    desc = serializers.CharField(source='eff_ko.description')
-    class Meta:
-        model = Effect
-        fields = ['slugname', 'name', 'efftype', 'effsub', 'desc']
-    def to_representation(self, instance):
-        result = super(A22ExtraSerializerKO, self).to_representation(instance)
-        if(result['efftype'] != 'EV'):
-            result['effects'] = []
-        return OrderedDict((k, v) for k, v in result.items() 
-                           if v not in [None, [], '', {}])
-
-class A22ExtraSerializerFR(serializers.ModelSerializer):
-    name = serializers.CharField(source='eff_fr.name')
-    desc = serializers.CharField(source='eff_fr.description')
-    class Meta:
-        model = Effect
-        fields = ['slugname', 'name', 'efftype', 'effsub', 'desc']
-    def to_representation(self, instance):
-        result = super(A22ExtraSerializerFR, self).to_representation(instance)
-        if(result['efftype'] != 'EV'):
-            result['effects'] = []
-        return OrderedDict((k, v) for k, v in result.items() 
-                           if v not in [None, [], '', {}])
-
-class A22ExtraSerializerSC(serializers.ModelSerializer):
-    name = serializers.CharField(source='eff_sc.name')
-    desc = serializers.CharField(source='eff_sc.description')
-    class Meta:
-        model = Effect
-        fields = ['slugname', 'name', 'efftype', 'effsub', 'desc']
-    def to_representation(self, instance):
-        result = super(A22ExtraSerializerSC, self).to_representation(instance)
-        if(result['efftype'] != 'EV'):
-            result['effects'] = []
-        return OrderedDict((k, v) for k, v in result.items() 
-                           if v not in [None, [], '', {}])
-
-class A22ExtraSerializerTC(serializers.ModelSerializer):
-    name = serializers.CharField(source='eff_tc.name')
-    desc = serializers.CharField(source='eff_tc.description')
-    class Meta:
-        model = Effect
-        fields = ['slugname', 'name', 'efftype', 'effsub', 'desc']
-    def to_representation(self, instance):
-        result = super(A22ExtraSerializerTC, self).to_representation(instance)
-        if(result['efftype'] != 'EV'):
-            result['effects'] = []
-        return OrderedDict((k, v) for k, v in result.items() 
-                           if v not in [None, [], '', {}])
+        fields = ['slug', 'name']
+    def get_name(self,obj):
+        if 'language' not in self.context:
+            return obj.eff_en.name
+        if self.context['language'] == 'ja':
+            return obj.eff_ja.name
+        if self.context['language'] == 'ko':
+            return obj.eff_ko.name
+        if self.context['language'] == 'fr':
+            return obj.eff_fr.name
+        if self.context['language'] == 'sc':
+            return obj.eff_sc.name
+        if self.context['language'] == 'tc':
+            return obj.eff_tc.name
+        else:
+            return obj.eff_en.name
 
 # Simplified Data for single languages
-class A22EffectSerializerEN(serializers.ModelSerializer):
-    name = serializers.CharField(source='eff_en.name')
-    description = serializers.CharField(source='eff_en.description')
-    effects = A22ExtraSerializerEN(many=True)
+class A22EffectSerializer(serializers.ModelSerializer):
+    slug = serializers.CharField(source='slugname')
+    name = serializers.SerializerMethodField()
+    desc = serializers.SerializerMethodField()
     class Meta:
         model = Effect
-        fields = ['slugname', 'efftype', 'effsub', 'note', 'name', 'description', 'effects']
-
+        fields = ['slug', 'effsub', 'name', 'desc']
+    def get_name(self,obj):
+        if 'language' not in self.context:
+            return obj.eff_en.name
+        if self.context['language'] == 'ja':
+            return obj.eff_ja.name
+        if self.context['language'] == 'ko':
+            return obj.eff_ko.name
+        if self.context['language'] == 'fr':
+            return obj.eff_fr.name
+        if self.context['language'] == 'sc':
+            return obj.eff_sc.name
+        if self.context['language'] == 'tc':
+            return obj.eff_tc.name
+        else:
+            return obj.eff_en.name
+    def get_desc(self,obj):
+        if 'language' not in self.context:
+            return obj.eff_en.description
+        if self.context['language'] == 'ja':
+            return obj.eff_ja.description
+        if self.context['language'] == 'ko':
+            return obj.eff_ko.description
+        if self.context['language'] == 'fr':
+            return obj.eff_fr.description
+        if self.context['language'] == 'sc':
+            return obj.eff_sc.description
+        if self.context['language'] == 'tc':
+            return obj.eff_tc.description
+        else:
+            return obj.eff_en.description
     def to_representation(self, instance):
-        result = super(A22EffectSerializerEN, self).to_representation(instance)
-        if(result['efftype'] != 'EV'):
-            result['effects'] = []
+        result = super(A22EffectSerializer, self).to_representation(instance)
         return OrderedDict((k, v) for k, v in result.items() 
                            if v not in [None, [], '', {}])
-
-class A22EffectSerializerJA(serializers.ModelSerializer):
-    name = serializers.CharField(source='eff_ja.name')
-    description = serializers.CharField(source='eff_ja.description')
-    effects = A22ExtraSerializerJA(many=True)
+        
+# Simplified Data for single languages
+class A22EVEffectSerializer(serializers.ModelSerializer):
+    slug = serializers.CharField(source='slugname')
+    name = serializers.SerializerMethodField()
+    desc = serializers.SerializerMethodField()
+    effects = A22ExtraSerializer(many=True)
     class Meta:
         model = Effect
-        fields = ['slugname', 'efftype', 'effsub', 'note', 'name', 'description', 'effects']
-
+        fields = ['slug', 'effsub', 'name', 'desc', 'effects']
+    def get_name(self,obj):
+        if 'language' not in self.context:
+            return obj.eff_en.name
+        if self.context['language'] == 'ja':
+            return obj.eff_ja.name
+        if self.context['language'] == 'ko':
+            return obj.eff_ko.name
+        if self.context['language'] == 'fr':
+            return obj.eff_fr.name
+        if self.context['language'] == 'sc':
+            return obj.eff_sc.name
+        if self.context['language'] == 'tc':
+            return obj.eff_tc.name
+        else:
+            return obj.eff_en.name
+    def get_desc(self,obj):
+        if 'language' not in self.context:
+            return obj.eff_en.description
+        if self.context['language'] == 'ja':
+            return obj.eff_ja.description
+        if self.context['language'] == 'ko':
+            return obj.eff_ko.description
+        if self.context['language'] == 'fr':
+            return obj.eff_fr.description
+        if self.context['language'] == 'sc':
+            return obj.eff_sc.description
+        if self.context['language'] == 'tc':
+            return obj.eff_tc.description
+        else:
+            return obj.eff_en.description
     def to_representation(self, instance):
-        result = super(A22EffectSerializerJA, self).to_representation(instance)
-        if(result['efftype'] != 'EV'):
-            result['effects'] = []
+        result = super(A22EVEffectSerializer, self).to_representation(instance)
         return OrderedDict((k, v) for k, v in result.items() 
                            if v not in [None, [], '', {}])
-
-class A22EffectSerializerKO(serializers.ModelSerializer):
-    name = serializers.CharField(source='eff_ko.name')
-    description = serializers.CharField(source='eff_ko.description')
-    effects = A22ExtraSerializerKO(many=True)
+        
+class A22EffectLineSerializer(serializers.ModelSerializer):
+    slug = serializers.CharField(source='item.slugname')
+    name = serializers.SerializerMethodField()
+    def get_name(self,obj):
+        if 'language' not in self.context:
+            return obj.item.item_en.name
+        if self.context['language'] == 'ja':
+            return obj.item.item_en.name
+        if self.context['language'] == 'ko':
+            return obj.item.item_en.name
+        if self.context['language'] == 'fr':
+            return obj.item.item_en.name
+        if self.context['language'] == 'sc':
+            return obj.item.item_en.name
+        if self.context['language'] == 'tc':
+            return obj.item.item_en.name
+        else:
+            return obj.item.item_en.name
     class Meta:
-        model = Effect
-        fields = ['slugname', 'efftype', 'effsub', 'note', 'name', 'description', 'effects']
-
-    def to_representation(self, instance):
-        result = super(A22EffectSerializerKO, self).to_representation(instance)
-        if(result['efftype'] != 'EV'):
-            result['effects'] = []
-        return OrderedDict((k, v) for k, v in result.items() 
-                           if v not in [None, [], '', {}])
-
-class A22EffectSerializerFR(serializers.ModelSerializer):
-    name = serializers.CharField(source='eff_fr.name')
-    description = serializers.CharField(source='eff_fr.description')
-    effects = A22ExtraSerializerFR(many=True)
-    class Meta:
-        model = Effect
-        fields = ['slugname', 'efftype', 'effsub', 'note', 'name', 'description', 'effects']
-
-    def to_representation(self, instance):
-        result = super(A22EffectSerializerFR, self).to_representation(instance)
-        if(result['efftype'] != 'EV'):
-            result['effects'] = []
-        return OrderedDict((k, v) for k, v in result.items() 
-                           if v not in [None, [], '', {}])
-
-class A22EffectSerializerSC(serializers.ModelSerializer):
-    name = serializers.CharField(source='eff_sc.name')
-    description = serializers.CharField(source='eff_sc.description')
-    effects = A22ExtraSerializerSC(many=True)
-    class Meta:
-        model = Effect
-        fields = ['slugname', 'efftype', 'effsub', 'note', 'name', 'description', 'effects']
-
-    def to_representation(self, instance):
-        result = super(A22EffectSerializerSC, self).to_representation(instance)
-        if(result['efftype'] != 'EV'):
-            result['effects'] = []
-        return OrderedDict((k, v) for k, v in result.items() 
-                           if v not in [None, [], '', {}])
-
-class A22EffectSerializerTC(serializers.ModelSerializer):
-    name = serializers.CharField(source='eff_tc.name')
-    description = serializers.CharField(source='eff_tc.description')
-    effects = A22ExtraSerializerTC(many=True)
-    class Meta:
-        model = Effect
-        fields = ['slugname', 'efftype', 'effsub', 'note', 'name', 'description', 'effects']
-
-    def to_representation(self, instance):
-        result = super(A22EffectSerializerTC, self).to_representation(instance)
-        if(result['efftype'] != 'EV'):
-            result['effects'] = []
-        return OrderedDict((k, v) for k, v in result.items() 
-                           if v not in [None, [], '', {}])
+        model = EffectLine
+        fields = ['slug', 'name']
 
 
 # Full Data for single languages
-class A22EffectSerializerENFull(serializers.ModelSerializer):
-    name = serializers.CharField(source='eff_en.name')
-    description = serializers.CharField(source='eff_en.description')
-    effects = A22ExtraSerializerEN(many=True)
-    parent  = A22ExtraSerializerEN(many=True)
-    effectline_set = A22EffectLineSerializerEN(many=True)
+class A22EffectSerializerFull(serializers.ModelSerializer):
+    slug = serializers.CharField(source='slugname')
+    name = serializers.SerializerMethodField()
+    desc = serializers.SerializerMethodField()
+    effects = A22ExtraSerializer(many=True)
+    parent  = A22SimpleExtraSerializer(many=True)
+    effectline_set = A22EffectLineSerializer(many=True)
     class Meta:
         model = Effect
-        fields = ['slugname', 'index', 'efftype', 'effsub', 'note', 'name', 'description', 'effects', 'parent', 'effectline_set', 'attTag0', 'actTag0', 'min_1_0', 'max_1_0', 'min_2_0', 'max_2_0','attTag1', 'actTag1', 'min_1_1', 'max_1_1', 'min_2_1', 'max_2_1']
-    
+        fields = ['slug', 'efftype', 'effsub', 'note', 'name', 'desc', 'effects', 'parent', 'effectline_set', 'attTag0', 'actTag0', 'min_1_0', 'max_1_0', 'min_2_0', 'max_2_0','attTag1', 'actTag1', 'min_1_1', 'max_1_1', 'min_2_1', 'max_2_1']
+    def get_name(self,obj):
+        if 'language' not in self.context:
+            return obj.eff_en.name
+        if self.context['language'] == 'ja':
+            return obj.eff_ja.name
+        if self.context['language'] == 'ko':
+            return obj.eff_ko.name
+        if self.context['language'] == 'fr':
+            return obj.eff_fr.name
+        if self.context['language'] == 'sc':
+            return obj.eff_sc.name
+        if self.context['language'] == 'tc':
+            return obj.eff_tc.name
+        else:
+            return obj.eff_en.name
+    def get_desc(self,obj):
+        if 'language' not in self.context:
+            return obj.eff_en.description
+        if self.context['language'] == 'ja':
+            return obj.eff_ja.description
+        if self.context['language'] == 'ko':
+            return obj.eff_ko.description
+        if self.context['language'] == 'fr':
+            return obj.eff_fr.description
+        if self.context['language'] == 'sc':
+            return obj.eff_sc.description
+        if self.context['language'] == 'tc':
+            return obj.eff_tc.description
+        else:
+            return obj.eff_en.description
     def to_representation(self, instance):
-        result = super(A22EffectSerializerENFull, self).to_representation(instance)
-        return OrderedDict((k, v) for k, v in result.items() 
-                           if v not in [None, [], '', {}])
-
-class A22EffectSerializerJAFull(serializers.ModelSerializer):
-    name = serializers.CharField(source='eff_ja.name')
-    description = serializers.CharField(source='eff_ja.description')
-    effects = A22ExtraSerializerJA(many=True)
-    parent  = A22ExtraSerializerJA(many=True)
-    effectline_set = A22EffectLineSerializerJA(many=True)
-    class Meta:
-        model = Effect
-        fields = ['slugname', 'index', 'efftype', 'effsub', 'note', 'name', 'description', 'effects', 'parent', 'effectline_set', 'attTag0', 'actTag0', 'min_1_0', 'max_1_0', 'min_2_0', 'max_2_0','attTag1', 'actTag1', 'min_1_1', 'max_1_1', 'min_2_1', 'max_2_1']
-    
-    def to_representation(self, instance):
-        result = super(A22EffectSerializerJAFull, self).to_representation(instance)
-        return OrderedDict((k, v) for k, v in result.items() 
-                           if v not in [None, [], '', {}])
-
-class A22EffectSerializerKOFull(serializers.ModelSerializer):
-    name = serializers.CharField(source='eff_ko.name')
-    description = serializers.CharField(source='eff_ko.description')
-    effects = A22ExtraSerializerKO(many=True)
-    parent  = A22ExtraSerializerKO(many=True)
-    effectline_set = A22EffectLineSerializerKO(many=True)
-    class Meta:
-        model = Effect
-        fields = ['slugname', 'index', 'efftype', 'effsub', 'note', 'name', 'description', 'effects', 'parent', 'effectline_set', 'attTag0', 'actTag0', 'min_1_0', 'max_1_0', 'min_2_0', 'max_2_0','attTag1', 'actTag1', 'min_1_1', 'max_1_1', 'min_2_1', 'max_2_1']
-
-    def to_representation(self, instance):
-        result = super(A22EffectSerializerKOFull, self).to_representation(instance)
-        return OrderedDict((k, v) for k, v in result.items() 
-                           if v not in [None, [], '', {}])
-
-class A22EffectSerializerFRFull(serializers.ModelSerializer):
-    name = serializers.CharField(source='eff_fr.name')
-    description = serializers.CharField(source='eff_fr.description')
-    effects = A22ExtraSerializerFR(many=True)
-    parent  = A22ExtraSerializerFR(many=True)
-    effectline_set = A22EffectLineSerializerFR(many=True)
-    class Meta:
-        model = Effect
-        fields = ['slugname', 'index', 'efftype', 'effsub', 'note', 'name', 'description', 'effects', 'parent', 'effectline_set', 'attTag0', 'actTag0', 'min_1_0', 'max_1_0', 'min_2_0', 'max_2_0','attTag1', 'actTag1', 'min_1_1', 'max_1_1', 'min_2_1', 'max_2_1']
-
-    def to_representation(self, instance):
-        result = super(A22EffectSerializerFRFull, self).to_representation(instance)
-        return OrderedDict((k, v) for k, v in result.items() 
-                           if v not in [None, [], '', {}])
-
-class A22EffectSerializerSCFull(serializers.ModelSerializer):
-    name = serializers.CharField(source='eff_sc.name')
-    description = serializers.CharField(source='eff_sc.description')
-    effects = A22ExtraSerializerSC(many=True)
-    parent = A22ExtraSerializerSC(many=True)
-    effectline_set = A22EffectLineSerializerSC(many=True)
-    class Meta:
-        model = Effect
-        fields = ['slugname', 'index', 'efftype', 'effsub', 'note', 'name', 'description', 'effects', 'parent', 'effectline_set', 'attTag0', 'actTag0', 'min_1_0', 'max_1_0', 'min_2_0', 'max_2_0','attTag1', 'actTag1', 'min_1_1', 'max_1_1', 'min_2_1', 'max_2_1']
-  
-    def to_representation(self, instance):
-        result = super(A22EffectSerializerSCFull, self).to_representation(instance)
-        return OrderedDict((k, v) for k, v in result.items() 
-                           if v not in [None, [], '', {}])
-
-class A22EffectSerializerTCFull(serializers.ModelSerializer):
-    name = serializers.CharField(source='eff_tc.name')
-    description = serializers.CharField(source='eff_tc.description')
-    effects = A22ExtraSerializerTC(many=True)
-    parent  = A22ExtraSerializerTC(many=True)
-    effectline_set = A22EffectLineSerializerTC(many=True)
-    class Meta:
-        model = Effect
-        fields = ['slugname', 'index', 'efftype', 'effsub', 'note', 'name', 'description', 'effects', 'parent', 'effectline_set', 'attTag0', 'actTag0', 'min_1_0', 'max_1_0', 'min_2_0', 'max_2_0','attTag1', 'actTag1', 'min_1_1', 'max_1_1', 'min_2_1', 'max_2_1']
-
-    def to_representation(self, instance):
-        result = super(A22EffectSerializerTCFull, self).to_representation(instance)
+        result = super(A22EffectSerializerFull, self).to_representation(instance)
+        if result['efftype'] != 'EV':
+            result['effects'] = []
         return OrderedDict((k, v) for k, v in result.items() 
                            if v not in [None, [], '', {}])
