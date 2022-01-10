@@ -64,18 +64,18 @@
     <div *ngIf="trt" class="card allheight">
       <div class="card-body griddisplay">
         <div class="flex">
-          <h4 class="card-title"><a style="color: black;" (click)="openModal(traitModal, trt.slugname); $event.preventDefault();" href="/{{gameURL}}/traits/{{trt.slugname}}/{{language}}">{{trt.name}}</a></h4>
-          <div *ngIf="trt.item_set.length == 0"><a href="javascript:void(0)"
+          <h4 class="card-title"><a style="color: black;" (click)="openModal(traitModal, trt.slug); $event.preventDefault();" href="/{{gameURL}}/traits/{{trt.slug}}/{{language}}">{{trt.name}}</a></h4>
+          <div *ngIf="!trt.item_set"><a href="javascript:void(0)"
               tooltip="A measure of rarity. This number determines where traits appear." container="true">Grade:</a>
             {{trt.grade}}
             <br /><span class="badge bg-secondary" *ngIf="trt.grade > 50">DLC</span>
           </div>
-          <div *ngIf="trt.item_set.length > 0">
-            <i class="atelier atelier-sm atelier-ryza2-material"></i><a href="/{{gameURL}}/items/{{trt.item_set[0].slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{trt.item_set[0].name}}</a>
+          <div *ngIf="trt.item_set">
+            <i class="atelier atelier-sm atelier-ryza2-material"></i><a href="/{{gameURL}}/items/{{trt.item_set[0].slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{trt.item_set[0].name}}</a>
           </div>
         </div>
         <div class="card-text">
-          <p>{{trt.description}}</p>
+          <p>{{trt.desc}}</p>
           <p *ngIf="trt.note"><b>Note:</b> {{trt.note}}</p>
         </div>
         <div class="flex card-text bottom">
@@ -97,7 +97,7 @@
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <i class="fas fa-times-circle"></i>
     </button>
-    <a22-trait slugname="{{trait}}" [showNav]="false"></a22-trait>
+    <a22-trait slug="{{trait}}" [showNav]="false"></a22-trait>
   </div>
 </ng-template>
 </ng-container>

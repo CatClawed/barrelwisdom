@@ -144,11 +144,9 @@ export interface Usable {
 }
 
 export interface EffectLine {
-    itemslug: string;
-    itemname: string;
-    effslug: string;
-    effname: string;
-    effdesc: string;
+    slug: string;
+    name: string;
+    desc: string;
     line: number;
     number: number;
 }
@@ -193,8 +191,8 @@ export interface ItemFull {
 export interface CategoryItem {
     slug: string;
     name: string;
-    item_set: ItemC[];
-    ingredientcat: ItemWrapper[];
+    items: ItemC[];
+    ingredients: ItemC[];
 }
 
 /* Shop Develop */

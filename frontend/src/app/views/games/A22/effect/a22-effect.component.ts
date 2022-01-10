@@ -32,7 +32,7 @@ export class A22EffectComponent implements OnInit {
   imgURL: string;
 
   @Input()
-  slugname: string = "";
+  slug: string = "";
 
   @Input()
   showNav: boolean = true;
@@ -46,7 +46,7 @@ export class A22EffectComponent implements OnInit {
     private errorService: ErrorCodeService,
     private seoService: SeoService) {
       if(this.route.snapshot.params.effect != null) {
-      this.slugname = this.route.snapshot.params.effect;
+      this.slug = this.route.snapshot.params.effect;
     }
   }
   ngOnInit(): void {
@@ -54,7 +54,7 @@ export class A22EffectComponent implements OnInit {
     if(this.showNav) {
       this.colset = "col-md-5 mx-auto "
     }
-    this.a22service.getEffect(this.slugname, this.language)
+    this.a22service.getEffect(this.slug, this.language)
     .subscribe(effect => {
       if(effect.efftype == "Hidden" || effect.efftype == "unused") {
           this.error = true;
@@ -68,9 +68,9 @@ export class A22EffectComponent implements OnInit {
           this.gameURL = this.a22service.gameURL;
           this.imgURL = this.a22service.imgURL;
 
-          this.seoURL = `${this.gameURL}/effects/${this.effect.slugname}/${this.language}`;
+          this.seoURL = `${this.gameURL}/effects/${this.effect.slug}/${this.language}`;
           this.seoTitle = `${this.effect.name} - ${this.gameTitle}`;
-          this.seoDesc = this.effect.description ? `${this.effect.description}` : `EV Effect in ${this.gameTitle}.`
+          this.seoDesc = this.effect.desc ? `${this.effect.desc}` : `EV Effect in ${this.gameTitle}.`
           this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
       }
     },

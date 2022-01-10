@@ -11,7 +11,7 @@ import { SeoService } from '@app/services/seo.service';
   selector: 'a22-shopdevelop',
 })
 export class A22ShopDevelopComponent implements OnInit {
-  slugname: string;
+  slug: string;
   loading = false;
   submitted = false;
   returnUrl: string;

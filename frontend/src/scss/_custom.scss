@@ -224,6 +224,8 @@ select {
  
 .close {
   text-shadow: none !important;
+  color: white !important;
+  opacity: 100% !important;
 }
 
 /* Background pattern from Toptal Subtle Patterns */
@@ -246,8 +248,8 @@ select {
 
 .card-read-more-position {
   position:absolute !important;
-  bottom:1.5em !important;
-  right:1.5em !important;
+  bottom:1em !important;
+  right:1em !important;
 }
 
 /* Background pattern from Toptal Subtle Patterns */

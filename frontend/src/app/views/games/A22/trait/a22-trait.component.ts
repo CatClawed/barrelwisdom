@@ -32,7 +32,7 @@ export class A22TraitComponent implements OnInit {
   imgURL: string;
 
   @Input()
-  slugname: string = "";
+  slug: string = "";
 
   @Input()
   showNav: boolean = true;
@@ -46,7 +46,7 @@ export class A22TraitComponent implements OnInit {
     private errorService: ErrorCodeService,
     private seoService: SeoService) {
       if(this.route.snapshot.params.trait != null) {
-      this.slugname = this.route.snapshot.params.trait;
+      this.slug = this.route.snapshot.params.trait;
     }
   }
   ngOnInit(): void {
@@ -54,16 +54,16 @@ export class A22TraitComponent implements OnInit {
     if(this.showNav) {
       this.colset = "col-md-5 mx-auto "
     }
-    this.a22service.getTrait(this.slugname, this.language)
+    this.a22service.getTrait(this.slug, this.language)
     .subscribe(trait => {
       this.trait = trait;
       this.gameTitle = this.a22service.gameTitle;
       this.gameURL = this.a22service.gameURL;
       this.imgURL = this.a22service.imgURL;
       
-      this.seoURL = `${this.gameURL}/traits/${this.trait.slugname}/${this.language}`;
+      this.seoURL = `${this.gameURL}/traits/${this.trait.slug}/${this.language}`;
       this.seoTitle = `${this.trait.name} - ${this.gameTitle}`;
-      this.seoDesc = `${this.trait.description}`;
+      this.seoDesc = `${this.trait.desc}`;
       this.seoImage = ``;
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },

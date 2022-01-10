@@ -101,9 +101,9 @@ export class A22TraitlistComponent implements OnInit {
     });
   }
 
-  openModal(template: TemplateRef<any>, slugname: string) {
-    this.trait = slugname;
-    this.location.go(`${this.gameURL}/traits/` + slugname + "/" + this.language);
+  openModal(template: TemplateRef<any>, slug: string) {
+    this.trait = slug;
+    this.location.go(`${this.gameURL}/traits/` + slug + "/" + this.language);
     this.modalRef = this.modalService.show(template);
     this.modalRef.onHide.subscribe((reason: string | any) => {
       if (reason != 'link') {
@@ -147,7 +147,7 @@ export class A22TraitlistComponent implements OnInit {
       }
     }
     return traitlist.filter(trait => {
-      return trait.name.toLowerCase().includes(filterValue) || trait.description.toLowerCase().includes(filterValue)
+      return trait.name.toLowerCase().includes(filterValue) || trait.desc.toLowerCase().includes(filterValue)
     });
   } 
 

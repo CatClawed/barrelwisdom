@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders,  } from '@angular/common/http';
 import { Observable} from 'rxjs';
 import { environment } from '@environments/environment';
-import { Trait, Effect, EffectFull, Region, Monster, MonsterFull, Item, ItemFull, Name, CategoryItem, ShopDevelop } from '@app/interfaces/a22';
+import { Trait, Effect, EffectFull, Region, Monster, MonsterFull, Item, ItemFull, NameLink, CategoryItem, ShopDevelop } from '@app/interfaces/a22';
 
 
 @Injectable({ providedIn: 'root' })
@@ -66,8 +66,8 @@ export class A22Service {
     return this.http.get<CategoryItem>(`${environment.apiUrl}/A22/category/${slugname}/${language}/`);
   }
 
-  getCategoryList(language: string): Observable<Name[]> {
-    return this.http.get<Name[]>(`${environment.apiUrl}/A22/category/${language}/`);
+  getCategoryList(language: string): Observable<NameLink[]> {
+    return this.http.get<NameLink[]>(`${environment.apiUrl}/A22/category/${language}/`);
   }
 
   getShopDevList(language: string): Observable<ShopDevelop[]> {

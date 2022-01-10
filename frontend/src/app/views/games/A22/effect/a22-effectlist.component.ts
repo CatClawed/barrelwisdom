@@ -126,9 +126,9 @@ import { SeoService } from '@app/services/seo.service';
       });
     }
   
-    openModal(template: TemplateRef<any>, slugname: string) {
-      this.effect = slugname;
-      this.location.go(`${this.gameURL}/effects/` + slugname + "/" + this.language);
+    openModal(template: TemplateRef<any>, slug: string) {
+      this.effect = slug;
+      this.location.go(`${this.gameURL}/effects/` + slug + "/" + this.language);
       this.modalRef = this.modalService.show(template);
       this.modalRef.onHide.subscribe((reason: string | any) => {
         if(reason != "link") {
@@ -179,7 +179,7 @@ import { SeoService } from '@app/services/seo.service';
       }
 
       return effectlist.filter(effect => { 
-          return (effect.description) ? effect.name.toLowerCase().includes(filterValue) ||  effect.description.toLowerCase().includes(filterValue) : effect.name.toLowerCase().includes(filterValue)
+          return (effect.desc) ? effect.name.toLowerCase().includes(filterValue) ||  effect.desc.toLowerCase().includes(filterValue) : effect.name.toLowerCase().includes(filterValue)
         });
     } 
   

@@ -28,7 +28,7 @@ export class A22ItemComponent implements OnInit {
   eff4: any[] = [];
 
   @Input()
-  slugname: string = "";
+  slug: string = "";
 
   @Input()
   showNav: boolean = true;
@@ -51,7 +51,7 @@ constructor(
     private errorService: ErrorCodeService,
     private seoService: SeoService) {
       if(this.route.snapshot.params.item != null) {
-      this.slugname = this.route.snapshot.params.item;
+      this.slug = this.route.snapshot.params.item;
     }
   }
   ngOnInit(): void {
@@ -59,7 +59,7 @@ constructor(
     if(this.showNav) {
       this.colset = "col-md-9 mx-auto "
     }
-    this.a22service.getItem(this.slugname, this.language)
+    this.a22service.getItem(this.slug, this.language)
     .subscribe(item => {
         this.error = false;
         this.item = item;
@@ -68,10 +68,10 @@ constructor(
         this.gameURL = this.a22service.gameURL;
         this.imgURL = this.a22service.imgURL;
 
-        this.seoURL = `${this.gameURL}/items/${this.item.slugname}/${this.language}`;
+        this.seoURL = `${this.gameURL}/items/${this.item.slug}/${this.language}`;
         this.seoTitle = `${this.item.name} - ${this.gameTitle}`;
-        this.seoDesc = `${this.item.description}`
-        this.seoImage = `${this.imgURL}items/${this.item.slugname}.png`
+        this.seoDesc = `${this.item.desc}`
+        this.seoImage = `${this.imgURL}items/${this.item.slug}.png`
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
 
         if(this.item.effectline_set) {
@@ -79,7 +79,7 @@ constructor(
                 let line = 0;
                 for(let e of this.item.effectline_set) {
                     if(e.number == 0) {
-                        this.default.push([e.effname, e.effslug]);
+                        this.default.push([e.name, e.slug]);
                         line = line+1;
                     }
                     if(line < e.line) {
@@ -87,10 +87,10 @@ constructor(
                         this.default.push([]);
                     }
                     if(e.number > 0) {
-                        if(e.line == 1) { this.eff1.push([e.effname, e.effslug]); }
-                        if(e.line == 2) { this.eff2.push([e.effname, e.effslug]); }
-                        if(e.line == 3) { this.eff3.push([e.effname, e.effslug]); }
-                        if(e.line == 4) { this.eff4.push([e.effname, e.effslug]); }
+                        if(e.line == 1) { this.eff1.push([e.name, e.slug]); }
+                        if(e.line == 2) { this.eff2.push([e.name, e.slug]); }
+                        if(e.line == 3) { this.eff3.push([e.name, e.slug]); }
+                        if(e.line == 4) { this.eff4.push([e.name, e.slug]); }
                     }
                 }
             }

@@ -22,11 +22,11 @@
         </div>
       </div>
       <div class="card-text">
-        <p *ngIf="effect.description">{{effect.description}}</p>
+        <p *ngIf="effect.desc">{{effect.desc}}</p>
         <p *ngIf="effect.note"><b>Note:</b> {{effect.note}}</p>
         <b *ngIf="effect.efftype == 'Normal' || effect.efftype == 'Material'">From Item:</b>
         <ul *ngIf="effect.effectline_set">
-          <li *ngFor="let e of effect.effectline_set"><a href="/{{gameURL}}/items/{{e.itemslug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{e.itemname}}</a></li>
+          <li *ngFor="let e of effect.effectline_set"><a href="/{{gameURL}}/items/{{e.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{e.name}}</a></li>
         </ul>
         <b *ngIf="effect.efftype == 'EV'">Combines Effects:</b>
         <ul *ngIf="effect.effects && effect.efftype == 'EV'">
@@ -37,7 +37,7 @@
         <b *ngIf="(effect.efftype == 'Normal' || effect.efftype == 'Material') && effect.parent">Child Effects:</b>
         <b *ngIf="(effect.efftype != 'Normal' && effect.efftype != 'Material') && effect.parent">Parent Effects:</b>
         <ul *ngIf="effect.parent">
-          <li *ngFor="let e of effect.parent"><a href="/{{gameURL}}/effects/{{e.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{e.name}}</a></li>
+          <li *ngFor="let e of effect.parent"><a href="/{{gameURL}}/effects/{{e.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{e.name}}</a></li>
         </ul>
         <b *ngIf="effect.actTag0">Advanced Data:</b>
           <ul *ngIf="effect.actTag0">

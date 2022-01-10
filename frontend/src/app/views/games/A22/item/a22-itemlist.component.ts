@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
-import { Item, Name } from '@app/interfaces/a22';
+import { Item, NameLink } from '@app/interfaces/a22';
 import { A22Service } from '@app/services/a22.service';
 import { HistoryService } from '@app/services/history.service';
 import { ErrorCodeService } from "@app/services/errorcode.service";
@@ -35,7 +35,7 @@ import { SeoService } from '@app/services/seo.service';
     ingstring = "";
     language = "";
     config: ModalOptions = { class: "col-md-5 mx-auto" };
-    categories: Name[];
+    categories: NameLink[];
     selectedCat = "Any";
     selectedElem = "Any";
     selectedElemV = 0;
@@ -146,9 +146,9 @@ import { SeoService } from '@app/services/seo.service';
         });
     }
   
-    openModal(template: TemplateRef<any>, slugname: string) {
-      this.item = slugname;
-      this.location.go(`${this.gameURL}/items/` + slugname + "/" + this.language);
+    openModal(template: TemplateRef<any>, slug: string) {
+      this.item = slug;
+      this.location.go(`${this.gameURL}/items/` + slug + "/" + this.language);
       this.modalRef = this.modalService.show(template);
       this.modalRef.onHide.subscribe((reason: string | any) => {
         if(reason != "link") {
@@ -157,7 +157,7 @@ import { SeoService } from '@app/services/seo.service';
         }})
     }
 
-    private filterT(value: string, type: string, elementV: number, element: string, ing: string): Item[] {
+    private filterT(value: string, type: string, elementV: number, element: string, ingt: string): Item[] {
   
       const filterValue = value.toLowerCase();
       let list: Item[] = this.items;
@@ -189,8 +189,8 @@ import { SeoService } from '@app/services/seo.service';
           }
       }
 
-      if(ing.length > 0) {
-          list = list.filter(item => (item.ingredient_set) ? item.ingredient_set.some(i => (i.item) ? i.item.toLowerCase().includes(ing) : i.category.toLowerCase().includes(ing)) : false)
+      if(ingt.length > 0) {
+          list = list.filter(item => (item.ingredient_set) ? item.ingredient_set.some(i => i.ing.toLowerCase().includes(ingt)) : false)
       }
 
       if(value.length > 0) {

@@ -36,7 +36,7 @@ export class A22MonsterComponent implements OnInit {
   imgURL: string;
 
   @Input()
-  slugname: string = "";
+  slug: string = "";
 
   @Input()
   showNav: boolean = true;
@@ -50,7 +50,7 @@ export class A22MonsterComponent implements OnInit {
     private errorService: ErrorCodeService,
     private seoService: SeoService) {
       if(this.route.snapshot.params.monster != null) {
-      this.slugname = this.route.snapshot.params.monster;
+      this.slug = this.route.snapshot.params.monster;
     }
   }
   ngOnInit(): void {
@@ -58,7 +58,7 @@ export class A22MonsterComponent implements OnInit {
     if(this.showNav) {
       this.colset = "col-md-9 mx-auto "
     }
-    this.a22service.getMonster(this.slugname, this.language)
+    this.a22service.getMonster(this.slug, this.language)
     .subscribe(monster => {
         this.error = false;
         this.monster = monster;
@@ -93,10 +93,10 @@ export class A22MonsterComponent implements OnInit {
         this.gameURL = this.a22service.gameURL;
         this.imgURL = this.a22service.imgURL;
 
-        this.seoURL = `${this.gameURL}/monsters/${this.monster.slugname}/${this.language}`;
+        this.seoURL = `${this.gameURL}/monsters/${this.monster.slug}/${this.language}`;
         this.seoTitle = `${this.monster.name} - ${this.gameTitle}`;
-        this.seoDesc = `${this.monster.description}`
-        this.seoImage = `${this.imgURL}monsters/${this.monster.slugname}.png`
+        this.seoDesc = `${this.monster.desc}`
+        this.seoImage = `${this.imgURL}monsters/${this.monster.slug}.png`
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error => {

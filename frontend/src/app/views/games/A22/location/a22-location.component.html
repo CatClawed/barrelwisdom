@@ -13,13 +13,13 @@
         <b>Table of Contents</b>
         <ol class="toc-list">
             <li *ngFor="let area of region.areas">
-                <a href="/{{gameURL}}/locations/{{region.slugname}}/{{language}}#{{area.slugname}}" (click)="$event.preventDefault();scroll(area.slugname)">{{area.name}}</a>
+                <a href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}" (click)="$event.preventDefault();scroll(area.slug)">{{area.name}}</a>
             </li>
         </ol>
     </div>
     <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
     </div>
-    <div id="{{area.slugname}}" *ngFor="let area of region.areas">
+    <div id="{{area.slug}}" *ngFor="let area of region.areas">
         <h2>{{area.name}}</h2>
         <table class="table table-shrink table-bordered" >
             <tr>
@@ -36,9 +36,9 @@
                 <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'Bomb Rod'"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-bomb-rod"></i></td>
                 <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'Bug Net'"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-bug-net"></i></td>
                 <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'Fishing Rod'"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-fishing-rod"></i></td>
-                <td *ngIf="node.tool != 'Dig'">               <a href="/{{gameURL}}/items/{{node.rank1.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{node.rank1.name}}</a><br/>{{node.priority1}}</td>
-                <td *ngIf="node.rank2  && node.tool != 'Dig'"><a href="/{{gameURL}}/items/{{node.rank2.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{node.rank2.name}}</a><br/>{{node.priority2}}</td>
-                <td *ngIf="node.rank3  && node.tool != 'Dig'"><a href="/{{gameURL}}/items/{{node.rank3.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{node.rank3.name}}</a><br/>{{node.priority3}}</td>
+                <td *ngIf="node.tool != 'Dig'">               <a href="/{{gameURL}}/items/{{node.rank1.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{node.rank1.name}}</a><br/>{{node.priority1}}</td>
+                <td *ngIf="node.rank2  && node.tool != 'Dig'"><a href="/{{gameURL}}/items/{{node.rank2.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{node.rank2.name}}</a><br/>{{node.priority2}}</td>
+                <td *ngIf="node.rank3  && node.tool != 'Dig'"><a href="/{{gameURL}}/items/{{node.rank3.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{node.rank3.name}}</a><br/>{{node.priority3}}</td>
                 <td *ngIf="!node.rank2 && node.tool != 'Dig'"></td>
                 <td *ngIf="!node.rank3 && node.tool != 'Dig'"></td>
             </tr>
@@ -48,7 +48,7 @@
                     <div style="column-count: 3;">
                     <ul style="padding-left:1em;">
                         <ng-container  *ngFor="let node of area.gatherdata">
-                            <li *ngIf="node.tool == 'Dig'"><a href="/{{gameURL}}/items/{{node.rank1.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{node.rank1.name}}</a></li>
+                            <li *ngIf="node.tool == 'Dig'"><a href="/{{gameURL}}/items/{{node.rank1.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{node.rank1.name}}</a></li>
                         </ng-container>
                     </ul>
                 </div>

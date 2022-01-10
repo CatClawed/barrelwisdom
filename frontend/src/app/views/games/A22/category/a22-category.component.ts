@@ -52,7 +52,7 @@ constructor(
         this.gameURL = this.a22service.gameURL;
         this.imgURL = this.a22service.imgURL;
 
-        this.seoURL = `${this.gameURL}/categories/${this.category.slugname}/${this.language}`;
+        this.seoURL = `${this.gameURL}/categories/${this.category.slug}/${this.language}`;
         this.seoTitle = `${this.category.name} - ${this.gameTitle}`;
         this.seoDesc = `All items in ${this.category.name}`
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);

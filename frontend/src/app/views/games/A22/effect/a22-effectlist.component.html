@@ -57,45 +57,45 @@
         <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
       </div>
     </form>
-  </div>
-  <ng-container *ngIf="filteredEffects">
-  <div *ngIf="!filteredEffects" class="d-flex justify-content-center">
+</div>
+<div *ngIf="!filteredEffects" class="d-flex justify-content-center">
   <div class="spinner-border text-secondary m-5" role="status">
     <span class="sr-only">Loading...</span>
   </div>
 </div>
+<ng-container *ngIf="filteredEffects">
 <div *ngFor="let effect of filteredEffects | async| pair " class="row">
   <div *ngFor="let eff of effect" class="spacer col-md-5 mx-auto">
-    <div *ngIf="eff" class="card allheight">
-      <div class="card-body griddisplay">
-        <div class="flex">
-          <h4 class="card-title card-icon-space"><a style="color: black;" (click)="openModal(effectModal, eff.slugname); $event.preventDefault();" href="/{{gameURL}}/effects/{{eff.slugname}}/{{language}}">{{eff.name}}</a></h4>
-          <div class="card-icon-position">
-            <i *ngIf="eff.efftype == 'Normal' && eff.effsub != 'Material'" class="atelier atelier-ryza2-type-synthesis"></i>
-            <i *ngIf="eff.effsub == 'Material'" class="atelier atelier-ryza2-material"></i>
-            <i *ngIf="eff.effsub == 'Weapon'" class="atelier atelier-ryza2-type-weapon"></i><i *ngIf="eff.effsub == 'Armor'" class="atelier atelier-ryza2-type-armor"></i><i *ngIf="eff.effsub == 'Accessory'" class="atelier atelier-ryza2-type-accessory"></i><i *ngIf="eff.effsub == 'Attack'" class="atelier atelier-ryza2-type-attack"></i><i *ngIf="eff.effsub == 'Heal'" class="atelier atelier-ryza2-type-heal"></i> <span *ngIf="eff.efftype == 'EV'" class="badge bg-secondary">EV</span><i *ngIf="eff.efftype == 'Forge'" class="atelier atelier-ryza2-forge"></i>
-          </div>
-        </div>
-        <div style="padding-right:1rem;margin-right:1rem;" class="card-text">
-          <button (click)="openModal(effectModal, eff.slugname)" style="box-shadow: none;" class="card-read-more-position" mat-mini-fab color="accent">
-              <mat-icon style="font-size:20px;" fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
-           </button>
-          <p *ngIf="eff.description">{{eff.description}}</p>
-          <p *ngIf="eff.note"><b>Note:</b> {{eff.note}}</p>
-          <ul *ngIf="eff.efftype == 'EV'">
-            <li *ngFor="let e of eff.effects"><a href="javascript:void(0)" tooltip="{{e.desc}}" container="true">{{e.name}}</a></li>
-          </ul>
+    <div *ngIf="eff" class="card allheight card-body griddisplay">
+      <div class="flex">
+        <h4 class="card-title card-icon-space"><a style="color: black;" (click)="openModal(effectModal, eff.slug); $event.preventDefault();" href="/{{gameURL}}/effects/{{eff.slug}}/{{language}}">{{eff.name}}</a></h4>
+        <div class="card-icon-position">
+          <i *ngIf="normal && eff.effsub != 'Material'" class="atelier atelier-ryza2-type-synthesis"></i>
+          <i *ngIf="eff.effsub == 'Material'" class="atelier atelier-ryza2-material"></i>
+          <i *ngIf="eff.effsub == 'Weapon'" class="atelier atelier-ryza2-type-weapon"></i>
+          <i *ngIf="eff.effsub == 'Armor'" class="atelier atelier-ryza2-type-armor"></i>
+          <i *ngIf="eff.effsub == 'Accessory'" class="atelier atelier-ryza2-type-accessory"></i>
+          <i *ngIf="eff.effsub == 'Attack'" class="atelier atelier-ryza2-type-attack"></i>
+          <i *ngIf="eff.effsub == 'Heal'" class="atelier atelier-ryza2-type-heal"></i> <span *ngIf="ev" class="badge bg-secondary">EV</span><i *ngIf="forge" class="atelier atelier-ryza2-forge"></i>
         </div>
       </div>
+      <button (click)="openModal(effectModal, eff.slug)" style="box-shadow: none;" class="card-read-more-position" mat-mini-fab color="accent">
+          <mat-icon style="font-size:20px;" fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+       </button>
+      <p *ngIf="eff.desc">{{eff.desc}}</p>
+      <ul *ngIf="ev">
+        <li *ngFor="let e of eff.effects"><a href="javascript:void(0)" tooltip="{{e.desc}}" container="true">{{e.name}}</a></li>
+      </ul>
     </div>
-  </div></div>
+  </div>
+</div>
 
 <ng-template #effectModal>
   <div class="modal-body">
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <i class="fas fa-times-circle"></i>
+      <i class="fas fa-times-circle modal-close"></i>
     </button>
-     <a22-effect slugname="{{effect}}" [showNav]="false"></a22-effect>
+     <a22-effect slug="{{effect}}" [showNav]="false"></a22-effect>
   </div>
 </ng-template>
 </ng-container>

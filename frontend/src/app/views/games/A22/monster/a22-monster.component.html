@@ -24,19 +24,19 @@
         </div>
       </div>
       <div class="card-text">
-        <img class="image-display" loading="lazy" src="{{imgURL}}monsters/{{monster.slugname}}.png">
-        <p *ngIf="monster.description">{{monster.description}}</p>
+        <img class="image-display" loading="lazy" src="{{imgURL}}monsters/{{monster.slug}}.png">
+        <p *ngIf="monster.desc">{{monster.desc}}</p>
         <p *ngIf="monster.note"><b>Note:</b> {{monster.note}}</p>
 
         <div class="row">
           <div class="col-md-6">
         <b *ngIf="monster.location">Locations:</b>
         <ul *ngIf="monster.location">
-          <li *ngFor="let loc of monster.location"><a *ngIf="loc.reg" href="{{gameURL}}/locations/{{loc.reg}}/{{language}}" (click)="historyService.hrefClicked($event)">{{loc.name}}</a><a *ngIf="!loc.reg" href="{{gameURL}}/locations/{{loc.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{loc.name}}</a></li>
+          <li *ngFor="let loc of monster.location"><a *ngIf="loc.reg" href="{{gameURL}}/locations/{{loc.reg}}/{{language}}" (click)="historyService.hrefClicked($event)">{{loc.name}}</a><a *ngIf="!loc.reg" href="{{gameURL}}/locations/{{loc.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{loc.name}}</a></li>
         </ul>
         <b *ngIf="monster.drops">Drops:</b>
         <ul *ngIf="monster.drops">
-          <li *ngFor="let drop of monster.drops"><a href="{{gameURL}}/items/{{drop.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{drop.name}}</a></li>
+          <li *ngFor="let drop of monster.drops"><a href="{{gameURL}}/items/{{drop.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{drop.name}}</a></li>
         </ul>
       </div>
       <div class="col-md=6">

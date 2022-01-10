@@ -1,6 +1,7 @@
 from rest_framework import viewsets, filters
 from games.A22.categories_a22.models import Category
-from games.A22.categories_a22.serializers import A22CategorySerializer, A22CategoryDataSerializer
+from games.A22.items_a22.models import CategoryItems
+from games.A22.categories_a22.serializers import A22CategorySerializer, A22CTSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
@@ -84,130 +85,130 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
     def en_full(self, request, slugname):
         try:
             queryset = (
-                Category.objects
+                CategoryItems.objects
                 .select_related(
-                    'cat_en'
+                    'category',
+                    'category__cat_en',
                 )
                 .prefetch_related(
-                    'item_set',
-                    'item_set__item_en',
-                    'ingredientcat',
-                    'ingredientcat__synthitem',
-                    'ingredientcat__synthitem__item_en'
+                    'items',
+                    'items__item_en',
+                    'ingredients',
+                    'ingredients__item_en',
                 )
-                .get(slugname=slugname)
+                .get(category__slugname=slugname)
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22CategoryDataSerializer(queryset, context={'language': 'en'})
+        serializer = A22CTSerializer(queryset, context={'language': 'en'})
         return Response(serializer.data)
 
-    @action(detail=False)
+    @action(detail=True, methods=['get'], url_path="ja")
     def ja_full(self, request, slugname):
         try:
             queryset = (
-                Category.objects
+                CategoryItems.objects
                 .select_related(
-                    'cat_ja'
+                    'category',
+                    'category__cat_ja',
                 )
                 .prefetch_related(
-                    'item_set',
-                    'item_set__item_ja',
-                    'ingredientcat',
-                    'ingredientcat__synthitem',
-                    'ingredientcat__synthitem__item_ja'
+                    'items',
+                    'items__item_ja',
+                    'ingredients',
+                    'ingredients__item_ja',
                 )
-                .get(slugname=slugname)
+                .get(category__slugname=slugname)
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22CategoryDataSerializer(queryset, context={'language': 'ja'})
+        serializer = A22CTSerializer(queryset, context={'language': 'ja'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ko")
     def ko_full(self, request, slugname):
         try:
             queryset = (
-                Category.objects
+                CategoryItems.objects
                 .select_related(
-                    'cat_ko'
+                    'category',
+                    'category__cat_ko',
                 )
                 .prefetch_related(
-                    'item_set',
-                    'item_set__item_ko',
-                    'ingredientcat',
-                    'ingredientcat__synthitem',
-                    'ingredientcat__synthitem__item_ko'
+                    'items',
+                    'items__item_ko',
+                    'ingredients',
+                    'ingredients__item_ko',
                 )
-                .get(slugname=slugname)
+                .get(category__slugname=slugname)
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22CategoryDataSerializer(queryset, context={'language': 'ko'})
+        serializer = A22CTSerializer(queryset, context={'language': 'ko'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="fr")
     def fr_full(self, request, slugname):
         try:
             queryset = (
-                Category.objects
+                CategoryItems.objects
                 .select_related(
-                    'cat_fr'
+                    'category',
+                    'category__cat_fr',
                 )
                 .prefetch_related(
-                    'item_set',
-                    'item_set__item_fr',
-                    'ingredientcat',
-                    'ingredientcat__synthitem',
-                    'ingredientcat__synthitem__item_fr'
+                    'items',
+                    'items__item_fr',
+                    'ingredients',
+                    'ingredients__item_fr',
                 )
-                .get(slugname=slugname)
+                .get(category__slugname=slugname)
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22CategoryDataSerializer(queryset, context={'language': 'fr'})
+        serializer = A22CTSerializer(queryset, context={'language': 'fr'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="sc")
     def sc_full(self, request, slugname):
         try:
             queryset = (
-                Category.objects
+                CategoryItems.objects
                 .select_related(
-                    'cat_sc'
+                    'category',
+                    'category__cat_sc',
                 )
                 .prefetch_related(
-                    'item_set',
-                    'item_set__item_sc',
-                    'ingredientcat',
-                    'ingredientcat__synthitem',
-                    'ingredientcat__synthitem__item_sc'
+                    'items',
+                    'items__item_sc',
+                    'ingredients',
+                    'ingredients__item_sc',
                 )
-                .get(slugname=slugname)
+                .get(category__slugname=slugname)
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22CategoryDataSerializer(queryset, context={'language': 'sc'})
+        serializer = A22CTSerializer(queryset, context={'language': 'sc'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="tc")
     def tc_full(self, request, slugname):
         try:
             queryset = (
-                Category.objects
+                CategoryItems.objects
                 .select_related(
-                    'cat_tc'
+                    'category',
+                    'category__cat_tc',
                 )
                 .prefetch_related(
-                    'item_set',
-                    'item_set__item_tc',
-                    'ingredientcat',
-                    'ingredientcat__synthitem',
-                    'ingredientcat__synthitem__item_tc'
+                    'items',
+                    'items__item_tc',
+                    'ingredients',
+                    'ingredients__item_tc',
                 )
-                .get(slugname=slugname)
+                .get(category__slugname=slugname)
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A22CategoryDataSerializer(queryset, context={'language': 'tc'})
+        serializer = A22CTSerializer(queryset, context={'language': 'tc'})
         return Response(serializer.data)

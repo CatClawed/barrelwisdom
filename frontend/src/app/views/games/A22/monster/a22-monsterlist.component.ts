@@ -107,9 +107,9 @@ import { SeoService } from '@app/services/seo.service';
       });
     }
   
-    openModal(template: TemplateRef<any>, slugname: string) {
-      this.monster = slugname;
-      this.location.go(`${this.gameURL}/monsters/` + slugname + "/" + this.language);
+    openModal(template: TemplateRef<any>, slug: string) {
+      this.monster = slug;
+      this.location.go(`${this.gameURL}/monsters/` + slug + "/" + this.language);
       this.modalRef = this.modalService.show(template);
       this.modalRef.onHide.subscribe((reason: string | any) => {
         if(reason != "link") {

@@ -13,17 +13,17 @@
 <div style="margin-top: 1em;" class="{{colset}} card griddisplay card-body">
       <div class="flex">
         <h4 class="card-title">{{trait.name}}</h4>
-        <div *ngIf="trait.item_set.length == 0"><a href="javascript:void(0)" (click)="$event.preventDefault();"
+        <div *ngIf="!trait.item_set"><a href="javascript:void(0)" (click)="$event.preventDefault();"
             tooltip="A measure of rarity. This number determines where traits appear." container="true">Grade:</a>
           {{trait.grade}}
           <br /><span class="badge bg-secondary" *ngIf="trait.grade > 50">DLC</span>
         </div>
-        <div *ngIf="trait.item_set.length > 0">
-          <i class="atelier atelier-sm atelier-ryza2-material"></i><a href="/{{gameURL}}/items/{{trait.item_set[0].slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{trait.item_set[0].name}}</a>
+        <div *ngIf="trait.item_set">
+          <i class="atelier atelier-sm atelier-ryza2-material"></i><a href="/{{gameURL}}/items/{{trait.item_set[0].slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{trait.item_set[0].name}}</a>
         </div>
       </div>
       <div class="card-text">
-        <p>{{trait.description}}</p>
+        <p>{{trait.desc}}</p>
         <p *ngIf="trait.note"><b>Note:</b> {{trait.note}}</p>
         </div>
       <div class="flex card-text bottom">

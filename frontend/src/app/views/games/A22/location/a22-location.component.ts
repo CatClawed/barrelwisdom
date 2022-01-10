@@ -66,7 +66,7 @@ import {AppComponent} from '@app/app.component';
               this.gameURL = this.a22service.gameURL;
               this.imgURL = this.a22service.imgURL;
       
-              this.seoURL = `${this.gameURL}/locations/${this.region.slugname}/${this.language}`;
+              this.seoURL = `${this.gameURL}/locations/${this.region.slug}/${this.language}`;
               this.seoTitle = `${this.region.name} - ${this.gameTitle}`;
               this.seoDesc = `All items in ${this.region.name}`
               this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, '');
@@ -80,7 +80,7 @@ import {AppComponent} from '@app/app.component';
         ).subscribe(fragment => this.viewportScroller.scrollToAnchor(fragment));
      }
      scroll(id: string) {
-        this.loc.replaceState(`${this.gameURL}/locations/${this.region.slugname}/${this.language}#${id}`);
+        this.loc.replaceState(`${this.gameURL}/locations/${this.region.slug}/${this.language}#${id}`);
         this.viewportScroller.scrollToAnchor(id);
      }
 
@@ -104,7 +104,7 @@ import {AppComponent} from '@app/app.component';
                 this.gameURL = this.a22service.gameURL;
                 this.imgURL = this.a22service.imgURL;
         
-                this.seoURL = `${this.gameURL}/locations/${this.region.slugname}/${this.language}`;
+                this.seoURL = `${this.gameURL}/locations/${this.region.slug}/${this.language}`;
                 this.seoTitle = `${this.region.name} - ${this.gameTitle}`;
                 this.seoDesc = `All items in ${this.region.name}`
                 this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
