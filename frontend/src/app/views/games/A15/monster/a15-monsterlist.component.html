@@ -37,7 +37,7 @@
               <span *ngIf="mon.isDX" style="float:right;margin-right:0.5em;" class="badge bg-secondary">DX</span>
           </div>
         </div>
-        <div class="card-display-bottom">
+        <div class="card-item-display">
             <a class="image-display" (click)="openModal(monsterModal, mon.slugname); $event.preventDefault();" href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">
               <img loading="lazy" src="{{imgURL}}monsters/{{mon.slugname}}.png">
             </a>

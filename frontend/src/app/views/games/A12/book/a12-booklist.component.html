@@ -34,7 +34,7 @@
             <span *ngIf="bk.isDX" style="float:right;margin-right:0.5em;" class="badge bg-secondary">DX</span>
           </div>
         </div>
-        <div class="card-display-bottom">
+        <div class="card-item-display">
             <a class="image-display" (click)="openModal(bookModal, bk.slugname); $event.preventDefault();" href="/{{gameURL}}/recipe-books/{{bk.slugname}}/{{language}}">
               <img loading="lazy" src="{{imgURL}}items/{{bk.slugname}}.png">
             </a>

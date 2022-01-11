@@ -12,37 +12,37 @@
 <language-settings style="margin-top: 1em;" class="col-md-3" section="{{gameURL}}"></language-settings>
 <div class="mx-auto row">
     <div class="col-md-6">
-        <table style="border:2px solid lightgray;" class="table">
-            <tr><th class="table-dark-center" colspan=2>Items in Category</th></tr>
+        <table style="border:1px solid #c8ced3;" class="table">
+            <tr class="table-dark-center"><th style="border:none;" colspan=2>Items in Category</th></tr>
             <tr *ngFor="let item of category.items">
                 <td>
                     <a href="/{{gameURL}}/items/{{item.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.name}}</a>
                     <span *ngIf="item.isDLC" style="margin-left: 0.4em;" class="badge bg-secondary badge-list">DLC</span>
                 </td>
                 <td>
-                    <i style="color:#f03a02;" *ngIf="item.fire"  class="atelier atelier-ryza2-fire"></i>
-                    <i style="color:#04b5db;" *ngIf="item.ice"  class="atelier atelier-ryza2-ice"></i>
-                    <i style="color:#e3bb05;" *ngIf="item.lightning"  class="atelier atelier-ryza2-lightning"></i>
-                    <i style="color:#589b1d;" *ngIf="item.wind"  class="atelier atelier-ryza2-wind"></i>
-                    {{item.elementvalue}}
+                    <i style="color:#f03a02;" *ngIf="item.fire"      class="atelier atelier-np atelier-ryza2-fire"></i>
+                    <i style="color:#04b5db;" *ngIf="item.ice"       class="atelier atelier-np atelier-ryza2-ice"></i>
+                    <i style="color:#e3bb05;" *ngIf="item.lightning" class="atelier atelier-np atelier-ryza2-lightning"></i>
+                    <i style="color:#589b1d;" *ngIf="item.wind"      class="atelier atelier-np atelier-ryza2-wind"></i>
+                    <span style="vertical-align:top;padding-left:0.5rem;">{{item.elementvalue}}</span>
                 </td>
             </tr>
         </table>
     </div>
     <div class="col-md-6">
-        <table style="border:2px solid lightgray;" class="table">
-            <tr><th class="table-dark-center" colspan=2>Items Using Category</th></tr>
+        <table style="border:1px solid #c8ced3;" class="table">
+            <tr class="table-dark-center"><th style="border:none;" colspan=2>Items Using Category</th></tr>
             <tr *ngFor="let item of category.ingredients">
                 <td>
                     <a href="/{{gameURL}}/items/{{item.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.name}}</a>
                     <span *ngIf="item.isDLC" style="margin-left: 0.4em;" class="badge bg-secondary badge-list">DLC</span>
                 </td>
                 <td>
-                    <i style="color:#f03a02;" *ngIf="item.fire"  class="atelier atelier-ryza2-fire"></i>
-                    <i style="color:#04b5db;" *ngIf="item.ice"  class="atelier atelier-ryza2-ice"></i>
-                    <i style="color:#e3bb05;" *ngIf="item.lightning"  class="atelier atelier-ryza2-lightning"></i>
-                    <i style="color:#589b1d;" *ngIf="item.wind"  class="atelier atelier-ryza2-wind"></i>
-                    {{item.elementvalue}}
+                    <i style="color:#f03a02;" *ngIf="item.fire"      class="atelier atelier-np atelier-ryza2-fire"></i>
+                    <i style="color:#04b5db;" *ngIf="item.ice"       class="atelier atelier-np atelier-ryza2-ice"></i>
+                    <i style="color:#e3bb05;" *ngIf="item.lightning" class="atelier atelier-np atelier-ryza2-lightning"></i>
+                    <i style="color:#589b1d;" *ngIf="item.wind"      class="atelier atelier-np atelier-ryza2-wind"></i>
+                    <span style="vertical-align:top;padding-left:0.5rem;">{{item.elementvalue}}</span>
                 </td>
             </tr>
         </table>

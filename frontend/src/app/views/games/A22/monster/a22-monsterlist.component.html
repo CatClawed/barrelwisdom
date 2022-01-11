@@ -97,34 +97,25 @@
 <ng-container *ngIf="filteredMonsters">
 <div *ngFor="let monster of filteredMonsters | async| pair " class="row">
   <div *ngFor="let mon of monster" class="spacer col-md-5 mx-auto">
-    <div *ngIf="mon" class="card allheight">
-      <div class="card-body griddisplay" style="position:relative">
-        <div class="flex">
-          <h4 class="card-title card-icon-space">
-              <a style="color: black;" (click)="openModal(monsterModal, mon.slug); $event.preventDefault();" href="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a>    
-          </h4>
-          <div class="card-icon-position">
-              <i *ngIf="mon.montype != 'boss'" class="atelier atelier-ryza2-race-{{mon.montype}}"></i>
-              <i *ngIf="mon.montype == 'boss'" class="atelier atelier-ryza2-boss-enemy"></i>
-              <i *ngIf="mon.size == 'Large'" class="atelier atelier-ryza2-large-enemy"></i>
-              <i *ngIf="mon.size == 'Medium'" class="atelier atelier-ryza2-medium-enemy"></i>
-              <i *ngIf="mon.size == 'Small'" class="atelier atelier-ryza2-small-enemy"></i>
-              <br *ngIf="mon.isDLC" /><span *ngIf="mon.isDLC" style="float:right;margin-right:0.5em;" class="badge bg-secondary">DLC</span>
-          </div>
-        </div>
-        <div class="card-display-bottom">
-            <a class="image-display" (click)="openModal(monsterModal, mon.slug); $event.preventDefault();" href="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">
-              <img loading="lazy" src="{{imgURL}}monsters/{{mon.slug}}.png">
-            </a>
-        </div>
-        <div style="padding-right:1rem;margin-right:1rem;" class="card-text">
-          <button (click)="openModal(monsterModal, mon.slug)" style="box-shadow: none;" class="card-read-more-position" mat-mini-fab color="accent">
-              <mat-icon style="font-size:20px;" fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
-           </button>
-        </div>
+    <div *ngIf="mon" class="card allheight card-body">
+      <h4 class="card-title card-icon-space">
+         <a (click)="openModal(monsterModal, mon.slug); $event.preventDefault();" href="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a>    
+      </h4>
+      <div class="card-icon-position">
+        <i *ngIf="mon.montype != 'boss'" class="atelier atelier-ryza2-race-{{mon.montype}}"></i>
+        <i *ngIf="mon.montype == 'boss'" class="atelier atelier-ryza2-boss-enemy"></i>
+        <i class="atelier atelier-np atelier-ryza2-{{mon.size.toLowerCase()}}-enemy"></i>
+        <br *ngIf="mon.isDLC" /><span *ngIf="mon.isDLC" class="badge bg-secondary">DLC</span>
       </div>
+      <a class="card-item-display" (click)="openModal(monsterModal, mon.slug); $event.preventDefault();" href="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">
+         <img loading="lazy" src="{{imgURL}}monsters/{{mon.slug}}.png">
+      </a>
+      <button (click)="openModal(monsterModal, mon.slug)" class="card-read-more-position" mat-mini-fab color="accent">
+         <mat-icon style="font-size:20px;" fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+      </button>
     </div>
-  </div></div>
+  </div>
+</div>
 
 <ng-template #monsterModal>
   <div class="modal-body">

@@ -57,6 +57,10 @@
   padding-right: 0.4em;
 }
 
+.atelier-np {
+  padding-right:0;
+}
+
 //  change icon size
 .atelier-xs {
   font-size: 0.5em;
@@ -233,23 +237,39 @@ select {
   border: 2px outset lightgray !important;
   background-color: white;
   background-image: url("/media/main/images/clean_textile.png");
+  margin-bottom: 0 !important;
 }
 
 .card-icon-space {
-  margin-right: 1em;
-  padding-right: 2.5em;
+  margin-right: 2em;
+  padding-right: 1.5em;
+}
+
+.card-title {
+  > a {
+    color:black;
+  }
+  > a:hover {
+    color:black !important;
+  }
 }
 
 .card-icon-position {
   position:absolute;
   top:1em;
   right:1em;
+  text-align: center;
+}
+
+.card-icon-position span {
+  float: right;
 }
 
 .card-read-more-position {
   position:absolute !important;
   bottom:1em !important;
   right:1em !important;
+  box-shadow: none !important;
 }
 
 /* Background pattern from Toptal Subtle Patterns */
@@ -271,6 +291,18 @@ select {
 .hide-bullets {
   list-style-type: none;
   padding: 0;
+}
+
+.table-item-data {
+  display:block;
+
+  > tr {
+    vertical-align: top;
+  }
+  > tr, span {
+    vertical-align: top;
+    padding-left:0.5rem;
+  }
 }
 
 /* Background pattern from Toptal Subtle Patterns */
@@ -355,8 +387,10 @@ h4 {
 }
 
 .table-dark-center {
-  text-align: center;
-  background-color:rgba(211, 211, 211, 0.3);
+  > th {
+    text-align: center;
+    background-color:rgba(211, 211, 211, 0.3);
+  }
 }
 
 // Major components (header, main, sidebar, etc.)
@@ -556,9 +590,8 @@ img {
 
 // Game Data Pages
 
-.card-display-bottom {
-  display:flex;
-  align-items: flex-end;
+.card-item-display {
+  margin: auto;
 }
 
 .image-display {
@@ -570,6 +603,13 @@ img {
 
 .image-display img {
   max-width: 100%;
+}
+
+.trait-color {
+  color:lightgray;
+}
+.trait-colortrue {
+  color:black;
 }
 
 // Create page

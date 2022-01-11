@@ -62,46 +62,42 @@
 <ng-container *ngIf="filteredItems">
 <div *ngFor="let item of filteredItems | async| pair " class="row">
   <div *ngFor="let it of item" class="spacer col-md-5 mx-auto">
-    <div *ngIf="it" class="card allheight card-body griddisplay flex">
+    <div *ngIf="it" class="card allheight card-body">
       <h4 class="card-title card-icon-space">
-          <a style="color: black;" (click)="openModal(itemModal, it.slug); $event.preventDefault();" href="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a>    
+          <a (click)="openModal(itemModal, it.slug); $event.preventDefault();" href="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a>    
       </h4>
       <div class="card-icon-position">
-          <i *ngIf="it.itemtype == 'Attack'" class="atelier atelier-ryza2-type-attack"></i>
-          <i *ngIf="it.itemtype == 'Heal'" class="atelier atelier-ryza2-type-heal"></i>
-          <i *ngIf="it.itemtype == 'Debuff'" class="atelier atelier-ryza2-type-debuff"></i>
-          <i *ngIf="it.itemtype == 'Buff'" class="atelier atelier-ryza2-type-buff"></i>
-          <i *ngIf="it.itemtype == 'Weapon'" class="atelier atelier-ryza2-type-weapon"></i>
-          <i *ngIf="it.itemtype == 'Armor'" class="atelier atelier-ryza2-type-armor"></i>
-          <i *ngIf="it.itemtype == 'Accessory'" class="atelier atelier-ryza2-type-accessory"></i>
-          <i *ngIf="it.itemtype == 'Rare Item'" class="atelier atelier-ryza2-category-key-items"></i>
-          <i *ngIf="it.itemtype == 'Synthesis'" class="atelier atelier-ryza2-type-synthesis"></i>
-          <i *ngIf="it.itemtype == 'Material'" class="atelier atelier-ryza2-material"></i>
-          <i *ngIf="it.itemtype == 'Essence'" class="atelier atelier-ryza2-category-essence"></i>
-          <i *ngIf="it.itemtype == 'Field'" class="atelier atelier-ryza2-category-tools"></i>
-          <br *ngIf="it.isDLC" /><span *ngIf="it.isDLC" style="float:right;margin-right:0.5em;" class="badge bg-secondary">DLC</span>
+        <i *ngIf="it.itemtype == 'Attack'"    class="atelier atelier-np atelier-ryza2-type-attack"></i>
+        <i *ngIf="it.itemtype == 'Heal'"      class="atelier atelier-np atelier-ryza2-type-heal"></i>
+        <i *ngIf="it.itemtype == 'Debuff'"    class="atelier atelier-np atelier-ryza2-type-debuff"></i>
+        <i *ngIf="it.itemtype == 'Buff'"      class="atelier atelier-np atelier-ryza2-type-buff"></i>
+        <i *ngIf="it.itemtype == 'Weapon'"    class="atelier atelier-np atelier-ryza2-type-weapon"></i>
+        <i *ngIf="it.itemtype == 'Armor'"     class="atelier atelier-np atelier-ryza2-type-armor"></i>
+        <i *ngIf="it.itemtype == 'Accessory'" class="atelier atelier-np atelier-ryza2-type-accessory"></i>
+        <i *ngIf="it.itemtype == 'Rare Item'" class="atelier atelier-np atelier-ryza2-category-key-items"></i>
+        <i *ngIf="it.itemtype == 'Synthesis'" class="atelier atelier-np atelier-ryza2-type-synthesis"></i>
+        <i *ngIf="it.itemtype == 'Material'"  class="atelier atelier-np atelier-ryza2-material"></i>
+        <i *ngIf="it.itemtype == 'Essence'"   class="atelier atelier-np atelier-ryza2-category-essence"></i>
+        <i *ngIf="it.itemtype == 'Field'"     class="atelier atelier-np atelier-ryza2-category-tools"></i>
+        <br *ngIf="it.isDLC" /><span *ngIf="it.isDLC" class="badge bg-secondary">DLC</span>
       </div>
-      <div class="card-display-bottom">
-        <a class="image-display" (click)="openModal(itemModal, it.slug); $event.preventDefault();" href="/{{gameURL}}/items/{{it.slug}}/{{language}}">
-          <img loading="lazy" src="{{imgURL}}items/{{it.slug}}.png">
-        </a>
-      </div>
-      <div style="padding-right:1rem;margin-right:1rem;">
-        <button (click)="openModal(itemModal, it.slug)" style="box-shadow: none;" class="card-read-more-position" mat-mini-fab color="accent">
-            <mat-icon style="font-size:20px;" fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
-         </button>
-      </div>
-      <table>
+      <a class="card-item-display" (click)="openModal(itemModal, it.slug); $event.preventDefault();" href="/{{gameURL}}/items/{{it.slug}}/{{language}}">
+        <img loading="lazy" src="{{imgURL}}items/{{it.slug}}.png">
+      </a> 
+      <button (click)="openModal(itemModal, it.slug)" class="card-read-more-position" mat-mini-fab color="accent">
+        <mat-icon style="font-size:20px;" fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+      </button>
+      <table class="table-item-data">
         <tr *ngFor="let cat of it.category">
-            <td><i style="padding:0;" class="atelier atelier-ryza2-category-{{cat.slug}}"></i></td><td>{{cat.name}}</td>
+            <td style="text-align:center;"><i class="atelier atelier-ryza2-category-{{cat.slug}}"></i></td><td>{{cat.name}}</td>
         </tr>
         <tr>
           <td colspan=2>
-            <i style="padding:0;color:#f03a02;" *ngIf="it.fire" class="atelier atelier-ryza2-fire"></i>
-            <i style="padding:0;color:#04b5db;" *ngIf="it.ice" class="atelier atelier-ryza2-ice"></i>
-            <i style="padding:0;color:#e3bb05;" *ngIf="it.lightning" class="atelier atelier-ryza2-lightning"></i>
-            <i style="padding:0;color:#589b1d;" *ngIf="it.wind" class="atelier atelier-ryza2-wind"></i>
-            {{it.elementvalue}}
+            <i style="color:#f03a02;" *ngIf="it.fire"      class="atelier atelier-np atelier-ryza2-fire"></i>
+            <i style="color:#04b5db;" *ngIf="it.ice"       class="atelier atelier-np atelier-ryza2-ice"></i>
+            <i style="color:#e3bb05;" *ngIf="it.lightning" class="atelier atelier-np atelier-ryza2-lightning"></i>
+            <i style="color:#589b1d;" *ngIf="it.wind"      class="atelier atelier-np atelier-ryza2-wind"></i>
+            <span>{{it.elementvalue}}</span>
           </td>
         </tr>
       </table>

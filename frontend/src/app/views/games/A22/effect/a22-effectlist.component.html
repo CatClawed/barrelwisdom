@@ -66,24 +66,21 @@
 <ng-container *ngIf="filteredEffects">
 <div *ngFor="let effect of filteredEffects | async| pair " class="row">
   <div *ngFor="let eff of effect" class="spacer col-md-5 mx-auto">
-    <div *ngIf="eff" class="card allheight card-body griddisplay">
-      <div class="flex">
-        <h4 class="card-title card-icon-space"><a style="color: black;" (click)="openModal(effectModal, eff.slug); $event.preventDefault();" href="/{{gameURL}}/effects/{{eff.slug}}/{{language}}">{{eff.name}}</a></h4>
-        <div class="card-icon-position">
-          <i *ngIf="normal && eff.effsub != 'Material'" class="atelier atelier-ryza2-type-synthesis"></i>
-          <i *ngIf="eff.effsub == 'Material'" class="atelier atelier-ryza2-material"></i>
-          <i *ngIf="eff.effsub == 'Weapon'" class="atelier atelier-ryza2-type-weapon"></i>
-          <i *ngIf="eff.effsub == 'Armor'" class="atelier atelier-ryza2-type-armor"></i>
-          <i *ngIf="eff.effsub == 'Accessory'" class="atelier atelier-ryza2-type-accessory"></i>
-          <i *ngIf="eff.effsub == 'Attack'" class="atelier atelier-ryza2-type-attack"></i>
-          <i *ngIf="eff.effsub == 'Heal'" class="atelier atelier-ryza2-type-heal"></i> <span *ngIf="ev" class="badge bg-secondary">EV</span><i *ngIf="forge" class="atelier atelier-ryza2-forge"></i>
-        </div>
+    <div *ngIf="eff" class="card allheight card-body">
+      <h4 class="card-title card-icon-space">
+        <a (click)="openModal(effectModal, eff.slug); $event.preventDefault();" href="/{{gameURL}}/effects/{{eff.slug}}/{{language}}">{{eff.name}}</a>
+      </h4>
+      <div class="card-icon-position">
+        <i *ngIf="normal && eff.effsub != 'Material'" class="atelier atelier-np atelier-ryza2-type-synthesis"></i>
+        <i *ngIf="eff.effsub == 'Material'" class="atelier atelier-np atelier-ryza2-material"></i>
+        <i *ngIf="!normal" class="atelier atelier-ryza2-type-{{eff.effsub.toLowerCase()}}"></i>
+        <span *ngIf="ev" class="badge bg-secondary">EV</span><i *ngIf="forge" class="atelier atelier-np atelier-ryza2-forge"></i>
       </div>
       <button (click)="openModal(effectModal, eff.slug)" style="box-shadow: none;" class="card-read-more-position" mat-mini-fab color="accent">
           <mat-icon style="font-size:20px;" fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
        </button>
-      <p *ngIf="eff.desc">{{eff.desc}}</p>
-      <ul *ngIf="ev">
+      <span style="margin-right:1.7rem" *ngIf="eff.desc">{{eff.desc}}</span>
+      <ul style="margin-right:1.7rem;margin-bottom:0;" *ngIf="ev">
         <li *ngFor="let e of eff.effects"><a href="javascript:void(0)" tooltip="{{e.desc}}" container="true">{{e.name}}</a></li>
       </ul>
     </div>

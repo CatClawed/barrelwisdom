@@ -12,13 +12,15 @@
   </ol>
 </nav>
 <div class="mx-auto row">
-<div class="{{colset}} card griddisplay card-body">
+<div class="{{colset}} card card-body">
     <div class="flex">
         <h4 class="card-title  card-icon-space">{{effect.name}}</h4>
         <div class="card-icon-position">
-          <i *ngIf="effect.efftype == 'Normal' && effect.effsub != 'Material'" class="atelier atelier-ryza2-type-synthesis"></i>
-          <i *ngIf="effect.effsub == 'Material'" class="atelier atelier-ryza2-material"></i>
-          <i *ngIf="effect.effsub == 'Weapon'" class="atelier atelier-ryza2-type-weapon"></i><i *ngIf="effect.effsub == 'Armor'" class="atelier atelier-ryza2-type-armor"></i><i *ngIf="effect.effsub == 'Accessory'" class="atelier atelier-ryza2-type-accessory"></i><i *ngIf="effect.effsub == 'Attack'" class="atelier atelier-ryza2-type-attack"></i><i *ngIf="effect.effsub == 'Heal'" class="atelier atelier-ryza2-type-heal"></i> <span *ngIf="effect.efftype == 'EV'" class="badge bg-secondary">EV</span><i *ngIf="effect.efftype == 'Forge'" class="atelier atelier-ryza2-forge"></i>
+          <i *ngIf="effect.efftype == 'Normal' && effect.effsub != 'Material'" class="atelier atelier-np atelier-ryza2-type-synthesis"></i>
+          <i *ngIf="effect.effsub == 'Material'" class="atelier atelier-np atelier-ryza2-material"></i>
+          <i *ngIf="effect.efftype != 'Normal'" class="atelier atelier-ryza2-type-{{effect.effsub.toLowerCase()}}"></i>
+          <span *ngIf="effect.efftype == 'EV'" class="badge bg-secondary">EV</span>
+          <i *ngIf="effect.efftype == 'Forge'" class="atelier atelier-np atelier-ryza2-forge"></i>
         </div>
       </div>
       <div class="card-text">
@@ -58,6 +60,6 @@
           </ul>
       </div>
 </div>
-<language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="{{gameURL}}"></language-settings>
+<language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
 </div>
 </div>
