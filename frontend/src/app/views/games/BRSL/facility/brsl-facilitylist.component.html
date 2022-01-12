@@ -46,7 +46,7 @@
           <p *ngIf="facility.size>3" >Other </p>
           -->
           <button (click)="openModal(facilityModal, facility.slug)" style="box-shadow: none;" class="card-read-more-position" mat-mini-fab color="accent">
-              <mat-icon style="font-size:20px;" fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+              <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
            </button>
         </div>
       </div>
@@ -56,8 +56,8 @@
 
 <ng-template #facilityModal>
   <div class="modal-body">
-    <button type="button" style="opacity:100;" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <i style="color:white" class="fas fa-times-circle"></i>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <i class="fas fa-times-circle"></i>
     </button>
      <brsl-facility slug="{{facility}}" [showNav]="false"></brsl-facility>
   </div>

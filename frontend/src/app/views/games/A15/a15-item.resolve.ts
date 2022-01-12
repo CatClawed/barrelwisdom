@@ -31,7 +31,7 @@ export class A15ItemResolver implements Resolve<ItemFull> {
 
     return this.a15service.getItem(route.params.item, route.params.language).toPromise().then(
         item => {
-            this.gameTitle = this.a15service.gameTitle;
+            this.gameTitle = this.a15service.gameTitle[this.language];
           this.gameURL = this.a15service.gameURL;
           this.imgURL = this.a15service.imgURL;
 

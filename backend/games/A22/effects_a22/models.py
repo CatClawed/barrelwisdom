@@ -36,7 +36,7 @@ class Effect(models.Model):
         ('EV', 'EV')
     ]
     slugname = models.SlugField(max_length=50, unique=True)
-    efftype = models.CharField(max_length=20, choices=types)
+    efftype = models.CharField(max_length=20, choices=types, db_index=True)
     effsub = models.CharField(max_length=20, blank=True, default="")
     note = models.CharField(max_length=255, blank=True)
     index = models.IntegerField()

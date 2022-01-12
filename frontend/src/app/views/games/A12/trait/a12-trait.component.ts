@@ -57,7 +57,7 @@ export class A12TraitComponent implements OnInit {
     this.a12service.getTrait(this.slugname, this.language)
     .subscribe(trait => {
       this.trait = trait;
-      this.gameTitle = this.a12service.gameTitle;
+      this.gameTitle = this.a12service.gameTitle[this.language];
       this.gameURL = this.a12service.gameURL;
       this.imgURL = this.a12service.imgURL;
 

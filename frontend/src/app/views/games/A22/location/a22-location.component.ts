@@ -62,7 +62,7 @@ import {AppComponent} from '@app/app.component';
                 }
                 this.dig = false;
               }
-              this.gameTitle = this.a22service.gameTitle;
+              this.gameTitle = this.a22service.gameTitle[this.language];
               this.gameURL = this.a22service.gameURL;
               this.imgURL = this.a22service.imgURL;
       
@@ -100,7 +100,7 @@ import {AppComponent} from '@app/app.component';
                   }
                   this.dig = false;
                 }
-                this.gameTitle = this.a22service.gameTitle;
+                this.gameTitle = this.a22service.gameTitle[this.language];
                 this.gameURL = this.a22service.gameURL;
                 this.imgURL = this.a22service.imgURL;
         

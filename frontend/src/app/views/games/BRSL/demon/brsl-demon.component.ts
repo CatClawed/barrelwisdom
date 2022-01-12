@@ -59,7 +59,7 @@ export class BRSLDemonComponent implements OnInit {
         this.error = false;
         this.demon = demon;
 
-        this.gameTitle = this.brslservice.gameTitle;
+        this.gameTitle = this.brslservice.gameTitle[this.language];
         this.gameURL = this.brslservice.gameURL;
         this.imgURL = this.brslservice.imgURL;
 

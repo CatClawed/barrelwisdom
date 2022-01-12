@@ -69,7 +69,7 @@ import { SeoService } from '@app/services/seo.service';
   
       this.getItems();
       this.getCategories();
-      this.gameTitle = this.brslservice.gameTitle;
+      this.gameTitle = this.brslservice.gameTitle[this.language];
       this.gameURL = this.brslservice.gameURL;
       this.imgURL = this.brslservice.imgURL;
 

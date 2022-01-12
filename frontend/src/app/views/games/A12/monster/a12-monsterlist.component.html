@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="!error">
+<ng-container *ngIf="!error">
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
@@ -12,49 +12,41 @@
 <div class="col-md-10 mx-auto">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
-        <mat-form-field class="col-md-5" appearance="outline">
+        <mat-form-field class="col-md-9" appearance="outline">
           <mat-label>Filter...</mat-label>
           <input style="height: 100%;" matInput formControlName="filtertext">
         </mat-form-field>
         <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
       </div>
     </form>
-  </div>
+</div>
 <ng-container *ngIf="filteredMonsters">
-<div *ngFor="let monster of filteredMonsters | async| pair " class="row">
-  <div *ngFor="let mon of monster" class="spacer col-md-5 mx-auto">
-    <div *ngIf="mon" class="card allheight">
-      <div class="card-body griddisplay" style="position:relative">
-        <div class="flex">
-          <h4 class="card-title card-icon-space">
-              <a style="color: black;" (click)="openModal(monsterModal, mon.slugname); $event.preventDefault();" href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">{{mon.name}}</a>    
-          </h4>
-          <div class="card-icon-position">
-              <span>{{mon.race}}</span>
-              <br *ngIf="mon.isDX" /><span *ngIf="mon.isDX" style="float:right;margin-right:0.5em;" class="badge bg-secondary">DX</span>
-          </div>
+  <div *ngFor="let monster of filteredMonsters | async| pair " class="row">
+    <div *ngFor="let mon of monster" class="spacer col-md-5 mx-auto">
+      <div *ngIf="mon" class="card allheight card-body">
+        <h4 class="card-title card-icon-space">
+          <a (click)="openModal(monsterModal, mon.slugname); $event.preventDefault();" href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">{{mon.name}}</a>    
+        </h4>
+        <div class="card-icon-position">
+          <span>{{mon.race}}</span>
+          <br *ngIf="mon.isDX" /><span *ngIf="mon.isDX" class="badge bg-secondary">DX</span>
         </div>
-        <div class="card-item-display">
-            <a class="image-display" (click)="openModal(monsterModal, mon.slugname); $event.preventDefault();" href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">
-              <img loading="lazy" src="{{imgURL}}monsters/{{mon.slugname}}.png">
-            </a>
-        </div>
-        <div style="padding-right:1rem;margin-right:1rem;" class="card-text">
-          <button (click)="openModal(monsterModal, mon.slugname)" style="box-shadow: none;" class="card-read-more-position" mat-mini-fab color="accent">
-              <mat-icon style="font-size:20px;" fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
-           </button>
-        </div>
+        <a class="card-item-display" (click)="openModal(monsterModal, mon.slugname); $event.preventDefault();" href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">
+          <img loading="lazy" src="{{imgURL}}monsters/{{mon.slugname}}.png">
+        </a>
+        <button (click)="openModal(monsterModal, mon.slugname)" style="box-shadow: none;" class="card-read-more-position" mat-mini-fab color="accent">
+          <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+        </button>
       </div>
     </div>
-  </div></div>
-
-<ng-template #monsterModal>
-  <div class="modal-body">
-    <button type="button" style="opacity:100;" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <i style="color:white" class="fas fa-times-circle"></i>
-    </button>
-     <a12-monster slugname="{{monster}}" [showNav]="false"></a12-monster>
   </div>
-</ng-template>
+  <ng-template #monsterModal>
+    <div class="modal-body">
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <i class="fas fa-times-circle"></i>
+      </button>
+       <a12-monster slugname="{{monster}}" [showNav]="false"></a12-monster>
+    </div>
+  </ng-template>
 </ng-container>
-</div>
+</ng-container>

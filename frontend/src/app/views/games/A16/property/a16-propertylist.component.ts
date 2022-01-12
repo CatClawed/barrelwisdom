@@ -59,7 +59,7 @@ export class A16PropertylistComponent implements OnInit {
     this.language = this.route.snapshot.params.language;
 
     this.getProperties();
-    this.gameTitle = this.a16service.gameTitle;
+    this.gameTitle = this.a16service.gameTitle[this.language];
     this.gameURL = this.a16service.gameURL;
     this.imgURL = this.a16service.imgURL;
     

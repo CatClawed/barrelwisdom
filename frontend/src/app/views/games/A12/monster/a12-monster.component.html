@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="monster">
+<ng-container *ngIf="monster">
 <nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
@@ -9,20 +9,18 @@
     <li class="breadcrumb-item active" aria-current="page">{{monster.name}}</li>
   </ol>
 </nav>
-<div class="mx-auto row">
- <div class="{{colset}} card griddisplay card-body">
-    <div class="flex">
-        <h4 class="card-title  card-icon-space">{{monster.name}}</h4>
-        <div class="card-icon-position">
-          <span>{{monster.race}}</span>
-          <br *ngIf="monster.isDX" /><span *ngIf="monster.isDX" style="float:right;margin-right:0.5em;" class="badge bg-secondary">DX</span>
-        </div>
-      <div class="card-text">
-        <img class="image-display" loading="lazy" src="{{imgURL}}monsters/{{monster.slugname}}.png">
-        <p *ngIf="monster.desc">{{monster.desc}}</p>
-        <p *ngIf="monster.note">{{monster.note}}</p>
-        <div class="row">
-          <div class="col-md-6">
+<div class="mx-auto row spacer">
+ <div class="{{colset}} card card-body">
+    <h4 class="card-title card-icon-space">{{monster.name}}</h4>
+    <div class="card-icon-position">
+      <span>{{monster.race}}</span>
+      <br *ngIf="monster.isDX" /><span *ngIf="monster.isDX" class="badge bg-secondary">DX</span>
+    </div>
+    <img class="image-display" loading="lazy" src="{{imgURL}}monsters/{{monster.slugname}}.png">
+    <p *ngIf="monster.desc">{{monster.desc}}</p>
+    <p *ngIf="monster.note">{{monster.note}}</p>
+    <div class="row">
+      <div class="col-md-6">
         <b *ngIf="monster.locations">Locations:</b>
         <ul *ngIf="monster.locations">
            <li *ngFor="let loc of monster.locations">
@@ -54,9 +52,8 @@
           </tr>
         </table>
       </div>
-      </div>
-      </div>
     </div>
  </div>
- <language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="{{gameURL}}"></language-settings>
+ <language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
 </div>
+</ng-container>

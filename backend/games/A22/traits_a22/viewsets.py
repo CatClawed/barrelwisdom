@@ -11,7 +11,6 @@ class A22TraitViewSet(viewsets.ModelViewSet):
     queryset = Trait.objects.all()
     serializer_class = A22TraitSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    ordering_fields = ['index']
     lookup_field = 'slugname'
 
     @action(detail=False)

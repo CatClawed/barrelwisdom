@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="category">
+<ng-container *ngIf="category">
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
@@ -12,8 +12,8 @@
 <language-settings style="margin-top: 1em;" class="col-md-3" section="{{gameURL}}"></language-settings>
 <div class="mx-auto row">
     <div class="col-md-6">
-        <table style="border:2px solid lightgray;" class="table">
-            <tr><th class="table-dark-center" colspan=2>Items in Category</th></tr>
+        <table style="border:1px solid #c8ced3;" class="table">
+            <tr class="table-dark-center"><th style="border:none;" colspan=2>Items in Category</th></tr>
             <tr *ngFor="let item of category.item_set">
                 <td>
                     <a href="/{{gameURL}}/items/{{item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.name}}</a>
@@ -23,8 +23,8 @@
         </table>
     </div>
     <div *ngIf="category.ingredientcat" class="col-md-6">
-        <table style="border:2px solid lightgray;" class="table">
-            <tr><th class="table-dark-center" colspan=2>Items Using Category</th></tr>
+        <table style="border:1px solid #c8ced3;" class="table">
+            <tr class="table-dark-center"><th style="border:none;" colspan=2>Items Using Category</th></tr>
             <tr *ngFor="let item of category.ingredientcat">
                 <td>
                     <a href="/{{gameURL}}/items/{{item.synthitem.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.synthitem.name}}</a>
@@ -34,4 +34,4 @@
         </table>
     </div>
 </div>
-</div>
+</ng-container>

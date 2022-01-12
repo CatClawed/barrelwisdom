@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="filteredTraits">
+<ng-container *ngIf="filteredTraits">
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
@@ -44,34 +44,29 @@
         <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
       </div>
     </form>
-  </div>
+</div>
  <div *ngFor="let traits of filteredTraits | async| pair " class="row">
   <div *ngFor="let trait of traits" class="spacer col-md-5 mx-auto">
-   <div *ngIf="trait">
-    <div class="card allheight">
-      <div class="card-body griddisplay">
-        <div class="flex">
-          <h4 class="card-title"><a style="color: black;" (click)="openModal(traitModal, trait.slugname); $event.preventDefault();" href="/{{gameURL}}/traits/{{trait.slugname}}/{{language}}">{{trait.name}}</a></h4>
-          <div *ngIf="trait.cost"><b>Cost: </b>{{trait.cost}}</div>
-        </div>
-        <div class="card-text">
-          <p>{{trait.desc}}</p>
-          <div *ngIf="trait.item_set">
-            <b>Items:</b>
-              <ul>
-                <li *ngFor="let item of trait.item_set"><a href="/{{gameURL}}/items/{{item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.name}}</a></li>
-              </ul>
-          </div>
-        <div class="flex card-text bottom">
-          <div><i *ngIf="trait.synth"      class="atelier atelier-ryza2-type-synthesis"></i>     <i style="color: lightgray;" *ngIf="!trait.synth"      class="atelier atelier-ryza2-type-synthesis"></i></div>
-          <div><i *ngIf="trait.usable"      class="atelier atelier-escha-bomb"></i>     <i style="color: lightgray;" *ngIf="!trait.usable"      class="atelier atelier-escha-bomb"></i>     </div>
-          <div><i *ngIf="trait.ingot"   class="atelier atelier-escha-weapon"></i>   <i style="color: lightgray;" *ngIf="!trait.ingot"    class="atelier atelier-escha-weapon"></i>     </div>
-          <div><i *ngIf="trait.cloth"     class="atelier atelier-escha-armor"></i>    <i style="color: lightgray;" *ngIf="!trait.cloth"     class="atelier atelier-escha-armor"></i>   </div>
-          <div><i *ngIf="trait.accessory" class="atelier atelier-escha-accessory"></i><i style="color: lightgray;" *ngIf="!trait.accessory" class="atelier atelier-escha-accessory"></i>    </div>
-        </div>
+   <div *ngIf="trait" style="justify-content:space-between;" class="card card-body allheight">
+    <div class="flex">
+      <h4 class="card-title"><a (click)="openModal(traitModal, trait.slugname); $event.preventDefault();" href="/{{gameURL}}/traits/{{trait.slugname}}/{{language}}">{{trait.name}}</a></h4>
+      <span *ngIf="trait.cost"><b>Cost: </b>{{trait.cost}}</span>
+      <p>{{trait.desc}}</p>
+      <div *ngIf="trait.item_set">
+       <b>Items:</b>
+         <ul>
+           <li *ngFor="let item of trait.item_set"><a href="/{{gameURL}}/items/{{item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.name}}</a></li>
+         </ul>
       </div>
     </div>
-    </div>
+     <div class="flex bottom">
+       <i class="trait-color{{trait.synth}}     atelier atelier-np atelier-ryza2-type-synthesis"></i>
+       <i class="trait-color{{trait.usable}}    atelier atelier-np atelier-escha-bomb"></i>
+       <i class="trait-color{{trait.ingot}}     atelier atelier-np atelier-escha-weapon"></i>
+       <i class="trait-color{{trait.cloth}}     atelier atelier-np atelier-escha-armor"></i>
+       <i class="trait-color{{trait.accessory}} atelier atelier-np atelier-escha-accessory"></i>
+     </div>
+   </div>
   </div>
  </div>
 <ng-template #traitModal>
@@ -82,4 +77,4 @@
     <a12-trait slugname="{{trait}}" [showNav]="false"></a12-trait>
   </div>
 </ng-template>
-</div>
+</ng-container>

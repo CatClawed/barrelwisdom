@@ -14,7 +14,7 @@ export class A15Service {
       private http: HttpClient,
     ) { }
 
-    public readonly gameTitle = "Atelier Escha & Logy";
+    public readonly gameTitle = {"en": "Atelier Escha & Logy", "ja":"エスカ＆ロジーのアトリエ"};
     public readonly gameURL = "escha";
     public readonly imgURL = `${environment.mediaURL}games/${this.gameURL}/`;
     

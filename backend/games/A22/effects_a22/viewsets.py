@@ -11,7 +11,6 @@ class A22EffectViewSet(viewsets.ModelViewSet):
     queryset = Effect.objects.filter(efftype='Normal')
     serializer_class = A22EffectSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    ordering_fields = ['index']
     lookup_field = 'slugname'
     filterset_fields = ['efftype']
 
@@ -231,7 +230,6 @@ class A22EVEffectViewSet(viewsets.ModelViewSet):
     queryset = Effect.objects.filter(efftype='EV')
     serializer_class = A22EVEffectSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    ordering_fields = ['index']
     lookup_field = 'slugname'
     filterset_fields = ['efftype']
 
@@ -336,7 +334,6 @@ class A22ForgeEffectViewSet(viewsets.ModelViewSet):
     queryset = Effect.objects.filter(efftype='Forge')
     serializer_class = A22EffectSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    ordering_fields = ['index']
     lookup_field = 'slugname'
     filterset_fields = ['efftype']
 

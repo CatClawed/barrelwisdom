@@ -70,7 +70,7 @@ constructor(
          }
         }
 
-        this.gameTitle = this.a12service.gameTitle;
+        this.gameTitle = this.a12service.gameTitle[this.language];
         this.gameURL = this.a12service.gameURL;
         this.imgURL = this.a12service.imgURL;
 

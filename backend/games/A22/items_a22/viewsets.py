@@ -24,7 +24,6 @@ class A22ItemViewSet(viewsets.ModelViewSet):
         )
     serializer_class = A22ItemSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    ordering_fields = ['index']
     lookup_field = 'slugname'
 
     # Full item list (simplified data)

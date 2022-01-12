@@ -64,7 +64,7 @@
             <li *ngFor="let cat of item.category">{{cat.name}}</li>
           </ul>
           <button (click)="openModal(itemModal, item.slug)" style="box-shadow: none;" class="card-read-more-position" mat-mini-fab color="accent">
-              <mat-icon style="font-size:20px;" fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+              <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
            </button>
         </div>
       </div>
@@ -73,8 +73,8 @@
 
 <ng-template #itemModal>
   <div class="modal-body">
-    <button type="button" style="opacity:100;" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <i style="color:white" class="fas fa-times-circle"></i>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <i class="fas fa-times-circle"></i>
     </button>
      <brsl-item slug="{{item}}" [showNav]="false"></brsl-item>
   </div>

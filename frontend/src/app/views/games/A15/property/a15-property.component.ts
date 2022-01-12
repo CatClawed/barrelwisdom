@@ -57,7 +57,7 @@ export class A15PropertyComponent implements OnInit {
     this.a15service.getProperty(this.slugname, this.language)
     .subscribe(property => {
       this.property = property;
-      this.gameTitle = this.a15service.gameTitle;
+      this.gameTitle = this.a15service.gameTitle[this.language];
       this.gameURL = this.a15service.gameURL;
       this.imgURL = this.a15service.imgURL;
 

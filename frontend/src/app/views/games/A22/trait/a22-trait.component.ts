@@ -57,7 +57,7 @@ export class A22TraitComponent implements OnInit {
     this.a22service.getTrait(this.slug, this.language)
     .subscribe(trait => {
       this.trait = trait;
-      this.gameTitle = this.a22service.gameTitle;
+      this.gameTitle = this.a22service.gameTitle[this.language];
       this.gameURL = this.a22service.gameURL;
       this.imgURL = this.a22service.imgURL;
       

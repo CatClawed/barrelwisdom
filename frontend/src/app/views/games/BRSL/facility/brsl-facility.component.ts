@@ -61,7 +61,7 @@ export class BRSLFacilityComponent implements OnInit {
         this.error = false;
         this.facility = facility;
 
-        this.gameTitle = this.brslservice.gameTitle;
+        this.gameTitle = this.brslservice.gameTitle[this.language];
         this.gameURL = this.brslservice.gameURL;
         this.imgURL = this.brslservice.imgURL;
 

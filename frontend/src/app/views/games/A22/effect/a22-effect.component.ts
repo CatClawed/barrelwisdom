@@ -64,7 +64,7 @@ export class A22EffectComponent implements OnInit {
       else {
           this.error = false;
           this.effect = effect;
-          this.gameTitle = this.a22service.gameTitle;
+          this.gameTitle = this.a22service.gameTitle[this.language];
           this.gameURL = this.a22service.gameURL;
           this.imgURL = this.a22service.imgURL;
 

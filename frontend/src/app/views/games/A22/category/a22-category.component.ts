@@ -48,7 +48,7 @@ constructor(
         this.error = false;
         this.category = category;
 
-        this.gameTitle = this.a22service.gameTitle;
+        this.gameTitle = this.a22service.gameTitle[this.language];
         this.gameURL = this.a22service.gameURL;
         this.imgURL = this.a22service.imgURL;
 

@@ -63,7 +63,7 @@ import { SeoService } from '@app/services/seo.service';
       this.getEffects();
       
       
-      this.gameTitle = this.a16service.gameTitle;
+      this.gameTitle = this.a16service.gameTitle[this.language];
       this.gameURL = this.a16service.gameURL;
       this.imgURL = this.a16service.imgURL;
 

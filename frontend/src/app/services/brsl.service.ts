@@ -14,7 +14,7 @@ export class BRSLService {
       private http: HttpClient,
     ) { }
 
-    public readonly gameTitle = "Blue Reflection: Second Light";
+    public readonly gameTitle = {"en": "Blue Reflection: Second Light", "ja":"BLUE REFLECTION TIE/帝", "sc":"BLUE REFLECTION: 帝", "tc":"BLUE REFLECTION: 帝"};
     public readonly gameURL = "second-light";
     public readonly imgURL = `${environment.mediaURL}games/${this.gameURL}/`;
 

@@ -111,7 +111,7 @@
          <img loading="lazy" src="{{imgURL}}monsters/{{mon.slug}}.png">
       </a>
       <button (click)="openModal(monsterModal, mon.slug)" class="card-read-more-position" mat-mini-fab color="accent">
-         <mat-icon style="font-size:20px;" fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+         <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
       </button>
     </div>
   </div>
@@ -119,8 +119,8 @@
 
 <ng-template #monsterModal>
   <div class="modal-body">
-    <button type="button" style="opacity:100;" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <i style="color:white" class="fas fa-times-circle"></i>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <i class="fas fa-times-circle"></i>
     </button>
      <a22-monster slug="{{monster}}" [showNav]="false"></a22-monster>
   </div>

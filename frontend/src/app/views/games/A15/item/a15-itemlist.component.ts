@@ -77,7 +77,7 @@ import { SeoService } from '@app/services/seo.service';
       this.getItems();
       this.getCategories();
 
-      this.gameTitle = this.a15service.gameTitle;
+      this.gameTitle = this.a15service.gameTitle[this.language];
       this.gameURL = this.a15service.gameURL;
       this.imgURL = this.a15service.imgURL;
 

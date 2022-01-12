@@ -16,7 +16,7 @@ export class A22Service {
     private http: HttpClient,
   ) { }
 
-  public readonly gameTitle = "Atelier Ryza 2";
+  public readonly gameTitle ={"en": "Atelier Ryza 2", "fr":"Atelier Ryza 2", "ja":"ライザのアトリエ２", "ko":"라이자의 아틀리에2", "sc":"莱莎的炼金工房２", "tc":"萊莎的鍊金工房２"};
   public readonly gameURL = "ryza2"; 
   public readonly imgURL = `${environment.mediaURL}games/${this.gameURL}/`;
 

@@ -9,25 +9,23 @@
     <li class="breadcrumb-item active" aria-current="page">{{book.name}}</li>
   </ol>
 </nav>
-<div class="mx-auto row">
- <div class="{{colset}} card griddisplay card-body">
-    <div class="flex">
-        <h4 class="card-title  card-icon-space">{{book.name}}</h4>
-        <div class="card-icon-position">
-          <span *ngIf="book.isDLC" style="float:right;margin-right:0.5em;" class="badge bg-secondary">DLC</span>
-          <span *ngIf="book.isDX" style="float:right;margin-right:0.5em;" class="badge bg-secondary">DX</span>
-        </div>
+<div class="mx-auto row spacer">
+ <div class="{{colset}} card card-body">
+    <h4 class="card-title  card-icon-space">{{book.name}}</h4>
+    <div class="card-icon-position">
+      <span *ngIf="book.isDLC" class="badge bg-secondary">DLC</span>
+      <span *ngIf="book.isDX" class="badge bg-secondary">DX</span>
     </div>
-    <div class="card-text">
-        <img class="image-display" loading="lazy" src="/media/games/{{gameURL}}/items/{{book.slugname}}.png">
-        <p *ngIf="book.desc">{{book.desc}}</p>
-        <p><b>Acquisition: </b>{{book.note}}</p>
-        <b>Items:</b>
-        <ul>
-          <li *ngFor="let item of book.items"><a href="/{{gameURL}}/items/{{item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.name}}</a></li>
-        </ul>
-     </div>
+    <div class="card-item-display">
+      <img loading="lazy" src="/media/games/{{gameURL}}/items/{{book.slugname}}.png">
+    </div>
+    <p *ngIf="book.desc">{{book.desc}}</p>
+    <p><b>Acquisition: </b>{{book.note}}</p>
+    <b>Items:</b>
+    <ul>
+      <li *ngFor="let item of book.items"><a href="/{{gameURL}}/items/{{item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.name}}</a></li>
+    </ul>
   </div>
-  <language-settings *ngIf="showNav" style="margin-top: 1em;" class="col-md-3" section="{{gameURL}}"></language-settings>
+  <language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
  </div>
 </div>

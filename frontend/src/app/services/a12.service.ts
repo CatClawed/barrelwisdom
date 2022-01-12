@@ -14,7 +14,7 @@ export class A12Service {
       private http: HttpClient,
     ) { }
 
-    public readonly gameTitle = "Atelier Totori";
+    public readonly gameTitle = {"en": "Atelier Totori", "ja":"トトリのアトリエ"};
     public readonly gameURL = "totori";
     public readonly imgURL = `${environment.mediaURL}games/${this.gameURL}/`;
     

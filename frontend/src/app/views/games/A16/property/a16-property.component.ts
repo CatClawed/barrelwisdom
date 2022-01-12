@@ -57,7 +57,7 @@ export class A16PropertyComponent implements OnInit {
     this.a16service.getProperty(this.slugname, this.language)
     .subscribe(property => {
       this.property = property;
-      this.gameTitle = this.a16service.gameTitle;
+      this.gameTitle = this.a16service.gameTitle[this.language];
       this.gameURL = this.a16service.gameURL;
       this.imgURL = this.a16service.imgURL;
 

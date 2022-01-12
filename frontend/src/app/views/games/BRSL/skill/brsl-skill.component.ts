@@ -51,7 +51,7 @@ export class BRSLSkillComponent implements OnInit {
         this.error = false;
         this.skills = skill;
 
-        this.gameTitle = this.brslservice.gameTitle;
+        this.gameTitle = this.brslservice.gameTitle[this.language];
         this.gameURL = this.brslservice.gameURL;
         this.imgURL = this.brslservice.imgURL;
 

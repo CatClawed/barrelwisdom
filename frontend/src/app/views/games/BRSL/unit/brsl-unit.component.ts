@@ -47,7 +47,7 @@ export class BRSLUnitComponent implements OnInit {
         this.error = false;
         this.units = unit;
 
-        this.gameTitle = this.brslservice.gameTitle;
+        this.gameTitle = this.brslservice.gameTitle[this.language];
         this.gameURL = this.brslservice.gameURL;
         this.imgURL = this.brslservice.imgURL;
 
