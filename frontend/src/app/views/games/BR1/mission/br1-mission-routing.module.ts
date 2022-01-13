@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: '',
     component: BR1MissionlistComponent,
-    canActivate: [LanguageGuard],
+    canActivate: [LanguageGuard]
   },
   {
     path: ':language',

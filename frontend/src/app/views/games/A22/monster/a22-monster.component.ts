@@ -96,7 +96,7 @@ export class A22MonsterComponent implements OnInit {
         this.seoURL = `${this.gameURL}/monsters/${this.monster.slug}/${this.language}`;
         this.seoTitle = `${this.monster.name} - ${this.gameTitle}`;
         this.seoDesc = `${this.monster.desc}`
-        this.seoImage = `${this.imgURL}monsters/${this.monster.slug}.png`
+        this.seoImage = `${this.imgURL}monsters/${this.monster.slug}.webp`
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error => {

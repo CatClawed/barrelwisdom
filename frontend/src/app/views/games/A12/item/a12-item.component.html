@@ -16,7 +16,7 @@
       <b *ngIf="item.level">LV {{item.level}}</b>
     </div>
     <div class="card-item-display">
-      <img loading="lazy" src="{{imgURL}}items/{{item.slugname}}.png">
+      <img loading="lazy" src="{{imgURL}}items/{{item.slugname}}.webp">
     </div>
     <p>{{item.desc}}</p>
     <p *ngIf="item.book_set"><b>Recipe Book: </b><a href="/{{gameURL}}/recipe-books/{{item.book_set[0].slugname}}" (click)="historyService.hrefClicked($event)">{{item.book_set[0].name}}</a></p>
@@ -98,7 +98,7 @@
     </table>
     <table *ngIf="item.equip_set" class="table">
         <tr class="table-dark-center"><th>Characters</th></tr>
-        <tr><td><img *ngFor="let char of item.equip_set[0].chars" src="{{imgURL}}resources/equip_{{char.name}}.png"></td></tr>
+        <tr><td><img *ngFor="let char of item.equip_set[0].chars" src="{{imgURL}}resources/equip_{{char.name}}.webp"></td></tr>
     </table>
   </div>
   <language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>

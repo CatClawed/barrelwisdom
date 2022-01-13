@@ -66,7 +66,7 @@ export class A15MonsterComponent implements OnInit {
         this.seoURL = `${this.gameURL}/monsters/${this.monster.slugname}/${this.language}`;
         this.seoTitle = `${this.monster.name} - ${this.gameTitle}`;
         this.seoDesc = `${this.monster.desc}`
-        this.seoImage = `${this.imgURL}monsters/${this.monster.slugname}.png`
+        this.seoImage = `${this.imgURL}monsters/${this.monster.slugname}.webp`
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error => {

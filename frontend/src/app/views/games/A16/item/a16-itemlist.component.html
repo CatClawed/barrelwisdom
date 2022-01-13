@@ -69,7 +69,7 @@
         <b>LV {{it.level}}</b>
       </div>
       <a class="card-item-display" (click)="openModal(itemModal, it.slugname); $event.preventDefault();" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">
-        <img loading="lazy" src="{{imgURL}}items/{{it.slugname}}.png">
+        <img loading="lazy" src="{{imgURL}}items/{{it.slugname}}.webp">
       </a>
       <table class="table-item-data">
         <tr *ngFor="let cat of it.categories">
@@ -86,7 +86,7 @@
         </tr>
         <tr *ngIf="it.slots > 0" >
           <td colspan=2>
-            <img *ngFor="let item of [].constructor(it.slots);" src="{{imgURL}}slot.png">
+            <img *ngFor="let item of [].constructor(it.slots);" src="{{imgURL}}slot.webp">
           </td>
         </tr>
       </table>            

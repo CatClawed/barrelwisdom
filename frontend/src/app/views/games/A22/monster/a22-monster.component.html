@@ -19,7 +19,7 @@
       <br *ngIf="monster.isDLC" /><span *ngIf="monster.isDLC" class="badge bg-secondary">DLC</span>
     </div>
     <div class="card-text">
-      <img class="image-display" loading="lazy" src="{{imgURL}}monsters/{{monster.slug}}.png">
+      <img class="image-display" loading="lazy" src="{{imgURL}}monsters/{{monster.slug}}.webp">
       <p *ngIf="monster.desc">{{monster.desc}}</p>
       <p *ngIf="monster.note"><b>Note:</b> {{monster.note}}</p>
       <div class="row">

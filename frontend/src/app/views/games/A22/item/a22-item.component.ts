@@ -71,7 +71,7 @@ constructor(
         this.seoURL = `${this.gameURL}/items/${this.item.slug}/${this.language}`;
         this.seoTitle = `${this.item.name} - ${this.gameTitle}`;
         this.seoDesc = `${this.item.desc}`
-        this.seoImage = `${this.imgURL}items/${this.item.slug}.png`
+        this.seoImage = `${this.imgURL}items/${this.item.slug}.webp`
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
 
         if(this.item.effectline_set) {

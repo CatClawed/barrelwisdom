@@ -77,7 +77,7 @@ constructor(
         this.seoURL = `${this.gameURL}/items/${this.item.slugname}/${this.language}`;
         this.seoTitle = `${this.item.name} - ${this.gameTitle}`;
         this.seoDesc = `${this.item.desc}`
-        this.seoImage = `${this.imgURL}items/${this.item.slugname}.png`
+        this.seoImage = `${this.imgURL}items/${this.item.slugname}.webp`
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error => {

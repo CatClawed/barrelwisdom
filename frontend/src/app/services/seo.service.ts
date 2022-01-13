@@ -39,7 +39,7 @@ export class SeoService {
             this.metaService.updateTag({ property: `og:image`, content: `https://barrelwisdom.com${image}` }, `property="og:image"`);
         }
         else {
-            this.metaService.updateTag({ property: `og:image`, content: `https://barrelwisdom.com/media/main/barrel.png` }, `property="og:image"`);
+            this.metaService.updateTag({ property: `og:image`, content: `https://barrelwisdom.com/media/main/barrel.webp` }, `property="og:image"`);
         }
     }
 

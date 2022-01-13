@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="!error">
+<ng-container *ngIf="!error">
  <nav style="margin-top: 1em;" aria-label="breadcrumb">
  <ol class="breadcrumb">
    <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
@@ -9,31 +9,27 @@
  </ol>
  </nav>
  <h1>Missions</h1>
- <div *ngFor="let mission of missions" class="row">
+ <div id="{{mission.slugname}}" *ngFor="let mission of missions" class="row">
   <div class="spacer col-md-7 mx-auto">
-    <div class="card allheight">
-       <div class="card-body">
-         <div class="flex">
-           <h4 class="card-title card-icon-space" id="{{mission.slugname}}">
-             {{mission.name}}
-           </h4>
-           <div class="card-icon-position">
-            <b style="padding-right:0.7em;">{{mission.character}}</b>
-            <br *ngIf="mission.chapter" /><b style="padding-right:0.7em;">Ch.{{mission.chapter}}</b>
-          </div>
-          <div class="card-text">
-           <b *ngIf="mission.reward || mission.points">Reward:</b>
-           <ul>
-             <li *ngIf="mission.points">{{mission.points}} points</li>
-             <li *ngIf="mission.reward">{{mission.reward}}</li>
-           </ul>
-           <p *ngIf="mission.location">{{mission.location}}</p>
-           <b *ngIf="mission.details">Details:</b>
-           <div (click)="historyService.hrefClicked($event);" [innerHTML]="mission.details"></div>
-          </div>
-         </div>
-       </div>
+    <div class="card card-body allheight">
+      <div class="flex">
+        <h4 class="card-title card-icon-space">
+          {{mission.name}}
+        </h4>
+        <div>
+          <b>{{mission.character}}</b>
+          <br *ngIf="mission.chapter" /><b>Ch.{{mission.chapter}}</b>
+        </div>
+      </div>
+      <b *ngIf="mission.reward || mission.points">Reward:</b>
+      <ul>
+        <li *ngIf="mission.points">{{mission.points}} points</li>
+        <li *ngIf="mission.reward">{{mission.reward}}</li>
+      </ul>
+      <p *ngIf="mission.location">{{mission.location}}</p>
+      <b *ngIf="mission.details">Details:</b>
+      <div (click)="historyService.hrefClicked($event);" [innerHTML]="mission.details"></div>
     </div>
   </div>
  </div>
-</div>
+</ng-container>

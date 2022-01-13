@@ -16,7 +16,7 @@
       <b>LV {{item.level}}</b>
     </div>
     <div class="card-item-display">
-      <img loading="lazy" src="{{imgURL}}items/{{item.slugname}}.png">
+      <img loading="lazy" src="{{imgURL}}items/{{item.slugname}}.webp">
     </div>
       <p>{{item.desc}}</p>
       <p *ngIf="item.book_set"><b>Recipe Book: </b><a href="/{{gameURL}}/recipe-books/{{item.book_set[0].slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.book_set[0].name}}</a></p>
@@ -39,7 +39,7 @@
           </tr>
           <tr *ngIf="item.slots > 0">
             <td colspan=2>
-              <img *ngFor="let item of [].constructor(item.slots);" src="{{imgURL}}slot.png">
+              <img *ngFor="let item of [].constructor(item.slots);" src="{{imgURL}}slot.webp">
             </td>
           </tr>
         </table>
@@ -108,7 +108,7 @@
         </table>
         <table *ngIf="item.characterequip_set" class="table">
           <tr class="table-dark-center"><th>Characters</th></tr>
-          <tr><td><img *ngFor="let char of item.characterequip_set[0].chars" src="{{imgURL}}equip/equip-{{char.name}}.png"></td></tr>
+          <tr><td><img *ngFor="let char of item.characterequip_set[0].chars" src="{{imgURL}}equip/equip-{{char.name}}.webp"></td></tr>
         </table>
   </div>
   <language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>

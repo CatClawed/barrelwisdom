@@ -32,7 +32,7 @@
           <br *ngIf="mon.isDX" /><span *ngIf="mon.isDX" class="badge bg-secondary">DX</span>
         </div>
         <a class="card-item-display" (click)="openModal(monsterModal, mon.slugname); $event.preventDefault();" href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">
-          <img loading="lazy" src="{{imgURL}}monsters/{{mon.slugname}}.png">
+          <img loading="lazy" src="{{imgURL}}monsters/{{mon.slugname}}.webp">
         </a>
         <button (click)="openModal(monsterModal, mon.slugname)" class="card-read-more-position" mat-mini-fab color="accent">
           <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>

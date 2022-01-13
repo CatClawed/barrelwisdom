@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.seoService.SEOSettings('','','The source for all things Atelier.','/media/blog/placeholder.png');
+    this.seoService.SEOSettings('','','The source for all things Atelier.','/media/blog/placeholder.webp');
     let url = this.location.path().split("/");
 
     if (url.length == 4) {

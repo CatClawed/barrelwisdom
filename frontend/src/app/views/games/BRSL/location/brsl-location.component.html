@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="!error">
+<ng-container *ngIf="!error">
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
@@ -25,9 +25,9 @@
   <h2 id="{{area.slug}}">{{area.name}}</h2>
   <img *ngIf="area.map" style="padding-bottom:1rem;" src="{{area.map}}">
   <table class="table border table-shrink">
-    <tr>
-      <th *ngIf="area.items"  style="width:50%;"class="table-dark-center">Items</th>
-      <th *ngIf="area.demons" style="width:50%;"class="table-dark-center">Demons</th>
+    <tr class="table-dark-center">
+      <th *ngIf="area.items"  style="width:50%;">Items</th>
+      <th *ngIf="area.demons" style="width:50%;">Demons</th>
     </tr>
     <tr>
       <td *ngIf="area.items">
@@ -43,4 +43,4 @@
     </tr>
   </table>
 </ng-container>
-</div>
+</ng-container>

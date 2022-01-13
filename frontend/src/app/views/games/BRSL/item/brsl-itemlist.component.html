@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="!error">
+<ng-container *ngIf="!error">
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
@@ -14,7 +14,7 @@
       <div class="row">
         <mat-form-field class="col-md-9" appearance="outline">
           <mat-label>Filter...</mat-label>
-          <input style="height: 100%;" matInput formControlName="filtertext">
+          <input matInput formControlName="filtertext">
         </mat-form-field>
         <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
       </div>
@@ -44,32 +44,23 @@
 <ng-container *ngIf="filteredItems">
 <div *ngFor="let item of filteredItems | async| pair " class="row">
   <div *ngFor="let item of item" class="spacer col-md-5 mx-auto">
-    <div *ngIf="item" class="card allheight">
-      <div class="card-body griddisplay" style="position:relative">
-        <div class="flex">
-          <h4 class="card-title card-icon-space">
-              <a style="color: black;" (click)="openModal(itemModal, item.slug); $event.preventDefault();" href="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>    
-          </h4>
-          <div *ngIf="item.isDLC" class="card-icon-position">
-            <span style="float:right;margin-right:0.5em;" class="badge bg-secondary">DLC</span>
-          </div>
-        </div>
-        <div class="card-item-display">
-            <a class="image-display" (click)="openModal(itemModal, item.slug); $event.preventDefault();" href="/{{gameURL}}/items/{{item.slug}}/{{language}}">
-              <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp">
-            </a>
-        </div>
-        <div style="padding-right:1rem;margin-right:1rem;" class="card-text">
-          <ul style="list-style-type:none;padding-left:0;">
-            <li *ngFor="let cat of item.category">{{cat.name}}</li>
-          </ul>
-          <button (click)="openModal(itemModal, item.slug)" class="card-read-more-position" mat-mini-fab color="accent">
-              <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
-           </button>
-        </div>
-      </div>
+    <div *ngIf="item" class="card card-body allheight">
+      <h4 class="card-title card-icon-space">
+        <a (click)="openModal(itemModal, item.slug); $event.preventDefault();" href="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>    
+      </h4>
+      <span *ngIf="item.isDLC" class="card-icon-position badge bg-secondary">DLC</span>
+      <a class="card-item-display" (click)="openModal(itemModal, item.slug); $event.preventDefault();" href="/{{gameURL}}/items/{{item.slug}}/{{language}}">
+        <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp">
+      </a>
+      <ul style="list-style-type:none;padding-left:0;">
+        <li *ngFor="let cat of item.category">{{cat.name}}</li>
+      </ul>
+      <button (click)="openModal(itemModal, item.slug)" class="card-read-more-position" mat-mini-fab color="accent">
+        <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+      </button>
     </div>
-  </div></div>
+  </div>
+</div>
 
 <ng-template #itemModal>
   <div class="modal-body">
@@ -80,4 +71,4 @@
   </div>
 </ng-template>
 </ng-container>
-</div>
+</ng-container>
