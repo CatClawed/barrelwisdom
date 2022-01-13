@@ -55,14 +55,11 @@
   </div>
 <div *ngFor="let props of filteredProperties | async| pair " class="row">
   <div *ngFor="let prop of props" class="spacer col-md-5 mx-auto">
-   <div *ngIf="prop">
-    <div class="card allheight">
-      <div class="card-body griddisplay">
-        <div class="flex">
-          <h4 class="card-title"><a style="color: black;" (click)="openModal(propertyModal, prop.slugname); $event.preventDefault();" href="/{{gameURL}}/properties/{{prop.slugname}}/{{language}}">{{prop.name}}</a></h4>
-          <div><b>PP: </b>{{prop.points}}</div>
-        </div>
-        <div class="card-text">
+    <div *ngIf="prop" style="justify-content:space-between;" class="card card-body allheight">
+      <div class="flex">
+        <h4 class="card-title"><a (click)="openModal(propertyModal, prop.slugname); $event.preventDefault();" href="/{{gameURL}}/properties/{{prop.slugname}}/{{language}}">{{prop.name}}</a></h4>
+        <b>PP {{prop.points}}</b>
+        <div>
           <p *ngIf="prop.combo1">
             <a href="/{{gameURL}}/properties/{{prop.combo1.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{prop.combo1.name}}</a> <span> x </span>
             <a href="/{{gameURL}}/properties/{{prop.combo2.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{prop.combo2.name}}</a>
@@ -77,23 +74,21 @@
               <li *ngIf="prop.item_set.length >= 3"><a href="/{{gameURL}}/items/{{prop.item_set[2].slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{prop.item_set[2].name}}</a></li>
               <li *ngIf="prop.item_set.length >= 4"><a (click)="openModal(propertyModal, prop.slugname); $event.preventDefault();" href="/{{gameURL}}/properties/{{prop.slugname}}/{{language}}">See more...</a></li>
             </ul>
-          <p *ngIf="prop.grade >= 0"><a href="javascript:void(0)"
-              tooltip="A measure of rarity. This number determines where properties appear." container="true">Grade:</a>
-            {{prop.grade}}
-          </p>
-        </div>
-        <div class="flex card-text bottom">
-          <div><i *ngIf="prop.bomb"      class="atelier atelier-escha-bomb"></i>     <i style="color: lightgray;" *ngIf="!prop.bomb"      class="atelier atelier-escha-bomb"></i></div>
-          <div><i *ngIf="prop.heal"      class="atelier atelier-escha-heal"></i>     <i style="color: lightgray;" *ngIf="!prop.heal"      class="atelier atelier-escha-heal"></i>     </div>
-          <div><i *ngIf="prop.buff"      class="atelier atelier-escha-buff"></i>     <i style="color: lightgray;" *ngIf="!prop.buff"      class="atelier atelier-escha-buff"></i>   </div>
-          <div><i *ngIf="prop.weapon"    class="atelier atelier-escha-weapon"></i>   <i style="color: lightgray;" *ngIf="!prop.weapon"    class="atelier atelier-escha-weapon"></i>     </div>
-          <div><i *ngIf="prop.armor"     class="atelier atelier-escha-armor"></i>    <i style="color: lightgray;" *ngIf="!prop.armor"     class="atelier atelier-escha-armor"></i>   </div>
-          <div><i *ngIf="prop.accessory" class="atelier atelier-escha-accessory"></i><i style="color: lightgray;" *ngIf="!prop.accessory" class="atelier atelier-escha-accessory"></i>    </div>
+          </div>
+          <p *ngIf="prop.grade"><a href="javascript:void(0)"
+            tooltip="A measure of rarity. This number determines where properties appear." container="true">Grade:</a>
+          {{prop.grade}}</p>
         </div>
       </div>
+        <div class="flex bottom">
+          <i class="trait-color{{prop.bomb}}      atelier atelier-np atelier-escha-bomb"></i>
+          <i class="trait-color{{prop.heal}}      atelier atelier-np atelier-escha-heal"></i>
+          <i class="trait-color{{prop.buff}}      atelier atelier-np atelier-escha-buff"></i>
+          <i class="trait-color{{prop.weapon}}    atelier atelier-np atelier-escha-weapon"></i>
+          <i class="trait-color{{prop.armor}}     atelier atelier-np atelier-escha-armor"></i>
+          <i class="trait-color{{prop.accessory}} atelier atelier-np atelier-escha-accessory"></i>
+        </div>
     </div>
-    </div>
-  </div>
 </div>
 
 <ng-template #propertyModal>

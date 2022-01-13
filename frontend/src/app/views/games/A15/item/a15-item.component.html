@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="item">
+<ng-container *ngIf="item">
 <nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
@@ -9,132 +9,128 @@
     <li class="breadcrumb-item active" aria-current="page">{{item.name}}</li>
   </ol>
 </nav>
-<div class="mx-auto row">
- <div class="{{colset}} card griddisplay card-body">
+<div class="mx-auto row spacer">
+  <div class="{{colset}} card card-body">
     <div class="flex">
-        <h4 class="card-title  card-icon-space">{{item.name}}</h4>
-        <div class="card-icon-position">
-          <b style="padding-right:0.5em;">LV {{item.level}}</b>
-        </div>
+      <h4 class="card-title card-icon-space">{{item.name}}</h4>
+      <b style="padding-right:0.5em;">LV {{item.level}}</b>
     </div>
     <div class="card-item-display">
-      <img class="image-display" loading="lazy" src="{{imgURL}}items/{{item.slugname}}.png">
+      <img loading="lazy" src="{{imgURL}}items/{{item.slugname}}.png">
     </div>
-    <div class="card-text">
-      <p>{{item.desc}}</p>
-      <p *ngIf="item.book_set"><b>Recipe Book: </b><a href="/{{gameURL}}/recipe-books/{{item.book_set[0].slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.book_set[0].name}}</a></p>
-      <p *ngIf="item.size"><b>Size: </b>{{item.size}}</p>
-      <div class="row" style="justify-content: space-between;margin: 0.5em;">
-          <table>
-            <tr *ngFor="let cat of item.categories">
-                <td style="text-align: center;"><i class="atelier atelier-{{cat.icon_name}}"></i></td><td><a href="/{{gameURL}}/categories/{{cat.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{cat.name}}</a></td>
-            </tr>
-          </table>
-          <table>
-            <tr>
-              <td colspan=2>
-                <i style="padding:0;color:#ac504f;" *ngIf="item.fire" class="atelier atelier-shallie-fire"></i>
-                <i style="padding:0;color:#427389;" *ngIf="item.water" class="atelier atelier-shallie-water"></i>
-                <i style="padding:0;color:#5a843c;" *ngIf="item.wind" class="atelier atelier-shallie-wind"></i>
-                <i style="padding:0;color:#8f7939;" *ngIf="item.earth" class="atelier atelier-shallie-earth"></i>
-                  {{item.evalue}}
-              </td>
-            </tr>
-          </table>
-      </div>
-      <b *ngIf="item.relic_set">Relic Locations:</b>
-      <ul *ngIf="item.relic_set">
-        <li *ngFor="let loc of item.relic_set"><a href="/{{gameURL}}/locations/{{loc.region.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{loc.region.name}}</a></li>
-      </ul>
-      <b *ngIf="item.disassembly_set">Disassembles to:</b>
-      <ul *ngIf="item.disassembly_set">
-        <li *ngFor="let it of item.disassembly_set[0].dis"><a href="/{{gameURL}}/items/{{it.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{it.name}}</a></li>
-      </ul>
-      <b *ngIf="item.disassembled_set">Disassembled from:</b>
-      <ul *ngIf="item.disassembled_set">
-        <li *ngFor="let it of item.disassembled_set[0].parent"><a href="/{{gameURL}}/items/{{it.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{it.name}}</a></li>
-      </ul>
-      <b *ngIf="item.locations">Locations:</b>
-      <ul *ngIf="item.locations">
-        <li *ngFor="let loc of item.locations"><a *ngIf="!loc.parentslug" href="/{{gameURL}}/locations/{{loc.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{loc.name}}</a><a *ngIf="loc.parentslug" href="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{loc.name}}</a></li>
-      </ul>
-      <b *ngIf="item.monsters">Monsters:</b>
-      <ul *ngIf="item.monsters">
-        <li *ngFor="let mon of item.monsters"><a href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{mon.name}}</a></li>
-      </ul>
-      <b *ngIf="item.properties">Properties:</b>
-      <ul *ngIf="item.properties">
-        <li *ngFor="let prop of item.properties"><a href="/{{gameURL}}/properties/{{prop.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{prop.name}}</a></li>
-      </ul>
-      <table *ngIf="item.ingredient_set" class="table">
-        <tr><th style="text-align: center;background-color:rgba(211, 211, 211, 0.3);">Ingredients</th></tr>
-        <tr><td>
-          <ul>
-           <li *ngFor="let ing of item.ingredient_set"><a *ngIf="ing.item" href="/{{gameURL}}/items/{{ing.item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{ing.item.name}}</a><a *ngIf="ing.category" href="/{{gameURL}}/categories/{{ing.category.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{ing.category.name}}</a></li>
-          </ul>
-        </td></tr>
+    <p>{{item.desc}}</p>
+    <p *ngIf="item.book_set"><b>Recipe Book: </b><a href="/{{gameURL}}/recipe-books/{{item.book_set[0].slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.book_set[0].name}}</a></p>
+    <p *ngIf="item.size"><b>Size: </b>{{item.size}}</p>
+    <div class="flex">
+      <table class="table-item-data">
+        <tr *ngFor="let cat of item.categories">
+            <td><i class="atelier atelier-{{cat.icon_name}}"></i></td><td><a href="/{{gameURL}}/categories/{{cat.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{cat.name}}</a></td>
+        </tr>
       </table>
-        <table *ngIf="item.effectline_set" class="table">
-          <tr><th colspan=2 style="text-align: center;background-color:rgba(211, 211, 211, 0.3);">Effects</th></tr>
-          <tr *ngIf="fire">
-            <td style="vertical-align:middle"><i style="padding:0;color:#ac504f;"  class="atelier atelier-shallie-fire"></i></td>
-            <td>
-              <ng-container *ngFor="let eff of item.effectline_set">
-                <a *ngIf="eff.elem == 'fire'" href="/{{gameURL}}/effects/{{eff.effect.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{eff.effect.name}}</a><span *ngIf="eff.elem == 'fire'"> ({{eff.min_elem}}-{{eff.max_elem}})</span>
-                <div *ngIf="eff.elem == 'fire'" class="effect-bar">
-                  <div class="elemental-bar" style="background:#ac504f;left:{{eff.min_elem}}%;width:{{eff.max_elem-eff.min_elem}}%;"></div>
-                </div>
-              </ng-container>
-            </td>
-          </tr>
-          <tr *ngIf="water">
-            <td style="vertical-align:middle"><i style="padding:0;color:#427389;" class="atelier atelier-shallie-water"></i></td>
-            <td>
-              <ng-container *ngFor="let eff of item.effectline_set">
-                <a *ngIf="eff.elem == 'water'" href="/{{gameURL}}/effects/{{eff.effect.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{eff.effect.name}}</a><span *ngIf="eff.elem == 'water'"> ({{eff.min_elem}}-{{eff.max_elem}})</span>
-                <div *ngIf="eff.elem == 'water'" class='effect-bar'>
-                  <div class="elemental-bar" style="background:#427389;left:{{eff.min_elem}}%;width:{{eff.max_elem-eff.min_elem}}%;"></div>
-                </div>
-              </ng-container>
-            </td>
-          </tr>
-          <tr *ngIf="wind">
-            <td style="vertical-align:middle"><i style="padding:0;color:#5a843c;"  class="atelier atelier-shallie-wind"></i></td>
-            <td>
-              <ng-container *ngFor="let eff of item.effectline_set">
-                <a *ngIf="eff.elem == 'wind'" href="/{{gameURL}}/effects/{{eff.effect.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{eff.effect.name}}</a><span *ngIf="eff.elem == 'wind'"> ({{eff.min_elem}}-{{eff.max_elem}})</span>
-                <div *ngIf="eff.elem == 'wind'" class='effect-bar'>
-                  <div class="elemental-bar" style="background:#5a843c;left:{{eff.min_elem}}%;width:{{eff.max_elem-eff.min_elem}}%;"></div>
-                </div>
-              </ng-container>
-            </td>
-          </tr>
-          <tr *ngIf="earth">
-            <td style="vertical-align:middle"><i style="padding:0;color:#8f7939;" class="atelier atelier-shallie-earth"></i></td>
-            <td>
-              <ng-container *ngFor="let eff of item.effectline_set">
-                <a *ngIf="eff.elem == 'earth'" href="/{{gameURL}}/effects/{{eff.effect.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{eff.effect.name}}</a><span *ngIf="eff.elem == 'earth'"> ({{eff.min_elem}}-{{eff.max_elem}})</span>
-                <div *ngIf="eff.elem == 'earth'" class='effect-bar'>
-                  <div class="elemental-bar" style="background:#8f7939;left:{{eff.min_elem}}%;width:{{eff.max_elem-eff.min_elem}}%;"></div>
-                </div>
-              </ng-container>
-            </td>
-          </tr>
-        </table>
-        <table *ngIf="item.equip_set" class="table">
-          <tr><th colspan=4 style="text-align: center;background-color:rgba(211, 211, 211, 0.3);">Stats</th></tr>
-          <tr><td style="padding-top:0.2rem;width:25%;"><b>HP </b></td> <td style="padding-top:0.2rem;padding-left:0.5em;width:25%">{{item.equip_set[0].hp}}   </td><td style="padding-top:0.2rem;padding-left:0;width:25%"><i style="color:#ac504f;" class="atelier atelier-shallie-fire"></i></td>  <td style="padding-top:0.2rem;padding-left:0;width:25%%;">{{item.equip_set[0].fire}}</td></tr>
-          <tr><td style="border-top:transparent;padding-top:0;width:25%;"><b>MP </b></td> <td style="border-top:transparent;padding-top:0;padding-left:0.5em;width:25%">{{item.equip_set[0].mp}}   </td><td style="border-top:transparent;padding:0;width:25%"><i style="color:#427389;" class="atelier atelier-shallie-water"></i></td> <td style="border-top:transparent;padding:0;width:25%%;">{{item.equip_set[0].water}}</td></tr>
-          <tr><td style="border-top:transparent;padding-top:0;width:25%;"><b>ATK </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;width:25%">{{item.equip_set[0].atk}}  </td><td style="border-top:transparent;padding:0;width:25%"><i style="color:#5a843c;" class="atelier atelier-shallie-wind"></i></td>  <td style="border-top:transparent;padding:0;width:25%%;">{{item.equip_set[0].wind}}</td></tr>
-          <tr><td style="border-top:transparent;padding-top:0;width:25%;"><b>DEF </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;width:25%">{{item.equip_set[0].defen}}</td><td style="border-top:transparent;padding:0;width:25%"><i style="color:#8f7939;" class="atelier atelier-shallie-earth"></i></td> <td style="border-top:transparent;padding:0;width:25%%;">{{item.equip_set[0].earth}}</td></tr>
-          <tr><td style="border-top:transparent;padding-top:0;width:25%;"><b>SPD </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;width:25%">{{item.equip_set[0].spd}}  </td></tr>
-        </table>
-        <table *ngIf="item.characterequip_set" class="table">
-          <tr><th style="text-align: center;background-color:rgba(211, 211, 211, 0.3);">Characters</th></tr>
-          <tr><td><img *ngFor="let char of item.characterequip_set[0].chars" src="{{imgURL}}equip/equip-{{char.name}}.png"></td></tr>
-        </table>
-     </div>
+      <table class="table-item-data">
+        <tr>
+          <td colspan=2>
+            <i style="color:#ac504f;" *ngIf="item.fire"  class="atelier atelier-np atelier-shallie-fire"></i>
+            <i style="color:#427389;" *ngIf="item.water" class="atelier atelier-np atelier-shallie-water"></i>
+            <i style="color:#5a843c;" *ngIf="item.wind"  class="atelier atelier-np atelier-shallie-wind"></i>
+            <i style="color:#8f7939;" *ngIf="item.earth" class="atelier atelier-np atelier-shallie-earth"></i>
+            <span>{{item.evalue}}</span>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <b *ngIf="item.relic_set">Relic Locations:</b>
+    <ul *ngIf="item.relic_set">
+      <li *ngFor="let loc of item.relic_set"><a href="/{{gameURL}}/locations/{{loc.region.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{loc.region.name}}</a></li>
+    </ul>
+    <b *ngIf="item.disassembly_set">Disassembles to:</b>
+    <ul *ngIf="item.disassembly_set">
+      <li *ngFor="let it of item.disassembly_set[0].dis"><a href="/{{gameURL}}/items/{{it.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{it.name}}</a></li>
+    </ul>
+    <b *ngIf="item.disassembled_set">Disassembled from:</b>
+    <ul *ngIf="item.disassembled_set">
+      <li *ngFor="let it of item.disassembled_set[0].parent"><a href="/{{gameURL}}/items/{{it.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{it.name}}</a></li>
+    </ul>
+    <b *ngIf="item.locations">Locations:</b>
+    <ul *ngIf="item.locations">
+      <li *ngFor="let loc of item.locations"><a *ngIf="!loc.parentslug" href="/{{gameURL}}/locations/{{loc.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{loc.name}}</a><a *ngIf="loc.parentslug" href="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{loc.name}}</a></li>
+    </ul>
+    <b *ngIf="item.monsters">Monsters:</b>
+    <ul *ngIf="item.monsters">
+      <li *ngFor="let mon of item.monsters"><a href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{mon.name}}</a></li>
+    </ul>
+    <b *ngIf="item.properties">Properties:</b>
+    <ul *ngIf="item.properties">
+      <li *ngFor="let prop of item.properties"><a href="/{{gameURL}}/properties/{{prop.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{prop.name}}</a></li>
+    </ul>
+    <table *ngIf="item.ingredient_set" class="table">
+      <tr class="table-dark-center"><th>Ingredients</th></tr>
+      <tr><td>
+        <ul>
+         <li *ngFor="let ing of item.ingredient_set"><a *ngIf="ing.item" href="/{{gameURL}}/items/{{ing.item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{ing.item.name}}</a><a *ngIf="ing.category" href="/{{gameURL}}/categories/{{ing.category.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{ing.category.name}}</a></li>
+        </ul>
+      </td></tr>
+    </table>
+    <table *ngIf="item.effectline_set" class="table">
+      <tr class="table-dark-center"><th colspan=2>Effects</th></tr>
+      <tr *ngIf="fire">
+        <td style="vertical-align:middle"><i style="color:#ac504f;" class="atelier atelier-np atelier-shallie-fire"></i></td>
+        <td>
+          <ng-container *ngFor="let eff of item.effectline_set">
+            <a *ngIf="eff.elem == 'fire'" href="/{{gameURL}}/effects/{{eff.effect.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{eff.effect.name}}</a><span *ngIf="eff.elem == 'fire'"> ({{eff.min_elem}}-{{eff.max_elem}})</span>
+            <div *ngIf="eff.elem == 'fire'" class="effect-bar">
+              <div class="elemental-bar" style="background:#ac504f;left:{{eff.min_elem}}%;width:{{eff.max_elem-eff.min_elem}}%;"></div>
+            </div>
+          </ng-container>
+        </td>
+      </tr>
+      <tr *ngIf="water">
+        <td style="vertical-align:middle"><i style="color:#427389;" class="atelier atelier-np atelier-shallie-water"></i></td>
+        <td>
+          <ng-container *ngFor="let eff of item.effectline_set">
+            <a *ngIf="eff.elem == 'water'" href="/{{gameURL}}/effects/{{eff.effect.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{eff.effect.name}}</a><span *ngIf="eff.elem == 'water'"> ({{eff.min_elem}}-{{eff.max_elem}})</span>
+            <div *ngIf="eff.elem == 'water'" class='effect-bar'>
+              <div class="elemental-bar" style="background:#427389;left:{{eff.min_elem}}%;width:{{eff.max_elem-eff.min_elem}}%;"></div>
+            </div>
+          </ng-container>
+        </td>
+      </tr>
+      <tr *ngIf="wind">
+        <td style="vertical-align:middle"><i style="color:#5a843c;"  class="atelier atelier-np atelier-shallie-wind"></i></td>
+        <td>
+          <ng-container *ngFor="let eff of item.effectline_set">
+            <a *ngIf="eff.elem == 'wind'" href="/{{gameURL}}/effects/{{eff.effect.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{eff.effect.name}}</a><span *ngIf="eff.elem == 'wind'"> ({{eff.min_elem}}-{{eff.max_elem}})</span>
+            <div *ngIf="eff.elem == 'wind'" class='effect-bar'>
+              <div class="elemental-bar" style="background:#5a843c;left:{{eff.min_elem}}%;width:{{eff.max_elem-eff.min_elem}}%;"></div>
+            </div>
+          </ng-container>
+        </td>
+      </tr>
+      <tr *ngIf="earth">
+        <td style="vertical-align:middle"><i style="color:#8f7939;" class="atelier atelier-np atelier-shallie-earth"></i></td>
+        <td>
+          <ng-container *ngFor="let eff of item.effectline_set">
+            <a *ngIf="eff.elem == 'earth'" href="/{{gameURL}}/effects/{{eff.effect.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{eff.effect.name}}</a><span *ngIf="eff.elem == 'earth'"> ({{eff.min_elem}}-{{eff.max_elem}})</span>
+            <div *ngIf="eff.elem == 'earth'" class='effect-bar'>
+              <div class="elemental-bar" style="background:#8f7939;left:{{eff.min_elem}}%;width:{{eff.max_elem-eff.min_elem}}%;"></div>
+            </div>
+          </ng-container>
+        </td>
+      </tr>
+    </table>
+    <table *ngIf="item.equip_set" class="table">
+      <tr class="table-dark-center"><th colspan=4>Stats</th></tr>
+      <tr><td style="padding-top:0.2rem;padding-bottom:0;width:25%;"><b>HP </b></td> <td style="padding-top:0.2rem;padding-left:0;padding-bottom:0;width:25%">{{item.equip_set[0].hp}}   </td><td style="padding-top:0.2rem;padding-left:0;padding-bottom:0;width:25%"><i style="color:#ac504f;" class="atelier atelier-shallie-fire"></i></td>  <td style="padding-top:0.2rem;padding-left:0;padding-bottom:0;width:25%%;">{{item.equip_set[0].fire}}</td></tr>
+      <tr><td style="border-top:transparent;padding-bottom:0;padding-top:0;width:25%;"><b>MP </b></td> <td style="border-top:transparent;padding:0;width:25%">{{item.equip_set[0].mp}}   </td><td style="border-top:transparent;padding:0;width:25%"><i style="color:#427389;" class="atelier atelier-shallie-water"></i></td> <td style="border-top:transparent;padding:0;width:25%%;">{{item.equip_set[0].water}}</td></tr>
+      <tr><td style="border-top:transparent;padding-bottom:0;padding-top:0;width:25%;"><b>ATK </b></td><td style="border-top:transparent;padding:0;width:25%">{{item.equip_set[0].atk}}  </td><td style="border-top:transparent;padding:0;width:25%"><i style="color:#5a843c;" class="atelier atelier-shallie-wind"></i></td>  <td style="border-top:transparent;padding:0;width:25%%;">{{item.equip_set[0].wind}}</td></tr>
+      <tr><td style="border-top:transparent;padding-bottom:0;padding-top:0;width:25%;"><b>DEF </b></td><td style="border-top:transparent;padding:0;width:25%">{{item.equip_set[0].defen}}</td><td style="border-top:transparent;padding:0;width:25%"><i style="color:#8f7939;" class="atelier atelier-shallie-earth"></i></td> <td style="border-top:transparent;padding:0;width:25%%;">{{item.equip_set[0].earth}}</td></tr>
+      <tr><td style="border-top:transparent;padding-bottom:0;padding-top:0;width:25%;"><b>SPD </b></td><td style="border-top:transparent;padding:0;width:25%">{{item.equip_set[0].spd}}  </td></tr>
+    </table>
+    <table *ngIf="item.characterequip_set" class="table">
+      <tr class="table-dark-center"><th>Characters</th></tr>
+      <tr><td><img *ngFor="let char of item.characterequip_set[0].chars" src="{{imgURL}}equip/equip-{{char.name}}.png"></td></tr>
+    </table>
   </div>
   <language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
- </div>
 </div>
+</ng-container>

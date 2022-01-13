@@ -45,8 +45,33 @@ class A15MonsterLevelSerializer(serializers.ModelSerializer):
             return obj.mon_ja.name
         else:
             return obj.mon_en.name
+        
+class A15MonsterSimpleSerializer(serializers.ModelSerializer):
+    name = serializers.SerializerMethodField()
+    race = serializers.SerializerMethodField()
+    class Meta:
+        model = Monster
+        fields = ['slugname', 'name', 'race', 'isDLC', 'isDX', 'isStrong']
+    def to_representation(self, instance):
+        result = super(A15MonsterSimpleSerializer, self).to_representation(instance)
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', {}])
+    def get_name(self,obj):
+        if 'language' not in self.context:
+            return obj.mon_en.name
+        if self.context['language'] == 'ja':
+            return obj.mon_ja.name
+        else:
+            return obj.mon_en.name
+    def get_race(self,obj):
+        if 'language' not in self.context:
+            return obj.mon_en.race
+        if self.context['language'] == 'ja':
+            return obj.mon_ja.race
+        else:
+            return obj.mon_en.race
 
-class A15MonsterSerializer(serializers.ModelSerializer):
+class A15MonsterSerializer(serializers.ModelSerializer): 
     name = serializers.SerializerMethodField()
     desc = serializers.SerializerMethodField()
     race = serializers.SerializerMethodField()

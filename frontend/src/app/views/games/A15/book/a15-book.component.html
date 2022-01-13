@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="book">
+<ng-container *ngIf="book">
 <nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
@@ -9,21 +9,19 @@
     <li class="breadcrumb-item active" aria-current="page">{{book.name}}</li>
   </ol>
 </nav>
-<div class="mx-auto row">
- <div class="{{colset}} card griddisplay card-body">
-    <div class="flex">
-        <h4 class="card-title  card-icon-space">{{book.name}}</h4>
+<div class="mx-auto row spacer">
+  <div class="{{colset}} card card-body">
+    <h4 class="card-title  card-icon-space">{{book.name}}</h4>
+    <div class="card-item-display">
+      <img loading="lazy" src="{{imgURL}}items/{{book.slugname}}.png">
     </div>
-    <div class="card-text">
-        <img class="image-display" loading="lazy" src="{{imgURL}}items/{{book.slugname}}.png">
-        <p *ngIf="book.desc">{{book.desc}}</p>
-        <p><b>Acquisition: </b>{{book.acquisition}}</p>
-        <b>Items:</b>
-        <ul>
-          <li *ngFor="let item of book.items"><a href="/{{gameURL}}/items/{{item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.name}}</a></li>
-        </ul>
-     </div>
+    <p *ngIf="book.desc">{{book.desc}}</p>
+    <p><b>Acquisition: </b>{{book.acquisition}}</p>
+    <b>Items:</b>
+    <ul>
+      <li *ngFor="let item of book.items"><a href="/{{gameURL}}/items/{{item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.name}}</a></li>
+    </ul>
   </div>
   <language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
  </div>
-</div>
+</ng-container>

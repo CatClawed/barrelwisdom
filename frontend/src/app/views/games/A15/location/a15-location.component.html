@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="!error">
+<ng-container *ngIf="!error">
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
@@ -28,10 +28,10 @@
 <p *ngIf="location.grade"><b>Grade Values from Relic Farming:</b> {{location.grade}}</p>
 
 <table class="table border table-shrink">
-  <tr>
-    <th class="table-dark-center">Relic</th>
-    <th class="table-dark-center">Disassembly</th>
-    <th class="table-dark-center">Area</th>
+  <tr class="table-dark-center">
+    <th>Relic</th>
+    <th>Disassembly</th>
+    <th>Area</th>
   </tr>
   <tr *ngFor="let relic of location.relic_set">
     <td><a href="/{{gameURL}}/items/{{relic.item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{relic.item.name}}</a></td>
@@ -41,8 +41,8 @@
 </table>
 
 <table class="table border table-shrink">
-  <tr>
-    <th class="table-dark-center">Strong Monsters</th>
+  <tr class="table-dark-center">
+    <th>Strong Monsters</th>
   </tr>
   <tr>
     <td>
@@ -62,10 +62,10 @@
   <h3 *ngIf="area.subarea">{{area.subarea}}</h3>
   <div [innerHTML]="area.note"></div>
   <table class="table border table-shrink">
-    <tr>
-      <th *ngIf="area.items" class="table-dark-center">Items</th>
-      <th *ngIf="area.monsters" class="table-dark-center">Monsters</th>
-      <th *ngIf="area.fieldevent" class="table-dark-center">Field Effects</th>
+    <tr class="table-dark-center">
+      <th *ngIf="area.items" >Items</th>
+      <th *ngIf="area.monsters">Monsters</th>
+      <th *ngIf="area.fieldevent">Field Effects</th>
     </tr>
     <tr>
       <td *ngIf="area.items">
@@ -88,4 +88,4 @@
     </tr>
   </table>
 </ng-container>
-</div>
+</ng-container>

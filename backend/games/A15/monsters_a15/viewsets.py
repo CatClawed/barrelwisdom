@@ -1,6 +1,6 @@
 from rest_framework import viewsets, filters
 from games.A15.monsters_a15.models import Monster
-from games.A15.monsters_a15.serializers import A15MonsterSerializer, A15MonsterLevelSerializer
+from games.A15.monsters_a15.serializers import A15MonsterSerializer, A15MonsterSimpleSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
@@ -21,7 +21,7 @@ class A15MonsterViewSet(viewsets.ModelViewSet):
                 'mon_en'
             )
         )
-        serializer = A15MonsterLevelSerializer(queryset, many=True, context={'language': 'en'})
+        serializer = A15MonsterSimpleSerializer(queryset, many=True, context={'language': 'en'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -32,7 +32,7 @@ class A15MonsterViewSet(viewsets.ModelViewSet):
                 'mon_ja'
             )
         )
-        serializer = A15MonsterLevelSerializer(queryset, many=True, context={'language': 'ja'})
+        serializer = A15MonsterSimpleSerializer(queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)
 
     # allows easy access via catect/slugname/en
