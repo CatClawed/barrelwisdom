@@ -45,7 +45,7 @@
           <p *ngIf="facility.size==3">Large </p>
           <p *ngIf="facility.size>3" >Other </p>
           -->
-          <button (click)="openModal(facilityModal, facility.slug)" style="box-shadow: none;" class="card-read-more-position" mat-mini-fab color="accent">
+          <button (click)="openModal(facilityModal, facility.slug)" class="card-read-more-position" mat-mini-fab color="accent">
               <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
            </button>
         </div>

@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="item">
+<ng-container *ngIf="item">
 <nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
@@ -10,45 +10,39 @@
   </ol>
 </nav>
 <div class="mx-auto row">
- <div class="{{colset}} card griddisplay card-body">
-    <div class="flex">
-        <h4 class="card-title  card-icon-space">{{item.name}}</h4>
-        <div class="card-icon-position">
-          <b style="padding-right:0.5em;">LV {{item.level}}</b>
-        </div>
+  <div class="{{colset}} card card-body">
+    <h4 class="card-title card-icon-space">{{item.name}}</h4>
+    <div class="card-icon-position">
+      <b>LV {{item.level}}</b>
     </div>
     <div class="card-item-display">
-      <img class="image-display" loading="lazy" src="{{imgURL}}items/{{item.slugname}}.png">
+      <img loading="lazy" src="{{imgURL}}items/{{item.slugname}}.png">
     </div>
-    <div class="card-text">
       <p>{{item.desc}}</p>
       <p *ngIf="item.book_set"><b>Recipe Book: </b><a href="/{{gameURL}}/recipe-books/{{item.book_set[0].slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.book_set[0].name}}</a></p>
       <p *ngIf="item.size"><b>Size: </b>{{item.size}}</p>
-      <div class="row" style="justify-content: space-between;margin: 0.5em;">
-          <table>
-            <tr *ngFor="let cat of item.categories">
-                <td style="text-align: center;"><i class="atelier atelier-{{cat.icon_name}}"></i></td><td><a href="/{{gameURL}}/categories/{{cat.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{cat.name}}</a></td>
-            </tr>
-          </table>
-          <table>
-            <tr>
-              <td colspan=2>
-                <i style="padding:0;color:#ac504f;" *ngIf="item.fire" class="atelier atelier-shallie-fire"></i>
-                <i style="padding:0;color:#427389;" *ngIf="item.water" class="atelier atelier-shallie-water"></i>
-                <i style="padding:0;color:#5a843c;" *ngIf="item.wind" class="atelier atelier-shallie-wind"></i>
-                <i style="padding:0;color:#8f7939;" *ngIf="item.earth" class="atelier atelier-shallie-earth"></i>
-                  {{item.evalue}}
-              </td>
-            </tr>
-            <tr>
-              <td *ngIf="item.slots > 0" colspan=2>
-                <img *ngIf="item.slots > 0" src="{{imgURL}}slot.png">
-                <img *ngIf="item.slots > 1" src="{{imgURL}}slot.png">
-                <img *ngIf="item.slots > 2" src="{{imgURL}}slot.png">
-                <img *ngIf="item.slots > 3" src="{{imgURL}}slot.png">
-              </td>
-            </tr>
-          </table>
+      <div class="flex">
+        <table class="table-item-data">
+          <tr *ngFor="let cat of item.categories">
+              <td><i class="atelier atelier-{{cat.icon_name}}"></i></td><td><a href="/{{gameURL}}/categories/{{cat.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{cat.name}}</a></td>
+          </tr>
+        </table>
+        <table class="table-item-data">
+          <tr>
+            <td colspan=2>
+              <i style="color:#ac504f;" *ngIf="item.fire"  class="atelier atelier-np atelier-shallie-fire"></i>
+              <i style="color:#427389;" *ngIf="item.water" class="atelier atelier-np atelier-shallie-water"></i>
+              <i style="color:#5a843c;" *ngIf="item.wind"  class="atelier atelier-np atelier-shallie-wind"></i>
+              <i style="color:#8f7939;" *ngIf="item.earth" class="atelier atelier-np atelier-shallie-earth"></i>
+              <span>{{item.evalue}}</span>
+            </td>
+          </tr>
+          <tr *ngIf="item.slots > 0">
+            <td colspan=2>
+              <img *ngFor="let item of [].constructor(item.slots);" src="{{imgURL}}slot.png">
+            </td>
+          </tr>
+        </table>
       </div>
       <b *ngIf="item.disassembly_set">Disassembles to:</b>
       <ul *ngIf="item.disassembly_set">
@@ -71,7 +65,7 @@
         <li *ngFor="let prop of item.properties"><a href="/{{gameURL}}/properties/{{prop.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{prop.name}}</a></li>
       </ul>
       <table *ngIf="item.ingredient_set" class="table">
-        <tr><th style="text-align: center;background-color:rgba(211, 211, 211, 0.3);">Ingredients</th></tr>
+        <tr  class="table-dark-center"><th>Ingredients</th></tr>
         <tr><td>
           <ul>
            <li *ngFor="let ing of item.ingredient_set"><a *ngIf="ing.item" href="/{{gameURL}}/items/{{ing.item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{ing.item.name}}</a><a *ngIf="ing.category" href="/{{gameURL}}/categories/{{ing.category.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{ing.category.name}}</a></li>
@@ -79,17 +73,17 @@
         </td></tr>
       </table>
         <table *ngIf="item.effectlines_set" class="table">
-          <tr><th colspan=2 style="text-align: center;background-color:rgba(211, 211, 211, 0.3);">Effects</th></tr>
+          <tr  class="table-dark-center"><th colspan=2>Effects</th></tr>
           <tr *ngFor="let effline of item.effectlines_set">
            <td style="vertical-align:middle">
-             <i *ngIf="effline.elem == 'fire'  && !effline.hidden" style="padding:0;color:#ac504f;"  class="atelier atelier-shallie-fire"></i>
-             <i *ngIf="effline.elem == 'fire'  &&  effline.hidden" style="padding:0;color:gray;"     class="atelier atelier-shallie-fire"></i>
-             <i *ngIf="effline.elem == 'water' && !effline.hidden" style="padding:0;color:#427389;"  class="atelier atelier-shallie-water"></i>
-             <i *ngIf="effline.elem == 'water' &&  effline.hidden" style="padding:0;color:gray;"     class="atelier atelier-shallie-water"></i>
-             <i *ngIf="effline.elem == 'wind'  && !effline.hidden" style="padding:0;color:#5a843c;"  class="atelier atelier-shallie-wind"></i>
-             <i *ngIf="effline.elem == 'wind'  &&  effline.hidden" style="padding:0;color:gray;"     class="atelier atelier-shallie-wind"></i>
-             <i *ngIf="effline.elem == 'earth' && !effline.hidden" style="padding:0;color:#8f7939;"  class="atelier atelier-shallie-earth"></i>
-             <i *ngIf="effline.elem == 'earth' &&  effline.hidden" style="padding:0;color:gray;"     class="atelier atelier-shallie-earth"></i>
+             <i *ngIf="effline.elem == 'fire'  && !effline.hidden" style="color:#ac504f;"  class="atelier atelier-np atelier-shallie-fire"></i>
+             <i *ngIf="effline.elem == 'fire'  &&  effline.hidden" style="color:gray;"     class="atelier atelier-np atelier-shallie-fire"></i>
+             <i *ngIf="effline.elem == 'water' && !effline.hidden" style="color:#427389;"  class="atelier atelier-np atelier-shallie-water"></i>
+             <i *ngIf="effline.elem == 'water' &&  effline.hidden" style="color:gray;"     class="atelier atelier-np atelier-shallie-water"></i>
+             <i *ngIf="effline.elem == 'wind'  && !effline.hidden" style="color:#5a843c;"  class="atelier atelier-np atelier-shallie-wind"></i>
+             <i *ngIf="effline.elem == 'wind'  &&  effline.hidden" style="color:gray;"     class="atelier atelier-np atelier-shallie-wind"></i>
+             <i *ngIf="effline.elem == 'earth' && !effline.hidden" style="color:#8f7939;"  class="atelier atelier-np atelier-shallie-earth"></i>
+             <i *ngIf="effline.elem == 'earth' &&  effline.hidden" style="color:gray;"     class="atelier atelier-np atelier-shallie-earth"></i>
            </td>
            <td>
              <ng-container *ngFor="let eff of effline.effects">
@@ -105,7 +99,7 @@
           </tr>
         </table>
         <table *ngIf="item.equip_set" class="table">
-          <tr><th colspan=2 style="text-align: center;background-color:rgba(211, 211, 211, 0.3);">Stats</th></tr>
+          <tr class="table-dark-center"><th colspan=2>Stats</th></tr>
           <tr><td style="padding-top:0.2rem;text-align:right;width:50%;"><b>HP </b></td> <td style="padding-top:0.2rem;padding-left:0.5em;">{{item.equip_set[0].hp}}   </td></tr>
           <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>MP </b></td> <td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].mp}}   </td></tr>
           <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>ATK </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].atk}}  </td></tr>
@@ -113,11 +107,10 @@
           <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>SPD </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].spd}}  </td></tr>
         </table>
         <table *ngIf="item.characterequip_set" class="table">
-          <tr><th style="text-align: center;background-color:rgba(211, 211, 211, 0.3);">Characters</th></tr>
+          <tr class="table-dark-center"><th>Characters</th></tr>
           <tr><td><img *ngFor="let char of item.characterequip_set[0].chars" src="{{imgURL}}equip/equip-{{char.name}}.png"></td></tr>
         </table>
-     </div>
   </div>
   <language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
  </div>
-</div>
+</ng-container>

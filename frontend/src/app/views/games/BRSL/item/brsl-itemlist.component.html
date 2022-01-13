@@ -63,7 +63,7 @@
           <ul style="list-style-type:none;padding-left:0;">
             <li *ngFor="let cat of item.category">{{cat.name}}</li>
           </ul>
-          <button (click)="openModal(itemModal, item.slug)" style="box-shadow: none;" class="card-read-more-position" mat-mini-fab color="accent">
+          <button (click)="openModal(itemModal, item.slug)" class="card-read-more-position" mat-mini-fab color="accent">
               <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
            </button>
         </div>

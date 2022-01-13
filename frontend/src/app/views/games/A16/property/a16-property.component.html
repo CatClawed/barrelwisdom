@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="property">
+<ng-container *ngIf="property">
 <nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
@@ -9,37 +9,36 @@
     <li class="breadcrumb-item active" aria-current="page">{{property.name}}</li>
   </ol>
 </nav>
-<div class="mx-auto row">
-<div style="margin-top: 1em;" class="{{colset}} card griddisplay card-body">
+<div class="mx-auto row spacer">
+  <div class="{{colset}} card card-body">
     <div class="flex">
       <h4 class="card-title">{{property.name}}</h4>
-      <div><b>PP: </b>{{property.points}}</div>
+      <b>PP {{property.points}}</b>
     </div>
-    <div class="card-text">
-      <p *ngIf="property.combo1">
-        <a href="/{{gameURL}}/properties/{{property.combo1.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{property.combo1.name}}</a>
-        <span *ngIf="property.combo2"> x </span><a *ngIf="property.combo2" href="/{{gameURL}}/properties/{{property.combo2.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{property.combo2.name}}</a>
-        <span *ngIf="property.combo3"> x </span><a *ngIf="property.combo3" href="/{{gameURL}}/properties/{{property.combo3.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{property.combo3.name}}</a>
+    <p *ngIf="property.combo1">
+      <a href="/{{gameURL}}/properties/{{property.combo1.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{property.combo1.name}}</a>
+      <span *ngIf="property.combo2"> x </span><a *ngIf="property.combo2" href="/{{gameURL}}/properties/{{property.combo2.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{property.combo2.name}}</a>
+      <span *ngIf="property.combo3"> x </span><a *ngIf="property.combo3" href="/{{gameURL}}/properties/{{property.combo3.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{property.combo3.name}}</a>
+    </p>
+    <p>{{property.desc}}</p>
+    <ng-container *ngIf="property.item_set">
+      <b>Items:</b>
+      <ul>
+        <li *ngFor="let item of property.item_set"><a href="/{{gameURL}}/items/{{item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.name}}</a></li>
+      </ul>
+    </ng-container>
+    <p *ngIf="property.grade != -1"><a href="javascript:void(0)"
+          tooltip="A measure of rarity. This number determines where properties appear." container="true">Grade:</a>
+        {{property.grade}}
       </p>
-      <p>{{property.desc}}</p>
-      <div *ngIf="property.item_set">
-        <b>Items:</b>
-          <ul>
-            <li *ngFor="let item of property.item_set"><a href="/{{gameURL}}/items/{{item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.name}}</a></li>
-          </ul>
-      </div>
-      <p *ngIf="property.grade != -1"><a href="javascript:void(0)"
-            tooltip="A measure of rarity. This number determines where properties appear." container="true">Grade:</a>
-          {{property.grade}}
-        </p>
-      <div class="flex card-text bottom">
-        <div><i *ngIf="property.bomb"      class="atelier atelier-escha-bomb"></i>     <i style="color: lightgray;" *ngIf="!property.bomb"      class="atelier atelier-escha-bomb"></i></div>
-        <div><i *ngIf="property.heal"      class="atelier atelier-escha-heal"></i>     <i style="color: lightgray;" *ngIf="!property.heal"      class="atelier atelier-escha-heal"></i>     </div>
-        <div><i *ngIf="property.weapon"   class="atelier atelier-escha-weapon"></i>   <i style="color: lightgray;" *ngIf="!property.weapon"    class="atelier atelier-escha-weapon"></i>     </div>
-        <div><i *ngIf="property.armor"     class="atelier atelier-escha-armor"></i>    <i style="color: lightgray;" *ngIf="!property.armor"     class="atelier atelier-escha-armor"></i>   </div>
-        <div><i *ngIf="property.accessory" class="atelier atelier-escha-accessory"></i><i style="color: lightgray;" *ngIf="!property.accessory" class="atelier atelier-escha-accessory"></i>    </div>
-      </div>
+    <div class="flex bottom">
+      <i class="trait-color{{property.bomb}}      atelier atelier-np atelier-escha-bomb"></i>
+      <i class="trait-color{{property.heal}}      atelier atelier-np atelier-escha-heal"></i>
+      <i class="trait-color{{property.weapon}}    atelier atelier-np atelier-escha-weapon"></i>
+      <i class="trait-color{{property.armor}}     atelier atelier-np atelier-escha-armor"></i>
+      <i class="trait-color{{property.accessory}} atelier atelier-np atelier-escha-accessory"></i>
     </div>
+  </div>
+  <language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
 </div>
-<language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
-</div>
+</ng-container>

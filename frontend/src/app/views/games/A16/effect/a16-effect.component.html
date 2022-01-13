@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="effect">
+<ng-container *ngIf="effect">
 <nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
@@ -9,21 +9,17 @@
     <li class="breadcrumb-item active" aria-current="page">{{effect.name}}</li>
   </ol>
 </nav>
-<div class="mx-auto row">
-<div class="{{colset}} card griddisplay card-body">
-    <div class="flex">
-        <h4 class="card-title  card-icon-space">{{effect.name}}</h4>
-    </div>
-    <div class="card-text">
-        <p *ngIf="effect.desc">{{effect.desc}}</p>
-        <b *ngIf="effect.effectdata_set">From Item:</b>
-        <ul *ngIf="effect.effectdata_set">
-          <li *ngFor="let e of effect.effectdata_set">
-            <a href="/{{gameURL}}/items/{{e.effectlines_set[0].slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{e.effectlines_set[0].name}}</a>
-          </li>
-        </ul>
-    </div>
-</div>
+<div class="mx-auto row spacer">
+  <div class="{{colset}} card card-body">
+    <h4 class="card-title">{{effect.name}}</h4>
+    <p *ngIf="effect.desc">{{effect.desc}}</p>
+    <b *ngIf="effect.effectdata_set">From Item:</b>
+    <ul *ngIf="effect.effectdata_set">
+      <li *ngFor="let e of effect.effectdata_set">
+        <a href="/{{gameURL}}/items/{{e.effectlines_set[0].slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{e.effectlines_set[0].name}}</a>
+      </li>
+    </ul>
+  </div>
 <language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
 </div>
-</div>
+</ng-container>

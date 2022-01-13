@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="!error">
+<ng-container *ngIf="!error">
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
@@ -12,7 +12,7 @@
 <div class="col-md-10 mx-auto">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
-        <mat-form-field class="col-md-5" appearance="outline">
+        <mat-form-field class="col-md-9" appearance="outline">
           <mat-label>Filter...</mat-label>
           <input style="height: 100%;" matInput formControlName="filtertext">
         </mat-form-field>
@@ -23,29 +23,22 @@
 <ng-container *ngIf="filteredMonsters">
 <div *ngFor="let monster of filteredMonsters | async| pair " class="row">
   <div *ngFor="let mon of monster" class="spacer col-md-5 mx-auto">
-    <div *ngIf="mon" class="card allheight">
-      <div class="card-body griddisplay" style="position:relative">
-        <div class="flex">
-          <h4 class="card-title card-icon-space">
-              <a style="color: black;" (click)="openModal(monsterModal, mon.slugname); $event.preventDefault();" href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">{{mon.name}}</a>    
-          </h4>
-          <div class="card-icon-position">
-              <i class="atelier atelier-shallie-race-{{mon.kind}}"></i>
-          </div>
-        </div>
-        <div class="card-item-display">
-            <a class="image-display" (click)="openModal(monsterModal, mon.slugname); $event.preventDefault();" href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">
-              <img loading="lazy" src="{{imgURL}}monsters/{{mon.slugname}}.png">
-            </a>
-        </div>
-        <div style="padding-right:1rem;margin-right:1rem;" class="card-text">
-          <button (click)="openModal(monsterModal, mon.slugname)" style="box-shadow: none;" class="card-read-more-position" mat-mini-fab color="accent">
-              <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
-           </button>
-        </div>
+    <div *ngIf="mon" class="card card-body allheight">
+      <h4 class="card-title card-icon-space">
+        <a (click)="openModal(monsterModal, mon.slugname); $event.preventDefault();" href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">{{mon.name}}</a>    
+      </h4>
+      <div class="card-icon-position">
+        <i class="atelier atelier-np atelier-shallie-race-{{mon.kind}}"></i>
       </div>
+      <a class="card-item-display" (click)="openModal(monsterModal, mon.slugname); $event.preventDefault();" href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">
+        <img loading="lazy" src="{{imgURL}}monsters/{{mon.slugname}}.png">
+      </a>
+      <button (click)="openModal(monsterModal, mon.slugname)" class="card-read-more-position" mat-mini-fab color="accent">
+        <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+      </button>
     </div>
-  </div></div>
+  </div>
+</div>
 
 <ng-template #monsterModal>
   <div class="modal-body">
@@ -56,4 +49,4 @@
   </div>
 </ng-template>
 </ng-container>
-</div>
+</ng-container>

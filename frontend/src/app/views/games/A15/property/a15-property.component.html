@@ -26,7 +26,7 @@
         <ul>
           <li *ngFor="let item of property.item_set"><a href="/{{gameURL}}/items/{{item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.name}}</a></li>
         </ul>
-      <p *ngIf="property.grade >= 0"><a href="javascript:void(0)" (click)="$event.preventDefault();"
+      <p *ngIf="property.grade"><a href="javascript:void(0)" (click)="$event.preventDefault();"
           tooltip="A measure of rarity. This number determines where properties appear." container="true">Grade:</a>
         {{property.grade}}
       </p>
@@ -42,3 +42,4 @@
   </div>
   <language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
 </div>
+</ng-container>

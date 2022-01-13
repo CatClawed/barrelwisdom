@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="!error">
+<ng-container *ngIf="!error">
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
@@ -61,51 +61,38 @@
 <ng-container *ngIf="filteredItems">
 <div *ngFor="let item of filteredItems | async| pair " class="row">
   <div *ngFor="let it of item" class="spacer col-md-5 mx-auto">
-    <div *ngIf="it" class="card allheight">
-      <div class="card-body griddisplay" style="position:relative">
-        <div class="flex">
-          <h4 class="card-title card-icon-space">
-              <a style="color: black;" (click)="openModal(itemModal, it.slugname); $event.preventDefault();" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a>    
-          </h4>
-          <div class="card-icon-position">
-              <b>LV {{it.level}}</b>
-          </div>
-        </div>
-        <div class="card-item-display">
-            <a class="image-display" (click)="openModal(itemModal, it.slugname); $event.preventDefault();" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">
-              <img loading="lazy" src="{{imgURL}}items/{{it.slugname}}.png">
-            </a>
-        </div>
-        <div class="card-text">
-            <table>
-            <tr *ngFor="let cat of it.categories">
-                <td style="text-align: center;"><i class="atelier atelier-{{cat.icon_name}}"></i></td><td>{{cat.name}}</td>
-            </tr>
-            <tr>
-                <td colspan=2>
-                    <i style="padding:0;color:#ac504f;" *ngIf="it.fire" class="atelier atelier-shallie-fire"></i>
-                    <i style="padding:0;color:#427389;" *ngIf="it.water" class="atelier atelier-shallie-water"></i>
-                    <i style="padding:0;color:#5a843c;" *ngIf="it.wind" class="atelier atelier-shallie-wind"></i>
-                    <i style="padding:0;color:#8f7939;" *ngIf="it.earth" class="atelier atelier-shallie-earth"></i>
-                    {{it.evalue}}
-                </td>
-            </tr>
-            <tr>
-              <td *ngIf="it.slots > 0" colspan=2>
-                <img *ngIf="it.slots > 0" src="{{imgURL}}slot.png">
-                <img *ngIf="it.slots > 1" src="{{imgURL}}slot.png">
-                <img *ngIf="it.slots > 2" src="{{imgURL}}slot.png">
-                <img *ngIf="it.slots > 3" src="{{imgURL}}slot.png">
-              </td>
-            </tr>
-            </table>
-        </div>
-        <div style="padding-right:1rem;margin-right:1rem;" class="card-text">
-          <button (click)="openModal(itemModal, it.slugname)" style="box-shadow: none;" class="card-read-more-position" mat-mini-fab color="accent">
-              <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
-           </button>
-        </div>
+    <div *ngIf="it" class="card card-body allheight">
+      <h4 class="card-title card-icon-space">
+        <a (click)="openModal(itemModal, it.slugname); $event.preventDefault();" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a>    
+      </h4>
+      <div class="card-icon-position">
+        <b>LV {{it.level}}</b>
       </div>
+      <a class="card-item-display" (click)="openModal(itemModal, it.slugname); $event.preventDefault();" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">
+        <img loading="lazy" src="{{imgURL}}items/{{it.slugname}}.png">
+      </a>
+      <table class="table-item-data">
+        <tr *ngFor="let cat of it.categories">
+          <td style="text-align: center;"><i class="atelier atelier-{{cat.icon_name}}"></i></td><td>{{cat.name}}</td>
+        </tr>
+        <tr>
+          <td colspan=2>
+            <i style="color:#ac504f;" *ngIf="it.fire"  class="atelier atelier-np atelier-shallie-fire"></i>
+            <i style="color:#427389;" *ngIf="it.water" class="atelier atelier-np atelier-shallie-water"></i>
+            <i style="color:#5a843c;" *ngIf="it.wind"  class="atelier atelier-np atelier-shallie-wind"></i>
+            <i style="color:#8f7939;" *ngIf="it.earth" class="atelier atelier-np atelier-shallie-earth"></i>
+            <span>{{it.evalue}}</span>
+          </td>
+        </tr>
+        <tr *ngIf="it.slots > 0" >
+          <td colspan=2>
+            <img *ngFor="let item of [].constructor(it.slots);" src="{{imgURL}}slot.png">
+          </td>
+        </tr>
+      </table>            
+      <button (click)="openModal(itemModal, it.slugname)" class="card-read-more-position" mat-mini-fab color="accent">
+        <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+      </button>
     </div>
   </div>
 </div>
@@ -119,4 +106,4 @@
   </div>
 </ng-template>
 </ng-container>
-</div>
+</ng-container>

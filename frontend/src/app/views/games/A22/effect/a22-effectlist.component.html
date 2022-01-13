@@ -76,7 +76,7 @@
         <i *ngIf="!normal" class="atelier atelier-ryza2-type-{{eff.effsub.toLowerCase()}}"></i>
         <span *ngIf="ev" class="badge bg-secondary">EV</span><i *ngIf="forge" class="atelier atelier-np atelier-ryza2-forge"></i>
       </div>
-      <button (click)="openModal(effectModal, eff.slug)" style="box-shadow: none;" class="card-read-more-position" mat-mini-fab color="accent">
+      <button (click)="openModal(effectModal, eff.slug)" class="card-read-more-position" mat-mini-fab color="accent">
           <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
        </button>
       <span style="margin-right:1.7rem" *ngIf="eff.desc">{{eff.desc}}</span>

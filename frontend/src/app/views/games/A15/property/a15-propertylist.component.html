@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="filteredProperties">
+<ng-container *ngIf="filteredProperties">
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
@@ -56,40 +56,40 @@
 <div *ngFor="let props of filteredProperties | async| pair " class="row">
   <div *ngFor="let prop of props" class="spacer col-md-5 mx-auto">
     <div *ngIf="prop" style="justify-content:space-between;" class="card card-body allheight">
-      <div class="flex">
-        <h4 class="card-title"><a (click)="openModal(propertyModal, prop.slugname); $event.preventDefault();" href="/{{gameURL}}/properties/{{prop.slugname}}/{{language}}">{{prop.name}}</a></h4>
-        <b>PP {{prop.points}}</b>
-        <div>
-          <p *ngIf="prop.combo1">
-            <a href="/{{gameURL}}/properties/{{prop.combo1.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{prop.combo1.name}}</a> <span> x </span>
-            <a href="/{{gameURL}}/properties/{{prop.combo2.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{prop.combo2.name}}</a>
-            <span *ngIf="prop.combo3"> x </span> <a *ngIf="prop.combo3" href="/{{gameURL}}/properties/{{prop.combo3.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{prop.combo3.name}}</a>
-          </p>
-          <p>{{prop.desc}}</p>
-          <div *ngIf="prop.item_set">
-            <b>Items:</b>
-            <ul>
-              <li *ngIf="prop.item_set.length >= 1"><a href="/{{gameURL}}/items/{{prop.item_set[0].slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{prop.item_set[0].name}}</a></li>
-              <li *ngIf="prop.item_set.length >= 2"><a href="/{{gameURL}}/items/{{prop.item_set[1].slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{prop.item_set[1].name}}</a></li>
-              <li *ngIf="prop.item_set.length >= 3"><a href="/{{gameURL}}/items/{{prop.item_set[2].slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{prop.item_set[2].name}}</a></li>
-              <li *ngIf="prop.item_set.length >= 4"><a (click)="openModal(propertyModal, prop.slugname); $event.preventDefault();" href="/{{gameURL}}/properties/{{prop.slugname}}/{{language}}">See more...</a></li>
-            </ul>
-          </div>
-          <p *ngIf="prop.grade"><a href="javascript:void(0)"
-            tooltip="A measure of rarity. This number determines where properties appear." container="true">Grade:</a>
-          {{prop.grade}}</p>
+      <div>
+        <div class="flex">
+          <h4 class="card-title"><a (click)="openModal(propertyModal, prop.slugname); $event.preventDefault();" href="/{{gameURL}}/properties/{{prop.slugname}}/{{language}}">{{prop.name}}</a></h4>
+          <b>PP {{prop.points}}</b>
         </div>
+        <p *ngIf="prop.combo1">
+          <a href="/{{gameURL}}/properties/{{prop.combo1.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{prop.combo1.name}}</a> <span> x </span>
+          <a href="/{{gameURL}}/properties/{{prop.combo2.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{prop.combo2.name}}</a>
+          <span *ngIf="prop.combo3"> x </span> <a *ngIf="prop.combo3" href="/{{gameURL}}/properties/{{prop.combo3.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{prop.combo3.name}}</a>
+        </p>
+        <p>{{prop.desc}}</p>
+        <div *ngIf="prop.item_set">
+          <b>Items:</b>
+          <ul>
+            <li *ngIf="prop.item_set.length >= 1"><a href="/{{gameURL}}/items/{{prop.item_set[0].slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{prop.item_set[0].name}}</a></li>
+            <li *ngIf="prop.item_set.length >= 2"><a href="/{{gameURL}}/items/{{prop.item_set[1].slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{prop.item_set[1].name}}</a></li>
+            <li *ngIf="prop.item_set.length >= 3"><a href="/{{gameURL}}/items/{{prop.item_set[2].slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{prop.item_set[2].name}}</a></li>
+            <li *ngIf="prop.item_set.length >= 4"><a (click)="openModal(propertyModal, prop.slugname); $event.preventDefault();" href="/{{gameURL}}/properties/{{prop.slugname}}/{{language}}">See more...</a></li>
+          </ul>
+        </div>
+        <p *ngIf="prop.grade"><a href="javascript:void(0)"
+          tooltip="A measure of rarity. This number determines where properties appear." container="true">Grade:</a>
+        {{prop.grade}}</p>
       </div>
-        <div class="flex bottom">
-          <i class="trait-color{{prop.bomb}}      atelier atelier-np atelier-escha-bomb"></i>
-          <i class="trait-color{{prop.heal}}      atelier atelier-np atelier-escha-heal"></i>
-          <i class="trait-color{{prop.buff}}      atelier atelier-np atelier-escha-buff"></i>
-          <i class="trait-color{{prop.weapon}}    atelier atelier-np atelier-escha-weapon"></i>
-          <i class="trait-color{{prop.armor}}     atelier atelier-np atelier-escha-armor"></i>
-          <i class="trait-color{{prop.accessory}} atelier atelier-np atelier-escha-accessory"></i>
-        </div>
+      <div class="flex bottom">
+        <i class="trait-color{{prop.bomb}}      atelier atelier-np atelier-escha-bomb"></i>
+        <i class="trait-color{{prop.heal}}      atelier atelier-np atelier-escha-heal"></i>
+        <i class="trait-color{{prop.buff}}      atelier atelier-np atelier-escha-buff"></i>
+        <i class="trait-color{{prop.weapon}}    atelier atelier-np atelier-escha-weapon"></i>
+        <i class="trait-color{{prop.armor}}     atelier atelier-np atelier-escha-armor"></i>
+        <i class="trait-color{{prop.accessory}} atelier atelier-np atelier-escha-accessory"></i>
+      </div>
     </div>
-</div>
+  </div>
 
 <ng-template #propertyModal>
   <div class="modal-body">
@@ -100,3 +100,4 @@
   </div>
 </ng-template>
 </div>
+</ng-container>

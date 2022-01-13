@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="monster">
+<ng-container *ngIf="monster">
 <nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
@@ -9,21 +9,17 @@
     <li class="breadcrumb-item active" aria-current="page">{{monster.name}}</li>
   </ol>
 </nav>
-<div class="mx-auto row">
- <div class="{{colset}} card griddisplay card-body">
-    <div class="flex">
-        <h4 class="card-title  card-icon-space">{{monster.name}}</h4>
-        <div class="card-icon-position">
-          <i class="atelier atelier-shallie-race-{{monster.kind}}"></i>
-          </div>
-      </div>
-      <div class="card-text">
-        <img class="image-display" loading="lazy" src="{{imgURL}}monsters/{{monster.slugname}}.png">
-        <p *ngIf="monster.desc">{{monster.desc}}</p>
-        <p *ngIf="monster.note">{{monster.note}}</p>
-
-        <div class="row">
-          <div class="col-md-6">
+<div class="mx-auto row spacer">
+ <div class="{{colset}} card card-body">
+    <h4 class="card-title card-icon-space">{{monster.name}}</h4>
+    <div class="card-icon-position">
+      <i class="atelier atelier-np atelier-shallie-race-{{monster.kind}}"></i>
+    </div>
+    <img class="image-display" loading="lazy" src="{{imgURL}}monsters/{{monster.slugname}}.png">
+    <p *ngIf="monster.desc">{{monster.desc}}</p>
+    <p *ngIf="monster.note">{{monster.note}}</p>
+    <div class="row">
+      <div class="col-md-6">
         <b *ngIf="monster.locations">Locations:</b>
         <ul *ngIf="monster.locations">
            <li *ngFor="let loc of monster.locations"><a href="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}#{{loc.slugname}}" (click)="historyService.hrefClicked($event)">{{loc.name}}</a></li>
@@ -34,33 +30,32 @@
         </ul>
       </div>
       <div class="col-md=6">
-        <table style="width:auto;" class="table" >
+        <table class="table" >
           <tr>
-            <td style="border-top:transparent;padding:0;"><b>Level: </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.level}}</td>
+            <td style="border-top:transparent;padding:0;"><b>LV </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.level}}</td>
           </tr>
           <tr>
-            <td style="border-top:transparent;padding:0;"><b>HP: </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.hp}}</td>
+            <td style="border-top:transparent;padding:0;"><b>HP </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.hp}}</td>
           </tr>
           <tr>
-            <td style="border-top:transparent;padding:0;"><b>ATK: </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.atk}}</td>
+            <td style="border-top:transparent;padding:0;"><b>ATK </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.atk}}</td>
           </tr>
           <tr>
-            <td style="border-top:transparent;padding:0;"><b>DEF: </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.defen}}</td>
+            <td style="border-top:transparent;padding:0;"><b>DEF </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.defen}}</td>
           </tr>
           <tr>
-            <td style="border-top:transparent;padding:0;"><b>SPD: </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.spd}}</td>
+            <td style="border-top:transparent;padding:0;"><b>SPD </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.spd}}</td>
           </tr>
           <tr>
-            <td style="border-top:transparent;padding:0;"><b>Exp: </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.exp}}</td>
+            <td style="border-top:transparent;padding:0;"><b>Exp </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.exp}}</td>
           </tr>
           <tr>
-            <td style="border-top:transparent;padding:0;"><b>Cole: </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.cole}}</td>
+            <td style="border-top:transparent;padding:0;"><b>Cole </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.cole}}</td>
           </tr>
         </table>
       </div>
-      </div>
-      </div>
-    </div>
+   </div>
+  </div>
   <language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
- </div>
 </div>
+</ng-container>

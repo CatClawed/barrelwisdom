@@ -48,9 +48,11 @@
  <div *ngFor="let traits of filteredTraits | async| pair " class="row">
   <div *ngFor="let trait of traits" class="spacer col-md-5 mx-auto">
    <div *ngIf="trait" style="justify-content:space-between;" class="card card-body allheight">
-    <div class="flex">
-      <h4 class="card-title"><a (click)="openModal(traitModal, trait.slugname); $event.preventDefault();" href="/{{gameURL}}/traits/{{trait.slugname}}/{{language}}">{{trait.name}}</a></h4>
-      <span *ngIf="trait.cost"><b>Cost: </b>{{trait.cost}}</span>
+    <div>
+      <div class="flex">
+        <h4 class="card-title"><a (click)="openModal(traitModal, trait.slugname); $event.preventDefault();" href="/{{gameURL}}/traits/{{trait.slugname}}/{{language}}">{{trait.name}}</a></h4>
+        <b *ngIf="trait.cost">Cost {{trait.cost}}</b>
+      </div>
       <p>{{trait.desc}}</p>
       <div *ngIf="trait.item_set">
        <b>Items:</b>
