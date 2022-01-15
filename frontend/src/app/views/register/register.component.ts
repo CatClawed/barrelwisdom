@@ -65,11 +65,10 @@ export class RegisterComponent {
     this.loading = true;
     this.authenticationService.register(this.f.username.value, this.f.email.value, this.f.password.value, this.f.confirmPassword.value, this.route.snapshot.queryParamMap.get('invite'))
         .pipe(first())
-        .subscribe(
-            data => {
+        .subscribe(() => {
               success = true;
               this.authenticationService.login(this.f.username.value, this.f.password.value)
-                .subscribe(data => {
+                .subscribe(() => {
                   this.router.navigateByUrl('/');
                 });
             },

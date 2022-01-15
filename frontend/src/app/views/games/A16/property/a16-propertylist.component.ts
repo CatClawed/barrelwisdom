@@ -106,9 +106,10 @@ export class A16PropertylistComponent implements OnInit {
     this.location.go(`${this.gameURL}/properties/` + slugname + "/" + this.language);
     this.modalRef = this.modalService.show(template);
     this.modalRef.onHide.subscribe((reason: string | any) => {
+      if(reason != "link") {
         this.location.go(`${this.gameURL}/properties/` + this.language);
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-      })
+      }})
   }
 
   private filterT(value: string, transfer: string): Property[] {

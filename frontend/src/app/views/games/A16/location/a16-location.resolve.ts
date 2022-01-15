@@ -1,26 +1,26 @@
-import { Region } from "@app/interfaces/a22";
+import { AreaData } from "@app/interfaces/a16";
 import { Resolve } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Router, ActivatedRoute } from '@angular/router';
 import { Observable, EMPTY } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { A22Service } from "@app/services/a22.service";
+import { A16Service } from "@app/services/a16.service";
 
 
 @Injectable({
     providedIn: 'root'
   })
-export class A22LocationResolver implements Resolve<Region> {
+export class A16LocationResolver implements Resolve<AreaData> {
 
-  constructor(private a22service: A22Service,
+  constructor(private a16service: A16Service,
     public router: Router,
     public route: ActivatedRoute) {
     }
 
-  resolve(route: ActivatedRouteSnapshot): Observable<Region> {
-    return this.a22service.getLocation(route.params.location, route.params.language).pipe(
+  resolve(route: ActivatedRouteSnapshot): Observable<AreaData> {
+    return this.a16service.getRegion(route.params.location, route.params.language).pipe(
         catchError(() => {
-            this.router.navigateByUrl('/ryza2/error');
+            this.router.navigateByUrl('/escha/error');
             return EMPTY;
         }));
     }

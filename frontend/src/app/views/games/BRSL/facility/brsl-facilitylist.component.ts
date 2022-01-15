@@ -26,10 +26,7 @@ import { SeoService } from '@app/services/seo.service';
     errorMsg: string;
     facility: string = "facilities";
     facilities: FacilityList[];
-    categories: NameOnly[];
     filteredFacilities: Observable<FacilityList[]>;
-    currentType: string = "Any";
-    currentCategory: string = "Any";
     searchstring = "";
     language = "";
     config: ModalOptions = { class: "col-md-5 mx-auto" };
@@ -58,8 +55,6 @@ import { SeoService } from '@app/services/seo.service';
 
       this.pageForm = this.formBuilder.group({
         filtertext: this.facilityControl,
-        category: ['Any'],
-        type: ['Any']
       })
     }
   
@@ -68,7 +63,6 @@ import { SeoService } from '@app/services/seo.service';
       this.language = this.route.snapshot.params.language;
   
       this.getFacilities();
-      this.getCategories();
       this.gameTitle = this.brslservice.gameTitle[this.language];
       this.gameURL = this.brslservice.gameURL;
       this.imgURL = this.brslservice.imgURL;
@@ -77,16 +71,6 @@ import { SeoService } from '@app/services/seo.service';
       this.seoTitle = `Facilities - ${this.gameTitle}`;
       this.seoDesc = `The list of facilities in ${this.gameTitle}.`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-  
-      this.pageForm.get('type').valueChanges
-        .subscribe(type => {
-          this.currentType = type;
-        });
-
-      this.pageForm.get('category').valueChanges
-        .subscribe(cat => {
-          this.currentCategory = cat;
-        });
   
       this.facilityControl.valueChanges.subscribe(search => {
         this.searchstring = search;
@@ -106,7 +90,7 @@ import { SeoService } from '@app/services/seo.service';
         this.facilities = facilities.slice(0,44);
         this.filteredFacilities = this.pageForm.valueChanges.pipe(
           startWith(null as Observable<FacilityList[]>),
-          map((search: string | null) => search ? this.filterT(this.searchstring, this.currentType, this.currentCategory) : this.facilities.slice())
+          map((search: string | null) => search ? this.filterT(this.searchstring) : this.facilities.slice())
         );
       },
       error => {
@@ -115,18 +99,6 @@ import { SeoService } from '@app/services/seo.service';
         this.errorVars = this.errorService.getCodes(this.errorCode);
       });
     }
-
-    getCategories() {
-      this.brslservice.getCategoryList(this.language)
-      .subscribe(categories  => {
-          this.categories = categories;
-      },
-      error => {
-          this.error = true;
-          this.errorCode = `${error.status}`;
-          this.errorVars = this.errorService.getCodes(this.errorCode);
-      });
-  }
   
     openModal(template: TemplateRef<any>, slugname: string) {
       this.facility = slugname;
@@ -139,7 +111,7 @@ import { SeoService } from '@app/services/seo.service';
         }})
     }
 
-    private filterT(value: string, type: string, category: string): FacilityList[] {
+    private filterT(value: string): FacilityList[] {
   
       const filterValue = value.toLowerCase();
       let list: FacilityList[] = this.facilities;

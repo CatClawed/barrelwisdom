@@ -48,12 +48,14 @@ constructor(
   ngOnInit(): void {
     this.slugname = this.route.snapshot.params.location;
     this.language = this.route.snapshot.params.language;
+    this.location = this.route.snapshot.data.loc;
 
-    this.a15service.getRegion(this.slugname, this.language)
-    .subscribe(location => {
-        this.error = false;
-        this.location = location;
-
+    if(!this.location) {
+      this.error = true;
+      this.errorCode = '404',
+      this.errorVars = this.errorService.getCodes(this.errorCode);
+    }
+    else {
         this.gameTitle = this.a15service.gameTitle[this.language];
         this.gameURL = this.a15service.gameURL;
         this.imgURL = this.a15service.imgURL;
@@ -61,13 +63,8 @@ constructor(
         this.seoURL = `${this.gameURL}/locations/${this.location.slugname}/${this.language}`;
         this.seoTitle = `${this.location.name} - ${this.gameTitle}`;
         this.seoDesc = `All items in ${this.location.name}`
-        this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-    },
-    error => {
-      this.error = true;
-      this.errorCode = `${error.status}`;
-      this.errorVars = this.errorService.getCodes(this.errorCode);
-    });
+        this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, '');
+    }
   }
   ngAfterViewInit(): void {
     this.route.fragment.pipe(

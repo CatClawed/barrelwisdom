@@ -27,7 +27,6 @@ import { SeoService } from '@app/services/seo.service';
     effect: string = "effect";
     effects: Effect[];
     filteredEffects: Observable<Effect[]>;
-    currentType: string = "1";
     searchstring = "";
     language = "";
     config: ModalOptions = { class: "col-md-5 mx-auto" };
@@ -56,7 +55,6 @@ import { SeoService } from '@app/services/seo.service';
 
       this.pageForm = this.formBuilder.group({
         filtertext: this.effectControl,
-        type: ['']
       })
     }
   
@@ -74,11 +72,6 @@ import { SeoService } from '@app/services/seo.service';
       this.seoTitle = `Effects - ${this.gameTitle}`;
       this.seoDesc = `The list of effects in ${this.gameTitle}.`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-  
-      this.pageForm.get('type').valueChanges
-        .subscribe(type => {
-          this.currentType = type;
-        });
   
       this.effectControl.valueChanges.subscribe(search => {
         this.searchstring = search;
@@ -98,7 +91,7 @@ import { SeoService } from '@app/services/seo.service';
         this.effects = effects;
         this.filteredEffects = this.pageForm.valueChanges.pipe(
           startWith(null as Observable<Effect[]>),
-          map((search: string | null) => search ? this.filterT(this.searchstring, this.currentType) : this.effects.slice())
+          map((search: string | null) => search ? this.filterT(this.searchstring) : this.effects.slice())
         );
       },
       error => {
@@ -120,7 +113,7 @@ import { SeoService } from '@app/services/seo.service';
     }
 
   
-    private filterT(value: string, type: string): Effect[] {
+    private filterT(value: string): Effect[] {
   
       const filterValue = value.toLowerCase();
       let effectlist: Effect[] = this.effects;

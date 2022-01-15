@@ -27,7 +27,6 @@ import { SeoService } from '@app/services/seo.service';
     demon: string = "demons";
     demons: DemonList[];
     filteredDemons: Observable<DemonList[]>;
-    currentType: string = "1";
     searchstring = "";
     language = "";
     config: ModalOptions = { class: "col-md-5 mx-auto" };
@@ -53,8 +52,7 @@ import { SeoService } from '@app/services/seo.service';
       this.demonControl = new FormControl();
 
       this.pageForm = this.formBuilder.group({
-        filtertext: this.demonControl,
-        type: ['']
+        filtertext: this.demonControl
       })
     }
   
@@ -71,11 +69,6 @@ import { SeoService } from '@app/services/seo.service';
       this.seoTitle = `Demons - ${this.gameTitle}`;
       this.seoDesc = `The list of demons in ${this.gameTitle}.`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-  
-      this.pageForm.get('type').valueChanges
-        .subscribe(type => {
-          this.currentType = type;
-        });
   
       this.demonControl.valueChanges.subscribe(search => {
         this.searchstring = search;
@@ -95,7 +88,7 @@ import { SeoService } from '@app/services/seo.service';
         this.demons = demons.slice(0,103);
         this.filteredDemons = this.pageForm.valueChanges.pipe(
           startWith(null as Observable<DemonList[]>),
-          map((search: string | null) => search ? this.filterT(this.searchstring, this.currentType) : this.demons.slice())
+          map((search: string | null) => search ? this.filterT(this.searchstring) : this.demons.slice())
         );
       },
       error => {
@@ -116,7 +109,7 @@ import { SeoService } from '@app/services/seo.service';
         }})
     }
 
-    private filterT(value: string, type: string): DemonList[] {
+    private filterT(value: string): DemonList[] {
   
       const filterValue = value.toLowerCase();
       let list: DemonList[] = this.demons;

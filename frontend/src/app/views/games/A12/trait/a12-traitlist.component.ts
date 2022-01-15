@@ -10,7 +10,6 @@ import { ErrorCodeService } from "@app/services/errorcode.service";
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { SeoService } from '@app/services/seo.service';
-import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   templateUrl: 'a12-traitlist.component.html',
@@ -110,9 +109,10 @@ export class A12TraitlistComponent implements OnInit {
     this.location.go(`${this.gameURL}/traits/` + slugname + "/" + this.language);
     this.modalRef = this.modalService.show(template);
     this.modalRef.onHide.subscribe((reason: string | any) => {
+      if(reason != "link") {
         this.location.go(`${this.gameURL}/traits/` + this.language);
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-      })
+      }})
   }
 
   private filterT(value: string, transfer: string): Trait[] {

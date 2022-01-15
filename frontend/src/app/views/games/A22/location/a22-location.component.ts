@@ -118,7 +118,7 @@ import {AppComponent} from '@app/app.component';
     }
 
     scrollTo(fragment): void {
-        this.router.navigate([], { fragment: fragment }).then(res => {
+        this.router.navigate([], { fragment: fragment }).then(() => {
           const element = document.getElementById(fragment);
           if (element != undefined) element.scrollIntoView();
         });

@@ -28,7 +28,6 @@ import { Meta, Title } from '@angular/platform-browser';
     effect: string = "effect";
     effects: Effect[];
     filteredEffects: Observable<Effect[]>;
-    currentType: string = "1";
     searchstring = "";
     language = "";
     config: ModalOptions = { class: "col-md-5 mx-auto" };
@@ -55,18 +54,12 @@ import { Meta, Title } from '@angular/platform-browser';
 
       this.pageForm = this.formBuilder.group({
         filtertext: this.effectControl,
-        type: ['']
       })
     }
   
     ngOnInit(): void {
   
       this.language = this.route.snapshot.params.language;
-
-      this.pageForm.get('type').valueChanges
-        .subscribe(type => {
-          this.currentType = type;
-        });
   
       this.effectControl.valueChanges.subscribe(search => {
         this.searchstring = search;
@@ -98,7 +91,7 @@ import { Meta, Title } from '@angular/platform-browser';
         this.effects = effects;
         this.filteredEffects = this.pageForm.valueChanges.pipe(
           startWith(null as Observable<Effect[]>),
-          map((search: string | null) => search ? this.filterT(this.searchstring, this.currentType) : this.effects.slice())
+          map((search: string | null) => search ? this.filterT(this.searchstring) : this.effects.slice())
         );
       },
       error => {
@@ -119,7 +112,7 @@ import { Meta, Title } from '@angular/platform-browser';
         }})
     }
   
-    private filterT(value: string, type: string): Effect[] {
+    private filterT(value: string): Effect[] {
   
       const filterValue = value.toLowerCase();
       let effectlist: Effect[] = this.effects;

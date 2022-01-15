@@ -58,7 +58,7 @@ export class LoginComponent {
     this.authenticationService.login(this.f.username.value, this.f.password.value)
         .pipe(first())
         .subscribe(
-            data => {
+            () => {
               this.router.navigateByUrl(this.returnUrl);
             },
             error => {

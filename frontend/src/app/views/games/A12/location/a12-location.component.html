@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
-<div *ngIf="!error">
+<ng-container *ngIf="!error">
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
@@ -26,9 +26,9 @@
   <p *ngIf="area.unlock"><b>Unlock:</b> {{area.unlock}}</p>
   <p>{{area.note}}</p>
   <table class="table border table-shrink">
-    <tr>
-      <th *ngIf="area.ingredients" class="table-dark-center">Items</th>
-      <th *ngIf="area.monsters" class="table-dark-center">Monsters</th>
+    <tr class="table-dark-center">
+      <th *ngIf="area.ingredients" >Items</th>
+      <th *ngIf="area.monsters">Monsters</th>
     </tr>
     <tr>
       <td *ngIf="area.ingredients">
@@ -44,4 +44,4 @@
     </tr>
   </table>
 </ng-container>
-</div>
+</ng-container>

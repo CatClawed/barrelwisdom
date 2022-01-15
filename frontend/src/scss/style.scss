@@ -33,6 +33,6 @@ $frontend-theme: mat.define-light-theme($frontend-primary, $frontend-accent, $fr
 // Import styles
 @import "~@coreui/coreui/scss/coreui";
 @import '~@angular/cdk/overlay-prebuilt.css';
-@import '@fortawesome/fontawesome-free/scss/fontawesome';
+//@import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
 // If you want to add something do it here

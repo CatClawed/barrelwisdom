@@ -2,12 +2,16 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { A16LocationComponent } from './a16-location.component';
 import { LanguageGuard } from '@app/_helpers/language.guard';
+import { A16LocationResolver } from './a16-location.resolve';
 
 const routes: Routes = [
   {
     path: ':location/:language',
     canActivate: [LanguageGuard],
-    component: A16LocationComponent
+    component: A16LocationComponent,
+    resolve: {
+      loc: A16LocationResolver
+    }
   },
   {
     path: ':location',

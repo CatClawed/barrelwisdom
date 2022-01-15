@@ -133,7 +133,7 @@ export class SettingsComponent {
     this.settingService.updateProfile(this.user.id, this.profilef.bio.value, this.profilef.website.value, this.profilef.avatar.value)
       .pipe(first())
       .subscribe(
-        data => {
+        () => {
           this.successProfile = true;
           this.loading = false;
           this.errorMsg = "";
@@ -157,7 +157,7 @@ export class SettingsComponent {
     this.settingService.updatePassword(this.passwordf.newPass.value, this.passwordf.repeatPass.value, this.passwordf.currentPass.value)
         .pipe(first())
         .subscribe(
-            data => {
+            () => {
               this.successPassword = true;
               this.loading = false;
               this.errorPass = "";
@@ -186,7 +186,7 @@ export class SettingsComponent {
     this.settingService.updateEmail(this.user.id, this.emailf.email.value)
         .pipe(first())
         .subscribe(
-            data => {
+            () => {
               this.successEmail = true;
               this.loading = false;
               this.erroEmail = "";
@@ -227,7 +227,7 @@ export class SettingsComponent {
         this.settingService.createSection(this.sectionf.name.value, this.sectionf.fullname.value)
             .pipe(first())
             .subscribe(
-                data => {
+                () => {
                   this.successSection = true;
                   this.loading = false;
                   this.errorSection = "";
@@ -258,7 +258,7 @@ export class SettingsComponent {
           this.settingService.updateNavigation(this.navigationf.section.value, this.navigationf.data.value)
               .pipe(first())
               .subscribe(
-                  data => {
+                  () => {
                     this.successNavigation = true;
                     this.loading = false;
                     this.errorNavigation = "";

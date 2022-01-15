@@ -3,31 +3,28 @@
 <h1 *ngIf="tagName">{{tagName}}</h1>
 <div *ngIf="!tagName" style="padding-top: 0.5em;"></div>
 
-<div *ngIf="blog">
-    <div *ngFor="let blg of blog.results | pair" class="row spacer flex">
-        <div *ngFor="let b of blg" class="col-md-6 mx-auto">
+<ng-container *ngIf="blog">
+    <div *ngFor="let blg of blog.results | pair" class="row flex">
+        <div *ngFor="let b of blg" class="col-md-6 mx-auto spacer">
             <div *ngIf="b" class="card allheight">
                 <div class="aspect-ratio-box">
                     <a (click)="historyService.hrefClicked($event);" href="/blog/{{b.slugtitle}}">
-                        <img src="{{b.image}}">
+                        <img load="lazy" src="{{b.image}}">
                     </a>
                 </div>
-                <div class=headline>
+                <div class="headline">
                     <a (click)="historyService.hrefClicked($event);" href="/blog/{{b.slugtitle}}">
                         <h3>{{b.title}}</h3>
                     </a>
                     <span class="text-muted" style="font-size: calc(0.8rem + 0.1vw);">
-                        <i class="far fa-calendar-alt"></i> <time class="updated" dateTime="{{b.created}}">
-                            {{b.created | date:'longDate' }} </time>
+                        <i style="margin-right:0.2rem;" class="far fa-calendar-alt"></i>
+                        <time class="updated" dateTime="{{b.created}}">{{b.created | date:'longDate' }} </time>
                     </span>
                     <p style="margin-top: 0.8em;">{{b.description}}</p>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-<div *ngIf="blog" >
     <ul class="pagination">
         <li *ngIf="path >= 2" class="page-item"><a class="page-link" (click)="historyService.hrefClicked($event);" href="/{{tagUrl}}{{path-1}}">Prevous</a></li>
         <li *ngIf="path >  3" class="page-item"><a class="page-link" (click)="historyService.hrefClicked($event);" href="/">1</a></li>
@@ -49,4 +46,4 @@
                 (click)="historyService.hrefClicked($event);" href="/{{ blog.count / limit | getCeil }}">{{ blog.count / limit | getCeil }}</a></li>
         <li *ngIf="path < blog.count / limit" class="page-item"><a class="page-link" (click)="historyService.hrefClicked($event);" href="/{{tagUrl}}{{path+1}}">Next</a></li>
     </ul>
-</div>
+</ng-container>

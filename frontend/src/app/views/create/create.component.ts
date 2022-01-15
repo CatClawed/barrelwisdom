@@ -201,7 +201,7 @@ export class CreateComponent {
           this.pageForm.get("section").value,
           idList // tags
           )
-          .subscribe(data => {
+          .subscribe(() => {
             this.router.navigateByUrl(`/${nextURL}`);
           },
           error => {
@@ -231,7 +231,7 @@ export class CreateComponent {
           this.pageForm.get("section").value,
           idList // tags
           )
-          .subscribe(data => {
+          .subscribe(() => {
             this.router.navigateByUrl(`/${nextURL}`);
           },
           error => {

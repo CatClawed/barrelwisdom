@@ -60,7 +60,7 @@ import { WINDOW } from '@app/services/window.service';
       }
 
   ngAfterViewInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe(() => {
       if (this.window.commento.main !== 'function') {
         setTimeout(() => { // probably not necessary, who cares
           this.resetDiv();

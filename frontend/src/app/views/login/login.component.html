@@ -1,51 +1,45 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 mx-auto">
-      <div class="card">
-        <div class="card-body">
-          <h1>Sign In</h1>
-          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <div class="form-group">
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="icon-user"></i></span>
-                </div>
-                <input type="text" formControlName="username" class="form-control" placeholder="Username"
-                  autocomplete="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-                <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                  <div *ngIf="f.username.errors.required">Username is required</div>
-                </div>
-              </div>
+<div style="margin-top:1em" class="col-md-6 mx-auto spacer">
+  <div class="card card-body">
+      <h1>Sign In</h1>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-user"></i></span>
             </div>
-            <div class="form-group">
-              <div class="input-group mb-4">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="icon-lock"></i></span>
-                </div>
-                <input type="password" formControlName="password" class="form-control" placeholder="Password"
-                  autocomplete="current-password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                  <div *ngIf="f.password.errors.required">Password is required</div>
-                </div>
-              </div>
+            <input type="text" formControlName="username" class="form-control" placeholder="Username"
+              autocomplete="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+              <div *ngIf="f.username.errors.required">Username is required</div>
             </div>
-            <div class="form-group">
-              <div class="row">
-                <div class="col-6">
-                  <button [disabled]="loading" class="btn btn-primary">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                    Login
-                  </button>
-                  <div *ngIf="errorMsg" class="text-danger">{{errorMsg}}</div>
-                </div>
-                <div class="col-6 text-right">
-                  <button type="button" class="btn btn-link px-0">Forgot password?</button>
-                </div>
-              </div>
-            </div>
-          </form>
+          </div>
         </div>
-      </div>
-    </div>
+        <div class="form-group">
+          <div class="input-group mb-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-lock"></i></span>
+            </div>
+            <input type="password" formControlName="password" class="form-control" placeholder="Password"
+              autocomplete="current-password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+              <div *ngIf="f.password.errors.required">Password is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-6">
+              <button [disabled]="loading" class="btn btn-primary">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Login
+              </button>
+              <div *ngIf="errorMsg" class="text-danger">{{errorMsg}}</div>
+            </div>
+            <div class="col-6 text-right">
+              <button type="button" class="btn btn-link px-0">Forgot password?</button>
+            </div>
+          </div>
+        </div>
+      </form>
   </div>
 </div>

@@ -27,7 +27,6 @@ import { SeoService } from '@app/services/seo.service';
     book: string = "books";
     books: Book[];
     filteredBooks: Observable<Book[]>;
-    currentType: string = "1";
     searchstring = "";
     language = "";
     config: ModalOptions = { class: "col-md-5 mx-auto" };
@@ -54,18 +53,12 @@ import { SeoService } from '@app/services/seo.service';
 
       this.pageForm = this.formBuilder.group({
         filtertext: this.bookControl,
-        type: ['']
       })
     }
   
     ngOnInit(): void {
   
       this.language = this.route.snapshot.params.language;
-
-      this.pageForm.get('type').valueChanges
-        .subscribe(type => {
-          this.currentType = type;
-        });
   
       this.bookControl.valueChanges.subscribe(search => {
         this.searchstring = search;
@@ -96,7 +89,7 @@ import { SeoService } from '@app/services/seo.service';
         this.books = books;
         this.filteredBooks = this.pageForm.valueChanges.pipe(
           startWith(null as Observable<Book[]>),
-          map((search: string | null) => search ? this.filterT(this.searchstring, this.currentType) : this.books.slice())
+          map((search: string | null) => search ? this.filterT(this.searchstring) : this.books.slice())
         );
       },
       error => {
@@ -117,7 +110,7 @@ import { SeoService } from '@app/services/seo.service';
         }})
     }
   
-    private filterT(value: string, type: string): Book[] {
+    private filterT(value: string): Book[] {
   
       const filterValue = value.toLowerCase();
       let list: Book[] = this.books;

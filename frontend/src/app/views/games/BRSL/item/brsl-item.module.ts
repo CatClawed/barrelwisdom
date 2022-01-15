@@ -1,40 +1,29 @@
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { ModalModule } from 'ngx-bootstrap/modal';
-
-import { BRSLItemlistComponent } from './brsl-itemlist.component';
-import { BRSLItemComponent } from './brsl-item.component';
-import { BRSLItemRoutingModule } from './brsl-item-routing.module';
-import { LanguageModule } from '@app/views/language/language.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 import { PipeModule } from '@app/pipes/pipes.module';
 import { ErrorModule } from '@app/views/error/error.module';
-
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import {MatInputModule} from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatChipsModule } from '@angular/material/chips';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {OverlayModule} from '@angular/cdk/overlay'; 
-import {MatIconModule} from '@angular/material/icon'; 
-import {MatSelectModule} from '@angular/material/select';
-import {MatButtonModule} from '@angular/material/button';
+import { LanguageModule } from '@app/views/language/language.module';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { PopoverModule } from 'ngx-bootstrap/popover';
+import { BRSLItemRoutingModule } from './brsl-item-routing.module';
+import { BRSLItemComponent } from './brsl-item.component';
+import { BRSLItemlistComponent } from './brsl-itemlist.component';
 
 @NgModule({
     imports: [
       CommonModule,
       ModalModule.forRoot(),
-      FormsModule,
       ReactiveFormsModule,
       BRSLItemRoutingModule,
-      TooltipModule.forRoot(),
       PipeModule,
       MatInputModule,
       MatFormFieldModule,
-      MatChipsModule,
-      MatAutocompleteModule,
-      OverlayModule,
       MatIconModule,
       MatSelectModule,
       MatButtonModule,
@@ -45,10 +34,6 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
     declarations: [
         BRSLItemlistComponent,
         BRSLItemComponent,
-    ],
-    exports: [
-        BRSLItemlistComponent,
-        BRSLItemComponent
-    ],
+    ]
   })
   export class BRSLItemModule {}

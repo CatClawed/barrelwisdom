@@ -26,7 +26,6 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/@coreui/icons/css/free.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.css",
               "src/scss/style.scss"
             ],
