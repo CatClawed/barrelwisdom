@@ -313,31 +313,45 @@ select {
 
 /* Background pattern from Toptal Subtle Patterns */
 .main {
-  background: url("/media/main/images/ricepaper2.webp");
-  background-color: #faf6f5;
-  margin-left: 0 !important;
+
   padding-left: 1em;
   padding-right: 1em;
   font-size: calc(1rem + 0.1vw);
+  margin: 55px auto 0 auto;
+  width: 60%;
+}
+
+@media screen and (max-width: 1280px) {
+  .main {
+  margin: 55px 0 0 200px;
+  width: 100%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .main {
+  margin: 55px 0 0 0;
+  width: 100%;
+  }
 }
 
 h1 {
   font-family: Merriweather;
-  font-size: calc(2.5rem + 0.1vw);
+  font-size: calc(2.5rem + 0.1vw) !important;
   padding-top: 0;
   border-bottom: 1px dotted black;
 }
 
 h2 {
   font-family: Merriweather;
-  font-size: calc(1.75rem + 0.1vw);
+  font-size: calc(1.75rem + 0.1vw) !important;
   padding-top: 0.5em;
   border-bottom: 1px dotted black;
 }
 
 h3 {
   font-family: Merriweather;
-  font-size: calc(1.53125rem + 0.1vw);
+  font-size: calc(1.53125rem + 0.1vw) !important;
   padding-top: 0.5em;
 }
 
@@ -399,6 +413,144 @@ h4 {
   }
 }
 
+// reeeeemake
+
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.navigation {
+  position: fixed;
+  z-index: 1000;
+  background-color: $navbar !important;
+  border-bottom: transparent !important;
+  background: linear-gradient(0deg, rgba(71,58,48,1) 0%, rgba(94,76,63,0.8687675753895308) 100%);
+  height: 55px;
+  padding: 0;
+  width: 100%;
+}
+
+.navigation-brand {
+  display: inline-flex;
+  align-items: center;
+  width: 155px;
+  height: 55px;
+  padding: 0;
+  margin-right: 0;
+  justify-content: center;
+  margin-right: 1rem;
+}
+
+.nav-items {
+  color:white;
+  padding-left:1rem;
+  padding-right:1rem;
+  padding-top:0.5rem;
+  padding-bottom:0.5rem;
+  font-size:1rem;
+}
+
+.nav-items:hover {
+  color:white;
+  text-decoration: none;
+  background-color: #2f1d12;
+  border-radius: 0.25rem;
+}
+
+.footer {
+  background-color: #5e4c3f;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+
+  > a {
+    color: white;
+  }
+
+  > a:hover {
+    color: white;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .navigation-hide-large {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .nav-items {
+    display: none;
+  }
+  .navbrand {
+    position: absolute;
+    left: 50%;
+    margin-left: -77.5px;
+  }
+}
+
+.sidenav {
+  background-color: $sidebar !important;
+  width: 200px;
+
+}
+
+.sidenav-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidenav-item {
+  padding: 0.6rem;
+  color: white;
+  border-radius: 0.25rem;
+  width: 95%;
+  display: flex;
+  align-items: center;
+
+  > i {
+    margin-right: 0.5rem;
+    width: 1rem;
+  }
+
+  > b {
+    margin-left: auto;
+  }
+}
+
+.sidenav-item:hover {
+  color: white;
+  background-color: #20a8d8 !important;
+  text-decoration: none;
+}
+
+.sidenav-child {
+  padding-left: 2.1rem;
+}
+
+.sidenav-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1em;
+}
+
+/* Background pattern from Toptal Subtle Patterns */
+body {
+  background: url("/media/main/images/ricepaper2.webp");
+  background-color: #faf6f5;
+}
+
+.mat-drawer-container {
+  background: transparent;
+}
+
+
 // Major components (header, main, sidebar, etc.)
 
 .app-header {
@@ -414,6 +566,8 @@ h4 {
   border-bottom: transparent !important;
   background: linear-gradient(0deg, rgba(71,58,48,1) 0%, rgba(94,76,63,0.8687675753895308) 100%);
 }
+
+
 
 .sidebar {
   background-color: $sidebar !important;

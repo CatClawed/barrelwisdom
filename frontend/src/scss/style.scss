@@ -1,4 +1,4 @@
-@use '~@angular/material' as mat;
+@use '@angular/material' as mat;
 
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
@@ -26,13 +26,17 @@ $frontend-theme: mat.define-light-theme($frontend-primary, $frontend-accent, $fr
 // that you are using.
 @include mat.all-component-themes($frontend-theme);
 
+
 // If you want to override variables do it here
 @import "variables";
-@import 'custom';
-//$fa-font-path: "~/media/main/font/fa-5.15.3";
-// Import styles
-@import "~@coreui/coreui/scss/coreui";
-@import '~@angular/cdk/overlay-prebuilt.css';
-//@import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
-// If you want to add something do it here
+@import "~bootstrap/scss/bootstrap";
+
+@import 'custom';
+
+// Import styles
+@import '~@angular/cdk/overlay-prebuilt.css';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '~@fortawesome/fontawesome-free/scss/solid.scss';
+@import '~@fortawesome/fontawesome-free/scss/regular.scss';
+@import '~@fortawesome/fontawesome-free/scss/brands.scss';

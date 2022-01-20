@@ -26,7 +26,6 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/@fortawesome/fontawesome-free/css/all.css",
               "src/scss/style.scss"
             ],
             "stylePreprocessorOptions": {
@@ -35,7 +34,6 @@
               ]
             },
             "scripts": [
-              "node_modules/chart.js/dist/Chart.min.js"
             ],
             "vendorChunk": true,
             "extractLicenses": false,

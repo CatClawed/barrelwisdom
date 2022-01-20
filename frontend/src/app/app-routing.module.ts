@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, ExtraOptions } from '@angular/router';
-import { DefaultLayoutComponent } from '@app/containers';
+import { LayoutComponent } from '@app/containers';
 
 const routerOptions: ExtraOptions = {
   scrollPositionRestoration: 'enabled',
@@ -12,7 +12,7 @@ const routerOptions: ExtraOptions = {
 const routes: Routes = [
   {
     path: 'login',
-    component: DefaultLayoutComponent,
+    component: LayoutComponent,
     children: [
       {
         path: '',
@@ -22,7 +22,7 @@ const routes: Routes = [
   },
   {
     path: 'settings',
-    component: DefaultLayoutComponent,
+    component: LayoutComponent,
     children: [
       {
         path: '',
@@ -32,7 +32,7 @@ const routes: Routes = [
   },
   {
     path: 'register',
-    component: DefaultLayoutComponent,
+    component: LayoutComponent,
     children: [
       {
         path: '',
@@ -42,7 +42,7 @@ const routes: Routes = [
   },
   {
     path: 'create',
-    component: DefaultLayoutComponent,
+    component: LayoutComponent,
     children: [
       {
         path: '',
@@ -52,7 +52,7 @@ const routes: Routes = [
   },
   {
     path: 'user/:username',
-    component: DefaultLayoutComponent,
+    component: LayoutComponent,
     children: [
       {
         path: '', 
@@ -62,7 +62,7 @@ const routes: Routes = [
   },
   {
     path: 'tag/:tagname',
-    component: DefaultLayoutComponent,
+    component: LayoutComponent,
     children: [
       {
         path: '', 
@@ -72,7 +72,7 @@ const routes: Routes = [
   },
   {
     path: 'escha',
-    component: DefaultLayoutComponent,
+    component: LayoutComponent,
     children: [
       {
         path: '', 
@@ -82,7 +82,7 @@ const routes: Routes = [
   },
   {
     path: 'shallie',
-    component: DefaultLayoutComponent,
+    component: LayoutComponent,
     children: [
       {
         path: '', 
@@ -92,7 +92,7 @@ const routes: Routes = [
   },
   {
     path: 'ryza2',
-    component: DefaultLayoutComponent,
+    component: LayoutComponent,
     children: [
       {
         path: '', 
@@ -103,7 +103,7 @@ const routes: Routes = [
   },
   {
     path: 'totori',
-    component: DefaultLayoutComponent,
+    component: LayoutComponent,
     children: [
       {
         path: '', 
@@ -113,7 +113,7 @@ const routes: Routes = [
   },
   {
     path: 'bluereflection',
-    component: DefaultLayoutComponent,
+    component: LayoutComponent,
     children: [
       {
         path: '', 
@@ -123,7 +123,7 @@ const routes: Routes = [
   },
   {
     path: 'second-light',
-    component: DefaultLayoutComponent,
+    component: LayoutComponent,
     children: [
       {
         path: '', 
@@ -153,7 +153,7 @@ const routes: Routes = [
   },
   {
     path: ':section/:title',
-    component: DefaultLayoutComponent,
+    component: LayoutComponent,
     children: [
       {
         path: '', 
@@ -163,7 +163,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: DefaultLayoutComponent,
+    component: LayoutComponent,
     children: [
       {
         path: '', 

@@ -2,15 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders,  } from '@angular/common/http';
 import { BehaviorSubject, Observable} from 'rxjs';
 import { environment } from '@environments/environment';
-import { INavData } from '@coreui/angular';
 import { Router, NavigationEnd } from '@angular/router';
 
 
 @Injectable({ providedIn: 'root' })
 export class NavigationService {
-  private navSubject: BehaviorSubject<INavData[]>;
-  public nav: Observable<INavData[]>;
-  public n: INavData[];
+  private navSubject: BehaviorSubject<NavItems[]>;
+  public nav: Observable<NavItems[]>;
+  public n: NavItems[];
   public blogNav = ['user', 'settings', 'tag', 'login', 'register'];
   previousSection = "";
 
@@ -21,7 +20,7 @@ export class NavigationService {
   constructor(
     private http: HttpClient,
     private router: Router) {
-      this.navSubject = new BehaviorSubject<INavData[]>(this.n);
+      this.navSubject = new BehaviorSubject<NavItems[]>(this.n);
       this.nav = this.navSubject.asObservable();
 
       this.router.events.subscribe(val => {
@@ -47,11 +46,21 @@ export class NavigationService {
   }
 
 
-  getNav(section: string): Observable<any> {
-    if(section && section != "tags" && section != "user" && section != "settings" && section != "create") {
-        return this.http.get<any>(`${environment.apiUrl}/nav/${section}/`, this.httpOptions);
-    }
-    return this.http.get<any>(`${environment.apiUrl}/nav/blog/`, this.httpOptions);
+  getNav(section: string): Observable<Nav> {
+      return this.http.get<Nav>(`${environment.apiUrl}/nav/${section}/`, this.httpOptions);
   }
 
+}
+
+export interface Nav {
+  section: string;
+  data: string;
+}
+
+export interface NavItems {
+  name: string;
+  url: string;
+  icon: string;
+  children: NavItems[];
+  expand: boolean;
 }
