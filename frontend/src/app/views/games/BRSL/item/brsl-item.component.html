@@ -13,11 +13,11 @@
  <div class="{{colset}} card card-body">
     <h4 class="card-title card-icon-space">{{item.name}}</h4>
     <span *ngIf="item.isDLC" class="card-icon-position badge bg-secondary">DLC</span>
-    <img class="image-display" loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp">
-    <table class="table" style="margin-top:1rem;">
+    <img class="image-display" loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
+    <table class="tbl" style="margin-top:1rem;">
       <tr>
         <td style="vertical-align:middle; border-bottom:1px solid #c8c3d3;">{{item.desc}}</td>
-        <td style="vertical-align:middle; padding:0;border-bottom:1px solid #c8c3d3;"><img src="/media/games/second-light/characters/{{item.char}}.webp"></td>
+        <td style="vertical-align:middle; padding:0;border-bottom:1px solid #c8c3d3;"><img src="/media/games/second-light/characters/{{item.char}}.webp" alt=""></td>
       </tr>
     </table>
     <p *ngIf="item.note"><b>Acquisition:</b> {{item.note}}</p>
@@ -40,7 +40,7 @@
       <li *ngFor="let drop of item.demon_set"><a href="/{{gameURL}}/demons/{{drop.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{drop.name}}</a></li>
     </ul>
     <ng-container *ngIf="item.effline_set">
-      <table class="table table-shrink">
+      <table class="tbl table-shrink">
         <tr class="table-dark-center"><th colspan=2>Effects</th></tr>
         <tr *ngFor="let eline of item.effline_set">
           <td style="width:50%;">{{eline.line}}</td>
@@ -71,7 +71,7 @@
       </table>
     </ng-container>
     <ng-container *ngIf="item.skillline_set">
-      <table class="table table-shrink">
+      <table class="tbl table-shrink">
         <tr class="table-dark-center">
           <th colspan=2 style="position:relative;">Skill Effects
             <a *ngIf="!expand" href="javascript:void(0)" style="color:black;text-decoration:none;position:absolute;right:1rem;top:50%;transform: translate(-50%,-50%);" (click)="expand=!expand;$event.preventDefault();" class="fas fa-chevron-up"></a>

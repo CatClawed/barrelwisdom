@@ -17,7 +17,7 @@
       <span *ngIf="book.isDX" class="badge bg-secondary">DX</span>
     </div>
     <div class="card-item-display">
-      <img loading="lazy" src="/media/games/{{gameURL}}/items/{{book.slugname}}.webp">
+      <img loading="lazy" src="/media/games/{{gameURL}}/items/{{book.slugname}}.webp" alt={{book.name}}>
     </div>
     <p *ngIf="book.desc">{{book.desc}}</p>
     <p><b>Acquisition: </b>{{book.note}}</p>

@@ -27,7 +27,7 @@
 </div>  
   <div *ngFor="let skill of skills">
     <h2 *ngIf="skill.skill_set" id="{{skill.slug}}">{{skill.name}}</h2>
-    <table *ngIf="skill.skill_set" class="table border table-shrink">
+    <table *ngIf="skill.skill_set" class="tbl border table-shrink">
       <tr *ngFor="let data of skill.skill_set">
         <td><b>{{data.name}}</b></td>
         <td>[{{data.range}}]<br />

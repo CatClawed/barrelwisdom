@@ -1,5 +1,6 @@
-import { BreakpointObserver, MediaMatcher } from '@angular/cdk/layout';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from '@app/interfaces/user';
 import { AuthenticationService } from '@app/services/authentication.service';
 import { HistoryService } from '@app/services/history.service';
@@ -13,17 +14,13 @@ export class LayoutComponent implements OnInit {
   public sidebarMinimized = false;
   public navItems: NavItems[];
   user: User;
-  previousRoute: string;
-  currentRoute: string;
-  mobileQuery: MediaQueryList;
   mobileView = false;
 
   constructor(private authenticationService: AuthenticationService,
     public navService: NavigationService,
     public historyService: HistoryService,
-    media: MediaMatcher,
-    public breakpointObserver: BreakpointObserver) {
-      this.mobileQuery = media.matchMedia('(max-width: 800px)');
+    public breakpointObserver: BreakpointObserver,
+    public router: Router) {
     }
     
   ngOnInit(): void {

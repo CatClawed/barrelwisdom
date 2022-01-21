@@ -16,7 +16,7 @@
       <b *ngIf="item.level">LV {{item.level}}</b>
     </div>
     <div class="card-item-display">
-      <img loading="lazy" src="{{imgURL}}items/{{item.slugname}}.webp">
+      <img loading="lazy" src="{{imgURL}}items/{{item.slugname}}.webp" alt="{{item.name}}">
     </div>
     <p>{{item.desc}}</p>
     <p *ngIf="item.book_set"><b>Recipe Book: </b><a href="/{{gameURL}}/recipe-books/{{item.book_set[0].slugname}}" (click)="historyService.hrefClicked($event)">{{item.book_set[0].name}}</a></p>
@@ -45,7 +45,7 @@
       <li *ngIf="item.price">Selling Price: {{item.price}}</li>
       <li *ngIf="item.uses">Uses: {{item.uses}}</li>
     </ul>
-    <table *ngIf="item.ingredient_set" class="table">
+    <table *ngIf="item.ingredient_set" class="tbl">
       <tr class="table-dark-center">
         <th>Ingredients</th>
       </tr>
@@ -55,7 +55,7 @@
         </ul>
       </td></tr>
     </table>
-    <table *ngIf="item.effectline_set" class="table">
+    <table *ngIf="item.effectline_set" class="tbl">
       <tr class="table-dark-center"><th colspan=2>Effects</th></tr>
       <tr *ngIf="itemone"><td>Item 1</td><td>
         <ul style="margin-bottom:0;">
@@ -79,7 +79,7 @@
         </ul>
       </td></tr>
     </table>
-    <table *ngIf="item.equip_set" class="table">
+    <table *ngIf="item.equip_set" class="tbl">
       <tr class="table-dark-center"><th>Materials</th></tr>
       <tr><td>
         <ul>
@@ -87,7 +87,7 @@
         </ul>
       </td></tr>
     </table>
-    <table *ngIf="item.equip_set" class="table">
+    <table *ngIf="item.equip_set" class="tbl">
         <tr class="table-dark-center"><th colspan=2>Stats</th></tr>
         <tr><td style="padding-top:0.2rem;text-align:right;width:50%;"><b>HP </b></td> <td style="padding-top:0.2rem;padding-left:0.5em;">{{item.equip_set[0].hp}}<span *ngIf="!item.equip_set[0].hp">0</span></td></tr>
         <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>MP </b></td> <td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].mp}}<span *ngIf="!item.equip_set[0].mp">0</span></td></tr>
@@ -96,9 +96,9 @@
         <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>DEF </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].defen}}<span *ngIf="!item.equip_set[0].defen">0</span></td></tr>
         <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>SPD </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].spd}}<span *ngIf="!item.equip_set[0].spd">0</span></td></tr>
     </table>
-    <table *ngIf="item.equip_set" class="table">
+    <table *ngIf="item.equip_set" class="tbl">
         <tr class="table-dark-center"><th>Characters</th></tr>
-        <tr><td><img *ngFor="let char of item.equip_set[0].chars" src="{{imgURL}}resources/equip_{{char.name}}.webp"></td></tr>
+        <tr><td><img *ngFor="let char of item.equip_set[0].chars" src="{{imgURL}}resources/equip_{{char.name}}.webp" alt="Can equip: {{char.name}}"></td></tr>
     </table>
   </div>
   <language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>

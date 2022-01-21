@@ -19,7 +19,7 @@
       <span *ngIf="monster.isStrong" class="badge bg-secondary">Strong</span>
       <span *ngIf="monster.isDX" class="badge bg-secondary">DX</span>
     </div>
-    <img class="image-display" loading="lazy" src="{{imgURL}}monsters/{{monster.slugname}}.webp">
+    <img class="image-display" loading="lazy" src="{{imgURL}}monsters/{{monster.slugname}}.webp" alt="{{monster.name}}">
     <p *ngIf="monster.desc">{{monster.desc}}</p>
     <div class="row">
       <div class="col-md-6">
@@ -34,8 +34,8 @@
           <li *ngFor="let drop of monster.item_set"><a href="/{{gameURL}}/items/{{drop.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{drop.name}}</a></li>
         </ul>
       </div>
-      <div class="col-md=6">
-        <table style="width:auto;" class="table">
+      <div class="col-md-6">
+        <table style="width:auto;" class="tbl">
         <tr>
             <td style="border-top:transparent;padding:0;"><b>LV </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.level}}</td>
           </tr>

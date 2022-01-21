@@ -28,6 +28,7 @@ __pycache__/
 /frontend/e2e/*.js
 /frontend/e2e/*.map
 /frontend/dist.tar
+/frontend/.angular
 
 # Junky stuff
 

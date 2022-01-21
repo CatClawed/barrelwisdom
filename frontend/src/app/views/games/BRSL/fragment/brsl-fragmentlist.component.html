@@ -84,14 +84,14 @@
               </li>
             </ul>
           </ng-template>
-          <table class="table table-shrink">
+          <table class="tbl table-shrink">
             <tr class="table-dark-center"><th>Fragments</th></tr>
             <tr><td><i class="fas fa-arrow-up"></i><i class="fas fa-arrow-up"></i>     {{evt.fragment[0].name}}<br /><a href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="fragonePopover" popoverTitle="{{evt.fragment[0].eff}}">{{evt.fragment[0].eff}}</a><br />Size: {{evt.fragment[0].size}}<br />Gear: {{evt.fragment[0].gear}}</td></tr>
             <tr><td><i class="fas fa-arrow-down"></i><i class="fas fa-arrow-down"></i> {{evt.fragment[1].name}}<br /><a href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="fragonePopover" popoverTitle="{{evt.fragment[1].eff}}">{{evt.fragment[1].eff}}</a><br />Size: {{evt.fragment[1].size}}<br />Gear: {{evt.fragment[1].gear}}</td></tr>
           </table>
           </ng-container>
           <ng-container *ngIf="evt.fragment.length != 2">
-             <table class="table table-shrink">
+             <table class="tbl table-shrink">
               <tr class="table-dark-center"><th>Fragments</th></tr>
               <tr *ngFor="let frag of evt.fragment">
                 <ng-template #fragPopover>
@@ -114,7 +114,7 @@
               </tr>
              </table>
           </ng-container>
-          <table *ngIf="evt.choices" class="table table-shrink">
+          <table *ngIf="evt.choices" class="tbl table-shrink">
             <tr class="table-dark-center"><th style="position:relative;">Choices<a *ngIf="!evt.expand" href="javascript:void(0)" style="color:black;text-decoration:none;position:absolute;right:1rem;top:50%;transform: translate(-50%,-50%);" (click)="evt.expand=!evt.expand;$event.preventDefault();" class="fas fa-chevron-up"></a><a *ngIf="evt.expand" href="javascript:void(0)" style="color:black;text-decoration:none;position:absolute;right:1rem;top:50%;transform: translate(-50%,-50%);" (click)="evt.expand=!evt.expand;$event.preventDefault();" class="fas fa-chevron-down"></a></th></tr>
             <ng-container *ngIf="evt.expand"><tr *ngFor="let p of evt.choices | pair"><td>
               <ul><li *ngFor="let choice of p">

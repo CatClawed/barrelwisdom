@@ -142,6 +142,11 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'lulua',
+    redirectTo: '/lulua/easy-final-boss-guide',
+    pathMatch: 'full'
+  },
+  {
     path: 'noa2',
     redirectTo: '/noa2/maps',
     pathMatch: 'full'

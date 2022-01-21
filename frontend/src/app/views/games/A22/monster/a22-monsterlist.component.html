@@ -108,7 +108,7 @@
         <br *ngIf="mon.isDLC" /><span *ngIf="mon.isDLC" class="badge bg-secondary">DLC</span>
       </div>
       <a class="card-item-display" (click)="openModal(monsterModal, mon.slug); $event.preventDefault();" href="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">
-         <img loading="lazy" src="{{imgURL}}monsters/{{mon.slug}}.webp">
+         <img loading="lazy" src="{{imgURL}}monsters/{{mon.slug}}.webp" alt="{{mon.name}}">
       </a>
       <button (click)="openModal(monsterModal, mon.slug)" class="card-read-more-position" mat-mini-fab color="accent">
          <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>

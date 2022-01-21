@@ -39,7 +39,7 @@
   <div class="form-group row">
     <label class="col-md-2 col-form-label" for="select1">Section</label>
     <div class="col-md-10">
-      <select class="form-control" formControlName="section"
+      <select class="form-select" formControlName="section"
         [ngClass]="{ 'is-invalid': submitted && f.section.errors }">
         <option *ngFor="let section of sectionList" value="{{section.id}}">{{section.name}}</option>
       </select>

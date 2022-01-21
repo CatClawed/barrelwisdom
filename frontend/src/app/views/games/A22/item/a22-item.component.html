@@ -29,13 +29,13 @@
         <br *ngIf="item.isDLC" /><span *ngIf="item.isDLC" class="badge bg-secondary">DLC</span>
       </div>
     <div class="card-item-display">
-       <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp">
+       <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
     </div>
     <div class="card-text">
       <p>{{item.desc}}</p>
       <p *ngIf="item.note"><b>Note:</b> {{item.note}}</p>
-      <div class="row" style="justify-content: space-between;margin: 0.5em;">
-        <table>
+      <div class="row">
+        <table class="table-item-data col">
           <tr *ngFor="let cat of item.category">
               <td style="text-align: center;"><i class="atelier atelier-ryza2-category-{{cat.slug}}"></i></td><td><a href="/{{gameURL}}/categories/{{cat.slug}}" (click)="historyService.hrefClicked($event)">{{cat.name}}</a></td>
           </tr>
@@ -88,7 +88,7 @@
           </div>
         </ng-container>
         <ng-container *ngIf="item.effectline_set">
-          <table class="table">
+          <table class="tbl">
             <tr class="table-dark-center"><th colspan=2 >Effects</th></tr>
             <tr>
               <td style="vertical-align: middle;"><b>1</b></td><td>
@@ -121,7 +121,7 @@
           </table>
         </ng-container>
         <ng-container *ngIf="item.usableitem_set">
-          <table class="table table-shrink">
+          <table class="tbl table-shrink">
             <tr class="table-dark-center">
               <th>WT</th>
               <th>Stun</th>
@@ -129,7 +129,7 @@
               <th>Cool Time</th>
               <th>Range</th>
             </tr>
-            <tr>
+            <tr style="text-align:center;">
               <td>{{item.usableitem_set[0].wt}}</td>
               <td>{{item.usableitem_set[0].stun}}</td>
               <td>{{item.usableitem_set[0].cc}}</td>
@@ -139,7 +139,7 @@
           </table>
         </ng-container>
         <ng-container *ngIf="item.ingredient_set">
-          <table class="table table-shrink">
+          <table class="tbl table-shrink">
             <tr class="table-dark-center"><th colspan=2>Synthesis</th></tr>
             <tr *ngFor="let ing of item.ingredient_set">
               <td style="text-align: center;">

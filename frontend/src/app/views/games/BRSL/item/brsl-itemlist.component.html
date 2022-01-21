@@ -50,7 +50,7 @@
       </h4>
       <span *ngIf="item.isDLC" class="card-icon-position badge bg-secondary">DLC</span>
       <a class="card-item-display" (click)="openModal(itemModal, item.slug); $event.preventDefault();" href="/{{gameURL}}/items/{{item.slug}}/{{language}}">
-        <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp">
+        <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
       </a>
       <ul style="list-style-type:none;padding-left:0;">
         <li *ngFor="let cat of item.category">{{cat.name}}</li>

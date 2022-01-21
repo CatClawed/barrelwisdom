@@ -24,7 +24,7 @@
 <ng-container *ngFor="let area of location.fields">
   <h2 id="{{area.slugname}}">{{area.name}}</h2>
   <div (click)="historyService.hrefClicked($event);" [innerHTML]="area.note"></div>
-  <table class="table border table-shrink">
+  <table class="tbl border table-shrink">
     <tr class="table-dark-center">
       <th *ngIf="area.ingredients">Items</th>
       <th *ngIf="area.rare">Rare</th>

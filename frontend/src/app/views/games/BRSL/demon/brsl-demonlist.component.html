@@ -29,7 +29,7 @@
         </h4>
         <span *ngIf="mon.isDLC" class="card-icon-position badge bg-secondary">DLC</span>
       <a class="card-item-display" (click)="openModal(demonModal, mon.slug); $event.preventDefault();" href="/{{gameURL}}/demons/{{mon.slug}}/{{language}}">
-        <img loading="lazy" src="{{imgURL}}demons/{{mon.slug}}.webp">
+        <img loading="lazy" src="{{imgURL}}demons/{{mon.slug}}.webp" alt="{{mon.name}}">
       </a>
       <button (click)="openModal(demonModal, mon.slug)" class="card-read-more-position" mat-mini-fab color="accent">
         <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>

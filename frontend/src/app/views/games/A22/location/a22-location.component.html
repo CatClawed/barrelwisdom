@@ -21,12 +21,12 @@
     </div>
     <div id="{{area.slug}}" *ngFor="let area of region.areas">
         <h2>{{area.name}}</h2>
-        <table class="table table-shrink table-bordered" >
-            <tr>
+        <table class="tbl table-shrink table-border" >
+            <tr style="text-align:center;">
                 <th>Tool</th>
-                <th style="text-align: center;"><i class="fas fa-star"></i></th>
-                <th style="text-align: center;"><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
-                <th style="text-align: center;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
+                <th><i class="fas fa-star"></i></th>
+                <th><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
+                <th><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
             </tr>
             <tr *ngFor="let node of area.gatherdata">
                 <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'All' || node.tool == 'Staff'"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-staff"></i></td>

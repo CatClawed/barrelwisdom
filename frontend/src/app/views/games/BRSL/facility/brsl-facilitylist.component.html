@@ -29,7 +29,7 @@
       </h4>
       <span *ngIf="facility.isDLC" class="card-icon-position badge bg-secondary">DLC</span>
       <a class="card-item-display" (click)="openModal(facilityModal, facility.slug); $event.preventDefault();" href="/{{gameURL}}/facilities/{{facility.slug}}/{{language}}">
-        <img loading="lazy" src="{{imgURL}}facilities/{{facility.slug}}.webp">
+        <img loading="lazy" src="{{imgURL}}facilities/{{facility.slug}}.webp" alt="{{facility.name}}">
       </a>
       <button (click)="openModal(facilityModal, facility.slug)" class="card-read-more-position" mat-mini-fab color="accent">
         <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>

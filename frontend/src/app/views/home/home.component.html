@@ -9,7 +9,7 @@
             <div *ngIf="b" class="card allheight">
                 <div class="aspect-ratio-box">
                     <a (click)="historyService.hrefClicked($event);" href="/blog/{{b.slugtitle}}">
-                        <img load="lazy" src="{{b.image}}">
+                        <img loading="lazy" src="{{b.image}}" alt="" role="presentation">
                     </a>
                 </div>
                 <div class="headline">

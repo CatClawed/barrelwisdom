@@ -73,7 +73,7 @@
         </div>
       </div>
       <a class="card-item-display" (click)="openModal(itemModal, it.slugname); $event.preventDefault();" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">
-        <img loading="lazy" src="{{imgURL}}items/{{it.slugname}}.webp">
+        <img loading="lazy" src="{{imgURL}}items/{{it.slugname}}.webp" alt="{{it.name}}">
       </a>
       <table class="table-item-data">
         <tr *ngFor="let cat of it.categories">

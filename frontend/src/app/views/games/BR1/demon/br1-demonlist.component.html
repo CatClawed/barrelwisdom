@@ -36,7 +36,7 @@
                <ul *ngIf="demon.item_set">
                   <li *ngFor="let item of demon.item_set"><a href="/{{gameURL}}/items/{{item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.name}}</a></li>
                </ul>
-               <table style="padding:0;text-align:center;" class="table table-shrink">
+               <table style="padding:0;text-align:center;" class="tbl table-shrink">
                   <tr>
                      <td>HP</td>
                      <td>ATK</td>
@@ -52,7 +52,7 @@
                      <td>{{demon.luk}}</td>
                   </tr>
                </table>
-               <table style="padding:0;text-align:center;" class="table table-shrink">
+               <table style="padding:0;text-align:center;" class="tbl table-shrink">
                   <tr>
                      <td style="width:25%">Slash</td>
                      <td style="width:25%">Impact</td>

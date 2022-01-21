@@ -9,6 +9,7 @@
 
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 .iconAtelier {
@@ -69,7 +70,7 @@
 
 .atelier-sm {
   font-size: 1em;
-  padding-right: 0.3em;
+  padding-right: 0;
 }
 .atelier-lg {
   font-size: 2.4em;
@@ -134,10 +135,6 @@
   }
 }
 
-select {
-  font-family: Atelier;
-}
-
 .spacer {
   margin-bottom: 1em;
 }
@@ -178,6 +175,11 @@ select {
   }
 }
 
+a.badge:hover {
+  color: white !important;
+  filter: brightness(85%);
+  text-decoration: none;
+}
 
 .modal-body {
   position:absolute !important;
@@ -227,9 +229,14 @@ select {
 }
  
 .close {
-  text-shadow: none !important;
-  color: white !important;
-  opacity: 100% !important;
+  text-shadow: none;
+  color: white;
+  opacity: 100%;
+  background-color: transparent;
+  border: none;
+  float: right;
+  padding: 0;
+  font-size: 1.35rem;
 }
 
 /* Background pattern from Toptal Subtle Patterns */
@@ -278,9 +285,17 @@ select {
 }
 
 /* Background pattern from Toptal Subtle Patterns */
-.table {
+.tbl {
   background-color: white;
   background-image: url("/media/main/images/clean_textile.webp");
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.tbl td, .tbl th {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #c8ced3;
 }
 
 @media screen and (max-width: 576px) {
@@ -301,6 +316,7 @@ select {
 
 .table-item-data {
   display:block;
+  width: fit-content;
 
   > tr {
     vertical-align: top;
@@ -415,6 +431,26 @@ h4 {
 
 // reeeeemake
 
+// tabs
+
+.tab-content > .tab-pane {
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+  border-bottom: 1px solid gray;
+  padding: 1rem;
+}
+
+// buttons
+
+.btn {
+  color: white !important;
+}
+
+// nasty white perfect scrollbar background gone
+.ps__rail-y {
+  background-color: transparent !important;
+}
+
 a {
   text-decoration: none;
 }
@@ -515,7 +551,8 @@ a:hover {
 
   > i {
     margin-right: 0.5rem;
-    width: 1rem;
+    width: 1.3rem;
+    text-align:center;
   }
 
   > b {
@@ -529,8 +566,12 @@ a:hover {
   text-decoration: none;
 }
 
+.sidenav-item.active {
+  background-color: #3c4e5e;
+}
+
 .sidenav-child {
-  padding-left: 2.1rem;
+  padding-left: 2.4rem;
 }
 
 .sidenav-bottom {
@@ -744,6 +785,10 @@ ul.pagination {
   padding: 0.3rem;
 }
 
+.table-border th, .table-border td {
+  border: 1px solid #c8ced3;
+}
+
 img {
   max-width: 100%;
 }
@@ -780,6 +825,10 @@ img {
 }
 
 // Settings page
+
+.form-group {
+  margin-bottom: 1rem;
+}
 
 // User Pages
 

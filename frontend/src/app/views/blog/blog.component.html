@@ -25,7 +25,7 @@
 </header>
 <article *ngIf="blog">
     <div *ngIf="blog.image" class="blog-image">
-        <img class="blog-head-img" src="{{blog.image}}">
+        <img class="blog-head-img" src="{{blog.image}}" alt="" role="presentation">
     </div>
     <div (click)="historyService.hrefClicked($event);" [innerHTML]="body"></div>
     <div *ngIf="blog.tags.length > 0" class="blog-tags clearfix">

@@ -12,7 +12,7 @@
 <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
 <div class="mx-auto row">
     <div class="col-md-6">
-        <table style="border:1px solid #c8ced3;" class="table">
+        <table style="border:1px solid #c8ced3;" class="tbl">
             <tr class="table-dark-center"><th colspan=2>Items in Category</th></tr>
             <tr *ngFor="let item of category.item_set">
                 <td>
@@ -25,16 +25,16 @@
                     {{item.evalue}}
                 </td>
                 <td style="vertical-align:middle;">
-                  <img *ngIf="item.slots > 0" src="{{imgURL}}slot.webp">
-                  <img *ngIf="item.slots > 1" src="{{imgURL}}slot.webp">
-                  <img *ngIf="item.slots > 2" src="{{imgURL}}slot.webp">
-                  <img *ngIf="item.slots > 3" src="{{imgURL}}slot.webp">
+                  <img *ngIf="item.slots > 0" src="{{imgURL}}slot.webp" alt="">
+                  <img *ngIf="item.slots > 1" src="{{imgURL}}slot.webp" alt="">
+                  <img *ngIf="item.slots > 2" src="{{imgURL}}slot.webp" alt="">
+                  <img *ngIf="item.slots > 3" src="{{imgURL}}slot.webp" alt="">
                 </td>
             </tr>
         </table>
     </div>
     <div *ngIf="category.ingredientcat" class="col-md-6">
-        <table style="border:1px solid #c8ced3;" class="table">
+        <table style="border:1px solid #c8ced3;" class="tbl">
             <tr class="table-dark-center"><th colspan=2>Items Using Category</th></tr>
             <tr *ngFor="let item of category.ingredientcat">
                 <td>
@@ -47,10 +47,10 @@
                     {{item.synthitem.evalue}}
                 </td>
                 <td style="vertical-align:middle;">
-                  <img *ngIf="item.synthitem.slots > 0" src="{{imgURL}}slot.webp">
-                  <img *ngIf="item.synthitem.slots > 1" src="{{imgURL}}slot.webp">
-                  <img *ngIf="item.synthitem.slots > 2" src="{{imgURL}}slot.webp">
-                  <img *ngIf="item.synthitem.slots > 3" src="{{imgURL}}slot.webp">
+                  <img *ngIf="item.synthitem.slots > 0" src="{{imgURL}}slot.webp" alt="">
+                  <img *ngIf="item.synthitem.slots > 1" src="{{imgURL}}slot.webp" alt="">
+                  <img *ngIf="item.synthitem.slots > 2" src="{{imgURL}}slot.webp" alt="">
+                  <img *ngIf="item.synthitem.slots > 3" src="{{imgURL}}slot.webp" alt="">
                 </td>
             </tr>
         </table>

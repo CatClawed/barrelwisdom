@@ -13,11 +13,11 @@
  <div class="{{colset}} card griddisplay card-body">
     <h4 class="card-title card-icon-space">{{facility.name}}</h4>
     <span *ngIf="facility.isDLC" class="card-icon-position badge bg-secondary">DLC</span>
-    <img class="image-display" loading="lazy" src="{{imgURL}}facilities/{{facility.slug}}.webp">
-    <table class="table" style="margin-top:1rem;">
+    <img class="image-display" loading="lazy" src="{{imgURL}}facilities/{{facility.slug}}.webp" alt="{{facility.name">
+    <table class="tbl" style="margin-top:1rem;">
       <tr>
         <td style="vertical-align:middle; border-bottom:1px solid #c8c3d3;">{{facility.desc}}</td>
-        <td style="vertical-align:middle; padding:0;border-bottom:1px solid #c8c3d3;"><img src="/media/games/second-light/characters/{{facility.char}}.webp"></td>
+        <td style="vertical-align:middle; padding:0;border-bottom:1px solid #c8c3d3;"><img src="/media/games/second-light/characters/{{facility.char}}.webp" alt=""></td>
       </tr>
     </table>
     <!--
@@ -27,7 +27,7 @@
     <span *ngIf="facility.size>3" >Other</span>
     -->
     <ng-container *ngIf="facility.facilityeffline_set">
-      <table class="table table-shrink">
+      <table class="tbl table-shrink">
         <tr class="table-dark-center"><th colspan=2>Effects</th></tr>
         <tr *ngFor="let eline of facility.facilityeffline_set">
           <td>{{eline.line}}</td>
@@ -45,7 +45,7 @@
       </table>
     </ng-container>
     <ng-container *ngIf="facility.facilitying_set">
-      <table class="table table-shrink">
+      <table class="tbl table-shrink">
         <tr class="table-dark-center"><th colspan=2>Ingredients</th></tr>
         <tr *ngFor="let line of facility.facilitying_set">
           <td>{{line.level}}</td>

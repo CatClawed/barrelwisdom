@@ -24,7 +24,7 @@
 <ng-container *ngFor="let area of location.areas">
   <h2 id="{{area.slug}}">{{area.name}}</h2>
   <img *ngIf="area.map" style="padding-bottom:1rem;" src="{{area.map}}">
-  <table class="table border table-shrink">
+  <table class="tbl border table-shrink">
     <tr class="table-dark-center">
       <th *ngIf="area.items"  style="width:50%;">Items</th>
       <th *ngIf="area.demons" style="width:50%;">Demons</th>
