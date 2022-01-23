@@ -14,6 +14,7 @@ import { BRSLFacilityRoutingModule } from './brsl-facility-routing.module';
 import { BRSLFacilityComponent } from './brsl-facility.component';
 import { BRSLFacilitylistComponent } from './brsl-facilitylist.component';
 import { BRSLFacilitySetComponent } from './brsl-facilityset.component';
+import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
 
 @NgModule({
     imports: [
@@ -28,7 +29,8 @@ import { BRSLFacilitySetComponent } from './brsl-facilityset.component';
       MatButtonModule,
       LanguageModule,
       ErrorModule,
-      PopoverModule.forRoot()
+      PopoverModule.forRoot(),
+      BreadcrumbModule,
     ],
     declarations: [
         BRSLFacilitylistComponent,

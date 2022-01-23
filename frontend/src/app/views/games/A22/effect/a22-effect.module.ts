@@ -14,6 +14,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { A22EffectRoutingModule } from './a22-effect-routing.module';
 import { A22EffectComponent } from './a22-effect.component';
 import { A22EffectlistComponent } from './a22-effectlist.component';
+import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
 
 @NgModule({
     imports: [
@@ -30,6 +31,7 @@ import { A22EffectlistComponent } from './a22-effectlist.component';
       MatButtonModule,
       LanguageModule,
       ErrorModule,
+      BreadcrumbModule,
     ],
     declarations: [
         A22EffectlistComponent,

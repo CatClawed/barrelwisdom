@@ -4,6 +4,7 @@ import { ErrorModule } from '@app/views/error/error.module';
 import { LanguageModule } from '@app/views/language/language.module';
 import { A15LocationRoutingModule } from './a15-location-routing.module';
 import { A15LocationComponent } from './a15-location.component';
+import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
 
 @NgModule({
     imports: [
@@ -11,6 +12,7 @@ import { A15LocationComponent } from './a15-location.component';
       A15LocationRoutingModule,
       LanguageModule,
       ErrorModule,
+      BreadcrumbModule,
     ],
     declarations: [
         A15LocationComponent,

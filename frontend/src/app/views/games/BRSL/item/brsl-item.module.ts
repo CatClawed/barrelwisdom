@@ -14,6 +14,7 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
 import { BRSLItemRoutingModule } from './brsl-item-routing.module';
 import { BRSLItemComponent } from './brsl-item.component';
 import { BRSLItemlistComponent } from './brsl-itemlist.component';
+import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
 
 @NgModule({
     imports: [
@@ -29,7 +30,8 @@ import { BRSLItemlistComponent } from './brsl-itemlist.component';
       MatButtonModule,
       LanguageModule,
       ErrorModule,
-      PopoverModule.forRoot()
+      PopoverModule.forRoot(),
+      BreadcrumbModule,
     ],
     declarations: [
         BRSLItemlistComponent,

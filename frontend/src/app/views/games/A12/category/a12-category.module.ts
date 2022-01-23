@@ -4,6 +4,7 @@ import { ErrorModule } from '@app/views/error/error.module';
 import { LanguageModule } from '@app/views/language/language.module';
 import { A12CategoryRoutingModule } from './a12-category-routing.module';
 import { A12CategoryComponent } from './a12-category.component';
+import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
 
 @NgModule({
     imports: [
@@ -11,6 +12,7 @@ import { A12CategoryComponent } from './a12-category.component';
       A12CategoryRoutingModule,
       LanguageModule,
       ErrorModule,
+      BreadcrumbModule,
     ],
     declarations: [
         A12CategoryComponent,

@@ -1,13 +1,7 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
 <ng-container *ngIf="units">
-  <nav style="margin-top: 1em;" aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
-      <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.hrefClicked($event)">{{gameTitle}}</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Units</li>
-    </ol>
-  </nav>
+<Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Units"></Breadcrumb>
 <h1>Units</h1>
 <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
 <ng-container *ngIf="units">

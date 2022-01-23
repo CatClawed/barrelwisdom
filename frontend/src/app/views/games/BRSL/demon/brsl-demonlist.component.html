@@ -1,13 +1,7 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
 <ng-container *ngIf="!error">
-<nav style="margin-top: 1em;" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.hrefClicked($event)">{{gameTitle}}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Demons</li>
-  </ol>
-</nav>
+<Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Demons"></Breadcrumb>
 <h1>Demons</h1>
 <div class="col-md-10 mx-auto">
     <form [formGroup]="pageForm" class="form-horizontal">

@@ -1,14 +1,7 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
 <ng-container *ngIf="effect">
-<nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.hrefClicked($event)">{{gameTitle}}</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}/effects/{{language}}" (click)="historyService.hrefClicked($event)">Effects</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{effect.name}}</li>
-  </ol>
-</nav>
+<Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Effects', '/'+gameURL+'/effects/'+language]]" [current]="effect.name"></Breadcrumb>
 <div class="mx-auto row spacer">
   <div class="{{colset}} card card-body">
     <h4 class="card-title  card-icon-space">{{effect.name}}</h4>

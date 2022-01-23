@@ -4,6 +4,7 @@ import { ErrorModule } from '@app/views/error/error.module';
 import { LanguageModule } from '@app/views/language/language.module';
 import { BRSLLocationRoutingModule } from './brsl-location-routing.module';
 import { BRSLLocationComponent } from './brsl-location.component';
+import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
 
 @NgModule({
     imports: [
@@ -11,6 +12,7 @@ import { BRSLLocationComponent } from './brsl-location.component';
       BRSLLocationRoutingModule,
       LanguageModule,
       ErrorModule,
+      BreadcrumbModule,
     ],
     declarations: [
         BRSLLocationComponent,

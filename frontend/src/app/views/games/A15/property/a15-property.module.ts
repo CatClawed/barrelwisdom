@@ -13,6 +13,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { A15PropertyRoutingModule } from './a15-property-routing.module';
 import { A15PropertyComponent } from './a15-property.component';
 import { A15PropertylistComponent } from './a15-propertylist.component';
+import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
 
 @NgModule({
     imports: [
@@ -28,6 +29,7 @@ import { A15PropertylistComponent } from './a15-propertylist.component';
       MatSelectModule,
       LanguageModule,
       ErrorModule,
+      BreadcrumbModule,
     ],
     declarations: [
         A15PropertylistComponent,

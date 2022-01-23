@@ -14,6 +14,7 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
 import { A22ItemRoutingModule } from './a22-item-routing.module';
 import { A22ItemComponent } from './a22-item.component';
 import { A22ItemlistComponent } from './a22-itemlist.component';
+import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
 
 @NgModule({
     imports: [
@@ -29,7 +30,8 @@ import { A22ItemlistComponent } from './a22-itemlist.component';
       MatButtonModule,
       LanguageModule,
       ErrorModule,
-      PopoverModule.forRoot()
+      PopoverModule.forRoot(),
+      BreadcrumbModule,
     ],
     declarations: [
         A22ItemlistComponent,

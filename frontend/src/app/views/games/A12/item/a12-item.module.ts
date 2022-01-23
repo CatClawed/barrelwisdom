@@ -13,6 +13,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { A12ItemRoutingModule } from './a12-item-routing.module';
 import { A12ItemComponent } from './a12-item.component';
 import { A12ItemlistComponent } from './a12-itemlist.component';
+import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
 
 @NgModule({
     imports: [
@@ -28,6 +29,7 @@ import { A12ItemlistComponent } from './a12-itemlist.component';
       MatButtonModule,
       LanguageModule,
       ErrorModule,
+      BreadcrumbModule,
     ],
     declarations: [
         A12ItemlistComponent,

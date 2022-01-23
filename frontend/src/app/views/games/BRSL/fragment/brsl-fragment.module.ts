@@ -10,6 +10,7 @@ import { LanguageModule } from '@app/views/language/language.module';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { BRSLFragmentRoutingModule } from './brsl-fragment-routing.module';
 import { BRSLFragmentComponent } from './brsl-fragmentlist.component';
+import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
 
 @NgModule({
     imports: [
@@ -22,7 +23,8 @@ import { BRSLFragmentComponent } from './brsl-fragmentlist.component';
       MatSelectModule,
       LanguageModule,
       ErrorModule,
-      PopoverModule.forRoot()
+      PopoverModule.forRoot(),
+      BreadcrumbModule
     ],
     declarations: [
         BRSLFragmentComponent,

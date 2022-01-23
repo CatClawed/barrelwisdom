@@ -10,6 +10,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { BR1ItemRoutingModule } from './br1-item-routing.module';
 import { BR1ItemComponent } from './br1-item.component';
 import { BR1ItemlistComponent } from './br1-itemlist.component';
+import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
 
 @NgModule({
     imports: [
@@ -22,6 +23,7 @@ import { BR1ItemlistComponent } from './br1-itemlist.component';
       MatFormFieldModule,
       LanguageModule,
       ErrorModule,
+      BreadcrumbModule,
     ],
     declarations: [
         BR1ItemlistComponent,

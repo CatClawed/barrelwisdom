@@ -1,4 +1,4 @@
-import 'zone.js/node';
+import  'zone.js/dist/zone-node';
 
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import * as express from 'express';
@@ -7,7 +7,7 @@ import {enableProdMode} from '@angular/core';
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
-import { createProxyMiddleware, Filter, Options, RequestHandler } from 'http-proxy-middleware';
+import { createProxyMiddleware } from 'http-proxy-middleware';
 
 
 // The Express app is exported so that it can be used by serverless Functions.
@@ -19,7 +19,7 @@ export function app(): express.Express {
   enableProdMode();
   server.engine('html', ngExpressEngine({
     bootstrap: AppServerModule,
-    inlineCriticalCss: false,
+    inlineCriticalCss: true,
   }));
 
   // proxy middleware options
@@ -43,7 +43,7 @@ const options = {
 const apiProxy = createProxyMiddleware(optionsApi);
 //const comProxy = createProxyMiddleware(optionsCom);
 const mediaProxy = createProxyMiddleware(options);
-  server.use(compression());
+  server.use(compression())
   server.use('/api', apiProxy);
   server.use('/auth', apiProxy);
   server.use('/media', mediaProxy);

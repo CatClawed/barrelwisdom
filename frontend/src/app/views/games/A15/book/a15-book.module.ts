@@ -10,6 +10,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { A15BookRoutingModule } from './a15-book-routing.module';
 import { A15BookComponent } from './a15-book.component';
 import { A15BooklistComponent } from './a15-booklist.component';
+import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
 
 @NgModule({
     imports: [
@@ -22,6 +23,7 @@ import { A15BooklistComponent } from './a15-booklist.component';
       MatFormFieldModule,
       LanguageModule,
       ErrorModule,
+      BreadcrumbModule,
     ],
     declarations: [
         A15BooklistComponent,

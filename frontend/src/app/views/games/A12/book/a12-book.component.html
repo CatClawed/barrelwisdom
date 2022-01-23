@@ -1,14 +1,7 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
 <ng-container *ngIf="book">
-<nav *ngIf="showNav" style="margin-top: 1em;" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.hrefClicked($event)">{{gameTitle}}</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}/recipe-books/{{language}}" (click)="historyService.hrefClicked($event)">Recipe Books</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{book.name}}</li>
-  </ol>
-</nav>
+<Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Recipe Books', '/'+gameURL+'/recipe-books/'+language]]" [current]="book.name"></Breadcrumb>
 <div class="mx-auto row spacer">
   <div class="{{colset}} card card-body">
     <h4 class="card-title card-icon-space">{{book.name}}</h4>

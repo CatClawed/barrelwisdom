@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
@@ -43,7 +43,6 @@ import { SeoService } from '@app/services/seo.service';
   
     constructor(
       private modalService: BsModalService,
-      private router: Router,
       public historyService: HistoryService,
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,

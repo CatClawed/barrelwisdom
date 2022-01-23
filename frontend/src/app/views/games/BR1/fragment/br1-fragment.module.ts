@@ -8,6 +8,7 @@ import { ErrorModule } from '@app/views/error/error.module';
 import { LanguageModule } from '@app/views/language/language.module';
 import { BR1FragmentEffectRoutingModule } from './br1-fragment-routing.module';
 import { BR1FragmentEffectlistComponent } from './br1-fragmentlist.component';
+import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
 
 @NgModule({
     imports: [
@@ -19,6 +20,7 @@ import { BR1FragmentEffectlistComponent } from './br1-fragmentlist.component';
       MatFormFieldModule,
       LanguageModule,
       ErrorModule,
+      BreadcrumbModule,
     ],
     declarations: [
         BR1FragmentEffectlistComponent

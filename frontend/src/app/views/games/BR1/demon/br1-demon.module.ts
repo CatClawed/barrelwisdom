@@ -11,6 +11,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { BR1DemonRoutingModule } from './br1-demon-routing.module';
 import { BR1DemonComponent } from './br1-demon.component';
 import { BR1DemonlistComponent } from './br1-demonlist.component';
+import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
 
 @NgModule({
     imports: [
@@ -24,6 +25,7 @@ import { BR1DemonlistComponent } from './br1-demonlist.component';
       MatIconModule,
       LanguageModule,
       ErrorModule,
+      BreadcrumbModule,
     ],
     declarations: [
         BR1DemonlistComponent,

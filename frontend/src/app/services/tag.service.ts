@@ -1,10 +1,9 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
-import { environment } from '@environments/environment';
-
 import { Tag } from '@app/interfaces/tag';
+import { environment } from '@environments/environment';
+import { Observable } from 'rxjs';
+
 
 @Injectable({ providedIn: 'root' })
 export class TagService {

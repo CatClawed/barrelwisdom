@@ -12,6 +12,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { A12MonsterRoutingModule } from './a12-monster-routing.module';
 import { A12MonsterComponent } from './a12-monster.component';
 import { A12MonsterlistComponent } from './a12-monsterlist.component';
+import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
 
 @NgModule({
     imports: [
@@ -26,6 +27,7 @@ import { A12MonsterlistComponent } from './a12-monsterlist.component';
       MatButtonModule,
       LanguageModule,
       ErrorModule,
+      BreadcrumbModule,
     ],
     declarations: [
         A12MonsterlistComponent,

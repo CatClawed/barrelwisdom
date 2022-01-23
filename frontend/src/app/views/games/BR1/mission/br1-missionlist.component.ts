@@ -68,9 +68,6 @@ constructor(
   ngAfterViewInit(): void {
     this.route.fragment.pipe(
       first()
-    ).subscribe(fragment => {
-      const element = document.getElementById(fragment);
-          if (element != undefined) element.scrollIntoView();
-    })
+    ).subscribe(fragment => this.viewportScroller.scrollToAnchor(fragment));
   }
 } 

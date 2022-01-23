@@ -38,7 +38,7 @@ const APP_CONTAINERS = [
     BrowserTransferStateModule,
     MatSidenavModule,
     AppRoutingModule
-  ],
+    ],
   providers: [
     CookieService,
     {

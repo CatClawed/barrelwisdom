@@ -27,7 +27,7 @@ import { WINDOW } from '@app/services/window.service';
       body: SafeHtml;
       allowedToEdit = false;
       gameName = "";
-      breadcrumbs = [["Barrel Wisdom", "/"]];
+      breadcrumbs = [];
       blogParam = '';
       renderer: Renderer2;
       change = false;
@@ -149,7 +149,7 @@ import { WINDOW } from '@app/services/window.service';
                   }
                 }
               }
-              if(this.breadcrumbs.length > 1) {
+              if(this.breadcrumbs.length > 0) {
                 this.breadcrumbs.pop();
               }
               if(section != "blog") {

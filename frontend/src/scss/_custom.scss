@@ -11,11 +11,6 @@
   font-style: normal;
   font-display: swap;
 }
-
-.iconAtelier {
-  font-family: Atelier !important;
-}
-
 // Commento
 
 .commento-footer, .commento-avatar-img, .commento-avatar, .commento-option-upvote, .commento-sort-policy-buttons-container, .commento-option-downvote , .commento-score, .commento-timeago::before {
@@ -63,10 +58,6 @@
 }
 
 //  change icon size
-.atelier-xs {
-  font-size: 0.5em;
-  padding-right: 0.3em;
-}
 
 .atelier-sm {
   font-size: 1em;
@@ -83,57 +74,10 @@
   }
 }
 
-
-.atelier-16 {
-  font-size: 16px;
-}
-.atelier-32 {
-  font-size: 32px;
-}
-
-// add backgrounds
-.atelier-bg-square,
-.atelier-bg-circle {
-  padding: 0.35em;
-  background-color: $atelier-background-color;
-}
-.atelier-bg-circle {
-  border-radius: 50%;
-}
-
-// use as list markers
-.atelier-ul {
-  padding-left: 0;
-  list-style-type: none;
-
-  > li {
-    display: flex;
-    align-items: flex-start;
-    line-height: 1.4;
-  }
-
-  > li > .atelier {
-    margin-right: $atelier-li-margin-right;
-    line-height: inherit;
-  }
-}
-
 @import "icons";
 
 // generic stuff
 
-@media only screen and (max-width: 600px) {
-  .main.container-fluid {
-    padding: 0 !important;
-    padding-left: 1em !important;
-    padding-right: 1em !important;
-  }
-  .container-fluid {
-    padding: 0 !important;
-    padding-left: 1em !important;
-    padding-right: 1em !important;
-  }
-}
 
 .spacer {
   margin-bottom: 1em;
@@ -155,12 +99,6 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-}
-
-.right {
-  text-align: right;
-  position: relative;
-  float: right;
 }
 
 .badge-list {
@@ -186,32 +124,22 @@ a.badge:hover {
   width: 55%;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 800px) {
   .modal-body {
     width:100% !important;
     padding:0 !important;
   }
 }
 
-@media screen and (max-width: 576px) {
-  .modal-dialogue {
+@media screen and (max-width: 800px) {
+  .modal-dialog {
     max-width: 100% !important;
-    padding-left:0.2em !important;
-    padding-right:0 !important;
-    margin:0 !important;
+    margin:0.5em !important;
     font-size: calc(1rem + 0.1vw) !important;
   }
 }
 
-.popover {
-  font-size: calc(1rem + 0.1vw) !important;
-}
-
-.popover-header {
-  font-size: calc(1.2rem + 0.1vw) !important;
-}
-
-@media screen and (min-width: 577px) {
+@media screen and (min-width: 800px) {
   .modal-dialog {
     max-width: 100% !important;
     padding-left: 1em !important;
@@ -222,10 +150,8 @@ a.badge:hover {
 
 .modal-content {
   background-color: transparent !important;
-  border: transparent !important;
-  //max-width: max-content !important;
+  border: none !important;
   align-items: center;
-  margin: auto;
 }
  
 .close {
@@ -308,12 +234,6 @@ a.badge:hover {
   border: 1px solid lightgray;
 }
 
-.hide-bullets {
-  list-style-type: none;
-  padding: 0;
-  margin-bottom: 0;
-}
-
 .table-item-data {
   display:block;
   width: fit-content;
@@ -327,9 +247,20 @@ a.badge:hover {
   }
 }
 
-/* Background pattern from Toptal Subtle Patterns */
-.main {
+.table-dark-center {
+  > th {
+    text-align: center;
+    background-color:rgba(211, 211, 211, 0.3);
+  }
+}
 
+.hide-bullets {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.main {
   padding-left: 1em;
   padding-right: 1em;
   font-size: calc(1rem + 0.1vw);
@@ -376,23 +307,34 @@ h4 {
   font-size: calc(1.3125rem + 0.1vw) !important;
 }
 
+// tabs
+
+.tab-content > .tab-pane {
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+  border-bottom: 1px solid gray;
+  padding: 1rem;
+}
+
 .tab-content {
-  background-image: url("/media/main/images/clean_textile.webp") !important;
+  background-image: url("/media/main/images/clean_textile.webp");
 }
 
 .nav-tabs .nav-link.active {
-  background-image: url("/media/main/images/clean_textile.webp") !important;
-  border-bottom-color: transparent !important;
+  background-image: url("/media/main/images/clean_textile.webp");
+  border: 1px solid darkgray;
+  border-bottom-color: transparent;
 }
 
 .nav-tabs .nav-link {
   background-color: #EBEBEB;
-  border: 1px solid darkgray !important;
+  border: 1px solid darkgray;
+  text-decoration: none;
 }
 
 .nav-tabs .nav-link:hover {
   background-color: #F9F9F9;
-  border-color: darkgray !important;
+  border: 1px solid darkgray;
 }
 
 .breadcrumb {
@@ -413,6 +355,14 @@ h4 {
   font-size: calc(1rem + 0.1vw) !important;
 }
 
+.popover {
+  font-size: calc(1rem + 0.1vw) !important;
+}
+
+.popover-header {
+  font-size: calc(1.2rem + 0.1vw) !important;
+}
+
 .table-of-contents {
   border: 2px solid lightgray;
   background-color: white;
@@ -420,24 +370,6 @@ h4 {
   padding: 0.8em;
   border-radius: 10px;
   width: max-content;
-}
-
-.table-dark-center {
-  > th {
-    text-align: center;
-    background-color:rgba(211, 211, 211, 0.3);
-  }
-}
-
-// reeeeemake
-
-// tabs
-
-.tab-content > .tab-pane {
-  border-left: 1px solid gray;
-  border-right: 1px solid gray;
-  border-bottom: 1px solid gray;
-  padding: 1rem;
 }
 
 // buttons
@@ -496,22 +428,6 @@ a:hover {
   border-radius: 0.25rem;
 }
 
-.footer {
-  background-color: #5e4c3f;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem;
-
-  > a {
-    color: white;
-  }
-
-  > a:hover {
-    color: white;
-  }
-}
-
 @media screen and (min-width: 800px) {
   .navigation-hide-large {
     display: none !important;
@@ -532,7 +448,6 @@ a:hover {
 .sidenav {
   background-color: $sidebar !important;
   width: 200px;
-
 }
 
 .sidenav-items {
@@ -591,65 +506,8 @@ body {
   background: transparent;
 }
 
-
-// Major components (header, main, sidebar, etc.)
-
-.app-header {
-  background-color: $navbar !important;
-  border-bottom: transparent !important;
-  background: linear-gradient(0deg, rgba(71,58,48,1) 0%, rgba(94,76,63,0.8687675753895308) 100%);
-}
-
-.hi {
-  position: fixed;
-  z-index: 1000;
-  background-color: $navbar !important;
-  border-bottom: transparent !important;
-  background: linear-gradient(0deg, rgba(71,58,48,1) 0%, rgba(94,76,63,0.8687675753895308) 100%);
-}
-
-
-
-.sidebar {
-  background-color: $sidebar !important;
-}
-
-.sidebar-fixed .sidebar {
-  height: calc(100% - 55px) !important;
-}
-
-.sidebar .nav-link.active {
-  background-color: #3C4E5E !important;
-}
-
-.sidebar .nav-link.active:hover {
-  color: #fff !important;
-  background-color: #20a8d8 !important;
-}
-
-.sidebar .nav-link.active .nav-icon {
-  color: #73818f !important;
-}
-
-.sidebar .nav-link.active .nav-icon:hover {
-  color: #fff !important;
-}
-
-.navbar-nav .nav-link {
-  color: white !important;
-}
-
-.navbar-nav .nav-link:hover, .navbar-nav .nav-link:focus {
-  color: #999c9e !important;
-}
-
-.app-body {
-  margin-top: 55px;
-  overflow-x: inherit !important;
-}
-
-.bg-secondary {
-  color: white !important;
+.mat-sidenav-content {
+  margin-left: 0 !important;
 }
 
 // Form stuff

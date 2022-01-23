@@ -4,6 +4,7 @@ import { ErrorModule } from '@app/views/error/error.module';
 import { LanguageModule } from '@app/views/language/language.module';
 import { A22CategoryRoutingModule } from './a22-category-routing.module';
 import { A22CategoryComponent } from './a22-category.component';
+import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
 
 @NgModule({
     imports: [
@@ -11,6 +12,7 @@ import { A22CategoryComponent } from './a22-category.component';
       A22CategoryRoutingModule,
       LanguageModule,
       ErrorModule,
+      BreadcrumbModule,
     ],
     declarations: [
         A22CategoryComponent,

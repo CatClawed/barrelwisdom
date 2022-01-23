@@ -1,13 +1,7 @@
 
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 <ng-container *ngIf="!error">
-   <nav style="margin-top: 1em;" aria-label="breadcrumb">
-      <ol class="breadcrumb">
-         <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
-         <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.hrefClicked($event)">{{gameTitle}}</a></li>
-         <li class="breadcrumb-item active" aria-current="page">Fragment Effects</li>
-      </ol>
-   </nav>
+   <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Fragment Effects"></Breadcrumb>
    <h1>Fragment Effects</h1>
    <p>See <a href="/{{gameURL}}/fragment-episodes" (click)="historyService.hrefClicked($event)">Fragment Episodes</a> for acqusition data.
    <div class="col-md-10 mx-auto">

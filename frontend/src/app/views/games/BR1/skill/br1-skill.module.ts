@@ -4,6 +4,7 @@ import { ErrorModule } from '@app/views/error/error.module';
 import { LanguageModule } from '@app/views/language/language.module';
 import { BR1SkillRoutingModule } from './br1-skill-routing.module';
 import { BR1SkilllistComponent } from './br1-skilllist.component';
+import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
 
 @NgModule({
     imports: [
@@ -11,6 +12,7 @@ import { BR1SkilllistComponent } from './br1-skilllist.component';
       BR1SkillRoutingModule,
       LanguageModule,
       ErrorModule,
+      BreadcrumbModule,
     ],
     declarations: [
         BR1SkilllistComponent,

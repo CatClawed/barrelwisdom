@@ -10,6 +10,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { A12EffectRoutingModule } from './a12-effect-routing.module';
 import { A12EffectComponent } from './a12-effect.component';
 import { A12EffectlistComponent } from './a12-effectlist.component';
+import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
 
 @NgModule({
     imports: [
@@ -22,6 +23,7 @@ import { A12EffectlistComponent } from './a12-effectlist.component';
       MatFormFieldModule,
       LanguageModule,
       ErrorModule,
+      BreadcrumbModule,
     ],
     declarations: [
         A12EffectlistComponent,

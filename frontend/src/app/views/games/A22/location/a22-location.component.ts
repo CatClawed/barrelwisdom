@@ -8,7 +8,6 @@ import { ErrorCodeService } from "@app/services/errorcode.service";
 import { first } from 'rxjs/operators';
 import { SeoService } from '@app/services/seo.service';
 import { Location } from '@angular/common';
-import {AppComponent} from '@app/app.component';
 
 @Component({
     templateUrl: 'a22-location.component.html',

@@ -13,6 +13,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { A12TraitRoutingModule } from './a12-trait-routing.module';
 import { A12TraitComponent } from './a12-trait.component';
 import { A12TraitlistComponent } from './a12-traitlist.component';
+import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
 
 @NgModule({
     imports: [
@@ -28,6 +29,7 @@ import { A12TraitlistComponent } from './a12-traitlist.component';
       MatSelectModule,
       LanguageModule,
       ErrorModule,
+      BreadcrumbModule,
     ],
     declarations: [
         A12TraitlistComponent,

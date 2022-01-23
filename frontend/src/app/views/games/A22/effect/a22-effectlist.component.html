@@ -1,15 +1,9 @@
 <Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
 
 <div *ngIf="!error">
-<nav style="margin-top: 1em;" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/" (click)="historyService.hrefClicked($event)">Barrel Wisdom</a></li>
-    <li class="breadcrumb-item"><a href="/{{gameURL}}" (click)="historyService.hrefClicked($event)">{{gameTitle}}</a></li>
-    <li *ngIf="normal" class="breadcrumb-item active" aria-current="page">Effects</li>
-    <li *ngIf="forge" class="breadcrumb-item active" aria-current="page">Forge Effects</li>
-    <li *ngIf="ev" class="breadcrumb-item active" aria-current="page">EV Effects</li>
-  </ol>
-</nav>
+<Breadcrumb *ngIf="normal" [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Effects"></Breadcrumb>
+<Breadcrumb *ngIf="forge" [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Forge Effects"></Breadcrumb>
+<Breadcrumb *ngIf="ev" [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="EV Effects"></Breadcrumb>
 <h1 *ngIf="normal">Effects</h1>
 <h1 *ngIf="forge">Forge Effects</h1>
 <h1 *ngIf="ev">EV Effects</h1>

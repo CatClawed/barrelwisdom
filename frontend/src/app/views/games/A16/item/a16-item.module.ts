@@ -13,6 +13,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { A16ItemRoutingModule } from './a16-item-routing.module';
 import { A16ItemComponent } from './a16-item.component';
 import { A16ItemlistComponent } from './a16-itemlist.component';
+import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
 
 @NgModule({
     imports: [
@@ -28,6 +29,7 @@ import { A16ItemlistComponent } from './a16-itemlist.component';
       MatButtonModule,
       LanguageModule,
       ErrorModule,
+      BreadcrumbModule,
     ],
     declarations: [
         A16ItemlistComponent,

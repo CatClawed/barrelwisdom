@@ -1,15 +1,15 @@
 <div class="navigation" style="display:flex;align-items:center;">
-    <i (click)="snav.toggle();" class="navigation-hide-large fas fa-bars" aria-label="Toggle navigation" style="color:white;font-size:2rem;padding-left:0.5rem;cursor:pointer;"></i>
+    <button (click)="snav.toggle();" class="navigation-hide-large fas fa-bars" aria-label="Toggle navigation" style="color:white;font-size:2rem;padding-left:0.5rem;background:none;border:none;"></button>
     <div class="navbrand" style="display:inline-flex;align-items:center;">
-        <a (click)="historyService.hrefClicked($event)" aria-label="homepage" href="/" class="navigation-brand">
+        <a aria-label="homepage" routerLink="/" class="navigation-brand">
             <img src="/media/main/barrelwisdom.svg" height=45 width=135 alt="Barrel Wisdom">
         </a>
-        <a class="nav-items" (click)="historyService.hrefClicked($event)" href="/blog/atelier-series-guide">Atelier Series Guide</a>
-        <a class="nav-items" (click)="historyService.hrefClicked($event)" href="/blog/donate">Donate</a>
+        <a class="nav-items" routerLink="/blog/atelier-series-guide">Atelier Series Guide</a>
+        <a class="nav-items" routerLink="/blog/donate">Donate</a>
     </div>
     <div style="margin-left:auto;margin-right:0;">
-        <a aria-label="Twitter" (click)="historyService.hrefClicked($event)" href="https://twitter.com/BarrelWisdom"><i class="fab fa-twitter" title="Twitter" style="color:white;font-size:2rem;padding-right:0.5rem;"></i></a>
-        <a aria-label="Discord" (click)="historyService.hrefClicked($event)" href="https://discord.gg/utRynRKxwh"><i class="fab fa-discord" title="Discord" style="color:white;font-size:2rem;padding-right:0.5rem;"></i></a>
+        <a aria-label="Twitter" routerLink="https://twitter.com/BarrelWisdom"><i class="fab fa-twitter" title="Twitter" style="color:white;font-size:2rem;padding-right:0.5rem;"></i></a>
+        <a aria-label="Discord" routerLink="https://discord.gg/utRynRKxwh"><i class="fab fa-discord" title="Discord" style="color:white;font-size:2rem;padding-right:0.5rem;"></i></a>
     </div>
 </div>
 
@@ -18,14 +18,14 @@
     [fixedInViewport]="true" fixedTopGap="55" class="sidenav">
     <perfect-scrollbar>
         <div class="sidenav-items">
-            <a class="navigation-hide-large sidenav-item" (click)="historyService.hrefClicked($event)" href="/blog/donate">
+            <a class="navigation-hide-large sidenav-item" routerLink="/blog/donate">
                 <i class="fas fa-donate"></i>Donate
             </a>
-            <a class="navigation-hide-large sidenav-item" (click)="historyService.hrefClicked($event)" href="/blog/atelier-series-guide">
+            <a class="navigation-hide-large sidenav-item" routerLink="/blog/atelier-series-guide">
                 <i class="fas fa-star"></i>Atelier Series Guide
             </a>
             <ng-container *ngFor="let n of navItems">
-                <a *ngIf="!n.children" class="sidenav-item" (click)="historyService.hrefClicked($event)" href="{{n.url}}">
+                <a *ngIf="!n.children" class="sidenav-item" routerLink="{{n.url}}">
                     <i class="{{n.icon}}"></i>{{n.name}}
                 </a>
                 <a *ngIf="n.children" class="sidenav-item" style="color:white;cursor:pointer;" (click)="n.expand=!n.expand;">
@@ -33,10 +33,10 @@
                 </a>
                 <ng-container *ngIf="n.expand">
                     <ng-container *ngFor="let c of n.children">
-                        <a *ngIf="router.url.indexOf(c.url) < 0" class="sidenav-item sidenav-child" (click)="historyService.hrefClicked($event)" href="{{c.url}}">
+                        <a *ngIf="router.url.indexOf(c.url) < 0" class="sidenav-item sidenav-child" routerLink="{{c.url}}">
                             {{c.name}}
                         </a>
-                        <a *ngIf="router.url.indexOf(c.url) > -1" class="sidenav-item sidenav-child active" (click)="historyService.hrefClicked($event)" href="{{c.url}}">
+                        <a *ngIf="router.url.indexOf(c.url) > -1" class="sidenav-item sidenav-child active" routerLink="{{c.url}}">
                             {{c.name}}
                         </a>
                     </ng-container>
@@ -44,28 +44,28 @@
             </ng-container>
         </div>
         <div class="sidenav-bottom">
-            <a *ngIf="!user" class="sidenav-item" (click)="historyService.hrefClicked($event)" href="/login">
+            <a *ngIf="!user" class="sidenav-item" routerLink="/login">
                 <i class="fas fa-user"></i>Login
             </a>
             <ng-container *ngIf="user">
-                <a class="sidenav-item" (click)="historyService.hrefClicked($event)" href="/user/{{user.username}}"><i class="fa fa-user"></i>{{user.username}}</a>
-                <a class="sidenav-item" (click)="historyService.hrefClicked($event)" href="/settings"><i class="fa fa-wrench"></i>Settings</a>
-                <a class="sidenav-item" (click)="historyService.hrefClicked($event)" href="/create"><i class="fa fa-file"></i>Create Page</a>
-                <a class="sidenav-item" (click)="historyService.hrefClicked($event)" href="/" (click)="logout()"><i class="fa fa-lock"></i>Logout</a>
+                <a class="sidenav-item" routerLink="/user/{{user.username}}"><i class="fa fa-user"></i>{{user.username}}</a>
+                <a class="sidenav-item" routerLink="/settings"><i class="fa fa-wrench"></i>Settings</a>
+                <a class="sidenav-item" routerLink="/create"><i class="fa fa-file"></i>Create Page</a>
+                <a class="sidenav-item" routerLink="/" (click)="logout()"><i class="fa fa-lock"></i>Logout</a>
             </ng-container>
-            <a class="sidenav-item" (click)="historyService.hrefClicked($event)" href="/legal">
+            <a class="sidenav-item" routerLink="/blog/legal">
                 <i class="fas fa-balance-scale-right"></i>Legal
             </a>
-            <a class="sidenav-item" (click)="historyService.hrefClicked($event)" href="https://github.com/CatClawed/barrelwisdom">
+            <a class="sidenav-item" href="https://github.com/CatClawed/barrelwisdom">
                 <i class="fab fa-github"></i>Source
             </a>
         </div>
     </perfect-scrollbar>
     </mat-sidenav>
+    <div style="display:flex;">
+        <div class="main">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
 
 </mat-sidenav-container>
-<div style="display:flex;">
-    <div class="main">
-        <router-outlet></router-outlet>
-    </div>
-</div>

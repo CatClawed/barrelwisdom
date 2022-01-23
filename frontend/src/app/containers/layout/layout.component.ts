@@ -14,7 +14,7 @@ export class LayoutComponent implements OnInit {
   public sidebarMinimized = false;
   public navItems: NavItems[];
   user: User;
-  mobileView = false;
+  mobileView = true;
 
   constructor(private authenticationService: AuthenticationService,
     public navService: NavigationService,

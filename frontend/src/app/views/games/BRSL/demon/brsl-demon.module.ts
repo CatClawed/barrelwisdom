@@ -12,6 +12,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { BRSLDemonRoutingModule } from './brsl-demon-routing.module';
 import { BRSLDemonComponent } from './brsl-demon.component';
 import { BRSLDemonlistComponent } from './brsl-demonlist.component';
+import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
 
 @NgModule({
     imports: [
@@ -26,6 +27,7 @@ import { BRSLDemonlistComponent } from './brsl-demonlist.component';
       MatButtonModule,
       LanguageModule,
       ErrorModule,
+      BreadcrumbModule,
     ],
     declarations: [
         BRSLDemonlistComponent,

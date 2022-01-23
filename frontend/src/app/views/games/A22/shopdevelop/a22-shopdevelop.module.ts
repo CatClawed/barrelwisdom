@@ -4,6 +4,7 @@ import { ErrorModule } from '@app/views/error/error.module';
 import { LanguageModule } from '@app/views/language/language.module';
 import { A22ShopDevelopRoutingModule } from './a22-shopdevelop-routing.module';
 import { A22ShopDevelopComponent } from './a22-shopdevelop.component';
+import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
 
 @NgModule({
     imports: [
@@ -11,6 +12,7 @@ import { A22ShopDevelopComponent } from './a22-shopdevelop.component';
       A22ShopDevelopRoutingModule,
       LanguageModule,
       ErrorModule,
+      BreadcrumbModule,
     ],
     declarations: [
         A22ShopDevelopComponent,
