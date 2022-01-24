@@ -4,13 +4,14 @@ from userprofile.serializers import UserProfileSerializer, UserSerializer, EditU
 from django.contrib.auth.models import User
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 
 class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = EditUserProfileSerializer
+    permission_classes = (IsAuthenticated,)
     ordering_fields = ['created']
     lookup_field = 'user'
 

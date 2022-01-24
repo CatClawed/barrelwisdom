@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['barrelwisdom.com', 'test.barrelwisdom.com', 'localhost', '127.0.0.1']
 
@@ -63,9 +63,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'django_filters',
     'django.contrib.sites',
-    'djoser',
+    'dj_rest_auth',
     #'debug_toolbar',
     # Major parts
     'blog.apps.BlogConfig',
@@ -122,11 +123,6 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-REST_AUTH_SERIALIZERS = {
-    'USER_DETAILS_SERIALIZER' : 'auth.serializers.UserDetailsSerializer',
-    'TOKEN_SERIALIZER': 'auth.serializers.KnoxSerializer'
-}
 
 MIDDLEWARE = [
     #'debug_toolbar.middleware.DebugToolbarMiddleware',
@@ -220,7 +216,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
-    'DEFAULT_AUTHENTICATION_CLASSES':('rest_framework_simplejwt.authentication.JWTAuthentication',),
+    'DEFAULT_AUTHENTICATION_CLASSES':('dj_rest_auth.jwt_auth.JWTCookieAuthentication',),
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
@@ -238,14 +234,8 @@ SIMPLE_JWT = {
 }
 
 REST_USE_JWT = True
-
-DJOSER = {
-    'SET_PASSWORD_RETYPE': True,
-    'USER_CREATE_PASSWORD_RETYPE': True,
-     'PERMISSIONS': {
-        'user_create': ['rest_framework.permissions.IsAdminUser'],
-    }
-}
+JWT_AUTH_COOKIE = 'bw-auth'
+JWT_AUTH_REFRESH_COOKIE = 'btw-refresh'
 
 CACHES = {
     'default': {

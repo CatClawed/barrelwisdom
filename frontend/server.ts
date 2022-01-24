@@ -1,25 +1,23 @@
-import  'zone.js/dist/zone-node';
-
+import { APP_BASE_HREF } from '@angular/common';
+import { enableProdMode } from '@angular/core';
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import * as express from 'express';
-import { join } from 'path';
-import {enableProdMode} from '@angular/core';
-import { AppServerModule } from './src/main.server';
-import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
 import { createProxyMiddleware } from 'http-proxy-middleware';
-
+import { join } from 'path';
+import 'zone.js/node';
+import { AppServerModule } from './src/main.server';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
-  const compression = require('compression')
+  const compression = require('compression');
   const server = express();
   const distFolder = join(process.cwd(), 'dist/frontend/browser');
   const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
   enableProdMode();
   server.engine('html', ngExpressEngine({
     bootstrap: AppServerModule,
-    inlineCriticalCss: true,
+    inlineCriticalCss: false,
   }));
 
   // proxy middleware options
@@ -38,16 +36,13 @@ const options = {
   },
 };
 
-
 // create the proxy (without context)
 const apiProxy = createProxyMiddleware(optionsApi);
-//const comProxy = createProxyMiddleware(optionsCom);
 const mediaProxy = createProxyMiddleware(options);
   server.use(compression())
   server.use('/api', apiProxy);
   server.use('/auth', apiProxy);
   server.use('/media', mediaProxy);
-  //server.use('/commento', comProxy);
 
   server.set('view engine', 'html');
   server.set('views', distFolder);

@@ -1,12 +1,10 @@
-from rest_framework.fields import SerializerMethodField
+from datetime import datetime
+from blog.models import Blog
+from django.contrib.auth.models import User
+from django.utils import timezone
+from invite.models import Invite
 from rest_framework import serializers
 from userprofile.models import UserProfile
-from django.contrib.auth.models import User
-from blog.models import Blog
-from invite.models import Invite
-from django.contrib.auth.password_validation import validate_password
-from django.contrib.auth.hashers import make_password
-from django.utils import timezone
 
 class BlogSimpleSerializer(serializers.ModelSerializer):
     secname = serializers.SerializerMethodField()

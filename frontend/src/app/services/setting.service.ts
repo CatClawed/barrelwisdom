@@ -17,12 +17,8 @@ export class SettingService {
     private http: HttpClient,
   ) { }
 
-  updateEmail(id: number, email: string) {
-    return this.http.put(`${environment.authUrl}/users/${id}/`, { email });
-  }
-
-  updatePassword(new_password: string, re_new_password: string, current_password: string) {
-      return this.http.post(`${environment.authUrl}/users/set_password/`, { new_password, re_new_password, current_password })
+  updatePassword(new_password1: string, new_password2: string, old_password: string) {
+      return this.http.post(`${environment.authUrl}/dj-rest-auth/password/change/`, { new_password1, new_password2, old_password })
   }
 
   createInvite() {

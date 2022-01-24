@@ -45,7 +45,7 @@ export class AuthenticationService {
     }
 
     login(username, password) {
-        return this.http.post<any>(`${environment.apiUrl}/token/`, { username, password })
+        return this.http.post<any>(`${environment.authUrl}/token/`, { username, password })
             .pipe(map(jwt => {
                 const jwtToken = JSON.parse(atob(jwt.refresh.split('.')[1]));
                 const expires = new Date(jwtToken.exp * 1000);
@@ -74,7 +74,7 @@ export class AuthenticationService {
     }
 
     refreshToken() {
-        return this.http.post<any>(`${environment.apiUrl}/token/refresh/`, {refresh: this.cookieService.get('refresh')})
+        return this.http.post<any>(`${environment.authUrl}/token/refresh/`, {refresh: this.cookieService.get('refresh')})
             .pipe(map(jwt => {
                 this.cookieService.set('access', jwt.access, {path: '/'});
                 this.startRefreshTokenTimer();

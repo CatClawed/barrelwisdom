@@ -38,9 +38,9 @@
             ],
             "vendorChunk": true,
             "extractLicenses": false,
-            "buildOptimizer": true,
+            "buildOptimizer": false,
             "sourceMap": true,
-            "optimization": true,
+            "optimization": false,
             "namedChunks": true
           },
           "configurations": {
@@ -55,7 +55,7 @@
                 "scripts": true,
                 "styles": {
                   "minify": true,
-                  "inlineCritical": true
+                  "inlineCritical": false
                 },
                 "fonts": true
               },
@@ -142,7 +142,7 @@
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json",
             "sourceMap": true,
-            "optimization": true
+            "optimization": false
           },
           "configurations": {
             "production": {

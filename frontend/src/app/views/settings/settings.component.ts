@@ -16,25 +16,21 @@ import { Meta, Title } from '@angular/platform-browser';
   templateUrl: 'settings.component.html',
 })
 export class SettingsComponent {
-  emailForm: FormGroup;
   profileForm: FormGroup;
   passwordForm: FormGroup;
   sectionForm: FormGroup;
   navigationForm: FormGroup;
   loading = false;
   submitted = false;
-  submittedEmail = false;
   submittedPass = false;
   submittedSection = false;
   submittedNavigation = false;
   returnUrl: string;
   errorMsg: string;
-  erroEmail: string;
   errorPass: string;
   errorInvite: string;
   errorSection: string;
   errorNavigation: string;
-  successEmail = false;
   successProfile = false;
   successPassword = false;
   successSection = false;
@@ -67,10 +63,6 @@ export class SettingsComponent {
         });
       }
 
-      this.emailForm = this.formBuilder.group({
-          email: ['', [Validators.required, Validators.email]],
-      });
-
       this.passwordForm = this.formBuilder.group({
         newPass: ['', [Validators.required, Validators.minLength(8)]],
         repeatPass: ['', Validators.required],
@@ -101,7 +93,6 @@ export class SettingsComponent {
 
   get profilef() { return this.profileForm.controls; }
   get passwordf() { return this.passwordForm.controls; }
-  get emailf() { return this.emailForm.controls; } // yes the function name is garbage
   get sectionf() { return this.sectionForm.controls; }
   get navigationf() { return this.navigationForm.controls; }
 
@@ -170,30 +161,6 @@ export class SettingsComponent {
                 else {
                   this.errorPass = this.errorCodeService.errorMessage(error);
                 }
-            });
-    }
-
-  submitEmail() {
-    this.submittedEmail = true;
-    this.successEmail = false;
-
-    // stop here if form is invalid
-    if (this.emailForm.invalid) {
-        return;
-    }
-
-    this.loading = true;
-    this.settingService.updateEmail(this.user.id, this.emailf.email.value)
-        .pipe(first())
-        .subscribe(
-            () => {
-              this.successEmail = true;
-              this.loading = false;
-              this.erroEmail = "";
-            },
-            error => {
-                this.loading = false;
-                this.erroEmail = this.errorCodeService.errorMessage(error);
             });
     }
 

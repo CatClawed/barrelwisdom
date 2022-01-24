@@ -1,7 +1,6 @@
 #import debug_toolbar
 from django.contrib import admin
-from django.urls import path
-from django.conf.urls import url, include
+from django.urls import include, path
 from rest_framework import routers
 from blog.viewsets import BlogViewSet, TagViewSet, SectionViewSet, MainBlogViewSet
 from invite.viewsets import InviteViewSet
@@ -40,13 +39,12 @@ for routeList in routeLists:
     for route in routeList:
         router.register(route[0], route[1])
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'api/', include(router.urls)),
-    path('api/token/', JWTObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
-    url(r'^auth/', include('djoser.urls')),
+    path(r'api/', include(router.urls)),
+    path('auth/token/', JWTObtainPairView.as_view(), name='token_obtain_pair'),
+    path('auth/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     #path('__debug__/', include(debug_toolbar.urls)),
-    url(r'auth/reg/', RegView.as_view(),)
+    path(r'auth/reg/', RegView.as_view(),),
+    path('auth/dj-rest-auth/', include('dj_rest_auth.urls')),
 ]
