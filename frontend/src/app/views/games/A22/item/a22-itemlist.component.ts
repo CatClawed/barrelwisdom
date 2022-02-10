@@ -1,19 +1,16 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Item, NameLink } from '@app/interfaces/a22';
 import { A22Service } from '@app/services/a22.service';
-import { HistoryService } from '@app/services/history.service';
-import { ErrorCodeService } from "@app/services/errorcode.service";
+import { SeoService } from '@app/services/seo.service';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { SeoService } from '@app/services/seo.service';
 
 @Component({
     templateUrl: 'a22-itemlist.component.html',
-    selector: 'a22-itemlist',
   })
 
   export class A22ItemlistComponent implements OnInit {
@@ -23,16 +20,9 @@ import { SeoService } from '@app/services/seo.service';
     ingControl: FormControl;
     error: boolean = false;
     errorCode: string;
-    errorVars: any[];
-    errorMsg: string;
     item: string = "items";
     items: Item[];
     filteredItems: Observable<Item[]>;
-    currentType: string = "Any";
-    currentElem: string = "Any";
-    currentElemVal: number = 1;
-    searchstring = "";
-    ingstring = "";
     language = "";
     config: ModalOptions = { class: "col-md-5 mx-auto" };
     categories: NameLink[];
@@ -52,12 +42,10 @@ import { SeoService } from '@app/services/seo.service';
     constructor(
       private modalService: BsModalService,
       private router: Router,
-      public historyService: HistoryService,
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private location: Location,
       private a22service: A22Service,
-      private errorService: ErrorCodeService,
       private seoService: SeoService
     ) { 
       this.itemControl = new FormControl();
@@ -86,29 +74,6 @@ import { SeoService } from '@app/services/seo.service';
       this.seoTitle = `Items - ${this.gameTitle}`;
       this.seoDesc = `The list of items in ${this.gameTitle}.`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-  
-      this.pageForm.get('type').valueChanges
-        .subscribe(type => {
-          this.currentType = type;
-        });
-
-        this.pageForm.get('elementval').valueChanges
-        .subscribe(val => {
-          this.currentElemVal = val;
-        });
-
-        this.pageForm.get('element').valueChanges
-        .subscribe(val => {
-          this.currentElem = val;
-        });
-  
-      this.itemControl.valueChanges.subscribe(search => {
-        this.searchstring = search;
-      });
-
-      this.ingControl.valueChanges.subscribe(search => {
-        this.ingstring = search;
-      });
 
       this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
@@ -120,33 +85,39 @@ import { SeoService } from '@app/services/seo.service';
   
     getItems() {
       this.a22service.getItemList(this.language)
-      .subscribe(items => {
-        this.items = items;
-        this.filteredItems = this.pageForm.valueChanges.pipe(
-          startWith(null as Observable<Item[]>),
-          map((search: string | null) => search ? this.filterT(this.searchstring, this.currentType, this.currentElemVal, this.currentElem, this.ingstring) : this.items.slice())
-        );
-      },
-      error => {
-        this.error = true;
-        this.errorCode = `${error.status}`;
-        this.errorVars = this.errorService.getCodes(this.errorCode);
-      });
+      .subscribe({next: items => {
+          this.items = items;
+          this.filteredItems = this.pageForm.valueChanges.pipe(
+            startWith(null as Observable<Item[]>),
+            map((search: any) => search ? this.filterT(search.filtertext, search.type, search.elementval, search.element, search.filtering) : this.items.slice())
+          );
+        },
+        error: error => {
+          this.error = true;
+          this.errorCode = `${error.status}`;
+        }});
     }
 
     getCategories() {
         this.a22service.getCategoryList(this.language)
-        .subscribe(categories  => {
+        .subscribe({next: categories  => {
             this.categories = categories;
         },
-        error => {
+        error: error => {
             this.error = true;
             this.errorCode = `${error.status}`;
-            this.errorVars = this.errorService.getCodes(this.errorCode);
-        });
+        }});
     }
   
-    openModal(template: TemplateRef<any>, slug: string) {
+    openModal(template: TemplateRef<any>, slug: string, event?) {
+      if (event) {
+        if(event.ctrlKey) {
+          return;
+        }
+        else {
+          event.preventDefault()
+        }
+      }
       this.item = slug;
       this.location.go(`${this.gameURL}/items/` + slug + "/" + this.language);
       this.modalRef = this.modalService.show(template);
@@ -157,9 +128,7 @@ import { SeoService } from '@app/services/seo.service';
         }})
     }
 
-    private filterT(value: string, type: string, elementV: number, element: string, ingt: string): Item[] {
-  
-      const filterValue = value.toLowerCase();
+    private filterT(value: string, type: string, elementV: number, element: string, ingt: string): Item[] {  
       let list: Item[] = this.items;
 
       if(type != 'Any') {
@@ -169,7 +138,6 @@ import { SeoService } from '@app/services/seo.service';
       if(elementV > 1) {
           list = list.filter(item => item.elementvalue >= elementV);
       }
-
       switch(element) {
           case "Fire": {
               list = list.filter(item => item.fire)
@@ -189,18 +157,23 @@ import { SeoService } from '@app/services/seo.service';
           }
       }
 
-      if(ingt.length > 0) {
-          list = list.filter(item => (item.ingredient_set) ? item.ingredient_set.some(i => i.ing.toLowerCase().includes(ingt)) : false)
+      if(ingt) {
+          const filterValue = ingt.toLowerCase();
+          list = list.filter(item => (item.ingredient_set) ? item.ingredient_set.some(i => i.ing.toLowerCase().includes(filterValue)) : false)
       }
 
-      if(value.length > 0) {
+      if(value) {
+        const filterValue = value.toLowerCase();
         list = list.filter(item => { 
             return item.name.toLowerCase().includes(filterValue);
           });
       }
-
       return list;
     } 
   
     get f() { return this.pageForm.controls; }
+
+    identify(index, item){
+      return item.slug; 
+   }
   }

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ErrorCodeService } from "@app/services/errorcode.service";
 
 @Component({
   templateUrl: '404.component.html',
@@ -12,7 +13,8 @@ export class P404Component {
   @Input()
   errorVars: any = ["Oops! You're lost.", "Our puni told us that the page you're looking for doesn't exist."];
   
-  constructor() {
+  constructor(private errorService: ErrorCodeService) {
+    this.errorVars = this.errorService.getCodes(this.errorCode);
   }
 
 }

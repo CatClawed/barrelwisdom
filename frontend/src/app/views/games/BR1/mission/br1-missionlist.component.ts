@@ -39,7 +39,7 @@ constructor(
     private route: ActivatedRoute,
     private br1service: BR1Service,
     public historyService: HistoryService,
-    private errorService: ErrorCodeService,
+
     private seoService: SeoService,
     private viewportScroller: ViewportScroller) {
   }
@@ -62,7 +62,7 @@ constructor(
     error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      this.errorVars = this.errorService.getCodes(this.errorCode);
+      
     });
   }
   ngAfterViewInit(): void {

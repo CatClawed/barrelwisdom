@@ -40,7 +40,7 @@ constructor(
     private loc: Location,
     private brslservice: BRSLService,
     public historyService: HistoryService,
-    private errorService: ErrorCodeService,
+
     private seoService: SeoService,
     private viewportScroller: ViewportScroller
     ) {
@@ -52,8 +52,7 @@ constructor(
 
     if(!this.location) {
       this.error = true;
-      this.errorCode = '404',
-      this.errorVars = this.errorService.getCodes(this.errorCode);
+      this.errorCode = '404';
     }
     else {
         this.gameTitle = this.brslservice.gameTitle[this.language];

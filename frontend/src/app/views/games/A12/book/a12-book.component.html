@@ -1,4 +1,4 @@
-<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+<Error *ngIf="error" [errorCode]="errorCode"></Error>
 
 <ng-container *ngIf="book">
 <Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Recipe Books', '/'+gameURL+'/recipe-books/'+language]]" [current]="book.name"></Breadcrumb>
@@ -16,7 +16,7 @@
     <p><b>Acquisition: </b>{{book.note}}</p>
     <b>Items:</b>
     <ul>
-      <li *ngFor="let item of book.items"><a href="/{{gameURL}}/items/{{item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.name}}</a></li>
+      <li *ngFor="let item of book.items"><a routerLink="/{{gameURL}}/items/{{item.slugname}}/{{language}}">{{item.name}}</a></li>
     </ul>
   </div>
   <language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>

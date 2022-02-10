@@ -5,15 +5,12 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Trait } from '@app/interfaces/a12';
 import { A12Service } from '@app/services/a12.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from "@app/services/errorcode.service";
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { SeoService } from '@app/services/seo.service';
 
 @Component({
   templateUrl: 'a12-traitlist.component.html',
-  selector: 'a12-traitlist',
 })
 export class A12TraitlistComponent implements OnInit {
   modalRef: BsModalRef;
@@ -21,13 +18,10 @@ export class A12TraitlistComponent implements OnInit {
   traitControl: FormControl;
   error: boolean = false;
   errorCode: string;
-  errorVars: any[];
-  errorMsg: string;
   trait: string = "trait";
   traits: Trait[]; 
   filteredTraits: Observable<Trait[]>;
   currentTransfer: string = "1";
-  searchstring = "";
   language = "";
 
   seoTitle: string;
@@ -45,8 +39,6 @@ export class A12TraitlistComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private a12service: A12Service,
-    public historyService: HistoryService,
-    private errorService: ErrorCodeService,
     private seoService: SeoService) { 
     this.traitControl = new FormControl();
     this.pageForm = this.formBuilder.group({
@@ -69,17 +61,6 @@ export class A12TraitlistComponent implements OnInit {
     this.seoDesc = `The list of traits in ${this.gameTitle}.`
     this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
 
-    
-
-    this.pageForm.get('transfers').valueChanges
-      .subscribe(trans => {
-        this.currentTransfer = trans;
-      });
-
-    this.traitControl.valueChanges.subscribe(search => {
-      this.searchstring = search;
-    });
-
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.modalService.setDismissReason('link');
@@ -90,23 +71,30 @@ export class A12TraitlistComponent implements OnInit {
 
   getTraits() {
     this.a12service.getTraitList(this.language)
-    .subscribe(traits => {
+    .subscribe({next: traits => {
       this.traits = traits;
       this.filteredTraits = this.pageForm.valueChanges.pipe(
         startWith(null as Observable<Trait[]>),
-        map((search: string | null) => search ? this.filterT(this.searchstring, this.currentTransfer) : this.traits.slice())
+        map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.traits.slice())
       );
     },
-    error => {
+    error: error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      this.errorVars = this.errorService.getCodes(this.errorCode);
-    });
+    }});
   }
 
-  openModal(template: TemplateRef<any>, slugname: string) {
-    this.trait = slugname;
-    this.location.go(`${this.gameURL}/traits/` + slugname + "/" + this.language);
+  openModal(template: TemplateRef<any>, slug: string, event?) {
+      if (event) {
+        if(event.ctrlKey) {
+          return;
+        }
+        else {
+          event.preventDefault()
+        }
+      }
+    this.trait = slug;
+    this.location.go(`${this.gameURL}/traits/` + slug + "/" + this.language);
     this.modalRef = this.modalService.show(template);
     this.modalRef.onHide.subscribe((reason: string | any) => {
       if(reason != "link") {
@@ -116,8 +104,6 @@ export class A12TraitlistComponent implements OnInit {
   }
 
   private filterT(value: string, transfer: string): Trait[] {
-
-    const filterValue = value.toLowerCase();
     let traitlist: Trait[] = this.traits;
     switch(transfer) {
       case "3": {
@@ -137,11 +123,18 @@ export class A12TraitlistComponent implements OnInit {
         break;
       }
     }
-    return traitlist.filter(trait => {
-      return trait.name.toLowerCase().includes(filterValue) || trait.desc.toLowerCase().includes(filterValue)
-    });
+    if(value) {
+      const filterValue = value.toLowerCase();
+      return traitlist.filter(trait => {
+        return trait.name.toLowerCase().includes(filterValue) || trait.desc.toLowerCase().includes(filterValue)
+      });
+    }
+    return traitlist;
   } 
 
   get f() { return this.pageForm.controls; }
 
-}
+    identify(index, item){
+      return item.slugname;
+   }
+  }

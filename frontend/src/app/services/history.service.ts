@@ -21,7 +21,7 @@ export class HistoryService {
 
         if(targetElement.href && !this.isExternalURL(targetElement.href)) {
 
-          if(!targetElement.href.includes('/media/')) {
+          if(!targetElement.href.includes('/media/') && !$event.ctrlKey) {
             $event.preventDefault();
             if(targetElement.href.indexOf('#') > -1) {
               let url = targetElement.href.split('#');
@@ -30,8 +30,6 @@ export class HistoryService {
             }
             else {
               let links = targetElement.href.split('/').splice(3);
-              //this.location.go(targetElement.href);
-              //this.router.navigate(links, {skipLocationChange: true});
               this.router.navigate(links);
             }
           }

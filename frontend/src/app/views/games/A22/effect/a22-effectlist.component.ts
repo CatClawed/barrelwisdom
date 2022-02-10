@@ -52,7 +52,7 @@ import { SeoService } from '@app/services/seo.service';
       private route: ActivatedRoute,
       private location: Location,
       private a22service: A22Service,
-      private errorService: ErrorCodeService,
+  
       private seoService: SeoService
     ) {
 
@@ -99,7 +99,7 @@ import { SeoService } from '@app/services/seo.service';
         });
   
       this.effectControl.valueChanges.subscribe(search => {
-        this.searchstring = search;
+        search.filtertext = search;
       });
 
       this.router.events.subscribe(event => {
@@ -116,13 +116,13 @@ import { SeoService } from '@app/services/seo.service';
         this.effects = effects;
         this.filteredEffects = this.pageForm.valueChanges.pipe(
           startWith(null as Observable<Effect[]>),
-          map((search: string | null) => search ? this.filterT(this.searchstring, this.currentType) : this.effects.slice())
+          map((search: any) => search ? this.filterT(search.filtertext, this.currentType) : this.effects.slice())
         );
       },
       error => {
         this.error = true;
         this.errorCode = `${error.status}`;
-        this.errorVars = this.errorService.getCodes(this.errorCode);
+        
       });
     }
   
@@ -185,5 +185,7 @@ import { SeoService } from '@app/services/seo.service';
   
     get f() { return this.pageForm.controls; }
 
-  
+    identify(index, item){
+      return item.slug; 
+   }
   }

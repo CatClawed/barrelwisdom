@@ -43,7 +43,7 @@ import { first } from 'rxjs/operators';
       private route: ActivatedRoute,
       private br1service: BR1Service,
       public historyService: HistoryService,
-      private errorService: ErrorCodeService,
+  
       private seoService: SeoService,
       private viewportScroller: ViewportScroller
     ) { 
@@ -70,7 +70,7 @@ import { first } from 'rxjs/operators';
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
   
       this.fragmenteffectControl.valueChanges.subscribe(search => {
-        this.searchstring = search; 
+        search.filtertext = search; 
       });  
     }
 
@@ -86,13 +86,13 @@ import { first } from 'rxjs/operators';
         this.fragmenteffects = fragmenteffects;
         this.filteredFragmentEffects = this.pageForm.valueChanges.pipe(
           startWith(null as Observable<FragmentEffect[]>),
-          map((search: string | null) => search ? this.filterT(this.searchstring) : this.fragmenteffects.slice())
+          map((search: any) => search ? this.filterT(search.filtertext) : this.fragmenteffects.slice())
         );
       },
       error => {
         this.error = true;
         this.errorCode = `${error.status}`;
-        this.errorVars = this.errorService.getCodes(this.errorCode);
+        
       });
     }
   
@@ -111,5 +111,8 @@ import { first } from 'rxjs/operators';
     } 
   
     get f() { return this.pageForm.controls; }
-  
+
+    identify(index, item){
+      return item.slug; 
+   }
   }

@@ -36,7 +36,7 @@ constructor(
     private route: ActivatedRoute,
     public historyService: HistoryService,
     private a22service: A22Service,
-    private errorService: ErrorCodeService,
+
     private seoService: SeoService) {
   }
   ngOnInit(): void {
@@ -58,7 +58,7 @@ constructor(
     error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      this.errorVars = this.errorService.getCodes(this.errorCode);
+      
     });
   }
 } 

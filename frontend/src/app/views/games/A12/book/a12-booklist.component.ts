@@ -1,19 +1,16 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Book } from '@app/interfaces/a12';
 import { A12Service } from '@app/services/a12.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from "@app/services/errorcode.service";
+import { SeoService } from '@app/services/seo.service';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { SeoService } from '@app/services/seo.service';
 
 @Component({
     templateUrl: 'a12-booklist.component.html',
-    selector: 'a12-booklist',
   })
 
   export class A12BooklistComponent implements OnInit {
@@ -22,12 +19,9 @@ import { SeoService } from '@app/services/seo.service';
     bookControl: FormControl;
     error: boolean = false;
     errorCode: string;
-    errorVars: any[];
-    errorMsg: string;
     book: string = "books";
     books: Book[];
     filteredBooks: Observable<Book[]>;
-    searchstring = "";
     language = "";
     config: ModalOptions = { class: "col-md-5 mx-auto" };
 
@@ -47,8 +41,6 @@ import { SeoService } from '@app/services/seo.service';
       private route: ActivatedRoute,
       private location: Location,
       private a12service: A12Service,
-      public historyService: HistoryService,
-      private errorService: ErrorCodeService,
       private seoService: SeoService
     ) { 
       this.bookControl = new FormControl();
@@ -59,7 +51,6 @@ import { SeoService } from '@app/services/seo.service';
     }
   
     ngOnInit(): void {
-  
       this.language = this.route.snapshot.params.language;
   
       this.getBooks();
@@ -72,10 +63,6 @@ import { SeoService } from '@app/services/seo.service';
       this.seoTitle = `Recipe Books - ${this.gameTitle}`;
       this.seoDesc = `The list of recipe books in ${this.gameTitle}.`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-  
-      this.bookControl.valueChanges.subscribe(search => {
-        this.searchstring = search;
-      });
 
       this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
@@ -87,21 +74,28 @@ import { SeoService } from '@app/services/seo.service';
   
     getBooks() {
       this.a12service.getBookList(this.language)
-      .subscribe(books => {
+      .subscribe({next: books => {
         this.books = books;
         this.filteredBooks = this.pageForm.valueChanges.pipe(
           startWith(null as Observable<Book[]>),
-          map((search: string | null) => search ? this.filterT(this.searchstring) : this.books.slice())
+          map((search: any) => search ? this.filterT(search.filtertext) : this.books.slice())
         );
       },
-      error => {
+      error: error => {
         this.error = true;
         this.errorCode = `${error.status}`;
-        this.errorVars = this.errorService.getCodes(this.errorCode);
-      });
+      }});
     }
   
-    openModal(template: TemplateRef<any>, slugname: string) {
+    openModal(template: TemplateRef<any>, slugname: string, event?) {
+      if (event) {
+        if(event.ctrlKey) {
+          return;
+        }
+        else {
+          event.preventDefault()
+        }
+      }
       this.book = slugname;
       this.location.go(`${this.gameURL}/recipe-books/` + slugname + "/" + this.language);
       this.modalRef = this.modalService.show(template);
@@ -113,19 +107,19 @@ import { SeoService } from '@app/services/seo.service';
     }
   
     private filterT(value: string): Book[] {
-  
-      const filterValue = value.toLowerCase();
       let list: Book[] = this.books;
-
-      if(value.length == 0) {
+      if(!value) {
         return list;
       }
-
+      const filterValue = value.toLowerCase();
       return list.filter(book => { 
           return book.name.toLowerCase().includes(filterValue);
         });
     } 
   
     get f() { return this.pageForm.controls; }
-  
+    
+    identify(index, item){
+      return item.slugname; 
+   }
   }

@@ -37,7 +37,7 @@ export class BRSLUnitComponent implements OnInit {
     private route: ActivatedRoute,
     private brslservice: BRSLService,
     public historyService: HistoryService,
-    private errorService: ErrorCodeService,
+
     private seoService: SeoService) {
   }
   ngOnInit(): void {
@@ -59,7 +59,7 @@ export class BRSLUnitComponent implements OnInit {
     error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      this.errorVars = this.errorService.getCodes(this.errorCode);
+      
     });
   }
 } 

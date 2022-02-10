@@ -45,7 +45,7 @@ export class BRSLFacilityComponent implements OnInit {
     private route: ActivatedRoute,
     private brslservice: BRSLService,
     public historyService: HistoryService,
-    private errorService: ErrorCodeService,
+
     private seoService: SeoService) {
       if(this.route.snapshot.params.facility != null) {
       this.slug = this.route.snapshot.params.facility;
@@ -74,7 +74,7 @@ export class BRSLFacilityComponent implements OnInit {
     error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      this.errorVars = this.errorService.getCodes(this.errorCode);
+      
     });
   }
 } 

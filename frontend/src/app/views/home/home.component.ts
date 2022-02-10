@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
     private route: ActivatedRoute,
     private blogService: BlogService,
     private location: Location,
-    private errorService: ErrorCodeService,
+
     private tagService: TagService,
     private seoService: SeoService,
     public historyService: HistoryService
@@ -65,7 +65,7 @@ export class HomeComponent implements OnInit {
         error => {
           this.error = true;
           this.errorCode = `${error.status}`;
-          this.errorVars = this.errorService.getCodes(this.errorCode);
+          
         });
     }
     else {
@@ -85,7 +85,7 @@ export class HomeComponent implements OnInit {
         error => {
           this.error = true;
           this.errorCode = `${error.status}`;
-          this.errorVars = this.errorService.getCodes(this.errorCode);
+          
         }
       );
   }

@@ -18,7 +18,7 @@ import { UserService } from '@app/services/user.service';
       constructor(
         private route: ActivatedRoute,
         private userService: UserService,
-        private errorService: ErrorCodeService,
+    
       ) {  }
 
       ngOnInit(): void {
@@ -29,7 +29,7 @@ import { UserService } from '@app/services/user.service';
          error => { 
             this.error = true;
             this.errorCode = `${error.status}`;
-            this.errorVars = this.errorService.getCodes(this.errorCode);
+            
           });
       }
   }

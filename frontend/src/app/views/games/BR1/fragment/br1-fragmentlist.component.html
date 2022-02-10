@@ -1,5 +1,5 @@
 
-<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+<Error *ngIf="error" [errorCode]="errorCode"></Error>
 <ng-container *ngIf="!error">
    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Fragment Effects"></Breadcrumb>
    <h1>Fragment Effects</h1>
@@ -14,7 +14,7 @@
          </div>
       </form>
    </div>
-   <div *ngFor="let fragmenteffects of filteredFragmentEffects | async| pair " class="row">
+   <div *ngFor="let fragmenteffects of filteredFragmentEffects | async;  trackBy:identify" class="row">
       <div *ngFor="let frag of fragmenteffects" class="spacer col-md-5 mx-auto">
          <div *ngIf="frag" class="card card-body allheight">
             <h4 class="card-title" id="{{frag.slugname}}">

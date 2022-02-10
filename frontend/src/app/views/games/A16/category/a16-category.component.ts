@@ -36,7 +36,7 @@ constructor(
     private route: ActivatedRoute,
     private a16service: A16Service,
     public historyService: HistoryService,
-    private errorService: ErrorCodeService,
+
     private seoService: SeoService) { }
   ngOnInit(): void {
     this.slugname = this.route.snapshot.params.category;
@@ -59,7 +59,7 @@ constructor(
     error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      this.errorVars = this.errorService.getCodes(this.errorCode);
+      
     });
   }
 } 

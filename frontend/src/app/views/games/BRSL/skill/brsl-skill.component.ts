@@ -39,7 +39,7 @@ export class BRSLSkillComponent implements OnInit {
     private route: ActivatedRoute,
     private brslservice: BRSLService,
     public historyService: HistoryService,
-    private errorService: ErrorCodeService,
+
     private seoService: SeoService,
     private viewportScroller: ViewportScroller,
     private loc: Location) {
@@ -63,7 +63,7 @@ export class BRSLSkillComponent implements OnInit {
     error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      this.errorVars = this.errorService.getCodes(this.errorCode);
+      
     });
   }
   ngAfterViewInit(): void {

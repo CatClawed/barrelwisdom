@@ -2,8 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute }from '@angular/router';
 import { MonsterFull } from '@app/interfaces/a12';
 import { A12Service } from '@app/services/a12.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
 
 @Component({
@@ -17,8 +15,6 @@ export class A12MonsterComponent implements OnInit {
   returnUrl: string;
   error: boolean = false;
   errorCode: string;
-  errorVars: any[];
-  errorMsg: string;
   monster: MonsterFull;
   colset: string;
 
@@ -42,8 +38,7 @@ export class A12MonsterComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private a12service: A12Service, public historyService: HistoryService,
-    private errorService: ErrorCodeService,
+    private a12service: A12Service,
     private seoService: SeoService) {
       if(this.route.snapshot.params.monster != null) {
       this.slugname = this.route.snapshot.params.monster;
@@ -55,7 +50,7 @@ export class A12MonsterComponent implements OnInit {
       this.colset = "col-md-9 mx-auto "
     }
     this.a12service.getMonster(this.slugname, this.language)
-    .subscribe(monster => {
+    .subscribe({next: monster => {
         this.error = false;
         this.monster = monster;
 
@@ -69,10 +64,10 @@ export class A12MonsterComponent implements OnInit {
         this.seoImage = `${this.imgURL}monsters/${this.monster.slugname}.webp`
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
-    error => {
+    error: error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      this.errorVars = this.errorService.getCodes(this.errorCode);
-    });
+      
+    }});
   }
 } 

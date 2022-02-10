@@ -1,4 +1,4 @@
-<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+<Error *ngIf="error" [errorCode]="errorCode"></Error>
 
 <ng-container *ngIf="!error">
 <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Items"></Breadcrumb>
@@ -53,7 +53,7 @@
   </form>
 </div>
 <ng-container *ngIf="filteredItems">
-<div *ngFor="let item of filteredItems | async| pair " class="row">
+<div *ngFor="let item of filteredItems | async;  trackBy:identify" class="row">
   <div *ngFor="let it of item" class="spacer col-md-5 mx-auto">
     <div *ngIf="it" class="card allheight card-body">
       <div class="flex">

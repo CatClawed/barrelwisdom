@@ -44,7 +44,7 @@ export class A16PropertylistComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private a16service: A16Service,
-    private errorService: ErrorCodeService,
+
     private seoService: SeoService) { 
     this.propertyControl = new FormControl();
 
@@ -68,15 +68,6 @@ export class A16PropertylistComponent implements OnInit {
     this.seoDesc = `The list of properties in ${this.gameTitle}.`
     this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
 
-    this.pageForm.get('transfers').valueChanges
-      .subscribe(trans => {
-        this.currentTransfer = trans;
-      });
-
-    this.propertyControl.valueChanges.subscribe(search => {
-      this.searchstring = search;
-    });
-
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.modalService.setDismissReason('link');
@@ -91,19 +82,27 @@ export class A16PropertylistComponent implements OnInit {
       this.properties = properties;
       this.filteredProperties = this.pageForm.valueChanges.pipe(
         startWith(null as Observable<Property[]>),
-        map((search: string | null) => search ? this.filterT(this.searchstring, this.currentTransfer) : this.properties.slice())
+        map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.properties.slice())
       );
     },
     error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      this.errorVars = this.errorService.getCodes(this.errorCode);
+      
     });
   }
 
-  openModal(template: TemplateRef<any>, slugname: string) {
-    this.property = slugname;
-    this.location.go(`${this.gameURL}/properties/` + slugname + "/" + this.language);
+  openModal(template: TemplateRef<any>, slug: string, event?) {
+      if (event) {
+        if(event.ctrlKey) {
+          return;
+        }
+        else {
+          event.preventDefault()
+        }
+      }
+    this.property = slug;
+    this.location.go(`${this.gameURL}/properties/` + slug + "/" + this.language);
     this.modalRef = this.modalService.show(template);
     this.modalRef.onHide.subscribe((reason: string | any) => {
       if(reason != "link") {
@@ -145,4 +144,7 @@ export class A16PropertylistComponent implements OnInit {
 
   get f() { return this.pageForm.controls; }
 
-}
+    identify(index, item){
+      return item.slug; 
+   }
+  }

@@ -43,7 +43,7 @@ export class A22EffectComponent implements OnInit {
     private route: ActivatedRoute,
     public historyService: HistoryService,
     private a22service: A22Service,
-    private errorService: ErrorCodeService,
+
     private seoService: SeoService) {
       if(this.route.snapshot.params.effect != null) {
       this.slug = this.route.snapshot.params.effect;
@@ -59,7 +59,7 @@ export class A22EffectComponent implements OnInit {
       if(effect.efftype == "Hidden" || effect.efftype == "unused") {
           this.error = true;
           this.errorCode = "404";
-          this.errorVars = this.errorService.getCodes(this.errorCode);
+          
       }
       else {
           this.error = false;
@@ -77,7 +77,7 @@ export class A22EffectComponent implements OnInit {
     error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      this.errorVars = this.errorService.getCodes(this.errorCode);
+      
     });
   }
 } 

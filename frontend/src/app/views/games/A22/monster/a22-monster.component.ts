@@ -47,7 +47,7 @@ export class A22MonsterComponent implements OnInit {
     private route: ActivatedRoute,
     public historyService: HistoryService,
     private a22service: A22Service,
-    private errorService: ErrorCodeService,
+
     private seoService: SeoService) {
       if(this.route.snapshot.params.monster != null) {
       this.slug = this.route.snapshot.params.monster;
@@ -102,7 +102,7 @@ export class A22MonsterComponent implements OnInit {
     error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      this.errorVars = this.errorService.getCodes(this.errorCode);
+      
     });
   }
 

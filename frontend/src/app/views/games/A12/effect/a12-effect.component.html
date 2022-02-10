@@ -1,4 +1,4 @@
-<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+<Error *ngIf="error" [errorCode]="errorCode"></Error>
 
 <ng-container *ngIf="effect">
 <Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Effects', '/'+gameURL+'/effects/'+language]]" [current]="effect.name"></Breadcrumb>
@@ -9,7 +9,7 @@
     <b>From Item:</b>
     <ul>
       <li *ngFor="let e of effect.effectline_set">
-          <a href="/{{gameURL}}/items/{{e.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{e.name}}</a>
+          <a routerLink="/{{gameURL}}/items/{{e.slugname}}/{{language}}">{{e.name}}</a>
         </li>
     </ul>
   </div>

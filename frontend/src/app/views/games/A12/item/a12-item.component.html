@@ -1,4 +1,4 @@
-<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+<Error *ngIf="error" [errorCode]="errorCode"></Error>
 
 <ng-container *ngIf="item">
 <Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Items', '/'+gameURL+'/items/'+language]]" [current]="item.name"></Breadcrumb>
@@ -12,25 +12,25 @@
       <img loading="lazy" src="{{imgURL}}items/{{item.slugname}}.webp" alt="{{item.name}}">
     </div>
     <p>{{item.desc}}</p>
-    <p *ngIf="item.book_set"><b>Recipe Book: </b><a href="/{{gameURL}}/recipe-books/{{item.book_set[0].slugname}}" (click)="historyService.hrefClicked($event)">{{item.book_set[0].name}}</a></p>
+    <p *ngIf="item.book_set"><b>Recipe Book: </b><a routerLink="/{{gameURL}}/recipe-books/{{item.book_set[0].slugname}}">{{item.book_set[0].name}}</a></p>
     <table class="table-item-data">
       <tr *ngFor="let cat of item.categories">
-        <td><i class="atelier atelier-{{cat.icon_name}}"></i></td><td><a href="/{{gameURL}}/categories/{{cat.slugname}}" (click)="historyService.hrefClicked($event)">{{cat.name}}</a></td>
+        <td><i class="atelier atelier-{{cat.icon_name}}"></i></td><td><a routerLink="/{{gameURL}}/categories/{{cat.slugname}}">{{cat.name}}</a></td>
       </tr>
     </table>
     <b *ngIf="item.locations">Locations:</b>
     <ul *ngIf="item.locations">
       <li *ngFor="let loc of item.locations">
-       <a *ngIf="loc.parentslug" href="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}#{{loc.slugname}}" (click)="historyService.hrefClicked($event)">{{loc.name}}</a>
-       <a *ngIf="!loc.parentslug" href="/{{gameURL}}/locations/{{loc.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{loc.name}}</a></li>
+       <a *ngIf="loc.parentslug" routerLink="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}" fragment="{{loc.slugname}}">{{loc.name}}</a>
+       <a *ngIf="!loc.parentslug" routerLink="/{{gameURL}}/locations/{{loc.slugname}}/{{language}}">{{loc.name}}</a></li>
     </ul>
     <b *ngIf="item.monsters">Monsters:</b>
     <ul *ngIf="item.monsters">
-      <li *ngFor="let mon of item.monsters"><a href="/{{gameURL}}/monsters/{{mon.slugname}}" (click)="historyService.hrefClicked($event)">{{mon.name}}</a></li>
+      <li *ngFor="let mon of item.monsters"><a routerLink="/{{gameURL}}/monsters/{{mon.slugname}}">{{mon.name}}</a></li>
     </ul>
     <b *ngIf="item.traits">Trait:</b>
     <ul *ngIf="item.traits">
-      <li><a href="/{{gameURL}}/traits/{{item.traits.slugname}}" (click)="historyService.hrefClicked($event)">{{item.traits.name}}</a></li>
+      <li><a routerLink="/{{gameURL}}/traits/{{item.traits.slugname}}">{{item.traits.name}}</a></li>
     </ul>
     <ul *ngIf="item.time" style="list-style:none;padding:0;">
       <li *ngIf="item.time">Time: {{item.time}}</li>
@@ -44,7 +44,7 @@
       </tr>
       <tr><td>
         <ul>
-          <li *ngFor="let ing of item.ingredient_set"><a *ngIf="ing.item" href="/{{gameURL}}/items/{{ing.item.slugname}}" (click)="historyService.hrefClicked($event)">{{ing.item.name}}</a><a *ngIf="ing.category" href="/{{gameURL}}/categories/{{ing.category.slugname}}" (click)="historyService.hrefClicked($event)">{{ing.category.name}}</a> x{{ing.num}}</li>
+          <li *ngFor="let ing of item.ingredient_set"><a *ngIf="ing.item" routerLink="/{{gameURL}}/items/{{ing.item.slugname}}">{{ing.item.name}}</a><a *ngIf="ing.category" routerLink="/{{gameURL}}/categories/{{ing.category.slugname}}">{{ing.category.name}}</a> x{{ing.num}}</li>
         </ul>
       </td></tr>
     </table>
@@ -53,21 +53,21 @@
       <tr *ngIf="itemone"><td>Item 1</td><td>
         <ul style="margin-bottom:0;">
          <ng-container *ngFor="let eff of item.effectline_set">
-         <li *ngIf="eff.itemnum == 1"><a href="/{{gameURL}}/effects/{{eff.effect.slugname}}" (click)="historyService.hrefClicked($event)">{{eff.effect.name}}</a></li>
+         <li *ngIf="eff.itemnum == 1"><a routerLink="/{{gameURL}}/effects/{{eff.effect.slugname}}">{{eff.effect.name}}</a></li>
          </ng-container>
         </ul>
       </td></tr>
       <tr *ngIf="itemtwo"><td>Item 2</td><td>
         <ul style="margin-bottom:0;">
          <ng-container *ngFor="let eff of item.effectline_set">
-         <li *ngIf="eff.itemnum == 2"><a href="/{{gameURL}}/effects/{{eff.effect.slugname}}" (click)="historyService.hrefClicked($event)">{{eff.effect.name}}</a></li>
+         <li *ngIf="eff.itemnum == 2"><a routerLink="/{{gameURL}}/effects/{{eff.effect.slugname}}">{{eff.effect.name}}</a></li>
          </ng-container>
         </ul>
       </td></tr>
       <tr *ngIf="itemthree"><td>Item 3</td><td>
         <ul style="margin-bottom:0;">
         <ng-container *ngFor="let eff of item.effectline_set">
-         <li *ngIf="eff.itemnum == 3"><a href="/{{gameURL}}/effects/{{eff.effect.slugname}}" (click)="historyService.hrefClicked($event)">{{eff.effect.name}}</a></li>
+         <li *ngIf="eff.itemnum == 3"><a routerLink="/{{gameURL}}/effects/{{eff.effect.slugname}}">{{eff.effect.name}}</a></li>
          </ng-container>
         </ul>
       </td></tr>
@@ -76,7 +76,7 @@
       <tr class="table-dark-center"><th>Materials</th></tr>
       <tr><td>
         <ul>
-         <li *ngFor="let item of item.equip_set[0].material"><a href="/{{gameURL}}/items/{{item.slugname}}" (click)="historyService.hrefClicked($event)">{{item.name}}</a></li>
+         <li *ngFor="let item of item.equip_set[0].material"><a routerLink="/{{gameURL}}/items/{{item.slugname}}">{{item.name}}</a></li>
         </ul>
       </td></tr>
     </table>

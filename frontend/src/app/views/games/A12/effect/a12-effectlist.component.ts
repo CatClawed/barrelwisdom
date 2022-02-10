@@ -5,15 +5,12 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Effect } from '@app/interfaces/a12';
 import { A12Service } from '@app/services/a12.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from "@app/services/errorcode.service";
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { SeoService } from '@app/services/seo.service';
 
 @Component({
     templateUrl: 'a12-effectlist.component.html',
-    selector: 'a12-effectlist',
   })
 
   export class A12EffectlistComponent implements OnInit {
@@ -22,12 +19,9 @@ import { SeoService } from '@app/services/seo.service';
     effectControl: FormControl;
     error: boolean = false;
     errorCode: string;
-    errorVars: any[];
-    errorMsg: string;
     effect: string = "effect";
     effects: Effect[];
     filteredEffects: Observable<Effect[]>;
-    searchstring = "";
     language = "";
     config: ModalOptions = { class: "col-md-5 mx-auto" };
 
@@ -47,8 +41,6 @@ import { SeoService } from '@app/services/seo.service';
       private route: ActivatedRoute,
       private location: Location,
       private a12service: A12Service,
-      public historyService: HistoryService,
-      private errorService: ErrorCodeService,
       private seoService: SeoService
     ) { 
       this.effectControl = new FormControl();
@@ -59,7 +51,6 @@ import { SeoService } from '@app/services/seo.service';
     }
   
     ngOnInit(): void {
-  
       this.language = this.route.snapshot.params.language;
   
       this.getEffects();
@@ -72,10 +63,6 @@ import { SeoService } from '@app/services/seo.service';
       this.seoTitle = `Effects - ${this.gameTitle}`;
       this.seoDesc = `The list of effects in ${this.gameTitle}.`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-  
-      this.effectControl.valueChanges.subscribe(search => {
-        this.searchstring = search;
-      });
 
       this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
@@ -87,23 +74,30 @@ import { SeoService } from '@app/services/seo.service';
   
     getEffects() {
       this.a12service.getEffectList(this.language)
-      .subscribe(effects => {
+      .subscribe({next: effects => {
         this.effects = effects;
         this.filteredEffects = this.pageForm.valueChanges.pipe(
           startWith(null as Observable<Effect[]>),
-          map((search: string | null) => search ? this.filterT(this.searchstring) : this.effects.slice())
+          map((search: any) => search ? this.filterT(search.filtertext) : this.effects.slice())
         );
       },
-      error => {
+      error: error => {
         this.error = true;
         this.errorCode = `${error.status}`;
-        this.errorVars = this.errorService.getCodes(this.errorCode);
-      });
+      }});
     }
   
-    openModal(template: TemplateRef<any>, slugname: string) {
-      this.effect = slugname;
-      this.location.go(`${this.gameURL}/effects/` + slugname + "/" + this.language);
+    openModal(template: TemplateRef<any>, slug: string, event?) {
+      if (event) {
+        if(event.ctrlKey) {
+          return;
+        }
+        else {
+          event.preventDefault()
+        }
+      }
+      this.effect = slug;
+      this.location.go(`${this.gameURL}/effects/` + slug + "/" + this.language);
       this.modalRef = this.modalService.show(template);
       this.modalRef.onHide.subscribe((reason: string | any) => {
         if(reason != "link") {
@@ -111,16 +105,13 @@ import { SeoService } from '@app/services/seo.service';
           this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
         }})
     }
-
   
     private filterT(value: string): Effect[] {
-  
-      const filterValue = value.toLowerCase();
       let effectlist: Effect[] = this.effects;
-
-      if(value.length == 0) {
+      if(!value) {
         return effectlist;
       }
+      const filterValue = value.toLowerCase();
 
       return effectlist.filter(effect => { 
           return (effect.desc) ? effect.name.toLowerCase().includes(filterValue) ||  effect.desc.toLowerCase().includes(filterValue) : effect.name.toLowerCase().includes(filterValue)
@@ -128,5 +119,8 @@ import { SeoService } from '@app/services/seo.service';
     } 
   
     get f() { return this.pageForm.controls; }
-  
+
+    identify(index, item){
+      return item.slugname;
+   }
   }

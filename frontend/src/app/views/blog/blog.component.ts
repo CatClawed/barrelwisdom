@@ -38,7 +38,7 @@ import { WINDOW } from '@app/services/window.service';
         private route: ActivatedRoute,
         public historyService: HistoryService,
         private blogService: BlogService,
-        private errorService: ErrorCodeService,
+    
         private authenticationService: AuthenticationService,
         private markdownService: MarkdownService,
         private seoService: SeoService,
@@ -173,7 +173,7 @@ import { WINDOW } from '@app/services/window.service';
             error => { 
                 this.error = true;
                 this.errorCode = `${error.status}`;
-                this.errorVars = this.errorService.getCodes(this.errorCode);
+                
               }
             );
       }

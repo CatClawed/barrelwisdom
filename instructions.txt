@@ -1,49 +1,18 @@
-DATABASE
-
 setup venv: https://docs.python.org/3/library/venv.html
 install pip
 install https://docs.djangoproject.com/en/3.2/topics/install/#database-installation
 make postgres https://www.postgresql.org/download/linux/debian/
-
-pip install django[argon2]
-sudo apt install python3-dev libpq-dev
-pip install psycopg2
-pip install djangorestframework
-djoser pip install -U djoser https://djoser.readthedocs.io/en/latest/getting_started.html
 sudo apt install memcached
-pip install pylibmc
 create secrets.json
 jwt-key: ssh-keygen -t rsa -b 4096 -m PEM -f jwt-key
-pip install gunicorn
-python -m pip install django-debug-toolbar
-pip install django-filter
-
 python manage.py dumpdata --exclude auth.permission --exclude contenttypes -o dump.json.gz
 comment out all @receiver decorators before import to prevent errors
 python manage.py loaddata dump.json.gz
-
-FRONTEND
-
 install node https://github.com/nodesource/distributions/blob/master/README.md
-
-COMMENTO
-
-install https://docs.commento.io/installation/self-hosting/on-your-server/release-binaries.html
-just follow this, it knows what it's doing https://bloggingfordevs.com/static-site-comments/
-
-
-OTHER
-
 sudo apt install git
 certbot
 nginx
 supervisor
 pm2
-
-supervisor -> supervisorctl myproject_gunicorn because I am big whoops and did not fix the tutorial name
-pm2 stop
-pm2 list
-etc
-
 setup ssh (cyberduck, putty, git), disable root, config file, etc, heck putty keys
 sudo ufw allow port (ssh especially)

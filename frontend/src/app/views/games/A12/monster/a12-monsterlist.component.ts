@@ -5,15 +5,12 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
 import { MonsterList } from '@app/interfaces/a12';
 import { A12Service } from '@app/services/a12.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from "@app/services/errorcode.service";
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { SeoService } from '@app/services/seo.service';
 
 @Component({
     templateUrl: 'a12-monsterlist.component.html',
-    selector: 'a12-monsterlist',
   })
 
   export class A12MonsterlistComponent implements OnInit {
@@ -22,12 +19,9 @@ import { SeoService } from '@app/services/seo.service';
     monsterControl: FormControl;
     error: boolean = false;
     errorCode: string;
-    errorVars: any[];
-    errorMsg: string;
     monster: string = "monsters";
     monsters: MonsterList[];
     filteredMonsters: Observable<MonsterList[]>;
-    searchstring = "";
     language = "";
     config: ModalOptions = { class: "col-md-5 mx-auto" };
   
@@ -47,8 +41,6 @@ import { SeoService } from '@app/services/seo.service';
       private route: ActivatedRoute,
       private location: Location,
       private a12service: A12Service,
-      public historyService: HistoryService,
-      private errorService: ErrorCodeService,
       private seoService: SeoService
     ) { 
       this.monsterControl = new FormControl();
@@ -71,10 +63,6 @@ import { SeoService } from '@app/services/seo.service';
       this.seoDesc = `The list of monsters in ${this.gameTitle}.`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
   
-      this.monsterControl.valueChanges.subscribe(search => {
-        this.searchstring = search;
-      });
-
       this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
           this.modalService.setDismissReason('link');
@@ -85,23 +73,30 @@ import { SeoService } from '@app/services/seo.service';
   
     getMonsters() {
       this.a12service.getMonsterList(this.language)
-      .subscribe(monsters => {
+      .subscribe({next: monsters => {
         this.monsters = monsters;
         this.filteredMonsters = this.pageForm.valueChanges.pipe(
           startWith(null as Observable<MonsterList[]>),
-          map((search: string | null) => search ? this.filterT(this.searchstring) : this.monsters.slice())
+          map((search: any) => search ? this.filterT(search.filtertext) : this.monsters.slice())
         );
       },
-      error => {
+      error: error => {
         this.error = true;
         this.errorCode = `${error.status}`;
-        this.errorVars = this.errorService.getCodes(this.errorCode);
-      });
+      }});
     }
   
-    openModal(template: TemplateRef<any>, slugname: string) {
-      this.monster = slugname;
-      this.location.go(`${this.gameURL}/monsters/` + slugname + "/" + this.language);
+    openModal(template: TemplateRef<any>, slug: string, event?) {
+      if (event) {
+        if(event.ctrlKey) {
+          return;
+        }
+        else {
+          event.preventDefault()
+        }
+      }
+      this.monster = slug;
+      this.location.go(`${this.gameURL}/monsters/` + slug + "/" + this.language);
       this.modalRef = this.modalService.show(template);
       this.modalRef.onHide.subscribe((reason: string | any) => {
         if(reason != "link") {
@@ -111,19 +106,19 @@ import { SeoService } from '@app/services/seo.service';
     }
   
     private filterT(value: string): MonsterList[] {
-  
-      const filterValue = value.toLowerCase();
       let list: MonsterList[] = this.monsters;
-
-      if(value.length == 0) {
+      if(!value) {
         return list;
       }
-
+      const filterValue = value.toLowerCase();
       return list.filter(mon => { 
           return mon.name.toLowerCase().includes(filterValue);
         });
     }
   
     get f() { return this.pageForm.controls; }
-  
+
+    identify(index, item){
+      return item.slugname; 
+   }
   }

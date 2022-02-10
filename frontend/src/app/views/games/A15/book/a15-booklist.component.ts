@@ -46,7 +46,7 @@ import { SeoService } from '@app/services/seo.service';
       private route: ActivatedRoute,
       private location: Location,
       private a15service: A15Service,
-      private errorService: ErrorCodeService,
+  
       private seoService: SeoService
     ) { 
       this.bookControl = new FormControl();
@@ -61,7 +61,7 @@ import { SeoService } from '@app/services/seo.service';
       this.language = this.route.snapshot.params.language;
   
       this.bookControl.valueChanges.subscribe(search => {
-        this.searchstring = search;
+        search.filtertext = search;
       });
   
       this.getBooks();
@@ -89,19 +89,27 @@ import { SeoService } from '@app/services/seo.service';
         this.books = books;
         this.filteredBooks = this.pageForm.valueChanges.pipe(
           startWith(null as Observable<Book[]>),
-          map((search: string | null) => search ? this.filterT(this.searchstring) : this.books.slice())
+          map((search: any) => search ? this.filterT(search.filtertext) : this.books.slice())
         );
       },
       error => {
         this.error = true;
         this.errorCode = `${error.status}`;
-        this.errorVars = this.errorService.getCodes(this.errorCode);
+        
       });
     }
   
-    openModal(template: TemplateRef<any>, slugname: string) {
-      this.book = slugname;
-      this.location.go(`${this.gameURL}/recipe-books/` + slugname + "/" + this.language);
+    openModal(template: TemplateRef<any>, slug: string, event?) {
+      if (event) {
+        if(event.ctrlKey) {
+          return;
+        }
+        else {
+          event.preventDefault()
+        }
+      }
+      this.book = slug;
+      this.location.go(`${this.gameURL}/recipe-books/` + slug + "/" + this.language);
       this.modalRef = this.modalService.show(template);
       this.modalRef.onHide.subscribe((reason: string | any) => {
         if(reason != "link") {
@@ -125,5 +133,8 @@ import { SeoService } from '@app/services/seo.service';
     } 
   
     get f() { return this.pageForm.controls; }
-  
+
+    identify(index, item){
+      return item.slug; 
+   }
   }

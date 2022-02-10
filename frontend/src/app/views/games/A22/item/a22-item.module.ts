@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { PipeModule } from '@app/pipes/pipes.module';
+import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
 import { ErrorModule } from '@app/views/error/error.module';
 import { LanguageModule } from '@app/views/language/language.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -14,7 +14,6 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
 import { A22ItemRoutingModule } from './a22-item-routing.module';
 import { A22ItemComponent } from './a22-item.component';
 import { A22ItemlistComponent } from './a22-itemlist.component';
-import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
 
 @NgModule({
     imports: [
@@ -22,7 +21,6 @@ import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
       ModalModule.forRoot(),
       ReactiveFormsModule,
       A22ItemRoutingModule,
-      PipeModule,
       MatInputModule,
       MatFormFieldModule,
       MatIconModule,

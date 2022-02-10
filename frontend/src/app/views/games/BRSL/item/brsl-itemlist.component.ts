@@ -51,7 +51,7 @@ import { SeoService } from '@app/services/seo.service';
       private route: ActivatedRoute,
       private location: Location,
       private brslservice: BRSLService,
-      private errorService: ErrorCodeService,
+  
       private seoService: SeoService
     ) { 
       this.itemControl = new FormControl();
@@ -89,7 +89,7 @@ import { SeoService } from '@app/services/seo.service';
         });
   
       this.itemControl.valueChanges.subscribe(search => {
-        this.searchstring = search;
+        search.filtertext = search;
       });
 
       this.router.events.subscribe(event => {
@@ -106,13 +106,13 @@ import { SeoService } from '@app/services/seo.service';
         this.items = items;
         this.filteredItems = this.pageForm.valueChanges.pipe(
           startWith(null as Observable<ItemList[]>),
-          map((search: string | null) => search ? this.filterT(this.searchstring, this.currentType, this.currentCategory) : this.items.slice())
+          map((search: any) => search ? this.filterT(search.filtertext, this.currentType, this.currentCategory) : this.items.slice())
         );
       },
       error => {
         this.error = true;
         this.errorCode = `${error.status}`;
-        this.errorVars = this.errorService.getCodes(this.errorCode);
+        
       });
     }
 
@@ -124,13 +124,21 @@ import { SeoService } from '@app/services/seo.service';
       error => {
           this.error = true;
           this.errorCode = `${error.status}`;
-          this.errorVars = this.errorService.getCodes(this.errorCode);
+          
       });
   }
   
-    openModal(template: TemplateRef<any>, slugname: string) {
-      this.item = slugname;
-      this.location.go(`${this.gameURL}/items/` + slugname + "/" + this.language);
+    openModal(template: TemplateRef<any>, slug: string, event?) {
+      if (event) {
+        if(event.ctrlKey) {
+          return;
+        }
+        else {
+          event.preventDefault()
+        }
+      }
+      this.item = slug;
+      this.location.go(`${this.gameURL}/items/` + slug + "/" + this.language);
       this.modalRef = this.modalService.show(template);
       this.modalRef.onHide.subscribe((reason: string | any) => {
         if(reason != "link") {
@@ -162,5 +170,8 @@ import { SeoService } from '@app/services/seo.service';
     } 
   
     get f() { return this.pageForm.controls; }
-  
+
+    identify(index, item){
+      return item.slug; 
+   }
   }

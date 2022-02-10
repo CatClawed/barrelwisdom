@@ -1,4 +1,4 @@
-<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+<Error *ngIf="error" [errorCode]="errorCode"></Error>
 
 <ng-container *ngIf="item">
 <Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Items', '/'+gameURL+'/items/'+language]]" [current]="item.name"></Breadcrumb>
@@ -30,7 +30,7 @@
       <div class="row">
         <table class="table-item-data col">
           <tr *ngFor="let cat of item.category">
-              <td style="text-align: center;"><i class="atelier atelier-ryza2-category-{{cat.slug}}"></i></td><td><a href="/{{gameURL}}/categories/{{cat.slug}}" (click)="historyService.hrefClicked($event)">{{cat.name}}</a></td>
+              <td style="text-align: center;"><i class="atelier atelier-ryza2-category-{{cat.slug}}"></i></td><td><a routerLink="/{{gameURL}}/categories/{{cat.slug}}">{{cat.name}}</a></td>
           </tr>
         </table>
         <table class="table-item-data">
@@ -49,34 +49,34 @@
       <b *ngIf="item.location" >Location:</b>
       <div *ngIf="item.location" style="column-count: 2;">
         <ul style="padding-left:1.1em;margin-bottom:0">
-            <li *ngFor="let loc of item.location"><a *ngIf="loc.reg" href="/{{gameURL}}/locations/{{loc.reg}}/{{language}}" (click)="historyService.hrefClicked($event)">{{loc.name}}</a><a *ngIf="!loc.reg" href="/{{gameURL}}/locations/{{loc.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{loc.name}}</a></li>
+            <li *ngFor="let loc of item.location"><a *ngIf="loc.reg" routerLink="/{{gameURL}}/locations/{{loc.reg}}/{{language}}">{{loc.name}}</a><a *ngIf="!loc.reg" routerLink="/{{gameURL}}/locations/{{loc.slug}}/{{language}}">{{loc.name}}</a></li>
         </ul>
       </div>
       <b *ngIf="item.monster_set" >Dropped by:</b>
       <div *ngIf="item.monster_set" style="column-count: 2;">
          <ul style="padding-left:1.1em;margin-bottom:0">
-             <li *ngFor="let mon of item.monster_set"><a href="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{mon.name}}</a></li>
+             <li *ngFor="let mon of item.monster_set"><a routerLink="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a></li>
          </ul>
       </div>
       <ng-container *ngIf="item.itemtype == 'Material'">
         <ng-container *ngIf="item.trait">
           <b>Trait:</b>
           <ul style="padding-left:1.1em;margin-bottom:0">
-            <li *ngFor="let trait of item.trait"><a href="/{{gameURL}}/traits/{{trait.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{trait.name}}</a></li>
+            <li *ngFor="let trait of item.trait"><a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">{{trait.name}}</a></li>
           </ul>
         </ng-container>
         <ng-container *ngIf="item.effectline_set">
-          <b>Effect: </b> <a href="/{{gameURL}}/effects/{{item.effectline_set[0].slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.effectline_set[0].name}}</a>
+          <b>Effect: </b> <a routerLink="/{{gameURL}}/effects/{{item.effectline_set[0].slug}}/{{language}}">{{item.effectline_set[0].name}}</a>
         </ng-container>
       </ng-container>
       <ng-container *ngIf="item.itemtype != 'Material' && item.ingredient_set">
         <p *ngIf="item.skilltree"><b>Acquired from skill tree.</b></p>
-        <p *ngIf="item.evlinkitems_set"><b>EV Link: <a href="/{{gameURL}}/items/{{item.evlinkitems_set[0].item1.slug}}" (click)="historyService.hrefClicked($event)">{{item.evlinkitems_set[0].item1.name}}</a> + <a href="/{{gameURL}}/items/{{item.evlinkitems_set[0].item2.slug}}" (click)="historyService.hrefClicked($event)">{{item.evlinkitems_set[0].item2.name}}</a></b></p>
+        <p *ngIf="item.evlinkitems_set"><b>EV Link: <a routerLink="/{{gameURL}}/items/{{item.evlinkitems_set[0].item1.slug}}">{{item.evlinkitems_set[0].item1.name}}</a> + <a routerLink="/{{gameURL}}/items/{{item.evlinkitems_set[0].item2.slug}}">{{item.evlinkitems_set[0].item2.name}}</a></b></p>
         <ng-container *ngIf="item.recipemorphs_set">
           <b>Morph Chain:</b>
           <div style="column-count: 2;">
             <ol style="padding-left:1.1em;">
-                <li *ngFor="let recipe of item.recipemorphs_set"><a href="/{{gameURL}}/items/{{recipe.parent.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{recipe.parent.name}}</a></li>
+                <li *ngFor="let recipe of item.recipemorphs_set"><a routerLink="/{{gameURL}}/items/{{recipe.parent.slug}}/{{language}}">{{recipe.parent.name}}</a></li>
             </ol>
           </div>
         </ng-container>
@@ -85,30 +85,30 @@
             <tr class="table-dark-center"><th colspan=2 >Effects</th></tr>
             <tr>
               <td style="vertical-align: middle;"><b>1</b></td><td>
-              <a *ngIf="default[0][1] != 'none'" href="/{{gameURL}}/effects/{{default[0][1]}}/{{language}}" (click)="historyService.hrefClicked($event)" (click)="historyService.hrefClicked($event)" class="badge bg-secondary badge-list">{{default[0][0]}}</a> 
+              <a *ngIf="default[0][1] != 'none'" routerLink="/{{gameURL}}/effects/{{default[0][1]}}/{{language}}" class="badge bg-secondary badge-list">{{default[0][0]}}</a> 
               <span *ngIf="default[0][1] == 'none'" class="badge bg-secondary badge-list">{{default[0][0]}}</span>
-              <a *ngFor="let e of eff1" class="badge bg-primary badge-list" href="/{{gameURL}}/effects/{{e[1]}}/{{language}}" (click)="historyService.hrefClicked($event)">{{e[0]}}</a>
+              <a *ngFor="let e of eff1" class="badge bg-primary badge-list" routerLink="/{{gameURL}}/effects/{{e[1]}}/{{language}}">{{e[0]}}</a>
             </td>
             </tr>
             <tr *ngIf="eff2.length > 0">
               <td style="vertical-align: middle;"><b>2</b></td><td>
-              <a *ngIf="default[1][1] != 'none'" href="/{{gameURL}}/effects/{{default[1][1]}}/{{language}}" (click)="historyService.hrefClicked($event)" class="badge bg-secondary badge-list">{{default[1][0]}}</a> 
+              <a *ngIf="default[1][1] != 'none'" routerLink="/{{gameURL}}/effects/{{default[1][1]}}/{{language}}" class="badge bg-secondary badge-list">{{default[1][0]}}</a> 
               <span *ngIf="default[1][1] == 'none'" class="badge bg-secondary badge-list">{{default[1][0]}}</span>
-              <a *ngFor="let e of eff2" class="badge bg-primary badge-list" href="/{{gameURL}}/effects/{{e[1]}}/{{language}}" (click)="historyService.hrefClicked($event)">{{e[0]}}</a>
+              <a *ngFor="let e of eff2" class="badge bg-primary badge-list" routerLink="/{{gameURL}}/effects/{{e[1]}}/{{language}}">{{e[0]}}</a>
             </td>
             </tr>
             <tr *ngIf="eff3.length > 0">
               <td style="vertical-align: middle;"><b>3</b></td><td>
-              <a *ngIf="default[2][1] != 'none'" href="/{{gameURL}}/effects/{{default[2][1]}}/{{language}}" (click)="historyService.hrefClicked($event)" class="badge bg-secondary badge-list">{{default[2][0]}}</a> 
+              <a *ngIf="default[2][1] != 'none'" routerLink="/{{gameURL}}/effects/{{default[2][1]}}/{{language}}" class="badge bg-secondary badge-list">{{default[2][0]}}</a> 
               <span *ngIf="default[2][1] == 'none'" class="badge bg-secondary badge-list">{{default[2][0]}}</span>
-              <a *ngFor="let e of eff3" class="badge bg-primary badge-list" href="/{{gameURL}}/effects/{{e[1]}}/{{language}}" (click)="historyService.hrefClicked($event)">{{e[0]}}</a>
+              <a *ngFor="let e of eff3" class="badge bg-primary badge-list" routerLink="/{{gameURL}}/effects/{{e[1]}}/{{language}}">{{e[0]}}</a>
             </td>
             </tr>
             <tr *ngIf="eff4.length > 0">
               <td style="vertical-align: middle;"><b>4</b></td><td>
-              <a *ngIf="default[3][1] != 'none'" href="/{{gameURL}}/effects/{{default[3][1]}}/{{language}}" (click)="historyService.hrefClicked($event)" class="badge bg-secondary badge-list">{{default[3][0]}}</a> 
+              <a *ngIf="default[3][1] != 'none'" routerLink="/{{gameURL}}/effects/{{default[3][1]}}/{{language}}" class="badge bg-secondary badge-list">{{default[3][0]}}</a> 
               <span *ngIf="default[3][1] == 'none'" class="badge bg-secondary badge-list">{{default[3][0]}}</span>
-              <a *ngFor="let e of eff4" class="badge bg-primary badge-list" href="/{{gameURL}}/effects/{{e[1]}}/{{language}}" (click)="historyService.hrefClicked($event)">{{e[0]}}</a>
+              <a *ngFor="let e of eff4" class="badge bg-primary badge-list" routerLink="/{{gameURL}}/effects/{{e[1]}}/{{language}}">{{e[0]}}</a>
             </td>
             </tr>
           </table>
@@ -136,8 +136,8 @@
             <tr class="table-dark-center"><th colspan=2>Synthesis</th></tr>
             <tr *ngFor="let ing of item.ingredient_set">
               <td style="text-align: center;">
-                <a *ngIf="ing.item" href="/{{gameURL}}/items/{{ing.item.slug}}/{{language}}" (click)="historyService.hrefClicked($event)" (click)="historyService.hrefClicked($event)">{{ing.item.name}}</a>
-                <a *ngIf="ing.category" href="/{{gameURL}}/categories/{{ing.category.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{ing.category.name}}</a><br />
+                <a *ngIf="ing.item" routerLink="/{{gameURL}}/items/{{ing.item.slug}}/{{language}}">{{ing.item.name}}</a>
+                <a *ngIf="ing.category" routerLink="/{{gameURL}}/categories/{{ing.category.slug}}/{{language}}">{{ing.category.name}}</a><br />
                 <i style="color:#f03a02;" *ngIf="ing.fire"      class="atelier atelier-np atelier-ryza2-fire"></i>
                 <i style="color:#04b5db;" *ngIf="ing.ice"       class="atelier atelier-np atelier-ryza2-ice"></i>
                 <i style="color:#e3bb05;" *ngIf="ing.lightning" class="atelier atelier-np atelier-ryza2-lightning"></i>
@@ -156,7 +156,7 @@
                   <a *ngIf="i.noneffect && i.essence"  href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="effPopover" popoverTitle="Synth Data" class="badge bg-secondary badge-list">{{i.noneffect}}</a>
                   <a *ngIf="i.effect    && !i.essence" href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="effPopover" popoverTitle="Synth Data" class="badge bg-primary badge-list">{{i.effect}}</a>
                   <a *ngIf="i.effect    && i.essence"  href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="effPopover" popoverTitle="Synth Data" class="badge bg-secondary badge-list">{{i.effect}}</a>
-                  <a *ngIf="i.morph" class="badge bg-success badge-list" href="/{{gameURL}}/items/{{i.morph.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{i.morph.name}}</a>
+                  <a *ngIf="i.morph" class="badge bg-success badge-list" routerLink="/{{gameURL}}/items/{{i.morph.slug}}/{{language}}">{{i.morph.name}}</a>
                 </ng-container>
               </td>
             </tr>

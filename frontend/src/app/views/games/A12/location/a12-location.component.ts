@@ -1,17 +1,13 @@
+import { Location, ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute }from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AreaData } from '@app/interfaces/a12';
 import { A12Service } from '@app/services/a12.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
-import { ViewportScroller } from '@angular/common';
 import { first } from 'rxjs/operators';
-import { Location } from '@angular/common';
 
 @Component({
   templateUrl: 'a12-location.component.html',
-  selector: 'a12-location',
 })
 export class A12LocationComponent implements OnInit {
   slugname: string;
@@ -20,8 +16,6 @@ export class A12LocationComponent implements OnInit {
   returnUrl: string;
   error: boolean = false;
   errorCode: string;
-  errorVars: any[];
-  errorMsg: string;
   location: AreaData;
   colset: string;
   language = "";
@@ -39,8 +33,6 @@ constructor(
     private route: ActivatedRoute,
     private loc: Location,
     private a12service: A12Service,
-    public historyService: HistoryService,
-    private errorService: ErrorCodeService,
     private seoService: SeoService,
     private viewportScroller: ViewportScroller
     ) {
@@ -52,8 +44,7 @@ constructor(
 
     if(!this.location) {
       this.error = true;
-      this.errorCode = '404',
-      this.errorVars = this.errorService.getCodes(this.errorCode);
+      this.errorCode = '404';
     }
     else {
         this.gameTitle = this.a12service.gameTitle[this.language];

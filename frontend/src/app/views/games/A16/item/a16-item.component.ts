@@ -43,7 +43,7 @@ constructor(
     private route: ActivatedRoute,
     private a16service: A16Service,
     public historyService: HistoryService,
-    private errorService: ErrorCodeService,
+
     private seoService: SeoService) {
       if(this.route.snapshot.params.item != null) {
       this.slugname = this.route.snapshot.params.item;
@@ -72,7 +72,7 @@ constructor(
     error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      this.errorVars = this.errorService.getCodes(this.errorCode);
+      
     });
   }
 } 

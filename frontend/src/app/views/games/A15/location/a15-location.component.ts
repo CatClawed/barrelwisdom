@@ -40,7 +40,7 @@ constructor(
     private loc: Location,
     private a15service: A15Service,
     public historyService: HistoryService,
-    private errorService: ErrorCodeService,
+
     private seoService: SeoService,
     private viewportScroller: ViewportScroller
     ) {
@@ -52,8 +52,7 @@ constructor(
 
     if(!this.location) {
       this.error = true;
-      this.errorCode = '404',
-      this.errorVars = this.errorService.getCodes(this.errorCode);
+      this.errorCode = '404';
     }
     else {
         this.gameTitle = this.a15service.gameTitle[this.language];

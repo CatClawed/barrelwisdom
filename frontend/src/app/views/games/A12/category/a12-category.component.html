@@ -1,4 +1,4 @@
-<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+<Error *ngIf="error" [errorCode]="errorCode"></Error>
 
 <ng-container *ngIf="category">
 <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Category: '+category.name"></Breadcrumb>
@@ -10,7 +10,7 @@
             <tr class="table-dark-center"><th style="border:none;" colspan=2>Items in Category</th></tr>
             <tr *ngFor="let item of category.item_set">
                 <td>
-                    <a href="/{{gameURL}}/items/{{item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.name}}</a>
+                    <a routerLink="/{{gameURL}}/items/{{item.slugname}}/{{language}}">{{item.name}}</a>
                 </td>
                 <td>LV {{item.level}}</td>
             </tr>
@@ -21,7 +21,7 @@
             <tr class="table-dark-center"><th style="border:none;" colspan=2>Items Using Category</th></tr>
             <tr *ngFor="let item of category.ingredientcat">
                 <td>
-                    <a href="/{{gameURL}}/items/{{item.synthitem.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.synthitem.name}}</a>
+                    <a routerLink="/{{gameURL}}/items/{{item.synthitem.slugname}}/{{language}}">{{item.synthitem.name}}</a>
                 </td>
                 <td>LV {{item.synthitem.level}}</td>
             </tr>

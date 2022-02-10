@@ -38,7 +38,7 @@ import { Location } from '@angular/common';
       private router: Router,
       private a22service: A22Service,
       public historyService: HistoryService,
-      private errorService: ErrorCodeService,
+  
       private seoService: SeoService,
       private viewportScroller: ViewportScroller
     ) { 
@@ -50,8 +50,7 @@ import { Location } from '@angular/common';
 
           if(this.region.areas.length == 0 || !this.region) {
             this.error = true;
-            this.errorCode = '404',
-            this.errorVars = this.errorService.getCodes(this.errorCode);
+            this.errorCode = '404';      
           }
           else {
               for(let g of this.region.areas[0].gatherdata) {
@@ -87,8 +86,7 @@ import { Location } from '@angular/common';
         this.a22service.getLocation(this.route.snapshot.params.location, this.language).subscribe(location => {
             if(location.areas.length == 0) {
               this.error = true;
-              this.errorCode = '404',
-              this.errorVars = this.errorService.getCodes(this.errorCode);
+              this.errorCode = '404';        
             }
             else {
               this.region = location;
@@ -112,7 +110,7 @@ import { Location } from '@angular/common';
         error => {
             this.error = true;
             this.errorCode = `${error.status}`;
-            this.errorVars = this.errorService.getCodes(this.errorCode);
+            
         });
     }
 

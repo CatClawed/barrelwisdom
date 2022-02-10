@@ -46,7 +46,7 @@ import { SeoService } from '@app/services/seo.service';
       private route: ActivatedRoute,
       private brslservice: BRSLService,
       public historyService: HistoryService,
-      private errorService: ErrorCodeService,
+  
       private seoService: SeoService,
     ) { 
       this.fragmentControl = new FormControl();
@@ -74,7 +74,7 @@ import { SeoService } from '@app/services/seo.service';
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
   
       this.fragmentControl.valueChanges.subscribe(search => {
-        this.searchstring = search; 
+        search.filtertext = search; 
       }); 
 
       this.pageForm.get('character').valueChanges
@@ -96,7 +96,7 @@ import { SeoService } from '@app/services/seo.service';
       error => {
         this.error = true;
         this.errorCode = `${error.status}`;
-        this.errorVars = this.errorService.getCodes(this.errorCode);
+        
       });
       this.brslservice.getSchoolLocationList(this.language)
       .subscribe(f => {
@@ -105,20 +105,20 @@ import { SeoService } from '@app/services/seo.service';
       error => {
         this.error = true;
         this.errorCode = `${error.status}`;
-        this.errorVars = this.errorService.getCodes(this.errorCode);
+        
       });
       this.brslservice.getFragmentList(this.language)
       .subscribe(fragment => {
         this.event = fragment;
         this.filteredEvents = this.pageForm.valueChanges.pipe(
           startWith(null as Observable<Event[]>),
-          map((search: string | null) => search ? this.filterT(this.searchstring, this.currentChar, this.currentLoc) : this.event.slice())
+          map((search: any) => search ? this.filterT(search.filtertext, this.currentChar, this.currentLoc) : this.event.slice())
         );
       },
       error => {
         this.error = true;
         this.errorCode = `${error.status}`;
-        this.errorVars = this.errorService.getCodes(this.errorCode);
+        
       });
     }
   
@@ -144,5 +144,8 @@ import { SeoService } from '@app/services/seo.service';
     } 
   
     get f() { return this.pageForm.controls; }
-  
+
+    identify(index, item){
+      return item.slug; 
+   }
   }

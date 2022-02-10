@@ -704,3 +704,20 @@ img {
   position: relative;
 }
 
+.item-grid {
+  display: grid;
+  grid-gap: 1rem;
+  margin-bottom:1rem;
+}
+
+@media screen and (min-width: 800px) {
+  .item-grid {
+    grid-template-columns: 50% 50%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .item-grid {
+    grid-template-columns: auto;
+  }
+}

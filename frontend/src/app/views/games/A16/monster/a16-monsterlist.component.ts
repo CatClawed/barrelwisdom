@@ -46,7 +46,7 @@ import { SeoService } from '@app/services/seo.service';
       private route: ActivatedRoute,
       private location: Location,
       private a16service: A16Service,
-      private errorService: ErrorCodeService,
+  
       private seoService: SeoService
     ) { 
       this.monsterControl = new FormControl();
@@ -71,7 +71,7 @@ import { SeoService } from '@app/services/seo.service';
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
   
       this.monsterControl.valueChanges.subscribe(search => {
-        this.searchstring = search;
+        search.filtertext = search;
       });
 
       this.router.events.subscribe(event => {
@@ -88,19 +88,27 @@ import { SeoService } from '@app/services/seo.service';
         this.monsters = monsters;
         this.filteredMonsters = this.pageForm.valueChanges.pipe(
           startWith(null as Observable<MonsterList[]>),
-          map((search: string | null) => search ? this.filterT(this.searchstring) : this.monsters.slice())
+          map((search: any) => search ? this.filterT(search.filtertext) : this.monsters.slice())
         );
       },
       error => {
         this.error = true;
         this.errorCode = `${error.status}`;
-        this.errorVars = this.errorService.getCodes(this.errorCode);
+        
       });
     }
   
-    openModal(template: TemplateRef<any>, slugname: string) {
-      this.monster = slugname;
-      this.location.go(`${this.gameURL}/monsters/` + slugname + "/" + this.language);
+    openModal(template: TemplateRef<any>, slug: string, event?) {
+      if (event) {
+        if(event.ctrlKey) {
+          return;
+        }
+        else {
+          event.preventDefault()
+        }
+      }
+      this.monster = slug;
+      this.location.go(`${this.gameURL}/monsters/` + slug + "/" + this.language);
       this.modalRef = this.modalService.show(template);
       this.modalRef.onHide.subscribe((reason: string | any) => {
         if(reason != "link") {
@@ -124,5 +132,8 @@ import { SeoService } from '@app/services/seo.service';
     } 
   
     get f() { return this.pageForm.controls; }
-  
+
+    identify(index, item){
+      return item.slug; 
+   }
   }

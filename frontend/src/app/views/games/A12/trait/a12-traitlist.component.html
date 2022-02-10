@@ -1,4 +1,4 @@
-<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+<Error *ngIf="error" [errorCode]="errorCode"></Error>
 
 <ng-container *ngIf="filteredTraits">
 <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Traits"></Breadcrumb>
@@ -39,19 +39,18 @@
       </div>
     </form>
 </div>
- <div *ngFor="let traits of filteredTraits | async| pair " class="row">
-  <div *ngFor="let trait of traits" class="spacer col-md-5 mx-auto">
-   <div *ngIf="trait" style="justify-content:space-between;" class="card card-body allheight">
+<div class="item-grid">
+ <div *ngFor="let trait of filteredTraits | async; trackBy:identify" style="justify-content:space-between;" class="card card-body">
     <div>
       <div class="flex">
-        <h4 class="card-title"><a (click)="openModal(traitModal, trait.slugname); $event.preventDefault();" href="/{{gameURL}}/traits/{{trait.slugname}}/{{language}}">{{trait.name}}</a></h4>
+        <h4 class="card-title"><a (click)="openModal(traitModal, trait.slugname, $event);" href="/{{gameURL}}/traits/{{trait.slugname}}/{{language}}">{{trait.name}}</a></h4>
         <b *ngIf="trait.cost">Cost {{trait.cost}}</b>
       </div>
       <p>{{trait.desc}}</p>
       <div *ngIf="trait.item_set">
        <b>Items:</b>
          <ul>
-           <li *ngFor="let item of trait.item_set"><a href="/{{gameURL}}/items/{{item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.name}}</a></li>
+           <li *ngFor="let item of trait.item_set"><a routerLink="/{{gameURL}}/items/{{item.slugname}}/{{language}}">{{item.name}}</a></li>
          </ul>
       </div>
     </div>
@@ -62,9 +61,8 @@
        <i class="trait-color{{trait.cloth}}     atelier atelier-np atelier-escha-armor"></i>
        <i class="trait-color{{trait.accessory}} atelier atelier-np atelier-escha-accessory"></i>
      </div>
-   </div>
-  </div>
  </div>
+</div>
 <ng-template #traitModal>
   <div class="modal-body">
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">

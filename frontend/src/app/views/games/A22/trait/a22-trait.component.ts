@@ -43,7 +43,7 @@ export class A22TraitComponent implements OnInit {
     private route: ActivatedRoute,
     public historyService: HistoryService,
     private a22service: A22Service,
-    private errorService: ErrorCodeService,
+
     private seoService: SeoService) {
       if(this.route.snapshot.params.trait != null) {
       this.slug = this.route.snapshot.params.trait;
@@ -70,7 +70,7 @@ export class A22TraitComponent implements OnInit {
     error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      this.errorVars = this.errorService.getCodes(this.errorCode);
+      
     });
   }
 } 

@@ -1,4 +1,4 @@
-<Error *ngIf="error" [errorCode]="errorCode" [errorVars]="errorVars"></Error>
+<Error *ngIf="error" [errorCode]="errorCode"></Error>
 
 <ng-container *ngIf="monster">
 <Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Monsters', '/'+gameURL+'/monsters/'+language]]" [current]="monster.name"></Breadcrumb>
@@ -17,13 +17,13 @@
         <b *ngIf="monster.locations">Locations:</b>
         <ul *ngIf="monster.locations">
            <li *ngFor="let loc of monster.locations">
-             <a *ngIf="loc.parentslug" href="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}#{{loc.slugname}}" (click)="historyService.hrefClicked($event)">{{loc.name}}</a>
-             <a *ngIf="!loc.parentslug" href="/{{gameURL}}/locations/{{loc.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{loc.name}}</a>
+             <a *ngIf="loc.parentslug" routerLink="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}" fragment="{{loc.slugname}}">{{loc.name}}</a>
+             <a *ngIf="!loc.parentslug" routerLink="/{{gameURL}}/locations/{{loc.slugname}}/{{language}}">{{loc.name}}</a>
            </li>
         </ul>
         <b *ngIf="monster.item_set">Drops:</b>
         <ul *ngIf="monster.item_set">
-          <li *ngFor="let drop of monster.item_set"><a href="/{{gameURL}}/items/{{drop.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{drop.name}}</a></li>
+          <li *ngFor="let drop of monster.item_set"><a routerLink="/{{gameURL}}/items/{{drop.slugname}}/{{language}}">{{drop.name}}</a></li>
         </ul>
       </div>
       <div class="col-md-6">

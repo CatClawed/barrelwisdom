@@ -44,7 +44,7 @@ export class A22TraitlistComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private a22service: A22Service,
-    private errorService: ErrorCodeService,
+
     private seoService: SeoService) { 
     this.traitControl = new FormControl();
 
@@ -68,15 +68,6 @@ export class A22TraitlistComponent implements OnInit {
     this.seoDesc = `The list of traits in ${this.gameTitle}.`
     this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
 
-    this.pageForm.get('transfers').valueChanges
-      .subscribe(trans => {
-        this.currentTransfer = trans;
-      });
-
-    this.traitControl.valueChanges.subscribe(search => {
-      this.searchstring = search;
-    });
-
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.modalService.setDismissReason('link');
@@ -91,13 +82,13 @@ export class A22TraitlistComponent implements OnInit {
       this.traits = traits;
       this.filteredTraits = this.pageForm.valueChanges.pipe(
         startWith(null as Observable<Trait[]>),
-        map((search: string | null) => search ? this.filterT(this.searchstring, this.currentTransfer) : this.traits.slice())
+        map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.traits.slice())
       );
     },
     error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      this.errorVars = this.errorService.getCodes(this.errorCode);
+      
     });
   }
 
@@ -153,4 +144,7 @@ export class A22TraitlistComponent implements OnInit {
 
   get f() { return this.pageForm.controls; }
 
-}
+    identify(index, item){
+      return item.slug; 
+   }
+  }

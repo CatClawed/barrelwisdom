@@ -1,19 +1,16 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
-import { ItemList, Category } from '@app/interfaces/a12';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Category, ItemList } from '@app/interfaces/a12';
 import { A12Service } from '@app/services/a12.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from "@app/services/errorcode.service";
+import { SeoService } from '@app/services/seo.service';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { SeoService } from '@app/services/seo.service';
 
 @Component({
     templateUrl: 'a12-itemlist.component.html',
-    selector: 'a12-itemlist',
   })
 
   export class A12ItemlistComponent implements OnInit {
@@ -23,21 +20,14 @@ import { SeoService } from '@app/services/seo.service';
     ingControl: FormControl;
     error: boolean = false;
     errorCode: string;
-    errorVars: any[];
     errorMsg: string;
     item: string = "items";
     items: ItemList[];
     filteredItems: Observable<ItemList[]>;
-    currentType: string = "Any";
-    currentLevel: number = 0;
-    searchstring = "";
-    ingstring = "";
     language = "";
     config: ModalOptions = { class: "col-md-5 mx-auto" };
     categories: Category[];
     selectedCat = "Any";
-    selectedElem = "Any";
-    selectedElemV = 0;
 
     seoTitle: string;
     seoDesc: string;
@@ -55,8 +45,6 @@ import { SeoService } from '@app/services/seo.service';
       private route: ActivatedRoute,
       private location: Location,
       private a12service: A12Service,
-      public historyService: HistoryService,
-      private errorService: ErrorCodeService,
       private seoService: SeoService
     ) { 
       this.itemControl = new FormControl();
@@ -71,7 +59,6 @@ import { SeoService } from '@app/services/seo.service';
     }
   
     ngOnInit(): void {
-  
       this.language = this.route.snapshot.params.language;
   
       this.getItems();
@@ -85,24 +72,6 @@ import { SeoService } from '@app/services/seo.service';
       this.seoTitle = `Items - ${this.gameTitle}`;
       this.seoDesc = `The list of items in ${this.gameTitle}.`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-  
-      this.pageForm.get('type').valueChanges
-        .subscribe(type => {
-          this.currentType = type;
-        });
-  
-      this.pageForm.get('level').valueChanges
-        .subscribe(val => {
-          this.currentLevel = val;
-      });
-  
-      this.itemControl.valueChanges.subscribe(search => {
-        this.searchstring = search;
-      });
-
-      this.ingControl.valueChanges.subscribe(search => {
-        this.ingstring = search;
-      });
 
       this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
@@ -114,33 +83,39 @@ import { SeoService } from '@app/services/seo.service';
   
     getItems() {
       this.a12service.getItemList(this.language)
-      .subscribe(items => {
+      .subscribe({next: items => {
         this.items = items;
         this.filteredItems = this.pageForm.valueChanges.pipe(
           startWith(null as Observable<ItemList[]>),
-          map((search: string | null) => search ? this.filterT(this.searchstring, this.currentType, this.currentLevel, this.ingstring) : this.items.slice())
+          map((search: any) => search ? this.filterT(search.filtertext, search.type, search.level, search.filtering) : this.items.slice())
         );
       },
-      error => {
+      error: error => {
         this.error = true;
         this.errorCode = `${error.status}`;
-        this.errorVars = this.errorService.getCodes(this.errorCode);
-      });
+      }});
     }
 
     getCategories() {
       this.a12service.getCategories(this.language)
-      .subscribe(categories  => {
+      .subscribe({next: categories  => {
           this.categories = categories;
       },
-      error => {
+      error: error => {
           this.error = true;
           this.errorCode = `${error.status}`;
-          this.errorVars = this.errorService.getCodes(this.errorCode);
-      });
+      }});
   }
   
-    openModal(template: TemplateRef<any>, slugname: string) {
+    openModal(template: TemplateRef<any>, slugname: string, event?) {
+      if (event) {
+        if(event.ctrlKey) {
+          return;
+        }
+        else {
+          event.preventDefault()
+        }
+      }
       this.item = slugname;
       this.location.go(`${this.gameURL}/items/` + slugname + "/" + this.language);
       this.modalRef = this.modalService.show(template);
@@ -152,8 +127,6 @@ import { SeoService } from '@app/services/seo.service';
     }
   
     private filterT(value: string, type: string, level: number, ing: string): ItemList[] {
-  
-      const filterValue = value.toLowerCase();
       let list: ItemList[] = this.items;
 
       if(type != 'Any') {
@@ -165,11 +138,13 @@ import { SeoService } from '@app/services/seo.service';
           list = list.filter(item => item.level >= level);
       }
 
-      if(ing.length > 0) {
-          list = list.filter(item => (item.ingredient_set) ? item.ingredient_set.some(i => i.ing.toLowerCase().includes(ing.toLowerCase())) : false)
+      if(ing) {
+        const filterValue = ing.toLowerCase();
+        list = list.filter(item => (item.ingredient_set) ? item.ingredient_set.some(i => i.ing.toLowerCase().includes(filterValue)) : false)
       }
 
-      if(value.length > 0) {
+      if(value) {
+        const filterValue = value.toLowerCase();
         list = list.filter(item => { 
             return item.name.toLowerCase().includes(filterValue);
           });
@@ -179,5 +154,9 @@ import { SeoService } from '@app/services/seo.service';
     } 
   
     get f() { return this.pageForm.controls; }
+
+    identify(index, item){
+      return item.slugname;
+   }
 
   }

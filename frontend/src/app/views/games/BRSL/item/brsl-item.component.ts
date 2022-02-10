@@ -45,7 +45,7 @@ export class BRSLItemComponent implements OnInit {
     private route: ActivatedRoute,
     private brslservice: BRSLService,
     public historyService: HistoryService,
-    private errorService: ErrorCodeService,
+
     private seoService: SeoService) {
       if(this.route.snapshot.params.item != null) {
       this.slug = this.route.snapshot.params.item;
@@ -74,7 +74,7 @@ export class BRSLItemComponent implements OnInit {
     error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      this.errorVars = this.errorService.getCodes(this.errorCode);
+      
     });
   }
 } 

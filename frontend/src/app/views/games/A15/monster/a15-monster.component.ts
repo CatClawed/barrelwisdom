@@ -43,7 +43,7 @@ export class A15MonsterComponent implements OnInit {
     private route: ActivatedRoute,
     private a15service: A15Service,
     public historyService: HistoryService,
-    private errorService: ErrorCodeService,
+
     private seoService: SeoService) {
       if(this.route.snapshot.params.monster != null) {
       this.slugname = this.route.snapshot.params.monster;
@@ -72,7 +72,7 @@ export class A15MonsterComponent implements OnInit {
     error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      this.errorVars = this.errorService.getCodes(this.errorCode);
+      
     });
   }
 } 

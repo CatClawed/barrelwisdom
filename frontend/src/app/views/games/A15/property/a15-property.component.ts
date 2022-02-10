@@ -42,7 +42,7 @@ export class A15PropertyComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private a15service: A15Service,
-    private errorService: ErrorCodeService,
+
     public historyService: HistoryService,
     private seoService: SeoService) {
       if(this.route.snapshot.params.property != null) {
@@ -69,7 +69,7 @@ export class A15PropertyComponent implements OnInit {
     error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      this.errorVars = this.errorService.getCodes(this.errorCode);
+      
     });
   }
 } 
