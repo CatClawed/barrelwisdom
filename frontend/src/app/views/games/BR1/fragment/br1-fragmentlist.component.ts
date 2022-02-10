@@ -1,19 +1,15 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute }from '@angular/router';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { FragmentEffect } from '@app/interfaces/br1';
 import { BR1Service } from '@app/services/br1.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from "@app/services/errorcode.service";
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 import { SeoService } from '@app/services/seo.service';
-import { ViewportScroller } from '@angular/common';
-import { first } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { first, map, startWith } from 'rxjs/operators';
 
 @Component({
     templateUrl: 'br1-fragmentlist.component.html',
-    selector: 'br1-fragmentlist',
   })
 
   export class BR1FragmentEffectlistComponent implements OnInit {
@@ -26,7 +22,6 @@ import { first } from 'rxjs/operators';
     fragmenteffect: string = "fragmenteffects";
     fragmenteffects: FragmentEffect[];
     filteredFragmentEffects: Observable<FragmentEffect[]>;
-    searchstring = "";
     language = "";    
 
     seoTitle: string;
@@ -42,8 +37,6 @@ import { first } from 'rxjs/operators';
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private br1service: BR1Service,
-      public historyService: HistoryService,
-  
       private seoService: SeoService,
       private viewportScroller: ViewportScroller
     ) { 
@@ -68,10 +61,6 @@ import { first } from 'rxjs/operators';
       this.seoTitle = `Fragment Effects - ${this.gameTitle}`;
       this.seoDesc = `The list of fragment effects in ${this.gameTitle}.`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-  
-      this.fragmenteffectControl.valueChanges.subscribe(search => {
-        search.filtertext = search; 
-      });  
     }
 
     ngAfterViewInit(): void {
@@ -82,37 +71,34 @@ import { first } from 'rxjs/operators';
   
     getFragmentEffects() {
       this.br1service.getFragmentEffectList(this.language)
-      .subscribe(fragmenteffects => {
+      .subscribe({next: fragmenteffects => {
         this.fragmenteffects = fragmenteffects;
         this.filteredFragmentEffects = this.pageForm.valueChanges.pipe(
           startWith(null as Observable<FragmentEffect[]>),
           map((search: any) => search ? this.filterT(search.filtertext) : this.fragmenteffects.slice())
         );
       },
-      error => {
+      error: error => {
         this.error = true;
         this.errorCode = `${error.status}`;
         
-      });
+      }});
     }
   
     private filterT(value: string): FragmentEffect[] {
-  
-      const filterValue = value.toLowerCase();
       let list: FragmentEffect[] = this.fragmenteffects;
-
-      if(value.length > 0) {
-        list = list.filter(fragmenteffect => { 
+      if(value) {
+        const filterValue = value.toLowerCase();
+        return list.filter(fragmenteffect => { 
             return fragmenteffect.name.toLowerCase().includes(filterValue);
           });
       }
-
       return list;
     } 
   
     get f() { return this.pageForm.controls; }
 
     identify(index, item){
-      return item.slug; 
+      return item.slugname;
    }
   }

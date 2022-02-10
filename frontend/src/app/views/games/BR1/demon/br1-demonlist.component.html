@@ -12,58 +12,54 @@
          </div>
       </form>
    </div>
-   <ng-container *ngIf="filteredDemons">
-      <div *ngFor="let demons of filteredDemons | async;  trackBy:identify" class="row">
-         <div *ngFor="let demon of demons" class="spacer col-lg-5 mx-auto">
-            <div *ngIf="demon" class="card card-body allheight">
-               <div class="flex">
-                  <h4 class="card-title">
-                     <a (click)="openModal(demonModal, demon.slugname); $event.preventDefault();" href="/{{gameURL}}/demons/{{demon.slugname}}/{{language}}">{{demon.name}}</a>    
-                  </h4>
-                  <b *ngIf="demon.race" style="padding-right:0.5em;">{{demon.race}}</b>
-               </div>
-               <b *ngIf="demon.locations">Locations:</b>
-               <ul *ngIf="demon.locations">
-                  <li *ngFor="let loc of demon.locations">{{loc.name}}</li>
-               </ul>
-               <b *ngIf="demon.item_set">Items:</b>
-               <ul *ngIf="demon.item_set">
-                  <li *ngFor="let item of demon.item_set"><a href="/{{gameURL}}/items/{{item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.name}}</a></li>
-               </ul>
-               <table style="padding:0;text-align:center;" class="tbl table-shrink">
-                  <tr>
-                     <td>HP</td>
-                     <td>ATK</td>
-                     <td>DEF</td>
-                     <td>AGI</td>
-                     <td>LUK</td>
-                  </tr>
-                  <tr>
-                     <td>{{demon.hp}}</td>
-                     <td>{{demon.atk}}</td>
-                     <td>{{demon.dfn}}</td>
-                     <td>{{demon.agi}}</td>
-                     <td>{{demon.luk}}</td>
-                  </tr>
-               </table>
-               <table style="padding:0;text-align:center;" class="tbl table-shrink">
-                  <tr>
-                     <td style="width:25%">Slash</td>
-                     <td style="width:25%">Impact</td>
-                     <td style="width:25%">Pierce</td>
-                     <td style="width:25%">Heart</td>
-                  </tr>
-                  <tr>
-                     <td style="width:25%"><span *ngIf="demon.slash" >{{demon.slash}} </span><span *ngIf="!demon.slash" >-</span></td>
-                     <td style="width:25%"><span *ngIf="demon.impact">{{demon.impact}}</span><span *ngIf="!demon.impact">-</span></td>
-                     <td style="width:25%"><span *ngIf="demon.pierce">{{demon.pierce}}</span><span *ngIf="!demon.pierce">-</span></td>
-                     <td style="width:25%"><span *ngIf="demon.heart" >{{demon.heart}} </span><span *ngIf="!demon.heart" >-</span></td>
-                  </tr>
-               </table>
-            </div>
+   <div *ngIf="filteredDemons" class="item-grid">
+      <div *ngFor="let demon of filteredDemons | async; trackBy:identify" class="card card-body">
+         <div class="flex">
+            <h4 class="card-title">
+               <a (click)="openModal(demonModal, demon.slugname, $event);" href="/{{gameURL}}/demons/{{demon.slugname}}/{{language}}">{{demon.name}}</a>    
+            </h4>
+            <b *ngIf="demon.race" style="padding-right:0.5em;">{{demon.race}}</b>
          </div>
+         <b *ngIf="demon.locations">Locations:</b>
+         <ul *ngIf="demon.locations">
+            <li *ngFor="let loc of demon.locations">{{loc.name}}</li>
+         </ul>
+         <b *ngIf="demon.item_set">Items:</b>
+         <ul *ngIf="demon.item_set">
+            <li *ngFor="let item of demon.item_set"><a routerLink="/{{gameURL}}/items/{{item.slugname}}/{{language}}">{{item.name}}</a></li>
+         </ul>
+         <table style="padding:0;text-align:center;" class="tbl table-shrink">
+            <tr>
+               <td>HP</td>
+               <td>ATK</td>
+               <td>DEF</td>
+               <td>AGI</td>
+               <td>LUK</td>
+            </tr>
+            <tr>
+               <td>{{demon.hp}}</td>
+               <td>{{demon.atk}}</td>
+               <td>{{demon.dfn}}</td>
+               <td>{{demon.agi}}</td>
+               <td>{{demon.luk}}</td>
+            </tr>
+         </table>
+         <table style="padding:0;text-align:center;" class="tbl table-shrink">
+            <tr>
+               <td style="width:25%">Slash</td>
+               <td style="width:25%">Impact</td>
+               <td style="width:25%">Pierce</td>
+               <td style="width:25%">Heart</td>
+            </tr>
+            <tr>
+               <td style="width:25%"><span *ngIf="demon.slash" >{{demon.slash}} </span><span *ngIf="!demon.slash" >-</span></td>
+               <td style="width:25%"><span *ngIf="demon.impact">{{demon.impact}}</span><span *ngIf="!demon.impact">-</span></td>
+               <td style="width:25%"><span *ngIf="demon.pierce">{{demon.pierce}}</span><span *ngIf="!demon.pierce">-</span></td>
+               <td style="width:25%"><span *ngIf="demon.heart" >{{demon.heart}} </span><span *ngIf="!demon.heart" >-</span></td>
+            </tr>
+         </table>
       </div>
-   </ng-container>
+   </div>
 
 <ng-template #demonModal>
   <div class="modal-body">

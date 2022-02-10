@@ -12,39 +12,35 @@
          </div>
       </form>
    </div>
-   <ng-container *ngIf="filteredItems">
-      <div *ngFor="let item of filteredItems | async;  trackBy:identify" class="row">
-         <div *ngFor="let it of item" class="spacer col-md-5 mx-auto">
-            <div *ngIf="it" class="card card-body allheight">
-               <div class="flex">
-                  <h4 class="card-title">
-                     <a (click)="openModal(itemModal, it.slugname); $event.preventDefault();" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a>    
-                  </h4>
-                  <b *ngIf="it.kind" style="padding-right:0.5em;">{{it.kind}}</b>
-               </div>
-               <p>{{it.description}}</p>
-               <p *ngIf="it.effect"><b>Effect: </b>{{it.effect}}</p>
-               <p *ngIf="it.acquisition"><b>Acquisition: </b>{{it.acquisition}}</p>
-               <b *ngIf="it.missions">Missions:</b>
-               <ul *ngIf="it.missions">
-                  <li *ngFor="let miss of it.missions"><a href="/{{gameURL}}/missions/{{language}}#{{miss.slugname}}" (click)="historyService.hrefClicked($event)">{{miss.name}}</a></li>
-               </ul>
-               <b *ngIf="it.locations">Locations:</b>
-               <ul *ngIf="it.locations">
-                  <li *ngFor="let loc of it.locations">{{loc.name}}</li>
-               </ul>
-               <b *ngIf="it.demons">Demons:</b>
-               <ul *ngIf="it.demons">
-                  <li *ngFor="let demon of it.demons"><a href="/{{gameURL}}/demons/{{demon.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{demon.name}}</a></li>
-               </ul>
-               <b *ngIf="it.ingredient_set">Craft:</b>
-               <ul *ngIf="it.ingredient_set">
-                  <li *ngFor="let ing of it.ingredient_set"><a href="/{{gameURL}}/items/{{ing.item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{ing.item.name}} x{{ing.num}}</a></li>
-               </ul>
-            </div>
+   <div *ngIf="filteredItems" class="item-grid">
+      <div *ngFor="let it of filteredItems | async; trackBy:identify" class="card card-body">
+         <div class="flex">
+            <h4 class="card-title">
+               <a (click)="openModal(itemModal, it.slugname, $event);" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a>    
+            </h4>
+            <b *ngIf="it.kind" style="padding-right:0.5em;">{{it.kind}}</b>
          </div>
+         <p>{{it.description}}</p>
+         <p *ngIf="it.effect"><b>Effect: </b>{{it.effect}}</p>
+         <p *ngIf="it.acquisition"><b>Acquisition: </b>{{it.acquisition}}</p>
+         <b *ngIf="it.missions">Missions:</b>
+         <ul *ngIf="it.missions">
+            <li *ngFor="let miss of it.missions"><a routerLink="/{{gameURL}}/missions/{{language}}" fragment="{{miss.slugname}}">{{miss.name}}</a></li>
+         </ul>
+         <b *ngIf="it.locations">Locations:</b>
+         <ul *ngIf="it.locations">
+            <li *ngFor="let loc of it.locations">{{loc.name}}</li>
+         </ul>
+         <b *ngIf="it.demons">Demons:</b>
+         <ul *ngIf="it.demons">
+            <li *ngFor="let demon of it.demons"><a routerLink="/{{gameURL}}/demons/{{demon.slugname}}/{{language}}">{{demon.name}}</a></li>
+         </ul>
+         <b *ngIf="it.ingredient_set">Craft:</b>
+         <ul *ngIf="it.ingredient_set">
+            <li *ngFor="let ing of it.ingredient_set"><a routerLink="/{{gameURL}}/items/{{ing.item.slugname}}/{{language}}">{{ing.item.name}} x{{ing.num}}</a></li>
+         </ul>
       </div>
-    </ng-container>
+    </div>
 <ng-template #itemModal>
   <div class="modal-body">
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">

@@ -1,9 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute }from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Demon } from '@app/interfaces/br1';
 import { BR1Service } from '@app/services/br1.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
 
 @Component({
@@ -17,13 +15,8 @@ export class BR1DemonComponent implements OnInit {
   returnUrl: string;
   error: boolean = false;
   errorCode: string;
-  errorVars: any[];
-  errorMsg: string;
   demon: Demon;
   colset: string;
-  demonone = false;
-  demontwo = false;
-  demonthree = false;
 
   seoTitle: string;
   seoDesc: string;
@@ -45,8 +38,6 @@ export class BR1DemonComponent implements OnInit {
 constructor(
     private route: ActivatedRoute,
     private br1service: BR1Service,
-    public historyService: HistoryService,
-
     private seoService: SeoService) {
       if(this.route.snapshot.params.demon != null) {
       this.slugname = this.route.snapshot.params.demon;
@@ -58,7 +49,7 @@ constructor(
       this.colset = "col-md-7 mx-auto "
     }
     this.br1service.getDemon(this.slugname, this.language)
-    .subscribe(demon => {
+    .subscribe({next: demon => {
         this.error = false;
         this.demon = demon;
 
@@ -71,10 +62,10 @@ constructor(
         this.seoDesc = `${this.demon.flavor}`
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
-    error => {
+    error: error => {
       this.error = true;
       this.errorCode = `${error.status}`;
       
-    });
+    }});
   }
 } 

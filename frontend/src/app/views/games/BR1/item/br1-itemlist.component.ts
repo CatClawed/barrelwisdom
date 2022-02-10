@@ -22,15 +22,11 @@ import { SeoService } from '@app/services/seo.service';
     itemControl: FormControl;
     error: boolean = false;
     errorCode: string;
-    errorVars: any[];
-    errorMsg: string;
     item: string = "items";
     items: Item[];
     filteredItems: Observable<Item[]>;
-    searchstring = "";
     language = "";
     config: ModalOptions = { class: "col-md-5 mx-auto" };
-    
 
     seoTitle: string;
     seoDesc: string;
@@ -42,12 +38,12 @@ import { SeoService } from '@app/services/seo.service';
     imgURL: string;
   
     constructor(
-      private modalService: BsModalService, private router: Router, public historyService: HistoryService,
+      private modalService: BsModalService,
+      private router: Router,
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private location: Location,
       private br1service: BR1Service,
-  
       private seoService: SeoService
     ) { 
       this.itemControl = new FormControl();
@@ -71,10 +67,6 @@ import { SeoService } from '@app/services/seo.service';
       this.seoTitle = `Items - ${this.gameTitle}`;
       this.seoDesc = `The list of items in ${this.gameTitle}.`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-  
-      this.itemControl.valueChanges.subscribe(search => {
-        search.filtertext = search; 
-      });
 
       this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
@@ -86,18 +78,17 @@ import { SeoService } from '@app/services/seo.service';
   
     getItems() {
       this.br1service.getItemList(this.language)
-      .subscribe(items => {
+      .subscribe({next: items => {
         this.items = items;
         this.filteredItems = this.pageForm.valueChanges.pipe(
           startWith(null as Observable<Item[]>),
           map((search: any) => search ? this.filterT(search.filtertext) : this.items.slice())
         );
       },
-      error => {
+      error: error => {
         this.error = true;
         this.errorCode = `${error.status}`;
-        
-      });
+      }});
     }
 
 
@@ -121,22 +112,19 @@ import { SeoService } from '@app/services/seo.service';
     }
   
     private filterT(value: string): Item[] {
-  
-      const filterValue = value.toLowerCase();
       let list: Item[] = this.items;
-
-      if(value.length > 0) {
-        list = list.filter(item => { 
+      if(value) {
+        const filterValue = value.toLowerCase();
+        return list.filter(item => { 
             return item.name.toLowerCase().includes(filterValue);
           });
       }
-
       return list;
     } 
   
     get f() { return this.pageForm.controls; }
 
     identify(index, item){
-      return item.slug; 
+      return item.slugname; 
    }
   }

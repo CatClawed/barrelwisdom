@@ -3,7 +3,7 @@
 <ng-container *ngIf="!error">
    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Fragment Effects"></Breadcrumb>
    <h1>Fragment Effects</h1>
-   <p>See <a href="/{{gameURL}}/fragment-episodes" (click)="historyService.hrefClicked($event)">Fragment Episodes</a> for acqusition data.
+   <p>See <a routerLink="/{{gameURL}}/fragment-episodes">Fragment Episodes</a> for acqusition data.
    <div class="col-md-10 mx-auto">
       <form [formGroup]="pageForm" class="form-horizontal">
          <div class="row">
@@ -14,18 +14,16 @@
          </div>
       </form>
    </div>
-   <div *ngFor="let fragmenteffects of filteredFragmentEffects | async;  trackBy:identify" class="row">
-      <div *ngFor="let frag of fragmenteffects" class="spacer col-md-5 mx-auto">
-         <div *ngIf="frag" class="card card-body allheight">
-            <h4 class="card-title" id="{{frag.slugname}}">
-               {{frag.name}}
-            </h4>
-            <p>{{frag.effect}}</p>
-            <b *ngIf="frag.upgrades">Upgrade:</b>
-            <ul *ngIf="frag.upgrades">
-               <li *ngFor="let up of frag.upgrades"><a href="/{{gameURL}}/items/{{up.item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{up.item.name}}</a> x{{up.num}}</li>
-            </ul>
-         </div>
-      </div>
+<div class="item-grid">
+   <div *ngFor="let frag of filteredFragmentEffects | async; trackBy:identify" class="card card-body">
+      <h4 class="card-title" id="{{frag.slugname}}">
+         {{frag.name}}
+      </h4>
+      <p>{{frag.effect}}</p>
+      <b *ngIf="frag.upgrades">Upgrade:</b>
+      <ul *ngIf="frag.upgrades">
+         <li *ngFor="let up of frag.upgrades"><a routerLink="/{{gameURL}}/items/{{up.item.slugname}}/{{language}}">{{up.item.name}}</a> x{{up.num}}</li>
+      </ul>
    </div>
+</div>
 </ng-container>

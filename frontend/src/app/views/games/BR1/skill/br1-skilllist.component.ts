@@ -5,8 +5,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute }from '@angular/router';
 import { Skill } from '@app/interfaces/br1';
 import { BR1Service } from '@app/services/br1.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
 import { Location } from '@angular/common';
 
@@ -21,8 +19,6 @@ export class BR1SkilllistComponent implements OnInit {
   returnUrl: string;
   error: boolean = false;
   errorCode: string;
-  errorVars: any[];
-  errorMsg: string;
   skills: Skill[];
   colset: string;
   language = "";
@@ -40,8 +36,6 @@ constructor(
     private route: ActivatedRoute,
     private loc: Location,
     private br1service: BR1Service,
-    public historyService: HistoryService,
-
     private seoService: SeoService,
     private viewportScroller: ViewportScroller) {
   }
@@ -57,15 +51,15 @@ constructor(
     this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
 
     this.br1service.getSkillList(this.language)
-    .subscribe(skill => {
+    .subscribe({next: skill => {
         this.error = false;
         this.skills = skill;
     },
-    error => {
+    error: error => {
       this.error = true;
       this.errorCode = `${error.status}`;
       
-    });
+    }});
   }
   ngAfterViewInit(): void {
     this.route.fragment.pipe(

@@ -1,19 +1,16 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Demon } from '@app/interfaces/br1';
 import { BR1Service } from '@app/services/br1.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from "@app/services/errorcode.service";
+import { SeoService } from '@app/services/seo.service';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { SeoService } from '@app/services/seo.service';
 
 @Component({
     templateUrl: 'br1-demonlist.component.html',
-    selector: 'br1-demonlist',
   })
 
   export class BR1DemonlistComponent implements OnInit {
@@ -22,15 +19,11 @@ import { SeoService } from '@app/services/seo.service';
     demonControl: FormControl;
     error: boolean = false;
     errorCode: string;
-    errorVars: any[];
-    errorMsg: string;
     demon: string = "demons";
     demons: Demon[];
     filteredDemons: Observable<Demon[]>;
-    searchstring = "";
     language = "";
     config: ModalOptions = { class: "col-md-5 mx-auto" };
-    
 
     seoTitle: string;
     seoDesc: string;
@@ -42,12 +35,12 @@ import { SeoService } from '@app/services/seo.service';
     imgURL: string;
   
     constructor(
-      private modalService: BsModalService, private router: Router, public historyService: HistoryService,
+      private modalService: BsModalService,
+      private router: Router,
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private location: Location,
       private br1service: BR1Service,
-  
       private seoService: SeoService
     ) { 
       this.demonControl = new FormControl();
@@ -71,10 +64,6 @@ import { SeoService } from '@app/services/seo.service';
       this.seoTitle = `Demons - ${this.gameTitle}`;
       this.seoDesc = `The list of demons in ${this.gameTitle}.`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-  
-      this.demonControl.valueChanges.subscribe(search => {
-        search.filtertext = search;
-      });
       
       this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
@@ -86,20 +75,18 @@ import { SeoService } from '@app/services/seo.service';
   
     getDemons() {
       this.br1service.getDemonList(this.language)
-      .subscribe(demons => {
+      .subscribe({next: demons => {
         this.demons = demons;
         this.filteredDemons = this.pageForm.valueChanges.pipe(
           startWith(null as Observable<Demon[]>),
           map((search: any) => search ? this.filterT(search.filtertext) : this.demons.slice())
         );
       },
-      error => {
+      error: error => {
         this.error = true;
         this.errorCode = `${error.status}`;
-        
-      });
+      }});
     }
-
 
     openModal(template: TemplateRef<any>, slug: string, event?) {
       if (event) {
@@ -121,22 +108,19 @@ import { SeoService } from '@app/services/seo.service';
     }
   
     private filterT(value: string): Demon[] {
-  
-      const filterValue = value.toLowerCase();
       let list: Demon[] = this.demons;
-
-      if(value.length > 0) {
-        list = list.filter(demon => { 
+      if(value) {
+        const filterValue = value.toLowerCase();
+        return list = list.filter(demon => { 
             return demon.name.toLowerCase().includes(filterValue);
           });
       }
-
       return list;
     } 
   
     get f() { return this.pageForm.controls; }
 
     identify(index, item){
-      return item.slug; 
+      return item.slugname; 
    }
   }

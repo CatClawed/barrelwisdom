@@ -17,8 +17,6 @@ export class BR1ItemComponent implements OnInit {
   returnUrl: string;
   error: boolean = false;
   errorCode: string;
-  errorVars: any[];
-  errorMsg: string;
   item: Item;
   colset: string;
 
@@ -42,8 +40,6 @@ export class BR1ItemComponent implements OnInit {
 constructor(
     private route: ActivatedRoute,
     private br1service: BR1Service,
-    public historyService: HistoryService,
-
     private seoService: SeoService) {
       if(this.route.snapshot.params.item != null) {
       this.slugname = this.route.snapshot.params.item;
@@ -55,7 +51,7 @@ constructor(
       this.colset = "col-md-7 mx-auto "
     }
     this.br1service.getItem(this.slugname, this.language)
-    .subscribe(item => {
+    .subscribe({next: item => {
         this.error = false;
         this.item = item;
 
@@ -68,10 +64,9 @@ constructor(
         this.seoDesc = `${this.item.description}`
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
-    error => {
+    error: error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      
-    });
+    }});
   }
 } 
