@@ -1,29 +1,26 @@
-import { Component, OnInit, Inject, Renderer2, RendererFactory2 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit, Renderer2, RendererFactory2 } from '@angular/core';
+import { SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Blog } from '@app/interfaces/blog';
 import { User } from '@app/interfaces/user';
-import { BlogService } from '@app/services/blog.service';
-import { ErrorCodeService } from "@app/services/errorcode.service";
-import {  SafeHtml } from '@angular/platform-browser';
 import { AuthenticationService } from '@app/services/authentication.service';
-import { MarkdownService } from 'ngx-markdown';
-import { SeoService } from '@app/services/seo.service';
+import { BlogService } from '@app/services/blog.service';
 import { HistoryService } from '@app/services/history.service';
-import { DOCUMENT } from '@angular/common';
-import { environment } from '@environments/environment';
+import { SeoService } from '@app/services/seo.service';
 import { WINDOW } from '@app/services/window.service';
+import { environment } from '@environments/environment';
+import { MarkdownService } from 'ngx-markdown';
 
 @Component({
     templateUrl: 'blog.component.html',
   })
-
 
   export class BlogComponent implements OnInit {
       user: User;
       blog: Blog;
       error: boolean = false;
       errorCode: string;
-      errorVars: any[];
       body: SafeHtml;
       allowedToEdit = false;
       gameName = "";
@@ -38,7 +35,6 @@ import { WINDOW } from '@app/services/window.service';
         private route: ActivatedRoute,
         public historyService: HistoryService,
         private blogService: BlogService,
-    
         private authenticationService: AuthenticationService,
         private markdownService: MarkdownService,
         private seoService: SeoService,
@@ -130,7 +126,7 @@ import { WINDOW } from '@app/services/window.service';
 
       getBlog(section: string, title: string): void {
         this.blogService.getBlog(title, section)
-          .subscribe(blog => { 
+          .subscribe({next: blog => { 
               this.error = false;
               this.blog = blog;
               this.gameName = (this.blog.section.fullname) ? `${this.blog.section.fullname} - ` : ""; // gotta make sure google sees the game name...
@@ -170,11 +166,11 @@ import { WINDOW } from '@app/services/window.service';
                 );
               }
             },
-            error => { 
+            error: error => { 
                 this.error = true;
                 this.errorCode = `${error.status}`;
                 
               }
-            );
+            });
       }
   }

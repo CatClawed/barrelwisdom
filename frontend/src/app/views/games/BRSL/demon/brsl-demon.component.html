@@ -17,11 +17,11 @@
       <div class="col-md-6">
         <b *ngIf="demon.region_set">Locations:</b>
         <ul *ngIf="demon.region_set">
-           <li *ngFor="let loc of demon.region_set"><a href="/{{gameURL}}/locations/{{loc.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{loc.name}}</a></li>
+           <li *ngFor="let loc of demon.region_set"><a routerLink="/{{gameURL}}/locations/{{loc.slug}}/{{language}}">{{loc.name}}</a></li>
         </ul>
         <b *ngIf="demon.drops">Drops:</b>
         <ul *ngIf="demon.drops">
-          <li *ngFor="let drop of demon.drops"><a href="/{{gameURL}}/items/{{drop.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{drop.name}}</a></li>
+          <li *ngFor="let drop of demon.drops"><a routerLink="/{{gameURL}}/items/{{drop.slug}}/{{language}}">{{drop.name}}</a></li>
         </ul>
       </div>
       <div class="col-md-6">

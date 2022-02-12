@@ -1,19 +1,16 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Effect } from '@app/interfaces/a22';
 import { A22Service } from '@app/services/a22.service';
-import { HistoryService } from '@app/services/history.service';
-import { ErrorCodeService } from "@app/services/errorcode.service";
+import { SeoService } from '@app/services/seo.service';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { SeoService } from '@app/services/seo.service';
 
 @Component({
     templateUrl: 'a22-effectlist.component.html',
-    selector: 'a22-effectlist',
   })
 
   export class A22EffectlistComponent implements OnInit {
@@ -22,13 +19,9 @@ import { SeoService } from '@app/services/seo.service';
     effectControl: FormControl;
     error: boolean = false;
     errorCode: string;
-    errorVars: any[];
-    errorMsg: string;
     effect: string = "effect";
     effects: Effect[];
     filteredEffects: Observable<Effect[]>;
-    currentType: string = "1";
-    searchstring = "";
     language = "";
     config: ModalOptions = { class: "col-md-5 mx-auto" };
     normal = false;
@@ -47,12 +40,10 @@ import { SeoService } from '@app/services/seo.service';
     constructor(
       private modalService: BsModalService,
       private router: Router,
-      public historyService: HistoryService,
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private location: Location,
       private a22service: A22Service,
-  
       private seoService: SeoService
     ) {
 
@@ -93,14 +84,6 @@ import { SeoService } from '@app/services/seo.service';
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
         this.getEffects();
       });  
-      this.pageForm.get('type').valueChanges
-        .subscribe(type => {
-          this.currentType = type;
-        });
-  
-      this.effectControl.valueChanges.subscribe(search => {
-        search.filtertext = search;
-      });
 
       this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
@@ -112,21 +95,28 @@ import { SeoService } from '@app/services/seo.service';
   
     getEffects() {
       this.a22service.getEffectList(this.language, this.ev, this.forge)
-      .subscribe(effects => {
+      .subscribe({next: effects => {
         this.effects = effects;
         this.filteredEffects = this.pageForm.valueChanges.pipe(
           startWith(null as Observable<Effect[]>),
-          map((search: any) => search ? this.filterT(search.filtertext, this.currentType) : this.effects.slice())
+          map((search: any) => search ? this.filterT(search.filtertext, search.type) : this.effects.slice())
         );
       },
-      error => {
+      error: error => {
         this.error = true;
         this.errorCode = `${error.status}`;
-        
-      });
+      }});
     }
   
-    openModal(template: TemplateRef<any>, slug: string) {
+    openModal(template: TemplateRef<any>, slug: string, event?) {
+      if (event) {
+        if(event.ctrlKey) {
+          return;
+        }
+        else {
+          event.preventDefault()
+        }
+      }
       this.effect = slug;
       this.location.go(`${this.gameURL}/effects/` + slug + "/" + this.language);
       this.modalRef = this.modalService.show(template);
@@ -140,44 +130,35 @@ import { SeoService } from '@app/services/seo.service';
     }
   
     private filterT(value: string, type: string): Effect[] {
-  
-      const filterValue = value.toLowerCase();
       let effectlist: Effect[];
       switch(type) {
-        case "2": {
+        case "2":
           effectlist = this.effects.filter(effect => effect.effsub == 'Weapon');
           break;
-        }
-        case "3": {
+        case "3":
           effectlist = this.effects.filter(effect => effect.effsub == "Armor");
           break;
-        }
-        case "4": {
+        case "4":
           effectlist = this.effects.filter(effect => effect.effsub == "Accessory");
           break;
-        }
-        case "5": {
+        case "5":
           effectlist = this.effects.filter(effect => effect.effsub == "Attack");
           break;
-        }
-        case "6": {
+        case "6":
           effectlist = this.effects.filter(effect => effect.effsub == "Material");
           break;
-        }
-        case "7": {
+        case "7":
           effectlist = this.effects.filter(effect => effect.effsub == "Heal");
           break;
-        }
-        default: {
+        default:
           effectlist = this.effects; 
           break;
-        }
       }
 
-      if(value.length == 0) {
+      if(!value) {
         return effectlist;
       }
-
+      const filterValue = value.toLowerCase();
       return effectlist.filter(effect => { 
           return (effect.desc) ? effect.name.toLowerCase().includes(filterValue) ||  effect.desc.toLowerCase().includes(filterValue) : effect.name.toLowerCase().includes(filterValue)
         });

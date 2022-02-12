@@ -169,16 +169,16 @@ export class CreateComponent {
     if(newList.length > 0) {
       let tag = newList.pop();
       this.tagService.addTag(tag, this.slug(tag))
-          .subscribe(data => {
+          .subscribe({next: data => {
             idList.push(data.id);
             this.updateTags(idList, newList);
           },
-          error => {
+          error: error => {
             this.loading = false;
             this.errorMsg = this.errorService.errorMessage(error);
             return;
           }
-          );
+        });
     }
     else {
       this.blogPost(idList);
@@ -201,14 +201,14 @@ export class CreateComponent {
           this.pageForm.get("section").value,
           idList // tags
           )
-          .subscribe(() => {
+          .subscribe({next: () => {
             this.router.navigateByUrl(`/${nextURL}`);
           },
-          error => {
+          error: error => {
             this.loading = false;
             this.errorMsg = this.errorService.errorMessage(error);
             return;
-          }
+          }}
           );
     }
     else {
@@ -231,14 +231,14 @@ export class CreateComponent {
           this.pageForm.get("section").value,
           idList // tags
           )
-          .subscribe(() => {
+          .subscribe({next: () => {
             this.router.navigateByUrl(`/${nextURL}`);
           },
-          error => {
+          error: error => {
             this.loading = false;
             this.errorMsg = this.errorService.errorMessage(error);
             return;
-          }
+          }}
           );
       }
   }
@@ -323,7 +323,7 @@ export class CreateComponent {
   loadBlog(id: string) {
     if(id != null) {
       this.BlogService.getBlogByID(id)
-      .subscribe(blog => {
+      .subscribe({next: blog => {
         this.blog = blog;
 
         // if the section is blog and you ain't trusted
@@ -363,9 +363,9 @@ export class CreateComponent {
         return;
        }
       },
-        error => {
+        error: error => {
           this.errorMsg = this.errorService.errorMessage(error);
-        }
+        }}
       );
       return;
     }

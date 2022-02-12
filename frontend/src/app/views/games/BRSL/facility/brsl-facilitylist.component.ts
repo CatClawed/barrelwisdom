@@ -1,15 +1,13 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { FacilityList } from '@app/interfaces/brsl';
 import { BRSLService } from '@app/services/brsl.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from "@app/services/errorcode.service";
+import { SeoService } from '@app/services/seo.service';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { SeoService } from '@app/services/seo.service';
 
 @Component({
     templateUrl: 'brsl-facilitylist.component.html',
@@ -22,12 +20,9 @@ import { SeoService } from '@app/services/seo.service';
     facilityControl: FormControl;
     error: boolean = false;
     errorCode: string;
-    errorVars: any[];
-    errorMsg: string;
     facility: string = "facilities";
     facilities: FacilityList[];
     filteredFacilities: Observable<FacilityList[]>;
-    searchstring = "";
     language = "";
     config: ModalOptions = { class: "col-md-5 mx-auto" };
   
@@ -43,12 +38,10 @@ import { SeoService } from '@app/services/seo.service';
     constructor(
       private modalService: BsModalService,
       private router: Router,
-      public historyService: HistoryService,
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private location: Location,
       private brslservice: BRSLService,
-  
       private seoService: SeoService
     ) { 
       this.facilityControl = new FormControl();
@@ -71,10 +64,6 @@ import { SeoService } from '@app/services/seo.service';
       this.seoTitle = `Facilities - ${this.gameTitle}`;
       this.seoDesc = `The list of facilities in ${this.gameTitle}.`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-  
-      this.facilityControl.valueChanges.subscribe(search => {
-        search.filtertext = search;
-      });
 
       this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
@@ -86,18 +75,17 @@ import { SeoService } from '@app/services/seo.service';
   
     getFacilities() {
       this.brslservice.getFacilityList(this.language)
-      .subscribe(facilities => {
+      .subscribe({next: facilities => {
         this.facilities = facilities.slice(0,44);
         this.filteredFacilities = this.pageForm.valueChanges.pipe(
           startWith(null as Observable<FacilityList[]>),
           map((search: any) => search ? this.filterT(search.filtertext) : this.facilities.slice())
         );
       },
-      error => {
+      error: error => {
         this.error = true;
         this.errorCode = `${error.status}`;
-        
-      });
+      }});
     }
   
     openModal(template: TemplateRef<any>, slug: string, event?) {
@@ -119,15 +107,12 @@ import { SeoService } from '@app/services/seo.service';
         }})
     }
 
-    private filterT(value: string): FacilityList[] {
-  
-      const filterValue = value.toLowerCase();
+    private filterT(value: string): FacilityList[] {  
       let list: FacilityList[] = this.facilities;
-
-      if(value.length == 0) {
+      if(!value) {
         return list;
       }
-
+      const filterValue = value.toLowerCase();
       return list.filter(mon => { 
           return mon.name.toLowerCase().includes(filterValue);
         });

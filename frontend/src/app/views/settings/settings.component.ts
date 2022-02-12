@@ -99,16 +99,16 @@ export class SettingsComponent {
   loadProfile(id: number) {
     if(id != null) {
       this.settingService.getProfile(id)
-      .subscribe(profile => {
+      .subscribe({next: profile => {
         this.profileForm.get('bio').setValue(profile.bio);
         this.profileForm.get('website').setValue(profile.website);
         this.profileForm.get('avatar').setValue(profile.avatar);
         this.loading = false;
       },
-        error => {
+        error: error => {
           this.loading = false;
           this.errorCodeService.errorMessage(error);
-      });
+      }});
     }
   }
 
@@ -123,16 +123,16 @@ export class SettingsComponent {
     this.loading = true;
     this.settingService.updateProfile(this.user.id, this.profilef.bio.value, this.profilef.website.value, this.profilef.avatar.value)
       .pipe(first())
-      .subscribe(
+      .subscribe({next:
         () => {
           this.successProfile = true;
           this.loading = false;
           this.errorMsg = "";
         },
-        error => {
+        error: error => {
             this.loading = false;
             this.errorMsg = this.errorCodeService.errorMessage(error);
-        });
+        }});
   }
 
   submitPassword() {
@@ -147,13 +147,13 @@ export class SettingsComponent {
     this.loading = true;
     this.settingService.updatePassword(this.passwordf.newPass.value, this.passwordf.repeatPass.value, this.passwordf.currentPass.value)
         .pipe(first())
-        .subscribe(
+        .subscribe({next:
             () => {
               this.successPassword = true;
               this.loading = false;
               this.errorPass = "";
             },
-            error => {
+            error: error => {
                 this.loading = false;
                 if(error.status = 400) {
                   this.errorPass = "Invalid Password."
@@ -161,7 +161,7 @@ export class SettingsComponent {
                 else {
                   this.errorPass = this.errorCodeService.errorMessage(error);
                 }
-            });
+            }});
     }
 
     createInvite() {
@@ -169,16 +169,16 @@ export class SettingsComponent {
 
       this.settingService.createInvite()
           .pipe(first())
-          .subscribe(
+          .subscribe({next:
               data => {
                 this.loading = false;
                 this.invite = `https://barrelwisdom.com/register?invite=${data['code']}`;
                 this.errorInvite = "";
               },
-              error => {
+              error: error => {
                   this.loading = false;
                   this.errorInvite = this.errorCodeService.errorMessage(error);
-              });
+          }});
       }
 
       createSection() {
@@ -193,16 +193,16 @@ export class SettingsComponent {
         this.loading = true;
         this.settingService.createSection(this.sectionf.name.value, this.sectionf.fullname.value)
             .pipe(first())
-            .subscribe(
+            .subscribe({next:
                 () => {
                   this.successSection = true;
                   this.loading = false;
                   this.errorSection = "";
                 },
-                error => {
+                error: error => {
                     this.loading = false;
                     this.errorSection = this.errorCodeService.errorMessage(error);
-                });
+                }});
         }
 
         loadNav(section: string) {
@@ -224,15 +224,15 @@ export class SettingsComponent {
           this.loading = true;
           this.settingService.updateNavigation(this.navigationf.section.value, this.navigationf.data.value)
               .pipe(first())
-              .subscribe(
+              .subscribe({next:
                   () => {
                     this.successNavigation = true;
                     this.loading = false;
                     this.errorNavigation = "";
                   },
-                  error => {
+                  error: error => {
                       this.loading = false;
                       this.errorNavigation = this.errorCodeService.errorMessage(error);
-                  });
+                  }});
         }
 }

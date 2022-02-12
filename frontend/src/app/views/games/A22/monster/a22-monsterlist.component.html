@@ -88,27 +88,23 @@
       </div>
     </form>
   </div>
-<ng-container *ngIf="filteredMonsters">
-<div *ngFor="let monster of filteredMonsters | async;  trackBy:identify" class="row">
-  <div *ngFor="let mon of monster" class="spacer col-md-5 mx-auto">
-    <div *ngIf="mon" class="card allheight card-body">
-      <h4 class="card-title card-icon-space">
-         <a (click)="openModal(monsterModal, mon.slug); $event.preventDefault();" href="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a>    
-      </h4>
-      <div class="card-icon-position">
-        <i *ngIf="mon.montype != 'boss'" class="atelier atelier-ryza2-race-{{mon.montype}}"></i>
-        <i *ngIf="mon.montype == 'boss'" class="atelier atelier-ryza2-boss-enemy"></i>
-        <i class="atelier atelier-np atelier-ryza2-{{mon.size.toLowerCase()}}-enemy"></i>
-        <br *ngIf="mon.isDLC" /><span *ngIf="mon.isDLC" class="badge bg-secondary">DLC</span>
-      </div>
-      <a class="card-item-display" (click)="openModal(monsterModal, mon.slug); $event.preventDefault();" href="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">
-         <img loading="lazy" src="{{imgURL}}monsters/{{mon.slug}}.webp" alt="{{mon.name}}">
-      </a>
-      <button (click)="openModal(monsterModal, mon.slug)" class="card-read-more-position" mat-mini-fab color="accent">
-         <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
-      </button>
-    </div>
-  </div>
+<div *ngIf="filteredMonsters" class="item-grid">
+<div *ngFor="let mon of filteredMonsters | async; trackBy:identify" class="card card-body">
+   <h4 class="card-title card-icon-space">
+      <a (click)="openModal(monsterModal, mon.slug, $event);" href="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a>    
+   </h4>
+   <div class="card-icon-position">
+     <i *ngIf="mon.montype != 'boss'" class="atelier atelier-ryza2-race-{{mon.montype}}"></i>
+     <i *ngIf="mon.montype == 'boss'" class="atelier atelier-ryza2-boss-enemy"></i>
+     <i class="atelier atelier-np atelier-ryza2-{{mon.size.toLowerCase()}}-enemy"></i>
+     <br *ngIf="mon.isDLC" /><span *ngIf="mon.isDLC" class="badge bg-secondary">DLC</span>
+   </div>
+   <a class="card-item-display" (click)="openModal(monsterModal, mon.slug, $event);" href="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">
+      <img loading="lazy" src="{{imgURL}}monsters/{{mon.slug}}.webp" alt="{{mon.name}}">
+   </a>
+   <button (click)="openModal(monsterModal, mon.slug)" class="card-read-more-position" mat-mini-fab color="accent">
+      <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+   </button>
 </div>
 
 <ng-template #monsterModal>
@@ -119,5 +115,5 @@
      <a22-monster slug="{{monster}}" [showNav]="false"></a22-monster>
   </div>
 </ng-template>
-</ng-container>
+</div>
 </div>

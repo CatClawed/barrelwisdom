@@ -1,17 +1,14 @@
+import { Location, ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute }from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { RegionData } from '@app/interfaces/a15';
 import { A15Service } from '@app/services/a15.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from '@app/services/errorcode.service';
+import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
-import { ViewportScroller } from '@angular/common';
 import { first } from 'rxjs/operators';
-import { Location } from '@angular/common';
 
 @Component({
   templateUrl: 'a15-location.component.html',
-  selector: 'a15-location',
 })
 export class A15LocationComponent implements OnInit {
   slugname: string;
@@ -20,8 +17,6 @@ export class A15LocationComponent implements OnInit {
   returnUrl: string;
   error: boolean = false;
   errorCode: string;
-  errorVars: any[];
-  errorMsg: string;
   location: RegionData;
   colset: string;
   language = "";
@@ -40,7 +35,6 @@ constructor(
     private loc: Location,
     private a15service: A15Service,
     public historyService: HistoryService,
-
     private seoService: SeoService,
     private viewportScroller: ViewportScroller
     ) {

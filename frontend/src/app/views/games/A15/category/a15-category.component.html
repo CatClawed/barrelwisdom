@@ -10,7 +10,7 @@
             <tr class="table-dark-center"><th style="border:none;" colspan=2>Items in Category</th></tr>
             <tr *ngFor="let item of category.item_set">
                 <td>
-                    <a href="/{{gameURL}}/items/{{item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.name}}</a>
+                    <a routerLink="/{{gameURL}}/items/{{item.slugname}}/{{language}}">{{item.name}}</a>
                     <br /><b>LV {{item.level}}</b>
                 </td>
                 <td>
@@ -28,7 +28,7 @@
             <tr class="table-dark-center"><th style="border:none;" colspan=2>Items Using Category</th></tr>
             <tr *ngFor="let item of category.ingredientcat">
                 <td>
-                    <a href="/{{gameURL}}/items/{{item.synthitem.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.synthitem.name}}</a>
+                    <a routerLink="/{{gameURL}}/items/{{item.synthitem.slugname}}/{{language}}">{{item.synthitem.name}}</a>
                     <br /><b>LV {{item.synthitem.level}}</b>
                 </td>
                 <td>

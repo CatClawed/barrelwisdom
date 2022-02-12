@@ -1,9 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute }from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Effect } from '@app/interfaces/a16';
 import { A16Service } from '@app/services/a16.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
 
 @Component({
@@ -17,8 +15,6 @@ export class A16EffectComponent implements OnInit {
   returnUrl: string;
   error: boolean = false;
   errorCode: string;
-  errorVars: any[];
-  errorMsg: string;
   effect: Effect;
   colset: string;
 
@@ -42,8 +38,6 @@ export class A16EffectComponent implements OnInit {
 constructor(
     private route: ActivatedRoute,
     private a16service: A16Service,
-    public historyService: HistoryService,
-
     private seoService: SeoService) {
       if(this.route.snapshot.params.effect != null) {
       this.slugname = this.route.snapshot.params.effect;
@@ -55,7 +49,7 @@ constructor(
       this.colset = "col-md-5 mx-auto "
     }
     this.a16service.getEffect(this.slugname, this.language)
-    .subscribe(effect => {
+    .subscribe({next: effect => {
       this.error = false;
       this.effect = effect;
       this.gameTitle = this.a16service.gameTitle[this.language];
@@ -67,10 +61,9 @@ constructor(
       this.seoDesc = `${this.effect.desc}`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
-    error => {
+    error: error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      
-    });
+    }});
   }
 } 

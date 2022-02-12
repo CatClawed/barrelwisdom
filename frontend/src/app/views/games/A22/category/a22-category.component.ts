@@ -2,13 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CategoryItem } from '@app/interfaces/a22';
 import { A22Service } from '@app/services/a22.service';
-import { HistoryService } from '@app/services/history.service';
-import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
 
 @Component({
   templateUrl: 'a22-category.component.html',
-  selector: 'a22-category',
 })
 export class A22CategoryComponent implements OnInit {
   slugname: string;
@@ -17,8 +14,6 @@ export class A22CategoryComponent implements OnInit {
   returnUrl: string;
   error: boolean = false;
   errorCode: string;
-  errorVars: any[];
-  errorMsg: string;
   category: CategoryItem;
   colset: string;
   language = "";
@@ -34,9 +29,7 @@ export class A22CategoryComponent implements OnInit {
 
 constructor(
     private route: ActivatedRoute,
-    public historyService: HistoryService,
     private a22service: A22Service,
-
     private seoService: SeoService) {
   }
   ngOnInit(): void {
@@ -44,7 +37,7 @@ constructor(
     this.language = this.route.snapshot.params.language;
 
     this.a22service.getCategoryItem(this.slugname, this.language)
-    .subscribe(category => {
+    .subscribe({next: category => {
         this.error = false;
         this.category = category;
 
@@ -57,10 +50,9 @@ constructor(
         this.seoDesc = `All items in ${this.category.name}`
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
-    error => {
+    error: error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      
-    });
+    }});
   }
 } 

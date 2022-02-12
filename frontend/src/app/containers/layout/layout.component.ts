@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '@app/interfaces/user';
 import { AuthenticationService } from '@app/services/authentication.service';
-import { HistoryService } from '@app/services/history.service';
 import { NavigationService, NavItems } from '@app/services/navigation.service';
 
 @Component({
@@ -18,7 +17,6 @@ export class LayoutComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService,
     public navService: NavigationService,
-    public historyService: HistoryService,
     public breakpointObserver: BreakpointObserver,
     public router: Router) {
     }

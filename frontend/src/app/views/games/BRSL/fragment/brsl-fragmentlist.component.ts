@@ -1,17 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute }from '@angular/router';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Event, NameLink, SchoolLocation } from '@app/interfaces/brsl';
 import { BRSLService } from '@app/services/brsl.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from "@app/services/errorcode.service";
+import { SeoService } from '@app/services/seo.service';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { SeoService } from '@app/services/seo.service';
 
 @Component({
     templateUrl: 'brsl-fragmentlist.component.html',
-    selector: 'brsl-fragmentlist',
   })
 
   export class BRSLFragmentComponent implements OnInit {
@@ -19,18 +16,13 @@ import { SeoService } from '@app/services/seo.service';
     fragmentControl: FormControl;
     error: boolean = false;
     errorCode: string;
-    errorVars: any[];
-    errorMsg: string;
     event: Event[];
     character: NameLink[];
     location: SchoolLocation[];
     filteredEvents: Observable<Event[]>;
-    searchstring = "";
     language = "";
     selectedChar = "Any";
     selectedLoc = "Any";
-    currentChar = "Any";
-    currentLoc = "Any";
 
     seoTitle: string;
     seoDesc: string;
@@ -45,8 +37,6 @@ import { SeoService } from '@app/services/seo.service';
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private brslservice: BRSLService,
-      public historyService: HistoryService,
-  
       private seoService: SeoService,
     ) { 
       this.fragmentControl = new FormControl();
@@ -59,9 +49,7 @@ import { SeoService } from '@app/services/seo.service';
     }
   
     ngOnInit(): void {
-  
       this.language = this.route.snapshot.params.language;
-  
       this.getEvents();
 
       this.gameTitle = this.brslservice.gameTitle[this.language];
@@ -72,74 +60,54 @@ import { SeoService } from '@app/services/seo.service';
       this.seoTitle = `Fragments & Dates - ${this.gameTitle}`;
       this.seoDesc = `The list of fragments and dates in ${this.gameTitle}.`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-  
-      this.fragmentControl.valueChanges.subscribe(search => {
-        search.filtertext = search; 
-      }); 
 
-      this.pageForm.get('character').valueChanges
-        .subscribe(val => {
-          this.currentChar = val;
-        });
-
-        this.pageForm.get('location').valueChanges
-        .subscribe(val => {
-          this.currentLoc = val;
-        });
     }
   
     getEvents() {
       this.brslservice.getCharacterList(this.language)
-      .subscribe(f => {
+      .subscribe({next: f => {
         this.character = f.slice(2);
       },
-      error => {
+      error: error => {
         this.error = true;
         this.errorCode = `${error.status}`;
-        
-      });
+      }});
       this.brslservice.getSchoolLocationList(this.language)
-      .subscribe(f => {
+      .subscribe({next: f => {
         this.location = f;
       },
-      error => {
+      error: error => {
         this.error = true;
         this.errorCode = `${error.status}`;
-        
-      });
+      }});
       this.brslservice.getFragmentList(this.language)
-      .subscribe(fragment => {
+      .subscribe({next: fragment => {
         this.event = fragment;
         this.filteredEvents = this.pageForm.valueChanges.pipe(
           startWith(null as Observable<Event[]>),
-          map((search: any) => search ? this.filterT(search.filtertext, this.currentChar, this.currentLoc) : this.event.slice())
+          map((search: any) => search ? this.filterT(search.filtertext, search.character, search.location) : this.event.slice())
         );
       },
-      error => {
+      error: error => {
         this.error = true;
         this.errorCode = `${error.status}`;
-        
-      });
+      }});
     }
   
     private filterT(value: string, char: string, loc: string): Event[] {
-  
-      const filterValue = value.toLowerCase();
       let list: Event[] = this.event;
-
       if(char != "Any") {
         list = list.filter(evt => (evt.character) ? evt.character.name == char : false)
       }
       if(loc != "Any") {
         list = list.filter(evt => (evt.location) ? evt.location.loc == loc : false)
       }
-
-      if(value.length > 0) {
+      if(value) {
+        const filterValue = value.toLowerCase();
         list = list.filter(fragment => { 
             return fragment.fragment.some(i => i.name.toLowerCase().includes(filterValue) || i.eff.toLowerCase().includes(filterValue) || i.desc.toLowerCase().includes(filterValue));
           });
       }
-
       return list;
     } 
   

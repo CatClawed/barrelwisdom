@@ -1,11 +1,9 @@
-import { RegionData } from "@app/interfaces/a15";
-import { Resolve } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Router, ActivatedRoute } from '@angular/router';
-import { Observable, EMPTY } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { ActivatedRoute, ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
+import { RegionData } from "@app/interfaces/a15";
 import { A15Service } from "@app/services/a15.service";
-
+import { EMPTY, Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'

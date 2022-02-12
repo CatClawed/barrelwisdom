@@ -20,17 +20,17 @@
     <b *ngIf="item.ingredient_set">Ingredients:</b>
     <ul *ngIf="item.ingredient_set">
        <li *ngFor="let ing of item.ingredient_set">
-         <ng-container *ngIf="ing.item"><a href="/{{gameURL}}/items/{{ing.item.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{ing.item.name}} </a>x{{ing.num}}</ng-container>
+         <ng-container *ngIf="ing.item"><a routerLink="/{{gameURL}}/items/{{ing.item.slug}}/{{language}}">{{ing.item.name}} </a>x{{ing.num}}</ng-container>
          <ng-container *ngIf="ing.category">{{ing.category.name}} x{{ing.num}}</ng-container>
         </li>
     </ul>
     <b *ngIf="item.region_set">Locations:</b>
     <ul *ngIf="item.region_set">
-       <li *ngFor="let loc of item.region_set"><a href="/{{gameURL}}/locations/{{loc.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{loc.name}}</a></li>
+       <li *ngFor="let loc of item.region_set"><a routerLink="/{{gameURL}}/locations/{{loc.slug}}/{{language}}">{{loc.name}}</a></li>
     </ul>
     <b *ngIf="item.demon_set">Demons:</b>
     <ul *ngIf="item.demon_set">
-      <li *ngFor="let drop of item.demon_set"><a href="/{{gameURL}}/demons/{{drop.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{drop.name}}</a></li>
+      <li *ngFor="let drop of item.demon_set"><a routerLink="/{{gameURL}}/demons/{{drop.slug}}/{{language}}">{{drop.name}}</a></li>
     </ul>
     <ng-container *ngIf="item.effline_set">
       <table class="tbl table-shrink">

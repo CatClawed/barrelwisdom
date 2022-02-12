@@ -12,12 +12,12 @@
       <img loading="lazy" src="{{imgURL}}items/{{item.slugname}}.webp" alt="{{item.name}}">
     </div>
     <p>{{item.desc}}</p>
-    <p *ngIf="item.book_set"><b>Recipe Book: </b><a href="/{{gameURL}}/recipe-books/{{item.book_set[0].slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.book_set[0].name}}</a></p>
+    <p *ngIf="item.book_set"><b>Recipe Book: </b><a routerLink="/{{gameURL}}/recipe-books/{{item.book_set[0].slugname}}/{{language}}">{{item.book_set[0].name}}</a></p>
     <p *ngIf="item.size"><b>Size: </b>{{item.size}}</p>
     <div class="flex">
       <table class="table-item-data">
         <tr *ngFor="let cat of item.categories">
-            <td><i class="atelier atelier-{{cat.icon_name}}"></i></td><td><a href="/{{gameURL}}/categories/{{cat.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{cat.name}}</a></td>
+            <td><i class="atelier atelier-{{cat.icon_name}}"></i></td><td><a routerLink="/{{gameURL}}/categories/{{cat.slugname}}/{{language}}">{{cat.name}}</a></td>
         </tr>
       </table>
       <table class="table-item-data">
@@ -34,33 +34,33 @@
     </div>
     <b *ngIf="item.relic_set">Relic Locations:</b>
     <ul *ngIf="item.relic_set">
-      <li *ngFor="let loc of item.relic_set"><a href="/{{gameURL}}/locations/{{loc.region.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{loc.region.name}}</a></li>
+      <li *ngFor="let loc of item.relic_set"><a routerLink="/{{gameURL}}/locations/{{loc.region.slugname}}/{{language}}">{{loc.region.name}}</a></li>
     </ul>
     <b *ngIf="item.disassembly_set">Disassembles to:</b>
     <ul *ngIf="item.disassembly_set">
-      <li *ngFor="let it of item.disassembly_set[0].dis"><a href="/{{gameURL}}/items/{{it.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{it.name}}</a></li>
+      <li *ngFor="let it of item.disassembly_set[0].dis"><a routerLink="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a></li>
     </ul>
     <b *ngIf="item.disassembled_set">Disassembled from:</b>
     <ul *ngIf="item.disassembled_set">
-      <li *ngFor="let it of item.disassembled_set[0].parent"><a href="/{{gameURL}}/items/{{it.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{it.name}}</a></li>
+      <li *ngFor="let it of item.disassembled_set[0].parent"><a routerLink="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a></li>
     </ul>
     <b *ngIf="item.locations">Locations:</b>
     <ul *ngIf="item.locations">
-      <li *ngFor="let loc of item.locations"><a *ngIf="!loc.parentslug" href="/{{gameURL}}/locations/{{loc.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{loc.name}}</a><a *ngIf="loc.parentslug" href="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{loc.name}}</a></li>
+      <li *ngFor="let loc of item.locations"><a *ngIf="!loc.parentslug" routerLink="/{{gameURL}}/locations/{{loc.slugname}}/{{language}}">{{loc.name}}</a><a *ngIf="loc.parentslug" routerLink="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}">{{loc.name}}</a></li>
     </ul>
     <b *ngIf="item.monsters">Monsters:</b>
     <ul *ngIf="item.monsters">
-      <li *ngFor="let mon of item.monsters"><a href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{mon.name}}</a></li>
+      <li *ngFor="let mon of item.monsters"><a routerLink="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">{{mon.name}}</a></li>
     </ul>
     <b *ngIf="item.properties">Properties:</b>
     <ul *ngIf="item.properties">
-      <li *ngFor="let prop of item.properties"><a href="/{{gameURL}}/properties/{{prop.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{prop.name}}</a></li>
+      <li *ngFor="let prop of item.properties"><a routerLink="/{{gameURL}}/properties/{{prop.slugname}}/{{language}}">{{prop.name}}</a></li>
     </ul>
     <table *ngIf="item.ingredient_set" class="tbl">
       <tr class="table-dark-center"><th>Ingredients</th></tr>
       <tr><td>
         <ul>
-         <li *ngFor="let ing of item.ingredient_set"><a *ngIf="ing.item" href="/{{gameURL}}/items/{{ing.item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{ing.item.name}}</a><a *ngIf="ing.category" href="/{{gameURL}}/categories/{{ing.category.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{ing.category.name}}</a></li>
+         <li *ngFor="let ing of item.ingredient_set"><a *ngIf="ing.item" routerLink="/{{gameURL}}/items/{{ing.item.slugname}}/{{language}}">{{ing.item.name}}</a><a *ngIf="ing.category" routerLink="/{{gameURL}}/categories/{{ing.category.slugname}}/{{language}}">{{ing.category.name}}</a></li>
         </ul>
       </td></tr>
     </table>
@@ -70,7 +70,7 @@
         <td style="vertical-align:middle"><i style="color:#ac504f;" class="atelier atelier-np atelier-shallie-fire"></i></td>
         <td>
           <ng-container *ngFor="let eff of item.effectline_set">
-            <a *ngIf="eff.elem == 'fire'" href="/{{gameURL}}/effects/{{eff.effect.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{eff.effect.name}}</a><span *ngIf="eff.elem == 'fire'"> ({{eff.min_elem}}-{{eff.max_elem}})</span>
+            <a *ngIf="eff.elem == 'fire'" routerLink="/{{gameURL}}/effects/{{eff.effect.slugname}}/{{language}}">{{eff.effect.name}}</a><span *ngIf="eff.elem == 'fire'"> ({{eff.min_elem}}-{{eff.max_elem}})</span>
             <div *ngIf="eff.elem == 'fire'" class="effect-bar">
               <div class="elemental-bar" style="background:#ac504f;left:{{eff.min_elem}}%;width:{{eff.max_elem-eff.min_elem}}%;"></div>
             </div>
@@ -81,7 +81,7 @@
         <td style="vertical-align:middle"><i style="color:#427389;" class="atelier atelier-np atelier-shallie-water"></i></td>
         <td>
           <ng-container *ngFor="let eff of item.effectline_set">
-            <a *ngIf="eff.elem == 'water'" href="/{{gameURL}}/effects/{{eff.effect.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{eff.effect.name}}</a><span *ngIf="eff.elem == 'water'"> ({{eff.min_elem}}-{{eff.max_elem}})</span>
+            <a *ngIf="eff.elem == 'water'" routerLink="/{{gameURL}}/effects/{{eff.effect.slugname}}/{{language}}">{{eff.effect.name}}</a><span *ngIf="eff.elem == 'water'"> ({{eff.min_elem}}-{{eff.max_elem}})</span>
             <div *ngIf="eff.elem == 'water'" class='effect-bar'>
               <div class="elemental-bar" style="background:#427389;left:{{eff.min_elem}}%;width:{{eff.max_elem-eff.min_elem}}%;"></div>
             </div>
@@ -92,7 +92,7 @@
         <td style="vertical-align:middle"><i style="color:#5a843c;"  class="atelier atelier-np atelier-shallie-wind"></i></td>
         <td>
           <ng-container *ngFor="let eff of item.effectline_set">
-            <a *ngIf="eff.elem == 'wind'" href="/{{gameURL}}/effects/{{eff.effect.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{eff.effect.name}}</a><span *ngIf="eff.elem == 'wind'"> ({{eff.min_elem}}-{{eff.max_elem}})</span>
+            <a *ngIf="eff.elem == 'wind'" routerLink="/{{gameURL}}/effects/{{eff.effect.slugname}}/{{language}}">{{eff.effect.name}}</a><span *ngIf="eff.elem == 'wind'"> ({{eff.min_elem}}-{{eff.max_elem}})</span>
             <div *ngIf="eff.elem == 'wind'" class='effect-bar'>
               <div class="elemental-bar" style="background:#5a843c;left:{{eff.min_elem}}%;width:{{eff.max_elem-eff.min_elem}}%;"></div>
             </div>
@@ -103,7 +103,7 @@
         <td style="vertical-align:middle"><i style="color:#8f7939;" class="atelier atelier-np atelier-shallie-earth"></i></td>
         <td>
           <ng-container *ngFor="let eff of item.effectline_set">
-            <a *ngIf="eff.elem == 'earth'" href="/{{gameURL}}/effects/{{eff.effect.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{eff.effect.name}}</a><span *ngIf="eff.elem == 'earth'"> ({{eff.min_elem}}-{{eff.max_elem}})</span>
+            <a *ngIf="eff.elem == 'earth'" routerLink="/{{gameURL}}/effects/{{eff.effect.slugname}}/{{language}}">{{eff.effect.name}}</a><span *ngIf="eff.elem == 'earth'"> ({{eff.min_elem}}-{{eff.max_elem}})</span>
             <div *ngIf="eff.elem == 'earth'" class='effect-bar'>
               <div class="elemental-bar" style="background:#8f7939;left:{{eff.min_elem}}%;width:{{eff.max_elem-eff.min_elem}}%;"></div>
             </div>

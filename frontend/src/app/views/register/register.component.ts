@@ -64,15 +64,15 @@ export class RegisterComponent {
     this.loading = true;
     this.authenticationService.register(this.f.username.value, this.f.email.value, this.f.password.value, this.f.confirmPassword.value, this.route.snapshot.queryParamMap.get('invite'))
         .pipe(first())
-        .subscribe(() => {
+        .subscribe({next: () => {
               this.authenticationService.login(this.f.username.value, this.f.password.value)
                 .subscribe(() => {
                   this.router.navigateByUrl('/');
                 });
             },
-            error => {
+            error: error => {
                 this.loading = false;
                 this.errorMsg = this.errorCodeService.errorMessage(error);
-            });
+            }});
   }
 }

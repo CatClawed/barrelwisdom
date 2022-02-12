@@ -14,23 +14,19 @@
       </div>
     </form>
   </div>
-<ng-container *ngIf="filteredBooks">
-<div *ngFor="let book of filteredBooks | async;  trackBy:identify" class="row">
-  <div *ngFor="let bk of book" class="spacer col-md-5 mx-auto">
-    <div *ngIf="bk" class="card card-body allheight">
-      <h4 class="card-title">
-        <a (click)="openModal(bookModal, bk.slugname); $event.preventDefault();" href="/{{gameURL}}/recipe-books/{{bk.slugname}}/{{language}}">{{bk.name}}</a>    
-      </h4>
-      <a class="card-item-display" (click)="openModal(bookModal, bk.slugname); $event.preventDefault();" href="/{{gameURL}}/recipe-books/{{bk.slugname}}/{{language}}">
-        <img loading="lazy" src="{{imgURL}}items/{{bk.slugname}}.webp" alt="{{bk.name}}">
-      </a>
-      <p><b>Acquisition: </b>{{bk.acquisition}}</p>
-      <b>Items:</b>
-      <ul>
-        <li *ngFor="let item of bk.items"><a href="/{{gameURL}}/items/{{item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.name}}</a></li>
-      </ul>
-    </div>
-  </div>
+<div *ngIf="filteredBooks" class="item-grid">
+<div *ngFor="let bk of filteredBooks | async; trackBy:identify" class="card card-body">
+  <h4 class="card-title">
+    <a (click)="openModal(bookModal, bk.slugname, $event);" href="/{{gameURL}}/recipe-books/{{bk.slugname}}/{{language}}">{{bk.name}}</a>    
+  </h4>
+  <a class="card-item-display" (click)="openModal(bookModal, bk.slugname, $event);" href="/{{gameURL}}/recipe-books/{{bk.slugname}}/{{language}}">
+    <img loading="lazy" src="{{imgURL}}items/{{bk.slugname}}.webp" alt="{{bk.name}}">
+  </a>
+  <p><b>Acquisition: </b>{{bk.acquisition}}</p>
+  <b>Items:</b>
+  <ul>
+    <li *ngFor="let item of bk.items"><a routerLink="/{{gameURL}}/items/{{item.slugname}}/{{language}}">{{item.name}}</a></li>
+  </ul>
 </div>
 
 <ng-template #bookModal>
@@ -41,5 +37,5 @@
      <a15-book slugname="{{book}}" [showNav]="false"></a15-book>
   </div>
 </ng-template>
-</ng-container>
+</div>
 </ng-container>

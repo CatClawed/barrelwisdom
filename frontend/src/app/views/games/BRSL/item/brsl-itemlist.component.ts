@@ -1,19 +1,16 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ItemList, NameOnly } from '@app/interfaces/brsl';
 import { BRSLService } from '@app/services/brsl.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from "@app/services/errorcode.service";
+import { SeoService } from '@app/services/seo.service';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { SeoService } from '@app/services/seo.service';
 
 @Component({
     templateUrl: 'brsl-itemlist.component.html',
-    selector: 'brsl-itemlist',
   })
 
   export class BRSLItemlistComponent implements OnInit {
@@ -22,15 +19,12 @@ import { SeoService } from '@app/services/seo.service';
     itemControl: FormControl;
     error: boolean = false;
     errorCode: string;
-    errorVars: any[];
-    errorMsg: string;
     item: string = "items";
     items: ItemList[];
     categories: NameOnly[];
     filteredItems: Observable<ItemList[]>;
     currentType: string = "Any";
     currentCategory: string = "Any";
-    searchstring = "";
     language = "";
     config: ModalOptions = { class: "col-md-5 mx-auto" };
   
@@ -46,12 +40,10 @@ import { SeoService } from '@app/services/seo.service';
     constructor(
       private modalService: BsModalService,
       private router: Router,
-      public historyService: HistoryService,
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private location: Location,
       private brslservice: BRSLService,
-  
       private seoService: SeoService
     ) { 
       this.itemControl = new FormControl();
@@ -77,20 +69,6 @@ import { SeoService } from '@app/services/seo.service';
       this.seoTitle = `Items - ${this.gameTitle}`;
       this.seoDesc = `The list of items in ${this.gameTitle}.`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-  
-      this.pageForm.get('type').valueChanges
-        .subscribe(type => {
-          this.currentType = type;
-        });
-
-      this.pageForm.get('category').valueChanges
-        .subscribe(cat => {
-          this.currentCategory = cat;
-        });
-  
-      this.itemControl.valueChanges.subscribe(search => {
-        search.filtertext = search;
-      });
 
       this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
@@ -102,30 +80,29 @@ import { SeoService } from '@app/services/seo.service';
   
     getItems() {
       this.brslservice.getItemList(this.language)
-      .subscribe(items => {
+      .subscribe({next: items => {
         this.items = items;
         this.filteredItems = this.pageForm.valueChanges.pipe(
           startWith(null as Observable<ItemList[]>),
-          map((search: any) => search ? this.filterT(search.filtertext, this.currentType, this.currentCategory) : this.items.slice())
+          map((search: any) => search ? this.filterT(search.filtertext, search.type, search.category) : this.items.slice())
         );
       },
-      error => {
+      error: error => {
         this.error = true;
         this.errorCode = `${error.status}`;
-        
-      });
+      }});
     }
 
     getCategories() {
       this.brslservice.getCategoryList(this.language)
-      .subscribe(categories  => {
+      .subscribe({next: categories  => {
           this.categories = categories;
       },
-      error => {
+      error: error => {
           this.error = true;
           this.errorCode = `${error.status}`;
           
-      });
+      }});
   }
   
     openModal(template: TemplateRef<any>, slug: string, event?) {
@@ -148,22 +125,17 @@ import { SeoService } from '@app/services/seo.service';
     }
 
     private filterT(value: string, type: string, category: string): ItemList[] {
-  
-      const filterValue = value.toLowerCase();
       let list: ItemList[] = this.items;
-
       if(type != 'Any') {
         list = list.filter(item => item.itemtype == type);
       }
-
       if(category != 'Any') {
         list = list.filter(item => item.category.some(c => c.name == category) );
       }
-
-      if(value.length == 0) {
+      if(!value) {
         return list;
       }
-
+      const filterValue = value.toLowerCase();
       return list.filter(mon => { 
           return mon.name.toLowerCase().includes(filterValue);
         });

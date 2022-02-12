@@ -1,18 +1,15 @@
+import { Location, ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute }from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Region } from '@app/interfaces/brsl';
 import { BRSLService } from '@app/services/brsl.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
-import { ViewportScroller } from '@angular/common';
 import { first } from 'rxjs/operators';
-import { Location } from '@angular/common';
 
 @Component({
   templateUrl: 'brsl-location.component.html',
-  selector: 'brsl-location',
 })
+
 export class BRSLLocationComponent implements OnInit {
   slugname: string;
   loading = false;
@@ -20,8 +17,6 @@ export class BRSLLocationComponent implements OnInit {
   returnUrl: string;
   error: boolean = false;
   errorCode: string;
-  errorVars: any[];
-  errorMsg: string;
   location: Region;
   colset: string;
   language = "";
@@ -39,8 +34,6 @@ constructor(
     private route: ActivatedRoute,
     private loc: Location,
     private brslservice: BRSLService,
-    public historyService: HistoryService,
-
     private seoService: SeoService,
     private viewportScroller: ViewportScroller
     ) {

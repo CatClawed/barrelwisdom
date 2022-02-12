@@ -9,7 +9,7 @@
     <b *ngIf="effect.effectline_set">From Item:</b>
     <ul *ngIf="effect.effectline_set">
       <li *ngFor="let e of effect.effectline_set">
-        <a href="/{{gameURL}}/items/{{e.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{e.name}}</a>
+        <a routerLink="/{{gameURL}}/items/{{e.slugname}}/{{language}}">{{e.name}}</a>
       </li>
     </ul>
   </div>

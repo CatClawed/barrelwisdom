@@ -1,9 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute }from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { DemonFull } from '@app/interfaces/brsl';
 import { BRSLService } from '@app/services/brsl.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
 
 @Component({
@@ -17,8 +15,6 @@ export class BRSLDemonComponent implements OnInit {
   returnUrl: string;
   error: boolean = false;
   errorCode: string;
-  errorVars: any[];
-  errorMsg: string;
   demon: DemonFull;
   colset: string;
 
@@ -42,8 +38,6 @@ export class BRSLDemonComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private brslservice: BRSLService,
-    public historyService: HistoryService,
-
     private seoService: SeoService) {
       if(this.route.snapshot.params.demon != null) {
       this.slug = this.route.snapshot.params.demon;
@@ -55,7 +49,7 @@ export class BRSLDemonComponent implements OnInit {
       this.colset = "col-md-9 mx-auto "
     }
     this.brslservice.getDemon(this.slug, this.language)
-    .subscribe(demon => {
+    .subscribe({next: demon => {
         this.error = false;
         this.demon = demon;
 
@@ -69,10 +63,9 @@ export class BRSLDemonComponent implements OnInit {
         this.seoImage = `${this.imgURL}demons/${this.demon.slug}.webp`
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
-    error => {
+    error: error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      
-    });
+    }});
   }
 } 

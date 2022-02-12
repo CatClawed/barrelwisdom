@@ -19,12 +19,12 @@
         <b *ngIf="monster.locations">Locations:</b>
         <ul *ngIf="monster.locations">
            <li *ngFor="let loc of monster.locations">
-             <a href="/{{gameURL}}/locations/{{loc.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{loc.name}}</a>
+             <a routerLink="/{{gameURL}}/locations/{{loc.slugname}}/{{language}}">{{loc.name}}</a>
            </li>
         </ul>
         <b *ngIf="monster.item_set">Drops:</b>
         <ul *ngIf="monster.item_set">
-          <li *ngFor="let drop of monster.item_set"><a href="/{{gameURL}}/items/{{drop.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{drop.name}}</a></li>
+          <li *ngFor="let drop of monster.item_set"><a routerLink="/{{gameURL}}/items/{{drop.slugname}}/{{language}}">{{drop.name}}</a></li>
         </ul>
       </div>
       <div class="col-md-6">

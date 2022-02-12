@@ -1,9 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute }from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ItemFull } from '@app/interfaces/a15';
 import { A15Service } from '@app/services/a15.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
 
 @Component({
@@ -17,8 +15,6 @@ export class A15ItemComponent implements OnInit {
   returnUrl: string;
   error: boolean = false;
   errorCode: string;
-  errorVars: any[];
-  errorMsg: string;
   item: ItemFull;
   colset: string;
   fire = false;
@@ -46,8 +42,6 @@ export class A15ItemComponent implements OnInit {
 constructor(
     private route: ActivatedRoute,
     private a15service: A15Service,
-    public historyService: HistoryService,
-
     private seoService: SeoService) {
       if(this.route.snapshot.params.item != null) {
       this.slugname = this.route.snapshot.params.item;
@@ -59,9 +53,8 @@ constructor(
       this.colset = "col-md-9 mx-auto "
     }
 
-
     this.a15service.getItem(this.slugname, this.language)
-      .subscribe(item => {
+      .subscribe({next: item => {
         this.error = false;
         this.item = item;
 
@@ -77,25 +70,26 @@ constructor(
 
         if (this.item.effectline_set) {
           for (let eff of this.item.effectline_set) {
-            if (eff.elem == "fire") {
-              this.fire = true;
-            }
-            if (eff.elem == "water") {
-              this.water = true;
-            }
-            if (eff.elem == "wind") {
-              this.wind = true;
-            }
-            if (eff.elem == "earth") {
-              this.earth = true;
+            switch(eff.elem) {
+              case "fire":
+                this.fire = true;
+                break;
+              case "water":
+                this.water = true;
+                break;
+              case "wind":
+                this.wind = true;
+                break;
+              case "earth":
+                this.earth = true;
+                break;
             }
           }
         }
       },
-        error => {
+        error: error => {
           this.error = true;
           this.errorCode = `${error.status}`;
-          
-        });
+        }});
   }
 } 

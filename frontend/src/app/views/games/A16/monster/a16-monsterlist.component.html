@@ -14,24 +14,20 @@
       </div>
     </form>
   </div>
-<ng-container *ngIf="filteredMonsters">
-<div *ngFor="let monster of filteredMonsters | async;  trackBy:identify" class="row">
-  <div *ngFor="let mon of monster" class="spacer col-md-5 mx-auto">
-    <div *ngIf="mon" class="card card-body allheight">
-      <h4 class="card-title card-icon-space">
-        <a (click)="openModal(monsterModal, mon.slugname); $event.preventDefault();" href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">{{mon.name}}</a>    
-      </h4>
-      <div class="card-icon-position">
-        <i class="atelier atelier-np atelier-shallie-race-{{mon.kind}}"></i>
-      </div>
-      <a class="card-item-display" (click)="openModal(monsterModal, mon.slugname); $event.preventDefault();" href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">
-        <img loading="lazy" src="{{imgURL}}monsters/{{mon.slugname}}.webp" alt="{{mon.name}}">
-      </a>
-      <button (click)="openModal(monsterModal, mon.slugname)" class="card-read-more-position" mat-mini-fab color="accent">
-        <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
-      </button>
-    </div>
+<div *ngIf="filteredMonsters" class="item-grid">
+<div *ngFor="let mon of filteredMonsters | async; trackBy:identify" class="card card-body">
+  <h4 class="card-title card-icon-space">
+    <a (click)="openModal(monsterModal, mon.slugname, $event);" href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">{{mon.name}}</a>    
+  </h4>
+  <div class="card-icon-position">
+    <i class="atelier atelier-np atelier-shallie-race-{{mon.kind}}"></i>
   </div>
+  <a class="card-item-display" (click)="openModal(monsterModal, mon.slugname, $event);" href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">
+    <img loading="lazy" src="{{imgURL}}monsters/{{mon.slugname}}.webp" alt="{{mon.name}}">
+  </a>
+  <button (click)="openModal(monsterModal, mon.slugname)" class="card-read-more-position" mat-mini-fab color="accent">
+    <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+  </button>
 </div>
 
 <ng-template #monsterModal>
@@ -42,5 +38,5 @@
      <a16-monster slugname="{{monster}}" [showNav]="false"></a16-monster>
   </div>
 </ng-template>
-</ng-container>
+</div>
 </ng-container>

@@ -52,38 +52,33 @@
       </div>
     </form>
   </div>
-<ng-container *ngIf="filteredTraits">
-<div *ngFor="let trait of filteredTraits | async;  trackBy:identify" class="row">
-  <div *ngFor="let trt of trait" class="spacer col-md-5 mx-auto">
-    <div *ngIf="trt" style="justify-content:space-between;" class="card allheight card-body">
-      <div>
-        <div class="flex">
-          <h4 class="card-title"><a (click)="openModal(traitModal, trt.slug); $event.preventDefault();" href="/{{gameURL}}/traits/{{trt.slug}}/{{language}}">{{trt.name}}</a></h4>
-          <div><a href="javascript:void(0)"
-              tooltip="Influences rank. A measure of rarity. This number determines where traits appear." container="true">Grade:</a>
-            {{trt.grade}}
-            <br /><span style="float:right;" class="badge bg-secondary" *ngIf="trt.grade > 50">DLC</span>
-          </div>
-        </div>
-        <p *ngIf="trt.item_set">
-          <i class="atelier atelier-sm atelier-ryza2-material"></i><a href="/{{gameURL}}/items/{{trt.item_set[0].slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{trt.item_set[0].name}}</a>
-        </p>
-        <p>{{trt.desc}}</p>
-        <p *ngIf="trt.note"><b>Note:</b> {{trt.note}}</p>
+<div *ngIf="filteredTraits" class="item-grid">
+<div *ngFor="let trt of filteredTraits | async;  trackBy:identify" class="card card-body">
+  <div style="height:100%;">
+    <div class="flex">
+      <h4 class="card-title"><a (click)="openModal(traitModal, trt.slug, $event);" href="/{{gameURL}}/traits/{{trt.slug}}/{{language}}">{{trt.name}}</a></h4>
+      <div><a href="javascript:void(0)"
+          tooltip="Influences rank. A measure of rarity. This number determines where traits appear." container="true">Grade:</a>
+        {{trt.grade}}
+        <br /><span style="float:right;" class="badge bg-secondary" *ngIf="trt.grade > 50">DLC</span>
       </div>
-        <div class="flex bottom">
-          <i class="trait-color{{trt.trans_atk}}  atelier atelier-np atelier-ryza2-type-attack"></i>
-          <i class="trait-color{{trt.trans_heal}} atelier atelier-np atelier-ryza2-type-heal"></i>
-          <i class="trait-color{{trt.trans_dbf}}  atelier atelier-np atelier-ryza2-type-debuff"></i>
-          <i class="trait-color{{trt.trans_buff}} atelier atelier-np atelier-ryza2-type-buff"></i>
-          <i class="trait-color{{trt.trans_wpn}}  atelier atelier-np atelier-ryza2-type-weapon"></i>
-          <i class="trait-color{{trt.trans_arm}}  atelier atelier-np atelier-ryza2-type-armor"></i>
-          <i class="trait-color{{trt.trans_acc}}  atelier atelier-np atelier-ryza2-type-accessory"></i>
-        </div>
     </div>
+    <p *ngIf="trt.item_set">
+      <i class="atelier atelier-sm atelier-ryza2-material"></i><a routerLink="/{{gameURL}}/items/{{trt.item_set[0].slug}}/{{language}}">{{trt.item_set[0].name}}</a>
+    </p>
+    <p>{{trt.desc}}</p>
+    <p *ngIf="trt.note"><b>Note:</b> {{trt.note}}</p>
+  </div>
+  <div class="flex bottom">
+    <i class="trait-color{{trt.trans_atk}}  atelier atelier-np atelier-ryza2-type-attack"></i>
+    <i class="trait-color{{trt.trans_heal}} atelier atelier-np atelier-ryza2-type-heal"></i>
+    <i class="trait-color{{trt.trans_dbf}}  atelier atelier-np atelier-ryza2-type-debuff"></i>
+    <i class="trait-color{{trt.trans_buff}} atelier atelier-np atelier-ryza2-type-buff"></i>
+    <i class="trait-color{{trt.trans_wpn}}  atelier atelier-np atelier-ryza2-type-weapon"></i>
+    <i class="trait-color{{trt.trans_arm}}  atelier atelier-np atelier-ryza2-type-armor"></i>
+    <i class="trait-color{{trt.trans_acc}}  atelier atelier-np atelier-ryza2-type-accessory"></i>
   </div>
 </div>
-
 <ng-template #traitModal>
   <div class="modal-body">
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -92,5 +87,5 @@
     <a22-trait slug="{{trait}}" [showNav]="false"></a22-trait>
   </div>
 </ng-template>
-</ng-container>
+</div>
 </div>

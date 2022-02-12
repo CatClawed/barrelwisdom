@@ -1,19 +1,16 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Monster } from '@app/interfaces/a22';
 import { A22Service } from '@app/services/a22.service';
-import { HistoryService } from '@app/services/history.service';
-import { ErrorCodeService } from "@app/services/errorcode.service";
+import { SeoService } from '@app/services/seo.service';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { SeoService } from '@app/services/seo.service';
 
 @Component({
     templateUrl: 'a22-monsterlist.component.html',
-    selector: 'a22-monsterlist',
   })
 
   export class A22MonsterlistComponent implements OnInit {
@@ -22,8 +19,6 @@ import { SeoService } from '@app/services/seo.service';
     monsterControl: FormControl;
     error: boolean = false;
     errorCode: string;
-    errorVars: any[];
-    errorMsg: string;
     monster: string = "monsters";
     monsters: Monster[];
     filteredMonsters: Observable<Monster[]>;
@@ -44,12 +39,10 @@ import { SeoService } from '@app/services/seo.service';
     constructor(
       private modalService: BsModalService,
       private router: Router,
-      public historyService: HistoryService,
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private location: Location,
       private a22service: A22Service,
-  
       private seoService: SeoService
     ) { 
       this.monsterControl = new FormControl();
@@ -73,15 +66,6 @@ import { SeoService } from '@app/services/seo.service';
       this.seoTitle = `Monsters - ${this.gameTitle}`;
       this.seoDesc = `The list of monsters in ${this.gameTitle}.`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-  
-      this.pageForm.get('type').valueChanges
-        .subscribe(type => {
-          this.currentType = type;
-        });
-  
-      this.monsterControl.valueChanges.subscribe(search => {
-        search.filtertext = search;
-      });
 
       this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
@@ -93,21 +77,28 @@ import { SeoService } from '@app/services/seo.service';
   
     getMonsters() {
       this.a22service.getMonsterList(this.language)
-      .subscribe(monsters => {
+      .subscribe({next: monsters => {
         this.monsters = monsters;
         this.filteredMonsters = this.pageForm.valueChanges.pipe(
           startWith(null as Observable<Monster[]>),
-          map((search: any) => search ? this.filterT(search.filtertext, this.currentType) : this.monsters.slice())
+          map((search: any) => search ? this.filterT(search.filtertext, search.type) : this.monsters.slice())
         );
       },
-      error => {
+      error: error => {
         this.error = true;
         this.errorCode = `${error.status}`;
-        
-      });
+      }});
     }
   
-    openModal(template: TemplateRef<any>, slug: string) {
+    openModal(template: TemplateRef<any>, slug: string, event?) {
+      if (event) {
+        if(event.ctrlKey) {
+          return;
+        }
+        else {
+          event.preventDefault()
+        }
+      }
       this.monster = slug;
       this.location.go(`${this.gameURL}/monsters/` + slug + "/" + this.language);
       this.modalRef = this.modalService.show(template);
@@ -119,84 +110,65 @@ import { SeoService } from '@app/services/seo.service';
     }
   
     private filterT(value: string, type: string): Monster[] {
-  
-      const filterValue = value.toLowerCase();
       let list: Monster[];
       switch(type) {
-        case "2": {
+        case "2":
             list = this.monsters.filter(mon => mon.montype == 'puni');
-          break;
-        }
-        case "3": {
+            break;
+        case "3":
             list = this.monsters.filter(mon => mon.montype == "weasel");
           break;
-        }
-        case "4": {
+        case "4":
             list = this.monsters.filter(mon => mon.montype == "spirit");
           break;
-        }
-        case "5": {
+        case "5":
             list = this.monsters.filter(mon => mon.montype == "golem");
           break;
-        }
-        case "6": {
+        case "6":
             list = this.monsters.filter(mon => mon.montype == "sheep");
           break;
-        }
-        case "7": {
+        case "7":
             list = this.monsters.filter(mon => mon.montype == "knight");
           break;
-        }
-        case "8": {
+        case "8":
             list = this.monsters.filter(mon => mon.montype == "scorpion");
           break;
-        }
-        case "9": {
+        case "9":
             list = this.monsters.filter(mon => mon.montype == "hedgehog");
           break;
-        }
-        case "10": {
+        case "10":
             list = this.monsters.filter(mon => mon.montype == "wyrm");
           break;
-        }
-        case "11": {
+        case "11":
             list = this.monsters.filter(mon => mon.montype == "roadrunner");
           break;
-        }
-        case "12": {
+        case "12":
             list = this.monsters.filter(mon => mon.montype == "beetle");
           break;
-        }
-        case "13": {
+        case "13":
             list = this.monsters.filter(mon => mon.montype == "shark");
           break;
-        }
-        case "14": {
+        case "14":
             list = this.monsters.filter(mon => mon.size == "Small");
           break;
-        }
-        case "15": {
+        case "15":
             list = this.monsters.filter(mon => mon.size == "Medium");
           break;
-        }
-        case "16": {
+        case "16":
             list = this.monsters.filter(mon => mon.size == "Large");
           break;
-        }
-        case "17": {
+        case "17":
             list = this.monsters.filter(mon => mon.montype == "boss");
           break;
-        }
-        default: {
+        default:
             list = this.monsters; 
           break;
-        }
       }
 
-      if(value.length == 0) {
+      if(!value) {
         return list;
       }
-
+      const filterValue = value.toLowerCase();
       return list.filter(mon => { 
           return mon.name.toLowerCase().includes(filterValue);
         });

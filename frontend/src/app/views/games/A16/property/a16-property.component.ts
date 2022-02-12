@@ -1,9 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute }from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Property } from '@app/interfaces/a16';
 import { A16Service } from '@app/services/a16.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
 
 @Component({
@@ -17,8 +15,6 @@ export class A16PropertyComponent implements OnInit {
   returnUrl: string;
   error: boolean = false;
   errorCode: string;
-  errorVars: any[];
-  errorMsg: string;
   property: Property;
   colset: string;
 
@@ -42,8 +38,6 @@ export class A16PropertyComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private a16service: A16Service,
-    public historyService: HistoryService,
-
     private seoService: SeoService) {
       if(this.route.snapshot.params.property != null) {
       this.slugname = this.route.snapshot.params.property;
@@ -55,7 +49,7 @@ export class A16PropertyComponent implements OnInit {
       this.colset = "col-md-5 mx-auto "
     }
     this.a16service.getProperty(this.slugname, this.language)
-    .subscribe(property => {
+    .subscribe({next: property => {
       this.property = property;
       this.gameTitle = this.a16service.gameTitle[this.language];
       this.gameURL = this.a16service.gameURL;
@@ -66,10 +60,9 @@ export class A16PropertyComponent implements OnInit {
       this.seoDesc = `${this.property.desc}`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
-    error => {
+    error: error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      
-    });
+    }});
   }
 } 

@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute }from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ShopDevelop } from '@app/interfaces/a22';
 import { A22Service } from '@app/services/a22.service';
-import { HistoryService } from '@app/services/history.service';
-import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
 
 @Component({
   templateUrl: 'a22-shopdevelop.component.html',
-  selector: 'a22-shopdevelop',
 })
 export class A22ShopDevelopComponent implements OnInit {
   slug: string;
@@ -17,8 +14,6 @@ export class A22ShopDevelopComponent implements OnInit {
   returnUrl: string;
   error: boolean = false;
   errorCode: string;
-  errorVars: any[];
-  errorMsg: string;
   shopdevelop: ShopDevelop[];
   colset: string;
   language = "";
@@ -34,9 +29,7 @@ export class A22ShopDevelopComponent implements OnInit {
 
 constructor(
     private route: ActivatedRoute,
-    public historyService: HistoryService,
     private a22service: A22Service,
-
     private seoService: SeoService) {
   }
   ngOnInit(): void {
@@ -51,14 +44,13 @@ constructor(
     this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
 
     this.a22service.getShopDevList(this.language)
-    .subscribe(shopdevelop => {
+    .subscribe({next: shopdevelop => {
         this.error = false;
         this.shopdevelop = shopdevelop;
     },
-    error => {
+    error: error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      
-    });
+    }});
   }
 } 

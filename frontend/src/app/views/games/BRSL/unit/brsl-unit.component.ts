@@ -36,14 +36,12 @@ export class BRSLUnitComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private brslservice: BRSLService,
-    public historyService: HistoryService,
-
     private seoService: SeoService) {
   }
   ngOnInit(): void {
     this.language = this.route.snapshot.params.language;
     this.brslservice.getUnit(this.language)
-    .subscribe(unit => {
+    .subscribe({next: unit => {
         this.error = false;
         this.units = unit;
 
@@ -56,10 +54,9 @@ export class BRSLUnitComponent implements OnInit {
         this.seoDesc = `All crafting units in ${this.gameTitle}.`
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
-    error => {
+    error: error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      
-    });
+    }});
   }
 } 

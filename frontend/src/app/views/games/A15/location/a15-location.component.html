@@ -28,8 +28,8 @@
     <th>Area</th>
   </tr>
   <tr *ngFor="let relic of location.relic_set">
-    <td><a href="/{{gameURL}}/items/{{relic.item.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{relic.item.name}}</a></td>
-    <td><ul class="hide-bullets"><li *ngFor="let d of relic.item.disassembly_set[0].dis"><a href="/{{gameURL}}/items/{{d.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{d.name}}</a></li></ul></td>
+    <td><a routerLink="/{{gameURL}}/items/{{relic.item.slugname}}/{{language}}">{{relic.item.name}}</a></td>
+    <td><ul class="hide-bullets"><li *ngFor="let d of relic.item.disassembly_set[0].dis"><a routerLink="/{{gameURL}}/items/{{d.slugname}}/{{language}}">{{d.name}}</a></li></ul></td>
     <td><ul class="hide-bullets"><li *ngFor="let a of relic.area">{{a.name}}</li></ul></td>
   </tr>
 </table>
@@ -43,7 +43,7 @@
     <ul class="hide-bullets">
      <div style="column-count: 3;">
       <li *ngFor="let mon of location.strong">
-        <a href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{mon.name}}</a> ({{mon.level}})
+        <a routerLink="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">{{mon.name}}</a> ({{mon.level}})
       </li>
       </div>
     </ul>
@@ -64,14 +64,14 @@
     <tr>
       <td *ngIf="area.items">
         <ul class="hide-bullets">
-          <li *ngFor="let it of area.items"><a href="/{{gameURL}}/items/{{it.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{it.name}}</a></li>
-          <ng-container *ngIf="area.rare"><li *ngFor="let it of area.rare"><a href="/{{gameURL}}/items/{{it.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{it.name}}</a> (Rare)</li></ng-container>
-          <ng-container *ngIf="area.maxitem"><li *ngFor="let it of area.maxitem"><a href="/{{gameURL}}/items/{{it.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{it.name}}</a> (Max)</li></ng-container>
+          <li *ngFor="let it of area.items"><a routerLink="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a></li>
+          <ng-container *ngIf="area.rare"><li *ngFor="let it of area.rare"><a routerLink="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a> (Rare)</li></ng-container>
+          <ng-container *ngIf="area.maxitem"><li *ngFor="let it of area.maxitem"><a routerLink="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a> (Max)</li></ng-container>
         </ul>
       </td>
       <td *ngIf="area.monsters">
         <ul class="hide-bullets">
-          <li *ngFor="let it of area.monsters"><a href="/{{gameURL}}/monsters/{{it.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{it.name}}</a></li>
+          <li *ngFor="let it of area.monsters"><a routerLink="/{{gameURL}}/monsters/{{it.slugname}}/{{language}}">{{it.name}}</a></li>
         </ul>
       </td>
       <td *ngIf="area.fieldevent">

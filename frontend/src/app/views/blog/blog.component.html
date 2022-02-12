@@ -8,9 +8,8 @@
             <i class="far fa-calendar-alt"></i> <time class="updated" dateTime="{{blog.modified}}"> {{blog.modified | date:'longDate' }} </time>
         </span>
         <span style="display: inline-block;">
-            <i class="fas fa-user"></i>
-            <a *ngIf="blog.authorlock" class="url" (click)="historyService.hrefClicked($event);"  href="/user/{{blog.author[0].username}}"> {{blog.author[0].username}} </a>
-            <i *ngIf="!blog.authorlock"> Community Post</i>
+            <i *ngIf="blog.authorlock" class="fas fa-user"></i>
+            <a *ngIf="blog.authorlock" class="url" routerLink="/user/{{blog.author[0].username}}"> {{blog.author[0].username}} </a>
         </span>
         <span *ngIf="allowedToEdit" style="display: inline-block;">
             <i class="fas fa-edit"></i>

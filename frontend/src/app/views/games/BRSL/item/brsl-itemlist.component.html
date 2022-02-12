@@ -35,25 +35,21 @@
       </div>
     </form>
   </div>
-<ng-container *ngIf="filteredItems">
-<div *ngFor="let item of filteredItems | async;  trackBy:identify" class="row">
-  <div *ngFor="let item of item" class="spacer col-md-5 mx-auto">
-    <div *ngIf="item" class="card card-body allheight">
-      <h4 class="card-title card-icon-space">
-        <a (click)="openModal(itemModal, item.slug); $event.preventDefault();" href="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>    
-      </h4>
-      <span *ngIf="item.isDLC" class="card-icon-position badge bg-secondary">DLC</span>
-      <a class="card-item-display" (click)="openModal(itemModal, item.slug); $event.preventDefault();" href="/{{gameURL}}/items/{{item.slug}}/{{language}}">
-        <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
-      </a>
-      <ul style="list-style-type:none;padding-left:0;">
-        <li *ngFor="let cat of item.category">{{cat.name}}</li>
-      </ul>
-      <button (click)="openModal(itemModal, item.slug)" class="card-read-more-position" mat-mini-fab color="accent">
-        <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
-      </button>
-    </div>
-  </div>
+<div *ngIf="filteredItems" class="item-grid">
+<div *ngFor="let item of filteredItems | async; trackBy:identify" class="card card-body">
+  <h4 class="card-title card-icon-space">
+    <a (click)="openModal(itemModal, item.slug, $event);" href="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>    
+  </h4>
+  <span *ngIf="item.isDLC" class="card-icon-position badge bg-secondary">DLC</span>
+  <a class="card-item-display" (click)="openModal(itemModal, item.slug, $event);" href="/{{gameURL}}/items/{{item.slug}}/{{language}}">
+    <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
+  </a>
+  <ul style="list-style-type:none;padding-left:0;">
+    <li *ngFor="let cat of item.category">{{cat.name}}</li>
+  </ul>
+  <button (click)="openModal(itemModal, item.slug)" class="card-read-more-position" mat-mini-fab color="accent">
+    <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+  </button>
 </div>
 
 <ng-template #itemModal>
@@ -64,5 +60,5 @@
      <brsl-item slug="{{item}}" [showNav]="false"></brsl-item>
   </div>
 </ng-template>
-</ng-container>
+</div>
 </ng-container>

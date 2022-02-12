@@ -45,7 +45,7 @@
           <td>
             <ul>
               <li *ngFor="let data of line.data">
-                <a *ngIf="data.item"  href="/{{gameURL}}/items/{{data.item.slug}}" (click)="historyService.hrefClicked($event)">{{data.item.name}}</a>
+                <a *ngIf="data.item"  routerLink="/{{gameURL}}/items/{{data.item.slug}}/{{language}}">{{data.item.name}}</a>
                 <span *ngIf="data.category">{{data.category.name}}</span>
                 x{{data.num}}
                 <span *ngIf="data.effect"> ({{data.effect.name}})</span>

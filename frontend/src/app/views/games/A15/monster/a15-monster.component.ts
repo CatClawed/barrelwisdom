@@ -1,9 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute }from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { MonsterFull } from '@app/interfaces/a15';
 import { A15Service } from '@app/services/a15.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
 
 @Component({
@@ -11,14 +9,11 @@ import { SeoService } from '@app/services/seo.service';
   selector: 'a15-monster',
 })
 export class A15MonsterComponent implements OnInit {
-
   loading = false;
   submitted = false;
   returnUrl: string;
   error: boolean = false;
   errorCode: string;
-  errorVars: any[];
-  errorMsg: string;
   monster: MonsterFull;
   colset: string;
 
@@ -42,8 +37,6 @@ export class A15MonsterComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private a15service: A15Service,
-    public historyService: HistoryService,
-
     private seoService: SeoService) {
       if(this.route.snapshot.params.monster != null) {
       this.slugname = this.route.snapshot.params.monster;
@@ -55,7 +48,7 @@ export class A15MonsterComponent implements OnInit {
       this.colset = "col-md-9 mx-auto "
     }
     this.a15service.getMonster(this.slugname, this.language)
-    .subscribe(monster => {
+    .subscribe({next: monster => {
         this.error = false;
         this.monster = monster;
 
@@ -69,10 +62,9 @@ export class A15MonsterComponent implements OnInit {
         this.seoImage = `${this.imgURL}monsters/${this.monster.slugname}.webp`
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
-    error => {
+    error: error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      
-    });
+    }});
   }
 } 

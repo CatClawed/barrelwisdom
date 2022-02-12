@@ -10,7 +10,7 @@
             <tr class="table-dark-center"><th style="border:none;" colspan=2>Items in Category</th></tr>
             <tr *ngFor="let item of category.items">
                 <td>
-                    <a href="/{{gameURL}}/items/{{item.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.name}}</a>
+                    <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
                     <span *ngIf="item.isDLC" style="margin-left: 0.4em;" class="badge bg-secondary badge-list">DLC</span>
                 </td>
                 <td>
@@ -28,7 +28,7 @@
             <tr class="table-dark-center"><th style="border:none;" colspan=2>Items Using Category</th></tr>
             <tr *ngFor="let item of category.ingredients">
                 <td>
-                    <a href="/{{gameURL}}/items/{{item.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{item.name}}</a>
+                    <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
                     <span *ngIf="item.isDLC" style="margin-left: 0.4em;" class="badge bg-secondary badge-list">DLC</span>
                 </td>
                 <td>

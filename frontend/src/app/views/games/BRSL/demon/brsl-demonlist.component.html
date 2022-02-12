@@ -14,22 +14,18 @@
       </div>
     </form>
   </div>
-<ng-container *ngIf="filteredDemons">
-<div *ngFor="let demon of filteredDemons | async;  trackBy:identify" class="row">
-  <div *ngFor="let mon of demon" class="spacer col-md-5 mx-auto">
-    <div *ngIf="mon" class="card card-body allheight">
-        <h4 class="card-title card-icon-space">
-          <a (click)="openModal(demonModal, mon.slug); $event.preventDefault();" href="/{{gameURL}}/demons/{{mon.slug}}/{{language}}">{{mon.name}}</a>    
-        </h4>
-        <span *ngIf="mon.isDLC" class="card-icon-position badge bg-secondary">DLC</span>
-      <a class="card-item-display" (click)="openModal(demonModal, mon.slug); $event.preventDefault();" href="/{{gameURL}}/demons/{{mon.slug}}/{{language}}">
-        <img loading="lazy" src="{{imgURL}}demons/{{mon.slug}}.webp" alt="{{mon.name}}">
-      </a>
-      <button (click)="openModal(demonModal, mon.slug)" class="card-read-more-position" mat-mini-fab color="accent">
-        <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
-      </button>
-    </div>
-  </div>
+<div *ngIf="filteredDemons" class="item-grid">
+<div *ngFor="let mon of filteredDemons | async; trackBy:identify" class="card card-body">
+  <h4 class="card-title card-icon-space">
+    <a (click)="openModal(demonModal, mon.slug, $event);" href="/{{gameURL}}/demons/{{mon.slug}}/{{language}}">{{mon.name}}</a>    
+  </h4>
+  <span *ngIf="mon.isDLC" class="card-icon-position badge bg-secondary">DLC</span>
+  <a class="card-item-display" (click)="openModal(demonModal, mon.slug, $event);" href="/{{gameURL}}/demons/{{mon.slug}}/{{language}}">
+    <img loading="lazy" src="{{imgURL}}demons/{{mon.slug}}.webp" alt="{{mon.name}}">
+  </a>
+  <button (click)="openModal(demonModal, mon.slug)" class="card-read-more-position" mat-mini-fab color="accent">
+    <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+  </button>
 </div>
 
 <ng-template #demonModal>
@@ -40,5 +36,5 @@
      <brsl-demon slug="{{demon}}" [showNav]="false"></brsl-demon>
   </div>
 </ng-template>
-</ng-container>
+</div>
 </ng-container>

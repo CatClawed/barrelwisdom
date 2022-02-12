@@ -37,16 +37,16 @@ export class NavigationService {
             }
             if(section != this.previousSection) {
               this.previousSection = section;
-            this.getNav(section).subscribe(data => {
+            this.getNav(section).subscribe({next: data => {
               this.n = JSON.parse(data.data);
               this.navSubject.next(this.n);
             },
-            error => {
+            error: () => {
               this.getNav("blog").subscribe(data => {
                 this.n = JSON.parse(data.data);
                 this.navSubject.next(this.n);
               });
-            });
+            }});
           }
         }});
   }

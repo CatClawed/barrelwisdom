@@ -22,12 +22,9 @@ import { SeoService } from '@app/services/seo.service';
     effectControl: FormControl;
     error: boolean = false;
     errorCode: string;
-    errorVars: any[];
-    errorMsg: string;
     effect: string = "effect";
     effects: Effect[];
     filteredEffects: Observable<Effect[]>;
-    searchstring = "";
     language = "";
     config: ModalOptions = { class: "col-md-5 mx-auto" };
   
@@ -41,12 +38,12 @@ import { SeoService } from '@app/services/seo.service';
     imgURL: string;
   
     constructor(
-      private modalService: BsModalService, private router: Router, public historyService: HistoryService,
+      private modalService: BsModalService,
+      private router: Router,
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private location: Location,
       private a15service: A15Service,
-  
       private seoService: SeoService
     ) { 
       this.effectControl = new FormControl();
@@ -59,13 +56,7 @@ import { SeoService } from '@app/services/seo.service';
     ngOnInit(): void {
   
       this.language = this.route.snapshot.params.language;
-  
-      this.effectControl.valueChanges.subscribe(search => {
-        search.filtertext = search;
-      });
-  
       this.getEffects();
-      
       
       this.gameTitle = this.a15service.gameTitle[this.language];
       this.gameURL = this.a15service.gameURL;
@@ -86,18 +77,17 @@ import { SeoService } from '@app/services/seo.service';
   
     getEffects() {
       this.a15service.getEffectList(this.language)
-      .subscribe(effects => {
+      .subscribe({next: effects => {
         this.effects = effects;
         this.filteredEffects = this.pageForm.valueChanges.pipe(
           startWith(null as Observable<Effect[]>),
           map((search: any) => search ? this.filterT(search.filtertext) : this.effects.slice())
         );
       },
-      error => {
+      error: error => {
         this.error = true;
         this.errorCode = `${error.status}`;
-        
-      });
+      }});
     }
   
     openModal(template: TemplateRef<any>, slug: string, event?) {
@@ -120,14 +110,11 @@ import { SeoService } from '@app/services/seo.service';
     }
   
     private filterT(value: string): Effect[] {
-  
-      const filterValue = value.toLowerCase();
       let effectlist: Effect[] = this.effects;
-
-      if(value.length == 0) {
+      if(!value) {
         return effectlist;
       }
-
+      const filterValue = value.toLowerCase();
       return effectlist.filter(effect => { 
           return (effect.desc) ? effect.name.toLowerCase().includes(filterValue) ||  effect.desc.toLowerCase().includes(filterValue) : effect.name.toLowerCase().includes(filterValue)
         });
@@ -136,6 +123,6 @@ import { SeoService } from '@app/services/seo.service';
     get f() { return this.pageForm.controls; }
 
     identify(index, item){
-      return item.slug; 
+      return item.slugname;
    }
   }

@@ -1,19 +1,16 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { MonsterList } from '@app/interfaces/a16';
 import { A16Service } from '@app/services/a16.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from "@app/services/errorcode.service";
+import { SeoService } from '@app/services/seo.service';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { SeoService } from '@app/services/seo.service';
 
 @Component({
     templateUrl: 'a16-monsterlist.component.html',
-    selector: 'a16-monsterlist',
   })
 
   export class A16MonsterlistComponent implements OnInit {
@@ -22,12 +19,9 @@ import { SeoService } from '@app/services/seo.service';
     monsterControl: FormControl;
     error: boolean = false;
     errorCode: string;
-    errorVars: any[];
-    errorMsg: string;
     monster: string = "monsters";
     monsters: MonsterList[];
     filteredMonsters: Observable<MonsterList[]>;
-    searchstring = "";
     language = "";
     config: ModalOptions = { class: "col-md-5 mx-auto" };
   
@@ -41,12 +35,12 @@ import { SeoService } from '@app/services/seo.service';
     imgURL: string;
   
     constructor(
-      private modalService: BsModalService, private router: Router, public historyService: HistoryService,
+      private modalService: BsModalService,
+      private router: Router,
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private location: Location,
       private a16service: A16Service,
-  
       private seoService: SeoService
     ) { 
       this.monsterControl = new FormControl();
@@ -84,18 +78,17 @@ import { SeoService } from '@app/services/seo.service';
   
     getMonsters() {
       this.a16service.getMonsterList(this.language)
-      .subscribe(monsters => {
+      .subscribe({next: monsters => {
         this.monsters = monsters;
         this.filteredMonsters = this.pageForm.valueChanges.pipe(
           startWith(null as Observable<MonsterList[]>),
           map((search: any) => search ? this.filterT(search.filtertext) : this.monsters.slice())
         );
       },
-      error => {
+      error: error => {
         this.error = true;
         this.errorCode = `${error.status}`;
-        
-      });
+      }});
     }
   
     openModal(template: TemplateRef<any>, slug: string, event?) {
@@ -118,14 +111,11 @@ import { SeoService } from '@app/services/seo.service';
     }
 
     private filterT(value: string): MonsterList[] {
-  
-      const filterValue = value.toLowerCase();
       let list: MonsterList[] = this.monsters;
-
-      if(value.length == 0) {
+      if(!value) {
         return list;
       }
-
+      const filterValue = value.toLowerCase();
       return list.filter(mon => { 
           return mon.name.toLowerCase().includes(filterValue);
         });
@@ -134,6 +124,6 @@ import { SeoService } from '@app/services/seo.service';
     get f() { return this.pageForm.controls; }
 
     identify(index, item){
-      return item.slug; 
+      return item.slugname;
    }
   }

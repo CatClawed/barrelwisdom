@@ -28,22 +28,22 @@
     <tr>
       <td *ngIf="area.ingredients">
         <ul class="hide-bullets">
-          <li *ngFor="let it of area.ingredients"><a href="/{{gameURL}}/items/{{it.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{it.name}}</a></li>
+          <li *ngFor="let it of area.ingredients"><a routerLink="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a></li>
         </ul>
       </td>
       <td *ngIf="area.rare">
         <ul class="hide-bullets">
-          <li *ngFor="let it of area.rare"><a href="/{{gameURL}}/items/{{it.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{it.name}}</a></li>
+          <li *ngFor="let it of area.rare"><a routerLink="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a></li>
         </ul>
       </td>
       <td *ngIf="area.relics">
         <ul class="hide-bullets">
-          <li *ngFor="let it of area.relics"><a href="/{{gameURL}}/items/{{it.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{it.name}}</a></li>
+          <li *ngFor="let it of area.relics"><a routerLink="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a></li>
         </ul>
       </td>
       <td *ngIf="area.monsters">
         <ul class="hide-bullets">
-          <li *ngFor="let it of area.monsters"><a href="/{{gameURL}}/monsters/{{it.slugname}}/{{language}}" (click)="historyService.hrefClicked($event)">{{it.name}}</a></li>
+          <li *ngFor="let it of area.monsters"><a routerLink="/{{gameURL}}/monsters/{{it.slugname}}/{{language}}">{{it.name}}</a></li>
         </ul>
       </td>
     </tr>

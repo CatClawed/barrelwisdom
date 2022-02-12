@@ -26,12 +26,12 @@
     <tr>
       <td *ngIf="area.items">
         <ul class="hide-bullets">
-          <li *ngFor="let it of area.items"><a href="/{{gameURL}}/items/{{it.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{it.name}}</a></li>
+          <li *ngFor="let it of area.items"><a routerLink="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a></li>
         </ul>
       </td>
       <td *ngIf="area.demons">
         <ul class="hide-bullets">
-          <li *ngFor="let it of area.demons"><a href="/{{gameURL}}/demons/{{it.demon.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{it.demon.name}}</a><span *ngIf="it.once"> x1</span></li>
+          <li *ngFor="let it of area.demons"><a routerLink="/{{gameURL}}/demons/{{it.demon.slug}}/{{language}}">{{it.demon.name}}</a><span *ngIf="it.once"> x1</span></li>
         </ul>
       </td>
     </tr>

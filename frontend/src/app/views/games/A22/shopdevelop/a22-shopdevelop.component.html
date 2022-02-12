@@ -13,15 +13,15 @@
         <th>Bonus</th>
       </tr>
       <tr *ngFor="let dev of shopdevelop">
-        <td><a href="/{{gameURL}}/items/{{dev.item.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{dev.item.name}}</a></td>
+        <td><a routerLink="/{{gameURL}}/items/{{dev.item.slug}}/{{language}}">{{dev.item.name}}</a></td>
         <td>
-          <a href="/{{gameURL}}/categories/{{dev.cat1.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{dev.cat1.name}}</a>
-          <br *ngIf="dev.cat2" /> <a *ngIf="dev.cat2" href="/{{gameURL}}/categories/{{dev.cat2.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{dev.cat2.name}}</a>
+          <a routerLink="/{{gameURL}}/categories/{{dev.cat1.slug}}/{{language}}">{{dev.cat1.name}}</a>
+          <br *ngIf="dev.cat2" /> <a *ngIf="dev.cat2" routerLink="/{{gameURL}}/categories/{{dev.cat2.slug}}/{{language}}">{{dev.cat2.name}}</a>
         </td>
         <td>
-          <a *ngIf="dev.addProd" href="/{{gameURL}}/items/{{dev.addProd.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{dev.addProd.name}}</a>
+          <a *ngIf="dev.addProd" routerLink="/{{gameURL}}/items/{{dev.addProd.slug}}/{{language}}">{{dev.addProd.name}}</a>
           <br *ngIf="dev.addProd && dev.addCat" />
-          <a *ngIf="dev.addCat" href="/{{gameURL}}/categories/{{dev.addCat.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{dev.addCat.name}}</a>
+          <a *ngIf="dev.addCat" routerLink="/{{gameURL}}/categories/{{dev.addCat.slug}}/{{language}}">{{dev.addCat.name}}</a>
         </td>
       </tr>
     </table>

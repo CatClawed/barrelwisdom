@@ -57,13 +57,13 @@ export class LoginComponent {
     this.loading = true;
     this.authenticationService.login(this.f.username.value, this.f.password.value)
         .pipe(first())
-        .subscribe(
+        .subscribe({next: 
             () => {
               this.router.navigateByUrl(this.returnUrl);
             },
-            error => {
+            error: error => {
                 this.loading = false;
                 this.errorMsg = this.errorCodeService.errorMessage(error);
-            });
+            }});
     }
 }

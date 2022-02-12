@@ -19,20 +19,16 @@
     <span class="sr-only">Loading...</span>
   </div>
 </div>
-<ng-container *ngIf="filteredEffects">
-<div *ngFor="let effect of filteredEffects | async;  trackBy:identify" class="row">
-  <div *ngFor="let eff of effect" class="spacer col-md-5 mx-auto">
-    <div *ngIf="eff" class="card card-body allheight">
-      <h4 class="card-title"><a (click)="openModal(effectModal, eff.slugname); $event.preventDefault();" href="/{{gameURL}}/effects/{{eff.slugname}}/{{language}}">{{eff.name}}</a></h4>
-      <p *ngIf="eff.desc">{{eff.desc}}</p>
-      <ul *ngIf="eff.effectline_set">
-        <li *ngIf="eff.effectline_set.length >= 1"><a href="/{{gameURL}}/items/{{eff.effectline_set[0].slugname}}" (click)="historyService.hrefClicked($event)">{{eff.effectline_set[0].name}}</a></li>
-        <li *ngIf="eff.effectline_set.length >= 2"><a href="/{{gameURL}}/items/{{eff.effectline_set[1].slugname}}" (click)="historyService.hrefClicked($event)">{{eff.effectline_set[1].name}}</a></li>
-        <li *ngIf="eff.effectline_set.length >= 3"><a href="/{{gameURL}}/items/{{eff.effectline_set[2].slugname}}" (click)="historyService.hrefClicked($event)">{{eff.effectline_set[2].name}}</a></li>
-        <li *ngIf="eff.effectline_set.length >= 4"><a (click)="openModal(effectModal, eff.slugname); $event.preventDefault();" href="/{{gameURL}}/effects/{{eff.slugname}}/{{language}}">See more...</a></li>
-      </ul>
-    </div>
-  </div>
+<div *ngIf="filteredEffects" class="item-grid">
+<div *ngFor="let eff of filteredEffects | async;  trackBy:identify" class="card card-body">
+  <h4 class="card-title"><a (click)="openModal(effectModal, eff.slugname, $event);" href="/{{gameURL}}/effects/{{eff.slugname}}/{{language}}">{{eff.name}}</a></h4>
+  <p *ngIf="eff.desc">{{eff.desc}}</p>
+  <ul *ngIf="eff.effectline_set">
+    <li *ngIf="eff.effectline_set.length >= 1"><a routerLink="/{{gameURL}}/items/{{eff.effectline_set[0].slugname}}">{{eff.effectline_set[0].name}}</a></li>
+    <li *ngIf="eff.effectline_set.length >= 2"><a routerLink="/{{gameURL}}/items/{{eff.effectline_set[1].slugname}}">{{eff.effectline_set[1].name}}</a></li>
+    <li *ngIf="eff.effectline_set.length >= 3"><a routerLink="/{{gameURL}}/items/{{eff.effectline_set[2].slugname}}">{{eff.effectline_set[2].name}}</a></li>
+    <li *ngIf="eff.effectline_set.length >= 4"><a (click)="openModal(effectModal, eff.slugname, $event);" href="/{{gameURL}}/effects/{{eff.slugname}}/{{language}}">See more...</a></li>
+  </ul>
 </div>
 
 <ng-template #effectModal>
@@ -43,5 +39,5 @@
      <a15-effect slugname="{{effect}}" [showNav]="false"></a15-effect>
   </div>
 </ng-template>
-</ng-container>
+</div>
 </ng-container>

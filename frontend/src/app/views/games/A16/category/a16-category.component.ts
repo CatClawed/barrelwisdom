@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute }from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CategoryData } from '@app/interfaces/a16';
 import { A16Service } from '@app/services/a16.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
 
 @Component({
   templateUrl: 'a16-category.component.html',
-  selector: 'a16-category',
 })
 export class A16CategoryComponent implements OnInit {
   slugname: string;
@@ -17,8 +14,6 @@ export class A16CategoryComponent implements OnInit {
   returnUrl: string;
   error: boolean = false;
   errorCode: string;
-  errorVars: any[];
-  errorMsg: string;
   category: CategoryData;
   colset: string;
   language = "";
@@ -35,15 +30,13 @@ export class A16CategoryComponent implements OnInit {
 constructor(
     private route: ActivatedRoute,
     private a16service: A16Service,
-    public historyService: HistoryService,
-
     private seoService: SeoService) { }
   ngOnInit(): void {
     this.slugname = this.route.snapshot.params.category;
     this.language = this.route.snapshot.params.language;
 
     this.a16service.getCategory(this.slugname, this.language)
-    .subscribe(category => {
+    .subscribe({next: category => {
         this.error = false;
         this.category = category;
 
@@ -56,10 +49,9 @@ constructor(
         this.seoDesc = `All items in ${this.category.name}`
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
-    error => {
+    error: error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      
-    });
+    }});
   }
 } 

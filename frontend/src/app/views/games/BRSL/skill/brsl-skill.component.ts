@@ -1,16 +1,13 @@
+import { Location, ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute }from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Skill } from '@app/interfaces/brsl';
 import { BRSLService } from '@app/services/brsl.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
-import { ViewportScroller, Location } from '@angular/common';
 import { first } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'brsl-skill.component.html',
-  selector: 'brsl-skill',
 })
 export class BRSLSkillComponent implements OnInit {
 
@@ -38,8 +35,6 @@ export class BRSLSkillComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private brslservice: BRSLService,
-    public historyService: HistoryService,
-
     private seoService: SeoService,
     private viewportScroller: ViewportScroller,
     private loc: Location) {
@@ -47,7 +42,7 @@ export class BRSLSkillComponent implements OnInit {
   ngOnInit(): void {
     this.language = this.route.snapshot.params.language;
     this.brslservice.getSkillList(this.language)
-    .subscribe(skill => {
+    .subscribe({next: skill => {
         this.error = false;
         this.skills = skill;
 
@@ -60,11 +55,10 @@ export class BRSLSkillComponent implements OnInit {
         this.seoDesc = `All skills in ${this.gameTitle}.`
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
-    error => {
+    error: error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      
-    });
+    }});
   }
   ngAfterViewInit(): void {
     this.route.fragment.pipe(

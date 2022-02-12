@@ -1,18 +1,14 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
-
 import { BlogPaginator } from '@app/interfaces/blog';
 import { BlogService } from '@app/services/blog.service';
-import { ErrorCodeService } from "@app/services/errorcode.service";
-import { TagService } from '@app/services/tag.service';
 import { SeoService } from '@app/services/seo.service';
-import { HistoryService} from '@app/services/history.service';
+import { TagService } from '@app/services/tag.service';
 
 @Component({
   templateUrl: 'home.component.html'
 })
-
 
 export class HomeComponent implements OnInit {
   blog: BlogPaginator;
@@ -21,7 +17,6 @@ export class HomeComponent implements OnInit {
   pagecount: number;
   error: boolean = false;
   errorCode: string;
-  errorVars: any[];
   tagUrl: string;
   tagName: string;
   tagID: number;
@@ -30,10 +25,8 @@ export class HomeComponent implements OnInit {
     private route: ActivatedRoute,
     private blogService: BlogService,
     private location: Location,
-
     private tagService: TagService,
     private seoService: SeoService,
-    public historyService: HistoryService
   ) { }
 
   ngOnInit(): void {
@@ -57,16 +50,15 @@ export class HomeComponent implements OnInit {
       const tag = this.route.snapshot.params.tagname;
       this.tagUrl = `tag/${tag}/`;
       this.tagService.getTagByName(tag)
-        .subscribe(tag => {
+        .subscribe({next: tag => {
           this.tagName = tag.name;
           this.tagID = tag.id;
           this.getBlog(this.path, this.limit);
         },
-        error => {
+        error: error => {
           this.error = true;
           this.errorCode = `${error.status}`;
-          
-        });
+        }});
     }
     else {
       this.getBlog(this.path, this.limit);
@@ -79,15 +71,13 @@ export class HomeComponent implements OnInit {
       tag = `${this.tagID}`;
     }
     this.blogService.getMainPageBlogs(num, limit, tag)
-      .subscribe(blog => {
+      .subscribe({next: blog => {
         this.blog = blog;
       },
-        error => {
+        error: error => {
           this.error = true;
           this.errorCode = `${error.status}`;
-          
-        }
-      );
+        }});
   }
 
   setPagecount(num: number): void {

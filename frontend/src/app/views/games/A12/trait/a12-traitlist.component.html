@@ -41,7 +41,7 @@
 </div>
 <div class="item-grid">
  <div *ngFor="let trait of filteredTraits | async; trackBy:identify" style="justify-content:space-between;" class="card card-body">
-    <div>
+    <div style="height:100%;">
       <div class="flex">
         <h4 class="card-title"><a (click)="openModal(traitModal, trait.slugname, $event);" href="/{{gameURL}}/traits/{{trait.slugname}}/{{language}}">{{trait.name}}</a></h4>
         <b *ngIf="trait.cost">Cost {{trait.cost}}</b>

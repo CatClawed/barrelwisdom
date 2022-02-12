@@ -139,22 +139,18 @@ import { map, startWith } from 'rxjs/operators';
           list = list.filter(item => item.elementvalue >= elementV);
       }
       switch(element) {
-          case "Fire": {
+          case "Fire":
               list = list.filter(item => item.fire)
               break;
-          }
-          case "Ice": {
+          case "Ice":
             list = list.filter(item => item.ice)
             break;
-          }
-          case "Lightning": {
+          case "Lightning":
               list = list.filter(item => item.lightning)
               break;
-          }
-          case "Wind": {
+          case "Wind":
               list = list.filter(item => item.wind)
               break;
-          }
       }
 
       if(ingt) {

@@ -1,19 +1,16 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Property } from '@app/interfaces/a16';
 import { A16Service } from '@app/services/a16.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from "@app/services/errorcode.service";
+import { SeoService } from '@app/services/seo.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { SeoService } from '@app/services/seo.service';
 
 @Component({
   templateUrl: 'a16-propertylist.component.html',
-  selector: 'a16-propertylist',
 })
 export class A16PropertylistComponent implements OnInit {
   modalRef: BsModalRef;
@@ -21,13 +18,9 @@ export class A16PropertylistComponent implements OnInit {
   propertyControl: FormControl;
   error: boolean = false;
   errorCode: string;
-  errorVars: any[];
-  errorMsg: string;
   property: string = "property";
   properties: Property[];
   filteredProperties: Observable<Property[]>;
-  currentTransfer: string = "1";
-  searchstring = "";
   language = "";
 
   seoTitle: string;
@@ -39,12 +32,12 @@ export class A16PropertylistComponent implements OnInit {
   imgURL: string;
 
   constructor(
-    private modalService: BsModalService, private router: Router, public historyService: HistoryService,
+    private modalService: BsModalService,
+    private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private location: Location,
     private a16service: A16Service,
-
     private seoService: SeoService) { 
     this.propertyControl = new FormControl();
 
@@ -78,18 +71,17 @@ export class A16PropertylistComponent implements OnInit {
 
   getProperties() {
     this.a16service.getPropertyList(this.language)
-    .subscribe(properties => {
+    .subscribe({next: properties => {
       this.properties = properties;
       this.filteredProperties = this.pageForm.valueChanges.pipe(
         startWith(null as Observable<Property[]>),
         map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.properties.slice())
       );
     },
-    error => {
+    error: error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      
-    });
+    }});
   }
 
   openModal(template: TemplateRef<any>, slug: string, event?) {
@@ -112,39 +104,36 @@ export class A16PropertylistComponent implements OnInit {
   }
 
   private filterT(value: string, transfer: string): Property[] {
-
-    const filterValue = value.toLowerCase();
     let propertylist: Property[] = this.properties;
     switch(transfer) {
-      case "2": {
+      case "2":
         propertylist = this.properties.filter(property => property.bomb == true);
         break;
-      }
-      case "3": {
+      case "3":
         propertylist = this.properties.filter(property => property.heal == true);
         break;
-      }
-      case "5": {
+      case "5":
         propertylist = this.properties.filter(property => property.weapon == true);
         break;
-      }
-      case "6": {
+      case "6":
         propertylist = this.properties.filter(property => property.armor == true);
         break;
-      }
-      case "7": {
+      case "7":
         propertylist = this.properties.filter(property => property.accessory == true);
         break;
-      }
     }
-    return propertylist.filter(property => {
-      return property.name.toLowerCase().includes(filterValue) || property.desc.toLowerCase().includes(filterValue)
-    });
+    if(value) {
+      const filterValue = value.toLowerCase();
+      return propertylist.filter(property => {
+        return property.name.toLowerCase().includes(filterValue) || property.desc.toLowerCase().includes(filterValue)
+      });
+    }
+    return propertylist;
   } 
 
   get f() { return this.pageForm.controls; }
 
     identify(index, item){
-      return item.slug; 
+      return item.slugname;
    }
   }

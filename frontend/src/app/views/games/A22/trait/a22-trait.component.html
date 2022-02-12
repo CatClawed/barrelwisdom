@@ -13,7 +13,7 @@
     </div>
   </div>
   <p *ngIf="trait.item_set">
-    <i class="atelier atelier-sm atelier-ryza2-material"></i><a href="/{{gameURL}}/items/{{trait.item_set[0].slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{trait.item_set[0].name}}</a>
+    <i class="atelier atelier-sm atelier-ryza2-material"></i><a routerLink="/{{gameURL}}/items/{{trait.item_set[0].slug}}/{{language}}">{{trait.item_set[0].name}}</a>
   </p>
   <p>{{trait.desc}}</p>
   <p *ngIf="trait.note"><b>Note:</b> {{trait.note}}</p>

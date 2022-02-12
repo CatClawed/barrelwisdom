@@ -21,7 +21,7 @@
     <p>{{set.effect.desc}}</p>
     <ul>
       <li *ngFor="let facility of set.facilities">
-        <a href="/{{gameURL}}/facilities/{{facility.slug}}" (click)="historyService.hrefClicked($event)">{{facility.name}}</a>
+        <a routerLink="/{{gameURL}}/facilities/{{facility.slug}}/{{language}}">{{facility.name}}</a>
       </li>
     </ul>
   </div>

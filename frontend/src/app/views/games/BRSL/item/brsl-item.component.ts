@@ -1,9 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute }from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ItemFull } from '@app/interfaces/brsl';
 import { BRSLService } from '@app/services/brsl.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
 
 @Component({
@@ -17,8 +15,6 @@ export class BRSLItemComponent implements OnInit {
   returnUrl: string;
   error: boolean = false;
   errorCode: string;
-  errorVars: any[];
-  errorMsg: string;
   item: ItemFull;
   colset: string;
 
@@ -44,8 +40,6 @@ export class BRSLItemComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private brslservice: BRSLService,
-    public historyService: HistoryService,
-
     private seoService: SeoService) {
       if(this.route.snapshot.params.item != null) {
       this.slug = this.route.snapshot.params.item;
@@ -57,7 +51,7 @@ export class BRSLItemComponent implements OnInit {
       this.colset = "col-md-9 mx-auto "
     }
     this.brslservice.getItem(this.slug, this.language)
-    .subscribe(item => {
+    .subscribe({next: item => {
         this.error = false;
         this.item = item;
 
@@ -71,10 +65,9 @@ export class BRSLItemComponent implements OnInit {
         this.seoImage = `${this.imgURL}items/${this.item.slug}.webp`
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
-    error => {
+    error: error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      
-    });
+    }});
   }
 } 

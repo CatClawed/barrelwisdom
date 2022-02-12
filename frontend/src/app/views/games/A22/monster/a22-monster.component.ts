@@ -1,9 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MonsterFull } from '@app/interfaces/a22';
 import { A22Service } from '@app/services/a22.service';
-import { HistoryService } from '@app/services/history.service';
-import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
 
 @Component({
@@ -17,8 +15,6 @@ export class A22MonsterComponent implements OnInit {
   returnUrl: string;
   error: boolean = false;
   errorCode: string;
-  errorVars: any[];
-  errorMsg: string;
   monster: MonsterFull;
   colset: string;
   hp:  boolean[] = [];
@@ -45,9 +41,7 @@ export class A22MonsterComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    public historyService: HistoryService,
     private a22service: A22Service,
-
     private seoService: SeoService) {
       if(this.route.snapshot.params.monster != null) {
       this.slug = this.route.snapshot.params.monster;
@@ -59,7 +53,7 @@ export class A22MonsterComponent implements OnInit {
       this.colset = "col-md-9 mx-auto "
     }
     this.a22service.getMonster(this.slug, this.language)
-    .subscribe(monster => {
+    .subscribe({next: monster => {
         this.error = false;
         this.monster = monster;
         for(let i = 0; i < 5; i++) {
@@ -99,11 +93,10 @@ export class A22MonsterComponent implements OnInit {
         this.seoImage = `${this.imgURL}monsters/${this.monster.slug}.webp`
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
-    error => {
+    error: error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      
-    });
+    }});
   }
 
 } 

@@ -1,9 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute }from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { FacilityFull } from '@app/interfaces/brsl';
 import { BRSLService } from '@app/services/brsl.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
 
 @Component({
@@ -17,8 +15,6 @@ export class BRSLFacilityComponent implements OnInit {
   returnUrl: string;
   error: boolean = false;
   errorCode: string;
-  errorVars: any[];
-  errorMsg: string;
   facility: FacilityFull;
   colset: string;
 
@@ -44,8 +40,6 @@ export class BRSLFacilityComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private brslservice: BRSLService,
-    public historyService: HistoryService,
-
     private seoService: SeoService) {
       if(this.route.snapshot.params.facility != null) {
       this.slug = this.route.snapshot.params.facility;
@@ -57,7 +51,7 @@ export class BRSLFacilityComponent implements OnInit {
       this.colset = "col-md-9 mx-auto "
     }
     this.brslservice.getFacility(this.slug, this.language)
-    .subscribe(facility => {
+    .subscribe({next: facility => {
         this.error = false;
         this.facility = facility;
 
@@ -71,10 +65,9 @@ export class BRSLFacilityComponent implements OnInit {
         this.seoImage = `${this.imgURL}facilities/${this.facility.slug}.webp`
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
-    error => {
+    error: error => {
       this.error = true;
       this.errorCode = `${error.status}`;
-      
-    });
+    }});
   }
 } 

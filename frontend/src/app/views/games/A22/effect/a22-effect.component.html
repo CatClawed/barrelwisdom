@@ -22,7 +22,7 @@
     <p *ngIf="effect.note"><b>Note:</b> {{effect.note}}</p>
     <b *ngIf="effect.efftype == 'Normal' || effect.efftype == 'Material'">From Item:</b>
     <ul *ngIf="effect.effectline_set">
-      <li *ngFor="let e of effect.effectline_set"><a href="/{{gameURL}}/items/{{e.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{e.name}}</a></li>
+      <li *ngFor="let e of effect.effectline_set"><a routerLink="/{{gameURL}}/items/{{e.slug}}/{{language}}">{{e.name}}</a></li>
     </ul>
     <b *ngIf="effect.efftype == 'EV'">Combines Effects:</b>
     <ul *ngIf="effect.effects && effect.efftype == 'EV'">
@@ -33,7 +33,7 @@
     <b *ngIf="(effect.efftype == 'Normal' || effect.efftype == 'Material') && effect.parent">Child Effects:</b>
     <b *ngIf="(effect.efftype != 'Normal' && effect.efftype != 'Material') && effect.parent">Parent Effects:</b>
     <ul *ngIf="effect.parent">
-      <li *ngFor="let e of effect.parent"><a href="/{{gameURL}}/effects/{{e.slug}}/{{language}}" (click)="historyService.hrefClicked($event)">{{e.name}}</a></li>
+      <li *ngFor="let e of effect.parent"><a routerLink="/{{gameURL}}/effects/{{e.slug}}/{{language}}">{{e.name}}</a></li>
     </ul>
     <b *ngIf="effect.actTag0">Advanced Data:</b>
     <ul *ngIf="effect.actTag0">
