@@ -178,12 +178,7 @@
             "browserTarget": "frontend:build:production",
             "serverTarget": "frontend:server:production",
             "guessRoutes": false,
-            "routes": [
-              "/totori/items/en",
-              "/totori/recipe-books/en",
-              "/totori/effects/en",
-              "/escha/items/en"
-            ]
+            "routesFile": "prerender.txt"
           },
           "configurations": {
             "production": {}

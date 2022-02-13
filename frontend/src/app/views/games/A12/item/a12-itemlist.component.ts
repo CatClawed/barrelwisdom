@@ -18,8 +18,7 @@ import { map, startWith } from 'rxjs/operators';
     pageForm: FormGroup;
     itemControl: FormControl;
     ingControl: FormControl;
-    error: boolean = false;
-    errorCode: string;
+    error: string = '';
     errorMsg: string;
     item: string = "items";
     items: ItemList[];
@@ -91,8 +90,7 @@ import { map, startWith } from 'rxjs/operators';
         );
       },
       error: error => {
-        this.error = true;
-        this.errorCode = `${error.status}`;
+        this.error =`${error.status}`;
       }});
     }
 
@@ -102,8 +100,7 @@ import { map, startWith } from 'rxjs/operators';
           this.categories = categories;
       },
       error: error => {
-          this.error = true;
-          this.errorCode = `${error.status}`;
+          this.error =`${error.status}`;
       }});
   }
   

@@ -17,8 +17,7 @@ import { map, startWith } from 'rxjs/operators';
     modalRef: BsModalRef;
     pageForm: FormGroup;
     bookControl: FormControl;
-    error: boolean = false;
-    errorCode: string;
+    error: string = '';
     book: string = "books";
     books: Book[];
     filteredBooks: Observable<Book[]>;
@@ -82,8 +81,7 @@ import { map, startWith } from 'rxjs/operators';
         );
       },
       error: error => {
-        this.error = true;
-        this.errorCode = `${error.status}`;
+        this.error =`${error.status}`;
       }});
     }
   

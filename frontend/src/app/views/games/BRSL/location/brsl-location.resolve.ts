@@ -20,7 +20,7 @@ export class BRSLLocationResolver implements Resolve<Region> {
   resolve(route: ActivatedRouteSnapshot): Observable<Region> {
     return this.brslservice.getRegion(route.params.location, route.params.language).pipe(
         catchError(() => {
-            this.router.navigateByUrl('/second-light/error');
+            this.router.navigateByUrl('/second-light/error', { skipLocationChange: true });
             return EMPTY;
         }));
     }

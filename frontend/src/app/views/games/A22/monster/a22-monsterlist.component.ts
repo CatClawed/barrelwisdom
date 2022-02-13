@@ -17,8 +17,7 @@ import { map, startWith } from 'rxjs/operators';
     modalRef: BsModalRef;
     pageForm: FormGroup;
     monsterControl: FormControl;
-    error: boolean = false;
-    errorCode: string;
+    error: string = '';
     monster: string = "monsters";
     monsters: Monster[];
     filteredMonsters: Observable<Monster[]>;
@@ -85,8 +84,7 @@ import { map, startWith } from 'rxjs/operators';
         );
       },
       error: error => {
-        this.error = true;
-        this.errorCode = `${error.status}`;
+        this.error =`${error.status}`;
       }});
     }
   

@@ -17,8 +17,7 @@ import { SeoService } from '@app/services/seo.service';
     modalRef: BsModalRef;
     pageForm: FormGroup;
     effectControl: FormControl;
-    error: boolean = false;
-    errorCode: string;
+    error: string = '';
     effect: string = "effect";
     effects: Effect[];
     filteredEffects: Observable<Effect[]>;
@@ -82,8 +81,7 @@ import { SeoService } from '@app/services/seo.service';
         );
       },
       error: error => {
-        this.error = true;
-        this.errorCode = `${error.status}`;
+        this.error =`${error.status}`;
       }});
     }
   

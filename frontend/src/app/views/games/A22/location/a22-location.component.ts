@@ -11,8 +11,7 @@ import { first } from 'rxjs/operators';
   })
 
   export class A22LocationComponent implements OnInit {
-    error: boolean = false;
-    errorCode: string;
+    error: string = '';
     errorVars: any[];
     errorMsg: string;
     region: Region;
@@ -43,8 +42,7 @@ import { first } from 'rxjs/operators';
         this.region = this.route.snapshot.data.loc;
 
           if(this.region.areas.length == 0 || !this.region) {
-            this.error = true;
-            this.errorCode = '404';      
+            this.error =`404`;
           }
           else {
               for(let g of this.region.areas[0].gatherdata) {

@@ -14,8 +14,7 @@ export class A12LocationComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  error: boolean = false;
-  errorCode: string;
+  error: string = '';
   location: AreaData;
   colset: string;
   language = "";
@@ -43,8 +42,7 @@ constructor(
     this.location = this.route.snapshot.data.loc;
 
     if(!this.location) {
-      this.error = true;
-      this.errorCode = '404';
+      this.error =`404`;
     }
     else {
         this.gameTitle = this.a12service.gameTitle[this.language];

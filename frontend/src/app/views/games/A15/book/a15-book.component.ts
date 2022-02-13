@@ -13,8 +13,7 @@ export class A15BookComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  error: boolean = false;
-  errorCode: string;
+  error: string = '';
   book: Book;
   colset: string;
 
@@ -50,7 +49,7 @@ constructor(
     }
     this.a15service.getBook(this.slugname, this.language)
     .subscribe(book => {
-        this.error = false;
+        this.error =``;
         this.book = book;
 
         this.gameTitle = this.a15service.gameTitle[this.language];
@@ -64,8 +63,7 @@ constructor(
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error => {
-      this.error = true;
-      this.errorCode = `${error.status}`;
+      this.error =`${error.status}`;
     });
   }
 } 

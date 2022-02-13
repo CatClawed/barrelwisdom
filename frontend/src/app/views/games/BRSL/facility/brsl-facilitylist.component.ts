@@ -18,8 +18,7 @@ import { map, startWith } from 'rxjs/operators';
     modalRef: BsModalRef;
     pageForm: FormGroup;
     facilityControl: FormControl;
-    error: boolean = false;
-    errorCode: string;
+    error: string = '';
     facility: string = "facilities";
     facilities: FacilityList[];
     filteredFacilities: Observable<FacilityList[]>;
@@ -83,8 +82,7 @@ import { map, startWith } from 'rxjs/operators';
         );
       },
       error: error => {
-        this.error = true;
-        this.errorCode = `${error.status}`;
+        this.error =`${error.status}`;
       }});
     }
   

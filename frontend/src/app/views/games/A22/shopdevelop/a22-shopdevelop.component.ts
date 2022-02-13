@@ -12,8 +12,7 @@ export class A22ShopDevelopComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  error: boolean = false;
-  errorCode: string;
+  error: string = '';
   shopdevelop: ShopDevelop[];
   colset: string;
   language = "";
@@ -45,12 +44,11 @@ constructor(
 
     this.a22service.getShopDevList(this.language)
     .subscribe({next: shopdevelop => {
-        this.error = false;
+        this.error =``;
         this.shopdevelop = shopdevelop;
     },
     error: error => {
-      this.error = true;
-      this.errorCode = `${error.status}`;
+      this.error =`${error.status}`;
     }});
   }
 } 

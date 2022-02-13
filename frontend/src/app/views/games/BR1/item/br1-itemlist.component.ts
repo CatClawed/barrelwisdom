@@ -20,8 +20,7 @@ import { SeoService } from '@app/services/seo.service';
     modalRef: BsModalRef;
     pageForm: FormGroup;
     itemControl: FormControl;
-    error: boolean = false;
-    errorCode: string;
+    error: string = '';
     item: string = "items";
     items: Item[];
     filteredItems: Observable<Item[]>;
@@ -86,8 +85,7 @@ import { SeoService } from '@app/services/seo.service';
         );
       },
       error: error => {
-        this.error = true;
-        this.errorCode = `${error.status}`;
+        this.error =`${error.status}`;
       }});
     }
 

@@ -20,7 +20,7 @@ export class A16LocationResolver implements Resolve<AreaData> {
   resolve(route: ActivatedRouteSnapshot): Observable<AreaData> {
     return this.a16service.getRegion(route.params.location, route.params.language).pipe(
         catchError(() => {
-            this.router.navigateByUrl('/escha/error');
+            this.router.navigateByUrl('/escha/error', { skipLocationChange: true });
             return EMPTY;
         }));
     }

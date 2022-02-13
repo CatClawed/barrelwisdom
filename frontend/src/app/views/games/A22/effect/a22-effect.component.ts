@@ -13,8 +13,7 @@ export class A22EffectComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  error: boolean = false;
-  errorCode: string;
+  error: string = '';
   effect: EffectFull;
   colset: string;
 
@@ -51,11 +50,10 @@ export class A22EffectComponent implements OnInit {
     this.a22service.getEffect(this.slug, this.language)
     .subscribe({next: effect => {
       if(effect.efftype == "Hidden" || effect.efftype == "unused") {
-          this.error = true;
-          this.errorCode = "404";
+          this.error =`404`;
       }
       else {
-          this.error = false;
+          this.error =``;
           this.effect = effect;
           this.gameTitle = this.a22service.gameTitle[this.language];
           this.gameURL = this.a22service.gameURL;
@@ -68,8 +66,7 @@ export class A22EffectComponent implements OnInit {
       }
     },
     error: error => {
-      this.error = true;
-      this.errorCode = `${error.status}`;
+      this.error =`${error.status}`;
     }});
   }
 } 

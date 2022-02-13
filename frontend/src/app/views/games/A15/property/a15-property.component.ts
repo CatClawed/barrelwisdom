@@ -13,8 +13,7 @@ export class A15PropertyComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  error: boolean = false;
-  errorCode: string;
+  error: string = '';
   property: Property;
   colset: string;
 
@@ -61,8 +60,7 @@ export class A15PropertyComponent implements OnInit {
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error: error => {
-      this.error = true;
-      this.errorCode = `${error.status}`;
+      this.error =`${error.status}`;
     }});
   }
 } 

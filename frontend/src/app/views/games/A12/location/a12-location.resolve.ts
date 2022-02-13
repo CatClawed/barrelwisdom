@@ -20,7 +20,7 @@ export class A12LocationResolver implements Resolve<AreaData> {
   resolve(route: ActivatedRouteSnapshot): Observable<AreaData> {
     return this.a12service.getRegion(route.params.location, route.params.language).pipe(
         catchError(() => {
-            this.router.navigateByUrl('/totori/error');
+            this.router.navigateByUrl('/totori/error', { skipLocationChange: true });
             return EMPTY;
         }));
     }

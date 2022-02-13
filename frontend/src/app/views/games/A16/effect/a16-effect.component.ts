@@ -13,8 +13,7 @@ export class A16EffectComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  error: boolean = false;
-  errorCode: string;
+  error: string = '';
   effect: Effect;
   colset: string;
 
@@ -50,7 +49,7 @@ constructor(
     }
     this.a16service.getEffect(this.slugname, this.language)
     .subscribe({next: effect => {
-      this.error = false;
+      this.error =``;
       this.effect = effect;
       this.gameTitle = this.a16service.gameTitle[this.language];
       this.gameURL = this.a16service.gameURL;
@@ -62,8 +61,7 @@ constructor(
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error: error => {
-      this.error = true;
-      this.errorCode = `${error.status}`;
+      this.error =`${error.status}`;
     }});
   }
 } 

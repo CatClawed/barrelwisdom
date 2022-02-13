@@ -15,8 +15,7 @@ import { first, map, startWith } from 'rxjs/operators';
   export class BR1FragmentEffectlistComponent implements OnInit {
     pageForm: FormGroup;
     fragmenteffectControl: FormControl;
-    error: boolean = false;
-    errorCode: string;
+    error: string = '';
     errorVars: any[];
     errorMsg: string;
     fragmenteffect: string = "fragmenteffects";
@@ -79,8 +78,7 @@ import { first, map, startWith } from 'rxjs/operators';
         );
       },
       error: error => {
-        this.error = true;
-        this.errorCode = `${error.status}`;
+        this.error =`${error.status}`;
         
       }});
     }

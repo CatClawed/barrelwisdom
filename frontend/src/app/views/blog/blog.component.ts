@@ -19,8 +19,7 @@ import { MarkdownService } from 'ngx-markdown';
   export class BlogComponent implements OnInit {
       user: User;
       blog: Blog;
-      error: boolean = false;
-      errorCode: string;
+      error: string = '';
       body: SafeHtml;
       allowedToEdit = false;
       gameName = "";
@@ -127,7 +126,7 @@ import { MarkdownService } from 'ngx-markdown';
       getBlog(section: string, title: string): void {
         this.blogService.getBlog(title, section)
           .subscribe({next: blog => { 
-              this.error = false;
+              this.error =``;
               this.blog = blog;
               this.gameName = (this.blog.section.fullname) ? `${this.blog.section.fullname} - ` : ""; // gotta make sure google sees the game name...
               this.body = this.markdownService.compile(this.blog.body);
@@ -167,9 +166,7 @@ import { MarkdownService } from 'ngx-markdown';
               }
             },
             error: error => { 
-                this.error = true;
-                this.errorCode = `${error.status}`;
-                
+                this.error =`${error.status}`;
               }
             });
       }

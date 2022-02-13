@@ -13,8 +13,7 @@ export class A16ItemComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  error: boolean = false;
-  errorCode: string;
+  error: string = '';
   item: ItemFull;
   colset: string;
 
@@ -50,7 +49,7 @@ constructor(
     }
     this.a16service.getItem(this.slugname, this.language)
     .subscribe({next: item => {
-        this.error = false;
+        this.error =``;
         this.item = item;
 
         this.gameTitle = this.a16service.gameTitle[this.language];
@@ -64,8 +63,7 @@ constructor(
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error: error => {
-      this.error = true;
-      this.errorCode = `${error.status}`;
+      this.error =`${error.status}`;
     }});
   }
 } 

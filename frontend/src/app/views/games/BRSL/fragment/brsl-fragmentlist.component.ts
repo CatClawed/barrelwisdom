@@ -14,8 +14,7 @@ import { map, startWith } from 'rxjs/operators';
   export class BRSLFragmentComponent implements OnInit {
     pageForm: FormGroup;
     fragmentControl: FormControl;
-    error: boolean = false;
-    errorCode: string;
+    error: string = '';
     event: Event[];
     character: NameLink[];
     location: SchoolLocation[];
@@ -69,16 +68,14 @@ import { map, startWith } from 'rxjs/operators';
         this.character = f.slice(2);
       },
       error: error => {
-        this.error = true;
-        this.errorCode = `${error.status}`;
+        this.error =`${error.status}`;
       }});
       this.brslservice.getSchoolLocationList(this.language)
       .subscribe({next: f => {
         this.location = f;
       },
       error: error => {
-        this.error = true;
-        this.errorCode = `${error.status}`;
+        this.error =`${error.status}`;
       }});
       this.brslservice.getFragmentList(this.language)
       .subscribe({next: fragment => {
@@ -89,8 +86,7 @@ import { map, startWith } from 'rxjs/operators';
         );
       },
       error: error => {
-        this.error = true;
-        this.errorCode = `${error.status}`;
+        this.error =`${error.status}`;
       }});
     }
   

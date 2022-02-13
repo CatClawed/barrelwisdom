@@ -13,8 +13,7 @@ export class A22ItemComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  error: boolean = false;
-  errorCode: string;
+  error: string = '';
   item: ItemFull;
   colset: string;
   default: any[] = [];
@@ -55,7 +54,7 @@ constructor(
     }
     this.a22service.getItem(this.slug, this.language)
     .subscribe({next: item => {
-        this.error = false;
+        this.error =``;
         this.item = item;
 
         this.gameTitle = this.a22service.gameTitle[this.language];
@@ -91,8 +90,7 @@ constructor(
         }
     },
     error: error => {
-      this.error = true;
-      this.errorCode = `${error.status}`;
+      this.error =`${error.status}`;
     }});
   }
 } 

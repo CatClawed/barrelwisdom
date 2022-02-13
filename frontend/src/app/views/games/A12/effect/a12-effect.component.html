@@ -1,4 +1,4 @@
-<Error *ngIf="error" [errorCode]="errorCode"></Error>
+<Error *ngIf="error" [errorCode]="error"></Error>
 
 <ng-container *ngIf="effect">
 <Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Effects', '/'+gameURL+'/effects/'+language]]" [current]="effect.name"></Breadcrumb>

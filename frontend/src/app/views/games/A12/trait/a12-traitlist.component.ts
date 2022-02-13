@@ -16,8 +16,7 @@ export class A12TraitlistComponent implements OnInit {
   modalRef: BsModalRef;
   pageForm: FormGroup;
   traitControl: FormControl;
-  error: boolean = false;
-  errorCode: string;
+  error: string = '';
   trait: string = "trait";
   traits: Trait[]; 
   filteredTraits: Observable<Trait[]>;
@@ -79,8 +78,7 @@ export class A12TraitlistComponent implements OnInit {
       );
     },
     error: error => {
-      this.error = true;
-      this.errorCode = `${error.status}`;
+      this.error =`${error.status}`;
     }});
   }
 

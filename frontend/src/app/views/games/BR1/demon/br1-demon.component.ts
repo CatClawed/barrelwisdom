@@ -13,8 +13,7 @@ export class BR1DemonComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  error: boolean = false;
-  errorCode: string;
+  error: string = '';
   demon: Demon;
   colset: string;
 
@@ -50,7 +49,7 @@ constructor(
     }
     this.br1service.getDemon(this.slugname, this.language)
     .subscribe({next: demon => {
-        this.error = false;
+        this.error =``;
         this.demon = demon;
 
         this.gameTitle = this.br1service.gameTitle;
@@ -63,8 +62,7 @@ constructor(
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error: error => {
-      this.error = true;
-      this.errorCode = `${error.status}`;
+      this.error =`${error.status}`;
       
     }});
   }

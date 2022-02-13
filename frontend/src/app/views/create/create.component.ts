@@ -26,8 +26,7 @@ import slugify from 'slugify';
 
 
 export class CreateComponent {
-  error: boolean = false;
-  errorCode: string;
+  error: string = '';
   errorVars: any[];
   pageForm: FormGroup;
   loading = false;

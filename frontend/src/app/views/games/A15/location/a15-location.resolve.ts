@@ -18,7 +18,7 @@ export class A15LocationResolver implements Resolve<RegionData> {
   resolve(route: ActivatedRouteSnapshot): Observable<RegionData> {
     return this.a15service.getRegion(route.params.location, route.params.language).pipe(
         catchError(() => {
-            this.router.navigateByUrl('/escha/error');
+            this.router.navigateByUrl('/escha/error', { skipLocationChange: true });
             return EMPTY;
         }));
     }

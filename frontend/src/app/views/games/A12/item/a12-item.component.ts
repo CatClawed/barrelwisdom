@@ -13,8 +13,7 @@ export class A12ItemComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  error: boolean = false;
-  errorCode: string;
+  error: string = '';
   item: ItemFull;
   colset: string;
   itemone = false;
@@ -53,7 +52,7 @@ constructor(
     }
     this.a12service.getItem(this.slugname, this.language)
     .subscribe({next: item => {
-        this.error = false;
+        this.error =``;
         this.item = item;
 
         if(this.item.effectline_set) {
@@ -75,8 +74,7 @@ constructor(
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error: error => {
-      this.error = true;
-      this.errorCode = `${error.status}`;
+      this.error =`${error.status}`;
     }});
   }
 } 

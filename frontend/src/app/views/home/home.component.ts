@@ -15,8 +15,7 @@ export class HomeComponent implements OnInit {
   path: number;
   limit: number;
   pagecount: number;
-  error: boolean = false;
-  errorCode: string;
+  error: string = '';
   tagUrl: string;
   tagName: string;
   tagID: number;
@@ -56,8 +55,7 @@ export class HomeComponent implements OnInit {
           this.getBlog(this.path, this.limit);
         },
         error: error => {
-          this.error = true;
-          this.errorCode = `${error.status}`;
+          this.error =`${error.status}`;
         }});
     }
     else {
@@ -75,8 +73,7 @@ export class HomeComponent implements OnInit {
         this.blog = blog;
       },
         error: error => {
-          this.error = true;
-          this.errorCode = `${error.status}`;
+          this.error =`${error.status}`;
         }});
   }
 

@@ -15,8 +15,7 @@ export class BRSLUnitComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  error: boolean = false;
-  errorCode: string;
+  error: string = '';
   errorVars: any[];
   errorMsg: string;
   units: Unit[];
@@ -42,7 +41,7 @@ export class BRSLUnitComponent implements OnInit {
     this.language = this.route.snapshot.params.language;
     this.brslservice.getUnit(this.language)
     .subscribe({next: unit => {
-        this.error = false;
+        this.error =``;
         this.units = unit;
 
         this.gameTitle = this.brslservice.gameTitle[this.language];
@@ -55,8 +54,7 @@ export class BRSLUnitComponent implements OnInit {
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error: error => {
-      this.error = true;
-      this.errorCode = `${error.status}`;
+      this.error =`${error.status}`;
     }});
   }
 } 

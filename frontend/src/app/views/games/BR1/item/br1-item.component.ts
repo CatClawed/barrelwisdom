@@ -15,8 +15,7 @@ export class BR1ItemComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  error: boolean = false;
-  errorCode: string;
+  error: string = '';
   item: Item;
   colset: string;
 
@@ -52,7 +51,7 @@ constructor(
     }
     this.br1service.getItem(this.slugname, this.language)
     .subscribe({next: item => {
-        this.error = false;
+        this.error =``;
         this.item = item;
 
         this.gameTitle = this.br1service.gameTitle;
@@ -65,8 +64,7 @@ constructor(
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error: error => {
-      this.error = true;
-      this.errorCode = `${error.status}`;
+      this.error =`${error.status}`;
     }});
   }
 } 

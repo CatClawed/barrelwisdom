@@ -9,8 +9,7 @@ import { UserService } from '@app/services/user.service';
 
 export class UserComponent implements OnInit {
   userprofile: UserProfile;
-  error: boolean = false;
-  errorCode: string;
+  error: string = '';
   errorVars: any[];
 
   constructor(
@@ -26,8 +25,7 @@ export class UserComponent implements OnInit {
           this.userprofile = x
         },
         error: error => {
-          this.error = true;
-          this.errorCode = `${error.status}`;
+          this.error =`${error.status}`;
         }});
   }
 }

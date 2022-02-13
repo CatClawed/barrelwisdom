@@ -13,8 +13,7 @@ export class BRSLFacilityComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  error: boolean = false;
-  errorCode: string;
+  error: string = '';
   facility: FacilityFull;
   colset: string;
 
@@ -52,7 +51,7 @@ export class BRSLFacilityComponent implements OnInit {
     }
     this.brslservice.getFacility(this.slug, this.language)
     .subscribe({next: facility => {
-        this.error = false;
+        this.error =``;
         this.facility = facility;
 
         this.gameTitle = this.brslservice.gameTitle[this.language];
@@ -66,8 +65,7 @@ export class BRSLFacilityComponent implements OnInit {
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error: error => {
-      this.error = true;
-      this.errorCode = `${error.status}`;
+      this.error =`${error.status}`;
     }});
   }
 } 

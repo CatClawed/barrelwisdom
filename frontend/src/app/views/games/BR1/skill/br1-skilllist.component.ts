@@ -17,8 +17,7 @@ export class BR1SkilllistComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  error: boolean = false;
-  errorCode: string;
+  error: string = '';
   skills: Skill[];
   colset: string;
   language = "";
@@ -52,12 +51,11 @@ constructor(
 
     this.br1service.getSkillList(this.language)
     .subscribe({next: skill => {
-        this.error = false;
+        this.error =``;
         this.skills = skill;
     },
     error: error => {
-      this.error = true;
-      this.errorCode = `${error.status}`;
+      this.error =`${error.status}`;
       
     }});
   }

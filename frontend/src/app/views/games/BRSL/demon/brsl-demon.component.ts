@@ -13,8 +13,7 @@ export class BRSLDemonComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  error: boolean = false;
-  errorCode: string;
+  error: string = '';
   demon: DemonFull;
   colset: string;
 
@@ -50,7 +49,7 @@ export class BRSLDemonComponent implements OnInit {
     }
     this.brslservice.getDemon(this.slug, this.language)
     .subscribe({next: demon => {
-        this.error = false;
+        this.error =``;
         this.demon = demon;
 
         this.gameTitle = this.brslservice.gameTitle[this.language];
@@ -64,8 +63,7 @@ export class BRSLDemonComponent implements OnInit {
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error: error => {
-      this.error = true;
-      this.errorCode = `${error.status}`;
+      this.error =`${error.status}`;
     }});
   }
 } 

@@ -14,8 +14,7 @@ export class BRSLSkillComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  error: boolean = false;
-  errorCode: string;
+  error: string = '';
   errorVars: any[];
   errorMsg: string;
   skills: Skill[];
@@ -43,7 +42,7 @@ export class BRSLSkillComponent implements OnInit {
     this.language = this.route.snapshot.params.language;
     this.brslservice.getSkillList(this.language)
     .subscribe({next: skill => {
-        this.error = false;
+        this.error =``;
         this.skills = skill;
 
         this.gameTitle = this.brslservice.gameTitle[this.language];
@@ -56,8 +55,7 @@ export class BRSLSkillComponent implements OnInit {
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error: error => {
-      this.error = true;
-      this.errorCode = `${error.status}`;
+      this.error =`${error.status}`;
     }});
   }
   ngAfterViewInit(): void {

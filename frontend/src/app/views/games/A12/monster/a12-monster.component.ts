@@ -13,8 +13,7 @@ export class A12MonsterComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  error: boolean = false;
-  errorCode: string;
+  error: string = '';
   monster: MonsterFull;
   colset: string;
 
@@ -51,7 +50,7 @@ export class A12MonsterComponent implements OnInit {
     }
     this.a12service.getMonster(this.slugname, this.language)
     .subscribe({next: monster => {
-        this.error = false;
+        this.error =``;
         this.monster = monster;
 
         this.gameTitle = this.a12service.gameTitle[this.language];
@@ -65,8 +64,7 @@ export class A12MonsterComponent implements OnInit {
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error: error => {
-      this.error = true;
-      this.errorCode = `${error.status}`;
+      this.error =`${error.status}`;
       
     }});
   }

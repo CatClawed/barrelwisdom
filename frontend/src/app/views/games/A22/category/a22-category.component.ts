@@ -12,8 +12,7 @@ export class A22CategoryComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  error: boolean = false;
-  errorCode: string;
+  error: string = '';
   category: CategoryItem;
   colset: string;
   language = "";
@@ -38,7 +37,7 @@ constructor(
 
     this.a22service.getCategoryItem(this.slugname, this.language)
     .subscribe({next: category => {
-        this.error = false;
+        this.error =``;
         this.category = category;
 
         this.gameTitle = this.a22service.gameTitle[this.language];
@@ -51,8 +50,7 @@ constructor(
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error: error => {
-      this.error = true;
-      this.errorCode = `${error.status}`;
+      this.error =`${error.status}`;
     }});
   }
 } 

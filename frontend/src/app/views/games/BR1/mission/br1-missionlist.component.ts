@@ -16,8 +16,7 @@ export class BR1MissionlistComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  error: boolean = false;
-  errorCode: string;
+  error: string = '';
   missions: Mission[];
   colset: string;
   language = "";
@@ -51,12 +50,11 @@ constructor(
 
     this.br1service.getMissionList(this.language)
     .subscribe({next: mission => {
-        this.error = false;
+        this.error =``;
         this.missions = mission;
     },
     error: error => {
-      this.error = true;
-      this.errorCode = `${error.status}`;
+      this.error =`${error.status}`;
       
     }});
   }

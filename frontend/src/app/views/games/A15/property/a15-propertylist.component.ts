@@ -16,8 +16,7 @@ export class A15PropertylistComponent implements OnInit {
   modalRef: BsModalRef;
   pageForm: FormGroup;
   propertyControl: FormControl;
-  error: boolean = false;
-  errorCode: string;
+  error: string = '';
   property: string = "property";
   properties: Property[];
   filteredProperties: Observable<Property[]>;
@@ -80,8 +79,7 @@ export class A15PropertylistComponent implements OnInit {
       );
     },
     error: error => {
-      this.error = true;
-      this.errorCode = `${error.status}`;
+      this.error =`${error.status}`;
     }});
   }
 

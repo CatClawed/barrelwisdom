@@ -13,8 +13,7 @@ export class A15ItemComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  error: boolean = false;
-  errorCode: string;
+  error: string = '';
   item: ItemFull;
   colset: string;
   fire = false;
@@ -55,7 +54,7 @@ constructor(
 
     this.a15service.getItem(this.slugname, this.language)
       .subscribe({next: item => {
-        this.error = false;
+        this.error =``;
         this.item = item;
 
         this.gameTitle = this.a15service.gameTitle[this.language];
@@ -88,8 +87,7 @@ constructor(
         }
       },
         error: error => {
-          this.error = true;
-          this.errorCode = `${error.status}`;
+          this.error =`${error.status}`;
         }});
   }
 } 

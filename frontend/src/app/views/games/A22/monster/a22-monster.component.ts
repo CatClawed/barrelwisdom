@@ -13,8 +13,7 @@ export class A22MonsterComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  error: boolean = false;
-  errorCode: string;
+  error: string = '';
   monster: MonsterFull;
   colset: string;
   hp:  boolean[] = [];
@@ -54,7 +53,7 @@ export class A22MonsterComponent implements OnInit {
     }
     this.a22service.getMonster(this.slug, this.language)
     .subscribe({next: monster => {
-        this.error = false;
+        this.error =``;
         this.monster = monster;
         for(let i = 0; i < 5; i++) {
           if(i < this.monster.hp_rank) {
@@ -94,8 +93,7 @@ export class A22MonsterComponent implements OnInit {
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     },
     error: error => {
-      this.error = true;
-      this.errorCode = `${error.status}`;
+      this.error =`${error.status}`;
     }});
   }
 

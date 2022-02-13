@@ -15,8 +15,7 @@ export class A15LocationComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  error: boolean = false;
-  errorCode: string;
+  error: string = '';
   location: RegionData;
   colset: string;
   language = "";
@@ -45,8 +44,7 @@ constructor(
     this.location = this.route.snapshot.data.loc;
 
     if(!this.location) {
-      this.error = true;
-      this.errorCode = '404';
+      this.error =`404`;
     }
     else {
         this.gameTitle = this.a15service.gameTitle[this.language];

@@ -1,4 +1,4 @@
-<Error *ngIf="error" [errorCode]="errorCode"></Error>
+<Error *ngIf="error" [errorCode]="error"></Error>
 
 <ng-container *ngIf="category">
 <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Category: '+category.name"></Breadcrumb>
