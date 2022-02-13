@@ -181,7 +181,8 @@
             "routes": [
               "/totori/items/en",
               "/totori/recipe-books/en",
-              "/totori/effects/en"
+              "/totori/effects/en",
+              "/escha/items/en"
             ]
           },
           "configurations": {

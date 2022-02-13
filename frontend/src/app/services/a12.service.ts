@@ -1,25 +1,18 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders,  } from '@angular/common/http';
-import { Observable} from 'rxjs';
+import { AreaData, Book, Category, CategoryData, Effect, ItemFull, ItemList, MonsterFull, MonsterList, Trait } from '@app/interfaces/a12';
 import { environment } from '@environments/environment';
-import { Trait, AreaData, Effect, MonsterList, MonsterFull, Book, ItemList, ItemFull, Category, CategoryData } from '@app/interfaces/a12';
-import {AppComponent} from '@app/app.component';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class A12Service {
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
       };
-      absolute = ""
     
     constructor(
       private http: HttpClient,
     ) {
-      AppComponent.isBrowser.subscribe(isBrowser => {
-        if (!isBrowser) {
-          this.absolute = 'http://localhost:8000'
-        }
-      });
     }
 
     public readonly gameTitle = {"en": "Atelier Totori", "ja":"トトリのアトリエ"};
@@ -51,7 +44,7 @@ export class A12Service {
     }
 
     getBookList(language: string): Observable<Book[]> {
-      return this.http.get<Book[]>(`${this.absolute}${environment.apiUrl}/A12/book/${language}/`);
+      return this.http.get<Book[]>(`${environment.apiUrl}/A12/book/${language}/`);
     }
 
     getBook(slugname: string, language: string): Observable<Book> {
@@ -59,7 +52,7 @@ export class A12Service {
     }
 
     getItemList(language: string): Observable<ItemList[]> {
-      return this.http.get<ItemList[]>(`${this.absolute}${environment.apiUrl}/A12/item/${language}/`);
+      return this.http.get<ItemList[]>(`${environment.apiUrl}/A12/item/${language}/`);
     }
 
     getItem(slugname: string, language: string): Observable<ItemFull> {
@@ -67,7 +60,7 @@ export class A12Service {
     }
 
     getCategories(language: string): Observable<Category[]> {
-      return this.http.get<Category[]>(`${this.absolute}${environment.apiUrl}/A12/category/${language}/`);
+      return this.http.get<Category[]>(`${environment.apiUrl}/A12/category/${language}/`);
     }
 
     getCategory(slugname: string, language: string): Observable<CategoryData> {

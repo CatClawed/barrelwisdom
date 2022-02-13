@@ -1,9 +1,8 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders,  } from '@angular/common/http';
-import { BehaviorSubject, Observable} from 'rxjs';
+import { NavigationEnd, Router } from '@angular/router';
 import { environment } from '@environments/environment';
-import { Router, NavigationEnd } from '@angular/router';
-import {AppComponent} from '@app/app.component';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class NavigationService {
@@ -12,7 +11,6 @@ export class NavigationService {
   public n: NavItems[];
   public blogNav = ['user', 'settings', 'tag', 'login', 'register'];
   previousSection = "";
-  absolute = ""
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -21,11 +19,6 @@ export class NavigationService {
   constructor(
     private http: HttpClient,
     private router: Router) {
-      AppComponent.isBrowser.subscribe(isBrowser => {
-        if (!isBrowser) {
-          this.absolute = 'http://localhost:8000'
-        }
-      });
       this.navSubject = new BehaviorSubject<NavItems[]>(this.n);
       this.nav = this.navSubject.asObservable();
 
@@ -51,9 +44,8 @@ export class NavigationService {
         }});
   }
 
-
   getNav(section: string): Observable<Nav> {
-      return this.http.get<Nav>(`${this.absolute}${environment.apiUrl}/nav/${section}/`, this.httpOptions);
+      return this.http.get<Nav>(`${environment.apiUrl}/nav/${section}/`, this.httpOptions);
   }
 
 }
