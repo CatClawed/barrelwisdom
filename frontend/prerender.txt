@@ -125,3 +125,14 @@
 /second-light/skills/ja
 /second-light/skills/sc
 /second-light/skills/tc
+/second-light/fragments-and-dates
+/second-light/fragments-and-dates/en
+/second-light/fragments-and-dates/ja
+/second-light/fragments-and-dates/sc
+/second-light/fragments-and-dates/tc
+/sophie2/traits
+/sophie2/traits/en
+/sophie2/traits/ja
+/sophie2/traits/ko
+/sophie2/traits/sc
+/sophie2/traits/tc

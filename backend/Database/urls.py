@@ -13,6 +13,7 @@ from games.A12 import urls as A12
 from games.A15 import urls as A15
 from games.A16 import urls as A16
 from games.A22 import urls as A22
+from games.A23 import urls as A23
 from games.BR1 import urls as BR1
 from games.BRSL import urls as BRSL
 
@@ -31,6 +32,7 @@ routeLists = [
     A15.routes,
     A16.routes,
     A22.routes,
+    A23.routes,
     BR1.routes,
     BRSL.routes,
 ]

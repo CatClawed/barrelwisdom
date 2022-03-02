@@ -45,6 +45,10 @@ export class LanguageComponent implements OnInit {
         this.languages = environment.ryza2_languages;
         this.langName = environment.ryza2_languages[this.currentLanguage];
         break;
+      case "sophie2":
+        this.languages = environment.sophie2_languages;
+        this.langName = environment.sophie2_languages[this.currentLanguage];
+        break;
       case "bluereflection":
         this.languages = environment.bluereflection_languages;
         this.langName = environment.bluereflection_languages[this.currentLanguage];

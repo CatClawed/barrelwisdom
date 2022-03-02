@@ -40,6 +40,9 @@ export class LanguageGuard implements CanActivate {
             case "ryza2":
                 if(environment.ryza2_languages[language]) return true;
                 break;
+            case "sophie2":
+                if(environment.sophie2_languages[language]) return true;
+                break;
             case "bluereflection":
                 if(environment.bluereflection_languages[language]) return true;
                 break;

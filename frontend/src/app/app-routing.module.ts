@@ -102,6 +102,17 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'sophie2',
+    component: LayoutComponent,
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A23/a23-routing.module').then(m=>m.A23RoutingModule),
+      },
+      
+    ]
+  },
+  {
     path: 'totori',
     component: LayoutComponent,
     children: [

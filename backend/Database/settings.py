@@ -92,6 +92,12 @@ INSTALLED_APPS = [
     'games.A22.items_a22.apps.A22ItemConfig',
     'games.A22.monsters_a22.apps.A22MonsterConfig',
     'games.A22.shops_a22.apps.A22ShopConfig',
+    # A23
+    'games.A23.effects_a23.apps.A23EffectConfig',
+    'games.A23.traits_a23.apps.A23TraitConfig',
+    'games.A23.misc_a23.apps.A23MiscConfig',
+    'games.A23.regions_a23.apps.A23RegionConfig',
+    'games.A23.items_a23.apps.A23ItemConfig',
     # Blue Reflection
     'games.BR1.missions_br1.apps.BR1MissionConfig',
     'games.BR1.areas_br1.apps.BR1AreaConfig',

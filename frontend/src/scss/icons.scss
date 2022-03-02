@@ -1,18 +1,15 @@
-/*------------------------
-	icons
--------------------------*/
 @function unicode($str) {
   @return unquote("\"\\#{$str}\"");
 }
 
 $atelier-escha-accessory: unicode(ea01);
 $atelier-escha-armor: unicode(ea02);
-$atelier-escha-bomb: unicode(ea04);
-$atelier-escha-buff: unicode(ea03);
-$atelier-escha-category-liquid: unicode(ea08);
-$atelier-escha-heal: unicode(ea05);
-$atelier-escha-weapon: unicode(ea06);
-$atelier-meruru-category-construction: unicode(ea07);
+$atelier-escha-bomb: unicode(ea03);
+$atelier-escha-buff: unicode(ea04);
+$atelier-escha-category-liquid: unicode(ea05);
+$atelier-escha-heal: unicode(ea06);
+$atelier-escha-weapon: unicode(ea07);
+$atelier-meruru-category-construction: unicode(ea08);
 $atelier-meruru-category-development: unicode(ea09);
 $atelier-meruru-category-farming: unicode(ea0a);
 $atelier-meruru-category-housing: unicode(ea0b);
@@ -25,10 +22,10 @@ $atelier-ryza2-category-accessories: unicode(ea11);
 $atelier-ryza2-category-animal-products: unicode(ea12);
 $atelier-ryza2-category-armor: unicode(ea13);
 $atelier-ryza2-category-beehives: unicode(ea14);
-$atelier-ryza2-category-bombs: unicode(ea18);
-$atelier-ryza2-category-bugs: unicode(ea15);
-$atelier-ryza2-category-cloth: unicode(ea16);
-$atelier-ryza2-category-dragon-mat: unicode(ea17);
+$atelier-ryza2-category-bombs: unicode(ea15);
+$atelier-ryza2-category-bugs: unicode(ea16);
+$atelier-ryza2-category-cloth: unicode(ea17);
+$atelier-ryza2-category-dragon-mat: unicode(ea18);
 $atelier-ryza2-category-edibles: unicode(ea19);
 $atelier-ryza2-category-elixirs: unicode(ea1a);
 $atelier-ryza2-category-essence: unicode(ea1b);
@@ -73,8 +70,8 @@ $atelier-ryza2-ice: unicode(ea41);
 $atelier-ryza2-large-enemy: unicode(ea42);
 $atelier-ryza2-lightning: unicode(ea43);
 $atelier-ryza2-magic: unicode(ea44);
-$atelier-ryza2-material: unicode(ea46);
-$atelier-ryza2-medium-enemy: unicode(ea45);
+$atelier-ryza2-material: unicode(ea45);
+$atelier-ryza2-medium-enemy: unicode(ea46);
 $atelier-ryza2-physical: unicode(ea47);
 $atelier-ryza2-race-ancient-philuscha: unicode(ea48);
 $atelier-ryza2-race-beetle: unicode(ea49);
@@ -82,19 +79,19 @@ $atelier-ryza2-race-demon-beast: unicode(ea4a);
 $atelier-ryza2-race-golem: unicode(ea4b);
 $atelier-ryza2-race-guardian: unicode(ea4c);
 $atelier-ryza2-race-hedgehog: unicode(ea4d);
-$atelier-ryza2-race-knight: unicode(ea50);
-$atelier-ryza2-race-puni: unicode(ea4e);
-$atelier-ryza2-race-roadrunner: unicode(ea4f);
+$atelier-ryza2-race-knight: unicode(ea4e);
+$atelier-ryza2-race-puni: unicode(ea4f);
+$atelier-ryza2-race-roadrunner: unicode(ea50);
 $atelier-ryza2-race-scorpion: unicode(ea51);
 $atelier-ryza2-race-shark: unicode(ea52);
-$atelier-ryza2-race-sheep: unicode(ea54);
-$atelier-ryza2-race-spirit: unicode(ea53);
+$atelier-ryza2-race-sheep: unicode(ea53);
+$atelier-ryza2-race-spirit: unicode(ea54);
 $atelier-ryza2-race-weasel-king: unicode(ea55);
 $atelier-ryza2-race-weasel: unicode(ea56);
 $atelier-ryza2-race-wyrm: unicode(ea57);
 $atelier-ryza2-shop: unicode(ea58);
-$atelier-ryza2-small-enemy: unicode(ea5a);
-$atelier-ryza2-tool-axe: unicode(ea59);
+$atelier-ryza2-small-enemy: unicode(ea59);
+$atelier-ryza2-tool-axe: unicode(ea5a);
 $atelier-ryza2-tool-bomb-rod: unicode(ea5b);
 $atelier-ryza2-tool-bug-net: unicode(ea5c);
 $atelier-ryza2-tool-fishing-rod: unicode(ea5d);
@@ -145,19 +142,19 @@ $atelier-shallie-category-magic-herb: unicode(ea89);
 $atelier-shallie-category-magic-tool: unicode(ea8a);
 $atelier-shallie-category-meat: unicode(ea8b);
 $atelier-shallie-category-medicine: unicode(ea8c);
-$atelier-shallie-category-metal: unicode(ea8e);
-$atelier-shallie-category-mystery: unicode(ea8d);
+$atelier-shallie-category-metal: unicode(ea8d);
+$atelier-shallie-category-mystery: unicode(ea8e);
 $atelier-shallie-category-natural: unicode(ea8f);
 $atelier-shallie-category-ore: unicode(ea90);
 $atelier-shallie-category-paper: unicode(ea91);
-$atelier-shallie-category-pelt: unicode(ea92);
-$atelier-shallie-category-plant: unicode(ea94);
-$atelier-shallie-category-poison: unicode(ea93);
-$atelier-shallie-category-sand: unicode(ea95);
+$atelier-shallie-category-pelt: unicode(ea93);
+$atelier-shallie-category-plant: unicode(ea95);
+$atelier-shallie-category-poison: unicode(ea92);
+$atelier-shallie-category-sand: unicode(ea94);
 $atelier-shallie-category-seasoning: unicode(ea96);
 $atelier-shallie-category-slag-part: unicode(ea97);
-$atelier-shallie-category-snack: unicode(ea98);
-$atelier-shallie-category-sundry: unicode(ea99);
+$atelier-shallie-category-snack: unicode(ea99);
+$atelier-shallie-category-sundry: unicode(ea98);
 $atelier-shallie-category-thread: unicode(ea9a);
 $atelier-shallie-category-vegetable: unicode(ea9b);
 $atelier-shallie-category-w-bell: unicode(ea9c);
@@ -174,36 +171,73 @@ $atelier-shallie-race-rare-slag: unicode(eaa6);
 $atelier-shallie-race-slag: unicode(eaa7);
 $atelier-shallie-water: unicode(eaa8);
 $atelier-shallie-wind: unicode(eaa9);
-$atelier-totori-category-accessory: unicode(eaaa);
-$atelier-totori-category-bomb: unicode(eaab);
-$atelier-totori-category-bug: unicode(eaac);
-$atelier-totori-category-cloth: unicode(eaad);
-$atelier-totori-category-cooking: unicode(eaae);
-$atelier-totori-category-dessert: unicode(eaaf);
-$atelier-totori-category-elixir: unicode(eab1);
-$atelier-totori-category-fish: unicode(eab0);
-$atelier-totori-category-fuel: unicode(eab3);
-$atelier-totori-category-gunpowder: unicode(eab2);
-$atelier-totori-category-healing: unicode(eab4);
-$atelier-totori-category-ingot: unicode(eab5);
-$atelier-totori-category-jewel: unicode(eab6);
-$atelier-totori-category-key-item: unicode(eab7);
-$atelier-totori-category-liquid: unicode(eab8);
-$atelier-totori-category-lumber: unicode(eab9);
-$atelier-totori-category-magic-tool: unicode(eabb);
-$atelier-totori-category-meat: unicode(eaba);
-$atelier-totori-category-medicine: unicode(eabd);
-$atelier-totori-category-mystery: unicode(eabc);
-$atelier-totori-category-ore: unicode(eabe);
-$atelier-totori-category-pie: unicode(eabf);
-$atelier-totori-category-plant: unicode(eac0);
-$atelier-totori-category-poison: unicode(eac1);
-$atelier-totori-category-seasoning: unicode(eac2);
-$atelier-totori-category-spice: unicode(eac3);
-$atelier-totori-category-sundry: unicode(eac4);
-$atelier-totori-category-supplement: unicode(eac5);
-$atelier-totori-category-threads: unicode(eac6);
-$atelier-totori-category-vegetable: unicode(eac7);
+$atelier-sophie2-category-catalysts: unicode(eaaa);
+$atelier-sophie2-category-seafood: unicode(eaab);
+$atelier-sophie2-category-spices: unicode(eaac);
+$atelier-sophie2-category-talismans: unicode(eaad);
+$atelier-sophie2-element-fire: unicode(eaae);
+$atelier-sophie2-element-ice: unicode(eaaf);
+$atelier-sophie2-element-light: unicode(eab0);
+$atelier-sophie2-element-lightning: unicode(eab1);
+$atelier-sophie2-element-magic: unicode(eab2);
+$atelier-sophie2-element-wind: unicode(eab3);
+$atelier-sophie2-race-apostle: unicode(eab4);
+$atelier-sophie2-race-apparition: unicode(eab5);
+$atelier-sophie2-race-bat: unicode(eab6);
+$atelier-sophie2-race-beast: unicode(eab7);
+$atelier-sophie2-race-bird: unicode(eab8);
+$atelier-sophie2-race-dragon: unicode(eab9);
+$atelier-sophie2-race-dragonaire: unicode(eaba);
+$atelier-sophie2-race-dream-eater: unicode(eabb);
+$atelier-sophie2-race-dryad: unicode(eabc);
+$atelier-sophie2-race-elvira: unicode(eabd);
+$atelier-sophie2-race-erde-wiege: unicode(eabe);
+$atelier-sophie2-race-ghost: unicode(eabf);
+$atelier-sophie2-race-golem: unicode(eac0);
+$atelier-sophie2-race-jellyfish: unicode(eac1);
+$atelier-sophie2-race-magical-creature: unicode(eac2);
+$atelier-sophie2-race-medium-groll: unicode(eac3);
+$atelier-sophie2-race-mushroom: unicode(eac4);
+$atelier-sophie2-race-plant: unicode(eac5);
+$atelier-sophie2-race-puni: unicode(eac6);
+$atelier-sophie2-race-rabbit: unicode(eac7);
+$atelier-sophie2-race-sea-serpent: unicode(eac8);
+$atelier-sophie2-race-small-groll: unicode(eac9);
+$atelier-sophie2-tool-hammer: unicode(eaca);
+$atelier-sophie2-tool-pickaxe: unicode(eacb);
+$atelier-sophie2-tool-slingshot: unicode(eacc);
+$atelier-sophie2-type-exploration: unicode(eacd);
+$atelier-sophie2-usable: unicode(eace);
+$atelier-totori-category-accessory: unicode(eacf);
+$atelier-totori-category-bomb: unicode(ead0);
+$atelier-totori-category-bug: unicode(ead1);
+$atelier-totori-category-cloth: unicode(ead2);
+$atelier-totori-category-cooking: unicode(ead3);
+$atelier-totori-category-dessert: unicode(ead4);
+$atelier-totori-category-elixir: unicode(ead5);
+$atelier-totori-category-fish: unicode(ead6);
+$atelier-totori-category-fuel: unicode(ead7);
+$atelier-totori-category-gunpowder: unicode(ead8);
+$atelier-totori-category-healing: unicode(ead9);
+$atelier-totori-category-ingot: unicode(eada);
+$atelier-totori-category-jewel: unicode(eadb);
+$atelier-totori-category-key-item: unicode(eae3);
+$atelier-totori-category-liquid: unicode(eadc);
+$atelier-totori-category-lumber: unicode(eadd);
+$atelier-totori-category-magic-tool: unicode(eade);
+$atelier-totori-category-meat: unicode(eae4);
+$atelier-totori-category-medicine: unicode(eadf);
+$atelier-totori-category-mystery: unicode(eae0);
+$atelier-totori-category-ore: unicode(eae1);
+$atelier-totori-category-pie: unicode(eae2);
+$atelier-totori-category-plant: unicode(eae5);
+$atelier-totori-category-poison: unicode(eae6);
+$atelier-totori-category-seasoning: unicode(eae7);
+$atelier-totori-category-spice: unicode(eae8);
+$atelier-totori-category-sundry: unicode(eae9);
+$atelier-totori-category-supplement: unicode(eaea);
+$atelier-totori-category-threads: unicode(eaeb);
+$atelier-totori-category-vegetable: unicode(eaec);
 
 .atelier-escha-accessory::before {
   content: $atelier-escha-accessory;
@@ -879,6 +913,154 @@ $atelier-totori-category-vegetable: unicode(eac7);
 
 .atelier-shallie-wind::before {
   content: $atelier-shallie-wind;
+}
+
+.atelier-sophie2-category-catalysts::before {
+  content: $atelier-sophie2-category-catalysts;
+}
+
+.atelier-sophie2-category-seafood::before {
+  content: $atelier-sophie2-category-seafood;
+}
+
+.atelier-sophie2-category-spices::before {
+  content: $atelier-sophie2-category-spices;
+}
+
+.atelier-sophie2-category-talismans::before {
+  content: $atelier-sophie2-category-talismans;
+}
+
+.atelier-sophie2-element-fire::before {
+  content: $atelier-sophie2-element-fire;
+}
+
+.atelier-sophie2-element-ice::before {
+  content: $atelier-sophie2-element-ice;
+}
+
+.atelier-sophie2-element-light::before {
+  content: $atelier-sophie2-element-light;
+}
+
+.atelier-sophie2-element-lightning::before {
+  content: $atelier-sophie2-element-lightning;
+}
+
+.atelier-sophie2-element-magic::before {
+  content: $atelier-sophie2-element-magic;
+}
+
+.atelier-sophie2-element-wind::before {
+  content: $atelier-sophie2-element-wind;
+}
+
+.atelier-sophie2-race-apostle::before {
+  content: $atelier-sophie2-race-apostle;
+}
+
+.atelier-sophie2-race-apparition::before {
+  content: $atelier-sophie2-race-apparition;
+}
+
+.atelier-sophie2-race-bat::before {
+  content: $atelier-sophie2-race-bat;
+}
+
+.atelier-sophie2-race-beast::before {
+  content: $atelier-sophie2-race-beast;
+}
+
+.atelier-sophie2-race-bird::before {
+  content: $atelier-sophie2-race-bird;
+}
+
+.atelier-sophie2-race-dragon::before {
+  content: $atelier-sophie2-race-dragon;
+}
+
+.atelier-sophie2-race-dragonaire::before {
+  content: $atelier-sophie2-race-dragonaire;
+}
+
+.atelier-sophie2-race-dream-eater::before {
+  content: $atelier-sophie2-race-dream-eater;
+}
+
+.atelier-sophie2-race-dryad::before {
+  content: $atelier-sophie2-race-dryad;
+}
+
+.atelier-sophie2-race-elvira::before {
+  content: $atelier-sophie2-race-elvira;
+}
+
+.atelier-sophie2-race-erde-wiege::before {
+  content: $atelier-sophie2-race-erde-wiege;
+}
+
+.atelier-sophie2-race-ghost::before {
+  content: $atelier-sophie2-race-ghost;
+}
+
+.atelier-sophie2-race-golem::before {
+  content: $atelier-sophie2-race-golem;
+}
+
+.atelier-sophie2-race-jellyfish::before {
+  content: $atelier-sophie2-race-jellyfish;
+}
+
+.atelier-sophie2-race-magical-creature::before {
+  content: $atelier-sophie2-race-magical-creature;
+}
+
+.atelier-sophie2-race-medium-groll::before {
+  content: $atelier-sophie2-race-medium-groll;
+}
+
+.atelier-sophie2-race-mushroom::before {
+  content: $atelier-sophie2-race-mushroom;
+}
+
+.atelier-sophie2-race-plant::before {
+  content: $atelier-sophie2-race-plant;
+}
+
+.atelier-sophie2-race-puni::before {
+  content: $atelier-sophie2-race-puni;
+}
+
+.atelier-sophie2-race-rabbit::before {
+  content: $atelier-sophie2-race-rabbit;
+}
+
+.atelier-sophie2-race-sea-serpent::before {
+  content: $atelier-sophie2-race-sea-serpent;
+}
+
+.atelier-sophie2-race-small-groll::before {
+  content: $atelier-sophie2-race-small-groll;
+}
+
+.atelier-sophie2-tool-hammer::before {
+  content: $atelier-sophie2-tool-hammer;
+}
+
+.atelier-sophie2-tool-pickaxe::before {
+  content: $atelier-sophie2-tool-pickaxe;
+}
+
+.atelier-sophie2-tool-slingshot::before {
+  content: $atelier-sophie2-tool-slingshot;
+}
+
+.atelier-sophie2-type-exploration::before {
+  content: $atelier-sophie2-type-exploration;
+}
+
+.atelier-sophie2-usable::before {
+  content: $atelier-sophie2-usable;
 }
 
 .atelier-totori-category-accessory::before {
