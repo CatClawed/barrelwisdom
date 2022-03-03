@@ -53,10 +53,6 @@
   padding-right: 0.4em;
 }
 
-.atelier-np {
-  padding-right:0;
-}
-
 //  change icon size
 
 .atelier-sm {
@@ -72,6 +68,10 @@
   .atelier-lg {
     font-size: 4vw;
   }
+}
+
+.atelier-np {
+  padding-right:0;
 }
 
 @import "icons";

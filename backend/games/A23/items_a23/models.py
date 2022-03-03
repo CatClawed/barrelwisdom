@@ -2,7 +2,6 @@ from django.db import models
 from games.A23.traits_a23.models import Trait
 from games.A23.effects_a23.models import Effect
 from games.A23.misc_a23.models import Character, Shop
-from games.A23.regions_a23.models import Region
 
 class Category(models.Model):
     slug = models.SlugField(max_length=25)
@@ -66,7 +65,6 @@ class Item(models.Model):
     traits = models.ManyToManyField(Trait)
     categories = models.ManyToManyField(Category)
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE, null=True, blank=True)
-    chest = models.ForeignKey(Region, on_delete=models.CASCADE, null=True, blank=True)
     class Meta:
         ordering = ['index']
 
@@ -79,7 +77,6 @@ class Book(models.Model):
     book_tc = models.CharField(max_length=50, blank=True, null=True)
     items = models.ManyToManyField(Item)
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE, null=True, blank=True)
-    chest = models.ForeignKey(Region, on_delete=models.CASCADE, null=True, blank=True)
     index = models.IntegerField()
     class Meta:
         ordering = ['index']

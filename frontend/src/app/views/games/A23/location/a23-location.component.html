@@ -1,0 +1,78 @@
+<Error *ngIf="error" [errorCode]="error"></Error>
+<div *ngIf="!error">
+    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Location: '+region.name"></Breadcrumb>
+    <h1>{{region.name}}</h1>
+    <div style="margin-left: 0.5em; margin-right: 0.5em;" class="row">
+    <div class="table-of-contents">
+        <b>Table of Contents</b>
+        <ol class="toc-list">
+            <li *ngFor="let area of region.areas">
+                <a href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}" (click)="$event.preventDefault();scroll(area.slug)">{{area.name}}</a>
+                <ul *ngIf="area.climate.length > 1">
+                    <li *ngFor="let climate of area.climate">
+                        <a *ngIf="climate.weather == 'sun'"     href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather)">Sun</a>
+                        <a *ngIf="climate.weather == 'rain'"    href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather)">Rain</a>
+                        <a *ngIf="climate.weather == 'snow'"    href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather)">Snow</a>
+                        <a *ngIf="climate.weather == 'thunder'" href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather)">Thunder</a>
+                    </li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+    </div>
+    <div class="col-md-10 mx-auto" style="margin-top:1.5rem;">
+        <form [formGroup]="pageForm" class="form-horizontal">
+          <div class="row">
+            <mat-form-field class="col-md-9" appearance="outline">
+              <mat-label>Filter...</mat-label>
+              <input matInput formControlName="filtertext">
+            </mat-form-field>
+            <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
+          </div>
+        </form>
+    </div>
+    <div id="{{area.slug}}" *ngFor="let area of region.areas">
+        <h2>{{area.name}}</h2>
+        <b *ngIf="area.chests">Chest:</b>
+        <ul *ngIf="area.chests">
+            <li *ngFor="let chest of area.chests">
+                <!-- <a *ngIf="chest.item" routerLink="/{{gameURL}}/items/{{chest.item.slug}}/{{language}}">{{chest.item.name}}</a>
+                <a *ngIf="chest.book" routerLink="/{{gameURL}}/items/books/{{chest.book.slug}}/{{language}}">{{chest.book.name}}</a>
+                -->
+                <span *ngIf="chest.item">{{chest.item.name}}</span>
+                <span *ngIf="chest.book">{{chest.book.name}}</span>
+            </li>
+        </ul>
+        <ng-container *ngFor="let climate of area.climate">
+            <h3 id="{{area.slug}}-{{climate.weather}}" *ngIf="climate.weather == 'sun'"    >Sun</h3>
+            <h3 id="{{area.slug}}-{{climate.weather}}" *ngIf="climate.weather == 'rain'"   >Rain</h3>
+            <h3 id="{{area.slug}}-{{climate.weather}}" *ngIf="climate.weather == 'snow'"   >Snow</h3>
+            <h3 id="{{area.slug}}-{{climate.weather}}" *ngIf="climate.weather == 'thunder'">Thunder</h3>
+            <table class="tbl table-shrink table-border" >
+                <tr style="text-align:center;">
+                    <th>Tool</th>
+                    <th><i class="fas fa-star"></i></th>
+                    <th><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
+                    <th><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
+                </tr>
+                <ng-container *ngFor="let node of climate.nodes">
+                  <tr *ngIf="validNode(node)">
+                    <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'HAND'"   ><i *ngIf="!node.kind.startsWith('major')" class="atelier atelier-np atelier-lg atelier-ryza2-tool-gather"     ></i><i *ngIf="node.kind.startsWith('major')" style="color:darkorange;" class="atelier atelier-np atelier-lg atelier-ryza2-tool-gather"     ></i></td>
+                    <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'ROD'"    ><i *ngIf="!node.kind.startsWith('major')" class="atelier atelier-np atelier-lg atelier-ryza2-tool-staff"      ></i><i *ngIf="node.kind.startsWith('major')" style="color:darkorange;" class="atelier atelier-np atelier-lg atelier-ryza2-tool-staff"      ></i></td>
+                    <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'FISH'"   ><i *ngIf="!node.kind.startsWith('major')" class="atelier atelier-np atelier-lg atelier-ryza2-tool-fishing-rod"></i><i *ngIf="node.kind.startsWith('major')" style="color:darkorange;" class="atelier atelier-np atelier-lg atelier-ryza2-tool-fishing-rod"></i></td>
+                    <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'SICKLE'" ><i *ngIf="!node.kind.startsWith('major')" class="atelier atelier-np atelier-lg atelier-ryza2-tool-sickle"     ></i><i *ngIf="node.kind.startsWith('major')" style="color:darkorange;" class="atelier atelier-np atelier-lg atelier-ryza2-tool-sickle"     ></i></td>
+                    <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'NET'"    ><i *ngIf="!node.kind.startsWith('major')" class="atelier atelier-np atelier-lg atelier-ryza2-tool-bug-net"    ></i><i *ngIf="node.kind.startsWith('major')" style="color:darkorange;" class="atelier atelier-np atelier-lg atelier-ryza2-tool-bug-net"    ></i></td>
+                    <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'PICKAXE'"><i *ngIf="!node.kind.startsWith('major')" class="atelier atelier-np atelier-lg atelier-sophie2-tool-pickaxe"  ></i><i *ngIf="node.kind.startsWith('major')" style="color:darkorange;" class="atelier atelier-np atelier-lg atelier-sophie2-tool-pickaxe"  ></i></td>
+                    <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'HAMMER'" ><i *ngIf="!node.kind.startsWith('major')" class="atelier atelier-np atelier-lg atelier-sophie2-tool-hammer"   ></i><i *ngIf="node.kind.startsWith('major')" style="color:darkorange;" class="atelier atelier-np atelier-lg atelier-sophie2-tool-hammer"   ></i></td>
+                    <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'SHOT'"   ><i *ngIf="!node.kind.startsWith('major')" class="atelier atelier-np atelier-lg atelier-sophie2-tool-slingshot"></i><i *ngIf="node.kind.startsWith('major')" style="color:darkorange;" class="atelier atelier-np atelier-lg atelier-sophie2-tool-slingshot"></i></td>
+                    <td *ngFor="let item of node.items">
+                        <!-- <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a><br/>{{item.priority}}%
+                        -->
+                        {{item.name}}<br/>{{item.priority}}%
+                    </td>
+                </tr>
+                </ng-container>
+            </table>
+        </ng-container>
+    </div>
+</div>

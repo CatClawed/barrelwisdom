@@ -48,3 +48,40 @@ export interface Effect {
     advanced: AdvData[];
     effectdata_set:EffectDataSimple[];
 }
+
+export interface GatherItem {
+    rank: number;
+    priority: number;
+    slug: string;
+    name: string;
+}
+
+export interface GatherNode {
+    kind: string;
+    tool: string;
+    items: GatherItem[];
+}
+
+export interface Climate {
+    weather: string;
+    monsters: NameLink[];
+    nodes: GatherNode[];
+}
+
+export interface Chest {
+    item: NameLink;
+    book: NameLink;
+}
+
+export interface Area {
+    slug: string;
+    name: string;
+    climate: Climate[];
+    chests: Chest[];
+}
+
+export interface Region {
+    slug: string;
+    name: string;
+    areas: Area[];
+}

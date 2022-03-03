@@ -16,7 +16,60 @@ with open('scripts/data.txt', newline='', encoding='utf-8') as csvfile:
         print(row[0])
         
         
+        
         """
+        loc = Region.objects.get(parent=Region.objects.get(slug=row[0]),
+                                 reg_en=row[1])
+        try:
+            item = Item.objects.get(slug=row[7])
+            o = Chest(item=item, loc=loc)
+            o.save()
+        except Item.DoesNotExist:
+            book = Book.objects.get(slug=row[7])
+            o = Chest(book=book, loc=loc)
+            o.save()
+        
+        
+        prevRank = 0
+    prevNode = None
+
+    for row in reader:
+        print(row[0])
+        try:
+            climate = Climate.objects.get(
+                loc=Region.objects.get(parent=Region.objects.get(slug=row[0]),
+                                       reg_en=row[1]),
+                weather=row[2])
+        except Climate.DoesNotExist:
+            climate = Climate(
+                loc=Region.objects.get(parent=Region.objects.get(slug=row[0]),
+                                       reg_en=row[1]),
+                weather=row[2]
+            )
+            climate.save()
+                
+        gatherItem = GatherItem(
+            item=Item.objects.get(slug=row[7]),
+            rank=row[5],
+            priority=row[8]
+        )
+        gatherItem.save()
+        
+        gatherNode = 0
+        
+        if prevRank is not int(row[5]):
+            print(row[5])
+            gatherNode = GatherNode(
+                kind=row[3].lower().replace("_", "-"),
+                tool=row[6]
+            )
+            gatherNode.save()
+            climate.node.add(gatherNode)
+            prevNode = gatherNode
+        else:
+            gatherNode = prevNode
+        prevRank = int(row[5]) +1
+        gatherNode.items.add(gatherItem)
         if row[0]:
             o = Item.objects.get(slug=row[0])
             

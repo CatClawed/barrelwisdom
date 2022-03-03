@@ -21,6 +21,15 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'locations',
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A23/location/a23-location.module').then(m=>m.A23LocationModule),
+      },
+    ]
+  },
+  {
     path: '',
     redirectTo: '/sophie2/faq',
     pathMatch: 'full'

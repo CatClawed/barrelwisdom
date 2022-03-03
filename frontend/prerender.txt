@@ -136,3 +136,9 @@
 /sophie2/traits/ko
 /sophie2/traits/sc
 /sophie2/traits/tc
+/sophie2/effects
+/sophie2/effects/en
+/sophie2/effects/ja
+/sophie2/effects/ko
+/sophie2/effects/sc
+/sophie2/effects/tc

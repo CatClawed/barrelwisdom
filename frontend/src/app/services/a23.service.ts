@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders,  } from '@angular/common/http';
 import { Observable} from 'rxjs';
 import { environment } from '@environments/environment';
-import { Trait, Effect } from '@app/interfaces/a23';
+import { Trait, Effect, Region } from '@app/interfaces/a23';
 
 
 @Injectable({ providedIn: 'root' })
@@ -34,6 +34,10 @@ export class A23Service {
 
   getEffect(slugname: string, language: string): Observable<Effect> {
     return this.http.get<Effect>(`${environment.apiUrl}/A23/effect/${slugname}/${language}/`);
+  }
+
+  getLocation(slugname: string, language: string): Observable<Region> {
+    return this.http.get<Region>(`${environment.apiUrl}/A23/region/${slugname}/${language}/`);
   }
 
 }
