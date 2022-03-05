@@ -36,11 +36,8 @@
         <b *ngIf="area.chests">Chest:</b>
         <ul *ngIf="area.chests">
             <li *ngFor="let chest of area.chests">
-                <!-- <a *ngIf="chest.item" routerLink="/{{gameURL}}/items/{{chest.item.slug}}/{{language}}">{{chest.item.name}}</a>
+                <a *ngIf="chest.item" routerLink="/{{gameURL}}/items/{{chest.item.slug}}/{{language}}">{{chest.item.name}}</a>
                 <a *ngIf="chest.book" routerLink="/{{gameURL}}/items/books/{{chest.book.slug}}/{{language}}">{{chest.book.name}}</a>
-                -->
-                <span *ngIf="chest.item">{{chest.item.name}}</span>
-                <span *ngIf="chest.book">{{chest.book.name}}</span>
             </li>
         </ul>
         <ng-container *ngFor="let climate of area.climate">
@@ -57,18 +54,33 @@
                 </tr>
                 <ng-container *ngFor="let node of climate.nodes">
                   <tr *ngIf="validNode(node)">
-                    <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'HAND'"   ><i *ngIf="!node.kind.startsWith('major')" class="atelier atelier-np atelier-lg atelier-ryza2-tool-gather"     ></i><i *ngIf="node.kind.startsWith('major')" style="color:darkorange;" class="atelier atelier-np atelier-lg atelier-ryza2-tool-gather"     ></i></td>
-                    <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'ROD'"    ><i *ngIf="!node.kind.startsWith('major')" class="atelier atelier-np atelier-lg atelier-ryza2-tool-staff"      ></i><i *ngIf="node.kind.startsWith('major')" style="color:darkorange;" class="atelier atelier-np atelier-lg atelier-ryza2-tool-staff"      ></i></td>
-                    <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'FISH'"   ><i *ngIf="!node.kind.startsWith('major')" class="atelier atelier-np atelier-lg atelier-ryza2-tool-fishing-rod"></i><i *ngIf="node.kind.startsWith('major')" style="color:darkorange;" class="atelier atelier-np atelier-lg atelier-ryza2-tool-fishing-rod"></i></td>
-                    <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'SICKLE'" ><i *ngIf="!node.kind.startsWith('major')" class="atelier atelier-np atelier-lg atelier-ryza2-tool-sickle"     ></i><i *ngIf="node.kind.startsWith('major')" style="color:darkorange;" class="atelier atelier-np atelier-lg atelier-ryza2-tool-sickle"     ></i></td>
-                    <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'NET'"    ><i *ngIf="!node.kind.startsWith('major')" class="atelier atelier-np atelier-lg atelier-ryza2-tool-bug-net"    ></i><i *ngIf="node.kind.startsWith('major')" style="color:darkorange;" class="atelier atelier-np atelier-lg atelier-ryza2-tool-bug-net"    ></i></td>
-                    <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'PICKAXE'"><i *ngIf="!node.kind.startsWith('major')" class="atelier atelier-np atelier-lg atelier-sophie2-tool-pickaxe"  ></i><i *ngIf="node.kind.startsWith('major')" style="color:darkorange;" class="atelier atelier-np atelier-lg atelier-sophie2-tool-pickaxe"  ></i></td>
-                    <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'HAMMER'" ><i *ngIf="!node.kind.startsWith('major')" class="atelier atelier-np atelier-lg atelier-sophie2-tool-hammer"   ></i><i *ngIf="node.kind.startsWith('major')" style="color:darkorange;" class="atelier atelier-np atelier-lg atelier-sophie2-tool-hammer"   ></i></td>
-                    <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'SHOT'"   ><i *ngIf="!node.kind.startsWith('major')" class="atelier atelier-np atelier-lg atelier-sophie2-tool-slingshot"></i><i *ngIf="node.kind.startsWith('major')" style="color:darkorange;" class="atelier atelier-np atelier-lg atelier-sophie2-tool-slingshot"></i></td>
+                      <ng-template #typePopover>
+                          {{node.kind}}
+                      </ng-template>
+                      <td *ngIf="!node.kind.startsWith('major')" style="text-align: center;vertical-align: middle;">
+                        <i *ngIf="node.tool == 'HAND'"    class="atelier atelier-lg atelier-ryza2-tool-gather"     ></i>
+                        <i *ngIf="node.tool == 'ROD'"     class="atelier atelier-lg atelier-ryza2-tool-staff"      ></i>
+                        <i *ngIf="node.tool == 'FISH'"    class="atelier atelier-lg atelier-ryza2-tool-fishing-rod"></i>
+                        <i *ngIf="node.tool == 'SICKLE'"  class="atelier atelier-lg atelier-ryza2-tool-sickle"     ></i>
+                        <i *ngIf="node.tool == 'NET'"     class="atelier atelier-lg atelier-ryza2-tool-bug-net"    ></i>
+                        <i *ngIf="node.tool == 'PICKAXE'" class="atelier atelier-lg atelier-sophie2-tool-pickaxe"  ></i>
+                        <i *ngIf="node.tool == 'HAMMER'"  class="atelier atelier-lg atelier-sophie2-tool-hammer"   ></i>
+                        <i *ngIf="node.tool == 'SHOT'"    class="atelier atelier-lg atelier-sophie2-tool-slingshot"></i>
+                        <a (click)="$event.preventDefault()" [popover]="typePopover" popoverTitle="Gather Type" class="fas fa-plus-square"></a>
+                      </td>
+                      <td *ngIf="node.kind.startsWith('major')" style="text-align: center;vertical-align: middle;color:darkorange;">
+                        <i *ngIf="node.tool == 'HAND'"    class="atelier atelier-lg atelier-ryza2-tool-gather"     ></i>
+                        <i *ngIf="node.tool == 'ROD'"     class="atelier atelier-lg atelier-ryza2-tool-staff"      ></i>
+                        <i *ngIf="node.tool == 'FISH'"    class="atelier atelier-lg atelier-ryza2-tool-fishing-rod"></i>
+                        <i *ngIf="node.tool == 'SICKLE'"  class="atelier atelier-lg atelier-ryza2-tool-sickle"     ></i>
+                        <i *ngIf="node.tool == 'NET'"     class="atelier atelier-lg atelier-ryza2-tool-bug-net"    ></i>
+                        <i *ngIf="node.tool == 'PICKAXE'" class="atelier atelier-lg atelier-sophie2-tool-pickaxe"  ></i>
+                        <i *ngIf="node.tool == 'HAMMER'"  class="atelier atelier-lg atelier-sophie2-tool-hammer"   ></i>
+                        <i *ngIf="node.tool == 'SHOT'"    class="atelier atelier-lg atelier-sophie2-tool-slingshot"></i>
+                        <a (click)="$event.preventDefault()" [popover]="typePopover" popoverTitle="Gather Type" class="fas fa-plus-square"></a>
+                      </td>
                     <td *ngFor="let item of node.items">
-                        <!-- <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a><br/>{{item.priority}}%
-                        -->
-                        {{item.name}}<br/>{{item.priority}}%
+                        <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a><br/>{{item.priority}}%
                     </td>
                 </tr>
                 </ng-container>

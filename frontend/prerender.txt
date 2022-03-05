@@ -142,3 +142,15 @@
 /sophie2/effects/ko
 /sophie2/effects/sc
 /sophie2/effects/tc
+/sophie2/monsters
+/sophie2/monsters/en
+/sophie2/monsters/ja
+/sophie2/monsters/ko
+/sophie2/monsters/sc
+/sophie2/monsters/tc
+/sophie2/items
+/sophie2/items/en
+/sophie2/items/ja
+/sophie2/items/ko
+/sophie2/items/sc
+/sophie2/items/tc

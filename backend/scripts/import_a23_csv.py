@@ -3,6 +3,7 @@ from games.A23.traits_a23.models import *
 from games.A23.misc_a23.models import *
 from games.A23.items_a23.models import *
 from games.A23.regions_a23.models import *
+from games.A23.monsters_a23.models import *
 
 # python manage.py shell < scripts/import_a23_csv.py
 
@@ -14,10 +15,159 @@ with open('scripts/data.txt', newline='', encoding='utf-8') as csvfile:
     reader = csv.reader(csvfile, delimiter='\t')
     for row in reader:
         print(row[0])
-        
-        
+    
         
         """
+        
+        bk = Book.objects.get(slug=row[0])
+        bk.items.add(Item.objects.get(slug=row[1]))
+        if row[2]:
+            bk.items.add(Item.objects.get(slug=row[2]))
+        if row[3]:
+            bk.note = row[3]
+            bk.save()
+        
+        
+        prevRank = 0
+    prevNode = None
+    for row in reader:
+        print(row[0])
+        try:
+            climate = Climate2.objects.get(
+                loc=Region2.objects.get(slug=Region.objects.get(reg_en=row[1],
+                                                                parent=Region.objects.get(slug=row[0])).slug
+                                        ),
+                weather=row[2]
+            )
+        except Climate2.DoesNotExist:
+            climate = Climate2(
+                loc=Region2.objects.get(slug=Region.objects.get(reg_en=row[1],
+                                                                parent=Region.objects.get(slug=row[0])).slug
+                                        ),
+                weather=row[2]
+            )
+            climate.save()
+                
+        gatherItem = GatherItem2(
+            item=Item.objects.get(slug=row[7]),
+            rank=row[5],
+            priority=row[8]
+        )
+        
+        
+        gatherNode = 0
+        
+        if prevRank is not int(row[5]):
+            print(row[5])
+            gatherNode = GatherNode2(
+                kind=row[3].lower().replace("_", "-"),
+                tool=row[6],
+                climate=climate
+            )
+            gatherNode.save()
+            prevNode = gatherNode
+        else:
+            gatherNode = prevNode
+        prevRank = int(row[5]) +1
+        gatherItem.node = prevNode
+        gatherItem.save()
+        
+        
+        
+        
+        
+        en = Monster_en(
+            name=row[3],
+            desc1=row[4] if row[4] else None,
+            desc2=row[5] if row[5] else None,
+            desc3=row[6] if row[6] else None,
+            desc4=row[7] if row[7] else None,
+        )
+        ja = Monster_ja(
+            name=row[8],
+            desc1=row[9] if row[9] else None,
+            desc2=row[10] if row[10] else None,
+            desc3=row[11] if row[11] else None,
+            desc4=row[12] if row[12] else None,
+        )
+        ko = Monster_ko(
+            name=row[13],
+            desc1=row[14] if row[14] else None,
+            desc2=row[15] if row[15] else None,
+            desc3=row[16] if row[16] else None,
+            desc4=row[17] if row[17] else None,
+        )
+        sc = Monster_sc(
+            name=row[18],
+            desc1=row[19] if row[19] else None,
+            desc2=row[20] if row[20] else None,
+            desc3=row[21] if row[21] else None,
+            desc4=row[22] if row[22] else None,
+        )
+        tc = Monster_tc(
+            name=row[23],
+            desc1=row[24] if row[24] else None,
+            desc2=row[25] if row[25] else None,
+            desc3=row[26] if row[26] else None,
+            desc4=row[27] if row[27] else None,
+        )
+        
+        en.save()
+        ja.save()
+        ko.save()
+        sc.save()
+        tc.save()
+        
+        o = Monster.objects.get(slug=row[0])
+        
+        o.mon_en=en
+        o.mon_ja=ja
+        o.mon_ko=ko
+        o.mon_sc=sc
+        o.mon_tc=tc
+        o.save()
+        
+        
+        
+        
+        o = Monster(
+            slug=row[0],
+            index=row[1],
+            hp_rank=row[2],
+            str_rank=row[3],
+            def_rank=row[4],
+            spd_rank=row[5],
+            kind=row[6],
+            resist_mag   = row[11] if row[11] else None,
+            resist_fire  = row[12] if row[12] else None,
+            resist_ice   = row[13] if row[13] else None,
+            resist_thun  = row[14] if row[14] else None,
+            resist_wind  = row[15] if row[15] else None,
+            resist_phys  = row[10] if row[16] else None,
+            ailment0  = row[17] if row[17] else 0,
+            ailment1  = row[18] if row[18] else 0,
+            ailment2  = row[19] if row[19] else 0,
+            ailment3  = row[20] if row[20] else 0,
+            ailment4  = row[21] if row[21] else 0,
+            ailment5  = row[22] if row[22] else 0,
+            ailment6  = row[23] if row[23] else 0,
+            ailment7  = row[24] if row[24] else 0,
+            ailment8  = row[25] if row[25] else 0,
+            ailment9  = row[26] if row[26] else 0,
+            ailment10 = row[27] if row[27] else 0,
+            char1 = Character.objects.get(slug=row[28]) if row[28] else None,
+            char2 = Character.objects.get(slug=row[29]) if row[29] else None,
+            char3 = Character.objects.get(slug=row[30]) if row[30] else None,
+            char4 = Character.objects.get(slug=row[31]) if row[31] else None,
+        )
+        o.save()
+        
+        for drop in row[16].split(','):
+            if drop:
+                it = Item.objects.get(slug=drop)
+                o.drops.add(it)
+        
+        
         loc = Region.objects.get(parent=Region.objects.get(slug=row[0]),
                                  reg_en=row[1])
         try:

@@ -72,8 +72,7 @@
     </div>
     <b *ngIf=" trt.item_set">Item:</b>
     <ul *ngIf=" trt.item_set">
-      <!-- <li *ngFor="let item of trt.item_set"><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
-      -->       <li *ngFor="let item of trt.item_set">{{item.name}}
+      <li *ngFor="let item of trt.item_set"><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
     </ul>
     <p *ngIf="trt.combo1"><a routerLink="/{{gameURL}}/traits/{{trt.combo1.slug}}/{{language}}">{{trt.combo1.name}}</a> x <a routerLink="/{{gameURL}}/traits/{{trt.combo2.slug}}/{{language}}">{{trt.combo2.name}}</a></p>
     <p>{{trt.desc}}</p>

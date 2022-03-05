@@ -12,6 +12,15 @@ class Category(models.Model):
     cat_tc = models.CharField(max_length=25)
     icon   = models.CharField(max_length=35)
 
+class Component(models.Model):
+    # only synth items have named ones
+    com_en = models.CharField(max_length=30, blank=True, null=True)
+    com_ja = models.CharField(max_length=30, blank=True, null=True)
+    com_ko = models.CharField(max_length=30, blank=True, null=True)
+    com_sc = models.CharField(max_length=30, blank=True, null=True)
+    com_tc = models.CharField(max_length=30, blank=True, null=True)
+    code = models.CharField(max_length=10) # first digit color; other nine are about the squares
+
 class Item_en(models.Model):
     name = models.CharField(max_length=50)
     desc1 = models.CharField(max_length=200, null=True, blank=True)
@@ -65,6 +74,14 @@ class Item(models.Model):
     traits = models.ManyToManyField(Trait)
     categories = models.ManyToManyField(Category)
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE, null=True, blank=True)
+    char = models.ForeignKey(Character, on_delete=models.CASCADE, null=True, blank=True, related_name="synthchar")
+    quantity = models.IntegerField(null=True, blank=True)
+    uses = models.IntegerField(null=True, blank=True)
+    wt = models.IntegerField(null=True, blank=True)
+    range = models.CharField(max_length=15, null=True, blank=True)
+    maxlv = models.IntegerField(null=True, blank=True)
+    restrict = models.IntegerField(null=True, blank=True)
+    components = models.ManyToManyField(Component)
     class Meta:
         ordering = ['index']
 
@@ -75,6 +92,7 @@ class Book(models.Model):
     book_ko = models.CharField(max_length=50, blank=True, null=True)
     book_sc = models.CharField(max_length=50, blank=True, null=True)
     book_tc = models.CharField(max_length=50, blank=True, null=True)
+    note = models.CharField(max_length=50, blank=True, null=True)
     items = models.ManyToManyField(Item)
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE, null=True, blank=True)
     index = models.IntegerField()
@@ -82,28 +100,35 @@ class Book(models.Model):
         ordering = ['index']
 
 class CharacterEquip(models.Model):
-    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    it  = models.OneToOneField(Item, on_delete=models.CASCADE, blank=True, null=True)
     chars = models.ManyToManyField(Character)
 
 class Equip(models.Model):
-    item  = models.ForeignKey(Item, on_delete=models.CASCADE)
+    it  = models.OneToOneField(Item, on_delete=models.CASCADE, blank=True, null=True)
     hp    = models.IntegerField()
     mp    = models.IntegerField()
     atk   = models.IntegerField()
     dfn   = models.IntegerField()
     spd   = models.IntegerField()
-
-class EffectData(models.Model):
-    effect = models.ForeignKey(Effect, on_delete=models.CASCADE)
-    elem = models.IntegerField()
-    num = models.IntegerField(blank=True, null=True)
-    class Meta:
-        ordering = ['num']
+    
+class Ingredient(models.Model):
+    item = models.ForeignKey(Item, on_delete=models.CASCADE, blank=True, null=True)
+    cat = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True)
+    quantity = models.IntegerField()
+    ing = models.ForeignKey(Item, on_delete=models.CASCADE, related_name="ingredients")   
 
 class EffectLines(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
-    effects = models.ManyToManyField(EffectData)
     elem = models.CharField(max_length=10, blank=True, null=True)
-    order = models.IntegerField() # order of elems due to duplicates
+    order = models.IntegerField()
     class Meta:
         ordering = ['order']
+
+class EffectData(models.Model):
+    effect = models.ForeignKey(Effect, on_delete=models.CASCADE, blank=True, null=True)
+    component = models.ForeignKey(Component, on_delete=models.CASCADE, blank=True, null=True)
+    elem = models.IntegerField()
+    num = models.IntegerField(blank=True, null=True)
+    line = models.ForeignKey(EffectLines, on_delete=models.CASCADE, blank=True, null=True)
+    class Meta:
+        ordering = ['num']

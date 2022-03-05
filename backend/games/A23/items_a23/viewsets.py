@@ -1,18 +1,244 @@
-"""
 from rest_framework import viewsets, filters
-from games.A23.items_a23.models import Item, Book
-from games.A23.items_a23.serializers import A23ItemSerializer, A23ItemFullSerializer, A23BookSerializer
+from games.A23.items_a23.models import Item, Book, Category
+from games.A23.items_a23.serializers import A23ItemSerializer, A23ItemListSerializer, A23CategorySerializer, A23BookSerializer, A23CategoryItemSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 
+class A23CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = A23CategorySerializer
+    filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
+    lookup_field = 'slug'
+
+    @action(detail=False)
+    def en(self, request): 
+        queryset = (
+            Category.objects
+        )
+        serializer = A23CategorySerializer(queryset, many=True, context={'language': 'en'})
+        return Response(serializer.data)
+    
+    @action(detail=True, methods=['get'], url_path="en")
+    def en_full(self, request, slug):
+        try:
+            queryset = (
+                Category.objects
+                .prefetch_related(
+                    'item_set',
+                    'item_set__item_en'
+                )
+                .get(slug=slug)
+            )
+        except ObjectDoesNotExist:
+            raise Http404
+        serializer = A23CategoryItemSerializer(queryset, context={'language': 'en'})
+        return Response(serializer.data)
+    
+    @action(detail=False)
+    def ja(self, request): 
+        queryset = (
+            Category.objects
+        )
+        serializer = A23CategorySerializer(queryset, many=True, context={'language': 'ja'})
+        return Response(serializer.data)
+    
+    @action(detail=True, methods=['get'], url_path="ja")
+    def ja_full(self, request, slug):
+        try:
+            queryset = (
+                Category.objects
+                .prefetch_related(
+                    'item_set',
+                    'item_set__item_ja'
+                )
+                .get(slug=slug)
+            )
+        except ObjectDoesNotExist:
+            raise Http404
+        serializer = A23CategoryItemSerializer(queryset, context={'language': 'ja'})
+        return Response(serializer.data)
+    
+    @action(detail=False)
+    def ko(self, request): 
+        queryset = (
+            Category.objects
+        )
+        serializer = A23CategorySerializer(queryset, many=True, context={'language': 'ko'})
+        return Response(serializer.data)
+    
+    @action(detail=True, methods=['get'], url_path="ko")
+    def ko_full(self, request, slug):
+        try:
+            queryset = (
+                Category.objects
+                .prefetch_related(
+                    'item_set',
+                    'item_set__item_ko'
+                )
+                .get(slug=slug)
+            )
+        except ObjectDoesNotExist:
+            raise Http404
+        serializer = A23CategoryItemSerializer(queryset, context={'language': 'ko'})
+        return Response(serializer.data)
+    
+    @action(detail=False)
+    def sc(self, request): 
+        queryset = (
+            Category.objects
+        )
+        serializer = A23CategorySerializer(queryset, many=True, context={'language': 'sc'})
+        return Response(serializer.data)
+    
+    @action(detail=True, methods=['get'], url_path="sc")
+    def sc_full(self, request, slug):
+        try:
+            queryset = (
+                Category.objects
+                .prefetch_related(
+                    'item_set',
+                    'item_set__item_sc'
+                )
+                .get(slug=slug)
+            )
+        except ObjectDoesNotExist:
+            raise Http404
+        serializer = A23CategoryItemSerializer(queryset, context={'language': 'sc'})
+        return Response(serializer.data)
+    
+    @action(detail=False)
+    def tc(self, request): 
+        queryset = (
+            Category.objects
+        )
+        serializer = A23CategorySerializer(queryset, many=True, context={'language': 'tc'})
+        return Response(serializer.data)
+    
+    @action(detail=True, methods=['get'], url_path="tc")
+    def tc_full(self, request, slug):
+        try:
+            queryset = (
+                Category.objects
+                .prefetch_related(
+                    'item_set',
+                    'item_set__item_tc'
+                )
+                .get(slug=slug)
+            )
+        except ObjectDoesNotExist:
+            raise Http404
+        serializer = A23CategoryItemSerializer(queryset, context={'language': 'tc'})
+        return Response(serializer.data)
+    
+class A23BookViewSet(viewsets.ModelViewSet):
+    queryset = Book.objects.all()
+    serializer_class = A23BookSerializer
+    filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
+    lookup_field = 'slug'
+
+    @action(detail=True, methods=['get'], url_path="en")
+    def en_full(self, request, slug):
+        try:
+            queryset = (
+                Book.objects
+                .select_related(
+                    'shop'
+                )
+                .prefetch_related(
+                    'items',
+                    'items__item_en'
+                )
+                .get(slug=slug)
+            )
+        except ObjectDoesNotExist:
+            raise Http404
+        serializer = A23BookSerializer(queryset, context={'language': 'en'})
+        return Response(serializer.data)
+    
+    @action(detail=True, methods=['get'], url_path="ja")
+    def ja_full(self, request, slug):
+        try:
+            queryset = (
+                Book.objects
+                .select_related(
+                    'shop'
+                )
+                .prefetch_related(
+                    'items',
+                    'items__item_ja'
+                )
+                .get(slug=slug)
+            )
+        except ObjectDoesNotExist:
+            raise Http404
+        serializer = A23BookSerializer(queryset, context={'language': 'ja'})
+        return Response(serializer.data)
+    
+    @action(detail=True, methods=['get'], url_path="ko")
+    def ko_full(self, request, slug):
+        try:
+            queryset = (
+                Book.objects
+                .select_related(
+                    'shop'
+                )
+                .prefetch_related(
+                    'items',
+                    'items__item_ko'
+                )
+                .get(slug=slug)
+            )
+        except ObjectDoesNotExist:
+            raise Http404
+        serializer = A23BookSerializer(queryset, context={'language': 'ko'})
+        return Response(serializer.data)
+    
+    @action(detail=True, methods=['get'], url_path="sc")
+    def sc_full(self, request, slug):
+        try:
+            queryset = (
+                Book.objects
+                .select_related(
+                    'shop'
+                )
+                .prefetch_related(
+                    'items',
+                    'items__item_sc'
+                )
+                .get(slug=slug)
+            )
+        except ObjectDoesNotExist:
+            raise Http404
+        serializer = A23BookSerializer(queryset, context={'language': 'sc'})
+        return Response(serializer.data)
+    
+    @action(detail=True, methods=['get'], url_path="tc")
+    def tc_full(self, request, slug):
+        try:
+            queryset = (
+                Book.objects
+                .select_related(
+                    'shop'
+                )
+                .prefetch_related(
+                    'items',
+                    'items__item_tc'
+                )
+                .get(slug=slug)
+            )
+        except ObjectDoesNotExist:
+            raise Http404
+        serializer = A23BookSerializer(queryset, context={'language': 'tc'})
+        return Response(serializer.data)
+
 class A23ItemViewSet(viewsets.ModelViewSet):
     queryset = Item.objects.all()
-    serializer_class = A23ItemSerializer
+    serializer_class = A23ItemListSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    lookup_field = 'slugname'
+    lookup_field = 'slug'
 
     @action(detail=False)
     def en(self, request): 
@@ -22,187 +248,214 @@ class A23ItemViewSet(viewsets.ModelViewSet):
                 'item_en'
             )
             .prefetch_related(
-                'categories',
-                'categories__cat_en',
-                'ingredient_set',
-                'ingredient_set__category__cat_en',
-                'ingredient_set__item__item_en'
+                'categories'
             )
         )
-        serializer = A23ItemSerializer(queryset, many=True, context={'language': 'en'})
+        serializer = A23ItemListSerializer(queryset, many=True, context={'language': 'en'})
         return Response(serializer.data)
-
+    
+    @action(detail=True, methods=['get'], url_path="en")
+    def en_full(self, request, slug):
+        try:
+            queryset = (
+                Item.objects
+                .select_related(
+                    'item_en',
+                    'char1',
+                    'char2',
+                    'char3',
+                    'char4',
+                    'equip'
+                )
+                .prefetch_related(
+                    'categories',
+                    'gatheritem2_set',
+                    'gatheritem2_set__node',
+                    'gatheritem2_set__node__climate',
+                    'gatheritem2_set__node__climate__loc',
+                    'gatheritem2_set__node__climate__loc__parent',
+                    'monster_set',
+                    'monster_set__mon_en'
+                )
+                .get(slug=slug)
+            )
+        except ObjectDoesNotExist:
+            raise Http404
+        serializer = A23ItemSerializer(queryset, context={'language': 'en'})
+        return Response(serializer.data)
+    
     @action(detail=False)
-    def ja(self, request):
+    def ja(self, request): 
         queryset = (
             Item.objects
             .select_related(
                 'item_ja'
             )
             .prefetch_related(
-                'categories',
-                'categories__cat_ja',
-                'ingredient_set',
-                'ingredient_set__category__cat_ja',
-                'ingredient_set__item__item_ja'
+                'categories'
             )
         )
-        serializer = A23ItemSerializer(queryset, many=True, context={'language': 'ja'})
+        serializer = A23ItemListSerializer(queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)
-
-    # allows easy access via catect/slugname/en
-    @action(detail=True, methods=['get'], url_path="en")
-    def en_full(self, request, slugname):
+    
+    @action(detail=True, methods=['get'], url_path="ja")
+    def ja_full(self, request, slug):
         try:
             queryset = (
                 Item.objects
                 .select_related(
-                    'item_en'
+                    'item_ja',
+                    'char1',
+                    'char2',
+                    'char3',
+                    'char4',
+                    'equip'
                 )
                 .prefetch_related(
                     'categories',
-                    'categories__cat_en',
-                    'ingredient_set',
-                    'ingredient_set__category__cat_en',
-                    'ingredient_set__item__item_en',
-                    'properties',
-                    'properties__prop_en',
-                    'monsters',
-                    'monsters__mon_en',
-                    'locations',
-                    'locations__reg_en',
-                    'characterequip_set',
-                    'equip_set',
-                    'disassembly_set',
-                    'disassembly_set__item__item_en',
-                    'disassembled_set',
-                    'disassembled_set__item__item_en',
-                    'book_set',
-                    'book_set__item_en',
-                    'effectlines_set',
-                    'effectlines_set__effects',
-                    'effectlines_set__effects__effect',
-                    'effectlines_set__effects__effect__eff_en'
+                    'gatheritem2_set',
+                    'gatheritem2_set__node',
+                    'gatheritem2_set__node__climate',
+                    'gatheritem2_set__node__climate__loc',
+                    'gatheritem2_set__node__climate__loc__parent',
+                    'monster_set',
+                    'monster_set__mon_ja'
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A23ItemFullSerializer(queryset, context={'language': 'en'})
+        serializer = A23ItemSerializer(queryset, context={'language': 'ja'})
         return Response(serializer.data)
-
-    @action(detail=True, methods=['get'], url_path="ja")
-    def ja_full(self, request, slugname):
+    
+    @action(detail=False)
+    def ko(self, request): 
+        queryset = (
+            Item.objects
+            .select_related(
+                'item_ko'
+            )
+            .prefetch_related(
+                'categories'
+            )
+        )
+        serializer = A23ItemListSerializer(queryset, many=True, context={'language': 'ko'})
+        return Response(serializer.data)
+    
+    @action(detail=True, methods=['get'], url_path="ko")
+    def ko_full(self, request, slug):
         try:
             queryset = (
                 Item.objects
                 .select_related(
-                    'item_ja'
+                    'item_ko',
+                    'char1',
+                    'char2',
+                    'char3',
+                    'char4',
+                    'equip'
                 )
                 .prefetch_related(
                     'categories',
-                    'categories__cat_ja',
-                    'ingredient_set',
-                    'ingredient_set__category__cat_ja',
-                    'ingredient_set__item__item_ja',
-                    'properties',
-                    'properties__prop_ja',
-                    'monsters',
-                    'monsters__mon_ja',
-                    'locations',
-                    'locations__reg_ja',
-                    'characterequip_set',
-                    'equip_set',
-                    'disassembly_set',
-                    'disassembly_set__item__item_ja',
-                    'disassembled_set',
-                    'disassembled_set__item__item_ja',
-                    'book_set',
-                    'book_set__item_ja',
-                    'effectlines_set',
-                    'effectlines_set__effects',
-                    'effectlines_set__effects__effect',
-                    'effectlines_set__effects__effect__eff_ja'
+                    'gatheritem2_set',
+                    'gatheritem2_set__node',
+                    'gatheritem2_set__node__climate',
+                    'gatheritem2_set__node__climate__loc',
+                    'gatheritem2_set__node__climate__loc__parent',
+                    'monster_set',
+                    'monster_set__mon_ko'
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A23ItemFullSerializer(queryset, context={'language': 'ja'})
+        serializer = A23ItemSerializer(queryset, context={'language': 'ko'})
         return Response(serializer.data)
-
-class A23BookViewSet(viewsets.ModelViewSet):
-    queryset = Book.objects.all()
-    serializer_class = A23BookSerializer
-    filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    lookup_field = 'slugname'
-
+    
     @action(detail=False)
-    def en(self, request):
+    def sc(self, request): 
         queryset = (
-            Book.objects
+            Item.objects
             .select_related(
-                'item_en'
+                'item_sc'
             )
             .prefetch_related(
-                'items',
-                'items__item_en'
+                'categories'
             )
         )
-        serializer = A23BookSerializer(queryset, many=True, context={'language': 'en'})
+        serializer = A23ItemListSerializer(queryset, many=True, context={'language': 'sc'})
         return Response(serializer.data)
-
+    
+    @action(detail=True, methods=['get'], url_path="sc")
+    def sc_full(self, request, slug):
+        try:
+            queryset = (
+                Item.objects
+                .select_related(
+                    'item_sc',
+                    'char1',
+                    'char2',
+                    'char3',
+                    'char4',
+                    'equip'
+                )
+                .prefetch_related(
+                    'categories',
+                    'gatheritem2_set',
+                    'gatheritem2_set__node',
+                    'gatheritem2_set__node__climate',
+                    'gatheritem2_set__node__climate__loc',
+                    'gatheritem2_set__node__climate__loc__parent',
+                    'monster_set',
+                    'monster_set__mon_sc'
+                )
+                .get(slug=slug)
+            )
+        except ObjectDoesNotExist:
+            raise Http404
+        serializer = A23ItemSerializer(queryset, context={'language': 'sc'})
+        return Response(serializer.data)
+    
     @action(detail=False)
-    def ja(self, request):
+    def tc(self, request): 
         queryset = (
-            Book.objects
+            Item.objects
             .select_related(
-                'item_ja'
+                'item_tc'
             )
             .prefetch_related(
-                'items',
-                'items__item_ja'
+                'categories'
             )
         )
-        serializer = A23BookSerializer(queryset, many=True, context={'language': 'ja'})
+        serializer = A23ItemListSerializer(queryset, many=True, context={'language': 'tc'})
         return Response(serializer.data)
-
-    # allows easy access via catect/slugname/en
-    @action(detail=True, methods=['get'], url_path="en")
-    def en_full(self, request, slugname):
+    
+    @action(detail=True, methods=['get'], url_path="tc")
+    def tc_full(self, request, slug):
         try:
             queryset = (
-                Book.objects
+                Item.objects
                 .select_related(
-                    'item_en'
+                    'item_tc',
+                    'char1',
+                    'char2',
+                    'char3',
+                    'char4',
+                    'equip'
                 )
                 .prefetch_related(
-                    'items',
-                    'items__item_en'
+                    'categories',
+                    'gatheritem2_set',
+                    'gatheritem2_set__node',
+                    'gatheritem2_set__node__climate',
+                    'gatheritem2_set__node__climate__loc',
+                    'gatheritem2_set__node__climate__loc__parent',
+                    'monster_set',
+                    'monster_set__mon_tc'
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A23BookSerializer(queryset, context={'language': 'en'})
+        serializer = A23ItemSerializer(queryset, context={'language': 'tc'})
         return Response(serializer.data)
-
-    @action(detail=True, methods=['get'], url_path="ja")
-    def ja_full(self, request, slugname):
-        try:
-            queryset = (
-                Book.objects
-                .select_related(
-                    'item_ja'
-                )
-                .prefetch_related(
-                    'items',
-                    'items__item_ja'
-                )
-                .get(slugname=slugname)
-            )
-        except ObjectDoesNotExist:
-            raise Http404
-        serializer = A23BookSerializer(queryset, context={'language': 'ja'})
-        return Response(serializer.data)
-"""

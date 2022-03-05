@@ -1,0 +1,39 @@
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { PipeModule } from '@app/pipes/pipes.module';
+import { ErrorModule } from '@app/views/error/error.module';
+import { LanguageModule } from '@app/views/language/language.module';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { A23MonsterRoutingModule } from './a23-monster-routing.module';
+import { A23MonsterComponent } from './a23-monster.component';
+import { A23MonsterlistComponent } from './a23-monsterlist.component';
+import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
+
+@NgModule({
+    imports: [
+      CommonModule,
+      ModalModule.forRoot(),
+      ReactiveFormsModule,
+      A23MonsterRoutingModule,
+      PipeModule,
+      MatInputModule,
+      MatFormFieldModule,
+      MatIconModule,
+      MatSelectModule,
+      MatButtonModule,
+      LanguageModule,
+      ErrorModule,
+      BreadcrumbModule,
+    ],
+    declarations: [
+        A23MonsterlistComponent,
+        A23MonsterComponent,
+    ]
+  })
+  export class A23MonsterModule {}

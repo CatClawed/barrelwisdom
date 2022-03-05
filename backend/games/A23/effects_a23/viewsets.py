@@ -79,10 +79,10 @@ class A23EffectViewSet(viewsets.ModelViewSet):
                 )
                 .prefetch_related(
                     'advanced',
-                    'effectdata_set',
-                    'effectdata_set__effectlines_set',
-                    'effectdata_set__effectlines_set__item',
-                    'effectdata_set__effectlines_set__item__item_en',
+                    #'effectdata_set',
+                    #'effectdata_set__effectlines_set',
+                    #'effectdata_set__effectlines_set__item',
+                    #'effectdata_set__effectlines_set__item__item_en',
                 )
                 .get(slug=slug)
             )
@@ -101,10 +101,10 @@ class A23EffectViewSet(viewsets.ModelViewSet):
                 )
                 .prefetch_related(
                     'advanced',
-                    'effectdata_set',
-                    'effectdata_set__effectlines_set',
-                    'effectdata_set__effectlines_set__item',
-                    'effectdata_set__effectlines_set__item__item_ja',
+                    #'effectdata_set',
+                    #'effectdata_set__effectlines_set',
+                    #'effectdata_set__effectlines_set__item',
+                    #'effectdata_set__effectlines_set__item__item_ja',
                 )
                 .get(slug=slug)
             )
@@ -123,10 +123,10 @@ class A23EffectViewSet(viewsets.ModelViewSet):
                 )
                 .prefetch_related(
                     'advanced',
-                    'effectdata_set',
-                    'effectdata_set__effectlines_set',
-                    'effectdata_set__effectlines_set__item',
-                    'effectdata_set__effectlines_set__item__item_ko',
+                    #'effectdata_set',
+                    #'effectdata_set__effectlines_set',
+                    #'effectdata_set__effectlines_set__item',
+                    #'effectdata_set__effectlines_set__item__item_ko',
                 )
                 .get(slug=slug)
             )
@@ -145,10 +145,10 @@ class A23EffectViewSet(viewsets.ModelViewSet):
                 )
                 .prefetch_related(
                     'advanced',
-                    'effectdata_set',
-                    'effectdata_set__effectlines_set',
-                    'effectdata_set__effectlines_set__item',
-                    'effectdata_set__effectlines_set__item__item_sc',
+                    #'effectdata_set',
+                    #'effectdata_set__effectlines_set',
+                    #'effectdata_set__effectlines_set__item',
+                    #'effectdata_set__effectlines_set__item__item_sc',
                 )
                 .get(slug=slug)
             )
@@ -167,10 +167,10 @@ class A23EffectViewSet(viewsets.ModelViewSet):
                 )
                 .prefetch_related(
                     'advanced',
-                    'effectdata_set',
-                    'effectdata_set__effectlines_set',
-                    'effectdata_set__effectlines_set__item',
-                    'effectdata_set__effectlines_set__item__item_tc',
+                    #'effectdata_set',
+                    #'effectdata_set__effectlines_set',
+                    #'effectdata_set__effectlines_set__item',
+                    #'effectdata_set__effectlines_set__item__item_tc',
                 )
                 .get(slug=slug)
             )

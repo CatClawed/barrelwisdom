@@ -30,6 +30,33 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'monsters',
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A23/monster/a23-monster.module').then(m=>m.A23MonsterModule),
+      },
+    ]
+  },
+  {
+    path: 'items',
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A23/item/a23-item.module').then(m=>m.A23ItemModule),
+      },
+    ]
+  },
+  {
+    path: 'categories',
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A23/category/a23-category.module').then(m=>m.A23CategoryModule),
+      },
+    ]
+  },
+  {
     path: '',
     redirectTo: '/sophie2/faq',
     pathMatch: 'full'

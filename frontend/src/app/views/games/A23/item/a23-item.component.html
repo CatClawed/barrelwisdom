@@ -1,0 +1,98 @@
+<Error *ngIf="error" [errorCode]="error"></Error>
+
+<ng-container *ngIf="item">
+<Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Items', '/'+gameURL+'/items/'+language]]" [current]="item.name"></Breadcrumb>
+<div class="mx-auto row spacer">
+  <div class="{{colset}} card card-body">
+    <h4 class="card-title card-icon-space">{{item.name}}</h4>
+      <div class="card-icon-position">
+        <b style="padding-right:0.5em;">LV {{item.level}}</b>
+        <i *ngIf="item.kind == 'attack'"     class="atelier atelier-np atelier-ryza2-type-attack"></i>
+        <i *ngIf="item.kind == 'heal'"       class="atelier atelier-np atelier-ryza2-type-heal"></i>
+        <i *ngIf="item.kind == 'debuffer'"   class="atelier atelier-np atelier-ryza2-type-debuff"></i>
+        <i *ngIf="item.kind == 'buffer'"     class="atelier atelier-np atelier-ryza2-type-buff"></i>
+        <i *ngIf="item.kind == 'weapon'"     class="atelier atelier-np atelier-ryza2-type-weapon"></i>
+        <i *ngIf="item.kind == 'armor'"      class="atelier atelier-np atelier-ryza2-type-armor"></i>
+        <i *ngIf="item.kind == 'accessory'"  class="atelier atelier-np atelier-ryza2-type-accessory"></i>
+        <i *ngIf="item.kind == 'mix'"        class="atelier atelier-np atelier-ryza2-type-synthesis"></i>
+        <i *ngIf="item.kind == 'material'"   class="atelier atelier-np atelier-ryza2-material"></i>
+        <i *ngIf="item.kind == 'field_tool'" class="atelier atelier-np atelier-sophie2-type-exploration"></i>
+        <i *ngIf="item.kind == 'amulet'"     class="atelier atelier-np atelier-sophie2-category-talismans"></i>
+      </div>
+    <div class="card-item-display">
+       <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
+    </div>
+    <div class="card-text">
+      <table>
+        <tr *ngIf="item.char1">
+          <td style="width:10%">
+            <img style="max-height:3em;" src="/media/games/sophie2/characters/{{item.char1}}.webp">
+          </td>
+          <td>
+            {{item.desc1}}
+          </td>
+        </tr>
+        <tr *ngIf="item.char2">
+          <td style="width:10%">
+            <img style="max-height:3em;" src="/media/games/sophie2/characters/{{item.char2}}.webp">
+          </td>
+          <td>
+            {{item.desc2}}
+          </td>
+        </tr>
+        <tr *ngIf="item.char3">
+          <td style="width:10%">
+            <img style="max-height:3em;" src="/media/games/sophie2/characters/{{item.char3}}.webp">
+          </td>
+          <td>
+            {{item.desc3}}
+          </td>
+        </tr>
+        <tr *ngIf="item.char4">
+          <td style="width:10%">
+            <img style="max-height:3em;" src="/media/games/sophie2/characters/{{item.char4}}.webp">
+          </td>
+          <td>
+            {{item.desc4}}
+          </td>
+        </tr>
+      </table>
+      <div class="row">
+        <table style="margin-top:1rem;" class="table-item-data col">
+          <tr *ngFor="let cat of item.categories">
+              <td style="text-align: center;"><i class="atelier atelier-{{cat.icon}}"></i></td>
+              <td><a routerLink="/{{gameURL}}/categories/{{cat.slug}}">{{cat.name}}</a></td>
+          </tr>
+        </table>
+      </div>
+      <p *ngIf="item.book"><b>Book: </b> <a routerLink="/{{gameURL}}/items/books/{{item.book[0].slug}}/{{language}}">{{item.book[0].name}}</a></p>
+      <b *ngIf="item.locations" >Location:</b>
+      <div *ngIf="item.locations" style="column-count: 2;">
+        <ul style="padding-left:1.1em;margin-bottom:0">
+            <li *ngFor="let loc of item.locations"><a routerLink="/{{gameURL}}/locations/{{loc.slug}}/{{language}}">{{loc.name}}</a>
+        </ul>
+      </div>
+      <b *ngIf="item.monsters" >Dropped by:</b>
+      <div *ngIf="item.monsters" style="column-count: 2;">
+         <ul style="padding-left:1.1em;margin-bottom:0">
+             <li *ngFor="let mon of item.monsters"><a routerLink="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a></li>
+         </ul>
+      </div>
+      <table *ngIf="item.equip" class="tbl">
+        <tr class="table-dark-center"><th colspan=2>Stats</th></tr>
+        <tr><td style="padding-top:0.2rem;text-align:right;width:50%;"><b>HP </b></td> <td style="padding-top:0.2rem;padding-left:0.5em;">{{item.equip.hp}}</td></tr>
+        <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>MP </b></td> <td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip.mp}}</td></tr>
+        <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>ATK </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip.atk}}</td></tr>
+        <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>DEF </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip.dfn}}</td></tr>
+        <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>SPD </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip.spd}}</td></tr>
+      </table>
+      <table *ngIf="item.chars" class="tbl">
+        <tr class="table-dark-center"><th>Characters</th></tr>
+        <tr><td><img *ngFor="let char of item.chars" src="{{imgURL}}characters/{{char.slug}}.webp" style="max-height:3em;"></td></tr>
+      </table>
+
+    </div>
+  </div>
+  <language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
+</div>
+</ng-container>

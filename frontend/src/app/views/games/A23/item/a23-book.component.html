@@ -1,0 +1,24 @@
+<Error *ngIf="error" [errorCode]="error"></Error>
+
+<ng-container *ngIf="item">
+<Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Items', '/'+gameURL+'/items/'+language]]" [current]="'Book: '+item.name"></Breadcrumb>
+<div class="mx-auto row spacer">
+  <div class="{{colset}} card card-body">
+    <h4 class="card-title card-icon-space">{{item.name}}</h4>
+      <div class="card-icon-position">
+        <i  class="atelier atelier-np atelier-ryza2-book"></i>
+      </div>
+    <div class="card-item-display">
+       <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
+    </div>
+    <div class="card-text">
+        <b>Item:</b>
+        <ul>
+            <li *ngFor="let it of item.items"><a routerLink="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a></li>
+        </ul>
+        <p><b>Acquisition: </b><span *ngIf="item.shop">{{item.shop}}</span><span *ngIf="item.note">{{item.note}}</span></p>
+    </div>
+  </div>
+  <language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
+</div>
+</ng-container>

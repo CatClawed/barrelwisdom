@@ -13,8 +13,7 @@
   </div>
   <b *ngIf=" trait.item_set">Item:</b>
     <ul *ngIf=" trait.item_set">
-      <!-- <li *ngFor="let item of trait.item_set"><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
-      -->       <li *ngFor="let item of trait.item_set">{{item.name}}
+      <li *ngFor="let item of trait.item_set"><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
     </ul>
     <p *ngIf="trait.combo1"><a routerLink="/{{gameURL}}/traits/{{trait.combo1.slug}}/{{language}}">{{trait.combo1.name}}</a> x <a routerLink="/{{gameURL}}/traits/{{trait.combo2.slug}}/{{language}}">{{trait.combo2.name}}</a></p>
   <p>{{trait.desc}}</p>

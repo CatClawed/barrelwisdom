@@ -85,3 +85,89 @@ export interface Region {
     name: string;
     areas: Area[];
 }
+
+export interface Monster {
+    slug: string;
+    kind: string;
+    name: string;
+    index: number;
+    char1: string;
+    char2: string;
+    char3: string;
+    char4: string;
+    ailment0: number;
+    ailment1: number;
+    ailment2: number;
+    ailment3: number;
+    ailment4: number;
+    ailment5: number;
+    ailment6: number;
+    ailment7: number;
+    ailment8: number;
+    ailment9: number;
+    ailment10: number;
+    resist_mag: string;
+    resist_fire: string;
+    resist_ice: string;
+    resist_thun: string;
+    resist_wind: string;
+    resist_phys: string;
+    desc1: string;
+    desc2: string;
+    desc3: string;
+    desc4: string;
+    hp_rank: number;
+    str_rank: number;
+    def_rank: number;
+    spd_rank: number;
+    drops: NameLink[];
+    location: NameLink[];
+}
+
+export interface Category {
+    slug: string;
+    name: string;
+    icon: string;
+    items: NameLink[];
+}
+
+export interface Book {
+    slug: string;
+    name: string;
+    shop: string;
+    note: string;
+    items: NameLink[];
+}
+
+export interface Equip {
+    hp: number;
+    mp: number;
+    atk: number;
+    dfn: number;
+    spd: number;
+}
+
+export interface CharSlug {
+    slug: string;
+}
+
+export interface Item {
+    slug: string;
+    name: string;
+    kind: string;
+    level: number;
+    categories: Category[];
+    locations: NameLink[];
+    desc1: string;
+    desc2: string;
+    desc3: string;
+    desc4: string;
+    char1: string;
+    char2: string;
+    char3: string;
+    char4: string;
+    equip: Equip;
+    book: NameLink[];
+    chars: CharSlug[];
+    monsters: NameLink[];
+}

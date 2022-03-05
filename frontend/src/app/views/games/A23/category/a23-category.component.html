@@ -1,0 +1,37 @@
+<Error *ngIf="error" [errorCode]="error"></Error>
+
+<ng-container *ngIf="category">
+<Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Category: '+category.name"></Breadcrumb>
+<h1>{{category.name}}</h1>
+<language-settings style="margin-top: 1em;" class="col-md-3" section="{{gameURL}}"></language-settings>
+<div class="mx-auto row">
+    <div class="col-md-6">
+        <table style="border:1px solid #c8ced3;" class="tbl">
+            <tr class="table-dark-center"><th style="border:none;" colspan=2>Items in Category</th></tr>
+            <tr *ngFor="let item of category.items">
+                <td>
+                    <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
+                </td>
+            </tr>
+        </table>
+    </div><!--
+    <div class="col-md-6">
+        <table style="border:1px solid #c8ced3;" class="tbl">
+            <tr class="table-dark-center"><th style="border:none;" colspan=2>Items Using Category</th></tr>
+            <tr *ngFor="let item of category.ingredients">
+                <td>
+                    <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
+                    <span *ngIf="item.isDLC" style="margin-left: 0.4em;" class="badge bg-secondary badge-list">DLC</span>
+                </td>
+                <td>
+                    <i style="color:#f03a02;" *ngIf="item.fire"      class="atelier atelier-np atelier-ryza2-fire"></i>
+                    <i style="color:#04b5db;" *ngIf="item.ice"       class="atelier atelier-np atelier-ryza2-ice"></i>
+                    <i style="color:#e3bb05;" *ngIf="item.lightning" class="atelier atelier-np atelier-ryza2-lightning"></i>
+                    <i style="color:#589b1d;" *ngIf="item.wind"      class="atelier atelier-np atelier-ryza2-wind"></i>
+                    <span style="vertical-align:top;padding-left:0.5rem;">{{item.elementvalue}}</span>
+                </td>
+            </tr>
+        </table>
+    </div> -->
+</div>
+</ng-container>

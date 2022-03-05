@@ -78,11 +78,11 @@ class A23AdvDataSerializer(serializers.ModelSerializer):
 class A23EffectSerializerFull(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     desc = serializers.SerializerMethodField()
-    effectdata_set = A23EffectDataSerializer(many=True)
+    #effectdata_set = A23EffectDataSerializer(many=True)
     advanced = A23AdvDataSerializer(many=True)
     class Meta:
         model = Effect
-        fields = ['slug', 'name', 'desc', 'effectdata_set', 'advanced']
+        fields = ['slug', 'name', 'desc', 'advanced']
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.eff_en.name
