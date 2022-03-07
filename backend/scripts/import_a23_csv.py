@@ -15,9 +15,239 @@ with open('scripts/data.txt', newline='', encoding='utf-8') as csvfile:
     reader = csv.reader(csvfile, delimiter='\t')
     for row in reader:
         print(row[0])
+
     
+    
+    """
+    item = None
+        if row[0]:
+            item = Item.objects.get(slug=row[0])
         
-        """
+        for i in range(1,4):
+            if row[i]:
+                text = RecipeText(
+                    item=item,
+                    text_en = row[i],
+                    text_ja = row[i+3],
+                    text_ko = row[i+6],
+                    text_sc = row[i+9],
+                    text_tc = row[i+12]
+                )
+                text.save()
+    
+    
+     r = 1
+    for row in reader:
+        print(row[0])
+        char = Character.objects.get(slug=row[0])
+        
+        ideas = []
+        for i in range(1,6):
+            if row[i]:
+                print(row[i])
+                idea = RecipeIdea(
+                    item = Item.objects.get(slug=row[i]),
+                    char = char,
+                    col=i,
+                    row=r
+                )
+                ideas.append(idea)
+            else:
+                ideas.append(None)
+        for i in range(6,10):
+            if row[i]:
+               ideas[i-6].hor = True
+        for i in range(10,15):
+            if row[i]:
+                ideas[i-10].ver = True
+        for idea in ideas:
+            if idea:
+                idea.save()
+        r = r + 1
+    
+    
+
+    colors = {
+        "BLUE":1,
+        "GREEN":2,
+        "YELLOW":3,
+        "RED":4,
+        "VIOLET":5
+    }
+    prevItem = ""
+    order = 1
+    for row in reader:
+        print(f'{row[0]} {order}')
+        
+        if row[0] != prevItem:
+            order = 1
+            prevItem = row[0]
+        
+        item = Item.objects.get(slug=row[0])
+        if row[1]:
+            item.quantity = row[1]
+        if row[2]:
+            item.uses = row[2]
+        if row[3]:
+            item.char = Character.objects.get(slug=row[3])
+        item.save()
+        
+        if row[4]:
+            ing = Ingredient(
+                quantity=row[5],
+                synth=item
+            )
+            try:
+                cat = Category.objects.get(cat_en=row[4])
+                ing.cat = cat
+            except Category.DoesNotExist:
+                it = Item.objects.get(slug=row[4])
+                ing.item = it
+            ing.save()
+        
+        if row[6]:
+            eline = EffectLines(
+                item = item,
+                elem = colors[row[6]],
+                maxlv = row[17] if row[17] else None,
+                restrict = row[18] if row[18] else None,
+                order = order
+            )
+            eline.save()
+            
+            for i in range(0,10,2):
+                if row[7+i]:
+                    edata = EffectData(
+                        num=row[7+i+1],
+                        line=eline
+                    )
+                    try:
+                        eff = Effect.objects.get(slug=row[7+i])
+                        edata.effect = eff
+                        edata.save()
+                    except Effect.DoesNotExist:
+                        print(row[7+i])
+                        com = Component.objects.get(com_en=row[7+i])
+                        edata.component = com
+                        edata.save()
+                    
+            
+        order = order + 1
+        
+    
+        lang =  ['en', 'ja', 'ko', 'sc', 'tc']
+    langn = [8,11,14,17,20]
+    for row in reader:
+        #print(row[0])
+        output = ""
+        for i in range(3,8):
+            if row[i].find("<STR") != -1:
+                html = row[i]
+                for j in range(0,3):
+                    if row[j]:
+                        o = None
+                        try:
+                            o = Item.objects.get(slug=row[j])
+                            rep = f'<a href="/sophie2/items/{o.slug}/{lang[i-3]}">{row[langn[i-3]+j]}</a>'
+                            html = html.replace(f"<STR{j+1}>", rep)
+                        except Item.DoesNotExist:
+                            o = None
+                        if o is None:
+                            try:
+                                o = Monster.objects.get(slug=row[j])
+                                rep = f'<a href="/sophie2/monsters/{o.slug}/{lang[i-3]}">{row[langn[i-3]+j]}</a>'
+                                html = html.replace(f"<STR{j+1}>", rep)
+                            except Monster.DoesNotExist:
+                                o = None
+                        if o is None:
+                            try:
+                                o = Effect.objects.get(slug=row[j])
+                                rep = f'<a href="/sophie2/effects/{o.slug}/{lang[i-3]}">{row[langn[i-3]+j]}</a>'
+                                html = html.replace(f"<STR{j+1}>", rep)
+                            except Effect.DoesNotExist:
+                                o = None
+                        if o is None:
+                            try:
+                                o = Category.objects.get(slug=row[j])
+                                rep = f'<a href="/sophie2/categories/{o.slug}/{lang[i-3]}">{row[langn[i-3]+j]}</a>'
+                                html = html.replace(f"<STR{j+1}>", rep)
+                            except Category.DoesNotExist:
+                                o = None
+                        if o is None:
+                            html = html.replace(f"<STR{j+1}>", row[langn[i-3]+j])
+                output = output + '\t' + html
+            else:
+                output = output + '\t' + row[i]
+                
+        print(output)
+        
+        
+        
+        
+        
+        name = row[2]
+        s = ""
+        if name:
+             try:
+                 o = Item.objects.get(slug=name)
+                 s = o.item_tc.name
+             except Item.DoesNotExist:
+                 o = None
+             if o is None:
+                 try:
+                     o = Monster.objects.get(slug=name)
+                     s = o.mon_tc.name
+                 except Monster.DoesNotExist:
+                     o = None
+             if o is None:
+                 try:
+                     o = Effect.objects.get(slug=name)
+                     s = o.eff_tc.name
+                 except Effect.DoesNotExist:
+                     o = None
+             if o is None:
+                 try:
+                     o = Category.objects.get(slug=name)
+                     s = o.cat_tc
+                 except Category.DoesNotExist:
+                     o = None
+             if o is None:
+                 try:
+                     o = Character.objects.get(char_en=name)
+                     s = o.char_tc
+                 except Character.DoesNotExist:
+                     o = None
+
+        
+        print(s)
+        
+        
+        if row[0]:
+            try:
+                o = Component.objects.get(com_en=row[0])
+            except Component.DoesNotExist:
+                o = Component(
+                    com_en=row[0],
+                    com_ja=row[1],
+                    com_ko=row[2],
+                    com_sc=row[3],
+                    com_tc=row[4],
+                    code=row[5]
+                )
+                o.save()
+        
+        
+        it = Item.objects.get(slug=row[0])
+        for i in range(1,9):
+            if row[i]:
+                o = Component(
+                    code=row[i]
+                )
+                o.save()
+                it.components.add(o)
+        
+        
+        
         
         bk = Book.objects.get(slug=row[0])
         bk.items.add(Item.objects.get(slug=row[1]))

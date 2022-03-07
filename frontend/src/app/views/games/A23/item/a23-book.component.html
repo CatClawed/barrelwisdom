@@ -16,7 +16,7 @@
         <ul>
             <li *ngFor="let it of item.items"><a routerLink="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a></li>
         </ul>
-        <p><b>Acquisition: </b><span *ngIf="item.shop">{{item.shop}}</span><span *ngIf="item.note">{{item.note}}</span></p>
+        <p><b>Acquisition: </b>{{item.shop}} {{item.note}}<span *ngIf="item.chest">{{item.chest[0].region}}<span *ngIf="item.chest[0].subregion"> &gt; </span>{{item.chest[0].subregion}}</span></p>
     </div>
   </div>
   <language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>

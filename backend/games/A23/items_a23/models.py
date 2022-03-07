@@ -79,8 +79,6 @@ class Item(models.Model):
     uses = models.IntegerField(null=True, blank=True)
     wt = models.IntegerField(null=True, blank=True)
     range = models.CharField(max_length=15, null=True, blank=True)
-    maxlv = models.IntegerField(null=True, blank=True)
-    restrict = models.IntegerField(null=True, blank=True)
     components = models.ManyToManyField(Component)
     class Meta:
         ordering = ['index']
@@ -115,20 +113,39 @@ class Ingredient(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE, blank=True, null=True)
     cat = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True)
     quantity = models.IntegerField()
-    ing = models.ForeignKey(Item, on_delete=models.CASCADE, related_name="ingredients")   
+    synth = models.ForeignKey(Item, on_delete=models.CASCADE, related_name="ingredients")   
 
 class EffectLines(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     elem = models.CharField(max_length=10, blank=True, null=True)
     order = models.IntegerField()
+    maxlv = models.IntegerField(null=True, blank=True)
+    restrict = models.IntegerField(null=True, blank=True)
     class Meta:
         ordering = ['order']
 
 class EffectData(models.Model):
     effect = models.ForeignKey(Effect, on_delete=models.CASCADE, blank=True, null=True)
     component = models.ForeignKey(Component, on_delete=models.CASCADE, blank=True, null=True)
-    elem = models.IntegerField()
     num = models.IntegerField(blank=True, null=True)
     line = models.ForeignKey(EffectLines, on_delete=models.CASCADE, blank=True, null=True)
     class Meta:
         ordering = ['num']
+        
+class RecipeIdea(models.Model):
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    row = models.IntegerField()
+    col = models.IntegerField()
+    hor = models.BooleanField(default=False) # right
+    ver = models.BooleanField(default=False) # up
+    char = models.ForeignKey(Character, on_delete=models.CASCADE)
+    class Meta:
+        ordering = ['char', 'row', 'col']
+    
+class RecipeText(models.Model):
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    text_en = models.CharField(max_length=250)
+    text_ja = models.CharField(max_length=250)
+    text_ko = models.CharField(max_length=250)
+    text_sc = models.CharField(max_length=250)
+    text_tc = models.CharField(max_length=250)

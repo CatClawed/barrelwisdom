@@ -10,10 +10,10 @@
       <h4 class="card-title">{{effect.name}}</h4>
     </div>
     <p *ngIf="effect.desc">{{effect.desc}}</p>
-    <b *ngIf="effect.effectdata_set">From Item:</b>
-    <ul *ngIf="effect.effectdata_set">
-      <li *ngFor="let e of effect.effectdata_set">
-        <a routerLink="/{{gameURL}}/items/{{e.effectlines_set[0].slug}}/{{language}}">{{e.effectlines_set[0].name}}</a>
+    <b *ngIf="effect.items">From Item:</b>
+    <ul *ngIf="effect.items">
+      <li *ngFor="let i of effect.items">
+        <a routerLink="/{{gameURL}}/items/{{i.slug}}/{{language}}">{{i.name}}</a>
       </li>
     </ul>
     <ng-container *ngIf="effect.advanced">

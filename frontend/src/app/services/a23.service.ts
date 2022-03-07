@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders,  } from '@angular/common/http';
 import { Observable} from 'rxjs';
 import { environment } from '@environments/environment';
-import { Trait, Effect, Region, Monster, Category, Item, Book } from '@app/interfaces/a23';
+import { Trait, Effect, Region, Monster, Category, Item, Book, RecipeIdea } from '@app/interfaces/a23';
 
 
 @Injectable({ providedIn: 'root' })
@@ -66,6 +66,10 @@ getCategoryList(language: string): Observable<Category[]> {
 
 getCategory(slugname: string, language: string): Observable<Category> {
   return this.http.get<Category>(`${environment.apiUrl}/A23/category/${slugname}/${language}/`);
+}
+
+getRecipeList(language: string): Observable<RecipeIdea[]> {
+  return this.http.get<RecipeIdea[]>(`${environment.apiUrl}/A23/recipe/${language}/`);
 }
 
 }

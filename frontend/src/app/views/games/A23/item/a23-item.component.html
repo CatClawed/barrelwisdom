@@ -16,8 +16,11 @@
         <i *ngIf="item.kind == 'accessory'"  class="atelier atelier-np atelier-ryza2-type-accessory"></i>
         <i *ngIf="item.kind == 'mix'"        class="atelier atelier-np atelier-ryza2-type-synthesis"></i>
         <i *ngIf="item.kind == 'material'"   class="atelier atelier-np atelier-ryza2-material"></i>
-        <i *ngIf="item.kind == 'field_tool'" class="atelier atelier-np atelier-sophie2-type-exploration"></i>
+        <i *ngIf="item.kind == 'field'"      class="atelier atelier-np atelier-sophie2-type-exploration"></i>
         <i *ngIf="item.kind == 'amulet'"     class="atelier atelier-np atelier-sophie2-category-talismans"></i>
+        <ng-container *ngIf="item.char">
+          <br /><img style="max-height:3em;" src="/media/games/sophie2/characters/{{item.char}}.webp">
+        </ng-container>
       </div>
     <div class="card-item-display">
        <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
@@ -66,18 +69,69 @@
         </table>
       </div>
       <p *ngIf="item.book"><b>Book: </b> <a routerLink="/{{gameURL}}/items/books/{{item.book[0].slug}}/{{language}}">{{item.book[0].name}}</a></p>
+      <p *ngIf="item.shop"><b>Shop: </b>{{item.shop}}</p>
       <b *ngIf="item.locations" >Location:</b>
       <div *ngIf="item.locations" style="column-count: 2;">
         <ul style="padding-left:1.1em;margin-bottom:0">
             <li *ngFor="let loc of item.locations"><a routerLink="/{{gameURL}}/locations/{{loc.slug}}/{{language}}">{{loc.name}}</a>
         </ul>
       </div>
+      <b *ngIf="item.wt || item.quantity || item.uses || item.range">Misc. Data: </b>
+      <ul *ngIf="item.wt || item.quantity || item.uses || item.range">
+        <li *ngIf="item.wt">WT: {{item.wt}}</li>
+        <li *ngIf="item.quantity">Number made: {{item.quantity}}</li>
+        <li *ngIf="item.uses">Uses: {{item.uses}}</li>
+        <li *ngIf="item.range">Range: {{item.range}}</li>
+      </ul>
       <b *ngIf="item.monsters" >Dropped by:</b>
       <div *ngIf="item.monsters" style="column-count: 2;">
          <ul style="padding-left:1.1em;margin-bottom:0">
              <li *ngFor="let mon of item.monsters"><a routerLink="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a></li>
          </ul>
       </div>
+      <a *ngIf="item.ideas" routerLink="/{{gameURL}}/recipe-ideas/{{language}}"><b>Recipe Idea:</b></a>
+      <ul *ngIf="item.ideas">
+        <li *ngFor="let idea of item.ideas" (click)="historyService.hrefClicked($event);" [innerHTML]="idea.text"></li>
+      </ul>
+      <table *ngIf="item.ingredient" class="tbl">
+        <tr class="table-dark-center"><th>Ingredients</th></tr>
+        <tr>
+          <td>
+            <ul>
+              <li *ngFor="let ing of item.ingredient">
+                <a *ngIf="ing.cat"  routerLink="/{{gameURL}}/categories/{{ing.cat.slug}}/{{language}}">{{ing.cat.name}} </a>
+                <a *ngIf="ing.item" routerLink="/{{gameURL}}/items/{{ing.item.slug}}/{{language}}"    >{{ing.item.name}} </a>
+                x{{ing.quantity}}
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+      <b  *ngIf="item.effects && !item.ingredient">Effects:</b>
+      <ul  *ngIf="item.effects && !item.ingredient">
+        <li *ngFor="let eff of item.effects[0].data">
+          <a routerLink="/{{gameURL}}/effects/{{eff.effect.slug}}/{{language}}">{{eff.effect.name}}</a>
+        </li>
+      </ul>
+      <table *ngIf="item.effects && item.ingredient" class="tbl">
+        <tr class="table-dark-center"><th colspan=2>Effects</th></tr>
+        <tr *ngFor="let eff of item.effects">
+          <td style="vertical-align:middle;">
+            <i style="color:#{{colors[eff.elem]}}" class="atelier atelier-np atelier-sophie2-element-{{icons[eff.elem]}}"></i>
+          </td>
+          <td>
+            <ul style="list-style:none;">
+              <li *ngFor="let e of eff.data">
+                <a *ngIf="e.effect" routerLink="/{{gameURL}}/effects/{{e.effect.slug}}/{{language}}">{{e.effect.name}}</a>
+                <span *ngIf="e.component">{{e.component.name}}</span>
+                <span *ngIf="checkLevel(eff.maxlv, eff.restrict, e.num) == 0 && e.num"> ({{e.num}})</span>
+                <span *ngIf="checkLevel(eff.maxlv, eff.restrict, e.num) == 1" style="color:darkgrey;"> ({{e.num}})</span>
+                <span *ngIf="checkLevel(eff.maxlv, eff.restrict, e.num) == 2" style="color:red;"> ({{e.num}})</span>
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </table>
       <table *ngIf="item.equip" class="tbl">
         <tr class="table-dark-center"><th colspan=2>Stats</th></tr>
         <tr><td style="padding-top:0.2rem;text-align:right;width:50%;"><b>HP </b></td> <td style="padding-top:0.2rem;padding-left:0.5em;">{{item.equip.hp}}</td></tr>

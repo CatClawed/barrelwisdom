@@ -56,6 +56,11 @@ class A23RegionViewSet(viewsets.ModelViewSet):
                     'chest2_set__item',
                     'chest2_set__item__item_ja',
                     'chest2_set__book',
+                    'child__climate2_set',
+                    'child__chest2_set',
+                    'child__chest2_set__item',
+                    'child__chest2_set__item__item_ja',
+                    'child__chest2_set__book',
                 )
                 .get(slug=slug)
             )
@@ -79,6 +84,11 @@ class A23RegionViewSet(viewsets.ModelViewSet):
                     'chest2_set__item',
                     'chest2_set__item__item_ko',
                     'chest2_set__book',
+                    'child__climate2_set',
+                    'child__chest2_set',
+                    'child__chest2_set__item',
+                    'child__chest2_set__item__item_ko',
+                    'child__chest2_set__book',
                 )
                 .get(slug=slug)
             )
@@ -102,6 +112,11 @@ class A23RegionViewSet(viewsets.ModelViewSet):
                     'chest2_set__item',
                     'chest2_set__item__item_sc',
                     'chest2_set__book',
+                    'child__climate2_set',
+                    'child__chest2_set',
+                    'child__chest2_set__item',
+                    'child__chest2_set__item__item_sc',
+                    'child__chest2_set__book',
                 )
                 .get(slug=slug)
             )
@@ -125,6 +140,11 @@ class A23RegionViewSet(viewsets.ModelViewSet):
                     'chest2_set__item',
                     'chest2_set__item__item_tc',
                     'chest2_set__book',
+                    'child__climate2_set',
+                    'child__chest2_set',
+                    'child__chest2_set__item',
+                    'child__chest2_set__item__item_tc',
+                    'child__chest2_set__book',
                 )
                 .get(slug=slug)
             )

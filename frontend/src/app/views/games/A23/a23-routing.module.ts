@@ -57,6 +57,15 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'recipe-ideas',
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A23/recipe/a23-recipe.module').then(m=>m.A23RecipeModule),
+      },
+    ]
+  },
+  {
     path: '',
     redirectTo: '/sophie2/faq',
     pathMatch: 'full'

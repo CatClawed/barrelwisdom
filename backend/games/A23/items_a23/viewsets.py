@@ -1,6 +1,6 @@
 from rest_framework import viewsets, filters
-from games.A23.items_a23.models import Item, Book, Category
-from games.A23.items_a23.serializers import A23ItemSerializer, A23ItemListSerializer, A23CategorySerializer, A23BookSerializer, A23CategoryItemSerializer
+from games.A23.items_a23.models import Item, Book, Category, RecipeIdea
+from games.A23.items_a23.serializers import A23ItemSerializer, A23ItemListSerializer, A23CategorySerializer, A23BookSerializer, A23CategoryItemSerializer, A23RecipeIdeaSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
@@ -28,7 +28,10 @@ class A23CategoryViewSet(viewsets.ModelViewSet):
                 Category.objects
                 .prefetch_related(
                     'item_set',
-                    'item_set__item_en'
+                    'item_set__item_en',
+                    'ingredient_set',
+                    'ingredient_set__synth',
+                    'ingredient_set__synth__item_en'
                 )
                 .get(slug=slug)
             )
@@ -52,7 +55,10 @@ class A23CategoryViewSet(viewsets.ModelViewSet):
                 Category.objects
                 .prefetch_related(
                     'item_set',
-                    'item_set__item_ja'
+                    'item_set__item_ja',
+                    'ingredient_set',
+                    'ingredient_set__synth',
+                    'ingredient_set__synth__item_ja'
                 )
                 .get(slug=slug)
             )
@@ -76,7 +82,10 @@ class A23CategoryViewSet(viewsets.ModelViewSet):
                 Category.objects
                 .prefetch_related(
                     'item_set',
-                    'item_set__item_ko'
+                    'item_set__item_ko',
+                    'ingredient_set',
+                    'ingredient_set__synth',
+                    'ingredient_set__synth__item_ko'
                 )
                 .get(slug=slug)
             )
@@ -100,7 +109,10 @@ class A23CategoryViewSet(viewsets.ModelViewSet):
                 Category.objects
                 .prefetch_related(
                     'item_set',
-                    'item_set__item_sc'
+                    'item_set__item_sc',
+                    'ingredient_set',
+                    'ingredient_set__synth',
+                    'ingredient_set__synth__item_sc'
                 )
                 .get(slug=slug)
             )
@@ -124,7 +136,10 @@ class A23CategoryViewSet(viewsets.ModelViewSet):
                 Category.objects
                 .prefetch_related(
                     'item_set',
-                    'item_set__item_tc'
+                    'item_set__item_tc',
+                    'ingredient_set',
+                    'ingredient_set__synth',
+                    'ingredient_set__synth__item_tc'
                 )
                 .get(slug=slug)
             )
@@ -248,7 +263,11 @@ class A23ItemViewSet(viewsets.ModelViewSet):
                 'item_en'
             )
             .prefetch_related(
-                'categories'
+                'categories',
+                'ingredients',
+                'ingredients__item',
+                'ingredients__item__item_en',
+                'ingredients__cat'
             )
         )
         serializer = A23ItemListSerializer(queryset, many=True, context={'language': 'en'})
@@ -265,7 +284,8 @@ class A23ItemViewSet(viewsets.ModelViewSet):
                     'char2',
                     'char3',
                     'char4',
-                    'equip'
+                    'equip',
+                    'char',
                 )
                 .prefetch_related(
                     'categories',
@@ -275,7 +295,21 @@ class A23ItemViewSet(viewsets.ModelViewSet):
                     'gatheritem2_set__node__climate__loc',
                     'gatheritem2_set__node__climate__loc__parent',
                     'monster_set',
-                    'monster_set__mon_en'
+                    'monster_set__mon_en',
+                    'book_set',
+                    'components',
+                    'traits',
+                    'traits__trait_en',
+                    'recipetext_set',
+                    'ingredients',
+                    'ingredients__cat',
+                    'ingredients__item',
+                    'ingredients__item__item_en',
+                    'effectlines_set',
+                    'effectlines_set__effectdata_set',
+                    'effectlines_set__effectdata_set__component',
+                    'effectlines_set__effectdata_set__effect',
+                    'effectlines_set__effectdata_set__effect__eff_en'
                 )
                 .get(slug=slug)
             )
@@ -292,7 +326,11 @@ class A23ItemViewSet(viewsets.ModelViewSet):
                 'item_ja'
             )
             .prefetch_related(
-                'categories'
+                'categories',
+                'ingredients',
+                'ingredients__item',
+                'ingredients__item__item_ja',
+                'ingredients__cat'
             )
         )
         serializer = A23ItemListSerializer(queryset, many=True, context={'language': 'ja'})
@@ -309,7 +347,8 @@ class A23ItemViewSet(viewsets.ModelViewSet):
                     'char2',
                     'char3',
                     'char4',
-                    'equip'
+                    'equip',
+                    'char',
                 )
                 .prefetch_related(
                     'categories',
@@ -319,7 +358,21 @@ class A23ItemViewSet(viewsets.ModelViewSet):
                     'gatheritem2_set__node__climate__loc',
                     'gatheritem2_set__node__climate__loc__parent',
                     'monster_set',
-                    'monster_set__mon_ja'
+                    'monster_set__mon_ja',
+                    'book_set',
+                    'components',
+                    'traits',
+                    'traits__trait_ja',
+                    'recipetext_set',
+                    'ingredients',
+                    'ingredients__cat',
+                    'ingredients__item',
+                    'ingredients__item__item_ja',
+                    'effectlines_set',
+                    'effectlines_set__effectdata_set',
+                    'effectlines_set__effectdata_set__component',
+                    'effectlines_set__effectdata_set__effect',
+                    'effectlines_set__effectdata_set__effect__eff_ja'
                 )
                 .get(slug=slug)
             )
@@ -336,7 +389,11 @@ class A23ItemViewSet(viewsets.ModelViewSet):
                 'item_ko'
             )
             .prefetch_related(
-                'categories'
+                'categories',
+                'ingredients',
+                'ingredients__item',
+                'ingredients__item__item_ko',
+                'ingredients__cat'
             )
         )
         serializer = A23ItemListSerializer(queryset, many=True, context={'language': 'ko'})
@@ -353,7 +410,8 @@ class A23ItemViewSet(viewsets.ModelViewSet):
                     'char2',
                     'char3',
                     'char4',
-                    'equip'
+                    'equip',
+                    'char',
                 )
                 .prefetch_related(
                     'categories',
@@ -363,7 +421,21 @@ class A23ItemViewSet(viewsets.ModelViewSet):
                     'gatheritem2_set__node__climate__loc',
                     'gatheritem2_set__node__climate__loc__parent',
                     'monster_set',
-                    'monster_set__mon_ko'
+                    'monster_set__mon_ko',
+                    'book_set',
+                    'components',
+                    'traits',
+                    'traits__trait_ko',
+                    'recipetext_set',
+                    'ingredients',
+                    'ingredients__cat',
+                    'ingredients__item',
+                    'ingredients__item__item_ko',
+                    'effectlines_set',
+                    'effectlines_set__effectdata_set',
+                    'effectlines_set__effectdata_set__component',
+                    'effectlines_set__effectdata_set__effect',
+                    'effectlines_set__effectdata_set__effect__eff_ko'
                 )
                 .get(slug=slug)
             )
@@ -380,7 +452,11 @@ class A23ItemViewSet(viewsets.ModelViewSet):
                 'item_sc'
             )
             .prefetch_related(
-                'categories'
+                'categories',
+                'ingredients',
+                'ingredients__item',
+                'ingredients__item__item_sc',
+                'ingredients__cat'
             )
         )
         serializer = A23ItemListSerializer(queryset, many=True, context={'language': 'sc'})
@@ -397,7 +473,8 @@ class A23ItemViewSet(viewsets.ModelViewSet):
                     'char2',
                     'char3',
                     'char4',
-                    'equip'
+                    'equip',
+                    'char',
                 )
                 .prefetch_related(
                     'categories',
@@ -407,7 +484,21 @@ class A23ItemViewSet(viewsets.ModelViewSet):
                     'gatheritem2_set__node__climate__loc',
                     'gatheritem2_set__node__climate__loc__parent',
                     'monster_set',
-                    'monster_set__mon_sc'
+                    'monster_set__mon_sc',
+                    'book_set',
+                    'components',
+                    'traits',
+                    'traits__trait_sc',
+                    'recipetext_set',
+                    'ingredients',
+                    'ingredients__cat',
+                    'ingredients__item',
+                    'ingredients__item__item_sc',
+                    'effectlines_set',
+                    'effectlines_set__effectdata_set',
+                    'effectlines_set__effectdata_set__component',
+                    'effectlines_set__effectdata_set__effect',
+                    'effectlines_set__effectdata_set__effect__eff_sc'
                 )
                 .get(slug=slug)
             )
@@ -424,7 +515,11 @@ class A23ItemViewSet(viewsets.ModelViewSet):
                 'item_tc'
             )
             .prefetch_related(
-                'categories'
+                'categories',
+                'ingredients',
+                'ingredients__item',
+                'ingredients__item__item_tc',
+                'ingredients__cat'
             )
         )
         serializer = A23ItemListSerializer(queryset, many=True, context={'language': 'tc'})
@@ -441,7 +536,8 @@ class A23ItemViewSet(viewsets.ModelViewSet):
                     'char2',
                     'char3',
                     'char4',
-                    'equip'
+                    'equip',
+                    'char',
                 )
                 .prefetch_related(
                     'categories',
@@ -451,11 +547,110 @@ class A23ItemViewSet(viewsets.ModelViewSet):
                     'gatheritem2_set__node__climate__loc',
                     'gatheritem2_set__node__climate__loc__parent',
                     'monster_set',
-                    'monster_set__mon_tc'
+                    'monster_set__mon_tc',
+                    'book_set',
+                    'components',
+                    'traits',
+                    'traits__trait_tc',
+                    'recipetext_set',
+                    'ingredients',
+                    'ingredients__cat',
+                    'ingredients__item',
+                    'ingredients__item__item_tc',
+                    'effectlines_set',
+                    'effectlines_set__effectdata_set',
+                    'effectlines_set__effectdata_set__component',
+                    'effectlines_set__effectdata_set__effect',
+                    'effectlines_set__effectdata_set__effect__eff_tc'
                 )
                 .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
         serializer = A23ItemSerializer(queryset, context={'language': 'tc'})
+        return Response(serializer.data)
+    
+class A23RecipeViewSet(viewsets.ModelViewSet):
+    queryset = RecipeIdea.objects.all()
+    serializer_class = A23RecipeIdeaSerializer
+    filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
+
+    @action(detail=False)
+    def en(self, request): 
+        queryset = (
+            RecipeIdea.objects
+            .select_related(
+                'item',
+                'item__item_en',
+                'char'
+            )
+            .prefetch_related(
+                'item__recipetext_set'
+            )
+        )
+        serializer = A23RecipeIdeaSerializer(queryset, many=True, context={'language': 'en'})
+        return Response(serializer.data)
+    
+    @action(detail=False)
+    def ja(self, request): 
+        queryset = (
+            RecipeIdea.objects
+            .select_related(
+                'item',
+                'item__item_ja',
+                'char'
+            )
+            .prefetch_related(
+                'item__recipetext_set'
+            )
+        )
+        serializer = A23RecipeIdeaSerializer(queryset, many=True, context={'language': 'ja'})
+        return Response(serializer.data)
+    
+    @action(detail=False)
+    def ko(self, request): 
+        queryset = (
+            RecipeIdea.objects
+            .select_related(
+                'item',
+                'item__item_ko',
+                'char'
+            )
+            .prefetch_related(
+                'item__recipetext_set'
+            )
+        )
+        serializer = A23RecipeIdeaSerializer(queryset, many=True, context={'language': 'ko'})
+        return Response(serializer.data)
+    
+    @action(detail=False)
+    def sc(self, request): 
+        queryset = (
+            RecipeIdea.objects
+            .select_related(
+                'item',
+                'item__item_sc',
+                'char'
+            )
+            .prefetch_related(
+                'item__recipetext_set'
+            )
+        )
+        serializer = A23RecipeIdeaSerializer(queryset, many=True, context={'language': 'sc'})
+        return Response(serializer.data)
+    
+    @action(detail=False)
+    def tc(self, request): 
+        queryset = (
+            RecipeIdea.objects
+            .select_related(
+                'item',
+                'item__item_tc',
+                'char'
+            )
+            .prefetch_related(
+                'item__recipetext_set'
+            )
+        )
+        serializer = A23RecipeIdeaSerializer(queryset, many=True, context={'language': 'tc'})
         return Response(serializer.data)

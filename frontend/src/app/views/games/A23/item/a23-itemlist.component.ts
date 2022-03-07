@@ -84,7 +84,7 @@ import { map, startWith } from 'rxjs/operators';
           this.items = items;
           this.filteredItems = this.pageForm.valueChanges.pipe(
             startWith(null as Observable<Item[]>),
-            map((search: any) => search ? this.filterT(search.filtertext, search.kind) : this.items.slice())
+            map((search: any) => search ? this.filterT(search.filtertext, search.kind, search.filtering) : this.items.slice())
           );
         },
         error: error => {
@@ -121,7 +121,7 @@ import { map, startWith } from 'rxjs/operators';
         }})
     }
 
-    private filterT(value: string, kind: string): Item[] {  
+    private filterT(value: string, kind: string, ingt: string): Item[] {  
       let list: Item[] = this.items;
 
       console.log(kind)
@@ -130,10 +130,10 @@ import { map, startWith } from 'rxjs/operators';
           list = list.filter(item => item.categories.some(c => c.name == kind) );
       }
 
-      //if(ingt) {
-      //    const filterValue = ingt.toLowerCase();
-      //    list = list.filter(item => (item.ingredient_set) ? item.ingredient_set.some(i => i.ing.toLowerCase().includes(filterValue)) : false)
-      //}
+      if(ingt) {
+          const filterValue = ingt.toLowerCase();
+          list = list.filter(item => (item.ing) ? item.ing.some(i => i.name.toLowerCase().includes(filterValue)) : false)
+      }
 
       if(value) {
         const filterValue = value.toLowerCase();

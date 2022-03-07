@@ -26,12 +26,12 @@
       </mat-form-field>
       <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
     </div>
-      <!-- <div class="row">
+      <div class="row">
         <mat-form-field class="col-md-5" appearance="outline">
             <mat-label>Has ingredient...</mat-label>
             <input style="height: 100%;" matInput formControlName="filtering">
           </mat-form-field>
-      </div> -->
+      </div> 
     </form>
 </div>
 <div *ngIf="filteredItems" class="item-grid">
@@ -49,7 +49,7 @@
       <i *ngIf="it.kind == 'accessory'"  class="atelier atelier-np atelier-ryza2-type-accessory"></i>
       <i *ngIf="it.kind == 'mix'"        class="atelier atelier-np atelier-ryza2-type-synthesis"></i>
       <i *ngIf="it.kind == 'material'"   class="atelier atelier-np atelier-ryza2-material"></i>
-      <i *ngIf="it.kind == 'field_tool'" class="atelier atelier-np atelier-sophie2-type-exploration"></i>
+      <i *ngIf="it.kind == 'field'"      class="atelier atelier-np atelier-sophie2-type-exploration"></i>
       <i *ngIf="it.kind == 'amulet'"     class="atelier atelier-np atelier-sophie2-category-talismans"></i>
     </div>
     <a class="card-item-display" (click)="openModal(itemModal, it.slug, $event);" href="/{{gameURL}}/items/{{it.slug}}/{{language}}">

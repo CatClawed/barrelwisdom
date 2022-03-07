@@ -7,6 +7,10 @@ export interface NameOnly {
     ing: string;
 }
 
+export interface NameOnly2 {
+    name: string;
+}
+
 export interface Trait {
     slug: string;
     grade: number;
@@ -37,16 +41,14 @@ export interface AdvData {
     max_2_0: string;
 }
 
-export interface EffectDataSimple {
-    effectlines_set: NameLink[]
-}
+
 
 export interface Effect {
     slug: string;
     name: string;
     desc: string;
     advanced: AdvData[];
-    effectdata_set:EffectDataSimple[];
+    items: NameLink[];
 }
 
 export interface GatherItem {
@@ -129,6 +131,12 @@ export interface Category {
     name: string;
     icon: string;
     items: NameLink[];
+    used: Ingredient[];
+}
+
+export interface ChestData {
+    region: string;
+    subregion: string;
 }
 
 export interface Book {
@@ -137,6 +145,7 @@ export interface Book {
     shop: string;
     note: string;
     items: NameLink[];
+    chest: ChestData[];
 }
 
 export interface Equip {
@@ -151,11 +160,50 @@ export interface CharSlug {
     slug: string;
 }
 
+export interface RecipeText {
+    text: string;
+}
+
+export interface SynthItem {
+    item: NameLink;
+}
+
+export interface Ingredient {
+    quantity: number;
+    cat: Category;
+    item: NameLink;
+    synth: SynthItem;
+}
+
+export interface Component {
+    name: string;
+    code: string;
+}
+
+export interface EffectData {
+    num: number;
+    effect: NameLink;
+    component: Component;
+}
+
+export interface EffectLine {
+    elem: string;
+    order: number;
+    maxlv: number;
+    restrict: number;
+    data: EffectData[];
+}
+
 export interface Item {
     slug: string;
     name: string;
     kind: string;
     level: number;
+    price: number;
+    wt: number;
+    range: string;
+    quantity: number;
+    uses: number;
     categories: Category[];
     locations: NameLink[];
     desc1: string;
@@ -166,8 +214,26 @@ export interface Item {
     char2: string;
     char3: string;
     char4: string;
+    char: string;
     equip: Equip;
-    book: NameLink[];
+    book: Book[];
     chars: CharSlug[];
     monsters: NameLink[];
+    ideas: RecipeText[];
+    ingredient: Ingredient[];
+    effects: EffectLine[];
+    component: Component[];
+    traits: Trait[];
+    ing: NameOnly2[];
+    shop: string;
+}
+
+
+export interface RecipeIdea {
+    row: number;
+    col: number;
+    hor: boolean;
+    ver: boolean;
+    char: string;
+    item: Item;
 }

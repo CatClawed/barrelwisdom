@@ -1,7 +1,7 @@
 from collections import OrderedDict
 from rest_framework import serializers
 from games.A23.effects_a23.models import Effect, AdvData
-from games.A23.items_a23.models import EffectLines, EffectData
+from games.A23.items_a23.models import EffectData
 
 class A23EffectSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
@@ -40,31 +40,27 @@ class A23EffectSerializer(serializers.ModelSerializer):
         return OrderedDict((k, v) for k, v in result.items() 
                            if v not in [None, [], '', {}])
 
-class A23EffectLineSerializer(serializers.ModelSerializer):
-    slug = serializers.CharField(source='item.slug')
-    name = serializers.SerializerMethodField()
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.item.item_en.name
-        if self.context['language'] == 'ja':
-            return obj.item.item_en.name
-        if self.context['language'] == 'ko':
-            return obj.item.item_en.name
-        if self.context['language'] == 'sc':
-            return obj.item.item_en.name
-        if self.context['language'] == 'tc':
-            return obj.item.item_en.name
-        else:
-            return obj.item.item_en.name
-    class Meta:
-        model = EffectLines
-        fields = ['slug', 'name']
-
 class A23EffectDataSerializer(serializers.ModelSerializer):
-    effectlines_set = A23EffectLineSerializer(many=True)
+    slug = serializers.SerializerMethodField()
+    name = serializers.SerializerMethodField()
     class Meta:
         model = EffectData
-        fields = ['effectlines_set']
+        fields = ['slug', 'name']
+    def get_slug(self,obj):
+        return obj.line.item.slug
+    def get_name(self,obj):
+        if 'language' not in self.context:
+            return obj.line.item.item_en.name
+        if self.context['language'] == 'ja':
+            return obj.line.item.item_ja.name
+        if self.context['language'] == 'ko':
+            return obj.line.item.item_ko.name
+        if self.context['language'] == 'sc':
+            return obj.line.item.item_sc.name
+        if self.context['language'] == 'tc':
+            return obj.line.item.item_tc.name
+        else:
+            return obj.line.item.item_en.name
 
 class A23AdvDataSerializer(serializers.ModelSerializer):
     class Meta:
@@ -78,11 +74,11 @@ class A23AdvDataSerializer(serializers.ModelSerializer):
 class A23EffectSerializerFull(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     desc = serializers.SerializerMethodField()
-    #effectdata_set = A23EffectDataSerializer(many=True)
+    items = A23EffectDataSerializer(many=True, source='effectdata_set')
     advanced = A23AdvDataSerializer(many=True)
     class Meta:
         model = Effect
-        fields = ['slug', 'name', 'desc', 'advanced']
+        fields = ['slug', 'name', 'desc', 'advanced', 'items']
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.eff_en.name
