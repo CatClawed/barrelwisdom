@@ -8,6 +8,7 @@ __pycache__/
 /backend/jwt-key
 /backend/jwt-key.pub
 /backend/dump.json.gz
+/backend/back.json.gz
 
 # Angular Stuff
 
