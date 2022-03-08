@@ -29,6 +29,8 @@ class A23CategoryViewSet(viewsets.ModelViewSet):
                 .prefetch_related(
                     'item_set',
                     'item_set__item_en',
+                    'add_categories',
+                    'add_categories__item_en',
                     'ingredient_set',
                     'ingredient_set__synth',
                     'ingredient_set__synth__item_en'
@@ -56,6 +58,8 @@ class A23CategoryViewSet(viewsets.ModelViewSet):
                 .prefetch_related(
                     'item_set',
                     'item_set__item_ja',
+                    'add_categories',
+                    'add_categories__item_ja',
                     'ingredient_set',
                     'ingredient_set__synth',
                     'ingredient_set__synth__item_ja'
@@ -83,6 +87,8 @@ class A23CategoryViewSet(viewsets.ModelViewSet):
                 .prefetch_related(
                     'item_set',
                     'item_set__item_ko',
+                    'add_categories',
+                    'add_categories__item_ko',
                     'ingredient_set',
                     'ingredient_set__synth',
                     'ingredient_set__synth__item_ko'
@@ -110,6 +116,8 @@ class A23CategoryViewSet(viewsets.ModelViewSet):
                 .prefetch_related(
                     'item_set',
                     'item_set__item_sc',
+                    'add_categories',
+                    'add_categories__item_sc',
                     'ingredient_set',
                     'ingredient_set__synth',
                     'ingredient_set__synth__item_sc'
@@ -137,6 +145,8 @@ class A23CategoryViewSet(viewsets.ModelViewSet):
                 .prefetch_related(
                     'item_set',
                     'item_set__item_tc',
+                    'add_categories',
+                    'add_categories__item_tc',
                     'ingredient_set',
                     'ingredient_set__synth',
                     'ingredient_set__synth__item_tc'
@@ -264,6 +274,7 @@ class A23ItemViewSet(viewsets.ModelViewSet):
             )
             .prefetch_related(
                 'categories',
+                'add',
                 'ingredients',
                 'ingredients__item',
                 'ingredients__item__item_en',
@@ -327,6 +338,7 @@ class A23ItemViewSet(viewsets.ModelViewSet):
             )
             .prefetch_related(
                 'categories',
+                'add',
                 'ingredients',
                 'ingredients__item',
                 'ingredients__item__item_ja',
@@ -390,6 +402,7 @@ class A23ItemViewSet(viewsets.ModelViewSet):
             )
             .prefetch_related(
                 'categories',
+                'add',
                 'ingredients',
                 'ingredients__item',
                 'ingredients__item__item_ko',
@@ -453,6 +466,7 @@ class A23ItemViewSet(viewsets.ModelViewSet):
             )
             .prefetch_related(
                 'categories',
+                'add',
                 'ingredients',
                 'ingredients__item',
                 'ingredients__item__item_sc',
@@ -516,6 +530,7 @@ class A23ItemViewSet(viewsets.ModelViewSet):
             )
             .prefetch_related(
                 'categories',
+                'add',
                 'ingredients',
                 'ingredients__item',
                 'ingredients__item__item_tc',

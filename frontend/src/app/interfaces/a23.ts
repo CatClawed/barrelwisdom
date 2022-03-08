@@ -132,6 +132,7 @@ export interface Category {
     icon: string;
     items: NameLink[];
     used: Ingredient[];
+    add: NameLink[];
 }
 
 export interface ChestData {
@@ -205,6 +206,7 @@ export interface Item {
     quantity: number;
     uses: number;
     categories: Category[];
+    add: Category[];
     locations: NameLink[];
     desc1: string;
     desc2: string;
@@ -222,10 +224,11 @@ export interface Item {
     ideas: RecipeText[];
     ingredient: Ingredient[];
     effects: EffectLine[];
-    component: Component[];
+    components: Component[];
     traits: Trait[];
     ing: NameOnly2[];
     shop: string;
+    chest: ChestData[];
 }
 
 

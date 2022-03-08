@@ -40,7 +40,7 @@ export class A23ItemComponent implements OnInit {
     2: "34d80d",
     3: "f7e331",
     4: "ff8242",
-    5: "74497f"
+    5: "debee3"
   }
 
   icons = {

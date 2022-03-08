@@ -35,19 +35,19 @@ class A23TraitSerializer(serializers.ModelSerializer):
         fields = ['slug','name']
     def get_name(self,obj):
         if 'language' not in self.context:
-            return obj.trait_en
+            return obj.trait_en.name
         if self.context['language'] == 'ja':
-            return obj.trait_ja
+            return obj.trait_ja.name
         if self.context['language'] == 'ko':
-            return obj.trait_ko
+            return obj.trait_ko.name
         if self.context['language'] == 'sc':
-            return obj.trait_sc
+            return obj.trait_sc.name
         if self.context['language'] == 'tc':
-            return obj.trait_tc
+            return obj.trait_tc.name
         else:
-            return obj.trait_en
+            return obj.trait_en.name
     def get_slug(self,obj):
-        return obj.node.climate.loc.parent.slug
+        return obj.slug
     
 class A23ComponentSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
@@ -188,10 +188,11 @@ class A23IngredientItemSerializer(serializers.ModelSerializer):
 class A23CategoryItemSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     items = A23ItemNameSerializer(source='item_set', many=True)
+    add = A23ItemNameSerializer(source='add_categories', many=True)
     used = A23IngredientItemSerializer(source='ingredient_set', many=True)
     class Meta:
         model = Category
-        fields = ['slug', 'name', 'items', 'used']
+        fields = ['slug', 'name', 'items', 'used', 'add']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -229,10 +230,11 @@ class A23IngredientNameSerializer(serializers.ModelSerializer):
 class A23ItemListSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     categories = A23CategorySerializer(many=True)
+    add = A23CategorySerializer(many=True)
     ing = A23IngredientNameSerializer(many=True, source='ingredients')
     class Meta:
         model = Item
-        fields = ['slug', 'name', 'categories', 'kind', 'ing']
+        fields = ['slug', 'name', 'categories','add', 'kind', 'ing']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -274,9 +276,10 @@ class A23MonsterNameSerializer(serializers.ModelSerializer):
         
 class A23EffectNameSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
+    desc = serializers.SerializerMethodField()
     class Meta:
         model = Effect
-        fields = ['slug', 'name']
+        fields = ['slug', 'name', 'desc']
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.eff_en.name
@@ -290,6 +293,19 @@ class A23EffectNameSerializer(serializers.ModelSerializer):
             return obj.eff_tc.name
         else:
             return obj.eff_en.name
+    def get_desc(self,obj):
+        if 'language' not in self.context:
+            return obj.eff_en.desc
+        if self.context['language'] == 'ja':
+            return obj.eff_ja.desc
+        if self.context['language'] == 'ko':
+            return obj.eff_ko.desc
+        if self.context['language'] == 'sc':
+            return obj.eff_sc.desc
+        if self.context['language'] == 'tc':
+            return obj.eff_tc.desc
+        else:
+            return obj.eff_en.desc
 
 class A23EffectDataSerializer(serializers.ModelSerializer):
     effect = A23EffectNameSerializer()
@@ -311,7 +327,40 @@ class A23EffectLinesSerializer(serializers.ModelSerializer):
         result = super(A23EffectLinesSerializer, self).to_representation(instance)
         return OrderedDict((k, v) for k, v in result.items() 
                            if v not in [None, [], '', False, {}])
-        
+
+class A23ChestSerializer(serializers.ModelSerializer):
+    region = serializers.SerializerMethodField()
+    subregion = serializers.SerializerMethodField()
+    class Meta:
+        model = Chest2
+        fields = ['region', 'subregion']
+    def get_region(self,obj):
+        if 'language' not in self.context:
+            return obj.loc.parent.reg_en
+        if self.context['language'] == 'ja':
+            return obj.loc.parent.reg_ja
+        if self.context['language'] == 'ko':
+            return obj.loc.parent.reg_ko
+        if self.context['language'] == 'sc':
+            return obj.loc.parent.reg_sc
+        if self.context['language'] == 'tc':
+            return obj.loc.parent.reg_tc
+        else:
+            return obj.loc.parent.reg_en
+    def get_subregion(self,obj):
+        if 'language' not in self.context:
+            return obj.loc.reg_en
+        if self.context['language'] == 'ja':
+            return obj.loc.reg_ja
+        if self.context['language'] == 'ko':
+            return obj.loc.reg_ko
+        if self.context['language'] == 'sc':
+            return obj.loc.reg_sc
+        if self.context['language'] == 'tc':
+            return obj.loc.reg_tc
+        else:
+            return obj.loc.reg_en
+           
 class A23ItemSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     categories = A23CategorySerializer(many=True)
@@ -335,9 +384,10 @@ class A23ItemSerializer(serializers.ModelSerializer):
     ingredient = A23IngredientSerializer(many=True, source='ingredients')
     effects = A23EffectLinesSerializer(many=True, source='effectlines_set')
     shop = serializers.SerializerMethodField()
+    chest = A23ChestSerializer(many=True, source="chest2_set")
     class Meta:
         model = Item
-        fields = ['slug', 'name', 'kind', 'level','price','shop',
+        fields = ['slug', 'name', 'kind', 'level','price','shop','chest',
                   'wt','range','quantity','uses','ingredient',
                   'categories', 'locations', 'chars','equip','effects',
                   'book','monsters','components','traits','ideas',
@@ -445,39 +495,6 @@ class A23ItemSerializer(serializers.ModelSerializer):
         result['locations'] = res
         return OrderedDict((k, v) for k, v in result.items() 
                            if v not in [None, [], '', False, {}])
-
-class A23ChestSerializer(serializers.ModelSerializer):
-    region = serializers.SerializerMethodField()
-    subregion = serializers.SerializerMethodField()
-    class Meta:
-        model = Chest2
-        fields = ['region', 'subregion']
-    def get_region(self,obj):
-        if 'language' not in self.context:
-            return obj.loc.parent.reg_en
-        if self.context['language'] == 'ja':
-            return obj.loc.parent.reg_ja
-        if self.context['language'] == 'ko':
-            return obj.loc.parent.reg_ko
-        if self.context['language'] == 'sc':
-            return obj.loc.parent.reg_sc
-        if self.context['language'] == 'tc':
-            return obj.loc.parent.reg_tc
-        else:
-            return obj.loc.parent.reg_en
-    def get_subregion(self,obj):
-        if 'language' not in self.context:
-            return obj.loc.reg_en
-        if self.context['language'] == 'ja':
-            return obj.loc.reg_ja
-        if self.context['language'] == 'ko':
-            return obj.loc.reg_ko
-        if self.context['language'] == 'sc':
-            return obj.loc.reg_sc
-        if self.context['language'] == 'tc':
-            return obj.loc.reg_tc
-        else:
-            return obj.loc.reg_en
 
 class A23BookSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()

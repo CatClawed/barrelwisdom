@@ -13,6 +13,11 @@
                     <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
                 </td>
             </tr>
+            <tr *ngFor="let item of category.add">
+                <td>
+                    <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a> (Add)
+                </td>
+            </tr>
         </table>
     </div>
     <div class="col-md-6">

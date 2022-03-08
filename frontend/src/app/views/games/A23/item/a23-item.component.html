@@ -69,6 +69,7 @@
         </table>
       </div>
       <p *ngIf="item.book"><b>Book: </b> <a routerLink="/{{gameURL}}/items/books/{{item.book[0].slug}}/{{language}}">{{item.book[0].name}}</a></p>
+      <p *ngIf="item.chest"><b>Chest: </b>{{item.chest[0].region}} &gt; {{item.chest[0].subregion}}</p>
       <p *ngIf="item.shop"><b>Shop: </b>{{item.shop}}</p>
       <b *ngIf="item.locations" >Location:</b>
       <div *ngIf="item.locations" style="column-count: 2;">
@@ -76,12 +77,16 @@
             <li *ngFor="let loc of item.locations"><a routerLink="/{{gameURL}}/locations/{{loc.slug}}/{{language}}">{{loc.name}}</a>
         </ul>
       </div>
-      <b *ngIf="item.wt || item.quantity || item.uses || item.range">Misc. Data: </b>
-      <ul *ngIf="item.wt || item.quantity || item.uses || item.range">
-        <li *ngIf="item.wt">WT: {{item.wt}}</li>
-        <li *ngIf="item.quantity">Number made: {{item.quantity}}</li>
-        <li *ngIf="item.uses">Uses: {{item.uses}}</li>
-        <li *ngIf="item.range">Range: {{item.range}}</li>
+      <a *ngIf="item.ideas" routerLink="/{{gameURL}}/recipe-ideas/{{language}}"><b>Recipe Idea:</b></a>
+      <ul *ngIf="item.ideas">
+        <li *ngFor="let idea of item.ideas" (click)="historyService.hrefClicked($event);" [innerHTML]="idea.text"></li>
+      </ul>
+      <ul *ngIf="item.wt || item.quantity || item.uses || item.range || item.price" style="padding-left:0;list-style:none;">
+        <li *ngIf="item.price"   >Cole: {{item.price}}</li>
+        <li *ngIf="item.wt"      >WT: {{item.wt}}</li>
+        <li *ngIf="item.quantity">Quantity: {{item.quantity}}</li>
+        <li *ngIf="item.uses"    >Uses: {{item.uses}}</li>
+        <li *ngIf="item.range"   >Range: {{item.range}}</li>
       </ul>
       <b *ngIf="item.monsters" >Dropped by:</b>
       <div *ngIf="item.monsters" style="column-count: 2;">
@@ -89,10 +94,6 @@
              <li *ngFor="let mon of item.monsters"><a routerLink="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a></li>
          </ul>
       </div>
-      <a *ngIf="item.ideas" routerLink="/{{gameURL}}/recipe-ideas/{{language}}"><b>Recipe Idea:</b></a>
-      <ul *ngIf="item.ideas">
-        <li *ngFor="let idea of item.ideas" (click)="historyService.hrefClicked($event);" [innerHTML]="idea.text"></li>
-      </ul>
       <table *ngIf="item.ingredient" class="tbl">
         <tr class="table-dark-center"><th>Ingredients</th></tr>
         <tr>
@@ -122,13 +123,47 @@
           <td>
             <ul style="list-style:none;">
               <li *ngFor="let e of eff.data">
-                <a *ngIf="e.effect" routerLink="/{{gameURL}}/effects/{{e.effect.slug}}/{{language}}">{{e.effect.name}}</a>
-                <span *ngIf="e.component">{{e.component.name}}</span>
+                <ng-template #effPopover>
+                  <p *ngIf="e.effect">{{e.effect.desc}}</p>
+                  <a *ngIf="e.effect" routerLink="/{{gameURL}}/effects/{{e.effect.slug}}/{{language}}">More info...</a>
+
+                  <div *ngIf="e.component" style="color:#{{colors[e.component.code[0]]}};border:1px solid #392d23;background-color:#392d23;display:inline-block;border-radius:3px;">
+                    <div *ngFor="let thing of [].constructor(3); let i = index" style="display:flex;">
+                      <ng-container *ngFor="let thingy of [].constructor(3); let j = index">
+                        <div *ngIf="e.component.code[i*3+j+1]==2" style="border:1px solid #392d23;height:1em;width:1em;display:flex;"><i style="font-size:0.75em;margin:auto;" class="fas fa-star"></i></div>
+                        <div *ngIf="e.component.code[i*3+j+1]==1" style="border:1px solid #392d23;height:1em;width:1em;display:flex;"><i style="font-size:0.8em;margin:auto;" class="fas fa-square"></i></div>
+                        <div *ngIf="e.component.code[i*3+j+1]==0" style="border:1px solid #392d23;height:1em;width:1em;display:flex;"><i style="color:#635552;font-size:0.8em;margin:auto;" class="fas fa-square"></i></div>
+                      </ng-container>
+                    </div>
+                  </div>
+                </ng-template>
+                <a *ngIf="e.effect"    [popover]="effPopover" [popoverTitle]="e.effect.name" (click)="$event.preventDefault();" href="/{{gameURL}}/effects/{{e.effect.slug}}/{{language}}">{{e.effect.name}}</a>
+                <a *ngIf="e.component" [popover]="effPopover" [popoverTitle]="e.component.name">{{e.component.name}}</a>
                 <span *ngIf="checkLevel(eff.maxlv, eff.restrict, e.num) == 0 && e.num"> ({{e.num}})</span>
                 <span *ngIf="checkLevel(eff.maxlv, eff.restrict, e.num) == 1" style="color:darkgrey;"> ({{e.num}})</span>
                 <span *ngIf="checkLevel(eff.maxlv, eff.restrict, e.num) == 2" style="color:red;"> ({{e.num}})</span>
               </li>
             </ul>
+          </td>
+        </tr>
+      </table>
+      <table *ngIf="item.components" class="tbl">
+        <tr class="table-dark-center"><th>Components</th></tr>
+        <tr>
+          <td>
+            <div style="display:grid; grid-template-columns: auto auto auto auto;grid-gap:1em;">
+              <div *ngFor="let component of item.components" style="display:flex;">
+                <div style="margin:auto;color:#{{colors[component.code[0]]}};border:1px solid #392d23;background-color:#392d23;display:inline-block;border-radius:3px;">
+                  <div *ngFor="let thing of [].constructor(3); let i = index" style="display:flex;">
+                    <ng-container *ngFor="let thingy of [].constructor(3); let j = index">
+                      <div *ngIf="component.code[i*3+j+1]==2" style="border:1px solid #392d23;height:1em;width:1em;display:flex;"><i style="font-size:0.75em;margin:auto;" class="fas fa-star"></i></div>
+                      <div *ngIf="component.code[i*3+j+1]==1" style="border:1px solid #392d23;height:1em;width:1em;display:flex;"><i style="font-size:0.8em;margin:auto;" class="fas fa-square"></i></div>
+                      <div *ngIf="component.code[i*3+j+1]==0" style="border:1px solid #392d23;height:1em;width:1em;display:flex;"><i style="color:#635552;font-size:0.8em;margin:auto;" class="fas fa-square"></i></div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
           </td>
         </tr>
       </table>

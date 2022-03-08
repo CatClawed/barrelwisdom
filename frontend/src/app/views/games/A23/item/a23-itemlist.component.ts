@@ -127,7 +127,7 @@ import { map, startWith } from 'rxjs/operators';
       console.log(kind)
 
       if(kind != 'Any') {
-          list = list.filter(item => item.categories.some(c => c.name == kind) );
+          list = list.filter(item => item.categories.some(c => c.name == kind) || (item.add ? item.add.some(c => c.name == kind) : false ));
       }
 
       if(ingt) {

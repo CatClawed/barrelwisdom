@@ -73,6 +73,7 @@ class Item(models.Model):
     kind = models.CharField(max_length=20)
     traits = models.ManyToManyField(Trait)
     categories = models.ManyToManyField(Category)
+    add = models.ManyToManyField(Category, related_name="add_categories")
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE, null=True, blank=True)
     char = models.ForeignKey(Character, on_delete=models.CASCADE, null=True, blank=True, related_name="synthchar")
     quantity = models.IntegerField(null=True, blank=True)

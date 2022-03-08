@@ -1,6 +1,6 @@
 from django.db import models
 from games.A23.items_a23.models import Item
-from games.A23.regions_a23.models import Region
+from games.A23.regions_a23.models import Region2
 from games.A23.misc_a23.models import Character
 
 class Monster_en(models.Model):
@@ -44,7 +44,7 @@ class Monster(models.Model):
     index = models.IntegerField()
     drops = models.ManyToManyField(Item, blank=True) # simplified!
     isDLC = models.BooleanField(default=False)
-    location = models.ManyToManyField(Region)
+    location = models.ManyToManyField(Region2)
     char1 = models.ForeignKey(Character, on_delete=models.CASCADE, null=True, blank=True, related_name="char1")
     char2 = models.ForeignKey(Character, on_delete=models.CASCADE, null=True, blank=True, related_name="char2")
     char3 = models.ForeignKey(Character, on_delete=models.CASCADE, null=True, blank=True, related_name="char3")
