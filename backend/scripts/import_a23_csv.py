@@ -15,8 +15,6 @@ with open('scripts/data.txt', newline='', encoding='utf-8') as csvfile:
     reader = csv.reader(csvfile, delimiter='\t')
     for row in reader:
         print(row[0])
-
-    
     
     """
     item = None

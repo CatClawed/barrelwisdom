@@ -66,7 +66,7 @@ export interface GatherNode {
 
 export interface Climate {
     weather: string;
-    monsters: NameLink[];
+    mons: NameLink[];
     nodes: GatherNode[];
 }
 
@@ -123,7 +123,7 @@ export interface Monster {
     def_rank: number;
     spd_rank: number;
     drops: NameLink[];
-    location: NameLink[];
+    locations: NameLink[];
 }
 
 export interface Category {

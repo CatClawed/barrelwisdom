@@ -300,6 +300,7 @@ class A23ItemViewSet(viewsets.ModelViewSet):
                 )
                 .prefetch_related(
                     'categories',
+                    'add',
                     'gatheritem2_set',
                     'gatheritem2_set__node',
                     'gatheritem2_set__node__climate',
@@ -364,6 +365,7 @@ class A23ItemViewSet(viewsets.ModelViewSet):
                 )
                 .prefetch_related(
                     'categories',
+                    'add',
                     'gatheritem2_set',
                     'gatheritem2_set__node',
                     'gatheritem2_set__node__climate',
@@ -428,6 +430,7 @@ class A23ItemViewSet(viewsets.ModelViewSet):
                 )
                 .prefetch_related(
                     'categories',
+                    'add',
                     'gatheritem2_set',
                     'gatheritem2_set__node',
                     'gatheritem2_set__node__climate',
@@ -492,6 +495,7 @@ class A23ItemViewSet(viewsets.ModelViewSet):
                 )
                 .prefetch_related(
                     'categories',
+                    'add',
                     'gatheritem2_set',
                     'gatheritem2_set__node',
                     'gatheritem2_set__node__climate',
@@ -556,6 +560,7 @@ class A23ItemViewSet(viewsets.ModelViewSet):
                 )
                 .prefetch_related(
                     'categories',
+                    'add',
                     'gatheritem2_set',
                     'gatheritem2_set__node',
                     'gatheritem2_set__node__climate',

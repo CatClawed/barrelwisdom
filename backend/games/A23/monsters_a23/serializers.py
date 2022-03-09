@@ -1,56 +1,10 @@
 from rest_framework import serializers
 from games.A23.monsters_a23.models import Monster
 from games.A23.items_a23.models import Item
-#from games.A23.regions_a23.models import Region
+from games.A23.regions_a23.models import Climate2
 from collections import OrderedDict
+from games.A23.misc_a23.serializers import A23ItemNameSerializer
 
-class A23ItemSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
-    class Meta:
-        model = Item
-        fields = ['slug', 'name']
-
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.item_en.name
-        if self.context['language'] == 'ja':
-            return obj.item_ja.name
-        if self.context['language'] == 'ko':
-            return obj.item_ko.name
-        if self.context['language'] == 'fr':
-            return obj.item_fr.name
-        if self.context['language'] == 'sc':
-            return obj.item_sc.name
-        if self.context['language'] == 'tc':
-            return obj.item_tc.name
-        else:
-            return obj.item_en.name
-    def to_representation(self, instance):
-        result = super(A23ItemSerializer, self).to_representation(instance)
-        return OrderedDict((k, v) for k, v in result.items() 
-                           if v not in [None, [], '', False, {}])
-
-# Name only
-class A23MonsterSerializerName(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
-    class Meta:
-        model = Monster
-        fields = ['slug', 'name']
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.mon_en.name
-        if self.context['language'] == 'ja':
-            return obj.mon_ja.name
-        if self.context['language'] == 'ko':
-            return obj.mon_ko.name
-        if self.context['language'] == 'fr':
-            return obj.mon_fr.name
-        if self.context['language'] == 'sc':
-            return obj.mon_sc.name
-        if self.context['language'] == 'tc':
-            return obj.mon_tc.name
-        else:
-            return obj.mon_en.name
 
 # For filtering
 class A23MonsterSerializer(serializers.ModelSerializer):
@@ -79,6 +33,30 @@ class A23MonsterSerializer(serializers.ModelSerializer):
                            if v not in [None, [], '', False, {}])
 
 
+class A23LocationSerializer(serializers.ModelSerializer):
+    name = serializers.SerializerMethodField()
+    slug = serializers.SerializerMethodField()
+    class Meta:
+        model = Climate2
+        fields = ['slug','name']
+
+    def get_name(self,obj):
+        if 'language' not in self.context:
+            return obj.loc.parent.reg_en
+        if self.context['language'] == 'ja':
+            return obj.loc.parent.reg_ja
+        if self.context['language'] == 'ko':
+            return obj.loc.parent.reg_ko
+        if self.context['language'] == 'sc':
+            return obj.loc.parent.reg_sc
+        if self.context['language'] == 'tc':
+            return obj.loc.parent.reg_tc
+        else:
+            return obj.loc.parent.reg_en
+        
+    def get_slug(self,obj):
+        return obj.loc.parent.slug
+
 # Full Details
 class A23MonsterSerializerFull(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
@@ -90,12 +68,13 @@ class A23MonsterSerializerFull(serializers.ModelSerializer):
     char2 = serializers.CharField(source='char2.slug')
     char3 = serializers.SerializerMethodField()
     char4 = serializers.SerializerMethodField()
-    drops = A23ItemSerializer(many=True)
-    #region = A23Regionserializer(many=True)
+    drops = A23ItemNameSerializer(many=True)
+    locations = A23LocationSerializer(many=True, source='climate2_set')
     class Meta:
         model = Monster
-        fields = ['slug', 'kind', 'name', 'drops',
-                  'resist_phys', 'resist_mag', 'resist_fire', 'resist_ice', 'resist_thun', 'resist_wind',
+        fields = ['slug', 'kind', 'name', 'drops','locations',
+                  'resist_phys', 'resist_mag', 'resist_fire',
+                  'resist_ice', 'resist_thun', 'resist_wind',
                   'hp_rank', 'str_rank', 'def_rank', 'spd_rank',
                   'desc1', 'desc2', 'desc3', 'desc4',
                   'char1', 'char2', 'char3', 'char4']
@@ -180,5 +159,10 @@ class A23MonsterSerializerFull(serializers.ModelSerializer):
         return obj.char4.slug if obj.char4 else None
     def to_representation(self, instance):
         result = super(A23MonsterSerializerFull, self).to_representation(instance)
+        res = []
+        for r in result['locations']:
+            if r not in res:
+                res.append(r)
+        result['locations'] = res
         return OrderedDict((k, v) for k, v in result.items() 
                            if v not in [None, [], '', False, {}])

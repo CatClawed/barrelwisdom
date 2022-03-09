@@ -27,7 +27,7 @@ export class LanguageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.currentLanguage = this.router.url.split('/').pop().split('#')[0];
+    this.currentLanguage = this.router.url.split('?')[0].split('/').pop().split('#')[0];
     switch(this.section) {
       case "totori":
         this.languages = environment.totori_languages;

@@ -74,7 +74,7 @@
     <ul *ngIf=" trt.item_set">
       <li *ngFor="let item of trt.item_set"><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
     </ul>
-    <p *ngIf="trt.combo1"><a routerLink="/{{gameURL}}/traits/{{trt.combo1.slug}}/{{language}}">{{trt.combo1.name}}</a> x <a routerLink="/{{gameURL}}/traits/{{trt.combo2.slug}}/{{language}}">{{trt.combo2.name}}</a></p>
+    <p *ngIf="trt.combo1"><a (click)="openModal(traitModal, trt.combo1.slug, $event);" href="/{{gameURL}}/traits/{{trt.combo1.slug}}/{{language}}">{{trt.combo1.name}}</a> x <a (click)="openModal(traitModal, trt.combo2.slug, $event);" href="/{{gameURL}}/traits/{{trt.combo2.slug}}/{{language}}">{{trt.combo2.name}}</a></p>
     <p>{{trt.desc}}</p>
   </div>
   <div class="flex bottom" style="text-align:center;">

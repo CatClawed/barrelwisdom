@@ -1,6 +1,6 @@
 from django.db import models
 from games.A23.items_a23.models import Item,Book
-#from games.A23.monsters_a23.models import Item,Book
+from games.A23.monsters_a23.models import Monster
 
 class Region2(models.Model):
     slug = models.SlugField(max_length=30)
@@ -16,7 +16,7 @@ class Climate2(models.Model):
     loc = models.ForeignKey(Region2, on_delete=models.CASCADE)
     map = models.CharField(max_length=250)
     weather = models.CharField(max_length=10)
-    # mons = models.ManyToManyField(Monster)
+    mons = models.ManyToManyField(Monster)
     class Meta:
         ordering = ['loc']
 

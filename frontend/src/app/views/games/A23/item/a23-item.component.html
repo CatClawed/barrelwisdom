@@ -66,15 +66,25 @@
               <td style="text-align: center;"><i class="atelier atelier-{{cat.icon}}"></i></td>
               <td><a routerLink="/{{gameURL}}/categories/{{cat.slug}}">{{cat.name}}</a></td>
           </tr>
+          <tr *ngFor="let cat of item.add">
+            <td style="text-align: center;"><i style="color:lightgrey;" class="atelier atelier-{{cat.icon}}"></i></td>
+            <td><a routerLink="/{{gameURL}}/categories/{{cat.slug}}">{{cat.name}}</a></td>
+        </tr>
         </table>
       </div>
+      <b *ngIf="item.traits">Trait:</b>
+      <ul *ngIf="item.traits">
+        <li *ngFor="let trait of item.traits">
+          <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">{{trait.name}}</a>
+        </li>
+      </ul>
       <p *ngIf="item.book"><b>Book: </b> <a routerLink="/{{gameURL}}/items/books/{{item.book[0].slug}}/{{language}}">{{item.book[0].name}}</a></p>
       <p *ngIf="item.chest"><b>Chest: </b>{{item.chest[0].region}} &gt; {{item.chest[0].subregion}}</p>
       <p *ngIf="item.shop"><b>Shop: </b>{{item.shop}}</p>
       <b *ngIf="item.locations" >Location:</b>
       <div *ngIf="item.locations" style="column-count: 2;">
         <ul style="padding-left:1.1em;margin-bottom:0">
-            <li *ngFor="let loc of item.locations"><a routerLink="/{{gameURL}}/locations/{{loc.slug}}/{{language}}">{{loc.name}}</a>
+            <li *ngFor="let loc of item.locations"><a routerLink="/{{gameURL}}/locations/{{loc.slug}}/{{language}}" [queryParams]="{item: item.name}">{{loc.name}}</a>
         </ul>
       </div>
       <a *ngIf="item.ideas" routerLink="/{{gameURL}}/recipe-ideas/{{language}}"><b>Recipe Idea:</b></a>

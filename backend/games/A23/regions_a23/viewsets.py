@@ -21,6 +21,8 @@ class A23RegionViewSet(viewsets.ModelViewSet):
                 .prefetch_related(
                     'child',
                     'climate2_set',
+                    'climate2_set__mons',
+                    'climate2_set__mons__mon_en',
                     'climate2_set__nodes',
                     'climate2_set__nodes__items',
                     'climate2_set__nodes__items__item_en',
@@ -49,6 +51,8 @@ class A23RegionViewSet(viewsets.ModelViewSet):
                 .prefetch_related(
                     'child',
                     'climate2_set',
+                    'climate2_set__mons',
+                    'climate2_set__mons__mon_ja',
                     'climate2_set__nodes',
                     'climate2_set__nodes__items',
                     'climate2_set__nodes__items__item_ja',
@@ -77,6 +81,8 @@ class A23RegionViewSet(viewsets.ModelViewSet):
                 .prefetch_related(
                     'child',
                     'climate2_set',
+                    'climate2_set__mons',
+                    'climate2_set__mons__mon_ko',
                     'climate2_set__nodes',
                     'climate2_set__nodes__items',
                     'climate2_set__nodes__items__item_ko',
@@ -105,6 +111,8 @@ class A23RegionViewSet(viewsets.ModelViewSet):
                 .prefetch_related(
                     'child',
                     'climate2_set',
+                    'climate2_set__mons',
+                    'climate2_set__mons__mon_sc',
                     'climate2_set__nodes',
                     'climate2_set__nodes__items',
                     'climate2_set__nodes__items__item_sc',
@@ -133,6 +141,8 @@ class A23RegionViewSet(viewsets.ModelViewSet):
                 .prefetch_related(
                     'child',
                     'climate2_set',
+                    'climate2_set__mons',
+                    'climate2_set__mons__mon_tc',
                     'climate2_set__nodes',
                     'climate2_set__nodes__items',
                     'climate2_set__nodes__items__item_tc',

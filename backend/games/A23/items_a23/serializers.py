@@ -1,31 +1,10 @@
-from ossaudiodev import SNDCTL_SYNTH_ID
 from rest_framework import serializers
 from collections import OrderedDict
 from games.A23.items_a23.models import Item, Category, Book, Equip, Component, RecipeText, RecipeIdea, EffectData, EffectLines, Ingredient
 from games.A23.regions_a23.models import GatherItem2, Chest2
 from games.A23.traits_a23.models import Trait
 from games.A23.effects_a23.models import Effect
-from games.A23.monsters_a23.models import Monster
-from games.A23.misc_a23.models import Character
-
-class A23BookNameSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
-    class Meta:
-        model = Book
-        fields = ['slug', 'name']
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.book_en
-        if self.context['language'] == 'ja':
-            return obj.book_ja
-        if self.context['language'] == 'ko':
-            return obj.book_ko
-        if self.context['language'] == 'sc':
-            return obj.book_sc
-        if self.context['language'] == 'tc':
-            return obj.book_tc
-        else:
-            return obj.book_en
+from games.A23.misc_a23.serializers import A23BookNameSerializer, A23CharacterSerializer, A23ItemNameSerializer, A23MonsterNameSerializer
 
 class A23TraitSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
@@ -118,35 +97,11 @@ class A23LocationSerializer(serializers.ModelSerializer):
         
     def get_slug(self,obj):
         return obj.node.climate.loc.parent.slug
-
-class A23CharEquipSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Character
-        fields = ['slug']
         
 class A23EquipSerializer(serializers.ModelSerializer):
     class Meta:
         model = Equip
         fields = ['hp', 'mp', 'atk', 'dfn', 'spd']
-
-class A23ItemNameSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
-    class Meta:
-        model = Item
-        fields = ['slug', 'name']
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.item_en.name
-        if self.context['language'] == 'ja':
-            return obj.item_ja.name
-        if self.context['language'] == 'ko':
-            return obj.item_ko.name
-        if self.context['language'] == 'sc':
-            return obj.item_sc.name
-        if self.context['language'] == 'tc':
-            return obj.item_tc.name
-        else:
-            return obj.item_en.name
         
 class A23CategorySerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
@@ -254,26 +209,6 @@ class A23ItemListSerializer(serializers.ModelSerializer):
         return OrderedDict((k, v) for k, v in result.items() 
                            if v not in [None, [], '', False, {}])
         
-class A23MonsterNameSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
-    class Meta:
-        model = Monster
-        fields = ['slug', 'name']
-
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.mon_en.name
-        if self.context['language'] == 'ja':
-            return obj.mon_ja.name
-        if self.context['language'] == 'ko':
-            return obj.mon_ko.name
-        if self.context['language'] == 'sc':
-            return obj.mon_sc.name
-        if self.context['language'] == 'tc':
-            return obj.mon_tc.name
-        else:
-            return obj.mon_en.name
-        
 class A23EffectNameSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     desc = serializers.SerializerMethodField()
@@ -364,6 +299,7 @@ class A23ChestSerializer(serializers.ModelSerializer):
 class A23ItemSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     categories = A23CategorySerializer(many=True)
+    add = A23CategorySerializer(many=True)
     locations = A23LocationSerializer(many=True, source='gatheritem2_set')
     desc1 = serializers.SerializerMethodField()
     desc2 = serializers.SerializerMethodField()
@@ -374,7 +310,7 @@ class A23ItemSerializer(serializers.ModelSerializer):
     char2 = serializers.CharField(source='char2.slug')
     char3 = serializers.SerializerMethodField()
     char4 = serializers.SerializerMethodField()
-    chars = A23CharEquipSerializer(source='characterequip.chars', many=True)
+    chars = A23CharacterSerializer(source='characterequip.chars', many=True)
     equip = A23EquipSerializer()
     book = A23BookNameSerializer(source='book_set', many=True)
     monsters = A23MonsterNameSerializer(source='monster_set', many=True)
@@ -389,7 +325,7 @@ class A23ItemSerializer(serializers.ModelSerializer):
         model = Item
         fields = ['slug', 'name', 'kind', 'level','price','shop','chest',
                   'wt','range','quantity','uses','ingredient',
-                  'categories', 'locations', 'chars','equip','effects',
+                  'categories', 'add', 'locations', 'chars','equip','effects',
                   'book','monsters','components','traits','ideas',
                   'desc1', 'desc2', 'desc3', 'desc4',
                   'char1', 'char2', 'char3', 'char4', 'char']

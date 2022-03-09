@@ -23,6 +23,7 @@ import { Observable } from 'rxjs';
     filteredNodes: GatherNode[];
     language: string;
     search: string = "";
+    query: string = "";
 
     seoTitle: string;
     seoDesc: string;
@@ -53,6 +54,8 @@ import { Observable } from 'rxjs';
         this.language = this.route.snapshot.params.language;
         this.region = this.route.snapshot.data.loc;
         this.filteredRegion = this.region.areas;
+        this.query = this.route.snapshot.queryParamMap.get('item');
+        
 
           if(this.region.areas.length == 0 || !this.region) {
             this.error =`404`;
@@ -64,6 +67,7 @@ import { Observable } from 'rxjs';
               this.search = filter;
             }
             );
+            if (this.query) { this.pageForm.controls['filtertext'].patchValue(this.query); }
 
               this.gameTitle = this.a23service.gameTitle[this.language];
               this.gameURL = this.a23service.gameURL;
