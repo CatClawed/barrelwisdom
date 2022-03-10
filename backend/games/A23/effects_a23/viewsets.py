@@ -79,9 +79,6 @@ class A23EffectViewSet(viewsets.ModelViewSet):
                 )
                 .prefetch_related(
                     'advanced',
-                    'effectdata_set',
-                    'effectdata_set__line',
-                    'effectdata_set__line__item',
                     'effectdata_set__line__item__item_en',
                 )
                 .get(slug=slug)
@@ -101,9 +98,6 @@ class A23EffectViewSet(viewsets.ModelViewSet):
                 )
                 .prefetch_related(
                     'advanced',
-                    'effectdata_set',
-                    'effectdata_set__line',
-                    'effectdata_set__line__item',
                     'effectdata_set__line__item__item_ja',
                 )
                 .get(slug=slug)
@@ -123,9 +117,6 @@ class A23EffectViewSet(viewsets.ModelViewSet):
                 )
                 .prefetch_related(
                     'advanced',
-                    'effectdata_set',
-                    'effectdata_set__line',
-                    'effectdata_set__line__item',
                     'effectdata_set__line__item__item_ko',
                 )
                 .get(slug=slug)
@@ -145,9 +136,6 @@ class A23EffectViewSet(viewsets.ModelViewSet):
                 )
                 .prefetch_related(
                     'advanced',
-                    'effectdata_set',
-                    'effectdata_set__line',
-                    'effectdata_set__line__item',
                     'effectdata_set__line__item__item_sc',
                 )
                 .get(slug=slug)
@@ -167,9 +155,6 @@ class A23EffectViewSet(viewsets.ModelViewSet):
                 )
                 .prefetch_related(
                     'advanced',
-                    'effectdata_set',
-                    'effectdata_set__line',
-                    'effectdata_set__line__item',
                     'effectdata_set__line__item__item_tc',
                 )
                 .get(slug=slug)

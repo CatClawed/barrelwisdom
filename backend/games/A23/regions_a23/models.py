@@ -1,6 +1,6 @@
 from django.db import models
 from games.A23.items_a23.models import Item,Book
-from games.A23.monsters_a23.models import Monster
+from games.A23.monsters_a23.models import Monster 
 
 class Region2(models.Model):
     slug = models.SlugField(max_length=30)

@@ -19,20 +19,11 @@ class A23RegionViewSet(viewsets.ModelViewSet):
             queryset = (
                 Region2.objects
                 .prefetch_related(
-                    'child',
-                    'climate2_set',
-                    'climate2_set__mons',
-                    'climate2_set__mons__mon_en',
-                    'climate2_set__nodes',
-                    'climate2_set__nodes__items',
-                    'climate2_set__nodes__items__item_en',
-                    'chest2_set',
-                    'chest2_set__item',
                     'chest2_set__item__item_en',
                     'chest2_set__book',
-                    'child__climate2_set',
-                    'child__chest2_set',
-                    'child__chest2_set__item',
+                    'child__climate2_set__mons__mon_en',
+                    'child__climate2_set__gathernode2_set__gatheritem2_set__item',
+                    'child__climate2_set__gathernode2_set__gatheritem2_set__item__item_en',
                     'child__chest2_set__item__item_en',
                     'child__chest2_set__book',
                 )
@@ -49,20 +40,11 @@ class A23RegionViewSet(viewsets.ModelViewSet):
             queryset = (
                 Region2.objects
                 .prefetch_related(
-                    'child',
-                    'climate2_set',
-                    'climate2_set__mons',
-                    'climate2_set__mons__mon_ja',
-                    'climate2_set__nodes',
-                    'climate2_set__nodes__items',
-                    'climate2_set__nodes__items__item_ja',
-                    'chest2_set',
-                    'chest2_set__item',
                     'chest2_set__item__item_ja',
                     'chest2_set__book',
-                    'child__climate2_set',
-                    'child__chest2_set',
-                    'child__chest2_set__item',
+                    'child__climate2_set__mons__mon_ja',
+                    'child__climate2_set__gathernode2_set__gatheritem2_set__item',
+                    'child__climate2_set__gathernode2_set__gatheritem2_set__item__item_ja',
                     'child__chest2_set__item__item_ja',
                     'child__chest2_set__book',
                 )
@@ -79,20 +61,11 @@ class A23RegionViewSet(viewsets.ModelViewSet):
             queryset = (
                 Region2.objects
                 .prefetch_related(
-                    'child',
-                    'climate2_set',
-                    'climate2_set__mons',
-                    'climate2_set__mons__mon_ko',
-                    'climate2_set__nodes',
-                    'climate2_set__nodes__items',
-                    'climate2_set__nodes__items__item_ko',
-                    'chest2_set',
-                    'chest2_set__item',
                     'chest2_set__item__item_ko',
                     'chest2_set__book',
-                    'child__climate2_set',
-                    'child__chest2_set',
-                    'child__chest2_set__item',
+                    'child__climate2_set__mons__mon_ko',
+                    'child__climate2_set__gathernode2_set__gatheritem2_set__item',
+                    'child__climate2_set__gathernode2_set__gatheritem2_set__item__item_ko',
                     'child__chest2_set__item__item_ko',
                     'child__chest2_set__book',
                 )
@@ -109,20 +82,11 @@ class A23RegionViewSet(viewsets.ModelViewSet):
             queryset = (
                 Region2.objects
                 .prefetch_related(
-                    'child',
-                    'climate2_set',
-                    'climate2_set__mons',
-                    'climate2_set__mons__mon_sc',
-                    'climate2_set__nodes',
-                    'climate2_set__nodes__items',
-                    'climate2_set__nodes__items__item_sc',
-                    'chest2_set',
-                    'chest2_set__item',
                     'chest2_set__item__item_sc',
                     'chest2_set__book',
-                    'child__climate2_set',
-                    'child__chest2_set',
-                    'child__chest2_set__item',
+                    'child__climate2_set__mons__mon_sc',
+                    'child__climate2_set__gathernode2_set__gatheritem2_set__item',
+                    'child__climate2_set__gathernode2_set__gatheritem2_set__item__item_sc',
                     'child__chest2_set__item__item_sc',
                     'child__chest2_set__book',
                 )
@@ -139,20 +103,11 @@ class A23RegionViewSet(viewsets.ModelViewSet):
             queryset = (
                 Region2.objects
                 .prefetch_related(
-                    'child',
-                    'climate2_set',
-                    'climate2_set__mons',
-                    'climate2_set__mons__mon_tc',
-                    'climate2_set__nodes',
-                    'climate2_set__nodes__items',
-                    'climate2_set__nodes__items__item_tc',
-                    'chest2_set',
-                    'chest2_set__item',
                     'chest2_set__item__item_tc',
                     'chest2_set__book',
-                    'child__climate2_set',
-                    'child__chest2_set',
-                    'child__chest2_set__item',
+                    'child__climate2_set__mons__mon_tc',
+                    'child__climate2_set__gathernode2_set__gatheritem2_set__item',
+                    'child__climate2_set__gathernode2_set__gatheritem2_set__item__item_tc',
                     'child__chest2_set__item__item_tc',
                     'child__chest2_set__book',
                 )

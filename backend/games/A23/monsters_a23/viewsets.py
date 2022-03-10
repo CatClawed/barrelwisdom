@@ -79,9 +79,7 @@ class A23MonsterViewSet(viewsets.ModelViewSet):
                     'mon_en'
                 )
                 .prefetch_related(
-                    'drops',
                     'drops__item_en',
-                    'climate2_set',
                     'climate2_set__loc__parent',
                     'char1',
                     'char2',
@@ -104,9 +102,7 @@ class A23MonsterViewSet(viewsets.ModelViewSet):
                     'mon_ja'
                 )
                 .prefetch_related(
-                    'drops',
                     'drops__item_ja',
-                    'climate2_set',
                     'climate2_set__loc__parent',
                     'char1',
                     'char2',
@@ -129,9 +125,7 @@ class A23MonsterViewSet(viewsets.ModelViewSet):
                     'mon_ko'
                 )
                 .prefetch_related(
-                    'drops',
                     'drops__item_ko',
-                    'climate2_set',
                     'climate2_set__loc__parent',
                     'char1',
                     'char2',
@@ -154,9 +148,7 @@ class A23MonsterViewSet(viewsets.ModelViewSet):
                     'mon_sc'
                 )
                 .prefetch_related(
-                    'drops',
                     'drops__item_sc',
-                    'climate2_set',
                     'climate2_set__loc__parent',
                     'char1',
                     'char2',
@@ -179,9 +171,7 @@ class A23MonsterViewSet(viewsets.ModelViewSet):
                     'mon_tc'
                 )
                 .prefetch_related(
-                    'drops',
                     'drops__item_tc',
-                    'climate2_set',
                     'climate2_set__loc__parent',
                     'char1',
                     'char2',

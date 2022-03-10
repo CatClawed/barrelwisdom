@@ -471,11 +471,50 @@ class A23BookSerializer(serializers.ModelSerializer):
         result = super(A23BookSerializer, self).to_representation(instance)
         return OrderedDict((k, v) for k, v in result.items() 
                            if v not in [None, [], '', False, {}])
+        
+class A23BookSimpleSerializer(serializers.ModelSerializer):
+    name = serializers.SerializerMethodField()
+    shop = serializers.SerializerMethodField()
+    chest = A23ChestSerializer(many=True, source="chest2_set")
+    class Meta:
+        model = Book
+        fields = ['slug', 'name', 'note', 'shop', 'chest']
+
+    def get_name(self,obj):
+        if 'language' not in self.context:
+            return obj.book_en
+        if self.context['language'] == 'ja':
+            return obj.book_ja
+        if self.context['language'] == 'ko':
+            return obj.book_ko
+        if self.context['language'] == 'sc':
+            return obj.book_sc
+        if self.context['language'] == 'tc':
+            return obj.book_tc
+        else:
+            return obj.book_en
+    def get_shop(self,obj):
+        if 'language' not in self.context:
+            return obj.shop.shop_en if obj.shop else None
+        if self.context['language'] == 'ja':
+            return obj.shop.shop_ja if obj.shop else None
+        if self.context['language'] == 'ko':
+            return obj.shop.shop_ko if obj.shop else None
+        if self.context['language'] == 'sc':
+            return obj.shop.shop_sc if obj.shop else None
+        if self.context['language'] == 'tc':
+            return obj.shop.shop_tc if obj.shop else None
+        else:
+            return obj.shop.shop_en if obj.shop else None
+    def to_representation(self, instance):
+        result = super(A23BookSimpleSerializer, self).to_representation(instance)
+        return OrderedDict((k, v) for k, v in result.items() 
+                           if v not in [None, [], '', False, {}])
 
 class A23ItemRecipeSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     ideas = A23RecipeTextSerializer(many=True, source="recipetext_set")
-    book = A23BookSerializer(source='book_set', many=True)
+    book = A23BookSimpleSerializer(source='book_set', many=True)
     class Meta:
         model = Item
         fields = ['slug', 'name', 'ideas', 'book']

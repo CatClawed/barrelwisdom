@@ -21,10 +21,9 @@ class A23TraitViewSet(viewsets.ModelViewSet):
                 'trait_en'
             )
             .prefetch_related(
-                'item_set',
                 'item_set__item_en',
-                "combo1",
-                "combo2",
+                "combo1__trait_en",
+                "combo2__trait_en",
             )
         )
         serializer = A23TraitSerializer(queryset, many=True, context={'language': 'en'})
@@ -38,10 +37,9 @@ class A23TraitViewSet(viewsets.ModelViewSet):
                 'trait_ko'
             )
             .prefetch_related(
-                'item_set',
                 'item_set__item_ko',
-                "combo1",
-                "combo2",
+                "combo1__trait_ko",
+                "combo2__trait_ko",
             )
         )
         serializer = A23TraitSerializer(queryset, many=True, context={'language': 'ko'})
@@ -55,8 +53,9 @@ class A23TraitViewSet(viewsets.ModelViewSet):
                 'trait_ja'
             )
             .prefetch_related(
-                'item_set',
                 'item_set__item_ja',
+                "combo1__trait_ja",
+                "combo2__trait_ja",
             )
         )
         serializer = A23TraitSerializer(queryset, many=True, context={'language': 'ja'})
@@ -70,10 +69,9 @@ class A23TraitViewSet(viewsets.ModelViewSet):
                 'trait_sc'
             )
             .prefetch_related(
-                'item_set',
                 'item_set__item_sc',
-                "combo1",
-                "combo2",
+                "combo1__trait_sc",
+                "combo2__trait_sc",
             )
         )
         serializer = A23TraitSerializer(queryset, many=True, context={'language': 'sc'})
@@ -87,10 +85,9 @@ class A23TraitViewSet(viewsets.ModelViewSet):
                 'trait_tc'
             )
             .prefetch_related(
-                'item_set',
                 'item_set__item_tc',
-                "combo1",
-                "combo2",
+                "combo1__trait_tc",
+                "combo2__trait_tc",
             )
         )
         serializer = A23TraitSerializer(queryset, many=True, context={'language': 'tc'})
@@ -106,10 +103,9 @@ class A23TraitViewSet(viewsets.ModelViewSet):
                     'trait_en'
                 )
                 .prefetch_related(
-                    'item_set',
                     'item_set__item_en',
-                    "combo1",
-                    "combo2",
+                    "combo1__trait_en",
+                    "combo2__trait_en",
                 )
                 .get(slug=slug)
             )
@@ -127,10 +123,9 @@ class A23TraitViewSet(viewsets.ModelViewSet):
                     'trait_ko'
                 )
                 .prefetch_related(
-                    'item_set',
                     'item_set__item_ko',
-                    "combo1",
-                    "combo2",
+                    "combo1__trait_ko",
+                    "combo2__trait_ko",
                 )
                 .get(slug=slug)
             )
@@ -148,10 +143,9 @@ class A23TraitViewSet(viewsets.ModelViewSet):
                     'trait_ja'
                 )
                 .prefetch_related(
-                    'item_set',
                     'item_set__item_ja',
-                    "combo1",
-                    "combo2",
+                    "combo1__trait_ja",
+                    "combo2__trait_ja",
                 )
                 .get(slug=slug)
             )
@@ -169,10 +163,9 @@ class A23TraitViewSet(viewsets.ModelViewSet):
                     'trait_sc'
                 )
                 .prefetch_related(
-                    'item_set',
                     'item_set__item_sc',
-                    "combo1",
-                    "combo2",
+                    "combo1__trait_sc",
+                    "combo2__trait_sc",
                 )
                 .get(slug=slug)
             )
@@ -190,10 +183,9 @@ class A23TraitViewSet(viewsets.ModelViewSet):
                     'trait_tc'
                 )
                 .prefetch_related(
-                    'item_set',
                     'item_set__item_tc',
-                    "combo1",
-                    "combo2",
+                    "combo1__trait_tc",
+                    "combo2__trait_tc",
                 )
                 .get(slug=slug)
             )
