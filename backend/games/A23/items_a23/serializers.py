@@ -261,7 +261,7 @@ class A23EffectLinesSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         result = super(A23EffectLinesSerializer, self).to_representation(instance)
         return OrderedDict((k, v) for k, v in result.items() 
-                           if v not in [None, [], '', False, {}])
+                           if v not in [None, [], '', {}])
 
 class A23ChestSerializer(serializers.ModelSerializer):
     region = serializers.SerializerMethodField()

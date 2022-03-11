@@ -146,12 +146,12 @@
                       </ng-container>
                     </div>
                   </div>
-                </ng-template>
+                </ng-template> 
                 <a *ngIf="e.effect"    [popover]="effPopover" [popoverTitle]="e.effect.name" (click)="$event.preventDefault();" href="/{{gameURL}}/effects/{{e.effect.slug}}/{{language}}">{{e.effect.name}}</a>
                 <a *ngIf="e.component" [popover]="effPopover" [popoverTitle]="e.component.name">{{e.component.name}}</a>
-                <span *ngIf="checkLevel(eff.maxlv, eff.restrict, e.num) == 0 && e.num"> ({{e.num}})</span>
-                <span *ngIf="checkLevel(eff.maxlv, eff.restrict, e.num) == 1" style="color:darkgrey;"> ({{e.num}})</span>
-                <span *ngIf="checkLevel(eff.maxlv, eff.restrict, e.num) == 2" style="color:red;"> ({{e.num}})</span>
+                <span *ngIf="checkLevel(eff.maxlv, eff.restrict, eff, e) == 0 && e.num"> ({{e.num}})</span>
+                <span *ngIf="checkLevel(eff.maxlv, eff.restrict, eff, e) == 1" style="color:darkgrey;"> ({{e.num}})</span>
+                <span *ngIf="checkLevel(eff.maxlv, eff.restrict, eff, e) == 2" style="color:red;"> ({{e.num}})</span>
               </li>
             </ul>
           </td>

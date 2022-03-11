@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Item } from '@app/interfaces/a23';
+import { Item, EffectLine, EffectData } from '@app/interfaces/a23';
 import { A23Service } from '@app/services/a23.service';
 import { SeoService } from '@app/services/seo.service';
 import { HistoryService } from '@app/services/history.service';
@@ -85,11 +85,14 @@ constructor(
     }});
   }
 
-  checkLevel(maxLv, restrict, effect) {
-    if (!maxLv) return 0;
-    if (effect >= maxLv) {
-      if (!restrict) return 1;
-      if (effect >= restrict) return 2;
+  checkLevel(maxLv, restrict, effectLine: EffectLine, effectData: EffectData) {
+    if (restrict !== null) {
+      if (effectLine.data.indexOf(effectData) >= restrict) return 2;
+    }
+    if (!maxLv) {
+      return 0;
+    }
+    if (effectData.num >= maxLv) {
       return 1;
     }
     return 0;
