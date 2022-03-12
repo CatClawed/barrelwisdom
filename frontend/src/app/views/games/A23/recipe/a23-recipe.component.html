@@ -5,10 +5,10 @@
 <h1>Recipe Ideas</h1>
 <language-settings style="margin-top: 1em;" class="col-md-3" section="{{gameURL}}"></language-settings>
 <div style="display:flex;justify-content:space-between;flex-wrap:wrap">
-    <button style="margin-right:1em;margin-bottom:1em;" class="btn btn-secondary" (click)="toggle(true, false, false, false)"><img style="max-height:3em;" src="/media/games/sophie2/characters/sophie.webp"></button>
-    <button style="margin-right:1em;margin-bottom:1em;" class="btn btn-secondary" (click)="toggle(false, true, false, false)"><img style="max-height:3em;" src="/media/games/sophie2/characters/plachta.webp"></button>
-    <button style="margin-right:1em;margin-bottom:1em;" class="btn btn-secondary" (click)="toggle(false, false, true, false)"><img style="max-height:3em;" src="/media/games/sophie2/characters/sophie.webp"><img style="max-height:3em;" src="/media/games/sophie2/characters/plachta.webp"></button>
-    <button style="margin-right:1em;margin-bottom:1em;" class="btn btn-secondary" (click)="toggle(false, false, false, true)"><i class="atelier atelier-np atelier-ryza2-book"></i></button>
+    <button style="margin-right:1em;margin-bottom:1em;" class="btn btn-secondary" (click)="toggle(true, false, false, false, 'sophie')"   ><img style="max-height:3em;" src="/media/games/sophie2/characters/sophie.webp"></button>
+    <button style="margin-right:1em;margin-bottom:1em;" class="btn btn-secondary" (click)="toggle(false, true, false, false, 'plachta')"  ><img style="max-height:3em;" src="/media/games/sophie2/characters/plachta.webp"></button>
+    <button style="margin-right:1em;margin-bottom:1em;" class="btn btn-secondary" (click)="toggle(false, false, true, false, 'shared')"   ><img style="max-height:3em;" src="/media/games/sophie2/characters/sophie.webp"><img style="max-height:3em;" src="/media/games/sophie2/characters/plachta.webp"></button>
+    <button style="margin-right:1em;margin-bottom:1em;" class="btn btn-secondary" (click)="toggle(false, false, false, true, 'reference')"><i class="atelier atelier-np atelier-ryza2-book"></i></button>
 </div>
 <ng-template #itemPopover>
     <p *ngFor="let idea of ctx.item.ideas"

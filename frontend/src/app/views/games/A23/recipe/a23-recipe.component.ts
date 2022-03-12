@@ -4,6 +4,7 @@ import { RecipeIdea } from '@app/interfaces/a23';
 import { A23Service } from '@app/services/a23.service';
 import { SeoService } from '@app/services/seo.service';
 import { HistoryService } from '@app/services/history.service';
+import { Location } from '@angular/common';
 
 @Component({
   templateUrl: 'a23-recipe.component.html',
@@ -13,6 +14,7 @@ export class A23RecipeComponent implements OnInit {
   recipes: RecipeIdea[];
   colset: string;
   language = "";
+  tab: string = "";
 
   seoTitle: string;
   seoDesc: string;
@@ -28,7 +30,7 @@ export class A23RecipeComponent implements OnInit {
   shared_num: number = 75;
   book_num: number = 80;
 
-  sophie = true;
+  sophie = false;
   plachta = false;
   shared = false;
   book = false;
@@ -40,11 +42,35 @@ export class A23RecipeComponent implements OnInit {
 constructor(
     private route: ActivatedRoute,
     private a23service: A23Service,
+    private location: Location,
     public historyService: HistoryService,
     private seoService: SeoService) {
   }
   ngOnInit(): void {
     this.language = this.route.snapshot.params.language;
+    this.tab = this.route.snapshot.queryParamMap.get('tab');
+
+    if (this.tab) {
+      switch (this.tab) {
+        case 'sophie':
+          this.sophie = true;
+          break;
+        case 'plachta':
+          this.plachta = true;
+          break;
+        case 'reference':
+          this.book = true;
+          break;
+        case 'shared':
+          this.shared = true;
+          break;
+        default:
+          this.sophie = true;
+      }
+    }
+    else {
+      this.sophie = true;
+    }
 
     this.a23service.getRecipeList(this.language)
     .subscribe({next: recipe => {
@@ -80,11 +106,12 @@ constructor(
     }});
   }
 
-  toggle(s: boolean, p: boolean, sh: boolean, b: boolean) {
+  toggle(s: boolean, p: boolean, sh: boolean, b: boolean, char: string) {
     this.sophie = s;
     this.plachta = p;
     this.shared = sh;
     this.book = b;
+    this.location.replaceState(`${this.gameURL}/recipe-ideas/${this.language}?tab=${char}`);
   }
 
   context(r: RecipeIdea) {

@@ -124,8 +124,6 @@ import { map, startWith } from 'rxjs/operators';
     private filterT(value: string, kind: string, ingt: string): Item[] {  
       let list: Item[] = this.items;
 
-      console.log(kind)
-
       if(kind != 'Any') {
           list = list.filter(item => item.categories.some(c => c.name == kind) || (item.add ? item.add.some(c => c.name == kind) : false ));
       }
@@ -136,9 +134,11 @@ import { map, startWith } from 'rxjs/operators';
       }
 
       if(value) {
-        const filterValue = value.toLowerCase();
+        const filterValue = (this.language == 'en') ? value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "") : value;
         list = list.filter(item => { 
-            return item.name.toLowerCase().includes(filterValue);
+            return ((this.language == 'en') ?
+              (item.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(filterValue) )
+              : item.name.includes(filterValue));
           });
       }
       return list;

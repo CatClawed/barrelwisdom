@@ -1,4 +1,4 @@
-import debug_toolbar
+#import debug_toolbar
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
@@ -46,7 +46,7 @@ urlpatterns = [
     path(r'api/', include(router.urls)),
     path('auth/token/', JWTObtainPairView.as_view(), name='token_obtain_pair'),
     path('auth/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
-    path('__debug__/', include(debug_toolbar.urls)),
+    #path('__debug__/', include(debug_toolbar.urls)),
     path(r'auth/reg/', RegView.as_view(),),
     path('auth/dj-rest-auth/', include('dj_rest_auth.urls')),
 ]

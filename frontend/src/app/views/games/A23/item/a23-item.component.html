@@ -87,7 +87,8 @@
             <li *ngFor="let loc of item.locations"><a routerLink="/{{gameURL}}/locations/{{loc.slug}}/{{language}}" [queryParams]="{item: item.name}">{{loc.name}}</a>
         </ul>
       </div>
-      <a *ngIf="item.ideas" routerLink="/{{gameURL}}/recipe-ideas/{{language}}"><b>Recipe Idea:</b></a>
+      <a *ngIf="item.ideas && item.char"  routerLink="/{{gameURL}}/recipe-ideas/{{language}}" [queryParams]="{tab: item.char}"><b>Recipe Idea:</b></a>
+      <a *ngIf="item.ideas && !item.char" routerLink="/{{gameURL}}/recipe-ideas/{{language}}" [queryParams]="{tab: 'shared'}" ><b>Recipe Idea:</b></a>
       <ul *ngIf="item.ideas">
         <li *ngFor="let idea of item.ideas" (click)="historyService.hrefClicked($event);" [innerHTML]="idea.text"></li>
       </ul>

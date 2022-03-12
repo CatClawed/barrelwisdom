@@ -70,12 +70,14 @@ constructor(
         this.error =``;
         this.item = item;
 
+        let name = (this.language === 'en') ? this.item.name.normalize('NFD').replace(/[\u0300-\u036f]/g, "") : this.item.name;
+
         this.gameTitle = this.a23service.gameTitle[this.language];
         this.gameURL = this.a23service.gameURL;
         this.imgURL = this.a23service.imgURL;
 
         this.seoURL = `${this.gameURL}/items/${this.item.slug}/${this.language}`;
-        this.seoTitle = `${this.item.name} - ${this.gameTitle}`;
+        this.seoTitle = `${name} - ${this.gameTitle}`;
         this.seoDesc = `${this.item.desc1}`
         this.seoImage = `${this.imgURL}items/${this.item.slug}.webp`
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
