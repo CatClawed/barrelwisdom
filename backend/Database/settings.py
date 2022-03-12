@@ -7,7 +7,7 @@ from datetime import timedelta
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['barrelwisdom.com', 'test.barrelwisdom.com', 'localhost', '127.0.0.1']
 
@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'django_filters',
     'django.contrib.sites',
     'dj_rest_auth',
-    #'debug_toolbar',
+    'debug_toolbar',
     # Major parts
     'blog.apps.BlogConfig',
     'invite.apps.InviteConfig',
@@ -116,7 +116,7 @@ SITE_ID = 1
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MIDDLEWARE = [
-    #'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -130,9 +130,9 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
-#DEBUG_TOOLBAR_CONFIG = {
-#    "SHOW_TOOLBAR_CALLBACK": lambda request: True,
-#}
+DEBUG_TOOLBAR_CONFIG = {
+    "SHOW_TOOLBAR_CALLBACK": lambda request: True,
+}
 
 ROOT_URLCONF = 'Database.urls'
 

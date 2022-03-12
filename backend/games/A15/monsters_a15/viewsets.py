@@ -45,9 +45,7 @@ class A15MonsterViewSet(viewsets.ModelViewSet):
                     'mon_en'
                 )
                 .prefetch_related(
-                    'item_set',
                     'item_set__item_en',
-                    'locations',
                     'locations__reg_en'
                 )
                 .get(slugname=slugname)
@@ -66,9 +64,7 @@ class A15MonsterViewSet(viewsets.ModelViewSet):
                     'mon_ja'
                 )
                 .prefetch_related(
-                    'item_set',
                     'item_set__item_ja',
-                    'locations',
                     'locations__reg_ja'
                 )
                 .get(slugname=slugname)

@@ -15,7 +15,7 @@ class BRSLSkillViewSet(viewsets.ModelViewSet):
         queryset = (
             Character.objects
             .prefetch_related(
-                'skill_set',
+                'skill_set__character',
                 'skill_set__skill_en'
             )
         )
@@ -27,7 +27,7 @@ class BRSLSkillViewSet(viewsets.ModelViewSet):
         queryset = (
             Character.objects
             .prefetch_related(
-                'skill_set',
+                'skill_set__character',
                 'skill_set__skill_ja'
             )
         )
@@ -39,7 +39,7 @@ class BRSLSkillViewSet(viewsets.ModelViewSet):
         queryset = (
             Character.objects
             .prefetch_related(
-                'skill_set',
+                'skill_set__character',
                 'skill_set__skill_sc'
             )
         )
@@ -51,7 +51,7 @@ class BRSLSkillViewSet(viewsets.ModelViewSet):
         queryset = (
             Character.objects
             .prefetch_related(
-                'skill_set',
+                'skill_set__character',
                 'skill_set__skill_tc'
             )
         )

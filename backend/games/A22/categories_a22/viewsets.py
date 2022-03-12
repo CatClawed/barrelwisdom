@@ -87,13 +87,10 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
             queryset = (
                 CategoryItems.objects
                 .select_related(
-                    'category',
                     'category__cat_en',
                 )
                 .prefetch_related(
-                    'items',
                     'items__item_en',
-                    'ingredients',
                     'ingredients__item_en',
                 )
                 .get(category__slugname=slugname)
@@ -109,13 +106,10 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
             queryset = (
                 CategoryItems.objects
                 .select_related(
-                    'category',
                     'category__cat_ja',
                 )
                 .prefetch_related(
-                    'items',
                     'items__item_ja',
-                    'ingredients',
                     'ingredients__item_ja',
                 )
                 .get(category__slugname=slugname)
@@ -131,13 +125,10 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
             queryset = (
                 CategoryItems.objects
                 .select_related(
-                    'category',
                     'category__cat_ko',
                 )
                 .prefetch_related(
-                    'items',
                     'items__item_ko',
-                    'ingredients',
                     'ingredients__item_ko',
                 )
                 .get(category__slugname=slugname)
@@ -153,13 +144,10 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
             queryset = (
                 CategoryItems.objects
                 .select_related(
-                    'category',
                     'category__cat_fr',
                 )
                 .prefetch_related(
-                    'items',
                     'items__item_fr',
-                    'ingredients',
                     'ingredients__item_fr',
                 )
                 .get(category__slugname=slugname)
@@ -175,13 +163,10 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
             queryset = (
                 CategoryItems.objects
                 .select_related(
-                    'category',
                     'category__cat_sc',
                 )
                 .prefetch_related(
-                    'items',
                     'items__item_sc',
-                    'ingredients',
                     'ingredients__item_sc',
                 )
                 .get(category__slugname=slugname)
@@ -197,13 +182,10 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
             queryset = (
                 CategoryItems.objects
                 .select_related(
-                    'category',
                     'category__cat_tc',
                 )
                 .prefetch_related(
-                    'items',
                     'items__item_tc',
-                    'ingredients',
                     'ingredients__item_tc',
                 )
                 .get(category__slugname=slugname)

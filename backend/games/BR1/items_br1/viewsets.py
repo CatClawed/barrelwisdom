@@ -17,6 +17,12 @@ class BR1ItemViewSet(viewsets.ModelViewSet):
     def en(self, request):
         queryset = (
             Item.objects
+            .prefetch_related(
+                'locations',
+                'demons',
+                'missions',
+                'ingredient_set__item',
+            )
         )
         serializer = BR1ItemSerializer(queryset, many=True)
         return Response(serializer.data)
@@ -29,7 +35,9 @@ class BR1ItemViewSet(viewsets.ModelViewSet):
                 Item.objects
                 .prefetch_related(
                     'locations',
-                    'demons'
+                    'demons',
+                    'missions',
+                    'ingredient_set__item',
                 )
                 .get(slugname=slugname)
             )

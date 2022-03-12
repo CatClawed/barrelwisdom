@@ -15,11 +15,6 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     ordering_fields = ['created']
     lookup_field = 'user'
 
-class UserViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    ordering_fields = ['created']
-
 class UserNameViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -29,7 +24,13 @@ class UserNameViewSet(viewsets.ReadOnlyModelViewSet):
     @action(detail=True, methods=['get'])
     def profile(self, request, username):
         try:
-            profile = UserProfile.objects.prefetch_related('user', 'user__blog_set', 'user__blog_set__section').get(user__username=username)
+            profile = (
+                UserProfile.objects
+                .prefetch_related(
+                    'user__blog_set__section'
+                )
+                .get(user__username=username)
+            )
         except ObjectDoesNotExist:
             raise Http404
         serializer = UserProfileSerializer(profile)

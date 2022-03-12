@@ -21,9 +21,7 @@ class A15ItemViewSet(viewsets.ModelViewSet):
                 'item_en'
             )
             .prefetch_related(
-                'categories',
                 'categories__cat_en',
-                'ingredient_set',
                 'ingredient_set__category__cat_en',
                 'ingredient_set__item__item_en'
             )
@@ -39,9 +37,7 @@ class A15ItemViewSet(viewsets.ModelViewSet):
                 'item_ja'
             )
             .prefetch_related(
-                'categories',
                 'categories__cat_ja',
-                'ingredient_set',
                 'ingredient_set__category__cat_ja',
                 'ingredient_set__item__item_ja'
             )
@@ -59,28 +55,18 @@ class A15ItemViewSet(viewsets.ModelViewSet):
                     'item_en'
                 )
                 .prefetch_related(
-                    'categories',
                     'categories__cat_en',
-                    'ingredient_set',
                     'ingredient_set__category__cat_en',
                     'ingredient_set__item__item_en',
-                    'properties',
                     'properties__prop_en',
-                    'monsters',
                     'monsters__mon_en',
-                    'locations',
                     'locations__reg_en',
-                    'characterequip_set',
+                    'characterequip_set__chars',
                     'equip_set',
-                    'disassembly_set',
                     'disassembly_set__item__item_en',
-                    'relic_set',
                     'relic_set__region__reg_en',
-                    'disassembled_set',
                     'disassembled_set__item__item_en',
-                    'book_set',
                     'book_set__item_en',
-                    'effectline_set',
                     'effectline_set__effect__eff_en'
                 )
                 .get(slugname=slugname)
@@ -99,28 +85,18 @@ class A15ItemViewSet(viewsets.ModelViewSet):
                     'item_ja'
                 )
                 .prefetch_related(
-                    'categories',
                     'categories__cat_ja',
-                    'ingredient_set',
                     'ingredient_set__category__cat_ja',
                     'ingredient_set__item__item_ja',
-                    'properties',
                     'properties__prop_ja',
-                    'monsters',
                     'monsters__mon_ja',
-                    'locations',
                     'locations__reg_ja',
-                    'characterequip_set',
+                    'characterequip_set__chars',
                     'equip_set',
-                    'disassembly_set',
                     'disassembly_set__item__item_ja',
-                    'relic_set',
                     'relic_set__region__reg_ja',
-                    'disassembled_set',
                     'disassembled_set__item__item_ja',
-                    'book_set',
                     'book_set__item_ja',
-                    'effectline_set',
                     'effectline_set__effect__eff_ja'
                 )
                 .get(slugname=slugname)
@@ -144,7 +120,6 @@ class A15BookViewSet(viewsets.ModelViewSet):
                 'item_en'
             )
             .prefetch_related(
-                'items',
                 'items__item_en'
             )
         )
@@ -159,7 +134,6 @@ class A15BookViewSet(viewsets.ModelViewSet):
                 'item_ja'
             )
             .prefetch_related(
-                'items',
                 'items__item_ja'
             )
         )
@@ -176,7 +150,6 @@ class A15BookViewSet(viewsets.ModelViewSet):
                     'item_en'
                 )
                 .prefetch_related(
-                    'items',
                     'items__item_en'
                 )
                 .get(slugname=slugname)
@@ -195,7 +168,6 @@ class A15BookViewSet(viewsets.ModelViewSet):
                     'item_ja'
                 )
                 .prefetch_related(
-                    'items',
                     'items__item_ja'
                 )
                 .get(slugname=slugname)
@@ -217,20 +189,21 @@ class A15RegionViewSet(viewsets.ModelViewSet):
             queryset = (
                 RegionData.objects
                 .select_related(
-                    'region'
+                    'region__reg_en'
                 )
                 .prefetch_related(
-                    'region__reg_en',
-                    'areas',
-                    'areas__items',
                     'areas__items__item_en',
-                    'areas__rare',
                     'areas__rare__item_en',
-                    'areas__maxitem',
                     'areas__maxitem__item_en',
                     'areas__fieldevent',
-                    'areas__monsters',
-                    'areas__monsters__mon_en'
+                    'areas__monsters__mon_en',
+                    'strong__mon_en',
+                    'areas__area__reg_en',
+                    'relic_set__region__reg_en',
+                    'relic_set__area__reg_en',
+                    'relic_set__area__parent__reg_en',
+                    'relic_set__item__item_en',
+                    'relic_set__item__disassembly_set__dis__item_en', # never let me code again
                 )
                 .get(region__slugname=slugname)
             )
@@ -245,20 +218,21 @@ class A15RegionViewSet(viewsets.ModelViewSet):
             queryset = (
                 RegionData.objects
                 .select_related(
-                    'region'
+                    'region__reg_ja'
                 )
                 .prefetch_related(
-                    'region__reg_ja',
-                    'areas',
-                    'areas__items',
                     'areas__items__item_ja',
-                    'areas__rare',
                     'areas__rare__item_ja',
-                    'areas__maxitem',
                     'areas__maxitem__item_ja',
                     'areas__fieldevent',
-                    'areas__monsters',
-                    'areas__monsters__mon_ja'
+                    'areas__monsters__mon_ja',
+                    'strong__mon_ja',
+                    'areas__area__reg_ja',
+                    'relic_set__region__reg_ja',
+                    'relic_set__area__reg_ja',
+                    'relic_set__area__parent__reg_ja',
+                    'relic_set__item__item_ja',
+                    'relic_set__item__disassembly_set__dis__item_ja',
                 )
                 .get(region__slugname=slugname)
             )

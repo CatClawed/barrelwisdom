@@ -30,8 +30,10 @@ class SectionViewSet(viewsets.ModelViewSet):
 class MainBlogViewSet(viewsets.ModelViewSet):
     queryset = (
             Blog.objects
+            .select_related(
+                'section'
+            )
             .prefetch_related(
-                'section',
                 'author',
                 'tags'
             )
@@ -50,9 +52,11 @@ class MainBlogViewSet(viewsets.ModelViewSet):
         try:
             queryset = (
                 Blog.objects
+                .select_related(
+                    'section'
+                )
                 .prefetch_related(
                     'tags',
-                    'section',
                     'author'
                 )
                 .get(slugtitle=slugname, section__name=section)

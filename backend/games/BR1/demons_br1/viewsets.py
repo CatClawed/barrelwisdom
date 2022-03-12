@@ -17,6 +17,10 @@ class BR1DemonViewSet(viewsets.ModelViewSet):
     def en(self, request):
         queryset = (
             Demon.objects
+            .prefetch_related(
+                'item_set',
+                'locations',
+            )
         )
         serializer = BR1DemonSerializer(queryset, many=True)
         return Response(serializer.data)

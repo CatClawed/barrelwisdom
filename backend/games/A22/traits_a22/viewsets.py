@@ -21,7 +21,6 @@ class A22TraitViewSet(viewsets.ModelViewSet):
                 'trait_en'
             )
             .prefetch_related(
-                'item_set',
                 'item_set__item_en'
             )
         )
@@ -36,7 +35,6 @@ class A22TraitViewSet(viewsets.ModelViewSet):
                 'trait_ko'
             )
             .prefetch_related(
-                'item_set',
                 'item_set__item_ko'
             )
         )
@@ -51,7 +49,6 @@ class A22TraitViewSet(viewsets.ModelViewSet):
                 'trait_ja'
             )
             .prefetch_related(
-                'item_set',
                 'item_set__item_ja'
             )
         )
@@ -66,7 +63,6 @@ class A22TraitViewSet(viewsets.ModelViewSet):
                 'trait_fr'
             )
             .prefetch_related(
-                'item_set',
                 'item_set__item_fr'
             )
         )
@@ -81,7 +77,6 @@ class A22TraitViewSet(viewsets.ModelViewSet):
                 'trait_sc'
             )
             .prefetch_related(
-                'item_set',
                 'item_set__item_sc'
             )
         )
@@ -96,7 +91,6 @@ class A22TraitViewSet(viewsets.ModelViewSet):
                 'trait_tc'
             )
             .prefetch_related(
-                'item_set',
                 'item_set__item_tc'
             )
         )
@@ -113,7 +107,6 @@ class A22TraitViewSet(viewsets.ModelViewSet):
                     'trait_en'
                 )
                 .prefetch_related(
-                    'item_set',
                     'item_set__item_en'
                 )
                 .get(slugname=slugname)
@@ -132,7 +125,6 @@ class A22TraitViewSet(viewsets.ModelViewSet):
                     'trait_ko'
                 )
                 .prefetch_related(
-                    'item_set',
                     'item_set__item_ko'
                 )
                 .get(slugname=slugname)
@@ -151,7 +143,6 @@ class A22TraitViewSet(viewsets.ModelViewSet):
                     'trait_ja'
                 )
                 .prefetch_related(
-                    'item_set',
                     'item_set__item_ja'
                 )
                 .get(slugname=slugname)
@@ -170,7 +161,6 @@ class A22TraitViewSet(viewsets.ModelViewSet):
                     'trait_fr'
                 )
                 .prefetch_related(
-                    'item_set',
                     'item_set__item_fr'
                 )
                 .get(slugname=slugname)
@@ -189,7 +179,6 @@ class A22TraitViewSet(viewsets.ModelViewSet):
                     'trait_sc'
                 )
                 .prefetch_related(
-                    'item_set',
                     'item_set__item_sc'
                 )
                 .get(slugname=slugname)
@@ -208,7 +197,6 @@ class A22TraitViewSet(viewsets.ModelViewSet):
                     'trait_tc'
                 )
                 .prefetch_related(
-                    'item_set',
                     'item_set__item_tc'
                 )
                 .get(slugname=slugname)

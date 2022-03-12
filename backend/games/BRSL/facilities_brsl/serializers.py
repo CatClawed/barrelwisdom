@@ -1,4 +1,4 @@
-from games.BRSL.facilities_brsl.models import Facility, FacilityEffect, FacilityEffectLine, FacilityIngredient, FacilitySet, FacilityEffData, FacilityEffLine, FacilityIng, IngData
+from games.BRSL.facilities_brsl.models import Facility, FacilityEffect, FacilitySet, FacilityEffData, FacilityEffLine, FacilityIng, IngData
 from games.BRSL.items_brsl.serializers import BRSLEffectSerializer, BRSLCategorySerializer, BRSLItemNameSerializer
 from rest_framework import serializers
 from collections import OrderedDict
@@ -47,26 +47,6 @@ class BRSLFacilityEffLineSerializer(serializers.ModelSerializer):
     class Meta:
         model = FacilityEffLine
         fields = ['effectdata', 'line']
-
-# destroy later
-class BRSLFacilityEffectLineSerializer(serializers.ModelSerializer):
-    effect = BRSLFacilityEffectSerializer()
-    class Meta:
-        model = FacilityEffectLine
-        fields = ['effect', 'line', 'num']
-    
-# old, destroy later
-class BRSLFacilityIngredienteSerializer(serializers.ModelSerializer):
-    effect = BRSLEffectSerializer()
-    item = BRSLItemNameSerializer()
-    category = BRSLCategorySerializer()
-    class Meta:
-        model = FacilityIngredient
-        fields = ['level', 'num', 'item', 'category', 'effect']
-    def to_representation(self, instance):
-        result = super(BRSLFacilityIngredienteSerializer, self).to_representation(instance)
-        return OrderedDict((k, v) for k, v in result.items() 
-                           if v not in [None, [], '', False, {}])
         
 class BRSLIngDatSerializer(serializers.ModelSerializer):
     effect = BRSLEffectSerializer()

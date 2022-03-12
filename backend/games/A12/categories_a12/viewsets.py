@@ -44,10 +44,7 @@ class A12CategoryViewSet(viewsets.ModelViewSet):
                     'cat_en'
                 )
                 .prefetch_related(
-                    'item_set',
                     'item_set__item_en',
-                    'ingredientcat',
-                    'ingredientcat__synthitem',
                     'ingredientcat__synthitem__item_en'
                 )
                 .get(slugname=slugname)
@@ -66,10 +63,7 @@ class A12CategoryViewSet(viewsets.ModelViewSet):
                     'cat_ja'
                 )
                 .prefetch_related(
-                    'item_set',
                     'item_set__item_ja',
-                    'ingredientcat',
-                    'ingredientcat__synthitem',
                     'ingredientcat__synthitem__item_ja'
                 )
                 .get(slugname=slugname)

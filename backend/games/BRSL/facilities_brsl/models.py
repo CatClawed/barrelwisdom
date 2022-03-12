@@ -77,14 +77,6 @@ class FacilityEffLine(models.Model):
     line = models.IntegerField()
     class Meta:
         ordering = ['line']
-# delete
-class FacilityEffectLine(models.Model): 
-    facility = models.ForeignKey(Facility, on_delete=models.CASCADE)
-    effect = models.ForeignKey(FacilityEffect, on_delete=models.CASCADE, related_name="facility_effect")
-    line = models.IntegerField()
-    num = models.IntegerField()
-    class Meta:
-        ordering = ['line', 'num']
 
 class IngData(models.Model):
     num = models.IntegerField()
@@ -99,13 +91,3 @@ class FacilityIng(models.Model):
     class Meta:
         ordering = ['level']
         
-# delete
-class FacilityIngredient(models.Model):
-    facility = models.ForeignKey(Facility, on_delete=models.CASCADE)
-    level = models.IntegerField()
-    num = models.IntegerField()
-    item = models.ForeignKey(Item, blank=True, null=True, on_delete=models.CASCADE, related_name='facility_item')
-    category = models.ForeignKey(Category, blank=True, null=True, on_delete=models.CASCADE, related_name='facility_cat')
-    effect = models.ForeignKey(Effect, blank=True, null=True, on_delete=models.CASCADE)
-    class Meta:
-        ordering = ['level']

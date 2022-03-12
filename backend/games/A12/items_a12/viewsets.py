@@ -21,9 +21,7 @@ class A12ItemViewSet(viewsets.ModelViewSet):
                 'item_en'
             )
             .prefetch_related(
-                'categories',
                 'categories__cat_en',
-                'ingredient_set',
                 'ingredient_set__category__cat_en',
                 'ingredient_set__item__item_en'
             )
@@ -39,9 +37,7 @@ class A12ItemViewSet(viewsets.ModelViewSet):
                 'item_ja'
             )
             .prefetch_related(
-                'categories',
                 'categories__cat_ja',
-                'ingredient_set',
                 'ingredient_set__category__cat_ja',
                 'ingredient_set__item__item_ja'
             )
@@ -56,25 +52,17 @@ class A12ItemViewSet(viewsets.ModelViewSet):
             queryset = (
                 Item.objects
                 .select_related(
-                    'item_en'
+                    'item_en',
+                    'traits__trait_en'
                 )
                 .prefetch_related(
-                    'categories',
                     'categories__cat_en',
-                    'ingredient_set',
                     'ingredient_set__category__cat_en',
                     'ingredient_set__item__item_en',
-                    'traits',
-                    'traits__trait_en',
-                    'monsters',
                     'monsters__mon_en',
-                    'locations',
                     'locations__reg_en',
                     'equip_set',
-                    'book_set',
                     'book_set__item_en',
-                    'effectline_set',
-                    'effectline_set__effect',
                     'effectline_set__effect__eff_en'
                 )
                 .get(slugname=slugname)
@@ -90,25 +78,18 @@ class A12ItemViewSet(viewsets.ModelViewSet):
             queryset = (
                 Item.objects
                 .select_related(
-                    'item_ja'
+                    'item_ja',
+                    'traits__trait_ja'
                 )
                 .prefetch_related(
-                    'categories',
                     'categories__cat_ja',
-                    'ingredient_set',
                     'ingredient_set__category__cat_ja',
                     'ingredient_set__item__item_ja',
-                    'traits',
-                    'traits__trait_ja',
-                    'monsters',
                     'monsters__mon_ja',
-                    'locations',
                     'locations__reg_ja',
                     'equip_set',
                     'book_set',
                     'book_set__item_ja',
-                    'effectline_set',
-                    'effectline_set__effect',
                     'effectline_set__effect__eff_ja'
                 )
                 .get(slugname=slugname)
@@ -132,7 +113,6 @@ class A12BookViewSet(viewsets.ModelViewSet):
                 'item_en'
             )
             .prefetch_related(
-                'items',
                 'items__item_en'
             )
         )
@@ -147,7 +127,6 @@ class A12BookViewSet(viewsets.ModelViewSet):
                 'item_ja'
             )
             .prefetch_related(
-                'items',
                 'items__item_ja'
             )
         )
@@ -164,7 +143,6 @@ class A12BookViewSet(viewsets.ModelViewSet):
                     'item_en'
                 )
                 .prefetch_related(
-                    'items',
                     'items__item_en'
                 )
                 .get(slugname=slugname)
@@ -183,7 +161,6 @@ class A12BookViewSet(viewsets.ModelViewSet):
                     'item_ja'
                 )
                 .prefetch_related(
-                    'items',
                     'items__item_ja'
                 )
                 .get(slugname=slugname)

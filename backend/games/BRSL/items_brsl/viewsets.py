@@ -22,8 +22,6 @@ class BRSLItemViewSet(viewsets.ModelViewSet):
             )
             .prefetch_related(
                 'category',
-                'ingredient_set',
-                'ingredient_set__category',
                 'ingredient_set__item__item_en'
             )
         )
@@ -39,8 +37,6 @@ class BRSLItemViewSet(viewsets.ModelViewSet):
             )
             .prefetch_related(
                 'category',
-                'ingredient_set',
-                'ingredient_set__category',
                 'ingredient_set__item__item_ja'
             )
         )
@@ -56,8 +52,6 @@ class BRSLItemViewSet(viewsets.ModelViewSet):
             )
             .prefetch_related(
                 'category',
-                'ingredient_set',
-                'ingredient_set__category',
                 'ingredient_set__item__item_sc'
             )
         )
@@ -73,8 +67,6 @@ class BRSLItemViewSet(viewsets.ModelViewSet):
             )
             .prefetch_related(
                 'category',
-                'ingredient_set',
-                'ingredient_set__category',
                 'ingredient_set__item__item_tc'
             )
         )
@@ -92,20 +84,15 @@ class BRSLItemViewSet(viewsets.ModelViewSet):
                 )
                 .prefetch_related(
                     'category',
-                    'ingredient_set',
-                    'ingredient_set__category',
-                    'ingredient_set__item__item_en',
                     'usableitem_set',
-                    'effectline_set',
-                    'effectline_set__linename',
-                    'effectline_set__effect__eff_en',
-                    'skillline_set',
+                    'effline_set__linename',
+                    'effline_set__effectdata__effect__eff_en',
                     'skillline_set__linename',
                     'skillline_set__effect1__eff_en',
                     'skillline_set__effect2__eff_en',
                     'skillline_set__effect3__eff_en',
-                    'region_set',
-                    'region_set__name'
+                    'region_set__name',
+                    'demon_set__demon_en'
             )
                 .get(slug=slug)
             )
@@ -124,20 +111,15 @@ class BRSLItemViewSet(viewsets.ModelViewSet):
                 )
                 .prefetch_related(
                     'category',
-                    'ingredient_set',
-                    'ingredient_set__category',
-                    'ingredient_set__item__item_ja',
                     'usableitem_set',
-                    'effectline_set',
-                    'effectline_set__linename',
-                    'effectline_set__effect__eff_ja',
-                    'skillline_set',
+                    'effline_set__linename',
+                    'effline_set__effectdata__effect__eff_ja',
                     'skillline_set__linename',
                     'skillline_set__effect1__eff_ja',
                     'skillline_set__effect2__eff_ja',
                     'skillline_set__effect3__eff_ja',
-                    'region_set',
-                    'region_set__name'
+                    'region_set__name',
+                    'demon_set__demon_ja'
             )
                 .get(slug=slug)
             )
@@ -156,20 +138,15 @@ class BRSLItemViewSet(viewsets.ModelViewSet):
                 )
                 .prefetch_related(
                     'category',
-                    'ingredient_set',
-                    'ingredient_set__category',
-                    'ingredient_set__item__item_sc',
                     'usableitem_set',
-                    'effectline_set',
-                    'effectline_set__linename',
-                    'effectline_set__effect__eff_sc',
-                    'skillline_set',
+                    'effline_set__linename',
+                    'effline_set__effectdata__effect__eff_sc',
                     'skillline_set__linename',
                     'skillline_set__effect1__eff_sc',
                     'skillline_set__effect2__eff_sc',
                     'skillline_set__effect3__eff_sc',
-                    'region_set',
-                    'region_set__name'
+                    'region_set__name',
+                    'demon_set__demon_sc'
             )
                 .get(slug=slug)
             )
@@ -187,21 +164,16 @@ class BRSLItemViewSet(viewsets.ModelViewSet):
                     'item_tc'
                 )
                 .prefetch_related(
-                    'category',
-                    'ingredient_set',
-                    'ingredient_set__category',
-                    'ingredient_set__item__item_tc',
+                   'category',
                     'usableitem_set',
-                    'effectline_set',
-                    'effectline_set__linename',
-                    'effectline_set__effect__eff_tc',
-                    'skillline_set',
+                    'effline_set__linename',
+                    'effline_set__effectdata__effect__eff_tc',
                     'skillline_set__linename',
                     'skillline_set__effect1__eff_tc',
                     'skillline_set__effect2__eff_tc',
                     'skillline_set__effect3__eff_tc',
-                    'region_set',
-                    'region_set__name'
+                    'region_set__name',
+                    'demon_set__demon_tc'
             )
                 .get(slug=slug)
             )

@@ -21,11 +21,6 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
             .select_related(
                 'mon_en'
             )
-            .prefetch_related(
-                'drops',
-                'drops__item_en',
-            )
-
         )
         serializer = A22MonsterSerializer(queryset, many=True, context={'language': 'en'})
         return Response(serializer.data)
@@ -37,11 +32,6 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
             .select_related(
                 'mon_ja'
             )
-            .prefetch_related(
-                'drops',
-                'drops__item_ja'
-            )
-
         )
         serializer = A22MonsterSerializer(queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)
@@ -53,11 +43,6 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
             .select_related(
                 'mon_ko'
             )
-            .prefetch_related(
-                'drops',
-                'drops__item_ko'
-            )
-
         )
         serializer = A22MonsterSerializer(queryset, many=True, context={'language': 'ko'})
         return Response(serializer.data)
@@ -69,11 +54,6 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
             .select_related(
                 'mon_fr'
             )
-            .prefetch_related(
-                'drops',
-                'drops__item_fr'
-            )
-
         )
         serializer = A22MonsterSerializer(queryset, many=True, context={'language': 'fr'})
         return Response(serializer.data)
@@ -85,11 +65,6 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
             .select_related(
                 'mon_sc'
             )
-            .prefetch_related(
-                'drops',
-                'drops__item_sc'
-            )
-
         )
         serializer = A22MonsterSerializer(queryset, many=True, context={'language': 'sc'})
         return Response(serializer.data)
@@ -101,11 +76,6 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
             .select_related(
                 'mon_tc'
             )
-            .prefetch_related(
-                'drops',
-                'drops__item_tc'
-            )
-
         )
         serializer = A22MonsterSerializer(queryset, many=True, context={'language': 'tc'})
         return Response(serializer.data)
@@ -120,9 +90,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
                     'mon_en'
                 )
                 .prefetch_related(
-                    'drops',
                     'drops__item_en',
-                    'location',
                     'location__loc_en',
                 )
                 .get(slugname=slugname)
@@ -141,9 +109,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
                     'mon_ja'
                 )
                 .prefetch_related(
-                    'drops',
                     'drops__item_ja',
-                    'location',
                     'location__loc_ja',
                 )
                 .get(slugname=slugname)
@@ -162,9 +128,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
                     'mon_ko'
                 )
                 .prefetch_related(
-                    'drops',
                     'drops__item_ko',
-                    'location',
                     'location__loc_ko',
                 )
                 .get(slugname=slugname)
@@ -183,9 +147,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
                     'mon_fr'
                 )
                 .prefetch_related(
-                    'drops',
                     'drops__item_fr',
-                    'location',
                     'location__loc_fr',
                 )
                 .get(slugname=slugname)
@@ -204,9 +166,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
                     'mon_sc'
                 )
                 .prefetch_related(
-                    'drops',
                     'drops__item_sc',
-                    'location',
                     'location__loc_sc',
                 )
                 .get(slugname=slugname)
@@ -225,9 +185,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
                     'mon_tc'
                 )
                 .prefetch_related(
-                    'drops',
                     'drops__item_tc',
-                    'location',
                     'location__loc_tc',
                 )
                 .get(slugname=slugname)

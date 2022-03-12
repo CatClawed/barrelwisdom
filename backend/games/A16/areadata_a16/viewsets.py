@@ -19,19 +19,14 @@ class A16AreaViewSet(viewsets.ModelViewSet):
             queryset = (
                 Area.objects
                 .select_related(
-                    'region'
+                    'region__reg_en'
                 )
                 .prefetch_related(
-                    'region__reg_en',
-                    'fields',
-                    'fields__ingredients',
                     'fields__ingredients__item_en',
-                    'fields__rare',
                     'fields__rare__item_en',
-                    'fields__relics',
                     'fields__relics__item_en',
-                    'fields__monsters',
-                    'fields__monsters__mon_en'
+                    'fields__monsters__mon_en',
+                    'fields__region__reg_en',
                 )
                 .get(region__slugname=slugname)
             )
@@ -46,19 +41,14 @@ class A16AreaViewSet(viewsets.ModelViewSet):
             queryset = (
                 Area.objects
                 .select_related(
-                    'region'
+                    'region__reg_ja'
                 )
                 .prefetch_related(
-                    'region__reg_ja',
-                    'fields',
-                    'fields__ingredients',
                     'fields__ingredients__item_ja',
-                    'fields__rare',
                     'fields__rare__item_ja',
-                    'fields__relics',
                     'fields__relics__item_ja',
-                    'fields__monsters',
-                    'fields__monsters__mon_ja'
+                    'fields__monsters__mon_ja',
+                    'fields__region__reg_en',
                 )
                 .get(region__slugname=slugname)
             )

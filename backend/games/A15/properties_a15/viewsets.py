@@ -21,13 +21,9 @@ class A15PropertyViewSet(viewsets.ModelViewSet):
                 'prop_en'
             )
             .prefetch_related(
-                'item_set',
                 'item_set__item_en',
-                'combo1',
                 'combo1__prop_en',
-                'combo2',
                 'combo2__prop_en',
-                'combo3',
                 'combo3__prop_en'
             )
         )
@@ -42,13 +38,9 @@ class A15PropertyViewSet(viewsets.ModelViewSet):
                 'prop_ja'
             )
             .prefetch_related(
-                'item_set',
                 'item_set__item_ja',
-                'combo1',
                 'combo1__prop_ja',
-                'combo2',
                 'combo2__prop_ja',
-                'combo3',
                 'combo3__prop_ja'
             )
         )
@@ -62,17 +54,13 @@ class A15PropertyViewSet(viewsets.ModelViewSet):
             queryset = (
                 Property.objects
                 .select_related(
-                    'prop_en'
+                    'prop_en',
+                    'combo1__prop_en',
+                    'combo2__prop_en',
+                    'combo3__prop_en'
                 )
                 .prefetch_related(
-                    'item_set',
                     'item_set__item_en',
-                    'combo1',
-                    'combo1__prop_en',
-                    'combo2',
-                    'combo2__prop_en',
-                    'combo3',
-                    'combo3__prop_en'
                 )
                 .get(slugname=slugname)
             )
@@ -87,17 +75,13 @@ class A15PropertyViewSet(viewsets.ModelViewSet):
             queryset = (
                 Property.objects
                 .select_related(
-                    'prop_ja'
+                    'prop_ja',
+                    'combo1__prop_ja',
+                    'combo2__prop_ja',
+                    'combo3__prop_ja'
                 )
                 .prefetch_related(
-                    'item_set',
                     'item_set__item_ja',
-                    'combo1',
-                    'combo1__prop_ja',
-                    'combo2',
-                    'combo2__prop_ja',
-                    'combo3',
-                    'combo3__prop_ja'
                 )
                 .get(slugname=slugname)
             )

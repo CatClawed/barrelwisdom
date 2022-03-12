@@ -33,9 +33,7 @@ class BRSLDemonViewSet(viewsets.ModelViewSet):
                     'demon_en'
                 )
                 .prefetch_related(
-                    'drops',
                     'drops__item_en',
-                    'region_set',
                     'region_set__name'
                 )
                 .get(slug=slug)
@@ -65,9 +63,7 @@ class BRSLDemonViewSet(viewsets.ModelViewSet):
                     'demon_ja'
                 )
                 .prefetch_related(
-                    'drops',
                     'drops__item_ja',
-                    'region_set',
                     'region_set__name'
                 )
                 .get(slug=slug)
@@ -97,9 +93,7 @@ class BRSLDemonViewSet(viewsets.ModelViewSet):
                     'demon_sc'
                 )
                 .prefetch_related(
-                    'drops',
                     'drops__item_sc',
-                    'region_set',
                     'region_set__name'
                 )
                 .get(slug=slug)
@@ -129,9 +123,7 @@ class BRSLDemonViewSet(viewsets.ModelViewSet):
                     'demon_tc'
                 )
                 .prefetch_related(
-                    'drops',
                     'drops__item_tc',
-                    'region_set',
                     'region_set__name'
                 )
                 .get(slug=slug)

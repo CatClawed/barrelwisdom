@@ -21,8 +21,6 @@ class A12EffectViewSet(viewsets.ModelViewSet):
                 'eff_en'
             )
             .prefetch_related(
-                'effectline_set',
-                'effectline_set__item',
                 'effectline_set__item__item_en',
             )
         )
@@ -37,8 +35,6 @@ class A12EffectViewSet(viewsets.ModelViewSet):
                 'eff_ja'
             )
             .prefetch_related(
-                'effectline_set',
-                'effectline_set__item',
                 'effectline_set__item__item_ja',
             )
         )
@@ -55,8 +51,6 @@ class A12EffectViewSet(viewsets.ModelViewSet):
                     'eff_en'
                 )
                 .prefetch_related(
-                    'effectline_set',
-                    'effectline_set__item',
                     'effectline_set__item__item_en',
                 )
                 .get(slugname=slugname)
@@ -75,8 +69,6 @@ class A12EffectViewSet(viewsets.ModelViewSet):
                     'eff_ja'
                 )
                 .prefetch_related(
-                    'effectline_set',
-                    'effectline_set__item',
                     'effectline_set__item__item_en',
                 )
                 .get(slugname=slugname)

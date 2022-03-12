@@ -14,11 +14,12 @@ class BRSLEventViewSet(viewsets.ModelViewSet):
     def en(self, request):
         queryset = (
             Event.objects
-            .prefetch_related(
-                'fragment',
-                'fragment__frag_en',
+            .select_related(
                 'location',
                 'character',
+            )
+            .prefetch_related(
+                'fragment__frag_en',
                 'choices',
             )
 
@@ -30,11 +31,12 @@ class BRSLEventViewSet(viewsets.ModelViewSet):
     def ja(self, request):
         queryset = (
             Event.objects
-            .prefetch_related(
-                'fragment',
-                'fragment__frag_ja',
+            .select_related(
                 'location',
                 'character',
+            )
+            .prefetch_related(
+                'fragment__frag_ja',
                 'choices',
             )
 
@@ -46,11 +48,12 @@ class BRSLEventViewSet(viewsets.ModelViewSet):
     def sc(self, request):
         queryset = (
             Event.objects
-            .prefetch_related(
-                'fragment',
-                'fragment__frag_sc',
+            .select_related(
                 'location',
                 'character',
+            )
+            .prefetch_related(
+                'fragment__frag_sc',
                 'choices',
             )
 
@@ -62,11 +65,12 @@ class BRSLEventViewSet(viewsets.ModelViewSet):
     def tc(self, request):
         queryset = (
             Event.objects
-            .prefetch_related(
-                'fragment',
-                'fragment__frag_tc',
+            .select_related(
                 'location',
                 'character',
+            )
+            .prefetch_related(
+                'fragment__frag_tc',
                 'choices',
             )
 

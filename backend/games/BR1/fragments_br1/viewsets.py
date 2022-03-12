@@ -16,7 +16,6 @@ class BR1FragmentViewSet(viewsets.ModelViewSet):
         queryset = (
             Fragment.objects
             .prefetch_related(
-                'upgrades',
                 'upgrades__item'
             )
         )

@@ -22,12 +22,8 @@ class BRSLRegionViewSet(viewsets.ModelViewSet):
                     'name'
                 )
                 .prefetch_related(
-                    'areas',
                     'areas__name',
-                    'areas__items',
                     'areas__items__item_en',
-                    'areas__demons',
-                    'areas__demons__demon',
                     'areas__demons__demon__demon_en'
                 )
                 .get(slug=slug)
@@ -46,12 +42,8 @@ class BRSLRegionViewSet(viewsets.ModelViewSet):
                     'name'
                 )
                 .prefetch_related(
-                    'areas',
                     'areas__name',
-                    'areas__items',
                     'areas__items__item_ja',
-                    'areas__demons',
-                    'areas__demons__demon',
                     'areas__demons__demon__demon_ja'
                 )
                 .get(slug=slug)
@@ -70,12 +62,8 @@ class BRSLRegionViewSet(viewsets.ModelViewSet):
                     'name'
                 )
                 .prefetch_related(
-                    'areas',
                     'areas__name',
-                    'areas__items',
                     'areas__items__item_sc',
-                    'areas__demons',
-                    'areas__demons__demon',
                     'areas__demons__demon__demon_sc'
                 )
                 .get(slug=slug)
@@ -94,12 +82,8 @@ class BRSLRegionViewSet(viewsets.ModelViewSet):
                     'name'
                 )
                 .prefetch_related(
-                    'areas',
                     'areas__name',
-                    'areas__items',
                     'areas__items__item_tc',
-                    'areas__demons',
-                    'areas__demons__demon',
                     'areas__demons__demon__demon_tc'
                 )
                 .get(slug=slug)

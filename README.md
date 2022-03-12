@@ -8,7 +8,7 @@ https://barrelwisdom.com
 ## Prerequisites
 
 - NodeJS (should be the latest LTS version). Install it from [official site](https://nodejs.org/en/) or use your package manager, such as [Homebrew](https://brew.sh/)
-- [Python 3](https://www.python.org/downloads/) or [Miniconda with Python 3](https://docs.conda.io/en/latest/miniconda.html), your choice. Should be `3.7.3` and up.
+- [Python 3](https://www.python.org/downloads/) or [Miniconda with Python 3](https://docs.conda.io/en/latest/miniconda.html), your choice. Should be `3.8` and up.
 
 ## Backend development
 
@@ -111,7 +111,7 @@ After installing Angular CLI, `ng` commands will be available and you will be ab
 - Begin development
 
 ```
-ng serve
+ng start
 ```
 
 
@@ -124,12 +124,9 @@ npm run dev:ssr
 - For production build
 
 ```
-ng build --configuration production --build-optimizer && ng run frontend:server
+npm run prerender
 ```
 
 ## Comment module
 
-Commento is used for commenting on the site. It's a drop-in and open-source replacement for Disqus.
-
-- Download the release [here](https://docs.commento.io/installation/self-hosting/on-your-server/release-binaries.html)
-- Instructions [here](https://bloggingfordevs.com/static-site-comments/)
+Commento is used for commenting on the site. I'd very much like to remove it sometime.

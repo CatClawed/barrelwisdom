@@ -76,15 +76,15 @@ class A23MonsterViewSet(viewsets.ModelViewSet):
             queryset = (
                 Monster.objects
                 .select_related(
-                    'mon_en'
-                )
-                .prefetch_related(
-                    'drops__item_en',
-                    'climate2_set__loc__parent',
+                    'mon_en',
                     'char1',
                     'char2',
                     'char3',
                     'char4',
+                )
+                .prefetch_related(
+                    'drops__item_en',
+                    'climate2_set__loc__parent',
                 )
                 .get(slug=slug)
             )
@@ -99,15 +99,15 @@ class A23MonsterViewSet(viewsets.ModelViewSet):
             queryset = (
                 Monster.objects
                 .select_related(
-                    'mon_ja'
-                )
-                .prefetch_related(
-                    'drops__item_ja',
-                    'climate2_set__loc__parent',
+                    'mon_ja',
                     'char1',
                     'char2',
                     'char3',
                     'char4',
+                )
+                .prefetch_related(
+                    'drops__item_ja',
+                    'climate2_set__loc__parent',
                 )
                 .get(slug=slug)
             )
@@ -122,15 +122,15 @@ class A23MonsterViewSet(viewsets.ModelViewSet):
             queryset = (
                 Monster.objects
                 .select_related(
-                    'mon_ko'
-                )
-                .prefetch_related(
-                    'drops__item_ko',
-                    'climate2_set__loc__parent',
+                    'mon_ko',
                     'char1',
                     'char2',
                     'char3',
                     'char4',
+                )
+                .prefetch_related(
+                    'drops__item_ko',
+                    'climate2_set__loc__parent',
                 )
                 .get(slug=slug)
             )
@@ -145,15 +145,15 @@ class A23MonsterViewSet(viewsets.ModelViewSet):
             queryset = (
                 Monster.objects
                 .select_related(
-                    'mon_sc'
-                )
-                .prefetch_related(
-                    'drops__item_sc',
-                    'climate2_set__loc__parent',
+                    'mon_sc',
                     'char1',
                     'char2',
                     'char3',
                     'char4',
+                )
+                .prefetch_related(
+                    'drops__item_sc',
+                    'climate2_set__loc__parent',
                 )
                 .get(slug=slug)
             )
@@ -168,15 +168,15 @@ class A23MonsterViewSet(viewsets.ModelViewSet):
             queryset = (
                 Monster.objects
                 .select_related(
-                    'mon_tc'
-                )
-                .prefetch_related(
-                    'drops__item_tc',
-                    'climate2_set__loc__parent',
+                    'mon_tc',
                     'char1',
                     'char2',
                     'char3',
                     'char4',
+                )
+                .prefetch_related(
+                    'drops__item_tc',
+                    'climate2_set__loc__parent',
                 )
                 .get(slug=slug)
             )

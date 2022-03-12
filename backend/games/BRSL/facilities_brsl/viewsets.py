@@ -33,15 +33,10 @@ class BRSLFacilityViewSet(viewsets.ModelViewSet):
                     'facility_en'
                 )
                 .prefetch_related(
-                    'facilityeffectline_set',
-                    'facilityeffectline_set__effect',
-                    'facilityeffectline_set__effect__eff_en',
-                    'facilityingredient_set',
-                    'facilityingredient_set__effect',
-                    'facilityingredient_set__effect__eff_en',
-                    'facilityingredient_set__item',
-                    'facilityingredient_set__item__item_en',
-                    'facilityingredient_set__category',
+                    'facilityeffline_set__effectdata__effect__eff_en',
+                    'facilitying_set__data__effect__eff_en',
+                    'facilitying_set__data__item__item_en',
+                    'facilitying_set__data__category',
                 )
                 .get(slug=slug)
             )
@@ -70,15 +65,10 @@ class BRSLFacilityViewSet(viewsets.ModelViewSet):
                     'facility_ja'
                 )
                 .prefetch_related(
-                    'facilityeffectline_set',
-                    'facilityeffectline_set__effect',
-                    'facilityeffectline_set__effect__eff_ja',
-                    'facilityingredient_set',
-                    'facilityingredient_set__effect',
-                    'facilityingredient_set__effect__eff_ja',
-                    'facilityingredient_set__item',
-                    'facilityingredient_set__item__item_ja',
-                    'facilityingredient_set__category',
+                    'facilityeffline_set__effectdata__effect__eff_ja',
+                    'facilitying_set__data__effect__eff_ja',
+                    'facilitying_set__data__item__item_ja',
+                    'facilitying_set__data__category',
                 )
                 .get(slug=slug)
             )
@@ -107,15 +97,10 @@ class BRSLFacilityViewSet(viewsets.ModelViewSet):
                     'facility_sc'
                 )
                 .prefetch_related(
-                    'facilityeffectline_set',
-                    'facilityeffectline_set__effect',
-                    'facilityeffectline_set__effect__eff_sc',
-                    'facilityingredient_set',
-                    'facilityingredient_set__effect',
-                    'facilityingredient_set__effect__eff_sc',
-                    'facilityingredient_set__item',
-                    'facilityingredient_set__item__item_sc',
-                    'facilityingredient_set__category',
+                    'facilityeffline_set__effectdata__effect__eff_sc',
+                    'facilitying_set__data__effect__eff_sc',
+                    'facilitying_set__data__item__item_sc',
+                    'facilitying_set__data__category',
                 )
                 .get(slug=slug)
             )
@@ -144,15 +129,10 @@ class BRSLFacilityViewSet(viewsets.ModelViewSet):
                     'facility_tc'
                 )
                 .prefetch_related(
-                    'facilityeffectline_set',
-                    'facilityeffectline_set__effect',
-                    'facilityeffectline_set__effect__eff_tc',
-                    'facilityingredient_set',
-                    'facilityingredient_set__effect',
-                    'facilityingredient_set__effect__eff_tc',
-                    'facilityingredient_set__item',
-                    'facilityingredient_set__item__item_tc',
-                    'facilityingredient_set__category',
+                    'facilityeffline_set__effectdata__effect__eff_tc',
+                    'facilitying_set__data__effect__eff_tc',
+                    'facilitying_set__data__item__item_tc',
+                    'facilitying_set__data__category',
                 )
                 .get(slug=slug)
             )
@@ -175,7 +155,6 @@ class BRSLFacilitySetViewSet(viewsets.ModelViewSet):
             )
             .prefetch_related(
                 'effect__eff_en',
-                'facilities',
                 'facilities__facility_en'
             )
         )
@@ -191,7 +170,6 @@ class BRSLFacilitySetViewSet(viewsets.ModelViewSet):
             )
             .prefetch_related(
                 'effect__eff_ja',
-                'facilities',
                 'facilities__facility_ja'
             )
         )
@@ -207,7 +185,6 @@ class BRSLFacilitySetViewSet(viewsets.ModelViewSet):
             )
             .prefetch_related(
                 'effect__eff_sc',
-                'facilities',
                 'facilities__facility_sc'
             )
         )
@@ -223,7 +200,6 @@ class BRSLFacilitySetViewSet(viewsets.ModelViewSet):
             )
             .prefetch_related(
                 'effect__eff_tc',
-                'facilities',
                 'facilities__facility_tc'
             )
         )

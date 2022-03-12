@@ -126,14 +126,6 @@ class EffLine(models.Model):
     class Meta:
         ordering = ['linename']
 
-class EffectLine(models.Model):
-    item = models.ForeignKey(Item, on_delete=models.CASCADE)
-    effect = models.ForeignKey(Effect, on_delete=models.CASCADE)
-    linename = models.ForeignKey(LineName, on_delete=models.CASCADE)
-    number = models.IntegerField()
-    class Meta:
-        ordering = ['linename', 'number']
-
 class SkillLine(models.Model):
     items = models.ManyToManyField(Item)
     effect1 = models.ForeignKey(Effect, on_delete=models.CASCADE, related_name="eff1")

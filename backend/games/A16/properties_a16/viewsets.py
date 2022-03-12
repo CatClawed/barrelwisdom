@@ -18,17 +18,13 @@ class A16PropertyViewSet(viewsets.ModelViewSet):
         queryset = (
             Property.objects
             .select_related(
-                'prop_en'
+                'prop_en',
+                'combo1__prop_en',
+                'combo2__prop_en',
+                'combo3__prop_en'
             )
             .prefetch_related(
-                'item_set',
                 'item_set__item_en',
-                'combo1',
-                'combo1__prop_en',
-                'combo2',
-                'combo2__prop_en',
-                'combo3',
-                'combo3__prop_en'
             )
         )
         serializer = A16PropertySerializer(queryset, many=True, context={'language': 'en'})

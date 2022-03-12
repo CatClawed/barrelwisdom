@@ -91,11 +91,8 @@ class A22EffectViewSet(viewsets.ModelViewSet):
                     'eff_en'
                 )
                 .prefetch_related(
-                    'effects',
                     'effects__eff_en',
-                    'parent',
                     'parent__eff_en',
-                    'effectline_set',
                     'effectline_set__effect__eff_en',
                     'effectline_set__item__item_en'
                 )
@@ -115,11 +112,8 @@ class A22EffectViewSet(viewsets.ModelViewSet):
                     'eff_ja'
                 )
                 .prefetch_related(
-                    'effects',
                     'effects__eff_ja',
-                    'parent',
                     'parent__eff_ja',
-                    'effectline_set',
                     'effectline_set__effect__eff_ja',
                     'effectline_set__item__item_ja'
                 )
@@ -139,11 +133,8 @@ class A22EffectViewSet(viewsets.ModelViewSet):
                     'eff_ko'
                 )
                 .prefetch_related(
-                    'effects',
                     'effects__eff_ko',
-                    'parent',
                     'parent__eff_ko',
-                    'effectline_set',
                     'effectline_set__effect__eff_ko',
                     'effectline_set__item__item_ko'
                 )
@@ -163,11 +154,8 @@ class A22EffectViewSet(viewsets.ModelViewSet):
                     'eff_fr'
                 )
                 .prefetch_related(
-                    'effects',
                     'effects__eff_fr',
-                    'parent',
                     'parent__eff_fr',
-                    'effectline_set',
                     'effectline_set__effect__eff_fr',
                     'effectline_set__item__item_fr'
                 )
@@ -187,11 +175,8 @@ class A22EffectViewSet(viewsets.ModelViewSet):
                     'eff_sc'
                 )
                 .prefetch_related(
-                    'effects',
                     'effects__eff_sc',
-                    'parent',
                     'parent__eff_sc',
-                    'effectline_set',
                     'effectline_set__effect__eff_sc',
                     'effectline_set__item__item_sc'
                 )
@@ -211,11 +196,8 @@ class A22EffectViewSet(viewsets.ModelViewSet):
                     'eff_tc'
                 )
                 .prefetch_related(
-                    'effects',
                     'effects__eff_tc',
-                    'parent',
                     'parent__eff_tc',
-                    'effectline_set',
                     'effectline_set__effect__eff_tc',
                     'effectline_set__item__item_tc'
                 )
@@ -242,7 +224,6 @@ class A22EVEffectViewSet(viewsets.ModelViewSet):
                 'eff_en'
             )
             .prefetch_related(
-                'effects',
                 'effects__eff_en'
             )
 
@@ -258,7 +239,6 @@ class A22EVEffectViewSet(viewsets.ModelViewSet):
                 'eff_ja'
             )
             .prefetch_related(
-                'effects',
                 'effects__eff_ja'
             )
 
@@ -274,7 +254,6 @@ class A22EVEffectViewSet(viewsets.ModelViewSet):
                 'eff_ko'
             )
             .prefetch_related(
-                'effects',
                 'effects__eff_ko'
             )
 
@@ -290,7 +269,6 @@ class A22EVEffectViewSet(viewsets.ModelViewSet):
                 'eff_fr'
             )
             .prefetch_related(
-                'effects',
                 'effects__eff_fr'
             )
 
@@ -306,7 +284,6 @@ class A22EVEffectViewSet(viewsets.ModelViewSet):
                 'eff_sc'
             )
             .prefetch_related(
-                'effects',
                 'effects__eff_sc'
             )
 
@@ -322,7 +299,6 @@ class A22EVEffectViewSet(viewsets.ModelViewSet):
                 'eff_tc'
             )
             .prefetch_related(
-                'effects',
                 'effects__eff_tc'
             )
 
