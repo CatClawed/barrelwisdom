@@ -3,11 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Skill } from '@app/interfaces/brsl';
 import { BRSLService } from '@app/services/brsl.service';
+import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { first } from 'rxjs/operators';
+import { first, takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'brsl-skill.component.html',
+  providers: [DestroyService]
 })
 export class BRSLSkillComponent implements OnInit {
 
@@ -33,6 +35,7 @@ export class BRSLSkillComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private readonly destroy$: DestroyService,
     private brslservice: BRSLService,
     private seoService: SeoService,
     private viewportScroller: ViewportScroller,
@@ -41,6 +44,7 @@ export class BRSLSkillComponent implements OnInit {
   ngOnInit(): void {
     this.language = this.route.snapshot.params.language;
     this.brslservice.getSkillList(this.language)
+    .pipe(takeUntil(this.destroy$))
     .subscribe({next: skill => {
         this.error =``;
         this.skills = skill;
@@ -60,7 +64,7 @@ export class BRSLSkillComponent implements OnInit {
   }
   ngAfterViewInit(): void {
     this.route.fragment.pipe(
-      first()
+      first(), takeUntil(this.destroy$)
     ).subscribe(fragment => this.viewportScroller.scrollToAnchor(fragment));
   }
   scroll(id: string) {

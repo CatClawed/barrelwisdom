@@ -1,16 +1,19 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Trait } from '@app/interfaces/a12';
 import { A12Service } from '@app/services/a12.service';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Observable } from 'rxjs';
+import { map, startWith, takeUntil } from 'rxjs/operators';
+
 
 @Component({
   templateUrl: 'a12-traitlist.component.html',
+  providers: [DestroyService]
 })
 export class A12TraitlistComponent implements OnInit {
   modalRef: BsModalRef;
@@ -33,6 +36,7 @@ export class A12TraitlistComponent implements OnInit {
 
   constructor(
     private modalService: BsModalService,
+    private readonly destroy$: DestroyService,
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -60,16 +64,19 @@ export class A12TraitlistComponent implements OnInit {
     this.seoDesc = `The list of traits in ${this.gameTitle}.`
     this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
 
-    this.router.events.subscribe(event => {
+    let modalLink = this.router.events
+    .subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.modalService.setDismissReason('link');
         this.modalService.hide();
+        modalLink.unsubscribe();
       }
     });
   }
 
   getTraits() {
     this.a12service.getTraitList(this.language)
+    .pipe(takeUntil(this.destroy$))
     .subscribe({next: traits => {
       this.traits = traits;
       this.filteredTraits = this.pageForm.valueChanges.pipe(
@@ -94,7 +101,9 @@ export class A12TraitlistComponent implements OnInit {
     this.trait = slug;
     this.location.go(`${this.gameURL}/traits/` + slug + "/" + this.language);
     this.modalRef = this.modalService.show(template);
-    this.modalRef.onHide.subscribe((reason: string | any) => {
+    this.modalRef.onHide
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((reason: string | any) => {
       if(reason != "link") {
         this.location.go(`${this.gameURL}/traits/` + this.language);
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);

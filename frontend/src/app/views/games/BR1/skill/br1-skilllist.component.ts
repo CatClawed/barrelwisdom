@@ -1,16 +1,16 @@
 
-import { ViewportScroller } from '@angular/common';
-import { first } from 'rxjs/operators';
+import { Location, ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute }from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Skill } from '@app/interfaces/br1';
 import { BR1Service } from '@app/services/br1.service';
+import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { Location } from '@angular/common';
+import { first, takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'br1-skilllist.component.html',
-  selector: 'br1-skilllist',
+  providers: [DestroyService]
 })
 export class BR1SkilllistComponent implements OnInit {
   slugname: string;
@@ -33,6 +33,7 @@ export class BR1SkilllistComponent implements OnInit {
 
 constructor(
     private route: ActivatedRoute,
+    private readonly destroy$: DestroyService,
     private loc: Location,
     private br1service: BR1Service,
     private seoService: SeoService,
@@ -50,6 +51,7 @@ constructor(
     this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
 
     this.br1service.getSkillList(this.language)
+    .pipe(takeUntil(this.destroy$))
     .subscribe({next: skill => {
         this.error =``;
         this.skills = skill;
@@ -61,7 +63,7 @@ constructor(
   }
   ngAfterViewInit(): void {
     this.route.fragment.pipe(
-      first()
+      first(), takeUntil(this.destroy$)
     ).subscribe(fragment => this.viewportScroller.scrollToAnchor(fragment));
   }
   scroll(id: string) {

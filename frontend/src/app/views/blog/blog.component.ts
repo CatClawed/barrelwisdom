@@ -11,9 +11,12 @@ import { SeoService } from '@app/services/seo.service';
 import { WINDOW } from '@app/services/window.service';
 import { environment } from '@environments/environment';
 import { MarkdownService } from 'ngx-markdown';
+import { takeUntil } from 'rxjs/operators';
+import { DestroyService } from '@app/services/destroy.service';
 
 @Component({
     templateUrl: 'blog.component.html',
+    providers: [DestroyService]
   })
 
   export class BlogComponent implements OnInit {
@@ -32,6 +35,7 @@ import { MarkdownService } from 'ngx-markdown';
 
       constructor(
         private route: ActivatedRoute,
+        private readonly destroy$: DestroyService,
         public historyService: HistoryService,
         private blogService: BlogService,
         private authenticationService: AuthenticationService,
@@ -45,46 +49,14 @@ import { MarkdownService } from 'ngx-markdown';
 
 
       ngOnInit(): void {
-        this.authenticationService.user.subscribe(x => this.user = x);   
-        this.route.paramMap.subscribe(params => {
+        this.authenticationService.user.pipe(takeUntil(this.destroy$)).subscribe(x => this.user = x);   
+        this.route.paramMap.pipe(takeUntil(this.destroy$))
+        .subscribe(params => {
           this.change = false;
           this.backup = false;
           this.window.commento = {}
           this.getBlog(params.get('section'), params.get('title'));
         }); 
-      }
-
-  ngAfterViewInit(): void {
-    this.route.paramMap.subscribe(() => {
-      if (this.window.commento.main !== 'function') {
-        setTimeout(() => { // probably not necessary, who cares
-          this.resetDiv();
-          this.removeCSS();
-          this.removeScript();
-        })
-
-        this.s = this.renderer.createElement('script');
-        this.s.defer = true;
-        this.renderer.setAttribute(this.s, 'data-auto-init', 'false')
-        this.s.src = `${environment.commentoUrl}/js/commento.js`;
-        this.renderer.appendChild(this.dom.head, this.s);
-
-      }
-    });
-  }
-
-      ngAfterViewChecked(): void {
-        let element = this.dom.querySelectorAll('div[id="commento-main-area"]');
-
-        if(element.length === 0 && typeof this.window.commento.main === "function" && !this.change) {
-          this.window.commento.main(); 
-          this.change = true;
-        }
-        // don't even question it, I give up for now
-        else if(element.length === 0 && typeof this.window.commento.main === "function" && this.change && !this.backup) {
-          this.window.commento.main();
-          this.backup = true;
-        }
       }
 
 
@@ -121,10 +93,9 @@ import { MarkdownService } from 'ngx-markdown';
         }
   } 
 
-
-
       getBlog(section: string, title: string): void {
         this.blogService.getBlog(title, section)
+        .pipe(takeUntil(this.destroy$))
           .subscribe({next: blog => { 
               this.error =``;
               this.blog = blog;

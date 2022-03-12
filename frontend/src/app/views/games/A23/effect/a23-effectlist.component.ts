@@ -4,13 +4,15 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Effect } from '@app/interfaces/a23';
 import { A23Service } from '@app/services/a23.service';
+import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { map, startWith, takeUntil } from 'rxjs/operators';
 
 @Component({
     templateUrl: 'a23-effectlist.component.html',
+    providers: [DestroyService]
   })
 
   export class A23EffectlistComponent implements OnInit {
@@ -35,6 +37,7 @@ import { map, startWith } from 'rxjs/operators';
   
     constructor(
       private modalService: BsModalService,
+      private readonly destroy$: DestroyService,
       private router: Router,
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
@@ -57,24 +60,25 @@ import { map, startWith } from 'rxjs/operators';
       this.gameURL = this.a23service.gameURL;
       this.imgURL = this.a23service.imgURL;
 
-      this.route.data.subscribe(data => {
-        this.seoURL = `${this.gameURL}/effects/${this.language}`;
-        this.seoTitle = `Effects - ${this.gameTitle}`;
-        this.seoDesc = `The list of effects in ${this.gameTitle}.`
-        this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-        this.getEffects();
-      });  
+      this.seoURL = `${this.gameURL}/effects/${this.language}`;
+      this.seoTitle = `Effects - ${this.gameTitle}`;
+      this.seoDesc = `The list of effects in ${this.gameTitle}.`
+      this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+      this.getEffects();
 
-      this.router.events.subscribe(event => {
+      let modalLink = this.router.events
+      .subscribe(event => {
         if (event instanceof NavigationEnd) {
           this.modalService.setDismissReason('link');
           this.modalService.hide();
+          modalLink.unsubscribe();
         }
       });
     }
   
     getEffects() {
       this.a23service.getEffectList(this.language)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({next: effects => {
         this.effects = effects;
         this.filteredEffects = this.pageForm.valueChanges.pipe(
@@ -99,7 +103,9 @@ import { map, startWith } from 'rxjs/operators';
       this.effect = slug;
       this.location.go(`${this.gameURL}/effects/` + slug + "/" + this.language);
       this.modalRef = this.modalService.show(template);
-      this.modalRef.onHide.subscribe((reason: string | any) => {
+      this.modalRef.onHide
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((reason: string | any) => {
         if(reason != "link") {
           this.location.go(`${this.gameURL}/effects/` + this.language);
           this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);

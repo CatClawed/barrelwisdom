@@ -13,7 +13,7 @@
     <p *ngIf="item.acquisition"><b>Acquisition: </b>{{item.acquisition}}</p>
     <b *ngIf="item.missions">Missions:</b>
     <ul *ngIf="item.missions">
-      <li *ngFor="let miss of item.missions"><a routerLink="/{{gameURL}}/missions/{{language}}#{{miss.slugname}}">{{miss.name}}</a></li>
+      <li *ngFor="let miss of item.missions"><a routerLink="/{{gameURL}}/missions/{{language}}" fragment="{{miss.slugname}}">{{miss.name}}</a></li>
     </ul>
     <b *ngIf="item.locations">Locations:</b>
     <ul *ngIf="item.locations">
@@ -29,4 +29,4 @@
     </ul>
   </div>
 </div>
-</ng-container>
+</ng-container> 

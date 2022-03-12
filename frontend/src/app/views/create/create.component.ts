@@ -19,9 +19,12 @@ import { Section } from '@app/interfaces/section';
 import { SectionService } from '@app/services/section.service';
 import { BlogService } from '@app/services/blog.service';
 import slugify from 'slugify';
+import { takeUntil } from 'rxjs/operators';
+import { DestroyService } from '@app/services/destroy.service';
 
 @Component({
-  templateUrl: 'create.component.html'
+  templateUrl: 'create.component.html',
+  providers: [DestroyService]
 })
 
 
@@ -68,6 +71,7 @@ export class CreateComponent {
 
   constructor(
     private route: ActivatedRoute,
+    private readonly destroy$: DestroyService,
     private router: Router,
     private formBuilder: FormBuilder,
     private errorService: ErrorCodeService,
@@ -78,7 +82,7 @@ export class CreateComponent {
     private BlogService: BlogService
   ) {
     this.getTags();
-    this.authenticationService.user.subscribe(x => this.user = x);
+    this.authenticationService.user.pipe(takeUntil(this.destroy$)).subscribe(x => this.user = x);
     this.tagControl = new FormControl();
 
     this.pageForm = this.formBuilder.group({
@@ -108,6 +112,7 @@ export class CreateComponent {
       }
 
     this.pageForm.get('section').valueChanges
+      .pipe(takeUntil(this.destroy$))
       .subscribe(value => {
         if (value == this.blogID) {
           this.pageForm.get('imgURL').setValidators(this.imgValidators.concat(Validators.required));
@@ -123,6 +128,7 @@ export class CreateComponent {
       );
 
       this.pageForm.get('body').valueChanges
+        .pipe(takeUntil(this.destroy$))
         .subscribe(value => {
           this.preview = this.markdownService.compile(<string>value); 
         });
@@ -168,6 +174,7 @@ export class CreateComponent {
     if(newList.length > 0) {
       let tag = newList.pop();
       this.tagService.addTag(tag, this.slug(tag))
+          .pipe(takeUntil(this.destroy$))
           .subscribe({next: data => {
             idList.push(data.id);
             this.updateTags(idList, newList);
@@ -200,6 +207,7 @@ export class CreateComponent {
           this.pageForm.get("section").value,
           idList // tags
           )
+          .pipe(takeUntil(this.destroy$))
           .subscribe({next: () => {
             this.router.navigateByUrl(`/${nextURL}`);
           },
@@ -288,6 +296,7 @@ export class CreateComponent {
   // get all the tags
   getTags(): void {
     this.tagService.getTags()
+      .pipe(takeUntil(this.destroy$))
       .subscribe(tags => {
           this.allTags = tags;
           this.allTags.forEach(tag => {
@@ -301,6 +310,7 @@ export class CreateComponent {
   // get the sections that apply to the user group
    getSections() {
     this.sectionService.getSections()
+      .pipe(takeUntil(this.destroy$))
       .subscribe((sections) => {
         sections.forEach(section => {
           if (section.name == 'blog') {
@@ -322,6 +332,7 @@ export class CreateComponent {
   loadBlog(id: string) {
     if(id != null) {
       this.BlogService.getBlogByID(id)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({next: blog => {
         this.blog = blog;
 

@@ -4,13 +4,15 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Demon } from '@app/interfaces/br1';
 import { BR1Service } from '@app/services/br1.service';
+import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { map, startWith, takeUntil } from 'rxjs/operators';
 
 @Component({
     templateUrl: 'br1-demonlist.component.html',
+    providers: [DestroyService]
   })
 
   export class BR1DemonlistComponent implements OnInit {
@@ -35,6 +37,7 @@ import { map, startWith } from 'rxjs/operators';
   
     constructor(
       private modalService: BsModalService,
+      private readonly destroy$: DestroyService,
       private router: Router,
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
@@ -64,16 +67,19 @@ import { map, startWith } from 'rxjs/operators';
       this.seoDesc = `The list of demons in ${this.gameTitle}.`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
       
-      this.router.events.subscribe(event => {
+      let modalLink = this.router.events
+      .subscribe(event => {
         if (event instanceof NavigationEnd) {
           this.modalService.setDismissReason('link');
           this.modalService.hide();
+          modalLink.unsubscribe();
         }
       });
     }
   
     getDemons() {
       this.br1service.getDemonList(this.language)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({next: demons => {
         this.demons = demons;
         this.filteredDemons = this.pageForm.valueChanges.pipe(
@@ -98,7 +104,9 @@ import { map, startWith } from 'rxjs/operators';
       this.demon = slug;
       this.location.go(`${this.gameURL}/demons/` + slug + "/" + this.language);
       this.modalRef = this.modalService.show(template);
-      this.modalRef.onHide.subscribe((reason: string | any) => {
+      this.modalRef.onHide
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((reason: string | any) => {
         if(reason != "link") {
           this.location.go(`${this.gameURL}/demons/` + this.language);
           this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);

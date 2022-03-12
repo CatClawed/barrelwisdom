@@ -4,12 +4,14 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { FragmentEffect } from '@app/interfaces/br1';
 import { BR1Service } from '@app/services/br1.service';
+import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Observable } from 'rxjs';
-import { first, map, startWith } from 'rxjs/operators';
+import { first, map, startWith, takeUntil } from 'rxjs/operators';
 
 @Component({
     templateUrl: 'br1-fragmentlist.component.html',
+    providers: [DestroyService]
   })
 
   export class BR1FragmentEffectlistComponent implements OnInit {
@@ -34,6 +36,7 @@ import { first, map, startWith } from 'rxjs/operators';
   
     constructor(
       private formBuilder: FormBuilder,
+      private readonly destroy$: DestroyService,
       private route: ActivatedRoute,
       private br1service: BR1Service,
       private seoService: SeoService,
@@ -64,12 +67,13 @@ import { first, map, startWith } from 'rxjs/operators';
 
     ngAfterViewInit(): void {
       this.route.fragment.pipe(
-        first()
+        first(), takeUntil(this.destroy$)
       ).subscribe(fragment => this.viewportScroller.scrollToAnchor(fragment));
     }
   
     getFragmentEffects() {
       this.br1service.getFragmentEffectList(this.language)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({next: fragmenteffects => {
         this.fragmenteffects = fragmenteffects;
         this.filteredFragmentEffects = this.pageForm.valueChanges.pipe(

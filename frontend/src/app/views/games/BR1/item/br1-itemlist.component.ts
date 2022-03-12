@@ -1,19 +1,18 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Item } from '@app/interfaces/br1';
 import { BR1Service } from '@app/services/br1.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from "@app/services/errorcode.service";
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { Observable } from 'rxjs';
+import { map, startWith, takeUntil } from 'rxjs/operators';
 
 @Component({
     templateUrl: 'br1-itemlist.component.html',
-    selector: 'br1-itemlist',
+    providers: [DestroyService]
   })
 
   export class BR1ItemlistComponent implements OnInit {
@@ -38,6 +37,7 @@ import { SeoService } from '@app/services/seo.service';
   
     constructor(
       private modalService: BsModalService,
+      private readonly destroy$: DestroyService,
       private router: Router,
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
@@ -67,16 +67,19 @@ import { SeoService } from '@app/services/seo.service';
       this.seoDesc = `The list of items in ${this.gameTitle}.`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
 
-      this.router.events.subscribe(event => {
+      let modalLink = this.router.events
+      .subscribe(event => {
         if (event instanceof NavigationEnd) {
           this.modalService.setDismissReason('link');
           this.modalService.hide();
+          modalLink.unsubscribe();
         }
       });
     }
   
     getItems() {
       this.br1service.getItemList(this.language)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({next: items => {
         this.items = items;
         this.filteredItems = this.pageForm.valueChanges.pipe(
@@ -102,7 +105,9 @@ import { SeoService } from '@app/services/seo.service';
       this.item = slug;
       this.location.go(`${this.gameURL}/items/` + slug + "/" + this.language);
       this.modalRef = this.modalService.show(template);
-      this.modalRef.onHide.subscribe((reason: string | any) => {
+      this.modalRef.onHide
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((reason: string | any) => {
         if(reason != "link") {
           this.location.go(`${this.gameURL}/items/` + this.language);
           this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);

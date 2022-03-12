@@ -3,12 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RegionData } from '@app/interfaces/a15';
 import { A15Service } from '@app/services/a15.service';
+import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
-import { first } from 'rxjs/operators';
+import { first, takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a15-location.component.html',
+  providers: [DestroyService]
 })
 export class A15LocationComponent implements OnInit {
   slugname: string;
@@ -31,6 +33,7 @@ export class A15LocationComponent implements OnInit {
 
 constructor(
     private route: ActivatedRoute,
+    private readonly destroy$: DestroyService,
     private loc: Location,
     private a15service: A15Service,
     public historyService: HistoryService,
@@ -59,7 +62,8 @@ constructor(
   }
   ngAfterViewInit(): void {
     this.route.fragment.pipe(
-      first()
+      first(),
+      takeUntil(this.destroy$)
     ).subscribe(fragment => this.viewportScroller.scrollToAnchor(fragment));
   }
   scroll(id: string) {

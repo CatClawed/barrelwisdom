@@ -1,16 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '@app/interfaces/user';
 import { environment } from "@environments/environment";
 import { CookieService } from 'ngx-cookie-service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export class AuthenticationService {
+export class AuthenticationService implements OnDestroy {
     private userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
     public u: User = null;
+    private destroy$ = new Subject<void>();
 
     constructor(private http: HttpClient,
         private cookieService: CookieService) {
@@ -94,7 +97,7 @@ export class AuthenticationService {
             const expires = new Date(jwtToken.exp * 1000);
             timeout = expires.getTime() - Date.now() - (60 * 1000);
         }
-        this.refreshTokenTimeout = setTimeout(() => this.refreshToken().subscribe(), timeout);
+        this.refreshTokenTimeout = setTimeout(() => this.refreshToken().pipe(takeUntil(this.destroy$)).subscribe(), timeout);
     }
 
     private stopRefreshTokenTimer() {
@@ -104,4 +107,9 @@ export class AuthenticationService {
     register(username, email, password, password2, code) {
         return this.http.post(`${environment.authUrl}/reg/`, { username, email, password, password2, code });
     }
+
+    ngOnDestroy() {
+        this.destroy$.next();
+        this.destroy$.complete();
+      }
 }

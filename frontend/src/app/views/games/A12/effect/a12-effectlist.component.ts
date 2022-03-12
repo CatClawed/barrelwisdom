@@ -8,9 +8,12 @@ import { A12Service } from '@app/services/a12.service';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { SeoService } from '@app/services/seo.service';
+import { takeUntil } from 'rxjs/operators';
+import { DestroyService } from '@app/services/destroy.service';
 
 @Component({
     templateUrl: 'a12-effectlist.component.html',
+    providers: [DestroyService]
   })
 
   export class A12EffectlistComponent implements OnInit {
@@ -35,6 +38,7 @@ import { SeoService } from '@app/services/seo.service';
   
     constructor(
       private modalService: BsModalService,
+      private readonly destroy$: DestroyService,
       private router: Router,
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
@@ -63,16 +67,19 @@ import { SeoService } from '@app/services/seo.service';
       this.seoDesc = `The list of effects in ${this.gameTitle}.`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
 
-      this.router.events.subscribe(event => {
+      let modalLink = this.router.events
+        .subscribe(event => {
         if (event instanceof NavigationEnd) {
           this.modalService.setDismissReason('link');
           this.modalService.hide();
+          modalLink.unsubscribe();
         }
       });
     }
   
     getEffects() {
       this.a12service.getEffectList(this.language)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({next: effects => {
         this.effects = effects;
         this.filteredEffects = this.pageForm.valueChanges.pipe(
@@ -97,7 +104,7 @@ import { SeoService } from '@app/services/seo.service';
       this.effect = slug;
       this.location.go(`${this.gameURL}/effects/` + slug + "/" + this.language);
       this.modalRef = this.modalService.show(template);
-      this.modalRef.onHide.subscribe((reason: string | any) => {
+      this.modalRef.onHide.pipe(takeUntil(this.destroy$)).subscribe((reason: string | any) => {
         if(reason != "link") {
           this.location.go(`${this.gameURL}/effects/` + this.language);
           this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);

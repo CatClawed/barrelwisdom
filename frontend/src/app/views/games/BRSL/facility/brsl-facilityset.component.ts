@@ -8,6 +8,8 @@ import { SeoService } from '@app/services/seo.service';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
+import { DestroyService } from '@app/services/destroy.service';
 
 @Component({
     templateUrl: 'brsl-facilityset.component.html',
@@ -37,6 +39,7 @@ import { map, startWith } from 'rxjs/operators';
   
     constructor(
       private modalService: BsModalService,
+      private readonly destroy$: DestroyService,
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private location: Location,
@@ -68,6 +71,7 @@ import { map, startWith } from 'rxjs/operators';
   
     getFacilities() {
       this.brslservice.getFacilitySetList(this.language)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({next: facilities => {
         this.facilities = facilities;
         this.filteredSets = this.pageForm.valueChanges.pipe(
@@ -82,6 +86,7 @@ import { map, startWith } from 'rxjs/operators';
 
     getCategories() {
       this.brslservice.getCategoryList(this.language)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({next: categories  => {
           this.categories = categories;
       },
@@ -102,7 +107,9 @@ import { map, startWith } from 'rxjs/operators';
       this.facility = slug;
       this.location.go(`${this.gameURL}/facilities/` + slug + "/" + this.language);
       this.modalRef = this.modalService.show(template);
-      this.modalRef.onHide.subscribe((reason: string | any) => {
+      this.modalRef.onHide
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((reason: string | any) => {
         if(reason != "link") {
           this.location.go(`${this.gameURL}/facilities/` + this.language);
           this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);

@@ -3,11 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Region } from '@app/interfaces/a22';
 import { A22Service } from '@app/services/a22.service';
+import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { first } from 'rxjs/operators';
+import { first, takeUntil } from 'rxjs/operators';
 
 @Component({
     templateUrl: 'a22-location.component.html',
+    providers: [DestroyService]
   })
 
   export class A22LocationComponent implements OnInit {
@@ -29,6 +31,7 @@ import { first } from 'rxjs/operators';
   
     constructor(
       private route: ActivatedRoute,
+      private readonly destroy$: DestroyService,
       private loc: Location,
       private router: Router,
       private a22service: A22Service,
@@ -66,7 +69,7 @@ import { first } from 'rxjs/operators';
 
     ngAfterViewInit(): void {
         this.route.fragment.pipe(
-          first()
+          first(), takeUntil(this.destroy$)
         ).subscribe(fragment => this.viewportScroller.scrollToAnchor(fragment));
      }
      scroll(id: string) {

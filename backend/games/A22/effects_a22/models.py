@@ -46,8 +46,8 @@ class Effect(models.Model):
     eff_fr = models.OneToOneField(Effect_fr, on_delete=models.CASCADE)
     eff_sc = models.OneToOneField(Effect_sc, on_delete=models.CASCADE)
     eff_tc = models.OneToOneField(Effect_tc, on_delete=models.CASCADE)
-    parent = models.ManyToManyField("self", blank=True, related_name='parent') # Forge and EV
-    effects = models.ManyToManyField("self", blank=True, related_name='effects') # EV only
+    parent = models.ManyToManyField("self", blank=True) # Forge and EV
+    effects = models.ManyToManyField("self", blank=True) # EV only
     # Advanced Data, not interpreted
     attTag0 = models.CharField(max_length=50, blank=True, null=True, default="")
     actTag0 = models.CharField(max_length=50, blank=True, null=True, default="")

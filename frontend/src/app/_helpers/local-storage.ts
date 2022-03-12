@@ -1,5 +1,7 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {AppComponent} from '@app/app.component';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 class LocalStorage implements Storage {
   [name: string]: any;
@@ -13,16 +15,19 @@ class LocalStorage implements Storage {
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class LocalstorageService implements Storage {
+export class LocalstorageService implements Storage, OnDestroy {
 
   private storage: Storage;
+  private destroy$ = new Subject<void>();
 
   constructor() {
     this.storage = new LocalStorage();
 
-    AppComponent.isBrowser.subscribe(isBrowser => {
+    AppComponent.isBrowser
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(isBrowser => {
       if (isBrowser) {
         this.storage = localStorage;
       }
@@ -51,5 +56,10 @@ export class LocalstorageService implements Storage {
 
   setItem(key: string, value: string): void {
     return this.storage.setItem(key, value);
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

@@ -4,13 +4,15 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Property } from '@app/interfaces/a15';
 import { A15Service } from '@app/services/a15.service';
+import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { map, startWith, takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a15-propertylist.component.html',
+  providers: [DestroyService]
 })
 export class A15PropertylistComponent implements OnInit {
   modalRef: BsModalRef;
@@ -33,6 +35,7 @@ export class A15PropertylistComponent implements OnInit {
 
   constructor(
     private modalService: BsModalService,
+    private readonly destroy$: DestroyService,
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -61,16 +64,19 @@ export class A15PropertylistComponent implements OnInit {
     this.seoDesc = `The list of properties in ${this.gameTitle}.`
     this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
 
-    this.router.events.subscribe(event => {
+    let modalLink = this.router.events
+    .subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.modalService.setDismissReason('link');
         this.modalService.hide();
+        modalLink.unsubscribe();
       }
     });
   }
 
   getProperties() {
     this.a15service.getPropertyList(this.language)
+    .pipe(takeUntil(this.destroy$))
     .subscribe({next: properties => {
       this.properties = properties;
       this.filteredProperties = this.pageForm.valueChanges.pipe(
@@ -95,7 +101,9 @@ export class A15PropertylistComponent implements OnInit {
     this.property = slug;
     this.location.go(`${this.gameURL}/properties/` + slug + "/" + this.language);
     this.modalRef = this.modalService.show(template);
-    this.modalRef.onHide.subscribe((reason: string | any) => {
+    this.modalRef.onHide
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((reason: string | any) => {
       if(reason != "link") {
         this.location.go(`${this.gameURL}/properties/` + this.language);
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);

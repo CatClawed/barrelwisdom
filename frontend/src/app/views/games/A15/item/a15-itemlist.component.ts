@@ -4,13 +4,15 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Category, ItemList } from '@app/interfaces/a15';
 import { A15Service } from '@app/services/a15.service';
+import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { map, startWith, takeUntil } from 'rxjs/operators';
 
 @Component({
     templateUrl: 'a15-itemlist.component.html',
+    providers: [DestroyService]
   })
 
   export class A15ItemlistComponent implements OnInit {
@@ -43,6 +45,7 @@ import { map, startWith } from 'rxjs/operators';
   
     constructor(
       private modalService: BsModalService,
+      private readonly destroy$: DestroyService,
       private router: Router,
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
@@ -78,16 +81,19 @@ import { map, startWith } from 'rxjs/operators';
       this.seoDesc = `The list of items in ${this.gameTitle}.`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
 
-      this.router.events.subscribe(event => {
+      let modalLink = this.router.events
+      .subscribe(event => {
         if (event instanceof NavigationEnd) {
           this.modalService.setDismissReason('link');
           this.modalService.hide();
+          modalLink.unsubscribe();
         }
       });
     }
   
     getItems() {
       this.a15service.getItemList(this.language)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({next: items => {
         this.items = items;
         this.filteredItems = this.pageForm.valueChanges.pipe(
@@ -102,6 +108,7 @@ import { map, startWith } from 'rxjs/operators';
 
     getCategories() {
       this.a15service.getCategories(this.language)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({next: categories  => {
           this.categories = categories;
       },
@@ -122,7 +129,9 @@ import { map, startWith } from 'rxjs/operators';
       this.item = slug;
       this.location.go(`${this.gameURL}/items/${slug}/${this.language}`);
       this.modalRef = this.modalService.show(template);
-      this.modalRef.onHide.subscribe((reason: string | any) => {
+      this.modalRef.onHide
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((reason: string | any) => {
         if(reason != "link") {
           this.location.go(`${this.gameURL}/items/${this.language}`);
           this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);

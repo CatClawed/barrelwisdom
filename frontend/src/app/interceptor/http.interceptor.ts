@@ -1,8 +1,10 @@
 import { HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Inject, Injectable, Optional } from '@angular/core';
+import { Inject, Injectable, Optional, OnDestroy } from '@angular/core';
 import { REQUEST } from '@nguniversal/express-engine/tokens';
 import { Request } from 'express';
 import {AppComponent} from '@app/app.component';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 // case insensitive check against config and value
 const startsWithAny = (arr: string[] = []) => (value = '') => {
@@ -13,10 +15,13 @@ const startsWithAny = (arr: string[] = []) => (value = '') => {
 const isAbsoluteURL = startsWithAny(['http']);
 
 @Injectable()
-export class UniversalRelativeInterceptor implements HttpInterceptor {
+export class UniversalRelativeInterceptor implements HttpInterceptor, OnDestroy {
     isBrowser = false;
+    private destroy$ = new Subject<void>();
     constructor(@Optional() @Inject(REQUEST) protected request: Request) {
-        AppComponent.isBrowser.subscribe(isBrowser => {
+        AppComponent.isBrowser
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(isBrowser => {
             if (!isBrowser) {
               this.isBrowser = isBrowser;
             }
@@ -42,4 +47,8 @@ export class UniversalRelativeInterceptor implements HttpInterceptor {
             return next.handle(req);
         }
     }
+    ngOnDestroy() {
+        this.destroy$.next();
+        this.destroy$.complete();
+      }
 }

@@ -1,15 +1,17 @@
 
 import { ViewportScroller } from '@angular/common';
-import { first } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute }from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Mission } from '@app/interfaces/br1';
 import { BR1Service } from '@app/services/br1.service';
-import { HistoryService} from '@app/services/history.service';
+import { DestroyService } from '@app/services/destroy.service';
+import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
+import { first, takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'br1-missionlist.component.html',
+  providers: [DestroyService]
 })
 export class BR1MissionlistComponent implements OnInit {
   slugname: string;
@@ -32,6 +34,7 @@ export class BR1MissionlistComponent implements OnInit {
 
 constructor(
     private route: ActivatedRoute,
+    private readonly destroy$: DestroyService,
     private br1service: BR1Service,
     public historyService: HistoryService,
     private seoService: SeoService,
@@ -49,6 +52,7 @@ constructor(
     this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
 
     this.br1service.getMissionList(this.language)
+    .pipe(takeUntil(this.destroy$))
     .subscribe({next: mission => {
         this.error =``;
         this.missions = mission;
@@ -60,7 +64,7 @@ constructor(
   }
   ngAfterViewInit(): void {
     this.route.fragment.pipe(
-      first()
+      first(), takeUntil(this.destroy$)
     ).subscribe(fragment => this.viewportScroller.scrollToAnchor(fragment));
   }
 } 

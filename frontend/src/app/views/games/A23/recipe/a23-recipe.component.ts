@@ -5,9 +5,12 @@ import { A23Service } from '@app/services/a23.service';
 import { SeoService } from '@app/services/seo.service';
 import { HistoryService } from '@app/services/history.service';
 import { Location } from '@angular/common';
+import { takeUntil } from 'rxjs/operators';
+import { DestroyService } from '@app/services/destroy.service';
 
 @Component({
   templateUrl: 'a23-recipe.component.html',
+  providers: [DestroyService]
 })
 export class A23RecipeComponent implements OnInit {
   error: string = '';
@@ -41,6 +44,7 @@ export class A23RecipeComponent implements OnInit {
 
 constructor(
     private route: ActivatedRoute,
+    private readonly destroy$: DestroyService,
     private a23service: A23Service,
     private location: Location,
     public historyService: HistoryService,
@@ -73,6 +77,7 @@ constructor(
     }
 
     this.a23service.getRecipeList(this.language)
+    .pipe(takeUntil(this.destroy$))
     .subscribe({next: recipe => {
         this.error =``;
         this.recipes = recipe;

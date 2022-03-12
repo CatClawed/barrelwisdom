@@ -111,7 +111,7 @@ After installing Angular CLI, `ng` commands will be available and you will be ab
 - Begin development
 
 ```
-ng start
+npm start
 ```
 
 

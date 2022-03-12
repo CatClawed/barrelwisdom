@@ -1,15 +1,16 @@
 import { Location, ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Region, Area, GatherNode } from '@app/interfaces/a23';
-import { A23Service } from '@app/services/a23.service';
-import { SeoService } from '@app/services/seo.service';
-import { first, map, startWith } from 'rxjs/operators';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Area, GatherNode, Region } from '@app/interfaces/a23';
+import { A23Service } from '@app/services/a23.service';
+import { DestroyService } from '@app/services/destroy.service';
+import { SeoService } from '@app/services/seo.service';
+import { first, takeUntil } from 'rxjs/operators';
 
 @Component({
     templateUrl: 'a23-location.component.html',
+    providers: [DestroyService]
   })
 
   export class A23LocationComponent implements OnInit {
@@ -36,6 +37,7 @@ import { Observable } from 'rxjs';
   
     constructor(
       private route: ActivatedRoute,
+      private readonly destroy$: DestroyService,
       private loc: Location,
       private router: Router,
       private a23service: A23Service,
@@ -62,7 +64,9 @@ import { Observable } from 'rxjs';
           }
           else {
 
-            this.pageForm.get("filtertext").valueChanges.subscribe(filter => {
+            this.pageForm.get("filtertext").valueChanges
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(filter => {
               this.filteredNodes = this.filterT(filter)
               this.search = filter;
             }
@@ -83,7 +87,7 @@ import { Observable } from 'rxjs';
 
     ngAfterViewInit(): void {
         this.route.fragment.pipe(
-          first()
+          first(), takeUntil(this.destroy$)
         ).subscribe(fragment => this.viewportScroller.scrollToAnchor(fragment));
      }
      scroll(id: string) {

@@ -3,12 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AreaData } from '@app/interfaces/a16';
 import { A16Service } from '@app/services/a16.service';
+import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
-import { first } from 'rxjs/operators';
+import { first, takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a16-location.component.html',
+  providers: [DestroyService]
 })
 export class A16LocationComponent implements OnInit {
   slugname: string;
@@ -31,6 +33,7 @@ export class A16LocationComponent implements OnInit {
 
 constructor(
     private route: ActivatedRoute,
+    private readonly destroy$: DestroyService,
     private loc: Location,
     private a16service: A16Service,
     public historyService: HistoryService,
@@ -59,7 +62,7 @@ constructor(
   }
   ngAfterViewInit(): void {
     this.route.fragment.pipe(
-      first()
+      first(), takeUntil(this.destroy$)
     ).subscribe(fragment => this.viewportScroller.scrollToAnchor(fragment));
   }
 

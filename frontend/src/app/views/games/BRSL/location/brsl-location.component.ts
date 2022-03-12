@@ -3,11 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Region } from '@app/interfaces/brsl';
 import { BRSLService } from '@app/services/brsl.service';
+import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { first } from 'rxjs/operators';
+import { first, takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'brsl-location.component.html',
+  providers: [DestroyService]
 })
 
 export class BRSLLocationComponent implements OnInit {
@@ -31,6 +33,7 @@ export class BRSLLocationComponent implements OnInit {
 
 constructor(
     private route: ActivatedRoute,
+    private readonly destroy$: DestroyService,
     private loc: Location,
     private brslservice: BRSLService,
     private seoService: SeoService,
@@ -58,7 +61,7 @@ constructor(
   }
   ngAfterViewInit(): void {
     this.route.fragment.pipe(
-      first()
+      first(), takeUntil(this.destroy$)
     ).subscribe(fragment => this.viewportScroller.scrollToAnchor(fragment));
   }
 

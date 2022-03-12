@@ -4,13 +4,15 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Effect } from '@app/interfaces/a16';
 import { A16Service } from '@app/services/a16.service';
+import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { map, startWith, takeUntil } from 'rxjs/operators';
 
 @Component({
     templateUrl: 'a16-effectlist.component.html',
+    providers: [DestroyService]
   })
 
   export class A16EffectlistComponent implements OnInit {
@@ -35,6 +37,7 @@ import { map, startWith } from 'rxjs/operators';
   
     constructor(
       private modalService: BsModalService,
+      private readonly destroy$: DestroyService,
       private router: Router,
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
@@ -65,20 +68,25 @@ import { map, startWith } from 'rxjs/operators';
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
   
-      this.effectControl.valueChanges.subscribe(search => {
+      this.effectControl.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(search => {
         search.filtertext = search;
       });
 
-      this.router.events.subscribe(event => {
+      let modalLink = this.router.events
+      .subscribe(event => {
         if (event instanceof NavigationEnd) {
           this.modalService.setDismissReason('link');
           this.modalService.hide();
+          modalLink.unsubscribe();
         }
       });
     }
   
     getEffects() {
       this.a16service.getEffectList(this.language)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({next: effects => {
         this.effects = effects;
         this.filteredEffects = this.pageForm.valueChanges.pipe(
@@ -103,7 +111,9 @@ import { map, startWith } from 'rxjs/operators';
       this.effect = slug;
       this.location.go(`${this.gameURL}/effects/` + slug + "/" + this.language);
       this.modalRef = this.modalService.show(template);
-      this.modalRef.onHide.subscribe((reason: string | any) => {
+      this.modalRef.onHide
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((reason: string | any) => {
         if(reason != "link") {
           this.location.go(`${this.gameURL}/effects/` + this.language);
           this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);

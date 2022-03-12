@@ -4,13 +4,15 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Effect } from '@app/interfaces/a22';
 import { A22Service } from '@app/services/a22.service';
+import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { map, startWith, takeUntil } from 'rxjs/operators';
 
 @Component({
     templateUrl: 'a22-effectlist.component.html',
+    providers: [DestroyService]
   })
 
   export class A22EffectlistComponent implements OnInit {
@@ -38,6 +40,7 @@ import { map, startWith } from 'rxjs/operators';
   
     constructor(
       private modalService: BsModalService,
+      private readonly destroy$: DestroyService,
       private router: Router,
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
@@ -61,7 +64,9 @@ import { map, startWith } from 'rxjs/operators';
       this.gameURL = this.a22service.gameURL;
       this.imgURL = this.a22service.imgURL;
 
-      this.route.data.subscribe(data => {
+      this.route.data
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(data => {
         if(data.type == "normal") {
           this.normal = true;
           this.seoURL = `${this.gameURL}/effects/${this.language}`;
@@ -84,16 +89,19 @@ import { map, startWith } from 'rxjs/operators';
         this.getEffects();
       });  
 
-      this.router.events.subscribe(event => {
+      let modalLink = this.router.events
+      .subscribe(event => {
         if (event instanceof NavigationEnd) {
           this.modalService.setDismissReason('link');
           this.modalService.hide();
+          modalLink.unsubscribe();
         }
       });
     }
   
     getEffects() {
       this.a22service.getEffectList(this.language, this.ev, this.forge)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({next: effects => {
         this.effects = effects;
         this.filteredEffects = this.pageForm.valueChanges.pipe(
@@ -118,7 +126,9 @@ import { map, startWith } from 'rxjs/operators';
       this.effect = slug;
       this.location.go(`${this.gameURL}/effects/` + slug + "/" + this.language);
       this.modalRef = this.modalService.show(template);
-      this.modalRef.onHide.subscribe((reason: string | any) => {
+      this.modalRef.onHide
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((reason: string | any) => {
         if(reason != "link") {
           if(this.normal) this.location.go(`${this.gameURL}/effects/` + this.language);
           if(this.forge) this.location.go(`${this.gameURL}/forge-effects/` + this.language);

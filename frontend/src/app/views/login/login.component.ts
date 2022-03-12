@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Meta, Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '@app/services/authentication.service';
-import { first } from 'rxjs/operators';
+import { DestroyService } from '@app/services/destroy.service';
 import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
-import { Meta, Title } from '@angular/platform-browser';
+import { first, takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'login.component.html',
-  selector: 'login',
+  providers: [DestroyService]
 })
 export class LoginComponent {
   loginForm: FormGroup;
@@ -20,6 +21,7 @@ export class LoginComponent {
 
   constructor(
     private formBuilder: FormBuilder,
+    private readonly destroy$: DestroyService,
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
@@ -56,7 +58,7 @@ export class LoginComponent {
 
     this.loading = true;
     this.authenticationService.login(this.f.username.value, this.f.password.value)
-        .pipe(first())
+        .pipe(first(), takeUntil(this.destroy$))
         .subscribe({next: 
             () => {
               this.router.navigateByUrl(this.returnUrl);

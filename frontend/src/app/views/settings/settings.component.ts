@@ -1,19 +1,21 @@
 // Probably shoulda put all these in components for simpler repeated code, oh well
 
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SettingService } from '@app/services/setting.service';
-import { ErrorCodeService } from '@app/services/errorcode.service';
-import { first } from 'rxjs/operators';
+import { Meta, Title } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 import { User } from "@app/interfaces/user";
 import { AuthenticationService } from "@app/services/authentication.service";
-import { environment } from '@environments/environment';
+import { DestroyService } from '@app/services/destroy.service';
+import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
-import { Meta, Title } from '@angular/platform-browser';
+import { SettingService } from '@app/services/setting.service';
+import { environment } from '@environments/environment';
+import { first, takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'settings.component.html',
+  providers: [DestroyService]
 })
 export class SettingsComponent {
   profileForm: FormGroup;
@@ -41,6 +43,7 @@ export class SettingsComponent {
 
   constructor(
     private formBuilder: FormBuilder,
+    private readonly destroy$: DestroyService,
     private route: ActivatedRoute,
     private settingService: SettingService,
     private errorCodeService: ErrorCodeService,
@@ -49,7 +52,9 @@ export class SettingsComponent {
     private metaService: Meta,
     private titleService: Title
     ) {
-      this.authenticationService.user.subscribe(x => this.user = x);
+      this.authenticationService.user
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(x => this.user = x);
     }
 
     ngOnInit() {
@@ -58,7 +63,9 @@ export class SettingsComponent {
       this.metaService.updateTag({ name: `robots`, content: `noindex` },`name="robots"`);
 
       if(this.user.group == "admin") {
-        this.settingService.getSections().subscribe(sections => {
+        this.settingService.getSections()
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(sections => {
           this.sections = sections;
         });
       }
@@ -99,6 +106,7 @@ export class SettingsComponent {
   loadProfile(id: number) {
     if(id != null) {
       this.settingService.getProfile(id)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({next: profile => {
         this.profileForm.get('bio').setValue(profile.bio);
         this.profileForm.get('website').setValue(profile.website);
@@ -122,7 +130,7 @@ export class SettingsComponent {
 
     this.loading = true;
     this.settingService.updateProfile(this.user.id, this.profilef.bio.value, this.profilef.website.value, this.profilef.avatar.value)
-      .pipe(first())
+      .pipe(first(), takeUntil(this.destroy$))
       .subscribe({next:
         () => {
           this.successProfile = true;
@@ -146,7 +154,7 @@ export class SettingsComponent {
 
     this.loading = true;
     this.settingService.updatePassword(this.passwordf.newPass.value, this.passwordf.repeatPass.value, this.passwordf.currentPass.value)
-        .pipe(first())
+        .pipe(first(), takeUntil(this.destroy$))
         .subscribe({next:
             () => {
               this.successPassword = true;
@@ -168,7 +176,7 @@ export class SettingsComponent {
       this.loading = true;
 
       this.settingService.createInvite()
-          .pipe(first())
+          .pipe(first(), takeUntil(this.destroy$))
           .subscribe({next:
               data => {
                 this.loading = false;
@@ -192,7 +200,7 @@ export class SettingsComponent {
 
         this.loading = true;
         this.settingService.createSection(this.sectionf.name.value, this.sectionf.fullname.value)
-            .pipe(first())
+            .pipe(first(), takeUntil(this.destroy$))
             .subscribe({next:
                 () => {
                   this.successSection = true;
@@ -206,7 +214,9 @@ export class SettingsComponent {
         }
 
         loadNav(section: string) {
-          this.settingService.getNavigation(section).subscribe(nav => {
+          this.settingService.getNavigation(section)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(nav => {
             this.navigationForm.get('section').setValue(nav.section);
             this.navigationForm.get('data').setValue(nav.data);
           });
@@ -223,7 +233,7 @@ export class SettingsComponent {
 
           this.loading = true;
           this.settingService.updateNavigation(this.navigationf.section.value, this.navigationf.data.value)
-              .pipe(first())
+              .pipe(first(), takeUntil(this.destroy$))
               .subscribe({next:
                   () => {
                     this.successNavigation = true;

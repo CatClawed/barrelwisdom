@@ -4,14 +4,15 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { FacilityList } from '@app/interfaces/brsl';
 import { BRSLService } from '@app/services/brsl.service';
+import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { map, startWith, takeUntil } from 'rxjs/operators';
 
 @Component({
     templateUrl: 'brsl-facilitylist.component.html',
-    selector: 'brsl-facilitylist',
+    providers: [DestroyService]
   })
 
   export class BRSLFacilitylistComponent implements OnInit {
@@ -36,6 +37,7 @@ import { map, startWith } from 'rxjs/operators';
   
     constructor(
       private modalService: BsModalService,
+      private readonly destroy$: DestroyService,
       private router: Router,
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
@@ -64,16 +66,19 @@ import { map, startWith } from 'rxjs/operators';
       this.seoDesc = `The list of facilities in ${this.gameTitle}.`
       this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
 
-      this.router.events.subscribe(event => {
+      let modalLink = this.router.events
+      .subscribe(event => {
         if (event instanceof NavigationEnd) {
           this.modalService.setDismissReason('link');
           this.modalService.hide();
+          modalLink.unsubscribe();
         }
       });
     }
   
     getFacilities() {
       this.brslservice.getFacilityList(this.language)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({next: facilities => {
         this.facilities = facilities.slice(0,44);
         this.filteredFacilities = this.pageForm.valueChanges.pipe(
@@ -98,7 +103,9 @@ import { map, startWith } from 'rxjs/operators';
       this.facility = slug;
       this.location.go(`${this.gameURL}/facilities/` + slug + "/" + this.language);
       this.modalRef = this.modalService.show(template);
-      this.modalRef.onHide.subscribe((reason: string | any) => {
+      this.modalRef.onHide
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((reason: string | any) => {
         if(reason != "link") {
           this.location.go(`${this.gameURL}/facilities/` + this.language);
           this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
