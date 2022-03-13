@@ -59,6 +59,39 @@ import { DestroyService } from '@app/services/destroy.service';
         }); 
       }
 
+      ngAfterViewInit(): void {
+        this.route.paramMap.subscribe(() => {
+          if (this.window.commento.main !== 'function') {
+            setTimeout(() => { // probably not necessary, who cares
+              this.resetDiv();
+              this.removeCSS();
+              this.removeScript();
+            })
+    
+            this.s = this.renderer.createElement('script');
+            this.s.defer = true;
+            this.renderer.setAttribute(this.s, 'data-auto-init', 'false')
+            this.s.src = `${environment.commentoUrl}/js/commento.js`;
+            this.renderer.appendChild(this.dom.head, this.s);
+    
+          }
+        });
+      }
+    
+          ngAfterViewChecked(): void {
+            let element = this.dom.querySelectorAll('div[id="commento-main-area"]');
+    
+            if(element.length === 0 && typeof this.window.commento.main === "function" && !this.change) {
+              this.window.commento.main(); 
+              this.change = true;
+            }
+            // don't even question it, I give up for now
+            else if(element.length === 0 && typeof this.window.commento.main === "function" && this.change && !this.backup) {
+              this.window.commento.main();
+              this.backup = true;
+            }
+          }
+
 
   resetDiv() {
     let element = this.dom.querySelector('div[id="comment"]')

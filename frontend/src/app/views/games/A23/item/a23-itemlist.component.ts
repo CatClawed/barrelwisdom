@@ -138,8 +138,12 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
       }
 
       if(ingt) {
-          const filterValue = ingt.toLowerCase();
-          list = list.filter(item => (item.ing) ? item.ing.some(i => i.name.toLowerCase().includes(filterValue)) : false)
+          const filterValue = (this.language == 'en') ? ingt.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "") : ingt;
+          list = list.filter(item => ((item.ing) ? item.ing.some(i => 
+            ((this.language == 'en') ?
+              i.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(filterValue) :
+              i.name.includes(filterValue)) )
+            : false))
       }
 
       if(value) {

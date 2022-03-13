@@ -7,9 +7,9 @@ from datetime import timedelta
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['barrelwisdom.com', 'test.barrelwisdom.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['barrelwisdom.com', 'test.barrelwisdom.com', 'localhost', '127.0.0.1', '159.65.240.56']
 
 if DEBUG:
     ALLOWED_HOSTS = ['*'] 
@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     'django_filters',
     'django.contrib.sites',
     'dj_rest_auth',
-    #'debug_toolbar',
     # Major parts
     'blog.apps.BlogConfig',
     'invite.apps.InviteConfig',
@@ -111,20 +110,26 @@ INSTALLED_APPS = [
     'games.BRSL.regions_brsl.apps.BRSLRegionConfig',
 ]
 
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 
 SITE_ID = 1
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MIDDLEWARE = [
-    #'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+if DEBUG:
+    INSTALLED_APPS.append('debug_toolbar')
+    MIDDLEWARE.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
 
 INTERNAL_IPS = [
     '127.0.0.1',

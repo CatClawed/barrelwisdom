@@ -1,4 +1,3 @@
-#import debug_toolbar
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
@@ -8,6 +7,7 @@ from navigation.viewsets import NavigationViewSet
 from userprofile.viewsets import UserProfileViewSet, UserNameViewSet, RegView
 from auth.views import JWTObtainPairView
 from rest_framework_simplejwt import views as jwt_views
+from django.conf import settings
 
 from games.A12 import urls as A12
 from games.A15 import urls as A15
@@ -46,7 +46,10 @@ urlpatterns = [
     path(r'api/', include(router.urls)),
     path('auth/token/', JWTObtainPairView.as_view(), name='token_obtain_pair'),
     path('auth/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
-    #path('__debug__/', include(debug_toolbar.urls)),
     path(r'auth/reg/', RegView.as_view(),),
     path('auth/dj-rest-auth/', include('dj_rest_auth.urls')),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns.append(path('__debug__/', include(debug_toolbar.urls)))
