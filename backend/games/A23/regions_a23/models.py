@@ -22,10 +22,11 @@ class Climate2(models.Model):
 
 class GatherNode2(models.Model):
     kind = models.CharField(max_length=35)
-    tool = models.CharField(max_length=10)
+    tool = models.CharField(max_length=10, db_index=True)
     climate = models.ForeignKey(Climate2,  on_delete=models.CASCADE)
+    major = models.BooleanField(default=False, db_index=True)
     class Meta:
-        ordering = ['tool']
+        ordering = ['tool', 'climate']
         
 class GatherItem2(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)

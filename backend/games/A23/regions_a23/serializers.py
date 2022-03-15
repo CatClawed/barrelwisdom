@@ -24,6 +24,28 @@ class A23GatherItemSerializer(serializers.ModelSerializer):
             return obj.item.item_tc.name
         else:
             return obj.item.item_en.name
+        
+class A23GatherItemSimpleSerializer(serializers.ModelSerializer):
+    slug = serializers.SerializerMethodField()
+    name = serializers.SerializerMethodField()
+    class Meta:
+        model = GatherItem2
+        fields = ['slug', 'name']
+    def get_slug(self,obj):
+        return obj.item.slug
+    def get_name(self,obj):
+        if 'language' not in self.context:
+            return obj.item.item_en.name
+        if self.context['language'] == 'ja':
+            return obj.item.item_ja.name
+        if self.context['language'] == 'ko':
+            return obj.item.item_ko.name
+        if self.context['language'] == 'sc':
+            return obj.item.item_sc.name
+        if self.context['language'] == 'tc':
+            return obj.item.item_tc.name
+        else:
+            return obj.item.item_en.name
 
 class A23GatherNodeSerializer(serializers.ModelSerializer):
     items = A23GatherItemSerializer(many=True, source='gatheritem2_set')
@@ -97,3 +119,60 @@ class A23RegionSerializer(serializers.ModelSerializer):
             return obj.reg_tc
         else:
             return obj.reg_en
+        
+class A23MajorGatheringSerializer(serializers.ModelSerializer):
+    items = A23GatherItemSimpleSerializer(many=True, source='gatheritem2_set')
+    region = serializers.SerializerMethodField()
+    area = serializers.SerializerMethodField()
+    weather = serializers.CharField(source='climate.weather')
+    class Meta:
+        model = GatherNode2
+        fields = ['region', 'area', 'items', 'weather']
+        
+    def get_region(self,obj):
+        if 'language' not in self.context:
+            return obj.climate.loc.parent.reg_en
+        if self.context['language'] == 'ja':
+            return obj.climate.loc.parent.reg_ja
+        if self.context['language'] == 'ko':
+            return obj.climate.loc.parent.reg_ko
+        if self.context['language'] == 'sc':
+            return obj.climate.loc.parent.reg_sc
+        if self.context['language'] == 'tc':
+            return obj.climate.loc.parent.reg_tc
+        else:
+            return obj.climate.loc.parent.reg_en
+    def get_area(self,obj):
+        if 'language' not in self.context:
+            return obj.climate.loc.reg_en
+        if self.context['language'] == 'ja':
+            return obj.climate.loc.reg_ja
+        if self.context['language'] == 'ko':
+            return obj.climate.loc.reg_ko
+        if self.context['language'] == 'sc':
+            return obj.climate.loc.reg_sc
+        if self.context['language'] == 'tc':
+            return obj.climate.loc.reg_tc
+        else:
+            return obj.climate.loc.reg_en
+        
+class A23MajorGatherSerializer(serializers.Serializer):
+    fish = serializers.SerializerMethodField()
+    shot = serializers.SerializerMethodField()
+    hammer = serializers.SerializerMethodField()
+    pickaxe = serializers.SerializerMethodField()
+    net = serializers.SerializerMethodField()
+    sickle = serializers.SerializerMethodField()
+        
+    def get_fish(self,obj):
+        return A23MajorGatheringSerializer(obj.filter(tool='FISH'), many=True, context=self.context).data
+    def get_shot(self,obj):
+        return A23MajorGatheringSerializer(obj.filter(tool='SHOT'), many=True, context=self.context).data
+    def get_hammer(self,obj):
+        return A23MajorGatheringSerializer(obj.filter(tool='HAMMER'), many=True, context=self.context).data
+    def get_pickaxe(self,obj):
+        return A23MajorGatheringSerializer(obj.filter(tool='PICKAXE'), many=True, context=self.context).data
+    def get_net(self,obj):
+        return A23MajorGatheringSerializer(obj.filter(tool='NET'), many=True, context=self.context).data
+    def get_sickle(self,obj):
+        return A23MajorGatheringSerializer(obj.filter(tool='SICKLE'), many=True, context=self.context).data

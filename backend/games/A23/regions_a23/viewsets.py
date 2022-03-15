@@ -1,6 +1,6 @@
 from rest_framework import viewsets, filters
-from games.A23.regions_a23.models import Region2
-from games.A23.regions_a23.serializers import A23RegionSerializer
+from games.A23.regions_a23.models import Region2, GatherNode2
+from games.A23.regions_a23.serializers import A23RegionSerializer, A23MajorGatherSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
@@ -116,4 +116,100 @@ class A23RegionViewSet(viewsets.ModelViewSet):
         except ObjectDoesNotExist:
             raise Http404
         serializer = A23RegionSerializer(queryset, context={'language': 'tc'})
+        return Response(serializer.data)
+    
+class A23MajorGatherViewSet(viewsets.ModelViewSet):
+    queryset = GatherNode2.objects.filter(major=True)
+    serializer_class = A23MajorGatherSerializer
+    filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
+    lookup_field = 'slug'
+
+    @action(detail=False)
+    def en(self, request):
+        try:
+            queryset = (
+                GatherNode2.objects
+                .select_related(
+                    'climate__loc__parent',
+                )
+                .prefetch_related(
+                    'gatheritem2_set__item__item_en',
+                )
+                .filter(major=True)
+            )
+        except ObjectDoesNotExist:
+            raise Http404
+        serializer = A23MajorGatherSerializer(queryset, many=False, context={'language': 'en'})
+        return Response(serializer.data)
+    
+    @action(detail=False)
+    def ja(self, request):
+        try:
+            queryset = (
+                GatherNode2.objects
+                .select_related(
+                    'climate__loc__parent',
+                )
+                .prefetch_related(
+                    'gatheritem2_set__item__item_ja',
+                )
+                .filter(major=True)
+            )
+        except ObjectDoesNotExist:
+            raise Http404
+        serializer = A23MajorGatherSerializer(queryset, many=False, context={'language': 'ja'})
+        return Response(serializer.data)
+    
+    @action(detail=False)
+    def ko(self, request):
+        try:
+            queryset = (
+                GatherNode2.objects
+                .select_related(
+                    'climate__loc__parent',
+                )
+                .prefetch_related(
+                    'gatheritem2_set__item__item_ko',
+                )
+                .filter(major=True)
+            )
+        except ObjectDoesNotExist:
+            raise Http404
+        serializer = A23MajorGatherSerializer(queryset, many=False, context={'language': 'ko'})
+        return Response(serializer.data)
+    
+    @action(detail=False)
+    def sc(self, request):
+        try:
+            queryset = (
+                GatherNode2.objects
+                .select_related(
+                    'climate__loc__parent',
+                )
+                .prefetch_related(
+                    'gatheritem2_set__item__item_sc',
+                )
+                .filter(major=True)
+            )
+        except ObjectDoesNotExist:
+            raise Http404
+        serializer = A23MajorGatherSerializer(queryset, many=False, context={'language': 'sc'})
+        return Response(serializer.data)
+    
+    @action(detail=False)
+    def tc(self, request):
+        try:
+            queryset = (
+                GatherNode2.objects
+                .select_related(
+                    'climate__loc__parent',
+                )
+                .prefetch_related(
+                    'gatheritem2_set__item__item_tc',
+                )
+                .filter(major=True)
+            )
+        except ObjectDoesNotExist:
+            raise Http404
+        serializer = A23MajorGatherSerializer(queryset, many=False, context={'language': 'tc'})
         return Response(serializer.data)

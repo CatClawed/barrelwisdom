@@ -1,32 +1,30 @@
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { environment } from '@environments/environment';
-import { ErrorCodeService } from "@app/services/errorcode.service";
-import { AuthenticationService } from "@app/services/authentication.service";
-import { User } from "@app/interfaces/user";
-import { EditBlog } from "@app/interfaces/blog";
-import { SafeHtml } from '@angular/platform-browser'
-import { MarkdownService } from 'ngx-markdown';
-import { COMMA, ENTER}  from '@angular/cdk/keycodes';
-import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
+import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { map, startWith } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { Tag } from '@app/interfaces/tag';
-import { TagService } from '@app/services/tag.service';
+import { SafeHtml } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { EditBlog } from "@app/interfaces/blog";
 import { Section } from '@app/interfaces/section';
-import { SectionService } from '@app/services/section.service';
+import { Tag } from '@app/interfaces/tag';
+import { User } from "@app/interfaces/user";
+import { AuthenticationService } from "@app/services/authentication.service";
 import { BlogService } from '@app/services/blog.service';
-import slugify from 'slugify';
-import { takeUntil } from 'rxjs/operators';
 import { DestroyService } from '@app/services/destroy.service';
+import { ErrorCodeService } from "@app/services/errorcode.service";
+import { SectionService } from '@app/services/section.service';
+import { TagService } from '@app/services/tag.service';
+import { environment } from '@environments/environment';
+import { MarkdownService } from 'ngx-markdown';
+import { Observable } from 'rxjs';
+import { map, startWith, takeUntil } from 'rxjs/operators';
+import slugify from 'slugify';
 
 @Component({
   templateUrl: 'create.component.html',
   providers: [DestroyService]
 })
-
 
 export class CreateComponent {
   error: string = '';
@@ -47,8 +45,8 @@ export class CreateComponent {
   removable = true;
   tagControl: FormControl;
   allTags: Tag[];
-  tagList: string[] =  [];
-  tagIDList: number[] =  [];
+  tagList: string[] = [];
+  tagIDList: number[] = [];
   sectionList: Section[] = [];
   sectionIDList: number[] = [];
   blogID: number;
@@ -57,10 +55,8 @@ export class CreateComponent {
   disableSubmit: boolean = false;
   disableAuthorLock: boolean = false;
   slugtitle = "";
+  section: string = "blog";
 
-  trans_all = 1;
-  trans_wep = 2;
-  
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
@@ -81,6 +77,7 @@ export class CreateComponent {
     private sectionService: SectionService,
     private BlogService: BlogService
   ) {
+    slugify.extend({ "'": "-" })
     this.getTags();
     this.authenticationService.user.pipe(takeUntil(this.destroy$)).subscribe(x => this.user = x);
     this.tagControl = new FormControl();
@@ -102,14 +99,14 @@ export class CreateComponent {
       startWith(null as Observable<string[]>),
       map((tag: string | null) => tag ? this._filter(tag) : this.tagList.slice()));
 
-      if(this.route.snapshot.queryParamMap.get('id')) {
-        this.currentTitle = "Edit Page";
-        this.editMode = true;
-      }
-      else {
-        this.currentTitle = "Create Page";
-        this.editMode = false;
-      }
+    if (this.route.snapshot.queryParamMap.get('id')) {
+      this.currentTitle = "Edit Page";
+      this.editMode = true;
+    }
+    else {
+      this.currentTitle = "Create Page";
+      this.editMode = false;
+    }
 
     this.pageForm.get('section').valueChanges
       .pipe(takeUntil(this.destroy$))
@@ -124,16 +121,17 @@ export class CreateComponent {
           this.pageForm.get('imgURL').updateValueAndValidity();
           this.sectionIsBlog = false;
         }
+        this.section = this.sectionList[this.sectionIDList.indexOf(Number(value))].name
       }
       );
 
-      this.pageForm.get('body').valueChanges
-        .pipe(takeUntil(this.destroy$))
-        .subscribe(value => {
-          this.preview = this.markdownService.compile(<string>value); 
-        });
+    this.pageForm.get('body').valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(value => {
+        this.preview = this.markdownService.compile(this.customLink(<string>value));
+      });
 
-        this.getSections();
+    this.getSections();
   }
 
   get f() { return this.pageForm.controls; }
@@ -159,7 +157,7 @@ export class CreateComponent {
     let newList = [];
     for (let tag of this.currentTags) {
       let index = this.tagList.indexOf(tag);
-      if(index < 0) {
+      if (index < 0) {
         newList.push(tag);
       }
       else {
@@ -171,11 +169,12 @@ export class CreateComponent {
 
   // Recursion your sorrows away. Fixes the 'gotta wait for tags to create' problem.
   updateTags(idList: number[], newList: string[]) {
-    if(newList.length > 0) {
+    if (newList.length > 0) {
       let tag = newList.pop();
       this.tagService.addTag(tag, this.slug(tag))
-          .pipe(takeUntil(this.destroy$))
-          .subscribe({next: data => {
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: data => {
             idList.push(data.id);
             this.updateTags(idList, newList);
           },
@@ -194,62 +193,66 @@ export class CreateComponent {
   blogPost(idList: number[]) {
     let slugtitle = this.slug(this.pageForm.get("title").value);
     let nextURL = this.sectionList[this.sectionIDList.indexOf(Number(this.pageForm.get("section").value))].name
-        + '/' + slugtitle;
+      + '/' + slugtitle;
 
-    if(!this.editMode) {
+    if (!this.editMode) {
       this.BlogService.createBlog(this.pageForm.get("title").value,
-          slugtitle,
-          this.pageForm.get("body").value,
-          this.pageForm.get("imgURL").value,
-          this.pageForm.get("seoDesc").value,
-          this.pageForm.get("authorLock").value,
-          [this.user.id],
-          this.pageForm.get("section").value,
-          idList // tags
-          )
-          .pipe(takeUntil(this.destroy$))
-          .subscribe({next: () => {
+        slugtitle,
+        this.pageForm.get("body").value,
+        this.pageForm.get("imgURL").value,
+        this.pageForm.get("seoDesc").value,
+        this.pageForm.get("authorLock").value,
+        [this.user.id],
+        this.pageForm.get("section").value,
+        idList // tags
+      )
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: () => {
             this.router.navigateByUrl(`/${nextURL}`);
           },
           error: error => {
             this.loading = false;
             this.errorMsg = this.errorService.errorMessage(error);
             return;
-          }}
-          );
+          }
+        }
+        );
     }
     else {
-      if(this.blog) {
+      if (this.blog) {
         let authors = this.blog.author;
-        if(authors.indexOf(this.user.id) < 0) {
+        if (authors.indexOf(this.user.id) < 0) {
           // admins can edit authorlocked stuff but not get names added to list
-          if(!this.pageForm.get("authorLock").value) {
+          if (!this.pageForm.get("authorLock").value) {
             authors.push(this.user.id);
           }
         }
         this.BlogService.updateBlog(this.route.snapshot.queryParamMap.get('id'),
           this.pageForm.get("title").value,
           slugtitle,
-          this.pageForm.get("body").value,
+          this.customLink(this.pageForm.get("body").value),
           this.pageForm.get("imgURL").value,
           this.pageForm.get("seoDesc").value,
           this.pageForm.get("authorLock").value,
           authors,
           this.pageForm.get("section").value,
           idList // tags
-          )
-          .subscribe({next: () => {
-            this.router.navigateByUrl(`/${nextURL}`);
-          },
-          error: error => {
-            this.loading = false;
-            this.errorMsg = this.errorService.errorMessage(error);
-            return;
-          }}
+        )
+          .subscribe({
+            next: () => {
+              this.router.navigateByUrl(`/${nextURL}`);
+            },
+            error: error => {
+              this.loading = false;
+              this.errorMsg = this.errorService.errorMessage(error);
+              return;
+            }
+          }
           );
       }
+    }
   }
-}
 
   // add to chip list
   add(event: MatChipInputEvent): void {
@@ -257,7 +260,7 @@ export class CreateComponent {
     const value = event.value;
 
     if ((value || '').trim()) {
-      if(this.currentTags.indexOf(value.trim()) == -1 && value.trim().length <= 100)  {
+      if (this.currentTags.indexOf(value.trim()) == -1 && value.trim().length <= 100) {
         this.currentTags.push(value.trim());
       }
     }
@@ -281,7 +284,7 @@ export class CreateComponent {
   // selected from chip list
   selected(event: MatAutocompleteSelectedEvent): void {
 
-    if(this.currentTags.indexOf(event.option.viewValue) == -1) {
+    if (this.currentTags.indexOf(event.option.viewValue) == -1) {
       this.currentTags.push(event.option.viewValue);
     }
     this.tagInput.nativeElement.value = '';
@@ -291,24 +294,24 @@ export class CreateComponent {
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.tagList.filter(tag => tag.toLowerCase().indexOf(filterValue) === 0);
-  } 
+  }
 
   // get all the tags
   getTags(): void {
     this.tagService.getTags()
       .pipe(takeUntil(this.destroy$))
       .subscribe(tags => {
-          this.allTags = tags;
-          this.allTags.forEach(tag => {
-            this.tagList.push(tag.name);
-            this.tagIDList.push(tag.id);
-          });
-        }
-        );
+        this.allTags = tags;
+        this.allTags.forEach(tag => {
+          this.tagList.push(tag.name);
+          this.tagIDList.push(tag.id);
+        });
+      }
+      );
   }
 
   // get the sections that apply to the user group
-   getSections() {
+  getSections() {
     this.sectionService.getSections()
       .pipe(takeUntil(this.destroy$))
       .subscribe((sections) => {
@@ -330,60 +333,107 @@ export class CreateComponent {
   }
 
   loadBlog(id: string) {
-    if(id != null) {
+    if (id != null) {
       this.BlogService.getBlogByID(id)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({next: blog => {
-        this.blog = blog;
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: blog => {
+            this.blog = blog;
 
-        // if the section is blog and you ain't trusted
-        if(this.sectionIDList.indexOf(this.blog.section) < 0) {
-          this.errorMsg = "Not allowed to edit this.";
-          this.disableSubmit = true;
-          return;
-        }
-
-        // if the page is locked and you are either author or admin
-        // or if the page is just not authorlocked
-        if(!this.blog.authorlock || (this.blog.authorlock && ((this.blog.author.indexOf(this.user.id) > -1) || this.user.group == 'admin'))) {
-          this.pageForm.get('title').setValue(this.blog.title);
-          this.pageForm.get('body').setValue(this.blog.body);
-          this.pageForm.get('section').setValue(this.blog.section);
-          this.pageForm.get('seoDesc').setValue(this.blog.description);
-          this.pageForm.get('imgURL').setValue(this.blog.image);
-          this.pageForm.get('authorLock').setValue(this.blog.authorlock);
-
-          for(let tag of this.blog.tags) {
-            let index = this.tagIDList.indexOf(tag);
-            // if the tag is deleted from the database for whatever reason
-            // there's no reason to keep it
-            if(index != -1) {
-              this.currentTags.push(this.tagList[index]);
+            // if the section is blog and you ain't trusted
+            if (this.sectionIDList.indexOf(this.blog.section) < 0) {
+              this.errorMsg = "Not allowed to edit this.";
+              this.disableSubmit = true;
+              return;
             }
-            this.sectionIsBlog = true;
+
+            // if the page is locked and you are either author or admin
+            // or if the page is just not authorlocked
+            if (!this.blog.authorlock || (this.blog.authorlock && ((this.blog.author.indexOf(this.user.id) > -1) || this.user.group == 'admin'))) {
+              this.pageForm.get('title').setValue(this.blog.title);
+              this.pageForm.get('body').setValue(this.blog.body);
+              this.pageForm.get('section').setValue(this.blog.section);
+              this.pageForm.get('seoDesc').setValue(this.blog.description);
+              this.pageForm.get('imgURL').setValue(this.blog.image);
+              this.pageForm.get('authorLock').setValue(this.blog.authorlock);
+
+              for (let tag of this.blog.tags) {
+                let index = this.tagIDList.indexOf(tag);
+                // if the tag is deleted from the database for whatever reason
+                // there's no reason to keep it
+                if (index != -1) {
+                  this.currentTags.push(this.tagList[index]);
+                }
+                this.sectionIsBlog = true;
+              }
+              if (this.blog.author.length > 1) { // we've established you're allowed to be here sooo
+                this.disableAuthorLock = true;
+              }
+
+            }
+            else {
+              this.errorMsg = "Not allowed to edit this.";
+              this.disableSubmit = true;
+              return;
+            }
+          },
+          error: error => {
+            this.errorMsg = this.errorService.errorMessage(error);
           }
-          if(this.blog.author.length > 1) { // we've established you're allowed to be here sooo
-            this.disableAuthorLock = true;
-          }
-          
-       }
-       else {
-        this.errorMsg = "Not allowed to edit this.";
-        this.disableSubmit = true;
-        return;
-       }
-      },
-        error: error => {
-          this.errorMsg = this.errorService.errorMessage(error);
-        }}
-      );
+        }
+        );
       return;
     }
   }
 
+  customLink(markdown: string): string {
+    let section = this.section;
+
+    return markdown.replace(/\[\[([^\]]+)\]\]/g, function (allPattern, link) {
+      let text =     link.replace(/\|([^\|]+)/, "").split("|")[0]
+      let category = link.replace(/([^\|]+)\|/, "")
+      let page =     category.split('|')
+      if (page.length > 1) {
+        category = page[1]
+        page = page[0];
+      }
+      else {
+        page = text;
+      }
+
+      switch (category) {
+        case "t":
+          category = "traits"
+          break;
+        case "e":
+          category = "effects"
+          break;
+        case "i":
+          category = "items"
+          break;
+        case "b":
+          category = "books"
+          break;
+        case "p":
+          category = "properties"
+          break;
+      }
+
+      link = slugify(page, {
+        replacement: '-',
+        remove: undefined,
+        lower: true,
+        strict: true,
+        locale: 'en'
+      });
+      if (category != text) return `[${text}](/${section}/${category}/${link})`;
+      return `[${text}](/${section}/${link})`;
+    })
+  }
+
   slug(title: string): string {
-    return slugify(title, { 
-      replacement: '-', 
+    return slugify(title, {
+      replacement: '-',
       remove: undefined,
       lower: true,
       strict: true,

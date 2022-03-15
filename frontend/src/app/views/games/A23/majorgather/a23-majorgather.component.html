@@ -1,0 +1,158 @@
+<Error *ngIf="error" [errorCode]="error"></Error>
+<div *ngIf="!error">
+    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Major Gathering Spots'"></Breadcrumb>
+    <h1>Major Gathering Spots</h1>
+    <div style="justify-content: space-between; margin-left: 0.5em; margin-right: 0.5em;" class="row">
+        <div class="table-of-contents">
+            <b>Table of Contents</b>
+            <ol class="toc-list">
+                <li>
+                    <a href="/{{gameURL}}/major-gathering/{{language}}#sickle"
+                        (click)="$event.preventDefault();scroll('sickle')">Sickle <i class="atelier atelier-sm atelier-ryza2-tool-sickle"></i></a>
+                </li>
+                <li>
+                    <a href="/{{gameURL}}/major-gathering/{{language}}#fish"
+                        (click)="$event.preventDefault();scroll('fish')">Fish <i class="atelier atelier-sm atelier-ryza2-tool-fishing-rod"></i></a>
+                </li>
+                <li>
+                    <a href="/{{gameURL}}/major-gathering/{{language}}#net"
+                        (click)="$event.preventDefault();scroll('net')">Bug Net <i class="atelier atelier-sm atelier-ryza2-tool-bug-net"></i></a>
+                </li>
+                <li>
+                    <a href="/{{gameURL}}/major-gathering/{{language}}#pickaxe"
+                        (click)="$event.preventDefault();scroll('pickaxe')">Pickaxe <i class="atelier atelier-sm atelier-sophie2-tool-pickaxe"></i></a>
+                </li>
+                <li>
+                    <a href="/{{gameURL}}/major-gathering/{{language}}#shot"
+                        (click)="$event.preventDefault();scroll('shot')">Slingshot <i class="atelier atelier-sm atelier-sophie2-tool-slingshot"></i></a>
+                </li>
+                <li>
+                    <a href="/{{gameURL}}/major-gathering/{{language}}#hammer"
+                        (click)="$event.preventDefault();scroll('hammer')">Hammer <i class="atelier atelier-sm atelier-sophie2-tool-hammer"></i></a>
+                </li>
+            </ol>
+        </div>
+        <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
+    </div>
+    <h2 id="sickle">Sickle <i class="atelier atelier-ryza2-tool-sickle"></i></h2>
+    <table class="tbl table-shrink table-border">
+        <tr style="text-align:center;">
+            <th>Area</th>
+            <th><i class="fas fa-star"></i></th>
+            <th><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
+            <th><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
+        </tr>
+        <tr *ngFor="let thing of major.sickle">
+            <td>{{thing.region}}
+                <i *ngIf="thing.weather == 'sun'"     class="fas fa-sun"></i>
+                <i *ngIf="thing.weather == 'rain'"    class="fas fa-tint"></i>
+                <i *ngIf="thing.weather == 'snow'"    class="fas fa-snowflake"></i>
+                <i *ngIf="thing.weather == 'thunder'" class="fas fa-bolt"></i>
+                <br />{{thing.area}}</td>
+            <td *ngFor="let item of thing.items">
+                <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
+            </td>
+        </tr>
+    </table>
+    <h2 id="fish">Fishing Rod <i class="atelier atelier-ryza2-tool-fishing-rod"></i></h2>
+    <table class="tbl table-shrink table-border">
+        <tr style="text-align:center;">
+            <th>Area</th>
+            <th><i class="fas fa-star"></i></th>
+            <th><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
+            <th><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
+        </tr>
+        <tr *ngFor="let thing of major.fish">
+            <td>{{thing.region}}
+                <i *ngIf="thing.weather == 'sun'"     class="fas fa-sun"></i>
+                <i *ngIf="thing.weather == 'rain'"    class="fas fa-tint"></i>
+                <i *ngIf="thing.weather == 'snow'"    class="fas fa-snowflake"></i>
+                <i *ngIf="thing.weather == 'thunder'" class="fas fa-bolt"></i>
+                <br />{{thing.area}}
+            </td>
+            <td *ngFor="let item of thing.items">
+                <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
+            </td>
+        </tr>
+    </table>
+    <h2 id="net">Bug Net <i class="atelier atelier-ryza2-tool-bug-net"></i></h2>
+    <table class="tbl table-shrink table-border">
+        <tr style="text-align:center;">
+            <th>Area</th>
+            <th><i class="fas fa-star"></i></th>
+            <th><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
+            <th><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
+        </tr>
+        <tr *ngFor="let thing of major.net">
+            <td>{{thing.region}}
+                <i *ngIf="thing.weather == 'sun'"     class="fas fa-sun"></i>
+                <i *ngIf="thing.weather == 'rain'"    class="fas fa-tint"></i>
+                <i *ngIf="thing.weather == 'snow'"    class="fas fa-snowflake"></i>
+                <i *ngIf="thing.weather == 'thunder'" class="fas fa-bolt"></i>
+                <br />{{thing.area}}</td>
+            <td *ngFor="let item of thing.items">
+                <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
+            </td>
+        </tr>
+    </table>
+    <h2 id="pickaxe">Pickaxe <i class="atelier atelier-sophie2-tool-pickaxe"></i></h2>
+    <table class="tbl table-shrink table-border">
+        <tr style="text-align:center;">
+            <th>Area</th>
+            <th><i class="fas fa-star"></i></th>
+            <th><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
+            <th><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
+        </tr>
+        <tr *ngFor="let thing of major.pickaxe">
+            <td>{{thing.region}}
+                <i *ngIf="thing.weather == 'sun'"     class="fas fa-sun"></i>
+                <i *ngIf="thing.weather == 'rain'"    class="fas fa-tint"></i>
+                <i *ngIf="thing.weather == 'snow'"    class="fas fa-snowflake"></i>
+                <i *ngIf="thing.weather == 'thunder'" class="fas fa-bolt"></i>
+                <br />{{thing.area}}</td>
+            <td *ngFor="let item of thing.items">
+                <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
+            </td>
+        </tr>
+    </table>
+    <h2 id="slingshot">Slingshot <i class="atelier atelier-sophie2-tool-slingshot"></i></h2>
+    <table class="tbl table-shrink table-border">
+        <tr style="text-align:center;">
+            <th>Area</th>
+            <th><i class="fas fa-star"></i></th>
+            <th><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
+            <th><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
+        </tr>
+        <tr *ngFor="let thing of major.shot">
+            <td>{{thing.region}}
+                <i *ngIf="thing.weather == 'sun'"     class="fas fa-sun"></i>
+                <i *ngIf="thing.weather == 'rain'"    class="fas fa-tint"></i>
+                <i *ngIf="thing.weather == 'snow'"    class="fas fa-snowflake"></i>
+                <i *ngIf="thing.weather == 'thunder'" class="fas fa-bolt"></i>
+                <br />{{thing.area}}</td>
+            <td *ngFor="let item of thing.items">
+                <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
+            </td>
+        </tr>
+    </table>
+    <h2 id="hammer">Hammer <i class="atelier atelier-sophie2-tool-hammer"></i></h2>
+    <table class="tbl table-shrink table-border">
+        <tr style="text-align:center;">
+            <th>Area</th>
+            <th><i class="fas fa-star"></i></th>
+            <th><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
+            <th><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
+        </tr>
+        <tr *ngFor="let thing of major.hammer">
+            <td>{{thing.region}}
+                <i *ngIf="thing.weather == 'sun'"     class="fas fa-sun"></i>
+                <i *ngIf="thing.weather == 'rain'"    class="fas fa-tint"></i>
+                <i *ngIf="thing.weather == 'snow'"    class="fas fa-snowflake"></i>
+                <i *ngIf="thing.weather == 'thunder'" class="fas fa-bolt"></i>
+                <br />{{thing.area}}</td>
+            <td *ngFor="let item of thing.items">
+                <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -62,6 +62,7 @@ export interface GatherNode {
     kind: string;
     tool: string;
     items: GatherItem[];
+    major: boolean;
 }
 
 export interface Climate {
@@ -239,4 +240,20 @@ export interface RecipeIdea {
     ver: boolean;
     char: string;
     item: Item;
+}
+
+export interface MajorGather {
+    fish: MajorNode[];
+    net: MajorNode[];
+    hammer: MajorNode[];
+    sickle: MajorNode[];
+    shot: MajorNode[];
+    pickaxe: MajorNode[];
+}
+
+export interface MajorNode {
+    region: string;
+    area: string;
+    items: NameLink[];
+    weather: string;
 }

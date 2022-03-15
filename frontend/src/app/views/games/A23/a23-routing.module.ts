@@ -66,6 +66,15 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'major-gathering',
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A23/majorgather/a23-majorgather.module').then(m=>m.A23MajorGatherModule),
+      },
+    ]
+  },
+  {
     path: '',
     redirectTo: '/sophie2/faq',
     pathMatch: 'full'
