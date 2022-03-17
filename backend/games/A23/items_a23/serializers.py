@@ -1,3 +1,4 @@
+from unicodedata import name
 from rest_framework import serializers
 from collections import OrderedDict
 from games.A23.items_a23.models import Item, Category, Book, Equip, Component, RecipeText, RecipeIdea, EffectData, EffectLines, Ingredient
@@ -321,12 +322,13 @@ class A23ItemSerializer(serializers.ModelSerializer):
     effects = A23EffectLinesSerializer(many=True, source='effectlines_set')
     shop = serializers.SerializerMethodField()
     chest = A23ChestSerializer(many=True, source="chest2_set")
+    seed = A23ItemNameSerializer(source="from_seed")
     class Meta:
         model = Item
         fields = ['slug', 'name', 'kind', 'level','price','shop','chest',
                   'wt','range','quantity','uses','ingredient',
                   'categories', 'add', 'locations', 'chars','equip','effects',
-                  'book','monsters','components','traits','ideas',
+                  'book','monsters','components','traits','ideas','seed',
                   'desc1', 'desc2', 'desc3', 'desc4',
                   'char1', 'char2', 'char3', 'char4', 'char']
 
@@ -538,3 +540,27 @@ class A23RecipeIdeaSerializer(serializers.ModelSerializer):
     class Meta:
         model = RecipeIdea
         fields = ['row', 'col', 'hor', 'ver', 'char', 'item']
+        
+class A23SeedSerializer(serializers.ModelSerializer):
+    name = serializers.SerializerMethodField()
+    slug = serializers.SerializerMethodField()
+    items = A23ItemNameSerializer(source='seedset', many=True)
+    class Meta:
+        model = Item
+        fields = ['name', 'slug', 'items']
+        
+    def get_name(self,obj):
+        if 'language' not in self.context:
+            return obj.item_en.name
+        if self.context['language'] == 'ja':
+            return obj.item_ja.name
+        if self.context['language'] == 'ko':
+            return obj.item_ko.name
+        if self.context['language'] == 'sc':
+            return obj.item_sc.name
+        if self.context['language'] == 'tc':
+            return obj.item_tc.name
+        else:
+            return obj.item_en.name
+    def get_slug(self,obj):
+        return obj.slug

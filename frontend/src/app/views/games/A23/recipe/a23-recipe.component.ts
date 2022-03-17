@@ -104,7 +104,7 @@ constructor(
         this.seoURL = `${this.gameURL}/recipe-ideas/${this.language}`;
         this.seoTitle = `Recipe Ideas - ${this.gameTitle}`;
         this.seoDesc = `All recipe ideas in ${this.gameTitle}`
-        this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+        this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage, true);
     },
     error: error => {
       this.error =`${error.status}`;

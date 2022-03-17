@@ -79,6 +79,7 @@
         </li>
       </ul>
       <p *ngIf="item.book"><b>Book: </b> <a routerLink="/{{gameURL}}/items/books/{{item.book[0].slug}}/{{language}}">{{item.book[0].name}}</a></p>
+      <p *ngIf="item.seed"><b>Seed: </b> <a routerLink="/{{gameURL}}/items/{{item.seed.slug}}/{{language}}">{{item.seed.name}}</a></p>
       <p *ngIf="item.chest"><b>Chest: </b>{{item.chest[0].region}} &gt; {{item.chest[0].subregion}}</p>
       <p *ngIf="item.shop"><b>Shop: </b>{{item.shop}}</p>
       <b *ngIf="item.locations" >Location:</b>

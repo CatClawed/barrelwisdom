@@ -50,7 +50,7 @@ export class A23MajorGatherComponent implements OnInit {
     this.seoURL = `${this.gameURL}/major-gathering/${this.language}`;
     this.seoTitle = `Major Gathering Spots - ${this.gameTitle}`;
     this.seoDesc = `All major gathering items in ${this.gameTitle}`
-    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, '');
+    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, '', true);
   }
 
   ngAfterViewInit(): void {

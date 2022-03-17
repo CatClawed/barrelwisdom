@@ -81,6 +81,8 @@ class Item(models.Model):
     wt = models.IntegerField(null=True, blank=True)
     range = models.CharField(max_length=15, null=True, blank=True)
     components = models.ManyToManyField(Component)
+    from_seed = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True, related_name="seedset")
+    isDLC = models.BooleanField(default=False)
     class Meta:
         ordering = ['index']
 
@@ -95,6 +97,7 @@ class Book(models.Model):
     items = models.ManyToManyField(Item)
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE, null=True, blank=True)
     index = models.IntegerField()
+    isDLC = models.BooleanField(default=False)
     class Meta:
         ordering = ['index']
 

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
-import { Trait, Effect, Region, Monster, Category, Item, Book, RecipeIdea, MajorGather } from '@app/interfaces/a23';
+import { Trait, Effect, Region, Monster, Category, Item, Book, RecipeIdea, MajorGather, Seed } from '@app/interfaces/a23';
 
 
 @Injectable({ providedIn: 'root' })
@@ -74,6 +74,10 @@ export class A23Service {
 
   getMajorGather(language: string): Observable<MajorGather> {
     return this.http.get<MajorGather>(`${environment.apiUrl}/A23/majorgather/${language}/`);
+  }
+
+  getSeeds(language: string): Observable<Seed[]> {
+    return this.http.get<Seed[]>(`${environment.apiUrl}/A23/seed/${language}/`);
   }
 
 }

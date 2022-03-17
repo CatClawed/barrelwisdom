@@ -12,7 +12,7 @@ export class SeoService {
       private metaService: Meta,
       private titleService: Title) { }
 
-    SEOSettings(url: string, title: string, description: string, image:string) {
+    SEOSettings(url: string, title: string, description: string, image:string, snippet?:boolean) {
         this.createCanonicalURL(url);
 
         if(title) {
@@ -39,6 +39,12 @@ export class SeoService {
         }
         else {
             this.metaService.updateTag({ property: `og:image`, content: `https://barrelwisdom.com/media/main/barrel.webp` }, `property="og:image"`);
+        }
+        if (snippet) { // heck google
+            this.metaService.updateTag({ property: `robots`, content: `index, follow, archive, max-snippet=-1` }, `property="og:title"`);
+        }
+        else {
+            this.metaService.updateTag({ property: `robots`, content: `index, follow, archive` }, `property="og:title"`);
         }
     }
 

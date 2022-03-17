@@ -1,0 +1,91 @@
+<Error *ngIf="error" [errorCode]="error"></Error>
+
+<ng-container *ngIf="seeds">
+    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Seeds"></Breadcrumb>
+    <h1>Seeds</h1>
+    <language-settings style="margin-top: 1em;" class="col-md-3" section="{{gameURL}}"></language-settings>
+    <p><b>Key things to know:</b></p>
+    <ul>
+        <li>The better your seed's rank (quality + traits), the rarer the items you get.</li>
+        <li>Seed grown items may have effects, such as Synth Quantity +1 or (Element) Lv. +2, and so on.</li>
+        <li>The traits you get are determined by the traits on your seeds. If you want high grade traits, make seeds
+            with high grade traits and get Trait Harvester XXL. This allows you to get traits with 10 grade above what
+            is on your seed. What's grade? A hidden value every trait has; the values are listed <a routerLink="/{{gameURL}}/traits/{{language}}">here</a>.</li>
+        <li>Need more greenhouses? Grow more seeds. I didn't count, but it should be less than 20 for all four.</li>
+    </ul>
+    <div class="mx-auto row">
+        <div class="col-md-6">
+            <table class="tbl border table-shrink">
+                <tr class="table-dark-center">
+                    <th><a routerLink="/{{gameURL}}/items/{{seeds[0].slug}}/{{language}}">{{seeds[0].name}}</a></th>
+                    <th><a routerLink="/{{gameURL}}/items/{{seeds[1].slug}}/{{language}}">{{seeds[1].name}}</a></th>
+                </tr>
+                <tr>
+                    <td>
+                        <ul style="list-style:none;padding-left:0;">
+                            <li *ngFor="let item of seeds[0].items"><a
+                                    routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul style="list-style:none;padding-left:0;">
+                            <li *ngFor="let item of seeds[1].items"><a
+                                    routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <table class="tbl border table-shrink">
+                <tr class="table-dark-center">
+                    <th><a routerLink="/{{gameURL}}/items/{{seeds[2].slug}}/{{language}}">{{seeds[2].name}}</a></th>
+                    <th><a routerLink="/{{gameURL}}/items/{{seeds[3].slug}}/{{language}}">{{seeds[3].name}}</a></th>
+                </tr>
+                <tr>
+                    <td>
+                        <ul style="list-style:none;padding-left:0;">
+                            <li *ngFor="let item of seeds[2].items"><a
+                                    routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul style="list-style:none;padding-left:0;">
+                            <li *ngFor="let item of seeds[3].items"><a
+                                    routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="mx-auto row">
+        <table class="tbl border table-shrink">
+            <tr class="table-dark-center">
+                <th><a routerLink="/{{gameURL}}/items/{{seeds[4].slug}}/{{language}}">{{seeds[4].name}}</a></th>
+                <th><a routerLink="/{{gameURL}}/items/{{seeds[5].slug}}/{{language}}">{{seeds[5].name}}</a></th>
+                <th><a routerLink="/{{gameURL}}/items/{{seeds[6].slug}}/{{language}}">{{seeds[6].name}}</a></th>
+            </tr>
+            <tr>
+                <td>
+                    <ul style="list-style:none;padding-left:0;">
+                        <li *ngFor="let item of seeds[4].items"><a
+                                routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul style="list-style:none;padding-left:0;">
+                        <li *ngFor="let item of seeds[5].items"><a
+                                routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul style="list-style:none;padding-left:0;">
+                        <li *ngFor="let item of seeds[6].items"><a
+                                routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+</ng-container>

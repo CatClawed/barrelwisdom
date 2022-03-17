@@ -75,6 +75,15 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'seeds',
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A23/seed/a23-seed.module').then(m=>m.A23SeedModule),
+      },
+    ]
+  },
+  {
     path: '',
     redirectTo: '/sophie2/faq',
     pathMatch: 'full'

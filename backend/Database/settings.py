@@ -9,7 +9,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['barrelwisdom.com', 'localhost', '127.0.0.1', '159.65.240.56']
+ALLOWED_HOSTS = ['barrelwisdom.com', 'localhost', '127.0.0.1']#, '159.65.240.56']
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
@@ -125,9 +125,12 @@ MIDDLEWARE = [
 ]
 
 if DEBUG:
+    SESSION_ENGINE = 'django.contrib.sessions.backends.db'
     ALLOWED_HOSTS = ['*'] 
     INSTALLED_APPS.append('debug_toolbar')
     MIDDLEWARE.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
+    MIDDLEWARE.remove('django.middleware.cache.UpdateCacheMiddleware')
+    MIDDLEWARE.remove('django.middleware.cache.FetchFromCacheMiddleware')
 
 INTERNAL_IPS = [
     '127.0.0.1',

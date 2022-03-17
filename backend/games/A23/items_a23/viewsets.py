@@ -1,6 +1,6 @@
 from rest_framework import viewsets, filters
 from games.A23.items_a23.models import Item, Book, Category, RecipeIdea
-from games.A23.items_a23.serializers import A23ItemSerializer, A23ItemListSerializer, A23CategorySerializer, A23BookSerializer, A23CategoryItemSerializer, A23RecipeIdeaSerializer
+from games.A23.items_a23.serializers import A23ItemSerializer, A23ItemListSerializer, A23CategorySerializer, A23BookSerializer, A23CategoryItemSerializer, A23RecipeIdeaSerializer, A23SeedSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
@@ -276,7 +276,8 @@ class A23ItemViewSet(viewsets.ModelViewSet):
                     'equip',
                     'char',
                     'equip',
-                    'characterequip'
+                    'characterequip',
+                    'from_seed__item_en',
                 )
                 .prefetch_related(
                     'categories',
@@ -331,7 +332,8 @@ class A23ItemViewSet(viewsets.ModelViewSet):
                     'equip',
                     'char',
                     'equip',
-                    'characterequip'
+                    'characterequip',
+                    'from_seed__item_ja',
                 )
                 .prefetch_related(
                     'categories',
@@ -386,7 +388,8 @@ class A23ItemViewSet(viewsets.ModelViewSet):
                     'equip',
                     'char',
                     'equip',
-                    'characterequip'
+                    'characterequip',
+                    'from_seed__item_ko',
                 )
                 .prefetch_related(
                     'categories',
@@ -441,7 +444,8 @@ class A23ItemViewSet(viewsets.ModelViewSet):
                     'equip',
                     'char',
                     'equip',
-                    'characterequip'
+                    'characterequip',
+                    'from_seed__item_sc',
                 )
                 .prefetch_related(
                     'categories',
@@ -496,7 +500,8 @@ class A23ItemViewSet(viewsets.ModelViewSet):
                     'equip',
                     'char',
                     'equip',
-                    'characterequip'
+                    'characterequip',
+                    'from_seed__item_tc',
                 )
                 .prefetch_related(
                     'categories',
@@ -608,4 +613,84 @@ class A23RecipeViewSet(viewsets.ModelViewSet):
             )
         )
         serializer = A23RecipeIdeaSerializer(queryset, many=True, context={'language': 'tc'})
+        return Response(serializer.data)
+    
+class A23SeedViewSet(viewsets.ModelViewSet):
+    queryset = Item.objects.filter(categories__slug='seeds')
+    serializer_class = A23SeedSerializer
+    filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
+
+    @action(detail=False)
+    def en(self, request): 
+        queryset = (
+            Item.objects
+            .select_related(
+                'item_en',
+            )
+            .prefetch_related(
+                'seedset__item_en'
+            )
+            .filter(categories__slug='seeds')
+        )
+        serializer = A23SeedSerializer(queryset, many=True, context={'language': 'en'})
+        return Response(serializer.data)
+    
+    @action(detail=False)
+    def ja(self, request): 
+        queryset = (
+            Item.objects
+            .select_related(
+                'item_ja',
+            )
+            .prefetch_related(
+                'seedset__item_ja'
+            )
+            .filter(categories__slug='seeds')
+        )
+        serializer = A23SeedSerializer(queryset, many=True, context={'language': 'ja'})
+        return Response(serializer.data)
+    
+    @action(detail=False)
+    def ko(self, request): 
+        queryset = (
+            Item.objects
+            .select_related(
+                'item_ko',
+            )
+            .prefetch_related(
+                'seedset__item_ko'
+            )
+            .filter(categories__slug='seeds')
+        )
+        serializer = A23SeedSerializer(queryset, many=True, context={'language': 'ko'})
+        return Response(serializer.data)
+    
+    @action(detail=False)
+    def sc(self, request): 
+        queryset = (
+            Item.objects
+            .select_related(
+                'item_sc',
+            )
+            .prefetch_related(
+                'seedset__item_sc'
+            )
+            .filter(categories__slug='seeds')
+        )
+        serializer = A23SeedSerializer(queryset, many=True, context={'language': 'sc'})
+        return Response(serializer.data)
+    
+    @action(detail=False)
+    def tc(self, request): 
+        queryset = (
+            Item.objects
+            .select_related(
+                'item_tc',
+            )
+            .prefetch_related(
+                'seedset__item_tc'
+            )
+            .filter(categories__slug='seeds')
+        )
+        serializer = A23SeedSerializer(queryset, many=True, context={'language': 'tc'})
         return Response(serializer.data)

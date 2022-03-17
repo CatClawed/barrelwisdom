@@ -230,6 +230,7 @@ export interface Item {
     ing: NameOnly2[];
     shop: string;
     chest: ChestData[];
+    seed: NameLink;
 }
 
 
@@ -256,4 +257,10 @@ export interface MajorNode {
     area: string;
     items: NameLink[];
     weather: string;
+}
+
+export interface Seed {
+    name: string;
+    slug: string;
+    items: NameLink[];
 }

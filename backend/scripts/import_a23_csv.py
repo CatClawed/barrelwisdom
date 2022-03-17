@@ -13,10 +13,31 @@ import sys
 
 with open('scripts/data.txt', newline='', encoding='utf-8') as csvfile:
     reader = csv.reader(csvfile, delimiter='\t')
+    seeds = []
+    index = 0
     for row in reader:
         print(row[0])
+
     
     """
+    for row in reader:
+        
+        if index is 0:
+            for i in range(0,7):
+                it = Item.objects.get(slug=row[i])
+                print("hey fucker")
+                sd = Seed.objects.get(seed=it)
+                seeds.append(sd)
+        else:
+            for i in range(0,7):
+                if row[i]:
+                    print(row[i])
+                    item = Item.objects.get(slug=row[i])
+                    item.from_seed = seeds[i].seed
+                    item.save()
+        index = index + 1
+        
+    
     item = None
         if row[0]:
             item = Item.objects.get(slug=row[0])
