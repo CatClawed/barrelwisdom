@@ -1,18 +1,15 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit, Renderer2, RendererFactory2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Blog } from '@app/interfaces/blog';
 import { User } from '@app/interfaces/user';
 import { AuthenticationService } from '@app/services/authentication.service';
 import { BlogService } from '@app/services/blog.service';
+import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
-import { WINDOW } from '@app/services/window.service';
-import { environment } from '@environments/environment';
 import { MarkdownService } from 'ngx-markdown';
 import { takeUntil } from 'rxjs/operators';
-import { DestroyService } from '@app/services/destroy.service';
 
 @Component({
   templateUrl: 'blog.component.html',
@@ -27,11 +24,6 @@ export class BlogComponent implements OnInit {
   allowedToEdit = false;
   gameName = "";
   breadcrumbs = [];
-  blogParam = '';
-  renderer: Renderer2;
-  change = false;
-  s;
-  backup = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,90 +32,15 @@ export class BlogComponent implements OnInit {
     private blogService: BlogService,
     private authenticationService: AuthenticationService,
     private markdownService: MarkdownService,
-    private seoService: SeoService,
-    private rendererFactory: RendererFactory2,
-    @Inject(DOCUMENT) private dom,
-    @Inject(WINDOW) private window) {
-    this.renderer = this.rendererFactory.createRenderer(null, null);
+    private seoService: SeoService) {
   }
-
 
   ngOnInit(): void {
     this.authenticationService.user.pipe(takeUntil(this.destroy$)).subscribe(x => this.user = x);
     this.route.paramMap.pipe(takeUntil(this.destroy$))
       .subscribe(params => {
-        this.change = false;
-        this.backup = false;
-        this.window.commento = {}
         this.getBlog(params.get('section'), params.get('title'));
       });
-  }
-
-  ngAfterViewInit(): void {
-    this.route.paramMap.subscribe(() => {
-      if (this.window.commento.main !== 'function') {
-        setTimeout(() => { // probably not necessary, who cares
-          this.resetDiv();
-          this.removeCSS();
-          this.removeScript();
-        })
-
-        this.s = this.renderer.createElement('script');
-        this.s.defer = true;
-        this.renderer.setAttribute(this.s, 'data-auto-init', 'false')
-        this.s.src = `${environment.commentoUrl}/js/commento.js`;
-        this.renderer.appendChild(this.dom.head, this.s);
-
-      }
-    });
-  }
-
-  ngAfterViewChecked(): void {
-    let element = this.dom.querySelectorAll('div[id="commento-main-area"]');
-
-    if (element.length === 0 && typeof this.window.commento.main === "function" && !this.change) {
-      this.window.commento.main();
-      this.change = true;
-    }
-    // don't even question it, I give up for now
-    else if (element.length === 0 && typeof this.window.commento.main === "function" && this.change && !this.backup) {
-      this.window.commento.main();
-      this.backup = true;
-    }
-  }
-
-
-  resetDiv() {
-    let element = this.dom.querySelector('div[id="comment"]')
-    if (element) {
-      let child = this.dom.querySelector('div[id="commento"]')
-      this.renderer.removeChild(element, child);
-      let d = this.renderer.createElement('div');
-      d.id = "commento"
-      this.renderer.appendChild(element, d)
-    }
-  }
-
-  insertScript() {
-    let s = this.renderer.createElement('script');
-    s.src = `${environment.commentoUrl}/js/commento.js`;
-    s.defer = true;
-    this.renderer.appendChild(this.dom.head, s);
-  }
-
-
-  removeScript() {
-    let element = this.dom.querySelectorAll(`script[src="${environment.commentoUrl}/js/commento.js"]`);
-    for (let e of element) {
-      this.renderer.removeChild(this.dom.head, e)
-    }
-  }
-
-  removeCSS() {
-    let element = this.dom.querySelectorAll(`link[href="${environment.commentoUrl}/css/commento.css"]`)
-    for (let e of element) {
-      this.renderer.removeChild(this.dom.head, e);
-    }
   }
 
   getBlog(section: string, title: string): void {
@@ -138,7 +55,6 @@ export class BlogComponent implements OnInit {
           if (this.user) {
             if (this.blog.authorlock && this.user.id == this.blog.author[0].id) {
               this.allowedToEdit = true;
-              this.blogParam = `{ id : ${this.blog.id} }`;
             }
             else if (this.user.group == 'admin') {
               this.allowedToEdit = true;

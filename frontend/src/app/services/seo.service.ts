@@ -21,7 +21,7 @@ export class SeoService {
         }
         else {
             this.titleService.setTitle('Barrel Wisdom');
-            this.metaService.updateTag({ property: `og:title`, content: `Barrel Wisdom` },`property="og:title"`);
+            this.metaService.updateTag({ name: `og:title`, content: `Barrel Wisdom` },`property="og:title"`);
 
         }
         if(description) {
@@ -33,18 +33,20 @@ export class SeoService {
             this.metaService.updateTag({ property: `og:description`, content: "The source for all things Atelier." },`property="og:description"`);
         }
         if(image) {
-            this.metaService.updateTag({ property: `twitter:card`, content: `summary_large_image` }, `property="twitter:card"`);
-            this.metaService.updateTag({ property: `twitter:image`, content: `https://barrelwisdom.com${image}` }, `property="twitter:image"`);
+            this.metaService.updateTag({ name: `twitter:card`, content: `summary_large_image` }, `name="twitter:card"`);
+            this.metaService.updateTag({ name: `twitter:image`, content: `https://barrelwisdom.com${image}` }, `name="twitter:image"`);
             this.metaService.updateTag({ property: `og:image`, content: `https://barrelwisdom.com${image}` }, `property="og:image"`);
         }
         else {
             this.metaService.updateTag({ property: `og:image`, content: `https://barrelwisdom.com/media/main/barrel.webp` }, `property="og:image"`);
+            this.metaService.updateTag({ name: `twitter:card`, content: `summary` }, `name="twitter:card"`);
+            this.metaService.updateTag({ name: `twitter:image`, content: `https://barrelwisdom.com/media/main/barrel.webp` }, `name="twitter:image"`);
         }
-        if (snippet) { // heck google
-            this.metaService.updateTag({ property: `robots`, content: `index, follow, archive, max-snippet=-1` }, `property="og:title"`);
+        if (snippet === true) { // heck google
+            this.metaService.updateTag({ name: `robots`, content: `index, follow, archive, max-snippet=-1` }, `name="robots"`);
         }
-        else {
-            this.metaService.updateTag({ property: `robots`, content: `index, follow, archive` }, `property="og:title"`);
+        if (snippet === undefined || snippet === false) {
+            this.metaService.updateTag({ name: `robots`, content: `index, follow, archive` }, `name="robots"`);
         }
     }
 

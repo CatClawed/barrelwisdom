@@ -126,7 +126,3 @@ npm run dev:ssr
 ```
 npm run prerender
 ```
-
-## Comment module
-
-Commento is used for commenting on the site. I'd very much like to remove it sometime.

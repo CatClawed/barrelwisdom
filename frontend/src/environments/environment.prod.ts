@@ -1,6 +1,5 @@
 export const environment = {
   production: true,
-  commentoUrl: 'https://commento.barrelwisdom.com',
   apiUrl: '/api',
   authUrl: '/auth',
   imageRegex: '/media/',

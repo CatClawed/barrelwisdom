@@ -6,7 +6,7 @@
 <ng-container *ngIf="blog">
     <div *ngFor="let blg of blog.results | pair" class="row flex">
         <div *ngFor="let b of blg" class="col-md-6 mx-auto spacer">
-            <div *ngIf="b" class="card allheight">
+            <div *ngIf="b" class="card" style="height:100%;">
                 <div class="aspect-ratio-box">
                     <a routerLink="/blog/{{b.slugtitle}}">
                         <img loading="lazy" src="{{b.image}}" alt="" role="presentation">

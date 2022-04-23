@@ -20,7 +20,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                         // client-side error
                         console.error(`${error.error.message}`);
                     }
-                    return throwError(error);
+                    return throwError(() => error);
                 }),
             )
     }
