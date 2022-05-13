@@ -18,8 +18,12 @@
         <i *ngIf="item.kind == 'material'"   class="atelier atelier-np atelier-ryza2-material"></i>
         <i *ngIf="item.kind == 'field'"      class="atelier atelier-np atelier-sophie2-type-exploration"></i>
         <i *ngIf="item.kind == 'amulet'"     class="atelier atelier-np atelier-sophie2-category-talismans"></i>
+        <i *ngIf="item.kind == 'important'"  class="atelier atelier-np atelier-ryza2-category-key-items"></i>
         <ng-container *ngIf="item.char">
           <br /><img style="max-height:3em;" src="/media/games/sophie2/characters/{{item.char}}.webp">
+        </ng-container>
+        <ng-container *ngIf="item.isDLC">
+          <br /><span class="badge bg-secondary">DLC</span>
         </ng-container>
       </div>
     <div class="card-item-display">

@@ -7,6 +7,9 @@
     <h4 class="card-title card-icon-space">{{item.name}}</h4>
       <div class="card-icon-position">
         <i  class="atelier atelier-np atelier-ryza2-book"></i>
+        <ng-container *ngIf="item.isDLC">
+          <br /><span class="badge bg-secondary">DLC</span>
+        </ng-container>
       </div>
     <div class="card-item-display">
        <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">

@@ -112,33 +112,37 @@ export class A23TraitlistComponent implements OnInit {
 
   private filterT(value: string, transfer: string): Trait[] {
     let traitlist: Trait[] = this.traits;
+    if (transfer != "1") {
+      traitlist = this.traits.filter(trait => false == (trait.trans_atk == trait.trans_heal == trait.trans_dbf == trait.trans_buff == trait.trans_wpn == trait.trans_arm == trait.trans_acc == trait.trans_tal == trait.trans_syn == trait.trans_exp));
+    }
+
     switch(transfer) {
       case "2":
-        traitlist = this.traits.filter(trait => trait.trans_atk == true);
+        traitlist = traitlist.filter(trait => trait.trans_atk == true);
         break;
       case "3":
-        traitlist = this.traits.filter(trait => trait.trans_heal == true);
+        traitlist = traitlist.filter(trait => trait.trans_heal == true);
         break;
       case "4":
-        traitlist = this.traits.filter(trait => trait.trans_dbf == true);
+        traitlist = traitlist.filter(trait => trait.trans_dbf == true);
         break;
       case "5":
-        traitlist = this.traits.filter(trait => trait.trans_buff == true);
+        traitlist = traitlist.filter(trait => trait.trans_buff == true);
         break;
       case "6":
-        traitlist = this.traits.filter(trait => trait.trans_wpn == true);
+        traitlist = traitlist.filter(trait => trait.trans_wpn == true);
         break;
       case "7":
-        traitlist = this.traits.filter(trait => trait.trans_arm == true);
+        traitlist = traitlist.filter(trait => trait.trans_arm == true);
         break;
       case "8":
-        traitlist = this.traits.filter(trait => trait.trans_acc == true);
+        traitlist = traitlist.filter(trait => trait.trans_acc == true);
         break;
       case "9":
-        traitlist = this.traits.filter(trait => trait.trans_tal == true);
+        traitlist = traitlist.filter(trait => trait.trans_tal == true);
         break;
       case "10":
-        traitlist = this.traits.filter(trait => trait.trans_exp == true);
+        traitlist = traitlist.filter(trait => trait.trans_exp == true);
         break;
     }
     if(!value) {

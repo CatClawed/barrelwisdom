@@ -28,6 +28,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
     config: ModalOptions = { class: "col-md-5 mx-auto" };
     categories: NameLink[];
     selectedCat = "Any";
+    selectedKind = "Any";
   
     seoTitle: string;
     seoDesc: string;
@@ -54,6 +55,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
       this.pageForm = this.formBuilder.group({
         filtertext: this.itemControl,
         filtering: this.ingControl,
+        cat: ['Any'],
         kind: ['Any'],
       })
     }
@@ -90,7 +92,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
           this.items = items;
           this.filteredItems = this.pageForm.valueChanges.pipe(
             startWith(null as Observable<Item[]>),
-            map((search: any) => search ? this.filterT(search.filtertext, search.kind, search.filtering) : this.items.slice())
+            map((search: any) => search ? this.filterT(search.filtertext, search.cat, search.filtering, search.kind) : this.items.slice())
           );
         },
         error: error => {
@@ -130,12 +132,16 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
         }})
     }
 
-    private filterT(value: string, kind: string, ingt: string): Item[] {  
+    private filterT(value: string, cat: string, ingt: string, kind: string): Item[] {  
       let list: Item[] = this.items;
 
-      if(kind != 'Any') {
-          list = list.filter(item => item.categories.some(c => c.name == kind) || (item.add ? item.add.some(c => c.name == kind) : false ));
+      if(cat != 'Any') {
+          list = list.filter(item => item.categories.some(c => c.name == cat) || (item.add ? item.add.some(c => c.name == cat) : false ));
       }
+
+      if(kind != 'Any') {
+        list = list.filter(item => item.kind == kind)
+    }
 
       if(ingt) {
           const filterValue = (this.language == 'en') ? ingt.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "") : ingt;

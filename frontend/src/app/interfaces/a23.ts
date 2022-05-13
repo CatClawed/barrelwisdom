@@ -3,6 +3,12 @@ export interface NameLink {
     name: string;
 }
 
+export interface CatNameLink {
+    slug: string;
+    name: string;
+    isDLC: boolean;
+}
+
 export interface NameOnly {
     ing: string;
 }
@@ -131,9 +137,9 @@ export interface Category {
     slug: string;
     name: string;
     icon: string;
-    items: NameLink[];
+    items: CatNameLink[];
     used: Ingredient[];
-    add: NameLink[];
+    add: CatNameLink[];
 }
 
 export interface ChestData {
@@ -148,6 +154,7 @@ export interface Book {
     note: string;
     items: NameLink[];
     chest: ChestData[];
+    isDLC: boolean;
 }
 
 export interface Equip {
@@ -173,7 +180,7 @@ export interface SynthItem {
 export interface Ingredient {
     quantity: number;
     cat: Category;
-    item: NameLink;
+    item: CatNameLink;
     synth: SynthItem;
 }
 
@@ -231,6 +238,7 @@ export interface Item {
     shop: string;
     chest: ChestData[];
     seed: NameLink;
+    isDLC: boolean;
 }
 
 

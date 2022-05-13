@@ -13,13 +13,27 @@ import sys
 
 with open('scripts/data.txt', newline='', encoding='utf-8') as csvfile:
     reader = csv.reader(csvfile, delimiter='\t')
-    seeds = []
-    index = 0
+
     for row in reader:
         print(row[0])
 
     
     """
+     i=15
+        for j in range(0,4): # I'm glad I neatened this out
+            adv = AdvData(
+                baseAtt=row[14] if j==0 and row[14] else None,
+                attTag0=row[i+j*6] if row[i+j*6] else None,
+                actTag0=row[i+1+j*6] if row[i+1+j*6] else None,
+                min_1_0=row[i+2+j*6] if row[i+2+j*6] else None,
+                max_1_0=row[i+3+j*6] if row[i+3+j*6] else None,
+                min_2_0=row[i+4+j*6] if row[i+4+j*6] else None,
+                max_2_0=row[i+5+j*6] if row[i+5+j*6] else None,
+            )
+            adv.save()
+            o.advanced.add(adv)
+            o.save()
+            
     for row in reader:
         
         if index is 0:

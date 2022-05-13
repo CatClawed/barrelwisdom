@@ -190,7 +190,7 @@ class A23ItemListSerializer(serializers.ModelSerializer):
     ing = A23IngredientNameSerializer(many=True, source='ingredients')
     class Meta:
         model = Item
-        fields = ['slug', 'name', 'categories','add', 'kind', 'ing']
+        fields = ['slug', 'name', 'categories','add', 'kind', 'ing', 'isDLC']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -325,7 +325,7 @@ class A23ItemSerializer(serializers.ModelSerializer):
     seed = A23ItemNameSerializer(source="from_seed")
     class Meta:
         model = Item
-        fields = ['slug', 'name', 'kind', 'level','price','shop','chest',
+        fields = ['slug', 'name', 'kind', 'level','price','shop','chest','isDLC',
                   'wt','range','quantity','uses','ingredient',
                   'categories', 'add', 'locations', 'chars','equip','effects',
                   'book','monsters','components','traits','ideas','seed',
@@ -441,7 +441,7 @@ class A23BookSerializer(serializers.ModelSerializer):
     chest = A23ChestSerializer(many=True, source="chest2_set")
     class Meta:
         model = Book
-        fields = ['slug', 'name', 'items', 'note', 'shop', 'chest']
+        fields = ['slug', 'name', 'items', 'note', 'shop', 'chest', 'isDLC']
 
     def get_name(self,obj):
         if 'language' not in self.context:

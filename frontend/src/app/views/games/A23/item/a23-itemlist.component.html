@@ -13,7 +13,7 @@
       </mat-form-field>
       <mat-form-field class="col-md-4" appearance="outline">
         <mat-label>Category</mat-label>
-        <mat-select matNativeControl formControlName="kind" disableOptionCentering="true" class="mat-select-icon" [(value)]="selectedCat">
+        <mat-select matNativeControl formControlName="cat" disableOptionCentering="true" class="mat-select-icon" [(value)]="selectedCat">
           <mat-option value="Any" selected><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"   ></mat-icon> Any</mat-option>
           <mat-option *ngFor="let cat of categories" value="{{cat.name}}">
               <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-{{cat.icon}}"></mat-icon>
@@ -30,6 +30,39 @@
         <mat-form-field class="col-md-5" appearance="outline">
             <mat-label>Has ingredient...</mat-label>
             <input style="height: 100%;" matInput formControlName="filtering">
+          </mat-form-field>
+          <mat-form-field class="col-md-4" appearance="outline">
+            <mat-label>Type</mat-label>
+            <mat-select matNativeControl formControlName="kind" disableOptionCentering="true" class="mat-select-icon" [(value)]="selectedKind">
+              <mat-option value="Any" selected><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"   ></mat-icon> Any</mat-option>
+              <mat-option value="attack"     ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-attack"></mat-icon>Attack</mat-option>
+              <mat-option value="heal"       ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-heal"></mat-icon>Heal</mat-option>
+              <mat-option value="debuffer"   ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-debuff"></mat-icon>Debuff</mat-option>
+              <mat-option value="buffer"     ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-buff"></mat-icon>Buff</mat-option>
+              <mat-option value="weapon"     ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-weapon"></mat-icon>Weapon</mat-option>
+              <mat-option value="armor"      ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-armor"></mat-icon>Armor</mat-option>
+              <mat-option value="accessory"  ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-accessory"></mat-icon>Accessory</mat-option>
+              <mat-option value="mix"        ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-synthesis"></mat-icon>Synthesis</mat-option>
+              <mat-option value="material"   ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-material"></mat-icon>Material</mat-option>
+              <mat-option value="field"      ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-type-exploration"></mat-icon>Exploration</mat-option>
+              <mat-option value="amulet"     ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-category-talismans"></mat-icon>Talisman</mat-option>
+              <mat-option value="important"  ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-category-key-items"></mat-icon>Key Item</mat-option>
+              <mat-select-trigger>
+                <span *ngIf="selectedKind == 'Any'"       >Any</span>
+                <span *ngIf="selectedKind == 'attack'"    >Attack</span>
+                <span *ngIf="selectedKind == 'heal'"      >Heal</span>
+                <span *ngIf="selectedKind == 'debuffer'"  >Debuff</span>
+                <span *ngIf="selectedKind == 'buffer'"    >Buff</span>
+                <span *ngIf="selectedKind == 'weapon'"    >Weapon</span>
+                <span *ngIf="selectedKind == 'armor'"     >Armor</span>
+                <span *ngIf="selectedKind == 'accessory'" >Accessory</span>
+                <span *ngIf="selectedKind == 'mix'"       >Synthesis</span>
+                <span *ngIf="selectedKind == 'material'"  >Material</span>
+                <span *ngIf="selectedKind == 'field'"     >Exploration</span>
+                <span *ngIf="selectedKind == 'amulet'"    >Talisman</span>
+                <span *ngIf="selectedKind == 'important'" >Key Item</span>
+              </mat-select-trigger>
+            </mat-select>
           </mat-form-field>
       </div> 
     </form>
@@ -51,6 +84,10 @@
       <i *ngIf="it.kind == 'material'"   class="atelier atelier-np atelier-ryza2-material"></i>
       <i *ngIf="it.kind == 'field'"      class="atelier atelier-np atelier-sophie2-type-exploration"></i>
       <i *ngIf="it.kind == 'amulet'"     class="atelier atelier-np atelier-sophie2-category-talismans"></i>
+      <i *ngIf="it.kind == 'important'"  class="atelier atelier-np atelier-ryza2-category-key-items"></i>
+      <ng-container *ngIf="it.isDLC">
+        <br /><span class="badge bg-secondary">DLC</span>
+      </ng-container>
     </div>
     <a class="card-item-display" (click)="openModal(itemModal, it.slug, $event);" href="/{{gameURL}}/items/{{it.slug}}/{{language}}">
       <img loading="lazy" src="{{imgURL}}items/{{it.slug}}.webp" alt="{{it.name}}">

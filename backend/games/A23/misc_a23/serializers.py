@@ -52,7 +52,7 @@ class A23ItemNameSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Item
-        fields = ['slug', 'name']
+        fields = ['slug', 'name', 'isDLC']
     def to_representation(self, instance):
         result = super(A23ItemNameSerializer, self).to_representation(instance)
         return OrderedDict((k, v) for k, v in result.items() 
