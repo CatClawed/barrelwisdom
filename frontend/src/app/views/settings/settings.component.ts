@@ -18,6 +18,7 @@ import { first, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 export class SettingsComponent {
+  currentSection: string = 'Section'
   profileForm: FormGroup;
   passwordForm: FormGroup;
   sectionForm: FormGroup;
@@ -219,6 +220,7 @@ export class SettingsComponent {
           .subscribe(nav => {
             this.navigationForm.get('section').setValue(nav.section);
             this.navigationForm.get('data').setValue(nav.data);
+            this.currentSection = nav.section;
           });
         }
 

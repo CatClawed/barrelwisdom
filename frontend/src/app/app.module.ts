@@ -9,10 +9,9 @@ import { LayoutComponent } from '@app/containers';
 import { HttpErrorInterceptor } from '@app/interceptor/http-error.intercepter';
 import { JwtInterceptor } from '@app/interceptor/jwt_interceptor';
 import { TransferHttpCacheModule } from '@nguniversal/common';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CookieService } from 'ngx-cookie-service';
 import { MarkdownModule } from 'ngx-markdown';
-import { PerfectScrollbarModule, PerfectScrollbarConfigInterface, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface, PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -31,7 +30,6 @@ const APP_CONTAINERS = [
     BrowserModule.withServerTransition({ appId: 'frontend' }),
     BrowserAnimationsModule,
     PerfectScrollbarModule,
-    BsDropdownModule.forRoot(),
     HttpClientModule,
     MarkdownModule.forRoot({sanitize: SecurityContext.NONE}),
     TransferHttpCacheModule,

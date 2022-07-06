@@ -1,7 +1,7 @@
 <h1>Settings</h1>
 
-<tabset>
-  <tab heading="Profile">
+<mat-tab-group>
+  <mat-tab label="Profile">
     <form [formGroup]="profileForm" (ngSubmit)="submitProfile()">
       <div class="form-group row">
         <label class="col-md-2 col-form-label" for="textarea-input">Bio</label>
@@ -52,8 +52,8 @@
         </div>
       </div>
     </form>
-  </tab>
-  <tab heading="Change Password">
+  </mat-tab>
+  <mat-tab label="Change Password">
     <form [formGroup]="passwordForm" (ngSubmit)="submitPassword()">
       <div class="form-group row">
         <label class="col-md-2 col-form-label" for="text-input">New Password</label>
@@ -96,16 +96,16 @@
         </div>
       </div>
     </form>
-  </tab>
-  <tab *ngIf="user.group == 'admin'" heading="Create Invite">
+  </mat-tab>
+  <mat-tab *ngIf="user.group == 'admin'" label="Create Invite">
     <button (click)="createInvite()" [disabled]="loading" class="btn btn-primary">
       <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
       Create
     </button>
     <div *ngIf="errorInvite" class="text-danger">{{errorInvite}}</div>
     <div *ngIf="invite" class="text-success">{{invite}}</div>
-  </tab>
-  <tab *ngIf="user.group == 'admin'" heading="Create Section">
+  </mat-tab>
+  <mat-tab *ngIf="user.group == 'admin'" label="Create Section">
     <form [formGroup]="sectionForm" (ngSubmit)="createSection()">
       <div class="form-group row">
         <label class="col-md-2 col-form-label" for="text-input">URL Name</label>
@@ -138,20 +138,17 @@
         </div>
       </div>
     </form>
-  </tab>
-  <tab *ngIf="user.group == 'admin'" heading="Nav">
-    <div class="btn-group" dropdown>
-      <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
-              aria-controls="dropdown-basic">
-        Section <span class="caret"></span>
+  </mat-tab>
+  <mat-tab *ngIf="user.group == 'admin'" label="Nav">
+    <button id="button-basic" type="button" class="btn btn-primary dropdown-toggle"
+            aria-controls="dropdown-basic" [matMenuTriggerFor]="section">
+      {{currentSection}} <span class="caret"></span>
+    </button>
+    <mat-menu #section>
+      <button mat-menu-item *ngFor="let section of sections">
+        <a class="dropdown-item" (click)="loadNav(section.name); $event.preventDefault()">{{section.name}}</a>
       </button>
-      <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
-          role="menu" aria-labelledby="button-basic">
-        <li *ngFor="let section of sections" role="menuitem">
-          <a class="dropdown-item" (click)="loadNav(section.name); $event.preventDefault()">{{section.name}}</a>
-        </li>
-      </ul>
-    </div>
+    </mat-menu>
     <form [formGroup]="navigationForm" (ngSubmit)="submitNav()">
       <div class="form-group row">
         <label class="col-md-2 col-form-label" for="text-input">Section</label>
@@ -184,5 +181,5 @@
         </div>
       </div>
     </form>
-  </tab>
-</tabset>
+  </mat-tab>
+</mat-tab-group>
