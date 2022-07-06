@@ -17,7 +17,7 @@ export abstract class ListComponent {
     pageForm: FormGroup;
     error: string = '';
     selected: string = "thing";
-    section: string = "items";
+    section: string = "things";
     language = "";
     config: ModalOptions = { class: "col-md-5 mx-auto" };
 
@@ -32,7 +32,7 @@ export abstract class ListComponent {
 
     constructor(
         protected modalService: BsModalService,
-        protected destroy$: DestroyService,
+        protected readonly destroy$: DestroyService,
         protected router: Router,
         protected route: ActivatedRoute,
         protected location: Location,

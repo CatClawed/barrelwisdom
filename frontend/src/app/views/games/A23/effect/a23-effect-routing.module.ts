@@ -16,7 +16,7 @@ const routes: Routes = [
     component: A23EffectlistComponent
   },
   {
-    path: ':effect/:language',
+    path: ':subject/:language',
     canActivate: [LanguageGuard],
     component: A23EffectComponent
   },
