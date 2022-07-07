@@ -16,7 +16,7 @@ const routes: Routes = [
     component: BR1DemonlistComponent
   },
   {
-    path: ':demon/:language',
+    path: ':subject/:language',
     canActivate: [LanguageGuard],
     component: BR1DemonComponent
   },

@@ -21,7 +21,6 @@ import { A12ItemlistComponent } from './a12-itemlist.component';
       ModalModule.forRoot(),
       ReactiveFormsModule,
       A12ItemRoutingModule,
-      PipeModule,
       MatInputModule,
       MatFormFieldModule,
       MatIconModule,

@@ -21,7 +21,6 @@ import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
       ModalModule.forRoot(),
       ReactiveFormsModule,
       A16ItemRoutingModule,
-      PipeModule,
       MatInputModule,
       MatFormFieldModule,
       MatIconModule,

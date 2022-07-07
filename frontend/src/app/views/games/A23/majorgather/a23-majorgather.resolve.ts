@@ -1,10 +1,10 @@
-import { MajorGather } from "@app/interfaces/a23";
+import { MajorGather } from "@app/views/games/A23/_services/a23.interface";
 import { Resolve } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Router, ActivatedRoute } from '@angular/router';
 import { Observable, EMPTY } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { A23Service } from "@app/services/a23.service";
+import { A23Service } from "@app/views/games/A23/_services/a23.service";
 
 
 @Injectable({ 

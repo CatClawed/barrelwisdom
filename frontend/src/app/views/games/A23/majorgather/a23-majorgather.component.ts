@@ -1,8 +1,8 @@
 import { Location, ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MajorGather } from '@app/interfaces/a23';
-import { A23Service } from '@app/services/a23.service';
+import { MajorGather } from '@app/views/games/A23/_services/a23.interface';
+import { A23Service } from '@app/views/games/A23/_services/a23.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';

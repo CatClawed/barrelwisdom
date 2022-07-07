@@ -1,70 +1,40 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute }from '@angular/router';
-import { Item } from '@app/interfaces/br1';
-import { BR1Service } from '@app/services/br1.service';
-import { HistoryService} from '@app/services/history.service';
-import { ErrorCodeService } from '@app/services/errorcode.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Item } from '@app/views/games/BR1/_services/br1.interface';
+import { BR1Service } from '@app/views/games/BR1/_services/br1.service';
 import { SeoService } from '@app/services/seo.service';
+import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
   templateUrl: 'br1-item.component.html',
   selector: 'br1-item',
 })
-export class BR1ItemComponent implements OnInit {
-
-  loading = false;
-  submitted = false;
-  returnUrl: string;
-  error: string = '';
+export class BR1ItemComponent extends SingleComponent implements OnInit {
   item: Item;
-  colset: string;
 
-  seoTitle: string;
-  seoDesc: string;
-  seoImage: string;
-  seoURL: string;
-
-  gameTitle: string;
-  gameURL: string;
-  imgURL: string;
-
-  @Input()
-  slugname: string = "";
-
-  @Input()
-  showNav: boolean = true;
-
-  language = "";
-
-constructor(
-    private route: ActivatedRoute,
+  constructor(
+    protected route: ActivatedRoute,
     private br1service: BR1Service,
     private seoService: SeoService) {
-      if(this.route.snapshot.params.item != null) {
-      this.slugname = this.route.snapshot.params.item;
-    }
+    super(route);
+    this.gameService(this.br1service);
   }
   ngOnInit(): void {
     this.language = this.route.snapshot.params.language;
-    if(this.showNav) {
-      this.colset = "col-md-7 mx-auto "
-    }
-    this.br1service.getItem(this.slugname, this.language)
-    .subscribe({next: item => {
-        this.error =``;
-        this.item = item;
-
-        this.gameTitle = this.br1service.gameTitle;
-        this.gameURL = this.br1service.gameURL;
-        this.imgURL = this.br1service.imgURL;
-
-        this.seoURL = `${this.gameURL}/items/${this.item.slugname}/${this.language}`;
-        this.seoTitle = `${this.item.name} - ${this.gameTitle}`;
-        this.seoDesc = `${this.item.description}`
-        this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-    },
-    error: error => {
-      this.error =`${error.status}`;
-    }});
+    if (this.showNav) this.colset = "col-md-7 mx-auto ";
+    this.br1service.getItem(this.slug, this.language)
+      .subscribe({
+        next: item => {
+          this.error = ``;
+          this.item = item;
+          this.seoURL = `${this.gameURL}/items/${this.item.slugname}/${this.language}`;
+          this.seoTitle = `${this.item.name} - ${this.gameTitle}`;
+          this.seoDesc = `${this.item.description}`
+          this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+        },
+        error: error => {
+          this.error = `${error.status}`;
+        }
+      });
   }
 } 

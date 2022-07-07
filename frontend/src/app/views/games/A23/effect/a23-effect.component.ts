@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Effect } from '@app/interfaces/a23';
-import { A23Service } from '@app/services/a23.service';
+import { Effect } from '@app/views/games/A23/_services/a23.interface';
+import { A23Service } from '@app/views/games/A23/_services/a23.service';
 import { SeoService } from '@app/services/seo.service';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 

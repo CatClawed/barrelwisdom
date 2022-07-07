@@ -15,7 +15,6 @@ import { A23EffectlistComponent } from './a23-effectlist.component';
       SharedModule,
       A23EffectRoutingModule,
       TooltipModule.forRoot(),
-      PipeModule,
       MatIconModule,
       MatSelectModule,
       MatButtonModule,

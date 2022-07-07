@@ -22,7 +22,6 @@ import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
       ReactiveFormsModule,
       A16PropertyRoutingModule,
       TooltipModule.forRoot(),
-      PipeModule,
       MatInputModule,
       MatFormFieldModule,
       MatIconModule,

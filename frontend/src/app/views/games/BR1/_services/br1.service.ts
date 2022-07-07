@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders,  } from '@angular/common/http';
 import { Observable} from 'rxjs';
 import { environment } from '@environments/environment';
-import { Item, Demon, Mission, FragmentEffect, Skill } from '@app/interfaces/br1';
+import { Item, Demon, Mission, FragmentEffect, Skill } from '@app/views/games/BR1/_services/br1.interface';
 
 @Injectable({ providedIn: 'root' })
 export class BR1Service {
@@ -14,7 +14,7 @@ export class BR1Service {
       private http: HttpClient,
     ) { }
 
-    public readonly gameTitle = "Blue Reflection";
+    public readonly gameTitle = {"en": "Blue Reflection"};
     public readonly gameURL = "bluereflection";
     public readonly imgURL = `${environment.mediaURL}games/${this.gameURL}/`;
     

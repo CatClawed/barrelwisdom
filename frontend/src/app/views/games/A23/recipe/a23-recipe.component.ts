@@ -1,8 +1,8 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { RecipeIdea } from '@app/interfaces/a23';
-import { A23Service } from '@app/services/a23.service';
+import { RecipeIdea } from '@app/views/games/A23/_services/a23.interface';
+import { A23Service } from '@app/views/games/A23/_services/a23.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
