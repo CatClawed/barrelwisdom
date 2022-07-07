@@ -7,7 +7,6 @@ import { ActivatedRoute } from '@angular/router';
 
 export abstract class SingleComponent {
     error: string = '';
-    selected: string = "thing";
     section: string = "things";
     language = "";
     colset: string;
@@ -31,8 +30,12 @@ export abstract class SingleComponent {
         protected route: ActivatedRoute,
     ) {
         this.language = this.route.snapshot.params.language;
-        this.slug = this.route.snapshot.params.subject;
+        this.slug = this.route.snapshot.params.subject ? this.route.snapshot.params.subject : '';
     }
 
-
+    gameService(service: any) {
+        this.gameTitle = service.gameTitle[this.language];
+        this.gameURL = service.gameURL;
+        this.imgURL = service.imgURL;
+    }
 }

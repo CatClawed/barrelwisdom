@@ -5,7 +5,7 @@ import { LanguageGuard } from '@app/_helpers/language.guard';
 
 const routes: Routes = [
   {
-    path: ':category/:language',
+    path: ':subject/:language',
     canActivate: [LanguageGuard],
     component: A23CategoryComponent
   },

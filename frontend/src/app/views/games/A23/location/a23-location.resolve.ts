@@ -18,7 +18,7 @@ export class A23LocationResolver implements Resolve<Region> {
     }
 
   resolve(route: ActivatedRouteSnapshot): Observable<Region> {
-    return this.a23service.getLocation(route.params.location, route.params.language).pipe(
+    return this.a23service.getLocation(route.params.subject, route.params.language).pipe(
         catchError(() => {
             this.router.navigateByUrl('/ryza2/error', { skipLocationChange: true });
             return EMPTY;

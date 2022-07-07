@@ -5,6 +5,7 @@ import { MajorGather } from '@app/interfaces/a23';
 import { A23Service } from '@app/services/a23.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { SingleComponent } from '@app/views/games/_prototype/single.component';
 import { first, takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -12,41 +13,24 @@ import { first, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A23MajorGatherComponent implements OnInit {
-  error: string = '';
-  errorVars: any[];
-  errorMsg: string;
+export class A23MajorGatherComponent extends SingleComponent implements OnInit {
   major: MajorGather;
-  language: string;
-
-  seoTitle: string;
-  seoDesc: string;
-  seoImage: string;
-  seoURL: string;
-
-  gameTitle: string;
-  gameURL: string;
-  imgURL: string;
 
   constructor(
-    private route: ActivatedRoute,
+    protected route: ActivatedRoute,
+    private seoService: SeoService,
+    private a23service: A23Service,
     private readonly destroy$: DestroyService,
     private loc: Location,
     private router: Router,
-    private a23service: A23Service,
-    private seoService: SeoService,
     private viewportScroller: ViewportScroller,
   ) {
+    super(route);
+    this.gameService(this.a23service);
   }
 
   ngOnInit(): void {
-    this.language = this.route.snapshot.params.language;
     this.major = this.route.snapshot.data.gather;
-
-    this.gameTitle = this.a23service.gameTitle[this.language];
-    this.gameURL = this.a23service.gameURL;
-    this.imgURL = this.a23service.imgURL;
-
     this.seoURL = `${this.gameURL}/major-gathering/${this.language}`;
     this.seoTitle = `Major Gathering Spots - ${this.gameTitle}`;
     this.seoDesc = `All major gathering items in ${this.gameTitle}`

@@ -22,12 +22,12 @@ export class A23EffectlistComponent extends ListComponent implements OnInit {
   filteredEffects: Observable<Effect[]>;
 
   constructor(
-    modalService: BsModalService,
-    destroy$: DestroyService,
-    router: Router,
-    route: ActivatedRoute,
-    location: Location,
-    seoService: SeoService,
+    protected modalService: BsModalService,
+    protected readonly destroy$: DestroyService,
+    protected router: Router,
+    protected route: ActivatedRoute,
+    protected location: Location,
+    protected seoService: SeoService,
     private formBuilder: FormBuilder,
     private a23service: A23Service,
   ) {
@@ -43,9 +43,7 @@ export class A23EffectlistComponent extends ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.modalEvent();
-    this.gameTitle = this.a23service.gameTitle[this.language];
-    this.gameURL = this.a23service.gameURL;
-    this.imgURL = this.a23service.imgURL;
+    this.gameService(this.a23service);
 
     this.seoURL = `${this.gameURL}/effects/${this.language}`;
     this.seoTitle = `Effects - ${this.gameTitle}`;
@@ -59,6 +57,7 @@ export class A23EffectlistComponent extends ListComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: effects => {
+          this.error =``;
           this.effects = effects;
           this.filteredEffects = this.pageForm.valueChanges.pipe(
             startWith(null as Observable<Effect[]>),

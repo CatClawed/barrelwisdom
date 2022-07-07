@@ -17,12 +17,12 @@ const routes: Routes = [
     component: A23ItemlistComponent
   },
   {
-    path: ':item/:language',
+    path: ':subject/:language',
     canActivate: [LanguageGuard],
     component: A23ItemComponent
   },
   {
-    path: 'books/:item/:language',
+    path: 'books/:subject/:language',
     canActivate: [LanguageGuard],
     component: A23BookComponent
   },

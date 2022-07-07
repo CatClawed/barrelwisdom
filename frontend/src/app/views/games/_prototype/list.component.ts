@@ -41,6 +41,12 @@ export abstract class ListComponent {
         this.language = this.route.snapshot.params.language;
     }
 
+    gameService(service: any) {
+        this.gameTitle = service.gameTitle[this.language];
+        this.gameURL = service.gameURL;
+        this.imgURL = service.imgURL;
+    }
+
     modalEvent() {
         let modalLink = this.router.events
             .subscribe(event => {

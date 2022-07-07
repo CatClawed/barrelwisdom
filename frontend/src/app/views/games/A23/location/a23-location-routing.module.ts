@@ -6,7 +6,7 @@ import { A23LocationResolver } from './a23-location.resolve';
 
 const routes: Routes = [
   {
-    path: ':location/:language',
+    path: ':subject/:language',
     canActivate: [LanguageGuard],
     component: A23LocationComponent,
     resolve: {

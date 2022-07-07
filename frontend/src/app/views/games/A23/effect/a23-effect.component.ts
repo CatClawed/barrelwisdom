@@ -13,23 +13,24 @@ export class A23EffectComponent extends SingleComponent implements OnInit {
   effect: Effect;
 
   constructor(
-    route: ActivatedRoute,
+    protected route: ActivatedRoute,
+    private seoService: SeoService,
     private a23service: A23Service,
-    private seoService: SeoService) {
+  ) {
     super(route);
+    this.gameService(this.a23service);
   }
+  
   ngOnInit(): void {
     if (this.showNav) this.colset = "col-md-5 mx-auto "
     this.a23service.getEffect(this.slug, this.language)
       .subscribe({
         next: effect => {
+          this.error =``;
           this.effect = effect;
-          this.gameTitle = this.a23service.gameTitle[this.language];
-          this.gameURL = this.a23service.gameURL;
-          this.imgURL = this.a23service.imgURL;
           this.seoURL = `${this.gameURL}/effects/${this.effect.slug}/${this.language}`;
           this.seoTitle = `${this.effect.name} - ${this.gameTitle}`;
-          this.seoDesc = `${this.effect.desc}`
+          this.seoDesc = `${this.effect.desc}`;
           this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
         },
         error: error => {

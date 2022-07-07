@@ -1,161 +1,116 @@
 import { Location } from '@angular/common';
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Monster } from '@app/interfaces/a23';
 import { A23Service } from '@app/services/a23.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { ListComponent } from '@app/views/games/_prototype/list.component';
+import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
 
 @Component({
-    templateUrl: 'a23-monsterlist.component.html',
-    providers: [DestroyService]
-  })
+  templateUrl: 'a23-monsterlist.component.html',
+  providers: [DestroyService]
+})
 
-  export class A23MonsterlistComponent implements OnInit {
-    modalRef: BsModalRef;
-    pageForm: FormGroup;
-    monsterControl: FormControl;
-    error: string = '';
-    monster: string = "monsters";
-    monsters: Monster[];
-    filteredMonsters: Observable<Monster[]>;
-    currentType: string = "1";
-    searchstring = "";
-    language = "";
-    config: ModalOptions = { class: "col-md-5 mx-auto" };
-  
-    seoTitle: string;
-    seoDesc: string;
-    seoImage: string;
-    seoURL: string;
+export class A23MonsterlistComponent extends ListComponent implements OnInit {
+  monsterControl: FormControl;
+  monsters: Monster[];
+  filteredMonsters: Observable<Monster[]>;
+  currentType: string = "1";
+  searchstring = "";
 
-    gameTitle: string;
-    gameURL: string;
-    imgURL: string;
-  
-    constructor(
-      private modalService: BsModalService,
-      private readonly destroy$: DestroyService,
-      private router: Router,
-      private formBuilder: FormBuilder,
-      private route: ActivatedRoute,
-      private location: Location,
-      private a23service: A23Service,
-      private seoService: SeoService
-    ) { 
-      this.monsterControl = new FormControl();
+  constructor(
+    protected modalService: BsModalService,
+    protected readonly destroy$: DestroyService,
+    protected router: Router,
+    protected route: ActivatedRoute,
+    protected location: Location,
+    protected seoService: SeoService,
+    private formBuilder: FormBuilder,
+    private a23service: A23Service,
+  ) {
+    super(modalService, destroy$, router, route, location, seoService);
+    this.section = 'monsters';
+    this.monsterControl = new FormControl();
 
-      this.pageForm = this.formBuilder.group({
-        filtertext: this.monsterControl,
-        type: ['']
-      })
-    }
-  
-    ngOnInit(): void {
-  
-      this.language = this.route.snapshot.params.language;
-  
-      this.getMonsters();
-      this.gameTitle = this.a23service.gameTitle[this.language];
-      this.gameURL = this.a23service.gameURL;
-      this.imgURL = this.a23service.imgURL;
+    this.pageForm = this.formBuilder.group({
+      filtertext: this.monsterControl,
+      type: ['']
+    })
+  }
 
-      this.seoURL = `${this.gameURL}/monsters/${this.language}`;
-      this.seoTitle = `Monsters - ${this.gameTitle}`;
-      this.seoDesc = `The list of monsters in ${this.gameTitle}.`
-      this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+  ngOnInit(): void {
+    this.modalEvent();
+    this.gameService(this.a23service);
+    this.getMonsters();
+    this.seoURL = `${this.gameURL}/monsters/${this.language}`;
+    this.seoTitle = `Monsters - ${this.gameTitle}`;
+    this.seoDesc = `The list of monsters in ${this.gameTitle}.`
+    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+  }
 
-      let modalLink = this.router.events
-      .subscribe(event => {
-        if (event instanceof NavigationEnd) {
-          this.modalService.setDismissReason('link');
-          this.modalService.hide();
-          modalLink.unsubscribe();
+  getMonsters() {
+    this.a23service.getMonsterList(this.language)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: monsters => {
+          this.monsters = monsters;
+          this.filteredMonsters = this.pageForm.valueChanges.pipe(
+            startWith(null as Observable<Monster[]>),
+            map((search: any) => search ? this.filterT(search.filtertext, search.type) : this.monsters.slice())
+          );
+        },
+        error: error => {
+          this.error = `${error.status}`;
         }
       });
-    }
-  
-    getMonsters() {
-      this.a23service.getMonsterList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({next: monsters => {
-        this.monsters = monsters;
-        this.filteredMonsters = this.pageForm.valueChanges.pipe(
-          startWith(null as Observable<Monster[]>),
-          map((search: any) => search ? this.filterT(search.filtertext, search.type) : this.monsters.slice())
-        );
-      },
-      error: error => {
-        this.error =`${error.status}`;
-      }});
-    }
-  
-    openModal(template: TemplateRef<any>, slug: string, event?) {
-      if (event) {
-        if(event.ctrlKey) {
-          return;
-        }
-        else {
-          event.preventDefault()
-        }
-      }
-      this.monster = slug;
-      this.location.go(`${this.gameURL}/monsters/` + slug + "/" + this.language);
-      this.modalRef = this.modalService.show(template);
-      this.modalRef.onHide
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((reason: string | any) => {
-        if(reason != "link") {
-          this.location.go(`${this.gameURL}/monsters/` + this.language);
-          this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-        }})
-    }
-  
-    private filterT(value: string, type: string): Monster[] {
-      let list: Monster[];
-      switch(type) {
-        case "2":
-            list = this.monsters.filter(mon => mon.kind == 'puni');
-            break;
-        case "3":
-            list = this.monsters.filter(mon => ["golem", "jellyfish"].includes(mon.kind));
-          break;
-        case "4":
-            list = this.monsters.filter(mon => ["rabbit", "bat", "bird", "dream-eater"].includes(mon.kind));
-          break;
-        case "5":
-            list = this.monsters.filter(mon => ["ghost", "apostle"].includes(mon.kind));
-          break;
-        case "6":
-            list = this.monsters.filter(mon => ["mushroom", "dryad"].includes(mon.kind));
-          break;
-        case "7":
-            list = this.monsters.filter(mon => ["dragonaire", "sea-serpent"].includes(mon.kind));
-          break;
-        case "8":
-            list = this.monsters.filter(mon => ["small-groll", "medium-groll", "elvira"].includes(mon.kind));
-          break;
-        default:
-            list = this.monsters; 
-          break;
-      }
-
-      if(!value) {
-        return list;
-      }
-      const filterValue = value.toLowerCase();
-      return list.filter(mon => { 
-          return mon.name.toLowerCase().includes(filterValue);
-        });
-    } 
-  
-    get f() { return this.pageForm.controls; }
-
-    identify(index, item){
-      return item.slug; 
-   }
   }
+
+  private filterT(value: string, type: string): Monster[] {
+    let list: Monster[];
+    switch (type) {
+      case "2":
+        list = this.monsters.filter(mon => mon.kind == 'puni');
+        break;
+      case "3":
+        list = this.monsters.filter(mon => ["golem", "jellyfish"].includes(mon.kind));
+        break;
+      case "4":
+        list = this.monsters.filter(mon => ["rabbit", "bat", "bird", "dream-eater"].includes(mon.kind));
+        break;
+      case "5":
+        list = this.monsters.filter(mon => ["ghost", "apostle"].includes(mon.kind));
+        break;
+      case "6":
+        list = this.monsters.filter(mon => ["mushroom", "dryad"].includes(mon.kind));
+        break;
+      case "7":
+        list = this.monsters.filter(mon => ["dragonaire", "sea-serpent"].includes(mon.kind));
+        break;
+      case "8":
+        list = this.monsters.filter(mon => ["small-groll", "medium-groll", "elvira"].includes(mon.kind));
+        break;
+      default:
+        list = this.monsters;
+        break;
+    }
+
+    if (!value) {
+      return list;
+    }
+    const filterValue = value.toLowerCase();
+    return list.filter(mon => {
+      return mon.name.toLowerCase().includes(filterValue);
+    });
+  }
+
+  get f() { return this.pageForm.controls; }
+
+  identify(index, item) {
+    return item.slug;
+  }
+}
