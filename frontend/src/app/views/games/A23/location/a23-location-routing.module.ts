@@ -14,7 +14,7 @@ const routes: Routes = [
     }
   },
   {
-    path: ':location',
+    path: ':subject',
     canActivate: [LanguageGuard],
     component: A23LocationComponent
   },

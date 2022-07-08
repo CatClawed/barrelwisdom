@@ -16,7 +16,7 @@ const routes: Routes = [
     component: BRSLItemlistComponent
   },
   {
-    path: ':item/:language',
+    path: ':subject/:language',
     canActivate: [LanguageGuard],
     component: BRSLItemComponent
   },

@@ -1,131 +1,78 @@
 import { Location } from '@angular/common';
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { FacilityList } from '@app/interfaces/brsl';
-import { BRSLService } from '@app/services/brsl.service';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { FacilityList } from '@app/views/games/BRSL/_services/brsl.interface';
+import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
+import { ListComponent } from '@app/views/games/_prototype/list.component';
+import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
 
 @Component({
-    templateUrl: 'brsl-facilitylist.component.html',
-    providers: [DestroyService]
-  })
+  templateUrl: 'brsl-facilitylist.component.html',
+  providers: [DestroyService]
+})
 
-  export class BRSLFacilitylistComponent implements OnInit {
-    modalRef: BsModalRef;
-    pageForm: FormGroup;
-    facilityControl: FormControl;
-    error: string = '';
-    facility: string = "facilities";
-    facilities: FacilityList[];
-    filteredFacilities: Observable<FacilityList[]>;
-    language = "";
-    config: ModalOptions = { class: "col-md-5 mx-auto" };
-  
-    seoTitle: string;
-    seoDesc: string;
-    seoImage: string;
-    seoURL: string;
+export class BRSLFacilitylistComponent extends ListComponent implements OnInit {
+  facilities: FacilityList[];
+  filteredFacilities: Observable<FacilityList[]>;
+  facilityControl: FormControl;
 
-    gameTitle: string;
-    gameURL: string;
-    imgURL: string;
-  
-    constructor(
-      private modalService: BsModalService,
-      private readonly destroy$: DestroyService,
-      private router: Router,
-      private formBuilder: FormBuilder,
-      private route: ActivatedRoute,
-      private location: Location,
-      private brslservice: BRSLService,
-      private seoService: SeoService
-    ) { 
-      this.facilityControl = new FormControl();
+  constructor(
+    protected modalService: BsModalService,
+    protected readonly destroy$: DestroyService,
+    protected router: Router,
+    protected route: ActivatedRoute,
+    protected location: Location,
+    protected seoService: SeoService,
+    private formBuilder: FormBuilder,
+    private brslservice: BRSLService,
+  ) {
+    super(modalService, destroy$, router, route, location, seoService);
+    this.section = 'facilities';
+    this.facilityControl = new FormControl();
+    this.pageForm = this.formBuilder.group({
+      filtertext: this.facilityControl,
+    })
+  }
 
-      this.pageForm = this.formBuilder.group({
-        filtertext: this.facilityControl,
-      })
-    }
-  
-    ngOnInit(): void {
-  
-      this.language = this.route.snapshot.params.language;
-  
-      this.getFacilities();
-      this.gameTitle = this.brslservice.gameTitle[this.language];
-      this.gameURL = this.brslservice.gameURL;
-      this.imgURL = this.brslservice.imgURL;
+  ngOnInit(): void {
+    this.modalEvent();
+    this.gameService(this.brslservice);
+    this.getFacilities();
+    this.seoURL = `${this.gameURL}/facilities/${this.language}`;
+    this.seoTitle = `Facilities - ${this.gameTitle}`;
+    this.seoDesc = `The list of facilities in ${this.gameTitle}.`
+    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+  }
 
-      this.seoURL = `${this.gameURL}/facilities/${this.language}`;
-      this.seoTitle = `Facilities - ${this.gameTitle}`;
-      this.seoDesc = `The list of facilities in ${this.gameTitle}.`
-      this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-
-      let modalLink = this.router.events
-      .subscribe(event => {
-        if (event instanceof NavigationEnd) {
-          this.modalService.setDismissReason('link');
-          this.modalService.hide();
-          modalLink.unsubscribe();
+  getFacilities() {
+    this.brslservice.getFacilityList(this.language)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: facilities => {
+          this.facilities = facilities.slice(0, 44);
+          this.filteredFacilities = this.pageForm.valueChanges.pipe(
+            startWith(null as Observable<FacilityList[]>),
+            map((search: any) => search ? this.filterT(search.filtertext) : this.facilities.slice())
+          );
+        },
+        error: error => {
+          this.error = `${error.status}`;
         }
       });
-    }
-  
-    getFacilities() {
-      this.brslservice.getFacilityList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({next: facilities => {
-        this.facilities = facilities.slice(0,44);
-        this.filteredFacilities = this.pageForm.valueChanges.pipe(
-          startWith(null as Observable<FacilityList[]>),
-          map((search: any) => search ? this.filterT(search.filtertext) : this.facilities.slice())
-        );
-      },
-      error: error => {
-        this.error =`${error.status}`;
-      }});
-    }
-  
-    openModal(template: TemplateRef<any>, slug: string, event?) {
-      if (event) {
-        if(event.ctrlKey) {
-          return;
-        }
-        else {
-          event.preventDefault()
-        }
-      }
-      this.facility = slug;
-      this.location.go(`${this.gameURL}/facilities/` + slug + "/" + this.language);
-      this.modalRef = this.modalService.show(template);
-      this.modalRef.onHide
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((reason: string | any) => {
-        if(reason != "link") {
-          this.location.go(`${this.gameURL}/facilities/` + this.language);
-          this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-        }})
-    }
-
-    private filterT(value: string): FacilityList[] {  
-      let list: FacilityList[] = this.facilities;
-      if(!value) {
-        return list;
-      }
-      const filterValue = value.toLowerCase();
-      return list.filter(mon => { 
-          return mon.name.toLowerCase().includes(filterValue);
-        });
-    } 
-  
-    get f() { return this.pageForm.controls; }
-
-    identify(index, item){
-      return item.slug; 
-   }
   }
+  private filterT(value: string): FacilityList[] {
+    let list: FacilityList[] = this.facilities;
+    if (!value) {
+      return list;
+    }
+    const filterValue = value.toLowerCase();
+    return list.filter(mon => {
+      return mon.name.toLowerCase().includes(filterValue);
+    });
+  }
+}

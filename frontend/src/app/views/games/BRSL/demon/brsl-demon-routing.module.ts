@@ -16,7 +16,7 @@ const routes: Routes = [
     component: BRSLDemonlistComponent
   },
   {
-    path: ':demon/:language',
+    path: ':subject/:language',
     canActivate: [LanguageGuard],
     component: BRSLDemonComponent
   },

@@ -6,7 +6,7 @@ import { BRSLLocationResolver } from './brsl-location.resolve';
 
 const routes: Routes = [
   {
-    path: ':location/:language',
+    path: ':subject/:language',
     canActivate: [LanguageGuard],
     component: BRSLLocationComponent,
     resolve: {
@@ -14,7 +14,7 @@ const routes: Routes = [
     }
   },
   {
-    path: ':location',
+    path: ':subject',
     canActivate: [LanguageGuard],
     component: BRSLLocationComponent
   },

@@ -8,7 +8,7 @@ import { ErrorCodeService } from "@app/services/errorcode.service";
 export class P404Component {
 
   @Input()
-  errorCode: string;
+  errorCode: string = "404";
 
   @Input()
   errorVars: any = ["Oops! You're lost.", "Our puni told us that the page you're looking for doesn't exist."];

@@ -1,66 +1,46 @@
 import { Location, ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Skill } from '@app/interfaces/brsl';
-import { BRSLService } from '@app/services/brsl.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { Skill } from '@app/views/games/BRSL/_services/brsl.interface';
+import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
+import { SingleComponent } from '@app/views/games/_prototype/single.component';
 import { first, takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'brsl-skill.component.html',
   providers: [DestroyService]
 })
-export class BRSLSkillComponent implements OnInit {
-
-  loading = false;
-  submitted = false;
-  returnUrl: string;
-  error: string = '';
-  errorVars: any[];
-  errorMsg: string;
+export class BRSLSkillComponent extends SingleComponent implements OnInit {
   skills: Skill[];
-  colset: string;
-
-  seoTitle: string;
-  seoDesc: string;
-  seoImage: string;
-  seoURL: string;
-
-  gameTitle: string;
-  gameURL: string;
-  imgURL: string;
-
-  language = "";
 
   constructor(
-    private route: ActivatedRoute,
+    protected route: ActivatedRoute,
     private readonly destroy$: DestroyService,
     private brslservice: BRSLService,
     private seoService: SeoService,
     private viewportScroller: ViewportScroller,
     private loc: Location) {
+    super(route);
+    this.gameService(this.brslservice);
   }
   ngOnInit(): void {
-    this.language = this.route.snapshot.params.language;
     this.brslservice.getSkillList(this.language)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe({next: skill => {
-        this.error =``;
-        this.skills = skill;
-
-        this.gameTitle = this.brslservice.gameTitle[this.language];
-        this.gameURL = this.brslservice.gameURL;
-        this.imgURL = this.brslservice.imgURL;
-
-        this.seoURL = `${this.gameURL}/skills/${this.language}`;
-        this.seoTitle = `Skills - ${this.gameTitle}`;
-        this.seoDesc = `All skills in ${this.gameTitle}.`
-        this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-    },
-    error: error => {
-      this.error =`${error.status}`;
-    }});
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: skill => {
+          this.error = ``;
+          this.skills = skill;
+          this.seoURL = `${this.gameURL}/skills/${this.language}`;
+          this.seoTitle = `Skills - ${this.gameTitle}`;
+          this.seoDesc = `All skills in ${this.gameTitle}.`
+          this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+        },
+        error: error => {
+          this.error = `${error.status}`;
+        }
+      });
   }
   ngAfterViewInit(): void {
     this.route.fragment.pipe(

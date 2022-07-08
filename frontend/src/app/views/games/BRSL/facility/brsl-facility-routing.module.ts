@@ -27,7 +27,7 @@ const routes: Routes = [
     component: BRSLFacilitylistComponent
   },
   {
-    path: ':facility/:language',
+    path: ':subject/:language',
     canActivate: [LanguageGuard],
     component: BRSLFacilityComponent
   },
