@@ -6,7 +6,7 @@ import { A22LocationResolver } from './a22-location.resolve';
 
 const routes: Routes = [
   {
-    path: ':location/:language',
+    path: ':subject/:language',
     canActivate: [LanguageGuard],
     component: A22LocationComponent,
     resolve: {
@@ -14,7 +14,7 @@ const routes: Routes = [
     }
   },
   {
-    path: ':location',
+    path: ':subject',
     canActivate: [LanguageGuard],
     component: A22LocationComponent
   },
