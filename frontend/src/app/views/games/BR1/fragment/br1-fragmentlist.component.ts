@@ -27,10 +27,10 @@ export class BR1FragmentEffectlistComponent extends SingleComponent implements O
     private readonly destroy$: DestroyService,
     protected route: ActivatedRoute,
     private br1service: BR1Service,
-    private seoService: SeoService,
+    protected seoService: SeoService,
     private viewportScroller: ViewportScroller
   ) {
-    super(route);
+    super(route, seoService);
     this.gameService(this.br1service);
     this.fragmenteffectControl = new FormControl();
     this.pageForm = this.formBuilder.group({

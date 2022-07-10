@@ -23,10 +23,10 @@ export class A22LocationComponent extends SingleComponent implements OnInit {
     private loc: Location,
     private router: Router,
     private a22service: A22Service,
-    private seoService: SeoService,
+    protected seoService: SeoService,
     private viewportScroller: ViewportScroller
   ) {
-    super(route);
+    super(route, seoService);
     this.gameService(this.a22service);
   }
 

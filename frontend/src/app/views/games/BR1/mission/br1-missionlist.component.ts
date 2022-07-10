@@ -22,9 +22,9 @@ export class BR1MissionlistComponent extends SingleComponent implements OnInit {
     private readonly destroy$: DestroyService,
     private br1service: BR1Service,
     public historyService: HistoryService,
-    private seoService: SeoService,
+    protected seoService: SeoService,
     private viewportScroller: ViewportScroller) {
-    super(route);
+    super(route, seoService);
     this.gameService(this.br1service);
   }
   ngOnInit(): void {

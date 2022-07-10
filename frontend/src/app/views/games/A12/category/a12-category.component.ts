@@ -29,7 +29,7 @@ export class A12CategoryComponent implements OnInit {
 constructor(
     private route: ActivatedRoute,
     private a12service: A12Service,
-    private seoService: SeoService) {
+    protected seoService: SeoService) {
   }
   ngOnInit(): void {
     this.slugname = this.route.snapshot.params.category;

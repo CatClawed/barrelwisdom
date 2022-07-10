@@ -26,7 +26,7 @@ export class A23LocationComponent extends SingleComponent implements OnInit {
 
   constructor(
     protected route: ActivatedRoute,
-    private seoService: SeoService,
+    protected seoService: SeoService,
     private a23service: A23Service,
     private readonly destroy$: DestroyService,
     private loc: Location,
@@ -34,7 +34,7 @@ export class A23LocationComponent extends SingleComponent implements OnInit {
     private viewportScroller: ViewportScroller,
     private formBuilder: FormBuilder,
   ) {
-    super(route);
+    super(route, seoService);
     this.gameService(this.a23service);
     this.locationControl = new FormControl();
 

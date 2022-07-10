@@ -16,7 +16,7 @@ const routes: Routes = [
     component: A16MonsterlistComponent
   },
   {
-    path: ':monster/:language',
+    path: ':subject/:language',
     canActivate: [LanguageGuard],
     component: A16MonsterComponent
   },

@@ -1,27 +1,25 @@
-import { AreaData } from "@app/interfaces/a16";
-import { Resolve } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Router, ActivatedRoute } from '@angular/router';
-import { Observable, EMPTY } from 'rxjs';
+import { ActivatedRoute, ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
+import { AreaData } from '@app/views/games/A16/_services/a16.interface';
+import { A16Service } from '@app/views/games/A16/_services/a16.service';
+import { EMPTY, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { A16Service } from "@app/services/a16.service";
-
 
 @Injectable({
-    providedIn: 'root'
-  })
+  providedIn: 'root'
+})
 export class A16LocationResolver implements Resolve<AreaData> {
 
   constructor(private a16service: A16Service,
     public router: Router,
     public route: ActivatedRoute) {
-    }
+  }
 
   resolve(route: ActivatedRouteSnapshot): Observable<AreaData> {
-    return this.a16service.getRegion(route.params.location, route.params.language).pipe(
-        catchError(() => {
-            this.router.navigateByUrl('/escha/error', { skipLocationChange: true });
-            return EMPTY;
-        }));
-    }
+    return this.a16service.getRegion(route.params.subject, route.params.language).pipe(
+      catchError(() => {
+        this.router.navigateByUrl('/escha/error', { skipLocationChange: true });
+        return EMPTY;
+      }));
+  }
 }

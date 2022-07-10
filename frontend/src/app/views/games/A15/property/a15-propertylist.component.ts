@@ -41,7 +41,7 @@ export class A15PropertylistComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private a15service: A15Service,
-    private seoService: SeoService) { 
+    protected seoService: SeoService) { 
     this.propertyControl = new FormControl();
 
     this.pageForm = this.formBuilder.group({

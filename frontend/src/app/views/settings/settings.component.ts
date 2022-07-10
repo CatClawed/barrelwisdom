@@ -49,7 +49,7 @@ export class SettingsComponent {
     private settingService: SettingService,
     private errorCodeService: ErrorCodeService,
     private authenticationService: AuthenticationService,
-    private seoService: SeoService,
+    protected seoService: SeoService,
     private metaService: Meta,
     private titleService: Title
     ) {

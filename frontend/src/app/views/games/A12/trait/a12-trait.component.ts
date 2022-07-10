@@ -37,7 +37,7 @@ export class A12TraitComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private a12service: A12Service,
-    private seoService: SeoService) {
+    protected seoService: SeoService) {
       if(this.route.snapshot.params.trait != null) {
       this.slugname = this.route.snapshot.params.trait;
     }

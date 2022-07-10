@@ -25,10 +25,10 @@ export class BRSLFacilitySetComponent extends SingleComponent implements OnInit 
     private readonly destroy$: DestroyService,
     private formBuilder: FormBuilder,
     protected route: ActivatedRoute,
-    private seoService: SeoService,
+    protected seoService: SeoService,
     private brslservice: BRSLService,
   ) {
-    super(route);
+    super(route, seoService);
     this.gameService(this.brslservice);
     this.facilityControl = new FormControl();
     this.pageForm = this.formBuilder.group({

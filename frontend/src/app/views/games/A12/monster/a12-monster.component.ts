@@ -38,7 +38,7 @@ export class A12MonsterComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private a12service: A12Service,
-    private seoService: SeoService) {
+    protected seoService: SeoService) {
       if(this.route.snapshot.params.monster != null) {
       this.slugname = this.route.snapshot.params.monster;
     }

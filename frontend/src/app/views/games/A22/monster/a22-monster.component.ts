@@ -19,8 +19,8 @@ export class A22MonsterComponent extends SingleComponent implements OnInit {
   constructor(
     protected route: ActivatedRoute,
     private a22service: A22Service,
-    private seoService: SeoService) {
-    super(route);
+    protected seoService: SeoService) {
+    super(route, seoService);
     this.gameService(this.a22service);
   }
   ngOnInit(): void {

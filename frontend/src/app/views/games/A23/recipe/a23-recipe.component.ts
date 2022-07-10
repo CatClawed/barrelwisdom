@@ -29,13 +29,13 @@ export class A23RecipeComponent extends SingleComponent implements OnInit {
 
   constructor(
     protected route: ActivatedRoute,
-    private seoService: SeoService,
+    protected seoService: SeoService,
     private a23service: A23Service,
     private readonly destroy$: DestroyService,
     private location: Location,
     public historyService: HistoryService,
   ) {
-    super(route);
+    super(route, seoService);
     this.gameService(this.a23service);
   }
 

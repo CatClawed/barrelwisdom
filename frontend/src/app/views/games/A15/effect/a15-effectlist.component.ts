@@ -44,7 +44,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
       private route: ActivatedRoute,
       private location: Location,
       private a15service: A15Service,
-      private seoService: SeoService
+      protected seoService: SeoService
     ) { 
       this.effectControl = new FormControl();
 

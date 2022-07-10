@@ -21,10 +21,10 @@ export class BRSLLocationComponent extends SingleComponent implements OnInit {
     private readonly destroy$: DestroyService,
     private loc: Location,
     private brslservice: BRSLService,
-    private seoService: SeoService,
+    protected seoService: SeoService,
     private viewportScroller: ViewportScroller
   ) {
-    super(route);
+    super(route, seoService);
     this.gameService(this.brslservice);
   }
   ngOnInit(): void {

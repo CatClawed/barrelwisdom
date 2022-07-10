@@ -15,9 +15,9 @@ export class BRSLFacilityComponent extends SingleComponent implements OnInit {
 
   constructor(
     protected route: ActivatedRoute,
-    private seoService: SeoService,
+    protected seoService: SeoService,
     private brslservice: BRSLService,) {
-    super(route);
+    super(route, seoService);
     this.gameService(this.brslservice);
   }
   ngOnInit(): void {

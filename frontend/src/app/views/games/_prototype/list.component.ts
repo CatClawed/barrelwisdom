@@ -85,4 +85,11 @@ export abstract class ListComponent {
     identify(index, item) {
         return item.slug;
     }
+
+    genericSEO(name: string, desc: string): void {
+        this.seoURL = `${this.gameURL}/${this.section}}/${this.language}`;
+        this.seoTitle = `${name} - ${this.gameTitle}`;
+        this.seoDesc = `${desc}`
+        this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+    }
 }

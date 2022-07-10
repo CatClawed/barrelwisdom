@@ -37,7 +37,7 @@ constructor(
     private loc: Location,
     private a15service: A15Service,
     public historyService: HistoryService,
-    private seoService: SeoService,
+    protected seoService: SeoService,
     private viewportScroller: ViewportScroller
     ) {
   }

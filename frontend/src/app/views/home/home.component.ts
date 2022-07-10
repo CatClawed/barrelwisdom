@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
     private blogService: BlogService,
     private location: Location,
     private tagService: TagService,
-    private seoService: SeoService,
+    protected seoService: SeoService,
   ) { }
 
   ngOnInit(): void {

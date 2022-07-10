@@ -40,7 +40,7 @@ export class A12ItemComponent implements OnInit {
 constructor(
     private route: ActivatedRoute,
     private a12service: A12Service,
-    private seoService: SeoService) {
+    protected seoService: SeoService) {
       if(this.route.snapshot.params.item != null) {
       this.slugname = this.route.snapshot.params.item;
     }

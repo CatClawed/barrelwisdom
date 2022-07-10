@@ -13,10 +13,10 @@ export class A23BookComponent extends SingleComponent implements OnInit {
 
   constructor(
     protected route: ActivatedRoute,
-    private seoService: SeoService,
+    protected seoService: SeoService,
     private a23service: A23Service,
   ) {
-    super(route);
+    super(route, seoService);
     this.gameService(this.a23service);
   }
   

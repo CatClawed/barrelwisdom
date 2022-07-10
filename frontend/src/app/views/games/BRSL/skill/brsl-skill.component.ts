@@ -19,10 +19,10 @@ export class BRSLSkillComponent extends SingleComponent implements OnInit {
     protected route: ActivatedRoute,
     private readonly destroy$: DestroyService,
     private brslservice: BRSLService,
-    private seoService: SeoService,
+    protected seoService: SeoService,
     private viewportScroller: ViewportScroller,
     private loc: Location) {
-    super(route);
+    super(route, seoService);
     this.gameService(this.brslservice);
   }
   ngOnInit(): void {

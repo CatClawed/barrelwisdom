@@ -51,7 +51,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
       private route: ActivatedRoute,
       private location: Location,
       private a15service: A15Service,
-      private seoService: SeoService
+      protected seoService: SeoService
     ) { 
       this.itemControl = new FormControl();
       this.ingControl = new FormControl();

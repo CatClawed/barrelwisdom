@@ -18,14 +18,14 @@ export class A23MajorGatherComponent extends SingleComponent implements OnInit {
 
   constructor(
     protected route: ActivatedRoute,
-    private seoService: SeoService,
+    protected seoService: SeoService,
     private a23service: A23Service,
     private readonly destroy$: DestroyService,
     private loc: Location,
     private router: Router,
     private viewportScroller: ViewportScroller,
   ) {
-    super(route);
+    super(route, seoService);
     this.gameService(this.a23service);
   }
 

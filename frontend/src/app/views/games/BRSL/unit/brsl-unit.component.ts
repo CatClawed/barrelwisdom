@@ -15,8 +15,8 @@ export class BRSLUnitComponent extends SingleComponent implements OnInit {
   constructor(
     protected route: ActivatedRoute,
     private brslservice: BRSLService,
-    private seoService: SeoService) {
-    super(route);
+    protected seoService: SeoService) {
+    super(route, seoService);
     this.gameService(this.brslservice);
   }
   ngOnInit(): void {

@@ -26,7 +26,7 @@ export class LoginComponent {
     private router: Router,
     private authenticationService: AuthenticationService,
     private errorCodeService: ErrorCodeService,
-    private seoService: SeoService,
+    protected seoService: SeoService,
     private metaService: Meta,
     private titleService: Title
     ) { }

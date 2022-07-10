@@ -15,8 +15,8 @@ export class BR1ItemComponent extends SingleComponent implements OnInit {
   constructor(
     protected route: ActivatedRoute,
     private br1service: BR1Service,
-    private seoService: SeoService) {
-    super(route);
+    protected seoService: SeoService) {
+    super(route, seoService);
     this.gameService(this.br1service);
   }
   ngOnInit(): void {

@@ -32,7 +32,7 @@ export class BlogComponent implements OnInit {
     private blogService: BlogService,
     private authenticationService: AuthenticationService,
     private markdownService: MarkdownService,
-    private seoService: SeoService) {
+    protected seoService: SeoService) {
   }
 
   ngOnInit(): void {

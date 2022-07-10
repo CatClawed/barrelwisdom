@@ -37,7 +37,7 @@ export class A15PropertyComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private a15service: A15Service,
-    private seoService: SeoService) {
+    protected seoService: SeoService) {
       if(this.route.snapshot.params.property != null) {
       this.slugname = this.route.snapshot.params.property;
     }

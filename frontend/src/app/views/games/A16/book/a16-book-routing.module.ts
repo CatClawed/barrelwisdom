@@ -16,7 +16,7 @@ const routes: Routes = [
     component: A16BooklistComponent
   },
   {
-    path: ':book/:language',
+    path: ':subject/:language',
     canActivate: [LanguageGuard],
     component: A16BookComponent
   },

@@ -26,9 +26,9 @@ export class BRSLFragmentComponent extends SingleComponent implements OnInit {
     private formBuilder: FormBuilder,
     protected route: ActivatedRoute,
     private brslservice: BRSLService,
-    private seoService: SeoService,
+    protected seoService: SeoService,
   ) {
-    super(route);
+    super(route, seoService);
     this.gameService(this.brslservice);
     this.fragmentControl = new FormControl();
     this.pageForm = this.formBuilder.group({
