@@ -17,8 +17,7 @@ export class A16EffectComponent extends SingleComponent implements OnInit {
     private a16service: A16Service,
     protected seoService: SeoService) {
     super(route, seoService);
-    this.gameService(this.a16service);
-    this.section = 'effects'
+    this.gameService(this.a16service, 'effects');
   }
   ngOnInit(): void {
     if (this.showNav) this.colset = "col-md-5 mx-auto ";

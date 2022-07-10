@@ -32,7 +32,7 @@ export class A16EffectlistComponent extends ListComponent implements OnInit {
     private a16service: A16Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.section = 'effects';
+    this.gameService(this.a16service, 'effects');
     this.effectControl = new FormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.effectControl
@@ -41,7 +41,6 @@ export class A16EffectlistComponent extends ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.modalEvent();
-    this.gameService(this.a16service);
     this.getEffects();
     this.genericSEO(`Effects`, `The list of effects in ${this.gameTitle}.`);
 

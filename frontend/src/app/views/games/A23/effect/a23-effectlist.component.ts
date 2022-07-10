@@ -32,10 +32,8 @@ export class A23EffectlistComponent extends ListComponent implements OnInit {
     private a23service: A23Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.section = 'effects';
-
+    this.gameService(this.a23service, 'effects');
     this.effectControl = new FormControl();
-
     this.pageForm = this.formBuilder.group({
       filtertext: this.effectControl,
     })
@@ -43,12 +41,7 @@ export class A23EffectlistComponent extends ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.modalEvent();
-    this.gameService(this.a23service);
-
-    this.seoURL = `${this.gameURL}/effects/${this.language}`;
-    this.seoTitle = `Effects - ${this.gameTitle}`;
-    this.seoDesc = `The list of effects in ${this.gameTitle}.`
-    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+    this.genericSEO(`Effects`, `The list of effects in ${this.gameTitle}.`);
     this.getEffects();
   }
 

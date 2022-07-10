@@ -37,7 +37,7 @@ export class A16ItemlistComponent extends ListComponent implements OnInit {
     private a16service: A16Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.section = 'items';
+    this.gameService(this.a16service, 'items');
     this.itemControl = new FormControl();
     this.ingControl = new FormControl();
     this.pageForm = this.formBuilder.group({
@@ -51,7 +51,6 @@ export class A16ItemlistComponent extends ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.modalEvent();
-    this.gameService(this.a16service);
     this.getItems();
     this.getCategories();
     this.genericSEO(`Items`, `The list of items in ${this.gameTitle}.`);

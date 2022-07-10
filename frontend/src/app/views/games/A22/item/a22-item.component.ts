@@ -22,7 +22,7 @@ export class A22ItemComponent extends SingleComponent implements OnInit {
     private a22service: A22Service,
     protected seoService: SeoService) {
     super(route, seoService);
-    this.gameService(this.a22service);
+    this.gameService(this.a22service, 'items');
   }
   ngOnInit(): void {
     if (this.showNav) this.colset = "col-md-9 mx-auto ";
@@ -31,11 +31,8 @@ export class A22ItemComponent extends SingleComponent implements OnInit {
         next: item => {
           this.error = ``;
           this.item = item;
-          this.seoURL = `${this.gameURL}/items/${this.item.slug}/${this.language}`;
-          this.seoTitle = `${this.item.name} - ${this.gameTitle}`;
-          this.seoDesc = `${this.item.desc}`
-          this.seoImage = `${this.imgURL}items/${this.item.slug}.webp`
-          this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+          this.seoImage = `${this.imgURL}${this.section}/${this.item.slug}.webp`;
+          this.genericSEO(this.item.name, this.item.desc);
 
           if (this.item.effectline_set) {
             if (this.item.effectline_set.length > 1) {

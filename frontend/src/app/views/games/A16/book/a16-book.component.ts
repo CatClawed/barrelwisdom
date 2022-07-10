@@ -17,8 +17,7 @@ export class A16BookComponent extends SingleComponent implements OnInit {
     private a16service: A16Service,
     protected seoService: SeoService) {
     super(route, seoService);
-    this.gameService(this.a16service);
-    this.section = 'recipe-books'
+    this.gameService(this.a16service, 'recipe-books');
   }
   ngOnInit(): void {
     this.language = this.route.snapshot.params.language;

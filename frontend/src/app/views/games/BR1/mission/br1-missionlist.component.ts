@@ -25,14 +25,10 @@ export class BR1MissionlistComponent extends SingleComponent implements OnInit {
     protected seoService: SeoService,
     private viewportScroller: ViewportScroller) {
     super(route, seoService);
-    this.gameService(this.br1service);
+    this.gameService(this.br1service, 'mission');
   }
   ngOnInit(): void {
-    this.seoURL = `${this.gameURL}/mission/${this.language}`;
-    this.seoTitle = `Missions - ${this.gameTitle}`;
-    this.seoDesc = `The full mission list.`
-    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-
+    this.genericSEO(`Missions`, `The full mission list.`);
     this.br1service.getMissionList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({

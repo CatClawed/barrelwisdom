@@ -17,7 +17,7 @@ export class A23TraitComponent extends SingleComponent implements OnInit {
     protected seoService: SeoService,
     private a23service: A23Service,) {
     super(route, seoService);
-    this.gameService(this.a23service);
+    this.gameService(this.a23service, 'traits');
   }
 
   ngOnInit(): void {
@@ -26,10 +26,7 @@ export class A23TraitComponent extends SingleComponent implements OnInit {
       .subscribe({
         next: trait => {
           this.trait = trait;
-          this.seoURL = `${this.gameURL}/traits/${this.trait.slug}/${this.language}`;
-          this.seoTitle = `${this.trait.name} - ${this.gameTitle}`;
-          this.seoDesc = `${this.trait.desc}`;
-          this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+          this.genericSEO(this.trait.name, this.trait.desc);
         },
         error: error => {
           this.error = `${error.status}`;

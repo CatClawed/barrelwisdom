@@ -32,7 +32,7 @@ export class BRSLDemonlistComponent extends ListComponent implements OnInit {
     private brslservice: BRSLService,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.section = 'demons';
+    this.gameService(this.brslservice, 'demons');
     this.demonControl = new FormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.demonControl
@@ -41,12 +41,8 @@ export class BRSLDemonlistComponent extends ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.modalEvent();
-    this.gameService(this.brslservice);
     this.getDemons();
-    this.seoURL = `${this.gameURL}/demons/${this.language}`;
-    this.seoTitle = `Demons - ${this.gameTitle}`;
-    this.seoDesc = `The list of demons in ${this.gameTitle}.`
-    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+    this.genericSEO(`Demons`, `The list of demons in ${this.gameTitle}.`);
   }
 
   getDemons() {

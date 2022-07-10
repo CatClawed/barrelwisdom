@@ -17,7 +17,7 @@ export class A22EffectComponent extends SingleComponent implements OnInit {
     private a22service: A22Service,
     protected seoService: SeoService) {
     super(route, seoService);
-    this.gameService(this.a22service);
+    this.gameService(this.a22service, 'effectss');
   }
   ngOnInit(): void {
     if (this.showNav) this.colset = "col-md-5 mx-auto ";
@@ -30,10 +30,7 @@ export class A22EffectComponent extends SingleComponent implements OnInit {
           else {
             this.error = ``;
             this.effect = effect;
-            this.seoURL = `${this.gameURL}/effects/${this.effect.slug}/${this.language}`;
-            this.seoTitle = `${this.effect.name} - ${this.gameTitle}`;
-            this.seoDesc = this.effect.desc ? `${this.effect.desc}` : `EV Effect in ${this.gameTitle}.`
-            this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+            this.genericSEO(this.effect.name, this.effect.desc ? this.effect.desc : `EV Effect in ${this.gameTitle}.`);
           }
         },
         error: error => {

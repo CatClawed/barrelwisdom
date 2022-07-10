@@ -37,7 +37,7 @@ export class A22ItemlistComponent extends ListComponent implements OnInit {
     private a22service: A22Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.section = 'items';
+    this.gameService(this.a22service, 'items');
     this.itemControl = new FormControl();
     this.ingControl = new FormControl();
     this.pageForm = this.formBuilder.group({
@@ -51,13 +51,9 @@ export class A22ItemlistComponent extends ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.modalEvent();
-    this.gameService(this.a22service);
     this.getItems();
     this.getCategories();
-    this.seoURL = `${this.gameURL}/items/${this.language}`;
-    this.seoTitle = `Items - ${this.gameTitle}`;
-    this.seoDesc = `The list of items in ${this.gameTitle}.`
-    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+    this.genericSEO(`Items`, `The list of items in ${this.gameTitle}.`);
   }
 
   getItems() {

@@ -23,7 +23,7 @@ export class BRSLSkillComponent extends SingleComponent implements OnInit {
     private viewportScroller: ViewportScroller,
     private loc: Location) {
     super(route, seoService);
-    this.gameService(this.brslservice);
+    this.gameService(this.brslservice, 'skills');
   }
   ngOnInit(): void {
     this.brslservice.getSkillList(this.language)
@@ -32,10 +32,7 @@ export class BRSLSkillComponent extends SingleComponent implements OnInit {
         next: skill => {
           this.error = ``;
           this.skills = skill;
-          this.seoURL = `${this.gameURL}/skills/${this.language}`;
-          this.seoTitle = `Skills - ${this.gameTitle}`;
-          this.seoDesc = `All skills in ${this.gameTitle}.`
-          this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+          this.genericSEO(`Skills`, `All skills in ${this.gameTitle}.`);
         },
         error: error => {
           this.error = `${error.status}`;
@@ -48,7 +45,7 @@ export class BRSLSkillComponent extends SingleComponent implements OnInit {
     ).subscribe(fragment => this.viewportScroller.scrollToAnchor(fragment));
   }
   scroll(id: string) {
-    this.loc.replaceState(`${this.gameURL}/skills/${this.language}#${id}`);
+    this.loc.replaceState(`${this.gameURL}/${this.section}/${this.language}#${id}`);
     this.viewportScroller.scrollToAnchor(id);
   }
 } 

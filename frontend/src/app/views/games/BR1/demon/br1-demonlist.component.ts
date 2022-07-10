@@ -32,9 +32,8 @@ export class BR1DemonlistComponent extends ListComponent implements OnInit {
     private br1service: BR1Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.section = 'demons';
+    this.gameService(this.br1service, 'demons');
     this.demonControl = new FormControl();
-
     this.pageForm = this.formBuilder.group({
       filtertext: this.demonControl
     })
@@ -42,12 +41,8 @@ export class BR1DemonlistComponent extends ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.modalEvent();
-    this.gameService(this.br1service);
     this.getDemons();
-    this.seoURL = `${this.gameURL}/demons/${this.language}`;
-    this.seoTitle = `Demons - ${this.gameTitle}`;
-    this.seoDesc = `The list of demons in ${this.gameTitle}.`
-    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+    this.genericSEO(`Demons`, `The list of demons in ${this.gameTitle}.`);
   }
 
   getDemons() {
@@ -78,7 +73,7 @@ export class BR1DemonlistComponent extends ListComponent implements OnInit {
     return list;
   }
 
-  identify(index, item) {
+  identify2(index, item) {
     return item.slugname;
   }
 }

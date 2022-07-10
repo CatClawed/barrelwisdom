@@ -27,7 +27,7 @@ export class A22LocationComponent extends SingleComponent implements OnInit {
     private viewportScroller: ViewportScroller
   ) {
     super(route, seoService);
-    this.gameService(this.a22service);
+    this.gameService(this.a22service, 'locations');
   }
 
   ngOnInit(): void {
@@ -43,10 +43,7 @@ export class A22LocationComponent extends SingleComponent implements OnInit {
         }
         this.dig = false;
       }
-      this.seoURL = `${this.gameURL}/locations/${this.region.slug}/${this.language}`;
-      this.seoTitle = `${this.region.name} - ${this.gameTitle}`;
-      this.seoDesc = `All items in ${this.region.name}`
-      this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, '');
+      this.genericSEO(this.region.name, `All items in ${this.region.name}`);
     }
   }
 
@@ -56,7 +53,7 @@ export class A22LocationComponent extends SingleComponent implements OnInit {
     ).subscribe(fragment => this.viewportScroller.scrollToAnchor(fragment));
   }
   scroll(id: string) {
-    this.loc.replaceState(`${this.gameURL}/locations/${this.region.slug}/${this.language}#${id}`);
+    this.loc.replaceState(`${this.gameURL}/${this.section}/${this.region.slug}/${this.language}#${id}`);
     this.viewportScroller.scrollToAnchor(id);
   }
 

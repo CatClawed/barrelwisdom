@@ -32,7 +32,7 @@ export class A16BooklistComponent extends ListComponent implements OnInit {
     private a16service: A16Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.section = 'recipe-books';
+    this.gameService(this.a16service, 'recipe-books');
     this.bookControl = new FormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.bookControl,
@@ -41,7 +41,6 @@ export class A16BooklistComponent extends ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.modalEvent();
-    this.gameService(this.a16service);
     this.getBooks();
     this.genericSEO(`Recipe Books`, `The list of recipe books in ${this.gameTitle}.`);
   }

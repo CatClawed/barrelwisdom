@@ -17,7 +17,7 @@ export class A23BookComponent extends SingleComponent implements OnInit {
     private a23service: A23Service,
   ) {
     super(route, seoService);
-    this.gameService(this.a23service);
+    this.gameService(this.a23service, 'items/books');
   }
   
   ngOnInit(): void {
@@ -27,11 +27,8 @@ export class A23BookComponent extends SingleComponent implements OnInit {
         next: item => {
           this.error = ``;
           this.item = item;
-          this.seoURL = `${this.gameURL}/items/books/${this.item.slug}/${this.language}`;
-          this.seoTitle = `${this.item.name} - ${this.gameTitle}`;
-          this.seoDesc = `Recipe book in ${this.gameTitle}`
           this.seoImage = `${this.imgURL}items/${this.item.slug}.webp`
-          this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+          this.genericSEO(this.item.name, `Recipe book in ${this.gameTitle}`);
         },
         error: error => {
           this.error = `${error.status}`;

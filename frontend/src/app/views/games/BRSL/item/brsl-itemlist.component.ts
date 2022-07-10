@@ -35,7 +35,7 @@ export class BRSLItemlistComponent extends ListComponent implements OnInit {
     private brslservice: BRSLService,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.section = 'items';
+    this.gameService(this.brslservice, 'items');
     this.itemControl = new FormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.itemControl,
@@ -46,13 +46,9 @@ export class BRSLItemlistComponent extends ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.modalEvent();
-    this.gameService(this.brslservice);
     this.getItems();
     this.getCategories();
-    this.seoURL = `${this.gameURL}/items/${this.language}`;
-    this.seoTitle = `Items - ${this.gameTitle}`;
-    this.seoDesc = `The list of items in ${this.gameTitle}.`
-    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+    this.genericSEO(`Items`, `The list of items in ${this.gameTitle}.`);
   }
 
   getItems() {

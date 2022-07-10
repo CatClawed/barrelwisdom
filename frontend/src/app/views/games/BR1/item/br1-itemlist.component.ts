@@ -32,7 +32,7 @@ export class BR1ItemlistComponent extends ListComponent implements OnInit {
     private br1service: BR1Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.section = 'items';
+    this.gameService(this.br1service, 'items');
     this.itemControl = new FormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.itemControl
@@ -41,12 +41,8 @@ export class BR1ItemlistComponent extends ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.modalEvent();
-    this.gameService(this.br1service);
     this.getItems();
-    this.seoURL = `${this.gameURL}/items/${this.language}`;
-    this.seoTitle = `Items - ${this.gameTitle}`;
-    this.seoDesc = `The list of items in ${this.gameTitle}.`
-    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+    this.genericSEO(`Items`, `The list of items in ${this.gameTitle}.`);
   }
 
   getItems() {
@@ -77,7 +73,7 @@ export class BR1ItemlistComponent extends ListComponent implements OnInit {
     return list;
   }
 
-  identify(index, item) {
+  identify2(index, item) {
     return item.slugname;
   }
 }

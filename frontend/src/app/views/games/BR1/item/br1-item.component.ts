@@ -17,7 +17,7 @@ export class BR1ItemComponent extends SingleComponent implements OnInit {
     private br1service: BR1Service,
     protected seoService: SeoService) {
     super(route, seoService);
-    this.gameService(this.br1service);
+    this.gameService(this.br1service, 'items');
   }
   ngOnInit(): void {
     this.language = this.route.snapshot.params.language;
@@ -27,10 +27,7 @@ export class BR1ItemComponent extends SingleComponent implements OnInit {
         next: item => {
           this.error = ``;
           this.item = item;
-          this.seoURL = `${this.gameURL}/items/${this.item.slugname}/${this.language}`;
-          this.seoTitle = `${this.item.name} - ${this.gameTitle}`;
-          this.seoDesc = `${this.item.description}`
-          this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+          this.genericSEO(this.item.name, this.item.description);
         },
         error: error => {
           this.error = `${error.status}`;

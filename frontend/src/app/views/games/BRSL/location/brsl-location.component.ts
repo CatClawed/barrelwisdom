@@ -25,7 +25,7 @@ export class BRSLLocationComponent extends SingleComponent implements OnInit {
     private viewportScroller: ViewportScroller
   ) {
     super(route, seoService);
-    this.gameService(this.brslservice);
+    this.gameService(this.brslservice, `locations`);
   }
   ngOnInit(): void {
     this.location = this.route.snapshot.data.loc;
@@ -34,10 +34,7 @@ export class BRSLLocationComponent extends SingleComponent implements OnInit {
       this.error = `404`;
     }
     else {
-      this.seoURL = `${this.gameURL}/locations/${this.location.slug}/${this.language}`;
-      this.seoTitle = `${this.location.name} - ${this.gameTitle}`;
-      this.seoDesc = `All items and demons at ${this.location.name}`
-      this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, '');
+      this.genericSEO(this.location.name, `All items and demons in ${this.location.name}`);
     }
   }
   ngAfterViewInit(): void {

@@ -31,7 +31,7 @@ export class BR1FragmentEffectlistComponent extends SingleComponent implements O
     private viewportScroller: ViewportScroller
   ) {
     super(route, seoService);
-    this.gameService(this.br1service);
+    this.gameService(this.br1service, 'fragment-effects');
     this.fragmenteffectControl = new FormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.fragmenteffectControl
@@ -40,10 +40,7 @@ export class BR1FragmentEffectlistComponent extends SingleComponent implements O
 
   ngOnInit(): void {
     this.getFragmentEffects();
-    this.seoURL = `${this.gameURL}/fragment-effects/${this.language}`;
-    this.seoTitle = `Fragment Effects - ${this.gameTitle}`;
-    this.seoDesc = `The list of fragment effects in ${this.gameTitle}.`
-    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+    this.genericSEO(`Fragment Effects`, `The list of fragment effects in ${this.gameTitle}.`);
   }
 
   ngAfterViewInit(): void {
@@ -82,7 +79,7 @@ export class BR1FragmentEffectlistComponent extends SingleComponent implements O
 
   get f() { return this.pageForm.controls; }
 
-  identify(index, item) {
+  identify2(index, item) {
     return item.slugname;
   }
 }

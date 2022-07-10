@@ -32,7 +32,7 @@ export class BRSLFacilitylistComponent extends ListComponent implements OnInit {
     private brslservice: BRSLService,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.section = 'facilities';
+    this.gameService(this.brslservice, 'facilities');
     this.facilityControl = new FormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.facilityControl,
@@ -41,12 +41,8 @@ export class BRSLFacilitylistComponent extends ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.modalEvent();
-    this.gameService(this.brslservice);
     this.getFacilities();
-    this.seoURL = `${this.gameURL}/facilities/${this.language}`;
-    this.seoTitle = `Facilities - ${this.gameTitle}`;
-    this.seoDesc = `The list of facilities in ${this.gameTitle}.`
-    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+    this.genericSEO(`Facilities`, `The list of facilities in ${this.gameTitle}.`);
   }
 
   getFacilities() {

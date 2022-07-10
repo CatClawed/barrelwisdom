@@ -16,7 +16,7 @@ export class A23CategoryComponent extends SingleComponent implements OnInit {
     protected seoService: SeoService,
     private a23service: A23Service,) {
     super(route, seoService);
-    this.gameService(this.a23service);
+    this.gameService(this.a23service, 'categories');
   }
   ngOnInit(): void {
     this.a23service.getCategory(this.slug, this.language)
@@ -24,10 +24,7 @@ export class A23CategoryComponent extends SingleComponent implements OnInit {
         next: category => {
           this.error = ``;
           this.category = category;
-          this.seoURL = `${this.gameURL}/categories/${this.category.slug}/${this.language}`;
-          this.seoTitle = `${this.category.name} - ${this.gameTitle}`;
-          this.seoDesc = `All items in ${this.category.name}`
-          this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+          this.genericSEO(this.category.name, `All items in ${this.category.name}`);
         },
         error: error => {
           this.error = `${error.status}`;

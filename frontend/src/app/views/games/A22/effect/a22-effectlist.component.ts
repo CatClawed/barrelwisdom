@@ -35,7 +35,7 @@ export class A22EffectlistComponent extends ListComponent implements OnInit {
     private a22service: A22Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.section = 'effects';
+    this.gameService(this.a22service, 'effects');
     this.effectControl = new FormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.effectControl,
@@ -45,7 +45,6 @@ export class A22EffectlistComponent extends ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.modalEvent();
-    this.gameService(this.a22service);
     this.route.data
       .pipe(takeUntil(this.destroy$))
       .subscribe(data => {
@@ -64,7 +63,7 @@ export class A22EffectlistComponent extends ListComponent implements OnInit {
         if (data.type == "ev") {
           this.ev = true;
           this.seoURL = `${this.gameURL}/ev-effects/${this.language}`;
-          this.seoTitle = `Effects - ${this.gameTitle}`;
+          this.seoTitle = `EV Effects - ${this.gameTitle}`;
           this.seoDesc = `The list of EV effects in ${this.gameTitle}.`
         }
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);

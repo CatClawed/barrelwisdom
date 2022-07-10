@@ -17,23 +17,22 @@ export class BRSLItemComponent extends SingleComponent implements OnInit {
     protected route: ActivatedRoute,
     private brslservice: BRSLService,
     protected seoService: SeoService) {
-      super(route, seoService);
-    this.gameService(this.brslservice);
+    super(route, seoService);
+    this.gameService(this.brslservice, 'items');
   }
   ngOnInit(): void {
     if (this.showNav) this.colset = "col-md-9 mx-auto ";
     this.brslservice.getItem(this.slug, this.language)
-    .subscribe({next: item => {
-        this.error =``;
-        this.item = item;
-        this.seoURL = `${this.gameURL}/items/${this.item.slug}/${this.language}`;
-        this.seoTitle = `${this.item.name} - ${this.gameTitle}`;
-        this.seoDesc = `${this.item.desc}`
-        this.seoImage = `${this.imgURL}items/${this.item.slug}.webp`
-        this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-    },
-    error: error => {
-      this.error =`${error.status}`;
-    }});
+      .subscribe({
+        next: item => {
+          this.error = ``;
+          this.item = item;
+          this.seoImage = `${this.imgURL}${this.section}/${this.item.slug}.webp`;
+          this.genericSEO(this.item.name, this.item.desc);
+        },
+        error: error => {
+          this.error = `${error.status}`;
+        }
+      });
   }
 } 

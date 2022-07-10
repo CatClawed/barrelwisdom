@@ -16,14 +16,10 @@ export class A22ShopDevelopComponent extends SingleComponent implements OnInit {
     private a22service: A22Service,
     protected seoService: SeoService) {
     super(route, seoService);
-    this.gameService(this.a22service);
+    this.gameService(this.a22service, 'shopdevelop');
   }
   ngOnInit(): void {
-    this.seoURL = `${this.gameURL}/shopdevelop/${this.language}`;
-    this.seoTitle = `Shop Development - ${this.gameTitle}`;
-    this.seoDesc = `The full shop develop list.`
-    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-
+    this.genericSEO(`Shop Development`, `The full shop develop list.`);
     this.a22service.getShopDevList(this.language)
       .subscribe({
         next: shopdevelop => {

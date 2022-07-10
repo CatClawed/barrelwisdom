@@ -17,7 +17,7 @@ export class BRSLDemonComponent extends SingleComponent implements OnInit {
     protected seoService: SeoService,
     private brslservice: BRSLService,) {
     super(route, seoService);
-    this.gameService(this.brslservice);
+    this.gameService(this.brslservice, 'demons');
   }
   ngOnInit(): void {
     if (this.showNav) this.colset = "col-md-9 mx-auto ";
@@ -26,11 +26,8 @@ export class BRSLDemonComponent extends SingleComponent implements OnInit {
         next: demon => {
           this.error = ``;
           this.demon = demon;
-          this.seoURL = `${this.gameURL}/demons/${this.demon.slug}/${this.language}`;
-          this.seoTitle = `${this.demon.name} - ${this.gameTitle}`;
-          this.seoDesc = `${this.demon.desc}`
-          this.seoImage = `${this.imgURL}demons/${this.demon.slug}.webp`
-          this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+          this.seoImage = `${this.imgURL}${this.section}/${this.demon.slug}.webp`
+          this.genericSEO(this.demon.name, this.demon.desc);
         },
         error: error => {
           this.error = `${error.status}`;

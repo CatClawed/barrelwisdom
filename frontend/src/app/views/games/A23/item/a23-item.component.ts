@@ -34,10 +34,9 @@ export class A23ItemComponent extends SingleComponent implements OnInit {
     private a23service: A23Service,
     public historyService: HistoryService) {
     super(route, seoService);
-    this.gameService(this.a23service);
+    this.gameService(this.a23service, 'items');
   }
   ngOnInit(): void {
-    this.language = this.route.snapshot.params.language;
     if (this.showNav) this.colset = "col-md-9 mx-auto ";
     this.a23service.getItem(this.slug, this.language)
       .subscribe({
@@ -45,11 +44,8 @@ export class A23ItemComponent extends SingleComponent implements OnInit {
           this.error = ``;
           this.item = item;
           let name = (this.language === 'en') ? this.item.name.normalize('NFD').replace(/[\u0300-\u036f]/g, "") : this.item.name;
-          this.seoURL = `${this.gameURL}/items/${this.item.slug}/${this.language}`;
-          this.seoTitle = `${name} - ${this.gameTitle}`;
-          this.seoDesc = `${this.item.desc1}`
-          this.seoImage = `${this.imgURL}items/${this.item.slug}.webp`
-          this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+          this.seoImage = `${this.imgURL}${this.section}/${this.item.slug}.webp`
+          this.genericSEO(name, this.item.desc1);
         },
         error: error => {
           this.error = `${error.status}`;

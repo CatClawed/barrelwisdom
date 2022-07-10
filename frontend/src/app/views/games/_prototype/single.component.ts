@@ -8,7 +8,7 @@ import { SeoService } from '@app/services/seo.service';
 
 export abstract class SingleComponent {
     error: string = '';
-    section: string = "things";
+    section: string;
     language = "";
     colset: string;
 
@@ -35,14 +35,15 @@ export abstract class SingleComponent {
         this.slug = this.route.snapshot.params.subject ? this.route.snapshot.params.subject : '';
     }
 
-    gameService(service: any) {
+    gameService(service: any, section: string) {
         this.gameTitle = service.gameTitle[this.language];
         this.gameURL = service.gameURL;
         this.imgURL = service.imgURL;
+        this.section = section;
     }
 
     genericSEO(name: string, desc: string): void {
-        this.seoURL = `${this.gameURL}/${this.section}}/${this.slug}/${this.language}`;
+        this.seoURL = this.slug === '' ? `${this.gameURL}/${this.section}/${this.language}` : `${this.gameURL}/${this.section}/${this.slug}/${this.language}`;
         this.seoTitle = `${name} - ${this.gameTitle}`;
         this.seoDesc = `${desc}`
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);

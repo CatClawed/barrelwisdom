@@ -30,9 +30,8 @@ export class A22TraitlistComponent extends ListComponent implements OnInit {
     private formBuilder: FormBuilder,
     private a22service: A22Service,) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.section = 'traits';
+    this.gameService(this.a22service, 'traits');
     this.traitControl = new FormControl();
-
     this.pageForm = this.formBuilder.group({
       filtertext: this.traitControl,
       transfers: ['']
@@ -41,12 +40,8 @@ export class A22TraitlistComponent extends ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.modalEvent();
-    this.gameService(this.a22service);
     this.getTraits();
-    this.seoURL = `${this.gameURL}/traits/${this.language}`;
-    this.seoTitle = `Traits - ${this.gameTitle}`;
-    this.seoDesc = `The list of traits in ${this.gameTitle}.`
-    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+    this.genericSEO(`Traits`, `The list of traits in ${this.gameTitle}.`);
   }
 
   getTraits() {

@@ -18,7 +18,7 @@ export class BRSLFacilityComponent extends SingleComponent implements OnInit {
     protected seoService: SeoService,
     private brslservice: BRSLService,) {
     super(route, seoService);
-    this.gameService(this.brslservice);
+    this.gameService(this.brslservice, 'facilities');
   }
   ngOnInit(): void {
     if (this.showNav) this.colset = "col-md-9 mx-auto ";
@@ -27,11 +27,8 @@ export class BRSLFacilityComponent extends SingleComponent implements OnInit {
         next: facility => {
           this.error = ``;
           this.facility = facility;
-          this.seoURL = `${this.gameURL}/facilities/${this.facility.slug}/${this.language}`;
-          this.seoTitle = `${this.facility.name} - ${this.gameTitle}`;
-          this.seoDesc = `${this.facility.desc}`
-          this.seoImage = `${this.imgURL}facilities/${this.facility.slug}.webp`
-          this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+          this.seoURL = `${this.gameURL}/${this.section}/${this.facility.slug}/${this.language}`;
+          this.genericSEO(this.facility.name, this.facility.desc);
         },
         error: error => {
           this.error = `${error.status}`;

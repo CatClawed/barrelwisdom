@@ -29,7 +29,7 @@ export class BRSLFacilitySetComponent extends SingleComponent implements OnInit 
     private brslservice: BRSLService,
   ) {
     super(route, seoService);
-    this.gameService(this.brslservice);
+    this.gameService(this.brslservice, 'facilities/sets');
     this.facilityControl = new FormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.facilityControl
@@ -38,13 +38,7 @@ export class BRSLFacilitySetComponent extends SingleComponent implements OnInit 
 
   ngOnInit(): void {
     this.getFacilities();
-    this.gameTitle = this.brslservice.gameTitle[this.language];
-    this.gameURL = this.brslservice.gameURL;
-    this.imgURL = this.brslservice.imgURL;
-    this.seoURL = `${this.gameURL}/facilities/sets/${this.language}`;
-    this.seoTitle = `Facility Sets - ${this.gameTitle}`;
-    this.seoDesc = `The list of facility sets in ${this.gameTitle}.`
-    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+    this.genericSEO(`Facility Sets`, `All facility sets in ${this.gameTitle}.`);
   }
 
   getFacilities() {

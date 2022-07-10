@@ -18,7 +18,7 @@ export class A23EffectComponent extends SingleComponent implements OnInit {
     private a23service: A23Service,
   ) {
     super(route, seoService);
-    this.gameService(this.a23service);
+    this.gameService(this.a23service, 'effects');
   }
   
   ngOnInit(): void {
@@ -28,10 +28,7 @@ export class A23EffectComponent extends SingleComponent implements OnInit {
         next: effect => {
           this.error =``;
           this.effect = effect;
-          this.seoURL = `${this.gameURL}/effects/${this.effect.slug}/${this.language}`;
-          this.seoTitle = `${this.effect.name} - ${this.gameTitle}`;
-          this.seoDesc = `${this.effect.desc}`;
-          this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+          this.genericSEO(this.effect.name, this.effect.desc);
         },
         error: error => {
           this.error = `${error.status}`;

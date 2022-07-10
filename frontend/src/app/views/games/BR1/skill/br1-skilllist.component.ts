@@ -24,14 +24,10 @@ export class BR1SkilllistComponent extends SingleComponent implements OnInit {
     protected seoService: SeoService,
     private viewportScroller: ViewportScroller) {
     super(route, seoService);
-    this.gameService(this.br1service);
+    this.gameService(this.br1service, 'skills');
   }
   ngOnInit(): void {
-    this.seoURL = `${this.gameURL}/skill/${this.language}`;
-    this.seoTitle = `Skills - ${this.gameTitle}`;
-    this.seoDesc = `The full shop skill list.`
-    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-
+    this.genericSEO(`Skills`, `The full skill list in ${this.gameTitle}.`);
     this.br1service.getSkillList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
@@ -50,7 +46,7 @@ export class BR1SkilllistComponent extends SingleComponent implements OnInit {
     ).subscribe(fragment => this.viewportScroller.scrollToAnchor(fragment));
   }
   scroll(id: string) {
-    this.loc.replaceState(`${this.gameURL}/skills/${this.language}#${id}`);
+    this.loc.replaceState(`${this.gameURL}/${this.section}/${this.language}#${id}`);
     this.viewportScroller.scrollToAnchor(id);
   }
 } 

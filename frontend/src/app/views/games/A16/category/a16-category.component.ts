@@ -16,8 +16,7 @@ export class A16CategoryComponent extends SingleComponent implements OnInit {
     private a16service: A16Service,
     protected seoService: SeoService) {
     super(route, seoService);
-    this.gameService(this.a16service);
-    this.section = 'categories'
+    this.gameService(this.a16service, 'categories');
   }
   ngOnInit(): void {
     this.a16service.getCategory(this.slug, this.language)

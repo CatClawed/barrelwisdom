@@ -13,7 +13,7 @@
       </form>
    </div>
    <div *ngIf="filteredItems" class="item-grid">
-      <div *ngFor="let it of filteredItems | async; trackBy:identify" class="card card-body">
+      <div *ngFor="let it of filteredItems | async; trackBy:identify2" class="card card-body">
          <div class="flex">
             <h4 class="card-title">
                <a (click)="openModal(itemModal, it.slugname, $event);" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a>    

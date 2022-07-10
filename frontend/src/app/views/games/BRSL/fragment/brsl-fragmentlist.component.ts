@@ -29,7 +29,7 @@ export class BRSLFragmentComponent extends SingleComponent implements OnInit {
     protected seoService: SeoService,
   ) {
     super(route, seoService);
-    this.gameService(this.brslservice);
+    this.gameService(this.brslservice, 'fragments-and-dates');
     this.fragmentControl = new FormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.fragmentControl,
@@ -40,10 +40,7 @@ export class BRSLFragmentComponent extends SingleComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEvents();
-    this.seoURL = `${this.gameURL}/fragments-and-dates/${this.language}`;
-    this.seoTitle = `Fragments & Dates - ${this.gameTitle}`;
-    this.seoDesc = `The list of fragments and dates in ${this.gameTitle}.`
-    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+    this.genericSEO(`Fragments & Dates`, `All fragments and dates in ${this.gameTitle}.`);
   }
 
   getEvents() {

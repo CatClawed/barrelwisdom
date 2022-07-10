@@ -26,8 +26,7 @@ export class A16LocationComponent extends SingleComponent implements OnInit {
     private viewportScroller: ViewportScroller
   ) {
     super(route, seoService);
-    this.gameService(this.a16service);
-    this.section = 'locations'
+    this.gameService(this.a16service, 'locations');
   }
   ngOnInit(): void {
     this.location = this.route.snapshot.data.loc;

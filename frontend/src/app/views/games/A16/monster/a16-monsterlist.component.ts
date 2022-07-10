@@ -32,7 +32,7 @@ export class A16MonsterlistComponent extends ListComponent implements OnInit {
     private a16service: A16Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.section = 'monsters';
+    this.gameService(this.a16service, 'monsters');
     this.monsterControl = new FormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.monsterControl,
@@ -41,10 +41,8 @@ export class A16MonsterlistComponent extends ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.modalEvent();
-    this.gameService(this.a16service);
     this.getMonsters();
     this.genericSEO(`Monsters`, `The list of monsters in ${this.gameTitle}.`);
-
     this.monsterControl.valueChanges
       .pipe(takeUntil(this.destroy$))
       .subscribe(search => {

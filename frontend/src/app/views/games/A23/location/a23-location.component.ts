@@ -35,9 +35,8 @@ export class A23LocationComponent extends SingleComponent implements OnInit {
     private formBuilder: FormBuilder,
   ) {
     super(route, seoService);
-    this.gameService(this.a23service);
+    this.gameService(this.a23service, 'locations');
     this.locationControl = new FormControl();
-
     this.pageForm = this.formBuilder.group({
       filtertext: this.locationControl,
     })
@@ -59,10 +58,7 @@ export class A23LocationComponent extends SingleComponent implements OnInit {
         }
         );
       if (this.query) { this.pageForm.controls['filtertext'].patchValue(this.query); }
-      this.seoURL = `${this.gameURL}/locations/${this.region.slug}/${this.language}`;
-      this.seoTitle = `${this.region.name} - ${this.gameTitle}`;
-      this.seoDesc = `All items in ${this.region.name}`
-      this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, '');
+      this.genericSEO(this.region.name, `All items in ${this.region.name}`);
     }
   }
 
@@ -72,7 +68,7 @@ export class A23LocationComponent extends SingleComponent implements OnInit {
     ).subscribe(fragment => this.viewportScroller.scrollToAnchor(fragment));
   }
   scroll(id: string) {
-    this.loc.replaceState(`${this.gameURL}/locations/${this.region.slug}/${this.language}#${id}`);
+    this.loc.replaceState(`${this.gameURL}/${this.section}/${this.region.slug}/${this.language}#${id}`);
     this.viewportScroller.scrollToAnchor(id);
   }
 

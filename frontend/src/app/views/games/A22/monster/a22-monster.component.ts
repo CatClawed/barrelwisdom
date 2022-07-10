@@ -21,7 +21,7 @@ export class A22MonsterComponent extends SingleComponent implements OnInit {
     private a22service: A22Service,
     protected seoService: SeoService) {
     super(route, seoService);
-    this.gameService(this.a22service);
+    this.gameService(this.a22service, 'monsters');
   }
   ngOnInit(): void {
     this.language = this.route.snapshot.params.language;
@@ -57,12 +57,8 @@ export class A22MonsterComponent extends SingleComponent implements OnInit {
               this.spd.push(false);
             }
           }
-
-          this.seoURL = `${this.gameURL}/monsters/${this.monster.slug}/${this.language}`;
-          this.seoTitle = `${this.monster.name} - ${this.gameTitle}`;
-          this.seoDesc = `${this.monster.desc}`
-          this.seoImage = `${this.imgURL}monsters/${this.monster.slug}.webp`
-          this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+          this.seoImage = `${this.imgURL}${this.section}/${this.monster.slug}.webp`
+          this.genericSEO(this.monster.name, this.monster.desc);
         },
         error: error => {
           this.error = `${error.status}`;

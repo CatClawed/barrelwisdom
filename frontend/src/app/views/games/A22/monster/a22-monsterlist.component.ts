@@ -34,7 +34,7 @@ export class A22MonsterlistComponent extends ListComponent implements OnInit {
     private a22service: A22Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.section = 'monsters';
+    this.gameService(this.a22service, 'monsters');
     this.monsterControl = new FormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.monsterControl,
@@ -44,12 +44,8 @@ export class A22MonsterlistComponent extends ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.modalEvent();
-    this.gameService(this.a22service);
     this.getMonsters();
-    this.seoURL = `${this.gameURL}/monsters/${this.language}`;
-    this.seoTitle = `Monsters - ${this.gameTitle}`;
-    this.seoDesc = `The list of monsters in ${this.gameTitle}.`
-    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+    this.genericSEO(`Monsters`, `The list of monsters in ${this.gameTitle}.`);
   }
 
   getMonsters() {

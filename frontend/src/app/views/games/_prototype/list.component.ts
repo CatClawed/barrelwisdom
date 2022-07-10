@@ -17,7 +17,7 @@ export abstract class ListComponent {
     pageForm: FormGroup;
     error: string = '';
     selected: string = "thing";
-    section: string = "things";
+    section: string;
     language = "";
     config: ModalOptions = { class: "col-md-5 mx-auto" };
 
@@ -41,10 +41,11 @@ export abstract class ListComponent {
         this.language = this.route.snapshot.params.language;
     }
 
-    gameService(service: any) {
+    gameService(service: any, section: string) {
         this.gameTitle = service.gameTitle[this.language];
         this.gameURL = service.gameURL;
         this.imgURL = service.imgURL;
+        this.section = section;
     }
 
     modalEvent() {

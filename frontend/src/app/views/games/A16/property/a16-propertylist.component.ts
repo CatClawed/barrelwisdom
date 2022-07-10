@@ -31,7 +31,7 @@ export class A16PropertylistComponent extends ListComponent implements OnInit {
     private a16service: A16Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.section = 'properties';
+    this.gameService(this.a16service, 'properties');
     this.propertyControl = new FormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.propertyControl,
@@ -41,7 +41,6 @@ export class A16PropertylistComponent extends ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.modalEvent();
-    this.gameService(this.a16service);
     this.getProperties();
     this.genericSEO(`Properties`, `The list of properties in ${this.gameTitle}.`);
   }

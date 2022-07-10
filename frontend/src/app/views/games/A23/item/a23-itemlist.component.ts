@@ -36,10 +36,9 @@ export class A23ItemlistComponent extends ListComponent implements OnInit {
     private a23service: A23Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.section = 'items';
+    this.gameService(this.a23service, 'items');
     this.itemControl = new FormControl();
     this.ingControl = new FormControl();
-
     this.pageForm = this.formBuilder.group({
       filtertext: this.itemControl,
       filtering: this.ingControl,
@@ -50,14 +49,9 @@ export class A23ItemlistComponent extends ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.modalEvent();
-    this.gameService(this.a23service);
     this.getItems();
     this.getCategories();
-
-    this.seoURL = `${this.gameURL}/items/${this.language}`;
-    this.seoTitle = `Items - ${this.gameTitle}`;
-    this.seoDesc = `The list of items in ${this.gameTitle}.`
-    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+    this.genericSEO(`Items`, `The list of items in ${this.gameTitle}.`);
   }
 
   getItems() {

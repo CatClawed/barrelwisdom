@@ -36,7 +36,7 @@ export class A23RecipeComponent extends SingleComponent implements OnInit {
     public historyService: HistoryService,
   ) {
     super(route, seoService);
-    this.gameService(this.a23service);
+    this.gameService(this.a23service, 'recipe-ideas');
   }
 
   ngOnInit(): void {
@@ -86,10 +86,7 @@ export class A23RecipeComponent extends SingleComponent implements OnInit {
               }
             }
           }
-          this.seoURL = `${this.gameURL}/recipe-ideas/${this.language}`;
-          this.seoTitle = `Recipe Ideas - ${this.gameTitle}`;
-          this.seoDesc = `All recipe ideas in ${this.gameTitle}`
-          this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage, true);
+          this.genericSEO(`Recipe Ideas`, `All recipe ideas in ${this.gameTitle}.`);
         },
         error: error => {
           this.error = `${error.status}`;
@@ -102,7 +99,7 @@ export class A23RecipeComponent extends SingleComponent implements OnInit {
     this.plachta = p;
     this.shared = sh;
     this.book = b;
-    this.location.replaceState(`${this.gameURL}/recipe-ideas/${this.language}?tab=${char}`);
+    this.location.replaceState(`${this.gameURL}/${this.section}/${this.language}?tab=${char}`);
   }
 
   context(r: RecipeIdea) {

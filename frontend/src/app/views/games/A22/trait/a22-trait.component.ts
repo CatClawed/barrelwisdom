@@ -17,7 +17,7 @@ export class A22TraitComponent extends SingleComponent implements OnInit {
     private a22service: A22Service,
     protected seoService: SeoService) {
     super(route, seoService);
-    this.gameService(this.a22service);
+    this.gameService(this.a22service, 'traits');
   }
   ngOnInit(): void {
     if (this.showNav) this.colset = "col-md-5 mx-auto "
@@ -25,11 +25,7 @@ export class A22TraitComponent extends SingleComponent implements OnInit {
       .subscribe({
         next: trait => {
           this.trait = trait;
-          this.seoURL = `${this.gameURL}/traits/${this.trait.slug}/${this.language}`;
-          this.seoTitle = `${this.trait.name} - ${this.gameTitle}`;
-          this.seoDesc = `${this.trait.desc}`;
-          this.seoImage = ``;
-          this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+          this.genericSEO(this.trait.name, this.trait.desc);
         },
         error: error => {
           this.error = `${error.status}`;

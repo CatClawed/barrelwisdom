@@ -26,15 +26,12 @@ export class A23MajorGatherComponent extends SingleComponent implements OnInit {
     private viewportScroller: ViewportScroller,
   ) {
     super(route, seoService);
-    this.gameService(this.a23service);
+    this.gameService(this.a23service, 'major-gathering');
   }
 
   ngOnInit(): void {
     this.major = this.route.snapshot.data.gather;
-    this.seoURL = `${this.gameURL}/major-gathering/${this.language}`;
-    this.seoTitle = `Major Gathering Spots - ${this.gameTitle}`;
-    this.seoDesc = `All major gathering items in ${this.gameTitle}`
-    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, '', true);
+    this.genericSEO(`Major Gathering Spots`, `All major gathering items in ${this.gameTitle}.`);
   }
 
   ngAfterViewInit(): void {
@@ -43,7 +40,7 @@ export class A23MajorGatherComponent extends SingleComponent implements OnInit {
     ).subscribe(fragment => this.viewportScroller.scrollToAnchor(fragment));
   }
   scroll(id: string) {
-    this.loc.replaceState(`${this.gameURL}/major-gathering/${this.language}#${id}`);
+    this.loc.replaceState(`${this.gameURL}/${this.section}/${this.language}#${id}`);
     this.viewportScroller.scrollToAnchor(id);
   }
 

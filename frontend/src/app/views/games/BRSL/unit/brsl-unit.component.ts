@@ -17,7 +17,7 @@ export class BRSLUnitComponent extends SingleComponent implements OnInit {
     private brslservice: BRSLService,
     protected seoService: SeoService) {
     super(route, seoService);
-    this.gameService(this.brslservice);
+    this.gameService(this.brslservice, 'locations');
   }
   ngOnInit(): void {
     this.language = this.route.snapshot.params.language;
@@ -26,10 +26,7 @@ export class BRSLUnitComponent extends SingleComponent implements OnInit {
         next: unit => {
           this.error = ``;
           this.units = unit;
-          this.seoURL = `${this.gameURL}/units/${this.language}`;
-          this.seoTitle = `Units - ${this.gameTitle}`;
-          this.seoDesc = `All crafting units in ${this.gameTitle}.`
-          this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+          this.genericSEO(`Units`, `All crafting units in ${this.gameTitle}.`);
         },
         error: error => {
           this.error = `${error.status}`;

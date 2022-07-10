@@ -16,18 +16,15 @@ constructor(
   protected seoService: SeoService,
   private a23service: A23Service,) {
     super(route, seoService);
-    this.gameService(this.a23service);
+    this.gameService(this.a23service, 'seeds');
   }
   ngOnInit(): void {
     this.a23service.getSeeds(this.language)
     .subscribe({next: seed => {
         this.error =``;
         this.seeds = seed;
-        this.seoURL = `${this.gameURL}/seeds/${this.language}`;
-        this.seoTitle = `Seeds - ${this.gameTitle}`;
-        this.seoDesc = `About growing seeds, and the list of items you can get.`
-        this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-    },
+        this.genericSEO(`Seeds`, `About growing seeds, and the list of items you can get.`);
+      },
     error: error => {
       this.error =`${error.status}`;
     }});
