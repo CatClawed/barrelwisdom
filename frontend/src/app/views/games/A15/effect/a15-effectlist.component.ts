@@ -1,131 +1,80 @@
 import { Location } from '@angular/common';
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { Effect } from '@app/interfaces/a15';
-import { A15Service } from '@app/services/a15.service';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Effect } from '@app/views/games/A15/_services/a15.interface';
+import { A15Service } from '@app/views/games/A15/_services/a15.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { ListComponent } from '@app/views/games/_prototype/list.component';
+import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
 
 @Component({
-    templateUrl: 'a15-effectlist.component.html',
-    selector: 'a15-effectlist',
-    providers: [DestroyService]
-  })
+  templateUrl: 'a15-effectlist.component.html',
+  selector: 'a15-effectlist',
+  providers: [DestroyService]
+})
 
-  export class A15EffectlistComponent implements OnInit {
-    modalRef: BsModalRef;
-    pageForm: FormGroup;
-    effectControl: FormControl;
-    error: string = '';
-    effect: string = "effect";
-    effects: Effect[];
-    filteredEffects: Observable<Effect[]>;
-    language = "";
-    config: ModalOptions = { class: "col-md-5 mx-auto" };
-  
-    seoTitle: string;
-    seoDesc: string;
-    seoImage: string;
-    seoURL: string;
+export class A15EffectlistComponent extends ListComponent implements OnInit {
+  effectControl: FormControl;
+  effects: Effect[];
+  filteredEffects: Observable<Effect[]>;
 
-    gameTitle: string;
-    gameURL: string;
-    imgURL: string;
-  
-    constructor(
-      private modalService: BsModalService,
-      private readonly destroy$: DestroyService,
-      private router: Router,
-      private formBuilder: FormBuilder,
-      private route: ActivatedRoute,
-      private location: Location,
-      private a15service: A15Service,
-      protected seoService: SeoService
-    ) { 
-      this.effectControl = new FormControl();
+  constructor(
+    protected modalService: BsModalService,
+    protected readonly destroy$: DestroyService,
+    protected router: Router,
+    protected route: ActivatedRoute,
+    protected location: Location,
+    protected seoService: SeoService,
+    private formBuilder: FormBuilder,
+    private a15service: A15Service,
+  ) {
+    super(modalService, destroy$, router, route, location, seoService);
+    this.gameService(this.a15service, 'effects');
+    this.effectControl = new FormControl();
+    this.pageForm = this.formBuilder.group({
+      filtertext: this.effectControl,
+    })
+  }
 
-      this.pageForm = this.formBuilder.group({
-        filtertext: this.effectControl,
-      })
-    }
-  
-    ngOnInit(): void {
-  
-      this.language = this.route.snapshot.params.language;
-      this.getEffects();
-      
-      this.gameTitle = this.a15service.gameTitle[this.language];
-      this.gameURL = this.a15service.gameURL;
-      this.imgURL = this.a15service.imgURL;
+  ngOnInit(): void {
+    this.modalEvent();
+    this.getEffects();
+    this.genericSEO(`Effects`, `The list of effects in ${this.gameTitle}.`);
+  }
 
-      this.seoURL = `${this.gameURL}/effects/${this.language}`;
-      this.seoTitle = `Effects - ${this.gameTitle}`;
-      this.seoDesc = `The list of effects in ${this.gameTitle}.`
-      this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-  
-      let modalLink = this.router.events
-      .subscribe(event => {
-        if (event instanceof NavigationEnd) {
-          this.modalService.setDismissReason('link');
-          this.modalService.hide();
-          modalLink.unsubscribe();
+  getEffects() {
+    this.a15service.getEffectList(this.language)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: effects => {
+          this.effects = effects;
+          this.filteredEffects = this.pageForm.valueChanges.pipe(
+            startWith(null as Observable<Effect[]>),
+            map((search: any) => search ? this.filterT(search.filtertext) : this.effects.slice())
+          );
+        },
+        error: error => {
+          this.error = `${error.status}`;
         }
       });
-    }
-  
-    getEffects() {
-      this.a15service.getEffectList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({next: effects => {
-        this.effects = effects;
-        this.filteredEffects = this.pageForm.valueChanges.pipe(
-          startWith(null as Observable<Effect[]>),
-          map((search: any) => search ? this.filterT(search.filtertext) : this.effects.slice())
-        );
-      },
-      error: error => {
-        this.error =`${error.status}`;
-      }});
-    }
-  
-    openModal(template: TemplateRef<any>, slug: string, event?) {
-      if (event) {
-        if(event.ctrlKey) {
-          return;
-        }
-        else {
-          event.preventDefault()
-        }
-      }
-      this.effect = slug;
-      this.location.go(`${this.gameURL}/effects/` + slug + "/" + this.language);
-      this.modalRef = this.modalService.show(template);
-      this.modalRef.onHide.pipe(takeUntil(this.destroy$))
-      .subscribe((reason: string | any) => {
-        if(reason != "link") {
-          this.location.go(`${this.gameURL}/effects/` + this.language);
-          this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-        }})
-    }
-  
-    private filterT(value: string): Effect[] {
-      let effectlist: Effect[] = this.effects;
-      if(!value) {
-        return effectlist;
-      }
-      const filterValue = value.toLowerCase();
-      return effectlist.filter(effect => { 
-          return (effect.desc) ? effect.name.toLowerCase().includes(filterValue) ||  effect.desc.toLowerCase().includes(filterValue) : effect.name.toLowerCase().includes(filterValue)
-        });
-    } 
-  
-    get f() { return this.pageForm.controls; }
-
-    identify(index, item){
-      return item.slugname;
-   }
   }
+
+  private filterT(value: string): Effect[] {
+    let effectlist: Effect[] = this.effects;
+    if (!value) {
+      return effectlist;
+    }
+    const filterValue = value.toLowerCase();
+    return effectlist.filter(effect => {
+      return (effect.desc) ? effect.name.toLowerCase().includes(filterValue) || effect.desc.toLowerCase().includes(filterValue) : effect.name.toLowerCase().includes(filterValue)
+    });
+  }
+
+  identify2(index, item) {
+    return item.slugname;
+  }
+}

@@ -16,7 +16,7 @@ const routes: Routes = [
     component: A15PropertylistComponent
   },
   {
-    path: ':property/:language',
+    path: ':subject/:language',
     canActivate: [LanguageGuard],
     component: A15PropertyComponent
   },

@@ -48,7 +48,7 @@
     </form>
   </div>
 <div class="item-grid">
-<div *ngFor="let prop of filteredProperties | async; trackBy:identify" class="card card-body">
+<div *ngFor="let prop of filteredProperties | async; trackBy:identify2" class="card card-body">
   <div style="height:100%;">
     <div class="flex">
       <h4 class="card-title"><a (click)="openModal(propertyModal, prop.slugname, $event);" href="/{{gameURL}}/properties/{{prop.slugname}}/{{language}}">{{prop.name}}</a></h4>
@@ -87,7 +87,7 @@
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <i class="fas fa-times-circle"></i>
     </button>
-    <a15-property slugname="{{property}}" [showNav]="false"></a15-property>
+    <a15-property slug="{{selected}}" [showNav]="false"></a15-property>
   </div>
 </ng-template>
 </div>

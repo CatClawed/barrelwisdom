@@ -1,10 +1,10 @@
-import { AreaData } from "@app/interfaces/a12";
+import { AreaData } from '@app/interfaces/a12';
 import { Resolve } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Router, ActivatedRoute } from '@angular/router';
 import { Observable, EMPTY } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { A12Service } from "@app/services/a12.service";
+import { A12Service } from '@app/services/a12.service';
 
 
 @Injectable({

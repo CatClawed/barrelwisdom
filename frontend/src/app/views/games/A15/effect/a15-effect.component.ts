@@ -1,67 +1,36 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Effect } from '@app/interfaces/a15';
-import { A15Service } from '@app/services/a15.service';
+import { Effect } from '@app/views/games/A15/_services/a15.interface';
+import { A15Service } from '@app/views/games/A15/_services/a15.service';
 import { SeoService } from '@app/services/seo.service';
+import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
   templateUrl: 'a15-effect.component.html',
   selector: 'a15-effect',
 })
-export class A15EffectComponent implements OnInit {
-
-  loading = false;
-  submitted = false;
-  returnUrl: string;
-  error: string = '';
+export class A15EffectComponent extends SingleComponent implements OnInit {
   effect: Effect;
-  colset: string;
 
-  @Input()
-  slugname: string = "";
-
-  @Input()
-  showNav: boolean = true;
-
-  language = "";
-
-  seoTitle: string;
-  seoDesc: string;
-  seoImage: string;
-  seoURL: string;
-
-  gameTitle: string;
-  gameURL: string;
-  imgURL: string;
-
-constructor(
-    private route: ActivatedRoute,
+  constructor(
+    protected route: ActivatedRoute,
     private a15service: A15Service,
     protected seoService: SeoService) {
-      if(this.route.snapshot.params.effect != null) {
-      this.slugname = this.route.snapshot.params.effect;
-    }
+    super(route, seoService);
+    this.gameService(this.a15service, 'effects');
   }
   ngOnInit(): void {
-    this.language = this.route.snapshot.params.language;
-    if(this.showNav) {
-      this.colset = "col-md-5 mx-auto "
-    }
-    this.a15service.getEffect(this.slugname, this.language)
-    .subscribe({next: effect => {
-      this.error =``;
-      this.effect = effect;
-      this.gameTitle = this.a15service.gameTitle[this.language];
-      this.gameURL = this.a15service.gameURL;
-      this.imgURL = this.a15service.imgURL;
-
-      this.seoURL = `${this.gameURL}/effects/${this.effect.slugname}/${this.language}`;
-      this.seoTitle = `${this.effect.name} - ${this.gameTitle}`;
-      this.seoDesc = `${this.effect.desc}`;
-      this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-    },
-    error: error => {
-      this.error =`${error.status}`;
-    }});
+    if (this.showNav) this.colset = "col-md-5 mx-auto ";
+    this.a15service.getEffect(this.slug, this.language)
+      .subscribe({
+        next: effect => {
+          this.error = ``;
+          this.effect = effect;
+          this.genericSEO(this.effect.name, this.effect.desc);
+        },
+        error: error => {
+          this.error = `${error.status}`;
+        }
+      });
   }
 } 

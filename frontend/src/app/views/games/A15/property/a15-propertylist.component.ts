@@ -1,12 +1,13 @@
 import { Location } from '@angular/common';
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { Property } from '@app/interfaces/a15';
-import { A15Service } from '@app/services/a15.service';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Property } from '@app/views/games/A15/_services/a15.interface';
+import { A15Service } from '@app/views/games/A15/_services/a15.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ListComponent } from '@app/views/games/_prototype/list.component';
+import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
 
@@ -14,36 +15,25 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   templateUrl: 'a15-propertylist.component.html',
   providers: [DestroyService]
 })
-export class A15PropertylistComponent implements OnInit {
-  modalRef: BsModalRef;
-  pageForm: FormGroup;
+export class A15PropertylistComponent extends ListComponent implements OnInit {
   propertyControl: FormControl;
-  error: string = '';
-  property: string = "property";
   properties: Property[];
   filteredProperties: Observable<Property[]>;
   currentTransfer: string = "1";
-  language = "";
-
-  seoTitle: string;
-  seoDesc: string;
-  seoImage: string;
-  seoURL: string;
-  gameTitle: string;
-  gameURL: string;
-  imgURL: string;
 
   constructor(
-    private modalService: BsModalService,
-    private readonly destroy$: DestroyService,
-    private router: Router,
+    protected modalService: BsModalService,
+    protected readonly destroy$: DestroyService,
+    protected router: Router,
+    protected route: ActivatedRoute,
+    protected location: Location,
+    protected seoService: SeoService,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private location: Location,
     private a15service: A15Service,
-    protected seoService: SeoService) { 
+  ) {
+    super(modalService, destroy$, router, route, location, seoService);
+    this.gameService(this.a15service, 'properties');
     this.propertyControl = new FormControl();
-
     this.pageForm = this.formBuilder.group({
       filtertext: this.propertyControl,
       transfers: ['']
@@ -51,68 +41,31 @@ export class A15PropertylistComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.language = this.route.snapshot.params.language;
-
+    this.modalEvent();
+    this.genericSEO(`Properties`, `The list of properties in ${this.gameTitle}.`);
     this.getProperties();
-    this.gameTitle = this.a15service.gameTitle[this.language];
-    this.gameURL = this.a15service.gameURL;
-    this.imgURL = this.a15service.imgURL;
-    
-    this.seoURL = `${this.gameURL}/properties/${this.language}`;
-    this.seoTitle = `Properties - ${this.gameTitle}`;
-    this.seoDesc = `The list of properties in ${this.gameTitle}.`
-    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-
-    let modalLink = this.router.events
-    .subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.modalService.setDismissReason('link');
-        this.modalService.hide();
-        modalLink.unsubscribe();
-      }
-    });
   }
 
   getProperties() {
     this.a15service.getPropertyList(this.language)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe({next: properties => {
-      this.properties = properties;
-      this.filteredProperties = this.pageForm.valueChanges.pipe(
-        startWith(null as Observable<Property[]>),
-        map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.properties.slice())
-      );
-    },
-    error: error => {
-      this.error =`${error.status}`;
-    }});
-  }
-
-  openModal(template: TemplateRef<any>, slug: string, event?) {
-      if (event) {
-        if(event.ctrlKey) {
-          return;
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: properties => {
+          this.properties = properties;
+          this.filteredProperties = this.pageForm.valueChanges.pipe(
+            startWith(null as Observable<Property[]>),
+            map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.properties.slice())
+          );
+        },
+        error: error => {
+          this.error = `${error.status}`;
         }
-        else {
-          event.preventDefault()
-        }
-      }
-    this.property = slug;
-    this.location.go(`${this.gameURL}/properties/` + slug + "/" + this.language);
-    this.modalRef = this.modalService.show(template);
-    this.modalRef.onHide
-    .pipe(takeUntil(this.destroy$))
-    .subscribe((reason: string | any) => {
-      if(reason != "link") {
-        this.location.go(`${this.gameURL}/properties/` + this.language);
-        this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-    }})
+      });
   }
 
   private filterT(value: string, transfer: string): Property[] {
     let propertylist: Property[] = this.properties;
-    switch(transfer) {
+    switch (transfer) {
       case "2":
         propertylist = this.properties.filter(property => property.bomb == true);
         break;
@@ -132,18 +85,16 @@ export class A15PropertylistComponent implements OnInit {
         propertylist = this.properties.filter(property => property.accessory == true);
         break;
     }
-    if(!value) {
+    if (!value) {
       return propertylist;
     }
     const filterValue = value.toLowerCase();
     return propertylist.filter(property => {
       return property.name.toLowerCase().includes(filterValue) || property.desc.toLowerCase().includes(filterValue)
     });
-  } 
-
-  get f() { return this.pageForm.controls; }
-
-    identify(index, item){
-      return item.slugname; 
-   }
   }
+
+  identify2(index, item) {
+    return item.slugname;
+  }
+}

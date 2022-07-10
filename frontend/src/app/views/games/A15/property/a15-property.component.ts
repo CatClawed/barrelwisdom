@@ -1,66 +1,35 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Property } from '@app/interfaces/a15';
-import { A15Service } from '@app/services/a15.service';
+import { Property } from '@app/views/games/A15/_services/a15.interface';
+import { A15Service } from '@app/views/games/A15/_services/a15.service';
 import { SeoService } from '@app/services/seo.service';
+import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
   templateUrl: 'a15-property.component.html',
   selector: 'a15-property',
 })
-export class A15PropertyComponent implements OnInit {
-
-  loading = false;
-  submitted = false;
-  returnUrl: string;
-  error: string = '';
+export class A15PropertyComponent extends SingleComponent implements OnInit {
   property: Property;
-  colset: string;
-
-  seoTitle: string;
-  seoDesc: string;
-  seoImage: string;
-  seoURL: string;
-
-  gameTitle: string;
-  gameURL: string;
-  imgURL: string;
-
-  @Input()
-  slugname: string = "";
-
-  @Input()
-  showNav: boolean = true;
-
-  language = "";
 
   constructor(
-    private route: ActivatedRoute,
+    protected route: ActivatedRoute,
     private a15service: A15Service,
     protected seoService: SeoService) {
-      if(this.route.snapshot.params.property != null) {
-      this.slugname = this.route.snapshot.params.property;
-    }
+    super(route, seoService);
+    this.gameService(this.a15service, 'properties');
   }
   ngOnInit(): void {
-    this.language = this.route.snapshot.params.language;
-    if(this.showNav) {
-      this.colset = "col-md-5 mx-auto "
-    }
-    this.a15service.getProperty(this.slugname, this.language)
-    .subscribe({next: property => {
-      this.property = property;
-      this.gameTitle = this.a15service.gameTitle[this.language];
-      this.gameURL = this.a15service.gameURL;
-      this.imgURL = this.a15service.imgURL;
-
-      this.seoURL = `${this.gameURL}/properties/${this.property.slugname}/${this.language}`;
-      this.seoTitle = `${this.property.name} - ${this.gameTitle}`;
-      this.seoDesc = `${this.property.desc}`
-      this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-    },
-    error: error => {
-      this.error =`${error.status}`;
-    }});
+    if (this.showNav) this.colset = "col-md-5 mx-auto ";
+    this.a15service.getProperty(this.slug, this.language)
+      .subscribe({
+        next: property => {
+          this.property = property;
+          this.genericSEO(this.property.name, this.property.desc);
+        },
+        error: error => {
+          this.error = `${error.status}`;
+        }
+      });
   }
 } 

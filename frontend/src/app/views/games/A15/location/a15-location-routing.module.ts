@@ -6,7 +6,7 @@ import { A15LocationResolver } from './a15-location.resolve';
 
 const routes: Routes = [
   {
-    path: ':location/:language',
+    path: ':subject/:language',
     canActivate: [LanguageGuard],
     component: A15LocationComponent,
     resolve: {
