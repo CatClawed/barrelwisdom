@@ -16,7 +16,7 @@ const routes: Routes = [
     component: A12TraitlistComponent
   },
   {
-    path: ':trait/:language',
+    path: ':subject/:language',
     canActivate: [LanguageGuard],
     component: A12TraitComponent
   },

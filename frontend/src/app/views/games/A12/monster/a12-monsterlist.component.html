@@ -15,7 +15,7 @@
     </form>
 </div>
 <div *ngIf="filteredMonsters" class="item-grid">
-  <div *ngFor="let mon of filteredMonsters | async; trackBy:identify" class="card card-body">
+  <div *ngFor="let mon of filteredMonsters | async; trackBy:identify2" class="card card-body">
     <h4 class="card-title card-icon-space">
       <a (click)="openModal(monsterModal, mon.slugname, $event);" href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">{{mon.name}}</a>    
     </h4>
@@ -35,7 +35,7 @@
       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
         <i class="fas fa-times-circle"></i>
       </button>
-       <a12-monster slugname="{{monster}}" [showNav]="false"></a12-monster>
+       <a12-monster slug="{{selected}}" [showNav]="false"></a12-monster>
     </div>
   </ng-template>
 </div>

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AreaData, Book, Category, CategoryData, Effect, ItemFull, ItemList, MonsterFull, MonsterList, Trait } from '@app/interfaces/a12';
+import { AreaData, Book, Category, CategoryData, Effect, ItemFull, ItemList, MonsterFull, MonsterList, Trait } from '@app/views/games/A12/_services/a12.interface';
 import { environment } from '@environments/environment';
 import { Observable } from 'rxjs';
 

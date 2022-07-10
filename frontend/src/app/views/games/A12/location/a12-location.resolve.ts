@@ -1,10 +1,9 @@
-import { AreaData } from '@app/interfaces/a12';
-import { Resolve } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Router, ActivatedRoute } from '@angular/router';
-import { Observable, EMPTY } from 'rxjs';
+import { ActivatedRoute, ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
+import { AreaData } from '@app/views/games/A12/_services/a12.interface';
+import { A12Service } from '@app/views/games/A12/_services/a12.service';
+import { EMPTY, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { A12Service } from '@app/services/a12.service';
 
 
 @Injectable({
@@ -18,7 +17,7 @@ export class A12LocationResolver implements Resolve<AreaData> {
     }
 
   resolve(route: ActivatedRouteSnapshot): Observable<AreaData> {
-    return this.a12service.getRegion(route.params.location, route.params.language).pipe(
+    return this.a12service.getRegion(route.params.subject, route.params.language).pipe(
         catchError(() => {
             this.router.navigateByUrl('/totori/error', { skipLocationChange: true });
             return EMPTY;

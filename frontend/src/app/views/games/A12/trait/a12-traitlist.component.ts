@@ -1,48 +1,38 @@
 import { Location } from '@angular/common';
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { Trait } from '@app/interfaces/a12';
-import { A12Service } from '@app/services/a12.service';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Trait } from '@app/views/games/A12/_services/a12.interface';
+import { A12Service } from '@app/views/games/A12/_services/a12.service';
+import { ListComponent } from '@app/views/games/_prototype/list.component';
+import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
-
 
 @Component({
   templateUrl: 'a12-traitlist.component.html',
   providers: [DestroyService]
 })
-export class A12TraitlistComponent implements OnInit {
-  modalRef: BsModalRef;
-  pageForm: FormGroup;
+export class A12TraitlistComponent extends ListComponent implements OnInit {
   traitControl: FormControl;
-  error: string = '';
-  trait: string = "trait";
-  traits: Trait[]; 
+  traits: Trait[];
   filteredTraits: Observable<Trait[]>;
   currentTransfer: string = "1";
-  language = "";
-
-  seoTitle: string;
-  seoDesc: string;
-  seoImage: string;
-  seoURL: string;
-  gameTitle: string;
-  gameURL: string;
-  imgURL: string;
 
   constructor(
-    private modalService: BsModalService,
-    private readonly destroy$: DestroyService,
-    private router: Router,
+    protected modalService: BsModalService,
+    protected readonly destroy$: DestroyService,
+    protected router: Router,
+    protected route: ActivatedRoute,
+    protected location: Location,
+    protected seoService: SeoService,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private location: Location,
     private a12service: A12Service,
-    protected seoService: SeoService) { 
+  ) {
+    super(modalService, destroy$, router, route, location, seoService);
+    this.gameService(this.a12service, 'traits');
     this.traitControl = new FormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.traitControl,
@@ -51,68 +41,31 @@ export class A12TraitlistComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.language = this.route.snapshot.params.language;
-
+    this.modalEvent();
     this.getTraits();
-    this.gameTitle = this.a12service.gameTitle[this.language];
-    this.gameURL = this.a12service.gameURL;
-    this.imgURL = this.a12service.imgURL;
-    
-    this.seoURL = `${this.gameURL}/traits/${this.language}`;
-    this.seoTitle = `Traits - ${this.gameTitle}`;
-    this.seoDesc = `The list of traits in ${this.gameTitle}.`
-    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-
-    let modalLink = this.router.events
-    .subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.modalService.setDismissReason('link');
-        this.modalService.hide();
-        modalLink.unsubscribe();
-      }
-    });
+    this.genericSEO(`Traits`, `The list of traits in ${this.gameTitle}.`);
   }
 
   getTraits() {
     this.a12service.getTraitList(this.language)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe({next: traits => {
-      this.traits = traits;
-      this.filteredTraits = this.pageForm.valueChanges.pipe(
-        startWith(null as Observable<Trait[]>),
-        map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.traits.slice())
-      );
-    },
-    error: error => {
-      this.error =`${error.status}`;
-    }});
-  }
-
-  openModal(template: TemplateRef<any>, slug: string, event?) {
-      if (event) {
-        if(event.ctrlKey) {
-          return;
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: traits => {
+          this.traits = traits;
+          this.filteredTraits = this.pageForm.valueChanges.pipe(
+            startWith(null as Observable<Trait[]>),
+            map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.traits.slice())
+          );
+        },
+        error: error => {
+          this.error = `${error.status}`;
         }
-        else {
-          event.preventDefault()
-        }
-      }
-    this.trait = slug;
-    this.location.go(`${this.gameURL}/traits/` + slug + "/" + this.language);
-    this.modalRef = this.modalService.show(template);
-    this.modalRef.onHide
-    .pipe(takeUntil(this.destroy$))
-    .subscribe((reason: string | any) => {
-      if(reason != "link") {
-        this.location.go(`${this.gameURL}/traits/` + this.language);
-        this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-      }})
+      });
   }
 
   private filterT(value: string, transfer: string): Trait[] {
     let traitlist: Trait[] = this.traits;
-    switch(transfer) {
+    switch (transfer) {
       case "3": {
         traitlist = this.traits.filter(trait => trait.usable == true);
         break;
@@ -130,18 +83,16 @@ export class A12TraitlistComponent implements OnInit {
         break;
       }
     }
-    if(value) {
+    if (value) {
       const filterValue = value.toLowerCase();
       return traitlist.filter(trait => {
         return trait.name.toLowerCase().includes(filterValue) || trait.desc.toLowerCase().includes(filterValue)
       });
     }
     return traitlist;
-  } 
-
-  get f() { return this.pageForm.controls; }
-
-    identify(index, item){
-      return item.slugname;
-   }
   }
+
+  identify2(index, item) {
+    return item.slugname;
+  }
+}

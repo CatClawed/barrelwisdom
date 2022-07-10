@@ -1,80 +1,47 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ItemFull } from '@app/interfaces/a12';
-import { A12Service } from '@app/services/a12.service';
 import { SeoService } from '@app/services/seo.service';
+import { ItemFull } from '@app/views/games/A12/_services/a12.interface';
+import { A12Service } from '@app/views/games/A12/_services/a12.service';
+import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
   templateUrl: 'a12-item.component.html',
   selector: 'a12-item',
 })
-export class A12ItemComponent implements OnInit {
-
-  loading = false;
-  submitted = false;
-  returnUrl: string;
-  error: string = '';
+export class A12ItemComponent extends SingleComponent implements OnInit {
   item: ItemFull;
-  colset: string;
-  itemone = false;
-  itemtwo = false;
-  itemthree = false;
+  itemone: boolean = false;
+  itemtwo: boolean = false;
+  itemthree: boolean = false;
 
-  seoTitle: string;
-  seoDesc: string;
-  seoImage: string;
-  seoURL: string;
-
-  gameTitle: string;
-  gameURL: string;
-  imgURL: string;
-
-  @Input()
-  slugname: string = "";
-
-  @Input()
-  showNav: boolean = true;
-
-  language = "";
-
-constructor(
-    private route: ActivatedRoute,
+  constructor(
+    protected route: ActivatedRoute,
     private a12service: A12Service,
     protected seoService: SeoService) {
-      if(this.route.snapshot.params.item != null) {
-      this.slugname = this.route.snapshot.params.item;
-    }
+    super(route, seoService);
+    this.gameService(this.a12service, 'items');
   }
   ngOnInit(): void {
-    this.language = this.route.snapshot.params.language;
-    if(this.showNav) {
-      this.colset = "col-md-9 mx-auto "
-    }
-    this.a12service.getItem(this.slugname, this.language)
-    .subscribe({next: item => {
-        this.error =``;
-        this.item = item;
-
-        if(this.item.effectline_set) {
-         for(let effline of this.item.effectline_set) {
-           if (effline.itemnum == 1) { this.itemone = true; }
-           if (effline.itemnum == 2) { this.itemtwo = true; }
-           if (effline.itemnum == 3) { this.itemthree = true; }
-         }
+    if (this.showNav) this.colset = "col-md-9 mx-auto ";
+    this.a12service.getItem(this.slug, this.language)
+      .subscribe({
+        next: item => {
+          this.error = ``;
+          this.item = item;
+          if (this.item.effectline_set) {
+            for (let effline of this.item.effectline_set) {
+              if (effline.itemnum == 1) { this.itemone = true; }
+              if (effline.itemnum == 2) { this.itemtwo = true; }
+              if (effline.itemnum == 3) { this.itemthree = true; }
+            }
+          }
+          this.seoImage = `${this.imgURL}${this.section}/${this.item.slugname}.webp`
+          this.genericSEO(this.item.name, this.item.desc);
+        },
+        error: error => {
+          this.error = `${error.status}`;
         }
-
-        this.gameTitle = this.a12service.gameTitle[this.language];
-        this.gameURL = this.a12service.gameURL;
-        this.imgURL = this.a12service.imgURL;
-
-        this.seoURL = `${this.gameURL}/items/${this.item.slugname}/${this.language}`;
-        this.seoTitle = `${this.item.name} - ${this.gameTitle}`;
-        this.seoDesc = `${this.item.desc}`
-        this.seoImage = `${this.imgURL}items/${this.item.slugname}.webp`
-        this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-    },
-    error: error => {
-      this.error =`${error.status}`;
-    }});
+      });
   }
 } 
