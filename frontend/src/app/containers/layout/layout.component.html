@@ -1,5 +1,6 @@
 <div class="navigation" style="display:flex;align-items:center;">
-    <button (click)="snav.toggle();" class="navigation-hide-large fas fa-bars" aria-label="Toggle navigation" style="color:white;font-size:2rem;padding-left:0.5rem;background:none;border:none;"></button>
+    <button (click)="snav.toggle();" class="navigation-hide-large fas fa-bars" aria-label="Toggle navigation"
+        style="color:white;font-size:2rem;padding-left:0.5rem;background:none;border:none;"></button>
     <div class="navbrand" style="display:inline-flex;align-items:center;">
         <a aria-label="homepage" routerLink="/" class="navigation-brand">
             <img src="/media/main/barrelwisdom.svg" height=45 width=135 alt="Barrel Wisdom">
@@ -8,15 +9,16 @@
         <a class="nav-items" routerLink="/blog/donate">Donate</a>
     </div>
     <div style="margin-left:auto;margin-right:0;">
-        <a aria-label="Twitter" target="_blank" rel="noopener" href="https://twitter.com/BarrelWisdom"><i class="fab fa-twitter" title="Twitter" style="color:white;font-size:2rem;padding-right:0.5rem;"></i></a>
-        <a aria-label="Discord" target="_blank" rel="noopener" href="https://discord.gg/utRynRKxwh"><i class="fab fa-discord" title="Discord" style="color:white;font-size:2rem;padding-right:0.5rem;"></i></a>
+        <a aria-label="Twitter" target="_blank" rel="noopener" href="https://twitter.com/BarrelWisdom"><i
+                class="fab fa-twitter" title="Twitter" style="color:white;font-size:2rem;padding-right:0.5rem;"></i></a>
+        <a aria-label="Discord" target="_blank" rel="noopener" href="https://discord.gg/utRynRKxwh"><i
+                class="fab fa-discord" title="Discord" style="color:white;font-size:2rem;padding-right:0.5rem;"></i></a>
     </div>
 </div>
 
 <mat-sidenav-container [hasBackdrop]="mobileView">
     <mat-sidenav #snav [mode]="mobileView ? 'over' : 'side'" [opened]="mobileView ? false : true"
-    [fixedInViewport]="true" fixedTopGap="55" class="sidenav">
-    <perfect-scrollbar>
+        [fixedInViewport]="true" fixedTopGap="55" class="sidenav">
         <div class="sidenav-items">
             <a class="navigation-hide-large sidenav-item" routerLink="/blog/donate">
                 <i class="fas fa-donate"></i>Donate
@@ -28,15 +30,19 @@
                 <a *ngIf="!n.children" class="sidenav-item" routerLink="{{n.url}}">
                     <i class="{{n.icon}}"></i>{{n.name}}
                 </a>
-                <a *ngIf="n.children" class="sidenav-item" style="color:white;cursor:pointer;" (click)="n.expand=!n.expand;">
-                    <i class="{{n.icon}}"></i>{{n.name}}<b *ngIf="!n.expand" class="fas fa-caret-down"></b><b *ngIf="n.expand" class="fas fa-caret-up"></b>
+                <a *ngIf="n.children" class="sidenav-item" style="color:white;cursor:pointer;"
+                    (click)="n.expand=!n.expand;">
+                    <i class="{{n.icon}}"></i>{{n.name}}<b *ngIf="!n.expand" class="fas fa-caret-down"></b><b
+                        *ngIf="n.expand" class="fas fa-caret-up"></b>
                 </a>
                 <ng-container *ngIf="n.expand">
                     <ng-container *ngFor="let c of n.children">
-                        <a *ngIf="router.url.indexOf(c.url) < 0" class="sidenav-item sidenav-child" routerLink="{{c.url}}">
+                        <a *ngIf="router.url.indexOf(c.url) < 0" class="sidenav-item sidenav-child"
+                            routerLink="{{c.url}}">
                             {{c.name}}
                         </a>
-                        <a *ngIf="router.url.indexOf(c.url) > -1" class="sidenav-item sidenav-child active" routerLink="{{c.url}}">
+                        <a *ngIf="router.url.indexOf(c.url) > -1" class="sidenav-item sidenav-child active"
+                            routerLink="{{c.url}}">
                             {{c.name}}
                         </a>
                     </ng-container>
@@ -48,7 +54,8 @@
                 <i class="fas fa-user"></i>Login
             </a>
             <ng-container *ngIf="user">
-                <a class="sidenav-item" routerLink="/user/{{user.username}}"><i class="fa fa-user"></i>{{user.username}}</a>
+                <a class="sidenav-item" routerLink="/user/{{user.username}}"><i
+                        class="fa fa-user"></i>{{user.username}}</a>
                 <a class="sidenav-item" routerLink="/settings"><i class="fa fa-wrench"></i>Settings</a>
                 <a class="sidenav-item" routerLink="/create"><i class="fa fa-file"></i>Create Page</a>
                 <a class="sidenav-item" routerLink="/" (click)="logout()"><i class="fa fa-lock"></i>Logout</a>
@@ -60,7 +67,6 @@
                 <i class="fab fa-github"></i>Source
             </a>
         </div>
-    </perfect-scrollbar>
     </mat-sidenav>
     <div style="display:flex;">
         <div class="main">

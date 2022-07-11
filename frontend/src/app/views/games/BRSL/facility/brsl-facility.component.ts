@@ -27,7 +27,7 @@ export class BRSLFacilityComponent extends SingleComponent implements OnInit {
         next: facility => {
           this.error = ``;
           this.facility = facility;
-          this.seoURL = `${this.gameURL}/${this.section}/${this.facility.slug}/${this.language}`;
+          this.seoImage = `${this.imgURL}${this.section}/${this.facility.slug}.webp`;
           this.genericSEO(this.facility.name, this.facility.desc);
         },
         error: error => {

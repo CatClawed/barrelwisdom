@@ -1,5 +1,5 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule, SecurityContext } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -10,12 +10,6 @@ import { HttpErrorInterceptor } from '@app/interceptor/http-error.intercepter';
 import { JwtInterceptor } from '@app/interceptor/jwt_interceptor';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { CookieService } from 'ngx-cookie-service';
-import { MarkdownModule } from 'ngx-markdown';
-import { PerfectScrollbarConfigInterface, PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
-
-const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true
-};
 
 const APP_CONTAINERS = [
   LayoutComponent
@@ -29,9 +23,7 @@ const APP_CONTAINERS = [
   imports: [
     BrowserModule.withServerTransition({ appId: 'frontend' }),
     BrowserAnimationsModule,
-    PerfectScrollbarModule,
     HttpClientModule,
-    MarkdownModule.forRoot({sanitize: SecurityContext.NONE}),
     TransferHttpCacheModule,
     BrowserTransferStateModule,
     MatSidenavModule,
@@ -48,10 +40,6 @@ const APP_CONTAINERS = [
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
       multi: true
-    },
-    {
-      provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     }
   ],
   bootstrap: [AppComponent]

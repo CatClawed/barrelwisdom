@@ -464,6 +464,15 @@ a:hover {
   margin-top: 1em;
 }
 
+.mat-drawer-inner-container::-webkit-scrollbar {
+  display: none;
+}
+
+.mat-drawer-inner-container {
+  -ms-overflow-style: none; 
+  scrollbar-width: none;
+}
+
 /* Background pattern from Toptal Subtle Patterns */
 body {
   background: url("/media/main/images/ricepaper2.webp");

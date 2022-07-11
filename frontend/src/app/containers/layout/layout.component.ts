@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '@app/interfaces/user';
 import { AuthenticationService } from '@app/services/authentication.service';
+import { DestroyService } from '@app/services/destroy.service';
 import { NavigationService, NavItems } from '@app/services/navigation.service';
 import { takeUntil } from 'rxjs/operators';
-import { DestroyService } from '@app/services/destroy.service';
 
 @Component({
   selector: 'app-layout',
@@ -23,33 +23,28 @@ export class LayoutComponent implements OnInit {
     public navService: NavigationService,
     public breakpointObserver: BreakpointObserver,
     public router: Router) {
-    }
-    
+  }
+
   ngOnInit(): void {
     this.authenticationService.user
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(x => this.user = x);
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(x => this.user = x);
     this.navService.nav
       .pipe(takeUntil(this.destroy$))
       .subscribe(x => {
-      this.navItems = x;
-    });
+        this.navItems = x;
+      });
 
     this.breakpointObserver.observe([
       '(max-width: 800px)'
     ]).subscribe(result => {
-      if (result.matches) {
-        this.mobileView = true;
-      }
-      else {
-        this.mobileView = false;
-      }
+      this.mobileView = result.matches;
     });
   }
 
-logout() {
-  this.authenticationService.logout();
-}
+  logout() {
+    this.authenticationService.logout();
+  }
 
   toggleMinimize(e) {
     this.sidebarMinimized = e;

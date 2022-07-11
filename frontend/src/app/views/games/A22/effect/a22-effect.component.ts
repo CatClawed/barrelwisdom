@@ -17,7 +17,7 @@ export class A22EffectComponent extends SingleComponent implements OnInit {
     private a22service: A22Service,
     protected seoService: SeoService) {
     super(route, seoService);
-    this.gameService(this.a22service, 'effectss');
+    this.gameService(this.a22service, 'effects');
   }
   ngOnInit(): void {
     if (this.showNav) this.colset = "col-md-5 mx-auto ";
