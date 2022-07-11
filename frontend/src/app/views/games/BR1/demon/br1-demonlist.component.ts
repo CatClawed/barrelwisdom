@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Demon } from '@app/views/games/BR1/_services/br1.interface';
 import { BR1Service } from '@app/views/games/BR1/_services/br1.service';
@@ -17,7 +17,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class BR1DemonlistComponent extends ListComponent implements OnInit {
-  demonControl: FormControl;
+  demonControl: UntypedFormControl;
   demons: Demon[];
   filteredDemons: Observable<Demon[]>;
 
@@ -28,12 +28,12 @@ export class BR1DemonlistComponent extends ListComponent implements OnInit {
     protected route: ActivatedRoute,
     protected location: Location,
     protected seoService: SeoService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private br1service: BR1Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
     this.gameService(this.br1service, 'demons');
-    this.demonControl = new FormControl();
+    this.demonControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.demonControl
     })

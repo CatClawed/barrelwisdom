@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
@@ -16,7 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 export class A16PropertylistComponent extends ListComponent implements OnInit {
-  propertyControl: FormControl;
+  propertyControl: UntypedFormControl;
   properties: Property[];
   filteredProperties: Observable<Property[]>;
 
@@ -27,12 +27,12 @@ export class A16PropertylistComponent extends ListComponent implements OnInit {
     protected route: ActivatedRoute,
     protected location: Location,
     protected seoService: SeoService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private a16service: A16Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
     this.gameService(this.a16service, 'properties');
-    this.propertyControl = new FormControl();
+    this.propertyControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.propertyControl,
       transfers: ['']

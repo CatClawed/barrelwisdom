@@ -1,6 +1,6 @@
 import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { FragmentEffect } from '@app/views/games/BR1/_services/br1.interface';
 import { BR1Service } from '@app/views/games/BR1/_services/br1.service';
@@ -16,14 +16,14 @@ import { first, map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class BR1FragmentEffectlistComponent extends SingleComponent implements OnInit {
-  pageForm: FormGroup;
-  fragmenteffectControl: FormControl;
+  pageForm: UntypedFormGroup;
+  fragmenteffectControl: UntypedFormControl;
   fragmenteffect: string = "fragmenteffects";
   fragmenteffects: FragmentEffect[];
   filteredFragmentEffects: Observable<FragmentEffect[]>;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private readonly destroy$: DestroyService,
     protected route: ActivatedRoute,
     private br1service: BR1Service,
@@ -32,7 +32,7 @@ export class BR1FragmentEffectlistComponent extends SingleComponent implements O
   ) {
     super(route, seoService);
     this.gameService(this.br1service, 'fragment-effects');
-    this.fragmenteffectControl = new FormControl();
+    this.fragmenteffectControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.fragmenteffectControl
     })

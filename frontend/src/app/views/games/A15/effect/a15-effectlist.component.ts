@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Effect } from '@app/views/games/A15/_services/a15.interface';
 import { A15Service } from '@app/views/games/A15/_services/a15.service';
@@ -18,7 +18,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class A15EffectlistComponent extends ListComponent implements OnInit {
-  effectControl: FormControl;
+  effectControl: UntypedFormControl;
   effects: Effect[];
   filteredEffects: Observable<Effect[]>;
 
@@ -29,12 +29,12 @@ export class A15EffectlistComponent extends ListComponent implements OnInit {
     protected route: ActivatedRoute,
     protected location: Location,
     protected seoService: SeoService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private a15service: A15Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
     this.gameService(this.a15service, 'effects');
-    this.effectControl = new FormControl();
+    this.effectControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.effectControl,
     })

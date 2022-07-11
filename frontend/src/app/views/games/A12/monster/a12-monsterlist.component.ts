@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
@@ -17,7 +17,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class A12MonsterlistComponent extends ListComponent implements OnInit {
-  monsterControl: FormControl;
+  monsterControl: UntypedFormControl;
   monsters: MonsterList[];
   filteredMonsters: Observable<MonsterList[]>;
 
@@ -28,12 +28,12 @@ export class A12MonsterlistComponent extends ListComponent implements OnInit {
     protected route: ActivatedRoute,
     protected location: Location,
     protected seoService: SeoService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private a12service: A12Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
     this.gameService(this.a12service, 'monsters');
-    this.monsterControl = new FormControl();
+    this.monsterControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.monsterControl,
     })

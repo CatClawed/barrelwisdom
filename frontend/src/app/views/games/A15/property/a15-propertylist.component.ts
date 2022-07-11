@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Property } from '@app/views/games/A15/_services/a15.interface';
 import { A15Service } from '@app/views/games/A15/_services/a15.service';
@@ -16,7 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 export class A15PropertylistComponent extends ListComponent implements OnInit {
-  propertyControl: FormControl;
+  propertyControl: UntypedFormControl;
   properties: Property[];
   filteredProperties: Observable<Property[]>;
   currentTransfer: string = "1";
@@ -28,12 +28,12 @@ export class A15PropertylistComponent extends ListComponent implements OnInit {
     protected route: ActivatedRoute,
     protected location: Location,
     protected seoService: SeoService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private a15service: A15Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
     this.gameService(this.a15service, 'properties');
-    this.propertyControl = new FormControl();
+    this.propertyControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.propertyControl,
       transfers: ['']

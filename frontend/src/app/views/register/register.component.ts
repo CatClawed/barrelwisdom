@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '@app/services/authentication.service';
 import { ErrorCodeService } from '@app/services/errorcode.service';
 import { first } from 'rxjs/operators';
@@ -12,7 +12,7 @@ import { Meta, Title } from '@angular/platform-browser';
   selector: 'register',
 })
 export class RegisterComponent {
-  registerForm: FormGroup;
+  registerForm: UntypedFormGroup;
   loading = false;
   submitted = false;
   returnUrl: string;
@@ -21,7 +21,7 @@ export class RegisterComponent {
   hasInvite = false;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,

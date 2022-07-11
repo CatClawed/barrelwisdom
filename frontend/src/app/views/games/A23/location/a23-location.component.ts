@@ -1,6 +1,6 @@
 import { Location, ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Area, GatherNode, Region } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
@@ -15,8 +15,8 @@ import { first, takeUntil } from 'rxjs/operators';
 })
 
 export class A23LocationComponent extends SingleComponent implements OnInit {
-  pageForm: FormGroup;
-  locationControl: FormControl;
+  pageForm: UntypedFormGroup;
+  locationControl: UntypedFormControl;
   region: Region;
   filteredRegion: Area[];
   filteredNodes: GatherNode[];
@@ -32,11 +32,11 @@ export class A23LocationComponent extends SingleComponent implements OnInit {
     private loc: Location,
     private router: Router,
     private viewportScroller: ViewportScroller,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
   ) {
     super(route, seoService);
     this.gameService(this.a23service, 'locations');
-    this.locationControl = new FormControl();
+    this.locationControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.locationControl,
     })

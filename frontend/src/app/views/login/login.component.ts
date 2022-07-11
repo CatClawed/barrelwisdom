@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '@app/services/authentication.service';
@@ -13,14 +13,14 @@ import { first, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 export class LoginComponent {
-  loginForm: FormGroup;
+  loginForm: UntypedFormGroup;
   loading = false;
   submitted = false;
   returnUrl: string;
   errorMsg: string;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private readonly destroy$: DestroyService,
     private route: ActivatedRoute,
     private router: Router,

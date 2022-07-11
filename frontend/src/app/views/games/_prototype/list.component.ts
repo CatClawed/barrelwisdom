@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, TemplateRef } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
@@ -14,7 +14,7 @@ import { takeUntil } from 'rxjs/operators';
 
 export abstract class ListComponent {
     modalRef: BsModalRef;
-    pageForm: FormGroup;
+    pageForm: UntypedFormGroup;
     error: string = '';
     selected: string = "thing";
     section: string;

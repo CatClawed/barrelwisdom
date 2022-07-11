@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Monster } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
@@ -17,7 +17,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class A23MonsterlistComponent extends ListComponent implements OnInit {
-  monsterControl: FormControl;
+  monsterControl: UntypedFormControl;
   monsters: Monster[];
   filteredMonsters: Observable<Monster[]>;
   currentType: string = "1";
@@ -30,12 +30,12 @@ export class A23MonsterlistComponent extends ListComponent implements OnInit {
     protected route: ActivatedRoute,
     protected location: Location,
     protected seoService: SeoService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private a23service: A23Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
     this.gameService(this.a23service, 'monsters');
-    this.monsterControl = new FormControl();
+    this.monsterControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.monsterControl,
       type: ['']

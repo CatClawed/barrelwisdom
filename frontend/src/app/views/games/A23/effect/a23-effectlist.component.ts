@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Effect } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
@@ -17,7 +17,7 @@ import { ListComponent } from '@app/views/games/_prototype/list.component';
 })
 
 export class A23EffectlistComponent extends ListComponent implements OnInit {
-  effectControl: FormControl;
+  effectControl: UntypedFormControl;
   effects: Effect[];
   filteredEffects: Observable<Effect[]>;
 
@@ -28,12 +28,12 @@ export class A23EffectlistComponent extends ListComponent implements OnInit {
     protected route: ActivatedRoute,
     protected location: Location,
     protected seoService: SeoService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private a23service: A23Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
     this.gameService(this.a23service, 'effects');
-    this.effectControl = new FormControl();
+    this.effectControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.effectControl,
     })

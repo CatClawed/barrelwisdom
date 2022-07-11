@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
@@ -16,7 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 export class A22TraitlistComponent extends ListComponent implements OnInit {
-  traitControl: FormControl;
+  traitControl: UntypedFormControl;
   traits: Trait[];
   filteredTraits: Observable<Trait[]>;
 
@@ -27,11 +27,11 @@ export class A22TraitlistComponent extends ListComponent implements OnInit {
     protected route: ActivatedRoute,
     protected location: Location,
     protected seoService: SeoService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private a22service: A22Service,) {
     super(modalService, destroy$, router, route, location, seoService);
     this.gameService(this.a22service, 'traits');
-    this.traitControl = new FormControl();
+    this.traitControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.traitControl,
       transfers: ['']

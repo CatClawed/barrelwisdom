@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
@@ -17,7 +17,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class BR1ItemlistComponent extends ListComponent implements OnInit {
-  itemControl: FormControl;
+  itemControl: UntypedFormControl;
   items: Item[];
   filteredItems: Observable<Item[]>;
 
@@ -28,12 +28,12 @@ export class BR1ItemlistComponent extends ListComponent implements OnInit {
     protected route: ActivatedRoute,
     protected location: Location,
     protected seoService: SeoService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private br1service: BR1Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
     this.gameService(this.br1service, 'items');
-    this.itemControl = new FormControl();
+    this.itemControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.itemControl
     })

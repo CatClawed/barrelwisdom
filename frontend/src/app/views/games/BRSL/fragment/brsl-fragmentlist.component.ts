@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { SeoService } from '@app/services/seo.service';
 import { Event, NameLink, SchoolLocation } from '@app/views/games/BRSL/_services/brsl.interface';
@@ -13,8 +13,8 @@ import { map, startWith } from 'rxjs/operators';
 })
 
 export class BRSLFragmentComponent extends SingleComponent implements OnInit {
-  pageForm: FormGroup;
-  fragmentControl: FormControl;
+  pageForm: UntypedFormGroup;
+  fragmentControl: UntypedFormControl;
   event: Event[];
   character: NameLink[];
   location: SchoolLocation[];
@@ -23,14 +23,14 @@ export class BRSLFragmentComponent extends SingleComponent implements OnInit {
   selectedLoc = "Any";
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     protected route: ActivatedRoute,
     private brslservice: BRSLService,
     protected seoService: SeoService,
   ) {
     super(route, seoService);
     this.gameService(this.brslservice, 'fragments-and-dates');
-    this.fragmentControl = new FormControl();
+    this.fragmentControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.fragmentControl,
       character: ['Any'],

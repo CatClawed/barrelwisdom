@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
@@ -14,8 +14,8 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class BRSLFacilitySetComponent extends SingleComponent implements OnInit {
-  pageForm: FormGroup;
-  facilityControl: FormControl;
+  pageForm: UntypedFormGroup;
+  facilityControl: UntypedFormControl;
   facilities: FacilitySet[];
   categories: NameOnly[];
   filteredSets: Observable<FacilitySet[]>;
@@ -23,14 +23,14 @@ export class BRSLFacilitySetComponent extends SingleComponent implements OnInit 
 
   constructor(
     private readonly destroy$: DestroyService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     protected route: ActivatedRoute,
     protected seoService: SeoService,
     private brslservice: BRSLService,
   ) {
     super(route, seoService);
     this.gameService(this.brslservice, 'facilities/sets');
-    this.facilityControl = new FormControl();
+    this.facilityControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.facilityControl
     })

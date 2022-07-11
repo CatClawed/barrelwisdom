@@ -1,6 +1,6 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { SafeHtml } from '@angular/platform-browser';
@@ -29,7 +29,7 @@ import slugify from 'slugify';
 export class CreateComponent {
   error: string = '';
   errorVars: any[];
-  pageForm: FormGroup;
+  pageForm: UntypedFormGroup;
   loading = false;
   submitted = false;
   returnUrl: string;
@@ -43,7 +43,7 @@ export class CreateComponent {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   selectable = true;
   removable = true;
-  tagControl: FormControl;
+  tagControl: UntypedFormControl;
   allTags: Tag[];
   tagList: string[] = [];
   tagIDList: number[] = [];
@@ -69,7 +69,7 @@ export class CreateComponent {
     private route: ActivatedRoute,
     private readonly destroy$: DestroyService,
     private router: Router,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private errorService: ErrorCodeService,
     private authenticationService: AuthenticationService,
     private markdownService: MarkdownService,
@@ -80,7 +80,7 @@ export class CreateComponent {
     slugify.extend({ "'": "-" })
     this.getTags();
     this.authenticationService.user.pipe(takeUntil(this.destroy$)).subscribe(x => this.user = x);
-    this.tagControl = new FormControl();
+    this.tagControl = new UntypedFormControl();
 
     this.pageForm = this.formBuilder.group({
       title: ['', [Validators.required, Validators.maxLength(100)]],

@@ -1,7 +1,7 @@
 // Probably shoulda put all these in components for simpler repeated code, oh well
 
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { User } from "@app/interfaces/user";
@@ -19,10 +19,10 @@ import { first, takeUntil } from 'rxjs/operators';
 })
 export class SettingsComponent {
   currentSection: string = 'Section'
-  profileForm: FormGroup;
-  passwordForm: FormGroup;
-  sectionForm: FormGroup;
-  navigationForm: FormGroup;
+  profileForm: UntypedFormGroup;
+  passwordForm: UntypedFormGroup;
+  sectionForm: UntypedFormGroup;
+  navigationForm: UntypedFormGroup;
   loading = false;
   submitted = false;
   submittedPass = false;
@@ -43,7 +43,7 @@ export class SettingsComponent {
   sections: any[];
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private readonly destroy$: DestroyService,
     private route: ActivatedRoute,
     private settingService: SettingService,
