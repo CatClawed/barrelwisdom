@@ -25,7 +25,7 @@
                 <div *ngIf="fixit[i*5+j] == false" style="aspect-ratio:1;">
                 </div>
                 <button *ngIf="fixit[i*5+j] != false"
-                    style="aspect-ratio:1;position:relative;display:flex;background:none;border:none;"
+                    style="aspect-ratio:1;position:relative;display:flex;background:none;border:none;outline:none;"
                     [popover]="itemPopover"
                     popoverTitle="{{fixit[i*5+j].item.name}}"
                     [popoverContext]="context(fixit[i*5+j])">
@@ -64,7 +64,7 @@
                 <div *ngIf="fixit[(i+sophie_num)*5+j] == false" style="aspect-ratio:1;">
                 </div>
                 <button *ngIf="fixit[(i+sophie_num)*5+j] != false"
-                    style="aspect-ratio:1;position:relative;display:flex;background:none;border:none;"
+                    style="aspect-ratio:1;position:relative;display:flex;background:none;border:none;outline:none;"
                     [popover]="itemPopover"
                     popoverTitle="{{fixit[(i+sophie_num)*5+j].item.name}}"
                     [popoverContext]="context(fixit[(i+sophie_num)*5+j])">
@@ -102,7 +102,7 @@
                 <div *ngIf="fixit[(i+plachta_num)*5+j] == false" style="aspect-ratio:1;">
                 </div>
                 <button *ngIf="fixit[(i+plachta_num)*5+j] != false"
-                    style="aspect-ratio:1;position:relative;display:flex;background:none;border:none;"
+                    style="aspect-ratio:1;position:relative;display:flex;background:none;border:none;outline:none;"
                     [popover]="itemPopover"
                     popoverTitle="{{fixit[(i+plachta_num)*5+j].item.name}}"
                     [popoverContext]="context(fixit[(i+plachta_num)*5+j])">
@@ -140,7 +140,7 @@
                 <div *ngIf="fixit[(i+shared_num)*5+j] == false" style="aspect-ratio:1;">
                 </div>
                 <button *ngIf="fixit[(i+shared_num)*5+j] != false"
-                    style="aspect-ratio:1;position:relative;display:flex;background:none;border:none;"
+                    style="aspect-ratio:1;position:relative;display:flex;background:none;border:none;outline:none;"
                     [popover]="itemPopover"
                     popoverTitle="{{fixit[(i+shared_num)*5+j].item.name}}"
                     [popoverContext]="context(fixit[(i+shared_num)*5+j])">

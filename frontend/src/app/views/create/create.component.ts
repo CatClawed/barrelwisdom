@@ -128,7 +128,7 @@ export class CreateComponent {
     this.pageForm.get('body').valueChanges
       .pipe(takeUntil(this.destroy$))
       .subscribe(value => {
-        this.preview = this.markdownService.compile(this.customLink(<string>value));
+        this.preview = this.markdownService.parse(this.customLink(<string>value));
       });
 
     this.getSections();
@@ -256,7 +256,6 @@ export class CreateComponent {
 
   // add to chip list
   add(event: MatChipInputEvent): void {
-    const input = event.input;
     const value = event.value;
 
     if ((value || '').trim()) {
@@ -265,10 +264,7 @@ export class CreateComponent {
       }
     }
 
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
+    event.chipInput!.clear();
     this.tagControl.setValue(null);
   }
 

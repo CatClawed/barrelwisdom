@@ -51,7 +51,7 @@ export class BlogComponent implements OnInit {
           this.error = ``;
           this.blog = blog;
           this.gameName = (this.blog.section.fullname) ? `${this.blog.section.fullname} - ` : ""; // gotta make sure google sees the game name...
-          this.body = this.markdownService.compile(this.blog.body);
+          this.body = this.markdownService.parse(this.blog.body);
           if (this.user) {
             if (this.blog.authorlock && this.user.id == this.blog.author[0].id) {
               this.allowedToEdit = true;
