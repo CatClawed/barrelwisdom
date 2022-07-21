@@ -35,7 +35,7 @@ export class A23TraitlistComponent extends ListComponent implements OnInit {
     this.traitControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.traitControl,
-      transfers: ['']
+      transfers: 1
     })
   }
 
@@ -62,38 +62,38 @@ export class A23TraitlistComponent extends ListComponent implements OnInit {
       });
   }
 
-  private filterT(value: string, transfer: string): Trait[] {
+  private filterT(value: string, transfer: number): Trait[] {
     let traitlist: Trait[] = this.traits;
-    if (transfer != "1") {
+    if (transfer != 1) { 
       traitlist = this.traits.filter(trait => false == (trait.trans_atk == trait.trans_heal == trait.trans_dbf == trait.trans_buff == trait.trans_wpn == trait.trans_arm == trait.trans_acc == trait.trans_tal == trait.trans_syn == trait.trans_exp));
     }
 
     switch (transfer) {
-      case "2":
+      case 2:
         traitlist = traitlist.filter(trait => trait.trans_atk == true);
         break;
-      case "3":
+      case 3:
         traitlist = traitlist.filter(trait => trait.trans_heal == true);
         break;
-      case "4":
+      case 4:
         traitlist = traitlist.filter(trait => trait.trans_dbf == true);
         break;
-      case "5":
+      case 5:
         traitlist = traitlist.filter(trait => trait.trans_buff == true);
         break;
-      case "6":
+      case 6:
         traitlist = traitlist.filter(trait => trait.trans_wpn == true);
         break;
-      case "7":
+      case 7:
         traitlist = traitlist.filter(trait => trait.trans_arm == true);
         break;
-      case "8":
+      case 8:
         traitlist = traitlist.filter(trait => trait.trans_acc == true);
         break;
-      case "9":
+      case 9:
         traitlist = traitlist.filter(trait => trait.trans_tal == true);
         break;
-      case "10":
+      case 10:
         traitlist = traitlist.filter(trait => trait.trans_exp == true);
         break;
     }
