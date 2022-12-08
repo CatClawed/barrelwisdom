@@ -2,7 +2,7 @@ argon2-cffi==21.3.0
 argon2-cffi-bindings==21.2.0
 asgiref==3.5.0
 backports.zoneinfo==0.2.1
-certifi==2021.10.8
+certifi==2022.12.7
 cffi==1.15.0
 charset-normalizer==2.0.12
 coreapi==2.3.3
