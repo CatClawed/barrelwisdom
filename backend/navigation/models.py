@@ -1,7 +1,7 @@
 from django.db import models
-from blog.models import Section
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from blog.models import Section
 
 class Navigation(models.Model):
     section = models.CharField(max_length=30)

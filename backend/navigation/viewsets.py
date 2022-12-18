@@ -1,4 +1,4 @@
-from rest_framework import viewsets, filters
+from rest_framework import viewsets
 from navigation.serializers import NavigationSerializer
 from navigation.models import Navigation
 

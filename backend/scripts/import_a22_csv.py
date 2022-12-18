@@ -16,6 +16,10 @@ import sys
 with open('scripts/data.txt', newline='', encoding='utf-8') as csvfile:
 	reader = csv.reader(csvfile, delimiter='\t')
 	for row in reader:
+		obj = Effect.objects.get(slugname=row[0])
+		
+
+	"""
 		try:
 			obj = Trait.objects.get(slugname=row[0])
 			obj.index = row[1]
@@ -55,9 +59,6 @@ with open('scripts/data.txt', newline='', encoding='utf-8') as csvfile:
 				trait_sc=sc,
 				trait_tc=tc)
 			obj.save()
-
-
-		"""
 
 		obj = Effect.objects.get(slugname=row[0])
 		if row[1]:

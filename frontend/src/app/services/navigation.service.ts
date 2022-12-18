@@ -11,7 +11,7 @@ export class NavigationService implements OnDestroy {
   private navSubject: BehaviorSubject<NavItems[]>;
   public nav: Observable<NavItems[]>;
   public n: NavItems[];
-  public blogNav = ['user', 'settings', 'tag', 'login', 'register'];
+  public blogNav = ['user', 'settings', 'tag', 'login', 'register', 'moderate'];
   previousSection = "";
   private destroy$ = new Subject<void>();
 

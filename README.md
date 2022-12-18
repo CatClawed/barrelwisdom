@@ -32,7 +32,7 @@ pip3 install virtualenv
 
 Django supports many kinds of databases. Let's take PostgreSQL as an example:
 
-- Install [PostgreSQL](https://www.postgresql.org/download/). On MacOS I recommend to use [Postgres.app](https://postgresapp.com/) since it's much easier to get it up and running. For some Linux distro, you may have to build Postgres from source.
+- Install [PostgreSQL](https://www.postgresql.org/download/). On MacOS I recommend using[Postgres.app](https://postgresapp.com/) since it's much easier to get it up and running.
 
 4. Activate `virtualenv` for current shell:
 
@@ -42,7 +42,7 @@ virtualenv env
 
 Then install packages as listed in `requirements.txt`:
 
-```
+```bash
 pip install -r requirements.txt
 ```
 
@@ -53,15 +53,17 @@ First, `cd` into `backend` folder:
 - Database migrations. Check `manage.py` file for for info:
 
 ```bash
-python manage.py makemigrations blog
+# Run this first, to copy all existing migrations, and run it after using
+# makemigrations as well
 python manage.py migrate
+# Run this when you make changes to the database
+python manage.py makemigrations model_names_here
 ```
 
 - Get backend up and running
 
 ```bash
-python manage.py runserver 0.0.0.0:8000
-python manage.py startapp blog
+python manage.py runserver
 ```
 
 ## Frontend development
@@ -76,13 +78,9 @@ First, get NodeJS as instructed above. It's also recommended to use [yarn](https
 
 2. Install dependencies
 
-```
+```bash
 npm install
-```
-
-or
-
-```
+# or
 yarn install
 ```
 
@@ -108,21 +106,13 @@ $Env:NODE_OPTIONS = "--max-old-space-size=5120>"
 
 After installing Angular CLI, `ng` commands will be available and you will be able to:
 
-- Begin development
-
-```
+```bash
+# Begin development
 npm start
-```
 
-
-- Begin development in server-side rendering mode
-
-```
+# Begin development in server-side rendering mode
 npm run dev:ssr
-```
 
-- For production build
-
-```
+# Production build
 npm run prerender
 ```

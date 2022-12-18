@@ -9,7 +9,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['barrelwisdom.com', 'localhost', '127.0.0.1']#, '159.65.240.56']
+ALLOWED_HOSTS = ['barrelwisdom.com', 'localhost', '127.0.0.1', '159.65.240.56']
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'invite.apps.InviteConfig',
     'navigation.apps.NavigationConfig',
     'userprofile.apps.UserProfileConfig',
+    'report.apps.ReportConfig',
     # A12
     'games.A12.traits_a12.apps.A12TraitConfig',
     'games.A12.effects_a12.apps.A12EffectConfig',

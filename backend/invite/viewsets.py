@@ -1,4 +1,4 @@
-from rest_framework import viewsets, filters
+from rest_framework import viewsets
 from invite.serializers import InviteSerializer
 from invite.models import Invite
 

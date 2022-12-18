@@ -1,38 +1,3 @@
-# backend/Python Stuff
-
-/backend/secrets.json
-/backend/include
-/backend/lib
-/backend/bin
-__pycache__/
-/backend/jwt-key
-/backend/jwt-key.pub
-/backend/dump.json.gz
-/backend/*.json.gz
-
-# Angular Stuff
-
-/frontend/node_modules
-/frontend/package-lock.json
-/frontend/dist
-/frontend/dist-server
-/frontend/tmp
-/frontend/out-tsc
-/frontend/.sass-cache
-/frontend/connect.lock
-/frontend/coverage
-/frontend/libpeerconnection.log
-/frontend/npm-debug.log
-/frontend/yarn-error.log
-/frontend/testem.log
-/frontend/typings
-/frontend/e2e/*.js
-/frontend/e2e/*.map
-/frontend/dist.tar
-/frontend/.angular
-
-# Junky stuff
-
 .DS_Store
 Thumbs.db
 .vscode
@@ -47,3 +12,6 @@ Thumbs.db
 *.launch
 .settings/
 *.sublime-workspace
+.history/*
+*.log
+*.bak

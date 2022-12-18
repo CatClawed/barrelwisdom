@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders,  } from '@angular/common/http';
 import { Observable} from 'rxjs';
 import { environment } from '@environments/environment';
-import { Blog, EditBlog, BlogPaginator } from '@app/interfaces/blog';
+import { Blog, EditBlog, BlogPaginator, Comment } from '@app/interfaces/blog';
 
 
 @Injectable({ providedIn: 'root' })
@@ -41,6 +41,31 @@ export class BlogService {
       return this.http.get<BlogPaginator>(`${environment.apiUrl}/blog/?ordering=-created&tags=${tag}&limit=${limit}&offset=${offset}`)
     }
     return this.http.get<BlogPaginator>(`${environment.apiUrl}/blog/?ordering=-created&limit=${limit}&offset=${offset}`)
+  }
+
+  postComment(body: string, blog: number, name: string, parent?: number) {
+    if (parent && name) {
+      return this.http.post(`${environment.apiUrl}/new/comment/`, { body, parent, name })
+    }
+    if (parent && !name) {
+      return this.http.post(`${environment.apiUrl}/new/comment/`, { body, parent })
+    }
+    if (!name) {
+      return this.http.post(`${environment.apiUrl}/new/comment/`, { body, blog, parent })
+    }
+    return this.http.post(`${environment.apiUrl}/new/comment/`, { body, blog, parent, name })
+  }
+
+  getComments(): Observable<Comment[]> {
+    return this.http.get<Comment[]>(`${environment.apiUrl}/comment/`)
+  }
+
+  deleteComment(id: number) {
+    return this.http.delete(`${environment.apiUrl}/comment/${id}/`)
+  }
+
+  approveComment(id: number) {
+    return this.http.patch(`${environment.apiUrl}/comment/${id}/`, {id, approved: true})
   }
 
 }

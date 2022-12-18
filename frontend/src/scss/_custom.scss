@@ -638,6 +638,26 @@ img {
   max-width: 100%;
 }
 
+.tab {
+  margin-left: 40px;
+}
+
+.comment-button {
+  border: none;
+  background-color: transparent !important;
+  font-weight: bold;
+  font-size: medium;
+  color: black !important;
+}
+
+.comment-button:hover {
+  background-color: lightgray !important;
+}
+
+.comment-card {
+  margin-bottom: 0.35rem !important;
+}
+
 // Game Data Pages
 
 .card-item-display {

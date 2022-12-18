@@ -51,6 +51,16 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'moderate',
+    component: LayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: ()=> import('@app/views/moderate/moderate.module').then(m=>m.ModerateModule),
+      },
+    ]
+  },
+  {
     path: 'user/:username',
     component: LayoutComponent,
     children: [

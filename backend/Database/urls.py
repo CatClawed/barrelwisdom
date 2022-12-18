@@ -1,13 +1,14 @@
 from django.contrib import admin
 from django.urls import include, path
+from django.conf import settings
 from rest_framework import routers
-from blog.viewsets import BlogViewSet, TagViewSet, SectionViewSet, MainBlogViewSet
+from rest_framework_simplejwt import views as jwt_views
+from blog.viewsets import BlogViewSet, TagViewSet, SectionViewSet, MainBlogViewSet, NewCommentViewSet, ModerateCommentViewSet
 from invite.viewsets import InviteViewSet
+from report.viewsets import ReportViewSet
 from navigation.viewsets import NavigationViewSet
 from userprofile.viewsets import UserProfileViewSet, UserNameViewSet, RegView
 from auth.views import JWTObtainPairView
-from rest_framework_simplejwt import views as jwt_views
-from django.conf import settings
 
 from games.A12 import urls as A12
 from games.A15 import urls as A15
@@ -26,6 +27,10 @@ router.register(r'invite', InviteViewSet)
 router.register(r'profile', UserProfileViewSet)
 router.register(r'user', UserNameViewSet)
 router.register(r'nav', NavigationViewSet)
+router.register(r'report', ReportViewSet)
+router.register(r'new/comment', NewCommentViewSet)
+router.register(r'comment', ModerateCommentViewSet)
+
 
 routeLists = [
     A12.routes,

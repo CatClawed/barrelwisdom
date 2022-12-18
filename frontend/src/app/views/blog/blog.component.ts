@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { Blog } from '@app/interfaces/blog';
+import { Blog, Comment } from '@app/interfaces/blog';
 import { User } from '@app/interfaces/user';
 import { AuthenticationService } from '@app/services/authentication.service';
 import { BlogService } from '@app/services/blog.service';
@@ -24,6 +25,9 @@ export class BlogComponent implements OnInit {
   allowedToEdit = false;
   gameName = "";
   breadcrumbs = [];
+  pageForm: UntypedFormGroup;
+  fakeComment: Comment = null;
+  success: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,8 +35,13 @@ export class BlogComponent implements OnInit {
     public historyService: HistoryService,
     private blogService: BlogService,
     private authenticationService: AuthenticationService,
+    private formBuilder: UntypedFormBuilder,
     private markdownService: MarkdownService,
     protected seoService: SeoService) {
+      this.pageForm = this.formBuilder.group({
+        name: "",
+        comment: ""
+      })
   }
 
   ngOnInit(): void {
@@ -41,6 +50,50 @@ export class BlogComponent implements OnInit {
       .subscribe(params => {
         this.getBlog(params.get('section'), params.get('title'));
       });
+  }
+
+  newForm(parent: Comment): void {
+    parent.form = this.formBuilder.group({
+      name: "",
+      comment: ""
+    })
+  }
+
+  postComment(parent?: Comment): void {
+    let body = this.pageForm.controls['comment'].value;
+    let name = this.pageForm.controls['name'].value
+    let id = undefined
+    if(parent !== undefined) {
+      body = parent.form.controls['comment'].value;
+      name = parent.form.controls['name'].value;
+      id = parent.id
+    }
+
+    this.blogService.postComment(body, this.blog.id, name, id)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
+      next: () => {
+        if(parent) {
+          this.switchState(parent);
+          parent.success = true;
+        }
+        else {
+          this.success = true;
+        }
+      },
+      error: error => {
+        if(parent) {
+          parent.success = false;
+        }
+        else {
+          this.success = false
+        }
+      }
+    });
+  }
+
+  switchState(parent: Comment): void {
+    parent.open = false;
   }
 
   getBlog(section: string, title: string): void {

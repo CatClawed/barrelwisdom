@@ -1,12 +1,13 @@
-from rest_framework import viewsets, filters
-from blog.serializers import BlogSerializer, TagSerializer, SectionSerializer, MainBlogSerializer
-from blog.models import Blog, Tags, Section
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.pagination import LimitOffsetPagination
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import viewsets, filters
+from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from rest_framework.permissions import AllowAny
+from blog.serializers import BlogSerializer, TagSerializer, SectionSerializer, MainBlogSerializer, NewCommentSerializer, ModerateCommentSerializer
+from blog.models import Blog, Tags, Section, Comment
 
 class BlogViewSet(viewsets.ModelViewSet):
     queryset = Blog.objects.all()
@@ -65,3 +66,21 @@ class MainBlogViewSet(viewsets.ModelViewSet):
             raise Http404
         serializer = MainBlogSerializer(queryset)
         return Response(serializer.data)
+    
+class NewCommentViewSet(viewsets.ModelViewSet):
+    queryset = Comment.objects.all()
+    ordering_fields = ['created']
+    serializer_class = NewCommentSerializer
+    permission_classes = (AllowAny,)
+    def perform_create(self, serializer):
+        user = None
+        if self.request.user.is_authenticated:
+            user = self.request.user
+            serializer.save(author=user, name='', approved=True)
+        else:
+            serializer.save()
+
+class ModerateCommentViewSet(viewsets.ModelViewSet):
+    queryset = Comment.objects.filter(approved=False)
+    ordering_fields = ['created']
+    serializer_class = ModerateCommentSerializer

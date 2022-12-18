@@ -6,13 +6,13 @@ import { MatInputModule } from '@angular/material/input';
 import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
 import { ErrorModule } from '@app/views/error/error.module';
 import { MarkdownModule } from 'ngx-markdown';
-import { BlogRoutingModule } from './blog-routing.module';
-import { BlogComponent } from './blog.component';
+import { ModerateRoutingModule } from './moderate-routing.module';
+import { ModerateComponent } from './moderate.component';
 
 @NgModule({
     imports: [
       CommonModule,
-      BlogRoutingModule,
+      ModerateRoutingModule,
       ErrorModule,
       BreadcrumbModule,
       MarkdownModule.forRoot({sanitize: SecurityContext.NONE}),
@@ -21,7 +21,7 @@ import { BlogComponent } from './blog.component';
       ReactiveFormsModule,
     ],
     declarations: [
-      BlogComponent,
+      ModerateComponent,
     ]
   })
-  export class BlogModule { }
+  export class ModerateModule { }

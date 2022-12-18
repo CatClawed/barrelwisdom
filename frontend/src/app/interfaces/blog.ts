@@ -17,6 +17,27 @@ export interface EditBlog {
     tags: number[];
 }
 
+export interface CommentBlog{
+    slugtitle: string;
+    sec: string;
+}
+
+export interface Comment {
+    id: number;
+    created: Date;
+    body: String;
+    author: SimpleUser;
+    name: String;
+    replies: Comment[];
+    open: Boolean;
+    success: boolean;
+    form: any;
+    approved: boolean;
+    parent: number;
+    blog: CommentBlog;
+    parent_blog: CommentBlog;
+}
+
 export interface Blog {
     id: number
     created: Date;
@@ -30,6 +51,8 @@ export interface Blog {
     author: SimpleUser[];
     section: Section;
     tags: Tag[];
+    comments: Comment[]
+    closed: boolean;
 }
 
 export interface BlogPaginator {

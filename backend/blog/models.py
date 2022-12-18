@@ -27,7 +27,30 @@ class Blog(models.Model):
     author = models.ManyToManyField(settings.AUTH_USER_MODEL)
     tags = models.ManyToManyField(Tags, blank=True,)
     section = models.ForeignKey(Section, on_delete=models.CASCADE, default="1")
+    closed = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['created']
         unique_together = ['slugtitle', 'section']
+        
+class Comment(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True) # if I need it
+    body = models.TextField()
+    approved = models.BooleanField(default=False)
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, blank=True, null=True)
+    parent = models.ForeignKey("self", on_delete=models.CASCADE, blank=True, null=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    name = models.CharField(max_length=50, blank=True)
+
+    class Meta:
+        ordering = ['created']
+
+    def save(self, **kwargs):
+        """Only top level comments may have replies."""
+        if self.parent:
+            if self.parent.parent:
+                self.parent = self.parent.parent
+        return super().save(**kwargs)
+    
+    
