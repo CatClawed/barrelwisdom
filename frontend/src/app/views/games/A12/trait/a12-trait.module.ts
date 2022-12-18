@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
+import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select';
 import { ErrorModule } from '@app/views/error/error.module';
 import { SharedModule } from '@app/views/games/_prototype/SharedModules/shared.module';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';

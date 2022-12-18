@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MatSelectModule } from '@angular/material/select';
+import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select';
 import { PipeModule } from '@app/pipes/pipes.module';
 import { ErrorModule } from '@app/views/error/error.module';
 import { SharedModule } from '@app/views/games/_prototype/SharedModules/shared.module';
