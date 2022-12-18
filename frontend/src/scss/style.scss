@@ -39,13 +39,13 @@ $frontend-theme: mat.define-light-theme($frontend-primary, $frontend-accent, $fr
 // If you want to override variables do it here
 @import "variables";
 
-@import "~bootstrap/scss/bootstrap";
-
+@import "bootstrap/scss/bootstrap.scss"; 
+ 
 @import 'custom';
 
 // Import styles
-@import '~@angular/cdk/overlay-prebuilt.css';
-@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
-@import '~@fortawesome/fontawesome-free/scss/solid.scss';
-@import '~@fortawesome/fontawesome-free/scss/regular.scss';
-@import '~@fortawesome/fontawesome-free/scss/brands.scss';
+@import '@angular/cdk/overlay-prebuilt.css';
+@import '@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '@fortawesome/fontawesome-free/scss/solid.scss';
+@import '@fortawesome/fontawesome-free/scss/regular.scss';
+@import '@fortawesome/fontawesome-free/scss/brands.scss';

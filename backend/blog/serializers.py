@@ -3,6 +3,7 @@ from blog.models import Blog, Tags, Section, Comment
 from userprofile.serializers import UserSerializerSimple
 
 class ReplySerializer(serializers.ModelSerializer):
+    author = UserSerializerSimple()
     class Meta:
         model = Comment
         fields = ['id', 'created', 'body', 'name', 'author']
