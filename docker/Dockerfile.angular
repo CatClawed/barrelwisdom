@@ -1,0 +1,6 @@
+FROM node:18
+WORKDIR /frontend
+COPY package.json /frontend
+RUN npm i --silent
+COPY . /frontend
+CMD npm start

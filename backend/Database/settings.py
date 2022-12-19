@@ -161,13 +161,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Database.wsgi.application'
 
+# may later replace with docker stuff, not sure
+# comment out host in production for now?
 SECRET_KEY = get_secret('SECRET_KEY')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'barrelwisdom',
-        'USER': 'loser',
+        'USER': get_secret('DB_USER'),
         'PASSWORD': get_secret('DB_PASSWORD'),
+        'HOST': 'postgres',
     },
 }
 

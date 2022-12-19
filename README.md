@@ -116,3 +116,52 @@ npm run dev:ssr
 # Production build
 npm run prerender
 ```
+
+## Docker usage
+
+Most matters will be taken care of with:
+
+```bash
+docker compose up
+```
+
+But further backend setup is necessary.
+
+Create `backend/secrets.json` with the following format:
+
+```json
+{
+    "SECRET_KEY": "",
+    "DB_PASSWORD": "",
+    "DB_USER": ""
+}
+```
+
+As well as `docker/.env`:
+
+```bash
+POSTGRES_USER=""
+POSTGRES_PASSWORD=""
+POSTGRES_DB="barrelwisdom"
+```
+
+In backend, you will also want to run:
+
+```bash
+ssh-keygen -t rsa -b 4096 -m PEM -f jwt-key
+```
+
+Finally, run the containers. To setup the database:
+
+```bash
+docker exec -it bw_backend bash
+python manage.py migrate
+```
+
+If you have data to load, comment out receivers in backend FIRST.
+
+```bash
+python manage.py dumpdata --exclude=auth --exclude=contenttypes --exclude=authtoken -o dump.json.gz
+python manage.py dumpdata app_name -o dump.json.gz
+python manage.py loaddata dump.json.gz
+```

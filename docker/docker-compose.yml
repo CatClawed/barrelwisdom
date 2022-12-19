@@ -1,0 +1,40 @@
+services:
+  postgres:
+    image: postgres:15.1
+    container_name: bw_postgres
+    restart: always
+    environment:
+      - 'POSTGRES_USER=${POSTGRES_USER}'
+      - 'POSTGRES_PASSWORD=${POSTGRES_PASSWORD}'
+      - 'POSTGRES_DB=barrelwisdom'
+    volumes:
+      - bw_database:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  backend:
+    container_name: bw_backend
+    build:
+      context: ../backend
+      dockerfile: ../docker/Dockerfile.django
+    ports:
+    - 8000:8000
+    depends_on:
+      - postgres
+    volumes:
+      - ../backend:/backend
+
+  frontend:
+    container_name: bw_frontend
+    build: 
+      context: ../frontend
+      dockerfile: ../docker/Dockerfile.angular
+    ports:
+      - 4200:4200
+    volumes:
+      - nodemodules:/frontend/node_modules
+      - ../frontend:/frontend
+
+volumes:
+  nodemodules: {}
+  bw_database: {}
