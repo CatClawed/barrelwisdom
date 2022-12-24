@@ -34,6 +34,8 @@ services:
     volumes:
       - nodemodules:/frontend/node_modules
       - ../frontend:/frontend
+    extra_hosts:
+      - "localhost:host-gateway"
 
 volumes:
   nodemodules: {}

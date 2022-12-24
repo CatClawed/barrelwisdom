@@ -1,7 +1,6 @@
 /src/scss/@fortawesome
 
 /node_modules
-/package-lock.json
 /dist
 /dist-server
 /tmp

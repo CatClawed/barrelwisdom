@@ -1,6 +1,7 @@
 FROM node:18
+RUN apt-get update && apt-get -y install vim
 WORKDIR /frontend
-COPY package.json /frontend
+COPY package*.json /frontend
 RUN npm i --silent
 COPY . /frontend
 CMD npm start
