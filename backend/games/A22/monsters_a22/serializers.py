@@ -14,15 +14,15 @@ class A22ItemSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.item_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.item_ja.name
-        if self.context['language'] == 'ko':
+        elif self.context['language'] == 'ko':
             return obj.item_ko.name
-        if self.context['language'] == 'fr':
+        elif self.context['language'] == 'fr':
             return obj.item_fr.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.item_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.item_tc.name
         else:
             return obj.item_en.name
@@ -41,15 +41,15 @@ class A22MonsterSerializerName(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.mon_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.mon_ja.name
-        if self.context['language'] == 'ko':
+        elif self.context['language'] == 'ko':
             return obj.mon_ko.name
-        if self.context['language'] == 'fr':
+        elif self.context['language'] == 'fr':
             return obj.mon_fr.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.mon_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.mon_tc.name
         else:
             return obj.mon_en.name
@@ -64,15 +64,15 @@ class A22MonsterSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.mon_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.mon_ja.name
-        if self.context['language'] == 'ko':
+        elif self.context['language'] == 'ko':
             return obj.mon_ko.name
-        if self.context['language'] == 'fr':
+        elif self.context['language'] == 'fr':
             return obj.mon_fr.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.mon_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.mon_tc.name
         else:
             return obj.mon_en.name
@@ -95,30 +95,30 @@ class A22MonsterSerializerFull(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.mon_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.mon_ja.name
-        if self.context['language'] == 'ko':
+        elif self.context['language'] == 'ko':
             return obj.mon_ko.name
-        if self.context['language'] == 'fr':
+        elif self.context['language'] == 'fr':
             return obj.mon_fr.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.mon_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.mon_tc.name
         else:
             return obj.mon_en.name
     def get_desc(self,obj):
         if 'language' not in self.context:
             return obj.mon_en.description
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.mon_ja.description
-        if self.context['language'] == 'ko':
+        elif self.context['language'] == 'ko':
             return obj.mon_ko.description
-        if self.context['language'] == 'fr':
+        elif self.context['language'] == 'fr':
             return obj.mon_fr.description
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.mon_sc.description
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.mon_tc.description
         else:
             return obj.mon_en.description

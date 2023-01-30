@@ -21,7 +21,7 @@ class A12FieldSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.region.reg_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.region.reg_ja.name
         else:
             return obj.region.reg_en.name
@@ -44,7 +44,7 @@ class A12AreaSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.region.reg_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.region.reg_ja.name
         else:
             return obj.region.reg_en.name

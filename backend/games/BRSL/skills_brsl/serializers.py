@@ -13,22 +13,22 @@ class BRSLSkillSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.skill_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.skill_ja.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.skill_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.skill_tc.name
         else:
             return obj.skill_en.name
     def get_desc(self,obj):
         if 'language' not in self.context:
             return obj.skill_en.desc
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.skill_ja.desc
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.skill_sc.desc
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.skill_tc.desc
         else:
             return obj.skill_en.desc
@@ -47,11 +47,11 @@ class BRSLCharacterSkillSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.char_en
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.char_ja
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.char_sc
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.char_tc
         else:
             return obj.char_en

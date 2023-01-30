@@ -14,13 +14,13 @@ class A23GatherItemSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.item.item_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.item.item_ja.name
-        if self.context['language'] == 'ko':
+        elif self.context['language'] == 'ko':
             return obj.item.item_ko.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.item.item_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.item.item_tc.name
         else:
             return obj.item.item_en.name
@@ -36,13 +36,13 @@ class A23GatherItemSimpleSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.item.item_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.item.item_ja.name
-        if self.context['language'] == 'ko':
+        elif self.context['language'] == 'ko':
             return obj.item.item_ko.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.item.item_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.item.item_tc.name
         else:
             return obj.item.item_en.name
@@ -85,13 +85,13 @@ class A23SubRegionSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.reg_en
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.reg_ja
-        if self.context['language'] == 'ko':
+        elif self.context['language'] == 'ko':
             return obj.reg_ko
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.reg_sc
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.reg_tc
         else:
             return obj.reg_en
@@ -109,13 +109,13 @@ class A23RegionSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.reg_en
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.reg_ja
-        if self.context['language'] == 'ko':
+        elif self.context['language'] == 'ko':
             return obj.reg_ko
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.reg_sc
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.reg_tc
         else:
             return obj.reg_en
@@ -132,26 +132,26 @@ class A23MajorGatheringSerializer(serializers.ModelSerializer):
     def get_region(self,obj):
         if 'language' not in self.context:
             return obj.climate.loc.parent.reg_en
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.climate.loc.parent.reg_ja
-        if self.context['language'] == 'ko':
+        elif self.context['language'] == 'ko':
             return obj.climate.loc.parent.reg_ko
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.climate.loc.parent.reg_sc
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.climate.loc.parent.reg_tc
         else:
             return obj.climate.loc.parent.reg_en
     def get_area(self,obj):
         if 'language' not in self.context:
             return obj.climate.loc.reg_en
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.climate.loc.reg_ja
-        if self.context['language'] == 'ko':
+        elif self.context['language'] == 'ko':
             return obj.climate.loc.reg_ko
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.climate.loc.reg_sc
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.climate.loc.reg_tc
         else:
             return obj.climate.loc.reg_en

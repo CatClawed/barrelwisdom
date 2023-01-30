@@ -12,11 +12,11 @@ class BRSLRegionNameSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.name.name_en
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.name.name_ja
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.name.name_sc
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.name.name_tc
         else:
             return obj.name.name_en
@@ -32,11 +32,11 @@ class BRSLAreaParentSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return Region.objects.filter(areas__slug=obj.slug).first().name.name_en
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return Region.objects.filter(areas__slug=obj.slug).first().name.name_ja
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return Region.objects.filter(areas__slug=obj.slug).first().name.name_sc
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return Region.objects.filter(areas__slug=obj.slug).first().name.name_tc
         else:
             return Region.objects.filter(areas__slug=obj.slug).first().name.name_en
@@ -50,22 +50,22 @@ class BRSLEffectSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.eff_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.eff_ja.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.eff_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.eff_tc.name
         else:
             return obj.eff_en.name
     def get_desc(self,obj):
         if 'language' not in self.context:
             return obj.eff_en.desc
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.eff_ja.desc
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.eff_sc.desc
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.eff_tc.desc
         else:
             return obj.eff_en.desc
@@ -83,22 +83,22 @@ class BRSLUnitSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.unit_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.unit_ja.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.unit_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.unit_tc.name
         else:
             return obj.unit_en.name
     def get_desc(self,obj):
         if 'language' not in self.context:
             return obj.unit_en.desc
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.unit_ja.desc
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.unit_sc.desc
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.unit_tc.desc
         else:
             return obj.unit_en.desc
@@ -111,11 +111,11 @@ class BRSLCategorySerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.cat_en
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.cat_ja
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.cat_sc
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.cat_tc
         else:
             return obj.cat_en
@@ -128,11 +128,11 @@ class BRSLItemNameSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.item_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.item_ja.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.item_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.item_tc.name
         else:
             return obj.item_en.name
@@ -152,11 +152,11 @@ class BRSLEffectLineSerializer(serializers.ModelSerializer):
     def get_line(self,obj):
         if 'language' not in self.context:
             return obj.linename.line_en
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.linename.line_ja
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.linename.line_sc
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.linename.line_tc
         else:
             return obj.linename.line_en
@@ -172,11 +172,11 @@ class BRSLSkillLineSerializer(serializers.ModelSerializer):
     def get_line(self,obj):
         if 'language' not in self.context:
             return obj.linename.line_en
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.linename.line_ja
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.linename.line_sc
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.linename.line_tc
         else:
             return obj.linename.line_en
@@ -200,11 +200,11 @@ class BRSLDemonNameSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.demon_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.demon_ja.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.demon_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.demon_tc.name
         else:
             return obj.demon_en.name
@@ -224,22 +224,22 @@ class BRSLItemSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.item_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.item_ja.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.item_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.item_tc.name
         else:
             return obj.item_en.name
     def get_desc(self,obj):
         if 'language' not in self.context:
             return obj.item_en.desc
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.item_ja.desc
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.item_sc.desc
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.item_tc.desc
         else:
             return obj.item_en.desc
@@ -258,11 +258,11 @@ class BRSLSimpleItemSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.item_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.item_ja.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.item_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.item_tc.name
         else:
             return obj.item_en.name

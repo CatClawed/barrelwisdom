@@ -27,11 +27,11 @@ class BRSLAreaSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.name.name_en
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.name.name_ja
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.name.name_sc
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.name.name_tc
         else:
             return obj.name.name_en
@@ -49,11 +49,11 @@ class BRSLRegionSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.name.name_en
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.name.name_ja
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.name.name_sc
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.name.name_tc
         else:
             return obj.name.name_en

@@ -16,7 +16,7 @@ class A12ItemNameSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.item_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.item_ja.name
         else:
             return obj.item_en.name
@@ -88,7 +88,7 @@ class A12BookNameSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.item_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.item_ja.name
         else:
             return obj.item_en.name
@@ -109,7 +109,7 @@ class A12ItemSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.item_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.item_ja.name
         else:
             return obj.item_en.name
@@ -136,14 +136,14 @@ class A12ItemFullSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.item_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.item_ja.name
         else:
             return obj.item_en.name
     def get_desc(self,obj):
         if 'language' not in self.context:
             return obj.item_en.desc
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.item_ja.desc
         else:
             return obj.item_en.desc
@@ -159,14 +159,14 @@ class A12BookSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.item_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.item_ja.name
         else:
             return obj.item_en.name
     def get_desc(self,obj):
         if 'language' not in self.context:
             return obj.item_en.desc
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.item_ja.desc
         else:
             return obj.item_en.desc

@@ -11,11 +11,11 @@ class BRSLCharacterSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.char_en
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.char_ja
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.char_sc
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.char_tc
         else:
             return obj.char_en
@@ -36,33 +36,33 @@ class BRSLFragmentSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.frag_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.frag_ja.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.frag_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.frag_tc.name
         else:
             return obj.frag_en.name
     def get_eff(self,obj):
         if 'language' not in self.context:
             return obj.frag_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.frag_ja.eff
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.frag_sc.eff
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.frag_tc.eff
         else:
             return obj.frag_en.eff
     def get_desc(self,obj):
         if 'language' not in self.context:
             return obj.frag_en.desc
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.frag_ja.desc
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.frag_sc.desc
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.frag_tc.desc
         else:
             return obj.frag_en.desc
@@ -75,11 +75,11 @@ class BRSLChoiceSerializer(serializers.ModelSerializer):
     def get_choice(self,obj):
         if 'language' not in self.context:
             return obj.choice_en
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.choice_ja
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.choice_sc
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.choice_tc
         else:
             return obj.choice_en
@@ -92,11 +92,11 @@ class BRSLSchoolLocationSerializer(serializers.ModelSerializer):
     def get_loc(self,obj):
         if 'language' not in self.context:
             return obj.loc_en
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.loc_ja
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.loc_sc
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.loc_tc
         else:
             return obj.loc_en
@@ -116,11 +116,11 @@ class BRSLEventSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.char_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.char_ja.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.char_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.char_tc.name
         else:
             return obj.char_en.name

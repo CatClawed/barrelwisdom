@@ -11,11 +11,11 @@ class BRSLDemonSimpleSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.demon_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.demon_ja.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.demon_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.demon_tc.name
         else:
             return obj.demon_en.name
@@ -31,22 +31,22 @@ class BRSLDemonSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.demon_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.demon_ja.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.demon_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.demon_tc.name
         else:
             return obj.demon_en.name
     def get_desc(self,obj):
         if 'language' not in self.context:
             return obj.demon_en.desc
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.demon_ja.desc
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.demon_sc.desc
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.demon_tc.desc
         else:
             return obj.demon_en.desc

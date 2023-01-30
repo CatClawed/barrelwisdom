@@ -14,15 +14,15 @@ class A22LocationSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.loc_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.loc_ja.name
-        if self.context['language'] == 'ko':
+        elif self.context['language'] == 'ko':
             return obj.loc_ko.name
-        if self.context['language'] == 'fr':
+        elif self.context['language'] == 'fr':
             return obj.loc_fr.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.loc_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.loc_tc.name
         else:
             return obj.loc_en.name

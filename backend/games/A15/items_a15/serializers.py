@@ -17,7 +17,7 @@ class A15ItemNameSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.item_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.item_ja.name
         else:
             return obj.item_en.name
@@ -95,7 +95,7 @@ class A15ItemNameDisSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.item_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.item_ja.name
         else:
             return obj.item_en.name
@@ -143,7 +143,7 @@ class A15BookNameSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.item_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.item_ja.name
         else:
             return obj.item_en.name
@@ -164,7 +164,7 @@ class A15ItemSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.item_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.item_ja.name
         else:
             return obj.item_en.name
@@ -195,14 +195,14 @@ class A15ItemFullSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.item_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.item_ja.name
         else:
             return obj.item_en.name
     def get_desc(self,obj):
         if 'language' not in self.context:
             return obj.item_en.desc
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.item_ja.desc
         else:
             return obj.item_en.desc
@@ -218,14 +218,14 @@ class A15BookSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.item_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.item_ja.name
         else:
             return obj.item_en.name
     def get_desc(self,obj):
         if 'language' not in self.context:
             return obj.item_en.desc
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.item_ja.desc
         else:
             return obj.item_en.desc
@@ -255,7 +255,7 @@ class A15AreaDataSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.area.reg_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.area.reg_ja.name
         else:
             return obj.area.reg_en.name
@@ -284,7 +284,7 @@ class A15RegionDataSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.region.reg_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.region.reg_ja.name
         else:
             return obj.region.reg_en.name

@@ -12,26 +12,26 @@ class A23EffectSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.eff_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.eff_ja.name
-        if self.context['language'] == 'ko':
+        elif self.context['language'] == 'ko':
             return obj.eff_ko.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.eff_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.eff_tc.name
         else:
             return obj.eff_en.name
     def get_desc(self,obj):
         if 'language' not in self.context:
             return obj.eff_en.desc
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.eff_ja.desc
-        if self.context['language'] == 'ko':
+        elif self.context['language'] == 'ko':
             return obj.eff_ko.desc
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.eff_sc.desc
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.eff_tc.desc
         else:
             return obj.eff_en.desc
@@ -51,13 +51,13 @@ class A23EffectDataSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.line.item.item_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.line.item.item_ja.name
-        if self.context['language'] == 'ko':
+        elif self.context['language'] == 'ko':
             return obj.line.item.item_ko.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.line.item.item_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.line.item.item_tc.name
         else:
             return obj.line.item.item_en.name
@@ -82,26 +82,26 @@ class A23EffectSerializerFull(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.eff_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.eff_ja.name
-        if self.context['language'] == 'ko':
+        elif self.context['language'] == 'ko':
             return obj.eff_ko.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.eff_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.eff_tc.name
         else:
             return obj.eff_en.name
     def get_desc(self,obj):
         if 'language' not in self.context:
             return obj.eff_en.desc
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.eff_ja.desc
-        if self.context['language'] == 'ko':
+        elif self.context['language'] == 'ko':
             return obj.eff_ko.desc
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.eff_sc.desc
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.eff_tc.desc
         else:
             return obj.eff_en.desc

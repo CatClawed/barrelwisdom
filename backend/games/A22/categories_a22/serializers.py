@@ -12,15 +12,15 @@ class A22ItemSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.item_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.item_ja.name
-        if self.context['language'] == 'ko':
+        elif self.context['language'] == 'ko':
             return obj.item_ko.name
-        if self.context['language'] == 'fr':
+        elif self.context['language'] == 'fr':
             return obj.item_fr.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.item_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.item_tc.name
         else:
             return obj.item_en.name
@@ -46,15 +46,15 @@ class A22CategorySerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.cat_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.cat_ja.name
-        if self.context['language'] == 'ko':
+        elif self.context['language'] == 'ko':
             return obj.cat_ko.name
-        if self.context['language'] == 'fr':
+        elif self.context['language'] == 'fr':
             return obj.cat_fr.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.cat_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.cat_tc.name
         else:
             return obj.cat_en.name
@@ -69,15 +69,15 @@ class A22CategorySerializerName(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.cat_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.cat_ja.name
-        if self.context['language'] == 'ko':
+        elif self.context['language'] == 'ko':
             return obj.cat_ko.name
-        if self.context['language'] == 'fr':
+        elif self.context['language'] == 'fr':
             return obj.cat_fr.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.cat_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.cat_tc.name
         else:
             return obj.cat_en.name
@@ -95,15 +95,15 @@ class A22CategoryDataSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.cat_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.cat_ja.name
-        if self.context['language'] == 'ko':
+        elif self.context['language'] == 'ko':
             return obj.cat_ko.name
-        if self.context['language'] == 'fr':
+        elif self.context['language'] == 'fr':
             return obj.cat_fr.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.cat_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.cat_tc.name
         else:
             return obj.cat_en.name
@@ -124,15 +124,15 @@ class A22CTSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.category.cat_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.category.cat_ja.name
-        if self.context['language'] == 'ko':
+        elif self.context['language'] == 'ko':
             return obj.category.cat_ko.name
-        if self.context['language'] == 'fr':
+        elif self.context['language'] == 'fr':
             return obj.category.cat_fr.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.category.cat_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.category.cat_tc.name
         else:
             return obj.category.cat_en.name

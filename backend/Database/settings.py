@@ -6,20 +6,6 @@ from datetime import timedelta
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = ['barrelwisdom.com', 'localhost', '127.0.0.1', '159.65.240.56']
-
-DEFAULT_AUTO_FIELD='django.db.models.AutoField'
-
-PASSWORD_HASHERS = [
-    'django.contrib.auth.hashers.Argon2PasswordHasher',
-    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
-    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
-    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
-]
-
 with open(os.path.join(BASE_DIR, 'secrets.json')) as secrets_file:
     secrets = json.load(secrets_file)
 
@@ -29,6 +15,20 @@ def get_secret(setting, secrets=secrets):
         return secrets[setting]
     except KeyError:
         raise ImproperlyConfigured("Set the {} setting".format(setting))
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = get_secret('DEBUG')
+
+ALLOWED_HOSTS = ['barrelwisdom.com', 'localhost', '127.0.0.1']
+
+DEFAULT_AUTO_FIELD='django.db.models.AutoField'
+
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+]
 
 # Application definition
 
@@ -77,6 +77,8 @@ INSTALLED_APPS = [
     'games.A16.monsters_a16.apps.A16MonsterConfig',
     'games.A16.items_a16.apps.A16ItemConfig',
     'games.A16.areadata_a16.apps.A16AreaDataConfig',
+    # A21
+    'games.A21.effects_traits_a21.apps.A21EffectTraitConfig',
     # A22
     'games.A22.effects_a22.apps.A22EffectConfig',
     'games.A22.traits_a22.apps.A22TraitConfig',

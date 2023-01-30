@@ -12,22 +12,22 @@ class BRSLFacilityEffectSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.eff_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.eff_ja.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.eff_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.eff_tc.name
         else:
             return obj.eff_en.name
     def get_desc(self,obj):
         if 'language' not in self.context:
             return obj.eff_en.desc
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.eff_ja.desc
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.eff_sc.desc
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.eff_tc.desc
         else:
             return obj.eff_en.desc
@@ -79,11 +79,11 @@ class BRSLFacilityNameSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.facility_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.facility_ja.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.facility_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.facility_tc.name
         else:
             return obj.facility_en.name
@@ -96,11 +96,11 @@ class BRSLFacilitySimpleSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.facility_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.facility_ja.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.facility_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.facility_tc.name
         else:
             return obj.facility_en.name
@@ -120,22 +120,22 @@ class BRSLFacilitySerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.facility_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.facility_ja.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.facility_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.facility_tc.name
         else:
             return obj.facility_en.name
     def get_desc(self,obj):
         if 'language' not in self.context:
             return obj.facility_en.desc
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.facility_ja.desc
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.facility_sc.desc
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.facility_tc.desc
         else:
             return obj.facility_en.desc

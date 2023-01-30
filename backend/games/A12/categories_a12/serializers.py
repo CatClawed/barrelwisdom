@@ -12,7 +12,7 @@ class A12ItemSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.item_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.item_ja.name
         else:
             return obj.item_en.name
@@ -31,7 +31,7 @@ class A12CategorySerializerName(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.cat_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.cat_ja.name
         else:
             return obj.cat_en.name
@@ -44,7 +44,7 @@ class A12CategorySerializerLink(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.cat_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.cat_ja.name
         else:
             return obj.cat_en.name
@@ -58,7 +58,7 @@ class A12CategorySerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.cat_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.cat_ja.name
         else:
             return obj.cat_en.name
@@ -74,7 +74,7 @@ class A12CategoryDataSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.cat_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.cat_ja.name
         else:
             return obj.cat_en.name

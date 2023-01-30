@@ -13,15 +13,15 @@ class A22ItemSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.item_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.item_ja.name
-        if self.context['language'] == 'ko':
+        elif self.context['language'] == 'ko':
             return obj.item_ko.name
-        if self.context['language'] == 'fr':
+        elif self.context['language'] == 'fr':
             return obj.item_fr.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.item_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.item_tc.name
         else:
             return obj.item_en.name
@@ -37,30 +37,30 @@ class A22TraitSerializerSimple(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.trait_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.trait_ja.name
-        if self.context['language'] == 'ko':
+        elif self.context['language'] == 'ko':
             return obj.trait_ko.name
-        if self.context['language'] == 'fr':
+        elif self.context['language'] == 'fr':
             return obj.trait_fr.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.trait_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.trait_tc.name
         else:
             return obj.trait_en.name
     def get_desc(self,obj):
         if 'language' not in self.context:
             return obj.trait_en.description
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.trait_ja.description
-        if self.context['language'] == 'ko':
+        elif self.context['language'] == 'ko':
             return obj.trait_ko.description
-        if self.context['language'] == 'fr':
+        elif self.context['language'] == 'fr':
             return obj.trait_fr.description
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.trait_sc.description
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.trait_tc.description
         else:
             return obj.trait_en.description
@@ -77,30 +77,30 @@ class A22TraitSerializer(serializers.ModelSerializer):
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.trait_en.name
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.trait_ja.name
-        if self.context['language'] == 'ko':
+        elif self.context['language'] == 'ko':
             return obj.trait_ko.name
-        if self.context['language'] == 'fr':
+        elif self.context['language'] == 'fr':
             return obj.trait_fr.name
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.trait_sc.name
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.trait_tc.name
         else:
             return obj.trait_en.name
     def get_desc(self,obj):
         if 'language' not in self.context:
             return obj.trait_en.description
-        if self.context['language'] == 'ja':
+        elif self.context['language'] == 'ja':
             return obj.trait_ja.description
-        if self.context['language'] == 'ko':
+        elif self.context['language'] == 'ko':
             return obj.trait_ko.description
-        if self.context['language'] == 'fr':
+        elif self.context['language'] == 'fr':
             return obj.trait_fr.description
-        if self.context['language'] == 'sc':
+        elif self.context['language'] == 'sc':
             return obj.trait_sc.description
-        if self.context['language'] == 'tc':
+        elif self.context['language'] == 'tc':
             return obj.trait_tc.description
         else:
             return obj.trait_en.description
