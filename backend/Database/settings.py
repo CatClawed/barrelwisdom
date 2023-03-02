@@ -77,6 +77,10 @@ INSTALLED_APPS = [
     'games.A16.monsters_a16.apps.A16MonsterConfig',
     'games.A16.items_a16.apps.A16ItemConfig',
     'games.A16.areadata_a16.apps.A16AreaDataConfig',
+    # A18
+    'games.A18.effects_traits_a18.apps.A18EffectTraitConfig',
+    'games.A18.misc_a18.apps.A18MiscConfig',
+    'games.A18.items_a18.apps.A18ItemConfig',
     # A21
     'games.A21.effects_traits_a21.apps.A21EffectTraitConfig',
     # A22
