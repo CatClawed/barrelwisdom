@@ -81,6 +81,7 @@ INSTALLED_APPS = [
     'games.A18.effects_traits_a18.apps.A18EffectTraitConfig',
     'games.A18.misc_a18.apps.A18MiscConfig',
     'games.A18.items_a18.apps.A18ItemConfig',
+    'games.A18.monsters_a18.apps.A18MonsterConfig',
     # A21
     'games.A21.effects_traits_a21.apps.A21EffectTraitConfig',
     # A22
@@ -176,7 +177,7 @@ DATABASES = {
         'NAME': 'barrelwisdom',
         'USER': get_secret('DB_USER'),
         'PASSWORD': get_secret('DB_PASSWORD'),
-        'HOST': 'postgres',
+        #'HOST': 'postgres',
     },
 }
 

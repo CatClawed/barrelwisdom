@@ -1,0 +1,252 @@
+<Error *ngIf="error" [errorCode]="error"></Error>
+
+<ng-container *ngIf="item">
+<Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Items', '/'+gameURL+'/items/'+language]]" [current]="item.name"></Breadcrumb>
+<div class="mx-auto row spacer">
+  <div class="{{colset}} card card-body">
+    <h4 class="card-title card-icon-space">{{item.name}}</h4>
+      <div class="card-icon-position">
+        <b *ngIf="item.level" style="padding-right:0.5em;">LV {{item.level}}</b>
+        <ng-container *ngIf="item.isDLC">
+          <br /><span class="badge bg-secondary">DLC</span>
+        </ng-container>
+        <ng-container *ngIf="item.isDX">
+          <br /><span class="badge bg-secondary">DX</span>
+        </ng-container>
+      </div>
+    <div class="card-item-display">
+       <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
+    </div>
+    <div class="card-text">
+      <table>
+        <tr *ngIf="item.char[0]">
+          <td style="width:10%">
+            <img style="max-height:3em;" src="/media/games/firis/characters/{{item.char[0]}}.webp">
+          </td>
+          <td>
+            {{item.desc[0]}}
+          </td>
+        </tr>
+        <tr *ngIf="item.char[1]">
+          <td style="width:10%">
+            <img style="max-height:3em;" src="/media/games/firis/characters/{{item.char[1]}}.webp">
+          </td>
+          <td>
+            {{item.desc[1]}}
+          </td>
+        </tr>
+        <tr *ngIf="item.char[2]">
+          <td style="width:10%">
+            <img style="max-height:3em;" src="/media/games/firis/characters/{{item.char[2]}}.webp">
+          </td>
+          <td>
+            {{item.desc[2]}}
+          </td>
+        </tr>
+        <tr *ngIf="item.char[3]">
+          <td style="width:10%">
+            <img style="max-height:3em;" src="/media/games/firis/characters/{{item.char[3]}}.webp">
+          </td>
+          <td>
+            {{item.desc[3]}}
+          </td>
+        </tr>
+      </table>
+      
+      <div class="row">
+        <table style="margin-top:1rem;" class="table-item-data col">
+          <tr *ngFor="let cat of item.categories">
+              <td style="text-align: center;"><i class="atelier atelier-{{cat.icon}}"></i></td>
+              <td><a routerLink="/{{gameURL}}/categories/{{cat.slug}}/{{language}}">{{cat.name}}</a></td>
+          </tr>
+        </table>
+      </div>
+      
+      <p *ngIf="item.trait"><b>Trait: </b><a routerLink="/{{gameURL}}/traits/{{item.trait.slug}}/{{language}}">{{item.trait.name}}</a></p>
+      <p *ngIf="item.book && !item.ideas"><b>Book: </b> <a routerLink="/{{gameURL}}/items/{{item.book.slug}}/{{language}}">{{item.book.name}}</a></p>
+      <b *ngIf="item.shopslot_set">Shop:</b>
+      <ul *ngIf="item.shopslot_set">
+        <li *ngFor="let shop of item.shopslot_set">
+          <a routerLink="/{{gameURL}}/shops/{{language}}" fragment="{{shop.slug}}">{{shop.name}}</a>
+        </li>
+      </ul>
+      <b *ngIf="item.recipes">Recipes:</b>
+      <ul *ngIf="item.recipes">
+        <li *ngFor="let recipe of item.recipes">
+          <a routerLink="/{{gameURL}}/items/{{recipe.slug}}/{{language}}">{{recipe.name}}</a>
+        </li>
+      </ul>
+      <b *ngIf="item.locations" >Location:</b>
+      <div *ngIf="item.locations" style="column-count: 2;">
+        <ul style="padding-left:1.1em;margin-bottom:0">
+            <li *ngFor="let loc of item.locations">{{loc.name}}</li>
+        </ul>
+      </div>
+      <ul *ngIf="item.wt || item.quantity || item.uses || item.range || item.price" style="padding-left:0;list-style:none;">
+        <li *ngIf="item.wt"      >WT: {{item.wt}}</li>
+        <li *ngIf="item.quantity">Quantity: {{item.quantity}}</li>
+        <li *ngIf="item.uses"    >Uses: {{item.uses}}</li>
+        <li *ngIf="item.range"   >Range: {{item.range}}</li>
+        <li *ngIf="item.dmin && !item.equip"   >DMG Min: {{item.dmin}}</li>
+        <li *ngIf="item.dmax && !item.equip"   >DMG Max: {{item.dmax}}</li>
+      </ul>
+      <b *ngIf="item.monsters" >Dropped by:</b>
+      <div *ngIf="item.monsters" style="column-count: 2;">
+         <ul style="padding-left:1.1em;margin-bottom:0">
+             <li *ngFor="let mon of item.monsters"><a routerLink="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a></li>
+         </ul>
+      </div>
+      <table *ngIf="item.ideas" class="tbl">
+        <tr *ngIf="item.book" class="table-dark-center">
+          <th colspan="2">Book</th>
+        </tr>
+        <tr *ngIf="item.book">
+          <td style="text-align:center;width:15%;">
+            <i class="atelier atelier-ryza2-book" style="padding-right:0;"></i>
+          </td>
+          <td>
+            <a routerLink="/{{gameURL}}/items/{{item.book.slug}}/{{language}}">{{item.book.name}}</a>
+          </td>
+        </tr>
+        <ng-container *ngFor="let idea of item.ideas; let i = index">
+          <tr class="table-dark-center">
+            <th colspan="2">Idea {{i+1}}</th>
+          </tr>
+          <tr *ngFor="let unlock of idea.unlocks">
+            <td *ngIf="unlock.level == 1"  style="text-align:center;width:15%;vertical-align:middle;"><i class="fa-solid fa-question"></i></td>
+            <td *ngIf="unlock.level == 4"  style="text-align:center;width:15%;vertical-align:middle;"><i class="fa-solid fa-lock-open"></i></td>
+            <td *ngIf="unlock.level == 1 || unlock.level == 4">
+              <ul>
+                <li *ngFor="let condition of unlock.condition">
+                  {{condition.condition}}
+                  <a *ngIf="condition.item" routerLink="/{{gameURL}}/items/{{condition.item.slug}}/{{language}}">
+                    {{condition.item.name}}
+                  </a>
+                  <a *ngIf="condition.monster" routerLink="/{{gameURL}}/monsters/{{condition.monster.slug}}/{{language}}">
+                    {{condition.monster.name}}
+                  </a>
+                  <a *ngIf="condition.category" routerLink="/{{gameURL}}/categories/{{condition.category.slug}}/{{language}}">
+                    {{condition.category.name}}
+                  </a>
+                  <span *ngIf="condition.race">
+                    {{condition.race.name}}
+                  </span>
+                  <span *ngIf="condition.number">x{{condition.number}}</span>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </ng-container>
+      </table>
+      <table *ngIf="item.ingredients" class="tbl">
+        <tr class="table-dark-center"><th>Ingredients</th></tr>
+        <tr>
+          <td>
+            <ul>
+              <li *ngFor="let ing of item.ingredients">
+                <a *ngIf="ing.cat"  routerLink="/{{gameURL}}/categories/{{ing.cat.slug}}/{{language}}">{{ing.cat.name}} </a>
+                <a *ngIf="ing.item" routerLink="/{{gameURL}}/items/{{ing.item.slug}}/{{language}}"    >{{ing.item.name}} </a>
+                x{{ing.quantity}}
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+      <table *ngIf="item.effectlines_set" class="tbl">
+        <tr class="table-dark-center"><th colspan=2>Effects</th></tr>
+        <tr *ngFor="let eff of item.effectlines_set">
+          <td *ngIf="item.ingredients" style="vertical-align:middle;text-align:center;">
+            <i style="color:{{colors[eff.color][1]}}" class="fa-{{colors[eff.color][0]}}"></i>
+          </td>
+          <td>
+            <ul style="list-style:none;">
+              <li *ngFor="let e of eff.data">
+                <ng-template #effPopover>
+                  <p *ngIf="e.effect">{{e.effect.desc}}</p>
+                  <a *ngIf="e.effect" routerLink="/{{gameURL}}/effects/{{e.effect.slug}}/{{language}}">More info...</a>
+                </ng-template> 
+                <a *ngIf="e.effect"    [popover]="effPopover" [popoverTitle]="e.effect.name" (click)="$event.preventDefault();" href="/{{gameURL}}/effects/{{e.effect.slug}}/{{language}}">{{e.effect.name}}</a>
+                <ng-container *ngIf="e.component">
+                  {{e.component.name}} {{e.component.value}} <i class="fa-{{colors[e.component.color][0]}}" style="color:{{colors[e.component.color][1]}};"></i>
+                </ng-container>
+                <span *ngIf="e.num && item.ingredients"> ({{e.num}})</span>
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+      <table *ngIf="item.fixed_components || item.random_components" class="tbl">
+        <tr *ngIf="item.fixed_components" class="table-dark-center">
+          <th>
+            Fixed Components
+          </th>
+        </tr>
+        <tr *ngFor="let comp of item.fixed_components">
+          <td>
+              {{comp.name}} {{comp.value}} <i class="fa-{{colors[comp.color][0]}}" style="color:{{colors[comp.color][1]}};"></i>
+          </td>
+        </tr>
+        <tr *ngIf="item.random_components" class="table-dark-center">
+          <th>
+            Random Components
+          </th>
+        </tr>
+        <tr *ngFor="let comp of item.random_components">
+          <td>
+              {{comp.name}} {{comp.value}} <i class="fa-{{colors[comp.color][0]}}" style="color:{{colors[comp.color][1]}};"></i>
+          </td>
+        </tr>
+      </table>
+      <table *ngIf="item.equip" class="tbl">
+        <tr class="table-dark-center"><th colspan=2>Stats</th></tr>
+        <tr><td style="padding-top:0.2rem;text-align:right;width:50%;"><b>HP </b></td> <td style="padding-top:0.2rem;padding-left:0.5em;">{{item.equip.hp}}</td></tr>
+        <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>MP </b></td> <td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip.mp}}</td></tr>
+        <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>ATK </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip.atk}}</td></tr>
+        <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>DEF </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip.dfn}}</td></tr>
+        <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>SPD </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip.spd}}</td></tr>
+        <tr *ngIf="item.dmin"><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>DMG Min </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.dmin}}</td></tr>
+        <tr *ngIf="item.dmax"><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>DMG Max </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.dmax}}</td></tr>
+      </table>
+      <table *ngIf="item.chars" class="tbl">
+        <tr class="table-dark-center"><th>Characters</th></tr>
+        <tr><td><img *ngFor="let char of item.chars" src="{{imgURL}}characters/{{char.slug}}.webp" style="max-height:3em;"></td></tr>
+      </table>
+      <table *ngIf="item.catalysts" class="tbl">
+        <tr class="table-dark-center"><th colspan="2">Catalysts Used</th></tr>
+        <tr *ngFor="let cat of item.catalysts">
+          <td style="text-align: center;width:15%;"><i class="atelier atelier-{{cat.icon}}"></i></td>
+          <td>
+            <a routerLink="/{{gameURL}}/catalysts/{{language}}"
+               [queryParams]="{search: cat.name}">
+               {{cat.name}}
+            </a>
+          </td>
+        </tr>
+      </table>
+      <table *ngIf="item.catalyst" class="tbl">
+        <tr class="table-dark-center"><th colspan="2">Catalyst Data ({{item.catalyst.size}}x{{item.catalyst.size}})</th></tr>
+        <tr *ngFor="let j of [].constructor(item.catalyst.color.length); let i = index">
+          <td style="text-align:center;width:15%;">
+            <i class="fa-{{colors[item.catalyst.color[i]][0]}}" style="color:{{colors[item.catalyst.color[i]][1]}}"></i>
+          </td>
+          <td>
+            {{item.catalyst.action[i]}}
+          </td>
+        </tr>
+      </table>
+      <table *ngIf="item.masteryline_set && item.ingredients" class="tbl">
+        <tr class="table-dark-center"><th colspan="2">Proficiency Data</th></tr>
+        <tr *ngFor="let masteryline of item.masteryline_set">
+          <td style="vertical-align:middle;text-align:center;width:15%;">{{masteryline.level}}</td>
+          <td>
+            <ul>
+              <li *ngFor="let mastery of masteryline.masteries">{{mastery.desc}}</li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+  </div>
+  </div>
+  <language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
+</div>
+</ng-container>

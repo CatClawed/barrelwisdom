@@ -1,6 +1,7 @@
 from django.db import models
-from games.A18.misc_a18.models import Character, BasicText, Shop, ItemMastery
+from games.A18.misc_a18.models import Character, BasicText, Shop, ItemMastery, AreaName
 from games.A18.effects_traits_a18.models import Trait, Effect
+from games.A18.monsters_a18.models import Race, Monster
 
 class Component(models.Model):
     color   = models.CharField(max_length=10)
@@ -20,10 +21,7 @@ class Category(models.Model):
 
 class Item(models.Model):
     slug = models.SlugField(max_length=50, unique=True)
-    item_en = models.OneToOneField(BasicText, on_delete=models.CASCADE, blank=True, null=True, related_name="item_en")
-    item_ja = models.OneToOneField(BasicText, on_delete=models.CASCADE, blank=True, null=True, related_name="item_ja")
-    item_sc = models.OneToOneField(BasicText, on_delete=models.CASCADE, blank=True, null=True, related_name="item_sc")
-    item_tc = models.OneToOneField(BasicText, on_delete=models.CASCADE, blank=True, null=True, related_name="item_tc")
+    text = models.OneToOneField(BasicText, on_delete=models.CASCADE, blank=True, null=True, related_name="item_en")
     char1 = models.ForeignKey(Character, on_delete=models.CASCADE, null=True, blank=True, related_name="char1")
     char2 = models.ForeignKey(Character, on_delete=models.CASCADE, null=True, blank=True, related_name="char2")
     char3 = models.ForeignKey(Character, on_delete=models.CASCADE, null=True, blank=True, related_name="char3")
@@ -47,13 +45,13 @@ class Item(models.Model):
     isDLC = models.BooleanField(default=False)
     isDX  = models.BooleanField(default=False)
     chars = models.ManyToManyField(Character)
+    recipe_points = models.IntegerField(null=True, blank=True)
+    monsters = models.ManyToManyField(Monster)
+    locations = models.ManyToManyField(AreaName)
+    book = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True, related_name="recipes")
+    
     class Meta:
         ordering = ['index']
-
-class Book(models.Model):
-    book  = models.OneToOneField(Item, on_delete=models.CASCADE, related_name="book")
-    note = models.CharField(max_length=200, blank=True, null=True)
-    recipes = models.ManyToManyField(Item, related_name="recipes")
 
 class Equip(models.Model):
     item  = models.OneToOneField(Item, on_delete=models.CASCADE)
@@ -118,3 +116,24 @@ class EffectData(models.Model):
     line = models.ForeignKey(EffectLines, on_delete=models.CASCADE, blank=True, null=True)
     class Meta:
         ordering = ['num']
+
+class RecipeIdea(models.Model):
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+
+class RecipeUnlock(models.Model):
+    idea = models.ForeignKey(RecipeIdea, on_delete=models.CASCADE)
+    level = models.IntegerField()
+
+class RecipeCondition(models.Model):
+    index = models.IntegerField()
+    condition = models.CharField(max_length=200)
+    condition_sc = models.CharField(max_length=200, blank=True)
+    condition_tc = models.CharField(max_length=200, blank=True)
+    number = models.IntegerField(null=True, blank=True)
+    group = models.ForeignKey(RecipeUnlock, on_delete=models.CASCADE)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE, blank=True, null=True)
+    monster = models.ForeignKey(Monster, on_delete=models.CASCADE, blank=True, null=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True)
+    race = models.ForeignKey(Race, on_delete=models.CASCADE, blank=True, null=True)
+    class Meta:
+        ordering = ['index']

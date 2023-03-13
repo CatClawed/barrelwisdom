@@ -1,0 +1,86 @@
+<Error *ngIf="error" [errorCode]="error"></Error>
+
+<div *ngIf="!error">
+<Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Traits"></Breadcrumb>
+<h1>Traits</h1>
+<div class="col-md-10 mx-auto">
+    <form [formGroup]="pageForm" class="form-horizontal">
+      <div class="row">
+        <mat-form-field class="col-md-5" appearance="outline">
+          <mat-label>Filter...</mat-label>
+          <input style="height: 100%;" matInput formControlName="filtertext">
+          <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
+        </mat-form-field>
+        <mat-form-field class="col-md-4" appearance="outline">
+          <mat-label>Transfers to...</mat-label>
+          <mat-select matNativeControl formControlName="transfers" disableOptionCentering="true" class="mat-select-icon">
+            <mat-option [value]="0" selected> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"></mat-icon> All</mat-option>
+            <mat-option [value]="1"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-firis-synthesis"></mat-icon> Synthesis</mat-option>
+            <mat-option [value]="2"><mat-icon fontSet="atelier atelier-sm"  fontIcon="atelier-firis-attack"  ></mat-icon> Attack</mat-option>
+            <mat-option [value]="3"><mat-icon fontSet="atelier atelier-sm"  fontIcon="atelier-firis-heal"    ></mat-icon> Heal</mat-option>
+            <mat-option [value]="6"><mat-icon fontSet="atelier atelier-sm"  fontIcon="atelier-firis-weapon"  ></mat-icon> Weapon</mat-option>
+            <mat-option [value]="7"><mat-icon fontSet="atelier atelier-sm"  fontIcon="atelier-firis-armor"   ></mat-icon> Armor</mat-option>
+            <mat-option [value]="8"><mat-icon fontSet="atelier atelier-sm"  fontIcon="atelier-firis-accessory"></mat-icon> Accessory</mat-option>
+            <mat-select-trigger *ngIf="f.transfers.value == 0">
+              All
+           </mat-select-trigger>
+            <mat-select-trigger *ngIf="f.transfers.value == 1">
+               Synthesis
+            </mat-select-trigger>
+            <mat-select-trigger *ngIf="f.transfers.value == 2">
+               Attack
+            </mat-select-trigger>
+            <mat-select-trigger *ngIf="f.transfers.value == 3">
+               Heal
+            </mat-select-trigger>
+            <mat-select-trigger *ngIf="f.transfers.value == 6">
+              Weapon
+           </mat-select-trigger>
+            <mat-select-trigger *ngIf="f.transfers.value == 7">
+               Armor
+            </mat-select-trigger>
+            <mat-select-trigger *ngIf="f.transfers.value == 8">
+              Accessory
+            </mat-select-trigger>
+          </mat-select>
+        </mat-form-field>
+        <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
+      </div>
+    </form>
+  </div>
+<div *ngIf="filteredTraits" class="item-grid">
+<div *ngFor="let trt of filteredTraits | async;  trackBy:identify" class="card card-body">
+  <div style="height:100%;">
+    <div class="flex">
+      <h4 class="card-title"><a (click)="openModal(traitModal, trt.slug, $event);" href="/{{gameURL}}/traits/{{trt.slug}}/{{language}}">{{trt.name}}</a></h4>
+      <div><a href="javascript:void(0)"
+          tooltip="Influences rank. A measure of rarity. This number determines where traits appear." container="true">Grade:</a>
+          <span *ngIf="trt.grade==-1"> N/A</span><span *ngIf="trt.grade>-1">{{trt.grade}}</span>
+      </div>
+    </div>
+    <b *ngIf=" trt.item_set">Item:</b>
+    <ul *ngIf=" trt.item_set">
+      <li *ngFor="let item of trt.item_set"><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
+    </ul>
+    <p *ngIf="trt.combo1"><a (click)="openModal(traitModal, trt.combo1.slug, $event);" href="/{{gameURL}}/traits/{{trt.combo1.slug}}/{{language}}">{{trt.combo1.name}}</a> x <a (click)="openModal(traitModal, trt.combo2.slug, $event);" href="/{{gameURL}}/traits/{{trt.combo2.slug}}/{{language}}">{{trt.combo2.name}}</a></p>
+    <p>{{trt.desc}}</p>
+  </div>
+  <div class="flex bottom" style="text-align:center;">
+    <i style="width:1.5rem" class="trait-color{{trt.trans_syn}}  atelier atelier-np atelier-firis-synthesis"></i>
+    <i style="width:1.5rem" class="trait-color{{trt.trans_atk}}  atelier atelier-np atelier-firis-attack"></i>
+    <i style="width:1.5rem" class="trait-color{{trt.trans_heal}} atelier atelier-np atelier-firis-heal"></i>
+    <i style="width:1.5rem" class="trait-color{{trt.trans_wpn}}  atelier atelier-np atelier-firis-weapon"></i>
+    <i style="width:1.5rem" class="trait-color{{trt.trans_arm}}  atelier atelier-np atelier-firis-armor"></i>
+    <i style="width:1.5rem" class="trait-color{{trt.trans_acc}}  atelier atelier-np atelier-firis-accessory"></i>
+  </div>
+</div>
+<ng-template #traitModal>
+  <div class="modal-body">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <i class="fas fa-times-circle"></i>
+    </button>
+    <a18-trait slug="{{selected}}" [showNav]="false"></a18-trait>
+  </div>
+</ng-template>
+</div>
+</div>

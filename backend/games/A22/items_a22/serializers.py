@@ -223,7 +223,11 @@ class A22ItemSerializerFull(serializers.ModelSerializer):
     monster_set = A22MonsterSerializerName(many=True)
     class Meta:
         model = Item
-        fields = ['slug', 'name', 'desc', 'level', 'itemtype', 'isDLC', 'ice', 'wind', 'lightning', 'fire', 'elementvalue', 'category', 'shop', 'trait', 'skilltree', 'location', 'ingredient_set', 'usableitem_set', 'effectline_set', 'evlinkitems_set', 'recipemorphs_set', 'monster_set', 'note']
+        fields = ['slug', 'name', 'desc', 'level', 'itemtype', 'isDLC',
+            'ice', 'wind', 'lightning', 'fire', 'elementvalue', 'category', 'shop', 'trait',
+            'skilltree', 'location', 'ingredient_set', 'usableitem_set', 'effectline_set',
+            'evlinkitems_set', 'recipemorphs_set', 'monster_set', 'note'
+        ]
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.item_en.name

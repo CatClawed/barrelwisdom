@@ -1,0 +1,34 @@
+<Error *ngIf="error" [errorCode]="error"></Error>
+
+<ng-container *ngIf="category">
+<Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Category: '+category.name"></Breadcrumb>
+<h1>{{category.name}}</h1>
+<language-settings style="margin-top: 1em;" class="col-md-3" section="{{gameURL}}"></language-settings>
+<div class="mx-auto row">
+    <div class="col-md-6">
+        <table style="border:1px solid #c8ced3;" class="tbl">
+            <tr class="table-dark-center"><th style="border:none;" colspan=2>Items in Category</th></tr>
+            <tr *ngFor="let item of category.items">
+                <td>
+                    <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
+                </td>
+            </tr>
+            <tr *ngFor="let item of category.add">
+                <td>
+                    <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a> (Add)
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <table style="border:1px solid #c8ced3;" class="tbl">
+            <tr class="table-dark-center"><th style="border:none;" colspan=2>Items Using Category</th></tr>
+            <tr *ngFor="let item of category.used">
+                <td>
+                    <a routerLink="/{{gameURL}}/items/{{item.synth.slug}}/{{language}}">{{item.synth.name}}</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</ng-container>

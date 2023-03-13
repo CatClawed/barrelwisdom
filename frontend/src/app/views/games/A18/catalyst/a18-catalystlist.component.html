@@ -1,0 +1,53 @@
+<Error *ngIf="error" [errorCode]="error"></Error>
+
+<div *ngIf="!error">
+<Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Catalysts"></Breadcrumb>
+<h1>Catalysts</h1>
+<div class="col-md-10 mx-auto">
+    <form [formGroup]="pageForm" class="form-horizontal">
+      <div class="row">
+        <mat-form-field class="col-md-9" appearance="outline">
+          <mat-label>Filter...</mat-label>
+          <input matInput formControlName="filtertext">
+        </mat-form-field>
+        <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
+      </div>
+    </form>
+</div>
+<div *ngIf="!filteredCatalysts" class="d-flex justify-content-center">
+  <div class="spinner-border text-secondary m-5" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+<div *ngIf="filteredCatalysts" class="item-grid">
+<div *ngFor="let cat of filteredCatalysts | async; trackBy:identify" class="card card-body">
+  <h4 class="card-title card-icon-space">
+    <a routerLink="/{{gameURL}}/items/{{cat.item.slug}}/{{language}}">{{cat.item.name}}</a>
+  </h4>
+  <div class="card-icon-position">
+    {{cat.size}} x {{cat.size}}
+  </div>
+  <a class="card-item-display" routerLink="/{{gameURL}}/items/{{cat.item.slug}}/{{language}}">
+    <img loading="lazy" src="{{imgURL}}items/{{cat.item.slug}}.webp" alt="{{cat.item.name}}">
+  </a>
+  <table class="table-item-data">
+    <tr *ngFor="let c of cat.item.categories">
+        <td style="text-align:center;"><i class="atelier atelier-{{c.icon}}"></i></td><td>{{c.name}}</td>
+    </tr>
+    <tr *ngFor="let c of cat.item.add">
+      <td style="text-align:center;"><i style="color:lightgray;" class="atelier atelier-{{c.icon}}"></i></td><td>{{c.name}}</td>
+  </tr>
+  </table>
+  <table>
+    <tr *ngFor="let j of [].constructor(cat.color.length); let i = index">
+      <td>
+        <i class="fa-{{colors[cat.color[i]][0]}}" style="color:{{colors[cat.color[i]][1]}}"></i>
+      </td>
+      <td>
+        {{cat.action[i]}}
+      </td>
+    </tr>
+  </table>
+</div>
+</div>
+</div>

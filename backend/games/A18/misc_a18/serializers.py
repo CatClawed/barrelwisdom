@@ -1,94 +1,123 @@
 from rest_framework import serializers
-from games.A18.misc_a18.models import Character, Shop
-#from games.A18.monsters_a18.models import Monster
+from games.A18.misc_a18.models import Character, Shop, BasicText, AreaName, ItemMastery
+from games.A18.monsters_a18.models import Monster
 from collections import OrderedDict
-#from games.A18.items_a18.models import Item, Book
+from games.A18.items_a18.models import Item, ShopSlot
+from games.A18.effects_traits_a18.models import Trait
+from games._helpers.serializer_helper import DefaultSerializer
+
+
+class A18ItemNameSerializer(DefaultSerializer):
+    name = serializers.SerializerMethodField()
+    class Meta:
+        model = Item
+        fields = ['slug', 'name']
+    def get_name(self,obj):
+        return DefaultSerializer.language_match(self,
+            en=obj.text.name_en,
+            ja=obj.text.name_ja,
+            sc=obj.text.name_sc,
+            tc=obj.text.name_tc,
+        )
+
+class A18MonsterNameSerializer(DefaultSerializer):
+    name = serializers.SerializerMethodField()
+    class Meta:
+        model = Monster
+        fields = ['slug', 'name']
+    def get_name(self,obj):
+        return DefaultSerializer.language_match(self,
+            en=obj.text.name_en,
+            ja=obj.text.name_ja,
+            sc=obj.text.name_sc,
+            tc=obj.text.name_tc,
+        )
 
 class A18CharacterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Character
         fields = ['slug']
         
-class A18ShopSerializer(serializers.ModelSerializer):
+class A18ShopSerializer(DefaultSerializer):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Shop
-        fields = ['name']
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.shop_en
-        elif self.context['language'] == 'ja':
-            return obj.shop_ja
-        elif self.context['language'] == 'sc':
-            return obj.shop_sc
-        elif self.context['language'] == 'tc':
-            return obj.shop_tc
-        else:
-            return obj.shop_en
-"""
-class A18MonsterNameSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
-    class Meta:
-        model = Monster
         fields = ['slug', 'name']
+    def get_name(self,obj):
+        return DefaultSerializer.language_match(self,
+            en=obj.shop_en,
+            ja=obj.shop_ja,
+            sc=obj.shop_sc,
+            tc=obj.shop_tc,
+        )
 
+class A18ShopSlotSerializer(DefaultSerializer):
+    item = A18ItemNameSerializer()
+    class Meta:
+        model = ShopSlot
+        fields = ['item', 'random']
     def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.mon_en.name
-        elif self.context['language'] == 'ja':
-            return obj.mon_ja.name
-        elif self.context['language'] == 'ko':
-            return obj.mon_ko.name
-        elif self.context['language'] == 'sc':
-            return obj.mon_sc.name
-        elif self.context['language'] == 'tc':
-            return obj.mon_tc.name
-        else:
-            return obj.mon_en.name
-        
-class A18ItemNameSerializer(serializers.ModelSerializer):
+        return DefaultSerializer.language_match(self,
+            en=obj.shop_en,
+            ja=obj.shop_ja,
+            sc=obj.shop_sc,
+            tc=obj.shop_tc,
+        )
+
+class A18ShopListSerializer(DefaultSerializer):
+    name = serializers.SerializerMethodField()
+    shopslots = A18ShopSlotSerializer(source='shopslot_set', many=True)
+    class Meta:
+        model = Shop
+        fields = ['slug', 'name', 'shopslots']
+    def get_name(self,obj):
+        return DefaultSerializer.language_match(self,
+            en=obj.shop_en,
+            ja=obj.shop_ja,
+            sc=obj.shop_sc,
+            tc=obj.shop_tc,
+        )
+
+class A18BasicTextSerializer(DefaultSerializer):
+    class Meta:
+        model = BasicText
+        fields = ['name', 'desc1', 'desc2', 'desc3', 'desc4']
+
+class A18ItemMasterySerializer(serializers.ModelSerializer):
+    desc = serializers.SerializerMethodField()
+    class Meta:
+        model = ItemMastery
+        fields = ['desc']
+    def get_desc(self,obj):
+       return DefaultSerializer.language_match(self,
+            en=obj.desc_en,
+            ja=obj.desc_ja,
+            sc=obj.desc_sc,
+            tc=obj.desc_tc,
+        )
+
+class A18AreaNameSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     class Meta:
-        model = Item
-        fields = ['slug', 'name', 'isDLC']
-    def to_representation(self, instance):
-        result = super(A18ItemNameSerializer, self).to_representation(instance)
-        return OrderedDict((k, v) for k, v in result.items() 
-                           if v not in [None, [], '', {}])
+        model = AreaName
+        fields = ['slug','name']
     def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.item_en.name
-        elif self.context['language'] == 'ja':
-            return obj.item_ja.name
-        elif self.context['language'] == 'ko':
-            return obj.item_ko.name
-        elif self.context['language'] == 'sc':
-            return obj.item_sc.name
-        elif self.context['language'] == 'tc':
-            return obj.item_tc.name
-        else:
-            return obj.item_en.name
-        
-class A18BookNameSerializer(serializers.ModelSerializer):
+        return DefaultSerializer.language_match(self,
+            en=obj.name_en,
+            ja=obj.name_ja,
+            sc=obj.name_sc,
+            tc=obj.name_tc,
+        )
+
+class A18TraitNameSerializer(DefaultSerializer):
     name = serializers.SerializerMethodField()
     class Meta:
-        model = Book
+        model = Trait
         fields = ['slug', 'name']
-    def to_representation(self, instance):
-        result = super(A18BookNameSerializer, self).to_representation(instance)
-        return OrderedDict((k, v) for k, v in result.items() 
-                           if v not in [None, [], '', {}])
     def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.book_en
-        elif self.context['language'] == 'ja':
-            return obj.book_ja
-        elif self.context['language'] == 'ko':
-            return obj.book_ko
-        elif self.context['language'] == 'sc':
-            return obj.book_sc
-        elif self.context['language'] == 'tc':
-            return obj.book_tc
-        else:
-            return obj.book_en
-"""
+        return DefaultSerializer.language_match(self,
+            en=obj.name_en,
+            ja=obj.name_ja,
+            sc=obj.name_sc,
+            tc=obj.name_tc,
+        )

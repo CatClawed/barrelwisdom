@@ -41,6 +41,10 @@ export class LanguageComponent implements OnInit {
         this.languages = environment.shallie_languages;
         this.langName = environment.shallie_languages[this.currentLanguage];
         break;
+      case "firis":
+        this.languages = environment.firis_languages;
+        this.langName = environment.firis_languages[this.currentLanguage];
+        break;
       case "ryza2":
         this.languages = environment.ryza2_languages;
         this.langName = environment.ryza2_languages[this.currentLanguage];

@@ -37,6 +37,9 @@ export class LanguageGuard implements CanActivate {
             case "shallie":
                 if(environment.shallie_languages[language]) return true;
                 break;
+            case "firis":
+                if(environment.firis_languages[language]) return true;
+                break;
             case "ryza2":
                 if(environment.ryza2_languages[language]) return true;
                 break;

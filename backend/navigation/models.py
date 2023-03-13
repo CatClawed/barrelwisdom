@@ -9,5 +9,5 @@ class Navigation(models.Model):
 
     @receiver(post_save, sender=Section)
     def create_nav(sender, instance, created, **kwargs):
-        if created:
+        if created and not kwargs.get('raw', False):
             Navigation.objects.create(section=instance.name)

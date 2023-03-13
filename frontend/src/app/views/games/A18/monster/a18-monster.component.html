@@ -1,0 +1,118 @@
+<Error *ngIf="error" [errorCode]="error"></Error>
+
+<ng-container *ngIf="monster">
+<Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Monsters', '/'+gameURL+'/monsters/'+language]]" [current]="monster.name"></Breadcrumb>
+<div class="mx-auto row spacer">
+  <div class="{{colset}} card card-body">
+    <h4 class="card-title  card-icon-space">{{monster.name}}</h4>
+    <div class="card-icon-position">
+      <i class="atelier atelier-{{monster.kind}}"></i>
+      <ng-container *ngIf="monster.isDX">
+        <br /><span class="badge bg-secondary">DX</span>
+      </ng-container>
+    </div>
+    <div class="card-text">
+      <img class="image-display" loading="lazy" src="{{imgURL}}monsters/{{monster.slug}}.webp" alt="{{monster.name}}">
+      <table>
+        <tr *ngIf="monster.char[0]">
+          <td>
+            <img style="max-height:3em;" src="/media/games/firis/characters/{{monster.char[0]}}.webp">
+          </td>
+          <td>
+            {{monster.desc[0]}}
+          </td>
+        </tr>
+        <tr *ngIf="monster.char[1]">
+          <td>
+            <img style="max-height:3em;" src="/media/games/firis/characters/{{monster.char[1]}}.webp">
+          </td>
+          <td>
+            {{monster.desc[1]}}
+          </td>
+        </tr>
+        <tr *ngIf="monster.char[2]">
+          <td>
+            <img style="max-height:3em;" src="/media/games/firis/characters/{{monster.char[2]}}.webp">
+          </td>
+          <td>
+            {{monster.desc[2]}}
+          </td>
+        </tr>
+        <tr *ngIf="monster.char[3]">
+          <td>
+            <img style="max-height:3em;" src="/media/games/firis/characters/{{monster.char[3]}}.webp">
+          </td>
+          <td>
+            {{monster.desc[3]}}
+          </td>
+        </tr>
+      </table>
+      <b *ngIf="monster.note">Note: </b><span *ngIf="monster.note">{{monster.note}}</span>
+      <div class="row">
+        <div class="col-md-6">
+          <b *ngIf="monster.locations">Locations:</b>
+          <ul *ngIf="monster.locations">
+            <li *ngFor="let loc of monster.locations">{{loc.name}}</li>
+          </ul>
+          <b *ngIf="monster.item_set">Drops:</b>
+          <ul *ngIf="monster.item_set">
+            <li *ngFor="let drop of monster.item_set"><a routerLink="/{{gameURL}}/items/{{drop.slug}}/{{language}}">{{drop.name}}</a></li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <table class="tbl" >
+            <tr>
+              <td style="border-top:transparent;padding:0;"><b>LV </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.level}}</td>
+            </tr>
+            <tr>
+              <td style="border-top:transparent;padding:0;"><b>HP </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.hp}}</td>
+            </tr>
+            <tr>
+              <td style="border-top:transparent;padding:0;"><b>ATK </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.atk}}</td>
+            </tr>
+            <tr>
+              <td style="border-top:transparent;padding:0;"><b>DEF </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.defen}}</td>
+            </tr>
+            <tr>
+              <td style="border-top:transparent;padding:0;"><b>SPD </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.spd}}</td>
+            </tr>
+            <tr>
+              <td style="border-top:transparent;padding:0;"><b>Exp </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.exp}}</td>
+            </tr>
+            <tr>
+              <td style="border-top:transparent;padding:0;"><b>Cole </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.cole}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <table class="tbl table-shrink" >
+      <tr>
+          <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-slash"></i></th>
+          <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-impact"></i></th>
+          <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-pierce"></i></th>
+          <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-magic"></i></th>
+      </tr>
+      <tr>
+          <td style="text-align: center;border:transparent;padding:0;" innerHTML="{{chart[monster.slash]}}"></td>
+          <td style="text-align: center;border:transparent;padding:0;" innerHTML="{{chart[monster.impact]}} "></td>
+          <td style="text-align: center;border:transparent;padding:0;" innerHTML="{{chart[monster.pierce]}}"></td>
+          <td style="text-align: center;border:transparent;padding:0;" innerHTML="{{chart[monster.magic]}}"></td>
+      </tr>
+      <tr>
+        <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-fire"></i></th>
+        <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-ice"></i></th>
+        <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-lightning"></i></th>
+        <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-ailment"></i></th>
+    </tr>
+    <tr>
+        <td style="text-align: center;border:transparent;padding:0;" innerHTML="{{chart[monster.fire]}}"></td>
+        <td style="text-align: center;border:transparent;padding:0;" innerHTML="{{chart[monster.ice]}} "></td>
+        <td style="text-align: center;border:transparent;padding:0;" innerHTML="{{chart[monster.light]}}"></td>
+        <td style="text-align: center;border:transparent;padding:0;" innerHTML="{{chart[monster.ail]}}"></td>
+    </tr>
+    </table>
+  </div>
+  <language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
+</div>
+</ng-container>

@@ -9,7 +9,7 @@
 
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
+  //font-display: swap;
 }
 
 // base class
@@ -17,6 +17,9 @@
 .atelier {
   display: inline-block;
   font: normal normal normal 1.5em/1 'Atelier';
+  color: inherit;
+  flex-shrink: 0;
+  speak: none;
   text-transform: none;
   /* Better Font Rendering */
   -webkit-font-smoothing: antialiased;
@@ -336,6 +339,25 @@ h4 {
 .popover-header {
   font-size: calc(1.2rem + 0.1vw) !important;
 }
+
+// ngx bootstrap bandaid
+.popover {
+  position: absolute;
+  top: 0;
+  left: 0 #{"/* rtl:ignore */"};
+  }
+  
+  .popover-arrow {
+  position: absolute;
+  }
+  
+  .tooltip {
+  position: absolute;
+  }
+  
+  .tooltip-arrow {
+  position: absolute;
+  }
 
 .table-of-contents {
   border: 2px solid lightgray;

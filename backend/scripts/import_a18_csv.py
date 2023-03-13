@@ -1,6 +1,7 @@
 from games.A18.effects_traits_a18.models import *
 from games.A18.misc_a18.models import *
 from games.A18.items_a18.models import *
+from games.A18.monsters_a18.models import *
 import csv
 import codecs
 import sys
@@ -171,6 +172,18 @@ def import_category(row, index):
         )
         obj.save()
 
+def import_race(row, index):
+    if row[0]:
+        print(row[0])
+        obj = Race(
+            race_en = row[0],
+            race_ja = row[1],
+            race_sc = row[2],
+            race_tc = row[3],
+            icon = row[4]
+        )
+        obj.save()
+
 def add_category_item():
     items = {
         "neutralizer-r": "fuel",
@@ -283,6 +296,62 @@ def import_item_library(row, index):
 
         item.save()
 
+def import_monster_library(row, index):
+    if row[0]:
+        print(row[0])
+        monster = Monster(
+            slug=row[0],
+            char1 = Character.objects.get(slug=row[6]) if row[6] else None,
+            char2 = Character.objects.get(slug=row[7]) if row[7] else None,
+            char3 = Character.objects.get(slug=row[8]) if row[8] else None,
+            char4 = Character.objects.get(slug=row[9]) if row[9] else None,
+        )
+        monster.save()
+        
+
+        en = BasicText(
+            name = row[1],
+            desc1 = row[11] if row[11] else "",
+            desc2 = row[12] if row[12] else "",
+            desc3 = row[13] if row[13] else "",
+            desc4 = row[14] if row[14] else "",
+        )
+        en.save()
+
+        ja = BasicText(
+            name = row[2],
+            desc1 = row[15] if row[15] else "",
+            desc2 = row[16] if row[16] else "",
+            desc3 = row[17] if row[17] else "",
+            desc4 = row[18] if row[18] else "",
+        )
+        ja.save()
+
+        sc = BasicText(
+            name = row[3],
+            desc1 = row[19] if row[19] else "",
+            desc2 = row[20] if row[20] else "",
+            desc3 = row[21] if row[21] else "",
+            desc4 = row[22] if row[22] else "",
+        )
+        sc.save()
+
+        tc = BasicText(
+            name = row[4],
+            desc1 = row[23] if row[23] else "",
+            desc2 = row[24] if row[24] else "",
+            desc3 = row[25] if row[25] else "",
+            desc4 = row[26] if row[26] else "",
+        )
+        tc.save()
+
+        monster.mon_en = en
+        monster.mon_ja = ja
+        monster.mon_sc = sc
+        monster.mon_tc = tc
+
+        monster.save()
+
 def import_shop_data(row, index):
     if row[0]:
         print(row[0])
@@ -316,16 +385,12 @@ def import_catalyst(row, index):
         obj.save()
 
 def import_book(row, index):
-    if row[0]:
-        print(row[0])
-        obj = Book(
-            book = Item.objects.get(slug=row[0])
-        )
-        obj.save()
-        for i in range(1,7):
-            if row[i]:
-                item = Item.objects.get(slug=row[i])
-                obj.recipes.add(item)
+    book = Item.objects.get(slug=row[0])
+    for i in range(1,7):
+        if row[i]:
+            item = Item.objects.get(slug=row[i])
+            item.book = book
+            item.save()
 
 def import_mastery(row, index):
     if row[0]:
@@ -417,6 +482,192 @@ def import_recipe_data():
                 item.save()
                 line_num = line_num + 1
 
+def import_recipe_idea():
+    with open('scripts/data.txt', newline='', encoding='utf-8') as csvfile:
+        reader = csv.reader(csvfile, delimiter='\t')
+        line_num = 0
+        idea = None
+        prev_level = 5
+        for row in reader:
+            if row[0]:
+                print(row[1])
+                item = Item.objects.get(slug=row[1])
+                if row[2]:
+                    item.recipe_points = row[2]
+                    item.save()
+                if prev_level >= int(row[0]):
+                    idea = RecipeIdea(
+                        item=item
+                    )
+                    idea.save()
+                prev_level = int(row[0])
+                unlock = RecipeUnlock(
+                    idea=idea,
+                    level=row[0]
+                )
+                unlock.save()
+
+                j = 0
+                for i in range(3,18,3):
+                    if row[i]:
+                        if not row[i+1]:
+                            cond = RecipeCondition(
+                                group=unlock,
+                                index = j,
+                                condition = row[i],
+                                number = row[i+2] if row[i+2] else None,
+                            )
+                            cond.save()
+                        else:
+                            try:
+                                cond = RecipeCondition(
+                                    group=unlock,
+                                    index = j,
+                                    condition = row[i],
+                                    number = row[i+2] if row[i+2] else None,
+                                    item = Item.objects.get(slug=row[i+1])
+                                )
+                                cond.save()
+                            except:
+                                try:
+                                    cond = RecipeCondition(
+                                        group=unlock,
+                                        index = j,
+                                        condition = row[i],
+                                        number = row[i+2] if row[i+2] else None,
+                                        category = Category.objects.get(cat_en=row[i+1])
+                                    )
+                                    cond.save()
+                                except:
+                                    try:
+                                        cond = RecipeCondition(
+                                            group=unlock,
+                                            index = j,
+                                            condition = row[i],
+                                            number = row[i+2] if row[i+2] else None,
+                                            race = Race.objects.get(race_en=row[i+1])
+                                        )
+                                        cond.save()
+                                    except:
+                                        try:
+                                            cond = RecipeCondition(
+                                                group=unlock,
+                                                index = j,
+                                                condition = row[i],
+                                                number = row[i+2] if row[i+2] else None,
+                                                monster = Monster.objects.get(slug=row[i+1])
+                                            )
+                                            cond.save()
+                                        except:
+                                            print("bad ", row[i], row[i+1], row[i+2])
+                        j = j + 1
+                
+#gotta fix those typos from hand gathered info
+def validate_monsters(row, index):
+    if row[0]:
+        areas = row[0].split(';')
+        for area in areas:
+            print(area)
+            a = AreaName.objects.get(name_en=area)
+    if row[1]:
+        drops = row[1].split(';')
+        for drop in drops:
+            print(drop)
+            d = Item.objects.get(item_en__name=drop)
+            #print(d)
+    if row[6]:
+        drops = row[6].split(';')
+        for drop in drops:
+            print(drop)
+            d = Item.objects.get(item_en__name=drop)
+
+def import_areas(row, index):
+    if row[0]:
+        print(row[0])
+        obj = AreaName(
+            slug=row[0],
+            name_en=row[1],
+            name_ja=row[2],
+            name_sc=row[3],
+            name_tc=row[4],
+        )
+        obj.save()
+
+def import_item_areas(row, index):
+    if row[0]:
+        print(row[0])
+        item = Item.objects.get(text__name_en=row[0])
+        for i in range(1,6):
+            if row[i]:
+                area = AreaName.objects.get(name_en=row[i])
+                item.locations.add(area)
+
+def import_monsters(row, index):
+    weakness = {
+        "W":  1,
+        "":   2,
+        "R1": 3,
+        "R2": 4,
+        "R3": 5,
+        "R4": 6
+    }
+    if row[0]:
+        print(row[0])
+        monster = Monster.objects.get(slug=row[0])
+        race = Race.objects.get(race_en=row[2])
+        monster.kind = race
+        monster.index = index
+        monster.level = row[3]
+        monster.exp   = row[4]
+        monster.cole  = row[5]
+        monster.hp    = row[6]
+        monster.atk   = row[7]
+        monster.defen = row[8]
+        monster.spd   = row[9]
+        monster.slash  = weakness[row[10]]
+        monster.impact = weakness[row[11]]
+        monster.pierce = weakness[row[12]]
+        monster.magic  = weakness[row[13]]
+        monster.fire   = weakness[row[14]]
+        monster.ice    = weakness[row[15]]
+        monster.light  = weakness[row[16]]
+        monster.ail    = weakness[row[17]]
+        monster.isDX = True if row[21] else False
+        monster.note = row[22] if row[22] else ""
+
+        if row[18]:
+            habitats = row[18].split(';')
+            for habitat in habitats:
+                if habitat:
+                    h = AreaName.objects.get(name_en=habitat)
+                    monster.locations.add(h)
+        
+        if row[19]:
+            drops = row[19].split(';')
+            for drop in drops:
+                if drop:
+                    item = Item.objects.get(text__name_en=drop)
+                    item.monsters.add(monster)
+        if row[20]:
+            drops = row[20].split(';')
+            for drop in drops:
+                if drop:
+                    item = Item.objects.get(text__name_en=drop)
+                    item.monsters.add(monster)
+        monster.save()
+
+def renumber_trait(row, index):
+    trait = Trait.objects.get(slug=row[0])
+    trait.index = index
+    trait.save()
+
+def import_cn_ideas(row, index):
+    conditions = RecipeCondition.objects.filter(condition=row[0])
+    print(row[0])
+    for condition in conditions:
+        condition.condition_sc = row[1]
+        condition.condition_tc = row[2]
+        condition.save()
 
 def import_generic(function):
     with open('scripts/data.txt', newline='', encoding='utf-8') as csvfile:
@@ -426,6 +677,10 @@ def import_generic(function):
             function(row, index)
             index = index + 1
 
-#import_generic(import_mastery)
+
+#import_generic(import_cn_ideas)
 #add_category_item()
 #import_recipe_data()
+#import_recipe_idea()
+#rearrange_text()
+#rearrange_text2()

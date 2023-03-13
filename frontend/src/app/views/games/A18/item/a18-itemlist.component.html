@@ -1,0 +1,72 @@
+<Error *ngIf="error" [errorCode]="error"></Error>
+
+<div *ngIf="!error">
+<Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Items"></Breadcrumb>
+<h1>Items</h1>
+<div *ngIf="categories" class ="col-md-10 mx-auto">
+  <form [formGroup]="pageForm" class="form-horizontal">
+    <div class="row">
+      <mat-form-field class="col-md-5" appearance="outline">
+        <mat-label>Filter...</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtertext">
+        <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="col-md-4" appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select matNativeControl formControlName="cat" disableOptionCentering="true" class="mat-select-icon" [(value)]="selectedCat">
+          <mat-option value="Any" selected><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"   ></mat-icon> Any</mat-option>
+          <mat-option *ngFor="let cat of categories" value="{{cat.name}}">
+              <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-{{cat.icon}}"></mat-icon>
+              {{cat.name}}
+          </mat-option>
+          <mat-select-trigger>
+             {{selectedCat}}
+          </mat-select-trigger>
+        </mat-select>
+      </mat-form-field>
+      <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
+    </div>
+      <div class="row">
+        <mat-form-field class="col-md-5" appearance="outline">
+            <mat-label>Has ingredient...</mat-label>
+            <input style="height: 100%;" matInput formControlName="filtering">
+          </mat-form-field>
+      </div> 
+    </form>
+</div>
+<div *ngIf="filteredItems" class="item-grid">
+  <div *ngFor="let it of filteredItems | async; trackBy:identify" class="card card-body">
+    <h4 class="card-title card-icon-space">
+        <a (click)="openModal(itemModal, it.slug, $event);" href="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a>    
+    </h4>
+    <div class="card-icon-position">
+      <ng-container *ngIf="it.isDLC">
+        <span class="badge bg-secondary">DLC</span>
+      </ng-container>
+      <ng-container *ngIf="it.isDX">
+        <span class="badge bg-secondary">DX</span>
+      </ng-container>
+    </div>
+    <a class="card-item-display" (click)="openModal(itemModal, it.slug, $event);" href="/{{gameURL}}/items/{{it.slug}}/{{language}}">
+      <img loading="lazy" src="{{imgURL}}items/{{it.slug}}.webp" alt="{{it.name}}">
+    </a> 
+    <button (click)="openModal(itemModal, it.slug)" class="card-read-more-position" mat-mini-fab color="accent">
+      <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+    </button>
+    <table class="table-item-data">
+      <tr *ngFor="let cat of it.categories">
+          <td style="text-align:center;"><i class="atelier atelier-{{cat.icon}}"></i></td><td>{{cat.name}}</td>
+      </tr>
+    </table>
+  </div>
+
+<ng-template #itemModal>
+  <div class="modal-body">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <i class="fas fa-times-circle"></i>
+    </button>
+      <a18-item slug="{{selected}}" [showNav]="false"></a18-item>
+  </div>
+</ng-template>
+</div>
+</div>

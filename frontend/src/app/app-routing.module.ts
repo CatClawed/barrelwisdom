@@ -101,6 +101,16 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'firis',
+    component: LayoutComponent,
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A18/a18-routing.module').then(m=>m.A18RoutingModule),
+      },
+    ]
+  },
+  {
     path: 'ryza2',
     component: LayoutComponent,
     children: [
@@ -155,11 +165,6 @@ const routes: Routes = [
   {
     path: 'ryza',
     redirectTo: '/ryza/faq',
-    pathMatch: 'full'
-  },
-  {
-    path: 'firis',
-    redirectTo: '/firis/ultimate-setups',
     pathMatch: 'full'
   },
   {

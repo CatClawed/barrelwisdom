@@ -1,0 +1,34 @@
+<Error *ngIf="error" [errorCode]="error"></Error>
+
+<ng-container *ngIf="effect">
+<ng-container *ngIf="showNav">
+  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Effects', '/'+gameURL+'/effects/'+language]]" [current]="effect.name"></Breadcrumb>
+</ng-container>
+<div class="mx-auto row spacer">
+  <div class="{{colset}} card card-body">
+    <div class="flex">
+      <h4 class="card-title">{{effect.name}}</h4>
+    </div>
+    <p *ngIf="effect.desc">{{effect.desc}}</p>
+    <b *ngIf="effect.items">From Item:</b>
+    <ul *ngIf="effect.items">
+      <li *ngFor="let i of effect.items">
+        <a routerLink="/{{gameURL}}/items/{{i.slug}}/{{language}}">{{i.name}}</a>
+      </li>
+    </ul>
+    <ng-container *ngIf="effect.advanced">
+      <b >Advanced Data:</b>
+      <ul>
+        <li *ngFor="let data of effect.advanced">
+          <span *ngIf="data.attTag0">{{data.attTag0}} /</span> {{data.actTag0}}
+          <ul>
+            <li *ngIf="data.min_1_0"><b>Value 1: </b>{{data.min_1_0}}<span *ngIf="data.max_1_0"> - {{data.max_1_0}}</span></li>
+            <li *ngIf="data.min_2_0"><b>Value 2: </b>{{data.min_2_0}}<span *ngIf="data.max_2_0"> - {{data.max_2_0}}</span></li>
+          </ul>
+        </li>
+      </ul>
+    </ng-container>
+</div>
+<language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
+</div>
+</ng-container>

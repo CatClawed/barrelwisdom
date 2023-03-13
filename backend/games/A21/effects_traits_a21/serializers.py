@@ -2,6 +2,7 @@ from rest_framework import serializers
 from games.A21.effects_traits_a21.models import Trait, Effect, AdvData
 #from games.A21.items_a21.models import Item, EffectData
 from collections import OrderedDict
+from games._helpers.serializer_helper import DefaultSerializer
 
 """
 class A21ItemSerializer(serializers.ModelSerializer):
@@ -22,7 +23,7 @@ class A21ItemSerializer(serializers.ModelSerializer):
             return obj.item_en.name
 """
 
-class A21AdvDataSerializer(serializers.ModelSerializer):
+class A21AdvDataSerializer(DefaultSerializer):
     class Meta:
         model = AdvData
         fields = ['baseAtt','attTag0', 'actTag0', 'min_1_0', 'max_1_0', 'min_2_0', 'max_2_0']
@@ -48,7 +49,7 @@ class A21TraitSerializerSimple(serializers.ModelSerializer):
         else:
             return obj.trait_en.name
 
-class A21TraitListSerializer(serializers.ModelSerializer):
+class A21TraitListSerializer(DefaultSerializer):
     text = serializers.SerializerMethodField()
     #item_set = A21ItemSerializer(many=True)
     class Meta:
@@ -57,22 +58,12 @@ class A21TraitListSerializer(serializers.ModelSerializer):
             'trans_wpn', 'trans_arm', 'trans_acc', 'trans_syn', 'text'#, 'item_set'
         ]
     def get_text(self,obj):
-        try:
-            match self.context['language']:
-                case 'ja':
-                    return obj.trait_ja.name, obj.trait_ja.desc
-                case 'sc':
-                    return obj.trait_sc.name, obj.trait_sc.desc
-                case 'tc':
-                    return obj.trait_tc.name, obj.trait_tc.desc
-                case _:
-                    return obj.trait_en.name, obj.trait_en.desc
-        except KeyError:
-            return obj.trait_en.name, obj.trait_en.desc
-    def to_representation(self, instance):
-        result = super(A21TraitListSerializer, self).to_representation(instance)
-        return OrderedDict((k, v) for k, v in result.items() 
-                           if v not in [None, [], '', False, {}])
+        return DefaultSerializer.language_match(self,
+            en=(obj.trait_en.name, obj.trait_en.desc),
+            ja=(obj.trait_ja.name, obj.trait_ja.desc),
+            sc=(obj.trait_sc.name, obj.trait_sc.desc),
+            tc=(obj.trait_tc.name, obj.trait_tc.desc),
+        )
 
 class A21TraitSerializer(serializers.ModelSerializer):
     text = serializers.SerializerMethodField()
@@ -108,7 +99,7 @@ class A21EffectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Effect
         fields = ['slug', 'text']
-    def get_name(self,obj):
+    def get_name(self,obj):        
         try:
             match self.context['language']:
                 case 'ja':

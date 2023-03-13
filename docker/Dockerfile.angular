@@ -1,5 +1,5 @@
-FROM node:18
-RUN apt-get update && apt-get -y install vim
+FROM node:18.14.2-alpine
+RUN apk add vim
 WORKDIR /frontend
 COPY package*.json /frontend
 RUN npm i --silent
