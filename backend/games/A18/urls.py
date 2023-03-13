@@ -1,6 +1,6 @@
 from games.A18.effects_traits_a18.viewsets import A18TraitViewSet, A18EffectViewSet
 from games.A18.monsters_a18.viewsets import A18MonsterViewSet, A18RaceViewSet
-from games.A18.items_a18.viewsets import A18CategoryViewSet, A18CatalystViewSet, A18RecipeIdeaViewSet, A18ItemViewSet
+from games.A18.items_a18.viewsets import A18CategoryViewSet, A18RecipeIdeaViewSet, A18ItemViewSet, A18CatalystViewSet
 from games.A18.misc_a18.viewsets import A18ShopViewSet
 
 routes = (

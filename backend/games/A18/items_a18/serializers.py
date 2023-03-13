@@ -84,6 +84,7 @@ class A18ShopSlotSerializer(DefaultSerializer):
             tc=obj.shop.shop_tc,
         )
 
+
 class A18CatalystSimpleSerializer(DefaultSerializer):
     color = serializers.SerializerMethodField()
     action = serializers.SerializerMethodField()
@@ -134,7 +135,6 @@ class A18CatalystSerializer(DefaultSerializer):
             sc=(act.cat_sc for act in actions if act ),
             tc=(act.cat_tc for act in actions if act ),
         )
-
 
 class A18RecipeConditionSerializer(DefaultSerializer):
     monster = A18MonsterNameSerializer()
@@ -227,7 +227,7 @@ class A18ItemSerializer(DefaultSerializer):
             'uses', 'wt', 'stun', 'range', 'dmin', 'dmax', 'quantity',
             'isDLC', 'isDX', 'chars', 'recipe_points', 'catalysts', 'categories',
             'locations', 'monsters', 'fixed_components', "random_components",
-            'book', 'recipes', 'equip', 'catalyst', 'masteryline_set',
+            'book', 'recipes', 'equip', 'masteryline_set', 'catalyst',
             'ingredients', 'effectlines_set', 'ideas', 'shopslot_set'
         ]
     def get_name(self,obj):

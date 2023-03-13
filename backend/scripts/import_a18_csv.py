@@ -678,7 +678,7 @@ def import_generic(function):
             index = index + 1
 
 
-#import_generic(import_cn_ideas)
+import_generic(import_catalyst)
 #add_category_item()
 #import_recipe_data()
 #import_recipe_idea()

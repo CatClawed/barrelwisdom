@@ -1,6 +1,6 @@
 from rest_framework import viewsets, filters
-from games.A18.items_a18.models import Item, Category, Catalyst, RecipeIdea
-from games.A18.items_a18.serializers import A18CategoryItemSerializer, A18CategorySerializer, A18CatalystSerializer, A18RecipeItemSerializer, A18ItemListSerializer, A18ItemSerializer
+from games.A18.items_a18.models import Item, Category, RecipeIdea, Catalyst
+from games.A18.items_a18.serializers import A18CategoryItemSerializer, A18CategorySerializer, A18RecipeItemSerializer, A18ItemListSerializer, A18ItemSerializer, A18CatalystSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
@@ -111,90 +111,6 @@ class A18CategoryViewSet(viewsets.ModelViewSet):
         except ObjectDoesNotExist:
             raise Http404
         serializer = A18CategoryItemSerializer(queryset, context={'language': 'tc'})
-        return Response(serializer.data)
-
-class A18CatalystViewSet(viewsets.ModelViewSet):
-    queryset = Category.objects.all()
-    serializer_class = A18CatalystSerializer
-
-    @action(detail=False) 
-    def en(self, request):
-        queryset = (
-            Catalyst.objects
-            .select_related(
-                'action1',
-                'action2',
-                'action3',
-                'action4',
-                'action5',
-                'action6',
-                'item__text',
-            )
-            .prefetch_related(
-                'item__categories'
-            )
-        )
-        serializer = A18CatalystSerializer(queryset, many=True, context={'language': 'en'})
-        return Response(serializer.data)
-
-    @action(detail=False) 
-    def ja(self, request):
-        queryset = (
-            Catalyst.objects
-            .select_related(
-                'action1',
-                'action2',
-                'action3',
-                'action4',
-                'action5',
-                'action6',
-                'item__text',
-            )
-            .prefetch_related(
-                'item__categories'
-            )
-        )
-        serializer = A18CatalystSerializer(queryset, many=True, context={'language': 'ja'})
-        return Response(serializer.data)
-    
-    @action(detail=False) 
-    def sc(self, request):
-        queryset = (
-            Catalyst.objects
-            .select_related(
-                'action1',
-                'action2',
-                'action3',
-                'action4',
-                'action5',
-                'action6',
-                'item__text',
-            )
-            .prefetch_related(
-                'item__categories'
-            )
-        )
-        serializer = A18CatalystSerializer(queryset, many=True, context={'language': 'sc'})
-        return Response(serializer.data)
-    
-    @action(detail=False) 
-    def tc(self, request):
-        queryset = (
-            Catalyst.objects
-            .select_related(
-                'action1',
-                'action2',
-                'action3',
-                'action4',
-                'action5',
-                'action6',
-                'item__text',
-            )
-            .prefetch_related(
-                'item__categories'
-            )
-        )
-        serializer = A18CatalystSerializer(queryset, many=True, context={'language': 'tc'})
         return Response(serializer.data)
 
 class A18ItemViewSet(viewsets.ModelViewSet):
@@ -518,4 +434,89 @@ class A18RecipeIdeaViewSet(viewsets.ModelViewSet):
             .distinct()
         )
         serializer = A18RecipeItemSerializer(queryset, many=True, context={'language': 'tc'})
+        return Response(serializer.data)
+
+
+class A18CatalystViewSet(viewsets.ModelViewSet):
+    queryset = Catalyst.objects.all()
+    serializer_class = A18CatalystSerializer
+
+    @action(detail=False) 
+    def en(self, request):
+        queryset = (
+            Catalyst.objects
+            .select_related(
+                'action1',
+                'action2',
+                'action3',
+                'action4',
+                'action5',
+                'action6',
+                'item__text',
+            )
+            .prefetch_related(
+                'item__categories'
+            )
+        )
+        serializer = A18CatalystSerializer(queryset, many=True, context={'language': 'en'})
+        return Response(serializer.data)
+
+    @action(detail=False) 
+    def ja(self, request):
+        queryset = (
+            Catalyst.objects
+            .select_related(
+                'action1',
+                'action2',
+                'action3',
+                'action4',
+                'action5',
+                'action6',
+                'item__text',
+            )
+            .prefetch_related(
+                'item__categories'
+            )
+        )
+        serializer = A18CatalystSerializer(queryset, many=True, context={'language': 'ja'})
+        return Response(serializer.data)
+    
+    @action(detail=False) 
+    def sc(self, request):
+        queryset = (
+            Catalyst.objects
+            .select_related(
+                'action1',
+                'action2',
+                'action3',
+                'action4',
+                'action5',
+                'action6',
+                'item__text',
+            )
+            .prefetch_related(
+                'item__categories'
+            )
+        )
+        serializer = A18CatalystSerializer(queryset, many=True, context={'language': 'sc'})
+        return Response(serializer.data)
+    
+    @action(detail=False) 
+    def tc(self, request):
+        queryset = (
+            Catalyst.objects
+            .select_related(
+                'action1',
+                'action2',
+                'action3',
+                'action4',
+                'action5',
+                'action6',
+                'item__text',
+            )
+            .prefetch_related(
+                'item__categories'
+            )
+        )
+        serializer = A18CatalystSerializer(queryset, many=True, context={'language': 'tc'})
         return Response(serializer.data)
