@@ -144,4 +144,7 @@ export class BlogComponent implements OnInit {
         }
       });
   }
+  lineBreak(str): string {
+    return str.replace(/\n/g, '</br>');
+  }
 }

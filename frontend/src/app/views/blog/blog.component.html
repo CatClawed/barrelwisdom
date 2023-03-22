@@ -23,7 +23,11 @@
     <div *ngIf="blog.image" class="blog-image">
         <img class="blog-head-img" src="{{blog.image}}" alt="" role="presentation">
     </div>
-    <div (click)="historyService.hrefClicked($event);" [innerHTML]="body"></div>
+    <div markdown
+        [disableSanitizer]="true"
+        (click)="historyService.hrefClicked($event);"
+        [data]="body">
+    </div>
     <div *ngIf="blog.tags.length > 0" class="blog-tags clearfix">
         <i style="margin-right: 1em; margin-top: 0.5em; font-size: 1rem;" class="badge bg-secondary"><i
                 class="fas fa-tag"></i></i>
@@ -62,7 +66,7 @@
             <time class="updated text-muted" style="margin-left:0.75rem;font-size: calc(0.8rem + 0.1vw);"
                 dateTime="{{comment.created}}"> {{comment.created | date:'mediumDate' }} </time>
         </div>
-        {{comment.body}}
+        <div markdown [data]="lineBreak(comment.body)"></div>
         <div>
             <button *ngIf="!comment.open && !blog.closed && !comment.success"
                 style="float:right;"

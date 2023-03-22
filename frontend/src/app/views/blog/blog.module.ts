@@ -15,7 +15,7 @@ import { BlogComponent } from './blog.component';
       BlogRoutingModule,
       ErrorModule,
       BreadcrumbModule,
-      MarkdownModule.forRoot({sanitize: SecurityContext.NONE}),
+      MarkdownModule.forRoot(),
       MatFormFieldModule,
       MatInputModule,
       ReactiveFormsModule,

@@ -37,6 +37,15 @@ services:
     extra_hosts:
       - "localhost:host-gateway"
 
+  memcached:
+    container_name: bw_memcached
+    image: memcached:1.6.19-alpine3.17
+    ports:
+      - "11211:11211"
+    entrypoint:
+      - memcached
+      - -m 64
+
 volumes:
   nodemodules: {}
   bw_database: {}

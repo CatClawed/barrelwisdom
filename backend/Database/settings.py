@@ -19,7 +19,7 @@ def get_secret(setting, secrets=secrets):
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = get_secret('DEBUG')
 
-ALLOWED_HOSTS = ['barrelwisdom.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
@@ -138,7 +138,7 @@ if DEBUG:
     INSTALLED_APPS.append('debug_toolbar')
     MIDDLEWARE.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
     MIDDLEWARE.remove('django.middleware.cache.UpdateCacheMiddleware')
-    MIDDLEWARE.remove('django.middleware.cache.FetchFromCacheMiddleware')
+MIDDLEWARE.remove('django.middleware.cache.FetchFromCacheMiddleware')
 
 INTERNAL_IPS = [
     '127.0.0.1',
@@ -177,7 +177,7 @@ DATABASES = {
         'NAME': 'barrelwisdom',
         'USER': get_secret('DB_USER'),
         'PASSWORD': get_secret('DB_PASSWORD'),
-        #'HOST': 'postgres',
+        'HOST': 'postgres',
     },
 }
 
@@ -234,6 +234,6 @@ JWT_AUTH_REFRESH_COOKIE = 'bw-refresh'
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
-        'LOCATION': '127.0.0.1:11211',
+        'LOCATION': 'memcached:11211',
     }
 }

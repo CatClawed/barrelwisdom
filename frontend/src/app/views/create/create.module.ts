@@ -6,7 +6,7 @@ import { MatLegacyChipsModule as MatChipsModule } from '@angular/material/legacy
 import { ErrorModule } from '@app/views/error/error.module';
 import { CreateRoutingModule } from './create-routing.module';
 import { CreateComponent } from './create.component';
-import { MarkdownModule } from 'ngx-markdown';
+import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 
 @NgModule({
   imports: [
@@ -16,7 +16,9 @@ import { MarkdownModule } from 'ngx-markdown';
     ErrorModule,
     MatChipsModule,
     MatAutocompleteModule,
-    MarkdownModule.forRoot({sanitize: SecurityContext.NONE}),
+    MarkdownModule.forRoot(
+      {sanitize: SecurityContext.NONE}
+    ),
   ],
   declarations: [
     CreateComponent,
