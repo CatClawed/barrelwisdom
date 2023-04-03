@@ -31,7 +31,7 @@ export class UniversalRelativeInterceptor implements HttpInterceptor, OnDestroy 
     intercept(req: HttpRequest<any>, next: HttpHandler) {
         if (!this.isBrowser) {
             const pathSeparator = !req.url.startsWith('/') ? '/' : '';
-            const url = 'http://localhost:8000' + pathSeparator + req.url;
+            const url = 'http://backend:8000' + pathSeparator + req.url;
             const serverRequest = req.clone({ url });
             return next.handle(serverRequest);
         }

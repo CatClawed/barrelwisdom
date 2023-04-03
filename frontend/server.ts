@@ -22,7 +22,7 @@ export function app(): express.Express {
 
   // proxy middleware options
 const optionsApi = {
-  target: 'http://localhost:8000', // target host
+  target: 'http://backend:8000', // target host
   changeOrigin: false, // needed for virtual hosted sites
   ws: true, // proxy websockets
 };
@@ -70,7 +70,7 @@ function run(): void {
   // Start up the Node server
   const server = app();
   server.listen(port, () => {
-    console.log(`Node Express server listening on http://localhost:${port}`);
+    console.log(`Node Express server listening on http://backend:${port}`);
   });
 }
 

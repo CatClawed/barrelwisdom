@@ -6,20 +6,10 @@ from datetime import timedelta
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-with open(os.path.join(BASE_DIR, 'secrets.json')) as secrets_file:
-    secrets = json.load(secrets_file)
-
-def get_secret(setting, secrets=secrets):
-    """Get secret setting or fail with ImproperlyConfigured"""
-    try:
-        return secrets[setting]
-    except KeyError:
-        raise ImproperlyConfigured("Set the {} setting".format(setting))
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = get_secret('DEBUG')
+DEBUG = os.environ['DEBUG']
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost', 'barrelwisdom.com', 'test.barrelwisdom.com']
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
@@ -54,7 +44,7 @@ INSTALLED_APPS = [
     'navigation.apps.NavigationConfig',
     'userprofile.apps.UserProfileConfig',
     'report.apps.ReportConfig',
-    # A12
+    # A12 Totori
     'games.A12.traits_a12.apps.A12TraitConfig',
     'games.A12.effects_a12.apps.A12EffectConfig',
     'games.A12.categories_a12.apps.A12CategoryConfig',
@@ -62,14 +52,14 @@ INSTALLED_APPS = [
     'games.A12.monsters_a12.apps.A12MonsterConfig',
     'games.A12.items_a12.apps.A12ItemConfig',
     'games.A12.areadata_a12.apps.A12AreaDataConfig',
-    # A15
+    # A15 Escha & Logy
     'games.A15.categories_a15.apps.A15CategoryConfig',
     'games.A15.properties_a15.apps.A15PropertyConfig',
     'games.A15.effects_a15.apps.A15EffectConfig',
     'games.A15.regions_a15.apps.A15RegionConfig',
     'games.A15.monsters_a15.apps.A15MonsterConfig',
     'games.A15.items_a15.apps.A15ItemConfig',
-    # A16
+    # A16 Shallie
     'games.A16.categories_a16.apps.A16CategoryConfig',
     'games.A16.regions_a16.apps.A16RegionConfig',
     'games.A16.effects_a16.apps.A16EffectConfig',
@@ -77,14 +67,14 @@ INSTALLED_APPS = [
     'games.A16.monsters_a16.apps.A16MonsterConfig',
     'games.A16.items_a16.apps.A16ItemConfig',
     'games.A16.areadata_a16.apps.A16AreaDataConfig',
-    # A18
+    # A18 Firis
     'games.A18.effects_traits_a18.apps.A18EffectTraitConfig',
     'games.A18.misc_a18.apps.A18MiscConfig',
     'games.A18.items_a18.apps.A18ItemConfig',
     'games.A18.monsters_a18.apps.A18MonsterConfig',
-    # A21
+    # A21 Ryza 1
     'games.A21.effects_traits_a21.apps.A21EffectTraitConfig',
-    # A22
+    # A22 Ryza 2
     'games.A22.effects_a22.apps.A22EffectConfig',
     'games.A22.traits_a22.apps.A22TraitConfig',
     'games.A22.categories_a22.apps.A22CategoryConfig',
@@ -92,13 +82,14 @@ INSTALLED_APPS = [
     'games.A22.items_a22.apps.A22ItemConfig',
     'games.A22.monsters_a22.apps.A22MonsterConfig',
     'games.A22.shops_a22.apps.A22ShopConfig',
-    # A23
+    # A23 Sophie 2
     'games.A23.effects_a23.apps.A23EffectConfig',
     'games.A23.traits_a23.apps.A23TraitConfig',
     'games.A23.misc_a23.apps.A23MiscConfig',
     'games.A23.regions_a23.apps.A23RegionConfig',
     'games.A23.items_a23.apps.A23ItemConfig',
     'games.A23.monsters_a23.apps.A23MonsterConfig',
+    # A24 Ryza 3
     # Blue Reflection
     'games.BR1.missions_br1.apps.BR1MissionConfig',
     'games.BR1.areas_br1.apps.BR1AreaConfig',
@@ -137,8 +128,10 @@ if DEBUG:
     ALLOWED_HOSTS = ['*'] 
     INSTALLED_APPS.append('debug_toolbar')
     MIDDLEWARE.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
+    # very annoying to have cache on during development
+    # but did this ever come back to bite me
     MIDDLEWARE.remove('django.middleware.cache.UpdateCacheMiddleware')
-MIDDLEWARE.remove('django.middleware.cache.FetchFromCacheMiddleware')
+    MIDDLEWARE.remove('django.middleware.cache.FetchFromCacheMiddleware')
 
 INTERNAL_IPS = [
     '127.0.0.1',
@@ -170,13 +163,13 @@ WSGI_APPLICATION = 'Database.wsgi.application'
 
 # may later replace with docker stuff, not sure
 # comment out host in production for now?
-SECRET_KEY = get_secret('SECRET_KEY')
+SECRET_KEY = os.environ['SECRET_KEY']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'barrelwisdom',
-        'USER': get_secret('DB_USER'),
-        'PASSWORD': get_secret('DB_PASSWORD'),
+        'USER': os.environ['DB_USER'],
+        'PASSWORD': os.environ['DB_PASSWORD'],
         'HOST': 'postgres',
     },
 }

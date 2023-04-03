@@ -163,6 +163,11 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'ryza3',
+    redirectTo: '/ryza3/how-to-get-infinite-gems',
+    pathMatch: 'full'
+  },
+  {
     path: 'ryza',
     redirectTo: '/ryza/faq',
     pathMatch: 'full'

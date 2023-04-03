@@ -93,14 +93,14 @@ class A18CatalystSimpleSerializer(DefaultSerializer):
         fields = ['size', 'color', 'action']
     def get_color(self,obj):
         colors = [obj.color1, obj.color2, obj.color3, obj.color4, obj.color5, obj.color6]
-        return (color for color in colors if color)
+        return tuple(color for color in colors if color)
     def get_action(self,obj):
         actions = [obj.action1,obj.action2,obj.action3,obj.action4,obj.action5,obj.action6]
         return DefaultSerializer.language_match(self,
-            en=(act.cat_en for act in actions if act ),
-            ja=(act.cat_ja for act in actions if act ),
-            sc=(act.cat_sc for act in actions if act ),
-            tc=(act.cat_tc for act in actions if act ),
+            en=tuple(act.cat_en for act in actions if act ),
+            ja=tuple(act.cat_ja for act in actions if act ),
+            sc=tuple(act.cat_sc for act in actions if act ),
+            tc=tuple(act.cat_tc for act in actions if act ),
         )
 
 class A18ItemCatalystSerializer(DefaultSerializer):
@@ -126,14 +126,14 @@ class A18CatalystSerializer(DefaultSerializer):
         fields = ['item', 'size', 'color', 'action']
     def get_color(self,obj):
         colors = [obj.color1, obj.color2, obj.color3, obj.color4, obj.color5, obj.color6]
-        return (color for color in colors if color)
+        return tuple(color for color in colors if color)
     def get_action(self,obj):
         actions = [obj.action1,obj.action2,obj.action3,obj.action4,obj.action5,obj.action6]
         return DefaultSerializer.language_match(self,
-            en=(act.cat_en for act in actions if act ),
-            ja=(act.cat_ja for act in actions if act ),
-            sc=(act.cat_sc for act in actions if act ),
-            tc=(act.cat_tc for act in actions if act ),
+            en=tuple(act.cat_en for act in actions if act ),
+            ja=tuple(act.cat_ja for act in actions if act ),
+            sc=tuple(act.cat_sc for act in actions if act ),
+            tc=tuple(act.cat_tc for act in actions if act ),
         )
 
 class A18RecipeConditionSerializer(DefaultSerializer):

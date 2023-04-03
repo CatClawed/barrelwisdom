@@ -1,10 +1,10 @@
 {
     "/api/": {
-       "target": "http://bw_backend:8000",
+       "target": "http://backend:8000",
        "secure": false
     },
     "/auth/": {
-      "target": "http://bw_backend:8000",
+      "target": "http://backend:8000",
       "secure": false
    },
    "/media/": {
