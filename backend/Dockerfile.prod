@@ -10,5 +10,5 @@ RUN \
  apk --purge del .build-deps
 COPY . /backend
 RUN adduser -D user
-USER myuser
+USER user
 ENTRYPOINT run_django.sh

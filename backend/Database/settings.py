@@ -1,5 +1,4 @@
 import os
-import json
 from django.core.exceptions import ImproperlyConfigured
 from datetime import timedelta
 
