@@ -50,7 +50,7 @@ python manage.py migrate
 If you have data to load, comment out receivers in backend FIRST.
 
 ```bash
-python manage.py dumpdata --exclude=auth --exclude=contenttypes --exclude=authtoken -o dump.json.gz
+python manage.py dumpdata --exclude=auth.permission --exclude=contenttypes --exclude=authtoken -o dump.json.gz
 python manage.py dumpdata app_name -o dump.json.gz
 python manage.py loaddata dump.json.gz
 ```

@@ -11,4 +11,4 @@ RUN \
 COPY . /backend
 RUN adduser -D user
 USER user
-ENTRYPOINT run_django.sh
+ENTRYPOINT ./run_django.sh
