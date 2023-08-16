@@ -1,4 +1,4 @@
-FROM node:18.14.2-alpine
+FROM node:18.17.1-alpine
 RUN apk add vim
 WORKDIR /frontend
 COPY package*.json /frontend
