@@ -5,6 +5,8 @@ https://barrelwisdom.com
 
 ![barrel](https://barrelwisdom.com/media/main/barrelwisdom.svg)
 
+To see how this is deployed and updated in a real world environment, see the [deployment repo](https://github.com/CatClawed/barrelwisdom_deployment/).
+
 ## Docker usage
 
 Most matters will be taken care of with:
@@ -16,23 +18,16 @@ docker compose up
 
 But further backend setup is necessary.
 
-Create `backend/secrets.json` with the following format:
-
-```json
-{
-    "SECRET_KEY": "50 rando character string of your choice goes here",
-    "DB_PASSWORD": "",
-    "DB_USER": ""
-}
-```
-
-As well as `docker/.env`:
+Create `docker/.env` with the following format:
 
 ```bash
-POSTGRES_USER=""
-POSTGRES_PASSWORD=""
-POSTGRES_DB="barrelwisdom"
+SECRET_KEY=50 rando character string of your choice goes here
+DB_PASSWORD=
+DB_USER=
+DEBUG=1
 ```
+
+DEBUG must be set to 0 in production environments.
 
 In `backend`, you will also want to run:
 
@@ -43,16 +38,32 @@ ssh-keygen -t rsa -b 4096 -m PEM -f jwt-key
 Finally, run the containers. To setup the database:
 
 ```bash
-docker exec -it bw_backend bash
+docker exec -it backend bash
 python manage.py migrate
 ```
 
-If you have data to load, comment out receivers in backend FIRST.
+If you have data to load/dump:
 
 ```bash
 python manage.py dumpdata --exclude=auth.permission --exclude=contenttypes --exclude=authtoken -o dump.json.gz
 python manage.py dumpdata app_name -o dump.json.gz
 python manage.py loaddata dump.json.gz
+```
+
+## Build frontend
+
+Be sure backend is running, as prerendering requires DB access.
+
+```bash
+docker exec -it frontend bash
+npm run prerender
+```
+
+For the final docker image:
+
+```bash
+docker build -t frontend_prod -f Dockerfile.prod .
+docker tag frontend_prod barrelwisdom/frontend:tag
 ```
 
 ## Non-Docker Notes

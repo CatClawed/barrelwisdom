@@ -16,3 +16,6 @@ Thumbs.db
 *.log
 *.bak
 .env
+.dccache
+.sonar_lock
+.scannerwork/report-task.txt

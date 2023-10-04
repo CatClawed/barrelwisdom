@@ -1,6 +1,7 @@
 import os
 from django.core.exceptions import ImproperlyConfigured
 from datetime import timedelta
+from pathlib import Path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'navigation.apps.NavigationConfig',
     'userprofile.apps.UserProfileConfig',
     'report.apps.ReportConfig',
+    # A01 Marie
     # A12 Totori
     'games.A12.traits_a12.apps.A12TraitConfig',
     'games.A12.effects_a12.apps.A12EffectConfig',
@@ -89,6 +91,7 @@ INSTALLED_APPS = [
     'games.A23.items_a23.apps.A23ItemConfig',
     'games.A23.monsters_a23.apps.A23MonsterConfig',
     # A24 Ryza 3
+    # A25 Resleri
     # Blue Reflection
     'games.BR1.missions_br1.apps.BR1MissionConfig',
     'games.BR1.areas_br1.apps.BR1AreaConfig',
@@ -214,8 +217,8 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=14),
     'ALGORITHM': 'RS256',
-    'SIGNING_KEY': open('jwt-key').read(),
-    'VERIFYING_KEY': open('jwt-key.pub').read(),
+    'SIGNING_KEY': Path('jwt-key').read_text(),
+    'VERIFYING_KEY': Path('jwt-key.pub').read_text(),
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
