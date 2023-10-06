@@ -92,6 +92,9 @@ INSTALLED_APPS = [
     'games.A23.monsters_a23.apps.A23MonsterConfig',
     # A24 Ryza 3
     # A25 Resleri
+    'games.A25.misc_a25.apps.A25MiscConfig',
+    'games.A25.chara_a25.apps.A25CharaConfig',
+    'games.A25.items_a25.apps.A25ItemConfig',
     # Blue Reflection
     'games.BR1.missions_br1.apps.BR1MissionConfig',
     'games.BR1.areas_br1.apps.BR1AreaConfig',
