@@ -17,6 +17,7 @@ from games.A18 import urls as A18
 from games.A21 import urls as A21
 from games.A22 import urls as A22
 from games.A23 import urls as A23
+from games.A25 import urls as A25
 from games.BR1 import urls as BR1
 from games.BRSL import urls as BRSL
 
@@ -42,6 +43,7 @@ routeLists = [
     A21.routes,
     A22.routes,
     A23.routes,
+    A25.routes,
     BR1.routes,
     BRSL.routes,
 ]

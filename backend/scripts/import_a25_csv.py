@@ -318,6 +318,79 @@ def ImpEquipment(row, index):
     )
     obj.save()
 
+def ImpCombatItem(row, index):
+    name = checkName(
+        text_ja = row["NAME"],
+        text_en = row["NAME_EN"]
+    )
+    desc = checkDesc(
+        text_ja = row["DESC"],
+        text_en = row["DESC_EN"]
+    )
+    print(row["NAME_EN"])
+    item = Item(
+        slug=slug_me(row["NAME_EN"], Item.objects),
+        name=name,
+        desc=desc,
+        kind=Filterable.objects.get(slug="combat", kind="item_type"),
+        rarity=row["RARITY"]
+    )
+    item.save()
+
+    obj = CombatItem(
+        item=item,
+        kind=Filterable.objects.get(text_en=row["Filter Trait"], kind="combat_type"),
+        elem=Filterable.objects.get(text_en=row["Element"], kind="element") if row["Element"] else None,
+        area=Name.objects.get(text_en=row["Range"]),
+        val_good=row["valSSR"] if row["valSSR"] else 0,
+        val_bad=row["valSR"] if row["valSR"] else 0,
+        pow_good=row["Power 1"] if row["Power 1"] else 0,
+        pow_bad=row["Power 2"] if row["Power 2"] else 0,
+        uses=row["USES"],
+    )
+    obj.save()
+    
+def ImpRecipe(row, index):
+    item = Item.objects.get(name__text_ja=row["NAME"])
+
+    unlock1 = checkDesc(
+        text_ja = row["UNLOCK1"],
+        text_en = row["UNLOCK1_EN"]
+    )
+    unlock2 = checkDesc(
+        text_ja = row["UNLOCK2"],
+        text_en = row["UNLOCK2_EN"]
+    )
+    unlock3 = checkDesc(
+        text_ja = row["UNLOCK3"],
+        text_en = row["UNLOCK3_EN"]
+    )
+
+    print(row["NAME"])
+
+    obj = Recipe(
+        item=item,
+        x=row["X"],
+        y=row["Y"],
+        book=row["Book"],
+        char1=Character.objects.filter(name__text_ja=row["Support 1"]).last(), # works for now i guess
+        char2=Character.objects.filter(name__text_ja=row["Support 2"]).last(),
+        char3=Character.objects.filter(name__text_ja=row["Support 3"]).last(),
+        color1=Filterable.objects.get(kind="color", text_en=row["Color1"]),
+        color2=Filterable.objects.get(kind="color", text_en=row["Color2"]),
+        color3=Filterable.objects.get(kind="color", text_en=row["Color3"]),
+        unlock1=unlock1,
+        unlock2=unlock2,
+        unlock3=unlock3,
+        ing1=Item.objects.get(name__text_en=row["ING1"]),
+        ing2=Item.objects.get(name__text_en=row["ING2"]) if row["ING2"] else None,
+        ing3=Item.objects.get(name__text_en=row["ING3"]) if row["ING3"] else None,
+        quant1=row["#1"],
+        quant2=row["#2"] if row["#2"] else None,
+        quant3=row["#3"] if row["#3"] else None,
+    )
+    obj.save()
+
 #import_generic(ImpFilter)
 #import_generic(ImpTrait, index=100, kind="equipment")
 #import_generic(ImpResearch)
@@ -326,3 +399,5 @@ def ImpEquipment(row, index):
 #import_generic(ImpPassive)
 #import_generic(ImpMaterials)
 #import_generic(ImpEquipment)
+#import_generic(ImpCombatItem)
+#import_generic(ImpRecipe)

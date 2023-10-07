@@ -21,9 +21,8 @@ class Material(models.Model):
     traits = models.ManyToManyField(Trait)
 
 class CombatItem(models.Model):
-    item   = models.ForeignKey(Item, on_delete=models.CASCADE)
-    kind   = models.ForeignKey(Filterable, on_delete=models.CASCADE)
-    traits = models.ManyToManyField(Trait)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    kind = models.ForeignKey(Filterable, on_delete=models.CASCADE)
 
     val_good = models.IntegerField(default=0)
     val_bad  = models.IntegerField(default=0)
@@ -60,7 +59,6 @@ class Recipe(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     x    = models.IntegerField()
     y    = models.IntegerField()
-    page = models.IntegerField()
     book = models.IntegerField()
 
     char1 = models.ForeignKey(Character, on_delete=models.CASCADE, related_name="recipe_char1")
@@ -85,6 +83,7 @@ class Recipe(models.Model):
 
     class Meta:
         ordering = [
+            "book",
             "x",
             "y",
         ]
