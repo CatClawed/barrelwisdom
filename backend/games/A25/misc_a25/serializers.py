@@ -23,7 +23,6 @@ class A25DefaultSerializer(DefaultSerializer):
             ja=obj.desc.text_ja,
         )
 
-
 class A25FilterableSerializerSimple(A25DefaultSerializer):
     class Meta:
         model = Filterable
@@ -52,6 +51,14 @@ class A25CharaNameSerializer(A25DefaultSerializer):
         fields = ['slug', 'name', 'title']
     def get_title(self,obj):
         return A25DefaultSerializer.get_text(self,obj.title)
+
+class A25TraitSimpleSerializer(A25DefaultSerializer):
+    name_en = serializers.CharField(source='name.text_en')
+    name_ja = serializers.CharField(source='name.text_ja')
+    desc = serializers.SerializerMethodField()
+    class Meta:
+        model = Trait
+        fields = ['slug', 'name_en', 'name_ja', 'desc', 'val1', 'val5']
 
 class A25TraitSerializer(A25DefaultSerializer):
     name_en = serializers.CharField(source='name.text_en')

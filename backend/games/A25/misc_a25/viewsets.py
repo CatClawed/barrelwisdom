@@ -7,13 +7,15 @@ from django_filters.rest_framework import DjangoFilterBackend
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 
+
 class A25TraitViewSet(viewsets.ModelViewSet):
     queryset = Trait.objects.all()
     serializer_class = A25TraitSerializer
-    filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
+    filter_backends = [filters.SearchFilter,
+                       DjangoFilterBackend, filters.OrderingFilter]
     lookup_field = 'slug'
 
-    @action(detail=False) 
+    @action(detail=False)
     def en(self, request):
         queryset = (
             Trait.objects
@@ -34,7 +36,8 @@ class A25TraitViewSet(viewsets.ModelViewSet):
                 'material_set__item__name',
             )
         )
-        serializer = A25TraitSerializer(queryset, many=True, context={'language': 'en'})
+        serializer = A25TraitSerializer(
+            queryset, many=True, context={'language': 'en'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="en")
@@ -65,7 +68,7 @@ class A25TraitViewSet(viewsets.ModelViewSet):
         serializer = A25TraitSerializer(queryset, context={'language': 'en'})
         return Response(serializer.data)
 
-    @action(detail=False) 
+    @action(detail=False)
     def ja(self, request):
         queryset = (
             Trait.objects
@@ -86,7 +89,8 @@ class A25TraitViewSet(viewsets.ModelViewSet):
                 'material_set__item__name',
             )
         )
-        serializer = A25TraitSerializer(queryset, many=True, context={'language': 'ja'})
+        serializer = A25TraitSerializer(
+            queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ja")
@@ -121,9 +125,10 @@ class A25TraitViewSet(viewsets.ModelViewSet):
 class A25ResearchViewSet(viewsets.ModelViewSet):
     queryset = Research.objects.all()
     serializer_class = A25ResearchSerializer
-    filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
+    filter_backends = [filters.SearchFilter,
+                       DjangoFilterBackend, filters.OrderingFilter]
 
-    @action(detail=False) 
+    @action(detail=False)
     def en(self, request):
         queryset = (
             Research.objects
@@ -134,10 +139,11 @@ class A25ResearchViewSet(viewsets.ModelViewSet):
                 'req',
             )
         )
-        serializer = A25ResearchSerializer(queryset, many=True, context={'language': 'en'})
+        serializer = A25ResearchSerializer(
+            queryset, many=True, context={'language': 'en'})
         return Response(serializer.data)
 
-    @action(detail=False) 
+    @action(detail=False)
     def ja(self, request):
         queryset = (
             Research.objects
@@ -148,13 +154,16 @@ class A25ResearchViewSet(viewsets.ModelViewSet):
                 'req',
             )
         )
-        serializer = A25ResearchSerializer(queryset, many=True, context={'language': 'ja'})
+        serializer = A25ResearchSerializer(
+            queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)
+
 
 class A25FilterViewSet(viewsets.ModelViewSet):
     queryset = Filterable.objects.all()
     serializer_class = A25FilterableSerializer
-    filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
+    filter_backends = [filters.SearchFilter,
+                       DjangoFilterBackend, filters.OrderingFilter]
     lookup_field = 'kind'
 
     @action(detail=True, methods=['get'], url_path="en")
@@ -166,7 +175,8 @@ class A25FilterViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A25FilterableSerializer(queryset, many=True, context={'language': 'en'})
+        serializer = A25FilterableSerializer(
+            queryset, many=True, context={'language': 'en'})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ja")
@@ -178,5 +188,6 @@ class A25FilterViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A25FilterableSerializer(queryset, many=True, context={'language': 'ja'})
+        serializer = A25FilterableSerializer(
+            queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)
