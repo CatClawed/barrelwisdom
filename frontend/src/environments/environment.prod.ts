@@ -11,6 +11,7 @@ export const environment = {
   ryza1_languages: {"en": "English", "ja":"日本語", "sc":"简体中文", "tc":"繁體中文"},
   ryza2_languages: {"en": "English", "fr": "Français", "ja":"日本語", "ko":"한국어", "sc":"简体中文", "tc":"繁體中文"},
   sophie2_languages: {"en": "English", "ja":"日本語", "ko":"한국어", "sc":"简体中文", "tc":"繁體中文"},
+  resleri_languages: {"en": "English", "ja":"日本語"},
   bluereflection_languages: {"en": "English"},
   secondlight_languages: {"en": "English", "ja":"日本語", "sc":"简体中文", "tc":"繁體中文"},
 };

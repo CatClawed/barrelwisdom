@@ -1,7 +1,7 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { APP_ID, NgModule } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from '@app/app-routing.module';
 import { AppComponent } from '@app/app.component';
@@ -21,15 +21,18 @@ const APP_CONTAINERS = [
     ...APP_CONTAINERS
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'frontend' }),
+    BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     TransferHttpCacheModule,
-    BrowserTransferStateModule,
     MatSidenavModule,
     AppRoutingModule
-    ],
+  ],
   providers: [
+    {
+      provide: APP_ID,
+      useValue: 'frontend'
+    },
     CookieService,
     {
       provide: HTTP_INTERCEPTORS,

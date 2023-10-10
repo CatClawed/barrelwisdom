@@ -81,6 +81,16 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'totori',
+    component: LayoutComponent,
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A12/a12-routing.module').then(m=>m.A12RoutingModule),
+      },
+    ]
+  },
+  {
     path: 'escha',
     component: LayoutComponent,
     children: [
@@ -133,13 +143,14 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'totori',
+    path: 'resleri',
     component: LayoutComponent,
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A12/a12-routing.module').then(m=>m.A12RoutingModule),
+        loadChildren: ()=> import('@app/views/games/A25/a25-routing.module').then(m=>m.A25RoutingModule),
       },
+      
     ]
   },
   {

@@ -43,6 +43,14 @@ class Trait(models.Model):
     val4  = models.IntegerField()
     val5  = models.IntegerField()
 
+    trans_atk  = models.BooleanField(default=False)
+    trans_heal = models.BooleanField(default=False)
+    trans_buff = models.BooleanField(default=False)
+    trans_dbf  = models.BooleanField(default=False)
+    trans_wep  = models.BooleanField(default=False)
+    trans_arm  = models.BooleanField(default=False)
+    trans_acc  = models.BooleanField(default=False)
+
 class Research(models.Model):
     name  = models.ForeignKey(Name, on_delete=models.CASCADE)
     desc  = models.ForeignKey(Desc, on_delete=models.CASCADE)

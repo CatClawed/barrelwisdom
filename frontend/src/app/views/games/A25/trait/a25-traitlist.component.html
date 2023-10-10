@@ -1,0 +1,78 @@
+<Error *ngIf="error" [errorCode]="error"></Error>
+
+<div *ngIf="!error">
+<Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Traits"></Breadcrumb>
+<h1>Traits</h1>
+<div class="col-md-10 mx-auto">
+    <form [formGroup]="pageForm" class="form-horizontal">
+      <div class="row">
+        <mat-form-field class="col-md-5" appearance="outline">
+          <mat-label>Filter...</mat-label>
+          <input style="height: 100%;" matInput formControlName="filtertext">
+          <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
+        </mat-form-field>
+        <mat-form-field class="col-md-4" appearance="outline">
+          <mat-label>Transfers to...</mat-label>
+          <mat-select matNativeControl formControlName="transfers" disableOptionCentering="true" class="mat-select-icon" [(value)]="selectedFilter">
+            <mat-option value="any" selected>
+              Any
+            </mat-option>
+            <mat-option *ngFor="let trans of transfer" [value]="trans.slug">
+              {{trans.name}}
+            </mat-option>
+            <mat-option value="equipment" selected>
+              {{language == 'en' ? 'Equipment' : '装備'}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
+      </div>
+    </form>
+  </div>
+<div *ngIf="filteredTraits" class="item-grid">
+<div *ngFor="let trt of filteredTraits | async;  trackBy:identify" class="card card-body">
+  <div style="height:100%;">
+    <div class="flex">
+      <h4 class="card-title card-icon-space">
+        <a (click)="openModal(traitModal, trt.slug, $event);"
+          href="/{{gameURL}}/traits/{{trt.slug}}/{{language}}">
+          <ng-container *ngIf="language=='en'">
+            {{trt.name_en}}<br /><small>{{trt.name_ja}}</small>
+          </ng-container>
+          <ng-container *ngIf="language=='ja'">
+            {{trt.name_ja}}
+          </ng-container>
+        </a>
+      </h4>
+      <div class="card-icon-position">
+        <img *ngIf="trt.trans_wep"  style="width:3rem;" src="{{imgURL}}svg/equipment.svg" />
+        <img *ngIf="!trt.trans_wep" style="width:3rem;" src="{{imgURL}}svg/combat.svg" />
+      </div>
+    </div>
+    <b *ngIf=" trt.items">Item:</b>
+    <ul *ngIf=" trt.items">
+      <li *ngFor="let item of trt.items"><a routerLink="/{{gameURL}}/materials/{{item.slug}}/{{language}}">{{item.name}}</a>
+    </ul>
+    <p [innerHTML]="trt.desc.replace('{0}', trt.val[0] + ' ~ ' + trt.val[4])"></p>
+    <p>
+      {{trt.val[0]}} > {{trt.val[1]}} > {{trt.val[2]}} > {{trt.val[3]}} > {{trt.val[4]}}
+    </p>
+  </div>
+  <div class="flex bottom" style="text-align:center;">
+    <img src="{{imgURL}}svg/attack.svg"    style="width:2rem;" class="{{!trt.trans_atk  ?  'svg-color' : ''}}"/>
+    <img src="{{imgURL}}svg/healing.svg"   style="width:2rem;" class="{{!trt.trans_heal ? 'svg-color' : ''}}"/>
+    <img src="{{imgURL}}svg/buff.svg"      style="width:2rem;" class="{{!trt.trans_buff ? 'svg-color' : ''}}"/>
+    <img src="{{imgURL}}svg/debuff.svg"    style="width:2rem;" class="{{!trt.trans_dbf  ? 'svg-color' : ''}}"/>
+    <img src="{{imgURL}}svg/equipment.svg" style="width:2rem;" class="{{!trt.trans_wep  ? 'svg-color' : ''}}"/>
+  </div>
+</div>
+<ng-template #traitModal>
+  <div class="modal-body">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <i class="fas fa-times-circle"></i>
+    </button>
+    <a25-trait slug="{{selected}}" [showNav]="false"></a25-trait>
+  </div>
+</ng-template>
+</div>
+</div>

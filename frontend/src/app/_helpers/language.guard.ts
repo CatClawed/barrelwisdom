@@ -46,6 +46,9 @@ export class LanguageGuard implements CanActivate {
             case "sophie2":
                 if(environment.sophie2_languages[language]) return true;
                 break;
+            case "resleri":
+                if(environment.resleri_languages[language]) return true;
+                break;
             case "bluereflection":
                 if(environment.bluereflection_languages[language]) return true;
                 break;

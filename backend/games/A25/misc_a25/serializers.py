@@ -66,7 +66,6 @@ class A25TraitSerializer(A25DefaultSerializer):
     desc = serializers.SerializerMethodField()
     kind = A25FilterableSerializer()
     cat = serializers.CharField(source='cat.slug')
-    trans = A25FilterableSerializerSimple(many=True)
     val = serializers.SerializerMethodField()
     items = A25ItemNameSerializer(many=True, source='material_set')
     char1 = A25CharaNameSerializer(source='chara_trait1', many=True)
@@ -74,8 +73,10 @@ class A25TraitSerializer(A25DefaultSerializer):
     char3 = A25CharaNameSerializer(source='chara_trait3', many=True)
     class Meta:
         model = Trait
-        fields = ['slug', 'name_en', 'name_ja', 'desc', 'kind', 'cat', 'trans',
-            'val', 'items', 'char1', 'char2', 'char3']
+        fields = ['slug', 'name_en', 'name_ja', 'desc', 'kind', 'cat',
+            'val', 'items', 'char1', 'char2', 'char3',
+            'trans_atk', 'trans_heal', 'trans_buff', 'trans_dbf', 'trans_wep'
+        ]
     def get_val(self, obj):
         return (obj.val1, obj.val2, obj.val3, obj.val4, obj.val5)
 

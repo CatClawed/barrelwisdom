@@ -391,6 +391,20 @@ def ImpRecipe(row, index):
     )
     obj.save()
 
+def fix_traits():
+    traits = Trait.objects.all()
+    for trait in traits:
+        transfer = Filterable.objects.filter(trait_transfer=trait)
+        for t in transfer:
+            if t.slug == 'attack':  trait.trans_atk  = True 
+            if t.slug == 'healing': trait.trans_heal = True 
+            if t.slug == 'buff':    trait.trans_buff = True 
+            if t.slug == 'debuff':  trait.trans_dbf  = True 
+        if trait.kind.slug == 'equipment':  trait.trans_wep  = True 
+        if trait.kind.slug == 'equipment':  trait.trans_arm  = True 
+        if trait.kind.slug == 'equipment':  trait.trans_acc  = True 
+        trait.save()
+
 #import_generic(ImpFilter)
 #import_generic(ImpTrait, index=100, kind="equipment")
 #import_generic(ImpResearch)

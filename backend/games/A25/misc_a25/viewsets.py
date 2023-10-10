@@ -15,111 +15,69 @@ class A25TraitViewSet(viewsets.ModelViewSet):
                        DjangoFilterBackend, filters.OrderingFilter]
     lookup_field = 'slug'
 
+    def get_query(slug=None, lang="en"):
+        if not slug:
+            queryset = (
+                Trait.objects
+                .select_related(
+                    'desc',
+                    'name',
+                    'kind',
+                    'cat',
+                )
+                .prefetch_related(
+                    'chara_trait1__name',
+                    'chara_trait1__title',
+                    'chara_trait2__name',
+                    'chara_trait2__title',
+                    'chara_trait3__name',
+                    'chara_trait3__title',
+                    'material_set__item__name',
+                )
+            )
+            serializer = A25TraitSerializer(
+                queryset, many=True, context={'language': lang})
+            return Response(serializer.data)
+        try:
+            queryset = (
+                Trait.objects
+                .select_related(
+                    'desc',
+                    'name',
+                    'kind',
+                    'cat',
+                )
+                .prefetch_related(
+                    'chara_trait1__name',
+                    'chara_trait1__title',
+                    'chara_trait2__name',
+                    'chara_trait2__title',
+                    'chara_trait3__name',
+                    'chara_trait3__title',
+                    'material_set__item__name',
+                )
+                .get(slug=slug)
+            )
+        except ObjectDoesNotExist:
+            raise Http404
+        serializer = A25TraitSerializer(queryset, context={'language': lang})
+        return Response(serializer.data)
+
     @action(detail=False)
     def en(self, request):
-        queryset = (
-            Trait.objects
-            .select_related(
-                'desc',
-                'name',
-                'kind',
-                'cat',
-            )
-            .prefetch_related(
-                'trans',
-                'chara_trait1__name',
-                'chara_trait1__title',
-                'chara_trait2__name',
-                'chara_trait2__title',
-                'chara_trait3__name',
-                'chara_trait3__title',
-                'material_set__item__name',
-            )
-        )
-        serializer = A25TraitSerializer(
-            queryset, many=True, context={'language': 'en'})
-        return Response(serializer.data)
+        return A25TraitViewSet.get_query(lang="en")
 
     @action(detail=True, methods=['get'], url_path="en")
     def en_full(self, request, slug):
-        try:
-            queryset = (
-                Trait.objects
-                .select_related(
-                    'desc',
-                    'name',
-                    'kind',
-                    'cat',
-                )
-                .prefetch_related(
-                    'trans',
-                    'chara_trait1__name',
-                    'chara_trait1__title',
-                    'chara_trait2__name',
-                    'chara_trait2__title',
-                    'chara_trait3__name',
-                    'chara_trait3__title',
-                    'material_set__item__name',
-                )
-                .get(slug=slug)
-            )
-        except ObjectDoesNotExist:
-            raise Http404
-        serializer = A25TraitSerializer(queryset, context={'language': 'en'})
-        return Response(serializer.data)
+        return A25TraitViewSet.get_query(lang="en", slug=slug)
 
     @action(detail=False)
     def ja(self, request):
-        queryset = (
-            Trait.objects
-            .select_related(
-                'desc',
-                'name',
-                'kind',
-                'cat',
-            )
-            .prefetch_related(
-                'trans',
-                'chara_trait1__name',
-                'chara_trait1__title',
-                'chara_trait2__name',
-                'chara_trait2__title',
-                'chara_trait3__name',
-                'chara_trait3__title',
-                'material_set__item__name',
-            )
-        )
-        serializer = A25TraitSerializer(
-            queryset, many=True, context={'language': 'ja'})
-        return Response(serializer.data)
+        return A25TraitViewSet.get_query(lang="ja")
 
     @action(detail=True, methods=['get'], url_path="ja")
     def ja_full(self, request, slug):
-        try:
-            queryset = (
-                Trait.objects
-                .select_related(
-                    'desc',
-                    'name',
-                    'kind',
-                    'cat',
-                )
-                .prefetch_related(
-                    'trans',
-                    'chara_trait1__name',
-                    'chara_trait1__title',
-                    'chara_trait2__name',
-                    'chara_trait2__title',
-                    'chara_trait3__name',
-                    'chara_trait3__title',
-                    'material_set__item__name',
-                )
-                .get(slug=slug)
-            )
-        except ObjectDoesNotExist:
-            raise Http404
-        serializer = A25TraitSerializer(queryset, context={'language': 'ja'})
-        return Response(serializer.data)
+        return A25TraitViewSet.get_query(lang="ja", slug=slug)
 
 
 class A25ResearchViewSet(viewsets.ModelViewSet):

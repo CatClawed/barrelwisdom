@@ -508,7 +508,7 @@ body {
 }
 
 .mat-drawer-container {
-  background: transparent;
+  background: transparent !important;
 }
 
 .mat-sidenav-content {
@@ -702,6 +702,10 @@ img {
 }
 .trait-colortrue {
   color:black;
+}
+
+.svg-color {
+  opacity: 35%;
 }
 
 // Create page

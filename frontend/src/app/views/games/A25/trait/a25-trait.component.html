@@ -1,0 +1,39 @@
+<Error *ngIf="error" [errorCode]="error"></Error>
+
+<ng-container *ngIf="trait">
+<Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Traits', '/'+gameURL+'/traits/'+language]]" [current]="language == 'en' ? trait.name_en : trait.name_ja"></Breadcrumb>
+<div class="mx-auto row spacer">
+<div class="{{colset}} card card-body">
+  <div class="flex">
+    <h4 class="card-title card-icon-space">
+      <ng-container *ngIf="language=='en'">
+        {{trait.name_en}}<br /><small>{{trait.name_ja}}</small>
+      </ng-container>
+      <ng-container *ngIf="language=='ja'">
+        {{trait.name_ja}}
+      </ng-container>
+    </h4>
+    <div class="card-icon-position">
+      <img *ngIf="trait.trans_wep"  style="width:3rem;" src="{{imgURL}}svg/equipment.svg" />
+      <img *ngIf="!trait.trans_wep" style="width:3rem;" src="{{imgURL}}svg/combat.svg" />
+    </div>
+  </div>
+  <b *ngIf=" trait.items">Item:</b>
+    <ul *ngIf=" trait.items">
+      <li *ngFor="let item of trait.items"><a routerLink="/{{gameURL}}/materials/{{item.slug}}/{{language}}">{{item.name}}</a>
+    </ul>
+  <p [innerHTML]="trait.desc.replace('{0}', trait.val[0] + ' ~ ' + trait.val[4])"></p>
+  <p>
+    {{trait.val[0]}} > {{trait.val[1]}} > {{trait.val[2]}} > {{trait.val[3]}} > {{trait.val[4]}}
+  </p>
+  <div class="flex bottom" style="text-align:center;">
+    <img src="{{imgURL}}svg/attack.svg"    style="width:2rem;" class="{{!trait.trans_atk  ?  'svg-color' : ''}}"/>
+    <img src="{{imgURL}}svg/healing.svg"   style="width:2rem;" class="{{!trait.trans_heal ? 'svg-color' : ''}}"/>
+    <img src="{{imgURL}}svg/buff.svg"      style="width:2rem;" class="{{!trait.trans_buff ? 'svg-color' : ''}}"/>
+    <img src="{{imgURL}}svg/debuff.svg"    style="width:2rem;" class="{{!trait.trans_dbf  ? 'svg-color' : ''}}"/>
+    <img src="{{imgURL}}svg/equipment.svg" style="width:2rem;" class="{{!trait.trans_wep  ? 'svg-color' : ''}}"/>
+  </div>
+</div>
+<language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
+</div>
+</ng-container>
