@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select';
+import { MatSelectModule } from '@angular/material/select';
 import { ErrorModule } from '@app/views/error/error.module';
 import { SharedModule } from '@app/views/games/_prototype/SharedModules/shared.module';
 import { A18RecipeRoutingModule } from './a18-recipe-routing.module';

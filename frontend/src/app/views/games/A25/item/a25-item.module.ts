@@ -4,22 +4,26 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { ErrorModule } from '@app/views/error/error.module';
 import { SharedModule } from '@app/views/games/_prototype/SharedModules/shared.module';
-import { A23MonsterRoutingModule } from './a23-monster-routing.module';
-import { A23MonsterComponent } from './a23-monster.component';
-import { A23MonsterlistComponent } from './a23-monsterlist.component';
+import { A25ItemRoutingModule } from './a25-item-routing.module';
+import { A25ItemComponent } from './a25-item.component';
+import { A25MaterialListComponent } from './a25-materiallist.component';
+import { A25SynthesisListComponent } from './a25-synthlist.component';
+import { PopoverModule } from 'ngx-bootstrap/popover';
 
 @NgModule({
     imports: [
       SharedModule,
-      A23MonsterRoutingModule,
+      A25ItemRoutingModule,
       MatIconModule,
       MatSelectModule,
       MatButtonModule,
       ErrorModule,
+      PopoverModule.forRoot(),
     ],
     declarations: [
-        A23MonsterlistComponent,
-        A23MonsterComponent,
+        A25MaterialListComponent,
+        A25ItemComponent,
+        A25SynthesisListComponent
     ]
   })
-  export class A23MonsterModule {}
+  export class A25ItemModule {}

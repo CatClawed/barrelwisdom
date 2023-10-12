@@ -24,7 +24,7 @@
   <h4 class="card-title card-icon-space">
     <a (click)="openModal(effectModal, eff.slug, $event);" href="/{{gameURL}}/effects/{{eff.slug}}/{{language}}">{{eff.name}}</a>
   </h4>
-  <button (click)="openModal(effectModal, eff.slug)" class="card-read-more-position" mat-mini-fab color="accent">
+  <button (click)="openModal(effectModal, eff.slug)" class="card-read-more-position" mat-mini-fab color="primary">
       <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
    </button>
   <span style="margin-right:1.7rem" *ngIf="eff.desc">{{eff.desc}}</span>

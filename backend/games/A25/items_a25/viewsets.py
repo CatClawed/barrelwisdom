@@ -55,6 +55,7 @@ class A25MaterialViewSet(viewsets.ModelViewSet):
                     'material_set__color',
                     'material_set__traits__name',
                     'material_set__traits__desc',
+                    'material_set__traits__kind',
                 )
                 .filter(kind__slug="material")
             )
@@ -67,12 +68,12 @@ class A25MaterialViewSet(viewsets.ModelViewSet):
                 .select_related(
                     'name',
                     'desc',
-                    'kind',
                 )
                 .prefetch_related(
                     'material_set__color',
                     'material_set__traits__name',
                     'material_set__traits__desc',
+                    'material_set__traits__kind',
                 )
                 .get(slug=slug)
             )
@@ -130,7 +131,6 @@ class A25SynthViewSet(viewsets.ModelViewSet):
                 .select_related(
                     'name',
                     'desc',
-                    'kind',
                 )
                 .prefetch_related(
                     'recipe_set__ing1__name',

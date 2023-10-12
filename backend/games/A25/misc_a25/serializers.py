@@ -56,9 +56,10 @@ class A25TraitSimpleSerializer(A25DefaultSerializer):
     name_en = serializers.CharField(source='name.text_en')
     name_ja = serializers.CharField(source='name.text_ja')
     desc = serializers.SerializerMethodField()
+    kind = serializers.CharField(source='kind.slug')
     class Meta:
         model = Trait
-        fields = ['slug', 'name_en', 'name_ja', 'desc', 'val1', 'val5']
+        fields = ['slug', 'name_en', 'name_ja', 'desc', 'val1', 'val5', 'kind']
 
 class A25TraitSerializer(A25DefaultSerializer):
     name_en = serializers.CharField(source='name.text_en')

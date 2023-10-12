@@ -12,6 +12,15 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'items',
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A25/item/a25-item.module').then(m=>m.A25ItemModule),
+      },
+    ]
+  },
+  {
     path: '',
     redirectTo: '/resleri/faq',
     pathMatch: 'full'

@@ -92,7 +92,7 @@
     <a class="card-item-display" (click)="openModal(itemModal, it.slug, $event);" href="/{{gameURL}}/items/{{it.slug}}/{{language}}">
       <img loading="lazy" src="{{imgURL}}items/{{it.slug}}.webp" alt="{{it.name}}">
     </a> 
-    <button (click)="openModal(itemModal, it.slug)" class="card-read-more-position" mat-mini-fab color="accent">
+    <button (click)="openModal(itemModal, it.slug)" class="card-read-more-position" mat-mini-fab color="primary">
       <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
     </button>
     <table class="table-item-data">

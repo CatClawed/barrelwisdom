@@ -1,0 +1,85 @@
+<Error *ngIf="error" [errorCode]="error"></Error>
+
+<ng-container *ngIf="!error">
+<Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Materials"></Breadcrumb>
+<h1>Materials</h1>
+<div class="col-md-10 mx-auto">
+    <form [formGroup]="pageForm" class="form-horizontal">
+      <div class="row">
+        <mat-form-field class="col-md-5" appearance="outline">
+          <mat-label>Filter...</mat-label>
+          <input style="height: 100%;" matInput formControlName="filtertext">
+        </mat-form-field>
+        <mat-form-field class="col-md-4" appearance="outline">
+          <mat-label>Color</mat-label>
+          <mat-select matNativeControl formControlName="color" disableOptionCentering="true" class="mat-select-icon">
+            <mat-option value="Any">Any</mat-option>
+            <mat-option *ngFor="let color of colors" value="{{color.slug}}">
+              {{color.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
+      </div>
+      <div class="row">
+        <mat-form-field class="col-md-5" appearance="outline">
+            <mat-label>Has trait...</mat-label>
+            <input style="height: 100%;" matInput formControlName="filtertrait">
+          </mat-form-field>
+        <mat-form-field class="col-md-3" appearance="outline">
+            <mat-label>Rarity</mat-label>
+            <mat-select matNativeControl formControlName="rarity" disableOptionCentering="true" class="mat-select-icon">
+              <mat-option value="0">Any</mat-option>
+              <mat-option value="3">SSR</mat-option>
+              <mat-option value="2">SR</mat-option>
+              <mat-option value="1">R</mat-option>
+            </mat-select>
+          </mat-form-field>
+      </div>
+    </form>
+  </div>
+<div *ngIf="filteredItems" class="item-grid">
+<div *ngFor="let it of filteredItems | async; trackBy:identify2" class="card card-body"  style="{{insertStyle(it)}}">
+  <h4 class="card-title card-icon-space">
+    <a (click)="openModal(itemModal, it.slug, $event);" href="/{{gameURL}}/items/materials/{{it.slug}}/{{language}}">{{it.name}}</a>    
+  </h4>
+  <div class="card-icon-position">
+    <img loading="lazy" *ngIf="it.material[0].traits" style="height:3rem;" src="{{imgURL}}svg/{{it.material[0].traits[0].kind}}.svg">
+  </div>
+  <a class="card-item-display" (click)="openModal(itemModal, it.slug, $event);" href="/{{gameURL}}/items/materials/{{it.slug}}/{{language}}">
+    <img loading="lazy" class="resleri-item-frame"
+      style="height:256px;background-image:url({{imgURL}}svg/item-frame-{{it.rarity}}.svg)"
+      src="{{imgURL}}items/{{it.slug}}.webp" alt="{{it.name}}">
+  </a>
+  <ul *ngIf="it.material[0].traits">
+    <li *ngFor="let trait of it.material[0].traits">
+      <ng-template #traitPopover>
+        <p *ngIf="language == 'en'">{{trait.name_ja}}</p>
+        <p [innerHTML]="trait.desc.replace('{0}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
+        <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
+      </ng-template>
+      <a *ngIf="language == 'en'" [popover]="traitPopover"
+        [popoverTitle]="trait.name_en"
+        (click)="$event.preventDefault();"
+        href="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">{{trait.name_en}}</a>
+      <a *ngIf="language == 'ja'" [popover]="traitPopover"
+        [popoverTitle]="trait.name_ja"
+        (click)="$event.preventDefault();"
+        href="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">{{trait.name_ja}}</a>
+    </li>
+  </ul>         
+  <button (click)="openModal(itemModal, it.slug)" class="card-read-more-position" mat-mini-fab color="primary">
+    <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+  </button>
+</div>
+
+<ng-template #itemModal>
+  <div class="modal-body">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <i class="fas fa-times-circle"></i>
+    </button>
+      <a25-item slug="{{selected}}" itemkind="materials" [showNav]="false"></a25-item>
+  </div>
+</ng-template>
+</div>
+</ng-container>

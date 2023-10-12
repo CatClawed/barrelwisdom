@@ -1,0 +1,110 @@
+<Error *ngIf="error" [errorCode]="error"></Error>
+<ng-container *ngIf="item">
+<Breadcrumb *ngIf="showNav && item.material"  [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Materials', '/'+gameURL+'/items/materials/'+language]]" [current]="item.name"></Breadcrumb>
+<Breadcrumb *ngIf="showNav && !item.material" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Synthesis Items', '/'+gameURL+'/items/synthesis/'+language]]" [current]="item.name"></Breadcrumb>
+<div class="mx-auto row spacer">
+  <div class="{{colset}} card card-body" style="{{insertStyle(item)}}">
+    <h4 class="card-title card-icon-space">
+      {{item.name}}
+    </h4>
+    <div class="card-icon-position">
+      <ng-container *ngIf="item.material"><img loading="lazy" *ngIf="item.material[0].traits" style="height:3rem;" src="{{imgURL}}svg/{{item.material[0].traits[0].kind}}.svg"></ng-container>
+      <img *ngIf="item.combat" style="height:3rem;" src="{{imgURL}}svg/{{item.combat[0].kind}}.svg">
+      <img *ngIf="item.equip"  style="height:3rem;" src="{{imgURL}}svg/{{item.equip[0].kind}}.svg">
+    </div>
+    <img loading="lazy" class="resleri-item-frame"
+      style="height:256px;background-image:url({{imgURL}}svg/item-frame-{{item.rarity}}.svg)"
+      src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
+    <ng-container *ngIf="item.material">
+      <p *ngIf="item.desc">{{item.desc}}</p>
+      <ul *ngIf="item.material[0].traits">
+        <li *ngFor="let trait of item.material[0].traits">
+          <ng-template #traitPopover>
+            <p *ngIf="language == 'en'">{{trait.name_ja}}</p>
+            <p [innerHTML]="trait.desc.replace('{0}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
+            <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
+          </ng-template>
+          <a *ngIf="language == 'en'" [popover]="traitPopover"
+            [popoverTitle]="trait.name_en"
+            (click)="$event.preventDefault();"
+            href="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">{{trait.name_en}}</a>
+          <a *ngIf="language == 'ja'" [popover]="traitPopover"
+            [popoverTitle]="trait.name_ja"
+            (click)="$event.preventDefault();"
+            href="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">{{trait.name_ja}}</a>
+        </li>
+      </ul>
+    </ng-container>
+    <ng-container *ngIf="item.combat">
+      <p style="padding-right:1.5rem;" [innerHTML]="replaceVal(item)"></p>
+      <p><b>Uses:</b> {{item.combat[0].uses}}<br />
+      <b>Range:</b> {{item.combat[0].area}}</p>
+    </ng-container>
+    <ng-container *ngIf="item.equip">
+      <p style="padding-right:1.5rem;" [innerHTML]="replaceVal(item)"></p>
+      <table class="tbl">
+        <tr class="table-dark-center"><th colspan="4">Stats</th></tr>
+        <tr>
+          <td style="width:25%;">{{stats['hp'][language]}} </td>
+          <td style="width:25%;"><ng-container *ngIf="item.equip[0].bad_hp"  >{{item.equip[0].bad_hp}} ->  </ng-container>{{item.equip[0].good_hp   ?  item.equip[0].good_hp   : 0}}</td>
+          <td style="width:25%;">{{stats['agi'][language]}}</td>
+          <td style="width:25%;"><ng-container *ngIf="item.equip[0].bad_spd" >{{item.equip[0].bad_spd}} -> </ng-container>{{item.equip[0].good_spd  ?  item.equip[0].good_spd  : 0}}</td>
+        </tr>
+        <tr>
+          <td style="width:25%;">{{stats['patk'][language]}} </td>
+          <td style="width:25%;"><ng-container *ngIf="item.equip[0].bad_patk">{{item.equip[0].bad_patk}} -> </ng-container>{{item.equip[0].good_patk ? item.equip[0].good_patk : 0}}</td>
+          <td style="width:25%;">{{stats['pdef'][language]}}</td>
+          <td style="width:25%;"><ng-container *ngIf="item.equip[0].bad_pdef">{{item.equip[0].bad_pdef}} -> </ng-container>{{item.equip[0].good_pdef ? item.equip[0].good_pdef : 0}}</td>
+        </tr>
+        <tr>
+          <td style="width:25%;">{{stats['matk'][language]}} </td>
+          <td style="width:25%;"><ng-container *ngIf="item.equip[0].bad_matk">{{item.equip[0].bad_matk}} -> </ng-container>{{item.equip[0].good_matk ? item.equip[0].good_matk : 0}}</td>
+          <td style="width:25%;">{{stats['mdef'][language]}}</td>
+          <td style="width:25%;"><ng-container *ngIf="item.equip[0].bad_mdef">{{item.equip[0].bad_mdef}} -> </ng-container>{{item.equip[0].good_mdef ? item.equip[0].good_mdef : 0}}</td>
+        </tr>
+      </table>
+    </ng-container>
+    <ng-container *ngIf="item.recipe">
+      <table class="tbl">
+        <tr class="table-dark-center"><th>Ingredients</th></tr>
+        <tr>
+          <td>
+            <ul>
+              <li *ngFor="let i of item.recipe[0].ing">
+                <a routerLink="/{{gameURL}}/items/materials/{{i[1]}}">{{i[2]}}</a> x{{i[0]}}
+              </li>
+            </ul>
+          </td>
+        </tr>
+        <tr class="table-dark-center"><th>Unlock Condition</th></tr>
+        <tr>
+          <td>
+            <ul>
+              <li *ngFor="let i of item.recipe[0].unlocks">
+                {{i}}
+              </li>
+            </ul>
+          </td>
+        </tr>
+        <tr class="table-dark-center"><th>Support Characters</th></tr>
+        <tr>
+          <td style="display:flex;">
+            <div style="margin:auto;">
+              <img *ngFor="let i of item.recipe[0].chars" src="{{imgURL}}characters/face/{{i}}.webp" style="height:100px;width:100px;">
+            </div>
+          </td>
+        </tr>
+        <tr class="table-dark-center"><th>Colors</th></tr>
+        <tr>
+          <td style="display:flex;padding:0;">
+            <div style="margin:auto;font-size:5rem;">
+              <i *ngFor="let i of item.recipe[0].colors" style="color:{{colors[i]}};" class="fa-solid fa-diamond"></i>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </ng-container>
+  </div>
+  <language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
+ </div>
+</ng-container>

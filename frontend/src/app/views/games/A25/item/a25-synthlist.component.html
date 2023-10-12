@@ -1,0 +1,73 @@
+<Error *ngIf="error" [errorCode]="error"></Error>
+
+<ng-container *ngIf="!error">
+<Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Synthesis Items"></Breadcrumb>
+<h1>Synthesis Items</h1>
+<div class="col-md-10 mx-auto">
+    <form [formGroup]="pageForm" class="form-horizontal">
+      <div class="row">
+        <mat-form-field class="col-md-5" appearance="outline">
+          <mat-label>Filter...</mat-label>
+          <input style="height: 100%;" matInput formControlName="filtertext">
+        </mat-form-field>
+        <mat-form-field class="col-md-4" appearance="outline">
+          <mat-label>Type</mat-label>
+          <mat-select matNativeControl formControlName="kind" disableOptionCentering="true" class="mat-select-icon">
+            <mat-option value="Any">Any</mat-option>
+            <mat-option *ngFor="let type of combat_type" value="{{type.slug}}">
+              {{type.name}}
+            </mat-option>
+            <mat-option *ngFor="let type of equipment_type" value="{{type.slug}}">
+                {{type.name}}
+              </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
+      </div>
+      <div class="row">
+        <mat-form-field class="col-md-5" appearance="outline">
+            <mat-label>Has ingredient...</mat-label>
+            <input style="height: 100%;" matInput formControlName="filtering">
+          </mat-form-field>
+        <mat-form-field class="col-md-3" appearance="outline">
+            <mat-label>Rarity</mat-label>
+            <mat-select matNativeControl formControlName="rarity" disableOptionCentering="true" class="mat-select-icon">
+              <mat-option value="0">Any</mat-option>
+              <mat-option value="3">SSR</mat-option>
+              <mat-option value="2">SR</mat-option>
+              <mat-option value="1">R</mat-option>
+            </mat-select>
+          </mat-form-field>
+      </div>
+    </form>
+  </div>
+<div *ngIf="filteredItems" class="item-grid">
+<div *ngFor="let it of filteredItems | async; trackBy:identify2" class="card card-body">
+  <h4 class="card-title card-icon-space">
+    <a (click)="openModal(itemModal, it.slug, $event);" href="/{{gameURL}}/items/synthesis/{{it.slug}}/{{language}}">{{it.name}}</a>    
+  </h4>
+  <div class="card-icon-position">
+    <img *ngIf="it.combat" style="height:3rem;" src="{{imgURL}}svg/{{it.combat[0].kind}}.svg">
+    <img *ngIf="it.equip"  style="height:3rem;" src="{{imgURL}}svg/{{it.equip[0].kind}}.svg">
+  </div>
+  <a class="card-item-display" (click)="openModal(itemModal, it.slug, $event);" href="/{{gameURL}}/items/synthesis/{{it.slug}}/{{language}}">
+    <img loading="lazy" class="resleri-item-frame"
+      style="height:256px;background-image:url({{imgURL}}svg/item-frame-{{it.rarity}}.svg)"
+      src="{{imgURL}}items/{{it.slug}}.webp" alt="{{it.name}}">
+  </a>
+  <p style="padding-right:1.5rem;" [innerHTML]="replaceVal(it)"></p>
+  <button (click)="openModal(itemModal, it.slug)" class="card-read-more-position" mat-mini-fab color="primary">
+    <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+  </button>
+</div>
+
+<ng-template #itemModal>
+  <div class="modal-body">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <i class="fas fa-times-circle"></i>
+    </button>
+      <a25-item slug="{{selected}}" itemkind="synthesis" [showNav]="false"></a25-item>
+  </div>
+</ng-template>
+</div>
+</ng-container>

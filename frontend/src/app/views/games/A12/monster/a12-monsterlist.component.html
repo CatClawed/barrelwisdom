@@ -26,7 +26,7 @@
     <a class="card-item-display" (click)="openModal(monsterModal, mon.slugname, $event);" href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">
       <img loading="lazy" src="{{imgURL}}monsters/{{mon.slugname}}.webp " alt="{{mon.name}}">
     </a>
-    <button (click)="openModal(monsterModal, mon.slugname)" class="card-read-more-position" mat-mini-fab color="accent">
+    <button (click)="openModal(monsterModal, mon.slugname)" class="card-read-more-position" mat-mini-fab color="primary">
       <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
     </button>
   </div>

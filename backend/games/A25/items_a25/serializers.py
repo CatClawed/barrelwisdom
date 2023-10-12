@@ -96,7 +96,6 @@ class A25RecipeSerializer(A25DefaultSerializer):
 class A25ItemFullSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()
     desc = serializers.SerializerMethodField()
-    kind = serializers.CharField(source='kind.slug')
     material = A25MaterialDetailSerializer(source='material_set', many=True)
     recipe = A25RecipeSerializer(source='recipe_set', many=True)
     combat = A25CombatSerializer(source="combatitem_set", many=True)
@@ -104,7 +103,7 @@ class A25ItemFullSerializer(A25DefaultSerializer):
     class Meta:
         model = Item
         fields = [
-            "slug", "name", "desc", "kind", "rarity",
+            "slug", "name", "desc", "rarity",
             'material', 'equip', 'combat', 'recipe'
         ]
     def get_desc(self,obj):
