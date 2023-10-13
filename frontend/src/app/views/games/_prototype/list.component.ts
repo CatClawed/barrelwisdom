@@ -60,7 +60,7 @@ export abstract class ListComponent {
     }
 
     openModal(template: TemplateRef<any>, slug: string, event?) {
-        if (event) {
+        if (event !== undefined) {
             if (event.ctrlKey) {
                 return;
             }

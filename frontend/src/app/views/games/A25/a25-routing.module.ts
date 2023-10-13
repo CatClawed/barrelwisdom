@@ -21,6 +21,15 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'characters',
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A25/character/a25-chara.module').then(m=>m.A25CharaModule),
+      },
+    ]
+  },
+  {
     path: '',
     redirectTo: '/resleri/faq',
     pathMatch: 'full'

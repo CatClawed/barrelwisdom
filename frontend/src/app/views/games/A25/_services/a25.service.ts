@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
-import { NameLink, Trait, Item } from '@app/views/games/A25/_services/a25.interface'
+import { NameLink, Trait, Item, RecipeList, Character } from '@app/views/games/A25/_services/a25.interface'
 
 
 @Injectable({ providedIn: 'root' })
@@ -46,5 +46,17 @@ export class A25Service {
 
   getSynth(slugname: string, language: string): Observable<Item> {
     return this.http.get<Item>(`${environment.apiUrl}/A25/synth/${slugname}/${language}/`);
+  }
+
+  getRecipeList(language: string): Observable<RecipeList[]> {
+    return this.http.get<RecipeList[]>(`${environment.apiUrl}/A25/recipe/${language}/`);
+  }
+
+  getCharaList(language: string): Observable<Character[]> {
+    return this.http.get<Character[]>(`${environment.apiUrl}/A25/character/${language}/`);
+  }
+
+  getChara(slugname: string, language: string): Observable<Character> {
+    return this.http.get<Character>(`${environment.apiUrl}/A25/character/${slugname}/${language}/`);
   }
 }

@@ -3,18 +3,29 @@ import { Routes, RouterModule } from '@angular/router';
 import { A25MaterialListComponent } from './a25-materiallist.component';
 import { A25SynthesisListComponent } from './a25-synthlist.component';
 import { A25ItemComponent } from './a25-item.component';
+import { A25RecipeComponent } from './a25-recipe.component';
 import { LanguageGuard } from '@app/_helpers/language.guard';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'materials',
     component: A25MaterialListComponent,
     canActivate: [LanguageGuard],
   },
   {
-    path: ':language',
+    path: 'synthesis',
     canActivate: [LanguageGuard],
-    component: A25MaterialListComponent
+    component: A25SynthesisListComponent
+  },
+  {
+    path: 'recipes',
+    canActivate: [LanguageGuard],
+    component: A25RecipeComponent
+  },
+  {
+    path: 'recipes/:language',
+    canActivate: [LanguageGuard],
+    component: A25RecipeComponent
   },
   {
     path: 'materials/:language',
@@ -22,14 +33,19 @@ const routes: Routes = [
     component: A25MaterialListComponent
   },
   {
-    path: ':itemkind/:subject/:language',
+    path: 'synthesis/:language',
+    canActivate: [LanguageGuard],
+    component: A25SynthesisListComponent
+  },
+  {
+    path: ':itemkind/:subject',
     canActivate: [LanguageGuard],
     component: A25ItemComponent
   },
   {
-    path: 'synthesis/:language',
+    path: ':itemkind/:subject/:language',
     canActivate: [LanguageGuard],
-    component: A25SynthesisListComponent
+    component: A25ItemComponent
   },
 ];
 

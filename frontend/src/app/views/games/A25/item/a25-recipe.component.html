@@ -1,0 +1,62 @@
+<Error *ngIf="error" [errorCode]="error"></Error>
+
+<ng-container *ngIf="recipes">
+<Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Recipe Books'"></Breadcrumb>
+<h1 id="0">Recipe Books</h1>
+<language-settings style="margin-top: 1em;" class="col-md-3" section="{{gameURL}}"></language-settings>
+
+<button (click)="scroll(0)" mat-mini-fab color="primary"  style="position:fixed;bottom:3%;right:10%;z-index:10;">
+    <mat-icon fontSet="fas" fontIcon="fa-arrow-up" ></mat-icon>
+</button>
+<mat-tab-group class="tabs-overflow">
+    <mat-tab label="Story" style="overflow-x:visible;">
+        <ng-container [ngTemplateOutlet]="grid" [ngTemplateOutletContext]="{collection:main, kind:'main'}"></ng-container>
+    </mat-tab>
+    <mat-tab label="Extra">
+        <ng-container [ngTemplateOutlet]="grid" [ngTemplateOutletContext]="{collection:ex,   kind:'ex'}"  ></ng-container>
+    </mat-tab>
+</mat-tab-group>
+
+
+<ng-template #grid let-collection="collection" let-kind="kind">
+    <div class="table-of-contents" style="margin-top:1rem;">
+        <b>Table of Contents</b>
+        <ol>
+            <li *ngFor="let book of collection; let chapter = index;">
+                <a href="#" (click)="$event.preventDefault();scroll(chapter+1)">Page {{chapter+1}}</a>
+            </li>
+        </ol>
+    </div>
+    <ng-container *ngFor="let book of collection; let chapter = index;">
+        <h2 id="{{chapter+1}}">Page {{chapter+1}}</h2>
+        <div style="display:grid;gap:0;grid-template-columns:20% 20% 20% 20% 20%;">
+            <ng-container *ngFor="let it of [].constructor(book[1] - book[0]); let i = index">
+                <ng-container *ngIf="liveRow(i+book[0], kind)">
+                    <ng-container *ngFor="let jt of [].constructor(5); let j = index;">
+                        <ng-container *ngIf="{ data: recipeLookup(i+book[0], j+1, kind) } as locals">
+                            <a *ngIf="locals.data; else notfound"
+                                href="/{{gameURL}}/items/synthesis/{{locals.data.slug}}/{{language}}"
+                                (click)="$event.preventDefault();"
+                                [popover]="recipePopover"
+                                [popoverTitle]="locals.data.name">
+                                <img class="resleri-item-frame" loading="lazy"
+                                    style="background-image:url({{imgURL}}svg/item-frame-{{locals.data.rarity}}.svg)"
+                                    src="{{imgURL}}items/{{locals.data.slug}}.webp">
+                            </a>
+                            <ng-template #recipePopover>
+                                <ul *ngIf="locals.data.unlock1">
+                                    <li *ngIf="locals.data.unlock1">{{locals.data.unlock1}}</li>
+                                    <li *ngIf="locals.data.unlock2">{{locals.data.unlock2}}</li>
+                                    <li *ngIf="locals.data.unlock3">{{locals.data.unlock3}}</li>
+                                </ul>
+                                <a routerLink="/{{gameURL}}/items/synthesis/{{locals.data.slug}}/{{language}}">More info...</a>
+                            </ng-template>
+                        </ng-container>
+                        <ng-template #notfound><div style="aspect-ratio:1;margin-bottom:1.5rem;"></div></ng-template>
+                    </ng-container>
+                </ng-container>
+            </ng-container>
+        </div>
+    </ng-container>
+</ng-template>
+</ng-container>

@@ -41,7 +41,7 @@ export class A25MaterialListComponent extends ListComponent implements OnInit {
     private a25service: A25Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.gameService(this.a25service, 'items');
+    this.gameService(this.a25service, 'items/materials');
     this.itemControl = new UntypedFormControl();
     this.traitControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
@@ -56,7 +56,7 @@ export class A25MaterialListComponent extends ListComponent implements OnInit {
     this.modalEvent();
     this.getItems();
     this.getColors();
-    this.genericSEO(`Items`, `The list of items in ${this.gameTitle}.`);
+    this.genericSEO(`Materials`, `The list of materials in ${this.gameTitle}.`);
   }
 
   getItems() {
@@ -123,27 +123,6 @@ export class A25MaterialListComponent extends ListComponent implements OnInit {
     return item.slug;
   }
 
-  openModal(template: TemplateRef<any>, slug: string, event?) {
-    if (event) {
-      if (event.ctrlKey) {
-        return;
-      }
-      else {
-        event.preventDefault()
-      }
-    }
-    this.selected = slug;
-    this.location.go(`${this.gameURL}/${this.section}/materials/${slug}/${this.language}`);
-    this.modalRef = this.modalService.show(template);
-    this.modalRef.onHide
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((reason: string | any) => {
-        if (reason != "link") {
-          this.location.go(`${this.gameURL}/${this.section}/materials/${this.language}`);
-          this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-        }
-      })
-  }
   insertStyle(item: Item): string {
     if (!item.material[0].color) return;
 

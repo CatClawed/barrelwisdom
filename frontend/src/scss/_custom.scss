@@ -773,3 +773,9 @@ img {
   filter: drop-shadow(10px 10px 15px rgba(90, 90, 90, 0.7));
   margin-bottom: 1.5rem;
 }
+
+// Material tabs cutting off my shadows...
+
+.tabs-overflow mat-tab-body, div {
+  overflow: visible !important;
+}

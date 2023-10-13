@@ -35,7 +35,7 @@ export class A25SynthesisListComponent extends ListComponent implements OnInit {
     private a25service: A25Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.gameService(this.a25service, 'items');
+    this.gameService(this.a25service, 'items/synthesis');
     this.itemControl = new UntypedFormControl();
     this.ingControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
@@ -50,7 +50,7 @@ export class A25SynthesisListComponent extends ListComponent implements OnInit {
     this.modalEvent();
     this.getItems();
     this.getTypes();
-    this.genericSEO(`Items`, `The list of items in ${this.gameTitle}.`);
+    this.genericSEO(`Synthesis Items`, `The list of synthesis items in ${this.gameTitle}.`);
   }
 
   replaceVal(item: Item): string {
@@ -136,27 +136,5 @@ export class A25SynthesisListComponent extends ListComponent implements OnInit {
 
   identify2(index, item) {
     return item.slug;
-  }
-
-  openModal(template: TemplateRef<any>, slug: string, event?) {
-    if (event) {
-      if (event.ctrlKey) {
-        return;
-      }
-      else {
-        event.preventDefault()
-      }
-    }
-    this.selected = slug;
-    this.location.go(`${this.gameURL}/${this.section}/synthesis/${slug}/${this.language}`);
-    this.modalRef = this.modalService.show(template);
-    this.modalRef.onHide
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((reason: string | any) => {
-        if (reason != "link") {
-          this.location.go(`${this.gameURL}/${this.section}/synthesis/${this.language}`);
-          this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-        }
-      })
   }
 }

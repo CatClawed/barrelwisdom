@@ -63,8 +63,8 @@ export class A25ItemComponent extends SingleComponent implements OnInit {
     private a25service: A25Service,
     protected seoService: SeoService) {
     super(route, seoService);
-    this.gameService(this.a25service, 'items');
     this.itemkind = this.route.snapshot.params.itemkind ? this.route.snapshot.params.itemkind : '';
+    this.gameService(this.a25service, `items/${this.itemkind}`);
   }
   ngOnInit(): void {
     if (this.showNav) this.colset = "col-md-9 mx-auto ";
@@ -74,7 +74,7 @@ export class A25ItemComponent extends SingleComponent implements OnInit {
         next: item => {
           this.error = (item.equip || item.combat) ? `404` : ``
           this.item = item;
-          this.seoImage = `${this.imgURL}items/${this.section}/${this.item.slug}.webp`
+          this.seoImage = `${this.imgURL}items/${this.item.slug}.webp`
           this.genericSEO(this.item.name, this.item.desc ? this.item.desc : this.item.material[0].kind);
         },
         error: error => {
@@ -88,7 +88,7 @@ export class A25ItemComponent extends SingleComponent implements OnInit {
         next: item => {
           this.error = item.material ? `404` : ``
           this.item = item;
-          this.seoImage = `${this.imgURL}items/${this.section}/${this.item.slug}.webp`
+          this.seoImage = `${this.imgURL}items/${this.item.slug}.webp`
           this.genericSEO(this.item.name, this.item.desc);
         },
         error: error => {

@@ -82,3 +82,54 @@ export interface Material {
     kind: string;
     traits: Trait[];
 }
+
+export interface RecipeList {
+    name: string;
+    slug: string;
+    x: number;
+    y: number;
+    book: number;
+    unlock1: string;
+    unlock2: string;
+    unlock3: string;
+    rarity: number;
+}
+
+export interface Character {
+    slug: string;
+    name: string;
+    title: string;
+    role: string;
+    elem: string;
+    rarity: number;
+    color1: string;
+    color2: string;
+    trait1: Trait;
+    trait2: Trait;
+    trait3: Trait;
+    hp: number;
+    spd: number;
+    patk: number;
+    pdfn: number;
+    matk: number;
+    mdfn: number;
+    rate_hp: number;
+    rate_patk: number;
+    rate_pdfn: number;
+    rate_matk: number;
+    rate_mdfn: number;
+    res_ice: number;
+    res_fir: number;
+    res_imp: number;
+    res_ltn: number;
+    res_pie: number;
+    res_sla: number;
+    res_wnd: number;
+    passive: Passive[];
+}
+
+export interface Passive {
+    name: string;
+    desc: string;
+    val: number;
+}

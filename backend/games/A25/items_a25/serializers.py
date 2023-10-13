@@ -110,15 +110,16 @@ class A25ItemFullSerializer(A25DefaultSerializer):
         if obj.desc:
             return A25DefaultSerializer.get_desc(self,obj)
 
-class A25RecipeBookSerializer(A25DefaultSerializer):
+class A25RecipeBookSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     slug = serializers.CharField(source="item.slug")
+    rarity = serializers.CharField(source="item.rarity")
     unlock1 = serializers.SerializerMethodField()
     unlock2 = serializers.SerializerMethodField()
     unlock3 = serializers.SerializerMethodField()
     class Meta:
         model = Recipe
-        fields = ['name', 'slug', 'x', 'y', 'book', 
+        fields = ['name', 'slug', 'x', 'y', 'book', 'rarity',
             'unlock1', 'unlock2', 'unlock3'
         ]
     def get_unlock1(self,obj):

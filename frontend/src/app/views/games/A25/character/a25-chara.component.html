@@ -1,0 +1,41 @@
+<Error *ngIf="error" [errorCode]="error"></Error>
+
+<ng-container *ngIf="chara">
+<Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Characterss', '/'+gameURL+'/charas/'+language]]" [current]="chara.name + ' ' + chara.title"></Breadcrumb>
+<!--
+<div class="mx-auto row spacer">
+<div class="{{colset}} card card-body">
+  <div class="flex">
+    <h4 class="card-title card-icon-space">
+      <ng-container *ngIf="language=='en'">
+        {{chara.name_en}}<br /><small>{{chara.name_ja}}</small>
+      </ng-container>
+      <ng-container *ngIf="language=='ja'">
+        {{chara.name_ja}}
+      </ng-container>
+    </h4>
+    <div class="card-icon-position">
+      <img *ngIf="chara.trans_wep"  style="width:3rem;" src="{{imgURL}}svg/equipment.svg" />
+      <img *ngIf="!chara.trans_wep" style="width:3rem;" src="{{imgURL}}svg/combat.svg" />
+    </div>
+  </div>
+  <b *ngIf=" chara.items">Item:</b>
+    <ul *ngIf=" chara.items">
+      <li *ngFor="let item of chara.items"><a routerLink="/{{gameURL}}/materials/{{item.slug}}/{{language}}">{{item.name}}</a>
+    </ul>
+  <p [innerHTML]="chara.desc.replace('{0}', chara.val[0] + ' ~ ' + chara.val[4])"></p>
+  <p>
+    {{chara.val[0]}} > {{chara.val[1]}} > {{chara.val[2]}} > {{chara.val[3]}} > {{chara.val[4]}}
+  </p>
+  <div class="flex bottom" style="text-align:center;">
+    <img src="{{imgURL}}svg/attack.svg"    style="width:2rem;" class="{{!chara.trans_atk  ?  'svg-color' : ''}}"/>
+    <img src="{{imgURL}}svg/healing.svg"   style="width:2rem;" class="{{!chara.trans_heal ? 'svg-color' : ''}}"/>
+    <img src="{{imgURL}}svg/buff.svg"      style="width:2rem;" class="{{!chara.trans_buff ? 'svg-color' : ''}}"/>
+    <img src="{{imgURL}}svg/debuff.svg"    style="width:2rem;" class="{{!chara.trans_dbf  ? 'svg-color' : ''}}"/>
+    <img src="{{imgURL}}svg/equipment.svg" style="width:2rem;" class="{{!chara.trans_wep  ? 'svg-color' : ''}}"/>
+  </div>
+</div>
+<language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
+</div>
+</ng-container>
+-->
