@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { RecipeList } from '@app/views/games/A25/_services/a25.interface';
-import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
+import { RecipeList } from '@app/views/games/A25/_services/a25.interface';
+import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 import { takeUntil } from 'rxjs/operators';
 

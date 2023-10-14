@@ -175,8 +175,8 @@ def ImpChara(row, index):
         hp  =row["HP"],
         spd =row["AGI"],
         patk=row["PATK"],
-        matk=row["PDEF"],
-        pdfn=row["MATK"],
+        matk=row["MATK"],
+        pdfn=row["PDEF"],
         mdfn=row["MDEF"],
         rate_hp  =row["Rate HP"],
         rate_patk=row["Rate ATK"],
@@ -404,6 +404,7 @@ def fix_traits():
         if trait.kind.slug == 'equipment':  trait.trans_arm  = True 
         if trait.kind.slug == 'equipment':  trait.trans_acc  = True 
         trait.save()
+
 
 #import_generic(ImpFilter)
 #import_generic(ImpTrait, index=100, kind="equipment")

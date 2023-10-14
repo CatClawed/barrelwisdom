@@ -776,6 +776,6 @@ img {
 
 // Material tabs cutting off my shadows...
 
-.tabs-overflow mat-tab-body, div {
+.tabs-overflow * {
   overflow: visible !important;
 }

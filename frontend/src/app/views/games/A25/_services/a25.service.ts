@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
-import { NameLink, Trait, Item, RecipeList, Character } from '@app/views/games/A25/_services/a25.interface'
+import { NameLink, Trait, Item, RecipeList, Character, Memoria } from '@app/views/games/A25/_services/a25.interface'
 
 
 @Injectable({ providedIn: 'root' })
@@ -19,6 +19,43 @@ export class A25Service {
   public readonly gameTitle = { "en": "Atelier Resleriana", "ja": "レスレリアーナのアトリエ"};
   public readonly gameURL = "resleri";
   public readonly imgURL = `${environment.mediaURL}games/${this.gameURL}/`;
+
+  public readonly stats = {
+    'hp': {
+      "en": "HP", "ja": "HP"
+    },
+    'agi': {
+      "en": "AGI", "ja": "素早い"
+    },
+    'patk': {
+      "en": "PATK", "ja": "物攻"
+    },
+    'pdef': {
+      "en": "PDEF", "ja": "物防"
+    },
+    'matk': {
+      "en": "MATK", "ja": "魔攻"
+    },
+    'mdef': {
+      "en": "MDEF", "ja": "魔防"
+    },
+  }
+
+  public readonly colors = {
+    'red':    '#b63c3c',
+    'blue':   '#3883ad',
+    'green':  '#3eb880',
+    'yellow': '#c9af47',
+    'purple': '#ac48b9'
+  }
+
+  public readonly colorList = {
+    'red':    'rgba(182,60,60,.7);',
+    'blue':   'rgba(56,131,173,0.7);',
+    'green':  'rgba(62,184,128,0.7);',
+    'yellow': 'rgba(201,175,71,0.7);',
+    'purple': 'rgba(172,72,185,0.7);'
+  }
 
   getFilter(slugname: string, language: string): Observable<NameLink[]> {
     return this.http.get<NameLink[]>(`${environment.apiUrl}/A25/filterable/${slugname}/${language}/`);
@@ -58,5 +95,13 @@ export class A25Service {
 
   getChara(slugname: string, language: string): Observable<Character> {
     return this.http.get<Character>(`${environment.apiUrl}/A25/character/${slugname}/${language}/`);
+  }
+
+  getMemoriaList(language: string): Observable<Memoria[]> {
+    return this.http.get<Memoria[]>(`${environment.apiUrl}/A25/memoria/${language}/`);
+  }
+
+  getMemoria(slugname: string, language: string): Observable<Memoria> {
+    return this.http.get<Memoria>(`${environment.apiUrl}/A25/memoria/${slugname}/${language}/`);
   }
 }

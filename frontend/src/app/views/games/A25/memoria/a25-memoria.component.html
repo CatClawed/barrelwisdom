@@ -1,0 +1,66 @@
+<Error *ngIf="error" [errorCode]="error"></Error>
+<ng-container *ngIf="memoria">
+<Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Memoria', '/'+gameURL+'/memoria/'+language]]" [current]="memoria.name"></Breadcrumb>
+<div class="mx-auto row spacer">
+<div class="{{colset}} card card-body">
+  <div class="flex">
+    <h4 class="card-title card-icon-space">
+      {{memoria.name}}
+    </h4>
+    <div class="card-icon-position">
+      {{rarity[memoria.rarity]}}
+    </div>
+  </div>
+  <img loading="lazy"
+    style="max-height:100%;width:256px;aspect-ratio:256/410;margin:auto;"
+    src="{{imgURL}}memoria/{{memoria.slug}}.webp"
+    alt="{{memoria.name}}" />
+  <p style="margin-top:1rem;"><b>{{memoria.skill_name}}: </b>
+    {{memoria.skill_desc.replace('{0}', memoria.lv1 + ' ~ ' + memoria.lv5)}}
+  </p>
+  <p>{{memoria.lv1}} > {{memoria.lv2}} > {{memoria.lv3}} > {{memoria.lv4}} > {{memoria.lv5}}</p>
+  <table class="tbl">
+    <tr class="table-dark-center"><th colspan="4">Level 1</th></tr>
+    <tr>
+      <td style="width:25%;">{{a25service.stats['hp'][language]}} </td>
+      <td style="width:25%;">{{memoria.hp1/100}}%</td>
+      <td style="width:25%;">{{a25service.stats['agi'][language]}}</td>
+      <td style="width:25%;">{{memoria.spd1/100}}%</td>
+    </tr>
+    <tr>
+      <td style="width:25%;">{{a25service.stats['patk'][language]}} </td>
+      <td style="width:25%;">{{memoria.patk1/100}}%</td>
+      <td style="width:25%;">{{a25service.stats['pdef'][language]}}</td>
+      <td style="width:25%;">{{memoria.pdef1/100}}%</td>
+    </tr>
+    <tr>
+      <td style="width:25%;">{{a25service.stats['matk'][language]}} </td>
+      <td style="width:25%;">{{memoria.matk1/100}}%</td>
+      <td style="width:25%;">{{a25service.stats['mdef'][language]}}</td>
+      <td style="width:25%;">{{memoria.mdef1/100}}%</td>
+    </tr>
+    <tr class="table-dark-center"><th colspan="4">Level 30</th></tr>
+    <tr>
+      <td style="width:25%;">{{a25service.stats['hp'][language]}} </td>
+      <td style="width:25%;">{{memoria.hp30/100}}%</td>
+      <td style="width:25%;">{{a25service.stats['agi'][language]}}</td>
+      <td style="width:25%;">{{memoria.spd30/100}}%</td>
+    </tr>
+    <tr>
+      <td style="width:25%;">{{a25service.stats['patk'][language]}} </td>
+      <td style="width:25%;">{{memoria.patk30/100}}%</td>
+      <td style="width:25%;">{{a25service.stats['pdef'][language]}}</td>
+      <td style="width:25%;">{{memoria.pdef30/100}}%</td>
+    </tr>
+    <tr>
+      <td style="width:25%;">{{a25service.stats['matk'][language]}} </td>
+      <td style="width:25%;">{{memoria.matk30/100}}%</td>
+      <td style="width:25%;">{{a25service.stats['mdef'][language]}}</td>
+      <td style="width:25%;">{{memoria.mdef30/100}}%</td>
+    </tr>
+  </table>
+
+</div>
+<language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
+</div>
+</ng-container>

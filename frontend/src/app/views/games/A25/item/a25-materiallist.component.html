@@ -12,7 +12,7 @@
         </mat-form-field>
         <mat-form-field class="col-md-4" appearance="outline">
           <mat-label>Color</mat-label>
-          <mat-select matNativeControl formControlName="color" disableOptionCentering="true" class="mat-select-icon">
+          <mat-select matNativeControl formControlName="color">
             <mat-option value="Any">Any</mat-option>
             <mat-option *ngFor="let color of colors" value="{{color.slug}}">
               {{color.name}}
@@ -28,7 +28,7 @@
           </mat-form-field>
         <mat-form-field class="col-md-3" appearance="outline">
             <mat-label>Rarity</mat-label>
-            <mat-select matNativeControl formControlName="rarity" disableOptionCentering="true" class="mat-select-icon">
+            <mat-select matNativeControl formControlName="rarity">
               <mat-option value="0">Any</mat-option>
               <mat-option value="3">SSR</mat-option>
               <mat-option value="2">SR</mat-option>

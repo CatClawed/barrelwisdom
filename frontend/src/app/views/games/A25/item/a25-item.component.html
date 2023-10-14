@@ -45,21 +45,21 @@
       <table class="tbl">
         <tr class="table-dark-center"><th colspan="4">Stats</th></tr>
         <tr>
-          <td style="width:25%;">{{stats['hp'][language]}} </td>
+          <td style="width:25%;">{{a25service.stats['hp'][language]}} </td>
           <td style="width:25%;"><ng-container *ngIf="item.equip[0].bad_hp"  >{{item.equip[0].bad_hp}} ->  </ng-container>{{item.equip[0].good_hp   ?  item.equip[0].good_hp   : 0}}</td>
-          <td style="width:25%;">{{stats['agi'][language]}}</td>
+          <td style="width:25%;">{{a25service.stats['agi'][language]}}</td>
           <td style="width:25%;"><ng-container *ngIf="item.equip[0].bad_spd" >{{item.equip[0].bad_spd}} -> </ng-container>{{item.equip[0].good_spd  ?  item.equip[0].good_spd  : 0}}</td>
         </tr>
         <tr>
-          <td style="width:25%;">{{stats['patk'][language]}} </td>
+          <td style="width:25%;">{{a25service.stats['patk'][language]}} </td>
           <td style="width:25%;"><ng-container *ngIf="item.equip[0].bad_patk">{{item.equip[0].bad_patk}} -> </ng-container>{{item.equip[0].good_patk ? item.equip[0].good_patk : 0}}</td>
-          <td style="width:25%;">{{stats['pdef'][language]}}</td>
+          <td style="width:25%;">{{a25service.stats['pdef'][language]}}</td>
           <td style="width:25%;"><ng-container *ngIf="item.equip[0].bad_pdef">{{item.equip[0].bad_pdef}} -> </ng-container>{{item.equip[0].good_pdef ? item.equip[0].good_pdef : 0}}</td>
         </tr>
         <tr>
-          <td style="width:25%;">{{stats['matk'][language]}} </td>
+          <td style="width:25%;">{{a25service.stats['matk'][language]}} </td>
           <td style="width:25%;"><ng-container *ngIf="item.equip[0].bad_matk">{{item.equip[0].bad_matk}} -> </ng-container>{{item.equip[0].good_matk ? item.equip[0].good_matk : 0}}</td>
-          <td style="width:25%;">{{stats['mdef'][language]}}</td>
+          <td style="width:25%;">{{a25service.stats['mdef'][language]}}</td>
           <td style="width:25%;"><ng-container *ngIf="item.equip[0].bad_mdef">{{item.equip[0].bad_mdef}} -> </ng-container>{{item.equip[0].good_mdef ? item.equip[0].good_mdef : 0}}</td>
         </tr>
       </table>
@@ -98,7 +98,7 @@
         <tr>
           <td style="display:flex;padding:0;">
             <div style="margin:auto;font-size:5rem;">
-              <i *ngFor="let i of item.recipe[0].colors" style="color:{{colors[i]}};" class="fa-solid fa-diamond"></i>
+              <i *ngFor="let i of item.recipe[0].colors" style="color:{{a25service.colors[i]}};" class="fa-solid fa-diamond"></i>
             </div>
           </td>
         </tr>

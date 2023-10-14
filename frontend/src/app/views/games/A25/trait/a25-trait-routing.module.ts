@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { A25TraitlistComponent } from './a25-traitlist.component';
-import { A25TraitComponent } from './a25-trait.component';
+import { RouterModule, Routes } from '@angular/router';
 import { LanguageGuard } from '@app/_helpers/language.guard';
+import { A25TraitComponent } from './a25-trait.component';
+import { A25TraitlistComponent } from './a25-traitlist.component';
 
 const routes: Routes = [
   {

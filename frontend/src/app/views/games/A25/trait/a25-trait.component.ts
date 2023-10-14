@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { SeoService } from '@app/services/seo.service';
 import { Trait } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
-import { SeoService } from '@app/services/seo.service';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({

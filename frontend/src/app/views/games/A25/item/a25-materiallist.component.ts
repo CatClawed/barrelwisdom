@@ -1,10 +1,10 @@
 import { Location } from '@angular/common';
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { NameLink, Item } from '@app/views/games/A25/_services/a25.interface';
+import { Item, NameLink } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { ListComponent } from '@app/views/games/_prototype/list.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -22,13 +22,6 @@ export class A25MaterialListComponent extends ListComponent implements OnInit {
   items: Item[];
   filteredItems: Observable<Item[]>;
   colors: NameLink[];
-  colorList = {
-    'red':    'rgba(182,60,60,.7);',
-    'blue':   'rgba(56,131,173,0.7);',
-    'green':  'rgba(62,184,128,0.7);',
-    'yellow': 'rgba(201,175,71,0.7);',
-    'purple': 'rgba(172,72,185,0.7);'
-  }
 
   constructor(
     protected modalService: BsModalService,
@@ -126,6 +119,6 @@ export class A25MaterialListComponent extends ListComponent implements OnInit {
   insertStyle(item: Item): string {
     if (!item.material[0].color) return;
 
-    return `box-shadow: inset 0 0px 30px 4px ${this.colorList[item.material[0].color]}`
+    return `box-shadow: inset 0 0px 30px 4px ${this.a25service.colorList[item.material[0].color]}`
   }
 }

@@ -12,7 +12,7 @@
         </mat-form-field>
         <mat-form-field class="col-md-4" appearance="outline">
           <mat-label>Type</mat-label>
-          <mat-select matNativeControl formControlName="kind" disableOptionCentering="true" class="mat-select-icon">
+          <mat-select matNativeControl formControlName="kind">
             <mat-option value="Any">Any</mat-option>
             <mat-option *ngFor="let type of combat_type" value="{{type.slug}}">
               {{type.name}}

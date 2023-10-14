@@ -30,6 +30,15 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'memoria',
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A25/memoria/a25-memoria.module').then(m=>m.A25MemoriaModule),
+      },
+    ]
+  },
+  {
     path: '',
     redirectTo: '/resleri/faq',
     pathMatch: 'full'

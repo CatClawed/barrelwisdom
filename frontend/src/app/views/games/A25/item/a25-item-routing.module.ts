@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { A25MaterialListComponent } from './a25-materiallist.component';
-import { A25SynthesisListComponent } from './a25-synthlist.component';
-import { A25ItemComponent } from './a25-item.component';
-import { A25RecipeComponent } from './a25-recipe.component';
+import { RouterModule, Routes } from '@angular/router';
 import { LanguageGuard } from '@app/_helpers/language.guard';
+import { A25ItemComponent } from './a25-item.component';
+import { A25MaterialListComponent } from './a25-materiallist.component';
+import { A25RecipeComponent } from './a25-recipe.component';
+import { A25SynthesisListComponent } from './a25-synthlist.component';
 
 const routes: Routes = [
   {

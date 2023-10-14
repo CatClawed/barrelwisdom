@@ -24,13 +24,6 @@ class Character(models.Model):
     matk  = models.IntegerField()
     mdfn  = models.IntegerField()
 
-    # spd never increases
-    rate_hp    = models.IntegerField()
-    rate_patk  = models.IntegerField()
-    rate_pdfn  = models.IntegerField()
-    rate_matk  = models.IntegerField()
-    rate_mdfn  = models.IntegerField()
-
     res_ice = models.IntegerField(default=0)
     res_fir = models.IntegerField(default=0)
     res_imp = models.IntegerField(default=0)

@@ -1,10 +1,10 @@
 import { Location } from '@angular/common';
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { NameLink, Item } from '@app/views/games/A25/_services/a25.interface';
+import { Item, NameLink } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { ListComponent } from '@app/views/games/_prototype/list.component';
 import { BsModalService } from 'ngx-bootstrap/modal';

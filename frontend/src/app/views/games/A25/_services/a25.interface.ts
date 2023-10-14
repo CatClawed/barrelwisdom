@@ -113,23 +113,36 @@ export interface Character {
     pdfn: number;
     matk: number;
     mdfn: number;
-    rate_hp: number;
-    rate_patk: number;
-    rate_pdfn: number;
-    rate_matk: number;
-    rate_mdfn: number;
-    res_ice: number;
-    res_fir: number;
-    res_imp: number;
-    res_ltn: number;
-    res_pie: number;
-    res_sla: number;
-    res_wnd: number;
-    passive: Passive[];
+    passives: Passive[];
 }
 
 export interface Passive {
     name: string;
     desc: string;
     val: number;
+}
+
+export interface Memoria {
+    slug: string;
+    name: string;
+    rarity: number;
+    skill_name: string;
+    skill_desc: string;
+    lv1: number;
+    lv2: number;
+    lv3: number;
+    lv4: number;
+    lv5: number;
+    hp1: number;
+    spd1: number;
+    patk1: number;
+    pdef1: number;
+    matk1: number;
+    mdef1: number;
+    hp30: number;
+    spd30: number;
+    patk30: number;
+    pdef30: number;
+    matk30: number;
+    mdef30: number;
 }

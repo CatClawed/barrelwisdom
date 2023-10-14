@@ -1,0 +1,38 @@
+<Error *ngIf="error" [errorCode]="error"></Error>
+
+<div *ngIf="!error">
+<Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Memoria"></Breadcrumb>
+<h1>Memoria</h1>
+<div class="col-md-10 mx-auto">
+    <form [formGroup]="pageForm" class="form-horizontal">
+      <div class="row">
+        <mat-form-field class="col-md-9" appearance="outline">
+          <mat-label>Filter...</mat-label>
+          <input style="height: 100%;" matInput formControlName="filtertext">
+          <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
+        </mat-form-field>
+        <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
+      </div>
+    </form>
+  </div>
+  <div *ngIf="filteredMemoria" style="display:grid;grid-template-columns:repeat(4,23%);grid-row-gap:1rem;grid-column-gap:2%;" class="spacer">
+    <a *ngFor="let memoria of filteredMemoria | async;  trackBy:identify"
+      (click)="openModal(memoriaModal, memoria.slug, $event);"
+      href="/{{gameURL}}/memoria/{{memoria.slug}}/{{language}}">
+      <div style="aspect-ratio:256/410;position:relative;">      
+          <img loading="lazy"
+            src="{{imgURL}}memoria/{{memoria.slug}}.webp"
+            style="max-height:100%;width:256px;">
+            <div style="position:absolute;bottom:10%;left:50%;transform:translate(-50%,0);font-size:2vw;text-align:center;width:100%;color:white;background:linear-gradient(270deg, rgba(0,0,0,0.5) 0%, rgb(0, 0, 0) 50%, rgba(0,0,0,0.5) 100%);">{{rarity[memoria.rarity]}}</div>
+      </div>
+  </a>
+    <ng-template #memoriaModal>
+      <div class="modal-body">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <i class="fas fa-times-circle"></i>
+        </button>
+        <a25-memoria slug="{{selected}}" [showNav]="false"></a25-memoria>
+      </div>
+    </ng-template>
+  </div>
+</div>
