@@ -39,8 +39,35 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'research',
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A25/research/a25-research.module').then(m=>m.A25ResearchModule),
+      },
+    ]
+  },
+  {
+    path: 'quests',
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A25/quest/a25-quest.module').then(m=>m.A25QuestModule),
+      },
+    ]
+  },
+  {
+    path: 'home',
+    children: [
+      {
+        path: '', 
+        loadChildren: ()=> import('@app/views/games/A25/update/a25-update.module').then(m=>m.A25UpdateModule),
+      },
+    ]
+  },
+  {
     path: '',
-    redirectTo: '/resleri/faq',
+    redirectTo: '/resleri/home',
     pathMatch: 'full'
   },
 ];

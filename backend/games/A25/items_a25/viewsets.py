@@ -1,6 +1,6 @@
 from rest_framework import viewsets, filters
-from games.A25.items_a25.models import Item, Recipe
-from games.A25.items_a25.serializers import A25RecipeBookSerializer, A25MaterialListSerializer, A25ItemFullSerializer, A25SynthesisItemListSerializer, A25CombatSerializer
+from games.A25.items_a25.models import Item, Recipe, LatestUpdate
+from games.A25.items_a25.serializers import A25RecipeBookSerializer, A25MaterialListSerializer, A25ItemFullSerializer, A25SynthesisItemListSerializer, A25CombatSerializer, A25LatestUpdateSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
@@ -172,3 +172,33 @@ class A25SynthViewSet(viewsets.ModelViewSet):
     @action(detail=True, url_path="ja")
     def ja_full(self, request, slug):
         return A25SynthViewSet.get_query(lang="ja", slug=slug)
+
+class A25UpdateViewSet(viewsets.ModelViewSet):
+    queryset = LatestUpdate.objects.all()
+    serializer_class = A25LatestUpdateSerializer
+    filter_backends = [filters.SearchFilter,
+                       DjangoFilterBackend, filters.OrderingFilter]
+
+    def get_query(lang="en"):
+        queryset = (
+            LatestUpdate.objects
+            .prefetch_related(
+                'items__name',
+                'items__kind',
+                'characters__name',
+                'characters__title',
+                'memoria__name',
+            )
+            .first()
+        )
+        serializer = A25LatestUpdateSerializer(
+            queryset, context={'language': lang})
+        return Response(serializer.data)
+
+    @action(detail=False)
+    def en(self, request):
+        return A25UpdateViewSet.get_query(lang="en")
+
+    @action(detail=False)
+    def ja(self, request):
+        return A25UpdateViewSet.get_query(lang="ja")

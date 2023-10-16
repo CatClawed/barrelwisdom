@@ -1,7 +1,8 @@
 from rest_framework import serializers
-from games.A25.items_a25.models import Item, Material, CombatItem, Equipment, Recipe
+from games.A25.items_a25.models import Item, Material, CombatItem, Equipment, Recipe, LatestUpdate
 from collections import OrderedDict
 from games.A25.misc_a25.serializers import A25DefaultSerializer, A25TraitSimpleSerializer, A25ItemNameSerializer
+from games.A25.chara_a25.serializers import A25CharaUpdateSerializer, A25MemoriaListSerializer
 
 class A25MaterialDetailSerializer(A25DefaultSerializer):
     color = serializers.CharField(source='color.slug', allow_null=True)
@@ -110,6 +111,18 @@ class A25ItemFullSerializer(A25DefaultSerializer):
         if obj.desc:
             return A25DefaultSerializer.get_desc(self,obj)
 
+class A25ItemUpdateSerializer(A25DefaultSerializer):
+    name = serializers.SerializerMethodField()
+    kind = serializers.CharField(source='kind.slug')
+    class Meta:
+        model = Item
+        fields = [
+            "slug", "name", "kind"
+        ]
+    def get_desc(self,obj):
+        if obj.desc:
+            return A25DefaultSerializer.get_desc(self,obj)
+
 class A25RecipeBookSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     slug = serializers.CharField(source="item.slug")
@@ -133,3 +146,11 @@ class A25RecipeBookSerializer(serializers.ModelSerializer):
             return A25DefaultSerializer.get_text(self,obj.unlock3)
     def get_name(self,obj):
         return A25DefaultSerializer.get_text(self,obj.item.name)
+
+class A25LatestUpdateSerializer(A25DefaultSerializer):
+    memoria = A25MemoriaListSerializer(many=True)
+    characters = A25CharaUpdateSerializer(many=True)
+    items = A25ItemUpdateSerializer(many=True)
+    class Meta:
+        model = LatestUpdate
+        fields = ['time', 'characters', 'items', 'memoria']

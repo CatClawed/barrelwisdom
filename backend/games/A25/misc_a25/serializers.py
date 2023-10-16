@@ -84,11 +84,11 @@ class A25TraitSerializer(A25DefaultSerializer):
 class A25ResearchSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()
     desc = serializers.SerializerMethodField()
-    kind = A25FilterableSerializer()
+    kind = serializers.CharField(source='kind.slug')
     req = serializers.SerializerMethodField()
     class Meta:
         model = Research
-        fields = ['name', 'desc', 'val', 'cole', 'level', 'kind', 'req']
+        fields = ['name', 'desc', 'val', 'cole', 'kind', 'req']
     def get_req(self,obj):
         if obj.req:
             return A25DefaultSerializer.get_text(self,obj.req)

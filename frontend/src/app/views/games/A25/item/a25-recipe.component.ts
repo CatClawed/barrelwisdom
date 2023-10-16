@@ -20,12 +20,12 @@ export class A25RecipeComponent extends SingleComponent implements OnInit {
     [0,  20],
     [21, 52],
     [53, 88],
-    //[89, 106]
+    [89, 106]
   ]
 
   ex = [
     [0,48],
-    //[49,60]
+    [49,60]
   ]
 
   pages = {

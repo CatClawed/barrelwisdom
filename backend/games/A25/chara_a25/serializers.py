@@ -10,6 +10,17 @@ class A25PassiveSerializer(A25DefaultSerializer):
         model =  Passive
         fields = ['name', 'desc', 'val']
 
+class A25CharaUpdateSerializer(A25DefaultSerializer):
+    name = serializers.SerializerMethodField()
+    title = serializers.SerializerMethodField()
+    class Meta:
+        model = Character
+        fields = [
+            'slug', 'name', 'title'
+        ]
+    def get_title(self, obj):
+        return A25DefaultSerializer.get_text(self,obj.title)
+
 class A25CharaListSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()
     title = serializers.SerializerMethodField()

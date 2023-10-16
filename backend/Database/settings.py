@@ -95,6 +95,7 @@ INSTALLED_APPS = [
     'games.A25.misc_a25.apps.A25MiscConfig',
     'games.A25.chara_a25.apps.A25CharaConfig',
     'games.A25.items_a25.apps.A25ItemConfig',
+    'games.A25.quest_a25.apps.A25QuestConfig',
     # Blue Reflection
     'games.BR1.missions_br1.apps.BR1MissionConfig',
     'games.BR1.areas_br1.apps.BR1AreaConfig',

@@ -1,6 +1,6 @@
 from django.db import models
 from games.A25.misc_a25.models import Name, Desc, Trait, Filterable
-from games.A25.chara_a25.models import Character
+from games.A25.chara_a25.models import Character, Memoria
 
 class Item(models.Model):
     slug   = models.CharField(max_length=50) #oops
@@ -8,6 +8,7 @@ class Item(models.Model):
     desc   = models.ForeignKey(Desc, on_delete=models.CASCADE, blank=True, null=True)
     kind   = models.ForeignKey(Filterable, on_delete=models.CASCADE)
     rarity = models.IntegerField()
+    limited = models.BooleanField(default=False)
 
     class Meta:
         ordering = [
@@ -86,4 +87,15 @@ class Recipe(models.Model):
             "book",
             "x",
             "y",
+        ]
+
+# dirty or not it's coming here
+class LatestUpdate(models.Model):
+    time       = models.DateTimeField(auto_now_add=True)
+    items      = models.ManyToManyField(Item)
+    characters = models.ManyToManyField(Character)
+    memoria    = models.ManyToManyField(Memoria)
+    class Meta:
+        ordering = [
+            "-time"
         ]

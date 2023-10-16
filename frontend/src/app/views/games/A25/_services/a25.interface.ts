@@ -1,3 +1,5 @@
+import slugify from "slugify";
+
 export interface NameLink {
     slug: string;
     name: string;
@@ -145,4 +147,37 @@ export interface Memoria {
     pdef30: number;
     matk30: number;
     mdef30: number;
+}
+
+export interface Research {
+    slug: string;
+    name: string;
+    desc: string;
+    kind: string;
+    val: number;
+    cole: number;
+    req: string;
+}
+
+export interface Update {
+    time: Date;
+    characters: Character[];
+    items: Item[];
+    memoria: Memoria[];
+}
+
+export interface Reward {
+    item: NameLink[];
+    num: number;
+}
+
+export interface DungeonFloor {
+    order: number;
+    combat_level: number;
+
+}
+
+export interface Dungeon {
+    name: string;
+    floors: DungeonFloor[];
 }

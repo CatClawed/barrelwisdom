@@ -1,0 +1,63 @@
+<Error *ngIf="error" [errorCode]="error"></Error>
+<ng-container *ngIf="update">
+<Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Home"></Breadcrumb>
+<h1>Home</h1>
+<language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
+<p><time dateTime="{{update.time}}">Last Updated: {{update.time | date:'mediumDate' }} </time></p>
+<ng-container *ngIf="update.characters">
+  <h2>Characters</h2>
+  <div style="display:grid;grid-template-columns:repeat(4,23%);grid-row-gap:1rem;grid-column-gap:2%;">
+    <a *ngFor="let chara of update.characters"
+      style="aspect-ratio:1;position:relative;"
+      routerLink="/{{gameURL}}/characters/{{chara.slug}}/{{language}}">
+      <img src="{{imgURL}}characters/face/{{chara.slug}}.webp"
+      style="width:256px;" />
+    </a>
+  </div>
+</ng-container>
+<ng-container *ngIf="update.memoria">
+  <h2>Memoria</h2>
+  <div style="display:grid;grid-template-columns:repeat(4,23%);grid-row-gap:1rem;grid-column-gap:2%;">
+    <a *ngFor="let memoria of update.memoria"
+      style="aspect-ratio:256/410;position:relative;"
+      routerLink="/{{gameURL}}/memoria/{{memoria.slug}}/{{language}}">
+      <img loading="lazy"
+        src="{{imgURL}}memoria/{{memoria.slug}}.webp"
+        style="max-height:100%;width:256px;"/>
+    </a>
+  </div>
+</ng-container>
+<ng-container *ngIf="update.items">
+  <h2>Items</h2>
+  <table class="tbl">
+    <tr class="table-dark-center"><th>Materials</th></tr>
+    <tr>
+      <td>
+        <ul style="columns:2;">
+          <ng-container *ngFor="let item of update.items">
+            <li *ngIf="item.kind == 'material'">
+              <a routerLink="/{{gameURL}}/items/materials/{{item.slug}}/{{language}}">
+                {{item.name}}
+              </a>
+            </li>
+          </ng-container>
+        </ul>
+      </td>
+    </tr>
+    <tr class="table-dark-center"><th>Synthesis</th></tr>
+    <tr>
+      <td>
+        <ul style="columns:2;">
+          <ng-container *ngFor="let item of update.items">
+            <li *ngIf="item.kind != 'material'">
+              <a routerLink="/{{gameURL}}/items/synthesis/{{item.slug}}/{{language}}">
+                {{item.name}}
+              </a>
+            </li>
+          </ng-container>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</ng-container>
+</ng-container>

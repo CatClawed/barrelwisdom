@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Character, Dungeon, Item, Memoria, NameLink, RecipeList, Research, Trait, Update } from '@app/views/games/A25/_services/a25.interface';
 import { environment } from '@environments/environment';
-import { NameLink, Trait, Item, RecipeList, Character, Memoria } from '@app/views/games/A25/_services/a25.interface'
+import { Observable } from 'rxjs';
 
 
 @Injectable({ providedIn: 'root' })
@@ -103,5 +103,17 @@ export class A25Service {
 
   getMemoria(slugname: string, language: string): Observable<Memoria> {
     return this.http.get<Memoria>(`${environment.apiUrl}/A25/memoria/${slugname}/${language}/`);
+  }
+
+  getResearch(language: string): Observable<Research[]> {
+    return this.http.get<Research[]>(`${environment.apiUrl}/A25/research/${language}/`);
+  }
+  
+  getUpdate(language: string): Observable<Update> {
+    return this.http.get<Update>(`${environment.apiUrl}/A25/update/${language}/`);
+  }
+
+  getDungeons(language: string): Observable<Dungeon[]> {
+    return this.http.get<Dungeon[]>(`${environment.apiUrl}/A25/dungeon/${language}/`);
   }
 }
