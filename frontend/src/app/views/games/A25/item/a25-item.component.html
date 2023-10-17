@@ -71,7 +71,7 @@
           <td>
             <ul>
               <li *ngFor="let i of item.recipe[0].ing">
-                <a routerLink="/{{gameURL}}/items/materials/{{i[1]}}">{{i[2]}}</a> x{{i[0]}}
+                <a routerLink="/{{gameURL}}/items/materials/{{i[1]}}/{{language}}">{{i[2]}}</a> x{{i[0]}}
               </li>
             </ul>
           </td>

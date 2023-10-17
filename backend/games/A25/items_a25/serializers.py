@@ -3,6 +3,7 @@ from games.A25.items_a25.models import Item, Material, CombatItem, Equipment, Re
 from collections import OrderedDict
 from games.A25.misc_a25.serializers import A25DefaultSerializer, A25TraitSimpleSerializer, A25ItemNameSerializer
 from games.A25.chara_a25.serializers import A25CharaUpdateSerializer, A25MemoriaListSerializer
+from games.A25.quest_a25.serializers import A25ItemRewardSerializer
 
 class A25MaterialDetailSerializer(A25DefaultSerializer):
     color = serializers.CharField(source='color.slug', allow_null=True)
@@ -101,10 +102,11 @@ class A25ItemFullSerializer(A25DefaultSerializer):
     recipe = A25RecipeSerializer(source='recipe_set', many=True)
     combat = A25CombatSerializer(source="combatitem_set", many=True)
     equip = A25EquipSerializer(source='equipment_set', many=True)
+    quest = A25ItemRewardSerializer(source='reward_set', many=True)
     class Meta:
         model = Item
         fields = [
-            "slug", "name", "desc", "rarity",
+            "slug", "name", "desc", "rarity", 'quest',
             'material', 'equip', 'combat', 'recipe'
         ]
     def get_desc(self,obj):

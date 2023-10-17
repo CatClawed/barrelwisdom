@@ -5,6 +5,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SettingsRoutingModule } from './setting-routing.module';
 import { SettingsComponent } from './settings.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
     imports: [
@@ -13,6 +14,7 @@ import { SettingsComponent } from './settings.component';
       SettingsRoutingModule,
       MatTabsModule,
       MatMenuModule,
+      MatSelectModule
     ],
     declarations: [
       SettingsComponent,

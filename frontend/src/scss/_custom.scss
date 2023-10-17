@@ -241,7 +241,7 @@ a.badge:hover {
   padding-left: 1em;
   padding-right: 1em;
   font-size: calc(1rem + 0.1vw);
-  margin: 55px auto 0 auto;
+  margin: 55px auto 1rem auto;
   width: 60%;
 }
 
@@ -772,6 +772,13 @@ img {
   object-fit: contain;
   filter: drop-shadow(10px 10px 15px rgba(90, 90, 90, 0.7));
   margin-bottom: 1.5rem;
+}
+
+.resleri-item-frame-sm {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  object-fit: contain;
 }
 
 // Material tabs cutting off my shadows...

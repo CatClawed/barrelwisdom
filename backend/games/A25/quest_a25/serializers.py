@@ -7,7 +7,7 @@ class A25ItemNameSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Item
-        fields = ['slug', 'name']
+        fields = ['slug', 'name', 'rarity']
 
 class A25RewardSerializer(A25DefaultSerializer):
     item = A25ItemNameSerializer()
@@ -58,8 +58,34 @@ class A25DungeonFloorSerializer(A25DefaultSerializer):
         fields = ['order', 'combat_level', 'effects', 'rewards']
 
 class A25DungeonSerializer(A25DefaultSerializer):
-    name = serializers.SerializerMethodField()
+    name_en = serializers.CharField(source='name.text_en')
+    name_ja = serializers.CharField(source='name.text_ja')
     floors = A25DungeonFloorSerializer(many=True, source='dungeonfloor_set')
     class Meta:
         model = Dungeon
-        fields = ['name', 'floors']
+        fields = ['name_en', 'name_ja', 'floors']
+
+class A25DungeonItemSerializer(A25DefaultSerializer):
+    name_en = serializers.CharField(source='name.text_en')
+    name_ja = serializers.CharField(source='name.text_ja')
+    class Meta:
+        model = Dungeon
+        fields = ['name_en', 'name_ja']
+
+class A25ScoreBattleItemSerializer(A25DefaultSerializer):
+    class Meta:
+        model = ScoreBattle
+        fields = ['chapter', 'section']
+
+class A25ScoreBattleDiffItemSerializer(A25DefaultSerializer):
+    scorebattle = A25ScoreBattleItemSerializer(many=True, source='scorebattle_set')
+    class Meta:
+        model = ScoreBattleDifficulties
+        fields = ['scorebattle', 'difficulty']
+
+class A25ItemRewardSerializer(A25DefaultSerializer):
+    scorebattle = A25ScoreBattleDiffItemSerializer(many=True, source='scorebattledifficulties_set')
+    dungeon = A25DungeonItemSerializer(many=True, source='dungeon_set')
+    class Meta:
+        model = Reward
+        fields = ['scorebattle', 'dungeon']

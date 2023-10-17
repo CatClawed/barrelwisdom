@@ -49,14 +49,26 @@
         <img *ngIf="!trt.trans_wep" style="width:3rem;" src="{{imgURL}}svg/combat.svg" />
       </div>
     </div>
-    <b *ngIf=" trt.items">Item:</b>
-    <ul *ngIf=" trt.items">
-      <li *ngFor="let item of trt.items"><a routerLink="/{{gameURL}}/materials/{{item.slug}}/{{language}}">{{item.name}}</a>
-    </ul>
     <p [innerHTML]="trt.desc.replace('{0}', trt.val[0] + ' ~ ' + trt.val[4])"></p>
     <p>
       {{trt.val[0]}} > {{trt.val[1]}} > {{trt.val[2]}} > {{trt.val[3]}} > {{trt.val[4]}}
     </p>
+    <b *ngIf=" trt.items">Item:</b>
+    <ul *ngIf=" trt.items">
+      <li *ngFor="let item of trt.items"><a routerLink="/{{gameURL}}/items/materials/{{item.slug}}/{{language}}">{{item.name}}</a>
+    </ul>
+    <b *ngIf=" trt.char1 || trt.char2 || trt.char3">Characters:</b>
+    <ul *ngIf=" trt.char1 || trt.char2 || trt.char3">
+      <li *ngFor="let char of trt.char1">
+        <a routerLink="/{{gameURL}}/characters/{{char.slug}}/{{language}}">{{char.name}} {{char.title}}</a>
+      </li>
+      <li *ngFor="let char of trt.char2">
+        <a routerLink="/{{gameURL}}/characters/{{char.slug}}/{{language}}">{{char.name}} {{char.title}}</a>
+      </li>
+      <li *ngFor="let char of trt.char3">
+        <a routerLink="/{{gameURL}}/characters/{{char.slug}}/{{language}}">{{char.name}} {{char.title}}</a>
+      </li>
+    </ul>
   </div>
   <div class="flex bottom" style="text-align:center;">
     <img src="{{imgURL}}svg/attack.svg"    style="width:2rem;" class="{{!trt.trans_atk  ?  'svg-color' : ''}}"/>

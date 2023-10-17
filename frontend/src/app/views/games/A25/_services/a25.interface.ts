@@ -49,6 +49,15 @@ export interface Item {
     recipe: Recipe[];
 }
 
+export interface DungeonName {
+    name_en: string;
+    name_ja: string;
+}
+
+export interface Quest {
+    
+}
+
 export interface Recipe {
     book: number;
     unlocks: string[];
@@ -167,7 +176,7 @@ export interface Update {
 }
 
 export interface Reward {
-    item: NameLink[];
+    item: Item[];
     num: number;
 }
 
@@ -178,6 +187,28 @@ export interface DungeonFloor {
 }
 
 export interface Dungeon {
-    name: string;
+    name_en: string;
+    name_ja: string;
     floors: DungeonFloor[];
+}
+
+export interface ScoreDifficulties {
+    difficulty: number;
+    combat_level: number;
+    rewards: Reward[];
+    exp: number;
+    cole: number;
+}
+
+export interface ScoreBattle {
+    name: string;
+    chapter: 1;
+    section: 1;
+    difficulties: ScoreDifficulties[];
+}
+
+export interface Tower {
+    floor: number;
+    combat_level: number;
+    reards: Reward[];
 }

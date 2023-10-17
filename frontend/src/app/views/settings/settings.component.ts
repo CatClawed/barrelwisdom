@@ -89,6 +89,7 @@ export class SettingsComponent {
       });
 
       this.navigationForm = this.formBuilder.group({
+        nav: [],
         section: [''],
         data: ['', [Validators.required]]
       });
@@ -215,6 +216,7 @@ export class SettingsComponent {
         }
 
         loadNav(section: string) {
+          console.log(section)
           this.settingService.getNavigation(section)
           .pipe(takeUntil(this.destroy$))
           .subscribe(nav => {

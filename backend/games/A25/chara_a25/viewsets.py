@@ -8,7 +8,15 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 
 class A25CharaViewSet(viewsets.ModelViewSet):
-    queryset = Character.objects.all()
+    queryset = (
+        Character.objects
+        .select_related(
+            'title',
+            'name',
+            'role',
+            'elem',
+        )
+    )
     serializer_class = A25CharaListSerializer
     filter_backends = [filters.SearchFilter,
                        DjangoFilterBackend, filters.OrderingFilter]
@@ -16,18 +24,8 @@ class A25CharaViewSet(viewsets.ModelViewSet):
 
     def get_query(slug=None, lang="en"):
         if not slug:
-            queryset = (
-                Character.objects
-                .select_related(
-                    'title',
-                    'name',
-                    'role',
-                    'elem',
-                )
-            )
-            serializer = A25CharaListSerializer(
-                queryset, many=True, context={'language': lang})
-            return Response(serializer.data)
+            return Response(A25CharaListSerializer(
+                A25CharaViewSet.queryset, many=True, context={'language': lang}).data)
         try:
             queryset = (
                 Character.objects
@@ -53,8 +51,7 @@ class A25CharaViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A25CharaSerializer(queryset, context={'language': lang})
-        return Response(serializer.data)
+        return Response(A25CharaSerializer(queryset, context={'language': lang}).data)
 
     @action(detail=False)
     def en(self, request):
@@ -73,7 +70,12 @@ class A25CharaViewSet(viewsets.ModelViewSet):
         return A25CharaViewSet.get_query(lang="ja", slug=slug)
 
 class A25MemoriaViewSet(viewsets.ModelViewSet):
-    queryset = Memoria.objects.all()
+    queryset = (
+        Memoria.objects
+        .select_related(
+            'name',
+        )
+    )
     serializer_class = A25MemoriaListSerializer
     filter_backends = [filters.SearchFilter,
                        DjangoFilterBackend, filters.OrderingFilter]
@@ -81,15 +83,8 @@ class A25MemoriaViewSet(viewsets.ModelViewSet):
 
     def get_query(slug=None, lang="en"):
         if not slug:
-            queryset = (
-                Memoria.objects
-                .select_related(
-                    'name',
-                )
-            )
-            serializer = A25MemoriaListSerializer(
-                queryset, many=True, context={'language': lang})
-            return Response(serializer.data)
+            return Response(A25MemoriaListSerializer(
+                A25MemoriaViewSet.queryset, many=True, context={'language': lang}).data)
         try:
             queryset = (
                 Memoria.objects
@@ -102,8 +97,7 @@ class A25MemoriaViewSet(viewsets.ModelViewSet):
             )
         except ObjectDoesNotExist:
             raise Http404
-        serializer = A25MemoriaSerializer(queryset, context={'language': lang})
-        return Response(serializer.data)
+        return Response(A25MemoriaSerializer(queryset, context={'language': lang}).data)
 
     @action(detail=False)
     def en(self, request):

@@ -3,7 +3,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { ErrorModule } from '@app/views/error/error.module';
 import { SharedModule } from '@app/views/games/_prototype/SharedModules/shared.module';
 import { A25QuestRoutingModule } from './a25-quest-routing.module';
-import { A25QuestComponent } from './a25-quest.component';
+import { A25DungeonComponent } from './a25-dungeon.component';
+import { A25ScoreBattleComponent } from './a25-scorebattle.component';
+import { A25TowerComponent } from './a25-tower.component';
 
 @NgModule({
   imports: [
@@ -13,7 +15,9 @@ import { A25QuestComponent } from './a25-quest.component';
     MatTabsModule
   ],
   declarations: [
-    A25QuestComponent,
+    A25DungeonComponent,
+    A25ScoreBattleComponent,
+    A25TowerComponent,
   ]
 })
 export class A25QuestModule { }

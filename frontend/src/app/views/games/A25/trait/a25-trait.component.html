@@ -18,14 +18,26 @@
       <img *ngIf="!trait.trans_wep" style="width:3rem;" src="{{imgURL}}svg/combat.svg" />
     </div>
   </div>
-  <b *ngIf=" trait.items">Item:</b>
-    <ul *ngIf=" trait.items">
-      <li *ngFor="let item of trait.items"><a routerLink="/{{gameURL}}/materials/{{item.slug}}/{{language}}">{{item.name}}</a>
-    </ul>
   <p [innerHTML]="trait.desc.replace('{0}', trait.val[0] + ' ~ ' + trait.val[4])"></p>
   <p>
     {{trait.val[0]}} > {{trait.val[1]}} > {{trait.val[2]}} > {{trait.val[3]}} > {{trait.val[4]}}
   </p>
+  <b *ngIf=" trait.items">Item:</b>
+  <ul *ngIf=" trait.items">
+    <li *ngFor="let item of trait.items"><a routerLink="/{{gameURL}}/items/materials/{{item.slug}}/{{language}}">{{item.name}}</a></li>
+  </ul>
+  <b *ngIf=" trait.char1 || trait.char2 || trait.char3">Characters:</b>
+  <ul *ngIf=" trait.char1 || trait.char2 || trait.char3">
+    <li *ngFor="let char of trait.char1">
+      <a routerLink="/{{gameURL}}/characters/{{char.slug}}/{{language}}">{{char.name}} {{char.title}}</a>
+    </li>
+    <li *ngFor="let char of trait.char2">
+      <a routerLink="/{{gameURL}}/characters/{{char.slug}}/{{language}}">{{char.name}} {{char.title}}</a>
+    </li>
+    <li *ngFor="let char of trait.char3">
+      <a routerLink="/{{gameURL}}/characters/{{char.slug}}/{{language}}">{{char.name}} {{char.title}}</a>
+    </li>
+  </ul>
   <div class="flex bottom" style="text-align:center;">
     <img src="{{imgURL}}svg/attack.svg"    style="width:2rem;" class="{{!trait.trans_atk  ?  'svg-color' : ''}}"/>
     <img src="{{imgURL}}svg/healing.svg"   style="width:2rem;" class="{{!trait.trans_heal ? 'svg-color' : ''}}"/>

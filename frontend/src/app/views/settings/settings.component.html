@@ -140,16 +140,13 @@
     </form>
   </mat-tab>
   <mat-tab *ngIf="user.group == 'admin'" label="Nav">
-    <button id="button-basic" type="button" class="btn btn-primary dropdown-toggle"
-            aria-controls="dropdown-basic" [matMenuTriggerFor]="section">
-      {{currentSection}} <span class="caret"></span>
-    </button>
-    <mat-menu #section>
-      <button mat-menu-item *ngFor="let section of sections">
-        <a class="dropdown-item" (click)="loadNav(section.name); $event.preventDefault()">{{section.name}}</a>
-      </button>
-    </mat-menu>
     <form [formGroup]="navigationForm" (ngSubmit)="submitNav()">
+      <mat-form-field class="col-md-3" appearance="outline">
+        <mat-label>Section</mat-label>
+        <mat-select matNativeControl formControlName="nav">
+          <mat-option *ngFor="let section of sections" value="section.name" (click)="loadNav(section.name)">{{section.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
       <div class="form-group row">
         <label class="col-md-2 col-form-label" for="text-input">Section</label>
         <div class="col-md-10">

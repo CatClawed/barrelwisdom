@@ -21,6 +21,16 @@ export class A25CharaComponent extends SingleComponent implements OnInit {
     this.gameService(this.a25service, 'charas');
   }
 
+  elements = {
+    'wind':      '#3b853d',
+    'fire':      '#b23e36',
+    'ice':       '#2089bc',
+    'lightning': '#9e8a1a',
+    'slash':     '#776a55',
+    'impact':    '#72543b',
+    'pierce':    '#647189',
+  }
+
   gradients = {
     1: "background: linear-gradient(0deg, rgba(81,53,40,1) 0%, rgba(10,32,47,1) 50%, rgba(22,60,73,1) 100%);",
     2: "background: linear-gradient(0deg, rgba(167,150,124,1) 0%, rgba(208,185,131,1) 50%, rgba(106,84,36,1) 100%);",
