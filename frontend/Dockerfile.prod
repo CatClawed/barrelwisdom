@@ -1,7 +1,7 @@
 # just build in the normal docker instance
 
 FROM node:18.18.0-alpine3.18
-COPY /dist .
+COPY /dist /dist
 RUN adduser -D user
 USER user
 CMD node dist/frontend/server/main.js

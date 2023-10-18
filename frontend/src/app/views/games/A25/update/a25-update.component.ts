@@ -31,7 +31,7 @@ export class A25UpdateComponent extends SingleComponent implements OnInit {
       .subscribe({
         next: update => {
           this.update = update;
-          this.genericSEO('Home', `What's new in ${this.a25service.gameTitle}?`);
+          this.genericSEO('Home', `What's new in ${this.gameTitle}?`);
         },
         error: error => {
           this.error = `${error.status}`;

@@ -74,6 +74,7 @@ export class A25CharaComponent extends SingleComponent implements OnInit {
       .subscribe({
         next: chara => {
           this.chara = chara;
+          this.seoImage = `${this.imgURL}characters/full/${this.chara.slug}.webp`
           this.genericSEO(`${this.chara.name} ${this.chara.title}`, `All data about ${this.chara.name}`);
         },   error: error => {
           this.error = `${error.status}`;

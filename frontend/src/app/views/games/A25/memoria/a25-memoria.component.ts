@@ -32,6 +32,7 @@ export class A25MemoriaComponent extends SingleComponent implements OnInit {
       .subscribe({
         next: memoria => {
           this.memoria = memoria;
+          this.seoImage = `${this.imgURL}memoria/${this.memoria.slug}.webp`
           this.genericSEO(this.memoria.name, this.memoria.skill_desc.replace('{0}', this.memoria.lv1 + ' ~ ' + this.memoria.lv5));
         },   error: error => {
           this.error = `${error.status}`;

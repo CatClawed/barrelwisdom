@@ -31,7 +31,7 @@ export class A25ResearchComponent extends SingleComponent implements OnInit {
       .subscribe({
         next: research => {
           this.research = research;
-          this.genericSEO('Research', `All research in ${this.a25service.gameTitle}`);
+          this.genericSEO('Research', `All research in ${this.gameTitle}`);
         },
         error: error => {
           this.error = `${error.status}`;
