@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from games.A25.items_a25.models import Item, Material, CombatItem, Equipment, Recipe, LatestUpdate
+from games.A25.items_a25.models import Item, Material, CombatItem, Equipment, Recipe, LatestUpdate, RecipeTab, RecipePage
 from collections import OrderedDict
 from games.A25.misc_a25.serializers import A25DefaultSerializer, A25TraitSimpleSerializer, A25ItemNameSerializer
 from games.A25.chara_a25.serializers import A25CharaUpdateSerializer, A25MemoriaListSerializer
@@ -15,9 +15,13 @@ class A25MaterialDetailSerializer(A25DefaultSerializer):
 class A25MaterialListSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()
     material = A25MaterialDetailSerializer(source='material_set', many=True)
+    limit = serializers.SerializerMethodField()
     class Meta:
         model =  Item
-        fields = ['name', 'slug', 'rarity', 'material']
+        fields = ['name', 'slug', 'rarity', 'material', 'limit']
+    def get_limit(self, obj):
+        if obj.limit:
+            return A25DefaultSerializer.get_text(self,obj.limit)
 
 class A25EquipDetailSerializer(A25DefaultSerializer):
     kind = serializers.CharField(source='kind.slug')
@@ -51,16 +55,20 @@ class A25CombatSerializer(A25DefaultSerializer):
         ]
     def get_area(self,obj):
         return A25DefaultSerializer.get_text(self,obj.area)
+    def get_limit(self, obj):
+        if obj.limit:
+            return A25DefaultSerializer.get_text(self,obj.limit)
 
 class A25SynthesisItemListSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()
     desc = serializers.SerializerMethodField()
+    limit = serializers.SerializerMethodField()
     equip = A25EquipDetailSerializer(source='equipment_set', many=True)
     combat = A25CombatDetailSerializer(source='combatitem_set', many=True)
     ing = serializers.SerializerMethodField()
     class Meta:
         model =  Item
-        fields = ['slug', 'name', 'desc', 'rarity', 'equip', 'combat', 'ing']
+        fields = ['slug', 'name', 'desc', 'limit', 'rarity', 'equip', 'combat', 'ing']
     def get_ing(self,obj):
         ings = obj.recipe_set.first()
         arr = []
@@ -68,6 +76,9 @@ class A25SynthesisItemListSerializer(A25DefaultSerializer):
             if thing:
                 arr.append(A25DefaultSerializer.get_name(self,thing))
         return arr
+    def get_limit(self, obj):
+        if obj.limit:
+            return A25DefaultSerializer.get_text(self,obj.limit)
 
 class A25RecipeSerializer(A25DefaultSerializer):
     ing = serializers.SerializerMethodField()
@@ -103,15 +114,19 @@ class A25ItemFullSerializer(A25DefaultSerializer):
     combat = A25CombatSerializer(source="combatitem_set", many=True)
     equip = A25EquipSerializer(source='equipment_set', many=True)
     quest = A25ItemRewardSerializer(source='reward_set', many=True)
+    limit = serializers.SerializerMethodField()
     class Meta:
         model = Item
         fields = [
             "slug", "name", "desc", "rarity", 'quest',
-            'material', 'equip', 'combat', 'recipe'
+            'material', 'equip', 'combat', 'recipe', 'limit'
         ]
     def get_desc(self,obj):
         if obj.desc:
             return A25DefaultSerializer.get_desc(self,obj)
+    def get_limit(self, obj):
+        if obj.limit:
+            return A25DefaultSerializer.get_text(self,obj.limit)
 
 class A25ItemUpdateSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()
@@ -125,29 +140,42 @@ class A25ItemUpdateSerializer(A25DefaultSerializer):
         if obj.desc:
             return A25DefaultSerializer.get_desc(self,obj)
 
+
 class A25RecipeBookSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     slug = serializers.CharField(source="item.slug")
     rarity = serializers.CharField(source="item.rarity")
-    unlock1 = serializers.SerializerMethodField()
-    unlock2 = serializers.SerializerMethodField()
-    unlock3 = serializers.SerializerMethodField()
+    unlocks = serializers.SerializerMethodField()
     class Meta:
         model = Recipe
         fields = ['name', 'slug', 'x', 'y', 'book', 'rarity',
-            'unlock1', 'unlock2', 'unlock3'
+            'unlocks'
         ]
-    def get_unlock1(self,obj):
-        if obj.unlock1:
-            return A25DefaultSerializer.get_text(self,obj.unlock1)
-    def get_unlock2(self,obj):
-        if obj.unlock2:
-            return A25DefaultSerializer.get_text(self,obj.unlock2)
-    def get_unlock3(self,obj):
-        if obj.unlock3:
-            return A25DefaultSerializer.get_text(self,obj.unlock3)
+    def get_unlocks(self,obj):
+        arr = []
+        for thing in [obj.unlock1, obj.unlock2, obj.unlock3]:
+            if thing:
+                arr.append(A25DefaultSerializer.get_text(self,thing))
+        return arr
     def get_name(self,obj):
         return A25DefaultSerializer.get_text(self,obj.item.name)
+
+class A25RecipePageSerializer(A25DefaultSerializer):
+    desc = serializers.SerializerMethodField()
+    recipes = A25RecipeBookSerializer(many=True, source='recipe_set')
+    class Meta:
+        model = RecipePage
+        fields = ['desc', 'min_x', 'max_x', 'recipes']
+    def get_desc(self,obj):
+        if obj.desc:
+            return super().get_desc(obj)
+
+class A25RecipeTabSerializer(A25DefaultSerializer):
+    name = serializers.SerializerMethodField()
+    pages = A25RecipePageSerializer(many=True, source='recipepage_set')
+    class Meta:
+        model = RecipePage
+        fields = ['name', 'pages']
 
 class A25LatestUpdateSerializer(A25DefaultSerializer):
     memoria = A25MemoriaListSerializer(many=True)

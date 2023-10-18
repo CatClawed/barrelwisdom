@@ -34,7 +34,7 @@ export class A25TowerComponent extends SingleComponent implements OnInit {
       this.error = `404`;
     }
     else {
-      this.genericSEO(this.title, `All Elemental Tower floors in ${this.a25service.gameTitle}`);
+      this.genericSEO(this.title, `All Elemental Tower floors in ${this.gameTitle}`);
     }
   }
 

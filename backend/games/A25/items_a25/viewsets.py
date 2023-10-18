@@ -1,6 +1,6 @@
 from rest_framework import viewsets, filters
-from games.A25.items_a25.models import Item, Recipe, LatestUpdate
-from games.A25.items_a25.serializers import A25RecipeBookSerializer, A25MaterialListSerializer, A25ItemFullSerializer, A25SynthesisItemListSerializer, A25CombatSerializer, A25LatestUpdateSerializer
+from games.A25.items_a25.models import Item, RecipeTab, LatestUpdate
+from games.A25.items_a25.serializers import A25RecipeTabSerializer, A25MaterialListSerializer, A25ItemFullSerializer, A25SynthesisItemListSerializer, A25CombatSerializer, A25LatestUpdateSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
@@ -10,26 +10,30 @@ from django.http import Http404
 
 class A25RecipeViewSet(viewsets.ModelViewSet):
     queryset = (
-        Recipe.objects
+        RecipeTab.objects
         .select_related(
-            'item__name',
-            'unlock1',
-            'unlock2',
-            'unlock3',
+            'name',
+        )
+        .prefetch_related(
+            'recipepage_set__desc',
+            'recipepage_set__recipe_set__item__name',
+            'recipepage_set__recipe_set__unlock1',
+            'recipepage_set__recipe_set__unlock2',
+            'recipepage_set__recipe_set__unlock3',
         )
     )
-    serializer_class = A25RecipeBookSerializer
+    serializer_class = A25RecipeTabSerializer
     filter_backends = [filters.SearchFilter,
                        DjangoFilterBackend, filters.OrderingFilter]
 
     @action(detail=False)
     def en(self, request):
-        return Response(A25RecipeBookSerializer(
+        return Response(A25RecipeTabSerializer(
             A25RecipeViewSet.queryset, many=True, context={'language': 'en'}).data)
 
     @action(detail=False)
     def ja(self, request):
-        return Response(A25RecipeBookSerializer(
+        return Response(A25RecipeTabSerializer(
             A25RecipeViewSet.queryset, many=True, context={'language': 'ja'}).data)
 
 class A25MaterialViewSet(viewsets.ModelViewSet):
@@ -37,6 +41,7 @@ class A25MaterialViewSet(viewsets.ModelViewSet):
         Item.objects
         .select_related(
             'name',
+            'limit',
         )
         .prefetch_related(
             'material_set__color',
@@ -61,6 +66,7 @@ class A25MaterialViewSet(viewsets.ModelViewSet):
                 .select_related(
                     'name',
                     'desc',
+                    'limit',
                 )
                 .prefetch_related(
                     'material_set__color',
@@ -98,6 +104,7 @@ class A25SynthViewSet(viewsets.ModelViewSet):
         .select_related(
             'name',
             'desc',
+            'limit',
         )
         .prefetch_related(
             'recipe_set__ing1__name',
@@ -123,6 +130,7 @@ class A25SynthViewSet(viewsets.ModelViewSet):
                 .select_related(
                     'name',
                     'desc',
+                    'limit',
                 )
                 .prefetch_related(
                     'recipe_set__ing1__name',

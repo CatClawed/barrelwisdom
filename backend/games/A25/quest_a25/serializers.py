@@ -1,7 +1,14 @@
 from rest_framework import serializers
-from games.A25.quest_a25.models import Reward, Training, FieldEffect, Tower, ScoreBattleDifficulties, ScoreBattle, Dungeon, DungeonFloor
+from games.A25.quest_a25.models import Reward, Training, Tower, ScoreBattleDifficulties, ScoreBattle, Dungeon, DungeonFloor
 from games.A25.items_a25.models import Item
+from games.A25.misc_a25.models import Desc
 from games.A25.misc_a25.serializers import A25DefaultSerializer, A25FilterableSerializer
+
+class A25FieldEffectSerializer(A25DefaultSerializer):
+    desc = serializers.SerializerMethodField()
+    class Meta:
+        model = Desc
+        fields = ['desc']
 
 class A25ItemNameSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()
@@ -14,13 +21,6 @@ class A25RewardSerializer(A25DefaultSerializer):
     class Meta:
         model = Reward
         fields = ['item', 'num']
-
-class A25FieldEffectSerializer(A25DefaultSerializer):
-    name = serializers.SerializerMethodField()
-    desc = serializers.SerializerMethodField()
-    class Meta:
-        model = FieldEffect
-        fields = ['name', 'desc']
 
 class A25TowerSerializer(A25DefaultSerializer):
     rewards = A25RewardSerializer(many=True)

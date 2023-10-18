@@ -15,6 +15,12 @@ export class A25ItemComponent extends SingleComponent implements OnInit {
   @Input()
   itemkind: string = "";
 
+  difficulties = {
+    1: "Normal",
+    2: "Hard",
+    3: "Very Hard",
+  }
+
   constructor(
     protected route: ActivatedRoute,
     protected a25service: A25Service,
@@ -32,7 +38,7 @@ export class A25ItemComponent extends SingleComponent implements OnInit {
           this.error = (item.equip || item.combat) ? `404` : ``
           this.item = item;
           this.seoImage = `${this.imgURL}items/${this.item.slug}.webp`
-          this.genericSEO(this.item.name, this.item.desc ? this.item.desc : this.item.material[0].kind);
+          this.genericSEO(this.item.name, this.item.desc ? this.item.desc : `Material from ${this.gameTitle}`);
         },   error: error => {
           this.error = `${error.status}`;
         }
@@ -45,7 +51,7 @@ export class A25ItemComponent extends SingleComponent implements OnInit {
           this.error = item.material ? `404` : ``
           this.item = item;
           this.seoImage = `${this.imgURL}items/${this.item.slug}.webp`
-          this.genericSEO(this.item.name, this.item.desc);
+          this.genericSEO(this.item.name, this.replaceVal(item));
         },   error: error => {
           this.error = `${error.status}`;
         }

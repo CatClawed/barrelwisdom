@@ -8,7 +8,7 @@ class Item(models.Model):
     desc   = models.ForeignKey(Desc, on_delete=models.CASCADE, blank=True, null=True)
     kind   = models.ForeignKey(Filterable, on_delete=models.CASCADE)
     rarity = models.IntegerField()
-    limited = models.BooleanField(default=False)
+    limit = models.ForeignKey(Desc, on_delete=models.CASCADE, blank=True, null=True, related_name="item_limited")
 
     class Meta:
         ordering = [
@@ -56,7 +56,27 @@ class Equipment(models.Model):
     bad_mdef = models.IntegerField(default=0)
 
 
+class RecipeTab(models.Model):
+    name   = models.ForeignKey(Name, on_delete=models.CASCADE)
+    order  = models.IntegerField()
+    class Meta:
+        ordering = [
+                "order"
+            ]
+
+class RecipePage(models.Model):
+    desc  = models.ForeignKey(Desc, on_delete=models.CASCADE, null=True, blank=True) # events
+    tab   = models.ForeignKey(RecipeTab, on_delete=models.CASCADE)
+    min_x = models.IntegerField()
+    max_x = models.IntegerField()
+    book = models.IntegerField(default=0)
+    class Meta:
+        ordering = [
+                "min_x"
+            ]
+
 class Recipe(models.Model):
+    page = models.ForeignKey(RecipePage, on_delete=models.CASCADE, null=True, blank=True)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     x    = models.IntegerField()
     y    = models.IntegerField()

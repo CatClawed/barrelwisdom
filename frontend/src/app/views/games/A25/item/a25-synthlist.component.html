@@ -56,6 +56,7 @@
       src="{{imgURL}}items/{{it.slug}}.webp" alt="{{it.name}}">
   </a>
   <p style="padding-right:1.5rem;" [innerHTML]="replaceVal(it)"></p>
+  <p *ngIf="it.limit"><b>Event: </b>{{it.limit}}</p>
   <button (click)="openModal(itemModal, it.slug)" class="card-read-more-position" mat-mini-fab color="primary">
     <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
   </button>

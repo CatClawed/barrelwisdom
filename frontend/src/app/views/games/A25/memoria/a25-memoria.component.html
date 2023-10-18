@@ -19,6 +19,7 @@
     {{memoria.skill_desc.replace('{0}', memoria.lv1 + ' ~ ' + memoria.lv5)}}
   </p>
   <p>{{memoria.lv1}} > {{memoria.lv2}} > {{memoria.lv3}} > {{memoria.lv4}} > {{memoria.lv5}}</p>
+  <p *ngIf="memoria.limit"><b>Event: </b>{{memoria.limit}}</p>
   <table class="tbl">
     <tr class="table-dark-center"><th colspan="4">Level 1</th></tr>
     <tr>

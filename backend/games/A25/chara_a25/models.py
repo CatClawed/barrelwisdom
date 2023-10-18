@@ -5,6 +5,7 @@ class Character(models.Model):
     slug  = models.SlugField(max_length=50, unique=True)
     name  = models.ForeignKey(Name, on_delete=models.CASCADE)
     title = models.ForeignKey(Name, on_delete=models.CASCADE, related_name="chara_title")
+    limit = models.ForeignKey(Desc, on_delete=models.CASCADE, blank=True, null=True)
     role  = models.ForeignKey(Filterable, on_delete=models.CASCADE)
     elem  = models.ForeignKey(Filterable, on_delete=models.CASCADE, related_name="chara_elem")
 
@@ -49,8 +50,14 @@ class Skill(models.Model):
     wt = models.IntegerField(default=0)
     index = models.IntegerField(default=0)
 
-    val1  = models.IntegerField()
+    # currently up to 3 is used but might as well futureproof
+    val0  = models.IntegerField(blank=True, null=True)
+    val1  = models.IntegerField(blank=True, null=True)
     val2  = models.IntegerField(blank=True, null=True)
+    val3  = models.IntegerField(blank=True, null=True)
+    val4  = models.IntegerField(blank=True, null=True)
+    val5  = models.IntegerField(blank=True, null=True)
+    val6  = models.IntegerField(blank=True, null=True)
 
     pow1  = models.IntegerField()
     pow2  = models.IntegerField()
@@ -82,6 +89,7 @@ class Memoria(models.Model):
     name = models.ForeignKey(Name, on_delete=models.CASCADE)
     skill_name = models.ForeignKey(Name, on_delete=models.CASCADE, related_name="memoria_skill")
     skill_desc = models.ForeignKey(Desc, on_delete=models.CASCADE)
+    limit = models.ForeignKey(Desc, on_delete=models.CASCADE, blank=True, null=True, related_name="memoria_limited")
     rarity = models.IntegerField()
 
     lv1  = models.IntegerField()

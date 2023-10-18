@@ -12,8 +12,7 @@ class A25TowerViewSet(viewsets.ModelViewSet):
         Tower.objects
         .prefetch_related(
             'rewards__item__name',
-            'effects__name',
-            'effects__desc',
+            'effects',
         )
     )
     serializer_class = A25TowerSerializer
@@ -87,8 +86,7 @@ class A25DungeonViewSet(viewsets.ModelViewSet):
             'name',
         )
         .prefetch_related(
-            'dungeonfloor_set__effects__name',
-            'dungeonfloor_set__effects__desc',
+            'dungeonfloor_set__effects',
             'dungeonfloor_set__rewards__item__name',
         )
     )

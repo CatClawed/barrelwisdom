@@ -10,6 +10,21 @@ class A25PassiveSerializer(A25DefaultSerializer):
         model =  Passive
         fields = ['name', 'desc', 'val']
 
+class A25SkillSerializer(A25DefaultSerializer):
+    name = serializers.SerializerMethodField()
+    desc = serializers.SerializerMethodField()
+    elem = serializers.CharField(source='elem.slug')
+    area = serializers.SerializerMethodField()
+    class Meta:
+        model =  Skill
+        fields = ['name', 'desc', 'elem', 'area', 'wt',
+            'val0','val1','val2','val3','val4','val5','val6',
+            'break1','break2','break3','break4','break5',
+            'pow1','pow2','pow3','pow4','pow5',
+        ]
+    def get_area(self, obj):
+        return A25DefaultSerializer.get_text(self,obj.area)
+
 class A25CharaUpdateSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()
     title = serializers.SerializerMethodField()
@@ -37,6 +52,7 @@ class A25CharaListSerializer(A25DefaultSerializer):
 class A25CharaSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()
     title = serializers.SerializerMethodField()
+    limit = serializers.SerializerMethodField()
     role = serializers.CharField(source='role.slug')
     elem = serializers.CharField(source='elem.slug')
     color1 = serializers.CharField(source='color1.slug')
@@ -45,16 +61,20 @@ class A25CharaSerializer(A25DefaultSerializer):
     trait2 = A25TraitSimpleSerializer()
     trait3 = A25TraitSimpleSerializer()
     passives = A25PassiveSerializer(source='passive_set', many=True)
+    skills = A25SkillSerializer(source='skill_set', many=True)
     class Meta:
         model = Character
         fields = [
             'slug', 'name', 'title', 'role', 'elem', 'rarity', 'color1', 'color2',
             'trait1', 'trait2', 'trait3',
             'hp', 'spd', 'patk', 'pdfn', 'matk', 'mdfn',
-            "passives",
+            "passives", 'limit', 'skills'
         ]
     def get_title(self, obj):
         return A25DefaultSerializer.get_text(self,obj.title)
+    def get_limit(self, obj):
+        if obj.limit:
+            return A25DefaultSerializer.get_text(self,obj.limit)
 
 class A25MemoriaListSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()
@@ -68,10 +88,11 @@ class A25MemoriaSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()
     skill_name = serializers.SerializerMethodField()
     skill_desc = serializers.SerializerMethodField()
+    limit = serializers.SerializerMethodField()
     class Meta:
         model = Memoria
         fields = [
-            'slug', 'name', 'skill_name', 'skill_desc', 'rarity',
+            'slug', 'name', 'skill_name', 'skill_desc', 'rarity', 'limit',
             'lv1', 'lv2', 'lv3', 'lv4', 'lv5',
             "hp1", "spd1", "patk1", "pdef1", "matk1", "mdef1",
             "hp30", "spd30", "patk30", "pdef30", "matk30", "mdef30",
@@ -80,3 +101,6 @@ class A25MemoriaSerializer(A25DefaultSerializer):
         return A25DefaultSerializer.get_text(self,obj.skill_name)
     def get_skill_desc(self, obj):
         return A25DefaultSerializer.get_text(self,obj.skill_desc)
+    def get_limit(self, obj):
+        if obj.limit:
+            return A25DefaultSerializer.get_text(self,obj.limit)

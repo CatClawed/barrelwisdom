@@ -35,7 +35,6 @@ class Trait(models.Model):
     desc  = models.ForeignKey(Desc, on_delete=models.CASCADE)
     kind  = models.ForeignKey(Filterable, on_delete=models.CASCADE, related_name="trait_kind") # item_type
     cat   = models.ForeignKey(Filterable, on_delete=models.CASCADE, related_name="trait_cat" ) # combat_type
-    trans = models.ManyToManyField(Filterable, related_name="trait_transfer") # combat_type
 
     val1  = models.IntegerField()
     val2  = models.IntegerField()

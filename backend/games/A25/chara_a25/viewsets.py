@@ -34,6 +34,7 @@ class A25CharaViewSet(viewsets.ModelViewSet):
                     'name',
                     'role',
                     'elem',
+                    'limit',
                     'color1',
                     'color2',
                     'trait1__name',
@@ -45,7 +46,11 @@ class A25CharaViewSet(viewsets.ModelViewSet):
                 )
                 .prefetch_related(
                     'passive_set__name',
-                    'passive_set__desc'
+                    'passive_set__desc',
+                    'skill_set__name',
+                    'skill_set__desc',
+                    'skill_set__elem',
+                    'skill_set__area',
                 )
                 .get(slug=slug)
             )
@@ -90,6 +95,7 @@ class A25MemoriaViewSet(viewsets.ModelViewSet):
                 Memoria.objects
                 .select_related(
                     'name',
+                    'limit',
                     'skill_name',
                     'skill_desc',
                 )

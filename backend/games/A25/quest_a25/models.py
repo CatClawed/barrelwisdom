@@ -22,15 +22,11 @@ class Training(models.Model):
             "kind",
         ]
 
-class FieldEffect(models.Model):
-    name  = models.ForeignKey(Name, on_delete=models.CASCADE)
-    desc  = models.ForeignKey(Desc, on_delete=models.CASCADE)
-
 class Tower(models.Model):
     floor = models.IntegerField(unique=True)
     combat_level = models.IntegerField()
     rewards = models.ManyToManyField(Reward)
-    effects = models.ManyToManyField(FieldEffect)
+    effects = models.ManyToManyField(Desc)
 
 class ScoreBattleDifficulties(models.Model):
     difficulty = models.IntegerField(default=0)
@@ -66,7 +62,7 @@ class DungeonFloor(models.Model):
     order = models.IntegerField()
     rewards = models.ManyToManyField(Reward)
     combat_level = models.IntegerField()
-    effects = models.ManyToManyField(FieldEffect)
+    effects = models.ManyToManyField(Desc)
     class Meta:
         ordering = [
             "order",

@@ -40,7 +40,7 @@ export class A25ScoreBattleComponent extends SingleComponent implements OnInit {
       this.error = `404`;
     }
     else {
-      this.genericSEO(this.title, `All Score Battles in ${this.a25service.gameTitle}`);
+      this.genericSEO(this.title, `All Score Battles in ${this.gameTitle}`);
     }
   }
 

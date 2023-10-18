@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Character, Dungeon, Item, Memoria, NameLink, RecipeList, Research, ScoreBattle, Tower, Trait, Update } from '@app/views/games/A25/_services/a25.interface';
+import { Character, Dungeon, Item, Memoria, NameLink, RecipeTab, Research, ScoreBattle, Tower, Trait, Update } from '@app/views/games/A25/_services/a25.interface';
 import { environment } from '@environments/environment';
 import { Observable } from 'rxjs';
 
@@ -85,8 +85,8 @@ export class A25Service {
     return this.http.get<Item>(`${environment.apiUrl}/A25/synth/${slugname}/${language}/`);
   }
 
-  getRecipeList(language: string): Observable<RecipeList[]> {
-    return this.http.get<RecipeList[]>(`${environment.apiUrl}/A25/recipe/${language}/`);
+  getRecipeList(language: string): Observable<RecipeTab[]> {
+    return this.http.get<RecipeTab[]>(`${environment.apiUrl}/A25/recipe/${language}/`);
   }
 
   getCharaList(language: string): Observable<Character[]> {

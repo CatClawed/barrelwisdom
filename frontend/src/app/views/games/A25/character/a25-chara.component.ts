@@ -84,4 +84,18 @@ export class A25CharaComponent extends SingleComponent implements OnInit {
   getStat(stat: number, stars: number, level: number): number {
     return Math.floor(this.star_multiplier[stars] * (stat + stat / 10 * (level-1)));
   }
+
+  replaceDesc(skill) {
+    let desc = skill.desc;
+    if (skill.val0) {
+      desc = desc.replace('{0}', skill.val0/100);
+    }
+    if (skill.val1) {
+      desc = desc.replace('{1}', skill.val1/100);
+    }
+    if (skill.val2) {
+      desc = desc.replace('{2}', skill.val2/100);
+    }
+    return desc;
+  }
 } 

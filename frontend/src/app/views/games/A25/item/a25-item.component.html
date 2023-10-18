@@ -15,6 +15,7 @@
     <img loading="lazy" class="resleri-item-frame"
       style="height:256px;background-image:url({{imgURL}}svg/item-frame-{{item.rarity}}.svg)"
       src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
+    <p *ngIf="item.limit"><b>Event: </b>{{item.limit}}</p>
     <ng-container *ngIf="item.material">
       <p *ngIf="item.desc">{{item.desc}}</p>
       <ul *ngIf="item.material[0].traits">
@@ -33,6 +34,27 @@
             (click)="$event.preventDefault();"
             href="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">{{trait.name_ja}}</a>
         </li>
+      </ul>
+      <b *ngIf="item.quest">Locations:</b>
+      <ul>
+        <ng-container *ngFor="let quest of item.quest">
+          <li *ngIf="quest.dungeon">
+            <a routerLink="/{{gameURL}}/quests/dungeons/{{language}}"
+              fragment="{{language == 'en' ? quest.dungeon[0].name_en : quest.dungeon[0].name_ja}}">
+              {{language == 'en' ? quest.dungeon[0].name_en : quest.dungeon[0].name_ja}}
+              <ng-container>
+                {{language == 'en' ? ' (' + quest.dungeon[0].name_ja + ')' : ''}}
+              </ng-container>
+            </a>
+          </li>
+          <li *ngIf="quest.scorebattle">
+            Score Battle: 
+            <a routerLink="/{{gameURL}}/quests/scorebattles/{{language}}"
+              fragment="{{quest.scorebattle[0].scorebattle[0].chapter}}-{{quest.scorebattle[0].scorebattle[0].section}}">
+              {{quest.scorebattle[0].scorebattle[0].chapter}}-{{quest.scorebattle[0].scorebattle[0].section}} {{difficulties[quest.scorebattle[0].difficulty]}}
+            </a>
+          </li>
+        </ng-container>
       </ul>
     </ng-container>
     <ng-container *ngIf="item.combat">

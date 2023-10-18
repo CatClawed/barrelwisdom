@@ -27,10 +27,10 @@ export class A25TraitComponent extends SingleComponent implements OnInit {
         next: trait => {
           this.trait = trait;
           if (this.language == "en") {
-            this.genericSEO(this.trait.name_en, this.trait.desc);
+            this.genericSEO(this.trait.name_en, this.trait.desc.replace('{0}', this.trait.val[0] + ' ~ ' + this.trait.val[4]));
           }
           else {
-            this.genericSEO(this.trait.name_ja, this.trait.desc);
+            this.genericSEO(this.trait.name_ja, this.trait.desc.replace('{0}', this.trait.val[0] + ' ~ ' + this.trait.val[4]));
           }
         },
         error: error => {

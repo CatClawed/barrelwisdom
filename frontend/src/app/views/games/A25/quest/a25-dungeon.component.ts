@@ -34,7 +34,7 @@ export class A25DungeonComponent extends SingleComponent implements OnInit {
       this.error = `404`;
     }
     else {
-      this.genericSEO(this.title, `All dungeons in ${this.a25service.gameTitle}`);
+      this.genericSEO(this.title, `All dungeons in ${this.gameTitle}`);
     }
   }
 

@@ -51,6 +51,7 @@
       style="height:256px;background-image:url({{imgURL}}svg/item-frame-{{it.rarity}}.svg)"
       src="{{imgURL}}items/{{it.slug}}.webp" alt="{{it.name}}">
   </a>
+  <p *ngIf="it.limit"><b>Event: </b>{{it.limit}}</p>
   <ul *ngIf="it.material[0].traits">
     <li *ngFor="let trait of it.material[0].traits">
       <ng-template #traitPopover>

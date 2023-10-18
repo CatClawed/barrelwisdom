@@ -47,15 +47,33 @@ export interface Item {
     combat: Synth[];
     equip: Synth[];
     recipe: Recipe[];
+    limit: string;
+    quest: Quest[];
 }
 
-export interface DungeonName {
+export interface NameTrans {
     name_en: string;
     name_ja: string;
 }
 
 export interface Quest {
-    
+    dungeon: NameTrans[];
+    scorebattle: SB[];
+}
+
+export interface SB {
+    difficulty: number;
+    scorebattle: SBB[]
+}
+
+export interface SBB {
+    chapter: string;
+    section: string;
+}
+
+export interface DungeonName {
+    name_en: string;
+    name_ja: string;
 }
 
 export interface Recipe {
@@ -100,10 +118,20 @@ export interface RecipeList {
     x: number;
     y: number;
     book: number;
-    unlock1: string;
-    unlock2: string;
-    unlock3: string;
+    unlocks: string[];
     rarity: number;
+}
+
+export interface RecipePage {
+    desc: string;
+    min_x: number;
+    max_x: number;
+    recipes: RecipeList[];
+}
+
+export interface RecipeTab {
+    name: string;
+    pages: RecipePage[];
 }
 
 export interface Character {
@@ -124,7 +152,34 @@ export interface Character {
     pdfn: number;
     matk: number;
     mdfn: number;
+    limit: string;
     passives: Passive[];
+    skills: Skill[];
+}
+
+export interface Skill {
+    name: string;
+    desc: string;
+    elem: string;
+    area: string;
+    wt: number;
+    val0: number;
+    val1: number;
+    val2: number;
+    val3: number;
+    val4: number;
+    val5: number;
+    val6: number;
+    pow1: number;
+    pow2: number;
+    pow3: number;
+    pow4: number;
+    pow5: number;
+    break1: number;
+    break2: number;
+    break3: number;
+    break4: number;
+    break5: number;
 }
 
 export interface Passive {
@@ -156,6 +211,7 @@ export interface Memoria {
     pdef30: number;
     matk30: number;
     mdef30: number;
+    limit: string;
 }
 
 export interface Research {
@@ -183,13 +239,14 @@ export interface Reward {
 export interface DungeonFloor {
     order: number;
     combat_level: number;
-
+    
 }
 
 export interface Dungeon {
     name_en: string;
     name_ja: string;
     floors: DungeonFloor[];
+    effects: string[];
 }
 
 export interface ScoreDifficulties {
@@ -210,5 +267,6 @@ export interface ScoreBattle {
 export interface Tower {
     floor: number;
     combat_level: number;
-    reards: Reward[];
+    rewards: Reward[];
+    effects: string[];
 }

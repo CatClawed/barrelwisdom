@@ -125,6 +125,7 @@ def ImpResearch(row, index):
     obj.save()
 
 def ImpMemoria(row, index):
+    limited = Desc.objects.get(text_ja=row["Event"]) if row["Event"] else None
     name = checkName(
         text_ja = row["Name"],
         text_en = row["EN"]
@@ -164,6 +165,7 @@ def ImpMemoria(row, index):
         obj.matk30 =row["MATK 30"]
         obj.pdef30 =row["PDEF 30"]
         obj.mdef30 =row["MDEF 30"]
+        obj.limit=limited
         obj.save()
     except:
         print('Create', row["EN"])
@@ -190,10 +192,15 @@ def ImpMemoria(row, index):
             matk30 =row["MATK 30"],
             pdef30 =row["PDEF 30"],
             mdef30 =row["MDEF 30"],
+            limit=limited,
         )
         obj.save()
+        update = LatestUpdate.objects.first()
+        update.memoria.add(obj)
 
+"""Add new events first."""
 def ImpChara(row, index):
+    limited = Desc.objects.get(text_ja=row["Event"]) if row["Event"] else None
     name = checkName(
         text_ja = row["NAME"],
         text_en = row["NAME_EN"]
@@ -202,6 +209,7 @@ def ImpChara(row, index):
         text_ja = row["TITLE"],
         text_en = row["TITLE_EN"]
     )
+
     try:
         obj = Character.objects.get(slug=slug_me(f'{row["NAME_EN"]} {row["TITLE_EN"]}'))
         print('Updating', row["NAME_EN"], row["TITLE_EN"])
@@ -228,6 +236,7 @@ def ImpChara(row, index):
         obj.trait1=Trait.objects.get(name__text_ja=row["GIFT1"])
         obj.trait2=Trait.objects.get(name__text_ja=row["GIFT2"])
         obj.trait3=Trait.objects.get(name__text_ja=row["GIFT3"])
+        obj.limit=limited
         obj.save()
     except:
         print('Creating', row["NAME_EN"], row["TITLE_EN"])
@@ -257,8 +266,11 @@ def ImpChara(row, index):
             trait1=Trait.objects.get(name__text_ja=row["GIFT1"]),
             trait2=Trait.objects.get(name__text_ja=row["GIFT2"]),
             trait3=Trait.objects.get(name__text_ja=row["GIFT3"]),
+            limit=limited,
         )
         obj.save()
+        update = LatestUpdate.objects.first()
+        update.characters.add(obj)
 
 def ImpPassive(row, index):
     name = checkName(
@@ -295,30 +307,65 @@ def ImpSkill(row, index):
         text_ja = row["EFFECT"],
         text_en = row["EFFECT_EN"]
     )
-    obj = Skill(
-        char=Character.objects.get(name__text_ja=row["CHARACTER"], title__text_ja=row["TITLE"]),
-        name=name,
-        desc=desc,
-        elem=Filterable.objects.get(text_en=row["ATTLIBUTE"], kind="element"),
-        area=Name.objects.get(text_en=row["RANGE"]),
-        wt=row["WT"],
-        index=index,
-        val1=row["Val 1"],
-        val2=row["Val 2"] if row["Val 2"] else None,
-        pow1=row["Pow1"],
-        pow2=row["Pow2"],
-        pow3=row["Pow3"],
-        pow4=row["Pow4"],
-        pow5=row["Pow5"],
-        break1=row["Break1"],
-        break2=row["Break2"],
-        break3=row["Break3"],
-        break4=row["Break4"],
-        break5=row["Break5"],
-    )
-    #obj.save()
+    char = Character.objects.get(name__text_ja=row["CHARACTER"], title__text_ja=row["TITLE"])
+    try:
+        obj = Skill.objects.get(char=char,name=name)
+        print("Updating Skill", row["Name_EN"])
+        obj.desc=desc
+        obj.elem=Filterable.objects.get(text_en=row["ATTLIBUTE"], kind="element")
+        obj.area=Name.objects.get(text_en=row["RANGE"])
+        obj.wt=row["WT"]
+        obj.index=index
+        obj.val0=row["Val 0"] if row["Val 0"] else None
+        obj.val1=row["Val 1"] if row["Val 1"] else None
+        obj.val2=row["Val 2"] if row["Val 2"] else None
+        obj.val3=row["Val 3"] if row["Val 3"] else None
+        obj.val4=row["Val 4"] if row["Val 4"] else None
+        obj.val5=row["Val 5"] if row["Val 5"] else None
+        obj.val6=row["Val 6"] if row["Val 6"] else None
+        obj.pow1=row["Pow1"]
+        obj.pow2=row["Pow2"]
+        obj.pow3=row["Pow3"]
+        obj.pow4=row["Pow4"]
+        obj.pow5=row["Pow5"]
+        obj.break1=row["Break1"]
+        obj.break2=row["Break2"]
+        obj.break3=row["Break3"]
+        obj.break4=row["Break4"]
+        obj.break5=row["Break5"]
+        obj.save()
+    except Skill.DoesNotExist:
+        print("Creating Skill", row["Name_EN"])
+        obj = Skill(
+            char=char,
+            name=name,
+            desc=desc,
+            elem=Filterable.objects.get(text_en=row["ATTLIBUTE"], kind="element"),
+            area=Name.objects.get(text_en=row["RANGE"]),
+            wt=row["WT"],
+            index=index,
+            val0=row["Val 0"] if row["Val 0"] else None,
+            val1=row["Val 1"] if row["Val 1"] else None,
+            val2=row["Val 2"] if row["Val 2"] else None,
+            val3=row["Val 3"] if row["Val 3"] else None,
+            val4=row["Val 4"] if row["Val 4"] else None,
+            val5=row["Val 5"] if row["Val 5"] else None,
+            val6=row["Val 6"] if row["Val 6"] else None,
+            pow1=row["Pow1"],
+            pow2=row["Pow2"],
+            pow3=row["Pow3"],
+            pow4=row["Pow4"],
+            pow5=row["Pow5"],
+            break1=row["Break1"],
+            break2=row["Break2"],
+            break3=row["Break3"],
+            break4=row["Break4"],
+            break5=row["Break5"],
+        )
+        obj.save()
 
 def ImpMaterials(row, index):
+    limited = Desc.objects.get(text_ja=row["Event"]) if row["Event"] else None
     name = checkName(
         text_ja = row["JP"],
         text_en = row["EN"]
@@ -327,7 +374,6 @@ def ImpMaterials(row, index):
         text_ja = row["DESC"],
         text_en = row["DESC_EN"]
     )
-    
 
     try:
         obj = Item.objects.get(slug=slug_me(row["EN"]))
@@ -336,7 +382,7 @@ def ImpMaterials(row, index):
         obj.desc=desc
         obj.kind=Filterable.objects.get(slug="material")
         obj.rarity=row["Rarity"]
-        obj.limited=True if row["Limited"] else False
+        obj.limit=limited
         obj.save()
         obj = Material.objects.get(item=obj)
         obj.color=Filterable.objects.get(text_en=row["Color"]) if row["Color"] else None
@@ -350,7 +396,7 @@ def ImpMaterials(row, index):
             desc=desc,
             kind=Filterable.objects.get(slug="material"),
             rarity=row["Rarity"],
-            limited=True if row["Limited"] else False
+            limit=limited
         )
         item.save()
         obj = Material(
@@ -359,6 +405,8 @@ def ImpMaterials(row, index):
             kind=Filterable.objects.get(text_en=row["Type"]), # can be redundant
         )
         obj.save()
+        update = LatestUpdate.objects.first()
+        update.items.add(item)
 
         if row["Gift 1"]:
             obj.traits.add(Trait.objects.get(name__text_ja=row["Gift 1"]))
@@ -366,6 +414,7 @@ def ImpMaterials(row, index):
             obj.traits.add(Trait.objects.get(name__text_ja=row["Gift 2"]))
 
 def ImpEquipment(row, index):
+    limited = Desc.objects.get(text_ja=row["Event"]) if row["Event"] else None
     name = checkName(
         text_ja = row["NAME"],
         text_en = row["NAME_EN"]
@@ -382,6 +431,7 @@ def ImpEquipment(row, index):
         obj.desc=desc
         obj.kind=Filterable.objects.get(slug="equipment", kind="item_type")
         obj.rarity=row["RARITY"]
+        obj.limit=limited
         obj.save()
         obj = Equipment.objects.get(item=obj)
         obj.kind=Filterable.objects.get(text_en=row["TYPE"], kind="equipment")
@@ -408,7 +458,8 @@ def ImpEquipment(row, index):
             name=name,
             desc=desc,
             kind=Filterable.objects.get(slug="equipment", kind="item_type"),
-            rarity=row["RARITY"]
+            rarity=row["RARITY"],
+            limit=limited
         )
         item.save()
 
@@ -431,8 +482,11 @@ def ImpEquipment(row, index):
             bad_mdef  = row["Crap1"] if row["Crap1"] and row["Stat 1"] == "MDEF" else (row["Crap2"] if row["Crap2"] and row["Stat 2"] == "MDEF" else 0),
         )
         obj.save()
+        update = LatestUpdate.objects.first()
+        update.items.add(item)
 
 def ImpCombatItem(row, index):
+    limited = Desc.objects.get(text_ja=row["Event"]) if row["Event"] else None
     name = checkName(
         text_ja = row["NAME"],
         text_en = row["NAME_EN"]
@@ -448,6 +502,7 @@ def ImpCombatItem(row, index):
         obj.desc=desc
         obj.kind=Filterable.objects.get(slug="combat", kind="item_type")
         obj.rarity=row["RARITY"]
+        obj.limit=limited
         obj.save()
         obj = CombatItem.objects.get(item=obj)
         obj.kind=Filterable.objects.get(text_en=row["Filter Trait"], kind="combat_type")
@@ -466,7 +521,8 @@ def ImpCombatItem(row, index):
             name=name,
             desc=desc,
             kind=Filterable.objects.get(slug="combat", kind="item_type"),
-            rarity=row["RARITY"]
+            rarity=row["RARITY"],
+            limit=limited
         )
         item.save()
 
@@ -482,9 +538,32 @@ def ImpCombatItem(row, index):
             uses=row["USES"],
         )
         obj.save()
+        update = LatestUpdate.objects.first()
+        update.items.add(item)
     
 def ImpRecipe(row, index):
+    rStory = RecipeTab.objects.get(order=1)
+    rExtra = RecipeTab.objects.get(order=2)
+    rEvent = RecipeTab.objects.get(order=3)
     item = Item.objects.get(name__text_ja=row["NAME"])
+
+    try:
+        rPage = RecipePage.objects.get(book=row["Book"])
+    except:
+        print("Page Created", row["Book"])
+        tab = rStory
+        if row["Book"] in [5,6]:
+            tab = rExtra
+        if row["Book"] in [7]:
+            tab = rEvent
+        rPage = RecipePage(
+            book=row["Book"],
+            min_x=row["X"],
+            max_x=row["X"],
+            tab=tab,
+            desc=item.limit if item.limit else None,
+        )
+        rPage.save()
 
     unlock1 = checkDesc(
         text_ja = row["UNLOCK1"],
@@ -502,6 +581,7 @@ def ImpRecipe(row, index):
     try:
         obj = Recipe.objects.get(item=item)
         print("Updating", row["NAME"])
+        obj.page=rPage
         obj.item=item
         obj.x=row["X"]
         obj.y=row["Y"]
@@ -522,11 +602,14 @@ def ImpRecipe(row, index):
         obj.quant2=row["#2"] if row["#2"] else None
         obj.quant3=row["#3"] if row["#3"] else None
         obj.save()
-    except:
+        rPage.max_x=row["X"]
+        rPage.save()
+    except Recipe.DoesNotExist:
         print("Creating", row["NAME"])
 
         obj = Recipe(
             item=item,
+            page=rPage,
             x=row["X"],
             y=row["Y"],
             book=row["Book"],
@@ -547,6 +630,8 @@ def ImpRecipe(row, index):
             quant3=row["#3"] if row["#3"] else None,
         )
         obj.save()
+        rPage.max_x=row["X"]
+        rPage.save()
 
 def GetReward(item, order, quantity=0):
     obj = Reward(
@@ -699,11 +784,53 @@ def fix_traits():
         trait.save()
 
 
+def fix_recipes():
+    recipes = Recipe.objects.all()
+    rStory = RecipeTab.objects.get(order=1)
+    rExtra = RecipeTab.objects.get(order=2)
+    rEvent = RecipeTab.objects.get(order=3)
+
+    page = -1
+    rPage = None
+
+    for recipe in recipes:
+        if recipe.book != page and not recipe.page:
+            tab = rStory
+            if page in [4,6]:
+                tab = rExtra
+            if page in [7]:
+                tab = rEvent
+            page = recipe.book
+            rPage = RecipePage(
+                tab=rStory if page in [1,2,3,5] else rExtra,
+                min_x=recipe.x,
+                max_x=recipe.x
+            )
+            rPage.save()
+        if not recipe.page:
+            recipe.page = rPage
+            recipe.save()
+        else:
+            rpage = recipe.page
+        rPage.max_x = recipe.x
+        rPage.save()        
+
+
 """Run me first for any updates holy shit"""
 def createUpdate():
     obj = LatestUpdate()
     obj.save()
     print('Update Created')
+
+"""
+Checklist
+1. createUpdate
+2. add events
+3. trait -> char/item
+4. char -> skill/passive
+5. items -> recipes -> quest
+6. fuck quest
+"""
 
 #createUpdate()
 
@@ -713,6 +840,7 @@ def createUpdate():
 #import_generic(ImpMemoria)
 #import_generic(ImpChara)
 #import_generic(ImpPassive)
+#import_generic(ImpSkill)
 #import_generic(ImpMaterials)
 #import_generic(ImpEquipment)
 #import_generic(ImpCombatItem)

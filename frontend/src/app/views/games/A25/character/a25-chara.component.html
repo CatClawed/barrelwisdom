@@ -19,7 +19,8 @@
     <img loading="lazy"
       style="aspect-ratio:1;width:400px;"
       src="{{imgURL}}characters/full/{{chara.slug}}.webp" alt="{{chara.name}} {{chara.title}}" />
-    </div>
+  </div>
+  <p style="margin-top:1rem;" *ngIf="chara.limit"><b>Event: </b>{{chara.limit}}</p>
   <table class="tbl" style="margin-bottom:0;margin-top:1rem;">
     <tr class="table-dark-center"><th>Gifts</th></tr>
     <tr>
@@ -100,6 +101,20 @@
       <td style="width:25%;">{{stats['mdef'][language]}}</td>
       <td style="width:25%;">{{getStat(chara.mdfn, stars[starSlider.value-1], slider.value)}}</td>
     </tr>
+  </table>
+  <table class="tbl">
+    <tr class="table-dark-center"><th>Skills</th></tr>
+    <tr *ngFor="let skill of chara.skills">
+      <td>
+        <p><b>{{skill.name}}</b><br />
+        {{replaceDesc(skill)}}</p>
+        <p *ngIf="skill.wt"    ><b>WT: </b>{{skill.wt}}</p>
+        <p *ngIf="skill.area"  ><b>Range: </b>{{skill.area}}</p>
+        <p *ngIf="skill.pow1"  ><b>Power: </b>{{skill.pow1}} > {{skill.pow2}} > {{skill.pow3}} > {{skill.pow4}} > {{skill.pow5}}</p>
+        <p *ngIf="skill.break1"><b>Break: </b>{{skill.break1}} > {{skill.break2}} > {{skill.break3}} > {{skill.break4}} > {{skill.break5}}</p>
+      </td>
+    </tr>
+    <tr>
   </table>
   <table class="tbl">
     <tr class="table-dark-center"><th>Passives</th></tr>
