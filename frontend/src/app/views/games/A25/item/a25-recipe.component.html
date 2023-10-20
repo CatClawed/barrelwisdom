@@ -39,7 +39,9 @@
                         <ul *ngIf="recipe.unlocks">
                             <li *ngFor="let unlock of recipe.unlocks">{{unlock}}</li>
                         </ul>
-                        <a routerLink="/{{gameURL}}/items/synthesis/{{recipe.slug}}/{{language}}">More info...</a>
+                        <a routerLink="/{{gameURL}}/items/synthesis/{{recipe.slug}}/{{language}}" target="_blank">
+                            More info<i class="new-tab fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
                     </ng-template>
                     
                 </ng-container>

@@ -9,10 +9,15 @@ from scripts.util import import_generic, slug_me
 
 # python manage.py shell < scripts/import_a25_csv.py 
 
-def checkName(text_en, text_ja):
+# Some names can be changed, some can't (without manual input), hence volatile.
+def checkName(text_en, text_ja, volatile=False):
     if text_en and text_ja:
         try:
-            return Name.objects.get(text_ja=text_ja)
+            name = Name.objects.get(text_ja=text_ja)
+            if volatile:
+                name.text_en = text_en
+                name.save()
+            return name
         except:
             name = Name(
                 text_ja = text_ja,
@@ -25,11 +30,14 @@ def checkName(text_en, text_ja):
 def checkDesc(text_en, text_ja):
     if text_en and text_ja:
         try:
-            return Desc.objects.get(text_ja=text_ja.replace('<br>',''))
+            desc = Desc.objects.get(text_ja=text_ja.replace('\r', '').replace('\n', '<br>'))
+            desc.text_en = text_en.replace('\r', '').replace('\n', '<br>')
+            desc.save()
+            return desc
         except:
             desc = Desc(
-                text_ja = text_ja.replace('<br>',''),
-                text_en = text_en
+                text_ja = text_ja.replace('\r', '').replace('\n', '<br>'),
+                text_en = text_en.replace('\r', '').replace('\n', '<br>')
             )
             desc.save()
             return desc
@@ -133,7 +141,8 @@ def ImpMemoria(row, index):
 
     skill_name = checkName(
         text_ja = row["Skill jp"],
-        text_en = row["Skill en"]
+        text_en = row["Skill en"],
+        volatile=True
     )
 
     skill_desc = checkDesc(
@@ -275,7 +284,8 @@ def ImpChara(row, index):
 def ImpPassive(row, index):
     name = checkName(
         text_ja = row["Name"],
-        text_en = row["Name en"]
+        text_en = row["Name en"],
+        volatile=True
     )
     desc = checkDesc(
         text_ja = row["Desc"],
@@ -301,7 +311,8 @@ def ImpPassive(row, index):
 def ImpSkill(row, index):
     name = checkName(
         text_ja = row["Name"],
-        text_en = row["Name_EN"]
+        text_en = row["Name_EN"],
+        volatile=True
     )
     desc = checkDesc(
         text_ja = row["EFFECT"],
@@ -314,7 +325,7 @@ def ImpSkill(row, index):
         obj.desc=desc
         obj.elem=Filterable.objects.get(text_en=row["ATTLIBUTE"], kind="element")
         obj.area=Name.objects.get(text_en=row["RANGE"])
-        obj.wt=row["WT"]
+        obj.wt=int(row["WT"])+200
         obj.index=index
         obj.val0=row["Val 0"] if row["Val 0"] else None
         obj.val1=row["Val 1"] if row["Val 1"] else None
@@ -323,16 +334,16 @@ def ImpSkill(row, index):
         obj.val4=row["Val 4"] if row["Val 4"] else None
         obj.val5=row["Val 5"] if row["Val 5"] else None
         obj.val6=row["Val 6"] if row["Val 6"] else None
-        obj.pow1=row["Pow1"]
-        obj.pow2=row["Pow2"]
-        obj.pow3=row["Pow3"]
-        obj.pow4=row["Pow4"]
-        obj.pow5=row["Pow5"]
-        obj.break1=row["Break1"]
-        obj.break2=row["Break2"]
-        obj.break3=row["Break3"]
-        obj.break4=row["Break4"]
-        obj.break5=row["Break5"]
+        obj.pow1=row["Pow1"] if not row["Pow6"] else row["Pow3"]
+        obj.pow2=row["Pow2"] if not row["Pow6"] else row["Pow4"]
+        obj.pow3=row["Pow3"] if not row["Pow6"] else row["Pow5"]
+        obj.pow4=row["Pow4"] if not row["Pow6"] else row["Pow6"]
+        obj.pow5=row["Pow5"] if not row["Pow6"] else row["Pow7"]
+        obj.break1=row["Break1"] if not row["Break6"] else row["Break3"]
+        obj.break2=row["Break2"] if not row["Break6"] else row["Break4"]
+        obj.break3=row["Break3"] if not row["Break6"] else row["Break5"]
+        obj.break4=row["Break4"] if not row["Break6"] else row["Break6"]
+        obj.break5=row["Break5"] if not row["Break6"] else row["Break7"]
         obj.save()
     except Skill.DoesNotExist:
         print("Creating Skill", row["Name_EN"])
@@ -342,7 +353,7 @@ def ImpSkill(row, index):
             desc=desc,
             elem=Filterable.objects.get(text_en=row["ATTLIBUTE"], kind="element"),
             area=Name.objects.get(text_en=row["RANGE"]),
-            wt=row["WT"],
+            wt=int(row["WT"])+200,
             index=index,
             val0=row["Val 0"] if row["Val 0"] else None,
             val1=row["Val 1"] if row["Val 1"] else None,
@@ -351,16 +362,16 @@ def ImpSkill(row, index):
             val4=row["Val 4"] if row["Val 4"] else None,
             val5=row["Val 5"] if row["Val 5"] else None,
             val6=row["Val 6"] if row["Val 6"] else None,
-            pow1=row["Pow1"],
-            pow2=row["Pow2"],
-            pow3=row["Pow3"],
-            pow4=row["Pow4"],
-            pow5=row["Pow5"],
-            break1=row["Break1"],
-            break2=row["Break2"],
-            break3=row["Break3"],
-            break4=row["Break4"],
-            break5=row["Break5"],
+            pow1=row["Pow1"] if not row["Pow6"] else row["Pow3"],
+            pow2=row["Pow2"] if not row["Pow6"] else row["Pow4"],
+            pow3=row["Pow3"] if not row["Pow6"] else row["Pow5"],
+            pow4=row["Pow4"] if not row["Pow6"] else row["Pow6"],
+            pow5=row["Pow5"] if not row["Pow6"] else row["Pow7"],
+            break1=row["Break1"] if not row["Break6"] else row["Break3"],
+            break2=row["Break2"] if not row["Break6"] else row["Break4"],
+            break3=row["Break3"] if not row["Break6"] else row["Break5"],
+            break4=row["Break4"] if not row["Break6"] else row["Break6"],
+            break5=row["Break5"] if not row["Break6"] else row["Break7"],
         )
         obj.save()
 
@@ -843,7 +854,7 @@ Checklist
 #import_generic(ImpSkill)
 #import_generic(ImpMaterials)
 #import_generic(ImpEquipment)
-#import_generic(ImpCombatItem)
+import_generic(ImpCombatItem)
 #import_generic(ImpRecipe)
 #import_generic(ImpTraining)
 #import_generic(ImpScoreBattle)

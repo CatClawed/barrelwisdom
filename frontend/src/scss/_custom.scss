@@ -1,7 +1,5 @@
 // Font
 
-@import "variables";
-
 @font-face {
   font-family: 'Atelier';
    src: url('#{$atelier-font-path}/Atelier.woff2') format('woff2'),
@@ -690,7 +688,10 @@ img {
 
 // Game Data Pages
 
+// TODO: Standarize all image sizes so I can get away with only left/right margins
 .card-item-display {
+  //margin-left: auto;
+  //margin-right: auto;
   margin: auto;
 }
 
@@ -785,4 +786,10 @@ img {
 
 .tabs-overflow * {
   overflow: visible !important;
+}
+
+.new-tab {
+  font-size: calc(0.6rem + 0.1vw);
+  text-decoration: none;
+  padding-left: 0.2rem;
 }

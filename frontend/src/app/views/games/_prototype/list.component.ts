@@ -81,6 +81,28 @@ export abstract class ListComponent {
             })
     }
 
+    openDifferentModal(template: TemplateRef<any>, slug: string, destination: string, event?) {
+        if (event !== undefined) {
+            if (event.ctrlKey) {
+                return;
+            }
+            else {
+                event.preventDefault()
+            }
+        }
+        this.selected = slug;
+        this.location.go(`${this.gameURL}/${destination}/${slug}/${this.language}`);
+        this.modalRef = this.modalService.show(template);
+        this.modalRef.onHide
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((reason: string | any) => {
+                if (reason != "link") {
+                    this.location.go(`${this.gameURL}/${this.section}/${this.language}`);
+                    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+                }
+            })
+    }
+
     get f() { return this.pageForm.controls; }
 
     identify(index, item) {

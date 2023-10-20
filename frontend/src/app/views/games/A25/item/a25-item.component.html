@@ -17,12 +17,12 @@
       src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
     <p *ngIf="item.limit"><b>Event: </b>{{item.limit}}</p>
     <ng-container *ngIf="item.material">
-      <p *ngIf="item.desc">{{item.desc}}</p>
+      <p *ngIf="item.desc" [innerHTML]="item.desc"></p>
       <ul *ngIf="item.material[0].traits">
         <li *ngFor="let trait of item.material[0].traits">
           <ng-template #traitPopover>
             <p *ngIf="language == 'en'">{{trait.name_ja}}</p>
-            <p [innerHTML]="trait.desc.replace('{0}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
+            <p [innerHTML]="trait.desc.replace('{0}', trait.val1 + ' ~ ' + trait.val5).replace('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
             <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
           </ng-template>
           <a *ngIf="language == 'en'" [popover]="traitPopover"
@@ -112,15 +112,9 @@
         <tr>
           <td style="display:flex;">
             <div style="margin:auto;">
-              <img *ngFor="let i of item.recipe[0].chars" src="{{imgURL}}characters/face/{{i}}.webp" style="height:100px;width:100px;">
-            </div>
-          </td>
-        </tr>
-        <tr class="table-dark-center"><th>Colors</th></tr>
-        <tr>
-          <td style="display:flex;padding:0;">
-            <div style="margin:auto;font-size:5rem;">
-              <i *ngFor="let i of item.recipe[0].colors" style="color:{{a25service.colors[i]}};" class="fa-solid fa-diamond"></i>
+              <img *ngFor="let i of item.recipe[0].chars; let index = index"
+                src="{{imgURL}}characters/face/{{i}}.webp"
+                style="height:100px;width:100px;border-radius:50%;background-color:{{a25service.colors[item.recipe[0].colors[index]]}};">
             </div>
           </td>
         </tr>

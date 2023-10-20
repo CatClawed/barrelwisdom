@@ -29,7 +29,7 @@
             ],
             "styles": [
               "node_modules/bootstrap/scss/bootstrap.scss",
-              "src/scss/style.scss"
+              "src/scss/style-dev.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -51,6 +51,10 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
+              ],
+              "styles": [
+                "node_modules/bootstrap/scss/bootstrap.scss",
+                "src/scss/style.scss"
               ],
               "optimization": {
                 "scripts": true,

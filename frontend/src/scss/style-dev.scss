@@ -1,3 +1,5 @@
+// literally made this to separate the Atelier dev and Atelier live font paths.
+
 @use '@angular/material' as mat;
 
 // Custom Theming for Angular Material
@@ -37,7 +39,7 @@ $frontend-theme: mat.define-light-theme((
 
 // Variable overrides
 
-$atelier-font-path:        "/media/main/font/atelier" !default;
+$atelier-font-path:        "/media/main/font/atelier-dev" !default;
 $atelier-background-color: #eee !default;
 $atelier-li-margin-right:  0.4em !default;
 

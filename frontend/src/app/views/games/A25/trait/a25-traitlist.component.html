@@ -49,24 +49,27 @@
         <img *ngIf="!trt.trans_wep" style="width:3rem;" src="{{imgURL}}svg/combat.svg" />
       </div>
     </div>
-    <p [innerHTML]="trt.desc.replace('{0}', trt.val[0] + ' ~ ' + trt.val[4])"></p>
+    <p [innerHTML]="trt.desc.replace('{0}', trt.val[0] + ' ~ ' + trt.val[4]).replace('{1}', trt.val[0] + ' ~ ' + trt.val[4])"></p>
     <p>
       {{trt.val[0]}} > {{trt.val[1]}} > {{trt.val[2]}} > {{trt.val[3]}} > {{trt.val[4]}}
     </p>
     <b *ngIf=" trt.items">Item:</b>
     <ul *ngIf=" trt.items">
-      <li *ngFor="let item of trt.items"><a routerLink="/{{gameURL}}/items/materials/{{item.slug}}/{{language}}">{{item.name}}</a>
+      <li *ngFor="let item of trt.items">
+        <a (click)="openDifferentModal(itemModal, item.slug, 'items/materials', $event);" href="/{{gameURL}}/items/materials/{{item.slug}}/{{language}}">
+          {{item.name}}
+        </a>
     </ul>
     <b *ngIf=" trt.char1 || trt.char2 || trt.char3">Characters:</b>
     <ul *ngIf=" trt.char1 || trt.char2 || trt.char3">
       <li *ngFor="let char of trt.char1">
-        <a routerLink="/{{gameURL}}/characters/{{char.slug}}/{{language}}">{{char.name}} {{char.title}}</a>
+        <a (click)="openDifferentModal(charModal, char.slug, 'characters', $event);" href="/{{gameURL}}/characters/{{char.slug}}/{{language}}">{{char.name}} {{char.title}}</a>
       </li>
       <li *ngFor="let char of trt.char2">
-        <a routerLink="/{{gameURL}}/characters/{{char.slug}}/{{language}}">{{char.name}} {{char.title}}</a>
+        <a (click)="openDifferentModal(charModal, char.slug, 'characters', $event);" href="/{{gameURL}}/characters/{{char.slug}}/{{language}}">{{char.name}} {{char.title}}</a>
       </li>
       <li *ngFor="let char of trt.char3">
-        <a routerLink="/{{gameURL}}/characters/{{char.slug}}/{{language}}">{{char.name}} {{char.title}}</a>
+        <a (click)="openDifferentModal(charModal, char.slug, 'characters', $event);" href="/{{gameURL}}/characters/{{char.slug}}/{{language}}">{{char.name}} {{char.title}}</a>
       </li>
     </ul>
   </div>
@@ -84,6 +87,22 @@
       <i class="fas fa-times-circle"></i>
     </button>
     <a25-trait slug="{{selected}}" [showNav]="false"></a25-trait>
+  </div>
+</ng-template>
+<ng-template #itemModal>
+  <div class="modal-body">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <i class="fas fa-times-circle"></i>
+    </button>
+    <a25-item slug="{{selected}}" kind="materials" [showNav]="false"></a25-item>
+  </div>
+</ng-template>
+<ng-template #charModal>
+  <div class="modal-body">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <i class="fas fa-times-circle"></i>
+    </button>
+    <a25-chara slug="{{selected}}" [showNav]="false"></a25-chara>
   </div>
 </ng-template>
 </div>

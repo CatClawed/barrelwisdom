@@ -199,12 +199,6 @@ export interface Memoria {
     lv3: number;
     lv4: number;
     lv5: number;
-    hp1: number;
-    spd1: number;
-    patk1: number;
-    pdef1: number;
-    matk1: number;
-    mdef1: number;
     hp30: number;
     spd30: number;
     patk30: number;

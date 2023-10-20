@@ -26,7 +26,7 @@ export class A25ItemComponent extends SingleComponent implements OnInit {
     protected a25service: A25Service,
     protected seoService: SeoService) {
     super(route, seoService);
-    this.itemkind = this.route.snapshot.params.itemkind ? this.route.snapshot.params.itemkind : '';
+    this.itemkind = this.route.snapshot.params.itemkind ? this.route.snapshot.params.itemkind : 'materials';
     this.gameService(this.a25service, `items/${this.itemkind}`);
   }
   ngOnInit(): void {
@@ -38,7 +38,7 @@ export class A25ItemComponent extends SingleComponent implements OnInit {
           this.error = (item.equip || item.combat) ? `404` : ``
           this.item = item;
           this.seoImage = `${this.imgURL}items/${this.item.slug}.webp`
-          this.genericSEO(this.item.name, this.item.desc ? this.item.desc : `Material from ${this.gameTitle}`);
+          this.genericSEO(this.item.name, this.item.desc ? this.item.desc.replace('<br>', ' -- ') : `Material from ${this.gameTitle}`);
         },   error: error => {
           this.error = `${error.status}`;
         }
@@ -51,7 +51,7 @@ export class A25ItemComponent extends SingleComponent implements OnInit {
           this.error = item.material ? `404` : ``
           this.item = item;
           this.seoImage = `${this.imgURL}items/${this.item.slug}.webp`
-          this.genericSEO(this.item.name, this.replaceVal(item));
+          this.genericSEO(this.item.name, this.replaceVal(item).replace('<br>', ' -- '));
         },   error: error => {
           this.error = `${error.status}`;
         }
@@ -65,14 +65,14 @@ export class A25ItemComponent extends SingleComponent implements OnInit {
   replaceVal(item: Item): string {
     if (item.equip) {
         if (item.equip[0].val_bad) {
-            return item.desc.replace("{0}", `${item.equip[0].val_bad/100} ~ ${item.equip[0].val_good/100}`)
+            return item.desc.replace("{0}", `${item.equip[0].val_bad/100} ~ ${item.equip[0].val_good/100}`).replace("{1}", `${item.equip[0].val_bad/100} ~ ${item.equip[0].val_good/100}`)
         }
-        return item.desc.replace("{0}", ` ${item.equip[0].val_good/100}`)
+        return item.desc.replace("{0}", ` ${item.equip[0].val_good/100}`).replace("{1}", ` ${item.equip[0].val_good/100}`)
     }
     if (item.combat[0].val_bad) {
-        return item.desc.replace("{0}", `${item.combat[0].val_bad/100} ~ ${item.combat[0].val_good/100}`)
+        return item.desc.replace("{0}", `${item.combat[0].val_bad/100} ~ ${item.combat[0].val_good/100}`).replace("{1}", `${item.combat[0].val_bad/100} ~ ${item.combat[0].val_good/100}`)
     }
-    return item.desc.replace("{0}", ` ${item.combat[0].val_good/100}`)
+    return item.desc.replace("{0}", ` ${item.combat[0].val_good/100}`).replace("{1}", ` ${item.combat[0].val_good/100}`)
   }
 
   insertStyle(item: Item): string {

@@ -20,6 +20,9 @@ import { A25CharalistComponent } from './a25-charalist.component';
     declarations: [
         A25CharalistComponent,
         A25CharaComponent,
+    ],
+    exports: [
+      A25CharaComponent
     ]
   })
   export class A25CharaModule {}

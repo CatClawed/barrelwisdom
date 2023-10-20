@@ -16,7 +16,7 @@ export class A25CharaComponent extends SingleComponent implements OnInit {
   constructor(
     protected route: ActivatedRoute,
     protected seoService: SeoService,
-    private a25service: A25Service,) {
+    protected a25service: A25Service,) {
     super(route, seoService);
     this.gameService(this.a25service, 'charas');
   }

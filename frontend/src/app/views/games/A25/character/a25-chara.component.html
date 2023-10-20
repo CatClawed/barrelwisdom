@@ -25,6 +25,10 @@
     <tr class="table-dark-center"><th>Gifts</th></tr>
     <tr>
       <td>
+        <div style="display:inline-flex;float:right;">
+          <div style="width:0;height:0;border-top:2.5rem solid transparent;border-right:2.5rem solid {{a25service.colors[chara.color1]}};border-bottom:2.5rem solid transparent;"></div>
+          <div style="width:0;height:0;border-top:2.5rem solid transparent;border-left:2.5rem solid {{a25service.colors[chara.color2]}};border-bottom:2.5rem solid transparent;"></div>
+        </div>
         <ul>
           <li>
             <a href="/{{gameURL}}/traits/{{chara.trait1.slug}}/{{language}}"
@@ -68,7 +72,7 @@
             style="width:100%;"
             [max]="60"
             [min]="1">
-            <input matSliderThumb #slider>
+            <input matSliderThumb value="60" #slider>
           </mat-slider>          
         </div>
         <div style="width:45%;float:right;">
@@ -78,7 +82,7 @@
             style="width:100%;"
             [max]="7"
             [min]="chara.rarity">
-            <input matSliderThumb #starSlider>
+            <input matSliderThumb value="7" #starSlider>
           </mat-slider>          
         </div>
       </td>
@@ -101,13 +105,20 @@
       <td style="width:25%;">{{stats['mdef'][language]}}</td>
       <td style="width:25%;">{{getStat(chara.mdfn, stars[starSlider.value-1], slider.value)}}</td>
     </tr>
+    <tr>
+      <td colspan="4">Does not include Grow Board</td>
+    </tr>
   </table>
   <table class="tbl">
     <tr class="table-dark-center"><th>Skills</th></tr>
     <tr *ngFor="let skill of chara.skills">
       <td>
-        <p><b>{{skill.name}}</b><br />
-        {{replaceDesc(skill)}}</p>
+        <b>{{skill.name}}</b>
+          <div style="float:right;width:3rem;height:3rem;background-color:{{elements[skill.elem]}};color:white;display:flex;justify-content:center;align-items:center;border-radius:50%;">
+            <i class="atelier atelier-np atelier-resleri-{{skill.elem}}"></i>
+          </div>
+          <p [innerHTML]="replaceDesc(skill)"></p>
+        
         <p *ngIf="skill.wt"    ><b>WT: </b>{{skill.wt}}</p>
         <p *ngIf="skill.area"  ><b>Range: </b>{{skill.area}}</p>
         <p *ngIf="skill.pow1"  ><b>Power: </b>{{skill.pow1}} > {{skill.pow2}} > {{skill.pow3}} > {{skill.pow4}} > {{skill.pow5}}</p>
@@ -135,7 +146,7 @@
 </div>
 <ng-template #traitPopover let-trait="trait">
   <p *ngIf="language == 'en'">{{trait.name_ja}}</p>
-  <p [innerHTML]="trait.desc.replace('{0}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
+  <p [innerHTML]="trait.desc.replace('{0}', trait.val1 + ' ~ ' + trait.val5).replace('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
   <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
 </ng-template>
 <language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>

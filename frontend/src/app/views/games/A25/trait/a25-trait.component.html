@@ -18,7 +18,7 @@
       <img *ngIf="!trait.trans_wep" style="width:3rem;" src="{{imgURL}}svg/combat.svg" />
     </div>
   </div>
-  <p [innerHTML]="trait.desc.replace('{0}', trait.val[0] + ' ~ ' + trait.val[4])"></p>
+  <p [innerHTML]="trait.desc.replace('{0}', trait.val[0] + ' ~ ' + trait.val[4]).replace('{1}', trait.val[0] + ' ~ ' + trait.val[4])"></p>
   <p>
     {{trait.val[0]}} > {{trait.val[1]}} > {{trait.val[2]}} > {{trait.val[3]}} > {{trait.val[4]}}
   </p>

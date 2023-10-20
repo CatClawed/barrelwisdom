@@ -167,8 +167,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Database.wsgi.application'
 
-# may later replace with docker stuff, not sure
-# comment out host in production for now?
 SECRET_KEY = os.environ['SECRET_KEY']
 DATABASES = {
     'default': {

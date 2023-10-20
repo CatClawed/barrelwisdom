@@ -28,6 +28,9 @@ import { A25SynthesisListComponent } from './a25-synthlist.component';
     A25ItemComponent,
     A25SynthesisListComponent,
     A25RecipeComponent
+  ],
+  exports: [
+    A25ItemComponent
   ]
 })
 export class A25ItemModule { }
