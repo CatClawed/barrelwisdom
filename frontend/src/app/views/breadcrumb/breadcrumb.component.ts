@@ -11,8 +11,5 @@ export class BreadcrumbComponent {
 
   @Input()
   current = "";
-  
-  constructor() {
-  }
 
 }

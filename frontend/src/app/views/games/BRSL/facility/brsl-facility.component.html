@@ -13,12 +13,6 @@
         <td style="vertical-align:middle; padding:0;border-bottom:1px solid #c8c3d3;"><img src="/media/games/second-light/characters/{{facility.char}}.webp" alt=""></td>
       </tr>
     </table>
-    <!--
-    <span *ngIf="!facility.size"  >Small</span>
-    <span *ngIf="facility.size==2">Medium</span>
-    <span *ngIf="facility.size==3">Large</span>
-    <span *ngIf="facility.size>3" >Other</span>
-    -->
     <ng-container *ngIf="facility.facilityeffline_set">
       <table class="tbl table-shrink">
         <tr class="table-dark-center"><th colspan=2>Effects</th></tr>

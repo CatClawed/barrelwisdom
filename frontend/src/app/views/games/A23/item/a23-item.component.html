@@ -20,7 +20,7 @@
         <i *ngIf="item.kind == 'amulet'"     class="atelier atelier-np atelier-sophie2-category-talismans"></i>
         <i *ngIf="item.kind == 'important'"  class="atelier atelier-np atelier-ryza2-category-key-items"></i>
         <ng-container *ngIf="item.char">
-          <br /><img style="max-height:3em;" src="/media/games/sophie2/characters/{{item.char}}.webp">
+          <br /><img style="max-height:3em;" src="/media/games/sophie2/characters/{{item.char}}.webp" alt="{{item.char}}">
         </ng-container>
         <ng-container *ngIf="item.isDLC">
           <br /><span class="badge bg-secondary">DLC</span>
@@ -33,7 +33,7 @@
       <table>
         <tr *ngIf="item.char1">
           <td style="width:10%">
-            <img style="max-height:3em;" src="/media/games/sophie2/characters/{{item.char1}}.webp">
+            <img style="max-height:3em;" src="/media/games/sophie2/characters/{{item.char1}}.webp" alt="{{item.char1}}">
           </td>
           <td>
             {{item.desc1}}
@@ -41,7 +41,7 @@
         </tr>
         <tr *ngIf="item.char2">
           <td style="width:10%">
-            <img style="max-height:3em;" src="/media/games/sophie2/characters/{{item.char2}}.webp">
+            <img style="max-height:3em;" src="/media/games/sophie2/characters/{{item.char2}}.webp" alt="{{item.char2}}">
           </td>
           <td>
             {{item.desc2}}
@@ -49,7 +49,7 @@
         </tr>
         <tr *ngIf="item.char3">
           <td style="width:10%">
-            <img style="max-height:3em;" src="/media/games/sophie2/characters/{{item.char3}}.webp">
+            <img style="max-height:3em;" src="/media/games/sophie2/characters/{{item.char3}}.webp" alt="{{item.char3}}">
           </td>
           <td>
             {{item.desc3}}
@@ -57,7 +57,7 @@
         </tr>
         <tr *ngIf="item.char4">
           <td style="width:10%">
-            <img style="max-height:3em;" src="/media/games/sophie2/characters/{{item.char4}}.webp">
+            <img style="max-height:3em;" src="/media/games/sophie2/characters/{{item.char4}}.webp" alt="{{item.char4}}">
           </td>
           <td>
             {{item.desc4}}
@@ -193,7 +193,7 @@
       </table>
       <table *ngIf="item.chars" class="tbl">
         <tr class="table-dark-center"><th>Characters</th></tr>
-        <tr><td><img *ngFor="let char of item.chars" src="{{imgURL}}characters/{{char.slug}}.webp" style="max-height:3em;"></td></tr>
+        <tr><td><img *ngFor="let char of item.chars" src="{{imgURL}}characters/{{char.slug}}.webp" alt="{{char.slug}}" style="max-height:3em;"></td></tr>
       </table>
 
     </div>

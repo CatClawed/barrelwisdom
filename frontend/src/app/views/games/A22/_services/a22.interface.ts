@@ -235,16 +235,6 @@ export interface MonsterFull {
     spd_rank: number;
     note: string;
     desc: string;
-    //ailment1: number;
-    //ailment2: number;
-    //ailment3: number;
-    //ailment4: number;
-    //ailment5: number;
-    //ailment6: number;
-    //ailment7: number;
-    //ailment8: number;
-    //ailment9: number;
-    //ailment10: number;
 }
 
 /* Locations */

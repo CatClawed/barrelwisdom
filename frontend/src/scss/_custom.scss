@@ -2,8 +2,8 @@
 
 @font-face {
   font-family: 'Atelier';
-   src: url('#{$atelier-font-path}/Atelier.woff2') format('woff2'),
-    url('#{$atelier-font-path}/Atelier.woff') format('woff');
+  src: url('#{$atelier-font-path}/Atelier.woff2') format('woff2'),
+  url('#{$atelier-font-path}/Atelier.woff') format('woff');
 
   font-weight: normal;
   font-style: normal;
@@ -31,6 +31,7 @@
   font-size: 1em;
   padding-right: 0;
 }
+
 .atelier-lg {
   font-size: 2.4em;
   padding-right: 0.5em;
@@ -43,14 +44,15 @@
 }
 
 .atelier-np {
-  padding-right:0;
+  padding-right: 0;
 }
 
 @import "icons";
 
 // generic stuff
 
-a:active, a:focus {
+a:active,
+a:focus {
   outline: 0;
   border: none;
   -moz-outline-style: none;
@@ -94,21 +96,21 @@ a.badge:hover {
 }
 
 .modal-body {
-  position:absolute !important;
+  position: absolute !important;
   width: 55%;
 }
 
 @media screen and (max-width: 800px) {
   .modal-body {
-    width:100% !important;
-    padding:0 !important;
+    width: 100% !important;
+    padding: 0 !important;
   }
 }
 
 @media screen and (max-width: 800px) {
   .modal-dialog {
     max-width: 100% !important;
-    margin:0.5em !important;
+    margin: 0.5em !important;
     font-size: calc(1rem + 0.1vw) !important;
   }
 }
@@ -127,7 +129,7 @@ a.badge:hover {
   border: none !important;
   align-items: center;
 }
- 
+
 .close {
   text-shadow: none;
   color: white;
@@ -148,7 +150,7 @@ a.badge:hover {
   min-height: 120px;
 }
 
-.card > *:last-child {
+.card>*:last-child {
   margin-bottom: 0 !important;
 }
 
@@ -158,18 +160,19 @@ a.badge:hover {
 }
 
 .card-title {
-  > a {
-    color:black;
+  >a {
+    color: black;
   }
-  > a:hover {
-    color:black !important;
+
+  >a:hover {
+    color: black !important;
   }
 }
 
 .card-icon-position {
-  position:absolute;
-  top:1em;
-  right:1em;
+  position: absolute;
+  top: 1em;
+  right: 1em;
   text-align: center;
 }
 
@@ -178,11 +181,11 @@ a.badge:hover {
 }
 
 .card-read-more-position {
-  position:absolute !important;
-  bottom:1em !important;
-  right:1em !important;
+  position: absolute !important;
+  bottom: 1em !important;
+  right: 1em !important;
   box-shadow: none !important;
-  font-size:20px !important;
+  font-size: 20px !important;
 }
 
 /* Background pattern from Toptal Subtle Patterns */
@@ -193,7 +196,8 @@ a.badge:hover {
   margin-bottom: 1rem;
 }
 
-.tbl td, .tbl th {
+.tbl td,
+.tbl th {
   padding: 0.75rem;
   vertical-align: top;
   border-top: 1px solid #c8ced3;
@@ -205,27 +209,30 @@ a.badge:hover {
   }
 }
 
-.border td, th {
+.border td,
+th {
   border: 1px solid lightgray;
 }
 
 .table-item-data {
-  display:block;
+  display: block;
   width: fit-content;
 
-  > tr {
+  >tr {
     vertical-align: top;
   }
-  > tr, span {
+
+  >tr,
+  span {
     vertical-align: top;
-    padding-left:0.5rem;
+    padding-left: 0.5rem;
   }
 }
 
 .table-dark-center {
-  > th {
+  >th {
     text-align: center;
-    background-color:rgba(211, 211, 211, 0.3);
+    background-color: rgba(211, 211, 211, 0.3);
   }
 }
 
@@ -245,15 +252,15 @@ a.badge:hover {
 
 @media screen and (max-width: 1280px) {
   .main {
-  margin: 55px 0 0 200px;
-  width: 100%;
+    margin: 55px 0 0 200px;
+    width: 100%;
   }
 }
 
 @media screen and (max-width: 800px) {
   .main {
-  margin: 55px 0 0 0;
-  width: 100%;
+    margin: 55px 0 0 0;
+    width: 100%;
   }
 }
 
@@ -284,7 +291,7 @@ h4 {
 
 // tabs
 
-.tab-content > .tab-pane {
+.tab-content>.tab-pane {
   border-left: 1px solid gray;
   border-right: 1px solid gray;
   border-bottom: 1px solid gray;
@@ -318,44 +325,46 @@ h4 {
   border-bottom: transparent !important;
 }
 
-.mat-flat-button.mat-accent, .mat-raised-button.mat-accent, .mat-fab.mat-accent, .mat-mini-fab.mat-accent {
+.mat-flat-button.mat-accent,
+.mat-raised-button.mat-accent,
+.mat-fab.mat-accent,
+.mat-mini-fab.mat-accent {
   background-color: $navbar !important;
 }
 
-.mat-flat-button.mat-accent, .mat-raised-button.mat-accent, .mat-fab.mat-accent, .mat-mini-fab.mat-accent:hover {
+.mat-flat-button.mat-accent,
+.mat-raised-button.mat-accent,
+.mat-fab.mat-accent,
+.mat-mini-fab.mat-accent:hover {
   background-color: #B8947B !important;
-}
-
-.tooltip {
-  font-size: calc(1rem + 0.1vw) !important;
 }
 
 .popover {
   font-size: calc(1rem + 0.1vw) !important;
+
+  // ngx bootstrap bandaid
+  position: absolute;
+  top: 0;
+  left: 0 #{"/* rtl:ignore */"};
 }
 
 .popover-header {
   font-size: calc(1.2rem + 0.1vw) !important;
 }
 
-// ngx bootstrap bandaid
-.popover {
+
+.popover-arrow {
   position: absolute;
-  top: 0;
-  left: 0 #{"/* rtl:ignore */"};
-  }
-  
-  .popover-arrow {
+}
+
+.tooltip {
+  font-size: calc(1rem + 0.1vw) !important;
   position: absolute;
-  }
-  
-  .tooltip {
+}
+
+.tooltip-arrow {
   position: absolute;
-  }
-  
-  .tooltip-arrow {
-  position: absolute;
-  }
+}
 
 .table-of-contents {
   border: 2px solid lightgray;
@@ -380,6 +389,7 @@ h4 {
 a {
   text-decoration: none;
 }
+
 a:hover {
   text-decoration: underline;
 }
@@ -387,9 +397,8 @@ a:hover {
 .navigation {
   position: fixed;
   z-index: 1000;
-  background-color: $navbar !important;
   border-bottom: transparent !important;
-  background: linear-gradient(0deg, rgba(71,58,48,1) 0%, rgba(94,76,63,0.8687675753895308) 100%);
+  background: $navbar linear-gradient(0deg, rgba(71, 58, 48, 1) 0%, rgba(94, 76, 63, 0.8687675753895308) 100%);
   height: 55px;
   padding: 0;
   width: 100%;
@@ -407,16 +416,16 @@ a:hover {
 }
 
 .nav-items {
-  color:white;
-  padding-left:1rem;
-  padding-right:1rem;
-  padding-top:0.5rem;
-  padding-bottom:0.5rem;
-  font-size:1rem;
+  color: white;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 1rem;
 }
 
 .nav-items:hover {
-  color:white;
+  color: white;
   text-decoration: none;
   background-color: #2f1d12;
   border-radius: 0.25rem;
@@ -432,6 +441,7 @@ a:hover {
   .nav-items {
     display: none;
   }
+
   .navbrand {
     position: absolute;
     left: 50%;
@@ -458,13 +468,13 @@ a:hover {
   display: flex;
   align-items: center;
 
-  > i {
+  >i {
     margin-right: 0.5rem;
     width: 1.3rem;
-    text-align:center;
+    text-align: center;
   }
 
-  > b {
+  >b {
     margin-left: auto;
   }
 }
@@ -495,7 +505,7 @@ a:hover {
 }
 
 .mat-drawer-inner-container {
-  -ms-overflow-style: none; 
+  -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
@@ -534,36 +544,36 @@ body {
 // Main page
 
 .main-thumb img {
-    width: 300px;
+  width: 300px;
 }
 
 .main-thumb div.thumb {
-    background: white;
-    max-width: 300px;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-    height: 100%;
+  background: white;
+  max-width: 300px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
 }
 
 .main-thumb div.spacer {
-    margin-top: 2em;
+  margin-top: 2em;
 }
 
 .main-thumb p {
-    padding-right: 10px;
-    padding-left: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 
 .main-thumb div.headline {
-    padding-right: 10px;
-    padding-left: 10px;
-    font-size: 1.5rem;
-    font-weight: 500;
+  padding-right: 10px;
+  padding-left: 10px;
+  font-size: 1.5rem;
+  font-weight: 500;
 }
 
 ul.pagination {
-    margin-top: 2em;
+  margin-top: 2em;
 }
 
 .headline {
@@ -649,7 +659,7 @@ ul.pagination {
   border: 1px lightgray solid;
   padding: 0.5rem;
   text-align: center;
-  background-color:rgba(211, 211, 211, 0.3);
+  background-color: rgba(211, 211, 211, 0.3);
   height: 2rem;
 }
 
@@ -658,7 +668,8 @@ ul.pagination {
   padding: 0.3rem;
 }
 
-.table-border th, .table-border td {
+.table-border th,
+.table-border td {
   border: 1px solid #c8ced3;
 }
 
@@ -707,10 +718,11 @@ img {
 }
 
 .trait-color {
-  color:lightgray;
+  color: lightgray;
 }
+
 .trait-colortrue {
-  color:black;
+  color: black;
 }
 
 .svg-color {
@@ -720,8 +732,8 @@ img {
 // Create page
 
 .mat-chip.mat-primary {
-    background-color: #20a8d8;
-    color: white;
+  background-color: #20a8d8;
+  color: white;
 }
 
 // Settings page
@@ -749,7 +761,7 @@ img {
 .item-grid {
   display: grid;
   grid-gap: 1rem;
-  margin-bottom:1rem;
+  margin-bottom: 1rem;
 }
 
 @media screen and (min-width: 800px) {

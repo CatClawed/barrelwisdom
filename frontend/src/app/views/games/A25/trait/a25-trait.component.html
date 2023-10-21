@@ -14,8 +14,8 @@
       </ng-container>
     </h4>
     <div class="card-icon-position">
-      <img *ngIf="trait.trans_wep"  style="width:3rem;" src="{{imgURL}}svg/equipment.svg" />
-      <img *ngIf="!trait.trans_wep" style="width:3rem;" src="{{imgURL}}svg/combat.svg" />
+      <img *ngIf="trait.trans_wep"  style="width:3rem;" src="{{imgURL}}svg/equipment.svg" alt="equipment"/>
+      <img *ngIf="!trait.trans_wep" style="width:3rem;" src="{{imgURL}}svg/combat.svg"    alt="combat"/>
     </div>
   </div>
   <p [innerHTML]="trait.desc.replace('{0}', trait.val[0] + ' ~ ' + trait.val[4]).replace('{1}', trait.val[0] + ' ~ ' + trait.val[4])"></p>
@@ -39,11 +39,11 @@
     </li>
   </ul>
   <div class="flex bottom" style="text-align:center;">
-    <img src="{{imgURL}}svg/attack.svg"    style="width:2rem;" class="{{!trait.trans_atk  ?  'svg-color' : ''}}"/>
-    <img src="{{imgURL}}svg/healing.svg"   style="width:2rem;" class="{{!trait.trans_heal ? 'svg-color' : ''}}"/>
-    <img src="{{imgURL}}svg/buff.svg"      style="width:2rem;" class="{{!trait.trans_buff ? 'svg-color' : ''}}"/>
-    <img src="{{imgURL}}svg/debuff.svg"    style="width:2rem;" class="{{!trait.trans_dbf  ? 'svg-color' : ''}}"/>
-    <img src="{{imgURL}}svg/equipment.svg" style="width:2rem;" class="{{!trait.trans_wep  ? 'svg-color' : ''}}"/>
+    <img src="{{imgURL}}svg/attack.svg"    alt="attack"    style="width:2rem;" class="{{!trait.trans_atk  ?  'svg-color' : ''}}"/>
+    <img src="{{imgURL}}svg/healing.svg"   alt="healing"   style="width:2rem;" class="{{!trait.trans_heal ? 'svg-color' : ''}}"/>
+    <img src="{{imgURL}}svg/buff.svg"      alt="buff"      style="width:2rem;" class="{{!trait.trans_buff ? 'svg-color' : ''}}"/>
+    <img src="{{imgURL}}svg/debuff.svg"    alt="debuff"    style="width:2rem;" class="{{!trait.trans_dbf  ? 'svg-color' : ''}}"/>
+    <img src="{{imgURL}}svg/equipment.svg" alt="equipment" style="width:2rem;" class="{{!trait.trans_wep  ? 'svg-color' : ''}}"/>
   </div>
 </div>
 <language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>

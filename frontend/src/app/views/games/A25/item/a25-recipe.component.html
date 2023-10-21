@@ -33,6 +33,7 @@
                         [popoverTitle]="recipe.name">
                         <img class="resleri-item-frame" loading="lazy"
                             style="background-image:url({{imgURL}}svg/item-frame-{{recipe.rarity}}.svg)"
+                            alt="{{recipe.name}}"
                             src="{{imgURL}}items/{{recipe.slug}}.webp">
                     </a>
                     <ng-template #recipePopover>

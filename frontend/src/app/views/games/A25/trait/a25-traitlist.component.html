@@ -45,8 +45,8 @@
         </a>
       </h4>
       <div class="card-icon-position">
-        <img *ngIf="trt.trans_wep"  style="width:3rem;" src="{{imgURL}}svg/equipment.svg" />
-        <img *ngIf="!trt.trans_wep" style="width:3rem;" src="{{imgURL}}svg/combat.svg" />
+        <img *ngIf="trt.trans_wep"  style="width:3rem;" src="{{imgURL}}svg/equipment.svg" alt="equipment"/>
+        <img *ngIf="!trt.trans_wep" style="width:3rem;" src="{{imgURL}}svg/combat.svg"    alt="combat"/>
       </div>
     </div>
     <p [innerHTML]="trt.desc.replace('{0}', trt.val[0] + ' ~ ' + trt.val[4]).replace('{1}', trt.val[0] + ' ~ ' + trt.val[4])"></p>
@@ -74,11 +74,11 @@
     </ul>
   </div>
   <div class="flex bottom" style="text-align:center;">
-    <img src="{{imgURL}}svg/attack.svg"    style="width:2rem;" class="{{!trt.trans_atk  ?  'svg-color' : ''}}"/>
-    <img src="{{imgURL}}svg/healing.svg"   style="width:2rem;" class="{{!trt.trans_heal ? 'svg-color' : ''}}"/>
-    <img src="{{imgURL}}svg/buff.svg"      style="width:2rem;" class="{{!trt.trans_buff ? 'svg-color' : ''}}"/>
-    <img src="{{imgURL}}svg/debuff.svg"    style="width:2rem;" class="{{!trt.trans_dbf  ? 'svg-color' : ''}}"/>
-    <img src="{{imgURL}}svg/equipment.svg" style="width:2rem;" class="{{!trt.trans_wep  ? 'svg-color' : ''}}"/>
+    <img src="{{imgURL}}svg/attack.svg"    alt="attack"    style="width:2rem;" class="{{!trt.trans_atk  ?  'svg-color' : ''}}"/>
+    <img src="{{imgURL}}svg/healing.svg"   alt="healing"   style="width:2rem;" class="{{!trt.trans_heal ? 'svg-color' : ''}}"/>
+    <img src="{{imgURL}}svg/buff.svg"      alt="buff"      style="width:2rem;" class="{{!trt.trans_buff ? 'svg-color' : ''}}"/>
+    <img src="{{imgURL}}svg/debuff.svg"    alt="debuff"    style="width:2rem;" class="{{!trt.trans_dbf  ? 'svg-color' : ''}}"/>
+    <img src="{{imgURL}}svg/equipment.svg" alt="equipment" style="width:2rem;" class="{{!trt.trans_wep  ? 'svg-color' : ''}}"/>
   </div>
 </div>
 <ng-template #traitModal>

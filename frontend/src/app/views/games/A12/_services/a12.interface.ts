@@ -39,7 +39,7 @@ export interface Trait {
     slugname: string;
     name: string;
     desc: string;
-    cost: Number;
+    cost: number;
     synth: boolean;
     usable: boolean;
     ingot: boolean;

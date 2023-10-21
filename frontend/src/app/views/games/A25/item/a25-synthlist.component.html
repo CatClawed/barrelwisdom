@@ -47,8 +47,8 @@
     <a (click)="openModal(itemModal, it.slug, $event);" href="/{{gameURL}}/items/synthesis/{{it.slug}}/{{language}}">{{it.name}}</a>    
   </h4>
   <div class="card-icon-position">
-    <img *ngIf="it.combat" style="height:3rem;" src="{{imgURL}}svg/{{it.combat[0].kind}}.svg">
-    <img *ngIf="it.equip"  style="height:3rem;" src="{{imgURL}}svg/{{it.equip[0].kind}}.svg">
+    <img *ngIf="it.combat" style="height:3rem;" src="{{imgURL}}svg/{{it.combat[0].kind}}.svg" alt="{{it.combat[0].kind}}">
+    <img *ngIf="it.equip"  style="height:3rem;" src="{{imgURL}}svg/{{it.equip[0].kind}}.svg"  alt="{{it.equip[0].kind}}">
   </div>
   <a class="card-item-display" (click)="openModal(itemModal, it.slug, $event);" href="/{{gameURL}}/items/synthesis/{{it.slug}}/{{language}}">
     <img loading="lazy" class="resleri-item-frame"

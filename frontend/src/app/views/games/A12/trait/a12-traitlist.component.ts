@@ -67,19 +67,19 @@ export class A12TraitlistComponent extends ListComponent implements OnInit {
     let traitlist: Trait[] = this.traits;
     switch (transfer) {
       case "3": {
-        traitlist = this.traits.filter(trait => trait.usable == true);
+        traitlist = this.traits.filter(trait => trait.usable);
         break;
       }
       case "5": {
-        traitlist = this.traits.filter(trait => trait.ingot == true);
+        traitlist = this.traits.filter(trait => trait.ingot);
         break;
       }
       case "6": {
-        traitlist = this.traits.filter(trait => trait.cloth == true);
+        traitlist = this.traits.filter(trait => trait.cloth);
         break;
       }
       case "7": {
-        traitlist = this.traits.filter(trait => trait.accessory == true);
+        traitlist = this.traits.filter(trait => trait.accessory);
         break;
       }
     }

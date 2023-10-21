@@ -139,17 +139,11 @@ export class CreateComponent {
   async onSubmit() {
     this.submitted = true;
 
-    if (this.disableSubmit) {
-      return;
+    if (!this.disableSubmit || !this.pageForm.invalid) {
+      this.loading = true;
+      this.checkTags();
+      this.loading = false;
     }
-
-    if (this.pageForm.invalid) {
-      return;
-    }
-
-    this.loading = true;
-    this.checkTags();
-    this.loading = false;
   }
 
   checkTags() {
@@ -181,7 +175,6 @@ export class CreateComponent {
           error: error => {
             this.loading = false;
             this.errorMsg = this.errorService.errorMessage(error);
-            return;
           }
         });
     }
@@ -214,7 +207,6 @@ export class CreateComponent {
           error: error => {
             this.loading = false;
             this.errorMsg = this.errorService.errorMessage(error);
-            return;
           }
         }
         );
@@ -246,7 +238,6 @@ export class CreateComponent {
             error: error => {
               this.loading = false;
               this.errorMsg = this.errorService.errorMessage(error);
-              return;
             }
           }
           );
@@ -340,12 +331,11 @@ export class CreateComponent {
             if (this.sectionIDList.indexOf(this.blog.section) < 0) {
               this.errorMsg = "Not allowed to edit this.";
               this.disableSubmit = true;
-              return;
             }
 
             // if the page is locked and you are either author or admin
             // or if the page is just not authorlocked
-            if (!this.blog.authorlock || (this.blog.authorlock && ((this.blog.author.indexOf(this.user.id) > -1) || this.user.group == 'admin'))) {
+            else if (!this.blog.authorlock || (this.blog.authorlock && ((this.blog.author.indexOf(this.user.id) > -1) || this.user.group == 'admin'))) {
               this.pageForm.get('title').setValue(this.blog.title);
               this.pageForm.get('body').setValue(this.blog.body);
               this.pageForm.get('section').setValue(this.blog.section);
@@ -370,7 +360,6 @@ export class CreateComponent {
             else {
               this.errorMsg = "Not allowed to edit this.";
               this.disableSubmit = true;
-              return;
             }
           },
           error: error => {
@@ -378,7 +367,6 @@ export class CreateComponent {
           }
         }
         );
-      return;
     }
   }
 

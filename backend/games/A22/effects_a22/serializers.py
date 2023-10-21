@@ -165,15 +165,15 @@ class A22EffectLineSerializer(serializers.ModelSerializer):
         if 'language' not in self.context:
             return obj.item.item_en.name
         elif self.context['language'] == 'ja':
-            return obj.item.item_en.name
+            return obj.item.item_ja.name
         elif self.context['language'] == 'ko':
-            return obj.item.item_en.name
+            return obj.item.item_ko.name
         elif self.context['language'] == 'fr':
-            return obj.item.item_en.name
+            return obj.item.item_fr.name
         elif self.context['language'] == 'sc':
-            return obj.item.item_en.name
+            return obj.item.item_sc.name
         elif self.context['language'] == 'tc':
-            return obj.item.item_en.name
+            return obj.item.item_tc.name
         else:
             return obj.item.item_en.name
     class Meta:

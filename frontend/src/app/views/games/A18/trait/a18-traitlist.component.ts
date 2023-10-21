@@ -65,27 +65,27 @@ export class A18TraitlistComponent extends ListComponent implements OnInit {
   private filterT(value: string, transfer: number): Trait[] {
     let traitlist: Trait[] = this.traits;
     if (transfer != 0) { 
-      traitlist = this.traits.filter(trait => false == (trait.trans_atk == trait.trans_heal == trait.trans_wpn == trait.trans_arm == trait.trans_acc == trait.trans_syn));
+      traitlist = this.traits.filter(trait => !(trait.trans_atk == trait.trans_heal == trait.trans_wpn == trait.trans_arm == trait.trans_acc == trait.trans_syn));
     }
 
     switch (transfer) {
       case 1:
-        traitlist = traitlist.filter(trait => trait.trans_syn == true);
+        traitlist = traitlist.filter(trait => trait.trans_syn);
         break;
       case 2:
-        traitlist = traitlist.filter(trait => trait.trans_atk == true);
+        traitlist = traitlist.filter(trait => trait.trans_atk);
         break;
       case 3:
-        traitlist = traitlist.filter(trait => trait.trans_heal == true);
+        traitlist = traitlist.filter(trait => trait.trans_heal);
         break;
       case 6:
-        traitlist = traitlist.filter(trait => trait.trans_wpn == true);
+        traitlist = traitlist.filter(trait => trait.trans_wpn);
         break;
       case 7:
-        traitlist = traitlist.filter(trait => trait.trans_arm == true);
+        traitlist = traitlist.filter(trait => trait.trans_arm);
         break;
       case 8:
-        traitlist = traitlist.filter(trait => trait.trans_acc == true);
+        traitlist = traitlist.filter(trait => trait.trans_acc);
         break;
     }
     if (!value) {

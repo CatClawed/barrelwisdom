@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from collections import OrderedDict
-from games.A15.items_a15.models import *
+from games.A15.items_a15.models import Item, Ingredient, Disassembly, Disassembled, Character, CharacterEquip, Book, Equip, AreaData, RegionData, Relic, EffectLine
 from games.A15.regions_a15.models import FieldEvent
 from games.A15.regions_a15.serializers import A15RegionNameSerializer, A15FieldEventSerializer
 from games.A15.monsters_a15.serializers import A15MonsterNameSerializer, A15MonsterLevelSerializer

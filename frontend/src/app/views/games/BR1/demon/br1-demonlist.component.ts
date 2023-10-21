@@ -66,7 +66,7 @@ export class BR1DemonlistComponent extends ListComponent implements OnInit {
     let list: Demon[] = this.demons;
     if (value) {
       const filterValue = value.toLowerCase();
-      return list = list.filter(demon => {
+      return list.filter(demon => {
         return demon.name.toLowerCase().includes(filterValue);
       });
     }

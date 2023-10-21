@@ -1,12 +1,10 @@
-import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Injectable, OnDestroy } from '@angular/core';
 import { User } from '@app/interfaces/user';
 import { environment } from "@environments/environment";
 import { CookieService } from 'ngx-cookie-service';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService implements OnDestroy {

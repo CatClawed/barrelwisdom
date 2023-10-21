@@ -83,19 +83,19 @@ export class A25TraitlistComponent extends ListComponent implements OnInit {
 
     switch (transfer) {
       case "attack":
-        traitlist = traitlist.filter(trait => trait.trans_atk == true);
+        traitlist = traitlist.filter(trait => trait.trans_atk);
         break;
       case "healing":
-        traitlist = traitlist.filter(trait => trait.trans_heal == true);
+        traitlist = traitlist.filter(trait => trait.trans_heal);
         break;
       case "buff":
-        traitlist = traitlist.filter(trait => trait.trans_buff == true);
+        traitlist = traitlist.filter(trait => trait.trans_buff);
         break;
       case "debuff":
-        traitlist = traitlist.filter(trait => trait.trans_dbf == true);
+        traitlist = traitlist.filter(trait => trait.trans_dbf);
         break;
       case "equipment":
-        traitlist = traitlist.filter(trait => trait.trans_wep == true);
+        traitlist = traitlist.filter(trait => trait.trans_wep);
         break;
     }
     if (!value) {

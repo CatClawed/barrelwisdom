@@ -4,7 +4,7 @@ from games.A16.items_a16.models import EffectLines, EffectData
 
 class A16EffectLineSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
-    slugname = serializers.SerializerMethodField()
+    slugname = serializers.CharField(source='item.slugname')
     class Meta:
         model = EffectLines
         fields = ['name', 'slugname']
@@ -16,13 +16,6 @@ class A16EffectLineSerializer(serializers.ModelSerializer):
             return obj.item.item_ja.name
         else:
             return obj.item.item_en.name
-    def get_slugname(self,obj):
-        if 'language' not in self.context:
-            return obj.item.slugname
-        elif self.context['language'] == 'ja':
-            return obj.item.slugname
-        else:
-            return obj.item.slugname
 
 
 class A16EffectDataSerializer(serializers.ModelSerializer):

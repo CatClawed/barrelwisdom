@@ -25,11 +25,11 @@ export interface CommentBlog{
 export interface Comment {
     id: number;
     created: Date;
-    body: String;
+    body: string;
     author: SimpleUser;
-    name: String;
+    name: string;
     replies: Comment[];
-    open: Boolean;
+    open: boolean;
     success: boolean;
     form: any;
     approved: boolean;

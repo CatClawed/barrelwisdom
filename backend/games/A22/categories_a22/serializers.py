@@ -86,7 +86,6 @@ class A22CategoryDataSerializer(serializers.ModelSerializer):
     slug = serializers.CharField(source='slugname')
     name = serializers.SerializerMethodField()
     item_set = A22ItemSerializer(many=True)
-    #ingredientcat = A22IngredientSerializer(many=True, read_only=True)
     ing = A22IngredientSerializer(source='item_set__ingredientcat', many=True, read_only=True)
     class Meta:
         model = Category

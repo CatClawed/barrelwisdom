@@ -11,7 +11,8 @@
       style="aspect-ratio:1;position:relative;"
       routerLink="/{{gameURL}}/characters/{{chara.slug}}/{{language}}">
       <img src="{{imgURL}}characters/face/{{chara.slug}}.webp"
-      style="width:256px;" />
+        alt="{{chara.name + ' ' + chara.title}}"
+        style="width:256px;" />
     </a>
   </div>
 </ng-container>
@@ -23,6 +24,7 @@
       routerLink="/{{gameURL}}/memoria/{{memoria.slug}}/{{language}}">
       <img loading="lazy"
         src="{{imgURL}}memoria/{{memoria.slug}}.webp"
+        alt="{{memoria.name}}"
         style="max-height:100%;width:256px;"/>
     </a>
   </div>

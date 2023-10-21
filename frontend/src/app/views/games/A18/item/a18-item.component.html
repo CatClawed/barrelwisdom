@@ -21,7 +21,7 @@
       <table>
         <tr *ngIf="item.char[0]">
           <td style="width:10%">
-            <img style="max-height:3em;" src="/media/games/firis/characters/{{item.char[0]}}.webp">
+            <img style="max-height:3em;" src="/media/games/firis/characters/{{item.char[0]}}.webp" alt="{{item.char[0]}}">
           </td>
           <td>
             {{item.desc[0]}}
@@ -29,7 +29,7 @@
         </tr>
         <tr *ngIf="item.char[1]">
           <td style="width:10%">
-            <img style="max-height:3em;" src="/media/games/firis/characters/{{item.char[1]}}.webp">
+            <img style="max-height:3em;" src="/media/games/firis/characters/{{item.char[1]}}.webp" alt="{{item.char[1]}}">
           </td>
           <td>
             {{item.desc[1]}}
@@ -37,7 +37,7 @@
         </tr>
         <tr *ngIf="item.char[2]">
           <td style="width:10%">
-            <img style="max-height:3em;" src="/media/games/firis/characters/{{item.char[2]}}.webp">
+            <img style="max-height:3em;" src="/media/games/firis/characters/{{item.char[2]}}.webp" alt="{{item.char[2]}}">
           </td>
           <td>
             {{item.desc[2]}}
@@ -45,7 +45,7 @@
         </tr>
         <tr *ngIf="item.char[3]">
           <td style="width:10%">
-            <img style="max-height:3em;" src="/media/games/firis/characters/{{item.char[3]}}.webp">
+            <img style="max-height:3em;" src="/media/games/firis/characters/{{item.char[3]}}.webp" alt="{{item.char[3]}}">
           </td>
           <td>
             {{item.desc[3]}}
@@ -209,7 +209,7 @@
       </table>
       <table *ngIf="item.chars" class="tbl">
         <tr class="table-dark-center"><th>Characters</th></tr>
-        <tr><td><img *ngFor="let char of item.chars" src="{{imgURL}}characters/{{char.slug}}.webp" style="max-height:3em;"></td></tr>
+        <tr><td><img *ngFor="let char of item.chars" src="{{imgURL}}characters/{{char.slug}}.webp" style="max-height:3em;" alt="{{char.slug}}"></td></tr>
       </table>
       <table *ngIf="item.catalysts" class="tbl">
         <tr class="table-dark-center"><th colspan="2">Catalysts Used</th></tr>

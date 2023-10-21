@@ -39,8 +39,8 @@ export interface Property {
     slugname: string;
     name: string;
     desc: string;
-    grade: Number;
-    points: Number;
+    grade: number;
+    points: number;
     bomb: boolean;
     heal: boolean;
     buff: boolean;

@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { SeoService } from '@app/services/seo.service';
 import { MonsterFull } from '@app/views/games/A15/_services/a15.interface';
 import { A15Service } from '@app/views/games/A15/_services/a15.service';
-import { SeoService } from '@app/services/seo.service';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({

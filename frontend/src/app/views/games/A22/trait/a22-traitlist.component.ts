@@ -65,25 +65,25 @@ export class A22TraitlistComponent extends ListComponent implements OnInit {
     let traitlist: Trait[] = this.traits;
     switch (transfer) {
       case "2":
-        traitlist = this.traits.filter(trait => trait.trans_atk == true);
+        traitlist = this.traits.filter(trait => trait.trans_atk);
         break;
       case "3":
-        traitlist = this.traits.filter(trait => trait.trans_heal == true);
+        traitlist = this.traits.filter(trait => trait.trans_heal);
         break;
       case "4":
-        traitlist = this.traits.filter(trait => trait.trans_dbf == true);
+        traitlist = this.traits.filter(trait => trait.trans_dbf);
         break;
       case "5":
-        traitlist = this.traits.filter(trait => trait.trans_buff == true);
+        traitlist = this.traits.filter(trait => trait.trans_buff);
         break;
       case "6":
-        traitlist = this.traits.filter(trait => trait.trans_wpn == true);
+        traitlist = this.traits.filter(trait => trait.trans_wpn);
         break;
       case "7":
-        traitlist = this.traits.filter(trait => trait.trans_arm == true);
+        traitlist = this.traits.filter(trait => trait.trans_arm);
         break;
       case "8":
-        traitlist = this.traits.filter(trait => trait.trans_acc == true);
+        traitlist = this.traits.filter(trait => trait.trans_acc);
         break;
     }
     if (!value) {

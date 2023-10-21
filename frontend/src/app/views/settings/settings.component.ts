@@ -165,7 +165,7 @@ export class SettingsComponent {
             },
             error: error => {
                 this.loading = false;
-                if(error.status = 400) {
+                if(error.status == 400) {
                   this.errorPass = "Invalid Password."
                 }
                 else {

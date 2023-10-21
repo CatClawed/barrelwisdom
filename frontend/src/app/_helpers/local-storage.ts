@@ -3,6 +3,7 @@ import {AppComponent} from '@app/app.component';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
+// The blank methods are intentional.
 class LocalStorage implements Storage {
   [name: string]: any;
   readonly length: number;

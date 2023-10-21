@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { EffectData, EffectLine, Item } from '@app/views/games/A18/_services/a18.interface';
-import { A18Service } from '@app/views/games/A18/_services/a18.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
+import { Item } from '@app/views/games/A18/_services/a18.interface';
+import { A18Service } from '@app/views/games/A18/_services/a18.service';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({

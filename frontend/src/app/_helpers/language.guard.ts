@@ -10,6 +10,18 @@ export const LanguageGuard = (route: ActivatedRouteSnapshot, state: RouterStateS
     let segments = state.url.split('/');
     const section = segments[1];
 
+    const envs = {
+        "totori": environment.totori_languages,
+        "escha": environment.escha_languages,
+        "shallie": environment.shallie_languages,
+        "firis": environment.firis_languages,
+        "ryza2": environment.ryza2_languages,
+        "sophie2": environment.sophie2_languages,
+        "resleri": environment.resleri_languages,
+        "bluereflection": environment.bluereflection_languages,
+        "second-light": environment.secondlight_languages,
+    }
+
     if(!language || language.length >= 3) {
         if(!languageService.languageValue) {
             languageService.setLanguage("en");
@@ -22,35 +34,7 @@ export const LanguageGuard = (route: ActivatedRouteSnapshot, state: RouterStateS
         languageService.setLanguage(language); // doesn't matter if this is a bad value, EN is default
     }
 
-    switch(section) {
-        case "totori":
-            if(environment.totori_languages[language]) return true;
-            break;
-        case "escha":
-            if(environment.escha_languages[language]) return true;
-            break;
-        case "shallie":
-            if(environment.shallie_languages[language]) return true;
-            break;
-        case "firis":
-            if(environment.firis_languages[language]) return true;
-            break;
-        case "ryza2":
-            if(environment.ryza2_languages[language]) return true;
-            break;
-        case "sophie2":
-            if(environment.sophie2_languages[language]) return true;
-            break;
-        case "resleri":
-            if(environment.resleri_languages[language]) return true;
-            break;
-        case "bluereflection":
-            if(environment.bluereflection_languages[language]) return true;
-            break;
-        case "second-light":
-            if(environment.secondlight_languages[language]) return true;
-            break;
-    }
+    if (envs[section][language]) return true;
     
     // go to the default EN page if all else fails
     segments.pop();

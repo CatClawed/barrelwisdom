@@ -44,7 +44,7 @@
     <a (click)="openModal(itemModal, it.slug, $event);" href="/{{gameURL}}/items/materials/{{it.slug}}/{{language}}">{{it.name}}</a>    
   </h4>
   <div class="card-icon-position">
-    <img loading="lazy" *ngIf="it.material[0].traits" style="height:3rem;" src="{{imgURL}}svg/{{it.material[0].traits[0].kind}}.svg">
+    <img loading="lazy" *ngIf="it.material[0].traits" style="height:3rem;" src="{{imgURL}}svg/{{it.material[0].traits[0].kind}}.svg" alt="{{it.material[0].traits[0].kind}}">
   </div>
   <a class="card-item-display" (click)="openModal(itemModal, it.slug, $event);" href="/{{gameURL}}/items/materials/{{it.slug}}/{{language}}">
     <img loading="lazy" class="resleri-item-frame"

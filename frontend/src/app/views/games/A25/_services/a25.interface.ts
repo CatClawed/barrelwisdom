@@ -1,5 +1,3 @@
-import slugify from "slugify";
-
 export interface NameLink {
     slug: string;
     name: string;

@@ -66,19 +66,19 @@ export class A16PropertylistComponent extends ListComponent implements OnInit {
     let propertylist: Property[] = this.properties;
     switch (transfer) {
       case "2":
-        propertylist = this.properties.filter(property => property.bomb == true);
+        propertylist = this.properties.filter(property => property.bomb);
         break;
       case "3":
-        propertylist = this.properties.filter(property => property.heal == true);
+        propertylist = this.properties.filter(property => property.heal);
         break;
       case "5":
-        propertylist = this.properties.filter(property => property.weapon == true);
+        propertylist = this.properties.filter(property => property.weapon);
         break;
       case "6":
-        propertylist = this.properties.filter(property => property.armor == true);
+        propertylist = this.properties.filter(property => property.armor);
         break;
       case "7":
-        propertylist = this.properties.filter(property => property.accessory == true);
+        propertylist = this.properties.filter(property => property.accessory);
         break;
     }
     if (value) {

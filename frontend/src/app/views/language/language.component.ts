@@ -54,10 +54,6 @@ export class LanguageComponent implements OnInit {
         this.languages = environment.resleri_languages;
         this.langName = environment.resleri_languages[this.currentLanguage];
         break;
-      case "bluereflection":
-        this.languages = environment.bluereflection_languages;
-        this.langName = environment.bluereflection_languages[this.currentLanguage];
-        break;
       case "second-light":
         this.languages = environment.secondlight_languages;
         this.langName = environment.secondlight_languages[this.currentLanguage];

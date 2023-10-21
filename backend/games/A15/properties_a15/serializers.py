@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from collections import OrderedDict
-from games.A15.properties_a15.models import *
+from games.A15.properties_a15.models import Property
 from games.A15.items_a15.models import Item
 
 class A15ItemNameSerializer(serializers.ModelSerializer):

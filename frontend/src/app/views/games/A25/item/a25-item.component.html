@@ -8,9 +8,9 @@
       {{item.name}}
     </h4>
     <div class="card-icon-position">
-      <ng-container *ngIf="item.material"><img loading="lazy" *ngIf="item.material[0].traits" style="height:3rem;" src="{{imgURL}}svg/{{item.material[0].traits[0].kind}}.svg"></ng-container>
-      <img *ngIf="item.combat" style="height:3rem;" src="{{imgURL}}svg/{{item.combat[0].kind}}.svg">
-      <img *ngIf="item.equip"  style="height:3rem;" src="{{imgURL}}svg/{{item.equip[0].kind}}.svg">
+      <ng-container *ngIf="item.material"><img loading="lazy" *ngIf="item.material[0].traits" style="height:3rem;" src="{{imgURL}}svg/{{item.material[0].traits[0].kind}}.svg" alt="{{item.material[0].traits[0].kind}}"></ng-container>
+      <img *ngIf="item.combat" style="height:3rem;" src="{{imgURL}}svg/{{item.combat[0].kind}}.svg" alt="{{item.combat[0].kind}}">
+      <img *ngIf="item.equip"  style="height:3rem;" src="{{imgURL}}svg/{{item.equip[0].kind}}.svg"  alt="{{item.equip[0].kind}}">
     </div>
     <img loading="lazy" class="resleri-item-frame"
       style="height:256px;background-image:url({{imgURL}}svg/item-frame-{{item.rarity}}.svg)"
@@ -114,6 +114,7 @@
             <div style="margin:auto;">
               <img *ngFor="let i of item.recipe[0].chars; let index = index"
                 src="{{imgURL}}characters/face/{{i}}.webp"
+                alt="{{i}}"
                 style="height:100px;width:100px;border-radius:50%;background-color:{{a25service.colors[item.recipe[0].colors[index]]}};">
             </div>
           </td>

@@ -36,7 +36,7 @@ export class BlogService {
   }
 
   getMainPageBlogs(num: number, limit: number, tag: string): Observable<BlogPaginator> {
-    var offset = num == 0 ?  1 : limit * (num-1);
+    const offset = num == 0 ?  1 : limit * (num-1);
     if(tag) {
       return this.http.get<BlogPaginator>(`${environment.apiUrl}/blog/?ordering=-created&tags=${tag}&limit=${limit}&offset=${offset}`)
     }

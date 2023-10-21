@@ -65,36 +65,36 @@ export class A23TraitlistComponent extends ListComponent implements OnInit {
   private filterT(value: string, transfer: number): Trait[] {
     let traitlist: Trait[] = this.traits;
     if (transfer != 1) { 
-      traitlist = this.traits.filter(trait => false == (trait.trans_atk == trait.trans_heal == trait.trans_dbf == trait.trans_buff == trait.trans_wpn == trait.trans_arm == trait.trans_acc == trait.trans_tal == trait.trans_syn == trait.trans_exp));
+      traitlist = this.traits.filter(trait => !(trait.trans_atk == trait.trans_heal == trait.trans_dbf == trait.trans_buff == trait.trans_wpn == trait.trans_arm == trait.trans_acc == trait.trans_tal == trait.trans_syn == trait.trans_exp));
     }
 
     switch (transfer) {
       case 2:
-        traitlist = traitlist.filter(trait => trait.trans_atk == true);
+        traitlist = traitlist.filter(trait => trait.trans_atk);
         break;
       case 3:
-        traitlist = traitlist.filter(trait => trait.trans_heal == true);
+        traitlist = traitlist.filter(trait => trait.trans_heal);
         break;
       case 4:
-        traitlist = traitlist.filter(trait => trait.trans_dbf == true);
+        traitlist = traitlist.filter(trait => trait.trans_dbf);
         break;
       case 5:
-        traitlist = traitlist.filter(trait => trait.trans_buff == true);
+        traitlist = traitlist.filter(trait => trait.trans_buff);
         break;
       case 6:
-        traitlist = traitlist.filter(trait => trait.trans_wpn == true);
+        traitlist = traitlist.filter(trait => trait.trans_wpn);
         break;
       case 7:
-        traitlist = traitlist.filter(trait => trait.trans_arm == true);
+        traitlist = traitlist.filter(trait => trait.trans_arm);
         break;
       case 8:
-        traitlist = traitlist.filter(trait => trait.trans_acc == true);
+        traitlist = traitlist.filter(trait => trait.trans_acc);
         break;
       case 9:
-        traitlist = traitlist.filter(trait => trait.trans_tal == true);
+        traitlist = traitlist.filter(trait => trait.trans_tal);
         break;
       case 10:
-        traitlist = traitlist.filter(trait => trait.trans_exp == true);
+        traitlist = traitlist.filter(trait => trait.trans_exp);
         break;
     }
     if (!value) {

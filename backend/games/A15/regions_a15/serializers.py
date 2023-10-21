@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from collections import OrderedDict
-from games.A15.regions_a15.models import *
+from games.A15.regions_a15.models import Region
 
 class A15FieldEventSerializer(serializers.ModelSerializer):
     class Meta:
