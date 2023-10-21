@@ -118,7 +118,6 @@ export class A25SynthesisListComponent extends ListComponent implements OnInit {
     }
 
     if (filter) {
-      console.log(filter)
       filter = filter.toLowerCase()
 
       list = list.filter(item => item.ing.some(i => i.toLowerCase().includes(filter)))

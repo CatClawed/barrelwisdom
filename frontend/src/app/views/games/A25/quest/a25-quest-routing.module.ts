@@ -1,11 +1,10 @@
 import { NgModule, inject } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { ActivatedRouteSnapshot, ResolveFn, RouterModule, RouterStateSnapshot, Routes } from '@angular/router';
 import { LanguageGuard } from '@app/_helpers/language.guard';
+import { Dungeon, ScoreBattle, Tower } from '@app/views/games/A25/_services/a25.interface';
+import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { A25DungeonComponent } from './a25-dungeon.component';
 import { A25ScoreBattleComponent } from './a25-scorebattle.component';
-import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
-import { Dungeon, ScoreBattle, Tower } from '@app/views/games/A25/_services/a25.interface';
-import { A25Service } from '@app/views/games/A25/_services/a25.service'; 
 import { A25TowerComponent } from './a25-tower.component';
 
 const dungeonResolver: ResolveFn<Dungeon[]> =

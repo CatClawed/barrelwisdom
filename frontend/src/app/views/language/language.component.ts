@@ -21,9 +21,6 @@ export class LanguageComponent implements OnInit {
     private router: Router,
     private languageService: LanguageService,
   ) { 
-    this.router.routeReuseStrategy.shouldReuseRoute = function () {
-      return false;
-  };
   }
 
   ngOnInit() {
@@ -82,7 +79,9 @@ export class LanguageComponent implements OnInit {
             }
         }
       this.languageService.setLanguage(event.value);
-      this.router.navigate([newUrl + '/' + event.value]);
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigate([newUrl + '/' + event.value])
+      });
   }
 
 }

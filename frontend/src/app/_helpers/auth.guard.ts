@@ -1,29 +1,23 @@
-import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
+import { inject } from '@angular/core';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthenticationService } from '@app/services/authentication.service';
+import { CookieService } from 'ngx-cookie-service';
 
-@Injectable({ providedIn: 'root' })
-export class AuthGuard implements CanActivate {
-    constructor(
-        private router: Router,
-        private accountService: AuthenticationService,
-        private cookieService: CookieService
-    ) {}
+export const AuthGuard = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+    const cookieService = inject(CookieService);
+    const accountService = inject(AuthenticationService);
+    const router = inject(Router);
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        const user = this.accountService.userValue;
-        if (user) {
-            if(this.cookieService.get('access')) {
-                const jwtToken = JSON.parse(atob(this.cookieService.get('access').split('.')[1]));
-                const expires = new Date(jwtToken.exp * 1000);
-                if(expires.getTime() > Date.now()) {
-                    return true;
-                }
+    if (accountService.userValue) {
+        if(cookieService.get('access')) {
+            const jwtToken = JSON.parse(atob(cookieService.get('access').split('.')[1]));
+            const expires = new Date(jwtToken.exp * 1000);
+            if(expires.getTime() > Date.now()) {
+                return true;
             }
         }
-        else {
-            return this.router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url }});
-        }
+    }
+    else {
+        return router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url }});
     }
 }

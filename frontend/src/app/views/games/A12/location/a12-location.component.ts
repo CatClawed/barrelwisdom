@@ -25,8 +25,10 @@ export class A12LocationComponent extends SingleComponent implements OnInit {
   ) {
     super(route, seoService);
     this.gameService(this.a12service, 'locations');
+    this.location = this.route.snapshot.data.loc;
   }
   ngOnInit(): void {
+    
     this.location = this.route.snapshot.data.loc;
     if (!this.location) {
       this.error = `404`;

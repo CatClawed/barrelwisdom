@@ -1,8 +1,23 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { A15LocationComponent } from './a15-location.component';
+import { NgModule, inject } from '@angular/core';
+import { ActivatedRouteSnapshot, ResolveFn, Router, RouterModule, RouterStateSnapshot, Routes } from '@angular/router';
 import { LanguageGuard } from '@app/_helpers/language.guard';
-import { A15LocationResolver } from './a15-location.resolve';
+import { RegionData } from '@app/views/games/A15/_services/a15.interface';
+import { A15Service } from '@app/views/games/A15/_services/a15.service';
+import { EMPTY } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { A15LocationComponent } from './a15-location.component';
+
+const resolver: ResolveFn<RegionData> =
+  (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+    const router = inject(Router);
+    return inject(A15Service)
+      .getRegion(route.params.subject, route.params.language).pipe(
+        catchError(() => {
+          router.navigateByUrl('/escha/error', { skipLocationChange: true });
+          return EMPTY;
+        })
+      )
+  }
 
 const routes: Routes = [
   {
@@ -10,11 +25,11 @@ const routes: Routes = [
     canActivate: [LanguageGuard],
     component: A15LocationComponent,
     resolve: {
-      loc: A15LocationResolver
+      loc: resolver
     }
   },
   {
-    path: ':location',
+    path: ':subject',
     canActivate: [LanguageGuard],
     component: A15LocationComponent
   },

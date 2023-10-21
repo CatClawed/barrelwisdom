@@ -15,11 +15,13 @@
         ],
         "createDefaultProgram": true
       },
+      "plugins": ["deprecation"],
       "extends": [
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
+        "deprecation/deprecation": "warn",
         "@angular-eslint/component-selector": [
           "error",
           {
