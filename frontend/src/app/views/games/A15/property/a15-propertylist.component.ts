@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Property } from '@app/views/games/A15/_services/a15.interface';
-import { A15Service } from '@app/views/games/A15/_services/a15.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { ListComponent } from '@app/views/games/_prototype/list.component';
+import { Property } from '@app/views/games/A15/_services/a15.interface';
+import { A15Service } from '@app/views/games/A15/_services/a15.service';
+import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -15,7 +15,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   templateUrl: 'a15-propertylist.component.html',
   providers: [DestroyService]
 })
-export class A15PropertylistComponent extends ListComponent implements OnInit {
+export class A15PropertylistComponent extends ListComponent2 {
   propertyControl: UntypedFormControl;
   properties: Property[];
   filteredProperties: Observable<Property[]>;
@@ -32,7 +32,7 @@ export class A15PropertylistComponent extends ListComponent implements OnInit {
     private a15service: A15Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.gameService(this.a15service, 'properties');
+
     this.propertyControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.propertyControl,
@@ -40,18 +40,14 @@ export class A15PropertylistComponent extends ListComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-    this.modalEvent();
-    this.genericSEO(`Properties`, `The list of properties in ${this.gameTitle}.`);
-    this.getProperties();
-  }
-
-  getProperties() {
+  changeData() {
     this.a15service.getPropertyList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: properties => {
           this.properties = properties;
+          this.gameService(this.a15service, 'properties');
+          this.genericSEO(`Properties`, `The list of properties in ${this.gameTitle}.`);
           this.filteredProperties = this.pageForm.valueChanges.pipe(
             startWith(null as Observable<Property[]>),
             map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.properties.slice())
@@ -92,9 +88,5 @@ export class A15PropertylistComponent extends ListComponent implements OnInit {
     return propertylist.filter(property => {
       return property.name.toLowerCase().includes(filterValue) || property.desc.toLowerCase().includes(filterValue)
     });
-  }
-
-  identify2(index, item) {
-    return item.slugname;
   }
 }

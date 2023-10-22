@@ -53,7 +53,6 @@ export class A12LocationComponent extends SingleComponent2 implements AfterViewI
           this.error = ``;
           this.gameService(this.a12service, 'locations');
           this.location = location;
-          this.seoImage = `${this.imgURL}items/${this.location.slugname}.webp`
           this.genericSEO(this.location.name, `All items in ${this.location.name}`);
         },
         error: error => {

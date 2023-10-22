@@ -1,32 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DestroyService } from '@app/services/destroy.service';
+import { SeoService } from '@app/services/seo.service';
 import { Book } from '@app/views/games/A15/_services/a15.interface';
 import { A15Service } from '@app/views/games/A15/_services/a15.service';
-import { SeoService } from '@app/services/seo.service';
-import { SingleComponent } from '@app/views/games/_prototype/single.component';
+import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a15-book.component.html',
   selector: 'a15-book',
+  providers: [DestroyService]
 })
-export class A15BookComponent extends SingleComponent implements OnInit {
+export class A15BookComponent extends SingleComponent2 {
   book: Book;
 
   constructor(
     protected route: ActivatedRoute,
+    protected readonly destroy$: DestroyService,
     private a15service: A15Service,
     protected seoService: SeoService) {
-    super(route, seoService);
-    this.gameService(this.a15service, 'recipe-books');
+    super(destroy$, route, seoService);
   }
-  ngOnInit(): void {
-    if (this.showNav) this.colset = "col-md-9 mx-auto ";
+
+  changeData(): void {
     this.a15service.getBook(this.slug, this.language)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: book => {
           this.error = ``;
           this.book = book;
           this.seoImage = `${this.imgURL}items/${this.book.slugname}.webp`
+          this.gameService(this.a15service, 'recipe-books');
           this.genericSEO(this.book.name, this.book.desc);
         },
         error: error => {
