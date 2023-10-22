@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { ItemFull } from '@app/views/games/A22/_services/a22.interface';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
-import { SingleComponent } from '@app/views/games/_prototype/single.component';
+import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a22-item.component.html',
   selector: 'a22-item',
+  providers: [DestroyService]
 })
-export class A22ItemComponent extends SingleComponent implements OnInit {
+export class A22ItemComponent extends SingleComponent2 {
   item: ItemFull;
   default: any[] = [];
   eff1: any[] = [];
@@ -19,18 +22,20 @@ export class A22ItemComponent extends SingleComponent implements OnInit {
 
   constructor(
     protected route: ActivatedRoute,
-    private a22service: A22Service,
-    protected seoService: SeoService) {
-    super(route, seoService);
-    this.gameService(this.a22service, 'items');
+    protected readonly destroy$: DestroyService,
+    protected seoService: SeoService,
+    private a22service: A22Service) {
+    super(destroy$, route, seoService);
   }
-  ngOnInit(): void {
-    if (this.showNav) this.colset = "col-md-9 mx-auto ";
+  
+  changeData(): void {
     this.a22service.getItem(this.slug, this.language)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: item => {
           this.error = ``;
           this.item = item;
+          this.gameService(this.a22service, 'items');
           this.seoImage = `${this.imgURL}${this.section}/${this.item.slug}.webp`;
           this.genericSEO(this.item.name, this.item.desc);
 

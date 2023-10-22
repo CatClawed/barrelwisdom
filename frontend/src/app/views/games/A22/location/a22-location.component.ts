@@ -1,11 +1,11 @@
 import { Location, ViewportScroller } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Region } from '@app/views/games/A22/_services/a22.interface';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
-import { SingleComponent } from '@app/views/games/_prototype/single.component';
+import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
 import { first, takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -13,24 +13,21 @@ import { first, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A22LocationComponent extends SingleComponent implements OnInit {
+export class A22LocationComponent extends SingleComponent2 {
   region: Region;
   dig = true;
 
   constructor(
     protected route: ActivatedRoute,
-    private readonly destroy$: DestroyService,
+    protected readonly destroy$: DestroyService,
     private loc: Location,
     private router: Router,
     private a22service: A22Service,
     protected seoService: SeoService,
     private viewportScroller: ViewportScroller
   ) {
-    super(route, seoService);
+    super(destroy$, route, seoService);
     this.gameService(this.a22service, 'locations');
-  }
-
-  ngOnInit(): void {
     this.region = this.route.snapshot.data.loc;
     if (this.region.areas.length == 0 || !this.region) {
       this.error = `404`;
@@ -45,6 +42,29 @@ export class A22LocationComponent extends SingleComponent implements OnInit {
       }
       this.genericSEO(this.region.name, `All items in ${this.region.name}`);
     }
+  }
+
+  changeData(): void {
+    this.a22service.getLocation(this.slug, this.language)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: region => {
+          this.error = ``;
+          this.region = region;
+          this.gameService(this.a22service, 'locations');
+          this.genericSEO(this.region.name, `All items in ${this.region.name}`);
+          for (let g of this.region.areas[0].gatherdata) {
+            if (g.tool == 'Dig') {
+              this.dig = true;
+              break;
+            }
+            this.dig = false;
+          }
+        },
+        error: error => {
+          this.error = `${error.status}`;
+        }
+      });
   }
 
   ngAfterViewInit(): void {

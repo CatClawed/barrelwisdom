@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Trait } from '@app/views/games/A22/_services/a22.interface';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
-import { ListComponent } from '@app/views/games/_prototype/list.component';
+import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -15,7 +15,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   templateUrl: 'a22-traitlist.component.html',
   providers: [DestroyService]
 })
-export class A22TraitlistComponent extends ListComponent implements OnInit {
+export class A22TraitlistComponent extends ListComponent2 {
   traitControl: UntypedFormControl;
   traits: Trait[];
   filteredTraits: Observable<Trait[]>;
@@ -30,7 +30,6 @@ export class A22TraitlistComponent extends ListComponent implements OnInit {
     private formBuilder: UntypedFormBuilder,
     private a22service: A22Service,) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.gameService(this.a22service, 'traits');
     this.traitControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.traitControl,
@@ -38,18 +37,14 @@ export class A22TraitlistComponent extends ListComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-    this.modalEvent();
-    this.getTraits();
-    this.genericSEO(`Traits`, `The list of traits in ${this.gameTitle}.`);
-  }
-
-  getTraits() {
+  changeData() {
     this.a22service.getTraitList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: traits => {
           this.traits = traits;
+          this.gameService(this.a22service, 'traits');
+          this.genericSEO(`Traits`, `The list of traits in ${this.gameTitle}.`);
           this.filteredTraits = this.pageForm.valueChanges.pipe(
             startWith(null as Observable<Trait[]>),
             map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.traits.slice())

@@ -59,7 +59,7 @@
 <div *ngIf="filteredEffects" class="item-grid">
 <div *ngFor="let eff of filteredEffects | async; trackBy:identify" class="card card-body">
   <h4 class="card-title card-icon-space">
-    <a (click)="openModal2(effectModal, eff.slug, $event);" href="/{{gameURL}}/effects/{{eff.slug}}/{{language}}">{{eff.name}}</a>
+    <a (click)="openModal(effectModal, eff.slug, $event);" href="/{{gameURL}}/effects/{{eff.slug}}/{{language}}">{{eff.name}}</a>
   </h4>
   <div class="card-icon-position">
     <i *ngIf="normal && eff.effsub != 'Material'" class="atelier atelier-np atelier-ryza2-type-synthesis"></i>
@@ -67,7 +67,7 @@
     <i *ngIf="!normal" class="atelier atelier-ryza2-type-{{eff.effsub.toLowerCase()}}"></i>
     <span *ngIf="ev" class="badge bg-secondary">EV</span><i *ngIf="forge" class="atelier atelier-np atelier-ryza2-forge"></i>
   </div>
-  <button (click)="openModal2(effectModal, eff.slug)" class="card-read-more-position" mat-mini-fab color="primary">
+  <button (click)="openModal(effectModal, eff.slug)" class="card-read-more-position" mat-mini-fab color="primary">
       <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
    </button>
   <span style="margin-right:1.7rem" *ngIf="eff.desc">{{eff.desc}}</span>
@@ -81,7 +81,7 @@
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <i class="fas fa-times-circle modal-close"></i>
     </button>
-     <a22-effect slug="{{selected}}" [showNav]="false"></a22-effect>
+     <a22-effect inputSlug="{{selected}}" [showNav]="false"></a22-effect>
   </div>
 </ng-template>
 </div>

@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { MonsterFull } from '@app/views/games/A22/_services/a22.interface';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
-import { SingleComponent } from '@app/views/games/_prototype/single.component';
+import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a22-monster.component.html',
   selector: 'a22-monster',
+  providers: [DestroyService]
 })
-export class A22MonsterComponent extends SingleComponent implements OnInit {
+export class A22MonsterComponent extends SingleComponent2 {
   monster: MonsterFull;
   hp: boolean[] = [];
   atk: boolean[] = [];
@@ -18,15 +21,15 @@ export class A22MonsterComponent extends SingleComponent implements OnInit {
 
   constructor(
     protected route: ActivatedRoute,
-    private a22service: A22Service,
-    protected seoService: SeoService) {
-    super(route, seoService);
-    this.gameService(this.a22service, 'monsters');
+    protected readonly destroy$: DestroyService,
+    protected seoService: SeoService,
+    private a22service: A22Service) {
+    super(destroy$, route, seoService);
   }
-  ngOnInit(): void {
-    this.language = this.route.snapshot.params.language;
-    if (this.showNav) this.colset = "col-md-9 mx-auto ";
+
+  changeData(): void {
     this.a22service.getMonster(this.slug, this.language)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: monster => {
           this.error = ``;
@@ -57,6 +60,7 @@ export class A22MonsterComponent extends SingleComponent implements OnInit {
               this.spd.push(false);
             }
           }
+          this.gameService(this.a22service, 'monsters');
           this.seoImage = `${this.imgURL}${this.section}/${this.monster.slug}.webp`
           this.genericSEO(this.monster.name, this.monster.desc);
         },

@@ -6,7 +6,7 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Monster } from '@app/views/games/A22/_services/a22.interface';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
-import { ListComponent } from '@app/views/games/_prototype/list.component';
+import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -16,7 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A22MonsterlistComponent extends ListComponent implements OnInit {
+export class A22MonsterlistComponent extends ListComponent2 {
   monsterControl: UntypedFormControl;
   monsters: Monster[];
   filteredMonsters: Observable<Monster[]>;
@@ -34,7 +34,6 @@ export class A22MonsterlistComponent extends ListComponent implements OnInit {
     private a22service: A22Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.gameService(this.a22service, 'monsters');
     this.monsterControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.monsterControl,
@@ -42,18 +41,14 @@ export class A22MonsterlistComponent extends ListComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-    this.modalEvent();
-    this.getMonsters();
-    this.genericSEO(`Monsters`, `The list of monsters in ${this.gameTitle}.`);
-  }
-
-  getMonsters() {
+  changeData() {
     this.a22service.getMonsterList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: monsters => {
           this.monsters = monsters;
+          this.gameService(this.a22service, 'monsters');
+          this.genericSEO(`Monsters`, `The list of monsters in ${this.gameTitle}.`);
           this.filteredMonsters = this.pageForm.valueChanges.pipe(
             startWith(null as Observable<Monster[]>),
             map((search: any) => search ? this.filterT(search.filtertext, search.type) : this.monsters.slice())

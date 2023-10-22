@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, TemplateRef  } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Effect } from '@app/views/games/A22/_services/a22.interface';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
-import { ListComponent } from '@app/views/games/_prototype/list.component';
+import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -16,7 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A22EffectlistComponent extends ListComponent implements OnInit {
+export class A22EffectlistComponent extends ListComponent2 {
   effectControl: UntypedFormControl;
   effects: Effect[];
   filteredEffects: Observable<Effect[]>;
@@ -35,7 +35,6 @@ export class A22EffectlistComponent extends ListComponent implements OnInit {
     private a22service: A22Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.gameService(this.a22service, 'effects');
     this.effectControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.effectControl,
@@ -43,11 +42,11 @@ export class A22EffectlistComponent extends ListComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-    this.modalEvent();
+  changeData(): void {
     this.route.data
       .pipe(takeUntil(this.destroy$))
       .subscribe(data => {
+        this.gameService(this.a22service, 'effects');
         if (data.type == "normal") {
           this.normal = true;
           this.seoURL = `${this.gameURL}/effects/${this.language}`;
@@ -123,7 +122,7 @@ export class A22EffectlistComponent extends ListComponent implements OnInit {
     });
   }
 
-  openModal2(template: TemplateRef<any>, slug: string, event?): void {
+  openModal(template: TemplateRef<any>, slug: string, event?): void {
     if (event) {
       if(event.ctrlKey) {
         return;
