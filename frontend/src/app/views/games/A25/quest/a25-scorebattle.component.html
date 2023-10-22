@@ -14,7 +14,7 @@
           </li>
       </ol>
   </div>
-  <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
+  <div class="col-md-3" ></div>
 </div>
 
 <ng-container *ngFor="let scorebattle of scorebattles">
@@ -30,7 +30,7 @@
             <div style="position:relative;text-align:center;" *ngFor="let reward of diff.rewards">
                 <a routerLink="/{{gameURL}}/items/materials/{{reward.item.slug}}/{{language}}">
                     <img loading="lazy" class="resleri-item-frame-sm"
-                        style="aspect-ratio:1;max-width:150px;background-image:url({{imgURL}}svg/item-frame-{{reward.item.rarity}}.svg)"
+                        style="aspect-ratio:1;width:150px;background-image:url({{imgURL}}svg/item-frame-{{reward.item.rarity}}.svg)"
                         src="{{imgURL}}items/{{reward.item.slug}}.webp" alt="{{reward.item.name}}"><br />
                     {{reward.item.name}}</a> x{{reward.num}}
             </div>

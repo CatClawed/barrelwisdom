@@ -35,7 +35,7 @@
             </mat-select-trigger>
           </mat-select>
         </mat-form-field>
-        <language-settings class="col-md-3" section="{{gameURL}}"></language-settings>
+        <div class="col-md-3" ></div>
       </div>
     </form>
 </div>
@@ -68,7 +68,7 @@
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <i class="fas fa-times-circle"></i>
     </button>
-    <a12-trait slug="{{selected}}" [showNav]="false"></a12-trait>
+    <a12-trait inputSlug="{{selected}}" [showNav]="false"></a12-trait>
   </div>
 </ng-template>
 </ng-container>

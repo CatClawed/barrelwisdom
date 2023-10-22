@@ -22,6 +22,6 @@
         <p><b>Acquisition: </b>{{item.shop}} {{item.note}}<span *ngIf="item.chest">{{item.chest[0].region}}<span *ngIf="item.chest[0].subregion"> &gt; </span>{{item.chest[0].subregion}}</span></p>
     </div>
   </div>
-  <language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
+  <div *ngIf="showNav" class="col-md-3" ></div>
 </div>
 </ng-container>

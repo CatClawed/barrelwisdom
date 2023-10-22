@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Trait } from '@app/views/games/A12/_services/a12.interface';
 import { A12Service } from '@app/views/games/A12/_services/a12.service';
-import { ListComponent } from '@app/views/games/_prototype/list.component';
+import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -15,7 +15,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   templateUrl: 'a12-traitlist.component.html',
   providers: [DestroyService]
 })
-export class A12TraitlistComponent extends ListComponent implements OnInit {
+export class A12TraitlistComponent extends ListComponent2 {
   traitControl: UntypedFormControl;
   traits: Trait[];
   filteredTraits: Observable<Trait[]>;
@@ -32,7 +32,6 @@ export class A12TraitlistComponent extends ListComponent implements OnInit {
     private a12service: A12Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.gameService(this.a12service, 'traits');
     this.traitControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.traitControl,
@@ -40,18 +39,14 @@ export class A12TraitlistComponent extends ListComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-    this.modalEvent();
-    this.getTraits();
-    this.genericSEO(`Traits`, `The list of traits in ${this.gameTitle}.`);
-  }
-
-  getTraits() {
+  changeData(): void {
     this.a12service.getTraitList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: traits => {
           this.traits = traits;
+          this.gameService(this.a12service, 'traits');
+          this.genericSEO(`Traits`, `The list of traits in ${this.gameTitle}.`);
           this.filteredTraits = this.pageForm.valueChanges.pipe(
             startWith(null as Observable<Trait[]>),
             map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.traits.slice())
@@ -90,9 +85,5 @@ export class A12TraitlistComponent extends ListComponent implements OnInit {
       });
     }
     return traitlist;
-  }
-
-  identify2(index, item) {
-    return item.slugname;
   }
 }

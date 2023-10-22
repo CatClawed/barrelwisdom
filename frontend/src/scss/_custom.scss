@@ -1,3 +1,5 @@
+@import 'specific/navigation';
+
 // Font
 
 @font-face {
@@ -7,7 +9,6 @@
 
   font-weight: normal;
   font-style: normal;
-  //font-display: swap;
 }
 
 // base class
@@ -392,121 +393,6 @@ a {
 
 a:hover {
   text-decoration: underline;
-}
-
-.navigation {
-  position: fixed;
-  z-index: 1000;
-  border-bottom: transparent !important;
-  background: $navbar linear-gradient(0deg, rgba(71, 58, 48, 1) 0%, rgba(94, 76, 63, 0.8687675753895308) 100%);
-  height: 55px;
-  padding: 0;
-  width: 100%;
-}
-
-.navigation-brand {
-  display: inline-flex;
-  align-items: center;
-  width: 155px;
-  height: 55px;
-  padding: 0;
-  margin-right: 0;
-  justify-content: center;
-  margin-right: 1rem;
-}
-
-.nav-items {
-  color: white;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  font-size: 1rem;
-}
-
-.nav-items:hover {
-  color: white;
-  text-decoration: none;
-  background-color: #2f1d12;
-  border-radius: 0.25rem;
-}
-
-@media screen and (min-width: 800px) {
-  .navigation-hide-large {
-    display: none !important;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .nav-items {
-    display: none;
-  }
-
-  .navbrand {
-    position: absolute;
-    left: 50%;
-    margin-left: -77.5px;
-  }
-}
-
-.sidenav {
-  background-color: $sidebar !important;
-  width: 200px;
-}
-
-.sidenav-items {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.sidenav-item {
-  padding: 0.6rem;
-  color: white;
-  border-radius: 0.25rem;
-  width: 95%;
-  display: flex;
-  align-items: center;
-
-  >i {
-    margin-right: 0.5rem;
-    width: 1.3rem;
-    text-align: center;
-  }
-
-  >b {
-    margin-left: auto;
-  }
-}
-
-.sidenav-item:hover {
-  color: white;
-  background-color: #20a8d8 !important;
-  text-decoration: none;
-}
-
-.sidenav-item.active {
-  background-color: #3c4e5e;
-}
-
-.sidenav-child {
-  padding-left: 2.4rem;
-}
-
-.sidenav-bottom {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 1em;
-}
-
-.mat-drawer-inner-container::-webkit-scrollbar {
-  display: none;
-}
-
-.mat-drawer-inner-container {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 }
 
 /* Background pattern from Toptal Subtle Patterns */

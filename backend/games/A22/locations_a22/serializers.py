@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from games.A22.locations_a22.models import *
+from games.A22.locations_a22.models import Location
 from collections import OrderedDict
 
 

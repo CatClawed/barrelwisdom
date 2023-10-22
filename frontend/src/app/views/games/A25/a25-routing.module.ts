@@ -7,6 +7,7 @@ const routes: Routes = [
     children: [
       {
         path: '', 
+        data: {howdy:'hi'},
         loadChildren: ()=> import('@app/views/games/A25/trait/a25-trait.module').then(m=>m.A25TraitModule),
       },
     ]

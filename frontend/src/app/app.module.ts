@@ -1,5 +1,6 @@
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { APP_ID, NgModule } from '@angular/core';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -26,6 +27,7 @@ const APP_CONTAINERS = [
     HttpClientModule,
     TransferHttpCacheModule,
     MatSidenavModule,
+    MatMenuModule,
     AppRoutingModule
   ],
   providers: [

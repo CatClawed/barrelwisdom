@@ -7,7 +7,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
 import { ErrorModule } from '@app/views/error/error.module';
-import { LanguageModule } from '@app/views/language/language.module';
 import { A23LocationRoutingModule } from './a23-location-routing.module';
 import { A23LocationComponent } from './a23-location.component';
 import { PopoverModule } from 'ngx-bootstrap/popover';
@@ -16,8 +15,7 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
     imports: [
       CommonModule,
       A23LocationRoutingModule,
-      LanguageModule,
-      ErrorModule,
+            ErrorModule,
       BreadcrumbModule,
       MatInputModule,
       MatFormFieldModule,

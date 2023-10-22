@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ErrorModule } from '@app/views/error/error.module';
-import { LanguageModule } from '@app/views/language/language.module';
 import { A23SeedRoutingModule } from './a23-seed-routing.module';
 import { A23SeedComponent } from './a23-seed.component';
 import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
@@ -10,8 +9,7 @@ import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
     imports: [
       CommonModule,
       A23SeedRoutingModule,
-      LanguageModule,
-      ErrorModule,
+            ErrorModule,
       BreadcrumbModule,
     ],
     declarations: [

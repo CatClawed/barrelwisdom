@@ -56,7 +56,7 @@
         <div>
             <ng-container *ngIf="comment.author">
                 <b><a routerLink="/user/{{comment.author.username}}" style="color:black;">{{comment.author.username}}</a></b>
-                <div *ngIf="comment.author in blog.author; else staff" class="badge bg-secondary" style="margin-left:0.5rem;">Author</div>
+                <div *ngIf="blog.author.includes(comment.author); else staff" class="badge bg-secondary" style="margin-left:0.5rem;">Author</div>
                 <ng-template #staff>
                     <div class="badge bg-secondary" style="margin-left:0.5rem;">Staff</div>
                 </ng-template>

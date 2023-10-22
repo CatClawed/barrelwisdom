@@ -6,7 +6,7 @@
   <div class="{{colset}} card card-body">
     <div class="flex">
       <h4 class="card-title">{{trait.name}}</h4>
-      <span><b>Cost: </b>{{trait.cost}}</span>
+      <span *ngIf="trait.cost"><b>Cost: </b>{{trait.cost}}</span>
     </div>
     <p>{{trait.desc}}</p>
     <div *ngIf="trait.item_set">
@@ -23,6 +23,6 @@
       <i class="trait-color{{trait.accessory}} atelier atelier-np atelier-escha-accessory"></i>
     </div>
   </div>
-<language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
+<div *ngIf="showNav" class="col-md-3" ></div>
 </div>
 </ng-container>

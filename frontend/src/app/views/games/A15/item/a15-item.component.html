@@ -124,6 +124,6 @@
       <tr><td><img *ngFor="let char of item.characterequip_set[0].chars" src="{{imgURL}}equip/equip-{{char.name}}.webp" alt="Can equip: {{char.name}}"></td></tr>
     </table>
   </div>
-  <language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
+  <div *ngIf="showNav" class="col-md-3" ></div>
 </div>
 </ng-container>

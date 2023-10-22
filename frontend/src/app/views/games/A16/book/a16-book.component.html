@@ -13,6 +13,6 @@
       <li *ngFor="let item of book.items"><a routerLink="/{{gameURL}}/items/{{item.slugname}}/{{language}}">{{item.name}}</a></li>
     </ul>
   </div>
-  <language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
+  <div *ngIf="showNav" class="col-md-3" ></div>
 </div>
 </ng-container>

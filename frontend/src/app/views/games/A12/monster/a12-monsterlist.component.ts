@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { MonsterList } from '@app/views/games/A12/_services/a12.interface';
 import { A12Service } from '@app/views/games/A12/_services/a12.service';
-import { ListComponent } from '@app/views/games/_prototype/list.component';
+import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -16,7 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A12MonsterlistComponent extends ListComponent implements OnInit {
+export class A12MonsterlistComponent extends ListComponent2 {
   monsterControl: UntypedFormControl;
   monsters: MonsterList[];
   filteredMonsters: Observable<MonsterList[]>;
@@ -32,25 +32,21 @@ export class A12MonsterlistComponent extends ListComponent implements OnInit {
     private a12service: A12Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.gameService(this.a12service, 'monsters');
+
     this.monsterControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.monsterControl,
     })
   }
 
-  ngOnInit(): void {
-    this.modalEvent();
-    this.getMonsters();
-    this.genericSEO(`Monsters`, `The list of monsters in ${this.gameTitle}.`);
-  }
-
-  getMonsters() {
+  changeData(): void {
     this.a12service.getMonsterList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: monsters => {
           this.monsters = monsters;
+          this.gameService(this.a12service, 'monsters');
+          this.genericSEO(`Monsters`, `The list of monsters in ${this.gameTitle}.`);
           this.filteredMonsters = this.pageForm.valueChanges.pipe(
             startWith(null as Observable<MonsterList[]>),
             map((search: any) => search ? this.filterT(search.filtertext) : this.monsters.slice())
@@ -71,9 +67,5 @@ export class A12MonsterlistComponent extends ListComponent implements OnInit {
     return list.filter(mon => {
       return mon.name.toLowerCase().includes(filterValue);
     });
-  }
-
-  identify2(index, item) {
-    return item.slugname;
   }
 }

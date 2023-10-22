@@ -2,7 +2,7 @@
 <ng-container *ngIf="update">
 <Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Home"></Breadcrumb>
 <h1>Home</h1>
-<language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
+<div *ngIf="showNav" class="col-md-3" ></div>
 <p><time dateTime="{{update.time}}">Last Updated: {{update.time | date:'mediumDate' }} </time></p>
 <ng-container *ngIf="update.characters">
   <h2>Characters</h2>

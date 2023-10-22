@@ -3,16 +3,51 @@
         style="color:white;font-size:2rem;padding-left:0.5rem;background:none;border:none;"></button>
     <div class="navbrand" style="display:inline-flex;align-items:center;">
         <a aria-label="homepage" routerLink="/" class="navigation-brand">
-            <img src="/media/main/barrelwisdom.svg" height=45 width=135 alt="Barrel Wisdom">
+            <picture>
+                <source
+                    srcset="/media/main/barrelwisdom.svg"
+                    media="(min-width: 721px)"
+                    height="45"
+                    width="135"
+                />
+                <img src="/media/main/barrel.svg" height="45" width="35" alt="Barrel Wisdom">
+            </picture>
         </a>
         <a class="nav-items" routerLink="/blog/atelier-series-guide">Atelier Series Guide</a>
         <a class="nav-items" routerLink="/blog/donate">Donate</a>
     </div>
-    <div style="margin-left:auto;margin-right:0;">
+    <div class="nav-social-media">
         <a aria-label="Twitter" target="_blank" rel="noopener" href="https://twitter.com/BarrelWisdom"><i
                 class="fab fa-twitter" title="Twitter" style="color:white;font-size:2rem;padding-right:0.5rem;"></i></a>
         <a aria-label="Discord" target="_blank" rel="noopener" href="https://discord.gg/utRynRKxwh"><i
                 class="fab fa-discord" title="Discord" style="color:white;font-size:2rem;padding-right:0.5rem;"></i></a>
+    </div>
+    <div class="nav-lang">
+        <ng-container *ngIf="languages.length > 1; else enOnly">
+            <button mat-icon-button
+                [matMenuTriggerFor]="menu"
+                aria-label="Language select">
+                <div>
+                    <i class="fa-solid fa-globe"></i>
+                    <span>{{codes[currentLang]}}</span>
+                    <b class="fas fa-caret-down"></b>
+                </div>
+                
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item
+                    *ngFor="let language of languages"
+                    (click)="changeLanguage(language)">
+                    <span>{{codes[language]}}</span>
+                </button>
+            </mat-menu>
+        </ng-container>
+        <ng-template #enOnly>
+            <button mat-icon-button disabled>
+                <i class="fa-solid fa-globe"></i>
+                <span>{{codes[currentLang]}}</span>
+            </button>
+        </ng-template>
     </div>
 </div>
 
@@ -50,6 +85,12 @@
             </ng-container>
         </div>
         <div class="sidenav-bottom">
+            <a class="sidenav-item sidenav-social-media" href="https://discord.gg/utRynRKxwh" rel="noopener" target="_blank">
+                <i class="fab fa-discord"></i>Discord
+            </a>
+            <a class="sidenav-item sidenav-social-media" href="https://twitter.com/BarrelWisdom" rel="noopener" target="_blank">
+                <i class="fab fa-twitter"></i>Twitter
+            </a>
             <a *ngIf="!user" class="sidenav-item" routerLink="/login">
                 <i class="fas fa-user"></i>Login
             </a>

@@ -149,6 +149,6 @@
   <p [innerHTML]="trait.desc.replace('{0}', trait.val1 + ' ~ ' + trait.val5).replace('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
   <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
 </ng-template>
-<language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
+<div *ngIf="showNav" class="col-md-3" ></div>
 </div>
 </ng-container>

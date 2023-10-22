@@ -2,7 +2,7 @@
 <ng-container *ngIf="research">
 <Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Research"></Breadcrumb>
 <h1>Research</h1>
-<language-settings *ngIf="showNav" class="col-md-3" section="{{gameURL}}"></language-settings>
+<div *ngIf="showNav" class="col-md-3" ></div>
 
 <mat-tab-group>
   <mat-tab label="{{kind[language][0]}}">
