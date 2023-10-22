@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
 import { Item } from '@app/views/games/A18/_services/a18.interface';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
-import { SingleComponent } from '@app/views/games/_prototype/single.component';
+import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a18-item.component.html',
   selector: 'a18-item',
+  providers: [DestroyService]
 })
-export class A18ItemComponent extends SingleComponent implements OnInit {
+export class A18ItemComponent extends SingleComponent2 {
 
   item: Item;
   colors = {
@@ -23,20 +26,22 @@ export class A18ItemComponent extends SingleComponent implements OnInit {
   }
 
   constructor(
+    protected historyService: HistoryService,
     protected route: ActivatedRoute,
+    protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
-    private a18service: A18Service,
-    public historyService: HistoryService) {
-    super(route, seoService);
-    this.gameService(this.a18service, 'items');
+    private a18service: A18Service) {
+    super(destroy$, route, seoService);
   }
-  ngOnInit(): void {
-    if (this.showNav) this.colset = "col-md-9 mx-auto ";
+
+  changeData(): void {
     this.a18service.getItem(this.slug, this.language)
+    .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: item => {
           this.error = ``;
           this.item = item;
+          this.gameService(this.a18service, 'items');
           let name = (this.language === 'en') ? this.item.name.normalize('NFD').replace(/[\u0300-\u036f]/g, "") : this.item.name;
           this.seoImage = `${this.imgURL}${this.section}/${this.item.slug}.webp`
           this.genericSEO(name, this.item.desc[0]);

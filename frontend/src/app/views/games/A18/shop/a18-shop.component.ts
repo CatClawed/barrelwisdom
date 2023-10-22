@@ -1,11 +1,11 @@
 import { Location, ViewportScroller } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Shop } from '@app/views/games/A18/_services/a18.interface';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
-import { SingleComponent } from '@app/views/games/_prototype/single.component';
+import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
 import { first, takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -13,7 +13,7 @@ import { first, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A18ShopComponent extends SingleComponent implements OnInit {
+export class A18ShopComponent extends SingleComponent2 implements AfterViewInit {
   shops: Shop[];
 
   constructor(
@@ -24,14 +24,9 @@ export class A18ShopComponent extends SingleComponent implements OnInit {
     private a18service: A18Service,
     private viewportScroller: ViewportScroller,
   ) {
-    super(route, seoService);
-    this.gameService(this.a18service, 'shops');
+    super(destroy$, route, seoService);
   }
 
-  ngOnInit(): void {
-    this.genericSEO(`Shops`, `The list of shops in ${this.gameTitle}.`);
-    this.getShops();
-  }
   ngAfterViewInit(): void {
     this.route.fragment.pipe(
       first(), takeUntil(this.destroy$)
@@ -42,13 +37,15 @@ export class A18ShopComponent extends SingleComponent implements OnInit {
     this.viewportScroller.scrollToAnchor(id);
   }
 
-  getShops() {
+  changeData() {
     this.a18service.getShopList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: shops => {
-          this.error =``;
+          this.error = ``;
           this.shops = shops;
+          this.gameService(this.a18service, 'shops');
+          this.genericSEO(`Shops`, `The list of shops in ${this.gameTitle}.`);
         },
         error: error => {
           this.error = `${error.status}`;
@@ -57,5 +54,5 @@ export class A18ShopComponent extends SingleComponent implements OnInit {
   }
   identify(index, item) {
     return item.slug;
-}
+  }
 }

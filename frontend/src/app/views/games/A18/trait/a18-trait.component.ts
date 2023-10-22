@@ -1,31 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DestroyService } from '@app/services/destroy.service';
+import { SeoService } from '@app/services/seo.service';
 import { Trait } from '@app/views/games/A18/_services/a18.interface';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
-import { SeoService } from '@app/services/seo.service';
-import { SingleComponent } from '@app/views/games/_prototype/single.component';
+import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a18-trait.component.html',
   selector: 'a18-trait',
+  providers: [DestroyService]
 })
-export class A18TraitComponent extends SingleComponent implements OnInit {
+export class A18TraitComponent extends SingleComponent2 {
   trait: Trait;
 
   constructor(
     protected route: ActivatedRoute,
+    protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
-    private a18service: A18Service,) {
-    super(route, seoService);
-    this.gameService(this.a18service, 'traits');
+    private a18service: A18Service) {
+    super(destroy$, route, seoService);
   }
 
-  ngOnInit(): void {
+  changeData(): void {
     if (this.showNav) this.colset = "col-md-5 mx-auto ";
     this.a18service.getTrait(this.slug, this.language)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: trait => {
+          this.error = ``;
           this.trait = trait;
+          this.gameService(this.a18service, 'traits');
           this.genericSEO(this.trait.name, this.trait.desc);
         },
         error: error => {

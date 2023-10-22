@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DestroyService } from '@app/services/destroy.service';
+import { SeoService } from '@app/services/seo.service';
 import { Monster } from '@app/views/games/A18/_services/a18.interface';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
-import { SeoService } from '@app/services/seo.service';
-import { SingleComponent } from '@app/views/games/_prototype/single.component';
+import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a18-monster.component.html',
   selector: 'a18-monster',
 })
-export class A18MonsterComponent extends SingleComponent implements OnInit {
+export class A18MonsterComponent extends SingleComponent2 {
   monster: Monster;
   chart = {
     1: `<i class="fa-solid fa-x"></i>`,
@@ -22,19 +24,20 @@ export class A18MonsterComponent extends SingleComponent implements OnInit {
 
   constructor(
     protected route: ActivatedRoute,
+    protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
-    private a18service: A18Service,) {
-    super(route, seoService);
-    this.gameService(this.a18service, 'monsters');
+    private a18service: A18Service) {
+    super(destroy$, route, seoService);
   }
-  ngOnInit(): void {
-    this.language = this.route.snapshot.params.language;
-    if (this.showNav) this.colset = "col-md-9 mx-auto ";
+
+  changeData(): void {
     this.a18service.getMonster(this.slug, this.language)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: monster => {
           this.error = ``;
           this.monster = monster;
+          this.gameService(this.a18service, 'monsters');
           this.seoImage = `${this.imgURL}${this.section}/${this.monster.slug}.webp`
           this.genericSEO(this.monster.name, this.monster.desc[0]);
         },
@@ -43,5 +46,4 @@ export class A18MonsterComponent extends SingleComponent implements OnInit {
         }
       });
   }
-
 } 

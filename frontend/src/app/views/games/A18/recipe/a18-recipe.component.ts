@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { RecipeIdeaList } from '@app/views/games/A18/_services/a18.interface';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
-import { SingleComponent } from '@app/views/games/_prototype/single.component';
+import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
 
@@ -14,7 +14,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A18RecipeComponent extends SingleComponent implements OnInit {
+export class A18RecipeComponent extends SingleComponent2 {
   pageForm: UntypedFormGroup
   recipeControl: UntypedFormControl;
   recipes: RecipeIdeaList[];
@@ -27,26 +27,22 @@ export class A18RecipeComponent extends SingleComponent implements OnInit {
     private formBuilder: UntypedFormBuilder,
     private a18service: A18Service,
   ) {
-    super(route, seoService);
-    this.gameService(this.a18service, 'recipes');
+    super(destroy$, route, seoService);
     this.recipeControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.recipeControl,
     })
   }
 
-  ngOnInit(): void {
-    this.genericSEO(`Recipes Ideas`, `The list of recipes ideas in ${this.gameTitle}.`);
-    this.getRecipes();
-  }
-
-  getRecipes() {
+  changeData() {
     this.a18service.getRecipeList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: recipes => {
-          this.error =``;
+          this.error = ``;
           this.recipes = recipes;
+          this.gameService(this.a18service, 'recipes');
+          this.genericSEO(`Recipes Ideas`, `The list of recipes ideas in ${this.gameTitle}.`);
           this.filteredRecipes = this.pageForm.valueChanges.pipe(
             startWith(null as Observable<RecipeIdeaList[]>),
             map((search: any) => search ? this.filterT(search.filtertext) : this.recipes.slice())
@@ -71,5 +67,5 @@ export class A18RecipeComponent extends SingleComponent implements OnInit {
   }
   identify(index, item) {
     return item.slug;
-}
+  }
 }

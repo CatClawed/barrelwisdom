@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Monster, Race } from '@app/views/games/A18/_services/a18.interface';
-import { A18Service } from '@app/views/games/A18/_services/a18.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { ListComponent } from '@app/views/games/_prototype/list.component';
+import { Monster, Race } from '@app/views/games/A18/_services/a18.interface';
+import { A18Service } from '@app/views/games/A18/_services/a18.service';
+import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -16,7 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A18MonsterlistComponent extends ListComponent implements OnInit {
+export class A18MonsterlistComponent extends ListComponent2 {
   monsterControl: UntypedFormControl;
   monsters: Monster[];
   filteredMonsters: Observable<Monster[]>;
@@ -36,7 +36,6 @@ export class A18MonsterlistComponent extends ListComponent implements OnInit {
     private a18service: A18Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.gameService(this.a18service, 'monsters');
     this.monsterControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.monsterControl,
@@ -44,11 +43,9 @@ export class A18MonsterlistComponent extends ListComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-    this.modalEvent();
+  changeData(): void {
     this.getMonsters();
     this.getRace();
-    this.genericSEO(`Monsters`, `The list of monsters in ${this.gameTitle}.`);
   }
 
   getMonsters() {
@@ -57,6 +54,8 @@ export class A18MonsterlistComponent extends ListComponent implements OnInit {
       .subscribe({
         next: monsters => {
           this.monsters = monsters;
+          this.gameService(this.a18service, 'monsters');
+          this.genericSEO(`Monsters`, `The list of monsters in ${this.gameTitle}.`);
           this.filteredMonsters = this.pageForm.valueChanges.pipe(
             startWith(null as Observable<Monster[]>),
             map((search: any) => search ? this.filterT(search.filtertext, search.type) : this.monsters.slice())

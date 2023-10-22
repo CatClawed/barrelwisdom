@@ -21,7 +21,7 @@ export class TranslationService implements OnDestroy {
       .pipe(takeUntil(this.destroy$))
         .subscribe(val => {
           if(val instanceof NavigationEnd) {
-            let sections = this.router.url.split('#')[0].split('/')
+            let sections = this.router.url.split('?')[0].split('#')[0].split('/')
             let section = sections[1];
             if (sections.length > 3) {
                 this.langOptions = environment.languages[section] === undefined ? environment.languages['default'] : environment.languages[section];
