@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Category, ItemList } from '@app/views/games/A16/_services/a16.interface';
 import { A16Service } from '@app/views/games/A16/_services/a16.service';
-import { ListComponent } from '@app/views/games/_prototype/list.component';
+import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -16,7 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A16ItemlistComponent extends ListComponent implements OnInit {
+export class A16ItemlistComponent extends ListComponent2 {
   itemControl: UntypedFormControl;
   ingControl: UntypedFormControl;
   items: ItemList[];
@@ -37,7 +37,6 @@ export class A16ItemlistComponent extends ListComponent implements OnInit {
     private a16service: A16Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.gameService(this.a16service, 'items');
     this.itemControl = new UntypedFormControl();
     this.ingControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
@@ -49,11 +48,9 @@ export class A16ItemlistComponent extends ListComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-    this.modalEvent();
+  changeData(): void {
     this.getItems();
     this.getCategories();
-    this.genericSEO(`Items`, `The list of items in ${this.gameTitle}.`);
   }
 
   getItems() {
@@ -62,6 +59,8 @@ export class A16ItemlistComponent extends ListComponent implements OnInit {
       .subscribe({
         next: items => {
           this.items = items;
+          this.gameService(this.a16service, 'items');
+          this.genericSEO(`Items`, `The list of items in ${this.gameTitle}.`);
           this.filteredItems = this.pageForm.valueChanges.pipe(
             startWith(null as Observable<ItemList[]>),
             map((search: any) => search ? this.filterT(search.filtertext, search.type, search.elementval, search.element, search.filtering) : this.items.slice())
@@ -119,9 +118,5 @@ export class A16ItemlistComponent extends ListComponent implements OnInit {
       });
     }
     return list;
-  }
-
-  identify2(index, item) {
-    return item.slugname;
   }
 }

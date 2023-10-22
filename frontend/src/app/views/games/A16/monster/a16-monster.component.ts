@@ -1,31 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { MonsterFull } from '@app/views/games/A16/_services/a16.interface';
 import { A16Service } from '@app/views/games/A16/_services/a16.service';
-import { SingleComponent } from '@app/views/games/_prototype/single.component';
+import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a16-monster.component.html',
   selector: 'a16-monster',
+  providers: [DestroyService]
 })
-export class A16MonsterComponent extends SingleComponent implements OnInit {
+export class A16MonsterComponent extends SingleComponent2 {
   monster: MonsterFull;
 
   constructor(
     protected route: ActivatedRoute,
+    protected readonly destroy$: DestroyService,
     private a16service: A16Service,
     protected seoService: SeoService) {
-    super(route, seoService);
-    this.gameService(this.a16service, 'monsters');
+    super(destroy$, route, seoService);
   }
-  ngOnInit(): void {
-    if (this.showNav) this.colset = "col-md-9 mx-auto ";
+
+  changeData(): void {
     this.a16service.getMonster(this.slug, this.language)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: monster => {
           this.error = ``;
           this.monster = monster;
+          this.gameService(this.a16service, 'monsters');
           this.seoImage = `${this.imgURL}${this.section}/${this.monster.slugname}.webp`
           this.genericSEO(this.monster.name, this.monster.desc);
         },

@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Property } from '@app/views/games/A16/_services/a16.interface';
 import { A16Service } from '@app/views/games/A16/_services/a16.service';
-import { ListComponent } from '@app/views/games/_prototype/list.component';
+import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -15,7 +15,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   templateUrl: 'a16-propertylist.component.html',
   providers: [DestroyService]
 })
-export class A16PropertylistComponent extends ListComponent implements OnInit {
+export class A16PropertylistComponent extends ListComponent2 {
   propertyControl: UntypedFormControl;
   properties: Property[];
   filteredProperties: Observable<Property[]>;
@@ -31,7 +31,6 @@ export class A16PropertylistComponent extends ListComponent implements OnInit {
     private a16service: A16Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.gameService(this.a16service, 'properties');
     this.propertyControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.propertyControl,
@@ -39,18 +38,14 @@ export class A16PropertylistComponent extends ListComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-    this.modalEvent();
-    this.getProperties();
-    this.genericSEO(`Properties`, `The list of properties in ${this.gameTitle}.`);
-  }
-
-  getProperties() {
+  changeData() {
     this.a16service.getPropertyList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: properties => {
           this.properties = properties;
+          this.gameService(this.a16service, 'properties');
+          this.genericSEO(`Properties`, `The list of properties in ${this.gameTitle}.`);
           this.filteredProperties = this.pageForm.valueChanges.pipe(
             startWith(null as Observable<Property[]>),
             map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.properties.slice())
@@ -88,9 +83,5 @@ export class A16PropertylistComponent extends ListComponent implements OnInit {
       });
     }
     return propertylist;
-  }
-
-  identify2(index, item) {
-    return item.slugname;
   }
 }
