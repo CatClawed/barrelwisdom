@@ -1,24 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Character } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
-import { SingleComponent } from '@app/views/games/_prototype/single.component';
+import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a25-chara.component.html',
   selector: 'a25-chara',
+  providers: [DestroyService]
 })
-export class A25CharaComponent extends SingleComponent implements OnInit {
+export class A25CharaComponent extends SingleComponent2 {
   chara: Character;
   stars: number[] = [1,2,3,3.5,4,4.5,5];
 
   constructor(
     protected route: ActivatedRoute,
+    protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
-    protected a25service: A25Service,) {
-    super(route, seoService);
-    this.gameService(this.a25service, 'charas');
+    protected a25service: A25Service) {
+    super(destroy$, route, seoService);
   }
 
   elements = {
@@ -47,33 +50,14 @@ export class A25CharaComponent extends SingleComponent implements OnInit {
     5: 1.25
   }
 
-  stats = {
-    'hp': {
-      "en": "HP", "ja": "HP"
-    },
-    'agi': {
-      "en": "AGI", "ja": "素早い"
-    },
-    'patk': {
-      "en": "PATK", "ja": "物攻"
-    },
-    'pdef': {
-      "en": "PDEF", "ja": "物防"
-    },
-    'matk': {
-      "en": "MATK", "ja": "魔攻"
-    },
-    'mdef': {
-      "en": "MDEF", "ja": "魔防"
-    },
-  }
-
-  ngOnInit(): void {
+  changeData(): void {
     if (this.showNav) this.colset = "col-md-5 mx-auto ";
     this.a25service.getChara(this.slug, this.language)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: chara => {
           this.chara = chara;
+          this.gameService(this.a25service, 'charas');
           this.seoImage = `${this.imgURL}characters/full/${this.chara.slug}.webp`
           this.genericSEO(`${this.chara.name} ${this.chara.title}`, `All data about ${this.chara.name}`);
         },   error: error => {

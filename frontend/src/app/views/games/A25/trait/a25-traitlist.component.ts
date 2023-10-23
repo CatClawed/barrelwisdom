@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { NameLink, Trait } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
-import { ListComponent } from '@app/views/games/_prototype/list.component';
+import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -16,7 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A25TraitlistComponent extends ListComponent implements OnInit {
+export class A25TraitlistComponent extends ListComponent2 {
   traitControl: UntypedFormControl;
   transfer: NameLink[];
   traits: Trait[];
@@ -33,7 +33,6 @@ export class A25TraitlistComponent extends ListComponent implements OnInit {
     private formBuilder: UntypedFormBuilder,
     private a25service: A25Service,) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.gameService(this.a25service, 'traits');
     this.traitControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.traitControl,
@@ -41,11 +40,9 @@ export class A25TraitlistComponent extends ListComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-    this.modalEvent();
+  changeData(): void {
     this.getTransfer();
     this.getTraits();
-    this.genericSEO(`Traits`, `The list of traits in ${this.gameTitle}.`);
   }
 
   getTraits() {
@@ -54,6 +51,8 @@ export class A25TraitlistComponent extends ListComponent implements OnInit {
       .subscribe({
         next: traits => {
           this.traits = traits;
+          this.gameService(this.a25service, 'traits');
+          this.genericSEO(`Traits`, `The list of traits in ${this.gameTitle}.`);      
           this.filteredTraits = this.pageForm.valueChanges.pipe(
             startWith(null as Observable<Trait[]>),
             map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.traits.slice())

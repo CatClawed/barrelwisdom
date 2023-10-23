@@ -1,23 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Research } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
-import { SingleComponent } from '@app/views/games/_prototype/single.component';
+import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { takeUntil } from 'rxjs/operators';
+
 
 @Component({
   templateUrl: 'a25-research.component.html',
   selector: 'a25-research',
+  providers: [DestroyService]
 })
-export class A25ResearchComponent extends SingleComponent implements OnInit {
+export class A25ResearchComponent extends SingleComponent2 {
   research: Research[];
 
   constructor(
     protected route: ActivatedRoute,
+    protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
-    protected a25service: A25Service,) {
-    super(route, seoService);
-    this.gameService(this.a25service, 'research');
+    protected a25service: A25Service) {
+    super(destroy$, route, seoService);
   }
 
   kind = {
@@ -25,12 +29,15 @@ export class A25ResearchComponent extends SingleComponent implements OnInit {
     "ja": ['戦闘研究', '錬金研究'],
   }
 
-  ngOnInit(): void {
+  changeData(): void {
     if (this.showNav) this.colset = "col-md-5 mx-auto ";
     this.a25service.getResearch(this.language)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: research => {
+          this.error = ``;
           this.research = research;
+          this.gameService(this.a25service, 'research');
           this.genericSEO('Research', `All research in ${this.gameTitle}`);
         },
         error: error => {

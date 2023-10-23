@@ -39,7 +39,7 @@
     </form>
   </div>
 <div *ngIf="filteredItems" class="item-grid">
-<div *ngFor="let it of filteredItems | async; trackBy:identify2" class="card card-body"  style="{{insertStyle(it)}}">
+<div *ngFor="let it of filteredItems | async; trackBy:identify" class="card card-body"  style="{{insertStyle(it)}}">
   <h4 class="card-title card-icon-space">
     <a (click)="openModal(itemModal, it.slug, $event);" href="/{{gameURL}}/items/materials/{{it.slug}}/{{language}}">{{it.name}}</a>    
   </h4>
@@ -79,7 +79,7 @@
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <i class="fas fa-times-circle"></i>
     </button>
-      <a25-item slug="{{selected}}" itemkind="materials" [showNav]="false"></a25-item>
+      <a25-item inputSlug="{{selected}}" itemkind="materials" [showNav]="false"></a25-item>
   </div>
 </ng-template>
 </div>

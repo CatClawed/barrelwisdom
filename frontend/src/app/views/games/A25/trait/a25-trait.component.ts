@@ -1,31 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Trait } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
-import { SingleComponent } from '@app/views/games/_prototype/single.component';
+import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a25-trait.component.html',
   selector: 'a25-trait',
+  providers: [DestroyService]
 })
-export class A25TraitComponent extends SingleComponent implements OnInit {
+export class A25TraitComponent extends SingleComponent2 {
   trait: Trait;
 
   constructor(
     protected route: ActivatedRoute,
+    protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
-    private a25service: A25Service,) {
-    super(route, seoService);
-    this.gameService(this.a25service, 'traits');
+    protected a25service: A25Service) {
+    super(destroy$, route, seoService);
   }
 
-  ngOnInit(): void {
+  changeData(): void {
     if (this.showNav) this.colset = "col-md-5 mx-auto ";
     this.a25service.getTrait(this.slug, this.language)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: trait => {
           this.trait = trait;
+          this.gameService(this.a25service, 'traits');
           if (this.language == "en") {
             this.genericSEO(this.trait.name_en, this.trait.desc.replace('{0}', this.trait.val[0] + ' ~ ' + this.trait.val[4]));
           }

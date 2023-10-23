@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Item, NameLink } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
-import { ListComponent } from '@app/views/games/_prototype/list.component';
+import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -16,7 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A25MaterialListComponent extends ListComponent implements OnInit {
+export class A25MaterialListComponent extends ListComponent2 {
   itemControl: UntypedFormControl;
   traitControl: UntypedFormControl;
   items: Item[];
@@ -34,7 +34,6 @@ export class A25MaterialListComponent extends ListComponent implements OnInit {
     private a25service: A25Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.gameService(this.a25service, 'items/materials');
     this.itemControl = new UntypedFormControl();
     this.traitControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
@@ -45,11 +44,9 @@ export class A25MaterialListComponent extends ListComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-    this.modalEvent();
+  changeData(): void {
     this.getItems();
     this.getColors();
-    this.genericSEO(`Materials`, `The list of materials in ${this.gameTitle}.`);
   }
 
   getItems() {
@@ -58,6 +55,8 @@ export class A25MaterialListComponent extends ListComponent implements OnInit {
       .subscribe({
         next: items => {
           this.items = items;
+          this.gameService(this.a25service, 'items/materials');
+          this.genericSEO(`Materials`, `The list of materials in ${this.gameTitle}.`);      
           this.filteredItems = this.pageForm.valueChanges.pipe(
             startWith(null as Observable<Item[]>),
             map((search: any) => search ? this.filterT(search.filtertext, search.color, search.rarity, search.filtertrait) : this.items.slice())
@@ -110,10 +109,6 @@ export class A25MaterialListComponent extends ListComponent implements OnInit {
     }
 
     return list;
-  }
-
-  identify2(index, item) {
-    return item.slug;
   }
 
   insertStyle(item: Item): string {
