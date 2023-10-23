@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Item, NameLink } from '@app/views/games/A23/_services/a23.interface';
-import { A23Service } from '@app/views/games/A23/_services/a23.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { ListComponent } from '@app/views/games/_prototype/list.component';
+import { Item, NameLink } from '@app/views/games/A23/_services/a23.interface';
+import { A23Service } from '@app/views/games/A23/_services/a23.service';
+import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -16,7 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A23ItemlistComponent extends ListComponent implements OnInit {
+export class A23ItemlistComponent extends ListComponent2 {
   itemControl: UntypedFormControl;
   ingControl: UntypedFormControl;
   items: Item[];
@@ -36,7 +36,6 @@ export class A23ItemlistComponent extends ListComponent implements OnInit {
     private a23service: A23Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.gameService(this.a23service, 'items');
     this.itemControl = new UntypedFormControl();
     this.ingControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
@@ -47,11 +46,9 @@ export class A23ItemlistComponent extends ListComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-    this.modalEvent();
+  changeData(): void {
     this.getItems();
     this.getCategories();
-    this.genericSEO(`Items`, `The list of items in ${this.gameTitle}.`);
   }
 
   getItems() {
@@ -59,8 +56,10 @@ export class A23ItemlistComponent extends ListComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: items => {
-          this.error =``;
+          this.error = ``;
           this.items = items;
+          this.gameService(this.a23service, 'items');
+          this.genericSEO(`Items`, `The list of items in ${this.gameTitle}.`);
           this.filteredItems = this.pageForm.valueChanges.pipe(
             startWith(null as Observable<Item[]>),
             map((search: any) => search ? this.filterT(search.filtertext, search.cat, search.filtering, search.kind) : this.items.slice())

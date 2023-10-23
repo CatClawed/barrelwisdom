@@ -1,32 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DestroyService } from '@app/services/destroy.service';
+import { SeoService } from '@app/services/seo.service';
 import { Book } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
-import { SeoService } from '@app/services/seo.service';
-import { SingleComponent } from '@app/views/games/_prototype/single.component';
+import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  templateUrl: 'a23-book.component.html'
+  templateUrl: 'a23-book.component.html',
+  providers: [DestroyService]
 })
-export class A23BookComponent extends SingleComponent implements OnInit {
+export class A23BookComponent extends SingleComponent2 {
   item: Book;
 
   constructor(
     protected route: ActivatedRoute,
+    protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
-    private a23service: A23Service,
-  ) {
-    super(route, seoService);
-    this.gameService(this.a23service, 'items/books');
+    private a23service: A23Service) {
+    super(destroy$, route, seoService);
   }
-  
-  ngOnInit(): void {
-    if (this.showNav) this.colset = "col-md-9 mx-auto ";
+
+  changeData(): void {
     this.a23service.getBook(this.slug, this.language)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: item => {
           this.error = ``;
           this.item = item;
+          this.gameService(this.a23service, 'items/books');
           this.seoImage = `${this.imgURL}items/${this.item.slug}.webp`
           this.genericSEO(this.item.name, `Recipe book in ${this.gameTitle}`);
         },

@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Trait } from '@app/views/games/A23/_services/a23.interface';
-import { A23Service } from '@app/views/games/A23/_services/a23.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { ListComponent } from '@app/views/games/_prototype/list.component';
+import { Trait } from '@app/views/games/A23/_services/a23.interface';
+import { A23Service } from '@app/views/games/A23/_services/a23.service';
+import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -16,7 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A23TraitlistComponent extends ListComponent implements OnInit {
+export class A23TraitlistComponent extends ListComponent2 {
   traitControl: UntypedFormControl;
   traits: Trait[];
   filteredTraits: Observable<Trait[]>;
@@ -31,26 +31,20 @@ export class A23TraitlistComponent extends ListComponent implements OnInit {
     private formBuilder: UntypedFormBuilder,
     private a23service: A23Service,) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.gameService(this.a23service, 'traits');
     this.traitControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.traitControl,
       transfers: 1
     })
   }
-
-  ngOnInit(): void {
-    this.modalEvent();
-    this.getTraits();
-    this.genericSEO(`Traits`, `The list of traits in ${this.gameTitle}.`);
-  }
-
-  getTraits() {
+  changeData() {
     this.a23service.getTraitList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: traits => {
           this.traits = traits;
+          this.gameService(this.a23service, 'traits');
+          this.genericSEO(`Traits`, `The list of traits in ${this.gameTitle}.`);
           this.filteredTraits = this.pageForm.valueChanges.pipe(
             startWith(null as Observable<Trait[]>),
             map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.traits.slice())
@@ -64,8 +58,8 @@ export class A23TraitlistComponent extends ListComponent implements OnInit {
 
   private filterT(value: string, transfer: number): Trait[] {
     let traitlist: Trait[] = this.traits;
-    if (transfer != 1) { 
-      traitlist = this.traits.filter(trait => !(trait.trans_atk == trait.trans_heal == trait.trans_dbf == trait.trans_buff == trait.trans_wpn == trait.trans_arm == trait.trans_acc == trait.trans_tal == trait.trans_syn == trait.trans_exp));
+    if (transfer != 1) {
+      traitlist = this.traits.filter(trait => !(trait.trans_atk && trait.trans_heal && trait.trans_dbf && trait.trans_buff && trait.trans_wpn && trait.trans_arm && trait.trans_acc && trait.trans_tal && trait.trans_syn && trait.trans_exp));
     }
 
     switch (transfer) {

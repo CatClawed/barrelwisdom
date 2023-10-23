@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DestroyService } from '@app/services/destroy.service';
+import { SeoService } from '@app/services/seo.service';
 import { Monster } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
-import { SeoService } from '@app/services/seo.service';
-import { SingleComponent } from '@app/views/games/_prototype/single.component';
+import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a23-monster.component.html',
   selector: 'a23-monster',
+  providers: [DestroyService]
 })
-export class A23MonsterComponent extends SingleComponent implements OnInit {
+export class A23MonsterComponent extends SingleComponent2 {
   monster: Monster;
   chart = {
     RESIST: `<i class="fas fa-chevron-up"></i>`,
@@ -22,19 +25,19 @@ export class A23MonsterComponent extends SingleComponent implements OnInit {
 
   constructor(
     protected route: ActivatedRoute,
+    protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
-    private a23service: A23Service,) {
-    super(route, seoService);
-    this.gameService(this.a23service, 'monsters');
+    private a23service: A23Service) {
+    super(destroy$, route, seoService);
   }
-  ngOnInit(): void {
-    this.language = this.route.snapshot.params.language;
-    if (this.showNav) this.colset = "col-md-9 mx-auto ";
+  changeData(): void {
     this.a23service.getMonster(this.slug, this.language)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: monster => {
           this.error = ``;
           this.monster = monster;
+          this.gameService(this.a23service, 'monsters');
           this.seoImage = `${this.imgURL}${this.section}/${this.monster.slug}.webp`
           this.genericSEO(this.monster.name, this.monster.desc1);
         },

@@ -1,12 +1,12 @@
 import { Location, ViewportScroller } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Area, GatherNode, Region } from '@app/views/games/A23/_services/a23.interface';
-import { A23Service } from '@app/views/games/A23/_services/a23.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { SingleComponent } from '@app/views/games/_prototype/single.component';
+import { Area, GatherNode, Region } from '@app/views/games/A23/_services/a23.interface';
+import { A23Service } from '@app/views/games/A23/_services/a23.service';
+import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
 import { first, takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -14,7 +14,7 @@ import { first, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A23LocationComponent extends SingleComponent implements OnInit {
+export class A23LocationComponent extends SingleComponent2 implements AfterViewInit {
   pageForm: UntypedFormGroup;
   locationControl: UntypedFormControl;
   region: Region;
@@ -28,21 +28,18 @@ export class A23LocationComponent extends SingleComponent implements OnInit {
     protected route: ActivatedRoute,
     protected seoService: SeoService,
     private a23service: A23Service,
-    private readonly destroy$: DestroyService,
+    protected readonly destroy$: DestroyService,
     private loc: Location,
     private router: Router,
     private viewportScroller: ViewportScroller,
     private formBuilder: UntypedFormBuilder,
   ) {
-    super(route, seoService);
+    super(destroy$, route, seoService);
     this.gameService(this.a23service, 'locations');
     this.locationControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.locationControl,
     })
-  }
-
-  ngOnInit(): void {
     this.region = this.route.snapshot.data.loc;
     this.filteredRegion = this.region.areas;
     this.query = this.route.snapshot.queryParamMap.get('item');
@@ -58,8 +55,36 @@ export class A23LocationComponent extends SingleComponent implements OnInit {
         }
         );
       if (this.query) { this.pageForm.controls['filtertext'].patchValue(this.query); }
-      this.genericSEO(this.region.name, `All items in ${this.region.name}`);
     }
+  }
+
+  changeData(): void {
+    this.a23service.getLocation(this.slug, this.language)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: region => {
+          this.region = region;
+          this.filteredRegion = this.region.areas;
+          if (this.region.areas.length == 0 || !this.region) {
+            this.error = `404`;
+          }
+          else {
+            this.error = ``;
+          }
+          this.query = this.route.snapshot.queryParamMap.get('item');
+          if (this.query) {
+            this.pageForm.controls['filtertext'].patchValue(this.query);
+          }
+          else {
+            this.pageForm.controls['filtertext'].patchValue('');
+          }
+          this.gameService(this.a23service, 'locations');
+          this.genericSEO(this.region.name, `All items in ${this.region.name}`);
+        },
+        error: error => {
+          this.error = `${error.status}`;
+        }
+      });
   }
 
   ngAfterViewInit(): void {
