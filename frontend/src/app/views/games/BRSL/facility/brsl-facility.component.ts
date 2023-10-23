@@ -3,30 +3,34 @@ import { ActivatedRoute } from '@angular/router';
 import { SeoService } from '@app/services/seo.service';
 import { FacilityFull } from '@app/views/games/BRSL/_services/brsl.interface';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
-import { SingleComponent } from '@app/views/games/_prototype/single.component';
+import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { takeUntil } from 'rxjs/operators';
+import { DestroyService } from '@app/services/destroy.service';
 
 @Component({
   templateUrl: 'brsl-facility.component.html',
   selector: 'brsl-facility',
+  providers: [DestroyService]
 })
-export class BRSLFacilityComponent extends SingleComponent implements OnInit {
+export class BRSLFacilityComponent extends SingleComponent2 {
   facility: FacilityFull;
   expand = false;
 
   constructor(
     protected route: ActivatedRoute,
+    protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
-    private brslservice: BRSLService,) {
-    super(route, seoService);
-    this.gameService(this.brslservice, 'facilities');
+    protected brslservice: BRSLService) {
+    super(destroy$, route, seoService);
   }
-  ngOnInit(): void {
-    if (this.showNav) this.colset = "col-md-9 mx-auto ";
+  changeData(): void {
     this.brslservice.getFacility(this.slug, this.language)
+    .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: facility => {
           this.error = ``;
           this.facility = facility;
+          this.gameService(this.brslservice, 'facilities');
           this.seoImage = `${this.imgURL}${this.section}/${this.facility.slug}.webp`;
           this.genericSEO(this.facility.name, this.facility.desc);
         },

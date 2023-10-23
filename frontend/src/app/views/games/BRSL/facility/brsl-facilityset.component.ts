@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { FacilitySet, NameOnly } from '@app/views/games/BRSL/_services/brsl.interface';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
-import { SingleComponent } from '@app/views/games/_prototype/single.component';
+import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'brsl-facilityset.component.html',
+  providers: [DestroyService]
 })
 
-export class BRSLFacilitySetComponent extends SingleComponent implements OnInit {
+export class BRSLFacilitySetComponent extends SingleComponent2 {
   pageForm: UntypedFormGroup;
   facilityControl: UntypedFormControl;
   facilities: FacilitySet[];
@@ -22,31 +23,28 @@ export class BRSLFacilitySetComponent extends SingleComponent implements OnInit 
   searchstring = "";
 
   constructor(
-    private readonly destroy$: DestroyService,
+    protected readonly destroy$: DestroyService,
     private formBuilder: UntypedFormBuilder,
     protected route: ActivatedRoute,
     protected seoService: SeoService,
     private brslservice: BRSLService,
   ) {
-    super(route, seoService);
-    this.gameService(this.brslservice, 'facilities/sets');
+    super(destroy$, route, seoService);
     this.facilityControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.facilityControl
     })
   }
 
-  ngOnInit(): void {
-    this.getFacilities();
-    this.genericSEO(`Facility Sets`, `All facility sets in ${this.gameTitle}.`);
-  }
-
-  getFacilities() {
+  changeData() {
     this.brslservice.getFacilitySetList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: facilities => {
+          this.error = ``;
           this.facilities = facilities;
+          this.gameService(this.brslservice, 'facilities/sets');
+          this.genericSEO(`Facility Sets`, `All facility sets in ${this.gameTitle}.`);      
           this.filteredSets = this.pageForm.valueChanges.pipe(
             startWith(null as Observable<FacilitySet[]>),
             map((search: any) => search ? this.filterT(search.filtertext) : this.facilities.slice())

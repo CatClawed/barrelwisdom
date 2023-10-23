@@ -9,7 +9,7 @@ import { A23MajorGatherComponent } from './a23-majorgather.component';
     imports: [
       CommonModule,
       A23MajorGatherRoutingModule,
-            ErrorModule,
+      ErrorModule,
       BreadcrumbModule,
     ],
     declarations: [

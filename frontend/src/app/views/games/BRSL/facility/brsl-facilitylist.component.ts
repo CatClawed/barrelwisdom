@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { FacilityList } from '@app/views/games/BRSL/_services/brsl.interface';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
-import { ListComponent } from '@app/views/games/_prototype/list.component';
+import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -16,7 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class BRSLFacilitylistComponent extends ListComponent implements OnInit {
+export class BRSLFacilitylistComponent extends ListComponent2 {
   facilities: FacilityList[];
   filteredFacilities: Observable<FacilityList[]>;
   facilityControl: UntypedFormControl;
@@ -32,25 +32,20 @@ export class BRSLFacilitylistComponent extends ListComponent implements OnInit {
     private brslservice: BRSLService,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.gameService(this.brslservice, 'facilities');
     this.facilityControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.facilityControl,
     })
   }
 
-  ngOnInit(): void {
-    this.modalEvent();
-    this.getFacilities();
-    this.genericSEO(`Facilities`, `The list of facilities in ${this.gameTitle}.`);
-  }
-
-  getFacilities() {
+  changeData() {
     this.brslservice.getFacilityList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: facilities => {
           this.facilities = facilities.slice(0, 44);
+          this.gameService(this.brslservice, 'facilities');
+          this.genericSEO(`Facilities`, `The list of facilities in ${this.gameTitle}.`);
           this.filteredFacilities = this.pageForm.valueChanges.pipe(
             startWith(null as Observable<FacilityList[]>),
             map((search: any) => search ? this.filterT(search.filtertext) : this.facilities.slice())

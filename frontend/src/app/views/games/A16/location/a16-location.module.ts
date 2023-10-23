@@ -9,7 +9,7 @@ import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
     imports: [
       CommonModule,
       A16LocationRoutingModule,
-            ErrorModule,
+      ErrorModule,
       BreadcrumbModule,
     ],
     declarations: [

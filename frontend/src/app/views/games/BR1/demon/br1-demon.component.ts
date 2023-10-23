@@ -1,31 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DestroyService } from '@app/services/destroy.service';
+import { SeoService } from '@app/services/seo.service';
 import { Demon } from '@app/views/games/BR1/_services/br1.interface';
 import { BR1Service } from '@app/views/games/BR1/_services/br1.service';
-import { SeoService } from '@app/services/seo.service';
-import { SingleComponent } from '@app/views/games/_prototype/single.component';
+import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'br1-demon.component.html',
   selector: 'br1-demon',
+  providers: [DestroyService]
 })
-export class BR1DemonComponent extends SingleComponent implements OnInit {
+export class BR1DemonComponent extends SingleComponent2 {
   demon: Demon;
 
   constructor(
     protected route: ActivatedRoute,
-    private br1service: BR1Service,
-    protected seoService: SeoService) {
-    super(route, seoService);
-    this.gameService(this.br1service, 'demons');
+    protected readonly destroy$: DestroyService,
+    protected seoService: SeoService,
+    private br1service: BR1Service) {
+    super(destroy$, route, seoService);
   }
-  ngOnInit(): void {
+
+  changeData(): void {
     if (this.showNav) this.colset = "col-md-7 mx-auto ";
     this.br1service.getDemon(this.slug, this.language)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: demon => {
           this.error = ``;
           this.demon = demon;
+          this.gameService(this.br1service, 'demons');
           this.genericSEO(this.demon.name, this.demon.flavor);
         },
         error: error => {

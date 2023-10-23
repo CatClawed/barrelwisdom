@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Item } from '@app/views/games/BR1/_services/br1.interface';
 import { BR1Service } from '@app/views/games/BR1/_services/br1.service';
-import { ListComponent } from '@app/views/games/_prototype/list.component';
+import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -16,7 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class BR1ItemlistComponent extends ListComponent implements OnInit {
+export class BR1ItemlistComponent extends ListComponent2 {
   itemControl: UntypedFormControl;
   items: Item[];
   filteredItems: Observable<Item[]>;
@@ -32,25 +32,20 @@ export class BR1ItemlistComponent extends ListComponent implements OnInit {
     private br1service: BR1Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.gameService(this.br1service, 'items');
     this.itemControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.itemControl
     })
   }
 
-  ngOnInit(): void {
-    this.modalEvent();
-    this.getItems();
-    this.genericSEO(`Items`, `The list of items in ${this.gameTitle}.`);
-  }
-
-  getItems() {
+  changeData() {
     this.br1service.getItemList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: items => {
           this.items = items;
+          this.gameService(this.br1service, 'items');
+          this.genericSEO(`Items`, `The list of items in ${this.gameTitle}.`);
           this.filteredItems = this.pageForm.valueChanges.pipe(
             startWith(null as Observable<Item[]>),
             map((search: any) => search ? this.filterT(search.filtertext) : this.items.slice())
@@ -71,9 +66,5 @@ export class BR1ItemlistComponent extends ListComponent implements OnInit {
       });
     }
     return list;
-  }
-
-  identify2(index, item) {
-    return item.slugname;
   }
 }

@@ -15,7 +15,7 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
     imports: [
       CommonModule,
       A23LocationRoutingModule,
-            ErrorModule,
+      ErrorModule,
       BreadcrumbModule,
       MatInputModule,
       MatFormFieldModule,

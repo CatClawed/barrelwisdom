@@ -1,37 +1,37 @@
 import { Location, ViewportScroller } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Skill } from '@app/views/games/BRSL/_services/brsl.interface';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
-import { SingleComponent } from '@app/views/games/_prototype/single.component';
+import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
 import { first, takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'brsl-skill.component.html',
   providers: [DestroyService]
 })
-export class BRSLSkillComponent extends SingleComponent implements OnInit {
+export class BRSLSkillComponent extends SingleComponent2 implements AfterViewInit {
   skills: Skill[];
 
   constructor(
     protected route: ActivatedRoute,
-    private readonly destroy$: DestroyService,
+    protected readonly destroy$: DestroyService,
     private brslservice: BRSLService,
     protected seoService: SeoService,
     private viewportScroller: ViewportScroller,
     private loc: Location) {
-    super(route, seoService);
-    this.gameService(this.brslservice, 'skills');
+    super(destroy$, route, seoService);
   }
-  ngOnInit(): void {
+  changeData(): void {
     this.brslservice.getSkillList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: skill => {
           this.error = ``;
           this.skills = skill;
+          this.gameService(this.brslservice, 'skills');
           this.genericSEO(`Skills`, `All skills in ${this.gameTitle}.`);
         },
         error: error => {

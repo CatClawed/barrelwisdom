@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Event, NameLink, SchoolLocation } from '@app/views/games/BRSL/_services/brsl.interface';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
-import { SingleComponent } from '@app/views/games/_prototype/single.component';
+import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { map, startWith, takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'brsl-fragmentlist.component.html',
+  providers: [DestroyService]
 })
 
-export class BRSLFragmentComponent extends SingleComponent implements OnInit {
+export class BRSLFragmentComponent extends SingleComponent2 {
   pageForm: UntypedFormGroup;
   fragmentControl: UntypedFormControl;
   event: Event[];
@@ -25,11 +27,11 @@ export class BRSLFragmentComponent extends SingleComponent implements OnInit {
   constructor(
     private formBuilder: UntypedFormBuilder,
     protected route: ActivatedRoute,
+    protected readonly destroy$: DestroyService,
     private brslservice: BRSLService,
     protected seoService: SeoService,
   ) {
-    super(route, seoService);
-    this.gameService(this.brslservice, 'fragments-and-dates');
+    super(destroy$, route, seoService);
     this.fragmentControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.fragmentControl,
@@ -38,13 +40,10 @@ export class BRSLFragmentComponent extends SingleComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-    this.getEvents();
-    this.genericSEO(`Fragments & Dates`, `All fragments and dates in ${this.gameTitle}.`);
-  }
 
-  getEvents() {
+  changeData() {
     this.brslservice.getCharacterList(this.language)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: f => {
           this.character = f.slice(2);
@@ -54,6 +53,7 @@ export class BRSLFragmentComponent extends SingleComponent implements OnInit {
         }
       });
     this.brslservice.getSchoolLocationList(this.language)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: f => {
           this.location = f;
@@ -63,9 +63,12 @@ export class BRSLFragmentComponent extends SingleComponent implements OnInit {
         }
       });
     this.brslservice.getFragmentList(this.language)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: fragment => {
           this.event = fragment;
+          this.gameService(this.brslservice, 'fragments-and-dates');
+          this.genericSEO(`Fragments & Dates`, `All fragments and dates in ${this.gameTitle}.`);
           this.filteredEvents = this.pageForm.valueChanges.pipe(
             startWith(null as Observable<Event[]>),
             map((search: any) => search ? this.filterT(search.filtertext, search.character, search.location) : this.event.slice())

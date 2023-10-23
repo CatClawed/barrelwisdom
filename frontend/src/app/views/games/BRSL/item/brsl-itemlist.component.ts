@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { ItemList, NameOnly } from '@app/views/games/BRSL/_services/brsl.interface';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
-import { ListComponent } from '@app/views/games/_prototype/list.component';
+import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -16,7 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class BRSLItemlistComponent extends ListComponent implements OnInit {
+export class BRSLItemlistComponent extends ListComponent2 {
   itemControl: UntypedFormControl;
   items: ItemList[];
   categories: NameOnly[];
@@ -35,7 +35,6 @@ export class BRSLItemlistComponent extends ListComponent implements OnInit {
     private brslservice: BRSLService,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.gameService(this.brslservice, 'items');
     this.itemControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
       filtertext: this.itemControl,
@@ -44,11 +43,9 @@ export class BRSLItemlistComponent extends ListComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-    this.modalEvent();
+  changeData(): void {
     this.getItems();
     this.getCategories();
-    this.genericSEO(`Items`, `The list of items in ${this.gameTitle}.`);
   }
 
   getItems() {
@@ -57,6 +54,8 @@ export class BRSLItemlistComponent extends ListComponent implements OnInit {
       .subscribe({
         next: items => {
           this.items = items;
+          this.gameService(this.brslservice, 'items');
+          this.genericSEO(`Items`, `The list of items in ${this.gameTitle}.`);
           this.filteredItems = this.pageForm.valueChanges.pipe(
             startWith(null as Observable<ItemList[]>),
             map((search: any) => search ? this.filterT(search.filtertext, search.type, search.category) : this.items.slice())
