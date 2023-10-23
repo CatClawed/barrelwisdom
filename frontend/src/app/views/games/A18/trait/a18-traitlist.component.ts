@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Trait } from '@app/views/games/A18/_services/a18.interface';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
-import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
+import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -16,8 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A18TraitlistComponent extends ListComponent2 {
-  traitControl: UntypedFormControl;
+export class A18TraitlistComponent extends  ModalUseComponent {
   traits: Trait[];
   filteredTraits: Observable<Trait[]>;
 
@@ -31,14 +30,14 @@ export class A18TraitlistComponent extends ListComponent2 {
     private formBuilder: UntypedFormBuilder,
     private a18service: A18Service,) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.traitControl = new UntypedFormControl();
-    this.pageForm = this.formBuilder.group({
-      filtertext: this.traitControl,
+    this.pageForm = this.formBuilder.nonNullable.group({
+      filtertext: '',
       transfers: 0
     })
   }
 
   changeData() {
+    this.pageForm.reset();
     this.a18service.getTraitList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({

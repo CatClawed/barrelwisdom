@@ -1,31 +1,31 @@
 import { Location, ViewportScroller } from '@angular/common';
-import { AfterViewInit, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
 import { AreaData } from '@app/views/games/A16/_services/a16.interface';
 import { A16Service } from '@app/views/games/A16/_services/a16.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
-import { first, takeUntil } from 'rxjs/operators';
+import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a16-location.component.html',
   providers: [DestroyService]
 })
-export class A16LocationComponent extends SingleComponent2 implements AfterViewInit {
+export class A16LocationComponent extends FragmentedComponent {
   location: AreaData;
 
   constructor(
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
-    private loc: Location,
+    protected loc: Location,
     private a16service: A16Service,
     public historyService: HistoryService,
     protected seoService: SeoService,
-    private viewportScroller: ViewportScroller
+    protected viewportScroller: ViewportScroller
   ) {
-    super(destroy$, route, seoService);
+    super(destroy$, route, seoService, viewportScroller, loc);
     this.gameService(this.a16service, 'locations');
     this.location = this.route.snapshot.data.loc;
     if (!this.location) {
@@ -50,16 +50,5 @@ export class A16LocationComponent extends SingleComponent2 implements AfterViewI
           this.error = `${error.status}`;
         }
       });
-  }
-
-  ngAfterViewInit(): void {
-    this.route.fragment.pipe(
-      first(), takeUntil(this.destroy$)
-    ).subscribe(fragment => this.viewportScroller.scrollToAnchor(fragment));
-  }
-
-  scroll(id: string) {
-    this.loc.replaceState(`${this.gameURL}/${this.section}/${this.location.slugname}/${this.language}#${id}`);
-    this.viewportScroller.scrollToAnchor(id);
   }
 } 

@@ -4,14 +4,14 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { ShopDevelop } from '@app/views/games/A22/_services/a22.interface';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { SingleComponent } from '@app/views/games/_prototype/single.component';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a22-shopdevelop.component.html',
   providers: [DestroyService]
 })
-export class A22ShopDevelopComponent extends SingleComponent2 {
+export class A22ShopDevelopComponent extends SingleComponent {
   shopdevelop: ShopDevelop[];
 
   constructor(

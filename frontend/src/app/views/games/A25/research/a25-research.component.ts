@@ -4,7 +4,7 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Research } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { SingleComponent } from '@app/views/games/_prototype/single.component';
 import { takeUntil } from 'rxjs/operators';
 
 
@@ -13,7 +13,7 @@ import { takeUntil } from 'rxjs/operators';
   selector: 'a25-research',
   providers: [DestroyService]
 })
-export class A25ResearchComponent extends SingleComponent2 {
+export class A25ResearchComponent extends SingleComponent {
   research: Research[];
 
   constructor(
@@ -30,7 +30,7 @@ export class A25ResearchComponent extends SingleComponent2 {
   }
 
   changeData(): void {
-    if (this.showNav) this.colset = "col-md-5 mx-auto ";
+    
     this.a25service.getResearch(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({

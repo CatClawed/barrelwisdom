@@ -4,7 +4,7 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Effect } from '@app/views/games/A15/_services/a15.interface';
 import { A15Service } from '@app/views/games/A15/_services/a15.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { SingleComponent } from '@app/views/games/_prototype/single.component';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -12,7 +12,7 @@ import { takeUntil } from 'rxjs/operators';
   selector: 'a15-effect',
   providers: [DestroyService]
 })
-export class A15EffectComponent extends SingleComponent2 {
+export class A15EffectComponent extends SingleComponent {
   effect: Effect;
 
   constructor(
@@ -24,7 +24,7 @@ export class A15EffectComponent extends SingleComponent2 {
   }
 
   changeData(): void {
-    if (this.showNav) this.colset = "col-md-5 mx-auto ";
+    
     this.a15service.getEffect(this.slug, this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({

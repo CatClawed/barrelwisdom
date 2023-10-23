@@ -4,14 +4,14 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Monster } from '@app/views/games/A18/_services/a18.interface';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { SingleComponent } from '@app/views/games/_prototype/single.component';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a18-monster.component.html',
   selector: 'a18-monster',
 })
-export class A18MonsterComponent extends SingleComponent2 {
+export class A18MonsterComponent extends SingleComponent {
   monster: Monster;
   chart = {
     1: `<i class="fa-solid fa-x"></i>`,

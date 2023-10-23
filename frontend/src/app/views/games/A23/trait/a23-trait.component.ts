@@ -4,7 +4,7 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Trait } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { SingleComponent } from '@app/views/games/_prototype/single.component';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -12,7 +12,7 @@ import { takeUntil } from 'rxjs/operators';
   selector: 'a23-trait',
   providers: [DestroyService]
 })
-export class A23TraitComponent extends SingleComponent2 {
+export class A23TraitComponent extends SingleComponent {
   trait: Trait;
 
   constructor(
@@ -23,7 +23,7 @@ export class A23TraitComponent extends SingleComponent2 {
     super(destroy$, route, seoService);
   }
   changeData(): void {
-    if (this.showNav) this.colset = "col-md-5 mx-auto ";
+    
     this.a23service.getTrait(this.slug, this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({

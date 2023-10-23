@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Demon } from '@app/views/games/BR1/_services/br1.interface';
 import { BR1Service } from '@app/views/games/BR1/_services/br1.service';
-import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
+import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -16,8 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class BR1DemonlistComponent extends ListComponent2 {
-  demonControl: UntypedFormControl;
+export class BR1DemonlistComponent extends  ModalUseComponent {
   demons: Demon[];
   filteredDemons: Observable<Demon[]>;
 
@@ -32,9 +31,8 @@ export class BR1DemonlistComponent extends ListComponent2 {
     private br1service: BR1Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.demonControl = new UntypedFormControl();
-    this.pageForm = this.formBuilder.group({
-      filtertext: this.demonControl
+    this.pageForm = this.formBuilder.nonNullable.group({
+      filtertext: ''
     })
   }
 

@@ -4,14 +4,14 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { CategoryData } from '@app/views/games/A16/_services/a16.interface';
 import { A16Service } from '@app/views/games/A16/_services/a16.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { SingleComponent } from '@app/views/games/_prototype/single.component';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a16-category.component.html',
   providers: [DestroyService]
 })
-export class A16CategoryComponent extends SingleComponent2 {
+export class A16CategoryComponent extends SingleComponent {
   category: CategoryData;
 
   constructor(

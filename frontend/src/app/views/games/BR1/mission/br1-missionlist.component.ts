@@ -1,20 +1,20 @@
 
-import { ViewportScroller } from '@angular/common';
-import { AfterViewInit, Component } from '@angular/core';
+import { Location, ViewportScroller } from '@angular/common';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
 import { Mission } from '@app/views/games/BR1/_services/br1.interface';
 import { BR1Service } from '@app/views/games/BR1/_services/br1.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
-import { first, takeUntil } from 'rxjs/operators';
+import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'br1-missionlist.component.html',
   providers: [DestroyService]
 })
-export class BR1MissionlistComponent extends SingleComponent2 implements AfterViewInit {
+export class BR1MissionlistComponent extends FragmentedComponent {
   missions: Mission[];
 
   constructor(
@@ -23,8 +23,9 @@ export class BR1MissionlistComponent extends SingleComponent2 implements AfterVi
     private br1service: BR1Service,
     public historyService: HistoryService,
     protected seoService: SeoService,
-    private viewportScroller: ViewportScroller) {
-    super(destroy$, route, seoService);
+    protected loc: Location,
+    protected viewportScroller: ViewportScroller) {
+      super(destroy$, route, seoService, viewportScroller, loc);
   }
   changeData(): void {
     this.br1service.getMissionList(this.language)
@@ -41,10 +42,5 @@ export class BR1MissionlistComponent extends SingleComponent2 implements AfterVi
 
         }
       });
-  }
-  ngAfterViewInit(): void {
-    this.route.fragment.pipe(
-      first(), takeUntil(this.destroy$)
-    ).subscribe(fragment => this.viewportScroller.scrollToAnchor(fragment));
   }
 } 

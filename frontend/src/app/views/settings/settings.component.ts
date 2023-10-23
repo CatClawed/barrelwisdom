@@ -71,24 +71,24 @@ export class SettingsComponent {
         });
       }
 
-      this.passwordForm = this.formBuilder.group({
+      this.passwordForm = this.formBuilder.nonNullable.group({
         newPass: ['', [Validators.required, Validators.minLength(8)]],
         repeatPass: ['', Validators.required],
         currentPass: ['', [Validators.required]],
       });
 
-      this.profileForm = this.formBuilder.group({
+      this.profileForm = this.formBuilder.nonNullable.group({
         bio: ['', [Validators.maxLength(500)]],
         website: ['', [Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?'), Validators.maxLength(200)]],
         avatar: ['', [Validators.pattern(environment.imageRegex + '.+\\.(png|jpg)'), Validators.maxLength(200)]],
       });
 
-      this.sectionForm = this.formBuilder.group({
+      this.sectionForm = this.formBuilder.nonNullable.group({
         name: ['', [Validators.required, Validators.maxLength(30)]],
         fullname: ['', [Validators.required, Validators.maxLength(30)]]
       });
 
-      this.navigationForm = this.formBuilder.group({
+      this.navigationForm = this.formBuilder.nonNullable.group({
         nav: [],
         section: [''],
         data: ['', [Validators.required]]

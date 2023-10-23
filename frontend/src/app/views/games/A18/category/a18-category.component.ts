@@ -4,14 +4,14 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Category } from '@app/views/games/A18/_services/a18.interface';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { SingleComponent } from '@app/views/games/_prototype/single.component';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a18-category.component.html',
   providers: [DestroyService]
 })
-export class A18CategoryComponent extends SingleComponent2 {
+export class A18CategoryComponent extends SingleComponent {
   category: Category;
 
   constructor(

@@ -4,14 +4,14 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Unit } from '@app/views/games/BRSL/_services/brsl.interface';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
   templateUrl: 'brsl-unit.component.html',
   selector: 'brsl-unit',
   providers: [DestroyService]
 })
-export class BRSLUnitComponent extends SingleComponent2 {
+export class BRSLUnitComponent extends SingleComponent {
   units: Unit[];
 
   constructor(

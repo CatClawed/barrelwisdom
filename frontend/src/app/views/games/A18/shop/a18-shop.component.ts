@@ -5,7 +5,7 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Shop } from '@app/views/games/A18/_services/a18.interface';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { SingleComponent } from '@app/views/games/_prototype/single.component';
 import { first, takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -13,7 +13,7 @@ import { first, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A18ShopComponent extends SingleComponent2 implements AfterViewInit {
+export class A18ShopComponent extends SingleComponent implements AfterViewInit {
   shops: Shop[];
 
   constructor(

@@ -37,7 +37,7 @@ export class LoginComponent {
       this.metaService.updateTag({ name: `robots`, content: `noindex` },`name="robots"`);
       this.seoService.removeCanonicalURL();
       
-      this.loginForm = this.formBuilder.group({
+      this.loginForm = this.formBuilder.nonNullable.group({
           username: ['', Validators.required],
           password: ['', Validators.required]
       });

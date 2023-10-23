@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Property } from '@app/views/games/A15/_services/a15.interface';
 import { A15Service } from '@app/views/games/A15/_services/a15.service';
-import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
+import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -15,11 +15,9 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   templateUrl: 'a15-propertylist.component.html',
   providers: [DestroyService]
 })
-export class A15PropertylistComponent extends ListComponent2 {
-  propertyControl: UntypedFormControl;
+export class A15PropertylistComponent extends  ModalUseComponent {
   properties: Property[];
   filteredProperties: Observable<Property[]>;
-  currentTransfer: string = "1";
 
   constructor(
     protected modalService: BsModalService,
@@ -29,18 +27,16 @@ export class A15PropertylistComponent extends ListComponent2 {
     protected location: Location,
     protected seoService: SeoService,
     private formBuilder: UntypedFormBuilder,
-    private a15service: A15Service,
-  ) {
+    private a15service: A15Service,) {
     super(modalService, destroy$, router, route, location, seoService);
-
-    this.propertyControl = new UntypedFormControl();
-    this.pageForm = this.formBuilder.group({
-      filtertext: this.propertyControl,
-      transfers: ['']
+    this.pageForm = this.formBuilder.nonNullable.group({
+      filtertext: '',
+      transfers: ''
     })
   }
 
   changeData() {
+    this.pageForm.reset();
     this.a15service.getPropertyList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({

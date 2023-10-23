@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Book } from '@app/views/games/A16/_services/a16.interface';
 import { A16Service } from '@app/views/games/A16/_services/a16.service';
-import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
+import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -16,8 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A16BooklistComponent extends ListComponent2 {
-  bookControl: UntypedFormControl;
+export class A16BooklistComponent extends  ModalUseComponent {
   books: Book[];
   filteredBooks: Observable<Book[]>;
 
@@ -32,13 +31,13 @@ export class A16BooklistComponent extends ListComponent2 {
     private a16service: A16Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.bookControl = new UntypedFormControl();
-    this.pageForm = this.formBuilder.group({
-      filtertext: this.bookControl,
+    this.pageForm = this.formBuilder.nonNullable.group({
+      filtertext: ''
     })
   }
 
   changeData() {
+    this.pageForm.reset();
     this.a16service.getBookList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({

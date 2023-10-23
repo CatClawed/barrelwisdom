@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Character, NameLink } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
-import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
+import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -16,12 +16,10 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A25CharalistComponent extends ListComponent2 {
-  charaControl: UntypedFormControl;
+export class A25CharalistComponent extends ModalUseComponent {
   roles: NameLink[];
   charas: Character[];
   filteredCharas: Observable<Character[]>;
-  selectedFilter: "Any"
 
   gradients = {
     1: "background: linear-gradient(0deg, rgba(81,53,40,1) 0%, rgba(10,32,47,1) 50%, rgba(22,60,73,1) 100%);",
@@ -39,14 +37,14 @@ export class A25CharalistComponent extends ListComponent2 {
     private formBuilder: UntypedFormBuilder,
     private a25service: A25Service,) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.charaControl = new UntypedFormControl();
-    this.pageForm = this.formBuilder.group({
-      filtertext: this.charaControl,
+    this.pageForm = this.formBuilder.nonNullable.group({
+      filtertext: '',
       roles: "any"
     })
   }
 
   changeData(): void {
+    this.pageForm.reset()
     this.getTransfer();
     this.getCharas();
   }

@@ -5,7 +5,7 @@ import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
 import { EffectData, EffectLine, Item } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { SingleComponent } from '@app/views/games/_prototype/single.component';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -13,7 +13,7 @@ import { takeUntil } from 'rxjs/operators';
   selector: 'a23-item',
   providers: [DestroyService]
 })
-export class A23ItemComponent extends SingleComponent2 {
+export class A23ItemComponent extends SingleComponent {
 
   item: Item;
   colors = {

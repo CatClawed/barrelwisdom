@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Trait } from '@app/views/games/A22/_services/a22.interface';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
-import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
+import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -15,8 +15,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   templateUrl: 'a22-traitlist.component.html',
   providers: [DestroyService]
 })
-export class A22TraitlistComponent extends ListComponent2 {
-  traitControl: UntypedFormControl;
+export class A22TraitlistComponent extends  ModalUseComponent {
   traits: Trait[];
   filteredTraits: Observable<Trait[]>;
 
@@ -30,14 +29,14 @@ export class A22TraitlistComponent extends ListComponent2 {
     private formBuilder: UntypedFormBuilder,
     private a22service: A22Service,) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.traitControl = new UntypedFormControl();
-    this.pageForm = this.formBuilder.group({
-      filtertext: this.traitControl,
-      transfers: ['']
+    this.pageForm = this.formBuilder.nonNullable.group({
+      filtertext: '',
+      transfers: ''
     })
   }
 
   changeData() {
+    this.pageForm.reset();
     this.a22service.getTraitList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({

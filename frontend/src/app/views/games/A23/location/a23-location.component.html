@@ -7,13 +7,13 @@
         <b>Table of Contents</b>
         <ol class="toc-list">
             <li *ngFor="let area of region.areas">
-                <a href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}" (click)="$event.preventDefault();scroll(area.slug)">{{area.name}}</a>
+                <a href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}" (click)="$event.preventDefault();scroll(area.slug,'locations/'+region.slug)">{{area.name}}</a>
                 <ul *ngIf="area.climate.length > 1">
                     <li *ngFor="let climate of area.climate">
-                        <a *ngIf="climate.weather == 'sun'"     href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather)">Sun</a>
-                        <a *ngIf="climate.weather == 'rain'"    href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather)">Rain</a>
-                        <a *ngIf="climate.weather == 'snow'"    href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather)">Snow</a>
-                        <a *ngIf="climate.weather == 'thunder'" href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather)">Thunder</a>
+                        <a *ngIf="climate.weather == 'sun'"     href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather,'locations/'+region.slug)">Sun</a>
+                        <a *ngIf="climate.weather == 'rain'"    href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather,'locations/'+region.slug)">Rain</a>
+                        <a *ngIf="climate.weather == 'snow'"    href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather,'locations/'+region.slug)">Snow</a>
+                        <a *ngIf="climate.weather == 'thunder'" href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather,'locations/'+region.slug)">Thunder</a>
                     </li>
                 </ul>
             </li>

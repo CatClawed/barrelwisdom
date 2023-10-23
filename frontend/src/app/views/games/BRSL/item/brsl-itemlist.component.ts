@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { ItemList, NameOnly } from '@app/views/games/BRSL/_services/brsl.interface';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
-import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
+import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -16,13 +16,10 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class BRSLItemlistComponent extends ListComponent2 {
-  itemControl: UntypedFormControl;
+export class BRSLItemlistComponent extends ModalUseComponent {
   items: ItemList[];
   categories: NameOnly[];
   filteredItems: Observable<ItemList[]>;
-  currentType: string = "Any";
-  currentCategory: string = "Any";
 
   constructor(
     protected modalService: BsModalService,
@@ -32,18 +29,17 @@ export class BRSLItemlistComponent extends ListComponent2 {
     protected location: Location,
     protected seoService: SeoService,
     private formBuilder: UntypedFormBuilder,
-    private brslservice: BRSLService,
-  ) {
+    private brslservice: BRSLService,) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.itemControl = new UntypedFormControl();
-    this.pageForm = this.formBuilder.group({
-      filtertext: this.itemControl,
-      category: ['Any'],
-      type: ['Any']
+    this.pageForm = this.formBuilder.nonNullable.group({
+      filtertext: '',
+      category: 'Any',
+      type: 'Any'
     })
   }
 
   changeData(): void {
+    this.pageForm.reset()
     this.getItems();
     this.getCategories();
   }
@@ -76,7 +72,6 @@ export class BRSLItemlistComponent extends ListComponent2 {
         },
         error: error => {
           this.error = `${error.status}`;
-
         }
       });
   }

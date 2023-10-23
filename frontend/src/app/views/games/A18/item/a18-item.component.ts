@@ -5,7 +5,7 @@ import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
 import { Item } from '@app/views/games/A18/_services/a18.interface';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { SingleComponent } from '@app/views/games/_prototype/single.component';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -13,7 +13,7 @@ import { takeUntil } from 'rxjs/operators';
   selector: 'a18-item',
   providers: [DestroyService]
 })
-export class A18ItemComponent extends SingleComponent2 {
+export class A18ItemComponent extends SingleComponent {
 
   item: Item;
   colors = {

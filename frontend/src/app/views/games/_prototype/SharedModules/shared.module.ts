@@ -16,7 +16,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ReactiveFormsModule,
     MatInputModule,
     MatFormFieldModule,
-        BreadcrumbModule,
+    BreadcrumbModule,
   ]
 })
 export class SharedModule {}

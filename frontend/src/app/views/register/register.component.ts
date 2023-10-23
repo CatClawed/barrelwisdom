@@ -38,7 +38,7 @@ export class RegisterComponent {
       this.metaService.updateTag({ name: `robots`, content: `noindex` },`name="robots"`);
       this.seoService.removeCanonicalURL();
 
-      this.registerForm = this.formBuilder.group({
+      this.registerForm = this.formBuilder.nonNullable.group({
           username: ['', Validators.required],
           email: ['', [Validators.email, Validators.required]],
           password: ['', [Validators.required, Validators.minLength(8)]],

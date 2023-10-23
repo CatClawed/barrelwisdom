@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Item, NameLink } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
-import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
+import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -16,9 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A25MaterialListComponent extends ListComponent2 {
-  itemControl: UntypedFormControl;
-  traitControl: UntypedFormControl;
+export class A25MaterialListComponent extends ModalUseComponent {
   items: Item[];
   filteredItems: Observable<Item[]>;
   colors: NameLink[];
@@ -34,17 +32,16 @@ export class A25MaterialListComponent extends ListComponent2 {
     private a25service: A25Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.itemControl = new UntypedFormControl();
-    this.traitControl = new UntypedFormControl();
-    this.pageForm = this.formBuilder.group({
-      filtertext: this.itemControl,
-      filtertrait: this.traitControl,
-      color: ['Any'],
-      rarity: ['0']
+    this.pageForm = this.formBuilder.nonNullable.group({
+      filtertext: '',
+      filtertrait: '',
+      color: 'Any',
+      rarity: '0'
     })
   }
 
   changeData(): void {
+    this.pageForm.reset()
     this.getItems();
     this.getColors();
   }
@@ -56,7 +53,7 @@ export class A25MaterialListComponent extends ListComponent2 {
         next: items => {
           this.items = items;
           this.gameService(this.a25service, 'items/materials');
-          this.genericSEO(`Materials`, `The list of materials in ${this.gameTitle}.`);      
+          this.genericSEO(`Materials`, `The list of materials in ${this.gameTitle}.`);
           this.filteredItems = this.pageForm.valueChanges.pipe(
             startWith(null as Observable<Item[]>),
             map((search: any) => search ? this.filterT(search.filtertext, search.color, search.rarity, search.filtertrait) : this.items.slice())
@@ -87,11 +84,9 @@ export class A25MaterialListComponent extends ListComponent2 {
     if (color != 'Any') {
       list = list.filter(item => item.material[0].color == color);
     }
-
     if (rarity > 0) {
       list = list.filter(item => item.rarity == rarity)
     }
-
     if (filter) {
       filter = filter.toLocaleLowerCase()
       list = list.filter(item => item.material[0].traits ?
@@ -100,20 +95,17 @@ export class A25MaterialListComponent extends ListComponent2 {
           t.name_ja.includes(filter))
         ) : false)
     }
-
     if (value) {
       const filterValue = value.toLowerCase();
       list = list.filter(item => {
         return item.name.toLowerCase().includes(filterValue);
       });
     }
-
     return list;
   }
 
   insertStyle(item: Item): string {
     if (!item.material[0].color) return;
-
     return `box-shadow: inset 0 0px 30px 4px ${this.a25service.colorList[item.material[0].color]}`
   }
 }

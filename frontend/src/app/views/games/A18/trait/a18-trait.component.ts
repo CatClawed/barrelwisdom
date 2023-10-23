@@ -4,7 +4,7 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Trait } from '@app/views/games/A18/_services/a18.interface';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { SingleComponent } from '@app/views/games/_prototype/single.component';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -12,7 +12,7 @@ import { takeUntil } from 'rxjs/operators';
   selector: 'a18-trait',
   providers: [DestroyService]
 })
-export class A18TraitComponent extends SingleComponent2 {
+export class A18TraitComponent extends SingleComponent {
   trait: Trait;
 
   constructor(
@@ -24,7 +24,7 @@ export class A18TraitComponent extends SingleComponent2 {
   }
 
   changeData(): void {
-    if (this.showNav) this.colset = "col-md-5 mx-auto ";
+    
     this.a18service.getTrait(this.slug, this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({

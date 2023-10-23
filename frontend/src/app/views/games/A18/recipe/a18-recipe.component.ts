@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { RecipeIdeaList } from '@app/views/games/A18/_services/a18.interface';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { FilterableComponent } from '@app/views/games/_prototype/filterable.component';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
 
@@ -14,9 +14,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A18RecipeComponent extends SingleComponent2 {
-  pageForm: UntypedFormGroup
-  recipeControl: UntypedFormControl;
+export class A18RecipeComponent extends FilterableComponent {
   recipes: RecipeIdeaList[];
   filteredRecipes: Observable<RecipeIdeaList[]>;
 
@@ -28,13 +26,13 @@ export class A18RecipeComponent extends SingleComponent2 {
     private a18service: A18Service,
   ) {
     super(destroy$, route, seoService);
-    this.recipeControl = new UntypedFormControl();
-    this.pageForm = this.formBuilder.group({
-      filtertext: this.recipeControl,
+    this.pageForm = this.formBuilder.nonNullable.group({
+      filtertext: '',
     })
   }
 
   changeData() {
+    this.pageForm.reset();
     this.a18service.getRecipeList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
@@ -64,8 +62,5 @@ export class A18RecipeComponent extends SingleComponent2 {
     return recipelist.filter(recipe => {
       return recipe.name.toLowerCase().includes(filterValue)
     });
-  }
-  identify(index, item) {
-    return item.slug;
   }
 }

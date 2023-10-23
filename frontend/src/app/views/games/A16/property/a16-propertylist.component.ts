@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Property } from '@app/views/games/A16/_services/a16.interface';
 import { A16Service } from '@app/views/games/A16/_services/a16.service';
-import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
+import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -15,8 +15,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   templateUrl: 'a16-propertylist.component.html',
   providers: [DestroyService]
 })
-export class A16PropertylistComponent extends ListComponent2 {
-  propertyControl: UntypedFormControl;
+export class A16PropertylistComponent extends  ModalUseComponent {
   properties: Property[];
   filteredProperties: Observable<Property[]>;
 
@@ -31,14 +30,14 @@ export class A16PropertylistComponent extends ListComponent2 {
     private a16service: A16Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.propertyControl = new UntypedFormControl();
-    this.pageForm = this.formBuilder.group({
-      filtertext: this.propertyControl,
-      transfers: ['']
+    this.pageForm = this.formBuilder.nonNullable.group({
+      filtertext: '',
+      transfers: ''
     })
   }
 
   changeData() {
+    this.pageForm.reset();
     this.a16service.getPropertyList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({

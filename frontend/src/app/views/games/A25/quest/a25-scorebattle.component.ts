@@ -1,19 +1,19 @@
 import { Location, ViewportScroller } from '@angular/common';
-import { AfterViewInit, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { ScoreBattle } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
-import { first, takeUntil } from 'rxjs/operators';
+import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a25-scorebattle.component.html',
   selector: 'a25-scorebattle',
   providers: [DestroyService]
 })
-export class A25ScoreBattleComponent extends SingleComponent2 implements AfterViewInit {
+export class A25ScoreBattleComponent extends FragmentedComponent {
   scorebattles: ScoreBattle[];
   title: string;
 
@@ -26,11 +26,11 @@ export class A25ScoreBattleComponent extends SingleComponent2 implements AfterVi
   constructor(
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
-    private loc: Location,
-    private viewportScroller: ViewportScroller,
+    protected loc: Location,
+    protected viewportScroller: ViewportScroller,
     protected seoService: SeoService,
     protected a25service: A25Service,) {
-    super(destroy$, route, seoService);
+    super(destroy$, route, seoService, viewportScroller, loc);
     this.scorebattles = this.route.snapshot.data.data
     if (!this.scorebattles) {
       this.error = `404`;
@@ -40,7 +40,6 @@ export class A25ScoreBattleComponent extends SingleComponent2 implements AfterVi
       this.title = (this.language == 'en') ? 'Score Battles' : "スコアバトル";
       this.genericSEO(this.title, `All Score Battles in ${this.gameTitle}`);
     }
-
   }
 
   changeData(): void {
@@ -59,16 +58,4 @@ export class A25ScoreBattleComponent extends SingleComponent2 implements AfterVi
         }
       });
   }
-
-  ngAfterViewInit(): void {
-    this.route.fragment.pipe(
-      first(), takeUntil(this.destroy$)
-    ).subscribe(fragment => this.viewportScroller.scrollToAnchor(fragment));
-  }
-
-  scroll(id: string) {
-    this.loc.replaceState(`${this.gameURL}/${this.section}/${this.language}#${id}`);
-    this.viewportScroller.scrollToAnchor(id);
-  }
-
 } 

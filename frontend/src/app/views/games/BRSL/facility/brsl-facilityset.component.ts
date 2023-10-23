@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { FacilitySet, NameOnly } from '@app/views/games/BRSL/_services/brsl.interface';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { FilterableComponent } from '@app/views/games/_prototype/filterable.component';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
 
@@ -14,13 +14,10 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class BRSLFacilitySetComponent extends SingleComponent2 {
-  pageForm: UntypedFormGroup;
-  facilityControl: UntypedFormControl;
+export class BRSLFacilitySetComponent extends FilterableComponent {
   facilities: FacilitySet[];
   categories: NameOnly[];
   filteredSets: Observable<FacilitySet[]>;
-  searchstring = "";
 
   constructor(
     protected readonly destroy$: DestroyService,
@@ -30,13 +27,13 @@ export class BRSLFacilitySetComponent extends SingleComponent2 {
     private brslservice: BRSLService,
   ) {
     super(destroy$, route, seoService);
-    this.facilityControl = new UntypedFormControl();
-    this.pageForm = this.formBuilder.group({
-      filtertext: this.facilityControl
+    this.pageForm = this.formBuilder.nonNullable.group({
+      filtertext: ''
     })
   }
 
   changeData() {
+    this.pageForm.reset()
     this.brslservice.getFacilitySetList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
@@ -66,11 +63,5 @@ export class BRSLFacilitySetComponent extends SingleComponent2 {
       return set.effect.name.toLowerCase().includes(filterValue) || set.effect.desc.toLowerCase().includes(filterValue)
         || set.facilities.some(f => f.name.toLowerCase().includes(filterValue));
     });
-  }
-
-  get f() { return this.pageForm.controls; }
-
-  identify(index, item) {
-    return item.slug;
   }
 }

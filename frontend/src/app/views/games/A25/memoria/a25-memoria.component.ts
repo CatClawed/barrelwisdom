@@ -4,14 +4,14 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Memoria } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
   templateUrl: 'a25-memoria.component.html',
   selector: 'a25-memoria',
   providers: [DestroyService]
 })
-export class A25MemoriaComponent extends SingleComponent2 {
+export class A25MemoriaComponent extends SingleComponent {
   memoria: Memoria;
 
   constructor(
@@ -29,7 +29,7 @@ export class A25MemoriaComponent extends SingleComponent2 {
   }
 
   changeData(): void {
-    if (this.showNav) this.colset = "col-md-5 mx-auto ";
+    
     this.a25service.getMemoria(this.slug, this.language)
       .subscribe({
         next: memoria => {

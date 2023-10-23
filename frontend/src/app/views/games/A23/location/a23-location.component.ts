@@ -1,26 +1,23 @@
 import { Location, ViewportScroller } from '@angular/common';
-import { AfterViewInit, Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { UntypedFormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Area, GatherNode, Region } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
-import { first, takeUntil } from 'rxjs/operators';
+import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a23-location.component.html',
   providers: [DestroyService]
 })
 
-export class A23LocationComponent extends SingleComponent2 implements AfterViewInit {
-  pageForm: UntypedFormGroup;
-  locationControl: UntypedFormControl;
+export class A23LocationComponent extends FragmentedComponent {
   region: Region;
   filteredRegion: Area[];
   filteredNodes: GatherNode[];
-  language: string;
   search: string = "";
   query: string = "";
 
@@ -29,16 +26,13 @@ export class A23LocationComponent extends SingleComponent2 implements AfterViewI
     protected seoService: SeoService,
     private a23service: A23Service,
     protected readonly destroy$: DestroyService,
-    private loc: Location,
-    private router: Router,
-    private viewportScroller: ViewportScroller,
-    private formBuilder: UntypedFormBuilder,
-  ) {
-    super(destroy$, route, seoService);
+    protected loc: Location,
+    protected viewportScroller: ViewportScroller,
+    private formBuilder: UntypedFormBuilder,) {
+    super(destroy$, route, seoService, viewportScroller, loc);
     this.gameService(this.a23service, 'locations');
-    this.locationControl = new UntypedFormControl();
-    this.pageForm = this.formBuilder.group({
-      filtertext: this.locationControl,
+    this.pageForm = this.formBuilder.nonNullable.group({
+      filtertext: '',
     })
     this.region = this.route.snapshot.data.loc;
     this.filteredRegion = this.region.areas;
@@ -63,6 +57,13 @@ export class A23LocationComponent extends SingleComponent2 implements AfterViewI
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: region => {
+          this.query = this.route.snapshot.queryParamMap.get('item');
+          if (this.query) {
+            this.pageForm.controls['filtertext'].patchValue(this.query);
+          }
+          else {
+            this.pageForm.reset();
+          }
           this.region = region;
           this.filteredRegion = this.region.areas;
           if (this.region.areas.length == 0 || !this.region) {
@@ -71,13 +72,6 @@ export class A23LocationComponent extends SingleComponent2 implements AfterViewI
           else {
             this.error = ``;
           }
-          this.query = this.route.snapshot.queryParamMap.get('item');
-          if (this.query) {
-            this.pageForm.controls['filtertext'].patchValue(this.query);
-          }
-          else {
-            this.pageForm.controls['filtertext'].patchValue('');
-          }
           this.gameService(this.a23service, 'locations');
           this.genericSEO(this.region.name, `All items in ${this.region.name}`);
         },
@@ -85,23 +79,6 @@ export class A23LocationComponent extends SingleComponent2 implements AfterViewI
           this.error = `${error.status}`;
         }
       });
-  }
-
-  ngAfterViewInit(): void {
-    this.route.fragment.pipe(
-      first(), takeUntil(this.destroy$)
-    ).subscribe(fragment => this.viewportScroller.scrollToAnchor(fragment));
-  }
-  scroll(id: string) {
-    this.loc.replaceState(`${this.gameURL}/${this.section}/${this.region.slug}/${this.language}#${id}`);
-    this.viewportScroller.scrollToAnchor(id);
-  }
-
-  scrollTo(fragment): void {
-    this.router.navigate([], { fragment: fragment }).then(() => {
-      const element = document.getElementById(fragment);
-      if (element != undefined) element.scrollIntoView();
-    });
   }
 
   private filterT(value: string): GatherNode[] {
@@ -122,8 +99,6 @@ export class A23LocationComponent extends SingleComponent2 implements AfterViewI
     }
     return nodeList;
   }
-
-  get f() { return this.pageForm.controls; }
 
   validNode(node: GatherNode): boolean {
     if (this.search.length === 0) return true;

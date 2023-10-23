@@ -6,14 +6,14 @@ import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
 import { RecipeIdea } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { SingleComponent } from '@app/views/games/_prototype/single.component';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a23-recipe.component.html',
   providers: [DestroyService]
 })
-export class A23RecipeComponent extends SingleComponent2 {
+export class A23RecipeComponent extends SingleComponent {
   recipes: RecipeIdea[];
   tab: string = "";
   sophie_num: number = 28;

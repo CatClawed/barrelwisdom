@@ -17,7 +17,7 @@
       <div class="row">
         <mat-form-field class="col-md-4" appearance="outline">
           <mat-label>Character</mat-label>
-          <mat-select matNativeControl formControlName="character" disableOptionCentering="true" [(value)]="selectedChar">
+          <mat-select matNativeControl formControlName="character" disableOptionCentering="true">
             <mat-option value="Any" selected>Any</mat-option>
             <mat-option *ngFor="let char of character" value="{{char.name}}">
                 {{char.name}}
@@ -26,7 +26,7 @@
        </mat-form-field>
        <mat-form-field class="col-md-4" appearance="outline">
           <mat-label>Location</mat-label>
-          <mat-select matNativeControl formControlName="location" disableOptionCentering="true" [(value)]="selectedLoc">
+          <mat-select matNativeControl formControlName="location" disableOptionCentering="true">
             <mat-option value="Any" selected>Any</mat-option>
             <mat-option *ngFor="let loc of location" value="{{loc.loc}}">
                 {{loc.loc}}

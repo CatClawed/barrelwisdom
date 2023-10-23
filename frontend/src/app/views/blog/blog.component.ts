@@ -38,7 +38,7 @@ export class BlogComponent implements OnInit {
     private formBuilder: UntypedFormBuilder,
     private markdownService: MarkdownService,
     protected seoService: SeoService) {
-      this.pageForm = this.formBuilder.group({
+      this.pageForm = this.formBuilder.nonNullable.group({
         name: "",
         comment: ""
       })
@@ -53,7 +53,7 @@ export class BlogComponent implements OnInit {
   }
 
   newForm(parent: Comment): void {
-    parent.form = this.formBuilder.group({
+    parent.form = this.formBuilder.nonNullable.group({
       name: "",
       comment: ""
     })

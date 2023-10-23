@@ -4,7 +4,7 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Item } from '@app/views/games/BR1/_services/br1.interface';
 import { BR1Service } from '@app/views/games/BR1/_services/br1.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { SingleComponent } from '@app/views/games/_prototype/single.component';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -12,7 +12,7 @@ import { takeUntil } from 'rxjs/operators';
   selector: 'br1-item',
   providers: [DestroyService]
 })
-export class BR1ItemComponent extends SingleComponent2 {
+export class BR1ItemComponent extends SingleComponent {
   item: Item;
 
   constructor(
@@ -24,7 +24,7 @@ export class BR1ItemComponent extends SingleComponent2 {
   }
   changeData(): void {
     this.language = this.route.snapshot.params.language;
-    if (this.showNav) this.colset = "col-md-7 mx-auto ";
+    
     this.br1service.getItem(this.slug, this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({

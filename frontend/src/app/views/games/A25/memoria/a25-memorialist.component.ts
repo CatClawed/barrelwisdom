@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Memoria } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
-import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
+import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -16,8 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A25MemorialistComponent extends ListComponent2 {
-  memoriaControl: UntypedFormControl;
+export class A25MemorialistComponent extends  ModalUseComponent {
   memoria: Memoria[];
   filteredMemoria: Observable<Memoria[]>;
 
@@ -37,13 +36,13 @@ export class A25MemorialistComponent extends ListComponent2 {
     private formBuilder: UntypedFormBuilder,
     private a25service: A25Service,) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.memoriaControl = new UntypedFormControl();
-    this.pageForm = this.formBuilder.group({
-      filtertext: this.memoriaControl,
+    this.pageForm = this.formBuilder.nonNullable.group({
+      filtertext: '',
     })
   }
 
   changeData() {
+    this.pageForm.reset()
     this.a25service.getMemoriaList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({

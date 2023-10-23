@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Effect } from '@app/views/games/A12/_services/a12.interface';
 import { A12Service } from '@app/views/games/A12/_services/a12.service';
-import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
+import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -16,8 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A12EffectlistComponent extends ListComponent2 {
-  effectControl: UntypedFormControl;
+export class A12EffectlistComponent extends  ModalUseComponent {
   effects: Effect[];
   filteredEffects: Observable<Effect[]>;
 
@@ -32,13 +31,13 @@ export class A12EffectlistComponent extends ListComponent2 {
     private a12service: A12Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.effectControl = new UntypedFormControl();
-    this.pageForm = this.formBuilder.group({
-      filtertext: this.effectControl,
+    this.pageForm = this.formBuilder.nonNullable.group({
+      filtertext: '',
     })
   }
 
   changeData(): void {
+    this.pageForm.reset();
     this.a12service.getEffectList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({

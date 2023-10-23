@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Catalyst } from '@app/views/games/A18/_services/a18.interface';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { FilterableComponent } from '@app/views/games/_prototype/filterable.component';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
 
@@ -15,9 +15,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A18CatalystlistComponent extends SingleComponent2 {
-  pageForm: UntypedFormGroup;
-  catalystControl: UntypedFormControl;
+export class A18CatalystlistComponent extends FilterableComponent {
   catalysts: Catalyst[];
   filteredCatalysts: Observable<Catalyst[]>;
   query: string = "";
@@ -41,9 +39,8 @@ export class A18CatalystlistComponent extends SingleComponent2 {
     protected readonly destroy$: DestroyService,
   ) {
     super(destroy$, route, seoService);
-    this.catalystControl = new UntypedFormControl();
-    this.pageForm = this.formBuilder.group({
-      filtertext: this.catalystControl,
+    this.pageForm = this.formBuilder.nonNullable.group({
+      filtertext: '',
     })
     // unused??
     this.query = this.route.snapshot.queryParamMap.get('search');
@@ -51,6 +48,7 @@ export class A18CatalystlistComponent extends SingleComponent2 {
   }
 
   changeData() {
+    this.pageForm.reset();
     this.a18service.getCatalystList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
@@ -88,8 +86,4 @@ export class A18CatalystlistComponent extends SingleComponent2 {
         catalyst.item.categories.some(cat => cat.name.toLowerCase().includes(filterValue))
     });
   }
-
-  identify(index, item) {
-    return item.slug;
-}
 }

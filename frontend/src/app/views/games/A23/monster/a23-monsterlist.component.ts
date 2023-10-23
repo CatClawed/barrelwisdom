@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Monster } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
-import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
+import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -16,12 +16,9 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A23MonsterlistComponent extends ListComponent2 {
-  monsterControl: UntypedFormControl;
+export class A23MonsterlistComponent extends ModalUseComponent {
   monsters: Monster[];
   filteredMonsters: Observable<Monster[]>;
-  currentType: string = "1";
-  searchstring = "";
 
   constructor(
     protected modalService: BsModalService,
@@ -31,18 +28,17 @@ export class A23MonsterlistComponent extends ListComponent2 {
     protected location: Location,
     protected seoService: SeoService,
     private formBuilder: UntypedFormBuilder,
-    private a23service: A23Service,
-  ) {
+    private a23service: A23Service,) {
     super(modalService, destroy$, router, route, location, seoService);
     this.gameService(this.a23service, 'monsters');
-    this.monsterControl = new UntypedFormControl();
-    this.pageForm = this.formBuilder.group({
-      filtertext: this.monsterControl,
-      type: ['']
+    this.pageForm = this.formBuilder.nonNullable.group({
+      filtertext: '',
+      type: ''
     })
   }
 
   changeData() {
+    this.pageForm.reset();
     this.a23service.getMonsterList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({

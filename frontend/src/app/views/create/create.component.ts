@@ -82,7 +82,7 @@ export class CreateComponent {
     this.authenticationService.user.pipe(takeUntil(this.destroy$)).subscribe(x => this.user = x);
     this.tagControl = new UntypedFormControl();
 
-    this.pageForm = this.formBuilder.group({
+    this.pageForm = this.formBuilder.nonNullable.group({
       title: ['', [Validators.required, Validators.maxLength(100)]],
       body: ['', Validators.required],
       section: ['', Validators.required],

@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
@@ -10,14 +11,11 @@ import { DataComponent } from './data.component';
     providers: [DestroyService]
 })
 
-export abstract class SingleComponent extends DataComponent implements OnInit {
-    colset: string;
-
-    @Input()
-    inputSlug: string = "";
-
-    @Input()
-    showNav: boolean = true;
+export abstract class FilterableComponent extends DataComponent implements OnInit {
+    pageForm: UntypedFormGroup;
+    formDefaults = {
+        filtertext: ""
+    }
 
     constructor(
         protected readonly destroy$: DestroyService,
@@ -25,20 +23,28 @@ export abstract class SingleComponent extends DataComponent implements OnInit {
         protected seoService: SeoService
     ) {
         super(destroy$, route, seoService)
-        this.slug = this.inputSlug ? this.inputSlug : this.route.snapshot.params.subject;
-        if (this.showNav) this.colset = "col-md-9 mx-auto ";
     }
 
     ngOnInit(): void {
         this.paramWatch();
     }
 
-    paramWatch(): void {
+    paramWatch() {
         this.route.paramMap.pipe(takeUntil(this.destroy$))
             .subscribe(params => {
                 this.language = params.get('language');
-                this.slug = this.inputSlug ? this.inputSlug : params.get('subject');
-                this.changeData()
+                this.slug = params.get('subject') ? params.get('subject') : '';
+                this.changeData();
             });
+    }
+
+    get f() { return this.pageForm.controls; }
+
+    identify(index, item) {
+        return item.slug;
+    }
+
+    identify2(index, item) {
+        return item.slugname;
     }
 }

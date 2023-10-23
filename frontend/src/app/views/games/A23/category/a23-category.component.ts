@@ -4,13 +4,13 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Category } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { SingleComponent } from '@app/views/games/_prototype/single.component';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a23-category.component.html',
 })
-export class A23CategoryComponent extends SingleComponent2 {
+export class A23CategoryComponent extends SingleComponent {
   category: Category;
 
   constructor(

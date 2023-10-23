@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Category, ItemList } from '@app/views/games/A16/_services/a16.interface';
 import { A16Service } from '@app/views/games/A16/_services/a16.service';
-import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
+import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -16,15 +16,10 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A16ItemlistComponent extends ListComponent2 {
-  itemControl: UntypedFormControl;
-  ingControl: UntypedFormControl;
+export class A16ItemlistComponent extends  ModalUseComponent {
   items: ItemList[];
   filteredItems: Observable<ItemList[]>;
   categories: Category[];
-  selectedCat = "Any";
-  selectedElem = "Any";
-  selectedElemV = 0;
 
   constructor(
     protected modalService: BsModalService,
@@ -37,18 +32,17 @@ export class A16ItemlistComponent extends ListComponent2 {
     private a16service: A16Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.itemControl = new UntypedFormControl();
-    this.ingControl = new UntypedFormControl();
-    this.pageForm = this.formBuilder.group({
-      filtertext: this.itemControl,
-      filtering: this.ingControl,
-      type: ['Any'],
-      elementval: [0],
-      element: ["Any"]
+    this.pageForm = this.formBuilder.nonNullable.group({
+      filtertext: '',
+      filtering: '',
+      type: 'Any',
+      elementval: 0,
+      element: "Any"
     })
   }
 
   changeData(): void {
+    this.pageForm.reset();
     this.getItems();
     this.getCategories();
   }

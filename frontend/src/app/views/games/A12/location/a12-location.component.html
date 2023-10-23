@@ -8,7 +8,7 @@
         <b>Table of Contents</b>
         <ol>
             <li *ngFor="let area of location.fields">
-                <a href="/{{gameURL}}/locations/{{location.slugname}}/{{language}}#{{area.slugname}}" (click)="$event.preventDefault();scroll(area.slugname)">{{area.name}}</a>
+                <a href="/{{gameURL}}/locations/{{location.slugname}}/{{language}}#{{area.slugname}}" (click)="$event.preventDefault();scroll(area.slugname,section+'/'+location.slugname)">{{area.name}}</a>
             </li>
         </ol>
     </div>

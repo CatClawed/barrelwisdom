@@ -5,14 +5,14 @@ import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
 import { RecipeTab } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { SingleComponent } from '@app/views/games/_prototype/single.component';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a25-recipe.component.html',
   providers: [DestroyService]
 })
-export class A25RecipeComponent extends SingleComponent2 {
+export class A25RecipeComponent extends SingleComponent {
   recipes: RecipeTab[];
 
   constructor(

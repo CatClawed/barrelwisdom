@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Item, NameLink } from '@app/views/games/A18/_services/a18.interface';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
-import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
+import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -16,14 +16,10 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A18ItemlistComponent extends ListComponent2 {
-  itemControl: UntypedFormControl;
-  ingControl: UntypedFormControl;
+export class A18ItemlistComponent extends  ModalUseComponent {
   items: Item[];
   filteredItems: Observable<Item[]>;
   categories: NameLink[];
-  selectedCat = "Any";
-  selectedKind = "Any";
 
   constructor(
     protected modalService: BsModalService,
@@ -36,16 +32,15 @@ export class A18ItemlistComponent extends ListComponent2 {
     private a18service: A18Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.itemControl = new UntypedFormControl();
-    this.ingControl = new UntypedFormControl();
-    this.pageForm = this.formBuilder.group({
-      filtertext: this.itemControl,
-      filtering: this.ingControl,
-      cat: ['Any'],
+    this.pageForm = this.formBuilder.nonNullable.group({
+      filtertext: '',
+      filtering: '',
+      cat: 'Any',
     })
   }
 
   changeData(): void {
+    this.pageForm.reset();
     this.getItems();
     this.getCategories();
   }

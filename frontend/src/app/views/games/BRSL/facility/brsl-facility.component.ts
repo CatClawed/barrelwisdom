@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { FacilityFull } from '@app/views/games/BRSL/_services/brsl.interface';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { SingleComponent } from '@app/views/games/_prototype/single.component';
 import { takeUntil } from 'rxjs/operators';
-import { DestroyService } from '@app/services/destroy.service';
 
 @Component({
   templateUrl: 'brsl-facility.component.html',
   selector: 'brsl-facility',
   providers: [DestroyService]
 })
-export class BRSLFacilityComponent extends SingleComponent2 {
+export class BRSLFacilityComponent extends SingleComponent {
   facility: FacilityFull;
   expand = false;
 

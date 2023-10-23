@@ -11,7 +11,7 @@
       <ol>
         <ng-container *ngFor="let skill of skills">
           <li *ngIf="skill.skill_set">
-            <a href="/{{gameURL}}/skills/{{language}}#{{skill.slug}}" (click)="$event.preventDefault();scroll(skill.slug)">{{skill.name}}</a>
+            <a href="/{{gameURL}}/skills/{{language}}#{{skill.slug}}" (click)="$event.preventDefault();scroll(skill.slug,section)">{{skill.name}}</a>
           </li>
         </ng-container>
       </ol>

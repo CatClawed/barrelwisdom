@@ -5,7 +5,7 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Region } from '@app/views/games/A22/_services/a22.interface';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { SingleComponent } from '@app/views/games/_prototype/single.component';
 import { first, takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -13,7 +13,7 @@ import { first, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A22LocationComponent extends SingleComponent2 {
+export class A22LocationComponent extends SingleComponent {
   region: Region;
   dig = true;
 

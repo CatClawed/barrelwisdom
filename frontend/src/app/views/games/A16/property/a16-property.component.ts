@@ -4,7 +4,7 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Property } from '@app/views/games/A16/_services/a16.interface';
 import { A16Service } from '@app/views/games/A16/_services/a16.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { SingleComponent } from '@app/views/games/_prototype/single.component';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -12,7 +12,7 @@ import { takeUntil } from 'rxjs/operators';
   selector: 'a16-property',
   providers: [DestroyService]
 })
-export class A16PropertyComponent extends SingleComponent2 {
+export class A16PropertyComponent extends SingleComponent {
   property: Property;
 
   constructor(
@@ -24,7 +24,7 @@ export class A16PropertyComponent extends SingleComponent2 {
   }
 
   changeData(): void {
-    if (this.showNav) this.colset = "col-md-5 mx-auto ";
+    
     this.a16service.getProperty(this.slug, this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({

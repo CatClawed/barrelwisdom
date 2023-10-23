@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="error"></Error>
 <ng-container *ngIf="tower">
-<Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="title"></Breadcrumb>
+<Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="title"></Breadcrumb>
 <h1>{{title}}</h1>
 <div style="justify-content: space-between; margin-left: 0.5em; margin-right: 0.5em;margin-bottom:0.5em;" class="row">
   <div class="table-of-contents">
@@ -8,7 +8,7 @@
       <ol>
           <li *ngFor="let floor of tower">
               <a href="/{{gameURL}}/quests/tower/{{language}}#{{floor.floor}}"
-                (click)="$event.preventDefault();scroll(floor.floor)">
+                (click)="$event.preventDefault();scroll(floor.floor, section)">
                 Floor {{floor.floor}}
               </a>
           </li>

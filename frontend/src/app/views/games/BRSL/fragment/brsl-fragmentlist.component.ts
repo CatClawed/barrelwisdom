@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Event, NameLink, SchoolLocation } from '@app/views/games/BRSL/_services/brsl.interface';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
-import { SingleComponent2 } from '@app/views/games/_prototype/single2.component';
+import { FilterableComponent } from '@app/views/games/_prototype/filterable.component';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
 
@@ -14,15 +14,11 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class BRSLFragmentComponent extends SingleComponent2 {
-  pageForm: UntypedFormGroup;
-  fragmentControl: UntypedFormControl;
+export class BRSLFragmentComponent extends FilterableComponent {
   event: Event[];
   character: NameLink[];
   location: SchoolLocation[];
   filteredEvents: Observable<Event[]>;
-  selectedChar = "Any";
-  selectedLoc = "Any";
 
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -32,16 +28,15 @@ export class BRSLFragmentComponent extends SingleComponent2 {
     protected seoService: SeoService,
   ) {
     super(destroy$, route, seoService);
-    this.fragmentControl = new UntypedFormControl();
-    this.pageForm = this.formBuilder.group({
-      filtertext: this.fragmentControl,
-      character: ['Any'],
-      location: ['Any']
+    this.pageForm = this.formBuilder.nonNullable.group({
+      filtertext: '',
+      character: 'Any',
+      location: 'Any'
     })
   }
 
-
   changeData() {
+    this.pageForm.reset()
     this.brslservice.getCharacterList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
@@ -95,11 +90,5 @@ export class BRSLFragmentComponent extends SingleComponent2 {
       });
     }
     return list;
-  }
-
-  get f() { return this.pageForm.controls; }
-
-  identify(index, item) {
-    return item.slug;
   }
 }

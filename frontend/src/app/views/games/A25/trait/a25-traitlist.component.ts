@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { NameLink, Trait } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
-import { ListComponent2 } from '@app/views/games/_prototype/list2.component';
+import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
@@ -16,12 +16,10 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A25TraitlistComponent extends ListComponent2 {
-  traitControl: UntypedFormControl;
+export class A25TraitlistComponent extends  ModalUseComponent {
   transfer: NameLink[];
   traits: Trait[];
   filteredTraits: Observable<Trait[]>;
-  selectedFilter: "Any"
 
   constructor(
     protected modalService: BsModalService,
@@ -33,14 +31,14 @@ export class A25TraitlistComponent extends ListComponent2 {
     private formBuilder: UntypedFormBuilder,
     private a25service: A25Service,) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.traitControl = new UntypedFormControl();
     this.pageForm = this.formBuilder.group({
-      filtertext: this.traitControl,
+      filtertext: '',
       transfers: "any"
     })
   }
 
   changeData(): void {
+    this.pageForm.reset();
     this.getTransfer();
     this.getTraits();
   }
