@@ -3,7 +3,7 @@
 <ng-container *ngIf="facility">
   <Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Facilities', '/'+gameURL+'/facilities/'+language]]" [current]="facility.name"></Breadcrumb>
 <div class="mx-auto row">
- <div class="{{colset}} card griddisplay card-body">
+ <div class="{{colset}} card card-body">
     <h4 class="card-title card-icon-space">{{facility.name}}</h4>
     <span *ngIf="facility.isDLC" class="card-icon-position badge bg-secondary">DLC</span>
     <img class="image-display" loading="lazy" src="{{imgURL}}facilities/{{facility.slug}}.webp" alt="{{facility.name">

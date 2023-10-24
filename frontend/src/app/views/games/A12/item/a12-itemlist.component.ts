@@ -37,12 +37,15 @@ export class A12ItemlistComponent extends  ModalUseComponent {
       type: 'Any',
       level: 0,
     })
+    this.modalEvent();
+    this.getItems();
+    this.getCategories();
+    this.genericSEO(`Items`, `The list of items in ${this.gameTitle}.`);
   }
+  
 
   changeData(): void {
     this.pageForm.reset();
-    this.getItems();
-    this.getCategories();
   }
 
   getItems() {

@@ -4,8 +4,6 @@
 <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Skills"></Breadcrumb>
 <h1>Skills</h1>
 <ng-container *ngIf="skills">
-<div class="mx-auto">
-  <div class="row" style="justify-content:space-between;margin-left:0.5em;margin-right:0.5em;margin-bottom:0.5em;">
     <div class="table-of-contents">
       <b>Table of Contents</b>
       <ol>
@@ -16,9 +14,6 @@
         </ng-container>
       </ol>
     </div>
-    <div class="col-md-3" ></div>
-  </div>
-</div>  
   <div *ngFor="let skill of skills">
     <h2 *ngIf="skill.skill_set" id="{{skill.slug}}">{{skill.name}}</h2>
     <table *ngIf="skill.skill_set" class="tbl border table-shrink">

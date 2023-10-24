@@ -3,7 +3,6 @@
 <ng-container *ngIf="units">
 <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Units"></Breadcrumb>
 <h1>Units</h1>
-<div class="col-md-3" ></div>
 <ng-container *ngIf="units">
   <div *ngFor="let unit of units" class="row spacer">
     <div class="card card-body col-md-8" style="margin-left:auto;margin-right:auto;">

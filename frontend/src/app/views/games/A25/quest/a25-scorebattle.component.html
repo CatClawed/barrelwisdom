@@ -2,7 +2,6 @@
 <ng-container *ngIf="scorebattles">
 <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="title"></Breadcrumb>
 <h1>{{title}}</h1>
-<div style="justify-content: space-between; margin-left: 0.5em; margin-right: 0.5em;margin-bottom:0.5em;" class="row">
   <div class="table-of-contents">
       <b>Table of Contents</b>
       <ol>
@@ -14,8 +13,6 @@
           </li>
       </ol>
   </div>
-  <div class="col-md-3" ></div>
-</div>
 
 <ng-container *ngFor="let scorebattle of scorebattles">
   <h2 id="{{scorebattle.chapter}}-{{scorebattle.section}}">{{scorebattle.chapter}}-{{scorebattle.section}}: {{scorebattle.name}}</h2>

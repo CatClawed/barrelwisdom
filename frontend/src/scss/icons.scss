@@ -1,3 +1,51 @@
+// Font
+
+@font-face {
+  font-family: 'Atelier';
+  src: url('#{$atelier-font-path}/Atelier.woff2') format('woff2'),
+  url('#{$atelier-font-path}/Atelier.woff') format('woff');
+
+  font-weight: normal;
+  font-style: normal;
+}
+
+// base class
+
+.atelier {
+  display: inline-block;
+  font: normal normal normal 1.5em/1 'Atelier';
+  color: inherit;
+  flex-shrink: 0;
+  speak: none;
+  text-transform: none;
+  /* Better Font Rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-right: 0.4em;
+}
+
+//  change icon size
+
+.atelier-sm {
+  font-size: 1em;
+  padding-right: 0;
+}
+
+.atelier-lg {
+  font-size: 2.4em;
+  padding-right: 0.5em;
+}
+
+@media screen and (max-width: 576px) {
+  .atelier-lg {
+    font-size: 4vw;
+  }
+}
+
+.atelier-np {
+  padding-right: 0;
+}
+
 /* icons */
 $icons: (
   'resleri-mats': 'ea02',

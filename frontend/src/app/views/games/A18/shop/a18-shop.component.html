@@ -3,7 +3,6 @@
 <div *ngIf="!error">
 <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Shop Ideas"></Breadcrumb>
 <h1>Shops</h1>
-<div style="justify-content: space-between; margin-left: 0.5em; margin-right: 0.5em;margin-bottom:0.5em;" class="row">
   <div class="table-of-contents">
       <b>Table of Contents</b>
       <ol>
@@ -12,8 +11,6 @@
           </li>
       </ol>
   </div>
-  <div class="col-md-3" ></div>
-</div>
 <ng-container *ngIf="shops">
 <div *ngFor="let shop of shops" class="row spacer">
   <div class="card card-body col-md-8" style="margin-left:auto;margin-right:auto;">

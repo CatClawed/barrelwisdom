@@ -37,6 +37,7 @@ export class A12TraitlistComponent extends  ModalUseComponent {
   }
 
   changeData(): void {
+    this.pageForm.reset();
     this.a12service.getTraitList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({

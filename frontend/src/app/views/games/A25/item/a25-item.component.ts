@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
@@ -9,6 +9,8 @@ import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a25-item.component.html',
+  styleUrls: ['../resleri.scss'],
+  encapsulation: ViewEncapsulation.None,
   selector: 'a25-item',
   providers: [DestroyService]
 })

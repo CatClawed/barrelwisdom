@@ -1,0 +1,55 @@
+// Form stuff
+
+.mdc-text-field--outlined {
+    background-color: white;
+}
+
+.mat-mdc-form-field {
+    display: inline-block !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+    background-color: white;
+}
+
+.mat-icon {
+    overflow: unset !important;
+}
+
+.mat-drawer-container {
+    background: transparent !important;
+}
+
+.mat-sidenav-content {
+    margin-left: 0 !important;
+}
+
+// Create page
+
+.mat-chip.mat-primary {
+    background-color: #20a8d8;
+    color: white;
+}
+
+// Material tabs cutting off my shadows...
+
+.tabs-overflow * {
+    overflow: visible !important;
+}
+
+
+// buttons
+
+.mat-flat-button.mat-accent,
+.mat-raised-button.mat-accent,
+.mat-fab.mat-accent,
+.mat-mini-fab.mat-accent {
+  background-color: $navbar !important;
+}
+
+.mat-flat-button.mat-accent,
+.mat-raised-button.mat-accent,
+.mat-fab.mat-accent,
+.mat-mini-fab.mat-accent:hover {
+  background-color: #B8947B !important;
+}

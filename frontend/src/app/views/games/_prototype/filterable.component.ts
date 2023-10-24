@@ -13,9 +13,6 @@ import { DataComponent } from './data.component';
 
 export abstract class FilterableComponent extends DataComponent implements OnInit {
     pageForm: UntypedFormGroup;
-    formDefaults = {
-        filtertext: ""
-    }
 
     constructor(
         protected readonly destroy$: DestroyService,

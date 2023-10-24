@@ -3,7 +3,6 @@
 <ng-container *ngIf="!error">
 <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Location: '+location.name"></Breadcrumb>
 <h1>{{location.name}}</h1>
-<div style="justify-content: space-between; margin-left: 0.5em; margin-right: 0.5em;margin-bottom:0.5em;" class="row">
   <div class="table-of-contents">
       <b>Table of Contents</b>
       <ol>
@@ -12,8 +11,6 @@
           </li>
       </ol>
   </div>
-  <div class="col-md-3" ></div>
-</div>
 
 <ng-container *ngFor="let area of location.fields">
   <h2 id="{{area.slugname}}">{{area.name}}</h2>

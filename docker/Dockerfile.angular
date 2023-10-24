@@ -1,5 +1,4 @@
-FROM node:18.18.0-alpine3.18
-RUN apk add vim
+FROM node:18.18.2-alpine3.18
 WORKDIR /frontend
 COPY package*.json /frontend
 RUN npm i --silent

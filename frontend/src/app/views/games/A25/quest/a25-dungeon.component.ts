@@ -1,5 +1,5 @@
 import { Location, ViewportScroller } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
@@ -10,6 +10,8 @@ import { FragmentedComponent } from '../../_prototype/fragmented.component';
 
 @Component({
   templateUrl: 'a25-dungeon.component.html',
+  styleUrls: ['../resleri.scss'],
+  encapsulation: ViewEncapsulation.None,
   selector: 'a25-dungeon',
   providers: [DestroyService]
 })

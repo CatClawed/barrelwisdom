@@ -50,6 +50,19 @@ python manage.py dumpdata app_name -o dump.json.gz
 python manage.py loaddata dump.json.gz
 ```
 
+### Update Postgres
+
+Overall process: back up whole database, delete docker volume, then can start fresh.
+
+Or, y'know, just make a db dump with django and let that do the work.
+
+```bash
+docker exec -it postgres psql -U [username] < dumpfile
+docker cp dumpfile postgres:/home
+# within new postgres container
+psql -U [username] barrelwisdom < home/dumpfile
+```
+
 ## Build frontend
 
 Be sure backend is running, as prerendering requires DB access.

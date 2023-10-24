@@ -2,7 +2,6 @@
 <div *ngIf="!error">
     <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Location: '+region.name"></Breadcrumb>
     <h1>{{region.name}}</h1>
-    <div style="justify-content: space-between; margin-left: 0.5em; margin-right: 0.5em;" class="row">
     <div class="table-of-contents">
         <b>Table of Contents</b>
         <ol class="toc-list">
@@ -10,8 +9,6 @@
                 <a href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}" (click)="$event.preventDefault();scroll(area.slug)">{{area.name}}</a>
             </li>
         </ol>
-    </div>
-    <div class="col-md-3" ></div>
     </div>
     <div id="{{area.slug}}" *ngFor="let area of region.areas">
         <h2>{{area.name}}</h2>

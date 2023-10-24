@@ -1,53 +1,6 @@
 @import 'specific/navigation';
-
-// Font
-
-@font-face {
-  font-family: 'Atelier';
-  src: url('#{$atelier-font-path}/Atelier.woff2') format('woff2'),
-  url('#{$atelier-font-path}/Atelier.woff') format('woff');
-
-  font-weight: normal;
-  font-style: normal;
-}
-
-// base class
-
-.atelier {
-  display: inline-block;
-  font: normal normal normal 1.5em/1 'Atelier';
-  color: inherit;
-  flex-shrink: 0;
-  speak: none;
-  text-transform: none;
-  /* Better Font Rendering */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding-right: 0.4em;
-}
-
-//  change icon size
-
-.atelier-sm {
-  font-size: 1em;
-  padding-right: 0;
-}
-
-.atelier-lg {
-  font-size: 2.4em;
-  padding-right: 0.5em;
-}
-
-@media screen and (max-width: 576px) {
-  .atelier-lg {
-    font-size: 4vw;
-  }
-}
-
-.atelier-np {
-  padding-right: 0;
-}
-
+@import 'specific/material-fix';
+@import 'specific/ngx-bootstrap-fix';
 @import "icons";
 
 // generic stuff
@@ -62,10 +15,6 @@ a:focus {
 
 .spacer {
   margin-bottom: 1em;
-}
-
-.griddisplay {
-  display: grid;
 }
 
 .bottom {
@@ -96,51 +45,7 @@ a.badge:hover {
   text-decoration: none;
 }
 
-.modal-body {
-  position: absolute !important;
-  width: 55%;
-}
 
-@media screen and (max-width: 800px) {
-  .modal-body {
-    width: 100% !important;
-    padding: 0 !important;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .modal-dialog {
-    max-width: 100% !important;
-    margin: 0.5em !important;
-    font-size: calc(1rem + 0.1vw) !important;
-  }
-}
-
-@media screen and (min-width: 800px) {
-  .modal-dialog {
-    max-width: 100% !important;
-    padding-left: 1em !important;
-    padding-right: 1em !important;
-    font-size: calc(1rem + 0.1vw) !important;
-  }
-}
-
-.modal-content {
-  background-color: transparent !important;
-  border: none !important;
-  align-items: center;
-}
-
-.close {
-  text-shadow: none;
-  color: white;
-  opacity: 100%;
-  background-color: transparent;
-  border: none;
-  float: right;
-  padding: 0;
-  font-size: 1.35rem;
-}
 
 /* Background pattern from Toptal Subtle Patterns */
 .card {
@@ -290,81 +195,10 @@ h4 {
   font-size: calc(1.3125rem + 0.1vw) !important;
 }
 
-// tabs
-
-.tab-content>.tab-pane {
-  border-left: 1px solid gray;
-  border-right: 1px solid gray;
-  border-bottom: 1px solid gray;
-  padding: 1rem;
-}
-
-.tab-content {
-  background-image: url("/media/main/images/clean_textile.webp");
-}
-
-.nav-tabs .nav-link.active {
-  background-image: url("/media/main/images/clean_textile.webp");
-  border: 1px solid darkgray;
-  border-bottom-color: transparent;
-}
-
-.nav-tabs .nav-link {
-  background-color: #EBEBEB;
-  border: 1px solid darkgray;
-  text-decoration: none;
-}
-
-.nav-tabs .nav-link:hover {
-  background-color: #F9F9F9;
-  border: 1px solid darkgray;
-}
-
 .breadcrumb {
   padding: 0 !important;
   background-color: transparent !important;
   border-bottom: transparent !important;
-}
-
-.mat-flat-button.mat-accent,
-.mat-raised-button.mat-accent,
-.mat-fab.mat-accent,
-.mat-mini-fab.mat-accent {
-  background-color: $navbar !important;
-}
-
-.mat-flat-button.mat-accent,
-.mat-raised-button.mat-accent,
-.mat-fab.mat-accent,
-.mat-mini-fab.mat-accent:hover {
-  background-color: #B8947B !important;
-}
-
-.popover {
-  font-size: calc(1rem + 0.1vw) !important;
-
-  // ngx bootstrap bandaid
-  position: absolute;
-  top: 0;
-  left: 0 #{"/* rtl:ignore */"};
-}
-
-.popover-header {
-  font-size: calc(1.2rem + 0.1vw) !important;
-}
-
-
-.popover-arrow {
-  position: absolute;
-}
-
-.tooltip {
-  font-size: calc(1rem + 0.1vw) !important;
-  position: absolute;
-}
-
-.tooltip-arrow {
-  position: absolute;
 }
 
 .table-of-contents {
@@ -374,17 +208,19 @@ h4 {
   padding: 0.8em;
   border-radius: 10px;
   width: max-content;
+  max-width: 100%;
+  margin: 0 0.5em 0.5em 0.5em;
+
+  ol {
+    margin-bottom: 0;
+  }
 }
+
 
 // buttons
 
 .btn {
   color: white !important;
-}
-
-// nasty white perfect scrollbar background gone
-.ps__rail-y {
-  background-color: transparent !important;
 }
 
 a {
@@ -399,32 +235,6 @@ a:hover {
 body {
   background: url("/media/main/images/ricepaper2.webp");
   background-color: #faf6f5;
-}
-
-.mat-drawer-container {
-  background: transparent !important;
-}
-
-.mat-sidenav-content {
-  margin-left: 0 !important;
-}
-
-// Form stuff
-
-.mdc-text-field--outlined {
-  background-color: white;
-}
-
-.mat-mdc-form-field {
-  display: inline-block !important;
-}
-
-.mat-form-field-appearance-outline .mat-form-field-outline {
-  background-color: white;
-}
-
-.mat-icon {
-  overflow: unset !important;
 }
 
 // Main page
@@ -563,6 +373,7 @@ img {
   max-width: 100%;
 }
 
+// comment related, not an actual tab
 .tab {
   margin-left: 40px;
 }
@@ -615,13 +426,6 @@ img {
   opacity: 35%;
 }
 
-// Create page
-
-.mat-chip.mat-primary {
-  background-color: #20a8d8;
-  color: white;
-}
-
 // Settings page
 
 .form-group {
@@ -660,34 +464,4 @@ img {
   .item-grid {
     grid-template-columns: auto;
   }
-}
-
-// Resleri
-
-.resleri-item-frame {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  object-fit: contain;
-  filter: drop-shadow(10px 10px 15px rgba(90, 90, 90, 0.7));
-  margin-bottom: 1.5rem;
-}
-
-.resleri-item-frame-sm {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  object-fit: contain;
-}
-
-// Material tabs cutting off my shadows...
-
-.tabs-overflow * {
-  overflow: visible !important;
-}
-
-.new-tab {
-  font-size: calc(0.6rem + 0.1vw);
-  text-decoration: none;
-  padding-left: 0.2rem;
 }

@@ -30,7 +30,6 @@ export class A23MonsterlistComponent extends ModalUseComponent {
     private formBuilder: UntypedFormBuilder,
     private a23service: A23Service,) {
     super(modalService, destroy$, router, route, location, seoService);
-    this.gameService(this.a23service, 'monsters');
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       type: ''
@@ -44,6 +43,7 @@ export class A23MonsterlistComponent extends ModalUseComponent {
       .subscribe({
         next: monsters => {
           this.monsters = monsters;
+          this.gameService(this.a23service, 'monsters');
           this.genericSEO(`Monsters`, `The list of monsters in ${this.gameTitle}.`);
           this.filteredMonsters = this.pageForm.valueChanges.pipe(
             startWith(null as Observable<Monster[]>),

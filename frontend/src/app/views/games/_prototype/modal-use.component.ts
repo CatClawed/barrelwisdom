@@ -17,7 +17,7 @@ export abstract class ModalUseComponent extends FilterableComponent implements O
     modalRef: BsModalRef;
     pageForm: UntypedFormGroup;
     selected: string = "thing";
-    config: ModalOptions = { class: "col-md-5 mx-auto" };
+    config: ModalOptions = { class: "col-md-7 mx-auto", animated: false };
     modalLink;
 
     constructor(
@@ -28,7 +28,7 @@ export abstract class ModalUseComponent extends FilterableComponent implements O
         protected location: Location,
         protected seoService: SeoService
     ) {
-        super(destroy$, route, seoService)
+        super(destroy$, route, seoService);
     }
 
     ngOnInit(): void {
@@ -59,7 +59,7 @@ export abstract class ModalUseComponent extends FilterableComponent implements O
         }
         this.selected = slug;
         this.location.go(`${this.gameURL}/${this.section}/${slug}/${this.language}`);
-        this.modalRef = this.modalService.show(template);
+        this.modalRef = this.modalService.show(template, this.config);
         this.modalRef.onHide
             .pipe(takeUntil(this.destroy$))
             .subscribe((reason: string | any) => {
@@ -81,7 +81,7 @@ export abstract class ModalUseComponent extends FilterableComponent implements O
         }
         this.selected = slug;
         this.location.go(`${this.gameURL}/${destination}/${slug}/${this.language}`);
-        this.modalRef = this.modalService.show(template);
+        this.modalRef = this.modalService.show(template, this.config);
         this.modalRef.onHide
             .pipe(takeUntil(this.destroy$))
             .subscribe((reason: string | any) => {

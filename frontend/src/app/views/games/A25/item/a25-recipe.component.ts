@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
@@ -10,6 +10,8 @@ import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a25-recipe.component.html',
+  styleUrls: ['../resleri.scss'],
+  encapsulation: ViewEncapsulation.None,
   providers: [DestroyService]
 })
 export class A25RecipeComponent extends SingleComponent {

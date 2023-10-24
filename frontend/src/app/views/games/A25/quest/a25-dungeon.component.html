@@ -2,7 +2,6 @@
 <ng-container *ngIf="dungeons">
 <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="title"></Breadcrumb>
 <h1>{{title}}</h1>
-<div style="justify-content: space-between; margin-left: 0.5em; margin-right: 0.5em;margin-bottom:0.5em;" class="row">
   <div class="table-of-contents">
       <b>Table of Contents</b>
       <ol>
@@ -15,8 +14,6 @@
           </li>
       </ol>
   </div>
-  <div class="col-md-3" ></div>
-</div>
 
 <ng-container *ngFor="let dungeon of dungeons">
   <h2 id="{{language == 'en' ? dungeon.name_en : dungeon.name_ja}}">{{language == 'en' ? dungeon.name_en : dungeon.name_ja}}{{language == 'en' ? ' (' + dungeon.name_ja + ')' : ''}}</h2>

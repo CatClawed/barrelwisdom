@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: postgres:15.1
+    image: postgres:16.0
     container_name: postgres
     restart: always
     environment:
@@ -44,7 +44,7 @@ services:
 
   memcached:
     container_name: memcached
-    image: memcached:1.6.19-alpine3.17
+    image: memcached:1.6.22-alpine3.18
     ports:
       - "11211:11211"
     entrypoint:

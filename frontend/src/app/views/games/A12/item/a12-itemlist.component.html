@@ -6,7 +6,7 @@
 <div *ngIf="categories" class ="col-md-10 mx-auto">
   <form [formGroup]="pageForm" class="form-horizontal">
     <div class="row">
-      <mat-form-field class="col-md-5" appearance="outline">
+      <mat-form-field class="col-md-8" appearance="outline">
         <mat-label>Filter...</mat-label>
         <input style="height: 100%;" matInput formControlName="filtertext">
       </mat-form-field>
@@ -20,7 +20,6 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <div class="col-md-3" ></div>
     </div>
     <div class="row">
       <mat-form-field class="col-md-5" appearance="outline">

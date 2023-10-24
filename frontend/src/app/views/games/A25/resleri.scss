@@ -1,0 +1,22 @@
+.resleri-item-frame {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    object-fit: contain;
+    filter: drop-shadow(10px 10px 15px rgba(90, 90, 90, 0.7));
+    margin-bottom: 1.5rem;
+  }
+  
+  .resleri-item-frame-sm {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    object-fit: contain;
+  }
+  
+  // as in opens a new tab
+  .new-tab {
+    font-size: calc(0.6rem + 0.1vw);
+    text-decoration: none;
+    padding-left: 0.2rem;
+  }

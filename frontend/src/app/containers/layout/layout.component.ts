@@ -47,7 +47,12 @@ export class LayoutComponent implements OnInit {
     this.translationService.langObserve
       .pipe(takeUntil(this.destroy$))
       .subscribe(x => {
-        this.languages = x; this.currentLang = this.translationService.currentLang;
+        this.languages = x;
+      });
+    this.translationService.currentLangObserve
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(x => {
+        this.currentLang = this.translationService.currentLang;
       });
 
     this.breakpointObserver.observe([

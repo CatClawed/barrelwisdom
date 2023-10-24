@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
@@ -13,6 +13,8 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a25-materiallist.component.html',
+  styleUrls: ['../resleri.scss'],
+  encapsulation: ViewEncapsulation.None,
   providers: [DestroyService]
 })
 

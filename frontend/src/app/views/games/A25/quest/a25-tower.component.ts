@@ -1,5 +1,5 @@
 import { Location, ViewportScroller } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
@@ -10,6 +10,8 @@ import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a25-tower.component.html',
+  styleUrls: ['../resleri.scss'],
+  encapsulation: ViewEncapsulation.None,
   selector: 'a25-tower',
   providers: [DestroyService]
 })

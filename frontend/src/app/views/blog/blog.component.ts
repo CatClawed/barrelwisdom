@@ -59,6 +59,10 @@ export class BlogComponent implements OnInit {
     })
   }
 
+  checkAuthor(commentAuthor: string) {
+    return this.blog.author.filter(author => author.username==commentAuthor)
+  }
+
   postComment(parent?: Comment): void {
     let body = this.pageForm.controls['comment'].value;
     let name = this.pageForm.controls['name'].value
