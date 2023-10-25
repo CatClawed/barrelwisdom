@@ -16,7 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A25TraitlistComponent extends  ModalUseComponent {
+export class A25TraitlistComponent extends ModalUseComponent {
   transfer: NameLink[];
   traits: Trait[];
   filteredTraits: Observable<Trait[]>;
@@ -38,6 +38,7 @@ export class A25TraitlistComponent extends  ModalUseComponent {
   }
 
   changeData(): void {
+    this.modalEvent();
     this.pageForm.reset();
     this.getTransfer();
     this.getTraits();

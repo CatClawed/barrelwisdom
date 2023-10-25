@@ -39,6 +39,7 @@ export class BRSLItemlistComponent extends ModalUseComponent {
   }
 
   changeData(): void {
+    this.modalEvent();
     this.pageForm.reset()
     this.getItems();
     this.getCategories();

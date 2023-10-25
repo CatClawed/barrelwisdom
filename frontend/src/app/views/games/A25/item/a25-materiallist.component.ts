@@ -43,6 +43,7 @@ export class A25MaterialListComponent extends ModalUseComponent {
   }
 
   changeData(): void {
+    this.modalEvent();
     this.pageForm.reset()
     this.getItems();
     this.getColors();

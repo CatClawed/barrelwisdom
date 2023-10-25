@@ -16,7 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class BRSLDemonlistComponent extends  ModalUseComponent {
+export class BRSLDemonlistComponent extends ModalUseComponent {
   demons: DemonList[];
   filteredDemons: Observable<DemonList[]>;
 
@@ -37,6 +37,7 @@ export class BRSLDemonlistComponent extends  ModalUseComponent {
   }
 
   changeData() {
+    this.modalEvent();
     this.pageForm.reset()
     this.brslservice.getDemonList(this.language)
       .pipe(takeUntil(this.destroy$))

@@ -16,7 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A16MonsterlistComponent extends  ModalUseComponent {
+export class A16MonsterlistComponent extends ModalUseComponent {
   monsters: MonsterList[];
   filteredMonsters: Observable<MonsterList[]>;
 
@@ -37,6 +37,7 @@ export class A16MonsterlistComponent extends  ModalUseComponent {
   }
 
   changeData() {
+    this.modalEvent();
     this.a16service.getMonsterList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({

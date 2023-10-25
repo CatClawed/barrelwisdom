@@ -44,6 +44,7 @@ export class A25CharalistComponent extends ModalUseComponent {
   }
 
   changeData(): void {
+    this.modalEvent();
     this.pageForm.reset()
     this.getTransfer();
     this.getCharas();

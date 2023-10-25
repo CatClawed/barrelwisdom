@@ -36,6 +36,7 @@ export class A23TraitlistComponent extends ModalUseComponent {
     })
   }
   changeData() {
+    this.modalEvent();
     this.pageForm.reset();
     this.a23service.getTraitList(this.language)
       .pipe(takeUntil(this.destroy$))

@@ -44,6 +44,7 @@ export class A25SynthesisListComponent extends ModalUseComponent {
   }
 
   changeData(): void {
+    this.modalEvent();
     this.pageForm.reset()
     this.getItems();
     this.getTypes();

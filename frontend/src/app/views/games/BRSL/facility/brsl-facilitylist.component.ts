@@ -16,7 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class BRSLFacilitylistComponent extends  ModalUseComponent {
+export class BRSLFacilitylistComponent extends ModalUseComponent {
   facilities: FacilityList[];
   filteredFacilities: Observable<FacilityList[]>;
 
@@ -37,6 +37,7 @@ export class BRSLFacilitylistComponent extends  ModalUseComponent {
   }
 
   changeData() {
+    this.modalEvent();
     this.pageForm.reset()
     this.brslservice.getFacilityList(this.language)
       .pipe(takeUntil(this.destroy$))

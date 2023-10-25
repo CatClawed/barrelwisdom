@@ -37,6 +37,7 @@ export class A23MonsterlistComponent extends ModalUseComponent {
   }
 
   changeData() {
+    this.modalEvent();
     this.pageForm.reset();
     this.a23service.getMonsterList(this.language)
       .pipe(takeUntil(this.destroy$))

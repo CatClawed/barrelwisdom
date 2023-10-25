@@ -15,7 +15,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   templateUrl: 'a16-propertylist.component.html',
   providers: [DestroyService]
 })
-export class A16PropertylistComponent extends  ModalUseComponent {
+export class A16PropertylistComponent extends ModalUseComponent {
   properties: Property[];
   filteredProperties: Observable<Property[]>;
 
@@ -37,6 +37,7 @@ export class A16PropertylistComponent extends  ModalUseComponent {
   }
 
   changeData() {
+    this.modalEvent();
     this.pageForm.reset();
     this.a16service.getPropertyList(this.language)
       .pipe(takeUntil(this.destroy$))

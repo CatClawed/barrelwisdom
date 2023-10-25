@@ -16,7 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A12ItemlistComponent extends  ModalUseComponent {
+export class A12ItemlistComponent extends ModalUseComponent {
   items: ItemList[];
   filteredItems: Observable<ItemList[]>;
   categories: Category[];
@@ -37,14 +37,12 @@ export class A12ItemlistComponent extends  ModalUseComponent {
       type: 'Any',
       level: 0,
     })
+  }
+  
+  changeData(): void {
     this.modalEvent();
     this.getItems();
     this.getCategories();
-    this.genericSEO(`Items`, `The list of items in ${this.gameTitle}.`);
-  }
-  
-
-  changeData(): void {
     this.pageForm.reset();
   }
 
@@ -102,5 +100,4 @@ export class A12ItemlistComponent extends  ModalUseComponent {
     }
     return list;
   }
-
 }

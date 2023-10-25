@@ -38,6 +38,7 @@ export class A15EffectlistComponent extends ModalUseComponent {
   }
 
   changeData(): void {
+    this.modalEvent();
     this.pageForm.reset();
     this.a15service.getEffectList(this.language)
       .pipe(takeUntil(this.destroy$))

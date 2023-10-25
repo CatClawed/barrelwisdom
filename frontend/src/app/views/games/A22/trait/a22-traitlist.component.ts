@@ -15,7 +15,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   templateUrl: 'a22-traitlist.component.html',
   providers: [DestroyService]
 })
-export class A22TraitlistComponent extends  ModalUseComponent {
+export class A22TraitlistComponent extends ModalUseComponent {
   traits: Trait[];
   filteredTraits: Observable<Trait[]>;
 
@@ -36,6 +36,7 @@ export class A22TraitlistComponent extends  ModalUseComponent {
   }
 
   changeData() {
+    this.modalEvent();
     this.pageForm.reset();
     this.a22service.getTraitList(this.language)
       .pipe(takeUntil(this.destroy$))

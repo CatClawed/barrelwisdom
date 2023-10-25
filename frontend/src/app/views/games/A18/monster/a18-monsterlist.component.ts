@@ -16,7 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A18MonsterlistComponent extends  ModalUseComponent {
+export class A18MonsterlistComponent extends ModalUseComponent {
   monsters: Monster[];
   filteredMonsters: Observable<Monster[]>;
   races: Race[];
@@ -39,6 +39,7 @@ export class A18MonsterlistComponent extends  ModalUseComponent {
   }
 
   changeData(): void {
+    this.modalEvent();
     this.pageForm.reset();
     this.getMonsters();
     this.getRace();
