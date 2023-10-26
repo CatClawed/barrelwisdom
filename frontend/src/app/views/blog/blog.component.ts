@@ -14,6 +14,7 @@ import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'blog.component.html',
+  styleUrls: ['blog.scss'],
   providers: [DestroyService]
 })
 

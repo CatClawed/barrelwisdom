@@ -4,7 +4,7 @@
   font-family: 'Atelier';
   src: url('#{$atelier-font-path}/Atelier.woff2') format('woff2'),
   url('#{$atelier-font-path}/Atelier.woff') format('woff');
-
+  font-display: swap;
   font-weight: normal;
   font-style: normal;
 }

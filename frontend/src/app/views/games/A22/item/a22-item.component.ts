@@ -10,6 +10,18 @@ import { takeUntil } from 'rxjs/operators';
 @Component({
   templateUrl: 'a22-item.component.html',
   selector: 'a22-item',
+  styles: [
+    `.badge-list {
+      margin-right: 0.4em;
+      margin-top: 0.3em;
+      font-size: calc(0.9rem + 0.1vw) !important;
+    }`,
+    `@media screen and (max-width: 576px) {
+      .badge-list {
+        font-size: 2.5vw !important;
+      }
+    }`
+  ],
   providers: [DestroyService]
 })
 export class A22ItemComponent extends SingleComponent {

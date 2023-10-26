@@ -8,35 +8,6 @@ export const environment = {
   authUrl: '/auth',
   imageRegex: '/media/',
   mediaURL: '/media/',
-  languages: {
-    "totori":         ["en", "ja"],
-    "escha":          ["en", "ja"],
-    "shallie":        ["en", "ja"],
-    "firis":          ["en", "ja", "sc", "tc"],
-    "ryza2":          ["en", "fr", "ja", "ko", "sc", "tc"],
-    "sophie2":        ["en", "ja", "ko", "sc", "tc"],
-    "resleri":        ["en", "ja"],
-    "bluereflection": ["en"],
-    "second-light":   ["en", "ja", "sc", "tc"],
-    "default":        ["en"],
-  },
-  language_codes: {
-    "en": "English",
-    "fr": "Français",
-    "ja":"日本語",
-    "ko":"한국어",
-    "sc":"简体中文",
-    "tc":"繁體中文"
-  },
-  totori_languages: {"en": "English", "ja":"日本語"},
-  escha_languages: {"en": "English", "ja":"日本語"},
-  shallie_languages: {"en": "English", "ja":"日本語"},
-  firis_languages: {"en": "English", "ja":"日本語", "sc":"简体中文", "tc":"繁體中文"},
-  ryza2_languages: {"en": "English", "fr": "Français", "ja":"日本語", "ko":"한국어", "sc":"简体中文", "tc":"繁體中文"},
-  sophie2_languages: {"en": "English", "ja":"日本語", "ko":"한국어", "sc":"简体中文", "tc":"繁體中文"},
-  resleri_languages: {"en": "English", "ja":"日本語"},
-  bluereflection_languages: {"en": "English"},
-  secondlight_languages: {"en": "English", "ja":"日本語", "sc":"简体中文", "tc":"繁體中文"},
 };
 
 /*

@@ -14,7 +14,6 @@
     .modal-dialog {
         max-width: 100% !important;
         margin: 0.5em !important;
-        font-size: calc(1rem + 0.1vw) !important;
     }
 }
 
@@ -23,13 +22,10 @@
         max-width: 100% !important;
         padding-left: 1em !important;
         padding-right: 1em !important;
-        font-size: calc(1rem + 0.1vw) !important;
     }
 }
 
 .modal-content {
-    background-color: transparent !important;
-    border: none !important;
     align-items: center;
 }
 
@@ -42,16 +38,4 @@
     float: right;
     padding: 0;
     font-size: 1.35rem;
-}
-
-.popover {
-    font-size: calc(1rem + 0.1vw) !important;
-}
-
-.popover-header {
-    font-size: calc(1.2rem + 0.1vw) !important;
-}
-
-.tooltip {
-    font-size: calc(1rem + 0.1vw) !important;
 }

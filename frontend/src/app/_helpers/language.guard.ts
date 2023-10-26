@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { LanguageService } from '@app/services/language.service';
-import { environment } from '@environments/environment';
+import { LanguageData } from '@environments/language-data';
 
 export const LanguageGuard = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
     const languageService = inject(LanguageService);
@@ -19,10 +19,11 @@ export const LanguageGuard = (route: ActivatedRouteSnapshot, state: RouterStateS
     }
 
     if(!languageService.languageValue) {
-        languageService.setLanguage(language); // doesn't matter if this is a bad value, EN is default
+        languageService.setLanguage(language);
+        // doesn't matter if this is a bad value, EN is default
     }
 
-    if (environment.languages[section].includes(language)) return true;
+    if (LanguageData.languages[section].includes(language)) return true;
     
     // go to the default EN page if all else fails
     segments.pop();

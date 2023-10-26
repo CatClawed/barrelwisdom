@@ -1,15 +1,5 @@
-// literally made this to separate the Atelier dev and Atelier live font paths.
-
 @use '@angular/material' as mat;
 @include mat.core();
-
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
-// Plus imports for other components in your app.
-
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
 $frontend-theme: mat.define-light-theme((color: (primary: mat.define-palette(mat.$brown-palette),
         accent: mat.define-palette(mat.$indigo-palette, A200, A100, A400),
       ),
@@ -17,12 +7,27 @@ $frontend-theme: mat.define-light-theme((color: (primary: mat.define-palette(mat
       ),
       density: 0,
     ));
-@include mat.all-component-themes($frontend-theme);
+@include mat.core-theme($frontend-theme);
+@include mat.button-theme($frontend-theme);
+@include mat.fab-theme($frontend-theme);
+@include mat.autocomplete-theme($frontend-theme);
+@include mat.chips-theme($frontend-theme);
+@include mat.form-field-theme($frontend-theme);
+@include mat.input-theme($frontend-theme);
+@include mat.menu-theme($frontend-theme);
+@include mat.paginator-theme($frontend-theme);
+@include mat.sidenav-theme($frontend-theme);
+@include mat.tabs-theme($frontend-theme);
+@include mat.select-theme($frontend-theme);
+@include mat.slider-theme($frontend-theme);
 
+html {
+  font-size: calc(16px + 0.1vw);
+}
 
 // Variable overrides
 
-$atelier-font-path: "/media/main/font/atelier" !default;
+$atelier-font-path: "/media/main/font/atelier-dev" !default;
 $atelier-background-color: #eee !default;
 $atelier-li-margin-right: 0.4em !default;
 
@@ -34,6 +39,22 @@ $primary: #20a8d8;
 $secondary: #5e4c3f;
 $success: #4dbd74;
 
+$breadcrumb-padding-x: 0;
+$breadcrumb-padding-y: 0;
+$breadcrumb-bg: transparent;
+
+$h1-font-size: 2.5rem;
+$h2-font-size: 1.75rem;
+$h3-font-size: 1.53125rem;
+$h4-font-size: 1.3125rem;
+$font-size-base: 1.1rem;
+$popover-font-size: 1.1rem;
+$tooltip-font-size: 1.1rem;
+
+$modal-content-bg: transparent;
+$modal-content-border-color: transparent;
+
+$btn-color: white;
 
 $font-family-sans-serif: Lato,
   -apple-system,
@@ -43,6 +64,7 @@ $font-family-sans-serif: Lato,
   "Helvetica Neue", Arial, sans-serif,
   "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
 
+$headings-font-family: Merriweather, serif;
 
 // How to minimize something you use everywhere lmao
 @import "bootstrap/scss/_functions.scss";
@@ -62,7 +84,6 @@ $font-family-sans-serif: Lato,
 @import "bootstrap/scss/_buttons.scss";
 @import "bootstrap/scss/_transitions.scss";
 @import "bootstrap/scss/_card.scss";
-@import "bootstrap/scss/_pagination.scss";
 @import "bootstrap/scss/_badge.scss";
 @import "bootstrap/scss/_close.scss";
 @import "bootstrap/scss/_modal.scss";

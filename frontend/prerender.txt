@@ -179,9 +179,12 @@
 /firis/recipe-ideas/ja
 /firis/recipe-ideas/sc
 /firis/recipe-ideas/tc
+/resleri/items/materials
 /resleri/items/materials/en
 /resleri/items/materials/ja
+/resleri/items/synthesis
 /resleri/items/synthesis/en
 /resleri/items/synthesis/ja
+/resleri/traits
 /resleri/traits/en
 /resleri/traits/ja

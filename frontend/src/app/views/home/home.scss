@@ -1,0 +1,64 @@
+// Main page
+
+.main-thumb img {
+    width: 300px;
+}
+
+.main-thumb div.thumb {
+    background: white;
+    max-width: 300px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+}
+
+.main-thumb div.spacer {
+    margin-top: 2em;
+}
+
+.main-thumb p {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.main-thumb div.headline {
+    padding-right: 10px;
+    padding-left: 10px;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+ul.pagination {
+    margin-top: 2em;
+}
+
+.headline {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    padding-top: 0.5rem;
+}
+
+/* Position child elements relative to this element */
+.aspect-ratio-box {
+    position: relative;
+}
+
+/* Create a pseudo element that uses padding-bottom to take up space */
+.aspect-ratio-box::after {
+    display: block;
+    content: "";
+    /* 16:9 aspect ratio */
+    padding-bottom: 56.25%;
+}
+
+/* Image is positioned absolutely relative to the parent element */
+.aspect-ratio-box img {
+    /* Image should match parent box size */
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

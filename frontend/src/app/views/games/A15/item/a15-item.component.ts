@@ -10,6 +10,7 @@ import { takeUntil } from 'rxjs/operators';
 @Component({
   templateUrl: 'a15-item.component.html',
   selector: 'a15-item',
+  styleUrls: ['../../_scss/dusk.scss'],
   providers: [DestroyService]
 })
 export class A15ItemComponent extends SingleComponent {

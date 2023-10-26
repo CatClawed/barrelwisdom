@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { environment } from '@environments/environment';
+import { LanguageData } from '@environments/language-data';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -8,7 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 export class TranslationService implements OnDestroy {
   private langSubject: BehaviorSubject<any>;
   public langObserve: Observable<any>;
-  public langOptions = environment.languages['default'];
+  public langOptions = LanguageData.languages['default'];
   public currentLang = "en";
   private destroy$ = new Subject<void>();
   private currentLangSubject: BehaviorSubject<any>;
@@ -28,13 +28,13 @@ export class TranslationService implements OnDestroy {
             let sections = this.router.url.split('?')[0].split('#')[0].split('/')
             let section = sections[1];
             if (sections.length > 3) {
-                this.langOptions = environment.languages[section] === undefined ? environment.languages['default'] : environment.languages[section];
+                this.langOptions = LanguageData.languages[section] === undefined ? LanguageData.languages['default'] : LanguageData.languages[section];
                 this.langSubject.next(this.langOptions)
                 this.currentLang = sections[sections.length-1]
                 this.currentLangSubject.next(this.currentLang)
             }
             else {
-                this.langOptions = environment.languages['default'];
+                this.langOptions = LanguageData.languages['default'];
                 this.langSubject.next(this.langOptions)
                 this.currentLang = "en"
                 this.currentLangSubject.next(this.currentLang)

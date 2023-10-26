@@ -28,7 +28,6 @@
               "src/robots.txt"
             ],
             "styles": [
-              "node_modules/bootstrap/scss/bootstrap.scss",
               "src/scss/style-dev.scss"
             ],
             "stylePreprocessorOptions": {
@@ -53,7 +52,6 @@
                 }
               ],
               "styles": [
-                "node_modules/bootstrap/scss/bootstrap.scss",
                 "src/scss/style.scss"
               ],
               "optimization": {
@@ -114,7 +112,6 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/scss/bootstrap.scss",
               "src/scss/styles.scss"
             ],
             "scripts": []

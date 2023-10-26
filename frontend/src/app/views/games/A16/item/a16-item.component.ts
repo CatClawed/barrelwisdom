@@ -9,6 +9,7 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
 @Component({
   templateUrl: 'a16-item.component.html',
   selector: 'a16-item',
+  styleUrls: ['../../_scss/dusk.scss'],
   providers: [DestroyService]
 })
 export class A16ItemComponent extends SingleComponent {

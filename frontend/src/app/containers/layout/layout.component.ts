@@ -7,7 +7,7 @@ import { DestroyService } from '@app/services/destroy.service';
 import { LanguageService } from '@app/services/language.service';
 import { NavItems, NavigationService } from '@app/services/navigation.service';
 import { TranslationService } from '@app/services/translation.service';
-import { environment } from '@environments/environment';
+import { LanguageData } from '@environments/language-data';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -16,7 +16,7 @@ import { takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 export class LayoutComponent implements OnInit {
-  public sidebarMinimized = false;
+  public sidebarMinimized = false; 
   public navItems: NavItems[];
   user: User;
   mobileView = true;
@@ -32,7 +32,7 @@ export class LayoutComponent implements OnInit {
     public navService: NavigationService,
     public breakpointObserver: BreakpointObserver,
     public router: Router) {
-    this.codes = environment.language_codes
+    this.codes = LanguageData.language_codes
   }
 
   ngOnInit(): void {
@@ -64,10 +64,6 @@ export class LayoutComponent implements OnInit {
 
   logout() {
     this.authenticationService.logout();
-  }
-
-  toggleMinimize(e) {
-    this.sidebarMinimized = e;
   }
 
   changeLanguage(lang) {

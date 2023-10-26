@@ -4,46 +4,31 @@
 <div *ngIf="!tagName" style="padding-top: 0.5em;"></div>
 
 <ng-container *ngIf="blog">
-    <div *ngFor="let blg of blog.results | pair" class="row flex">
-        <div *ngFor="let b of blg" class="col-md-6 mx-auto spacer">
-            <div *ngIf="b" class="card" style="height:100%;">
-                <div class="aspect-ratio-box">
-                    <a routerLink="/blog/{{b.slugtitle}}">
-                        <img loading="lazy" src="{{b.image}}" alt="" role="presentation">
-                    </a>
-                </div>
-                <div class="headline">
-                    <a routerLink="/blog/{{b.slugtitle}}">
-                        <h3>{{b.title}}</h3>
-                    </a>
-                    <span class="text-muted" style="font-size: calc(0.8rem + 0.1vw);">
-                        <i style="margin-right:0.2rem;" class="far fa-calendar-alt"></i>
-                        <time class="updated" dateTime="{{b.created}}">{{b.created | date:'longDate' }} </time>
-                    </span>
-                    <p style="margin-top: 0.8em;">{{b.description}}</p>
-                </div>
+    <div class="item-grid">
+        <div *ngFor="let b of blog.results" class="card" style="height:100%">
+            <div class="aspect-ratio-box">
+                <a routerLink="/blog/{{b.slugtitle}}">
+                    <img loading="lazy" src="{{b.image}}" alt="" role="presentation">
+                </a>
+            </div>
+            <div class="headline">
+                <a routerLink="/blog/{{b.slugtitle}}">
+                    <h3>{{b.title}}</h3>
+                </a>
+                <span class="text-muted" style="font-size: calc(0.8rem + 0.1vw);">
+                    <i style="margin-right:0.2rem;" class="far fa-calendar-alt"></i>
+                    <time class="updated" dateTime="{{b.created}}">{{b.created | date:'longDate' }} </time>
+                </span>
+                <p style="margin-top: 0.8em;">{{b.description}}</p>
             </div>
         </div>
     </div>
-    <ul class="pagination">
-        <li *ngIf="path >= 2" class="page-item"><a class="page-link" routerLink="/{{tagUrl}}{{path-1}}">Prevous</a></li>
-        <li *ngIf="path >  3" class="page-item"><a class="page-link" routerLink="/">1</a></li>
-        <li *ngIf="path >  4" class="page-item"><span class="page-link">...</span></li>
-
-        <li *ngIf="path-2 > 0" class="page-item"><a class="page-link" routerLink="/{{tagUrl}}{{path-2}}">{{path-2}}</a></li>
-        <li *ngIf="path-1 > 0" class="page-item"><a class="page-link" routerLink="/{{tagUrl}}{{path-1}}">{{path-1}}</a></li>
-        <li *ngIf="path > 0" class="page-item active"><span class="page-link">{{path}} <span
-                    class="sr-only">(current)</span></span></li>
-        <li *ngIf="path == 0" class="page-item active"><span class="page-link">1<span class="sr-only">(current)</span></span></li>
-
-        <li *ngIf="path+1 <= (blog.count / limit | getCeil)" class="page-item"><a class="page-link"
-                routerLink="/{{tagUrl}}{{path+1}}">{{path+1}}</a></li>
-        <li *ngIf="path+2 <= (blog.count / limit | getCeil)" class="page-item"><a class="page-link"
-                routerLink="/{{tagUrl}}{{path+2}}">{{path+2}}</a></li>
-
-        <li *ngIf="path+4 <= (blog.count / limit | getCeil)" class="page-item disabled"><span class="page-link">...</span></li>
-        <li *ngIf="path+3 <= (blog.count / limit | getCeil)" class="page-item"><a class="page-link"
-                routerLink="/{{ blog.count / limit | getCeil }}">{{ blog.count / limit | getCeil }}</a></li>
-        <li *ngIf="path < blog.count / limit" class="page-item"><a class="page-link" routerLink="/{{tagUrl}}{{path+1}}">Next</a></li>
-    </ul>
+    <mat-paginator
+        style="background-color:transparent;"
+        [length]="blog.count"
+        [pageSize]="10"
+        [pageIndex]="path-1"
+        aria-label="Select page"
+        (page)="changePage($event)">
+    </mat-paginator>
 </ng-container>

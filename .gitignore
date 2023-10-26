@@ -18,4 +18,5 @@ Thumbs.db
 .env
 .dccache
 .sonar_lock
-.scannerwork/report-task.txt
+.scannerwork/*
+sonar-project.properties

@@ -22,8 +22,7 @@ export abstract class SingleComponent extends DataComponent implements OnInit {
     constructor(
         protected readonly destroy$: DestroyService,
         protected route: ActivatedRoute,
-        protected seoService: SeoService
-    ) {
+        protected seoService: SeoService) {
         super(destroy$, route, seoService)
         this.slug = this.inputSlug ? this.inputSlug : this.route.snapshot.params.subject;
         if (this.showNav) this.colset = "col-md-9 mx-auto ";

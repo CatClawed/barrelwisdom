@@ -1,0 +1,45 @@
+a.badge:hover {
+    color: white !important;
+    filter: brightness(85%);
+    text-decoration: none;
+}
+
+.blog-head-img {
+    max-height: 500px;
+    max-width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.author {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 0.5em;
+}
+
+.blog-tags {
+    padding-bottom: 1em;
+    border-bottom: 1px dotted black;
+}
+
+// comment related, not an actual tab
+.tab {
+    margin-left: 40px;
+}
+
+.comment-button {
+    border: none;
+    background-color: transparent !important;
+    font-weight: bold;
+    font-size: medium;
+    color: black !important;
+}
+
+.comment-button:hover {
+    background-color: lightgray !important;
+}
+
+.comment-card {
+    margin-bottom: 0.35rem !important;
+}

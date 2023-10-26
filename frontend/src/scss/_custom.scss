@@ -13,6 +13,79 @@ a:focus {
   outline-style: none;
 }
 
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.main {
+  padding-left: 1em;
+  padding-right: 1em;
+  font-size: calc(1rem + 0.1vw);
+  margin: 55px auto 1rem auto;
+  width: 60%;
+}
+
+@media screen and (max-width: 1280px) {
+  .main {
+    margin: 55px 1rem 0 200px;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .main {
+    margin: 55px 0 0 0;
+    width: 100%;
+  }
+}
+
+/* Background pattern from Toptal Subtle Patterns */
+body {
+  background: url("/media/main/images/ricepaper2.webp");
+  background-color: #faf6f5;
+}
+
+h1 {
+  padding-top: 0;
+  border-bottom: 1px dotted black;
+}
+
+h2 {
+  padding-top: 0.5em;
+  border-bottom: 1px dotted black;
+}
+
+h3 {
+  padding-top: 0.5em;
+}
+
+img {
+  max-width: 100%;
+}
+
+// For lists of things
+.item-grid {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 800px) {
+  .item-grid {
+    grid-template-columns: 50% 50%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .item-grid {
+    grid-template-columns: auto;
+  }
+}
+
 .spacer {
   margin-bottom: 1em;
 }
@@ -26,26 +99,6 @@ a:focus {
   flex-wrap: wrap;
   justify-content: space-between;
 }
-
-.badge-list {
-  margin-right: 0.4em;
-  margin-top: 0.3em;
-  font-size: calc(0.9rem + 0.1vw) !important;
-}
-
-@media screen and (max-width: 576px) {
-  .badge-list {
-    font-size: 2.5vw !important;
-  }
-}
-
-a.badge:hover {
-  color: white !important;
-  filter: brightness(85%);
-  text-decoration: none;
-}
-
-
 
 /* Background pattern from Toptal Subtle Patterns */
 .card {
@@ -142,208 +195,6 @@ th {
   }
 }
 
-.hide-bullets {
-  list-style-type: none;
-  padding: 0;
-  margin-bottom: 0;
-}
-
-.main {
-  padding-left: 1em;
-  padding-right: 1em;
-  font-size: calc(1rem + 0.1vw);
-  margin: 55px auto 1rem auto;
-  width: 60%;
-}
-
-@media screen and (max-width: 1280px) {
-  .main {
-    margin: 55px 0 0 200px;
-    width: 100%;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .main {
-    margin: 55px 0 0 0;
-    width: 100%;
-  }
-}
-
-h1 {
-  font-family: Merriweather;
-  font-size: calc(2.5rem + 0.1vw) !important;
-  padding-top: 0;
-  border-bottom: 1px dotted black;
-}
-
-h2 {
-  font-family: Merriweather;
-  font-size: calc(1.75rem + 0.1vw) !important;
-  padding-top: 0.5em;
-  border-bottom: 1px dotted black;
-}
-
-h3 {
-  font-family: Merriweather;
-  font-size: calc(1.53125rem + 0.1vw) !important;
-  padding-top: 0.5em;
-}
-
-h4 {
-  font-family: Merriweather;
-  font-size: calc(1.3125rem + 0.1vw) !important;
-}
-
-.breadcrumb {
-  padding: 0 !important;
-  background-color: transparent !important;
-  border-bottom: transparent !important;
-}
-
-.table-of-contents {
-  border: 2px solid lightgray;
-  background-color: white;
-  background-image: url("/media/main/images/clean_textile.webp");
-  padding: 0.8em;
-  border-radius: 10px;
-  width: max-content;
-  max-width: 100%;
-  margin: 0 0.5em 0.5em 0.5em;
-
-  ol {
-    margin-bottom: 0;
-  }
-}
-
-
-// buttons
-
-.btn {
-  color: white !important;
-}
-
-a {
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* Background pattern from Toptal Subtle Patterns */
-body {
-  background: url("/media/main/images/ricepaper2.webp");
-  background-color: #faf6f5;
-}
-
-// Main page
-
-.main-thumb img {
-  width: 300px;
-}
-
-.main-thumb div.thumb {
-  background: white;
-  max-width: 300px;
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
-  height: 100%;
-}
-
-.main-thumb div.spacer {
-  margin-top: 2em;
-}
-
-.main-thumb p {
-  padding-right: 10px;
-  padding-left: 10px;
-}
-
-.main-thumb div.headline {
-  padding-right: 10px;
-  padding-left: 10px;
-  font-size: 1.5rem;
-  font-weight: 500;
-}
-
-ul.pagination {
-  margin-top: 2em;
-}
-
-.headline {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  padding-top: 0.5rem;
-}
-
-/* Position child elements relative to this element */
-.aspect-ratio-box {
-  position: relative;
-}
-
-/* Create a pseudo element that uses padding-bottom to take up space */
-.aspect-ratio-box::after {
-  display: block;
-  content: "";
-  /* 16:9 aspect ratio */
-  padding-bottom: 56.25%;
-}
-
-/* Image is positioned absolutely relative to the parent element */
-.aspect-ratio-box img {
-  /* Image should match parent box size */
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-// Blog Pages
-
-.blog-head-img {
-  max-height: 500px;
-  max-width: 100%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.center {
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}
-
-.right {
-  float: right;
-  margin-left: 1em;
-  text-align: left;
-}
-
-.left {
-  float: left;
-  margin-right: 1em;
-}
-
-.author {
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 0.5em;
-}
-
-.blog-tags {
-  padding-bottom: 1em;
-  border-bottom: 1px dotted black;
-}
-
-.spread-apart {
-  justify-content: space-around;
-}
-
 .table-compress {
   background-color: white;
   background-image: url("/media/main/images/clean_textile.webp");
@@ -364,34 +215,32 @@ ul.pagination {
   padding: 0.3rem;
 }
 
-.table-border th,
-.table-border td {
-  border: 1px solid #c8ced3;
+.hide-bullets {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 0;
 }
 
-img {
+.table-of-contents {
+  border: 2px solid lightgray;
+  background-color: white;
+  background-image: url("/media/main/images/clean_textile.webp");
+  padding: 0.8em;
+  border-radius: 10px;
+  width: max-content;
   max-width: 100%;
+  margin: 0 0.5em 0.5em 0.5em;
+
+  ol {
+    margin-bottom: 0;
+  }
 }
 
-// comment related, not an actual tab
-.tab {
-  margin-left: 40px;
-}
-
-.comment-button {
-  border: none;
-  background-color: transparent !important;
-  font-weight: bold;
-  font-size: medium;
-  color: black !important;
-}
-
-.comment-button:hover {
-  background-color: lightgray !important;
-}
-
-.comment-card {
-  margin-bottom: 0.35rem !important;
+// as in opens a new tab
+.new-tab {
+  font-size: calc(0.6rem + 0.1vw);
+  text-decoration: none;
+  padding-left: 0.2rem;
 }
 
 // Game Data Pages
@@ -403,6 +252,7 @@ img {
   margin: auto;
 }
 
+// Not used by everything, wtf is this for
 .image-display {
   margin-left: auto;
   margin-right: auto;
@@ -414,6 +264,7 @@ img {
   max-width: 100%;
 }
 
+// Trait specific
 .trait-color {
   color: lightgray;
 }
@@ -426,42 +277,31 @@ img {
   opacity: 35%;
 }
 
-// Settings page
+// universal styles for blog pages
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.right {
+  float: right;
+  margin-left: 1em;
+  text-align: left;
+}
+
+.left {
+  float: left;
+  margin-right: 1em;
+}
+
+.spread-apart {
+  justify-content: space-around;
+}
+
+// Settings, Create, Login, Register pages
+// Tempting to throw this out.
 
 .form-group {
   margin: 1rem;
-}
-
-// User Pages
-
-// Game stuff
-
-.effect-bar {
-  background-color: lightgray;
-  border-radius: 5px;
-  height: 100%;
-}
-
-.elemental-bar {
-  border-radius: 5px;
-  height: 1rem;
-  position: relative;
-}
-
-.item-grid {
-  display: grid;
-  grid-gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-@media screen and (min-width: 800px) {
-  .item-grid {
-    grid-template-columns: 50% 50%;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .item-grid {
-    grid-template-columns: auto;
-  }
 }

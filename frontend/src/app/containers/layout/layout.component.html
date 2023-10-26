@@ -52,7 +52,7 @@
 </div>
 
 <mat-sidenav-container [hasBackdrop]="mobileView">
-    <mat-sidenav #snav [mode]="mobileView ? 'over' : 'side'" [opened]="mobileView ? false : true"
+    <mat-sidenav #snav [mode]="mobileView ? 'over' : 'side'" [opened]="!mobileView"
         [fixedInViewport]="true" fixedTopGap="55" class="sidenav">
         <div class="sidenav-items">
             <a class="navigation-hide-large sidenav-item" routerLink="/blog/donate">
