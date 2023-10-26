@@ -16,7 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class BR1ItemlistComponent extends  ModalUseComponent {
+export class BR1ItemlistComponent extends ModalUseComponent {
   items: Item[];
   filteredItems: Observable<Item[]>;
 
@@ -37,6 +37,7 @@ export class BR1ItemlistComponent extends  ModalUseComponent {
   }
 
   changeData() {
+    this.modalEvent();
     this.br1service.getItemList(this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({

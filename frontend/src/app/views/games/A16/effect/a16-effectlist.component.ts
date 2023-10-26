@@ -16,7 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A16EffectlistComponent extends  ModalUseComponent {
+export class A16EffectlistComponent extends ModalUseComponent {
   effects: Effect[];
   filteredEffects: Observable<Effect[]>;
 
@@ -37,6 +37,7 @@ export class A16EffectlistComponent extends  ModalUseComponent {
   }
 
   changeData() {
+    this.modalEvent();
     this.pageForm.reset();
     this.a16service.getEffectList(this.language)
       .pipe(takeUntil(this.destroy$))

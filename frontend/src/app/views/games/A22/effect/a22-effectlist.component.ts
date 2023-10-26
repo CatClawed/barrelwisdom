@@ -16,7 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A22EffectlistComponent extends  ModalUseComponent {
+export class A22EffectlistComponent extends ModalUseComponent {
   effects: Effect[];
   filteredEffects: Observable<Effect[]>;
   normal = false;
@@ -41,6 +41,7 @@ export class A22EffectlistComponent extends  ModalUseComponent {
   }
 
   changeData(): void {
+    this.modalEvent();
     this.route.data
       .pipe(takeUntil(this.destroy$))
       .subscribe(data => {

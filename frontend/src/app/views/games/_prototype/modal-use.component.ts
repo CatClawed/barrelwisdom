@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
-import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
+import { Component, TemplateRef } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
@@ -13,7 +13,7 @@ import { FilterableComponent } from './filterable.component';
     providers: [DestroyService]
 })
 
-export abstract class ModalUseComponent extends FilterableComponent implements OnInit, OnDestroy {
+export abstract class ModalUseComponent extends FilterableComponent {
     modalRef: BsModalRef;
     pageForm: UntypedFormGroup;
     selected: string = "thing";
@@ -31,16 +31,11 @@ export abstract class ModalUseComponent extends FilterableComponent implements O
         super(destroy$, route, seoService);
     }
 
-    ngOnInit(): void {
-        this.paramWatch();
-        this.modalEvent();
-    }
-
     modalEvent() {
         this.modalLink = this.router.events
             .pipe(takeUntil(this.destroy$))
             .subscribe(event => {
-                if (event instanceof NavigationEnd) {
+                if (event instanceof NavigationStart) {
                     this.modalService.setDismissReason('link');
                     this.modalService.hide();
                     this.modalLink.unsubscribe();
@@ -59,7 +54,7 @@ export abstract class ModalUseComponent extends FilterableComponent implements O
         }
         this.selected = slug;
         this.location.go(`${this.gameURL}/${this.section}/${slug}/${this.language}`);
-        this.modalRef = this.modalService.show(template, this.config);
+        this.modalRef = this.modalService.show(template);
         this.modalRef.onHide
             .pipe(takeUntil(this.destroy$))
             .subscribe((reason: string | any) => {
@@ -81,7 +76,7 @@ export abstract class ModalUseComponent extends FilterableComponent implements O
         }
         this.selected = slug;
         this.location.go(`${this.gameURL}/${destination}/${slug}/${this.language}`);
-        this.modalRef = this.modalService.show(template, this.config);
+        this.modalRef = this.modalService.show(template);
         this.modalRef.onHide
             .pipe(takeUntil(this.destroy$))
             .subscribe((reason: string | any) => {
@@ -90,10 +85,5 @@ export abstract class ModalUseComponent extends FilterableComponent implements O
                     this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
                 }
             })
-    }
-
-    ngOnDestroy() {
-        this.modalService.hide();
-        this.modalLink.unsubscribe();
     }
 }

@@ -16,7 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A22ItemlistComponent extends  ModalUseComponent {
+export class A22ItemlistComponent extends ModalUseComponent {
   items: Item[];
   filteredItems: Observable<Item[]>;
   categories: NameLink[];
@@ -42,6 +42,7 @@ export class A22ItemlistComponent extends  ModalUseComponent {
   }
 
   changeData(): void {
+    this.modalEvent();
     this.pageForm.reset();
     this.getItems();
     this.getCategories();

@@ -16,7 +16,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 
-export class A25MemorialistComponent extends  ModalUseComponent {
+export class A25MemorialistComponent extends ModalUseComponent {
   memoria: Memoria[];
   filteredMemoria: Observable<Memoria[]>;
 
@@ -42,6 +42,7 @@ export class A25MemorialistComponent extends  ModalUseComponent {
   }
 
   changeData() {
+    this.modalEvent();
     this.pageForm.reset()
     this.a25service.getMemoriaList(this.language)
       .pipe(takeUntil(this.destroy$))
