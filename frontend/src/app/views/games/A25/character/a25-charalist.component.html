@@ -28,14 +28,17 @@
   <div *ngIf="filteredCharas" style="display:grid;grid-template-columns:repeat(4,23%);grid-row-gap:1rem;grid-column-gap:2%;" class="spacer">
     <div *ngFor="let chara of filteredCharas | async;  trackBy:identify" style="aspect-ratio:256/736;position:relative;">
       <a  (click)="openModal(charaModal, chara.slug, $event);"
-      href="/{{gameURL}}/characters/{{chara.slug}}/{{language}}">
-      <img loading="lazy"
-      src="{{imgURL}}characters/long/{{chara.slug}}.webp"
-      alt="{{chara.name + ' ' + chara.title}}"
-      style="max-height:100%;width:256px;border-radius:1000px;{{gradients[chara.rarity]}}">
-      <div style="outline-offset:-5px;outline:solid 7px lightgray;width:100%;height:100%;border-radius:1000px;position:absolute;top:0;left:0;"></div>
-      <div style="position:absolute;bottom:10%;left:50%;transform:translate(-50%,0);color:yellow;font-size:3.3vw;text-align:center;width:100%;-webkit-text-stroke-width:.2vw;-webkit-text-stroke-color:black;"><i *ngFor="let i of [].constructor(chara.rarity)" class="fa-solid fa-star"></i></div>
-      <img style="max-width:60%;position:absolute;bottom:25%;left:50%;transform:translate(-50%,0);filter:drop-shadow(5px 5px 5px black);" src="{{imgURL}}characters/{{chara.role}}.webp" alt="{{chara.role}}"/>
+        href="/{{gameURL}}/characters/{{chara.slug}}/{{language}}">
+        <img loading="lazy" width="256" height="736"
+          src="{{imgURL}}characters/long/{{chara.slug}}.webp"
+          alt="{{chara.name + ' ' + chara.title}}"
+          style="max-height:100%;border-radius:1000px;{{gradients[chara.rarity]}}">
+        <div style="outline-offset:-5px;outline:solid 7px lightgray;width:100%;height:100%;border-radius:1000px;position:absolute;top:0;left:0;"></div>
+        <div style="position:absolute;bottom:10%;left:50%;transform:translate(-50%,0);color:yellow;font-size:3.3vw;text-align:center;width:100%;-webkit-text-stroke-width:.2vw;-webkit-text-stroke-color:black;"><i *ngFor="let i of [].constructor(chara.rarity)" class="fa-solid fa-star"></i></div>
+        <img
+          style="aspect-ratio:48/45;max-width:60%;position:absolute;bottom:25%;left:50%;transform:translate(-50%,0);filter:drop-shadow(5px 5px 5px black);"
+          src="{{imgURL}}characters/{{chara.role}}.webp"
+          alt="{{chara.role}}"/>
       </a>
     </div>
     <ng-template #charaModal>

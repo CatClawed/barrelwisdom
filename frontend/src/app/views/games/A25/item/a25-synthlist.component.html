@@ -46,12 +46,12 @@
     <a (click)="openModal(itemModal, it.slug, $event);" href="/{{gameURL}}/items/synthesis/{{it.slug}}/{{language}}">{{it.name}}</a>    
   </h4>
   <div class="card-icon-position">
-    <img *ngIf="it.combat" style="height:3rem;" src="{{imgURL}}svg/{{it.combat[0].kind}}.svg" alt="{{it.combat[0].kind}}">
-    <img *ngIf="it.equip"  style="height:3rem;" src="{{imgURL}}svg/{{it.equip[0].kind}}.svg"  alt="{{it.equip[0].kind}}">
+    <img *ngIf="it.combat" style="height:3rem;width:3rem;" src="{{imgURL}}svg/{{it.combat[0].kind}}.svg" alt="{{it.combat[0].kind}}">
+    <img *ngIf="it.equip"  style="height:3rem;width:3rem;" src="{{imgURL}}svg/{{it.equip[0].kind}}.svg"  alt="{{it.equip[0].kind}}">
   </div>
   <a class="card-item-display" (click)="openModal(itemModal, it.slug, $event);" href="/{{gameURL}}/items/synthesis/{{it.slug}}/{{language}}">
-    <img loading="lazy" class="resleri-item-frame"
-      style="height:256px;background-image:url({{imgURL}}svg/item-frame-{{it.rarity}}.svg)"
+    <img loading="lazy" class="resleri-item-frame"  height="256" width="256"
+      style="background-image:url({{imgURL}}svg/item-frame-{{it.rarity}}.svg)"
       src="{{imgURL}}items/{{it.slug}}.webp" alt="{{it.name}}">
   </a>
   <p style="padding-right:1.5rem;" [innerHTML]="replaceVal(it)"></p>

@@ -34,10 +34,11 @@ export class A25MemorialistComponent extends ModalUseComponent {
     protected location: Location,
     protected seoService: SeoService,
     private formBuilder: UntypedFormBuilder,
-    private a25service: A25Service,) {
+    protected a25service: A25Service,) {
     super(modalService, destroy$, router, route, location, seoService);
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
+      stats: 'hp',
     })
   }
 
@@ -53,7 +54,7 @@ export class A25MemorialistComponent extends ModalUseComponent {
           this.genericSEO(`Memoria`, `The list of memoria in ${this.gameTitle}.`);
           this.filteredMemoria = this.pageForm.valueChanges.pipe(
             startWith(null as Observable<Memoria[]>),
-            map((search: any) => search ? this.filterT(search.filtertext) : this.memoria.slice())
+            map((search: any) => search ? this.filterT(search.filtertext, search.stats) : this.memoria.slice())
           );
         },
         error: error => {
@@ -62,8 +63,37 @@ export class A25MemorialistComponent extends ModalUseComponent {
       });
   }
 
-  private filterT(value: string): Memoria[] {
+  private filterT(value: string, stat: string): Memoria[] {
     let memorialist: Memoria[] = this.memoria;
+
+    if (stat !== 'any') {
+      switch (stat) {
+        case "hp": {
+          memorialist = memorialist.sort((a,b) => (a.hp30 > b.hp30 ? -1 : 1));
+          break;
+        }
+        case "agi": {
+          memorialist = memorialist.sort((a,b) => (a.spd30 > b.spd30 ? -1 : 1));
+          break;
+        }
+        case "patk": {
+          memorialist = memorialist.sort((a,b) => (a.patk30 > b.patk30 ? -1 : 1));
+          break;
+        }
+        case "pdef": {
+          memorialist = memorialist.sort((a,b) => (a.pdef30 > b.pdef30 ? -1 : 1));
+          break;
+        }
+        case "matk": {
+          memorialist = memorialist.sort((a,b) => (a.matk30 > b.matk30 ? -1 : 1));
+          break;
+        }
+        case "mdef": {
+          memorialist = memorialist.sort((a,b) => (a.mdef30 > b.mdef30 ? -1 : 1));
+          break;
+        }
+      }
+    }
 
     const filterValue = value.toLowerCase();
     return memorialist.filter(memoria => {

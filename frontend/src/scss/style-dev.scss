@@ -32,10 +32,6 @@ $frontend-theme: mat.define-light-theme((color: (primary: mat.define-palette(mat
 @include mat.select-theme($frontend-theme);
 @include mat.slider-theme($frontend-theme);
 
-html {
-  font-size: calc(16px + 0.1vw);
-}
-
 // Variable overrides
 
 $atelier-font-path: "/media/main/font/atelier-dev" !default;

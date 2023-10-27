@@ -79,16 +79,19 @@ class A25MemoriaViewSet(viewsets.ModelViewSet):
         Memoria.objects
         .select_related(
             'name',
+            'limit',
+            'skill_name',
+            'skill_desc',
         )
     )
-    serializer_class = A25MemoriaListSerializer
+    serializer_class = A25MemoriaSerializer
     filter_backends = [filters.SearchFilter,
                        DjangoFilterBackend, filters.OrderingFilter]
     lookup_field = 'slug'
 
     def get_query(slug=None, lang="en"):
         if not slug:
-            return Response(A25MemoriaListSerializer(
+            return Response(A25MemoriaSerializer(
                 A25MemoriaViewSet.queryset, many=True, context={'language': lang}).data)
         try:
             queryset = (

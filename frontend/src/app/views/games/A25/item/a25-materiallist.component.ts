@@ -38,7 +38,8 @@ export class A25MaterialListComponent extends ModalUseComponent {
       filtertext: '',
       filtertrait: '',
       color: 'Any',
-      rarity: '0'
+      rarity: '0',
+      traittype: 'Any'
     })
   }
 
@@ -59,7 +60,7 @@ export class A25MaterialListComponent extends ModalUseComponent {
           this.genericSEO(`Materials`, `The list of materials in ${this.gameTitle}.`);
           this.filteredItems = this.pageForm.valueChanges.pipe(
             startWith(null as Observable<Item[]>),
-            map((search: any) => search ? this.filterT(search.filtertext, search.color, search.rarity, search.filtertrait) : this.items.slice())
+            map((search: any) => search ? this.filterT(search.filtertext, search.color, search.rarity, search.filtertrait, search.traittype) : this.items.slice())
           );
         },
         error: error => {
@@ -81,7 +82,7 @@ export class A25MaterialListComponent extends ModalUseComponent {
       });
   }
 
-  private filterT(value: string, color: string, rarity: number, filter: string): Item[] {
+  private filterT(value: string, color: string, rarity: number, filter: string, traittype: string): Item[] {
     let list: Item[] = this.items;
 
     if (color != 'Any') {
@@ -89,6 +90,9 @@ export class A25MaterialListComponent extends ModalUseComponent {
     }
     if (rarity > 0) {
       list = list.filter(item => item.rarity == rarity)
+    }
+    if (traittype !== 'Any') {
+      list = list.filter(item => item.material[0].traits ? item.material[0].traits[0].kind === traittype : false)
     }
     if (filter) {
       filter = filter.toLocaleLowerCase()

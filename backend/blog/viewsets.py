@@ -6,7 +6,7 @@ from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
-from blog.serializers import BlogSerializer, TagSerializer, SectionSerializer, MainBlogSerializer, NewCommentSerializer, ModerateCommentSerializer
+from blog.serializers import BlogSerializer, TagSerializer, SectionSerializer, MainBlogSerializer, NewCommentSerializer, ModerateCommentSerializer, MainBlogListSerializer
 from blog.models import Blog, Tags, Section, Comment
 
 class BlogViewSet(viewsets.ModelViewSet):
@@ -31,16 +31,9 @@ class SectionViewSet(viewsets.ModelViewSet):
 class MainBlogViewSet(viewsets.ModelViewSet):
     queryset = (
             Blog.objects
-            .select_related(
-                'section'
-            )
-            .prefetch_related(
-                'author',
-                'tags'
-            )
             .filter(section__name="blog")
         )
-    serializer_class = MainBlogSerializer
+    serializer_class = MainBlogListSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
     search_fields = ['title','body']
     ordering_fields = ['created']

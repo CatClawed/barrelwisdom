@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { MatSelectModule } from '@angular/material/select';
 import { ErrorModule } from '@app/views/error/error.module';
 import { SharedModule } from '@app/views/games/_prototype/SharedModules/shared.module';
 import { PopoverModule } from 'ngx-bootstrap/popover';
@@ -10,6 +11,7 @@ import { A25MemorialistComponent } from './a25-memorialist.component';
     imports: [
       SharedModule,
       A25MemoriaRoutingModule,
+      MatSelectModule,
       ErrorModule,
       PopoverModule.forRoot(),
     ],

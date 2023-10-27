@@ -6,26 +6,62 @@
 <div class="col-md-10 mx-auto">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
-        <mat-form-field class="col-md-12" appearance="outline">
+        <mat-form-field class="col-md-8" appearance="outline">
           <mat-label>Filter...</mat-label>
           <input style="height: 100%;" matInput formControlName="filtertext">
           <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
         </mat-form-field>
+        <mat-form-field class="col-md-4" appearance="outline">
+          <mat-label>Sort by...</mat-label>
+          <mat-select matNativeControl formControlName="stats">
+            <mat-option *ngFor="let stat of a25service.stats | keyvalue" [value]="stat.key">
+              {{stat.value[language]}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
     </form>
   </div>
-  <div *ngIf="filteredMemoria" style="display:grid;grid-template-columns:repeat(4,23%);grid-row-gap:1rem;grid-column-gap:2%;" class="spacer">
-    <a *ngFor="let memoria of filteredMemoria | async;  trackBy:identify"
+  <div *ngIf="filteredMemoria" class="item-grid spacer">
+    <div *ngFor="let memoria of filteredMemoria | async;  trackBy:identify" style="aspect-ratio:512/410;display:flex;max-height:410px;margin:auto;">
+      <a style="height:100%;aspect-ratio:256/410;"
       (click)="openModal(memoriaModal, memoria.slug, $event);"
       href="/{{gameURL}}/memoria/{{memoria.slug}}/{{language}}">
-      <div style="aspect-ratio:256/410;position:relative;">      
+      <div style="position:relative;">      
           <img loading="lazy"
             src="{{imgURL}}memoria/{{memoria.slug}}.webp"
             alt="{{memoria.name}}"
-            style="max-height:100%;width:256px;">
-            <div style="position:absolute;bottom:10%;left:50%;transform:translate(-50%,0);font-size:2vw;text-align:center;width:100%;color:white;background:linear-gradient(270deg, rgba(0,0,0,0.5) 0%, rgb(0, 0, 0) 50%, rgba(0,0,0,0.5) 100%);">{{rarity[memoria.rarity]}}</div>
+            style="height:100%;width:256px;aspect-ratio:256/410;">
+            <div style="position:absolute;bottom:10%;left:50%;transform:translate(-50%,0);font-size:2rem;text-align:center;width:100%;color:white;background:linear-gradient(270deg, rgba(0,0,0,0.5) 0%, rgb(0, 0, 0) 50%, rgba(0,0,0,0.5) 100%);">{{rarity[memoria.rarity]}}</div>
       </div>
-  </a>
+    </a>
+    <table class="tbl table-compress" style="aspect-ratio:256/410;width:256px;height:100%;text-align:center;">
+      <tr>
+        <th>{{a25service.stats['hp'][language]}}</th>
+        <td>{{memoria.hp30/100}}%</td>
+      </tr>
+      <tr>
+        <th>{{a25service.stats['agi'][language]}}</th>
+        <td>{{memoria.spd30/100}}%</td>
+      </tr>
+      <tr>
+        <th>{{a25service.stats['patk'][language]}}</th>
+        <td>{{memoria.patk30/100}}%</td>
+      </tr>
+      <tr>
+        <th>{{a25service.stats['pdef'][language]}}</th>
+        <td>{{memoria.pdef30/100}}%</td>
+      </tr>
+      <tr>
+        <th>{{a25service.stats['matk'][language]}}</th>
+        <td>{{memoria.matk30/100}}%</td>
+      </tr>
+      <tr>
+        <th>{{a25service.stats['mdef'][language]}}</th>
+        <td>{{memoria.mdef30/100}}%</td>
+      </tr>
+    </table>
+    </div>
     <ng-template #memoriaModal>
       <div class="modal-body">
         <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">

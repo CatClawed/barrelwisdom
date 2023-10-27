@@ -94,7 +94,6 @@ class A25MemoriaSerializer(A25DefaultSerializer):
         fields = [
             'slug', 'name', 'skill_name', 'skill_desc', 'rarity', 'limit',
             'lv1', 'lv2', 'lv3', 'lv4', 'lv5',
-            "hp1", "spd1", "patk1", "pdef1", "matk1", "mdef1",
             "hp30", "spd30", "patk30", "pdef30", "matk30", "mdef30",
         ]
     def get_skill_name(self, obj):

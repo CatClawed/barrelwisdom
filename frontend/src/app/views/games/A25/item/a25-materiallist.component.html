@@ -21,19 +21,27 @@
         </mat-form-field>
       </div>
       <div class="row">
-        <mat-form-field class="col-md-5" appearance="outline">
+        <mat-form-field class="col-md-6" appearance="outline">
             <mat-label>Has trait...</mat-label>
             <input style="height: 100%;" matInput formControlName="filtertrait">
-          </mat-form-field>
+        </mat-form-field>
         <mat-form-field class="col-md-3" appearance="outline">
-            <mat-label>Rarity</mat-label>
-            <mat-select matNativeControl formControlName="rarity">
-              <mat-option value="0">Any</mat-option>
-              <mat-option value="3">SSR</mat-option>
-              <mat-option value="2">SR</mat-option>
-              <mat-option value="1">R</mat-option>
-            </mat-select>
-          </mat-form-field>
+          <mat-label>Trait Type</mat-label>
+          <mat-select matNativeControl formControlName="traittype">
+            <mat-option value="Any">Any</mat-option>
+            <mat-option value="equipment">{{language == 'en' ? 'Equipment' : '装備'}}</mat-option>
+            <mat-option value="combat">{{language == 'en' ? 'Combat' : '戦闘'}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-md-3" appearance="outline">
+          <mat-label>Rarity</mat-label>
+          <mat-select matNativeControl formControlName="rarity">
+            <mat-option value="0">Any</mat-option>
+            <mat-option value="3">SSR</mat-option>
+            <mat-option value="2">SR</mat-option>
+            <mat-option value="1">R</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
     </form>
   </div>
@@ -43,11 +51,11 @@
     <a (click)="openModal(itemModal, it.slug, $event);" href="/{{gameURL}}/items/materials/{{it.slug}}/{{language}}">{{it.name}}</a>    
   </h4>
   <div class="card-icon-position">
-    <img loading="lazy" *ngIf="it.material[0].traits" style="height:3rem;" src="{{imgURL}}svg/{{it.material[0].traits[0].kind}}.svg" alt="{{it.material[0].traits[0].kind}}">
+    <img loading="lazy" *ngIf="it.material[0].traits" style="height:3rem;width:3rem;" src="{{imgURL}}svg/{{it.material[0].traits[0].kind}}.svg" alt="{{it.material[0].traits[0].kind}}">
   </div>
   <a class="card-item-display" (click)="openModal(itemModal, it.slug, $event);" href="/{{gameURL}}/items/materials/{{it.slug}}/{{language}}">
-    <img loading="lazy" class="resleri-item-frame"
-      style="height:256px;background-image:url({{imgURL}}svg/item-frame-{{it.rarity}}.svg)"
+    <img loading="lazy" class="resleri-item-frame" height="256" width="256"
+      style="background-image:url({{imgURL}}svg/item-frame-{{it.rarity}}.svg)"
       src="{{imgURL}}items/{{it.slug}}.webp" alt="{{it.name}}">
   </a>
   <p *ngIf="it.limit"><b>Event: </b>{{it.limit}}</p>

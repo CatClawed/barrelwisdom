@@ -53,7 +53,12 @@ class MainBlogSerializer(serializers.ModelSerializer):
         qs = instance.comment_set.filter(approved=True)
         serializer = CommentSerializer(instance=qs, many=True)
         return serializer.data
-    
+
+class MainBlogListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Blog
+        fields = ['id', 'created', 'title', 'slugtitle', 'image', 'description']
+
 class ModerateCommentBlogSerializer(serializers.ModelSerializer):
     sec = serializers.CharField(source='section.name')
     class Meta:
