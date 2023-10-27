@@ -42,6 +42,14 @@ services:
     extra_hosts:
       - "localhost:host-gateway"
 
+  frontend-prod:
+    container_name: frontend-prod
+    build: 
+      context: ../frontend
+      dockerfile: ./Dockerfile.prod
+    ports:
+      - 4000:4000
+
   memcached:
     container_name: memcached
     image: memcached:1.6.22-alpine3.18
