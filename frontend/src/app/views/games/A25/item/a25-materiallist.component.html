@@ -22,7 +22,7 @@
       </div>
       <div class="row">
         <mat-form-field class="col-md-6" appearance="outline">
-            <mat-label>Has trait...</mat-label>
+            <mat-label>Has trait...{{language == 'en' ? ' (JP OK)' : ''}}</mat-label>
             <input style="height: 100%;" matInput formControlName="filtertrait">
         </mat-form-field>
         <mat-form-field class="col-md-3" appearance="outline">

@@ -120,7 +120,7 @@ npm run prerender
 
 1. Install python and relevant tools
 
-You need [Python 3](https://www.python.org/downloads/) or [Miniconda with Python 3](https://docs.conda.io/en/latest/miniconda.html), your choice. Should be `3.9` and up.
+You need [Python 3](https://www.python.org/downloads/) or [Miniconda with Python 3](https://docs.conda.io/en/latest/miniconda.html), your choice. Should be `3.11` and up.
 
 ```bash
 # On Linux

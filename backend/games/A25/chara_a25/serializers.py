@@ -68,7 +68,7 @@ class A25CharaSerializer(A25DefaultSerializer):
             'slug', 'name', 'title', 'role', 'elem', 'rarity', 'color1', 'color2',
             'trait1', 'trait2', 'trait3',
             'hp', 'spd', 'patk', 'pdfn', 'matk', 'mdfn',
-            "passives", 'limit', 'skills'
+            "passives", 'limit', 'skills', 'note'
         ]
     def get_title(self, obj):
         return A25DefaultSerializer.get_text(self,obj.title)
@@ -93,7 +93,7 @@ class A25MemoriaSerializer(A25DefaultSerializer):
         model = Memoria
         fields = [
             'slug', 'name', 'skill_name', 'skill_desc', 'rarity', 'limit',
-            'lv1', 'lv2', 'lv3', 'lv4', 'lv5',
+            'note', 'lv1', 'lv2', 'lv3', 'lv4', 'lv5',
             "hp30", "spd30", "patk30", "pdef30", "matk30", "mdef30",
         ]
     def get_skill_name(self, obj):

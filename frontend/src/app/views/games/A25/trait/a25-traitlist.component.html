@@ -7,7 +7,7 @@
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
         <mat-form-field class="col-md-8" appearance="outline">
-          <mat-label>Filter...</mat-label>
+          <mat-label>Filter...{{language == 'en' ? ' (JP names OK)' : ''}}</mat-label>
           <input style="height: 100%;" matInput formControlName="filtertext">
           <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
         </mat-form-field>
@@ -39,7 +39,7 @@
             {{trt.name_en}}<br /><small>{{trt.name_ja}}</small>
           </ng-container>
           <ng-container *ngIf="language=='ja'">
-            {{trt.name_ja}}
+            {{trt.name_ja}}<br />
           </ng-container>
         </a>
       </h4>
@@ -48,10 +48,11 @@
         <img *ngIf="!trt.trans_wep" style="width:3rem;" src="{{imgURL}}svg/combat.svg"    alt="combat"/>
       </div>
     </div>
-    <p [innerHTML]="trt.desc.replace('{0}', trt.val[0] + ' ~ ' + trt.val[4]).replace('{1}', trt.val[0] + ' ~ ' + trt.val[4])"></p>
+    <p style="padding-top:1rem;" [innerHTML]="trt.desc.replace('{0}', trt.val[0] + ' ~ ' + trt.val[4]).replace('{1}', trt.val[0] + ' ~ ' + trt.val[4])"></p>
     <p>
       {{trt.val[0]}} > {{trt.val[1]}} > {{trt.val[2]}} > {{trt.val[3]}} > {{trt.val[4]}}
     </p>
+    <p *ngIf="trt.note" [innerHTML]="trt.note"></p>
     <b *ngIf=" trt.items">Item:</b>
     <ul *ngIf=" trt.items">
       <li *ngFor="let item of trt.items">

@@ -3,6 +3,10 @@
 @use '@angular/material' as mat;
 @include mat.core();
 
+html {
+  font-size: 16px;
+}
+
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 // Plus imports for other components in your app.
@@ -31,6 +35,7 @@ $frontend-theme: mat.define-light-theme((color: (primary: mat.define-palette(mat
 @include mat.tabs-theme($frontend-theme);
 @include mat.select-theme($frontend-theme);
 @include mat.slider-theme($frontend-theme);
+@include mat.tooltip-theme($frontend-theme);
 
 // Variable overrides
 

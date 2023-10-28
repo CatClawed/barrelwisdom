@@ -36,7 +36,6 @@ export class A23LocationComponent extends FragmentedComponent {
     })
     this.region = this.route.snapshot.data.loc;
     this.filteredRegion = this.region.areas;
-    this.query = this.route.snapshot.queryParamMap.get('item');
     if (this.region.areas.length == 0 || !this.region) {
       this.error = `404`;
     }
@@ -48,7 +47,6 @@ export class A23LocationComponent extends FragmentedComponent {
           this.search = filter;
         }
         );
-      if (this.query) { this.pageForm.controls['filtertext'].patchValue(this.query); }
     }
   }
 
@@ -57,6 +55,10 @@ export class A23LocationComponent extends FragmentedComponent {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: region => {
+          this.region = region;
+          this.filteredRegion = this.region.areas;
+          // Chrome note: query second, not first. Firefox can handle either.
+          // I am so mad.
           this.query = this.route.snapshot.queryParamMap.get('item');
           if (this.query) {
             this.pageForm.controls['filtertext'].patchValue(this.query);
@@ -64,8 +66,6 @@ export class A23LocationComponent extends FragmentedComponent {
           else {
             this.pageForm.reset();
           }
-          this.region = region;
-          this.filteredRegion = this.region.areas;
           if (this.region.areas.length == 0 || !this.region) {
             this.error = `404`;
           }

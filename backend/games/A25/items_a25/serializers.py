@@ -84,10 +84,9 @@ class A25RecipeSerializer(A25DefaultSerializer):
     ing = serializers.SerializerMethodField()
     unlocks = serializers.SerializerMethodField()
     colors = serializers.SerializerMethodField()
-    chars = serializers.SerializerMethodField()
     class Meta:
         model = Recipe
-        fields = ['book', 'unlocks', 'colors', 'chars','ing']
+        fields = ['book', 'unlocks', 'colors', 'ing']
     def get_ing(self,obj):
         arr = []
         for thing in [[obj.quant1,obj.ing1], [obj.quant2, obj.ing2], [obj.quant3,obj.ing3]]:
@@ -101,8 +100,6 @@ class A25RecipeSerializer(A25DefaultSerializer):
             if thing:
                 arr.append(A25DefaultSerializer.get_text(self,thing))
         return arr
-    def get_chars(self,obj):
-        return [obj.char1.slug, obj.char2.slug, obj.char3.slug]
     def get_colors(self,obj):
         return [obj.color1.slug, obj.color2.slug, obj.color3.slug]
 
@@ -118,7 +115,7 @@ class A25ItemFullSerializer(A25DefaultSerializer):
     class Meta:
         model = Item
         fields = [
-            "slug", "name", "desc", "rarity", 'quest',
+            "slug", "name", "desc", "rarity", 'quest', 'note',
             'material', 'equip', 'combat', 'recipe', 'limit'
         ]
     def get_desc(self,obj):

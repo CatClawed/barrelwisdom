@@ -27,7 +27,7 @@ export interface Trait {
     char1: CharBasic[];
     char2: CharBasic[];
     char3: CharBasic[];
-
+    note: string;
     trans_atk: boolean;
     trans_heal: boolean;
     trans_buff: boolean;
@@ -47,6 +47,7 @@ export interface Item {
     recipe: Recipe[];
     limit: string;
     quest: Quest[];
+    note: string;
 }
 
 export interface NameTrans {
@@ -153,6 +154,7 @@ export interface Character {
     limit: string;
     passives: Passive[];
     skills: Skill[];
+    note: string;
 }
 
 export interface Skill {
@@ -204,6 +206,7 @@ export interface Memoria {
     matk30: number;
     mdef30: number;
     limit: string;
+    note: string;
 }
 
 export interface Research {

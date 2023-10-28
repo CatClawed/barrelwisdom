@@ -75,7 +75,7 @@ class A25TraitSerializer(A25DefaultSerializer):
     class Meta:
         model = Trait
         fields = ['slug', 'name_en', 'name_ja', 'desc', 'kind', 'cat',
-            'val', 'items', 'char1', 'char2', 'char3',
+            'val', 'items', 'char1', 'char2', 'char3', 'note',
             'trans_atk', 'trans_heal', 'trans_buff', 'trans_dbf', 'trans_wep'
         ]
     def get_val(self, obj):

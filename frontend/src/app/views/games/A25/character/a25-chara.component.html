@@ -21,6 +21,7 @@
       src="{{imgURL}}characters/full/{{chara.slug}}.webp" alt="{{chara.name}} {{chara.title}}" />
   </div>
   <p style="margin-top:1rem;" *ngIf="chara.limit"><b>Event: </b>{{chara.limit}}</p>
+  <p style="margin-top:1rem;" *ngIf="chara.note" [innerHTML]="chara.note"></p>
   <table class="tbl" style="margin-bottom:0;margin-top:1rem;">
     <tr class="table-dark-center"><th>Gifts</th></tr>
     <tr>

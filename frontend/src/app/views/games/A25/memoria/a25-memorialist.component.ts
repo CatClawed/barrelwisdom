@@ -66,38 +66,36 @@ export class A25MemorialistComponent extends ModalUseComponent {
   private filterT(value: string, stat: string): Memoria[] {
     let memorialist: Memoria[] = this.memoria;
 
-    if (stat !== 'any') {
-      switch (stat) {
-        case "hp": {
-          memorialist = memorialist.sort((a,b) => (a.hp30 > b.hp30 ? -1 : 1));
-          break;
-        }
-        case "agi": {
-          memorialist = memorialist.sort((a,b) => (a.spd30 > b.spd30 ? -1 : 1));
-          break;
-        }
-        case "patk": {
-          memorialist = memorialist.sort((a,b) => (a.patk30 > b.patk30 ? -1 : 1));
-          break;
-        }
-        case "pdef": {
-          memorialist = memorialist.sort((a,b) => (a.pdef30 > b.pdef30 ? -1 : 1));
-          break;
-        }
-        case "matk": {
-          memorialist = memorialist.sort((a,b) => (a.matk30 > b.matk30 ? -1 : 1));
-          break;
-        }
-        case "mdef": {
-          memorialist = memorialist.sort((a,b) => (a.mdef30 > b.mdef30 ? -1 : 1));
-          break;
-        }
+    switch (stat) {
+      case "hp": {
+        memorialist = memorialist.sort((a, b) => (a.hp30 > b.hp30 ? -1 : 1));
+        break;
+      }
+      case "agi": {
+        memorialist = memorialist.sort((a, b) => (a.spd30 > b.spd30 ? -1 : 1));
+        break;
+      }
+      case "patk": {
+        memorialist = memorialist.sort((a, b) => (a.patk30 > b.patk30 ? -1 : 1));
+        break;
+      }
+      case "pdef": {
+        memorialist = memorialist.sort((a, b) => (a.pdef30 > b.pdef30 ? -1 : 1));
+        break;
+      }
+      case "matk": {
+        memorialist = memorialist.sort((a, b) => (a.matk30 > b.matk30 ? -1 : 1));
+        break;
+      }
+      case "mdef": {
+        memorialist = memorialist.sort((a, b) => (a.mdef30 > b.mdef30 ? -1 : 1));
+        break;
       }
     }
 
     const filterValue = value.toLowerCase();
     return memorialist.filter(memoria => {
-      return memoria.name.toLowerCase().includes(filterValue)
+      return memoria.name.toLowerCase().includes(filterValue) || memoria.skill_desc.toLowerCase().includes(filterValue)
     });
   }
 }

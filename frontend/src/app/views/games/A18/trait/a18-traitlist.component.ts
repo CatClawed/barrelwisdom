@@ -60,7 +60,7 @@ export class A18TraitlistComponent extends ModalUseComponent {
   private filterT(value: string, transfer: number): Trait[] {
     let traitlist: Trait[] = this.traits;
     if (transfer != 0) {
-      traitlist = this.traits.filter(trait => !(trait.trans_atk == trait.trans_heal == trait.trans_wpn == trait.trans_arm == trait.trans_acc == trait.trans_syn));
+      traitlist = this.traits.filter(trait => !(trait.trans_atk === trait.trans_heal === trait.trans_wpn === trait.trans_arm === trait.trans_acc === trait.trans_syn));
     }
 
     switch (transfer) {

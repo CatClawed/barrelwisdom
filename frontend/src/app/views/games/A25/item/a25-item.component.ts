@@ -35,17 +35,13 @@ export class A25ItemComponent extends SingleComponent {
   }
   changeData(): void {
     this.itemkind = this.itemkind ? this.itemkind : this.route.snapshot.params.itemkind;
-    if (this.itemkind !== 'materials' && this.itemkind !== 'synthesis') this.error = `404`;
-    this.a25service.getMaterial(this.slug, this.language)
+
+    if (this.itemkind === 'materials') {
+      this.a25service.getMaterial(this.slug, this.language)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: item => {
-          if (this.itemkind == 'materials') {
-            this.error = (item.equip || item.combat) ? `404` : ``
-          }
-          else {
-            this.error = item.material ? `404` : ``
-          }
+          this.error = (item.equip || item.combat) ? `404` : ``
           this.itemkind = '';
           this.item = item;
           this.gameService(this.a25service, `items/${this.itemkind}`);
@@ -57,6 +53,29 @@ export class A25ItemComponent extends SingleComponent {
           this.error = `${error.status}`;
         }
       });
+    }
+    else if (this.itemkind === 'synthesis') {
+      this.a25service.getSynth(this.slug, this.language)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: item => {
+          this.error = item.material ? `404` : ``
+          this.itemkind = '';
+          this.item = item;
+          this.gameService(this.a25service, `items/${this.itemkind}`);
+          this.seoImage = `${this.imgURL}items/${this.item.slug}.webp`
+          this.genericSEO(this.item.name,
+            this.item.desc ? this.item.desc.replace('<br>', ' -- ') : `Material from ${this.gameTitle}`);
+        },
+        error: error => {
+          this.error = `${error.status}`;
+        }
+      });
+    }
+    else {
+      this.error = `404`;
+    }
+    
   }
 
   replaceVal(item: Item): string {

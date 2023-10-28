@@ -8,6 +8,7 @@ class Character(models.Model):
     limit = models.ForeignKey(Desc, on_delete=models.CASCADE, blank=True, null=True)
     role  = models.ForeignKey(Filterable, on_delete=models.CASCADE)
     elem  = models.ForeignKey(Filterable, on_delete=models.CASCADE, related_name="chara_elem")
+    note  = models.CharField(max_length=200, blank=True)
 
     rarity = models.IntegerField()
 
@@ -91,6 +92,7 @@ class Memoria(models.Model):
     skill_desc = models.ForeignKey(Desc, on_delete=models.CASCADE)
     limit = models.ForeignKey(Desc, on_delete=models.CASCADE, blank=True, null=True, related_name="memoria_limited")
     rarity = models.IntegerField()
+    note  = models.CharField(max_length=200, blank=True)
 
     lv1  = models.IntegerField()
     lv2  = models.IntegerField()

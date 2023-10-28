@@ -10,7 +10,7 @@
         {{trait.name_en}}<br /><small>{{trait.name_ja}}</small>
       </ng-container>
       <ng-container *ngIf="language=='ja'">
-        {{trait.name_ja}}
+        {{trait.name_ja}}<br />
       </ng-container>
     </h4>
     <div class="card-icon-position">
@@ -18,10 +18,11 @@
       <img *ngIf="!trait.trans_wep" style="width:3rem;" src="{{imgURL}}svg/combat.svg"    alt="combat"/>
     </div>
   </div>
-  <p [innerHTML]="trait.desc.replace('{0}', trait.val[0] + ' ~ ' + trait.val[4]).replace('{1}', trait.val[0] + ' ~ ' + trait.val[4])"></p>
+  <p style="padding-top:1rem;" [innerHTML]="trait.desc.replace('{0}', trait.val[0] + ' ~ ' + trait.val[4]).replace('{1}', trait.val[0] + ' ~ ' + trait.val[4])"></p>
   <p>
     {{trait.val[0]}} > {{trait.val[1]}} > {{trait.val[2]}} > {{trait.val[3]}} > {{trait.val[4]}}
   </p>
+  <p *ngIf="trait.note" [innerHTML]="trait.note"></p>
   <b *ngIf=" trait.items">Item:</b>
   <ul *ngIf=" trait.items">
     <li *ngFor="let item of trait.items"><a routerLink="/{{gameURL}}/items/materials/{{item.slug}}/{{language}}">{{item.name}}</a></li>

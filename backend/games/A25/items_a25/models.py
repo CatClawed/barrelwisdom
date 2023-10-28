@@ -8,6 +8,7 @@ class Item(models.Model):
     desc   = models.ForeignKey(Desc, on_delete=models.CASCADE, blank=True, null=True)
     kind   = models.ForeignKey(Filterable, on_delete=models.CASCADE)
     rarity = models.IntegerField()
+    note  = models.CharField(max_length=200, blank=True)
     limit = models.ForeignKey(Desc, on_delete=models.CASCADE, blank=True, null=True, related_name="item_limited")
 
     class Meta:

@@ -23,44 +23,48 @@
     </form>
   </div>
   <div *ngIf="filteredMemoria" class="item-grid spacer">
-    <div *ngFor="let memoria of filteredMemoria | async;  trackBy:identify" style="aspect-ratio:512/410;display:flex;max-height:410px;margin:auto;">
-      <a style="height:100%;aspect-ratio:256/410;"
-      (click)="openModal(memoriaModal, memoria.slug, $event);"
-      href="/{{gameURL}}/memoria/{{memoria.slug}}/{{language}}">
-      <div style="position:relative;">      
-          <img loading="lazy"
-            src="{{imgURL}}memoria/{{memoria.slug}}.webp"
-            alt="{{memoria.name}}"
-            style="height:100%;width:256px;aspect-ratio:256/410;">
-            <div style="position:absolute;bottom:10%;left:50%;transform:translate(-50%,0);font-size:2rem;text-align:center;width:100%;color:white;background:linear-gradient(270deg, rgba(0,0,0,0.5) 0%, rgb(0, 0, 0) 50%, rgba(0,0,0,0.5) 100%);">{{rarity[memoria.rarity]}}</div>
+    <div *ngFor="let memoria of filteredMemoria | async;  trackBy:identify" style="margin:auto;">
+      <div style="aspect-ratio:512/410;display:flex;max-height:410px;margin:auto;">
+        <a style="height:100%;aspect-ratio:256/410;"
+          (click)="openModal(memoriaModal, memoria.slug, $event);"
+          href="/{{gameURL}}/memoria/{{memoria.slug}}/{{language}}">
+          <div style="position:relative;">      
+              <img loading="lazy"
+                src="{{imgURL}}memoria/{{memoria.slug}}.webp"
+                alt="{{memoria.name}}"
+                style="height:100%;width:256px;aspect-ratio:256/410;">
+                <div style="position:absolute;bottom:10%;left:50%;transform:translate(-50%,0);font-size:2rem;text-align:center;width:100%;color:white;background:linear-gradient(270deg, rgba(0,0,0,0.5) 0%, rgb(0, 0, 0) 50%, rgba(0,0,0,0.5) 100%);">{{rarity[memoria.rarity]}}</div>
+          </div>
+        </a>
+        <table class="tbl table-compress" style="aspect-ratio:256/410;width:256px;height:100%;text-align:center;">
+          <tr>
+            <th>{{a25service.stats['hp'][language]}}</th>
+            <td>{{memoria.hp30/100}}%</td>
+          </tr>
+          <tr>
+            <th>{{a25service.stats['agi'][language]}}</th>
+            <td>{{memoria.spd30/100}}%</td>
+          </tr>
+          <tr>
+            <th>{{a25service.stats['patk'][language]}}</th>
+            <td>{{memoria.patk30/100}}%</td>
+          </tr>
+          <tr>
+            <th>{{a25service.stats['pdef'][language]}}</th>
+            <td>{{memoria.pdef30/100}}%</td>
+          </tr>
+          <tr>
+            <th>{{a25service.stats['matk'][language]}}</th>
+            <td>{{memoria.matk30/100}}%</td>
+          </tr>
+          <tr>
+            <th>{{a25service.stats['mdef'][language]}}</th>
+            <td>{{memoria.mdef30/100}}%</td>
+          </tr>
+        </table>
       </div>
-    </a>
-    <table class="tbl table-compress" style="aspect-ratio:256/410;width:256px;height:100%;text-align:center;">
-      <tr>
-        <th>{{a25service.stats['hp'][language]}}</th>
-        <td>{{memoria.hp30/100}}%</td>
-      </tr>
-      <tr>
-        <th>{{a25service.stats['agi'][language]}}</th>
-        <td>{{memoria.spd30/100}}%</td>
-      </tr>
-      <tr>
-        <th>{{a25service.stats['patk'][language]}}</th>
-        <td>{{memoria.patk30/100}}%</td>
-      </tr>
-      <tr>
-        <th>{{a25service.stats['pdef'][language]}}</th>
-        <td>{{memoria.pdef30/100}}%</td>
-      </tr>
-      <tr>
-        <th>{{a25service.stats['matk'][language]}}</th>
-        <td>{{memoria.matk30/100}}%</td>
-      </tr>
-      <tr>
-        <th>{{a25service.stats['mdef'][language]}}</th>
-        <td>{{memoria.mdef30/100}}%</td>
-      </tr>
-    </table>
+      <p style="max-width:512px;">{{memoria.skill_desc.replace('{0}', memoria.lv1 + ' ~ ' + memoria.lv5)}}</p>
+      <p *ngIf="memoria.note" [innerHTML]="memoria.note"></p>
     </div>
     <ng-template #memoriaModal>
       <div class="modal-body">
