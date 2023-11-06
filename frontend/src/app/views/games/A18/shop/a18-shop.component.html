@@ -7,7 +7,10 @@
       <b>Table of Contents</b>
       <ol>
           <li *ngFor="let shop of shops">
-              <a href="/{{gameURL}}/shops/{{language}}#{{shop.slug}}" (click)="$event.preventDefault();scroll(shop.slug)">{{shop.name}}</a>
+              <a href="/{{gameURL}}/shops/{{language}}#{{shop.slug}}"
+                (click)="$event.preventDefault();scroll(shop.slug)">
+                {{shop.name}}
+              </a>
           </li>
       </ol>
   </div>

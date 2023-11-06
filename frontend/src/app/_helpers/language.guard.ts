@@ -33,6 +33,6 @@ export const LanguageGuard = (route: ActivatedRouteSnapshot, state: RouterStateS
             newUrl += '/' + s;
         }
     }
-    router.navigateByUrl(newUrl + "/en", { replaceUrl: true });
+    router.navigateByUrl(newUrl + "/en");
     return false;
 }

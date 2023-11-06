@@ -1,6 +1,6 @@
 import { Location, ViewportScroller } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { AreaData } from '@app/views/games/A12/_services/a12.interface';
@@ -17,20 +17,12 @@ export class A12LocationComponent extends FragmentedComponent {
 
   constructor(
     protected route: ActivatedRoute,
-    protected readonly destroy$: DestroyService,
     protected loc: Location,
+    protected readonly destroy$: DestroyService,
     private a12service: A12Service,
     protected seoService: SeoService,
     protected viewportScroller: ViewportScroller) {
     super(destroy$, route, seoService, viewportScroller, loc);
-    this.gameService(this.a12service, 'locations');
-    this.location = this.route.snapshot.data.loc;
-    if (!this.location) {
-      this.error = `404`;
-    }
-    else {
-      this.genericSEO(this.location.name, `All items in ${this.location.name}`);
-    }
   }
 
   changeData(): void {
@@ -39,8 +31,9 @@ export class A12LocationComponent extends FragmentedComponent {
       .subscribe({
         next: location => {
           this.error = ``;
-          this.gameService(this.a12service, 'locations');
           this.location = location;
+          this.hasData = true;
+          this.gameService(this.a12service, 'locations');
           this.genericSEO(this.location.name, `All items in ${this.location.name}`);
         },
         error: error => {

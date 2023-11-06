@@ -25,11 +25,11 @@ class Name(models.Model):
     text_ja = models.CharField(max_length=40, unique=True) # I'd be surprised if JP surpassed 15
 
 class Desc(models.Model):
-    text_en = models.CharField(max_length=200)
-    text_ja = models.CharField(max_length=200, unique=True)
+    text_en = models.CharField(max_length=255)
+    text_ja = models.CharField(max_length=255, unique=True)
 
 class Trait(models.Model):
-    slug  = models.SlugField(max_length=40, unique=True)
+    slug  = models.SlugField(max_length=50, unique=True)
     index = models.IntegerField()
     name  = models.ForeignKey(Name, on_delete=models.CASCADE)
     desc  = models.ForeignKey(Desc, on_delete=models.CASCADE)

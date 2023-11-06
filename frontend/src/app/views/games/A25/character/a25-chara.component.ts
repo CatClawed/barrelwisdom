@@ -59,7 +59,10 @@ export class A25CharaComponent extends SingleComponent {
           this.chara = chara;
           this.gameService(this.a25service, 'charas');
           this.seoImage = `${this.imgURL}characters/full/${this.chara.slug}.webp`
-          this.genericSEO(`${this.chara.name} ${this.chara.title}`, `All data about ${this.chara.name}`);
+          this.genericSEO(`${this.chara.name} ${this.chara.title}`,
+            this.language == 'en' ?
+              `Gifts: ${this.chara.trait1.name_en} • ${this.chara.trait2.name_en} • ${this.chara.trait3.name_en}` :
+              `Gifts: ${this.chara.trait1.name_ja} • ${this.chara.trait2.name_ja} • ${this.chara.trait3.name_ja}`);
         },   error: error => {
           this.error = `${error.status}`;
         }

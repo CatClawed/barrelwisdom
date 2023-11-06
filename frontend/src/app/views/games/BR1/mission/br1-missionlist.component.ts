@@ -34,6 +34,7 @@ export class BR1MissionlistComponent extends FragmentedComponent {
         next: mission => {
           this.error = ``;
           this.missions = mission;
+          this.hasData = true;
           this.gameService(this.br1service, 'mission');
           this.genericSEO(`Missions`, `The full mission list.`);
         },

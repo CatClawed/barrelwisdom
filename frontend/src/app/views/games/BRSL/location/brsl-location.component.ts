@@ -25,14 +25,6 @@ export class BRSLLocationComponent extends FragmentedComponent {
     protected viewportScroller: ViewportScroller
   ) {
     super(destroy$, route, seoService, viewportScroller, loc);
-    this.gameService(this.brslservice, `locations`);
-    this.location = this.route.snapshot.data.loc;
-    if (!this.location) {
-      this.error = `404`;
-    }
-    else {
-      this.genericSEO(this.location.name, `All items and demons in ${this.location.name}`);
-    }
   }
   changeData(): void {
     this.brslservice.getRegion(this.slug, this.language)
@@ -41,6 +33,7 @@ export class BRSLLocationComponent extends FragmentedComponent {
         next: location => {
           this.error = ``;
           this.location = location;
+          this.hasData = true;
           this.gameService(this.brslservice, `locations`);
           this.genericSEO(this.location.name, `All items and demons in ${this.location.name}`);
         },

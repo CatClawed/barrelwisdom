@@ -7,7 +7,7 @@
       <ol>
           <li *ngFor="let dungeon of dungeons">
               <a href="/{{gameURL}}/quests/dungeons/{{language}}#{{language == 'en' ? dungeon.name_en : dungeon.name_ja}}"
-                (click)="$event.preventDefault();scroll(language == 'en' ? dungeon.name_en : dungeon.name_ja, section)">
+                (click)="$event.preventDefault();scroll(language == 'en' ? dungeon.name_en : dungeon.name_ja)">
                 {{language == 'en' ? dungeon.name_en : dungeon.name_ja}}
                 {{language == 'en' ? ' (' + dungeon.name_ja + ')' : ''}}
               </a>

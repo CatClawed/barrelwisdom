@@ -6,7 +6,7 @@
 <div class="col-md-10 mx-auto">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
-        <mat-form-field class="col-md-8" appearance="outline">
+        <mat-form-field class="col-md-4" appearance="outline">
           <mat-label>Filter...</mat-label>
           <input style="height: 100%;" matInput formControlName="filtertext">
           <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
@@ -19,6 +19,17 @@
             </mat-option>
             <mat-option *ngFor="let role of roles" [value]="role.slug">
               {{role.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-md-4" appearance="outline">
+          <mat-label>Element</mat-label>
+          <mat-select matNativeControl formControlName="elems" disableOptionCentering="true" class="mat-select-icon">
+            <mat-option value="any" selected>
+              Any
+            </mat-option>
+            <mat-option *ngFor="let elem of elems" [value]="elem.slug">
+              {{elem.name}}
             </mat-option>
           </mat-select>
         </mat-form-field>

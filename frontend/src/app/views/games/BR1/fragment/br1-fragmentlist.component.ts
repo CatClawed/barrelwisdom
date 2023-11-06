@@ -39,6 +39,7 @@ export class BR1FragmentEffectlistComponent extends FragmentedComponent {
       .subscribe({
         next: fragmenteffects => {
           this.fragmenteffects = fragmenteffects;
+          this.hasData = true;
           this.gameService(this.br1service, 'fragment-effects');
           this.genericSEO(`Fragment Effects`, `The list of fragment effects in ${this.gameTitle}.`);
           this.filteredFragmentEffects = this.pageForm.valueChanges.pipe(

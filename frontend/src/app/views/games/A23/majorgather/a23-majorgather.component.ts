@@ -25,9 +25,6 @@ export class A23MajorGatherComponent extends FragmentedComponent {
     protected viewportScroller: ViewportScroller,
   ) {
     super(destroy$, route, seoService, viewportScroller, loc);
-    this.gameService(this.a23service, 'major-gathering');
-    this.major = this.route.snapshot.data.gather;
-    this.genericSEO(`Major Gathering Spots`, `All major gathering items in ${this.gameTitle}.`);
   }
 
   changeData(): void {
@@ -37,6 +34,7 @@ export class A23MajorGatherComponent extends FragmentedComponent {
         next: major => {
           this.error = ``;
           this.major = major;
+          this.hasData = true;
           this.gameService(this.a23service, 'major-gathering');
           this.genericSEO(`Major Gathering Spots`, `All major gathering items in ${this.gameTitle}.`);
         },

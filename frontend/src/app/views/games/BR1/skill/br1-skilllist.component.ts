@@ -32,6 +32,7 @@ export class BR1SkilllistComponent extends FragmentedComponent {
         next: skill => {
           this.error = ``;
           this.skills = skill;
+          this.hasData = true;
           this.gameService(this.br1service, 'skills');
           this.genericSEO(`Skills`, `The full skill list in ${this.gameTitle}.`);
         },

@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="error"></Error>
 
-<ng-container *ngIf="!error">
+<ng-container *ngIf="location">
 <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Location: '+location.name"></Breadcrumb>
 <h1>{{location.name}}</h1>
     <div class="table-of-contents">
@@ -8,7 +8,10 @@
         <ol>
            <ng-container *ngFor="let area of location.areas">
             <li *ngIf="!area.subarea" >
-                <a href="/{{gameURL}}/locations/{{location.slugname}}/{{language}}#{{area.slugname}}" (click)="$event.preventDefault();scroll(area.slugname, section+'/'+location.slugname)">{{area.name}}</a>
+                <a href="/{{gameURL}}/locations/{{location.slugname}}/{{language}}#{{area.slugname}}"
+                  (click)="$event.preventDefault();scroll(area.slugname, location.slugname)">
+                  {{area.name}}
+                </a>
             </li>
           </ng-container>
         </ol>

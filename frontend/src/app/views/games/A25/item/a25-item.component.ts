@@ -65,7 +65,7 @@ export class A25ItemComponent extends SingleComponent {
           this.gameService(this.a25service, `items/${this.itemkind}`);
           this.seoImage = `${this.imgURL}items/${this.item.slug}.webp`
           this.genericSEO(this.item.name,
-            this.item.desc ? this.item.desc.replace('<br>', ' -- ') : `Material from ${this.gameTitle}`);
+            this.item.desc ? this.replaceVal(this.item).replace('<br>', ' -- ') : `Material from ${this.gameTitle}`);
         },
         error: error => {
           this.error = `${error.status}`;

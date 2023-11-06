@@ -1,12 +1,15 @@
 <Error *ngIf="error" [errorCode]="error"></Error>
-<div *ngIf="!error">
+<div *ngIf="region">
     <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Location: '+region.name"></Breadcrumb>
     <h1>{{region.name}}</h1>
     <div class="table-of-contents">
         <b>Table of Contents</b>
         <ol class="toc-list">
             <li *ngFor="let area of region.areas">
-                <a href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}" (click)="$event.preventDefault();scroll(area.slug)">{{area.name}}</a>
+                <a href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}"
+                    (click)="$event.preventDefault();scroll(area.slug, region.slug)">
+                    {{area.name}}
+                </a>
             </li>
         </ol>
     </div>

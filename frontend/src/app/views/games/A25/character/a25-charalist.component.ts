@@ -17,6 +17,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class A25CharalistComponent extends ModalUseComponent {
+  elems: NameLink[];
   roles: NameLink[];
   charas: Character[];
   filteredCharas: Observable<Character[]>;
@@ -39,7 +40,8 @@ export class A25CharalistComponent extends ModalUseComponent {
     super(modalService, destroy$, router, route, location, seoService);
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
-      roles: "any"
+      roles: "any",
+      elems: "any"
     })
   }
 
@@ -47,6 +49,7 @@ export class A25CharalistComponent extends ModalUseComponent {
     this.modalEvent();
     this.pageForm.reset()
     this.getTransfer();
+    this.getElements();
     this.getCharas();
   }
 
@@ -60,7 +63,7 @@ export class A25CharalistComponent extends ModalUseComponent {
           this.genericSEO(`Characters`, `The list of characters in ${this.gameTitle}.`);
           this.filteredCharas = this.pageForm.valueChanges.pipe(
             startWith(null as Observable<Character[]>),
-            map((search: any) => search ? this.filterT(search.filtertext, search.roles) : this.charas.slice())
+            map((search: any) => search ? this.filterT(search.filtertext, search.roles, search.elems) : this.charas.slice())
           );
         },
         error: error => {
@@ -82,11 +85,27 @@ export class A25CharalistComponent extends ModalUseComponent {
       });
   }
 
-  private filterT(value: string, role: string): Character[] {
+  getElements() {
+    this.a25service.getFilter("element", this.language)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: elems => {
+          this.elems = elems;
+        },
+        error: error => {
+          this.error = `${error.status}`;
+        }
+      });
+  }
+
+  private filterT(value: string, role: string, elem: string): Character[] {
     let charalist: Character[] = this.charas;
 
     if (role != 'any') {
       charalist = charalist.filter(chara => chara.role == role)
+    }
+    if (elem != 'any') {
+      charalist = charalist.filter(chara => chara.elem == elem)
     }
     if (!value) {
       return charalist;

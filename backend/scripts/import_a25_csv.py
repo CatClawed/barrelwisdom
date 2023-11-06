@@ -9,6 +9,9 @@ from scripts.util import import_generic, slug_me
 
 # python manage.py shell < scripts/import_a25_csv.py 
 
+def replaceNewline(text):
+    return text.replace('\r', '').replace('\n', '<br>')
+
 # Some names can be changed, some can't (without manual input), hence volatile.
 def checkName(text_en, text_ja, volatile=False):
     if text_en and text_ja:
@@ -79,6 +82,7 @@ def ImpTrait(row, index, **kwargs):
             obj.val3=row["EFF 1-3"]
             obj.val4=row["EFF 1-4"]
             obj.val5=row["EFF 1-5"]
+            obj.note=row["Notes"]
             obj.index=index
             obj.save()
         except:
@@ -94,14 +98,17 @@ def ImpTrait(row, index, **kwargs):
                 val3=row["EFF 1-3"],
                 val4=row["EFF 1-4"],
                 val5=row["EFF 1-5"],
+                note=row["Notes"],
                 index=index
             )
             obj.save()
             # this needs to be changed
+            """
             if row["Filter ID"]:
                 obj.trans.add(Filterable.objects.get(text_en=row["Filter ID"],  kind="combat_type"))
             if row["Filter ID2"]:
                 obj.trans.add(Filterable.objects.get(text_en=row["Filter ID2"], kind="combat_type"))
+            """
 
 
 def ImpResearch(row, index):
@@ -175,6 +182,7 @@ def ImpMemoria(row, index):
         obj.pdef30 =row["PDEF 30"]
         obj.mdef30 =row["MDEF 30"]
         obj.limit=limited
+        obj.note=replaceNewline(row["Notes"])
         obj.save()
     except:
         print('Create', row["EN"])
@@ -201,6 +209,7 @@ def ImpMemoria(row, index):
             matk30 =row["MATK 30"],
             pdef30 =row["PDEF 30"],
             mdef30 =row["MDEF 30"],
+            note=replaceNewline(row["Notes"]),
             limit=limited,
         )
         obj.save()
@@ -246,6 +255,7 @@ def ImpChara(row, index):
         obj.trait2=Trait.objects.get(name__text_ja=row["GIFT2"])
         obj.trait3=Trait.objects.get(name__text_ja=row["GIFT3"])
         obj.limit=limited
+        obj.note=replaceNewline(row["Notes"])
         obj.save()
     except:
         print('Creating', row["NAME_EN"], row["TITLE_EN"])
@@ -276,6 +286,7 @@ def ImpChara(row, index):
             trait2=Trait.objects.get(name__text_ja=row["GIFT2"]),
             trait3=Trait.objects.get(name__text_ja=row["GIFT3"]),
             limit=limited,
+            note=replaceNewline(row["Notes"])
         )
         obj.save()
         update = LatestUpdate.objects.first()
@@ -394,6 +405,7 @@ def ImpMaterials(row, index):
         obj.kind=Filterable.objects.get(slug="material")
         obj.rarity=row["Rarity"]
         obj.limit=limited
+        obj.note=replaceNewline(row["Notes"])
         obj.save()
         obj = Material.objects.get(item=obj)
         obj.color=Filterable.objects.get(text_en=row["Color"]) if row["Color"] else None
@@ -407,6 +419,7 @@ def ImpMaterials(row, index):
             desc=desc,
             kind=Filterable.objects.get(slug="material"),
             rarity=row["Rarity"],
+            note=replaceNewline(row["Notes"]),
             limit=limited
         )
         item.save()
@@ -443,6 +456,7 @@ def ImpEquipment(row, index):
         obj.kind=Filterable.objects.get(slug="equipment", kind="item_type")
         obj.rarity=row["RARITY"]
         obj.limit=limited
+        obj.note=replaceNewline(row["Notes"])
         obj.save()
         obj = Equipment.objects.get(item=obj)
         obj.kind=Filterable.objects.get(text_en=row["TYPE"], kind="equipment")
@@ -470,6 +484,7 @@ def ImpEquipment(row, index):
             desc=desc,
             kind=Filterable.objects.get(slug="equipment", kind="item_type"),
             rarity=row["RARITY"],
+            note=replaceNewline(row["Notes"]),
             limit=limited
         )
         item.save()
@@ -565,7 +580,7 @@ def ImpRecipe(row, index):
         tab = rStory
         if row["Book"] in [5,6]:
             tab = rExtra
-        if row["Book"] in [7]:
+        if row["Book"] in [7, 8, 9]:
             tab = rEvent
         rPage = RecipePage(
             book=row["Book"],
@@ -809,11 +824,11 @@ def fix_recipes():
             tab = rStory
             if page in [4,6]:
                 tab = rExtra
-            if page in [7]:
+            if page in [7,8,9]:
                 tab = rEvent
             page = recipe.book
             rPage = RecipePage(
-                tab=rStory if page in [1,2,3,5] else rExtra,
+                tab=tab,
                 min_x=recipe.x,
                 max_x=recipe.x
             )
@@ -854,7 +869,7 @@ Checklist
 #import_generic(ImpSkill)
 #import_generic(ImpMaterials)
 #import_generic(ImpEquipment)
-import_generic(ImpCombatItem)
+#import_generic(ImpCombatItem)
 #import_generic(ImpRecipe)
 #import_generic(ImpTraining)
 #import_generic(ImpScoreBattle)

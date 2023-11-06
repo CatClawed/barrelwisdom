@@ -7,7 +7,7 @@
       <ol>
           <li *ngFor="let scorebattle of scorebattles">
               <a href="/{{gameURL}}/quests/scorebattles/{{language}}#{{scorebattle.chapter}}-{{scorebattle.section}}"
-                (click)="$event.preventDefault();scroll(scorebattle.chapter+'-'+scorebattle.section, section)">
+                (click)="$event.preventDefault();scroll(scorebattle.chapter+'-'+scorebattle.section)">
                 {{scorebattle.chapter}}-{{scorebattle.section}}: {{scorebattle.name}}
               </a>
           </li>

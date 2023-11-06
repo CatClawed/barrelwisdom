@@ -1,40 +1,30 @@
 import { Location, ViewportScroller } from '@angular/common';
-import { AfterViewInit, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Shop } from '@app/views/games/A18/_services/a18.interface';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
-import { SingleComponent } from '@app/views/games/_prototype/single.component';
-import { first, takeUntil } from 'rxjs/operators';
+import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a18-shop.component.html',
   providers: [DestroyService]
 })
 
-export class A18ShopComponent extends SingleComponent implements AfterViewInit {
+export class A18ShopComponent extends FragmentedComponent {
   shops: Shop[];
 
   constructor(
     protected readonly destroy$: DestroyService,
     protected route: ActivatedRoute,
-    protected location: Location,
     protected seoService: SeoService,
     private a18service: A18Service,
-    private viewportScroller: ViewportScroller,
+    protected viewportScroller: ViewportScroller,
+    protected loc: Location
   ) {
-    super(destroy$, route, seoService);
-  }
-
-  ngAfterViewInit(): void {
-    this.route.fragment.pipe(
-      first(), takeUntil(this.destroy$)
-    ).subscribe(fragment => this.viewportScroller.scrollToAnchor(fragment));
-  }
-  scroll(id: string) {
-    this.location.replaceState(`${this.gameURL}/${this.section}/${this.language}#${id}`);
-    this.viewportScroller.scrollToAnchor(id);
+    super(destroy$, route, seoService, viewportScroller, loc);
   }
 
   changeData() {
@@ -44,15 +34,15 @@ export class A18ShopComponent extends SingleComponent implements AfterViewInit {
         next: shops => {
           this.error = ``;
           this.shops = shops;
+          console.log('shops')
+          this.hasData = true;
           this.gameService(this.a18service, 'shops');
           this.genericSEO(`Shops`, `The list of shops in ${this.gameTitle}.`);
+          
         },
         error: error => {
           this.error = `${error.status}`;
         }
       });
-  }
-  identify(index, item) {
-    return item.slug;
   }
 }

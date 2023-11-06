@@ -21,21 +21,12 @@ export class A25TowerComponent extends FragmentedComponent {
 
   constructor(
     protected route: ActivatedRoute,
-    protected readonly destroy$: DestroyService,
     protected loc: Location,
+    protected readonly destroy$: DestroyService,
     protected viewportScroller: ViewportScroller,
     protected seoService: SeoService,
     protected a25service: A25Service,) {
     super(destroy$, route, seoService, viewportScroller, loc);
-    this.tower = this.route.snapshot.data.data
-    if (!this.tower) {
-      this.error = `404`;
-    }
-    else {
-      this.gameService(this.a25service, 'quests/tower');
-      this.title = (this.language == 'en') ? 'Elemental Tower' : "四元の塔";
-      this.genericSEO(this.title, `All Elemental Tower floors in ${this.gameTitle}`);
-    }
   }
 
   changeData(): void {
@@ -45,6 +36,7 @@ export class A25TowerComponent extends FragmentedComponent {
         next: quest => {
           this.error = ``;
           this.tower = quest;
+          this.hasData = true;
           this.gameService(this.a25service, 'quests/tower');
           this.title = (this.language == 'en') ? 'Elemental Tower' : "四元の塔";
           this.genericSEO(this.title, `All Elemental Tower floors in ${this.gameTitle}`);

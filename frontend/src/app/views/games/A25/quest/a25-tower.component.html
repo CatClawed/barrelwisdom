@@ -7,7 +7,7 @@
       <ol>
           <li *ngFor="let floor of tower">
               <a href="/{{gameURL}}/quests/tower/{{language}}#{{floor.floor}}"
-                (click)="$event.preventDefault();scroll(floor.floor, section)">
+                (click)="$event.preventDefault();scroll(floor.floor)">
                 Floor {{floor.floor}}
               </a>
           </li>

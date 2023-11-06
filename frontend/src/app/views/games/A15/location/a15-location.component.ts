@@ -26,14 +26,6 @@ export class A15LocationComponent extends FragmentedComponent {
     protected viewportScroller: ViewportScroller
   ) {
     super(destroy$, route, seoService, viewportScroller, loc);
-    this.gameService(this.a15service, 'locations');
-    this.location = this.route.snapshot.data.loc;
-    if (!this.location) {
-      this.error = `404`;
-    }
-    else {
-      this.genericSEO(this.location.name, `All items in ${this.location.name}`);
-    }
   }
 
   changeData(): void {
@@ -43,6 +35,7 @@ export class A15LocationComponent extends FragmentedComponent {
         next: location => {
           this.error = ``;
           this.location = location;
+          this.hasData = true;
           this.gameService(this.a15service, 'locations');
           this.genericSEO(this.location.name, `All items in ${this.location.name}`);
         },

@@ -142,5 +142,5 @@ def sitemap_index():
 
 resleri()
 #firis()
-blog()
-sitemap_index()
+#blog()
+#sitemap_index()

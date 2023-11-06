@@ -1,5 +1,5 @@
 <Error *ngIf="error" [errorCode]="error"></Error>
-<div *ngIf="!error">
+<div *ngIf="region">
     <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Location: '+region.name"></Breadcrumb>
     <h1>{{region.name}}</h1>
     <div style="margin-left: 0.5em; margin-right: 0.5em;" class="row">
@@ -7,7 +7,10 @@
         <b>Table of Contents</b>
         <ol class="toc-list">
             <li *ngFor="let area of region.areas">
-                <a href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}" (click)="$event.preventDefault();scroll(area.slug,'locations/'+region.slug)">{{area.name}}</a>
+                <a href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}"
+                    (click)="$event.preventDefault();scroll(area.slug,region.slug)">
+                    {{area.name}}
+                </a>
                 <ul *ngIf="area.climate.length > 1">
                     <li *ngFor="let climate of area.climate">
                         <a *ngIf="climate.weather == 'sun'"     href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather,'locations/'+region.slug)">Sun</a>

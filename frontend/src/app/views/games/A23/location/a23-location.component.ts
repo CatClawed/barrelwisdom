@@ -34,20 +34,6 @@ export class A23LocationComponent extends FragmentedComponent {
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
     })
-    this.region = this.route.snapshot.data.loc;
-    this.filteredRegion = this.region.areas;
-    if (this.region.areas.length == 0 || !this.region) {
-      this.error = `404`;
-    }
-    else {
-      this.pageForm.get("filtertext").valueChanges
-        .pipe(takeUntil(this.destroy$))
-        .subscribe(filter => {
-          this.filteredNodes = this.filterT(filter)
-          this.search = filter;
-        }
-        );
-    }
   }
 
   changeData(): void {
@@ -57,8 +43,23 @@ export class A23LocationComponent extends FragmentedComponent {
         next: region => {
           this.region = region;
           this.filteredRegion = this.region.areas;
+          this.hasData = true;
+          this.gameService(this.a23service, 'locations');
+          this.genericSEO(this.region.name, `All items in ${this.region.name}`);
           // Chrome note: query second, not first. Firefox can handle either.
           // I am so mad.
+          if (this.region.areas.length == 0 || !this.region) {
+            this.error = `404`;
+          }
+          else {
+            this.error = ``;
+            this.pageForm.get("filtertext").valueChanges
+              .pipe(takeUntil(this.destroy$))
+              .subscribe(filter => {
+                this.filteredNodes = this.filterT(filter)
+                this.search = filter;
+              });
+          }
           this.query = this.route.snapshot.queryParamMap.get('item');
           if (this.query) {
             this.pageForm.controls['filtertext'].patchValue(this.query);
@@ -66,14 +67,6 @@ export class A23LocationComponent extends FragmentedComponent {
           else {
             this.pageForm.reset();
           }
-          if (this.region.areas.length == 0 || !this.region) {
-            this.error = `404`;
-          }
-          else {
-            this.error = ``;
-          }
-          this.gameService(this.a23service, 'locations');
-          this.genericSEO(this.region.name, `All items in ${this.region.name}`);
         },
         error: error => {
           this.error = `${error.status}`;

@@ -1,5 +1,5 @@
 <Error *ngIf="error" [errorCode]="error"></Error>
-<div *ngIf="!error">
+<div *ngIf="major">
     <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Major Gathering Spots'"></Breadcrumb>
     <h1>Major Gathering Spots</h1>
         <div class="table-of-contents">
@@ -7,27 +7,27 @@
             <ol class="toc-list">
                 <li>
                     <a href="/{{gameURL}}/major-gathering/{{language}}#sickle"
-                        (click)="$event.preventDefault();scroll('sickle', section)">Sickle <i class="atelier atelier-sm atelier-ryza2-tool-sickle"></i></a>
+                        (click)="$event.preventDefault();scroll('sickle')">Sickle <i class="atelier atelier-sm atelier-ryza2-tool-sickle"></i></a>
                 </li>
                 <li>
                     <a href="/{{gameURL}}/major-gathering/{{language}}#fish"
-                        (click)="$event.preventDefault();scroll('fish', section)">Fish <i class="atelier atelier-sm atelier-ryza2-tool-fishing-rod"></i></a>
+                        (click)="$event.preventDefault();scroll('fish')">Fish <i class="atelier atelier-sm atelier-ryza2-tool-fishing-rod"></i></a>
                 </li>
                 <li>
                     <a href="/{{gameURL}}/major-gathering/{{language}}#net"
-                        (click)="$event.preventDefault();scroll('net', section)">Bug Net <i class="atelier atelier-sm atelier-ryza2-tool-bug-net"></i></a>
+                        (click)="$event.preventDefault();scroll('net')">Bug Net <i class="atelier atelier-sm atelier-ryza2-tool-bug-net"></i></a>
                 </li>
                 <li>
                     <a href="/{{gameURL}}/major-gathering/{{language}}#pickaxe"
-                        (click)="$event.preventDefault();scroll('pickaxe', section)">Pickaxe <i class="atelier atelier-sm atelier-sophie2-tool-pickaxe"></i></a>
+                        (click)="$event.preventDefault();scroll('pickaxe')">Pickaxe <i class="atelier atelier-sm atelier-sophie2-tool-pickaxe"></i></a>
                 </li>
                 <li>
                     <a href="/{{gameURL}}/major-gathering/{{language}}#slingshot"
-                        (click)="$event.preventDefault();scroll('slingshot', section)">Slingshot <i class="atelier atelier-sm atelier-sophie2-tool-slingshot"></i></a>
+                        (click)="$event.preventDefault();scroll('slingshot')">Slingshot <i class="atelier atelier-sm atelier-sophie2-tool-slingshot"></i></a>
                 </li>
                 <li>
                     <a href="/{{gameURL}}/major-gathering/{{language}}#hammer"
-                        (click)="$event.preventDefault();scroll('hammer', section)">Hammer <i class="atelier atelier-sm atelier-sophie2-tool-hammer"></i></a>
+                        (click)="$event.preventDefault();scroll('hammer')">Hammer <i class="atelier atelier-sm atelier-sophie2-tool-hammer"></i></a>
                 </li>
             </ol>
         </div>

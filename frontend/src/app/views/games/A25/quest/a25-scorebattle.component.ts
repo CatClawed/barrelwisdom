@@ -27,21 +27,12 @@ export class A25ScoreBattleComponent extends FragmentedComponent {
 
   constructor(
     protected route: ActivatedRoute,
-    protected readonly destroy$: DestroyService,
     protected loc: Location,
+    protected readonly destroy$: DestroyService,
     protected viewportScroller: ViewportScroller,
     protected seoService: SeoService,
     protected a25service: A25Service,) {
     super(destroy$, route, seoService, viewportScroller, loc);
-    this.scorebattles = this.route.snapshot.data.data
-    if (!this.scorebattles) {
-      this.error = `404`;
-    }
-    else {
-      this.gameService(this.a25service, 'quests/scorebattles');
-      this.title = (this.language == 'en') ? 'Score Battles' : "スコアバトル";
-      this.genericSEO(this.title, `All Score Battles in ${this.gameTitle}`);
-    }
   }
 
   changeData(): void {
@@ -51,6 +42,7 @@ export class A25ScoreBattleComponent extends FragmentedComponent {
         next: quest => {
           this.error = ``;
           this.scorebattles = quest;
+          this.hasData = true;
           this.gameService(this.a25service, 'quests/scorebattles');
           this.title = (this.language == 'en') ? 'Score Battles' : "スコアバトル";
           this.genericSEO(this.title, `All Score Battles in ${this.gameTitle}`);
