@@ -1,16 +1,12 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Tag } from '@app/interfaces/tag';
 import { environment } from '@environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 
 @Injectable({ providedIn: 'root' })
 export class TagService {
-
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
 
   constructor(
     private http: HttpClient,
@@ -27,5 +23,8 @@ export class TagService {
   addTag(name: string, slugname: string): Observable<Tag> {
     return this.http.post<any>(`${environment.apiUrl}/tags/`, { name, slugname });
   }
-
+  addTags(tags: Tag[]): Observable<any[]> {
+    if (tags.length === 0) return of([]) 
+    return this.http.post<any>(`${environment.apiUrl}/tags/`, tags);
+  }
 }

@@ -30,6 +30,7 @@ class TagSerializer(serializers.ModelSerializer):
         model = Tags
         fields = ['id', 'name', 'slugname']
 
+
 class SectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Section
@@ -38,7 +39,8 @@ class SectionSerializer(serializers.ModelSerializer):
 class BlogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blog
-        fields = ['id', 'created', 'modified', 'title', 'slugtitle', 'body', 'image', 'description', 'authorlock', 'author', 'section', 'tags']
+        fields = ['id', 'created', 'modified', 'title', 'slugtitle', 'body', 'image',
+            'description', 'authorlock', 'author', 'section', 'tags']
 
 class MainBlogSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True)
@@ -47,7 +49,8 @@ class MainBlogSerializer(serializers.ModelSerializer):
     comments = serializers.SerializerMethodField()
     class Meta:
         model = Blog
-        fields = ['id', 'created', 'modified', 'title', 'slugtitle', 'body', 'image', 'description', 'authorlock', 'author', 'section', 'tags', 'comments']
+        fields = ['id', 'created', 'modified', 'title', 'slugtitle', 'body', 'image',
+            'description', 'authorlock', 'author', 'section', 'tags', 'comments']
 
     def get_comments(self, instance):
         qs = instance.comment_set.filter(approved=True)

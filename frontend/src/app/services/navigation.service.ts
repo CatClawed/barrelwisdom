@@ -2,8 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { environment } from '@environments/environment';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
+import { catchError, filter, first, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class NavigationService implements OnDestroy {
@@ -12,6 +12,7 @@ export class NavigationService implements OnDestroy {
   public n: NavItems[];
   public blogNav = ['user', 'settings', 'tag', 'login', 'register', 'moderate'];
   previousSection = "";
+  section = "blog";
   private destroy$ = new Subject<void>();
 
   httpOptions = {
@@ -21,42 +22,41 @@ export class NavigationService implements OnDestroy {
   constructor(
     private http: HttpClient,
     private router: Router) {
-      this.navSubject = new BehaviorSubject<NavItems[]>(this.n);
-      this.nav = this.navSubject.asObservable();
+    this.navSubject = new BehaviorSubject<NavItems[]>(this.n);
+    this.nav = this.navSubject.asObservable();
 
-      this.router.events
-      .pipe(takeUntil(this.destroy$))
-        .subscribe(val => {
-          if(val instanceof NavigationEnd) {
-            let section = this.router.url.split('/')[1];
-            if(/^\d+/.test(section) || /^create.*/.test(section) || this.blogNav.includes(section) || !section) {
-              section = 'blog'
-            }
-            if(section != this.previousSection) {
-              this.previousSection = section;
-            this.getNav(section).pipe(takeUntil(this.destroy$)).subscribe({next: data => {
-              this.n = JSON.parse(data.data);
-              this.navSubject.next(this.n);
-            },
-            error: () => {
-              this.getNav("blog").pipe(takeUntil(this.destroy$)).subscribe(data => {
-                this.n = JSON.parse(data.data);
-                this.navSubject.next(this.n);
-              });
-            }});
+    this.router.events
+      .pipe(takeUntil(this.destroy$),
+        filter(val => val instanceof NavigationEnd),
+        tap(() => {
+          this.section = this.router.url.split('/')[1];
+          if (/^\d+/.test(this.section) || /^create.*/.test(this.section) || this.blogNav.includes(this.section) || !this.section) {
+            this.section = 'blog'
           }
-        }});
+        }),
+        filter(() => this.section != this.previousSection),
+        switchMap(() =>
+          this.getNav(this.section).pipe(
+            first(),
+            catchError(() => { return of({ data: '[]' }) })
+          )
+        )
+      )
+      .subscribe(data => {
+        this.previousSection = this.section;
+        this.n = JSON.parse(data.data);
+        this.navSubject.next(this.n);
+      })
   }
 
   getNav(section: string): Observable<Nav> {
-      return this.http.get<Nav>(`${environment.apiUrl}/nav/${section}/`, this.httpOptions);
+    return this.http.get<Nav>(`${environment.apiUrl}/nav/${section}/`, this.httpOptions);
   }
 
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
   }
-
 }
 
 export interface Nav {

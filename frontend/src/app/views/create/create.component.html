@@ -41,7 +41,7 @@
     <div class="col-md-10">
       <select class="form-select" formControlName="section"
         [ngClass]="{ 'is-invalid': submitted && f.section.errors }">
-        <option *ngFor="let section of sectionList" value="{{section.id}}">{{section.name}}</option>
+        <option *ngFor="let section of sectionList" [value]="section.id">{{section.name}}</option>
       </select>
     </div>
   </div>

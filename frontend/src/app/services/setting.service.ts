@@ -1,28 +1,23 @@
 // Catch all for the settings page
 
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class SettingService {
-
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
 
   constructor(
     private http: HttpClient,
   ) { }
 
   updatePassword(new_password1: string, new_password2: string, old_password: string) {
-      return this.http.post(`${environment.authUrl}/dj-rest-auth/password/change/`, { new_password1, new_password2, old_password })
+    return this.http.post(`${environment.authUrl}/dj-rest-auth/password/change/`, { new_password1, new_password2, old_password })
   }
 
   createInvite() {
-    return this.http.post(`${environment.apiUrl}/invite/`, {  });
+    return this.http.post(`${environment.apiUrl}/invite/`, {});
   }
 
   getInvite(code: string): Observable<any> {
@@ -30,7 +25,7 @@ export class SettingService {
   }
 
   getProfile(user: number): Observable<any> {
-      return this.http.get<any>(`${environment.apiUrl}/profile/${user}/`);
+    return this.http.get<any>(`${environment.apiUrl}/profile/${user}/`);
   }
 
   updateProfile(user: number, bio: string, website: string, avatar: string) {
@@ -52,5 +47,4 @@ export class SettingService {
   getSections() {
     return this.http.get<any>(`${environment.apiUrl}/section/`);
   }
-
 }
