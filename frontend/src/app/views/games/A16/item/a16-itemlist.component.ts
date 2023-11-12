@@ -4,12 +4,12 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { Category, ItemList } from '@app/views/games/A16/_services/a16.interface';
+import { ItemList } from '@app/views/games/A16/_services/a16.interface';
 import { A16Service } from '@app/views/games/A16/_services/a16.service';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { Observable } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { Observable, forkJoin } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a16-itemlist.component.html',
@@ -17,9 +17,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class A16ItemlistComponent extends ModalUseComponent {
-  items: ItemList[];
   filteredItems: Observable<ItemList[]>;
-  categories: Category[];
 
   constructor(
     protected modalService: BsModalService,
@@ -41,47 +39,25 @@ export class A16ItemlistComponent extends ModalUseComponent {
     })
   }
 
-  changeData(): void {
-    this.modalEvent();
+  changeData() {
+    this.gameService(this.a16service, 'items');
+    this.genericSEO(`Items`, `The list of items in ${this.gameTitle}.`);
     this.pageForm.reset();
-    this.getItems();
-    this.getCategories();
+    return forkJoin({
+      items: this.a16service.getItemList(this.language),
+      categories: this.a16service.getCategories(this.language)
+    })
   }
 
-  getItems() {
-    this.a16service.getItemList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: items => {
-          this.items = items;
-          this.gameService(this.a16service, 'items');
-          this.genericSEO(`Items`, `The list of items in ${this.gameTitle}.`);
-          this.filteredItems = this.pageForm.valueChanges.pipe(
-            startWith(null as Observable<ItemList[]>),
-            map((search: any) => search ? this.filterT(search.filtertext, search.type, search.elementval, search.element, search.filtering) : this.items.slice())
-          );
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
-  }
-
-  getCategories() {
-    this.a16service.getCategories(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: categories => {
-          this.categories = categories;
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+  afterAssignment(): void {
+    this.filteredItems = this.pageForm.valueChanges.pipe(
+      startWith(null as Observable<ItemList[]>),
+      map((search: any) => search ? this.filterT(search.filtertext, search.type, search.elementval, search.element, search.filtering) : this.data.items.slice())
+    );
   }
 
   private filterT(value: string, type: string, elementV: number, element: string, ing: string): ItemList[] {
-    let list: ItemList[] = this.items;
+    let list: ItemList[] = this.data.items;
     if (type != 'Any') {
       list = list.filter(item => item.categories.some(c => c.name == type));
     }

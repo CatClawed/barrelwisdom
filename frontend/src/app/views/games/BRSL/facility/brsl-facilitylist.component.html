@@ -13,7 +13,7 @@
       </div>
     </form>
   </div>
-<div *ngIf="filteredFacilities" class="item-grid">
+<div class="item-grid">
 <div *ngFor="let facility of filteredFacilities | async; trackBy:identify" class="card card-body">
   <h4 class="card-title card-icon-space">
       <a style="color: black;" (click)="openModal(facilityModal, facility.slug, $event);" href="/{{gameURL}}/facilities/{{facility.slug}}/{{language}}">{{facility.name}}</a>    

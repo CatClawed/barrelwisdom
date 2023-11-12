@@ -8,7 +8,7 @@ import { Catalyst } from '@app/views/games/A18/_services/a18.interface';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
 import { FilterableComponent } from '@app/views/games/_prototype/filterable.component';
 import { Observable } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a18-catalystlist.component.html',
@@ -16,10 +16,8 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class A18CatalystlistComponent extends FilterableComponent {
-  catalysts: Catalyst[];
   filteredCatalysts: Observable<Catalyst[]>;
   query: string = "";
-
   colors = {
     "white": [`regular fa-circle`, `black`],
     "yellow": [`solid fa-circle`, `#edc200`],
@@ -48,25 +46,18 @@ export class A18CatalystlistComponent extends FilterableComponent {
   }
 
   changeData() {
+    this.gameService(this.a18service, 'catalysts');
+    this.genericSEO(`Catalysts`, `The list of catalysts in ${this.gameTitle}.`);
     this.pageForm.reset();
-    this.a18service.getCatalystList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: catalysts => {
-          this.error = ``;
-          this.catalysts = catalysts;
-          this.gameService(this.a18service, 'catalysts');
-          this.genericSEO(`Catalysts`, `The list of catalysts in ${this.gameTitle}.`);
-          this.filteredCatalysts = this.pageForm.valueChanges.pipe(
-            startWith(null as Observable<Catalyst[]>),
-            map((search: any) => search || this.query ? this.filterT(search ? search.filtertext : "") : this.catalysts.slice())
-          );
-          this.pageForm.controls['filtertext'].setValue(this.query);
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+    return this.a18service.getCatalystList(this.language);
+  }
+
+  afterAssignment(): void {
+    this.filteredCatalysts = this.pageForm.valueChanges.pipe(
+      startWith(null as Observable<Catalyst[]>),
+      map((search: any) => search || this.query ? this.filterT(search ? search.filtertext : "") : this.data.slice())
+    );
+    this.pageForm.controls['filtertext'].setValue(this.query);
   }
 
   private filterT(value: string): Catalyst[] {
@@ -74,7 +65,7 @@ export class A18CatalystlistComponent extends FilterableComponent {
       value = this.query;
       this.query = "";
     }
-    let catalystlist: Catalyst[] = this.catalysts;
+    let catalystlist: Catalyst[] = this.data;
 
     if (!value) {
       return catalystlist;

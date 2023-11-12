@@ -15,7 +15,6 @@ import { takeUntil } from 'rxjs/operators';
 })
 
 export class A23LocationComponent extends FragmentedComponent {
-  region: Region;
   filteredRegion: Area[];
   filteredNodes: GatherNode[];
   search: string = "";
@@ -36,42 +35,35 @@ export class A23LocationComponent extends FragmentedComponent {
     })
   }
 
-  changeData(): void {
-    this.a23service.getLocation(this.slug, this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: region => {
-          this.region = region;
-          this.filteredRegion = this.region.areas;
-          this.hasData = true;
-          this.gameService(this.a23service, 'locations');
-          this.genericSEO(this.region.name, `All items in ${this.region.name}`);
-          // Chrome note: query second, not first. Firefox can handle either.
-          // I am so mad.
-          if (this.region.areas.length == 0 || !this.region) {
-            this.error = `404`;
-          }
-          else {
-            this.error = ``;
-            this.pageForm.get("filtertext").valueChanges
-              .pipe(takeUntil(this.destroy$))
-              .subscribe(filter => {
-                this.filteredNodes = this.filterT(filter)
-                this.search = filter;
-              });
-          }
-          this.query = this.route.snapshot.queryParamMap.get('item');
-          if (this.query) {
-            this.pageForm.controls['filtertext'].patchValue(this.query);
-          }
-          else {
-            this.pageForm.reset();
-          }
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+  changeData() {
+    this.gameService(this.a23service, 'locations');
+    return this.a23service.getLocation(this.slug, this.language)
+  }
+
+  // TODO: See if I can work out something else for this inner subscribe.
+  afterAssignment(): void {
+    this.filteredRegion = this.data.areas
+    this.genericSEO(this.data.name, `All items in ${this.data.name}`);
+    // Chrome note: query second, not first. Firefox can handle either.
+    // I am so mad.
+    if (this.data.areas.length == 0 || !this.data) {
+      this.error = `404`;
+    }
+    else {
+      this.pageForm.get("filtertext").valueChanges
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(filter => {
+          this.filteredNodes = this.filterT(filter)
+          this.search = filter;
+        });
+    }
+    this.query = this.route.snapshot.queryParamMap.get('item');
+    if (this.query) {
+      this.pageForm.controls['filtertext'].patchValue(this.query);
+    }
+    else {
+      this.pageForm.reset();
+    }
   }
 
   private filterT(value: string): GatherNode[] {
@@ -81,7 +73,7 @@ export class A23LocationComponent extends FragmentedComponent {
       return nodeList;
     }
     const filterValue = value.toLowerCase();
-    for (let area of this.region.areas) {
+    for (let area of this.data.areas) {
       for (let climate of area.climate) {
         for (let node of climate.nodes) {
           if (node.items.some(item => item.name.toLowerCase().includes(filterValue))) {

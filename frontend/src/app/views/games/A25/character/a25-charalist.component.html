@@ -17,9 +17,11 @@
             <mat-option value="any" selected>
               Any
             </mat-option>
-            <mat-option *ngFor="let role of roles" [value]="role.slug">
-              {{role.name}}
-            </mat-option>
+            <ng-container *ngIf="data">
+              <mat-option *ngFor="let role of data.roles" [value]="role.slug">
+                {{role.name}}
+              </mat-option>
+            </ng-container>
           </mat-select>
         </mat-form-field>
         <mat-form-field class="col-md-4" appearance="outline">
@@ -28,15 +30,17 @@
             <mat-option value="any" selected>
               Any
             </mat-option>
-            <mat-option *ngFor="let elem of elems" [value]="elem.slug">
-              {{elem.name}}
-            </mat-option>
+            <ng-container *ngIf="data">
+              <mat-option *ngFor="let elem of data.elems" [value]="elem.slug">
+                {{elem.name}}
+              </mat-option>
+            </ng-container>
           </mat-select>
         </mat-form-field>
       </div>
     </form>
   </div>
-  <div *ngIf="filteredCharas" style="display:grid;grid-template-columns:repeat(4,23%);grid-row-gap:1rem;grid-column-gap:2%;" class="spacer">
+  <div style="display:grid;grid-template-columns:repeat(4,23%);grid-row-gap:1rem;grid-column-gap:2%;" class="spacer">
     <div *ngFor="let chara of filteredCharas | async;  trackBy:identify" style="aspect-ratio:256/736;position:relative;">
       <a  (click)="openModal(charaModal, chara.slug, $event);"
         href="/{{gameURL}}/characters/{{chara.slug}}/{{language}}">

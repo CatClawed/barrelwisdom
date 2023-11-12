@@ -1,5 +1,4 @@
 import { Section } from "./section";
-import { Tag } from "./tag";
 import { SimpleUser } from "./user";
 
 export interface EditBlog {
@@ -60,4 +59,11 @@ export interface BlogPaginator {
     next: string;
     previous: string;
     results: Blog[];
+    tagname: string;
+}
+
+export interface Tag {
+    id: number;
+    name: string;
+    slugname: string;
 }

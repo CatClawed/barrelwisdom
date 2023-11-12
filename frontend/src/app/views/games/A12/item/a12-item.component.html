@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="error"></Error>
 
-<ng-container *ngIf="item">
+<ng-container *ngIf="data as item">
 <Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Items', '/'+gameURL+'/items/'+language]]" [current]="item.name"></Breadcrumb>
 <div class="mx-auto row spacer">
  <div class="{{colset}} card card-body">

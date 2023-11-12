@@ -9,7 +9,7 @@ import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'brsl-facilitylist.component.html',
@@ -17,7 +17,6 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class BRSLFacilitylistComponent extends ModalUseComponent {
-  facilities: FacilityList[];
   filteredFacilities: Observable<FacilityList[]>;
 
   constructor(
@@ -37,27 +36,20 @@ export class BRSLFacilitylistComponent extends ModalUseComponent {
   }
 
   changeData() {
-    this.modalEvent();
-    this.pageForm.reset()
-    this.brslservice.getFacilityList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: facilities => {
-          this.facilities = facilities.slice(0, 44);
-          this.gameService(this.brslservice, 'facilities');
-          this.genericSEO(`Facilities`, `The list of facilities in ${this.gameTitle}.`);
-          this.filteredFacilities = this.pageForm.valueChanges.pipe(
-            startWith(null as Observable<FacilityList[]>),
-            map((search: any) => search ? this.filterT(search.filtertext) : this.facilities.slice())
-          );
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+    this.gameService(this.brslservice, 'facilities');
+    this.genericSEO(`Facilities`, `The list of facilities in ${this.gameTitle}.`);
+    this.pageForm.reset();
+    return this.brslservice.getFacilityList(this.language);
+  }
+  afterAssignment(): void {
+    this.data = this.data.slice(0, 44)
+    this.filteredFacilities = this.pageForm.valueChanges.pipe(
+      startWith(null as Observable<FacilityList[]>),
+      map((search: any) => search ? this.filterT(search.filtertext) : this.data.slice())
+    );
   }
   private filterT(value: string): FacilityList[] {
-    let list: FacilityList[] = this.facilities;
+    let list: FacilityList[] = this.data;
     if (!value) {
       return list;
     }

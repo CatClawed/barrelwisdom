@@ -1,5 +1,5 @@
 <Error *ngIf="error" [errorCode]="error"></Error>
-<ng-container *ngIf="memoria">
+<ng-container *ngIf="data as memoria">
 <Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Memoria', '/'+gameURL+'/memoria/'+language]]" [current]="memoria.name"></Breadcrumb>
 <div class="mx-auto row spacer">
 <div class="{{colset}} card card-body">
@@ -16,7 +16,7 @@
     src="{{imgURL}}memoria/{{memoria.slug}}.webp"
     alt="{{memoria.name}}" />
   <p style="margin-top:1rem;"><b>{{memoria.skill_name}}: </b>
-    {{memoria.skill_desc.replace('{0}', memoria.lv1 + ' ~ ' + memoria.lv5)}}
+    {{memoria.skill_desc.replaceAll('{0}', memoria.lv1 + ' ~ ' + memoria.lv5)}}
   </p>
   <p>{{memoria.lv1}} > {{memoria.lv2}} > {{memoria.lv3}} > {{memoria.lv4}} > {{memoria.lv5}}</p>
   <p *ngIf="memoria.note" [innerHTML]="memoria.note"></p>

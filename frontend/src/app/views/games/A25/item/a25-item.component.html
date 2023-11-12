@@ -1,5 +1,5 @@
 <Error *ngIf="error" [errorCode]="error"></Error>
-<ng-container *ngIf="item">
+<ng-container *ngIf="data as item">
 <Breadcrumb *ngIf="showNav && item.material"  [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Materials', '/'+gameURL+'/items/materials/'+language]]" [current]="item.name"></Breadcrumb>
 <Breadcrumb *ngIf="showNav && !item.material" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Synthesis Items', '/'+gameURL+'/items/synthesis/'+language]]" [current]="item.name"></Breadcrumb>
 <div class="mx-auto row spacer">
@@ -23,7 +23,7 @@
         <li *ngFor="let trait of item.material[0].traits">
           <ng-template #traitPopover>
             <p *ngIf="language == 'en'">{{trait.name_ja}}</p>
-            <p [innerHTML]="trait.desc.replace('{0}', trait.val1 + ' ~ ' + trait.val5).replace('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
+            <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5).replaceAll('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
             <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
           </ng-template>
           <a *ngIf="language == 'en'" [popover]="traitPopover"

@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="error"></Error>
 
-<ng-container *ngIf="category">
+<ng-container *ngIf="data as category">
 <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Category: '+category.name"></Breadcrumb>
 <h1>{{category.name}}</h1>
 <div style="margin-top: 1em;" class="col-md-3" ></div>

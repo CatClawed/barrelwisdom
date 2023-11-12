@@ -9,7 +9,7 @@ import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a25-memorialist.component.html',
@@ -17,9 +17,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class A25MemorialistComponent extends ModalUseComponent {
-  memoria: Memoria[];
   filteredMemoria: Observable<Memoria[]>;
-
   rarity = {
     1: "R",
     2: "SR",
@@ -43,28 +41,21 @@ export class A25MemorialistComponent extends ModalUseComponent {
   }
 
   changeData() {
-    this.modalEvent();
-    this.pageForm.reset()
-    this.a25service.getMemoriaList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: memoria => {
-          this.memoria = memoria;
-          this.gameService(this.a25service, 'memoria');
-          this.genericSEO(`Memoria`, `The list of memoria in ${this.gameTitle}.`);
-          this.filteredMemoria = this.pageForm.valueChanges.pipe(
-            startWith(null as Observable<Memoria[]>),
-            map((search: any) => search ? this.filterT(search.filtertext, search.stats) : this.memoria.slice())
-          );
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+    this.gameService(this.a25service, 'memoria');
+    this.genericSEO(`Memoria`, `The list of memoria in ${this.gameTitle}.`);
+    this.pageForm.reset();
+    return this.a25service.getMemoriaList(this.language);
+  }
+
+  afterAssignment(): void {
+    this.filteredMemoria = this.pageForm.valueChanges.pipe(
+      startWith(null as Observable<Memoria[]>),
+      map((search: any) => search ? this.filterT(search.filtertext, search.stats) : this.data.slice())
+    );
   }
 
   private filterT(value: string, stat: string): Memoria[] {
-    let memorialist: Memoria[] = this.memoria;
+    let memorialist: Memoria[] = this.data;
 
     switch (stat) {
       case "hp": {

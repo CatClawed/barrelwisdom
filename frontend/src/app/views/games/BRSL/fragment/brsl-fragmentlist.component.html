@@ -5,7 +5,7 @@
 <h1>Fragments &amp; Dates</h1>
 <p>Dates give one of two possible fragments. The first listed will always be from two top choices; the second will always be two bottom choices. A handful of fragments come from DLC and a choice you make later in the game.</p>
 <p><b>Note:</b> There may be inaccuracies for anything labelled as DLC.</p>
-<div *ngIf="character && location" class="col-md-10 mx-auto">
+<div class="col-md-10 mx-auto">
    <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
          <mat-form-field class="col-md-12" appearance="outline">
@@ -18,18 +18,22 @@
           <mat-label>Character</mat-label>
           <mat-select matNativeControl formControlName="character" disableOptionCentering="true">
             <mat-option value="Any" selected>Any</mat-option>
-            <mat-option *ngFor="let char of character" value="{{char.name}}">
+            <ng-container *ngIf="data">
+              <mat-option *ngFor="let char of data.character" value="{{char.name}}">
                 {{char.name}}
-            </mat-option>
+              </mat-option>
+            </ng-container>
           </mat-select>
        </mat-form-field>
        <mat-form-field class="col-md-4" appearance="outline">
           <mat-label>Location</mat-label>
           <mat-select matNativeControl formControlName="location" disableOptionCentering="true">
             <mat-option value="Any" selected>Any</mat-option>
-            <mat-option *ngFor="let loc of location" value="{{loc.loc}}">
+            <ng-container *ngIf="data">
+              <mat-option *ngFor="let loc of data.location" value="{{loc.loc}}">
                 {{loc.loc}}
-            </mat-option>
+              </mat-option>
+            </ng-container>
           </mat-select>
        </mat-form-field>
       </div>

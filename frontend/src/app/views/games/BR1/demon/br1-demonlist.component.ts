@@ -9,7 +9,7 @@ import { BR1Service } from '@app/views/games/BR1/_services/br1.service';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'br1-demonlist.component.html',
@@ -17,7 +17,6 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class BR1DemonlistComponent extends ModalUseComponent {
-  demons: Demon[];
   filteredDemons: Observable<Demon[]>;
 
   constructor(
@@ -37,27 +36,20 @@ export class BR1DemonlistComponent extends ModalUseComponent {
   }
 
   changeData() {
-    this.modalEvent();
-    this.br1service.getDemonList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: demons => {
-          this.demons = demons;
-          this.gameService(this.br1service, 'demons');
-          this.genericSEO(`Demons`, `The list of demons in ${this.gameTitle}.`);
-          this.filteredDemons = this.pageForm.valueChanges.pipe(
-            startWith(null as Observable<Demon[]>),
-            map((search: any) => search ? this.filterT(search.filtertext) : this.demons.slice())
-          );
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+    this.gameService(this.br1service, 'demons');
+    this.genericSEO(`Demons`, `The list of demons in ${this.gameTitle}.`);
+    return this.br1service.getDemonList(this.language);
+  }
+
+  afterAssignment(): void {
+    this.filteredDemons = this.pageForm.valueChanges.pipe(
+      startWith(null as Observable<Demon[]>),
+      map((search: any) => search ? this.filterT(search.filtertext) : this.data.slice())
+    );
   }
 
   private filterT(value: string): Demon[] {
-    let list: Demon[] = this.demons;
+    let list: Demon[] = this.data;
     if (value) {
       const filterValue = value.toLowerCase();
       return list.filter(demon => {

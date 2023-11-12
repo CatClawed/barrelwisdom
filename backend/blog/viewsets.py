@@ -49,7 +49,7 @@ class MainBlogViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
     search_fields = ['title','body']
     ordering_fields = ['created']
-    filterset_fields = ['slugtitle', 'section', 'tags']
+    filterset_fields = ['slugtitle', 'section', 'tags__slugname']
     pagination_class = LimitOffsetPagination
     lookup_field = 'slugname'
 
@@ -71,6 +71,12 @@ class MainBlogViewSet(viewsets.ModelViewSet):
             raise Http404
         serializer = MainBlogSerializer(queryset)
         return Response(serializer.data)
+
+    def list(self, request, *args, **kwargs):
+        response = super().list(request, args, kwargs)
+        if request.query_params.get('tags__slugname'):
+            response.data['tagname'] = Tags.objects.get(slugname=request.query_params.get('tags__slugname')).name # Or wherever you get this values from
+        return response
     
 class NewCommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()

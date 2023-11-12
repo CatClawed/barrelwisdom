@@ -26,8 +26,7 @@ export abstract class ModalUseComponent extends FilterableComponent {
         protected router: Router,
         protected route: ActivatedRoute,
         protected location: Location,
-        protected seoService: SeoService
-    ) {
+        protected seoService: SeoService) {
         super(destroy$, route, seoService);
     }
 
@@ -53,6 +52,7 @@ export abstract class ModalUseComponent extends FilterableComponent {
             }
         }
         this.selected = slug;
+        this.modalEvent();
         this.location.go(`${this.gameURL}/${this.section}/${slug}/${this.language}`);
         this.modalRef = this.modalService.show(template);
         this.modalRef.onHide
@@ -62,6 +62,7 @@ export abstract class ModalUseComponent extends FilterableComponent {
                     this.location.go(`${this.gameURL}/${this.section}/${this.language}`);
                     this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
                 }
+                this.modalLink.unsubscribe();
             })
     }
 
@@ -75,6 +76,7 @@ export abstract class ModalUseComponent extends FilterableComponent {
             }
         }
         this.selected = slug;
+        this.modalEvent();
         this.location.go(`${this.gameURL}/${destination}/${slug}/${this.language}`);
         this.modalRef = this.modalService.show(template);
         this.modalRef.onHide
@@ -84,6 +86,7 @@ export abstract class ModalUseComponent extends FilterableComponent {
                     this.location.go(`${this.gameURL}/${this.section}/${this.language}`);
                     this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
                 }
+                this.modalLink.unsubscribe();
             })
     }
 }

@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, TemplateRef } from '@angular/core';
+import { Component, effect } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
@@ -17,11 +17,11 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class A22EffectlistComponent extends ModalUseComponent {
-  effects: Effect[];
   filteredEffects: Observable<Effect[]>;
   normal = false;
   ev = false;
   forge = false;
+  kind: string;
 
   constructor(
     protected modalService: BsModalService,
@@ -36,82 +36,48 @@ export class A22EffectlistComponent extends ModalUseComponent {
     super(modalService, destroy$, router, route, location, seoService);
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
-      type: ''
+      type: '1'
     })
+    this.route.data.pipe(takeUntil(this.destroy$)).subscribe(data => this.kind = data.type)
   }
 
-  changeData(): void {
-    this.modalEvent();
-    this.route.data
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(data => {
+  changeData() {
+    this.pageForm.reset();
+    switch (this.kind) {
+      case "normal": {
+        this.normal = true;
         this.gameService(this.a22service, 'effects');
-        if (data.type == "normal") {
-          this.normal = true;
-          this.seoURL = `${this.gameURL}/effects/${this.language}`;
-          this.seoTitle = `Effects - ${this.gameTitle}`;
-          this.seoDesc = `The list of effects in ${this.gameTitle}.`
-        }
-        if (data.type == "forge") {
-          this.forge = true;
-          this.seoURL = `${this.gameURL}/forge-effects/${this.language}`;
-          this.seoTitle = `Forge Effects - ${this.gameTitle}`;
-          this.seoDesc = `The list of forge effects in ${this.gameTitle}.`
-        }
-        if (data.type == "ev") {
-          this.ev = true;
-          this.seoURL = `${this.gameURL}/ev-effects/${this.language}`;
-          this.seoTitle = `EV Effects - ${this.gameTitle}`;
-          this.seoDesc = `The list of EV effects in ${this.gameTitle}.`
-        }
-        this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-        this.getEffects();
-      });
+        this.genericSEO('Effects', `The list of effects in ${this.gameTitle}.`)
+        break;
+      }
+      case "forge": {
+        this.forge = true;
+        this.gameService(this.a22service, 'forge-effects');
+        this.genericSEO('Forge Effects', `The list of forge effects in ${this.gameTitle}.`)
+        break;
+      }
+      case "ev": {
+        this.ev = true;
+        this.gameService(this.a22service, 'ev-effects');
+        this.genericSEO('EV Effects', `The list of EV effects in ${this.gameTitle}.`)
+        break;
+      }
+    }
+    return this.a22service.getEffectList(this.language, this.ev, this.forge);
   }
 
-  getEffects() {
-    this.a22service.getEffectList(this.language, this.ev, this.forge)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: effects => {
-          this.effects = effects;
-          this.filteredEffects = this.pageForm.valueChanges.pipe(
-            startWith(null as Observable<Effect[]>),
-            map((search: any) => search ? this.filterT(search.filtertext, search.type) : this.effects.slice())
-          );
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+  afterAssignment(): void {
+    this.filteredEffects = this.pageForm.valueChanges.pipe(
+      startWith(null as Observable<Effect[]>),
+      map((search: any) => search ? this.filterT(search.filtertext, search.type) : this.data.slice())
+    );
   }
 
   private filterT(value: string, type: string): Effect[] {
-    let effectlist: Effect[];
-    switch (type) {
-      case "2":
-        effectlist = this.effects.filter(effect => effect.effsub == 'Weapon');
-        break;
-      case "3":
-        effectlist = this.effects.filter(effect => effect.effsub == "Armor");
-        break;
-      case "4":
-        effectlist = this.effects.filter(effect => effect.effsub == "Accessory");
-        break;
-      case "5":
-        effectlist = this.effects.filter(effect => effect.effsub == "Attack");
-        break;
-      case "6":
-        effectlist = this.effects.filter(effect => effect.effsub == "Material");
-        break;
-      case "7":
-        effectlist = this.effects.filter(effect => effect.effsub == "Heal");
-        break;
-      default:
-        effectlist = this.effects;
-        break;
+    let effectlist: Effect[] = this.data;
+    if (type != "1") {
+      effectlist = effectlist.filter(effect => effect.effsub == type)
     }
-
     if (!value) {
       return effectlist;
     }
@@ -119,28 +85,5 @@ export class A22EffectlistComponent extends ModalUseComponent {
     return effectlist.filter(effect => {
       return (effect.desc) ? effect.name.toLowerCase().includes(filterValue) || effect.desc.toLowerCase().includes(filterValue) : effect.name.toLowerCase().includes(filterValue)
     });
-  }
-
-  openModal(template: TemplateRef<any>, slug: string, event?): void {
-    if (event) {
-      if(event.ctrlKey) {
-        return;
-      }
-      else {
-        event.preventDefault()
-      }
-    }
-    this.selected = slug;
-    this.location.go(`${this.gameURL}/effects/` + slug + "/" + this.language);
-    this.modalRef = this.modalService.show(template);
-    this.modalRef.onHide
-    .pipe(takeUntil(this.destroy$))
-    .subscribe((reason: string | any) => {
-      if(reason != "link") {
-        if(this.normal) this.location.go(`${this.gameURL}/effects/` + this.language);
-        if(this.forge) this.location.go(`${this.gameURL}/forge-effects/` + this.language);
-        if(this.ev) this.location.go(`${this.gameURL}/ev-effects/` + this.language);
-        this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-      }})
   }
 }

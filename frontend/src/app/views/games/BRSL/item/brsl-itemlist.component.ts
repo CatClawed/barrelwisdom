@@ -4,12 +4,12 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { ItemList, NameOnly } from '@app/views/games/BRSL/_services/brsl.interface';
+import { ItemList } from '@app/views/games/BRSL/_services/brsl.interface';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { Observable } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { Observable, forkJoin } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'brsl-itemlist.component.html',
@@ -17,8 +17,6 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class BRSLItemlistComponent extends ModalUseComponent {
-  items: ItemList[];
-  categories: NameOnly[];
   filteredItems: Observable<ItemList[]>;
 
   constructor(
@@ -38,47 +36,25 @@ export class BRSLItemlistComponent extends ModalUseComponent {
     })
   }
 
-  changeData(): void {
-    this.modalEvent();
-    this.pageForm.reset()
-    this.getItems();
-    this.getCategories();
+  changeData() {
+    this.gameService(this.brslservice, 'items');
+    this.genericSEO(`Items`, `The list of items in ${this.gameTitle}.`);
+    this.pageForm.reset();
+    return forkJoin({
+      items: this.brslservice.getItemList(this.language),
+      categories: this.brslservice.getCategoryList(this.language)
+    })
   }
 
-  getItems() {
-    this.brslservice.getItemList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: items => {
-          this.items = items;
-          this.gameService(this.brslservice, 'items');
-          this.genericSEO(`Items`, `The list of items in ${this.gameTitle}.`);
-          this.filteredItems = this.pageForm.valueChanges.pipe(
-            startWith(null as Observable<ItemList[]>),
-            map((search: any) => search ? this.filterT(search.filtertext, search.type, search.category) : this.items.slice())
-          );
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
-  }
-
-  getCategories() {
-    this.brslservice.getCategoryList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: categories => {
-          this.categories = categories;
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+  afterAssignment(): void {
+    this.filteredItems = this.pageForm.valueChanges.pipe(
+      startWith(null as Observable<ItemList[]>),
+      map((search: any) => search ? this.filterT(search.filtertext, search.type, search.category) : this.data.items.slice())
+    );
   }
 
   private filterT(value: string, type: string, category: string): ItemList[] {
-    let list: ItemList[] = this.items;
+    let list: ItemList[] = this.data.items;
     if (type != 'Any') {
       list = list.filter(item => item.itemtype == type);
     }

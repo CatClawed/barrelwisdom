@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="error"></Error>
 
-<ng-container *ngIf="filteredTraits">
+<ng-container *ngIf="!error">
 <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Traits"></Breadcrumb>
 <h1>Traits</h1>
 <div class="col-md-10 mx-auto">

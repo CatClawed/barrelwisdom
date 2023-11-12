@@ -1,8 +1,9 @@
 <Error *ngIf="error" [errorCode]="error"></Error>
-<ng-container *ngIf="update">
-<Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Home"></Breadcrumb>
-<h1>Home</h1>
-<div *ngIf="showNav" class="col-md-3" ></div>
+<ng-container *ngIf="!error">
+  <Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Home"></Breadcrumb>
+  <h1>Home</h1>
+</ng-container>
+<ng-container *ngIf="data as update">
 <p><time dateTime="{{update.time}}">Last Updated: {{update.time | date:'mediumDate' }} </time></p>
 <ng-container *ngIf="update.characters">
   <h2>Characters</h2>

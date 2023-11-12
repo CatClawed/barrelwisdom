@@ -12,8 +12,6 @@ import { takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 export class A12CategoryComponent extends SingleComponent {
-  category: CategoryData;
-
   constructor(
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
@@ -22,19 +20,12 @@ export class A12CategoryComponent extends SingleComponent {
     super(destroy$, route, seoService);
   }
 
-  changeData(): void {
-    this.a12service.getCategory(this.slug, this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: category => {
-          this.error = ``;
-          this.category = category;
-          this.gameService(this.a12service, 'categories');
-          this.genericSEO(this.category.name, `All items in ${this.category.name}`);
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+  changeData() {
+    this.gameService(this.a12service, 'categories');
+    return this.a12service.getCategory(this.slug, this.language);
+  }
+
+  afterAssignment(): void {
+    this.genericSEO(this.data.name, `All items in ${this.data.name}`);
   }
 } 

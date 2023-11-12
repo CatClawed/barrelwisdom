@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="error"></Error>
 
-<ng-container *ngIf="chara">
+<ng-container *ngIf="data as chara">
 <Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Characters', '/'+gameURL+'/characters/'+language]]" [current]="chara.name + ' ' + chara.title"></Breadcrumb>
 <div class="mx-auto row spacer">
 <div class="{{colset}} card card-body">
@@ -136,7 +136,7 @@
           <li *ngFor="let passive of chara.passives">
             {{passive.name}}
             <ul>
-              <li [innerHTML]="passive.desc.replace('{0}', passive.val/100)"></li>
+              <li [innerHTML]="passive.desc.replaceAll('{0}', passive.val/100)"></li>
             </ul>
           </li>
         </ul>
@@ -147,7 +147,7 @@
 </div>
 <ng-template #traitPopover let-trait="trait">
   <p *ngIf="language == 'en'">{{trait.name_ja}}</p>
-  <p [innerHTML]="trait.desc.replace('{0}', trait.val1 + ' ~ ' + trait.val5).replace('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
+  <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5).replaceAll('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
   <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
 </ng-template>
 <div *ngIf="showNav" class="col-md-3" ></div>

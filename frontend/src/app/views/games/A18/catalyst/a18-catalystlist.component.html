@@ -18,7 +18,7 @@
     <span class="sr-only">Loading...</span>
   </div>
 </div>
-<div *ngIf="filteredCatalysts" class="item-grid">
+<div class="item-grid">
 <div *ngFor="let cat of filteredCatalysts | async; trackBy:identify" class="card card-body">
   <h4 class="card-title card-icon-space">
     <a routerLink="/{{gameURL}}/items/{{cat.item.slug}}/{{language}}">{{cat.item.name}}</a>

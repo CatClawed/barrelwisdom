@@ -1,6 +1,5 @@
 <Error *ngIf="error" [errorCode]="error"></Error>
-
-<ng-container *ngIf="seeds">
+<ng-container *ngIf="!error">
     <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Seeds"></Breadcrumb>
     <h1>Seeds</h1>
     <div style="margin-top: 1em;" class="col-md-3" ></div>
@@ -12,6 +11,8 @@
             traits that have at least 50 grade. What's grade? A hidden value every trait has; the values are listed <a routerLink="/{{gameURL}}/traits/{{language}}">here</a>.</li>
         <li>Need more greenhouses? Grow more seeds. I didn't count, but it should be less than 20 for all four. Story progress matters also.</li>
     </ul>
+</ng-container>
+<ng-container *ngIf="data as seeds">
     <div class="mx-auto row">
         <div class="col-md-6">
             <table class="tbl border table-shrink">

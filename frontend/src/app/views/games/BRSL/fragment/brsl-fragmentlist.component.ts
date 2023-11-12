@@ -3,11 +3,11 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { Event, NameLink, SchoolLocation } from '@app/views/games/BRSL/_services/brsl.interface';
+import { Event } from '@app/views/games/BRSL/_services/brsl.interface';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
 import { FilterableComponent } from '@app/views/games/_prototype/filterable.component';
-import { Observable } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { Observable, forkJoin } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'brsl-fragmentlist.component.html',
@@ -15,9 +15,6 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class BRSLFragmentComponent extends FilterableComponent {
-  event: Event[];
-  character: NameLink[];
-  location: SchoolLocation[];
   filteredEvents: Observable<Event[]>;
 
   constructor(
@@ -36,47 +33,26 @@ export class BRSLFragmentComponent extends FilterableComponent {
   }
 
   changeData() {
-    this.pageForm.reset()
-    this.brslservice.getCharacterList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: f => {
-          this.character = f.slice(2);
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
-    this.brslservice.getSchoolLocationList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: f => {
-          this.location = f;
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
-    this.brslservice.getFragmentList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: fragment => {
-          this.event = fragment;
-          this.gameService(this.brslservice, 'fragments-and-dates');
-          this.genericSEO(`Fragments & Dates`, `All fragments and dates in ${this.gameTitle}.`);
-          this.filteredEvents = this.pageForm.valueChanges.pipe(
-            startWith(null as Observable<Event[]>),
-            map((search: any) => search ? this.filterT(search.filtertext, search.character, search.location) : this.event.slice())
-          );
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+    this.gameService(this.brslservice, 'fragments-and-dates');
+    this.genericSEO(`Fragments & Dates`, `All fragments and dates in ${this.gameTitle}.`);
+    this.pageForm.reset();
+    return forkJoin({
+      character: this.brslservice.getCharacterList(this.language),
+      location: this.brslservice.getSchoolLocationList(this.language),
+      fragment: this.brslservice.getFragmentList(this.language)
+    })
+  }
+
+  afterAssignment(): void {
+    this.data.character = this.data.character.slice(2);
+    this.filteredEvents = this.pageForm.valueChanges.pipe(
+      startWith(null as Observable<Event[]>),
+      map((search: any) => search ? this.filterT(search.filtertext, search.character, search.location) : this.data.fragment.slice())
+    );
   }
 
   private filterT(value: string, char: string, loc: string): Event[] {
-    let list: Event[] = this.event;
+    let list: Event[] = this.data.fragment;
     if (char != "Any") {
       list = list.filter(evt => (evt.character) ? evt.character.name == char : false)
     }

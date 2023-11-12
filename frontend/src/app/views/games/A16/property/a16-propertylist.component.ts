@@ -9,14 +9,13 @@ import { A16Service } from '@app/views/games/A16/_services/a16.service';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a16-propertylist.component.html',
   providers: [DestroyService]
 })
 export class A16PropertylistComponent extends ModalUseComponent {
-  properties: Property[];
   filteredProperties: Observable<Property[]>;
 
   constructor(
@@ -27,8 +26,7 @@ export class A16PropertylistComponent extends ModalUseComponent {
     protected location: Location,
     protected seoService: SeoService,
     private formBuilder: UntypedFormBuilder,
-    private a16service: A16Service,
-  ) {
+    private a16service: A16Service) {
     super(modalService, destroy$, router, route, location, seoService);
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -37,43 +35,35 @@ export class A16PropertylistComponent extends ModalUseComponent {
   }
 
   changeData() {
-    this.modalEvent();
+    this.gameService(this.a16service, 'properties');
+    this.genericSEO(`Properties`, `The list of properties in ${this.gameTitle}.`);
     this.pageForm.reset();
-    this.a16service.getPropertyList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: properties => {
-          this.properties = properties;
-          this.gameService(this.a16service, 'properties');
-          this.genericSEO(`Properties`, `The list of properties in ${this.gameTitle}.`);
-          this.filteredProperties = this.pageForm.valueChanges.pipe(
-            startWith(null as Observable<Property[]>),
-            map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.properties.slice())
-          );
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+    return this.a16service.getPropertyList(this.language);
+  }
+  afterAssignment(): void {
+    this.filteredProperties = this.pageForm.valueChanges.pipe(
+      startWith(null as Observable<Property[]>),
+      map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.data.slice())
+    );
   }
 
   private filterT(value: string, transfer: string): Property[] {
-    let propertylist: Property[] = this.properties;
+    let propertylist: Property[] = this.data;
     switch (transfer) {
       case "2":
-        propertylist = this.properties.filter(property => property.bomb);
+        propertylist = propertylist.filter(property => property.bomb);
         break;
       case "3":
-        propertylist = this.properties.filter(property => property.heal);
+        propertylist = propertylist.filter(property => property.heal);
         break;
       case "5":
-        propertylist = this.properties.filter(property => property.weapon);
+        propertylist = propertylist.filter(property => property.weapon);
         break;
       case "6":
-        propertylist = this.properties.filter(property => property.armor);
+        propertylist = propertylist.filter(property => property.armor);
         break;
       case "7":
-        propertylist = this.properties.filter(property => property.accessory);
+        propertylist = propertylist.filter(property => property.accessory);
         break;
     }
     if (value) {

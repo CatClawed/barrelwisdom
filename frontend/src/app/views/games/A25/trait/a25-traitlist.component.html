@@ -17,18 +17,20 @@
             <mat-option value="any" selected>
               Any
             </mat-option>
-            <mat-option *ngFor="let trans of transfer" [value]="trans.slug">
-              {{trans.name}}
-            </mat-option>
-            <mat-option value="equipment" selected>
-              {{language == 'en' ? 'Equipment' : '装備'}}
-            </mat-option>
+            <ng-container *ngIf="data">
+              <mat-option *ngFor="let trans of data.transfer" [value]="trans.slug">
+                {{trans.name}}
+              </mat-option>
+              <mat-option value="equipment" selected>
+                {{language == 'en' ? 'Equipment' : '装備'}}
+              </mat-option>
+            </ng-container>
           </mat-select>
         </mat-form-field>
       </div>
     </form>
   </div>
-<div *ngIf="filteredTraits" class="item-grid">
+<div class="item-grid">
 <div *ngFor="let trt of filteredTraits | async;  trackBy:identify" class="card card-body">
   <div style="height:100%;">
     <div class="flex">
@@ -48,7 +50,7 @@
         <img *ngIf="!trt.trans_wep" style="width:3rem;" src="{{imgURL}}svg/combat.svg"    alt="combat"/>
       </div>
     </div>
-    <p style="padding-top:1rem;" [innerHTML]="trt.desc.replace('{0}', trt.val[0] + ' ~ ' + trt.val[4]).replace('{1}', trt.val[0] + ' ~ ' + trt.val[4])"></p>
+    <p style="padding-top:1rem;" [innerHTML]="trt.desc.replaceAll('{0}', trt.val[0] + ' ~ ' + trt.val[4]).replaceAll('{1}', trt.val[0] + ' ~ ' + trt.val[4])"></p>
     <p>
       {{trt.val[0]}} > {{trt.val[1]}} > {{trt.val[2]}} > {{trt.val[3]}} > {{trt.val[4]}}
     </p>

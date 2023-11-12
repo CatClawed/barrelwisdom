@@ -1,44 +1,70 @@
 import { Location } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { BlogPaginator } from '@app/interfaces/blog';
 import { BlogService } from '@app/services/blog.service';
+import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { TagService } from '@app/services/tag.service';
+import { catchError, mergeMap, of, takeUntil } from 'rxjs';
 
 @Component({
   templateUrl: 'home.component.html',
-  styleUrls: ['home.scss']
+  styleUrls: ['home.scss'],
+  providers: [DestroyService]
 })
 
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
   blog: BlogPaginator;
   path: number;
   limit: number = 10;
   error: string = '';
-  tagName: string;
-  tagID: number;
-  rt;
   totalPages: number;
   baseUrl: string;
 
   constructor(
+    private readonly destroy$: DestroyService,
     private router: Router,
     private route: ActivatedRoute,
     private blogService: BlogService,
     private location: Location,
-    private tagService: TagService,
     protected seoService: SeoService) {
-    this.rt = router.events.subscribe(val => {
-      if (val instanceof NavigationEnd) {
-        this.initializePage();
-      }
-    });
   }
 
   ngOnInit(): void {
-    this.seoService.SEOSettings('', '', 'The source for all things Atelier.', '/media/blog/placeholder.webp');
     this.initializePage()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: data => {
+          this.blog = data
+          this.error = ``;
+          this.totalPages = Math.ceil(this.blog.count / this.limit)
+        },
+        error: error => {
+          this.error = `${error.status}`
+        }
+      })
+
+    this.seoService.SEOSettings('', '', 'The source for all things Atelier.', '/media/blog/placeholder.webp');
+    this.router.events.pipe(
+        mergeMap(val => {
+          if (val instanceof NavigationEnd) {
+            return this.initializePage();
+          }
+          return of(undefined)
+        }),
+        catchError(error => {
+          this.blog = null;
+          this.error = `${error.status}`;
+          return of(undefined)
+        }),
+        takeUntil(this.destroy$)
+      ).subscribe(data => {
+        if (data) {
+          this.blog = data;
+          this.error = ``;
+          this.totalPages = Math.ceil(this.blog.count / this.limit)
+        }
+      });
   }
 
   initializePage() {
@@ -56,43 +82,10 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.path = 1;
       this.baseUrl = this.location.path()
     }
-    if (this.route.snapshot.params.tagname) {
-      const tag = this.route.snapshot.params.tagname;
-      this.tagService.getTagByName(tag)
-        .subscribe({
-          next: tag => {
-            this.tagName = tag.name;
-            this.tagID = tag.id;
-            this.getBlog(this.path, this.limit);
-          },
-          error: error => {
-            this.error = `${error.status}`;
-          }
-        });
-    }
-    else {
-      this.getBlog(this.path, this.limit);
-    }
+    return this.blogService.getMainPageBlogs(this.path, this.limit, this.route.snapshot.params.tagname)
   }
 
   changePage(e) {
     this.router.navigateByUrl(`${this.baseUrl}/${e.pageIndex + 1}`)
-  }
-
-  getBlog(num: number, limit: number): void {
-    this.blogService.getMainPageBlogs(num, limit, this.tagID ? `${this.tagID}` : '')
-      .subscribe({
-        next: blog => {
-          this.blog = blog;
-          this.totalPages = Math.ceil(blog.count / this.limit)
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
-  }
-
-  ngOnDestroy() {
-    this.rt.unsubscribe();
   }
 }

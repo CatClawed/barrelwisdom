@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { Property } from '@app/views/games/A16/_services/a16.interface';
 import { A16Service } from '@app/views/games/A16/_services/a16.service';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a16-property.component.html',
@@ -13,8 +11,6 @@ import { takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 export class A16PropertyComponent extends SingleComponent {
-  property: Property;
-
   constructor(
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
@@ -23,19 +19,11 @@ export class A16PropertyComponent extends SingleComponent {
     super(destroy$, route, seoService);
   }
 
-  changeData(): void {
-    
-    this.a16service.getProperty(this.slug, this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: property => {
-          this.property = property;
-          this.gameService(this.a16service, 'properties');
-          this.genericSEO(this.property.name, this.property.desc);
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+  changeData() {
+    this.gameService(this.a16service, 'properties');
+    return this.a16service.getProperty(this.slug, this.language);
+  }
+  afterAssignment(): void {
+    this.genericSEO(this.data.name, this.data.desc);
   }
 } 

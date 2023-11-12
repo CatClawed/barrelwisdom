@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
@@ -8,7 +8,8 @@ import { SeoService } from '@app/services/seo.service';
     providers: [DestroyService]
 })
 
-export abstract class DataComponent {
+export abstract class DataComponent implements OnInit {
+    data: any
     error: string = '';
     section: string;
     language = "";
@@ -26,9 +27,12 @@ export abstract class DataComponent {
     constructor(
         protected readonly destroy$: DestroyService,
         protected route: ActivatedRoute,
-        protected seoService: SeoService
-    ) {
+        protected seoService: SeoService) {
         this.language = this.route.snapshot.params.language;
+    }
+
+    ngOnInit(): void {
+        this.paramWatch();
     }
 
     gameService(service: any, section: string) {
@@ -44,6 +48,8 @@ export abstract class DataComponent {
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     }
 
-    abstract changeData(): void;
-    abstract paramWatch(): void;
+    abstract changeData();
+    abstract paramWatch()
+    // intentionall blank, may be overridden
+    afterAssignment(): void { }
 }

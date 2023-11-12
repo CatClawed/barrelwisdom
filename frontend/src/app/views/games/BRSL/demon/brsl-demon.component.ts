@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { DemonFull } from '@app/views/games/BRSL/_services/brsl.interface';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'brsl-demon.component.html',
@@ -13,8 +11,6 @@ import { takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 export class BRSLDemonComponent extends SingleComponent {
-  demon: DemonFull;
-
   constructor(
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
@@ -22,20 +18,13 @@ export class BRSLDemonComponent extends SingleComponent {
     protected brslservice: BRSLService) {
     super(destroy$, route, seoService);
   }
-  changeData(): void {
-    this.brslservice.getDemon(this.slug, this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: demon => {
-          this.error = ``;
-          this.demon = demon;
-          this.gameService(this.brslservice, 'demons');
-          this.seoImage = `${this.imgURL}${this.section}/${this.demon.slug}.webp`
-          this.genericSEO(this.demon.name, this.demon.desc);
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+  changeData() {
+    this.gameService(this.brslservice, 'demons');
+    return this.brslservice.getDemon(this.slug, this.language);
+  }
+
+  afterAssignment(): void {
+    this.seoImage = `${this.imgURL}${this.section}/${this.data.slug}.webp`
+    this.genericSEO(this.data.name, this.data.desc);
   }
 } 

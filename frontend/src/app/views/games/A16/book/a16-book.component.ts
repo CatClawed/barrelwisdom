@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { Book } from '@app/views/games/A16/_services/a16.interface';
 import { A16Service } from '@app/views/games/A16/_services/a16.service';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a16-book.component.html',
@@ -13,8 +11,6 @@ import { takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 export class A16BookComponent extends SingleComponent {
-  book: Book;
-
   constructor(
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
@@ -23,20 +19,13 @@ export class A16BookComponent extends SingleComponent {
     super(destroy$, route, seoService);
   }
 
-  changeData(): void {
-    this.a16service.getBook(this.slug, this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: book => {
-          this.error = ``;
-          this.book = book;
-          this.gameService(this.a16service, 'recipe-books');
-          this.seoImage = `${this.imgURL}items/${this.book.slugname}.webp`
-          this.genericSEO(this.book.name, this.book.desc);
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+  changeData() {
+    this.gameService(this.a16service, 'recipe-books');
+    return this.a16service.getBook(this.slug, this.language);
+  }
+
+  afterAssignment(): void {
+    this.seoImage = `${this.imgURL}items/${this.data.slugname}.webp`
+    this.genericSEO(this.data.name, this.data.desc);
   }
 } 

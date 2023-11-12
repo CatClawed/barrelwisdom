@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { Trait } from '@app/views/games/A22/_services/a22.interface';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a22-trait.component.html',
@@ -13,8 +11,6 @@ import { takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 export class A22TraitComponent extends SingleComponent {
-  trait: Trait;
-
   constructor(
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
@@ -22,19 +18,11 @@ export class A22TraitComponent extends SingleComponent {
     private a22service: A22Service) {
     super(destroy$, route, seoService);
   }
-  changeData(): void {
-    
-    this.a22service.getTrait(this.slug, this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: trait => {
-          this.trait = trait;
-          this.gameService(this.a22service, 'traits');
-          this.genericSEO(this.trait.name, this.trait.desc);
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+  changeData() {
+    this.gameService(this.a22service, 'traits');
+    return this.a22service.getTrait(this.slug, this.language);
+  }
+  afterAssignment(): void {
+    this.genericSEO(this.data.name, this.data.desc);
   }
 } 

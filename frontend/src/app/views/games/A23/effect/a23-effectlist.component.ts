@@ -9,7 +9,7 @@ import { A23Service } from '@app/views/games/A23/_services/a23.service';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a23-effectlist.component.html',
@@ -17,7 +17,6 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class A23EffectlistComponent extends ModalUseComponent {
-  effects: Effect[];
   filteredEffects: Observable<Effect[]>;
 
   constructor(
@@ -37,29 +36,21 @@ export class A23EffectlistComponent extends ModalUseComponent {
   }
 
   changeData() {
-    this.modalEvent();
-    this.pageForm.reset()
-    this.a23service.getEffectList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: effects => {
-          this.error = ``;
-          this.effects = effects;
-          this.gameService(this.a23service, 'effects');
-          this.genericSEO(`Effects`, `The list of effects in ${this.gameTitle}.`);
-          this.filteredEffects = this.pageForm.valueChanges.pipe(
-            startWith(null as Observable<Effect[]>),
-            map((search: any) => search ? this.filterT(search.filtertext) : this.effects.slice())
-          );
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+    this.gameService(this.a23service, 'effects');
+    this.genericSEO(`Effects`, `The list of effects in ${this.gameTitle}.`);
+    this.pageForm.reset();
+    return this.a23service.getEffectList(this.language);
+  }
+
+  afterAssignment(): void {
+    this.filteredEffects = this.pageForm.valueChanges.pipe(
+      startWith(null as Observable<Effect[]>),
+      map((search: any) => search ? this.filterT(search.filtertext) : this.data.slice())
+    );
   }
 
   private filterT(value: string): Effect[] {
-    let effectlist: Effect[] = this.effects;
+    let effectlist: Effect[] = this.data;
 
     if (!value) {
       return effectlist;

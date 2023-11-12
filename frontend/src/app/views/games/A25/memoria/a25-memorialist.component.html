@@ -22,8 +22,8 @@
       </div>
     </form>
   </div>
-  <div *ngIf="filteredMemoria" class="item-grid spacer">
-    <div *ngFor="let memoria of filteredMemoria | async;  trackBy:identify" style="margin:auto;">
+  <div class="item-grid spacer">
+    <div *ngFor="let memoria of filteredMemoria | async;  trackBy:identify" style="margin-left:auto;margin-right:auto;">
       <div style="aspect-ratio:512/410;display:flex;max-height:410px;margin:auto;">
         <a style="height:100%;aspect-ratio:256/410;"
           (click)="openModal(memoriaModal, memoria.slug, $event);"
@@ -63,7 +63,7 @@
           </tr>
         </table>
       </div>
-      <p style="max-width:512px;">{{memoria.skill_desc.replace('{0}', memoria.lv1 + ' ~ ' + memoria.lv5)}}</p>
+      <p style="max-width:512px;">{{memoria.skill_desc.replaceAll('{0}', memoria.lv1 + ' ~ ' + memoria.lv5)}}</p>
       <p *ngIf="memoria.note" [innerHTML]="memoria.note"></p>
     </div>
     <ng-template #memoriaModal>

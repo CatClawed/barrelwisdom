@@ -9,7 +9,7 @@ import { A22Service } from '@app/views/games/A22/_services/a22.service';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a22-monsterlist.component.html',
@@ -17,7 +17,6 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class A22MonsterlistComponent extends ModalUseComponent {
-  monsters: Monster[];
   filteredMonsters: Observable<Monster[]>;
 
   constructor(
@@ -33,87 +32,40 @@ export class A22MonsterlistComponent extends ModalUseComponent {
     super(modalService, destroy$, router, route, location, seoService);
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
-      type: ''
+      type: '1'
     })
   }
 
   changeData() {
-    this.modalEvent();
+    this.gameService(this.a22service, 'monsters');
+    this.genericSEO(`Monsters`, `The list of monsters in ${this.gameTitle}.`);
     this.pageForm.reset();
-    this.a22service.getMonsterList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: monsters => {
-          this.monsters = monsters;
-          this.gameService(this.a22service, 'monsters');
-          this.genericSEO(`Monsters`, `The list of monsters in ${this.gameTitle}.`);
-          this.filteredMonsters = this.pageForm.valueChanges.pipe(
-            startWith(null as Observable<Monster[]>),
-            map((search: any) => search ? this.filterT(search.filtertext, search.type) : this.monsters.slice())
-          );
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+    return this.a22service.getMonsterList(this.language);
+  }
+
+  afterAssignment(): void {
+    this.filteredMonsters = this.pageForm.valueChanges.pipe(
+      startWith(null as Observable<Monster[]>),
+      map((search: any) => search ? this.filterT(search.filtertext, search.type) : this.data.slice())
+    );
   }
 
   private filterT(value: string, type: string): Monster[] {
     let list: Monster[];
+
     switch (type) {
-      case "2":
-        list = this.monsters.filter(mon => mon.montype == 'puni');
+      case "1":
+        list = this.data;
         break;
-      case "3":
-        list = this.monsters.filter(mon => mon.montype == "weasel");
-        break;
-      case "4":
-        list = this.monsters.filter(mon => mon.montype == "spirit");
-        break;
-      case "5":
-        list = this.monsters.filter(mon => mon.montype == "golem");
-        break;
-      case "6":
-        list = this.monsters.filter(mon => mon.montype == "sheep");
-        break;
-      case "7":
-        list = this.monsters.filter(mon => mon.montype == "knight");
-        break;
-      case "8":
-        list = this.monsters.filter(mon => mon.montype == "scorpion");
-        break;
-      case "9":
-        list = this.monsters.filter(mon => mon.montype == "hedgehog");
-        break;
-      case "10":
-        list = this.monsters.filter(mon => mon.montype == "wyrm");
-        break;
-      case "11":
-        list = this.monsters.filter(mon => mon.montype == "roadrunner");
-        break;
-      case "12":
-        list = this.monsters.filter(mon => mon.montype == "beetle");
-        break;
-      case "13":
-        list = this.monsters.filter(mon => mon.montype == "shark");
-        break;
-      case "14":
-        list = this.monsters.filter(mon => mon.size == "Small");
-        break;
-      case "15":
-        list = this.monsters.filter(mon => mon.size == "Medium");
-        break;
-      case "16":
-        list = this.monsters.filter(mon => mon.size == "Large");
-        break;
-      case "17":
-        list = this.monsters.filter(mon => mon.montype == "boss");
+      case "Small":
+      case "Medium":
+      case "Large":
+        list = this.data.filter(mon => mon.size == type);
         break;
       default:
-        list = this.monsters;
+        list = this.data.filter(mon => mon.montype == type);
         break;
     }
-
     if (!value) {
       return list;
     }

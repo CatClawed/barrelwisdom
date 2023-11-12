@@ -14,12 +14,14 @@
           <mat-label>Type</mat-label>
           <mat-select matNativeControl formControlName="kind">
             <mat-option value="Any">Any</mat-option>
-            <mat-option *ngFor="let type of combat_type" value="{{type.slug}}">
-              {{type.name}}
-            </mat-option>
-            <mat-option *ngFor="let type of equipment_type" value="{{type.slug}}">
+            <ng-container *ngIf="data">
+              <mat-option *ngFor="let type of data.combat_type" value="{{type.slug}}">
                 {{type.name}}
               </mat-option>
+              <mat-option *ngFor="let type of data.equipment_type" value="{{type.slug}}">
+                  {{type.name}}
+              </mat-option>
+            </ng-container>
           </mat-select>
         </mat-form-field>
       </div>
@@ -40,7 +42,7 @@
       </div>
     </form>
   </div>
-<div *ngIf="filteredItems" class="item-grid">
+<div class="item-grid">
 <div *ngFor="let it of filteredItems | async; trackBy:identify" class="card card-body">
   <h4 class="card-title card-icon-space">
     <a (click)="openModal(itemModal, it.slug, $event);" href="/{{gameURL}}/items/synthesis/{{it.slug}}/{{language}}">{{it.name}}</a>    

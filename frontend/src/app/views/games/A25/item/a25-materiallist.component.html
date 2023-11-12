@@ -14,9 +14,11 @@
           <mat-label>Color</mat-label>
           <mat-select matNativeControl formControlName="color">
             <mat-option value="Any">Any</mat-option>
-            <mat-option *ngFor="let color of colors" value="{{color.slug}}">
-              {{color.name}}
-            </mat-option>
+            <ng-container *ngIf="data">
+              <mat-option *ngFor="let color of data.colors" value="{{color.slug}}">
+                {{color.name}}
+              </mat-option>
+            </ng-container>
           </mat-select>
         </mat-form-field>
       </div>
@@ -45,7 +47,7 @@
       </div>
     </form>
   </div>
-<div *ngIf="filteredItems" class="item-grid">
+<div class="item-grid">
 <div *ngFor="let it of filteredItems | async; trackBy:identify" class="card card-body"  style="{{insertStyle(it)}}">
   <h4 class="card-title card-icon-space">
     <a (click)="openModal(itemModal, it.slug, $event);" href="/{{gameURL}}/items/materials/{{it.slug}}/{{language}}">{{it.name}}</a>    
@@ -63,7 +65,7 @@
     <li *ngFor="let trait of it.material[0].traits">
       <ng-template #traitPopover>
         <p *ngIf="language == 'en'">{{trait.name_ja}}</p>
-        <p [innerHTML]="trait.desc.replace('{0}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
+        <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
         <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
       </ng-template>
       <a *ngIf="language == 'en'" [popover]="traitPopover"

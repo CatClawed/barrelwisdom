@@ -1,8 +1,9 @@
 <Error *ngIf="error" [errorCode]="error"></Error>
-
-<div *ngIf="skills">
-<Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Skills"></Breadcrumb>
-<h1>Skills</h1>
+<ng-container *ngIf="!error">
+  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Skills"></Breadcrumb>
+  <h1>Skills</h1>
+</ng-container>
+<div *ngIf="data as skills">
 <ng-container *ngIf="skills">
     <div class="table-of-contents">
       <b>Table of Contents</b>

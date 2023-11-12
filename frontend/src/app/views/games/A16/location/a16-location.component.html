@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="error"></Error>
 
-<ng-container *ngIf="location">
+<ng-container *ngIf="data as location">
 <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Location: '+location.name"></Breadcrumb>
 <h1>{{location.name}}</h1>
   <div class="table-of-contents">

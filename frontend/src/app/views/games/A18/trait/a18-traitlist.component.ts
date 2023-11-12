@@ -9,7 +9,7 @@ import { A18Service } from '@app/views/games/A18/_services/a18.service';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a18-traitlist.component.html',
@@ -17,7 +17,6 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class A18TraitlistComponent extends ModalUseComponent {
-  traits: Trait[];
   filteredTraits: Observable<Trait[]>;
 
   constructor(
@@ -37,30 +36,23 @@ export class A18TraitlistComponent extends ModalUseComponent {
   }
 
   changeData() {
-    this.modalEvent();
+    this.gameService(this.a18service, 'traits');
+    this.genericSEO(`Traits`, `The list of traits in ${this.gameTitle}.`);
     this.pageForm.reset();
-    this.a18service.getTraitList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: traits => {
-          this.traits = traits;
-          this.gameService(this.a18service, 'traits');
-          this.genericSEO(`Traits`, `The list of traits in ${this.gameTitle}.`);
-          this.filteredTraits = this.pageForm.valueChanges.pipe(
-            startWith(null as Observable<Trait[]>),
-            map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.traits.slice())
-          );
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+    return this.a18service.getTraitList(this.language);
+  }
+
+  afterAssignment(): void {
+    this.filteredTraits = this.pageForm.valueChanges.pipe(
+      startWith(null as Observable<Trait[]>),
+      map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.data.slice())
+    );
   }
 
   private filterT(value: string, transfer: number): Trait[] {
-    let traitlist: Trait[] = this.traits;
+    let traitlist: Trait[] = this.data;
     if (transfer != 0) {
-      traitlist = this.traits.filter(trait => !(trait.trans_atk === trait.trans_heal === trait.trans_wpn === trait.trans_arm === trait.trans_acc === trait.trans_syn));
+      traitlist = traitlist.filter(trait => !(trait.trans_atk === trait.trans_heal === trait.trans_wpn === trait.trans_arm === trait.trans_acc === trait.trans_syn));
     }
 
     switch (transfer) {

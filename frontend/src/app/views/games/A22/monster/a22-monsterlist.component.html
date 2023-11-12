@@ -15,79 +15,28 @@
           <mat-label>Type</mat-label>
           <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
             <mat-option value="1" selected><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"   ></mat-icon> Any</mat-option>
-            <mat-option value="2"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-puni"      ></mat-icon> Puni</mat-option>
-            <mat-option value="3"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-weasel"    ></mat-icon> Weasel</mat-option>
-            <mat-option value="4"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-spirit"    ></mat-icon> Spirit</mat-option>
-            <mat-option value="5"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-golem"     ></mat-icon> Golem</mat-option>
-            <mat-option value="6"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-sheep"     ></mat-icon> Sheep</mat-option>
-            <mat-option value="7"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-knight"    ></mat-icon> Knight</mat-option>
-            <mat-option value="8"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-scorpion"  ></mat-icon> Scorpion</mat-option>
-            <mat-option value="9"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-hedgehog"  ></mat-icon> Hedgehog</mat-option>
-            <mat-option value="10"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-wyrm"      ></mat-icon> Wyrm</mat-option>
-            <mat-option value="11"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-roadrunner"></mat-icon> Roadrunner</mat-option>
-            <mat-option value="12"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-beetle"    ></mat-icon> Beetle</mat-option>
-            <mat-option value="13"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-shark"     ></mat-icon> Shark</mat-option>
-            <mat-option value="14"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-small-enemy"    ></mat-icon> Small</mat-option>
-            <mat-option value="15"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-medium-enemy"   ></mat-icon> Medium</mat-option>
-            <mat-option value="16"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-large-enemy"    ></mat-icon> Large</mat-option>
-            <mat-option value="17"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-boss-enemy"     ></mat-icon> Boss</mat-option>
-            <mat-select-trigger *ngIf="f.type.value == 1">
-               Any
-            </mat-select-trigger>
-            <mat-select-trigger *ngIf="f.type.value == 2">
-               Puni
-            </mat-select-trigger>
-            <mat-select-trigger *ngIf="f.type.value == 3">
-               Weasel
-            </mat-select-trigger>
-            <mat-select-trigger *ngIf="f.type.value == 4">
-               Spirit
-            </mat-select-trigger>
-            <mat-select-trigger *ngIf="f.type.value == 5">
-               Golem
-            </mat-select-trigger>
-            <mat-select-trigger *ngIf="f.type.value == 6">
-               Sheep
-            </mat-select-trigger>
-            <mat-select-trigger *ngIf="f.type.value == 7">
-                Knight
-             </mat-select-trigger>
-             <mat-select-trigger *ngIf="f.type.value == 8">
-                Scorpion
-             </mat-select-trigger>
-             <mat-select-trigger *ngIf="f.type.value == 9">
-                Hedgehog
-             </mat-select-trigger>
-             <mat-select-trigger *ngIf="f.type.value == 10">
-                Wyrm
-             </mat-select-trigger>
-             <mat-select-trigger *ngIf="f.type.value == 11">
-                Roadrunner
-             </mat-select-trigger>
-             <mat-select-trigger *ngIf="f.type.value == 12">
-                Beetle
-             </mat-select-trigger>
-             <mat-select-trigger *ngIf="f.type.value == 13">
-                Shark
-             </mat-select-trigger>
-             <mat-select-trigger *ngIf="f.type.value == 14">
-                Small
-             </mat-select-trigger>
-             <mat-select-trigger *ngIf="f.type.value == 15">
-                Medium
-             </mat-select-trigger>
-             <mat-select-trigger *ngIf="f.type.value == 16">
-                Large
-             </mat-select-trigger>
-             <mat-select-trigger *ngIf="f.type.value == 17">
-                Boss
-             </mat-select-trigger>
+            <mat-option value="puni"      > <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-puni"      ></mat-icon> Puni</mat-option>
+            <mat-option value="weasel"    > <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-weasel"    ></mat-icon> Weasel</mat-option>
+            <mat-option value="spirit"    > <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-spirit"    ></mat-icon> Spirit</mat-option>
+            <mat-option value="golem"     > <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-golem"     ></mat-icon> Golem</mat-option>
+            <mat-option value="sheep"     > <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-sheep"     ></mat-icon> Sheep</mat-option>
+            <mat-option value="knight"    > <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-knight"    ></mat-icon> Knight</mat-option>
+            <mat-option value="scorpion"  > <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-scorpion"  ></mat-icon> Scorpion</mat-option>
+            <mat-option value="hedgehog"  > <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-hedgehog"  ></mat-icon> Hedgehog</mat-option>
+            <mat-option value="wyrm"      ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-wyrm"      ></mat-icon> Wyrm</mat-option>
+            <mat-option value="roadrunner"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-roadrunner"></mat-icon> Roadrunner</mat-option>
+            <mat-option value="beetle"    ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-beetle"    ></mat-icon> Beetle</mat-option>
+            <mat-option value="shark"     ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-shark"     ></mat-icon> Shark</mat-option>
+            <mat-option value="Small"     ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-small-enemy"    ></mat-icon> Small</mat-option>
+            <mat-option value="Medium"    ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-medium-enemy"   ></mat-icon> Medium</mat-option>
+            <mat-option value="Large"     ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-large-enemy"    ></mat-icon> Large</mat-option>
+            <mat-option value="boss"      ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-boss-enemy"     ></mat-icon> Boss</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
     </form>
   </div>
-<div *ngIf="filteredMonsters" class="item-grid">
+<div class="item-grid">
 <div *ngFor="let mon of filteredMonsters | async; trackBy:identify" class="card card-body">
    <h4 class="card-title card-icon-space">
       <a (click)="openModal(monsterModal, mon.slug, $event);" href="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a>    

@@ -4,12 +4,12 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { Item, NameLink } from '@app/views/games/A25/_services/a25.interface';
+import { Item } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { Observable } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { Observable, forkJoin } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a25-materiallist.component.html',
@@ -19,9 +19,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class A25MaterialListComponent extends ModalUseComponent {
-  items: Item[];
   filteredItems: Observable<Item[]>;
-  colors: NameLink[];
 
   constructor(
     protected modalService: BsModalService,
@@ -43,47 +41,25 @@ export class A25MaterialListComponent extends ModalUseComponent {
     })
   }
 
-  changeData(): void {
-    this.modalEvent();
+  changeData() {
+    this.gameService(this.a25service, 'items/materials');
+    this.genericSEO(`Materials`, `The list of materials in ${this.gameTitle}.`);
     this.pageForm.reset()
-    this.getItems();
-    this.getColors();
+    return forkJoin({
+      items: this.a25service.getMaterialList(this.language),
+      colors: this.a25service.getFilter('color', this.language)
+    })
   }
 
-  getItems() {
-    this.a25service.getMaterialList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: items => {
-          this.items = items;
-          this.gameService(this.a25service, 'items/materials');
-          this.genericSEO(`Materials`, `The list of materials in ${this.gameTitle}.`);
-          this.filteredItems = this.pageForm.valueChanges.pipe(
-            startWith(null as Observable<Item[]>),
-            map((search: any) => search ? this.filterT(search.filtertext, search.color, search.rarity, search.filtertrait, search.traittype) : this.items.slice())
-          );
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
-  }
-
-  getColors() {
-    this.a25service.getFilter('color', this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: colors => {
-          this.colors = colors;
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+  afterAssignment(): void {
+    this.filteredItems = this.pageForm.valueChanges.pipe(
+      startWith(null as Observable<Item[]>),
+      map((search: any) => search ? this.filterT(search.filtertext, search.color, search.rarity, search.filtertrait, search.traittype) : this.data.items.slice())
+    );
   }
 
   private filterT(value: string, color: string, rarity: number, filter: string, traittype: string): Item[] {
-    let list: Item[] = this.items;
+    let list: Item[] = this.data.items;
 
     if (color != 'Any') {
       list = list.filter(item => item.material[0].color == color);

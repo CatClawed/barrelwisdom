@@ -12,7 +12,7 @@
          </div>
       </form>
    </div>
-   <div *ngIf="filteredDemons" class="item-grid">
+   <div class="item-grid">
       <div *ngFor="let demon of filteredDemons | async; trackBy:identify2" class="card card-body">
          <div class="flex">
             <h4 class="card-title">

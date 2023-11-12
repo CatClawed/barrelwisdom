@@ -9,7 +9,7 @@ import { A16Service } from '@app/views/games/A16/_services/a16.service';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a16-booklist.component.html',
@@ -17,7 +17,6 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class A16BooklistComponent extends ModalUseComponent {
-  books: Book[];
   filteredBooks: Observable<Book[]>;
 
   constructor(
@@ -28,8 +27,7 @@ export class A16BooklistComponent extends ModalUseComponent {
     protected location: Location,
     protected seoService: SeoService,
     private formBuilder: UntypedFormBuilder,
-    private a16service: A16Service,
-  ) {
+    private a16service: A16Service) {
     super(modalService, destroy$, router, route, location, seoService);
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: ''
@@ -37,28 +35,21 @@ export class A16BooklistComponent extends ModalUseComponent {
   }
 
   changeData() {
-    this.modalEvent();
+    this.gameService(this.a16service, 'recipe-books');
+    this.genericSEO(`Recipe Books`, `The list of recipe books in ${this.gameTitle}.`);
     this.pageForm.reset();
-    this.a16service.getBookList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: books => {
-          this.books = books;
-          this.gameService(this.a16service, 'recipe-books');
-          this.genericSEO(`Recipe Books`, `The list of recipe books in ${this.gameTitle}.`);
-          this.filteredBooks = this.pageForm.valueChanges.pipe(
-            startWith(null as Observable<Book[]>),
-            map((search: any) => search ? this.filterT(search.filtertext) : this.books.slice())
-          );
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+    return this.a16service.getBookList(this.language);
+  }
+
+  afterAssignment(): void {
+    this.filteredBooks = this.pageForm.valueChanges.pipe(
+      startWith(null as Observable<Book[]>),
+      map((search: any) => search ? this.filterT(search.filtertext) : this.data.slice())
+    );
   }
 
   private filterT(value: string): Book[] {
-    let list: Book[] = this.books;
+    let list: Book[] = this.data;
     if (!value) {
       return list;
     }

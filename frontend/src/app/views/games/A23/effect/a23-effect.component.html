@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="error"></Error>
 
-<ng-container *ngIf="effect">
+<ng-container *ngIf="data as effect">
 <ng-container *ngIf="showNav">
   <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Effects', '/'+gameURL+'/effects/'+language]]" [current]="effect.name"></Breadcrumb>
 </ng-container>

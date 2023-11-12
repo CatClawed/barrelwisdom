@@ -3,10 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
-import { EffectData, EffectLine, Item } from '@app/views/games/A23/_services/a23.interface';
+import { EffectData, EffectLine } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a23-item.component.html',
@@ -14,8 +13,6 @@ import { takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 export class A23ItemComponent extends SingleComponent {
-
-  item: Item;
   colors = {
     1: "39b4f6",
     2: "34d80d",
@@ -40,22 +37,15 @@ export class A23ItemComponent extends SingleComponent {
     super(destroy$, route, seoService);
   }
 
-  changeData(): void {
-    this.a23service.getItem(this.slug, this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: item => {
-          this.error = ``;
-          this.item = item;
-          this.gameService(this.a23service, 'items');
-          let name = (this.language === 'en') ? this.item.name.normalize('NFD').replace(/[\u0300-\u036f]/g, "") : this.item.name;
-          this.seoImage = `${this.imgURL}${this.section}/${this.item.slug}.webp`
-          this.genericSEO(name, this.item.desc1);
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+  changeData() {
+    this.gameService(this.a23service, 'items');
+    return this.a23service.getItem(this.slug, this.language);
+  }
+
+  afterAssignment(): void {
+    let name = (this.language === 'en') ? this.data.name.normalize('NFD').replace(/[\u0300-\u036f]/g, "") : this.data.name;
+    this.seoImage = `${this.imgURL}${this.section}/${this.data.slug}.webp`
+    this.genericSEO(name, this.data.desc1);
   }
 
   checkLevel(maxLv, restrict, effectLine: EffectLine, effectData: EffectData) {

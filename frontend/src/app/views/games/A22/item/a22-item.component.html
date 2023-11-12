@@ -1,24 +1,13 @@
 <Error *ngIf="error" [errorCode]="error"></Error>
 
-<ng-container *ngIf="item">
+<ng-container *ngIf="data as item">
 <Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Items', '/'+gameURL+'/items/'+language]]" [current]="item.name"></Breadcrumb>
 <div class="mx-auto row spacer">
   <div class="{{colset}} card card-body">
     <h4 class="card-title card-icon-space">{{item.name}}</h4>
       <div class="card-icon-position">
         <b style="padding-right:0.5em;">LV {{item.level}}</b>
-        <i *ngIf="item.itemtype == 'Attack'"    class="atelier atelier-np atelier-ryza2-type-attack"></i>
-        <i *ngIf="item.itemtype == 'Heal'"      class="atelier atelier-np atelier-ryza2-type-heal"></i>
-        <i *ngIf="item.itemtype == 'Debuff'"    class="atelier atelier-np atelier-ryza2-type-debuff"></i>
-        <i *ngIf="item.itemtype == 'Buff'"      class="atelier atelier-np atelier-ryza2-type-buff"></i>
-        <i *ngIf="item.itemtype == 'Weapon'"    class="atelier atelier-np atelier-ryza2-type-weapon"></i>
-        <i *ngIf="item.itemtype == 'Armor'"     class="atelier atelier-np atelier-ryza2-type-armor"></i>
-        <i *ngIf="item.itemtype == 'Accessory'" class="atelier atelier-np atelier-ryza2-type-accessory"></i>
-        <i *ngIf="item.itemtype == 'Rare Item'" class="atelier atelier-np atelier-ryza2-category-key-items"></i>
-        <i *ngIf="item.itemtype == 'Synthesis'" class="atelier atelier-np atelier-ryza2-type-synthesis"></i>
-        <i *ngIf="item.itemtype == 'Material'"  class="atelier atelier-np atelier-ryza2-material"></i>
-        <i *ngIf="item.itemtype == 'Essence'"   class="atelier atelier-np atelier-ryza2-category-essence"></i>
-        <i *ngIf="item.itemtype == 'Field'"     class="atelier atelier-np atelier-ryza2-category-tools"></i>
+        <i class="atelier atelier-np atelier-ryza2-{{icons[item.itemtype]}}"></i>
         <br *ngIf="item.isDLC" /><span *ngIf="item.isDLC" class="badge bg-secondary">DLC</span>
       </div>
     <div class="card-item-display">

@@ -13,7 +13,6 @@
       </div>
     </form>
 </div>
-<ng-container *ngIf="filteredRecipes">
 <div *ngFor="let recipe of filteredRecipes | async; trackBy:identify" class="row spacer">
   <div class="card card-body col-md-8" style="margin-left:auto;margin-right:auto;">
     <h4 class="card-title card-icon-space">
@@ -69,5 +68,4 @@
       </table>
   </div>
 </div>
-</ng-container>
 </div>

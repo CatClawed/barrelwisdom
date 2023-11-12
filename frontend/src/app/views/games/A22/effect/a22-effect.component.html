@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="error"></Error>
 
-<ng-container *ngIf="effect">
+<ng-container *ngIf="data as effect">
 <ng-container *ngIf="showNav">
   <Breadcrumb *ngIf="effect.efftype == 'Normal'" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Effects', '/'+gameURL+'/effects/'+language]]" [current]="effect.name"></Breadcrumb>
   <Breadcrumb *ngIf="effect.efftype == 'Forge'"  [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Forge Effects', '/'+gameURL+'/forge-effects/'+language]]" [current]="effect.name"></Breadcrumb>

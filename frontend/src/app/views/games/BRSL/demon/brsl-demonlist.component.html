@@ -13,7 +13,7 @@
       </div>
     </form>
   </div>
-<div *ngIf="filteredDemons" class="item-grid">
+<div class="item-grid">
 <div *ngFor="let mon of filteredDemons | async; trackBy:identify" class="card card-body">
   <h4 class="card-title card-icon-space">
     <a (click)="openModal(demonModal, mon.slug, $event);" href="/{{gameURL}}/demons/{{mon.slug}}/{{language}}">{{mon.name}}</a>    

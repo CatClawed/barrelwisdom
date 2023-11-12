@@ -12,23 +12,20 @@ import { FilterableComponent } from './filterable.component';
 })
 
 // Fragments extending Filterables is a compromise of sorts.
-// It's the reason reset needs to be explicitly called.
 export abstract class FragmentedComponent extends FilterableComponent implements AfterViewChecked {
     isStarting: boolean = true;
-    hasData: boolean = false;
     constructor(
         protected readonly destroy$: DestroyService,
         protected route: ActivatedRoute,
         protected seoService: SeoService,
         protected viewportScroller: ViewportScroller,
-        protected loc: Location
-    ) {
+        protected loc: Location) {
         super(destroy$, route, seoService)
     }
     // relies on probably rendering the full component after the timeout
     // feels better than resolvers
     ngAfterViewChecked(): void {
-        if (this.isStarting && this.hasData) {
+        if (this.isStarting && this.data) {
             setTimeout(() => {
                 this.route.fragment
                     .pipe(first())

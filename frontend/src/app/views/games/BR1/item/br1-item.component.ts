@@ -13,8 +13,6 @@ import { takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 export class BR1ItemComponent extends SingleComponent {
-  item: Item;
-
   constructor(
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
@@ -22,21 +20,12 @@ export class BR1ItemComponent extends SingleComponent {
     private br1service: BR1Service) {
     super(destroy$, route, seoService);
   }
-  changeData(): void {
-    this.language = this.route.snapshot.params.language;
-    
-    this.br1service.getItem(this.slug, this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: item => {
-          this.error = ``;
-          this.item = item;
-          this.gameService(this.br1service, 'items');
-          this.genericSEO(this.item.name, this.item.description);
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+  changeData() {
+    this.gameService(this.br1service, 'items');
+    return this.br1service.getItem(this.slug, this.language)
+  }
+
+  afterAssignment(): void {
+    this.genericSEO(this.data.name, this.data.description);
   }
 } 

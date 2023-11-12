@@ -4,12 +4,12 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { Item, NameLink } from '@app/views/games/A23/_services/a23.interface';
+import { Item } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { Observable } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { Observable, forkJoin } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a23-itemlist.component.html',
@@ -17,9 +17,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class A23ItemlistComponent extends ModalUseComponent {
-  items: Item[];
   filteredItems: Observable<Item[]>;
-  categories: NameLink[];
 
   constructor(
     protected modalService: BsModalService,
@@ -40,57 +38,32 @@ export class A23ItemlistComponent extends ModalUseComponent {
     })
   }
 
-  changeData(): void {
-    this.modalEvent();
-    this.pageForm.reset()
-    this.getItems();
-    this.getCategories();
+  changeData() {
+    this.gameService(this.a23service, 'items');
+    this.genericSEO(`Items`, `The list of items in ${this.gameTitle}.`);
+    this.pageForm.reset();
+    return forkJoin({
+      items: this.a23service.getItemList(this.language),
+      categories: this.a23service.getCategoryList(this.language)
+    });
   }
 
-  getItems() {
-    this.a23service.getItemList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: items => {
-          this.error = ``;
-          this.items = items;
-          this.gameService(this.a23service, 'items');
-          this.genericSEO(`Items`, `The list of items in ${this.gameTitle}.`);
-          this.filteredItems = this.pageForm.valueChanges.pipe(
-            startWith(null as Observable<Item[]>),
-            map((search: any) => search ? this.filterT(search.filtertext, search.cat, search.filtering, search.kind) : this.items.slice())
-          );
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
-  }
-
-  getCategories() {
-    this.a23service.getCategoryList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: categories => {
-          this.categories = categories;
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+  afterAssignment(): void {
+    this.filteredItems = this.pageForm.valueChanges.pipe(
+      startWith(null as Observable<Item[]>),
+      map((search: any) => search ? this.filterT(search.filtertext, search.cat, search.filtering, search.kind) : this.data.items.slice())
+    );
   }
 
   private filterT(value: string, cat: string, ingt: string, kind: string): Item[] {
-    let list: Item[] = this.items;
+    let list: Item[] = this.data.items;
 
     if (cat != 'Any') {
       list = list.filter(item => item.categories.some(c => c.name == cat) || (item.add ? item.add.some(c => c.name == cat) : false));
     }
-
     if (kind != 'Any') {
       list = list.filter(item => item.kind == kind)
     }
-
     if (ingt) {
       const filterValue = (this.language == 'en') ? ingt.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "") : ingt;
       list = list.filter(item => ((item.ing) ? item.ing.some(i =>
@@ -99,7 +72,6 @@ export class A23ItemlistComponent extends ModalUseComponent {
         i.name.includes(filterValue)))
         : false))
     }
-
     if (value) {
       const filterValue = (this.language == 'en') ? value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "") : value;
       list = list.filter(item => {

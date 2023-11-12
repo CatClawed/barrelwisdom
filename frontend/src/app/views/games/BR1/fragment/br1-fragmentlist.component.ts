@@ -8,7 +8,7 @@ import { FragmentEffect } from '@app/views/games/BR1/_services/br1.interface';
 import { BR1Service } from '@app/views/games/BR1/_services/br1.service';
 import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
 import { Observable } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'br1-fragmentlist.component.html',
@@ -16,7 +16,6 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class BR1FragmentEffectlistComponent extends FragmentedComponent {
-  fragmenteffects: FragmentEffect[];
   filteredFragmentEffects: Observable<FragmentEffect[]>;
 
   constructor(
@@ -34,27 +33,20 @@ export class BR1FragmentEffectlistComponent extends FragmentedComponent {
   }
 
   changeData() {
-    this.br1service.getFragmentEffectList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: fragmenteffects => {
-          this.fragmenteffects = fragmenteffects;
-          this.hasData = true;
-          this.gameService(this.br1service, 'fragment-effects');
-          this.genericSEO(`Fragment Effects`, `The list of fragment effects in ${this.gameTitle}.`);
-          this.filteredFragmentEffects = this.pageForm.valueChanges.pipe(
-            startWith(null as Observable<FragmentEffect[]>),
-            map((search: any) => search ? this.filterT(search.filtertext) : this.fragmenteffects.slice())
-          );
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+    this.gameService(this.br1service, 'fragment-effects');
+    this.genericSEO(`Fragment Effects`, `The list of fragment effects in ${this.gameTitle}.`);
+    return this.br1service.getFragmentEffectList(this.language)
+  }
+
+  afterAssignment(): void {
+    this.filteredFragmentEffects = this.pageForm.valueChanges.pipe(
+      startWith(null as Observable<FragmentEffect[]>),
+      map((search: any) => search ? this.filterT(search.filtertext) : this.data.slice())
+    );
   }
 
   private filterT(value: string): FragmentEffect[] {
-    let list: FragmentEffect[] = this.fragmenteffects;
+    let list: FragmentEffect[] = this.data;
     if (value) {
       const filterValue = value.toLowerCase();
       return list.filter(fragmenteffect => {

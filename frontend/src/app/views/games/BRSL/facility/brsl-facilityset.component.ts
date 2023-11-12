@@ -3,11 +3,11 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { FacilitySet, NameOnly } from '@app/views/games/BRSL/_services/brsl.interface';
+import { FacilitySet } from '@app/views/games/BRSL/_services/brsl.interface';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
 import { FilterableComponent } from '@app/views/games/_prototype/filterable.component';
 import { Observable } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'brsl-facilityset.component.html',
@@ -15,8 +15,6 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class BRSLFacilitySetComponent extends FilterableComponent {
-  facilities: FacilitySet[];
-  categories: NameOnly[];
   filteredSets: Observable<FacilitySet[]>;
 
   constructor(
@@ -33,28 +31,21 @@ export class BRSLFacilitySetComponent extends FilterableComponent {
   }
 
   changeData() {
-    this.pageForm.reset()
-    this.brslservice.getFacilitySetList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: facilities => {
-          this.error = ``;
-          this.facilities = facilities;
-          this.gameService(this.brslservice, 'facilities/sets');
-          this.genericSEO(`Facility Sets`, `All facility sets in ${this.gameTitle}.`);      
-          this.filteredSets = this.pageForm.valueChanges.pipe(
-            startWith(null as Observable<FacilitySet[]>),
-            map((search: any) => search ? this.filterT(search.filtertext) : this.facilities.slice())
-          );
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+    this.gameService(this.brslservice, 'facilities/sets');
+    this.genericSEO(`Facility Sets`, `All facility sets in ${this.gameTitle}.`);
+    this.pageForm.reset();
+    return this.brslservice.getFacilitySetList(this.language);
+  }
+
+  afterAssignment(): void {
+    this.filteredSets = this.pageForm.valueChanges.pipe(
+      startWith(null as Observable<FacilitySet[]>),
+      map((search: any) => search ? this.filterT(search.filtertext) : this.data.slice())
+    );
   }
 
   private filterT(value: string): FacilitySet[] {
-    let list: FacilitySet[] = this.facilities;
+    let list: FacilitySet[] = this.data;
     if (!value) {
       return list;
     }

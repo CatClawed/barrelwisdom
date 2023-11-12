@@ -18,33 +18,12 @@
           <mat-label>Type</mat-label>
           <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
             <mat-option value="1" selected> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-synthesis"></mat-icon> Any</mat-option>
-            <mat-option value="2" *ngIf="forge"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-weapon"  ></mat-icon> Weapon</mat-option>
-            <mat-option value="3" *ngIf="forge"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-armor"    ></mat-icon> Armor</mat-option>
-            <mat-option value="5" *ngIf="ev"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-attack"    ></mat-icon> Attack</mat-option>
-            <mat-option value="7" *ngIf="ev"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-heal"    ></mat-icon> Heal</mat-option>
-            <mat-option value="4" *ngIf="forge || ev"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-accessory"  ></mat-icon> Accessory</mat-option>
-            <mat-option value="6" *ngIf="normal"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-material"  ></mat-icon> Material</mat-option>
-            <mat-select-trigger *ngIf="f.type.value == 1">
-               Any
-            </mat-select-trigger>
-            <mat-select-trigger *ngIf="f.type.value == 2">
-               Weapon
-            </mat-select-trigger>
-            <mat-select-trigger *ngIf="f.type.value == 3">
-               Armor
-            </mat-select-trigger>
-            <mat-select-trigger *ngIf="f.type.value == 5">
-               Attack
-            </mat-select-trigger>
-            <mat-select-trigger *ngIf="f.type.value == 7">
-               Heal
-            </mat-select-trigger>
-            <mat-select-trigger *ngIf="f.type.value == 4">
-               Accessory
-            </mat-select-trigger>
-            <mat-select-trigger *ngIf="f.type.value == 6">
-               Material
-            </mat-select-trigger>
+            <mat-option value="Weapon" *ngIf="forge"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-weapon"  ></mat-icon> Weapon</mat-option>
+            <mat-option value="Armor" *ngIf="forge"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-armor"    ></mat-icon> Armor</mat-option>
+            <mat-option value="Attack" *ngIf="ev"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-attack"    ></mat-icon> Attack</mat-option>
+            <mat-option value="Heal" *ngIf="ev"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-heal"    ></mat-icon> Heal</mat-option>
+            <mat-option value="Accessory" *ngIf="forge || ev"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-accessory"  ></mat-icon> Accessory</mat-option>
+            <mat-option value="Material" *ngIf="normal"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-material"  ></mat-icon> Material</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -55,7 +34,7 @@
     <span class="sr-only">Loading...</span>
   </div>
 </div>
-<div *ngIf="filteredEffects" class="item-grid">
+<div class="item-grid">
 <div *ngFor="let eff of filteredEffects | async; trackBy:identify" class="card card-body">
   <h4 class="card-title card-icon-space">
     <a (click)="openModal(effectModal, eff.slug, $event);" href="/{{gameURL}}/effects/{{eff.slug}}/{{language}}">{{eff.name}}</a>

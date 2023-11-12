@@ -13,7 +13,6 @@
       </div>
     </form>
 </div>
-<ng-container *ngIf="filteredSets">
 <div *ngFor="let set of filteredSets | async" class="row spacer">
   <div class="card card-body col-md-8" style="margin-left:auto;margin-right:auto;">
     <h4>{{set.effect.name}}</h4>
@@ -25,5 +24,4 @@
     </ul>
   </div>
 </div>
-</ng-container>
 </ng-container>

@@ -9,14 +9,13 @@ import { A22Service } from '@app/views/games/A22/_services/a22.service';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a22-traitlist.component.html',
   providers: [DestroyService]
 })
 export class A22TraitlistComponent extends ModalUseComponent {
-  traits: Trait[];
   filteredTraits: Observable<Trait[]>;
 
   constructor(
@@ -36,49 +35,42 @@ export class A22TraitlistComponent extends ModalUseComponent {
   }
 
   changeData() {
-    this.modalEvent();
+    this.gameService(this.a22service, 'traits');
+    this.genericSEO(`Traits`, `The list of traits in ${this.gameTitle}.`);
     this.pageForm.reset();
-    this.a22service.getTraitList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: traits => {
-          this.traits = traits;
-          this.gameService(this.a22service, 'traits');
-          this.genericSEO(`Traits`, `The list of traits in ${this.gameTitle}.`);
-          this.filteredTraits = this.pageForm.valueChanges.pipe(
-            startWith(null as Observable<Trait[]>),
-            map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.traits.slice())
-          );
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+    return this.a22service.getTraitList(this.language);
+  }
+
+  afterAssignment(): void {
+    this.filteredTraits = this.pageForm.valueChanges.pipe(
+      startWith(null as Observable<Trait[]>),
+      map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.data.slice())
+    );
   }
 
   private filterT(value: string, transfer: string): Trait[] {
-    let traitlist: Trait[] = this.traits;
+    let traitlist: Trait[] = this.data;
     switch (transfer) {
       case "2":
-        traitlist = this.traits.filter(trait => trait.trans_atk);
+        traitlist = this.data.filter(trait => trait.trans_atk);
         break;
       case "3":
-        traitlist = this.traits.filter(trait => trait.trans_heal);
+        traitlist = this.data.filter(trait => trait.trans_heal);
         break;
       case "4":
-        traitlist = this.traits.filter(trait => trait.trans_dbf);
+        traitlist = this.data.filter(trait => trait.trans_dbf);
         break;
       case "5":
-        traitlist = this.traits.filter(trait => trait.trans_buff);
+        traitlist = this.data.filter(trait => trait.trans_buff);
         break;
       case "6":
-        traitlist = this.traits.filter(trait => trait.trans_wpn);
+        traitlist = this.data.filter(trait => trait.trans_wpn);
         break;
       case "7":
-        traitlist = this.traits.filter(trait => trait.trans_arm);
+        traitlist = this.data.filter(trait => trait.trans_arm);
         break;
       case "8":
-        traitlist = this.traits.filter(trait => trait.trans_acc);
+        traitlist = this.data.filter(trait => trait.trans_acc);
         break;
     }
     if (!value) {

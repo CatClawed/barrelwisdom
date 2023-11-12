@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="error"></Error>
 
-<ng-container *ngIf="filteredProperties">
+<ng-container *ngIf="!error">
 <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Properties"></Breadcrumb>
 <h1>Properties</h1>
 <div class="col-md-10 mx-auto">
@@ -20,27 +20,6 @@
             <mat-option value="5"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-escha-weapon"    ></mat-icon> Weapon</mat-option>
             <mat-option value="6"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-escha-armor"  ></mat-icon> Armor</mat-option>
             <mat-option value="7"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-escha-accessory"   ></mat-icon> Accessory</mat-option>
-            <mat-select-trigger *ngIf="f.transfers.value == 1">
-               Any
-            </mat-select-trigger>
-            <mat-select-trigger *ngIf="f.transfers.value == 2">
-               Bomb
-            </mat-select-trigger>
-            <mat-select-trigger *ngIf="f.transfers.value == 3">
-               Heal
-            </mat-select-trigger>
-            <mat-select-trigger *ngIf="f.transfers.value == 4">
-               Buff
-            </mat-select-trigger>
-            <mat-select-trigger *ngIf="f.transfers.value == 5">
-               Weapon
-            </mat-select-trigger>
-            <mat-select-trigger *ngIf="f.transfers.value == 6">
-               Armor
-            </mat-select-trigger>
-            <mat-select-trigger *ngIf="f.transfers.value == 7">
-               Accessory
-            </mat-select-trigger>
           </mat-select>
         </mat-form-field>
       </div>

@@ -21,36 +21,12 @@
             <mat-option value="6"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-race-plant"           ></mat-icon> Plant</mat-option>
             <mat-option value="7"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-race-dragon"          ></mat-icon> Dragon</mat-option>
             <mat-option value="8"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-race-erde-wiege"      ></mat-icon> Erde Wiege</mat-option>
-            <mat-select-trigger *ngIf="f.type.value == 1">
-               Any
-            </mat-select-trigger>
-            <mat-select-trigger *ngIf="f.type.value == 2">
-               Puni
-            </mat-select-trigger>
-            <mat-select-trigger *ngIf="f.type.value == 3">
-               Magical Creature
-            </mat-select-trigger>
-            <mat-select-trigger *ngIf="f.type.value == 4">
-               Beast
-            </mat-select-trigger>
-            <mat-select-trigger *ngIf="f.type.value == 5">
-               Apparition
-            </mat-select-trigger>
-            <mat-select-trigger *ngIf="f.type.value == 6">
-               Plant
-            </mat-select-trigger>
-            <mat-select-trigger *ngIf="f.type.value == 7">
-                Dragon
-             </mat-select-trigger>
-             <mat-select-trigger *ngIf="f.type.value == 8">
-                Erde Wiege
-             </mat-select-trigger>
           </mat-select>
         </mat-form-field>
       </div>
     </form>
   </div>
-<div *ngIf="filteredMonsters" class="item-grid">
+<div class="item-grid">
 <div *ngFor="let mon of filteredMonsters | async; trackBy:identify" class="card card-body">
    <h4 class="card-title card-icon-space">
       <a (click)="openModal(monsterModal, mon.slug, $event);" href="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a>    

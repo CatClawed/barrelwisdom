@@ -1,9 +1,8 @@
+import { HttpClient, HttpHeaders, } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders,  } from '@angular/common/http';
-import { Observable} from 'rxjs';
+import { Blog, BlogPaginator, Comment, EditBlog, Tag } from '@app/interfaces/blog';
 import { environment } from '@environments/environment';
-import { Blog, EditBlog, BlogPaginator, Comment } from '@app/interfaces/blog';
-
+import { Observable, of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class BlogService {
@@ -37,7 +36,7 @@ export class BlogService {
   getMainPageBlogs(num: number, limit: number, tag: string): Observable<BlogPaginator> {
     const offset = num == 0 ?  1 : limit * (num-1);
     if(tag) {
-      return this.http.get<BlogPaginator>(`${environment.apiUrl}/blog/?ordering=-created&tags=${tag}&limit=${limit}&offset=${offset}`)
+      return this.http.get<BlogPaginator>(`${environment.apiUrl}/blog/?ordering=-created&tags__slugname=${tag}&limit=${limit}&offset=${offset}`)
     }
     return this.http.get<BlogPaginator>(`${environment.apiUrl}/blog/?ordering=-created&limit=${limit}&offset=${offset}`)
   }
@@ -67,4 +66,11 @@ export class BlogService {
     return this.http.patch(`${environment.apiUrl}/comment/${id}/`, {id, approved: true})
   }
 
+  getTags(): Observable<Tag[]> {
+    return this.http.get<Tag[]>(`${environment.apiUrl}/tags/`)
+  }
+  addTags(tags: Tag[]): Observable<any[]> {
+    if (tags.length === 0) return of([])
+    return this.http.post<any>(`${environment.apiUrl}/tags/`, tags);
+  }
 }

@@ -9,7 +9,7 @@ import { A15Service } from '@app/views/games/A15/_services/a15.service';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a15-monsterlist.component.html',
@@ -17,7 +17,6 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class A15MonsterlistComponent extends ModalUseComponent {
-  monsters: MonsterList[];
   filteredMonsters: Observable<MonsterList[]>;
 
   constructor(
@@ -28,37 +27,29 @@ export class A15MonsterlistComponent extends ModalUseComponent {
     protected location: Location,
     protected seoService: SeoService,
     private formBuilder: UntypedFormBuilder,
-    private a15service: A15Service,
-  ) {
+    private a15service: A15Service) {
     super(modalService, destroy$, router, route, location, seoService);
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
     })
   }
 
-  changeData(): void {
-    this.modalEvent();
+  changeData() {
+    this.gameService(this.a15service, 'monsters');
+    this.genericSEO(`Monsters`, `The list of monsters in ${this.gameTitle}.`);
     this.pageForm.reset();
-    this.a15service.getMonsterList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: monsters => {
-          this.monsters = monsters;
-          this.gameService(this.a15service, 'monsters');
-          this.genericSEO(`Monsters`, `The list of monsters in ${this.gameTitle}.`);
-          this.filteredMonsters = this.pageForm.valueChanges.pipe(
-            startWith(null as Observable<MonsterList[]>),
-            map((search: any) => search ? this.filterT(search.filtertext) : this.monsters.slice())
-          );
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+    return this.a15service.getMonsterList(this.language);
+  }
+
+  afterAssignment(): void {
+    this.filteredMonsters = this.pageForm.valueChanges.pipe(
+      startWith(null as Observable<MonsterList[]>),
+      map((search: any) => search ? this.filterT(search.filtertext) : this.data.slice())
+    );
   }
 
   private filterT(value: string): MonsterList[] {
-    let list: MonsterList[] = this.monsters;
+    let list: MonsterList[] = this.data;
     if (!value) {
       return list;
     }

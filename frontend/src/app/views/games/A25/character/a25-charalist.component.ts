@@ -4,12 +4,12 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { Character, NameLink } from '@app/views/games/A25/_services/a25.interface';
+import { Character } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { Observable } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { Observable, forkJoin } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a25-charalist.component.html',
@@ -17,9 +17,6 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class A25CharalistComponent extends ModalUseComponent {
-  elems: NameLink[];
-  roles: NameLink[];
-  charas: Character[];
   filteredCharas: Observable<Character[]>;
 
   gradients = {
@@ -45,61 +42,26 @@ export class A25CharalistComponent extends ModalUseComponent {
     })
   }
 
-  changeData(): void {
-    this.modalEvent();
+  changeData() {
+    this.gameService(this.a25service, 'characters');
+    this.genericSEO(`Characters`, `The list of characters in ${this.gameTitle}.`);
     this.pageForm.reset()
-    this.getTransfer();
-    this.getElements();
-    this.getCharas();
+    return forkJoin({
+      charas: this.a25service.getCharaList(this.language),
+      roles: this.a25service.getFilter("role", this.language),
+      elems: this.a25service.getFilter("element", this.language)
+    });
   }
 
-  getCharas() {
-    this.a25service.getCharaList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: charas => {
-          this.charas = charas;
-          this.gameService(this.a25service, 'characters');
-          this.genericSEO(`Characters`, `The list of characters in ${this.gameTitle}.`);
-          this.filteredCharas = this.pageForm.valueChanges.pipe(
-            startWith(null as Observable<Character[]>),
-            map((search: any) => search ? this.filterT(search.filtertext, search.roles, search.elems) : this.charas.slice())
-          );
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
-  }
-
-  getTransfer() {
-    this.a25service.getFilter("role", this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: role => {
-          this.roles = role;
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
-  }
-
-  getElements() {
-    this.a25service.getFilter("element", this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: elems => {
-          this.elems = elems;
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+  afterAssignment(): void {
+    this.filteredCharas = this.pageForm.valueChanges.pipe(
+      startWith(null as Observable<Character[]>),
+      map((search: any) => search ? this.filterT(search.filtertext, search.roles, search.elems) : this.data.charas.slice())
+    );
   }
 
   private filterT(value: string, role: string, elem: string): Character[] {
-    let charalist: Character[] = this.charas;
+    let charalist: Character[] = this.data.charas;
 
     if (role != 'any') {
       charalist = charalist.filter(chara => chara.role == role)

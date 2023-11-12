@@ -10,7 +10,7 @@ import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
 import { MarkdownService } from 'ngx-markdown';
-import { catchError, first, switchMap, takeUntil } from 'rxjs/operators';
+import { catchError, switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'blog.component.html',
@@ -48,15 +48,14 @@ export class BlogComponent implements OnInit {
   ngOnInit(): void {
     this.authenticationService.user.pipe(takeUntil(this.destroy$)).subscribe(x => this.user = x);
     this.route.paramMap.pipe(
-      takeUntil(this.destroy$),
       switchMap(params => {
         this.error = ``;
         return this.blogService.getBlog(params.get('title'), params.get('section'))
           .pipe(
-            first(),
             catchError(error => this.error = `${error.status}`)
           )
-      })
+      }),
+      takeUntil(this.destroy$)
     )
       .subscribe(data => {
         this.setBlog(data)
@@ -112,7 +111,10 @@ export class BlogComponent implements OnInit {
   }
 
   setBlog(blog) {
-    if (this.error) return;
+    if (this.error) {
+      this.blog = null;
+      return;
+    }
     this.blog = blog;
     this.gameName = (this.blog.section.fullname) ? `${this.blog.section.fullname} - ` : ""; // gotta make sure google sees the game name...
     this.body = this.markdownService.parse(this.blog.body);

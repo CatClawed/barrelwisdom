@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="error"></Error>
 
-<ng-container *ngIf="trait">
+<ng-container *ngIf="data as trait">
 <Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Traits', '/'+gameURL+'/traits/'+language]]" [current]="language == 'en' ? trait.name_en : trait.name_ja"></Breadcrumb>
 <div class="mx-auto row spacer">
 <div class="{{colset}} card card-body">
@@ -18,7 +18,7 @@
       <img *ngIf="!trait.trans_wep" style="width:3rem;" src="{{imgURL}}svg/combat.svg"    alt="combat"/>
     </div>
   </div>
-  <p style="padding-top:1rem;" [innerHTML]="trait.desc.replace('{0}', trait.val[0] + ' ~ ' + trait.val[4]).replace('{1}', trait.val[0] + ' ~ ' + trait.val[4])"></p>
+  <p style="padding-top:1rem;" [innerHTML]="trait.desc.replaceAll('{0}', trait.val[0] + ' ~ ' + trait.val[4]).replaceAll('{1}', trait.val[0] + ' ~ ' + trait.val[4])"></p>
   <p>
     {{trait.val[0]}} > {{trait.val[1]}} > {{trait.val[2]}} > {{trait.val[3]}} > {{trait.val[4]}}
   </p>

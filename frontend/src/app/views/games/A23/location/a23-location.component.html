@@ -1,5 +1,5 @@
 <Error *ngIf="error" [errorCode]="error"></Error>
-<div *ngIf="region">
+<div *ngIf="data as region">
     <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Location: '+region.name"></Breadcrumb>
     <h1>{{region.name}}</h1>
     <div style="margin-left: 0.5em; margin-right: 0.5em;" class="row">

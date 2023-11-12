@@ -13,7 +13,7 @@
       </div>
     </form>
   </div>
-<div *ngIf="filteredBooks" class="item-grid">
+<div class="item-grid">
 <div *ngFor="let bk of filteredBooks | async; trackBy:identify2" class="card card-body">
   <h4 class="card-title">
     <a (click)="openModal(bookModal, bk.slugname, $event);" href="/{{gameURL}}/recipe-books/{{bk.slugname}}/{{language}}">{{bk.name}}</a>    

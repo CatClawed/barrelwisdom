@@ -2,17 +2,13 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { CategoryData } from '@app/views/games/A15/_services/a15.interface';
 import { A15Service } from '@app/views/games/A15/_services/a15.service';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a15-category.component.html',
 })
 export class A15CategoryComponent extends SingleComponent {
-  category: CategoryData;
-
   constructor(
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
@@ -20,19 +16,11 @@ export class A15CategoryComponent extends SingleComponent {
     protected seoService: SeoService) {
     super(destroy$, route, seoService);
   }
-  changeData(): void {
-    this.a15service.getCategory(this.slug, this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: category => {
-          this.error = ``;
-          this.category = category;
-          this.gameService(this.a15service, 'categories');
-          this.genericSEO(this.category.name, `All items in ${this.category.name}`);
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+  changeData() {
+    this.gameService(this.a15service, 'categories');
+    return this.a15service.getCategory(this.slug, this.language);
+  }
+  afterAssignment(): void {
+    this.genericSEO(this.data.name, `All items in ${this.data.name}`);
   }
 } 

@@ -18,7 +18,7 @@
     <span class="sr-only">Loading...</span>
   </div>
 </div>
-<div *ngIf="filteredEffects" class="item-grid">
+<div class="item-grid">
 <div *ngFor="let eff of filteredEffects | async; trackBy:identify2" class="card card-body">
   <h4 class="card-title"><a (click)="openModal(effectModal, eff.slugname, $event);" href="/{{gameURL}}/effects/{{eff.slugname}}/{{language}}">{{eff.name}}</a></h4>
   <p *ngIf="eff.desc">{{eff.desc}}</p>

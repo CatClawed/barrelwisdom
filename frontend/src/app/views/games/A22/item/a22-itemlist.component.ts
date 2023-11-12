@@ -4,12 +4,12 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { Item, NameLink } from '@app/views/games/A22/_services/a22.interface';
+import { Item } from '@app/views/games/A22/_services/a22.interface';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { Observable } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { Observable, forkJoin } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a22-itemlist.component.html',
@@ -17,9 +17,21 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class A22ItemlistComponent extends ModalUseComponent {
-  items: Item[];
   filteredItems: Observable<Item[]>;
-  categories: NameLink[];
+  icons = {
+    'Attack':    'type-attack',
+    'Heal':      'type-heal',
+    "Debuff":    'type-debuff',
+    "Buff":      'type-buff',
+    'Weapon':    'type-weapon',
+    "Armor":     'type-armor',
+    "Accessory": 'type-accessory',
+    "Rare Item": 'category-key-items',
+    "Synthesis": 'type-synthesis',
+    "Material":  'material',
+    "Essence":   'category-essence',
+    "Field":     'category-tools'
+  }
 
   constructor(
     protected modalService: BsModalService,
@@ -41,52 +53,29 @@ export class A22ItemlistComponent extends ModalUseComponent {
     })
   }
 
-  changeData(): void {
-    this.modalEvent();
+  changeData() {
+    this.gameService(this.a22service, 'items');
+    this.genericSEO(`Items`, `The list of items in ${this.gameTitle}.`);
     this.pageForm.reset();
-    this.getItems();
-    this.getCategories();
+    return forkJoin({
+      items: this.a22service.getItemList(this.language),
+      categories: this.a22service.getCategoryList(this.language)
+    });
   }
 
-  getItems() {
-    this.a22service.getItemList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: items => {
-          this.items = items;
-          this.gameService(this.a22service, 'items');
-          this.genericSEO(`Items`, `The list of items in ${this.gameTitle}.`);
-          this.filteredItems = this.pageForm.valueChanges.pipe(
-            startWith(null as Observable<Item[]>),
-            map((search: any) => search ? this.filterT(search.filtertext, search.type, search.elementval, search.element, search.filtering) : this.items.slice())
-          );
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
-  }
-
-  getCategories() {
-    this.a22service.getCategoryList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: categories => {
-          this.categories = categories;
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+  afterAssignment(): void {
+    this.filteredItems = this.pageForm.valueChanges.pipe(
+      startWith(null as Observable<Item[]>),
+      map((search: any) => search ? this.filterT(search.filtertext, search.type, search.elementval, search.element, search.filtering) : this.data.items.slice())
+    );
   }
 
   private filterT(value: string, type: string, elementV: number, element: string, ingt: string): Item[] {
-    let list: Item[] = this.items;
+    let list: Item[] = this.data.items;
 
     if (type != 'Any') {
       list = list.filter(item => item.category.some(c => c.name == type));
     }
-
     if (elementV > 1) {
       list = list.filter(item => item.elementvalue >= elementV);
     }
@@ -104,12 +93,10 @@ export class A22ItemlistComponent extends ModalUseComponent {
         list = list.filter(item => item.wind)
         break;
     }
-
     if (ingt) {
       const filterValue = ingt.toLowerCase();
       list = list.filter(item => (item.ingredient_set) ? item.ingredient_set.some(i => i.ing.toLowerCase().includes(filterValue)) : false)
     }
-
     if (value) {
       const filterValue = value.toLowerCase();
       list = list.filter(item => {

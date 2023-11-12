@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { takeUntil } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { catchError, switchMap, takeUntil } from 'rxjs/operators';
 import { DataComponent } from './data.component';
 
 @Component({
@@ -11,27 +12,36 @@ import { DataComponent } from './data.component';
     providers: [DestroyService]
 })
 
-export abstract class FilterableComponent extends DataComponent implements OnInit {
+export abstract class FilterableComponent extends DataComponent {
     pageForm: UntypedFormGroup;
 
     constructor(
         protected readonly destroy$: DestroyService,
         protected route: ActivatedRoute,
-        protected seoService: SeoService
-    ) {
+        protected seoService: SeoService) {
         super(destroy$, route, seoService)
     }
 
-    ngOnInit(): void {
-        this.paramWatch();
-    }
-
     paramWatch() {
-        this.route.paramMap.pipe(takeUntil(this.destroy$))
-            .subscribe(params => {
-                this.language = params.get('language');
-                this.slug = params.get('subject') ? params.get('subject') : '';
-                this.changeData();
+        this.route.paramMap
+            .pipe(
+                switchMap(params => {
+                    this.language = params.get('language');
+                    this.slug = params.get('subject') ? params.get('subject') : '';
+                    return this.changeData();
+                }),
+                catchError(error => {
+                    this.error = `${error.status}`;
+                    return of(undefined);
+                }),
+                takeUntil(this.destroy$)
+            )
+            .subscribe(data => {
+                this.data = data;
+                if (this.data) {
+                    this.error = ``;
+                    this.afterAssignment();
+                }
             });
     }
 

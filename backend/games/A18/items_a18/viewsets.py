@@ -357,84 +357,42 @@ class A18ItemViewSet(viewsets.ModelViewSet):
 
 
 class A18RecipeIdeaViewSet(viewsets.ModelViewSet):
-    queryset = Item.objects.all()
+    queryset = (
+        Item.objects
+        .select_related(
+            'text',
+            'book__text',
+        )
+        .prefetch_related(
+            'recipeidea_set__recipeunlock_set__recipecondition_set__category',
+            'recipeidea_set__recipeunlock_set__recipecondition_set__race',
+            'recipeidea_set__recipeunlock_set__recipecondition_set__monster__text',
+            'recipeidea_set__recipeunlock_set__recipecondition_set__item__text',
+        )
+        .filter(recipeidea__isnull=False)
+        .distinct()
+    )
     serializer_class = A18RecipeItemSerializer
 
     @action(detail=False) 
     def en(self, request):
-        queryset = (
-            Item.objects
-            .select_related(
-                'text',
-            )
-            .prefetch_related(
-                'recipeidea_set__recipeunlock_set__recipecondition_set__category',
-                'recipeidea_set__recipeunlock_set__recipecondition_set__race',
-                'recipeidea_set__recipeunlock_set__recipecondition_set__monster__text',
-                'recipeidea_set__recipeunlock_set__recipecondition_set__item__text',
-            )
-            .filter(recipeidea__isnull=False)
-            .distinct()
-        )
-        serializer = A18RecipeItemSerializer(queryset, many=True, context={'language': 'en'})
-        return Response(serializer.data)
+        return Response(A18RecipeItemSerializer(
+            A18RecipeIdeaViewSet.queryset, many=True, context={'language': 'en'}).data)
 
     @action(detail=False) 
     def ja(self, request):
-        queryset = (
-            Item.objects
-            .select_related(
-                'text',
-            )
-            .prefetch_related(
-                'recipeidea_set__recipeunlock_set__recipecondition_set__category',
-                'recipeidea_set__recipeunlock_set__recipecondition_set__race',
-                'recipeidea_set__recipeunlock_set__recipecondition_set__monster__text',
-                'recipeidea_set__recipeunlock_set__recipecondition_set__item__text',
-            )
-            .filter(recipeidea__isnull=False)
-            .distinct()
-        )
-        serializer = A18RecipeItemSerializer(queryset, many=True, context={'language': 'ja'})
-        return Response(serializer.data)
+        return Response(A18RecipeItemSerializer(
+            A18RecipeIdeaViewSet.queryset, many=True, context={'language': 'ja'}).data)
 
     @action(detail=False) 
     def sc(self, request):
-        queryset = (
-            Item.objects
-            .select_related(
-                'text',
-            )
-            .prefetch_related(
-                'recipeidea_set__recipeunlock_set__recipecondition_set__category',
-                'recipeidea_set__recipeunlock_set__recipecondition_set__race',
-                'recipeidea_set__recipeunlock_set__recipecondition_set__monster__text',
-                'recipeidea_set__recipeunlock_set__recipecondition_set__item__text',
-            )
-            .filter(recipeidea__isnull=False)
-            .distinct()
-        )
-        serializer = A18RecipeItemSerializer(queryset, many=True, context={'language': 'sc'})
-        return Response(serializer.data)
+        return Response(A18RecipeItemSerializer(
+            A18RecipeIdeaViewSet.queryset, many=True, context={'language': 'sc'}).data)
 
     @action(detail=False) 
     def tc(self, request):
-        queryset = (
-            Item.objects
-            .select_related(
-                'text',
-            )
-            .prefetch_related(
-                'recipeidea_set__recipeunlock_set__recipecondition_set__category',
-                'recipeidea_set__recipeunlock_set__recipecondition_set__race',
-                'recipeidea_set__recipeunlock_set__recipecondition_set__monster__text',
-                'recipeidea_set__recipeunlock_set__recipecondition_set__item__text',
-            )
-            .filter(recipeidea__isnull=False)
-            .distinct()
-        )
-        serializer = A18RecipeItemSerializer(queryset, many=True, context={'language': 'tc'})
-        return Response(serializer.data)
+        return Response(A18RecipeItemSerializer(
+            A18RecipeIdeaViewSet.queryset, many=True, context={'language': 'tc'}).data)
 
 
 class A18CatalystViewSet(viewsets.ModelViewSet):

@@ -49,8 +49,7 @@ export class ModerateComponent implements OnInit {
     this.blogService.approveComment(id)
     .pipe(takeUntil(this.destroy$))
     .subscribe({
-      next: () => {
-      },
+      next: () => {},
       error: error => {
         this.error = `${error.status}`;
       }
@@ -61,8 +60,7 @@ export class ModerateComponent implements OnInit {
     this.blogService.deleteComment(id)
     .pipe(takeUntil(this.destroy$))
     .subscribe({
-      next: () => {
-      },
+      next: () => {},
       error: error => {
         this.error = `${error.status}`;
       }

@@ -6,7 +6,7 @@ import { AuthenticationService } from '@app/services/authentication.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { ErrorCodeService } from '@app/services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
-import { first, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'login.component.html',
@@ -29,20 +29,20 @@ export class LoginComponent {
     protected seoService: SeoService,
     private metaService: Meta,
     private titleService: Title
-    ) { }
+  ) { }
 
-    ngOnInit() {
-      // honestly I have no idea if I need this junk but I don't want this in search
-      this.titleService.setTitle(`Login - Barrel Wisdom`);
-      this.metaService.updateTag({ name: `robots`, content: `noindex` },`name="robots"`);
-      this.seoService.removeCanonicalURL();
-      
-      this.loginForm = this.formBuilder.nonNullable.group({
-          username: ['', Validators.required],
-          password: ['', Validators.required]
-      });
+  ngOnInit() {
+    // honestly I have no idea if I need this junk but I don't want this in search
+    this.titleService.setTitle(`Login - Barrel Wisdom`);
+    this.metaService.updateTag({ name: `robots`, content: `noindex` }, `name="robots"`);
+    this.seoService.removeCanonicalURL();
 
-      this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.loginForm = this.formBuilder.nonNullable.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
 
@@ -50,22 +50,21 @@ export class LoginComponent {
 
   onSubmit() {
     this.submitted = true;
-
-    // stop here if form is invalid
     if (this.loginForm.invalid) {
-        return;
+      return;
     }
 
     this.loading = true;
     this.authenticationService.login(this.f.username.value, this.f.password.value)
-        .pipe(first(), takeUntil(this.destroy$))
-        .subscribe({next: 
-            () => {
-              this.router.navigateByUrl(this.returnUrl);
-            },
-            error: error => {
-                this.loading = false;
-                this.errorMsg = this.errorCodeService.errorMessage(error);
-            }});
-    }
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          this.router.navigateByUrl(this.returnUrl);
+        },
+        error: error => {
+          this.loading = false;
+          this.errorMsg = this.errorCodeService.errorMessage(error);
+        }
+      });
+  }
 }

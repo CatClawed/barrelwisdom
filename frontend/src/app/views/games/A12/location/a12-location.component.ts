@@ -13,8 +13,6 @@ import { takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 export class A12LocationComponent extends FragmentedComponent {
-  location: AreaData;
-
   constructor(
     protected route: ActivatedRoute,
     protected loc: Location,
@@ -25,20 +23,12 @@ export class A12LocationComponent extends FragmentedComponent {
     super(destroy$, route, seoService, viewportScroller, loc);
   }
 
-  changeData(): void {
-    this.a12service.getRegion(this.slug, this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: location => {
-          this.error = ``;
-          this.location = location;
-          this.hasData = true;
-          this.gameService(this.a12service, 'locations');
-          this.genericSEO(this.location.name, `All items in ${this.location.name}`);
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+  changeData() {
+    this.gameService(this.a12service, 'locations');
+    return this.a12service.getRegion(this.slug, this.language)
+  }
+
+  afterAssignment(): void {
+    this.genericSEO(this.data.name, `All items in ${this.data.name}`);
   }
 } 

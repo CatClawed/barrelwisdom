@@ -1,6 +1,6 @@
 <Error *ngIf="error" [errorCode]="error"></Error>
 
-<ng-container *ngIf="effect">
+<ng-container *ngIf="data as effect">
 <Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Effects', '/'+gameURL+'/effects/'+language]]" [current]="effect.name"></Breadcrumb>
 <div class="mx-auto row spacer">
   <div class="{{colset}} card card-body">

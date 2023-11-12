@@ -1,9 +1,8 @@
 <Error *ngIf="error" [errorCode]="error"></Error>
 
-<h1 *ngIf="tagName">{{tagName}}</h1>
-<div *ngIf="!tagName" style="padding-top: 0.5em;"></div>
-
 <ng-container *ngIf="blog">
+    <h1 *ngIf="blog.tagname">{{blog.tagname}}</h1>
+    <div *ngIf="!blog.tagname" style="padding-top: 0.5em;"></div>
     <div class="item-grid">
         <div *ngFor="let b of blog.results" class="card" style="height:100%">
             <div class="aspect-ratio-box">

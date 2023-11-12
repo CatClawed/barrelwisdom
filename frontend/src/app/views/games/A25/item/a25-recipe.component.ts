@@ -3,10 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
-import { RecipeTab } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a25-recipe.component.html',
@@ -15,8 +13,6 @@ import { takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 export class A25RecipeComponent extends SingleComponent {
-  recipes: RecipeTab[];
-
   constructor(
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
@@ -26,20 +22,10 @@ export class A25RecipeComponent extends SingleComponent {
     super(destroy$, route, seoService);
   }
 
-  changeData(): void {
-    this.a25service.getRecipeList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: recipe => {
-          this.error = ``;
-          this.recipes = recipe;
-          this.gameService(this.a25service, 'recipe-ideas');
-          this.genericSEO(`Recipes`, `All recipes in ${this.gameTitle}.`);
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+  changeData() {
+    this.gameService(this.a25service, 'items/recipes');
+    this.genericSEO(`Recipe Books`, `All recipes in ${this.gameTitle}.`);
+    return this.a25service.getRecipeList(this.language)
   }
 
   getEmptySpace(page, index) {

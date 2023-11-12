@@ -9,7 +9,7 @@ import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'brsl-demonlist.component.html',
@@ -17,7 +17,6 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class BRSLDemonlistComponent extends ModalUseComponent {
-  demons: DemonList[];
   filteredDemons: Observable<DemonList[]>;
 
   constructor(
@@ -37,28 +36,22 @@ export class BRSLDemonlistComponent extends ModalUseComponent {
   }
 
   changeData() {
-    this.modalEvent();
+    this.gameService(this.brslservice, 'demons');
+    this.genericSEO(`Demons`, `The list of demons in ${this.gameTitle}.`);
     this.pageForm.reset()
-    this.brslservice.getDemonList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: demons => {
-          this.demons = demons.slice(0, 103);
-          this.gameService(this.brslservice, 'demons');
-          this.genericSEO(`Demons`, `The list of demons in ${this.gameTitle}.`);
-          this.filteredDemons = this.pageForm.valueChanges.pipe(
-            startWith(null as Observable<DemonList[]>),
-            map((search: any) => search ? this.filterT(search.filtertext) : this.demons.slice())
-          );
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+    return this.brslservice.getDemonList(this.language)
+  }
+
+  afterAssignment(): void {
+    this.data = this.data.slice(0, 103)
+    this.filteredDemons = this.pageForm.valueChanges.pipe(
+      startWith(null as Observable<DemonList[]>),
+      map((search: any) => search ? this.filterT(search.filtertext) : this.data.slice())
+    );
   }
 
   private filterT(value: string): DemonList[] {
-    let list: DemonList[] = this.demons;
+    let list: DemonList[] = this.data;
     if (!value) {
       return list;
     }

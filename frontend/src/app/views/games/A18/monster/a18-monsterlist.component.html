@@ -10,11 +10,11 @@
           <mat-label>Filter...</mat-label>
           <input style="height: 100%;" matInput formControlName="filtertext">
         </mat-form-field>
-        <mat-form-field class="col-md-4" appearance="outline">
+        <mat-form-field *ngIf="data" class="col-md-4" appearance="outline">
           <mat-label>Type</mat-label>
           <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
             <mat-option value="Any" selected><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"   ></mat-icon> Any</mat-option>
-            <mat-option *ngFor="let race of races" value="{{race.name}}">
+            <mat-option *ngFor="let race of data.races" value="{{race.name}}">
                <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-{{race.icon}}"></mat-icon>
                {{race.name}}
             </mat-option>
@@ -23,7 +23,7 @@
       </div>
     </form>
   </div>
-<div *ngIf="filteredMonsters" class="item-grid">
+<div class="item-grid">
 <div *ngFor="let mon of filteredMonsters | async; trackBy:identify" class="card card-body">
    <h4 class="card-title card-icon-space">
       <a (click)="openModal(monsterModal, mon.slug, $event);" href="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a>    

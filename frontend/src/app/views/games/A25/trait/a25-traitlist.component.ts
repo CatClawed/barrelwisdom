@@ -8,8 +8,8 @@ import { NameLink, Trait } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { Observable } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { Observable, forkJoin } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a25-traitlist.component.html',
@@ -17,8 +17,6 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class A25TraitlistComponent extends ModalUseComponent {
-  transfer: NameLink[];
-  traits: Trait[];
   filteredTraits: Observable<Trait[]>;
 
   constructor(
@@ -37,47 +35,25 @@ export class A25TraitlistComponent extends ModalUseComponent {
     })
   }
 
-  changeData(): void {
-    this.modalEvent();
+  changeData() {
+    this.gameService(this.a25service, 'traits');
+    this.genericSEO(`Traits`, `The list of traits in ${this.gameTitle}.`); 
     this.pageForm.reset();
-    this.getTransfer();
-    this.getTraits();
+    return forkJoin({
+      traits: this.a25service.getTraitList(this.language),
+      transfer: this.a25service.getFilter("combat_type", this.language),
+    })
   }
 
-  getTraits() {
-    this.a25service.getTraitList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: traits => {
-          this.traits = traits;
-          this.gameService(this.a25service, 'traits');
-          this.genericSEO(`Traits`, `The list of traits in ${this.gameTitle}.`);      
-          this.filteredTraits = this.pageForm.valueChanges.pipe(
-            startWith(null as Observable<Trait[]>),
-            map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.traits.slice())
-          );
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
-  }
-
-  getTransfer() {
-    this.a25service.getFilter("combat_type", this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: transfer => {
-          this.transfer = transfer;
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+  afterAssignment(): void {
+    this.filteredTraits = this.pageForm.valueChanges.pipe(
+      startWith(null as Observable<Trait[]>),
+      map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.data.traits.slice())
+    );
   }
 
   private filterT(value: string, transfer: string): Trait[] {
-    let traitlist: Trait[] = this.traits;
+    let traitlist: Trait[] = this.data.traits;
 
     switch (transfer) {
       case "attack":

@@ -5,27 +5,19 @@ import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material
 import { MatChipInputEvent } from '@angular/material/chips';
 import { SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EditBlog } from "@app/interfaces/blog";
+import { EditBlog, Tag } from "@app/interfaces/blog";
 import { Section } from '@app/interfaces/section';
-import { Tag } from '@app/interfaces/tag';
 import { User } from "@app/interfaces/user";
 import { AuthenticationService } from "@app/services/authentication.service";
 import { BlogService } from '@app/services/blog.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { ErrorCodeService } from "@app/services/errorcode.service";
 import { SectionService } from '@app/services/section.service';
-import { TagService } from '@app/services/tag.service';
 import { environment } from '@environments/environment';
 import { MarkdownService } from 'ngx-markdown';
-import { Observable, iif, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, first, map, mergeMap, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import slugify from 'slugify';
-
-/**
- * TODO: Figure out what in the hell is going on with tags.
- * TODO: Fix the backend of whatever the heck is making this garbage.
- * TODO: Go back in time and stop myself from ever coding.
- * */
 
 @Component({
   templateUrl: 'create.component.html',
@@ -77,7 +69,6 @@ export class CreateComponent {
     private errorService: ErrorCodeService,
     private authenticationService: AuthenticationService,
     private markdownService: MarkdownService,
-    private tagService: TagService,
     private sectionService: SectionService,
     private BlogService: BlogService
   ) {
@@ -180,7 +171,7 @@ export class CreateComponent {
         idList.push(this.tagIDList[index]);
       }
     }
-    this.tagService.addTags(newList)
+    this.BlogService.addTags(newList)
       .pipe(first(),
         mergeMap(data => {
           idList = this.handleTags(data, idList)
@@ -237,7 +228,7 @@ export class CreateComponent {
 
   // get all the tags
   getTags(): void {
-    this.tagService.getTags()
+    this.BlogService.getTags()
       .pipe(takeUntil(this.destroy$))
       .subscribe(tags => {
         this.allTags = tags;

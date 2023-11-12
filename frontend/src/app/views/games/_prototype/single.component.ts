@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { takeUntil } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { catchError, switchMap, takeUntil } from 'rxjs/operators';
 import { DataComponent } from './data.component';
 
 @Component({
@@ -10,7 +11,7 @@ import { DataComponent } from './data.component';
     providers: [DestroyService]
 })
 
-export abstract class SingleComponent extends DataComponent implements OnInit {
+export abstract class SingleComponent extends DataComponent {
     colset: string;
 
     @Input()
@@ -28,16 +29,26 @@ export abstract class SingleComponent extends DataComponent implements OnInit {
         if (this.showNav) this.colset = "col-md-9 mx-auto ";
     }
 
-    ngOnInit(): void {
-        this.paramWatch();
-    }
-
     paramWatch(): void {
-        this.route.paramMap.pipe(takeUntil(this.destroy$))
-            .subscribe(params => {
-                this.language = params.get('language');
-                this.slug = this.inputSlug ? this.inputSlug : params.get('subject');
-                this.changeData()
-            });
+        this.route.paramMap
+            .pipe(
+                switchMap(params => {
+                    this.language = params.get('language');
+                    this.slug = this.inputSlug ? this.inputSlug : params.get('subject');
+                    return this.changeData()
+                }),
+                catchError(error => {
+                    this.error = `${error.status}`;
+                    return of(undefined);
+                }),
+                takeUntil(this.destroy$)
+            )
+            .subscribe(data => {
+                this.data = data;
+                if (this.data) {
+                    this.error = ``;
+                    this.afterAssignment();
+                }
+            })
     }
 }

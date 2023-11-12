@@ -3,7 +3,7 @@
 <ng-container *ngIf="!error">
 <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Items"></Breadcrumb>
 <h1>Items</h1>
-<div *ngIf="categories" class ="col-md-10 mx-auto">
+<div class ="col-md-10 mx-auto">
   <form [formGroup]="pageForm" class="form-horizontal">
     <div class="row">
       <mat-form-field class="col-md-8" appearance="outline">
@@ -14,10 +14,12 @@
         <mat-label>Category</mat-label>
         <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
           <mat-option value="Any"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"   ></mat-icon> Any</mat-option>
-          <mat-option *ngFor="let cat of categories" value="{{cat.name}}">
+          <ng-container *ngIf="data">
+            <mat-option *ngFor="let cat of data.categories" value="{{cat.name}}">
               <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-{{cat.icon_name}}"></mat-icon>
               {{cat.name}}
-          </mat-option>
+            </mat-option>
+          </ng-container>
         </mat-select>
       </mat-form-field>
     </div>
@@ -29,7 +31,7 @@
     </div>
   </form>
 </div>
-<div *ngIf="filteredItems" class="item-grid">
+<div class="item-grid">
   <div *ngFor="let it of filteredItems | async; trackBy:identify2" class="card card-body">
     <h4 class="card-title card-icon-space">
       <a (click)="openModal(itemModal, it.slugname, $event);" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a>    

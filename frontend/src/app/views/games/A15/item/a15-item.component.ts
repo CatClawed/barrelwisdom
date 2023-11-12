@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { ItemFull } from '@app/views/games/A15/_services/a15.interface';
 import { A15Service } from '@app/views/games/A15/_services/a15.service';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a15-item.component.html',
@@ -14,7 +12,6 @@ import { takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 export class A15ItemComponent extends SingleComponent {
-  item: ItemFull;
   fire = false;
   water = false;
   wind = false;
@@ -28,39 +25,31 @@ export class A15ItemComponent extends SingleComponent {
     super(destroy$, route, seoService);
   }
 
-  changeData(): void {
-    this.a15service.getItem(this.slug, this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: item => {
-          this.error = ``;
-          this.item = item;
-          this.gameService(this.a15service, 'items');
-          this.seoImage = `${this.imgURL}${this.section}/${this.item.slugname}.webp`
-          this.genericSEO(this.item.name, this.item.desc);
+  changeData() {
+    this.gameService(this.a15service, 'items');
+    return this.a15service.getItem(this.slug, this.language);
+  }
+  afterAssignment(): void {
+    this.seoImage = `${this.imgURL}${this.section}/${this.data.slugname}.webp`
+    this.genericSEO(this.data.name, this.data.desc);
 
-          if (this.item.effectline_set) {
-            for (let eff of this.item.effectline_set) {
-              switch (eff.elem) {
-                case "fire":
-                  this.fire = true;
-                  break;
-                case "water":
-                  this.water = true;
-                  break;
-                case "wind":
-                  this.wind = true;
-                  break;
-                case "earth":
-                  this.earth = true;
-                  break;
-              }
-            }
-          }
-        },
-        error: error => {
-          this.error = `${error.status}`;
+    if (this.data.effectline_set) {
+      for (let eff of this.data.effectline_set) {
+        switch (eff.elem) {
+          case "fire":
+            this.fire = true;
+            break;
+          case "water":
+            this.water = true;
+            break;
+          case "wind":
+            this.wind = true;
+            break;
+          case "earth":
+            this.earth = true;
+            break;
         }
-      });
+      }
+    }
   }
 } 

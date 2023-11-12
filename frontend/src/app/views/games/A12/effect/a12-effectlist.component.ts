@@ -9,7 +9,7 @@ import { A12Service } from '@app/views/games/A12/_services/a12.service';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a12-effectlist.component.html',
@@ -17,7 +17,6 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 })
 
 export class A12EffectlistComponent extends ModalUseComponent {
-  effects: Effect[];
   filteredEffects: Observable<Effect[]>;
 
   constructor(
@@ -28,37 +27,29 @@ export class A12EffectlistComponent extends ModalUseComponent {
     protected location: Location,
     protected seoService: SeoService,
     private formBuilder: UntypedFormBuilder,
-    private a12service: A12Service,
-  ) {
+    private a12service: A12Service) {
     super(modalService, destroy$, router, route, location, seoService);
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
     })
   }
 
-  changeData(): void {
-    this.modalEvent();
+  changeData() {
+    this.gameService(this.a12service, 'effects');
+    this.genericSEO(`Effects`, `The list of effects in ${this.gameTitle}.`);
     this.pageForm.reset();
-    this.a12service.getEffectList(this.language)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: effects => {
-          this.effects = effects;
-          this.gameService(this.a12service, 'effects');
-          this.genericSEO(`Effects`, `The list of effects in ${this.gameTitle}.`);
-          this.filteredEffects = this.pageForm.valueChanges.pipe(
-            startWith(null as Observable<Effect[]>),
-            map((search: any) => search ? this.filterT(search.filtertext) : this.effects.slice())
-          );
-        },
-        error: error => {
-          this.error = `${error.status}`;
-        }
-      });
+    return this.a12service.getEffectList(this.language);
+  }
+
+  afterAssignment(): void {
+    this.filteredEffects = this.pageForm.valueChanges.pipe(
+      startWith(null as Observable<Effect[]>),
+      map((search: any) => search ? this.filterT(search.filtertext) : this.data.slice())
+    );
   }
 
   private filterT(value: string): Effect[] {
-    let effectlist: Effect[] = this.effects;
+    let effectlist: Effect[] = this.data;
     if (!value) {
       return effectlist;
     }

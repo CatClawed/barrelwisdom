@@ -16,9 +16,11 @@
           <mat-label>Category</mat-label>
           <mat-select matNativeControl formControlName="category" disableOptionCentering="true" class="mat-select-icon">
             <mat-option value="Any" selected>Any</mat-option>
-            <mat-option *ngFor="let cat of categories" value="{{cat.name}}">
+            <ng-container *ngIf="data">
+              <mat-option *ngFor="let cat of data.categories" value="{{cat.name}}">
                 {{cat.name}}
-            </mat-option>
+              </mat-option>
+            </ng-container>
           </mat-select>
         </mat-form-field>
         <mat-form-field class="col-md-4" appearance="outline">
@@ -34,7 +36,7 @@
       </div>
     </form>
   </div>
-<div *ngIf="filteredItems" class="item-grid">
+<div class="item-grid">
 <div *ngFor="let item of filteredItems | async; trackBy:identify" class="card card-body">
   <h4 class="card-title card-icon-space">
     <a (click)="openModal(itemModal, item.slug, $event);" href="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>    

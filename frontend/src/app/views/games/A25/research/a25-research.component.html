@@ -1,9 +1,9 @@
 <Error *ngIf="error" [errorCode]="error"></Error>
-<ng-container *ngIf="research">
-<Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Research"></Breadcrumb>
-<h1>Research</h1>
-<div *ngIf="showNav" class="col-md-3" ></div>
-
+<ng-container *ngIf="!error">
+  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Research"></Breadcrumb>
+  <h1>Research</h1>
+</ng-container>
+<ng-container *ngIf="data">
 <mat-tab-group>
   <mat-tab label="{{kind[language][0]}}">
     <table class="tbl spacer" style="margin-top:1rem;">
@@ -11,9 +11,9 @@
       <tr *ngFor="let it of [].constructor(100); let i = index;">
         <td>{{i+1}}</td>
         <td>
-          <p><b>{{research[i].name}}: </b> {{research[i].desc}} ({{research[i].val/100}}%)</p>
-          <p *ngIf="research[i].req"><b>Requirement: </b>{{research[i].req}}</p>
-          <p><b>Cole: </b> {{research[i].cole}}</p>
+          <p><b>{{data[i].name}}: </b> {{data[i].desc}} ({{data[i].val/100}}%)</p>
+          <p *ngIf="data[i].req"><b>Requirement: </b>{{data[i].req}}</p>
+          <p><b>Cole: </b> {{data[i].cole}}</p>
         </td>
       </tr>
     </table>
@@ -24,9 +24,9 @@
       <tr *ngFor="let it of [].constructor(100); let i = index;">
         <td>{{i+1}}</td>
         <td>
-          <p><b>{{research[i+100].name}}: </b> {{research[i+100].desc}} ({{research[i+100].val/100}}%)</p>
-          <p *ngIf="research[i+100].req"><b>Requirement: </b>{{research[i+100].req}}</p>
-          <p><b>Cole: </b> {{research[i+100].cole}}</p>
+          <p><b>{{data[i+100].name}}: </b> {{data[i+100].desc}} ({{data[i+100].val/100}}%)</p>
+          <p *ngIf="data[i+100].req"><b>Requirement: </b>{{data[i+100].req}}</p>
+          <p><b>Cole: </b> {{data[i+100].cole}}</p>
         </td>
       </tr>
     </table>

@@ -1,7 +1,9 @@
 <Error *ngIf="error" [errorCode]="error"></Error>
-<div *ngIf="major">
+<ng-container *ngIf="!error">
     <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Major Gathering Spots'"></Breadcrumb>
     <h1>Major Gathering Spots</h1>
+</ng-container>
+<ng-container *ngIf="data as major">
         <div class="table-of-contents">
             <b>Table of Contents</b>
             <ol class="toc-list">
@@ -152,4 +154,4 @@
             </td>
         </tr>
     </table>
-</div>
+</ng-container>
