@@ -8,150 +8,71 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 
 class A18MonsterViewSet(viewsets.ModelViewSet):
-    queryset = Monster.objects.all()
+    queryset = (
+        Monster.objects
+        .select_related(
+            'text',
+            'kind',
+        )
+    )
     serializer_class = A18MonsterListSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
     lookup_field = 'slug'
 
+    def get_query(slug=None, lang="en"):
+        if not slug:
+            return Response(A18MonsterListSerializer(
+                A18MonsterViewSet.queryset, many=True,context={'language': lang}).data)
+        try:
+            queryset = (
+                Monster.objects
+                .select_related(
+                    'text',
+                    'kind',
+                    'char1',
+                    'char2',
+                    'char3',
+                    'char4',
+                )
+                .prefetch_related(
+                    'item_set__text',
+                )
+                .get(slug=slug)
+            )
+        except ObjectDoesNotExist:
+            raise Http404
+        return Response(A18MonsterFullSerializer(queryset, context={'language': lang}).data)
+
     @action(detail=False)
     def en(self, request):
-        queryset = (
-            Monster.objects
-            .select_related(
-                'text',
-                'kind',
-            )
-        )
-        serializer = A18MonsterListSerializer(queryset, many=True, context={'language': 'en'})
-        return Response(serializer.data)
+        return A18MonsterViewSet.get_query(lang="en")
 
     @action(detail=True, methods=['get'], url_path="en")
     def en_full(self, request, slug):
-        try:
-            queryset = (
-                Monster.objects
-                .select_related(
-                    'text',
-                    'kind',
-                    'char1',
-                    'char2',
-                    'char3',
-                    'char4',
-                )
-                .prefetch_related(
-                    'item_set__text',
-                )
-                .get(slug=slug)
-            )
-        except ObjectDoesNotExist:
-            raise Http404
-        serializer = A18MonsterFullSerializer(queryset, context={'language': 'en'})
-        return Response(serializer.data)
+        return A18MonsterViewSet.get_query(lang="en", slug=slug)
 
     @action(detail=False)
     def ja(self, request):
-        queryset = (
-            Monster.objects
-            .select_related(
-                'text',
-                'kind',
-            )
-        )
-        serializer = A18MonsterListSerializer(queryset, many=True, context={'language': 'ja'})
-        return Response(serializer.data)
+        return A18MonsterViewSet.get_query(lang="ja")
 
     @action(detail=True, methods=['get'], url_path="ja")
     def ja_full(self, request, slug):
-        try:
-            queryset = (
-                Monster.objects
-                .select_related(
-                    'text',
-                    'kind',
-                    'char1',
-                    'char2',
-                    'char3',
-                    'char4',
-                )
-                .prefetch_related(
-                    'item_set__text',
-                )
-                .get(slug=slug)
-            )
-        except ObjectDoesNotExist:
-            raise Http404
-        serializer = A18MonsterFullSerializer(queryset, context={'language': 'ja'})
-        return Response(serializer.data)
-
+        return A18MonsterViewSet.get_query(lang="ja", slug=slug)
     @action(detail=False)
     def sc(self, request):
-        queryset = (
-            Monster.objects
-            .select_related(
-                'text',
-                'kind',
-            )
-        )
-        serializer = A18MonsterListSerializer(queryset, many=True, context={'language': 'sc'})
-        return Response(serializer.data)
+        return A18MonsterViewSet.get_query(lang="sc")
 
     @action(detail=True, methods=['get'], url_path="sc")
     def sc_full(self, request, slug):
-        try:
-            queryset = (
-                Monster.objects
-                .select_related(
-                    'text',
-                    'kind',
-                    'char1',
-                    'char2',
-                    'char3',
-                    'char4',
-                )
-                .prefetch_related(
-                    'item_set__text',
-                )
-                .get(slug=slug)
-            )
-        except ObjectDoesNotExist:
-            raise Http404
-        serializer = A18MonsterFullSerializer(queryset, context={'language': 'sc'})
-        return Response(serializer.data)
+        return A18MonsterViewSet.get_query(lang="sc", slug=slug)
 
     @action(detail=False)
     def tc(self, request):
-        queryset = (
-            Monster.objects
-            .select_related(
-                'text',
-                'kind',
-            )
-        )
-        serializer = A18MonsterListSerializer(queryset, many=True, context={'language': 'tc'})
-        return Response(serializer.data)
+        return A18MonsterViewSet.get_query(lang="tc")
 
     @action(detail=True, methods=['get'], url_path="tc")
     def tc_full(self, request, slug):
-        try:
-            queryset = (
-                Monster.objects
-                .select_related(
-                    'text',
-                    'kind',
-                    'char1',
-                    'char2',
-                    'char3',
-                    'char4',
-                )
-                .prefetch_related(
-                    'item_set__text',
-                )
-                .get(slug=slug)
-            )
-        except ObjectDoesNotExist:
-            raise Http404
-        serializer = A18MonsterFullSerializer(queryset, context={'language': 'tc'})
-        return Response(serializer.data)
+        return A18MonsterViewSet.get_query(lang="tc", slug=slug)
 
 class A18RaceViewSet(viewsets.ModelViewSet):
     queryset = Race.objects.all()
@@ -159,24 +80,20 @@ class A18RaceViewSet(viewsets.ModelViewSet):
 
     @action(detail=False)
     def en(self, request):
-        queryset = Race.objects.all()
-        serializer = A18RaceListSerializer(queryset, many=True, context={'language': 'en'})
-        return Response(serializer.data)
+        return Response(A18RaceListSerializer(
+            A18RaceViewSet.queryset, many=True, context={'language': 'en'}).data)
 
     @action(detail=False)
     def ja(self, request):
-        queryset = Race.objects.all()
-        serializer = A18RaceListSerializer(queryset, many=True, context={'language': 'ja'})
-        return Response(serializer.data)
+        return Response(A18RaceListSerializer(
+            A18RaceViewSet.queryset, many=True, context={'language': 'ja'}).data)
 
     @action(detail=False)
     def sc(self, request):
-        queryset = Race.objects.all()
-        serializer = A18RaceListSerializer(queryset, many=True, context={'language': 'sc'})
-        return Response(serializer.data)
+        return Response(A18RaceListSerializer(
+            A18RaceViewSet.queryset, many=True, context={'language': 'sc'}).data)
 
     @action(detail=False)
     def tc(self, request):
-        queryset = Race.objects.all()
-        serializer = A18RaceListSerializer(queryset, many=True, context={'language': 'tc'})
-        return Response(serializer.data)
+        return Response(A18RaceListSerializer(
+            A18RaceViewSet.queryset, many=True, context={'language': 'tc'}).data)
