@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-import { ErrorModule } from '@app/views/error/error.module';
+import { ErrorComponent } from '@app/views/error/error.component';
 import { SharedModule } from '@app/views/games/_prototype/SharedModules/shared.module';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { A23TraitRoutingModule } from './a23-trait-routing.module';
@@ -15,7 +15,7 @@ import { A23TraitlistComponent } from './a23-traitlist.component';
       TooltipModule.forRoot(),
       MatIconModule,
       MatSelectModule,
-      ErrorModule,
+      ErrorComponent,
     ],
     declarations: [
         A23TraitlistComponent,

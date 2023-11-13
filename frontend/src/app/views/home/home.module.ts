@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { ErrorModule } from '@app/views/error/error.module';
+import { ErrorComponent } from '@app/views/error/error.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 
@@ -9,7 +9,7 @@ import { HomeComponent } from './home.component';
     imports: [
       CommonModule,
       HomeRoutingModule,
-      ErrorModule,
+      ErrorComponent,
       MatPaginatorModule
     ],
     declarations: [

@@ -1,16 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ErrorModule } from '@app/views/error/error.module';
+import { ErrorComponent } from '@app/views/error/error.component';
 import { A22LocationRoutingModule } from './a22-location-routing.module';
 import { A22LocationComponent } from './a22-location.component';
-import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
+import { BreadcrumbComponent } from '@app/views/breadcrumb/breadcrumb.component';
 
 @NgModule({
     imports: [
       CommonModule,
       A22LocationRoutingModule,
-      ErrorModule,
-      BreadcrumbModule,
+      ErrorComponent,
+      BreadcrumbComponent,
     ],
     declarations: [
         A22LocationComponent,

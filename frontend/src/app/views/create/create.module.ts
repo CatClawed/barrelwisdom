@@ -3,7 +3,7 @@ import { NgModule, SecurityContext } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
-import { ErrorModule } from '@app/views/error/error.module';
+import { ErrorComponent } from '@app/views/error/error.component';
 import { MarkdownModule } from 'ngx-markdown';
 import { CreateRoutingModule } from './create-routing.module';
 import { CreateComponent } from './create.component';
@@ -13,7 +13,7 @@ import { CreateComponent } from './create.component';
     CommonModule,
     ReactiveFormsModule,
     CreateRoutingModule,
-    ErrorModule,
+    ErrorComponent,
     MatChipsModule,
     MatAutocompleteModule,
     MarkdownModule.forRoot(

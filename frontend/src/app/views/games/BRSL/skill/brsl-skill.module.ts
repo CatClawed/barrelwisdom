@@ -1,16 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ErrorModule } from '@app/views/error/error.module';
+import { ErrorComponent } from '@app/views/error/error.component';
 import { BRSLSkillRoutingModule } from './brsl-skill-routing.module';
 import { BRSLSkillComponent } from './brsl-skill.component';
-import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
+import { BreadcrumbComponent } from '@app/views/breadcrumb/breadcrumb.component';
 
 @NgModule({
     imports: [
       CommonModule,
       BRSLSkillRoutingModule,
-      ErrorModule,
-      BreadcrumbModule,
+      ErrorComponent,
+      BreadcrumbComponent,
     ],
     declarations: [
         BRSLSkillComponent,

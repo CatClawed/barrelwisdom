@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { ErrorModule } from '@app/views/error/error.module';
+import { ErrorComponent } from '@app/views/error/error.component';
 import { SharedModule } from '@app/views/games/_prototype/SharedModules/shared.module';
 import { A15MonsterRoutingModule } from './a15-monster-routing.module';
 import { A15MonsterComponent } from './a15-monster.component';
@@ -13,7 +13,7 @@ import { A15MonsterlistComponent } from './a15-monsterlist.component';
       A15MonsterRoutingModule,
       MatIconModule,
       MatButtonModule,
-      ErrorModule,
+      ErrorComponent,
     ],
     declarations: [
         A15MonsterlistComponent,

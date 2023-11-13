@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-import { ErrorModule } from '@app/views/error/error.module';
+import { ErrorComponent } from '@app/views/error/error.component';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { SharedModule } from '@app/views/games/_prototype/SharedModules/shared.module';
 import { A23BookComponent } from './a23-book.component';
@@ -17,7 +17,7 @@ import { A23ItemlistComponent } from './a23-itemlist.component';
       MatIconModule,
       MatSelectModule,
       MatButtonModule,
-      ErrorModule,
+      ErrorComponent,
       PopoverModule.forRoot(),
     ],
     declarations: [

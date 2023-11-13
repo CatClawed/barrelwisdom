@@ -2,13 +2,13 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { UserComponent } from './user.component';
 import { UserRoutingModule } from './user-routing.module';
-import { ErrorModule } from '@app/views/error/error.module';
+import { ErrorComponent } from '@app/views/error/error.component';
 
 @NgModule({
     imports: [
       CommonModule,
       UserRoutingModule,
-      ErrorModule
+      ErrorComponent
     ],
     declarations: [
       UserComponent,

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-import { ErrorModule } from '@app/views/error/error.module';
+import { ErrorComponent } from '@app/views/error/error.component';
 import { A25CharaModule } from '@app/views/games/A25/character/a25-chara.module';
 import { A25ItemModule } from '@app/views/games/A25/item/a25-item.module';
 import { SharedModule } from '@app/views/games/_prototype/SharedModules/shared.module';
@@ -15,7 +15,7 @@ import { A25TraitlistComponent } from './a25-traitlist.component';
       A25TraitRoutingModule,
       MatIconModule,
       MatSelectModule,
-      ErrorModule,
+      ErrorComponent,
       A25ItemModule,
       A25CharaModule
     ],

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ErrorModule } from '@app/views/error/error.module';
+import { ErrorComponent } from '@app/views/error/error.component';
 import { SharedModule } from '@app/views/games/_prototype/SharedModules/shared.module';
 import { A25UpdateRoutingModule } from './a25-update-routing.module';
 import { A25UpdateComponent } from './a25-update.component';
@@ -8,7 +8,7 @@ import { A25UpdateComponent } from './a25-update.component';
   imports: [
     SharedModule,
     A25UpdateRoutingModule,
-    ErrorModule,
+    ErrorComponent,
   ],
   declarations: [
     A25UpdateComponent,

@@ -218,6 +218,16 @@ const routes: Routes = [
       },
     ]
   },
+  {
+    path: '**',
+    component: LayoutComponent,
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('@app/views/error/error.component').then(m=>m.ErrorComponent)
+      },
+    ]
+  }
 ];
 
 @NgModule({

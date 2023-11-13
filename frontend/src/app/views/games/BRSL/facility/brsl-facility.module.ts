@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { ErrorModule } from '@app/views/error/error.module';
+import { ErrorComponent } from '@app/views/error/error.component';
 import { SharedModule } from '@app/views/games/_prototype/SharedModules/shared.module';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { BRSLFacilityRoutingModule } from './brsl-facility-routing.module';
@@ -15,7 +15,7 @@ import { BRSLFacilitySetComponent } from './brsl-facilityset.component';
       BRSLFacilityRoutingModule,
       MatIconModule,
       MatButtonModule,
-      ErrorModule,
+      ErrorComponent,
       PopoverModule.forRoot(),
     ],
     declarations: [

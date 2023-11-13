@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
-import { ErrorModule } from '@app/views/error/error.module';
+import { ErrorComponent } from '@app/views/error/error.component';
 import { SharedModule } from '@app/views/games/_prototype/SharedModules/shared.module';
 import { A25QuestRoutingModule } from './a25-quest-routing.module';
 import { A25DungeonComponent } from './a25-dungeon.component';
@@ -11,7 +11,7 @@ import { A25TowerComponent } from './a25-tower.component';
   imports: [
     SharedModule,
     A25QuestRoutingModule,
-    ErrorModule,
+    ErrorComponent,
     MatTabsModule
   ],
   declarations: [

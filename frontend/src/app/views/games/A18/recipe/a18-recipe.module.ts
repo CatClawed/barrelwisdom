@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-import { ErrorModule } from '@app/views/error/error.module';
+import { ErrorComponent } from '@app/views/error/error.component';
 import { SharedModule } from '@app/views/games/_prototype/SharedModules/shared.module';
 import { A18RecipeRoutingModule } from './a18-recipe-routing.module';
 import { A18RecipeComponent } from './a18-recipe.component';
@@ -14,7 +14,7 @@ import { A18RecipeComponent } from './a18-recipe.component';
       MatIconModule,
       MatSelectModule,
       MatButtonModule,
-      ErrorModule,
+      ErrorComponent,
     ],
     declarations: [
       A18RecipeComponent,

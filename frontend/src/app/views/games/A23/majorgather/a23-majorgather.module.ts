@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
-import { ErrorModule } from '@app/views/error/error.module';
+import { BreadcrumbComponent } from '@app/views/breadcrumb/breadcrumb.component';
+import { ErrorComponent } from '@app/views/error/error.component';
 import { A23MajorGatherRoutingModule } from './a23-majorgather-routing.module';
 import { A23MajorGatherComponent } from './a23-majorgather.component';
 
@@ -9,8 +9,8 @@ import { A23MajorGatherComponent } from './a23-majorgather.component';
     imports: [
       CommonModule,
       A23MajorGatherRoutingModule,
-      ErrorModule,
-      BreadcrumbModule,
+      ErrorComponent,
+      BreadcrumbComponent,
     ],
     declarations: [
         A23MajorGatherComponent,

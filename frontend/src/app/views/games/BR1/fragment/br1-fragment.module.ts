@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
-import { ErrorModule } from '@app/views/error/error.module';
+import { BreadcrumbComponent } from '@app/views/breadcrumb/breadcrumb.component';
+import { ErrorComponent } from '@app/views/error/error.component';
 import { BR1FragmentEffectRoutingModule } from './br1-fragment-routing.module';
 import { BR1FragmentEffectlistComponent } from './br1-fragmentlist.component';
 
@@ -15,8 +15,8 @@ import { BR1FragmentEffectlistComponent } from './br1-fragmentlist.component';
       BR1FragmentEffectRoutingModule,
       MatInputModule,
       MatFormFieldModule,
-      ErrorModule,
-      BreadcrumbModule,
+      ErrorComponent,
+      BreadcrumbComponent,
     ],
     declarations: [
         BR1FragmentEffectlistComponent

@@ -1,16 +1,18 @@
 import { Component, Input } from '@angular/core';
 import { ErrorCodeService } from "@app/services/errorcode.service";
+import { CommonModule } from '@angular/common';
 
 @Component({
-  templateUrl: '404.component.html',
-  selector: 'Error'
+  standalone: true,
+  templateUrl: 'error.component.html',
+  selector: 'Error',
+  imports: [CommonModule]
 })
-export class P404Component {
+export class ErrorComponent {
 
   @Input()
   errorCode: string = "404";
 
-  @Input()
   errorVars: any = ["Oops! You're lost.", "Our puni told us that the page you're looking for doesn't exist."];
   
   constructor(private errorService: ErrorCodeService) {

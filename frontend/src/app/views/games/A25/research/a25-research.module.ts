@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
-import { ErrorModule } from '@app/views/error/error.module';
+import { ErrorComponent } from '@app/views/error/error.component';
 import { SharedModule } from '@app/views/games/_prototype/SharedModules/shared.module';
 import { A25ResearchRoutingModule } from './a25-research-routing.module';
 import { A25ResearchComponent } from './a25-research.component';
@@ -9,7 +9,7 @@ import { A25ResearchComponent } from './a25-research.component';
   imports: [
     SharedModule,
     A25ResearchRoutingModule,
-    ErrorModule,
+    ErrorComponent,
     MatTabsModule
   ],
   declarations: [

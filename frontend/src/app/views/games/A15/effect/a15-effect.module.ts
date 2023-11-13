@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ErrorModule } from '@app/views/error/error.module';
+import { ErrorComponent } from '@app/views/error/error.component';
 import { SharedModule } from '@app/views/games/_prototype/SharedModules/shared.module';
 import { A15EffectRoutingModule } from './a15-effect-routing.module';
 import { A15EffectComponent } from './a15-effect.component';
@@ -9,7 +9,7 @@ import { A15EffectlistComponent } from './a15-effectlist.component';
     imports: [
       SharedModule,
       A15EffectRoutingModule,
-      ErrorModule,
+      ErrorComponent,
     ],
     declarations: [
         A15EffectlistComponent,

@@ -3,12 +3,13 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { BreadcrumbModule } from '@app/views/breadcrumb/breadcrumb.module';
+import { BreadcrumbComponent } from '@app/views/breadcrumb/breadcrumb.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   imports: [
     ModalModule.forRoot(),
+    BreadcrumbComponent
   ],
   exports: [
     CommonModule,
@@ -16,7 +17,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ReactiveFormsModule,
     MatInputModule,
     MatFormFieldModule,
-    BreadcrumbModule,
+    BreadcrumbComponent,
   ]
 })
 export class SharedModule {}
