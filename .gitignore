@@ -20,3 +20,4 @@ Thumbs.db
 .sonar_lock
 .scannerwork/*
 sonar-project.properties
+backend/scripts/data.txt
