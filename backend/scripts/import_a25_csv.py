@@ -330,6 +330,13 @@ def ImpSkill(row, index):
         text_en = row["EFFECT_EN"]
     )
     char = Character.objects.get(name__text_ja=row["CHARACTER"], title__text_ja=row["TITLE"])
+    v0 = row["Val 0"].split('-')
+    v1 = row["Val 1"].split('-')
+    v2 = row["Val 2"].split('-')
+    v3 = row["Val 3"].split('-')
+    v4 = row["Val 4"].split('-')
+    v5 = row["Val 5"].split('-')
+    v6 = row["Val 6"].split('-')
     try:
         obj = Skill.objects.get(char=char,name=name)
         print("Updating Skill", row["Name_EN"])
@@ -338,13 +345,20 @@ def ImpSkill(row, index):
         obj.area=Name.objects.get(text_en=row["RANGE"])
         obj.wt=int(row["WT"])+200
         obj.index=index
-        obj.val0=row["Val 0"] if row["Val 0"] else None
-        obj.val1=row["Val 1"] if row["Val 1"] else None
-        obj.val2=row["Val 2"] if row["Val 2"] else None
-        obj.val3=row["Val 3"] if row["Val 3"] else None
-        obj.val4=row["Val 4"] if row["Val 4"] else None
-        obj.val5=row["Val 5"] if row["Val 5"] else None
-        obj.val6=row["Val 6"] if row["Val 6"] else None
+        obj.val0=v0[0] if v0[0] else None
+        obj.val1=v1[0] if v1[0] else None
+        obj.val2=v2[0] if v2[0] else None
+        obj.val3=v3[0] if v3[0] else None
+        obj.val4=v4[0] if v4[0] else None
+        obj.val5=v5[0] if v5[0] else None
+        obj.val6=v6[0] if v6[0] else None
+        obj.val0_2=v0[1] if v0[0] != v0[1] else None
+        obj.val1_2=v1[1] if v1[0] != v1[1] else None
+        obj.val2_2=v2[1] if v2[0] != v2[1] else None
+        obj.val3_2=v3[1] if v3[0] != v3[1] else None
+        obj.val4_2=v4[1] if v4[0] != v4[1] else None
+        obj.val5_2=v5[1] if v5[0] != v5[1] else None
+        obj.val6_2=v6[1] if v6[0] != v6[1] else None
         obj.pow1=row["Pow1"] if not row["Pow6"] else row["Pow3"]
         obj.pow2=row["Pow2"] if not row["Pow6"] else row["Pow4"]
         obj.pow3=row["Pow3"] if not row["Pow6"] else row["Pow5"]
@@ -366,13 +380,20 @@ def ImpSkill(row, index):
             area=Name.objects.get(text_en=row["RANGE"]),
             wt=int(row["WT"])+200,
             index=index,
-            val0=row["Val 0"] if row["Val 0"] else None,
-            val1=row["Val 1"] if row["Val 1"] else None,
-            val2=row["Val 2"] if row["Val 2"] else None,
-            val3=row["Val 3"] if row["Val 3"] else None,
-            val4=row["Val 4"] if row["Val 4"] else None,
-            val5=row["Val 5"] if row["Val 5"] else None,
-            val6=row["Val 6"] if row["Val 6"] else None,
+            val0=v0[0] if v0[0] else None,
+            val1=v1[0] if v1[0] else None,
+            val2=v2[0] if v2[0] else None,
+            val3=v3[0] if v3[0] else None,
+            val4=v4[0] if v4[0] else None,
+            val5=v5[0] if v5[0] else None,
+            val6=v6[0] if v6[0] else None,
+            val0_2=v0[1] if v0[0] != v0[1] else None,
+            val1_2=v1[1] if v1[0] != v1[1] else None,
+            val2_2=v2[1] if v2[0] != v2[1] else None,
+            val3_2=v3[1] if v3[0] != v3[1] else None,
+            val4_2=v4[1] if v4[0] != v4[1] else None,
+            val5_2=v5[1] if v5[0] != v5[1] else None,
+            val6_2=v6[1] if v6[0] != v6[1] else None,
             pow1=row["Pow1"] if not row["Pow6"] else row["Pow3"],
             pow2=row["Pow2"] if not row["Pow6"] else row["Pow4"],
             pow3=row["Pow3"] if not row["Pow6"] else row["Pow5"],
@@ -578,7 +599,7 @@ def ImpRecipe(row, index):
     except:
         print("Page Created", row["Book"])
         tab = rStory
-        if row["Book"] in [5,6]:
+        if row["Book"] in [5,6,11]:
             tab = rExtra
         if row["Book"] in [7, 8, 9]:
             tab = rEvent
@@ -700,6 +721,8 @@ def ImpScoreBattle(row, index):
         info = row["Score Battle ID"].split('-')
         try:
             sb = ScoreBattle.objects.get(chapter=info[0], section=info[1])
+            #for diff in sb.difficulties.all():
+            #    diff.delete()
         except ScoreBattle.DoesNotExist:
             print('New Score Battle')
             name = checkName(
@@ -734,6 +757,8 @@ def ImpTower(row, index):
         try:
             obj=Tower.objects.get(floor=floor)
             print("Updating", row['En'])
+            for reward in obj.rewards.all():
+                reward.delete()
         except:
             print("Creating", row['En'])
             obj = Tower(
@@ -779,6 +804,8 @@ def ImpDungeon(row, index):
         try:
             obj = DungeonFloor.objects.get(dungeon=dun, order=floor)
             print("Updating floor", floor)
+            for reward in obj.rewards.all():
+                reward.delete()
         except:
             print("Creating Floor", floor)
             obj = DungeonFloor(
@@ -787,6 +814,9 @@ def ImpDungeon(row, index):
                 combat_level=row["Rec Combat"],
             )
             obj.save()
+        if floor == 1:
+            for reward in dun.rewards.all():
+                reward.delete()
         for i in range(1,7):
             if row["Dungeon"+str(i)]:
                 reward = GetReward(row["Dungeon"+str(i)],i)
@@ -854,7 +884,7 @@ Checklist
 2. add events
 3. trait -> char/item
 4. char -> skill/passive
-5. items -> recipes -> quest
+5. items -> recipes (update book in function!) -> quest
 6. fuck quest
 """
 
@@ -872,6 +902,6 @@ Checklist
 #import_generic(ImpCombatItem)
 #import_generic(ImpRecipe)
 #import_generic(ImpTraining)
-#import_generic(ImpScoreBattle)
+import_generic(ImpScoreBattle)
 #import_generic(ImpTower)
 #import_generic(ImpDungeon)

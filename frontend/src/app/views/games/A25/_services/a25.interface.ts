@@ -170,6 +170,13 @@ export interface Skill {
     val4: number;
     val5: number;
     val6: number;
+    val0_2: number;
+    val1_2: number;
+    val2_2: number;
+    val3_2: number;
+    val4_2: number;
+    val5_2: number;
+    val6_2: number;
     pow1: number;
     pow2: number;
     pow3: number;

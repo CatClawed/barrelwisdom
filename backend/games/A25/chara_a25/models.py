@@ -60,6 +60,14 @@ class Skill(models.Model):
     val5  = models.IntegerField(blank=True, null=True)
     val6  = models.IntegerField(blank=True, null=True)
 
+    val0_2  = models.IntegerField(blank=True, null=True)
+    val1_2  = models.IntegerField(blank=True, null=True)
+    val2_2  = models.IntegerField(blank=True, null=True)
+    val3_2  = models.IntegerField(blank=True, null=True)
+    val4_2  = models.IntegerField(blank=True, null=True)
+    val5_2  = models.IntegerField(blank=True, null=True)
+    val6_2  = models.IntegerField(blank=True, null=True)
+
     pow1  = models.IntegerField()
     pow2  = models.IntegerField()
     pow3  = models.IntegerField()

@@ -64,13 +64,19 @@ export class A25CharaComponent extends SingleComponent {
   replaceDesc(skill) {
     let desc = skill.desc;
     if (skill.val0) {
-      desc = desc.replaceAll('{0}', skill.val0 / 100);
+      desc = skill.val0_2
+        ? desc.replaceAll('{0}', `${skill.val0 / 100} ~ ${skill.val0_2 / 100}`)
+        : desc.replaceAll('{0}', skill.val0 / 100);
     }
     if (skill.val1) {
-      desc = desc.replaceAll('{1}', skill.val1 / 100);
+      desc = skill.val1_2
+        ? desc.replaceAll('{1}', `${skill.val1 / 100} ~ ${skill.val1_2 / 100}`)
+        : desc.replaceAll('{1}', skill.val1 / 100);
     }
     if (skill.val2) {
-      desc = desc.replaceAll('{2}', skill.val2 / 100);
+      desc = skill.val2_2
+        ? desc.replaceAll('{2}', `${skill.val2 / 100} ~ ${skill.val2_2 / 100}`)
+        : desc.replaceAll('{2}', skill.val2 / 100);
     }
     return desc;
   }

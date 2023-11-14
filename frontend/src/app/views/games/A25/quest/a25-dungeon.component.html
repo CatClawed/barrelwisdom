@@ -32,7 +32,7 @@
 </table>
   <ng-container *ngFor="let floor of dungeon.floors">
     <h3 *ngIf="floor.order == 1">1-2</h3>
-    <h3 *ngIf="floor.order == 3">2-4</h3>
+    <h3 *ngIf="floor.order == 3">3-4</h3>
     <h3 *ngIf="floor.order == 5">5-9</h3>
     <ng-container *ngIf="floor.order == 1 || floor.order == 3 || floor.order == 5">
       <div style="display:grid;grid-template-columns:repeat(2,50%);grid-row-gap:1rem;">

@@ -19,6 +19,7 @@ class A25SkillSerializer(A25DefaultSerializer):
         model =  Skill
         fields = ['name', 'desc', 'elem', 'area', 'wt',
             'val0','val1','val2','val3','val4','val5','val6',
+            'val0_2','val1_2','val2_2','val3_2','val4_2','val5_2','val6_2',
             'break1','break2','break3','break4','break5',
             'pow1','pow2','pow3','pow4','pow5',
         ]
