@@ -16,7 +16,7 @@ class A18CategoryViewSet(viewsets.ModelViewSet):
     def get_query(slug=None, lang="en"):
         if not slug:
             return Response(A18CategorySerializer(
-                A18CategoryViewSet.queryset, many=True, context={'language': 'en'}).data)
+                A18CategoryViewSet.queryset, many=True, context={'language': lang}).data)
         try:
             queryset = (
                 Category.objects
