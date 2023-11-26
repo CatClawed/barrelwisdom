@@ -24,6 +24,12 @@ export class A22EffectComponent extends SingleComponent {
     return this.a22service.getEffect(this.slug, this.language);
   }
   afterAssignment(): void {
-    this.genericSEO(this.data.name, this.data.desc ? this.data.desc : `EV Effect in ${this.gameTitle}.`);
+    if (this.data.efftype === "Hidden" || this.data.efftype === 'unused') {
+      this.error = `404`;
+      this.data = undefined;
+    }
+    else {
+      this.genericSEO(this.data.name, this.data.desc ? this.data.desc : `EV Effect in ${this.gameTitle}.`);
+    }
   }
 } 
