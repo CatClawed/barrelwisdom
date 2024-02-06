@@ -1,11 +1,14 @@
 from rest_framework import viewsets, filters
 from games.A25.misc_a25.models import Filterable, Trait, Research
+from games.A25.chara_a25.models import Character
+from games.A25.items_a25.models import Material
 from games.A25.misc_a25.serializers import A25ResearchSerializer, A25TraitSerializer, A25FilterableSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
+from django.db.models import Prefetch
 
 
 class A25TraitViewSet(viewsets.ModelViewSet):
@@ -18,6 +21,22 @@ class A25TraitViewSet(viewsets.ModelViewSet):
             'cat',
         )
         .prefetch_related(
+            Prefetch(
+                'chara_trait1',
+                queryset=Character.objects.filter(gbl=True)
+            ),
+            Prefetch(
+                'chara_trait2',
+                queryset=Character.objects.filter(gbl=True)
+            ),
+            Prefetch(
+                'chara_trait3',
+                queryset=Character.objects.filter(gbl=True)
+            ),
+            Prefetch(
+                'material_set',
+                queryset=Material.objects.filter(item__gbl=True)
+            ),
             'chara_trait1__name',
             'chara_trait1__title',
             'chara_trait2__name',
@@ -33,10 +52,8 @@ class A25TraitViewSet(viewsets.ModelViewSet):
     lookup_field = 'slug'
 
     def get_query(slug=None, lang="en"):
-        if not slug:
-            return Response(A25TraitSerializer(
-                A25TraitViewSet.queryset, many=True, context={'language': lang}).data)
-        try:
+        queryset = A25TraitViewSet.queryset
+        if lang == 'ja':
             queryset = (
                 Trait.objects
                 .select_related(
@@ -54,8 +71,13 @@ class A25TraitViewSet(viewsets.ModelViewSet):
                     'chara_trait3__title',
                     'material_set__item__name',
                 )
-                .get(slug=slug)
             )
+        
+        if not slug:
+            return Response(A25TraitSerializer(
+                queryset, many=True, context={'language': lang}).data)
+        try:
+            queryset = queryset.get(slug=slug)
         except ObjectDoesNotExist:
             raise Http404
         return Response(A25TraitSerializer(queryset, context={'language': lang}).data)
