@@ -74,8 +74,7 @@ export class A25MaterialListComponent extends ModalUseComponent {
       filter = filter.toLocaleLowerCase()
       list = list.filter(item => item.material[0].traits ?
         (item.material[0].traits.some(t =>
-          t.name_en.toLowerCase().includes(filter) ||
-          t.name_ja.includes(filter))
+          t.name.toLowerCase().includes(filter) )
         ) : false)
     }
     if (value) {

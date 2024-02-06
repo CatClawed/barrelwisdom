@@ -25,7 +25,7 @@ export class A25Service {
       "en": "HP", "ja": "HP"
     },
     'agi': {
-      "en": "AGI", "ja": "素早い"
+      "en": "SPD", "ja": "素早い"
     },
     'patk': {
       "en": "PATK", "ja": "物攻"

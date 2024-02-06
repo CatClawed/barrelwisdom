@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { ErrorComponent } from '@app/views/error/error.component';
@@ -15,6 +16,7 @@ import { A25CharalistComponent } from './a25-charalist.component';
       MatSelectModule,
       ErrorComponent,
       MatSliderModule,
+      MatCheckboxModule,
       PopoverModule.forRoot(),
     ],
     declarations: [

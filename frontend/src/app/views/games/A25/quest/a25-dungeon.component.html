@@ -8,17 +8,16 @@
       <b>Table of Contents</b>
       <ol>
           <li *ngFor="let dungeon of dungeons">
-              <a href="/{{gameURL}}/quests/dungeons/{{language}}#{{language == 'en' ? dungeon.name_en : dungeon.name_ja}}"
-                (click)="$event.preventDefault();scroll(language == 'en' ? dungeon.name_en : dungeon.name_ja)">
-                {{language == 'en' ? dungeon.name_en : dungeon.name_ja}}
-                {{language == 'en' ? ' (' + dungeon.name_ja + ')' : ''}}
+              <a href="/{{gameURL}}/quests/dungeons/{{language}}#{{dungeon.name}}"
+                (click)="$event.preventDefault();scroll(dungeon.name)">
+                {{dungeon.name}}
               </a>
           </li>
       </ol>
   </div>
 
 <ng-container *ngFor="let dungeon of dungeons">
-  <h2 id="{{language == 'en' ? dungeon.name_en : dungeon.name_ja}}">{{language == 'en' ? dungeon.name_en : dungeon.name_ja}}{{language == 'en' ? ' (' + dungeon.name_ja + ')' : ''}}</h2>
+  <h2 id="{{dungeon.name}}">{{dungeon.name}}</h2>
 
   <table class="table-compress">
     <tr class="table-dark-center">
@@ -31,10 +30,10 @@
     </tr>
 </table>
   <ng-container *ngFor="let floor of dungeon.floors">
-    <h3 *ngIf="floor.order == 1">1-2</h3>
-    <h3 *ngIf="floor.order == 3">3-4</h3>
-    <h3 *ngIf="floor.order == 5">5-9</h3>
-    <ng-container *ngIf="floor.order == 1 || floor.order == 3 || floor.order == 5">
+    <h3 *ngIf="floor.order == 1">Beginning</h3>
+    <h3 *ngIf="floor.order == 4">Middle</h3>
+    <h3 *ngIf="floor.order == 8">End</h3>
+    <ng-container *ngIf="floor.order == 1 || floor.order == 4 || floor.order == 8">
       <div style="display:grid;grid-template-columns:repeat(2,50%);grid-row-gap:1rem;">
         <div style="position:relative;text-align:center;" *ngFor="let reward of floor.rewards">
             <a routerLink="/{{gameURL}}/items/materials/{{reward.item.slug}}/{{language}}">

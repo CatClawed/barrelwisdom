@@ -20,6 +20,11 @@
           </mat-select>
         </mat-form-field>
       </div>
+      <div class="row" *ngIf="language == 'en'">
+        <mat-checkbox formControlName="show_jp" style="padding-bottom:1rem;">
+          Show Japanese Memoria (untranslated)
+        </mat-checkbox>
+      </div>
     </form>
   </div>
   <div class="item-grid spacer">

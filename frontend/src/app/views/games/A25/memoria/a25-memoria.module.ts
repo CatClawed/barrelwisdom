@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { ErrorComponent } from '@app/views/error/error.component';
 import { SharedModule } from '@app/views/games/_prototype/SharedModules/shared.module';
@@ -13,6 +14,7 @@ import { A25MemorialistComponent } from './a25-memorialist.component';
       A25MemoriaRoutingModule,
       MatSelectModule,
       ErrorComponent,
+      MatCheckboxModule,
       PopoverModule.forRoot(),
     ],
     declarations: [

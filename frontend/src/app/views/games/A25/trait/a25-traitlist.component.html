@@ -7,7 +7,7 @@
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
         <mat-form-field class="col-md-8" appearance="outline">
-          <mat-label>Filter...{{language == 'en' ? ' (JP names OK)' : ''}}</mat-label>
+          <mat-label>Filter...</mat-label>
           <input style="height: 100%;" matInput formControlName="filtertext">
           <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
         </mat-form-field>
@@ -37,12 +37,7 @@
       <h4 class="card-title card-icon-space">
         <a (click)="openModal(traitModal, trt.slug, $event);"
           href="/{{gameURL}}/traits/{{trt.slug}}/{{language}}">
-          <ng-container *ngIf="language=='en'">
-            {{trt.name_en}}<br /><small>{{trt.name_ja}}</small>
-          </ng-container>
-          <ng-container *ngIf="language=='ja'">
-            {{trt.name_ja}}<br />
-          </ng-container>
+          {{trt.name}}
         </a>
       </h4>
       <div class="card-icon-position">

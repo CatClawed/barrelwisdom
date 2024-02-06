@@ -21,6 +21,7 @@
       src="{{imgURL}}characters/full/{{chara.slug}}.webp" alt="{{chara.name}} {{chara.title}}" />
   </div>
   <p style="margin-top:1rem;" *ngIf="chara.limit"><b>Event: </b>{{chara.limit}}</p>
+  <p style="margin-top:1rem;" *ngIf="language == 'en' && !chara.gbl">This character is not in Global. Displaying Japanese text.</p>
   <p style="margin-top:1rem;" *ngIf="chara.note" [innerHTML]="chara.note"></p>
   <table class="tbl" style="margin-bottom:0;margin-top:1rem;">
     <tr class="table-dark-center"><th>Gifts</th></tr>
@@ -36,8 +37,8 @@
             (click)="$event.preventDefault();"
             [popover]="traitPopover"
             [popoverContext]="{ trait : chara.trait1 }"
-            [popoverTitle]="language == 'en' ? chara.trait1.name_en : chara.trait1.name_ja">
-              {{language == 'en' ? chara.trait1.name_en : chara.trait1.name_ja}}
+            [popoverTitle]="chara.trait1.name">
+            {{chara.trait1.name}}
             </a>
           </li>
           <li>
@@ -45,8 +46,8 @@
             (click)="$event.preventDefault();"
             [popover]="traitPopover"
             [popoverContext]="{ trait : chara.trait2 }"
-            [popoverTitle]="language == 'en' ? chara.trait2.name_en : chara.trait2.name_ja">
-              {{language == 'en' ? chara.trait2.name_en : chara.trait2.name_ja}}
+            [popoverTitle]="chara.trait2.name">
+              {{chara.trait2.name}}
             </a>
           </li>
           <li>
@@ -54,8 +55,8 @@
             (click)="$event.preventDefault();"
             [popover]="traitPopover"
             [popoverContext]="{ trait : chara.trait3 }"
-            [popoverTitle]="language == 'en' ? chara.trait3.name_en : chara.trait3.name_ja">
-              {{language == 'en' ? chara.trait3.name_en : chara.trait3.name_ja}}
+            [popoverTitle]="chara.trait3.name">
+              {{chara.trait3.name}}
             </a>
           </li>
         </ul>
@@ -71,9 +72,9 @@
           <b>Level: </b>{{slider.value}}<br />
           <mat-slider
             style="width:100%;"
-            [max]="60"
+            [max]="80"
             [min]="1">
-            <input matSliderThumb value="60" #slider>
+            <input matSliderThumb value="80" #slider>
           </mat-slider>          
         </div>
         <div style="width:45%;float:right;">
@@ -146,7 +147,6 @@
   </table>
 </div>
 <ng-template #traitPopover let-trait="trait">
-  <p *ngIf="language == 'en'">{{trait.name_ja}}</p>
   <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5).replaceAll('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
   <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
 </ng-template>

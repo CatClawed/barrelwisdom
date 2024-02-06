@@ -45,6 +45,9 @@ export class A25ItemComponent extends SingleComponent {
   }
 
   afterAssignment(): void {
+    if (this.data.equip || this.data.combat[0]) {
+      this.data.desc = this.replaceVal(this.data)
+    }
     this.seoImage = `${this.imgURL}items/${this.data.slug}.webp`
     this.genericSEO(this.data.name,
       this.data.desc ? this.data.desc.replaceAll('<br>', ' -- ') : `Material from ${this.gameTitle}`);

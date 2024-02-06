@@ -57,6 +57,11 @@ export class A22ItemComponent extends SingleComponent {
   }
 
   afterAssignment(): void {
+    this.default = [];
+    this.eff1 = [];
+    this.eff2 = [];
+    this.eff3 = [];
+    this.eff4 = [];
     this.seoImage = `${this.imgURL}${this.section}/${this.data.slug}.webp`;
     this.genericSEO(this.data.name, this.data.desc);
 
