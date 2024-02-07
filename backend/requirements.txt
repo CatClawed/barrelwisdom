@@ -11,7 +11,7 @@ coreschema==0.0.4
 cryptography==42.0.2
 defusedxml==0.7.1
 dj-rest-auth==5.0.2
-Django==5.0.1
+Django==5.0.2
 django-debug-toolbar==4.3.0
 django-filter==23.5
 django-templated-mail==1.1.1
