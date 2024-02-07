@@ -1,12 +1,14 @@
-FROM python:3.11.5-alpine3.18
+FROM python:alpine3.19
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 WORKDIR /backend
 COPY requirements.txt /backend
 RUN \
  apk add --no-cache python3 postgresql-libs libmemcached-dev zlib-dev && \
- apk add --no-cache --virtual .build-deps gcc python3-dev musl-dev postgresql-dev && \
+ apk add --no-cache --virtual .build-deps gcc python3-dev musl-dev postgresql-dev libffi-dev && \
+ python3 -m pip install --upgrade pip && \
  python3 -m pip install -r requirements.txt --no-cache-dir && \
+ python3 -m pip install "psycopg[binary]" && \
  apk --purge del .build-deps
 COPY . /backend
 RUN adduser -D user

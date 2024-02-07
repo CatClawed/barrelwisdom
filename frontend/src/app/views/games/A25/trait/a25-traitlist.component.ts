@@ -77,8 +77,7 @@ export class A25TraitlistComponent extends ModalUseComponent {
     }
     const filterValue = value.toLowerCase();
     return traitlist.filter(trait => {
-      return trait.name_en.toLowerCase().includes(filterValue) ||
-        trait.name_ja.includes(filterValue) ||
+      return trait.name.toLowerCase().includes(filterValue) ||
         trait.desc.toLowerCase().includes(filterValue)
     });
   }

@@ -37,6 +37,7 @@ export class A25MemorialistComponent extends ModalUseComponent {
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       stats: 'hp',
+      show_jp: this.language == 'en' ? false : true,
     })
   }
 
@@ -50,12 +51,16 @@ export class A25MemorialistComponent extends ModalUseComponent {
   afterAssignment(): void {
     this.filteredMemoria = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Memoria[]>),
-      map((search: any) => search ? this.filterT(search.filtertext, search.stats) : this.data.slice())
+      map((search: any) => search ?
+        this.filterT(search.filtertext, search.stats, search.show_jp)
+        : this.filterT('', 'hp', this.language == 'en' ? false : true))
     );
   }
 
-  private filterT(value: string, stat: string): Memoria[] {
+  private filterT(value: string, stat: string, show_jp: boolean): Memoria[] {
     let memorialist: Memoria[] = this.data;
+
+    if (!show_jp) memorialist = memorialist.filter(mem => mem.gbl === true)
 
     switch (stat) {
       case "hp": {

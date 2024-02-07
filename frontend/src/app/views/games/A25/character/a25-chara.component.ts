@@ -52,9 +52,7 @@ export class A25CharaComponent extends SingleComponent {
   afterAssignment(): void {
     this.seoImage = `${this.imgURL}characters/full/${this.data.slug}.webp`
     this.genericSEO(`${this.data.name} ${this.data.title}`,
-      this.language == 'en' ?
-        `Gifts: ${this.data.trait1.name_en} • ${this.data.trait2.name_en} • ${this.data.trait3.name_en}` :
-        `Gifts: ${this.data.trait1.name_ja} • ${this.data.trait2.name_ja} • ${this.data.trait3.name_ja}`);
+        `Gifts: ${this.data.trait1.name} • ${this.data.trait2.name} • ${this.data.trait3.name}`)
   }
 
   getStat(stat: number, stars: number, level: number): number {

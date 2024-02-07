@@ -44,7 +44,7 @@ services:
 
   frontend_prod:
     container_name: frontend_prod
-    image: barrelwisdom/frontend:11-13-23
+    image: barrelwisdom/frontend:test
     ports:
       - 4000:4000
 

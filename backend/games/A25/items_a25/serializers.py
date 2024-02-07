@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from games.A25.items_a25.models import Item, Material, CombatItem, Equipment, Recipe, LatestUpdate, RecipeTab, RecipePage
+from games.A25.items_a25.models import Item, Material, CombatItem, Equipment, Recipe, LatestUpdate, LatestUpdateGBL, RecipeTab, RecipePage
 from collections import OrderedDict
 from games.A25.misc_a25.serializers import A25DefaultSerializer, A25TraitSimpleSerializer, A25ItemNameSerializer
 from games.A25.chara_a25.serializers import A25CharaUpdateSerializer, A25MemoriaListSerializer
@@ -21,7 +21,7 @@ class A25MaterialListSerializer(A25DefaultSerializer):
         fields = ['name', 'slug', 'rarity', 'material', 'limit']
     def get_limit(self, obj):
         if obj.limit:
-            return A25DefaultSerializer.get_text(self,obj.limit)
+            return A25DefaultSerializer.get_text_gbl(self,obj.limit,obj.gbl)
 
 class A25EquipDetailSerializer(A25DefaultSerializer):
     kind = serializers.CharField(source='kind.slug')
@@ -55,9 +55,6 @@ class A25CombatSerializer(A25DefaultSerializer):
         ]
     def get_area(self,obj):
         return A25DefaultSerializer.get_text(self,obj.area)
-    def get_limit(self, obj):
-        if obj.limit:
-            return A25DefaultSerializer.get_text(self,obj.limit)
 
 class A25SynthesisItemListSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()
@@ -78,7 +75,7 @@ class A25SynthesisItemListSerializer(A25DefaultSerializer):
         return arr
     def get_limit(self, obj):
         if obj.limit:
-            return A25DefaultSerializer.get_text(self,obj.limit)
+            return A25DefaultSerializer.get_text_gbl(self,obj.limit,obj.gbl)
 
 class A25RecipeSerializer(A25DefaultSerializer):
     ing = serializers.SerializerMethodField()
@@ -92,13 +89,13 @@ class A25RecipeSerializer(A25DefaultSerializer):
         for thing in [[obj.quant1,obj.ing1], [obj.quant2, obj.ing2], [obj.quant3,obj.ing3]]:
             if thing[1]:
                 arr.append([thing[0], thing[1].slug,
-                    A25DefaultSerializer.get_text(self,thing[1].name)])
+                    A25DefaultSerializer.get_text_gbl(self,thing[1].name,obj.item.gbl)])
         return arr
     def get_unlocks(self,obj):
         arr = []
         for thing in [obj.unlock1, obj.unlock2, obj.unlock3]:
             if thing:
-                arr.append(A25DefaultSerializer.get_text(self,thing))
+                arr.append(A25DefaultSerializer.get_text_gbl(self,thing,obj.item.gbl))
         return arr
     def get_colors(self,obj):
         return [obj.color1.slug, obj.color2.slug, obj.color3.slug]
@@ -115,7 +112,7 @@ class A25ItemFullSerializer(A25DefaultSerializer):
     class Meta:
         model = Item
         fields = [
-            "slug", "name", "desc", "rarity", 'quest', 'note',
+            "slug", "name", "desc", "rarity", 'quest', 'note', 'gbl',
             'material', 'equip', 'combat', 'recipe', 'limit'
         ]
     def get_desc(self,obj):
@@ -162,7 +159,7 @@ class A25RecipePageSerializer(A25DefaultSerializer):
     recipes = A25RecipeBookSerializer(many=True, source='recipe_set')
     class Meta:
         model = RecipePage
-        fields = ['desc', 'min_x', 'max_x', 'recipes']
+        fields = ['desc', 'min_x', 'max_x', 'recipes', 'gbl']
     def get_desc(self,obj):
         if obj.desc:
             return super().get_desc(obj)
@@ -180,4 +177,12 @@ class A25LatestUpdateSerializer(A25DefaultSerializer):
     items = A25ItemUpdateSerializer(many=True)
     class Meta:
         model = LatestUpdate
+        fields = ['time', 'characters', 'items', 'memoria']
+
+class A25LatestUpdateGBLSerializer(A25DefaultSerializer):
+    memoria = A25MemoriaListSerializer(many=True)
+    characters = A25CharaUpdateSerializer(many=True)
+    items = A25ItemUpdateSerializer(many=True)
+    class Meta:
+        model = LatestUpdateGBL
         fields = ['time', 'characters', 'items', 'memoria']

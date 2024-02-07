@@ -1,17 +1,12 @@
 <Error *ngIf="error" [errorCode]="error"></Error>
 
 <ng-container *ngIf="data as trait">
-<Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Traits', '/'+gameURL+'/traits/'+language]]" [current]="language == 'en' ? trait.name_en : trait.name_ja"></Breadcrumb>
+<Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Traits', '/'+gameURL+'/traits/'+language]]" [current]="trait.name"></Breadcrumb>
 <div class="mx-auto row spacer">
 <div class="{{colset}} card card-body">
   <div class="flex">
     <h4 class="card-title card-icon-space">
-      <ng-container *ngIf="language=='en'">
-        {{trait.name_en}}<br /><small>{{trait.name_ja}}</small>
-      </ng-container>
-      <ng-container *ngIf="language=='ja'">
-        {{trait.name_ja}}<br />
-      </ng-container>
+      {{trait.name}}
     </h4>
     <div class="card-icon-position">
       <img *ngIf="trait.trans_wep"  style="width:3rem;" src="{{imgURL}}svg/equipment.svg" alt="equipment"/>
