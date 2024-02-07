@@ -1,12 +1,14 @@
 from rest_framework import viewsets, filters
 from games.A25.items_a25.models import Item, RecipeTab, LatestUpdate, LatestUpdateGBL
 from games.A25.items_a25.serializers import A25RecipeTabSerializer, A25MaterialListSerializer, A25ItemFullSerializer, A25SynthesisItemListSerializer, A25CombatSerializer, A25LatestUpdateSerializer, A25LatestUpdateGBLSerializer
+from games.A25.quest_a25.models import Reward
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
- 
+from django.db.models import Prefetch
+
 
 class A25RecipeViewSet(viewsets.ModelViewSet):
     queryset = (
@@ -66,6 +68,11 @@ class A25MaterialViewSet(viewsets.ModelViewSet):
                     'limit',
                 )
                 .prefetch_related(
+                    Prefetch(
+                        'reward_set',
+                        queryset=Reward.objects.filter(scorebattledifficulties__isnull=False)
+                            | Reward.objects.filter(dungeon__isnull=False)
+                    ),
                     'material_set__color',
                     'material_set__traits__name',
                     'material_set__traits__desc',
@@ -73,7 +80,7 @@ class A25MaterialViewSet(viewsets.ModelViewSet):
                     'reward_set__dungeon_set__name',
                     'reward_set__scorebattledifficulties_set__scorebattle_set',
                 )
-                .get(slug=slug)
+                .get(slug=slug, combatitem__isnull=True, equipment__isnull=True)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -147,7 +154,7 @@ class A25SynthViewSet(viewsets.ModelViewSet):
                     'combatitem_set__area',
                     'equipment_set__kind'
                 )
-                .get(slug=slug)
+                .get(slug=slug, material__isnull=True)
             )
         except ObjectDoesNotExist:
             raise Http404

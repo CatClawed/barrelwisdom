@@ -138,14 +138,13 @@ if DEBUG:
     # but did this ever come back to bite me
     MIDDLEWARE.remove('django.middleware.cache.UpdateCacheMiddleware')
     MIDDLEWARE.remove('django.middleware.cache.FetchFromCacheMiddleware')
+    DEBUG_TOOLBAR_CONFIG = {
+        "SHOW_TOOLBAR_CALLBACK": lambda request: True,
+    }
 
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
-
-DEBUG_TOOLBAR_CONFIG = {
-    "SHOW_TOOLBAR_CALLBACK": lambda request: True,
-}
 
 ROOT_URLCONF = 'Database.urls'
 
