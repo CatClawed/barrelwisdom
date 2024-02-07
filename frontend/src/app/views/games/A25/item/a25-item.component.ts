@@ -45,6 +45,9 @@ export class A25ItemComponent extends SingleComponent {
   }
 
   afterAssignment(): void {
+    if (this.data.equip || this.data.combat) {
+      this.data.desc = this.replaceVal(this.data)
+    }
     this.seoImage = `${this.imgURL}items/${this.data.slug}.webp`
     this.genericSEO(this.data.name,
       this.data.desc ? this.data.desc.replaceAll('<br>', ' -- ') : `Material from ${this.gameTitle}`);
@@ -57,7 +60,7 @@ export class A25ItemComponent extends SingleComponent {
       }
       return item.desc.replaceAll("{0}", ` ${item.equip[0].val_good / 100}`).replaceAll("{1}", ` ${item.equip[0].val_good / 100}`)
     }
-    if (item.combat[0].val_bad) {
+    if (item.combat) {
       return item.desc.replaceAll("{0}", `${item.combat[0].val_bad / 100} ~ ${item.combat[0].val_good / 100}`).replaceAll("{1}", `${item.combat[0].val_bad / 100} ~ ${item.combat[0].val_good / 100}`)
     }
     return item.desc.replaceAll("{0}", ` ${item.combat[0].val_good / 100}`).replaceAll("{1}", ` ${item.combat[0].val_good / 100}`)

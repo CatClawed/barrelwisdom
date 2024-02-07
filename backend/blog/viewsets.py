@@ -75,7 +75,10 @@ class MainBlogViewSet(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
         response = super().list(request, args, kwargs)
         if request.query_params.get('tags__slugname'):
-            response.data['tagname'] = Tags.objects.get(slugname=request.query_params.get('tags__slugname')).name # Or wherever you get this values from
+            try:
+                response.data['tagname'] = Tags.objects.get(slugname=request.query_params.get('tags__slugname')).name # Or wherever you get this values from
+            except ObjectDoesNotExist:
+                raise Http404
         return response
     
 class NewCommentViewSet(viewsets.ModelViewSet):

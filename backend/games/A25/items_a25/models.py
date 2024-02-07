@@ -10,6 +10,7 @@ class Item(models.Model):
     rarity = models.IntegerField()
     note  = models.CharField(max_length=200, blank=True)
     limit = models.ForeignKey(Desc, on_delete=models.CASCADE, blank=True, null=True, related_name="item_limited")
+    gbl   = models.BooleanField(default=False)
 
     class Meta:
         ordering = [
@@ -71,6 +72,7 @@ class RecipePage(models.Model):
     min_x = models.IntegerField()
     max_x = models.IntegerField()
     book = models.IntegerField(default=0)
+    gbl = models.BooleanField(default=False)
     class Meta:
         ordering = [
                 "min_x"
@@ -112,6 +114,16 @@ class Recipe(models.Model):
 
 # dirty or not it's coming here
 class LatestUpdate(models.Model):
+    time       = models.DateTimeField(auto_now_add=True)
+    items      = models.ManyToManyField(Item)
+    characters = models.ManyToManyField(Character)
+    memoria    = models.ManyToManyField(Memoria)
+    class Meta:
+        ordering = [
+            "-time"
+        ]
+
+class LatestUpdateGBL(models.Model):
     time       = models.DateTimeField(auto_now_add=True)
     items      = models.ManyToManyField(Item)
     characters = models.ManyToManyField(Character)

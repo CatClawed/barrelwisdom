@@ -1,7 +1,7 @@
 <Error *ngIf="error" [errorCode]="error"></Error>
 <ng-container *ngIf="!error">
-    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Recipe Books'"></Breadcrumb>
-    <h1 id="0">Recipe Books</h1>
+    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Recipes'"></Breadcrumb>
+    <h1 id="0">Recipes</h1>
 </ng-container>
 <ng-container *ngIf="data as recipes">
 <button (click)="scroll(0)" mat-mini-fab color="primary"  style="position:fixed;bottom:3%;right:10%;z-index:10;">

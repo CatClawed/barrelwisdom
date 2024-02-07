@@ -5,6 +5,7 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
+import { Dungeon } from '../_services/a25.interface';
 
 @Component({
   templateUrl: 'a25-dungeon.component.html',

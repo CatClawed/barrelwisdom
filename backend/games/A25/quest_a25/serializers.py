@@ -58,19 +58,17 @@ class A25DungeonFloorSerializer(A25DefaultSerializer):
         fields = ['order', 'combat_level', 'effects', 'rewards']
 
 class A25DungeonSerializer(A25DefaultSerializer):
-    name_en = serializers.CharField(source='name.text_en')
-    name_ja = serializers.CharField(source='name.text_ja')
+    name = serializers.SerializerMethodField()
     floors = A25DungeonFloorSerializer(many=True, source='dungeonfloor_set')
     class Meta:
         model = Dungeon
-        fields = ['name_en', 'name_ja', 'floors']
+        fields = ['name', 'floors']
 
 class A25DungeonItemSerializer(A25DefaultSerializer):
-    name_en = serializers.CharField(source='name.text_en')
-    name_ja = serializers.CharField(source='name.text_ja')
+    name = serializers.SerializerMethodField()
     class Meta:
         model = Dungeon
-        fields = ['name_en', 'name_ja']
+        fields = ['name']
 
 class A25ScoreBattleItemSerializer(A25DefaultSerializer):
     class Meta:

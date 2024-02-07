@@ -24,14 +24,23 @@ export class A25RecipeComponent extends SingleComponent {
 
   changeData() {
     this.gameService(this.a25service, 'items/recipes');
-    this.genericSEO(`Recipe Books`, `All recipes in ${this.gameTitle}.`);
+    this.genericSEO(`Recipes`, `All recipes in ${this.gameTitle}.`);
     return this.a25service.getRecipeList(this.language)
+  }
+
+  afterAssignment(): void {
+    if (this.language !== 'ja') {
+      this.data = this.data.filter(x => x.name != "Event") // TODO: REMOVE WHEN EVENT HAPPENS, change 2 to 3
+      for (let i = 0; i < this.data.length; i++) {
+        this.data[i].pages = this.data[i].pages.filter(x => { return x.gbl == true })
+      }
+    }
   }
 
   getEmptySpace(page, index) {
     if (index == 0) {
       return page.recipes[index].y - 1;
-    }
+    } 
     if (page.recipes[index].x > page.recipes[index - 1].x) {
       return (5 - page.recipes[index - 1].y) + (page.recipes[index].y - 1)
     }

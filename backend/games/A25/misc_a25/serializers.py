@@ -5,6 +5,16 @@ from games.A25.chara_a25.models import Character
 from collections import OrderedDict
 from games._helpers.serializer_helper import DefaultSerializer
 
+def gbl_check(self):
+    try:
+        match self.context['language']:
+            case 'ja':
+                return False
+            case _:
+                return True
+    except KeyError:
+        return True
+
 # how to stop rewriting methods
 class A25DefaultSerializer(DefaultSerializer):
     def get_text(self,obj):
@@ -12,12 +22,25 @@ class A25DefaultSerializer(DefaultSerializer):
             en=obj.text_en,
             ja=obj.text_ja,
         )
+    def get_text_gbl(self,obj,gbl):
+        if not gbl:
+            return obj.text_ja
+        return DefaultSerializer.language_match(self,
+            en=obj.text_en,
+            ja=obj.text_ja,
+        )
     def get_name(self,obj):
+        if hasattr(obj, 'gbl'):
+            if not obj.gbl:
+                return obj.name.text_ja
         return DefaultSerializer.language_match(self,
             en=obj.name.text_en,
             ja=obj.name.text_ja,
         )
     def get_desc(self,obj):
+        if hasattr(obj, 'gbl'):
+            if not obj.gbl:
+                return obj.desc.text_ja
         return DefaultSerializer.language_match(self,
             en=obj.desc.text_en,
             ja=obj.desc.text_ja,
@@ -41,7 +64,7 @@ class A25ItemNameSerializer(A25DefaultSerializer):
         model = Material
         fields = ['slug', 'name']
     def get_name(self,obj):
-        return A25DefaultSerializer.get_text(self,obj.item.name)
+        return A25DefaultSerializer.get_text_gbl(self,obj.item.name,obj.item.gbl)
 
 class A25CharaNameSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()
@@ -53,17 +76,15 @@ class A25CharaNameSerializer(A25DefaultSerializer):
         return A25DefaultSerializer.get_text(self,obj.title)
 
 class A25TraitSimpleSerializer(A25DefaultSerializer):
-    name_en = serializers.CharField(source='name.text_en')
-    name_ja = serializers.CharField(source='name.text_ja')
+    name = serializers.SerializerMethodField()
     desc = serializers.SerializerMethodField()
     kind = serializers.CharField(source='kind.slug')
     class Meta:
         model = Trait
-        fields = ['slug', 'name_en', 'name_ja', 'desc', 'val1', 'val5', 'kind']
+        fields = ['slug', 'name', 'desc', 'val1', 'val5', 'kind']
 
 class A25TraitSerializer(A25DefaultSerializer):
-    name_en = serializers.CharField(source='name.text_en')
-    name_ja = serializers.CharField(source='name.text_ja')
+    name = serializers.SerializerMethodField()
     desc = serializers.SerializerMethodField()
     kind = A25FilterableSerializer()
     cat = serializers.CharField(source='cat.slug')
@@ -74,7 +95,7 @@ class A25TraitSerializer(A25DefaultSerializer):
     char3 = A25CharaNameSerializer(source='chara_trait3', many=True)
     class Meta:
         model = Trait
-        fields = ['slug', 'name_en', 'name_ja', 'desc', 'kind', 'cat',
+        fields = ['slug', 'name', 'desc', 'kind', 'cat',
             'val', 'items', 'char1', 'char2', 'char3', 'note',
             'trans_atk', 'trans_heal', 'trans_buff', 'trans_dbf', 'trans_wep'
         ]

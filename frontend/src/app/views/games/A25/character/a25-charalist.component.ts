@@ -18,7 +18,6 @@ import { map, startWith } from 'rxjs/operators';
 
 export class A25CharalistComponent extends ModalUseComponent {
   filteredCharas: Observable<Character[]>;
-
   gradients = {
     1: "background: linear-gradient(0deg, rgba(81,53,40,1) 0%, rgba(10,32,47,1) 50%, rgba(22,60,73,1) 100%);",
     2: "background: linear-gradient(0deg, rgba(167,150,124,1) 0%, rgba(208,185,131,1) 50%, rgba(106,84,36,1) 100%);",
@@ -38,7 +37,8 @@ export class A25CharalistComponent extends ModalUseComponent {
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       roles: "any",
-      elems: "any"
+      elems: "any",
+      show_jp: this.language == 'en' ? false : true,
     })
   }
 
@@ -56,12 +56,16 @@ export class A25CharalistComponent extends ModalUseComponent {
   afterAssignment(): void {
     this.filteredCharas = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Character[]>),
-      map((search: any) => search ? this.filterT(search.filtertext, search.roles, search.elems) : this.data.charas.slice())
+      map((search: any) => search ?
+        this.filterT(search.filtertext, search.roles, search.elems, search.show_jp)
+        : this.filterT('', 'any', 'any', this.language == 'en' ? false : true)),
     );
   }
 
-  private filterT(value: string, role: string, elem: string): Character[] {
+  private filterT(value: string, role: string, elem: string, show_jp: boolean): Character[] {
     let charalist: Character[] = this.data.charas;
+
+    if (!show_jp) charalist = charalist.filter(chara => chara.gbl === true)
 
     if (role != 'any') {
       charalist = charalist.filter(chara => chara.role == role)

@@ -24,7 +24,7 @@
       </div>
       <div class="row">
         <mat-form-field class="col-md-6" appearance="outline">
-            <mat-label>Has trait...{{language == 'en' ? ' (JP OK)' : ''}}</mat-label>
+            <mat-label>Has trait...</mat-label>
             <input style="height: 100%;" matInput formControlName="filtertrait">
         </mat-form-field>
         <mat-form-field class="col-md-3" appearance="outline">
@@ -64,18 +64,13 @@
   <ul *ngIf="it.material[0].traits">
     <li *ngFor="let trait of it.material[0].traits">
       <ng-template #traitPopover>
-        <p *ngIf="language == 'en'">{{trait.name_ja}}</p>
         <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
         <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
       </ng-template>
-      <a *ngIf="language == 'en'" [popover]="traitPopover"
-        [popoverTitle]="trait.name_en"
+      <a [popover]="traitPopover"
+        [popoverTitle]="trait.name"
         (click)="$event.preventDefault();"
-        href="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">{{trait.name_en}}</a>
-      <a *ngIf="language == 'ja'" [popover]="traitPopover"
-        [popoverTitle]="trait.name_ja"
-        (click)="$event.preventDefault();"
-        href="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">{{trait.name_ja}}</a>
+        href="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">{{trait.name}}</a>
     </li>
   </ul>         
   <button (click)="openModal(itemModal, it.slug)" class="card-read-more-position" mat-mini-fab color="primary">

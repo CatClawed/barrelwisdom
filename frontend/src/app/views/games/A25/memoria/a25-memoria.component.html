@@ -15,6 +15,7 @@
     style="max-height:100%;width:256px;aspect-ratio:256/410;margin:auto;"
     src="{{imgURL}}memoria/{{memoria.slug}}.webp"
     alt="{{memoria.name}}" />
+    <p *ngIf="language == 'en' && !memoria.gbl">This Memoria is not in global. Displaying Japanese text.</p>
   <p style="margin-top:1rem;"><b>{{memoria.skill_name}}: </b>
     {{memoria.skill_desc.replaceAll('{0}', memoria.lv1 + ' ~ ' + memoria.lv5)}}
   </p>

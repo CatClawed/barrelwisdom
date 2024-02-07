@@ -17,6 +17,7 @@ class Training(models.Model):
     rewards = models.ManyToManyField(Reward)
     kind = models.ForeignKey(Filterable, on_delete=models.CASCADE)
     exp = models.IntegerField(default=0)
+    gbl = models.BooleanField(default=True)
     class Meta:
         ordering = [
             "kind",
@@ -44,6 +45,7 @@ class ScoreBattle(models.Model):
     chapter = models.CharField(max_length=10)
     section = models.CharField(max_length=10)
     difficulties = models.ManyToManyField(ScoreBattleDifficulties)
+    gbl = models.BooleanField(default=False)
     class Meta:
         ordering = [
             "chapter",
@@ -56,6 +58,7 @@ class ScoreBattle(models.Model):
 class Dungeon(models.Model):
     name = models.ForeignKey(Name, on_delete=models.CASCADE)
     rewards = models.ManyToManyField(Reward)
+    gbl = models.BooleanField(default=False)
 
 class DungeonFloor(models.Model):
     dungeon = models.ForeignKey(Dungeon, on_delete=models.CASCADE)

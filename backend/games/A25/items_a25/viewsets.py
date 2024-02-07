@@ -1,12 +1,14 @@
 from rest_framework import viewsets, filters
-from games.A25.items_a25.models import Item, RecipeTab, LatestUpdate
-from games.A25.items_a25.serializers import A25RecipeTabSerializer, A25MaterialListSerializer, A25ItemFullSerializer, A25SynthesisItemListSerializer, A25CombatSerializer, A25LatestUpdateSerializer
+from games.A25.items_a25.models import Item, RecipeTab, LatestUpdate, LatestUpdateGBL
+from games.A25.items_a25.serializers import A25RecipeTabSerializer, A25MaterialListSerializer, A25ItemFullSerializer, A25SynthesisItemListSerializer, A25CombatSerializer, A25LatestUpdateSerializer, A25LatestUpdateGBLSerializer
+from games.A25.quest_a25.models import Reward
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
- 
+from django.db.models import Prefetch
+
 
 class A25RecipeViewSet(viewsets.ModelViewSet):
     queryset = (
@@ -25,7 +27,7 @@ class A25RecipeViewSet(viewsets.ModelViewSet):
     serializer_class = A25RecipeTabSerializer
     filter_backends = [filters.SearchFilter,
                        DjangoFilterBackend, filters.OrderingFilter]
-
+ 
     @action(detail=False)
     def en(self, request):
         return Response(A25RecipeTabSerializer(
@@ -57,9 +59,6 @@ class A25MaterialViewSet(viewsets.ModelViewSet):
     lookup_field = 'slug'
 
     def get_query(slug=None, lang="en"):
-        if not slug:
-            return Response(A25MaterialListSerializer(
-                A25MaterialViewSet.queryset, many=True,context={'language': lang}).data)
         try:
             queryset = (
                 Item.objects
@@ -69,6 +68,11 @@ class A25MaterialViewSet(viewsets.ModelViewSet):
                     'limit',
                 )
                 .prefetch_related(
+                    Prefetch(
+                        'reward_set',
+                        queryset=Reward.objects.filter(scorebattledifficulties__isnull=False)
+                            | Reward.objects.filter(dungeon__isnull=False)
+                    ),
                     'material_set__color',
                     'material_set__traits__name',
                     'material_set__traits__desc',
@@ -76,7 +80,7 @@ class A25MaterialViewSet(viewsets.ModelViewSet):
                     'reward_set__dungeon_set__name',
                     'reward_set__scorebattledifficulties_set__scorebattle_set',
                 )
-                .get(slug=slug)
+                .get(slug=slug, combatitem__isnull=True, equipment__isnull=True)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -84,7 +88,9 @@ class A25MaterialViewSet(viewsets.ModelViewSet):
 
     @action(detail=False)
     def en(self, request):
-        return A25MaterialViewSet.get_query(lang="en")
+        return Response(A25MaterialListSerializer(
+            A25MaterialViewSet.queryset.filter(gbl=True),
+            many=True,context={'language': "en"}).data)
 
     @action(detail=True, url_path="en")
     def en_full(self, request, slug):
@@ -92,7 +98,9 @@ class A25MaterialViewSet(viewsets.ModelViewSet):
 
     @action(detail=False)
     def ja(self, request):
-        return A25MaterialViewSet.get_query(lang="ja")
+        return Response(A25MaterialListSerializer(
+            A25MaterialViewSet.queryset,
+            many=True,context={'language': "ja"}).data)
 
     @action(detail=True, url_path="ja")
     def ja_full(self, request, slug):
@@ -122,8 +130,7 @@ class A25SynthViewSet(viewsets.ModelViewSet):
 
     def get_query(slug=None, lang="en"):
         if not slug:
-            return Response(A25SynthesisItemListSerializer(
-                A25SynthViewSet.queryset, many=True, context={'language': lang}).data)
+            return 
         try:
             queryset = (
                 Item.objects
@@ -147,7 +154,7 @@ class A25SynthViewSet(viewsets.ModelViewSet):
                     'combatitem_set__area',
                     'equipment_set__kind'
                 )
-                .get(slug=slug)
+                .get(slug=slug, material__isnull=True)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -155,7 +162,9 @@ class A25SynthViewSet(viewsets.ModelViewSet):
 
     @action(detail=False)
     def en(self, request):
-        return A25SynthViewSet.get_query(lang="en")
+        return Response(A25SynthesisItemListSerializer(
+            A25SynthViewSet.queryset.filter(gbl=True),
+            many=True, context={'language': "en"}).data)
 
     @action(detail=True, url_path="en")
     def en_full(self, request, slug):
@@ -163,7 +172,9 @@ class A25SynthViewSet(viewsets.ModelViewSet):
 
     @action(detail=False)
     def ja(self, request):
-        return A25SynthViewSet.get_query(lang="ja")
+        return Response(A25SynthesisItemListSerializer(
+            A25SynthViewSet.queryset,
+            many=True, context={'language': "ja"}).data)
 
     @action(detail=True, url_path="ja")
     def ja_full(self, request, slug):
@@ -171,7 +182,7 @@ class A25SynthViewSet(viewsets.ModelViewSet):
 
 class A25UpdateViewSet(viewsets.ModelViewSet):
     queryset = (
-        LatestUpdate.objects
+        LatestUpdateGBL.objects
         .prefetch_related(
             'items__name',
             'items__kind',
@@ -180,16 +191,26 @@ class A25UpdateViewSet(viewsets.ModelViewSet):
             'memoria__name',
         )
     )
-    serializer_class = A25LatestUpdateSerializer
+    serializer_class = A25LatestUpdateGBLSerializer
     filter_backends = [filters.SearchFilter,
                        DjangoFilterBackend, filters.OrderingFilter]
 
     @action(detail=False)
     def en(self, request):
-        return Response(A25LatestUpdateSerializer(
+        return Response(A25LatestUpdateGBLSerializer(
             A25UpdateViewSet.queryset.first(), context={'language': 'en'}).data)
 
     @action(detail=False)
     def ja(self, request):
+        queryset = (
+            LatestUpdate.objects
+            .prefetch_related(
+                'items__name',
+                'items__kind',
+                'characters__name',
+                'characters__title',
+                'memoria__name',
+            )
+        )
         return Response(A25LatestUpdateSerializer(
-            A25UpdateViewSet.queryset.first(), context={'language': 'ja'}).data)
+            queryset.first(), context={'language': 'ja'}).data)

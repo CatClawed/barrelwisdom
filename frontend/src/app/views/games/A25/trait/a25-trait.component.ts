@@ -25,11 +25,6 @@ export class A25TraitComponent extends SingleComponent {
   }
 
   afterAssignment(): void {
-    if (this.language == "en") {
-      this.genericSEO(this.data.name_en, this.data.desc.replaceAll('{0}', this.data.val[0] + ' ~ ' + this.data.val[4]));
-    }
-    else {
-      this.genericSEO(this.data.name_ja, this.data.desc.replaceAll('{0}', this.data.val[0] + ' ~ ' + this.data.val[4]));
-    }
+    this.genericSEO(this.data.name, this.data.desc.replaceAll('{0}', this.data.val[0] + ' ~ ' + this.data.val[4]));
   }
 } 

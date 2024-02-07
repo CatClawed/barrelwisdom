@@ -15,8 +15,7 @@ export interface NameOnly2 {
 
 export interface Trait {
     slug: string;
-    name_en: string;
-    name_ja: string;
+    name: string;
     desc: string;
     kind: string;
     cat: string;
@@ -48,11 +47,11 @@ export interface Item {
     limit: string;
     quest: Quest[];
     note: string;
+    gbl: boolean;
 }
 
 export interface NameTrans {
-    name_en: string;
-    name_ja: string;
+    name: string;
 }
 
 export interface Quest {
@@ -71,8 +70,7 @@ export interface SBB {
 }
 
 export interface DungeonName {
-    name_en: string;
-    name_ja: string;
+    name: string;
 }
 
 export interface Recipe {
@@ -126,6 +124,7 @@ export interface RecipePage {
     min_x: number;
     max_x: number;
     recipes: RecipeList[];
+    gbl: boolean;
 }
 
 export interface RecipeTab {
@@ -155,6 +154,7 @@ export interface Character {
     passives: Passive[];
     skills: Skill[];
     note: string;
+    gbl: boolean;
 }
 
 export interface Skill {
@@ -214,6 +214,7 @@ export interface Memoria {
     mdef30: number;
     limit: string;
     note: string;
+    gbl: boolean;
 }
 
 export interface Research {
@@ -241,12 +242,11 @@ export interface Reward {
 export interface DungeonFloor {
     order: number;
     combat_level: number;
-    
+    rewards: Reward[];
 }
 
 export interface Dungeon {
-    name_en: string;
-    name_ja: string;
+    name: string;
     floors: DungeonFloor[];
     effects: string[];
 }

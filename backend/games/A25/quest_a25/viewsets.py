@@ -71,7 +71,7 @@ class A25ScoreBattleViewSet(viewsets.ModelViewSet):
 
     @action(detail=False)
     def en(self, request):
-        return Response(A25ScoreBattleSerializer(A25ScoreBattleViewSet.queryset,
+        return Response(A25ScoreBattleSerializer(A25ScoreBattleViewSet.queryset.filter(gbl=True),
             many=True, context={'language': 'en'}).data)
 
     @action(detail=False)
@@ -96,7 +96,7 @@ class A25DungeonViewSet(viewsets.ModelViewSet):
 
     @action(detail=False)
     def en(self, request):
-        return Response(A25DungeonSerializer(A25DungeonViewSet.queryset,
+        return Response(A25DungeonSerializer(A25DungeonViewSet.queryset.filter(gbl=True),
             many=True, context={'language': 'en'}).data)
 
     @action(detail=False)
