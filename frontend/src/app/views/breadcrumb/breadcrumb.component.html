@@ -1,7 +1,9 @@
 <nav style="margin-top: 1em;" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a routerLink="/">Barrel Wisdom</a></li>
-    <li *ngFor="let crumb of breadcrumbs" class="breadcrumb-item"><a routerLink="/{{crumb[1]}}">{{crumb[0]}}</a></li>
+    @for (crumb of breadcrumbs; track crumb) {
+      <li class="breadcrumb-item"><a routerLink="/{{crumb[1]}}">{{crumb[0]}}</a></li>
+    }
     <li class="breadcrumb-item active" aria-current="page">{{current}}</li>
   </ol>
 </nav>

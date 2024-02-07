@@ -1,127 +1,170 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
 
-<header *ngIf="blog">
+@if (blog) {
+  <header>
     <Breadcrumb [breadcrumbs]="breadcrumbs" [current]="blog.title"></Breadcrumb>
     <h1>{{blog.title}}</h1>
     <div class="author">
-        <span style="display: inline-block;">
-            <i class="far fa-calendar-alt"></i> <time class="updated" dateTime="{{blog.modified}}"> {{blog.modified |
-                date:'longDate' }} </time>
-        </span>
-        <span style="display: inline-block;">
-            <i *ngIf="blog.authorlock" class="fas fa-user"></i>
-            <a *ngIf="blog.authorlock" class="url" routerLink="/user/{{blog.author[0].username}}">
-                {{blog.author[0].username}} </a>
-        </span>
-        <span *ngIf="allowedToEdit" style="display: inline-block;">
-            <i class="fas fa-edit"></i>
-            <a routerLink="/create" [queryParams]="{ id: blog.id }"> Edit</a>
-        </span>
-    </div>
+      <span style="display: inline-block;">
+        <i class="far fa-calendar-alt"></i> <time class="updated" dateTime="{{blog.modified}}"> {{blog.modified |
+      date:'longDate' }} </time>
+    </span>
+    <span style="display: inline-block;">
+      @if (blog.authorlock) {
+        <i class="fas fa-user"></i>
+      }
+      @if (blog.authorlock) {
+        <a class="url" routerLink="/user/{{blog.author[0].username}}">
+        {{blog.author[0].username}} </a>
+      }
+    </span>
+    @if (allowedToEdit) {
+      <span style="display: inline-block;">
+        <i class="fas fa-edit"></i>
+        <a routerLink="/create" [queryParams]="{ id: blog.id }"> Edit</a>
+      </span>
+    }
+  </div>
 </header>
-<article *ngIf="blog">
-    <div *ngIf="blog.image" class="blog-image">
+}
+@if (blog) {
+  <article>
+    @if (blog.image) {
+      <div class="blog-image">
         <img class="blog-head-img" src="{{blog.image}}" alt="" role="presentation">
-    </div>
+      </div>
+    }
     <div markdown
-        [disableSanitizer]="true"
-        (click)="historyService.hrefClicked($event);"
-        [data]="body">
+      [disableSanitizer]="true"
+      (click)="historyService.hrefClicked($event);"
+      [data]="body">
     </div>
-    <div *ngIf="blog.tags.length > 0" class="blog-tags clearfix">
+    @if (blog.tags.length > 0) {
+      <div class="blog-tags clearfix">
         <i style="margin-right: 1em; margin-top: 0.5em; font-size: 1rem;" class="badge bg-secondary"><i
-                class="fas fa-tag"></i></i>
-        <a *ngFor="let tag of blog.tags" rel="tag" style="margin-right: 1em; margin-top: 0.5em; font-size: 1rem;"
-            class="badge bg-primary" routerLink="/tag/{{tag.slugname}}">{{tag.name}} </a>
-    </div>
+        class="fas fa-tag"></i></i>
+        @for (tag of blog.tags; track tag) {
+          <a rel="tag" style="margin-right: 1em; margin-top: 0.5em; font-size: 1rem;"
+          class="badge bg-primary" routerLink="/tag/{{tag.slugname}}">{{tag.name}} </a>
+        }
+      </div>
+    }
     <h2>Comments</h2>
-    <ng-container *ngIf="!blog.closed && success === undefined"
+    @if (!blog.closed && success === undefined) {
+      <ng-container
         style="margin-bottom:0.5rem;"
         [ngTemplateOutlet]="maincommentbox">
-    </ng-container>
-    <ng-container *ngIf="success"><span class="text-success">Comment will be displayed upon human review, thank you!</span></ng-container>
-    <ng-container *ngIf="success === false"><span class="is-invalid">There was an error in submitting your comment.</span></ng-container>
-    <ng-container *ngFor="let com of blog.comments">
-        <ng-container [ngTemplateOutlet]="comment" [ngTemplateOutletContext]="{comment:com}">
-        </ng-container>
-        <div class="tab">
-            <ng-container *ngFor="let c of com.replies" [ngTemplateOutlet]="comment"
-                [ngTemplateOutletContext]="{comment:c}">
-            </ng-container>
-        </div>
-    </ng-container>
-</article>
+      </ng-container>
+    }
+    @if (success) {
+      <span class="text-success">Comment will be displayed upon human review, thank you!</span>
+    }
+    @if (success === false) {
+      <span class="is-invalid">There was an error in submitting your comment.</span>
+    }
+    @for (com of blog.comments; track com) {
+      <ng-container [ngTemplateOutlet]="comment" [ngTemplateOutletContext]="{comment:com}">
+      </ng-container>
+      <div class="tab">
+        @for (c of com.replies; track c) {
+          <ng-container [ngTemplateOutlet]="comment"
+            [ngTemplateOutletContext]="{comment:c}">
+          </ng-container>
+        }
+      </div>
+    }
+  </article>
+}
 <ng-template #comment let-comment="comment">
-    <div class="card card-body comment-card">
-        <div>
-            <ng-container *ngIf="comment.author">
-                <b><a routerLink="/user/{{comment.author.username}}" style="color:black;">{{comment.author.username}}</a></b>
-                <div *ngIf="checkAuthor(comment.author.username); else staff" class="badge bg-secondary" style="margin-left:0.5rem;">Author</div>
-                <ng-template #staff>
-                    <div class="badge bg-secondary" style="margin-left:0.5rem;">Staff</div>
-                </ng-template>
-            </ng-container>
-            <b *ngIf="comment.name">{{comment.name}}</b>
-            <b *ngIf="!comment.name && !comment.author">Anonymous</b>
-            <time class="updated text-muted" style="margin-left:0.75rem;font-size: calc(0.8rem + 0.1vw);"
-                dateTime="{{comment.created}}"> {{comment.created | date:'mediumDate' }} </time>
-        </div>
-        <div markdown [data]="lineBreak(comment.body)"></div>
-        <div>
-            <button *ngIf="!comment.open && !blog.closed && !comment.success"
-                style="float:right;"
-                class="btn comment-button"
-                (click)="comment.open=true;newForm(comment);">
-                    Reply
-            </button>
-            <div *ngIf="comment.open && !blog.closed">
-                <ng-container [ngTemplateOutlet]="commentbox" [ngTemplateOutletContext]="{parent: comment}">
-                </ng-container>
-            </div>
-            <ng-container *ngIf="comment.success"><span class="text-success">Comment will be displayed upon human review, thank you!</span></ng-container>
-            <ng-container *ngIf="comment.success === false"><span class="is-invalid">There was an error in submitting your comment.</span></ng-container>
-        </div>
+  <div class="card card-body comment-card">
+    <div>
+      @if (comment.author) {
+        <b><a routerLink="/user/{{comment.author.username}}" style="color:black;">{{comment.author.username}}</a></b>
+        @if (checkAuthor(comment.author.username)) {
+          <div class="badge bg-secondary" style="margin-left:0.5rem;">Author</div>
+        } @else {
+          <div class="badge bg-secondary" style="margin-left:0.5rem;">Staff</div>
+        }
+      }
+      @if (comment.name) {
+        <b>{{comment.name}}</b>
+      }
+      @if (!comment.name && !comment.author) {
+        <b>Anonymous</b>
+      }
+      <time class="updated text-muted" style="margin-left:0.75rem;font-size: calc(0.8rem + 0.1vw);"
+      dateTime="{{comment.created}}"> {{comment.created | date:'mediumDate' }} </time>
     </div>
+    <div markdown [data]="lineBreak(comment.body)"></div>
+    <div>
+      @if (!comment.open && !blog.closed && !comment.success) {
+        <button
+          style="float:right;"
+          class="btn comment-button"
+          (click)="comment.open=true;newForm(comment);">
+          Reply
+        </button>
+      }
+      @if (comment.open && !blog.closed) {
+        <div>
+          <ng-container [ngTemplateOutlet]="commentbox" [ngTemplateOutletContext]="{parent: comment}">
+          </ng-container>
+        </div>
+      }
+      @if (comment.success) {
+        <span class="text-success">Comment will be displayed upon human review, thank you!</span>
+      }
+      @if (comment.success === false) {
+        <span class="is-invalid">There was an error in submitting your comment.</span>
+      }
+    </div>
+  </div>
 </ng-template>
 <ng-template #commentbox let-parent="parent">
-    <div style="font-size:calc(0.75rem + 0.1vw)">
-        <form [formGroup]="parent.form">
-            <mat-form-field *ngIf="!user" appearance="outline" style="margin-bottom:-1rem;">
-                <mat-label>Name (Optional)</mat-label>
-                <input matInput formControlName="name">
-            </mat-form-field>
-            <mat-form-field appearance="outline" style="width:100%;margin-bottom:-1rem;">
-                <textarea matInput formControlName="comment"></textarea>
-                <mat-label>Leave a comment...</mat-label>
-            </mat-form-field>
-        </form>
-    </div>
-    <div style="text-align:right">
-        <button class="btn comment-button" (click)="switchState(parent)">
-            Cancel
-        </button>
-        <button class="btn btn-secondary" style="font-weight:bold;margin-left:0.2rem;" (click)="postComment(parent);">
-            Submit
-        </button>
-    </div>
+  <div style="font-size:calc(0.75rem + 0.1vw)">
+    <form [formGroup]="parent.form">
+      @if (!user) {
+        <mat-form-field appearance="outline" style="margin-bottom:-1rem;">
+          <mat-label>Name (Optional)</mat-label>
+          <input matInput formControlName="name">
+        </mat-form-field>
+      }
+      <mat-form-field appearance="outline" style="width:100%;margin-bottom:-1rem;">
+        <textarea matInput formControlName="comment"></textarea>
+        <mat-label>Leave a comment...</mat-label>
+      </mat-form-field>
+    </form>
+  </div>
+  <div style="text-align:right">
+    <button class="btn comment-button" (click)="switchState(parent)">
+      Cancel
+    </button>
+    <button class="btn btn-secondary" style="font-weight:bold;margin-left:0.2rem;" (click)="postComment(parent);">
+      Submit
+    </button>
+  </div>
 </ng-template>
 
 <ng-template #maincommentbox>
-    <div style="font-size:calc(0.75rem + 0.1vw)">
-        <form [formGroup]="pageForm">
-            <mat-form-field *ngIf="!user" appearance="outline" style="margin-bottom:-1rem;">
-                <mat-label>Name (Optional)</mat-label>
-                <input matInput formControlName="name">
-            </mat-form-field>
-            <mat-form-field appearance="outline" style="width:100%;margin-bottom:-1rem;">
-                <textarea matInput formControlName="comment"></textarea>
-                <mat-label>Leave a comment...</mat-label>
-            </mat-form-field>
-        </form>
-    </div>
-    <div style="text-align:right;margin-bottom:0.5rem">
-        <button class="btn btn-secondary" style="font-weight:bold;margin-left:0.2rem;" (click)="postComment();">
-            Submit
-        </button>
-    </div>
+  <div style="font-size:calc(0.75rem + 0.1vw)">
+    <form [formGroup]="pageForm">
+      @if (!user) {
+        <mat-form-field appearance="outline" style="margin-bottom:-1rem;">
+          <mat-label>Name (Optional)</mat-label>
+          <input matInput formControlName="name">
+        </mat-form-field>
+      }
+      <mat-form-field appearance="outline" style="width:100%;margin-bottom:-1rem;">
+        <textarea matInput formControlName="comment"></textarea>
+        <mat-label>Leave a comment...</mat-label>
+      </mat-form-field>
+    </form>
+  </div>
+  <div style="text-align:right;margin-bottom:0.5rem">
+    <button class="btn btn-secondary" style="font-weight:bold;margin-left:0.2rem;" (click)="postComment();">
+      Submit
+    </button>
+  </div>
 </ng-template>

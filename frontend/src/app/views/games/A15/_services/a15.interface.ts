@@ -139,6 +139,8 @@ export interface ItemList {
     water: boolean;
     wind: boolean;
     earth: boolean;
+    isDLC: boolean;
+    isDX: boolean;
 }
 
 export interface Disassembly {

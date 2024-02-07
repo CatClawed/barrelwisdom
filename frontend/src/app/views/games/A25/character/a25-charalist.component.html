@@ -1,73 +1,87 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
 
-<div *ngIf="!error">
-<Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Characters"></Breadcrumb>
-<h1>Characters</h1>
-<div class="col-md-10 mx-auto">
-  <form [formGroup]="pageForm" class="form-horizontal">
-    <div class="row">
-      <mat-form-field class="col-md-4" appearance="outline">
-        <mat-label>Filter...</mat-label>
-        <input style="height: 100%;" matInput formControlName="filtertext">
-        <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
-      </mat-form-field>
-      <mat-form-field class="col-md-4" appearance="outline">
-        <mat-label>Role</mat-label>
-        <mat-select matNativeControl formControlName="roles" disableOptionCentering="true" class="mat-select-icon">
-          <mat-option value="any" selected>
-            Any
-          </mat-option>
-          <ng-container *ngIf="data">
-            <mat-option *ngFor="let role of data.roles" [value]="role.slug">
-              {{role.name}}
-            </mat-option>
-          </ng-container>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field class="col-md-4" appearance="outline">
-        <mat-label>Element</mat-label>
-        <mat-select matNativeControl formControlName="elems" disableOptionCentering="true" class="mat-select-icon">
-          <mat-option value="any" selected>
-            Any
-          </mat-option>
-          <ng-container *ngIf="data">
-            <mat-option *ngFor="let elem of data.elems" [value]="elem.slug">
-              {{elem.name}}
-            </mat-option>
-          </ng-container>
-        </mat-select>
-      </mat-form-field>
+@if (!error) {
+  <div>
+    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Characters"></Breadcrumb>
+    <h1>Characters</h1>
+    <div class="col-md-10 mx-auto">
+      <form [formGroup]="pageForm" class="form-horizontal">
+        <div class="row">
+          <mat-form-field class="col-md-4" appearance="outline">
+            <mat-label>Filter...</mat-label>
+            <input style="height: 100%;" matInput formControlName="filtertext">
+            <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
+          </mat-form-field>
+          <mat-form-field class="col-md-4" appearance="outline">
+            <mat-label>Role</mat-label>
+            <mat-select matNativeControl formControlName="roles" disableOptionCentering="true" class="mat-select-icon">
+              <mat-option value="any" selected>
+                Any
+              </mat-option>
+              @if (data) {
+                @for (role of data.roles; track role) {
+                  <mat-option [value]="role.slug">
+                    {{role.name}}
+                  </mat-option>
+                }
+              }
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="col-md-4" appearance="outline">
+            <mat-label>Element</mat-label>
+            <mat-select matNativeControl formControlName="elems" disableOptionCentering="true" class="mat-select-icon">
+              <mat-option value="any" selected>
+                Any
+              </mat-option>
+              @if (data) {
+                @for (elem of data.elems; track elem) {
+                  <mat-option [value]="elem.slug">
+                    {{elem.name}}
+                  </mat-option>
+                }
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+        @if (language == 'en') {
+          <div class="row">
+            <mat-checkbox formControlName="show_jp" style="padding-bottom:1rem;">
+              Show Japanese characters (untranslated)
+            </mat-checkbox>
+          </div>
+        }
+      </form>
     </div>
-    <div class="row" *ngIf="language == 'en'">
-      <mat-checkbox formControlName="show_jp" style="padding-bottom:1rem;">
-        Show Japanese characters (untranslated)
-      </mat-checkbox>
+    <div style="display:grid;grid-template-columns:repeat(4,23%);grid-row-gap:1rem;grid-column-gap:2%;" class="spacer">
+      @for (chara of filteredCharas | async; track identify($index, chara)) {
+        <div style="aspect-ratio:256/736;position:relative;">
+          <a  (click)="openModal(charaModal, chara.slug, $event);"
+            href="/{{gameURL}}/characters/{{chara.slug}}/{{language}}">
+            <img loading="lazy" width="256" height="736"
+              src="{{imgURL}}characters/long/{{chara.slug}}.webp"
+              alt="{{chara.name + ' ' + chara.title}}"
+              style="max-height:100%;border-radius:1000px;{{gradients[chara.rarity]}}">
+            <div style="outline-offset:-5px;outline:solid 7px lightgray;width:100%;height:100%;border-radius:1000px;position:absolute;top:0;left:0;"></div>
+            <div style="position:absolute;bottom:10%;left:50%;transform:translate(-50%,0);color:yellow;font-size:3.3vw;text-align:center;width:100%;-webkit-text-stroke-width:.2vw;-webkit-text-stroke-color:black;">@for (i of [].constructor(chara.rarity); track i) {
+              <i class="fa-solid fa-star"></i>
+            }</div>
+            <img
+              style="aspect-ratio:48/45;max-width:60%;position:absolute;bottom:25%;left:50%;transform:translate(-50%,0);filter:drop-shadow(5px 5px 5px black);"
+              src="{{imgURL}}characters/{{chara.role}}.webp"
+              alt="{{chara.role}}"/>
+          </a>
+        </div>
+      }
+      <ng-template #charaModal>
+        <div class="modal-body">
+          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <i class="fas fa-times-circle"></i>
+          </button>
+          <a25-chara inputSlug="{{selected}}" [showNav]="false"></a25-chara>
+        </div>
+      </ng-template>
     </div>
-  </form>
-</div>
-  <div style="display:grid;grid-template-columns:repeat(4,23%);grid-row-gap:1rem;grid-column-gap:2%;" class="spacer">
-    <div *ngFor="let chara of filteredCharas | async;  trackBy:identify" style="aspect-ratio:256/736;position:relative;">
-      <a  (click)="openModal(charaModal, chara.slug, $event);"
-        href="/{{gameURL}}/characters/{{chara.slug}}/{{language}}">
-        <img loading="lazy" width="256" height="736"
-          src="{{imgURL}}characters/long/{{chara.slug}}.webp"
-          alt="{{chara.name + ' ' + chara.title}}"
-          style="max-height:100%;border-radius:1000px;{{gradients[chara.rarity]}}">
-        <div style="outline-offset:-5px;outline:solid 7px lightgray;width:100%;height:100%;border-radius:1000px;position:absolute;top:0;left:0;"></div>
-        <div style="position:absolute;bottom:10%;left:50%;transform:translate(-50%,0);color:yellow;font-size:3.3vw;text-align:center;width:100%;-webkit-text-stroke-width:.2vw;-webkit-text-stroke-color:black;"><i *ngFor="let i of [].constructor(chara.rarity)" class="fa-solid fa-star"></i></div>
-        <img
-          style="aspect-ratio:48/45;max-width:60%;position:absolute;bottom:25%;left:50%;transform:translate(-50%,0);filter:drop-shadow(5px 5px 5px black);"
-          src="{{imgURL}}characters/{{chara.role}}.webp"
-          alt="{{chara.role}}"/>
-      </a>
-    </div>
-    <ng-template #charaModal>
-      <div class="modal-body">
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-          <i class="fas fa-times-circle"></i>
-        </button>
-        <a25-chara inputSlug="{{selected}}" [showNav]="false"></a25-chara>
-      </div>
-    </ng-template>
   </div>
-</div>
+}

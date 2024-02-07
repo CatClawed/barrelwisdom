@@ -1,20 +1,30 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
 
-<ng-container *ngIf="data as book">
-<Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Recipe Books', '/'+gameURL+'/recipe-books/'+language]]" [current]="book.name"></Breadcrumb>
-<div class="mx-auto row spacer">
-  <div class="{{colset}} card card-body">
-    <h4 class="card-title  card-icon-space">{{book.name}}</h4>
-    <div class="card-item-display">
-      <img loading="lazy" src="{{imgURL}}items/{{book.slugname}}.webp" alt="{{book.name}}">
+@if (data; as book) {
+  @if (showNav) {
+    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Recipe Books', '/'+gameURL+'/recipe-books/'+language]]" [current]="book.name"></Breadcrumb>
+  }
+  <div class="mx-auto row spacer">
+    <div class="{{colset}} card card-body">
+      <h4 class="card-title  card-icon-space">{{book.name}}</h4>
+      <div class="card-item-display">
+        <img loading="lazy" src="{{imgURL}}items/{{book.slugname}}.webp" alt="{{book.name}}">
+      </div>
+      @if (book.desc) {
+        <p>{{book.desc}}</p>
+      }
+      <p><b>Acquisition: </b>{{book.acquisition}}</p>
+      <b>Items:</b>
+      <ul>
+        @for (item of book.items; track item) {
+          <li><a routerLink="/{{gameURL}}/items/{{item.slugname}}/{{language}}">{{item.name}}</a></li>
+        }
+      </ul>
     </div>
-    <p *ngIf="book.desc">{{book.desc}}</p>
-    <p><b>Acquisition: </b>{{book.acquisition}}</p>
-    <b>Items:</b>
-    <ul>
-      <li *ngFor="let item of book.items"><a routerLink="/{{gameURL}}/items/{{item.slugname}}/{{language}}">{{item.name}}</a></li>
-    </ul>
+    @if (showNav) {
+      <div class="col-md-3" ></div>
+    }
   </div>
-  <div *ngIf="showNav" class="col-md-3" ></div>
- </div>
-</ng-container>
+}

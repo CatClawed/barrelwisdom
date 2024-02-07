@@ -1,33 +1,43 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
-<ng-container *ngIf="!error">
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
+@if (!error) {
   <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Shop Ideas"></Breadcrumb>
   <h1>Shops</h1>
-</ng-container>
-<ng-container *ngIf="data as shops">
+}
+@if (data; as shops) {
   <div class="table-of-contents">
-      <b>Table of Contents</b>
-      <ol>
-          <li *ngFor="let shop of shops">
-              <a href="/{{gameURL}}/shops/{{language}}#{{shop.slug}}"
-                (click)="$event.preventDefault();scroll(shop.slug)">
-                {{shop.name}}
-              </a>
-          </li>
-      </ol>
+    <b>Table of Contents</b>
+    <ol>
+      @for (shop of shops; track shop) {
+        <li>
+          <a href="/{{gameURL}}/shops/{{language}}#{{shop.slug}}"
+            (click)="$event.preventDefault();scroll(shop.slug)">
+            {{shop.name}}
+          </a>
+        </li>
+      }
+    </ol>
   </div>
-<ng-container *ngIf="shops">
-<div *ngFor="let shop of shops" class="row spacer">
-  <div class="card card-body col-md-8" style="margin-left:auto;margin-right:auto;">
-    <h4 class="card-title card-icon-space" id="{{shop.slug}}">
-      {{shop.name}}
-    </h4>
-    <ul style="column-count:2">
-      <li *ngFor="let slot of shop.shopslots">
-        <a routerLink="/{{gameURL}}/items/{{slot.item.slug}}/{{language}}">{{slot.item.name}}</a>
-        <span *ngIf="slot.random"> (RNG)</span>
-      </li>
-    </ul>
-  </div>
-</div>
-</ng-container>
-</ng-container>
+  @if (shops) {
+    @for (shop of shops; track shop) {
+      <div class="row spacer">
+        <div class="card card-body col-md-8" style="margin-left:auto;margin-right:auto;">
+          <h4 class="card-title card-icon-space" id="{{shop.slug}}">
+            {{shop.name}}
+          </h4>
+          <ul style="column-count:2">
+            @for (slot of shop.shopslots; track slot) {
+              <li>
+                <a routerLink="/{{gameURL}}/items/{{slot.item.slug}}/{{language}}">{{slot.item.name}}</a>
+                @if (slot.random) {
+                  <span> (RNG)</span>
+                }
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+    }
+  }
+}

@@ -1,32 +1,66 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
 
-<ng-container *ngIf="data as item">
-<Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Items', '/'+gameURL+'/items/'+language]]" [current]="item.name"></Breadcrumb>
-<div class="mx-auto row spacer">
- <div class="{{colset}} card card-body">
-    <div class="flex">
+@if (data; as item) {
+  @if (showNav) {
+    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Items', '/'+gameURL+'/items/'+language]]" [current]="item.name"></Breadcrumb>
+  }
+  <div class="mx-auto row spacer">
+    <div class="{{colset}} card card-body">
+      <div class="flex">
         <h4 class="card-title  card-icon-space">{{item.name}}</h4>
-        <b *ngIf="item.kind">{{item.kind}}</b>
+        @if (item.kind) {
+          <b>{{item.kind}}</b>
+        }
+      </div>
+      <p>{{item.description}}</p>
+      @if (item.effect) {
+        <p><b>Effect: </b>{{item.effect}}</p>
+      }
+      @if (item.acquisition) {
+        <p><b>Acquisition: </b>{{item.acquisition}}</p>
+      }
+      @if (item.missions) {
+        <b>Missions:</b>
+      }
+      @if (item.missions) {
+        <ul>
+          @for (miss of item.missions; track miss) {
+            <li><a routerLink="/{{gameURL}}/missions/{{language}}" fragment="{{miss.slugname}}">{{miss.name}}</a></li>
+          }
+        </ul>
+      }
+      @if (item.locations) {
+        <b>Locations:</b>
+      }
+      @if (item.locations) {
+        <ul>
+          @for (loc of item.locations; track loc) {
+            <li>{{loc.name}}</li>
+          }
+        </ul>
+      }
+      @if (item.demons) {
+        <b>Demons:</b>
+      }
+      @if (item.demons) {
+        <ul>
+          @for (demon of item.demons; track demon) {
+            <li><a routerLink="/{{gameURL}}/demons/{{demon.slugname}}/{{language}}">{{demon.name}}</a></li>
+          }
+        </ul>
+      }
+      @if (item.ingredient_set) {
+        <b>Craft:</b>
+      }
+      @if (item.ingredient_set) {
+        <ul>
+          @for (ing of item.ingredient_set; track ing) {
+            <li><a routerLink="/{{gameURL}}/items/{{ing.item.slugname}}/{{language}}">{{ing.item.name}}</a> x{{ing.num}}</li>
+          }
+        </ul>
+      }
     </div>
-    <p>{{item.description}}</p>
-    <p *ngIf="item.effect"><b>Effect: </b>{{item.effect}}</p>
-    <p *ngIf="item.acquisition"><b>Acquisition: </b>{{item.acquisition}}</p>
-    <b *ngIf="item.missions">Missions:</b>
-    <ul *ngIf="item.missions">
-      <li *ngFor="let miss of item.missions"><a routerLink="/{{gameURL}}/missions/{{language}}" fragment="{{miss.slugname}}">{{miss.name}}</a></li>
-    </ul>
-    <b *ngIf="item.locations">Locations:</b>
-    <ul *ngIf="item.locations">
-      <li *ngFor="let loc of item.locations">{{loc.name}}</li>
-    </ul>
-    <b *ngIf="item.demons">Demons:</b>
-    <ul *ngIf="item.demons">
-      <li *ngFor="let demon of item.demons"><a routerLink="/{{gameURL}}/demons/{{demon.slugname}}/{{language}}">{{demon.name}}</a></li>
-    </ul>
-    <b *ngIf="item.ingredient_set">Craft:</b>
-    <ul *ngIf="item.ingredient_set">
-      <li *ngFor="let ing of item.ingredient_set"><a routerLink="/{{gameURL}}/items/{{ing.item.slugname}}/{{language}}">{{ing.item.name}}</a> x{{ing.num}}</li>
-    </ul>
   </div>
-</div>
-</ng-container> 
+}

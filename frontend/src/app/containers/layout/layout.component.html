@@ -1,119 +1,132 @@
 <div class="navigation" style="display:flex;align-items:center;">
-    <button (click)="snav.toggle();" class="navigation-hide-large fas fa-bars" aria-label="Toggle navigation"
-        style="color:white;font-size:2rem;padding-left:0.5rem;background:none;border:none;"></button>
-    <div class="navbrand" style="display:inline-flex;align-items:center;">
-        <a aria-label="homepage" routerLink="/" class="navigation-brand">
-            <picture>
-                <source
-                    srcset="/media/main/barrelwisdom.svg"
-                    media="(min-width: 721px)"
-                    height="45"
-                    width="135"
-                />
-                <img src="/media/main/barrel.svg" height="45" width="35" alt="Barrel Wisdom">
-            </picture>
-        </a>
-        <a class="nav-items" routerLink="/blog/atelier-series-guide">Atelier Series Guide</a>
-        <a class="nav-items" routerLink="/blog/donate">Donate</a>
-    </div>
-    <div class="nav-social-media">
-        <a aria-label="Twitter" target="_blank" rel="noopener" href="https://twitter.com/BarrelWisdom"><i
-                class="fab fa-twitter" title="Twitter" style="color:white;font-size:2rem;padding-right:0.5rem;"></i></a>
-        <a aria-label="Discord" target="_blank" rel="noopener" href="https://discord.gg/utRynRKxwh"><i
-                class="fab fa-discord" title="Discord" style="color:white;font-size:2rem;padding-right:0.5rem;"></i></a>
-    </div>
-    <div class="nav-lang">
-        <ng-container *ngIf="languages.length > 1; else enOnly">
-            <button mat-icon-button
-                [matMenuTriggerFor]="menu"
-                aria-label="Language select">
-                <div>
-                    <i class="fa-solid fa-globe"></i>
-                    <span>{{codes[currentLang]}}</span>
-                    <b class="fas fa-caret-down"></b>
-                </div>
-                
-            </button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item
-                    *ngFor="let language of languages"
-                    (click)="changeLanguage(language)">
-                    <span>{{codes[language]}}</span>
-                </button>
-            </mat-menu>
-        </ng-container>
-        <ng-template #enOnly>
-            <button mat-icon-button disabled>
-                <i class="fa-solid fa-globe"></i>
-                <span>{{codes[currentLang]}}</span>
-            </button>
-        </ng-template>
-    </div>
+  <button (click)="snav.toggle();" class="navigation-hide-large fas fa-bars" aria-label="Toggle navigation"
+  style="color:white;font-size:2rem;padding-left:0.5rem;background:none;border:none;"></button>
+  <div class="navbrand" style="display:inline-flex;align-items:center;">
+    <a aria-label="homepage" routerLink="/" class="navigation-brand">
+      <picture>
+        <source
+          srcset="/media/main/barrelwisdom.svg"
+          media="(min-width: 721px)"
+          height="45"
+          width="135"
+          />
+        <img src="/media/main/barrel.svg" height="45" width="35" alt="Barrel Wisdom">
+      </picture>
+    </a>
+    <a class="nav-items" routerLink="/blog/atelier-series-guide">Atelier Series Guide</a>
+    <a class="nav-items" routerLink="/blog/donate">Donate</a>
+  </div>
+  <div class="nav-social-media">
+    <a aria-label="Twitter" target="_blank" rel="noopener" href="https://twitter.com/BarrelWisdom"><i
+    class="fab fa-twitter" title="Twitter" style="color:white;font-size:2rem;padding-right:0.5rem;"></i></a>
+    <a aria-label="Discord" target="_blank" rel="noopener" href="https://discord.gg/utRynRKxwh"><i
+    class="fab fa-discord" title="Discord" style="color:white;font-size:2rem;padding-right:0.5rem;"></i></a>
+  </div>
+  <div class="nav-lang">
+    @if (languages.length > 1) {
+      <button mat-icon-button
+        [matMenuTriggerFor]="menu"
+        aria-label="Language select">
+        <div>
+          <i class="fa-solid fa-globe"></i>
+          <span>{{codes[currentLang]}}</span>
+          <b class="fas fa-caret-down"></b>
+        </div>
+      </button>
+      <mat-menu #menu="matMenu">
+        @for (language of languages; track language) {
+          <button mat-menu-item
+            (click)="changeLanguage(language)">
+            <span>{{codes[language]}}</span>
+          </button>
+        }
+      </mat-menu>
+    } @else {
+      <button mat-icon-button disabled>
+        <i class="fa-solid fa-globe"></i>
+        <span>{{codes[currentLang]}}</span>
+      </button>
+    }
+  </div>
 </div>
 
 <mat-sidenav-container [hasBackdrop]="mobileView">
-    <mat-sidenav #snav [mode]="mobileView ? 'over' : 'side'" [opened]="!mobileView"
-        [fixedInViewport]="true" fixedTopGap="55" class="sidenav">
-        <div class="sidenav-items">
-            <a class="navigation-hide-large sidenav-item" routerLink="/blog/donate">
-                <i class="fas fa-donate"></i>Donate
+  <mat-sidenav #snav [mode]="mobileView ? 'over' : 'side'" [opened]="!mobileView"
+    [fixedInViewport]="true" fixedTopGap="55" class="sidenav">
+    <div class="sidenav-items">
+      <a class="navigation-hide-large sidenav-item" routerLink="/blog/donate">
+        <i class="fas fa-donate"></i>Donate
+      </a>
+      <a class="navigation-hide-large sidenav-item" routerLink="/blog/atelier-series-guide">
+        <i class="fas fa-star"></i>Atelier Series Guide
+      </a>
+      @for (n of navItems; track n) {
+        @if (!n.children) {
+          <a class="sidenav-item" routerLink="{{n.url}}">
+            <i class="{{n.icon}}"></i>{{n.name}}
+          </a>
+        }
+        @if (n.children) {
+          <a class="sidenav-item" style="color:white;cursor:pointer;"
+            (click)="n.expand=!n.expand;">
+            <i class="{{n.icon}}"></i>{{n.name}}@if (!n.expand) {
+            <b class="fas fa-caret-down"></b>
+            }@if (n.expand) {
+            <b
+            class="fas fa-caret-up"></b>
+          }
+        </a>
+      }
+      @if (n.expand) {
+        @for (c of n.children; track c) {
+          @if (router.url.indexOf(c.url) < 0) {
+            <a class="sidenav-item sidenav-child"
+              routerLink="{{c.url}}">
+              {{c.name}}
             </a>
-            <a class="navigation-hide-large sidenav-item" routerLink="/blog/atelier-series-guide">
-                <i class="fas fa-star"></i>Atelier Series Guide
+          }
+          @if (router.url.indexOf(c.url) > -1) {
+            <a class="sidenav-item sidenav-child active"
+              routerLink="{{c.url}}">
+              {{c.name}}
             </a>
-            <ng-container *ngFor="let n of navItems">
-                <a *ngIf="!n.children" class="sidenav-item" routerLink="{{n.url}}">
-                    <i class="{{n.icon}}"></i>{{n.name}}
-                </a>
-                <a *ngIf="n.children" class="sidenav-item" style="color:white;cursor:pointer;"
-                    (click)="n.expand=!n.expand;">
-                    <i class="{{n.icon}}"></i>{{n.name}}<b *ngIf="!n.expand" class="fas fa-caret-down"></b><b
-                        *ngIf="n.expand" class="fas fa-caret-up"></b>
-                </a>
-                <ng-container *ngIf="n.expand">
-                    <ng-container *ngFor="let c of n.children">
-                        <a *ngIf="router.url.indexOf(c.url) < 0" class="sidenav-item sidenav-child"
-                            routerLink="{{c.url}}">
-                            {{c.name}}
-                        </a>
-                        <a *ngIf="router.url.indexOf(c.url) > -1" class="sidenav-item sidenav-child active"
-                            routerLink="{{c.url}}">
-                            {{c.name}}
-                        </a>
-                    </ng-container>
-                </ng-container>
-            </ng-container>
-        </div>
-        <div class="sidenav-bottom">
-            <a class="sidenav-item sidenav-social-media" href="https://discord.gg/utRynRKxwh" rel="noopener" target="_blank">
-                <i class="fab fa-discord"></i>Discord
-            </a>
-            <a class="sidenav-item sidenav-social-media" href="https://twitter.com/BarrelWisdom" rel="noopener" target="_blank">
-                <i class="fab fa-twitter"></i>Twitter
-            </a>
-            <a *ngIf="!user" class="sidenav-item" routerLink="/login">
-                <i class="fas fa-user"></i>Login
-            </a>
-            <ng-container *ngIf="user">
-                <a class="sidenav-item" routerLink="/user/{{user.username}}"><i
-                        class="fa fa-user"></i>{{user.username}}</a>
-                <a class="sidenav-item" routerLink="/settings"><i class="fa fa-wrench"></i>Settings</a>
-                <a class="sidenav-item" routerLink="/create"><i class="fa fa-file"></i>Create Page</a>
-                <a class="sidenav-item" routerLink="/moderate/comment"><i class="fa fa-comment"></i>Comments</a>
-                <a class="sidenav-item" routerLink="/" (click)="logout()"><i class="fa fa-lock"></i>Logout</a>
-            </ng-container>
-            <a class="sidenav-item" routerLink="/blog/legal">
-                <i class="fas fa-balance-scale-right"></i>Legal
-            </a>
-            <a class="sidenav-item" href="https://github.com/CatClawed/barrelwisdom" rel="noopener" target="_blank">
-                <i class="fab fa-github"></i>Source
-            </a>
-        </div>
-    </mat-sidenav>
-    <div style="display:flex;">
-        <div class="main">
-            <router-outlet></router-outlet>
-        </div>
-    </div>
+          }
+        }
+      }
+    }
+  </div>
+  <div class="sidenav-bottom">
+    <a class="sidenav-item sidenav-social-media" href="https://discord.gg/utRynRKxwh" rel="noopener" target="_blank">
+      <i class="fab fa-discord"></i>Discord
+    </a>
+    <a class="sidenav-item sidenav-social-media" href="https://twitter.com/BarrelWisdom" rel="noopener" target="_blank">
+      <i class="fab fa-twitter"></i>Twitter
+    </a>
+    @if (!user) {
+      <a class="sidenav-item" routerLink="/login">
+        <i class="fas fa-user"></i>Login
+      </a>
+    }
+    @if (user) {
+      <a class="sidenav-item" routerLink="/user/{{user.username}}"><i
+      class="fa fa-user"></i>{{user.username}}</a>
+      <a class="sidenav-item" routerLink="/settings"><i class="fa fa-wrench"></i>Settings</a>
+      <a class="sidenav-item" routerLink="/create"><i class="fa fa-file"></i>Create Page</a>
+      <a class="sidenav-item" routerLink="/moderate/comment"><i class="fa fa-comment"></i>Comments</a>
+      <a class="sidenav-item" routerLink="/" (click)="logout()"><i class="fa fa-lock"></i>Logout</a>
+    }
+    <a class="sidenav-item" routerLink="/blog/legal">
+      <i class="fas fa-balance-scale-right"></i>Legal
+    </a>
+    <a class="sidenav-item" href="https://github.com/CatClawed/barrelwisdom" rel="noopener" target="_blank">
+      <i class="fab fa-github"></i>Source
+    </a>
+  </div>
+</mat-sidenav>
+<div style="display:flex;">
+  <div class="main">
+    <router-outlet></router-outlet>
+  </div>
+</div>
 
 </mat-sidenav-container>

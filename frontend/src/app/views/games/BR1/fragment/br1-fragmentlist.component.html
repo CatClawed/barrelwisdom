@@ -1,29 +1,39 @@
 
-<Error *ngIf="error" [errorCode]="error"></Error>
-<ng-container *ngIf="!error">
-   <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Fragment Effects"></Breadcrumb>
-   <h1>Fragment Effects</h1>
-   <p>See <a routerLink="/{{gameURL}}/fragment-episodes">Fragment Episodes</a> for acqusition data.
-   <div class="col-md-10 mx-auto">
-      <form [formGroup]="pageForm" class="form-horizontal">
-         <div class="row">
-            <mat-form-field class="col-md-12" appearance="outline">
-               <mat-label>Filter...</mat-label>
-               <input matInput formControlName="filtertext">
-            </mat-form-field>
-         </div>
-      </form>
-   </div>
-<div class="item-grid">
-   <div *ngFor="let frag of filteredFragmentEffects | async; trackBy:identify2" class="card card-body">
-      <h4 class="card-title" id="{{frag.slugname}}">
-         {{frag.name}}
-      </h4>
-      <p>{{frag.effect}}</p>
-      <b *ngIf="frag.upgrades">Upgrade:</b>
-      <ul *ngIf="frag.upgrades">
-         <li *ngFor="let up of frag.upgrades"><a routerLink="/{{gameURL}}/items/{{up.item.slugname}}/{{language}}">{{up.item.name}}</a> x{{up.num}}</li>
-      </ul>
-   </div>
-</div>
-</ng-container>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
+@if (!error) {
+  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Fragment Effects"></Breadcrumb>
+  <h1>Fragment Effects</h1>
+  <p>See <a routerLink="/{{gameURL}}/fragment-episodes">Fragment Episodes</a> for acqusition data.
+  <div class="col-md-10 mx-auto">
+    <form [formGroup]="pageForm" class="form-horizontal">
+      <div class="row">
+        <mat-form-field class="col-md-12" appearance="outline">
+          <mat-label>Filter...</mat-label>
+          <input matInput formControlName="filtertext">
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+  <div class="item-grid">
+    @for (frag of filteredFragmentEffects | async; track identify2($index, frag)) {
+      <div class="card card-body">
+        <h4 class="card-title" id="{{frag.slugname}}">
+          {{frag.name}}
+        </h4>
+        <p>{{frag.effect}}</p>
+        @if (frag.upgrades) {
+          <b>Upgrade:</b>
+        }
+        @if (frag.upgrades) {
+          <ul>
+            @for (up of frag.upgrades; track up) {
+              <li><a routerLink="/{{gameURL}}/items/{{up.item.slugname}}/{{language}}">{{up.item.name}}</a> x{{up.num}}</li>
+            }
+          </ul>
+        }
+      </div>
+    }
+  </div>
+}

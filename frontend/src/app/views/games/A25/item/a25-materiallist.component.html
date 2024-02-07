@@ -1,9 +1,11 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
 
-<ng-container *ngIf="!error">
-<Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Materials"></Breadcrumb>
-<h1>Materials</h1>
-<div class="col-md-10 mx-auto">
+@if (!error) {
+  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Materials"></Breadcrumb>
+  <h1>Materials</h1>
+  <div class="col-md-10 mx-auto">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
         <mat-form-field class="col-md-8" appearance="outline">
@@ -14,18 +16,20 @@
           <mat-label>Color</mat-label>
           <mat-select matNativeControl formControlName="color">
             <mat-option value="Any">Any</mat-option>
-            <ng-container *ngIf="data">
-              <mat-option *ngFor="let color of data.colors" value="{{color.slug}}">
-                {{color.name}}
-              </mat-option>
-            </ng-container>
+            @if (data) {
+              @for (color of data.colors; track color) {
+                <mat-option value="{{color.slug}}">
+                  {{color.name}}
+                </mat-option>
+              }
+            }
           </mat-select>
         </mat-form-field>
       </div>
       <div class="row">
         <mat-form-field class="col-md-6" appearance="outline">
-            <mat-label>Has trait...</mat-label>
-            <input style="height: 100%;" matInput formControlName="filtertrait">
+          <mat-label>Has trait...</mat-label>
+          <input style="height: 100%;" matInput formControlName="filtertrait">
         </mat-form-field>
         <mat-form-field class="col-md-3" appearance="outline">
           <mat-label>Trait Type</mat-label>
@@ -47,44 +51,53 @@
       </div>
     </form>
   </div>
-<div class="item-grid">
-<div *ngFor="let it of filteredItems | async; trackBy:identify" class="card card-body"  style="{{insertStyle(it)}}">
-  <h4 class="card-title card-icon-space">
-    <a (click)="openModal(itemModal, it.slug, $event);" href="/{{gameURL}}/items/materials/{{it.slug}}/{{language}}">{{it.name}}</a>    
-  </h4>
-  <div class="card-icon-position">
-    <img loading="lazy" *ngIf="it.material[0].traits" style="height:3rem;width:3rem;" src="{{imgURL}}svg/{{it.material[0].traits[0].kind}}.svg" alt="{{it.material[0].traits[0].kind}}">
-  </div>
-  <a class="card-item-display" (click)="openModal(itemModal, it.slug, $event);" href="/{{gameURL}}/items/materials/{{it.slug}}/{{language}}">
-    <img loading="lazy" class="resleri-item-frame" height="256" width="256"
-      style="background-image:url({{imgURL}}svg/item-frame-{{it.rarity}}.svg)"
-      src="{{imgURL}}items/{{it.slug}}.webp" alt="{{it.name}}">
-  </a>
-  <p *ngIf="it.limit"><b>Event: </b>{{it.limit}}</p>
-  <ul *ngIf="it.material[0].traits">
-    <li *ngFor="let trait of it.material[0].traits">
-      <ng-template #traitPopover>
-        <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
-        <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
+  <div class="item-grid">
+    @for (it of filteredItems | async; track identify($index, it)) {
+      <div class="card card-body"  style="{{insertStyle(it)}}">
+        <h4 class="card-title card-icon-space">
+          <a (click)="openModal(itemModal, it.slug, $event);" href="/{{gameURL}}/items/materials/{{it.slug}}/{{language}}">{{it.name}}</a>
+        </h4>
+        <div class="card-icon-position">
+          @if (it.material[0].traits) {
+            <img loading="lazy" style="height:3rem;width:3rem;" src="{{imgURL}}svg/{{it.material[0].traits[0].kind}}.svg" alt="{{it.material[0].traits[0].kind}}">
+          }
+        </div>
+        <a class="card-item-display" (click)="openModal(itemModal, it.slug, $event);" href="/{{gameURL}}/items/materials/{{it.slug}}/{{language}}">
+          <img loading="lazy" class="resleri-item-frame" height="256" width="256"
+            style="background-image:url({{imgURL}}svg/item-frame-{{it.rarity}}.svg)"
+            src="{{imgURL}}items/{{it.slug}}.webp" alt="{{it.name}}">
+          </a>
+          @if (it.limit) {
+            <p><b>Event: </b>{{it.limit}}</p>
+          }
+          @if (it.material[0].traits) {
+            <ul>
+              @for (trait of it.material[0].traits; track trait) {
+                <li>
+                  <ng-template #traitPopover>
+                    <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
+                    <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
+                  </ng-template>
+                  <a [popover]="traitPopover"
+                    [popoverTitle]="trait.name"
+                    (click)="$event.preventDefault();"
+                  href="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">{{trait.name}}</a>
+                </li>
+              }
+            </ul>
+          }
+          <button (click)="openModal(itemModal, it.slug)" class="card-read-more-position" mat-mini-fab color="primary">
+            <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+          </button>
+        </div>
+      }
+      <ng-template #itemModal>
+        <div class="modal-body">
+          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <i class="fas fa-times-circle"></i>
+          </button>
+          <a25-item inputSlug="{{selected}}" itemkind="materials" [showNav]="false"></a25-item>
+        </div>
       </ng-template>
-      <a [popover]="traitPopover"
-        [popoverTitle]="trait.name"
-        (click)="$event.preventDefault();"
-        href="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">{{trait.name}}</a>
-    </li>
-  </ul>         
-  <button (click)="openModal(itemModal, it.slug)" class="card-read-more-position" mat-mini-fab color="primary">
-    <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
-  </button>
-</div>
-
-<ng-template #itemModal>
-  <div class="modal-body">
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <i class="fas fa-times-circle"></i>
-    </button>
-      <a25-item inputSlug="{{selected}}" itemkind="materials" [showNav]="false"></a25-item>
-  </div>
-</ng-template>
-</div>
-</ng-container>
+    </div>
+  }
