@@ -1,58 +1,128 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
 
-<ng-container *ngIf="data as effect">
-<ng-container *ngIf="showNav">
-  <Breadcrumb *ngIf="effect.efftype == 'Normal'" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Effects', '/'+gameURL+'/effects/'+language]]" [current]="effect.name"></Breadcrumb>
-  <Breadcrumb *ngIf="effect.efftype == 'Forge'"  [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Forge Effects', '/'+gameURL+'/forge-effects/'+language]]" [current]="effect.name"></Breadcrumb>
-  <Breadcrumb *ngIf="effect.efftype == 'EV'"     [breadcrumbs]="[[gameTitle, '/'+gameURL], ['EV Effects', '/'+gameURL+'/ev-effects/'+language]]" [current]="effect.name"></Breadcrumb>
-</ng-container>
-<div class="mx-auto row spacer">
-  <div class="{{colset}} card card-body">
-    <div class="flex">
-      <h4 class="card-title">{{effect.name}}</h4>
-      <div class="card-icon-position">
-        <i *ngIf="effect.efftype == 'Normal' && effect.effsub != 'Material'" class="atelier atelier-np atelier-ryza2-type-synthesis"></i>
-        <i *ngIf="effect.effsub == 'Material'" class="atelier atelier-np atelier-ryza2-material"></i>
-        <i *ngIf="effect.efftype != 'Normal'" class="atelier atelier-ryza2-type-{{effect.effsub.toLowerCase()}}"></i>
-        <span *ngIf="effect.efftype == 'EV'" class="badge bg-secondary">EV</span>
-        <i *ngIf="effect.efftype == 'Forge'" class="atelier atelier-np atelier-ryza2-forge"></i>
+@if (data; as effect) {
+  @if (showNav) {
+    @if (effect.efftype == 'Normal') {
+      <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Effects', '/'+gameURL+'/effects/'+language]]" [current]="effect.name"></Breadcrumb>
+    }
+    @if (effect.efftype == 'Forge') {
+      <Breadcrumb  [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Forge Effects', '/'+gameURL+'/forge-effects/'+language]]" [current]="effect.name"></Breadcrumb>
+    }
+    @if (effect.efftype == 'EV') {
+      <Breadcrumb     [breadcrumbs]="[[gameTitle, '/'+gameURL], ['EV Effects', '/'+gameURL+'/ev-effects/'+language]]" [current]="effect.name"></Breadcrumb>
+    }
+  }
+  <div class="mx-auto row spacer">
+    <div class="{{colset}} card card-body">
+      <div class="flex">
+        <h4 class="card-title">{{effect.name}}</h4>
+        <div class="card-icon-position">
+          @if (effect.efftype == 'Normal' && effect.effsub != 'Material') {
+            <i class="atelier atelier-np atelier-ryza2-type-synthesis"></i>
+          }
+          @if (effect.effsub == 'Material') {
+            <i class="atelier atelier-np atelier-ryza2-material"></i>
+          }
+          @if (effect.efftype != 'Normal') {
+            <i class="atelier atelier-ryza2-type-{{effect.effsub.toLowerCase()}}"></i>
+          }
+          @if (effect.efftype == 'EV') {
+            <span class="badge bg-secondary">EV</span>
+          }
+          @if (effect.efftype == 'Forge') {
+            <i class="atelier atelier-np atelier-ryza2-forge"></i>
+          }
+        </div>
       </div>
-    </div>
-    <p *ngIf="effect.desc">{{effect.desc}}</p>
-    <p *ngIf="effect.note"><b>Note:</b> {{effect.note}}</p>
-    <b *ngIf="effect.efftype == 'Normal' || effect.efftype == 'Material'">From Item:</b>
-    <ul *ngIf="effect.effectline_set">
-      <li *ngFor="let e of effect.effectline_set"><a routerLink="/{{gameURL}}/items/{{e.slug}}/{{language}}">{{e.name}}</a></li>
-    </ul>
-    <b *ngIf="effect.efftype == 'EV'">Combines Effects:</b>
-    <ul *ngIf="effect.effects && effect.efftype == 'EV'">
-      <li *ngFor="let e of effect.effects">
-        <a href="javascript:void(0)" (click)="$event.preventDefault();" tooltip="{{e.desc}}" container="true">{{e.name}}</a>
-      </li>
-    </ul>
-    <b *ngIf="(effect.efftype == 'Normal' || effect.efftype == 'Material') && effect.parent">Child Effects:</b>
-    <b *ngIf="(effect.efftype != 'Normal' && effect.efftype != 'Material') && effect.parent">Parent Effects:</b>
-    <ul *ngIf="effect.parent">
-      <li *ngFor="let e of effect.parent"><a routerLink="/{{gameURL}}/effects/{{e.slug}}/{{language}}">{{e.name}}</a></li>
-    </ul>
-    <b *ngIf="effect.actTag0">Advanced Data:</b>
-    <ul *ngIf="effect.actTag0">
-      <li>
-        <span *ngIf="effect.attTag0">{{effect.attTag0}} /</span> {{effect.actTag0}}
+      @if (effect.desc) {
+        <p>{{effect.desc}}</p>
+      }
+      @if (effect.note) {
+        <p><b>Note:</b> {{effect.note}}</p>
+      }
+      @if (effect.efftype == 'Normal' || effect.efftype == 'Material') {
+        <b>From Item:</b>
+      }
+      @if (effect.effectline_set) {
         <ul>
-          <li *ngIf="effect.min_1_0"><b>Value 1: </b>{{effect.min_1_0}}<span *ngIf="effect.max_1_0"> - {{effect.max_1_0}}</span></li>
-          <li *ngIf="effect.min_2_0"><b>Value 2: </b>{{effect.min_2_0}}<span *ngIf="effect.max_2_0"> - {{effect.max_2_0}}</span></li>
+          @for (e of effect.effectline_set; track e) {
+            <li><a routerLink="/{{gameURL}}/items/{{e.slug}}/{{language}}">{{e.name}}</a></li>
+          }
         </ul>
-      </li>
-      <li *ngIf="effect.actTag1">
-        <span *ngIf="effect.attTag1">{{effect.attTag1}} /</span> {{effect.actTag1}}
+      }
+      @if (effect.efftype == 'EV') {
+        <b>Combines Effects:</b>
+      }
+      @if (effect.effects && effect.efftype == 'EV') {
         <ul>
-          <li *ngIf="effect.min_1_1"><b>Value 1: </b>{{effect.min_1_1}}<span *ngIf="effect.max_1_1"> - {{effect.max_1_1}}</span></li>
-          <li *ngIf="effect.min_2_1"><b>Value 2: </b>{{effect.min_2_1}}<span *ngIf="effect.max_2_1"> - {{effect.max_2_1}}</span></li>
+          @for (e of effect.effects; track e) {
+            <li>
+              <a href="javascript:void(0)" (click)="$event.preventDefault();" tooltip="{{e.desc}}" container="true">{{e.name}}</a>
+            </li>
+          }
         </ul>
-      </li>
+      }
+      @if ((effect.efftype == 'Normal' || effect.efftype == 'Material') && effect.parent) {
+        <b>Child Effects:</b>
+      }
+      @if ((effect.efftype != 'Normal' && effect.efftype != 'Material') && effect.parent) {
+        <b>Parent Effects:</b>
+      }
+      @if (effect.parent) {
+        <ul>
+          @for (e of effect.parent; track e) {
+            <li><a routerLink="/{{gameURL}}/effects/{{e.slug}}/{{language}}">{{e.name}}</a></li>
+          }
+        </ul>
+      }
+      @if (effect.actTag0) {
+        <b>Advanced Data:</b>
+      }
+      @if (effect.actTag0) {
+        <ul>
+          <li>
+            @if (effect.attTag0) {
+              <span>{{effect.attTag0}} /</span>
+              } {{effect.actTag0}}
+              <ul>
+                @if (effect.min_1_0) {
+                  <li><b>Value 1: </b>{{effect.min_1_0}}@if (effect.max_1_0) {
+                  <span> - {{effect.max_1_0}}</span>
+                }</li>
+              }
+              @if (effect.min_2_0) {
+                <li><b>Value 2: </b>{{effect.min_2_0}}@if (effect.max_2_0) {
+                <span> - {{effect.max_2_0}}</span>
+              }</li>
+            }
+          </ul>
+        </li>
+        @if (effect.actTag1) {
+          <li>
+            @if (effect.attTag1) {
+              <span>{{effect.attTag1}} /</span>
+              } {{effect.actTag1}}
+              <ul>
+                @if (effect.min_1_1) {
+                  <li><b>Value 1: </b>{{effect.min_1_1}}@if (effect.max_1_1) {
+                  <span> - {{effect.max_1_1}}</span>
+                }</li>
+              }
+              @if (effect.min_2_1) {
+                <li><b>Value 2: </b>{{effect.min_2_1}}@if (effect.max_2_1) {
+                <span> - {{effect.max_2_1}}</span>
+              }</li>
+            }
+          </ul>
+        </li>
+      }
     </ul>
+  }
 </div>
-<div *ngIf="showNav" class="col-md-3" ></div>
+@if (showNav) {
+  <div class="col-md-3" ></div>
+}
 </div>
-</ng-container>
+}

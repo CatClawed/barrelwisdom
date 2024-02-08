@@ -1,9 +1,11 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
 
-<ng-container *ngIf="!error">
-<Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Monsters"></Breadcrumb>
-<h1>Monsters</h1>
-<div class="col-md-10 mx-auto">
+@if (!error) {
+  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Monsters"></Breadcrumb>
+  <h1>Monsters</h1>
+  <div class="col-md-10 mx-auto">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
         <mat-form-field class="col-md-12" appearance="outline">
@@ -12,30 +14,36 @@
         </mat-form-field>
       </div>
     </form>
-</div>
-<div class="item-grid">
-  <div *ngFor="let mon of filteredMonsters | async; trackBy:identify2" class="card card-body">
-    <h4 class="card-title card-icon-space">
-      <a (click)="openModal(monsterModal, mon.slugname, $event);" href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">{{mon.name}}</a>    
-    </h4>
-    <div class="card-icon-position">
-      <span>{{mon.race}}</span>
-      <br *ngIf="mon.isDX" /><span *ngIf="mon.isDX" class="badge bg-secondary">DX</span>
-    </div>
-    <a class="card-item-display" (click)="openModal(monsterModal, mon.slugname, $event);" href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">
-      <img loading="lazy" src="{{imgURL}}monsters/{{mon.slugname}}.webp " alt="{{mon.name}}">
-    </a>
-    <button (click)="openModal(monsterModal, mon.slugname)" class="card-read-more-position" mat-mini-fab color="primary">
-      <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
-    </button>
   </div>
-  <ng-template #monsterModal>
-    <div class="modal-body">
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-        <i class="fas fa-times-circle"></i>
-      </button>
-       <a12-monster inputSlug="{{selected}}" [showNav]="false"></a12-monster>
-    </div>
-  </ng-template>
-</div>
-</ng-container>
+  <div class="item-grid">
+    @for (mon of filteredMonsters | async; track identify2($index, mon)) {
+      <div class="card card-body">
+        <h4 class="card-title card-icon-space">
+          <a (click)="openModal(monsterModal, mon.slugname, $event);" href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">{{mon.name}}</a>
+        </h4>
+        <div class="card-icon-position">
+          <span>{{mon.race}}</span>
+          @if (mon.isDX) {
+            <br />
+            }@if (mon.isDX) {
+            <span class="badge bg-secondary">DX</span>
+          }
+        </div>
+        <a class="card-item-display" (click)="openModal(monsterModal, mon.slugname, $event);" href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">
+          <img loading="lazy" src="{{imgURL}}monsters/{{mon.slugname}}.webp " alt="{{mon.name}}">
+        </a>
+        <button (click)="openModal(monsterModal, mon.slugname)" class="card-read-more-position" mat-mini-fab color="primary">
+          <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+        </button>
+      </div>
+    }
+    <ng-template #monsterModal>
+      <div class="modal-body">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <i class="fas fa-times-circle"></i>
+        </button>
+        <a12-monster inputSlug="{{selected}}" [showNav]="false"></a12-monster>
+      </div>
+    </ng-template>
+  </div>
+}

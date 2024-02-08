@@ -1,52 +1,96 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
-<ng-container *ngIf="!error">
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
+@if (!error) {
   <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Skills"></Breadcrumb>
   <h1>Skills</h1>
-</ng-container>
-<div *ngIf="data as skills">
-<ng-container *ngIf="skills">
-    <div class="table-of-contents">
-      <b>Table of Contents</b>
-      <ol>
-        <ng-container *ngFor="let skill of skills">
-          <li *ngIf="skill.skill_set">
-            <a href="/{{gameURL}}/skills/{{language}}#{{skill.slug}}"
-              (click)="$event.preventDefault();scroll(skill.slug)">
-              {{skill.name}}
-            </a>
-          </li>
-        </ng-container>
-      </ol>
+}
+@if (data; as skills) {
+  <div>
+    @if (skills) {
+      <div class="table-of-contents">
+        <b>Table of Contents</b>
+        <ol>
+          @for (skill of skills; track skill) {
+            @if (skill.skill_set) {
+              <li>
+                <a href="/{{gameURL}}/skills/{{language}}#{{skill.slug}}"
+                  (click)="$event.preventDefault();scroll(skill.slug)">
+                  {{skill.name}}
+                </a>
+              </li>
+            }
+          }
+        </ol>
+      </div>
+      @for (skill of skills; track skill) {
+        <div>
+          @if (skill.skill_set) {
+            <h2 id="{{skill.slug}}">{{skill.name}}</h2>
+          }
+          @if (skill.skill_set) {
+            <table class="tbl border table-shrink"><tbody>
+              @for (data of skill.skill_set; track data) {
+                <tr>
+                  <td><b>{{data.name}}</b></td>
+                  <td>[{{data.range}}]<br />
+                    @if (data.desc) {
+                      <p>{{data.desc}}</p>
+                    }
+                    <div style="column-count:2;margin-bottom:1rem;">
+                      @if (data.ether) {
+                        <b>Ether: </b> {{data.ether}}<br />
+                      }
+                      @if (data.ether_rec) {
+                        <b>Ether Recovery: </b> {{data.ether_rec}}<br />
+                      }
+                      @if (data.level) {
+                        <b>Gear: </b> {{data.level}}<br />
+                      }
+                      @if (data.knockback) {
+                        <b>Knockback: </b> {{data.knockback}}<br />
+                      }
+                    </div>
+                    @if (data.actTag0) {
+                      {{data.actTag0}} @if (data.attTag0) {
+                      <span>/ {{data.attTag0}}</span>
+                    }
+                    @if (data.actTag0) {
+                      <ul>
+                        @if (data.min_1_0) {
+                          <li>Value 1: {{data.min_1_0}} @if (data.max_1_0) {
+                            <span>- {{data.max_1_0}}</span>
+                          }</li>
+                        }
+                        @if (data.min_2_0) {
+                          <li>Value 2: {{data.min_2_0}} @if (data.max_2_0) {
+                            <span>- {{data.max_2_0}}</span>
+                          }</li>
+                        }
+                      </ul>
+                    }
+                  }
+                  @if (data.actTag1) {
+                    {{data.actTag1}} @if (data.attTag1) {
+                    <span>/ {{data.attTag1}}</span>
+                  }
+                  @if (data.actTag1) {
+                    <ul>
+                      @if (data.min_1_1) {
+                        <li>Value 1: {{data.min_1_1}} @if (data.max_1_1) {
+                          <span>- {{data.max_1_1}}</span>
+                        }</li>
+                      }
+                    </ul>
+                  }
+                }
+              </td>
+            </tr>
+          }
+        </tbody></table>
+      }
     </div>
-  <div *ngFor="let skill of skills">
-    <h2 *ngIf="skill.skill_set" id="{{skill.slug}}">{{skill.name}}</h2>
-    <table *ngIf="skill.skill_set" class="tbl border table-shrink">
-      <tr *ngFor="let data of skill.skill_set">
-        <td><b>{{data.name}}</b></td>
-        <td>[{{data.range}}]<br />
-          <p *ngIf="data.desc">{{data.desc}}</p>
-          <div style="column-count:2;margin-bottom:1rem;">
-            <ng-container *ngIf="data.ether"><b>Ether: </b> {{data.ether}}<br /></ng-container>
-            <ng-container *ngIf="data.ether_rec"><b>Ether Recovery: </b> {{data.ether_rec}}<br /></ng-container>
-            <ng-container *ngIf="data.level"><b>Gear: </b> {{data.level}}<br /></ng-container>
-            <ng-container *ngIf="data.knockback"><b>Knockback: </b> {{data.knockback}}<br /></ng-container>
-          </div>
-          <ng-container *ngIf="data.actTag0">
-            {{data.actTag0}} <span *ngIf="data.attTag0">/ {{data.attTag0}}</span>
-            <ul *ngIf="data.actTag0">
-              <li *ngIf="data.min_1_0">Value 1: {{data.min_1_0}} <span *ngIf="data.max_1_0">- {{data.max_1_0}}</span></li>
-              <li *ngIf="data.min_2_0">Value 2: {{data.min_2_0}} <span *ngIf="data.max_2_0">- {{data.max_2_0}}</span></li>
-            </ul>
-          </ng-container>
-          <ng-container *ngIf="data.actTag1">
-            {{data.actTag1}} <span *ngIf="data.attTag1">/ {{data.attTag1}}</span>
-            <ul *ngIf="data.actTag1">
-              <li *ngIf="data.min_1_1">Value 1: {{data.min_1_1}} <span *ngIf="data.max_1_1">- {{data.max_1_1}}</span></li>
-            </ul>
-          </ng-container>
-        </td>
-      </tr>
-    </table>
-  </div>
-</ng-container>
+  }
+}
 </div>
+}

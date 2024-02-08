@@ -1,30 +1,44 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
-<ng-container *ngIf="!error">
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
+@if (!error) {
   <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Shop Development"></Breadcrumb>
   <h1>Shop Development</h1>
-</ng-container>
-<ng-container *ngIf="data as shopdevelop">
-<div class="mx-auto row">
-  <div class="col-md-6">
-    <table style="border:2px solid lightgray;" class="tbl table-compress table-shrink">
-      <tr>
-        <th>Item</th>
-        <th>Categories</th>
-        <th>Bonus</th>
-      </tr>
-      <tr *ngFor="let dev of shopdevelop">
-        <td><a routerLink="/{{gameURL}}/items/{{dev.item.slug}}/{{language}}">{{dev.item.name}}</a></td>
-        <td>
-          <a routerLink="/{{gameURL}}/categories/{{dev.cat1.slug}}/{{language}}">{{dev.cat1.name}}</a>
-          <br *ngIf="dev.cat2" /> <a *ngIf="dev.cat2" routerLink="/{{gameURL}}/categories/{{dev.cat2.slug}}/{{language}}">{{dev.cat2.name}}</a>
-        </td>
-        <td>
-          <a *ngIf="dev.addProd" routerLink="/{{gameURL}}/items/{{dev.addProd.slug}}/{{language}}">{{dev.addProd.name}}</a>
-          <br *ngIf="dev.addProd && dev.addCat" />
-          <a *ngIf="dev.addCat" routerLink="/{{gameURL}}/categories/{{dev.addCat.slug}}/{{language}}">{{dev.addCat.name}}</a>
-        </td>
-      </tr>
-    </table>
+}
+@if (data; as shopdevelop) {
+  <div class="mx-auto row">
+    <div class="col-md-6">
+      <table style="border:2px solid lightgray;" class="tbl table-compress table-shrink"><tbody>
+        <tr>
+          <th>Item</th>
+          <th>Categories</th>
+          <th>Bonus</th>
+        </tr>
+        @for (dev of shopdevelop; track dev) {
+          <tr>
+            <td><a routerLink="/{{gameURL}}/items/{{dev.item.slug}}/{{language}}">{{dev.item.name}}</a></td>
+            <td>
+              <a routerLink="/{{gameURL}}/categories/{{dev.cat1.slug}}/{{language}}">{{dev.cat1.name}}</a>
+              @if (dev.cat2) {
+                <br />
+                } @if (dev.cat2) {
+                <a routerLink="/{{gameURL}}/categories/{{dev.cat2.slug}}/{{language}}">{{dev.cat2.name}}</a>
+              }
+            </td>
+            <td>
+              @if (dev.addProd) {
+                <a routerLink="/{{gameURL}}/items/{{dev.addProd.slug}}/{{language}}">{{dev.addProd.name}}</a>
+              }
+              @if (dev.addProd && dev.addCat) {
+                <br />
+              }
+              @if (dev.addCat) {
+                <a routerLink="/{{gameURL}}/categories/{{dev.addCat.slug}}/{{language}}">{{dev.addCat.name}}</a>
+              }
+            </td>
+          </tr>
+        }
+      </tbody></table>
+    </div>
   </div>
-</div>
-</ng-container>
+}

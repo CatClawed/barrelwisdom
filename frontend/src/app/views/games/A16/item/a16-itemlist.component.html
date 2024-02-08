@@ -1,9 +1,11 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
 
-<ng-container *ngIf="!error">
-<Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Items"></Breadcrumb>
-<h1>Items</h1>
-<div class="col-md-10 mx-auto">
+@if (!error) {
+  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Items"></Breadcrumb>
+  <h1>Items</h1>
+  <div class="col-md-10 mx-auto">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
         <mat-form-field class="col-md-8" appearance="outline">
@@ -14,84 +16,101 @@
           <mat-label>Category</mat-label>
           <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
             <mat-option value="Any"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"   ></mat-icon> Any</mat-option>
-            <ng-container *ngIf="data">
-              <mat-option *ngFor="let cat of data.categories" value="{{cat.name}}">
-                <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-{{cat.icon_name}}"></mat-icon>
-                {{cat.name}}
-            </mat-option>
-            </ng-container>
+            @if (data) {
+              @for (cat of data.categories; track cat) {
+                <mat-option value="{{cat.name}}">
+                  <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-{{cat.icon_name}}"></mat-icon>
+                  {{cat.name}}
+                </mat-option>
+              }
+            }
           </mat-select>
         </mat-form-field>
       </div>
       <div class="row">
         <mat-form-field class="col-md-5" appearance="outline">
-            <mat-label>Has ingredient...</mat-label>
-            <input style="height: 100%;" matInput formControlName="filtering">
-          </mat-form-field>
+          <mat-label>Has ingredient...</mat-label>
+          <input style="height: 100%;" matInput formControlName="filtering">
+        </mat-form-field>
         <mat-form-field class="col-md-3" appearance="outline">
-            <mat-label>Element</mat-label>
-            <mat-select matNativeControl formControlName="element" disableOptionCentering="true" class="mat-select-icon">
-              <mat-option value="Any">Any</mat-option>
-              <mat-option value="Fire"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-shallie-fire"></mat-icon>Fire</mat-option>
-              <mat-option value="Water"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-shallie-water"></mat-icon>Water</mat-option>
-              <mat-option value="Wind"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-shallie-wind"></mat-icon>Wind</mat-option>
-              <mat-option value="Earth"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-shallie-earth"></mat-icon>Earth</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field class="col-md-4" appearance="outline">
-            <mat-label>Element Value</mat-label>
-            <mat-select matNativeControl formControlName="elementval" disableOptionCentering="true" class="mat-select-icon">
-              <mat-option value="0" type="number">Any</mat-option>
-              <mat-option value="20" type="number">20+</mat-option>
-              <mat-option value="30" type="number">30+</mat-option>
-              <mat-option value="40" type="number">40+</mat-option>
-            </mat-select>
-          </mat-form-field>
+          <mat-label>Element</mat-label>
+          <mat-select matNativeControl formControlName="element" disableOptionCentering="true" class="mat-select-icon">
+            <mat-option value="Any">Any</mat-option>
+            <mat-option value="Fire"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-shallie-fire"></mat-icon>Fire</mat-option>
+            <mat-option value="Water"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-shallie-water"></mat-icon>Water</mat-option>
+            <mat-option value="Wind"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-shallie-wind"></mat-icon>Wind</mat-option>
+            <mat-option value="Earth"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-shallie-earth"></mat-icon>Earth</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-md-4" appearance="outline">
+          <mat-label>Element Value</mat-label>
+          <mat-select matNativeControl formControlName="elementval" disableOptionCentering="true" class="mat-select-icon">
+            <mat-option value="0" type="number">Any</mat-option>
+            <mat-option value="20" type="number">20+</mat-option>
+            <mat-option value="30" type="number">30+</mat-option>
+            <mat-option value="40" type="number">40+</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
     </form>
   </div>
-<div class="item-grid">
-<div *ngFor="let it of filteredItems | async; trackBy:identify2" class="card card-body">
-  <h4 class="card-title card-icon-space">
-    <a (click)="openModal(itemModal, it.slugname, $event);" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a>    
-  </h4>
-  <div class="card-icon-position">
-    <b>LV {{it.level}}</b>
+  <div class="item-grid">
+    @for (it of filteredItems | async; track identify2($index, it)) {
+      <div class="card card-body">
+        <h4 class="card-title card-icon-space">
+          <a (click)="openModal(itemModal, it.slugname, $event);" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a>
+        </h4>
+        <div class="card-icon-position">
+          <b>LV {{it.level}}</b>
+        </div>
+        <a class="card-item-display" (click)="openModal(itemModal, it.slugname, $event);" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">
+          <img loading="lazy" src="{{imgURL}}items/{{it.slugname}}.webp" alt="{{it.name}}">
+        </a>
+        <table class="table-item-data"><tbody>
+          @for (cat of it.categories; track cat) {
+            <tr>
+              <td style="text-align: center;"><i class="atelier atelier-{{cat.icon_name}}"></i></td><td>{{cat.name}}</td>
+            </tr>
+          }
+          <tr>
+            <td colspan=2>
+              @if (it.fire) {
+                <i style="color:#ac504f;"  class="atelier atelier-np atelier-shallie-fire"></i>
+              }
+              @if (it.water) {
+                <i style="color:#427389;" class="atelier atelier-np atelier-shallie-water"></i>
+              }
+              @if (it.wind) {
+                <i style="color:#5a843c;"  class="atelier atelier-np atelier-shallie-wind"></i>
+              }
+              @if (it.earth) {
+                <i style="color:#8f7939;" class="atelier atelier-np atelier-shallie-earth"></i>
+              }
+              <span>{{it.evalue}}</span>
+            </td>
+          </tr>
+          @if (it.slots > 0) {
+            <tr >
+              <td colspan=2>
+                @for (item of [].constructor(it.slots); track item) {
+                  <img src="{{imgURL}}slot.webp" alt="">
+                }
+              </td>
+            </tr>
+          }
+        </tbody></table>
+        <button (click)="openModal(itemModal, it.slugname)" class="card-read-more-position" mat-mini-fab color="primary">
+          <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+        </button>
+      </div>
+    }
+    <ng-template #itemModal>
+      <div class="modal-body">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <i class="fas fa-times-circle"></i>
+        </button>
+        <a16-item inputSlug="{{selected}}" [showNav]="false"></a16-item>
+      </div>
+    </ng-template>
   </div>
-  <a class="card-item-display" (click)="openModal(itemModal, it.slugname, $event);" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">
-    <img loading="lazy" src="{{imgURL}}items/{{it.slugname}}.webp" alt="{{it.name}}">
-  </a>
-  <table class="table-item-data">
-    <tr *ngFor="let cat of it.categories">
-      <td style="text-align: center;"><i class="atelier atelier-{{cat.icon_name}}"></i></td><td>{{cat.name}}</td>
-    </tr>
-    <tr>
-      <td colspan=2>
-        <i style="color:#ac504f;" *ngIf="it.fire"  class="atelier atelier-np atelier-shallie-fire"></i>
-        <i style="color:#427389;" *ngIf="it.water" class="atelier atelier-np atelier-shallie-water"></i>
-        <i style="color:#5a843c;" *ngIf="it.wind"  class="atelier atelier-np atelier-shallie-wind"></i>
-        <i style="color:#8f7939;" *ngIf="it.earth" class="atelier atelier-np atelier-shallie-earth"></i>
-        <span>{{it.evalue}}</span>
-      </td>
-    </tr>
-    <tr *ngIf="it.slots > 0" >
-      <td colspan=2>
-        <img *ngFor="let item of [].constructor(it.slots);" src="{{imgURL}}slot.webp" alt="">
-      </td>
-    </tr>
-  </table>            
-  <button (click)="openModal(itemModal, it.slugname)" class="card-read-more-position" mat-mini-fab color="primary">
-    <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
-  </button>
-</div>
-
-<ng-template #itemModal>
-  <div class="modal-body">
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <i class="fas fa-times-circle"></i>
-    </button>
-      <a16-item inputSlug="{{selected}}" [showNav]="false"></a16-item>
-  </div>
-</ng-template>
-</div>
-</ng-container>
+}

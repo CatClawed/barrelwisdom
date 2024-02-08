@@ -1,37 +1,51 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
 
-<ng-container *ngIf="data as trait">
-<Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Traits', '/'+gameURL+'/traits/'+language]]" [current]="trait.name"></Breadcrumb>
-<div class="mx-auto row spacer">
-<div class="{{colset}} card card-body">
-  <div class="flex">
-    <h4 class="card-title">{{trait.name}}</h4>
-    <div><a href="javascript:void(0)" (click)="$event.preventDefault();"
+@if (data; as trait) {
+  @if (showNav) {
+    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Traits', '/'+gameURL+'/traits/'+language]]" [current]="trait.name"></Breadcrumb>
+  }
+  <div class="mx-auto row spacer">
+    <div class="{{colset}} card card-body">
+      <div class="flex">
+        <h4 class="card-title">{{trait.name}}</h4>
+        <div><a href="javascript:void(0)" (click)="$event.preventDefault();"
         tooltip="Influences rank. A measure of rarity. This number determines where traits appear." container="true">Grade:</a>
-      {{trait.grade}}
+        {{trait.grade}}
+      </div>
     </div>
+    @if ( trait.item_set) {
+      <b>Item:</b>
+    }
+    @if ( trait.item_set) {
+      <ul>
+        @for (item of trait.item_set; track item) {
+          <li><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
+          }
+        </ul>
+      }
+      @if (trait.combo1) {
+        <p><a routerLink="/{{gameURL}}/traits/{{trait.combo1.slug}}/{{language}}">{{trait.combo1.name}}</a> x <a routerLink="/{{gameURL}}/traits/{{trait.combo2.slug}}/{{language}}">{{trait.combo2.name}}</a></p>
+      }
+      <p>{{trait.desc}}</p>
+      <div class="flex bottom" style="text-align:center;">
+        <i style="width:1.5rem" class="trait-color{{trait.trans_syn}}  atelier atelier-np atelier-ryza2-type-synthesis"></i>
+        <i style="width:1.5rem" class="trait-color{{trait.trans_atk}}  atelier atelier-np atelier-ryza2-type-attack"></i>
+        <i style="width:1.5rem" class="trait-color{{trait.trans_heal}} atelier atelier-np atelier-ryza2-type-heal"></i>
+        <i style="width:1.5rem" class="trait-color{{trait.trans_dbf}}  atelier atelier-np atelier-ryza2-type-debuff"></i>
+        <i style="width:1.5rem" class="trait-color{{trait.trans_buff}} atelier atelier-np atelier-ryza2-type-buff"></i>
+      </div>
+      <div class="flex bottom" style="text-align:center;margin-top:0.4rem;">
+        <i style="width:1.5rem" class="trait-color{{trait.trans_wpn}}  atelier atelier-np atelier-ryza2-type-weapon"></i>
+        <i style="width:1.5rem" class="trait-color{{trait.trans_arm}}  atelier atelier-np atelier-ryza2-type-armor"></i>
+        <i style="width:1.5rem" class="trait-color{{trait.trans_acc}}  atelier atelier-np atelier-ryza2-type-accessory"></i>
+        <i style="width:1.5rem" class="trait-color{{trait.trans_tal}}  atelier atelier-np atelier-sophie2-category-talismans"></i>
+        <i style="width:1.5rem" class="trait-color{{trait.trans_exp}}  atelier atelier-np atelier-sophie2-type-exploration"></i>
+      </div>
+    </div>
+    @if (showNav) {
+      <div class="col-md-3" ></div>
+    }
   </div>
-  <b *ngIf=" trait.item_set">Item:</b>
-    <ul *ngIf=" trait.item_set">
-      <li *ngFor="let item of trait.item_set"><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
-    </ul>
-    <p *ngIf="trait.combo1"><a routerLink="/{{gameURL}}/traits/{{trait.combo1.slug}}/{{language}}">{{trait.combo1.name}}</a> x <a routerLink="/{{gameURL}}/traits/{{trait.combo2.slug}}/{{language}}">{{trait.combo2.name}}</a></p>
-  <p>{{trait.desc}}</p>
-  <div class="flex bottom" style="text-align:center;">
-    <i style="width:1.5rem" class="trait-color{{trait.trans_syn}}  atelier atelier-np atelier-ryza2-type-synthesis"></i>
-    <i style="width:1.5rem" class="trait-color{{trait.trans_atk}}  atelier atelier-np atelier-ryza2-type-attack"></i>
-    <i style="width:1.5rem" class="trait-color{{trait.trans_heal}} atelier atelier-np atelier-ryza2-type-heal"></i>
-    <i style="width:1.5rem" class="trait-color{{trait.trans_dbf}}  atelier atelier-np atelier-ryza2-type-debuff"></i>
-    <i style="width:1.5rem" class="trait-color{{trait.trans_buff}} atelier atelier-np atelier-ryza2-type-buff"></i>
-  </div>
-  <div class="flex bottom" style="text-align:center;margin-top:0.4rem;">
-    <i style="width:1.5rem" class="trait-color{{trait.trans_wpn}}  atelier atelier-np atelier-ryza2-type-weapon"></i>
-    <i style="width:1.5rem" class="trait-color{{trait.trans_arm}}  atelier atelier-np atelier-ryza2-type-armor"></i>
-    <i style="width:1.5rem" class="trait-color{{trait.trans_acc}}  atelier atelier-np atelier-ryza2-type-accessory"></i>
-    <i style="width:1.5rem" class="trait-color{{trait.trans_tal}}  atelier atelier-np atelier-sophie2-category-talismans"></i>
-    <i style="width:1.5rem" class="trait-color{{trait.trans_exp}}  atelier atelier-np atelier-sophie2-type-exploration"></i>
-  </div>
-</div>
-<div *ngIf="showNav" class="col-md-3" ></div>
-</div>
-</ng-container>
+}

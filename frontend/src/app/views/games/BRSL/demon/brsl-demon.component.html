@@ -1,60 +1,112 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
 
-<ng-container *ngIf="data as demon">
-<Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Demons', '/'+gameURL+'/demons/'+language]]" [current]="demon.name"></Breadcrumb>
-<div class="mx-auto row spacer">
-  <div class="{{colset}} card card-body">
-    <h4 class="card-title card-icon-space">{{demon.name}}</h4>
-    <span *ngIf="demon.isDLC" class="card-icon-position badge bg-secondary">DLC</span>
-    <img class="image-display" loading="lazy" src="{{imgURL}}demons/{{demon.slug}}.webp" alt="{{demon.name}}">
-    <table class="tbl" style="margin-top:1rem;">
-      <tr>
-        <td style="vertical-align:middle; border-bottom:1px solid #c8c3d3;">{{demon.desc}}</td>
-        <td style="vertical-align:middle; padding:0;border-bottom:1px solid #c8c3d3;"><img src="/media/games/second-light/characters/{{demon.char}}.webp" alt=""></td>
+@if (data; as demon) {
+  @if (showNav) {
+    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Demons', '/'+gameURL+'/demons/'+language]]" [current]="demon.name"></Breadcrumb>
+  }
+  <div class="mx-auto row spacer">
+    <div class="{{colset}} card card-body">
+      <h4 class="card-title card-icon-space">{{demon.name}}</h4>
+      @if (demon.isDLC) {
+        <span class="card-icon-position badge bg-secondary">DLC</span>
+      }
+      <img class="image-display" loading="lazy" src="{{imgURL}}demons/{{demon.slug}}.webp" alt="{{demon.name}}">
+      <table class="tbl" style="margin-top:1rem;"><tbody>
+        <tr>
+          <td style="vertical-align:middle; border-bottom:1px solid #c8c3d3;">{{demon.desc}}</td>
+          <td style="vertical-align:middle; padding:0;border-bottom:1px solid #c8c3d3;"><img src="/media/games/second-light/characters/{{demon.char}}.webp" alt=""></td>
+        </tr>
+      </tbody></table>
+      <div class="row">
+        <div class="col-md-6">
+          @if (demon.region_set) {
+            <b>Locations:</b>
+          }
+          @if (demon.region_set) {
+            <ul>
+              @for (loc of demon.region_set; track loc) {
+                <li><a routerLink="/{{gameURL}}/locations/{{loc.slug}}/{{language}}">{{loc.name}}</a></li>
+              }
+            </ul>
+          }
+          @if (demon.drops) {
+            <b>Drops:</b>
+          }
+          @if (demon.drops) {
+            <ul>
+              @for (drop of demon.drops; track drop) {
+                <li><a routerLink="/{{gameURL}}/items/{{drop.slug}}/{{language}}">{{drop.name}}</a></li>
+              }
+            </ul>
+          }
+        </div>
+        <div class="col-md-6">
+          <table class="tbl" ><tbody>
+            <tr>
+              <td style="border-top:transparent;padding:0;"><b>Vitality: </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">@for (i of [].constructor(demon.vit); track i) {
+              <i class="fas fa-square" style="padding-right:0.1rem"> </i>
+              }@for (i of [].constructor(5-demon.vit); track i) {
+              <i class="far fa-square" style="padding-right:0.1rem"></i>
+            }</td>
+          </tr>
+          <tr>
+            <td style="border-top:transparent;padding:0;"><b>Attack: </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">@for (i of [].constructor(demon.atk); track i) {
+            <i    class="fas fa-square" style="padding-right:0.1rem"></i>
+            }@for (i of [].constructor(5-demon.atk); track i) {
+            <i class="far fa-square" style="padding-right:0.1rem"></i>
+          }</td>
+        </tr>
+        <tr>
+          <td style="border-top:transparent;padding:0;"><b>Defense: </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">@for (i of [].constructor(demon.dfn); track i) {
+          <i   class="fas fa-square" style="padding-right:0.1rem"></i>
+          }@for (i of [].constructor(5-demon.dfn); track i) {
+          <i class="far fa-square" style="padding-right:0.1rem"></i>
+        }</td>
       </tr>
-    </table>
-    <div class="row">
-      <div class="col-md-6">
-        <b *ngIf="demon.region_set">Locations:</b>
-        <ul *ngIf="demon.region_set">
-           <li *ngFor="let loc of demon.region_set"><a routerLink="/{{gameURL}}/locations/{{loc.slug}}/{{language}}">{{loc.name}}</a></li>
-        </ul>
-        <b *ngIf="demon.drops">Drops:</b>
-        <ul *ngIf="demon.drops">
-          <li *ngFor="let drop of demon.drops"><a routerLink="/{{gameURL}}/items/{{drop.slug}}/{{language}}">{{drop.name}}</a></li>
-        </ul>
-      </div>
-      <div class="col-md-6">
-        <table class="tbl" >
-          <tr>
-            <td style="border-top:transparent;padding:0;"><b>Vitality: </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;"><i *ngFor="let i of [].constructor(demon.vit)" class="fas fa-square" style="padding-right:0.1rem"> </i><i *ngFor="let i of [].constructor(5-demon.vit)" class="far fa-square" style="padding-right:0.1rem"></i></td>
-          </tr>
-          <tr>
-            <td style="border-top:transparent;padding:0;"><b>Attack: </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;"><i    *ngFor="let i of [].constructor(demon.atk)" class="fas fa-square" style="padding-right:0.1rem"></i><i *ngFor="let i of [].constructor(5-demon.atk)" class="far fa-square" style="padding-right:0.1rem"></i></td>
-          </tr>
-          <tr>
-            <td style="border-top:transparent;padding:0;"><b>Defense: </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;"><i   *ngFor="let i of [].constructor(demon.dfn)" class="fas fa-square" style="padding-right:0.1rem"></i><i *ngFor="let i of [].constructor(5-demon.dfn)" class="far fa-square" style="padding-right:0.1rem"></i></td>
-          </tr>
-        </table>
-      </div>
-      <table class="tbl table-shrink" >
-        <tr>
-          <th style="text-align: center;border:transparent;padding-bottom:0;width:20%"><img src="/media/games/second-light/icons/slash.webp"  alt="Slash attribute"  style="max-width:100%"></th>
-          <th style="text-align: center;border:transparent;padding-bottom:0;width:20%"><img src="/media/games/second-light/icons/pierce.webp" alt="Pierce attribute" style="max-width:100%"></th>
-          <th style="text-align: center;border:transparent;padding-bottom:0;width:20%"><img src="/media/games/second-light/icons/shock.webp"  alt="Shock attribute"  style="max-width:100%"></th>
-          <th style="text-align: center;border:transparent;padding-bottom:0;width:20%"><img src="/media/games/second-light/icons/tremor.webp" alt="Tremor attribute" style="max-width:100%"></th>
-          <th style="text-align: center;border:transparent;padding-bottom:0;width:20%"><img src="/media/games/second-light/icons/warp.webp"   alt="Warp attribute"   style="max-width:100%"></th>
-        </tr>
-        <tr>
-          <td style="text-align: center;border:transparent;padding:0;"><i class="fas fa-arrow-down" *ngIf="demon.slash   == 'HALF'"></i><i class="fas fa-arrow-up" *ngIf="demon.slash   == 'WEAK'"></i></td>
-          <td style="text-align: center;border:transparent;padding:0;"><i class="fas fa-arrow-down" *ngIf="demon.pierce  == 'HALF'"></i><i class="fas fa-arrow-up" *ngIf="demon.pierce  == 'WEAK'"></i></td>
-          <td style="text-align: center;border:transparent;padding:0;"><i class="fas fa-arrow-down" *ngIf="demon.shock   == 'HALF'"></i><i class="fas fa-arrow-up" *ngIf="demon.shock   == 'WEAK'"></i></td>
-          <td style="text-align: center;border:transparent;padding:0;"><i class="fas fa-arrow-down" *ngIf="demon.tremor  == 'HALF'"></i><i class="fas fa-arrow-up" *ngIf="demon.tremor  == 'WEAK'"></i></td>
-          <td style="text-align: center;border:transparent;padding:0;"><i class="fas fa-arrow-down" *ngIf="demon.warp    == 'HALF'"></i><i class="fas fa-arrow-up" *ngIf="demon.warp    == 'WEAK'"></i></td>
-        </tr>
-      </table>
-    </div>
+    </tbody></table>
   </div>
-  <div *ngIf="showNav" class="col-md-3" ></div>
- </div>
-</ng-container>
+  <table class="tbl table-shrink" ><tbody>
+    <tr>
+      <th style="text-align: center;border:transparent;padding-bottom:0;width:20%"><img src="/media/games/second-light/icons/slash.webp"  alt="Slash attribute"  style="max-width:100%"></th>
+      <th style="text-align: center;border:transparent;padding-bottom:0;width:20%"><img src="/media/games/second-light/icons/pierce.webp" alt="Pierce attribute" style="max-width:100%"></th>
+      <th style="text-align: center;border:transparent;padding-bottom:0;width:20%"><img src="/media/games/second-light/icons/shock.webp"  alt="Shock attribute"  style="max-width:100%"></th>
+      <th style="text-align: center;border:transparent;padding-bottom:0;width:20%"><img src="/media/games/second-light/icons/tremor.webp" alt="Tremor attribute" style="max-width:100%"></th>
+      <th style="text-align: center;border:transparent;padding-bottom:0;width:20%"><img src="/media/games/second-light/icons/warp.webp"   alt="Warp attribute"   style="max-width:100%"></th>
+    </tr>
+    <tr>
+      <td style="text-align: center;border:transparent;padding:0;">@if (demon.slash   == 'HALF') {
+        <i class="fas fa-arrow-down"></i>
+        }@if (demon.slash   == 'WEAK') {
+        <i class="fas fa-arrow-up"></i>
+      }</td>
+      <td style="text-align: center;border:transparent;padding:0;">@if (demon.pierce  == 'HALF') {
+        <i class="fas fa-arrow-down"></i>
+        }@if (demon.pierce  == 'WEAK') {
+        <i class="fas fa-arrow-up"></i>
+      }</td>
+      <td style="text-align: center;border:transparent;padding:0;">@if (demon.shock   == 'HALF') {
+        <i class="fas fa-arrow-down"></i>
+        }@if (demon.shock   == 'WEAK') {
+        <i class="fas fa-arrow-up"></i>
+      }</td>
+      <td style="text-align: center;border:transparent;padding:0;">@if (demon.tremor  == 'HALF') {
+        <i class="fas fa-arrow-down"></i>
+        }@if (demon.tremor  == 'WEAK') {
+        <i class="fas fa-arrow-up"></i>
+      }</td>
+      <td style="text-align: center;border:transparent;padding:0;">@if (demon.warp    == 'HALF') {
+        <i class="fas fa-arrow-down"></i>
+        }@if (demon.warp    == 'WEAK') {
+        <i class="fas fa-arrow-up"></i>
+      }</td>
+    </tr>
+  </tbody></table>
+</div>
+</div>
+@if (showNav) {
+  <div class="col-md-3" ></div>
+}
+</div>
+}

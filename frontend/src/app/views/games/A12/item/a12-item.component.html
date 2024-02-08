@@ -1,99 +1,185 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
 
-<ng-container *ngIf="data as item">
-<Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Items', '/'+gameURL+'/items/'+language]]" [current]="item.name"></Breadcrumb>
-<div class="mx-auto row spacer">
- <div class="{{colset}} card card-body">
-    <h4 class="card-title card-icon-space">{{item.name}}</h4>
-    <div class="card-icon-position">
-      <b *ngIf="item.level">LV {{item.level}}</b>
-    </div>
-    <div class="card-item-display">
-      <img loading="lazy" src="{{imgURL}}items/{{item.slugname}}.webp" alt="{{item.name}}">
-    </div>
-    <p>{{item.desc}}</p>
-    <p *ngIf="item.book_set"><b>Recipe Book: </b><a routerLink="/{{gameURL}}/recipe-books/{{item.book_set[0].slugname}}/{{language}}">{{item.book_set[0].name}}</a></p>
-    <table class="table-item-data">
-      <tr *ngFor="let cat of item.categories">
-        <td><i class="atelier atelier-{{cat.icon_name}}"></i></td><td><a routerLink="/{{gameURL}}/categories/{{cat.slugname}}/{{language}}">{{cat.name}}</a></td>
-      </tr>
-    </table>
-    <b *ngIf="item.locations">Locations:</b>
-    <ul *ngIf="item.locations">
-      <li *ngFor="let loc of item.locations">
-       <a *ngIf="loc.parentslug" routerLink="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}" fragment="{{loc.slugname}}">{{loc.name}}</a>
-       <a *ngIf="!loc.parentslug" routerLink="/{{gameURL}}/locations/{{loc.slugname}}/{{language}}">{{loc.name}}</a></li>
-    </ul>
-    <b *ngIf="item.monsters">Monsters:</b>
-    <ul *ngIf="item.monsters">
-      <li *ngFor="let mon of item.monsters"><a routerLink="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">{{mon.name}}</a></li>
-    </ul>
-    <b *ngIf="item.traits">Trait:</b>
-    <ul *ngIf="item.traits">
-      <li><a routerLink="/{{gameURL}}/traits/{{item.traits.slugname}}/{{language}}">{{item.traits.name}}</a></li>
-    </ul>
-    <ul *ngIf="item.time" style="list-style:none;padding:0;">
-      <li *ngIf="item.time">Time: {{item.time}}</li>
-      <li *ngIf="item.mp">MP Used: {{item.mp}}</li>
-      <li *ngIf="item.price">Selling Price: {{item.price}}</li>
-      <li *ngIf="item.uses">Uses: {{item.uses}}</li>
-    </ul>
-    <table *ngIf="item.ingredient_set" class="tbl">
-      <tr class="table-dark-center">
-        <th>Ingredients</th>
-      </tr>
-      <tr><td>
+@if (data; as item) {
+  @if (showNav) {
+    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Items', '/'+gameURL+'/items/'+language]]" [current]="item.name"></Breadcrumb>
+  }
+  <div class="mx-auto row spacer">
+    <div class="{{colset}} card card-body">
+      <h4 class="card-title card-icon-space">{{item.name}}</h4>
+      <div class="card-icon-position">
+        @if (item.level) {
+          <b>LV {{item.level}}</b>
+        }
+      </div>
+      <div class="card-item-display">
+        <img loading="lazy" src="{{imgURL}}items/{{item.slugname}}.webp" alt="{{item.name}}">
+      </div>
+      <p>{{item.desc}}</p>
+      @if (item.book_set) {
+        <p><b>Recipe Book: </b><a routerLink="/{{gameURL}}/recipe-books/{{item.book_set[0].slugname}}/{{language}}">{{item.book_set[0].name}}</a></p>
+      }
+      <table class="table-item-data"><tbody>
+        @for (cat of item.categories; track cat) {
+          <tr>
+            <td><i class="atelier atelier-{{cat.icon_name}}"></i></td><td><a routerLink="/{{gameURL}}/categories/{{cat.slugname}}/{{language}}">{{cat.name}}</a></td>
+          </tr>
+        }
+      </tbody></table>
+      @if (item.locations) {
+        <b>Locations:</b>
+      }
+      @if (item.locations) {
         <ul>
-          <li *ngFor="let ing of item.ingredient_set"><a *ngIf="ing.item" routerLink="/{{gameURL}}/items/{{ing.item.slugname}}/{{language}}">{{ing.item.name}}</a><a *ngIf="ing.category" routerLink="/{{gameURL}}/categories/{{ing.category.slugname}}/{{language}}">{{ing.category.name}}</a> x{{ing.num}}</li>
-        </ul>
-      </td></tr>
-    </table>
-    <table *ngIf="item.effectline_set" class="tbl">
-      <tr class="table-dark-center"><th colspan=2>Effects</th></tr>
-      <tr *ngIf="itemone"><td>Item 1</td><td>
-        <ul style="margin-bottom:0;">
-         <ng-container *ngFor="let eff of item.effectline_set">
-         <li *ngIf="eff.itemnum == 1"><a routerLink="/{{gameURL}}/effects/{{eff.effect.slugname}}/{{language}}">{{eff.effect.name}}</a></li>
-         </ng-container>
-        </ul>
-      </td></tr>
-      <tr *ngIf="itemtwo"><td>Item 2</td><td>
-        <ul style="margin-bottom:0;">
-         <ng-container *ngFor="let eff of item.effectline_set">
-         <li *ngIf="eff.itemnum == 2"><a routerLink="/{{gameURL}}/effects/{{eff.effect.slugname}}/{{language}}">{{eff.effect.name}}</a></li>
-         </ng-container>
-        </ul>
-      </td></tr>
-      <tr *ngIf="itemthree"><td>Item 3</td><td>
-        <ul style="margin-bottom:0;">
-        <ng-container *ngFor="let eff of item.effectline_set">
-         <li *ngIf="eff.itemnum == 3"><a routerLink="/{{gameURL}}/effects/{{eff.effect.slugname}}/{{language}}">{{eff.effect.name}}</a></li>
-         </ng-container>
-        </ul>
-      </td></tr>
-    </table>
-    <table *ngIf="item.equip_set" class="tbl">
+          @for (loc of item.locations; track loc) {
+            <li>
+              @if (loc.parentslug) {
+                <a routerLink="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}" fragment="{{loc.slugname}}">{{loc.name}}</a>
+              }
+              @if (!loc.parentslug) {
+                <a routerLink="/{{gameURL}}/locations/{{loc.slugname}}/{{language}}">{{loc.name}}</a>
+              }</li>
+            }
+          </ul>
+        }
+        @if (item.monsters) {
+          <b>Monsters:</b>
+        }
+        @if (item.monsters) {
+          <ul>
+            @for (mon of item.monsters; track mon) {
+              <li><a routerLink="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">{{mon.name}}</a></li>
+            }
+          </ul>
+        }
+        @if (item.traits) {
+          <b>Trait:</b>
+        }
+        @if (item.traits) {
+          <ul>
+            <li><a routerLink="/{{gameURL}}/traits/{{item.traits.slugname}}/{{language}}">{{item.traits.name}}</a></li>
+          </ul>
+        }
+        @if (item.time) {
+          <ul style="list-style:none;padding:0;">
+            @if (item.time) {
+              <li>Time: {{item.time}}</li>
+            }
+            @if (item.mp) {
+              <li>MP Used: {{item.mp}}</li>
+            }
+            @if (item.price) {
+              <li>Selling Price: {{item.price}}</li>
+            }
+            @if (item.uses) {
+              <li>Uses: {{item.uses}}</li>
+            }
+          </ul>
+        }
+        @if (item.ingredient_set) {
+          <table class="tbl"><tbody>
+            <tr class="table-dark-center">
+              <th>Ingredients</th>
+            </tr>
+            <tr><td>
+              <ul>
+                @for (ing of item.ingredient_set; track ing) {
+                  <li>@if (ing.item) {
+                    <a routerLink="/{{gameURL}}/items/{{ing.item.slugname}}/{{language}}">{{ing.item.name}}</a>
+                    }@if (ing.category) {
+                    <a routerLink="/{{gameURL}}/categories/{{ing.category.slugname}}/{{language}}">{{ing.category.name}}</a>
+                  } x{{ing.num}}</li>
+                }
+              </ul>
+            </td></tr>
+          </tbody></table>
+        }
+        @if (item.effectline_set) {
+          <table class="tbl"><tbody>
+            <tr class="table-dark-center"><th colspan=2>Effects</th></tr>
+            @if (itemone) {
+              <tr><td>Item 1</td><td>
+              <ul style="margin-bottom:0;">
+                @for (eff of item.effectline_set; track eff) {
+                  @if (eff.itemnum == 1) {
+                    <li><a routerLink="/{{gameURL}}/effects/{{eff.effect.slugname}}/{{language}}">{{eff.effect.name}}</a></li>
+                  }
+                }
+              </ul>
+            </td></tr>
+          }
+          @if (itemtwo) {
+            <tr><td>Item 2</td><td>
+            <ul style="margin-bottom:0;">
+              @for (eff of item.effectline_set; track eff) {
+                @if (eff.itemnum == 2) {
+                  <li><a routerLink="/{{gameURL}}/effects/{{eff.effect.slugname}}/{{language}}">{{eff.effect.name}}</a></li>
+                }
+              }
+            </ul>
+          </td></tr>
+        }
+        @if (itemthree) {
+          <tr><td>Item 3</td><td>
+          <ul style="margin-bottom:0;">
+            @for (eff of item.effectline_set; track eff) {
+              @if (eff.itemnum == 3) {
+                <li><a routerLink="/{{gameURL}}/effects/{{eff.effect.slugname}}/{{language}}">{{eff.effect.name}}</a></li>
+              }
+            }
+          </ul>
+        </td></tr>
+      }
+    </tbody></table>
+  }
+  @if (item.equip_set) {
+    <table class="tbl"><tbody>
       <tr class="table-dark-center"><th>Materials</th></tr>
       <tr><td>
         <ul>
-         <li *ngFor="let item of item.equip_set[0].material"><a routerLink="/{{gameURL}}/items/{{item.slugname}}/{{language}}">{{item.name}}</a></li>
+          @for (item of item.equip_set[0].material; track item) {
+            <li><a routerLink="/{{gameURL}}/items/{{item.slugname}}/{{language}}">{{item.name}}</a></li>
+          }
         </ul>
       </td></tr>
-    </table>
-    <table *ngIf="item.equip_set" class="tbl">
-        <tr class="table-dark-center"><th colspan=2>Stats</th></tr>
-        <tr><td style="padding-top:0.2rem;text-align:right;width:50%;"><b>HP </b></td> <td style="padding-top:0.2rem;padding-left:0.5em;">{{item.equip_set[0].hp}}<span *ngIf="!item.equip_set[0].hp">0</span></td></tr>
-        <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>MP </b></td> <td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].mp}}<span *ngIf="!item.equip_set[0].mp">0</span></td></tr>
-        <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>LP </b></td> <td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].lp}}<span *ngIf="!item.equip_set[0].lp">0</span></td></tr>
-        <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>ATK </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].atk}}<span *ngIf="!item.equip_set[0].atk">0</span></td></tr>
-        <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>DEF </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].defen}}<span *ngIf="!item.equip_set[0].defen">0</span></td></tr>
-        <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>SPD </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].spd}}<span *ngIf="!item.equip_set[0].spd">0</span></td></tr>
-    </table>
-    <table *ngIf="item.equip_set" class="tbl">
-        <tr class="table-dark-center"><th>Characters</th></tr>
-        <tr><td><img *ngFor="let char of item.equip_set[0].chars" src="{{imgURL}}resources/equip_{{char.name}}.webp" alt="Can equip: {{char.name}}"></td></tr>
-    </table>
-  </div>
-  <div *ngIf="showNav" class="col-md-3" ></div>
+    </tbody></table>
+  }
+  @if (item.equip_set) {
+    <table class="tbl"><tbody>
+      <tr class="table-dark-center"><th colspan=2>Stats</th></tr>
+      <tr><td style="padding-top:0.2rem;text-align:right;width:50%;"><b>HP </b></td> <td style="padding-top:0.2rem;padding-left:0.5em;">{{item.equip_set[0].hp}}@if (!item.equip_set[0].hp) {
+      <span>0</span>
+    }</td></tr>
+    <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>MP </b></td> <td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].mp}}@if (!item.equip_set[0].mp) {
+    <span>0</span>
+  }</td></tr>
+  <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>LP </b></td> <td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].lp}}@if (!item.equip_set[0].lp) {
+  <span>0</span>
+}</td></tr>
+<tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>ATK </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].atk}}@if (!item.equip_set[0].atk) {
+<span>0</span>
+}</td></tr>
+<tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>DEF </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].defen}}@if (!item.equip_set[0].defen) {
+<span>0</span>
+}</td></tr>
+<tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>SPD </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].spd}}@if (!item.equip_set[0].spd) {
+<span>0</span>
+}</td></tr>
+</tbody></table>
+}
+@if (item.equip_set) {
+  <table class="tbl"><tbody>
+    <tr class="table-dark-center"><th>Characters</th></tr>
+    <tr><td>@for (char of item.equip_set[0].chars; track char) {
+      <img src="{{imgURL}}resources/equip_{{char.name}}.webp" alt="Can equip: {{char.name}}">
+    }</td></tr>
+  </tbody></table>
+}
 </div>
-</ng-container>
+@if (showNav) {
+  <div class="col-md-3" ></div>
+}
+</div>
+}

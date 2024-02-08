@@ -2,14 +2,13 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { APP_ID, NgModule } from '@angular/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from '@app/app-routing.module';
 import { AppComponent } from '@app/app.component';
 import { LayoutComponent } from '@app/containers';
 import { HttpErrorInterceptor } from '@app/interceptor/http-error.intercepter';
 import { JwtInterceptor } from '@app/interceptor/jwt_interceptor';
-import { TransferHttpCacheModule } from '@nguniversal/common';
 import { CookieService } from 'ngx-cookie-service';
 
 const APP_CONTAINERS = [
@@ -25,12 +24,12 @@ const APP_CONTAINERS = [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    TransferHttpCacheModule,
     MatSidenavModule,
     MatMenuModule,
     AppRoutingModule
   ],
   providers: [
+    provideClientHydration(),
     {
       provide: APP_ID,
       useValue: 'frontend'

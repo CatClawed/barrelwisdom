@@ -1,31 +1,39 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
 
-<ng-container *ngIf="data as category">
-<Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Category: '+category.name"></Breadcrumb>
-<h1>{{category.name}}</h1>
-<div style="margin-top: 1em;" class="col-md-3" ></div>
-<div class="mx-auto row">
+@if (data; as category) {
+  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Category: '+category.name"></Breadcrumb>
+  <h1>{{category.name}}</h1>
+  <div style="margin-top: 1em;" class="col-md-3" ></div>
+  <div class="mx-auto row">
     <div class="col-md-6">
-        <table style="border:1px solid #c8ced3;" class="tbl">
-            <tr class="table-dark-center"><th style="border:none;" colspan=2>Items in Category</th></tr>
-            <tr *ngFor="let item of category.item_set">
-                <td>
-                    <a routerLink="/{{gameURL}}/items/{{item.slugname}}/{{language}}">{{item.name}}</a>
-                </td>
-                <td>LV {{item.level}}</td>
-            </tr>
-        </table>
+      <table style="border:1px solid #c8ced3;" class="tbl"><tbody>
+        <tr class="table-dark-center"><th style="border:none;" colspan=2>Items in Category</th></tr>
+        @for (item of category.item_set; track item) {
+          <tr>
+            <td>
+              <a routerLink="/{{gameURL}}/items/{{item.slugname}}/{{language}}">{{item.name}}</a>
+            </td>
+            <td>LV {{item.level}}</td>
+          </tr>
+        }
+      </tbody></table>
     </div>
-    <div *ngIf="category.ingredientcat" class="col-md-6">
-        <table style="border:1px solid #c8ced3;" class="tbl">
-            <tr class="table-dark-center"><th style="border:none;" colspan=2>Items Using Category</th></tr>
-            <tr *ngFor="let item of category.ingredientcat">
-                <td>
-                    <a routerLink="/{{gameURL}}/items/{{item.synthitem.slugname}}/{{language}}">{{item.synthitem.name}}</a>
-                </td>
-                <td>LV {{item.synthitem.level}}</td>
+    @if (category.ingredientcat) {
+      <div class="col-md-6">
+        <table style="border:1px solid #c8ced3;" class="tbl"><tbody>
+          <tr class="table-dark-center"><th style="border:none;" colspan=2>Items Using Category</th></tr>
+          @for (item of category.ingredientcat; track item) {
+            <tr>
+              <td>
+                <a routerLink="/{{gameURL}}/items/{{item.synthitem.slugname}}/{{language}}">{{item.synthitem.name}}</a>
+              </td>
+              <td>LV {{item.synthitem.level}}</td>
             </tr>
-        </table>
-    </div>
-</div>
-</ng-container>
+          }
+        </tbody></table>
+      </div>
+    }
+  </div>
+}

@@ -1,159 +1,271 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
 
-<ng-container *ngIf="data as item">
-<Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Items', '/'+gameURL+'/items/'+language]]" [current]="item.name"></Breadcrumb>
-<div class="mx-auto row spacer">
-  <div class="{{colset}} card card-body">
-    <h4 class="card-title card-icon-space">{{item.name}}</h4>
+@if (data; as item) {
+  @if (showNav) {
+    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Items', '/'+gameURL+'/items/'+language]]" [current]="item.name"></Breadcrumb>
+  }
+  <div class="mx-auto row spacer">
+    <div class="{{colset}} card card-body">
+      <h4 class="card-title card-icon-space">{{item.name}}</h4>
       <div class="card-icon-position">
         <b style="padding-right:0.5em;">LV {{item.level}}</b>
         <i class="atelier atelier-np atelier-ryza2-{{icons[item.itemtype]}}"></i>
-        <br *ngIf="item.isDLC" /><span *ngIf="item.isDLC" class="badge bg-secondary">DLC</span>
+        @if (item.isDLC) {
+          <br />
+          }@if (item.isDLC) {
+          <span class="badge bg-secondary">DLC</span>
+        }
       </div>
-    <div class="card-item-display">
-       <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
-    </div>
-    <div class="card-text">
-      <p>{{item.desc}}</p>
-      <p *ngIf="item.note"><b>Note:</b> {{item.note}}</p>
-      <div class="row">
-        <table class="table-item-data col">
-          <tr *ngFor="let cat of item.category">
-              <td style="text-align: center;"><i class="atelier atelier-ryza2-category-{{cat.slug}}"></i></td><td><a routerLink="/{{gameURL}}/categories/{{cat.slug}}">{{cat.name}}</a></td>
-          </tr>
-        </table>
-        <table class="table-item-data">
-          <tr>
-            <td colspan=2>
-              <i style="color:#f03a02;" *ngIf="item.fire"      class="atelier atelier-np atelier-ryza2-fire"></i>
-              <i style="color:#04b5db;" *ngIf="item.ice"       class="atelier atelier-np atelier-ryza2-ice"></i>
-              <i style="color:#e3bb05;" *ngIf="item.lightning" class="atelier atelier-np atelier-ryza2-lightning"></i>
-              <i style="color:#589b1d;" *ngIf="item.wind"      class="atelier atelier-np atelier-ryza2-wind"></i>
-              <span>{{item.elementvalue}}</span>
-            </td>
-          </tr>
-        </table>
+      <div class="card-item-display">
+        <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
       </div>
-      <p *ngIf="item.shop"><i class="atelier atelier-ryza2-shop"></i><b>Shop:</b> {{item.shop.name}}</p>
-      <b *ngIf="item.location" >Location:</b>
-      <div *ngIf="item.location" style="column-count: 2;">
-        <ul style="padding-left:1.1em;margin-bottom:0">
-            <li *ngFor="let loc of item.location"><a *ngIf="loc.reg" routerLink="/{{gameURL}}/locations/{{loc.reg}}/{{language}}">{{loc.name}}</a><a *ngIf="!loc.reg" routerLink="/{{gameURL}}/locations/{{loc.slug}}/{{language}}">{{loc.name}}</a></li>
-        </ul>
-      </div>
-      <b *ngIf="item.monster_set" >Dropped by:</b>
-      <div *ngIf="item.monster_set" style="column-count: 2;">
-         <ul style="padding-left:1.1em;margin-bottom:0">
-             <li *ngFor="let mon of item.monster_set"><a routerLink="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a></li>
-         </ul>
-      </div>
-      <ng-container *ngIf="item.itemtype == 'Material'">
-        <ng-container *ngIf="item.trait">
-          <b>Trait:</b>
-          <ul style="padding-left:1.1em;margin-bottom:0">
-            <li *ngFor="let trait of item.trait"><a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">{{trait.name}}</a></li>
-          </ul>
-        </ng-container>
-        <ng-container *ngIf="item.effectline_set">
-          <b>Effect: </b> <a routerLink="/{{gameURL}}/effects/{{item.effectline_set[0].slug}}/{{language}}">{{item.effectline_set[0].name}}</a>
-        </ng-container>
-      </ng-container>
-      <ng-container *ngIf="item.itemtype != 'Material' && item.ingredient_set">
-        <p *ngIf="item.skilltree"><b>Acquired from skill tree.</b></p>
-        <p *ngIf="item.evlinkitems_set"><b>EV Link: <a routerLink="/{{gameURL}}/items/{{item.evlinkitems_set[0].item1.slug}}">{{item.evlinkitems_set[0].item1.name}}</a> + <a routerLink="/{{gameURL}}/items/{{item.evlinkitems_set[0].item2.slug}}">{{item.evlinkitems_set[0].item2.name}}</a></b></p>
-        <ng-container *ngIf="item.recipemorphs_set">
-          <b>Morph Chain:</b>
-          <div style="column-count: 2;">
-            <ol style="padding-left:1.1em;">
-                <li *ngFor="let recipe of item.recipemorphs_set"><a routerLink="/{{gameURL}}/items/{{recipe.parent.slug}}/{{language}}">{{recipe.parent.name}}</a></li>
-            </ol>
-          </div>
-        </ng-container>
-        <ng-container *ngIf="item.effectline_set">
-          <table class="tbl">
-            <tr class="table-dark-center"><th colspan=2 >Effects</th></tr>
+      <div class="card-text">
+        <p>{{item.desc}}</p>
+        @if (item.note) {
+          <p><b>Note:</b> {{item.note}}</p>
+        }
+        <div class="row">
+          <table class="table-item-data col"><tbody>
+            @for (cat of item.category; track cat) {
+              <tr>
+                <td style="text-align: center;"><i class="atelier atelier-ryza2-category-{{cat.slug}}"></i></td><td><a routerLink="/{{gameURL}}/categories/{{cat.slug}}">{{cat.name}}</a></td>
+              </tr>
+            }
+          </tbody></table>
+          <table class="table-item-data"><tbody>
             <tr>
-              <td style="vertical-align: middle;"><b>1</b></td><td>
-              <a *ngIf="default[0][1] != 'none'" routerLink="/{{gameURL}}/effects/{{default[0][1]}}/{{language}}" class="badge bg-secondary badge-list">{{default[0][0]}}</a> 
-              <span *ngIf="default[0][1] == 'none'" class="badge bg-secondary badge-list">{{default[0][0]}}</span>
-              <a *ngFor="let e of eff1" class="badge bg-primary badge-list" routerLink="/{{gameURL}}/effects/{{e[1]}}/{{language}}">{{e[0]}}</a>
-            </td>
+              <td colspan=2>
+                @if (item.fire) {
+                  <i style="color:#f03a02;"      class="atelier atelier-np atelier-ryza2-fire"></i>
+                }
+                @if (item.ice) {
+                  <i style="color:#04b5db;"       class="atelier atelier-np atelier-ryza2-ice"></i>
+                }
+                @if (item.lightning) {
+                  <i style="color:#e3bb05;" class="atelier atelier-np atelier-ryza2-lightning"></i>
+                }
+                @if (item.wind) {
+                  <i style="color:#589b1d;"      class="atelier atelier-np atelier-ryza2-wind"></i>
+                }
+                <span>{{item.elementvalue}}</span>
+              </td>
             </tr>
-            <tr *ngIf="eff2.length > 0">
-              <td style="vertical-align: middle;"><b>2</b></td><td>
-              <a *ngIf="default[1][1] != 'none'" routerLink="/{{gameURL}}/effects/{{default[1][1]}}/{{language}}" class="badge bg-secondary badge-list">{{default[1][0]}}</a> 
-              <span *ngIf="default[1][1] == 'none'" class="badge bg-secondary badge-list">{{default[1][0]}}</span>
-              <a *ngFor="let e of eff2" class="badge bg-primary badge-list" routerLink="/{{gameURL}}/effects/{{e[1]}}/{{language}}">{{e[0]}}</a>
-            </td>
+          </tbody></table>
+        </div>
+        @if (item.shop) {
+          <p><i class="atelier atelier-ryza2-shop"></i><b>Shop:</b> {{item.shop.name}}</p>
+        }
+        @if (item.location) {
+          <b >Location:</b>
+        }
+        @if (item.location) {
+          <div style="column-count: 2;">
+            <ul style="padding-left:1.1em;margin-bottom:0">
+              @for (loc of item.location; track loc) {
+                <li>@if (loc.reg) {
+                  <a routerLink="/{{gameURL}}/locations/{{loc.reg}}/{{language}}">{{loc.name}}</a>
+                  }@if (!loc.reg) {
+                  <a routerLink="/{{gameURL}}/locations/{{loc.slug}}/{{language}}">{{loc.name}}</a>
+                }</li>
+              }
+            </ul>
+          </div>
+        }
+        @if (item.monster_set) {
+          <b >Dropped by:</b>
+        }
+        @if (item.monster_set) {
+          <div style="column-count: 2;">
+            <ul style="padding-left:1.1em;margin-bottom:0">
+              @for (mon of item.monster_set; track mon) {
+                <li><a routerLink="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a></li>
+              }
+            </ul>
+          </div>
+        }
+        @if (item.itemtype == 'Material') {
+          @if (item.trait) {
+            <b>Trait:</b>
+            <ul style="padding-left:1.1em;margin-bottom:0">
+              @for (trait of item.trait; track trait) {
+                <li><a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">{{trait.name}}</a></li>
+              }
+            </ul>
+          }
+          @if (item.effectline_set) {
+            <b>Effect: </b> <a routerLink="/{{gameURL}}/effects/{{item.effectline_set[0].slug}}/{{language}}">{{item.effectline_set[0].name}}</a>
+          }
+        }
+        @if (item.itemtype != 'Material' && item.ingredient_set) {
+          @if (item.skilltree) {
+            <p><b>Acquired from skill tree.</b></p>
+          }
+          @if (item.evlinkitems_set) {
+            <p><b>EV Link: <a routerLink="/{{gameURL}}/items/{{item.evlinkitems_set[0].item1.slug}}">{{item.evlinkitems_set[0].item1.name}}</a> + <a routerLink="/{{gameURL}}/items/{{item.evlinkitems_set[0].item2.slug}}">{{item.evlinkitems_set[0].item2.name}}</a></b></p>
+          }
+          @if (item.recipemorphs_set) {
+            <b>Morph Chain:</b>
+            <div style="column-count: 2;">
+              <ol style="padding-left:1.1em;">
+                @for (recipe of item.recipemorphs_set; track recipe) {
+                  <li><a routerLink="/{{gameURL}}/items/{{recipe.parent.slug}}/{{language}}">{{recipe.parent.name}}</a></li>
+                }
+              </ol>
+            </div>
+          }
+          @if (item.effectline_set) {
+            <table class="tbl"><tbody>
+              <tr class="table-dark-center"><th colspan=2 >Effects</th></tr>
+              <tr>
+                <td style="vertical-align: middle;"><b>1</b></td><td>
+                @if (default[0][1] != 'none') {
+                  <a routerLink="/{{gameURL}}/effects/{{default[0][1]}}/{{language}}" class="badge bg-secondary badge-list">{{default[0][0]}}</a>
+                }
+                @if (default[0][1] == 'none') {
+                  <span class="badge bg-secondary badge-list">{{default[0][0]}}</span>
+                }
+                @for (e of eff1; track e) {
+                  <a class="badge bg-primary badge-list" routerLink="/{{gameURL}}/effects/{{e[1]}}/{{language}}">{{e[0]}}</a>
+                }
+              </td>
             </tr>
-            <tr *ngIf="eff3.length > 0">
+            @if (eff2.length > 0) {
+              <tr>
+                <td style="vertical-align: middle;"><b>2</b></td><td>
+                @if (default[1][1] != 'none') {
+                  <a routerLink="/{{gameURL}}/effects/{{default[1][1]}}/{{language}}" class="badge bg-secondary badge-list">{{default[1][0]}}</a>
+                }
+                @if (default[1][1] == 'none') {
+                  <span class="badge bg-secondary badge-list">{{default[1][0]}}</span>
+                }
+                @for (e of eff2; track e) {
+                  <a class="badge bg-primary badge-list" routerLink="/{{gameURL}}/effects/{{e[1]}}/{{language}}">{{e[0]}}</a>
+                }
+              </td>
+            </tr>
+          }
+          @if (eff3.length > 0) {
+            <tr>
               <td style="vertical-align: middle;"><b>3</b></td><td>
-              <a *ngIf="default[2][1] != 'none'" routerLink="/{{gameURL}}/effects/{{default[2][1]}}/{{language}}" class="badge bg-secondary badge-list">{{default[2][0]}}</a> 
-              <span *ngIf="default[2][1] == 'none'" class="badge bg-secondary badge-list">{{default[2][0]}}</span>
-              <a *ngFor="let e of eff3" class="badge bg-primary badge-list" routerLink="/{{gameURL}}/effects/{{e[1]}}/{{language}}">{{e[0]}}</a>
+              @if (default[2][1] != 'none') {
+                <a routerLink="/{{gameURL}}/effects/{{default[2][1]}}/{{language}}" class="badge bg-secondary badge-list">{{default[2][0]}}</a>
+              }
+              @if (default[2][1] == 'none') {
+                <span class="badge bg-secondary badge-list">{{default[2][0]}}</span>
+              }
+              @for (e of eff3; track e) {
+                <a class="badge bg-primary badge-list" routerLink="/{{gameURL}}/effects/{{e[1]}}/{{language}}">{{e[0]}}</a>
+              }
             </td>
-            </tr>
-            <tr *ngIf="eff4.length > 0">
-              <td style="vertical-align: middle;"><b>4</b></td><td>
-              <a *ngIf="default[3][1] != 'none'" routerLink="/{{gameURL}}/effects/{{default[3][1]}}/{{language}}" class="badge bg-secondary badge-list">{{default[3][0]}}</a> 
-              <span *ngIf="default[3][1] == 'none'" class="badge bg-secondary badge-list">{{default[3][0]}}</span>
-              <a *ngFor="let e of eff4" class="badge bg-primary badge-list" routerLink="/{{gameURL}}/effects/{{e[1]}}/{{language}}">{{e[0]}}</a>
+          </tr>
+        }
+        @if (eff4.length > 0) {
+          <tr>
+            <td style="vertical-align: middle;"><b>4</b></td><td>
+            @if (default[3][1] != 'none') {
+              <a routerLink="/{{gameURL}}/effects/{{default[3][1]}}/{{language}}" class="badge bg-secondary badge-list">{{default[3][0]}}</a>
+            }
+            @if (default[3][1] == 'none') {
+              <span class="badge bg-secondary badge-list">{{default[3][0]}}</span>
+            }
+            @for (e of eff4; track e) {
+              <a class="badge bg-primary badge-list" routerLink="/{{gameURL}}/effects/{{e[1]}}/{{language}}">{{e[0]}}</a>
+            }
+          </td>
+        </tr>
+      }
+    </tbody></table>
+  }
+  @if (item.usableitem_set) {
+    <table class="tbl table-shrink"><tbody>
+      <tr class="table-dark-center">
+        <th>WT</th>
+        <th>Stun</th>
+        <th>CC</th>
+        <th>Cool Time</th>
+        <th>Range</th>
+      </tr>
+      <tr style="text-align:center;">
+        <td>{{item.usableitem_set[0].wt}}</td>
+        <td>{{item.usableitem_set[0].stun}}</td>
+        <td>{{item.usableitem_set[0].cc}}</td>
+        <td>{{item.usableitem_set[0].cooltime}}</td>
+        <td>{{item.usableitem_set[0].effrange}}</td>
+      </tr>
+    </tbody></table>
+  }
+  @if (item.ingredient_set) {
+    <table class="tbl table-shrink"><tbody>
+      <tr class="table-dark-center"><th colspan=2>Synthesis</th></tr>
+      @for (ing of item.ingredient_set; track ing) {
+        <tr>
+          <td style="text-align: center;">
+            @if (ing.item) {
+              <a routerLink="/{{gameURL}}/items/{{ing.item.slug}}/{{language}}">{{ing.item.name}}</a>
+            }
+            @if (ing.category) {
+              <a routerLink="/{{gameURL}}/categories/{{ing.category.slug}}/{{language}}">{{ing.category.name}}</a>
+              }<br />
+              @if (ing.fire) {
+                <i style="color:#f03a02;"      class="atelier atelier-np atelier-ryza2-fire"></i>
+              }
+              @if (ing.ice) {
+                <i style="color:#04b5db;"       class="atelier atelier-np atelier-ryza2-ice"></i>
+              }
+              @if (ing.lightning) {
+                <i style="color:#e3bb05;" class="atelier atelier-np atelier-ryza2-lightning"></i>
+              }
+              @if (ing.wind) {
+                <i style="color:#589b1d;"      class="atelier atelier-np atelier-ryza2-wind"></i>
+              }
             </td>
-            </tr>
-          </table>
-        </ng-container>
-        <ng-container *ngIf="item.usableitem_set">
-          <table class="tbl table-shrink">
-            <tr class="table-dark-center">
-              <th>WT</th>
-              <th>Stun</th>
-              <th>CC</th>
-              <th>Cool Time</th>
-              <th>Range</th>
-            </tr>
-            <tr style="text-align:center;">
-              <td>{{item.usableitem_set[0].wt}}</td>
-              <td>{{item.usableitem_set[0].stun}}</td>
-              <td>{{item.usableitem_set[0].cc}}</td>
-              <td>{{item.usableitem_set[0].cooltime}}</td>
-              <td>{{item.usableitem_set[0].effrange}}</td>
-            </tr>
-          </table>
-        </ng-container>
-        <ng-container *ngIf="item.ingredient_set">
-          <table class="tbl table-shrink">
-            <tr class="table-dark-center"><th colspan=2>Synthesis</th></tr>
-            <tr *ngFor="let ing of item.ingredient_set">
-              <td style="text-align: center;">
-                <a *ngIf="ing.item" routerLink="/{{gameURL}}/items/{{ing.item.slug}}/{{language}}">{{ing.item.name}}</a>
-                <a *ngIf="ing.category" routerLink="/{{gameURL}}/categories/{{ing.category.slug}}/{{language}}">{{ing.category.name}}</a><br />
-                <i style="color:#f03a02;" *ngIf="ing.fire"      class="atelier atelier-np atelier-ryza2-fire"></i>
-                <i style="color:#04b5db;" *ngIf="ing.ice"       class="atelier atelier-np atelier-ryza2-ice"></i>
-                <i style="color:#e3bb05;" *ngIf="ing.lightning" class="atelier atelier-np atelier-ryza2-lightning"></i>
-                <i style="color:#589b1d;" *ngIf="ing.wind"      class="atelier atelier-np atelier-ryza2-wind"></i>
-              </td>
-              <td>
-                <ng-container *ngFor="let i of ing.ingeffects_set">
-                  <ng-template #effPopover>
-                    <ng-container *ngIf="ing.fire">     <i style="color:#f03a02;" class="atelier atelier-ryza2-fire"     ></i> x {{i.value}}</ng-container>
-                    <ng-container *ngIf="ing.ice">      <i style="color:#04b5db;" class="atelier atelier-ryza2-ice"      ></i> x {{i.value}}</ng-container>
-                    <ng-container *ngIf="ing.lightning"><i style="color:#e3bb05;" class="atelier atelier-ryza2-lightning"></i> x {{i.value}}</ng-container>
-                    <ng-container *ngIf="ing.wind">     <i style="color:#589b1d;" class="atelier atelier-ryza2-wind"     ></i> x {{i.value}}</ng-container>
-                    <ng-container *ngIf="i.essence"><br /><i class="atelier atelier-ryza2-category-essence"></i> Essence Required</ng-container>
-                  </ng-template>
-                  <a *ngIf="i.noneffect && !i.essence" href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="effPopover" popoverTitle="Synth Data" class="badge bg-primary badge-list">{{i.noneffect}}</a>
-                  <a *ngIf="i.noneffect && i.essence"  href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="effPopover" popoverTitle="Synth Data" class="badge bg-secondary badge-list">{{i.noneffect}}</a>
-                  <a *ngIf="i.effect    && !i.essence" href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="effPopover" popoverTitle="Synth Data" class="badge bg-primary badge-list">{{i.effect}}</a>
-                  <a *ngIf="i.effect    && i.essence"  href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="effPopover" popoverTitle="Synth Data" class="badge bg-secondary badge-list">{{i.effect}}</a>
-                  <a *ngIf="i.morph" class="badge bg-success badge-list" routerLink="/{{gameURL}}/items/{{i.morph.slug}}/{{language}}">{{i.morph.name}}</a>
-                </ng-container>
-              </td>
-            </tr>
-          </table>
-        </ng-container>
-      </ng-container>
-    </div>
-  </div>
-  <div *ngIf="showNav" class="col-md-3" ></div>
+            <td>
+              @for (i of ing.ingeffects_set; track i) {
+                <ng-template #effPopover>
+                  @if (ing.fire) {
+                    <i style="color:#f03a02;" class="atelier atelier-ryza2-fire"     ></i> x {{i.value}}
+                  }
+                  @if (ing.ice) {
+                    <i style="color:#04b5db;" class="atelier atelier-ryza2-ice"      ></i> x {{i.value}}
+                  }
+                  @if (ing.lightning) {
+                    <i style="color:#e3bb05;" class="atelier atelier-ryza2-lightning"></i> x {{i.value}}
+                  }
+                  @if (ing.wind) {
+                    <i style="color:#589b1d;" class="atelier atelier-ryza2-wind"     ></i> x {{i.value}}
+                  }
+                  @if (i.essence) {
+                    <br /><i class="atelier atelier-ryza2-category-essence"></i> Essence Required
+                  }
+                </ng-template>
+                @if (i.noneffect && !i.essence) {
+                  <a href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="effPopover" popoverTitle="Synth Data" class="badge bg-primary badge-list">{{i.noneffect}}</a>
+                }
+                @if (i.noneffect && i.essence) {
+                  <a  href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="effPopover" popoverTitle="Synth Data" class="badge bg-secondary badge-list">{{i.noneffect}}</a>
+                }
+                @if (i.effect    && !i.essence) {
+                  <a href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="effPopover" popoverTitle="Synth Data" class="badge bg-primary badge-list">{{i.effect}}</a>
+                }
+                @if (i.effect    && i.essence) {
+                  <a  href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="effPopover" popoverTitle="Synth Data" class="badge bg-secondary badge-list">{{i.effect}}</a>
+                }
+                @if (i.morph) {
+                  <a class="badge bg-success badge-list" routerLink="/{{gameURL}}/items/{{i.morph.slug}}/{{language}}">{{i.morph.name}}</a>
+                }
+              }
+            </td>
+          </tr>
+        }
+      </tbody></table>
+    }
+  }
 </div>
-</ng-container>
+</div>
+@if (showNav) {
+  <div class="col-md-3" ></div>
+}
+</div>
+}

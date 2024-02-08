@@ -1,9 +1,11 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
 
-<ng-container *ngIf="!error">
-<Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Demons"></Breadcrumb>
-<h1>Demons</h1>
-<div class="col-md-10 mx-auto">
+@if (!error) {
+  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Demons"></Breadcrumb>
+  <h1>Demons</h1>
+  <div class="col-md-10 mx-auto">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
         <mat-form-field class="col-md-12" appearance="outline">
@@ -13,27 +15,30 @@
       </div>
     </form>
   </div>
-<div class="item-grid">
-<div *ngFor="let mon of filteredDemons | async; trackBy:identify" class="card card-body">
-  <h4 class="card-title card-icon-space">
-    <a (click)="openModal(demonModal, mon.slug, $event);" href="/{{gameURL}}/demons/{{mon.slug}}/{{language}}">{{mon.name}}</a>    
-  </h4>
-  <span *ngIf="mon.isDLC" class="card-icon-position badge bg-secondary">DLC</span>
-  <a class="card-item-display" (click)="openModal(demonModal, mon.slug, $event);" href="/{{gameURL}}/demons/{{mon.slug}}/{{language}}">
-    <img loading="lazy" src="{{imgURL}}demons/{{mon.slug}}.webp" alt="{{mon.name}}">
-  </a>
-  <button (click)="openModal(demonModal, mon.slug)" class="card-read-more-position" mat-mini-fab color="primary">
-    <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
-  </button>
-</div>
-
-<ng-template #demonModal>
-  <div class="modal-body">
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <i class="fas fa-times-circle"></i>
-    </button>
-     <brsl-demon inputSlug="{{selected}}" [showNav]="false"></brsl-demon>
+  <div class="item-grid">
+    @for (mon of filteredDemons | async; track identify($index, mon)) {
+      <div class="card card-body">
+        <h4 class="card-title card-icon-space">
+          <a (click)="openModal(demonModal, mon.slug, $event);" href="/{{gameURL}}/demons/{{mon.slug}}/{{language}}">{{mon.name}}</a>
+        </h4>
+        @if (mon.isDLC) {
+          <span class="card-icon-position badge bg-secondary">DLC</span>
+        }
+        <a class="card-item-display" (click)="openModal(demonModal, mon.slug, $event);" href="/{{gameURL}}/demons/{{mon.slug}}/{{language}}">
+          <img loading="lazy" src="{{imgURL}}demons/{{mon.slug}}.webp" alt="{{mon.name}}">
+        </a>
+        <button (click)="openModal(demonModal, mon.slug)" class="card-read-more-position" mat-mini-fab color="primary">
+          <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+        </button>
+      </div>
+    }
+    <ng-template #demonModal>
+      <div class="modal-body">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <i class="fas fa-times-circle"></i>
+        </button>
+        <brsl-demon inputSlug="{{selected}}" [showNav]="false"></brsl-demon>
+      </div>
+    </ng-template>
   </div>
-</ng-template>
-</div>
-</ng-container>
+}

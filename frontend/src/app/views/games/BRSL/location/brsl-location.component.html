@@ -1,39 +1,59 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
 
-<ng-container *ngIf="data as location">
-<Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Location: '+location.name"></Breadcrumb>
-<h1>{{location.name}}</h1>
-    <div class="table-of-contents">
-        <b>Table of Contents</b>
-        <ol>
-            <li *ngFor="let area of location.areas">
-                <a href="/{{gameURL}}/locations/{{location.slug}}/{{language}}#{{area.slug}}"
-                  (click)="$event.preventDefault();scroll(area.slug,location.slug)">
-                    {{area.name}}
-                  </a>
-            </li>
-        </ol>
-    </div>
-<ng-container *ngFor="let area of location.areas">
-  <h2 id="{{area.slug}}">{{area.name}}</h2>
-  <img *ngIf="area.map" style="padding-bottom:1rem;" src="{{area.map}}">
-  <table class="tbl border table-shrink">
-    <tr class="table-dark-center">
-      <th *ngIf="area.items"  style="width:50%;">Items</th>
-      <th *ngIf="area.demons" style="width:50%;">Demons</th>
+@if (data; as location) {
+  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Location: '+location.name"></Breadcrumb>
+  <h1>{{location.name}}</h1>
+  <div class="table-of-contents">
+    <b>Table of Contents</b>
+    <ol>
+      @for (area of location.areas; track area) {
+        <li>
+          <a href="/{{gameURL}}/locations/{{location.slug}}/{{language}}#{{area.slug}}"
+            (click)="$event.preventDefault();scroll(area.slug,location.slug)">
+            {{area.name}}
+          </a>
+        </li>
+      }
+    </ol>
+  </div>
+  @for (area of location.areas; track area) {
+    <h2 id="{{area.slug}}">{{area.name}}</h2>
+    @if (area.map) {
+      <img style="padding-bottom:1rem;" src="{{area.map}}">
+    }
+    <table class="tbl border table-shrink"><tbody>
+      <tr class="table-dark-center">
+        @if (area.items) {
+          <th  style="width:50%;">Items</th>
+        }
+        @if (area.demons) {
+          <th style="width:50%;">Demons</th>
+        }
+      </tr>
+      <tr>
+        @if (area.items) {
+          <td>
+            <ul class="hide-bullets">
+              @for (it of area.items; track it) {
+                <li><a routerLink="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a></li>
+              }
+            </ul>
+          </td>
+        }
+        @if (area.demons) {
+          <td>
+            <ul class="hide-bullets">
+              @for (it of area.demons; track it) {
+                <li><a routerLink="/{{gameURL}}/demons/{{it.demon.slug}}/{{language}}">{{it.demon.name}}</a>@if (it.once) {
+                <span> x1</span>
+              }</li>
+            }
+          </ul>
+        </td>
+      }
     </tr>
-    <tr>
-      <td *ngIf="area.items">
-        <ul class="hide-bullets">
-          <li *ngFor="let it of area.items"><a routerLink="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a></li>
-        </ul>
-      </td>
-      <td *ngIf="area.demons">
-        <ul class="hide-bullets">
-          <li *ngFor="let it of area.demons"><a routerLink="/{{gameURL}}/demons/{{it.demon.slug}}/{{language}}">{{it.demon.name}}</a><span *ngIf="it.once"> x1</span></li>
-        </ul>
-      </td>
-    </tr>
-  </table>
-</ng-container>
-</ng-container>
+  </tbody></table>
+}
+}

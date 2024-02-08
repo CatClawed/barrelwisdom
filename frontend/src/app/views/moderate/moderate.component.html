@@ -1,35 +1,43 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
-<ng-container *ngIf="comments">
-    <ng-container *ngFor="let comment of comments">
-        <div *ngIf="!comment.approved" class="card card-body comment-card">
-            <div>
-                <b *ngIf="comment.name">{{comment.name}}</b>
-                <b *ngIf="!comment.name">Anonymous</b>
-                <time class="updated text-muted"
-                    style="margin-left:0.75rem;font-size: calc(0.8rem + 0.1vw);"
-                    dateTime="{{comment.created}}">
-                    {{comment.created | date:'mediumDate' }}
-                </time>
-            </div>
-            {{comment.body}}
-            <div>
-                <ng-container *ngIf="comment.parent">
-                    Child: https://barrelwisdom.com/{{comment.parent_blog.sec}}/{{comment.parent_blog.slugtitle}}
-                </ng-container>
-                <ng-container *ngIf="comment.blog">
-                    https://barrelwisdom.com/{{comment.blog.sec}}/{{comment.blog.slugtitle}}
-                </ng-container>
-                <button style="float:right;"
-                    class="btn btn-secondary"
-                    (click)="comment.approved=true;approveComment(comment.id);">
-                        Approve
-                </button>
-                <button style="float:right;"
-                    class="btn btn-danger"
-                    (click)="comment.approved=true;deleteComment(comment.id);">
-                        Delete 
-                </button>
-            </div>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
+@if (comments) {
+  @for (comment of comments; track comment) {
+    @if (!comment.approved) {
+      <div class="card card-body comment-card">
+        <div>
+          @if (comment.name) {
+            <b>{{comment.name}}</b>
+          }
+          @if (!comment.name) {
+            <b>Anonymous</b>
+          }
+          <time class="updated text-muted"
+            style="margin-left:0.75rem;font-size: calc(0.8rem + 0.1vw);"
+            dateTime="{{comment.created}}">
+            {{comment.created | date:'mediumDate' }}
+          </time>
         </div>
-    </ng-container>
-</ng-container>
+        {{comment.body}}
+        <div>
+          @if (comment.parent) {
+            Child: https://barrelwisdom.com/{{comment.parent_blog.sec}}/{{comment.parent_blog.slugtitle}}
+          }
+          @if (comment.blog) {
+            https://barrelwisdom.com/{{comment.blog.sec}}/{{comment.blog.slugtitle}}
+          }
+          <button style="float:right;"
+            class="btn btn-secondary"
+            (click)="comment.approved=true;approveComment(comment.id);">
+            Approve
+          </button>
+          <button style="float:right;"
+            class="btn btn-danger"
+            (click)="comment.approved=true;deleteComment(comment.id);">
+            Delete
+          </button>
+        </div>
+      </div>
+    }
+  }
+}

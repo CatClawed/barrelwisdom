@@ -1,31 +1,57 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
 
-<head *ngIf="userprofile">
+@if (userprofile) {
+  <head>
     <title>{{userprofile.user.username}} - Barrel Wisdom</title>
-    <meta *ngIf="userprofile.bio" name="description" content="{{userprofile.bio}}" />
+    @if (userprofile.bio) {
+      <meta name="description" content="{{userprofile.bio}}" />
+    }
     <meta name="robots" content="index, archive" />
     <meta property="og:title" content="{{userprofile.user.username}} - Barrel Wisdom" />
     <meta property="og:description" content={{userprofile.bio}} />
     <meta property="og:type" content="website" />
-    <meta *ngIf="userprofile.avatar" property="og:image" content="{{userprofile.avatar}}" />
-</head>
+    @if (userprofile.avatar) {
+      <meta property="og:image" content="{{userprofile.avatar}}" />
+    }
+  </head>
+}
 
-<header *ngIf="userprofile">
+@if (userprofile) {
+  <header>
     <h1>User: {{userprofile.user.username}}</h1>
-</header>
-<article *ngIf="userprofile">
-    <div *ngIf="userprofile.avatar" class="blog-image">
+  </header>
+}
+@if (userprofile) {
+  <article>
+    @if (userprofile.avatar) {
+      <div class="blog-image">
         <img src="{{userprofile.avatar}}">
-    </div>
-    <p *ngIf="userprofile.bio">{{userprofile.bio}}</p>
-    <p *ngIf="userprofile.website"><b>Website: </b><a href="{{userprofile.website}}" target="_blank">{{userprofile.website}}</a></p>
-    <div *ngIf="userprofile.user.blog_set">
-      <h2>Pages Edited ({{userprofile.user.blog_set.length}})</h2>
-      <ul>
-        <li *ngFor="let b of userprofile.user.blog_set">
-          <span *ngIf="b.secfull">{{b.secfull}}: </span><span *ngIf="!b.secfull">Main: </span>
-          <a routerLink="/{{b.secname}}/{{b.slugtitle}}">{{b.title}}</a>
-        </li>
-      </ul>
-    </div>
-</article>
+      </div>
+    }
+    @if (userprofile.bio) {
+      <p>{{userprofile.bio}}</p>
+    }
+    @if (userprofile.website) {
+      <p><b>Website: </b><a href="{{userprofile.website}}" target="_blank">{{userprofile.website}}</a></p>
+    }
+    @if (userprofile.user.blog_set) {
+      <div>
+        <h2>Pages Edited ({{userprofile.user.blog_set.length}})</h2>
+        <ul>
+          @for (b of userprofile.user.blog_set; track b) {
+            <li>
+              @if (b.secfull) {
+                <span>{{b.secfull}}: </span>
+                }@if (!b.secfull) {
+                <span>Main: </span>
+              }
+              <a routerLink="/{{b.secname}}/{{b.slugtitle}}">{{b.title}}</a>
+            </li>
+          }
+        </ul>
+      </div>
+    }
+  </article>
+}
