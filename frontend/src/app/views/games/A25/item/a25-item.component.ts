@@ -6,6 +6,7 @@ import { Item } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 import { of } from 'rxjs';
+import { catchError, switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a25-item.component.html',
@@ -17,6 +18,8 @@ import { of } from 'rxjs';
 export class A25ItemComponent extends SingleComponent {
   @Input()
   itemkind: string = "";
+
+  itemkind2: string = "";
   
   difficulties = {
     1: "Normal",
@@ -31,10 +34,11 @@ export class A25ItemComponent extends SingleComponent {
     protected a25service: A25Service) {
     super(destroy$, route, seoService);
   }
+
   changeData() {
-    this.itemkind = this.itemkind ? this.itemkind : this.route.snapshot.params.itemkind;
-    this.gameService(this.a25service, `items/${this.itemkind}`);
-    switch(this.itemkind) {
+    this.itemkind2 = this.itemkind ? this.itemkind : this.route.snapshot.params.itemkind;
+    this.gameService(this.a25service, `items/${this.itemkind2}`);
+    switch(this.itemkind2) {
       case 'materials': return this.a25service.getMaterial(this.slug, this.language);
       case 'synthesis': return this.a25service.getSynth(this.slug, this.language);
       default: {
