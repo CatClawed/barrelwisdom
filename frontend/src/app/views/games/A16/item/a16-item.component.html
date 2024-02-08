@@ -23,14 +23,14 @@
         <p><b>Size: </b>{{item.size}}</p>
       }
       <div class="flex">
-        <table class="table-item-data">
+        <table class="table-item-data"><tbody>
           @for (cat of item.categories; track cat) {
             <tr>
               <td><i class="atelier atelier-{{cat.icon_name}}"></i></td><td><a routerLink="/{{gameURL}}/categories/{{cat.slugname}}/{{language}}">{{cat.name}}</a></td>
             </tr>
           }
-        </table>
-        <table class="table-item-data">
+        </tbody></table>
+        <table class="table-item-data"><tbody>
           <tr>
             <td colspan=2>
               @if (item.fire) {
@@ -57,7 +57,7 @@
               </td>
             </tr>
           }
-        </table>
+        </tbody></table>
       </div>
       @if (item.disassembly_set) {
         <b>Disassembles to:</b>
@@ -110,7 +110,7 @@
         </ul>
       }
       @if (item.ingredient_set) {
-        <table class="tbl">
+        <table class="tbl"><tbody>
           <tr  class="table-dark-center"><th>Ingredients</th></tr>
           <tr><td>
             <ul>
@@ -123,10 +123,10 @@
               }
             </ul>
           </td></tr>
-        </table>
+        </tbody></table>
       }
       @if (item.effectlines_set) {
-        <table class="tbl">
+        <table class="tbl"><tbody>
           <tr  class="table-dark-center"><th colspan=2>Effects</th></tr>
           @for (effline of item.effectlines_set; track effline) {
             <tr>
@@ -177,25 +177,25 @@
               </td>
             </tr>
           }
-        </table>
+        </tbody></table>
       }
       @if (item.equip_set) {
-        <table class="tbl">
+        <table class="tbl"><tbody>
           <tr class="table-dark-center"><th colspan=2>Stats</th></tr>
           <tr><td style="padding-top:0.2rem;text-align:right;width:50%;"><b>HP </b></td> <td style="padding-top:0.2rem;padding-left:0.5em;">{{item.equip_set[0].hp}}   </td></tr>
           <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>MP </b></td> <td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].mp}}   </td></tr>
           <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>ATK </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].atk}}  </td></tr>
           <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>DEF </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].defen}}</td></tr>
           <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>SPD </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].spd}}  </td></tr>
-        </table>
+        </tbody></table>
       }
       @if (item.characterequip_set) {
-        <table class="tbl">
+        <table class="tbl"><tbody>
           <tr class="table-dark-center"><th>Characters</th></tr>
           <tr><td>@for (char of item.characterequip_set[0].chars; track char) {
             <img src="{{imgURL}}equip/equip-{{char.name}}.webp" alt="Can equp: {{char.name}}">
           }</td></tr>
-        </table>
+        </tbody></table>
       }
     </div>
     @if (showNav) {

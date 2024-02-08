@@ -24,7 +24,7 @@
         <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
       </div>
       <div class="card-text">
-        <table>
+        <table><tbody>
           @if (item.char[0]) {
             <tr>
               <td style="width:10%">
@@ -65,16 +65,16 @@
               </td>
             </tr>
           }
-        </table>
+        </tbody></table>
         <div class="row">
-          <table style="margin-top:1rem;" class="table-item-data col">
+          <table style="margin-top:1rem;" class="table-item-data col"><tbody>
             @for (cat of item.categories; track cat) {
               <tr>
                 <td style="text-align: center;"><i class="atelier atelier-{{cat.icon}}"></i></td>
                 <td><a routerLink="/{{gameURL}}/categories/{{cat.slug}}/{{language}}">{{cat.name}}</a></td>
               </tr>
             }
-          </table>
+          </tbody></table>
         </div>
         @if (item.trait) {
           <p><b>Trait: </b><a routerLink="/{{gameURL}}/traits/{{item.trait.slug}}/{{language}}">{{item.trait.name}}</a></p>
@@ -153,7 +153,7 @@
           </div>
         }
         @if (item.ideas) {
-          <table class="tbl">
+          <table class="tbl"><tbody>
             @if (item.book) {
               <tr class="table-dark-center">
                 <th colspan="2">Book</th>
@@ -218,10 +218,10 @@
                 </tr>
               }
             }
-          </table>
+          </tbody></table>
         }
         @if (item.ingredients) {
-          <table class="tbl">
+          <table class="tbl"><tbody>
             <tr class="table-dark-center"><th>Ingredients</th></tr>
             <tr>
               <td>
@@ -240,10 +240,10 @@
                 </ul>
               </td>
             </tr>
-          </table>
+          </tbody></table>
         }
         @if (item.effectlines_set) {
-          <table class="tbl">
+          <table class="tbl"><tbody>
             <tr class="table-dark-center"><th colspan=2>Effects</th></tr>
             @for (eff of item.effectlines_set; track eff) {
               <tr>
@@ -279,10 +279,10 @@
                 </td>
               </tr>
             }
-          </table>
+          </tbody></table>
         }
         @if (item.fixed_components || item.random_components) {
-          <table class="tbl">
+          <table class="tbl"><tbody>
             @if (item.fixed_components) {
               <tr class="table-dark-center">
                 <th>
@@ -311,10 +311,10 @@
                 </td>
               </tr>
             }
-          </table>
+          </tbody></table>
         }
         @if (item.equip) {
-          <table class="tbl">
+          <table class="tbl"><tbody>
             <tr class="table-dark-center"><th colspan=2>Stats</th></tr>
             <tr><td style="padding-top:0.2rem;text-align:right;width:50%;"><b>HP </b></td> <td style="padding-top:0.2rem;padding-left:0.5em;">{{item.equip.hp}}</td></tr>
             <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>MP </b></td> <td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip.mp}}</td></tr>
@@ -327,18 +327,18 @@
             @if (item.dmax) {
               <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>DMG Max </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.dmax}}</td></tr>
             }
-          </table>
+          </tbody></table>
         }
         @if (item.chars) {
-          <table class="tbl">
+          <table class="tbl"><tbody>
             <tr class="table-dark-center"><th>Characters</th></tr>
             <tr><td>@for (char of item.chars; track char) {
               <img src="{{imgURL}}characters/{{char.slug}}.webp" style="max-height:3em;" alt="{{char.slug}}">
             }</td></tr>
-          </table>
+          </tbody></table>
         }
         @if (item.catalysts) {
-          <table class="tbl">
+          <table class="tbl"><tbody>
             <tr class="table-dark-center"><th colspan="2">Catalysts Used</th></tr>
             @for (cat of item.catalysts; track cat) {
               <tr>
@@ -351,10 +351,10 @@
                 </td>
               </tr>
             }
-          </table>
+          </tbody></table>
         }
         @if (item.catalyst) {
-          <table class="tbl">
+          <table class="tbl"><tbody>
             <tr class="table-dark-center"><th colspan="2">Catalyst Data ({{item.catalyst.size}}x{{item.catalyst.size}})</th></tr>
             @for (j of [].constructor(item.catalyst.color.length); track j; let i = $index) {
               <tr>
@@ -366,10 +366,10 @@
                 </td>
               </tr>
             }
-          </table>
+          </tbody></table>
         }
         @if (item.masteryline_set && item.ingredients) {
-          <table class="tbl">
+          <table class="tbl"><tbody>
             <tr class="table-dark-center"><th colspan="2">Proficiency Data</th></tr>
             @for (masteryline of item.masteryline_set; track masteryline) {
               <tr>
@@ -383,7 +383,7 @@
                 </td>
               </tr>
             }
-          </table>
+          </tbody></table>
         }
       </div>
     </div>

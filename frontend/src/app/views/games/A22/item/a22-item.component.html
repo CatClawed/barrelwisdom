@@ -27,14 +27,14 @@
           <p><b>Note:</b> {{item.note}}</p>
         }
         <div class="row">
-          <table class="table-item-data col">
+          <table class="table-item-data col"><tbody>
             @for (cat of item.category; track cat) {
               <tr>
                 <td style="text-align: center;"><i class="atelier atelier-ryza2-category-{{cat.slug}}"></i></td><td><a routerLink="/{{gameURL}}/categories/{{cat.slug}}">{{cat.name}}</a></td>
               </tr>
             }
-          </table>
-          <table class="table-item-data">
+          </tbody></table>
+          <table class="table-item-data"><tbody>
             <tr>
               <td colspan=2>
                 @if (item.fire) {
@@ -52,7 +52,7 @@
                 <span>{{item.elementvalue}}</span>
               </td>
             </tr>
-          </table>
+          </tbody></table>
         </div>
         @if (item.shop) {
           <p><i class="atelier atelier-ryza2-shop"></i><b>Shop:</b> {{item.shop.name}}</p>
@@ -116,7 +116,7 @@
             </div>
           }
           @if (item.effectline_set) {
-            <table class="tbl">
+            <table class="tbl"><tbody>
               <tr class="table-dark-center"><th colspan=2 >Effects</th></tr>
               <tr>
                 <td style="vertical-align: middle;"><b>1</b></td><td>
@@ -176,10 +176,10 @@
           </td>
         </tr>
       }
-    </table>
+    </tbody></table>
   }
   @if (item.usableitem_set) {
-    <table class="tbl table-shrink">
+    <table class="tbl table-shrink"><tbody>
       <tr class="table-dark-center">
         <th>WT</th>
         <th>Stun</th>
@@ -194,10 +194,10 @@
         <td>{{item.usableitem_set[0].cooltime}}</td>
         <td>{{item.usableitem_set[0].effrange}}</td>
       </tr>
-    </table>
+    </tbody></table>
   }
   @if (item.ingredient_set) {
-    <table class="tbl table-shrink">
+    <table class="tbl table-shrink"><tbody>
       <tr class="table-dark-center"><th colspan=2>Synthesis</th></tr>
       @for (ing of item.ingredient_set; track ing) {
         <tr>
@@ -259,7 +259,7 @@
             </td>
           </tr>
         }
-      </table>
+      </tbody></table>
     }
   }
 </div>

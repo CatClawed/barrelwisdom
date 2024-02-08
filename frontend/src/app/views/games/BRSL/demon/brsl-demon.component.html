@@ -13,12 +13,12 @@
         <span class="card-icon-position badge bg-secondary">DLC</span>
       }
       <img class="image-display" loading="lazy" src="{{imgURL}}demons/{{demon.slug}}.webp" alt="{{demon.name}}">
-      <table class="tbl" style="margin-top:1rem;">
+      <table class="tbl" style="margin-top:1rem;"><tbody>
         <tr>
           <td style="vertical-align:middle; border-bottom:1px solid #c8c3d3;">{{demon.desc}}</td>
           <td style="vertical-align:middle; padding:0;border-bottom:1px solid #c8c3d3;"><img src="/media/games/second-light/characters/{{demon.char}}.webp" alt=""></td>
         </tr>
-      </table>
+      </tbody></table>
       <div class="row">
         <div class="col-md-6">
           @if (demon.region_set) {
@@ -43,7 +43,7 @@
           }
         </div>
         <div class="col-md-6">
-          <table class="tbl" >
+          <table class="tbl" ><tbody>
             <tr>
               <td style="border-top:transparent;padding:0;"><b>Vitality: </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">@for (i of [].constructor(demon.vit); track i) {
               <i class="fas fa-square" style="padding-right:0.1rem"> </i>
@@ -65,9 +65,9 @@
           <i class="far fa-square" style="padding-right:0.1rem"></i>
         }</td>
       </tr>
-    </table>
+    </tbody></table>
   </div>
-  <table class="tbl table-shrink" >
+  <table class="tbl table-shrink" ><tbody>
     <tr>
       <th style="text-align: center;border:transparent;padding-bottom:0;width:20%"><img src="/media/games/second-light/icons/slash.webp"  alt="Slash attribute"  style="max-width:100%"></th>
       <th style="text-align: center;border:transparent;padding-bottom:0;width:20%"><img src="/media/games/second-light/icons/pierce.webp" alt="Pierce attribute" style="max-width:100%"></th>
@@ -102,7 +102,7 @@
         <i class="fas fa-arrow-up"></i>
       }</td>
     </tr>
-  </table>
+  </tbody></table>
 </div>
 </div>
 @if (showNav) {

@@ -21,7 +21,7 @@
   </div>
   @for (dungeon of dungeons; track dungeon) {
     <h2 id="{{dungeon.name}}">{{dungeon.name}}</h2>
-    <table class="table-compress">
+    <table class="table-compress"><tbody>
       <tr class="table-dark-center">
         <th>#</th>
         <th>Combat Level</th>
@@ -32,7 +32,7 @@
           <td>{{floor.combat_level}}</td>
         </tr>
       }
-    </table>
+    </tbody></table>
     @for (floor of dungeon.floors; track floor) {
       @if (floor.order == 1) {
         <h3>Beginning</h3>

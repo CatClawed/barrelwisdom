@@ -17,7 +17,7 @@
   @if (data; as seeds) {
     <div class="mx-auto row">
       <div class="col-md-6">
-        <table class="tbl border table-shrink">
+        <table class="tbl border table-shrink"><tbody>
           <tr class="table-dark-center">
             <th><a routerLink="/{{gameURL}}/items/{{seeds[0].slug}}/{{language}}">{{seeds[0].name}}</a></th>
             <th><a routerLink="/{{gameURL}}/items/{{seeds[1].slug}}/{{language}}">{{seeds[1].name}}</a></th>
@@ -40,10 +40,10 @@
               </ul>
             </td>
           </tr>
-        </table>
+        </tbody></table>
       </div>
       <div class="col-md-6">
-        <table class="tbl border table-shrink">
+        <table class="tbl border table-shrink"><tbody>
           <tr class="table-dark-center">
             <th><a routerLink="/{{gameURL}}/items/{{seeds[2].slug}}/{{language}}">{{seeds[2].name}}</a></th>
             <th><a routerLink="/{{gameURL}}/items/{{seeds[3].slug}}/{{language}}">{{seeds[3].name}}</a></th>
@@ -66,11 +66,11 @@
               </ul>
             </td>
           </tr>
-        </table>
+        </tbody></table>
       </div>
     </div>
     <div class="mx-auto row">
-      <table class="tbl border table-shrink">
+      <table class="tbl border table-shrink"><tbody>
         <tr class="table-dark-center">
           <th><a routerLink="/{{gameURL}}/items/{{seeds[4].slug}}/{{language}}">{{seeds[4].name}}</a></th>
           <th><a routerLink="/{{gameURL}}/items/{{seeds[5].slug}}/{{language}}">{{seeds[5].name}}</a></th>
@@ -102,6 +102,6 @@
             </ul>
           </td>
         </tr>
-      </table>
+      </tbody></table>
     </div>
   }

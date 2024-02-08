@@ -108,13 +108,13 @@
           <button (click)="openModal(itemModal, it.slug)" class="card-read-more-position" mat-mini-fab color="primary">
             <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
           </button>
-          <table class="table-item-data">
+          <table class="table-item-data"><tbody>
             @for (cat of it.categories; track cat) {
               <tr>
                 <td style="text-align:center;"><i class="atelier atelier-{{cat.icon}}"></i></td><td>{{cat.name}}</td>
               </tr>
             }
-          </table>
+          </tbody></table>
         </div>
       }
       <ng-template #itemModal>

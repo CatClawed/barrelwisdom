@@ -23,14 +23,14 @@
         <p><b>Size: </b>{{item.size}}</p>
       }
       <div class="flex">
-        <table class="table-item-data">
+        <table class="table-item-data"><tbody>
           @for (cat of item.categories; track cat) {
             <tr>
               <td><i class="atelier atelier-{{cat.icon_name}}"></i></td><td><a routerLink="/{{gameURL}}/categories/{{cat.slugname}}/{{language}}">{{cat.name}}</a></td>
             </tr>
           }
-        </table>
-        <table class="table-item-data">
+        </tbody></table>
+        <table class="table-item-data"><tbody>
           <tr>
             <td colspan=2>
               @if (item.fire) {
@@ -48,7 +48,7 @@
               <span>{{item.evalue}}</span>
             </td>
           </tr>
-        </table>
+        </tbody></table>
       </div>
       @if (item.relic_set) {
         <b>Relic Locations:</b>
@@ -115,7 +115,7 @@
         </ul>
       }
       @if (item.ingredient_set) {
-        <table class="tbl">
+        <table class="tbl"><tbody>
           <tr class="table-dark-center"><th>Ingredients</th></tr>
           <tr><td>
             <ul>
@@ -128,10 +128,10 @@
               }
             </ul>
           </td></tr>
-        </table>
+        </tbody></table>
       }
       @if (item.effectline_set) {
-        <table class="tbl">
+        <table class="tbl"><tbody>
           <tr class="table-dark-center"><th colspan=2>Effects</th></tr>
           @if (fire) {
             <tr>
@@ -209,25 +209,25 @@
               </td>
             </tr>
           }
-        </table>
+        </tbody></table>
       }
       @if (item.equip_set) {
-        <table class="tbl">
+        <table class="tbl"><tbody>
           <tr class="table-dark-center"><th colspan=4>Stats</th></tr>
           <tr><td style="padding-top:0.2rem;padding-bottom:0;width:25%;"><b>HP </b></td> <td style="padding-top:0.2rem;padding-left:0;padding-bottom:0;width:25%">{{item.equip_set[0].hp}}   </td><td style="padding-top:0.2rem;padding-left:0;padding-bottom:0;width:25%"><i style="color:#ac504f;" class="atelier atelier-shallie-fire"></i></td>  <td style="padding-top:0.2rem;padding-left:0;padding-bottom:0;width:25%;">{{item.equip_set[0].fire}}</td></tr>
           <tr><td style="border-top:transparent;padding-bottom:0;padding-top:0;width:25%;"><b>MP </b></td> <td style="border-top:transparent;padding:0;width:25%">{{item.equip_set[0].mp}}   </td><td style="border-top:transparent;padding:0;width:25%"><i style="color:#427389;" class="atelier atelier-shallie-water"></i></td> <td style="border-top:transparent;padding:0;width:25%;">{{item.equip_set[0].water}}</td></tr>
           <tr><td style="border-top:transparent;padding-bottom:0;padding-top:0;width:25%;"><b>ATK </b></td><td style="border-top:transparent;padding:0;width:25%">{{item.equip_set[0].atk}}  </td><td style="border-top:transparent;padding:0;width:25%"><i style="color:#5a843c;" class="atelier atelier-shallie-wind"></i></td>  <td style="border-top:transparent;padding:0;width:25%;">{{item.equip_set[0].wind}}</td></tr>
           <tr><td style="border-top:transparent;padding-bottom:0;padding-top:0;width:25%;"><b>DEF </b></td><td style="border-top:transparent;padding:0;width:25%">{{item.equip_set[0].defen}}</td><td style="border-top:transparent;padding:0;width:25%"><i style="color:#8f7939;" class="atelier atelier-shallie-earth"></i></td> <td style="border-top:transparent;padding:0;width:25%;">{{item.equip_set[0].earth}}</td></tr>
           <tr><td style="border-top:transparent;padding-bottom:0;padding-top:0;width:25%;"><b>SPD </b></td><td style="border-top:transparent;padding:0;width:25%">{{item.equip_set[0].spd}}  </td></tr>
-        </table>
+        </tbody></table>
       }
       @if (item.characterequip_set) {
-        <table class="tbl">
+        <table class="tbl"><tbody>
           <tr class="table-dark-center"><th>Characters</th></tr>
           <tr><td>@for (char of item.characterequip_set[0].chars; track char) {
             <img src="{{imgURL}}equip/equip-{{char.name}}.webp" alt="Can equip: {{char.name}}">
           }</td></tr>
-        </table>
+        </tbody></table>
       }
     </div>
     @if (showNav) {

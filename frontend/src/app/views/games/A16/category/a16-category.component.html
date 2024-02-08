@@ -7,7 +7,7 @@
   <h1>{{category.name}}</h1>
   <div class="mx-auto row">
     <div class="col-md-6">
-      <table style="border:1px solid #c8ced3;" class="tbl">
+      <table style="border:1px solid #c8ced3;" class="tbl"><tbody>
         <tr class="table-dark-center"><th colspan=2>Items in Category</th></tr>
         @for (item of category.item_set; track item) {
           <tr>
@@ -44,11 +44,11 @@
             </td>
           </tr>
         }
-      </table>
+      </tbody></table>
     </div>
     @if (category.ingredientcat) {
       <div class="col-md-6">
-        <table style="border:1px solid #c8ced3;" class="tbl">
+        <table style="border:1px solid #c8ced3;" class="tbl"><tbody>
           <tr class="table-dark-center"><th colspan=2>Items Using Category</th></tr>
           @for (item of category.ingredientcat; track item) {
             <tr>
@@ -85,7 +85,7 @@
               </td>
             </tr>
           }
-        </table>
+        </tbody></table>
       </div>
     }
   </div>

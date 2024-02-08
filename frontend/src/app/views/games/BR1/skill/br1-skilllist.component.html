@@ -16,7 +16,7 @@
   </div>
   <h2 id="hinako">Hinako</h2>
   <h3>Level Up</h3>
-  <table class="table-compress table-shrink">
+  <table class="table-compress table-shrink"><tbody>
     <tr><th>Name</th><th>Description</th></tr>
     @for (skill of skills; track skill) {
       @if (skill.lvl && skill.character == 'Hinako') {
@@ -37,9 +37,9 @@
       </tr>
     }
   }
-</table>
+</tbody></table>
 <h3>Points</h3>
-<table class="table-compress table-shrink">
+<table class="table-compress table-shrink"><tbody>
   <tr><th>Name</th><th>Description</th><th>A</th><th>D</th><th>S</th><th>T</th></tr>
   @for (skill of skills; track skill) {
     @if (!skill.lvl && skill.character == 'Hinako') {
@@ -64,10 +64,10 @@
     </tr>
   }
 }
-</table>
+</tbody></table>
 <h2 id="yuzu">Yuzu</h2>
 <h3>Level Up</h3>
-<table class="table-compress table-shrink">
+<table class="table-compress table-shrink"><tbody>
   <tr><th>Name</th><th>Description</th></tr>
   @for (skill of skills; track skill) {
     @if (skill.lvl && skill.character == 'Yuzu') {
@@ -88,9 +88,9 @@
     </tr>
   }
 }
-</table>
+</tbody></table>
 <h3>Points</h3>
-<table class="table-compress table-shrink">
+<table class="table-compress table-shrink"><tbody>
   <tr><th>Name</th><th>Description</th><th>A</th><th>D</th><th>S</th><th>T</th></tr>
   @for (skill of skills; track skill) {
     @if (!skill.lvl && skill.character == 'Yuzu') {
@@ -115,10 +115,10 @@
     </tr>
   }
 }
-</table>
+</tbody></table>
 <h2 id="lime">Lime</h2>
 <h3>Level Up</h3>
-<table class="table-compress table-shrink">
+<table class="table-compress table-shrink"><tbody>
   <tr><th>Name</th><th>Description</th></tr>
   @for (skill of skills; track skill) {
     @if (skill.lvl && skill.character == 'Lime') {
@@ -139,9 +139,9 @@
     </tr>
   }
 }
-</table>
+</tbody></table>
 <h3>Points</h3>
-<table class="table-compress table-shrink">
+<table class="table-compress table-shrink"><tbody>
   <tr><th>Name</th><th>Description</th><th>A</th><th>D</th><th>S</th><th>T</th></tr>
   @for (skill of skills; track skill) {
     @if (!skill.lvl && skill.character == 'Lime') {
@@ -166,5 +166,5 @@
     </tr>
   }
 }
-</table>
+</tbody></table>
 }

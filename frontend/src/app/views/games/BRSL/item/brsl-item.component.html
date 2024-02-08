@@ -13,12 +13,12 @@
         <span class="card-icon-position badge bg-secondary">DLC</span>
       }
       <img class="image-display" loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
-      <table class="tbl" style="margin-top:1rem;">
+      <table class="tbl" style="margin-top:1rem;"><tbody>
         <tr>
           <td style="vertical-align:middle; border-bottom:1px solid #c8c3d3;">{{item.desc}}</td>
           <td style="vertical-align:middle; padding:0;border-bottom:1px solid #c8c3d3;"><img src="/media/games/second-light/characters/{{item.char}}.webp" alt=""></td>
         </tr>
-      </table>
+      </tbody></table>
       @if (item.note) {
         <p><b>Acquisition:</b> {{item.note}}</p>
       }
@@ -65,7 +65,7 @@
         </ul>
       }
       @if (item.effline_set) {
-        <table class="tbl table-shrink">
+        <table class="tbl table-shrink"><tbody>
           <tr class="table-dark-center"><th colspan=2>Effects</th></tr>
           @for (eline of item.effline_set; track eline) {
             <tr>
@@ -113,10 +113,10 @@
             </td>
           </tr>
         }
-      </table>
+      </tbody></table>
     }
     @if (item.skillline_set) {
-      <table class="tbl table-shrink">
+      <table class="tbl table-shrink"><tbody>
         <tr class="table-dark-center">
           <th colspan=2 style="position:relative;">Skill Effects
             @if (!expand) {
@@ -243,7 +243,7 @@
       </tr>
     }
   }
-</table>
+</tbody></table>
 }
 </div>
 @if (showNav) {

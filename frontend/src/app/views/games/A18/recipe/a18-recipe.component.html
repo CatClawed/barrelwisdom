@@ -30,7 +30,7 @@
           <a class="card-item-display" routerLink="/{{gameURL}}/items/{{recipe.slug}}/{{language}}">
             <img loading="lazy" src="{{imgURL}}items/{{recipe.slug}}.webp" alt="{{recipe.name}}">
           </a>
-          <table class="table-compress">
+          <table class="table-compress"><tbody>
             @if (recipe.book) {
               <tr>
                 <th colspan="2" style="text-align:center;">Book</th>
@@ -95,7 +95,7 @@
                 </tr>
               }
             }
-          </table>
+          </tbody></table>
         </div>
       </div>
     }

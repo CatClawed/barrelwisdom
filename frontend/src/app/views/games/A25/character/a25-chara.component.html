@@ -33,8 +33,9 @@
       @if (chara.note) {
         <p style="margin-top:1rem;" [innerHTML]="chara.note"></p>
       }
-      <table class="tbl" style="margin-bottom:0;margin-top:1rem;">
-        <tr class="table-dark-center"><th>Gifts</th></tr>
+      <table class="tbl" style="margin-bottom:0;margin-top:1rem;"><tbody>
+        
+          <tr class="table-dark-center"><th>Gifts</th></tr>
         <tr>
           <td>
             <div style="display:inline-flex;float:right;">
@@ -73,9 +74,11 @@
           </td>
         </tr>
         <tr>
-        </table>
-        <table class="tbl">
-          <tr class="table-dark-center"><th colspan="4">Stats</th></tr>
+        
+        </tbody></table>
+        <table class="tbl"><tbody>
+          
+            <tr class="table-dark-center"><th colspan="4">Stats</th></tr>
           <tr>
             <td colspan="4">
               <div style="width:45%;float:left;">
@@ -120,9 +123,11 @@
           <tr>
             <td colspan="4">Does not include Grow Board</td>
           </tr>
-        </table>
-        <table class="tbl">
-          <tr class="table-dark-center"><th>Skills</th></tr>
+          
+        </tbody></table>
+        <table class="tbl"><tbody>
+          
+            <tr class="table-dark-center"><th>Skills</th></tr>
           @for (skill of chara.skills; track skill) {
             <tr>
               <td>
@@ -147,9 +152,11 @@
             </tr>
           }
           <tr>
-          </table>
-          <table class="tbl">
-            <tr class="table-dark-center"><th>Passives</th></tr>
+          
+          </tbody></table>
+          <table class="tbl"><tbody>
+            
+              <tr class="table-dark-center"><th>Passives</th></tr>
             <tr>
               <td>
                 <ul>
@@ -165,7 +172,8 @@
               </td>
             </tr>
             <tr>
-            </table>
+            
+            </tbody></table>
           </div>
           <ng-template #traitPopover let-trait="trait">
             <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5).replaceAll('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>

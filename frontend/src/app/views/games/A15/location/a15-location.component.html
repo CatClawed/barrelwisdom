@@ -24,7 +24,7 @@
   @if (location.grade) {
     <p><b>Grade Values from Relic Farming:</b> {{location.grade}}</p>
   }
-  <table class="tbl border table-shrink">
+  <table class="tbl border table-shrink"><tbody>
     <tr class="table-dark-center">
       <th>Relic</th>
       <th>Disassembly</th>
@@ -41,8 +41,8 @@
         }</ul></td>
       </tr>
     }
-  </table>
-  <table class="tbl border table-shrink">
+  </tbody></table>
+  <table class="tbl border table-shrink"><tbody>
     <tr class="table-dark-center">
       <th>Strong Monsters</th>
     </tr>
@@ -59,7 +59,7 @@
         </ul>
       </td>
     </tr>
-  </table>
+  </tbody></table>
   @for (area of location.areas; track area) {
     @if (!area.subarea) {
       <h2 id="{{area.slugname}}">{{area.name}}</h2>
@@ -68,7 +68,7 @@
       <h3>{{area.subarea}}</h3>
     }
     <div [innerHTML]="area.note"></div>
-    <table class="tbl border table-shrink">
+    <table class="tbl border table-shrink"><tbody>
       <tr class="table-dark-center">
         @if (area.items) {
           <th >Items</th>
@@ -119,6 +119,6 @@
           </td>
         }
       </tr>
-    </table>
+    </tbody></table>
   }
 }

@@ -35,7 +35,7 @@
           <a class="card-item-display" routerLink="/{{gameURL}}/items/{{cat.item.slug}}/{{language}}">
             <img loading="lazy" src="{{imgURL}}items/{{cat.item.slug}}.webp" alt="{{cat.item.name}}">
           </a>
-          <table class="table-item-data">
+          <table class="table-item-data"><tbody>
             @for (c of cat.item.categories; track c) {
               <tr>
                 <td style="text-align:center;"><i class="atelier atelier-{{c.icon}}"></i></td><td>{{c.name}}</td>
@@ -46,8 +46,8 @@
                 <td style="text-align:center;"><i style="color:lightgray;" class="atelier atelier-{{c.icon}}"></i></td><td>{{c.name}}</td>
               </tr>
             }
-          </table>
-          <table>
+          </tbody></table>
+          <table><tbody>
             @for (j of [].constructor(cat.color.length); track j; let i = $index) {
               <tr>
                 <td>
@@ -58,7 +58,7 @@
                 </td>
               </tr>
             }
-          </table>
+          </tbody></table>
         </div>
       }
     </div>

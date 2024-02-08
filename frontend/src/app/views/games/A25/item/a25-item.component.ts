@@ -17,6 +17,8 @@ import { of } from 'rxjs';
 export class A25ItemComponent extends SingleComponent {
   @Input()
   itemkind: string = "";
+
+  itemkind2: string = "";
   
   difficulties = {
     1: "Normal",
@@ -31,10 +33,11 @@ export class A25ItemComponent extends SingleComponent {
     protected a25service: A25Service) {
     super(destroy$, route, seoService);
   }
+
   changeData() {
-    this.itemkind = this.itemkind ? this.itemkind : this.route.snapshot.params.itemkind;
-    this.gameService(this.a25service, `items/${this.itemkind}`);
-    switch(this.itemkind) {
+    this.itemkind2 = this.itemkind ? this.itemkind : this.route.snapshot.params.itemkind;
+    this.gameService(this.a25service, `items/${this.itemkind2}`);
+    switch(this.itemkind2) {
       case 'materials': return this.a25service.getMaterial(this.slug, this.language);
       case 'synthesis': return this.a25service.getSynth(this.slug, this.language);
       default: {

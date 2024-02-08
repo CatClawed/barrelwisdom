@@ -32,7 +32,7 @@
     @if (memoria.limit) {
       <p><b>Event: </b>{{memoria.limit}}</p>
     }
-    <table class="tbl">
+    <table class="tbl"><tbody>
       <tr class="table-dark-center"><th colspan="4">Level 30</th></tr>
       <tr>
         <td style="width:25%;">{{a25service.stats['hp'][language]}} </td>
@@ -52,7 +52,7 @@
         <td style="width:25%;">{{a25service.stats['mdef'][language]}}</td>
         <td style="width:25%;">{{memoria.mdef30/100}}%</td>
       </tr>
-    </table>
+    </tbody></table>
   </div>
   @if (showNav) {
     <div class="col-md-3" ></div>

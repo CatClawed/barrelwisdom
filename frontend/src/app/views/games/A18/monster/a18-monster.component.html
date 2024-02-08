@@ -17,7 +17,7 @@
       </div>
       <div class="card-text">
         <img class="image-display" loading="lazy" src="{{imgURL}}monsters/{{monster.slug}}.webp" alt="{{monster.name}}">
-        <table>
+        <table><tbody>
           @if (monster.char[0]) {
             <tr>
               <td>
@@ -58,7 +58,7 @@
               </td>
             </tr>
           }
-        </table>
+        </tbody></table>
         @if (monster.note) {
           <b>Note: </b>
           }@if (monster.note) {
@@ -88,7 +88,7 @@
             }
           </div>
           <div class="col-md-6">
-            <table class="tbl" >
+            <table class="tbl" ><tbody>
               <tr>
                 <td style="border-top:transparent;padding:0;"><b>LV </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.level}}</td>
               </tr>
@@ -110,11 +110,11 @@
               <tr>
                 <td style="border-top:transparent;padding:0;"><b>Cole </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.cole}}</td>
               </tr>
-            </table>
+            </tbody></table>
           </div>
         </div>
       </div>
-      <table class="tbl table-shrink" >
+      <table class="tbl table-shrink" ><tbody>
         <tr>
           <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-slash"></i></th>
           <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-impact"></i></th>
@@ -139,7 +139,7 @@
           <td style="text-align: center;border:transparent;padding:0;" innerHTML="{{chart[monster.light]}}"></td>
           <td style="text-align: center;border:transparent;padding:0;" innerHTML="{{chart[monster.ail]}}"></td>
         </tr>
-      </table>
+      </tbody></table>
     </div>
     @if (showNav) {
       <div class="col-md-3" ></div>

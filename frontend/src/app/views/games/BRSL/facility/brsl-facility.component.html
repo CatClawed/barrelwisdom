@@ -13,14 +13,14 @@
         <span class="card-icon-position badge bg-secondary">DLC</span>
       }
       <img class="image-display" loading="lazy" src="{{imgURL}}facilities/{{facility.slug}}.webp" alt="{{facility.name">
-      <table class="tbl" style="margin-top:1rem;">
+      <table class="tbl" style="margin-top:1rem;"><tbody>
         <tr>
           <td style="vertical-align:middle; border-bottom:1px solid #c8c3d3;">{{facility.desc}}</td>
           <td style="vertical-align:middle; padding:0;border-bottom:1px solid #c8c3d3;"><img src="/media/games/second-light/characters/{{facility.char}}.webp" alt=""></td>
         </tr>
-      </table>
+      </tbody></table>
       @if (facility.facilityeffline_set) {
-        <table class="tbl table-shrink">
+        <table class="tbl table-shrink"><tbody>
           <tr class="table-dark-center"><th colspan=2>Effects</th></tr>
           @for (eline of facility.facilityeffline_set; track eline) {
             <tr>
@@ -39,10 +39,10 @@
               </td>
             </tr>
           }
-        </table>
+        </tbody></table>
       }
       @if (facility.facilitying_set) {
-        <table class="tbl table-shrink">
+        <table class="tbl table-shrink"><tbody>
           <tr class="table-dark-center"><th colspan=2>Ingredients</th></tr>
           @for (line of facility.facilitying_set; track line) {
             <tr>
@@ -67,7 +67,7 @@
               </td>
             </tr>
           }
-        </table>
+        </tbody></table>
       }
     </div>
     @if (showNav) {

@@ -49,7 +49,7 @@
                   <div style="position:absolute;bottom:10%;left:50%;transform:translate(-50%,0);font-size:2rem;text-align:center;width:100%;color:white;background:linear-gradient(270deg, rgba(0,0,0,0.5) 0%, rgb(0, 0, 0) 50%, rgba(0,0,0,0.5) 100%);">{{rarity[memoria.rarity]}}</div>
                 </div>
               </a>
-              <table class="tbl table-compress" style="aspect-ratio:256/410;width:256px;height:100%;text-align:center;">
+              <table class="tbl table-compress" style="aspect-ratio:256/410;width:256px;height:100%;text-align:center;"><tbody>
                 <tr>
                   <th>{{a25service.stats['hp'][language]}}</th>
                   <td>{{memoria.hp30/100}}%</td>
@@ -74,7 +74,7 @@
                   <th>{{a25service.stats['mdef'][language]}}</th>
                   <td>{{memoria.mdef30/100}}%</td>
                 </tr>
-              </table>
+              </tbody></table>
             </div>
             <p style="max-width:512px;">{{memoria.skill_desc.replaceAll('{0}', memoria.lv1 + ' ~ ' + memoria.lv5)}}</p>
             @if (memoria.note) {

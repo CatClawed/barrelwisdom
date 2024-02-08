@@ -14,7 +14,7 @@
       </div>
       <div class="card-text">
         <img class="image-display" loading="lazy" src="{{imgURL}}monsters/{{monster.slug}}.webp" alt="{{monster.name}}">
-        <table>
+        <table><tbody>
           @if (monster.char1) {
             <tr>
               <td>
@@ -55,7 +55,7 @@
               </td>
             </tr>
           }
-        </table>
+        </tbody></table>
         <div class="row">
           <div class="col-md-6">
             @if (monster.locations) {
@@ -84,7 +84,7 @@
             }
           </div>
           <div class="col-md-6">
-            <table style="width:auto;" class="table-item-data" >
+            <table style="width:auto;" class="table-item-data" ><tbody>
               <tr>
                 <td style="border-top:transparent;padding:0;">
                   <b>HP: </b>
@@ -137,11 +137,11 @@
                   }
                 </td>
               </tr>
-            </table>
+            </tbody></table>
           </div>
         </div>
       </div>
-      <table class="tbl table-shrink" >
+      <table class="tbl table-shrink" ><tbody>
         <tr>
           <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;color:#c88401;" class="atelier atelier-lg atelier-ryza2-physical"></i></th>
           <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;color:#5f49ec;" class="atelier atelier-lg atelier-sophie2-element-magic"></i></th>
@@ -158,7 +158,7 @@
           <td style="text-align: center;border:transparent;padding:0;" innerHTML="{{chart[monster.resist_thun]}}"></td>
           <td style="text-align: center;border:transparent;padding:0;" innerHTML="{{chart[monster.resist_wind]}}"></td>
         </tr>
-      </table>
+      </tbody></table>
     </div>
     @if (showNav) {
       <div class="col-md-3" ></div>

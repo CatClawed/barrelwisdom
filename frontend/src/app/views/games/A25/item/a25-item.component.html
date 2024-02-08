@@ -94,7 +94,7 @@
         @if (item.note) {
           <p [innerHTML]="item.note"></p>
         }
-        <table class="tbl">
+        <table class="tbl"><tbody>
           <tr class="table-dark-center"><th colspan="4">Stats</th></tr>
           <tr>
             <td style="width:25%;">{{a25service.stats['hp'][language]}} </td>
@@ -126,10 +126,10 @@
               {{item.equip[0].bad_mdef}} ->
             }{{item.equip[0].good_mdef ? item.equip[0].good_mdef : 0}}</td>
           </tr>
-        </table>
+        </tbody></table>
       }
       @if (item.recipe) {
-        <table class="tbl">
+        <table class="tbl"><tbody>
           <tr class="table-dark-center"><th>Ingredients</th></tr>
           <tr>
             <td>
@@ -166,7 +166,7 @@
               </div>
             </td>
           </tr>
-        </table>
+        </tbody></table>
       }
     </div>
     @if (showNav) {

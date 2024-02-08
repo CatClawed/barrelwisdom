@@ -8,7 +8,7 @@
 @if (data) {
   <mat-tab-group>
     <mat-tab label="{{kind[language][0]}}">
-      <table class="tbl spacer" style="margin-top:1rem;">
+      <table class="tbl spacer" style="margin-top:1rem;"><tbody>
         <tr class="table-dark-center"><th colspan="2">{{kind[language][0]}}</th></tr>
         @for (it of [].constructor(100); track it; let i = $index) {
           <tr>
@@ -22,10 +22,10 @@
             </td>
           </tr>
         }
-      </table>
+      </tbody></table>
     </mat-tab>
     <mat-tab label="{{kind[language][1]}}">
-      <table class="tbl spacer" style="margin-top:1rem;">
+      <table class="tbl spacer" style="margin-top:1rem;"><tbody>
         <tr class="table-dark-center"><th colspan="2">{{kind[language][1]}}</th></tr>
         @for (it of [].constructor(100); track it; let i = $index) {
           <tr>
@@ -39,7 +39,7 @@
             </td>
           </tr>
         }
-      </table>
+      </tbody></table>
     </mat-tab>
   </mat-tab-group>
 }
