@@ -9,7 +9,7 @@ To see how this is deployed and updated in a real world environment, see the [de
 
 ## Docker usage
 
-Docker is strongly suggested. Most things will be taken care of for you. If you do not wish to use docker, I would still recommend looking at the dockerfiles to see what commands they run.
+Docker is strongly suggested. If you do not wish to use docker, I recommend looking at the dockerfiles to see what commands they run.
 
 Create `docker/.env` with the following format:
 
@@ -28,7 +28,7 @@ In `backend`, you will also want to run:
 ssh-keygen -t rsa -b 4096 -m PEM -f jwt-key
 ```
 
-With that backend setup done, you can run:
+With that setup done, you can run:
 
 ```bash
 docker compose build
@@ -68,6 +68,7 @@ psql -U [username] barrelwisdom < home/dumpfile
 Be sure backend is running, as prerendering requires DB access.
 
 ```bash
+docker exec -it frontend bash
 npm run prerender
 ```
 
