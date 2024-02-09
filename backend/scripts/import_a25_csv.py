@@ -14,10 +14,10 @@ def replaceNewline(text):
 
 # Some names can be changed, some can't (without manual input), hence volatile.
 def checkName(text_en, text_ja, volatile=False):
-    if text_en and text_ja:
+    if text_ja:
         try:
             name = Name.objects.get(text_ja=text_ja)
-            if volatile:
+            if volatile and text_en:
                 name.text_en = text_en
                 name.save()
             return name
@@ -31,11 +31,12 @@ def checkName(text_en, text_ja, volatile=False):
     return None
 
 def checkDesc(text_en, text_ja):
-    if text_en and text_ja:
+    if text_ja:
         try:
             desc = Desc.objects.get(text_ja=text_ja.replace('\r', '').replace('\n', '<br>'))
-            desc.text_en = text_en.replace('\r', '').replace('\n', '<br>')
-            desc.save()
+            if text_en:
+                desc.text_en = text_en.replace('\r', '').replace('\n', '<br>')
+                desc.save()
             return desc
         except:
             desc = Desc(
@@ -119,6 +120,7 @@ def ImpResearch(row, index):
     )
 
     print(row["Name"])
+    """
     obj = Research(
         name=name,
         desc=desc,
@@ -129,6 +131,7 @@ def ImpResearch(row, index):
         req=req
     )
     obj.save()
+    """
 
 def ImpMemoria(row, index):
     limited = Desc.objects.get(text_ja=row["Event"]) if row["Event"] else None
@@ -152,10 +155,12 @@ def ImpMemoria(row, index):
     try:
         obj = Memoria.objects.get(slug=row["Slug"])
         create = False
+        create_gbl = True if not obj.gbl and row["Global"] else False
         print('update', row["EN"])
     except:
         print('Create', row["EN"])
         create = True
+        create_gbl = True if row["Global"] else False
         obj = Memoria(
             slug=row["Slug"],
         )
@@ -187,6 +192,9 @@ def ImpMemoria(row, index):
     if create:
         update = LatestUpdate.objects.first()
         update.memoria.add(obj)
+    if create_gbl:
+        update = LatestUpdateGBL.objects.first()
+        update.memoria.add(obj)
 
 """Add new events first."""
 def ImpChara(row, index):
@@ -205,10 +213,12 @@ def ImpChara(row, index):
         obj = Character.objects.get(slug=row["Slug"])
         print('Updating', row["NAME_EN"], row["TITLE_EN"])
         create = False
+        create_gbl = True if row["Global"] and not obj.gbl else False
         
     except:
         print('Creating', row["NAME_EN"], row["TITLE_EN"])
         create = True
+        create_gbl = True if row["Global"] else False
         obj = Character(
             slug=row["Slug"],
         )
@@ -241,6 +251,9 @@ def ImpChara(row, index):
     obj.save()
     if create:
         update = LatestUpdate.objects.first()
+        update.characters.add(obj)
+    if create_gbl:
+        update = LatestUpdateGBL.objects.first()
         update.characters.add(obj)
 
 def ImpPassive(row, index):
@@ -340,7 +353,8 @@ def ImpMaterials(row, index):
 
     try:
         obj = Item.objects.get(slug=row["Slug"])
-        print('Updating', row["EN"])
+        gbl_og = obj.gbl
+        print('Updating', row["JP"])
         obj.name=name
         obj.desc=desc
         obj.kind=Filterable.objects.get(slug="material")
@@ -349,12 +363,15 @@ def ImpMaterials(row, index):
         obj.note=replaceNewline(row["Notes"])
         obj.gbl=True if row["Global"] else False
         obj.save()
+        if gbl_og != obj.gbl:
+            updateG = LatestUpdateGBL.objects.first()
+            updateG.items.add(obj)
         obj = Material.objects.get(item=obj)
         obj.color=Filterable.objects.get(text_en=row["Color"]) if row["Color"] else None
         obj.kind=Filterable.objects.get(text_en=row["Type"])
         obj.save()
     except Item.DoesNotExist:
-        print('Creating', row["EN"])
+        print('Creating', row["JP"])
         item = Item(
             slug=row["Slug"],
             name=name,
@@ -366,6 +383,9 @@ def ImpMaterials(row, index):
             gbl=True if row["Global"] else False
         )
         item.save()
+        if item.gbl:
+            updateG = LatestUpdateGBL.objects.first()
+            updateG.items.add(item)
         obj = Material(
             item=item,
             color=Filterable.objects.get(text_en=row["Color"]) if row["Color"] else None,
@@ -393,13 +413,12 @@ def ImpEquipment(row, index):
 
     try:
         obj = Item.objects.get(slug=row["Slug"])
-        print('Updating', row["NAME_EN"])
+        print('Updating', row["Slug"])
         obj.name=name
         obj.desc=desc
         obj.kind=Filterable.objects.get(slug="equipment", kind="item_type")
         obj.rarity=row["RARITY"]
         obj.note=replaceNewline(row["Notes"])
-        obj.gbl=True if row["Global"] else False
         obj.save()
         obj = Equipment.objects.get(item=obj)
         obj.kind=Filterable.objects.get(text_en=row["TYPE"], kind="equipment")
@@ -420,7 +439,7 @@ def ImpEquipment(row, index):
         obj.save()
 
     except Item.DoesNotExist:
-        print('Creating', row["NAME_EN"])
+        print('Creating', row["Slug"])
         item = Item(
             slug=row["Slug"],
             name=name,
@@ -428,7 +447,6 @@ def ImpEquipment(row, index):
             kind=Filterable.objects.get(slug="equipment", kind="item_type"),
             rarity=row["RARITY"],
             note=replaceNewline(row["Notes"]),
-            gbl=True if row["Global"] else False
         )
         item.save()
 
@@ -467,12 +485,11 @@ def ImpCombatItem(row, index):
     )
     try:
         obj = Item.objects.get(slug=row["Slug"])
-        print('Updating', row["NAME_EN"])
+        print('Updating', row["Slug"])
         obj.name=name
         obj.desc=desc
         obj.kind=Filterable.objects.get(slug="combat", kind="item_type")
         obj.rarity=row["RARITY"]
-        obj.gbl=True if row["Global"] else False
         obj.save()
         obj = CombatItem.objects.get(item=obj)
         obj.kind=Filterable.objects.get(text_en=row["Filter Trait"], kind="combat_type")
@@ -485,14 +502,13 @@ def ImpCombatItem(row, index):
         obj.uses=row["USES"]
         obj.save()
     except Item.DoesNotExist:
-        print('Creating', row["NAME_EN"])
+        print('Creating', row["Slug"])
         item = Item(
             slug=row["Slug"],
             name=name,
             desc=desc,
             kind=Filterable.objects.get(slug="combat", kind="item_type"),
             rarity=row["RARITY"],
-            gbl=True if row["Global"] else False
         )
         item.save()
 
@@ -541,7 +557,9 @@ def ImpRecipe(row, index):
     rPage.gbl=gbl
     rPage.save()
 
-    # TODO: ensure gbl flips adds items to update.
+    if item.gbl != gbl:
+        updateG = LatestUpdateGBL.objects.first()
+        updateG.items.add(item)
     item.gbl=gbl
     item.limit=limited
     item.save()
@@ -743,10 +761,12 @@ def ImpDungeon(row, index):
 def createUpdate():
     obj = LatestUpdate()
     obj.save()
+    print('Update Created')
 
+
+def createUpdateGBL():
     obj = LatestUpdateGBL()
     obj.save()
-
     print('Update Created')
 
 def print_skill_data():
@@ -790,6 +810,7 @@ Checklist
 """
 
 #createUpdate()
+#createUpdateGBL()
 
 #import_generic(ImpFilter)
 #import_generic(ImpTrait, index=1, kind="combat")

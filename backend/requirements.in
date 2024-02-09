@@ -10,3 +10,4 @@ djangorestframework
 djangorestframework-simplejwt
 gunicorn
 pylibmc
+python-slugify

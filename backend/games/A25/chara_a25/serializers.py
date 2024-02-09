@@ -56,7 +56,7 @@ class A25CharaListSerializer(A25DefaultSerializer):
             'slug', 'name', 'title', 'role', 'elem', 'rarity', 'gbl'
         ]
     def get_title(self, obj):
-        return A25DefaultSerializer.get_text(self,obj.title)
+        return A25DefaultSerializer.get_text_gbl(self,obj.title,obj.gbl)
 
 class A25CharaSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()

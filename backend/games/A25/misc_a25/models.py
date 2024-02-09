@@ -21,11 +21,11 @@ class Filterable(models.Model):
     kind    = models.CharField(max_length=20)
 
 class Name(models.Model):
-    text_en = models.CharField(max_length=50) # Heck English
+    text_en = models.CharField(max_length=50, blank=True) # Heck English
     text_ja = models.CharField(max_length=40, unique=True) # I'd be surprised if JP surpassed 15
 
 class Desc(models.Model):
-    text_en = models.CharField(max_length=255)
+    text_en = models.CharField(max_length=255, blank=True)
     text_ja = models.CharField(max_length=255, unique=True)
 
 class Trait(models.Model):
