@@ -1,52 +1,90 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
-<div *ngIf="data as region">
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
+@if (data; as region) {
+  <div>
     <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Location: '+region.name"></Breadcrumb>
     <h1>{{region.name}}</h1>
     <div class="table-of-contents">
-        <b>Table of Contents</b>
-        <ol class="toc-list">
-            <li *ngFor="let area of region.areas">
-                <a href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}"
-                    (click)="$event.preventDefault();scroll(area.slug, region.slug)">
-                    {{area.name}}
-                </a>
-            </li>
-        </ol>
+      <b>Table of Contents</b>
+      <ol class="toc-list">
+        @for (area of region.areas; track area) {
+          <li>
+            <a href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}"
+              (click)="$event.preventDefault();scroll(area.slug, region.slug)">
+              {{area.name}}
+            </a>
+          </li>
+        }
+      </ol>
     </div>
-    <div id="{{area.slug}}" *ngFor="let area of region.areas">
+    @for (area of region.areas; track area) {
+      <div id="{{area.slug}}">
         <h2>{{area.name}}</h2>
-        <table class="tbl table-shrink border" >
-            <tr style="text-align:center;">
-                <th>Tool</th>
-                <th><i class="fas fa-star"></i></th>
-                <th><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
-                <th><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
+        <table class="tbl table-shrink border" ><tbody>
+          <tr style="text-align:center;">
+            <th>Tool</th>
+            <th><i class="fas fa-star"></i></th>
+            <th><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
+            <th><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
+          </tr>
+          @for (node of area.gatherdata; track node) {
+            <tr>
+              @if (node.tool == 'All' || node.tool == 'Staff') {
+                <td style="text-align: center;vertical-align: middle;"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-staff"></i></td>
+              }
+              @if (node.tool == 'Hand' || !node.tool) {
+                <td style="text-align: center;vertical-align: middle;"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-gather"></i></td>
+              }
+              @if (node.tool == 'Axe') {
+                <td style="text-align: center;vertical-align: middle;"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-axe"></i></td>
+              }
+              @if (node.tool == 'Sickle') {
+                <td style="text-align: center;vertical-align: middle;"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-sickle"></i></td>
+              }
+              @if (node.tool == 'Bomb Rod') {
+                <td style="text-align: center;vertical-align: middle;"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-bomb-rod"></i></td>
+              }
+              @if (node.tool == 'Bug Net') {
+                <td style="text-align: center;vertical-align: middle;"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-bug-net"></i></td>
+              }
+              @if (node.tool == 'Fishing Rod') {
+                <td style="text-align: center;vertical-align: middle;"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-fishing-rod"></i></td>
+              }
+              @if (node.tool != 'Dig') {
+                <td>               <a routerLink="/{{gameURL}}/items/{{node.rank1.slug}}/{{language}}">{{node.rank1.name}}</a><br/>{{node.priority1}}</td>
+              }
+              @if (node.rank2  && node.tool != 'Dig') {
+                <td><a routerLink="/{{gameURL}}/items/{{node.rank2.slug}}/{{language}}">{{node.rank2.name}}</a><br/>{{node.priority2}}</td>
+              }
+              @if (node.rank3  && node.tool != 'Dig') {
+                <td><a routerLink="/{{gameURL}}/items/{{node.rank3.slug}}/{{language}}">{{node.rank3.name}}</a><br/>{{node.priority3}}</td>
+              }
+              @if (!node.rank2 && node.tool != 'Dig') {
+                <td></td>
+              }
+              @if (!node.rank3 && node.tool != 'Dig') {
+                <td></td>
+              }
             </tr>
-            <tr *ngFor="let node of area.gatherdata">
-                <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'All' || node.tool == 'Staff'"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-staff"></i></td>
-                <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'Hand' || !node.tool"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-gather"></i></td>
-                <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'Axe'"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-axe"></i></td>
-                <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'Sickle'"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-sickle"></i></td>
-                <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'Bomb Rod'"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-bomb-rod"></i></td>
-                <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'Bug Net'"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-bug-net"></i></td>
-                <td style="text-align: center;vertical-align: middle;" *ngIf="node.tool == 'Fishing Rod'"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-tool-fishing-rod"></i></td>
-                <td *ngIf="node.tool != 'Dig'">               <a routerLink="/{{gameURL}}/items/{{node.rank1.slug}}/{{language}}">{{node.rank1.name}}</a><br/>{{node.priority1}}</td>
-                <td *ngIf="node.rank2  && node.tool != 'Dig'"><a routerLink="/{{gameURL}}/items/{{node.rank2.slug}}/{{language}}">{{node.rank2.name}}</a><br/>{{node.priority2}}</td>
-                <td *ngIf="node.rank3  && node.tool != 'Dig'"><a routerLink="/{{gameURL}}/items/{{node.rank3.slug}}/{{language}}">{{node.rank3.name}}</a><br/>{{node.priority3}}</td>
-                <td *ngIf="!node.rank2 && node.tool != 'Dig'"></td>
-                <td *ngIf="!node.rank3 && node.tool != 'Dig'"></td>
-            </tr>
-            <tr *ngIf="dig">
-                <td style="text-align: center;vertical-align: middle;"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-race-weasel-king"></i></td>
-                <td colspan="3">
-                    <div style="column-count: 3;">
-                    <ul style="padding-left:1em;">
-                        <ng-container  *ngFor="let node of area.gatherdata">
-                            <li *ngIf="node.tool == 'Dig'"><a routerLink="/{{gameURL}}/items/{{node.rank1.slug}}/{{language}}">{{node.rank1.name}}</a></li>
-                        </ng-container>
-                    </ul>
+          }
+          @if (dig) {
+            <tr>
+              <td style="text-align: center;vertical-align: middle;"><i style="padding:0;" class="atelier atelier-lg atelier-ryza2-race-weasel-king"></i></td>
+              <td colspan="3">
+                <div style="column-count: 3;">
+                  <ul style="padding-left:1em;">
+                    @for (node of area.gatherdata; track node) {
+                      @if (node.tool == 'Dig') {
+                        <li><a routerLink="/{{gameURL}}/items/{{node.rank1.slug}}/{{language}}">{{node.rank1.name}}</a></li>
+                      }
+                    }
+                  </ul>
                 </div>
-            </tr>
-        </table>
+              </tr>
+            }
+          </tbody></table>
+        </div>
+      }
     </div>
-</div>
+  }

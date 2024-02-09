@@ -1,18 +1,32 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
 
-<ng-container *ngIf="data as effect">
-<Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Effects', '/'+gameURL+'/effects/'+language]]" [current]="effect.name"></Breadcrumb>
-<div class="mx-auto row spacer">
-  <div class="{{colset}} card card-body">
-    <h4 class="card-title">{{effect.name}}</h4>
-    <p *ngIf="effect.desc">{{effect.desc}}</p>
-    <b *ngIf="effect.effectdata_set">From Item:</b>
-    <ul *ngIf="effect.effectdata_set">
-      <li *ngFor="let e of effect.effectdata_set">
-        <a routerLink="/{{gameURL}}/items/{{e.effectlines_set[0].slugname}}/{{language}}">{{e.effectlines_set[0].name}}</a>
-      </li>
-    </ul>
+@if (data; as effect) {
+  @if (showNav) {
+    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Effects', '/'+gameURL+'/effects/'+language]]" [current]="effect.name"></Breadcrumb>
+  }
+  <div class="mx-auto row spacer">
+    <div class="{{colset}} card card-body">
+      <h4 class="card-title">{{effect.name}}</h4>
+      @if (effect.desc) {
+        <p>{{effect.desc}}</p>
+      }
+      @if (effect.effectdata_set) {
+        <b>From Item:</b>
+      }
+      @if (effect.effectdata_set) {
+        <ul>
+          @for (e of effect.effectdata_set; track e) {
+            <li>
+              <a routerLink="/{{gameURL}}/items/{{e.effectlines_set[0].slugname}}/{{language}}">{{e.effectlines_set[0].name}}</a>
+            </li>
+          }
+        </ul>
+      }
+    </div>
+    @if (showNav) {
+      <div class="col-md-3" ></div>
+    }
   </div>
-<div *ngIf="showNav" class="col-md-3" ></div>
-</div>
-</ng-container>
+}

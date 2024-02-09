@@ -1,49 +1,61 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
-<ng-container *ngIf="!error">
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
+@if (!error) {
   <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="title"></Breadcrumb>
   <h1>{{title}}</h1>
-</ng-container>
-<ng-container *ngIf="data as dungeons">
+}
+@if (data; as dungeons) {
   <div class="table-of-contents">
-      <b>Table of Contents</b>
-      <ol>
-          <li *ngFor="let dungeon of dungeons">
-              <a href="/{{gameURL}}/quests/dungeons/{{language}}#{{dungeon.name}}"
-                (click)="$event.preventDefault();scroll(dungeon.name)">
-                {{dungeon.name}}
-              </a>
-          </li>
-      </ol>
+    <b>Table of Contents</b>
+    <ol>
+      @for (dungeon of dungeons; track dungeon) {
+        <li>
+          <a href="/{{gameURL}}/quests/dungeons/{{language}}#{{dungeon.name}}"
+            (click)="$event.preventDefault();scroll(dungeon.name)">
+            {{dungeon.name}}
+          </a>
+        </li>
+      }
+    </ol>
   </div>
-
-<ng-container *ngFor="let dungeon of dungeons">
-  <h2 id="{{dungeon.name}}">{{dungeon.name}}</h2>
-
-  <table class="table-compress">
-    <tr class="table-dark-center">
+  @for (dungeon of dungeons; track dungeon) {
+    <h2 id="{{dungeon.name}}">{{dungeon.name}}</h2>
+    <table class="table-compress"><tbody>
+      <tr class="table-dark-center">
         <th>#</th>
         <th>Combat Level</th>
-    </tr>
-    <tr *ngFor="let floor of dungeon.floors">
-        <td>{{floor.order}}</td>
-        <td>{{floor.combat_level}}</td>
-    </tr>
-</table>
-  <ng-container *ngFor="let floor of dungeon.floors">
-    <h3 *ngIf="floor.order == 1">Beginning</h3>
-    <h3 *ngIf="floor.order == 4">Middle</h3>
-    <h3 *ngIf="floor.order == 8">End</h3>
-    <ng-container *ngIf="floor.order == 1 || floor.order == 4 || floor.order == 8">
-      <div style="display:grid;grid-template-columns:repeat(2,50%);grid-row-gap:1rem;">
-        <div style="position:relative;text-align:center;" *ngFor="let reward of floor.rewards">
-            <a routerLink="/{{gameURL}}/items/materials/{{reward.item.slug}}/{{language}}">
+      </tr>
+      @for (floor of dungeon.floors; track floor) {
+        <tr>
+          <td>{{floor.order}}</td>
+          <td>{{floor.combat_level}}</td>
+        </tr>
+      }
+    </tbody></table>
+    @for (floor of dungeon.floors; track floor) {
+      @if (floor.order == 1) {
+        <h3>Beginning</h3>
+      }
+      @if (floor.order == 4) {
+        <h3>Middle</h3>
+      }
+      @if (floor.order == 8) {
+        <h3>End</h3>
+      }
+      @if (floor.order == 1 || floor.order == 4 || floor.order == 8) {
+        <div style="display:grid;grid-template-columns:repeat(2,50%);grid-row-gap:1rem;">
+          @for (reward of floor.rewards; track reward) {
+            <div style="position:relative;text-align:center;">
+              <a routerLink="/{{gameURL}}/items/materials/{{reward.item.slug}}/{{language}}">
                 <img loading="lazy" class="resleri-item-frame-sm"
-                    style="aspect-ratio:1;width:150px;background-image:url({{imgURL}}svg/item-frame-{{reward.item.rarity}}.svg)"
-                    src="{{imgURL}}items/{{reward.item.slug}}.webp" alt="{{reward.item.name}}"><br />
+                  style="aspect-ratio:1;width:150px;background-image:url({{imgURL}}svg/item-frame-{{reward.item.rarity}}.svg)"
+                  src="{{imgURL}}items/{{reward.item.slug}}.webp" alt="{{reward.item.name}}"><br />
                 {{reward.item.name}}</a>
-        </div>
-      </div>
-    </ng-container>
-  </ng-container>
-</ng-container>
-</ng-container>
+              </div>
+            }
+          </div>
+        }
+      }
+    }
+  }

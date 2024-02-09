@@ -1,22 +1,32 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
 
-<ng-container *ngIf="data as trait">
-<Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Traits', '/'+gameURL+'/traits/'+language]]" [current]="trait.name"></Breadcrumb>
-<div class="mx-auto row spacer">
-<div class="{{colset}} card card-body">
-  <div class="flex">
-    <h4 class="card-title">{{trait.name}}</h4>
-    <div><a href="javascript:void(0)" (click)="$event.preventDefault();"
+@if (data; as trait) {
+  @if (showNav) {
+    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Traits', '/'+gameURL+'/traits/'+language]]" [current]="trait.name"></Breadcrumb>
+  }
+  <div class="mx-auto row spacer">
+    <div class="{{colset}} card card-body">
+      <div class="flex">
+        <h4 class="card-title">{{trait.name}}</h4>
+        <div><a href="javascript:void(0)" (click)="$event.preventDefault();"
         tooltip="Influences rank. A measure of rarity. This number determines where traits appear." container="true">Grade:</a>
-      {{trait.grade}}
-      <br /><span style="float:right;" class="badge bg-secondary" *ngIf="trait.grade > 50">DLC</span>
+        {{trait.grade}}
+        <br />@if (trait.grade > 50) {
+        <span style="float:right;" class="badge bg-secondary">DLC</span>
+      }
     </div>
   </div>
-  <p *ngIf="trait.item_set">
-    <i class="atelier atelier-sm atelier-ryza2-material"></i><a routerLink="/{{gameURL}}/items/{{trait.item_set[0].slug}}/{{language}}">{{trait.item_set[0].name}}</a>
-  </p>
+  @if (trait.item_set) {
+    <p>
+      <i class="atelier atelier-sm atelier-ryza2-material"></i><a routerLink="/{{gameURL}}/items/{{trait.item_set[0].slug}}/{{language}}">{{trait.item_set[0].name}}</a>
+    </p>
+  }
   <p>{{trait.desc}}</p>
-  <p *ngIf="trait.note"><b>Note:</b> {{trait.note}}</p>
+  @if (trait.note) {
+    <p><b>Note:</b> {{trait.note}}</p>
+  }
   <div class="flex bottom">
     <i class="trait-color{{trait.trans_atk}}  atelier atelier-np atelier-ryza2-type-attack"></i>
     <i class="trait-color{{trait.trans_heal}} atelier atelier-np atelier-ryza2-type-heal"></i>
@@ -27,6 +37,8 @@
     <i class="trait-color{{trait.trans_acc}}  atelier atelier-np atelier-ryza2-type-accessory"></i>
   </div>
 </div>
-<div *ngIf="showNav" class="col-md-3" ></div>
+@if (showNav) {
+  <div class="col-md-3" ></div>
+}
 </div>
-</ng-container>
+}

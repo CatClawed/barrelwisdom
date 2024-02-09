@@ -1,6 +1,6 @@
 import { HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Inject, Injectable, Optional, OnDestroy } from '@angular/core';
-import { REQUEST } from '@nguniversal/express-engine/tokens';
+import { REQUEST } from '../../express.tokens';
 import { Request } from 'express';
 import {AppComponent} from '@app/app.component';
 import { takeUntil } from 'rxjs/operators';

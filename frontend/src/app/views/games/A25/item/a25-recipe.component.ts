@@ -49,6 +49,6 @@ export class A25RecipeComponent extends SingleComponent {
 
   scroll(id) {
     let el = document.getElementById(id);
-    el.scrollIntoView({ behavior: 'smooth' });
+    el.scrollIntoView();
   }
 } 

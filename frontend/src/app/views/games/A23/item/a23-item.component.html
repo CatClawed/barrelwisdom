@@ -30,7 +30,7 @@
        <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
     </div>
     <div class="card-text">
-      <table>
+      <table><tbody>
         <tr *ngIf="item.char1">
           <td style="width:10%">
             <img style="max-height:3em;" src="/media/games/sophie2/characters/{{item.char1}}.webp" alt="{{item.char1}}">
@@ -63,9 +63,9 @@
             {{item.desc4}}
           </td>
         </tr>
-      </table>
+      </tbody></table>
       <div class="row">
-        <table style="margin-top:1rem;" class="table-item-data col">
+        <table style="margin-top:1rem;" class="table-item-data col"><tbody>
           <tr *ngFor="let cat of item.categories">
               <td style="text-align: center;"><i class="atelier atelier-{{cat.icon}}"></i></td>
               <td><a routerLink="/{{gameURL}}/categories/{{cat.slug}}">{{cat.name}}</a></td>
@@ -74,7 +74,7 @@
             <td style="text-align: center;"><i style="color:lightgrey;" class="atelier atelier-{{cat.icon}}"></i></td>
             <td><a routerLink="/{{gameURL}}/categories/{{cat.slug}}">{{cat.name}}</a></td>
         </tr>
-        </table>
+        </tbody></table>
       </div>
       <b *ngIf="item.traits">Trait:</b>
       <ul *ngIf="item.traits">
@@ -110,7 +110,7 @@
              <li *ngFor="let mon of item.monsters"><a routerLink="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a></li>
          </ul>
       </div>
-      <table *ngIf="item.ingredient" class="tbl">
+      <table *ngIf="item.ingredient" class="tbl"><tbody>
         <tr class="table-dark-center"><th>Ingredients</th></tr>
         <tr>
           <td>
@@ -123,14 +123,14 @@
             </ul>
           </td>
         </tr>
-      </table>
+      </tbody></table>
       <b  *ngIf="item.effects && !item.ingredient">Effects:</b>
       <ul  *ngIf="item.effects && !item.ingredient">
         <li *ngFor="let eff of item.effects[0].data">
           <a routerLink="/{{gameURL}}/effects/{{eff.effect.slug}}/{{language}}">{{eff.effect.name}}</a>
         </li>
       </ul>
-      <table *ngIf="item.effects && item.ingredient" class="tbl">
+      <table *ngIf="item.effects && item.ingredient" class="tbl"><tbody>
         <tr class="table-dark-center"><th colspan=2>Effects</th></tr>
         <tr *ngFor="let eff of item.effects">
           <td style="vertical-align:middle;">
@@ -162,8 +162,8 @@
             </ul>
           </td>
         </tr>
-      </table>
-      <table *ngIf="item.components" class="tbl">
+      </tbody></table>
+      <table *ngIf="item.components" class="tbl"><tbody>
         <tr class="table-dark-center"><th>Components</th></tr>
         <tr>
           <td>
@@ -182,19 +182,19 @@
             </div>
           </td>
         </tr>
-      </table>
-      <table *ngIf="item.equip" class="tbl">
+      </tbody></table>
+      <table *ngIf="item.equip" class="tbl"><tbody>
         <tr class="table-dark-center"><th colspan=2>Stats</th></tr>
         <tr><td style="padding-top:0.2rem;text-align:right;width:50%;"><b>HP </b></td> <td style="padding-top:0.2rem;padding-left:0.5em;">{{item.equip.hp}}</td></tr>
         <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>MP </b></td> <td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip.mp}}</td></tr>
         <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>ATK </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip.atk}}</td></tr>
         <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>DEF </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip.dfn}}</td></tr>
         <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>SPD </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip.spd}}</td></tr>
-      </table>
-      <table *ngIf="item.chars" class="tbl">
+      </tbody></table>
+      <table *ngIf="item.chars" class="tbl"><tbody>
         <tr class="table-dark-center"><th>Characters</th></tr>
         <tr><td><img *ngFor="let char of item.chars" src="{{imgURL}}characters/{{char.slug}}.webp" alt="{{char.slug}}" style="max-height:3em;"></td></tr>
-      </table>
+      </tbody></table>
 
     </div>
   </div>

@@ -1,121 +1,167 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
 
-<ng-container *ngIf="data as monster">
-<Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Monsters', '/'+gameURL+'/monsters/'+language]]" [current]="monster.name"></Breadcrumb>
-<div class="mx-auto row spacer">
-  <div class="{{colset}} card card-body">
-    <h4 class="card-title  card-icon-space">{{monster.name}}</h4>
-    <div class="card-icon-position">
-      <i class="atelier atelier-sophie2-race-{{monster.kind}}"></i>
-    </div>
-    <div class="card-text">
-      <img class="image-display" loading="lazy" src="{{imgURL}}monsters/{{monster.slug}}.webp" alt="{{monster.name}}">
-      <table>
-        <tr *ngIf="monster.char1">
-          <td>
-            <img style="max-height:3em;" src="/media/games/sophie2/characters/{{monster.char1}}.webp" alt="{{monster.char1}}">
-          </td>
-          <td>
-            {{monster.desc1}}
-          </td>
-        </tr>
-        <tr *ngIf="monster.char2">
-          <td>
-            <img style="max-height:3em;" src="/media/games/sophie2/characters/{{monster.char2}}.webp" alt="{{monster.char2}}">
-          </td>
-          <td>
-            {{monster.desc2}}
-          </td>
-        </tr>
-        <tr *ngIf="monster.char3">
-          <td>
-            <img style="max-height:3em;" src="/media/games/sophie2/characters/{{monster.char3}}.webp" alt="{{monster.char3}}">
-          </td>
-          <td>
-            {{monster.desc3}}
-          </td>
-        </tr>
-        <tr *ngIf="monster.char4">
-          <td>
-            <img style="max-height:3em;" src="/media/games/sophie2/characters/{{monster.char4}}.webp" alt="{{monster.char4}}">
-          </td>
-          <td>
-            {{monster.desc4}}
-          </td>
-        </tr>
-      </table>
-      <div class="row">
-        <div class="col-md-6">
-          <b *ngIf="monster.locations">Locations:</b>
-          <ul *ngIf="monster.locations">
-            <li *ngFor="let loc of monster.locations"><a *ngIf="loc.reg" routerLink="/{{gameURL}}/locations/{{loc.reg}}/{{language}}">{{loc.name}}</a><a *ngIf="!loc.reg" routerLink="/{{gameURL}}/locations/{{loc.slug}}/{{language}}">{{loc.name}}</a></li>
-          </ul>
-          <b *ngIf="monster.drops">Drops:</b>
-          <ul *ngIf="monster.drops">
-            <li *ngFor="let drop of monster.drops"><a routerLink="/{{gameURL}}/items/{{drop.slug}}/{{language}}">{{drop.name}}</a></li>
-          </ul>
-        </div>
-        <div class="col-md-6">
-          <table style="width:auto;" class="table-item-data" >
+@if (data; as monster) {
+  @if (showNav) {
+    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Monsters', '/'+gameURL+'/monsters/'+language]]" [current]="monster.name"></Breadcrumb>
+  }
+  <div class="mx-auto row spacer">
+    <div class="{{colset}} card card-body">
+      <h4 class="card-title  card-icon-space">{{monster.name}}</h4>
+      <div class="card-icon-position">
+        <i class="atelier atelier-sophie2-race-{{monster.kind}}"></i>
+      </div>
+      <div class="card-text">
+        <img class="image-display" loading="lazy" src="{{imgURL}}monsters/{{monster.slug}}.webp" alt="{{monster.name}}">
+        <table><tbody>
+          @if (monster.char1) {
             <tr>
-              <td style="border-top:transparent;padding:0;">
-                <b>HP: </b>
+              <td>
+                <img style="max-height:3em;" src="/media/games/sophie2/characters/{{monster.char1}}.webp" alt="{{monster.char1}}">
               </td>
-              <td style="border-top:transparent;padding:0;padding-left:0.5em;">
-                <i *ngFor="let i of [].constructor(monster.hp_rank)"   class="fas fa-star" style="color:gold;padding-right:0.1rem"></i>
-                <i *ngFor="let i of [].constructor(5-monster.hp_rank)" class="fas fa-star" style="padding-right:0.1rem"             ></i>
+              <td>
+                {{monster.desc1}}
               </td>
             </tr>
+          }
+          @if (monster.char2) {
             <tr>
-              <td style="border-top:transparent;padding:0;">
-                <b>ATK: </b>
+              <td>
+                <img style="max-height:3em;" src="/media/games/sophie2/characters/{{monster.char2}}.webp" alt="{{monster.char2}}">
               </td>
-              <td style="border-top:transparent;padding:0;padding-left:0.5em;">
-                <i *ngFor="let i of [].constructor(monster.str_rank)"   class="fas fa-star" style="color:gold;padding-right:0.1rem"></i>
-                <i *ngFor="let i of [].constructor(5-monster.str_rank)" class="fas fa-star" style="padding-right:0.1rem"             ></i>
+              <td>
+                {{monster.desc2}}
               </td>
             </tr>
+          }
+          @if (monster.char3) {
             <tr>
-              <td style="border-top:transparent;padding:0;">
-                <b>DEF: </b>
+              <td>
+                <img style="max-height:3em;" src="/media/games/sophie2/characters/{{monster.char3}}.webp" alt="{{monster.char3}}">
               </td>
-              <td style="border-top:transparent;padding:0;padding-left:0.5em;">
-                <i *ngFor="let i of [].constructor(monster.def_rank)"   class="fas fa-star" style="color:gold;padding-right:0.1rem"></i>
-                <i *ngFor="let i of [].constructor(5-monster.def_rank)" class="fas fa-star" style="padding-right:0.1rem"             ></i>
+              <td>
+                {{monster.desc3}}
               </td>
             </tr>
+          }
+          @if (monster.char4) {
             <tr>
-              <td style="border-top:transparent;padding:0;">
-                <b>SPD: </b>
+              <td>
+                <img style="max-height:3em;" src="/media/games/sophie2/characters/{{monster.char4}}.webp" alt="{{monster.char4}}">
               </td>
-              <td style="border-top:transparent;padding:0;padding-left:0.5em;">
-                <i *ngFor="let i of [].constructor(monster.spd_rank)"   class="fas fa-star" style="color:gold;padding-right:0.1rem"></i>
-                <i *ngFor="let i of [].constructor(5-monster.spd_rank)" class="fas fa-star" style="padding-right:0.1rem"             ></i>
+              <td>
+                {{monster.desc4}}
               </td>
             </tr>
-          </table>
+          }
+        </tbody></table>
+        <div class="row">
+          <div class="col-md-6">
+            @if (monster.locations) {
+              <b>Locations:</b>
+            }
+            @if (monster.locations) {
+              <ul>
+                @for (loc of monster.locations; track loc) {
+                  <li>@if (loc.reg) {
+                    <a routerLink="/{{gameURL}}/locations/{{loc.reg}}/{{language}}">{{loc.name}}</a>
+                    }@if (!loc.reg) {
+                    <a routerLink="/{{gameURL}}/locations/{{loc.slug}}/{{language}}">{{loc.name}}</a>
+                  }</li>
+                }
+              </ul>
+            }
+            @if (monster.drops) {
+              <b>Drops:</b>
+            }
+            @if (monster.drops) {
+              <ul>
+                @for (drop of monster.drops; track drop) {
+                  <li><a routerLink="/{{gameURL}}/items/{{drop.slug}}/{{language}}">{{drop.name}}</a></li>
+                }
+              </ul>
+            }
+          </div>
+          <div class="col-md-6">
+            <table style="width:auto;" class="table-item-data" ><tbody>
+              <tr>
+                <td style="border-top:transparent;padding:0;">
+                  <b>HP: </b>
+                </td>
+                <td style="border-top:transparent;padding:0;padding-left:0.5em;">
+                  @for (i of [].constructor(monster.hp_rank); track i) {
+                    <i   class="fas fa-star" style="color:gold;padding-right:0.1rem"></i>
+                  }
+                  @for (i of [].constructor(5-monster.hp_rank); track i) {
+                    <i class="fas fa-star" style="padding-right:0.1rem"             ></i>
+                  }
+                </td>
+              </tr>
+              <tr>
+                <td style="border-top:transparent;padding:0;">
+                  <b>ATK: </b>
+                </td>
+                <td style="border-top:transparent;padding:0;padding-left:0.5em;">
+                  @for (i of [].constructor(monster.str_rank); track i) {
+                    <i   class="fas fa-star" style="color:gold;padding-right:0.1rem"></i>
+                  }
+                  @for (i of [].constructor(5-monster.str_rank); track i) {
+                    <i class="fas fa-star" style="padding-right:0.1rem"             ></i>
+                  }
+                </td>
+              </tr>
+              <tr>
+                <td style="border-top:transparent;padding:0;">
+                  <b>DEF: </b>
+                </td>
+                <td style="border-top:transparent;padding:0;padding-left:0.5em;">
+                  @for (i of [].constructor(monster.def_rank); track i) {
+                    <i   class="fas fa-star" style="color:gold;padding-right:0.1rem"></i>
+                  }
+                  @for (i of [].constructor(5-monster.def_rank); track i) {
+                    <i class="fas fa-star" style="padding-right:0.1rem"             ></i>
+                  }
+                </td>
+              </tr>
+              <tr>
+                <td style="border-top:transparent;padding:0;">
+                  <b>SPD: </b>
+                </td>
+                <td style="border-top:transparent;padding:0;padding-left:0.5em;">
+                  @for (i of [].constructor(monster.spd_rank); track i) {
+                    <i   class="fas fa-star" style="color:gold;padding-right:0.1rem"></i>
+                  }
+                  @for (i of [].constructor(5-monster.spd_rank); track i) {
+                    <i class="fas fa-star" style="padding-right:0.1rem"             ></i>
+                  }
+                </td>
+              </tr>
+            </tbody></table>
+          </div>
         </div>
       </div>
-    </div>
-    <table class="tbl table-shrink" >
-      <tr>
+      <table class="tbl table-shrink" ><tbody>
+        <tr>
           <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;color:#c88401;" class="atelier atelier-lg atelier-ryza2-physical"></i></th>
           <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;color:#5f49ec;" class="atelier atelier-lg atelier-sophie2-element-magic"></i></th>
           <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;color:#f03a02;" class="atelier atelier-lg atelier-sophie2-element-fire"></i></th>
           <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;color:#04b5db;" class="atelier atelier-lg atelier-sophie2-element-ice"></i></th>
           <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;color:#e3bb05;" class="atelier atelier-lg atelier-sophie2-element-lightning"></i></th>
           <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;color:#589b1d;" class="atelier atelier-lg atelier-sophie2-element-wind"></i></th>
-      </tr>
-      <tr>
+        </tr>
+        <tr>
           <td style="text-align: center;border:transparent;padding:0;" innerHTML="{{chart[monster.resist_phys]}}"></td>
           <td style="text-align: center;border:transparent;padding:0;" innerHTML="{{chart[monster.resist_mag]}} "></td>
           <td style="text-align: center;border:transparent;padding:0;" innerHTML="{{chart[monster.resist_fire]}}"></td>
           <td style="text-align: center;border:transparent;padding:0;" innerHTML="{{chart[monster.resist_ice]}} "></td>
           <td style="text-align: center;border:transparent;padding:0;" innerHTML="{{chart[monster.resist_thun]}}"></td>
           <td style="text-align: center;border:transparent;padding:0;" innerHTML="{{chart[monster.resist_wind]}}"></td>
-      </tr>
-    </table>
+        </tr>
+      </tbody></table>
+    </div>
+    @if (showNav) {
+      <div class="col-md-3" ></div>
+    }
   </div>
-  <div *ngIf="showNav" class="col-md-3" ></div>
-</div>
-</ng-container>
+}

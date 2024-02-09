@@ -1,54 +1,76 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
 
-<ng-container *ngIf="data as monster">
-<Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Monsters', '/'+gameURL+'/monsters/'+language]]" [current]="monster.name"></Breadcrumb>
-<div class="mx-auto row spacer">
- <div class="{{colset}} card card-body">
-    <h4 class="card-title card-icon-space">{{monster.name}}</h4>
-    <div class="card-icon-position">
-      <i class="atelier atelier-np atelier-shallie-race-{{monster.kind}}"></i>
+@if (data; as monster) {
+  @if (showNav) {
+    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Monsters', '/'+gameURL+'/monsters/'+language]]" [current]="monster.name"></Breadcrumb>
+  }
+  <div class="mx-auto row spacer">
+    <div class="{{colset}} card card-body">
+      <h4 class="card-title card-icon-space">{{monster.name}}</h4>
+      <div class="card-icon-position">
+        <i class="atelier atelier-np atelier-shallie-race-{{monster.kind}}"></i>
+      </div>
+      <img class="image-display" loading="lazy" src="{{imgURL}}monsters/{{monster.slugname}}.webp" alt="{{monster.name}}">
+      @if (monster.desc) {
+        <p>{{monster.desc}}</p>
+      }
+      @if (monster.note) {
+        <p>{{monster.note}}</p>
+      }
+      <div class="row">
+        <div class="col-md-6">
+          @if (monster.locations) {
+            <b>Locations:</b>
+          }
+          @if (monster.locations) {
+            <ul>
+              @for (loc of monster.locations; track loc) {
+                <li><a routerLink="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}" fragment="{{loc.slugname}}">{{loc.name}}</a></li>
+              }
+            </ul>
+          }
+          @if (monster.item_set) {
+            <b>Drops:</b>
+          }
+          @if (monster.item_set) {
+            <ul>
+              @for (drop of monster.item_set; track drop) {
+                <li><a routerLink="/{{gameURL}}/items/{{drop.slugname}}/{{language}}">{{drop.name}}</a></li>
+              }
+            </ul>
+          }
+        </div>
+        <div class="col-md-6">
+          <table class="tbl" ><tbody>
+            <tr>
+              <td style="border-top:transparent;padding:0;"><b>LV </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.level}}</td>
+            </tr>
+            <tr>
+              <td style="border-top:transparent;padding:0;"><b>HP </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.hp}}</td>
+            </tr>
+            <tr>
+              <td style="border-top:transparent;padding:0;"><b>ATK </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.atk}}</td>
+            </tr>
+            <tr>
+              <td style="border-top:transparent;padding:0;"><b>DEF </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.defen}}</td>
+            </tr>
+            <tr>
+              <td style="border-top:transparent;padding:0;"><b>SPD </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.spd}}</td>
+            </tr>
+            <tr>
+              <td style="border-top:transparent;padding:0;"><b>Exp </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.exp}}</td>
+            </tr>
+            <tr>
+              <td style="border-top:transparent;padding:0;"><b>Cole </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.cole}}</td>
+            </tr>
+          </tbody></table>
+        </div>
+      </div>
     </div>
-    <img class="image-display" loading="lazy" src="{{imgURL}}monsters/{{monster.slugname}}.webp" alt="{{monster.name}}">
-    <p *ngIf="monster.desc">{{monster.desc}}</p>
-    <p *ngIf="monster.note">{{monster.note}}</p>
-    <div class="row">
-      <div class="col-md-6">
-        <b *ngIf="monster.locations">Locations:</b>
-        <ul *ngIf="monster.locations">
-           <li *ngFor="let loc of monster.locations"><a routerLink="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}" fragment="{{loc.slugname}}">{{loc.name}}</a></li>
-        </ul>
-        <b *ngIf="monster.item_set">Drops:</b>
-        <ul *ngIf="monster.item_set">
-          <li *ngFor="let drop of monster.item_set"><a routerLink="/{{gameURL}}/items/{{drop.slugname}}/{{language}}">{{drop.name}}</a></li>
-        </ul>
-      </div>
-      <div class="col-md-6">
-        <table class="tbl" >
-          <tr>
-            <td style="border-top:transparent;padding:0;"><b>LV </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.level}}</td>
-          </tr>
-          <tr>
-            <td style="border-top:transparent;padding:0;"><b>HP </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.hp}}</td>
-          </tr>
-          <tr>
-            <td style="border-top:transparent;padding:0;"><b>ATK </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.atk}}</td>
-          </tr>
-          <tr>
-            <td style="border-top:transparent;padding:0;"><b>DEF </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.defen}}</td>
-          </tr>
-          <tr>
-            <td style="border-top:transparent;padding:0;"><b>SPD </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.spd}}</td>
-          </tr>
-          <tr>
-            <td style="border-top:transparent;padding:0;"><b>Exp </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.exp}}</td>
-          </tr>
-          <tr>
-            <td style="border-top:transparent;padding:0;"><b>Cole </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.cole}}</td>
-          </tr>
-        </table>
-      </div>
-   </div>
+    @if (showNav) {
+      <div class="col-md-3" ></div>
+    }
   </div>
-  <div *ngIf="showNav" class="col-md-3" ></div>
-</div>
-</ng-container>
+}

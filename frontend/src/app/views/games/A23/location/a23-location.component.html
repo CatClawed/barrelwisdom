@@ -1,98 +1,182 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
-<div *ngIf="data as region">
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
+@if (data; as region) {
+  <div>
     <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Location: '+region.name"></Breadcrumb>
     <h1>{{region.name}}</h1>
     <div style="margin-left: 0.5em; margin-right: 0.5em;" class="row">
-    <div class="table-of-contents">
+      <div class="table-of-contents">
         <b>Table of Contents</b>
         <ol class="toc-list">
-            <li *ngFor="let area of region.areas">
-                <a href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}"
-                    (click)="$event.preventDefault();scroll(area.slug,region.slug)">
-                    {{area.name}}
-                </a>
-                <ul *ngIf="area.climate.length > 1">
-                    <li *ngFor="let climate of area.climate">
-                        <a *ngIf="climate.weather == 'sun'"     href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather,'locations/'+region.slug)">Sun</a>
-                        <a *ngIf="climate.weather == 'rain'"    href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather,'locations/'+region.slug)">Rain</a>
-                        <a *ngIf="climate.weather == 'snow'"    href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather,'locations/'+region.slug)">Snow</a>
-                        <a *ngIf="climate.weather == 'thunder'" href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather,'locations/'+region.slug)">Thunder</a>
+          @for (area of region.areas; track area) {
+            <li>
+              <a href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}"
+                (click)="$event.preventDefault();scroll(area.slug,region.slug)">
+                {{area.name}}
+              </a>
+              @if (area.climate.length > 1) {
+                <ul>
+                  @for (climate of area.climate; track climate) {
+                    <li>
+                      @if (climate.weather == 'sun') {
+                        <a     href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather,'locations/'+region.slug)">Sun</a>
+                      }
+                      @if (climate.weather == 'rain') {
+                        <a    href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather,'locations/'+region.slug)">Rain</a>
+                      }
+                      @if (climate.weather == 'snow') {
+                        <a    href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather,'locations/'+region.slug)">Snow</a>
+                      }
+                      @if (climate.weather == 'thunder') {
+                        <a href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather,'locations/'+region.slug)">Thunder</a>
+                      }
                     </li>
+                  }
                 </ul>
+              }
             </li>
+          }
         </ol>
-    </div>
+      </div>
     </div>
     <div class="col-md-10 mx-auto" style="margin-top:1.5rem;">
-        <form [formGroup]="pageForm" class="form-horizontal">
-          <div class="row">
-            <mat-form-field class="col-md-12" appearance="outline">
-              <mat-label>Filter...</mat-label>
-              <input matInput formControlName="filtertext">
-            </mat-form-field>
-          </div>
-        </form>
+      <form [formGroup]="pageForm" class="form-horizontal">
+        <div class="row">
+          <mat-form-field class="col-md-12" appearance="outline">
+            <mat-label>Filter...</mat-label>
+            <input matInput formControlName="filtertext">
+          </mat-form-field>
+        </div>
+      </form>
     </div>
-    <div id="{{area.slug}}" *ngFor="let area of region.areas">
+    @for (area of region.areas; track area) {
+      <div id="{{area.slug}}">
         <h2>{{area.name}}</h2>
-        <b *ngIf="area.chests">Chest:</b>
-        <ul *ngIf="area.chests">
-            <li *ngFor="let chest of area.chests">
-                <a *ngIf="chest.item" routerLink="/{{gameURL}}/items/{{chest.item.slug}}/{{language}}">{{chest.item.name}}</a>
-                <a *ngIf="chest.book" routerLink="/{{gameURL}}/items/books/{{chest.book.slug}}/{{language}}">{{chest.book.name}}</a>
-            </li>
-        </ul>
-        <ng-container *ngFor="let climate of area.climate">
-            <h3 id="{{area.slug}}-{{climate.weather}}" *ngIf="climate.weather == 'sun'"    >Sun</h3>
-            <h3 id="{{area.slug}}-{{climate.weather}}" *ngIf="climate.weather == 'rain'"   >Rain</h3>
-            <h3 id="{{area.slug}}-{{climate.weather}}" *ngIf="climate.weather == 'snow'"   >Snow</h3>
-            <h3 id="{{area.slug}}-{{climate.weather}}" *ngIf="climate.weather == 'thunder'">Thunder</h3>
-            <b *ngIf="climate.mons">Monsters:</b>
-            <ul *ngIf="climate.mons">
-                <li *ngFor="let mon of climate.mons">
-                    <a routerLink="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a>
+        @if (area.chests) {
+          <b>Chest:</b>
+        }
+        @if (area.chests) {
+          <ul>
+            @for (chest of area.chests; track chest) {
+              <li>
+                @if (chest.item) {
+                  <a routerLink="/{{gameURL}}/items/{{chest.item.slug}}/{{language}}">{{chest.item.name}}</a>
+                }
+                @if (chest.book) {
+                  <a routerLink="/{{gameURL}}/items/books/{{chest.book.slug}}/{{language}}">{{chest.book.name}}</a>
+                }
+              </li>
+            }
+          </ul>
+        }
+        @for (climate of area.climate; track climate) {
+          @if (climate.weather == 'sun') {
+            <h3 id="{{area.slug}}-{{climate.weather}}"    >Sun</h3>
+          }
+          @if (climate.weather == 'rain') {
+            <h3 id="{{area.slug}}-{{climate.weather}}"   >Rain</h3>
+          }
+          @if (climate.weather == 'snow') {
+            <h3 id="{{area.slug}}-{{climate.weather}}"   >Snow</h3>
+          }
+          @if (climate.weather == 'thunder') {
+            <h3 id="{{area.slug}}-{{climate.weather}}">Thunder</h3>
+          }
+          @if (climate.mons) {
+            <b>Monsters:</b>
+          }
+          @if (climate.mons) {
+            <ul>
+              @for (mon of climate.mons; track mon) {
+                <li>
+                  <a routerLink="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a>
                 </li>
+              }
             </ul>
-            <table class="tbl table-shrink border" >
-                <tr style="text-align:center;">
-                    <th>Tool</th>
-                    <th><i class="fas fa-star"></i></th>
-                    <th><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
-                    <th><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
-                </tr>
-                <ng-container *ngFor="let node of climate.nodes">
-                  <tr *ngIf="validNode(node)">
-                      <ng-template #typePopover>
-                          {{node.kind}}
-                      </ng-template>
-                      <td *ngIf="!node.kind.startsWith('major')" style="text-align: center;vertical-align: middle;">
-                        <i *ngIf="node.tool == 'HAND'"    class="atelier atelier-lg atelier-ryza2-tool-gather"     ></i>
-                        <i *ngIf="node.tool == 'ROD'"     class="atelier atelier-lg atelier-ryza2-tool-staff"      ></i>
-                        <i *ngIf="node.tool == 'FISH'"    class="atelier atelier-lg atelier-ryza2-tool-fishing-rod"></i>
-                        <i *ngIf="node.tool == 'SICKLE'"  class="atelier atelier-lg atelier-ryza2-tool-sickle"     ></i>
-                        <i *ngIf="node.tool == 'NET'"     class="atelier atelier-lg atelier-ryza2-tool-bug-net"    ></i>
-                        <i *ngIf="node.tool == 'PICKAXE'" class="atelier atelier-lg atelier-sophie2-tool-pickaxe"  ></i>
-                        <i *ngIf="node.tool == 'HAMMER'"  class="atelier atelier-lg atelier-sophie2-tool-hammer"   ></i>
-                        <i *ngIf="node.tool == 'SHOT'"    class="atelier atelier-lg atelier-sophie2-tool-slingshot"></i>
-                        <a (click)="$event.preventDefault()" [popover]="typePopover" popoverTitle="Gather Type" class="fas fa-plus-square"></a>
-                      </td>
-                      <td *ngIf="node.kind.startsWith('major')" style="text-align: center;vertical-align: middle;color:darkorange;">
-                        <i *ngIf="node.tool == 'HAND'"    class="atelier atelier-lg atelier-ryza2-tool-gather"     ></i>
-                        <i *ngIf="node.tool == 'ROD'"     class="atelier atelier-lg atelier-ryza2-tool-staff"      ></i>
-                        <i *ngIf="node.tool == 'FISH'"    class="atelier atelier-lg atelier-ryza2-tool-fishing-rod"></i>
-                        <i *ngIf="node.tool == 'SICKLE'"  class="atelier atelier-lg atelier-ryza2-tool-sickle"     ></i>
-                        <i *ngIf="node.tool == 'NET'"     class="atelier atelier-lg atelier-ryza2-tool-bug-net"    ></i>
-                        <i *ngIf="node.tool == 'PICKAXE'" class="atelier atelier-lg atelier-sophie2-tool-pickaxe"  ></i>
-                        <i *ngIf="node.tool == 'HAMMER'"  class="atelier atelier-lg atelier-sophie2-tool-hammer"   ></i>
-                        <i *ngIf="node.tool == 'SHOT'"    class="atelier atelier-lg atelier-sophie2-tool-slingshot"></i>
-                        <a (click)="$event.preventDefault()" [popover]="typePopover" popoverTitle="Gather Type" class="fas fa-plus-square"></a>
-                      </td>
-                    <td *ngFor="let item of node.items">
-                        <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a><br/>{{item.priority}}%
+          }
+          <table class="tbl table-shrink border" ><tbody>
+            <tr style="text-align:center;">
+              <th>Tool</th>
+              <th><i class="fas fa-star"></i></th>
+              <th><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
+              <th><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
+            </tr>
+            @for (node of climate.nodes; track node) {
+              @if (validNode(node)) {
+                <tr>
+                  <ng-template #typePopover>
+                    {{node.kind}}
+                  </ng-template>
+                  @if (!node.kind.startsWith('major')) {
+                    <td style="text-align: center;vertical-align: middle;">
+                      @if (node.tool == 'HAND') {
+                        <i    class="atelier atelier-lg atelier-ryza2-tool-gather"     ></i>
+                      }
+                      @if (node.tool == 'ROD') {
+                        <i     class="atelier atelier-lg atelier-ryza2-tool-staff"      ></i>
+                      }
+                      @if (node.tool == 'FISH') {
+                        <i    class="atelier atelier-lg atelier-ryza2-tool-fishing-rod"></i>
+                      }
+                      @if (node.tool == 'SICKLE') {
+                        <i  class="atelier atelier-lg atelier-ryza2-tool-sickle"     ></i>
+                      }
+                      @if (node.tool == 'NET') {
+                        <i     class="atelier atelier-lg atelier-ryza2-tool-bug-net"    ></i>
+                      }
+                      @if (node.tool == 'PICKAXE') {
+                        <i class="atelier atelier-lg atelier-sophie2-tool-pickaxe"  ></i>
+                      }
+                      @if (node.tool == 'HAMMER') {
+                        <i  class="atelier atelier-lg atelier-sophie2-tool-hammer"   ></i>
+                      }
+                      @if (node.tool == 'SHOT') {
+                        <i    class="atelier atelier-lg atelier-sophie2-tool-slingshot"></i>
+                      }
+                      <a (click)="$event.preventDefault()" [popover]="typePopover" popoverTitle="Gather Type" class="fas fa-plus-square"></a>
                     </td>
+                  }
+                  @if (node.kind.startsWith('major')) {
+                    <td style="text-align: center;vertical-align: middle;color:darkorange;">
+                      @if (node.tool == 'HAND') {
+                        <i    class="atelier atelier-lg atelier-ryza2-tool-gather"     ></i>
+                      }
+                      @if (node.tool == 'ROD') {
+                        <i     class="atelier atelier-lg atelier-ryza2-tool-staff"      ></i>
+                      }
+                      @if (node.tool == 'FISH') {
+                        <i    class="atelier atelier-lg atelier-ryza2-tool-fishing-rod"></i>
+                      }
+                      @if (node.tool == 'SICKLE') {
+                        <i  class="atelier atelier-lg atelier-ryza2-tool-sickle"     ></i>
+                      }
+                      @if (node.tool == 'NET') {
+                        <i     class="atelier atelier-lg atelier-ryza2-tool-bug-net"    ></i>
+                      }
+                      @if (node.tool == 'PICKAXE') {
+                        <i class="atelier atelier-lg atelier-sophie2-tool-pickaxe"  ></i>
+                      }
+                      @if (node.tool == 'HAMMER') {
+                        <i  class="atelier atelier-lg atelier-sophie2-tool-hammer"   ></i>
+                      }
+                      @if (node.tool == 'SHOT') {
+                        <i    class="atelier atelier-lg atelier-sophie2-tool-slingshot"></i>
+                      }
+                      <a (click)="$event.preventDefault()" [popover]="typePopover" popoverTitle="Gather Type" class="fas fa-plus-square"></a>
+                    </td>
+                  }
+                  @for (item of node.items; track item) {
+                    <td>
+                      <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a><br/>{{item.priority}}%
+                    </td>
+                  }
                 </tr>
-                </ng-container>
-            </table>
-        </ng-container>
-    </div>
-</div>
+              }
+            }
+          </tbody></table>
+        }
+      </div>
+    }
+  </div>
+}

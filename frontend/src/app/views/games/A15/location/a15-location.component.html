@@ -1,85 +1,124 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
 
-<ng-container *ngIf="data as location">
-<Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Location: '+location.name"></Breadcrumb>
-<h1>{{location.name}}</h1>
-    <div class="table-of-contents">
-        <b>Table of Contents</b>
-        <ol>
-           <ng-container *ngFor="let area of location.areas">
-            <li *ngIf="!area.subarea" >
-                <a href="/{{gameURL}}/locations/{{location.slugname}}/{{language}}#{{area.slugname}}"
-                  (click)="$event.preventDefault();scroll(area.slugname, location.slugname)">
-                  {{area.name}}
-                </a>
-            </li>
-          </ng-container>
-        </ol>
-    </div>
-
-<div (click)="historyService.hrefClicked($event);" [innerHTML]="location.note"></div>
-
-<p *ngIf="location.grade"><b>Grade Values from Relic Farming:</b> {{location.grade}}</p>
-
-<table class="tbl border table-shrink">
-  <tr class="table-dark-center">
-    <th>Relic</th>
-    <th>Disassembly</th>
-    <th>Area</th>
-  </tr>
-  <tr *ngFor="let relic of location.relic_set">
-    <td><a routerLink="/{{gameURL}}/items/{{relic.item.slugname}}/{{language}}">{{relic.item.name}}</a></td>
-    <td><ul class="hide-bullets"><li *ngFor="let d of relic.item.disassembly_set[0].dis"><a routerLink="/{{gameURL}}/items/{{d.slugname}}/{{language}}">{{d.name}}</a></li></ul></td>
-    <td><ul class="hide-bullets"><li *ngFor="let a of relic.area">{{a.name}}</li></ul></td>
-  </tr>
-</table>
-
-<table class="tbl border table-shrink">
-  <tr class="table-dark-center">
-    <th>Strong Monsters</th>
-  </tr>
-  <tr>
-    <td>
-    <ul class="hide-bullets">
-     <div style="column-count: 3;">
-      <li *ngFor="let mon of location.strong">
-        <a routerLink="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">{{mon.name}}</a> ({{mon.level}})
-      </li>
-      </div>
-    </ul>
-    </td>
-  </tr>
-</table> 
-
-<ng-container *ngFor="let area of location.areas">
-  <h2 *ngIf="!area.subarea" id="{{area.slugname}}">{{area.name}}</h2>
-  <h3 *ngIf="area.subarea">{{area.subarea}}</h3>
-  <div [innerHTML]="area.note"></div>
-  <table class="tbl border table-shrink">
+@if (data; as location) {
+  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Location: '+location.name"></Breadcrumb>
+  <h1>{{location.name}}</h1>
+  <div class="table-of-contents">
+    <b>Table of Contents</b>
+    <ol>
+      @for (area of location.areas; track area) {
+        @if (!area.subarea) {
+          <li >
+            <a href="/{{gameURL}}/locations/{{location.slugname}}/{{language}}#{{area.slugname}}"
+              (click)="$event.preventDefault();scroll(area.slugname, location.slugname)">
+              {{area.name}}
+            </a>
+          </li>
+        }
+      }
+    </ol>
+  </div>
+  <div (click)="historyService.hrefClicked($event);" [innerHTML]="location.note"></div>
+  @if (location.grade) {
+    <p><b>Grade Values from Relic Farming:</b> {{location.grade}}</p>
+  }
+  <table class="tbl border table-shrink"><tbody>
     <tr class="table-dark-center">
-      <th *ngIf="area.items" >Items</th>
-      <th *ngIf="area.monsters">Monsters</th>
-      <th *ngIf="area.fieldevent">Field Effects</th>
+      <th>Relic</th>
+      <th>Disassembly</th>
+      <th>Area</th>
+    </tr>
+    @for (relic of location.relic_set; track relic) {
+      <tr>
+        <td><a routerLink="/{{gameURL}}/items/{{relic.item.slugname}}/{{language}}">{{relic.item.name}}</a></td>
+        <td><ul class="hide-bullets">@for (d of relic.item.disassembly_set[0].dis; track d) {
+          <li><a routerLink="/{{gameURL}}/items/{{d.slugname}}/{{language}}">{{d.name}}</a></li>
+        }</ul></td>
+        <td><ul class="hide-bullets">@for (a of relic.area; track a) {
+          <li>{{a.name}}</li>
+        }</ul></td>
+      </tr>
+    }
+  </tbody></table>
+  <table class="tbl border table-shrink"><tbody>
+    <tr class="table-dark-center">
+      <th>Strong Monsters</th>
     </tr>
     <tr>
-      <td *ngIf="area.items">
+      <td>
         <ul class="hide-bullets">
-          <li *ngFor="let it of area.items"><a routerLink="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a></li>
-          <ng-container *ngIf="area.rare"><li *ngFor="let it of area.rare"><a routerLink="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a> (Rare)</li></ng-container>
-          <ng-container *ngIf="area.maxitem"><li *ngFor="let it of area.maxitem"><a routerLink="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a> (Max)</li></ng-container>
-        </ul>
-      </td>
-      <td *ngIf="area.monsters">
-        <ul class="hide-bullets">
-          <li *ngFor="let it of area.monsters"><a routerLink="/{{gameURL}}/monsters/{{it.slugname}}/{{language}}">{{it.name}}</a></li>
-        </ul>
-      </td>
-      <td *ngIf="area.fieldevent">
-        <ul class="hide-bullets">
-          <li *ngFor="let it of area.fieldevent">{{it.name}}</li>
+          <div style="column-count: 3;">
+            @for (mon of location.strong; track mon) {
+              <li>
+                <a routerLink="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">{{mon.name}}</a> ({{mon.level}})
+              </li>
+            }
+          </div>
         </ul>
       </td>
     </tr>
-  </table>
-</ng-container>
-</ng-container>
+  </tbody></table>
+  @for (area of location.areas; track area) {
+    @if (!area.subarea) {
+      <h2 id="{{area.slugname}}">{{area.name}}</h2>
+    }
+    @if (area.subarea) {
+      <h3>{{area.subarea}}</h3>
+    }
+    <div [innerHTML]="area.note"></div>
+    <table class="tbl border table-shrink"><tbody>
+      <tr class="table-dark-center">
+        @if (area.items) {
+          <th >Items</th>
+        }
+        @if (area.monsters) {
+          <th>Monsters</th>
+        }
+        @if (area.fieldevent) {
+          <th>Field Effects</th>
+        }
+      </tr>
+      <tr>
+        @if (area.items) {
+          <td>
+            <ul class="hide-bullets">
+              @for (it of area.items; track it) {
+                <li><a routerLink="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a></li>
+              }
+              @if (area.rare) {
+                @for (it of area.rare; track it) {
+                  <li><a routerLink="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a> (Rare)</li>
+                }
+              }
+              @if (area.maxitem) {
+                @for (it of area.maxitem; track it) {
+                  <li><a routerLink="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a> (Max)</li>
+                }
+              }
+            </ul>
+          </td>
+        }
+        @if (area.monsters) {
+          <td>
+            <ul class="hide-bullets">
+              @for (it of area.monsters; track it) {
+                <li><a routerLink="/{{gameURL}}/monsters/{{it.slugname}}/{{language}}">{{it.name}}</a></li>
+              }
+            </ul>
+          </td>
+        }
+        @if (area.fieldevent) {
+          <td>
+            <ul class="hide-bullets">
+              @for (it of area.fieldevent; track it) {
+                <li>{{it.name}}</li>
+              }
+            </ul>
+          </td>
+        }
+      </tr>
+    </tbody></table>
+  }
+}

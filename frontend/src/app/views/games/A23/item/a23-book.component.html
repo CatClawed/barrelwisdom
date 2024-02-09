@@ -1,27 +1,39 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
 
-<ng-container *ngIf="data as item">
-<Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Items', '/'+gameURL+'/items/'+language]]" [current]="'Book: '+item.name"></Breadcrumb>
-<div class="mx-auto row spacer">
-  <div class="{{colset}} card card-body">
-    <h4 class="card-title card-icon-space">{{item.name}}</h4>
+@if (data; as item) {
+  @if (showNav) {
+    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Items', '/'+gameURL+'/items/'+language]]" [current]="'Book: '+item.name"></Breadcrumb>
+  }
+  <div class="mx-auto row spacer">
+    <div class="{{colset}} card card-body">
+      <h4 class="card-title card-icon-space">{{item.name}}</h4>
       <div class="card-icon-position">
         <i  class="atelier atelier-np atelier-ryza2-book"></i>
-        <ng-container *ngIf="item.isDLC">
+        @if (item.isDLC) {
           <br /><span class="badge bg-secondary">DLC</span>
-        </ng-container>
+        }
       </div>
-    <div class="card-item-display">
-       <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
-    </div>
-    <div class="card-text">
+      <div class="card-item-display">
+        <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
+      </div>
+      <div class="card-text">
         <b>Item:</b>
         <ul>
-            <li *ngFor="let it of item.items"><a routerLink="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a></li>
+          @for (it of item.items; track it) {
+            <li><a routerLink="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a></li>
+          }
         </ul>
-        <p><b>Acquisition: </b>{{item.shop}} {{item.note}}<span *ngIf="item.chest">{{item.chest[0].region}}<span *ngIf="item.chest[0].subregion"> &gt; </span>{{item.chest[0].subregion}}</span></p>
+        <p><b>Acquisition: </b>{{item.shop}} {{item.note}}@if (item.chest) {
+        <span>{{item.chest[0].region}}@if (item.chest[0].subregion) {
+          <span> &gt; </span>
+        }{{item.chest[0].subregion}}</span>
+      }</p>
     </div>
   </div>
-  <div *ngIf="showNav" class="col-md-3" ></div>
+  @if (showNav) {
+    <div class="col-md-3" ></div>
+  }
 </div>
-</ng-container>
+}

@@ -4,11 +4,11 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /backend
 COPY requirements.txt /backend
 RUN \
- apk add --no-cache python3 postgresql-libs libmemcached-dev zlib-dev && \
- apk add --no-cache --virtual .build-deps gcc python3-dev musl-dev postgresql-dev libffi-dev && \
+ apk add --no-cache python3 postgresql-libs libmemcached-dev && \
+ apk add --no-cache --virtual .build-deps gcc python3-dev musl-dev postgresql-dev libffi-dev zlib-dev  && \
  python3 -m pip install --upgrade pip && \
  python3 -m pip install -r requirements.txt --no-cache-dir && \
- python3 -m pip install "psycopg[binary]" && \
+ python3 -m pip install "psycopg[binary]" pip-tools && \
  apk --purge del .build-deps
 COPY . /backend
 CMD python manage.py runserver 0.0.0.0:8000

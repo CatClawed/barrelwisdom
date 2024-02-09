@@ -1,20 +1,24 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
 
-<ng-container *ngIf="!error">
-<Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Units"></Breadcrumb>
-<h1>Units</h1>
-<ng-container *ngIf="data as units">
-  <div *ngFor="let unit of units" class="row spacer">
-    <div class="card card-body col-md-8" style="margin-left:auto;margin-right:auto;">
-      <h4>{{unit.name}}</h4>
-      <p>{{unit.desc}}</p>
-      <div class="flex">
-        <img src="/media/games/second-light/characters/{{unit.char1}}.webp" alt="" style="max-width:25%">
-        <img src="/media/games/second-light/characters/{{unit.char2}}.webp" alt="" style="max-width:25%">
-        <img src="/media/games/second-light/characters/{{unit.char3}}.webp" alt="" style="max-width:25%">
-        <img src="/media/games/second-light/characters/{{unit.char4}}.webp" alt="" style="max-width:25%">
+@if (!error) {
+  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Units"></Breadcrumb>
+  <h1>Units</h1>
+  @if (data; as units) {
+    @for (unit of units; track unit) {
+      <div class="row spacer">
+        <div class="card card-body col-md-8" style="margin-left:auto;margin-right:auto;">
+          <h4>{{unit.name}}</h4>
+          <p>{{unit.desc}}</p>
+          <div class="flex">
+            <img src="/media/games/second-light/characters/{{unit.char1}}.webp" alt="" style="max-width:25%">
+            <img src="/media/games/second-light/characters/{{unit.char2}}.webp" alt="" style="max-width:25%">
+            <img src="/media/games/second-light/characters/{{unit.char3}}.webp" alt="" style="max-width:25%">
+            <img src="/media/games/second-light/characters/{{unit.char4}}.webp" alt="" style="max-width:25%">
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</ng-container>
-</ng-container>
+    }
+  }
+}

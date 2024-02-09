@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { ErrorCodeService } from "@app/services/errorcode.service";
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   standalone: true,
   templateUrl: 'error.component.html',
   selector: 'Error',
-  imports: [CommonModule]
+  imports: []
 })
 export class ErrorComponent {
 

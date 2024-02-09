@@ -1,15 +1,15 @@
-<ng-container *ngIf="errorCode != 'undefined'">
-<div class="flex-row align-items-center" style="min-height:90vh;display:flex;">
+@if (errorCode != 'undefined') {
+  <div class="flex-row align-items-center" style="min-height:90vh;display:flex;">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="row">
-              <div class="col" >
-                <h1 style="float:right;height:min-content;width:min-content;font-size:calc(4rem + 0.1vw) !important;font-weight:300;">{{errorCode}}</h1>
-              </div>
-              <div class="col">
-                <h4 class="pt-3">{{errorVars[0]}}</h4>
-                <p class="text-muted">{{errorVars[1]}}</p>
+          <div class="row">
+            <div class="col" >
+              <h1 style="float:right;height:min-content;width:min-content;font-size:calc(4rem + 0.1vw) !important;font-weight:300;">{{errorCode}}</h1>
+            </div>
+            <div class="col">
+              <h4 class="pt-3">{{errorVars[0]}}</h4>
+              <p class="text-muted">{{errorVars[1]}}</p>
             </div>
           </div>
         </div>
@@ -19,4 +19,4 @@
       </div>
     </div>
   </div>
-  </ng-container>
+}

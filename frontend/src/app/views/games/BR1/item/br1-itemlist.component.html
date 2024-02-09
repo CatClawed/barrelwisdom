@@ -1,52 +1,86 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
-<ng-container *ngIf="!error">
-   <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Items"></Breadcrumb>
-   <h1>Items</h1>
-   <div class="col-md-10 mx-auto">
-      <form [formGroup]="pageForm" class="form-horizontal">
-         <div class="row">
-            <mat-form-field class="col-md-12" appearance="outline">
-               <mat-label>Filter...</mat-label>
-               <input matInput formControlName="filtertext">
-            </mat-form-field>
-         </div>
-      </form>
-   </div>
-   <div class="item-grid">
-      <div *ngFor="let it of filteredItems | async; trackBy:identify2" class="card card-body">
-         <div class="flex">
-            <h4 class="card-title">
-               <a (click)="openModal(itemModal, it.slugname, $event);" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a>    
-            </h4>
-            <b *ngIf="it.kind" style="padding-right:0.5em;">{{it.kind}}</b>
-         </div>
-         <p>{{it.description}}</p>
-         <p *ngIf="it.effect"><b>Effect: </b>{{it.effect}}</p>
-         <p *ngIf="it.acquisition"><b>Acquisition: </b>{{it.acquisition}}</p>
-         <b *ngIf="it.missions">Missions:</b>
-         <ul *ngIf="it.missions">
-            <li *ngFor="let miss of it.missions"><a routerLink="/{{gameURL}}/missions/{{language}}" fragment="{{miss.slugname}}">{{miss.name}}</a></li>
-         </ul>
-         <b *ngIf="it.locations">Locations:</b>
-         <ul *ngIf="it.locations">
-            <li *ngFor="let loc of it.locations">{{loc.name}}</li>
-         </ul>
-         <b *ngIf="it.demons">Demons:</b>
-         <ul *ngIf="it.demons">
-            <li *ngFor="let demon of it.demons"><a routerLink="/{{gameURL}}/demons/{{demon.slugname}}/{{language}}">{{demon.name}}</a></li>
-         </ul>
-         <b *ngIf="it.ingredient_set">Craft:</b>
-         <ul *ngIf="it.ingredient_set">
-            <li *ngFor="let ing of it.ingredient_set"><a routerLink="/{{gameURL}}/items/{{ing.item.slugname}}/{{language}}">{{ing.item.name}} x{{ing.num}}</a></li>
-         </ul>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
+@if (!error) {
+  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Items"></Breadcrumb>
+  <h1>Items</h1>
+  <div class="col-md-10 mx-auto">
+    <form [formGroup]="pageForm" class="form-horizontal">
+      <div class="row">
+        <mat-form-field class="col-md-12" appearance="outline">
+          <mat-label>Filter...</mat-label>
+          <input matInput formControlName="filtertext">
+        </mat-form-field>
       </div>
-    </div>
-<ng-template #itemModal>
-  <div class="modal-body">
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <i class="fas fa-times-circle"></i>
-    </button>
-      <br1-item inputSlug="{{selected}}" [showNav]="false"></br1-item>
+    </form>
   </div>
-</ng-template>
-</ng-container>
+  <div class="item-grid">
+    @for (it of filteredItems | async; track identify2($index, it)) {
+      <div class="card card-body">
+        <div class="flex">
+          <h4 class="card-title">
+            <a (click)="openModal(itemModal, it.slugname, $event);" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a>
+          </h4>
+          @if (it.kind) {
+            <b style="padding-right:0.5em;">{{it.kind}}</b>
+          }
+        </div>
+        <p>{{it.description}}</p>
+        @if (it.effect) {
+          <p><b>Effect: </b>{{it.effect}}</p>
+        }
+        @if (it.acquisition) {
+          <p><b>Acquisition: </b>{{it.acquisition}}</p>
+        }
+        @if (it.missions) {
+          <b>Missions:</b>
+        }
+        @if (it.missions) {
+          <ul>
+            @for (miss of it.missions; track miss) {
+              <li><a routerLink="/{{gameURL}}/missions/{{language}}" fragment="{{miss.slugname}}">{{miss.name}}</a></li>
+            }
+          </ul>
+        }
+        @if (it.locations) {
+          <b>Locations:</b>
+        }
+        @if (it.locations) {
+          <ul>
+            @for (loc of it.locations; track loc) {
+              <li>{{loc.name}}</li>
+            }
+          </ul>
+        }
+        @if (it.demons) {
+          <b>Demons:</b>
+        }
+        @if (it.demons) {
+          <ul>
+            @for (demon of it.demons; track demon) {
+              <li><a routerLink="/{{gameURL}}/demons/{{demon.slugname}}/{{language}}">{{demon.name}}</a></li>
+            }
+          </ul>
+        }
+        @if (it.ingredient_set) {
+          <b>Craft:</b>
+        }
+        @if (it.ingredient_set) {
+          <ul>
+            @for (ing of it.ingredient_set; track ing) {
+              <li><a routerLink="/{{gameURL}}/items/{{ing.item.slugname}}/{{language}}">{{ing.item.name}} x{{ing.num}}</a></li>
+            }
+          </ul>
+        }
+      </div>
+    }
+  </div>
+  <ng-template #itemModal>
+    <div class="modal-body">
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <i class="fas fa-times-circle"></i>
+      </button>
+      <br1-item inputSlug="{{selected}}" [showNav]="false"></br1-item>
+    </div>
+  </ng-template>
+}

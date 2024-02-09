@@ -1,74 +1,104 @@
 <div style="margin-top:1em" class="col-md-6 mx-auto spacer">
-    <div class="card card-body">
-        <h1>Register</h1>
-        <p *ngIf="!hasInvite">You need a valid invite to join this party; only the admin hands those out. We're looking for experienced and trustworthy folks.</p>
-        <form *ngIf="hasInvite" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-            <div class="form-group">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span style="height:100%;" class="input-group-text"><i class="fas fa-user"></i></span>
-                    </div>
-                    <input type="text" formControlName="username" class="form-control"
-                        placeholder="Username" autocomplete="username"
-                        [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                        <div *ngIf="f.username.errors.required">Username is required</div>
-                    </div>
-                </div>
+  <div class="card card-body">
+    <h1>Register</h1>
+    @if (!hasInvite) {
+      <p>You need a valid invite to join this party; only the admin hands those out. We're looking for experienced and trustworthy folks.</p>
+    }
+    @if (hasInvite) {
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span style="height:100%;" class="input-group-text"><i class="fas fa-user"></i></span>
             </div>
-            <div class="form-group">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span style="height:100%;" class="input-group-text">&#64;</span>
-                    </div>
-                    <input type="text" formControlName="email" class="form-control"
-                        placeholder="Email" autocomplete="email"
-                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                        <div *ngIf="f.email.errors.required">Email is required</div>
-                        <div *ngIf="f.email.errors.email">Does not appear to be an email</div>
-                    </div>
-                </div>
+            <input type="text" formControlName="username" class="form-control"
+              placeholder="Username" autocomplete="username"
+              [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+            @if (submitted && f.username.errors) {
+              <div class="invalid-feedback">
+                @if (f.username.errors.required) {
+                  <div>Username is required</div>
+                }
+              </div>
+            }
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span style="height:100%;" class="input-group-text">&#64;</span>
             </div>
-            <div class="form-group">
-                <div class="input-group mb-4">
-                    <div class="input-group-prepend">
-                        <span style="height:100%;" class="input-group-text"><i class="fas fa-lock"></i></span>
-                    </div>
-                    <input type="password" formControlName="password" class="form-control"
-                        placeholder="Password"
-                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                        <div *ngIf="f.password.errors.required">Password is required</div>
-                        <div *ngIf="f.password.errors.minlength">8 characters or more</div>
-                    </div>
-                </div>
+            <input type="text" formControlName="email" class="form-control"
+              placeholder="Email" autocomplete="email"
+              [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+            @if (submitted && f.email.errors) {
+              <div class="invalid-feedback">
+                @if (f.email.errors.required) {
+                  <div>Email is required</div>
+                }
+                @if (f.email.errors.email) {
+                  <div>Does not appear to be an email</div>
+                }
+              </div>
+            }
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group mb-4">
+            <div class="input-group-prepend">
+              <span style="height:100%;" class="input-group-text"><i class="fas fa-lock"></i></span>
             </div>
-            <div class="form-group">
-                <div class="input-group mb-4">
-                    <div class="input-group-prepend">
-                        <span style="height:100%;" class="input-group-text"><i class="fas fa-lock"></i></span>
-                    </div>
-                    <input type="password" formControlName="confirmPassword" class="form-control"
-                        placeholder="Repeat password"
-                        [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
-                    <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
-                        <div *ngIf="f.confirmPassword.errors.required">Password is required</div>
-                        <div *ngIf="f.confirmPassword.errors.minlength">8 characters or more</div>
-                    </div>
-                </div>
+            <input type="password" formControlName="password" class="form-control"
+              placeholder="Password"
+              [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+            @if (submitted && f.password.errors) {
+              <div class="invalid-feedback">
+                @if (f.password.errors.required) {
+                  <div>Password is required</div>
+                }
+                @if (f.password.errors.minlength) {
+                  <div>8 characters or more</div>
+                }
+              </div>
+            }
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group mb-4">
+            <div class="input-group-prepend">
+              <span style="height:100%;" class="input-group-text"><i class="fas fa-lock"></i></span>
             </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-6">
-                        <button [disabled]="loading" class="btn btn-primary">
-                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                            Login
-                        </button>
-                        <div *ngIf="errorMsg" class="text-danger">{{errorMsg}}</div>
-                    </div>
-                </div>
+            <input type="password" formControlName="confirmPassword" class="form-control"
+              placeholder="Repeat password"
+              [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+            @if (submitted && f.confirmPassword.errors) {
+              <div class="invalid-feedback">
+                @if (f.confirmPassword.errors.required) {
+                  <div>Password is required</div>
+                }
+                @if (f.confirmPassword.errors.minlength) {
+                  <div>8 characters or more</div>
+                }
+              </div>
+            }
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-6">
+              <button [disabled]="loading" class="btn btn-primary">
+                @if (loading) {
+                  <span class="spinner-border spinner-border-sm mr-1"></span>
+                }
+                Login
+              </button>
+              @if (errorMsg) {
+                <div class="text-danger">{{errorMsg}}</div>
+              }
             </div>
-        </form>
-    </div>
+          </div>
+        </div>
+      </form>
+    }
+  </div>
 </div>

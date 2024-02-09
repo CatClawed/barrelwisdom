@@ -3,4 +3,5 @@ WORKDIR /frontend
 COPY package*.json /frontend
 RUN npm i --silent
 COPY . /frontend
+#CMD npm run dev:ssr
 CMD npm start

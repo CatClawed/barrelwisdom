@@ -1,0 +1,12 @@
+# requirements.in
+autopep8
+argon2-cffi
+cryptography
+django
+django-debug-toolbar
+django-filter
+dj-rest-auth
+djangorestframework
+djangorestframework-simplejwt
+gunicorn
+pylibmc

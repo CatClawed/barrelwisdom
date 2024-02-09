@@ -1,41 +1,58 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
 
-<ng-container *ngIf="data as location">
-<Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Location: '+location.name"></Breadcrumb>
-<h1>{{location.name}}</h1>
-    <div class="table-of-contents">
-        <b>Table of Contents</b>
-        <ol>
-            <li *ngFor="let area of location.fields">
-                <a href="/{{gameURL}}/locations/{{location.slugname}}/{{language}}#{{area.slugname}}"
-                  (click)="$event.preventDefault();scroll(area.slugname, location.slugname)">
-                  {{area.name}}
-                </a>
-            </li>
-        </ol>
-    </div>
-
-<ng-container *ngFor="let area of location.fields">
-  <h2 id="{{area.slugname}}">{{area.name}}</h2>
-  <p *ngIf="area.unlock"><b>Unlock:</b> {{area.unlock}}</p>
-  <p>{{area.note}}</p>
-  <table class="tbl border table-shrink">
-    <tr class="table-dark-center">
-      <th *ngIf="area.ingredients" >Items</th>
-      <th *ngIf="area.monsters">Monsters</th>
-    </tr>
-    <tr>
-      <td *ngIf="area.ingredients">
-        <ul class="hide-bullets">
-          <li *ngFor="let it of area.ingredients"><a routerLink="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a></li>
-        </ul>
-      </td>
-      <td *ngIf="area.monsters">
-        <ul class="hide-bullets">
-          <li *ngFor="let it of area.monsters"><a routerLink="/{{gameURL}}/monsters/{{it.slugname}}/{{language}}">{{it.name}}</a></li>
-        </ul>
-      </td>
-    </tr>
-  </table>
-</ng-container>
-</ng-container>
+@if (data; as location) {
+  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Location: '+location.name"></Breadcrumb>
+  <h1>{{location.name}}</h1>
+  <div class="table-of-contents">
+    <b>Table of Contents</b>
+    <ol>
+      @for (area of location.fields; track area) {
+        <li>
+          <a href="/{{gameURL}}/locations/{{location.slugname}}/{{language}}#{{area.slugname}}"
+            (click)="$event.preventDefault();scroll(area.slugname, location.slugname)">
+            {{area.name}}
+          </a>
+        </li>
+      }
+    </ol>
+  </div>
+  @for (area of location.fields; track area) {
+    <h2 id="{{area.slugname}}">{{area.name}}</h2>
+    @if (area.unlock) {
+      <p><b>Unlock:</b> {{area.unlock}}</p>
+    }
+    <p>{{area.note}}</p>
+    <table class="tbl border table-shrink"><tbody>
+      <tr class="table-dark-center">
+        @if (area.ingredients) {
+          <th >Items</th>
+        }
+        @if (area.monsters) {
+          <th>Monsters</th>
+        }
+      </tr>
+      <tr>
+        @if (area.ingredients) {
+          <td>
+            <ul class="hide-bullets">
+              @for (it of area.ingredients; track it) {
+                <li><a routerLink="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a></li>
+              }
+            </ul>
+          </td>
+        }
+        @if (area.monsters) {
+          <td>
+            <ul class="hide-bullets">
+              @for (it of area.monsters; track it) {
+                <li><a routerLink="/{{gameURL}}/monsters/{{it.slugname}}/{{language}}">{{it.name}}</a></li>
+              }
+            </ul>
+          </td>
+        }
+      </tr>
+    </tbody></table>
+  }
+}

@@ -1,35 +1,45 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
-<ng-container *ngIf="!error">
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
+@if (!error) {
   <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Research"></Breadcrumb>
   <h1>Research</h1>
-</ng-container>
-<ng-container *ngIf="data">
-<mat-tab-group>
-  <mat-tab label="{{kind[language][0]}}">
-    <table class="tbl spacer" style="margin-top:1rem;">
-      <tr class="table-dark-center"><th colspan="2">{{kind[language][0]}}</th></tr>
-      <tr *ngFor="let it of [].constructor(100); let i = index;">
-        <td>{{i+1}}</td>
-        <td>
-          <p><b>{{data[i].name}}: </b> {{data[i].desc}} ({{data[i].val/100}}%)</p>
-          <p *ngIf="data[i].req"><b>Requirement: </b>{{data[i].req}}</p>
-          <p><b>Cole: </b> {{data[i].cole}}</p>
-        </td>
-      </tr>
-    </table>
-  </mat-tab>
-  <mat-tab label="{{kind[language][1]}}">
-    <table class="tbl spacer" style="margin-top:1rem;">
-      <tr class="table-dark-center"><th colspan="2">{{kind[language][1]}}</th></tr>
-      <tr *ngFor="let it of [].constructor(100); let i = index;">
-        <td>{{i+1}}</td>
-        <td>
-          <p><b>{{data[i+100].name}}: </b> {{data[i+100].desc}} ({{data[i+100].val/100}}%)</p>
-          <p *ngIf="data[i+100].req"><b>Requirement: </b>{{data[i+100].req}}</p>
-          <p><b>Cole: </b> {{data[i+100].cole}}</p>
-        </td>
-      </tr>
-    </table>
-  </mat-tab>
-</mat-tab-group>
-</ng-container>
+}
+@if (data) {
+  <mat-tab-group>
+    <mat-tab label="{{kind[language][0]}}">
+      <table class="tbl spacer" style="margin-top:1rem;"><tbody>
+        <tr class="table-dark-center"><th colspan="2">{{kind[language][0]}}</th></tr>
+        @for (it of [].constructor(100); track it; let i = $index) {
+          <tr>
+            <td>{{i+1}}</td>
+            <td>
+              <p><b>{{data[i].name}}: </b> {{data[i].desc}} ({{data[i].val/100}}%)</p>
+              @if (data[i].req) {
+                <p><b>Requirement: </b>{{data[i].req}}</p>
+              }
+              <p><b>Cole: </b> {{data[i].cole}}</p>
+            </td>
+          </tr>
+        }
+      </tbody></table>
+    </mat-tab>
+    <mat-tab label="{{kind[language][1]}}">
+      <table class="tbl spacer" style="margin-top:1rem;"><tbody>
+        <tr class="table-dark-center"><th colspan="2">{{kind[language][1]}}</th></tr>
+        @for (it of [].constructor(100); track it; let i = $index) {
+          <tr>
+            <td>{{i+1}}</td>
+            <td>
+              <p><b>{{data[i+100].name}}: </b> {{data[i+100].desc}} ({{data[i+100].val/100}}%)</p>
+              @if (data[i+100].req) {
+                <p><b>Requirement: </b>{{data[i+100].req}}</p>
+              }
+              <p><b>Cole: </b> {{data[i+100].cole}}</p>
+            </td>
+          </tr>
+        }
+      </tbody></table>
+    </mat-tab>
+  </mat-tab-group>
+}
