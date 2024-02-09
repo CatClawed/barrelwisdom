@@ -749,6 +749,36 @@ def createUpdate():
 
     print('Update Created')
 
+def print_skill_data():
+    skills = Skill.objects.all()
+
+    attackers = []
+    defenders = []
+    supporters = []
+    breakers = []
+
+    for skill in skills:
+        arr = [skill.char.name.text_en, skill.char.role.text_en, skill.name.text_en if skill.char.gbl else skill.name.text_ja, skill.pow5, skill.break5]
+        match skill.char.role.slug:
+            case 'attacker':
+                attackers.append(arr)
+            case 'defender':
+                defenders.append(arr)
+            case 'supporter':
+                supporters.append(arr)
+            case _:
+                breakers.append(arr)
+
+    print('Name\tRole\tSkill\tPower\tStun')
+    for o in attackers:
+        print(f'{o[0]}\t{o[1]}\t{o[2]}\t{o[3]}\t{o[4]}\t')
+    for o in defenders:
+        print(f'{o[0]}\t{o[1]}\t{o[2]}\t{o[3]}\t{o[4]}\t')
+    for o in supporters:
+        print(f'{o[0]}\t{o[1]}\t{o[2]}\t{o[3]}\t{o[4]}\t')
+    for o in breakers:
+        print(f'{o[0]}\t{o[1]}\t{o[2]}\t{o[3]}\t{o[4]}\t')
+
 """
 Checklist
 1. createUpdate

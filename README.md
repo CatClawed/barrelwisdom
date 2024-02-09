@@ -9,14 +9,7 @@ To see how this is deployed and updated in a real world environment, see the [de
 
 ## Docker usage
 
-Most matters will be taken care of with:
-
-```bash
-docker compose build
-docker compose up
-```
-
-But further backend setup is necessary.
+Docker is strongly suggested. Most things will be taken care of for you. If you do not wish to use docker, I would still recommend looking at the dockerfiles to see what commands they run.
 
 Create `docker/.env` with the following format:
 
@@ -35,7 +28,14 @@ In `backend`, you will also want to run:
 ssh-keygen -t rsa -b 4096 -m PEM -f jwt-key
 ```
 
-Finally, run the containers. To setup the database:
+With that backend setup done, you can run:
+
+```bash
+docker compose build
+docker compose up
+```
+
+To setup the database:
 
 ```bash
 docker exec -it backend bash
@@ -63,12 +63,11 @@ docker cp dumpfile postgres:/home
 psql -U [username] barrelwisdom < home/dumpfile
 ```
 
-## Build frontend
+### Build frontend
 
 Be sure backend is running, as prerendering requires DB access.
 
 ```bash
-docker exec -it frontend bash
 npm run prerender
 ```
 
@@ -79,31 +78,9 @@ docker build -t frontend_prod -f Dockerfile.prod .
 docker tag frontend_prod barrelwisdom/frontend:tag
 ```
 
-## Non-Docker Notes
+### Other Comamands
 
-### Frontend
-
-1. Install NodeJS
-
-Use latest LTS version. Install it from [official site](https://nodejs.org/en/) or use your package manager, such as [Homebrew](https://brew.sh/)
-
-2. Install dependencies
-
-```bash
-npm install
-# or
-yarn install
-```
-
-3. Install Angular CLI
-
-```bash
-npm install -g @angular/cli
-```
-
-4. Common commands
-
-After installing Angular CLI, `ng` commands will be available and you will be able to:
+Angular commands
 
 ```bash
 # Begin development
@@ -111,59 +88,11 @@ npm start
 
 # Begin development in server-side rendering mode
 npm run dev:ssr
-
-# Production build
-npm run prerender
 ```
 
-### Backend
-
-1. Install python and relevant tools
-
-You need [Python 3](https://www.python.org/downloads/) or [Miniconda with Python 3](https://docs.conda.io/en/latest/miniconda.html), your choice. Should be `3.11` and up.
+Django model changes.
 
 ```bash
-# On Linux
-sudo apt install python3-dev libpq-dev memcached git
-
-# On Mac
-brew install python@3.9 libmemcached
-```
-
-2. Prepare a database
-
-Install [PostgreSQL](https://www.postgresql.org/download/). On MacOS I recommend using[Postgres.app](https://postgresapp.com/) since it's much easier to get it up and running.
-
-3. Use `virtualenv` or `venv` for current shell:
-
-```bash
-pip3 install virtualenv
-virtualenv env
-# or
-python3 -m venv /your/path/here
-source /your/path/here/bin/activate
-```
-
-Then install packages as listed in `requirements.txt`:
-
-```bash
-pip install -r requirements.txt
-```
-
-5. Create secrets.json and jwt-key, same as in Docker section
-
-6. Common command usage
-
-```bash
-# Run this first. Copies existing migrations.
-# Run it after using makemigrations as well
+python manage.py makemigrations names_here
 python manage.py migrate
-# Run this when you make changes to the database
-python manage.py makemigrations model_names_here
-```
-
-Get backend up and running
-
-```bash
-python manage.py runserver
 ```
