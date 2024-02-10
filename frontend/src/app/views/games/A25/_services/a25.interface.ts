@@ -1,12 +1,15 @@
 export interface NameLink {
     slug: string;
     name: string;
+    color: string;
 }
 
 export interface CharBasic {
     slug: string;
     name: string;
     title: string;
+    color1: string;
+    color2: string;
 }
 
 export interface NameOnly2 {

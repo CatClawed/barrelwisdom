@@ -58,20 +58,23 @@ class A25FilterableSerializer(A25DefaultSerializer):
         fields = ['slug', 'name']
 
 class A25ItemNameSerializer(A25DefaultSerializer):
-    name = serializers.SerializerMethodField()
-    slug = serializers.CharField(source='item.slug')
+    name  = serializers.SerializerMethodField()
+    slug  = serializers.CharField(source='item.slug')
+    color = serializers.CharField(source='color.slug')
     class Meta:
         model = Material
-        fields = ['slug', 'name']
+        fields = ['slug', 'name', 'color']
     def get_name(self,obj):
         return A25DefaultSerializer.get_text_gbl(self,obj.item.name,obj.item.gbl)
 
 class A25CharaNameSerializer(A25DefaultSerializer):
-    name = serializers.SerializerMethodField()
-    title = serializers.SerializerMethodField()
+    name   = serializers.SerializerMethodField()
+    title  = serializers.SerializerMethodField()
+    color1 = serializers.CharField(source='color1.slug')
+    color2 = serializers.CharField(source='color2.slug')
     class Meta:
         model = Character
-        fields = ['slug', 'name', 'title']
+        fields = ['slug', 'name', 'title', 'color1', 'color2']
     def get_title(self,obj):
         return A25DefaultSerializer.get_text(self,obj.title)
 

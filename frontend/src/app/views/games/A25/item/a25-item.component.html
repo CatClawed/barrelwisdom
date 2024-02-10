@@ -38,6 +38,14 @@
         @if (item.desc) {
           <p [innerHTML]="item.desc"></p>
         }
+        @if (item.recipe) {
+          <div style="margin:auto;display:flex;padding-bottom:1rem;">
+            <i style="font-size:100px;color:{{a25service.colors[item.recipe[0].colors[0]]}};display:inline;" class="atelier atelier-np atelier-resleri-color-l"></i>
+            <i style="font-size:100px;color:{{a25service.colors[item.recipe[0].colors[1]]}};display:inline;" class="atelier atelier-np atelier-resleri-color-r"></i>
+            <i style="font-size:100px;color:{{a25service.colors[item.recipe[0].colors[2]]}};display:inline;margin-left:-100px" class="atelier atelier-np atelier-resleri-color-bl"></i>
+            <i style="font-size:100px;color:{{a25service.colors[item.recipe[0].colors[2]]}};display:inline;" class="atelier atelier-np atelier-resleri-color-br"></i>
+          </div>
+        }
         @if (item.material) {
           @if (item.note) {
             <p [innerHTML]="item.note"></p>
@@ -152,18 +160,6 @@
                   </li>
                 }
               </ul>
-            </td>
-          </tr>
-          <tr class="table-dark-center"><th>Colors</th></tr>
-          <tr>
-            <td style="display:flex;">
-              <div style="margin:auto;display:flex">
-                @for (i of item.recipe[0].colors; track i) {
-                  <div
-                    style="height:100px;width:100px;border-radius:50%;background-color:{{a25service.colors[i]}};">
-                  </div>
-                }
-              </div>
             </td>
           </tr>
         </tbody></table>

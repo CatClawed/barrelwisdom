@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from games.A25.items_a25.models import Item, Material, CombatItem, Equipment, Recipe, LatestUpdate, LatestUpdateGBL, RecipeTab, RecipePage
 from collections import OrderedDict
-from games.A25.misc_a25.serializers import A25DefaultSerializer, A25TraitSimpleSerializer, A25ItemNameSerializer
+from games.A25.misc_a25.serializers import A25DefaultSerializer, A25TraitSimpleSerializer
 from games.A25.chara_a25.serializers import A25CharaUpdateSerializer, A25MemoriaListSerializer
 from games.A25.quest_a25.serializers import A25ItemRewardSerializer
 

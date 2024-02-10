@@ -6,7 +6,6 @@ import { Item } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 import { of } from 'rxjs';
-import { catchError, switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a25-item.component.html',

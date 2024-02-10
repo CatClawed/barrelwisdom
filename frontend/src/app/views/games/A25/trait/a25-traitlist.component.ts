@@ -27,7 +27,7 @@ export class A25TraitlistComponent extends ModalUseComponent {
     protected location: Location,
     protected seoService: SeoService,
     private formBuilder: UntypedFormBuilder,
-    private a25service: A25Service,) {
+    protected a25service: A25Service,) {
     super(modalService, destroy$, router, route, location, seoService);
     this.pageForm = this.formBuilder.group({
       filtertext: '',

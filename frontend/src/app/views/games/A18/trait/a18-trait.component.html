@@ -1,43 +1,84 @@
-<Error *ngIf="error" [errorCode]="error"></Error>
+@if (error) {
+  <Error [errorCode]="error"></Error>
+}
 
-<ng-container *ngIf="data as trait">
-<Breadcrumb *ngIf="showNav" [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Traits', '/'+gameURL+'/traits/'+language]]" [current]="trait.name"></Breadcrumb>
-<div class="mx-auto row spacer">
-<div class="{{colset}} card card-body">
-  <div class="flex">
-    <h4 class="card-title">{{trait.name}}</h4>
-    <div><a href="javascript:void(0)" (click)="$event.preventDefault();"
-        tooltip="Influences rank. A measure of rarity. This number determines where traits appear." container="true">Grade:</a>
-      <span *ngIf="trait.grade==-1"> N/A</span><span *ngIf="trait.grade>-1">{{trait.grade}}</span>
-    </div>
-  </div>
-  <b *ngIf=" trait.item_set">Item:</b>
-    <ul *ngIf=" trait.item_set">
-      <li *ngFor="let item of trait.item_set"><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
-    </ul>
-    <p *ngIf="trait.combo1"><a routerLink="/{{gameURL}}/traits/{{trait.combo1.slug}}/{{language}}">{{trait.combo1.name}}</a> x <a routerLink="/{{gameURL}}/traits/{{trait.combo2.slug}}/{{language}}">{{trait.combo2.name}}</a></p>
-  <p>{{trait.desc}}</p>
-  <ng-container *ngIf="trait.advanced">
-    <b >Advanced Data:</b>
-    <ul>
-      <li *ngFor="let data of trait.advanced">
-        <span *ngIf="data.attTag0">{{data.attTag0}} /</span> {{data.actTag0}}
+@if (data; as trait) {
+  @if (showNav) {
+    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Traits', '/'+gameURL+'/traits/'+language]]" [current]="trait.name"></Breadcrumb>
+  }
+  <div class="mx-auto row spacer">
+    <div class="{{colset}} card card-body">
+      <div class="flex">
+        <h4 class="card-title">{{trait.name}}</h4>
+        <div>
+          <a href="javascript:void(0)" (click)="$event.preventDefault();"
+            tooltip="Influences rank. A measure of rarity. This number determines where traits appear." container="true">Grade:</a>
+          @if (trait.grade == -1) {
+            N/A
+          }
+          @else {
+            {{trait.grade}}
+          }
+        </div>
+      </div>
+      @if (trait.item_set) {
+        <b>Item:</b>
         <ul>
-          <li *ngIf="data.min_1_0"><b>Value 1: </b>{{data.min_1_0}}<span *ngIf="data.max_1_0"> - {{data.max_1_0}}</span></li>
-          <li *ngIf="data.min_2_0"><b>Value 2: </b>{{data.min_2_0}}<span *ngIf="data.max_2_0"> - {{data.max_2_0}}</span></li>
+          @for (item of trait.item_set; track item) {
+            <li>
+              <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
+            </li>
+          }
         </ul>
-      </li>
-    </ul>
-  </ng-container>
-  <div class="flex bottom" style="text-align:center;">
-    <i style="width:1.5rem" class="trait-color{{trait.trans_syn}}  atelier atelier-np atelier-firis-synthesis"></i>
-    <i style="width:1.5rem" class="trait-color{{trait.trans_atk}}  atelier atelier-np atelier-firis-attack"></i>
-    <i style="width:1.5rem" class="trait-color{{trait.trans_heal}} atelier atelier-np atelier-firis-heal"></i>
-    <i style="width:1.5rem" class="trait-color{{trait.trans_wpn}}  atelier atelier-np atelier-firis-weapon"></i>
-    <i style="width:1.5rem" class="trait-color{{trait.trans_arm}}  atelier atelier-np atelier-firis-armor"></i>
-    <i style="width:1.5rem" class="trait-color{{trait.trans_acc}}  atelier atelier-np atelier-firis-accessory"></i>
+      }
+      @if (trait.combo1) {
+        <p>
+          <a routerLink="/{{gameURL}}/traits/{{trait.combo1.slug}}/{{language}}">{{trait.combo1.name}}</a> x <a routerLink="/{{gameURL}}/traits/{{trait.combo2.slug}}/{{language}}">{{trait.combo2.name}}</a>
+        </p>
+      }
+      <p>{{trait.desc}}</p>
+      @if (trait.advanced) {
+        <b>Advanced Data:</b>
+        <ul>
+          @for (data of trait.advanced; track data) {
+            <li>
+              @if (data.actTag0) {
+                @if (data.attTag0) {
+                  {{data.attTag0}} /
+                }
+                {{data.actTag0}}
+              }
+              <ul>
+                @if (data.min_1_0) {
+                  <li><b>Value 1: </b>{{data.min_1_0}}
+                    @if (data.max_1_0) {
+                       - {{data.max_1_0}}
+                    }
+                  </li>
+                }
+                @if (data.min_2_0){
+                  <li><b>Value 2: </b>{{data.min_2_0}}
+                    @if (data.max_2_0) {
+                       - {{data.max_2_0}}
+                    }
+                  </li>
+                }
+              </ul>
+            </li>
+          }
+        </ul>
+      }
+      <div class="flex bottom" style="text-align:center;">
+        <i style="width:1.5rem" class="trait-color{{trait.trans_syn}}  atelier atelier-np atelier-firis-synthesis"></i>
+        <i style="width:1.5rem" class="trait-color{{trait.trans_atk}}  atelier atelier-np atelier-firis-attack"></i>
+        <i style="width:1.5rem" class="trait-color{{trait.trans_heal}} atelier atelier-np atelier-firis-heal"></i>
+        <i style="width:1.5rem" class="trait-color{{trait.trans_wpn}}  atelier atelier-np atelier-firis-weapon"></i>
+        <i style="width:1.5rem" class="trait-color{{trait.trans_arm}}  atelier atelier-np atelier-firis-armor"></i>
+        <i style="width:1.5rem" class="trait-color{{trait.trans_acc}}  atelier atelier-np atelier-firis-accessory"></i>
+      </div>
+    </div>
+    @if (showNav) {
+      <div class="col-md-3" ></div>
+    }
   </div>
-</div>
-<div *ngIf="showNav" class="col-md-3" ></div>
-</div>
-</ng-container>
+}

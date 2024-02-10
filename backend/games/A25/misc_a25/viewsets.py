@@ -39,11 +39,18 @@ class A25TraitViewSet(viewsets.ModelViewSet):
             ),
             'chara_trait1__name',
             'chara_trait1__title',
+            'chara_trait1__color1',
+            'chara_trait1__color2',
             'chara_trait2__name',
             'chara_trait2__title',
+            'chara_trait2__color1',
+            'chara_trait2__color2',
             'chara_trait3__name',
             'chara_trait3__title',
+            'chara_trait3__color1',
+            'chara_trait3__color2',
             'material_set__item__name',
+            'material_set__color'
         )
     )
     serializer_class = A25TraitSerializer
@@ -52,9 +59,7 @@ class A25TraitViewSet(viewsets.ModelViewSet):
     lookup_field = 'slug'
 
     def get_query(slug=None, lang="en"):
-        queryset = A25TraitViewSet.queryset
-        if lang == 'ja':
-            queryset = (
+        queryset = A25TraitViewSet.queryset if lang != 'ja' else (
                 Trait.objects
                 .select_related(
                     'desc',
@@ -65,11 +70,18 @@ class A25TraitViewSet(viewsets.ModelViewSet):
                 .prefetch_related(
                     'chara_trait1__name',
                     'chara_trait1__title',
+                    'chara_trait1__color1',
+                    'chara_trait1__color2',
                     'chara_trait2__name',
                     'chara_trait2__title',
+                    'chara_trait2__color1',
+                    'chara_trait2__color2',
                     'chara_trait3__name',
                     'chara_trait3__title',
+                    'chara_trait3__color1',
+                    'chara_trait3__color2',
                     'material_set__item__name',
+                    'material_set__color'
                 )
             )
         
