@@ -50,10 +50,13 @@ class A25CharaListSerializer(A25DefaultSerializer):
     title = serializers.SerializerMethodField()
     role = serializers.CharField(source='role.slug')
     elem = serializers.CharField(source='elem.slug')
+    color1 = serializers.CharField(source='color1.slug')
+    color2 = serializers.CharField(source='color2.slug')
     class Meta:
         model = Character
         fields = [
-            'slug', 'name', 'title', 'role', 'elem', 'rarity', 'gbl'
+            'slug', 'name', 'title', 'role', 'elem', 'rarity', 'gbl',
+            'color1', 'color2'
         ]
     def get_title(self, obj):
         return A25DefaultSerializer.get_text_gbl(self,obj.title,obj.gbl)

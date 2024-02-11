@@ -13,16 +13,29 @@ import { map, startWith } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a25-charalist.component.html',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  styles: [
+    `.char-grid {
+      display: grid;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      grid-column-gap:2%;
+    }`,
+    `@media screen and (min-width: 800px) {
+      .char-grid {
+        grid-template-columns:repeat(4,23%);
+      }
+    }`,
+    `@media screen and (max-width: 800px) {
+      .char-grid {
+        grid-template-columns:repeat(2,49%);
+      }
+    }`
+  ],
 })
 
 export class A25CharalistComponent extends ModalUseComponent {
   filteredCharas: Observable<Character[]>;
-  gradients = {
-    1: "background: linear-gradient(0deg, rgba(81,53,40,1) 0%, rgba(10,32,47,1) 50%, rgba(22,60,73,1) 100%);",
-    2: "background: linear-gradient(0deg, rgba(167,150,124,1) 0%, rgba(208,185,131,1) 50%, rgba(106,84,36,1) 100%);",
-    3: "background: linear-gradient(0deg, rgba(155,95,191,1) 0%, rgba(110,35,152,1) 50%, rgba(65,82,153,1) 100%);",
-  }
 
   constructor(
     protected modalService: BsModalService,
@@ -32,7 +45,7 @@ export class A25CharalistComponent extends ModalUseComponent {
     protected location: Location,
     protected seoService: SeoService,
     private formBuilder: UntypedFormBuilder,
-    private a25service: A25Service,) {
+    protected a25service: A25Service,) {
     super(modalService, destroy$, router, route, location, seoService);
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',

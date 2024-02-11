@@ -57,6 +57,16 @@ export class A25Service {
     'purple': 'rgba(172,72,185,0.7);'
   }
 
+  public readonly elements = {
+    'wind': '#3b853d',
+    'fire': '#b23e36',
+    'ice': '#2089bc',
+    'lightning': '#9e8a1a',
+    'slash': '#776a55',
+    'impact': '#72543b',
+    'pierce': '#647189',
+  }
+
   getFilter(slugname: string, language: string): Observable<NameLink[]> {
     return this.http.get<NameLink[]>(`${environment.apiUrl}/A25/filterable/${slugname}/${language}/`);
   }

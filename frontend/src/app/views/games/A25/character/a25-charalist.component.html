@@ -54,24 +54,38 @@
         }
       </form>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(4,23%);grid-row-gap:1rem;grid-column-gap:2%;" class="spacer">
+    <div class="char-grid">
       @for (chara of filteredCharas | async; track identify($index, chara)) {
-        <div style="aspect-ratio:256/736;position:relative;">
-          <a  (click)="openModal(charaModal, chara.slug, $event);"
-            href="/{{gameURL}}/characters/{{chara.slug}}/{{language}}">
-            <img loading="lazy" width="256" height="736"
-              src="{{imgURL}}characters/long/{{chara.slug}}.webp"
-              alt="{{chara.name + ' ' + chara.title}}"
-              style="max-height:100%;border-radius:1000px;{{gradients[chara.rarity]}}">
-            <div style="outline-offset:-5px;outline:solid 7px lightgray;width:100%;height:100%;border-radius:1000px;position:absolute;top:0;left:0;"></div>
-            <div style="position:absolute;bottom:10%;left:50%;transform:translate(-50%,0);color:yellow;font-size:3.3vw;text-align:center;width:100%;-webkit-text-stroke-width:.2vw;-webkit-text-stroke-color:black;">@for (i of [].constructor(chara.rarity); track i) {
-              <i class="fa-solid fa-star"></i>
-            }</div>
+        <div>
+          <div style="aspect-ratio:1;position:relative;">
+            <a  (click)="openModal(charaModal, chara.slug, $event);"
+              href="/{{gameURL}}/characters/{{chara.slug}}/{{language}}">
+              <img loading="lazy" width="100%"
+                src="{{imgURL}}characters/face/{{chara.slug}}.webp"
+                alt="{{chara.name + ' ' + chara.title}}"
+                style="position:absolute;z-index:10;max-height:83%;max-width:83%;-webkit-clip-path: polygon(0 0, 100% 0%, 100% 50%, 50% 100%, 0 50%);clip-path: polygon(0 0, 100% 0%, 100% 50%, 50% 100%, 0 50%);left:50%;top:50%;transform:translate(-50%, -50%);">
+                <div style="display:flex;width:100%;position:absolute;left:50%;top:50%;transform:translate(-50%, -50%);">
+                  <svg viewBox="0 0 125 250" style="max-width:100%;">
+                    <path [attr.fill]="a25service.colors[chara.color1]" d="M128.315904 232.287744H122.368L24.448 134.368256V122.399744L122.368 24.479744H128.34304L128.34304 6.144H121.31328L6.11328 121.344V135.424L121.31328 250.624H128.3072zM128.335872 227.199488H124.000256L29.536256 132.735488V124.031488L124.000256 29.567488H128.326656z" />
+                  </svg>
+                  <svg viewBox="0 0 125 250" style="max-width:100%;transform:scale(-1,1)">
+                    <path [attr.fill]="a25service.colors[chara.color2]" d="M128.315904 232.287744H122.368L24.448 134.368256V122.399744L122.368 24.479744H128.34304L128.34304 6.144H121.31328L6.11328 121.344V135.424L121.31328 250.624H128.3072zM128.335872 227.199488H124.000256L29.536256 132.735488V124.031488L124.000256 29.567488H128.326656z" />
+                  </svg>
+                </div>
+            </a>
             <img
-              style="aspect-ratio:48/45;max-width:60%;position:absolute;bottom:25%;left:50%;transform:translate(-50%,0);filter:drop-shadow(5px 5px 5px black);"
+              style="aspect-ratio:48/45;width:25%;filter:drop-shadow(5px 5px 5px black);position:absolute;bottom:0;left:3%;"
               src="{{imgURL}}characters/{{chara.role}}.webp"
               alt="{{chara.role}}"/>
-          </a>
+            <div style="height:20%;width:20%;aspect-ratio:1;background-color:{{a25service.elements[chara.elem]}};color:white;display:flex;justify-content:center;align-items:center;border-radius:50%;position:absolute;bottom:0;right:9%;">
+              <i class="atelier atelier-np atelier-resleri-{{chara.elem}}" style="font-size:1.7vw"></i>
+            </div>
+          </div>
+          <div style="color:yellow;font-size:2vw;text-align:center;width:100%;-webkit-text-stroke-width:.2vw;-webkit-text-stroke-color:black;">
+            @for (i of [].constructor(chara.rarity); track i) {
+              <i class="fa-solid fa-star"></i>
+            }
+          </div>
         </div>
       }
       <ng-template #charaModal>

@@ -15,6 +15,8 @@ class A25CharaViewSet(viewsets.ModelViewSet):
             'name',
             'role',
             'elem',
+            'color1',
+            'color2'
         )
     )
     serializer_class = A25CharaListSerializer
