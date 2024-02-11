@@ -1,5 +1,5 @@
 from rest_framework import viewsets, filters
-from games.A25.items_a25.models import Item, RecipeTab, LatestUpdate, LatestUpdateGBL
+from games.A25.items_a25.models import Item, Recipe, RecipeTab, LatestUpdate, LatestUpdateGBL
 from games.A25.items_a25.serializers import A25RecipeTabSerializer, A25MaterialListSerializer, A25ItemFullSerializer, A25SynthesisItemListSerializer, A25CombatSerializer, A25LatestUpdateSerializer, A25LatestUpdateGBLSerializer
 from games.A25.quest_a25.models import Reward
 from rest_framework.decorators import action
@@ -60,28 +60,71 @@ class A25MaterialViewSet(viewsets.ModelViewSet):
 
     def get_query(slug=None, lang="en"):
         try:
-            queryset = (
-                Item.objects
-                .select_related(
-                    'name',
-                    'desc',
-                    'limit',
+            if lang == 'ja':
+                queryset = (
+                    Item.objects
+                    .select_related(
+                        'name',
+                        'desc',
+                        'limit',
+                    )
+                    .prefetch_related(
+                        Prefetch(
+                            'reward_set',
+                            queryset=Reward.objects.filter(scorebattledifficulties__isnull=False)
+                                | Reward.objects.filter(dungeon__isnull=False)
+                        ),
+                        'material_set__color',
+                        'material_set__traits__name',
+                        'material_set__traits__desc',
+                        'material_set__traits__kind',
+                        'ing1__item__name',
+                        'ing2__item__name',
+                        'ing3__item__name',
+                        'reward_set__dungeon_set__name',
+                        'reward_set__scorebattledifficulties_set__scorebattle_set',
+                    )
+                    .get(slug=slug, combatitem__isnull=True, equipment__isnull=True)
                 )
-                .prefetch_related(
-                    Prefetch(
-                        'reward_set',
-                        queryset=Reward.objects.filter(scorebattledifficulties__isnull=False)
-                            | Reward.objects.filter(dungeon__isnull=False)
-                    ),
-                    'material_set__color',
-                    'material_set__traits__name',
-                    'material_set__traits__desc',
-                    'material_set__traits__kind',
-                    'reward_set__dungeon_set__name',
-                    'reward_set__scorebattledifficulties_set__scorebattle_set',
+            else:
+                qr = Recipe.objects.filter(item__gbl=True)
+                queryset = (
+                    Item.objects
+                    .select_related(
+                        'name',
+                        'desc',
+                        'limit',
+                    )
+                    .prefetch_related(
+                        Prefetch(
+                            'reward_set',
+                            queryset=Reward.objects.filter(scorebattledifficulties__isnull=False)
+                                | Reward.objects.filter(dungeon__isnull=False)
+                        ),
+                        Prefetch(
+                            'ing1',
+                            queryset=qr
+                        ),
+                        Prefetch(
+                            'ing2',
+                            queryset=qr
+                        ),
+                        Prefetch(
+                            'ing3',
+                            queryset=qr
+                        ),
+                        'material_set__color',
+                        'material_set__traits__name',
+                        'material_set__traits__desc',
+                        'material_set__traits__kind',
+                        'ing1__item__name',
+                        'ing2__item__name',
+                        'ing3__item__name',
+                        'reward_set__dungeon_set__name',
+                        'reward_set__scorebattledifficulties_set__scorebattle_set',
+                    )
+                    .get(slug=slug, combatitem__isnull=True, equipment__isnull=True)
                 )
-                .get(slug=slug, combatitem__isnull=True, equipment__isnull=True)
-            )
         except ObjectDoesNotExist:
             raise Http404
         return Response(A25ItemFullSerializer(queryset, context={'language': lang}).data)
@@ -118,6 +161,9 @@ class A25SynthViewSet(viewsets.ModelViewSet):
             'recipe_set__ing1__name',
             'recipe_set__ing2__name',
             'recipe_set__ing3__name',
+            'recipe_set__color1',
+            'recipe_set__color2',
+            'recipe_set__color3',
             'combatitem_set__kind',
             'equipment_set__kind'
         )

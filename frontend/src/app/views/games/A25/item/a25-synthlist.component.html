@@ -61,6 +61,14 @@
           @if (it.equip) {
             <img  style="height:3rem;width:3rem;" src="{{imgURL}}svg/{{it.equip[0].kind}}.svg"  alt="{{it.equip[0].kind}}">
           }
+          @if (it.colors) {
+            <div style="margin:auto;display:flex;padding-top:0.5rem;">
+              <i style="font-size:3.2rem;color:{{a25service.colors[it.colors[0]]}};display:inline;" class="atelier atelier-np atelier-resleri-color-l"></i>
+              <i style="font-size:3.2rem;color:{{a25service.colors[it.colors[1]]}};display:inline;" class="atelier atelier-np atelier-resleri-color-r"></i>
+              <i style="font-size:3.2rem;color:{{a25service.colors[it.colors[2]]}};display:inline;margin-left:-3.2rem" class="atelier atelier-np atelier-resleri-color-bl"></i>
+              <i style="font-size:3.2rem;color:{{a25service.colors[it.colors[2]]}};display:inline;" class="atelier atelier-np atelier-resleri-color-br"></i>
+            </div>
+          }
         </div>
         <a class="card-item-display" (click)="openModal(itemModal, it.slug, $event);" href="/{{gameURL}}/items/synthesis/{{it.slug}}/{{language}}">
           <img loading="lazy" class="resleri-item-frame"  height="256" width="256"

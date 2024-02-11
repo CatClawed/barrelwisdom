@@ -51,6 +51,7 @@ export interface Item {
     quest: Quest[];
     note: string;
     gbl: boolean;
+    colors: string[];
 }
 
 export interface NameTrans {
@@ -110,6 +111,7 @@ export interface Material {
     color: string;
     kind: string;
     traits: Trait[];
+    ing: NameLink[];
 }
 
 export interface RecipeList {

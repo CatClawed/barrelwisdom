@@ -5,16 +5,6 @@ from games.A25.chara_a25.models import Character
 from collections import OrderedDict
 from games._helpers.serializer_helper import DefaultSerializer
 
-def gbl_check(self):
-    try:
-        match self.context['language']:
-            case 'ja':
-                return False
-            case _:
-                return True
-    except KeyError:
-        return True
-
 # how to stop rewriting methods
 class A25DefaultSerializer(DefaultSerializer):
     def get_text(self,obj):

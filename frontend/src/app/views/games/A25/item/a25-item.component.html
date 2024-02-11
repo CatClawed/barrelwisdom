@@ -25,6 +25,14 @@
         @if (item.equip) {
           <img  style="height:3rem;width:3rem;" src="{{imgURL}}svg/{{item.equip[0].kind}}.svg"  alt="{{item.equip[0].kind}}">
         }
+        @if (item.recipe) {
+          <div style="margin:auto;display:flex;padding-top:0.5rem;">
+            <i style="font-size:3.2rem;color:{{a25service.colors[item.recipe[0].colors[0]]}};display:inline;" class="atelier atelier-np atelier-resleri-color-l"></i>
+            <i style="font-size:3.2rem;color:{{a25service.colors[item.recipe[0].colors[1]]}};display:inline;" class="atelier atelier-np atelier-resleri-color-r"></i>
+            <i style="font-size:3.2rem;color:{{a25service.colors[item.recipe[0].colors[2]]}};display:inline;margin-left:-3.2rem" class="atelier atelier-np atelier-resleri-color-bl"></i>
+            <i style="font-size:3.2rem;color:{{a25service.colors[item.recipe[0].colors[2]]}};display:inline;" class="atelier atelier-np atelier-resleri-color-br"></i>
+          </div>
+        }
       </div>
       <img loading="lazy" class="resleri-item-frame" height="256" width="256"
         style="background-image:url({{imgURL}}svg/item-frame-{{item.rarity}}.svg)"
@@ -37,14 +45,6 @@
         }
         @if (item.desc) {
           <p [innerHTML]="item.desc"></p>
-        }
-        @if (item.recipe) {
-          <div style="margin:auto;display:flex;padding-bottom:1rem;">
-            <i style="font-size:100px;color:{{a25service.colors[item.recipe[0].colors[0]]}};display:inline;" class="atelier atelier-np atelier-resleri-color-l"></i>
-            <i style="font-size:100px;color:{{a25service.colors[item.recipe[0].colors[1]]}};display:inline;" class="atelier atelier-np atelier-resleri-color-r"></i>
-            <i style="font-size:100px;color:{{a25service.colors[item.recipe[0].colors[2]]}};display:inline;margin-left:-100px" class="atelier atelier-np atelier-resleri-color-bl"></i>
-            <i style="font-size:100px;color:{{a25service.colors[item.recipe[0].colors[2]]}};display:inline;" class="atelier atelier-np atelier-resleri-color-br"></i>
-          </div>
         }
         @if (item.material) {
           @if (item.note) {
@@ -90,6 +90,16 @@
             }
           }
         </ul>
+        @if (item.material[0].ing) {
+          <b>Used in:</b>
+          <ul>
+            @for (ing of item.material[0].ing; track ing) {
+              <li>
+                <a routerLink="/{{gameURL}}/items/synthesis/{{ing.slug}}/{{language}}">{{ing.name}}</a>
+              </li>
+            }
+          </ul>
+        }
       }
       @if (item.combat) {
         @if (item.note) {
