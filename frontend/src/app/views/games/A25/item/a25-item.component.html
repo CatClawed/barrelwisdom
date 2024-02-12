@@ -20,18 +20,10 @@
           }
         }
         @if (item.combat) {
-          <img style="height:3rem;width:3rem;" src="{{imgURL}}svg/{{item.combat[0].kind}}.svg" alt="{{item.combat[0].kind}}">
+          <a25-icon style="height:3rem;width:3rem;" [kind]="item.combat[0].kind" [colors]="item.recipe[0].colors"></a25-icon>
         }
         @if (item.equip) {
-          <img  style="height:3rem;width:3rem;" src="{{imgURL}}svg/{{item.equip[0].kind}}.svg"  alt="{{item.equip[0].kind}}">
-        }
-        @if (item.recipe) {
-          <div style="margin:auto;display:flex;padding-top:0.5rem;">
-            <i style="font-size:3.2rem;color:{{a25service.colors[item.recipe[0].colors[0]]}};display:inline;" class="atelier atelier-np atelier-resleri-color-l"></i>
-            <i style="font-size:3.2rem;color:{{a25service.colors[item.recipe[0].colors[1]]}};display:inline;" class="atelier atelier-np atelier-resleri-color-r"></i>
-            <i style="font-size:3.2rem;color:{{a25service.colors[item.recipe[0].colors[2]]}};display:inline;margin-left:-3.2rem" class="atelier atelier-np atelier-resleri-color-bl"></i>
-            <i style="font-size:3.2rem;color:{{a25service.colors[item.recipe[0].colors[2]]}};display:inline;" class="atelier atelier-np atelier-resleri-color-br"></i>
-          </div>
+          <a25-icon style="height:3.5rem;width:3.5rem;" [kind]="item.equip[0].kind" [colors]="item.recipe[0].colors"></a25-icon>
         }
       </div>
       <img loading="lazy" class="resleri-item-frame" height="256" width="256"

@@ -11,6 +11,7 @@ import { A25ItemComponent } from './a25-item.component';
 import { A25MaterialListComponent } from './a25-materiallist.component';
 import { A25RecipeComponent } from './a25-recipe.component';
 import { A25SynthesisListComponent } from './a25-synthlist.component';
+import { A25IconComponent } from './a25-icon.component';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { A25SynthesisListComponent } from './a25-synthlist.component';
     MatTabsModule,
     ErrorComponent,
     PopoverModule.forRoot(),
+    A25IconComponent
   ],
   declarations: [
     A25MaterialListComponent,

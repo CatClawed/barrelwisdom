@@ -25,10 +25,24 @@ import { map, startWith } from 'rxjs/operators';
       .char-grid {
         grid-template-columns:repeat(4,23%);
       }
+      .a25-char-font {
+        font-size:1.7vw
+      }
+      .a25-star-font {
+        font-size:2vw;
+        -webkit-text-stroke-width:.2vw;
+      }
     }`,
     `@media screen and (max-width: 800px) {
       .char-grid {
         grid-template-columns:repeat(2,49%);
+      }
+      .a25-char-font {
+        font-size:5vw
+      }
+      .a25-star-font {
+        font-size:5vw;
+        -webkit-text-stroke-width:.4vw;
       }
     }`
   ],
@@ -36,6 +50,9 @@ import { map, startWith } from 'rxjs/operators';
 
 export class A25CharalistComponent extends ModalUseComponent {
   filteredCharas: Observable<Character[]>;
+  fillL = 'grey';
+  fillR = 'grey';
+  colors = ['red', 'green', 'yellow', 'blue', 'purple']
 
   constructor(
     protected modalService: BsModalService,
@@ -52,6 +69,8 @@ export class A25CharalistComponent extends ModalUseComponent {
       roles: "any",
       elems: "any",
       show_jp: this.language == 'en' ? false : true,
+      colorL: 'any',
+      colorR: 'any'
     })
   }
 
@@ -62,7 +81,8 @@ export class A25CharalistComponent extends ModalUseComponent {
     return forkJoin({
       charas: this.a25service.getCharaList(this.language),
       roles: this.a25service.getFilter("role", this.language),
-      elems: this.a25service.getFilter("element", this.language)
+      elems: this.a25service.getFilter("element", this.language),
+      colors: this.a25service.getFilter('color', this.language)
     });
   }
 
@@ -70,12 +90,12 @@ export class A25CharalistComponent extends ModalUseComponent {
     this.filteredCharas = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Character[]>),
       map((search: any) => search ?
-        this.filterT(search.filtertext, search.roles, search.elems, search.show_jp)
-        : this.filterT('', 'any', 'any', this.language == 'en' ? false : true)),
+        this.filterT(search.filtertext, search.roles, search.elems, search.show_jp, search.colorL, search.colorR)
+        : this.filterT('', 'any', 'any', this.language == 'en' ? false : true, 'any', 'any')),
     );
   }
 
-  private filterT(value: string, role: string, elem: string, show_jp: boolean): Character[] {
+  private filterT(value: string, role: string, elem: string, show_jp: boolean, colorL: string, colorR: string): Character[] {
     let charalist: Character[] = this.data.charas;
 
     if (!show_jp) charalist = charalist.filter(chara => chara.gbl === true)
@@ -86,6 +106,12 @@ export class A25CharalistComponent extends ModalUseComponent {
     if (elem != 'any') {
       charalist = charalist.filter(chara => chara.elem == elem)
     }
+    if (colorL !== 'any') {
+      charalist = charalist.filter(chara => chara.color1 == colorL)
+    }
+    if (colorR !== 'any') {
+      charalist = charalist.filter(chara => chara.color2 == colorR)
+    }
     if (!value) {
       return charalist;
     }
@@ -94,5 +120,10 @@ export class A25CharalistComponent extends ModalUseComponent {
       return chara.name.toLowerCase().includes(filterValue) ||
         chara.title.toLowerCase().includes(filterValue)
     });
+  }
+
+  changeFill(color) {
+    if (color === 'any') return 'grey';
+    return this.a25service.colors[color];
   }
 }

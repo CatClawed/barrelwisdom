@@ -45,13 +45,49 @@
             </mat-select>
           </mat-form-field>
         </div>
-        @if (language == 'en') {
-          <div class="row">
-            <mat-checkbox formControlName="show_jp" style="padding-bottom:1rem;">
-              Show Japanese characters (untranslated)
-            </mat-checkbox>
+        <div class="row">
+          <div class="col-md-4" style="display:flex;padding-bottom:1rem;">
+            <button [matMenuTriggerFor]="menuLeft" style="width:2rem;background:none;border:none;padding-right:0.1rem;">
+              <svg viewBox="0 0 125 250" style="max-width:2rem;">
+                <path [attr.fill]="changeFill(pageForm.get('colorL').value)" d="M128.315904 232.287744H122.368L24.448 134.368256V122.399744L122.368 24.479744H128.34304L128.34304 6.144H121.31328L6.11328 121.344V135.424L121.31328 250.624H128.3072zM128.335872 227.199488H124.000256L29.536256 132.735488V124.031488L124.000256 29.567488H128.326656z" />
+              </svg>
+            </button>
+            <button [matMenuTriggerFor]="menuRight" style="width:2rem;background:none;border:none;padding-left:0.1rem;">
+              <svg viewBox="0 0 125 250" style="max-width:2rem;transform:scale(-1,1)">
+                <path [attr.fill]="changeFill(pageForm.get('colorR').value)" d="M128.315904 232.287744H122.368L24.448 134.368256V122.399744L122.368 24.479744H128.34304L128.34304 6.144H121.31328L6.11328 121.344V135.424L121.31328 250.624H128.3072zM128.335872 227.199488H124.000256L29.536256 132.735488V124.031488L124.000256 29.567488H128.326656z" />
+              </svg>
+            </button>
+            <mat-menu #menuLeft="matMenu">
+              <button mat-menu-item (click)="pageForm.controls['colorL'].setValue('any')">
+                Any
+              </button>
+              @if (data) {
+                @for (color of data.colors; track color) {
+                  <button mat-menu-item (click)="pageForm.controls['colorL'].setValue(color.slug)">
+                    {{color.name}}
+                  </button>
+                }
+              }
+            </mat-menu>
+            <mat-menu #menuRight="matMenu">
+              <button mat-menu-item (click)="pageForm.controls['colorR'].setValue('any')">
+                Any
+              </button>
+              @if (data) {
+                @for (color of data.colors; track color) {
+                  <button mat-menu-item (click)="pageForm.controls['colorR'].setValue(color.slug)">
+                    {{color.name}}
+                  </button>
+                }
+              }
+            </mat-menu>
           </div>
-        }
+          @if (language == 'en') {
+            <mat-checkbox class="col-md-6" formControlName="show_jp">
+              Show JP characters (untranslated)
+            </mat-checkbox>
+          }
+        </div>
       </form>
     </div>
     <div class="char-grid">
@@ -78,10 +114,10 @@
               src="{{imgURL}}characters/{{chara.role}}.webp"
               alt="{{chara.role}}"/>
             <div style="height:20%;width:20%;aspect-ratio:1;background-color:{{a25service.elements[chara.elem]}};color:white;display:flex;justify-content:center;align-items:center;border-radius:50%;position:absolute;bottom:0;right:9%;">
-              <i class="atelier atelier-np atelier-resleri-{{chara.elem}}" style="font-size:1.7vw"></i>
+              <i class="atelier atelier-np atelier-resleri-{{chara.elem}} a25-char-font"></i>
             </div>
           </div>
-          <div style="color:yellow;font-size:2vw;text-align:center;width:100%;-webkit-text-stroke-width:.2vw;-webkit-text-stroke-color:black;">
+          <div class="a25-star-font" style="color:yellow;text-align:center;width:100%;-webkit-text-stroke-color:black;">
             @for (i of [].constructor(chara.rarity); track i) {
               <i class="fa-solid fa-star"></i>
             }
