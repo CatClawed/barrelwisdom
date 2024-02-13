@@ -28,7 +28,12 @@ export class A25TowerComponent extends FragmentedComponent {
 
   changeData() {
     this.gameService(this.a25service, 'quests/tower');
-    this.title = (this.language == 'en') ? 'Elemental Tower' : "四元の塔";
+    switch(this.language) {
+      case "ja": this.title = "四元の塔"; break;
+      case "tc": this.title = "四元之塔"; break;
+      case "sc": this.title = "四元之塔"; break;
+      default: this.title = "Elemental Tower";
+    }
     this.genericSEO(this.title, `All Elemental Tower floors in ${this.gameTitle}`);
     return this.a25service.getTower(this.language);
   }

@@ -37,7 +37,7 @@ export class A25MemorialistComponent extends ModalUseComponent {
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       stats: 'hp',
-      show_jp: this.language == 'en' ? false : true,
+      show_jp: this.language != 'ja' ? false : true,
     })
   }
 
@@ -53,7 +53,7 @@ export class A25MemorialistComponent extends ModalUseComponent {
       startWith(null as Observable<Memoria[]>),
       map((search: any) => search ?
         this.filterT(search.filtertext, search.stats, search.show_jp)
-        : this.filterT('', 'hp', this.language == 'en' ? false : true))
+        : this.filterT('', 'hp', this.language != 'ja' ? false : true))
     );
   }
 

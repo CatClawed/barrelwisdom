@@ -11,6 +11,8 @@ class A25DefaultSerializer(DefaultSerializer):
         return DefaultSerializer.language_match(self,
             en=obj.text_en,
             ja=obj.text_ja,
+            tc=obj.text_tc,
+            sc=obj.text_sc,
         )
     def get_text_gbl(self,obj,gbl):
         if not gbl:
@@ -18,6 +20,8 @@ class A25DefaultSerializer(DefaultSerializer):
         return DefaultSerializer.language_match(self,
             en=obj.text_en,
             ja=obj.text_ja,
+            tc=obj.text_tc,
+            sc=obj.text_sc,
         )
     def get_name(self,obj):
         if hasattr(obj, 'gbl'):
@@ -26,6 +30,8 @@ class A25DefaultSerializer(DefaultSerializer):
         return DefaultSerializer.language_match(self,
             en=obj.name.text_en,
             ja=obj.name.text_ja,
+            tc=obj.name.text_tc,
+            sc=obj.name.text_sc,
         )
     def get_desc(self,obj):
         if hasattr(obj, 'gbl'):
@@ -34,6 +40,8 @@ class A25DefaultSerializer(DefaultSerializer):
         return DefaultSerializer.language_match(self,
             en=obj.desc.text_en,
             ja=obj.desc.text_ja,
+            tc=obj.desc.text_tc,
+            sc=obj.desc.text_sc,
         )
 
 class A25FilterableSerializerSimple(A25DefaultSerializer):

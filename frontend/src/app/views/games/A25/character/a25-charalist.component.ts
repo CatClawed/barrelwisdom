@@ -68,7 +68,7 @@ export class A25CharalistComponent extends ModalUseComponent {
       filtertext: '',
       roles: "any",
       elems: "any",
-      show_jp: this.language == 'en' ? false : true,
+      show_jp: this.language != 'ja' ? false : true,
       colorL: 'any',
       colorR: 'any'
     })
@@ -91,7 +91,7 @@ export class A25CharalistComponent extends ModalUseComponent {
       startWith(null as Observable<Character[]>),
       map((search: any) => search ?
         this.filterT(search.filtertext, search.roles, search.elems, search.show_jp, search.colorL, search.colorR)
-        : this.filterT('', 'any', 'any', this.language == 'en' ? false : true, 'any', 'any')),
+        : this.filterT('', 'any', 'any', this.language != 'ja' ? false : true, 'any', 'any')),
     );
   }
 

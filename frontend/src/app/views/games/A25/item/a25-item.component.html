@@ -32,7 +32,7 @@
         @if (item.limit) {
           <p><b>Event: </b>{{item.limit}}</p>
         }
-        @if (language == 'en' && !item.gbl) {
+        @if (language != 'ja' && !item.gbl) {
           <p>This item is not in Global yet. Displaying Japanese text.</p>
         }
         @if (item.desc) {

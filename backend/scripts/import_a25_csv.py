@@ -13,35 +13,43 @@ def replaceNewline(text):
     return text.replace('\r', '').replace('\n', '<br>')
 
 # Some names can be changed, some can't (without manual input), hence volatile.
-def checkName(text_en, text_ja, volatile=False):
+def checkName(text_en, text_ja, text_sc, text_tc, volatile=False):
     if text_ja:
         try:
             name = Name.objects.get(text_ja=text_ja)
             if volatile and text_en:
                 name.text_en = text_en
+                name.text_tc = text_tc
+                name.text_sc = text_sc
                 name.save()
             return name
         except:
             name = Name(
                 text_ja = text_ja,
-                text_en = text_en
+                text_en = text_en,
+                text_tc = text_tc,
+                text_sc = text_sc,
             )
             name.save()
             return name
     return None
 
-def checkDesc(text_en, text_ja):
+def checkDesc(text_en, text_ja, text_sc, text_tc):
     if text_ja:
         try:
             desc = Desc.objects.get(text_ja=text_ja.replace('\r', '').replace('\n', '<br>'))
             if text_en:
                 desc.text_en = text_en.replace('\r', '').replace('\n', '<br>')
+                desc.text_sc = text_sc.replace('\r', '').replace('\n', '<br>')
+                desc.text_tc = text_tc.replace('\r', '').replace('\n', '<br>')
                 desc.save()
             return desc
         except:
             desc = Desc(
                 text_ja = text_ja.replace('\r', '').replace('\n', '<br>'),
-                text_en = text_en.replace('\r', '').replace('\n', '<br>')
+                text_en = text_en.replace('\r', '').replace('\n', '<br>'),
+                text_tc = text_tc.replace('\r', '').replace('\n', '<br>'),
+                text_sc = text_sc.replace('\r', '').replace('\n', '<br>')
             )
             desc.save()
             return desc
@@ -49,15 +57,17 @@ def checkDesc(text_en, text_ja):
 
 
 def ImpFilter(row, index):
-    if row["JP"]:
-        print(row["EN"])
-        obj = Filterable(
-            slug = slug_me(row["EN"]),
-            text_en=row["EN"],
-            text_ja=row["JP"],
-            kind=row["kind"],
-        )
+    try:
+        obj = Filterable.objects.get(text_ja=row['JP'])
+        obj.text_en = row['EN']
+        obj.text_tc = row['TC']
+        obj.text_sc = row['SC']        
         obj.save()
+    except:
+        print("Failure", row['JP'])
+
+def ImpEvent(row, index):
+    checkDesc(row['EN'], row['JP'], row['SC'], row['TC'])
 
 # expected kwarg: kind (combat/equipment)
 def ImpTrait(row, index, **kwargs):
@@ -66,12 +76,16 @@ def ImpTrait(row, index, **kwargs):
         name = checkName(
             text_ja = row["Name"],
             text_en = row["Name en"],
+            text_tc = row["Name tc"],
+            text_sc = row["Name sc"],
             volatile=True
         )
 
         desc = checkDesc(
             text_ja = row["Desc"],
-            text_en = row["Desc en"]
+            text_en = row["Desc en"],
+            text_tc = row["Desc tc"],
+            text_sc = row["Desc sc"],
         )
 
         try:
@@ -106,17 +120,23 @@ def ImpTrait(row, index, **kwargs):
 def ImpResearch(row, index):
     name = checkName(
         text_ja = row["Name"],
-        text_en = row["Name en"]
+        text_en = row["Name en"],
+        text_tc = row["Name tc"],
+        text_sc = row["Name sc"]
     )
 
     desc = checkDesc(
         text_ja = row["Desc"],
-        text_en = row["Desc en"]
+        text_en = row["Desc en"],
+        text_tc = row["Desc tc"],
+        text_sc = row["Desc sc"]
     )
 
     req = checkDesc(
         text_ja = row["Req"],
-        text_en = row["Req en"]
+        text_en = row["Req en"],
+        text_tc = row["Req tc"],
+        text_sc = row["Req sc"]
     )
 
     print(row["Name"])
@@ -138,18 +158,24 @@ def ImpMemoria(row, index):
     name = checkName(
         volatile=True,
         text_ja = row["Name"],
-        text_en = row["EN"]
+        text_en = row["EN"],
+        text_tc = row["TC"],
+        text_sc = row["SC"]
     )
 
     skill_name = checkName(
         text_ja = row["Skill jp"],
         text_en = row["Skill en"],
+        text_tc = row["Skill tc"],
+        text_sc = row["Skill sc"],
         volatile=True
     )
 
     skill_desc = checkDesc(
         text_ja = row["Eff"],
-        text_en = row["Eff en"]
+        text_en = row["Eff en"],
+        text_tc = row["Eff tc"],
+        text_sc = row["Eff sc"],
     )
 
     try:
@@ -201,12 +227,16 @@ def ImpChara(row, index):
     limited = Desc.objects.get(text_ja=row["Event"]) if row["Event"] else None
     name = checkName(
         text_ja = row["NAME"],
-        text_en = row["NAME_EN"]
+        text_en = row["NAME_EN"],
+        text_sc = row["NAME_SC"],
+        text_tc = row["NAME_TC"],
     )
     title = checkName(
         volatile=True,
         text_ja = row["TITLE"],
-        text_en = row["TITLE_EN"]
+        text_en = row["TITLE_EN"],
+        text_tc = row["TITLE_TC"],
+        text_sc = row["TITLE_SC"],
     )
 
     try:
@@ -260,11 +290,15 @@ def ImpPassive(row, index):
     name = checkName(
         text_ja = row["Name"],
         text_en = row["Name en"],
+        text_sc = row["Name sc"],
+        text_tc = row["Name tc"],
         volatile=True
     )
     desc = checkDesc(
         text_ja = row["Desc"],
-        text_en = row["Desc en"]
+        text_en = row["Desc en"],
+        text_tc = row["Desc tc"],
+        text_sc = row["Desc sc"],
     )
     char=Character.objects.get(name__text_ja=row["Chara"], title__text_ja=row["Title"])
     try:
@@ -284,11 +318,15 @@ def ImpSkill(row, index):
     name = checkName(
         text_ja = row["Name"],
         text_en = row["Name_EN"],
+        text_tc = row["Name_TC"],
+        text_sc = row["Name_SC"],
         volatile=True
     )
     desc = checkDesc(
         text_ja = row["EFFECT"],
-        text_en = row["EFFECT_EN"]
+        text_en = row["EFFECT_EN"],
+        text_tc = row["EFFECT_TC"],
+        text_sc = row["EFFECT_SC"],
     )
     char = Character.objects.get(name__text_ja=row["CHARACTER"], title__text_ja=row["TITLE"])
     v0 = row["Val 0"].split('-')
@@ -344,11 +382,15 @@ def ImpMaterials(row, index):
     name = checkName(
         volatile=True,
         text_ja = row["JP"],
-        text_en = row["EN"]
+        text_en = row["EN"],
+        text_sc = row["SC"],
+        text_tc = row["TC"],
     )
     desc = checkDesc(
         text_ja = row["DESC"],
-        text_en = row["DESC_EN"]
+        text_en = row["DESC_EN"],
+        text_tc = row["DESC_TC"],
+        text_sc = row["DESC_SC"],
     )
 
     try:
@@ -404,11 +446,15 @@ def ImpEquipment(row, index):
     name = checkName(
         volatile=True,
         text_ja = row["NAME"],
-        text_en = row["NAME_EN"]
+        text_en = row["NAME_EN"],
+        text_sc = row["NAME_SC"],
+        text_tc = row["NAME_TC"],
     )
     desc = checkDesc(
         text_ja = row["DESC"],
-        text_en = row["DESC_EN"]
+        text_en = row["DESC_EN"],
+        text_sc = row["DESC_SC"],
+        text_tc = row["DESC_TC"],
     )
 
     try:
@@ -477,11 +523,15 @@ def ImpCombatItem(row, index):
     name = checkName(
         volatile=True,
         text_ja = row["NAME"],
-        text_en = row["NAME_EN"]
+        text_en = row["NAME_EN"],
+        text_sc = row["NAME_SC"],
+        text_tc = row["NAME_TC"],
     )
     desc = checkDesc(
         text_ja = row["DESC"],
-        text_en = row["DESC_EN"]
+        text_en = row["DESC_EN"],
+        text_sc = row["DESC_SC"],
+        text_tc = row["DESC_TC"],
     )
     try:
         obj = Item.objects.get(slug=row["Slug"])
@@ -566,15 +616,21 @@ def ImpRecipe(row, index):
 
     unlock1 = checkDesc(
         text_ja = row["UNLOCK1"],
-        text_en = row["UNLOCK1_EN"]
+        text_en = row["UNLOCK1_EN"],
+        text_sc = row["UNLOCK1_SC"],
+        text_tc = row["UNLOCK1_TC"],
     )
     unlock2 = checkDesc(
         text_ja = row["UNLOCK2"],
-        text_en = row["UNLOCK2_EN"]
+        text_en = row["UNLOCK2_EN"],
+        text_sc = row["UNLOCK2_SC"],
+        text_tc = row["UNLOCK2_TC"],
     )
     unlock3 = checkDesc(
         text_ja = row["UNLOCK3"],
-        text_en = row["UNLOCK3_EN"]
+        text_en = row["UNLOCK3_EN"],
+        text_sc = row["UNLOCK3_SC"],
+        text_tc = row["UNLOCK3_TC"],
     )
 
     try:
@@ -651,6 +707,8 @@ def ImpScoreBattle(row, index):
         name = checkName(
             text_ja = row["Name"],
             text_en = row["En"],
+            text_tc = row["Tc"],
+            text_sc = row["Sc"],
             volatile=True
         )
         try:
@@ -720,9 +778,13 @@ def ImpDungeon(row, index):
         floor = heck[row['Name'].split('：')[1]]
         data_jp = row['Name'].split('[')[0]
         data_en = row['En'].split(' [Risk ')[0]
+        data_sc = row['Sc'].split('[')[0]
+        data_tc = row['Tc'].split('[')[0]
         name = checkName(
             text_ja = data_jp,
             text_en = data_en,
+            text_tc = data_tc,
+            text_sc = data_sc,
             volatile=True
         )
         try:
@@ -813,6 +875,7 @@ Checklist
 #createUpdateGBL()
 
 #import_generic(ImpFilter)
+#import_generic(ImpEvent)
 #import_generic(ImpTrait, index=1, kind="combat")
 #import_generic(ImpTrait, index=100, kind="equipment")
 #import_generic(ImpResearch)

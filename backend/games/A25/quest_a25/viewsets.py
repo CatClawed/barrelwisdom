@@ -25,6 +25,16 @@ class A25TowerViewSet(viewsets.ModelViewSet):
             many=True, context={'language': 'en'}).data)
 
     @action(detail=False)
+    def sc(self, request):
+        return Response(A25TowerSerializer(A25TowerViewSet.queryset,
+            many=True, context={'language': 'sc'}).data)
+
+    @action(detail=False)
+    def tc(self, request):
+        return Response(A25TowerSerializer(A25TowerViewSet.queryset,
+            many=True, context={'language': 'tc'}).data)
+
+    @action(detail=False)
     def ja(self, request):
         return Response(A25TowerSerializer(A25TowerViewSet.queryset,
             many=True, context={'language': 'ja'}).data)
@@ -51,6 +61,16 @@ class A25TrainingViewSet(viewsets.ModelViewSet):
             many=True, context={'language': 'en'}).data)
 
     @action(detail=False)
+    def sc(self, request):
+        return Response(A25TrainingSerializer(A25TrainingViewSet.queryset,
+            many=True, context={'language': 'sc'}).data)
+
+    @action(detail=False)
+    def tc(self, request):
+        return Response(A25TrainingSerializer(A25TrainingViewSet.queryset,
+            many=True, context={'language': 'tc'}).data)
+
+    @action(detail=False)
     def ja(self, request):
         return Response(A25TrainingSerializer(A25TrainingViewSet.queryset,
             many=True, context={'language': 'ja'}).data)
@@ -73,6 +93,16 @@ class A25ScoreBattleViewSet(viewsets.ModelViewSet):
     def en(self, request):
         return Response(A25ScoreBattleSerializer(A25ScoreBattleViewSet.queryset.filter(gbl=True),
             many=True, context={'language': 'en'}).data)
+
+    @action(detail=False)
+    def sc(self, request):
+        return Response(A25ScoreBattleSerializer(A25ScoreBattleViewSet.queryset.filter(gbl=True),
+            many=True, context={'language': 'sc'}).data)
+
+    @action(detail=False)
+    def tc(self, request):
+        return Response(A25ScoreBattleSerializer(A25ScoreBattleViewSet.queryset.filter(gbl=True),
+            many=True, context={'language': 'tc'}).data)
 
     @action(detail=False)
     def ja(self, request):
@@ -98,6 +128,16 @@ class A25DungeonViewSet(viewsets.ModelViewSet):
     def en(self, request):
         return Response(A25DungeonSerializer(A25DungeonViewSet.queryset.filter(gbl=True),
             many=True, context={'language': 'en'}).data)
+
+    @action(detail=False)
+    def sc(self, request):
+        return Response(A25DungeonSerializer(A25DungeonViewSet.queryset.filter(gbl=True),
+            many=True, context={'language': 'sc'}).data)
+
+    @action(detail=False)
+    def tc(self, request):
+        return Response(A25DungeonSerializer(A25DungeonViewSet.queryset.filter(gbl=True),
+            many=True, context={'language': 'tc'}).data)
 
     @action(detail=False)
     def ja(self, request):

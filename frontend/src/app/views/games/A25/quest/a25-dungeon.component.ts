@@ -29,7 +29,12 @@ export class A25DungeonComponent extends FragmentedComponent {
 
   changeData() {
     this.gameService(this.a25service, 'quests/dungeons');
-    this.title = (this.language == 'en') ? 'Dungeons' : "ダンジョン";
+    switch(this.language) {
+      case "ja": this.title = "ダンジョン"; break;
+      case "tc": this.title = "迷宫"; break;
+      case "sc": this.title = "迷宮"; break;
+      default: this.title = "Dungeons";
+    }
     this.genericSEO(this.title, `All dungeons in ${this.gameTitle}`);
     return this.a25service.getDungeons(this.language);
   }

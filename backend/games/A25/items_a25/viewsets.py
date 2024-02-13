@@ -34,6 +34,16 @@ class A25RecipeViewSet(viewsets.ModelViewSet):
             A25RecipeViewSet.queryset, many=True, context={'language': 'en'}).data)
 
     @action(detail=False)
+    def sc(self, request):
+        return Response(A25RecipeTabSerializer(
+            A25RecipeViewSet.queryset, many=True, context={'language': 'sc'}).data)
+
+    @action(detail=False)
+    def tc(self, request):
+        return Response(A25RecipeTabSerializer(
+            A25RecipeViewSet.queryset, many=True, context={'language': 'tc'}).data)
+
+    @action(detail=False)
     def ja(self, request):
         return Response(A25RecipeTabSerializer(
             A25RecipeViewSet.queryset, many=True, context={'language': 'ja'}).data)
@@ -140,6 +150,26 @@ class A25MaterialViewSet(viewsets.ModelViewSet):
         return A25MaterialViewSet.get_query(lang="en", slug=slug)
 
     @action(detail=False)
+    def sc(self, request):
+        return Response(A25MaterialListSerializer(
+            A25MaterialViewSet.queryset.filter(gbl=True),
+            many=True,context={'language': "sc"}).data)
+
+    @action(detail=True, url_path="sc")
+    def sc_full(self, request, slug):
+        return A25MaterialViewSet.get_query(lang="sc", slug=slug)
+
+    @action(detail=False)
+    def tc(self, request):
+        return Response(A25MaterialListSerializer(
+            A25MaterialViewSet.queryset.filter(gbl=True),
+            many=True,context={'language': "tc"}).data)
+
+    @action(detail=True, url_path="tc")
+    def tc_full(self, request, slug):
+        return A25MaterialViewSet.get_query(lang="tc", slug=slug)
+
+    @action(detail=False)
     def ja(self, request):
         return Response(A25MaterialListSerializer(
             A25MaterialViewSet.queryset,
@@ -217,6 +247,26 @@ class A25SynthViewSet(viewsets.ModelViewSet):
         return A25SynthViewSet.get_query(lang="en", slug=slug)
 
     @action(detail=False)
+    def sc(self, request):
+        return Response(A25SynthesisItemListSerializer(
+            A25SynthViewSet.queryset.filter(gbl=True),
+            many=True, context={'language': "sc"}).data)
+
+    @action(detail=True, url_path="sc")
+    def sc_full(self, request, slug):
+        return A25SynthViewSet.get_query(lang="sc", slug=slug)
+
+    @action(detail=False)
+    def tc(self, request):
+        return Response(A25SynthesisItemListSerializer(
+            A25SynthViewSet.queryset.filter(gbl=True),
+            many=True, context={'language': "tc"}).data)
+
+    @action(detail=True, url_path="tc")
+    def tc_full(self, request, slug):
+        return A25SynthViewSet.get_query(lang="tc", slug=slug)
+
+    @action(detail=False)
     def ja(self, request):
         return Response(A25SynthesisItemListSerializer(
             A25SynthViewSet.queryset,
@@ -245,6 +295,16 @@ class A25UpdateViewSet(viewsets.ModelViewSet):
     def en(self, request):
         return Response(A25LatestUpdateGBLSerializer(
             A25UpdateViewSet.queryset.first(), context={'language': 'en'}).data)
+
+    @action(detail=False)
+    def sc(self, request):
+        return Response(A25LatestUpdateGBLSerializer(
+            A25UpdateViewSet.queryset.first(), context={'language': 'sc'}).data)
+
+    @action(detail=False)
+    def tc(self, request):
+        return Response(A25LatestUpdateGBLSerializer(
+            A25UpdateViewSet.queryset.first(), context={'language': 'tc'}).data)
 
     @action(detail=False)
     def ja(self, request):

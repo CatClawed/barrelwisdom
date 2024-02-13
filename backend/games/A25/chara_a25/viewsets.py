@@ -69,6 +69,22 @@ class A25CharaViewSet(viewsets.ModelViewSet):
         return A25CharaViewSet.get_query(lang="en", slug=slug)
 
     @action(detail=False)
+    def sc(self, request):
+        return A25CharaViewSet.get_query(lang="sc")
+
+    @action(detail=True, url_path="sc")
+    def sc_full(self, request, slug):
+        return A25CharaViewSet.get_query(lang="sc", slug=slug)
+
+    @action(detail=False)
+    def tc(self, request):
+        return A25CharaViewSet.get_query(lang="tc")
+
+    @action(detail=True, url_path="tc")
+    def tc_full(self, request, slug):
+        return A25CharaViewSet.get_query(lang="tc", slug=slug)
+
+    @action(detail=False)
     def ja(self, request):
         return A25CharaViewSet.get_query(lang="ja")
 
@@ -117,6 +133,22 @@ class A25MemoriaViewSet(viewsets.ModelViewSet):
     @action(detail=True, url_path="en")
     def en_full(self, request, slug):
         return A25MemoriaViewSet.get_query(lang="en", slug=slug)
+
+    @action(detail=False)
+    def sc(self, request):
+        return A25MemoriaViewSet.get_query(lang="sc")
+
+    @action(detail=True, url_path="sc")
+    def sc_full(self, request, slug):
+        return A25MemoriaViewSet.get_query(lang="sc", slug=slug)
+
+    @action(detail=False)
+    def tc(self, request):
+        return A25MemoriaViewSet.get_query(lang="tc")
+
+    @action(detail=True, url_path="tc")
+    def tc_full(self, request, slug):
+        return A25MemoriaViewSet.get_query(lang="tc", slug=slug)
 
     @action(detail=False)
     def ja(self, request):

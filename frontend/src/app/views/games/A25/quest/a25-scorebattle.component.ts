@@ -33,7 +33,12 @@ export class A25ScoreBattleComponent extends FragmentedComponent {
 
   changeData() {
     this.gameService(this.a25service, 'quests/scorebattles');
-    this.title = (this.language == 'en') ? 'Score Battles' : "スコアバトル";
+    switch(this.language) {
+      case "ja": this.title = "スコアバトル"; break;
+      case "tc": this.title = "积分战斗蟩"; break;
+      case "sc": this.title = "積分戰蟩"; break;
+      default: this.title = "Score Battles";
+    }
     this.genericSEO(this.title, `All Score Battles in ${this.gameTitle}`);
     return this.a25service.getScoreBattles(this.language);
   }

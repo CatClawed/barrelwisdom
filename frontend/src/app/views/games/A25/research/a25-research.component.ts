@@ -22,6 +22,8 @@ export class A25ResearchComponent extends SingleComponent {
   kind = {
     "en": ['Combat Research', 'Alchemy Research'],
     "ja": ['戦闘研究', '錬金研究'],
+    "sc": ['战斗研究', '炼金研究'],
+    "tc": ['戰鬥研究', '鍊金研究']
   }
 
   changeData() {

@@ -30,7 +30,7 @@ export class A25RecipeComponent extends SingleComponent {
 
   afterAssignment(): void {
     if (this.language !== 'ja') {
-      this.data = this.data.filter(x => x.name != "Event") // TODO: REMOVE WHEN EVENT HAPPENS, change 2 to 3
+      this.data.pop() // TODO: REMOVE WHEN EVENT HAPPENS, change 2 to 3
       for (let i = 0; i < this.data.length; i++) {
         this.data[i].pages = this.data[i].pages.filter(x => { return x.gbl == true })
       }
