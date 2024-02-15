@@ -471,13 +471,13 @@ def ImpEquipment(row, index):
         obj.val_good=row["VAL"]  if row["VAL"]  else None
         obj.val_bad= row["VAL2"] if row["VAL2"] else None
         obj.good_hp   = row["Good1"] if row["Stat 1"] == "HP"   else (row["Good2"] if row["Stat 2"] == "HP"   else 0)
-        obj.good_spd  = row["Good1"] if row["Stat 1"] == "AGI"  else (row["Good2"] if row["Stat 2"] == "AGI"  else 0)
+        obj.good_spd  = row["Good1"] if row["Stat 1"] == "SPD"  else (row["Good2"] if row["Stat 2"] == "SPD"  else 0)
         obj.good_patk = row["Good1"] if row["Stat 1"] == "PATK" else (row["Good2"] if row["Stat 2"] == "PATK" else 0)
         obj.good_matk = row["Good1"] if row["Stat 1"] == "MATK" else (row["Good2"] if row["Stat 2"] == "MATK" else 0)
         obj.good_pdef = row["Good1"] if row["Stat 1"] == "PDEF" else (row["Good2"] if row["Stat 2"] == "PDEF" else 0)
         obj.good_mdef = row["Good1"] if row["Stat 1"] == "MDEF" else (row["Good2"] if row["Stat 2"] == "MDEF" else 0)
         obj.bad_hp    = row["Crap1"] if row["Crap1"] and row["Stat 1"] == "HP"   else (row["Crap2"] if row["Crap2"] and row["Stat 2"] == "HP"   else 0)
-        obj.bad_spd   = row["Crap1"] if row["Crap1"] and row["Stat 1"] == "AGI"  else (row["Crap2"] if row["Crap2"] and row["Stat 2"] == "AGI"  else 0)
+        obj.bad_spd   = row["Crap1"] if row["Crap1"] and row["Stat 1"] == "SPD"  else (row["Crap2"] if row["Crap2"] and row["Stat 2"] == "SPD"  else 0)
         obj.bad_patk  = row["Crap1"] if row["Crap1"] and row["Stat 1"] == "PATK" else (row["Crap2"] if row["Crap2"] and row["Stat 2"] == "PATK" else 0)
         obj.bad_matk  = row["Crap1"] if row["Crap1"] and row["Stat 1"] == "MATK" else (row["Crap2"] if row["Crap2"] and row["Stat 2"] == "MATK" else 0)
         obj.bad_pdef  = row["Crap1"] if row["Crap1"] and row["Stat 1"] == "PDEF" else (row["Crap2"] if row["Crap2"] and row["Stat 2"] == "PDEF" else 0)
@@ -502,13 +502,13 @@ def ImpEquipment(row, index):
             val_good=row["VAL"]  if row["VAL"]  else None,
             val_bad= row["VAL2"] if row["VAL2"] else None,
             good_hp   = row["Good1"] if row["Stat 1"] == "HP"   else (row["Good2"] if row["Stat 2"] == "HP"   else 0),
-            good_spd  = row["Good1"] if row["Stat 1"] == "AGI"  else (row["Good2"] if row["Stat 2"] == "AGI"  else 0),
+            good_spd  = row["Good1"] if row["Stat 1"] == "SPD"  else (row["Good2"] if row["Stat 2"] == "SPD"  else 0),
             good_patk = row["Good1"] if row["Stat 1"] == "PATK" else (row["Good2"] if row["Stat 2"] == "PATK" else 0),
             good_matk = row["Good1"] if row["Stat 1"] == "MATK" else (row["Good2"] if row["Stat 2"] == "MATK" else 0),
             good_pdef = row["Good1"] if row["Stat 1"] == "PDEF" else (row["Good2"] if row["Stat 2"] == "PDEF" else 0),
             good_mdef = row["Good1"] if row["Stat 1"] == "MDEF" else (row["Good2"] if row["Stat 2"] == "MDEF" else 0),
             bad_hp    = row["Crap1"] if row["Crap1"] and row["Stat 1"] == "HP"   else (row["Crap2"] if row["Crap2"] and row["Stat 2"] == "HP"   else 0),
-            bad_spd   = row["Crap1"] if row["Crap1"] and row["Stat 1"] == "AGI"  else (row["Crap2"] if row["Crap2"] and row["Stat 2"] == "AGI"  else 0),
+            bad_spd   = row["Crap1"] if row["Crap1"] and row["Stat 1"] == "SPD"  else (row["Crap2"] if row["Crap2"] and row["Stat 2"] == "SPD"  else 0),
             bad_patk  = row["Crap1"] if row["Crap1"] and row["Stat 1"] == "PATK" else (row["Crap2"] if row["Crap2"] and row["Stat 2"] == "PATK" else 0),
             bad_matk  = row["Crap1"] if row["Crap1"] and row["Stat 1"] == "MATK" else (row["Crap2"] if row["Crap2"] and row["Stat 2"] == "MATK" else 0),
             bad_pdef  = row["Crap1"] if row["Crap1"] and row["Stat 1"] == "PDEF" else (row["Crap2"] if row["Crap2"] and row["Stat 2"] == "PDEF" else 0),

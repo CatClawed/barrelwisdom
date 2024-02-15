@@ -22,29 +22,6 @@ export function app(): express.Express {
   server.set('view engine', 'html');
   server.set('views', distFolder);
 
-  // proxy middleware options
-  const optionsApi = {
-    target: 'http://backend:8000', // target host
-    changeOrigin: false, // needed for virtual hosted sites
-    ws: true, // proxy websockets
-  };
-
-  const options = {
-    target: 'https://media.barrelwisdom.com', // target host
-    changeOrigin: true, // needed for virtual hosted sites
-    ws: true, // proxy websockets
-    pathRewrite: {
-      '^/media': '/file/barrelwisdom', // rewrite path
-    },
-  };
-
-  // create the proxy (without context)
-  const apiProxy = createProxyMiddleware(optionsApi);
-  const mediaProxy = createProxyMiddleware(options);
-  server.use('/api', apiProxy);
-  server.use('/auth', apiProxy);
-  server.use('/media', mediaProxy);
-
   // Example Express Rest API endpoints
   // server.get('/api/**', (req, res) => { });
   // Serve static files from /browser

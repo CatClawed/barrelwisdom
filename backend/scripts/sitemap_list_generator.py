@@ -41,7 +41,7 @@ def sitemap(langs=['en'], pages=[], game='error'):
 
 
 def resleri():
-    langs = ["en", "ja"]
+    langs = ["en", "ja", 'sc', 'tc']
     pages = []
     for obj in A25Item.objects.all():
         if obj.kind.slug == 'material':

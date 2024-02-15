@@ -34,7 +34,7 @@
       <p>{{userprofile.bio}}</p>
     }
     @if (userprofile.website) {
-      <p><b>Website: </b><a href="{{userprofile.website}}" target="_blank">{{userprofile.website}}</a></p>
+      <p><b>Website: </b><a href="{{userprofile.website}}" rel="noopener" target="_blank">{{userprofile.website}}</a></p>
     }
     @if (userprofile.user.blog_set) {
       <div>
