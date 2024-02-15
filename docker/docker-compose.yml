@@ -57,7 +57,7 @@ services:
     container_name: frontend_prod
     image: barrelwisdom/frontend:test
     ports:
-      - 4000:4000
+      - 127.0.0.1:4000:4000
 
   nginx:
     container_name: nginx

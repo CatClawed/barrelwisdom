@@ -7,9 +7,9 @@ from pathlib import Path
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ['DEBUG']
+DEBUG = int(os.environ['DEBUG'])
 
-ALLOWED_HOSTS = ['localhost', 'barrelwisdom.com', 'test.barrelwisdom.com']
+ALLOWED_HOSTS = ['barrelwisdom.com', 'localhost', '127.0.0.1', 'backend']
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
