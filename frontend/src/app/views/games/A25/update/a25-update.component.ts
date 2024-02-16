@@ -20,7 +20,7 @@ export class A25UpdateComponent extends SingleComponent {
     super(destroy$, route, seoService);
   }
   changeData() {
-    this.gameService(this.a25service, 'update');
+    this.gameService(this.a25service, 'home');
     this.genericSEO('Home', `What's new in ${this.gameTitle}?`);
     return this.a25service.getUpdate(this.language)
   }

@@ -29,59 +29,59 @@
       <img loading="lazy" class="resleri-item-frame" height="256" width="256"
         style="background-image:url({{imgURL}}svg/item-frame-{{item.rarity}}.svg)"
         src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
-        @if (item.limit) {
-          <p><b>Event: </b>{{item.limit}}</p>
+      @if (item.limit) {
+        <p><b>Event: </b>{{item.limit}}</p>
+      }
+      @if (language != 'ja' && !item.gbl) {
+        <p>This item is not in Global yet. Displaying Japanese text.</p>
+      }
+      @if (item.desc) {
+        <p [innerHTML]="item.desc"></p>
+      }
+      @if (item.note) {
+        <p [innerHTML]="item.note"></p>
+      }
+      @if (item.material) {
+        @if (item.material[0].traits) {
+          <ul>
+            @for (trait of item.material[0].traits; track trait) {
+              <li>
+                <ng-template #traitPopover>
+                  <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5).replaceAll('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
+                  <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
+                </ng-template>
+                <a [popover]="traitPopover"
+                  [popoverTitle]="trait.name"
+                  (click)="$event.preventDefault();"
+                href="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">{{trait.name}}</a>
+              </li>
+            }
+          </ul>
         }
-        @if (language != 'ja' && !item.gbl) {
-          <p>This item is not in Global yet. Displaying Japanese text.</p>
-        }
-        @if (item.desc) {
-          <p [innerHTML]="item.desc"></p>
-        }
-        @if (item.material) {
-          @if (item.note) {
-            <p [innerHTML]="item.note"></p>
-          }
-          @if (item.material[0].traits) {
-            <ul>
-              @for (trait of item.material[0].traits; track trait) {
-                <li>
-                  <ng-template #traitPopover>
-                    <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5).replaceAll('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
-                    <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
-                  </ng-template>
-                  <a [popover]="traitPopover"
-                    [popoverTitle]="trait.name"
-                    (click)="$event.preventDefault();"
-                  href="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">{{trait.name}}</a>
-                </li>
-              }
-            </ul>
-          }
-          @if (item.quest && item.material[0].traits) {
-            <b>Locations:</b>
-          }
+        @if (item.quest && item.material[0].traits) {
+          <b>Locations:</b>
           <ul>
             @for (quest of item.quest; track quest) {
               @if (quest.dungeon) {
                 <li>
                   <a routerLink="/{{gameURL}}/quests/dungeons/{{language}}"
                     fragment="{{quest.dungeon[0].name}}">
-                  {{quest.dungeon[0].name}}
-                </a>
-              </li>
+                    {{quest.dungeon[0].name}}
+                  </a>
+                </li>
+              }
+              @if (quest.scorebattle) {
+                <li>
+                  Score Battle:
+                  <a routerLink="/{{gameURL}}/quests/scorebattles/{{language}}"
+                    fragment="{{quest.scorebattle[0].scorebattle[0].chapter}}-{{quest.scorebattle[0].scorebattle[0].section}}">
+                    {{quest.scorebattle[0].scorebattle[0].chapter}}-{{quest.scorebattle[0].scorebattle[0].section}} {{difficulties[quest.scorebattle[0].difficulty]}}
+                  </a>
+                </li>
+              }
             }
-            @if (quest.scorebattle) {
-              <li>
-                Score Battle:
-                <a routerLink="/{{gameURL}}/quests/scorebattles/{{language}}"
-                  fragment="{{quest.scorebattle[0].scorebattle[0].chapter}}-{{quest.scorebattle[0].scorebattle[0].section}}">
-                  {{quest.scorebattle[0].scorebattle[0].chapter}}-{{quest.scorebattle[0].scorebattle[0].section}} {{difficulties[quest.scorebattle[0].difficulty]}}
-                </a>
-              </li>
-            }
-          }
-        </ul>
+          </ul>
+        }
         @if (item.material[0].ing) {
           <b>Used in:</b>
           <ul>
@@ -94,16 +94,10 @@
         }
       }
       @if (item.combat) {
-        @if (item.note) {
-          <p [innerHTML]="item.note"></p>
-        }
         <p><b>Uses:</b> {{item.combat[0].uses}}<br />
         <b>Range:</b> {{item.combat[0].area}}</p>
       }
       @if (item.equip) {
-        @if (item.note) {
-          <p [innerHTML]="item.note"></p>
-        }
         <table class="tbl"><tbody>
           <tr class="table-dark-center"><th colspan="4">Stats</th></tr>
           <tr>

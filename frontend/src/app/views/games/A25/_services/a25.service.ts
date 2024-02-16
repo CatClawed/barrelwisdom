@@ -72,6 +72,13 @@ export class A25Service {
     'pierce': '#647189',
   }
 
+  public readonly equipment = {
+    "en":"Equipment",
+    "ja":"装備",
+    "sc":"装备",
+    "tc":"裝備"
+  }
+
   getFilter(slugname: string, language: string): Observable<NameLink[]> {
     return this.http.get<NameLink[]>(`${environment.apiUrl}/A25/filterable/${slugname}/${language}/`);
   }

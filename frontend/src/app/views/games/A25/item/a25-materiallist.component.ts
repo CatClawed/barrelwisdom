@@ -20,6 +20,12 @@ import { map, startWith } from 'rxjs/operators';
 
 export class A25MaterialListComponent extends ModalUseComponent {
   filteredItems: Observable<Item[]>;
+  combat = {
+    "en":"Combat",
+    "ja":"戦闘",
+    "sc":"战斗道具",
+    "tc":"戰鬥道具"
+  }
 
   constructor(
     protected modalService: BsModalService,
@@ -29,7 +35,7 @@ export class A25MaterialListComponent extends ModalUseComponent {
     protected location: Location,
     protected seoService: SeoService,
     private formBuilder: UntypedFormBuilder,
-    private a25service: A25Service,
+    protected a25service: A25Service,
   ) {
     super(modalService, destroy$, router, route, location, seoService);
     this.pageForm = this.formBuilder.nonNullable.group({

@@ -21,6 +21,24 @@ import { map, startWith } from 'rxjs/operators';
       margin-bottom: 1rem;
       grid-column-gap:2%;
     }`,
+    `.a25-star-font {
+      -webkit-text-stroke-color:black;
+      color:yellow;
+      padding-top:0.3rem;
+    }`,
+    `.a25-char-font {
+      height: 20%;
+      width: 20%;
+      aspect-ratio:1;
+      color:white;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      border-radius:50%;
+      position:absolute;
+      bottom:0;
+      right:9%;
+    }`,
     `@media screen and (min-width: 800px) {
       .char-grid {
         grid-template-columns:repeat(4,23%);

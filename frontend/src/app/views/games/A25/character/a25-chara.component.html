@@ -19,11 +19,9 @@
           </div>
         </div>
       </div>
-      <div style="position:relative;border-radius:50%;overflow:hidden !important;margin:auto;aspect-ratio:1;max-width:100%;width:400px;filter:drop-shadow(5px 5px 5px black);{{gradients[chara.rarity]}}">
-        <img loading="lazy"
-          style="aspect-ratio:680/724;width:400px;"
-          src="{{imgURL}}characters/full/{{chara.slug}}.webp" alt="{{chara.name}} {{chara.title}}" />
-      </div>
+      <img loading="lazy"
+        style="aspect-ratio:680/724;width:400px;position:relative;border-radius:50%;overflow:hidden !important;margin:auto;aspect-ratio:1;max-width:100%;width:400px;filter:drop-shadow(5px 5px 5px black);{{gradients[chara.rarity]}}display:block;"
+        src="{{imgURL}}characters/full/{{chara.slug}}.webp" alt="{{chara.name}} {{chara.title}}" />
       @if (chara.limit) {
         <p style="margin-top:1rem;"><b>Event: </b>{{chara.limit}}</p>
       }
@@ -132,9 +130,7 @@
             <tr>
               <td>
                 <b>{{skill.name}}</b>
-                <div style="float:right;width:3rem;height:3rem;background-color:{{elements[skill.elem]}};color:white;display:flex;justify-content:center;align-items:center;border-radius:50%;">
-                  <i class="atelier atelier-np atelier-resleri-{{skill.elem}}"></i>
-                </div>
+                <i class="atelier atelier-np atelier-resleri-{{skill.elem}}" style="float:right;width:3rem;height:3rem;background-color:{{elements[skill.elem]}};color:white;display:flex;justify-content:center;align-items:center;border-radius:50%;"></i>
                 <p [innerHTML]="replaceDesc(skill)"></p>
                 @if (skill.wt) {
                   <p    ><b>WT: </b>{{skill.wt}}</p>
@@ -152,10 +148,8 @@
             </tr>
           }
           <tr>
-          
           </tbody></table>
           <table class="tbl"><tbody>
-            
               <tr class="table-dark-center"><th>Passives</th></tr>
             <tr>
               <td>
