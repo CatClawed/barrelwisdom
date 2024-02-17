@@ -6,11 +6,14 @@ import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
 import { BR1Service } from '@app/views/games/BR1/_services/br1.service';
+import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
 
 @Component({
   templateUrl: 'br1-missionlist.component.html',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports]
 })
 export class BR1MissionlistComponent extends FragmentedComponent {
   constructor(

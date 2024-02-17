@@ -3,12 +3,15 @@ import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
+import { CommonImports, PopoverBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
   templateUrl: 'brsl-item.component.html',
   selector: 'brsl-item',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports, PopoverBandaidModule]
 })
 export class BRSLItemComponent extends SingleComponent {
   expand = false;

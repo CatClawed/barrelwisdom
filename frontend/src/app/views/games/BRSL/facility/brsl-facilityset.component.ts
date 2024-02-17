@@ -5,13 +5,16 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { FacilitySet } from '@app/views/games/BRSL/_services/brsl.interface';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
+import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { FilterableComponent } from '@app/views/games/_prototype/filterable.component';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'brsl-facilityset.component.html',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports, ...MaterialFormImports]
 })
 
 export class BRSLFacilitySetComponent extends FilterableComponent {

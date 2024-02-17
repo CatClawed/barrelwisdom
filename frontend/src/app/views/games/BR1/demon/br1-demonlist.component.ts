@@ -6,14 +6,19 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Demon } from '@app/views/games/BR1/_services/br1.interface';
 import { BR1Service } from '@app/views/games/BR1/_services/br1.service';
+import { CommonImports, MaterialFormImports, ModalBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { BR1DemonComponent } from './br1-demon.component';
 
 @Component({
   templateUrl: 'br1-demonlist.component.html',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports, ...MaterialFormImports, ModalBandaidModule,
+    BR1DemonComponent]
 })
 
 export class BR1DemonlistComponent extends ModalUseComponent {

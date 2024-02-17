@@ -1,17 +1,21 @@
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { PipeModule } from '@app/pipes/pipes.module';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Event } from '@app/views/games/BRSL/_services/brsl.interface';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
+import { CommonImports, MaterialFormImports, PopoverBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { FilterableComponent } from '@app/views/games/_prototype/filterable.component';
 import { Observable, forkJoin } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'brsl-fragmentlist.component.html',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports, ...MaterialFormImports, PipeModule, PopoverBandaidModule]
 })
 
 export class BRSLFragmentComponent extends FilterableComponent {

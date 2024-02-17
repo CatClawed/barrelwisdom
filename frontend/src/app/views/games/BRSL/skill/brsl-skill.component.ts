@@ -4,11 +4,14 @@ import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
+import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
 
 @Component({
   templateUrl: 'brsl-skill.component.html',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports]
 })
 export class BRSLSkillComponent extends FragmentedComponent {
   constructor(

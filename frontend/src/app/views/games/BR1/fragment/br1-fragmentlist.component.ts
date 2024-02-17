@@ -6,13 +6,16 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { FragmentEffect } from '@app/views/games/BR1/_services/br1.interface';
 import { BR1Service } from '@app/views/games/BR1/_services/br1.service';
+import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'br1-fragmentlist.component.html',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports, ...MaterialFormImports]
 })
 
 export class BR1FragmentEffectlistComponent extends FragmentedComponent {

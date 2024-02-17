@@ -5,11 +5,14 @@ import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { BR1Service } from '@app/views/games/BR1/_services/br1.service';
+import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
 
 @Component({
   templateUrl: 'br1-skilllist.component.html',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports]
 })
 export class BR1SkilllistComponent extends FragmentedComponent {
   constructor(

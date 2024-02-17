@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LanguageGuard } from '@app/_helpers/language.guard';
 
 const routes: Routes = [
   {
@@ -7,7 +8,13 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/BRSL/fragment/brsl-fragment.module').then(m=>m.BRSLFragmentModule),
+        loadComponent: ()=> import('@app/views/games/BRSL/fragment/brsl-fragmentlist.component').then(m=>m.BRSLFragmentComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/BRSL/fragment/brsl-fragmentlist.component').then(m=>m.BRSLFragmentComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
@@ -16,7 +23,18 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/BRSL/demon/brsl-demon.module').then(m=>m.BRSLDemonModule),
+        loadComponent: ()=> import('@app/views/games/BRSL/demon/brsl-demonlist.component').then(m=>m.BRSLDemonlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/BRSL/demon/brsl-demonlist.component').then(m=>m.BRSLDemonlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/BRSL/demon/brsl-demon.component').then(m=>m.BRSLDemonComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
@@ -25,7 +43,18 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/BRSL/item/brsl-item.module').then(m=>m.BRSLItemModule),
+        loadComponent: ()=> import('@app/views/games/BRSL/item/brsl-itemlist.component').then(m=>m.BRSLItemlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/BRSL/item/brsl-itemlist.component').then(m=>m.BRSLItemlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/BRSL/item/brsl-item.component').then(m=>m.BRSLItemComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
@@ -34,7 +63,13 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/BRSL/unit/brsl-unit.module').then(m=>m.BRSLUnitModule),
+        loadComponent: ()=> import('@app/views/games/BRSL/unit/brsl-unit.component').then(m=>m.BRSLUnitComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/BRSL/unit/brsl-unit.component').then(m=>m.BRSLUnitComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
@@ -43,7 +78,28 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/BRSL/facility/brsl-facility.module').then(m=>m.BRSLFacilityModule),
+        loadComponent: ()=> import('@app/views/games/BRSL/facility/brsl-facilitylist.component').then(m=>m.BRSLFacilitylistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/BRSL/facility/brsl-facilitylist.component').then(m=>m.BRSLFacilitylistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: 'sets', 
+        loadComponent: ()=> import('@app/views/games/BRSL/facility/brsl-facilityset.component').then(m=>m.BRSLFacilitySetComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: 'sets/:language', 
+        loadComponent: ()=> import('@app/views/games/BRSL/facility/brsl-facilityset.component').then(m=>m.BRSLFacilitySetComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/BRSL/facility/brsl-facility.component').then(m=>m.BRSLFacilityComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
@@ -52,7 +108,13 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/BRSL/skill/brsl-skill.module').then(m=>m.BRSLSkillModule),
+        loadComponent: ()=> import('@app/views/games/BRSL/skill/brsl-skill.component').then(m=>m.BRSLSkillComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/BRSL/skill/brsl-skill.component').then(m=>m.BRSLSkillComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
@@ -60,9 +122,19 @@ const routes: Routes = [
     path: 'locations',
     children: [
       {
-        path: '', 
-        loadChildren: ()=> import('@app/views/games/BRSL/location/brsl-location.module').then(m=>m.BRSLLocationModule),
+        path: ':subject', 
+        loadComponent: ()=> import('@app/views/games/BRSL/location/brsl-location.component').then(m=>m.BRSLLocationComponent),
+        canActivate: [LanguageGuard],
       },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/BRSL/location/brsl-location.component').then(m=>m.BRSLLocationComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: '',
+        loadComponent: () => import('@app/views/error/error.component').then(m=>m.ErrorComponent)
+      }
     ]
   },
   {
