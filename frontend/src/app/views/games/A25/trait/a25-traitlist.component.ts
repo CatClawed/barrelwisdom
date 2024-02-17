@@ -4,16 +4,23 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { NameLink, Trait } from '@app/views/games/A25/_services/a25.interface';
+import { Trait } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
+import { CommonImports, MaterialFormImports, ModalBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable, forkJoin } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { A25CharaComponent } from '../character/a25-chara.component';
+import { A25ItemComponent } from '../item/a25-item.component';
+import { A25TraitComponent } from './a25-trait.component';
 
 @Component({
   templateUrl: 'a25-traitlist.component.html',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports, ...MaterialFormImports, ModalBandaidModule,
+    A25ItemComponent, A25TraitComponent, A25CharaComponent]
 })
 
 export class A25TraitlistComponent extends ModalUseComponent {

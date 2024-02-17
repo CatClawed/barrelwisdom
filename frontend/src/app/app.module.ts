@@ -26,7 +26,7 @@ const APP_CONTAINERS = [
     HttpClientModule,
     MatSidenavModule,
     MatMenuModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [
     provideClientHydration(),

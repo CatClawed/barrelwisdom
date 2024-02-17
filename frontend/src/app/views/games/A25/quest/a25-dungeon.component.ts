@@ -4,15 +4,17 @@ import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
+import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
-import { Dungeon } from '../_services/a25.interface';
 
 @Component({
   templateUrl: 'a25-dungeon.component.html',
   styleUrls: ['../resleri.scss'],
   encapsulation: ViewEncapsulation.None,
   selector: 'a25-dungeon',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports]
 })
 export class A25DungeonComponent extends FragmentedComponent {
   title: string;

@@ -1,21 +1,27 @@
 import { Location } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Item } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
+import { CommonImports, MaterialFormImports, ModalBandaidModule, PopoverBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable, forkJoin } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { A25ItemComponent } from './a25-item.component';
 
 @Component({
   templateUrl: 'a25-materiallist.component.html',
   styleUrls: ['../resleri.scss'],
   encapsulation: ViewEncapsulation.None,
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports, ...MaterialFormImports, ModalBandaidModule,
+    PopoverBandaidModule, A25ItemComponent, MatButtonModule]
 })
 
 export class A25MaterialListComponent extends ModalUseComponent {
