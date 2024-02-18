@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { LanguageGuard } from '@app/_helpers/language.guard';
 
 const routes: Routes = [
   {
@@ -7,7 +8,18 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A18/trait/a18-trait.module').then(m=>m.A18TraitModule),
+        loadComponent: ()=> import('@app/views/games/A18/trait/a18-traitlist.component').then(m=>m.A18TraitlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/A18/trait/a18-traitlist.component').then(m=>m.A18TraitlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/A18/trait/a18-trait.component').then(m=>m.A18TraitComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
@@ -16,7 +28,18 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A18/effect/a18-effect.module').then(m=>m.A18EffectModule),
+        loadComponent: ()=> import('@app/views/games/A18/effect/a18-effectlist.component').then(m=>m.A18EffectlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/A18/effect/a18-effectlist.component').then(m=>m.A18EffectlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/A18/effect/a18-effect.component').then(m=>m.A18EffectComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
@@ -25,7 +48,18 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A18/monster/a18-monster.module').then(m=>m.A18MonsterModule),
+        loadComponent: ()=> import('@app/views/games/A18/monster/a18-monsterlist.component').then(m=>m.A18MonsterlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/A18/monster/a18-monsterlist.component').then(m=>m.A18MonsterlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/A18/monster/a18-monster.component').then(m=>m.A18MonsterComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
@@ -33,9 +67,19 @@ const routes: Routes = [
     path: 'categories',
     children: [
       {
-        path: '', 
-        loadChildren: ()=> import('@app/views/games/A18/category/a18-category.module').then(m=>m.A18CategoryModule),
+        path: ':subject', 
+        loadComponent: ()=> import('@app/views/games/A18/category/a18-category.component').then(m=>m.A18CategoryComponent),
+        canActivate: [LanguageGuard],
       },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/A18/category/a18-category.component').then(m=>m.A18CategoryComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: '',
+        loadComponent: () => import('@app/views/error/error.component').then(m=>m.ErrorComponent)
+      }
     ]
   },
   {
@@ -43,7 +87,13 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A18/catalyst/a18-catalyst.module').then(m=>m.A18CatalystModule),
+        loadComponent: ()=> import('@app/views/games/A18/catalyst/a18-catalystlist.component').then(m=>m.A18CatalystlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/A18/catalyst/a18-catalystlist.component').then(m=>m.A18CatalystlistComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
@@ -52,7 +102,13 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A18/recipe/a18-recipe.module').then(m=>m.A18RecipeModule),
+        loadComponent: ()=> import('@app/views/games/A18/recipe/a18-recipe.component').then(m=>m.A18RecipeComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/A18/recipe/a18-recipe.component').then(m=>m.A18RecipeComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
@@ -61,7 +117,18 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A18/item/a18-item.module').then(m=>m.A18ItemModule),
+        loadComponent: ()=> import('@app/views/games/A18/item/a18-itemlist.component').then(m=>m.A18ItemlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/A18/item/a18-itemlist.component').then(m=>m.A18ItemlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/A18/item/a18-item.component').then(m=>m.A18ItemComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
@@ -70,7 +137,13 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A18/shop/a18-shop.module').then(m=>m.A18ShopModule),
+        loadComponent: ()=> import('@app/views/games/A18/shop/a18-shop.component').then(m=>m.A18ShopComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/A18/shop/a18-shop.component').then(m=>m.A18ShopComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },

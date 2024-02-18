@@ -3,12 +3,15 @@ import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
+import { CommonImports, TooltipBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
   templateUrl: 'a22-effect.component.html',
   selector: 'a22-effect',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports, TooltipBandaidModule]
 })
 export class A22EffectComponent extends SingleComponent {
   constructor(

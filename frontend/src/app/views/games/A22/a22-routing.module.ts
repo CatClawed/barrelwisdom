@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { LanguageGuard } from '@app/_helpers/language.guard';
 
 const routes: Routes = [
   {
@@ -7,7 +8,18 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A22/trait/a22-trait.module').then(m=>m.A22TraitModule),
+        loadComponent: ()=> import('@app/views/games/A22/trait/a22-traitlist.component').then(m=>m.A22TraitlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/A22/trait/a22-traitlist.component').then(m=>m.A22TraitlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/A22/trait/a22-trait.component').then(m=>m.A22TraitComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
@@ -16,37 +28,81 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A22/monster/a22-monster.module').then(m=>m.A22MonsterModule),
+        loadComponent: ()=> import('@app/views/games/A22/monster/a22-monsterlist.component').then(m=>m.A22MonsterlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/A22/monster/a22-monsterlist.component').then(m=>m.A22MonsterlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/A22/monster/a22-monster.component').then(m=>m.A22MonsterComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
   {
     path: 'effects',
+    data: { type: "normal" },
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A22/effect/a22-effect.module').then(m=>m.A22EffectModule),
-        data: { type: "normal" }
+        loadComponent: ()=> import('@app/views/games/A22/effect/a22-effectlist.component').then(m=>m.A22EffectlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/A22/effect/a22-effectlist.component').then(m=>m.A22EffectlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/A22/effect/a22-effect.component').then(m=>m.A22EffectComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
   {
     path: 'forge-effects',
+    data: { type: "forge" },
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A22/effect/a22-effect.module').then(m=>m.A22EffectModule),
-        data: { type: "forge" }
+        loadComponent: ()=> import('@app/views/games/A22/effect/a22-effectlist.component').then(m=>m.A22EffectlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/A22/effect/a22-effectlist.component').then(m=>m.A22EffectlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/A22/effect/a22-effect.component').then(m=>m.A22EffectComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
   {
     path: 'ev-effects',
+    data: { type: "ev" },
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A22/effect/a22-effect.module').then(m=>m.A22EffectModule),
-        data: { type: "ev" }
+        loadComponent: ()=> import('@app/views/games/A22/effect/a22-effectlist.component').then(m=>m.A22EffectlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/A22/effect/a22-effectlist.component').then(m=>m.A22EffectlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/A22/effect/a22-effect.component').then(m=>m.A22EffectComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
@@ -54,9 +110,19 @@ const routes: Routes = [
     path: 'locations',
     children: [
       {
-        path: '', 
-        loadChildren: ()=> import('@app/views/games/A22/location/a22-location.module').then(m=>m.A22LocationModule),
+        path: ':subject', 
+        loadComponent: ()=> import('@app/views/games/A22/location/a22-location.component').then(m=>m.A22LocationComponent),
+        canActivate: [LanguageGuard],
       },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/A22/location/a22-location.component').then(m=>m.A22LocationComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: '',
+        loadComponent: () => import('@app/views/error/error.component').then(m=>m.ErrorComponent)
+      }
     ]
   },
   {
@@ -64,7 +130,18 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A22/item/a22-item.module').then(m=>m.A22ItemModule),
+        loadComponent: ()=> import('@app/views/games/A22/item/a22-itemlist.component').then(m=>m.A22ItemlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/A22/item/a22-itemlist.component').then(m=>m.A22ItemlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/A22/item/a22-item.component').then(m=>m.A22ItemComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
@@ -73,7 +150,13 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A22/shopdevelop/a22-shopdevelop.module').then(m=>m.A22ShopDevelopModule),
+        loadComponent: ()=> import('@app/views/games/A22/shopdevelop/a22-shopdevelop.component').then(m=>m.A22ShopDevelopComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/A22/shopdevelop/a22-shopdevelop.component').then(m=>m.A22ShopDevelopComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
@@ -81,9 +164,19 @@ const routes: Routes = [
     path: 'categories',
     children: [
       {
-        path: '', 
-        loadChildren: ()=> import('@app/views/games/A22/category/a22-category.module').then(m=>m.A22CategoryModule),
+        path: ':subject', 
+        loadComponent: ()=> import('@app/views/games/A22/category/a22-category.component').then(m=>m.A22CategoryComponent),
+        canActivate: [LanguageGuard],
       },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/A22/category/a22-category.component').then(m=>m.A22CategoryComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: '',
+        loadComponent: () => import('@app/views/error/error.component').then(m=>m.ErrorComponent)
+      }
     ]
   },
   {

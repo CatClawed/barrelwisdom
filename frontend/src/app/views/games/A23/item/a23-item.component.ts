@@ -5,12 +5,15 @@ import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
 import { EffectData, EffectLine } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
+import { CommonImports, PopoverBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
   templateUrl: 'a23-item.component.html',
   selector: 'a23-item',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports, PopoverBandaidModule]
 })
 export class A23ItemComponent extends SingleComponent {
   colors = {

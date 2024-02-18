@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { LanguageGuard } from '@app/_helpers/language.guard';
 
 const routes: Routes = [
   {
@@ -7,7 +8,18 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A23/trait/a23-trait.module').then(m=>m.A23TraitModule),
+        loadComponent: ()=> import('@app/views/games/A23/trait/a23-traitlist.component').then(m=>m.A23TraitlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/A23/trait/a23-traitlist.component').then(m=>m.A23TraitlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/A23/trait/a23-trait.component').then(m=>m.A23TraitComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
@@ -16,7 +28,18 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A23/effect/a23-effect.module').then(m=>m.A23EffectModule),
+        loadComponent: ()=> import('@app/views/games/A23/effect/a23-effectlist.component').then(m=>m.A23EffectlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/A23/effect/a23-effectlist.component').then(m=>m.A23EffectlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/A23/effect/a23-effect.component').then(m=>m.A23EffectComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
@@ -24,9 +47,19 @@ const routes: Routes = [
     path: 'locations',
     children: [
       {
-        path: '', 
-        loadChildren: ()=> import('@app/views/games/A23/location/a23-location.module').then(m=>m.A23LocationModule),
+        path: ':subject', 
+        loadComponent: ()=> import('@app/views/games/A23/location/a23-location.component').then(m=>m.A23LocationComponent),
+        canActivate: [LanguageGuard],
       },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/A23/location/a23-location.component').then(m=>m.A23LocationComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: '',
+        loadComponent: () => import('@app/views/error/error.component').then(m=>m.ErrorComponent)
+      }
     ]
   },
   {
@@ -34,7 +67,18 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A23/monster/a23-monster.module').then(m=>m.A23MonsterModule),
+        loadComponent: ()=> import('@app/views/games/A23/monster/a23-monsterlist.component').then(m=>m.A23MonsterlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/A23/monster/a23-monsterlist.component').then(m=>m.A23MonsterlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/A23/monster/a23-monster.component').then(m=>m.A23MonsterComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
@@ -43,7 +87,28 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A23/item/a23-item.module').then(m=>m.A23ItemModule),
+        loadComponent: ()=> import('@app/views/games/A23/item/a23-itemlist.component').then(m=>m.A23ItemlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/A23/item/a23-itemlist.component').then(m=>m.A23ItemlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/A23/item/a23-item.component').then(m=>m.A23ItemComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: 'books/:subject', 
+        loadComponent: ()=> import('@app/views/games/A23/item/a23-book.component').then(m=>m.A23BookComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: 'books/:subject/:language', 
+        loadComponent: ()=> import('@app/views/games/A23/item/a23-book.component').then(m=>m.A23BookComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
@@ -51,9 +116,19 @@ const routes: Routes = [
     path: 'categories',
     children: [
       {
-        path: '', 
-        loadChildren: ()=> import('@app/views/games/A23/category/a23-category.module').then(m=>m.A23CategoryModule),
+        path: ':subject', 
+        loadComponent: ()=> import('@app/views/games/A23/category/a23-category.component').then(m=>m.A23CategoryComponent),
+        canActivate: [LanguageGuard],
       },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/A23/category/a23-category.component').then(m=>m.A23CategoryComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: '',
+        loadComponent: () => import('@app/views/error/error.component').then(m=>m.ErrorComponent)
+      }
     ]
   },
   {
@@ -61,7 +136,13 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A23/recipe/a23-recipe.module').then(m=>m.A23RecipeModule),
+        loadComponent: ()=> import('@app/views/games/A23/recipe/a23-recipe.component').then(m=>m.A23RecipeComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/A23/recipe/a23-recipe.component').then(m=>m.A23RecipeComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
@@ -70,7 +151,13 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A23/majorgather/a23-majorgather.module').then(m=>m.A23MajorGatherModule),
+        loadComponent: ()=> import('@app/views/games/A23/majorgather/a23-majorgather.component').then(m=>m.A23MajorGatherComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/A23/majorgather/a23-majorgather.component').then(m=>m.A23MajorGatherComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
@@ -79,7 +166,13 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A23/seed/a23-seed.module').then(m=>m.A23SeedModule),
+        loadComponent: ()=> import('@app/views/games/A23/seed/a23-seed.component').then(m=>m.A23SeedComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/A23/seed/a23-seed.component').then(m=>m.A23SeedComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
