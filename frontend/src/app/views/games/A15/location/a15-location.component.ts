@@ -5,11 +5,14 @@ import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
 import { A15Service } from '@app/views/games/A15/_services/a15.service';
+import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
 
 @Component({
   templateUrl: 'a15-location.component.html',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports]
 })
 export class A15LocationComponent extends FragmentedComponent {
   constructor(

@@ -6,14 +6,19 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Property } from '@app/views/games/A15/_services/a15.interface';
 import { A15Service } from '@app/views/games/A15/_services/a15.service';
+import { CommonImports, MaterialFormImports, ModalBandaidModule, TooltipBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { A15PropertyComponent } from './a15-property.component';
 
 @Component({
   templateUrl: 'a15-propertylist.component.html',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports, ...MaterialFormImports, ModalBandaidModule,
+    A15PropertyComponent, TooltipBandaidModule]
 })
 export class A15PropertylistComponent extends ModalUseComponent {
   filteredProperties: Observable<Property[]>;

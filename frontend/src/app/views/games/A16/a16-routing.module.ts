@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { LanguageGuard } from '@app/_helpers/language.guard';
 
 const routes: Routes = [
   {
@@ -7,7 +8,18 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A16/property/a16-property.module').then(m=>m.A16PropertyModule),
+        loadComponent: ()=> import('@app/views/games/A16/property/a16-propertylist.component').then(m=>m.A16PropertylistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/A16/property/a16-propertylist.component').then(m=>m.A16PropertylistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/A16/property/a16-property.component').then(m=>m.A16PropertyComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
@@ -16,7 +28,18 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A16/effect/a16-effect.module').then(m=>m.A16EffectModule),
+        loadComponent: ()=> import('@app/views/games/A16/effect/a16-effectlist.component').then(m=>m.A16EffectlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/A16/effect/a16-effectlist.component').then(m=>m.A16EffectlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/A16/effect/a16-effect.component').then(m=>m.A16EffectComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
@@ -25,7 +48,18 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A16/monster/a16-monster.module').then(m=>m.A16MonsterModule),
+        loadComponent: ()=> import('@app/views/games/A16/monster/a16-monsterlist.component').then(m=>m.A16MonsterlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/A16/monster/a16-monsterlist.component').then(m=>m.A16MonsterlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/A16/monster/a16-monster.component').then(m=>m.A16MonsterComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
@@ -34,7 +68,18 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A16/book/a16-book.module').then(m=>m.A16BookModule),
+        loadComponent: ()=> import('@app/views/games/A16/book/a16-booklist.component').then(m=>m.A16BooklistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/A16/book/a16-booklist.component').then(m=>m.A16BooklistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/A16/book/a16-book.component').then(m=>m.A16BookComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
@@ -43,7 +88,18 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/games/A16/item/a16-item.module').then(m=>m.A16ItemModule),
+        loadComponent: ()=> import('@app/views/games/A16/item/a16-itemlist.component').then(m=>m.A16ItemlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language', 
+        loadComponent: ()=> import('@app/views/games/A16/item/a16-itemlist.component').then(m=>m.A16ItemlistComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/A16/item/a16-item.component').then(m=>m.A16ItemComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },
@@ -51,23 +107,43 @@ const routes: Routes = [
     path: 'categories',
     children: [
       {
-        path: '', 
-        loadChildren: ()=> import('@app/views/games/A16/category/a16-category.module').then(m=>m.A16CategoryModule),
+        path: ':subject', 
+        loadComponent: ()=> import('@app/views/games/A16/category/a16-category.component').then(m=>m.A16CategoryComponent),
+        canActivate: [LanguageGuard],
       },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/A16/category/a16-category.component').then(m=>m.A16CategoryComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: '',
+        loadComponent: () => import('@app/views/error/error.component').then(m=>m.ErrorComponent)
+      }
     ]
   },
   {
     path: 'locations',
     children: [
       {
-        path: '', 
-        loadChildren: ()=> import('@app/views/games/A16/location/a16-location.module').then(m=>m.A16LocationModule),
+        path: ':subject', 
+        loadComponent: ()=> import('@app/views/games/A16/location/a16-location.component').then(m=>m.A16LocationComponent),
+        canActivate: [LanguageGuard],
       },
+      {
+        path: ':subject/:language', 
+        loadComponent: ()=> import('@app/views/games/A16/location/a16-location.component').then(m=>m.A16LocationComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: '',
+        loadComponent: () => import('@app/views/error/error.component').then(m=>m.ErrorComponent)
+      }
     ]
   },
   {
     path: '',
-    redirectTo: '/shallie/faq',
+    redirectTo: '/escha/faq',
     pathMatch: 'full'
   },
 ];

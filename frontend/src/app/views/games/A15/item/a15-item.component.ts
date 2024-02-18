@@ -3,13 +3,16 @@ import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { A15Service } from '@app/views/games/A15/_services/a15.service';
+import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
   templateUrl: 'a15-item.component.html',
   selector: 'a15-item',
   styleUrls: ['../../_scss/dusk.scss'],
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports]
 })
 export class A15ItemComponent extends SingleComponent {
   fire = false;

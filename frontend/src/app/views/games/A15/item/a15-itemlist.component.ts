@@ -1,19 +1,25 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { ItemList } from '@app/views/games/A15/_services/a15.interface';
 import { A15Service } from '@app/views/games/A15/_services/a15.service';
+import { CommonImports, MaterialFormImports, ModalBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable, forkJoin } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { A15ItemComponent } from './a15-item.component';
 
 @Component({
   templateUrl: 'a15-itemlist.component.html',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports, ...MaterialFormImports, ModalBandaidModule,
+    A15ItemComponent, MatButtonModule]
 })
 
 export class A15ItemlistComponent extends ModalUseComponent {

@@ -10,6 +10,7 @@ import { BreadcrumbComponent } from '@app/views/breadcrumb/breadcrumb.component'
 import { ErrorComponent } from '@app/views/error/error.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { PopoverModule } from 'ngx-bootstrap/popover';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 export const CommonImports = [ErrorComponent, BreadcrumbComponent, RouterLink]
 export const MaterialFormImports = [MatIconModule, MatSelectModule, MatInputModule,
@@ -34,3 +35,13 @@ export class ModalBandaidModule { }
     ]
 })
 export class PopoverBandaidModule { }
+
+@NgModule({
+    imports: [
+        TooltipModule.forRoot()
+    ],
+    exports: [
+        TooltipModule,
+    ]
+})
+export class TooltipBandaidModule { }
