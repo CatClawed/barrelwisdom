@@ -10,13 +10,12 @@ import { SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthenticationService } from "@app/services/authentication.service";
 import { DestroyService } from '@app/services/destroy.service';
-import { UserService } from '@app/views/main/_services/user.service';
 import { ErrorComponent } from '@app/views/_components/error/error.component';
 import { EditBlog, Tag } from "@app/views/main/_interfaces/blog";
 import { Section } from '@app/views/main/_interfaces/section';
 import { User } from "@app/views/main/_interfaces/user";
 import { ErrorCodeService } from "@app/views/main/_services/errorcode.service";
-import { SectionService } from '@app/views/main/_services/section.service';
+import { UserService } from '@app/views/main/_services/user.service';
 import { environment } from '@environments/environment';
 import { MarkdownComponent, MarkdownPipe, MarkdownService, provideMarkdown } from 'ngx-markdown';
 import { Observable, of } from 'rxjs';
@@ -77,9 +76,7 @@ export class CreateComponent {
     private errorService: ErrorCodeService,
     private authenticationService: AuthenticationService,
     private markdownService: MarkdownService,
-    private sectionService: SectionService,
-    private userService: UserService
-  ) {
+    private userService: UserService) {
     slugify.extend({ "'": "-" })
     this.getTags();
     this.authenticationService.user
@@ -250,7 +247,7 @@ export class CreateComponent {
 
   // get the sections that apply to the user group
   getSections() {
-    this.sectionService.getSections()
+    this.userService.getSections()
       .pipe(
         first(),
         switchMap(sections => {

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { PipeModule } from '@app/pipes/pipes.module';
+import { PipeModule } from '@app/_helpers/pipes/pipes.module';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Event } from '@app/views/games/BRSL/_services/brsl.interface';

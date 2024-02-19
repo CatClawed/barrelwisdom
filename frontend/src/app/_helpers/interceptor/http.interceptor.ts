@@ -1,8 +1,8 @@
 import { HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Inject, Injectable, Optional, OnDestroy } from '@angular/core';
-import { REQUEST } from '../../express.tokens';
+import { REQUEST } from 'src/express.tokens';
 import { Request } from 'express';
-import {AppComponent} from '@app/app.component';
+import { AppComponent } from '@app/app.component';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
@@ -20,12 +20,12 @@ export class UniversalRelativeInterceptor implements HttpInterceptor, OnDestroy 
     private destroy$ = new Subject<void>();
     constructor(@Optional() @Inject(REQUEST) protected request: Request) {
         AppComponent.isBrowser
-        .pipe(takeUntil(this.destroy$))
-        .subscribe(isBrowser => {
-            if (!isBrowser) {
-              this.isBrowser = isBrowser;
-            }
-          });
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(isBrowser => {
+                if (!isBrowser) {
+                    this.isBrowser = isBrowser;
+                }
+            });
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler) {
@@ -43,12 +43,11 @@ export class UniversalRelativeInterceptor implements HttpInterceptor, OnDestroy 
             const url = protocolHost + pathSeparator + req.url;
             const serverRequest = req.clone({ url });
             return next.handle(serverRequest);
-        } else {
-            return next.handle(req);
         }
+        return next.handle(req);
     }
     ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();
-      }
+    }
 }
