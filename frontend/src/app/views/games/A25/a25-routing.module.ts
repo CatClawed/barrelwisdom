@@ -28,7 +28,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadComponent: () => import('@app/views/error/error.component').then(m=>m.ErrorComponent)
+        loadComponent: () => import('@app/views/_components/error/error.component').then(m=>m.ErrorComponent)
       },
       {
         path: 'materials', 
@@ -162,7 +162,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        loadComponent: () => import('@app/views/error/error.component').then(m=>m.ErrorComponent)
+        loadComponent: () => import('@app/views/_components/error/error.component').then(m=>m.ErrorComponent)
       }
     ]
   },

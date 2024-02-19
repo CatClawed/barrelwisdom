@@ -6,7 +6,7 @@ import { BlogPaginator } from '@app/interfaces/blog';
 import { BlogService } from '@app/services/blog.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { ErrorComponent } from '@app/views/error/error.component';
+import { ErrorComponent } from '@app/views/_components/error/error.component';
 import { catchError, mergeMap, of, takeUntil } from 'rxjs';
 
 @Component({

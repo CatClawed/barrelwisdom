@@ -58,7 +58,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        loadComponent: () => import('@app/views/error/error.component').then(m=>m.ErrorComponent)
+        loadComponent: () => import('@app/views/_components/error/error.component').then(m=>m.ErrorComponent)
       }
     ]
   },
@@ -127,7 +127,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        loadComponent: () => import('@app/views/error/error.component').then(m=>m.ErrorComponent)
+        loadComponent: () => import('@app/views/_components/error/error.component').then(m=>m.ErrorComponent)
       }
     ]
   },

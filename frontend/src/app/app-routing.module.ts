@@ -20,7 +20,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadComponent: ()=> import('@app/views/login/login.component').then(m=>m.LoginComponent),
+        loadComponent: ()=> import('@app/views/main/login/login.component').then(m=>m.LoginComponent),
       },
     ]
   },
@@ -30,7 +30,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadComponent: ()=> import('@app/views/settings/settings.component').then(m=>m.SettingsComponent),
+        loadComponent: ()=> import('@app/views/main/settings/settings.component').then(m=>m.SettingsComponent),
       },
     ]
   },
@@ -40,7 +40,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadComponent: ()=> import('@app/views/register/register.component').then(m=>m.RegisterComponent),
+        loadComponent: ()=> import('@app/views/main/register/register.component').then(m=>m.RegisterComponent),
       },
     ]
   },
@@ -50,7 +50,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadComponent: ()=> import('@app/views/create/create.component').then(m=>m.CreateComponent),
+        loadComponent: ()=> import('@app/views/main/create/create.component').then(m=>m.CreateComponent),
       },
     ]
   },
@@ -60,7 +60,7 @@ const routes: Routes = [
     children: [
       {
         path: 'comment',
-        loadComponent: ()=> import('@app/views/moderate/moderate.component').then(m=>m.ModerateComponent),
+        loadComponent: ()=> import('@app/views/main/moderate/moderate.component').then(m=>m.ModerateComponent),
       },
     ]
   },
@@ -70,7 +70,7 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadComponent: ()=> import('@app/views/user/user.component').then(m=>m.UserComponent),
+        loadComponent: ()=> import('@app/views/main/user/user.component').then(m=>m.UserComponent),
       },
     ]
   },
@@ -198,7 +198,7 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadComponent: ()=> import('@app/views/blog/blog.component').then(m=>m.BlogComponent),
+        loadComponent: ()=> import('@app/views/main/blog/blog.component').then(m=>m.BlogComponent),
       },
     ]
   },
@@ -208,20 +208,20 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadComponent: ()=> import('@app/views/home/home.component').then(m=>m.HomeComponent),
+        loadComponent: ()=> import('@app/views/main/home/home.component').then(m=>m.HomeComponent),
       },
       {
         path: 'tag/:tagname', 
-        loadComponent: ()=> import('@app/views/home/home.component').then(m=>m.HomeComponent),
+        loadComponent: ()=> import('@app/views/main/home/home.component').then(m=>m.HomeComponent),
       },
       {
         path: 'tag/:tagname/:number',
-        loadComponent: ()=> import('@app/views/home/home.component').then(m=>m.HomeComponent),
+        loadComponent: ()=> import('@app/views/main/home/home.component').then(m=>m.HomeComponent),
         canMatch: [canMatchNumber]
       },
       {
         path: ':number',
-        loadComponent: ()=> import('@app/views/home/home.component').then(m=>m.HomeComponent),
+        loadComponent: ()=> import('@app/views/main/home/home.component').then(m=>m.HomeComponent),
         canMatch: [canMatchNumber]
       },
     ]
@@ -232,7 +232,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadComponent: () => import('@app/views/error/error.component').then(m=>m.ErrorComponent)
+        loadComponent: () => import('@app/views/_components/error/error.component').then(m=>m.ErrorComponent)
       },
     ]
   }

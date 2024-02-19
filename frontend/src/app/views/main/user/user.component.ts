@@ -3,7 +3,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { UserProfile } from '@app/interfaces/user';
 import { DestroyService } from '@app/services/destroy.service';
 import { UserService } from '@app/services/user.service';
-import { ErrorComponent } from '@app/views/error/error.component';
+import { ErrorComponent } from '@app/views/_components/error/error.component';
 import { takeUntil } from 'rxjs';
 
 @Component({
