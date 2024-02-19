@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit, SecurityContext } from '@angular/core';
+import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { SafeHtml } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Blog, Comment } from '@app/interfaces/blog';
 import { User } from '@app/interfaces/user';
 import { AuthenticationService } from '@app/services/authentication.service';
@@ -9,13 +12,19 @@ import { BlogService } from '@app/services/blog.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
-import { MarkdownService } from 'ngx-markdown';
+import { BreadcrumbComponent } from '@app/views/breadcrumb/breadcrumb.component';
+import { ErrorComponent } from '@app/views/error/error.component';
+import { MarkdownComponent, MarkdownPipe, MarkdownService, provideMarkdown } from 'ngx-markdown';
 import { catchError, switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'blog.component.html',
   styleUrls: ['blog.scss'],
-  providers: [DestroyService]
+  providers: [DestroyService, provideMarkdown({sanitize: SecurityContext.NONE})],
+  standalone: true,
+  imports: [ErrorComponent, BreadcrumbComponent, MatFormFieldModule, MatInputModule,
+    ReactiveFormsModule, RouterLink, MarkdownComponent, MarkdownPipe,
+    CommonModule]
 })
 
 export class BlogComponent implements OnInit {

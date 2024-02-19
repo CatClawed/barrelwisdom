@@ -1,10 +1,13 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { MatChipInputEvent } from '@angular/material/chips';
+import { CommonModule } from '@angular/common';
+import { Component, ElementRef, SecurityContext, ViewChild } from '@angular/core';
+import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { MatAutocomplete, MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { SafeHtml } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { EditBlog, Tag } from "@app/interfaces/blog";
 import { Section } from '@app/interfaces/section';
 import { User } from "@app/interfaces/user";
@@ -13,15 +16,20 @@ import { BlogService } from '@app/services/blog.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { ErrorCodeService } from "@app/services/errorcode.service";
 import { SectionService } from '@app/services/section.service';
+import { ErrorComponent } from '@app/views/error/error.component';
 import { environment } from '@environments/environment';
-import { MarkdownService } from 'ngx-markdown';
+import { MarkdownComponent, MarkdownPipe, MarkdownService, provideMarkdown } from 'ngx-markdown';
 import { Observable, of } from 'rxjs';
 import { catchError, first, map, mergeMap, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import slugify from 'slugify';
 
 @Component({
   templateUrl: 'create.component.html',
-  providers: [DestroyService]
+  providers: [DestroyService, provideMarkdown({sanitize: SecurityContext.NONE})],
+  standalone: true,
+  imports: [ErrorComponent, MatFormFieldModule, MatInputModule,
+    ReactiveFormsModule, RouterLink, MarkdownComponent, MarkdownPipe,
+    CommonModule, MatChipsModule, MatAutocompleteModule]
 })
 
 export class CreateComponent {

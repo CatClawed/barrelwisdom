@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Comment } from '@app/interfaces/blog';
 import { User } from '@app/interfaces/user';
@@ -5,11 +6,14 @@ import { AuthenticationService } from '@app/services/authentication.service';
 import { BlogService } from '@app/services/blog.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
+import { ErrorComponent } from '@app/views/error/error.component';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'moderate.component.html',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [ErrorComponent, DatePipe]
 })
 
 export class ModerateComponent implements OnInit {

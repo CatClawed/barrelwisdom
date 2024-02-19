@@ -1,18 +1,20 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { AuthenticationService } from '@app/services/authentication.service';
-import { ErrorCodeService } from '@app/services/errorcode.service';
-import { first, mergeMap, takeUntil } from 'rxjs/operators';
-import { SeoService } from '@app/services/seo.service';
+import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from '@app/services/authentication.service';
 import { DestroyService } from '@app/services/destroy.service';
-import { EMPTY, of, throwError } from 'rxjs';
+import { ErrorCodeService } from '@app/services/errorcode.service';
+import { SeoService } from '@app/services/seo.service';
+import { mergeMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'register.component.html',
   selector: 'register',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [ReactiveFormsModule, CommonModule]
 })
 export class RegisterComponent {
   registerForm: UntypedFormGroup;

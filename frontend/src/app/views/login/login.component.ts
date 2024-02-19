@@ -1,5 +1,6 @@
+import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '@app/services/authentication.service';
@@ -10,7 +11,9 @@ import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'login.component.html',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [ReactiveFormsModule, NgClass]
 })
 export class LoginComponent {
   loginForm: UntypedFormGroup;

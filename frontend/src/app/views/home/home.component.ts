@@ -1,16 +1,20 @@
-import { Location } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
 import { BlogPaginator } from '@app/interfaces/blog';
 import { BlogService } from '@app/services/blog.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { ErrorComponent } from '@app/views/error/error.component';
 import { catchError, mergeMap, of, takeUntil } from 'rxjs';
 
 @Component({
   templateUrl: 'home.component.html',
   styleUrls: ['home.scss'],
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [ErrorComponent, RouterLink, DatePipe, MatPaginatorModule]
 })
 
 export class HomeComponent implements OnInit {
@@ -26,7 +30,6 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private blogService: BlogService,
-    private location: Location,
     protected seoService: SeoService) {
   }
 
@@ -68,20 +71,10 @@ export class HomeComponent implements OnInit {
   }
 
   initializePage() {
-    let url = this.location.path().split("/");
-
-    if (url.length === 4) {
-      this.path = parseInt(url[3], 10);
-      this.baseUrl = this.location.path().substring(0, this.location.path().lastIndexOf('/'));
-    }
-    else if (url.length === 2) {
-      this.path = parseInt(url[1], 10);
-      this.baseUrl = this.location.path().substring(0, this.location.path().lastIndexOf('/'));
-    }
-    else {
-      this.path = 1;
-      this.baseUrl = this.location.path()
-    }
+    this.baseUrl = this.route.snapshot.params.tagname ?
+      `tag/${this.route.snapshot.params.tagname}` : '/'
+    this.path = this.route.snapshot.params.number ?
+      this.route.snapshot.params.number : 1;
     return this.blogService.getMainPageBlogs(this.path, this.limit, this.route.snapshot.params.tagname)
   }
 

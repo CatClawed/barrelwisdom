@@ -1,5 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { User } from "@app/interfaces/user";
@@ -13,7 +17,10 @@ import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'settings.component.html',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, MatTabsModule, MatMenuModule,
+    MatSelectModule]
 })
 export class SettingsComponent {
   currentSection: string = 'Section'

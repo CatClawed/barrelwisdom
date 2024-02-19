@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { UserProfile } from '@app/interfaces/user';
 import { DestroyService } from '@app/services/destroy.service';
 import { UserService } from '@app/services/user.service';
+import { ErrorComponent } from '@app/views/error/error.component';
 import { takeUntil } from 'rxjs';
 
 @Component({
   templateUrl: 'user.component.html',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [ErrorComponent, RouterLink]
 })
 
 export class UserComponent implements OnInit {
@@ -18,9 +21,7 @@ export class UserComponent implements OnInit {
   constructor(
     private readonly destroy$: DestroyService,
     private route: ActivatedRoute,
-    private userService: UserService,
-
-  ) { }
+    private userService: UserService) { }
 
   ngOnInit(): void {
     this.userService.getUserProfile(this.route.snapshot.params.username)

@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, ExtraOptions } from '@angular/router';
+import { CanMatchFn, ExtraOptions, Route, RouterModule, Routes, UrlMatchResult, UrlSegment } from '@angular/router';
 import { LayoutComponent } from '@app/containers';
+
+const canMatchNumber: CanMatchFn = (route: Route, segments: UrlSegment[]) => {
+  return !isNaN(Number(segments[segments.length - 1].path));
+}
 
 const routerOptions: ExtraOptions = {
   scrollPositionRestoration: 'enabled',
@@ -16,7 +20,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: ()=> import('@app/views/login/login.module').then(m=>m.LoginModule),
+        loadComponent: ()=> import('@app/views/login/login.component').then(m=>m.LoginComponent),
       },
     ]
   },
@@ -26,7 +30,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: ()=> import('@app/views/settings/settings.module').then(m=>m.SettingsModule),
+        loadComponent: ()=> import('@app/views/settings/settings.component').then(m=>m.SettingsComponent),
       },
     ]
   },
@@ -36,7 +40,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: ()=> import('@app/views/register/register.module').then(m=>m.RegisterModule),
+        loadComponent: ()=> import('@app/views/register/register.component').then(m=>m.RegisterComponent),
       },
     ]
   },
@@ -46,7 +50,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: ()=> import('@app/views/create/create.module').then(m=>m.CreateModule),
+        loadComponent: ()=> import('@app/views/create/create.component').then(m=>m.CreateComponent),
       },
     ]
   },
@@ -55,8 +59,8 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        path: '',
-        loadChildren: ()=> import('@app/views/moderate/moderate.module').then(m=>m.ModerateModule),
+        path: 'comment',
+        loadComponent: ()=> import('@app/views/moderate/moderate.component').then(m=>m.ModerateComponent),
       },
     ]
   },
@@ -66,17 +70,7 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/user/user.module').then(m=>m.UserModule),
-      },
-    ]
-  },
-  {
-    path: 'tag/:tagname',
-    component: LayoutComponent,
-    children: [
-      {
-        path: '', 
-        loadChildren: ()=> import('@app/views/home/home.module').then(m=>m.HomeModule),
+        loadComponent: ()=> import('@app/views/user/user.component').then(m=>m.UserComponent),
       },
     ]
   },
@@ -111,7 +105,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'firis',
+    path: 'firis',  
     component: LayoutComponent,
     children: [
       {
@@ -204,7 +198,7 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/blog/blog.module').then(m=>m.BlogModule),
+        loadComponent: ()=> import('@app/views/blog/blog.component').then(m=>m.BlogComponent),
       },
     ]
   },
@@ -214,7 +208,21 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        loadChildren: ()=> import('@app/views/home/home.module').then(m=>m.HomeModule),
+        loadComponent: ()=> import('@app/views/home/home.component').then(m=>m.HomeComponent),
+      },
+      {
+        path: 'tag/:tagname', 
+        loadComponent: ()=> import('@app/views/home/home.component').then(m=>m.HomeComponent),
+      },
+      {
+        path: 'tag/:tagname/:number',
+        loadComponent: ()=> import('@app/views/home/home.component').then(m=>m.HomeComponent),
+        canMatch: [canMatchNumber]
+      },
+      {
+        path: ':number',
+        loadComponent: ()=> import('@app/views/home/home.component').then(m=>m.HomeComponent),
+        canMatch: [canMatchNumber]
       },
     ]
   },
