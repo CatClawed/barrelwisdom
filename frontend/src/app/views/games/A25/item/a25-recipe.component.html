@@ -20,7 +20,7 @@
                 @if (page.desc) {
                   <a  href="#" (click)="$event.preventDefault();scroll(chapter+1)">{{page.desc}}</a>
                 }
-                @if (!page.desc) {
+                @else {
                   <a href="#" (click)="$event.preventDefault();scroll(chapter+1)">Page {{chapter+1}}</a>
                 }
               </li>
@@ -31,7 +31,7 @@
           @if (page.desc) {
             <h2  id="{{chapter+1}}">{{page.desc}}</h2>
           }
-          @if (!page.desc) {
+          @else {
             <h2 id="{{chapter+1}}">Page {{chapter+1}}</h2>
           }
           <div style="display:grid;gap:0;grid-template-columns:20% 20% 20% 20% 20%;max-width:600px;margin-left:auto;margin-right:auto;">

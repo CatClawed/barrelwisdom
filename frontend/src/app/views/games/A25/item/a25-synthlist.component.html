@@ -54,12 +54,12 @@
         <h4 class="card-title card-icon-space">
           <a (click)="openModal(itemModal, it.slug, $event);" href="/{{gameURL}}/items/synthesis/{{it.slug}}/{{language}}">{{it.name}}</a>
         </h4>
-        <div class="card-icon-position">
+        <div class="card-icon-position"> 
           @if (it.combat) {
-            <img style="height:3rem;width:3rem;" src="{{imgURL}}svg/{{it.combat[0].kind}}.svg" alt="{{it.combat[0].kind}}">
+            <a25-icon [kind]="it.combat[0].kind" [colors]="it.colors"></a25-icon>
           }
           @if (it.equip) {
-            <img  style="height:3rem;width:3rem;" src="{{imgURL}}svg/{{it.equip[0].kind}}.svg"  alt="{{it.equip[0].kind}}">
+            <a25-icon [kind]="it.equip[0].kind" [colors]="it.colors"></a25-icon>
           }
         </div>
         <a class="card-item-display" (click)="openModal(itemModal, it.slug, $event);" href="/{{gameURL}}/items/synthesis/{{it.slug}}/{{language}}">

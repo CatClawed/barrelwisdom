@@ -6,14 +6,17 @@ import { Item } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 import { of } from 'rxjs';
-import { catchError, switchMap, takeUntil } from 'rxjs/operators';
+import { CommonImports, PopoverBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
+import { A25IconComponent } from './a25-icon.component';
 
 @Component({
   templateUrl: 'a25-item.component.html',
   styleUrls: ['../resleri.scss'],
   encapsulation: ViewEncapsulation.None,
   selector: 'a25-item',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports, PopoverBandaidModule, A25IconComponent]
 })
 export class A25ItemComponent extends SingleComponent {
   @Input()

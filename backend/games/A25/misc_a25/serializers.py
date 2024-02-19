@@ -5,22 +5,14 @@ from games.A25.chara_a25.models import Character
 from collections import OrderedDict
 from games._helpers.serializer_helper import DefaultSerializer
 
-def gbl_check(self):
-    try:
-        match self.context['language']:
-            case 'ja':
-                return False
-            case _:
-                return True
-    except KeyError:
-        return True
-
 # how to stop rewriting methods
 class A25DefaultSerializer(DefaultSerializer):
     def get_text(self,obj):
         return DefaultSerializer.language_match(self,
             en=obj.text_en,
             ja=obj.text_ja,
+            tc=obj.text_tc,
+            sc=obj.text_sc,
         )
     def get_text_gbl(self,obj,gbl):
         if not gbl:
@@ -28,6 +20,8 @@ class A25DefaultSerializer(DefaultSerializer):
         return DefaultSerializer.language_match(self,
             en=obj.text_en,
             ja=obj.text_ja,
+            tc=obj.text_tc,
+            sc=obj.text_sc,
         )
     def get_name(self,obj):
         if hasattr(obj, 'gbl'):
@@ -36,6 +30,8 @@ class A25DefaultSerializer(DefaultSerializer):
         return DefaultSerializer.language_match(self,
             en=obj.name.text_en,
             ja=obj.name.text_ja,
+            tc=obj.name.text_tc,
+            sc=obj.name.text_sc,
         )
     def get_desc(self,obj):
         if hasattr(obj, 'gbl'):
@@ -44,6 +40,8 @@ class A25DefaultSerializer(DefaultSerializer):
         return DefaultSerializer.language_match(self,
             en=obj.desc.text_en,
             ja=obj.desc.text_ja,
+            tc=obj.desc.text_tc,
+            sc=obj.desc.text_sc,
         )
 
 class A25FilterableSerializerSimple(A25DefaultSerializer):
@@ -58,20 +56,23 @@ class A25FilterableSerializer(A25DefaultSerializer):
         fields = ['slug', 'name']
 
 class A25ItemNameSerializer(A25DefaultSerializer):
-    name = serializers.SerializerMethodField()
-    slug = serializers.CharField(source='item.slug')
+    name  = serializers.SerializerMethodField()
+    slug  = serializers.CharField(source='item.slug')
+    color = serializers.CharField(source='color.slug')
     class Meta:
         model = Material
-        fields = ['slug', 'name']
+        fields = ['slug', 'name', 'color']
     def get_name(self,obj):
         return A25DefaultSerializer.get_text_gbl(self,obj.item.name,obj.item.gbl)
 
 class A25CharaNameSerializer(A25DefaultSerializer):
-    name = serializers.SerializerMethodField()
-    title = serializers.SerializerMethodField()
+    name   = serializers.SerializerMethodField()
+    title  = serializers.SerializerMethodField()
+    color1 = serializers.CharField(source='color1.slug')
+    color2 = serializers.CharField(source='color2.slug')
     class Meta:
         model = Character
-        fields = ['slug', 'name', 'title']
+        fields = ['slug', 'name', 'title', 'color1', 'color2']
     def get_title(self,obj):
         return A25DefaultSerializer.get_text(self,obj.title)
 

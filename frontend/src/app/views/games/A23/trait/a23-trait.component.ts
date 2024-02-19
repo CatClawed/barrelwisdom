@@ -3,12 +3,15 @@ import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
+import { CommonImports, TooltipBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
   templateUrl: 'a23-trait.component.html',
   selector: 'a23-trait',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports, TooltipBandaidModule]
 })
 export class A23TraitComponent extends SingleComponent {
   constructor(

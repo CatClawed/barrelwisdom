@@ -11,7 +11,7 @@ class TestA25(TestCase):
     fixtures = ['fixtures/a25_data.json.gz']
     client = APIClient()
     apiBase = '/api/A25'
-    languages = ['en', 'ja']
+    languages = ['en', 'ja', 'sc', 'tc']
     lists = ['trait', 'research', 'character', 'memoria', 'recipe', 'material',
         'synth', 'update', 'tower', 'training', 'scorebattle']
 

@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
+import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
 
 @Component({
@@ -11,7 +12,9 @@ import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.comp
   styleUrls: ['../resleri.scss'],
   encapsulation: ViewEncapsulation.None,
   selector: 'a25-scorebattle',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports]
 })
 export class A25ScoreBattleComponent extends FragmentedComponent {
   title: string;
@@ -33,7 +36,12 @@ export class A25ScoreBattleComponent extends FragmentedComponent {
 
   changeData() {
     this.gameService(this.a25service, 'quests/scorebattles');
-    this.title = (this.language == 'en') ? 'Score Battles' : "スコアバトル";
+    switch(this.language) {
+      case "ja": this.title = "スコアバトル"; break;
+      case "tc": this.title = "积分战斗蟩"; break;
+      case "sc": this.title = "積分戰蟩"; break;
+      default: this.title = "Score Battles";
+    }
     this.genericSEO(this.title, `All Score Battles in ${this.gameTitle}`);
     return this.a25service.getScoreBattles(this.language);
   }

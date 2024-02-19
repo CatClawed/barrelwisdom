@@ -4,14 +4,17 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { Area, GatherNode, Region } from '@app/views/games/A23/_services/a23.interface';
+import { Area, GatherNode } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
+import { CommonImports, MaterialFormImports, PopoverBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a23-location.component.html',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports, ...MaterialFormImports, PopoverBandaidModule]
 })
 
 export class A23LocationComponent extends FragmentedComponent {

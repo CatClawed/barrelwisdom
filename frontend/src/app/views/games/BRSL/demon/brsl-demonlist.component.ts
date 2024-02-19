@@ -1,19 +1,25 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { DemonList } from '@app/views/games/BRSL/_services/brsl.interface';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
+import { CommonImports, MaterialFormImports, ModalBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { BRSLDemonComponent } from './brsl-demon.component';
 
 @Component({
   templateUrl: 'brsl-demonlist.component.html',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports, ...MaterialFormImports, ModalBandaidModule,
+    BRSLDemonComponent, MatButtonModule]
 })
 
 export class BRSLDemonlistComponent extends ModalUseComponent {

@@ -36,11 +36,11 @@
               ]
             },
             "scripts": [],
-            "vendorChunk": true,
+            "vendorChunk": false,
             "extractLicenses": false,
             "buildOptimizer": false,
             "sourceMap": true,
-            "optimization": false,
+            "optimization": true,
             "namedChunks": true
           },
           "configurations": {
@@ -54,14 +54,7 @@
               "styles": [
                 "src/scss/style.scss"
               ],
-              "optimization": {
-                "scripts": true,
-                "styles": {
-                  "minify": true,
-                  "inlineCritical": false
-                },
-                "fonts": true
-              },
+              "optimization": true,
               "outputHashing": "all",
               "sourceMap": true,
               "namedChunks": false,

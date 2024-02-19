@@ -6,14 +6,19 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Effect } from '@app/views/games/A16/_services/a16.interface';
 import { A16Service } from '@app/views/games/A16/_services/a16.service';
+import { CommonImports, MaterialFormImports, ModalBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { A16EffectComponent } from './a16-effect.component';
 
 @Component({
   templateUrl: 'a16-effectlist.component.html',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports, ...MaterialFormImports, ModalBandaidModule,
+    A16EffectComponent]
 })
 
 export class A16EffectlistComponent extends ModalUseComponent {

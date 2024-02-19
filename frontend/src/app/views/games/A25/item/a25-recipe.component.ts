@@ -1,16 +1,21 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
+import { CommonImports, PopoverBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
   templateUrl: 'a25-recipe.component.html',
   styleUrls: ['../resleri.scss'],
   encapsulation: ViewEncapsulation.None,
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports, PopoverBandaidModule, MatTabsModule, MatIconModule]
 })
 export class A25RecipeComponent extends SingleComponent {
   constructor(
@@ -30,7 +35,6 @@ export class A25RecipeComponent extends SingleComponent {
 
   afterAssignment(): void {
     if (this.language !== 'ja') {
-      this.data = this.data.filter(x => x.name != "Event") // TODO: REMOVE WHEN EVENT HAPPENS, change 2 to 3
       for (let i = 0; i < this.data.length; i++) {
         this.data[i].pages = this.data[i].pages.filter(x => { return x.gbl == true })
       }

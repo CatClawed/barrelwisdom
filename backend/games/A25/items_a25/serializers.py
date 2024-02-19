@@ -1,9 +1,18 @@
 from rest_framework import serializers
 from games.A25.items_a25.models import Item, Material, CombatItem, Equipment, Recipe, LatestUpdate, LatestUpdateGBL, RecipeTab, RecipePage
 from collections import OrderedDict
-from games.A25.misc_a25.serializers import A25DefaultSerializer, A25TraitSimpleSerializer, A25ItemNameSerializer
+from games.A25.misc_a25.serializers import A25DefaultSerializer, A25TraitSimpleSerializer
 from games.A25.chara_a25.serializers import A25CharaUpdateSerializer, A25MemoriaListSerializer
 from games.A25.quest_a25.serializers import A25ItemRewardSerializer
+
+class A25ItemNameSerializer(A25DefaultSerializer):
+    name  = serializers.SerializerMethodField()
+    slug = serializers.CharField(source='item.slug')
+    class Meta:
+        model = Item
+        fields = ['slug', 'name']
+    def get_name(self,obj):
+        return A25DefaultSerializer.get_text_gbl(self,obj.item.name,obj.item.gbl)
 
 class A25MaterialDetailSerializer(A25DefaultSerializer):
     color = serializers.CharField(source='color.slug', allow_null=True)
@@ -11,6 +20,18 @@ class A25MaterialDetailSerializer(A25DefaultSerializer):
     class Meta:
         model = Material
         fields = ['color', 'traits']
+
+class A25MaterialDetailSynthSerializer(A25DefaultSerializer):
+    color = serializers.CharField(source='color.slug', allow_null=True)
+    traits = A25TraitSimpleSerializer(many=True)
+    ing = serializers.SerializerMethodField()
+    class Meta:
+        model = Material
+        fields = ['color', 'traits', 'ing']
+    def get_ing(self,obj):
+        # one little context line cost me hours of grief
+        return A25ItemNameSerializer(obj.item.ing1.all() | obj.item.ing2.all()
+            | obj.item.ing3.all(), many=True, context=self.context).data
 
 class A25MaterialListSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()
@@ -63,9 +84,11 @@ class A25SynthesisItemListSerializer(A25DefaultSerializer):
     equip = A25EquipDetailSerializer(source='equipment_set', many=True)
     combat = A25CombatDetailSerializer(source='combatitem_set', many=True)
     ing = serializers.SerializerMethodField()
+    colors = serializers.SerializerMethodField()
     class Meta:
         model =  Item
-        fields = ['slug', 'name', 'desc', 'limit', 'rarity', 'equip', 'combat', 'ing']
+        fields = ['slug', 'name', 'desc', 'limit', 'rarity', 'equip', 'combat',
+            'ing', 'colors']
     def get_ing(self,obj):
         ings = obj.recipe_set.first()
         arr = []
@@ -76,6 +99,9 @@ class A25SynthesisItemListSerializer(A25DefaultSerializer):
     def get_limit(self, obj):
         if obj.limit:
             return A25DefaultSerializer.get_text_gbl(self,obj.limit,obj.gbl)
+    def get_colors(self,obj):
+        rec = obj.recipe_set.all()[0]
+        return [rec.color1.slug, rec.color2.slug, rec.color3.slug]
 
 class A25RecipeSerializer(A25DefaultSerializer):
     ing = serializers.SerializerMethodField()
@@ -103,7 +129,7 @@ class A25RecipeSerializer(A25DefaultSerializer):
 class A25ItemFullSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()
     desc = serializers.SerializerMethodField()
-    material = A25MaterialDetailSerializer(source='material_set', many=True)
+    material = A25MaterialDetailSynthSerializer(source='material_set', many=True)
     recipe = A25RecipeSerializer(source='recipe_set', many=True)
     combat = A25CombatSerializer(source="combatitem_set", many=True)
     equip = A25EquipSerializer(source='equipment_set', many=True)

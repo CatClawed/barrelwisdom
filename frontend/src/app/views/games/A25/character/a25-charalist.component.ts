@@ -1,28 +1,83 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatMenuModule } from '@angular/material/menu';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Character } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
+import { CommonImports, MaterialFormImports, ModalBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable, forkJoin } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { A25CharaComponent } from './a25-chara.component';
 
 @Component({
   templateUrl: 'a25-charalist.component.html',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports, ...MaterialFormImports, ModalBandaidModule,
+    A25CharaComponent, MatMenuModule, MatCheckboxModule],
+  styles: [
+    `.char-grid {
+      display: grid;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      grid-column-gap:2%;
+    }`,
+    `.a25-star-font {
+      -webkit-text-stroke-color:black;
+      color:yellow;
+      padding-top:0.3rem;
+    }`,
+    `.a25-char-font {
+      height: 20%;
+      width: 20%;
+      aspect-ratio:1;
+      color:white;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      border-radius:50%;
+      position:absolute;
+      bottom:0;
+      right:9%;
+    }`,
+    `@media screen and (min-width: 800px) {
+      .char-grid {
+        grid-template-columns:repeat(4,23%);
+      }
+      .a25-char-font {
+        font-size:1.7vw
+      }
+      .a25-star-font {
+        font-size:2vw;
+        -webkit-text-stroke-width:.2vw;
+      }
+    }`,
+    `@media screen and (max-width: 800px) {
+      .char-grid {
+        grid-template-columns:repeat(2,49%);
+      }
+      .a25-char-font {
+        font-size:5vw
+      }
+      .a25-star-font {
+        font-size:5vw;
+        -webkit-text-stroke-width:.4vw;
+      }
+    }`
+  ],
 })
 
 export class A25CharalistComponent extends ModalUseComponent {
   filteredCharas: Observable<Character[]>;
-  gradients = {
-    1: "background: linear-gradient(0deg, rgba(81,53,40,1) 0%, rgba(10,32,47,1) 50%, rgba(22,60,73,1) 100%);",
-    2: "background: linear-gradient(0deg, rgba(167,150,124,1) 0%, rgba(208,185,131,1) 50%, rgba(106,84,36,1) 100%);",
-    3: "background: linear-gradient(0deg, rgba(155,95,191,1) 0%, rgba(110,35,152,1) 50%, rgba(65,82,153,1) 100%);",
-  }
+  fillL = 'grey';
+  fillR = 'grey';
+  colors = ['red', 'green', 'yellow', 'blue', 'purple']
 
   constructor(
     protected modalService: BsModalService,
@@ -32,13 +87,15 @@ export class A25CharalistComponent extends ModalUseComponent {
     protected location: Location,
     protected seoService: SeoService,
     private formBuilder: UntypedFormBuilder,
-    private a25service: A25Service,) {
+    protected a25service: A25Service,) {
     super(modalService, destroy$, router, route, location, seoService);
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       roles: "any",
       elems: "any",
-      show_jp: this.language == 'en' ? false : true,
+      show_jp: this.language != 'ja' ? false : true,
+      colorL: 'any',
+      colorR: 'any'
     })
   }
 
@@ -49,7 +106,8 @@ export class A25CharalistComponent extends ModalUseComponent {
     return forkJoin({
       charas: this.a25service.getCharaList(this.language),
       roles: this.a25service.getFilter("role", this.language),
-      elems: this.a25service.getFilter("element", this.language)
+      elems: this.a25service.getFilter("element", this.language),
+      colors: this.a25service.getFilter('color', this.language)
     });
   }
 
@@ -57,12 +115,12 @@ export class A25CharalistComponent extends ModalUseComponent {
     this.filteredCharas = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Character[]>),
       map((search: any) => search ?
-        this.filterT(search.filtertext, search.roles, search.elems, search.show_jp)
-        : this.filterT('', 'any', 'any', this.language == 'en' ? false : true)),
+        this.filterT(search.filtertext, search.roles, search.elems, search.show_jp, search.colorL, search.colorR)
+        : this.filterT('', 'any', 'any', this.language != 'ja' ? false : true, 'any', 'any')),
     );
   }
 
-  private filterT(value: string, role: string, elem: string, show_jp: boolean): Character[] {
+  private filterT(value: string, role: string, elem: string, show_jp: boolean, colorL: string, colorR: string): Character[] {
     let charalist: Character[] = this.data.charas;
 
     if (!show_jp) charalist = charalist.filter(chara => chara.gbl === true)
@@ -73,6 +131,12 @@ export class A25CharalistComponent extends ModalUseComponent {
     if (elem != 'any') {
       charalist = charalist.filter(chara => chara.elem == elem)
     }
+    if (colorL !== 'any') {
+      charalist = charalist.filter(chara => chara.color1 == colorL)
+    }
+    if (colorR !== 'any') {
+      charalist = charalist.filter(chara => chara.color2 == colorR)
+    }
     if (!value) {
       return charalist;
     }
@@ -81,5 +145,10 @@ export class A25CharalistComponent extends ModalUseComponent {
       return chara.name.toLowerCase().includes(filterValue) ||
         chara.title.toLowerCase().includes(filterValue)
     });
+  }
+
+  changeFill(color) {
+    if (color === 'any') return 'grey';
+    return this.a25service.colors[color];
   }
 }

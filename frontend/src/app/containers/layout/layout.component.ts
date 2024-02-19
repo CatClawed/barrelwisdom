@@ -56,8 +56,9 @@ export class LayoutComponent implements OnInit {
       });
 
     this.breakpointObserver.observe([
-      '(max-width: 800px)'
-    ]).subscribe(result => {
+      '(max-width: 800px)'])
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(result => {
       this.mobileView = result.matches;
     });
   }

@@ -2,9 +2,7 @@
   <Error [errorCode]="error"></Error>
 }
 @if (!error) {
-  @if (showNav) {
-    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Home"></Breadcrumb>
-  }
+  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Home"></Breadcrumb>
   <h1>Home</h1>
 }
 @if (data; as update) {

@@ -1,12 +1,15 @@
 export interface NameLink {
     slug: string;
     name: string;
+    color: string;
 }
 
 export interface CharBasic {
     slug: string;
     name: string;
     title: string;
+    color1: string;
+    color2: string;
 }
 
 export interface NameOnly2 {
@@ -48,6 +51,7 @@ export interface Item {
     quest: Quest[];
     note: string;
     gbl: boolean;
+    colors: string[];
 }
 
 export interface NameTrans {
@@ -107,6 +111,7 @@ export interface Material {
     color: string;
     kind: string;
     traits: Trait[];
+    ing: NameLink[];
 }
 
 export interface RecipeList {

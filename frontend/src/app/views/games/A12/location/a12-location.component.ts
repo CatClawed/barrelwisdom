@@ -1,16 +1,17 @@
 import { Location, ViewportScroller } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { AreaData } from '@app/views/games/A12/_services/a12.interface';
 import { A12Service } from '@app/views/games/A12/_services/a12.service';
+import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'a12-location.component.html',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports]
 })
 export class A12LocationComponent extends FragmentedComponent {
   constructor(

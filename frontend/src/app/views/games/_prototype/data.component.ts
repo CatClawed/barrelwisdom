@@ -42,7 +42,7 @@ export abstract class DataComponent implements OnInit {
         this.section = section;
     }
     genericSEO(name: string, desc: string): void {
-        this.seoURL = this.slug === '' ? `${this.gameURL}/${this.section}/${this.language}` : `${this.gameURL}/${this.section}/${this.slug}/${this.language}`;
+        this.seoURL = this.slug ? `${this.gameURL}/${this.section}/${this.slug}/${this.language}` : `${this.gameURL}/${this.section}/${this.language}`;
         this.seoTitle = `${name} - ${this.gameTitle}`;
         this.seoDesc = `${desc}`
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);

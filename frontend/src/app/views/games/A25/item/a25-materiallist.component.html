@@ -35,8 +35,8 @@
           <mat-label>Trait Type</mat-label>
           <mat-select matNativeControl formControlName="traittype">
             <mat-option value="Any">Any</mat-option>
-            <mat-option value="equipment">{{language == 'en' ? 'Equipment' : '装備'}}</mat-option>
-            <mat-option value="combat">{{language == 'en' ? 'Combat' : '戦闘'}}</mat-option>
+            <mat-option value="equipment">{{a25service.equipment[language]}}</mat-option>
+            <mat-option value="combat">{{combat[language]}}</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field class="col-md-3" appearance="outline">

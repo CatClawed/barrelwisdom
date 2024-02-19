@@ -1,14 +1,20 @@
 import { Component } from '@angular/core';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSliderModule } from '@angular/material/slider';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
+import { CommonImports, PopoverBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
   templateUrl: 'a25-chara.component.html',
   selector: 'a25-chara',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports, PopoverBandaidModule, MatSliderModule,
+    MatCheckboxModule]
 })
 export class A25CharaComponent extends SingleComponent {
   stars: number[] = [1, 2, 3, 3.5, 4, 4.5, 5];

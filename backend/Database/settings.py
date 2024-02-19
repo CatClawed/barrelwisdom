@@ -7,9 +7,9 @@ from pathlib import Path
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ['DEBUG']
+DEBUG = int(os.environ['DEBUG'])
 
-ALLOWED_HOSTS = ['localhost', 'barrelwisdom.com', 'test.barrelwisdom.com']
+ALLOWED_HOSTS = ['barrelwisdom.com', 'localhost', '127.0.0.1', 'backend']
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
@@ -207,7 +207,10 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
     'DEFAULT_AUTHENTICATION_CLASSES':('dj_rest_auth.jwt_auth.JWTCookieAuthentication',),
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_RENDERER_CLASSES': ['rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer'] if DEBUG else
+        ['rest_framework.renderers.JSONRenderer']
 }
 
 AUTHENTICATION_BACKENDS = (

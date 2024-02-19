@@ -39,11 +39,18 @@ class A25TraitViewSet(viewsets.ModelViewSet):
             ),
             'chara_trait1__name',
             'chara_trait1__title',
+            'chara_trait1__color1',
+            'chara_trait1__color2',
             'chara_trait2__name',
             'chara_trait2__title',
+            'chara_trait2__color1',
+            'chara_trait2__color2',
             'chara_trait3__name',
             'chara_trait3__title',
+            'chara_trait3__color1',
+            'chara_trait3__color2',
             'material_set__item__name',
+            'material_set__color'
         )
     )
     serializer_class = A25TraitSerializer
@@ -52,9 +59,7 @@ class A25TraitViewSet(viewsets.ModelViewSet):
     lookup_field = 'slug'
 
     def get_query(slug=None, lang="en"):
-        queryset = A25TraitViewSet.queryset
-        if lang == 'ja':
-            queryset = (
+        queryset = A25TraitViewSet.queryset if lang != 'ja' else (
                 Trait.objects
                 .select_related(
                     'desc',
@@ -65,11 +70,18 @@ class A25TraitViewSet(viewsets.ModelViewSet):
                 .prefetch_related(
                     'chara_trait1__name',
                     'chara_trait1__title',
+                    'chara_trait1__color1',
+                    'chara_trait1__color2',
                     'chara_trait2__name',
                     'chara_trait2__title',
+                    'chara_trait2__color1',
+                    'chara_trait2__color2',
                     'chara_trait3__name',
                     'chara_trait3__title',
+                    'chara_trait3__color1',
+                    'chara_trait3__color2',
                     'material_set__item__name',
+                    'material_set__color'
                 )
             )
         
@@ -89,6 +101,22 @@ class A25TraitViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=['get'], url_path="en")
     def en_full(self, request, slug):
         return A25TraitViewSet.get_query(lang="en", slug=slug)
+
+    @action(detail=False)
+    def sc(self, request):
+        return A25TraitViewSet.get_query(lang="sc")
+
+    @action(detail=True, methods=['get'], url_path="sc")
+    def sc_full(self, request, slug):
+        return A25TraitViewSet.get_query(lang="sc", slug=slug)
+
+    @action(detail=False)
+    def tc(self, request):
+        return A25TraitViewSet.get_query(lang="tc")
+
+    @action(detail=True, methods=['get'], url_path="tc")
+    def tc_full(self, request, slug):
+        return A25TraitViewSet.get_query(lang="tc", slug=slug)
 
     @action(detail=False)
     def ja(self, request):
@@ -119,6 +147,16 @@ class A25ResearchViewSet(viewsets.ModelViewSet):
             A25ResearchViewSet.queryset, many=True, context={'language': 'en'}).data)
 
     @action(detail=False)
+    def sc(self, request):
+        return Response(A25ResearchSerializer(
+            A25ResearchViewSet.queryset, many=True, context={'language': 'sc'}).data)
+
+    @action(detail=False)
+    def tc(self, request):
+        return Response(A25ResearchSerializer(
+            A25ResearchViewSet.queryset, many=True, context={'language': 'tc'}).data)
+
+    @action(detail=False)
     def ja(self, request):
         return Response(A25ResearchSerializer(
             A25ResearchViewSet.queryset, many=True, context={'language': 'ja'}).data)
@@ -145,6 +183,14 @@ class A25FilterViewSet(viewsets.ModelViewSet):
     @action(detail=True)
     def en(self, request, kind):
         return A25FilterViewSet.get_query(kind=kind, lang='en')
+
+    @action(detail=True)
+    def sc(self, request, kind):
+        return A25FilterViewSet.get_query(kind=kind, lang='sc')
+
+    @action(detail=True)
+    def tc(self, request, kind):
+        return A25FilterViewSet.get_query(kind=kind, lang='tc')
 
     @action(detail=True)
     def ja(self, request, kind):

@@ -1,19 +1,25 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { MonsterList } from '@app/views/games/A15/_services/a15.interface';
 import { A15Service } from '@app/views/games/A15/_services/a15.service';
+import { CommonImports, MaterialFormImports, ModalBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { A15MonsterComponent } from './a15-monster.component';
 
 @Component({
   templateUrl: 'a15-monsterlist.component.html',
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [...CommonImports, ...MaterialFormImports, ModalBandaidModule,
+    A15MonsterComponent, MatButtonModule]
 })
 
 export class A15MonsterlistComponent extends ModalUseComponent {

@@ -16,28 +16,33 @@ export class A25Service {
     private http: HttpClient,
   ) { }
 
-  public readonly gameTitle = { "en": "Atelier Resleriana", "ja": "レスレリアーナのアトリエ"};
+  public readonly gameTitle = {
+    "en": "Atelier Resleriana", 
+    "ja": "レスレリアーナのアトリエ",
+    "sc": "蕾斯莱莉娅娜的炼金工房",
+    "tc": "蕾斯萊莉婭娜的鍊金工房"
+  };
   public readonly gameURL = "resleri";
   public readonly imgURL = `${environment.mediaURL}games/${this.gameURL}/`;
 
   public readonly stats = {
     'hp': {
-      "en": "HP", "ja": "HP"
+      "en": "HP", "ja": "HP", "sc": "HP", "tc": "HP"
     },
     'agi': {
-      "en": "SPD", "ja": "素早い"
+      "en": "SPD", "ja": "素早い", "sc": "敏捷", "tc": "敏捷"
     },
     'patk': {
-      "en": "PATK", "ja": "物攻"
+      "en": "PATK", "ja": "物攻", "sc": "物攻", "tc": "物攻"
     },
     'pdef': {
-      "en": "PDEF", "ja": "物防"
+      "en": "PDEF", "ja": "物防", "sc": "物防", "tc": "物防"
     },
     'matk': {
-      "en": "MATK", "ja": "魔攻"
+      "en": "MATK", "ja": "魔攻", "sc": "魔攻", "tc": "魔攻"
     },
     'mdef': {
-      "en": "MDEF", "ja": "魔防"
+      "en": "MDEF", "ja": "魔防", "sc": "魔防", "tc": "魔防"
     },
   }
 
@@ -55,6 +60,23 @@ export class A25Service {
     'green':  'rgba(62,184,128,0.7);',
     'yellow': 'rgba(201,175,71,0.7);',
     'purple': 'rgba(172,72,185,0.7);'
+  }
+
+  public readonly elements = {
+    'wind': '#3b853d',
+    'fire': '#b23e36',
+    'ice': '#2089bc',
+    'lightning': '#9e8a1a',
+    'slash': '#776a55',
+    'impact': '#72543b',
+    'pierce': '#647189',
+  }
+
+  public readonly equipment = {
+    "en":"Equipment",
+    "ja":"装備",
+    "sc":"装备",
+    "tc":"裝備"
   }
 
   getFilter(slugname: string, language: string): Observable<NameLink[]> {

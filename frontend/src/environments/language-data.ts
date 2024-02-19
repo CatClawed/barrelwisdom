@@ -6,7 +6,7 @@ export const LanguageData = {
       "firis":          ["en", "ja", "sc", "tc"],
       "ryza2":          ["en", "fr", "ja", "ko", "sc", "tc"],
       "sophie2":        ["en", "ja", "ko", "sc", "tc"],
-      "resleri":        ["en", "ja"],
+      "resleri":        ["en", "ja", "sc", "tc"],
       "bluereflection": ["en"],
       "second-light":   ["en", "ja", "sc", "tc"],
       "default":        ["en"],

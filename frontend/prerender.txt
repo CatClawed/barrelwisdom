@@ -182,9 +182,15 @@
 /resleri/items/materials
 /resleri/items/materials/en
 /resleri/items/materials/ja
+/resleri/items/materials/sc
+/resleri/items/materials/tc
 /resleri/items/synthesis
 /resleri/items/synthesis/en
 /resleri/items/synthesis/ja
+/resleri/items/synthesis/sc
+/resleri/items/synthesis/tc
 /resleri/traits
 /resleri/traits/en
 /resleri/traits/ja
+/resleri/traits/sc
+/resleri/traits/tc
