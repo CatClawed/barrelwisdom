@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Section } from '@app/interfaces/section';
+import { Section } from '@app/views/main/_interfaces/section';
 import { environment } from '@environments/environment';
 import { Observable } from 'rxjs';
 

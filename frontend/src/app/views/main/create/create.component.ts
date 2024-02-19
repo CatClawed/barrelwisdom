@@ -8,15 +8,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { EditBlog, Tag } from "@app/interfaces/blog";
-import { Section } from '@app/interfaces/section';
-import { User } from "@app/interfaces/user";
 import { AuthenticationService } from "@app/services/authentication.service";
-import { BlogService } from '@app/services/blog.service';
 import { DestroyService } from '@app/services/destroy.service';
-import { ErrorCodeService } from "@app/services/errorcode.service";
-import { SectionService } from '@app/services/section.service';
+import { UserService } from '@app/views/main/_services/user.service';
 import { ErrorComponent } from '@app/views/_components/error/error.component';
+import { EditBlog, Tag } from "@app/views/main/_interfaces/blog";
+import { Section } from '@app/views/main/_interfaces/section';
+import { User } from "@app/views/main/_interfaces/user";
+import { ErrorCodeService } from "@app/views/main/_services/errorcode.service";
+import { SectionService } from '@app/views/main/_services/section.service';
 import { environment } from '@environments/environment';
 import { MarkdownComponent, MarkdownPipe, MarkdownService, provideMarkdown } from 'ngx-markdown';
 import { Observable, of } from 'rxjs';
@@ -78,7 +78,7 @@ export class CreateComponent {
     private authenticationService: AuthenticationService,
     private markdownService: MarkdownService,
     private sectionService: SectionService,
-    private BlogService: BlogService
+    private userService: UserService
   ) {
     slugify.extend({ "'": "-" })
     this.getTags();
@@ -179,11 +179,11 @@ export class CreateComponent {
         idList.push(this.tagIDList[index]);
       }
     }
-    this.BlogService.addTags(newList)
+    this.userService.addTags(newList)
       .pipe(first(),
         mergeMap(data => {
           idList = this.handleTags(data, idList)
-          return this.BlogService.blogPost(
+          return this.userService.blogPost(
             this.pageForm.get("title").value,
             slugtitle,
             this.customLink(this.pageForm.get("body").value),
@@ -236,7 +236,7 @@ export class CreateComponent {
 
   // get all the tags
   getTags(): void {
-    this.BlogService.getTags()
+    this.userService.getTags()
       .pipe(takeUntil(this.destroy$))
       .subscribe(tags => {
         this.allTags = tags;
@@ -259,7 +259,7 @@ export class CreateComponent {
             this.sectionList = this.sectionList.filter(obj => obj.name !== 'blog')
           }
           this.blogID = this.sectionList.filter(obj => obj.name === 'blog')[0].id // gross
-          return this.route.snapshot.queryParamMap.get('id') ? this.BlogService.getBlogByID(this.route.snapshot.queryParamMap.get('id')) : of(undefined)
+          return this.route.snapshot.queryParamMap.get('id') ? this.userService.getBlogByID(this.route.snapshot.queryParamMap.get('id')) : of(undefined)
             .pipe(first(),
               catchError(error => this.errorMsg = this.errorService.errorMessage(error)))
         })

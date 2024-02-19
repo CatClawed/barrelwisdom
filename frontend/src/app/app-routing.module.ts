@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CanMatchFn, ExtraOptions, Route, RouterModule, Routes, UrlMatchResult, UrlSegment } from '@angular/router';
+import { CanMatchFn, ExtraOptions, Route, RouterModule, Routes, UrlSegment } from '@angular/router';
 import { LayoutComponent } from '@app/containers';
 
 const canMatchNumber: CanMatchFn = (route: Route, segments: UrlSegment[]) => {

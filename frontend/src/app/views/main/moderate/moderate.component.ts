@@ -1,12 +1,12 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Comment } from '@app/interfaces/blog';
-import { User } from '@app/interfaces/user';
 import { AuthenticationService } from '@app/services/authentication.service';
-import { BlogService } from '@app/services/blog.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { ErrorComponent } from '@app/views/_components/error/error.component';
+import { Comment } from '@app/views/main/_interfaces/blog';
+import { User } from '@app/views/main/_interfaces/user';
+import { UserService } from '@app/views/main/_services/user.service';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -24,7 +24,7 @@ export class ModerateComponent implements OnInit {
   constructor(
     private readonly destroy$: DestroyService,
     public historyService: HistoryService,
-    private blogService: BlogService,
+    private userService: UserService,
     private authenticationService: AuthenticationService,) {
   }
 
@@ -36,7 +36,7 @@ export class ModerateComponent implements OnInit {
   }
 
   getComments(): void {
-    this.blogService.getComments()
+    this.userService.getComments()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: comments => {
@@ -50,7 +50,7 @@ export class ModerateComponent implements OnInit {
   }
 
   approveComment(id: number) {
-    this.blogService.approveComment(id)
+    this.userService.approveComment(id)
     .pipe(takeUntil(this.destroy$))
     .subscribe({
       next: () => {},
@@ -61,7 +61,7 @@ export class ModerateComponent implements OnInit {
   }
 
   deleteComment(id: number) {
-    this.blogService.deleteComment(id)
+    this.userService.deleteComment(id)
     .pipe(takeUntil(this.destroy$))
     .subscribe({
       next: () => {},

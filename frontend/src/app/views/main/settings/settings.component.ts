@@ -6,12 +6,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { User } from "@app/interfaces/user";
+import { User } from "@app/views/main/_interfaces/user";
 import { AuthenticationService } from "@app/services/authentication.service";
 import { DestroyService } from '@app/services/destroy.service';
-import { ErrorCodeService } from '@app/services/errorcode.service';
+import { ErrorCodeService } from '@app/views/main/_services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
-import { SettingService } from '@app/services/setting.service';
+import { SettingService } from '@app/views/main/_services/setting.service';
 import { environment } from '@environments/environment';
 import { takeUntil } from 'rxjs/operators';
 

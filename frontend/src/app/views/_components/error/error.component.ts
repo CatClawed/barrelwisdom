@@ -1,6 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { ErrorCodeService } from "@app/services/errorcode.service";
-
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -8,15 +6,26 @@ import { ErrorCodeService } from "@app/services/errorcode.service";
   selector: 'Error',
   imports: []
 })
-export class ErrorComponent {
+export class ErrorComponent implements OnInit  {
 
   @Input()
-  errorCode: string = "404";
+  errorCode: string = '404';
 
-  errorVars: any = ["Oops! You're lost.", "Our puni told us that the page you're looking for doesn't exist."];
-  
-  constructor(private errorService: ErrorCodeService) {
-    this.errorVars = this.errorService.getCodes(this.errorCode);
+  errorTitle: string;
+  errorDescription: string;
+
+  constructor() {}
+
+  ngOnInit(): void {
+    switch (this.errorCode) {
+      case '404':
+        this.errorTitle = "Oops! You're lost.";
+        this.errorDescription = "Our puni told us that the page you're looking for doesn't exist.";
+        break;
+      default:
+        this.errorTitle = "The server puni died.";
+        this.errorDescription = "We'll replace that puni soon. The site is either broken or under maintenance.";
+        break;
+    }
   }
-
 }
