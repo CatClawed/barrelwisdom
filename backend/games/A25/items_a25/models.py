@@ -42,6 +42,8 @@ class Equipment(models.Model):
 
     val_good = models.IntegerField(blank=True, null=True)
     val_bad  = models.IntegerField(blank=True, null=True)
+    val2_good = models.IntegerField(blank=True, null=True, default=None)
+    val2_bad  = models.IntegerField(blank=True, null=True, default=None)
 
     good_hp   = models.IntegerField(default=0)
     good_spd  = models.IntegerField(default=0)

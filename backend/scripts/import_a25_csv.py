@@ -107,6 +107,7 @@ def ImpTrait(row, index, **kwargs):
         obj.val5=row["EFF 1-5"]
         obj.note=row["Notes"]
         obj.index=index
+        obj.gbl=True if row["Global"] else False
         obj.save()
         # this needs to be changed
         """
@@ -470,6 +471,8 @@ def ImpEquipment(row, index):
         obj.kind=Filterable.objects.get(text_en=row["TYPE"], kind="equipment")
         obj.val_good=row["VAL"]  if row["VAL"]  else None
         obj.val_bad= row["VAL2"] if row["VAL2"] else None
+        obj.val2_good=row["VAL2-1"]  if row["VAL2-1"]  else None
+        obj.val2_bad= row["VAL2-2"] if row["VAL2-2"] else None
         obj.good_hp   = row["Good1"] if row["Stat 1"] == "HP"   else (row["Good2"] if row["Stat 2"] == "HP"   else 0)
         obj.good_spd  = row["Good1"] if row["Stat 1"] == "SPD"  else (row["Good2"] if row["Stat 2"] == "SPD"  else 0)
         obj.good_patk = row["Good1"] if row["Stat 1"] == "PATK" else (row["Good2"] if row["Stat 2"] == "PATK" else 0)
@@ -501,6 +504,8 @@ def ImpEquipment(row, index):
             kind=Filterable.objects.get(text_en=row["TYPE"], kind="equipment"),
             val_good=row["VAL"]  if row["VAL"]  else None,
             val_bad= row["VAL2"] if row["VAL2"] else None,
+            val2_good=row["VAL2-1"]  if row["VAL2-1"]  else None,
+            val2_bad= row["VAL2-2"] if row["VAL2-2"] else None,
             good_hp   = row["Good1"] if row["Stat 1"] == "HP"   else (row["Good2"] if row["Stat 2"] == "HP"   else 0),
             good_spd  = row["Good1"] if row["Stat 1"] == "SPD"  else (row["Good2"] if row["Stat 2"] == "SPD"  else 0),
             good_patk = row["Good1"] if row["Stat 1"] == "PATK" else (row["Good2"] if row["Stat 2"] == "PATK" else 0),
@@ -585,6 +590,8 @@ def ImpRecipe(row, index):
     gbl = True if row["Global"] else False
     limited = row["Page Name"] if len(row["Page Name"]) > 1 else None
     if limited:
+        if limited == 'アーランドの錬金術士':
+            limited = 'アーランドの錬金術士 〜迷子の少女と雪の帰り道〜'
         print(limited)
         limited = Desc.objects.get(text_ja=limited)
     tab = rStory

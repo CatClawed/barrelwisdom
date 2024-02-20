@@ -42,6 +42,7 @@ class Trait(models.Model):
     kind  = models.ForeignKey(Filterable, on_delete=models.CASCADE, related_name="trait_kind") # item_type
     cat   = models.ForeignKey(Filterable, on_delete=models.CASCADE, related_name="trait_cat" ) # combat_type
     note  = models.CharField(max_length=200, blank=True)
+    gbl   = models.BooleanField(default=True)
 
     val1  = models.IntegerField()
     val2  = models.IntegerField()

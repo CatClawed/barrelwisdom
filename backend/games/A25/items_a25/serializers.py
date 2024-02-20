@@ -48,13 +48,13 @@ class A25EquipDetailSerializer(A25DefaultSerializer):
     kind = serializers.CharField(source='kind.slug')
     class Meta:
         model = Equipment
-        fields = ['kind', 'val_good', 'val_bad']
+        fields = ['kind', 'val_good', 'val_bad', 'val2_good', 'val2_bad']
 
 class A25EquipSerializer(A25DefaultSerializer):
     kind = serializers.CharField(source='kind.slug')
     class Meta:
         model = Equipment
-        fields = ['kind', 'val_good', 'val_bad',
+        fields = ['kind', 'val_good', 'val_bad', 'val2_good', 'val2_bad',
             'good_hp', 'good_spd', 'good_patk', 'good_matk', 'good_pdef', 'good_mdef',
             'bad_hp', 'bad_spd', 'bad_patk', 'bad_matk', 'bad_pdef', 'bad_mdef',
         ]

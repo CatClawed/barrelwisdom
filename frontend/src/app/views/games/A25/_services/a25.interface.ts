@@ -89,6 +89,8 @@ export interface Synth {
     kind: string;
     val_bad: number;
     val_good: number;
+    val2_bad: number;
+    val2_good: number;
     uses: number;
     area: string;
 

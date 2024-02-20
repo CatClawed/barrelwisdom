@@ -51,7 +51,7 @@ class A25TraitViewSet(viewsets.ModelViewSet):
             'chara_trait3__color2',
             'material_set__item__name',
             'material_set__color'
-        )
+        ).filter(gbl=True)
     )
     serializer_class = A25TraitSerializer
     filter_backends = [filters.SearchFilter,
