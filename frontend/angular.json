@@ -28,7 +28,7 @@
               "src/robots.txt"
             ],
             "styles": [
-              "src/scss/style-dev.scss"
+              "src/scss/style.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
