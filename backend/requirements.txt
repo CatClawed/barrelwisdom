@@ -16,7 +16,7 @@ cffi==1.16.0
     # via
     #   argon2-cffi-bindings
     #   cryptography
-cryptography==42.0.2
+cryptography==42.0.4
     # via -r requirements.in
 dj-rest-auth==5.0.2
     # via -r requirements.in
