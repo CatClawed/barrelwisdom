@@ -19,9 +19,11 @@
           </div>
         </div>
       </div>
-      <img loading="lazy"
-        style="aspect-ratio:680/724;width:400px;position:relative;border-radius:50%;overflow:hidden !important;margin:auto;aspect-ratio:1;max-width:100%;width:400px;filter:drop-shadow(5px 5px 5px black);{{gradients[chara.rarity]}}display:block;"
+      <div style="aspect-ratio:1;max-width:100%;width:400px;filter:drop-shadow(5px 5px 5px black);{{gradients[chara.rarity]}}display:block;border-radius:50%;overflow:hidden !important;margin:auto;">
+        <img loading="lazy"
+        style="aspect-ratio:680/724;width:400px;position:relative;"
         src="{{imgURL}}characters/full/{{chara.slug}}.webp" alt="{{chara.name}} {{chara.title}}" />
+      </div>
       @if (chara.limit) {
         <p style="margin-top:1rem;"><b>Event: </b>{{chara.limit}}</p>
       }
@@ -32,7 +34,7 @@
         <p style="margin-top:1rem;" [innerHTML]="chara.note"></p>
       }
       <table class="tbl" style="margin-bottom:0;margin-top:1rem;"><tbody>
-        
+
           <tr class="table-dark-center"><th>Gifts</th></tr>
         <tr>
           <td>
@@ -72,10 +74,10 @@
           </td>
         </tr>
         <tr>
-        
+
         </tbody></table>
         <table class="tbl"><tbody>
-          
+
             <tr class="table-dark-center"><th colspan="4">Stats</th></tr>
           <tr>
             <td colspan="4">
@@ -121,10 +123,10 @@
           <tr>
             <td colspan="4">Does not include Grow Board</td>
           </tr>
-          
+
         </tbody></table>
         <table class="tbl"><tbody>
-          
+
             <tr class="table-dark-center"><th>Skills</th></tr>
           @for (skill of chara.skills; track skill) {
             <tr>
@@ -166,7 +168,7 @@
               </td>
             </tr>
             <tr>
-            
+
             </tbody></table>
           </div>
           <ng-template #traitPopover let-trait="trait">

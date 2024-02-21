@@ -270,7 +270,7 @@ export class CreateComponent {
     if (blog !== undefined) {
       this.blog = blog;
       // if the section is blog and you ain't trusted
-      if (this.sectionList.filter(sec => sec.name === 'blog').length < 0 && this.blog.section === this.blogID) {
+      if (this.sectionList.filter(sec => sec.name === 'blog').length == 0 && this.blog.section === this.blogID) {
         this.errorMsg = "Not allowed to edit this.";
         this.disableSubmit = true;
       }
