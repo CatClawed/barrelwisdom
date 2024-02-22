@@ -11,4 +11,4 @@ class Invite(models.Model):
     def __init__(self, *args, **kwargs):
         super(Invite, self).__init__(*args, **kwargs)
         if not self.pk and not self.code:
-            self.code = ''.join(random.choice(string.ascii_letters) for i in range(10))
+            self.code = ''.join(random.choice(string.ascii_letters) for _ in range(10))

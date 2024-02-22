@@ -43,7 +43,7 @@ export class A25MemorialistComponent extends ModalUseComponent {
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       stats: 'hp',
-      show_jp: this.language != 'ja' ? false : true,
+      show_jp: this.language === 'ja',
     })
   }
 
@@ -51,6 +51,7 @@ export class A25MemorialistComponent extends ModalUseComponent {
     this.gameService(this.a25service, 'memoria');
     this.genericSEO(`Memoria`, `The list of memoria in ${this.gameTitle}.`);
     this.pageForm.reset();
+    this.pageForm.get('show_jp').setValue(this.language === 'ja');
     return this.a25service.getMemoriaList(this.language);
   }
 
@@ -59,7 +60,7 @@ export class A25MemorialistComponent extends ModalUseComponent {
       startWith(null as Observable<Memoria[]>),
       map((search: any) => search ?
         this.filterT(search.filtertext, search.stats, search.show_jp)
-        : this.filterT('', 'hp', this.language != 'ja' ? false : true))
+        : this.filterT('', 'hp', this.language === 'ja'))
     );
   }
 

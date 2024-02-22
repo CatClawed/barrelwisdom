@@ -685,8 +685,8 @@ def ImpTraining(row, index):
         name = checkName(
             text_ja = row["Name"],
             text_en = row["En"],
-            text_en = row["Sc"],
-            text_en = row["Tc"],
+            text_sc = row["Sc"],
+            text_tc = row["Tc"],
             volatile=True
         )
 

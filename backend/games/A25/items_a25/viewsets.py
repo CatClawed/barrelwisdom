@@ -68,7 +68,7 @@ class A25MaterialViewSet(viewsets.ModelViewSet):
                        DjangoFilterBackend, filters.OrderingFilter]
     lookup_field = 'slug'
 
-    def get_query(slug=None, lang="en"):
+    def get_query(self, slug=None, lang="en"):
         try:
             if lang == 'ja':
                 queryset = (
@@ -142,42 +142,42 @@ class A25MaterialViewSet(viewsets.ModelViewSet):
     @action(detail=False)
     def en(self, request):
         return Response(A25MaterialListSerializer(
-            A25MaterialViewSet.queryset.filter(gbl=True),
+            self.queryset.filter(gbl=True),
             many=True,context={'language': "en"}).data)
 
     @action(detail=True, url_path="en")
     def en_full(self, request, slug):
-        return A25MaterialViewSet.get_query(lang="en", slug=slug)
+        return self.get_query(lang="en", slug=slug)
 
     @action(detail=False)
     def sc(self, request):
         return Response(A25MaterialListSerializer(
-            A25MaterialViewSet.queryset.filter(gbl=True),
+            self.queryset.filter(gbl=True),
             many=True,context={'language': "sc"}).data)
 
     @action(detail=True, url_path="sc")
     def sc_full(self, request, slug):
-        return A25MaterialViewSet.get_query(lang="sc", slug=slug)
+        return self.get_query(lang="sc", slug=slug)
 
     @action(detail=False)
     def tc(self, request):
         return Response(A25MaterialListSerializer(
-            A25MaterialViewSet.queryset.filter(gbl=True),
+            self.queryset.filter(gbl=True),
             many=True,context={'language': "tc"}).data)
 
     @action(detail=True, url_path="tc")
     def tc_full(self, request, slug):
-        return A25MaterialViewSet.get_query(lang="tc", slug=slug)
+        return self.get_query(lang="tc", slug=slug)
 
     @action(detail=False)
     def ja(self, request):
         return Response(A25MaterialListSerializer(
-            A25MaterialViewSet.queryset,
+            self.queryset,
             many=True,context={'language': "ja"}).data)
 
     @action(detail=True, url_path="ja")
     def ja_full(self, request, slug):
-        return A25MaterialViewSet.get_query(lang="ja", slug=slug)
+        return self.get_query(lang="ja", slug=slug)
 
 class A25SynthViewSet(viewsets.ModelViewSet):
     queryset = (
@@ -204,7 +204,7 @@ class A25SynthViewSet(viewsets.ModelViewSet):
                        DjangoFilterBackend, filters.OrderingFilter]
     lookup_field = 'slug'
 
-    def get_query(slug=None, lang="en"):
+    def get_query(self, slug=None, lang="en"):
         if not slug:
             return 
         try:
@@ -239,42 +239,42 @@ class A25SynthViewSet(viewsets.ModelViewSet):
     @action(detail=False)
     def en(self, request):
         return Response(A25SynthesisItemListSerializer(
-            A25SynthViewSet.queryset.filter(gbl=True),
+            self.queryset.filter(gbl=True),
             many=True, context={'language': "en"}).data)
 
     @action(detail=True, url_path="en")
     def en_full(self, request, slug):
-        return A25SynthViewSet.get_query(lang="en", slug=slug)
+        return self.get_query(lang="en", slug=slug)
 
     @action(detail=False)
     def sc(self, request):
         return Response(A25SynthesisItemListSerializer(
-            A25SynthViewSet.queryset.filter(gbl=True),
+            self.queryset.filter(gbl=True),
             many=True, context={'language': "sc"}).data)
 
     @action(detail=True, url_path="sc")
     def sc_full(self, request, slug):
-        return A25SynthViewSet.get_query(lang="sc", slug=slug)
+        return self.get_query(lang="sc", slug=slug)
 
     @action(detail=False)
     def tc(self, request):
         return Response(A25SynthesisItemListSerializer(
-            A25SynthViewSet.queryset.filter(gbl=True),
+            self.queryset.filter(gbl=True),
             many=True, context={'language': "tc"}).data)
 
     @action(detail=True, url_path="tc")
     def tc_full(self, request, slug):
-        return A25SynthViewSet.get_query(lang="tc", slug=slug)
+        return self.get_query(lang="tc", slug=slug)
 
     @action(detail=False)
     def ja(self, request):
         return Response(A25SynthesisItemListSerializer(
-            A25SynthViewSet.queryset,
+            self.queryset,
             many=True, context={'language': "ja"}).data)
 
     @action(detail=True, url_path="ja")
     def ja_full(self, request, slug):
-        return A25SynthViewSet.get_query(lang="ja", slug=slug)
+        return self.get_query(lang="ja", slug=slug)
 
 class A25UpdateViewSet(viewsets.ModelViewSet):
     queryset = (
@@ -294,17 +294,17 @@ class A25UpdateViewSet(viewsets.ModelViewSet):
     @action(detail=False)
     def en(self, request):
         return Response(A25LatestUpdateGBLSerializer(
-            A25UpdateViewSet.queryset.first(), context={'language': 'en'}).data)
+            self.queryset.first(), context={'language': 'en'}).data)
 
     @action(detail=False)
     def sc(self, request):
         return Response(A25LatestUpdateGBLSerializer(
-            A25UpdateViewSet.queryset.first(), context={'language': 'sc'}).data)
+            self.queryset.first(), context={'language': 'sc'}).data)
 
     @action(detail=False)
     def tc(self, request):
         return Response(A25LatestUpdateGBLSerializer(
-            A25UpdateViewSet.queryset.first(), context={'language': 'tc'}).data)
+            self.queryset.first(), context={'language': 'tc'}).data)
 
     @action(detail=False)
     def ja(self, request):

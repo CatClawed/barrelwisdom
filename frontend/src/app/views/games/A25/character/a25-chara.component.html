@@ -34,8 +34,7 @@
         <p style="margin-top:1rem;" [innerHTML]="chara.note"></p>
       }
       <table class="tbl" style="margin-bottom:0;margin-top:1rem;"><tbody>
-
-          <tr class="table-dark-center"><th>Gifts</th></tr>
+        <tr class="table-dark-center"><th>Gifts</th></tr>
         <tr>
           <td>
             <div style="display:inline-flex;float:right;">
@@ -74,60 +73,56 @@
           </td>
         </tr>
         <tr>
-
-        </tbody></table>
+      </tbody></table>
+      <table class="tbl"><tbody>
+        <tr class="table-dark-center"><th colspan="4">Stats</th></tr>
+        <tr>
+          <td colspan="4">
+            <div style="width:45%;float:left;">
+              <b>Level: </b>{{slider.value}}<br />
+              <mat-slider
+                style="width:100%;"
+                [max]="80"
+                [min]="1">
+                <input matSliderThumb value="80" #slider>
+              </mat-slider>
+            </div>
+            <div style="width:45%;float:right;">
+              <b>Stars: </b>{{stars[starSlider.value-1]}}<br />
+              <mat-slider
+                color="accent"
+                style="width:100%;"
+                [max]="7"
+                [min]="chara.rarity">
+                <input matSliderThumb value="7" #starSlider>
+              </mat-slider>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="width:25%;">{{a25service.stats['hp'][language]}} </td>
+          <td style="width:25%;">{{getStat(chara.hp, stars[starSlider.value-1], slider.value)}}</td>
+          <td style="width:25%;">{{a25service.stats['agi'][language]}}</td>
+          <td style="width:25%;">{{chara.spd}}</td>
+        </tr>
+        <tr>
+          <td style="width:25%;">{{a25service.stats['patk'][language]}} </td>
+          <td style="width:25%;">{{getStat(chara.patk, stars[starSlider.value-1], slider.value)}}</td>
+          <td style="width:25%;">{{a25service.stats['pdef'][language]}}</td>
+          <td style="width:25%;">{{getStat(chara.pdfn, stars[starSlider.value-1], slider.value)}}</td>
+        </tr>
+        <tr>
+          <td style="width:25%;">{{a25service.stats['matk'][language]}} </td>
+          <td style="width:25%;">{{getStat(chara.matk, stars[starSlider.value-1], slider.value)}}</td>
+          <td style="width:25%;">{{a25service.stats['mdef'][language]}}</td>
+          <td style="width:25%;">{{getStat(chara.mdfn, stars[starSlider.value-1], slider.value)}}</td>
+        </tr>
+        <tr>
+          <td colspan="4">Does not include Grow Board</td>
+        </tr>
+      </tbody></table>
         <table class="tbl"><tbody>
-
-            <tr class="table-dark-center"><th colspan="4">Stats</th></tr>
-          <tr>
-            <td colspan="4">
-              <div style="width:45%;float:left;">
-                <b>Level: </b>{{slider.value}}<br />
-                <mat-slider
-                  style="width:100%;"
-                  [max]="80"
-                  [min]="1">
-                  <input matSliderThumb value="80" #slider>
-                </mat-slider>
-              </div>
-              <div style="width:45%;float:right;">
-                <b>Stars: </b>{{stars[starSlider.value-1]}}<br />
-                <mat-slider
-                  color="accent"
-                  style="width:100%;"
-                  [max]="7"
-                  [min]="chara.rarity">
-                  <input matSliderThumb value="7" #starSlider>
-                </mat-slider>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td style="width:25%;">{{a25service.stats['hp'][language]}} </td>
-            <td style="width:25%;">{{getStat(chara.hp, stars[starSlider.value-1], slider.value)}}</td>
-            <td style="width:25%;">{{a25service.stats['agi'][language]}}</td>
-            <td style="width:25%;">{{chara.spd}}</td>
-          </tr>
-          <tr>
-            <td style="width:25%;">{{a25service.stats['patk'][language]}} </td>
-            <td style="width:25%;">{{getStat(chara.patk, stars[starSlider.value-1], slider.value)}}</td>
-            <td style="width:25%;">{{a25service.stats['pdef'][language]}}</td>
-            <td style="width:25%;">{{getStat(chara.pdfn, stars[starSlider.value-1], slider.value)}}</td>
-          </tr>
-          <tr>
-            <td style="width:25%;">{{a25service.stats['matk'][language]}} </td>
-            <td style="width:25%;">{{getStat(chara.matk, stars[starSlider.value-1], slider.value)}}</td>
-            <td style="width:25%;">{{a25service.stats['mdef'][language]}}</td>
-            <td style="width:25%;">{{getStat(chara.mdfn, stars[starSlider.value-1], slider.value)}}</td>
-          </tr>
-          <tr>
-            <td colspan="4">Does not include Grow Board</td>
-          </tr>
-
-        </tbody></table>
-        <table class="tbl"><tbody>
-
-            <tr class="table-dark-center"><th>Skills</th></tr>
+          <tr class="table-dark-center"><th>Skills</th></tr>
           @for (skill of chara.skills; track skill) {
             <tr>
               <td>
@@ -150,9 +145,9 @@
             </tr>
           }
           <tr>
-          </tbody></table>
-          <table class="tbl"><tbody>
-              <tr class="table-dark-center"><th>Passives</th></tr>
+        </tbody></table>
+        <table class="tbl"><tbody>
+          <tr class="table-dark-center"><th>Passives</th></tr>
             <tr>
               <td>
                 <ul>
@@ -167,16 +162,15 @@
                 </ul>
               </td>
             </tr>
-            <tr>
-
-            </tbody></table>
-          </div>
-          <ng-template #traitPopover let-trait="trait">
-            <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5).replaceAll('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
-            <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
-          </ng-template>
-          @if (showNav) {
-            <div class="col-md-3" ></div>
-          }
-        </div>
-      }
+          <tr>
+        </tbody></table>
+    </div>
+    <ng-template #traitPopover let-trait="trait">
+      <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5).replaceAll('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
+      <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
+    </ng-template>
+    @if (showNav) {
+      <div class="col-md-3" ></div>
+    }
+  </div>
+}
