@@ -13,7 +13,9 @@ class TestA25(TestCase):
     apiBase = '/api/A25'
     languages = ['en', 'ja', 'sc', 'tc']
     lists = ['trait', 'research', 'character', 'memoria', 'recipe', 'material',
-        'synth', 'update', 'tower', 'training', 'scorebattle']
+        'synth', 'update', 'tower/elemental-tower', 'training', 'scorebattle',
+        'tower/fire', 'tower/ice', 'tower/lightning', 'tower/wind', 'tower/slash',
+        'tower/pierce', 'tower/impact']
 
     def test_lists(self):
         for ls in self.lists:
