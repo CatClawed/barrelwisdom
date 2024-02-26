@@ -1,17 +1,46 @@
+$wind: #3b853d;
+$fire: #b23e36;
+$ice: #2089bc;
+$lightning: #9e8a1a;
+$slash: #776a55;
+$impact: #72543b;
+$pierce: #647189;
+
 .resleri-item-frame {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    object-fit: contain;
-    filter: drop-shadow(10px 10px 15px rgba(90, 90, 90, 0.7));
-    margin-bottom: 1.5rem;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .resleri-item-frame-sm {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    object-fit: contain;
-  }
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  object-fit: contain;
+  filter: drop-shadow(10px 10px 15px rgba(90, 90, 90, 0.7));
+  margin-bottom: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.resleri-item-frame-sm {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  object-fit: contain;
+}
+
+.resleri-element-icon {
+  width: 3rem;
+  height: 3rem;
+  color: white;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.resleri-element-icon-s {
+  width:1.5rem;
+  height:1.5rem;
+  font-size: 1.1rem;
+  color: white;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}

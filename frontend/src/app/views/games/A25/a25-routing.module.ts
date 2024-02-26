@@ -7,17 +7,17 @@ const routes: Routes = [
     path: 'traits',
     children: [
       {
-        path: ':subject/:language', 
+        path: ':subject/:language',
         loadComponent: ()=> import('@app/views/games/A25/trait/a25-trait.component').then(m=>m.A25TraitComponent),
         canActivate: [LanguageGuard]
       },
       {
-        path: ':language', 
+        path: ':language',
         loadComponent: ()=> import('@app/views/games/A25/trait/a25-traitlist.component').then(m=>m.A25TraitlistComponent),
         canActivate: [LanguageGuard]
       },
       {
-        path: '', 
+        path: '',
         loadComponent: ()=> import('@app/views/games/A25/trait/a25-traitlist.component').then(m=>m.A25TraitlistComponent),
         canActivate: [LanguageGuard]
       },
@@ -31,42 +31,42 @@ const routes: Routes = [
         loadComponent: () => import('@app/views/_components/error/error.component').then(m=>m.ErrorComponent)
       },
       {
-        path: 'materials', 
+        path: 'materials',
         loadComponent: ()=> import('@app/views/games/A25/item/a25-materiallist.component').then(m=>m.A25MaterialListComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: 'materials/:language', 
+        path: 'materials/:language',
         loadComponent: ()=> import('@app/views/games/A25/item/a25-materiallist.component').then(m=>m.A25MaterialListComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: 'synthesis', 
+        path: 'synthesis',
         loadComponent: ()=> import('@app/views/games/A25/item/a25-synthlist.component').then(m=>m.A25SynthesisListComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: 'synthesis/:language', 
+        path: 'synthesis/:language',
         loadComponent: ()=> import('@app/views/games/A25/item/a25-synthlist.component').then(m=>m.A25SynthesisListComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: 'recipes', 
+        path: 'recipes',
         loadComponent: ()=> import('@app/views/games/A25/item/a25-recipe.component').then(m=>m.A25RecipeComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: 'recipes/:language', 
+        path: 'recipes/:language',
         loadComponent: ()=> import('@app/views/games/A25/item/a25-recipe.component').then(m=>m.A25RecipeComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':itemkind/:subject', 
+        path: ':itemkind/:subject',
         loadComponent: ()=> import('@app/views/games/A25/item/a25-item.component').then(m=>m.A25ItemComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':itemkind/:subject/:language', 
+        path: ':itemkind/:subject/:language',
         loadComponent: ()=> import('@app/views/games/A25/item/a25-item.component').then(m=>m.A25ItemComponent),
         canActivate: [LanguageGuard],
       },
@@ -76,17 +76,17 @@ const routes: Routes = [
     path: 'characters',
     children: [
       {
-        path: '', 
+        path: '',
         loadComponent: ()=> import('@app/views/games/A25/character/a25-charalist.component').then(m=>m.A25CharalistComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':language', 
+        path: ':language',
         loadComponent: ()=> import('@app/views/games/A25/character/a25-charalist.component').then(m=>m.A25CharalistComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':subject/:language', 
+        path: ':subject/:language',
         loadComponent: ()=> import('@app/views/games/A25/character/a25-chara.component').then(m=>m.A25CharaComponent),
         canActivate: [LanguageGuard],
       },
@@ -96,17 +96,17 @@ const routes: Routes = [
     path: 'memoria',
     children: [
       {
-        path: '', 
+        path: '',
         loadComponent: ()=> import('@app/views/games/A25/memoria/a25-memorialist.component').then(m=>m.A25MemorialistComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':language', 
+        path: ':language',
         loadComponent: ()=> import('@app/views/games/A25/memoria/a25-memorialist.component').then(m=>m.A25MemorialistComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':subject/:language', 
+        path: ':subject/:language',
         loadComponent: ()=> import('@app/views/games/A25/memoria/a25-memoria.component').then(m=>m.A25MemoriaComponent),
         canActivate: [LanguageGuard],
       },
@@ -131,32 +131,37 @@ const routes: Routes = [
     path: 'quests',
     children: [
       {
-        path: 'dungeons', 
+        path: 'dungeons',
         loadComponent: ()=> import('@app/views/games/A25/quest/a25-dungeon.component').then(m=>m.A25DungeonComponent),
         canActivate: [LanguageGuard]
       },
       {
-        path: 'dungeons/:language', 
+        path: 'dungeons/:language',
         loadComponent: ()=> import('@app/views/games/A25/quest/a25-dungeon.component').then(m=>m.A25DungeonComponent),
         canActivate: [LanguageGuard]
       },
       {
-        path: 'scorebattles', 
+        path: 'scorebattles',
         loadComponent: ()=> import('@app/views/games/A25/quest/a25-scorebattle.component').then(m=>m.A25ScoreBattleComponent),
         canActivate: [LanguageGuard]
       },
       {
-        path: 'scorebattles/:language', 
+        path: 'scorebattles/:language',
         loadComponent: ()=> import('@app/views/games/A25/quest/a25-scorebattle.component').then(m=>m.A25ScoreBattleComponent),
         canActivate: [LanguageGuard]
       },
       {
-        path: 'tower', 
+        path: 'tower',
         loadComponent: ()=> import('@app/views/games/A25/quest/a25-tower.component').then(m=>m.A25TowerComponent),
         canActivate: [LanguageGuard]
       },
       {
-        path: 'tower/:language', 
+        path: 'tower/:language',
+        loadComponent: ()=> import('@app/views/games/A25/quest/a25-tower.component').then(m=>m.A25TowerComponent),
+        canActivate: [LanguageGuard]
+      },
+      {
+        path: 'tower/:subject/:language',
         loadComponent: ()=> import('@app/views/games/A25/quest/a25-tower.component').then(m=>m.A25TowerComponent),
         canActivate: [LanguageGuard]
       },
@@ -170,12 +175,12 @@ const routes: Routes = [
     path: 'home',
     children: [
       {
-        path: '', 
+        path: '',
         loadComponent: ()=> import('@app/views/games/A25/update/a25-update.component').then(m=>m.A25UpdateComponent),
         canActivate: [LanguageGuard]
       },
       {
-        path: ':language', 
+        path: ':language',
         loadComponent: ()=> import('@app/views/games/A25/update/a25-update.component').then(m=>m.A25UpdateComponent),
         canActivate: [LanguageGuard]
       },

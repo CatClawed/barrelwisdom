@@ -273,9 +273,52 @@ export interface ScoreBattle {
     difficulties: ScoreDifficulties[];
 }
 
+export interface EnemySKill {
+  name: string;
+  elem: string;
+  area: string;
+  wt: number;
+  pow1: number;
+}
+
+export interface SkillData {
+  king: string;
+  skill: EnemySKill;
+}
+
+export interface Enemy {
+  res_ice: number;
+  res_fir: number;
+  res_str: number;
+  res_blt: number;
+  res_sta: number;
+  res_sla: number;
+  res_air: number;
+  name: string;
+  base_enemy: string;
+  skills: SkillData[];
+}
+
+export interface Wave {
+  level: number;
+  enemies: Enemy[];
+}
+
+export interface Hint {
+  base_enemy: string;
+  desc: string;
+}
+
+export interface Battle {
+  panels: string[];
+  hints: Hint[];
+  waves: Wave[];
+}
+
 export interface Tower {
     floor: number;
     combat_level: number;
     rewards: Reward[];
     effects: string[];
+    battle: Battle;
 }

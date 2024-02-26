@@ -56,18 +56,26 @@ def checkDesc(text_en, text_ja, text_sc, text_tc):
     return None
 
 
-def ImpFilter(row, index):
+def ImpFilter(row, index, **kwargs):
     try:
-        obj = Filterable.objects.get(text_ja=row['JP'])
-        obj.text_en = row['EN']
-        obj.text_tc = row['TC']
-        obj.text_sc = row['SC']        
-        obj.save()
+        obj = Filterable.objects.get(text_ja=row['JP'], kind=kwargs.get("kind"))
     except:
-        print("Failure", row['JP'])
+        print(f'Adding {row["JP"]}')
+        obj = Filterable(
+            text_en = row['EN'],
+            text_ja = row['JP'],
+            text_sc = row['SC'],
+            text_tc = row['TC'],
+            slug = slug_me(row['EN'] if row['EN'] else kwargs.get("kind"), Filterable.objects.all()),
+            kind = kwargs.get("kind"),
+        )
+        obj.save()
 
 def ImpEvent(row, index):
     checkDesc(row['EN'], row['JP'], row['SC'], row['TC'])
+
+def ImpName(row, index):
+    checkName(row['EN'], row['JP'], row['SC'], row['TC'], volatile=True)
 
 # expected kwarg: kind (combat/equipment)
 def ImpTrait(row, index, **kwargs):
@@ -743,7 +751,8 @@ def ImpScoreBattle(row, index):
                 combat_level=row["Rec Combat"],
                 exp=row["Exp"],
                 cole=row["SB#5-1"],
-                difficulty=diff[row['Diff']]
+                difficulty=diff[row['Diff']],
+                q_id=row["ID"]
             )
             obj.save()
             for i in range(2,6):
@@ -751,24 +760,45 @@ def ImpScoreBattle(row, index):
                     reward = GetReward(row["SB Reward 5-"+str(i)],i-1,row["SB#5-"+str(i)])
                     obj.rewards.add(reward)
             sb.difficulties.add(obj)
+        else:
+            print("Update Difficulty")
+            obj[0].q_id=row["ID"]
+            obj[0].save()
         
 
 def ImpTower(row, index):
     if row["Quest Type"] == '4':
-        floor=int(row['En'].split(' ')[0])
+        floor=int(row['Name'].split('階')[0])
+        kind=Filterable.objects.get(slug=row["Training Quest Name"])
         try:
-            obj=Tower.objects.get(floor=floor)
+            obj=Tower.objects.get(floor=floor, kind=kind)
+            obj.q_id=row["ID"]
+            obj.gbl=True if row["Global"] else False
+            obj.kind=kind
+            obj.save()
         except:
             print("Creating", row['En'])
             obj = Tower(
                 floor=floor,
                 combat_level=row["Rec Combat"],
+                q_id=row["ID"],
+                gbl=True if row["Global"] else False,
+                kind=kind
             )
             obj.save()
             for i in range(2,6):
                 if row["Tower"+str(i)]:
                     reward = GetReward(row["Tower"+str(i)],i-1,row["T#"+str(i)])
                     obj.rewards.add(reward)
+            for i in range(1,5):
+                if row[f'FDJP{i}']:
+                    eff = checkDesc(
+                        text_ja = row[f'FDJP{i}'],
+                        text_en = row[f'FDEN{i}'],
+                        text_sc = row[f'FDSC{i}'],
+                        text_tc = row[f'FDTC{i}'],
+                    )
+                    obj.effects.add(eff)
         
 def ImpDungeon(row, index):
     heck = {
@@ -810,6 +840,7 @@ def ImpDungeon(row, index):
             dun.save()
         try:
             obj = DungeonFloor.objects.get(dungeon=dun, order=floor)
+            obj.q_id=row["ID"]
             obj.save()
             print("Old floor", floor)
         except:
@@ -818,6 +849,7 @@ def ImpDungeon(row, index):
                 dungeon=dun,
                 order=floor,
                 combat_level=row["Rec Combat"],
+                q_id=row["ID"]
             )
             obj.save()
             for i in range(1,7):
@@ -826,7 +858,142 @@ def ImpDungeon(row, index):
                     obj.rewards.add(reward)
                     if floor == 1 or floor == 9:
                         dun.rewards.add(reward)
+            for i in range(1,5):
+                if row[f'FDJP{i}']:
+                    eff = checkDesc(
+                        text_ja = row[f'FDJP{i}'],
+                        text_en = row[f'FDEN{i}'],
+                        text_sc = row[f'FDSC{i}'],
+                        text_tc = row[f'FDTC{i}'],
+                    )
+                    obj.effects.add(eff)
 
+
+def ImpEnemySkill(row, index):
+    desc = None
+    if row['Desc'] and row['Desc'] != "テキストなし" or row['Desc'] != '追加効果なし':
+        desc = checkDesc(
+            text_ja=row['Desc'],
+            text_en=row['Desc En'],
+            text_sc=row['Desc Sc'],
+            text_tc=row['Desc Tc'],
+        )
+    name = checkName(
+        text_ja=row['Name'],
+        text_en=row['Name En'],
+        text_sc=row['Name Sc'],
+        text_tc=row['Name Tc'],
+        volatile=True
+    )
+    try:
+        obj = EnemySkill.objects.get(s_id=row['id'])
+        print(f'Found {obj.name.text_ja}')
+    except:
+        print(f'Creating {row["id"]}')
+        obj = EnemySkill(
+            name=name,
+            desc=desc,
+            elem=Filterable.objects.get(text_en=row['Attribute']) if row['Attribute'] else None,
+            area=Name.objects.get(text_en=row['Range']) if row['Range'] else None,
+            wt=row['WT'],
+            s_id=row['id'],
+            pow1=row['power']
+        )
+        obj.save()
+
+def ImpEnemy(row, index):
+    name = checkName(
+        text_ja=row['Name'],
+        text_en=row['Name En'],
+        text_sc=row['Name Sc'],
+        text_tc=row['Name Tc'],
+        volatile=True
+    )
+    try:
+        obj = Enemy.objects.get(e_id=row['ID'])
+    except:
+        print(f'Creating {row["Name"]} {row["ID"]}')
+        obj = Enemy(
+            name=name,
+            species=Name.objects.get(text_ja=row['Species']),
+            base_enemy=Filterable.objects.get(text_ja=row['BaseEnemy'], kind="base-enemy"),
+            burst=EnemySkill.objects.get(s_id=row['Burst Skill']),
+            e_id=row['ID'],
+            res_ice=row['Ice'],
+            res_fir=row['Fire'],
+            res_str=row['Strike'],
+            res_blt=row['Bolt'],
+            res_sta=row['Stab'],
+            res_sla=row['Slash'],
+            res_air=row['Air'],
+        )
+        obj.save()
+
+        for i in range(1,10):
+            if row[f'Normal Skill {i}']:
+                obj.normal.add(EnemySkill.objects.get(s_id=row[f'Normal Skill {i}']))
+        for i in range(1,3):
+            if row[f'Extra Skill {i}']:
+                obj.extra.add(EnemySkill.objects.get(s_id=row[f'Extra Skill {i}']))
+
+def ImpWave(row, index):
+    try:
+        obj = Wave.objects.get(w_id=row['id'])
+    except:
+        print(f'Creating {row["id"]}')
+        obj = Wave(
+            level=row['enemies/0/level'],
+            w_id=row['id']
+        )
+        obj.save()
+        for i in range(0,5):
+            if row[f'enemies/{i}/id']:
+                obj.enemies.add(Enemy.objects.get(e_id=row[f'enemies/{i}/id']))
+
+def checkHint(text_ja, enemy_id):
+    desc = Desc.objects.get(text_ja=text_ja.replace('\r', '').replace('\n', '<br>'))
+    enemy = Enemy.objects.get(e_id=enemy_id)
+    try:
+        obj = Hint.objects.get(desc=desc, enemy=enemy)
+    except:
+        obj = Hint(desc=desc, enemy=enemy)
+        obj.save()
+    return obj
+
+def ImpBattle(row, index):
+    if row['Quest ID']:
+        try:
+            tower = Tower.objects.get(q_id=row['Quest ID'])
+        except:
+            tower = None
+        try:
+            score = ScoreBattleDifficulties.objects.get(q_id=row['Quest ID'])
+        except:
+            score = None
+        if tower or score and score.difficulty == 3:
+            try:
+                obj = Battle.objects.get(b_id=row['battle id'])
+            except:
+                print(f'Creating {row["battle id"]}')
+                obj = Battle(b_id=row['battle id'])
+                obj.save()
+                wave = Wave.objects.get(w_id=row['wave id'])
+                obj.waves.add(wave)
+
+                for i in range(1,7):
+                    if row[f'Hint {i}']:
+                        hint = checkHint(row[f'Hint {i}'], row[f'H Enemy ID {i}'])
+                        obj.hints.add(hint)
+                    if row[f'Panel {i}']:
+                        panel = Filterable.objects.get(kind='panel', text_ja=row[f'Panel {i}'])
+                        obj.panels.add(panel)
+                
+                if tower:
+                    tower.battle = obj
+                    tower.save()
+                if score:
+                    score.battle = obj
+                    score.save()
 
 """Run me first for any updates holy shit"""
 def createUpdate():
@@ -877,14 +1044,15 @@ Checklist
 3. trait -> char/item
 4. char -> skill/passive
 5. items -> recipes -> quest
-6. fuck quest
+6. quest -> enemy skill -> enemy -> hint -> wave -> battle
 """
 
 #createUpdate()
 #createUpdateGBL()
 
-#import_generic(ImpFilter)
+#import_generic(ImpFilter, kind="panel")
 #import_generic(ImpEvent)
+#import_generic(ImpName)
 #import_generic(ImpTrait, index=1, kind="combat")
 #import_generic(ImpTrait, index=100, kind="equipment")
 #import_generic(ImpResearch)
@@ -900,3 +1068,7 @@ Checklist
 #import_generic(ImpScoreBattle)
 #import_generic(ImpTower)
 #import_generic(ImpDungeon)
+#import_generic(ImpEnemySkill)
+#import_generic(ImpEnemy)
+#import_generic(ImpWave)
+#import_generic(ImpBattle)

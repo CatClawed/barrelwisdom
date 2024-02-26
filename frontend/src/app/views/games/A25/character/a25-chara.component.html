@@ -14,7 +14,7 @@
         </h4>
         <div class="card-icon-position">
           <img style="width:3rem;aspect-ratio:48/45" src="{{imgURL}}characters/{{chara.role}}.webp" alt="{{chara.role}}" />
-          <div style="width:3rem;height:3rem;background-color:{{elements[chara.elem]}};color:white;display:flex;justify-content:center;align-items:center;border-radius:50%;">
+          <div class="resleri-element-icon" style="background-color:{{a25service.elements[chara.elem]}};">
             <i class="atelier atelier-np atelier-resleri-{{chara.elem}}"></i>
           </div>
         </div>
@@ -127,7 +127,8 @@
             <tr>
               <td>
                 <b>{{skill.name}}</b>
-                <i class="atelier atelier-np atelier-resleri-{{skill.elem}}" style="float:right;width:3rem;height:3rem;background-color:{{elements[skill.elem]}};color:white;display:flex;justify-content:center;align-items:center;border-radius:50%;"></i>
+                <i class="atelier atelier-np atelier-resleri-{{skill.elem}} resleri-element-icon"
+                  style="float:right;background-color:{{a25service.elements[skill.elem]}};"></i>
                 <p [innerHTML]="replaceDesc(skill)"></p>
                 @if (skill.wt) {
                   <p    ><b>WT: </b>{{skill.wt}}</p>
