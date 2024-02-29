@@ -24,9 +24,8 @@ class A25DefaultSerializer(DefaultSerializer):
             sc=obj.text_sc,
         )
     def get_name(self,obj):
-        if hasattr(obj, 'gbl'):
-            if not obj.gbl:
-                return obj.name.text_ja
+        if hasattr(obj, "gbl") and not obj.gbl:
+            return obj.name.text_ja
         return DefaultSerializer.language_match(self,
             en=obj.name.text_en,
             ja=obj.name.text_ja,
@@ -34,9 +33,8 @@ class A25DefaultSerializer(DefaultSerializer):
             sc=obj.name.text_sc,
         )
     def get_desc(self,obj):
-        if hasattr(obj, 'gbl'):
-            if not obj.gbl:
-                return obj.desc.text_ja
+        if hasattr(obj, "gbl") and not obj.gbl:
+            return obj.desc.text_ja
         return DefaultSerializer.language_match(self,
             en=obj.desc.text_en,
             ja=obj.desc.text_ja,

@@ -1,7 +1,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '@app/interfaces/user';
+import { User } from '@app/views/main/_interfaces/user';
 import { AuthenticationService } from '@app/services/authentication.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { LanguageService } from '@app/services/language.service';

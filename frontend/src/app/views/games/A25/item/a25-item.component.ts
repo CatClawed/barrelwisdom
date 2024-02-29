@@ -23,7 +23,7 @@ export class A25ItemComponent extends SingleComponent {
   itemkind: string = "";
 
   itemkind2: string = "";
-  
+
   difficulties = {
     1: "Normal",
     2: "Hard",
@@ -62,8 +62,11 @@ export class A25ItemComponent extends SingleComponent {
 
   replaceVal(item: Item): string {
     if (item.equip) {
-      if (item.equip[0].val_bad) {
-        return item.desc.replaceAll("{0}", `${item.equip[0].val_bad / 100} ~ ${item.equip[0].val_good / 100}`).replaceAll("{1}", `${item.equip[0].val_bad / 100} ~ ${item.equip[0].val_good / 100}`)
+      if (item.equip[0].val_bad && !item.equip[0].val2_bad) {
+        return item.desc.replaceAll("{0}", `${item.equip[0].val_bad / 100} ~ ${item.equip[0].val_good / 100}`)
+      }
+      if (item.equip[0].val2_bad) {
+        return item.desc.replaceAll("{0}", `${item.equip[0].val_bad / 100} ~ ${item.equip[0].val_good / 100}`).replaceAll("{1}", `${item.equip[0].val2_bad / 100} ~ ${item.equip[0].val2_good / 100}`)
       }
       return item.desc.replaceAll("{0}", ` ${item.equip[0].val_good / 100}`).replaceAll("{1}", ` ${item.equip[0].val_good / 100}`)
     }
@@ -78,4 +81,4 @@ export class A25ItemComponent extends SingleComponent {
     if (!item.material[0].color) return;
     return `box-shadow: inset 0 0px 30px 4px ${this.a25service.colorList[item.material[0].color]}`
   }
-} 
+}

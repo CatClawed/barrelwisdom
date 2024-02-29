@@ -8,7 +8,7 @@ def slug_me(item, existing_slugs=None):
     if existing_slugs:
         num = 2
         if existing_slugs.filter(slug=item).exists():
-            item2 = item + str(num)
+            item2 = item + "-" + str(num)
             while existing_slugs.filter(slug=item2).exists():
                 num = num + 1
                 item2 = item + "-" + str(num)

@@ -29,10 +29,10 @@ class Name(models.Model):
     text_sc = models.CharField(max_length=40, blank=True)
 
 class Desc(models.Model):
-    text_en = models.CharField(max_length=255, blank=True)
+    text_en = models.CharField(max_length=1000, blank=True)
     text_ja = models.CharField(max_length=255, unique=True)
-    text_tc = models.CharField(max_length=255, blank=True)
-    text_sc = models.CharField(max_length=255, blank=True)
+    text_tc = models.CharField(max_length=500, blank=True)
+    text_sc = models.CharField(max_length=500, blank=True)
 
 class Trait(models.Model):
     slug  = models.SlugField(max_length=50, unique=True)
@@ -42,6 +42,7 @@ class Trait(models.Model):
     kind  = models.ForeignKey(Filterable, on_delete=models.CASCADE, related_name="trait_kind") # item_type
     cat   = models.ForeignKey(Filterable, on_delete=models.CASCADE, related_name="trait_cat" ) # combat_type
     note  = models.CharField(max_length=200, blank=True)
+    gbl   = models.BooleanField(default=True)
 
     val1  = models.IntegerField()
     val2  = models.IntegerField()

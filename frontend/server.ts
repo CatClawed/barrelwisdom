@@ -2,7 +2,6 @@ import { APP_BASE_HREF } from '@angular/common';
 import { enableProdMode } from '@angular/core';
 import { CommonEngine } from '@angular/ssr';
 import * as express from 'express';
-import { createProxyMiddleware } from 'http-proxy-middleware';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import 'zone.js/node';

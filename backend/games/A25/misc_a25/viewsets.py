@@ -58,8 +58,11 @@ class A25TraitViewSet(viewsets.ModelViewSet):
                        DjangoFilterBackend, filters.OrderingFilter]
     lookup_field = 'slug'
 
-    def get_query(slug=None, lang="en"):
-        queryset = A25TraitViewSet.queryset if lang != 'ja' else (
+    def get_query(self, slug=None, lang="en"):
+        if lang != 'ja':
+            queryset = self.queryset if slug else self.queryset.filter(gbl=True)
+        else:
+            queryset = (
                 Trait.objects
                 .select_related(
                     'desc',
@@ -96,35 +99,35 @@ class A25TraitViewSet(viewsets.ModelViewSet):
 
     @action(detail=False)
     def en(self, request):
-        return A25TraitViewSet.get_query(lang="en")
+        return self.get_query(lang="en")
 
     @action(detail=True, methods=['get'], url_path="en")
     def en_full(self, request, slug):
-        return A25TraitViewSet.get_query(lang="en", slug=slug)
+        return self.get_query(lang="en", slug=slug)
 
     @action(detail=False)
     def sc(self, request):
-        return A25TraitViewSet.get_query(lang="sc")
+        return self.get_query(lang="sc")
 
     @action(detail=True, methods=['get'], url_path="sc")
     def sc_full(self, request, slug):
-        return A25TraitViewSet.get_query(lang="sc", slug=slug)
+        return self.get_query(lang="sc", slug=slug)
 
     @action(detail=False)
     def tc(self, request):
-        return A25TraitViewSet.get_query(lang="tc")
+        return self.get_query(lang="tc")
 
     @action(detail=True, methods=['get'], url_path="tc")
     def tc_full(self, request, slug):
-        return A25TraitViewSet.get_query(lang="tc", slug=slug)
+        return self.get_query(lang="tc", slug=slug)
 
     @action(detail=False)
     def ja(self, request):
-        return A25TraitViewSet.get_query(lang="ja")
+        return self.get_query(lang="ja")
 
     @action(detail=True, methods=['get'], url_path="ja")
     def ja_full(self, request, slug):
-        return A25TraitViewSet.get_query(lang="ja", slug=slug)
+        return self.get_query(lang="ja", slug=slug)
 
 
 class A25ResearchViewSet(viewsets.ModelViewSet):
@@ -144,22 +147,22 @@ class A25ResearchViewSet(viewsets.ModelViewSet):
     @action(detail=False)
     def en(self, request):
         return Response(A25ResearchSerializer(
-            A25ResearchViewSet.queryset, many=True, context={'language': 'en'}).data)
+            self.queryset, many=True, context={'language': 'en'}).data)
 
     @action(detail=False)
     def sc(self, request):
         return Response(A25ResearchSerializer(
-            A25ResearchViewSet.queryset, many=True, context={'language': 'sc'}).data)
+            self.queryset, many=True, context={'language': 'sc'}).data)
 
     @action(detail=False)
     def tc(self, request):
         return Response(A25ResearchSerializer(
-            A25ResearchViewSet.queryset, many=True, context={'language': 'tc'}).data)
+            self.queryset, many=True, context={'language': 'tc'}).data)
 
     @action(detail=False)
     def ja(self, request):
         return Response(A25ResearchSerializer(
-            A25ResearchViewSet.queryset, many=True, context={'language': 'ja'}).data)
+            self.queryset, many=True, context={'language': 'ja'}).data)
 
 
 class A25FilterViewSet(viewsets.ModelViewSet):
@@ -169,7 +172,7 @@ class A25FilterViewSet(viewsets.ModelViewSet):
                        DjangoFilterBackend, filters.OrderingFilter]
     lookup_field = 'kind'
 
-    def get_query(kind, lang='en'):
+    def get_query(self, kind, lang='en'):
         try:
             queryset = (
                 Filterable.objects
@@ -182,16 +185,16 @@ class A25FilterViewSet(viewsets.ModelViewSet):
 
     @action(detail=True)
     def en(self, request, kind):
-        return A25FilterViewSet.get_query(kind=kind, lang='en')
+        return self.get_query(kind=kind, lang='en')
 
     @action(detail=True)
     def sc(self, request, kind):
-        return A25FilterViewSet.get_query(kind=kind, lang='sc')
+        return self.get_query(kind=kind, lang='sc')
 
     @action(detail=True)
     def tc(self, request, kind):
-        return A25FilterViewSet.get_query(kind=kind, lang='tc')
+        return self.get_query(kind=kind, lang='tc')
 
     @action(detail=True)
     def ja(self, request, kind):
-        return A25FilterViewSet.get_query(kind=kind, lang='ja')
+        return self.get_query(kind=kind, lang='ja')

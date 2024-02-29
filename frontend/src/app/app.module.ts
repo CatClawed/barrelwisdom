@@ -7,8 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from '@app/app-routing.module';
 import { AppComponent } from '@app/app.component';
 import { LayoutComponent } from '@app/containers';
-import { HttpErrorInterceptor } from '@app/interceptor/http-error.intercepter';
-import { JwtInterceptor } from '@app/interceptor/jwt_interceptor';
+import { HttpErrorInterceptor } from '@app/_helpers/interceptor/http-error.interceptor';
+import { JwtInterceptor } from '@app/_helpers/interceptor/jwt_interceptor';
 import { CookieService } from 'ngx-cookie-service';
 
 const APP_CONTAINERS = [

@@ -9,11 +9,9 @@ import { RouterModule } from '@angular/router';
   imports: [RouterModule]
 })
 export class BreadcrumbComponent {
-
   @Input()
   breadcrumbs = [];
 
   @Input()
   current = "";
-
 }

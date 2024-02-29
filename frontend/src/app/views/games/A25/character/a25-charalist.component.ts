@@ -93,7 +93,7 @@ export class A25CharalistComponent extends ModalUseComponent {
       filtertext: '',
       roles: "any",
       elems: "any",
-      show_jp: this.language != 'ja' ? false : true,
+      show_jp: this.language === 'ja',
       colorL: 'any',
       colorR: 'any'
     })
@@ -103,6 +103,7 @@ export class A25CharalistComponent extends ModalUseComponent {
     this.gameService(this.a25service, 'characters');
     this.genericSEO(`Characters`, `The list of characters in ${this.gameTitle}.`);
     this.pageForm.reset()
+    this.pageForm.get('show_jp').setValue(this.language === 'ja')
     return forkJoin({
       charas: this.a25service.getCharaList(this.language),
       roles: this.a25service.getFilter("role", this.language),
@@ -116,7 +117,7 @@ export class A25CharalistComponent extends ModalUseComponent {
       startWith(null as Observable<Character[]>),
       map((search: any) => search ?
         this.filterT(search.filtertext, search.roles, search.elems, search.show_jp, search.colorL, search.colorR)
-        : this.filterT('', 'any', 'any', this.language != 'ja' ? false : true, 'any', 'any')),
+        : this.filterT('', 'any', 'any', this.language === 'ja', 'any', 'any')),
     );
   }
 

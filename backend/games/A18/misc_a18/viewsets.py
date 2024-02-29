@@ -19,19 +19,19 @@ class A18ShopViewSet(viewsets.ModelViewSet):
     @action(detail=False) 
     def en(self, request):
         return Response(A18ShopListSerializer(
-            A18ShopViewSet.queryset, many=True, context={'language': 'en'}).data)
+            self.queryset, many=True, context={'language': 'en'}).data)
 
     @action(detail=False) 
     def ja(self, request):
         return Response(A18ShopListSerializer(
-            A18ShopViewSet.queryset, many=True, context={'language': 'ja'}).data)
+            self.queryset, many=True, context={'language': 'ja'}).data)
 
     @action(detail=False) 
     def sc(self, request):
         return Response(A18ShopListSerializer(
-            A18ShopViewSet.queryset, many=True, context={'language': 'sc'}).data)
+            self.queryset, many=True, context={'language': 'sc'}).data)
 
     @action(detail=False) 
     def tc(self, request):
         return Response(A18ShopListSerializer(
-            A18ShopViewSet.queryset, many=True, context={'language': 'tc'}).data)
+            self.queryset, many=True, context={'language': 'tc'}).data)

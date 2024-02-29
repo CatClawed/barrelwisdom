@@ -17,7 +17,7 @@ export class A25Service {
   ) { }
 
   public readonly gameTitle = {
-    "en": "Atelier Resleriana", 
+    "en": "Atelier Resleriana",
     "ja": "レスレリアーナのアトリエ",
     "sc": "蕾斯莱莉娅娜的炼金工房",
     "tc": "蕾斯萊莉婭娜的鍊金工房"
@@ -130,7 +130,7 @@ export class A25Service {
   getResearch(language: string): Observable<Research[]> {
     return this.http.get<Research[]>(`${environment.apiUrl}/A25/research/${language}/`);
   }
-  
+
   getUpdate(language: string): Observable<Update> {
     return this.http.get<Update>(`${environment.apiUrl}/A25/update/${language}/`);
   }
@@ -143,7 +143,17 @@ export class A25Service {
     return this.http.get<ScoreBattle[]>(`${environment.apiUrl}/A25/scorebattle/${language}/`);
   }
 
-  getTower(language: string): Observable<Tower[]> {
-    return this.http.get<Tower[]>(`${environment.apiUrl}/A25/tower/${language}/`);
+  getTower(slugname: string, language: string): Observable<Tower[]> {
+    const slug = {
+      "fire":"fire",
+      "ice":"ice",
+      "bolt":"lightning",
+      "air":"wind",
+      "slash":"slash",
+      "strike":"impact",
+      "stab":"pierce",
+      "elemental-tower":"elemental-tower"
+    }
+    return this.http.get<Tower[]>(`${environment.apiUrl}/A25/tower/${slug[slugname]}/${language}/`);
   }
 }

@@ -1,4 +1,4 @@
-FROM node:18.19-alpine3.18
+FROM node:20.11.1-alpine3.19
 WORKDIR /frontend
 COPY package*.json /frontend
 RUN npm i --silent

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
-import { User } from '@app/interfaces/user';
+import { User } from '@app/views/main/_interfaces/user';
 import { environment } from "@environments/environment";
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';

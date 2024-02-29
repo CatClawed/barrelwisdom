@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ActivatedRoute } from '@angular/router';
@@ -15,7 +16,7 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
   encapsulation: ViewEncapsulation.None,
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, PopoverBandaidModule, MatTabsModule, MatIconModule]
+  imports: [...CommonImports, PopoverBandaidModule, MatTabsModule, MatIconModule, MatButtonModule]
 })
 export class A25RecipeComponent extends SingleComponent {
   constructor(
@@ -36,7 +37,7 @@ export class A25RecipeComponent extends SingleComponent {
   afterAssignment(): void {
     if (this.language !== 'ja') {
       for (let i = 0; i < this.data.length; i++) {
-        this.data[i].pages = this.data[i].pages.filter(x => { return x.gbl == true })
+        this.data[i].pages = this.data[i].pages.filter(x => { return x.gbl })
       }
     }
   }
@@ -44,7 +45,7 @@ export class A25RecipeComponent extends SingleComponent {
   getEmptySpace(page, index) {
     if (index == 0) {
       return page.recipes[index].y - 1;
-    } 
+    }
     if (page.recipes[index].x > page.recipes[index - 1].x) {
       return (5 - page.recipes[index - 1].y) + (page.recipes[index].y - 1)
     }
@@ -55,4 +56,4 @@ export class A25RecipeComponent extends SingleComponent {
     let el = document.getElementById(id);
     el.scrollIntoView();
   }
-} 
+}

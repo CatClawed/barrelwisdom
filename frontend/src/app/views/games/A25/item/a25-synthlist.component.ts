@@ -66,8 +66,11 @@ export class A25SynthesisListComponent extends ModalUseComponent {
 
   replaceVal(item: Item): string {
     if (item.equip) {
-      if (item.equip[0].val_bad) {
-        return item.desc.replaceAll("{0}", `${item.equip[0].val_bad / 100} ~ ${item.equip[0].val_good / 100}`).replaceAll("{1}", `${item.equip[0].val_bad / 100} ~ ${item.equip[0].val_good / 100}`)
+      if (item.equip[0].val_bad && !item.equip[0].val2_bad) {
+        return item.desc.replaceAll("{0}", `${item.equip[0].val_bad / 100} ~ ${item.equip[0].val_good / 100}`)
+      }
+      if (item.equip[0].val2_bad) {
+        return item.desc.replaceAll("{0}", `${item.equip[0].val_bad / 100} ~ ${item.equip[0].val_good / 100}`).replaceAll("{1}", `${item.equip[0].val2_bad / 100} ~ ${item.equip[0].val2_good / 100}`)
       }
       return item.desc.replaceAll("{0}", ` ${item.equip[0].val_good / 100}`).replaceAll("{1}", ` ${item.equip[0].val_good / 100}`)
     }

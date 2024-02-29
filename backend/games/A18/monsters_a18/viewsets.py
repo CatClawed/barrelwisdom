@@ -19,10 +19,10 @@ class A18MonsterViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
     lookup_field = 'slug'
 
-    def get_query(slug=None, lang="en"):
+    def get_query(self, slug=None, lang="en"):
         if not slug:
             return Response(A18MonsterListSerializer(
-                A18MonsterViewSet.queryset, many=True,context={'language': lang}).data)
+                self.queryset, many=True,context={'language': lang}).data)
         try:
             queryset = (
                 Monster.objects
@@ -45,34 +45,34 @@ class A18MonsterViewSet(viewsets.ModelViewSet):
 
     @action(detail=False)
     def en(self, request):
-        return A18MonsterViewSet.get_query(lang="en")
+        return self.get_query(lang="en")
 
     @action(detail=True, methods=['get'], url_path="en")
     def en_full(self, request, slug):
-        return A18MonsterViewSet.get_query(lang="en", slug=slug)
+        return self.get_query(lang="en", slug=slug)
 
     @action(detail=False)
     def ja(self, request):
-        return A18MonsterViewSet.get_query(lang="ja")
+        return self.get_query(lang="ja")
 
     @action(detail=True, methods=['get'], url_path="ja")
     def ja_full(self, request, slug):
-        return A18MonsterViewSet.get_query(lang="ja", slug=slug)
+        return self.get_query(lang="ja", slug=slug)
     @action(detail=False)
     def sc(self, request):
-        return A18MonsterViewSet.get_query(lang="sc")
+        return self.get_query(lang="sc")
 
     @action(detail=True, methods=['get'], url_path="sc")
     def sc_full(self, request, slug):
-        return A18MonsterViewSet.get_query(lang="sc", slug=slug)
+        return self.get_query(lang="sc", slug=slug)
 
     @action(detail=False)
     def tc(self, request):
-        return A18MonsterViewSet.get_query(lang="tc")
+        return self.get_query(lang="tc")
 
     @action(detail=True, methods=['get'], url_path="tc")
     def tc_full(self, request, slug):
-        return A18MonsterViewSet.get_query(lang="tc", slug=slug)
+        return self.get_query(lang="tc", slug=slug)
 
 class A18RaceViewSet(viewsets.ModelViewSet):
     queryset = Race.objects.all()
@@ -81,19 +81,19 @@ class A18RaceViewSet(viewsets.ModelViewSet):
     @action(detail=False)
     def en(self, request):
         return Response(A18RaceListSerializer(
-            A18RaceViewSet.queryset, many=True, context={'language': 'en'}).data)
+            self.queryset, many=True, context={'language': 'en'}).data)
 
     @action(detail=False)
     def ja(self, request):
         return Response(A18RaceListSerializer(
-            A18RaceViewSet.queryset, many=True, context={'language': 'ja'}).data)
+            self.queryset, many=True, context={'language': 'ja'}).data)
 
     @action(detail=False)
     def sc(self, request):
         return Response(A18RaceListSerializer(
-            A18RaceViewSet.queryset, many=True, context={'language': 'sc'}).data)
+            self.queryset, many=True, context={'language': 'sc'}).data)
 
     @action(detail=False)
     def tc(self, request):
         return Response(A18RaceListSerializer(
-            A18RaceViewSet.queryset, many=True, context={'language': 'tc'}).data)
+            self.queryset, many=True, context={'language': 'tc'}).data)

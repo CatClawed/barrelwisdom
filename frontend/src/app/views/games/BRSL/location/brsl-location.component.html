@@ -1,7 +1,7 @@
 @if (error) {
     <Error [errorCode]="error"></Error>
   }
-  
+
   @if (data; as location) {
     <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Location: '+location.name"></Breadcrumb>
     <h1>{{location.name}}</h1>
@@ -21,7 +21,7 @@
     @for (area of location.areas; track area) {
       <h2 id="{{area.slug}}">{{area.name}}</h2>
       @if (area.map) {
-        <img style="padding-bottom:1rem;" src="{{area.map}}">
+        <img style="padding-bottom:1rem;" src="{{area.map}}" alt="{{area.name}}">
       }
       <table class="tbl border table-shrink"><tbody>
         <tr class="table-dark-center">

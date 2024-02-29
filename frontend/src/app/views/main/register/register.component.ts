@@ -5,7 +5,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '@app/services/authentication.service';
 import { DestroyService } from '@app/services/destroy.service';
-import { ErrorCodeService } from '@app/services/errorcode.service';
+import { ErrorCodeService } from '@app/views/main/_services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
 import { mergeMap, takeUntil } from 'rxjs/operators';
 

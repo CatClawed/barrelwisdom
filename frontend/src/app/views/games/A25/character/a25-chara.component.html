@@ -14,14 +14,15 @@
         </h4>
         <div class="card-icon-position">
           <img style="width:3rem;aspect-ratio:48/45" src="{{imgURL}}characters/{{chara.role}}.webp" alt="{{chara.role}}" />
-          <div style="width:3rem;height:3rem;background-color:{{elements[chara.elem]}};color:white;display:flex;justify-content:center;align-items:center;border-radius:50%;">
-            <i class="atelier atelier-np atelier-resleri-{{chara.elem}}"></i>
-          </div>
+          <i class="atelier atelier-np atelier-resleri-{{chara.elem}} resleri-element-icon"
+            style="background-color:{{a25service.elements[chara.elem]}};display:flex;"></i>
         </div>
       </div>
-      <img loading="lazy"
-        style="aspect-ratio:680/724;width:400px;position:relative;border-radius:50%;overflow:hidden !important;margin:auto;aspect-ratio:1;max-width:100%;width:400px;filter:drop-shadow(5px 5px 5px black);{{gradients[chara.rarity]}}display:block;"
-        src="{{imgURL}}characters/full/{{chara.slug}}.webp" alt="{{chara.name}} {{chara.title}}" />
+      <div style="aspect-ratio:1;max-width:100%;width:400px;filter:drop-shadow(5px 5px 5px black);{{gradients[chara.rarity]}}display:block;border-radius:50%;overflow:hidden !important;margin:auto;">
+        <img loading="lazy"
+          style="aspect-ratio:680/724;width:400px;position:relative;"
+          src="{{imgURL}}characters/full/{{chara.slug}}.webp" alt="{{chara.name}} {{chara.title}}" />
+      </div>
       @if (chara.limit) {
         <p style="margin-top:1rem;"><b>Event: </b>{{chara.limit}}</p>
       }
@@ -32,8 +33,7 @@
         <p style="margin-top:1rem;" [innerHTML]="chara.note"></p>
       }
       <table class="tbl" style="margin-bottom:0;margin-top:1rem;"><tbody>
-        
-          <tr class="table-dark-center"><th>Gifts</th></tr>
+        <tr class="table-dark-center"><th>Gifts</th></tr>
         <tr>
           <td>
             <div style="display:inline-flex;float:right;">
@@ -72,65 +72,62 @@
           </td>
         </tr>
         <tr>
-        
-        </tbody></table>
+      </tbody></table>
+      <table class="tbl"><tbody>
+        <tr class="table-dark-center"><th colspan="4">Stats</th></tr>
+        <tr>
+          <td colspan="4">
+            <div style="width:45%;float:left;">
+              <b>Level: </b>{{slider.value}}<br />
+              <mat-slider
+                style="width:100%;"
+                [max]="80"
+                [min]="1">
+                <input matSliderThumb value="80" #slider>
+              </mat-slider>
+            </div>
+            <div style="width:45%;float:right;">
+              <b>Stars: </b>{{stars[starSlider.value-1]}}<br />
+              <mat-slider
+                color="accent"
+                style="width:100%;"
+                [max]="7"
+                [min]="chara.rarity">
+                <input matSliderThumb value="7" #starSlider>
+              </mat-slider>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="width:25%;">{{a25service.stats['hp'][language]}} </td>
+          <td style="width:25%;">{{getStat(chara.hp, stars[starSlider.value-1], slider.value)}}</td>
+          <td style="width:25%;">{{a25service.stats['agi'][language]}}</td>
+          <td style="width:25%;">{{chara.spd}}</td>
+        </tr>
+        <tr>
+          <td style="width:25%;">{{a25service.stats['patk'][language]}} </td>
+          <td style="width:25%;">{{getStat(chara.patk, stars[starSlider.value-1], slider.value)}}</td>
+          <td style="width:25%;">{{a25service.stats['pdef'][language]}}</td>
+          <td style="width:25%;">{{getStat(chara.pdfn, stars[starSlider.value-1], slider.value)}}</td>
+        </tr>
+        <tr>
+          <td style="width:25%;">{{a25service.stats['matk'][language]}} </td>
+          <td style="width:25%;">{{getStat(chara.matk, stars[starSlider.value-1], slider.value)}}</td>
+          <td style="width:25%;">{{a25service.stats['mdef'][language]}}</td>
+          <td style="width:25%;">{{getStat(chara.mdfn, stars[starSlider.value-1], slider.value)}}</td>
+        </tr>
+        <tr>
+          <td colspan="4">Does not include Grow Board</td>
+        </tr>
+      </tbody></table>
         <table class="tbl"><tbody>
-          
-            <tr class="table-dark-center"><th colspan="4">Stats</th></tr>
-          <tr>
-            <td colspan="4">
-              <div style="width:45%;float:left;">
-                <b>Level: </b>{{slider.value}}<br />
-                <mat-slider
-                  style="width:100%;"
-                  [max]="80"
-                  [min]="1">
-                  <input matSliderThumb value="80" #slider>
-                </mat-slider>
-              </div>
-              <div style="width:45%;float:right;">
-                <b>Stars: </b>{{stars[starSlider.value-1]}}<br />
-                <mat-slider
-                  color="accent"
-                  style="width:100%;"
-                  [max]="7"
-                  [min]="chara.rarity">
-                  <input matSliderThumb value="7" #starSlider>
-                </mat-slider>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td style="width:25%;">{{a25service.stats['hp'][language]}} </td>
-            <td style="width:25%;">{{getStat(chara.hp, stars[starSlider.value-1], slider.value)}}</td>
-            <td style="width:25%;">{{a25service.stats['agi'][language]}}</td>
-            <td style="width:25%;">{{chara.spd}}</td>
-          </tr>
-          <tr>
-            <td style="width:25%;">{{a25service.stats['patk'][language]}} </td>
-            <td style="width:25%;">{{getStat(chara.patk, stars[starSlider.value-1], slider.value)}}</td>
-            <td style="width:25%;">{{a25service.stats['pdef'][language]}}</td>
-            <td style="width:25%;">{{getStat(chara.pdfn, stars[starSlider.value-1], slider.value)}}</td>
-          </tr>
-          <tr>
-            <td style="width:25%;">{{a25service.stats['matk'][language]}} </td>
-            <td style="width:25%;">{{getStat(chara.matk, stars[starSlider.value-1], slider.value)}}</td>
-            <td style="width:25%;">{{a25service.stats['mdef'][language]}}</td>
-            <td style="width:25%;">{{getStat(chara.mdfn, stars[starSlider.value-1], slider.value)}}</td>
-          </tr>
-          <tr>
-            <td colspan="4">Does not include Grow Board</td>
-          </tr>
-          
-        </tbody></table>
-        <table class="tbl"><tbody>
-          
-            <tr class="table-dark-center"><th>Skills</th></tr>
+          <tr class="table-dark-center"><th>Skills</th></tr>
           @for (skill of chara.skills; track skill) {
             <tr>
               <td>
                 <b>{{skill.name}}</b>
-                <i class="atelier atelier-np atelier-resleri-{{skill.elem}}" style="float:right;width:3rem;height:3rem;background-color:{{elements[skill.elem]}};color:white;display:flex;justify-content:center;align-items:center;border-radius:50%;"></i>
+                <i class="atelier atelier-np atelier-resleri-{{skill.elem}} resleri-element-icon"
+                  style="float:right;background-color:{{a25service.elements[skill.elem]}};"></i>
                 <p [innerHTML]="replaceDesc(skill)"></p>
                 @if (skill.wt) {
                   <p    ><b>WT: </b>{{skill.wt}}</p>
@@ -148,9 +145,9 @@
             </tr>
           }
           <tr>
-          </tbody></table>
-          <table class="tbl"><tbody>
-              <tr class="table-dark-center"><th>Passives</th></tr>
+        </tbody></table>
+        <table class="tbl"><tbody>
+          <tr class="table-dark-center"><th>Passives</th></tr>
             <tr>
               <td>
                 <ul>
@@ -165,16 +162,15 @@
                 </ul>
               </td>
             </tr>
-            <tr>
-            
-            </tbody></table>
-          </div>
-          <ng-template #traitPopover let-trait="trait">
-            <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5).replaceAll('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
-            <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
-          </ng-template>
-          @if (showNav) {
-            <div class="col-md-3" ></div>
-          }
-        </div>
-      }
+          <tr>
+        </tbody></table>
+    </div>
+    <ng-template #traitPopover let-trait="trait">
+      <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5).replaceAll('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
+      <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
+    </ng-template>
+    @if (showNav) {
+      <div class="col-md-3" ></div>
+    }
+  </div>
+}
