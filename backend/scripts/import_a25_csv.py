@@ -106,6 +106,9 @@ def ImpTrait(row, index, **kwargs):
                 kind=Filterable.objects.get(slug=kwargs.get("kind"), kind="item_type"),
                 cat=Filterable.objects.get(text_en=row["Cat ID"], kind="combat_type"),
             )
+            if kwargs.get("kind") == 'equipment':
+                obj.trans_wep = True
+            # TODO: Write the combat equivalent
         obj.name=name
         obj.desc=desc
         obj.val1=row["EFF 1-1"]

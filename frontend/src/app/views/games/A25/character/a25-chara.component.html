@@ -14,15 +14,14 @@
         </h4>
         <div class="card-icon-position">
           <img style="width:3rem;aspect-ratio:48/45" src="{{imgURL}}characters/{{chara.role}}.webp" alt="{{chara.role}}" />
-          <div class="resleri-element-icon" style="background-color:{{a25service.elements[chara.elem]}};">
-            <i class="atelier atelier-np atelier-resleri-{{chara.elem}}"></i>
-          </div>
+          <i class="atelier atelier-np atelier-resleri-{{chara.elem}} resleri-element-icon"
+            style="background-color:{{a25service.elements[chara.elem]}};display:flex;"></i>
         </div>
       </div>
       <div style="aspect-ratio:1;max-width:100%;width:400px;filter:drop-shadow(5px 5px 5px black);{{gradients[chara.rarity]}}display:block;border-radius:50%;overflow:hidden !important;margin:auto;">
         <img loading="lazy"
-        style="aspect-ratio:680/724;width:400px;position:relative;"
-        src="{{imgURL}}characters/full/{{chara.slug}}.webp" alt="{{chara.name}} {{chara.title}}" />
+          style="aspect-ratio:680/724;width:400px;position:relative;"
+          src="{{imgURL}}characters/full/{{chara.slug}}.webp" alt="{{chara.name}} {{chara.title}}" />
       </div>
       @if (chara.limit) {
         <p style="margin-top:1rem;"><b>Event: </b>{{chara.limit}}</p>
