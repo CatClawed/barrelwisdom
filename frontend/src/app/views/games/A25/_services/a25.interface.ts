@@ -162,6 +162,10 @@ export interface Character {
     skills: Skill[];
     note: string;
     gbl: boolean;
+    leader_skill_name: string;
+    leader_skill_desc: string;
+    leader_skill_chars: string[];
+    tags: string[];
 }
 
 export interface Skill {

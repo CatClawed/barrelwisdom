@@ -74,19 +74,36 @@ class A25CharaSerializer(A25DefaultSerializer):
     trait3 = A25TraitSimpleSerializer()
     passives = A25PassiveSerializer(source='passive_set', many=True)
     skills = A25SkillSerializer(source='skill_set', many=True)
+    leader_skill_name = serializers.SerializerMethodField()
+    leader_skill_desc = serializers.SerializerMethodField()
+    leader_skill_chars  = serializers.SerializerMethodField()
+    tags  = serializers.SerializerMethodField()
     class Meta:
         model = Character
         fields = [
             'slug', 'name', 'title', 'role', 'elem', 'rarity', 'color1', 'color2',
             'trait1', 'trait2', 'trait3',
             'hp', 'spd', 'patk', 'pdfn', 'matk', 'mdfn',
-            "passives", 'limit', 'skills', 'note', 'gbl'
+            "passives", 'limit', 'skills', 'note', 'gbl',
+            'leader_skill_name', 'leader_skill_desc', 'leader_skill_chars', 'tags'
         ]
     def get_title(self, obj):
         return A25DefaultSerializer.get_text_gbl(self,obj.title,obj.gbl)
     def get_limit(self, obj):
         if obj.limit:
             return A25DefaultSerializer.get_text(self,obj.limit)
+    def get_leader_skill_name(self, obj):
+        return A25DefaultSerializer.get_text_gbl(self,obj.leader_skill_name,False)
+    def get_leader_skill_desc(self, obj):
+        return A25DefaultSerializer.get_text_gbl(self,obj.leader_skill_desc,False)
+    def get_leader_skill_chars(self, obj):
+        if obj.leader_skill_tag:
+            chars = obj.leader_skill_tag.chara_tags.all()
+            return [char.slug for char in chars]
+    def get_tags(self, obj):
+            return [A25DefaultSerializer.get_text_gbl(self,tag,False)
+                for tag in obj.tags.all()
+            ]
 
 class A25MemoriaListSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()

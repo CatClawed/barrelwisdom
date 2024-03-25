@@ -87,10 +87,6 @@ class Recipe(models.Model):
     y    = models.IntegerField()
     book = models.IntegerField()
 
-    char1 = models.ForeignKey(Character, on_delete=models.CASCADE, related_name="recipe_char1")
-    char2 = models.ForeignKey(Character, on_delete=models.CASCADE, related_name="recipe_char2")
-    char3 = models.ForeignKey(Character, on_delete=models.CASCADE, related_name="recipe_char3")
-
     color1 = models.ForeignKey(Filterable, on_delete=models.CASCADE, related_name="recipe_color1")
     color2 = models.ForeignKey(Filterable, on_delete=models.CASCADE, related_name="recipe_color2")
     color3 = models.ForeignKey(Filterable, on_delete=models.CASCADE, related_name="recipe_color3")

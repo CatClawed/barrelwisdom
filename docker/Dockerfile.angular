@@ -1,7 +1,8 @@
 FROM node:20.11.1-alpine3.19
 WORKDIR /frontend
 COPY package*.json /frontend
-RUN npm i --silent
+RUN npm ci
+RUN npm install -g @angular/cli
 COPY . /frontend
 #CMD npm run dev:ssr
 CMD npm start

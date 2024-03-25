@@ -11,6 +11,11 @@ class Character(models.Model):
     note  = models.CharField(max_length=200, blank=True)
     gbl   = models.BooleanField(default=False)
 
+    leader_skill_name = models.ForeignKey(Name, on_delete=models.CASCADE, blank=True, null=True, related_name="leader_name")
+    leader_skill_desc = models.ForeignKey(Desc, on_delete=models.CASCADE, blank=True, null=True, related_name="leader_desc")
+    leader_skill_tag  = models.ForeignKey(Filterable, on_delete=models.CASCADE, blank=True, null=True, related_name="skill_tag")
+    tags = models.ManyToManyField(Filterable, related_name="chara_tags")
+
     rarity = models.IntegerField()
 
     color1 = models.ForeignKey(Filterable, on_delete=models.CASCADE, related_name="char_color1")
@@ -110,17 +115,11 @@ class Memoria(models.Model):
     lv4  = models.IntegerField()
     lv5  = models.IntegerField()
 
-    hp1    = models.IntegerField()
     hp30   = models.IntegerField()
-    spd1   = models.IntegerField()
     spd30  = models.IntegerField()
-    patk1  = models.IntegerField()
     patk30 = models.IntegerField()
-    matk1  = models.IntegerField()
     matk30 = models.IntegerField()
-    pdef1  = models.IntegerField()
     pdef30 = models.IntegerField()
-    mdef1  = models.IntegerField()
     mdef30 = models.IntegerField()
 
     class Meta:
