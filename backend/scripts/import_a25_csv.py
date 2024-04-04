@@ -6,20 +6,7 @@ import csv, codecs, sys, urllib.request, json
 from scripts.util import import_generic, slug_me
 
 BASE_URL = 'https://resleriana-db.vercel.app/api/'
-"""
-names = ['ability', 'base_character', 'base_enemy', 'battle', 'battle_hint',
-    'battle_mission', 'battle_tool', 'battle_tool_trait', 'battle_tool_trait_lottery',
-    'character', 'character_common_rarity', 'character_growth', 'character_tag', 'drop_reward_set',
-    'effect', 'emblem', 'emblem_group', 'emblem_rarity', 'enemy', 'enemy_ai_unit',
-    'equipment_tool', 'equipment_tool_trait', 'equipment_tool_trait_lottery', 'event',
-    'expedition', 'expedition_recommended_character', 'expedition_user_rank_reward', 'gacha',
-    'growboard', 'growboard_page', 'growboard_panel', 'hyperlink', 'item', 'leader_skill_condition',
-    'memoria', 'memoria_buff_growth', 'memoria_level', 'memoria_rarity', 'memoria_scope', 'quest',
-    'quest_icon', 'recipe', 'recipe_plan', 'research', 'research_effect', 'research_effect_level',
-    'research_group', 'reward_set', 'skill', 'species', 'synthesis_support_character', 'timeline_panel',
-    'timeline_panel_group', 'trait_color', 'trait_rank_total', 'wave']
 
-"""
 names = ['ability', 'battle_tool', 'battle_tool_trait', 'character', 'character_tag', 'effect', 'equipment_tool', 'equipment_tool_trait', 'hyperlink', 'item', 'leader_skill_condition', 'memoria', 'memoria_buff_growth', 'quest', 'recipe', 'recipe_plan', 'reward_set', 'skill']
 names_gbl = ['ability', 'battle_tool', 'battle_tool_trait', 'character', 'effect', 'equipment_tool', 'equipment_tool_trait', 'item', 'memoria', 'quest', 'recipe', 'recipe_plan', 'skill']
 jsons = {}
@@ -27,10 +14,17 @@ languages = ['en', 'zh_cn', 'zh_tw']
 
 # for setting slugs
 additions = {
-    'スール': 'suelle-2',
-    'フロッケ': 'flocke-1'
+    'レスナ': 'resna-4',
+    'ソフィー': 'sophie-2'
 }
-memoria_index = 84
+memoria_index = 87
+
+trait_cat = {
+    1: Filterable.objects.get(text_en="Attack"),
+    2: Filterable.objects.get(text_en="Enhance"),
+    3: Filterable.objects.get(text_en="Weakening"),
+    4: Filterable.objects.get(text_en="Recovery")
+}
 
 elems = {
     1: Filterable.objects.get(kind="element", text_en="Slash"),
@@ -196,48 +190,62 @@ def createUpdateGBL():
 
 def import_combat_traits():
     for trait in jsons['battle_tool_trait']:
-        if trait['id'] <= 38 or trait['id'] >= 44:
-            try:
-                obj = Trait.objects.get(index=trait['id'])
-                print('Update', trait["name"], trait['id'])
-            except:
-                obj = Trait(gbl=False)
-                print('Create', trait["name"], trait['id'])
-            
-            name = checkName(
-                text_ja = trait['name'],
-                text_en = trait['name_en'] if 'name_en' in trait else '',
-                text_sc = trait['name_zh_cn'] if 'name_zh_cn' in trait else '',
-                text_tc = trait['name_zh_tw'] if 'name_zh_tw' in trait else '',
-                volatile=True
+        try:
+            obj = Trait.objects.get(index=trait['id'])
+            print('Update', trait["name"], trait['id'])
+        except:
+            obj = Trait(gbl=False, slug=f'usable-trait-{trait["id"]}')
+            print('Create', trait["name"], trait['id'])
+
+        kind = Filterable.objects.get(slug="combat")
+        
+        name = checkName(
+            text_ja = trait['name'],
+            text_en = trait['name_en'] if 'name_en' in trait else '',
+            text_sc = trait['name_zh_cn'] if 'name_zh_cn' in trait else '',
+            text_tc = trait['name_zh_tw'] if 'name_zh_tw' in trait else '',
+            volatile=True
+        )
+
+        if trait['description']:
+            desc = checkDesc(
+                text_ja = trait['description'],
+                text_en = trait['description_en'] if 'description_en' in trait else '',
+                text_sc = trait['description_zh_cn'] if 'description_zh_cn' in trait else '',
+                text_tc = trait['description_zh_tw'] if 'description_zh_tw' in trait else '',
             )
+        else:
+            effect = search(trait['effects'][0]['id'], jsons['effect'])[0]
+            desc = checkDesc(
+                text_ja = effect['description'],
+                text_en = effect['description_en'] if 'description_en' in effect else '',
+                text_sc = effect['description_zh_cn'] if 'description_zh_cn' in effect else '',
+                text_tc = effect['description_zh_tw'] if 'description_zh_tw' in effect else '',
+            )
+        eff = trait['effects'][0]['values']
 
-            if trait['description']:
-                desc = checkDesc(
-                    text_ja = trait['description'],
-                    text_en = trait['description_en'] if 'description_en' in trait else '',
-                    text_sc = trait['description_zh_cn'] if 'description_zh_cn' in trait else '',
-                    text_tc = trait['description_zh_tw'] if 'description_zh_tw' in trait else '',
-                )
-            else:
-                effect = search(trait['effects'][0]['id'], jsons['effect'])[0]
-                desc = checkDesc(
-                    text_ja = effect['description'],
-                    text_en = effect['description_en'] if 'description_en' in effect else '',
-                    text_sc = effect['description_zh_cn'] if 'description_zh_cn' in effect else '',
-                    text_tc = effect['description_zh_tw'] if 'description_zh_tw' in effect else '',
-                )
-            eff = trait['effects'][0]['values']
+        obj.name=name
+        obj.desc=desc
+        obj.val1=eff[0]/100
+        obj.val2=eff[1]/100
+        obj.val3=eff[2]/100
+        obj.val4=eff[3]/100
+        obj.val5=eff[4]/100
+        obj.index=trait['id']
+        obj.kind=kind
+        obj.cat=trait_cat[trait['category_id']]
 
-            obj.name=name
-            obj.desc=desc
-            obj.val1=eff[0]/100
-            obj.val2=eff[1]/100
-            obj.val3=eff[2]/100
-            obj.val4=eff[3]/100
-            obj.val5=eff[4]/100
-            obj.index=trait['id']
-            obj.save()
+        for filterid in trait['filter_ids']:
+            match filterid:
+                case 1:
+                    obj.trans_atk=True
+                case 2:
+                    obj.trans_buff=True
+                case 3:
+                    obj.trans_dbf=True
+                case 4:
+                    obj.trans_heal=True
+        obj.save()
 
 def import_equipment_traits():
     for trait in jsons['equipment_tool_trait']:
@@ -245,8 +253,10 @@ def import_equipment_traits():
             obj = Trait.objects.get(index=trait['id']+99)
             print('Update', trait["name"], trait['id']+99)
         except:
-            obj = Trait(gbl=False)
+            obj = Trait(gbl=False, slug=f'equip-trait-{trait["id"]+100}')
             print('Create', trait["name"], trait['id']+99)
+
+        kind = Filterable.objects.get(slug="equipment")
 
         name = checkName(
             text_ja = trait['name'],
@@ -273,6 +283,11 @@ def import_equipment_traits():
         obj.val4=search(abl[3], jsons['ability'])[0]['effects'][0]['value']/100
         obj.val5=search(abl[4], jsons['ability'])[0]['effects'][0]['value']/100
         obj.index=trait['id']+99
+        obj.kind=kind
+        obj.cat=trait_cat[trait['category_id']]
+        obj.trans_web=True
+        obj.trans_arm=True
+        obj.trans_acc=True
         obj.save()
 
 def import_tags():
@@ -300,21 +315,16 @@ def fix_hyperlink(desc, lang=''):
     return desc
 
 def import_skills(char_dict, char):
-    s1 = search(
-        search(char_dict["normal1_skill_ids"][0], jsons['skill'])[0]['name'],
-        jsons['skill'],
-        "name"
-    )
-    s2 = search(
-        search(char_dict["normal2_skill_ids"][0], jsons['skill'])[0]['name'],
-        jsons['skill'],
-        "name"
-    )
-    s3 = search(
-        search(char_dict["burst_skill_ids"][0], jsons['skill'])[0]['name'],
-        jsons['skill'],
-        "name"
-    )
+    s1 = []
+    s2 = []
+    s3 = []
+    for s in char_dict["normal1_skill_ids"]:
+        s1.append(search(s, jsons['skill'])[0])
+    for s in char_dict["normal2_skill_ids"]:
+        s2.append(search(s, jsons['skill'])[0])
+    for s in char_dict["burst_skill_ids"]:
+        s3.append(search(s, jsons['skill'])[0])
+    s3 = s3[2:]
 
     skills = [s1, s2, s3]
     index = 0
@@ -420,7 +430,7 @@ def import_passives(char_dict, char):
         obj.save()
 
 
-def import_characters():
+def import_characters(event=None):
     import_tags()
     roles = {
         1: Filterable.objects.get(text_en="Attacker", kind="role"),
@@ -439,7 +449,7 @@ def import_characters():
         )
         title = checkName(
             text_ja = char["another_name"],
-            text_en = char["another_name_en"] if "another_name_en" in char else '',
+            text_en = f'[{char["another_name_en"]}]' if "another_name_en" in char else '',
             text_sc = char["another_name_zh_cn"] if "another_name_zh_cn" in char else '',
             text_tc = char["another_name_zh_tw"] if "another_name_zh_tw" in char else '',
             volatile= True
@@ -465,6 +475,8 @@ def import_characters():
             print('Creating', name.text_ja, title.text_ja)
             obj = Character(slug=additions[name.text_ja])
             create = True
+            if event:
+                obj.limit = event
 
         t1 = search(char['battle_tool_trait_ids'][0], jsons['battle_tool_trait'])[0]
         t2 = search(char['battle_tool_trait_ids'][1], jsons['battle_tool_trait'])[0]
@@ -521,7 +533,7 @@ def import_characters():
         import_skills(char, obj)
         import_passives(char, obj)
 
-def import_memoria(memoria_index):
+def import_memoria(memoria_index, event=None):
     for mem in jsons['memoria']:
         name = checkName(
             text_ja = mem["name"],
@@ -557,6 +569,8 @@ def import_memoria(memoria_index):
             create = True
             obj = Memoria(slug=str(memoria_index))
             memoria_index = memoria_index + 1
+            if event:
+                obj.limit = event
 
         obj.name = name
         obj.skill_name=skill_name
@@ -581,7 +595,7 @@ def import_memoria(memoria_index):
             update = LatestUpdate.objects.first()
             update.memoria.add(obj)
 
-def import_material():
+def import_material(event=None):
     for item in jsons['item']:
         name = checkName(
             text_ja = item["name"],
@@ -607,6 +621,8 @@ def import_material():
                 slug=str(item['id'])
             )
             create = True
+            if event:
+                obj.limit = event
         
         obj.name = name
         obj.desc = desc
@@ -634,7 +650,7 @@ def import_material():
                 name = search(t, jsons['equipment_tool_trait'])[0]['name']
                 obj2.traits.add(Trait.objects.get(name__text_ja=name))
 
-def import_combat_items():
+def import_combat_items(event=None):
     prev_item = None
     for item in jsons['battle_tool']:
         name = checkName(
@@ -658,6 +674,8 @@ def import_combat_items():
             obj = Item(slug=f'usable-{item["id"]}')
             print("Creating Combat Item", name.text_ja)
             create = True
+            if event:
+                obj.limit = event
         
         obj.name = name
         obj.desc = desc
@@ -692,7 +710,7 @@ def import_combat_items():
             update = LatestUpdate.objects.first()
             update.items.add(item)
 
-def import_equipment():
+def import_equipment(event=None):
     prev_item = None
     for item in jsons['equipment_tool']:
         name = checkName(
@@ -717,6 +735,8 @@ def import_equipment():
             obj = Item(slug=f'equip-{item["id"]}')
             print("Creating Equipment", name.text_ja)
             create = True
+            if event:
+                obj.limit = event
 
         obj.name = name
         obj.desc = desc
@@ -1202,26 +1222,66 @@ def global_additions():
     createUpdateGBL()
     update = LatestUpdateGBL.objects.first()
 
-    dungeons = []
+    rStory = RecipeTab.objects.get(order=1)
+    rExtra = RecipeTab.objects.get(order=2)
+
+    dungeons = None #['Shimmering Springs', 'Deep Grasslands']
     score_battle_chapter = None
     tower_floor_max = None
     elem_tower_floor_max = None
-    events = ['忘却の賢者と秘密の楽園', 'ライザのアトリエ LEGEND FES', 'ライザからの挑戦状']
-    recipe_pages = []
+    events = None #['イザナ新章追加記念 LEGEND FES', '属性塔']
+    recipe_pages = None #[[rStory, 15], [rExtra, 16]] # refer to db for numbers
     traits = []
 
     if tower_floor_max:
-        pass
+        towers = Tower.objects.filter(kind=Filterable.objects.get(text_en="Elemental Tower"))
+        for tower in towers:
+            if tower.floor <= tower_floor_max and not tower.gbl:
+                tower.gbl = True
+                tower.save()
+                print(tower.kind.text_en, tower.floor)
     if elem_tower_floor_max:
-        pass
+        towers = Tower.objects.exclude(kind=Filterable.objects.get(text_en="Elemental Tower"))
+        for tower in towers:
+            if tower.floor <= elem_tower_floor_max and not tower.gbl:
+                tower.gbl = True
+                tower.save()
+                print(tower.kind.text_en, tower.floor)
     if score_battle_chapter:
-        pass
+        score_battles = ScoreBattle.objects.filter(chapter=score_battle_chapter)
+        for sb in score_battles:
+            sb.gbl = True
+            sb.save()
+            for diff in sb.difficulties.all():
+                for reward in diff.rewards.all():
+                    if not reward.item.gbl:
+                        reward.item.gbl = True
+                        reward.item.save()
+                        print("Score Battle Reward", sb.chapter, sb.section, diff.difficulty, reward.item.name.text_en, reward.item.name.text_ja)
+                        update.items.add(reward.item)
     for dungeon in dungeons:
-        pass
-    for page in recipe_pages:
-        pass
+        n = Name.objects.get(text_en=dungeon)
+        dun = Dungeon.objects.get(name=n)
+        for reward in dun.rewards.all():
+            if not reward.item.gbl:
+                print("Dungeon Reward", reward.item.name.text_en, reward.item.name.text_ja)
+                reward.item.gbl = True
+                reward.item.save()
+                update.items.add(reward.item)
+        dun.gbl=True
+        dun.save()
     for trait in traits:
         pass
+
+    for page in recipe_pages:
+        p = RecipePage.objects.get(book=page[1], tab=page[0])
+        for recipe in p.recipe_set.all():
+            print("Item GBL (recipe):", recipe.item.name.text_en, recipe.item.name.text_ja)
+            recipe.item.gbl = True
+            recipe.item.save()
+            update.items.add(recipe.item)
+        p.gbl = True
+        p.save()
 
     for event in events:
         ev = Desc.objects.get(text_ja=event)
@@ -1263,19 +1323,30 @@ def global_additions():
             char.save()
             update.characters.add(char)
 
+def create_event(ja, en='', sc='', tc=''):
+    if not sc:
+        sc = ja
+        tc = ja
+    if not en:
+        en = ja
+    return checkDesc(en, ja, sc, tc)
 
+# From Resleri Academy, use abbreviations in recipe_plan
+
+gacha = None #create_event(ja='レスレリ学園 LEGEND FES 入学編', en='Resleri Academy LEGEND FES Entrance')
+event = None #create_event(ja='レスレリ学園第1弾', en="Resleri Academy 1")
 
 #createUpdate()
 retrieve_all_jsons()
-#import_combat_traits()
-#import_equipment_traits()
-#import_characters()
-#import_memoria(memoria_index)
-#import_material()
-#import_combat_items()
-#import_equipment()
-#import_recipes()
-#import_quest()
+import_combat_traits()
+import_equipment_traits()
+import_characters(event=gacha)
+import_memoria(memoria_index, event=gacha)
+import_material(event=event)
+import_combat_items(event=event)
+import_equipment(event=event)
+import_recipes()
+import_quest()
 #scan_update_images()
 
 #import_generic(ImpEnemySkill)
