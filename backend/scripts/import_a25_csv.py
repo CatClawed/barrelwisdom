@@ -14,10 +14,10 @@ languages = ['en', 'zh_cn', 'zh_tw']
 
 # for setting slugs
 additions = {
-    'レスナ': 'resna-4',
-    'ソフィー': 'sophie-2'
+    'ミミ': 'mimi-1',
+    'ライザ': 'ryza-3'
 }
-memoria_index = 87
+memoria_index = 88 # resleri acad 2
 
 trait_cat = {
     1: Filterable.objects.get(text_en="Attack"),
@@ -708,7 +708,7 @@ def import_combat_items(event=None):
 
         if create:
             update = LatestUpdate.objects.first()
-            update.items.add(item)
+            update.items.add(obj)
 
 def import_equipment(event=None):
     prev_item = None
@@ -1219,18 +1219,18 @@ def scan_update_images():
         print(character.slug, jsons['path_hash_to_name'][im])
 
 def global_additions():
-    createUpdateGBL()
+    #createUpdateGBL()
     update = LatestUpdateGBL.objects.first()
 
     rStory = RecipeTab.objects.get(order=1)
     rExtra = RecipeTab.objects.get(order=2)
 
-    dungeons = None #['Shimmering Springs', 'Deep Grasslands']
+    dungeons = [] #['Shimmering Springs', 'Deep Grasslands']
     score_battle_chapter = None
     tower_floor_max = None
     elem_tower_floor_max = None
-    events = None #['イザナ新章追加記念 LEGEND FES', '属性塔']
-    recipe_pages = None #[[rStory, 15], [rExtra, 16]] # refer to db for numbers
+    events = ['ライザからの挑戦状']
+    recipe_pages = [] #[[rStory, 15], [rExtra, 16]] # refer to db for numbers
     traits = []
 
     if tower_floor_max:
@@ -1286,18 +1286,17 @@ def global_additions():
     for event in events:
         ev = Desc.objects.get(text_ja=event)
         try:
-            if event != 'ライザからの挑戦状': #heck this event
-                page = RecipePage.objects.get(desc=ev)
-                print("Page GBL:", ev.text_en)
-                page.gbl = True
-                page.save()
-                recipes = Recipe.objects.filter(page=page)
-                for recipe in recipes:
-                    if recipe.item.name.text_sc:
-                        print("Item GBL:", recipe.item.name.text_en, recipe.item.name.text_ja)
-                        recipe.item.gbl = True
-                        recipe.item.save()
-                        update.items.add(recipe.item)
+            page = RecipePage.objects.get(desc=ev)
+            print("Page GBL:", ev.text_en)
+            page.gbl = True
+            page.save()
+            recipes = Recipe.objects.filter(page=page)
+            for recipe in recipes:
+                if recipe.item.name.text_sc:
+                    print("Item GBL:", recipe.item.name.text_en, recipe.item.name.text_ja)
+                    recipe.item.gbl = True
+                    recipe.item.save()
+                    update.items.add(recipe.item)
         except:
             pass
 
@@ -1333,20 +1332,20 @@ def create_event(ja, en='', sc='', tc=''):
 
 # From Resleri Academy, use abbreviations in recipe_plan
 
-gacha = None #create_event(ja='レスレリ学園 LEGEND FES 入学編', en='Resleri Academy LEGEND FES Entrance')
-event = None #create_event(ja='レスレリ学園第1弾', en="Resleri Academy 1")
+gacha = None #create_event(ja='レスレリ学園 LEGEND FES 錬金祭編', en='Resleri Academy LEGEND FES Festival')
+event = None #create_event(ja='レスレリ学園第2弾', en="Resleri Academy 2")
 
 #createUpdate()
-retrieve_all_jsons()
-import_combat_traits()
-import_equipment_traits()
-import_characters(event=gacha)
-import_memoria(memoria_index, event=gacha)
-import_material(event=event)
-import_combat_items(event=event)
-import_equipment(event=event)
-import_recipes()
-import_quest()
+#retrieve_all_jsons()
+#import_combat_traits()
+#import_equipment_traits()
+#import_characters(event=gacha)
+#import_memoria(memoria_index, event=gacha)
+#import_material(event=event)
+#import_combat_items(event=event)
+#import_equipment(event=event)
+#import_recipes()
+#import_quest()
 #scan_update_images()
 
 #import_generic(ImpEnemySkill)
@@ -1354,7 +1353,7 @@ import_quest()
 #import_generic(ImpWave)
 #import_generic(ImpBattle)
 
-#global_additions()
+global_additions()
 
 """
 Checklist
