@@ -54,12 +54,12 @@ class TestA25(TestCase):
             for lang in self.languages:
                 if len(obj.material_set.all()) > 0:
                     request = self.client.get(f'{self.apiBase}/material/{obj.slug}/{lang}/')
-                    assert(request.status_code == 200)
+                    assert request.status_code == 200, print(obj.name.text_ja)
                     request = self.client.get(f'{self.apiBase}/synth/{obj.slug}/{lang}/')
-                    assert(request.status_code == 404)
+                    assert request.status_code == 404, print(obj.name.text_ja)
                 else:
                     request = self.client.get(f'{self.apiBase}/material/{obj.slug}/{lang}/')
-                    assert(request.status_code == 404)
+                    assert request.status_code == 404, print(obj.name.text_ja)
                     request = self.client.get(f'{self.apiBase}/synth/{obj.slug}/{lang}/')
-                    assert(request.status_code == 200)
+                    assert request.status_code == 200, print(obj.name.text_ja)
 

@@ -45,6 +45,8 @@ class A25CharaViewSet(viewsets.ModelViewSet):
                     'trait1__desc',
                     'trait2__desc',
                     'trait3__desc',
+                    'leader_skill_name',
+                    'leader_skill_desc',
                 )
                 .prefetch_related(
                     'passive_set__name',
@@ -53,6 +55,7 @@ class A25CharaViewSet(viewsets.ModelViewSet):
                     'skill_set__desc',
                     'skill_set__elem',
                     'skill_set__area',
+                    'tags',
                 )
                 .get(slug=slug)
             )

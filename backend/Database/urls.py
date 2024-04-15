@@ -22,7 +22,7 @@ from games.BR1 import urls as BR1
 from games.BRSL import urls as BRSL
 
 router = routers.DefaultRouter()
-router.register(r'editblog', BlogViewSet)
+router.register(r'editblog', BlogViewSet, 'edit')
 router.register(r'blog', MainBlogViewSet)
 router.register(r'tags', TagViewSet)
 router.register(r'section', SectionViewSet)
@@ -32,7 +32,7 @@ router.register(r'user', UserNameViewSet)
 router.register(r'nav', NavigationViewSet)
 router.register(r'report', ReportViewSet)
 router.register(r'new/comment', NewCommentViewSet)
-router.register(r'comment', ModerateCommentViewSet)
+router.register(r'comment', ModerateCommentViewSet, 'modcomment')
 
 
 routeLists = [
@@ -50,7 +50,7 @@ routeLists = [
 
 for routeList in routeLists:
     for route in routeList:
-        router.register(route[0], route[1])
+        router.register(route[0], route[1], f"{route[0]}-{route[1]}")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
