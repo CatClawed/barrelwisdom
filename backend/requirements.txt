@@ -39,7 +39,7 @@ djangorestframework==3.15.1
     #   djangorestframework-simplejwt
 djangorestframework-simplejwt==5.3.1
     # via -r requirements.in
-gunicorn==21.2.0
+gunicorn==22.0.0
     # via -r requirements.in
 packaging==24.0
     # via gunicorn
