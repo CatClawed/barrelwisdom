@@ -1,4 +1,4 @@
-FROM node:20.11.1-alpine3.19
+FROM node:lts-alpine
 WORKDIR /frontend
 COPY package*.json /frontend
 RUN npm ci
