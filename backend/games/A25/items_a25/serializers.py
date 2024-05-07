@@ -63,7 +63,7 @@ class A25CombatDetailSerializer(A25DefaultSerializer):
     kind = serializers.CharField(source='kind.slug')
     class Meta:
         model = CombatItem
-        fields = ['kind', 'val_good', 'val_bad',]
+        fields = ['kind', 'val_good', 'val_bad', 'val2_good', 'val2_bad']
 
 class A25CombatSerializer(A25DefaultSerializer):
     kind = serializers.CharField(source='kind.slug')
@@ -72,7 +72,7 @@ class A25CombatSerializer(A25DefaultSerializer):
     class Meta:
         model = CombatItem
         fields = ['kind', 'area', 'uses', 'elem',
-            'val_good', 'val_bad', 'pow_good', 'pow_bad',
+            'val_good', 'val_bad', 'pow_good', 'pow_bad', 'val2_good', 'val2_bad',
         ]
     def get_area(self,obj):
         return A25DefaultSerializer.get_text(self,obj.area)

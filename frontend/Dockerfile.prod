@@ -1,6 +1,6 @@
 # just build in the normal docker instance
 
-FROM node:20.11.1-alpine3.19
+FROM node:20.12.2-alpine3.19 
 COPY /dist /dist
 RUN adduser -D user
 USER user
