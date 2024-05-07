@@ -29,6 +29,8 @@ class CombatItem(models.Model):
 
     val_good = models.IntegerField(default=0)
     val_bad  = models.IntegerField(default=0)
+    val2_good = models.IntegerField(blank=True, null=True, default=None)
+    val2_bad  = models.IntegerField(blank=True, null=True, default=None)
     pow_good = models.IntegerField(default=0)
     pow_bad  = models.IntegerField(default=0)
     uses     = models.IntegerField()

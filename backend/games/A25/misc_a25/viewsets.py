@@ -139,7 +139,7 @@ class A25ResearchViewSet(viewsets.ModelViewSet):
             'kind',
             'req',
         )
-    )
+    ).order_by('kind', 'level')
     serializer_class = A25ResearchSerializer
     filter_backends = [filters.SearchFilter,
                        DjangoFilterBackend, filters.OrderingFilter]

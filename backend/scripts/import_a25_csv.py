@@ -7,17 +7,16 @@ from scripts.util import import_generic, slug_me
 
 BASE_URL = 'https://resleriana-db.vercel.app/api/'
 
-names = ['ability', 'battle_tool', 'battle_tool_trait', 'character', 'character_tag', 'effect', 'equipment_tool', 'equipment_tool_trait', 'hyperlink', 'item', 'leader_skill_condition', 'memoria', 'memoria_buff_growth', 'quest', 'recipe', 'recipe_plan', 'reward_set', 'skill']
-names_gbl = ['ability', 'battle_tool', 'battle_tool_trait', 'character', 'effect', 'equipment_tool', 'equipment_tool_trait', 'item', 'memoria', 'quest', 'recipe', 'recipe_plan', 'skill']
+names = ['ability', 'battle_tool', 'battle_tool_trait', 'character', 'character_tag', 'effect', 'equipment_tool', 'equipment_tool_trait', 'hyperlink', 'item', 'leader_skill_condition', 'memoria', 'memoria_buff_growth', 'quest', 'recipe', 'recipe_plan', 'research', 'research_effect', 'research_effect_level', 'reward_set', 'skill']
+names_gbl = ['ability', 'battle_tool', 'battle_tool_trait', 'character', 'effect', 'equipment_tool', 'equipment_tool_trait', 'item', 'memoria', 'quest', 'recipe', 'recipe_plan', 'research', 'research_effect', 'skill']
 jsons = {}
 languages = ['en', 'zh_cn', 'zh_tw']
 
 # for setting slugs
 additions = {
-    'ミミ': 'mimi-1',
-    'ライザ': 'ryza-3'
+    'クラウディア': 'klaudia-2',
 }
-memoria_index = 88 # resleri acad 2
+memoria_index = 91 # onsen
 
 trait_cat = {
     1: Filterable.objects.get(text_en="Attack"),
@@ -187,6 +186,52 @@ def createUpdateGBL():
     obj = LatestUpdateGBL()
     obj.save()
     print('Update Created')
+
+def import_research():
+    for res in jsons['research']:
+        if res['id'] < 2000:
+            filt = Filterable.objects.get(slug='combat-research') if res['id'] < 1000 else Filterable.objects.get(slug='alchemy-research')
+
+            try:
+                obj = Research.objects.get(level=res['level'], kind=filt)
+                print('Found Research', res['level'], filt.slug)
+            except:
+                req = None
+                if len(res['requirements']) > 0:
+                    req = checkDesc(
+                        text_ja = res['requirements'][0]['name'],
+                        text_en = res['requirements_en'][0]['name'] if 'requirements_en' in res else '',
+                        text_sc = res['requirements_zh_cn'][0]['name'] if 'requirements_zh_cn' in res else '',
+                        text_tc = res['requirements_zh_tw'][0]['name'] if 'requirements_zh_tw' in res else '',
+                    )
+                name = checkName(
+                    text_ja=res['name'],
+                    text_en=res['name_en'] if 'name_en' in res else '',
+                    text_sc=res['name_zh_cn'] if 'name_zh_cn' in res else '',
+                    text_tc=res['name_zh_tw'] if 'name_zh_tw' in res else '',
+                )
+                eff = search(res['research_effect_ids'][0], jsons['research_effect'])[0]
+                desc = checkDesc(
+                    text_ja=eff['name'],
+                    text_en=eff['name_en'] if 'name_en' in eff else '',
+                    text_sc=eff['name_zh_cn'] if 'name_zh_cn' in eff else '',
+                    text_tc=eff['name_zh_tw'] if 'name_zh_tw' in eff else '',
+                )
+                vals = search(res['research_effect_ids'][0], jsons['research_effect_level'], field='research_effect_id')
+                same_type = Research.objects.filter(desc=desc)
+                val = search(len(same_type)+1, vals, field='level')[0]['value'] # heck this
+                
+                obj = Research(
+                    level=res['level'],
+                    kind=filt,
+                    req=req,
+                    name=name,
+                    desc=desc,
+                    cole=res['cost']['quantity'],
+                    val=val
+                )
+                obj.save()
+                print('Create Research', res['level'], filt.slug, name.text_ja, res['cost']['quantity'], val)
 
 def import_combat_traits():
     for trait in jsons['battle_tool_trait']:
@@ -651,7 +696,7 @@ def import_material(event=None):
                 obj2.traits.add(Trait.objects.get(name__text_ja=name))
 
 def import_combat_items(event=None):
-    prev_item = None
+    prev_items = []
     for item in jsons['battle_tool']:
         name = checkName(
             text_ja = item["name"],
@@ -680,10 +725,10 @@ def import_combat_items(event=None):
         obj.name = name
         obj.desc = desc
         obj.kind=Filterable.objects.get(slug="combat", kind="item_type")
-        if obj != prev_item:
+        if obj not in prev_items:
             obj.rarity = item['rarity']
         obj.save()
-
+        
         try:
             obj2 = CombatItem.objects.get(item=obj)
         except:
@@ -697,14 +742,16 @@ def import_combat_items(event=None):
         skill = search(item['skill_id'], jsons['skill'])[0]
         obj2.area = area[skill['skill_target_type']]
 
-        if prev_item == obj:
+        if obj in prev_items:
             obj2.pow_bad = skill['power']
             obj2.val_bad = skill['effects'][0]['value'] if len(skill['effects']) > 0 else 0
+            obj2.val2_bad = skill['effects'][1]['value'] if len(skill['effects']) > 1 else None
         else:
             obj2.pow_good = skill['power']
             obj2.val_good = skill['effects'][0]['value'] if len(skill['effects']) > 0 else 0
+            obj2.val2_good = skill['effects'][1]['value'] if len(skill['effects']) > 1 else None
         obj2.save()
-        prev_item = obj
+        prev_items.append(obj)
 
         if create:
             update = LatestUpdate.objects.first()
@@ -883,6 +930,7 @@ def get_quest_name(quest):
         text_en=quest['name_en'] if 'name_en' in quest else '',
         text_sc=quest['name_zh_cn'] if 'name_zh_cn' in quest else '',
         text_tc=quest['name_zh_tw'] if 'name_zh_tw' in quest else '',
+        volatile=True
     )
     return name
 
@@ -920,6 +968,7 @@ def import_score_battle(quest, difficulty, chapter, section):
 
     try:
         sb = ScoreBattle.objects.get(chapter=chapter, section=section)
+        get_quest_name(quest)
     except:
         sb = ScoreBattle(
             name=get_quest_name(quest),
@@ -998,6 +1047,7 @@ def import_dungeon(quest):
         text_en = quest['name_en'].split(' [Risk ')[0] if 'name_en' in quest else '',
         text_sc = quest['name_zh_cn'].split('[')[0] if 'name_zh_cn' in quest else '',
         text_tc = quest['name_zh_tw'].split('[')[0] if 'name_zh_tw' in quest else '',
+        volatile= True
     )
     effects = get_floor_effects(quest['field_ability_ids'])
     try:
@@ -1219,18 +1269,18 @@ def scan_update_images():
         print(character.slug, jsons['path_hash_to_name'][im])
 
 def global_additions():
-    #createUpdateGBL()
+    createUpdateGBL()
     update = LatestUpdateGBL.objects.first()
 
     rStory = RecipeTab.objects.get(order=1)
     rExtra = RecipeTab.objects.get(order=2)
 
-    dungeons = [] #['Shimmering Springs', 'Deep Grasslands']
+    dungeons = [] #['Trail of Aspirations', 'Abandoned Mineshaft']
     score_battle_chapter = None
     tower_floor_max = None
     elem_tower_floor_max = None
-    events = ['ライザからの挑戦状']
-    recipe_pages = [] #[[rStory, 15], [rExtra, 16]] # refer to db for numbers
+    events = ['浪漫の果てに LEGEND FES']
+    recipe_pages = [] #[[rStory, 20], [rExtra, 21]] # refer to recipepage db for numbers
     traits = []
 
     if tower_floor_max:
@@ -1332,8 +1382,8 @@ def create_event(ja, en='', sc='', tc=''):
 
 # From Resleri Academy, use abbreviations in recipe_plan
 
-gacha = None #create_event(ja='レスレリ学園 LEGEND FES 錬金祭編', en='Resleri Academy LEGEND FES Festival')
-event = None #create_event(ja='レスレリ学園第2弾', en="Resleri Academy 2")
+gacha = create_event(ja='癒しくつろぎ温泉 LEGEND FES', en='Hot Spring LEGEND FES')
+event = create_event(ja='温泉奪還作戦！', en="Hot Spring")
 
 #createUpdate()
 #retrieve_all_jsons()
@@ -1348,12 +1398,15 @@ event = None #create_event(ja='レスレリ学園第2弾', en="Resleri Academy 2
 #import_quest()
 #scan_update_images()
 
+#import_research()
+
+#global_additions()
+
 #import_generic(ImpEnemySkill)
 #import_generic(ImpEnemy)
 #import_generic(ImpWave)
 #import_generic(ImpBattle)
 
-global_additions()
 
 """
 Checklist
