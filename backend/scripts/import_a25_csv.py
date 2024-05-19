@@ -5,7 +5,7 @@ from games.A25.quest_a25.models import *
 import csv, codecs, sys, urllib.request, json
 from scripts.util import import_generic, slug_me
 
-BASE_URL = 'https://resleriana-db.vercel.app/api/'
+BASE_URL = 'https://raw.githubusercontent.com/theBowja/resleriana-db/main/data/'
 
 names = ['ability', 'battle_tool', 'battle_tool_trait', 'character', 'character_tag', 'effect', 'equipment_tool', 'equipment_tool_trait', 'hyperlink', 'item', 'leader_skill_condition', 'memoria', 'memoria_buff_growth', 'quest', 'recipe', 'recipe_plan', 'research', 'research_effect', 'research_effect_level', 'reward_set', 'skill']
 names_gbl = ['ability', 'battle_tool', 'battle_tool_trait', 'character', 'effect', 'equipment_tool', 'equipment_tool_trait', 'item', 'memoria', 'quest', 'recipe', 'recipe_plan', 'research', 'research_effect', 'skill']
@@ -14,9 +14,10 @@ languages = ['en', 'zh_cn', 'zh_tw']
 
 # for setting slugs
 additions = {
-    'クラウディア': 'klaudia-2',
+    'ランツェ': 'lanze-1',
+    'トトリ': 'totori-3'
 }
-memoria_index = 91 # onsen
+memoria_index = 93 # sea man
 
 trait_cat = {
     1: Filterable.objects.get(text_en="Attack"),
@@ -144,27 +145,14 @@ def ImpEvent(row, index):
 def ImpName(row, index):
     checkName(row['EN'], row['JP'], row['SC'], row['TC'], volatile=True)
 
-def global_query(query, section, kind='master'):
-    gbl = {}
-    for lang in languages:
-        with urllib.request.urlopen(f'{BASE_URL}/{kind}/search?language={lang}&file={section}{query}') as url:
-            try:
-                data = json.load(url)[0]['data']
-                for key in ['description', 'name', 'another_name', 'requirements', 'abbreviation']:
-                    if key in data:
-                        gbl[f'{key}_{lang}'] = data[key]
-            except:
-                return None
-    return gbl
-
 def retrieve_all_jsons():
     for name in names:
-        with urllib.request.urlopen(f'{BASE_URL}/master/jp/{name}') as url:
+        with urllib.request.urlopen(f'{BASE_URL}/master/jp/{name}.json') as url:
             data = json.load(url)
             jsons[name] = data
         if name in names_gbl:
             for lang in languages:
-                with urllib.request.urlopen(f'{BASE_URL}/master/{lang}/{name}') as url:
+                with urllib.request.urlopen(f'{BASE_URL}/master/{lang}/{name}.json') as url:
                     data = json.load(url)
                     for entry in jsons[name]:
                         found = search(entry['id'], data)
@@ -472,6 +460,9 @@ def import_passives(char_dict, char):
         obj.name = name
         obj.desc = desc
         obj.val = passive['effects'][0]['value']
+        obj.val2 = passive['effects'][1]['value'] if len(passive['effects']) > 1 else None
+        obj.val3 = passive['effects'][2]['value'] if len(passive['effects']) > 2 else None
+        obj.val4 = passive['effects'][3]['value'] if len(passive['effects']) > 3 else None
         obj.save()
 
 
@@ -1070,14 +1061,14 @@ def import_dungeon(quest):
         )
         obj.save()
 
-        for i in range(0, len(quest['sample_rewards'])):
-            r = GetReward(quest['sample_rewards'][i], i+1)
-            obj.rewards.add(r)
-            if floor == 1 or floor == 9:
-                dun.rewards.add(r)
-
         for e in effects:
             obj.effects.add(e)
+
+        # If redoing earlier floors, needs a floor 1 check as well
+        for i in range(0, len(quest['sample_rewards'])):
+            r = GetReward(quest['sample_rewards'][i], i+1)
+            if floor == 9:
+                dun.rewards.add(r)
 
 def import_quest():
     count = 0
@@ -1279,7 +1270,7 @@ def global_additions():
     score_battle_chapter = None
     tower_floor_max = None
     elem_tower_floor_max = None
-    events = ['浪漫の果てに LEGEND FES']
+    events = ['シャリーのアトリエ LEGEND FES', '二人のシャリーと母の願い']
     recipe_pages = [] #[[rStory, 20], [rExtra, 21]] # refer to recipepage db for numbers
     traits = []
 
@@ -1382,11 +1373,11 @@ def create_event(ja, en='', sc='', tc=''):
 
 # From Resleri Academy, use abbreviations in recipe_plan
 
-gacha = create_event(ja='癒しくつろぎ温泉 LEGEND FES', en='Hot Spring LEGEND FES')
-event = create_event(ja='温泉奪還作戦！', en="Hot Spring")
+gacha = create_event(ja='新章記念 海の男の門出 LEGEND FES', en='Sea Man LEGEND FES')
+event = None #create_event(ja='温泉奪還作戦！', en="Hot Spring")
 
 #createUpdate()
-#retrieve_all_jsons()
+retrieve_all_jsons()
 #import_combat_traits()
 #import_equipment_traits()
 #import_characters(event=gacha)
@@ -1395,7 +1386,7 @@ event = create_event(ja='温泉奪還作戦！', en="Hot Spring")
 #import_combat_items(event=event)
 #import_equipment(event=event)
 #import_recipes()
-#import_quest()
+import_quest()
 #scan_update_images()
 
 #import_research()

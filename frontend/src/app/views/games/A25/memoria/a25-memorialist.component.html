@@ -75,7 +75,7 @@
                 </tr>
               </tbody></table>
             </div>
-            <p style="max-width:512px;">{{memoria.skill_desc.replaceAll('{0}', memoria.lv1 + ' ~ ' + memoria.lv5)}}</p>
+            <p style="max-width:512px;">{{memoria.skill_desc.replaceAll('{0}', memoria.lv1 + ' ~ ' + memoria.lv5).replaceAll('{1}', memoria.lv1 + ' ~ ' + memoria.lv5)}}</p>
             @if (memoria.note) {
               <p [innerHTML]="memoria.note"></p>
             }

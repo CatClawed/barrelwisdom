@@ -155,7 +155,7 @@
                     <li>
                       {{passive.name}}
                       <ul>
-                        <li [innerHTML]="passive.desc.replaceAll('{0}', passive.val/100)"></li>
+                        <li [innerHTML]="replacePassive(passive)"></li>
                       </ul>
                     </li>
                   }

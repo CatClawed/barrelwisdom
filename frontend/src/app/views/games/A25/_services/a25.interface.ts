@@ -204,6 +204,9 @@ export interface Passive {
     name: string;
     desc: string;
     val: number;
+    val2: number;
+    val3: number;
+    val4: number;
 }
 
 export interface Memoria {
@@ -253,13 +256,13 @@ export interface Reward {
 export interface DungeonFloor {
     order: number;
     combat_level: number;
-    rewards: Reward[];
 }
 
 export interface Dungeon {
     name: string;
     floors: DungeonFloor[];
     effects: string[];
+    rewards: Reward[];
 }
 
 export interface ScoreDifficulties {

@@ -76,4 +76,21 @@ export class A25CharaComponent extends SingleComponent {
     }
     return desc;
   }
+
+  replacePassive(passive) {
+    let desc = passive.desc;
+    if (passive.val) {
+      desc = desc.replaceAll('{0}', passive.val/100)
+    }
+    if (passive.val2) {
+      desc = desc.replaceAll('{1}', passive.val2/100)
+    }
+    if (passive.val3) {
+      desc = desc.replaceAll('{2}', passive.val3/100)
+    }
+    if (passive.val4) {
+      desc = desc.replaceAll('{3}', passive.val4/100)
+    }
+    return desc;
+  }
 }

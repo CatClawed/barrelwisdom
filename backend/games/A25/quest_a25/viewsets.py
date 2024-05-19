@@ -150,7 +150,7 @@ class A25DungeonViewSet(viewsets.ModelViewSet):
         )
         .prefetch_related(
             'dungeonfloor_set__effects',
-            'dungeonfloor_set__rewards__item__name',
+            'rewards__item__name',
         )
     )
     serializer_class = A25DungeonSerializer

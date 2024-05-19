@@ -106,10 +106,9 @@ class A25ScoreBattleSerializer(A25DefaultSerializer):
 
 class A25DungeonFloorSerializer(A25DefaultSerializer):
     effects = serializers.SerializerMethodField()
-    rewards = A25RewardSerializer(many=True)
     class Meta:
         model = DungeonFloor
-        fields = ['order', 'combat_level', 'effects', 'rewards']
+        fields = ['order', 'combat_level', 'effects']
     def get_effects(self,obj):
         arr = []
         for eff in obj.effects.all():
@@ -119,9 +118,10 @@ class A25DungeonFloorSerializer(A25DefaultSerializer):
 class A25DungeonSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()
     floors = A25DungeonFloorSerializer(many=True, source='dungeonfloor_set')
+    rewards = A25RewardSerializer(many=True)
     class Meta:
         model = Dungeon
-        fields = ['name', 'floors']
+        fields = ['name', 'floors', 'rewards']
 
 class A25DungeonItemSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()
