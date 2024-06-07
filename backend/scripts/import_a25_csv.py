@@ -7,17 +7,17 @@ from scripts.util import import_generic, slug_me
 
 BASE_URL = 'https://raw.githubusercontent.com/theBowja/resleriana-db/main/data/'
 
-names = ['ability', 'battle_tool', 'battle_tool_trait', 'character', 'character_tag', 'effect', 'equipment_tool', 'equipment_tool_trait', 'hyperlink', 'item', 'leader_skill_condition', 'memoria', 'memoria_buff_growth', 'quest', 'recipe', 'recipe_plan', 'research', 'research_effect', 'research_effect_level', 'reward_set', 'skill']
-names_gbl = ['ability', 'battle_tool', 'battle_tool_trait', 'character', 'effect', 'equipment_tool', 'equipment_tool_trait', 'item', 'memoria', 'quest', 'recipe', 'recipe_plan', 'research', 'research_effect', 'skill']
+names = ['ability', 'battle_hint', 'battle_tool', 'battle_tool_trait', 'character', 'character_tag', 'effect', 'enemy', 'equipment_tool', 'equipment_tool_trait', 'hyperlink', 'item', 'leader_skill_condition', 'memoria', 'memoria_buff_growth', 'quest', 'recipe', 'recipe_plan', 'research', 'research_effect', 'research_effect_level', 'reward_set', 'skill']
+names_gbl = ['ability', 'battle_hint', 'battle_tool', 'battle_tool_trait', 'character', 'effect', 'enemy', 'equipment_tool', 'equipment_tool_trait', 'item', 'memoria', 'quest', 'recipe', 'recipe_plan', 'research', 'research_effect', 'skill']
 jsons = {}
 languages = ['en', 'zh_cn', 'zh_tw']
 
 # for setting slugs
 additions = {
-    'ランツェ': 'lanze-1',
-    'トトリ': 'totori-3'
+    'リンカ': 'linca-2',
+    'ユナ': 'juna-2'
 }
-memoria_index = 93 # sea man
+memoria_index = 96 # scarlet
 
 trait_cat = {
     1: Filterable.objects.get(text_en="Attack"),
@@ -707,17 +707,19 @@ def import_combat_items(event=None):
             print("Updating Combat Item", name.text_ja)
             create = False
         except:
-            obj = Item(slug=f'usable-{item["id"]}')
+            obj = Item(slug=f'usable-{item["id"]}', desc=desc)
             print("Creating Combat Item", name.text_ja)
             create = True
             if event:
                 obj.limit = event
         
         obj.name = name
-        obj.desc = desc
-        obj.kind=Filterable.objects.get(slug="combat", kind="item_type")
         if obj not in prev_items:
             obj.rarity = item['rarity']
+        if not create:
+            if obj.rarity == item['rarity']: # skip SR text when SSR exists
+                obj.desc = desc
+        obj.kind=Filterable.objects.get(slug="combat", kind="item_type")
         obj.save()
         
         try:
@@ -770,17 +772,19 @@ def import_equipment(event=None):
             print("Updating Equipment", name.text_ja)
             create = False
         except:
-            obj = Item(slug=f'equip-{item["id"]}')
+            obj = Item(slug=f'equip-{item["id"]}', desc=desc)
             print("Creating Equipment", name.text_ja)
             create = True
             if event:
                 obj.limit = event
 
         obj.name = name
-        obj.desc = desc
-        obj.kind = Filterable.objects.get(slug="equipment", kind="item_type")
-        if obj != prev_item:
+        if obj not in prev_item:
             obj.rarity = item['rarity']
+        if not create:
+            if obj.rarity == item['rarity']: # skip SR text when SSR exists
+                obj.desc = desc
+        obj.kind = Filterable.objects.get(slug="equipment", kind="item_type")
         obj.save()
 
         try:
@@ -1109,6 +1113,34 @@ def import_quest():
             count = count + 1
     print(count)
 
+def import_enemy():
+    for enemy in jsons['enemy']:
+        name = checkName(
+            text_ja = enemy['name'],
+            text_en = enemy['name_en'] if 'name_en' in enemy else '',
+            text_sc = enemy['name_zh_cn'] if 'name_zh_cn' in enemy else '',
+            text_tc = enemy['name_zh_tw'] if 'name_zh_tw' in enemy else '',
+            volatile= True
+        )
+        #try:
+        #    obj = Enemy.objects.get(e_id=enemy['id'])
+        #    print("Updating Enemy", enemy['name'])
+        #except:
+        #    obj = Enemy(
+        #        e_id=enemy['id']
+        #    )
+        #    obj.save()
+        #    print("New Enemy", enemy['name'])
+
+    for hint in jsons['battle_hint']:
+        desc = checkDesc(
+            text_ja=hint['description'].replace('\r', '').replace('\n', '<br>'),
+            text_en=hint['description_en'] if 'description_en' in hint else '',
+            text_sc=hint['description_zh_cn'] if 'description_zh_cn' in hint else '',
+            text_tc=hint['description_zh_tw'] if 'description_zh_tw' in hint else '',
+        )
+
+
 def ImpEnemySkill(row, index):
     desc = None
     if row['Desc'] and row['Desc'] != "テキストなし" or row['Desc'] != '追加効果なし':
@@ -1251,7 +1283,7 @@ def scan_update_images():
             im = search(item.name.text_ja, battle_dict, 'name')[0]['still_path_hash']
             print(item.slug, jsons['path_hash_to_name'][im])
     for memoria in update.memoria.all():
-        im = search(memoria.name.text_ja, jsons['memoria'], 'name')[0]['large_still_path_hash']
+        im = search(memoria.name.text_ja, jsons['memoria'], 'name')[0]['still_path_hash']
         print(memoria.slug, jsons['path_hash_to_name'][im])
     for character in update.characters.all():
         im = search(character.title.text_ja, jsons['character'], 'another_name')[0]['large_still_path_hash']
@@ -1266,13 +1298,13 @@ def global_additions():
     rStory = RecipeTab.objects.get(order=1)
     rExtra = RecipeTab.objects.get(order=2)
 
-    dungeons = [] #['Trail of Aspirations', 'Abandoned Mineshaft']
+    dungeons = [] # ['Silver Ridge', 'Deep Snow Bluff']
     score_battle_chapter = None
     tower_floor_max = None
     elem_tower_floor_max = None
-    events = ['シャリーのアトリエ LEGEND FES', '二人のシャリーと母の願い']
-    recipe_pages = [] #[[rStory, 20], [rExtra, 21]] # refer to recipepage db for numbers
-    traits = []
+    events = ['アーランドの錬金術士 LEGEND FES', 'アーランドの錬金術士 〜迷子の少女と雪の帰り道〜']
+    recipe_pages = [] #[[rStory, 23], [rExtra, 24]] # refer to recipepage db for numbers
+    traits = ['Critical Damage Up']
 
     if tower_floor_max:
         towers = Tower.objects.filter(kind=Filterable.objects.get(text_en="Elemental Tower"))
@@ -1312,7 +1344,9 @@ def global_additions():
         dun.gbl=True
         dun.save()
     for trait in traits:
-        pass
+        t = Trait.objects.get(name__text_en=trait)
+        t.gbl=True
+        t.save()
 
     for page in recipe_pages:
         p = RecipePage.objects.get(book=page[1], tab=page[0])
@@ -1373,11 +1407,11 @@ def create_event(ja, en='', sc='', tc=''):
 
 # From Resleri Academy, use abbreviations in recipe_plan
 
-gacha = create_event(ja='新章記念 海の男の門出 LEGEND FES', en='Sea Man LEGEND FES')
-event = None #create_event(ja='温泉奪還作戦！', en="Hot Spring")
+gacha = None #create_event(ja='新章記念 緋蒼の剣士 LEGEND FES', en='Scarlet Swordsman LEGEND FES')
+event = None #create_event(ja='ランターナ建国記念杯', en="Lanterna Cup")
 
 #createUpdate()
-retrieve_all_jsons()
+#retrieve_all_jsons()
 #import_combat_traits()
 #import_equipment_traits()
 #import_characters(event=gacha)
@@ -1386,12 +1420,13 @@ retrieve_all_jsons()
 #import_combat_items(event=event)
 #import_equipment(event=event)
 #import_recipes()
-import_quest()
+#import_quest()
+#import_enemy()
 #scan_update_images()
 
 #import_research()
 
-#global_additions()
+global_additions()
 
 #import_generic(ImpEnemySkill)
 #import_generic(ImpEnemy)

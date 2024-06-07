@@ -1,0 +1,20 @@
+<div (click)="toggle()" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
+    <ng-content select="[popoverOpener]"></ng-content>
+</div>
+
+<ng-template cdkConnectedOverlay
+    (overlayOutsideClick)="seize();"
+    (overlayKeydown)="$event.key === 'Escape' ? isOpen = false : true"
+    [withPush]="true"
+    [cdkConnectedOverlayPositions]="positionPairs"
+    [cdkConnectedOverlayOrigin]="trigger"
+    [cdkConnectedOverlayOpen]="isOpen">
+    <div class="popover">
+        @if (title) {
+            <h4>{{title}}</h4>
+        }
+        <div class="popoverContents">
+            <ng-content select="[popoverContent]"></ng-content>
+        </div>
+    </div>
+</ng-template>

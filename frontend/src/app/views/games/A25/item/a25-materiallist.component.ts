@@ -90,9 +90,11 @@ export class A25MaterialListComponent extends ModalUseComponent {
         ) : false)
     }
     if (value) {
-      const filterValue = value.toLowerCase();
+      const filterValue = (this.language == 'en') ? value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "") : value;
       list = list.filter(item => {
-        return item.name.toLowerCase().includes(filterValue);
+        return ((this.language == 'en') ?
+          (item.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(filterValue))
+          : item.name.includes(filterValue));
       });
     }
     return list;

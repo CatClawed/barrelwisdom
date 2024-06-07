@@ -52,11 +52,12 @@ export class A25ItemComponent extends SingleComponent {
   }
 
   afterAssignment(): void {
+    let name = (this.language === 'en') ? this.data.name.normalize('NFD').replace(/[\u0300-\u036f]/g, "") : this.data.name;
     if (this.data.equip || this.data.combat) {
       this.data.desc = this.replaceVal(this.data)
     }
     this.seoImage = `${this.imgURL}items/${this.data.slug}.webp`
-    this.genericSEO(this.data.name,
+    this.genericSEO(name,
       this.data.desc ? this.data.desc.replaceAll('<br>', ' -- ') : `Material from ${this.gameTitle}`);
   }
 

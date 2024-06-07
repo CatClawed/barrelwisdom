@@ -100,9 +100,11 @@ export class A25SynthesisListComponent extends ModalUseComponent {
       list = list.filter(item => item.ing.some(i => i.toLowerCase().includes(filter)))
     }
     if (value) {
-      const filterValue = value.toLowerCase();
+      const filterValue = (this.language == 'en') ? value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "") : value;
       list = list.filter(item => {
-        return item.name.toLowerCase().includes(filterValue) || item.desc.toLowerCase().includes(filterValue);
+        return ((this.language == 'en') ?
+          (item.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(filterValue) || item.desc.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(filterValue))
+          : item.name.includes(filterValue) || item.desc.includes(filterValue));
       });
     }
     return list;
