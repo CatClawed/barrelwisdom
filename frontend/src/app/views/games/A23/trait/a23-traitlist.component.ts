@@ -4,9 +4,10 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { Tooltip } from '@app/views/_components/tooltip/tooltip.component';
 import { Trait } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
-import { CommonImports, MaterialFormImports, ModalBandaidModule, TooltipBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
+import { CommonImports, MaterialFormImports, ModalBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
@@ -18,7 +19,7 @@ import { A23TraitComponent } from './a23-trait.component';
   providers: [DestroyService],
   standalone: true,
   imports: [...CommonImports, ...MaterialFormImports, ModalBandaidModule,
-    A23TraitComponent, TooltipBandaidModule]
+    A23TraitComponent, Tooltip]
 })
 
 export class A23TraitlistComponent extends ModalUseComponent {

@@ -39,26 +39,26 @@
               @for (it of [].constructor(getEmptySpace(page,num)); track it) {
                 <div style="aspect-ratio:1;margin-bottom:1.5rem;"></div>
               }
-              <popover [title]="recipe.name">
-                <a popoverOpener (click)="$event.preventDefault();" href="/{{gameURL}}/items/synthesis/{{recipe.slug}}/{{language}}">
-                  <img class="resleri-item-frame" loading="lazy"
-                    style="aspect-ratio:1;background-image:url({{imgURL}}svg/item-frame-{{recipe.rarity}}.svg)"
-                    alt="{{recipe.name}}"
-                    src="{{imgURL}}items/{{recipe.slug}}.webp">
-                </a>
-                <ng-container popoverContent>
-                  @if (recipe.unlocks) {
-                    <ul>
-                      @for (unlock of recipe.unlocks; track unlock) {
-                        <li>{{unlock}}</li>
-                      }
-                    </ul>
-                  }
-                  <a routerLink="/{{gameURL}}/items/synthesis/{{recipe.slug}}/{{language}}" target="_blank">
-                    More info<i class="new-tab fa-solid fa-arrow-up-right-from-square"></i>
-                  </a>
-                </ng-container>
+              <popover [title]="recipe.name"
+                [template]="popoverContent"
+                url="/{{gameURL}}/items/synthesis/{{recipe.slug}}/{{language}}">
+                <img class="resleri-item-frame" loading="lazy"
+                  style="aspect-ratio:1;background-image:url({{imgURL}}svg/item-frame-{{recipe.rarity}}.svg)"
+                  alt="{{recipe.name}}"
+                  src="{{imgURL}}items/{{recipe.slug}}.webp">
               </popover>
+              <ng-template #popoverContent>
+                @if (recipe.unlocks) {
+                  <ul>
+                    @for (unlock of recipe.unlocks; track unlock) {
+                      <li>{{unlock}}</li>
+                    }
+                  </ul>
+                }
+                <a routerLink="/{{gameURL}}/items/synthesis/{{recipe.slug}}/{{language}}" target="_blank">
+                  More info<i class="new-tab fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </ng-template>
               }
               <ng-template #notfound><div style="aspect-ratio:1;margin-bottom:1.5rem;"></div></ng-template>
             </div>

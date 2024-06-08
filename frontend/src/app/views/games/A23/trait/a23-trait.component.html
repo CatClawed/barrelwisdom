@@ -10,10 +10,10 @@
     <div class="{{colset}} card card-body">
       <div class="flex">
         <h4 class="card-title">{{trait.name}}</h4>
-        <div><a href="javascript:void(0)" (click)="$event.preventDefault();"
-        tooltip="Influences rank. A measure of rarity. This number determines where traits appear." container="true">Grade:</a>
-        {{trait.grade}}
-      </div>
+        <div>
+          <tooltip tip="Influences rank. A measure of rarity. This number determines where traits appear.">Grade: </tooltip>
+          {{trait.grade}}
+        </div>
     </div>
     @if ( trait.item_set) {
       <b>Item:</b>

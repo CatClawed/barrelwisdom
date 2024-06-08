@@ -3,8 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
+import { Popover } from '@app/views/_components/popover/popover.component';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
-import { CommonImports, PopoverBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
+import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
@@ -12,7 +13,7 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
   selector: 'a18-item',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, PopoverBandaidModule]
+  imports: [...CommonImports, Popover]
 })
 export class A18ItemComponent extends SingleComponent {
   colors = {

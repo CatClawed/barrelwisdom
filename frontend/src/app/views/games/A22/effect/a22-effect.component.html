@@ -59,7 +59,7 @@
         <ul>
           @for (e of effect.effects; track e) {
             <li>
-              <a href="javascript:void(0)" (click)="$event.preventDefault();" tooltip="{{e.desc}}" container="true">{{e.name}}</a>
+              <tooltip [tip]="e.desc">{{e.name}}</tooltip>
             </li>
           }
         </ul>

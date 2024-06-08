@@ -11,8 +11,7 @@
       <div class="flex">
         <h4 class="card-title">{{trait.name}}</h4>
         <div>
-          <a href="javascript:void(0)" (click)="$event.preventDefault();"
-            tooltip="Influences rank. A measure of rarity. This number determines where traits appear." container="true">Grade:</a>
+          <tooltip tip="Influences rank. A measure of rarity. This number determines where traits appear.">Grade: </tooltip>
           @if (trait.grade == -1) {
             N/A
           }

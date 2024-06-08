@@ -5,9 +5,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { Popover } from '@app/views/_components/popover/popover.component';
 import { Item } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
-import { CommonImports, MaterialFormImports, ModalBandaidModule, PopoverBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
+import { CommonImports, MaterialFormImports, ModalBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable, forkJoin } from 'rxjs';
@@ -21,7 +22,7 @@ import { A25ItemComponent } from './a25-item.component';
   providers: [DestroyService],
   standalone: true,
   imports: [...CommonImports, ...MaterialFormImports, ModalBandaidModule,
-    PopoverBandaidModule, A25ItemComponent, MatButtonModule]
+    A25ItemComponent, MatButtonModule, Popover]
 })
 
 export class A25MaterialListComponent extends ModalUseComponent {

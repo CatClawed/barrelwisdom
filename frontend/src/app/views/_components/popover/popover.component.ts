@@ -1,13 +1,15 @@
 import { ConnectionPositionPair, OverlayModule } from '@angular/cdk/overlay';
-import { Component, Input } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import { Component, Input, TemplateRef } from '@angular/core';
 
+// TODO: Fix fake link style to appear as real link. adding 'wtf' fixes wut.
 
 @Component({
   selector: 'popover',
   templateUrl: 'popover.component.html',
   styleUrl: 'popover.component.scss',
   standalone: true,
-  imports: [OverlayModule],
+  imports: [OverlayModule, NgTemplateOutlet],
 })
 export class Popover {
   isOpen = false;
@@ -15,6 +17,21 @@ export class Popover {
 
   @Input()
   title?: string;
+
+  @Input()
+  url?: string;
+
+  @Input()
+  template: TemplateRef<any>;
+
+  @Input()
+  context?: any = {};
+
+  @Input()
+  cls?: string = '';
+
+  @Input()
+  display?: string = 'inherit'
 
   // TODO: letting X be centered can cause the left offset to be negative
   // but dang I like the centered look
@@ -52,7 +69,7 @@ export class Popover {
   }
 
   // without the timer we get a double toggle that reopens the popover
-  seize() {
+  timeToggle() {
     this.isOpen = false;
     this.noRun = true;
     setTimeout(() => {

@@ -7,7 +7,7 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { FacilityList } from '@app/views/games/BRSL/_services/brsl.interface';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
-import { CommonImports, MaterialFormImports, ModalBandaidModule, PopoverBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
+import { CommonImports, MaterialFormImports, ModalBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
@@ -19,7 +19,7 @@ import { BRSLFacilityComponent } from './brsl-facility.component';
   providers: [DestroyService],
   standalone: true,
   imports: [...CommonImports, ...MaterialFormImports, ModalBandaidModule,
-    BRSLFacilityComponent, PopoverBandaidModule, MatButtonModule]
+    BRSLFacilityComponent, MatButtonModule]
 })
 
 export class BRSLFacilitylistComponent extends ModalUseComponent {

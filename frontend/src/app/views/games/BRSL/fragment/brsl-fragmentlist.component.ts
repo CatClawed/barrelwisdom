@@ -4,9 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 import { PipeModule } from '@app/_helpers/pipes/pipes.module';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { Popover } from '@app/views/_components/popover/popover.component';
 import { Event } from '@app/views/games/BRSL/_services/brsl.interface';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
-import { CommonImports, MaterialFormImports, PopoverBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
+import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { FilterableComponent } from '@app/views/games/_prototype/filterable.component';
 import { Observable, forkJoin } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -15,7 +16,7 @@ import { map, startWith } from 'rxjs/operators';
   templateUrl: 'brsl-fragmentlist.component.html',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, PipeModule, PopoverBandaidModule]
+  imports: [...CommonImports, ...MaterialFormImports, PipeModule, Popover]
 })
 
 export class BRSLFragmentComponent extends FilterableComponent {

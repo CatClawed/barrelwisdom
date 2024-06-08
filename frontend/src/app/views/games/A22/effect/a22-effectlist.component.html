@@ -94,7 +94,9 @@
           @if (ev) {
             <ul style="margin-right:1.7rem;">
               @for (e of eff.effects; track e) {
-                <li><a href="javascript:void(0)" tooltip="{{e.desc}}" container="true">{{e.name}}</a></li>
+                <li>
+                  <tooltip [tip]="e.desc">{{e.name}}</tooltip>
+                </li>
               }
             </ul>
           }

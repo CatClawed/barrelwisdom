@@ -3,9 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
+import { Popover } from '@app/views/_components/popover/popover.component';
 import { EffectData, EffectLine } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
-import { CommonImports, PopoverBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
+import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
@@ -13,7 +14,7 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
   selector: 'a23-item',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, PopoverBandaidModule]
+  imports: [...CommonImports, Popover]
 })
 export class A23ItemComponent extends SingleComponent {
   colors = {

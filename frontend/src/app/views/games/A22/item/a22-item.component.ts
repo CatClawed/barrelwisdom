@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { Popover } from '@app/views/_components/popover/popover.component';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
-import { CommonImports, PopoverBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
+import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
@@ -21,9 +22,10 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
       }
     }`
   ],
+  encapsulation: ViewEncapsulation.None,
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, PopoverBandaidModule]
+  imports: [...CommonImports, Popover]
 })
 export class A22ItemComponent extends SingleComponent {
   default: any[] = [];

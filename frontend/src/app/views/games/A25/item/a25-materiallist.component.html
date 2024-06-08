@@ -74,14 +74,15 @@
             <ul>
               @for (trait of it.material[0].traits; track trait) {
                 <li>
-                  <ng-template #traitPopover>
-                    <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
+                  <popover [title]="trait.name"
+                    [template]="popoverContent"
+                    url="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">
+                    {{trait.name}}
+                  </popover>
+                  <ng-template #popoverContent>
+                    <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5).replaceAll('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
                     <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
                   </ng-template>
-                  <a [popover]="traitPopover"
-                    [popoverTitle]="trait.name"
-                    (click)="$event.preventDefault();"
-                  href="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">{{trait.name}}</a>
                 </li>
               }
             </ul>

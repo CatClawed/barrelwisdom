@@ -265,7 +265,11 @@
                           }
                         </ng-template>
                         @if (e.effect) {
-                          <a    [popover]="effPopover" [popoverTitle]="e.effect.name" (click)="$event.preventDefault();" href="/{{gameURL}}/effects/{{e.effect.slug}}/{{language}}">{{e.effect.name}}</a>
+                          <popover [template]="effPopover"
+                            [title]="e.effect.name"
+                            url="/{{gameURL}}/effects/{{e.effect.slug}}/{{language}}">
+                            {{e.effect.name}}
+                          </popover>
                         }
                         @if (e.component) {
                           {{e.component.name}} {{e.component.value}} <i class="fa-{{colors[e.component.color][0]}}" style="color:{{colors[e.component.color][1]}};"></i>

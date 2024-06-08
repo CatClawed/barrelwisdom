@@ -134,7 +134,10 @@
                       @if (node.tool == 'SHOT') {
                         <i    class="atelier atelier-lg atelier-sophie2-tool-slingshot"></i>
                       }
-                      <a (click)="$event.preventDefault()" [popover]="typePopover" popoverTitle="Gather Type" class="fas fa-plus-square"></a>
+                      <popover title="Gather Type"
+                        [template]="typePopover"
+                        cls="fas fa-plus-square">
+                      </popover>
                     </td>
                   }
                   @if (node.kind.startsWith('major')) {
@@ -163,7 +166,10 @@
                       @if (node.tool == 'SHOT') {
                         <i    class="atelier atelier-lg atelier-sophie2-tool-slingshot"></i>
                       }
-                      <a (click)="$event.preventDefault()" [popover]="typePopover" popoverTitle="Gather Type" class="fas fa-plus-square"></a>
+                      <popover title="Gather Type"
+                        [template]="typePopover"
+                        cls="fas fa-plus-square">
+                      </popover>
                     </td>
                   }
                   @for (item of node.items; track item) {

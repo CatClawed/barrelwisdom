@@ -4,9 +4,10 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { Tooltip } from '@app/views/_components/tooltip/tooltip.component';
 import { Trait } from '@app/views/games/A18/_services/a18.interface';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
-import { CommonImports, MaterialFormImports, ModalBandaidModule, TooltipBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
+import { CommonImports, MaterialFormImports, ModalBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
@@ -18,7 +19,7 @@ import { A18TraitComponent } from './a18-trait.component';
   providers: [DestroyService],
   standalone: true,
   imports: [...CommonImports, ...MaterialFormImports, ModalBandaidModule,
-    A18TraitComponent, TooltipBandaidModule]
+    A18TraitComponent, Tooltip]
 })
 
 export class A18TraitlistComponent extends ModalUseComponent {

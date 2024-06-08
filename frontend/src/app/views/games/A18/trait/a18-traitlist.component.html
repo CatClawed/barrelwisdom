@@ -35,14 +35,14 @@
           <div style="height:100%;">
             <div class="flex">
               <h4 class="card-title"><a (click)="openModal(traitModal, trt.slug, $event);" href="/{{gameURL}}/traits/{{trt.slug}}/{{language}}">{{trt.name}}</a></h4>
-              <div><a href="javascript:void(0)"
-              tooltip="Influences rank. A measure of rarity. This number determines where traits appear." container="true">Grade:</a>
-              @if (trt.grade==-1) {
-                <span> N/A</span>
-                }@if (trt.grade>-1) {
-                <span>{{trt.grade}}</span>
-              }
-            </div>
+              <div>
+                <tooltip tip="Influences rank. A measure of rarity. This number determines where traits appear.">Grade: </tooltip>
+                @if (trt.grade==-1) {
+                  <span> N/A</span>
+                  }@if (trt.grade>-1) {
+                  <span>{{trt.grade}}</span>
+                }
+              </div>
           </div>
           @if ( trt.item_set) {
             <b>Item:</b>

@@ -42,31 +42,28 @@
             </div>
             <ul>
               <li>
-                <a href="/{{gameURL}}/traits/{{chara.trait1.slug}}/{{language}}"
-                  (click)="$event.preventDefault();"
-                  [popover]="traitPopover"
-                  [popoverContext]="{ trait : chara.trait1 }"
-                  [popoverTitle]="chara.trait1.name">
+                <popover [title]="chara.trait1.name"
+                  [template]="traitPopover"
+                  [context]="{ trait : chara.trait1 }"
+                  url="/{{gameURL}}/traits/{{chara.trait1.slug}}/{{language}}">
                   {{chara.trait1.name}}
-                </a>
+                </popover>
               </li>
               <li>
-                <a href="/{{gameURL}}/traits/{{chara.trait2.slug}}/{{language}}"
-                  (click)="$event.preventDefault();"
-                  [popover]="traitPopover"
-                  [popoverContext]="{ trait : chara.trait2 }"
-                  [popoverTitle]="chara.trait2.name">
+                <popover [title]="chara.trait2.name"
+                  [template]="traitPopover"
+                  [context]="{ trait : chara.trait2 }"
+                  url="/{{gameURL}}/traits/{{chara.trait2.slug}}/{{language}}">
                   {{chara.trait2.name}}
-                </a>
+                </popover>
               </li>
               <li>
-                <a href="/{{gameURL}}/traits/{{chara.trait3.slug}}/{{language}}"
-                  (click)="$event.preventDefault();"
-                  [popover]="traitPopover"
-                  [popoverContext]="{ trait : chara.trait3 }"
-                  [popoverTitle]="chara.trait3.name">
+                <popover [title]="chara.trait3.name"
+                  [template]="traitPopover"
+                  [context]="{ trait : chara.trait3 }"
+                  url="/{{gameURL}}/traits/{{chara.trait3.slug}}/{{language}}">
                   {{chara.trait3.name}}
-                </a>
+                </popover>
               </li>
             </ul>
           </td>

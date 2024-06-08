@@ -5,9 +5,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { Tooltip } from '@app/views/_components/tooltip/tooltip.component';
 import { Effect } from '@app/views/games/A22/_services/a22.interface';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
-import { CommonImports, MaterialFormImports, ModalBandaidModule, TooltipBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
+import { CommonImports, MaterialFormImports, ModalBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
@@ -19,7 +20,7 @@ import { A22EffectComponent } from './a22-effect.component';
   providers: [DestroyService],
   standalone: true,
   imports: [...CommonImports, ...MaterialFormImports, ModalBandaidModule,
-    A22EffectComponent, TooltipBandaidModule, MatButtonModule]
+    A22EffectComponent, Tooltip, MatButtonModule]
 })
 
 export class A22EffectlistComponent extends ModalUseComponent {

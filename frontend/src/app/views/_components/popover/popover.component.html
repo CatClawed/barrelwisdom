@@ -1,20 +1,25 @@
-<div (click)="toggle()" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
-    <ng-content select="[popoverOpener]"></ng-content>
-</div>
+<a (click)="$event.preventDefault(); toggle();"
+    [attr.href]="url ? url : null"
+    cdkOverlayOrigin
+    #trigger="cdkOverlayOrigin"
+    class="{{cls}} wtf"
+    style="display:{{display}};">
+    <ng-content />
+</a>
 
 <ng-template cdkConnectedOverlay
-    (overlayOutsideClick)="seize();"
+    (overlayOutsideClick)="timeToggle();"
     (overlayKeydown)="$event.key === 'Escape' ? isOpen = false : true"
     [withPush]="true"
     [cdkConnectedOverlayPositions]="positionPairs"
     [cdkConnectedOverlayOrigin]="trigger"
     [cdkConnectedOverlayOpen]="isOpen">
-    <div class="popover">
+    <div class="popover2">
         @if (title) {
             <h4>{{title}}</h4>
         }
         <div class="popoverContents">
-            <ng-content select="[popoverContent]"></ng-content>
+            <ng-container *ngTemplateOutlet="template; context: context"></ng-container>
         </div>
     </div>
 </ng-template>

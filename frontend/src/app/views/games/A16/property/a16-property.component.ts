@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { Tooltip } from '@app/views/_components/tooltip/tooltip.component';
 import { A16Service } from '@app/views/games/A16/_services/a16.service';
-import { CommonImports, TooltipBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
+import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
@@ -11,7 +12,7 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
   selector: 'a16-property',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, TooltipBandaidModule]
+  imports: [...CommonImports, Tooltip]
 })
 export class A16PropertyComponent extends SingleComponent {
   constructor(

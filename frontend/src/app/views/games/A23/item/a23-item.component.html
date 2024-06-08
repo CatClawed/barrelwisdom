@@ -213,10 +213,17 @@
                           }
                         </ng-template> 
                         @if (e.effect) {
-                          <a [popover]="effPopover" [popoverTitle]="e.effect.name" (click)="$event.preventDefault();" href="/{{gameURL}}/effects/{{e.effect.slug}}/{{language}}">{{e.effect.name}}</a>
+                          <popover [title]="e.effect.name"
+                            [template]="effPopover"
+                            url="/{{gameURL}}/effects/{{e.effect.slug}}/{{language}}">
+                            {{e.effect.name}}
+                          </popover>
                         }
                         @if (e.component) {
-                          <a [popover]="effPopover" [popoverTitle]="e.component.name">{{e.component.name}}</a>
+                          <popover [title]="e.component.name"
+                            [template]="effPopover">
+                            {{e.component.name}}
+                          </popover>
                         }
                         @if (checkLevel(eff.maxlv, eff.restrict, eff, e) == 0 && e.num) { ({{e.num}}) }
                         @if (checkLevel(eff.maxlv, eff.restrict, eff, e) == 1) { <span style="color:darkgrey;"> ({{e.num}})</span> }
