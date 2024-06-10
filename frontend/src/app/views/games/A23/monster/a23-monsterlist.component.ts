@@ -1,3 +1,4 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
@@ -7,9 +8,8 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Monster } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
-import { CommonImports, MaterialFormImports, ModalBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
-import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
-import { BsModalService } from 'ngx-bootstrap/modal';
+import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
+import { DialogUseComponent } from '@app/views/games/_prototype/dialog-use.component';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { A23MonsterComponent } from './a23-monster.component';
@@ -18,15 +18,15 @@ import { A23MonsterComponent } from './a23-monster.component';
   templateUrl: 'a23-monsterlist.component.html',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, ModalBandaidModule,
+  imports: [...CommonImports, ...MaterialFormImports,
     A23MonsterComponent, MatButtonModule]
 })
 
-export class A23MonsterlistComponent extends ModalUseComponent {
+export class A23MonsterlistComponent extends DialogUseComponent {
   filteredMonsters: Observable<Monster[]>;
 
   constructor(
-    protected modalService: BsModalService,
+    protected cdkDialog: Dialog,
     protected readonly destroy$: DestroyService,
     protected router: Router,
     protected route: ActivatedRoute,
@@ -34,7 +34,8 @@ export class A23MonsterlistComponent extends ModalUseComponent {
     protected seoService: SeoService,
     private formBuilder: UntypedFormBuilder,
     private a23service: A23Service,) {
-    super(modalService, destroy$, router, route, location, seoService);
+    super(destroy$, router, route, location, seoService, cdkDialog);
+    this.component = A23MonsterComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       type: ''

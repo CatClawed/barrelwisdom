@@ -1,3 +1,4 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
@@ -7,9 +8,8 @@ import { SeoService } from '@app/services/seo.service';
 import { Tooltip } from '@app/views/_components/tooltip/tooltip.component';
 import { Trait } from '@app/views/games/A18/_services/a18.interface';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
-import { CommonImports, MaterialFormImports, ModalBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
-import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
-import { BsModalService } from 'ngx-bootstrap/modal';
+import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
+import { DialogUseComponent } from '@app/views/games/_prototype/dialog-use.component';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { A18TraitComponent } from './a18-trait.component';
@@ -18,15 +18,15 @@ import { A18TraitComponent } from './a18-trait.component';
   templateUrl: 'a18-traitlist.component.html',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, ModalBandaidModule,
+  imports: [...CommonImports, ...MaterialFormImports,
     A18TraitComponent, Tooltip]
 })
 
-export class A18TraitlistComponent extends ModalUseComponent {
+export class A18TraitlistComponent extends DialogUseComponent {
   filteredTraits: Observable<Trait[]>;
 
   constructor(
-    protected modalService: BsModalService,
+    protected cdkDialog: Dialog,
     protected readonly destroy$: DestroyService,
     protected router: Router,
     protected route: ActivatedRoute,
@@ -34,7 +34,8 @@ export class A18TraitlistComponent extends ModalUseComponent {
     protected seoService: SeoService,
     private formBuilder: UntypedFormBuilder,
     private a18service: A18Service,) {
-    super(modalService, destroy$, router, route, location, seoService);
+    super(destroy$, router, route, location, seoService, cdkDialog);
+    this.component = A18TraitComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       transfers: 0

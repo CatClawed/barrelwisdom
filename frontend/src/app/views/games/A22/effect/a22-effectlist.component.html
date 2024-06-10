@@ -67,7 +67,7 @@
       @for (eff of filteredEffects | async; track identify($index, eff)) {
         <div class="card card-body">
           <h4 class="card-title card-icon-space">
-            <a (click)="openModal(effectModal, eff.slug, $event);" href="/{{gameURL}}/effects/{{eff.slug}}/{{language}}">{{eff.name}}</a>
+            <a (click)="openDialog(eff.slug, $event);" href="/{{gameURL}}/effects/{{eff.slug}}/{{language}}">{{eff.name}}</a>
           </h4>
           <div class="card-icon-position">
             @if (normal && eff.effsub != 'Material') {
@@ -85,7 +85,7 @@
               <i class="atelier atelier-np atelier-ryza2-forge"></i>
             }
           </div>
-          <button (click)="openModal(effectModal, eff.slug)" class="card-read-more-position" mat-mini-fab color="primary">
+          <button (click)="openDialog(eff.slug)" class="card-read-more-position" mat-mini-fab color="primary">
             <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
           </button>
           @if (eff.desc) {
@@ -102,14 +102,6 @@
           }
         </div>
       }
-      <ng-template #effectModal>
-        <div class="modal-body">
-          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-            <i class="fas fa-times-circle modal-close"></i>
-          </button>
-          <a22-effect inputSlug="{{selected}}" [showNav]="false"></a22-effect>
-        </div>
-      </ng-template>
     </div>
   </div>
 }

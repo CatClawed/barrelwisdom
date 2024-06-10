@@ -19,9 +19,9 @@
     @for (bk of filteredBooks | async; track identify2($index, bk)) {
       <div class="card card-body">
         <h4 class="card-title">
-          <a (click)="openModal(bookModal, bk.slugname, $event);" href="/{{gameURL}}/recipe-books/{{bk.slugname}}/{{language}}">{{bk.name}}</a>
+          <a (click)="openDialog(bk.slugname, $event);" href="/{{gameURL}}/recipe-books/{{bk.slugname}}/{{language}}">{{bk.name}}</a>
         </h4>
-        <a class="card-item-display" (click)="openModal(bookModal, bk.slugname, $event);" href="/{{gameURL}}/recipe-books/{{bk.slugname}}/{{language}}">
+        <a class="card-item-display" (click)="openDialog(bk.slugname, $event);" href="/{{gameURL}}/recipe-books/{{bk.slugname}}/{{language}}">
           <img loading="lazy" src="{{imgURL}}items/{{bk.slugname}}.webp" alt="{{bk.name}}">
         </a>
         <p><b>Acquisition: </b>{{bk.acquisition}}</p>
@@ -33,13 +33,5 @@
         </ul>
       </div>
     }
-    <ng-template #bookModal>
-      <div class="modal-body">
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-          <i class="fas fa-times-circle"></i>
-        </button>
-        <a15-book inputSlug="{{selected}}" [showNav]="false"></a15-book>
-      </div>
-    </ng-template>
   </div>
 }

@@ -1,3 +1,4 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
@@ -8,9 +9,8 @@ import { SeoService } from '@app/services/seo.service';
 import { Tooltip } from '@app/views/_components/tooltip/tooltip.component';
 import { Effect } from '@app/views/games/A22/_services/a22.interface';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
-import { CommonImports, MaterialFormImports, ModalBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
-import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
-import { BsModalService } from 'ngx-bootstrap/modal';
+import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
+import { DialogUseComponent } from '@app/views/games/_prototype/dialog-use.component';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
 import { A22EffectComponent } from './a22-effect.component';
@@ -19,11 +19,11 @@ import { A22EffectComponent } from './a22-effect.component';
   templateUrl: 'a22-effectlist.component.html',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, ModalBandaidModule,
+  imports: [...CommonImports, ...MaterialFormImports,
     A22EffectComponent, Tooltip, MatButtonModule]
 })
 
-export class A22EffectlistComponent extends ModalUseComponent {
+export class A22EffectlistComponent extends DialogUseComponent {
   filteredEffects: Observable<Effect[]>;
   normal = false;
   ev = false;
@@ -31,7 +31,7 @@ export class A22EffectlistComponent extends ModalUseComponent {
   kind: string;
 
   constructor(
-    protected modalService: BsModalService,
+    protected cdkDialog: Dialog,
     protected readonly destroy$: DestroyService,
     protected router: Router,
     protected route: ActivatedRoute,
@@ -40,7 +40,8 @@ export class A22EffectlistComponent extends ModalUseComponent {
     private formBuilder: UntypedFormBuilder,
     private a22service: A22Service,
   ) {
-    super(modalService, destroy$, router, route, location, seoService);
+    super(destroy$, router, route, location, seoService, cdkDialog);
+    this.component = A22EffectComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       type: '1'

@@ -1,3 +1,4 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { Location } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
@@ -8,9 +9,8 @@ import { SeoService } from '@app/services/seo.service';
 import { Popover } from '@app/views/_components/popover/popover.component';
 import { Item } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
-import { CommonImports, MaterialFormImports, ModalBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
-import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
-import { BsModalService } from 'ngx-bootstrap/modal';
+import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
+import { DialogUseComponent } from '@app/views/games/_prototype/dialog-use.component';
 import { Observable, forkJoin } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { A25ItemComponent } from './a25-item.component';
@@ -21,11 +21,11 @@ import { A25ItemComponent } from './a25-item.component';
   encapsulation: ViewEncapsulation.None,
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, ModalBandaidModule,
+  imports: [...CommonImports, ...MaterialFormImports,
     A25ItemComponent, MatButtonModule, Popover]
 })
 
-export class A25MaterialListComponent extends ModalUseComponent {
+export class A25MaterialListComponent extends DialogUseComponent {
   filteredItems: Observable<Item[]>;
   combat = {
     "en":"Combat",
@@ -35,7 +35,7 @@ export class A25MaterialListComponent extends ModalUseComponent {
   }
 
   constructor(
-    protected modalService: BsModalService,
+    protected cdkDialog: Dialog,
     protected readonly destroy$: DestroyService,
     protected router: Router,
     protected route: ActivatedRoute,
@@ -44,7 +44,8 @@ export class A25MaterialListComponent extends ModalUseComponent {
     private formBuilder: UntypedFormBuilder,
     protected a25service: A25Service,
   ) {
-    super(modalService, destroy$, router, route, location, seoService);
+    super(destroy$, router, route, location, seoService, cdkDialog);
+    this.component = A25ItemComponent
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       filtertrait: '',
@@ -69,6 +70,10 @@ export class A25MaterialListComponent extends ModalUseComponent {
       startWith(null as Observable<Item[]>),
       map((search: any) => search ? this.filterT(search.filtertext, search.color, search.rarity, search.filtertrait, search.traittype) : this.data.items.slice())
     );
+  }
+
+  extraSettings(): void {
+    this.dialogref.componentInstance.itemkind = 'materials'
   }
 
   private filterT(value: string, color: string, rarity: number, filter: string, traittype: string): Item[] {

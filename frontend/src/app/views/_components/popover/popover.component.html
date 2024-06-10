@@ -10,8 +10,6 @@
 <ng-template cdkConnectedOverlay
     (overlayOutsideClick)="timeToggle();"
     (overlayKeydown)="$event.key === 'Escape' ? isOpen = false : true"
-    [withPush]="true"
-    [cdkConnectedOverlayPositions]="positionPairs"
     [cdkConnectedOverlayOrigin]="trigger"
     [cdkConnectedOverlayOpen]="isOpen">
     <div class="popover2">

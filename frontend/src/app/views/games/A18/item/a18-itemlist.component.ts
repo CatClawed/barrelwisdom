@@ -1,3 +1,4 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
@@ -7,9 +8,8 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Item } from '@app/views/games/A18/_services/a18.interface';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
-import { CommonImports, MaterialFormImports, ModalBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
-import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
-import { BsModalService } from 'ngx-bootstrap/modal';
+import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
+import { DialogUseComponent } from '@app/views/games/_prototype/dialog-use.component';
 import { Observable, forkJoin } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { A18ItemComponent } from './a18-item.component';
@@ -19,15 +19,15 @@ import { A18ItemComponent } from './a18-item.component';
   templateUrl: 'a18-itemlist.component.html',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, ModalBandaidModule,
+  imports: [...CommonImports, ...MaterialFormImports,
     A18ItemComponent, MatButtonModule]
 })
 
-export class A18ItemlistComponent extends ModalUseComponent {
+export class A18ItemlistComponent extends DialogUseComponent {
   filteredItems: Observable<Item[]>;
 
   constructor(
-    protected modalService: BsModalService,
+    protected cdkDialog: Dialog,
     protected readonly destroy$: DestroyService,
     protected router: Router,
     protected route: ActivatedRoute,
@@ -35,7 +35,8 @@ export class A18ItemlistComponent extends ModalUseComponent {
     protected seoService: SeoService,
     private formBuilder: UntypedFormBuilder,
     private a18service: A18Service) {
-    super(modalService, destroy$, router, route, location, seoService);
+    super(destroy$, router, route, location, seoService, cdkDialog);
+    this.component = A18ItemComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       filtering: '',

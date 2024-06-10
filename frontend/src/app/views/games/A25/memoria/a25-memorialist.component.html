@@ -38,7 +38,7 @@
         <div style="margin-left:auto;margin-right:auto;">
           <div style="aspect-ratio:512/410;display:flex;max-height:410px;margin:auto;">
             <a style="height:100%;aspect-ratio:256/410;"
-              (click)="openModal(memoriaModal, memoria.slug, $event);"
+              (click)="openDialog(memoria.slug, $event);"
               href="/{{gameURL}}/memoria/{{memoria.slug}}/{{language}}">
               <div style="position:relative;">
                 <img loading="lazy"
@@ -81,13 +81,5 @@
             }
           </div>
         }
-        <ng-template #memoriaModal>
-          <div class="modal-body">
-            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-              <i class="fas fa-times-circle"></i>
-            </button>
-            <a25-memoria inputSlug="{{selected}}" [showNav]="false"></a25-memoria>
-          </div>
-        </ng-template>
       </div>
   }

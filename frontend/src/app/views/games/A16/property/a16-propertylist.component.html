@@ -31,7 +31,7 @@
       <div class="card card-body">
         <div style="height:100%;">
           <div class="flex">
-            <h4 class="card-title"><a (click)="openModal(propertyModal, prop.slugname, $event);" href="/{{gameURL}}/properties/{{prop.slugname}}/{{language}}">{{prop.name}}</a></h4>
+            <h4 class="card-title"><a (click)="openDialog(prop.slugname, $event);" href="/{{gameURL}}/properties/{{prop.slugname}}/{{language}}">{{prop.name}}</a></h4>
             <b>PP {{prop.points}}</b>
           </div>
           @if (prop.combo1) {
@@ -63,7 +63,7 @@
                 <li><a routerLink="/{{gameURL}}/items/{{prop.item_set[2].slugname}}/{{language}}">{{prop.item_set[2].name}}</a></li>
               }
               @if (prop.item_set.length >= 4) {
-                <li><a (click)="openModal(propertyModal, prop.slugname, $event);" href="/{{gameURL}}/properties/{{prop.slugname}}/{{language}}">See more...</a></li>
+                <li><a (click)="openDialog(prop.slugname, $event);" href="/{{gameURL}}/properties/{{prop.slugname}}/{{language}}">See more...</a></li>
               }
             </ul>
           }
@@ -81,14 +81,6 @@
         <i class="trait-color{{prop.armor}}     atelier atelier-np atelier-escha-armor"></i>
         <i class="trait-color{{prop.accessory}} atelier atelier-np atelier-escha-accessory"></i>
       </div>
-      <ng-template #propertyModal>
-        <div class="modal-body">
-          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-            <i class="fas fa-times-circle"></i>
-          </button>
-          <a16-property inputSlug="{{selected}}" [showNav]="false"></a16-property>
-        </div>
-      </ng-template>
     </div>
   }
 </div>

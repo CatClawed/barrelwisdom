@@ -44,12 +44,12 @@
     @for (item of filteredItems | async; track identify($index, item)) {
       <div class="card card-body">
         <h4 class="card-title card-icon-space">
-          <a (click)="openModal(itemModal, item.slug, $event);" href="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
+          <a (click)="openDialog(item.slug, $event);" href="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
         </h4>
         @if (item.isDLC) {
           <span class="card-icon-position badge bg-secondary">DLC</span>
         }
-        <a class="card-item-display" (click)="openModal(itemModal, item.slug, $event);" href="/{{gameURL}}/items/{{item.slug}}/{{language}}">
+        <a class="card-item-display" (click)="openDialog(item.slug, $event);" href="/{{gameURL}}/items/{{item.slug}}/{{language}}">
           <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
         </a>
         <ul style="list-style-type:none;padding-left:0;">
@@ -57,18 +57,10 @@
             <li>{{cat.name}}</li>
           }
         </ul>
-        <button (click)="openModal(itemModal, item.slug)" class="card-read-more-position" mat-mini-fab color="primary">
+        <button (click)="openDialog(item.slug)" class="card-read-more-position" mat-mini-fab color="primary">
           <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
         </button>
       </div>
     }
-    <ng-template #itemModal>
-      <div class="modal-body">
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-          <i class="fas fa-times-circle"></i>
-        </button>
-        <brsl-item inputSlug="{{selected}}" [showNav]="false"></brsl-item>
-      </div>
-    </ng-template>
   </div>
 }

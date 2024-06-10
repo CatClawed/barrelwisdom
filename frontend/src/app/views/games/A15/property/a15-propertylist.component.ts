@@ -1,3 +1,4 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
@@ -7,9 +8,8 @@ import { SeoService } from '@app/services/seo.service';
 import { Tooltip } from '@app/views/_components/tooltip/tooltip.component';
 import { Property } from '@app/views/games/A15/_services/a15.interface';
 import { A15Service } from '@app/views/games/A15/_services/a15.service';
-import { CommonImports, MaterialFormImports, ModalBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
-import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
-import { BsModalService } from 'ngx-bootstrap/modal';
+import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
+import { DialogUseComponent } from '@app/views/games/_prototype/dialog-use.component';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { A15PropertyComponent } from './a15-property.component';
@@ -18,14 +18,13 @@ import { A15PropertyComponent } from './a15-property.component';
   templateUrl: 'a15-propertylist.component.html',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, ModalBandaidModule,
-    A15PropertyComponent, Tooltip]
+  imports: [...CommonImports, ...MaterialFormImports, A15PropertyComponent, Tooltip]
 })
-export class A15PropertylistComponent extends ModalUseComponent {
+export class A15PropertylistComponent extends DialogUseComponent {
   filteredProperties: Observable<Property[]>;
 
   constructor(
-    protected modalService: BsModalService,
+    protected cdkDialog: Dialog,
     protected readonly destroy$: DestroyService,
     protected router: Router,
     protected route: ActivatedRoute,
@@ -33,7 +32,8 @@ export class A15PropertylistComponent extends ModalUseComponent {
     protected seoService: SeoService,
     private formBuilder: UntypedFormBuilder,
     private a15service: A15Service,) {
-    super(modalService, destroy$, router, route, location, seoService);
+    super(destroy$, router, route, location, seoService, cdkDialog);
+    this.component = A15PropertyComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       transfers: ''

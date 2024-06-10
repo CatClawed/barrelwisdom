@@ -93,7 +93,7 @@
     @for (chara of filteredCharas | async; track identify($index, chara)) {
       <div style="text-align:center;">
         <div style="aspect-ratio:1;position:relative;">
-          <a  (click)="openModal(charaModal, chara.slug, $event);"
+          <a  (click)="openDialog(chara.slug, $event);"
             href="/{{gameURL}}/characters/{{chara.slug}}/{{language}}">
             <img loading="lazy" width="100%"
               src="{{imgURL}}characters/face/{{chara.slug}}.webp"
@@ -119,13 +119,5 @@
           }
       </div>
     }
-    <ng-template #charaModal>
-      <div class="modal-body">
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-          <i class="fas fa-times-circle"></i>
-        </button>
-        <a25-chara inputSlug="{{selected}}" [showNav]="false"></a25-chara>
-      </div>
-    </ng-template>
   </div>
 }

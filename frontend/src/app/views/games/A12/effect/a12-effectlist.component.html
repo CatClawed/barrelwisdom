@@ -25,7 +25,7 @@
   <div class="item-grid">
     @for (eff of filteredEffects | async; track identify2($index, eff)) {
       <div class="card card-body">
-        <h4 class="card-title"><a (click)="openModal(effectModal, eff.slugname, $event);" href="/{{gameURL}}/effects/{{eff.slugname}}/{{language}}">{{eff.name}}</a></h4>
+        <h4 class="card-title"><a (click)="openDialog(eff.slugname, $event);" href="/{{gameURL}}/effects/{{eff.slugname}}/{{language}}">{{eff.name}}</a></h4>
         @if (eff.desc) {
           <p>{{eff.desc}}</p>
         }
@@ -38,13 +38,5 @@
         </ul>
       </div>
     }
-    <ng-template #effectModal>
-      <div class="modal-body">
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-          <i class="fas fa-times-circle"></i>
-        </button>
-        <a12-effect inputSlug="{{selected}}" [showNav]="false"></a12-effect>
-      </div>
-    </ng-template>
   </div>
 }

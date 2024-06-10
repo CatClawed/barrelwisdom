@@ -18,7 +18,10 @@ export abstract class SingleComponent extends DataComponent {
     inputSlug: string = "";
 
     @Input()
-    showNav: boolean = true;
+    showNav: boolean = true
+    
+    @Input()
+    inputLang?: string;
 
     constructor(
         protected readonly destroy$: DestroyService,
@@ -33,7 +36,7 @@ export abstract class SingleComponent extends DataComponent {
         this.route.paramMap
             .pipe(
                 switchMap(params => {
-                    this.language = params.get('language');
+                    this.language = this.inputLang ? this.inputLang : params.get('language');
                     this.slug = this.inputSlug ? this.inputSlug : params.get('subject');
                     return this.changeData()
                 }),

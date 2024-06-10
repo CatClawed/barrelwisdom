@@ -14,8 +14,8 @@ languages = ['en', 'zh_cn', 'zh_tw']
 
 # for setting slugs
 additions = {
-    'リンカ': 'linca-2',
-    'ユナ': 'juna-2'
+    'イザナ': 'izana-2',
+    'ハイディ': 'juna-2'
 }
 memoria_index = 96 # scarlet
 
@@ -1426,7 +1426,7 @@ event = None #create_event(ja='ランターナ建国記念杯', en="Lanterna Cup
 
 #import_research()
 
-global_additions()
+#global_additions()
 
 #import_generic(ImpEnemySkill)
 #import_generic(ImpEnemy)

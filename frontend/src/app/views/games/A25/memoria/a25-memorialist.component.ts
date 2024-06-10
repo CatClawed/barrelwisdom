@@ -1,3 +1,4 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { KeyValuePipe, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
@@ -7,9 +8,8 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Memoria } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
-import { CommonImports, MaterialFormImports, ModalBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
-import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
-import { BsModalService } from 'ngx-bootstrap/modal';
+import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
+import { DialogUseComponent } from '@app/views/games/_prototype/dialog-use.component';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { A25MemoriaComponent } from './a25-memoria.component';
@@ -18,11 +18,11 @@ import { A25MemoriaComponent } from './a25-memoria.component';
   templateUrl: 'a25-memorialist.component.html',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, ModalBandaidModule,
+  imports: [...CommonImports, ...MaterialFormImports,
     A25MemoriaComponent, KeyValuePipe, MatCheckboxModule]
 })
 
-export class A25MemorialistComponent extends ModalUseComponent {
+export class A25MemorialistComponent extends DialogUseComponent {
   filteredMemoria: Observable<Memoria[]>;
   rarity = {
     1: "R",
@@ -31,7 +31,7 @@ export class A25MemorialistComponent extends ModalUseComponent {
   }
 
   constructor(
-    protected modalService: BsModalService,
+    protected cdkDialog: Dialog,
     protected readonly destroy$: DestroyService,
     protected router: Router,
     protected route: ActivatedRoute,
@@ -39,7 +39,8 @@ export class A25MemorialistComponent extends ModalUseComponent {
     protected seoService: SeoService,
     private formBuilder: UntypedFormBuilder,
     protected a25service: A25Service,) {
-    super(modalService, destroy$, router, route, location, seoService);
+    super(destroy$, router, route, location, seoService, cdkDialog);
+    this.component = A25MemoriaComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       stats: 'hp',
