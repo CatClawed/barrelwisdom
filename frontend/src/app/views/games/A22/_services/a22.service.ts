@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders,  } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable} from 'rxjs';
 import { environment } from '@environments/environment';
 import { Trait, Effect, EffectFull, Region, Monster, MonsterFull, Item, ItemFull, NameLink, CategoryItem, ShopDevelop } from '@app/views/games/A22/_services/a22.interface';

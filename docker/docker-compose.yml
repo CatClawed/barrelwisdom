@@ -55,7 +55,7 @@ services:
 # For local testing of production build
   frontend_prod:
     container_name: frontend_prod
-    image: barrelwisdom/frontend:3-25-24
+    image: barrelwisdom/frontend:06-11-24
     ports:
       - 127.0.0.1:4000:4000
 

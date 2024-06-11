@@ -54,10 +54,8 @@ export abstract class DialogUseComponent extends FilterableComponent {
         let comp = otherComp ? otherComp : this.component;
         this.location.go(`${this.gameURL}/${dest}/${slug}/${this.language}`);
         this.dialogref = this.cdkDialog.open(comp, {
-            maxWidth: '95vw',
             backdropClass: ['closer'],
             panelClass: ['dialog-margin'],
-            autoFocus: false,
         });
         this.dialogref.componentInstance.inputSlug = slug;
         this.dialogref.componentInstance.showNav = false;

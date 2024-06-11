@@ -15,9 +15,9 @@ languages = ['en', 'zh_cn', 'zh_tw']
 # for setting slugs
 additions = {
     'イザナ': 'izana-2',
-    'ハイディ': 'juna-2'
+    'ハイディ': 'heidi-2'
 }
-memoria_index = 96 # scarlet
+memoria_index = 98 # dragon bride
 
 trait_cat = {
     1: Filterable.objects.get(text_en="Attack"),
@@ -751,7 +751,7 @@ def import_combat_items(event=None):
             update.items.add(obj)
 
 def import_equipment(event=None):
-    prev_item = None
+    prev_item = []
     for item in jsons['equipment_tool']:
         name = checkName(
             text_ja = item["name"],
@@ -796,7 +796,7 @@ def import_equipment(event=None):
         
         if item['ability_ids']:
             ability = search(item['ability_ids'][0], jsons['ability'])[0]
-            if prev_item == obj:
+            if obj in prev_item:
                 obj2.val_bad  = ability['effects'][0]['value']
                 obj2.val2_bad = ability['effects'][1]['value'] if len(ability['effects']) > 1 else None
             else:
@@ -804,7 +804,7 @@ def import_equipment(event=None):
                 obj2.val2_good = ability['effects'][1]['value'] if len(ability['effects']) > 1 else None
 
         for stat in item['status_buffs']:
-            if prev_item != obj:
+            if obj not in prev_item:
                 match stat['status_type']:
                     case 1:
                         obj2.good_hp   = stat['value']
@@ -838,7 +838,7 @@ def import_equipment(event=None):
         if create:
             update = LatestUpdate.objects.first()
             update.items.add(obj)
-        prev_item = obj
+        prev_item.append(obj)
 
 def import_recipes():
     rStory = RecipeTab.objects.get(order=1)
@@ -1298,13 +1298,13 @@ def global_additions():
     rStory = RecipeTab.objects.get(order=1)
     rExtra = RecipeTab.objects.get(order=2)
 
-    dungeons = [] # ['Silver Ridge', 'Deep Snow Bluff']
+    dungeons = None # ['Passage to the Remnants of Dreams', 'Celestial Gloom Tower']
     score_battle_chapter = None
     tower_floor_max = None
     elem_tower_floor_max = None
-    events = ['アーランドの錬金術士 LEGEND FES', 'アーランドの錬金術士 〜迷子の少女と雪の帰り道〜']
-    recipe_pages = [] #[[rStory, 23], [rExtra, 24]] # refer to recipepage db for numbers
-    traits = ['Critical Damage Up']
+    events = ['決戦 LEGEND FES 目覚めた災厄']
+    recipe_pages = [] #[[rStory, 27], [rExtra, 28]] # refer to recipepage db for numbers
+    traits = [] #['Critical Damage Up']
 
     if tower_floor_max:
         towers = Tower.objects.filter(kind=Filterable.objects.get(text_en="Elemental Tower"))
@@ -1407,8 +1407,8 @@ def create_event(ja, en='', sc='', tc=''):
 
 # From Resleri Academy, use abbreviations in recipe_plan
 
-gacha = None #create_event(ja='新章記念 緋蒼の剣士 LEGEND FES', en='Scarlet Swordsman LEGEND FES')
-event = None #create_event(ja='ランターナ建国記念杯', en="Lanterna Cup")
+gacha = None #create_event(ja='竜の花嫁 LEGEND FES', en="Dragon's Bride LEGEND FES")
+event = None #create_event(ja='竜の涙は花と散る', en="Dragon Tears")
 
 #createUpdate()
 #retrieve_all_jsons()
@@ -1421,12 +1421,12 @@ event = None #create_event(ja='ランターナ建国記念杯', en="Lanterna Cup
 #import_equipment(event=event)
 #import_recipes()
 #import_quest()
-#import_enemy()
+##import_enemy()
 #scan_update_images()
 
 #import_research()
 
-#global_additions()
+global_additions()
 
 #import_generic(ImpEnemySkill)
 #import_generic(ImpEnemy)
