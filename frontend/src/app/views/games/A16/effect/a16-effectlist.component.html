@@ -25,7 +25,7 @@
   <div class="item-grid">
     @for (eff of filteredEffects | async; track identify2($index, eff)) {
       <div class="card card-body">
-        <h4 class="card-title"><a (click)="openModal(effectModal, eff.slugname, $event);" href="/{{gameURL}}/effects/{{eff.slugname}}/{{language}}">{{eff.name}}</a></h4>
+        <h4 class="card-title"><a (click)="openDialog(eff.slugname, $event);" href="/{{gameURL}}/effects/{{eff.slugname}}/{{language}}">{{eff.name}}</a></h4>
         @if (eff.desc) {
           <p>{{eff.desc}}</p>
         }
@@ -41,19 +41,11 @@
               <li><a routerLink="/{{gameURL}}/items/{{eff.effectdata_set[2].effectlines_set[0].slugname}}">{{eff.effectdata_set[2].effectlines_set[0].name}}</a></li>
             }
             @if (eff.effectdata_set.length >= 4) {
-              <li><a (click)="openModal(effectModal, eff.slugname, $event);" href="/{{gameURL}}/effects/{{eff.slugname}}/{{language}}">See more...</a></li>
+              <li><a (click)="openDialog(eff.slugname, $event);" href="/{{gameURL}}/effects/{{eff.slugname}}/{{language}}">See more...</a></li>
             }
           </ul>
         }
       </div>
     }
-    <ng-template #effectModal>
-      <div class="modal-body">
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-          <i class="fas fa-times-circle"></i>
-        </button>
-        <a16-effect inputSlug="{{selected}}" [showNav]="false"></a16-effect>
-      </div>
-    </ng-template>
   </div>
 }

@@ -129,8 +129,8 @@
         </ng-template>
         <table class="tbl table-shrink"><tbody>
           <tr class="table-dark-center"><th>Fragments</th></tr>
-          <tr><td><i class="fas fa-arrow-up"></i><i class="fas fa-arrow-up"></i>     {{evt.fragment[0].name}}<br /><a href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="fragonePopover" popoverTitle="{{evt.fragment[0].eff}}">{{evt.fragment[0].eff}}</a><br />Size: {{evt.fragment[0].size}}<br />Gear: {{evt.fragment[0].gear}}</td></tr>
-          <tr><td><i class="fas fa-arrow-down"></i><i class="fas fa-arrow-down"></i> {{evt.fragment[1].name}}<br /><a href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="fragonePopover" popoverTitle="{{evt.fragment[1].eff}}">{{evt.fragment[1].eff}}</a><br />Size: {{evt.fragment[1].size}}<br />Gear: {{evt.fragment[1].gear}}</td></tr>
+          <tr><td><i class="fas fa-arrow-up"></i><i class="fas fa-arrow-up"></i>     {{evt.fragment[0].name}}<br /><popover [template]="fragonePopover" title="{{evt.fragment[0].eff}}">{{evt.fragment[0].eff}}</popover><br />Size: {{evt.fragment[0].size}}<br />Gear: {{evt.fragment[0].gear}}</td></tr>
+          <tr><td><i class="fas fa-arrow-down"></i><i class="fas fa-arrow-down"></i> {{evt.fragment[1].name}}<br /><popover [template]="fragonePopover" title="{{evt.fragment[1].eff}}">{{evt.fragment[1].eff}}</popover><br />Size: {{evt.fragment[1].size}}<br />Gear: {{evt.fragment[1].gear}}</td></tr>
         </tbody></table>
       }
       @if (evt.fragment.length != 2) {
@@ -170,7 +170,7 @@
                   </ul>
                 }
               </ng-template>
-              <td>{{frag.name}}<br /><a href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="fragPopover" popoverTitle="{{frag.eff}}">{{frag.eff}}</a><br />Size: {{frag.size}}<br />Gear: {{frag.gear}}</td>
+              <td>{{frag.name}}<br /><popover [template]="fragPopover" title="{{frag.eff}}">{{frag.eff}}</popover><br />Size: {{frag.size}}<br />Gear: {{frag.gear}}</td>
             </tr>
           }
         </tbody></table>

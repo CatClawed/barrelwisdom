@@ -126,7 +126,6 @@ class Dungeon(models.Model):
 class DungeonFloor(models.Model):
     dungeon = models.ForeignKey(Dungeon, on_delete=models.CASCADE)
     order = models.IntegerField()
-    rewards = models.ManyToManyField(Reward)
     combat_level = models.IntegerField()
     effects = models.ManyToManyField(Desc)
     q_id = models.IntegerField(default=0)

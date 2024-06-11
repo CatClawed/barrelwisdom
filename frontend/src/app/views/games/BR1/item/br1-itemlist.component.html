@@ -19,7 +19,7 @@
       <div class="card card-body">
         <div class="flex">
           <h4 class="card-title">
-            <a (click)="openModal(itemModal, it.slugname, $event);" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a>
+            <a (click)="openDialog(it.slugname, $event);" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a>
           </h4>
           @if (it.kind) {
             <b style="padding-right:0.5em;">{{it.kind}}</b>
@@ -75,12 +75,4 @@
       </div>
     }
   </div>
-  <ng-template #itemModal>
-    <div class="modal-body">
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-        <i class="fas fa-times-circle"></i>
-      </button>
-      <br1-item inputSlug="{{selected}}" [showNav]="false"></br1-item>
-    </div>
-  </ng-template>
 }

@@ -55,7 +55,7 @@
       <div style="justify-content:space-between;" class="card card-body">
         <div style="height:100%;">
           <div class="flex">
-            <h4 class="card-title"><a (click)="openModal(traitModal, trait.slugname, $event);" href="/{{gameURL}}/traits/{{trait.slugname}}/{{language}}">{{trait.name}}</a></h4>
+            <h4 class="card-title"><a (click)="openDialog(trait.slugname, $event);" href="/{{gameURL}}/traits/{{trait.slugname}}/{{language}}">{{trait.name}}</a></h4>
             @if (trait.cost) {
               <b>Cost {{trait.cost}}</b>
             }
@@ -82,12 +82,4 @@
       </div>
     }
   </div>
-  <ng-template #traitModal>
-    <div class="modal-body">
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-        <i class="fas fa-times-circle"></i>
-      </button>
-      <a12-trait inputSlug="{{selected}}" [showNav]="false"></a12-trait>
-    </div>
-  </ng-template>
 }

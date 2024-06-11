@@ -35,14 +35,14 @@
         <div class="card card-body">
           <div style="height:100%;">
             <div class="flex">
-              <h4 class="card-title"><a (click)="openModal(traitModal, trt.slug, $event);" href="/{{gameURL}}/traits/{{trt.slug}}/{{language}}">{{trt.name}}</a></h4>
-              <div><a href="javascript:void(0)"
-              tooltip="Influences rank. A measure of rarity. This number determines where traits appear." container="true">Grade:</a>
-              {{trt.grade}}
-              <br />@if (trt.grade > 50) {
-              <span style="float:right;" class="badge bg-secondary">DLC</span>
-            }
-          </div>
+              <h4 class="card-title"><a (click)="openDialog(trt.slug, $event);" href="/{{gameURL}}/traits/{{trt.slug}}/{{language}}">{{trt.name}}</a></h4>
+              <div>
+                <tooltip tip="Influences rank. A measure of rarity. This number determines where traits appear.">Grade: </tooltip>
+                {{trt.grade}}
+                <br />@if (trt.grade > 50) {
+                <span style="float:right;" class="badge bg-secondary">DLC</span>
+                }
+              </div>
         </div>
         @if (trt.item_set) {
           <p>
@@ -65,14 +65,6 @@
       </div>
     </div>
   }
-  <ng-template #traitModal>
-    <div class="modal-body">
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-        <i class="fas fa-times-circle"></i>
-      </button>
-      <a22-trait inputSlug="{{selected}}" [showNav]="false"></a22-trait>
-    </div>
-  </ng-template>
 </div>
 </div>
 }

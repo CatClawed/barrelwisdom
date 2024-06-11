@@ -1,3 +1,4 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { Location } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
@@ -7,9 +8,8 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Item } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
-import { CommonImports, MaterialFormImports, ModalBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
-import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
-import { BsModalService } from 'ngx-bootstrap/modal';
+import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
+import { DialogUseComponent } from '@app/views/games/_prototype/dialog-use.component';
 import { Observable, forkJoin } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { A25IconComponent } from './a25-icon.component';
@@ -21,15 +21,15 @@ import { A25ItemComponent } from './a25-item.component';
   encapsulation: ViewEncapsulation.None,
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, ModalBandaidModule,
+  imports: [...CommonImports, ...MaterialFormImports,
     A25ItemComponent, A25IconComponent, MatButtonModule]
 })
 
-export class A25SynthesisListComponent extends ModalUseComponent {
+export class A25SynthesisListComponent extends DialogUseComponent {
   filteredItems: Observable<Item[]>;
 
   constructor(
-    protected modalService: BsModalService,
+    protected cdkDialog: Dialog,
     protected readonly destroy$: DestroyService,
     protected router: Router,
     protected route: ActivatedRoute,
@@ -37,7 +37,8 @@ export class A25SynthesisListComponent extends ModalUseComponent {
     protected seoService: SeoService,
     private formBuilder: UntypedFormBuilder,
     protected a25service: A25Service) {
-    super(modalService, destroy$, router, route, location, seoService);
+    super(destroy$, router, route, location, seoService, cdkDialog);
+    this.component = A25ItemComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       filtering: '',
@@ -62,6 +63,10 @@ export class A25SynthesisListComponent extends ModalUseComponent {
       startWith(null as Observable<Item[]>),
       map((search: any) => search ? this.filterT(search.filtertext, search.kind, search.rarity, search.filtering) : this.data.items.slice())
     );
+  }
+
+  extraSettings(): void {
+    this.dialogref.componentInstance.itemkind = 'synthesis'
   }
 
   replaceVal(item: Item): string {
@@ -100,9 +105,11 @@ export class A25SynthesisListComponent extends ModalUseComponent {
       list = list.filter(item => item.ing.some(i => i.toLowerCase().includes(filter)))
     }
     if (value) {
-      const filterValue = value.toLowerCase();
+      const filterValue = (this.language == 'en') ? value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "") : value;
       list = list.filter(item => {
-        return item.name.toLowerCase().includes(filterValue) || item.desc.toLowerCase().includes(filterValue);
+        return ((this.language == 'en') ?
+          (item.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(filterValue) || item.desc.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(filterValue))
+          : item.name.includes(filterValue) || item.desc.includes(filterValue));
       });
     }
     return list;

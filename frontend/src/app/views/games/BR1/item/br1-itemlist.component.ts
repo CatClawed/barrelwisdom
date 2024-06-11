@@ -1,3 +1,4 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
@@ -6,9 +7,8 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Item } from '@app/views/games/BR1/_services/br1.interface';
 import { BR1Service } from '@app/views/games/BR1/_services/br1.service';
-import { CommonImports, MaterialFormImports, ModalBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
-import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
-import { BsModalService } from 'ngx-bootstrap/modal';
+import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
+import { DialogUseComponent } from '@app/views/games/_prototype/dialog-use.component';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { BR1ItemComponent } from './br1-item.component';
@@ -17,15 +17,14 @@ import { BR1ItemComponent } from './br1-item.component';
   templateUrl: 'br1-itemlist.component.html',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, ModalBandaidModule,
-    BR1ItemComponent]
+  imports: [...CommonImports, ...MaterialFormImports, BR1ItemComponent]
 })
 
-export class BR1ItemlistComponent extends ModalUseComponent {
+export class BR1ItemlistComponent extends DialogUseComponent {
   filteredItems: Observable<Item[]>;
 
   constructor(
-    protected modalService: BsModalService,
+    protected cdkDialog: Dialog,
     protected readonly destroy$: DestroyService,
     protected router: Router,
     protected route: ActivatedRoute,
@@ -34,7 +33,8 @@ export class BR1ItemlistComponent extends ModalUseComponent {
     private formBuilder: UntypedFormBuilder,
     private br1service: BR1Service,
   ) {
-    super(modalService, destroy$, router, route, location, seoService);
+    super(destroy$, router, route, location, seoService,cdkDialog);
+    this.component = BR1ItemComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: ''
     })

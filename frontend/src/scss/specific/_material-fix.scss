@@ -44,12 +44,56 @@
 .mat-raised-button.mat-accent,
 .mat-fab.mat-accent,
 .mat-mini-fab.mat-accent {
-  background-color: $navbar !important;
+    background-color: $navbar !important;
 }
 
 .mat-flat-button.mat-accent,
 .mat-raised-button.mat-accent,
 .mat-fab.mat-accent,
 .mat-mini-fab.mat-accent:hover {
-  background-color: #B8947B !important;
+    background-color: #B8947B !important;
+}
+
+// dialog
+
+.cdk-global-overlay-wrapper {
+    overflow-y: auto;
+}
+
+.closer {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.closer:before {
+    position: absolute;
+    content: "\274c";
+    color: rgb(180, 0, 0);
+    cursor: pointer;
+    top: 57px;
+    right: 10px;
+    font-size: 1.8rem;
+    background-color: white;
+    height: 2.7rem;
+    aspect-ratio: 1;
+    text-align: center;
+    border-radius: 50%;
+    box-shadow: 2px 2px 2px hsl(0deg 0% 0% / 0.38);
+}
+
+
+@media screen and (min-width: 1100px) {
+    .dialog-margin {
+        margin-top: 0;
+        max-height: 95vh;
+        max-width: 50vw;
+        min-width: 500px;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .dialog-margin {
+        margin-top: 210px;
+        max-width: min(95vw, 800px);
+        min-width: max(40vw, 320px);
+    }
 }

@@ -1,3 +1,4 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
@@ -6,9 +7,8 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Trait } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
-import { CommonImports, MaterialFormImports, ModalBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
-import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
-import { BsModalService } from 'ngx-bootstrap/modal';
+import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
+import { DialogUseComponent } from '@app/views/games/_prototype/dialog-use.component';
 import { Observable, forkJoin } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { A25CharaComponent } from '../character/a25-chara.component';
@@ -19,15 +19,17 @@ import { A25TraitComponent } from './a25-trait.component';
   templateUrl: 'a25-traitlist.component.html',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, ModalBandaidModule,
+  imports: [...CommonImports, ...MaterialFormImports,
     A25ItemComponent, A25TraitComponent, A25CharaComponent]
 })
 
-export class A25TraitlistComponent extends ModalUseComponent {
+export class A25TraitlistComponent extends DialogUseComponent {
   filteredTraits: Observable<Trait[]>;
+  c2;
+  c3;
 
   constructor(
-    protected modalService: BsModalService,
+    protected cdkDialog: Dialog,
     protected readonly destroy$: DestroyService,
     protected router: Router,
     protected route: ActivatedRoute,
@@ -35,7 +37,10 @@ export class A25TraitlistComponent extends ModalUseComponent {
     protected seoService: SeoService,
     private formBuilder: UntypedFormBuilder,
     protected a25service: A25Service,) {
-    super(modalService, destroy$, router, route, location, seoService);
+    super(destroy$, router, route, location, seoService, cdkDialog);
+    this.component = A25TraitComponent;
+    this.c2 = A25CharaComponent;
+    this.c3 = A25ItemComponent;
     this.pageForm = this.formBuilder.group({
       filtertext: '',
       transfers: "any"
@@ -57,6 +62,10 @@ export class A25TraitlistComponent extends ModalUseComponent {
       startWith(null as Observable<Trait[]>),
       map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.data.traits.slice())
     );
+  }
+
+  extraSettings(): void {
+    this.dialogref.componentInstance.itemkind = 'materials'
   }
 
   private filterT(value: string, transfer: string): Trait[] {

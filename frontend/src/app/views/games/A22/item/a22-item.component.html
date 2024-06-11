@@ -241,16 +241,16 @@
                   }
                 </ng-template>
                 @if (i.noneffect && !i.essence) {
-                  <a href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="effPopover" popoverTitle="Synth Data" class="badge bg-primary badge-list">{{i.noneffect}}</a>
+                  <popover [template]="effPopover" display="inline-flex" title="Synth Data" cls="badge bg-primary badge-list">{{i.noneffect}}</popover>
                 }
                 @if (i.noneffect && i.essence) {
-                  <a  href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="effPopover" popoverTitle="Synth Data" class="badge bg-secondary badge-list">{{i.noneffect}}</a>
+                  <popover [template]="effPopover" display="inline-flex" title="Synth Data" cls="badge-list badge bg-secondary">{{i.noneffect}}</popover>
                 }
                 @if (i.effect    && !i.essence) {
-                  <a href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="effPopover" popoverTitle="Synth Data" class="badge bg-primary badge-list">{{i.effect}}</a>
+                  <popover [template]="effPopover" display="inline-flex" title="Synth Data" cls="badge bg-primary badge-list">{{i.effect}}</popover>
                 }
                 @if (i.effect    && i.essence) {
-                  <a  href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="effPopover" popoverTitle="Synth Data" class="badge bg-secondary badge-list">{{i.effect}}</a>
+                  <popover [template]="effPopover" display="inline-flex" title="Synth Data" cls="badge bg-secondary badge-list">{{i.effect}}</popover>
                 }
                 @if (i.morph) {
                   <a class="badge bg-success badge-list" routerLink="/{{gameURL}}/items/{{i.morph.slug}}/{{language}}">{{i.morph.name}}</a>

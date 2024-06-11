@@ -1,0 +1,16 @@
+.popover2 {
+    background: #fff;
+    border-radius: 5px;
+    border: solid 1px #ccc;
+    background-image: url(/media/main/images/clean_textile.webp);
+
+    >h4 {
+        background-color: #d3d3d34d;
+        padding: 0.5rem 1rem 0.1rem 1rem;
+        border-bottom: solid 1px #ccc;
+    }
+
+    .popoverContents {
+        padding: 0 1rem 1rem 1rem;
+    }
+}

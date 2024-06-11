@@ -5,18 +5,19 @@ from games.A25.quest_a25.models import *
 import csv, codecs, sys, urllib.request, json
 from scripts.util import import_generic, slug_me
 
-BASE_URL = 'https://resleriana-db.vercel.app/api/'
+BASE_URL = 'https://raw.githubusercontent.com/theBowja/resleriana-db/main/data/'
 
-names = ['ability', 'battle_tool', 'battle_tool_trait', 'character', 'character_tag', 'effect', 'equipment_tool', 'equipment_tool_trait', 'hyperlink', 'item', 'leader_skill_condition', 'memoria', 'memoria_buff_growth', 'quest', 'recipe', 'recipe_plan', 'research', 'research_effect', 'research_effect_level', 'reward_set', 'skill']
-names_gbl = ['ability', 'battle_tool', 'battle_tool_trait', 'character', 'effect', 'equipment_tool', 'equipment_tool_trait', 'item', 'memoria', 'quest', 'recipe', 'recipe_plan', 'research', 'research_effect', 'skill']
+names = ['ability', 'battle_hint', 'battle_tool', 'battle_tool_trait', 'character', 'character_tag', 'effect', 'enemy', 'equipment_tool', 'equipment_tool_trait', 'hyperlink', 'item', 'leader_skill_condition', 'memoria', 'memoria_buff_growth', 'quest', 'recipe', 'recipe_plan', 'research', 'research_effect', 'research_effect_level', 'reward_set', 'skill']
+names_gbl = ['ability', 'battle_hint', 'battle_tool', 'battle_tool_trait', 'character', 'effect', 'enemy', 'equipment_tool', 'equipment_tool_trait', 'item', 'memoria', 'quest', 'recipe', 'recipe_plan', 'research', 'research_effect', 'skill']
 jsons = {}
 languages = ['en', 'zh_cn', 'zh_tw']
 
 # for setting slugs
 additions = {
-    'クラウディア': 'klaudia-2',
+    'イザナ': 'izana-2',
+    'ハイディ': 'heidi-2'
 }
-memoria_index = 91 # onsen
+memoria_index = 98 # dragon bride
 
 trait_cat = {
     1: Filterable.objects.get(text_en="Attack"),
@@ -144,27 +145,14 @@ def ImpEvent(row, index):
 def ImpName(row, index):
     checkName(row['EN'], row['JP'], row['SC'], row['TC'], volatile=True)
 
-def global_query(query, section, kind='master'):
-    gbl = {}
-    for lang in languages:
-        with urllib.request.urlopen(f'{BASE_URL}/{kind}/search?language={lang}&file={section}{query}') as url:
-            try:
-                data = json.load(url)[0]['data']
-                for key in ['description', 'name', 'another_name', 'requirements', 'abbreviation']:
-                    if key in data:
-                        gbl[f'{key}_{lang}'] = data[key]
-            except:
-                return None
-    return gbl
-
 def retrieve_all_jsons():
     for name in names:
-        with urllib.request.urlopen(f'{BASE_URL}/master/jp/{name}') as url:
+        with urllib.request.urlopen(f'{BASE_URL}/master/jp/{name}.json') as url:
             data = json.load(url)
             jsons[name] = data
         if name in names_gbl:
             for lang in languages:
-                with urllib.request.urlopen(f'{BASE_URL}/master/{lang}/{name}') as url:
+                with urllib.request.urlopen(f'{BASE_URL}/master/{lang}/{name}.json') as url:
                     data = json.load(url)
                     for entry in jsons[name]:
                         found = search(entry['id'], data)
@@ -472,6 +460,9 @@ def import_passives(char_dict, char):
         obj.name = name
         obj.desc = desc
         obj.val = passive['effects'][0]['value']
+        obj.val2 = passive['effects'][1]['value'] if len(passive['effects']) > 1 else None
+        obj.val3 = passive['effects'][2]['value'] if len(passive['effects']) > 2 else None
+        obj.val4 = passive['effects'][3]['value'] if len(passive['effects']) > 3 else None
         obj.save()
 
 
@@ -716,17 +707,19 @@ def import_combat_items(event=None):
             print("Updating Combat Item", name.text_ja)
             create = False
         except:
-            obj = Item(slug=f'usable-{item["id"]}')
+            obj = Item(slug=f'usable-{item["id"]}', desc=desc)
             print("Creating Combat Item", name.text_ja)
             create = True
             if event:
                 obj.limit = event
         
         obj.name = name
-        obj.desc = desc
-        obj.kind=Filterable.objects.get(slug="combat", kind="item_type")
         if obj not in prev_items:
             obj.rarity = item['rarity']
+        if not create:
+            if obj.rarity == item['rarity']: # skip SR text when SSR exists
+                obj.desc = desc
+        obj.kind=Filterable.objects.get(slug="combat", kind="item_type")
         obj.save()
         
         try:
@@ -758,7 +751,7 @@ def import_combat_items(event=None):
             update.items.add(obj)
 
 def import_equipment(event=None):
-    prev_item = None
+    prev_item = []
     for item in jsons['equipment_tool']:
         name = checkName(
             text_ja = item["name"],
@@ -779,17 +772,19 @@ def import_equipment(event=None):
             print("Updating Equipment", name.text_ja)
             create = False
         except:
-            obj = Item(slug=f'equip-{item["id"]}')
+            obj = Item(slug=f'equip-{item["id"]}', desc=desc)
             print("Creating Equipment", name.text_ja)
             create = True
             if event:
                 obj.limit = event
 
         obj.name = name
-        obj.desc = desc
-        obj.kind = Filterable.objects.get(slug="equipment", kind="item_type")
-        if obj != prev_item:
+        if obj not in prev_item:
             obj.rarity = item['rarity']
+        if not create:
+            if obj.rarity == item['rarity']: # skip SR text when SSR exists
+                obj.desc = desc
+        obj.kind = Filterable.objects.get(slug="equipment", kind="item_type")
         obj.save()
 
         try:
@@ -801,7 +796,7 @@ def import_equipment(event=None):
         
         if item['ability_ids']:
             ability = search(item['ability_ids'][0], jsons['ability'])[0]
-            if prev_item == obj:
+            if obj in prev_item:
                 obj2.val_bad  = ability['effects'][0]['value']
                 obj2.val2_bad = ability['effects'][1]['value'] if len(ability['effects']) > 1 else None
             else:
@@ -809,7 +804,7 @@ def import_equipment(event=None):
                 obj2.val2_good = ability['effects'][1]['value'] if len(ability['effects']) > 1 else None
 
         for stat in item['status_buffs']:
-            if prev_item != obj:
+            if obj not in prev_item:
                 match stat['status_type']:
                     case 1:
                         obj2.good_hp   = stat['value']
@@ -843,7 +838,7 @@ def import_equipment(event=None):
         if create:
             update = LatestUpdate.objects.first()
             update.items.add(obj)
-        prev_item = obj
+        prev_item.append(obj)
 
 def import_recipes():
     rStory = RecipeTab.objects.get(order=1)
@@ -1070,14 +1065,14 @@ def import_dungeon(quest):
         )
         obj.save()
 
-        for i in range(0, len(quest['sample_rewards'])):
-            r = GetReward(quest['sample_rewards'][i], i+1)
-            obj.rewards.add(r)
-            if floor == 1 or floor == 9:
-                dun.rewards.add(r)
-
         for e in effects:
             obj.effects.add(e)
+
+        # If redoing earlier floors, needs a floor 1 check as well
+        for i in range(0, len(quest['sample_rewards'])):
+            r = GetReward(quest['sample_rewards'][i], i+1)
+            if floor == 9:
+                dun.rewards.add(r)
 
 def import_quest():
     count = 0
@@ -1117,6 +1112,34 @@ def import_quest():
             import_tower(quest, 'wind')
             count = count + 1
     print(count)
+
+def import_enemy():
+    for enemy in jsons['enemy']:
+        name = checkName(
+            text_ja = enemy['name'],
+            text_en = enemy['name_en'] if 'name_en' in enemy else '',
+            text_sc = enemy['name_zh_cn'] if 'name_zh_cn' in enemy else '',
+            text_tc = enemy['name_zh_tw'] if 'name_zh_tw' in enemy else '',
+            volatile= True
+        )
+        #try:
+        #    obj = Enemy.objects.get(e_id=enemy['id'])
+        #    print("Updating Enemy", enemy['name'])
+        #except:
+        #    obj = Enemy(
+        #        e_id=enemy['id']
+        #    )
+        #    obj.save()
+        #    print("New Enemy", enemy['name'])
+
+    for hint in jsons['battle_hint']:
+        desc = checkDesc(
+            text_ja=hint['description'].replace('\r', '').replace('\n', '<br>'),
+            text_en=hint['description_en'] if 'description_en' in hint else '',
+            text_sc=hint['description_zh_cn'] if 'description_zh_cn' in hint else '',
+            text_tc=hint['description_zh_tw'] if 'description_zh_tw' in hint else '',
+        )
+
 
 def ImpEnemySkill(row, index):
     desc = None
@@ -1260,7 +1283,7 @@ def scan_update_images():
             im = search(item.name.text_ja, battle_dict, 'name')[0]['still_path_hash']
             print(item.slug, jsons['path_hash_to_name'][im])
     for memoria in update.memoria.all():
-        im = search(memoria.name.text_ja, jsons['memoria'], 'name')[0]['large_still_path_hash']
+        im = search(memoria.name.text_ja, jsons['memoria'], 'name')[0]['still_path_hash']
         print(memoria.slug, jsons['path_hash_to_name'][im])
     for character in update.characters.all():
         im = search(character.title.text_ja, jsons['character'], 'another_name')[0]['large_still_path_hash']
@@ -1275,13 +1298,13 @@ def global_additions():
     rStory = RecipeTab.objects.get(order=1)
     rExtra = RecipeTab.objects.get(order=2)
 
-    dungeons = [] #['Trail of Aspirations', 'Abandoned Mineshaft']
+    dungeons = None # ['Passage to the Remnants of Dreams', 'Celestial Gloom Tower']
     score_battle_chapter = None
     tower_floor_max = None
     elem_tower_floor_max = None
-    events = ['浪漫の果てに LEGEND FES']
-    recipe_pages = [] #[[rStory, 20], [rExtra, 21]] # refer to recipepage db for numbers
-    traits = []
+    events = ['決戦 LEGEND FES 目覚めた災厄']
+    recipe_pages = [] #[[rStory, 27], [rExtra, 28]] # refer to recipepage db for numbers
+    traits = [] #['Critical Damage Up']
 
     if tower_floor_max:
         towers = Tower.objects.filter(kind=Filterable.objects.get(text_en="Elemental Tower"))
@@ -1321,7 +1344,9 @@ def global_additions():
         dun.gbl=True
         dun.save()
     for trait in traits:
-        pass
+        t = Trait.objects.get(name__text_en=trait)
+        t.gbl=True
+        t.save()
 
     for page in recipe_pages:
         p = RecipePage.objects.get(book=page[1], tab=page[0])
@@ -1382,8 +1407,8 @@ def create_event(ja, en='', sc='', tc=''):
 
 # From Resleri Academy, use abbreviations in recipe_plan
 
-gacha = create_event(ja='癒しくつろぎ温泉 LEGEND FES', en='Hot Spring LEGEND FES')
-event = create_event(ja='温泉奪還作戦！', en="Hot Spring")
+gacha = None #create_event(ja='竜の花嫁 LEGEND FES', en="Dragon's Bride LEGEND FES")
+event = None #create_event(ja='竜の涙は花と散る', en="Dragon Tears")
 
 #createUpdate()
 #retrieve_all_jsons()
@@ -1396,11 +1421,12 @@ event = create_event(ja='温泉奪還作戦！', en="Hot Spring")
 #import_equipment(event=event)
 #import_recipes()
 #import_quest()
+##import_enemy()
 #scan_update_images()
 
 #import_research()
 
-#global_additions()
+global_additions()
 
 #import_generic(ImpEnemySkill)
 #import_generic(ImpEnemy)

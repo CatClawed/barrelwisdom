@@ -39,7 +39,7 @@
     @for (it of filteredItems | async; track identify2($index, it)) {
       <div class="card card-body">
         <h4 class="card-title card-icon-space">
-          <a (click)="openModal(itemModal, it.slugname, $event);" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a>
+          <a (click)="openDialog(it.slugname, $event);" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a>
         </h4>
         <div class="card-icon-position">
           @if (it.level) {
@@ -47,7 +47,7 @@
           }
         </div>
         <div class="card-item-display">
-          <a (click)="openModal(itemModal, it.slugname, $event);" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">
+          <a (click)="openDialog(it.slugname, $event);" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">
             <img loading="lazy" src="{{imgURL}}items/{{it.slugname}}.webp" alt="{{it.name}}">
           </a>
         </div>
@@ -58,18 +58,10 @@
             </tr>
           }
         </tbody></table>
-        <button (click)="openModal(itemModal, it.slugname)" class="card-read-more-position" mat-mini-fab color="primary">
+        <button (click)="openDialog(it.slugname)" class="card-read-more-position" mat-mini-fab color="primary">
           <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
         </button>
       </div>
     }
-    <ng-template #itemModal>
-      <div class="modal-body">
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-          <i class="fas fa-times-circle"></i>
-        </button>
-        <a12-item inputSlug="{{selected}}" [showNav]="false"></a12-item>
-      </div>
-    </ng-template>
   </div>
 }

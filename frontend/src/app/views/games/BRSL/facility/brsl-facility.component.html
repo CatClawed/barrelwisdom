@@ -32,7 +32,10 @@
                       <ng-template #effPopover>
                         {{data.effect.desc}}
                       </ng-template>
-                      <a href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="effPopover" popoverTitle="{{data.effect.name}}">{{data.effect.name}}</a>
+                      <popover [title]="data.effect.name"
+                        [template]="effPopover">
+                        {{data.effect.name}}
+                      </popover>
                     </li>
                   }
                 </ul>

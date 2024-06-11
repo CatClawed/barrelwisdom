@@ -79,7 +79,7 @@ docker build -t frontend_prod -f Dockerfile.prod .
 docker tag frontend_prod barrelwisdom/frontend:tag
 ```
 
-### Other Comamands
+### Other Commands
 
 Angular commands
 

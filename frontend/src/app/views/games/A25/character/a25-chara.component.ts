@@ -4,8 +4,9 @@ import { MatSliderModule } from '@angular/material/slider';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { Popover } from '@app/views/_components/popover/popover.component';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
-import { CommonImports, PopoverBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
+import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
@@ -14,8 +15,7 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
   styleUrls: ['../resleri.scss'],
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, PopoverBandaidModule, MatSliderModule,
-    MatCheckboxModule]
+  imports: [...CommonImports, Popover, MatSliderModule, MatCheckboxModule]
 })
 export class A25CharaComponent extends SingleComponent {
   stars: number[] = [1, 2, 3, 3.5, 4, 4.5, 5];
@@ -73,6 +73,23 @@ export class A25CharaComponent extends SingleComponent {
       desc = skill.val2_2
         ? desc.replaceAll('{2}', `${skill.val2 / 100} ~ ${skill.val2_2 / 100}`)
         : desc.replaceAll('{2}', skill.val2 / 100);
+    }
+    return desc;
+  }
+
+  replacePassive(passive) {
+    let desc = passive.desc;
+    if (passive.val) {
+      desc = desc.replaceAll('{0}', passive.val/100)
+    }
+    if (passive.val2) {
+      desc = desc.replaceAll('{1}', passive.val2/100)
+    }
+    if (passive.val3) {
+      desc = desc.replaceAll('{2}', passive.val3/100)
+    }
+    if (passive.val4) {
+      desc = desc.replaceAll('{3}', passive.val4/100)
     }
     return desc;
   }

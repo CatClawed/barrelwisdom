@@ -1,3 +1,4 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
@@ -6,9 +7,8 @@ import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Effect } from '@app/views/games/A16/_services/a16.interface';
 import { A16Service } from '@app/views/games/A16/_services/a16.service';
-import { CommonImports, MaterialFormImports, ModalBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
-import { ModalUseComponent } from '@app/views/games/_prototype/modal-use.component';
-import { BsModalService } from 'ngx-bootstrap/modal';
+import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
+import { DialogUseComponent } from '@app/views/games/_prototype/dialog-use.component';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { A16EffectComponent } from './a16-effect.component';
@@ -17,15 +17,14 @@ import { A16EffectComponent } from './a16-effect.component';
   templateUrl: 'a16-effectlist.component.html',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, ModalBandaidModule,
-    A16EffectComponent]
+  imports: [...CommonImports, ...MaterialFormImports, A16EffectComponent]
 })
 
-export class A16EffectlistComponent extends ModalUseComponent {
+export class A16EffectlistComponent extends DialogUseComponent {
   filteredEffects: Observable<Effect[]>;
 
   constructor(
-    protected modalService: BsModalService,
+    protected cdkDialog: Dialog,
     protected readonly destroy$: DestroyService,
     protected router: Router,
     protected route: ActivatedRoute,
@@ -34,7 +33,8 @@ export class A16EffectlistComponent extends ModalUseComponent {
     private formBuilder: UntypedFormBuilder,
     private a16service: A16Service,
   ) {
-    super(modalService, destroy$, router, route, location, seoService);
+    super(destroy$, router, route, location, seoService, cdkDialog);
+    this.component = A16EffectComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: ''
     })

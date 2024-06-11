@@ -37,11 +37,11 @@
         </ul>
       }
       @if (property.grade != -1) {
-        <p><a href="javascript:void(0)"
-        tooltip="A measure of rarity. This number determines where properties appear." container="true">Grade:</a>
+        <p>
+          <tooltip tip="A measure of rarity. This number determines where properties appear.">Grade: </tooltip>
         {{property.grade}}
-      </p>
-    }
+        </p>
+      }
     <div class="flex bottom">
       <i class="trait-color{{property.bomb}}      atelier atelier-np atelier-escha-bomb"></i>
       <i class="trait-color{{property.heal}}      atelier atelier-np atelier-escha-heal"></i>

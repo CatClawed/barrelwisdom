@@ -39,7 +39,7 @@
   <div style="height:100%;">
     <div class="flex">
       <h4 class="card-title card-icon-space">
-        <a (click)="openModal(traitModal, trt.slug, $event);"
+        <a (click)="openDialog(trt.slug, $event);"
           href="/{{gameURL}}/traits/{{trt.slug}}/{{language}}">
           {{trt.name}}
         </a>
@@ -66,7 +66,7 @@
         @for (item of trt.items; track item) {
           <li>
             <i class="fa-solid fa-circle" style="color:{{a25service.colors[item.color]}};"></i>
-            <a (click)="openDifferentModal(itemModal, item.slug, 'items/materials', $event);"
+            <a (click)="openDialog(item.slug, $event, 'items/materials', c3);"
               href="/{{gameURL}}/items/materials/{{item.slug}}/{{language}}">
               {{item.name}}
             </a>
@@ -81,7 +81,7 @@
           <li>
             <i style="width:1rem;vertical-align:-0.5rem;color:{{a25service.colors[char.color1]}};display:inline;" class="atelier atelier-np atelier-resleri-color-l"></i>
             <i style="width:1rem;vertical-align:-0.5rem;color:{{a25service.colors[char.color2]}};display:inline;" class="atelier atelier-np atelier-resleri-color-r"></i>
-            <a (click)="openDifferentModal(charModal, char.slug, 'characters', $event);"
+            <a (click)="openDialog(char.slug, $event, 'characters', c2);"
               href="/{{gameURL}}/characters/{{char.slug}}/{{language}}">
               {{char.name}} {{char.title}}
             </a>
@@ -91,7 +91,7 @@
           <li>
             <i style="width:1rem;vertical-align:-0.5rem;color:{{a25service.colors[char.color1]}};display:inline;" class="atelier atelier-np atelier-resleri-color-l"></i>
             <i style="width:1rem;vertical-align:-0.5rem;color:{{a25service.colors[char.color2]}};display:inline;" class="atelier atelier-np atelier-resleri-color-r"></i>
-            <a (click)="openDifferentModal(charModal, char.slug, 'characters', $event);"
+            <a (click)="openDialog(char.slug, $event, 'characters', c2);"
               href="/{{gameURL}}/characters/{{char.slug}}/{{language}}">
               {{char.name}} {{char.title}}
             </a>
@@ -101,7 +101,7 @@
           <li>
             <i style="width:1rem;vertical-align:-0.5rem;color:{{a25service.colors[char.color1]}};display:inline;" class="atelier atelier-np atelier-resleri-color-l"></i>
             <i style="width:1rem;vertical-align:-0.5rem;color:{{a25service.colors[char.color2]}};display:inline;" class="atelier atelier-np atelier-resleri-color-r"></i>
-            <a (click)="openDifferentModal(charModal, char.slug, 'characters', $event);"
+            <a (click)="openDialog(char.slug, $event, 'characters', c2);"
               href="/{{gameURL}}/characters/{{char.slug}}/{{language}}">
               {{char.name}} {{char.title}}
             </a>
@@ -119,29 +119,5 @@
   </div>
 </div>
 }
-<ng-template #traitModal>
-  <div class="modal-body">
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <i class="fas fa-times-circle"></i>
-    </button>
-    <a25-trait inputSlug="{{selected}}" [showNav]="false"></a25-trait>
-  </div>
-</ng-template>
-<ng-template #itemModal>
-  <div class="modal-body">
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <i class="fas fa-times-circle"></i>
-    </button>
-    <a25-item inputSlug="{{selected}}" itemkind="materials" [showNav]="false"></a25-item>
-  </div>
-</ng-template>
-<ng-template #charModal>
-  <div class="modal-body">
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <i class="fas fa-times-circle"></i>
-    </button>
-    <a25-chara inputSlug="{{selected}}" [showNav]="false"></a25-chara>
-  </div>
-</ng-template>
 </div>
 }

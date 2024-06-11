@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { Popover } from '@app/views/_components/popover/popover.component';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
-import { CommonImports, PopoverBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
+import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
@@ -11,7 +12,7 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
   selector: 'brsl-item',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, PopoverBandaidModule]
+  imports: [...CommonImports, Popover]
 })
 export class BRSLItemComponent extends SingleComponent {
   expand = false;

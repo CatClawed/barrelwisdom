@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Blog, BlogPaginator } from '@app/views/main/_interfaces/blog';
 import { UserProfile } from '@app/views/main/_interfaces/user';

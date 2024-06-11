@@ -1,4 +1,4 @@
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { APP_ID, NgModule } from '@angular/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -15,37 +15,31 @@ const APP_CONTAINERS = [
   LayoutComponent
 ];
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    ...APP_CONTAINERS
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    MatSidenavModule,
-    MatMenuModule,
-    AppRoutingModule,
-  ],
-  providers: [
-    provideClientHydration(),
-    {
-      provide: APP_ID,
-      useValue: 'frontend'
-    },
-    CookieService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpErrorInterceptor, 
-      multi: true
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: JwtInterceptor,
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        ...APP_CONTAINERS
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        BrowserAnimationsModule,
+        MatSidenavModule,
+        MatMenuModule,
+        AppRoutingModule], providers: [
+        provideClientHydration(),
+        {
+            provide: APP_ID,
+            useValue: 'frontend'
+        },
+        CookieService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: HttpErrorInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: JwtInterceptor,
+            multi: true
+        },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule { }

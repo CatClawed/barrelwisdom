@@ -97,6 +97,9 @@ class Passive(models.Model):
     name = models.ForeignKey(Name, on_delete=models.CASCADE)
     desc = models.ForeignKey(Desc, on_delete=models.CASCADE)
     val  = models.IntegerField()
+    val2  = models.IntegerField(blank=True, null=True)
+    val3  = models.IntegerField(blank=True, null=True)
+    val4  = models.IntegerField(blank=True, null=True)
 
 # well they are equipped to characters...
 class Memoria(models.Model):

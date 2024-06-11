@@ -2,11 +2,12 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { Popover } from '@app/views/_components/popover/popover.component';
 import { Item } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
+import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 import { of } from 'rxjs';
-import { CommonImports, PopoverBandaidModule } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { A25IconComponent } from './a25-icon.component';
 
 @Component({
@@ -16,7 +17,7 @@ import { A25IconComponent } from './a25-icon.component';
   selector: 'a25-item',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, PopoverBandaidModule, A25IconComponent]
+  imports: [...CommonImports, A25IconComponent, Popover]
 })
 export class A25ItemComponent extends SingleComponent {
   @Input()
@@ -52,11 +53,12 @@ export class A25ItemComponent extends SingleComponent {
   }
 
   afterAssignment(): void {
+    let name = (this.language === 'en') ? this.data.name.normalize('NFD').replace(/[\u0300-\u036f]/g, "") : this.data.name;
     if (this.data.equip || this.data.combat) {
       this.data.desc = this.replaceVal(this.data)
     }
     this.seoImage = `${this.imgURL}items/${this.data.slug}.webp`
-    this.genericSEO(this.data.name,
+    this.genericSEO(name,
       this.data.desc ? this.data.desc.replaceAll('<br>', ' -- ') : `Material from ${this.gameTitle}`);
   }
 

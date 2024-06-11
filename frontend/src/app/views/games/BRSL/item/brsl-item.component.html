@@ -107,7 +107,7 @@
                   }
                 </ng-template>
                 <ol start="{{data.number}}" style="margin-bottom:0;">
-                  <li><a href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="effPopover" popoverTitle="{{data.effect.name}}">{{data.effect.name}}</a></li>
+                  <li><popover [template]="effPopover" title="{{data.effect.name}}">{{data.effect.name}}</popover></li>
                 </ol>
               }
             </td>
@@ -235,9 +235,9 @@
         <td style="width:50%;">{{eline.line}}</td>
         <td>
           <ol>
-            <li><a href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="effOnePopover"   popoverTitle="{{eline.effect1.name}}">{{eline.effect1.name}}</a></li>
-            <li><a href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="effTwoPopover"   popoverTitle="{{eline.effect2.name}}">{{eline.effect2.name}}</a></li>
-            <li><a href="javascript:void(0)" (click)="$event.preventDefault();" [popover]="effThreePopover" popoverTitle="{{eline.effect3.name}}">{{eline.effect3.name}}</a></li>
+            <li><popover [template]="effOnePopover"   title="{{eline.effect1.name}}">{{eline.effect1.name}}</popover></li>
+            <li><popover [template]="effTwoPopover"   title="{{eline.effect2.name}}">{{eline.effect2.name}}</popover></li>
+            <li><popover [template]="effThreePopover" title="{{eline.effect3.name}}">{{eline.effect3.name}}</popover></li>
           </ol>
         </td>
       </tr>
