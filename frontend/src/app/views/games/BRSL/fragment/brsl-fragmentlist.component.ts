@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PipeModule } from '@app/_helpers/pipes/pipes.module';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { Popover } from '@app/views/_components/popover/popover.component';
 import { Event } from '@app/views/games/BRSL/_services/brsl.interface';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
@@ -28,8 +29,9 @@ export class BRSLFragmentComponent extends FilterableComponent {
     protected readonly destroy$: DestroyService,
     private brslservice: BRSLService,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
   ) {
-    super(destroy$, route, seoService);
+    super(destroy$, route, breadcrumbService, seoService);
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       character: 'Any',
@@ -39,7 +41,7 @@ export class BRSLFragmentComponent extends FilterableComponent {
 
   changeData() {
     this.gameService(this.brslservice, 'fragments-and-dates');
-    this.genericSEO(`Fragments & Dates`, `All fragments and dates in ${this.gameTitle}.`);
+    this.genericSettings(`Fragments & Dates`, `All fragments and dates in ${this.gameTitle}.`);
     this.pageForm.reset();
     return forkJoin({
       character: this.brslservice.getCharacterList(this.language),

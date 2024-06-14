@@ -3,6 +3,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
@@ -30,8 +31,9 @@ export class A25ScoreBattleComponent extends FragmentedComponent {
     protected readonly destroy$: DestroyService,
     protected viewportScroller: ViewportScroller,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     protected a25service: A25Service,) {
-    super(destroy$, route, seoService, viewportScroller, loc);
+    super(destroy$, route, seoService, breadcrumbService, viewportScroller, loc);
   }
 
   changeData() {
@@ -42,7 +44,7 @@ export class A25ScoreBattleComponent extends FragmentedComponent {
       case "sc": this.title = "積分戰蟩"; break;
       default: this.title = "Score Battles";
     }
-    this.genericSEO(this.title, `All Score Battles in ${this.gameTitle}`);
+    this.genericSettings(this.title, `All Score Battles in ${this.gameTitle}`);
     return this.a25service.getScoreBattles(this.language);
   }
 } 

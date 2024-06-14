@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { Tooltip } from '@app/views/_components/tooltip/tooltip.component';
 import { A15Service } from '@app/views/games/A15/_services/a15.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -19,8 +20,9 @@ export class A15PropertyComponent extends SingleComponent {
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
     private a15service: A15Service,
+    protected breadcrumbService: BreadcrumbService,
     protected seoService: SeoService) {
-    super(destroy$, route, seoService);
+    super(destroy$, route, breadcrumbService, seoService);
   }
 
   changeData() {
@@ -28,6 +30,9 @@ export class A15PropertyComponent extends SingleComponent {
     return this.a15service.getProperty(this.slug, this.language);
   }
   afterAssignment(): void {
-    this.genericSEO(this.data.name, this.data.desc);
+    this.genericSettings(this.data.name, this.data.desc,
+      'Properties',
+      false,
+      this.inputSlug ? false : true);
   }
 } 

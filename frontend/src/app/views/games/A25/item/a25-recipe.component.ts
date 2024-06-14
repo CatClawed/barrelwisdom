@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { Popover } from '@app/views/_components/popover/popover.component';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -24,14 +25,15 @@ export class A25RecipeComponent extends SingleComponent {
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     protected a25service: A25Service,
     public historyService: HistoryService,) {
-    super(destroy$, route, seoService);
+    super(destroy$, route, breadcrumbService, seoService);
   }
 
   changeData() {
     this.gameService(this.a25service, 'items/recipes');
-    this.genericSEO(`Recipes`, `All recipes in ${this.gameTitle}.`);
+    this.genericSettings(`Recipes`, `All recipes in ${this.gameTitle}.`);
     return this.a25service.getRecipeList(this.language)
   }
 

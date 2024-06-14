@@ -4,6 +4,7 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { Catalyst } from '@app/views/games/A18/_services/a18.interface';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -35,11 +36,12 @@ export class A18CatalystlistComponent extends FilterableComponent {
     protected route: ActivatedRoute,
     protected location: Location,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
     private a18service: A18Service,
     protected readonly destroy$: DestroyService,
   ) {
-    super(destroy$, route, seoService);
+    super(destroy$, route, breadcrumbService, seoService);
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
     })
@@ -50,7 +52,7 @@ export class A18CatalystlistComponent extends FilterableComponent {
 
   changeData() {
     this.gameService(this.a18service, 'catalysts');
-    this.genericSEO(`Catalysts`, `The list of catalysts in ${this.gameTitle}.`);
+    this.genericSettings(`Catalysts`, `The list of catalysts in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a18service.getCatalystList(this.language);
   }

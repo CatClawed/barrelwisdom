@@ -1,13 +1,4 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
 @if (data; as item) {
-  @if (showNav && item.material) {
-    <Breadcrumb  [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Materials', '/'+gameURL+'/items/materials/'+language]]" [current]="item.name"></Breadcrumb>
-  }
-  @if (showNav && !item.material) {
-    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Synthesis Items', '/'+gameURL+'/items/synthesis/'+language]]" [current]="item.name"></Breadcrumb>
-  }
   <div class="mx-auto row spacer">
     <div class="{{colset}} card card-body" style="{{insertStyle(item)}}">
       <h4 class="card-title card-icon-space">

@@ -1,11 +1,5 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
-@if (!error) {
-  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Recipes'"></Breadcrumb>
-  <h1 id="0">Recipes</h1>
-}
 @if (data; as recipes) {
+  <h1 id="0">Recipes</h1>
   <button (click)="scroll(0)" mat-mini-fab color="primary"  style="position:fixed;bottom:3%;right:10%;z-index:10;">
     <mat-icon fontSet="fas" fontIcon="fa-arrow-up" ></mat-icon>
   </button>

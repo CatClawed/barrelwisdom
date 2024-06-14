@@ -1,9 +1,4 @@
-
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
 @if (!error) {
-  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Fragment Effects"></Breadcrumb>
   <h1>Fragment Effects</h1>
   <p>See <a routerLink="/{{gameURL}}/fragment-episodes">Fragment Episodes</a> for acqusition data.
   <div class="col-md-10 mx-auto">

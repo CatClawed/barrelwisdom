@@ -1,9 +1,4 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
-
 @if (!error) {
-  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Facility Sets"></Breadcrumb>
   <h1>Facility Sets</h1>
   <div class="col-md-10 mx-auto">
     <form [formGroup]="pageForm" class="form-horizontal">

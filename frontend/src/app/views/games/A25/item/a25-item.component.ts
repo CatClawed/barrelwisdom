@@ -2,6 +2,7 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { Popover } from '@app/views/_components/popover/popover.component';
 import { Item } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
@@ -35,8 +36,9 @@ export class A25ItemComponent extends SingleComponent {
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     protected a25service: A25Service) {
-    super(destroy$, route, seoService);
+    super(destroy$, route, breadcrumbService, seoService);
   }
 
   changeData() {
@@ -58,8 +60,9 @@ export class A25ItemComponent extends SingleComponent {
       this.data.desc = this.replaceVal(this.data)
     }
     this.seoImage = `${this.imgURL}items/${this.data.slug}.webp`
-    this.genericSEO(name,
-      this.data.desc ? this.data.desc.replaceAll('<br>', ' -- ') : `Material from ${this.gameTitle}`);
+    this.genericSettings(name,
+      this.data.desc ? this.data.desc.replaceAll('<br>', ' -- ') : `Material from ${this.gameTitle}`,
+      this.data.material ? 'Materials' : 'Synthesis Items', false, this.inputSlug ? false : true);
   }
 
   replaceVal(item: Item): string {

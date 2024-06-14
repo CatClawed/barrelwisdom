@@ -69,7 +69,7 @@ Be sure backend is running, as prerendering requires DB access.
 
 ```bash
 docker exec -it frontend bash
-npm run prerender
+ng build
 ```
 
 For the final docker image:

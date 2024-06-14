@@ -1,8 +1,4 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
 @if (!error) {
-  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Missions"></Breadcrumb>
   <h1>Missions</h1>
 }
 @if (data; as missions) {

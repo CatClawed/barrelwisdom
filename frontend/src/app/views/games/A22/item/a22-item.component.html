@@ -1,11 +1,4 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
-
 @if (data; as item) {
-  @if (showNav) {
-    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Items', '/'+gameURL+'/items/'+language]]" [current]="item.name"></Breadcrumb>
-  }
   <div class="mx-auto row spacer">
     <div class="{{colset}} card card-body">
       <h4 class="card-title card-icon-space">{{item.name}}</h4>
@@ -14,7 +7,6 @@
         <i class="atelier atelier-np atelier-ryza2-{{icons[item.itemtype]}}"></i>
         @if (item.isDLC) {
           <br />
-          }@if (item.isDLC) {
           <span class="badge bg-secondary">DLC</span>
         }
       </div>

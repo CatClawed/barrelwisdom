@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { A16Service } from '@app/views/games/A16/_services/a16.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
@@ -19,8 +20,9 @@ export class A16ItemComponent extends SingleComponent {
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
     private a16service: A16Service,
+    protected breadcrumbService: BreadcrumbService,
     protected seoService: SeoService) {
-    super(destroy$, route, seoService);
+    super(destroy$, route, breadcrumbService, seoService);
   }
 
   changeData() {
@@ -29,6 +31,9 @@ export class A16ItemComponent extends SingleComponent {
   }
   afterAssignment(): void {
     this.seoImage = `${this.imgURL}${this.section}/${this.data.slugname}.webp`
-    this.genericSEO(this.data.name, this.data.desc);
+    this.genericSettings(this.data.name, this.data.desc,
+      'Items',
+      false,
+      this.inputSlug ? false : true);
   }
 } 

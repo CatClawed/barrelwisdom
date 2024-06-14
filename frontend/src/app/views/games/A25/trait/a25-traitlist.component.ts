@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Trait } from '@app/views/games/A25/_services/a25.interface';
@@ -35,9 +36,10 @@ export class A25TraitlistComponent extends DialogUseComponent {
     protected route: ActivatedRoute,
     protected location: Location,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
     protected a25service: A25Service,) {
-    super(destroy$, router, route, location, seoService, cdkDialog);
+    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A25TraitComponent;
     this.c2 = A25CharaComponent;
     this.c3 = A25ItemComponent;
@@ -49,7 +51,7 @@ export class A25TraitlistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.a25service, 'traits');
-    this.genericSEO(`Traits`, `The list of traits in ${this.gameTitle}.`); 
+    this.genericSettings(`Traits`, `The list of traits in ${this.gameTitle}.`);
     this.pageForm.reset();
     return forkJoin({
       traits: this.a25service.getTraitList(this.language),

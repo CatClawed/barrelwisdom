@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { ItemList } from '@app/views/games/BRSL/_services/brsl.interface';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -32,9 +33,10 @@ export class BRSLItemlistComponent extends DialogUseComponent {
     protected route: ActivatedRoute,
     protected location: Location,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
     private brslservice: BRSLService,) {
-    super(destroy$, router, route, location, seoService, cdkDialog);
+    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = BRSLItemComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -45,7 +47,7 @@ export class BRSLItemlistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.brslservice, 'items');
-    this.genericSEO(`Items`, `The list of items in ${this.gameTitle}.`);
+    this.genericSettings(`Items`, `The list of items in ${this.gameTitle}.`);
     this.pageForm.reset();
     return forkJoin({
       items: this.brslservice.getItemList(this.language),

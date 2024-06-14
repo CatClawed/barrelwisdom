@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { Item } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -35,9 +36,10 @@ export class A25SynthesisListComponent extends DialogUseComponent {
     protected route: ActivatedRoute,
     protected location: Location,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
     protected a25service: A25Service) {
-    super(destroy$, router, route, location, seoService, cdkDialog);
+    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A25ItemComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -49,7 +51,7 @@ export class A25SynthesisListComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.a25service, 'items/synthesis');
-    this.genericSEO(`Synthesis Items`, `The list of synthesis items in ${this.gameTitle}.`);
+    this.genericSettings(`Synthesis Items`, `The list of synthesis items in ${this.gameTitle}.`);
     this.pageForm.reset();
     return forkJoin({
       items: this.a25service.getSynthList(this.language),

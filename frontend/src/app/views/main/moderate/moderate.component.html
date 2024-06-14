@@ -1,6 +1,3 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
 @if (comments) {
   @for (comment of comments; track comment) {
     @if (!comment.approved) {

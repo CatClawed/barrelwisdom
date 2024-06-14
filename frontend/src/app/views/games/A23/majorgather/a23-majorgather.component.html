@@ -1,8 +1,4 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
 @if (!error) {
-  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Major Gathering Spots'"></Breadcrumb>
   <h1>Major Gathering Spots</h1>
 }
 @if (data; as major) {

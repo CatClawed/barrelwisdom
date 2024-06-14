@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { Popover } from '@app/views/_components/popover/popover.component';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -30,8 +31,9 @@ export class A18ItemComponent extends SingleComponent {
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     private a18service: A18Service) {
-    super(destroy$, route, seoService);
+    super(destroy$, route, breadcrumbService, seoService);
   }
 
   changeData() {
@@ -42,6 +44,9 @@ export class A18ItemComponent extends SingleComponent {
   afterAssignment(): void {
     let name = (this.language === 'en') ? this.data.name.normalize('NFD').replace(/[\u0300-\u036f]/g, "") : this.data.name;
     this.seoImage = `${this.imgURL}${this.section}/${this.data.slug}.webp`
-    this.genericSEO(name, this.data.desc[0]);
+    this.genericSettings(name, this.data.desc[0],
+      'Items',
+      false,
+      this.inputSlug ? false : true);
   }
 } 

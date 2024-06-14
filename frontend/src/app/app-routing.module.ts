@@ -193,23 +193,9 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: ':section/:title',
-    component: LayoutComponent,
-    children: [
-      {
-        path: '', 
-        loadComponent: ()=> import('@app/views/main/blog/blog.component').then(m=>m.BlogComponent),
-      },
-    ]
-  },
-  {
     path: '',
     component: LayoutComponent,
     children: [
-      {
-        path: '', 
-        loadComponent: ()=> import('@app/views/main/home/home.component').then(m=>m.HomeComponent),
-      },
       {
         path: 'tag/:tagname', 
         loadComponent: ()=> import('@app/views/main/home/home.component').then(m=>m.HomeComponent),
@@ -220,9 +206,23 @@ const routes: Routes = [
         canMatch: [canMatchNumber]
       },
       {
+        path: '', 
+        loadComponent: ()=> import('@app/views/main/home/home.component').then(m=>m.HomeComponent),
+      },
+      {
         path: ':number',
         loadComponent: ()=> import('@app/views/main/home/home.component').then(m=>m.HomeComponent),
         canMatch: [canMatchNumber]
+      }
+    ]
+  },
+  {
+    path: ':section/:title',
+    component: LayoutComponent,
+    children: [
+      {
+        path: '', 
+        loadComponent: ()=> import('@app/views/main/blog/blog.component').then(m=>m.BlogComponent),
       },
     ]
   },

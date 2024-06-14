@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
@@ -18,8 +19,9 @@ export class A25TraitComponent extends SingleComponent {
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     protected a25service: A25Service) {
-    super(destroy$, route, seoService);
+    super(destroy$, route, breadcrumbService, seoService);
   }
 
   changeData() {
@@ -28,6 +30,10 @@ export class A25TraitComponent extends SingleComponent {
   }
 
   afterAssignment(): void {
-    this.genericSEO(this.data.name, this.data.desc.replaceAll('{0}', this.data.val[0] + ' ~ ' + this.data.val[4]));
+    this.genericSettings(this.data.name,
+      this.data.desc.replaceAll('{0}', this.data.val[0] + ' ~ ' + this.data.val[4]),
+      'Traits',
+      false,
+      this.inputSlug ? false : true);
   }
 } 

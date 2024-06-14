@@ -3,6 +3,7 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { RecipeIdeaList } from '@app/views/games/A18/_services/a18.interface';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -24,9 +25,10 @@ export class A18RecipeComponent extends FilterableComponent {
     protected readonly destroy$: DestroyService,
     protected route: ActivatedRoute,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
     private a18service: A18Service) {
-    super(destroy$, route, seoService);
+    super(destroy$, route, breadcrumbService, seoService);
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
     })
@@ -34,7 +36,7 @@ export class A18RecipeComponent extends FilterableComponent {
 
   changeData() {
     this.gameService(this.a18service, 'recipes');
-    this.genericSEO(`Recipes Ideas`, `The list of recipes ideas in ${this.gameTitle}.`);
+    this.genericSettings(`Recipe Ideas`, `The list of recipes ideas in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a18service.getRecipeList(this.language);
   }

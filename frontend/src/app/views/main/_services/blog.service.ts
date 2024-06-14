@@ -19,7 +19,7 @@ export class BlogService {
     return this.http.get<Blog>(`${environment.apiUrl}/blog/${slugtitle}/${section}/`)
   }
 
-  getMainPageBlogs(num: number, limit: number, tag: string): Observable<BlogPaginator> {
+  getMainPageBlogs(num: number, limit: number, tag?: string): Observable<BlogPaginator> {
     const offset = num == 0 ? 1 : limit * (num - 1);
     if (tag) {
       return this.http.get<BlogPaginator>(`${environment.apiUrl}/blog/?ordering=-created&tags__slugname=${tag}&limit=${limit}&offset=${offset}`)

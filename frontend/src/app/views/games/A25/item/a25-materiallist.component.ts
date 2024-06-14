@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { Popover } from '@app/views/_components/popover/popover.component';
 import { Item } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
@@ -41,10 +42,11 @@ export class A25MaterialListComponent extends DialogUseComponent {
     protected route: ActivatedRoute,
     protected location: Location,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
     protected a25service: A25Service,
   ) {
-    super(destroy$, router, route, location, seoService, cdkDialog);
+    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A25ItemComponent
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -57,7 +59,7 @@ export class A25MaterialListComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.a25service, 'items/materials');
-    this.genericSEO(`Materials`, `The list of materials in ${this.gameTitle}.`);
+    this.genericSettings(`Materials`, `The list of materials in ${this.gameTitle}.`);
     this.pageForm.reset()
     return forkJoin({
       items: this.a25service.getMaterialList(this.language),

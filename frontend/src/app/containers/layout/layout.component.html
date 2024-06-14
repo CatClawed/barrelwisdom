@@ -125,6 +125,40 @@
 </mat-sidenav>
 <div style="display:flex;">
   <div class="main">
+    @if (error.code !== 200) {
+      <div class="flex-row align-items-center" style="min-height:90vh;display:flex;">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col">
+                  <h1 style="float:right;height:min-content;width:min-content;font-size:calc(4rem + 0.1vw) !important;font-weight:300;">
+                    {{error.code}}</h1>
+                </div>
+                <div class="col">
+                  <h4 class="pt-3">{{error.title}}</h4>
+                  <p class="text-muted">{{error.desc}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center" style="margin:10px">
+            <img src="/media/main/punidead.svg" alt="" loading="lazy" style="width:30%;">
+          </div>
+        </div>
+      </div>
+    }
+    @else if (bread.current) {
+      <nav style="margin-top: 1em;" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/">Barrel Wisdom</a></li>
+          @for (crumb of bread.breadcrumbs; track crumb) {
+            <li class="breadcrumb-item"><a routerLink="/{{crumb[1]}}">{{crumb[0]}}</a></li>
+          }
+          <li class="breadcrumb-item active" aria-current="page">{{bread.current}}</li>
+        </ol>
+      </nav>
+    }
     <router-outlet></router-outlet>
   </div>
 </div>

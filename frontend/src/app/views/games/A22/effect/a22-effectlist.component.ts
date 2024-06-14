@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { Tooltip } from '@app/views/_components/tooltip/tooltip.component';
 import { Effect } from '@app/views/games/A22/_services/a22.interface';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
@@ -37,10 +38,11 @@ export class A22EffectlistComponent extends DialogUseComponent {
     protected route: ActivatedRoute,
     protected location: Location,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
     private a22service: A22Service,
   ) {
-    super(destroy$, router, route, location, seoService, cdkDialog);
+    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A22EffectComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -55,19 +57,19 @@ export class A22EffectlistComponent extends DialogUseComponent {
       case "normal": {
         this.normal = true;
         this.gameService(this.a22service, 'effects');
-        this.genericSEO('Effects', `The list of effects in ${this.gameTitle}.`)
+        this.genericSettings('Effects', `The list of effects in ${this.gameTitle}.`)
         break;
       }
       case "forge": {
         this.forge = true;
         this.gameService(this.a22service, 'forge-effects');
-        this.genericSEO('Forge Effects', `The list of forge effects in ${this.gameTitle}.`)
+        this.genericSettings('Forge Effects', `The list of forge effects in ${this.gameTitle}.`)
         break;
       }
       case "ev": {
         this.ev = true;
         this.gameService(this.a22service, 'ev-effects');
-        this.genericSEO('EV Effects', `The list of EV effects in ${this.gameTitle}.`)
+        this.genericSettings('EV Effects', `The list of EV effects in ${this.gameTitle}.`)
         break;
       }
     }

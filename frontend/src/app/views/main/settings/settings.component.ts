@@ -11,6 +11,7 @@ import { AuthenticationService } from "@app/services/authentication.service";
 import { DestroyService } from '@app/services/destroy.service';
 import { ErrorCodeService } from '@app/views/main/_services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { SettingService } from '@app/views/main/_services/setting.service';
 import { environment } from '@environments/environment';
 import { takeUntil } from 'rxjs/operators';
@@ -55,6 +56,7 @@ export class SettingsComponent {
     private errorCodeService: ErrorCodeService,
     private authenticationService: AuthenticationService,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     private metaService: Meta,
     private titleService: Title
   ) {
@@ -68,6 +70,7 @@ export class SettingsComponent {
     this.titleService.setTitle(`Settings - Barrel Wisdom`);
     this.metaService.updateTag({ name: `robots`, content: `noindex` }, `name="robots"`);
 
+    this.breadcrumbService.setBreadcrumbs([], undefined)
     if (this.user.group == "admin") {
       this.settingService.getSections()
         .pipe(takeUntil(this.destroy$))

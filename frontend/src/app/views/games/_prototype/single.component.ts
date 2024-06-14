@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { of } from 'rxjs';
@@ -15,7 +16,7 @@ export abstract class SingleComponent extends DataComponent {
     colset: string;
 
     @Input()
-    inputSlug: string = "";
+    inputSlug: string;
 
     @Input()
     showNav: boolean = true
@@ -26,8 +27,9 @@ export abstract class SingleComponent extends DataComponent {
     constructor(
         protected readonly destroy$: DestroyService,
         protected route: ActivatedRoute,
+        protected breadcrumbService: BreadcrumbService,
         protected seoService: SeoService) {
-        super(destroy$, route, seoService)
+        super(destroy$, route, breadcrumbService, seoService)
         this.slug = this.inputSlug ? this.inputSlug : this.route.snapshot.params.subject;
         if (this.showNav) this.colset = "col-md-9 mx-auto ";
     }
@@ -41,7 +43,7 @@ export abstract class SingleComponent extends DataComponent {
                     return this.changeData()
                 }),
                 catchError(error => {
-                    this.error = `${error.status}`;
+                    this.error = this.breadcrumbService.setStatus(error.status);
                     return of(undefined);
                 }),
                 takeUntil(this.destroy$)
@@ -49,7 +51,7 @@ export abstract class SingleComponent extends DataComponent {
             .subscribe(data => {
                 this.data = data;
                 if (this.data) {
-                    this.error = ``;
+                    this.error = this.breadcrumbService.setStatus(200);
                     this.afterAssignment();
                 }
             })

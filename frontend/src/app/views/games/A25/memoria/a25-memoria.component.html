@@ -1,10 +1,4 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
 @if (data; as memoria) {
-  @if (showNav) {
-    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Memoria', '/'+gameURL+'/memoria/'+language]]" [current]="memoria.name"></Breadcrumb>
-  }
   <div class="mx-auto row spacer">
     <div class="{{colset}} card card-body">
       <div class="flex">

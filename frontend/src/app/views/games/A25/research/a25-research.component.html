@@ -1,11 +1,5 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
-@if (!error) {
-  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Research"></Breadcrumb>
-  <h1>Research</h1>
-}
 @if (data) {
+  <h1>Research</h1>
   <mat-tab-group>
     <mat-tab label="{{kind[language][0]}}">
       <table class="tbl spacer" style="margin-top:1rem;"><tbody>

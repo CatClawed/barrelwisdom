@@ -1,18 +1,5 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
-
 @if (!error) {
   <div>
-    @if (normal) {
-      <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Effects"></Breadcrumb>
-    }
-    @if (forge) {
-      <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Forge Effects"></Breadcrumb>
-    }
-    @if (ev) {
-      <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="EV Effects"></Breadcrumb>
-    }
     @if (normal) {
       <h1>Effects</h1>
     }
@@ -35,14 +22,10 @@
               <mat-option value="1" selected> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-synthesis"></mat-icon> Any</mat-option>
               @if (forge) {
                 <mat-option value="Weapon"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-weapon"  ></mat-icon> Weapon</mat-option>
-              }
-              @if (forge) {
                 <mat-option value="Armor"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-armor"    ></mat-icon> Armor</mat-option>
               }
               @if (ev) {
                 <mat-option value="Attack"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-attack"    ></mat-icon> Attack</mat-option>
-              }
-              @if (ev) {
                 <mat-option value="Heal"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-heal"    ></mat-icon> Heal</mat-option>
               }
               @if (forge || ev) {
