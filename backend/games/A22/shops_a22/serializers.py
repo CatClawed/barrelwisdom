@@ -4,7 +4,6 @@ from games.A22.shops_a22.models import Shop
 # Complete Data for single languages
 class A22ShopSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
-    slug = serializers.CharField(source='slugname')
     class Meta:
         model = Shop
         fields = ['slug', 'name']

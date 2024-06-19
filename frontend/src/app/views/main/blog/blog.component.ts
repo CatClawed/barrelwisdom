@@ -153,9 +153,9 @@ export class BlogComponent implements OnInit {
         this.blog.title);
     }
     this.seoService.SEOSettings(
-      `${this.blog.section.name}/${this.blog.slugtitle}`,
+      `${this.blog.section.name}/${this.blog.slug}`,
       this.blog.section.fullname ? `${this.blog.title} - ${this.blog.section.fullname}` : this.blog.title,
-      this.blog.description,
+      this.blog.desc,
       this.blog.image
     );
   }

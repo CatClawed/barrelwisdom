@@ -11,7 +11,7 @@ class A12EffectViewSet(viewsets.ModelViewSet):
     queryset = Effect.objects.all()
     serializer_class = A12EffectSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    lookup_field = 'slugname'
+    lookup_field = 'slug'
 
     @action(detail=False)
     def en(self, request):
@@ -41,9 +41,9 @@ class A12EffectViewSet(viewsets.ModelViewSet):
         serializer = A12EffectSerializer(queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)
 
-    # allows easy access via catect/slugname/en
+    # allows easy access via catect/slug/en
     @action(detail=True, methods=['get'], url_path="en")
-    def en_full(self, request, slugname):
+    def en_full(self, request, slug):
         try:
             queryset = (
                 Effect.objects
@@ -53,7 +53,7 @@ class A12EffectViewSet(viewsets.ModelViewSet):
                 .prefetch_related(
                     'effectline_set__item__item_en',
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -61,7 +61,7 @@ class A12EffectViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ja")
-    def ja_full(self, request, slugname):
+    def ja_full(self, request, slug):
         try:
             queryset = (
                 Effect.objects
@@ -71,7 +71,7 @@ class A12EffectViewSet(viewsets.ModelViewSet):
                 .prefetch_related(
                     'effectline_set__item__item_en',
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404

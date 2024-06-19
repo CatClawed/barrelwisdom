@@ -154,9 +154,9 @@ export class CreateComponent {
   }
 
   blogPost() {
-    const slugtitle = this.slug(this.pageForm.get("title").value);
+    const slug = this.slug(this.pageForm.get("title").value);
     const nextURL = this.sectionList.find(obj => obj.id === +this.pageForm.get("section").value).name
-      + '/' + slugtitle;
+      + '/' + slug;
     let authors = [];
     if (this.blog && this.editMode) {
       authors = this.blog.author;
@@ -172,7 +172,7 @@ export class CreateComponent {
     for (let tag of this.currentTags) {
       let index = this.tagList.indexOf(tag);
       if (index < 0) {
-        newList.push({ name: tag, slugname: this.slug(tag) });
+        newList.push({ name: tag, slug: this.slug(tag) });
       }
       else {
         idList.push(this.tagIDList[index]);
@@ -184,7 +184,7 @@ export class CreateComponent {
           idList = this.handleTags(data, idList)
           return this.userService.blogPost(
             this.pageForm.get("title").value,
-            slugtitle,
+            slug,
             this.customLink(this.pageForm.get("body").value),
             this.pageForm.get("imgURL").value,
             this.pageForm.get("seoDesc").value,
@@ -283,7 +283,7 @@ export class CreateComponent {
         this.pageForm.get('title').setValue(this.blog.title);
         this.pageForm.get('body').setValue(this.blog.body);
         this.pageForm.get('section').setValue(this.blog.section);
-        this.pageForm.get('seoDesc').setValue(this.blog.description);
+        this.pageForm.get('seoDesc').setValue(this.blog.desc);
         this.pageForm.get('imgURL').setValue(this.blog.image);
         this.pageForm.get('authorLock').setValue(this.blog.authorlock);
 

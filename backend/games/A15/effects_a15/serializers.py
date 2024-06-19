@@ -5,10 +5,10 @@ from games.A15.items_a15.models import EffectLine
 
 class A15EffectLineerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
-    slugname = serializers.CharField(source='item.slugname')
+    slug = serializers.CharField(source='item.slug')
     class Meta:
         model = EffectLine
-        fields = ['name', 'slugname']
+        fields = ['name', 'slug']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -24,7 +24,7 @@ class A15EffectSerializer(serializers.ModelSerializer):
     effectline_set = A15EffectLineerializer(many=True)
     class Meta:
         model = Effect
-        fields = ['slugname', 'name', 'desc', "effectline_set"]
+        fields = ['slug', 'name', 'desc', "effectline_set"]
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -45,7 +45,7 @@ class A15EffectSerializerSimple(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Effect
-        fields = ['slugname', 'name']
+        fields = ['slug', 'name']
 
     def get_name(self,obj):
         if 'language' not in self.context:

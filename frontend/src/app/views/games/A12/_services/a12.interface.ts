@@ -1,5 +1,5 @@
 export interface NameLink {
-    slugname: string;
+    slug: string;
     name: string;
 }
 
@@ -14,13 +14,13 @@ export interface CategoryIcon {
 
 export interface Category {
     name: string;
-    slugname: string;
+    slug: string;
     icon_name: string;
 }
 
 export interface RegionName {
     name: string;
-    slugname: string;
+    slug: string;
     parentslug: string;
 }
 
@@ -29,14 +29,14 @@ export interface Region {
 }
 
 export interface Effect {
-    slugname: string;
+    slug: string;
     name: string;
     desc: string;
     effectline_set: NameLink[];
 }
 
 export interface Trait {
-    slugname: string;
+    slug: string;
     name: string;
     desc: string;
     cost: number;
@@ -49,7 +49,7 @@ export interface Trait {
 }
 
 export interface MonsterFull {
-    slugname: string;
+    slug: string;
     name: string;
     desc: string;
     race: string;
@@ -65,7 +65,7 @@ export interface MonsterFull {
 }
 
 export interface MonsterList {
-    slugname: string;
+    slug: string;
     name: string;
     level: number;
     race: string;
@@ -104,7 +104,7 @@ export interface Equipment {
 }
 
 export interface ItemList {
-    slugname: string;
+    slug: string;
     name: string;
     categories: CategoryIcon[];
     ingredient_set: Ingredient[];
@@ -113,7 +113,7 @@ export interface ItemList {
 }
 
 export interface ItemFull {
-    slugname: string;
+    slug: string;
     name: string;
     desc: string;
     item_type: string;
@@ -136,7 +136,7 @@ export interface ItemFull {
 }
 
 export interface Book {
-    slugname: string;
+    slug: string;
     name: string;
     desc: string;
     items: NameLink[];
@@ -146,7 +146,7 @@ export interface Book {
 }
 
 export interface CategoryItem {
-    slugname: string;
+    slug: string;
     name: string;
     level: number;
 }
@@ -157,14 +157,14 @@ export interface IngCat {
 
 export interface CategoryData {
     name: string;
-    slugname: string;
+    slug: string;
     icon_name: string;
     item_set: CategoryItem[];
     ingredientcat: IngCat[];
 }
 
 export interface FieldData {
-    slugname: string;
+    slug: string;
     name: string;
     unlock: string;
     ingredients: NameLink[];
@@ -174,6 +174,6 @@ export interface FieldData {
 
 export interface AreaData {
     name: string;
-    slugname: string;
+    slug: string;
     fields: FieldData[];
 }

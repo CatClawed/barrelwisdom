@@ -11,7 +11,7 @@ class A22EffectViewSet(viewsets.ModelViewSet):
     queryset = Effect.objects.filter(efftype='Normal')
     serializer_class = A22EffectSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    lookup_field = 'slugname'
+    lookup_field = 'slug'
     filterset_fields = ['efftype']
 
     # full effect list
@@ -83,7 +83,7 @@ class A22EffectViewSet(viewsets.ModelViewSet):
 
     # single effect view
     @action(detail=True, methods=['get'], url_path="en")
-    def en_full(self, request, slugname):
+    def en_full(self, request, slug):
         try:
             queryset = (
                 Effect.objects
@@ -96,7 +96,7 @@ class A22EffectViewSet(viewsets.ModelViewSet):
                     'effectline_set__effect__eff_en',
                     'effectline_set__item__item_en'
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -104,7 +104,7 @@ class A22EffectViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ja")
-    def ja_full(self, request, slugname):
+    def ja_full(self, request, slug):
         try:
             queryset = (
                 Effect.objects
@@ -117,7 +117,7 @@ class A22EffectViewSet(viewsets.ModelViewSet):
                     'effectline_set__effect__eff_ja',
                     'effectline_set__item__item_ja'
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -125,7 +125,7 @@ class A22EffectViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ko")
-    def ko_full(self, request, slugname):
+    def ko_full(self, request, slug):
         try:
             queryset = (
                 Effect.objects
@@ -138,7 +138,7 @@ class A22EffectViewSet(viewsets.ModelViewSet):
                     'effectline_set__effect__eff_ko',
                     'effectline_set__item__item_ko'
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -146,7 +146,7 @@ class A22EffectViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="fr")
-    def fr_full(self, request, slugname):
+    def fr_full(self, request, slug):
         try:
             queryset = (
                 Effect.objects
@@ -159,7 +159,7 @@ class A22EffectViewSet(viewsets.ModelViewSet):
                     'effectline_set__effect__eff_fr',
                     'effectline_set__item__item_fr'
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -167,7 +167,7 @@ class A22EffectViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="sc")
-    def sc_full(self, request, slugname):
+    def sc_full(self, request, slug):
         try:
             queryset = (
                 Effect.objects
@@ -180,7 +180,7 @@ class A22EffectViewSet(viewsets.ModelViewSet):
                     'effectline_set__effect__eff_sc',
                     'effectline_set__item__item_sc'
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -188,7 +188,7 @@ class A22EffectViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="tc")
-    def tc_full(self, request, slugname):
+    def tc_full(self, request, slug):
         try:
             queryset = (
                 Effect.objects
@@ -201,7 +201,7 @@ class A22EffectViewSet(viewsets.ModelViewSet):
                     'effectline_set__effect__eff_tc',
                     'effectline_set__item__item_tc'
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -212,7 +212,7 @@ class A22EVEffectViewSet(viewsets.ModelViewSet):
     queryset = Effect.objects.filter(efftype='EV')
     serializer_class = A22EVEffectSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    lookup_field = 'slugname'
+    lookup_field = 'slug'
     filterset_fields = ['efftype']
 
     # full effect list
@@ -310,7 +310,7 @@ class A22ForgeEffectViewSet(viewsets.ModelViewSet):
     queryset = Effect.objects.filter(efftype='Forge')
     serializer_class = A22EffectSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    lookup_field = 'slugname'
+    lookup_field = 'slug'
     filterset_fields = ['efftype']
 
     # full effect list

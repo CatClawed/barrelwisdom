@@ -11,7 +11,7 @@ class A16PropertyViewSet(viewsets.ModelViewSet):
     queryset = Property.objects.all()
     serializer_class = A16PropertySerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    lookup_field = 'slugname'
+    lookup_field = 'slug'
 
     @action(detail=False)
     def en(self, request):
@@ -51,9 +51,9 @@ class A16PropertyViewSet(viewsets.ModelViewSet):
         serializer = A16PropertySerializer(queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)
 
-    # allows easy access via catect/slugname/en
+    # allows easy access via catect/slug/en
     @action(detail=True, methods=['get'], url_path="en")
-    def en_full(self, request, slugname):
+    def en_full(self, request, slug):
         try:
             queryset = (
                 Property.objects
@@ -70,7 +70,7 @@ class A16PropertyViewSet(viewsets.ModelViewSet):
                     'combo3',
                     'combo3__prop_en'
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -78,7 +78,7 @@ class A16PropertyViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ja")
-    def ja_full(self, request, slugname):
+    def ja_full(self, request, slug):
         try:
             queryset = (
                 Property.objects
@@ -95,7 +95,7 @@ class A16PropertyViewSet(viewsets.ModelViewSet):
                     'combo3',
                     'combo3__prop_ja'
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404

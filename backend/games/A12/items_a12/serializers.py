@@ -11,7 +11,7 @@ class A12ItemNameSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Item
-        fields = ['slugname', 'name']
+        fields = ['slug', 'name']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -83,7 +83,7 @@ class A12BookNameSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Book
-        fields = ['slugname', 'name']
+        fields = ['slug', 'name']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -100,7 +100,7 @@ class A12ItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Item
-        fields = ['slugname', 'name', 'level', 'categories', 'ingredient_set', 'isDX', 'isDLC', 'item_type']
+        fields = ['slug', 'name', 'level', 'categories', 'ingredient_set', 'isDX', 'isDLC', 'item_type']
 
     def to_representation(self, instance):
         result = super(A12ItemSerializer, self).to_representation(instance)
@@ -127,7 +127,7 @@ class A12ItemFullSerializer(serializers.ModelSerializer):
     book_set = A12BookNameSerializer(many=True)
     class Meta:
         model = Item
-        fields = ['slugname', 'name', 'desc', 'note', 'level', 'locations', 'monsters', 'traits', 'categories', 'ingredient_set', 'equip_set', 'effectline_set', 'book_set', 'isDX', 'isDLC', 'time', 'mp', 'price', 'uses', 'item_type', 'item_subtype']
+        fields = ['slug', 'name', 'desc', 'note', 'level', 'locations', 'monsters', 'traits', 'categories', 'ingredient_set', 'equip_set', 'effectline_set', 'book_set', 'isDX', 'isDLC', 'time', 'mp', 'price', 'uses', 'item_type', 'item_subtype']
 
     def to_representation(self, instance):
         result = super(A12ItemFullSerializer, self).to_representation(instance)
@@ -154,7 +154,7 @@ class A12BookSerializer(serializers.ModelSerializer):
     items = A12ItemNameSerializer(many=True)
     class Meta:
         model = Book
-        fields = ['slugname', 'name', 'desc', 'items', 'note', 'isDLC', 'isDX']
+        fields = ['slug', 'name', 'desc', 'items', 'note', 'isDLC', 'isDX']
 
     def get_name(self,obj):
         if 'language' not in self.context:

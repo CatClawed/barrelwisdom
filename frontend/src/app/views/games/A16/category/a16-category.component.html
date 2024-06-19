@@ -7,7 +7,7 @@
         @for (item of category.item_set; track item) {
           <tr>
             <td>
-              <a routerLink="/{{gameURL}}/items/{{item.slugname}}/{{language}}">{{item.name}}</a>
+              <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
               <br /><b>LV {{item.level}}</b><br />
               @if (item.fire) {
                 <i style="color:#ac504f;"  class="atelier atelier-np atelier-shallie-fire"></i>
@@ -48,7 +48,7 @@
           @for (item of category.ingredientcat; track item) {
             <tr>
               <td>
-                <a routerLink="/{{gameURL}}/items/{{item.synthitem.slugname}}/{{language}}">{{item.synthitem.name}}</a>
+                <a routerLink="/{{gameURL}}/items/{{item.synthitem.slug}}/{{language}}">{{item.synthitem.name}}</a>
                 <br /><b>LV {{item.synthitem.level}}</b><br />
                 @if (item.synthitem.fire) {
                   <i style="color:#ac504f;"  class="atelier atelier-np atelier-shallie-fire"></i>

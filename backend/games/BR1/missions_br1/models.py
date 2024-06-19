@@ -1,7 +1,7 @@
 from django.db import models
 
 class Mission(models.Model):
-    slugname = models.SlugField(max_length=300, default="")
+    slug = models.SlugField(max_length=300, default="")
     name = models.CharField(max_length=300)
     character = models.CharField(max_length=20, default="")
     points = models.IntegerField()

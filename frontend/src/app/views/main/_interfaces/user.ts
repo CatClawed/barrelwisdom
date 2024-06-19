@@ -9,7 +9,7 @@ export class User {
 
 export class EditedBlogs {
     title: string;
-    slugtitle: string;
+    slug: string;
     secname: string;
     secfull: string;
 }

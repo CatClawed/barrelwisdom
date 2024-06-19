@@ -4,7 +4,6 @@ from games.A22.categories_a22.models import Category
 from games.A22.items_a22.models import Item, Ingredient, CategoryItems
 
 class A22ItemSerializer(serializers.ModelSerializer):
-    slug = serializers.CharField(source='slugname')
     name = serializers.SerializerMethodField()
     class Meta:
         model = Item
@@ -37,7 +36,6 @@ class A22IngredientSerializer(serializers.ModelSerializer):
 
 # Full Data
 class A22CategorySerializer(serializers.ModelSerializer):
-    slug = serializers.CharField(source='slugname')
     name = serializers.SerializerMethodField()
     class Meta:
         model = Category
@@ -83,7 +81,6 @@ class A22CategorySerializerName(serializers.ModelSerializer):
             return obj.cat_en.name
         
 class A22CategoryDataSerializer(serializers.ModelSerializer):
-    slug = serializers.CharField(source='slugname')
     name = serializers.SerializerMethodField()
     item_set = A22ItemSerializer(many=True)
     ing = A22IngredientSerializer(source='item_set__ingredientcat', many=True, read_only=True)
@@ -114,7 +111,7 @@ class A22CategoryDataSerializer(serializers.ModelSerializer):
         
 class A22CTSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
-    slug = serializers.CharField(source='category.slugname')
+    slug = serializers.CharField(source='category.slug')
     items = A22ItemSerializer(many=True, read_only=True)
     ingredients = A22ItemSerializer(many=True, read_only=True)
     class Meta:

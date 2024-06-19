@@ -30,7 +30,7 @@ export class A16BookComponent extends SingleComponent {
   }
 
   afterAssignment(): void {
-    this.seoImage = `${this.imgURL}items/${this.data.slugname}.webp`
+    this.seoImage = `${this.imgURL}items/${this.data.slug}.webp`
     this.genericSettings(this.data.name, this.data.desc,
       'Recipe Books',
       false,

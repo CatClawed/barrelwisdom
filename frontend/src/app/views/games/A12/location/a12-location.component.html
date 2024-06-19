@@ -5,8 +5,8 @@
     <ol>
       @for (area of location.fields; track area) {
         <li>
-          <a href="/{{gameURL}}/locations/{{location.slugname}}/{{language}}#{{area.slugname}}"
-            (click)="$event.preventDefault();scroll(area.slugname, location.slugname)">
+          <a href="/{{gameURL}}/locations/{{location.slug}}/{{language}}#{{area.slug}}"
+            (click)="$event.preventDefault();scroll(area.slug, location.slug)">
             {{area.name}}
           </a>
         </li>
@@ -14,7 +14,7 @@
     </ol>
   </div>
   @for (area of location.fields; track area) {
-    <h2 id="{{area.slugname}}">{{area.name}}</h2>
+    <h2 id="{{area.slug}}">{{area.name}}</h2>
     @if (area.unlock) {
       <p><b>Unlock:</b> {{area.unlock}}</p>
     }
@@ -33,7 +33,7 @@
           <td>
             <ul class="hide-bullets">
               @for (it of area.ingredients; track it) {
-                <li><a routerLink="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a></li>
+                <li><a routerLink="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a></li>
               }
             </ul>
           </td>
@@ -42,7 +42,7 @@
           <td>
             <ul class="hide-bullets">
               @for (it of area.monsters; track it) {
-                <li><a routerLink="/{{gameURL}}/monsters/{{it.slugname}}/{{language}}">{{it.name}}</a></li>
+                <li><a routerLink="/{{gameURL}}/monsters/{{it.slug}}/{{language}}">{{it.name}}</a></li>
               }
             </ul>
           </td>

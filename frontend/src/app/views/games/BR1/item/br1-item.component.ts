@@ -29,7 +29,7 @@ export class BR1ItemComponent extends SingleComponent {
   }
 
   afterAssignment(): void {
-    this.genericSettings(this.data.name, this.data.description,
+    this.genericSettings(this.data.name, this.data.desc,
       'Items',
       false,
       this.inputSlug ? false : true);

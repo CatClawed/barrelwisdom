@@ -14,7 +14,7 @@
   <div class="item-grid">
     @for (frag of filteredFragmentEffects | async; track identify2($index, frag)) {
       <div class="card card-body">
-        <h4 class="card-title" id="{{frag.slugname}}">
+        <h4 class="card-title" id="{{frag.slug}}">
           {{frag.name}}
         </h4>
         <p>{{frag.effect}}</p>
@@ -24,7 +24,7 @@
         @if (frag.upgrades) {
           <ul>
             @for (up of frag.upgrades; track up) {
-              <li><a routerLink="/{{gameURL}}/items/{{up.item.slugname}}/{{language}}">{{up.item.name}}</a> x{{up.num}}</li>
+              <li><a routerLink="/{{gameURL}}/items/{{up.item.slug}}/{{language}}">{{up.item.name}}</a> x{{up.num}}</li>
             }
           </ul>
         }

@@ -9,7 +9,7 @@ class BR1MissionViewSet(viewsets.ModelViewSet):
     queryset = Mission.objects.all()
     serializer_class = BR1Missionerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    lookup_field = 'slugname'
+    lookup_field = 'slug'
 
     @action(detail=False)
     def en(self, request):

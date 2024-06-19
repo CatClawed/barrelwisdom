@@ -42,7 +42,7 @@
         class="fas fa-tag"></i></i>
         @for (tag of blog.tags; track tag) {
           <a rel="tag" style="margin-right: 1em; margin-top: 0.5em; font-size: 1rem;"
-          class="badge bg-primary" routerLink="/tag/{{tag.slugname}}">{{tag.name}} </a>
+          class="badge bg-primary" routerLink="/tag/{{tag.slug}}">{{tag.name}} </a>
         }
       </div>
     }

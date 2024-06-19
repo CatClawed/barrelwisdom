@@ -11,7 +11,7 @@ class BR1DemonViewSet(viewsets.ModelViewSet):
     queryset = Demon.objects.all()
     serializer_class = BR1DemonSerializerSimple
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    lookup_field = 'slugname'
+    lookup_field = 'slug'
 
     @action(detail=False)
     def en(self, request):
@@ -25,9 +25,9 @@ class BR1DemonViewSet(viewsets.ModelViewSet):
         serializer = BR1DemonSerializer(queryset, many=True)
         return Response(serializer.data)
 
-    # allows easy access via catect/slugname/en
+    # allows easy access via catect/slug/en
     @action(detail=True, methods=['get'], url_path="en")
-    def en_full(self, request, slugname):
+    def en_full(self, request, slug):
         try:
             queryset = (
                 Demon.objects
@@ -35,7 +35,7 @@ class BR1DemonViewSet(viewsets.ModelViewSet):
                     'item_set',
                     'locations',
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404

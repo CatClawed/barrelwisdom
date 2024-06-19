@@ -12,7 +12,7 @@
         <ul>
           @for (e of effect.effectdata_set; track e) {
             <li>
-              <a routerLink="/{{gameURL}}/items/{{e.effectlines_set[0].slugname}}/{{language}}">{{e.effectlines_set[0].name}}</a>
+              <a routerLink="/{{gameURL}}/items/{{e.effectlines_set[0].slug}}/{{language}}">{{e.effectlines_set[0].name}}</a>
             </li>
           }
         </ul>

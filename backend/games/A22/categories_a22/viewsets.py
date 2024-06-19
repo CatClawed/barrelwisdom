@@ -12,7 +12,7 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = A22CategorySerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    lookup_field = 'slugname'
+    lookup_field = 'slug'
 
     @action(detail=False)
     def en(self, request):
@@ -80,9 +80,9 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
         serializer = A22CategorySerializer(queryset, many=True, context={'language': 'tc'})
         return Response(serializer.data)
 
-    # allows easy access via catect/slugname/en
+    # allows easy access via catect/slug/en
     @action(detail=True, methods=['get'], url_path="en")
-    def en_full(self, request, slugname):
+    def en_full(self, request, slug):
         try:
             queryset = (
                 CategoryItems.objects
@@ -93,7 +93,7 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
                     'items__item_en',
                     'ingredients__item_en',
                 )
-                .get(category__slugname=slugname)
+                .get(category__slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -101,7 +101,7 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ja")
-    def ja_full(self, request, slugname):
+    def ja_full(self, request, slug):
         try:
             queryset = (
                 CategoryItems.objects
@@ -112,7 +112,7 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
                     'items__item_ja',
                     'ingredients__item_ja',
                 )
-                .get(category__slugname=slugname)
+                .get(category__slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -120,7 +120,7 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ko")
-    def ko_full(self, request, slugname):
+    def ko_full(self, request, slug):
         try:
             queryset = (
                 CategoryItems.objects
@@ -131,7 +131,7 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
                     'items__item_ko',
                     'ingredients__item_ko',
                 )
-                .get(category__slugname=slugname)
+                .get(category__slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -139,7 +139,7 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="fr")
-    def fr_full(self, request, slugname):
+    def fr_full(self, request, slug):
         try:
             queryset = (
                 CategoryItems.objects
@@ -150,7 +150,7 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
                     'items__item_fr',
                     'ingredients__item_fr',
                 )
-                .get(category__slugname=slugname)
+                .get(category__slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -158,7 +158,7 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="sc")
-    def sc_full(self, request, slugname):
+    def sc_full(self, request, slug):
         try:
             queryset = (
                 CategoryItems.objects
@@ -169,7 +169,7 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
                     'items__item_sc',
                     'ingredients__item_sc',
                 )
-                .get(category__slugname=slugname)
+                .get(category__slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -177,7 +177,7 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="tc")
-    def tc_full(self, request, slugname):
+    def tc_full(self, request, slug):
         try:
             queryset = (
                 CategoryItems.objects
@@ -188,7 +188,7 @@ class A22CategoryViewSet(viewsets.ModelViewSet):
                     'items__item_tc',
                     'ingredients__item_tc',
                 )
-                .get(category__slugname=slugname)
+                .get(category__slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404

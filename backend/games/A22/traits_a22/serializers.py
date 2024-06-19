@@ -5,7 +5,6 @@ from collections import OrderedDict
 
 # to prevent circular dependencies I guess
 class A22ItemSerializer(serializers.ModelSerializer):
-    slug = serializers.CharField(source='slugname')
     name = serializers.SerializerMethodField()
     class Meta:
         model = Item
@@ -30,7 +29,6 @@ class A22ItemSerializer(serializers.ModelSerializer):
 class A22TraitSerializerSimple(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     desc = serializers.SerializerMethodField()
-    slug = serializers.CharField(source='slugname')
     class Meta:
         model = Trait
         fields = ['slug', 'name', 'desc']
@@ -51,25 +49,24 @@ class A22TraitSerializerSimple(serializers.ModelSerializer):
             return obj.trait_en.name
     def get_desc(self,obj):
         if 'language' not in self.context:
-            return obj.trait_en.description
+            return obj.trait_en.desc
         elif self.context['language'] == 'ja':
-            return obj.trait_ja.description
+            return obj.trait_ja.desc
         elif self.context['language'] == 'ko':
-            return obj.trait_ko.description
+            return obj.trait_ko.desc
         elif self.context['language'] == 'fr':
-            return obj.trait_fr.description
+            return obj.trait_fr.desc
         elif self.context['language'] == 'sc':
-            return obj.trait_sc.description
+            return obj.trait_sc.desc
         elif self.context['language'] == 'tc':
-            return obj.trait_tc.description
+            return obj.trait_tc.desc
         else:
-            return obj.trait_en.description
+            return obj.trait_en.desc
 
 # Complete Data for single languages
 class A22TraitSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     desc = serializers.SerializerMethodField()
-    slug = serializers.CharField(source='slugname')
     item_set = A22ItemSerializer(many=True)
     class Meta:
         model = Trait
@@ -91,19 +88,19 @@ class A22TraitSerializer(serializers.ModelSerializer):
             return obj.trait_en.name
     def get_desc(self,obj):
         if 'language' not in self.context:
-            return obj.trait_en.description
+            return obj.trait_en.desc
         elif self.context['language'] == 'ja':
-            return obj.trait_ja.description
+            return obj.trait_ja.desc
         elif self.context['language'] == 'ko':
-            return obj.trait_ko.description
+            return obj.trait_ko.desc
         elif self.context['language'] == 'fr':
-            return obj.trait_fr.description
+            return obj.trait_fr.desc
         elif self.context['language'] == 'sc':
-            return obj.trait_sc.description
+            return obj.trait_sc.desc
         elif self.context['language'] == 'tc':
-            return obj.trait_tc.description
+            return obj.trait_tc.desc
         else:
-            return obj.trait_en.description
+            return obj.trait_en.desc
     def to_representation(self, instance):
         result = super(A22TraitSerializer, self).to_representation(instance)
         return OrderedDict((k, v) for k, v in result.items() 

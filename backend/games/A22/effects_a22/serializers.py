@@ -5,7 +5,6 @@ from games.A22.items_a22.models import EffectLine
 
 # parents and effects
 class A22ExtraSerializer(serializers.ModelSerializer):
-    slug = serializers.CharField(source='slugname')
     name = serializers.SerializerMethodField()
     desc = serializers.SerializerMethodField()
     class Meta:
@@ -28,19 +27,19 @@ class A22ExtraSerializer(serializers.ModelSerializer):
             return obj.eff_en.name
     def get_desc(self,obj):
         if 'language' not in self.context:
-            return obj.eff_en.description
+            return obj.eff_en.desc
         elif self.context['language'] == 'ja':
-            return obj.eff_ja.description
+            return obj.eff_ja.desc
         elif self.context['language'] == 'ko':
-            return obj.eff_ko.description
+            return obj.eff_ko.desc
         elif self.context['language'] == 'fr':
-            return obj.eff_fr.description
+            return obj.eff_fr.desc
         elif self.context['language'] == 'sc':
-            return obj.eff_sc.description
+            return obj.eff_sc.desc
         elif self.context['language'] == 'tc':
-            return obj.eff_tc.description
+            return obj.eff_tc.desc
         else:
-            return obj.eff_en.description
+            return obj.eff_en.desc
     def to_representation(self, instance):
         result = super(A22ExtraSerializer, self).to_representation(instance)
         if(result['efftype'] != 'EV'):
@@ -50,7 +49,6 @@ class A22ExtraSerializer(serializers.ModelSerializer):
         
 # parents and effects
 class A22SimpleExtraSerializer(serializers.ModelSerializer):
-    slug = serializers.CharField(source='slugname')
     name = serializers.SerializerMethodField()
     class Meta:
         model = Effect
@@ -73,7 +71,6 @@ class A22SimpleExtraSerializer(serializers.ModelSerializer):
 
 # Simplified Data for single languages
 class A22EffectSerializer(serializers.ModelSerializer):
-    slug = serializers.CharField(source='slugname')
     name = serializers.SerializerMethodField()
     desc = serializers.SerializerMethodField()
     class Meta:
@@ -96,19 +93,19 @@ class A22EffectSerializer(serializers.ModelSerializer):
             return obj.eff_en.name
     def get_desc(self,obj):
         if 'language' not in self.context:
-            return obj.eff_en.description
+            return obj.eff_en.desc
         elif self.context['language'] == 'ja':
-            return obj.eff_ja.description
+            return obj.eff_ja.desc
         elif self.context['language'] == 'ko':
-            return obj.eff_ko.description
+            return obj.eff_ko.desc
         elif self.context['language'] == 'fr':
-            return obj.eff_fr.description
+            return obj.eff_fr.desc
         elif self.context['language'] == 'sc':
-            return obj.eff_sc.description
+            return obj.eff_sc.desc
         elif self.context['language'] == 'tc':
-            return obj.eff_tc.description
+            return obj.eff_tc.desc
         else:
-            return obj.eff_en.description
+            return obj.eff_en.desc
     def to_representation(self, instance):
         result = super(A22EffectSerializer, self).to_representation(instance)
         return OrderedDict((k, v) for k, v in result.items() 
@@ -116,7 +113,6 @@ class A22EffectSerializer(serializers.ModelSerializer):
         
 # Simplified Data for single languages
 class A22EVEffectSerializer(serializers.ModelSerializer):
-    slug = serializers.CharField(source='slugname')
     name = serializers.SerializerMethodField()
     desc = serializers.SerializerMethodField()
     effects = A22ExtraSerializer(many=True)
@@ -140,26 +136,26 @@ class A22EVEffectSerializer(serializers.ModelSerializer):
             return obj.eff_en.name
     def get_desc(self,obj):
         if 'language' not in self.context:
-            return obj.eff_en.description
+            return obj.eff_en.desc
         elif self.context['language'] == 'ja':
-            return obj.eff_ja.description
+            return obj.eff_ja.desc
         elif self.context['language'] == 'ko':
-            return obj.eff_ko.description
+            return obj.eff_ko.desc
         elif self.context['language'] == 'fr':
-            return obj.eff_fr.description
+            return obj.eff_fr.desc
         elif self.context['language'] == 'sc':
-            return obj.eff_sc.description
+            return obj.eff_sc.desc
         elif self.context['language'] == 'tc':
-            return obj.eff_tc.description
+            return obj.eff_tc.desc
         else:
-            return obj.eff_en.description
+            return obj.eff_en.desc
     def to_representation(self, instance):
         result = super(A22EVEffectSerializer, self).to_representation(instance)
         return OrderedDict((k, v) for k, v in result.items() 
                            if v not in [None, [], '', {}])
         
 class A22EffectLineSerializer(serializers.ModelSerializer):
-    slug = serializers.CharField(source='item.slugname')
+    slug = serializers.CharField(source='item.slug')
     name = serializers.SerializerMethodField()
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -183,7 +179,6 @@ class A22EffectLineSerializer(serializers.ModelSerializer):
 
 # Full Data for single languages
 class A22EffectSerializerFull(serializers.ModelSerializer):
-    slug = serializers.CharField(source='slugname')
     name = serializers.SerializerMethodField()
     desc = serializers.SerializerMethodField()
     effects = A22ExtraSerializer(many=True)
@@ -209,19 +204,19 @@ class A22EffectSerializerFull(serializers.ModelSerializer):
             return obj.eff_en.name
     def get_desc(self,obj):
         if 'language' not in self.context:
-            return obj.eff_en.description
+            return obj.eff_en.desc
         elif self.context['language'] == 'ja':
-            return obj.eff_ja.description
+            return obj.eff_ja.desc
         elif self.context['language'] == 'ko':
-            return obj.eff_ko.description
+            return obj.eff_ko.desc
         elif self.context['language'] == 'fr':
-            return obj.eff_fr.description
+            return obj.eff_fr.desc
         elif self.context['language'] == 'sc':
-            return obj.eff_sc.description
+            return obj.eff_sc.desc
         elif self.context['language'] == 'tc':
-            return obj.eff_tc.description
+            return obj.eff_tc.desc
         else:
-            return obj.eff_en.description
+            return obj.eff_en.desc
     def to_representation(self, instance):
         result = super(A22EffectSerializerFull, self).to_representation(instance)
         if result['efftype'] != 'EV':

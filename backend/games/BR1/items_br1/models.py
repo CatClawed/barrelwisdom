@@ -4,9 +4,9 @@ from games.BR1.areas_br1.models import Area
 from games.BR1.missions_br1.models import Mission
 
 class Item(models.Model):
-    slugname = models.SlugField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=50, unique=True)
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=500)
+    desc = models.CharField(max_length=500)
     index = models.IntegerField(default=-1)
     effect = models.CharField(max_length=200)
     acquisition = models.CharField(max_length=200)

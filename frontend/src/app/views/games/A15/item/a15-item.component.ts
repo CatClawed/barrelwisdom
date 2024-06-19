@@ -35,7 +35,7 @@ export class A15ItemComponent extends SingleComponent {
     return this.a15service.getItem(this.slug, this.language);
   }
   afterAssignment(): void {
-    this.seoImage = `${this.imgURL}${this.section}/${this.data.slugname}.webp`
+    this.seoImage = `${this.imgURL}${this.section}/${this.data.slug}.webp`
     this.genericSettings(this.data.name, this.data.desc,
       'Items',
       false,

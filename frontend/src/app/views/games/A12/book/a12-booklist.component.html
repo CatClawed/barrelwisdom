@@ -14,7 +14,7 @@
     @for (bk of filteredBooks | async; track identify2($index, bk)) {
       <div  class="card card-body">
         <h4 class="card-title card-icon-space">
-          <a (click)="openDialog(bk.slugname, $event);" href="/{{gameURL}}/recipe-books/{{bk.slugname}}/{{language}}">{{bk.name}}</a>
+          <a (click)="openDialog(bk.slug, $event);" href="/{{gameURL}}/recipe-books/{{bk.slug}}/{{language}}">{{bk.name}}</a>
         </h4>
         <div class="card-icon-position">
           @if (bk.isDLC) {
@@ -24,15 +24,15 @@
             <span class="badge bg-secondary">DX</span>
           }
         </div>
-        <a class="card-item-display" (click)="openDialog(bk.slugname, $event);" href="/{{gameURL}}/recipe-books/{{bk.slugname}}/{{language}}">
-          <img loading="lazy" src="{{imgURL}}items/{{bk.slugname}}.webp" alt="{{bk.name}}">
+        <a class="card-item-display" (click)="openDialog(bk.slug, $event);" href="/{{gameURL}}/recipe-books/{{bk.slug}}/{{language}}">
+          <img loading="lazy" src="{{imgURL}}items/{{bk.slug}}.webp" alt="{{bk.name}}">
         </a>
         <p><b>Acquisition: </b>{{bk.note}}</p>
         @if (bk.items) {
           <b>Items:</b>
           <ul>
             @for (item of bk.items; track item) {
-              <li><a routerLink="/{{gameURL}}/items/{{item.slugname}}/{{language}}">{{item.name}}</a></li>
+              <li><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
             }
           </ul>
         }

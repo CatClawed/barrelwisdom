@@ -11,7 +11,7 @@ class A12TraitViewSet(viewsets.ModelViewSet):
     queryset = Trait.objects.all()
     serializer_class = A12TraitSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    lookup_field = 'slugname'
+    lookup_field = 'slug'
 
     @action(detail=False)
     def en(self, request):
@@ -41,9 +41,9 @@ class A12TraitViewSet(viewsets.ModelViewSet):
         serializer = A12TraitSerializer(queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)
 
-    # allows easy access via catect/slugname/en
+    # allows easy access via catect/slug/en
     @action(detail=True, methods=['get'], url_path="en")
-    def en_full(self, request, slugname):
+    def en_full(self, request, slug):
         try:
             queryset = (
                 Trait.objects
@@ -53,7 +53,7 @@ class A12TraitViewSet(viewsets.ModelViewSet):
                 .prefetch_related(
                     'item_set__item_en'
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -61,7 +61,7 @@ class A12TraitViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ja")
-    def ja_full(self, request, slugname):
+    def ja_full(self, request, slug):
         try:
             queryset = (
                 Trait.objects
@@ -71,7 +71,7 @@ class A12TraitViewSet(viewsets.ModelViewSet):
                 .prefetch_related(
                     'item_set__item_ja'
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404

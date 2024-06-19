@@ -7,7 +7,7 @@ class A16RegionNameSerializer(serializers.ModelSerializer):
     parentslug = serializers.SerializerMethodField()
     class Meta:
         model = Region
-        fields = ['slugname', 'name', 'parentslug']
+        fields = ['slug', 'name', 'parentslug']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -18,7 +18,7 @@ class A16RegionNameSerializer(serializers.ModelSerializer):
             return obj.reg_en.name
     def get_parentslug(self,obj):
         if obj.parent:
-           return obj.parent.slugname
+           return obj.parent.slug
     def to_representation(self, instance):
         result = super(A16RegionNameSerializer, self).to_representation(instance)
         return OrderedDict((k, v) for k, v in result.items() 

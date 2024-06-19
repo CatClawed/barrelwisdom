@@ -54,6 +54,6 @@ export abstract class FilterableComponent extends DataComponent {
     }
 
     identify2(index, item) {
-        return item.slugname;
+        return item.slug;
     }
 }

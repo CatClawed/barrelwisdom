@@ -24,7 +24,7 @@
       @if (demon.item_set) {
         <ul>
           @for (item of demon.item_set; track item) {
-            <li><a routerLink="/{{gameURL}}/items/{{item.slugname}}/{{language}}">{{item.name}}</a></li>
+            <li><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
           }
         </ul>
       }

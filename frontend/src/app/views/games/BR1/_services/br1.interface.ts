@@ -1,5 +1,5 @@
 export interface NameLink {
-    slugname: string;
+    slug: string;
     name: string;
 }
 
@@ -8,13 +8,13 @@ export interface NameOnly {
 }
 
 export interface DemonSimple {
-    slugname: string;
+    slug: string;
     name: string;
     race: string;
 }
 
 export interface Demon {
-    slugname: string;
+    slug: string;
     name: string;
     race: string;
     flavor: string;
@@ -37,9 +37,9 @@ export interface IngredientSet {
 }
 
 export interface Item {
-    slugname: string;
+    slug: string;
     name: string;
-    description: string;
+    desc: string;
     effect: string;
     acquisition: string;
     kind: string;
@@ -50,7 +50,7 @@ export interface Item {
 }
 
 export interface Mission {
-    slugname: string;
+    slug: string;
     name: string;
     character: string;
     points: number;
@@ -62,7 +62,7 @@ export interface Mission {
 }
 
 export interface FragmentEffect {
-    slugname: string;
+    slug: string;
     name: string;
     effect: string;
     upgrades: IngredientSet[];

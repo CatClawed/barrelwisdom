@@ -2,30 +2,30 @@ from django.db import models
 
 class Trait_en(models.Model):
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=250, blank=True)
+    desc = models.CharField(max_length=250, blank=True)
 
 class Trait_ja(models.Model):
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=250, blank=True)
+    desc = models.CharField(max_length=250, blank=True)
 
 class Trait_ko(models.Model):
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=250, blank=True)
+    desc = models.CharField(max_length=250, blank=True)
 
 class Trait_fr(models.Model):
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=250, blank=True)
+    desc = models.CharField(max_length=250, blank=True)
 
 class Trait_sc(models.Model):
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=250, blank=True)
+    desc = models.CharField(max_length=250, blank=True)
 
 class Trait_tc(models.Model):
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=250, blank=True)
+    desc = models.CharField(max_length=250, blank=True)
 
 class Trait(models.Model):
-    slugname = models.SlugField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=50, unique=True)
     note = models.CharField(max_length=255, blank=True)
     index = models.IntegerField()
     grade = models.IntegerField()

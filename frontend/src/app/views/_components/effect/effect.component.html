@@ -19,9 +19,6 @@
     @if (effect.desc) {
       <p [class]="hideContents ? 'card-read-more-spacer' : null">{{effect.desc}}</p>
     }
-    @if (effect.description) {
-      <p [class]="hideContents ? 'card-read-more-spacer' : null">{{effect.description}}</p>
-    }
     <ng-content></ng-content>
     @if (hideContents) {
       <button class="card-read-more-position"

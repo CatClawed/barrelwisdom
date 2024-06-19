@@ -8,16 +8,16 @@
         }
       </div>
       <div class="card-item-display">
-        <img loading="lazy" src="{{imgURL}}items/{{item.slugname}}.webp" alt="{{item.name}}">
+        <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
       </div>
       <p>{{item.desc}}</p>
       @if (item.book_set) {
-        <p><b>Recipe Book: </b><a routerLink="/{{gameURL}}/recipe-books/{{item.book_set[0].slugname}}/{{language}}">{{item.book_set[0].name}}</a></p>
+        <p><b>Recipe Book: </b><a routerLink="/{{gameURL}}/recipe-books/{{item.book_set[0].slug}}/{{language}}">{{item.book_set[0].name}}</a></p>
       }
       <table class="table-item-data"><tbody>
         @for (cat of item.categories; track cat) {
           <tr>
-            <td><i class="atelier atelier-{{cat.icon_name}}"></i></td><td><a routerLink="/{{gameURL}}/categories/{{cat.slugname}}/{{language}}">{{cat.name}}</a></td>
+            <td><i class="atelier atelier-{{cat.icon_name}}"></i></td><td><a routerLink="/{{gameURL}}/categories/{{cat.slug}}/{{language}}">{{cat.name}}</a></td>
           </tr>
         }
       </tbody></table>
@@ -29,10 +29,10 @@
           @for (loc of item.locations; track loc) {
             <li>
               @if (loc.parentslug) {
-                <a routerLink="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}" fragment="{{loc.slugname}}">{{loc.name}}</a>
+                <a routerLink="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}" fragment="{{loc.slug}}">{{loc.name}}</a>
               }
               @if (!loc.parentslug) {
-                <a routerLink="/{{gameURL}}/locations/{{loc.slugname}}/{{language}}">{{loc.name}}</a>
+                <a routerLink="/{{gameURL}}/locations/{{loc.slug}}/{{language}}">{{loc.name}}</a>
               }</li>
             }
           </ul>
@@ -43,7 +43,7 @@
         @if (item.monsters) {
           <ul>
             @for (mon of item.monsters; track mon) {
-              <li><a routerLink="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">{{mon.name}}</a></li>
+              <li><a routerLink="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a></li>
             }
           </ul>
         }
@@ -52,7 +52,7 @@
         }
         @if (item.traits) {
           <ul>
-            <li><a routerLink="/{{gameURL}}/traits/{{item.traits.slugname}}/{{language}}">{{item.traits.name}}</a></li>
+            <li><a routerLink="/{{gameURL}}/traits/{{item.traits.slug}}/{{language}}">{{item.traits.name}}</a></li>
           </ul>
         }
         @if (item.time) {
@@ -80,9 +80,9 @@
               <ul>
                 @for (ing of item.ingredient_set; track ing) {
                   <li>@if (ing.item) {
-                    <a routerLink="/{{gameURL}}/items/{{ing.item.slugname}}/{{language}}">{{ing.item.name}}</a>
+                    <a routerLink="/{{gameURL}}/items/{{ing.item.slug}}/{{language}}">{{ing.item.name}}</a>
                     }@if (ing.category) {
-                    <a routerLink="/{{gameURL}}/categories/{{ing.category.slugname}}/{{language}}">{{ing.category.name}}</a>
+                    <a routerLink="/{{gameURL}}/categories/{{ing.category.slug}}/{{language}}">{{ing.category.name}}</a>
                   } x{{ing.num}}</li>
                 }
               </ul>
@@ -97,7 +97,7 @@
               <ul style="margin-bottom:0;">
                 @for (eff of item.effectline_set; track eff) {
                   @if (eff.itemnum == 1) {
-                    <li><a routerLink="/{{gameURL}}/effects/{{eff.effect.slugname}}/{{language}}">{{eff.effect.name}}</a></li>
+                    <li><a routerLink="/{{gameURL}}/effects/{{eff.effect.slug}}/{{language}}">{{eff.effect.name}}</a></li>
                   }
                 }
               </ul>
@@ -108,7 +108,7 @@
             <ul style="margin-bottom:0;">
               @for (eff of item.effectline_set; track eff) {
                 @if (eff.itemnum == 2) {
-                  <li><a routerLink="/{{gameURL}}/effects/{{eff.effect.slugname}}/{{language}}">{{eff.effect.name}}</a></li>
+                  <li><a routerLink="/{{gameURL}}/effects/{{eff.effect.slug}}/{{language}}">{{eff.effect.name}}</a></li>
                 }
               }
             </ul>
@@ -119,7 +119,7 @@
           <ul style="margin-bottom:0;">
             @for (eff of item.effectline_set; track eff) {
               @if (eff.itemnum == 3) {
-                <li><a routerLink="/{{gameURL}}/effects/{{eff.effect.slugname}}/{{language}}">{{eff.effect.name}}</a></li>
+                <li><a routerLink="/{{gameURL}}/effects/{{eff.effect.slug}}/{{language}}">{{eff.effect.name}}</a></li>
               }
             }
           </ul>
@@ -133,7 +133,7 @@
       <tr><td>
         <ul>
           @for (item of item.equip_set[0].material; track item) {
-            <li><a routerLink="/{{gameURL}}/items/{{item.slugname}}/{{language}}">{{item.name}}</a></li>
+            <li><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
           }
         </ul>
       </td></tr>

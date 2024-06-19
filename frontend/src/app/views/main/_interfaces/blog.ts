@@ -6,10 +6,10 @@ export interface EditBlog {
     created: Date;
     modified: Date;
     title: string;
-    slugtitle: string
+    slug: string
     body: string;
     image: string;
-    description: string;
+    desc: string;
     authorlock: boolean;
     author: number[];
     section: number;
@@ -17,7 +17,7 @@ export interface EditBlog {
 }
 
 export interface CommentBlog{
-    slugtitle: string;
+    slug: string;
     sec: string;
 }
 
@@ -42,10 +42,10 @@ export interface Blog {
     created: Date;
     modified: Date;
     title: string;
-    slugtitle: string
+    slug: string
     body: string;
     image: string;
-    description: string;
+    desc: string;
     authorlock: boolean;
     author: SimpleUser[];
     section: Section;
@@ -65,5 +65,5 @@ export interface BlogPaginator {
 export interface Tag {
     id: number;
     name: string;
-    slugname: string;
+    slug: string;
 }

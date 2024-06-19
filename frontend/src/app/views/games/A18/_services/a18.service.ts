@@ -24,16 +24,16 @@ export class A18Service {
     return this.http.get<Trait[]>(`${environment.apiUrl}/A18/trait/${language}/`);
   }
 
-  getTrait(slugname: string, language: string): Observable<Trait> {
-    return this.http.get<Trait>(`${environment.apiUrl}/A18/trait/${slugname}/${language}/`);
+  getTrait(slug: string, language: string): Observable<Trait> {
+    return this.http.get<Trait>(`${environment.apiUrl}/A18/trait/${slug}/${language}/`);
   }
 
   getEffectList(language: string): Observable<Effect[]> {
     return this.http.get<Effect[]>(`${environment.apiUrl}/A18/effect/${language}/`);
   }
 
-  getEffect(slugname: string, language: string): Observable<Effect> {
-    return this.http.get<Effect>(`${environment.apiUrl}/A18/effect/${slugname}/${language}/`);
+  getEffect(slug: string, language: string): Observable<Effect> {
+    return this.http.get<Effect>(`${environment.apiUrl}/A18/effect/${slug}/${language}/`);
   }
 
   getRaceList(language: string): Observable<Race[]> {
@@ -44,16 +44,16 @@ export class A18Service {
     return this.http.get<Monster[]>(`${environment.apiUrl}/A18/monster/${language}/`);
   }
 
-  getMonster(slugname: string, language: string): Observable<Monster> {
-    return this.http.get<Monster>(`${environment.apiUrl}/A18/monster/${slugname}/${language}/`);
+  getMonster(slug: string, language: string): Observable<Monster> {
+    return this.http.get<Monster>(`${environment.apiUrl}/A18/monster/${slug}/${language}/`);
   }
 
   getItemList(language: string): Observable<Item[]> {
     return this.http.get<Item[]>(`${environment.apiUrl}/A18/item/${language}/`);
   }
 
-  getItem(slugname: string, language: string): Observable<Item> {
-    return this.http.get<Item>(`${environment.apiUrl}/A18/item/${slugname}/${language}/`);
+  getItem(slug: string, language: string): Observable<Item> {
+    return this.http.get<Item>(`${environment.apiUrl}/A18/item/${slug}/${language}/`);
   }
 
   getCatalystList(language: string): Observable<Catalyst[]> {
@@ -64,8 +64,8 @@ export class A18Service {
     return this.http.get<Category[]>(`${environment.apiUrl}/A18/category/${language}/`);
   }
 
-  getCategory(slugname: string, language: string): Observable<Category> {
-    return this.http.get<Category>(`${environment.apiUrl}/A18/category/${slugname}/${language}/`);
+  getCategory(slug: string, language: string): Observable<Category> {
+    return this.http.get<Category>(`${environment.apiUrl}/A18/category/${slug}/${language}/`);
   }
 
   getRecipeList(language: string): Observable<RecipeIdeaList[]> {

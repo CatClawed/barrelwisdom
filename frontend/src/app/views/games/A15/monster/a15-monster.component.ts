@@ -30,7 +30,7 @@ export class A15MonsterComponent extends SingleComponent {
   }
 
   afterAssignment(): void {
-    this.seoImage = `${this.imgURL}${this.section}/${this.data.slugname}.webp`
+    this.seoImage = `${this.imgURL}${this.section}/${this.data.slug}.webp`
     this.genericSettings(this.data.name, this.data.desc,
       'Monsters',
       false,

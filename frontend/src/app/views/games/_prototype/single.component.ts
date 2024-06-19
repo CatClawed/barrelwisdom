@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
@@ -23,6 +23,11 @@ export abstract class SingleComponent extends DataComponent {
     
     @Input()
     inputLang?: string;
+
+    small: boolean = false;
+
+    @Output()
+    buttonClicked = new EventEmitter<string>();
 
     constructor(
         protected readonly destroy$: DestroyService,

@@ -14,7 +14,7 @@
     @for (mon of filteredMonsters | async; track identify2($index, mon)) {
       <div class="card card-body">
         <h4 class="card-title card-icon-space">
-          <a (click)="openDialog(mon.slugname, $event);" href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">{{mon.name}}</a>
+          <a (click)="openDialog(mon.slug, $event);" href="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a>
         </h4>
         <div class="card-icon-position">
           <span>{{mon.race}}</span>
@@ -31,10 +31,10 @@
             <span class="badge bg-secondary">DX</span>
           }
         </div>
-        <a class="card-item-display" (click)="openDialog(mon.slugname, $event);" href="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">
-          <img loading="lazy" src="{{imgURL}}monsters/{{mon.slugname}}.webp" alt="{{mon.name}}">
+        <a class="card-item-display" (click)="openDialog(mon.slug, $event);" href="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">
+          <img loading="lazy" src="{{imgURL}}monsters/{{mon.slug}}.webp" alt="{{mon.name}}">
         </a>
-        <button (click)="openDialog(mon.slugname)" class="card-read-more-position" mat-mini-fab color="primary">
+        <button (click)="openDialog(mon.slug)" class="card-read-more-position" mat-mini-fab color="primary">
           <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
         </button>
       </div>

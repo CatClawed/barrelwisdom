@@ -17,7 +17,7 @@
           <span class="badge bg-secondary">DX</span>
         }
       </div>
-      <img class="image-display" loading="lazy" src="{{imgURL}}monsters/{{monster.slugname}}.webp" alt="{{monster.name}}">
+      <img class="image-display" loading="lazy" src="{{imgURL}}monsters/{{monster.slug}}.webp" alt="{{monster.name}}">
       @if (monster.desc) {
         <p>{{monster.desc}}</p>
       }
@@ -30,7 +30,7 @@
             <ul>
               @for (loc of monster.locations; track loc) {
                 <li>
-                  <a routerLink="/{{gameURL}}/locations/{{loc.slugname}}/{{language}}">{{loc.name}}</a>
+                  <a routerLink="/{{gameURL}}/locations/{{loc.slug}}/{{language}}">{{loc.name}}</a>
                 </li>
               }
             </ul>
@@ -41,7 +41,7 @@
           @if (monster.item_set) {
             <ul>
               @for (drop of monster.item_set; track drop) {
-                <li><a routerLink="/{{gameURL}}/items/{{drop.slugname}}/{{language}}">{{drop.name}}</a></li>
+                <li><a routerLink="/{{gameURL}}/items/{{drop.slug}}/{{language}}">{{drop.name}}</a></li>
               }
             </ul>
           }

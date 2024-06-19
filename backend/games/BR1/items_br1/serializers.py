@@ -7,12 +7,12 @@ from games.BR1.demons_br1.serializers import BR1DemonSerializerSimple
 class BR1MissionSerializerName(serializers.ModelSerializer):
     class Meta:
         model = Item
-        fields = ['slugname', 'name']
+        fields = ['slug', 'name']
 
 class BR1ItemSerializerName(serializers.ModelSerializer):
     class Meta:
         model = Item
-        fields = ['slugname', 'name']
+        fields = ['slug', 'name']
 
 class BR1IngredientSerializer(serializers.ModelSerializer):
     item = BR1ItemSerializerName()
@@ -27,7 +27,7 @@ class BR1IngredientSerializer(serializers.ModelSerializer):
 class BR1ItemSerializerSimple(serializers.ModelSerializer):
     class Meta:
         model = Item
-        fields = ['slugname', 'name', 'description', 'effect', 'kind']
+        fields = ['slug', 'name', 'desc', 'effect', 'kind']
     def to_representation(self, instance):
         result = super(BR1ItemSerializerSimple, self).to_representation(instance)
         return OrderedDict((k, v) for k, v in result.items() 
@@ -40,7 +40,7 @@ class BR1ItemSerializer(serializers.ModelSerializer):
     missions = BR1MissionSerializerName(many=True)
     class Meta:
         model = Item
-        fields = ['slugname', 'name', 'description', 'effect', 'acquisition', 'kind', 'demons', 'locations', 'ingredient_set', 'missions']
+        fields = ['slug', 'name', 'desc', 'effect', 'acquisition', 'kind', 'demons', 'locations', 'ingredient_set', 'missions']
     def to_representation(self, instance):
         result = super(BR1ItemSerializer, self).to_representation(instance)
         return OrderedDict((k, v) for k, v in result.items() 

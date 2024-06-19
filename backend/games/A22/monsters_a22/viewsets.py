@@ -11,7 +11,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
     queryset = Monster.objects.all()
     serializer_class = A22MonsterSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    lookup_field = 'slugname'
+    lookup_field = 'slug'
 
     # full effect list
     @action(detail=False)
@@ -82,7 +82,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
 
     # single monster view
     @action(detail=True, methods=['get'], url_path="en")
-    def en_full(self, request, slugname):
+    def en_full(self, request, slug):
         try:
             queryset = (
                 Monster.objects
@@ -93,7 +93,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
                     'drops__item_en',
                     'location__loc_en',
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -101,7 +101,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ja")
-    def ja_full(self, request, slugname):
+    def ja_full(self, request, slug):
         try:
             queryset = (
                 Monster.objects
@@ -112,7 +112,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
                     'drops__item_ja',
                     'location__loc_ja',
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -120,7 +120,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ko")
-    def ko_full(self, request, slugname):
+    def ko_full(self, request, slug):
         try:
             queryset = (
                 Monster.objects
@@ -131,7 +131,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
                     'drops__item_ko',
                     'location__loc_ko',
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -139,7 +139,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="fr")
-    def fr_full(self, request, slugname):
+    def fr_full(self, request, slug):
         try:
             queryset = (
                 Monster.objects
@@ -150,7 +150,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
                     'drops__item_fr',
                     'location__loc_fr',
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -158,7 +158,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="sc")
-    def sc_full(self, request, slugname):
+    def sc_full(self, request, slug):
         try:
             queryset = (
                 Monster.objects
@@ -169,7 +169,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
                     'drops__item_sc',
                     'location__loc_sc',
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -177,7 +177,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="tc")
-    def tc_full(self, request, slugname):
+    def tc_full(self, request, slug):
         try:
             queryset = (
                 Monster.objects
@@ -188,7 +188,7 @@ class A22MonsterViewSet(viewsets.ModelViewSet):
                     'drops__item_tc',
                     'location__loc_tc',
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404

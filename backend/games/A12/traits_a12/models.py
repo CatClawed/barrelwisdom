@@ -9,7 +9,7 @@ class Trait_ja(models.Model):
     desc = models.CharField(max_length=500, default="")
 
 class Trait(models.Model):
-    slugname = models.SlugField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=50, unique=True)
     trait_en = models.OneToOneField(Trait_en, on_delete=models.CASCADE)
     trait_ja = models.OneToOneField(Trait_ja, on_delete=models.CASCADE)
     index = models.IntegerField()

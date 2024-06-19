@@ -5,7 +5,7 @@ from rest_framework import serializers
 class BR1Missionerializer(serializers.ModelSerializer):
     class Meta:
         model = Mission
-        fields = ['slugname', 'name', 'character', 'points', 'reward', 'kind', 'details', 'chapter','location']
+        fields = ['slug', 'name', 'character', 'points', 'reward', 'kind', 'details', 'chapter','location']
     def to_representation(self, instance):
         result = super(BR1Missionerializer, self).to_representation(instance)
         return OrderedDict((k, v) for k, v in result.items() 

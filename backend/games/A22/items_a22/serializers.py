@@ -10,7 +10,7 @@ from collections import OrderedDict
 # Effect Lines
 
 class A22EffectLineSerializer(serializers.ModelSerializer):
-    slug = serializers.CharField(source='effect.slugname')
+    slug = serializers.CharField(source='effect.slug')
     name = serializers.SerializerMethodField()
     desc = serializers.SerializerMethodField()
     def get_name(self,obj):
@@ -30,19 +30,19 @@ class A22EffectLineSerializer(serializers.ModelSerializer):
             return obj.effect.eff_en.name
     def get_desc(self,obj):
         if 'language' not in self.context:
-            return obj.effect.eff_en.description
+            return obj.effect.eff_en.desc
         elif self.context['language'] == 'ja':
-            return obj.effect.eff_ja.description
+            return obj.effect.eff_ja.desc
         elif self.context['language'] == 'ko':
-            return obj.effect.eff_ko.description
+            return obj.effect.eff_ko.desc
         elif self.context['language'] == 'fr':
-            return obj.effect.eff_fr.description
+            return obj.effect.eff_fr.desc
         elif self.context['language'] == 'sc':
-            return obj.effect.eff_sc.description
+            return obj.effect.eff_sc.desc
         elif self.context['language'] == 'tc':
-            return obj.effect.eff_tc.description
+            return obj.effect.eff_tc.desc
         else:
-            return obj.effect.eff_en.description
+            return obj.effect.eff_en.desc
     class Meta:
         model = EffectLine
         fields = ['slug', 'name', 'desc', 'line', 'number']
@@ -91,7 +91,6 @@ class A22IngredientSerializerSimple(serializers.ModelSerializer):
 
 class A22ItemSerializerSimple(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
-    slug = serializers.CharField(source='slugname')
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.item_en.name
@@ -174,7 +173,6 @@ class A22RecipeMorph(serializers.ModelSerializer):
 
 # Listing All Data for single languages
 class A22ItemSerializer(serializers.ModelSerializer):
-    slug = serializers.CharField(source='slugname')
     name = serializers.SerializerMethodField()
     category = A22CategorySerializer(many=True)
     ingredient_set = A22IngredientSerializerSimple(many=True)
@@ -208,7 +206,7 @@ class A22UsableItemSerializer(serializers.ModelSerializer):
 
 # Full data individual view
 class A22ItemSerializerFull(serializers.ModelSerializer):
-    slug = serializers.CharField(source="slugname")
+    slug = serializers.CharField(source="slug")
     name = serializers.SerializerMethodField()
     desc = serializers.SerializerMethodField()
     category = A22CategorySerializer(many=True)
@@ -245,19 +243,19 @@ class A22ItemSerializerFull(serializers.ModelSerializer):
             return obj.item_en.name
     def get_desc(self,obj):
         if 'language' not in self.context:
-            return obj.item_en.description
+            return obj.item_en.desc
         elif self.context['language'] == 'ja':
-            return obj.item_ja.description
+            return obj.item_ja.desc
         elif self.context['language'] == 'ko':
-            return obj.item_ko.description
+            return obj.item_ko.desc
         elif self.context['language'] == 'fr':
-            return obj.item_fr.description
+            return obj.item_fr.desc
         elif self.context['language'] == 'sc':
-            return obj.item_sc.description
+            return obj.item_sc.desc
         elif self.context['language'] == 'tc':
-            return obj.item_tc.description
+            return obj.item_tc.desc
         else:
-            return obj.item_en.description
+            return obj.item_en.desc
     def to_representation(self, instance):
         result = super(A22ItemSerializerFull, self).to_representation(instance)
         return OrderedDict((k, v) for k, v in result.items() 
@@ -279,7 +277,7 @@ class A22ItemLocationSerializer(serializers.ModelSerializer):
 
 # Areas
 class A22ItemAreasSerlaizer(serializers.ModelSerializer):
-    slug = serializers.CharField(source="area.slugname")
+    slug = serializers.CharField(source="area.slug")
     name = serializers.SerializerMethodField()
     gatherdata = A22ItemLocationSerializer(many=True)
     class Meta:
@@ -308,7 +306,7 @@ class A22ItemAreasSerlaizer(serializers.ModelSerializer):
 # regions 
 
 class A22ItemRegionSerializer(serializers.ModelSerializer):
-    slug = serializers.CharField(source="region.slugname")
+    slug = serializers.CharField(source="region.slug")
     name = serializers.SerializerMethodField()
     areas = A22ItemAreasSerlaizer(many=True)
     class Meta:
@@ -350,7 +348,7 @@ class A22ShopDevelopSerializer(serializers.ModelSerializer):
 # Category info
 class A22ItemCatSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
-    slug = serializers.CharField(source='category.slugname')
+    slug = serializers.CharField(source='category.slug')
     items = A22ItemSerializer(many=True, read_only=True)
     ingredients = A22ItemSerializer(many=True, read_only=True)
     class Meta:

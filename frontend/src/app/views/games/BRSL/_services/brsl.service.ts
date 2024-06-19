@@ -34,16 +34,16 @@ export class BRSLService {
       return this.http.get<DemonList[]>(`${environment.apiUrl}/BRSL/demon/${language}/`);
     }
 
-    getDemon(slugname: string, language: string): Observable<DemonFull> {
-      return this.http.get<DemonFull>(`${environment.apiUrl}/BRSL/demon/${slugname}/${language}/`);
+    getDemon(slug: string, language: string): Observable<DemonFull> {
+      return this.http.get<DemonFull>(`${environment.apiUrl}/BRSL/demon/${slug}/${language}/`);
     }
 
     getItemList(language: string): Observable<ItemList[]> {
       return this.http.get<ItemList[]>(`${environment.apiUrl}/BRSL/item/${language}/`);
     }
 
-    getItem(slugname: string, language: string): Observable<ItemFull> {
-      return this.http.get<ItemFull>(`${environment.apiUrl}/BRSL/item/${slugname}/${language}/`);
+    getItem(slug: string, language: string): Observable<ItemFull> {
+      return this.http.get<ItemFull>(`${environment.apiUrl}/BRSL/item/${slug}/${language}/`);
     }
 
     getCategoryList(language: string): Observable<NameOnly[]> {
@@ -58,8 +58,8 @@ export class BRSLService {
       return this.http.get<FacilityList[]>(`${environment.apiUrl}/BRSL/facility/${language}/`);
     }
 
-    getFacility(slugname: string, language: string): Observable<FacilityFull> {
-      return this.http.get<FacilityFull>(`${environment.apiUrl}/BRSL/facility/${slugname}/${language}/`);
+    getFacility(slug: string, language: string): Observable<FacilityFull> {
+      return this.http.get<FacilityFull>(`${environment.apiUrl}/BRSL/facility/${slug}/${language}/`);
     }
 
     getFacilitySetList(language: string): Observable<FacilitySet[]> {
@@ -70,8 +70,8 @@ export class BRSLService {
       return this.http.get<Skill[]>(`${environment.apiUrl}/BRSL/skill/${language}/`);
     }
 
-    getRegion(slugname: string, language: string): Observable<Region> {
-      return this.http.get<Region>(`${environment.apiUrl}/BRSL/region/${slugname}/${language}/`);
+    getRegion(slug: string, language: string): Observable<Region> {
+      return this.http.get<Region>(`${environment.apiUrl}/BRSL/region/${slug}/${language}/`);
     }
     
 }

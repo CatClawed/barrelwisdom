@@ -24,48 +24,48 @@ export class A23Service {
     return this.http.get<Trait[]>(`${environment.apiUrl}/A23/trait/${language}/`);
   }
 
-  getTrait(slugname: string, language: string): Observable<Trait> {
-    return this.http.get<Trait>(`${environment.apiUrl}/A23/trait/${slugname}/${language}/`);
+  getTrait(slug: string, language: string): Observable<Trait> {
+    return this.http.get<Trait>(`${environment.apiUrl}/A23/trait/${slug}/${language}/`);
   }
 
   getEffectList(language: string): Observable<Effect[]> {
     return this.http.get<Effect[]>(`${environment.apiUrl}/A23/effect/${language}/`);
   }
 
-  getEffect(slugname: string, language: string): Observable<Effect> {
-    return this.http.get<Effect>(`${environment.apiUrl}/A23/effect/${slugname}/${language}/`);
+  getEffect(slug: string, language: string): Observable<Effect> {
+    return this.http.get<Effect>(`${environment.apiUrl}/A23/effect/${slug}/${language}/`);
   }
 
-  getLocation(slugname: string, language: string): Observable<Region> {
-    return this.http.get<Region>(`${environment.apiUrl}/A23/region/${slugname}/${language}/`);
+  getLocation(slug: string, language: string): Observable<Region> {
+    return this.http.get<Region>(`${environment.apiUrl}/A23/region/${slug}/${language}/`);
   }
 
   getMonsterList(language: string): Observable<Monster[]> {
     return this.http.get<Monster[]>(`${environment.apiUrl}/A23/monster/${language}/`);
   }
 
-  getMonster(slugname: string, language: string): Observable<Monster> {
-    return this.http.get<Monster>(`${environment.apiUrl}/A23/monster/${slugname}/${language}/`);
+  getMonster(slug: string, language: string): Observable<Monster> {
+    return this.http.get<Monster>(`${environment.apiUrl}/A23/monster/${slug}/${language}/`);
   }
 
   getItemList(language: string): Observable<Item[]> {
     return this.http.get<Item[]>(`${environment.apiUrl}/A23/item/${language}/`);
   }
 
-  getItem(slugname: string, language: string): Observable<Item> {
-    return this.http.get<Item>(`${environment.apiUrl}/A23/item/${slugname}/${language}/`);
+  getItem(slug: string, language: string): Observable<Item> {
+    return this.http.get<Item>(`${environment.apiUrl}/A23/item/${slug}/${language}/`);
   }
 
-  getBook(slugname: string, language: string): Observable<Book> {
-    return this.http.get<Book>(`${environment.apiUrl}/A23/book/${slugname}/${language}/`);
+  getBook(slug: string, language: string): Observable<Book> {
+    return this.http.get<Book>(`${environment.apiUrl}/A23/book/${slug}/${language}/`);
   }
 
   getCategoryList(language: string): Observable<Category[]> {
     return this.http.get<Category[]>(`${environment.apiUrl}/A23/category/${language}/`);
   }
 
-  getCategory(slugname: string, language: string): Observable<Category> {
-    return this.http.get<Category>(`${environment.apiUrl}/A23/category/${slugname}/${language}/`);
+  getCategory(slug: string, language: string): Observable<Category> {
+    return this.http.get<Category>(`${environment.apiUrl}/A23/category/${slug}/${language}/`);
   }
 
   getRecipeList(language: string): Observable<RecipeIdea[]> {

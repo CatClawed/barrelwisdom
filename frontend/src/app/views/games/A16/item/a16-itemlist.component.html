@@ -53,13 +53,13 @@
     @for (it of filteredItems | async; track identify2($index, it)) {
       <div class="card card-body">
         <h4 class="card-title card-icon-space">
-          <a (click)="openDialog(it.slugname, $event);" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a>
+          <a (click)="openDialog(it.slug, $event);" href="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a>
         </h4>
         <div class="card-icon-position">
           <b>LV {{it.level}}</b>
         </div>
-        <a class="card-item-display" (click)="openDialog(it.slugname, $event);" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">
-          <img loading="lazy" src="{{imgURL}}items/{{it.slugname}}.webp" alt="{{it.name}}">
+        <a class="card-item-display" (click)="openDialog(it.slug, $event);" href="/{{gameURL}}/items/{{it.slug}}/{{language}}">
+          <img loading="lazy" src="{{imgURL}}items/{{it.slug}}.webp" alt="{{it.name}}">
         </a>
         <table class="table-item-data"><tbody>
           @for (cat of it.categories; track cat) {
@@ -94,7 +94,7 @@
             </tr>
           }
         </tbody></table>
-        <button (click)="openDialog(it.slugname)" class="card-read-more-position" mat-mini-fab color="primary">
+        <button (click)="openDialog(it.slug)" class="card-read-more-position" mat-mini-fab color="primary">
           <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
         </button>
       </div>

@@ -15,7 +15,7 @@
       <div class="card card-body">
         <div class="flex">
           <h4 class="card-title">
-            <a (click)="openDialog(demon.slugname, $event);" href="/{{gameURL}}/demons/{{demon.slugname}}/{{language}}">{{demon.name}}</a>
+            <a (click)="openDialog(demon.slug, $event);" href="/{{gameURL}}/demons/{{demon.slug}}/{{language}}">{{demon.name}}</a>
           </h4>
           @if (demon.race) {
             <b style="padding-right:0.5em;">{{demon.race}}</b>
@@ -37,7 +37,7 @@
         @if (demon.item_set) {
           <ul>
             @for (item of demon.item_set; track item) {
-              <li><a routerLink="/{{gameURL}}/items/{{item.slugname}}/{{language}}">{{item.name}}</a></li>
+              <li><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
             }
           </ul>
         }

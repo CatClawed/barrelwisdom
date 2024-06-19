@@ -20,23 +20,23 @@
   <div class="item-grid">
     @for (eff of filteredEffects | async; track identify2($index, eff)) {
       <div class="card card-body">
-        <h4 class="card-title"><a (click)="openDialog(eff.slugname, $event);" href="/{{gameURL}}/effects/{{eff.slugname}}/{{language}}">{{eff.name}}</a></h4>
+        <h4 class="card-title"><a (click)="openDialog(eff.slug, $event);" href="/{{gameURL}}/effects/{{eff.slug}}/{{language}}">{{eff.name}}</a></h4>
         @if (eff.desc) {
           <p>{{eff.desc}}</p>
         }
         @if (eff.effectline_set) {
           <ul>
             @if (eff.effectline_set.length >= 1) {
-              <li><a routerLink="/{{gameURL}}/items/{{eff.effectline_set[0].slugname}}">{{eff.effectline_set[0].name}}</a></li>
+              <li><a routerLink="/{{gameURL}}/items/{{eff.effectline_set[0].slug}}">{{eff.effectline_set[0].name}}</a></li>
             }
             @if (eff.effectline_set.length >= 2) {
-              <li><a routerLink="/{{gameURL}}/items/{{eff.effectline_set[1].slugname}}">{{eff.effectline_set[1].name}}</a></li>
+              <li><a routerLink="/{{gameURL}}/items/{{eff.effectline_set[1].slug}}">{{eff.effectline_set[1].name}}</a></li>
             }
             @if (eff.effectline_set.length >= 3) {
-              <li><a routerLink="/{{gameURL}}/items/{{eff.effectline_set[2].slugname}}">{{eff.effectline_set[2].name}}</a></li>
+              <li><a routerLink="/{{gameURL}}/items/{{eff.effectline_set[2].slug}}">{{eff.effectline_set[2].name}}</a></li>
             }
             @if (eff.effectline_set.length >= 4) {
-              <li><a (click)="openDialog(eff.slugname, $event);" href="/{{gameURL}}/effects/{{eff.slugname}}/{{language}}">See more...</a></li>
+              <li><a (click)="openDialog(eff.slug, $event);" href="/{{gameURL}}/effects/{{eff.slug}}/{{language}}">See more...</a></li>
             }
           </ul>
         }

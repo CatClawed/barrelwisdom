@@ -7,7 +7,7 @@ class A12ItemNameSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Item
-        fields = ['slugname', 'name']
+        fields = ['slug', 'name']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -21,7 +21,7 @@ class A12TraitNameSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Trait
-        fields = ['slugname', 'name']
+        fields = ['slug', 'name']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -37,7 +37,7 @@ class A12TraitSerializer(serializers.ModelSerializer):
     item_set = A12ItemNameSerializer(many=True)
     class Meta:
         model = Trait
-        fields = ['slugname', 'name', 'desc', 'cost', 'synth', 'usable', 'ingot', 'cloth', 'accessory', 'note', 'item_set']
+        fields = ['slug', 'name', 'desc', 'cost', 'synth', 'usable', 'ingot', 'cloth', 'accessory', 'note', 'item_set']
 
     def to_representation(self, instance):
         result = super(A12TraitSerializer, self).to_representation(instance)

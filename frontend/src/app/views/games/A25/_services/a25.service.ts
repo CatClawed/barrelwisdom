@@ -79,32 +79,32 @@ export class A25Service {
     "tc":"裝備"
   }
 
-  getFilter(slugname: string, language: string): Observable<NameLink[]> {
-    return this.http.get<NameLink[]>(`${environment.apiUrl}/A25/filterable/${slugname}/${language}/`);
+  getFilter(slug: string, language: string): Observable<NameLink[]> {
+    return this.http.get<NameLink[]>(`${environment.apiUrl}/A25/filterable/${slug}/${language}/`);
   }
 
   getTraitList(language: string): Observable<Trait[]> {
     return this.http.get<Trait[]>(`${environment.apiUrl}/A25/trait/${language}/`);
   }
 
-  getTrait(slugname: string, language: string): Observable<Trait> {
-    return this.http.get<Trait>(`${environment.apiUrl}/A25/trait/${slugname}/${language}/`);
+  getTrait(slug: string, language: string): Observable<Trait> {
+    return this.http.get<Trait>(`${environment.apiUrl}/A25/trait/${slug}/${language}/`);
   }
 
   getMaterialList(language: string): Observable<Item[]> {
     return this.http.get<Item[]>(`${environment.apiUrl}/A25/material/${language}/`);
   }
 
-  getMaterial(slugname: string, language: string): Observable<Item> {
-    return this.http.get<Item>(`${environment.apiUrl}/A25/material/${slugname}/${language}/`);
+  getMaterial(slug: string, language: string): Observable<Item> {
+    return this.http.get<Item>(`${environment.apiUrl}/A25/material/${slug}/${language}/`);
   }
 
   getSynthList(language: string): Observable<Item[]> {
     return this.http.get<Item[]>(`${environment.apiUrl}/A25/synth/${language}/`);
   }
 
-  getSynth(slugname: string, language: string): Observable<Item> {
-    return this.http.get<Item>(`${environment.apiUrl}/A25/synth/${slugname}/${language}/`);
+  getSynth(slug: string, language: string): Observable<Item> {
+    return this.http.get<Item>(`${environment.apiUrl}/A25/synth/${slug}/${language}/`);
   }
 
   getRecipeList(language: string): Observable<RecipeTab[]> {
@@ -115,16 +115,16 @@ export class A25Service {
     return this.http.get<Character[]>(`${environment.apiUrl}/A25/character/${language}/`);
   }
 
-  getChara(slugname: string, language: string): Observable<Character> {
-    return this.http.get<Character>(`${environment.apiUrl}/A25/character/${slugname}/${language}/`);
+  getChara(slug: string, language: string): Observable<Character> {
+    return this.http.get<Character>(`${environment.apiUrl}/A25/character/${slug}/${language}/`);
   }
 
   getMemoriaList(language: string): Observable<Memoria[]> {
     return this.http.get<Memoria[]>(`${environment.apiUrl}/A25/memoria/${language}/`);
   }
 
-  getMemoria(slugname: string, language: string): Observable<Memoria> {
-    return this.http.get<Memoria>(`${environment.apiUrl}/A25/memoria/${slugname}/${language}/`);
+  getMemoria(slug: string, language: string): Observable<Memoria> {
+    return this.http.get<Memoria>(`${environment.apiUrl}/A25/memoria/${slug}/${language}/`);
   }
 
   getResearch(language: string): Observable<Research[]> {
@@ -143,8 +143,8 @@ export class A25Service {
     return this.http.get<ScoreBattle[]>(`${environment.apiUrl}/A25/scorebattle/${language}/`);
   }
 
-  getTower(slugname: string, language: string): Observable<Tower[]> {
-    const slug = {
+  getTower(slug: string, language: string): Observable<Tower[]> {
+    const slugname = {
       "fire":"fire",
       "ice":"ice",
       "bolt":"lightning",
@@ -154,6 +154,6 @@ export class A25Service {
       "stab":"pierce",
       "elemental-tower":"elemental-tower"
     }
-    return this.http.get<Tower[]>(`${environment.apiUrl}/A25/tower/${slug[slugname]}/${language}/`);
+    return this.http.get<Tower[]>(`${environment.apiUrl}/A25/tower/${slugname[slug]}/${language}/`);
   }
 }

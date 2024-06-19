@@ -7,7 +7,7 @@ class A16ItemSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Item
-        fields = ['slugname', 'name', 'level', 'evalue', 'fire', 'water', 'wind', 'earth', 'slots']
+        fields = ['slug', 'name', 'level', 'evalue', 'fire', 'water', 'wind', 'earth', 'slots']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -40,7 +40,7 @@ class A16CategorySerializerLink(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Category
-        fields = ['slugname', 'name']
+        fields = ['slug', 'name']
     def get_name(self,obj):
         if 'language' not in self.context:
             return obj.cat_en.name
@@ -53,7 +53,7 @@ class A16CategorySerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Category
-        fields = ['slugname', 'name', 'icon_name']
+        fields = ['slug', 'name', 'icon_name']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -69,7 +69,7 @@ class A16CategoryDataSerializer(serializers.ModelSerializer):
     ingredientcat = A16IngredientSerializer(many=True, read_only=True)
     class Meta:
         model = Category
-        fields = ['slugname', 'name', 'icon_name', 'item_set', 'ingredientcat']
+        fields = ['slug', 'name', 'icon_name', 'item_set', 'ingredientcat']
 
     def get_name(self,obj):
         if 'language' not in self.context:

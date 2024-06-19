@@ -8,7 +8,7 @@ from games.BR1.areas_br1.serializers import BR1AreaSerializer
 class BR1ItemSerializerSimple(serializers.ModelSerializer):
     class Meta:
         model = Item
-        fields = ['slugname', 'name']
+        fields = ['slug', 'name']
 
 class BR1UpgradeSerializer(serializers.ModelSerializer):
     item = BR1ItemSerializerSimple()
@@ -20,7 +20,7 @@ class BR1FragmentSerializer(serializers.ModelSerializer):
     upgrades = BR1UpgradeSerializer(many=True)
     class Meta:
         model = Fragment
-        fields = ['slugname', 'name', 'effect', 'upgrades']
+        fields = ['slug', 'name', 'effect', 'upgrades']
     def to_representation(self, instance):
         result = super(BR1FragmentSerializer, self).to_representation(instance)
         return OrderedDict((k, v) for k, v in result.items() 

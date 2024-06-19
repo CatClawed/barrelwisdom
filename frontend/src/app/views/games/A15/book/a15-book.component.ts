@@ -29,7 +29,7 @@ export class A15BookComponent extends SingleComponent {
     return this.a15service.getBook(this.slug, this.language);
   }
   afterAssignment(): void {
-    this.seoImage = `${this.imgURL}items/${this.data.slugname}.webp`
+    this.seoImage = `${this.imgURL}items/${this.data.slug}.webp`
     this.genericSettings(this.data.name, this.data.desc,
       'Recipe Books',
       false,

@@ -7,30 +7,30 @@ from games.A22.traits_a22.models import Trait
 
 class Item_en(models.Model):
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=270, blank=True)
+    desc = models.CharField(max_length=270, blank=True)
 
 class Item_ja(models.Model):
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=270, blank=True)
+    desc = models.CharField(max_length=270, blank=True)
 
 class Item_ko(models.Model):
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=270, blank=True)
+    desc = models.CharField(max_length=270, blank=True)
 
 class Item_fr(models.Model):
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=270, blank=True)
+    desc = models.CharField(max_length=270, blank=True)
 
 class Item_sc(models.Model):
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=270, blank=True)
+    desc = models.CharField(max_length=270, blank=True)
 
 class Item_tc(models.Model):
     name = models.CharField(max_length=50, unique=True)
-    description = models.CharField(max_length=270, blank=True)
+    desc = models.CharField(max_length=270, blank=True)
 
 class Item(models.Model):
-    slugname = models.SlugField(max_length=50, unique=True) 
+    slug = models.SlugField(max_length=50, unique=True) 
     itemtype = models.CharField(max_length=20, blank=True)
     note = models.CharField(max_length=255, blank=True)
     index = models.IntegerField()

@@ -50,7 +50,7 @@
       <div style="justify-content:space-between;" class="card card-body">
         <div style="height:100%;">
           <div class="flex">
-            <h4 class="card-title"><a (click)="openDialog(trait.slugname, $event);" href="/{{gameURL}}/traits/{{trait.slugname}}/{{language}}">{{trait.name}}</a></h4>
+            <h4 class="card-title"><a (click)="openDialog(trait.slug, $event);" href="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">{{trait.name}}</a></h4>
             @if (trait.cost) {
               <b>Cost {{trait.cost}}</b>
             }
@@ -61,7 +61,7 @@
               <b>Items:</b>
               <ul>
                 @for (item of trait.item_set; track item) {
-                  <li><a routerLink="/{{gameURL}}/items/{{item.slugname}}/{{language}}">{{item.name}}</a></li>
+                  <li><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
                 }
               </ul>
             </div>

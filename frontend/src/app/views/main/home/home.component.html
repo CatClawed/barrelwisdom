@@ -9,19 +9,19 @@
     @for (b of blog.results; track b) {
       <div class="card" style="height:100%">
         <div class="aspect-ratio-box">
-          <a routerLink="/blog/{{b.slugtitle}}">
+          <a routerLink="/blog/{{b.slug}}">
             <img loading="lazy" src="{{b.image}}" alt="" role="presentation">
           </a>
         </div>
         <div class="headline">
-          <a routerLink="/blog/{{b.slugtitle}}">
+          <a routerLink="/blog/{{b.slug}}">
             <h3>{{b.title}}</h3>
           </a>
           <span class="text-muted" style="font-size: calc(0.8rem + 0.1vw);">
             <i style="margin-right:0.2rem;" class="far fa-calendar-alt"></i>
             <time class="updated" dateTime="{{b.created}}">{{b.created | date:'longDate' }} </time>
           </span>
-          <p style="margin-top: 0.8em;">{{b.description}}</p>
+          <p style="margin-top: 0.8em;">{{b.desc}}</p>
         </div>
       </div>
     }

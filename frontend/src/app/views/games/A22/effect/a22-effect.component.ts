@@ -29,11 +29,6 @@ export class A22EffectComponent extends SingleComponent {
   @Input()
   efftype: string;
 
-  small: boolean = false;
-
-  @Output()
-  buttonClicked = new EventEmitter<string>();
-
   changeData() {
     this.gameService(this.a22service, 'effects');
     return this.a22service.getEffect(this.slug, this.language);
