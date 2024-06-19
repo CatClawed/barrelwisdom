@@ -30,6 +30,7 @@ export class A22EffectlistComponent extends DialogUseComponent {
   ev = false;
   forge = false;
   kind: string;
+  efftype: string;
 
   constructor(
     protected cdkDialog: Dialog,
@@ -56,18 +57,21 @@ export class A22EffectlistComponent extends DialogUseComponent {
     switch (this.kind) {
       case "normal": {
         this.normal = true;
+        this.efftype = 'Normal';
         this.gameService(this.a22service, 'effects');
         this.genericSettings('Effects', `The list of effects in ${this.gameTitle}.`)
         break;
       }
       case "forge": {
         this.forge = true;
+        this.efftype = 'Forge';
         this.gameService(this.a22service, 'forge-effects');
         this.genericSettings('Forge Effects', `The list of forge effects in ${this.gameTitle}.`)
         break;
       }
       case "ev": {
         this.ev = true;
+        this.efftype = 'EV';
         this.gameService(this.a22service, 'ev-effects');
         this.genericSettings('EV Effects', `The list of EV effects in ${this.gameTitle}.`)
         break;
@@ -92,8 +96,9 @@ export class A22EffectlistComponent extends DialogUseComponent {
       return effectlist;
     }
     const filterValue = value.toLowerCase();
-    return effectlist.filter(effect => {
+    effectlist = effectlist.filter(effect => {
       return (effect.desc) ? effect.name.toLowerCase().includes(filterValue) || effect.desc.toLowerCase().includes(filterValue) : effect.name.toLowerCase().includes(filterValue)
     });
+    return effectlist;
   }
 }

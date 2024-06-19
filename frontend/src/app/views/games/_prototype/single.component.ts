@@ -31,29 +31,30 @@ export abstract class SingleComponent extends DataComponent {
         protected seoService: SeoService) {
         super(destroy$, route, breadcrumbService, seoService)
         this.slug = this.inputSlug ? this.inputSlug : this.route.snapshot.params.subject;
+        this.data = this.inputData ? this.inputData : undefined;
         if (this.showNav) this.colset = "col-md-9 mx-auto ";
     }
 
     paramWatch(): void {
         this.route.paramMap
-            .pipe(
-                switchMap(params => {
-                    this.language = this.inputLang ? this.inputLang : params.get('language');
-                    this.slug = this.inputSlug ? this.inputSlug : params.get('subject');
-                    return this.changeData()
-                }),
-                catchError(error => {
-                    this.error = this.breadcrumbService.setStatus(error.status);
-                    return of(undefined);
-                }),
-                takeUntil(this.destroy$)
-            )
-            .subscribe(data => {
-                this.data = data;
-                if (this.data) {
-                    this.error = this.breadcrumbService.setStatus(200);
-                    this.afterAssignment();
-                }
-            })
+        .pipe(
+            switchMap(params => {
+                this.language = this.inputLang ? this.inputLang : params.get('language');
+                this.slug = this.inputSlug ? this.inputSlug : params.get('subject');
+                return this.changeData()
+            }),
+            catchError(error => {
+                this.error = this.breadcrumbService.setStatus(error.status);
+                return of(undefined);
+            }),
+            takeUntil(this.destroy$)
+        )
+        .subscribe(data => {
+            this.data = data;                
+            if (this.data) {
+                this.error = this.breadcrumbService.setStatus(200);
+                this.afterAssignment();
+            }
+        })
     }
 }

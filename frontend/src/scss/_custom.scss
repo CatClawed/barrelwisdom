@@ -105,7 +105,6 @@ img {
   background-color: white;
   background-image: url("/media/main/images/clean_textile.webp");
   margin-bottom: 0 !important;
-  min-height: 120px;
 }
 
 .card>*:last-child {
@@ -139,11 +138,45 @@ img {
 }
 
 .card-read-more-position {
-  position: absolute !important;
-  bottom: 1em !important;
-  right: 1em !important;
   box-shadow: none !important;
   font-size: 20px !important;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  margin-left: auto;
+  position: absolute !important;
+}
+
+.card-read-more-spacer {
+  margin-bottom: 0;
+}
+
+.card-read-more-spacer::after {
+  float: right;
+  height: 48px;
+  width: 48px;
+  content: '';
+  margin-bottom: -0.5rem;
+  margin-right: -0.5rem;
+  margin-left: auto;
+}
+
+.card-placeholder {
+  height: 120px;
+}
+
+.card-small {
+  width: 60%;
+  min-width: 320px;
+
+  @media screen and (max-width: 1280px) {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  
+  @media screen and (max-width: 800px) {
+    width: 100%;
+  }
 }
 
 /* Background pattern from Toptal Subtle Patterns */

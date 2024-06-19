@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
@@ -25,6 +25,12 @@ export abstract class DataComponent implements OnInit {
     gameURL: string;
     imgURL: string;
 
+    @Input()
+    inputData?: any;
+
+    @Input()
+    hideContents: boolean = false;
+
     constructor(
         protected readonly destroy$: DestroyService,
         protected route: ActivatedRoute,
@@ -34,7 +40,12 @@ export abstract class DataComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.paramWatch();
+        if (this.inputData !== undefined) {
+            this.data = this.inputData;
+        }
+        else {
+            this.paramWatch();
+        }
     }
 
     gameService(service: any, section: string) {

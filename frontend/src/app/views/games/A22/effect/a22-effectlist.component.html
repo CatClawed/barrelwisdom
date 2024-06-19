@@ -1,90 +1,64 @@
 @if (!error) {
-  <div>
-    @if (normal) {
-      <h1>Effects</h1>
-    }
-    @if (forge) {
-      <h1>Forge Effects</h1>
-    }
-    @if (ev) {
-      <h1>EV Effects</h1>
-    }
-    <div class="col-md-10 mx-auto">
-      <form [formGroup]="pageForm" class="form-horizontal">
-        <div class="row">
-          <mat-form-field class="col-md-8" appearance="outline">
-            <mat-label>Filter...</mat-label>
-            <input matInput formControlName="filtertext">
-          </mat-form-field>
-          <mat-form-field class="col-md-4" appearance="outline">
-            <mat-label>Type</mat-label>
-            <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
-              <mat-option value="1" selected> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-synthesis"></mat-icon> Any</mat-option>
-              @if (forge) {
-                <mat-option value="Weapon"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-weapon"  ></mat-icon> Weapon</mat-option>
-                <mat-option value="Armor"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-armor"    ></mat-icon> Armor</mat-option>
-              }
-              @if (ev) {
-                <mat-option value="Attack"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-attack"    ></mat-icon> Attack</mat-option>
-                <mat-option value="Heal"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-heal"    ></mat-icon> Heal</mat-option>
-              }
-              @if (forge || ev) {
-                <mat-option value="Accessory"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-accessory"  ></mat-icon> Accessory</mat-option>
-              }
-              @if (normal) {
-                <mat-option value="Material"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-material"  ></mat-icon> Material</mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
-        </div>
-      </form>
-    </div>
-    @if (!filteredEffects) {
-      <div class="d-flex justify-content-center">
-        <div class="spinner-border text-secondary m-5" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
-      </div>
-    }
-    <div class="item-grid">
-      @for (eff of filteredEffects | async; track identify($index, eff)) {
-        <div class="card card-body">
-          <h4 class="card-title card-icon-space">
-            <a (click)="openDialog(eff.slug, $event);" href="/{{gameURL}}/effects/{{eff.slug}}/{{language}}">{{eff.name}}</a>
-          </h4>
-          <div class="card-icon-position">
-            @if (normal && eff.effsub != 'Material') {
-              <i class="atelier atelier-np atelier-ryza2-type-synthesis"></i>
-            }
-            @if (eff.effsub == 'Material') {
-              <i class="atelier atelier-np atelier-ryza2-material"></i>
-            }
-            @if (!normal) {
-              <i class="atelier atelier-ryza2-type-{{eff.effsub.toLowerCase()}}"></i>
-            }
-            @if (ev) {
-              <span class="badge bg-secondary">EV</span>
-              }@if (forge) {
-              <i class="atelier atelier-np atelier-ryza2-forge"></i>
-            }
-          </div>
-          <button (click)="openDialog(eff.slug)" class="card-read-more-position" mat-mini-fab color="primary">
-            <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
-          </button>
-          @if (eff.desc) {
-            <span style="margin-right:1.7rem">{{eff.desc}}</span>
+  @if (normal) {
+    <h1>Effects</h1>
+  }
+  @if (forge) {
+    <h1>Forge Effects</h1>
+  }
+  @if (ev) {
+    <h1>EV Effects</h1>
+  }
+  <form [formGroup]="pageForm" class="form-horizontal">
+    <div class="row">
+      <mat-form-field class="col-md-8" appearance="outline">
+        <mat-label>Filter...</mat-label>
+        <input matInput formControlName="filtertext">
+      </mat-form-field>
+      <mat-form-field class="col-md-4" appearance="outline">
+        <mat-label>Type</mat-label>
+        <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
+          <mat-option value="1" selected> <mat-icon fontSet="atelier atelier-sm"
+              fontIcon="atelier-ryza2-type-synthesis"></mat-icon> Any</mat-option>
+          @if (forge) {
+            <mat-option value="Weapon"><mat-icon fontSet="atelier atelier-sm"
+                fontIcon="atelier-ryza2-type-weapon"></mat-icon> Weapon</mat-option>
+            <mat-option value="Armor"><mat-icon fontSet="atelier atelier-sm"
+                fontIcon="atelier-ryza2-type-armor"></mat-icon> Armor</mat-option>
           }
           @if (ev) {
-            <ul style="margin-right:1.7rem;">
-              @for (e of eff.effects; track e) {
-                <li>
-                  <tooltip [tip]="e.desc">{{e.name}}</tooltip>
-                </li>
-              }
-            </ul>
+            <mat-option value="Attack"><mat-icon fontSet="atelier atelier-sm"
+                fontIcon="atelier-ryza2-type-attack"></mat-icon> Attack</mat-option>
+            <mat-option value="Heal"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-heal"></mat-icon>
+              Heal</mat-option>
           }
-        </div>
-      }
+          @if (forge || ev) {
+            <mat-option value="Accessory"><mat-icon fontSet="atelier atelier-sm"
+                fontIcon="atelier-ryza2-type-accessory"></mat-icon> Accessory</mat-option>
+          }
+          @if (normal) {
+            <mat-option value="Material"><mat-icon fontSet="atelier atelier-sm"
+                fontIcon="atelier-ryza2-material"></mat-icon> Material</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
     </div>
+  </form>
+  <div class="item-grid">
+    @for (eff of filteredEffects | async; track eff; let index=$index) {
+      @if (index < 20) {
+        <a22-effect (buttonClicked)="openDialog($event)" [inputData]="eff"
+        [hideContents]="true" [efftype]="efftype"></a22-effect>
+      }
+      @else {
+        @defer (on viewport) {
+          <a22-effect (buttonClicked)="openDialog($event)" [inputData]="eff"
+          [hideContents]="true" [efftype]="efftype"></a22-effect>
+        }
+        @placeholder() {
+          <div class="card card-placeholder">
+          </div>
+        }
+      }
+    }
   </div>
 }

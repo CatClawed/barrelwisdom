@@ -1,113 +1,114 @@
 @if (data; as effect) {
-  <div class="mx-auto row spacer">
-    <div class="{{colset}} card card-body">
-      <div class="flex">
-        <h4 class="card-title">{{effect.name}}</h4>
-        <div class="card-icon-position">
-          @if (effect.efftype == 'Normal' && effect.effsub != 'Material') {
-            <i class="atelier atelier-np atelier-ryza2-type-synthesis"></i>
-          }
-          @if (effect.effsub == 'Material') {
-            <i class="atelier atelier-np atelier-ryza2-material"></i>
-          }
-          @if (effect.efftype != 'Normal') {
-            <i class="atelier atelier-ryza2-type-{{effect.effsub.toLowerCase()}}"></i>
-          }
-          @if (effect.efftype == 'EV') {
-            <span class="badge bg-secondary">EV</span>
-          }
-          @if (effect.efftype == 'Forge') {
-            <i class="atelier atelier-np atelier-ryza2-forge"></i>
-          }
-        </div>
-      </div>
-      @if (effect.desc) {
-        <p>{{effect.desc}}</p>
-      }
-      @if (effect.note) {
-        <p><b>Note:</b> {{effect.note}}</p>
-      }
-      @if (effect.efftype == 'Normal' || effect.efftype == 'Material') {
-        <b>From Item:</b>
+<effect [effect]="data"
+  [small]="inputSlug ? false : hideContents ? false : true"
+  [hideContents]="hideContents"
+  url="/ryza2/effects/{{effect.slug}}"
+  [language]="language"
+  (buttonClicked)="buttonClicked.emit($event)">
+  <ng-container icon>
+    @if (efftype == 'Normal' && !effect.effsub) {
+    <i class="atelier atelier-np atelier-ryza2-type-synthesis"></i>
+    }
+    @if (effect.effsub == 'Material') {
+    <i class="atelier atelier-np atelier-ryza2-material"></i>
+    }
+    @if (efftype != 'Normal') {
+    <i class="atelier atelier-ryza2-type-{{effect.effsub.toLowerCase()}}"></i>
+    }
+    @if (efftype == 'EV') {
+    <span class="badge bg-secondary">EV</span>
+    }
+    @if (efftype == 'Forge') {
+    <i class="atelier atelier-np atelier-ryza2-forge"></i>
+    }
+  </ng-container>
+  @if (efftype == 'EV' && !hideContents) {
+    <b>Combines Effects:</b>
+  }
+  @if (effect.effects && efftype == 'EV') {
+  <ul [style]="hideContents ? 'float:left;margin-bottom:0;' : null">
+    @for (e of effect.effects; track e) {
+    <li>
+      <tooltip [tip]="e.desc">{{e.name}}</tooltip>
+    </li>
+    }
+  </ul>
+  }
+  @if (!hideContents) {
+    @if (efftype == 'Normal' || efftype == 'Material') {
+      <b>From Item:</b>
       }
       @if (effect.effectline_set) {
-        <ul>
-          @for (e of effect.effectline_set; track e) {
-            <li><a routerLink="/{{gameURL}}/items/{{e.slug}}/{{language}}">{{e.name}}</a></li>
-          }
-        </ul>
+      <ul>
+        @for (e of effect.effectline_set; track e) {
+        <li><a routerLink="/{{gameURL}}/items/{{e.slug}}/{{language}}">{{e.name}}</a></li>
+        }
+      </ul>
       }
-      @if (effect.efftype == 'EV') {
-        <b>Combines Effects:</b>
-      }
-      @if (effect.effects && effect.efftype == 'EV') {
-        <ul>
-          @for (e of effect.effects; track e) {
-            <li>
-              <tooltip [tip]="e.desc">{{e.name}}</tooltip>
-            </li>
-          }
-        </ul>
-      }
-      @if ((effect.efftype == 'Normal' || effect.efftype == 'Material') && effect.parent) {
+      @if ((efftype == 'Normal' || efftype == 'Material') && effect.parent) {
         <b>Child Effects:</b>
       }
-      @if ((effect.efftype != 'Normal' && effect.efftype != 'Material') && effect.parent) {
+      @if ((efftype != 'Normal' && efftype != 'Material') && effect.parent) {
         <b>Parent Effects:</b>
       }
       @if (effect.parent) {
-        <ul>
-          @for (e of effect.parent; track e) {
-            <li><a routerLink="/{{gameURL}}/effects/{{e.slug}}/{{language}}">{{e.name}}</a></li>
-          }
-        </ul>
+      <ul>
+        @for (e of effect.parent; track e) {
+        <li>
+          <a routerLink="/{{gameURL}}/effects/{{e.slug}}/{{language}}">{{e.name}}</a>
+        </li>
+        }
+      </ul>
       }
       @if (effect.actTag0) {
-        <b>Advanced Data:</b>
-      }
-      @if (effect.actTag0) {
-        <ul>
-          <li>
-            @if (effect.attTag0) {
-              <span>{{effect.attTag0}} /</span>
-              } {{effect.actTag0}}
-              <ul>
-                @if (effect.min_1_0) {
-                  <li><b>Value 1: </b>{{effect.min_1_0}}@if (effect.max_1_0) {
-                  <span> - {{effect.max_1_0}}</span>
-                }</li>
+      <b>Advanced Data:</b>
+      <ul>
+        <li>
+          @if (effect.attTag0) {
+          {{effect.attTag0}} /
+          } {{effect.actTag0}}
+          <ul>
+            @if (effect.min_1_0) {
+            <li><b>Value 1: </b>{{effect.min_1_0}}
+              @if (effect.max_1_0) {
+              - {{effect.max_1_0}}
               }
-              @if (effect.min_2_0) {
-                <li><b>Value 2: </b>{{effect.min_2_0}}@if (effect.max_2_0) {
-                <span> - {{effect.max_2_0}}</span>
-              }</li>
+            </li>
+            }
+            @if (effect.min_2_0) {
+            <li><b>Value 2: </b>{{effect.min_2_0}}
+              @if (effect.max_2_0) {
+               - {{effect.max_2_0}}
+              }
+            </li>
             }
           </ul>
         </li>
         @if (effect.actTag1) {
-          <li>
-            @if (effect.attTag1) {
-              <span>{{effect.attTag1}} /</span>
-              } {{effect.actTag1}}
-              <ul>
-                @if (effect.min_1_1) {
-                  <li><b>Value 1: </b>{{effect.min_1_1}}@if (effect.max_1_1) {
-                  <span> - {{effect.max_1_1}}</span>
-                }</li>
+        <li>
+          @if (effect.attTag1) {
+            {{effect.attTag1}} /
+          } {{effect.actTag1}}
+          <ul>
+            @if (effect.min_1_1) {
+            <li><b>Value 1: </b>{{effect.min_1_1}}
+              @if (effect.max_1_1) {
+              - {{effect.max_1_1}}
               }
-              @if (effect.min_2_1) {
-                <li><b>Value 2: </b>{{effect.min_2_1}}@if (effect.max_2_1) {
-                <span> - {{effect.max_2_1}}</span>
-              }</li>
+            </li>
+            }
+            @if (effect.min_2_1) {
+            <li><b>Value 2: </b>{{effect.min_2_1}}
+              @if (effect.max_2_1) {
+               - {{effect.max_2_1}}
+              }
+            </li>
             }
           </ul>
         </li>
+        }
+      </ul>
       }
-    </ul>
   }
-</div>
-@if (showNav) {
-  <div class="col-md-3" ></div>
-}
-</div>
+</effect>
 }
