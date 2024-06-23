@@ -3,9 +3,10 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Effect } from '@app/views/games/A15/_services/a15.interface';
 import { A15Service } from '@app/views/games/A15/_services/a15.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -19,7 +20,7 @@ import { A15EffectComponent } from './a15-effect.component';
   selector: 'a15-effectlist',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, A15EffectComponent]
+  imports: [...CommonImports, ...MaterialFormImports, A15EffectComponent, FilterListComponent]
 })
 
 export class A15EffectlistComponent extends DialogUseComponent {
@@ -57,6 +58,7 @@ export class A15EffectlistComponent extends DialogUseComponent {
   }
 
   private filterT(value: string): Effect[] {
+    this.hide = false;
     let effectlist: Effect[] = this.data;
     if (!value) {
       return effectlist;

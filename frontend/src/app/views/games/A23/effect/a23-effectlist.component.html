@@ -1,37 +1,20 @@
 @if (!error) {
-  <div>
-    <h1>Effects</h1>
-    <div class="col-md-10 mx-auto">
-      <form [formGroup]="pageForm" class="form-horizontal">
-        <div class="row">
-          <mat-form-field class="col-md-12" appearance="outline">
-            <mat-label>Filter...</mat-label>
-            <input matInput formControlName="filtertext">
-          </mat-form-field>
-        </div>
-      </form>
-    </div>
-    @if (!filteredEffects) {
-      <div class="d-flex justify-content-center">
-        <div class="spinner-border text-secondary m-5" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
+  <ng-template #template let-item="item">
+    <a23-effect (buttonClicked)="openDialog($event)" [inputData]="item"
+      [hideContents]="true"></a23-effect>
+  </ng-template>
+  <filter-list
+    [list]="filteredEffects"
+    [(hide)]="hide"
+    title="Effects"
+    [template]="template">
+    <form [formGroup]="pageForm" class="form-horizontal">
+      <div class="row">
+        <mat-form-field class="col-md-12" appearance="outline">
+          <mat-label>Filter...</mat-label>
+          <input style="height: 100%;" matInput formControlName="filtertext">
+        </mat-form-field>
       </div>
-    }
-    <div class="item-grid">
-      @for (eff of filteredEffects | async; track identify($index, eff)) {
-        <div class="card card-body">
-          <h4 class="card-title card-icon-space">
-            <a (click)="openDialog(eff.slug, $event);" href="/{{gameURL}}/effects/{{eff.slug}}/{{language}}">{{eff.name}}</a>
-          </h4>
-          <button (click)="openDialog(eff.slug)" class="card-read-more-position" mat-mini-fab color="primary">
-            <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
-          </button>
-          @if (eff.desc) {
-            <span style="margin-right:1.7rem">{{eff.desc}}</span>
-          }
-        </div>
-      }
-    </div>
-  </div>
+    </form>
+  </filter-list>
 }

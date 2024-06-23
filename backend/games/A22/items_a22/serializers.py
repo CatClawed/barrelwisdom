@@ -206,7 +206,6 @@ class A22UsableItemSerializer(serializers.ModelSerializer):
 
 # Full data individual view
 class A22ItemSerializerFull(serializers.ModelSerializer):
-    slug = serializers.CharField(source="slug")
     name = serializers.SerializerMethodField()
     desc = serializers.SerializerMethodField()
     category = A22CategorySerializer(many=True)

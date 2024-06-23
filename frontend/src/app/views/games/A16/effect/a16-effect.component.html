@@ -1,25 +1,35 @@
 @if (data; as effect) {
-  <div class="mx-auto row spacer">
-    <div class="{{colset}} card card-body">
-      <h4 class="card-title">{{effect.name}}</h4>
-      @if (effect.desc) {
-        <p>{{effect.desc}}</p>
-      }
-      @if (effect.effectdata_set) {
-        <b>From Item:</b>
-      }
-      @if (effect.effectdata_set) {
-        <ul>
-          @for (e of effect.effectdata_set; track e) {
+  <effect [effect]="effect"
+  [small]="inputSlug ? false : hideContents ? false : true"
+  [hideContents]="hideContents"
+  url="/shallie/effects/{{effect.slug}}"
+  [language]="language"
+  (buttonClicked)="buttonClicked.emit($event)">
+
+    @if (!hideContents && effect.effectdata_set) {
+      <b>From Item:</b>
+    }
+    @if (effect.effectdata_set) {
+      <ul [style]="hideContents ? 'float: left;margin-bottom: 0;' : null">
+        @for (e of effect.effectdata_set; track e; let index=$index) {
+          @if (index == 3 && effect.effectdata_set.length > 4 && hideContents) {
             <li>
-              <a routerLink="/{{gameURL}}/items/{{e.effectlines_set[0].slug}}/{{language}}">{{e.effectlines_set[0].name}}</a>
+              <a (click)="$event.preventDefault(); buttonClicked.emit(effect.slug);"
+                href="/shallie/effects/{{effect.slug}}/{{language}}">See more...</a>
             </li>
           }
-        </ul>
-      }
-    </div>
-    @if (showNav) {
-      <div class="col-md-3" ></div>
+          @else if(index < 4) {
+            <li>
+              <a routerLink="/shallie/items/{{e.effectlines_set[0].slug}}/{{language}}">{{e.effectlines_set[0].name}}</a>
+            </li>
+          }
+          @else if (index > 3 && !hideContents) {
+            <li>
+              <a routerLink="/shallie/items/{{e.effectlines_set[0].slug}}/{{language}}">{{e.effectlines_set[0].name}}</a>
+            </li>
+          }
+        }
+      </ul>
     }
-  </div>
+  </effect>
 }

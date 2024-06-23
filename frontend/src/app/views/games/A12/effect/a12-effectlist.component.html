@@ -1,5 +1,13 @@
 @if (!error) {
-  <h1>Effects</h1>
+  <ng-template #template let-item="item">
+    <a12-effect (buttonClicked)="openDialog($event)" [inputData]="item"
+      [hideContents]="true"></a12-effect>
+  </ng-template>
+  <filter-list
+    [list]="filteredEffects"
+    [(hide)]="hide"
+    title="Effects"
+    [template]="template">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
         <mat-form-field class="col-md-12" appearance="outline">
@@ -8,10 +16,5 @@
         </mat-form-field>
       </div>
     </form>
-  <div class="item-grid">
-    @for (eff of filteredEffects | async; track eff; let index=$index) {
-      <a12-effect (buttonClicked)="openDialog($event)" [inputData]="eff"
-        [hideContents]="true"></a12-effect>
-    }
-  </div>
+  </filter-list>
 }

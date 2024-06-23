@@ -1,25 +1,19 @@
 @if (data; as effect) {
-  <div class="mx-auto row spacer">
-    <div class="{{colset}} card card-body">
-      <h4 class="card-title  card-icon-space">{{effect.name}}</h4>
-      @if (effect.desc) {
-        <p>{{effect.desc}}</p>
-      }
-      @if (effect.effectline_set) {
-        <b>From Item:</b>
-      }
-      @if (effect.effectline_set) {
-        <ul>
-          @for (e of effect.effectline_set; track e) {
-            <li>
-              <a routerLink="/{{gameURL}}/items/{{e.slug}}/{{language}}">{{e.name}}</a>
-            </li>
-          }
-        </ul>
-      }
-    </div>
-    @if (showNav) {
-      <div class="col-md-3" ></div>
+  <effect [effect]="effect"
+  [small]="inputSlug ? false : hideContents ? false : true"
+  [hideContents]="hideContents"
+  url="/escha/effects/{{effect.slug}}"
+  [language]="language"
+  (buttonClicked)="buttonClicked.emit($event)">
+    @if (!hideContents) {
+      <b>From Item:</b>
     }
-  </div>
+    <ul [style]="hideContents ? 'float: left;margin-bottom: 0;' : null">
+      @for (e of effect.effectline_set; track e) {
+        <li>
+          <a routerLink="/escha/items/{{e.slug}}/{{language}}">{{e.name}}</a>
+        </li>
+      }
+    </ul>
+  </effect>
 }

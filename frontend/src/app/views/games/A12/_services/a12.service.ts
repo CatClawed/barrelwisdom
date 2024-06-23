@@ -9,7 +9,7 @@ export class A12Service {
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
       };
-    
+
     constructor(
       private http: HttpClient,
     ) {
@@ -18,7 +18,7 @@ export class A12Service {
     public readonly gameTitle = {"en": "Atelier Totori", "ja":"トトリのアトリエ"};
     public readonly gameURL = "totori";
     public readonly imgURL = `${environment.mediaURL}games/${this.gameURL}/`;
-    
+
     getTraitList(language: string): Observable<Trait[]> {
       return this.http.get<Trait[]>(`${environment.apiUrl}/A12/trait/${language}/`);
     }
@@ -70,5 +70,5 @@ export class A12Service {
     getRegion(slug: string, language: string): Observable<AreaData> {
       return this.http.get<AreaData>(`${environment.apiUrl}/A12/area/${slug}/${language}/`);
     }
-    
+
 }

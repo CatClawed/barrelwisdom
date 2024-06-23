@@ -6,7 +6,6 @@ from collections import OrderedDict
 # Full Data
 class A22LocationSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
-    slug = serializers.CharField(source="slug")
     reg = serializers.CharField(source="region.slug", allow_null=True)
     class Meta:
         model = Location

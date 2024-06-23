@@ -1,20 +1,16 @@
 @if (data; as effect) {
-  <div class="mx-auto row spacer">
-    <div class="{{colset}} card card-body">
-      <div class="flex">
-        <h4 class="card-title">{{effect.name}}</h4>
-      </div>
-      @if (effect.desc) {
-        <p>{{effect.desc}}</p>
-      }
-      @if (effect.items) {
-        <b>From Item:</b>
-      }
+  <effect [effect]="effect"
+  [small]="inputSlug ? false : hideContents ? false : true"
+  [hideContents]="hideContents"
+  url="/totori/effects/{{effect.slug}}"
+  [language]="language"
+  (buttonClicked)="buttonClicked.emit($event)">
+    @if (!hideContents) {
       @if (effect.items) {
         <ul>
           @for (i of effect.items; track i) {
             <li>
-              <a routerLink="/{{gameURL}}/items/{{i.slug}}/{{language}}">{{i.name}}</a>
+              <a routerLink="/sophie2/items/{{i.slug}}/{{language}}">{{i.name}}</a>
             </li>
           }
         </ul>
@@ -32,22 +28,19 @@
                 <ul>
                   @if (data.min_1_0) {
                     <li><b>Value 1: </b>{{data.min_1_0}}@if (data.max_1_0) {
-                    <span> - {{data.max_1_0}}</span>
-                  }</li>
-                }
-                @if (data.min_2_0) {
-                  <li><b>Value 2: </b>{{data.min_2_0}}@if (data.max_2_0) {
-                  <span> - {{data.max_2_0}}</span>
-                }</li>
-              }
-            </ul>
-          </li>
-        }
-      </ul>
+                      <span> - {{data.max_1_0}}</span>
+                    }</li>
+                  }
+                  @if (data.min_2_0) {
+                    <li><b>Value 2: </b>{{data.min_2_0}}@if (data.max_2_0) {
+                      <span> - {{data.max_2_0}}</span>
+                    }</li>
+                  }
+                </ul>
+            </li>
+          }
+        </ul>
+      }
     }
-  </div>
-  @if (showNav) {
-    <div class="col-md-3" ></div>
-  }
-</div>
+  </effect>
 }

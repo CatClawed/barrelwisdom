@@ -2,11 +2,11 @@ import { Dialog } from '@angular/cdk/dialog';
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Tooltip } from '@app/views/_components/tooltip/tooltip.component';
 import { Effect } from '@app/views/games/A22/_services/a22.interface';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
@@ -21,7 +21,7 @@ import { A22EffectComponent } from './a22-effect.component';
   providers: [DestroyService],
   standalone: true,
   imports: [...CommonImports, ...MaterialFormImports,
-    A22EffectComponent, Tooltip, MatButtonModule]
+    A22EffectComponent, Tooltip, FilterListComponent]
 })
 
 export class A22EffectlistComponent extends DialogUseComponent {
@@ -88,6 +88,7 @@ export class A22EffectlistComponent extends DialogUseComponent {
   }
 
   private filterT(value: string, type: string): Effect[] {
+    this.hide = false;
     let effectlist: Effect[] = this.data;
     if (type != "1") {
       effectlist = effectlist.filter(effect => effect.effsub == type)
@@ -96,9 +97,8 @@ export class A22EffectlistComponent extends DialogUseComponent {
       return effectlist;
     }
     const filterValue = value.toLowerCase();
-    effectlist = effectlist.filter(effect => {
+    return effectlist.filter(effect => {
       return (effect.desc) ? effect.name.toLowerCase().includes(filterValue) || effect.desc.toLowerCase().includes(filterValue) : effect.name.toLowerCase().includes(filterValue)
     });
-    return effectlist;
   }
 }

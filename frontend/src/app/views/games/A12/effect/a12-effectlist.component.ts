@@ -1,11 +1,12 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { Location } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Effect } from '@app/views/games/A12/_services/a12.interface';
 import { A12Service } from '@app/views/games/A12/_services/a12.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -18,7 +19,7 @@ import { A12EffectComponent } from './a12-effect.component';
   templateUrl: 'a12-effectlist.component.html',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, A12EffectComponent]
+  imports: [...CommonImports, ...MaterialFormImports, A12EffectComponent, FilterListComponent]
 })
 
 export class A12EffectlistComponent extends DialogUseComponent {
@@ -56,6 +57,7 @@ export class A12EffectlistComponent extends DialogUseComponent {
   }
 
   private filterT(value: string): Effect[] {
+    this.hide = false;
     let effectlist: Effect[] = this.data;
     if (!value) {
       return effectlist;
