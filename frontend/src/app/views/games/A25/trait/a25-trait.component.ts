@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
@@ -12,7 +13,7 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
   selector: 'a25-trait',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports]
+  imports: [...CommonImports, NgTemplateOutlet]
 })
 export class A25TraitComponent extends SingleComponent {
   constructor(
@@ -23,6 +24,12 @@ export class A25TraitComponent extends SingleComponent {
     protected a25service: A25Service) {
     super(destroy$, route, breadcrumbService, seoService);
   }
+
+  @Output()
+  charClicked = new EventEmitter<string>();
+
+  @Output()
+  itemClicked = new EventEmitter<string>();
 
   changeData() {
     this.gameService(this.a25service, 'traits');
@@ -36,4 +43,4 @@ export class A25TraitComponent extends SingleComponent {
       false,
       this.inputSlug ? false : true);
   }
-} 
+}

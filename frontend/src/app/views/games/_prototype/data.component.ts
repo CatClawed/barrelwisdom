@@ -22,7 +22,11 @@ export abstract class DataComponent implements OnInit {
     seoURL: string;
 
     gameTitle: string;
+
+    @Input()
     gameURL: string;
+
+    @Input()
     imgURL: string;
 
     @Input()

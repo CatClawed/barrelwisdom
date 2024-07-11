@@ -90,6 +90,8 @@ class A25SynthesisItemListSerializer(A25DefaultSerializer):
         fields = ['slug', 'name', 'desc', 'limit', 'rarity', 'equip', 'combat',
             'ing', 'colors']
     def get_ing(self,obj):
+        if obj.rarity > 3:
+            return
         ings = obj.recipe_set.first()
         arr = []
         for thing in [ings.ing1, ings.ing2, ings.ing3]:
@@ -100,6 +102,8 @@ class A25SynthesisItemListSerializer(A25DefaultSerializer):
         if obj.limit:
             return A25DefaultSerializer.get_text_gbl(self,obj.limit,obj.gbl)
     def get_colors(self,obj):
+        if obj.rarity > 3:
+            return
         rec = obj.recipe_set.all()[0]
         return [rec.color1.slug, rec.color2.slug, rec.color3.slug]
 

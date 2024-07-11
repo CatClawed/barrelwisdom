@@ -8,16 +8,16 @@ from scripts.util import import_generic, slug_me
 BASE_URL = 'https://raw.githubusercontent.com/theBowja/resleriana-db/main/data/'
 
 names = ['ability', 'battle_hint', 'battle_tool', 'battle_tool_trait', 'character', 'character_tag', 'effect', 'enemy', 'equipment_tool', 'equipment_tool_trait', 'hyperlink', 'item', 'leader_skill_condition', 'memoria', 'memoria_buff_growth', 'quest', 'recipe', 'recipe_plan', 'research', 'research_effect', 'research_effect_level', 'reward_set', 'skill']
-names_gbl = ['ability', 'battle_hint', 'battle_tool', 'battle_tool_trait', 'character', 'effect', 'enemy', 'equipment_tool', 'equipment_tool_trait', 'item', 'memoria', 'quest', 'recipe', 'recipe_plan', 'research', 'research_effect', 'skill']
+names_gbl = ['ability', 'battle_hint', 'battle_tool', 'battle_tool_trait', 'character', 'character_tag', 'effect', 'enemy', 'equipment_tool', 'equipment_tool_trait', 'item', 'memoria', 'quest', 'recipe', 'recipe_plan', 'research', 'research_effect', 'skill']
 jsons = {}
 languages = ['en', 'zh_cn', 'zh_tw']
 
 # for setting slugs
 additions = {
-    'イザナ': 'izana-2',
-    'ハイディ': 'heidi-2'
+    'ライザ': 'ryza-4',
+    'レスナ': 'resna-5'
 }
-memoria_index = 98 # dragon bride
+memoria_index = 104 # summer 1
 
 trait_cat = {
     1: Filterable.objects.get(text_en="Attack"),
@@ -157,7 +157,7 @@ def retrieve_all_jsons():
                     for entry in jsons[name]:
                         found = search(entry['id'], data)
                         if found:
-                            for key in ['description', 'name', 'another_name', 'requirements', 'abbreviation']: # 'leader_skill'
+                            for key in ['description', 'name', 'another_name', 'requirements', 'abbreviation', 'leader_skill']:
                                 if key in found[0]:
                                     entry[f'{key}_{lang}'] = found[0][key]
     with urllib.request.urlopen('https://raw.githubusercontent.com/theBowja/resleriana-db/main/resources/Japan/path_hash_to_name.json') as url:
@@ -208,7 +208,7 @@ def import_research():
                 vals = search(res['research_effect_ids'][0], jsons['research_effect_level'], field='research_effect_id')
                 same_type = Research.objects.filter(desc=desc)
                 val = search(len(same_type)+1, vals, field='level')[0]['value'] # heck this
-                
+
                 obj = Research(
                     level=res['level'],
                     kind=filt,
@@ -231,7 +231,7 @@ def import_combat_traits():
             print('Create', trait["name"], trait['id'])
 
         kind = Filterable.objects.get(slug="combat")
-        
+
         name = checkName(
             text_ja = trait['name'],
             text_en = trait['name_en'] if 'name_en' in trait else '',
@@ -364,7 +364,7 @@ def import_skills(char_dict, char):
 
     for skill in skills:
         fix_hyperlink(skill[0]['description'])
-        
+
         name = checkName(
             text_ja=skill[0]['name'],
             text_en=skill[0]['name_en'] if 'name_en' in skill[0] else '',
@@ -431,7 +431,7 @@ def import_skills(char_dict, char):
 
         obj.save()
         index = index + 1
-        
+
 def import_passives(char_dict, char):
     passives = []
     for a in char_dict['ability_ids']:
@@ -492,16 +492,16 @@ def import_characters(event=None):
         )
         leader_name = checkName(
             text_ja = char['leader_skill']["name"],
-            text_en = '',
-            text_sc = '',
-            text_tc = '',
+            text_en = char["leader_skill_en"]["name"] if "leader_skill_en" in char else '',
+            text_sc = char["leader_skill_zh_cn"]["name"] if "leader_skill_zh_cn" in char else '',
+            text_tc = char["leader_skill_zh_tw"]["name"] if "leader_skill_zh_tw" in char else '',
             volatile=True
         )
         leader_desc = checkDesc(
             text_ja = char['leader_skill']["description"],
-            text_en = '',
-            text_sc = '',
-            text_tc = '',
+            text_en = char["leader_skill_en"]["description"] if "leader_skill_en" in char else '',
+            text_sc = char["leader_skill_zh_cn"]["description"] if "leader_skill_zh_cn" in char else '',
+            text_tc = char["leader_skill_zh_tw"]["description"] if "leader_skill_zh_tw" in char else '',
         )
         try:
             obj = Character.objects.get(name=name, title=title)
@@ -581,7 +581,7 @@ def import_memoria(memoria_index, event=None):
         skills = []
         for ability in mem['ability_ids']:
             skills.append(search(ability, jsons['ability'])[0])
-        
+
         skill_name = checkName(
             text_ja = skills[0]["name"],
             text_en = skills[0]["name_en"] if 'name_en' in skills[0] else '',
@@ -659,7 +659,7 @@ def import_material(event=None):
             create = True
             if event:
                 obj.limit = event
-        
+
         obj.name = name
         obj.desc = desc
         obj.rarity = item['rarity']
@@ -712,7 +712,7 @@ def import_combat_items(event=None):
             create = True
             if event:
                 obj.limit = event
-        
+
         obj.name = name
         if obj not in prev_items:
             obj.rarity = item['rarity']
@@ -721,12 +721,12 @@ def import_combat_items(event=None):
                 obj.desc = desc
         obj.kind=Filterable.objects.get(slug="combat", kind="item_type")
         obj.save()
-        
+
         try:
             obj2 = CombatItem.objects.get(item=obj)
         except:
             obj2 = CombatItem(item=obj)
-        
+
         obj2.kind = combat_kind[item['trait_filter_ids'][0]]
         if len(item['attack_attributes']) > 0:
             obj2.elem = elems[item['attack_attributes'][0]]
@@ -793,7 +793,7 @@ def import_equipment(event=None):
             obj2 = Equipment(item=obj)
 
         obj2.kind=equip_kind[item['slot_type']]
-        
+
         if item['ability_ids']:
             ability = search(item['ability_ids'][0], jsons['ability'])[0]
             if obj in prev_item:
@@ -990,7 +990,7 @@ def import_score_battle(quest, difficulty, chapter, section):
         for i in range(1,len(reward)):
             obj.rewards.add(GetReward(reward[i], i))
         sb.difficulties.add(obj)
-    
+
     section = section + 1
     return difficulty, chapter, section
 
@@ -1087,6 +1087,7 @@ def import_quest():
         if quest['id'] >= 204200000 and quest['id'] < 204300000  and quest['skippable_type'] != 1:
             import_dungeon(quest)
             count = count + 1
+        """
         if quest['id'] >= 301000000 and quest['id'] < 302000000:
             import_tower(quest, 'elemental-tower')
             count = count + 1
@@ -1111,6 +1112,7 @@ def import_quest():
         if quest['id'] >= 308000000 and quest['id'] < 309000000:
             import_tower(quest, 'wind')
             count = count + 1
+        """
     print(count)
 
 def import_enemy():
@@ -1259,7 +1261,7 @@ def ImpBattle(row, index):
                     if row[f'Panel {i}']:
                         panel = Filterable.objects.get(kind='panel', text_ja=row[f'Panel {i}'])
                         obj.panels.add(panel)
-                
+
                 if tower:
                     tower.battle = obj
                     tower.save()
@@ -1298,13 +1300,13 @@ def global_additions():
     rStory = RecipeTab.objects.get(order=1)
     rExtra = RecipeTab.objects.get(order=2)
 
-    dungeons = None # ['Passage to the Remnants of Dreams', 'Celestial Gloom Tower']
+    dungeons = [] #['The Fragrant Path']
     score_battle_chapter = None
     tower_floor_max = None
     elem_tower_floor_max = None
-    events = ['決戦 LEGEND FES 目覚めた災厄']
-    recipe_pages = [] #[[rStory, 27], [rExtra, 28]] # refer to recipepage db for numbers
-    traits = [] #['Critical Damage Up']
+    events = [] #['決戦 LEGEND FES 最後の日']
+    recipe_pages = []# [[rStory, 31], [rExtra, 32]] # refer to recipepage db for numbers
+    traits = []# ['Burst Skill Power Up']
 
     if tower_floor_max:
         towers = Tower.objects.filter(kind=Filterable.objects.get(text_en="Elemental Tower"))
@@ -1405,16 +1407,22 @@ def create_event(ja, en='', sc='', tc=''):
         en = ja
     return checkDesc(en, ja, sc, tc)
 
+# I wrote this intending on removing duds but there aren't actually too many of them
+def cleanup():
+    bad = Desc.objects.filter(character__isnull=True, dungeonfloor__isnull=True, enemyskill__isnull=True, hint__isnull=True, item__isnull=True, item_limited__isnull=True, leader_desc__isnull=True, memoria__isnull=True, memoria_limited__isnull=True, passive__isnull=True, recipepage__isnull=True, req__isnull=True, research__isnull=True, skill__isnull=True, tower__isnull=True, trait__isnull=True, unlock1__isnull=True, unlock2__isnull=True, unlock3__isnull=True)
+    for b in bad:
+        print(b.text_en, b.text_ja)
+
 # From Resleri Academy, use abbreviations in recipe_plan
 
-gacha = None #create_event(ja='竜の花嫁 LEGEND FES', en="Dragon's Bride LEGEND FES")
-event = None #create_event(ja='竜の涙は花と散る', en="Dragon Tears")
+gacha = None #create_event(ja='アトリエサマー第1弾 LEGEND FES', en="Atelier Summer 1 LEGEND FES")
+event = None #create_event(ja='アトリエサマー2024 第1弾', en="Atelier Summer 2024 1")
 
 #createUpdate()
-#retrieve_all_jsons()
+retrieve_all_jsons()
 #import_combat_traits()
 #import_equipment_traits()
-#import_characters(event=gacha)
+import_characters(event=gacha)
 #import_memoria(memoria_index, event=gacha)
 #import_material(event=event)
 #import_combat_items(event=event)
@@ -1426,7 +1434,7 @@ event = None #create_event(ja='竜の涙は花と散る', en="Dragon Tears")
 
 #import_research()
 
-global_additions()
+#global_additions()
 
 #import_generic(ImpEnemySkill)
 #import_generic(ImpEnemy)

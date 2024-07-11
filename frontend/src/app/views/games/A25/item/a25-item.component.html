@@ -11,10 +11,10 @@
           }
         }
         @if (item.combat) {
-          <a25-icon style="height:3rem;width:3rem;" [kind]="item.combat[0].kind" [colors]="item.recipe[0].colors"></a25-icon>
+          <a25-icon style="height:3rem;width:3rem;" [kind]="item.combat[0].kind" [colors]="item.recipe ? item.recipe[0].colors : ['black','black', 'black']"></a25-icon>
         }
         @if (item.equip) {
-          <a25-icon style="height:3.5rem;width:3.5rem;" [kind]="item.equip[0].kind" [colors]="item.recipe[0].colors"></a25-icon>
+          <a25-icon style="height:3.5rem;width:3.5rem;" [kind]="item.equip[0].kind" [colors]="item.recipe ? item.recipe[0].colors : ['black','black', 'black']"></a25-icon>
         }
       </div>
       <img loading="lazy" class="resleri-item-frame" height="256" width="256"

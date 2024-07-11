@@ -88,20 +88,20 @@ class A25CharaSerializer(A25DefaultSerializer):
             'leader_skill_name', 'leader_skill_desc', 'leader_skill_chars', 'tags'
         ]
     def get_title(self, obj):
-        return A25DefaultSerializer.get_text_gbl(self,obj.title,obj.gbl)
+        return A25DefaultSerializer.get_text(self,obj.title)
     def get_limit(self, obj):
         if obj.limit:
             return A25DefaultSerializer.get_text(self,obj.limit)
     def get_leader_skill_name(self, obj):
-        return A25DefaultSerializer.get_text_gbl(self,obj.leader_skill_name,False)
+        return A25DefaultSerializer.get_text(self,obj.leader_skill_name)
     def get_leader_skill_desc(self, obj):
-        return A25DefaultSerializer.get_text_gbl(self,obj.leader_skill_desc,False)
+        return A25DefaultSerializer.get_text(self,obj.leader_skill_desc)
     def get_leader_skill_chars(self, obj):
         if obj.leader_skill_tag:
             chars = obj.leader_skill_tag.chara_tags.all()
             return [char.slug for char in chars]
     def get_tags(self, obj):
-            return [A25DefaultSerializer.get_text_gbl(self,tag,False)
+            return [A25DefaultSerializer.get_text(self,tag)
                 for tag in obj.tags.all()
             ]
 

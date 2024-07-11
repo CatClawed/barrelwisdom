@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Trait } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -21,7 +22,7 @@ import { A25TraitComponent } from './a25-trait.component';
   providers: [DestroyService],
   standalone: true,
   imports: [...CommonImports, ...MaterialFormImports,
-    A25ItemComponent, A25TraitComponent, A25CharaComponent]
+    A25ItemComponent, A25TraitComponent, A25CharaComponent, FilterListComponent]
 })
 
 export class A25TraitlistComponent extends DialogUseComponent {
@@ -71,6 +72,7 @@ export class A25TraitlistComponent extends DialogUseComponent {
   }
 
   private filterT(value: string, transfer: string): Trait[] {
+    this.hide = false;
     let traitlist: Trait[] = this.data.traits;
 
     switch (transfer) {

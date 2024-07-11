@@ -1,6 +1,6 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { Location } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumbService } from '@app/services/breadcrumb.service';
