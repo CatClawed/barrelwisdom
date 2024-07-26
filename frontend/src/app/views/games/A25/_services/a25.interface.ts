@@ -139,6 +139,11 @@ export interface RecipeTab {
     pages: RecipePage[];
 }
 
+export interface Tag {
+    name: string;
+    char: string[];
+}
+
 export interface Character {
     slug: string;
     name: string;
@@ -165,7 +170,7 @@ export interface Character {
     leader_skill_name: string;
     leader_skill_desc: string;
     leader_skill_chars: string[];
-    tags: string[];
+    tags: Tag[];
 }
 
 export interface Skill {

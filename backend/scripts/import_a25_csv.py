@@ -14,10 +14,9 @@ languages = ['en', 'zh_cn', 'zh_tw']
 
 # for setting slugs
 additions = {
-    'ライザ': 'ryza-4',
-    'レスナ': 'resna-5'
+    'ヴァレリア': 'valeria-4'
 }
-memoria_index = 104 # summer 1
+memoria_index = 105 # summer 2
 
 trait_cat = {
     1: Filterable.objects.get(text_en="Attack"),
@@ -1304,7 +1303,7 @@ def global_additions():
     score_battle_chapter = None
     tower_floor_max = None
     elem_tower_floor_max = None
-    events = [] #['決戦 LEGEND FES 最後の日']
+    events = ['レスレリ学園 LEGEND FES 錬金祭編', 'レスレリ学園第2弾']
     recipe_pages = []# [[rStory, 31], [rExtra, 32]] # refer to recipepage db for numbers
     traits = []# ['Burst Skill Power Up']
 
@@ -1415,14 +1414,14 @@ def cleanup():
 
 # From Resleri Academy, use abbreviations in recipe_plan
 
-gacha = None #create_event(ja='アトリエサマー第1弾 LEGEND FES', en="Atelier Summer 1 LEGEND FES")
-event = None #create_event(ja='アトリエサマー2024 第1弾', en="Atelier Summer 2024 1")
+gacha = None #create_event(ja='アトリエサマー第2弾 LEGEND FES', en="Atelier Summer 2 LEGEND FES")
+event = None #create_event(ja='アトリエサマー2024 第2弾', en="Atelier Summer 2024 2")
 
 #createUpdate()
-retrieve_all_jsons()
+#retrieve_all_jsons()
 #import_combat_traits()
 #import_equipment_traits()
-import_characters(event=gacha)
+#import_characters(event=gacha)
 #import_memoria(memoria_index, event=gacha)
 #import_material(event=event)
 #import_combat_items(event=event)

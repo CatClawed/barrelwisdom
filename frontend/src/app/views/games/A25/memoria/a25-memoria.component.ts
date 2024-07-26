@@ -35,7 +35,7 @@ export class A25MemoriaComponent extends SingleComponent {
   }
   afterAssignment(): void {
     this.seoImage = `${this.imgURL}memoria/${this.data.slug}.webp`
-    this.genericSettings(this.data.name, this.data.skill_desc.replaceAll('{0}', this.data.lv1 + ' ~ ' + this.data.lv5), 'Memoria', false, this.inputSlug ? false : true);
+    this.genericSettings(this.data.name, this.data.skill_desc.replaceAll('{0}', this.data.lv1 + ' ~ ' + this.data.lv5).replaceAll('{1}', this.data.lv1 + ' ~ ' + this.data.lv5), 'Memoria', false, this.inputSlug ? false : true);
   }
 
-} 
+}

@@ -93,17 +93,17 @@ class A25CharaSerializer(A25DefaultSerializer):
         if obj.limit:
             return A25DefaultSerializer.get_text(self,obj.limit)
     def get_leader_skill_name(self, obj):
-        return A25DefaultSerializer.get_text(self,obj.leader_skill_name)
+        return A25DefaultSerializer.get_text_gbl(self,obj.leader_skill_name,obj.gbl)
     def get_leader_skill_desc(self, obj):
-        return A25DefaultSerializer.get_text(self,obj.leader_skill_desc)
+        return A25DefaultSerializer.get_text_gbl(self,obj.leader_skill_desc,obj.gbl)
     def get_leader_skill_chars(self, obj):
         if obj.leader_skill_tag:
             chars = obj.leader_skill_tag.chara_tags.all()
             return [char.slug for char in chars]
     def get_tags(self, obj):
-            return [A25DefaultSerializer.get_text(self,tag)
-                for tag in obj.tags.all()
-            ]
+        return [{"name": A25DefaultSerializer.get_text_gbl(self,tag,obj.gbl),
+            "char": [char.slug for char in Character.objects.filter(tags=tag)]}
+            for tag in obj.tags.all()]
 
 class A25MemoriaListSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()

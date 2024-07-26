@@ -104,7 +104,7 @@ export class A25SynthesisListComponent extends DialogUseComponent {
     }
     if (filter) {
       filter = filter.toLowerCase()
-      list = list.filter(item => item.ing.some(i => i.toLowerCase().includes(filter)))
+      list = list.filter(item => item.ing ? item.ing.some(i => i.toLowerCase().includes(filter)) : false)
     }
     if (value) {
       const filterValue = (this.language == 'en') ? value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "") : value;

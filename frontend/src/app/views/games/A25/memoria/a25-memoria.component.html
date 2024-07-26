@@ -16,8 +16,7 @@
       @if (language == 'en' && !memoria.gbl) {
         <p>This Memoria is not in global. Displaying Japanese text.</p>
       }
-      <p style="margin-top:1rem;"><b>{{memoria.skill_name}}: </b>
-      {{memoria.skill_desc.replaceAll('{0}', memoria.lv1 + ' ~ ' + memoria.lv5).replaceAll('{0}', memoria.lv1 + ' ~ ' + memoria.lv5)}}
+      <p style="margin-top:1rem;" [innerHTML]="'<b>' + memoria.skill_name + ': </b>' + memoria.skill_desc.replaceAll('{0}', memoria.lv1 + ' ~ ' + memoria.lv5).replaceAll('{1}', memoria.lv1 + ' ~ ' + memoria.lv5)">
     </p>
     <p>{{memoria.lv1}} > {{memoria.lv2}} > {{memoria.lv3}} > {{memoria.lv4}} > {{memoria.lv5}}</p>
     @if (memoria.note) {

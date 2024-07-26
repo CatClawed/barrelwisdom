@@ -172,7 +172,11 @@
                 <b>Type: </b>
                 <ul>
                   @for (tag of chara.tags; track tag) {
-                    <li>{{tag}}</li>
+                    <li><popover [title]="tag.name"
+                      [template]="tagPopover"
+                      [context]="{ chars : tag.char }">
+                      {{tag.name}}
+                    </popover></li>
                   }
                 </ul>
               </td>
@@ -183,6 +187,13 @@
     <ng-template #traitPopover let-trait="trait">
       <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5).replaceAll('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
       <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
+    </ng-template>
+    <ng-template #tagPopover let-chars="chars">
+      @for (char of chars; track char) {
+        <a routerLink="/{{gameURL}}/characters/{{char}}/{{language}}">
+          <img src="{{imgURL}}characters/face/{{char}}.webp" style="aspect-ratio:1;max-width:110px;border-radius:50%;">
+        </a>
+      }
     </ng-template>
     @if (showNav) {
       <div class="col-md-3" ></div>
