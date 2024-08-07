@@ -20,7 +20,7 @@ cryptography==42.0.7
     # via -r requirements.in
 dj-rest-auth==6.0.0
     # via -r requirements.in
-django==5.0.5
+django==5.0.8
     # via
     #   -r requirements.in
     #   dj-rest-auth
