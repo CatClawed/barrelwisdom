@@ -30,7 +30,7 @@ class Name(models.Model):
 
 class Desc(models.Model):
     text_en = models.CharField(max_length=1000, blank=True)
-    text_ja = models.CharField(max_length=255, unique=True)
+    text_ja = models.CharField(max_length=500, unique=True)
     text_tc = models.CharField(max_length=500, blank=True)
     text_sc = models.CharField(max_length=500, blank=True)
 

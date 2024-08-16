@@ -14,9 +14,10 @@ languages = ['en', 'zh_cn', 'zh_tw']
 
 # for setting slugs
 additions = {
-    'ヴァレリア': 'valeria-4'
+    'ザスキア': 'saskia-1',
+    'ヨハナ': 'johanna-1'
 }
-memoria_index = 105 # summer 2
+memoria_index = 108 # summer 4 / chapter 15 wtf
 
 trait_cat = {
     1: Filterable.objects.get(text_en="Attack"),
@@ -1303,7 +1304,7 @@ def global_additions():
     score_battle_chapter = None
     tower_floor_max = None
     elem_tower_floor_max = None
-    events = ['レスレリ学園 LEGEND FES 錬金祭編', 'レスレリ学園第2弾']
+    events = ['レスレリ学園 LEGEND FES 対抗戦編', 'レスレリ学園第3弾', '癒しくつろぎ温泉 LEGEND FES', '温泉奪還作戦！']
     recipe_pages = []# [[rStory, 31], [rExtra, 32]] # refer to recipepage db for numbers
     traits = []# ['Burst Skill Power Up']
 
@@ -1414,8 +1415,8 @@ def cleanup():
 
 # From Resleri Academy, use abbreviations in recipe_plan
 
-gacha = None #create_event(ja='アトリエサマー第2弾 LEGEND FES', en="Atelier Summer 2 LEGEND FES")
-event = None #create_event(ja='アトリエサマー2024 第2弾', en="Atelier Summer 2024 2")
+gacha = None #create_event(ja='アトリエサマー第4弾 LEGEND FES', en="Atelier Summer 4 LEGEND FES")
+event = None #create_event(ja='アトリエサマー2024 第3弾', en="Atelier Summer 2024 3")
 
 #createUpdate()
 #retrieve_all_jsons()
