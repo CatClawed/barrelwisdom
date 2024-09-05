@@ -30,11 +30,6 @@
           }
           <div style="display:grid;gap:0;grid-template-columns:20% 20% 20% 20% 20%;max-width:600px;margin-left:auto;margin-right:auto;">
             @for (recipe of page.recipes; track recipe; let num = $index) {
-              @if ((page.desc == 'Affinity Tower' || page.desc == '属性塔' || page.desc == '屬性塔') && recipe.x > 51 && language !== 'ja')  {}
-              @else {
-              @for (it of [].constructor(getEmptySpace(page,num)); track it) {
-                <div style="aspect-ratio:1;margin-bottom:1.5rem;"></div>
-              }
               <popover [title]="recipe.name"
                 [template]="popoverContent"
                 url="/{{gameURL}}/items/synthesis/{{recipe.slug}}/{{language}}">
@@ -55,7 +50,6 @@
                   More info<i class="new-tab fa-solid fa-arrow-up-right-from-square"></i>
                 </a>
               </ng-template>
-              }
               <ng-template #notfound><div style="aspect-ratio:1;margin-bottom:1.5rem;"></div></ng-template>
             }
             </div>

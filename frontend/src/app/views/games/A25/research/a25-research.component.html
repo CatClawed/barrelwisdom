@@ -5,18 +5,16 @@
       <table class="tbl spacer" style="margin-top:1rem;"><tbody>
         <tr class="table-dark-center"><th colspan="2">{{kind[language][0]}}</th></tr>
         @for (it of [].constructor(150); track it; let i = $index) {
-          @if (i < 100 || language === "ja") {
-            <tr>
-              <td>{{i+1}}</td>
-              <td>
-                <p><b>{{data[i].name}}: </b> {{data[i].desc}} ({{data[i].val/100}}%)</p>
-                @if (data[i].req) {
-                  <p><b>Requirement: </b>{{data[i].req}}</p>
-                }
-                <p><b>Cole: </b> {{data[i].cole}}</p>
-              </td>
-            </tr>
-          }
+          <tr>
+            <td>{{i+1}}</td>
+            <td>
+              <p><b>{{data[i].name}}: </b> {{data[i].desc}} ({{data[i].val/100}}%)</p>
+              @if (data[i].req) {
+                <p><b>Requirement: </b>{{data[i].req}}</p>
+              }
+              <p><b>Cole: </b> {{data[i].cole}}</p>
+            </td>
+          </tr>
         }
       </tbody></table>
     </mat-tab>
@@ -24,18 +22,16 @@
       <table class="tbl spacer" style="margin-top:1rem;"><tbody>
         <tr class="table-dark-center"><th colspan="2">{{kind[language][1]}}</th></tr>
         @for (it of [].constructor(150); track it; let i = $index) {
-          @if (i < 100 || language === "ja") {
-            <tr>
-              <td>{{i+1}}</td>
-              <td>
-                <p><b>{{data[i+150].name}}: </b> {{data[i+150].desc}} ({{data[i+150].val/100}}%)</p>
-                @if (data[i+150].req) {
-                  <p><b>Requirement: </b>{{data[i+150].req}}</p>
-                }
-                <p><b>Cole: </b> {{data[i+150].cole}}</p>
-              </td>
-            </tr>
-          }
+          <tr>
+            <td>{{i+1}}</td>
+            <td>
+              <p><b>{{data[i+150].name}}: </b> {{data[i+150].desc}} ({{data[i+150].val/100}}%)</p>
+              @if (data[i+150].req) {
+                <p><b>Requirement: </b>{{data[i+150].req}}</p>
+              }
+              <p><b>Cole: </b> {{data[i+150].cole}}</p>
+            </td>
+          </tr>
         }
       </tbody></table>
     </mat-tab>

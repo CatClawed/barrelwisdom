@@ -119,8 +119,7 @@ export interface Material {
 export interface RecipeList {
     name: string;
     slug: string;
-    x: number;
-    y: number;
+    order: number;
     book: number;
     unlocks: string[];
     rarity: number;
@@ -128,8 +127,6 @@ export interface RecipeList {
 
 export interface RecipePage {
     desc: string;
-    min_x: number;
-    max_x: number;
     recipes: RecipeList[];
     gbl: boolean;
 }

@@ -94,9 +94,10 @@ class A25SynthesisItemListSerializer(A25DefaultSerializer):
             return
         ings = obj.recipe_set.first()
         arr = []
-        for thing in [ings.ing1, ings.ing2, ings.ing3]:
-            if thing:
-                arr.append(A25DefaultSerializer.get_name(self,thing))
+        if ings:
+            for thing in [ings.ing1, ings.ing2, ings.ing3]:
+                if thing:
+                    arr.append(A25DefaultSerializer.get_name(self,thing))
         return arr
     def get_limit(self, obj):
         if obj.limit:
@@ -104,8 +105,8 @@ class A25SynthesisItemListSerializer(A25DefaultSerializer):
     def get_colors(self,obj):
         if obj.rarity > 3:
             return
-        rec = obj.recipe_set.all()[0]
-        return [rec.color1.slug, rec.color2.slug, rec.color3.slug]
+        rec = obj.recipe_set.all()
+        return [rec[0].color1.slug, rec[0].color2.slug, rec[0].color3.slug] if len(rec) > 0 else None
 
 class A25RecipeSerializer(A25DefaultSerializer):
     ing = serializers.SerializerMethodField()
@@ -172,7 +173,7 @@ class A25RecipeBookSerializer(serializers.ModelSerializer):
     unlocks = serializers.SerializerMethodField()
     class Meta:
         model = Recipe
-        fields = ['name', 'slug', 'x', 'y', 'book', 'rarity',
+        fields = ['name', 'slug', 'order', 'book', 'rarity',
             'unlocks'
         ]
     def get_unlocks(self,obj):
@@ -189,7 +190,7 @@ class A25RecipePageSerializer(A25DefaultSerializer):
     recipes = A25RecipeBookSerializer(many=True, source='recipe_set')
     class Meta:
         model = RecipePage
-        fields = ['desc', 'min_x', 'max_x', 'recipes', 'gbl']
+        fields = ['desc', 'recipes', 'gbl']
     def get_desc(self,obj):
         if obj.desc:
             return super().get_desc(obj)

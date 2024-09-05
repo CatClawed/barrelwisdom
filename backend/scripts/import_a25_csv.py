@@ -14,10 +14,10 @@ languages = ['en', 'zh_cn', 'zh_tw']
 
 # for setting slugs
 additions = {
-    'ザスキア': 'saskia-1',
-    'ヨハナ': 'johanna-1'
+    'レスナ': 'resna-6',
+    'ララ': 'lara-1',
 }
-memoria_index = 108 # summer 4 / chapter 15 wtf
+memoria_index = 112 # anni part 3
 
 trait_cat = {
     1: Filterable.objects.get(text_en="Attack"),
@@ -60,6 +60,7 @@ item_kind = {
     9: Filterable.objects.get(text_en="Currency"),
     10: Filterable.objects.get(text_en="Currency"),
     11: Filterable.objects.get(text_en="Currency"),
+    12: Filterable.objects.get(text_en="Currency"),
 }
 
 combat_kind = {
@@ -87,9 +88,10 @@ def checkName(text_en, text_ja, text_sc, text_tc, volatile=False):
         try:
             name = Name.objects.get(text_ja=text_ja)
             if volatile and text_en:
-                name.text_en = text_en
-                name.text_tc = text_tc
-                name.text_sc = text_sc
+                if text_ja != text_en: # I can see this causing problems if they use EN...
+                    name.text_en = text_en
+                    name.text_tc = text_tc
+                    name.text_sc = text_sc
                 name.save()
             return name
         except:
@@ -108,9 +110,10 @@ def checkDesc(text_en, text_ja, text_sc, text_tc):
         try:
             desc = Desc.objects.get(text_ja=text_ja.replace('\r', '').replace('\n', '<br>').strip())
             if text_en:
-                desc.text_en = text_en.replace('\r', '').replace('\n', '<br>')
-                desc.text_sc = text_sc.replace('\r', '').replace('\n', '<br>')
-                desc.text_tc = text_tc.replace('\r', '').replace('\n', '<br>')
+                if text_en != text_ja:
+                    desc.text_en = text_en.replace('\r', '').replace('\n', '<br>')
+                    desc.text_sc = text_sc.replace('\r', '').replace('\n', '<br>')
+                    desc.text_tc = text_tc.replace('\r', '').replace('\n', '<br>')
                 desc.save()
             return desc
         except:
@@ -182,7 +185,29 @@ def import_research():
 
             try:
                 obj = Research.objects.get(level=res['level'], kind=filt)
-                print('Found Research', res['level'], filt.slug)
+
+                if len(res['requirements']) > 0:
+                    req = checkDesc(
+                        text_ja = res['requirements'][0]['name'],
+                        text_en = res['requirements_en'][0]['name'] if 'requirements_en' in res else '',
+                        text_sc = res['requirements_zh_cn'][0]['name'] if 'requirements_zh_cn' in res else '',
+                        text_tc = res['requirements_zh_tw'][0]['name'] if 'requirements_zh_tw' in res else '',
+                    )
+                name = checkName(
+                    text_ja=res['name'],
+                    text_en=res['name_en'] if 'name_en' in res else '',
+                    text_sc=res['name_zh_cn'] if 'name_zh_cn' in res else '',
+                    text_tc=res['name_zh_tw'] if 'name_zh_tw' in res else '',
+                )
+                eff = search(res['research_effect_ids'][0], jsons['research_effect'])[0]
+                # print this shit
+                desc = checkDesc(
+                    text_ja=eff['name'],
+                    text_en=eff['name_en'] if 'name_en' in eff else '',
+                    text_sc=eff['name_zh_cn'] if 'name_zh_cn' in eff else '',
+                    text_tc=eff['name_zh_tw'] if 'name_zh_tw' in eff else '',
+                )
+                print('Updated Research', res['level'], filt.slug)
             except:
                 req = None
                 if len(res['requirements']) > 0:
@@ -509,7 +534,12 @@ def import_characters(event=None):
             create = False
         except:
             print('Creating', name.text_ja, title.text_ja)
-            obj = Character(slug=additions[name.text_ja])
+            try:
+                add = additions[name.text_ja]
+            except:
+                print('Failed to add character, continuing.')
+                continue
+            obj = Character(slug=add)
             create = True
             if event:
                 obj.limit = event
@@ -767,6 +797,8 @@ def import_equipment(event=None):
             text_tc = item["description_zh_tw"] if 'description_zh_tw' in item else '',
         )
 
+
+
         try:
             obj = Item.objects.get(name=name)
             print("Updating Equipment", name.text_ja)
@@ -864,8 +896,6 @@ def import_recipes():
             print("Page Created", recipe['recipe_plan_id'])
             rPage = RecipePage(
                 book=recipe['recipe_plan_id'],
-                min_x = recipe['position']['x'],
-                max_x = recipe['position']['x'],
                 tab=tab,
                 desc=limited,
             )
@@ -900,8 +930,7 @@ def import_recipes():
             obj = Recipe(item=item)
 
         obj.page=rPage
-        obj.x=recipe['position']['x']
-        obj.y=recipe['position']['y']
+        obj.order=recipe['id']
         obj.book=recipe['recipe_plan_id']
         obj.color1=colors[recipe['support_color_ids'][0]]
         obj.color2=colors[recipe['support_color_ids'][1]]
@@ -916,8 +945,6 @@ def import_recipes():
         obj.ing2=Item.objects.get(name__text_ja=search(recipe['ingredient_costs'][1]['id'], jsons['item'])[0]['name']) if len(recipe['ingredient_costs']) > 1 else None
         obj.ing3=Item.objects.get(name__text_ja=search(recipe['ingredient_costs'][2]['id'], jsons['item'])[0]['name']) if len(recipe['ingredient_costs']) > 2 else None
         obj.save()
-        rPage.max_x=recipe['position']['x']
-        rPage.save()
 
 def get_quest_name(quest):
     name = checkName(
@@ -1300,13 +1327,13 @@ def global_additions():
     rStory = RecipeTab.objects.get(order=1)
     rExtra = RecipeTab.objects.get(order=2)
 
-    dungeons = [] #['The Fragrant Path']
+    dungeons = [] # ['Mirror Sandcastle', 'Sea of Golden Sand']
     score_battle_chapter = None
     tower_floor_max = None
     elem_tower_floor_max = None
-    events = ['レスレリ学園 LEGEND FES 対抗戦編', 'レスレリ学園第3弾', '癒しくつろぎ温泉 LEGEND FES', '温泉奪還作戦！']
-    recipe_pages = []# [[rStory, 31], [rExtra, 32]] # refer to recipepage db for numbers
-    traits = []# ['Burst Skill Power Up']
+    events = [] #['新章記念 海の男の門出 LEGEND FES']
+    recipe_pages = [] # [[rStory, 37], [rExtra, 38]] # refer to recipepage db for numbers
+    traits = [] # ['Burst Skill Power Up']
 
     if tower_floor_max:
         towers = Tower.objects.filter(kind=Filterable.objects.get(text_en="Elemental Tower"))
@@ -1415,8 +1442,8 @@ def cleanup():
 
 # From Resleri Academy, use abbreviations in recipe_plan
 
-gacha = None #create_event(ja='アトリエサマー第4弾 LEGEND FES', en="Atelier Summer 4 LEGEND FES")
-event = None #create_event(ja='アトリエサマー2024 第3弾', en="Atelier Summer 2024 3")
+gacha = None #create_event(ja='1周年 星導祭 LEGEND FES 訣別の時', en="1st Anniversaty LEGEND FES Part 3")
+event = None #create_event(ja='１周年前夜祭ボスチャレンジ', en="1sth Anniversary Boss Challenge")
 
 #createUpdate()
 #retrieve_all_jsons()
