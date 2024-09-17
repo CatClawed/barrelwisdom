@@ -14,10 +14,10 @@ languages = ['en', 'zh_cn', 'zh_tw']
 
 # for setting slugs
 additions = {
-    'レスナ': 'resna-6',
-    'ララ': 'lara-1',
+    'ヴァレリア': 'valeria-5',
+    'ジェロン': 'geron-1',
 }
-memoria_index = 112 # anni part 3
+memoria_index = 115 # anni part 4 geron/val
 
 trait_cat = {
     1: Filterable.objects.get(text_en="Attack"),
@@ -372,7 +372,7 @@ def fix_hyperlink(desc, lang=''):
         desc = d[0] + skill + d2[1]
     return desc
 
-def import_skills(char_dict, char):
+def import_skills(char_dict, char, index):
     s1 = []
     s2 = []
     s3 = []
@@ -385,7 +385,6 @@ def import_skills(char_dict, char):
     s3 = s3[2:]
 
     skills = [s1, s2, s3]
-    index = 0
 
     for skill in skills:
         fix_hyperlink(skill[0]['description'])
@@ -457,7 +456,7 @@ def import_skills(char_dict, char):
         obj.save()
         index = index + 1
 
-def import_passives(char_dict, char):
+def import_passives(char_dict, char, num):
     passives = []
     for a in char_dict['ability_ids']:
         passives.append(search(a, jsons['ability'])[0])
@@ -477,11 +476,11 @@ def import_passives(char_dict, char):
             text_tc=passive['description_zh_tw'] if 'description_zh_tw' in passive else '',
         )
         try:
-            obj = Passive.objects.get(name=name, char=char)
+            obj = Passive.objects.get(num=num, char=char)
             print("Updating Passive", name.text_ja)
         except:
             print("Creating Passive", name.text_ja)
-            obj = Passive(char=char)
+            obj = Passive(char=char, num=num)
         obj.name = name
         obj.desc = desc
         obj.val = passive['effects'][0]['value']
@@ -489,6 +488,7 @@ def import_passives(char_dict, char):
         obj.val3 = passive['effects'][2]['value'] if len(passive['effects']) > 2 else None
         obj.val4 = passive['effects'][3]['value'] if len(passive['effects']) > 3 else None
         obj.save()
+        num = num + 1
 
 
 def import_characters(event=None):
@@ -499,7 +499,6 @@ def import_characters(event=None):
         3: Filterable.objects.get(text_en="Defender", kind="role"),
         4: Filterable.objects.get(text_en="Supporter", kind="role"),
     }
-
     for char in jsons['character']:
         name = checkName(
             text_ja = char["name"],
@@ -596,8 +595,8 @@ def import_characters(event=None):
             update = LatestUpdate.objects.first()
             update.characters.add(obj)
 
-        import_skills(char, obj)
-        import_passives(char, obj)
+        import_skills(char, obj, 4 if char['change'] else 1)
+        import_passives(char, obj, 3 if char['change'] else 1)
 
 def import_memoria(memoria_index, event=None):
     for mem in jsons['memoria']:
@@ -1327,12 +1326,12 @@ def global_additions():
     rStory = RecipeTab.objects.get(order=1)
     rExtra = RecipeTab.objects.get(order=2)
 
-    dungeons = [] # ['Mirror Sandcastle', 'Sea of Golden Sand']
+    dungeons = [] # ["Creature's Paradise", "Forest That Swallows Disasters"]
     score_battle_chapter = None
     tower_floor_max = None
     elem_tower_floor_max = None
-    events = [] #['新章記念 海の男の門出 LEGEND FES']
-    recipe_pages = [] # [[rStory, 37], [rExtra, 38]] # refer to recipepage db for numbers
+    events = [] #['HALLOWEEN2023 LEGEND FES', '新章記念 緋蒼の剣士 LEGEND FES', '決戦！ハロウィンぷに']
+    recipe_pages =[] # [[rStory, 40], [rExtra, 41]] # refer to recipepage db for numbers
     traits = [] # ['Burst Skill Power Up']
 
     if tower_floor_max:
@@ -1440,9 +1439,10 @@ def cleanup():
     for b in bad:
         print(b.text_en, b.text_ja)
 
+
 # From Resleri Academy, use abbreviations in recipe_plan
 
-gacha = None #create_event(ja='1周年 星導祭 LEGEND FES 訣別の時', en="1st Anniversaty LEGEND FES Part 3")
+gacha = None #create_event(ja='1周年 星導祭 LEGEND FES ヒト造リシ災禍', en="1st Anniversaty LEGEND FES Part 4")
 event = None #create_event(ja='１周年前夜祭ボスチャレンジ', en="1sth Anniversary Boss Challenge")
 
 #createUpdate()
@@ -1461,7 +1461,7 @@ event = None #create_event(ja='１周年前夜祭ボスチャレンジ', en="1st
 
 #import_research()
 
-#global_additions()
+global_additions()
 
 #import_generic(ImpEnemySkill)
 #import_generic(ImpEnemy)
