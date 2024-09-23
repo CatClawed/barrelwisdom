@@ -7,17 +7,17 @@ from scripts.util import import_generic, slug_me
 
 BASE_URL = 'https://raw.githubusercontent.com/theBowja/resleriana-db/main/data/'
 
-names = ['ability', 'battle_hint', 'battle_tool', 'battle_tool_trait', 'character', 'character_tag', 'effect', 'enemy', 'equipment_tool', 'equipment_tool_trait', 'hyperlink', 'item', 'leader_skill_condition', 'memoria', 'memoria_buff_growth', 'quest', 'recipe', 'recipe_plan', 'research', 'research_effect', 'research_effect_level', 'reward_set', 'skill']
-names_gbl = ['ability', 'battle_hint', 'battle_tool', 'battle_tool_trait', 'character', 'character_tag', 'effect', 'enemy', 'equipment_tool', 'equipment_tool_trait', 'item', 'memoria', 'quest', 'recipe', 'recipe_plan', 'research', 'research_effect', 'skill']
+names = ['ability', 'battle_hint', 'battle_tool', 'battle_tool_trait', 'character', 'character_tag', 'effect', 'emblem', 'emblem_rarity', 'enemy', 'equipment_tool', 'equipment_tool_trait', 'hyperlink', 'item', 'leader_skill_condition', 'memoria', 'memoria_buff_growth', 'quest', 'recipe', 'recipe_plan', 'research', 'research_effect', 'research_effect_level', 'reward_set', 'skill']
+names_gbl = ['ability', 'battle_hint', 'battle_tool', 'battle_tool_trait', 'character', 'character_tag', 'effect', 'emblem', 'emblem_rarity', 'enemy', 'equipment_tool', 'equipment_tool_trait', 'item', 'memoria', 'quest', 'recipe', 'recipe_plan', 'research', 'research_effect', 'skill']
 jsons = {}
 languages = ['en', 'zh_cn', 'zh_tw']
 
 # for setting slugs
 additions = {
-    'ヴァレリア': 'valeria-5',
-    'ジェロン': 'geron-1',
+    'ロロナ': 'rorona-4',
+    'マリー': 'marie-4',
 }
-memoria_index = 115 # anni part 4 geron/val
+memoria_index = 116 # anni part 5 rorona/marie
 
 trait_cat = {
     1: Filterable.objects.get(text_en="Attack"),
@@ -61,6 +61,9 @@ item_kind = {
     10: Filterable.objects.get(text_en="Currency"),
     11: Filterable.objects.get(text_en="Currency"),
     12: Filterable.objects.get(text_en="Currency"),
+    12: Filterable.objects.get(text_en="Currency"),
+    13: Filterable.objects.get(text_en="Currency"),
+    14: Filterable.objects.get(text_en="Currency"),
 }
 
 combat_kind = {
@@ -160,7 +163,7 @@ def retrieve_all_jsons():
                     for entry in jsons[name]:
                         found = search(entry['id'], data)
                         if found:
-                            for key in ['description', 'name', 'another_name', 'requirements', 'abbreviation', 'leader_skill']:
+                            for key in ['description', 'name', 'another_name', 'requirements', 'abbreviation', 'leader_skill', 'effect_name', 'requirement']:
                                 if key in found[0]:
                                     entry[f'{key}_{lang}'] = found[0][key]
     with urllib.request.urlopen('https://raw.githubusercontent.com/theBowja/resleriana-db/main/resources/Japan/path_hash_to_name.json') as url:
@@ -1141,6 +1144,62 @@ def import_quest():
         """
     print(count)
 
+def import_emblem():
+    for emb in jsons['emblem']:
+        name = checkName(
+            text_ja = emb['name'],
+            text_en = emb['name_en'] if 'name_en' in emb else '',
+            text_sc = emb['name_zh_cn'] if 'name_zh_cn' in emb else '',
+            text_tc = emb['name_zh_tw'] if 'name_zh_tw' in emb else '',
+            volatile= True
+        )
+
+        desc = checkDesc(
+            text_ja=emb['effect_name'],
+            text_en=emb['effect_name_en'] if 'effect_name_en' in emb else '',
+            text_sc=emb['effect_name_zh_cn'] if 'effect_name_zh_cn' in emb else '',
+            text_tc=emb['effect_name_zh_tw'] if 'effect_name_zh_tw' in emb else '',
+        )
+
+        try:
+            obj = Emblem.objects.get(index=emb['priority'], eid=emb['id'])
+            print("Updating Emblem", name.text_ja)
+        except:
+            print("Creating Emblem", name.text_ja)
+            obj = Emblem(
+                index=emb['priority'],
+                eid=emb['id'],
+                kind=emb['emblem_group_id']
+            )
+        obj.name = name
+        obj.desc = desc
+
+        rarities = search(emb['id'], jsons['emblem_rarity'], 'emblem_id')
+
+        obj.lv1 = rarities[0]['value']
+        obj.lv2 = rarities[1]['value']
+        obj.lv3 = rarities[2]['value']
+
+        acquisitions = []
+
+        for r in rarities:
+            obj.gbl = False
+            if 'requirement_en' in r:
+                obj.gbl = True
+            acquisition = checkDesc(
+                text_ja=r['requirement']['name'],
+                text_en=r['requirement_en']['name'] if obj.gbl else '',
+                text_sc=r['requirement_zh_cn']['name'] if obj.gbl else '',
+                text_tc=r['requirement_zh_tw']['name'] if obj.gbl else '',
+            )
+            acquisitions.append(acquisition)
+
+        obj.acquisition1=acquisitions[0]
+        obj.acquisition2=acquisitions[1]
+        obj.acquisition3=acquisitions[2]
+
+        obj.save()
+
 def import_enemy():
     for enemy in jsons['enemy']:
         name = checkName(
@@ -1319,6 +1378,10 @@ def scan_update_images():
         im = search(character.title.text_ja, jsons['character'], 'another_name')[0]['large_narrow_still_path_hash']
         print(character.slug, jsons['path_hash_to_name'][im])
 
+    for emblem in Emblem.objects.all():
+        for i in range(1, 4):
+            print(f'emblem-{emblem.eid}-{i}', f'emblem_00{emblem.eid}_{i}')
+
 def global_additions():
     createUpdateGBL()
     update = LatestUpdateGBL.objects.first()
@@ -1330,7 +1393,7 @@ def global_additions():
     score_battle_chapter = None
     tower_floor_max = None
     elem_tower_floor_max = None
-    events = [] #['HALLOWEEN2023 LEGEND FES', '新章記念 緋蒼の剣士 LEGEND FES', '決戦！ハロウィンぷに']
+    events = ['竜の花嫁 LEGEND FES', '竜の涙は花と散る']
     recipe_pages =[] # [[rStory, 40], [rExtra, 41]] # refer to recipepage db for numbers
     traits = [] # ['Burst Skill Power Up']
 
@@ -1442,11 +1505,11 @@ def cleanup():
 
 # From Resleri Academy, use abbreviations in recipe_plan
 
-gacha = None #create_event(ja='1周年 星導祭 LEGEND FES ヒト造リシ災禍', en="1st Anniversaty LEGEND FES Part 4")
-event = None #create_event(ja='１周年前夜祭ボスチャレンジ', en="1sth Anniversary Boss Challenge")
+gacha = None #create_event(ja='1周年 星導祭 LEGEND FES 彷徨える亡者', en="1st Anniversaty LEGEND FES Part 5")
+event = None #create_event(ja='爆裂！！マリーからの試練', en="Explosion! Marie Challenge")
 
 #createUpdate()
-#retrieve_all_jsons()
+retrieve_all_jsons()
 #import_combat_traits()
 #import_equipment_traits()
 #import_characters(event=gacha)
@@ -1457,11 +1520,12 @@ event = None #create_event(ja='１周年前夜祭ボスチャレンジ', en="1st
 #import_recipes()
 #import_quest()
 ##import_enemy()
-#scan_update_images()
+#import_emblem()
+scan_update_images()
 
 #import_research()
 
-global_additions()
+#global_additions()
 
 #import_generic(ImpEnemySkill)
 #import_generic(ImpEnemy)

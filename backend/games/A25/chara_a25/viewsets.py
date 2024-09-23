@@ -1,6 +1,6 @@
 from rest_framework import viewsets, filters
-from games.A25.chara_a25.models import Character, Memoria
-from games.A25.chara_a25.serializers import A25CharaListSerializer, A25CharaSerializer, A25MemoriaSerializer, A25MemoriaListSerializer
+from games.A25.chara_a25.models import Character, Memoria, Emblem
+from games.A25.chara_a25.serializers import A25CharaListSerializer, A25CharaSerializer, A25MemoriaSerializer, A25EmblemSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
@@ -108,26 +108,43 @@ class A25MemoriaViewSet(viewsets.ModelViewSet):
     serializer_class = A25MemoriaSerializer
     filter_backends = [filters.SearchFilter,
                        DjangoFilterBackend, filters.OrderingFilter]
+
+    @action(detail=False)
+    def en(self, request):
+        return Response(A25MemoriaSerializer(
+            self.queryset, many=True, context={'language': 'en'}).data)
+
+    @action(detail=False)
+    def sc(self, request):
+        return Response(A25MemoriaSerializer(
+            self.queryset, many=True, context={'language': 'sc'}).data)
+
+    @action(detail=False)
+    def tc(self, request):
+        return Response(A25MemoriaSerializer(
+            self.queryset, many=True, context={'language': 'tc'}).data)
+
+    @action(detail=False)
+    def ja(self, request):
+        return Response(A25MemoriaSerializer(
+            self.queryset, many=True, context={'language': 'ja'}).data)
+
+class A25EmblemViewSet(viewsets.ModelViewSet):
+    queryset = (
+        Emblem.objects
+        .select_related(
+            'name',
+            'desc',
+        )
+    )
+    serializer_class = A25EmblemSerializer
+    filter_backends = [filters.SearchFilter,
+                       DjangoFilterBackend, filters.OrderingFilter]
     lookup_field = 'slug'
 
     def get_query(self, slug=None, lang="en"):
-        if not slug:
-            return Response(A25MemoriaSerializer(
-                self.queryset, many=True, context={'language': lang}).data)
-        try:
-            queryset = (
-                Memoria.objects
-                .select_related(
-                    'name',
-                    'limit',
-                    'skill_name',
-                    'skill_desc',
-                )
-                .get(slug=slug)
-            )
-        except ObjectDoesNotExist:
-            raise Http404
-        return Response(A25MemoriaSerializer(queryset, context={'language': lang}).data)
+        return Response(A25EmblemSerializer(
+            self.queryset, many=True, context={'language': lang}).data)
 
     @action(detail=False)
     def en(self, request):
@@ -160,4 +177,3 @@ class A25MemoriaViewSet(viewsets.ModelViewSet):
     @action(detail=True, url_path="ja")
     def ja_full(self, request, slug):
         return self.get_query(lang="ja", slug=slug)
-

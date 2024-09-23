@@ -136,3 +136,25 @@ class Memoria(models.Model):
             "-rarity",
             "name__text_en"
         ]
+
+class Emblem(models.Model):
+    index = models.IntegerField()
+    eid   = models.IntegerField()
+    kind  = models.IntegerField()
+    name  = models.ForeignKey(Name, on_delete=models.CASCADE)
+    desc  = models.ForeignKey(Desc, on_delete=models.CASCADE)
+    gbl   = models.BooleanField(default=False)
+
+    # bronze silver gold
+    lv1 = models.IntegerField()
+    lv2 = models.IntegerField()
+    lv3 = models.IntegerField()
+    acquisition1 = models.ForeignKey(Desc, on_delete=models.CASCADE, related_name="emblem_acquisition1")
+    acquisition2 = models.ForeignKey(Desc, on_delete=models.CASCADE, related_name="emblem_acquisition2")
+    acquisition3 = models.ForeignKey(Desc, on_delete=models.CASCADE, related_name="emblem_acquisition3")
+
+    class Meta:
+        ordering = [
+            "kind",
+            "index"
+        ]

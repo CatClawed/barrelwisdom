@@ -168,6 +168,7 @@ export interface Character {
     leader_skill_desc: string;
     leader_skill_chars: string[];
     tags: Tag[];
+    id: number;
 }
 
 export interface Skill {
@@ -231,6 +232,7 @@ export interface Memoria {
     limit: string;
     note: string;
     gbl: boolean;
+    id: number;
 }
 
 export interface Research {
@@ -330,4 +332,14 @@ export interface Tower {
     rewards: Reward[];
     effects: string[];
     battle: Battle;
+}
+
+export interface Emblem {
+    eid: number;
+    kind: number;
+    name: string;
+    desc: string;
+    lv1: number;
+    lv2: number;
+    lv3: number;
 }

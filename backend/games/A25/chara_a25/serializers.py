@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from games.A25.chara_a25.models import Character, Memoria, Passive, Skill
+from games.A25.chara_a25.models import Character, Memoria, Passive, Skill, Emblem
 from collections import OrderedDict
 from games.A25.misc_a25.serializers import A25DefaultSerializer, A25TraitSimpleSerializer
 
@@ -56,7 +56,7 @@ class A25CharaListSerializer(A25DefaultSerializer):
         model = Character
         fields = [
             'slug', 'name', 'title', 'role', 'elem', 'rarity', 'gbl',
-            'color1', 'color2'
+            'color1', 'color2', 'id'
         ]
     def get_title(self, obj):
         return A25DefaultSerializer.get_text_gbl(self,obj.title,obj.gbl)
@@ -123,7 +123,7 @@ class A25MemoriaSerializer(A25DefaultSerializer):
         fields = [
             'slug', 'name', 'skill_name', 'skill_desc', 'rarity', 'limit',
             'note', 'gbl', 'lv1', 'lv2', 'lv3', 'lv4', 'lv5',
-            "hp30", "spd30", "patk30", "pdef30", "matk30", "mdef30", 'gbl'
+            "hp30", "spd30", "patk30", "pdef30", "matk30", "mdef30", 'gbl', 'id'
         ]
     def get_skill_name(self, obj):
         return A25DefaultSerializer.get_text_gbl(self,obj.skill_name,obj.gbl)
@@ -132,3 +132,12 @@ class A25MemoriaSerializer(A25DefaultSerializer):
     def get_limit(self, obj):
         if obj.limit:
             return A25DefaultSerializer.get_text(self,obj.limit)
+
+class A25EmblemSerializer(A25DefaultSerializer):
+    name = serializers.SerializerMethodField()
+    desc = serializers.SerializerMethodField()
+    class Meta:
+        model = Emblem
+        fields = [
+            'eid', 'kind', 'name', 'desc', 'lv1', 'lv2', 'lv3',
+        ]

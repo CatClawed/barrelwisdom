@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Character, Dungeon, Item, Memoria, NameLink, RecipeTab, Research, ScoreBattle, Tower, Trait, Update } from '@app/views/games/A25/_services/a25.interface';
+import { Character, Dungeon, Emblem, Item, Memoria, NameLink, RecipeTab, Research, ScoreBattle, Tower, Trait, Update } from '@app/views/games/A25/_services/a25.interface';
 import { environment } from '@environments/environment';
 import { Observable } from 'rxjs';
 
@@ -155,5 +155,9 @@ export class A25Service {
       "elemental-tower":"elemental-tower"
     }
     return this.http.get<Tower[]>(`${environment.apiUrl}/A25/tower/${slugname[slug]}/${language}/`);
+  }
+
+  getEmblems(language: string): Observable<Emblem[]> {
+    return this.http.get<Emblem[]>(`${environment.apiUrl}/A25/emblem/${language}/`);
   }
 }

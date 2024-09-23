@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSliderModule } from '@angular/material/slider';
-import { MatTabsModule } from '@angular/material/tabs';
 import { ActivatedRoute } from '@angular/router';
 import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
@@ -17,7 +16,7 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
   styleUrls: ['../resleri.scss'],
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, Popover, MatSliderModule, MatCheckboxModule, MatTabsModule]
+  imports: [...CommonImports, Popover, MatSliderModule, MatCheckboxModule]
 })
 export class A25CharaComponent extends SingleComponent {
   stars: number[] = [1, 2, 3, 3.5, 4, 4.5, 5];
