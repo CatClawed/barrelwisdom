@@ -27,7 +27,7 @@ import { A25CharaComponent } from './a25-chara.component';
       display: grid;
       gap: 1rem;
       margin-bottom: 1rem;
-      grid-column-gap:2%;
+      grid-column-gap:0.8%;
     }`,
     `.a25-star-font {
       -webkit-text-stroke-color:black;
@@ -49,25 +49,25 @@ import { A25CharaComponent } from './a25-chara.component';
     }`,
     `@media screen and (min-width: 800px) {
       .char-grid {
-        grid-template-columns:repeat(4,23%);
+        grid-template-columns:repeat(6,16%);
       }
       .a25-char-font {
-        font-size:1.7vw
+        font-size:1.4vw
       }
       .a25-star-font {
-        font-size:2vw;
-        -webkit-text-stroke-width:.2vw;
+        font-size:1.5vw;
+        -webkit-text-stroke-width:.15vw;
       }
     }`,
     `@media screen and (max-width: 800px) {
       .char-grid {
-        grid-template-columns:repeat(2,49%);
+        grid-template-columns:repeat(3,31%);
       }
       .a25-char-font {
-        font-size:5vw
+        font-size:4vw
       }
       .a25-star-font {
-        font-size:5vw;
+        font-size:4vw;
         -webkit-text-stroke-width:.4vw;
       }
     }`

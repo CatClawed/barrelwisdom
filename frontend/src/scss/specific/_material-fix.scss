@@ -37,6 +37,11 @@
     overflow: visible !important;
 }
 
+// the weirdest interaction on A25 collection
+.cdk-dialog-container:focus {
+    outline: 0;
+}
+
 
 // buttons
 

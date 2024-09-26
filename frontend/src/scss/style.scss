@@ -36,6 +36,7 @@ $frontend-theme: mat.m2-define-light-theme((color: (primary: mat.m2-define-palet
 @include mat.select-theme($frontend-theme);
 @include mat.slider-theme($frontend-theme);
 @include mat.tooltip-theme($frontend-theme);
+@include mat.snack-bar-theme($frontend-theme);
 
 // Variable overrides
 

@@ -342,4 +342,5 @@ export interface Emblem {
     lv1: number;
     lv2: number;
     lv3: number;
+    gbl: boolean;
 }

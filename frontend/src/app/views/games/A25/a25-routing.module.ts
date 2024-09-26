@@ -187,7 +187,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'collection',
+    path: 'collect',
     children: [
       {
         path: '',
@@ -196,6 +196,11 @@ const routes: Routes = [
       },
       {
         path: ':language',
+        loadComponent: ()=> import('@app/views/games/A25/collection/a25-collection.component').then(m=>m.A25CollectionComponent),
+        canActivate: [LanguageGuard]
+      },
+      {
+        path: ':code/:language',
         loadComponent: ()=> import('@app/views/games/A25/collection/a25-collection.component').then(m=>m.A25CollectionComponent),
         canActivate: [LanguageGuard]
       },

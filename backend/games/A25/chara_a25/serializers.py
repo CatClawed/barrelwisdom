@@ -139,5 +139,5 @@ class A25EmblemSerializer(A25DefaultSerializer):
     class Meta:
         model = Emblem
         fields = [
-            'eid', 'kind', 'name', 'desc', 'lv1', 'lv2', 'lv3',
+            'eid', 'kind', 'name', 'desc', 'lv1', 'lv2', 'lv3', 'gbl'
         ]
