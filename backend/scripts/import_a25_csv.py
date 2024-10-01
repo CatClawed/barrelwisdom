@@ -4,6 +4,7 @@ from games.A25.items_a25.models import *
 from games.A25.quest_a25.models import *
 import csv, codecs, sys, urllib.request, json
 from scripts.util import import_generic, slug_me
+from datetime import datetime
 
 BASE_URL = 'https://raw.githubusercontent.com/theBowja/resleriana-db/main/data/'
 
@@ -14,10 +15,10 @@ languages = ['en', 'zh_cn', 'zh_tw']
 
 # for setting slugs
 additions = {
-    'ロロナ': 'rorona-4',
-    'マリー': 'marie-4',
+    'ロマン': 'roman-3',
+    'イザナ': 'izana-3',
 }
-memoria_index = 116 # anni part 5 rorona/marie
+memoria_index = 117 # anni part 6 izana/roman
 
 trait_cat = {
     1: Filterable.objects.get(text_en="Attack"),
@@ -546,6 +547,8 @@ def import_characters(event=None):
             if event:
                 obj.limit = event
 
+        obj.date = datetime.fromisoformat(char["start_at"]) if char["start_at"] else datetime.fromisoformat('2023-09-23T03:00:00.000Z')
+
         t1 = search(char['battle_tool_trait_ids'][0], jsons['battle_tool_trait'])[0]
         t2 = search(char['battle_tool_trait_ids'][1], jsons['battle_tool_trait'])[0]
         t3 = search(char['equipment_tool_trait_ids'][0], jsons['equipment_tool_trait'])[0]
@@ -639,6 +642,7 @@ def import_memoria(memoria_index, event=None):
             memoria_index = memoria_index + 1
             if event:
                 obj.limit = event
+        obj.date = datetime.fromisoformat(mem["start_at"]) if mem["start_at"] else datetime.fromisoformat('2023-09-23T03:00:00.000Z')
 
         obj.name = name
         obj.skill_name=skill_name
@@ -1048,7 +1052,7 @@ def import_tower(quest, kind):
                 obj.rewards.add(GetReward(reward[i], i))
 
         for e in effects:
-            obj.effects.add(eff)
+            obj.effects.add(e)
 
 
 def import_dungeon(quest):
@@ -1183,14 +1187,14 @@ def import_emblem():
         acquisitions = []
 
         for r in rarities:
-            obj.gbl = False
+            gbl = False
             if 'requirement_en' in r:
-                obj.gbl = True
+                gbl = True
             acquisition = checkDesc(
                 text_ja=r['requirement']['name'],
-                text_en=r['requirement_en']['name'] if obj.gbl else '',
-                text_sc=r['requirement_zh_cn']['name'] if obj.gbl else '',
-                text_tc=r['requirement_zh_tw']['name'] if obj.gbl else '',
+                text_en=r['requirement_en']['name'] if gbl else '',
+                text_sc=r['requirement_zh_cn']['name'] if gbl else '',
+                text_tc=r['requirement_zh_tw']['name'] if gbl else '',
             )
             acquisitions.append(acquisition)
 
@@ -1378,10 +1382,6 @@ def scan_update_images():
         im = search(character.title.text_ja, jsons['character'], 'another_name')[0]['large_narrow_still_path_hash']
         print(character.slug, jsons['path_hash_to_name'][im])
 
-    for emblem in Emblem.objects.all():
-        for i in range(1, 4):
-            print(f'emblem-{emblem.eid}-{i}', f'emblem_00{emblem.eid}_{i}')
-
 def global_additions():
     createUpdateGBL()
     update = LatestUpdateGBL.objects.first()
@@ -1393,7 +1393,7 @@ def global_additions():
     score_battle_chapter = None
     tower_floor_max = None
     elem_tower_floor_max = None
-    events = ['竜の花嫁 LEGEND FES', '竜の涙は花と散る']
+    events = ['黄昏の開発班 LEGEND FES', '事件発生！飛び出せオフィス！']
     recipe_pages =[] # [[rStory, 40], [rExtra, 41]] # refer to recipepage db for numbers
     traits = [] # ['Burst Skill Power Up']
 
@@ -1505,11 +1505,11 @@ def cleanup():
 
 # From Resleri Academy, use abbreviations in recipe_plan
 
-gacha = None #create_event(ja='1周年 星導祭 LEGEND FES 彷徨える亡者', en="1st Anniversaty LEGEND FES Part 5")
+gacha = None #create_event(ja='1周年 星礼祭 LEGEND FES 極夜に解ける呼び声', en="1st Anniversaty LEGEND FES Part 6")
 event = None #create_event(ja='爆裂！！マリーからの試練', en="Explosion! Marie Challenge")
 
 #createUpdate()
-retrieve_all_jsons()
+#retrieve_all_jsons()
 #import_combat_traits()
 #import_equipment_traits()
 #import_characters(event=gacha)
@@ -1521,7 +1521,7 @@ retrieve_all_jsons()
 #import_quest()
 ##import_enemy()
 #import_emblem()
-scan_update_images()
+#scan_update_images()
 
 #import_research()
 

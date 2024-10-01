@@ -163,6 +163,7 @@ export class A25CollectionComponent extends DialogUseComponent {
     character_gbl: 0
   }
   use_global_count: boolean;
+  has_collection: boolean = false;
 
   constructor(
     protected LocalStorage: LocalstorageService,
@@ -176,9 +177,11 @@ export class A25CollectionComponent extends DialogUseComponent {
     private formBuilder: UntypedFormBuilder,
     protected a25service: A25Service,) {
     super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
+    this.has_collection = false;
     if (this.route.snapshot.params.code) {
       this.shareCode = this.route.snapshot.params.code;
       this.editMode = false;
+      this.has_collection = this.LocalStorage.getItem('a25collect') !== null;
     }
     else {
       this.shareCode = this.LocalStorage.getItem('a25collect')
@@ -191,7 +194,7 @@ export class A25CollectionComponent extends DialogUseComponent {
       elems: "any",
       colorL: 'any',
       colorR: 'any',
-      stats: 'hp',
+      stats: 'date',
     })
     if (this.shareCode) this.load()
     this.use_global_count = this.language !== 'ja';
@@ -236,7 +239,7 @@ export class A25CollectionComponent extends DialogUseComponent {
         startWith(null as Observable<Memoria[]>),
         map((search: any) => search ?
         this.filterB(search.filtertext, search.stats, search.show_jp, search.hide_missing)
-        : this.filterB('', 'hp', this.editMode ? this.language === 'ja' || !this.use_global_count : true, !this.editMode))
+        : this.filterB('', 'date', this.editMode ? this.language === 'ja' || !this.use_global_count : true, !this.editMode))
       );
 
       this.filteredEmblems = this.pageForm.valueChanges.pipe(
@@ -310,6 +313,10 @@ export class A25CollectionComponent extends DialogUseComponent {
       }
       case "mdef": {
         memorialist = memorialist.sort((a, b) => (a.mdef30 > b.mdef30 ? -1 : 1));
+        break;
+      }
+      case "date": {
+        memorialist = memorialist.sort((a, b) => (a.date > b.date ? -1 : 1));
         break;
       }
     }
@@ -523,11 +530,11 @@ export class A25CollectionComponent extends DialogUseComponent {
   }
 
   openSnackBar() {
-    this._snackBar.open("Link copied!", "Close", {duration: 2000});
+    this._snackBar.open("Link copied!", "Close", {duration: 2000, panelClass: ['mat-primary']});
   }
 
   import(permission? : boolean) {
-    if (!this.LocalStorage.getItem('a25collect') || permission) {
+    if (permission) {
       this.LocalStorage.setItem('a25collect', this.shareCode)
       this.router.navigateByUrl('/resleri/collect/'+this.language)
     }

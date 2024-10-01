@@ -1,20 +1,4 @@
 @if (userprofile) {
-  <head>
-    <title>{{userprofile.user.username}} - Barrel Wisdom</title>
-    @if (userprofile.bio) {
-      <meta name="description" content="{{userprofile.bio}}" />
-    }
-    <meta name="robots" content="index, archive" />
-    <meta property="og:title" content="{{userprofile.user.username}} - Barrel Wisdom" />
-    <meta property="og:description" content={{userprofile.bio}} />
-    <meta property="og:type" content="website" />
-    @if (userprofile.avatar) {
-      <meta property="og:image" content="{{userprofile.avatar}}" />
-    }
-  </head>
-}
-
-@if (userprofile) {
   <header>
     <h1>User: {{userprofile.user.username}}</h1>
   </header>

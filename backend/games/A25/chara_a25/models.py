@@ -10,6 +10,7 @@ class Character(models.Model):
     elem  = models.ForeignKey(Filterable, on_delete=models.CASCADE, related_name="chara_elem")
     note  = models.CharField(max_length=200, blank=True)
     gbl   = models.BooleanField(default=False)
+    date  = models.DateField(blank=True, null=True)
 
     leader_skill_name = models.ForeignKey(Name, on_delete=models.CASCADE, blank=True, null=True, related_name="leader_name")
     leader_skill_desc = models.ForeignKey(Desc, on_delete=models.CASCADE, blank=True, null=True, related_name="leader_desc")
@@ -42,9 +43,10 @@ class Character(models.Model):
 
     class Meta:
         ordering = [
-            "-rarity",
             "role",
-            "name__text_en"
+            "-rarity",
+            "-date",
+            "slug"
         ]
 
 class Skill(models.Model):
@@ -117,6 +119,7 @@ class Memoria(models.Model):
     rarity = models.IntegerField()
     note  = models.CharField(max_length=200, blank=True)
     gbl   = models.BooleanField(default=False)
+    date = models.DateField(blank=True, null=True)
 
     lv1  = models.IntegerField()
     lv2  = models.IntegerField()
@@ -133,8 +136,8 @@ class Memoria(models.Model):
 
     class Meta:
         ordering = [
+            "-date",
             "-rarity",
-            "name__text_en"
         ]
 
 class Emblem(models.Model):

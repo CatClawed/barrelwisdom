@@ -45,7 +45,7 @@ export class A25MemorialistComponent extends DialogUseComponent {
     this.component = A25MemoriaComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
-      stats: 'hp',
+      stats: 'date',
       show_jp: this.language === 'ja',
     })
   }
@@ -63,7 +63,7 @@ export class A25MemorialistComponent extends DialogUseComponent {
       startWith(null as Observable<Memoria[]>),
       map((search: any) => search ?
         this.filterT(search.filtertext, search.stats, search.show_jp)
-        : this.filterT('', 'hp', this.language === 'ja'))
+        : this.filterT('', 'date', this.language === 'ja'))
     );
   }
 
@@ -95,6 +95,10 @@ export class A25MemorialistComponent extends DialogUseComponent {
       }
       case "mdef": {
         memorialist = memorialist.sort((a, b) => (a.mdef30 > b.mdef30 ? -1 : 1));
+        break;
+      }
+      case "date": {
+        memorialist = memorialist.sort((a, b) => (a.date > b.date ? -1 : 1));
         break;
       }
     }

@@ -133,43 +133,37 @@
   </form>
 </ng-template>
 @if (editMode) {
-<div class="row spacer">
-  <mat-form-field [cdkCopyToClipboard]="shareUrl" (click)="openSnackBar();" appearance="outline" class="col-md-10">
-    <input matInput readonly value="{{shareUrl}}">
-  </mat-form-field>
-  <button [cdkCopyToClipboard]="shareUrl" (click)="openSnackBar();" mat-fab extended color="primary" class="col-md-2">
-    <mat-icon fontSet="fa-solid" fontIcon="fa-link" style="font-size: 1.3rem;"></mat-icon> Share
+<div style="width:100%; height: 2.5rem; display: flex;" class="spacer">
+  <input type="text" (click)="openSnackBar();" readonly value="{{shareUrl}}"
+    [cdkCopyToClipboard]="shareUrl" style="width: 100%; margin-right: 0.5rem; border-radius: 5px; border-style: ridge; outline: none;;">
+  <button [cdkCopyToClipboard]="shareUrl" mat-fab extended color="primary"
+    (click)="openSnackBar();" style="height:100%;" class="input-group-text">
+    <i class="fa-solid fa-link"></i> Share
   </button>
 </div>
 }
 @else {
 <div style="margin-bottom: 1rem;" class="row spacer">
-  @if (LocalStorage.getItem('a25collect')) {
   <div class="col-md-4">
-    <button mat-fab extended color="primary" (click)="router.navigateByUrl('/resleri/collect/'+language)">
-      <mat-icon fontSet="fa-solid" fontIcon="fa-pen-to-square" style="font-size: 1.3rem;"></mat-icon> Edit my collection
+    <button mat-fab extended color="primary" style="height: 2.5rem;"
+      (click)="router.navigateByUrl('/resleri/collect/'+language)">
+      <mat-icon fontSet="fa-solid" [fontIcon]="has_collection ? 'fa-pen-to-square' : 'fa-plus'"
+        style="font-size: 1.3rem;"></mat-icon> {{has_collection ? 'Edit my collection' : 'Create new'}}
     </button>
   </div>
-  }
-  @else {
-  <button mat-fab extended color="primary" class="col-md-4"
-    (click)="router.navigateByUrl('/resleri/collect/'+language)">
-    <mat-icon fontSet="fa-solid" fontIcon="fa-plus" style="font-size: 1.3rem;"></mat-icon> Create new
-  </button>
-  }
   <div class="col-md-4"></div>
   <div class="col-md-4" style="display: grid;">
-    <button mat-fab extended color="accent" style="margin-left: auto; margin-right: 0;" (click)="import()">
+    <button mat-fab extended color="accent" style="margin-left: auto; margin-right: 0; height: 2.5rem;" (click)="import()">
       <mat-icon fontSet="fa-solid" fontIcon="fa-file-import" style="font-size: 1.3rem;"></mat-icon> Import
     </button>
     @if (areyousure) {
     <div>
-      This will overwrite your data. Are you sure?
+      This will overwrite your data with the current collection. Are you sure?
       <div>
         <button mat-flat-button color="primary" (click)="import(true)">
           Yes
         </button>
-        <button (click)="import(false)" style="margin-left: 3rem;">
+        <button (click)="import(false)" mat-flat-button style="margin-left: 3rem; background-color: lightgray;">
           Cancel
         </button>
       </div>
@@ -242,7 +236,7 @@
     <ng-container *ngTemplateOutlet="forms"></ng-container>
     <div class="mem-grid">
       @for (memoria of filteredMemoria | async; track memoria) {
-      <div style="aspect-ratio:256/410;position: relative;">
+      <div style="aspect-ratio:256/410;position: relative;cursor: pointer;">
         <img src="{{imgURL}}memoria/{{memoria.slug}}.webp" (click)="changeMemoria(memoria.id, memoria.slug, $event)"
           [style]="collection.memoria[memoria.id] ? 'width:100%' : 'width:100%;filter:grayscale(1)'">
         @if (collection.memoria[memoria.id] !== undefined) {
@@ -258,29 +252,29 @@
     <ng-container *ngTemplateOutlet="forms"></ng-container>
     <h2>Permanent</h2>
     @for (emblem of filteredEmblems | async; track emblem) {
-    @if (emblem.kind === 1) {
-    @if (!editMode) {
-    <popover [title]="emblem.name" [template]="emblemPopover" [context]="{ emblem: emblem }">
-      <ng-content *ngTemplateOutlet="emblemDisplay;context:{emblem:emblem}"></ng-content>
-    </popover>
-    }
-    @else {
-    <ng-content *ngTemplateOutlet="emblemDisplay;context:{emblem:emblem}"></ng-content>
-    }
-    }
+      @if (emblem.kind === 1) {
+        @if (!editMode) {
+          <popover [title]="emblem.name" [template]="emblemPopover" [context]="{ emblem: emblem }">
+            <ng-content *ngTemplateOutlet="emblemDisplay;context:{emblem:emblem}"></ng-content>
+          </popover>
+        }
+        @else {
+          <ng-content *ngTemplateOutlet="emblemDisplay;context:{emblem:emblem}"></ng-content>
+        }
+      }
     }
     <h2>Limited</h2>
     @for (emblem of filteredEmblems | async; track emblem) {
-    @if (emblem.kind === 2) {
-    @if (!editMode) {
-    <popover [title]="emblem.name" [template]="emblemPopover" [context]="{ emblem: emblem }">
-      <ng-content *ngTemplateOutlet="emblemDisplay;context:{emblem:emblem}"></ng-content>
-    </popover>
-    }
-    @else {
-    <ng-content *ngTemplateOutlet="emblemDisplay;context:{emblem:emblem}"></ng-content>
-    }
-    }
+      @if (emblem.kind === 2) {
+        @if (!editMode) {
+          <popover [title]="emblem.name" [template]="emblemPopover" [context]="{ emblem: emblem }">
+            <ng-content *ngTemplateOutlet="emblemDisplay;context:{emblem:emblem}"></ng-content>
+          </popover>
+        }
+        @else {
+          <ng-content *ngTemplateOutlet="emblemDisplay;context:{emblem:emblem}"></ng-content>
+        }
+      }
     }
   </mat-tab>
 </mat-tab-group>
@@ -297,7 +291,7 @@ Corrupt data detected.
   <img
     [src]="collection.emblems[emblem.eid] ? imgURL+'emblems/emblem-'+emblem.eid+'-'+collection.emblems[emblem.eid]+'.webp' : imgURL+'emblems/emblem-'+emblem.eid+'-1.webp'"
     (click)="editMode ? changeEmblem(emblem.eid) : null;" alt="{{emblem.name}}"
-    [style]=" collection.emblems[emblem.eid] ? '' : 'filter: grayscale(.8) drop-shadow(10px 10px 3px darkgray);'"
+    [style]=" collection.emblems[emblem.eid] ? 'cursor: pointer;' : 'filter: grayscale(.8) drop-shadow(10px 10px 3px darkgray); cursor: pointer;'"
     class="a25-emblem" loading="lazy">
 </ng-template>
 }

@@ -11,7 +11,7 @@ class BlogSimpleSerializer(serializers.ModelSerializer):
     secfull = serializers.SerializerMethodField()
     class Meta:
         model = Blog
-        fields = ['title', 'slugtitle', 'secname', 'secfull']
+        fields = ['title', 'slug', 'secname', 'secfull']
     def get_secname(self,obj):
         return obj.section.name
     def get_secfull(self,obj):
@@ -42,7 +42,7 @@ class EditUserProfileSerializer(serializers.ModelSerializer):
 class RegisterSerializer(serializers.ModelSerializer):
     code = serializers.CharField(required=True, write_only=True)
     password2 = serializers.CharField(required=True, write_only=True)
-    
+
     class Meta:
         model = User
         fields = ['username', 'email', 'password', 'password2', 'code']

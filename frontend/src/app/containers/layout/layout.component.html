@@ -17,8 +17,6 @@
     <a class="nav-items" routerLink="/blog/donate">Donate</a>
   </div>
   <div class="nav-social-media">
-    <a aria-label="Twitter" target="_blank" rel="noopener" href="https://twitter.com/BarrelWisdom"><i
-    class="fab fa-twitter" title="Twitter" style="color:white;font-size:2rem;padding-right:0.5rem;"></i></a>
     <a aria-label="Discord" target="_blank" rel="noopener" href="https://discord.gg/utRynRKxwh"><i
     class="fab fa-discord" title="Discord" style="color:white;font-size:2rem;padding-right:0.5rem;"></i></a>
   </div>
@@ -99,14 +97,6 @@
     <a class="sidenav-item sidenav-social-media" href="https://discord.gg/utRynRKxwh" rel="noopener" target="_blank">
       <i class="fab fa-discord"></i>Discord
     </a>
-    <a class="sidenav-item sidenav-social-media" href="https://twitter.com/BarrelWisdom" rel="noopener" target="_blank">
-      <i class="fab fa-twitter"></i>Twitter
-    </a>
-    @if (!user) {
-      <a class="sidenav-item" routerLink="/login">
-        <i class="fas fa-user"></i>Login
-      </a>
-    }
     @if (user) {
       <a class="sidenav-item" routerLink="/user/{{user.username}}"><i
       class="fa fa-user"></i>{{user.username}}</a>

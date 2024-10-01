@@ -44,6 +44,9 @@ export class A25Service {
     'mdef': {
       "en": "MDEF", "ja": "魔防", "sc": "魔防", "tc": "魔防"
     },
+    'date': {
+      "en": "Date", "ja": "日付", "sc": "日期", "tc": "日期"
+    },
   }
 
   public readonly colors = {

@@ -169,6 +169,7 @@ export interface Character {
     leader_skill_chars: string[];
     tags: Tag[];
     id: number;
+    date: Date;
 }
 
 export interface Skill {
@@ -233,6 +234,7 @@ export interface Memoria {
     note: string;
     gbl: boolean;
     id: number;
+    date: Date;
 }
 
 export interface Research {
