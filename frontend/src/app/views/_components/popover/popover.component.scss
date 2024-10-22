@@ -5,7 +5,7 @@
     background-image: url(/media/main/images/clean_textile.webp);
     margin-right: 1rem;
     max-height: 80vh;
-    overflow: scroll;
+    overflow-y: auto;
 
     >h4 {
         background-color: #d3d3d34d;

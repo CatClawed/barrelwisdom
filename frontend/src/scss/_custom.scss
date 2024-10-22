@@ -101,7 +101,7 @@ img {
 
 /* Background pattern from Toptal Subtle Patterns */
 .card {
-  border: 2px outset lightgray !important;
+  border: 2px solid lightgray !important;
   background-color: white;
   background-image: url("/media/main/images/clean_textile.webp");
   margin-bottom: 0 !important;
@@ -173,7 +173,7 @@ img {
     max-width: 600px;
   }
 
-  
+
   @media screen and (max-width: 800px) {
     width: 100%;
   }

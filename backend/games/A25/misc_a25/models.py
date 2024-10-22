@@ -23,7 +23,7 @@ class Filterable(models.Model):
     kind    = models.CharField(max_length=20)
 
 class Name(models.Model):
-    text_en = models.CharField(max_length=70, blank=True) # Heck English
+    text_en = models.CharField(max_length=100, blank=True) # Heck English
     text_ja = models.CharField(max_length=40, unique=True) # I'd be surprised if JP surpassed 15
     text_tc = models.CharField(max_length=40, blank=True)
     text_sc = models.CharField(max_length=40, blank=True)

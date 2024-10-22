@@ -92,10 +92,10 @@ import { forkJoin, map, Observable, startWith } from 'rxjs';
       }
     }`,
     `.a25-emblem {
-      aspect-ratio:1;
-      width: min(180px, 25%);
-      max-width: 180px;
-      filter: drop-shadow(10px 10px 3px darkgray);
+      cursor: pointer;
+      display: inline-block;
+      width: 180px;
+      aspect-ratio: 180/540;
     }`,
     `.mem-grid {
       display: grid;

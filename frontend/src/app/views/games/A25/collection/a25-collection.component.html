@@ -237,7 +237,7 @@
     <div class="mem-grid">
       @for (memoria of filteredMemoria | async; track memoria) {
       <div style="aspect-ratio:256/410;position: relative;cursor: pointer;">
-        <img src="{{imgURL}}memoria/{{memoria.slug}}.webp" (click)="changeMemoria(memoria.id, memoria.slug, $event)"
+        <img src="{{imgURL}}memoria/{{memoria.slug}}.webp" (click)="changeMemoria(memoria.id, memoria.slug, $event)" loading="lazy"
           [style]="collection.memoria[memoria.id] ? 'width:100%' : 'width:100%;filter:grayscale(1)'">
         @if (collection.memoria[memoria.id] !== undefined) {
         <div
@@ -288,10 +288,12 @@ Corrupt data detected.
   {{replaceDesc(emblem)}}
 </ng-template>
 <ng-template #emblemDisplay let-emblem="emblem">
-  <img
-    [src]="collection.emblems[emblem.eid] ? imgURL+'emblems/emblem-'+emblem.eid+'-'+collection.emblems[emblem.eid]+'.webp' : imgURL+'emblems/emblem-'+emblem.eid+'-1.webp'"
-    (click)="editMode ? changeEmblem(emblem.eid) : null;" alt="{{emblem.name}}"
-    [style]=" collection.emblems[emblem.eid] ? 'cursor: pointer;' : 'filter: grayscale(.8) drop-shadow(10px 10px 3px darkgray); cursor: pointer;'"
-    class="a25-emblem" loading="lazy">
+  <div style="overflow: hidden; width: min(180px, 25%); aspect-ratio: 1; display: inline-block; filter: drop-shadow(10px 10px 3px darkgray);">
+    <img
+      [src]="collection.emblems[emblem.eid] ? imgURL+'emblems/emblem-'+emblem.eid+'.webp' : imgURL+'emblems/emblem-'+emblem.eid+'.webp'"
+      (click)="editMode ? changeEmblem(emblem.eid) : null;" alt="{{emblem.name}}"
+      [style]="collection.emblems[emblem.eid] ? 'margin-top:calc(-100% * ' + (collection.emblems[emblem.eid]-1) + ');' : 'filter: grayscale(.8);'"
+      class="a25-emblem" loading="lazy">
+  </div>
 </ng-template>
 }

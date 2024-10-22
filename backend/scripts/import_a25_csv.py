@@ -15,10 +15,9 @@ languages = ['en', 'zh_cn', 'zh_tw']
 
 # for setting slugs
 additions = {
-    'ロマン': 'roman-3',
-    'イザナ': 'izana-3',
+
 }
-memoria_index = 117 # anni part 6 izana/roman
+memoria_index = 118 # anni part 7 ryza/judie
 
 trait_cat = {
     1: Filterable.objects.get(text_en="Attack"),
@@ -158,6 +157,7 @@ def retrieve_all_jsons():
             data = json.load(url)
             jsons[name] = data
         if name in names_gbl:
+            print(name)
             for lang in languages:
                 with urllib.request.urlopen(f'{BASE_URL}/master/{lang}/{name}.json') as url:
                     data = json.load(url)
@@ -1383,19 +1383,19 @@ def scan_update_images():
         print(character.slug, jsons['path_hash_to_name'][im])
 
 def global_additions():
-    createUpdateGBL()
+    #createUpdateGBL()
     update = LatestUpdateGBL.objects.first()
 
     rStory = RecipeTab.objects.get(order=1)
     rExtra = RecipeTab.objects.get(order=2)
 
-    dungeons = [] # ["Creature's Paradise", "Forest That Swallows Disasters"]
+    dungeons = [] #["Spiral into Another World", "Bottomless Pit"]
     score_battle_chapter = None
     tower_floor_max = None
     elem_tower_floor_max = None
-    events = ['黄昏の開発班 LEGEND FES', '事件発生！飛び出せオフィス！']
-    recipe_pages =[] # [[rStory, 40], [rExtra, 41]] # refer to recipepage db for numbers
-    traits = [] # ['Burst Skill Power Up']
+    events = [] #['アトリエサマー第1弾 LEGEND FES', 'アトリエサマー2024 第1弾']
+    recipe_pages = [] #[[rStory, 44], [rExtra, 45]] # refer to recipepage db for numbers
+    traits = ['Stun Damage Up on Weakness', 'Enhanced Resistance Down [Bolt]', 'Enhanced Resistance Down [Ice]']
 
     if tower_floor_max:
         towers = Tower.objects.filter(kind=Filterable.objects.get(text_en="Elemental Tower"))
@@ -1505,8 +1505,8 @@ def cleanup():
 
 # From Resleri Academy, use abbreviations in recipe_plan
 
-gacha = None #create_event(ja='1周年 星礼祭 LEGEND FES 極夜に解ける呼び声', en="1st Anniversaty LEGEND FES Part 6")
-event = None #create_event(ja='爆裂！！マリーからの試練', en="Explosion! Marie Challenge")
+gacha = None #create_event(ja='1周年 星礼祭 LEGEND FES 暁の風雲児', en="1st Anniversaty LEGEND FES Part 7")
+event = None #create_event(ja='旋風！！ユーディーからの試練', en="Whirlwind! Judie Challenge")
 
 #createUpdate()
 #retrieve_all_jsons()
@@ -1541,4 +1541,5 @@ Checklist
 4. char -> skill/passive
 5. items -> recipes -> quest
 6. quest -> enemy skill -> enemy -> hint -> wave -> battle
+python manage.py dumpdata chara_a25 items_a25 misc_a25 misc_a25 quest_a25 -o dump.json.gz
 """
