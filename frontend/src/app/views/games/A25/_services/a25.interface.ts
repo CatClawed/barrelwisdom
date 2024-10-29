@@ -69,8 +69,8 @@ export interface SB {
 }
 
 export interface SBB {
-    chapter: string;
-    section: string;
+    chapter: number;
+    section: number;
 }
 
 export interface DungeonName {
@@ -281,8 +281,8 @@ export interface ScoreDifficulties {
 
 export interface ScoreBattle {
     name: string;
-    chapter: 1;
-    section: 1;
+    chapter: number;
+    section: number;
     difficulties: ScoreDifficulties[];
 }
 

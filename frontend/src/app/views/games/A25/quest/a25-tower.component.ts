@@ -95,6 +95,7 @@ export class A25TowerComponent extends FragmentedComponent {
   }
 
   getHint(hints: Hint[], base_enemy: string) {
-    return hints.find(h => h.base_enemy === base_enemy).desc
+    let h = hints.find(h => h.base_enemy === base_enemy)
+    return h ? h.desc : undefined;
   }
 }

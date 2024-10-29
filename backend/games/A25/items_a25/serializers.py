@@ -173,7 +173,7 @@ class A25RecipeBookSerializer(serializers.ModelSerializer):
     unlocks = serializers.SerializerMethodField()
     class Meta:
         model = Recipe
-        fields = ['name', 'slug', 'order', 'book', 'rarity',
+        fields = ['name', 'slug', 'book', 'rarity',
             'unlocks'
         ]
     def get_unlocks(self,obj):

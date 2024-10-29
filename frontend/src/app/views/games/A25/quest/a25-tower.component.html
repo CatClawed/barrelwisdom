@@ -5,8 +5,8 @@
     <ol>
       @for (floor of tower; track floor) {
         <li>
-          <a href="/{{gameURL}}/quests/tower/{{language}}#{{floor.floor}}"
-            (click)="$event.preventDefault();scroll(floor.floor)">
+          <a href="/{{gameURL}}/quests/tower/{{slug}}/{{language}}#{{floor.floor}}"
+            (click)="$event.preventDefault();scroll(floor.floor, slug)">
             Floor {{floor.floor}}
           </a>
         </li>
@@ -41,63 +41,71 @@
         }
       </ul>
     }
-    @for (panel of floor.battle.panels; track panel) {
+    @for (panel of floor.battle.panels; track panel;) {
       <img loading="lazy"
         style="aspect-ratio:1;width:100px;"
         src="{{imgURL}}panels/{{panel}}.webp">
     }
-    <div style="display:grid;grid-row-gap:1rem;grid-column-gap:1rem;grid-template-columns:repeat(auto-fit, 350px);">
-      @for (enemy of floor.battle.waves[0].enemies; track enemy) {
-        <div class="card card-body" style="min-width:350px;max-width:450px;">
-          <img loading="lazy"
-            style="aspect-ratio: 1;width:128px;height:128px;margin-left:auto;margin-right:auto;"
-            src="{{imgURL}}enemy/{{enemy.base_enemy}}.webp">
-          <h4>{{enemy.name}}</h4>
-          <table style="margin-bottom:0.7rem;">
-            <tbody>
-              <tr>
-                <td><i class="atelier atelier-np atelier-resleri-fire resleri-element-icon-s" style="background-color:{{a25service.elements['fire']}}"></i></td><td>{{enemy.res_fir ? enemy.res_fir : 0}}%</td>
-                <td><i class="atelier atelier-np atelier-resleri-ice resleri-element-icon-s" style="background-color:{{a25service.elements['ice']}}"></i></td><td>{{enemy.res_ice ? enemy.res_ice : 0}}%</td>
-                <td><i class="atelier atelier-np atelier-resleri-lightning resleri-element-icon-s" style="background-color:{{a25service.elements['lightning']}}"></i></td><td>{{enemy.res_blt ? enemy.res_blt : 0}}%</td>
-                <td><i class="atelier atelier-np atelier-resleri-wind resleri-element-icon-s" style="background-color:{{a25service.elements['wind']}}"></i></td><td>{{enemy.res_air ? enemy.res_air : 0}}%</td>
-              </tr>
-              <tr>
-                <td><i class="atelier atelier-np atelier-resleri-slash resleri-element-icon-s" style="background-color:{{a25service.elements['slash']}}"></i></td><td>{{enemy.res_sla ? enemy.res_sla : 0}}%</td>
-                <td><i class="atelier atelier-np atelier-resleri-impact resleri-element-icon-s" style="background-color:{{a25service.elements['impact']}}"></i></td><td>{{enemy.res_str ? enemy.res_str : 0}}%</td>
-                <td><i class="atelier atelier-np atelier-resleri-pierce resleri-element-icon-s" style="background-color:{{a25service.elements['pierce']}}"></i></td><td>{{enemy.res_sta ? enemy.res_sta : 0}}%</td>
-                <td></td><td></td>
-              </tr>
-            </tbody>
-          </table>
-          <b>Skills</b>
-          <ul>
-            @for (skill of enemy.skills; track skill) {
-              <li>
-                {{skill.skill.name}}
-                @if (skill.kind == 'burst') {
-                  <b>(Burst)</b>
-                }
-                @if (skill.skill.elem) {
-                  <i class="atelier atelier-np atelier-resleri-{{skill.skill.elem}} resleri-element-icon-s"
-                    style="float:right;background-color:{{a25service.elements[skill.skill.elem]}};"></i>
-                }
-                @if (skill.skill.wt) {
-                  <br />WT: {{skill.skill.wt+200}}
-                }
-                @if (skill.skill.pow1) {
-                  <br />Power: {{skill.skill.pow1}}
-                }
-                @if (skill.skill.area) {
-                  <br />Range: {{skill.skill.area}}
-                }
+      @for (wave of floor.battle.waves; track wave; let index = $index) {
 
-              </li>
+        @if (index > 0) {
+          <h3>Wave {{index+1}}</h3>
+        }
+        <div style="display:grid;grid-row-gap:1rem;grid-column-gap:1rem;grid-template-columns:repeat(auto-fit, 350px);">
+        @for (enemy of wave.enemies; track enemy) {
+          <div class="card card-body" style="min-width:350px;max-width:450px;">
+            <img loading="lazy"
+              style="aspect-ratio: 1;width:128px;height:128px;margin-left:auto;margin-right:auto;"
+              src="{{imgURL}}enemy/{{enemy.base_enemy}}.webp">
+            <h4>{{enemy.name}}</h4>
+            <table style="margin-bottom:0.7rem;">
+              <tbody>
+                <tr>
+                  <td><i class="atelier atelier-np atelier-resleri-fire resleri-element-icon-s" style="background-color:{{a25service.elements['fire']}}"></i></td><td>{{enemy.res_fir ? enemy.res_fir : 0}}%</td>
+                  <td><i class="atelier atelier-np atelier-resleri-ice resleri-element-icon-s" style="background-color:{{a25service.elements['ice']}}"></i></td><td>{{enemy.res_ice ? enemy.res_ice : 0}}%</td>
+                  <td><i class="atelier atelier-np atelier-resleri-lightning resleri-element-icon-s" style="background-color:{{a25service.elements['lightning']}}"></i></td><td>{{enemy.res_blt ? enemy.res_blt : 0}}%</td>
+                  <td><i class="atelier atelier-np atelier-resleri-wind resleri-element-icon-s" style="background-color:{{a25service.elements['wind']}}"></i></td><td>{{enemy.res_air ? enemy.res_air : 0}}%</td>
+                </tr>
+                <tr>
+                  <td><i class="atelier atelier-np atelier-resleri-slash resleri-element-icon-s" style="background-color:{{a25service.elements['slash']}}"></i></td><td>{{enemy.res_sla ? enemy.res_sla : 0}}%</td>
+                  <td><i class="atelier atelier-np atelier-resleri-impact resleri-element-icon-s" style="background-color:{{a25service.elements['impact']}}"></i></td><td>{{enemy.res_str ? enemy.res_str : 0}}%</td>
+                  <td><i class="atelier atelier-np atelier-resleri-pierce resleri-element-icon-s" style="background-color:{{a25service.elements['pierce']}}"></i></td><td>{{enemy.res_sta ? enemy.res_sta : 0}}%</td>
+                  <td></td><td></td>
+                </tr>
+              </tbody>
+            </table>
+            <b>Skills</b>
+            <ul>
+              @for (skill of enemy.skills; track skill) {
+                <li>
+                  {{skill.skill.name}}
+                  @if (skill.kind == 'burst') {
+                    <b>(Burst)</b>
+                  }
+                  @if (skill.skill.elem) {
+                    <i class="atelier atelier-np atelier-resleri-{{skill.skill.elem}} resleri-element-icon-s"
+                      style="float:right;background-color:{{a25service.elements[skill.skill.elem]}};"></i>
+                  }
+                  @if (skill.skill.wt) {
+                    <br />WT: {{skill.skill.wt+200}}
+                  }
+                  @if (skill.skill.pow1) {
+                    <br />Power: {{skill.skill.pow1}}
+                  }
+                  @if (skill.skill.area) {
+                    <br />Range: {{skill.skill.area}}
+                  }
+
+                </li>
+              }
+            </ul>
+            @if (getHint(floor.battle.hints, enemy.base_enemy)) {
+              <b>Hints</b>
+              <span [innerHTML]="getHint(floor.battle.hints, enemy.base_enemy)"></span>
             }
-          </ul>
-          <b>Hints</b>
-          <span [innerHTML]="getHint(floor.battle.hints, enemy.base_enemy)"></span>
-        </div>
+          </div>
+        }
+      </div>
       }
-    </div>
   }
 }
