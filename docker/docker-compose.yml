@@ -31,7 +31,7 @@ services:
 
   frontend:
     container_name: frontend
-    build: 
+    build:
       context: ../frontend
       dockerfile: ../docker/Dockerfile.angular
     ports:
@@ -55,7 +55,7 @@ services:
 # For local testing of production build
   frontend_prod:
     container_name: frontend_prod
-    image: barrelwisdom/frontend:test
+    image: frontend_prod:latest
     ports:
       - 127.0.0.1:4000:4000
 

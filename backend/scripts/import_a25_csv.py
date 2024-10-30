@@ -1558,7 +1558,7 @@ base_enemy_index = 82
 gacha = None #create_event(ja='HALLOWEEN2024 LEGEND FES', en="HALLOWEEN2024 LEGEND FES")
 
 #createUpdate()
-retrieve_all_jsons()
+#retrieve_all_jsons()
 #import_combat_traits()
 #import_equipment_traits()
 #import_characters(event=gacha, additions=additions)
@@ -1576,7 +1576,7 @@ retrieve_all_jsons()
 #import_research()
 
 #global_additions()
-enemy_images()
+#enemy_images()
 
 
 """
