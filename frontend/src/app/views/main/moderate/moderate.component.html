@@ -1,6 +1,3 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
 @if (comments) {
   @for (comment of comments; track comment) {
     @if (!comment.approved) {
@@ -21,10 +18,10 @@
         {{comment.body}}
         <div>
           @if (comment.parent) {
-            Child: https://barrelwisdom.com/{{comment.parent_blog.sec}}/{{comment.parent_blog.slugtitle}}
+            Child: https://barrelwisdom.com/{{comment.parent_blog.sec}}/{{comment.parent_blog.slug}}
           }
           @if (comment.blog) {
-            https://barrelwisdom.com/{{comment.blog.sec}}/{{comment.blog.slugtitle}}
+            https://barrelwisdom.com/{{comment.blog.sec}}/{{comment.blog.slug}}
           }
           <button style="float:right;"
             class="btn btn-secondary"

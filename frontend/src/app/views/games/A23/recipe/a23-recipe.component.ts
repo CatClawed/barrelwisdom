@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { Popover } from '@app/views/_components/popover/popover.component';
 import { RecipeIdea } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
@@ -31,12 +32,13 @@ export class A23RecipeComponent extends SingleComponent {
   constructor(
     protected route: ActivatedRoute,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     private a23service: A23Service,
     protected readonly destroy$: DestroyService,
     private location: Location,
     public historyService: HistoryService,
   ) {
-    super(destroy$, route, seoService);
+    super(destroy$, route, breadcrumbService, seoService);
     switch (this.route.snapshot.queryParamMap.get('tab')) {
       case 'sophie':
         this.sophie = true;
@@ -57,7 +59,7 @@ export class A23RecipeComponent extends SingleComponent {
 
   changeData() {
     this.gameService(this.a23service, 'recipe-ideas');
-    this.genericSEO(`Recipe Ideas`, `All recipe ideas in ${this.gameTitle}.`);
+    this.genericSettings(`Recipe Ideas`, `All recipe ideas in ${this.gameTitle}.`);
     return this.a23service.getRecipeList(this.language);
   }
 

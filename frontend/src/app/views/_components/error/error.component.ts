@@ -1,27 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 
 @Component({
   standalone: true,
-  templateUrl: 'error.component.html',
-  selector: 'Error',
-  imports: []
+  template: ''
 })
 export class ErrorComponent implements OnInit {
-
-  @Input()
-  errorCode: string = '404';
-
-  errorTitle: string;
-  errorDescription: string;
+  constructor(
+    protected breadcrumbService: BreadcrumbService) { }
 
   ngOnInit(): void {
-    if (this.errorCode === '404') {
-      this.errorTitle = "Oops! You're lost.";
-      this.errorDescription = "Our puni told us that the page you're looking for doesn't exist.";
-    }
-    else {
-      this.errorTitle = "The server puni died.";
-      this.errorDescription = "We'll replace that puni soon. The site is either broken or under maintenance.";
-    }
+    this.breadcrumbService.setStatus(404)
   }
 }

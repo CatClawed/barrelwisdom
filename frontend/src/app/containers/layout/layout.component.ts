@@ -1,12 +1,13 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '@app/views/main/_interfaces/user';
 import { AuthenticationService } from '@app/services/authentication.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { LanguageService } from '@app/services/language.service';
 import { NavItems, NavigationService } from '@app/services/navigation.service';
 import { TranslationService } from '@app/services/translation.service';
+import { User } from '@app/views/main/_interfaces/user';
 import { LanguageData } from '@environments/language-data';
 import { takeUntil } from 'rxjs/operators';
 
@@ -23,8 +24,13 @@ export class LayoutComponent implements OnInit {
   languages;
   codes;
   currentLang = "en";
+  breadcrumbs = [['hiya', '/papaya']];
+  current = 'heyo';
+  bread;
+  error;
 
   constructor(
+    private breadcrumbService: BreadcrumbService,
     private languageService: LanguageService,
     private translationService: TranslationService,
     private authenticationService: AuthenticationService,
@@ -53,6 +59,16 @@ export class LayoutComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe(x => {
         this.currentLang = this.translationService.currentLang;
+      });
+    this.breadcrumbService.breadcrumbObserve
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(x => {
+        this.bread = this.breadcrumbService.breadcrumbValue;
+      });
+    this.breadcrumbService.errorObserve
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(x => {
+        this.error = this.breadcrumbService.errorValue;
       });
 
     this.breakpointObserver.observe([

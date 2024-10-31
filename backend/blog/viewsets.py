@@ -15,13 +15,13 @@ class BlogViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
     search_fields = ['title','body']
     ordering_fields = ['created']
-    filterset_fields = ['slugtitle', 'section', 'tags']
+    filterset_fields = ['slug', 'section', 'tags']
     pagination_class = LimitOffsetPagination
 
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tags.objects.all()
     serializer_class = TagSerializer
-    lookup_field = 'slugname'
+    lookup_field = 'slug'
 
     # https://stackoverflow.com/questions/67151379/create-multiple-instances-at-once-django-rest-framework
     def create(self, request, *args, **kwargs):
@@ -49,12 +49,12 @@ class MainBlogViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
     search_fields = ['title','body']
     ordering_fields = ['created']
-    filterset_fields = ['slugtitle', 'section', 'tags__slugname']
+    filterset_fields = ['slug', 'section', 'tags__slug']
     pagination_class = LimitOffsetPagination
-    lookup_field = 'slugname'
+    lookup_field = 'slug'
 
     @action(detail=True, methods=['get'], url_path=r"(?P<section>[a-z-0-9]+)")
-    def blog(self, request, section, slugname):
+    def blog(self, request, section, slug):
         try:
             queryset = (
                 Blog.objects
@@ -65,7 +65,7 @@ class MainBlogViewSet(viewsets.ModelViewSet):
                     'tags',
                     'author'
                 )
-                .get(slugtitle=slugname, section__name=section)
+                .get(slug=slug, section__name=section)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -74,9 +74,9 @@ class MainBlogViewSet(viewsets.ModelViewSet):
 
     def list(self, request, *args, **kwargs):
         response = super().list(request, args, kwargs)
-        if request.query_params.get('tags__slugname'):
+        if request.query_params.get('tags__slug'):
             try:
-                response.data['tagname'] = Tags.objects.get(slugname=request.query_params.get('tags__slugname')).name # Or wherever you get this values from
+                response.data['tagname'] = Tags.objects.get(slug=request.query_params.get('tags__slug')).name # Or wherever you get this values from
             except ObjectDoesNotExist:
                 raise Http404
         return response

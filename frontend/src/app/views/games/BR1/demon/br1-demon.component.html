@@ -1,11 +1,4 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
-
 @if (data; as demon) {
-  @if (showNav) {
-    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Demons', '/'+gameURL+'/demons/'+language]]" [current]="demon.name"></Breadcrumb>
-  }
   <div class="mx-auto row spacer">
     <div class="{{colset}} card card-body">
       <div class="flex">
@@ -31,7 +24,7 @@
       @if (demon.item_set) {
         <ul>
           @for (item of demon.item_set; track item) {
-            <li><a routerLink="/{{gameURL}}/items/{{item.slugname}}/{{language}}">{{item.name}}</a></li>
+            <li><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
           }
         </ul>
       }

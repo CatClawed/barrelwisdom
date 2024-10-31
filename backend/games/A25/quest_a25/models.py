@@ -105,17 +105,17 @@ class ScoreBattleDifficulties(models.Model):
 
 class ScoreBattle(models.Model):
     name = models.ForeignKey(Name, on_delete=models.CASCADE)
-    chapter = models.CharField(max_length=10)
-    section = models.CharField(max_length=10)
+    chap = models.IntegerField(default=0)
+    sect = models.IntegerField(default=0)
     difficulties = models.ManyToManyField(ScoreBattleDifficulties)
     gbl = models.BooleanField(default=False)
     class Meta:
         ordering = [
-            "chapter",
-            "section"
+            "chap",
+            "sect"
         ]
         constraints = [
-            models.UniqueConstraint(fields=['chapter', 'section'], name='score_section')
+            models.UniqueConstraint(fields=['chap', 'sect'], name='score_section')
         ]
 
 class Dungeon(models.Model):

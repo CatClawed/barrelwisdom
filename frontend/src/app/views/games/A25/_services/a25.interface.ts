@@ -69,8 +69,8 @@ export interface SB {
 }
 
 export interface SBB {
-    chapter: string;
-    section: string;
+    chapter: number;
+    section: number;
 }
 
 export interface DungeonName {
@@ -119,8 +119,7 @@ export interface Material {
 export interface RecipeList {
     name: string;
     slug: string;
-    x: number;
-    y: number;
+    order: number;
     book: number;
     unlocks: string[];
     rarity: number;
@@ -128,8 +127,6 @@ export interface RecipeList {
 
 export interface RecipePage {
     desc: string;
-    min_x: number;
-    max_x: number;
     recipes: RecipeList[];
     gbl: boolean;
 }
@@ -137,6 +134,11 @@ export interface RecipePage {
 export interface RecipeTab {
     name: string;
     pages: RecipePage[];
+}
+
+export interface Tag {
+    name: string;
+    char: string[];
 }
 
 export interface Character {
@@ -165,7 +167,9 @@ export interface Character {
     leader_skill_name: string;
     leader_skill_desc: string;
     leader_skill_chars: string[];
-    tags: string[];
+    tags: Tag[];
+    id: number;
+    date: Date;
 }
 
 export interface Skill {
@@ -229,6 +233,8 @@ export interface Memoria {
     limit: string;
     note: string;
     gbl: boolean;
+    id: number;
+    date: Date;
 }
 
 export interface Research {
@@ -275,8 +281,8 @@ export interface ScoreDifficulties {
 
 export interface ScoreBattle {
     name: string;
-    chapter: 1;
-    section: 1;
+    chapter: number;
+    section: number;
     difficulties: ScoreDifficulties[];
 }
 
@@ -328,4 +334,15 @@ export interface Tower {
     rewards: Reward[];
     effects: string[];
     battle: Battle;
+}
+
+export interface Emblem {
+    eid: number;
+    kind: number;
+    name: string;
+    desc: string;
+    lv1: number;
+    lv2: number;
+    lv3: number;
+    gbl: boolean;
 }

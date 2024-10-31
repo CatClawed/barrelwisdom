@@ -5,6 +5,7 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { Tooltip } from '@app/views/_components/tooltip/tooltip.component';
 import { Property } from '@app/views/games/A16/_services/a16.interface';
 import { A16Service } from '@app/views/games/A16/_services/a16.service';
@@ -31,9 +32,10 @@ export class A16PropertylistComponent extends DialogUseComponent {
     protected route: ActivatedRoute,
     protected location: Location,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
     private a16service: A16Service) {
-    super(destroy$, router, route, location, seoService, cdkDialog);
+    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A16PropertyComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -43,7 +45,7 @@ export class A16PropertylistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.a16service, 'properties');
-    this.genericSEO(`Properties`, `The list of properties in ${this.gameTitle}.`);
+    this.genericSettings(`Properties`, `The list of properties in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a16service.getPropertyList(this.language);
   }

@@ -1,11 +1,5 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
 
 @if (data; as trait) {
-  @if (showNav) {
-    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Traits', '/'+gameURL+'/traits/'+language]]" [current]="trait.name"></Breadcrumb>
-  }
   <div class="mx-auto row spacer">
     <div class="{{colset}} card card-body">
       <div class="flex">

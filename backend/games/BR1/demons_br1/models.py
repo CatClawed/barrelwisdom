@@ -2,7 +2,7 @@ from django.db import models
 from games.BR1.areas_br1.models import Area
 
 class Demon(models.Model):
-    slugname = models.SlugField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=50, unique=True)
     name = models.CharField(max_length=50)
     race = models.CharField(max_length=20)
     hp = models.IntegerField()

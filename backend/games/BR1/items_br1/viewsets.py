@@ -11,7 +11,7 @@ class BR1ItemViewSet(viewsets.ModelViewSet):
     queryset = Item.objects.all()
     serializer_class = BR1ItemSerializerSimple
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    lookup_field = 'slugname'
+    lookup_field = 'slug'
 
     @action(detail=False)
     def en(self, request):
@@ -27,9 +27,9 @@ class BR1ItemViewSet(viewsets.ModelViewSet):
         serializer = BR1ItemSerializer(queryset, many=True)
         return Response(serializer.data)
 
-    # allows easy access via catect/slugname/en
+    # allows easy access via catect/slug/en
     @action(detail=True, methods=['get'], url_path="en")
-    def en_full(self, request, slugname):
+    def en_full(self, request, slug):
         try:
             queryset = (
                 Item.objects
@@ -39,7 +39,7 @@ class BR1ItemViewSet(viewsets.ModelViewSet):
                     'missions',
                     'ingredient_set__item',
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404

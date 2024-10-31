@@ -15,14 +15,14 @@ export class BlogService {
   constructor(
     private http: HttpClient) { }
 
-  getBlog(slugtitle: string, section: string): Observable<Blog> {
-    return this.http.get<Blog>(`${environment.apiUrl}/blog/${slugtitle}/${section}/`)
+  getBlog(slug: string, section: string): Observable<Blog> {
+    return this.http.get<Blog>(`${environment.apiUrl}/blog/${slug}/${section}/`)
   }
 
-  getMainPageBlogs(num: number, limit: number, tag: string): Observable<BlogPaginator> {
+  getMainPageBlogs(num: number, limit: number, tag?: string): Observable<BlogPaginator> {
     const offset = num == 0 ? 1 : limit * (num - 1);
     if (tag) {
-      return this.http.get<BlogPaginator>(`${environment.apiUrl}/blog/?ordering=-created&tags__slugname=${tag}&limit=${limit}&offset=${offset}`)
+      return this.http.get<BlogPaginator>(`${environment.apiUrl}/blog/?ordering=-created&tags__slug=${tag}&limit=${limit}&offset=${offset}`)
     }
     return this.http.get<BlogPaginator>(`${environment.apiUrl}/blog/?ordering=-created&limit=${limit}&offset=${offset}`)
   }

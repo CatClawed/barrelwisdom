@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { of } from 'rxjs';
@@ -14,12 +15,14 @@ import { DataComponent } from './data.component';
 
 export abstract class FilterableComponent extends DataComponent {
     pageForm: UntypedFormGroup;
+    hide: boolean = false;
 
     constructor(
         protected readonly destroy$: DestroyService,
         protected route: ActivatedRoute,
+        protected breadcrumbService: BreadcrumbService,
         protected seoService: SeoService) {
-        super(destroy$, route, seoService)
+        super(destroy$, route, breadcrumbService, seoService)
     }
 
     paramWatch() {
@@ -31,7 +34,7 @@ export abstract class FilterableComponent extends DataComponent {
                     return this.changeData();
                 }),
                 catchError(error => {
-                    this.error = `${error.status}`;
+                    this.error = this.breadcrumbService.setStatus(error.status);
                     return of(undefined);
                 }),
                 takeUntil(this.destroy$)
@@ -39,7 +42,7 @@ export abstract class FilterableComponent extends DataComponent {
             .subscribe(data => {
                 this.data = data;
                 if (this.data) {
-                    this.error = ``;
+                    this.error = this.breadcrumbService.setStatus(200);
                     this.afterAssignment();
                 }
             });
@@ -52,6 +55,6 @@ export abstract class FilterableComponent extends DataComponent {
     }
 
     identify2(index, item) {
-        return item.slugname;
+        return item.slug;
     }
 }

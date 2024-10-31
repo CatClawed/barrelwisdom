@@ -16,11 +16,11 @@ export class UserService {
         return this.http.get<EditBlog>(`${environment.apiUrl}/editblog/${id}/`)
     }
 
-    blogPost(title: string, slugtitle: string, body: string, image: string, description: string, authorlock: boolean, author: number[], section: number, tags: number[], id?: string) {
+    blogPost(title: string, slug: string, body: string, image: string, desc: string, authorlock: boolean, author: number[], section: number, tags: number[], id?: string) {
         if (id) {
-            return this.http.put(`${environment.apiUrl}/editblog/${id}/`, { title, slugtitle, body, image, description, authorlock, author, section, tags })
+            return this.http.put(`${environment.apiUrl}/editblog/${id}/`, { title, slug, body, image, desc, authorlock, author, section, tags })
         }
-        return this.http.post(`${environment.apiUrl}/editblog/`, { title, slugtitle, body, image, description, authorlock, author, section, tags })
+        return this.http.post(`${environment.apiUrl}/editblog/`, { title, slug, body, image, desc, authorlock, author, section, tags })
     }
 
     getSections(): Observable<Section[]> {

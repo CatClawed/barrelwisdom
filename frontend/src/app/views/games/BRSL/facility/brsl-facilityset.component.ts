@@ -3,6 +3,7 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { FacilitySet } from '@app/views/games/BRSL/_services/brsl.interface';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -25,9 +26,10 @@ export class BRSLFacilitySetComponent extends FilterableComponent {
     private formBuilder: UntypedFormBuilder,
     protected route: ActivatedRoute,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     private brslservice: BRSLService,
   ) {
-    super(destroy$, route, seoService);
+    super(destroy$, route, breadcrumbService, seoService);
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: ''
     })
@@ -35,7 +37,7 @@ export class BRSLFacilitySetComponent extends FilterableComponent {
 
   changeData() {
     this.gameService(this.brslservice, 'facilities/sets');
-    this.genericSEO(`Facility Sets`, `All facility sets in ${this.gameTitle}.`);
+    this.genericSettings(`Facility Sets`, `All facility sets in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.brslservice.getFacilitySetList(this.language);
   }

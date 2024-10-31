@@ -9,8 +9,8 @@ import { MatInputModule } from '@angular/material/input';
 import { SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthenticationService } from "@app/services/authentication.service";
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
-import { ErrorComponent } from '@app/views/_components/error/error.component';
 import { EditBlog, Tag } from "@app/views/main/_interfaces/blog";
 import { Section } from '@app/views/main/_interfaces/section';
 import { User } from "@app/views/main/_interfaces/user";
@@ -26,7 +26,7 @@ import slugify from 'slugify';
   templateUrl: 'create.component.html',
   providers: [DestroyService, provideMarkdown({sanitize: SecurityContext.NONE})],
   standalone: true,
-  imports: [ErrorComponent, MatFormFieldModule, MatInputModule,
+  imports: [MatFormFieldModule, MatInputModule,
     ReactiveFormsModule, RouterLink, MarkdownComponent, MarkdownPipe,
     CommonModule, MatChipsModule, MatAutocompleteModule]
 })
@@ -76,6 +76,7 @@ export class CreateComponent {
     private errorService: ErrorCodeService,
     private authenticationService: AuthenticationService,
     private markdownService: MarkdownService,
+    private breadcrumbService: BreadcrumbService,
     private userService: UserService) {
     slugify.extend({ "'": "-" })
     this.getTags();
@@ -96,6 +97,7 @@ export class CreateComponent {
   }
 
   ngOnInit() {
+    this.breadcrumbService.setBreadcrumbs([], undefined)
     this.filteredTags = this.tagControl.valueChanges.pipe(
       startWith(null as Observable<string[]>),
       map((tag: string | null) => tag ? this._filter(tag) : this.tagList.slice()));
@@ -152,9 +154,9 @@ export class CreateComponent {
   }
 
   blogPost() {
-    const slugtitle = this.slug(this.pageForm.get("title").value);
+    const slug = this.slug(this.pageForm.get("title").value);
     const nextURL = this.sectionList.find(obj => obj.id === +this.pageForm.get("section").value).name
-      + '/' + slugtitle;
+      + '/' + slug;
     let authors = [];
     if (this.blog && this.editMode) {
       authors = this.blog.author;
@@ -170,7 +172,7 @@ export class CreateComponent {
     for (let tag of this.currentTags) {
       let index = this.tagList.indexOf(tag);
       if (index < 0) {
-        newList.push({ name: tag, slugname: this.slug(tag) });
+        newList.push({ name: tag, slug: this.slug(tag) });
       }
       else {
         idList.push(this.tagIDList[index]);
@@ -182,7 +184,7 @@ export class CreateComponent {
           idList = this.handleTags(data, idList)
           return this.userService.blogPost(
             this.pageForm.get("title").value,
-            slugtitle,
+            slug,
             this.customLink(this.pageForm.get("body").value),
             this.pageForm.get("imgURL").value,
             this.pageForm.get("seoDesc").value,
@@ -281,7 +283,7 @@ export class CreateComponent {
         this.pageForm.get('title').setValue(this.blog.title);
         this.pageForm.get('body').setValue(this.blog.body);
         this.pageForm.get('section').setValue(this.blog.section);
-        this.pageForm.get('seoDesc').setValue(this.blog.description);
+        this.pageForm.get('seoDesc').setValue(this.blog.desc);
         this.pageForm.get('imgURL').setValue(this.blog.image);
         this.pageForm.get('authorLock').setValue(this.blog.authorlock);
 

@@ -23,7 +23,7 @@ PASSWORD_HASHERS = [
 # Application definition
 
 DB_TABLES = [
-    
+
 ]
 
 INSTALLED_APPS = [
@@ -131,13 +131,13 @@ MIDDLEWARE = [
 
 if DEBUG:
     SESSION_ENGINE = 'django.contrib.sessions.backends.db'
-    ALLOWED_HOSTS = ['*'] 
+    ALLOWED_HOSTS = ['*']
     INSTALLED_APPS.append('debug_toolbar')
     MIDDLEWARE.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
     # very annoying to have cache on during development
     # but did this ever come back to bite me
-    MIDDLEWARE.remove('django.middleware.cache.UpdateCacheMiddleware')
-    MIDDLEWARE.remove('django.middleware.cache.FetchFromCacheMiddleware')
+    #MIDDLEWARE.remove('django.middleware.cache.UpdateCacheMiddleware')
+    #MIDDLEWARE.remove('django.middleware.cache.FetchFromCacheMiddleware')
     DEBUG_TOOLBAR_CONFIG = {
         "SHOW_TOOLBAR_CALLBACK": lambda request: True,
     }

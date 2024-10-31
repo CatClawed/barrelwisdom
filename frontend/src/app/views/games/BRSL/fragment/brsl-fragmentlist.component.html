@@ -1,9 +1,4 @@
-
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
 @if (!error) {
-  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Fragments & Dates"></Breadcrumb>
   <h1>Fragments &amp; Dates</h1>
   <p>Dates give one of two possible fragments. The first listed will always be from two top choices; the second will always be two bottom choices. A handful of fragments come from DLC and a choice you make later in the game.</p>
   <p><b>Note:</b> There may be inaccuracies for anything labelled as DLC.</p>

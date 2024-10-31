@@ -17,8 +17,6 @@
     <a class="nav-items" routerLink="/blog/donate">Donate</a>
   </div>
   <div class="nav-social-media">
-    <a aria-label="Twitter" target="_blank" rel="noopener" href="https://twitter.com/BarrelWisdom"><i
-    class="fab fa-twitter" title="Twitter" style="color:white;font-size:2rem;padding-right:0.5rem;"></i></a>
     <a aria-label="Discord" target="_blank" rel="noopener" href="https://discord.gg/utRynRKxwh"><i
     class="fab fa-discord" title="Discord" style="color:white;font-size:2rem;padding-right:0.5rem;"></i></a>
   </div>
@@ -99,14 +97,6 @@
     <a class="sidenav-item sidenav-social-media" href="https://discord.gg/utRynRKxwh" rel="noopener" target="_blank">
       <i class="fab fa-discord"></i>Discord
     </a>
-    <a class="sidenav-item sidenav-social-media" href="https://twitter.com/BarrelWisdom" rel="noopener" target="_blank">
-      <i class="fab fa-twitter"></i>Twitter
-    </a>
-    @if (!user) {
-      <a class="sidenav-item" routerLink="/login">
-        <i class="fas fa-user"></i>Login
-      </a>
-    }
     @if (user) {
       <a class="sidenav-item" routerLink="/user/{{user.username}}"><i
       class="fa fa-user"></i>{{user.username}}</a>
@@ -125,6 +115,40 @@
 </mat-sidenav>
 <div style="display:flex;">
   <div class="main">
+    @if (error.code !== 200) {
+      <div class="flex-row align-items-center" style="min-height:90vh;display:flex;">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col">
+                  <h1 style="float:right;height:min-content;width:min-content;font-size:calc(4rem + 0.1vw) !important;font-weight:300;">
+                    {{error.code}}</h1>
+                </div>
+                <div class="col">
+                  <h4 class="pt-3">{{error.title}}</h4>
+                  <p class="text-muted">{{error.desc}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center" style="margin:10px">
+            <img src="/media/main/punidead.svg" alt="" loading="lazy" style="width:30%;">
+          </div>
+        </div>
+      </div>
+    }
+    @else if (bread.current) {
+      <nav style="margin-top: 1em;" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/">Barrel Wisdom</a></li>
+          @for (crumb of bread.breadcrumbs; track crumb) {
+            <li class="breadcrumb-item"><a routerLink="/{{crumb[1]}}">{{crumb[0]}}</a></li>
+          }
+          <li class="breadcrumb-item active" aria-current="page">{{bread.current}}</li>
+        </ol>
+      </nav>
+    }
     <router-outlet></router-outlet>
   </div>
 </div>

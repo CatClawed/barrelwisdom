@@ -4,30 +4,30 @@ from games.A22.locations_a22.models import Location
 
 class Monster_en(models.Model):
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=270, blank=True)
+    desc = models.CharField(max_length=270, blank=True)
 
 class Monster_ja(models.Model):
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=270, blank=True)
+    desc = models.CharField(max_length=270, blank=True)
 
 class Monster_ko(models.Model):
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=270, blank=True)
+    desc = models.CharField(max_length=270, blank=True)
 
 class Monster_fr(models.Model):
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=270, blank=True)
+    desc = models.CharField(max_length=270, blank=True)
 
 class Monster_sc(models.Model):
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=270, blank=True)
+    desc = models.CharField(max_length=270, blank=True)
 
 class Monster_tc(models.Model):
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=270, blank=True)
+    desc = models.CharField(max_length=270, blank=True)
 
 class Monster(models.Model):
-    slugname = models.SlugField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=50, unique=True)
     montype = models.CharField(max_length=20)
     note = models.CharField(max_length=255, blank=True)
     index = models.IntegerField()

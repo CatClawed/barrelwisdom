@@ -5,6 +5,7 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { Tooltip } from '@app/views/_components/tooltip/tooltip.component';
 import { Property } from '@app/views/games/A15/_services/a15.interface';
 import { A15Service } from '@app/views/games/A15/_services/a15.service';
@@ -30,9 +31,10 @@ export class A15PropertylistComponent extends DialogUseComponent {
     protected route: ActivatedRoute,
     protected location: Location,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
     private a15service: A15Service,) {
-    super(destroy$, router, route, location, seoService, cdkDialog);
+    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A15PropertyComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -42,7 +44,7 @@ export class A15PropertylistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.a15service, 'properties');
-    this.genericSEO(`Properties`, `The list of properties in ${this.gameTitle}.`);
+    this.genericSettings(`Properties`, `The list of properties in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a15service.getPropertyList(this.language);
   }

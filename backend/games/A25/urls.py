@@ -1,5 +1,5 @@
 from games.A25.misc_a25.viewsets import A25TraitViewSet, A25ResearchViewSet, A25FilterViewSet
-from games.A25.chara_a25.viewsets import A25CharaViewSet, A25MemoriaViewSet
+from games.A25.chara_a25.viewsets import A25CharaViewSet, A25MemoriaViewSet, A25EmblemViewSet
 from games.A25.items_a25.viewsets import A25RecipeViewSet, A25MaterialViewSet, A25SynthViewSet, A25UpdateViewSet
 from games.A25.quest_a25.viewsets import A25TowerViewSet, A25TrainingViewSet, A25ScoreBattleViewSet, A25DungeonViewSet
 
@@ -17,4 +17,5 @@ routes = (
     (r'A25/training', A25TrainingViewSet),
     (r'A25/scorebattle', A25ScoreBattleViewSet),
     (r'A25/dungeon', A25DungeonViewSet),
+    (r'A25/emblem', A25EmblemViewSet),
 )

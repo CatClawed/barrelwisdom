@@ -7,6 +7,7 @@ import { AuthenticationService } from '@app/services/authentication.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { ErrorCodeService } from '@app/views/main/_services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { mergeMap, takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -33,6 +34,7 @@ export class RegisterComponent {
     private authenticationService: AuthenticationService,
     private errorCodeService: ErrorCodeService,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     private metaService: Meta,
     private titleService: Title
   ) {
@@ -43,6 +45,7 @@ export class RegisterComponent {
     this.titleService.setTitle(`Register - Barrel Wisdom`);
     this.metaService.updateTag({ name: `robots`, content: `noindex` }, `name="robots"`);
     this.seoService.removeCanonicalURL();
+    this.breadcrumbService.setBreadcrumbs([], undefined)
 
     this.registerForm = this.formBuilder.nonNullable.group({
       username: ['', Validators.required],

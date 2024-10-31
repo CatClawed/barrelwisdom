@@ -10,17 +10,17 @@ argon2-cffi-bindings==21.2.0
     # via argon2-cffi
 asgiref==3.8.1
     # via django
-autopep8==2.1.0
+autopep8==2.3.1
     # via -r requirements.in
 cffi==1.16.0
     # via
     #   argon2-cffi-bindings
     #   cryptography
-cryptography==42.0.7
+cryptography==43.0.3
     # via -r requirements.in
 dj-rest-auth==6.0.0
     # via -r requirements.in
-django==5.0.5
+django==5.1.2
     # via
     #   -r requirements.in
     #   dj-rest-auth
@@ -28,22 +28,22 @@ django==5.0.5
     #   django-filter
     #   djangorestframework
     #   djangorestframework-simplejwt
-django-debug-toolbar==4.3.0
+django-debug-toolbar==4.4.6
     # via -r requirements.in
-django-filter==24.2
+django-filter==24.3
     # via -r requirements.in
-djangorestframework==3.15.1
+djangorestframework==3.15.2
     # via
     #   -r requirements.in
     #   dj-rest-auth
     #   djangorestframework-simplejwt
 djangorestframework-simplejwt==5.3.1
     # via -r requirements.in
-gunicorn==22.0.0
+gunicorn==23.0.0
     # via -r requirements.in
-packaging==24.0
+packaging==24.1
     # via gunicorn
-pycodestyle==2.11.1
+pycodestyle==2.12.0
     # via autopep8
 pycparser==2.22
     # via cffi
@@ -53,7 +53,7 @@ pylibmc==1.6.3
     # via -r requirements.in
 python-slugify==8.0.4
     # via -r requirements.in
-sqlparse==0.5.0
+sqlparse==0.5.1
     # via
     #   django
     #   django-debug-toolbar

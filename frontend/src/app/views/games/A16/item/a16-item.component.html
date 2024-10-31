@@ -1,11 +1,4 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
-
 @if (data; as item) {
-  @if (showNav) {
-    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Items', '/'+gameURL+'/items/'+language]]" [current]="item.name"></Breadcrumb>
-  }
   <div class="mx-auto row">
     <div class="{{colset}} card card-body">
       <h4 class="card-title card-icon-space">{{item.name}}</h4>
@@ -13,11 +6,11 @@
         <b>LV {{item.level}}</b>
       </div>
       <div class="card-item-display">
-        <img loading="lazy" src="{{imgURL}}items/{{item.slugname}}.webp" alt="{{item.name}}">
+        <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
       </div>
       <p>{{item.desc}}</p>
       @if (item.book_set) {
-        <p><b>Recipe Book: </b><a routerLink="/{{gameURL}}/recipe-books/{{item.book_set[0].slugname}}/{{language}}">{{item.book_set[0].name}}</a></p>
+        <p><b>Recipe Book: </b><a routerLink="/{{gameURL}}/recipe-books/{{item.book_set[0].slug}}/{{language}}">{{item.book_set[0].name}}</a></p>
       }
       @if (item.size) {
         <p><b>Size: </b>{{item.size}}</p>
@@ -26,7 +19,7 @@
         <table class="table-item-data"><tbody>
           @for (cat of item.categories; track cat) {
             <tr>
-              <td><i class="atelier atelier-{{cat.icon_name}}"></i></td><td><a routerLink="/{{gameURL}}/categories/{{cat.slugname}}/{{language}}">{{cat.name}}</a></td>
+              <td><i class="atelier atelier-{{cat.icon_name}}"></i></td><td><a routerLink="/{{gameURL}}/categories/{{cat.slug}}/{{language}}">{{cat.name}}</a></td>
             </tr>
           }
         </tbody></table>
@@ -65,7 +58,7 @@
       @if (item.disassembly_set) {
         <ul>
           @for (it of item.disassembly_set[0].dis; track it) {
-            <li><a routerLink="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a></li>
+            <li><a routerLink="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a></li>
           }
         </ul>
       }
@@ -75,7 +68,7 @@
       @if (item.disassembled_set) {
         <ul>
           @for (it of item.disassembled_set[0].parent; track it) {
-            <li><a routerLink="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a></li>
+            <li><a routerLink="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a></li>
           }
         </ul>
       }
@@ -85,7 +78,7 @@
       @if (item.locations) {
         <ul>
           @for (loc of item.locations; track loc) {
-            <li><a routerLink="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}" fragment="{{loc.slugname}}">{{loc.name}}</a></li>
+            <li><a routerLink="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}" fragment="{{loc.slug}}">{{loc.name}}</a></li>
           }
         </ul>
       }
@@ -95,7 +88,7 @@
       @if (item.monsters) {
         <ul>
           @for (mon of item.monsters; track mon) {
-            <li><a routerLink="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">{{mon.name}}</a></li>
+            <li><a routerLink="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a></li>
           }
         </ul>
       }
@@ -105,7 +98,7 @@
       @if (item.properties) {
         <ul>
           @for (prop of item.properties; track prop) {
-            <li><a routerLink="/{{gameURL}}/properties/{{prop.slugname}}/{{language}}">{{prop.name}}</a></li>
+            <li><a routerLink="/{{gameURL}}/properties/{{prop.slug}}/{{language}}">{{prop.name}}</a></li>
           }
         </ul>
       }
@@ -116,9 +109,9 @@
             <ul>
               @for (ing of item.ingredient_set; track ing) {
                 <li>@if (ing.item) {
-                  <a routerLink="/{{gameURL}}/items/{{ing.item.slugname}}/{{language}}">{{ing.item.name}}</a>
+                  <a routerLink="/{{gameURL}}/items/{{ing.item.slug}}/{{language}}">{{ing.item.name}}</a>
                   }@if (ing.category) {
-                  <a routerLink="/{{gameURL}}/categories/{{ing.category.slugname}}/{{language}}">{{ing.category.name}}</a>
+                  <a routerLink="/{{gameURL}}/categories/{{ing.category.slug}}/{{language}}">{{ing.category.name}}</a>
                 }</li>
               }
             </ul>
@@ -158,7 +151,7 @@
               </td>
               <td>
                 @for (eff of effline.effects; track eff) {
-                  <a routerLink="/{{gameURL}}/effects/{{eff.effect.slugname}}/{{language}}">{{eff.effect.name}}</a><span> ({{eff.min_elem}}-{{eff.max_elem}})</span>
+                  <a routerLink="/{{gameURL}}/effects/{{eff.effect.slug}}/{{language}}">{{eff.effect.name}}</a><span> ({{eff.min_elem}}-{{eff.max_elem}})</span>
                   <div class="effect-bar">
                     @if (effline.elem == 'fire') {
                       <div  class="elemental-bar" style="background:#ac504f;left:{{eff.min_elem}}%;width:{{eff.max_elem-eff.min_elem}}%;"></div>

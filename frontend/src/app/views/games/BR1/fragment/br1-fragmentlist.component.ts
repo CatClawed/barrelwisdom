@@ -4,6 +4,7 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { FragmentEffect } from '@app/views/games/BR1/_services/br1.interface';
 import { BR1Service } from '@app/views/games/BR1/_services/br1.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -27,9 +28,10 @@ export class BR1FragmentEffectlistComponent extends FragmentedComponent {
     protected route: ActivatedRoute,
     private br1service: BR1Service,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     protected loc: Location,
     protected viewportScroller: ViewportScroller) {
-    super(destroy$, route, seoService, viewportScroller, loc);
+    super(destroy$, route, seoService, breadcrumbService, viewportScroller, loc);
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: ''
     })
@@ -37,7 +39,7 @@ export class BR1FragmentEffectlistComponent extends FragmentedComponent {
 
   changeData() {
     this.gameService(this.br1service, 'fragment-effects');
-    this.genericSEO(`Fragment Effects`, `The list of fragment effects in ${this.gameTitle}.`);
+    this.genericSettings(`Fragment Effects`, `The list of fragment effects in ${this.gameTitle}.`);
     return this.br1service.getFragmentEffectList(this.language)
   }
 

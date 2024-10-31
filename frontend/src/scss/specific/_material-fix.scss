@@ -37,6 +37,11 @@
     overflow: visible !important;
 }
 
+// the weirdest interaction on A25 collection
+.cdk-dialog-container:focus {
+    outline: 0;
+}
+
 
 // buttons
 
@@ -80,20 +85,33 @@
     box-shadow: 2px 2px 2px hsl(0deg 0% 0% / 0.38);
 }
 
+.dialog-margin::-webkit-scrollbar {
+    display: none;
+}
 
 @media screen and (min-width: 1100px) {
     .dialog-margin {
         margin-top: 0;
-        max-height: 95vh;
+        //max-height: 95vh;
+        //margin-left: auto;
+        //margin-right: auto;
         max-width: 50vw;
         min-width: 500px;
+        overflow-y: auto; // heck webkit
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
     }
 }
 
 @media screen and (max-width: 1100px) {
     .dialog-margin {
         margin-top: 210px;
+        //margin-left: auto;
+        //margin-right: auto;
         max-width: min(95vw, 800px);
         min-width: max(40vw, 320px);
+        overflow-y: auto; // heck webkit
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
     }
 }

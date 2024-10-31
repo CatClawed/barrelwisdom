@@ -1,11 +1,4 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
-
 @if (data; as trait) {
-  @if (showNav) {
-    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Traits', '/'+gameURL+'/traits/'+language]]" [current]="trait.name"></Breadcrumb>
-  }
   <div class="mx-auto row spacer">
     <div class="{{colset}} card card-body">
       <div class="flex">
@@ -20,7 +13,7 @@
           <b>Items:</b>
           <ul>
             @for (item of trait.item_set; track item) {
-              <li><a routerLink="/{{gameURL}}/items/{{item.slugname}}/{{language}}">{{item.name}}</a></li>
+              <li><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
             }
           </ul>
         </div>

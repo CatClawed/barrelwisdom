@@ -31,7 +31,7 @@ services:
 
   frontend:
     container_name: frontend
-    build: 
+    build:
       context: ../frontend
       dockerfile: ../docker/Dockerfile.angular
     ports:
@@ -44,7 +44,7 @@ services:
 
   memcached:
     container_name: memcached
-    image: memcached:1.6.22-alpine3.18
+    image: memcached:1.6.32-alpine
     ports:
       - "11211:11211"
     entrypoint:
@@ -55,7 +55,7 @@ services:
 # For local testing of production build
   frontend_prod:
     container_name: frontend_prod
-    image: barrelwisdom/frontend:06-11-24
+    image: frontend_prod:latest
     ports:
       - 127.0.0.1:4000:4000
 

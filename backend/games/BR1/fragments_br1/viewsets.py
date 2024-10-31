@@ -9,7 +9,7 @@ class BR1FragmentViewSet(viewsets.ModelViewSet):
     queryset = Fragment.objects.all()
     serializer_class = BR1FragmentSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    lookup_field = 'slugname'
+    lookup_field = 'slug'
 
     @action(detail=False)
     def en(self, request):

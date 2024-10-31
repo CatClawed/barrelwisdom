@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { Popover } from '@app/views/_components/popover/popover.component';
 import { EffectData, EffectLine } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
@@ -36,9 +37,10 @@ export class A23ItemComponent extends SingleComponent {
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     private a23service: A23Service,
     public historyService: HistoryService) {
-    super(destroy$, route, seoService);
+    super(destroy$, route, breadcrumbService, seoService);
   }
 
   changeData() {
@@ -49,7 +51,10 @@ export class A23ItemComponent extends SingleComponent {
   afterAssignment(): void {
     let name = (this.language === 'en') ? this.data.name.normalize('NFD').replace(/[\u0300-\u036f]/g, "") : this.data.name;
     this.seoImage = `${this.imgURL}${this.section}/${this.data.slug}.webp`
-    this.genericSEO(name, this.data.desc1);
+    this.genericSettings(name, this.data.desc1,
+      'Items',
+      false,
+      this.inputSlug ? false : true);
   }
 
   checkLevel(maxLv, restrict, effectLine: EffectLine, effectData: EffectData) {

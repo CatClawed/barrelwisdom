@@ -3,6 +3,7 @@ import { AfterViewChecked, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { first } from 'rxjs/operators';
 import { FilterableComponent } from './filterable.component';
 
@@ -18,9 +19,10 @@ export abstract class FragmentedComponent extends FilterableComponent implements
         protected readonly destroy$: DestroyService,
         protected route: ActivatedRoute,
         protected seoService: SeoService,
+        protected breadcrumbService: BreadcrumbService,
         protected viewportScroller: ViewportScroller,
         protected loc: Location) {
-        super(destroy$, route, seoService)
+        super(destroy$, route, breadcrumbService, seoService)
     }
     // relies on probably rendering the full component after the timeout
     // feels better than resolvers

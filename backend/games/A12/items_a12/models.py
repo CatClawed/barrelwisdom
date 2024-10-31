@@ -14,7 +14,7 @@ class Item_ja(models.Model):
     desc = models.CharField(max_length=500, default="")
 
 class Item(models.Model):
-    slugname = models.SlugField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=50, unique=True)
     item_en = models.OneToOneField(Item_en, on_delete=models.CASCADE)
     item_ja = models.OneToOneField(Item_ja, on_delete=models.CASCADE)
     index = models.IntegerField()
@@ -36,7 +36,7 @@ class Item(models.Model):
         ordering = ['index']
 
 class Book(models.Model):
-    slugname = models.SlugField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=50, unique=True)
     item_en = models.OneToOneField(Item_en, on_delete=models.CASCADE)
     item_ja = models.OneToOneField(Item_ja, on_delete=models.CASCADE)
     index = models.IntegerField()

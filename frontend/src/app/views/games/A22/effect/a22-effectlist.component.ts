@@ -2,10 +2,11 @@ import { Dialog } from '@angular/cdk/dialog';
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Tooltip } from '@app/views/_components/tooltip/tooltip.component';
 import { Effect } from '@app/views/games/A22/_services/a22.interface';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
@@ -20,7 +21,7 @@ import { A22EffectComponent } from './a22-effect.component';
   providers: [DestroyService],
   standalone: true,
   imports: [...CommonImports, ...MaterialFormImports,
-    A22EffectComponent, Tooltip, MatButtonModule]
+    A22EffectComponent, Tooltip, FilterListComponent]
 })
 
 export class A22EffectlistComponent extends DialogUseComponent {
@@ -29,6 +30,7 @@ export class A22EffectlistComponent extends DialogUseComponent {
   ev = false;
   forge = false;
   kind: string;
+  efftype: string;
 
   constructor(
     protected cdkDialog: Dialog,
@@ -37,10 +39,11 @@ export class A22EffectlistComponent extends DialogUseComponent {
     protected route: ActivatedRoute,
     protected location: Location,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
     private a22service: A22Service,
   ) {
-    super(destroy$, router, route, location, seoService, cdkDialog);
+    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A22EffectComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -54,20 +57,23 @@ export class A22EffectlistComponent extends DialogUseComponent {
     switch (this.kind) {
       case "normal": {
         this.normal = true;
+        this.efftype = 'Normal';
         this.gameService(this.a22service, 'effects');
-        this.genericSEO('Effects', `The list of effects in ${this.gameTitle}.`)
+        this.genericSettings('Effects', `The list of effects in ${this.gameTitle}.`)
         break;
       }
       case "forge": {
         this.forge = true;
+        this.efftype = 'Forge';
         this.gameService(this.a22service, 'forge-effects');
-        this.genericSEO('Forge Effects', `The list of forge effects in ${this.gameTitle}.`)
+        this.genericSettings('Forge Effects', `The list of forge effects in ${this.gameTitle}.`)
         break;
       }
       case "ev": {
         this.ev = true;
+        this.efftype = 'EV';
         this.gameService(this.a22service, 'ev-effects');
-        this.genericSEO('EV Effects', `The list of EV effects in ${this.gameTitle}.`)
+        this.genericSettings('EV Effects', `The list of EV effects in ${this.gameTitle}.`)
         break;
       }
     }
@@ -82,6 +88,7 @@ export class A22EffectlistComponent extends DialogUseComponent {
   }
 
   private filterT(value: string, type: string): Effect[] {
+    this.hide = false;
     let effectlist: Effect[] = this.data;
     if (type != "1") {
       effectlist = effectlist.filter(effect => effect.effsub == type)

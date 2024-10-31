@@ -1,31 +1,31 @@
 from django.db import models
 
 # English, Japanese, Korean, French, Simplified Chinese, Traditional Chinese
-# And a slugname in english to bind them I guess
+# And a slug in english to bind them I guess
 
 class Effect_en(models.Model):
     name = models.CharField(max_length=50, unique=False)
-    description = models.CharField(max_length=250, blank=True)
+    desc = models.CharField(max_length=250, blank=True)
 
 class Effect_ja(models.Model):
     name = models.CharField(max_length=50, unique=False)
-    description = models.CharField(max_length=250, blank=True)
+    desc = models.CharField(max_length=250, blank=True)
 
 class Effect_ko(models.Model):
     name = models.CharField(max_length=50, unique=False)
-    description = models.CharField(max_length=250, blank=True)
+    desc = models.CharField(max_length=250, blank=True)
 
 class Effect_fr(models.Model):
     name = models.CharField(max_length=50, unique=False)
-    description = models.CharField(max_length=250, blank=True)
+    desc = models.CharField(max_length=250, blank=True)
 
 class Effect_sc(models.Model):
     name = models.CharField(max_length=50, unique=False)
-    description = models.CharField(max_length=250, blank=True)
+    desc = models.CharField(max_length=250, blank=True)
 
 class Effect_tc(models.Model):
     name = models.CharField(max_length=50, unique=False)
-    description = models.CharField(max_length=250, blank=True)
+    desc = models.CharField(max_length=250, blank=True)
 
 class Effect(models.Model):
     types = [
@@ -35,7 +35,7 @@ class Effect(models.Model):
         ('Accessory Forge', 'Accessory Forge'),
         ('EV', 'EV')
     ]
-    slugname = models.SlugField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=50, unique=True)
     efftype = models.CharField(max_length=20, choices=types, db_index=True)
     effsub = models.CharField(max_length=20, blank=True, default="")
     note = models.CharField(max_length=255, blank=True)

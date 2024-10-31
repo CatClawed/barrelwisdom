@@ -1,11 +1,5 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
-@if (!error) {
-  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Recipes'"></Breadcrumb>
-  <h1 id="0">Recipes</h1>
-}
 @if (data; as recipes) {
+  <h1 id="0">Recipes</h1>
   <button (click)="scroll(0)" mat-mini-fab color="primary"  style="position:fixed;bottom:3%;right:10%;z-index:10;">
     <mat-icon fontSet="fas" fontIcon="fa-arrow-up" ></mat-icon>
   </button>
@@ -36,9 +30,6 @@
           }
           <div style="display:grid;gap:0;grid-template-columns:20% 20% 20% 20% 20%;max-width:600px;margin-left:auto;margin-right:auto;">
             @for (recipe of page.recipes; track recipe; let num = $index) {
-              @for (it of [].constructor(getEmptySpace(page,num)); track it) {
-                <div style="aspect-ratio:1;margin-bottom:1.5rem;"></div>
-              }
               <popover [title]="recipe.name"
                 [template]="popoverContent"
                 url="/{{gameURL}}/items/synthesis/{{recipe.slug}}/{{language}}">
@@ -59,8 +50,8 @@
                   More info<i class="new-tab fa-solid fa-arrow-up-right-from-square"></i>
                 </a>
               </ng-template>
-              }
               <ng-template #notfound><div style="aspect-ratio:1;margin-bottom:1.5rem;"></div></ng-template>
+            }
             </div>
           }
         </mat-tab>

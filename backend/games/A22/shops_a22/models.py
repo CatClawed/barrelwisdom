@@ -19,7 +19,7 @@ class Shop_tc(models.Model):
     name = models.CharField(max_length=50, unique=True)
 
 class Shop(models.Model):
-    slugname = models.SlugField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=50, unique=True)
     shop_en = models.OneToOneField(Shop_en, on_delete=models.CASCADE)
     shop_ja = models.OneToOneField(Shop_ja, on_delete=models.CASCADE)
     shop_ko = models.OneToOneField(Shop_ko, on_delete=models.CASCADE)

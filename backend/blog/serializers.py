@@ -28,7 +28,7 @@ class CommentSerializer(serializers.ModelSerializer):
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tags
-        fields = ['id', 'name', 'slugname']
+        fields = ['id', 'name', 'slug']
 
 
 class SectionSerializer(serializers.ModelSerializer):
@@ -39,8 +39,8 @@ class SectionSerializer(serializers.ModelSerializer):
 class BlogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blog
-        fields = ['id', 'created', 'modified', 'title', 'slugtitle', 'body', 'image',
-            'description', 'authorlock', 'author', 'section', 'tags']
+        fields = ['id', 'created', 'modified', 'title', 'slug', 'body', 'image',
+            'desc', 'authorlock', 'author', 'section', 'tags']
 
 class MainBlogSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True)
@@ -49,8 +49,8 @@ class MainBlogSerializer(serializers.ModelSerializer):
     comments = serializers.SerializerMethodField()
     class Meta:
         model = Blog
-        fields = ['id', 'created', 'modified', 'title', 'slugtitle', 'body', 'image',
-            'description', 'authorlock', 'author', 'section', 'tags', 'comments']
+        fields = ['id', 'created', 'modified', 'title', 'slug', 'body', 'image',
+            'desc', 'authorlock', 'author', 'section', 'tags', 'comments']
 
     def get_comments(self, instance):
         qs = instance.comment_set.filter(approved=True)
@@ -60,13 +60,13 @@ class MainBlogSerializer(serializers.ModelSerializer):
 class MainBlogListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blog
-        fields = ['id', 'created', 'title', 'slugtitle', 'image', 'description']
+        fields = ['id', 'created', 'title', 'slug', 'image', 'desc']
 
 class ModerateCommentBlogSerializer(serializers.ModelSerializer):
     sec = serializers.CharField(source='section.name')
     class Meta:
         model = Blog
-        fields = ['slugtitle', 'sec']
+        fields = ['slug', 'sec']
     
 class ModerateCommentSerializer(serializers.ModelSerializer):
     blog = ModerateCommentBlogSerializer()

@@ -19,7 +19,7 @@ class Location_tc(models.Model):
     name = models.CharField(max_length=50, unique=True)
 
 class Location(models.Model):
-    slugname = models.SlugField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=50, unique=True)
     region = models.ForeignKey("self", blank=True, null=True, on_delete=models.CASCADE)
     isDLC = models.BooleanField(default=False)
     loc_en = models.OneToOneField(Location_en, on_delete=models.CASCADE)

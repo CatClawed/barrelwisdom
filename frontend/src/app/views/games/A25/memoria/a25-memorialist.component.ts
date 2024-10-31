@@ -6,6 +6,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { Memoria } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -37,20 +38,21 @@ export class A25MemorialistComponent extends DialogUseComponent {
     protected route: ActivatedRoute,
     protected location: Location,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
     protected a25service: A25Service,) {
-    super(destroy$, router, route, location, seoService, cdkDialog);
+    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A25MemoriaComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
-      stats: 'hp',
+      stats: 'date',
       show_jp: this.language === 'ja',
     })
   }
 
   changeData() {
     this.gameService(this.a25service, 'memoria');
-    this.genericSEO(`Memoria`, `The list of memoria in ${this.gameTitle}.`);
+    this.genericSettings(`Memoria`, `The list of memoria in ${this.gameTitle}.`);
     this.pageForm.reset();
     this.pageForm.get('show_jp').setValue(this.language === 'ja');
     return this.a25service.getMemoriaList(this.language);
@@ -61,7 +63,7 @@ export class A25MemorialistComponent extends DialogUseComponent {
       startWith(null as Observable<Memoria[]>),
       map((search: any) => search ?
         this.filterT(search.filtertext, search.stats, search.show_jp)
-        : this.filterT('', 'hp', this.language === 'ja'))
+        : this.filterT('', 'date', this.language === 'ja'))
     );
   }
 
@@ -93,6 +95,10 @@ export class A25MemorialistComponent extends DialogUseComponent {
       }
       case "mdef": {
         memorialist = memorialist.sort((a, b) => (a.mdef30 > b.mdef30 ? -1 : 1));
+        break;
+      }
+      case "date": {
+        memorialist = memorialist.sort((a, b) => (a.date > b.date ? -1 : 1));
         break;
       }
     }

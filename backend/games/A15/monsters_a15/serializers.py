@@ -8,7 +8,7 @@ class A15ItemNameSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Item
-        fields = ['slugname', 'name']
+        fields = ['slug', 'name']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -22,7 +22,7 @@ class A15MonsterNameSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Monster
-        fields = ['slugname', 'name']
+        fields = ['slug', 'name']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -36,7 +36,7 @@ class A15MonsterLevelSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Monster
-        fields = ['slugname', 'name', 'level']
+        fields = ['slug', 'name', 'level']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -51,7 +51,7 @@ class A15MonsterSimpleSerializer(serializers.ModelSerializer):
     race = serializers.SerializerMethodField()
     class Meta:
         model = Monster
-        fields = ['slugname', 'name', 'race', 'isDLC', 'isDX', 'isStrong']
+        fields = ['slug', 'name', 'race', 'isDLC', 'isDX', 'isStrong']
     def to_representation(self, instance):
         result = super(A15MonsterSimpleSerializer, self).to_representation(instance)
         return OrderedDict((k, v) for k, v in result.items() 
@@ -79,7 +79,7 @@ class A15MonsterSerializer(serializers.ModelSerializer):
     item_set = A15ItemNameSerializer(many=True)
     class Meta:
         model = Monster
-        fields = ['slugname', 'name', 'desc', 'race', 'hp', 'atk', 'defen', 'spd', 'fire', 'water', 'wind', 'earth', 'level', 'exp', 'cole', 'note', 'isDLC', 'isDX', 'isStrong', 'locations', 'item_set']
+        fields = ['slug', 'name', 'desc', 'race', 'hp', 'atk', 'defen', 'spd', 'fire', 'water', 'wind', 'earth', 'level', 'exp', 'cole', 'note', 'isDLC', 'isDX', 'isStrong', 'locations', 'item_set']
 
     def to_representation(self, instance):
         result = super(A15MonsterSerializer, self).to_representation(instance)

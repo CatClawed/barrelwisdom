@@ -1,9 +1,4 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
-
 @if (data; as category) {
-  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Category: '+category.name"></Breadcrumb>
   <h1>{{category.name}}</h1>
   <div style="margin-top: 1em;" class="col-md-3" ></div>
   <div class="mx-auto row">

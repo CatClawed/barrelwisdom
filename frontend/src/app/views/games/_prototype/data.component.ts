@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 
@@ -10,10 +11,10 @@ import { SeoService } from '@app/services/seo.service';
 
 export abstract class DataComponent implements OnInit {
     data: any
-    error: string = '';
+    error: any = '';
     section: string;
     language = "";
-    slug: string = '';
+    slug: string;
 
     seoTitle: string;
     seoDesc: string;
@@ -21,18 +22,34 @@ export abstract class DataComponent implements OnInit {
     seoURL: string;
 
     gameTitle: string;
+
+    @Input()
     gameURL: string;
+
+    @Input()
     imgURL: string;
+
+    @Input()
+    inputData?: any;
+
+    @Input()
+    hideContents: boolean = false;
 
     constructor(
         protected readonly destroy$: DestroyService,
         protected route: ActivatedRoute,
+        protected breadcrumbService: BreadcrumbService,
         protected seoService: SeoService) {
         this.language = this.route.snapshot.params.language;
     }
 
     ngOnInit(): void {
-        this.paramWatch();
+        if (this.inputData !== undefined) {
+            this.data = this.inputData;
+        }
+        else {
+            this.paramWatch();
+        }
     }
 
     gameService(service: any, section: string) {
@@ -48,8 +65,27 @@ export abstract class DataComponent implements OnInit {
         this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
     }
 
+    genericSettings(name: string, desc: string, sectionName?: string, ignoreSection?: boolean, updateBreadcrumb?: boolean): void {
+        this.genericSEO(name, desc);
+
+        if (updateBreadcrumb !== false) {
+            if (this.slug === null || this.slug === '' || ignoreSection === true) {
+                this.breadcrumbService.setBreadcrumbs(
+                    [[this.gameTitle, `/${this.gameURL}`]],
+                    name);
+            }
+            else {
+                this.breadcrumbService.setBreadcrumbs(
+                    [[this.gameTitle, `/${this.gameURL}`],
+                        [sectionName, `/${this.gameURL}/${this.section}/${this.language}`],
+                    ],
+                    name);
+            }
+        }
+    }
+
     abstract changeData();
     abstract paramWatch()
-    // intentionall blank, may be overridden
+    // intentionally blank, may be overridden
     afterAssignment(): void { }
 }

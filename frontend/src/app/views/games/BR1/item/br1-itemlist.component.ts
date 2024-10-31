@@ -5,6 +5,7 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { Item } from '@app/views/games/BR1/_services/br1.interface';
 import { BR1Service } from '@app/views/games/BR1/_services/br1.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -30,10 +31,11 @@ export class BR1ItemlistComponent extends DialogUseComponent {
     protected route: ActivatedRoute,
     protected location: Location,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
     private br1service: BR1Service,
   ) {
-    super(destroy$, router, route, location, seoService,cdkDialog);
+    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = BR1ItemComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: ''
@@ -42,7 +44,7 @@ export class BR1ItemlistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.br1service, 'items');
-    this.genericSEO(`Items`, `The list of items in ${this.gameTitle}.`);
+    this.genericSettings(`Items`, `The list of items in ${this.gameTitle}.`);
     return this.br1service.getItemList(this.language);
   }
 

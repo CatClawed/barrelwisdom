@@ -1,9 +1,4 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
-
 @if (data; as location) {
-  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Location: '+location.name"></Breadcrumb>
   <h1>{{location.name}}</h1>
   <div class="table-of-contents">
     <b>Table of Contents</b>
@@ -11,8 +6,8 @@
       @for (area of location.areas; track area) {
         @if (!area.subarea) {
           <li >
-            <a href="/{{gameURL}}/locations/{{location.slugname}}/{{language}}#{{area.slugname}}"
-              (click)="$event.preventDefault();scroll(area.slugname, location.slugname)">
+            <a href="/{{gameURL}}/locations/{{location.slug}}/{{language}}#{{area.slug}}"
+              (click)="$event.preventDefault();scroll(area.slug, location.slug)">
               {{area.name}}
             </a>
           </li>
@@ -32,9 +27,9 @@
     </tr>
     @for (relic of location.relic_set; track relic) {
       <tr>
-        <td><a routerLink="/{{gameURL}}/items/{{relic.item.slugname}}/{{language}}">{{relic.item.name}}</a></td>
+        <td><a routerLink="/{{gameURL}}/items/{{relic.item.slug}}/{{language}}">{{relic.item.name}}</a></td>
         <td><ul class="hide-bullets">@for (d of relic.item.disassembly_set[0].dis; track d) {
-          <li><a routerLink="/{{gameURL}}/items/{{d.slugname}}/{{language}}">{{d.name}}</a></li>
+          <li><a routerLink="/{{gameURL}}/items/{{d.slug}}/{{language}}">{{d.name}}</a></li>
         }</ul></td>
         <td><ul class="hide-bullets">@for (a of relic.area; track a) {
           <li>{{a.name}}</li>
@@ -52,7 +47,7 @@
           <div style="column-count: 3;">
             @for (mon of location.strong; track mon) {
               <li>
-                <a routerLink="/{{gameURL}}/monsters/{{mon.slugname}}/{{language}}">{{mon.name}}</a> ({{mon.level}})
+                <a routerLink="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a> ({{mon.level}})
               </li>
             }
           </div>
@@ -62,7 +57,7 @@
   </tbody></table>
   @for (area of location.areas; track area) {
     @if (!area.subarea) {
-      <h2 id="{{area.slugname}}">{{area.name}}</h2>
+      <h2 id="{{area.slug}}">{{area.name}}</h2>
     }
     @if (area.subarea) {
       <h3>{{area.subarea}}</h3>
@@ -85,16 +80,16 @@
           <td>
             <ul class="hide-bullets">
               @for (it of area.items; track it) {
-                <li><a routerLink="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a></li>
+                <li><a routerLink="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a></li>
               }
               @if (area.rare) {
                 @for (it of area.rare; track it) {
-                  <li><a routerLink="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a> (Rare)</li>
+                  <li><a routerLink="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a> (Rare)</li>
                 }
               }
               @if (area.maxitem) {
                 @for (it of area.maxitem; track it) {
-                  <li><a routerLink="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a> (Max)</li>
+                  <li><a routerLink="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a> (Max)</li>
                 }
               }
             </ul>
@@ -104,7 +99,7 @@
           <td>
             <ul class="hide-bullets">
               @for (it of area.monsters; track it) {
-                <li><a routerLink="/{{gameURL}}/monsters/{{it.slugname}}/{{language}}">{{it.name}}</a></li>
+                <li><a routerLink="/{{gameURL}}/monsters/{{it.slug}}/{{language}}">{{it.name}}</a></li>
               }
             </ul>
           </td>

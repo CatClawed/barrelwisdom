@@ -1,9 +1,4 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
-
 @if (!error) {
-  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Synthesis Items"></Breadcrumb>
   <h1>Synthesis Items</h1>
   <div class="col-md-10 mx-auto">
     <form [formGroup]="pageForm" class="form-horizontal">
@@ -40,6 +35,7 @@
           <mat-label>Rarity</mat-label>
           <mat-select matNativeControl formControlName="rarity" disableOptionCentering="true" class="mat-select-icon">
             <mat-option value="0">Any</mat-option>
+            <mat-option value="4">UR</mat-option>
             <mat-option value="3">SSR</mat-option>
             <mat-option value="2">SR</mat-option>
             <mat-option value="1">R</mat-option>
@@ -54,12 +50,12 @@
         <h4 class="card-title card-icon-space">
           <a (click)="openDialog(it.slug, $event);" href="/{{gameURL}}/items/synthesis/{{it.slug}}/{{language}}">{{it.name}}</a>
         </h4>
-        <div class="card-icon-position"> 
+        <div class="card-icon-position">
           @if (it.combat) {
-            <a25-icon [kind]="it.combat[0].kind" [colors]="it.colors"></a25-icon>
+            <a25-icon [kind]="it.combat[0].kind" [colors]="it.colors ? it.colors : ['black','black', 'black']"></a25-icon>
           }
           @if (it.equip) {
-            <a25-icon [kind]="it.equip[0].kind" [colors]="it.colors"></a25-icon>
+            <a25-icon [kind]="it.equip[0].kind" [colors]="it.colors ? it.colors : ['black','black', 'black']"></a25-icon>
           }
         </div>
         <a class="card-item-display" (click)="openDialog(it.slug, $event);" href="/{{gameURL}}/items/synthesis/{{it.slug}}/{{language}}">

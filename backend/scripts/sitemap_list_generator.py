@@ -26,7 +26,7 @@ def sitemap(langs=['en'], pages=[], game='error'):
     urlset = ET.Element("urlset")
     urlset.set('xmlns','http://www.sitemaps.org/schemas/sitemap/0.9')
     urlset.set('xmlns:xhtml','http://www.w3.org/1999/xhtml')
-    
+
     for page in pages:
         for lang in langs:
             url = ET.SubElement(urlset, "url")
@@ -48,7 +48,7 @@ def resleri():
             pages.append(f'items/materials/{obj.slug}')
         else:
             pages.append(f'items/synthesis/{obj.slug}')
-    
+
     for obj in A25Character.objects.all():
         pages.append(f'characters/{obj.slug}')
 
@@ -66,14 +66,22 @@ def resleri():
     pages.append(f'research')
     pages.append(f'home')
     pages.append(f'traits')
-    pages.append(f'dungeons')
-    pages.append(f'scorebattles')
-    pages.append(f'tower')
+    pages.append(f'quests/dungeons')
+    pages.append(f'quests/scorebattles')
+    pages.append(f'quests/tower/elemental-tower')
+    pages.append(f'quests/tower/fire')
+    pages.append(f'quests/tower/ice')
+    pages.append(f'quests/tower/air')
+    pages.append(f'quests/tower/bolt')
+    pages.append(f'quests/tower/slash')
+    pages.append(f'quests/tower/strike')
+    pages.append(f'quests/tower/stab')
+    pages.append(f'collect')
 
     sitemap(langs, pages, 'resleri')
 
 def firis():
-    langs = ["en", "ja"]
+    langs = ["en", "ja", 'sc', 'tc']
     pages = []
 
     for obj in A18Item.objects.all():
@@ -136,7 +144,7 @@ def sitemap_index():
         sitemap = ET.SubElement(index, "sitemap")
         ET.SubElement(sitemap, 'loc').text = f'https://barrelwisdom.com/media/sitemaps/{section}.xml'
         ET.SubElement(sitemap, 'lastmod').text = datetime.datetime.now().strftime("%Y-%m-%d")
-        
+
         tree = ET.ElementTree(index)
         tree.write('scripts/sitemaps/sitemap.xml',encoding='utf-8', xml_declaration=True)
 

@@ -12,7 +12,7 @@ class A15ItemNameSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Item
-        fields = ['slugname', 'name']
+        fields = ['slug', 'name']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -90,7 +90,7 @@ class A15ItemNameDisSerializer(serializers.ModelSerializer):
     disassembly_set = A15DissasembleSerializer(many=True)
     class Meta:
         model = Item
-        fields = ['slugname', 'name', 'disassembly_set']
+        fields = ['slug', 'name', 'disassembly_set']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -138,7 +138,7 @@ class A15BookNameSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Book
-        fields = ['slugname', 'name']
+        fields = ['slug', 'name']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -155,7 +155,7 @@ class A15ItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Item
-        fields = ['slugname', 'name', 'level', 'evalue', 'fire', 'water', 'wind', 'earth', 'effect', 'itype', 'isDLC', 'isDX', 'categories', 'ingredient_set']
+        fields = ['slug', 'name', 'level', 'evalue', 'fire', 'water', 'wind', 'earth', 'effect', 'itype', 'isDLC', 'isDX', 'categories', 'ingredient_set']
 
     def to_representation(self, instance):
         result = super(A15ItemSerializer, self).to_representation(instance)
@@ -186,7 +186,7 @@ class A15ItemFullSerializer(serializers.ModelSerializer):
     book_set = A15BookNameSerializer(many=True)
     class Meta:
         model = Item
-        fields = ['slugname', 'name', 'desc', 'level', 'evalue', 'fire', 'water', 'wind', 'earth', 'effect', 'size', 'itype', 'isDLC', 'isDX', 'locations', 'monsters', 'properties', 'categories', 'ingredient_set', 'characterequip_set', 'equip_set', 'disassembly_set', 'disassembled_set', 'relic_set', 'effectline_set', 'book_set']
+        fields = ['slug', 'name', 'desc', 'level', 'evalue', 'fire', 'water', 'wind', 'earth', 'effect', 'size', 'itype', 'isDLC', 'isDX', 'locations', 'monsters', 'properties', 'categories', 'ingredient_set', 'characterequip_set', 'equip_set', 'disassembly_set', 'disassembled_set', 'relic_set', 'effectline_set', 'book_set']
 
     def to_representation(self, instance):
         result = super(A15ItemFullSerializer, self).to_representation(instance)
@@ -213,7 +213,7 @@ class A15BookSerializer(serializers.ModelSerializer):
     items = A15ItemNameSerializer(many=True)
     class Meta:
         model = Book
-        fields = ['slugname', 'name', 'desc', 'items', 'acquisition']
+        fields = ['slug', 'name', 'desc', 'items', 'acquisition']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -237,7 +237,7 @@ class A15FieldEventSerializer(serializers.ModelSerializer):
 
 class A15AreaDataSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
-    slugname = serializers.SerializerMethodField()
+    slug = serializers.SerializerMethodField()
     items = A15ItemNameSerializer(many=True)
     rare = A15ItemNameSerializer(many=True)
     maxitem = A15ItemNameSerializer(many=True)
@@ -246,7 +246,7 @@ class A15AreaDataSerializer(serializers.ModelSerializer):
     note = serializers.SerializerMethodField()
     class Meta:
         model = AreaData
-        fields = ['slugname', 'name', 'subarea', 'items', 'rare', 'maxitem', 'fieldevent', 'monsters', 'note']
+        fields = ['slug', 'name', 'subarea', 'items', 'rare', 'maxitem', 'fieldevent', 'monsters', 'note']
 
     def to_representation(self, instance):
         result = super(A15AreaDataSerializer, self).to_representation(instance)
@@ -259,15 +259,15 @@ class A15AreaDataSerializer(serializers.ModelSerializer):
             return obj.area.reg_ja.name
         else:
             return obj.area.reg_en.name
-    def get_slugname(self,obj):
-        return obj.area.slugname
+    def get_slug(self,obj):
+        return obj.area.slug
     def get_note(self,obj):
         return obj.area.note
 
 
 class A15RegionDataSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
-    slugname = serializers.SerializerMethodField()
+    slug = serializers.SerializerMethodField()
     areas = A15AreaDataSerializer(many=True)
     relic_set = A15RelicSerializer(many=True)
     strong = A15MonsterLevelSerializer(many=True)
@@ -276,7 +276,7 @@ class A15RegionDataSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = RegionData
-        fields = ['slugname', 'name', 'areas', 'relic_set', 'strong', 'note', 'grade']
+        fields = ['slug', 'name', 'areas', 'relic_set', 'strong', 'note', 'grade']
     def to_representation(self, instance):
         result = super(A15RegionDataSerializer, self).to_representation(instance)
         return OrderedDict((k, v) for k, v in result.items() 
@@ -288,8 +288,8 @@ class A15RegionDataSerializer(serializers.ModelSerializer):
             return obj.region.reg_ja.name
         else:
             return obj.region.reg_en.name
-    def get_slugname(self,obj):
-        return obj.region.slugname
+    def get_slug(self,obj):
+        return obj.region.slug
     def get_note(self,obj):
         return obj.region.note
     def get_grade(self,obj):

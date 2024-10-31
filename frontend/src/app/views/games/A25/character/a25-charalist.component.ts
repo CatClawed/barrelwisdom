@@ -7,6 +7,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { Character } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -26,7 +27,7 @@ import { A25CharaComponent } from './a25-chara.component';
       display: grid;
       gap: 1rem;
       margin-bottom: 1rem;
-      grid-column-gap:2%;
+      grid-column-gap:0.8%;
     }`,
     `.a25-star-font {
       -webkit-text-stroke-color:black;
@@ -48,25 +49,25 @@ import { A25CharaComponent } from './a25-chara.component';
     }`,
     `@media screen and (min-width: 800px) {
       .char-grid {
-        grid-template-columns:repeat(4,23%);
+        grid-template-columns:repeat(6,16%);
       }
       .a25-char-font {
-        font-size:1.7vw
+        font-size:1.4vw
       }
       .a25-star-font {
-        font-size:2vw;
-        -webkit-text-stroke-width:.2vw;
+        font-size:1.5vw;
+        -webkit-text-stroke-width:.15vw;
       }
     }`,
     `@media screen and (max-width: 800px) {
       .char-grid {
-        grid-template-columns:repeat(2,49%);
+        grid-template-columns:repeat(3,31%);
       }
       .a25-char-font {
-        font-size:5vw
+        font-size:4vw
       }
       .a25-star-font {
-        font-size:5vw;
+        font-size:4vw;
         -webkit-text-stroke-width:.4vw;
       }
     }`
@@ -86,9 +87,10 @@ export class A25CharalistComponent extends DialogUseComponent {
     protected route: ActivatedRoute,
     protected location: Location,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
     protected a25service: A25Service,) {
-    super(destroy$, router, route, location, seoService, cdkDialog);
+    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A25CharaComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -102,7 +104,7 @@ export class A25CharalistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.a25service, 'characters');
-    this.genericSEO(`Characters`, `The list of characters in ${this.gameTitle}.`);
+    this.genericSettings(`Characters`, `The list of characters in ${this.gameTitle}.`);
     this.pageForm.reset()
     this.pageForm.get('show_jp').setValue(this.language === 'ja')
     return forkJoin({

@@ -7,7 +7,7 @@ class A16ItemNameSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Item
-        fields = ['slugname', 'name']
+        fields = ['slug', 'name']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -21,7 +21,7 @@ class A16PropertyNameSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Property
-        fields = ['slugname', 'name']
+        fields = ['slug', 'name']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -40,7 +40,7 @@ class A16PropertySerializer(serializers.ModelSerializer):
     item_set = A16ItemNameSerializer(many=True)
     class Meta:
         model = Property
-        fields = ['slugname', 'name', 'desc', 'grade', 'points', 'bomb', 'heal', 'weapon', 'armor', 'accessory', 'combo1', 'combo2', 'combo3', 'item_set']
+        fields = ['slug', 'name', 'desc', 'grade', 'points', 'bomb', 'heal', 'weapon', 'armor', 'accessory', 'combo1', 'combo2', 'combo3', 'item_set']
 
     def to_representation(self, instance):
         result = super(A16PropertySerializer, self).to_representation(instance)

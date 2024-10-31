@@ -22,7 +22,7 @@ class A22ItemViewSet(viewsets.ModelViewSet):
         )
     serializer_class = A22ItemSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    lookup_field = 'slugname'
+    lookup_field = 'slug'
 
     # Full item list (simplified data)
 
@@ -130,7 +130,7 @@ class A22ItemViewSet(viewsets.ModelViewSet):
 
     # Individual items
     @action(detail=True, methods=['get'], url_path="en")
-    def en_full(self, request, slugname):
+    def en_full(self, request, slug):
         try:
             queryset = (
                 Item.objects
@@ -151,7 +151,7 @@ class A22ItemViewSet(viewsets.ModelViewSet):
                     'evlinkitems_set__result__item_en',
                     'monster_set__mon_en',
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -159,7 +159,7 @@ class A22ItemViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ja")
-    def ja_full(self, request, slugname):
+    def ja_full(self, request, slug):
         try:
             queryset = (
                 Item.objects
@@ -180,7 +180,7 @@ class A22ItemViewSet(viewsets.ModelViewSet):
                     'evlinkitems_set__result__item_ja',
                     'monster_set__mon_ja',
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -188,7 +188,7 @@ class A22ItemViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ko")
-    def ko_full(self, request, slugname):
+    def ko_full(self, request, slug):
         try:
             queryset = (
                 Item.objects
@@ -209,7 +209,7 @@ class A22ItemViewSet(viewsets.ModelViewSet):
                     'evlinkitems_set__result__item_ko',
                     'monster_set__mon_ko',
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -217,7 +217,7 @@ class A22ItemViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
     
     @action(detail=True, methods=['get'], url_path="fr")
-    def fr_full(self, request, slugname):
+    def fr_full(self, request, slug):
         try:
             queryset = (
                 Item.objects
@@ -238,7 +238,7 @@ class A22ItemViewSet(viewsets.ModelViewSet):
                     'evlinkitems_set__result__item_fr',
                     'monster_set__mon_fr',
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -246,7 +246,7 @@ class A22ItemViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="sc")
-    def sc_full(self, request, slugname):
+    def sc_full(self, request, slug):
         try:
             queryset = (
                 Item.objects
@@ -267,7 +267,7 @@ class A22ItemViewSet(viewsets.ModelViewSet):
                     'evlinkitems_set__result__item_sc',
                     'monster_set__mon_sc',
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -275,7 +275,7 @@ class A22ItemViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="tc")
-    def tc_full(self, request, slugname):
+    def tc_full(self, request, slug):
         try:
             queryset = (
                 Item.objects
@@ -297,7 +297,7 @@ class A22ItemViewSet(viewsets.ModelViewSet):
                     'evlinkitems_set__result__item_tc',
                     'monster_set__mon_tc',
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -318,10 +318,10 @@ class A22ItemRegionViewSet(viewsets.ModelViewSet):
         )
     serializer_class = A22ItemRegionSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    lookup_field = 'slugname'
+    lookup_field = 'slug'
 
     @action(detail=True, methods=['get'], url_path="en")
-    def en_full(self, request, slugname):
+    def en_full(self, request, slug):
         try:
             queryset = (
                 ItemRegions.objects
@@ -335,7 +335,7 @@ class A22ItemRegionViewSet(viewsets.ModelViewSet):
                     'areas__gatherdata__rank2__item_en',
                     'areas__gatherdata__rank3__item_en',
                 )
-                .get(region__slugname=slugname)
+                .get(region__slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -343,7 +343,7 @@ class A22ItemRegionViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ja")
-    def ja_full(self, request, slugname):
+    def ja_full(self, request, slug):
         try:
             queryset = (
                 ItemRegions.objects
@@ -356,7 +356,7 @@ class A22ItemRegionViewSet(viewsets.ModelViewSet):
                     'areas__gatherdata__rank2__item_ja',
                     'areas__gatherdata__rank3__item_ja',
                 )
-                .get(region__slugname=slugname)
+                .get(region__slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -364,7 +364,7 @@ class A22ItemRegionViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ko")
-    def ko_full(self, request, slugname):
+    def ko_full(self, request, slug):
         try:
             queryset = (
                 ItemRegions.objects
@@ -377,7 +377,7 @@ class A22ItemRegionViewSet(viewsets.ModelViewSet):
                     'areas__gatherdata__rank2__item_ko',
                     'areas__gatherdata__rank3__item_ko',
                 )
-                .get(region__slugname=slugname)
+                .get(region__slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -385,7 +385,7 @@ class A22ItemRegionViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="fr")
-    def fr_full(self, request, slugname):
+    def fr_full(self, request, slug):
         try:
             queryset = (
                 ItemRegions.objects
@@ -398,7 +398,7 @@ class A22ItemRegionViewSet(viewsets.ModelViewSet):
                     'areas__gatherdata__rank2__item_fr',
                     'areas__gatherdata__rank3__item_fr',
                 )
-                .get(region__slugname=slugname)
+                .get(region__slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -406,7 +406,7 @@ class A22ItemRegionViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="sc")
-    def sc_full(self, request, slugname):
+    def sc_full(self, request, slug):
         try:
             queryset = (
                 ItemRegions.objects
@@ -419,7 +419,7 @@ class A22ItemRegionViewSet(viewsets.ModelViewSet):
                     'areas__gatherdata__rank2__item_sc',
                     'areas__gatherdata__rank3__item_sc',
                 )
-                .get(region__slugname=slugname)
+                .get(region__slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -427,7 +427,7 @@ class A22ItemRegionViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="tc")
-    def tc_full(self, request, slugname):
+    def tc_full(self, request, slug):
         try:
             queryset = (
                 ItemRegions.objects
@@ -440,7 +440,7 @@ class A22ItemRegionViewSet(viewsets.ModelViewSet):
                     'areas__gatherdata__rank2__item_tc',
                     'areas__gatherdata__rank3__item_tc',
                 )
-                .get(region__slugname=slugname)
+                .get(region__slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -460,7 +460,7 @@ class A22ShopDevelopViewSet(viewsets.ModelViewSet):
         )
     serializer_class = A22ShopDevelopSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    lookup_field = 'slugname'
+    lookup_field = 'slug'
 
     # Full item list (simplified data)
 

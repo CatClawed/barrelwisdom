@@ -1,11 +1,5 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
-@if (!error) {
-  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Home"></Breadcrumb>
-  <h1>Home</h1>
-}
 @if (data; as update) {
+  <h1>Home</h1>
   <p><time dateTime="{{update.time}}">Last Updated: {{update.time | date:'mediumDate' }} </time></p>
   @if (update.characters) {
     <h2>Characters</h2>

@@ -4,20 +4,22 @@ from games.A25.items_a25.models import *
 from games.A25.quest_a25.models import *
 import csv, codecs, sys, urllib.request, json
 from scripts.util import import_generic, slug_me
+from datetime import datetime
 
 BASE_URL = 'https://raw.githubusercontent.com/theBowja/resleriana-db/main/data/'
 
-names = ['ability', 'battle_hint', 'battle_tool', 'battle_tool_trait', 'character', 'character_tag', 'effect', 'enemy', 'equipment_tool', 'equipment_tool_trait', 'hyperlink', 'item', 'leader_skill_condition', 'memoria', 'memoria_buff_growth', 'quest', 'recipe', 'recipe_plan', 'research', 'research_effect', 'research_effect_level', 'reward_set', 'skill']
-names_gbl = ['ability', 'battle_hint', 'battle_tool', 'battle_tool_trait', 'character', 'effect', 'enemy', 'equipment_tool', 'equipment_tool_trait', 'item', 'memoria', 'quest', 'recipe', 'recipe_plan', 'research', 'research_effect', 'skill']
+names =     ['ability', 'base_enemy', 'battle', 'battle_hint', 'battle_tool', 'battle_tool_trait', 'character',
+             'character_tag', 'effect', 'emblem', 'emblem_rarity', 'enemy', 'enemy_ai_unit', 'equipment_tool',
+             'equipment_tool_trait', 'hyperlink', 'item', 'leader_skill_condition', 'memoria',
+             'memoria_buff_growth', 'quest', 'recipe', 'recipe_plan', 'research', 'research_effect',
+             'research_effect_level', 'reward_set', 'skill', 'species', 'timeline_panel', 'wave']
+names_gbl = ['ability', 'base_enemy', 'battle_hint', 'battle_tool', 'battle_tool_trait', 'character',
+             'character_tag', 'effect', 'emblem', 'emblem_rarity', 'enemy', 'equipment_tool',
+             'equipment_tool_trait', 'item', 'memoria',
+             'quest', 'recipe', 'recipe_plan', 'research', 'research_effect',
+             'skill', 'species']
 jsons = {}
 languages = ['en', 'zh_cn', 'zh_tw']
-
-# for setting slugs
-additions = {
-    'イザナ': 'izana-2',
-    'ハイディ': 'heidi-2'
-}
-memoria_index = 98 # dragon bride
 
 trait_cat = {
     1: Filterable.objects.get(text_en="Attack"),
@@ -60,6 +62,10 @@ item_kind = {
     9: Filterable.objects.get(text_en="Currency"),
     10: Filterable.objects.get(text_en="Currency"),
     11: Filterable.objects.get(text_en="Currency"),
+    12: Filterable.objects.get(text_en="Currency"),
+    12: Filterable.objects.get(text_en="Currency"),
+    13: Filterable.objects.get(text_en="Currency"),
+    14: Filterable.objects.get(text_en="Currency"),
 }
 
 combat_kind = {
@@ -87,9 +93,10 @@ def checkName(text_en, text_ja, text_sc, text_tc, volatile=False):
         try:
             name = Name.objects.get(text_ja=text_ja)
             if volatile and text_en:
-                name.text_en = text_en
-                name.text_tc = text_tc
-                name.text_sc = text_sc
+                if text_ja != text_en: # I can see this causing problems if they use EN...
+                    name.text_en = text_en
+                    name.text_tc = text_tc
+                    name.text_sc = text_sc
                 name.save()
             return name
         except:
@@ -108,9 +115,10 @@ def checkDesc(text_en, text_ja, text_sc, text_tc):
         try:
             desc = Desc.objects.get(text_ja=text_ja.replace('\r', '').replace('\n', '<br>').strip())
             if text_en:
-                desc.text_en = text_en.replace('\r', '').replace('\n', '<br>')
-                desc.text_sc = text_sc.replace('\r', '').replace('\n', '<br>')
-                desc.text_tc = text_tc.replace('\r', '').replace('\n', '<br>')
+                if text_en != text_ja:
+                    desc.text_en = text_en.replace('\r', '').replace('\n', '<br>')
+                    desc.text_sc = text_sc.replace('\r', '').replace('\n', '<br>')
+                    desc.text_tc = text_tc.replace('\r', '').replace('\n', '<br>')
                 desc.save()
             return desc
         except:
@@ -151,13 +159,14 @@ def retrieve_all_jsons():
             data = json.load(url)
             jsons[name] = data
         if name in names_gbl:
+            print(name)
             for lang in languages:
                 with urllib.request.urlopen(f'{BASE_URL}/master/{lang}/{name}.json') as url:
                     data = json.load(url)
                     for entry in jsons[name]:
                         found = search(entry['id'], data)
                         if found:
-                            for key in ['description', 'name', 'another_name', 'requirements', 'abbreviation']: # 'leader_skill'
+                            for key in ['description', 'name', 'another_name', 'requirements', 'abbreviation', 'leader_skill', 'effect_name', 'requirement']:
                                 if key in found[0]:
                                     entry[f'{key}_{lang}'] = found[0][key]
     with urllib.request.urlopen('https://raw.githubusercontent.com/theBowja/resleriana-db/main/resources/Japan/path_hash_to_name.json') as url:
@@ -182,7 +191,30 @@ def import_research():
 
             try:
                 obj = Research.objects.get(level=res['level'], kind=filt)
-                print('Found Research', res['level'], filt.slug)
+
+                if len(res['requirements']) > 0:
+                    req = checkDesc(
+                        text_ja = res['requirements'][0]['name'],
+                        text_en = res['requirements_en'][0]['name'] if 'requirements_en' in res else '',
+                        text_sc = res['requirements_zh_cn'][0]['name'] if 'requirements_zh_cn' in res else '',
+                        text_tc = res['requirements_zh_tw'][0]['name'] if 'requirements_zh_tw' in res else '',
+                    )
+                name = checkName(
+                    text_ja=res['name'],
+                    text_en=res['name_en'] if 'name_en' in res else '',
+                    text_sc=res['name_zh_cn'] if 'name_zh_cn' in res else '',
+                    text_tc=res['name_zh_tw'] if 'name_zh_tw' in res else '',
+                    volatile=True
+                )
+                eff = search(res['research_effect_ids'][0], jsons['research_effect'])[0]
+                # print this shit
+                desc = checkDesc(
+                    text_ja=eff['name'],
+                    text_en=eff['name_en'] if 'name_en' in eff else '',
+                    text_sc=eff['name_zh_cn'] if 'name_zh_cn' in eff else '',
+                    text_tc=eff['name_zh_tw'] if 'name_zh_tw' in eff else '',
+                )
+                print('Updated Research', res['level'], filt.slug)
             except:
                 req = None
                 if len(res['requirements']) > 0:
@@ -208,7 +240,7 @@ def import_research():
                 vals = search(res['research_effect_ids'][0], jsons['research_effect_level'], field='research_effect_id')
                 same_type = Research.objects.filter(desc=desc)
                 val = search(len(same_type)+1, vals, field='level')[0]['value'] # heck this
-                
+
                 obj = Research(
                     level=res['level'],
                     kind=filt,
@@ -231,7 +263,7 @@ def import_combat_traits():
             print('Create', trait["name"], trait['id'])
 
         kind = Filterable.objects.get(slug="combat")
-        
+
         name = checkName(
             text_ja = trait['name'],
             text_en = trait['name_en'] if 'name_en' in trait else '',
@@ -347,7 +379,7 @@ def fix_hyperlink(desc, lang=''):
         desc = d[0] + skill + d2[1]
     return desc
 
-def import_skills(char_dict, char):
+def import_skills(char_dict, char, index):
     s1 = []
     s2 = []
     s3 = []
@@ -360,11 +392,10 @@ def import_skills(char_dict, char):
     s3 = s3[2:]
 
     skills = [s1, s2, s3]
-    index = 0
 
     for skill in skills:
         fix_hyperlink(skill[0]['description'])
-        
+
         name = checkName(
             text_ja=skill[0]['name'],
             text_en=skill[0]['name_en'] if 'name_en' in skill[0] else '',
@@ -431,8 +462,8 @@ def import_skills(char_dict, char):
 
         obj.save()
         index = index + 1
-        
-def import_passives(char_dict, char):
+
+def import_passives(char_dict, char, num):
     passives = []
     for a in char_dict['ability_ids']:
         passives.append(search(a, jsons['ability'])[0])
@@ -452,11 +483,11 @@ def import_passives(char_dict, char):
             text_tc=passive['description_zh_tw'] if 'description_zh_tw' in passive else '',
         )
         try:
-            obj = Passive.objects.get(name=name, char=char)
+            obj = Passive.objects.get(num=num, char=char)
             print("Updating Passive", name.text_ja)
         except:
             print("Creating Passive", name.text_ja)
-            obj = Passive(char=char)
+            obj = Passive(char=char, num=num)
         obj.name = name
         obj.desc = desc
         obj.val = passive['effects'][0]['value']
@@ -464,9 +495,10 @@ def import_passives(char_dict, char):
         obj.val3 = passive['effects'][2]['value'] if len(passive['effects']) > 2 else None
         obj.val4 = passive['effects'][3]['value'] if len(passive['effects']) > 3 else None
         obj.save()
+        num = num + 1
 
 
-def import_characters(event=None):
+def import_characters(event=None, additions=None):
     import_tags()
     roles = {
         1: Filterable.objects.get(text_en="Attacker", kind="role"),
@@ -474,7 +506,6 @@ def import_characters(event=None):
         3: Filterable.objects.get(text_en="Defender", kind="role"),
         4: Filterable.objects.get(text_en="Supporter", kind="role"),
     }
-
     for char in jsons['character']:
         name = checkName(
             text_ja = char["name"],
@@ -492,16 +523,16 @@ def import_characters(event=None):
         )
         leader_name = checkName(
             text_ja = char['leader_skill']["name"],
-            text_en = '',
-            text_sc = '',
-            text_tc = '',
+            text_en = char["leader_skill_en"]["name"] if "leader_skill_en" in char else '',
+            text_sc = char["leader_skill_zh_cn"]["name"] if "leader_skill_zh_cn" in char else '',
+            text_tc = char["leader_skill_zh_tw"]["name"] if "leader_skill_zh_tw" in char else '',
             volatile=True
         )
         leader_desc = checkDesc(
             text_ja = char['leader_skill']["description"],
-            text_en = '',
-            text_sc = '',
-            text_tc = '',
+            text_en = char["leader_skill_en"]["description"] if "leader_skill_en" in char else '',
+            text_sc = char["leader_skill_zh_cn"]["description"] if "leader_skill_zh_cn" in char else '',
+            text_tc = char["leader_skill_zh_tw"]["description"] if "leader_skill_zh_tw" in char else '',
         )
         try:
             obj = Character.objects.get(name=name, title=title)
@@ -509,10 +540,17 @@ def import_characters(event=None):
             create = False
         except:
             print('Creating', name.text_ja, title.text_ja)
-            obj = Character(slug=additions[name.text_ja])
+            try:
+                add = additions[name.text_ja]
+            except:
+                print('Failed to add character, continuing.')
+                continue
+            obj = Character(slug=add)
             create = True
             if event:
                 obj.limit = event
+
+        obj.date = datetime.fromisoformat(char["start_at"]) if char["start_at"] else datetime.fromisoformat('2023-09-23T03:00:00.000Z')
 
         t1 = search(char['battle_tool_trait_ids'][0], jsons['battle_tool_trait'])[0]
         t2 = search(char['battle_tool_trait_ids'][1], jsons['battle_tool_trait'])[0]
@@ -566,8 +604,8 @@ def import_characters(event=None):
             update = LatestUpdate.objects.first()
             update.characters.add(obj)
 
-        import_skills(char, obj)
-        import_passives(char, obj)
+        import_skills(char, obj, 4 if char['change'] else 1)
+        import_passives(char, obj, 3 if char['change'] else 1)
 
 def import_memoria(memoria_index, event=None):
     for mem in jsons['memoria']:
@@ -581,7 +619,7 @@ def import_memoria(memoria_index, event=None):
         skills = []
         for ability in mem['ability_ids']:
             skills.append(search(ability, jsons['ability'])[0])
-        
+
         skill_name = checkName(
             text_ja = skills[0]["name"],
             text_en = skills[0]["name_en"] if 'name_en' in skills[0] else '',
@@ -607,6 +645,7 @@ def import_memoria(memoria_index, event=None):
             memoria_index = memoria_index + 1
             if event:
                 obj.limit = event
+        obj.date = datetime.fromisoformat(mem["start_at"]) if mem["start_at"] else datetime.fromisoformat('2023-09-23T03:00:00.000Z')
 
         obj.name = name
         obj.skill_name=skill_name
@@ -631,7 +670,9 @@ def import_memoria(memoria_index, event=None):
             update = LatestUpdate.objects.first()
             update.memoria.add(obj)
 
-def import_material(event=None):
+    return memoria_index
+
+def import_material():
     for item in jsons['item']:
         name = checkName(
             text_ja = item["name"],
@@ -657,9 +698,7 @@ def import_material(event=None):
                 slug=str(item['id'])
             )
             create = True
-            if event:
-                obj.limit = event
-        
+
         obj.name = name
         obj.desc = desc
         obj.rarity = item['rarity']
@@ -686,7 +725,7 @@ def import_material(event=None):
                 name = search(t, jsons['equipment_tool_trait'])[0]['name']
                 obj2.traits.add(Trait.objects.get(name__text_ja=name))
 
-def import_combat_items(event=None):
+def import_combat_items():
     prev_items = []
     for item in jsons['battle_tool']:
         name = checkName(
@@ -710,9 +749,7 @@ def import_combat_items(event=None):
             obj = Item(slug=f'usable-{item["id"]}', desc=desc)
             print("Creating Combat Item", name.text_ja)
             create = True
-            if event:
-                obj.limit = event
-        
+
         obj.name = name
         if obj not in prev_items:
             obj.rarity = item['rarity']
@@ -721,12 +758,12 @@ def import_combat_items(event=None):
                 obj.desc = desc
         obj.kind=Filterable.objects.get(slug="combat", kind="item_type")
         obj.save()
-        
+
         try:
             obj2 = CombatItem.objects.get(item=obj)
         except:
             obj2 = CombatItem(item=obj)
-        
+
         obj2.kind = combat_kind[item['trait_filter_ids'][0]]
         if len(item['attack_attributes']) > 0:
             obj2.elem = elems[item['attack_attributes'][0]]
@@ -750,7 +787,7 @@ def import_combat_items(event=None):
             update = LatestUpdate.objects.first()
             update.items.add(obj)
 
-def import_equipment(event=None):
+def import_equipment():
     prev_item = []
     for item in jsons['equipment_tool']:
         name = checkName(
@@ -767,6 +804,8 @@ def import_equipment(event=None):
             text_tc = item["description_zh_tw"] if 'description_zh_tw' in item else '',
         )
 
+
+
         try:
             obj = Item.objects.get(name=name)
             print("Updating Equipment", name.text_ja)
@@ -775,8 +814,6 @@ def import_equipment(event=None):
             obj = Item(slug=f'equip-{item["id"]}', desc=desc)
             print("Creating Equipment", name.text_ja)
             create = True
-            if event:
-                obj.limit = event
 
         obj.name = name
         if obj not in prev_item:
@@ -793,7 +830,7 @@ def import_equipment(event=None):
             obj2 = Equipment(item=obj)
 
         obj2.kind=equip_kind[item['slot_type']]
-        
+
         if item['ability_ids']:
             ability = search(item['ability_ids'][0], jsons['ability'])[0]
             if obj in prev_item:
@@ -842,21 +879,23 @@ def import_equipment(event=None):
 
 def import_recipes():
     rStory = RecipeTab.objects.get(order=1)
-    rExtra = RecipeTab.objects.get(order=2)
+    rTower = RecipeTab.objects.get(order=2)
     rEvent = RecipeTab.objects.get(order=3)
     for recipe in jsons['recipe']:
         item = Item.objects.get(name__text_ja=recipe['name'])
         plan = search(recipe['recipe_plan_id'], jsons['recipe_plan'])[0]
-        limited = plan['abbreviation'].replace('\n', '') if len(plan['abbreviation']) > 2 else None
-        if limited:
-            if limited == 'アーランドの錬金術士':
-                limited = 'アーランドの錬金術士 〜迷子の少女と雪の帰り道〜'
-            limited = Desc.objects.get(text_ja=limited)
+
+        limited = checkDesc(
+            text_ja=plan['name'],
+            text_en=plan['name_en']    if 'name_en' in plan    else plan['name'],
+            text_sc=plan['name_zh_cn'] if 'name_zh_cn' in plan else plan['name'],
+            text_tc=plan['name_zh_tw'] if 'name_zh_tw' in plan else plan['name'],
+        )
         tab = rStory
-        if plan['tab_type'] == 2:
-            tab = rExtra
-        if plan['tab_type'] == 3:
+        if plan['recipe_plan_category_id'] == 2:
             tab = rEvent
+        if plan['recipe_plan_category_id'] == 3:
+            tab = rTower
 
         try:
             rPage = RecipePage.objects.get(book=recipe['recipe_plan_id'])
@@ -864,11 +903,14 @@ def import_recipes():
             print("Page Created", recipe['recipe_plan_id'])
             rPage = RecipePage(
                 book=recipe['recipe_plan_id'],
-                min_x = recipe['position']['x'],
-                max_x = recipe['position']['x'],
                 tab=tab,
                 desc=limited,
             )
+            if plan['recipe_plan_category_id'] == 2:
+                for i in LatestUpdate.objects.first().items:
+                    if i.rarity == 4 or i.kind.slug == 'material':
+                        i.limit = limited
+                        i.save()
         rPage.save()
 
         unlock1 = checkDesc(
@@ -900,8 +942,7 @@ def import_recipes():
             obj = Recipe(item=item)
 
         obj.page=rPage
-        obj.x=recipe['position']['x']
-        obj.y=recipe['position']['y']
+        obj.order=recipe['id']
         obj.book=recipe['recipe_plan_id']
         obj.color1=colors[recipe['support_color_ids'][0]]
         obj.color2=colors[recipe['support_color_ids'][1]]
@@ -916,8 +957,21 @@ def import_recipes():
         obj.ing2=Item.objects.get(name__text_ja=search(recipe['ingredient_costs'][1]['id'], jsons['item'])[0]['name']) if len(recipe['ingredient_costs']) > 1 else None
         obj.ing3=Item.objects.get(name__text_ja=search(recipe['ingredient_costs'][2]['id'], jsons['item'])[0]['name']) if len(recipe['ingredient_costs']) > 2 else None
         obj.save()
-        rPage.max_x=recipe['position']['x']
-        rPage.save()
+
+        if plan['recipe_plan_category_id'] == 2:
+            item.limit = limited
+            item.save()
+            if obj.ing1:
+                obj.ing1.limit = limited
+                obj.ing1.save()
+            if obj.ing2:
+                obj.ing2.limit = limited
+                obj.ing2.save()
+            if obj.ing3:
+                obj.ing3.limit = limited
+                obj.ing3.save()
+
+
 
 def get_quest_name(quest):
     name = checkName(
@@ -962,13 +1016,13 @@ def import_score_battle(quest, difficulty, chapter, section):
     print('score battle', quest['name'], f'{chapter}-{section} {difficulty}')
 
     try:
-        sb = ScoreBattle.objects.get(chapter=chapter, section=section)
+        sb = ScoreBattle.objects.get(chap=chapter, sect=section)
         get_quest_name(quest)
     except:
         sb = ScoreBattle(
             name=get_quest_name(quest),
-            chapter=chapter,
-            section=section
+            chap=chapter,
+            sect=section
         )
         sb.save()
 
@@ -990,9 +1044,65 @@ def import_score_battle(quest, difficulty, chapter, section):
         for i in range(1,len(reward)):
             obj.rewards.add(GetReward(reward[i], i))
         sb.difficulties.add(obj)
-    
+
     section = section + 1
     return difficulty, chapter, section
+
+def wave(data, order):
+    try:
+        wave = Wave.objects.get(w_id=data['id'])
+    except:
+        wave = Wave(
+            w_id=data['id']
+        )
+    wave.order = order
+    wave.level = data['enemies'][0]['level']
+    wave.save()
+
+    for o in data['enemies']:
+        enemy = Enemy.objects.get(e_id=o['id'])
+        if enemy not in wave.enemies.all():
+            wave.enemies.add(enemy)
+    return wave
+
+def battle(id):
+    battle_data = search(id, jsons['battle'])[0]
+    try:
+        obj = Battle.objects.get(b_id=id)
+    except:
+        obj = Battle(
+            b_id=id
+        )
+        obj.save()
+
+        count = 1;
+        for b in battle_data['wave_ids']:
+            obj.waves.add(wave(search(b, jsons['wave'])[0], count))
+            count = count + 1
+
+        for p in battle_data['display_timeline_panel_ids']:
+            if p != 11: # 11 is blank/default
+                obj.panels.add(Filterable.objects.get(
+                    kind="panel",
+                    text_ja=search(p, jsons['timeline_panel'])[0]['name']))
+
+        for id in battle_data['hint_ids']:
+            hint = search(id, jsons['battle_hint'])[0]
+            desc = checkDesc(
+                text_ja=hint['description'].replace('\r', '').replace('\n', '<br>'),
+                text_en=hint['description_en'].replace('\r', '').replace('\n', '<br>') if 'description_en' in hint else '',
+                text_sc=hint['description_zh_cn'].replace('\r', '').replace('\n', '<br>') if 'description_zh_cn' in hint else '',
+                text_tc=hint['description_zh_tw'].replace('\r', '').replace('\n', '<br>') if 'description_zh_tw' in hint else '',
+            )
+            e = Enemy.objects.get(e_id=hint['enemy_id'])
+            try:
+                h = Hint.objects.get(enemy=e, desc=desc)
+            except:
+                h = Hint(enemy=e, desc=desc)
+                h.save()
+                obj.hints.add(h)
+    return obj
+
 
 def import_tower(quest, kind):
     print(quest['name'], kind)
@@ -1009,17 +1119,19 @@ def import_tower(quest, kind):
             q_id=quest['id'],
             combat_level=quest['recommended_combat_power'],
         )
+        obj.battle = battle(quest['battle_id'])
         obj.save()
 
-        # TODO: Actually test this crap against new data TEEHEE
-        reward = search(quest['first_clear_reward_set_id'], jsons['reward_set'])[0]['rewards']
+        reward = None
+        if quest['first_clear_reward_set_id']:
+            reward = search(quest['first_clear_reward_set_id'], jsons['reward_set'])[0]['rewards']
 
         if len(reward) > 1:
             for i in range(1, len(reward)):
                 obj.rewards.add(GetReward(reward[i], i))
 
         for e in effects:
-            obj.effects.add(eff)
+            obj.effects.add(e)
 
 
 def import_dungeon(quest):
@@ -1113,8 +1225,106 @@ def import_quest():
             count = count + 1
     print(count)
 
-def import_enemy():
+def import_emblem():
+    for emb in jsons['emblem']:
+        name = checkName(
+            text_ja = emb['name'],
+            text_en = emb['name_en'] if 'name_en' in emb else '',
+            text_sc = emb['name_zh_cn'] if 'name_zh_cn' in emb else '',
+            text_tc = emb['name_zh_tw'] if 'name_zh_tw' in emb else '',
+            volatile= True
+        )
+
+        desc = checkDesc(
+            text_ja=emb['effect_name'],
+            text_en=emb['effect_name_en'] if 'effect_name_en' in emb else '',
+            text_sc=emb['effect_name_zh_cn'] if 'effect_name_zh_cn' in emb else '',
+            text_tc=emb['effect_name_zh_tw'] if 'effect_name_zh_tw' in emb else '',
+        )
+
+        try:
+            obj = Emblem.objects.get(index=emb['priority'], eid=emb['id'])
+            print("Updating Emblem", name.text_ja)
+        except:
+            print("Creating Emblem", name.text_ja)
+            obj = Emblem(
+                index=emb['priority'],
+                eid=emb['id'],
+                kind=emb['emblem_group_id']
+            )
+        obj.name = name
+        obj.desc = desc
+
+        rarities = search(emb['id'], jsons['emblem_rarity'], 'emblem_id')
+
+        obj.lv1 = rarities[0]['value']
+        obj.lv2 = rarities[1]['value']
+        obj.lv3 = rarities[2]['value']
+
+        acquisitions = []
+
+        for r in rarities:
+            gbl = False
+            if 'requirement_en' in r:
+                gbl = True
+            acquisition = checkDesc(
+                text_ja=r['requirement']['name'],
+                text_en=r['requirement_en']['name'] if gbl else '',
+                text_sc=r['requirement_zh_cn']['name'] if gbl else '',
+                text_tc=r['requirement_zh_tw']['name'] if gbl else '',
+            )
+            acquisitions.append(acquisition)
+
+        obj.acquisition1=acquisitions[0]
+        obj.acquisition2=acquisitions[1]
+        obj.acquisition3=acquisitions[2]
+
+        obj.save()
+
+def enemy_skill(id, kind):
+    skill = search(id, jsons['skill'])[0]
+    name = checkName(
+        volatile=True,
+        text_ja=skill['name'],
+        text_en=skill['name_en'] if 'name_en' in skill else '',
+        text_sc=skill['name_zh_cn'] if 'name_zh_cn' in skill else '',
+        text_tc=skill['name_zh_tw'] if 'name_zh_tw' in skill else '',
+    )
+    desc = None
+    if skill['description'] != 'テキストなし':
+        desc = checkDesc(
+            text_ja=skill['description'],
+            text_en=skill['description_en'] if 'description_en' in skill else '',
+            text_sc=skill['description_zh_cn'] if 'description_zh_cn' in skill else '',
+            text_tc=skill['description_zh_tw'] if 'description_zh_tw' in skill else '',
+    )
+    try:
+        obj = EnemySkill.objects.get(s_id=id)
+    except:
+        obj = EnemySkill(
+            s_id=id
+        )
+    obj.name = name
+    obj.desc = desc
+    obj.elem = elems[skill['attack_attributes'][0]] if len(skill['attack_attributes']) > 0 else None
+    obj.area = area[skill['skill_target_type']] if skill['skill_target_type'] != 1 else None
+    obj.wt = skill['wait']
+    obj.pow1 = skill['power']
+    obj.save()
+
+    try:
+        sk = SkillKind.objects.get(kind=kind, skill=obj)
+    except:
+        sk = SkillKind(
+            kind=kind,
+            skill=obj
+        )
+        sk.save()
+    return sk
+
+def import_enemy(base_enemy_index):
     for enemy in jsons['enemy']:
+        create = False
         name = checkName(
             text_ja = enemy['name'],
             text_en = enemy['name_en'] if 'name_en' in enemy else '',
@@ -1122,150 +1332,71 @@ def import_enemy():
             text_tc = enemy['name_zh_tw'] if 'name_zh_tw' in enemy else '',
             volatile= True
         )
-        #try:
-        #    obj = Enemy.objects.get(e_id=enemy['id'])
-        #    print("Updating Enemy", enemy['name'])
-        #except:
-        #    obj = Enemy(
-        #        e_id=enemy['id']
-        #    )
-        #    obj.save()
-        #    print("New Enemy", enemy['name'])
-
-    for hint in jsons['battle_hint']:
-        desc = checkDesc(
-            text_ja=hint['description'].replace('\r', '').replace('\n', '<br>'),
-            text_en=hint['description_en'] if 'description_en' in hint else '',
-            text_sc=hint['description_zh_cn'] if 'description_zh_cn' in hint else '',
-            text_tc=hint['description_zh_tw'] if 'description_zh_tw' in hint else '',
+        base = search(enemy['base_enemy_id'], jsons['base_enemy'])[0]
+        species = search(base['species_id'], jsons['species'])[0]
+        species = checkName(
+            volatile=True,
+            text_ja=species['name'],
+            text_en=species['name_en'] if 'name_en' in species else '',
+            text_sc=species['name_zh_cn'] if 'name_zh_cn' in species else '',
+            text_tc=species['name_zh_tw'] if 'name_zh_tw' in species else '',
         )
-
-
-def ImpEnemySkill(row, index):
-    desc = None
-    if row['Desc'] and row['Desc'] != "テキストなし" or row['Desc'] != '追加効果なし':
-        desc = checkDesc(
-            text_ja=row['Desc'],
-            text_en=row['Desc En'],
-            text_sc=row['Desc Sc'],
-            text_tc=row['Desc Tc'],
-        )
-    name = checkName(
-        text_ja=row['Name'],
-        text_en=row['Name En'],
-        text_sc=row['Name Sc'],
-        text_tc=row['Name Tc'],
-        volatile=True
-    )
-    try:
-        obj = EnemySkill.objects.get(s_id=row['id'])
-        print(f'Found {obj.name.text_ja}')
-    except:
-        print(f'Creating {row["id"]}')
-        obj = EnemySkill(
-            name=name,
-            desc=desc,
-            elem=Filterable.objects.get(text_en=row['Attribute']) if row['Attribute'] else None,
-            area=Name.objects.get(text_en=row['Range']) if row['Range'] else None,
-            wt=row['WT'],
-            s_id=row['id'],
-            pow1=row['power']
-        )
-        obj.save()
-
-def ImpEnemy(row, index):
-    name = checkName(
-        text_ja=row['Name'],
-        text_en=row['Name En'],
-        text_sc=row['Name Sc'],
-        text_tc=row['Name Tc'],
-        volatile=True
-    )
-    try:
-        obj = Enemy.objects.get(e_id=row['ID'])
-    except:
-        print(f'Creating {row["Name"]} {row["ID"]}')
-        obj = Enemy(
-            name=name,
-            species=Name.objects.get(text_ja=row['Species']),
-            base_enemy=Filterable.objects.get(text_ja=row['BaseEnemy'], kind="base-enemy"),
-            burst=EnemySkill.objects.get(s_id=row['Burst Skill']),
-            e_id=row['ID'],
-            res_ice=row['Ice'],
-            res_fir=row['Fire'],
-            res_str=row['Strike'],
-            res_blt=row['Bolt'],
-            res_sta=row['Stab'],
-            res_sla=row['Slash'],
-            res_air=row['Air'],
-        )
-        obj.save()
-
-        for i in range(1,10):
-            if row[f'Normal Skill {i}']:
-                obj.normal.add(EnemySkill.objects.get(s_id=row[f'Normal Skill {i}']))
-        for i in range(1,3):
-            if row[f'Extra Skill {i}']:
-                obj.extra.add(EnemySkill.objects.get(s_id=row[f'Extra Skill {i}']))
-
-def ImpWave(row, index):
-    try:
-        obj = Wave.objects.get(w_id=row['id'])
-    except:
-        print(f'Creating {row["id"]}')
-        obj = Wave(
-            level=row['enemies/0/level'],
-            w_id=row['id']
-        )
-        obj.save()
-        for i in range(0,5):
-            if row[f'enemies/{i}/id']:
-                obj.enemies.add(Enemy.objects.get(e_id=row[f'enemies/{i}/id']))
-
-def checkHint(text_ja, enemy_id):
-    desc = Desc.objects.get(text_ja=text_ja.replace('\r', '').replace('\n', '<br>'))
-    enemy = Enemy.objects.get(e_id=enemy_id)
-    try:
-        obj = Hint.objects.get(desc=desc, enemy=enemy)
-    except:
-        obj = Hint(desc=desc, enemy=enemy)
-        obj.save()
-    return obj
-
-def ImpBattle(row, index):
-    if row['Quest ID']:
         try:
-            tower = Tower.objects.get(q_id=row['Quest ID'])
+            base_enemy=Filterable.objects.get(text_ja=base['name'], kind='base-enemy')
         except:
-            tower = None
-        try:
-            score = ScoreBattleDifficulties.objects.get(q_id=row['Quest ID'])
-        except:
-            score = None
-        if tower or score and score.difficulty == 3:
-            try:
-                obj = Battle.objects.get(b_id=row['battle id'])
-            except:
-                print(f'Creating {row["battle id"]}')
-                obj = Battle(b_id=row['battle id'])
-                obj.save()
-                wave = Wave.objects.get(w_id=row['wave id'])
-                obj.waves.add(wave)
+            base_enemy=Filterable(
+                slug=f'base-enemy-{base_enemy_index}',
+                text_ja=base['name'],
+                text_en=base['name_en'] if 'name_en' in base else '',
+                text_sc=base['name_zh_cn'] if 'name_zh_cn' in base else '',
+                text_tc=base['name_zh_tw'] if 'name_zh_tw' in base else '',
+                kind='base-enemy'
+            )
+            base_enemy.save()
+            base_enemy_index = base_enemy_index + 1
 
-                for i in range(1,7):
-                    if row[f'Hint {i}']:
-                        hint = checkHint(row[f'Hint {i}'], row[f'H Enemy ID {i}'])
-                        obj.hints.add(hint)
-                    if row[f'Panel {i}']:
-                        panel = Filterable.objects.get(kind='panel', text_ja=row[f'Panel {i}'])
-                        obj.panels.add(panel)
-                
-                if tower:
-                    tower.battle = obj
-                    tower.save()
-                if score:
-                    score.battle = obj
-                    score.save()
+        try:
+            obj = Enemy.objects.get(e_id=enemy['id'])
+            print("Updating Enemy", enemy['name'])
+        except:
+            obj = Enemy(
+                e_id=enemy['id'],
+            )
+            create = True
+            print("New Enemy", enemy['name'])
+        obj.res_ice=enemy['resistance']['ice']
+        obj.res_fir=enemy['resistance']['fire']
+        obj.res_str=enemy['resistance']['impact']
+        obj.res_blt=enemy['resistance']['lightning']
+        obj.res_sta=enemy['resistance']['piercing']
+        obj.res_sla=enemy['resistance']['slashing']
+        obj.res_air=enemy['resistance']['wind']
+        obj.base_enemy=base_enemy
+        obj.species=species
+        obj.name=name
+        obj.save()
+
+        ai_unit = search(enemy['enemy_ai_id'], jsons['enemy_ai_unit'], 'enemy_ai_id')
+        uniques = []
+
+        for a in ai_unit:
+            for s in a['skills']:
+                if s['id'] not in uniques:
+                    uniques.append(s['id'])
+
+        burst = enemy_skill(enemy['burst_skill_id'], 'burst')
+        extra = [enemy_skill(x, 'extra') for x in enemy['extra_skill_ids']]
+        normal = [enemy_skill(x, 'normal') for x in uniques]
+
+        if create:
+            obj.skills.add(burst)
+            for o in extra:
+                obj.skills.add(o)
+            for o in normal:
+                obj.skills.add(o)
+
+    return base_enemy_index
+
 
 def scan_update_images():
     update = LatestUpdate.objects.first()
@@ -1291,20 +1422,26 @@ def scan_update_images():
         im = search(character.title.text_ja, jsons['character'], 'another_name')[0]['large_narrow_still_path_hash']
         print(character.slug, jsons['path_hash_to_name'][im])
 
+def enemy_images():
+    for e in jsons['base_enemy']:
+        print(Filterable.objects.get(kind='base-enemy', text_ja=e['name']).slug,
+              jsons['path_hash_to_name'][e['large_still_path_hash']])
+
+
 def global_additions():
     createUpdateGBL()
     update = LatestUpdateGBL.objects.first()
 
     rStory = RecipeTab.objects.get(order=1)
-    rExtra = RecipeTab.objects.get(order=2)
+    rTower = RecipeTab.objects.get(order=2)
 
-    dungeons = None # ['Passage to the Remnants of Dreams', 'Celestial Gloom Tower']
+    dungeons = [] #["Spiral into Another World", "Bottomless Pit"]
     score_battle_chapter = None
     tower_floor_max = None
     elem_tower_floor_max = None
-    events = ['決戦 LEGEND FES 目覚めた災厄']
-    recipe_pages = [] #[[rStory, 27], [rExtra, 28]] # refer to recipepage db for numbers
-    traits = [] #['Critical Damage Up']
+    events = [] #['アトリエサマー第1弾 LEGEND FES', 'アトリエサマー2024 第1弾']
+    recipe_pages = [] #[[rStory, 44], [rStory, 45]] # refer to recipepage db for numbers
+    traits = []
 
     if tower_floor_max:
         towers = Tower.objects.filter(kind=Filterable.objects.get(text_en="Elemental Tower"))
@@ -1405,41 +1542,41 @@ def create_event(ja, en='', sc='', tc=''):
         en = ja
     return checkDesc(en, ja, sc, tc)
 
-# From Resleri Academy, use abbreviations in recipe_plan
+# I wrote this intending on removing duds but there aren't actually too many of them
+def cleanup():
+    bad = Desc.objects.filter(character__isnull=True, dungeonfloor__isnull=True, enemyskill__isnull=True, hint__isnull=True, item__isnull=True, item_limited__isnull=True, leader_desc__isnull=True, memoria__isnull=True, memoria_limited__isnull=True, passive__isnull=True, recipepage__isnull=True, req__isnull=True, research__isnull=True, skill__isnull=True, tower__isnull=True, trait__isnull=True, unlock1__isnull=True, unlock2__isnull=True, unlock3__isnull=True)
+    for b in bad:
+        print(b.text_en, b.text_ja)
 
-gacha = None #create_event(ja='竜の花嫁 LEGEND FES', en="Dragon's Bride LEGEND FES")
-event = None #create_event(ja='竜の涙は花と散る', en="Dragon Tears")
+# for setting slugs
+additions = {
+    "フロッケ": "flocke-2"
+}
+memoria_index = 121 # 1st anni heidi/flocke
+base_enemy_index = 84
+
+gacha = None #create_event(ja='1周年 星礼祭 LEGEND FES かけがえのないモノ', en="1st Anniversary Part 8")
 
 #createUpdate()
 #retrieve_all_jsons()
 #import_combat_traits()
 #import_equipment_traits()
-#import_characters(event=gacha)
-#import_memoria(memoria_index, event=gacha)
-#import_material(event=event)
-#import_combat_items(event=event)
-#import_equipment(event=event)
+#import_characters(event=gacha, additions=additions)
+#memoria_index = import_memoria(memoria_index, event=gacha)
+#import_material()
+#import_combat_items()s
+#import_equipment()
 #import_recipes()
+#base_enemy_index = import_enemy(base_enemy_index)
 #import_quest()
-##import_enemy()
+#import_emblem()
 #scan_update_images()
+#print(f'Memoria: {memoria_index}\tEnemy: {base_enemy_index}')
 
+#global_additions()
+#enemy_images()
 #import_research()
 
-global_additions()
-
-#import_generic(ImpEnemySkill)
-#import_generic(ImpEnemy)
-#import_generic(ImpWave)
-#import_generic(ImpBattle)
-
-
 """
-Checklist
-1. createUpdate
-2. add events
-3. trait -> char/item
-4. char -> skill/passive
-5. items -> recipes -> quest
-6. quest -> enemy skill -> enemy -> hint -> wave -> battle
+python manage.py dumpdata chara_a25 items_a25 misc_a25 misc_a25 quest_a25 -o dump.json.gz
 """

@@ -1,0 +1,299 @@
+@if (!error) {
+@if (editMode) { <h1>My Collection</h1> }
+@else { <h1>View Collection</h1> }
+@if (!bad_data) {
+<ng-template #forms>
+  <form [formGroup]="pageForm" class="form-horizontal">
+    @if (openTab === 0) {
+    <div class="row" style="margin-top:0.8rem;">
+      <mat-form-field class="col-md-4" appearance="outline">
+        <mat-label>Filter...</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtertext">
+        <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="col-md-4" appearance="outline">
+        <mat-label>Role</mat-label>
+        <mat-select matNativeControl formControlName="roles" disableOptionCentering="true" class="mat-select-icon">
+          <mat-option value="any" selected>
+            Any
+          </mat-option>
+          @if (data) {
+          @for (role of data.roles; track role) {
+          <mat-option [value]="role.slug">
+            {{role.name}}
+          </mat-option>
+          }
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="col-md-4" appearance="outline">
+        <mat-label>Element</mat-label>
+        <mat-select matNativeControl formControlName="elems" disableOptionCentering="true" class="mat-select-icon">
+          <mat-option value="any" selected>
+            Any
+          </mat-option>
+          @if (data) {
+          @for (elem of data.elems; track elem) {
+          <mat-option [value]="elem.slug">
+            {{elem.name}}
+          </mat-option>
+          }
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <div class="col-md-4" style="display:flex;padding-bottom:1rem;">
+        <button [matMenuTriggerFor]="menuLeft" style="width:2rem;background:none;border:none;padding-right:0.1rem;">
+          <svg viewBox="0 0 125 250" style="max-width:2rem;">
+            <path [attr.fill]="changeFill(pageForm.get('colorL').value)"
+              d="M128.315904 232.287744H122.368L24.448 134.368256V122.399744L122.368 24.479744H128.34304L128.34304 6.144H121.31328L6.11328 121.344V135.424L121.31328 250.624H128.3072zM128.335872 227.199488H124.000256L29.536256 132.735488V124.031488L124.000256 29.567488H128.326656z" />
+          </svg>
+        </button>
+        <button [matMenuTriggerFor]="menuRight" style="width:2rem;background:none;border:none;padding-left:0.1rem;">
+          <svg viewBox="0 0 125 250" style="max-width:2rem;transform:scale(-1,1)">
+            <path [attr.fill]="changeFill(pageForm.get('colorR').value)"
+              d="M128.315904 232.287744H122.368L24.448 134.368256V122.399744L122.368 24.479744H128.34304L128.34304 6.144H121.31328L6.11328 121.344V135.424L121.31328 250.624H128.3072zM128.335872 227.199488H124.000256L29.536256 132.735488V124.031488L124.000256 29.567488H128.326656z" />
+          </svg>
+        </button>
+        <mat-menu #menuLeft="matMenu">
+          <button mat-menu-item (click)="pageForm.controls['colorL'].setValue('any')">
+            Any
+          </button>
+          @if (data) {
+          @for (color of data.colors; track color) {
+          <button mat-menu-item (click)="pageForm.controls['colorL'].setValue(color.slug)">
+            {{color.name}}
+          </button>
+          }
+          }
+        </mat-menu>
+        <mat-menu #menuRight="matMenu">
+          <button mat-menu-item (click)="pageForm.controls['colorR'].setValue('any')">
+            Any
+          </button>
+          @if (data) {
+          @for (color of data.colors; track color) {
+          <button mat-menu-item (click)="pageForm.controls['colorR'].setValue(color.slug)">
+            {{color.name}}
+          </button>
+          }
+          }
+        </mat-menu>
+      </div>
+      @if (editMode) {
+      @if (language != 'ja') {
+      <mat-checkbox class="col-md-4" formControlName="show_jp">
+        Show JP
+      </mat-checkbox>
+      }
+      <mat-checkbox class="col-md-4" formControlName="hide_missing">
+        Hide Missing
+      </mat-checkbox> }
+    </div>
+    }
+    @if (openTab == 1) {
+    <div class="row" style="margin-top:0.8rem;">
+      <mat-form-field class="col-md-8" appearance="outline">
+        <mat-label>Filter...</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtertext">
+        <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="col-md-4" appearance="outline">
+        <mat-label>Sort by...</mat-label>
+        <mat-select matNativeControl formControlName="stats">
+          @for (stat of a25service.stats | keyvalue; track stat) {
+          <mat-option [value]="stat.key">
+            {{stat.value[language]}}
+          </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+    @if (editMode) {
+    <div class="row" style="padding-bottom:1rem;">
+      @if (language != 'ja') {
+      <mat-checkbox formControlName="show_jp" class="col-md-4">
+        Show JP
+      </mat-checkbox>
+      }
+      <mat-checkbox class="col-md-4" formControlName="hide_missing">
+        Hide Missing
+      </mat-checkbox>
+    </div>
+    }
+    }
+    @if (openTab === 2 && editMode) {
+      @if (language != 'ja') {
+      <mat-checkbox class="col-md-4" formControlName="show_jp">
+        Show JP
+      </mat-checkbox>
+      }
+    }
+  </form>
+</ng-template>
+@if (editMode) {
+<div style="width:100%; height: 2.5rem; display: flex;" class="spacer">
+  <input type="text" (click)="openSnackBar();" readonly value="{{shareUrl}}"
+    [cdkCopyToClipboard]="shareUrl" style="width: 100%; margin-right: 0.5rem; border-radius: 5px; border-style: ridge; outline: none;;">
+  <button [cdkCopyToClipboard]="shareUrl" mat-fab extended color="primary"
+    (click)="openSnackBar();" style="height:100%;" class="input-group-text">
+    <i class="fa-solid fa-link"></i> Share
+  </button>
+</div>
+}
+@else {
+<div style="margin-bottom: 1rem;" class="row spacer">
+  <div class="col-md-4">
+    <button mat-fab extended color="primary" style="height: 2.5rem;"
+      (click)="router.navigateByUrl('/resleri/collect/'+language)">
+      <mat-icon fontSet="fa-solid" [fontIcon]="has_collection ? 'fa-pen-to-square' : 'fa-plus'"
+        style="font-size: 1.3rem;"></mat-icon> {{has_collection ? 'Edit my collection' : 'Create new'}}
+    </button>
+  </div>
+  <div class="col-md-4"></div>
+  <div class="col-md-4" style="display: grid;">
+    <button mat-fab extended color="accent" style="margin-left: auto; margin-right: 0; height: 2.5rem;" (click)="import()">
+      <mat-icon fontSet="fa-solid" fontIcon="fa-file-import" style="font-size: 1.3rem;"></mat-icon> Import
+    </button>
+    @if (areyousure) {
+    <div>
+      This will overwrite your data with the current collection. Are you sure?
+      <div>
+        <button mat-flat-button color="primary" (click)="import(true)">
+          Yes
+        </button>
+        <button (click)="import(false)" mat-flat-button style="margin-left: 3rem; background-color: lightgray;">
+          Cancel
+        </button>
+      </div>
+    </div>
+    }
+  </div>
+</div>
+}
+
+@defer {
+@if (data) {
+  <div style="column-count: 2;">
+    <ul style="list-style-type: none; padding-left: 0;">
+      <li>
+        <i class="atelier atelier-np atelier-resleri-char"
+          style="font-size: 2.4rem; vertical-align: middle; padding-right: 0.5rem;"></i>
+          <span style="vertical-align: middle;">{{totals['characters']}} / {{use_global_count ? totals['character_gbl'] : totals['character_total']}}</span>
+        </li>
+      <li>
+        <i class="atelier atelier-np atelier-resleri-memoria"
+          style="font-size: 2.4rem; vertical-align: middle; padding-right: 0.5rem;"></i>
+        <span style="vertical-align: middle;">{{totals['memoria']}} / {{use_global_count ? totals['memoria_gbl'] : totals['memoria_total']}}</span>
+      </li>
+    </ul>
+    <div>
+      <ul style="list-style-type: none; padding-left: 0; float: right;">
+        <li><i class="fa-solid fa-shield" style="color:#a17b4c; font-size: 1.3rem; -webkit-text-stroke-color: black; -webkit-text-stroke-width: 0.1rem; padding-right: 0.5rem;"></i>
+          {{totals['emblems_1']+totals['emblems_2']+totals['emblems_3']}} / {{use_global_count ? totals['emblem_gbl'] : totals['emblem_total']}}</li>
+        <li><i class="fa-solid fa-shield" style="color:#c1c3c2; font-size: 1.3rem; -webkit-text-stroke-color: black; -webkit-text-stroke-width: 0.1rem; padding-right: 0.5rem;"></i>
+          {{totals['emblems_2']+totals['emblems_3']}} / {{use_global_count ? totals['emblem_gbl'] : totals['emblem_total']}}</li>
+        <li><i class="fa-solid fa-shield" style="color:#e9c82d; font-size: 1.3rem; -webkit-text-stroke-color: black; -webkit-text-stroke-width: 0.1rem; padding-right: 0.5rem;"></i>
+          {{totals['emblems_3']}} / {{use_global_count ? totals['emblem_gbl'] : totals['emblem_total']}}</li>
+      </ul>
+    </div>
+  </div>
+<mat-tab-group (selectedTabChange)="changeTab($event)" class="tabs-overflow2">
+  <mat-tab label="Characters" style="overflow-x:visible;">
+    <ng-container *ngTemplateOutlet="forms"></ng-container>
+    <div class="char-grid">
+      @for (chara of filteredCharas | async; track chara) {
+      <div
+        [style]="this.collection.characters[chara.id] ? 'text-align:center;cursor: pointer;' : 'text-align:center;filter:grayscale(.8);cursor: pointer;'"
+        (click)="changeCharacter(chara.id, chara.rarity, chara.slug, $event)">
+        <div style="aspect-ratio:1;position:relative;">
+          <img loading="lazy" width="100%" src="{{imgURL}}characters/face/{{chara.slug}}.webp"
+            alt="{{chara.name + ' ' + chara.title}}"
+            style="position:absolute;z-index:10;max-height:83%;max-width:83%;-webkit-clip-path: polygon(0 0, 100% 0%, 100% 50%, 50% 100%, 0 50%);clip-path: polygon(0 0, 100% 0%, 100% 50%, 50% 100%, 0 50%);left:50%;top:50%;transform:translate(-50%, -50%);">
+          <div style="display:flex;width:100%;position:absolute;left:50%;top:50%;transform:translate(-50%, -50%);">
+            <svg viewBox="0 0 125 250" style="max-width:100%;">
+              <path [attr.fill]="a25service.colors[chara.color1]"
+                d="M128.315904 232.287744H122.368L24.448 134.368256V122.399744L122.368 24.479744H128.34304L128.34304 6.144H121.31328L6.11328 121.344V135.424L121.31328 250.624H128.3072zM128.335872 227.199488H124.000256L29.536256 132.735488V124.031488L124.000256 29.567488H128.326656z" />
+            </svg>
+            <svg viewBox="0 0 125 250" style="max-width:100%;transform:scale(-1,1)">
+              <path [attr.fill]="a25service.colors[chara.color2]"
+                d="M128.315904 232.287744H122.368L24.448 134.368256V122.399744L122.368 24.479744H128.34304L128.34304 6.144H121.31328L6.11328 121.344V135.424L121.31328 250.624H128.3072zM128.335872 227.199488H124.000256L29.536256 132.735488V124.031488L124.000256 29.567488H128.326656z" />
+            </svg>
+          </div>
+          <img
+            style="aspect-ratio:48/45;width:25%;filter:drop-shadow(5px 5px 5px black);position:absolute;bottom:0;left:3%;"
+            src="{{imgURL}}characters/{{chara.role}}.webp" alt="{{chara.role}}" />
+          <i class="atelier atelier-np atelier-resleri-{{chara.elem}} a25-char-font"
+            style="background-color:{{a25service.elements[chara.elem]}};"></i>
+        </div>
+        <div class="a25-star-font fa-solid" [innerHTML]="fetchStars(chara.id, chara.rarity)"></div>
+      </div>
+      }
+    </div>
+  </mat-tab>
+  <mat-tab label="Memoria">
+    <ng-container *ngTemplateOutlet="forms"></ng-container>
+    <div class="mem-grid">
+      @for (memoria of filteredMemoria | async; track memoria) {
+      <div style="aspect-ratio:256/410;position: relative;cursor: pointer;">
+        <img src="{{imgURL}}memoria/{{memoria.slug}}.webp" (click)="changeMemoria(memoria.id, memoria.slug, $event)" loading="lazy"
+          [style]="collection.memoria[memoria.id] ? 'width:100%' : 'width:100%;filter:grayscale(1)'">
+        @if (collection.memoria[memoria.id] !== undefined) {
+        <div
+          style="position:absolute;bottom:0%;left:50%;transform:translate(-50%,0);font-size:2rem;text-align:center;width:100%;color:white;background:linear-gradient(270deg, rgba(0,0,0,0.5) 0%, rgb(0, 0, 0) 50%, rgba(0,0,0,0.5) 100%);">
+          {{ranks[collection.memoria[memoria.id]]}}</div>
+        }
+      </div>
+      }
+    </div>
+  </mat-tab>
+  <mat-tab label="Emblems">
+    <ng-container *ngTemplateOutlet="forms"></ng-container>
+    <h2>Permanent</h2>
+    @for (emblem of filteredEmblems | async; track emblem) {
+      @if (emblem.kind === 1) {
+        @if (!editMode) {
+          <popover [title]="emblem.name" [template]="emblemPopover" [context]="{ emblem: emblem }">
+            <ng-content *ngTemplateOutlet="emblemDisplay;context:{emblem:emblem}"></ng-content>
+          </popover>
+        }
+        @else {
+          <ng-content *ngTemplateOutlet="emblemDisplay;context:{emblem:emblem}"></ng-content>
+        }
+      }
+    }
+    <h2>Limited</h2>
+    @for (emblem of filteredEmblems | async; track emblem) {
+      @if (emblem.kind === 2) {
+        @if (!editMode) {
+          <popover [title]="emblem.name" [template]="emblemPopover" [context]="{ emblem: emblem }">
+            <ng-content *ngTemplateOutlet="emblemDisplay;context:{emblem:emblem}"></ng-content>
+          </popover>
+        }
+        @else {
+          <ng-content *ngTemplateOutlet="emblemDisplay;context:{emblem:emblem}"></ng-content>
+        }
+      }
+    }
+  </mat-tab>
+</mat-tab-group>
+}
+}
+}
+@else {
+Corrupt data detected.
+}
+<ng-template #emblemPopover let-emblem="emblem">
+  {{replaceDesc(emblem)}}
+</ng-template>
+<ng-template #emblemDisplay let-emblem="emblem">
+  <div style="overflow: hidden; width: min(180px, 25%); aspect-ratio: 1; display: inline-block; filter: drop-shadow(10px 10px 3px darkgray);">
+    <img
+      [src]="collection.emblems[emblem.eid] ? imgURL+'emblems/emblem-'+emblem.eid+'.webp' : imgURL+'emblems/emblem-'+emblem.eid+'.webp'"
+      (click)="editMode ? changeEmblem(emblem.eid) : null;" alt="{{emblem.name}}"
+      [style]="collection.emblems[emblem.eid] ? 'margin-top:calc(-100% * ' + (collection.emblems[emblem.eid]-1) + ');' : 'filter: grayscale(.8);'"
+      class="a25-emblem" loading="lazy">
+  </div>
+</ng-template>
+}

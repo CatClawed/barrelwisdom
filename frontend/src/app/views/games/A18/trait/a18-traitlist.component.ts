@@ -5,6 +5,7 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { Tooltip } from '@app/views/_components/tooltip/tooltip.component';
 import { Trait } from '@app/views/games/A18/_services/a18.interface';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
@@ -32,9 +33,10 @@ export class A18TraitlistComponent extends DialogUseComponent {
     protected route: ActivatedRoute,
     protected location: Location,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
     private a18service: A18Service,) {
-    super(destroy$, router, route, location, seoService, cdkDialog);
+    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A18TraitComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -44,7 +46,7 @@ export class A18TraitlistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.a18service, 'traits');
-    this.genericSEO(`Traits`, `The list of traits in ${this.gameTitle}.`);
+    this.genericSettings(`Traits`, `The list of traits in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a18service.getTraitList(this.language);
   }

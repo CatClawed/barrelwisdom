@@ -7,6 +7,7 @@ import { AuthenticationService } from '@app/services/authentication.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { ErrorCodeService } from '@app/views/main/_services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -21,6 +22,7 @@ export class LoginComponent {
   submitted = false;
   returnUrl: string;
   errorMsg: string;
+  error: boolean = false;
 
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -30,6 +32,7 @@ export class LoginComponent {
     private authenticationService: AuthenticationService,
     private errorCodeService: ErrorCodeService,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     private metaService: Meta,
     private titleService: Title
   ) { }
@@ -39,6 +42,8 @@ export class LoginComponent {
     this.titleService.setTitle(`Login - Barrel Wisdom`);
     this.metaService.updateTag({ name: `robots`, content: `noindex` }, `name="robots"`);
     this.seoService.removeCanonicalURL();
+    this.breadcrumbService.setBreadcrumbs([], undefined)
+    this.error = this.breadcrumbService.setStatus(200);
 
     this.loginForm = this.formBuilder.nonNullable.group({
       username: ['', Validators.required],

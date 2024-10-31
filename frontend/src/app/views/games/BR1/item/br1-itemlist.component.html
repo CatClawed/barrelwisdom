@@ -1,8 +1,4 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
 @if (!error) {
-  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Items"></Breadcrumb>
   <h1>Items</h1>
   <div class="col-md-10 mx-auto">
     <form [formGroup]="pageForm" class="form-horizontal">
@@ -19,13 +15,13 @@
       <div class="card card-body">
         <div class="flex">
           <h4 class="card-title">
-            <a (click)="openDialog(it.slugname, $event);" href="/{{gameURL}}/items/{{it.slugname}}/{{language}}">{{it.name}}</a>
+            <a (click)="openDialog(it.slug, $event);" href="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a>
           </h4>
           @if (it.kind) {
             <b style="padding-right:0.5em;">{{it.kind}}</b>
           }
         </div>
-        <p>{{it.description}}</p>
+        <p>{{it.desc}}</p>
         @if (it.effect) {
           <p><b>Effect: </b>{{it.effect}}</p>
         }
@@ -38,7 +34,7 @@
         @if (it.missions) {
           <ul>
             @for (miss of it.missions; track miss) {
-              <li><a routerLink="/{{gameURL}}/missions/{{language}}" fragment="{{miss.slugname}}">{{miss.name}}</a></li>
+              <li><a routerLink="/{{gameURL}}/missions/{{language}}" fragment="{{miss.slug}}">{{miss.name}}</a></li>
             }
           </ul>
         }
@@ -58,7 +54,7 @@
         @if (it.demons) {
           <ul>
             @for (demon of it.demons; track demon) {
-              <li><a routerLink="/{{gameURL}}/demons/{{demon.slugname}}/{{language}}">{{demon.name}}</a></li>
+              <li><a routerLink="/{{gameURL}}/demons/{{demon.slug}}/{{language}}">{{demon.name}}</a></li>
             }
           </ul>
         }
@@ -68,7 +64,7 @@
         @if (it.ingredient_set) {
           <ul>
             @for (ing of it.ingredient_set; track ing) {
-              <li><a routerLink="/{{gameURL}}/items/{{ing.item.slugname}}/{{language}}">{{ing.item.name}} x{{ing.num}}</a></li>
+              <li><a routerLink="/{{gameURL}}/items/{{ing.item.slug}}/{{language}}">{{ing.item.name}} x{{ing.num}}</a></li>
             }
           </ul>
         }

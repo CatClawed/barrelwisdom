@@ -23,6 +23,7 @@ export function app(): express.Express {
   server.get('**', express.static(browserDistFolder, {
     maxAge: '1y',
     index: 'index.html',
+    redirect: false
   }));
 
   // All regular routes use the Angular engine

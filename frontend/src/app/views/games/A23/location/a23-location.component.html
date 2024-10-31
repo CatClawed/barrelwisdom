@@ -1,9 +1,5 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
 @if (data; as region) {
   <div>
-    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Location: '+region.name"></Breadcrumb>
     <h1>{{region.name}}</h1>
     <div style="margin-left: 0.5em; margin-right: 0.5em;" class="row">
       <div class="table-of-contents">

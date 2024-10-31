@@ -5,6 +5,7 @@ import { UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { takeUntil } from 'rxjs/operators';
 import { FilterableComponent } from './filterable.component';
 
@@ -26,8 +27,9 @@ export abstract class DialogUseComponent extends FilterableComponent {
         protected route: ActivatedRoute,
         protected location: Location,
         protected seoService: SeoService,
+        protected breadcrumbService: BreadcrumbService,
         protected cdkDialog: Dialog) {
-        super(destroy$, route, seoService);
+        super(destroy$, route, breadcrumbService, seoService);
     }
 
     dialogEvent() {

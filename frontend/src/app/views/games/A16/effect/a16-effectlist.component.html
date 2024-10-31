@@ -1,11 +1,13 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
-
 @if (!error) {
-  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Effects"></Breadcrumb>
-  <h1>Effects</h1>
-  <div class="col-md-10 mx-auto">
+  <ng-template #template let-item="item">
+    <a16-effect (buttonClicked)="openDialog($event)" [inputData]="item"
+      [hideContents]="true"></a16-effect>
+  </ng-template>
+  <filter-list
+    [list]="filteredEffects"
+    [(hide)]="hide"
+    title="Effects"
+    [template]="template">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
         <mat-form-field class="col-md-12" appearance="outline">
@@ -14,38 +16,5 @@
         </mat-form-field>
       </div>
     </form>
-  </div>
-  @if (!filteredEffects) {
-    <div class="d-flex justify-content-center">
-      <div class="spinner-border text-secondary m-5" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
-    </div>
-  }
-  <div class="item-grid">
-    @for (eff of filteredEffects | async; track identify2($index, eff)) {
-      <div class="card card-body">
-        <h4 class="card-title"><a (click)="openDialog(eff.slugname, $event);" href="/{{gameURL}}/effects/{{eff.slugname}}/{{language}}">{{eff.name}}</a></h4>
-        @if (eff.desc) {
-          <p>{{eff.desc}}</p>
-        }
-        @if (eff.effectdata_set) {
-          <ul>
-            @if (eff.effectdata_set.length >= 1) {
-              <li><a routerLink="/{{gameURL}}/items/{{eff.effectdata_set[0].effectlines_set[0].slugname}}">{{eff.effectdata_set[0].effectlines_set[0].name}}</a></li>
-            }
-            @if (eff.effectdata_set.length >= 2) {
-              <li><a routerLink="/{{gameURL}}/items/{{eff.effectdata_set[1].effectlines_set[0].slugname}}">{{eff.effectdata_set[1].effectlines_set[0].name}}</a></li>
-            }
-            @if (eff.effectdata_set.length >= 3) {
-              <li><a routerLink="/{{gameURL}}/items/{{eff.effectdata_set[2].effectlines_set[0].slugname}}">{{eff.effectdata_set[2].effectlines_set[0].name}}</a></li>
-            }
-            @if (eff.effectdata_set.length >= 4) {
-              <li><a (click)="openDialog(eff.slugname, $event);" href="/{{gameURL}}/effects/{{eff.slugname}}/{{language}}">See more...</a></li>
-            }
-          </ul>
-        }
-      </div>
-    }
-  </div>
+  </filter-list>
 }

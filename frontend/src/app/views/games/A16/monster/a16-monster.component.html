@@ -1,18 +1,11 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
-
 @if (data; as monster) {
-  @if (showNav) {
-    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Monsters', '/'+gameURL+'/monsters/'+language]]" [current]="monster.name"></Breadcrumb>
-  }
   <div class="mx-auto row spacer">
     <div class="{{colset}} card card-body">
       <h4 class="card-title card-icon-space">{{monster.name}}</h4>
       <div class="card-icon-position">
         <i class="atelier atelier-np atelier-shallie-race-{{monster.kind}}"></i>
       </div>
-      <img class="image-display" loading="lazy" src="{{imgURL}}monsters/{{monster.slugname}}.webp" alt="{{monster.name}}">
+      <img class="image-display" loading="lazy" src="{{imgURL}}monsters/{{monster.slug}}.webp" alt="{{monster.name}}">
       @if (monster.desc) {
         <p>{{monster.desc}}</p>
       }
@@ -27,7 +20,7 @@
           @if (monster.locations) {
             <ul>
               @for (loc of monster.locations; track loc) {
-                <li><a routerLink="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}" fragment="{{loc.slugname}}">{{loc.name}}</a></li>
+                <li><a routerLink="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}" fragment="{{loc.slug}}">{{loc.name}}</a></li>
               }
             </ul>
           }
@@ -37,7 +30,7 @@
           @if (monster.item_set) {
             <ul>
               @for (drop of monster.item_set; track drop) {
-                <li><a routerLink="/{{gameURL}}/items/{{drop.slugname}}/{{language}}">{{drop.name}}</a></li>
+                <li><a routerLink="/{{gameURL}}/items/{{drop.slug}}/{{language}}">{{drop.name}}</a></li>
               }
             </ul>
           }

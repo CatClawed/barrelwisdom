@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { FacilityList } from '@app/views/games/BRSL/_services/brsl.interface';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -32,10 +33,11 @@ export class BRSLFacilitylistComponent extends DialogUseComponent {
     protected route: ActivatedRoute,
     protected location: Location,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
     private brslservice: BRSLService,
   ) {
-    super(destroy$, router, route, location, seoService, cdkDialog);
+    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = BRSLFacilityComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -44,7 +46,7 @@ export class BRSLFacilitylistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.brslservice, 'facilities');
-    this.genericSEO(`Facilities`, `The list of facilities in ${this.gameTitle}.`);
+    this.genericSettings(`Facilities`, `The list of facilities in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.brslservice.getFacilityList(this.language);
   }

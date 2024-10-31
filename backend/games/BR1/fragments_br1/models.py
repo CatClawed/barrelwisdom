@@ -6,7 +6,7 @@ class Upgrade(models.Model):
     num = models.IntegerField()
 
 class Fragment(models.Model):
-    slugname = models.SlugField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=50, unique=True)
     name = models.CharField(max_length=50)
     effect = models.CharField(max_length=500)
     upgrades = models.ManyToManyField(Upgrade)

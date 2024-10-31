@@ -1,85 +1,80 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
-
 @if (!error) {
-    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Memoria"></Breadcrumb>
-    <h1>Memoria</h1>
-    <div class="col-md-10 mx-auto">
-      <form [formGroup]="pageForm" class="form-horizontal">
-        <div class="row">
-          <mat-form-field class="col-md-8" appearance="outline">
-            <mat-label>Filter...</mat-label>
-            <input style="height: 100%;" matInput formControlName="filtertext">
-            <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
-          </mat-form-field>
-          <mat-form-field class="col-md-4" appearance="outline">
-            <mat-label>Sort by...</mat-label>
-            <mat-select matNativeControl formControlName="stats">
-              @for (stat of a25service.stats | keyvalue; track stat) {
-                <mat-option [value]="stat.key">
-                  {{stat.value[language]}}
-                </mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
-        </div>
-        @if (language != 'ja') {
-          <div class="row">
-            <mat-checkbox formControlName="show_jp" style="padding-bottom:1rem;">
-              Show Japanese Memoria (untranslated)
-            </mat-checkbox>
-          </div>
-        }
-      </form>
-    </div>
-    <div class="item-grid spacer">
-      @for (memoria of filteredMemoria | async; track identify($index, memoria)) {
-        <div style="margin-left:auto;margin-right:auto;">
-          <div style="aspect-ratio:512/410;display:flex;max-height:410px;margin:auto;">
-            <a style="height:100%;aspect-ratio:256/410;"
-              (click)="openDialog(memoria.slug, $event);"
-              href="/{{gameURL}}/memoria/{{memoria.slug}}/{{language}}">
-              <div style="position:relative;">
-                <img loading="lazy"
-                  src="{{imgURL}}memoria/{{memoria.slug}}.webp"
-                  alt="{{memoria.name}}"
-                  style="height:100%;width:256px;aspect-ratio:256/410;">
-                  <div style="position:absolute;bottom:10%;left:50%;transform:translate(-50%,0);font-size:2rem;text-align:center;width:100%;color:white;background:linear-gradient(270deg, rgba(0,0,0,0.5) 0%, rgb(0, 0, 0) 50%, rgba(0,0,0,0.5) 100%);">{{rarity[memoria.rarity]}}</div>
-                </div>
-              </a>
-              <table class="tbl table-compress" style="aspect-ratio:256/410;width:256px;height:100%;text-align:center;"><tbody>
-                <tr>
-                  <th>{{a25service.stats['hp'][language]}}</th>
-                  <td>{{memoria.hp30/100}}%</td>
-                </tr>
-                <tr>
-                  <th>{{a25service.stats['agi'][language]}}</th>
-                  <td>{{memoria.spd30/100}}%</td>
-                </tr>
-                <tr>
-                  <th>{{a25service.stats['patk'][language]}}</th>
-                  <td>{{memoria.patk30/100}}%</td>
-                </tr>
-                <tr>
-                  <th>{{a25service.stats['pdef'][language]}}</th>
-                  <td>{{memoria.pdef30/100}}%</td>
-                </tr>
-                <tr>
-                  <th>{{a25service.stats['matk'][language]}}</th>
-                  <td>{{memoria.matk30/100}}%</td>
-                </tr>
-                <tr>
-                  <th>{{a25service.stats['mdef'][language]}}</th>
-                  <td>{{memoria.mdef30/100}}%</td>
-                </tr>
-              </tbody></table>
-            </div>
-            <p style="max-width:512px;">{{memoria.skill_desc.replaceAll('{0}', memoria.lv1 + ' ~ ' + memoria.lv5).replaceAll('{1}', memoria.lv1 + ' ~ ' + memoria.lv5)}}</p>
-            @if (memoria.note) {
-              <p [innerHTML]="memoria.note"></p>
+  <h1>Memoria</h1>
+  <div class="col-md-10 mx-auto">
+    <form [formGroup]="pageForm" class="form-horizontal">
+      <div class="row">
+        <mat-form-field class="col-md-8" appearance="outline">
+          <mat-label>Filter...</mat-label>
+          <input style="height: 100%;" matInput formControlName="filtertext">
+          <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
+        </mat-form-field>
+        <mat-form-field class="col-md-4" appearance="outline">
+          <mat-label>Sort by...</mat-label>
+          <mat-select matNativeControl formControlName="stats">
+            @for (stat of a25service.stats | keyvalue; track stat) {
+              <mat-option [value]="stat.key">
+                {{stat.value[language]}}
+              </mat-option>
             }
-          </div>
-        }
+          </mat-select>
+        </mat-form-field>
       </div>
-  }
+      @if (language != 'ja') {
+        <div class="row">
+          <mat-checkbox formControlName="show_jp" style="padding-bottom:1rem;">
+            Show Japanese Memoria (untranslated)
+          </mat-checkbox>
+        </div>
+      }
+    </form>
+  </div>
+  <div class="item-grid spacer">
+    @for (memoria of filteredMemoria | async; track identify($index, memoria)) {
+      <div style="margin-left:auto;margin-right:auto;">
+        <div style="aspect-ratio:512/410;display:flex;max-height:410px;margin:auto;">
+          <a style="height:100%;aspect-ratio:256/410;"
+            (click)="openDialog(memoria.slug, $event);"
+            href="/{{gameURL}}/memoria/{{memoria.slug}}/{{language}}">
+            <div style="position:relative;">
+              <img loading="lazy"
+                src="{{imgURL}}memoria/{{memoria.slug}}.webp"
+                alt="{{memoria.name}}"
+                style="height:100%;width:256px;aspect-ratio:256/410;">
+                <div style="position:absolute;bottom:10%;left:50%;transform:translate(-50%,0);font-size:2rem;text-align:center;width:100%;color:white;background:linear-gradient(270deg, rgba(0,0,0,0.5) 0%, rgb(0, 0, 0) 50%, rgba(0,0,0,0.5) 100%);">{{rarity[memoria.rarity]}}</div>
+              </div>
+            </a>
+            <table class="tbl table-compress" style="aspect-ratio:256/410;width:256px;height:100%;text-align:center;"><tbody>
+              <tr>
+                <th>{{a25service.stats['hp'][language]}}</th>
+                <td>{{memoria.hp30/100}}%</td>
+              </tr>
+              <tr>
+                <th>{{a25service.stats['agi'][language]}}</th>
+                <td>{{memoria.spd30/100}}%</td>
+              </tr>
+              <tr>
+                <th>{{a25service.stats['patk'][language]}}</th>
+                <td>{{memoria.patk30/100}}%</td>
+              </tr>
+              <tr>
+                <th>{{a25service.stats['pdef'][language]}}</th>
+                <td>{{memoria.pdef30/100}}%</td>
+              </tr>
+              <tr>
+                <th>{{a25service.stats['matk'][language]}}</th>
+                <td>{{memoria.matk30/100}}%</td>
+              </tr>
+              <tr>
+                <th>{{a25service.stats['mdef'][language]}}</th>
+                <td>{{memoria.mdef30/100}}%</td>
+              </tr>
+            </tbody></table>
+          </div>
+          <p style="max-width:512px;" [innerHTML]="memoria.skill_desc.replaceAll('{0}', memoria.lv1 + ' ~ ' + memoria.lv5).replaceAll('{1}', memoria.lv1 + ' ~ ' + memoria.lv5)"></p>
+          @if (memoria.note) {
+            <p [innerHTML]="memoria.note"></p>
+          }
+        </div>
+      }
+  </div>
+}

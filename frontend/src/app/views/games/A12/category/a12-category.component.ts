@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { A12Service } from '@app/views/games/A12/_services/a12.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
@@ -17,8 +18,9 @@ export class A12CategoryComponent extends SingleComponent {
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
     private a12service: A12Service,
+    protected breadcrumbService: BreadcrumbService,
     protected seoService: SeoService) {
-    super(destroy$, route, seoService);
+    super(destroy$, route, breadcrumbService, seoService);
   }
 
   changeData() {
@@ -27,6 +29,6 @@ export class A12CategoryComponent extends SingleComponent {
   }
 
   afterAssignment(): void {
-    this.genericSEO(this.data.name, `All items in ${this.data.name}`);
+    this.genericSettings(this.data.name, `All items in ${this.data.name}`, '', true);
   }
 } 

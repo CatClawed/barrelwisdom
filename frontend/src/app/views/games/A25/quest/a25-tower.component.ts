@@ -4,6 +4,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { Hint } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -77,15 +78,16 @@ export class A25TowerComponent extends FragmentedComponent {
     protected readonly destroy$: DestroyService,
     protected viewportScroller: ViewportScroller,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     protected a25service: A25Service,) {
-    super(destroy$, route, seoService, viewportScroller, loc);
+    super(destroy$, route, seoService, breadcrumbService, viewportScroller, loc);
   }
 
   changeData() {
     this.slug = this.route.snapshot.params.subject ? this.route.snapshot.params.subject : 'elemental-tower';
     this.gameService(this.a25service, `quests/tower`);
     this.title = this.translations[this.slug] ? this.translations[this.slug][this.language] : undefined;
-    this.genericSEO(this.title, `All Tower floors in ${this.gameTitle}`);
+    this.genericSettings(this.title, `All Tower floors in ${this.gameTitle}`, this.title, true);
     if (!this.title) {
       throw new HttpErrorResponse({status: 404});
     }
@@ -93,6 +95,7 @@ export class A25TowerComponent extends FragmentedComponent {
   }
 
   getHint(hints: Hint[], base_enemy: string) {
-    return hints.find(h => h.base_enemy === base_enemy).desc
+    let h = hints.find(h => h.base_enemy === base_enemy)
+    return h ? h.desc : undefined;
   }
 }

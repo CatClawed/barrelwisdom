@@ -1,9 +1,4 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
-
 @if (data; as category) {
-  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" [current]="'Category: '+category.name"></Breadcrumb>
   <h1>{{category.name}}</h1>
   <div style="margin-top: 1em;" class="col-md-3" ></div>
   <div class="mx-auto row">
@@ -13,7 +8,7 @@
         @for (item of category.item_set; track item) {
           <tr>
             <td>
-              <a routerLink="/{{gameURL}}/items/{{item.slugname}}/{{language}}">{{item.name}}</a>
+              <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
             </td>
             <td>LV {{item.level}}</td>
           </tr>
@@ -27,7 +22,7 @@
           @for (item of category.ingredientcat; track item) {
             <tr>
               <td>
-                <a routerLink="/{{gameURL}}/items/{{item.synthitem.slugname}}/{{language}}">{{item.synthitem.name}}</a>
+                <a routerLink="/{{gameURL}}/items/{{item.synthitem.slug}}/{{language}}">{{item.synthitem.name}}</a>
               </td>
               <td>LV {{item.synthitem.level}}</td>
             </tr>

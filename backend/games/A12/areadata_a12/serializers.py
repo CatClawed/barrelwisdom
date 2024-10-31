@@ -7,12 +7,12 @@ from games.A12.monsters_a12.serializers import A12MonsterNameSerializer
 
 class A12FieldSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
-    slugname = serializers.SerializerMethodField()
+    slug = serializers.SerializerMethodField()
     ingredients = A12ItemNameSerializer(many=True)
     monsters = A12MonsterNameSerializer(many=True)
     class Meta:
         model = Field
-        fields = ['slugname', 'name', 'unlock', 'ingredients', 'monsters', 'note']
+        fields = ['slug', 'name', 'unlock', 'ingredients', 'monsters', 'note']
 
     def to_representation(self, instance):
         result = super(A12FieldSerializer, self).to_representation(instance)
@@ -25,18 +25,18 @@ class A12FieldSerializer(serializers.ModelSerializer):
             return obj.region.reg_ja.name
         else:
             return obj.region.reg_en.name
-    def get_slugname(self,obj):
-        return obj.region.slugname
+    def get_slug(self,obj):
+        return obj.region.slug
 
 
 class A12AreaSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
-    slugname = serializers.SerializerMethodField()
+    slug = serializers.SerializerMethodField()
     fields = A12FieldSerializer(many=True)
 
     class Meta:
         model = Area
-        fields = ['slugname', 'name', 'fields']
+        fields = ['slug', 'name', 'fields']
     def to_representation(self, instance):
         result = super(A12AreaSerializer, self).to_representation(instance)
         return OrderedDict((k, v) for k, v in result.items() 
@@ -48,5 +48,5 @@ class A12AreaSerializer(serializers.ModelSerializer):
             return obj.region.reg_ja.name
         else:
             return obj.region.reg_en.name
-    def get_slugname(self,obj):
-        return obj.region.slugname
+    def get_slug(self,obj):
+        return obj.region.slug

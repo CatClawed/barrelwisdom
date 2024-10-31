@@ -8,7 +8,7 @@ class A16ItemNameSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Item
-        fields = ['slugname', 'name']
+        fields = ['slug', 'name']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -22,7 +22,7 @@ class A16MonsterNameSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Monster
-        fields = ['slugname', 'name']
+        fields = ['slug', 'name']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -36,7 +36,7 @@ class A16MonsterLevelSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Monster
-        fields = ['slugname', 'name', 'level', 'kind']
+        fields = ['slug', 'name', 'level', 'kind']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -54,7 +54,7 @@ class A16MonsterSerializer(serializers.ModelSerializer):
     item_set = A16ItemNameSerializer(many=True)
     class Meta:
         model = Monster
-        fields = ['slugname', 'name', 'desc', 'race', 'hp', 'atk', 'defen', 'spd', 'level', 'exp', 'cole', 'note', 'locations', 'item_set', 'kind']
+        fields = ['slug', 'name', 'desc', 'race', 'hp', 'atk', 'defen', 'spd', 'level', 'exp', 'cole', 'note', 'locations', 'item_set', 'kind']
 
     def to_representation(self, instance):
         result = super(A16MonsterSerializer, self).to_representation(instance)

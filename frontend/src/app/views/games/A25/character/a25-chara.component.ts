@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSliderModule } from '@angular/material/slider';
 import { ActivatedRoute } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { Popover } from '@app/views/_components/popover/popover.component';
@@ -38,19 +39,21 @@ export class A25CharaComponent extends SingleComponent {
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     protected a25service: A25Service) {
-    super(destroy$, route, seoService);
+    super(destroy$, route, breadcrumbService, seoService);
   }
 
   changeData() {
-    this.gameService(this.a25service, 'charas');
+    this.gameService(this.a25service, 'characters');
     return this.a25service.getChara(this.slug, this.language)
   }
 
   afterAssignment(): void {
     this.seoImage = `${this.imgURL}characters/full/${this.data.slug}.webp`
-    this.genericSEO(`${this.data.name} ${this.data.title}`,
-        `Gifts: ${this.data.trait1.name} • ${this.data.trait2.name} • ${this.data.trait3.name}`)
+    this.genericSettings(`${this.data.name} ${this.data.title}`,
+        `Gifts: ${this.data.trait1.name} • ${this.data.trait2.name} • ${this.data.trait3.name}`,
+        'Characters', false, this.inputSlug ? false : true);
   }
 
   getStat(stat: number, stars: number, level: number): number {

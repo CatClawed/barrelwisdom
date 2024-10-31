@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { A15Service } from '@app/views/games/A15/_services/a15.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
@@ -22,8 +23,9 @@ export class A15LocationComponent extends FragmentedComponent {
     private a15service: A15Service,
     public historyService: HistoryService,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     protected viewportScroller: ViewportScroller) {
-    super(destroy$, route, seoService, viewportScroller, loc);
+    super(destroy$, route, seoService, breadcrumbService, viewportScroller, loc);
   }
 
   changeData() {
@@ -31,6 +33,6 @@ export class A15LocationComponent extends FragmentedComponent {
     return this.a15service.getRegion(this.slug, this.language);
   }
   afterAssignment(): void {
-    this.genericSEO(this.data.name, `All items in ${this.data.name}`);
+    this.genericSettings(this.data.name, `All items in ${this.data.name}`, '', true);
   }
 } 

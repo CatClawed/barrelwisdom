@@ -27,7 +27,7 @@ class A25RecipeViewSet(viewsets.ModelViewSet):
     serializer_class = A25RecipeTabSerializer
     filter_backends = [filters.SearchFilter,
                        DjangoFilterBackend, filters.OrderingFilter]
- 
+
     @action(detail=False)
     def en(self, request):
         return Response(A25RecipeTabSerializer(
@@ -206,7 +206,7 @@ class A25SynthViewSet(viewsets.ModelViewSet):
 
     def get_query(self, slug=None, lang="en"):
         if not slug:
-            return 
+            return
         try:
             queryset = (
                 Item.objects

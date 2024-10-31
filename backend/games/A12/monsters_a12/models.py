@@ -10,7 +10,7 @@ class Monster_ja(models.Model):
     desc = models.CharField(max_length=500)
 
 class Monster(models.Model):
-    slugname = models.SlugField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=50, unique=True)
     mon_en = models.OneToOneField(Monster_en, on_delete=models.CASCADE)
     mon_ja = models.OneToOneField(Monster_ja, on_delete=models.CASCADE)
     index = models.IntegerField()

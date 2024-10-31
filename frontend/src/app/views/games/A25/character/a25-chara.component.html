@@ -1,11 +1,4 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
-
 @if (data; as chara) {
-  @if (showNav) {
-    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Characters', '/'+gameURL+'/characters/'+language]]" [current]="chara.name + ' ' + chara.title"></Breadcrumb>
-  }
   <div class="mx-auto row spacer">
     <div class="{{colset}} card card-body">
       <div class="flex">
@@ -18,7 +11,7 @@
             style="background-color:{{a25service.elements[chara.elem]}};display:flex;"></i>
         </div>
       </div>
-      <div style="aspect-ratio:1;max-width:100%;width:400px;filter:drop-shadow(5px 5px 5px black);{{gradients[chara.rarity]}}display:block;border-radius:50%;overflow:hidden !important;margin:auto;">
+      <div style="aspect-ratio:1;max-width:100%;width:400px;{{gradients[chara.rarity]}}display:block;border-radius:50%;overflow:hidden !important;margin:auto;">
         <img loading="lazy"
           style="aspect-ratio:680/724;width:400px;position:relative;"
           src="{{imgURL}}characters/full/{{chara.slug}}.webp" alt="{{chara.name}} {{chara.title}}" />
@@ -78,9 +71,9 @@
               <b>Level: </b>{{slider.value}}<br />
               <mat-slider
                 style="width:100%;"
-                [max]="80"
+                [max]="90"
                 [min]="1">
-                <input matSliderThumb value="80" #slider>
+                <input matSliderThumb value="90" #slider>
               </mat-slider>
             </div>
             <div style="width:45%;float:right;">
@@ -162,7 +155,7 @@
           <tr>
         </tbody></table>
         <table class="tbl"><tbody>
-          <tr class="table-dark-center"><th>Leader @if (language != 'ja') { (Untranslated) }</th></tr>
+          <tr class="table-dark-center"><th>Leader</th></tr>
             <tr>
               <td>
                 <p>
@@ -179,7 +172,11 @@
                 <b>Type: </b>
                 <ul>
                   @for (tag of chara.tags; track tag) {
-                    <li>{{tag}}</li>
+                    <li><popover [title]="tag.name"
+                      [template]="tagPopover"
+                      [context]="{ chars : tag.char }">
+                      {{tag.name}}
+                    </popover></li>
                   }
                 </ul>
               </td>
@@ -190,6 +187,13 @@
     <ng-template #traitPopover let-trait="trait">
       <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5).replaceAll('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
       <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
+    </ng-template>
+    <ng-template #tagPopover let-chars="chars">
+      @for (char of chars; track char) {
+        <a routerLink="/{{gameURL}}/characters/{{char}}/{{language}}">
+          <img src="{{imgURL}}characters/face/{{char}}.webp" style="aspect-ratio:1;max-width:110px;border-radius:50%;">
+        </a>
+      }
     </ng-template>
     @if (showNav) {
       <div class="col-md-3" ></div>

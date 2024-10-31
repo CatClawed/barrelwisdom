@@ -4,6 +4,7 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { Popover } from '@app/views/_components/popover/popover.component';
 import { Area, GatherNode } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
@@ -27,12 +28,13 @@ export class A23LocationComponent extends FragmentedComponent {
   constructor(
     protected route: ActivatedRoute,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     private a23service: A23Service,
     protected readonly destroy$: DestroyService,
     protected loc: Location,
     protected viewportScroller: ViewportScroller,
     private formBuilder: UntypedFormBuilder,) {
-    super(destroy$, route, seoService, viewportScroller, loc);
+    super(destroy$, route, seoService, breadcrumbService, viewportScroller, loc);
     this.gameService(this.a23service, 'locations');
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -47,7 +49,7 @@ export class A23LocationComponent extends FragmentedComponent {
   // TODO: See if I can work out something else for this inner subscribe.
   afterAssignment(): void {
     this.filteredRegion = this.data.areas
-    this.genericSEO(this.data.name, `All items in ${this.data.name}`);
+    this.genericSettings(this.data.name, `All items in ${this.data.name}`, '', true);
     // Chrome note: query second, not first. Firefox can handle either.
     // I am so mad.
     if (this.data.areas.length == 0 || !this.data) {

@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { EffectComponent } from '@app/views/_components/effect/effect.component';
 import { A16Service } from '@app/views/games/A16/_services/a16.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
@@ -11,15 +13,16 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
   selector: 'a16-effect',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports]
+  imports: [...CommonImports, EffectComponent]
 })
 export class A16EffectComponent extends SingleComponent {
   constructor(
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
     private a16service: A16Service,
+    protected breadcrumbService: BreadcrumbService,
     protected seoService: SeoService) {
-    super(destroy$, route, seoService);
+    super(destroy$, route, breadcrumbService, seoService);
   }
 
   changeData() {
@@ -28,6 +31,9 @@ export class A16EffectComponent extends SingleComponent {
   }
 
   afterAssignment(): void {
-    this.genericSEO(this.data.name, this.data.desc);
+    this.genericSettings(this.data.name, this.data.desc,
+      'Effects',
+      false,
+      this.inputSlug ? false : true);
   }
 }

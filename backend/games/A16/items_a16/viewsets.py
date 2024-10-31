@@ -11,7 +11,7 @@ class A16ItemViewSet(viewsets.ModelViewSet):
     queryset = Item.objects.all()
     serializer_class = A16ItemSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    lookup_field = 'slugname'
+    lookup_field = 'slug'
 
     @action(detail=False)
     def en(self, request): 
@@ -45,9 +45,9 @@ class A16ItemViewSet(viewsets.ModelViewSet):
         serializer = A16ItemSerializer(queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)
 
-    # allows easy access via catect/slugname/en
+    # allows easy access via catect/slug/en
     @action(detail=True, methods=['get'], url_path="en")
-    def en_full(self, request, slugname):
+    def en_full(self, request, slug):
         try:
             queryset = (
                 Item.objects
@@ -68,7 +68,7 @@ class A16ItemViewSet(viewsets.ModelViewSet):
                     'book_set__item_en',
                     'effectlines_set__effects__effect__eff_en'
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -76,7 +76,7 @@ class A16ItemViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ja")
-    def ja_full(self, request, slugname):
+    def ja_full(self, request, slug):
         try:
             queryset = (
                 Item.objects
@@ -97,7 +97,7 @@ class A16ItemViewSet(viewsets.ModelViewSet):
                     'book_set__item_ja',
                     'effectlines_set__effects__effect__eff_ja'
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -108,7 +108,7 @@ class A16BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = A16BookSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    lookup_field = 'slugname'
+    lookup_field = 'slug'
 
     @action(detail=False)
     def en(self, request):
@@ -138,9 +138,9 @@ class A16BookViewSet(viewsets.ModelViewSet):
         serializer = A16BookSerializer(queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)
 
-    # allows easy access via catect/slugname/en
+    # allows easy access via catect/slug/en
     @action(detail=True, methods=['get'], url_path="en")
-    def en_full(self, request, slugname):
+    def en_full(self, request, slug):
         try:
             queryset = (
                 Book.objects
@@ -150,7 +150,7 @@ class A16BookViewSet(viewsets.ModelViewSet):
                 .prefetch_related(
                     'items__item_en'
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -158,7 +158,7 @@ class A16BookViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ja")
-    def ja_full(self, request, slugname):
+    def ja_full(self, request, slug):
         try:
             queryset = (
                 Book.objects
@@ -168,7 +168,7 @@ class A16BookViewSet(viewsets.ModelViewSet):
                 .prefetch_related(
                     'items__item_ja'
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404

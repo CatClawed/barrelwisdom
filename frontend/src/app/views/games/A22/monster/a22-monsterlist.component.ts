@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { Monster } from '@app/views/games/A22/_services/a22.interface';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -32,10 +33,11 @@ export class A22MonsterlistComponent extends DialogUseComponent {
     protected route: ActivatedRoute,
     protected location: Location,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
     private a22service: A22Service,
   ) {
-    super(destroy$, router, route, location, seoService, cdkDialog);
+    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A22MonsterComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -45,7 +47,7 @@ export class A22MonsterlistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.a22service, 'monsters');
-    this.genericSEO(`Monsters`, `The list of monsters in ${this.gameTitle}.`);
+    this.genericSettings(`Monsters`, `The list of monsters in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a22service.getMonsterList(this.language);
   }

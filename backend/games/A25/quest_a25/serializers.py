@@ -11,7 +11,7 @@ class A25EnemySkillSerializer(A25DefaultSerializer):
     area = serializers.SerializerMethodField()
     class Meta:
         model = EnemySkill
-        fields = ['name', 'elem', 'area', 'wt', 'pow1'] 
+        fields = ['name', 'elem', 'area', 'wt', 'pow1']
     def get_area(self, obj):
         if obj.area:
             return A25DefaultSerializer.get_text(self,obj.area)
@@ -20,7 +20,7 @@ class A25SkillKindSerializer(A25DefaultSerializer):
     skill = A25EnemySkillSerializer()
     class Meta:
         model = SkillKind
-        fields = ['kind', 'skill'] 
+        fields = ['kind', 'skill']
     def get_area(self, obj):
         if obj.area:
             return A25DefaultSerializer.get_text(self,obj.area)
@@ -100,6 +100,8 @@ class A25ScoreBattleDiffSerializer(A25DefaultSerializer):
 class A25ScoreBattleSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()
     difficulties = A25ScoreBattleDiffSerializer(many=True)
+    chapter = serializers.IntegerField(source='chap')
+    section = serializers.IntegerField(source='sect')
     class Meta:
         model = ScoreBattle
         fields = ['name', 'chapter', 'section', 'difficulties']
@@ -130,6 +132,8 @@ class A25DungeonItemSerializer(A25DefaultSerializer):
         fields = ['name']
 
 class A25ScoreBattleItemSerializer(A25DefaultSerializer):
+    chapter = serializers.IntegerField(source='chap')
+    section = serializers.IntegerField(source='sect')
     class Meta:
         model = ScoreBattle
         fields = ['chapter', 'section']

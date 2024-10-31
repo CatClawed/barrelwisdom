@@ -1,11 +1,4 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
-
 @if (data; as item) {
-  @if (showNav) {
-    <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL], ['Items', '/'+gameURL+'/items/'+language]]" [current]="item.name"></Breadcrumb>
-  }
   <div class="mx-auto row spacer">
     <div class="{{colset}} card card-body">
       <div class="flex">
@@ -14,7 +7,7 @@
           <b>{{item.kind}}</b>
         }
       </div>
-      <p>{{item.description}}</p>
+      <p>{{item.desc}}</p>
       @if (item.effect) {
         <p><b>Effect: </b>{{item.effect}}</p>
       }
@@ -27,7 +20,7 @@
       @if (item.missions) {
         <ul>
           @for (miss of item.missions; track miss) {
-            <li><a routerLink="/{{gameURL}}/missions/{{language}}" fragment="{{miss.slugname}}">{{miss.name}}</a></li>
+            <li><a routerLink="/{{gameURL}}/missions/{{language}}" fragment="{{miss.slug}}">{{miss.name}}</a></li>
           }
         </ul>
       }
@@ -47,7 +40,7 @@
       @if (item.demons) {
         <ul>
           @for (demon of item.demons; track demon) {
-            <li><a routerLink="/{{gameURL}}/demons/{{demon.slugname}}/{{language}}">{{demon.name}}</a></li>
+            <li><a routerLink="/{{gameURL}}/demons/{{demon.slug}}/{{language}}">{{demon.name}}</a></li>
           }
         </ul>
       }
@@ -57,7 +50,7 @@
       @if (item.ingredient_set) {
         <ul>
           @for (ing of item.ingredient_set; track ing) {
-            <li><a routerLink="/{{gameURL}}/items/{{ing.item.slugname}}/{{language}}">{{ing.item.name}}</a> x{{ing.num}}</li>
+            <li><a routerLink="/{{gameURL}}/items/{{ing.item.slug}}/{{language}}">{{ing.item.name}}</a> x{{ing.num}}</li>
           }
         </ul>
       }

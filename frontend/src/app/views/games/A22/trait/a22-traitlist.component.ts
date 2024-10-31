@@ -5,6 +5,7 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { Tooltip } from '@app/views/_components/tooltip/tooltip.component';
 import { Trait } from '@app/views/games/A22/_services/a22.interface';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
@@ -31,9 +32,10 @@ export class A22TraitlistComponent extends DialogUseComponent {
     protected route: ActivatedRoute,
     protected location: Location,
     protected seoService: SeoService,
+    protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
     private a22service: A22Service,) {
-    super(destroy$, router, route, location, seoService, cdkDialog);
+    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A22TraitComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -43,7 +45,7 @@ export class A22TraitlistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.a22service, 'traits');
-    this.genericSEO(`Traits`, `The list of traits in ${this.gameTitle}.`);
+    this.genericSettings(`Traits`, `The list of traits in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a22service.getTraitList(this.language);
   }

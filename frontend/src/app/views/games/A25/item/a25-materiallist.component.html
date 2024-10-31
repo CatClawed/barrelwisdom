@@ -1,9 +1,4 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
-
 @if (!error) {
-  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Materials"></Breadcrumb>
   <h1>Materials</h1>
   <div class="col-md-10 mx-auto">
     <form [formGroup]="pageForm" class="form-horizontal">
@@ -93,4 +88,4 @@
         </div>
       }
     </div>
-  }
+}

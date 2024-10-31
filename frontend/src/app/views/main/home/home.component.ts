@@ -2,11 +2,11 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
-import { BlogPaginator } from '@app/views/main/_interfaces/blog';
-import { BlogService } from '@app/views/main/_services/blog.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { ErrorComponent } from '@app/views/_components/error/error.component';
+import { BlogPaginator } from '@app/views/main/_interfaces/blog';
+import { BlogService } from '@app/views/main/_services/blog.service';
 import { catchError, mergeMap, of, takeUntil } from 'rxjs';
 
 @Component({
@@ -14,14 +14,14 @@ import { catchError, mergeMap, of, takeUntil } from 'rxjs';
   styleUrls: ['home.scss'],
   providers: [DestroyService],
   standalone: true,
-  imports: [ErrorComponent, RouterLink, DatePipe, MatPaginatorModule]
+  imports: [RouterLink, DatePipe, MatPaginatorModule]
 })
 
 export class HomeComponent implements OnInit {
   blog: BlogPaginator;
   path: number;
   limit: number = 10;
-  error: string = '';
+  error: boolean = false;
   totalPages: number;
   baseUrl: string;
 
@@ -30,20 +30,23 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private blogService: BlogService,
+    protected breadcrumbService: BreadcrumbService,
     protected seoService: SeoService) {
   }
 
   ngOnInit(): void {
+    this.breadcrumbService.setBreadcrumbs([], undefined)
     this.initializePage()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: data => {
           this.blog = data
-          this.error = ``;
+          this.error = this.breadcrumbService.setStatus(200);
           this.totalPages = Math.ceil(this.blog.count / this.limit)
         },
         error: error => {
-          this.error = `${error.status}`
+          this.blog = null;
+          this.error = this.breadcrumbService.setStatus(error.status);
         }
       })
 
@@ -57,14 +60,14 @@ export class HomeComponent implements OnInit {
         }),
         catchError(error => {
           this.blog = null;
-          this.error = `${error.status}`;
+          this.error = this.breadcrumbService.setStatus(error.status);
           return of(undefined)
         }),
         takeUntil(this.destroy$)
       ).subscribe(data => {
         if (data) {
           this.blog = data;
-          this.error = ``;
+          this.error = this.breadcrumbService.setStatus(200);
           this.totalPages = Math.ceil(this.blog.count / this.limit)
         }
       });

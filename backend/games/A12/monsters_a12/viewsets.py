@@ -11,7 +11,7 @@ class A12MonsterViewSet(viewsets.ModelViewSet):
     queryset = Monster.objects.all()
     serializer_class = A12MonsterSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    lookup_field = 'slugname'
+    lookup_field = 'slug'
 
     @action(detail=False)
     def en(self, request):
@@ -35,9 +35,9 @@ class A12MonsterViewSet(viewsets.ModelViewSet):
         serializer = A12MonsterLevelSerializer(queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)
 
-    # allows easy access via catect/slugname/en
+    # allows easy access via catect/slug/en
     @action(detail=True, methods=['get'], url_path="en")
-    def en_full(self, request, slugname):
+    def en_full(self, request, slug):
         try:
             queryset = (
                 Monster.objects
@@ -48,7 +48,7 @@ class A12MonsterViewSet(viewsets.ModelViewSet):
                     'item_set__item_en',
                     'locations__reg_en'
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -56,7 +56,7 @@ class A12MonsterViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ja")
-    def ja_full(self, request, slugname):
+    def ja_full(self, request, slug):
         try:
             queryset = (
                 Monster.objects
@@ -67,7 +67,7 @@ class A12MonsterViewSet(viewsets.ModelViewSet):
                     'item_set__item_ja',
                     'locations__reg_ja'
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404

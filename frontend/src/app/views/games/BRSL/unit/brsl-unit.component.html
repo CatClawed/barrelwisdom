@@ -1,9 +1,4 @@
-@if (error) {
-  <Error [errorCode]="error"></Error>
-}
-
 @if (!error) {
-  <Breadcrumb [breadcrumbs]="[[gameTitle, '/'+gameURL]]" current="Units"></Breadcrumb>
   <h1>Units</h1>
   @if (data; as units) {
     @for (unit of units; track unit) {

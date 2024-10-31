@@ -71,23 +71,20 @@ class RecipeTab(models.Model):
             ]
 
 class RecipePage(models.Model):
-    desc  = models.ForeignKey(Desc, on_delete=models.CASCADE, null=True, blank=True) # events
-    tab   = models.ForeignKey(RecipeTab, on_delete=models.CASCADE)
-    min_x = models.IntegerField()
-    max_x = models.IntegerField()
+    desc = models.ForeignKey(Desc, on_delete=models.CASCADE, null=True, blank=True) # events
+    tab  = models.ForeignKey(RecipeTab, on_delete=models.CASCADE)
     book = models.IntegerField(default=0)
-    gbl = models.BooleanField(default=False)
+    gbl  = models.BooleanField(default=False)
     class Meta:
         ordering = [
-                "min_x"
+                "book"
             ]
 
 class Recipe(models.Model):
-    page = models.ForeignKey(RecipePage, on_delete=models.CASCADE, null=True, blank=True)
-    item = models.ForeignKey(Item, on_delete=models.CASCADE)
-    x    = models.IntegerField()
-    y    = models.IntegerField()
-    book = models.IntegerField()
+    page  = models.ForeignKey(RecipePage, on_delete=models.CASCADE, null=True, blank=True)
+    item  = models.ForeignKey(Item, on_delete=models.CASCADE)
+    order = models.IntegerField(default=0)
+    book  = models.IntegerField()
 
     color1 = models.ForeignKey(Filterable, on_delete=models.CASCADE, related_name="recipe_color1")
     color2 = models.ForeignKey(Filterable, on_delete=models.CASCADE, related_name="recipe_color2")
@@ -108,8 +105,7 @@ class Recipe(models.Model):
     class Meta:
         ordering = [
             "book",
-            "x",
-            "y",
+            "order"
         ]
 
 # dirty or not it's coming here

@@ -11,10 +11,10 @@ class A16AreaViewSet(viewsets.ModelViewSet):
     queryset = Area.objects.all()
     serializer_class = A16AreaSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    lookup_field = 'slugname'
+    lookup_field = 'slug'
 
     @action(detail=True, methods=['get'], url_path="en")
-    def en_full(self, request, slugname):
+    def en_full(self, request, slug):
         try:
             queryset = (
                 Area.objects
@@ -28,7 +28,7 @@ class A16AreaViewSet(viewsets.ModelViewSet):
                     'fields__monsters__mon_en',
                     'fields__region__reg_en',
                 )
-                .get(region__slugname=slugname)
+                .get(region__slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -36,7 +36,7 @@ class A16AreaViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ja")
-    def ja_full(self, request, slugname):
+    def ja_full(self, request, slug):
         try:
             queryset = (
                 Area.objects
@@ -50,7 +50,7 @@ class A16AreaViewSet(viewsets.ModelViewSet):
                     'fields__monsters__mon_ja',
                     'fields__region__reg_en',
                 )
-                .get(region__slugname=slugname)
+                .get(region__slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404

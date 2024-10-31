@@ -1,6 +1,6 @@
 from rest_framework import viewsets, filters
-from games.A25.chara_a25.models import Character, Memoria
-from games.A25.chara_a25.serializers import A25CharaListSerializer, A25CharaSerializer, A25MemoriaSerializer, A25MemoriaListSerializer
+from games.A25.chara_a25.models import Character, Memoria, Emblem
+from games.A25.chara_a25.serializers import A25CharaListSerializer, A25CharaSerializer, A25MemoriaSerializer, A25EmblemSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
@@ -104,7 +104,7 @@ class A25MemoriaViewSet(viewsets.ModelViewSet):
             'skill_name',
             'skill_desc',
         )
-    )
+    ).exclude(slug="69")
     serializer_class = A25MemoriaSerializer
     filter_backends = [filters.SearchFilter,
                        DjangoFilterBackend, filters.OrderingFilter]
@@ -161,3 +161,51 @@ class A25MemoriaViewSet(viewsets.ModelViewSet):
     def ja_full(self, request, slug):
         return self.get_query(lang="ja", slug=slug)
 
+class A25EmblemViewSet(viewsets.ModelViewSet):
+    queryset = (
+        Emblem.objects
+        .select_related(
+            'name',
+            'desc',
+        )
+    )
+    serializer_class = A25EmblemSerializer
+    filter_backends = [filters.SearchFilter,
+                       DjangoFilterBackend, filters.OrderingFilter]
+    lookup_field = 'slug'
+
+    def get_query(self, slug=None, lang="en"):
+        return Response(A25EmblemSerializer(
+            self.queryset, many=True, context={'language': lang}).data)
+
+    @action(detail=False)
+    def en(self, request):
+        return self.get_query(lang="en")
+
+    @action(detail=True, url_path="en")
+    def en_full(self, request, slug):
+        return self.get_query(lang="en", slug=slug)
+
+    @action(detail=False)
+    def sc(self, request):
+        return self.get_query(lang="sc")
+
+    @action(detail=True, url_path="sc")
+    def sc_full(self, request, slug):
+        return self.get_query(lang="sc", slug=slug)
+
+    @action(detail=False)
+    def tc(self, request):
+        return self.get_query(lang="tc")
+
+    @action(detail=True, url_path="tc")
+    def tc_full(self, request, slug):
+        return self.get_query(lang="tc", slug=slug)
+
+    @action(detail=False)
+    def ja(self, request):
+        return self.get_query(lang="ja")
+
+    @action(detail=True, url_path="ja")
+    def ja_full(self, request, slug):
+        return self.get_query(lang="ja", slug=slug)

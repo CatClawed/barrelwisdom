@@ -59,17 +59,6 @@ export interface Effect {
     efftype: string;
     effsub: string;
     effects: ExtraEffs[];
-}
-
-export interface EffectFull {
-    slug: string;
-    note: string;
-    name: string;
-    desc: string;
-    efftype: string;
-    effsub: string;
-    parent: NameLink[];
-    effects: ExtraEffs[];
     effectline_set: NameLink[];
     attTag0: string;
     actTag0: string;

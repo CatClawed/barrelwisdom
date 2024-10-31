@@ -187,6 +187,26 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'collect',
+    children: [
+      {
+        path: '',
+        loadComponent: ()=> import('@app/views/games/A25/collection/a25-collection.component').then(m=>m.A25CollectionComponent),
+        canActivate: [LanguageGuard]
+      },
+      {
+        path: ':language',
+        loadComponent: ()=> import('@app/views/games/A25/collection/a25-collection.component').then(m=>m.A25CollectionComponent),
+        canActivate: [LanguageGuard]
+      },
+      {
+        path: ':code/:language',
+        loadComponent: ()=> import('@app/views/games/A25/collection/a25-collection.component').then(m=>m.A25CollectionComponent),
+        canActivate: [LanguageGuard]
+      },
+    ]
+  },
+  {
     path: '',
     redirectTo: '/resleri/home',
     pathMatch: 'full'

@@ -11,7 +11,7 @@ class A16ItemNameSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Item
-        fields = ['slugname', 'name']
+        fields = ['slug', 'name']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -89,7 +89,7 @@ class A16ItemNameDisSerializer(serializers.ModelSerializer):
     disassembly_set = A16DissasembleSerializer(many=True)
     class Meta:
         model = Item
-        fields = ['slugname', 'name', 'disassembly_set']
+        fields = ['slug', 'name', 'disassembly_set']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -115,7 +115,7 @@ class A16BookNameSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Book
-        fields = ['slugname', 'name']
+        fields = ['slug', 'name']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -132,7 +132,7 @@ class A16ItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Item
-        fields = ['slugname', 'name', 'level', 'slots', 'evalue', 'fire', 'water', 'wind', 'earth', 'effect', 'kind', 'categories', 'ingredient_set']
+        fields = ['slug', 'name', 'level', 'slots', 'evalue', 'fire', 'water', 'wind', 'earth', 'effect', 'kind', 'categories', 'ingredient_set']
 
     def to_representation(self, instance):
         result = super(A16ItemSerializer, self).to_representation(instance)
@@ -162,7 +162,7 @@ class A16ItemFullSerializer(serializers.ModelSerializer):
     book_set = A16BookNameSerializer(many=True)
     class Meta:
         model = Item
-        fields = ['slugname', 'name', 'desc', 'level', 'slots', 'evalue', 'fire', 'water', 'wind', 'earth', 'effect', 'size', 'kind', 'locations', 'monsters', 'properties', 'categories', 'ingredient_set', 'characterequip_set', 'equip_set', 'disassembly_set', 'disassembled_set', 'effectlines_set', 'book_set']
+        fields = ['slug', 'name', 'desc', 'level', 'slots', 'evalue', 'fire', 'water', 'wind', 'earth', 'effect', 'size', 'kind', 'locations', 'monsters', 'properties', 'categories', 'ingredient_set', 'characterequip_set', 'equip_set', 'disassembly_set', 'disassembled_set', 'effectlines_set', 'book_set']
 
     def to_representation(self, instance):
         result = super(A16ItemFullSerializer, self).to_representation(instance)
@@ -189,7 +189,7 @@ class A16BookSerializer(serializers.ModelSerializer):
     items = A16ItemNameSerializer(many=True)
     class Meta:
         model = Book
-        fields = ['slugname', 'name', 'desc', 'items', 'note']
+        fields = ['slug', 'name', 'desc', 'items', 'note']
 
     def get_name(self,obj):
         if 'language' not in self.context:

@@ -22,16 +22,16 @@ export class BR1Service {
       return this.http.get<Item[]>(`${environment.apiUrl}/BR1/item/${language}/`);
     }
 
-    getItem(slugname: string, language: string): Observable<Item> {
-      return this.http.get<Item>(`${environment.apiUrl}/BR1/item/${slugname}/${language}/`);
+    getItem(slug: string, language: string): Observable<Item> {
+      return this.http.get<Item>(`${environment.apiUrl}/BR1/item/${slug}/${language}/`);
     }
 
     getDemonList(language: string): Observable<Demon[]> {
       return this.http.get<Demon[]>(`${environment.apiUrl}/BR1/demon/${language}/`);
     }
     
-    getDemon(slugname: string, language: string): Observable<Demon> {
-      return this.http.get<Demon>(`${environment.apiUrl}/BR1/demon/${slugname}/${language}/`);
+    getDemon(slug: string, language: string): Observable<Demon> {
+      return this.http.get<Demon>(`${environment.apiUrl}/BR1/demon/${slug}/${language}/`);
     }
 
     getMissionList(language: string): Observable<Mission[]> {

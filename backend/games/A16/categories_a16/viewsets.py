@@ -11,7 +11,7 @@ class A16CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = A16CategorySerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    lookup_field = 'slugname'
+    lookup_field = 'slug'
 
     @action(detail=False)
     def en(self, request):
@@ -36,7 +36,7 @@ class A16CategoryViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="en")
-    def en_full(self, request, slugname):
+    def en_full(self, request, slug):
         try:
             queryset = (
                 Category.objects
@@ -47,7 +47,7 @@ class A16CategoryViewSet(viewsets.ModelViewSet):
                     'item_set__item_en',
                     'ingredientcat__synthitem__item_en'
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404
@@ -55,7 +55,7 @@ class A16CategoryViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'], url_path="ja")
-    def ja_full(self, request, slugname):
+    def ja_full(self, request, slug):
         try:
             queryset = (
                 Category.objects
@@ -66,7 +66,7 @@ class A16CategoryViewSet(viewsets.ModelViewSet):
                     'item_set__item_ja',
                     'ingredientcat__synthitem__item_ja'
                 )
-                .get(slugname=slugname)
+                .get(slug=slug)
             )
         except ObjectDoesNotExist:
             raise Http404

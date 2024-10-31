@@ -5,16 +5,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Blog, Comment } from '@app/views/main/_interfaces/blog';
-import { User } from '@app/views/main/_interfaces/user';
 import { AuthenticationService } from '@app/services/authentication.service';
-import { BlogService } from '@app/views/main/_services/blog.service';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbComponent } from '@app/views/_components/breadcrumb/breadcrumb.component';
-import { ErrorComponent } from '@app/views/_components/error/error.component';
+import { Blog, Comment } from '@app/views/main/_interfaces/blog';
+import { User } from '@app/views/main/_interfaces/user';
+import { BlogService } from '@app/views/main/_services/blog.service';
 import { MarkdownComponent, MarkdownPipe, MarkdownService, provideMarkdown } from 'ngx-markdown';
+import { of } from 'rxjs';
 import { catchError, switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -22,7 +22,7 @@ import { catchError, switchMap, takeUntil } from 'rxjs/operators';
   styleUrls: ['blog.scss'],
   providers: [DestroyService, provideMarkdown({sanitize: SecurityContext.NONE})],
   standalone: true,
-  imports: [ErrorComponent, BreadcrumbComponent, MatFormFieldModule, MatInputModule,
+  imports: [MatFormFieldModule, MatInputModule,
     ReactiveFormsModule, RouterLink, MarkdownComponent, MarkdownPipe,
     CommonModule]
 })
@@ -30,11 +30,10 @@ import { catchError, switchMap, takeUntil } from 'rxjs/operators';
 export class BlogComponent implements OnInit {
   user: User;
   blog: Blog;
-  error: string = '';
+  error: boolean = false;
   body: SafeHtml;
   allowedToEdit = false;
   gameName = "";
-  breadcrumbs = [];
   pageForm: UntypedFormGroup;
   fakeComment: Comment = null;
   success: boolean;
@@ -47,6 +46,7 @@ export class BlogComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private formBuilder: UntypedFormBuilder,
     private markdownService: MarkdownService,
+    protected breadcrumbService: BreadcrumbService,
     protected seoService: SeoService) {
     this.pageForm = this.formBuilder.nonNullable.group({
       name: "",
@@ -58,16 +58,22 @@ export class BlogComponent implements OnInit {
     this.authenticationService.user.pipe(takeUntil(this.destroy$)).subscribe(x => this.user = x);
     this.route.paramMap.pipe(
       switchMap(params => {
-        this.error = ``;
         return this.blogService.getBlog(params.get('title'), params.get('section'))
           .pipe(
-            catchError(error => this.error = `${error.status}`)
+            catchError(error => {
+              this.blog = null;
+              this.error = this.breadcrumbService.setStatus(error.status);
+              return of(undefined)
+            })
           )
       }),
       takeUntil(this.destroy$)
     )
       .subscribe(data => {
-        this.setBlog(data)
+        if (data) {
+          this.setBlog(data)
+          this.error = this.breadcrumbService.setStatus(200);
+        }
       });
   }
 
@@ -120,10 +126,6 @@ export class BlogComponent implements OnInit {
   }
 
   setBlog(blog) {
-    if (this.error) {
-      this.blog = null;
-      return;
-    }
     this.blog = blog;
     this.gameName = (this.blog.section.fullname) ? `${this.blog.section.fullname} - ` : ""; // gotta make sure google sees the game name...
     this.body = this.markdownService.parse(this.blog.body);
@@ -140,16 +142,20 @@ export class BlogComponent implements OnInit {
         }
       }
     }
-    if (this.breadcrumbs.length > 0) {
-      this.breadcrumbs.pop();
-    }
     if (this.blog.section.name !== "blog") {
-      this.breadcrumbs.push([this.blog.section.fullname, '/' + this.blog.section.name])
+      this.breadcrumbService.setBreadcrumbs(
+        [[this.blog.section.fullname, `/${this.blog.section.name}`]],
+        this.blog.title);
+    }
+    else {
+      this.breadcrumbService.setBreadcrumbs(
+        [],
+        this.blog.title);
     }
     this.seoService.SEOSettings(
-      `${this.blog.section.name}/${this.blog.slugtitle}`,
+      `${this.blog.section.name}/${this.blog.slug}`,
       this.blog.section.fullname ? `${this.blog.title} - ${this.blog.section.fullname}` : this.blog.title,
-      this.blog.description,
+      this.blog.desc,
       this.blog.image
     );
   }

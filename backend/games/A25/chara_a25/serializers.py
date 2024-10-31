@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from games.A25.chara_a25.models import Character, Memoria, Passive, Skill
+from games.A25.chara_a25.models import Character, Memoria, Passive, Skill, Emblem
 from collections import OrderedDict
 from games.A25.misc_a25.serializers import A25DefaultSerializer, A25TraitSimpleSerializer
 
@@ -56,7 +56,7 @@ class A25CharaListSerializer(A25DefaultSerializer):
         model = Character
         fields = [
             'slug', 'name', 'title', 'role', 'elem', 'rarity', 'gbl',
-            'color1', 'color2'
+            'color1', 'color2', 'id', 'date'
         ]
     def get_title(self, obj):
         return A25DefaultSerializer.get_text_gbl(self,obj.title,obj.gbl)
@@ -93,17 +93,17 @@ class A25CharaSerializer(A25DefaultSerializer):
         if obj.limit:
             return A25DefaultSerializer.get_text(self,obj.limit)
     def get_leader_skill_name(self, obj):
-        return A25DefaultSerializer.get_text_gbl(self,obj.leader_skill_name,False)
+        return A25DefaultSerializer.get_text_gbl(self,obj.leader_skill_name,obj.gbl)
     def get_leader_skill_desc(self, obj):
-        return A25DefaultSerializer.get_text_gbl(self,obj.leader_skill_desc,False)
+        return A25DefaultSerializer.get_text_gbl(self,obj.leader_skill_desc,obj.gbl)
     def get_leader_skill_chars(self, obj):
         if obj.leader_skill_tag:
             chars = obj.leader_skill_tag.chara_tags.all()
             return [char.slug for char in chars]
     def get_tags(self, obj):
-            return [A25DefaultSerializer.get_text_gbl(self,tag,False)
-                for tag in obj.tags.all()
-            ]
+        return [{"name": A25DefaultSerializer.get_text_gbl(self,tag,obj.gbl),
+            "char": [char.slug for char in Character.objects.filter(tags=tag)]}
+            for tag in obj.tags.all()]
 
 class A25MemoriaListSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()
@@ -122,8 +122,8 @@ class A25MemoriaSerializer(A25DefaultSerializer):
         model = Memoria
         fields = [
             'slug', 'name', 'skill_name', 'skill_desc', 'rarity', 'limit',
-            'note', 'gbl', 'lv1', 'lv2', 'lv3', 'lv4', 'lv5',
-            "hp30", "spd30", "patk30", "pdef30", "matk30", "mdef30", 'gbl'
+            'note', 'gbl', 'lv1', 'lv2', 'lv3', 'lv4', 'lv5', 'date',
+            "hp30", "spd30", "patk30", "pdef30", "matk30", "mdef30", 'gbl', 'id'
         ]
     def get_skill_name(self, obj):
         return A25DefaultSerializer.get_text_gbl(self,obj.skill_name,obj.gbl)
@@ -132,3 +132,12 @@ class A25MemoriaSerializer(A25DefaultSerializer):
     def get_limit(self, obj):
         if obj.limit:
             return A25DefaultSerializer.get_text(self,obj.limit)
+
+class A25EmblemSerializer(A25DefaultSerializer):
+    name = serializers.SerializerMethodField()
+    desc = serializers.SerializerMethodField()
+    class Meta:
+        model = Emblem
+        fields = [
+            'eid', 'kind', 'name', 'desc', 'lv1', 'lv2', 'lv3', 'gbl'
+        ]
