@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Character, Dungeon, Emblem, Item, Memoria, NameLink, RecipeTab, Research, ScoreBattle, Tower, Trait, Update } from '@app/views/games/A25/_services/a25.interface';
 import { environment } from '@environments/environment';
@@ -7,10 +7,7 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class A25Service {
-
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
+  private readonly version = '10-30-24';
 
   constructor(
     private http: HttpClient,
@@ -83,67 +80,67 @@ export class A25Service {
   }
 
   getFilter(slug: string, language: string): Observable<NameLink[]> {
-    return this.http.get<NameLink[]>(`${environment.apiUrl}/A25/filterable/${slug}/${language}/`);
+    return this.http.get<NameLink[]>(`${environment.apiUrl}/A25/filterable/${slug}/${language}/?v=${this.version}`);
   }
 
   getTraitList(language: string): Observable<Trait[]> {
-    return this.http.get<Trait[]>(`${environment.apiUrl}/A25/trait/${language}/`);
+    return this.http.get<Trait[]>(`${environment.apiUrl}/A25/trait/${language}/?v=${this.version}`);
   }
 
   getTrait(slug: string, language: string): Observable<Trait> {
-    return this.http.get<Trait>(`${environment.apiUrl}/A25/trait/${slug}/${language}/`);
+    return this.http.get<Trait>(`${environment.apiUrl}/A25/trait/${slug}/${language}/?v=${this.version}`);
   }
 
   getMaterialList(language: string): Observable<Item[]> {
-    return this.http.get<Item[]>(`${environment.apiUrl}/A25/material/${language}/`);
+    return this.http.get<Item[]>(`${environment.apiUrl}/A25/material/${language}/?v=${this.version}`);
   }
 
   getMaterial(slug: string, language: string): Observable<Item> {
-    return this.http.get<Item>(`${environment.apiUrl}/A25/material/${slug}/${language}/`);
+    return this.http.get<Item>(`${environment.apiUrl}/A25/material/${slug}/${language}/?v=${this.version}`);
   }
 
   getSynthList(language: string): Observable<Item[]> {
-    return this.http.get<Item[]>(`${environment.apiUrl}/A25/synth/${language}/`);
+    return this.http.get<Item[]>(`${environment.apiUrl}/A25/synth/${language}/?v=${this.version}`);
   }
 
   getSynth(slug: string, language: string): Observable<Item> {
-    return this.http.get<Item>(`${environment.apiUrl}/A25/synth/${slug}/${language}/`);
+    return this.http.get<Item>(`${environment.apiUrl}/A25/synth/${slug}/${language}/?v=${this.version}`);
   }
 
   getRecipeList(language: string): Observable<RecipeTab[]> {
-    return this.http.get<RecipeTab[]>(`${environment.apiUrl}/A25/recipe/${language}/`);
+    return this.http.get<RecipeTab[]>(`${environment.apiUrl}/A25/recipe/${language}/?v=${this.version}`);
   }
 
   getCharaList(language: string): Observable<Character[]> {
-    return this.http.get<Character[]>(`${environment.apiUrl}/A25/character/${language}/`);
+    return this.http.get<Character[]>(`${environment.apiUrl}/A25/character/${language}/?v=${this.version}`);
   }
 
   getChara(slug: string, language: string): Observable<Character> {
-    return this.http.get<Character>(`${environment.apiUrl}/A25/character/${slug}/${language}/`);
+    return this.http.get<Character>(`${environment.apiUrl}/A25/character/${slug}/${language}/?v=${this.version}`);
   }
 
   getMemoriaList(language: string): Observable<Memoria[]> {
-    return this.http.get<Memoria[]>(`${environment.apiUrl}/A25/memoria/${language}/`);
+    return this.http.get<Memoria[]>(`${environment.apiUrl}/A25/memoria/${language}/?v=${this.version}`);
   }
 
   getMemoria(slug: string, language: string): Observable<Memoria> {
-    return this.http.get<Memoria>(`${environment.apiUrl}/A25/memoria/${slug}/${language}/`);
+    return this.http.get<Memoria>(`${environment.apiUrl}/A25/memoria/${slug}/${language}/?v=${this.version}`);
   }
 
   getResearch(language: string): Observable<Research[]> {
-    return this.http.get<Research[]>(`${environment.apiUrl}/A25/research/${language}/`);
+    return this.http.get<Research[]>(`${environment.apiUrl}/A25/research/${language}/?v=${this.version}`);
   }
 
   getUpdate(language: string): Observable<Update> {
-    return this.http.get<Update>(`${environment.apiUrl}/A25/update/${language}/`);
+    return this.http.get<Update>(`${environment.apiUrl}/A25/update/${language}/?v=${this.version}`);
   }
 
   getDungeons(language: string): Observable<Dungeon[]> {
-    return this.http.get<Dungeon[]>(`${environment.apiUrl}/A25/dungeon/${language}/`);
+    return this.http.get<Dungeon[]>(`${environment.apiUrl}/A25/dungeon/${language}/?v=${this.version}`);
   }
 
   getScoreBattles(language: string): Observable<ScoreBattle[]> {
-    return this.http.get<ScoreBattle[]>(`${environment.apiUrl}/A25/scorebattle/${language}/`);
+    return this.http.get<ScoreBattle[]>(`${environment.apiUrl}/A25/scorebattle/${language}/?v=${this.version}`);
   }
 
   getTower(slug: string, language: string): Observable<Tower[]> {
@@ -157,10 +154,10 @@ export class A25Service {
       "stab":"pierce",
       "elemental-tower":"elemental-tower"
     }
-    return this.http.get<Tower[]>(`${environment.apiUrl}/A25/tower/${slugname[slug]}/${language}/`);
+    return this.http.get<Tower[]>(`${environment.apiUrl}/A25/tower/${slugname[slug]}/${language}/?v=${this.version}`);
   }
 
   getEmblems(language: string): Observable<Emblem[]> {
-    return this.http.get<Emblem[]>(`${environment.apiUrl}/A25/emblem/${language}/`);
+    return this.http.get<Emblem[]>(`${environment.apiUrl}/A25/emblem/${language}/?v=${this.version}`);
   }
 }

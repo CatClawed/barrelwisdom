@@ -44,7 +44,7 @@ services:
 
   memcached:
     container_name: memcached
-    image: memcached:1.6.22-alpine3.18
+    image: memcached:1.6.32-alpine
     ports:
       - "11211:11211"
     entrypoint:

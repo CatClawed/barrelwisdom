@@ -1550,12 +1550,12 @@ def cleanup():
 
 # for setting slugs
 additions = {
-
+    "フロッケ": "flocke-2"
 }
-memoria_index = 120 # halloween
-base_enemy_index = 82
+memoria_index = 121 # 1st anni heidi/flocke
+base_enemy_index = 84
 
-gacha = None #create_event(ja='HALLOWEEN2024 LEGEND FES', en="HALLOWEEN2024 LEGEND FES")
+gacha = None #create_event(ja='1周年 星礼祭 LEGEND FES かけがえのないモノ', en="1st Anniversary Part 8")
 
 #createUpdate()
 #retrieve_all_jsons()
@@ -1564,7 +1564,7 @@ gacha = None #create_event(ja='HALLOWEEN2024 LEGEND FES', en="HALLOWEEN2024 LEGE
 #import_characters(event=gacha, additions=additions)
 #memoria_index = import_memoria(memoria_index, event=gacha)
 #import_material()
-#import_combat_items()
+#import_combat_items()s
 #import_equipment()
 #import_recipes()
 #base_enemy_index = import_enemy(base_enemy_index)
@@ -1573,19 +1573,10 @@ gacha = None #create_event(ja='HALLOWEEN2024 LEGEND FES', en="HALLOWEEN2024 LEGE
 #scan_update_images()
 #print(f'Memoria: {memoria_index}\tEnemy: {base_enemy_index}')
 
-#import_research()
-
 #global_additions()
 #enemy_images()
-
+#import_research()
 
 """
 python manage.py dumpdata chara_a25 items_a25 misc_a25 misc_a25 quest_a25 -o dump.json.gz
 """
-
-#sbs = ScoreBattle.objects.all()
-#sbs.delete()
-#sbs = ScoreBattleDifficulties.objects.all()
-#sbs.delete()
-
-

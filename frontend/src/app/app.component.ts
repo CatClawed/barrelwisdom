@@ -28,12 +28,11 @@ export class AppComponent {
             window.location.reload();
           }
         } catch (err) {
-          console.log('You might be using incognito or an unsupported browser. Or I messed up. Have an error message.', err);
+          console.log('I messed up? Have an error message.', err);
         }
       });
 
       updates.unrecoverable.subscribe((event) => {
-        console.log("aw heck")
         window.location.reload();
       })
     }
