@@ -1,25 +1,24 @@
 @if (data; as category) {
+  <ng-template #cat let-item="item">
+    <tr>
+      <td>
+        <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
+      </td>
+      <td>LV {{item.level}}</td>
+    </tr>
+  </ng-template>
   <category
     [name]="category.name"
-    [using]="category.ingredientcat !== undefined">
+    [using]="category.ingredientcat !== undefined"
+    [colspan]="2">
     <ng-container inCategory>
       @for (item of category.item_set; track item) {
-        <tr>
-          <td>
-            <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
-          </td>
-          <td>LV {{item.level}}</td>
-        </tr>
+        <ng-content *ngTemplateOutlet="cat;context:{item:item}"></ng-content>
       }
     </ng-container>
     <ng-container usingCategory>
       @for (item of category.ingredientcat; track item) {
-        <tr>
-          <td>
-            <a routerLink="/{{gameURL}}/items/{{item.synthitem.slug}}/{{language}}">{{item.synthitem.name}}</a>
-          </td>
-          <td>LV {{item.synthitem.level}}</td>
-        </tr>
+        <ng-content *ngTemplateOutlet="cat;context:{item:item.synthitem}"></ng-content>
       }
     </ng-container>
   </category>

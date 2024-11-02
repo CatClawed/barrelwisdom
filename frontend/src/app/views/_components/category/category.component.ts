@@ -16,4 +16,7 @@ export class CategoryComponent {
   @Input()
   using: boolean = false;
 
+  @Input()
+  colspan: number = 1;
+
 }

@@ -1,63 +1,40 @@
 @if (data; as category) {
-  <h1>{{category.name}}</h1>
-  <div class="mx-auto row">
-    <div class="col-md-6">
-      <table style="border:1px solid #c8ced3;" class="tbl"><tbody>
-        <tr class="table-dark-center"><th style="border:none;" colspan=2>Items in Category</th></tr>
-        @for (item of category.item_set; track item) {
-          <tr>
-            <td>
-              <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
-              <br /><b>LV {{item.level}}</b>
-            </td>
-            <td>
-              @if (item.fire) {
-                <i style="color:#ac504f;"  class="atelier atelier-np atelier-shallie-fire"></i>
-              }
-              @if (item.water) {
-                <i style="color:#427389;" class="atelier atelier-np atelier-shallie-water"></i>
-              }
-              @if (item.wind) {
-                <i style="color:#5a843c;"  class="atelier atelier-np atelier-shallie-wind"></i>
-              }
-              @if (item.earth) {
-                <i style="color:#8f7939;" class="atelier atelier-np atelier-shallie-earth"></i>
-              }
-              <span style="vertical-align:top;padding-left:0.5rem;">{{item.evalue}}</span>
-            </td>
-          </tr>
+  <ng-template #cat let-item="item">
+    <tr>
+      <td>
+        <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
+        <br /><b>LV {{item.level}}</b>
+      </td>
+      <td>
+        @if (item.fire) {
+          <i style="color:#ac504f;"  class="atelier atelier-np atelier-shallie-fire"></i>
         }
-      </tbody></table>
-    </div>
-    @if (category.ingredientcat) {
-      <div class="col-md-6">
-        <table style="border:1px solid #c8ced3;" class="tbl"><tbody>
-          <tr class="table-dark-center"><th style="border:none;" colspan=2>Items Using Category</th></tr>
-          @for (item of category.ingredientcat; track item) {
-            <tr>
-              <td>
-                <a routerLink="/{{gameURL}}/items/{{item.synthitem.slug}}/{{language}}">{{item.synthitem.name}}</a>
-                <br /><b>LV {{item.synthitem.level}}</b>
-              </td>
-              <td>
-                @if (item.synthitem.fire) {
-                  <i style="color:#ac504f;"  class="atelier atelier-np atelier-shallie-fire"></i>
-                }
-                @if (item.synthitem.water) {
-                  <i style="color:#427389;" class="atelier atelier-np atelier-shallie-water"></i>
-                }
-                @if (item.synthitem.wind) {
-                  <i style="color:#5a843c;"  class="atelier atelier-np atelier-shallie-wind"></i>
-                }
-                @if (item.synthitem.earth) {
-                  <i style="color:#8f7939;" class="atelier atelier-np atelier-shallie-earth"></i>
-                }
-                <span style="vertical-align:top;padding-left:0.5rem;">{{item.synthitem.evalue}}</span>
-              </td>
-            </tr>
-          }
-        </tbody></table>
-      </div>
-    }
-  </div>
+        @if (item.water) {
+          <i style="color:#427389;" class="atelier atelier-np atelier-shallie-water"></i>
+        }
+        @if (item.wind) {
+          <i style="color:#5a843c;"  class="atelier atelier-np atelier-shallie-wind"></i>
+        }
+        @if (item.earth) {
+          <i style="color:#8f7939;" class="atelier atelier-np atelier-shallie-earth"></i>
+        }
+        <span style="vertical-align:top;padding-left:0.5rem;">{{item.evalue}}</span>
+      </td>
+    </tr>
+  </ng-template>
+  <category
+    [name]="category.name"
+    [using]="category.ingredientcat !== undefined"
+    [colspan]="2">
+    <ng-container inCategory>
+      @for (item of category.item_set; track item) {
+        <ng-content *ngTemplateOutlet="cat;context:{item:item}"></ng-content>
+      }
+    </ng-container>
+    <ng-container usingCategory>
+      @for (item of category.ingredientcat; track item) {
+        <ng-content *ngTemplateOutlet="cat;context:{item:item.synthitem}"></ng-content>
+      }
+    </ng-container>
+  </category>
 }

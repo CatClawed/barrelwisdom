@@ -1,8 +1,10 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { CategoryComponent } from '@app/views/_components/category/category.component';
 import { A16Service } from '@app/views/games/A16/_services/a16.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
@@ -11,7 +13,7 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
   templateUrl: 'a16-category.component.html',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports]
+  imports: [...CommonImports, CategoryComponent, NgTemplateOutlet]
 })
 export class A16CategoryComponent extends SingleComponent {
   constructor(
@@ -30,4 +32,4 @@ export class A16CategoryComponent extends SingleComponent {
   afterAssignment(): void {
     this.genericSettings(this.data.name, `All items in ${this.data.name}`, '', true);
   }
-} 
+}

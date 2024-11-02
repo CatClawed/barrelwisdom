@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BreadcrumbService } from '@app/services/breadcrumb.service';
@@ -12,7 +13,7 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
   templateUrl: 'a12-category.component.html',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, CategoryComponent]
+  imports: [...CommonImports, CategoryComponent, NgTemplateOutlet]
 })
 export class A12CategoryComponent extends SingleComponent {
   constructor(

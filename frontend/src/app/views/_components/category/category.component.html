@@ -12,7 +12,7 @@
     <div class="col-md-6">
       <table style="border:1px solid #c8ced3;" class="tbl"><tbody>
         <tr class="table-dark-center">
-          <th style="border:none;" colspan=2>Items Using Category</th>
+          <th style="border:none;" [attr.colspan]="colspan">Items Using Category</th>
         </tr>
         <ng-content select="[usingCategory]"></ng-content>
       </tbody></table>
