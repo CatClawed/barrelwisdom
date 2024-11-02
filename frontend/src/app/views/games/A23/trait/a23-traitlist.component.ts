@@ -3,10 +3,10 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { Tooltip } from '@app/views/_components/tooltip/tooltip.component';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Trait } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -20,7 +20,7 @@ import { A23TraitComponent } from './a23-trait.component';
   providers: [DestroyService],
   standalone: true,
   imports: [...CommonImports, ...MaterialFormImports,
-    A23TraitComponent, Tooltip]
+    A23TraitComponent, FilterListComponent]
 })
 
 export class A23TraitlistComponent extends DialogUseComponent {
@@ -58,6 +58,7 @@ export class A23TraitlistComponent extends DialogUseComponent {
   }
 
   private filterT(value: string, transfer: number): Trait[] {
+    this.hide = false;
     let traitlist: Trait[] = this.data;
     if (transfer !== 1) {
       traitlist = traitlist.filter(trait => trait.trans_atk !== trait.trans_heal !== trait.trans_dbf !== trait.trans_buff !== trait.trans_wpn !== trait.trans_arm !== trait.trans_acc !== trait.trans_tal !== trait.trans_syn !== trait.trans_exp);

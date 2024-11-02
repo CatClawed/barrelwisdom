@@ -1,18 +1,30 @@
 @if (data; as property) {
-  <div class="mx-auto row spacer">
-    <div class="{{colset}} card card-body">
-      <div class="flex">
-        <h4 class="card-title">{{property.name}}</h4>
-        <b>PP {{property.points}}</b>
-      </div>
+  <ng-template #template let-property="property" let-url="url">
+    @if (url) {
+      <a (click)="$event.preventDefault(); buttonClicked.emit(property.slug);" href="/{{gameURL}}/properties/{{property.slug}}/{{language}}">{{property.name}}</a>
+    }
+    @else {
+      <a routerLink="/{{gameURL}}/properties/{{property.slug}}/{{language}}">{{property.name}}</a>
+    }
+  </ng-template>
+    <div [class]="url || inputSlug ? 'card card-body' : 'card card-body card-small'"
+      [style]="url ? 'height: 100%;' : null">
+        <h4 class="card-title" style="margin-right:6rem;">
+          @if (url) {
+            <a (click)="$event.preventDefault(); buttonClicked.emit(property.slug);"
+              href="{{url}}">{{property.name}}</a>
+          }
+          @else {
+            {{property.name}}
+          }
+        </h4>
+      <b class="card-icon-position">PP {{property.points}}</b>
       @if (property.combo1) {
         <p>
-          <a routerLink="/{{gameURL}}/properties/{{property.combo1.slug}}/{{language}}">{{property.combo1.name}}</a> <span> x </span>
-          <a routerLink="/{{gameURL}}/properties/{{property.combo2.slug}}/{{language}}">{{property.combo2.name}}</a>
+          <ng-content *ngTemplateOutlet="template;context:{property:property.combo1,url:url}"></ng-content> x
+          <ng-content *ngTemplateOutlet="template;context:{property:property.combo2,url:url}"></ng-content>
           @if (property.combo3) {
-            <span> x </span>
-            } @if (property.combo3) {
-            <a routerLink="/{{gameURL}}/properties/{{property.combo3.slug}}/{{language}}">{{property.combo3.name}}</a>
+            x <ng-content *ngTemplateOutlet="template;context:{property:property.combo3,url:url}"></ng-content>
           }
         </p>
       }
@@ -20,8 +32,13 @@
       @if (property.item_set) {
         <b>Items:</b>
         <ul>
-          @for (item of property.item_set; track item) {
-            <li><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
+          @for (item of property.item_set; track item; let index=$index) {
+            @if (index < 3 || !url) {
+              <li><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
+            }
+            @else if(index == 4) {
+              <li><a (click)="$event.preventDefault(); buttonClicked.emit(property.slug);" href="/{{gameURL}}/properties/{{property.slug}}/{{language}}">View more...</a></li>
+            }
           }
         </ul>
         @if (property.grade) {
@@ -30,7 +47,7 @@
           </p>
         }
       }
-    <div class="flex bottom">
+    <div class="flex bottom" style="height:100%;">
       <i class="trait-color{{property.bomb}}      atelier atelier-np atelier-escha-bomb"></i>
       <i class="trait-color{{property.heal}}      atelier atelier-np atelier-escha-heal"></i>
       <i class="trait-color{{property.buff}}      atelier atelier-np atelier-escha-buff"></i>
@@ -39,8 +56,4 @@
       <i class="trait-color{{property.accessory}} atelier atelier-np atelier-escha-accessory"></i>
     </div>
   </div>
-  @if (showNav) {
-    <div class="col-md-3" ></div>
-  }
-</div>
 }

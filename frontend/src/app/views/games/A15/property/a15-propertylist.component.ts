@@ -3,10 +3,10 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { Tooltip } from '@app/views/_components/tooltip/tooltip.component';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Property } from '@app/views/games/A15/_services/a15.interface';
 import { A15Service } from '@app/views/games/A15/_services/a15.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -19,7 +19,8 @@ import { A15PropertyComponent } from './a15-property.component';
   templateUrl: 'a15-propertylist.component.html',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, A15PropertyComponent, Tooltip]
+  imports: [...CommonImports, ...MaterialFormImports, A15PropertyComponent,
+    FilterListComponent]
 })
 export class A15PropertylistComponent extends DialogUseComponent {
   filteredProperties: Observable<Property[]>;
@@ -56,6 +57,7 @@ export class A15PropertylistComponent extends DialogUseComponent {
   }
 
   private filterT(value: string, transfer: string): Property[] {
+    this.hide = false;
     let propertylist: Property[] = this.data;
     switch (transfer) {
       case "2":

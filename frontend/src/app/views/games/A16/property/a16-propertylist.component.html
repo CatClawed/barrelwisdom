@@ -1,6 +1,17 @@
 @if (!error) {
-  <h1>Properties</h1>
-  <div class="col-md-10 mx-auto">
+  <ng-template #template let-prop="item">
+    <a16-property
+      (buttonClicked)="openDialog($event)"
+      [inputData]="prop"
+      [gameURL]="gameURL"
+      url="/{{gameURL}}/properties/{{prop.slug}}/{{language}}">
+    </a16-property>
+  </ng-template>
+  <filter-list
+    [list]="filteredProperties"
+    title="Properties"
+    [(hide)]="hide"
+    [template]="template">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
         <mat-form-field class="col-md-8" appearance="outline">
@@ -20,63 +31,5 @@
         </mat-form-field>
       </div>
     </form>
-  </div>
-  <div class="item-grid">
-    @for (prop of filteredProperties | async; track identify2($index, prop)) {
-      <div class="card card-body">
-        <div style="height:100%;">
-          <div class="flex">
-            <h4 class="card-title"><a (click)="openDialog(prop.slug, $event);" href="/{{gameURL}}/properties/{{prop.slug}}/{{language}}">{{prop.name}}</a></h4>
-            <b>PP {{prop.points}}</b>
-          </div>
-          @if (prop.combo1) {
-            <p>
-              <a routerLink="/{{gameURL}}/properties/{{prop.combo1.slug}}/{{language}}">{{prop.combo1.name}}</a>
-              @if (prop.combo2) {
-                <span> x </span>
-                } @if (prop.combo2) {
-                <a routerLink="/{{gameURL}}/properties/{{prop.combo2.slug}}/{{language}}">{{prop.combo2.name}}</a>
-              }
-              @if (prop.combo3) {
-                <span> x </span>
-                } @if (prop.combo3) {
-                <a routerLink="/{{gameURL}}/properties/{{prop.combo3.slug}}/{{language}}">{{prop.combo3.name}}</a>
-              }
-            </p>
-          }
-          <p>{{prop.desc}}</p>
-          @if (prop.item_set) {
-            <b>Items:</b>
-            <ul>
-              @if (prop.item_set.length >= 1) {
-                <li><a routerLink="/{{gameURL}}/items/{{prop.item_set[0].slug}}/{{language}}">{{prop.item_set[0].name}}</a></li>
-              }
-              @if (prop.item_set.length >= 2) {
-                <li><a routerLink="/{{gameURL}}/items/{{prop.item_set[1].slug}}/{{language}}">{{prop.item_set[1].name}}</a></li>
-              }
-              @if (prop.item_set.length >= 3) {
-                <li><a routerLink="/{{gameURL}}/items/{{prop.item_set[2].slug}}/{{language}}">{{prop.item_set[2].name}}</a></li>
-              }
-              @if (prop.item_set.length >= 4) {
-                <li><a (click)="openDialog(prop.slug, $event);" href="/{{gameURL}}/properties/{{prop.slug}}/{{language}}">See more...</a></li>
-              }
-            </ul>
-          }
-          @if (prop.grade != -1) {
-            <p>
-              <tooltip tip="A measure of rarity. This number determines where properties appear.">Grade: </tooltip>
-              {{prop.grade}}
-            </p>
-          }
-      </div>
-      <div class="flex bottom">
-        <i class="trait-color{{prop.bomb}}      atelier atelier-np atelier-escha-bomb"></i>
-        <i class="trait-color{{prop.heal}}      atelier atelier-np atelier-escha-heal"></i>
-        <i class="trait-color{{prop.weapon}}    atelier atelier-np atelier-escha-weapon"></i>
-        <i class="trait-color{{prop.armor}}     atelier atelier-np atelier-escha-armor"></i>
-        <i class="trait-color{{prop.accessory}} atelier atelier-np atelier-escha-accessory"></i>
-      </div>
-    </div>
-  }
-</div>
+  </filter-list>
 }

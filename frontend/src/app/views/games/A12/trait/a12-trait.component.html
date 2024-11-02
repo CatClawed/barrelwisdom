@@ -1,15 +1,15 @@
 @if (data; as trait) {
     <div [class]="url || inputSlug ? 'card card-body' : 'card card-body card-small'"
       [style]="url ? 'height: 100%;' : null">
-        @if (url) {
           <h4 class="card-title" style="margin-right:6rem;">
-            <a (click)="$event.preventDefault(); buttonClicked.emit(trait.slug);"
-            href="{{url}}">{{trait.name}}</a>
+            @if (url) {
+              <a (click)="$event.preventDefault(); buttonClicked.emit(trait.slug);"
+                href="{{url}}">{{trait.name}}</a>
+            }
+            @else {
+              {{trait.name}}
+            }
           </h4>
-        }
-        @else {
-          <h4 class="card-title" style="margin-right:6rem;">{{trait.name}}</h4>
-        }
         @if (trait.cost) {
           <div class="card-icon-position"><b>Cost: </b>{{trait.cost}}</div>
         }

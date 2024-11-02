@@ -3,7 +3,8 @@
     <a12-trait
       (buttonClicked)="openDialog($event)"
       [inputData]="trait"
-      url="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">
+      url="/{{gameURL}}/traits/{{trait.slug}}/{{language}}"
+      [gameURL]="gameURL">
     </a12-trait>
   </ng-template>
   <filter-list

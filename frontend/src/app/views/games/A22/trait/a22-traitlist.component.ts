@@ -3,10 +3,10 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { Tooltip } from '@app/views/_components/tooltip/tooltip.component';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Trait } from '@app/views/games/A22/_services/a22.interface';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -20,7 +20,7 @@ import { A22TraitComponent } from './a22-trait.component';
   providers: [DestroyService],
   standalone: true,
   imports: [...CommonImports, ...MaterialFormImports,
-    A22TraitComponent, Tooltip]
+    A22TraitComponent, FilterListComponent]
 })
 export class A22TraitlistComponent extends DialogUseComponent {
   filteredTraits: Observable<Trait[]>;
@@ -58,6 +58,7 @@ export class A22TraitlistComponent extends DialogUseComponent {
   }
 
   private filterT(value: string, transfer: string): Trait[] {
+    this.hide = false;
     let traitlist: Trait[] = this.data;
     switch (transfer) {
       case "2":
