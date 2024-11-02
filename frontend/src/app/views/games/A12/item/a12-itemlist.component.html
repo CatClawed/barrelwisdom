@@ -1,6 +1,30 @@
 @if (!error) {
-  <h1>Items</h1>
-  <div class ="col-md-10 mx-auto">
+  <ng-template #template let-item="item">
+    <item
+      [item]="item"
+      url="/{{gameURL}}/items/{{item.slug}}/{{language}}"
+      imgURL="{{imgURL}}items/{{item.slug}}.webp?v=1"
+      (buttonClicked)="openDialog($event)"
+      dimension="240">
+      <ng-container icon>
+        @if (item.level) {
+          <b>LV {{item.level}}</b>
+        }
+      </ng-container>
+      <table class="table-item-data"><tbody>
+        @for (cat of item.categories; track cat) {
+          <tr>
+            <td><i class="atelier atelier-{{cat.icon_name}}"></i></td><td>{{cat.name}}</td>
+          </tr>
+        }
+      </tbody></table>
+    </item>
+  </ng-template>
+  <filter-list
+    [list]="filteredItems"
+    title="Items"
+    [(hide)]="hide"
+    [template]="template">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
         <mat-form-field class="col-md-8" appearance="outline">
@@ -29,34 +53,5 @@
         </mat-form-field>
       </div>
     </form>
-  </div>
-  <div class="item-grid">
-    @for (it of filteredItems | async; track identify2($index, it)) {
-      <div class="card card-body">
-        <h4 class="card-title card-icon-space">
-          <a (click)="openDialog(it.slug, $event);" href="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a>
-        </h4>
-        <div class="card-icon-position">
-          @if (it.level) {
-            <b>LV {{it.level}}</b>
-          }
-        </div>
-        <div class="card-item-display">
-          <a (click)="openDialog(it.slug, $event);" href="/{{gameURL}}/items/{{it.slug}}/{{language}}">
-            <img loading="lazy" src="{{imgURL}}items/{{it.slug}}.webp" alt="{{it.name}}">
-          </a>
-        </div>
-        <table class="table-item-data"><tbody>
-          @for (cat of it.categories; track cat) {
-            <tr>
-              <td><i class="atelier atelier-{{cat.icon_name}}"></i></td><td>{{cat.name}}</td>
-            </tr>
-          }
-        </tbody></table>
-        <button (click)="openDialog(it.slug)" class="card-read-more-position" mat-mini-fab color="primary">
-          <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
-        </button>
-      </div>
-    }
-  </div>
+  </filter-list>
 }

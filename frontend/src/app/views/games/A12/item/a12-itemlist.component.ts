@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { ItemList } from '@app/views/games/A12/_services/a12.interface';
 import { A12Service } from '@app/views/games/A12/_services/a12.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -14,13 +15,14 @@ import { DialogUseComponent } from '@app/views/games/_prototype/dialog-use.compo
 import { Observable, forkJoin } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { A12ItemComponent } from './a12-item.component';
+import { ItemComponent } from '@app/views/_components/item/item.component';
 
 @Component({
   templateUrl: 'a12-itemlist.component.html',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports,
-    A12ItemComponent, MatButtonModule]
+  imports: [...CommonImports, ...MaterialFormImports, ItemComponent,
+    A12ItemComponent, MatButtonModule, FilterListComponent]
 })
 
 export class A12ItemlistComponent extends DialogUseComponent {
@@ -64,6 +66,7 @@ export class A12ItemlistComponent extends DialogUseComponent {
   }
 
   private filterT(value: string, type: string, level: number, ing: string): ItemList[] {
+    this.hide = false;
     let list: ItemList[] = this.data.items;
 
     if (type != 'Any') {

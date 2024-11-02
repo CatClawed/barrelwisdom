@@ -1,13 +1,19 @@
 @if (data; as trait) {
-  <div class="mx-auto row spacer">
-    <div class="{{colset}} card card-body">
-      <div class="flex">
-        <h4 class="card-title">{{trait.name}}</h4>
-        @if (trait.cost) {
-          <span><b>Cost: </b>{{trait.cost}}</span>
+    <div [class]="url || inputSlug ? 'card card-body' : 'card card-body card-small'"
+      [style]="url ? 'height: 100%;' : null">
+        @if (url) {
+          <h4 class="card-title" style="margin-right:6rem;">
+            <a (click)="$event.preventDefault(); buttonClicked.emit(trait.slug);"
+            href="{{url}}">{{trait.name}}</a>
+          </h4>
         }
-      </div>
-      <p>{{trait.desc}}</p>
+        @else {
+          <h4 class="card-title" style="margin-right:6rem;">{{trait.name}}</h4>
+        }
+        @if (trait.cost) {
+          <div class="card-icon-position"><b>Cost: </b>{{trait.cost}}</div>
+        }
+      <p [style]="url ? 'height: 100%;' : null">{{trait.desc}}</p>
       @if (trait.item_set) {
         <div>
           <b>Items:</b>
@@ -26,8 +32,4 @@
         <i class="trait-color{{trait.accessory}} atelier atelier-np atelier-escha-accessory"></i>
       </div>
     </div>
-    @if (showNav) {
-      <div class="col-md-3" ></div>
-    }
-  </div>
 }

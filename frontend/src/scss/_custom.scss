@@ -173,6 +173,19 @@ img {
     max-width: 600px;
   }
 
+  @media screen and (max-width: 800px) {
+    width: 100%;
+  }
+}
+
+.card-medium {
+  width: 75%;
+  min-width: 320px;
+
+  @media screen and (max-width: 1280px) {
+    width: 100%;
+    max-width: 900px;
+  }
 
   @media screen and (max-width: 800px) {
     width: 100%;
@@ -279,9 +292,7 @@ th {
 
 // TODO: Standarize all image sizes so I can get away with only left/right margins
 .card-item-display {
-  //margin-left: auto;
-  //margin-right: auto;
-  margin: auto;
+  margin: 0 auto 0 auto;
 }
 
 // Not used by everything, wtf is this for

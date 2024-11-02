@@ -1,6 +1,5 @@
 @if (data; as item) {
-  <div class="mx-auto row spacer">
-    <div class="{{colset}} card card-body">
+    <div [class]="inputSlug ? 'card card-body' : 'card card-body card-medium'">
       <h4 class="card-title card-icon-space">{{item.name}}</h4>
       <div class="card-icon-position">
         @if (item.level) {
@@ -8,7 +7,8 @@
         }
       </div>
       <div class="card-item-display">
-        <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
+        <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp?v=1"
+          alt="{{item.name}}" height="240" width="240">
       </div>
       <p>{{item.desc}}</p>
       @if (item.book_set) {
@@ -55,7 +55,6 @@
             <li><a routerLink="/{{gameURL}}/traits/{{item.traits.slug}}/{{language}}">{{item.traits.name}}</a></li>
           </ul>
         }
-        @if (item.time) {
           <ul style="list-style:none;padding:0;">
             @if (item.time) {
               <li>Time: {{item.time}}</li>
@@ -70,7 +69,6 @@
               <li>Uses: {{item.uses}}</li>
             }
           </ul>
-        }
         @if (item.ingredient_set) {
           <table class="tbl"><tbody>
             <tr class="table-dark-center">
@@ -94,38 +92,38 @@
             <tr class="table-dark-center"><th colspan=2>Effects</th></tr>
             @if (itemone) {
               <tr><td>Item 1</td><td>
+                <ul style="margin-bottom:0;">
+                  @for (eff of item.effectline_set; track eff) {
+                    @if (eff.itemnum == 1) {
+                      <li><a routerLink="/{{gameURL}}/effects/{{eff.effect.slug}}/{{language}}">{{eff.effect.name}}</a></li>
+                    }
+                  }
+                </ul>
+              </td></tr>
+            }
+            @if (itemtwo) {
+              <tr><td>Item 2</td><td>
+                <ul style="margin-bottom:0;">
+                  @for (eff of item.effectline_set; track eff) {
+                    @if (eff.itemnum == 2) {
+                      <li><a routerLink="/{{gameURL}}/effects/{{eff.effect.slug}}/{{language}}">{{eff.effect.name}}</a></li>
+                    }
+                  }
+                </ul>
+            </td></tr>
+          }
+          @if (itemthree) {
+            <tr><td>Item 3</td><td>
               <ul style="margin-bottom:0;">
                 @for (eff of item.effectline_set; track eff) {
-                  @if (eff.itemnum == 1) {
+                  @if (eff.itemnum == 3) {
                     <li><a routerLink="/{{gameURL}}/effects/{{eff.effect.slug}}/{{language}}">{{eff.effect.name}}</a></li>
                   }
                 }
               </ul>
             </td></tr>
           }
-          @if (itemtwo) {
-            <tr><td>Item 2</td><td>
-            <ul style="margin-bottom:0;">
-              @for (eff of item.effectline_set; track eff) {
-                @if (eff.itemnum == 2) {
-                  <li><a routerLink="/{{gameURL}}/effects/{{eff.effect.slug}}/{{language}}">{{eff.effect.name}}</a></li>
-                }
-              }
-            </ul>
-          </td></tr>
-        }
-        @if (itemthree) {
-          <tr><td>Item 3</td><td>
-          <ul style="margin-bottom:0;">
-            @for (eff of item.effectline_set; track eff) {
-              @if (eff.itemnum == 3) {
-                <li><a routerLink="/{{gameURL}}/effects/{{eff.effect.slug}}/{{language}}">{{eff.effect.name}}</a></li>
-              }
-            }
-          </ul>
-        </td></tr>
-      }
-    </tbody></table>
+        </tbody></table>
   }
   @if (item.equip_set) {
     <table class="tbl"><tbody>
@@ -141,38 +139,49 @@
   }
   @if (item.equip_set) {
     <table class="tbl"><tbody>
-      <tr class="table-dark-center"><th colspan=2>Stats</th></tr>
-      <tr><td style="padding-top:0.2rem;text-align:right;width:50%;"><b>HP </b></td> <td style="padding-top:0.2rem;padding-left:0.5em;">{{item.equip_set[0].hp}}@if (!item.equip_set[0].hp) {
-      <span>0</span>
-    }</td></tr>
-    <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>MP </b></td> <td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].mp}}@if (!item.equip_set[0].mp) {
-    <span>0</span>
-  }</td></tr>
-  <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>LP </b></td> <td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].lp}}@if (!item.equip_set[0].lp) {
-  <span>0</span>
-}</td></tr>
-<tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>ATK </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].atk}}@if (!item.equip_set[0].atk) {
-<span>0</span>
-}</td></tr>
-<tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>DEF </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].defen}}@if (!item.equip_set[0].defen) {
-<span>0</span>
-}</td></tr>
-<tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>SPD </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].spd}}@if (!item.equip_set[0].spd) {
-<span>0</span>
-}</td></tr>
-</tbody></table>
+      <tr class="table-dark-center">
+        <th colspan=2>Stats</th>
+      </tr>
+      <tr>
+        <td style="padding-top:0.2rem;text-align:right;width:50%;"><b>HP </b></td>
+        <td style="padding-top:0.2rem;padding-left:0.5em;">{{item.equip_set[0].hp}}@if (!item.equip_set[0].hp) { 0 }</td>
+      </tr>
+      <tr>
+        <td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>MP </b></td>
+        <td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].mp}}@if
+          (!item.equip_set[0].mp) { 0 }</td>
+      </tr>
+      <tr>
+        <td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>LP </b></td>
+        <td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].lp}}@if
+          (!item.equip_set[0].lp) { 0 }</td>
+      </tr>
+      <tr>
+        <td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>ATK </b></td>
+        <td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].atk}}@if
+          (!item.equip_set[0].atk) { 0 }</td>
+      </tr>
+      <tr>
+        <td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>DEF </b></td>
+        <td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].defen}}@if
+          (!item.equip_set[0].defen) { 0 }</td>
+      </tr>
+      <tr>
+        <td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>SPD </b></td>
+        <td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].spd}}@if
+          (!item.equip_set[0].spd) { 0 }</td>
+      </tr>
+    </tbody></table>
 }
 @if (item.equip_set) {
   <table class="tbl"><tbody>
     <tr class="table-dark-center"><th>Characters</th></tr>
     <tr><td>@for (char of item.equip_set[0].chars; track char) {
-      <img src="{{imgURL}}resources/equip_{{char.name}}.webp" alt="Can equip: {{char.name}}">
+      <img src="{{imgURL}}resources/equip_{{char.name}}.webp"
+        alt="Can equip: {{char.name}}"
+        height="85" width="86">
     }</td></tr>
   </tbody></table>
-}
-</div>
-@if (showNav) {
-  <div class="col-md-3" ></div>
 }
 </div>
 }

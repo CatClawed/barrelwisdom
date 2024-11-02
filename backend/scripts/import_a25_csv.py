@@ -1439,7 +1439,7 @@ def global_additions():
     score_battle_chapter = None
     tower_floor_max = None
     elem_tower_floor_max = None
-    events = [] #['アトリエサマー第1弾 LEGEND FES', 'アトリエサマー2024 第1弾']
+    events = ['アトリエサマー第2弾 LEGEND FES', 'アトリエサマー2024 第2弾']
     recipe_pages = [] #[[rStory, 44], [rStory, 45]] # refer to recipepage db for numbers
     traits = []
 
@@ -1578,5 +1578,5 @@ gacha = None #create_event(ja='1周年 星礼祭 LEGEND FES かけがえのな�
 #import_research()
 
 """
-python manage.py dumpdata chara_a25 items_a25 misc_a25 misc_a25 quest_a25 -o dump.json.gz
+p7ython manage.py dumpdata chara_a25 items_a25 misc_a25 quest_a25 -o dump.json.gz
 """

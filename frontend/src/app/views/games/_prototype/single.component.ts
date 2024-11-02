@@ -20,9 +20,12 @@ export abstract class SingleComponent extends DataComponent {
 
     @Input()
     showNav: boolean = true
-    
+
     @Input()
     inputLang?: string;
+
+    @Input()
+    url: string;
 
     small: boolean = false;
 
@@ -55,7 +58,7 @@ export abstract class SingleComponent extends DataComponent {
             takeUntil(this.destroy$)
         )
         .subscribe(data => {
-            this.data = data;                
+            this.data = data;
             if (this.data) {
                 this.error = this.breadcrumbService.setStatus(200);
                 this.afterAssignment();

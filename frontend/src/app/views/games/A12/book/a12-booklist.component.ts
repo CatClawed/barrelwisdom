@@ -3,9 +3,10 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Book } from '@app/views/games/A12/_services/a12.interface';
 import { A12Service } from '@app/views/games/A12/_services/a12.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -19,7 +20,7 @@ import { A12BookComponent } from './a12-book.component';
   providers: [DestroyService],
   standalone: true,
   imports: [...CommonImports, ...MaterialFormImports,
-    A12BookComponent]
+    A12BookComponent, FilterListComponent]
 })
 
 export class A12BooklistComponent extends DialogUseComponent {
@@ -57,6 +58,7 @@ export class A12BooklistComponent extends DialogUseComponent {
   }
 
   private filterT(value: string): Book[] {
+    this.hide = false;
     let list: Book[] = this.data;
     if (!value) {
       return list;

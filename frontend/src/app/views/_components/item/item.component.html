@@ -1,0 +1,36 @@
+<div
+  [class]="url || !small ? 'card card-body' : 'card card-body card-small'"
+  [style]="url ? 'height:100%;' : null">
+  @if (url) {
+    <h4 class="card-title" style="margin-right:6rem;">
+      <a (click)="$event.preventDefault(); buttonClicked.emit(item.slug);"
+        href="{{url}}">{{item.name}}</a>
+    </h4>
+  }
+  @else {
+    <h4 class="card-title" style="margin-right:6rem;">{{item.name}}</h4>
+  }
+  <div class="card-icon-position">
+    <ng-content select="[icon]"></ng-content>
+  </div>
+  <div class="card-item-display">
+    @if (url) {
+      <a (click)="$event.preventDefault(); buttonClicked.emit(item.slug);"
+        href="{{url}}">
+        <img loading="lazy" src="{{imgURL}}" alt="{{item.name}}" height="{{dimension}}" width="{{dimension}}">
+      </a>
+    }
+    @else {
+      <img loading="lazy" src="{{imgURL}}" alt="{{item.name}}" height="{{dimension}}" width="{{dimension}}">
+    }
+
+  </div>
+  <ng-content></ng-content>
+  @if (!hideButton) {
+    <button class="card-read-more-position"
+      mat-mini-fab color="primary"
+      (click)="buttonClicked.emit(item.slug)">
+      <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v"></mat-icon>
+    </button>
+  }
+</div>

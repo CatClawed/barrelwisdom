@@ -1,6 +1,16 @@
 @if (!error) {
-  <h1>Traits</h1>
-  <div class="col-md-10 mx-auto">
+  <ng-template #template let-trait="item">
+    <a12-trait
+      (buttonClicked)="openDialog($event)"
+      [inputData]="trait"
+      url="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">
+    </a12-trait>
+  </ng-template>
+  <filter-list
+    [list]="filteredTraits"
+    title="Traits"
+    [(hide)]="hide"
+    [template]="template">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
         <mat-form-field class="col-md-8" appearance="outline">
@@ -44,37 +54,5 @@
         </mat-form-field>
       </div>
     </form>
-  </div>
-  <div class="item-grid">
-    @for (trait of filteredTraits | async; track identify2($index, trait)) {
-      <div style="justify-content:space-between;" class="card card-body">
-        <div style="height:100%;">
-          <div class="flex">
-            <h4 class="card-title"><a (click)="openDialog(trait.slug, $event);" href="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">{{trait.name}}</a></h4>
-            @if (trait.cost) {
-              <b>Cost {{trait.cost}}</b>
-            }
-          </div>
-          <p>{{trait.desc}}</p>
-          @if (trait.item_set) {
-            <div>
-              <b>Items:</b>
-              <ul>
-                @for (item of trait.item_set; track item) {
-                  <li><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
-                }
-              </ul>
-            </div>
-          }
-        </div>
-        <div class="flex bottom">
-          <i class="trait-color{{trait.synth}}     atelier atelier-np atelier-ryza2-type-synthesis"></i>
-          <i class="trait-color{{trait.usable}}    atelier atelier-np atelier-escha-bomb"></i>
-          <i class="trait-color{{trait.ingot}}     atelier atelier-np atelier-escha-weapon"></i>
-          <i class="trait-color{{trait.cloth}}     atelier atelier-np atelier-escha-armor"></i>
-          <i class="trait-color{{trait.accessory}} atelier atelier-np atelier-escha-accessory"></i>
-        </div>
-      </div>
-    }
-  </div>
+  </filter-list>
 }

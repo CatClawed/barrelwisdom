@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Trait } from '@app/views/games/A12/_services/a12.interface';
 import { A12Service } from '@app/views/games/A12/_services/a12.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -19,7 +20,7 @@ import { A12TraitComponent } from './a12-trait.component';
   providers: [DestroyService],
   standalone: true,
   imports: [...CommonImports, ...MaterialFormImports,
-    A12TraitComponent]
+    A12TraitComponent, FilterListComponent]
 })
 export class A12TraitlistComponent extends DialogUseComponent {
   filteredTraits: Observable<Trait[]>;
@@ -56,6 +57,7 @@ export class A12TraitlistComponent extends DialogUseComponent {
   }
 
   private filterT(value: string, transfer: string): Trait[] {
+    this.hide = false;
     let traitlist: Trait[] = this.data;
     switch (transfer) {
       case "3": {

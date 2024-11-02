@@ -1,34 +1,26 @@
 @if (data; as category) {
-  <h1>{{category.name}}</h1>
-  <div style="margin-top: 1em;" class="col-md-3" ></div>
-  <div class="mx-auto row">
-    <div class="col-md-6">
-      <table style="border:1px solid #c8ced3;" class="tbl"><tbody>
-        <tr class="table-dark-center"><th style="border:none;" colspan=2>Items in Category</th></tr>
-        @for (item of category.item_set; track item) {
-          <tr>
-            <td>
-              <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
-            </td>
-            <td>LV {{item.level}}</td>
-          </tr>
-        }
-      </tbody></table>
-    </div>
-    @if (category.ingredientcat) {
-      <div class="col-md-6">
-        <table style="border:1px solid #c8ced3;" class="tbl"><tbody>
-          <tr class="table-dark-center"><th style="border:none;" colspan=2>Items Using Category</th></tr>
-          @for (item of category.ingredientcat; track item) {
-            <tr>
-              <td>
-                <a routerLink="/{{gameURL}}/items/{{item.synthitem.slug}}/{{language}}">{{item.synthitem.name}}</a>
-              </td>
-              <td>LV {{item.synthitem.level}}</td>
-            </tr>
-          }
-        </tbody></table>
-      </div>
-    }
-  </div>
+  <category
+    [name]="category.name"
+    [using]="category.ingredientcat !== undefined">
+    <ng-container inCategory>
+      @for (item of category.item_set; track item) {
+        <tr>
+          <td>
+            <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
+          </td>
+          <td>LV {{item.level}}</td>
+        </tr>
+      }
+    </ng-container>
+    <ng-container usingCategory>
+      @for (item of category.ingredientcat; track item) {
+        <tr>
+          <td>
+            <a routerLink="/{{gameURL}}/items/{{item.synthitem.slug}}/{{language}}">{{item.synthitem.name}}</a>
+          </td>
+          <td>LV {{item.synthitem.level}}</td>
+        </tr>
+      }
+    </ng-container>
+  </category>
 }

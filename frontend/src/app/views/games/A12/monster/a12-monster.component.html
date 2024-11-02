@@ -1,6 +1,5 @@
 @if (data; as monster) {
-  <div class="mx-auto row spacer">
-    <div class="{{colset}} card card-body">
+    <div class="card card-body">
       <h4 class="card-title card-icon-space">{{monster.name}}</h4>
       <div class="card-icon-position">
         <span>{{monster.race}}</span>
@@ -10,7 +9,8 @@
           <span class="badge bg-secondary">DX</span>
         }
       </div>
-      <img class="image-display" loading="lazy" src="{{imgURL}}monsters/{{monster.slug}}.webp" alt="{{monster.name}}">
+      <img class="image-display" loading="lazy" height="257" width="257"
+        src="{{imgURL}}monsters/{{monster.slug}}.webp?v=1" alt="{{monster.name}}">
       @if (monster.desc) {
         <p>{{monster.desc}}</p>
       }
@@ -68,8 +68,4 @@
         </div>
       </div>
     </div>
-    @if (showNav) {
-      <div class="col-md-3" ></div>
-    }
-  </div>
 }

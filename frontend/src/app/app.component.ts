@@ -16,15 +16,21 @@ export class AppComponent {
     updates: SwUpdate) {
     AppComponent.isBrowser.next(isPlatformBrowser(platformId));
 
-    if (AppComponent.isBrowser.getValue() && updates.isEnabled) {
+    if (updates.isEnabled && 'serviceWorker' in navigator) {
+      // hard refreshes mess things up
+      // I have to check for the service worker controller
+      navigator.serviceWorker.getRegistration().then(function(reg) {
+        if (reg.active && !navigator.serviceWorker.controller) {
+          window.location.reload();
+        }
+      });
       const appIsStable$ = appRef.isStable.pipe(first((isStable) => isStable === true));
-      const updateInterval$ = interval(15 * 60 * 1000);
-      const updateAfterStable$ = concat(appIsStable$, updateInterval$);
+      const updateAfterStable$ = concat(appIsStable$, interval(60 * 15 * 1000));
 
       updateAfterStable$.subscribe(async () => {
         try {
-          const updateFound = await updates.checkForUpdate();
-          if (updateFound) {
+          const up = await updates.checkForUpdate();
+          if (up) {
             window.location.reload();
           }
         } catch (err) {
@@ -32,6 +38,7 @@ export class AppComponent {
         }
       });
 
+      // angular recommends I check for this state so I do
       updates.unrecoverable.subscribe((event) => {
         window.location.reload();
       })
