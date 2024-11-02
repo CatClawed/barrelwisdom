@@ -1,7 +1,7 @@
 @if (!error) {
   <ng-template #template let-item="item">
     <a12-effect (buttonClicked)="openDialog($event)" [inputData]="item"
-      [hideContents]="true"></a12-effect>
+      [hideContents]="true" [gameURL]="gameURL"></a12-effect>
   </ng-template>
   <filter-list
     [list]="filteredEffects"

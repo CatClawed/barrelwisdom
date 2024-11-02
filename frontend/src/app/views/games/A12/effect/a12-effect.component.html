@@ -2,7 +2,7 @@
   <effect [effect]="effect"
   [small]="inputSlug ? false : hideContents ? false : true"
   [hideContents]="hideContents"
-  url="/totori/effects/{{effect.slug}}"
+  url="/{{gameURL}}/effects/{{effect.slug}}"
   [language]="language"
   (buttonClicked)="buttonClicked.emit($event)">
     @if (!hideContents) {

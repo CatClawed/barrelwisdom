@@ -15,7 +15,7 @@
         <span class="badge bg-secondary">DX</span>
       }
     </ng-container>
-    @if (book.desc) {
+    @if (book.desc && !inputData) {
       <p>{{book.desc}}</p>
     }
     <p><b>Acquisition: </b>{{book.note}}</p>
