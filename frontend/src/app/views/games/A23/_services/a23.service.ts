@@ -1,17 +1,12 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Book, Category, Effect, Item, MajorGather, Monster, RecipeIdea, Region, Seed, Trait } from '@app/views/games/A23/_services/a23.interface';
 import { environment } from '@environments/environment';
-import { Trait, Effect, Region, Monster, Category, Item, Book, RecipeIdea, MajorGather, Seed } from '@app/views/games/A23/_services/a23.interface'
+import { Observable } from 'rxjs';
 
 
 @Injectable({ providedIn: 'root' })
 export class A23Service {
-
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
-
   constructor(
     private http: HttpClient,
   ) { }

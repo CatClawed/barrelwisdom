@@ -1,32 +1,26 @@
 @if (data; as item) {
-  <div class="mx-auto row spacer">
-    <div class="{{colset}} card card-body">
-      <h4 class="card-title card-icon-space">{{item.name}}</h4>
-      <div class="card-icon-position">
-        <i  class="atelier atelier-np atelier-ryza2-book"></i>
-        @if (item.isDLC) {
-          <br /><span class="badge bg-secondary">DLC</span>
-        }
-      </div>
-      <div class="card-item-display">
-        <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
-      </div>
-      <div class="card-text">
-        <b>Item:</b>
-        <ul>
-          @for (it of item.items; track it) {
-            <li><a routerLink="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a></li>
-          }
-        </ul>
-        <p><b>Acquisition: </b>{{item.shop}} {{item.note}}@if (item.chest) {
-        <span>{{item.chest[0].region}}@if (item.chest[0].subregion) {
-          <span> &gt; </span>
-        }{{item.chest[0].subregion}}</span>
-      }</p>
-    </div>
-  </div>
-  @if (showNav) {
-    <div class="col-md-3" ></div>
-  }
-</div>
+  <item
+    [item]="item"
+    dimension="256"
+    imgURL="{{imgURL}}items/{{item.slug}}.webp?v=1"
+    [small]="true"
+    [hideButton]="true">
+    <ng-container icon>
+      <i  class="atelier atelier-np atelier-ryza2-book"></i>
+      @if (item.isDLC) {
+        <br /><span class="badge bg-secondary">DLC</span>
+      }
+    </ng-container>
+    <b>Item:</b>
+    <ul>
+      @for (it of item.items; track it) {
+        <li><a routerLink="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a></li>
+      }
+    </ul>
+    <p><b>Acquisition: </b>{{item.shop}} {{item.note}}@if (item.chest) {
+      {{item.chest[0].region}}@if (item.chest[0].subregion) {
+          &gt;
+      }{{item.chest[0].subregion}}
+    }</p>
+  </item>
 }

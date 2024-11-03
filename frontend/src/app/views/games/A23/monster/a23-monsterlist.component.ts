@@ -4,9 +4,11 @@ import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
+import { ItemComponent } from '@app/views/_components/item/item.component';
 import { Monster } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -19,8 +21,8 @@ import { A23MonsterComponent } from './a23-monster.component';
   templateUrl: 'a23-monsterlist.component.html',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports,
-    A23MonsterComponent, MatButtonModule]
+  imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
+    ItemComponent, MatButtonModule]
 })
 
 export class A23MonsterlistComponent extends DialogUseComponent {
@@ -59,6 +61,7 @@ export class A23MonsterlistComponent extends DialogUseComponent {
   }
 
   private filterT(value: string, type: string): Monster[] {
+    this.hide = false;
     let list: Monster[];
     switch (type) {
       case "2":

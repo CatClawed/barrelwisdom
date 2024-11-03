@@ -4,9 +4,11 @@ import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
+import { ItemComponent } from '@app/views/_components/item/item.component';
 import { Item } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -19,8 +21,8 @@ import { A23ItemComponent } from './a23-item.component';
   templateUrl: 'a23-itemlist.component.html',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports,
-    A23ItemComponent, MatButtonModule]
+  imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
+    ItemComponent, MatButtonModule]
 })
 
 export class A23ItemlistComponent extends DialogUseComponent {
@@ -65,6 +67,7 @@ export class A23ItemlistComponent extends DialogUseComponent {
   }
 
   private filterT(value: string, cat: string, ingt: string, kind: string): Item[] {
+    this.hide = false;
     let list: Item[] = this.data.items;
 
     if (cat != 'Any') {

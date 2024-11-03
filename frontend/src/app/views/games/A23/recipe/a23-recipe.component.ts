@@ -1,4 +1,4 @@
-import { Location } from '@angular/common';
+import { Location, NgTemplateOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
@@ -15,7 +15,7 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
   templateUrl: 'a23-recipe.component.html',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, Popover]
+  imports: [...CommonImports, Popover, NgTemplateOutlet]
 })
 export class A23RecipeComponent extends SingleComponent {
   sophie_num: number = 28;
@@ -93,4 +93,4 @@ export class A23RecipeComponent extends SingleComponent {
   context(r: RecipeIdea) {
     this.ctx = r;
   }
-} 
+}
