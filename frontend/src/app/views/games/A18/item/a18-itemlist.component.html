@@ -1,6 +1,33 @@
 @if (!error) {
-  <h1>Items</h1>
-  <div class ="col-md-10 mx-auto">
+  <ng-template #template let-item="item">
+    <item
+      [item]="item"
+      url="/{{gameURL}}/items/{{item.slug}}/{{language}}"
+      imgURL="{{imgURL}}items/{{item.slug}}.webp?v=1"
+      (buttonClicked)="openDialog($event)"
+      dimension="280">
+      <ng-container icon>
+        @if (item.isDLC) {
+          <span class="badge bg-secondary">DLC</span>
+        }
+        @if (item.isDX) {
+          <span class="badge bg-secondary">DX</span>
+        }
+      </ng-container>
+      <table class="table-item-data"><tbody>
+        @for (cat of item.categories; track cat) {
+          <tr>
+            <td style="text-align:center;"><i class="atelier atelier-{{cat.icon}}"></i></td><td>{{cat.name}}</td>
+          </tr>
+        }
+      </tbody></table>
+    </item>
+  </ng-template>
+  <filter-list
+    [list]="filteredItems"
+    title="Items"
+    [(hide)]="hide"
+    [template]="template">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
         <mat-form-field class="col-md-8" appearance="outline">
@@ -30,35 +57,5 @@
         </mat-form-field>
       </div>
     </form>
-  </div>
-  <div class="item-grid">
-    @for (it of filteredItems | async; track identify($index, it)) {
-      <div class="card card-body">
-        <h4 class="card-title card-icon-space">
-          <a (click)="openDialog(it.slug, $event);" href="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a>
-        </h4>
-        <div class="card-icon-position">
-          @if (it.isDLC) {
-            <span class="badge bg-secondary">DLC</span>
-          }
-          @if (it.isDX) {
-            <span class="badge bg-secondary">DX</span>
-          }
-        </div>
-        <a class="card-item-display" (click)="openDialog(it.slug, $event);" href="/{{gameURL}}/items/{{it.slug}}/{{language}}">
-          <img loading="lazy" src="{{imgURL}}items/{{it.slug}}.webp" alt="{{it.name}}">
-        </a>
-        <button (click)="openDialog(it.slug)" class="card-read-more-position" mat-mini-fab color="primary">
-          <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
-        </button>
-        <table class="table-item-data"><tbody>
-          @for (cat of it.categories; track cat) {
-            <tr>
-              <td style="text-align:center;"><i class="atelier atelier-{{cat.icon}}"></i></td><td>{{cat.name}}</td>
-            </tr>
-          }
-        </tbody></table>
-      </div>
-    }
-  </div>
+  </filter-list>
 }

@@ -1,10 +1,10 @@
 @if (data; as item) {
-  <div [class]="inputSlug ? 'card card-body' : 'card card-body card-medium'">
+  <div [class]="inputSlug ? 'card card-body spacer' : 'card card-body card-medium'">
     <h4 class="card-title card-icon-space">{{item.name}}</h4>
     <b class="card-icon-position">LV {{item.level}}</b>
     <div class="card-item-display">
       <img src="{{imgURL}}items/{{item.slug}}.webp?v=1"
-        alt="{{item.name}}" height="192" width="192">
+        alt="{{item.name}}" style="aspect-ratio: 1; width: 192px;">
     </div>
     <p>{{item.desc}}</p>
     @if (item.book_set) {
@@ -43,7 +43,7 @@
           <tr>
             <td colspan=2>
               @for (item of [].constructor(item.slots); track item) {
-                <img src="{{imgURL}}slot.webp" alt="" width="29" height="44">
+                <img src="{{imgURL}}slot.webp" alt="" style="aspect-ratio: 29/44; width: 29px;">
               }
             </td>
           </tr>
@@ -175,7 +175,7 @@
         <tr class="table-dark-center"><th>Characters</th></tr>
         <tr><td>@for (char of item.characterequip_set[0].chars; track char) {
           <img src="{{imgURL}}equip/equip-{{char.name}}.webp"
-            alt="Can equip: {{char.name}}" height="44" width="111">
+            alt="Can equip: {{char.name}}" style="aspect-ratio: 111/44; width: 111px;">
         }</td></tr>
       </tbody></table>
     }

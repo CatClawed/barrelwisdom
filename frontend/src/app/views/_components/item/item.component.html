@@ -17,7 +17,8 @@
     @if (url) {
       <a (click)="$event.preventDefault(); buttonClicked.emit(item.slug);"
         href="{{url}}">
-        <img loading="lazy" src="{{imgURL}}" alt="{{item.name}}" height="{{dimension}}" width="{{dimension}}">
+        <img loading="lazy" src="{{imgURL}}" alt="{{item.name}}"
+          style="aspect-ratio: 1; width: {{dimension}}px;">
       </a>
     }
     @else {

@@ -1,5 +1,5 @@
 @if (data; as monster) {
-    <div [class]="inputSlug ? 'card card-body' : 'card card-body card-medium'">
+    <div [class]="inputSlug ? 'card card-body spacer' : 'card card-body card-medium'">
       <h4 class="card-title card-icon-space">{{monster.name}}</h4>
       <div class="card-icon-position">
         <span>{{monster.race}}</span>
@@ -8,7 +8,7 @@
           <span class="badge bg-secondary">DX</span>
         }
       </div>
-      <img class="image-display" height="257" width="257"
+      <img class="image-display" style="aspect-ratio: 1; width: 257px;"
         src="{{imgURL}}monsters/{{monster.slug}}.webp?v=1" alt="{{monster.name}}">
       @if (monster.desc) {
         <p>{{monster.desc}}</p>

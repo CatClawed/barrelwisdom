@@ -1,9 +1,9 @@
 @if (data; as monster) {
-  <div [class]="inputSlug ? 'card card-body' : 'card card-body card-medium'">
+  <div [class]="inputSlug ? 'card card-body spacer' : 'card card-body card-medium'">
     <h4 class="card-title card-icon-space">{{monster.name}}</h4>
     <i class="card-icon-position atelier atelier-np atelier-shallie-race-{{monster.kind}}"></i>
     <img class="image-display" src="{{imgURL}}monsters/{{monster.slug}}.webp"
-      alt="{{monster.name}}" height="218"  width="218">
+      alt="{{monster.name}}" style="aspect-ratio: 1; width: 218px;">
     @if (monster.desc) {
       <p>{{monster.desc}}</p>
     }

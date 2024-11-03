@@ -1,17 +1,12 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Catalyst, Category, Effect, Item, Monster, Race, RecipeIdeaList, Shop, Trait } from '@app/views/games/A18/_services/a18.interface';
 import { environment } from '@environments/environment';
-import { Race, Trait, Effect, Monster, Category, Item, Shop, RecipeIdeaList, Catalyst } from '@app/views/games/A18/_services/a18.interface'
+import { Observable } from 'rxjs';
 
 
 @Injectable({ providedIn: 'root' })
 export class A18Service {
-
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
-
   constructor(
     private http: HttpClient,
   ) { }

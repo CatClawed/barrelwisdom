@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { Popover } from '@app/views/_components/popover/popover.component';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -49,4 +49,4 @@ export class A18ItemComponent extends SingleComponent {
       false,
       this.inputSlug ? false : true);
   }
-} 
+}
