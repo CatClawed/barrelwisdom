@@ -1,77 +1,66 @@
 @if (data; as monster) {
-  <div class="mx-auto row spacer">
-    <div class="{{colset}} card card-body">
-      <h4 class="card-title card-icon-space">{{monster.name}}</h4>
-      <div class="card-icon-position">
-        <span>{{monster.race}}</span>
-        @if (monster.isStrong || monster.isDLC || monster.isDX) {
-          <br />
+  <div [class]="inputSlug ? 'card card-body' : 'card card-body card-medium'">
+    <h4 class="card-title card-icon-space">{{monster.name}}</h4>
+    <div class="card-icon-position">
+      {{monster.race}}
+      @if (monster.isDLC) {
+        <br /><span class="badge bg-secondary">DLC</span>
+      }
+      @if (monster.isStrong) {
+        <br /><span class="badge bg-secondary">Strong</span>
+      }
+      @if (monster.isDX) {
+        <br /><span class="badge bg-secondary">DX</span>
+      }
+    </div>
+    <img class="image-display" loading="lazy" height="288" width="288"
+      src="{{imgURL}}monsters/{{monster.slug}}.webp?v=1" alt="{{monster.name}}">
+    @if (monster.desc) {
+      <p>{{monster.desc}}</p>
+    }
+    <div class="row">
+      <div class="col-md-6">
+        @if (monster.locations) {
+          <b>Locations:</b>
+          <ul>
+            @for (loc of monster.locations; track loc) {
+              <li>
+                <a routerLink="/{{gameURL}}/locations/{{loc.slug}}/{{language}}">{{loc.name}}</a>
+              </li>
+            }
+          </ul>
         }
-        @if (monster.isDLC) {
-          <span class="badge bg-secondary">DLC</span>
-        }
-        @if (monster.isStrong) {
-          <span class="badge bg-secondary">Strong</span>
-        }
-        @if (monster.isDX) {
-          <span class="badge bg-secondary">DX</span>
+        @if (monster.item_set) {
+          <b>Drops:</b>
+          <ul>
+            @for (drop of monster.item_set; track drop) {
+              <li><a routerLink="/{{gameURL}}/items/{{drop.slug}}/{{language}}">{{drop.name}}</a></li>
+            }
+          </ul>
         }
       </div>
-      <img class="image-display" loading="lazy" src="{{imgURL}}monsters/{{monster.slug}}.webp" alt="{{monster.name}}">
-      @if (monster.desc) {
-        <p>{{monster.desc}}</p>
-      }
-      <div class="row">
-        <div class="col-md-6">
-          @if (monster.locations) {
-            <b>Locations:</b>
-          }
-          @if (monster.locations) {
-            <ul>
-              @for (loc of monster.locations; track loc) {
-                <li>
-                  <a routerLink="/{{gameURL}}/locations/{{loc.slug}}/{{language}}">{{loc.name}}</a>
-                </li>
-              }
-            </ul>
-          }
-          @if (monster.item_set) {
-            <b>Drops:</b>
-          }
-          @if (monster.item_set) {
-            <ul>
-              @for (drop of monster.item_set; track drop) {
-                <li><a routerLink="/{{gameURL}}/items/{{drop.slug}}/{{language}}">{{drop.name}}</a></li>
-              }
-            </ul>
-          }
-        </div>
-        <div class="col-md-6">
-          <table style="width:auto;" class="tbl"><tbody>
-            <tr>
-              <td style="border-top:transparent;padding:0;"><b>LV </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.level}}</td>
-            </tr>
-            <tr>
-              <td style="border-top:transparent;padding:0;"><b>HP </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.hp}}</td><td style="border-top:transparent;padding:0;padding-left:1em;"><i style="color:#ac504f;" class="atelier atelier-shallie-fire"></i></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.fire}}</td>
-            </tr>
-            <tr>
-              <td style="border-top:transparent;padding:0;"><b>ATK </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.atk}}</td><td style="border-top:transparent;padding:0;padding-left:1em;"><i style="color:#427389;" class="atelier atelier-shallie-water"></i></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.water}}</td>
-            </tr>
-            <tr>
-              <td style="border-top:transparent;padding:0;"><b>DEF </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.defen}}</td><td style="border-top:transparent;padding:0;padding-left:1em;"><i style="color:#5a843c;" class="atelier atelier-shallie-wind"></i></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.wind}}</td>
-            </tr>
-            <tr>
-              <td style="border-top:transparent;padding:0;"><b>SPD </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.spd}}</td><td style="border-top:transparent;padding:0;padding-left:1em;"><i style="color:#8f7939;" class="atelier atelier-shallie-earth"></i></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.earth}}</td>
-            </tr>
-            <tr>
-              <td style="border-top:transparent;padding:0;"><b>Exp </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.exp}}</td><td style="border-top:transparent;padding:0;padding-left:1em;"><b>Cole </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.cole}}</td>
-            </tr>
-          </tbody></table>
-        </div>
+      <div class="col-md-6">
+        <table style="width:auto;" class="tbl"><tbody>
+          <tr>
+            <td style="border-top:transparent;padding:0;"><b>LV </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.level}}</td>
+          </tr>
+          <tr>
+            <td style="border-top:transparent;padding:0;"><b>HP </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.hp}}</td><td style="border-top:transparent;padding:0;padding-left:1em;"><i style="color:#ac504f;" class="atelier atelier-shallie-fire"></i></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.fire}}</td>
+          </tr>
+          <tr>
+            <td style="border-top:transparent;padding:0;"><b>ATK </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.atk}}</td><td style="border-top:transparent;padding:0;padding-left:1em;"><i style="color:#427389;" class="atelier atelier-shallie-water"></i></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.water}}</td>
+          </tr>
+          <tr>
+            <td style="border-top:transparent;padding:0;"><b>DEF </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.defen}}</td><td style="border-top:transparent;padding:0;padding-left:1em;"><i style="color:#5a843c;" class="atelier atelier-shallie-wind"></i></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.wind}}</td>
+          </tr>
+          <tr>
+            <td style="border-top:transparent;padding:0;"><b>SPD </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.spd}}</td><td style="border-top:transparent;padding:0;padding-left:1em;"><i style="color:#8f7939;" class="atelier atelier-shallie-earth"></i></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.earth}}</td>
+          </tr>
+          <tr>
+            <td style="border-top:transparent;padding:0;"><b>Exp </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.exp}}</td><td style="border-top:transparent;padding:0;padding-left:1em;"><b>Cole </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.cole}}</td>
+          </tr>
+        </tbody></table>
       </div>
     </div>
-    @if (showNav) {
-      <div class="col-md-3" ></div>
-    }
   </div>
 }

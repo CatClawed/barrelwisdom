@@ -5,7 +5,6 @@
         <span>{{monster.race}}</span>
         @if (monster.isDX) {
           <br />
-          }@if (monster.isDX) {
           <span class="badge bg-secondary">DX</span>
         }
       </div>
@@ -21,8 +20,6 @@
         <div class="col-md-6">
           @if (monster.locations) {
             <b>Locations:</b>
-          }
-          @if (monster.locations) {
             <ul>
               @for (loc of monster.locations; track loc) {
                 <li>
@@ -38,8 +35,6 @@
           }
           @if (monster.item_set) {
             <b>Drops:</b>
-          }
-          @if (monster.item_set) {
             <ul>
               @for (drop of monster.item_set; track drop) {
                 <li><a routerLink="/{{gameURL}}/items/{{drop.slug}}/{{language}}">{{drop.name}}</a></li>

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { ItemComponent } from '@app/views/_components/item/item.component';
 import { A15Service } from '@app/views/games/A15/_services/a15.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
@@ -12,7 +13,7 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
   selector: 'a15-book',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports]
+  imports: [...CommonImports, ItemComponent]
 })
 export class A15BookComponent extends SingleComponent {
   constructor(
@@ -35,4 +36,4 @@ export class A15BookComponent extends SingleComponent {
       false,
       this.inputSlug ? false : true);
   }
-} 
+}

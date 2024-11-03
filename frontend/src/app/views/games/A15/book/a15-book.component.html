@@ -1,23 +1,21 @@
 @if (data; as book) {
-  <div class="mx-auto row spacer">
-    <div class="{{colset}} card card-body">
-      <h4 class="card-title  card-icon-space">{{book.name}}</h4>
-      <div class="card-item-display">
-        <img loading="lazy" src="{{imgURL}}items/{{book.slug}}.webp" alt="{{book.name}}">
-      </div>
-      @if (book.desc) {
-        <p>{{book.desc}}</p>
-      }
-      <p><b>Acquisition: </b>{{book.acquisition}}</p>
-      <b>Items:</b>
-      <ul>
-        @for (item of book.items; track item) {
-          <li><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
-        }
-      </ul>
-    </div>
-    @if (showNav) {
-      <div class="col-md-3" ></div>
+  <item
+    [item]="book"
+    [url]="inputData ? '/' + gameURL + '/recipe-books/' + book.slug + '/' + language : undefined"
+    imgURL="{{imgURL}}items/{{book.slug}}.webp?v=1"
+    (buttonClicked)="buttonClicked.emit($event)"
+    dimension="192"
+    [small]="inputSlug ? false : true"
+    [hideButton]="true">
+    @if (book.desc && !inputData) {
+      <p>{{book.desc}}</p>
     }
-  </div>
+    <p><b>Acquisition: </b>{{book.acquisition}}</p>
+    <b>Items:</b>
+    <ul>
+      @for (item of book.items; track item) {
+        <li><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
+      }
+    </ul>
+  </item>
 }

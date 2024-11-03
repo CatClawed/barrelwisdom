@@ -8,6 +8,7 @@ import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
+import { ItemComponent } from '@app/views/_components/item/item.component';
 import { ItemList } from '@app/views/games/A12/_services/a12.interface';
 import { A12Service } from '@app/views/games/A12/_services/a12.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -15,14 +16,13 @@ import { DialogUseComponent } from '@app/views/games/_prototype/dialog-use.compo
 import { Observable, forkJoin } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { A12ItemComponent } from './a12-item.component';
-import { ItemComponent } from '@app/views/_components/item/item.component';
 
 @Component({
   templateUrl: 'a12-itemlist.component.html',
   providers: [DestroyService],
   standalone: true,
   imports: [...CommonImports, ...MaterialFormImports, ItemComponent,
-    A12ItemComponent, MatButtonModule, FilterListComponent]
+    MatButtonModule, FilterListComponent]
 })
 
 export class A12ItemlistComponent extends DialogUseComponent {

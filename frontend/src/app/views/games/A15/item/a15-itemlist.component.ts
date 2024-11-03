@@ -4,9 +4,11 @@ import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
+import { ItemComponent } from '@app/views/_components/item/item.component';
 import { ItemList } from '@app/views/games/A15/_services/a15.interface';
 import { A15Service } from '@app/views/games/A15/_services/a15.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -19,8 +21,8 @@ import { A15ItemComponent } from './a15-item.component';
   templateUrl: 'a15-itemlist.component.html',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports,
-    A15ItemComponent, MatButtonModule]
+  imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
+    ItemComponent, MatButtonModule]
 })
 
 export class A15ItemlistComponent extends DialogUseComponent {
@@ -66,6 +68,7 @@ export class A15ItemlistComponent extends DialogUseComponent {
 
 
   private filterT(value: string, type: string, elementV: number, element: string, ing: string): ItemList[] {
+    this.hide = false;
     let list: ItemList[] = this.data.items;
 
     if (type != 'Any') {

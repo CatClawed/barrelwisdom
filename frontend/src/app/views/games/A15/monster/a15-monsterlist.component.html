@@ -1,43 +1,29 @@
 @if (!error) {
-  <h1>Monsters</h1>
-  <div class="col-md-10 mx-auto">
-    <form [formGroup]="pageForm" class="form-horizontal">
-      <div class="row">
-        <mat-form-field class="col-md-12" appearance="outline">
-          <mat-label>Filter...</mat-label>
-          <input style="height: 100%;" matInput formControlName="filtertext">
-        </mat-form-field>
-      </div>
-    </form>
-  </div>
-  <div class="item-grid">
-    @for (mon of filteredMonsters | async; track identify2($index, mon)) {
-      <div class="card card-body">
-        <h4 class="card-title card-icon-space">
-          <a (click)="openDialog(mon.slug, $event);" href="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a>
-        </h4>
-        <div class="card-icon-position">
-          <span>{{mon.race}}</span>
-          @if (mon.isStrong || mon.isDLC || mon.isDX) {
-            <br />
-          }
-          @if (mon.isDLC) {
-            <span class="badge bg-secondary">DLC</span>
-          }
-          @if (mon.isStrong) {
-            <span class="badge bg-secondary">Strong</span>
-          }
-          @if (mon.isDX) {
-            <span class="badge bg-secondary">DX</span>
-          }
-        </div>
-        <a class="card-item-display" (click)="openDialog(mon.slug, $event);" href="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">
-          <img loading="lazy" src="{{imgURL}}monsters/{{mon.slug}}.webp" alt="{{mon.name}}">
-        </a>
-        <button (click)="openDialog(mon.slug)" class="card-read-more-position" mat-mini-fab color="primary">
-          <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
-        </button>
-      </div>
-    }
-  </div>
+<ng-template #template let-mon="item">
+  <item [item]="mon" url="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}" (buttonClicked)="openDialog($event)"
+    dimension="288" imgURL="{{imgURL}}monsters/{{mon.slug}}.webp?v=1">
+    <ng-container icon>
+      <span>{{mon.race}}</span>
+      @if (mon.isDLC) {
+      <br /><span class="badge bg-secondary">DLC</span>
+      }
+      @if (mon.isStrong) {
+      <br /><span class="badge bg-secondary">Strong</span>
+      }
+      @if (mon.isDX) {
+      <br /><span class="badge bg-secondary">DX</span>
+      }
+    </ng-container>
+  </item>
+</ng-template>
+<filter-list [list]="filteredMonsters" title="Monsters" [(hide)]="hide" [template]="template">
+  <form [formGroup]="pageForm" class="form-horizontal">
+    <div class="row">
+      <mat-form-field class="col-md-12" appearance="outline">
+        <mat-label>Filter...</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtertext">
+      </mat-form-field>
+    </div>
+  </form>
+</filter-list>
 }
