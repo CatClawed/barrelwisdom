@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CategoryItem, Effect, Item, ItemFull, Monster, MonsterFull, NameLink, Region, ShopDevelop, Trait } from '@app/views/games/A22/_services/a22.interface';
 import { environment } from '@environments/environment';
@@ -7,17 +7,12 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class A22Service {
-
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
-
   constructor(
     private http: HttpClient,
   ) { }
 
   public readonly gameTitle ={"en": "Atelier Ryza 2", "fr":"Atelier Ryza 2", "ja":"ライザのアトリエ２", "ko":"라이자의 아틀리에2", "sc":"莱莎的炼金工房２", "tc":"萊莎的鍊金工房２"};
-  public readonly gameURL = "ryza2"; 
+  public readonly gameURL = "ryza2";
   public readonly imgURL = `${environment.mediaURL}games/${this.gameURL}/`;
 
   getTraitList(language: string): Observable<Trait[]> {

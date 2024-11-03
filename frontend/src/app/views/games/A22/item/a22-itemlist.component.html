@@ -1,102 +1,99 @@
 @if (!error) {
-  <div>
-    <h1>Items</h1>
-    <div class ="col-md-10 mx-auto">
-      <form [formGroup]="pageForm" class="form-horizontal">
-        <div class="row">
-          <mat-form-field class="col-md-8" appearance="outline">
-            <mat-label>Filter...</mat-label>
-            <input style="height: 100%;" matInput formControlName="filtertext">
-            <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
-          </mat-form-field>
-          <mat-form-field class="col-md-4" appearance="outline">
-            <mat-label>Category</mat-label>
-            <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
-              <mat-option value="Any" selected><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"   ></mat-icon> Any</mat-option>
-              @if (data) {
-                @for (cat of data.categories; track cat) {
-                  <mat-option value="{{cat.name}}">
-                    <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-category-{{cat.slug}}"></mat-icon>
-                    {{cat.name}}
-                  </mat-option>
-                }
-              }
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="row">
-          <mat-form-field class="col-md-5" appearance="outline">
-            <mat-label>Has ingredient...</mat-label>
-            <input style="height: 100%;" matInput formControlName="filtering">
-          </mat-form-field>
-          <mat-form-field class="col-md-3" appearance="outline">
-            <mat-label>Element</mat-label>
-            <mat-select matNativeControl formControlName="element" disableOptionCentering="true" class="mat-select-icon">
-              <mat-option value="Any" selected>Any</mat-option>
-              <mat-option value="Fire">     <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-fire"></mat-icon>Fire</mat-option>
-              <mat-option value="Ice">      <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-ice"></mat-icon>Ice</mat-option>
-              <mat-option value="Lightning"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-lightning"></mat-icon>Lightning</mat-option>
-              <mat-option value="Wind">     <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-wind"></mat-icon>Wind</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field class="col-md-4" appearance="outline">
-            <mat-label>Element Value</mat-label>
-            <mat-select matNativeControl formControlName="elementval" disableOptionCentering="true" class="mat-select-icon">
-              <mat-option value="1" type="number" selected>1+</mat-option>
-              <mat-option value="2" type="number">2+</mat-option>
-              <mat-option value="3" type="number">3+</mat-option>
-              <mat-option value="4" type="number">4+</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-      </form>
-    </div>
-    <div class="item-grid">
-      @for (it of filteredItems | async; track identify($index, it)) {
-        <div class="card card-body">
-          <h4 class="card-title card-icon-space">
-            <a (click)="openDialog(it.slug, $event);" href="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a>
-          </h4>
-          <div class="card-icon-position">
-            <i class="atelier atelier-np atelier-ryza2-{{icons[it.itemtype]}}"></i>
-            @if (it.isDLC) {
-              <br />
-              }@if (it.isDLC) {
-              <span class="badge bg-secondary">DLC</span>
-            }
-          </div>
-          <a class="card-item-display" (click)="openDialog(it.slug, $event);" href="/{{gameURL}}/items/{{it.slug}}/{{language}}">
-            <img loading="lazy" src="{{imgURL}}items/{{it.slug}}.webp" alt="{{it.name}}">
-          </a>
-          <button (click)="openDialog(it.slug)" class="card-read-more-position" mat-mini-fab color="primary">
-            <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
-          </button>
-          <table class="table-item-data"><tbody>
-            @for (cat of it.category; track cat) {
-              <tr>
-                <td style="text-align:center;"><i class="atelier atelier-ryza2-category-{{cat.slug}}"></i></td><td>{{cat.name}}</td>
-              </tr>
-            }
+  <ng-template #template let-item="item">
+    <item
+      [item]="item"
+      url="/{{gameURL}}/items/{{item.slug}}/{{language}}"
+      imgURL="{{imgURL}}items/{{item.slug}}.webp?v=1"
+      (buttonClicked)="openDialog($event)"
+      dimension="256">
+      <ng-container icon>
+        <i class="atelier atelier-np atelier-ryza2-{{icons[item.itemtype]}}"></i>
+        @if (item.isDLC) {
+          <br />
+          }@if (item.isDLC) {
+          <span style="margin-top: 0.5rem;" class="badge bg-secondary">DLC</span>
+        }
+      </ng-container>
+      <div style="column-count: 2; padding-top: 0.5rem;">
+        <table class="table-item-data"><tbody>
+          @for (cat of item.category; track cat) {
             <tr>
-              <td colspan=2>
-                @if (it.fire) {
-                  <i style="color:#f03a02;"      class="atelier atelier-np atelier-ryza2-fire"></i>
-                }
-                @if (it.ice) {
-                  <i style="color:#04b5db;"       class="atelier atelier-np atelier-ryza2-ice"></i>
-                }
-                @if (it.lightning) {
-                  <i style="color:#e3bb05;" class="atelier atelier-np atelier-ryza2-lightning"></i>
-                }
-                @if (it.wind) {
-                  <i style="color:#589b1d;"      class="atelier atelier-np atelier-ryza2-wind"></i>
-                }
-                <span>{{it.elementvalue}}</span>
-              </td>
+              <td style="text-align:center;"><i class="atelier atelier-ryza2-category-{{cat.slug}}"></i></td><td>{{cat.name}}</td>
             </tr>
-          </tbody></table>
+          }
+        </tbody></table>
+        <div style="break-inside: avoid-column; margin-right:2rem;">
+          @if (item.fire) {
+            <i style="color:#f03a02;" class="atelier atelier-np atelier-ryza2-fire"></i>
+          }
+          @if (item.ice) {
+            <i style="color:#04b5db;" class="atelier atelier-np atelier-ryza2-ice"></i>
+          }
+          @if (item.lightning) {
+            <i style="color:#e3bb05;" class="atelier atelier-np atelier-ryza2-lightning"></i>
+          }
+          @if (item.wind) {
+            <i style="color:#589b1d;" class="atelier atelier-np atelier-ryza2-wind"></i>
+          }
+          @if (item.fire || item.wind || item.ice || item.lightning) {
+            {{item.elementvalue}}
+          }
         </div>
-      }
-    </div>
-  </div>
+      </div>
+    </item>
+  </ng-template>
+  <filter-list
+    [list]="filteredItems"
+    title="Items"
+    [(hide)]="hide"
+    [template]="template">
+    <form [formGroup]="pageForm" class="form-horizontal">
+      <div class="row">
+        <mat-form-field class="col-md-8" appearance="outline">
+          <mat-label>Filter...</mat-label>
+          <input style="height: 100%;" matInput formControlName="filtertext">
+          <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
+        </mat-form-field>
+        <mat-form-field class="col-md-4" appearance="outline">
+          <mat-label>Category</mat-label>
+          <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
+            <mat-option value="Any" selected><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"   ></mat-icon> Any</mat-option>
+            @if (data) {
+              @for (cat of data.categories; track cat) {
+                <mat-option value="{{cat.name}}">
+                  <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-category-{{cat.slug}}"></mat-icon>
+                  {{cat.name}}
+                </mat-option>
+              }
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field class="col-md-5" appearance="outline">
+          <mat-label>Has ingredient...</mat-label>
+          <input style="height: 100%;" matInput formControlName="filtering">
+        </mat-form-field>
+        <mat-form-field class="col-md-3" appearance="outline">
+          <mat-label>Element</mat-label>
+          <mat-select matNativeControl formControlName="element" disableOptionCentering="true" class="mat-select-icon">
+            <mat-option value="Any" selected>Any</mat-option>
+            <mat-option value="Fire">     <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-fire"></mat-icon>Fire</mat-option>
+            <mat-option value="Ice">      <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-ice"></mat-icon>Ice</mat-option>
+            <mat-option value="Lightning"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-lightning"></mat-icon>Lightning</mat-option>
+            <mat-option value="Wind">     <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-wind"></mat-icon>Wind</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-md-4" appearance="outline">
+          <mat-label>Element Value</mat-label>
+          <mat-select matNativeControl formControlName="elementval" disableOptionCentering="true" class="mat-select-icon">
+            <mat-option value="1" type="number" selected>1+</mat-option>
+            <mat-option value="2" type="number">2+</mat-option>
+            <mat-option value="3" type="number">3+</mat-option>
+            <mat-option value="4" type="number">4+</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </form>
+  </filter-list>
 }
