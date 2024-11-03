@@ -1,15 +1,11 @@
 @if (data; as item) {
     <div [class]="inputSlug ? 'card card-body' : 'card card-body card-medium'">
       <h4 class="card-title card-icon-space">{{item.name}}</h4>
-      <div class="card-icon-position">
-        @if (item.level) {
-          <b>LV {{item.level}}</b>
-        }
-      </div>
-      <div class="card-item-display">
-        <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp?v=1"
-          alt="{{item.name}}" height="240" width="240">
-      </div>
+      @if (item.level) {
+        <b class="card-icon-position">LV {{item.level}}</b>
+      }
+      <img class="card-item-display" src="{{imgURL}}items/{{item.slug}}.webp?v=1"
+        alt="{{item.name}}" height="240" width="240">
       <p>{{item.desc}}</p>
       @if (item.book_set) {
         <p><b>Recipe Book: </b><a routerLink="/{{gameURL}}/recipe-books/{{item.book_set[0].slug}}/{{language}}">{{item.book_set[0].name}}</a></p>

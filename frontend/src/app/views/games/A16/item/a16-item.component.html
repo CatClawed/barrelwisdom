@@ -1,198 +1,183 @@
 @if (data; as item) {
-  <div class="mx-auto row">
-    <div class="{{colset}} card card-body">
-      <h4 class="card-title card-icon-space">{{item.name}}</h4>
-      <div class="card-icon-position">
-        <b>LV {{item.level}}</b>
-      </div>
-      <div class="card-item-display">
-        <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
-      </div>
-      <p>{{item.desc}}</p>
-      @if (item.book_set) {
-        <p><b>Recipe Book: </b><a routerLink="/{{gameURL}}/recipe-books/{{item.book_set[0].slug}}/{{language}}">{{item.book_set[0].name}}</a></p>
-      }
-      @if (item.size) {
-        <p><b>Size: </b>{{item.size}}</p>
-      }
-      <div class="flex">
-        <table class="table-item-data"><tbody>
-          @for (cat of item.categories; track cat) {
-            <tr>
-              <td><i class="atelier atelier-{{cat.icon_name}}"></i></td><td><a routerLink="/{{gameURL}}/categories/{{cat.slug}}/{{language}}">{{cat.name}}</a></td>
-            </tr>
-          }
-        </tbody></table>
-        <table class="table-item-data"><tbody>
+  <div [class]="inputSlug ? 'card card-body' : 'card card-body card-medium'">
+    <h4 class="card-title card-icon-space">{{item.name}}</h4>
+    <b class="card-icon-position">LV {{item.level}}</b>
+    <div class="card-item-display">
+      <img src="{{imgURL}}items/{{item.slug}}.webp?v=1"
+        alt="{{item.name}}" height="192" width="192">
+    </div>
+    <p>{{item.desc}}</p>
+    @if (item.book_set) {
+      <p><b>Recipe Book: </b><a routerLink="/{{gameURL}}/recipe-books/{{item.book_set[0].slug}}/{{language}}">{{item.book_set[0].name}}</a></p>
+    }
+    @if (item.size) {
+      <p><b>Size: </b>{{item.size}}</p>
+    }
+    <div class="flex">
+      <table class="table-item-data"><tbody>
+        @for (cat of item.categories; track cat) {
+          <tr>
+            <td><i class="atelier atelier-{{cat.icon_name}}"></i></td><td><a routerLink="/{{gameURL}}/categories/{{cat.slug}}/{{language}}">{{cat.name}}</a></td>
+          </tr>
+        }
+      </tbody></table>
+      <table class="table-item-data"><tbody>
+        <tr>
+          <td colspan=2>
+            @if (item.fire) {
+              <i style="color:#ac504f;"  class="atelier atelier-np atelier-shallie-fire"></i>
+            }
+            @if (item.water) {
+              <i style="color:#427389;" class="atelier atelier-np atelier-shallie-water"></i>
+            }
+            @if (item.wind) {
+              <i style="color:#5a843c;"  class="atelier atelier-np atelier-shallie-wind"></i>
+            }
+            @if (item.earth) {
+              <i style="color:#8f7939;" class="atelier atelier-np atelier-shallie-earth"></i>
+            }
+            {{item.evalue}}
+          </td>
+        </tr>
+        @if (item.slots > 0) {
           <tr>
             <td colspan=2>
-              @if (item.fire) {
-                <i style="color:#ac504f;"  class="atelier atelier-np atelier-shallie-fire"></i>
+              @for (item of [].constructor(item.slots); track item) {
+                <img src="{{imgURL}}slot.webp" alt="" width="29" height="44">
               }
-              @if (item.water) {
-                <i style="color:#427389;" class="atelier atelier-np atelier-shallie-water"></i>
-              }
-              @if (item.wind) {
-                <i style="color:#5a843c;"  class="atelier atelier-np atelier-shallie-wind"></i>
-              }
-              @if (item.earth) {
-                <i style="color:#8f7939;" class="atelier atelier-np atelier-shallie-earth"></i>
-              }
-              <span>{{item.evalue}}</span>
             </td>
           </tr>
-          @if (item.slots > 0) {
-            <tr>
-              <td colspan=2>
-                @for (item of [].constructor(item.slots); track item) {
-                  <img src="{{imgURL}}slot.webp" alt="">
-                }
-              </td>
-            </tr>
-          }
-        </tbody></table>
-      </div>
-      @if (item.disassembly_set) {
-        <b>Disassembles to:</b>
-      }
-      @if (item.disassembly_set) {
-        <ul>
-          @for (it of item.disassembly_set[0].dis; track it) {
-            <li><a routerLink="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a></li>
-          }
-        </ul>
-      }
-      @if (item.disassembled_set) {
-        <b>Disassembled from:</b>
-      }
-      @if (item.disassembled_set) {
-        <ul>
-          @for (it of item.disassembled_set[0].parent; track it) {
-            <li><a routerLink="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a></li>
-          }
-        </ul>
-      }
-      @if (item.locations) {
-        <b>Locations:</b>
-      }
-      @if (item.locations) {
-        <ul>
-          @for (loc of item.locations; track loc) {
-            <li><a routerLink="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}" fragment="{{loc.slug}}">{{loc.name}}</a></li>
-          }
-        </ul>
-      }
-      @if (item.monsters) {
-        <b>Monsters:</b>
-      }
-      @if (item.monsters) {
-        <ul>
-          @for (mon of item.monsters; track mon) {
-            <li><a routerLink="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a></li>
-          }
-        </ul>
-      }
-      @if (item.properties) {
-        <b>Properties:</b>
-      }
-      @if (item.properties) {
-        <ul>
-          @for (prop of item.properties; track prop) {
-            <li><a routerLink="/{{gameURL}}/properties/{{prop.slug}}/{{language}}">{{prop.name}}</a></li>
-          }
-        </ul>
-      }
-      @if (item.ingredient_set) {
-        <table class="tbl"><tbody>
-          <tr  class="table-dark-center"><th>Ingredients</th></tr>
-          <tr><td>
-            <ul>
-              @for (ing of item.ingredient_set; track ing) {
-                <li>@if (ing.item) {
-                  <a routerLink="/{{gameURL}}/items/{{ing.item.slug}}/{{language}}">{{ing.item.name}}</a>
-                  }@if (ing.category) {
-                  <a routerLink="/{{gameURL}}/categories/{{ing.category.slug}}/{{language}}">{{ing.category.name}}</a>
-                }</li>
-              }
-            </ul>
-          </td></tr>
-        </tbody></table>
-      }
-      @if (item.effectlines_set) {
-        <table class="tbl"><tbody>
-          <tr  class="table-dark-center"><th colspan=2>Effects</th></tr>
-          @for (effline of item.effectlines_set; track effline) {
-            <tr>
-              <td style="vertical-align:middle">
-                @if (effline.elem == 'fire'  && !effline.hidden) {
-                  <i style="color:#ac504f;"  class="atelier atelier-np atelier-shallie-fire"></i>
-                }
-                @if (effline.elem == 'fire'  &&  effline.hidden) {
-                  <i style="color:gray;"     class="atelier atelier-np atelier-shallie-fire"></i>
-                }
-                @if (effline.elem == 'water' && !effline.hidden) {
-                  <i style="color:#427389;"  class="atelier atelier-np atelier-shallie-water"></i>
-                }
-                @if (effline.elem == 'water' &&  effline.hidden) {
-                  <i style="color:gray;"     class="atelier atelier-np atelier-shallie-water"></i>
-                }
-                @if (effline.elem == 'wind'  && !effline.hidden) {
-                  <i style="color:#5a843c;"  class="atelier atelier-np atelier-shallie-wind"></i>
-                }
-                @if (effline.elem == 'wind'  &&  effline.hidden) {
-                  <i style="color:gray;"     class="atelier atelier-np atelier-shallie-wind"></i>
-                }
-                @if (effline.elem == 'earth' && !effline.hidden) {
-                  <i style="color:#8f7939;"  class="atelier atelier-np atelier-shallie-earth"></i>
-                }
-                @if (effline.elem == 'earth' &&  effline.hidden) {
-                  <i style="color:gray;"     class="atelier atelier-np atelier-shallie-earth"></i>
-                }
-              </td>
-              <td>
-                @for (eff of effline.effects; track eff) {
-                  <a routerLink="/{{gameURL}}/effects/{{eff.effect.slug}}/{{language}}">{{eff.effect.name}}</a><span> ({{eff.min_elem}}-{{eff.max_elem}})</span>
-                  <div class="effect-bar">
-                    @if (effline.elem == 'fire') {
-                      <div  class="elemental-bar" style="background:#ac504f;left:{{eff.min_elem}}%;width:{{eff.max_elem-eff.min_elem}}%;"></div>
-                    }
-                    @if (effline.elem == 'water') {
-                      <div class="elemental-bar" style="background:#427389;left:{{eff.min_elem}}%;width:{{eff.max_elem-eff.min_elem}}%;"></div>
-                    }
-                    @if (effline.elem == 'wind') {
-                      <div  class="elemental-bar" style="background:#5a843c;left:{{eff.min_elem}}%;width:{{eff.max_elem-eff.min_elem}}%;"></div>
-                    }
-                    @if (effline.elem == 'earth') {
-                      <div class="elemental-bar" style="background:#8f7939;left:{{eff.min_elem}}%;width:{{eff.max_elem-eff.min_elem}}%;"></div>
-                    }
-                  </div>
-                }
-              </td>
-            </tr>
-          }
-        </tbody></table>
-      }
-      @if (item.equip_set) {
-        <table class="tbl"><tbody>
-          <tr class="table-dark-center"><th colspan=2>Stats</th></tr>
-          <tr><td style="padding-top:0.2rem;text-align:right;width:50%;"><b>HP </b></td> <td style="padding-top:0.2rem;padding-left:0.5em;">{{item.equip_set[0].hp}}   </td></tr>
-          <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>MP </b></td> <td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].mp}}   </td></tr>
-          <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>ATK </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].atk}}  </td></tr>
-          <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>DEF </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].defen}}</td></tr>
-          <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>SPD </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].spd}}  </td></tr>
-        </tbody></table>
-      }
-      @if (item.characterequip_set) {
-        <table class="tbl"><tbody>
-          <tr class="table-dark-center"><th>Characters</th></tr>
-          <tr><td>@for (char of item.characterequip_set[0].chars; track char) {
-            <img src="{{imgURL}}equip/equip-{{char.name}}.webp" alt="Can equp: {{char.name}}">
-          }</td></tr>
-        </tbody></table>
-      }
+        }
+      </tbody></table>
     </div>
-    @if (showNav) {
-      <div class="col-md-3" ></div>
+    @if (item.disassembly_set) {
+      <b>Disassembles to:</b>
+      <ul>
+        @for (it of item.disassembly_set[0].dis; track it) {
+          <li><a routerLink="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a></li>
+        }
+      </ul>
+    }
+    @if (item.disassembled_set) {
+      <b>Disassembled from:</b>
+      <ul>
+        @for (it of item.disassembled_set[0].parent; track it) {
+          <li><a routerLink="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a></li>
+        }
+      </ul>
+    }
+    @if (item.locations) {
+      <b>Locations:</b>
+      <ul>
+        @for (loc of item.locations; track loc) {
+          <li><a routerLink="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}" fragment="{{loc.slug}}">{{loc.name}}</a></li>
+        }
+      </ul>
+    }
+    @if (item.monsters) {
+      <b>Monsters:</b>
+      <ul>
+        @for (mon of item.monsters; track mon) {
+          <li><a routerLink="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a></li>
+        }
+      </ul>
+    }
+    @if (item.properties) {
+      <b>Properties:</b>
+      <ul>
+        @for (prop of item.properties; track prop) {
+          <li><a routerLink="/{{gameURL}}/properties/{{prop.slug}}/{{language}}">{{prop.name}}</a></li>
+        }
+      </ul>
+    }
+    @if (item.ingredient_set) {
+      <table class="tbl"><tbody>
+        <tr  class="table-dark-center"><th>Ingredients</th></tr>
+        <tr><td>
+          <ul>
+            @for (ing of item.ingredient_set; track ing) {
+              <li>@if (ing.item) {
+                <a routerLink="/{{gameURL}}/items/{{ing.item.slug}}/{{language}}">{{ing.item.name}}</a>
+                }@if (ing.category) {
+                <a routerLink="/{{gameURL}}/categories/{{ing.category.slug}}/{{language}}">{{ing.category.name}}</a>
+              }</li>
+            }
+          </ul>
+        </td></tr>
+      </tbody></table>
+    }
+    @if (item.effectlines_set) {
+      <table class="tbl"><tbody>
+        <tr  class="table-dark-center"><th colspan=2>Effects</th></tr>
+        @for (effline of item.effectlines_set; track effline) {
+          <tr>
+            <td style="vertical-align:middle">
+              @if (effline.elem == 'fire'  && !effline.hidden) {
+                <i style="color:#ac504f;"  class="atelier atelier-np atelier-shallie-fire"></i>
+              }
+              @if (effline.elem == 'fire'  &&  effline.hidden) {
+                <i style="color:gray;"     class="atelier atelier-np atelier-shallie-fire"></i>
+              }
+              @if (effline.elem == 'water' && !effline.hidden) {
+                <i style="color:#427389;"  class="atelier atelier-np atelier-shallie-water"></i>
+              }
+              @if (effline.elem == 'water' &&  effline.hidden) {
+                <i style="color:gray;"     class="atelier atelier-np atelier-shallie-water"></i>
+              }
+              @if (effline.elem == 'wind'  && !effline.hidden) {
+                <i style="color:#5a843c;"  class="atelier atelier-np atelier-shallie-wind"></i>
+              }
+              @if (effline.elem == 'wind'  &&  effline.hidden) {
+                <i style="color:gray;"     class="atelier atelier-np atelier-shallie-wind"></i>
+              }
+              @if (effline.elem == 'earth' && !effline.hidden) {
+                <i style="color:#8f7939;"  class="atelier atelier-np atelier-shallie-earth"></i>
+              }
+              @if (effline.elem == 'earth' &&  effline.hidden) {
+                <i style="color:gray;"     class="atelier atelier-np atelier-shallie-earth"></i>
+              }
+            </td>
+            <td>
+              @for (eff of effline.effects; track eff) {
+                <a routerLink="/{{gameURL}}/effects/{{eff.effect.slug}}/{{language}}">{{eff.effect.name}}</a><span> ({{eff.min_elem}}-{{eff.max_elem}})</span>
+                <div class="effect-bar">
+                  @if (effline.elem == 'fire') {
+                    <div  class="elemental-bar" style="background:#ac504f;left:{{eff.min_elem}}%;width:{{eff.max_elem-eff.min_elem}}%;"></div>
+                  }
+                  @if (effline.elem == 'water') {
+                    <div class="elemental-bar" style="background:#427389;left:{{eff.min_elem}}%;width:{{eff.max_elem-eff.min_elem}}%;"></div>
+                  }
+                  @if (effline.elem == 'wind') {
+                    <div  class="elemental-bar" style="background:#5a843c;left:{{eff.min_elem}}%;width:{{eff.max_elem-eff.min_elem}}%;"></div>
+                  }
+                  @if (effline.elem == 'earth') {
+                    <div class="elemental-bar" style="background:#8f7939;left:{{eff.min_elem}}%;width:{{eff.max_elem-eff.min_elem}}%;"></div>
+                  }
+                </div>
+              }
+            </td>
+          </tr>
+        }
+      </tbody></table>
+    }
+    @if (item.equip_set) {
+      <table class="tbl"><tbody>
+        <tr class="table-dark-center"><th colspan=2>Stats</th></tr>
+        <tr><td style="padding-top:0.2rem;text-align:right;width:50%;"><b>HP </b></td> <td style="padding-top:0.2rem;padding-left:0.5em;">{{item.equip_set[0].hp}}   </td></tr>
+        <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>MP </b></td> <td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].mp}}   </td></tr>
+        <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>ATK </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].atk}}  </td></tr>
+        <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>DEF </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].defen}}</td></tr>
+        <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>SPD </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].spd}}  </td></tr>
+      </tbody></table>
+    }
+    @if (item.characterequip_set) {
+      <table class="tbl"><tbody>
+        <tr class="table-dark-center"><th>Characters</th></tr>
+        <tr><td>@for (char of item.characterequip_set[0].chars; track char) {
+          <img src="{{imgURL}}equip/equip-{{char.name}}.webp"
+            alt="Can equip: {{char.name}}" height="44" width="111">
+        }</td></tr>
+      </tbody></table>
     }
   </div>
 }

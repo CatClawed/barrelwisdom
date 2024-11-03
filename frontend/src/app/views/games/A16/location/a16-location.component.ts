@@ -1,10 +1,10 @@
 import { Location, ViewportScroller } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { A16Service } from '@app/views/games/A16/_services/a16.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
@@ -35,4 +35,4 @@ export class A16LocationComponent extends FragmentedComponent {
   afterAssignment(): void {
     this.genericSettings(this.data.name, `All items in ${this.data.name}`, '', true);
   }
-} 
+}

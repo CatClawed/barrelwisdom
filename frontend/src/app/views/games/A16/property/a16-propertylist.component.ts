@@ -57,6 +57,7 @@ export class A16PropertylistComponent extends DialogUseComponent {
   }
 
   private filterT(value: string, transfer: string): Property[] {
+    this.hide = false;
     let propertylist: Property[] = this.data;
     switch (transfer) {
       case "2":
