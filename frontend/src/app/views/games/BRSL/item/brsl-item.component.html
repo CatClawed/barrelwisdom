@@ -1,246 +1,259 @@
 @if (data; as item) {
-  <div class="mx-auto row spacer">
-    <div class="{{colset}} card card-body">
-      <h4 class="card-title card-icon-space">{{item.name}}</h4>
-      @if (item.isDLC) {
-        <span class="card-icon-position badge bg-secondary">DLC</span>
-      }
-      <img class="image-display" loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
-      <table class="tbl" style="margin-top:1rem;"><tbody>
-        <tr>
-          <td style="vertical-align:middle; border-bottom:1px solid #c8c3d3;">{{item.desc}}</td>
-          <td style="vertical-align:middle; padding:0;border-bottom:1px solid #c8c3d3;"><img src="/media/games/second-light/characters/{{item.char}}.webp" alt=""></td>
-        </tr>
-      </tbody></table>
-      @if (item.note) {
-        <p><b>Acquisition:</b> {{item.note}}</p>
-      }
-      <ul style="list-style-type:none;padding-left:0;">
-        @for (cat of item.category; track cat) {
-          <li>{{cat.name}}</li>
-        }
-      </ul>
-      @if (item.ingredient_set) {
-        <b>Ingredients:</b>
-      }
-      @if (item.ingredient_set) {
-        <ul>
-          @for (ing of item.ingredient_set; track ing) {
-            <li>
-              @if (ing.item) {
-                <a routerLink="/{{gameURL}}/items/{{ing.item.slug}}/{{language}}">{{ing.item.name}} </a>x{{ing.num}}
-              }
-              @if (ing.category) {
-                {{ing.category.name}} x{{ing.num}}
-              }
-            </li>
-          }
-        </ul>
-      }
-      @if (item.region_set) {
-        <b>Locations:</b>
-      }
-      @if (item.region_set) {
-        <ul>
-          @for (loc of item.region_set; track loc) {
-            <li><a routerLink="/{{gameURL}}/locations/{{loc.slug}}/{{language}}">{{loc.name}}</a></li>
-          }
-        </ul>
-      }
-      @if (item.demon_set) {
-        <b>Demons:</b>
-      }
-      @if (item.demon_set) {
-        <ul>
-          @for (drop of item.demon_set; track drop) {
-            <li><a routerLink="/{{gameURL}}/demons/{{drop.slug}}/{{language}}">{{drop.name}}</a></li>
-          }
-        </ul>
-      }
-      @if (item.effline_set) {
-        <table class="tbl table-shrink"><tbody>
-          <tr class="table-dark-center"><th colspan=2>Effects</th></tr>
-          @for (eline of item.effline_set; track eline) {
-            <tr>
-              <td style="width:50%;">{{eline.line}}</td>
-              <td>
-                @for (data of eline.effectdata; track data) {
-                  <ng-template #effPopover>
-                    {{data.effect.desc}}
-                    @if (data.effect.actTag0) {
-                      <ul>
-                        <li>{{data.effect.actTag0}}@if (data.effect.attTag0) {
-                          <span> / {{data.effect.attTag0}}</span>
-                        }
-                        @if (data.effect.min_1_0) {
-                          <ul>
-                            <li>Value 1: {{data.effect.min_1_0}}@if (data.effect.max_1_0) {
-                              - {{data.effect.max_1_0}}
-                            }</li>
-                            @if (data.effect.min_2_0) {
-                              <li>Value 2: {{data.effect.min_2_0}}@if (data.effect.max_2_0) {
-                                - {{data.effect.max_2_0}}
-                              }</li>
-                            }
-                          </ul>
-                        }
-                      </li>
-                      @if (data.effect.actTag1) {
-                        <li>{{data.effect.actTag1}}
-                          @if (data.effect.min_1_1) {
-                            <ul>
-                              <li>Value 1: {{data.effect.min_1_1}}@if (data.effect.max_1_1) {
-                                - {{data.effect.max_1_1}}
-                              }</li>
-                            </ul>
-                          }
-                        </li>
-                      }
-                    </ul>
-                  }
-                </ng-template>
-                <ol start="{{data.number}}" style="margin-bottom:0;">
-                  <li><popover [template]="effPopover" title="{{data.effect.name}}">{{data.effect.name}}</popover></li>
-                </ol>
-              }
-            </td>
-          </tr>
-        }
-      </tbody></table>
+<div [class]="inputSlug ? 'card card-body spacer' : 'card card-body card-medium'">
+  <h4 class="card-title card-icon-space">{{item.name}}</h4>
+  @if (item.isDLC) {
+  <span class="card-icon-position badge bg-secondary">DLC</span>
+  }
+  <img class="image-display" src="{{imgURL}}items/{{item.slug}}.webp?v=1" alt="{{item.name}}"
+    style="aspect-ratio: 1; width: 256px;">
+  <table class="tbl" style="margin-top:1rem;">
+    <tbody>
+      <tr>
+        <td style="vertical-align:middle; border-bottom:1px solid #c8c3d3;">{{item.desc}}</td>
+        <td style="vertical-align:middle; padding:0;border-bottom:1px solid #c8c3d3;">
+          <img src="/media/games/second-light/characters/{{item.char}}.webp" alt=""
+            style="aspect-ratio: 189/150;width: 189px; min-width: 100px;">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  @if (item.note) {
+  <p><b>Acquisition:</b> {{item.note}}</p>
+  }
+  <ul style="list-style-type:none;padding-left:0;">
+    @for (cat of item.category; track cat) {
+    <li>{{cat.name}}</li>
     }
-    @if (item.skillline_set) {
-      <table class="tbl table-shrink"><tbody>
-        <tr class="table-dark-center">
-          <th colspan=2 style="position:relative;">Skill Effects
-            @if (!expand) {
-              <a href="javascript:void(0)" style="color:black;text-decoration:none;position:absolute;right:1rem;top:50%;transform: translate(-50%,-50%);" (click)="expand=!expand;$event.preventDefault();" class="fas fa-chevron-up"></a>
-            }
-            @if (expand) {
-              <a  href="javascript:void(0)" style="color:black;text-decoration:none;position:absolute;right:1rem;top:50%;transform: translate(-50%,-50%);" (click)="expand=!expand;$event.preventDefault();" class="fas fa-chevron-down"></a>
-            }
-          </th>
-        </tr>
-        @if (expand) {
-          @for (eline of item.skillline_set; track eline) {
-            <tr>
-              <ng-template #effOnePopover>
-                {{eline.effect1.desc}}
-                @if (eline.effect1.actTag0) {
-                  <ul>
-                    <li>{{eline.effect1.actTag0}}@if (eline.effect1.attTag0) {
-                      <span> / {{eline.effect1.attTag0}}</span>
-                    }
-                    @if (eline.effect1.min_1_0) {
-                      <ul>
-                        <li>Value 1: {{eline.effect1.min_1_0}}@if (eline.effect1.max_1_0) {
-                          - {{eline.effect1.max_1_0}}
-                        }</li>
-                        @if (eline.effect1.min_2_0) {
-                          <li>Value 2: {{eline.effect1.min_2_0}}@if (eline.effect1.max_2_0) {
-                            - {{eline.effect1.max_2_0}}
-                          }</li>
-                        }
-                      </ul>
-                    }
-                  </li>
-                  @if (eline.effect1.actTag1) {
-                    <li>{{eline.effect1.actTag1}}
-                      @if (eline.effect1.min_1_1) {
-                        <ul>
-                          <li>Value 1: {{eline.effect1.min_1_1}}@if (eline.effect1.max_1_1) {
-                            - {{eline.effect1.max_1_1}}
-                          }</li>
-                        </ul>
-                      }
-                    </li>
+  </ul>
+  @if (item.ingredient_set) {
+  <b>Ingredients:</b>
+  <ul>
+    @for (ing of item.ingredient_set; track ing) {
+    <li>
+      @if (ing.item) {
+      <a routerLink="/{{gameURL}}/items/{{ing.item.slug}}/{{language}}">{{ing.item.name}} </a>x{{ing.num}}
+      }
+      @if (ing.category) {
+      {{ing.category.name}} x{{ing.num}}
+      }
+    </li>
+    }
+  </ul>
+  }
+  @if (item.region_set) {
+  <b>Locations:</b>
+  <ul>
+    @for (loc of item.region_set; track loc) {
+    <li><a routerLink="/{{gameURL}}/locations/{{loc.slug}}/{{language}}">{{loc.name}}</a></li>
+    }
+  </ul>
+  }
+  @if (item.demon_set) {
+  <b>Demons:</b>
+  <ul>
+    @for (drop of item.demon_set; track drop) {
+    <li><a routerLink="/{{gameURL}}/demons/{{drop.slug}}/{{language}}">{{drop.name}}</a></li>
+    }
+  </ul>
+  }
+  @if (item.effline_set) {
+  <table class="tbl table-shrink">
+    <tbody>
+      <tr class="table-dark-center">
+        <th colspan=2>Effects</th>
+      </tr>
+      @for (eline of item.effline_set; track eline) {
+      <tr>
+        <td style="width:50%;">{{eline.line}}</td>
+        <td>
+          @for (data of eline.effectdata; track data) {
+          <ng-template #effPopover>
+            {{data.effect.desc}}
+            @if (data.effect.actTag0) {
+            <ul>
+              <li>{{data.effect.actTag0}}@if (data.effect.attTag0) {
+                / {{data.effect.attTag0}}
+                }
+                @if (data.effect.min_1_0) {
+                <ul>
+                  <li>Value 1: {{data.effect.min_1_0}}@if (data.effect.max_1_0) {
+                    - {{data.effect.max_1_0}}
+                    }</li>
+                  @if (data.effect.min_2_0) {
+                  <li>Value 2: {{data.effect.min_2_0}}@if (data.effect.max_2_0) {
+                    - {{data.effect.max_2_0}}
+                    }</li>
                   }
                 </ul>
-              }
-            </ng-template>
-            <ng-template #effTwoPopover>
-              {{eline.effect2.desc}}
-              @if (eline.effect2.actTag0) {
-                <ul>
-                  <li>{{eline.effect2.actTag0}}@if (eline.effect2.attTag0) {
-                    <span> / {{eline.effect2.attTag0}}</span>
-                  }
-                  @if (eline.effect2.min_1_0) {
-                    <ul>
-                      <li>Value 1: {{eline.effect2.min_1_0}}@if (eline.effect2.max_1_0) {
-                        - {{eline.effect2.max_1_0}}
-                      }</li>
-                      @if (eline.effect2.min_2_0) {
-                        <li>Value 2: {{eline.effect2.min_2_0}}@if (eline.effect2.max_2_0) {
-                          - {{eline.effect2.max_2_0}}
-                        }</li>
-                      }
-                    </ul>
-                  }
-                </li>
-                @if (eline.effect2.actTag1) {
-                  <li>{{eline.effect2.actTag1}}
-                    @if (eline.effect2.min_1_1) {
-                      <ul>
-                        <li>Value 1: {{eline.effect2.min_1_1}}@if (eline.effect2.max_1_1) {
-                          - {{eline.effect2.max_1_1}}
-                        }</li>
-                      </ul>
-                    }
-                  </li>
-                }
-              </ul>
-            }
-          </ng-template>
-          <ng-template #effThreePopover>
-            {{eline.effect3.desc}}
-            @if (eline.effect3.actTag0) {
-              <ul>
-                <li>{{eline.effect3.actTag0}}@if (eline.effect3.attTag0) {
-                  <span> / {{eline.effect3.attTag0}}</span>
-                }
-                @if (eline.effect3.min_1_0) {
-                  <ul>
-                    <li>Value 1: {{eline.effect3.min_1_0}}@if (eline.effect3.max_1_0) {
-                      - {{eline.effect3.max_1_0}}
-                    }</li>
-                    @if (eline.effect3.min_2_0) {
-                      <li>Value 2: {{eline.effect3.min_2_0}}@if (eline.effect3.max_2_0) {
-                        - {{eline.effect3.max_2_0}}
-                      }</li>
-                    }
-                  </ul>
                 }
               </li>
-              @if (eline.effect3.actTag1) {
-                <li>{{eline.effect3.actTag1}}
-                  @if (eline.effect3.min_1_1) {
-                    <ul>
-                      <li>Value 1: {{eline.effect3.min_1_1}}@if (eline.effect3.max_1_1) {
-                        - {{eline.effect3.max_1_1}}
-                      }</li>
-                    </ul>
-                  }
-                </li>
+              @if (data.effect.actTag1) {
+              <li>{{data.effect.actTag1}}
+                @if (data.effect.min_1_1) {
+                <ul>
+                  <li>Value 1: {{data.effect.min_1_1}}@if (data.effect.max_1_1) {
+                    - {{data.effect.max_1_1}}
+                    }</li>
+                </ul>
+                }
+              </li>
               }
             </ul>
+            }
+          </ng-template>
+          <ol start="{{data.number}}" style="margin-bottom:0;">
+            <li>
+              <popover [template]="effPopover" title="{{data.effect.name}}">{{data.effect.name}}</popover>
+            </li>
+          </ol>
+          }
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+  }
+  @if (item.skillline_set) {
+  <table class="tbl table-shrink">
+    <tbody>
+      <tr class="table-dark-center">
+        <th colspan=2 style="position:relative;">Skill Effects
+          @if (!expand) {
+          <a href="javascript:void(0)"
+            style="color:black;text-decoration:none;position:absolute;right:1rem;top:50%;transform: translate(-50%,-50%);"
+            (click)="expand=!expand;$event.preventDefault();" class="fas fa-chevron-up"></a>
+          }
+          @if (expand) {
+          <a href="javascript:void(0)"
+            style="color:black;text-decoration:none;position:absolute;right:1rem;top:50%;transform: translate(-50%,-50%);"
+            (click)="expand=!expand;$event.preventDefault();" class="fas fa-chevron-down"></a>
+          }
+        </th>
+      </tr>
+      @if (expand) {
+      @for (eline of item.skillline_set; track eline) {
+      <tr>
+        <ng-template #effOnePopover>
+          {{eline.effect1.desc}}
+          @if (eline.effect1.actTag0) {
+          <ul>
+            <li>{{eline.effect1.actTag0}}@if (eline.effect1.attTag0) {
+              / {{eline.effect1.attTag0}}
+              }
+              @if (eline.effect1.min_1_0) {
+              <ul>
+                <li>Value 1: {{eline.effect1.min_1_0}}@if (eline.effect1.max_1_0) {
+                  - {{eline.effect1.max_1_0}}
+                  }</li>
+                @if (eline.effect1.min_2_0) {
+                <li>Value 2: {{eline.effect1.min_2_0}}@if (eline.effect1.max_2_0) {
+                  - {{eline.effect1.max_2_0}}
+                  }</li>
+                }
+              </ul>
+              }
+            </li>
+            @if (eline.effect1.actTag1) {
+            <li>{{eline.effect1.actTag1}}
+              @if (eline.effect1.min_1_1) {
+              <ul>
+                <li>Value 1: {{eline.effect1.min_1_1}}@if (eline.effect1.max_1_1) {
+                  - {{eline.effect1.max_1_1}}
+                  }</li>
+              </ul>
+              }
+            </li>
+            }
+          </ul>
+          }
+        </ng-template>
+        <ng-template #effTwoPopover>
+          {{eline.effect2.desc}}
+          @if (eline.effect2.actTag0) {
+          <ul>
+            <li>{{eline.effect2.actTag0}}@if (eline.effect2.attTag0) {
+              / {{eline.effect2.attTag0}}
+              }
+              @if (eline.effect2.min_1_0) {
+              <ul>
+                <li>Value 1: {{eline.effect2.min_1_0}}@if (eline.effect2.max_1_0) {
+                  - {{eline.effect2.max_1_0}}
+                  }</li>
+                @if (eline.effect2.min_2_0) {
+                <li>Value 2: {{eline.effect2.min_2_0}}@if (eline.effect2.max_2_0) {
+                  - {{eline.effect2.max_2_0}}
+                  }</li>
+                }
+              </ul>
+              }
+            </li>
+            @if (eline.effect2.actTag1) {
+            <li>{{eline.effect2.actTag1}}
+              @if (eline.effect2.min_1_1) {
+              <ul>
+                <li>Value 1: {{eline.effect2.min_1_1}}@if (eline.effect2.max_1_1) {
+                  - {{eline.effect2.max_1_1}}
+                  }</li>
+              </ul>
+              }
+            </li>
+            }
+          </ul>
+          }
+        </ng-template>
+        <ng-template #effThreePopover>
+          {{eline.effect3.desc}}
+          @if (eline.effect3.actTag0) {
+          <ul>
+            <li>{{eline.effect3.actTag0}}@if (eline.effect3.attTag0) {
+              / {{eline.effect3.attTag0}}
+              }
+              @if (eline.effect3.min_1_0) {
+              <ul>
+                <li>Value 1: {{eline.effect3.min_1_0}}@if (eline.effect3.max_1_0) {
+                  - {{eline.effect3.max_1_0}}
+                  }</li>
+                @if (eline.effect3.min_2_0) {
+                <li>Value 2: {{eline.effect3.min_2_0}}@if (eline.effect3.max_2_0) {
+                  - {{eline.effect3.max_2_0}}
+                  }</li>
+                }
+              </ul>
+              }
+            </li>
+            @if (eline.effect3.actTag1) {
+            <li>{{eline.effect3.actTag1}}
+              @if (eline.effect3.min_1_1) {
+              <ul>
+                <li>Value 1: {{eline.effect3.min_1_1}}@if (eline.effect3.max_1_1) {
+                  - {{eline.effect3.max_1_1}}
+                  }</li>
+              </ul>
+              }
+            </li>
+            }
+          </ul>
           }
         </ng-template>
         <td style="width:50%;">{{eline.line}}</td>
         <td>
           <ol>
-            <li><popover [template]="effOnePopover"   title="{{eline.effect1.name}}">{{eline.effect1.name}}</popover></li>
-            <li><popover [template]="effTwoPopover"   title="{{eline.effect2.name}}">{{eline.effect2.name}}</popover></li>
-            <li><popover [template]="effThreePopover" title="{{eline.effect3.name}}">{{eline.effect3.name}}</popover></li>
+            <li>
+              <popover [template]="effOnePopover" title="{{eline.effect1.name}}">{{eline.effect1.name}}</popover>
+            </li>
+            <li>
+              <popover [template]="effTwoPopover" title="{{eline.effect2.name}}">{{eline.effect2.name}}</popover>
+            </li>
+            <li>
+              <popover [template]="effThreePopover" title="{{eline.effect3.name}}">{{eline.effect3.name}}</popover>
+            </li>
           </ol>
         </td>
       </tr>
-    }
+      }
+      }
+    </tbody>
+  </table>
   }
-</tbody></table>
-}
-</div>
-@if (showNav) {
-  <div class="col-md-3" ></div>
-}
 </div>
 }

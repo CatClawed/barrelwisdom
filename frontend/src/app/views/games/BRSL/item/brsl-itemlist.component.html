@@ -1,6 +1,28 @@
 @if (!error) {
-  <h1>Items</h1>
-  <div class="col-md-10 mx-auto">
+  <ng-template #template let-item="item">
+    <item
+      [item]="item"
+      url="/{{gameURL}}/items/{{item.slug}}/{{language}}"
+      imgURL="{{imgURL}}items/{{item.slug}}.webp?v=1"
+      (buttonClicked)="openDialog($event)"
+      dimension="256">
+      <ng-container icon>
+        @if (item.isDLC) {
+          <span class="badge bg-secondary">DLC</span>
+        }
+      </ng-container>
+      <ul style="list-style-type:none;padding-left:0;">
+        @for (cat of item.category; track cat) {
+          <li>{{cat.name}}</li>
+        }
+      </ul>
+    </item>
+  </ng-template>
+  <filter-list
+    [list]="filteredItems"
+    title="Items"
+    [(hide)]="hide"
+    [template]="template">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
         <mat-form-field class="col-md-12" appearance="outline">
@@ -34,28 +56,5 @@
         </mat-form-field>
       </div>
     </form>
-  </div>
-  <div class="item-grid">
-    @for (item of filteredItems | async; track identify($index, item)) {
-      <div class="card card-body">
-        <h4 class="card-title card-icon-space">
-          <a (click)="openDialog(item.slug, $event);" href="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
-        </h4>
-        @if (item.isDLC) {
-          <span class="card-icon-position badge bg-secondary">DLC</span>
-        }
-        <a class="card-item-display" (click)="openDialog(item.slug, $event);" href="/{{gameURL}}/items/{{item.slug}}/{{language}}">
-          <img loading="lazy" src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
-        </a>
-        <ul style="list-style-type:none;padding-left:0;">
-          @for (cat of item.category; track cat) {
-            <li>{{cat.name}}</li>
-          }
-        </ul>
-        <button (click)="openDialog(item.slug)" class="card-read-more-position" mat-mini-fab color="primary">
-          <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
-        </button>
-      </div>
-    }
-  </div>
+  </filter-list>
 }

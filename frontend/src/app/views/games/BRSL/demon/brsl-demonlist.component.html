@@ -1,6 +1,18 @@
 @if (!error) {
-  <h1>Demons</h1>
-  <div class="col-md-10 mx-auto">
+  <ng-template #template let-mon="item">
+    <item
+      [item]="mon"
+      url="/{{gameURL}}/demons/{{mon.slug}}/{{language}}"
+      (buttonClicked)="openDialog($event)"
+      dimension="256"
+      imgURL="{{imgURL}}demons/{{mon.slug}}.webp?v=1">
+    </item>
+  </ng-template>
+  <filter-list
+    [list]="filteredDemons"
+    title="Demons"
+    [(hide)]="hide"
+    [template]="template">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
         <mat-form-field class="col-md-12" appearance="outline">
@@ -9,23 +21,5 @@
         </mat-form-field>
       </div>
     </form>
-  </div>
-  <div class="item-grid">
-    @for (mon of filteredDemons | async; track identify($index, mon)) {
-      <div class="card card-body">
-        <h4 class="card-title card-icon-space">
-          <a (click)="openDialog(mon.slug, $event);" href="/{{gameURL}}/demons/{{mon.slug}}/{{language}}">{{mon.name}}</a>
-        </h4>
-        @if (mon.isDLC) {
-          <span class="card-icon-position badge bg-secondary">DLC</span>
-        }
-        <a class="card-item-display" (click)="openDialog(mon.slug, $event);" href="/{{gameURL}}/demons/{{mon.slug}}/{{language}}">
-          <img loading="lazy" src="{{imgURL}}demons/{{mon.slug}}.webp" alt="{{mon.name}}">
-        </a>
-        <button (click)="openDialog(mon.slug)" class="card-read-more-position" mat-mini-fab color="primary">
-          <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
-        </button>
-      </div>
-    }
-  </div>
+  </filter-list>
 }

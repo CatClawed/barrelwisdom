@@ -1,6 +1,23 @@
 @if (!error) {
-  <h1>Facilities</h1>
-  <div class="col-md-10 mx-auto">
+  <ng-template #template let-facility="item">
+    <item
+      [item]="facility"
+      url="/{{gameURL}}/facilities{{facility.slug}}/{{language}}"
+      (buttonClicked)="openDialog($event)"
+      dimension="253"
+      imgURL="{{imgURL}}facilities/{{facility.slug}}.webp?v=1">
+      <ng-container icon>
+        @if (facility.isDLC) {
+          <span class="badge bg-secondary">DLC</span>
+        }
+      </ng-container>
+    </item>
+  </ng-template>
+  <filter-list
+    [list]="filteredFacilities"
+    title="Facilities"
+    [(hide)]="hide"
+    [template]="template">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
         <mat-form-field class="col-md-12" appearance="outline">
@@ -9,23 +26,5 @@
         </mat-form-field>
       </div>
     </form>
-  </div>
-  <div class="item-grid">
-    @for (facility of filteredFacilities | async; track identify($index, facility)) {
-      <div class="card card-body">
-        <h4 class="card-title card-icon-space">
-          <a style="color: black;" (click)="openDialog(facility.slug, $event);" href="/{{gameURL}}/facilities/{{facility.slug}}/{{language}}">{{facility.name}}</a>
-        </h4>
-        @if (facility.isDLC) {
-          <span class="card-icon-position badge bg-secondary">DLC</span>
-        }
-        <a class="card-item-display" (click)="openDialog(facility.slug, $event);" href="/{{gameURL}}/facilities/{{facility.slug}}/{{language}}">
-          <img loading="lazy" src="{{imgURL}}facilities/{{facility.slug}}.webp" alt="{{facility.name}}">
-        </a>
-        <button (click)="openDialog(facility.slug)" class="card-read-more-position" mat-mini-fab color="primary">
-          <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
-        </button>
-      </div>
-    }
-  </div>
+  </filter-list>
 }

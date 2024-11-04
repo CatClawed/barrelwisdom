@@ -4,9 +4,11 @@ import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
+import { ItemComponent } from '@app/views/_components/item/item.component';
 import { FacilityList } from '@app/views/games/BRSL/_services/brsl.interface';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -19,8 +21,8 @@ import { BRSLFacilityComponent } from './brsl-facility.component';
   templateUrl: 'brsl-facilitylist.component.html',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports,
-    BRSLFacilityComponent, MatButtonModule]
+  imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
+    ItemComponent, MatButtonModule]
 })
 
 export class BRSLFacilitylistComponent extends DialogUseComponent {
@@ -58,6 +60,7 @@ export class BRSLFacilitylistComponent extends DialogUseComponent {
     );
   }
   private filterT(value: string): FacilityList[] {
+    this.hide = false;
     let list: FacilityList[] = this.data;
     if (!value) {
       return list;

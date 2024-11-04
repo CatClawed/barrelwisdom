@@ -1,73 +1,72 @@
 @if (data; as facility) {
-  <div class="mx-auto row">
-    <div class="{{colset}} card card-body">
-      <h4 class="card-title card-icon-space">{{facility.name}}</h4>
-      @if (facility.isDLC) {
-        <span class="card-icon-position badge bg-secondary">DLC</span>
-      }
-      <img class="image-display" loading="lazy" src="{{imgURL}}facilities/{{facility.slug}}.webp" alt="{{facility.name">
-      <table class="tbl" style="margin-top:1rem;"><tbody>
-        <tr>
-          <td style="vertical-align:middle; border-bottom:1px solid #c8c3d3;">{{facility.desc}}</td>
-          <td style="vertical-align:middle; padding:0;border-bottom:1px solid #c8c3d3;"><img src="/media/games/second-light/characters/{{facility.char}}.webp" alt=""></td>
-        </tr>
+  <div [class]="inputSlug ? 'card card-body spacer' : 'card card-body card-medium'">
+    <h4 class="card-title card-icon-space">{{facility.name}}</h4>
+    @if (facility.isDLC) {
+      <span class="card-icon-position badge bg-secondary">DLC</span>
+    }
+    <img class="image-display" src="{{imgURL}}facilities/{{facility.slug}}.webp?v=1"
+      alt="{{facility.name}}" style="aspect-ratio: 1; width: 253px;">
+    <table class="tbl" style="margin-top:1rem;"><tbody>
+      <tr>
+        <td style="vertical-align:middle; border-bottom:1px solid #c8c3d3;">{{facility.desc}}</td>
+        <td style="vertical-align:middle; padding:0;border-bottom:1px solid #c8c3d3;">
+          <img src="/media/games/second-light/characters/{{facility.char}}.webp" alt=""
+            style="aspect-ratio: 189/150;width: 189px; min-width: 100px;">
+        </td>
+      </tr>
+    </tbody></table>
+    @if (facility.facilityeffline_set) {
+      <table class="tbl table-shrink"><tbody>
+        <tr class="table-dark-center"><th colspan=2>Effects</th></tr>
+        @for (eline of facility.facilityeffline_set; track eline) {
+          <tr>
+            <td>{{eline.line}}</td>
+            <td>
+              <ul>
+                @for (data of eline.effectdata; track data) {
+                  <li>
+                    <ng-template #effPopover>
+                      {{data.effect.desc}}
+                    </ng-template>
+                    <popover [title]="data.effect.name"
+                      [template]="effPopover">
+                      {{data.effect.name}}
+                    </popover>
+                  </li>
+                }
+              </ul>
+            </td>
+          </tr>
+        }
       </tbody></table>
-      @if (facility.facilityeffline_set) {
-        <table class="tbl table-shrink"><tbody>
-          <tr class="table-dark-center"><th colspan=2>Effects</th></tr>
-          @for (eline of facility.facilityeffline_set; track eline) {
-            <tr>
-              <td>{{eline.line}}</td>
-              <td>
-                <ul>
-                  @for (data of eline.effectdata; track data) {
-                    <li>
-                      <ng-template #effPopover>
-                        {{data.effect.desc}}
-                      </ng-template>
-                      <popover [title]="data.effect.name"
-                        [template]="effPopover">
-                        {{data.effect.name}}
-                      </popover>
-                    </li>
-                  }
-                </ul>
-              </td>
-            </tr>
-          }
-        </tbody></table>
-      }
-      @if (facility.facilitying_set) {
-        <table class="tbl table-shrink"><tbody>
-          <tr class="table-dark-center"><th colspan=2>Ingredients</th></tr>
-          @for (line of facility.facilitying_set; track line) {
-            <tr>
-              <td>{{line.level}}</td>
-              <td>
-                <ul>
-                  @for (data of line.data; track data) {
-                    <li>
-                      @if (data.item) {
-                        <a  routerLink="/{{gameURL}}/items/{{data.item.slug}}/{{language}}">{{data.item.name}}</a>
-                      }
-                      @if (data.category) {
-                        <span>{{data.category.name}}</span>
-                      }
-                      x{{data.num}}
-                      @if (data.effect) {
-                        <span> ({{data.effect.name}})</span>
-                      }
-                    </li>
-                  }
-                </ul>
-              </td>
-            </tr>
-          }
-        </tbody></table>
-      }
-    </div>
-    @if (showNav) {
-      <div class="col-md-3" ></div>
+    }
+    @if (facility.facilitying_set) {
+      <table class="tbl table-shrink"><tbody>
+        <tr class="table-dark-center"><th colspan=2>Ingredients</th></tr>
+        @for (line of facility.facilitying_set; track line) {
+          <tr>
+            <td>{{line.level}}</td>
+            <td>
+              <ul>
+                @for (data of line.data; track data) {
+                  <li>
+                    @if (data.item) {
+                      <a  routerLink="/{{gameURL}}/items/{{data.item.slug}}/{{language}}">{{data.item.name}}</a>
+                    }
+                    @if (data.category) {
+                      <span>{{data.category.name}}</span>
+                    }
+                    x{{data.num}}
+                    @if (data.effect) {
+                      <span> ({{data.effect.name}})</span>
+                    }
+                  </li>
+                }
+              </ul>
+            </td>
+          </tr>
+        }
+      </tbody></table>
     }
   </div>
 }

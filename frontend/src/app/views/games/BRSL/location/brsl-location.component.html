@@ -16,7 +16,8 @@
     @for (area of location.areas; track area) {
       <h2 id="{{area.slug}}">{{area.name}}</h2>
       @if (area.map) {
-        <img style="padding-bottom:1rem;" src="{{area.map}}" alt="{{area.name}}">
+        <img style="padding-bottom:1rem; aspect-ratio: 890/761; width: 890px;"
+          src="{{area.map}}" alt="{{area.name}}">
       }
       <table class="tbl border table-shrink"><tbody>
         <tr class="table-dark-center">

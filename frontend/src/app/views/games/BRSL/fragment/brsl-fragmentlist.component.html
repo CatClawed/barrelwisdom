@@ -1,8 +1,128 @@
 @if (!error) {
-  <h1>Fragments &amp; Dates</h1>
-  <p>Dates give one of two possible fragments. The first listed will always be from two top choices; the second will always be two bottom choices. A handful of fragments come from DLC and a choice you make later in the game.</p>
-  <p><b>Note:</b> There may be inaccuracies for anything labelled as DLC.</p>
-  <div class="col-md-10 mx-auto">
+  <ng-template #fragitPopover let-frag="frag">
+    {{frag.desc}}
+    @if (frag.actTag0) {
+      <ul>
+        <li>{{frag.actTag0}}
+          @if (frag.min1_0) {
+            <ul>
+              <li>Value 1: {{frag.min1_0}}@if (frag.min1_0!=frag.max1_0) {
+                - {{frag.max1_0}}
+              }</li>
+              @if (frag.min2_0) {
+                <li>Value 2: {{frag.min2_0}}@if (frag.min2_0!=frag.max2_0) {
+                  - {{frag.max2_0}}
+                }</li>
+              }
+            </ul>
+          }
+        </li>
+        @if (frag.actTag1) {
+          <li>{{frag.actTag1}}
+            @if (frag.min1_1) {
+              <ul>
+                <li>Value 1: {{frag.min1_1}}@if (frag.min1_1!=frag.max1_1) {
+                  - {{frag.max1_1}}
+                }</li>
+              </ul>
+            }
+          </li>
+        }
+      </ul>
+    }
+  </ng-template>
+  <ng-template #template let-evt="item">
+    <div class="card card-body" style="height:min-content;">
+      @if (evt.character) {
+        <h4 class="card-title">
+          {{evt.character.name}}
+          @if (evt.isDLC) {
+            DLC
+          }
+          @if (evt.location) {
+            - {{evt.location.loc}}
+          }
+        </h4>
+      }
+      @if (!evt.character && evt.isDLC) {
+        <h4 class="card-title">
+          DLC
+        </h4>
+      }
+      @if (evt.fragment.length == 2) {
+        <table class="tbl table-shrink"><tbody>
+          <tr class="table-dark-center"><th>Fragments</th></tr>
+          <tr><td>
+            <i class="fas fa-arrow-up"></i><i class="fas fa-arrow-up"></i>
+            {{evt.fragment[0].name}}<br />
+            <popover
+              [template]="fragitPopover"
+              [context]="{frag: evt.fragment[0]}"
+              title="{{evt.fragment[0].eff}}">
+              {{evt.fragment[0].eff}}
+            </popover>
+            <br />Size: {{evt.fragment[0].size}}
+            <br />Gear: {{evt.fragment[0].gear}}
+          </td></tr>
+          <tr><td>
+            <i class="fas fa-arrow-down"></i><i class="fas fa-arrow-down"></i>
+            {{evt.fragment[1].name}}<br />
+            <popover
+              [template]="fragitPopover"
+              [context]="{frag: evt.fragment[1]}"
+              title="{{evt.fragment[1].eff}}">
+              {{evt.fragment[1].eff}}
+            </popover>
+            <br />Size: {{evt.fragment[1].size}}
+            <br />Gear: {{evt.fragment[1].gear}}
+          </td></tr>
+        </tbody></table>
+      }
+      @if (evt.fragment.length != 2) {
+        <table class="tbl table-shrink"><tbody>
+          <tr class="table-dark-center"><th>Fragments</th></tr>
+          @for (frag of evt.fragment; track frag) {
+            <tr>
+              <td>{{frag.name}}<br />
+                <popover [template]="fragitPopover" [context]="{frag:frag}" title="{{frag.eff}}">
+                  {{frag.eff}}
+                </popover>
+                <br />Size: {{frag.size}}
+                <br />Gear: {{frag.gear}}
+              </td>
+            </tr>
+          }
+        </tbody></table>
+      }
+      @if (evt.choices) {
+        <table class="tbl table-shrink"><tbody>
+          <tr class="table-dark-center"><th style="position:relative;">Choices@if (!evt.expand) {
+            <a href="javascript:void(0)" style="color:black;text-decoration:none;position:absolute;right:1rem;top:50%;transform: translate(-50%,-50%);" (click)="evt.expand=!evt.expand;$event.preventDefault();" class="fas fa-chevron-up"></a>
+            }@if (evt.expand) {
+            <a href="javascript:void(0)" style="color:black;text-decoration:none;position:absolute;right:1rem;top:50%;transform: translate(-50%,-50%);" (click)="evt.expand=!evt.expand;$event.preventDefault();" class="fas fa-chevron-down"></a>
+          }</th></tr>
+          @if (evt.expand) {
+            @for (p of evt.choices | pair; track p) {
+              <tr><td>
+                <ul>@for (choice of p; track choice) {
+                  <li>
+                    {{choice.choice}}
+                  </li>
+                }</ul>
+              </td></tr>
+            }
+          }
+        </tbody></table>
+      }
+    </div>
+  </ng-template>
+  <filter-list
+    [list]="filteredEvents"
+    title="Fragments &amp; Dates"
+    [(hide)]="hide"
+    [template]="template">
+    <p>Dates give one of two possible fragments. The first listed will always be from two top choices; the second will always be two bottom choices. A handful of fragments come from DLC and a choice you make later in the game.</p>
+    <p><b>Note:</b> There may be inaccuracies for anything labelled as DLC.</p>
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
         <mat-form-field class="col-md-12" appearance="outline">
@@ -39,158 +159,5 @@
         </mat-form-field>
       </div>
     </form>
-  </div>
-  <div class="item-grid">
-    @for (evt of filteredEvents | async; track identify($index, evt)) {
-      <div class="card card-body" style="height:min-content;">
-        @if (evt.character) {
-          <h4 class="card-title">
-            {{evt.character.name}}@if (evt.isDLC) {
-            DLC
-            }@if (evt.location) {
-            - {{evt.location.loc}}
-          }
-        </h4>
-      }
-      @if (!evt.character && evt.isDLC) {
-        <h4 class="card-title">
-          DLC
-        </h4>
-      }
-      @if (evt.fragment.length == 2) {
-        <ng-template #fragonePopover>
-          {{evt.fragment[0].desc}}
-          @if (evt.fragment[0].actTag0) {
-            <ul>
-              <li>{{evt.fragment[0].actTag0}}
-                @if (evt.fragment[0].min1_0) {
-                  <ul>
-                    <li>Value 1: {{evt.fragment[0].min1_0}}@if (evt.fragment[0].min1_0!=evt.fragment[0].max1_0) {
-                      - {{evt.fragment[0].max1_0}}
-                    }</li>
-                    @if (evt.fragment[0].min2_0) {
-                      <li>Value 2: {{evt.fragment[0].min2_0}}@if (evt.fragment[0].min2_0!=evt.fragment[0].max2_0) {
-                        - {{evt.fragment[0].max2_0}}
-                      }</li>
-                    }
-                  </ul>
-                }
-              </li>
-              @if (evt.fragment[0].actTag1) {
-                <li>{{evt.fragment[0].actTag1}}
-                  @if (evt.fragment[0].min1_1) {
-                    <ul>
-                      <li>Value 1: {{evt.fragment[0].min1_1}}@if (evt.fragment[0].min1_1!=evt.fragment[0].max1_1) {
-                        - {{evt.fragment[0].max1_1}}
-                      }</li>
-                    </ul>
-                  }
-                </li>
-              }
-            </ul>
-          }
-        </ng-template>
-        <ng-template #fragtwoPopover>
-          {{evt.fragment[1].desc}}
-          @if (evt.fragment[1].actTag0) {
-            <ul>
-              <li>{{evt.fragment[1].actTag0}}
-                @if (evt.fragment[1].min1_0) {
-                  <ul>
-                    <li>Value 1: {{evt.fragment[1].min1_0}}@if (evt.fragment[1].min1_0!=evt.fragment[1].max1_0) {
-                      - {{evt.fragment[1].max1_0}}
-                    }</li>
-                    @if (evt.fragment[1].min2_0) {
-                      <li>Value 2: {{evt.fragment[1].min2_0}}@if (evt.fragment[1].min2_0!=evt.fragment[1].max2_0) {
-                        - {{evt.fragment[1].max2_0}}
-                      }</li>
-                    }
-                  </ul>
-                }
-              </li>
-              @if (evt.fragment[1].actTag1) {
-                <li>{{evt.fragment[1].actTag1}}
-                  @if (evt.fragment[1].min1_1) {
-                    <ul>
-                      <li>Value 1: {{evt.fragment[1].min1_1}}@if (evt.fragment[1].min1_1!=evt.fragment[1].max1_1) {
-                        - {{evt.fragment[1].max1_1}}
-                      }</li>
-                    </ul>
-                  }
-                </li>
-              }
-            </ul>
-          }
-        </ng-template>
-        <table class="tbl table-shrink"><tbody>
-          <tr class="table-dark-center"><th>Fragments</th></tr>
-          <tr><td><i class="fas fa-arrow-up"></i><i class="fas fa-arrow-up"></i>     {{evt.fragment[0].name}}<br /><popover [template]="fragonePopover" title="{{evt.fragment[0].eff}}">{{evt.fragment[0].eff}}</popover><br />Size: {{evt.fragment[0].size}}<br />Gear: {{evt.fragment[0].gear}}</td></tr>
-          <tr><td><i class="fas fa-arrow-down"></i><i class="fas fa-arrow-down"></i> {{evt.fragment[1].name}}<br /><popover [template]="fragonePopover" title="{{evt.fragment[1].eff}}">{{evt.fragment[1].eff}}</popover><br />Size: {{evt.fragment[1].size}}<br />Gear: {{evt.fragment[1].gear}}</td></tr>
-        </tbody></table>
-      }
-      @if (evt.fragment.length != 2) {
-        <table class="tbl table-shrink"><tbody>
-          <tr class="table-dark-center"><th>Fragments</th></tr>
-          @for (frag of evt.fragment; track frag) {
-            <tr>
-              <ng-template #fragPopover>
-                {{frag.desc}}
-                @if (frag.actTag0) {
-                  <ul>
-                    <li>{{frag.actTag0}}
-                      @if (frag.min1_0) {
-                        <ul>
-                          <li>Value 1: {{frag.min1_0}}@if (frag.min1_0!=frag.max1_0) {
-                            - {{frag.max1_0}}
-                          }</li>
-                          @if (frag.min2_0) {
-                            <li>Value 2: {{frag.min2_0}}@if (frag.min2_0!=frag.max2_0) {
-                              - {{frag.max2_0}}
-                            }</li>
-                          }
-                        </ul>
-                      }
-                    </li>
-                    @if (frag.actTag1) {
-                      <li>{{frag.actTag1}}
-                        @if (frag.min1_1) {
-                          <ul>
-                            <li>Value 1: {{frag.min1_1}}@if (frag.min1_1!=frag.max1_1) {
-                              - {{frag.max1_1}}
-                            }</li>
-                          </ul>
-                        }
-                      </li>
-                    }
-                  </ul>
-                }
-              </ng-template>
-              <td>{{frag.name}}<br /><popover [template]="fragPopover" title="{{frag.eff}}">{{frag.eff}}</popover><br />Size: {{frag.size}}<br />Gear: {{frag.gear}}</td>
-            </tr>
-          }
-        </tbody></table>
-      }
-      @if (evt.choices) {
-        <table class="tbl table-shrink"><tbody>
-          <tr class="table-dark-center"><th style="position:relative;">Choices@if (!evt.expand) {
-            <a href="javascript:void(0)" style="color:black;text-decoration:none;position:absolute;right:1rem;top:50%;transform: translate(-50%,-50%);" (click)="evt.expand=!evt.expand;$event.preventDefault();" class="fas fa-chevron-up"></a>
-            }@if (evt.expand) {
-            <a href="javascript:void(0)" style="color:black;text-decoration:none;position:absolute;right:1rem;top:50%;transform: translate(-50%,-50%);" (click)="evt.expand=!evt.expand;$event.preventDefault();" class="fas fa-chevron-down"></a>
-          }</th></tr>
-          @if (evt.expand) {
-            @for (p of evt.choices | pair; track p) {
-              <tr><td>
-                <ul>@for (choice of p; track choice) {
-                  <li>
-                    {{choice.choice}}
-                  </li>
-                }</ul>
-              </td></tr>
-            }
-          }
-        </tbody></table>
-      }
-    </div>
-  }
-</div>
+  </filter-list>
 }

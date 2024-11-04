@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PipeModule } from '@app/_helpers/pipes/pipes.module';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Popover } from '@app/views/_components/popover/popover.component';
 import { Event } from '@app/views/games/BRSL/_services/brsl.interface';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
@@ -17,7 +18,8 @@ import { map, startWith } from 'rxjs/operators';
   templateUrl: 'brsl-fragmentlist.component.html',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, PipeModule, Popover]
+  imports: [...CommonImports, ...MaterialFormImports, PipeModule, Popover,
+    FilterListComponent]
 })
 
 export class BRSLFragmentComponent extends FilterableComponent {
@@ -59,6 +61,7 @@ export class BRSLFragmentComponent extends FilterableComponent {
   }
 
   private filterT(value: string, char: string, loc: string): Event[] {
+    this.hide = false;
     let list: Event[] = this.data.fragment;
     if (char != "Any") {
       list = list.filter(evt => (evt.character) ? evt.character.name == char : false)

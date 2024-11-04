@@ -1,6 +1,18 @@
 @if (!error) {
-  <h1>Facility Sets</h1>
-  <div class="col-md-10 mx-auto">
+  <ng-template #template let-set="item">
+    <div class="card card-body">
+      <h4>{{set.effect.name}}</h4>
+      <p>{{set.effect.desc}}</p>
+      <ul>
+        @for (facility of set.facilities; track facility) {
+          <li>
+            <a routerLink="/{{gameURL}}/facilities/{{facility.slug}}/{{language}}">{{facility.name}}</a>
+          </li>
+        }
+      </ul>
+    </div>
+  </ng-template>
+  <filter-list [list]="filteredSets" title="Facility Sets" [(hide)]="hide" [template]="template">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
         <mat-form-field class="col-md-12" appearance="outline">
@@ -9,20 +21,5 @@
         </mat-form-field>
       </div>
     </form>
-  </div>
-  @for (set of filteredSets | async; track set) {
-    <div class="row spacer">
-      <div class="card card-body col-md-8" style="margin-left:auto;margin-right:auto;">
-        <h4>{{set.effect.name}}</h4>
-        <p>{{set.effect.desc}}</p>
-        <ul>
-          @for (facility of set.facilities; track facility) {
-            <li>
-              <a routerLink="/{{gameURL}}/facilities/{{facility.slug}}/{{language}}">{{facility.name}}</a>
-            </li>
-          }
-        </ul>
-      </div>
-    </div>
-  }
+  </filter-list>
 }
