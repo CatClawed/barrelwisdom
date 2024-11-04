@@ -16,6 +16,7 @@ import { DataComponent } from './data.component';
 export abstract class FilterableComponent extends DataComponent {
     pageForm: UntypedFormGroup;
     hide: boolean = false;
+    loadAll: boolean = false;
 
     constructor(
         protected readonly destroy$: DestroyService,

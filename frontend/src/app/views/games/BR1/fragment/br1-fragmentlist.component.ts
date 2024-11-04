@@ -2,9 +2,10 @@ import { Location, ViewportScroller } from '@angular/common';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { FragmentEffect } from '@app/views/games/BR1/_services/br1.interface';
 import { BR1Service } from '@app/views/games/BR1/_services/br1.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -16,7 +17,7 @@ import { map, startWith } from 'rxjs/operators';
   templateUrl: 'br1-fragmentlist.component.html',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports]
+  imports: [...CommonImports, ...MaterialFormImports, FilterListComponent]
 })
 
 export class BR1FragmentEffectlistComponent extends FragmentedComponent {
@@ -51,6 +52,7 @@ export class BR1FragmentEffectlistComponent extends FragmentedComponent {
   }
 
   private filterT(value: string): FragmentEffect[] {
+    this.hide = false;
     let list: FragmentEffect[] = this.data;
     if (value) {
       const filterValue = value.toLowerCase();

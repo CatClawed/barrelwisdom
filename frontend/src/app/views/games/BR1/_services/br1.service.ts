@@ -1,15 +1,11 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable} from 'rxjs';
+import { Demon, FragmentEffect, Item, Mission, Skill } from '@app/views/games/BR1/_services/br1.interface';
 import { environment } from '@environments/environment';
-import { Item, Demon, Mission, FragmentEffect, Skill } from '@app/views/games/BR1/_services/br1.interface';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class BR1Service {
-    httpOptions = {
-        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-      };
-    
     constructor(
       private http: HttpClient,
     ) { }
@@ -17,7 +13,7 @@ export class BR1Service {
     public readonly gameTitle = {"en": "Blue Reflection"};
     public readonly gameURL = "bluereflection";
     public readonly imgURL = `${environment.mediaURL}games/${this.gameURL}/`;
-    
+
     getItemList(language: string): Observable<Item[]> {
       return this.http.get<Item[]>(`${environment.apiUrl}/BR1/item/${language}/`);
     }
@@ -29,7 +25,7 @@ export class BR1Service {
     getDemonList(language: string): Observable<Demon[]> {
       return this.http.get<Demon[]>(`${environment.apiUrl}/BR1/demon/${language}/`);
     }
-    
+
     getDemon(slug: string, language: string): Observable<Demon> {
       return this.http.get<Demon>(`${environment.apiUrl}/BR1/demon/${slug}/${language}/`);
     }

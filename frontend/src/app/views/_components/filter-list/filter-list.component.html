@@ -6,7 +6,7 @@
         <ng-container *ngTemplateOutlet="template; context: {item:item}"></ng-container>
       }
       @else {
-        @defer (on viewport(loadingSpinner)) {
+        @defer (on viewport(loadingSpinner); when loadAll) {
           <ng-container *ngTemplateOutlet="template; context: {item:item}"></ng-container>
         }
       }

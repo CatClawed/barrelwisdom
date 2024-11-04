@@ -2,6 +2,55 @@
   <h1>Skills</h1>
 }
 @if (data; as skills) {
+  <ng-template #skillTemplate let-skills="skills" let-char="char" let-frag="frag">
+    <h2 id="{{frag}}">{{char}}</h2>
+    <h3>Level Up</h3>
+    <table class="table-compress table-shrink"><tbody>
+      <tr><th>Name</th><th>Description</th></tr>
+      @for (skill of skills; track skill) {
+        @if (skill.lvl && skill.character == char) {
+          <tr>
+            <td><b>{{skill.name}}</b> (LV{{skill.lvl}})
+              @if (skill.isRankUp) {
+                <br />Rank Up
+              }
+            </td>
+            <td>{{skill.effect}}<br />
+              <span style="margin-right:1.5rem"><b>MP: </b> {{skill.mp}}</span>
+              <span style="margin-right:1.5rem"><b>WT: </b> {{skill.wt}}</span>
+              <span style="margin-right:1.5rem"><b>Slots: </b> {{skill.slots}}</span>
+              <span><b>Range: </b>{{skill.rng}}</span>
+            </td>
+          </tr>
+        }
+    }
+    </tbody></table>
+    <h3>Points</h3>
+    <table class="table-compress table-shrink"><tbody>
+      <tr><th>Name</th><th>Description</th><th>A</th><th>D</th><th>S</th><th>T</th></tr>
+      @for (skill of skills; track skill) {
+        @if (!skill.lvl && skill.character == 'Hinako') {
+          <tr>
+            <td><b>{{skill.name}}</b>
+            @if (skill.isRankUp) {
+              <br />Rank Up
+            }
+            </td>
+            <td>{{skill.effect}}<br />
+              <span style="margin-right:1.5rem"><b>MP: </b> {{skill.mp}}</span>
+              <span style="margin-right:1.5rem"><b>WT: </b> {{skill.wt}}</span>
+              <span style="margin-right:1.5rem"><b>Slots: </b> {{skill.slots}}</span>
+              <span><b>Range: </b>{{skill.rng}}</span>
+            </td>
+            <td style="background-color:rgba(227,143,183,0.3)">{{skill.atk}}</td>
+            <td style="background-color:rgba(151,191,230,0.3)">{{skill.dfn}}</td>
+            <td style="background-color:rgba(120,226,159,0.3)">{{skill.sup}}</td>
+            <td style="background-color:rgba(205,197,116,0.3)">{{skill.tec}}</td>
+          </tr>
+        }
+      }
+    </tbody></table>
+  </ng-template>
   <div class="table-of-contents">
     <b>Table of Contents</b>
     <ol>
@@ -10,157 +59,7 @@
       <li><a href="/{{gameURL}}/skills/{{language}}#lime"   (click)="$event.preventDefault();scroll('lime')">Lime</a></li>
     </ol>
   </div>
-  <h2 id="hinako">Hinako</h2>
-  <h3>Level Up</h3>
-  <table class="table-compress table-shrink"><tbody>
-    <tr><th>Name</th><th>Description</th></tr>
-    @for (skill of skills; track skill) {
-      @if (skill.lvl && skill.character == 'Hinako') {
-        <tr>
-          <td><b>{{skill.name}}</b> (LV{{skill.lvl}})
-          @if (skill.isRankUp) {
-            <br />
-            }@if (skill.isRankUp) {
-            <span>Rank Up</span>
-          }
-        </td>
-        <td>{{skill.effect}}<br />
-          <span style="margin-right:1.5rem"><b>MP: </b> {{skill.mp}}</span>
-          <span style="margin-right:1.5rem"><b>WT: </b> {{skill.wt}}</span>
-          <span style="margin-right:1.5rem"><b>Slots: </b> {{skill.slots}}</span>
-          <span><b>Range: </b>{{skill.rng}}</span>
-        </td>
-      </tr>
-    }
-  }
-</tbody></table>
-<h3>Points</h3>
-<table class="table-compress table-shrink"><tbody>
-  <tr><th>Name</th><th>Description</th><th>A</th><th>D</th><th>S</th><th>T</th></tr>
-  @for (skill of skills; track skill) {
-    @if (!skill.lvl && skill.character == 'Hinako') {
-      <tr>
-        <td><b>{{skill.name}}</b>
-        @if (skill.isRankUp) {
-          <br />
-          }@if (skill.isRankUp) {
-          <span>Rank Up</span>
-        }
-      </td>
-      <td>{{skill.effect}}<br />
-        <span style="margin-right:1.5rem"><b>MP: </b> {{skill.mp}}</span>
-        <span style="margin-right:1.5rem"><b>WT: </b> {{skill.wt}}</span>
-        <span style="margin-right:1.5rem"><b>Slots: </b> {{skill.slots}}</span>
-        <span><b>Range: </b>{{skill.rng}}</span>
-      </td>
-      <td style="background-color:rgba(227,143,183,0.3)">{{skill.atk}}</td>
-      <td style="background-color:rgba(151,191,230,0.3)">{{skill.dfn}}</td>
-      <td style="background-color:rgba(120,226,159,0.3)">{{skill.sup}}</td>
-      <td style="background-color:rgba(205,197,116,0.3)">{{skill.tec}}</td>
-    </tr>
-  }
-}
-</tbody></table>
-<h2 id="yuzu">Yuzu</h2>
-<h3>Level Up</h3>
-<table class="table-compress table-shrink"><tbody>
-  <tr><th>Name</th><th>Description</th></tr>
-  @for (skill of skills; track skill) {
-    @if (skill.lvl && skill.character == 'Yuzu') {
-      <tr>
-        <td><b>{{skill.name}}</b> (LV{{skill.lvl}})
-        @if (skill.isRankUp) {
-          <br />
-          }@if (skill.isRankUp) {
-          <span>Rank Up</span>
-        }
-      </td>
-      <td>{{skill.effect}}<br />
-        <span style="margin-right:1.5rem"><b>MP: </b> {{skill.mp}}</span>
-        <span style="margin-right:1.5rem"><b>WT: </b> {{skill.wt}}</span>
-        <span style="margin-right:1.5rem"><b>Slots: </b> {{skill.slots}}</span>
-        <span><b>Range: </b>{{skill.rng}}</span>
-      </td>
-    </tr>
-  }
-}
-</tbody></table>
-<h3>Points</h3>
-<table class="table-compress table-shrink"><tbody>
-  <tr><th>Name</th><th>Description</th><th>A</th><th>D</th><th>S</th><th>T</th></tr>
-  @for (skill of skills; track skill) {
-    @if (!skill.lvl && skill.character == 'Yuzu') {
-      <tr>
-        <td><b>{{skill.name}}</b>
-        @if (skill.isRankUp) {
-          <br />
-          }@if (skill.isRankUp) {
-          <span>Rank Up</span>
-        }
-      </td>
-      <td>{{skill.effect}}<br />
-        <span style="margin-right:1.5rem"><b>MP: </b> {{skill.mp}}</span>
-        <span style="margin-right:1.5rem"><b>WT: </b> {{skill.wt}}</span>
-        <span style="margin-right:1.5rem"><b>Slots: </b> {{skill.slots}}</span>
-        <span><b>Range: </b>{{skill.rng}}</span>
-      </td>
-      <td style="background-color:rgba(227,143,183,0.3)">{{skill.atk}}</td>
-      <td style="background-color:rgba(151,191,230,0.3)">{{skill.dfn}}</td>
-      <td style="background-color:rgba(120,226,159,0.3)">{{skill.sup}}</td>
-      <td style="background-color:rgba(205,197,116,0.3)">{{skill.tec}}</td>
-    </tr>
-  }
-}
-</tbody></table>
-<h2 id="lime">Lime</h2>
-<h3>Level Up</h3>
-<table class="table-compress table-shrink"><tbody>
-  <tr><th>Name</th><th>Description</th></tr>
-  @for (skill of skills; track skill) {
-    @if (skill.lvl && skill.character == 'Lime') {
-      <tr>
-        <td><b>{{skill.name}}</b> (LV{{skill.lvl}})
-        @if (skill.isRankUp) {
-          <br />
-          }@if (skill.isRankUp) {
-          <span>Rank Up</span>
-        }
-      </td>
-      <td>{{skill.effect}}<br />
-        <span style="margin-right:1.5rem"><b>MP: </b> {{skill.mp}}</span>
-        <span style="margin-right:1.5rem"><b>WT: </b> {{skill.wt}}</span>
-        <span style="margin-right:1.5rem"><b>Slots: </b> {{skill.slots}}</span>
-        <span><b>Range: </b>{{skill.rng}}</span>
-      </td>
-    </tr>
-  }
-}
-</tbody></table>
-<h3>Points</h3>
-<table class="table-compress table-shrink"><tbody>
-  <tr><th>Name</th><th>Description</th><th>A</th><th>D</th><th>S</th><th>T</th></tr>
-  @for (skill of skills; track skill) {
-    @if (!skill.lvl && skill.character == 'Lime') {
-      <tr>
-        <td><b>{{skill.name}}</b>
-        @if (skill.isRankUp) {
-          <br />
-          }@if (skill.isRankUp) {
-          <span>Rank Up</span>
-        }
-      </td>
-      <td>{{skill.effect}}<br />
-        <span style="margin-right:1.5rem"><b>MP: </b> {{skill.mp}}</span>
-        <span style="margin-right:1.5rem"><b>WT: </b> {{skill.wt}}</span>
-        <span style="margin-right:1.5rem"><b>Slots: </b> {{skill.slots}}</span>
-        <span><b>Range: </b>{{skill.rng}}</span>
-      </td>
-      <td style="background-color:rgba(227,143,183,0.3)">{{skill.atk}}</td>
-      <td style="background-color:rgba(151,191,230,0.3)">{{skill.dfn}}</td>
-      <td style="background-color:rgba(120,226,159,0.3)">{{skill.sup}}</td>
-      <td style="background-color:rgba(205,197,116,0.3)">{{skill.tec}}</td>
-    </tr>
-  }
-}
-</tbody></table>
+  <ng-content *ngTemplateOutlet="skillTemplate; context: {skills:skills, char:'Hinako', frag:'hinako'}"></ng-content>
+  <ng-content *ngTemplateOutlet="skillTemplate; context: {skills:skills, char:'Yuzu', frag:'yuzu'}"></ng-content>
+  <ng-content *ngTemplateOutlet="skillTemplate; context: {skills:skills, char:'Lime', frag:'lime'}"></ng-content>
 }

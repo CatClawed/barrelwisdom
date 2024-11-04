@@ -28,6 +28,9 @@ export class FilterListComponent implements AfterViewInit, OnDestroy {
   @Input()
   template: TemplateRef<any>;
 
+  @Input()
+  loadAll: boolean = false;
+
   skip: boolean = false;
   intersectionObserver: IntersectionObserver;
   waitingOver: boolean = false;

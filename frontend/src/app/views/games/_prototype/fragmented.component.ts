@@ -31,12 +31,18 @@ export abstract class FragmentedComponent extends FilterableComponent implements
             setTimeout(() => {
                 this.route.fragment
                     .pipe(first())
-                    .subscribe(fragment => this.viewportScroller.scrollToAnchor(fragment));
+                    .subscribe(fragment => {
+                        if (fragment) {
+                            this.loadAll = true;
+                            this.viewportScroller.scrollToAnchor(fragment);
+                        }
+                    });
                 this.isStarting = false
             }, 100)
         }
     }
     scroll(id: string, subsection?: string) {
+        this.loadAll = true;
         this.viewportScroller.scrollToAnchor(id)
         if(subsection) {
             this.loc.replaceState(`${this.gameURL}/${this.section}/${subsection}/${this.language}#${id}`);

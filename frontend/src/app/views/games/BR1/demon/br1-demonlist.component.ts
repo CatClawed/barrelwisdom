@@ -3,9 +3,10 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Demon } from '@app/views/games/BR1/_services/br1.interface';
 import { BR1Service } from '@app/views/games/BR1/_services/br1.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -18,7 +19,7 @@ import { BR1DemonComponent } from './br1-demon.component';
   templateUrl: 'br1-demonlist.component.html',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, BR1DemonComponent]
+  imports: [...CommonImports, ...MaterialFormImports, BR1DemonComponent, FilterListComponent]
 })
 
 export class BR1DemonlistComponent extends DialogUseComponent {
@@ -56,6 +57,7 @@ export class BR1DemonlistComponent extends DialogUseComponent {
   }
 
   private filterT(value: string): Demon[] {
+    this.hide = false;
     let list: Demon[] = this.data;
     if (value) {
       const filterValue = value.toLowerCase();

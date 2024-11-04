@@ -3,40 +3,36 @@
 }
 @if (data; as missions) {
   @for (mission of missions; track mission) {
-    <div id="{{mission.slug}}" class="row">
-      <div class="spacer col-md-7 mx-auto">
-        <div class="card card-body">
-          <div class="flex">
-            <h4 class="card-title card-icon-space">
-              {{mission.name}}
-            </h4>
-            <div>
-              <b>{{mission.character}}</b>
-              @if (mission.chapter) {
-                <br />
-                }<b>Ch.{{mission.chapter}}</b>
-              </div>
-            </div>
-            @if (mission.reward || mission.points) {
-              <b>Reward:</b>
-            }
-            <ul>
-              @if (mission.points) {
-                <li>{{mission.points}} points</li>
-              }
-              @if (mission.reward) {
-                <li>{{mission.reward}}</li>
-              }
-            </ul>
-            @if (mission.location) {
-              <p>{{mission.location}}</p>
-            }
-            @if (mission.details) {
-              <b>Details:</b>
-            }
-            <div (click)="historyService.hrefClicked($event);" [innerHTML]="mission.details"></div>
+    <div id="{{mission.slug}}" class="card card-body card-small spacer" style="margin-left: auto; margin-right: auto;">
+      <div class="flex">
+        <h4 class="card-title card-icon-space">
+          {{mission.name}}
+        </h4>
+        <div>
+          <b>{{mission.character}}</b>
+          @if (mission.chapter) {
+            <br />
+            }<b>Ch.{{mission.chapter}}</b>
           </div>
         </div>
+        @if (mission.reward || mission.points) {
+          <b>Reward:</b>
+        }
+        <ul>
+          @if (mission.points) {
+            <li>{{mission.points}} points</li>
+          }
+          @if (mission.reward) {
+            <li>{{mission.reward}}</li>
+          }
+        </ul>
+        @if (mission.location) {
+          <p>{{mission.location}}</p>
+        }
+        @if (mission.details) {
+          <b>Details:</b>
+        }
+        <div (click)="historyService.hrefClicked($event);" [innerHTML]="mission.details"></div>
       </div>
     }
   }

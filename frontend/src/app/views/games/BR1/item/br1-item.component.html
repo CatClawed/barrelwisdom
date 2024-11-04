@@ -1,59 +1,60 @@
 @if (data; as item) {
-  <div class="mx-auto row spacer">
-    <div class="{{colset}} card card-body">
-      <div class="flex">
-        <h4 class="card-title  card-icon-space">{{item.name}}</h4>
-        @if (item.kind) {
-          <b>{{item.kind}}</b>
+  <div [class]="url || inputSlug ? 'card card-body' : 'card card-body card-small'"
+    [style]="url ? 'height: 100%;' : null">
+    <h4 class="card-title card-icon-space">
+      @if (url) {
+        <a (click)="$event.preventDefault(); buttonClicked.emit(item.slug);"
+          href="{{url}}">{{item.name}}</a>
+      }
+      @else {
+        {{item.name}}
+      }
+    </h4>
+    @if (item.kind) {
+      <b class="card-icon-position">{{item.kind}}</b>
+    }
+    <p>{{item.desc}}</p>
+    @if (item.effect) {
+      <p><b>Effect: </b>{{item.effect}}</p>
+    }
+    @if (item.acquisition) {
+      <p><b>Acquisition: </b>{{item.acquisition}}</p>
+    }
+    @if (item.missions) {
+      <b>Missions:</b>
+    }
+    @if (item.missions) {
+      <ul>
+        @for (miss of item.missions; track miss) {
+          <li><a routerLink="/{{gameURL}}/missions/{{language}}" fragment="{{miss.slug}}">{{miss.name}}</a></li>
         }
-      </div>
-      <p>{{item.desc}}</p>
-      @if (item.effect) {
-        <p><b>Effect: </b>{{item.effect}}</p>
-      }
-      @if (item.acquisition) {
-        <p><b>Acquisition: </b>{{item.acquisition}}</p>
-      }
-      @if (item.missions) {
-        <b>Missions:</b>
-      }
-      @if (item.missions) {
-        <ul>
-          @for (miss of item.missions; track miss) {
-            <li><a routerLink="/{{gameURL}}/missions/{{language}}" fragment="{{miss.slug}}">{{miss.name}}</a></li>
-          }
-        </ul>
-      }
-      @if (item.locations) {
-        <b>Locations:</b>
-      }
-      @if (item.locations) {
-        <ul>
-          @for (loc of item.locations; track loc) {
-            <li>{{loc.name}}</li>
-          }
-        </ul>
-      }
-      @if (item.demons) {
-        <b>Demons:</b>
-      }
-      @if (item.demons) {
-        <ul>
-          @for (demon of item.demons; track demon) {
-            <li><a routerLink="/{{gameURL}}/demons/{{demon.slug}}/{{language}}">{{demon.name}}</a></li>
-          }
-        </ul>
-      }
-      @if (item.ingredient_set) {
-        <b>Craft:</b>
-      }
-      @if (item.ingredient_set) {
-        <ul>
-          @for (ing of item.ingredient_set; track ing) {
-            <li><a routerLink="/{{gameURL}}/items/{{ing.item.slug}}/{{language}}">{{ing.item.name}}</a> x{{ing.num}}</li>
-          }
-        </ul>
-      }
-    </div>
+      </ul>
+    }
+    @if (item.locations) {
+      <b>Locations:</b>
+    }
+    @if (item.locations) {
+      <ul>
+        @for (loc of item.locations; track loc) {
+          <li>{{loc.name}}</li>
+        }
+      </ul>
+    }
+    @if (item.demons) {
+      <b>Demons:</b>
+      <ul>
+        @for (demon of item.demons; track demon) {
+          <li><a routerLink="/{{gameURL}}/demons/{{demon.slug}}/{{language}}">{{demon.name}}</a></li>
+        }
+      </ul>
+    }
+    @if (item.ingredient_set) {
+      <b>Craft:</b>
+      <ul>
+        @for (ing of item.ingredient_set; track ing) {
+          <li><a routerLink="/{{gameURL}}/items/{{ing.item.slug}}/{{language}}">{{ing.item.name}}</a> x{{ing.num}}</li>
+        }
+      </ul>
+    }
   </div>
 }
