@@ -1,160 +1,155 @@
 @if (data; as item) {
-  <div class="mx-auto row spacer">
-    <div class="{{colset}} card card-body" style="{{insertStyle(item)}}">
-      <h4 class="card-title card-icon-space">
-        {{item.name}}
-      </h4>
-      <div class="card-icon-position">
-        @if (item.material) {
-          @if (item.material[0].traits) {
-            <img loading="lazy" style="height:3rem;width:3rem;" src="{{imgURL}}svg/{{item.material[0].traits[0].kind}}.svg" alt="{{item.material[0].traits[0].kind}}">
-          }
-        }
-        @if (item.combat) {
-          <a25-icon style="height:3rem;width:3rem;" [kind]="item.combat[0].kind" [colors]="item.recipe ? item.recipe[0].colors : ['black','black', 'black']"></a25-icon>
-        }
-        @if (item.equip) {
-          <a25-icon style="height:3.5rem;width:3.5rem;" [kind]="item.equip[0].kind" [colors]="item.recipe ? item.recipe[0].colors : ['black','black', 'black']"></a25-icon>
-        }
-      </div>
-      <img loading="lazy" class="resleri-item-frame" height="256" width="256"
-        style="background-image:url({{imgURL}}svg/item-frame-{{item.rarity}}.svg)"
-        src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
-      @if (item.limit) {
-        <p><b>Event: </b>{{item.limit}}</p>
-      }
-      @if (language != 'ja' && !item.gbl) {
-        <p>This item is not in Global yet. Displaying Japanese text.</p>
-      }
-      @if (item.desc) {
-        <p [innerHTML]="item.desc"></p>
-      }
-      @if (item.note) {
-        <p [innerHTML]="item.note"></p>
-      }
+  <div [class]="inputSlug ? 'card card-body spacer' : 'card card-body card-medium'" style="{{insertStyle(item)}}">
+    <h4 class="card-title card-icon-space">
+      {{item.name}}
+    </h4>
+    <div class="card-icon-position">
       @if (item.material) {
         @if (item.material[0].traits) {
-          <ul>
-            @for (trait of item.material[0].traits; track trait) {
-              <li>
-                <popover [title]="trait.name"
-                  [template]="popoverContent"
-                  url="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">
-                  {{trait.name}}
-                </popover>
-                <ng-template #popoverContent>
-                  <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5).replaceAll('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
-                  <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
-                </ng-template>
-              </li>
-            }
-          </ul>
-        }
-        @if (item.quest && item.material[0].traits) {
-          <b>Locations:</b>
-          <ul>
-            @for (quest of item.quest; track quest) {
-              @if (quest.dungeon) {
-                <li>
-                  <a routerLink="/{{gameURL}}/quests/dungeons/{{language}}"
-                    fragment="{{quest.dungeon[0].name}}">
-                    {{quest.dungeon[0].name}}
-                  </a>
-                </li>
-              }
-              @if (quest.scorebattle) {
-                <li>
-                  Score Battle:
-                  <a routerLink="/{{gameURL}}/quests/scorebattles/{{language}}"
-                    fragment="{{quest.scorebattle[0].scorebattle[0].chapter}}-{{quest.scorebattle[0].scorebattle[0].section}}">
-                    {{quest.scorebattle[0].scorebattle[0].chapter}}-{{quest.scorebattle[0].scorebattle[0].section}} {{difficulties[quest.scorebattle[0].difficulty]}}
-                  </a>
-                </li>
-              }
-            }
-          </ul>
-        }
-        @if (item.material[0].ing) {
-          <b>Used in:</b>
-          <ul>
-            @for (ing of item.material[0].ing; track ing) {
-              <li>
-                <a routerLink="/{{gameURL}}/items/synthesis/{{ing.slug}}/{{language}}">{{ing.name}}</a>
-              </li>
-            }
-          </ul>
+          <img style="height:3rem;width:3rem;" src="{{imgURL}}svg/{{item.material[0].traits[0].kind}}.svg" alt="{{item.material[0].traits[0].kind}}">
         }
       }
       @if (item.combat) {
-        <p><b>Uses:</b> {{item.combat[0].uses}}<br />
-        <b>Range:</b> {{item.combat[0].area}}</p>
+        <a25-icon style="height:3rem;width:3rem;" [kind]="item.combat[0].kind" [colors]="item.recipe ? item.recipe[0].colors : ['black','black', 'black']"></a25-icon>
       }
       @if (item.equip) {
-        <table class="tbl"><tbody>
-          <tr class="table-dark-center"><th colspan="4">Stats</th></tr>
-          <tr>
-            <td style="width:25%;">{{a25service.stats['hp'][language]}} </td>
-            <td style="width:25%;">@if (item.equip[0].bad_hp) {
-              {{item.equip[0].bad_hp}} ->
-            }{{item.equip[0].good_hp   ?  item.equip[0].good_hp   : 0}}</td>
-            <td style="width:25%;">{{a25service.stats['agi'][language]}}</td>
-            <td style="width:25%;">@if (item.equip[0].bad_spd) {
-              {{item.equip[0].bad_spd}} ->
-            }{{item.equip[0].good_spd  ?  item.equip[0].good_spd  : 0}}</td>
-          </tr>
-          <tr>
-            <td style="width:25%;">{{a25service.stats['patk'][language]}} </td>
-            <td style="width:25%;">@if (item.equip[0].bad_patk) {
-              {{item.equip[0].bad_patk}} ->
-            }{{item.equip[0].good_patk ? item.equip[0].good_patk : 0}}</td>
-            <td style="width:25%;">{{a25service.stats['pdef'][language]}}</td>
-            <td style="width:25%;">@if (item.equip[0].bad_pdef) {
-              {{item.equip[0].bad_pdef}} ->
-            }{{item.equip[0].good_pdef ? item.equip[0].good_pdef : 0}}</td>
-          </tr>
-          <tr>
-            <td style="width:25%;">{{a25service.stats['matk'][language]}} </td>
-            <td style="width:25%;">@if (item.equip[0].bad_matk) {
-              {{item.equip[0].bad_matk}} ->
-            }{{item.equip[0].good_matk ? item.equip[0].good_matk : 0}}</td>
-            <td style="width:25%;">{{a25service.stats['mdef'][language]}}</td>
-            <td style="width:25%;">@if (item.equip[0].bad_mdef) {
-              {{item.equip[0].bad_mdef}} ->
-            }{{item.equip[0].good_mdef ? item.equip[0].good_mdef : 0}}</td>
-          </tr>
-        </tbody></table>
-      }
-      @if (item.recipe) {
-        <table class="tbl"><tbody>
-          <tr class="table-dark-center"><th>Ingredients</th></tr>
-          <tr>
-            <td>
-              <ul>
-                @for (i of item.recipe[0].ing; track i) {
-                  <li>
-                    <a routerLink="/{{gameURL}}/items/materials/{{i[1]}}/{{language}}">{{i[2]}}</a> x{{i[0]}}
-                  </li>
-                }
-              </ul>
-            </td>
-          </tr>
-          <tr class="table-dark-center"><th>Unlock Condition</th></tr>
-          <tr>
-            <td>
-              <ul>
-                @for (i of item.recipe[0].unlocks; track i) {
-                  <li>
-                    {{i}}
-                  </li>
-                }
-              </ul>
-            </td>
-          </tr>
-        </tbody></table>
+        <a25-icon style="height:3.5rem;width:3.5rem;" [kind]="item.equip[0].kind" [colors]="item.recipe ? item.recipe[0].colors : ['black','black', 'black']"></a25-icon>
       }
     </div>
-    @if (showNav) {
-      <div class="col-md-3" ></div>
+    <img class="resleri-item-frame" height="256" width="256"
+      style="background-image:url({{imgURL}}svg/item-frame-{{item.rarity}}.svg)"
+      src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
+    @if (item.limit) {
+      <p><b>Event: </b>{{item.limit}}</p>
+    }
+    @if (language != 'ja' && !item.gbl) {
+      <p>This item is not in Global yet. Displaying Japanese text.</p>
+    }
+    @if (item.desc) {
+      <p [innerHTML]="item.desc"></p>
+    }
+    @if (item.note) {
+      <p [innerHTML]="item.note"></p>
+    }
+    @if (item.material) {
+      @if (item.material[0].traits) {
+        <ul>
+          @for (trait of item.material[0].traits; track trait) {
+            <li>
+              <popover [title]="trait.name"
+                [template]="popoverContent"
+                url="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">
+                {{trait.name}}
+              </popover>
+              <ng-template #popoverContent>
+                <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5).replaceAll('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
+                <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
+              </ng-template>
+            </li>
+          }
+        </ul>
+      }
+      @if (item.quest && item.material[0].traits) {
+        <b>Locations:</b>
+        <ul>
+          @for (quest of item.quest; track quest) {
+            @if (quest.dungeon) {
+              <li>
+                <a routerLink="/{{gameURL}}/quests/dungeons/{{language}}"
+                  fragment="{{quest.dungeon[0].name}}">
+                  {{quest.dungeon[0].name}}
+                </a>
+              </li>
+            }
+            @if (quest.scorebattle) {
+              <li>
+                Score Battle:
+                <a routerLink="/{{gameURL}}/quests/scorebattles/{{language}}"
+                  fragment="{{quest.scorebattle[0].scorebattle[0].chapter}}-{{quest.scorebattle[0].scorebattle[0].section}}">
+                  {{quest.scorebattle[0].scorebattle[0].chapter}}-{{quest.scorebattle[0].scorebattle[0].section}} {{difficulties[quest.scorebattle[0].difficulty]}}
+                </a>
+              </li>
+            }
+          }
+        </ul>
+      }
+      @if (item.material[0].ing) {
+        <b>Used in:</b>
+        <ul>
+          @for (ing of item.material[0].ing; track ing) {
+            <li>
+              <a routerLink="/{{gameURL}}/items/synthesis/{{ing.slug}}/{{language}}">{{ing.name}}</a>
+            </li>
+          }
+        </ul>
+      }
+    }
+    @if (item.combat) {
+      <p><b>Uses:</b> {{item.combat[0].uses}}<br />
+      <b>Range:</b> {{item.combat[0].area}}</p>
+    }
+    @if (item.equip) {
+      <table class="tbl"><tbody>
+        <tr class="table-dark-center"><th colspan="4">Stats</th></tr>
+        <tr>
+          <td style="width:25%;">{{a25service.stats['hp'][language]}} </td>
+          <td style="width:25%;">@if (item.equip[0].bad_hp) {
+            {{item.equip[0].bad_hp}} ->
+          }{{item.equip[0].good_hp   ?  item.equip[0].good_hp   : 0}}</td>
+          <td style="width:25%;">{{a25service.stats['agi'][language]}}</td>
+          <td style="width:25%;">@if (item.equip[0].bad_spd) {
+            {{item.equip[0].bad_spd}} ->
+          }{{item.equip[0].good_spd  ?  item.equip[0].good_spd  : 0}}</td>
+        </tr>
+        <tr>
+          <td style="width:25%;">{{a25service.stats['patk'][language]}} </td>
+          <td style="width:25%;">@if (item.equip[0].bad_patk) {
+            {{item.equip[0].bad_patk}} ->
+          }{{item.equip[0].good_patk ? item.equip[0].good_patk : 0}}</td>
+          <td style="width:25%;">{{a25service.stats['pdef'][language]}}</td>
+          <td style="width:25%;">@if (item.equip[0].bad_pdef) {
+            {{item.equip[0].bad_pdef}} ->
+          }{{item.equip[0].good_pdef ? item.equip[0].good_pdef : 0}}</td>
+        </tr>
+        <tr>
+          <td style="width:25%;">{{a25service.stats['matk'][language]}} </td>
+          <td style="width:25%;">@if (item.equip[0].bad_matk) {
+            {{item.equip[0].bad_matk}} ->
+          }{{item.equip[0].good_matk ? item.equip[0].good_matk : 0}}</td>
+          <td style="width:25%;">{{a25service.stats['mdef'][language]}}</td>
+          <td style="width:25%;">@if (item.equip[0].bad_mdef) {
+            {{item.equip[0].bad_mdef}} ->
+          }{{item.equip[0].good_mdef ? item.equip[0].good_mdef : 0}}</td>
+        </tr>
+      </tbody></table>
+    }
+    @if (item.recipe) {
+      <table class="tbl"><tbody>
+        <tr class="table-dark-center"><th>Ingredients</th></tr>
+        <tr>
+          <td>
+            <ul>
+              @for (i of item.recipe[0].ing; track i) {
+                <li>
+                  <a routerLink="/{{gameURL}}/items/materials/{{i[1]}}/{{language}}">{{i[2]}}</a> x{{i[0]}}
+                </li>
+              }
+            </ul>
+          </td>
+        </tr>
+        <tr class="table-dark-center"><th>Unlock Condition</th></tr>
+        <tr>
+          <td>
+            <ul>
+              @for (i of item.recipe[0].unlocks; track i) {
+                <li>
+                  {{i}}
+                </li>
+              }
+            </ul>
+          </td>
+        </tr>
+      </tbody></table>
     }
   </div>
 }

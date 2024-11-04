@@ -1,6 +1,49 @@
 @if (!error) {
-  <h1>Materials</h1>
-  <div class="col-md-10 mx-auto">
+  <ng-template #template let-it="item">
+    <div class="card card-body"  style="{{insertStyle(it)}}">
+      <h4 class="card-title card-icon-space">
+        <a (click)="openDialog(it.slug, $event);" href="/{{gameURL}}/items/materials/{{it.slug}}/{{language}}">{{it.name}}</a>
+      </h4>
+      <div class="card-icon-position">
+        @if (it.material[0].traits) {
+          <img loading="lazy" style="height:3rem;width:3rem;" src="{{imgURL}}svg/{{it.material[0].traits[0].kind}}.svg" alt="{{it.material[0].traits[0].kind}}">
+        }
+      </div>
+      <a class="card-item-display" (click)="openDialog(it.slug, $event);" href="/{{gameURL}}/items/materials/{{it.slug}}/{{language}}">
+        <img loading="lazy" class="resleri-item-frame" height="256" width="256"
+          style="background-image:url({{imgURL}}svg/item-frame-{{it.rarity}}.svg)"
+          src="{{imgURL}}items/{{it.slug}}.webp" alt="{{it.name}}">
+        </a>
+        @if (it.limit) {
+          <p><b>Event: </b>{{it.limit}}</p>
+        }
+        @if (it.material[0].traits) {
+          <ul>
+            @for (trait of it.material[0].traits; track trait) {
+              <li>
+                <popover [title]="trait.name"
+                  [template]="popoverContent"
+                  url="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">
+                  {{trait.name}}
+                </popover>
+                <ng-template #popoverContent>
+                  <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5).replaceAll('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
+                  <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
+                </ng-template>
+              </li>
+            }
+          </ul>
+        }
+        <button (click)="openDialog(it.slug)" class="card-read-more-position" mat-mini-fab color="primary">
+          <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+        </button>
+      </div>
+  </ng-template>
+  <filter-list
+    [list]="filteredItems"
+    title="Materials"
+    [(hide)]="hide"
+    [template]="template">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
         <mat-form-field class="col-md-8" appearance="outline">
@@ -45,47 +88,5 @@
         </mat-form-field>
       </div>
     </form>
-  </div>
-  <div class="item-grid">
-    @for (it of filteredItems | async; track identify($index, it)) {
-      <div class="card card-body"  style="{{insertStyle(it)}}">
-        <h4 class="card-title card-icon-space">
-          <a (click)="openDialog(it.slug, $event);" href="/{{gameURL}}/items/materials/{{it.slug}}/{{language}}">{{it.name}}</a>
-        </h4>
-        <div class="card-icon-position">
-          @if (it.material[0].traits) {
-            <img loading="lazy" style="height:3rem;width:3rem;" src="{{imgURL}}svg/{{it.material[0].traits[0].kind}}.svg" alt="{{it.material[0].traits[0].kind}}">
-          }
-        </div>
-        <a class="card-item-display" (click)="openDialog(it.slug, $event);" href="/{{gameURL}}/items/materials/{{it.slug}}/{{language}}">
-          <img loading="lazy" class="resleri-item-frame" height="256" width="256"
-            style="background-image:url({{imgURL}}svg/item-frame-{{it.rarity}}.svg)"
-            src="{{imgURL}}items/{{it.slug}}.webp" alt="{{it.name}}">
-          </a>
-          @if (it.limit) {
-            <p><b>Event: </b>{{it.limit}}</p>
-          }
-          @if (it.material[0].traits) {
-            <ul>
-              @for (trait of it.material[0].traits; track trait) {
-                <li>
-                  <popover [title]="trait.name"
-                    [template]="popoverContent"
-                    url="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">
-                    {{trait.name}}
-                  </popover>
-                  <ng-template #popoverContent>
-                    <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5).replaceAll('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
-                    <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
-                  </ng-template>
-                </li>
-              }
-            </ul>
-          }
-          <button (click)="openDialog(it.slug)" class="card-read-more-position" mat-mini-fab color="primary">
-            <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
-          </button>
-        </div>
-      }
-    </div>
+  </filter-list>
 }

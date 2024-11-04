@@ -1,202 +1,194 @@
 @if (data; as chara) {
-  <div class="mx-auto row spacer">
-    <div class="{{colset}} card card-body">
-      <div class="flex">
-        <h4 class="card-title card-icon-space">
-          {{chara.name}} {{chara.title}}
-        </h4>
-        <div class="card-icon-position">
-          <img style="width:3rem;aspect-ratio:48/45" src="{{imgURL}}characters/{{chara.role}}.webp" alt="{{chara.role}}" />
-          <i class="atelier atelier-np atelier-resleri-{{chara.elem}} resleri-element-icon"
-            style="background-color:{{a25service.elements[chara.elem]}};display:flex;"></i>
-        </div>
-      </div>
-      <div style="aspect-ratio:1;max-width:100%;width:400px;{{gradients[chara.rarity]}}display:block;border-radius:50%;overflow:hidden !important;margin:auto;">
-        <img loading="lazy"
-          style="aspect-ratio:680/724;width:400px;position:relative;"
-          src="{{imgURL}}characters/full/{{chara.slug}}.webp" alt="{{chara.name}} {{chara.title}}" />
-      </div>
-      @if (chara.limit) {
-        <p style="margin-top:1rem;"><b>Event: </b>{{chara.limit}}</p>
-      }
-      @if (language == 'en' && !chara.gbl) {
-        <p style="margin-top:1rem;">This character is not in Global. Displaying Japanese text.</p>
-      }
-      @if (chara.note) {
-        <p style="margin-top:1rem;" [innerHTML]="chara.note"></p>
-      }
-      <table class="tbl" style="margin-bottom:0;margin-top:1rem;"><tbody>
-        <tr class="table-dark-center"><th>Gifts</th></tr>
-        <tr>
-          <td>
-            <div style="display:inline-flex;float:right;">
-              <i style="font-size:5rem;vertical-align:-0.5rem;color:{{a25service.colors[chara.color1]}};display:inline;" class="atelier atelier-np atelier-resleri-color-l"></i>
-              <i style="font-size:5rem;vertical-align:-0.5rem;color:{{a25service.colors[chara.color2]}};display:inline;" class="atelier atelier-np atelier-resleri-color-r"></i>
-            </div>
-            <ul>
-              <li>
-                <popover [title]="chara.trait1.name"
-                  [template]="traitPopover"
-                  [context]="{ trait : chara.trait1 }"
-                  url="/{{gameURL}}/traits/{{chara.trait1.slug}}/{{language}}">
-                  {{chara.trait1.name}}
-                </popover>
-              </li>
-              <li>
-                <popover [title]="chara.trait2.name"
-                  [template]="traitPopover"
-                  [context]="{ trait : chara.trait2 }"
-                  url="/{{gameURL}}/traits/{{chara.trait2.slug}}/{{language}}">
-                  {{chara.trait2.name}}
-                </popover>
-              </li>
-              <li>
-                <popover [title]="chara.trait3.name"
-                  [template]="traitPopover"
-                  [context]="{ trait : chara.trait3 }"
-                  url="/{{gameURL}}/traits/{{chara.trait3.slug}}/{{language}}">
-                  {{chara.trait3.name}}
-                </popover>
-              </li>
-            </ul>
-          </td>
-        </tr>
+  <div [class]="inputSlug ? 'card card-body spacer' : 'card card-body card-medium'">
+    <h4 class="card-title card-icon-space">
+      {{chara.name}} {{chara.title}}
+    </h4>
+    <div class="card-icon-position">
+      <img style="width:3rem;aspect-ratio:48/45" src="{{imgURL}}characters/{{chara.role}}.webp" alt="{{chara.role}}" />
+      <i class="atelier atelier-np atelier-resleri-{{chara.elem}} resleri-element-icon"
+        style="background-color:{{a25service.elements[chara.elem]}};display:flex;"></i>
+    </div>
+    <div style="aspect-ratio:1;max-width:100%;width:400px;{{gradients[chara.rarity]}}display:block;border-radius:50%;overflow:hidden !important;margin:auto;">
+      <img  style="aspect-ratio:680/724;width:400px;position:relative;"
+        src="{{imgURL}}characters/full/{{chara.slug}}.webp" alt="{{chara.name}} {{chara.title}}" />
+    </div>
+    @if (chara.limit) {
+      <p style="margin-top:1rem;"><b>Event: </b>{{chara.limit}}</p>
+    }
+    @if (language == 'en' && !chara.gbl) {
+      <p style="margin-top:1rem;">This character is not in Global. Displaying Japanese text.</p>
+    }
+    @if (chara.note) {
+      <p style="margin-top:1rem;" [innerHTML]="chara.note"></p>
+    }
+    <table class="tbl" style="margin-bottom:0;margin-top:1rem;"><tbody>
+      <tr class="table-dark-center"><th>Gifts</th></tr>
+      <tr>
+        <td>
+          <div style="display:inline-flex;float:right;">
+            <i style="font-size:5rem;vertical-align:-0.5rem;color:{{a25service.colors[chara.color1]}};display:inline;" class="atelier atelier-np atelier-resleri-color-l"></i>
+            <i style="font-size:5rem;vertical-align:-0.5rem;color:{{a25service.colors[chara.color2]}};display:inline;" class="atelier atelier-np atelier-resleri-color-r"></i>
+          </div>
+          <ul>
+            <li>
+              <popover [title]="chara.trait1.name"
+                [template]="traitPopover"
+                [context]="{ trait : chara.trait1 }"
+                url="/{{gameURL}}/traits/{{chara.trait1.slug}}/{{language}}">
+                {{chara.trait1.name}}
+              </popover>
+            </li>
+            <li>
+              <popover [title]="chara.trait2.name"
+                [template]="traitPopover"
+                [context]="{ trait : chara.trait2 }"
+                url="/{{gameURL}}/traits/{{chara.trait2.slug}}/{{language}}">
+                {{chara.trait2.name}}
+              </popover>
+            </li>
+            <li>
+              <popover [title]="chara.trait3.name"
+                [template]="traitPopover"
+                [context]="{ trait : chara.trait3 }"
+                url="/{{gameURL}}/traits/{{chara.trait3.slug}}/{{language}}">
+                {{chara.trait3.name}}
+              </popover>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+    </tbody></table>
+    <table class="tbl"><tbody>
+      <tr class="table-dark-center"><th colspan="4">Stats</th></tr>
+      <tr>
+        <td colspan="4">
+          <div style="width:45%;float:left;">
+            <b>Level: </b>{{slider.value}}<br />
+            <mat-slider
+              style="width:100%;"
+              [max]="90"
+              [min]="1">
+              <input matSliderThumb value="90" #slider>
+            </mat-slider>
+          </div>
+          <div style="width:45%;float:right;">
+            <b>Stars: </b>{{stars[starSlider.value-1]}}<br />
+            <mat-slider
+              color="accent"
+              style="width:100%;"
+              [max]="7"
+              [min]="chara.rarity">
+              <input matSliderThumb value="7" #starSlider>
+            </mat-slider>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td style="width:25%;">{{a25service.stats['hp'][language]}} </td>
+        <td style="width:25%;">{{getStat(chara.hp, stars[starSlider.value-1], slider.value)}}</td>
+        <td style="width:25%;">{{a25service.stats['agi'][language]}}</td>
+        <td style="width:25%;">{{chara.spd}}</td>
+      </tr>
+      <tr>
+        <td style="width:25%;">{{a25service.stats['patk'][language]}} </td>
+        <td style="width:25%;">{{getStat(chara.patk, stars[starSlider.value-1], slider.value)}}</td>
+        <td style="width:25%;">{{a25service.stats['pdef'][language]}}</td>
+        <td style="width:25%;">{{getStat(chara.pdfn, stars[starSlider.value-1], slider.value)}}</td>
+      </tr>
+      <tr>
+        <td style="width:25%;">{{a25service.stats['matk'][language]}} </td>
+        <td style="width:25%;">{{getStat(chara.matk, stars[starSlider.value-1], slider.value)}}</td>
+        <td style="width:25%;">{{a25service.stats['mdef'][language]}}</td>
+        <td style="width:25%;">{{getStat(chara.mdfn, stars[starSlider.value-1], slider.value)}}</td>
+      </tr>
+      <tr>
+        <td colspan="4">Does not include Grow Board</td>
+      </tr>
+    </tbody></table>
+      <table class="tbl"><tbody>
+        <tr class="table-dark-center"><th>Skills</th></tr>
+        @for (skill of chara.skills; track skill) {
+          <tr>
+            <td>
+              <b>{{skill.name}}</b>
+              <i class="atelier atelier-np atelier-resleri-{{skill.elem}} resleri-element-icon"
+                style="float:right;background-color:{{a25service.elements[skill.elem]}};"></i>
+              <p [innerHTML]="replaceDesc(skill)"></p>
+              @if (skill.wt) {
+                <p    ><b>WT: </b>{{skill.wt}}</p>
+              }
+              @if (skill.area) {
+                <p  ><b>Range: </b>{{skill.area}}</p>
+              }
+              @if (skill.pow1) {
+                <p  ><b>Power: </b>{{skill.pow1}} > {{skill.pow2}} > {{skill.pow3}} > {{skill.pow4}} > {{skill.pow5}}</p>
+              }
+              @if (skill.break1) {
+                <p><b>Break: </b>{{skill.break1}} > {{skill.break2}} > {{skill.break3}} > {{skill.break4}} > {{skill.break5}}</p>
+              }
+            </td>
+          </tr>
+        }
         <tr>
       </tbody></table>
       <table class="tbl"><tbody>
-        <tr class="table-dark-center"><th colspan="4">Stats</th></tr>
+        <tr class="table-dark-center"><th>Passives</th></tr>
+          <tr>
+            <td>
+              <ul>
+                @for (passive of chara.passives; track passive) {
+                  <li>
+                    {{passive.name}}
+                    <ul>
+                      <li [innerHTML]="replacePassive(passive)"></li>
+                    </ul>
+                  </li>
+                }
+              </ul>
+            </td>
+          </tr>
         <tr>
-          <td colspan="4">
-            <div style="width:45%;float:left;">
-              <b>Level: </b>{{slider.value}}<br />
-              <mat-slider
-                style="width:100%;"
-                [max]="90"
-                [min]="1">
-                <input matSliderThumb value="90" #slider>
-              </mat-slider>
-            </div>
-            <div style="width:45%;float:right;">
-              <b>Stars: </b>{{stars[starSlider.value-1]}}<br />
-              <mat-slider
-                color="accent"
-                style="width:100%;"
-                [max]="7"
-                [min]="chara.rarity">
-                <input matSliderThumb value="7" #starSlider>
-              </mat-slider>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td style="width:25%;">{{a25service.stats['hp'][language]}} </td>
-          <td style="width:25%;">{{getStat(chara.hp, stars[starSlider.value-1], slider.value)}}</td>
-          <td style="width:25%;">{{a25service.stats['agi'][language]}}</td>
-          <td style="width:25%;">{{chara.spd}}</td>
-        </tr>
-        <tr>
-          <td style="width:25%;">{{a25service.stats['patk'][language]}} </td>
-          <td style="width:25%;">{{getStat(chara.patk, stars[starSlider.value-1], slider.value)}}</td>
-          <td style="width:25%;">{{a25service.stats['pdef'][language]}}</td>
-          <td style="width:25%;">{{getStat(chara.pdfn, stars[starSlider.value-1], slider.value)}}</td>
-        </tr>
-        <tr>
-          <td style="width:25%;">{{a25service.stats['matk'][language]}} </td>
-          <td style="width:25%;">{{getStat(chara.matk, stars[starSlider.value-1], slider.value)}}</td>
-          <td style="width:25%;">{{a25service.stats['mdef'][language]}}</td>
-          <td style="width:25%;">{{getStat(chara.mdfn, stars[starSlider.value-1], slider.value)}}</td>
-        </tr>
-        <tr>
-          <td colspan="4">Does not include Grow Board</td>
-        </tr>
       </tbody></table>
-        <table class="tbl"><tbody>
-          <tr class="table-dark-center"><th>Skills</th></tr>
-          @for (skill of chara.skills; track skill) {
-            <tr>
-              <td>
-                <b>{{skill.name}}</b>
-                <i class="atelier atelier-np atelier-resleri-{{skill.elem}} resleri-element-icon"
-                  style="float:right;background-color:{{a25service.elements[skill.elem]}};"></i>
-                <p [innerHTML]="replaceDesc(skill)"></p>
-                @if (skill.wt) {
-                  <p    ><b>WT: </b>{{skill.wt}}</p>
-                }
-                @if (skill.area) {
-                  <p  ><b>Range: </b>{{skill.area}}</p>
-                }
-                @if (skill.pow1) {
-                  <p  ><b>Power: </b>{{skill.pow1}} > {{skill.pow2}} > {{skill.pow3}} > {{skill.pow4}} > {{skill.pow5}}</p>
-                }
-                @if (skill.break1) {
-                  <p><b>Break: </b>{{skill.break1}} > {{skill.break2}} > {{skill.break3}} > {{skill.break4}} > {{skill.break5}}</p>
-                }
-              </td>
-            </tr>
-          }
+      <table class="tbl"><tbody>
+        <tr class="table-dark-center"><th>Leader</th></tr>
           <tr>
-        </tbody></table>
-        <table class="tbl"><tbody>
-          <tr class="table-dark-center"><th>Passives</th></tr>
-            <tr>
-              <td>
-                <ul>
-                  @for (passive of chara.passives; track passive) {
-                    <li>
-                      {{passive.name}}
-                      <ul>
-                        <li [innerHTML]="replacePassive(passive)"></li>
-                      </ul>
-                    </li>
-                  }
-                </ul>
-              </td>
-            </tr>
-          <tr>
-        </tbody></table>
-        <table class="tbl"><tbody>
-          <tr class="table-dark-center"><th>Leader</th></tr>
-            <tr>
-              <td>
-                <p>
-                  <b>{{chara.leader_skill_name}}</b><br />
-                  {{chara.leader_skill_desc}}
-                </p>
-                <div>
-                  @for (char of chara.leader_skill_chars; track char) {
-                    <a routerLink="/{{gameURL}}/characters/{{char}}/{{language}}">
-                      <img src="{{imgURL}}characters/face/{{char}}.webp" loading="lazy" style="aspect-ratio:1;max-width:110px;border-radius:50%;">
-                    </a>
-                  }
-                </div>
-                <b>Type: </b>
-                <ul>
-                  @for (tag of chara.tags; track tag) {
-                    <li><popover [title]="tag.name"
-                      [template]="tagPopover"
-                      [context]="{ chars : tag.char }">
-                      {{tag.name}}
-                    </popover></li>
-                  }
-                </ul>
-              </td>
-            </tr>
-          <tr>
-        </tbody></table>
-    </div>
-    <ng-template #traitPopover let-trait="trait">
-      <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5).replaceAll('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
-      <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
-    </ng-template>
-    <ng-template #tagPopover let-chars="chars">
-      @for (char of chars; track char) {
-        <a routerLink="/{{gameURL}}/characters/{{char}}/{{language}}">
-          <img src="{{imgURL}}characters/face/{{char}}.webp" style="aspect-ratio:1;max-width:110px;border-radius:50%;">
-        </a>
-      }
-    </ng-template>
-    @if (showNav) {
-      <div class="col-md-3" ></div>
-    }
+            <td>
+              <p>
+                <b>{{chara.leader_skill_name}}</b><br />
+                {{chara.leader_skill_desc}}
+              </p>
+              <div>
+                @for (char of chara.leader_skill_chars; track char) {
+                  <a routerLink="/{{gameURL}}/characters/{{char}}/{{language}}">
+                    <img src="{{imgURL}}characters/face/{{char}}.webp" loading="lazy" style="aspect-ratio:1;max-width:110px;border-radius:50%;">
+                  </a>
+                }
+              </div>
+              <b>Type: </b>
+              <ul>
+                @for (tag of chara.tags; track tag) {
+                  <li><popover [title]="tag.name"
+                    [template]="tagPopover"
+                    [context]="{ chars : tag.char }">
+                    {{tag.name}}
+                  </popover></li>
+                }
+              </ul>
+            </td>
+          </tr>
+        <tr>
+      </tbody></table>
   </div>
+  <ng-template #traitPopover let-trait="trait">
+    <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5).replaceAll('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
+    <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
+  </ng-template>
+  <ng-template #tagPopover let-chars="chars">
+    @for (char of chars; track char) {
+      <a routerLink="/{{gameURL}}/characters/{{char}}/{{language}}">
+        <img src="{{imgURL}}characters/face/{{char}}.webp" style="aspect-ratio:1;max-width:110px;border-radius:50%;">
+      </a>
+    }
+  </ng-template>
 }

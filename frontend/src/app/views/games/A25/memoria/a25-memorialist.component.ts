@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Memoria } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -19,7 +20,7 @@ import { A25MemoriaComponent } from './a25-memoria.component';
   templateUrl: 'a25-memorialist.component.html',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports,
+  imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
     A25MemoriaComponent, KeyValuePipe, MatCheckboxModule]
 })
 
@@ -68,6 +69,7 @@ export class A25MemorialistComponent extends DialogUseComponent {
   }
 
   private filterT(value: string, stat: string, show_jp: boolean): Memoria[] {
+    this.hide = false;
     let memorialist: Memoria[] = this.data;
 
     if (!show_jp) memorialist = memorialist.filter(mem => mem.gbl === true)

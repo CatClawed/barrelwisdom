@@ -1,9 +1,9 @@
-import { Location, ViewportScroller } from '@angular/common';
+import { Location, NgTemplateOutlet, ViewportScroller } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
@@ -15,7 +15,7 @@ import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.comp
   selector: 'a25-scorebattle',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports]
+  imports: [...CommonImports, NgTemplateOutlet]
 })
 export class A25ScoreBattleComponent extends FragmentedComponent {
   title: string;
@@ -47,4 +47,4 @@ export class A25ScoreBattleComponent extends FragmentedComponent {
     this.genericSettings(this.title, `All Score Battles in ${this.gameTitle}`);
     return this.a25service.getScoreBattles(this.language);
   }
-} 
+}

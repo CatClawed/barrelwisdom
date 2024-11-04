@@ -4,9 +4,10 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Popover } from '@app/views/_components/popover/popover.component';
 import { Item } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
@@ -22,7 +23,7 @@ import { A25ItemComponent } from './a25-item.component';
   encapsulation: ViewEncapsulation.None,
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports,
+  imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
     A25ItemComponent, MatButtonModule, Popover]
 })
 
@@ -79,6 +80,7 @@ export class A25MaterialListComponent extends DialogUseComponent {
   }
 
   private filterT(value: string, color: string, rarity: number, filter: string, traittype: string): Item[] {
+    this.hide = false;
     let list: Item[] = this.data.items;
 
     if (color != 'Any') {

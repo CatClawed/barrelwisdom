@@ -1,10 +1,10 @@
-import { Location, ViewportScroller } from '@angular/common';
+import { Location, NgTemplateOutlet, ViewportScroller } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { Hint } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -17,7 +17,7 @@ import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.comp
   selector: 'a25-tower',
   providers: [DestroyService],
   standalone: true,
-  imports: [...CommonImports]
+  imports: [...CommonImports, NgTemplateOutlet]
 })
 export class A25TowerComponent extends FragmentedComponent {
   title: string;

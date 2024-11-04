@@ -13,7 +13,7 @@
       }
     </ol>
   </div>
-  @for (floor of tower; track floor) {
+  <ng-template #tow let-floor="floor">
     <h2 id="{{floor.floor}}">Floor {{floor.floor}}</h2>
     @if (floor.rewards) {
       <div style="display:grid;grid-template-columns:repeat(4,23%);grid-row-gap:1rem;grid-column-gap:2%;margin-bottom:1rem;">
@@ -27,27 +27,26 @@
             </div>
           }
         </div>
-    }
-    <p>
-      <b>Combat Level: </b>{{floor.combat_level}}
-    </p>
-    @if (floor.effects) {
-      <b>Floor Effects:</b>
-      <ul>
-        @for (effect of floor.effects; track effect) {
-          <li>
-            {{effect}}
-          </li>
-        }
-      </ul>
-    }
-    @for (panel of floor.battle.panels; track panel;) {
-      <img loading="lazy"
-        style="aspect-ratio:1;width:100px;"
-        src="{{imgURL}}panels/{{panel}}.webp">
-    }
+      }
+      <p>
+        <b>Combat Level: </b>{{floor.combat_level}}
+      </p>
+      @if (floor.effects) {
+        <b>Floor Effects:</b>
+        <ul>
+          @for (effect of floor.effects; track effect) {
+            <li>
+              {{effect}}
+            </li>
+          }
+        </ul>
+      }
+      @for (panel of floor.battle.panels; track panel;) {
+        <img loading="lazy"
+          style="aspect-ratio:1;width:100px;"
+          src="{{imgURL}}panels/{{panel}}.webp">
+      }
       @for (wave of floor.battle.waves; track wave; let index = $index) {
-
         @if (index > 0) {
           <h3>Wave {{index+1}}</h3>
         }
@@ -106,6 +105,16 @@
           </div>
         }
       </div>
+    }
+  </ng-template>
+  @for (floor of tower; track floor; let index=$index) {
+    @if (index < 10) {
+      <ng-content *ngTemplateOutlet="tow; context: {floor:floor}"></ng-content>
+    }
+    @else {
+      @defer {
+        <ng-content *ngTemplateOutlet="tow; context: {floor:floor}"></ng-content>
       }
+    }
   }
 }

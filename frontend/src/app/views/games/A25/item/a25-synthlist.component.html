@@ -1,6 +1,36 @@
 @if (!error) {
-  <h1>Synthesis Items</h1>
-  <div class="col-md-10 mx-auto">
+  <ng-template #template let-it="item">
+    <div class="card card-body">
+      <h4 class="card-title card-icon-space">
+        <a (click)="openDialog(it.slug, $event);" href="/{{gameURL}}/items/synthesis/{{it.slug}}/{{language}}">{{it.name}}</a>
+      </h4>
+      <div class="card-icon-position">
+        @if (it.combat) {
+          <a25-icon [kind]="it.combat[0].kind" [colors]="it.colors ? it.colors : ['black','black', 'black']"></a25-icon>
+        }
+        @if (it.equip) {
+          <a25-icon [kind]="it.equip[0].kind" [colors]="it.colors ? it.colors : ['black','black', 'black']"></a25-icon>
+        }
+      </div>
+      <a class="card-item-display" (click)="openDialog(it.slug, $event);" href="/{{gameURL}}/items/synthesis/{{it.slug}}/{{language}}">
+        <img loading="lazy" class="resleri-item-frame"  height="256" width="256"
+          style="background-image:url({{imgURL}}svg/item-frame-{{it.rarity}}.svg)"
+          src="{{imgURL}}items/{{it.slug}}.webp" alt="{{it.name}}">
+        </a>
+        <p style="padding-right:1.5rem;" [innerHTML]="replaceVal(it)"></p>
+        @if (it.limit) {
+          <p><b>Event: </b>{{it.limit}}</p>
+        }
+        <button (click)="openDialog(it.slug)" class="card-read-more-position" mat-mini-fab color="primary">
+          <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
+        </button>
+      </div>
+  </ng-template>
+  <filter-list
+    [list]="filteredItems"
+    title="Synthesis Items"
+    [(hide)]="hide"
+    [template]="template">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">
         <mat-form-field class="col-md-8" appearance="outline">
@@ -43,34 +73,5 @@
         </mat-form-field>
       </div>
     </form>
-  </div>
-  <div class="item-grid">
-    @for (it of filteredItems | async; track identify($index, it)) {
-      <div class="card card-body">
-        <h4 class="card-title card-icon-space">
-          <a (click)="openDialog(it.slug, $event);" href="/{{gameURL}}/items/synthesis/{{it.slug}}/{{language}}">{{it.name}}</a>
-        </h4>
-        <div class="card-icon-position">
-          @if (it.combat) {
-            <a25-icon [kind]="it.combat[0].kind" [colors]="it.colors ? it.colors : ['black','black', 'black']"></a25-icon>
-          }
-          @if (it.equip) {
-            <a25-icon [kind]="it.equip[0].kind" [colors]="it.colors ? it.colors : ['black','black', 'black']"></a25-icon>
-          }
-        </div>
-        <a class="card-item-display" (click)="openDialog(it.slug, $event);" href="/{{gameURL}}/items/synthesis/{{it.slug}}/{{language}}">
-          <img loading="lazy" class="resleri-item-frame"  height="256" width="256"
-            style="background-image:url({{imgURL}}svg/item-frame-{{it.rarity}}.svg)"
-            src="{{imgURL}}items/{{it.slug}}.webp" alt="{{it.name}}">
-          </a>
-          <p style="padding-right:1.5rem;" [innerHTML]="replaceVal(it)"></p>
-          @if (it.limit) {
-            <p><b>Event: </b>{{it.limit}}</p>
-          }
-          <button (click)="openDialog(it.slug)" class="card-read-more-position" mat-mini-fab color="primary">
-            <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v" ></mat-icon>
-          </button>
-        </div>
-      }
-    </div>
-  }
+  </filter-list>
+}

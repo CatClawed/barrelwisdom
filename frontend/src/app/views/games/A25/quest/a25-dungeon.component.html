@@ -13,7 +13,7 @@
       }
     </ol>
   </div>
-  @for (dungeon of dungeons; track dungeon) {
+  <ng-template #dun let-dungeon="dungeon">
     <h2 id="{{dungeon.name}}">{{dungeon.name}}</h2>
     <table class="table-compress"><tbody>
       <tr class="table-dark-center">
@@ -36,5 +36,15 @@
           {{reward.item.name}}</a>
         }
     </div>
+  </ng-template>
+  @for (dungeon of dungeons; track dungeon; let index=$index) {
+    @if (index < 10) {
+      <ng-content *ngTemplateOutlet="dun; context: {dungeon:dungeon}"></ng-content>
+    }
+    @else {
+      @defer {
+        <ng-content *ngTemplateOutlet="dun; context: {dungeon:dungeon}"></ng-content>
+      }
     }
   }
+}
