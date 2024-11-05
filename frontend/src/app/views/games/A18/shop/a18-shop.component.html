@@ -22,7 +22,7 @@
           <h4 class="card-title card-icon-space" id="{{shop.slug}}">
             {{shop.name}}
           </h4>
-          <ul style="column-count:2">
+          <ul class="two-column">
             @for (slot of shop.shopslots; track slot) {
               <li>
                 <a routerLink="/{{gameURL}}/items/{{slot.item.slug}}/{{language}}">{{slot.item.name}}</a>

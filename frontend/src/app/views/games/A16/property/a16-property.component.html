@@ -34,13 +34,13 @@
       <p>{{property.desc}}</p>
       @if (property.item_set) {
         <b>Items:</b>
-        <ul style="column-count: 2;">
+        <ul class="two-column">
           @for (item of property.item_set; track item; let index=$index) {
             @if (index < 3 || !url) {
-              <li style="break-inside: avoid;"><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
+              <li><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
             }
             @else if(index == 4) {
-              <li style="break-inside: avoid;"><a (click)="$event.preventDefault(); buttonClicked.emit(property.slug);" href="/{{gameURL}}/properties/{{property.slug}}/{{language}}">View more...</a></li>
+              <li><a (click)="$event.preventDefault(); buttonClicked.emit(property.slug);" href="/{{gameURL}}/properties/{{property.slug}}/{{language}}">View more...</a></li>
             }
           }
         </ul>

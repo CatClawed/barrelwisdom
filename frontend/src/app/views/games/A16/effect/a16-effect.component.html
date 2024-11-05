@@ -10,21 +10,21 @@
       <b>From Item:</b>
     }
     @if (effect.effectdata_set) {
-      <ul [style]="inputData ? 'column-count:2; margin-right:1.7rem;' : 'column-count:2;'">
+      <ul class="two-column" [style]="inputData ? 'margin-right:1.7rem;' : null">
         @for (e of effect.effectdata_set; track e; let index=$index) {
           @if (index == 3 && effect.effectdata_set.length > 4 && hideContents) {
-            <li style="break-inside: avoid-column;">
+            <li>
               <a (click)="$event.preventDefault(); buttonClicked.emit(effect.slug);"
                 href="/shallie/effects/{{effect.slug}}/{{language}}">See more...</a>
             </li>
           }
           @else if(index < 4) {
-            <li style="break-inside: avoid-column;">
+            <li>
               <a routerLink="/shallie/items/{{e.effectlines_set[0].slug}}/{{language}}">{{e.effectlines_set[0].name}}</a>
             </li>
           }
           @else if (index > 3 && !hideContents) {
-            <li style="break-inside: avoid-column;">
+            <li>
               <a routerLink="/shallie/items/{{e.effectlines_set[0].slug}}/{{language}}">{{e.effectlines_set[0].name}}</a>
             </li>
           }

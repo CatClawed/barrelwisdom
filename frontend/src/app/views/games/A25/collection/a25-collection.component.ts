@@ -22,6 +22,7 @@ import { A25CharaComponent } from '@app/views/games/A25/character/a25-chara.comp
 import { A25MemoriaComponent } from '@app/views/games/A25/memoria/a25-memoria.component';
 import * as FastIntCompress from 'fastintcompression';
 import { forkJoin, map, Observable, startWith } from 'rxjs';
+import { A25CharaFrameComponent } from '../character/a25-charaframe.component';
 
 @Component({
   templateUrl: 'a25-collection.component.html',
@@ -30,66 +31,13 @@ import { forkJoin, map, Observable, startWith } from 'rxjs';
   standalone: true,
   imports: [...CommonImports, ...MaterialFormImports, MatTabsModule, KeyValuePipe,
     MatButtonModule, MatCheckboxModule, MatMenuModule, NgTemplateOutlet,
-    A25MemoriaComponent, A25CharaComponent, Popover, ClipboardModule],
-  encapsulation: ViewEncapsulation.None,
+    A25MemoriaComponent, A25CharaComponent, Popover, ClipboardModule, A25CharaFrameComponent],
   styles: [
     `.char-grid {
       display: grid;
       gap: 1rem;
       margin-bottom: 1rem;
       grid-column-gap:0.8%;
-    }`,
-    `.a25-star-font {
-      -webkit-text-stroke-color:black;
-      color:yellow;
-      padding-top:0.3rem;
-    }`,
-    `.a25-char-font {
-      height: 20%;
-      width: 20%;
-      aspect-ratio:1;
-      color:white;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      border-radius:50%;
-      position:absolute;
-      bottom:0;
-      right:9%;
-    }`,
-    `@media screen and (min-width: 800px) {
-      .char-grid {
-        grid-template-columns:repeat(6,16%);
-      }
-      .a25-char-font {
-        font-size:1.4vw
-      }
-      .a25-star-font {
-        font-size:1.5vw;
-        -webkit-text-stroke-width:.15vw;
-      }
-      .a25-half-star {
-        display:inline-block;
-        overflow-x:clip;
-        width:1vw;
-      }
-    }`,
-    `@media screen and (max-width: 800px) {
-      .char-grid {
-        grid-template-columns:repeat(3,31%);
-      }
-      .a25-char-font {
-        font-size:4vw
-      }
-      .a25-star-font {
-        font-size:4vw;
-        -webkit-text-stroke-width:.4vw;
-      }
-      .a25-half-star {
-        display: inline-block;
-        overflow-x: clip;
-        width: 3vw;
-      }
     }`,
     `.a25-emblem {
       cursor: pointer;
@@ -101,6 +49,9 @@ import { forkJoin, map, Observable, startWith } from 'rxjs';
       display: grid;
     }`,
     `@media screen and (min-width: 800px) {
+      .char-grid {
+        grid-template-columns:repeat(6,16%);
+      }
       .mem-grid {
         grid-template-columns:repeat(6,16%);
       }
@@ -110,6 +61,9 @@ import { forkJoin, map, Observable, startWith } from 'rxjs';
     }`
     ,
     `@media screen and (max-width: 800px) {
+      .char-grid {
+        grid-template-columns:repeat(3,31%);
+      }
       .mem-grid {
         grid-template-columns:repeat(3,33%);
       }
@@ -357,46 +311,21 @@ export class A25CollectionComponent extends DialogUseComponent {
     this.save();
   }
 
-  changeCharacter(id: number, rarity: number, slug :string, event) {
+  changeChar(char) {
     if (this.editMode) {
-      let kind = this.collection.characters[id]
-      kind = (kind===undefined) ? rarity : kind + 1;
+      let kind = this.collection.characters[char.id]
+      kind = (kind===undefined) ? char.rarity : kind + 1;
       if (kind <= 7) {
-        this.collection.characters[id]=kind;
+        this.collection.characters[char.id]=kind;
       }
       else {
-        delete this.collection.characters[id];
+        delete this.collection.characters[char.id];
       }
       this.save();
     }
     else {
-      this.openDialog(slug, event, 'characters', A25CharaComponent)
+      this.openDialog(char.slug, undefined, 'characters', A25CharaComponent)
     }
-  }
-
-  starMap = {
-    1: [1, false],
-    2: [2, false],
-    3: [3, false],
-    4: [3, true],
-    5: [4, false],
-    6: [4, true],
-    7: [5, false]
-  }
-
-  fetchStars(id: number, rarity: number) {
-    let stars = ['', '']
-    let limit = rarity;
-    if (this.collection.characters[id]) {
-      if (this.starMap[this.collection.characters[id]][1]) {
-        stars[1] = `<div class="a25-half-star"><span class="fa-star-half"></span></div>`;
-      }
-      limit = this.starMap[this.collection.characters[id]][0]
-    }
-    for (let i = 0; i < limit; i++) {
-      stars[0] += '<span class="fa-star"></span>'
-    }
-    return stars[0]+stars[1];
   }
 
   changeMemoria(id: number, slug: string, event) {

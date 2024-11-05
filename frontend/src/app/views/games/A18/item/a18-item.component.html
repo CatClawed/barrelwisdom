@@ -100,16 +100,14 @@
       <b >Location:</b>
     }
     @if (item.locations) {
-      <div style="column-count: 2;">
-        <ul style="padding-left:1.1em;margin-bottom:0">
-          @for (loc of item.locations; track loc) {
-            <li>{{loc.name}}</li>
-          }
-        </ul>
-      </div>
+      <ul class="two-column">
+        @for (loc of item.locations; track loc) {
+          <li>{{loc.name}}</li>
+        }
+      </ul>
     }
     @if (item.wt || item.quantity || item.uses || item.range || item.price) {
-      <ul style="padding-left:0;list-style:none;">
+      <ul style="padding-left:0;list-style:none;column-count: 2;">
         @if (item.wt) {
           <li      >WT: {{item.wt}}</li>
         }
@@ -134,13 +132,11 @@
       <b >Dropped by:</b>
     }
     @if (item.monsters) {
-      <div style="column-count: 2;">
-        <ul style="padding-left:1.1em;margin-bottom:0">
-          @for (mon of item.monsters; track mon) {
-            <li><a routerLink="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a></li>
-          }
-        </ul>
-      </div>
+      <ul class="two-column">
+        @for (mon of item.monsters; track mon) {
+          <li><a routerLink="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a></li>
+        }
+      </ul>
     }
     @if (item.ideas) {
       <table class="tbl"><tbody>
@@ -173,7 +169,7 @@
               }
               @if (unlock.level == 1 || unlock.level == 4) {
                 <td>
-                  <ul>
+                  <ul style="margin-bottom: 0;">
                     @for (condition of unlock.condition; track condition) {
                       <li>
                         {{condition.condition}}
@@ -243,7 +239,7 @@
               </td>
             }
             <td>
-              <ul style="list-style:none;">
+              <ul style="list-style:none;margin-top: auto; margin-bottom: auto;">
                 @for (e of eff.data; track e) {
                   <li>
                     <ng-template #effPopover>
@@ -262,10 +258,10 @@
                       </popover>
                     }
                     @if (e.component) {
-                      {{e.component.name}} {{e.component.value}} <i class="fa-{{colors[e.component.color][0]}}" style="color:{{colors[e.component.color][1]}};"></i>
+                      <i class="fa-{{colors[e.component.color][0]}}" style="color:{{colors[e.component.color][1]}};"></i> {{e.component.name}} {{e.component.value}}
                     }
                     @if (e.num && item.ingredients) {
-                      <span> ({{e.num}})</span>
+                      ({{e.num}})
                     }
                   </li>
                 }
@@ -283,11 +279,15 @@
               Fixed Components
             </th>
           </tr>
-        }
-        @for (comp of item.fixed_components; track comp) {
           <tr>
             <td>
-              {{comp.name}} {{comp.value}} <i class="fa-{{colors[comp.color][0]}}" style="color:{{colors[comp.color][1]}};"></i>
+              <ul class="two-column" style="list-style: none; padding-left: 0;">
+                @for (comp of item.fixed_components; track comp) {
+                  <li>
+                    <i class="fa-{{colors[comp.color][0]}}" style="color:{{colors[comp.color][1]}};"></i> {{comp.name}} {{comp.value}}
+                  </li>
+                }
+              </ul>
             </td>
           </tr>
         }
@@ -297,11 +297,15 @@
               Random Components
             </th>
           </tr>
-        }
-        @for (comp of item.random_components; track comp) {
           <tr>
             <td>
-              {{comp.name}} {{comp.value}} <i class="fa-{{colors[comp.color][0]}}" style="color:{{colors[comp.color][1]}};"></i>
+              <ul class="two-column" style="list-style: none; padding-left: 0;">
+                @for (comp of item.random_components; track comp) {
+                  <li>
+                    <i class="fa-{{colors[comp.color][0]}}" style="color:{{colors[comp.color][1]}};"></i> {{comp.name}} {{comp.value}}
+                  </li>
+                }
+              </ul>
             </td>
           </tr>
         }
@@ -334,32 +338,38 @@
     @if (item.catalysts) {
       <table class="tbl"><tbody>
         <tr class="table-dark-center"><th colspan="2">Catalysts Used</th></tr>
-        @for (cat of item.catalysts; track cat) {
-          <tr>
-            <td style="text-align: center;width:15%;"><i class="atelier atelier-{{cat.icon}}"></i></td>
-            <td>
-              <a routerLink="/{{gameURL}}/catalysts/{{language}}"
-                [queryParams]="{search: cat.name}">
-                {{cat.name}}
-              </a>
-            </td>
-          </tr>
-        }
+        <tr>
+          <td>
+            <ul class="two-column" style="list-style: none; padding-left: 0;">
+              @for (cat of item.catalysts; track cat) {
+                <li>
+                  <i class="atelier atelier-{{cat.icon}}"></i>
+                  <a routerLink="/{{gameURL}}/catalysts/{{language}}"
+                    [queryParams]="{search: cat.name}">
+                    {{cat.name}}
+                  </a>
+                </li>
+              }
+            </ul>
+          </td>
+        </tr>
       </tbody></table>
     }
     @if (item.catalyst) {
       <table class="tbl"><tbody>
         <tr class="table-dark-center"><th colspan="2">Catalyst Data ({{item.catalyst.size}}x{{item.catalyst.size}})</th></tr>
-        @for (j of [].constructor(item.catalyst.color.length); track j; let i = $index) {
-          <tr>
-            <td style="text-align:center;width:15%;">
-              <i class="fa-{{colors[item.catalyst.color[i]][0]}}" style="color:{{colors[item.catalyst.color[i]][1]}}"></i>
-            </td>
-            <td>
-              {{item.catalyst.action[i]}}
-            </td>
-          </tr>
-        }
+        <tr>
+          <td>
+            <ul class="two-column" style="list-style: none; padding-left: 0;">
+              @for (j of [].constructor(item.catalyst.color.length); track j; let i = $index) {
+                <li>
+                  <i class="fa-{{colors[item.catalyst.color[i]][0]}}" style="color:{{colors[item.catalyst.color[i]][1]}}"></i>
+                  {{item.catalyst.action[i]}}
+                </li>
+              }
+            </ul>
+          </td>
+        </tr>
       </tbody></table>
     }
     @if (item.masteryline_set && item.ingredients) {
@@ -369,7 +379,7 @@
           <tr>
             <td style="vertical-align:middle;text-align:center;width:15%;">{{masteryline.level}}</td>
             <td>
-              <ul>
+              <ul style="margin-bottom: 0;">
                 @for (mastery of masteryline.masteries; track mastery) {
                   <li>{{mastery.desc}}</li>
                 }

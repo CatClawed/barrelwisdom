@@ -69,13 +69,14 @@ img {
 // For lists of things
 .item-grid {
   display: grid;
-  gap: 1rem;
+  column-gap: 2%;
+  row-gap: 1rem;
   margin-bottom: 1rem;
 }
 
 @media screen and (min-width: 800px) {
   .item-grid {
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 49% 49%;
   }
 }
 
@@ -290,7 +291,6 @@ th {
 
 // Game Data Pages
 
-// TODO: Standarize all image sizes so I can get away with only left/right margins
 .card-item-display {
   margin: 0 auto 0 auto;
 }
@@ -347,4 +347,16 @@ th {
 
 .form-group {
   margin: 1rem;
+}
+
+// list behavior
+
+.two-column {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-column-gap: 1rem;
+
+  >li {
+    break-inside: avoid-column;
+  }
 }

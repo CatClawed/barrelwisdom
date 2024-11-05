@@ -12,7 +12,7 @@
     }
     <p><b>Acquisition: </b>{{book.acquisition}}</p>
     <b>Items:</b>
-    <ul>
+    <ul class="two-column">
       @for (item of book.items; track item) {
         <li><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
       }

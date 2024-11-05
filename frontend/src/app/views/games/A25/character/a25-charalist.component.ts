@@ -15,13 +15,14 @@ import { DialogUseComponent } from '@app/views/games/_prototype/dialog-use.compo
 import { Observable, forkJoin } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { A25CharaComponent } from './a25-chara.component';
+import { A25CharaFrameComponent } from './a25-charaframe.component';
 
 @Component({
   templateUrl: 'a25-charalist.component.html',
   providers: [DestroyService],
   standalone: true,
   imports: [...CommonImports, ...MaterialFormImports, NgTemplateOutlet,
-    A25CharaComponent, MatMenuModule, MatCheckboxModule],
+    A25CharaComponent, MatMenuModule, MatCheckboxModule, A25CharaFrameComponent],
   styles: [
     `.char-grid {
       display: grid;
@@ -29,46 +30,14 @@ import { A25CharaComponent } from './a25-chara.component';
       margin-bottom: 1rem;
       grid-column-gap:0.8%;
     }`,
-    `.a25-star-font {
-      -webkit-text-stroke-color:black;
-      color:yellow;
-      padding-top:0.3rem;
-    }`,
-    `.a25-char-font {
-      height: 20%;
-      width: 20%;
-      aspect-ratio:1;
-      color:white;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      border-radius:50%;
-      position:absolute;
-      bottom:0;
-      right:9%;
-    }`,
     `@media screen and (min-width: 800px) {
       .char-grid {
         grid-template-columns:repeat(6,16%);
-      }
-      .a25-char-font {
-        font-size:1.4vw
-      }
-      .a25-star-font {
-        font-size:1.5vw;
-        -webkit-text-stroke-width:.15vw;
       }
     }`,
     `@media screen and (max-width: 800px) {
       .char-grid {
         grid-template-columns:repeat(3,31%);
-      }
-      .a25-char-font {
-        font-size:4vw
-      }
-      .a25-star-font {
-        font-size:4vw;
-        -webkit-text-stroke-width:.4vw;
       }
     }`
   ],

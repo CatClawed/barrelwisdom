@@ -10,9 +10,9 @@
     @if (book.desc && !inputData) {
       <p>{{book.desc}}</p>
     }
-    <p><b>Acquisition: </b>{{book.acquisition}}</p>
+    <p><b>Acquisition: </b>{{book.note}}</p>
     <b>Items:</b>
-    <ul>
+    <ul class="two-column">
       @for (item of book.items; track item) {
         <li><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
       }

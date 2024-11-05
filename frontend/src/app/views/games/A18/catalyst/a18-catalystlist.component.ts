@@ -25,7 +25,7 @@ import { A18ItemComponent } from '../item/a18-item.component';
 
 export class A18CatalystlistComponent extends DialogUseComponent {
   filteredCatalysts: Observable<Catalyst[]>;
-  query: string = "";
+  query: string = null;
   colors = {
     "white": [`regular fa-circle`, `black`],
     "yellow": [`solid fa-circle`, `#edc200`],
@@ -51,9 +51,7 @@ export class A18CatalystlistComponent extends DialogUseComponent {
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
     })
-    // unused??
     this.query = this.route.snapshot.queryParamMap.get('search');
-    if (this.query) { this.pageForm.controls['filtertext'].patchValue(this.query); }
   }
 
   changeData() {
@@ -68,14 +66,14 @@ export class A18CatalystlistComponent extends DialogUseComponent {
       startWith(null as Observable<Catalyst[]>),
       map((search: any) => search || this.query ? this.filterT(search ? search.filtertext : "") : this.data.slice())
     );
-    this.pageForm.controls['filtertext'].setValue(this.query);
+    if (this.query) { this.pageForm.controls['filtertext'].setValue(this.query); }
   }
 
   private filterT(value: string): Catalyst[] {
     this.hide = false;
     if (this.query) {
       value = this.query;
-      this.query = "";
+      this.query = null;
     }
     let catalystlist: Catalyst[] = this.data;
 

@@ -12,19 +12,17 @@
       <table class="table-item-data"><tbody>
         @for (c of cat.item.categories; track c) {
           <tr>
-            <td style="text-align:center;"><i class="atelier atelier-{{c.icon}}"></i></td><td>{{c.name}}</td>
+            <td style="text-align:center;padding-right: 0.4em;"><i class="atelier atelier-np atelier-{{c.icon}}"></i></td><td>{{c.name}}</td>
           </tr>
         }
         @for (c of cat.item.add; track c) {
           <tr>
-            <td style="text-align:center;"><i style="color:lightgray;" class="atelier atelier-{{c.icon}}"></i></td><td>{{c.name}}</td>
+            <td style="text-align:center;padding-right: 0.4em;"><i style="color:lightgray;" class="atelier atelier-np atelier-{{c.icon}}"></i></td><td>{{c.name}}</td>
           </tr>
         }
-      </tbody></table>
-      <table><tbody>
         @for (j of [].constructor(cat.color.length); track j; let i = $index) {
           <tr>
-            <td>
+            <td style="text-align: center; padding-right: 0.4em;">
               <i class="fa-{{colors[cat.color[i]][0]}}" style="color:{{colors[cat.color[i]][1]}}"></i>
             </td>
             <td>
