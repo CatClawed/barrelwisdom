@@ -8,9 +8,11 @@
       <i class="atelier atelier-np atelier-resleri-{{chara.elem}} resleri-element-icon"
         style="background-color:{{a25service.elements[chara.elem]}};display:flex;"></i>
     </div>
-    <div style="aspect-ratio:1;max-width:100%;width:400px;{{gradients[chara.rarity]}}display:block;border-radius:50%;overflow:hidden !important;margin:auto;">
-      <img  style="aspect-ratio:680/724;width:400px;position:relative;"
-        src="{{imgURL}}characters/full/{{chara.slug}}.webp" alt="{{chara.name}} {{chara.title}}" />
+    <div style="aspect-ratio: 1; max-width: 100%; width: 426px; margin: auto;"> <!-- This stupid div is for webkit. -->
+      <div style="{{gradients[chara.rarity]}}border-radius:50%;overflow:clip;text-align:center;height:100%;">
+        <img  style="aspect-ratio:680/724;width:400px;max-width:100%;position:relative;"
+          src="{{imgURL}}characters/full/{{chara.slug}}.webp" alt="{{chara.name}} {{chara.title}}" />
+      </div>
     </div>
     @if (chara.limit) {
       <p style="margin-top:1rem;"><b>Event: </b>{{chara.limit}}</p>

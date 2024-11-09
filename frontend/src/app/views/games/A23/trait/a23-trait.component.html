@@ -1,6 +1,6 @@
 @if (data; as trait) {
   <div [class]="url ? 'card' : inputSlug ? 'card card-dialog' : 'card card-small'"
-    [style]="url ? 'height:100%;' : 'margin-bottom: 1rem;'">
+    [style]="url ? 'height:100%;' : null">
     <h4 class="card-title" style="margin-right:6rem;">
       @if (url) {
         <a (click)="$event.preventDefault(); buttonClicked.emit(trait.slug);"

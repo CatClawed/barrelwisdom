@@ -1,6 +1,6 @@
 <div
   [class]="small ? 'card card-small' : url ? 'card' : 'card card-dialog'"
-  [style]="hideContents ? 'height:100%;' : 'margin-bottom: 1rem;'">
+  [style]="hideContents ? 'height:100%;' : null">
   @if (url && hideContents) {
     <h4 class="card-title" style="margin-right:6rem;">
       <a (click)="$event.preventDefault(); buttonClicked.emit(effect.slug);"
