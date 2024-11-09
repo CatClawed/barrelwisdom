@@ -20,8 +20,10 @@ export class AppComponent {
       // hard refreshes mess things up
       // I have to check for the service worker controller
       navigator.serviceWorker.getRegistration().then(function(reg) {
-        if (reg.active && !navigator.serviceWorker.controller) {
-          window.location.reload();
+        if (reg) {
+          if (reg.active && !navigator.serviceWorker.controller) {
+            window.location.reload();
+          }
         }
       });
       const appIsStable$ = appRef.isStable.pipe(first((isStable) => isStable === true));

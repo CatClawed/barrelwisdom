@@ -62,37 +62,25 @@ export class A25CharaComponent extends SingleComponent {
 
   replaceDesc(skill) {
     let desc = skill.desc;
-    if (skill.val0) {
-      desc = skill.val0_2
-        ? desc.replaceAll('{0}', `${skill.val0 / 100} ~ ${skill.val0_2 / 100}`)
-        : desc.replaceAll('{0}', skill.val0 / 100);
-    }
-    if (skill.val1) {
-      desc = skill.val1_2
-        ? desc.replaceAll('{1}', `${skill.val1 / 100} ~ ${skill.val1_2 / 100}`)
-        : desc.replaceAll('{1}', skill.val1 / 100);
-    }
-    if (skill.val2) {
-      desc = skill.val2_2
-        ? desc.replaceAll('{2}', `${skill.val2 / 100} ~ ${skill.val2_2 / 100}`)
-        : desc.replaceAll('{2}', skill.val2 / 100);
+    const skillval =  [skill.val0,   skill.val1,   skill.val2,   skill.val3];
+    const skillval2 = [skill.val0_2, skill.val1_2, skill.val2_2, skill.val3_2];
+    for (let i = 0; i < skillval.length; i++) {
+      if (skillval[i]) {
+        desc = skillval2[i]
+          ? desc.replaceAll(`{${i}}`, `${skillval[i] / 100} ~ ${skillval2[i] / 100}`)
+          : desc.replaceAll(`{${i}}`, skillval[i] / 100);
+      }
     }
     return desc;
   }
 
   replacePassive(passive) {
     let desc = passive.desc;
-    if (passive.val) {
-      desc = desc.replaceAll('{0}', passive.val/100)
-    }
-    if (passive.val2) {
-      desc = desc.replaceAll('{1}', passive.val2/100)
-    }
-    if (passive.val3) {
-      desc = desc.replaceAll('{2}', passive.val3/100)
-    }
-    if (passive.val4) {
-      desc = desc.replaceAll('{3}', passive.val4/100)
+    const skillval = [passive.val, passive.val2, passive.val3, passive.val4]
+    for (let i = 0; i < skillval.length; i++) {
+      if (skillval[i]) {
+        desc = desc.replaceAll(`{${i}}`, skillval[i]/100)
+      }
     }
     return desc;
   }

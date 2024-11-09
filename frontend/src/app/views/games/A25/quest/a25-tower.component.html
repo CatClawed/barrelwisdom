@@ -52,7 +52,7 @@
         }
         <div style="display:grid;grid-row-gap:1rem;grid-column-gap:1rem;grid-template-columns:repeat(auto-fit, 350px);">
         @for (enemy of wave.enemies; track enemy) {
-          <div class="card card-body" style="min-width:350px;max-width:450px;">
+          <div class="card" style="min-width:350px;max-width:450px;">
             <img loading="lazy"
               style="aspect-ratio: 1;width:128px;height:128px;margin-left:auto;margin-right:auto;"
               src="{{imgURL}}enemy/{{enemy.base_enemy}}.webp">

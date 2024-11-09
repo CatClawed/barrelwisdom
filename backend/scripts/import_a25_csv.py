@@ -907,7 +907,7 @@ def import_recipes():
                 desc=limited,
             )
             if plan['recipe_plan_category_id'] == 2:
-                for i in LatestUpdate.objects.first().items:
+                for i in LatestUpdate.objects.first().items.all():
                     if i.rarity == 4 or i.kind.slug == 'material':
                         i.limit = limited
                         i.save()
@@ -1118,6 +1118,7 @@ def import_tower(quest, kind):
             kind=kind,
             q_id=quest['id'],
             combat_level=quest['recommended_combat_power'],
+            gbl=False,
         )
         obj.battle = battle(quest['battle_id'])
         obj.save()
@@ -1550,12 +1551,13 @@ def cleanup():
 
 # for setting slugs
 additions = {
-    "フロッケ": "flocke-2"
+    "ミーケ": "mieke-1",
+    "ディオーナ": "diona-1"
 }
-memoria_index = 121 # 1st anni heidi/flocke
-base_enemy_index = 84
+memoria_index = 124 # lara groupies
+base_enemy_index = 87
 
-gacha = None #create_event(ja='1周年 星礼祭 LEGEND FES かけがえのないモノ', en="1st Anniversary Part 8")
+gacha = create_event(ja='渇きの中で咲く花たち LEGEND FES', en="Flowers Blooming LEGEND FES")
 
 #createUpdate()
 #retrieve_all_jsons()
@@ -1564,19 +1566,19 @@ gacha = None #create_event(ja='1周年 星礼祭 LEGEND FES かけがえのな�
 #import_characters(event=gacha, additions=additions)
 #memoria_index = import_memoria(memoria_index, event=gacha)
 #import_material()
-#import_combat_items()s
+#import_combat_items()
 #import_equipment()
 #import_recipes()
 #base_enemy_index = import_enemy(base_enemy_index)
 #import_quest()
 #import_emblem()
 #scan_update_images()
+#enemy_images()
 #print(f'Memoria: {memoria_index}\tEnemy: {base_enemy_index}')
 
 #global_additions()
-#enemy_images()
 #import_research()
 
 """
-p7ython manage.py dumpdata chara_a25 items_a25 misc_a25 quest_a25 -o dump.json.gz
+python manage.py dumpdata chara_a25 items_a25 misc_a25 quest_a25 -o dump.json.gz
 """

@@ -23,18 +23,10 @@
           }
         </tbody></table>
         <div style="break-inside: avoid-column; margin-right:2rem;">
-          @if (item.fire) {
-            <i style="color:#f03a02;" class="atelier atelier-np atelier-ryza2-fire"></i>
-          }
-          @if (item.ice) {
-            <i style="color:#04b5db;" class="atelier atelier-np atelier-ryza2-ice"></i>
-          }
-          @if (item.lightning) {
-            <i style="color:#e3bb05;" class="atelier atelier-np atelier-ryza2-lightning"></i>
-          }
-          @if (item.wind) {
-            <i style="color:#589b1d;" class="atelier atelier-np atelier-ryza2-wind"></i>
-          }
+          <i [style]="item.fire      ? 'color:#f03a02;' : 'color:lightgrey'" class="atelier atelier-np atelier-ryza2-fire"></i>
+          <i [style]="item.ice       ? 'color:#04b5db;' : 'color:lightgrey'" class="atelier atelier-np atelier-ryza2-ice"></i>
+          <i [style]="item.lightning ? 'color:#e3bb05;' : 'color:lightgrey'" class="atelier atelier-np atelier-ryza2-lightning"></i>
+          <i [style]="item.wind      ? 'color:#589b1d;' : 'color:lightgrey'" class="atelier atelier-np atelier-ryza2-wind"></i>
           @if (item.fire || item.wind || item.ice || item.lightning) {
             {{item.elementvalue}}
           }

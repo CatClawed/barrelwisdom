@@ -1,9 +1,8 @@
 @if (data; as effect) {
   <effect [effect]="effect"
-  [small]="inputSlug ? false : hideContents ? false : true"
+  [small]="inputData || inputSlug ? false : hideContents ? false : true"
   [hideContents]="hideContents"
-  url="/firis/effects/{{effect.slug}}"
-  [language]="language"
+  [url]="inputData ? '/' + gameURL + '/effects/' + effect.slug + '/' + language : undefined"
   (buttonClicked)="buttonClicked.emit($event)">
     @if (!hideContents) {
       @if (effect.items) {

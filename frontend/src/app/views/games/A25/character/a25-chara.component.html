@@ -1,5 +1,5 @@
 @if (data; as chara) {
-  <div [class]="inputSlug ? 'card card-body spacer' : 'card card-body card-medium'">
+  <div [class]="inputSlug ? 'card card-dialog' : 'card card-medium'">
     <h4 class="card-title card-icon-space">
       {{chara.name}} {{chara.title}}
     </h4>
@@ -67,9 +67,9 @@
             <b>Level: </b>{{slider.value}}<br />
             <mat-slider
               style="width:100%;"
-              [max]="90"
+              [max]="100"
               [min]="1">
-              <input matSliderThumb value="90" #slider>
+              <input matSliderThumb value="100" #slider>
             </mat-slider>
           </div>
           <div style="width:45%;float:right;">

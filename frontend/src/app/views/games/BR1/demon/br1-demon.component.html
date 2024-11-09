@@ -1,6 +1,6 @@
 @if (data; as demon) {
-  <div [class]="url || inputSlug ? 'card card-body' : 'card card-body card-small'"
-      [style]="url ? 'height: 100%;' : null">
+  <div [class]="url ? 'card' : inputSlug ? 'card card-dialog' : 'card card-small'"
+      [style]="url ? 'height:100%;' : 'margin-bottom: 1rem;'">
     <h4 class="card-title">
       @if (url) {
         <a (click)="$event.preventDefault(); buttonClicked.emit(demon.slug);"

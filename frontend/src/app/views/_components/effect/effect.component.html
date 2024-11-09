@@ -1,10 +1,10 @@
 <div
-  [class]="small ? 'card card-body card-small' : 'card card-body'"
-  [style]="hideContents ? 'height:100%;' : null">
+  [class]="small ? 'card card-small' : url ? 'card' : 'card card-dialog'"
+  [style]="hideContents ? 'height:100%;' : 'margin-bottom: 1rem;'">
   @if (url && hideContents) {
     <h4 class="card-title" style="margin-right:6rem;">
       <a (click)="$event.preventDefault(); buttonClicked.emit(effect.slug);"
-      href="{{url}}/{{language}}">{{effect.name}}</a>
+      href="{{url}}">{{effect.name}}</a>
     </h4>
   }
   @else {

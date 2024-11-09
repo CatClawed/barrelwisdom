@@ -113,44 +113,35 @@
     </a>
   </div>
 </mat-sidenav>
-<div style="display:flex;">
-  <div class="main">
-    @if (error.code !== 200) {
-      <div class="flex-row align-items-center" style="min-height:90vh;display:flex;">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-md-6">
-              <div class="row">
-                <div class="col">
-                  <h1 style="float:right;height:min-content;width:min-content;font-size:calc(4rem + 0.1vw) !important;font-weight:300;">
-                    {{error.code}}</h1>
-                </div>
-                <div class="col">
-                  <h4 class="pt-3">{{error.title}}</h4>
-                  <p class="text-muted">{{error.desc}}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row justify-content-center" style="margin:10px">
-            <img src="/media/main/punidead.svg" alt="" loading="lazy" style="width:30%;">
+<div class="main">
+  @if (error.code !== 200) {
+    <div style="display: flex; height: calc(100vh - 65px - 1rem);">
+      <div style="width: 100%; margin: auto;">
+        <div style="display: flex; justify-content: center;">
+          <h1 style="height:min-content;font-size:calc(4rem + 0.1vw) !important;font-weight:300;">
+            {{error.code}}
+          </h1>
+          <div style="margin-left: 1rem;">
+            <h4 class="pt-3">{{error.title}}</h4>
+            <p class="text-muted">{{error.desc}}</p>
           </div>
         </div>
+        <img src="/media/main/punidead.svg" alt=""
+          style="width:40%; position: relative; left: 50%; transform: translate(-50%); aspect-ratio: 511/670;">
       </div>
-    }
-    @else if (bread.current) {
-      <nav style="margin-top: 1em;" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a routerLink="/">Barrel Wisdom</a></li>
-          @for (crumb of bread.breadcrumbs; track crumb) {
-            <li class="breadcrumb-item"><a routerLink="/{{crumb[1]}}">{{crumb[0]}}</a></li>
-          }
-          <li class="breadcrumb-item active" aria-current="page">{{bread.current}}</li>
-        </ol>
-      </nav>
-    }
-    <router-outlet></router-outlet>
-  </div>
+    </div>
+  }
+  @else if (bread.current) {
+    <nav style="margin-top: 1em;" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Barrel Wisdom</a></li>
+        @for (crumb of bread.breadcrumbs; track crumb) {
+          <li class="breadcrumb-item"><a routerLink="/{{crumb[1]}}">{{crumb[0]}}</a></li>
+        }
+        <li class="breadcrumb-item active" aria-current="page">{{bread.current}}</li>
+      </ol>
+    </nav>
+  }
+  <router-outlet></router-outlet>
 </div>
-
 </mat-sidenav-container>

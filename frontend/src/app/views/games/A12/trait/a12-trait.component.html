@@ -1,28 +1,26 @@
 @if (data; as trait) {
-    <div [class]="url || inputSlug ? 'card card-body' : 'card card-body card-small'"
-      [style]="url ? 'height: 100%;' : null">
-          <h4 class="card-title" style="margin-right:6rem;">
-            @if (url) {
-              <a (click)="$event.preventDefault(); buttonClicked.emit(trait.slug);"
-                href="{{url}}">{{trait.name}}</a>
-            }
-            @else {
-              {{trait.name}}
-            }
-          </h4>
-        @if (trait.cost) {
-          <div class="card-icon-position"><b>Cost: </b>{{trait.cost}}</div>
+    <div [class]="url ? 'card' : inputSlug ? 'card card-dialog' : 'card card-small'"
+      [style]="url ? 'height:100%;' : 'margin-bottom: 1rem;'">
+      <h4 class="card-title" style="margin-right:6rem;">
+        @if (url) {
+          <a (click)="$event.preventDefault(); buttonClicked.emit(trait.slug);"
+            href="{{url}}">{{trait.name}}</a>
         }
-      <p [style]="url ? 'height: 100%;' : null">{{trait.desc}}</p>
+        @else {
+          {{trait.name}}
+        }
+      </h4>
+      @if (trait.cost) {
+        <div class="card-icon-position"><b>Cost: </b>{{trait.cost}}</div>
+      }
+      <p [style]="url ? 'height:100%;' : 'margin-bottom: 1rem;'">{{trait.desc}}</p>
       @if (trait.item_set) {
-        <div>
-          <b>Items:</b>
-          <ul>
-            @for (item of trait.item_set; track item) {
-              <li><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
-            }
-          </ul>
-        </div>
+        <b>Items:</b>
+        <ul>
+          @for (item of trait.item_set; track item) {
+            <li><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
+          }
+        </ul>
       }
       <div class="flex bottom">
         <i class="trait-color{{trait.synth}}     atelier atelier-np atelier-ryza2-type-synthesis"></i>

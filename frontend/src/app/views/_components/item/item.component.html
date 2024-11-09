@@ -1,6 +1,6 @@
 <div
-  [class]="url || !small ? 'card card-body' : 'card card-body card-small'"
-  [style]="url ? 'height:100%;' : null">
+  [class]="small ? 'card card-small' : url ? 'card' : 'card card-dialog'"
+  [style]="url ? 'height:100%;' : 'margin-bottom: 1rem;'">
   @if (url) {
     <h4 class="card-title" style="margin-right:6rem;">
       <a (click)="$event.preventDefault(); buttonClicked.emit(item.slug);"

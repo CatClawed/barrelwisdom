@@ -5,7 +5,7 @@
     imgURL="{{imgURL}}items/{{book.slug}}.webp?v=1"
     (buttonClicked)="buttonClicked.emit($event)"
     dimension="240"
-    [small]="inputSlug ? false : true"
+    [small]="inputData || inputSlug ? false : true"
     [hideButton]="true">
     <ng-container icon>
       @if (book.isDLC) {

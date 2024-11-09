@@ -24,8 +24,5 @@ export class EffectComponent {
   url: string;
 
   @Input()
-  language: string;
-
-  @Input()
   small: boolean = false;
 }

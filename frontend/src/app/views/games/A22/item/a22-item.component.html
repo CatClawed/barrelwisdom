@@ -1,5 +1,5 @@
 @if (data; as item) {
-  <div [class]="inputSlug ? 'card card-body spacer' : 'card card-body card-medium'">
+  <div [class]="inputSlug ? 'card card-dialog' : 'card card-medium'">
     <h4 class="card-title card-icon-space">{{item.name}}</h4>
     <div class="card-icon-position">
       <b style="padding-right:0.5em;">LV {{item.level}}</b>
@@ -15,7 +15,7 @@
       @if (item.note) {
         <p><b>Note:</b> {{item.note}}</p>
       }
-      <div class="row">
+      <div class="two-column">
         <table class="table-item-data col"><tbody>
           @for (cat of item.category; track cat) {
             <tr>
@@ -23,25 +23,15 @@
             </tr>
           }
         </tbody></table>
-        <table class="table-item-data"><tbody>
-          <tr>
-            <td colspan=2>
-              @if (item.fire) {
-                <i style="color:#f03a02;" class="atelier atelier-np atelier-ryza2-fire"></i>
+        <div style="break-inside: avoid-column;">
+          <i [style]="item.fire      ? 'color:#f03a02;' : 'color:lightgrey'" class="atelier atelier-np atelier-ryza2-fire"></i>
+              <i [style]="item.ice       ? 'color:#04b5db;' : 'color:lightgrey'" class="atelier atelier-np atelier-ryza2-ice"></i>
+              <i [style]="item.lightning ? 'color:#e3bb05;' : 'color:lightgrey'" class="atelier atelier-np atelier-ryza2-lightning"></i>
+              <i [style]="item.wind      ? 'color:#589b1d;' : 'color:lightgrey'" class="atelier atelier-np atelier-ryza2-wind"></i>
+              @if (item.fire || item.wind || item.ice || item.lightning) {
+                {{item.elementvalue}}
               }
-              @if (item.ice) {
-                <i style="color:#04b5db;" class="atelier atelier-np atelier-ryza2-ice"></i>
-              }
-              @if (item.lightning) {
-                <i style="color:#e3bb05;" class="atelier atelier-np atelier-ryza2-lightning"></i>
-              }
-              @if (item.wind) {
-                <i style="color:#589b1d;" class="atelier atelier-np atelier-ryza2-wind"></i>
-              }
-              <span>{{item.elementvalue}}</span>
-            </td>
-          </tr>
-        </tbody></table>
+        </div>
       </div>
       @if (item.shop) {
         <p><i class="atelier atelier-ryza2-shop"></i><b>Shop:</b> {{item.shop.name}}</p>
@@ -107,61 +97,21 @@
         @if (item.effectline_set) {
           <table class="tbl"><tbody>
             <tr class="table-dark-center"><th colspan=2 >Effects</th></tr>
-            <tr>
-              <td style="vertical-align: middle;"><b>1</b></td><td>
-              @if (default[0][1] != 'none') {
-                <a routerLink="/{{gameURL}}/effects/{{default[0][1]}}/{{language}}" class="badge bg-secondary badge-list">{{default[0][0]}}</a>
-              }
-              @if (default[0][1] == 'none') {
-                <span class="badge bg-secondary badge-list">{{default[0][0]}}</span>
-              }
-              @for (e of eff1; track e) {
-                <a class="badge bg-primary badge-list" routerLink="/{{gameURL}}/effects/{{e[1]}}/{{language}}">{{e[0]}}</a>
-              }
-              </td>
-            </tr>
-            @if (eff2.length > 0) {
+            @for (eff of effs; track eff; let index=$index) {
               <tr>
-                <td style="vertical-align: middle;"><b>2</b></td><td>
-                  @if (default[1][1] != 'none') {
-                    <a routerLink="/{{gameURL}}/effects/{{default[1][1]}}/{{language}}" class="badge bg-secondary badge-list">{{default[1][0]}}</a>
+                <td style="vertical-align: middle;"><b>{{index+1}}</b></td><td>
+                @if (default[index][0]) {
+                  @if (default[index][1] != 'none') {
+                    <a routerLink="/{{gameURL}}/effects/{{default[index][1]}}/{{language}}"
+                      class="badge bg-secondary badge-list">{{default[index][0]}}</a>
                   }
-                  @if (default[1][1] == 'none') {
-                    <span class="badge bg-secondary badge-list">{{default[1][0]}}</span>
+                  @if (default[index][1] == 'none') {
+                    <span class="badge bg-secondary badge-list">{{default[index][0]}}</span>
                   }
-                  @for (e of eff2; track e) {
-                    <a class="badge bg-primary badge-list" routerLink="/{{gameURL}}/effects/{{e[1]}}/{{language}}">{{e[0]}}</a>
-                  }
-                </td>
-              </tr>
-            }
-            @if (eff3.length > 0) {
-              <tr>
-                  <td style="vertical-align: middle;"><b>3</b></td><td>
-                  @if (default[2][1] != 'none') {
-                    <a routerLink="/{{gameURL}}/effects/{{default[2][1]}}/{{language}}" class="badge bg-secondary badge-list">{{default[2][0]}}</a>
-                  }
-                  @if (default[2][1] == 'none') {
-                    <span class="badge bg-secondary badge-list">{{default[2][0]}}</span>
-                  }
-                  @for (e of eff3; track e) {
-                    <a class="badge bg-primary badge-list" routerLink="/{{gameURL}}/effects/{{e[1]}}/{{language}}">{{e[0]}}</a>
-                  }
-                </td>
-              </tr>
-            }
-            @if (eff4.length > 0) {
-              <tr>
-                <td style="vertical-align: middle;"><b>4</b></td><td>
-                  @if (default[3][1] != 'none') {
-                    <a routerLink="/{{gameURL}}/effects/{{default[3][1]}}/{{language}}" class="badge bg-secondary badge-list">{{default[3][0]}}</a>
-                  }
-                  @if (default[3][1] == 'none') {
-                    <span class="badge bg-secondary badge-list">{{default[3][0]}}</span>
-                  }
-                  @for (e of eff4; track e) {
-                    <a class="badge bg-primary badge-list" routerLink="/{{gameURL}}/effects/{{e[1]}}/{{language}}">{{e[0]}}</a>
-                  }
+                }
+                @for (e of eff; track e) {
+                  <a class="badge bg-primary badge-list" routerLink="/{{gameURL}}/effects/{{e[1]}}/{{language}}">{{e[0]}}</a>
+                }
                 </td>
               </tr>
             }
@@ -230,16 +180,16 @@
                         }
                       </ng-template>
                       @if (i.noneffect && !i.essence) {
-                        <popover [template]="effPopover" display="inline-flex" title="Synth Data" cls="badge bg-primary badge-list">{{i.noneffect}}</popover>
+                        <popover [template]="effPopover" display="inline-block" title="Synth Data" cls="badge bg-primary badge-list">{{i.noneffect}}</popover>
                       }
                       @if (i.noneffect && i.essence) {
-                        <popover [template]="effPopover" display="inline-flex" title="Synth Data" cls="badge-list badge bg-secondary">{{i.noneffect}}</popover>
+                        <popover [template]="effPopover" display="inline-block" title="Synth Data" cls="badge-list badge bg-secondary">{{i.noneffect}}</popover>
                       }
                       @if (i.effect    && !i.essence) {
-                        <popover [template]="effPopover" display="inline-flex" title="Synth Data" cls="badge bg-primary badge-list">{{i.effect}}</popover>
+                        <popover [template]="effPopover" display="inline-block" title="Synth Data" cls="badge bg-primary badge-list">{{i.effect}}</popover>
                       }
                       @if (i.effect    && i.essence) {
-                        <popover [template]="effPopover" display="inline-flex" title="Synth Data" cls="badge bg-secondary badge-list">{{i.effect}}</popover>
+                        <popover [template]="effPopover" display="inline-block" title="Synth Data" cls="badge bg-secondary badge-list">{{i.effect}}</popover>
                       }
                       @if (i.morph) {
                         <a class="badge bg-success badge-list" routerLink="/{{gameURL}}/items/{{i.morph.slug}}/{{language}}">{{i.morph.name}}</a>

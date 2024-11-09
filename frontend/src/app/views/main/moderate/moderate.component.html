@@ -1,7 +1,7 @@
 @if (comments) {
   @for (comment of comments; track comment) {
     @if (!comment.approved) {
-      <div class="card card-body comment-card">
+      <div class="card comment-card">
         <div>
           @if (comment.name) {
             <b>{{comment.name}}</b>

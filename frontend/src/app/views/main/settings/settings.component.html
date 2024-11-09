@@ -60,7 +60,7 @@
           <div class="col-6">
             <button [disabled]="loading" class="btn btn-primary">
               @if (loading) {
-                <span class="spinner-border spinner-border-sm mr-1"></span>
+                <span class="loader"></span>
               }
               Save
             </button>
@@ -118,7 +118,7 @@
           <div class="col-6">
             <button [disabled]="loading" class="btn btn-primary">
               @if (loading) {
-                <span class="spinner-border spinner-border-sm mr-1"></span>
+                <span class="loader"></span>
               }
               Save
             </button>
@@ -137,7 +137,7 @@
     <mat-tab label="Create Invite">
       <button (click)="createInvite()" [disabled]="loading" class="btn btn-primary">
         @if (loading) {
-          <span class="spinner-border spinner-border-sm mr-1"></span>
+          <span class="loader"></span>
         }
         Create
       </button>
@@ -179,7 +179,7 @@
             <div class="col-6">
               <button [disabled]="loading" class="btn btn-primary">
                 @if (loading) {
-                  <span class="spinner-border spinner-border-sm mr-1"></span>
+                  <span class="loader"></span>
                 }
                 Save
               </button>
@@ -233,7 +233,7 @@
             <div class="col-6">
               <button [disabled]="loading" class="btn btn-primary">
                 @if (loading) {
-                  <span class="spinner-border spinner-border-sm mr-1"></span>
+                  <span class="loader"></span>
                 }
                 Save
               </button>

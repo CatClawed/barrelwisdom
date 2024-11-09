@@ -21,8 +21,14 @@
 }
 
 .mat-sidenav-content {
-    margin-left: 0 !important;
+    margin-left: 200px; // prevents a layout shift
 }
+
+@media screen and (max-width: 800px) {
+    .mat-sidenav-content {
+        margin-left: 0;
+    }
+  }
 
 // Create page
 
@@ -74,7 +80,7 @@
     content: "\274c";
     color: rgb(180, 0, 0);
     cursor: pointer;
-    top: 57px;
+    top: 10px;
     right: 10px;
     font-size: 1.8rem;
     background-color: white;
@@ -91,7 +97,7 @@
 
 @media screen and (min-width: 1100px) {
     .dialog-margin {
-        margin-top: 0;
+        margin-top: 1rem;
         //max-height: 95vh;
         //margin-left: auto;
         //margin-right: auto;
@@ -100,12 +106,13 @@
         overflow-y: auto; // heck webkit
         -ms-overflow-style: none;  /* IE and Edge */
         scrollbar-width: none;  /* Firefox */
+        padding-bottom: 1rem;
     }
 }
 
 @media screen and (max-width: 1100px) {
     .dialog-margin {
-        margin-top: 210px;
+        margin-top: 3.7rem;
         //margin-left: auto;
         //margin-right: auto;
         max-width: min(95vw, 800px);
@@ -113,5 +120,6 @@
         overflow-y: auto; // heck webkit
         -ms-overflow-style: none;  /* IE and Edge */
         scrollbar-width: none;  /* Firefox */
+        padding-bottom: 1rem;
     }
 }

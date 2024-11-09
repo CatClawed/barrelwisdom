@@ -1,5 +1,5 @@
 <div style="margin-top:1em" class="col-md-6 mx-auto spacer">
-  <div class="card card-body">
+  <div class="card">
     <h1>Register</h1>
     @if (!hasInvite) {
       <p>You need a valid invite to join this party; only the admin hands those out. We're looking for experienced and trustworthy folks.</p>
@@ -88,7 +88,7 @@
             <div class="col-6">
               <button [disabled]="loading" class="btn btn-primary">
                 @if (loading) {
-                  <span class="spinner-border spinner-border-sm mr-1"></span>
+                  <span class="loader"></span>
                 }
                 Login
               </button>

@@ -1,5 +1,5 @@
 @if (data; as monster) {
-  <div [class]="inputSlug ? 'card card-body spacer' : 'card card-body card-medium'">
+  <div [class]="inputSlug ? 'card card-dialog' : 'card card-medium'">
     <h4 class="card-title card-icon-space">{{monster.name}}</h4>
     <i class="card-icon-position atelier atelier-np atelier-shallie-race-{{monster.kind}}"></i>
     <img class="image-display" src="{{imgURL}}monsters/{{monster.slug}}.webp"

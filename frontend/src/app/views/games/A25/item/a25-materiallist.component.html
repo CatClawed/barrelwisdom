@@ -1,6 +1,6 @@
 @if (!error) {
   <ng-template #template let-it="item">
-    <div class="card card-body"  style="{{insertStyle(it)}}">
+    <div class="card"  style="{{insertStyle(it)}}">
       <h4 class="card-title card-icon-space">
         <a (click)="openDialog(it.slug, $event);" href="/{{gameURL}}/items/materials/{{it.slug}}/{{language}}">{{it.name}}</a>
       </h4>

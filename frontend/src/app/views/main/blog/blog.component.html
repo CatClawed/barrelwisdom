@@ -73,7 +73,7 @@
   </article>
 }
 <ng-template #comment let-comment="comment">
-  <div class="card card-body comment-card">
+  <div class="card comment-card">
     <div>
       @if (comment.author) {
         <b><a routerLink="/user/{{comment.author.username}}" style="color:black;">{{comment.author.username}}</a></b>

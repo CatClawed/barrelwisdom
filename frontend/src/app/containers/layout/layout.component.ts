@@ -17,7 +17,7 @@ import { takeUntil } from 'rxjs/operators';
   providers: [DestroyService]
 })
 export class LayoutComponent implements OnInit {
-  public sidebarMinimized = false; 
+  public sidebarMinimized = false;
   public navItems: NavItems[];
   user: User;
   mobileView = true;

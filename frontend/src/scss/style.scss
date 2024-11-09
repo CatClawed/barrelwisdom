@@ -64,9 +64,6 @@ $font-size-base: 1.1rem;
 $popover-font-size: 1.1rem;
 $tooltip-font-size: 1.1rem;
 
-$modal-content-bg: transparent;
-$modal-content-border-color: transparent;
-
 $btn-color: white;
 
 $font-family-sans-serif: Lato,
@@ -82,29 +79,17 @@ $headings-font-family: Merriweather, serif;
 // How to minimize something you use everywhere lmao
 @import "bootstrap/scss/_functions.scss";
 @import "bootstrap/scss/_variables.scss";
-@import "bootstrap/scss/_variables-dark.scss";
 @import "bootstrap/scss/_maps.scss";
 @import "bootstrap/scss/_mixins.scss";
 @import "bootstrap/scss/_utilities.scss";
 
 @import "bootstrap/scss/_root.scss";
 @import "bootstrap/scss/_reboot.scss";
-@import "bootstrap/scss/_type.scss";
-@import "bootstrap/scss/_images.scss";
-@import "bootstrap/scss/_containers.scss";
 @import "bootstrap/scss/_grid.scss";
 @import "bootstrap/scss/_forms.scss";
+
+
 @import "bootstrap/scss/_buttons.scss";
-@import "bootstrap/scss/_transitions.scss";
-@import "bootstrap/scss/_card.scss";
-@import "bootstrap/scss/_badge.scss";
-@import "bootstrap/scss/_close.scss";
-@import "bootstrap/scss/_modal.scss";
-@import "bootstrap/scss/_spinners.scss";
-@import "bootstrap/scss/_tooltip.scss";
-@import "bootstrap/scss/_popover.scss";
-@import "bootstrap/scss/_breadcrumb.scss";
-@import "bootstrap/scss/_placeholders.scss";
 
 @import "bootstrap/scss/_helpers.scss";
 @import "bootstrap/scss/utilities/_api.scss";

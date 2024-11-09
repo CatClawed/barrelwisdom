@@ -1,5 +1,5 @@
 @if (data; as monster) {
-  <div [class]="inputSlug ? 'card card-body spacer' : 'card card-body card-medium'">
+  <div [class]="inputSlug ? 'card card-dialog' : 'card card-medium'">
     <h4 class="card-title  card-icon-space">{{monster.name}}</h4>
     <div class="card-icon-position">
       @if (monster.montype != 'boss') {

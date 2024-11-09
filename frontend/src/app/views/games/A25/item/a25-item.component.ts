@@ -95,6 +95,6 @@ export class A25ItemComponent extends SingleComponent {
   insertStyle(item: Item): string {
     if (!item.material) return;
     if (!item.material[0].color) return;
-    return `box-shadow: inset 0 0px 30px 4px ${this.a25service.colorList[item.material[0].color]}`
+    return `box-shadow: 1px 2px 4px 1px grey, inset 0 0px 30px 4px ${this.a25service.colorList[item.material[0].color]}`
   }
 }

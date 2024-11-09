@@ -33,35 +33,6 @@ export class Popover {
   @Input()
   display?: string = 'inherit'
 
-  // TODO: letting X be centered can cause the left offset to be negative
-  // but dang I like the centered look
-  positionPairs: ConnectionPositionPair[] = [
-    {
-      originX: 'start',
-      originY: 'top',
-      overlayX: 'start',
-      overlayY: 'bottom'
-    },
-    {
-      originX: 'start',
-      originY: 'bottom',
-      overlayX: 'start',
-      overlayY: 'top'
-    },
-    {
-      originX: 'end',
-      originY: 'top',
-      overlayX: 'end',
-      overlayY: 'bottom'
-    },
-    {
-      originX: 'end',
-      originY: 'bottom',
-      overlayX: 'end',
-      overlayY: 'top'
-    },
-  ];
-
   toggle() {
     if (!this.noRun) {
       this.isOpen = !this.isOpen;

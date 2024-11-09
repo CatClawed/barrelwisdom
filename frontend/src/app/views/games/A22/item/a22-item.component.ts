@@ -35,6 +35,7 @@ export class A22ItemComponent extends SingleComponent {
   eff2: any[] = [];
   eff3: any[] = [];
   eff4: any[] = [];
+  effs: any[] = [];
   icons = {
     'Attack':    'type-attack',
     'Heal':      'type-heal',
@@ -70,6 +71,7 @@ export class A22ItemComponent extends SingleComponent {
     this.eff2 = [];
     this.eff3 = [];
     this.eff4 = [];
+    this.effs = [];
     this.seoImage = `${this.imgURL}${this.section}/${this.data.slug}.webp`;
     this.genericSettings(this.data.name, this.data.desc,
       'Items',
@@ -79,6 +81,7 @@ export class A22ItemComponent extends SingleComponent {
     if (this.data.effectline_set) {
       if (this.data.effectline_set.length > 1) {
         let line = 0;
+        console.log('wtf')
         for (let e of this.data.effectline_set) {
           if (e.number == 0) {
             this.default.push([e.name, e.slug]);
@@ -95,7 +98,12 @@ export class A22ItemComponent extends SingleComponent {
             if (e.line == 4) { this.eff4.push([e.name, e.slug]); }
           }
         }
+        if (this.eff1.length > 0) this.effs.push(this.eff1);
+        if (this.eff2.length > 0) this.effs.push(this.eff2);
+        if (this.eff3.length > 0) this.effs.push(this.eff3);
+        if (this.eff4.length > 0) this.effs.push(this.eff4);
+        console.log(this.default)
       }
     }
   }
-} 
+}

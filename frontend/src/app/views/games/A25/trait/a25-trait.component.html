@@ -1,5 +1,5 @@
 @if (data; as trait) {
-  <div [class]="inputData || inputSlug ? 'card card-body' : 'card card-body card-small'"
+  <div [class]="inputData ? 'card' : inputSlug ? 'card card-dialog' : 'card card-small'"
     [style]="inputData ? 'height:100%;' : null">
     <h4 class="card-title card-icon-space">
       @if (inputData) {
