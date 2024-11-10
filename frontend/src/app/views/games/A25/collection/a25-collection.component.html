@@ -235,7 +235,7 @@
     @for (emblem of filteredEmblems | async; track emblem) {
       @if (emblem.kind === 1) {
         @if (!editMode) {
-          <popover [title]="emblem.name" [template]="emblemPopover" [context]="{ emblem: emblem }">
+          <popover [name]="emblem.name" [template]="emblemPopover" [context]="{ emblem: emblem }">
             <ng-content *ngTemplateOutlet="emblemDisplay;context:{emblem:emblem}"></ng-content>
           </popover>
         }
@@ -248,7 +248,7 @@
     @for (emblem of filteredEmblems | async; track emblem) {
       @if (emblem.kind === 2) {
         @if (!editMode) {
-          <popover [title]="emblem.name" [template]="emblemPopover" [context]="{ emblem: emblem }">
+          <popover [name]="emblem.name" [template]="emblemPopover" [context]="{ emblem: emblem }">
             <ng-content *ngTemplateOutlet="emblemDisplay;context:{emblem:emblem}"></ng-content>
           </popover>
         }

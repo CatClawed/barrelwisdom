@@ -103,7 +103,7 @@
           </ng-template>
           <ol start="{{data.number}}" style="margin-bottom:0;">
             <li>
-              <popover [template]="effPopover" title="{{data.effect.name}}">{{data.effect.name}}</popover>
+              <popover [template]="effPopover" name="{{data.effect.name}}">{{data.effect.name}}</popover>
             </li>
           </ol>
           }
@@ -239,13 +239,13 @@
         <td>
           <ol>
             <li>
-              <popover [template]="effOnePopover" title="{{eline.effect1.name}}">{{eline.effect1.name}}</popover>
+              <popover [template]="effOnePopover" name="{{eline.effect1.name}}">{{eline.effect1.name}}</popover>
             </li>
             <li>
-              <popover [template]="effTwoPopover" title="{{eline.effect2.name}}">{{eline.effect2.name}}</popover>
+              <popover [template]="effTwoPopover" name="{{eline.effect2.name}}">{{eline.effect2.name}}</popover>
             </li>
             <li>
-              <popover [template]="effThreePopover" title="{{eline.effect3.name}}">{{eline.effect3.name}}</popover>
+              <popover [template]="effThreePopover" name="{{eline.effect3.name}}">{{eline.effect3.name}}</popover>
             </li>
           </ol>
         </td>

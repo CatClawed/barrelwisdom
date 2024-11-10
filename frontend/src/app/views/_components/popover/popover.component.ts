@@ -1,4 +1,4 @@
-import { ConnectionPositionPair, OverlayModule } from '@angular/cdk/overlay';
+import { OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, Input, TemplateRef } from '@angular/core';
 
@@ -16,7 +16,7 @@ export class Popover {
   noRun = false;
 
   @Input()
-  title?: string;
+  name?: string;
 
   @Input()
   url?: string;

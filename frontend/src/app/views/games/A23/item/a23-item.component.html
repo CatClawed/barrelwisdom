@@ -204,14 +204,14 @@
                       }
                     </ng-template>
                     @if (e.effect) {
-                      <popover [title]="e.effect.name"
+                      <popover [name]="e.effect.name"
                         [template]="effPopover"
                         url="/{{gameURL}}/effects/{{e.effect.slug}}/{{language}}">
                         {{e.effect.name}}
                       </popover>
                     }
                     @if (e.component) {
-                      <popover [title]="e.component.name"
+                      <popover [name]="e.component.name"
                         [template]="effPopover">
                         {{e.component.name}}
                       </popover>

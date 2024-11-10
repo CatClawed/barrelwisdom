@@ -81,7 +81,6 @@ export class A22ItemComponent extends SingleComponent {
     if (this.data.effectline_set) {
       if (this.data.effectline_set.length > 1) {
         let line = 0;
-        console.log('wtf')
         for (let e of this.data.effectline_set) {
           if (e.number == 0) {
             this.default.push([e.name, e.slug]);

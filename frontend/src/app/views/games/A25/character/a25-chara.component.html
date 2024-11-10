@@ -8,8 +8,8 @@
       <i class="atelier atelier-np atelier-resleri-{{chara.elem}} resleri-element-icon"
         style="background-color:{{a25service.elements[chara.elem]}};display:flex;"></i>
     </div>
-    <div style="aspect-ratio: 1; max-width: 100%; width: 426px; margin: auto;"> <!-- This stupid div is for webkit. -->
-      <div style="{{gradients[chara.rarity]}}border-radius:50%;overflow:clip;text-align:center;height:100%;">
+    <div style="aspect-ratio: 1; max-width: 100%; width: 400px; margin: auto; max-height: 400px;"> <!-- This stupid div is for webkit. -->
+      <div style="{{gradients[chara.rarity]}}border-radius:50%;overflow:clip;height:100%;">
         <img  style="aspect-ratio:680/724;width:400px;max-width:100%;position:relative;"
           src="{{imgURL}}characters/full/{{chara.slug}}.webp" alt="{{chara.name}} {{chara.title}}" />
       </div>
@@ -33,7 +33,7 @@
           </div>
           <ul>
             <li>
-              <popover [title]="chara.trait1.name"
+              <popover [name]="chara.trait1.name"
                 [template]="traitPopover"
                 [context]="{ trait : chara.trait1 }"
                 url="/{{gameURL}}/traits/{{chara.trait1.slug}}/{{language}}">
@@ -41,7 +41,7 @@
               </popover>
             </li>
             <li>
-              <popover [title]="chara.trait2.name"
+              <popover [name]="chara.trait2.name"
                 [template]="traitPopover"
                 [context]="{ trait : chara.trait2 }"
                 url="/{{gameURL}}/traits/{{chara.trait2.slug}}/{{language}}">
@@ -49,7 +49,7 @@
               </popover>
             </li>
             <li>
-              <popover [title]="chara.trait3.name"
+              <popover [name]="chara.trait3.name"
                 [template]="traitPopover"
                 [context]="{ trait : chara.trait3 }"
                 url="/{{gameURL}}/traits/{{chara.trait3.slug}}/{{language}}">
@@ -117,18 +117,20 @@
               <i class="atelier atelier-np atelier-resleri-{{skill.elem}} resleri-element-icon"
                 style="float:right;background-color:{{a25service.elements[skill.elem]}};"></i>
               <p [innerHTML]="replaceDesc(skill)"></p>
-              @if (skill.wt) {
-                <p    ><b>WT: </b>{{skill.wt}}</p>
-              }
-              @if (skill.area) {
-                <p  ><b>Range: </b>{{skill.area}}</p>
-              }
-              @if (skill.pow1) {
-                <p  ><b>Power: </b>{{skill.pow1}} > {{skill.pow2}} > {{skill.pow3}} > {{skill.pow4}} > {{skill.pow5}}</p>
-              }
-              @if (skill.break1) {
-                <p><b>Break: </b>{{skill.break1}} > {{skill.break2}} > {{skill.break3}} > {{skill.break4}} > {{skill.break5}}</p>
-              }
+              <ul style="list-style: none; padding-left: 0;">
+                @if (skill.wt) {
+                  <li><b>WT: </b>{{skill.wt}}</li>
+                }
+                @if (skill.area) {
+                  <li><b>Range: </b>{{skill.area}}</li>
+                }
+                @if (skill.pow1) {
+                  <li><b>Power: </b>{{skill.pow1}} > {{skill.pow2}} > {{skill.pow3}} > {{skill.pow4}} > {{skill.pow5}}</li>
+                }
+                @if (skill.break1) {
+                  <li><b>Break: </b>{{skill.break1}} > {{skill.break2}} > {{skill.break3}} > {{skill.break4}} > {{skill.break5}}</li>
+                }
+              </ul>
             </td>
           </tr>
         }
@@ -170,7 +172,7 @@
               <b>Type: </b>
               <ul>
                 @for (tag of chara.tags; track tag) {
-                  <li><popover [title]="tag.name"
+                  <li><popover [name]="tag.name"
                     [template]="tagPopover"
                     [context]="{ chars : tag.char }">
                     {{tag.name}}

@@ -21,7 +21,7 @@
           <ul>
             @for (trait of it.material[0].traits; track trait) {
               <li>
-                <popover [title]="trait.name"
+                <popover [name]="trait.name"
                   [template]="popoverContent"
                   url="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">
                   {{trait.name}}
@@ -41,7 +41,7 @@
   </ng-template>
   <filter-list
     [list]="filteredItems"
-    title="Materials"
+    name="Materials"
     [(hide)]="hide"
     [template]="template">
     <form [formGroup]="pageForm" class="form-horizontal">

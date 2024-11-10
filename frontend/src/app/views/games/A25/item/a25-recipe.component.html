@@ -25,7 +25,7 @@
           <h2  id="{{chapter+1}}">{{page.desc}}</h2>
           <div style="display:grid;gap:0;grid-template-columns:20% 20% 20% 20% 20%;max-width:600px;margin-left:auto;margin-right:auto;">
             @for (recipe of page.recipes; track recipe; let num = $index) {
-              <popover [title]="recipe.name"
+              <popover [name]="recipe.name"
                 [template]="popoverContent"
                 url="/{{gameURL}}/items/synthesis/{{recipe.slug}}/{{language}}">
                 <img class="resleri-item-frame" loading="lazy"

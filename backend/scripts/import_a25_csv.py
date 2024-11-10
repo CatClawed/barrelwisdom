@@ -545,12 +545,13 @@ def import_characters(event=None, additions=None):
             except:
                 print('Failed to add character, continuing.')
                 continue
-            obj = Character(slug=add)
+            obj = Character(
+                slug=add,
+                date = datetime.fromisoformat(char["start_at"]) if char["start_at"] else datetime.fromisoformat('2023-09-23T03:00:00.000Z')
+            )
             create = True
             if event:
                 obj.limit = event
-
-        obj.date = datetime.fromisoformat(char["start_at"]) if char["start_at"] else datetime.fromisoformat('2023-09-23T03:00:00.000Z')
 
         t1 = search(char['battle_tool_trait_ids'][0], jsons['battle_tool_trait'])[0]
         t2 = search(char['battle_tool_trait_ids'][1], jsons['battle_tool_trait'])[0]
@@ -641,11 +642,13 @@ def import_memoria(memoria_index, event=None):
         except:
             print("Creating Memoria", name.text_ja)
             create = True
-            obj = Memoria(slug=str(memoria_index))
+            obj = Memoria(
+                slug=str(memoria_index),
+                date = datetime.fromisoformat(mem["start_at"]) if mem["start_at"] else datetime.fromisoformat('2023-09-23T03:00:00.000Z')
+            )
             memoria_index = memoria_index + 1
             if event:
                 obj.limit = event
-        obj.date = datetime.fromisoformat(mem["start_at"]) if mem["start_at"] else datetime.fromisoformat('2023-09-23T03:00:00.000Z')
 
         obj.name = name
         obj.skill_name=skill_name

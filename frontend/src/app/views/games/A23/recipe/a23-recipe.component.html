@@ -32,7 +32,7 @@
     <div style="aspect-ratio:1;"></div>
   }
   @if (fixit[(i+offset)*5+j] != false) {
-    <popover [template]="itemPopover" title="{{fixit[(i+offset)*5+j].item.name}}" [context]="context(fixit[(i+offset)*5+j])" display="grid">
+    <popover [template]="itemPopover" name="{{fixit[(i+offset)*5+j].item.name}}" [context]="context(fixit[(i+offset)*5+j])" display="grid">
       <button style="aspect-ratio:1;position:relative;display:flex;background:none;border:none;outline:none;">
         <img src="{{imgURL}}items/{{fixit[(i+offset)*5+j].item.slug}}.webp?v=1" alt="{{fixit[(i+offset)*5+j].item.name}}" loading="lazy"
           style="z-index:5;max-height:75%;max-width:75%;margin:auto;aspect-ratio: 1;">

@@ -252,7 +252,7 @@
                     </ng-template>
                     @if (e.effect) {
                       <popover [template]="effPopover"
-                        [title]="e.effect.name"
+                        [name]="e.effect.name"
                         url="/{{gameURL}}/effects/{{e.effect.slug}}/{{language}}">
                         {{e.effect.name}}
                       </popover>

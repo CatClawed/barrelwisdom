@@ -36,7 +36,7 @@
         <ul>
           @for (trait of item.material[0].traits; track trait) {
             <li>
-              <popover [title]="trait.name"
+              <popover [name]="trait.name"
                 [template]="popoverContent"
                 url="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">
                 {{trait.name}}

@@ -180,16 +180,16 @@
                         }
                       </ng-template>
                       @if (i.noneffect && !i.essence) {
-                        <popover [template]="effPopover" display="inline-block" title="Synth Data" cls="badge bg-primary badge-list">{{i.noneffect}}</popover>
+                        <popover [template]="effPopover" display="inline-block" name="Synth Data" cls="badge bg-primary badge-list">{{i.noneffect}}</popover>
                       }
                       @if (i.noneffect && i.essence) {
-                        <popover [template]="effPopover" display="inline-block" title="Synth Data" cls="badge-list badge bg-secondary">{{i.noneffect}}</popover>
+                        <popover [template]="effPopover" display="inline-block" name="Synth Data" cls="badge-list badge bg-secondary">{{i.noneffect}}</popover>
                       }
                       @if (i.effect    && !i.essence) {
-                        <popover [template]="effPopover" display="inline-block" title="Synth Data" cls="badge bg-primary badge-list">{{i.effect}}</popover>
+                        <popover [template]="effPopover" display="inline-block" name="Synth Data" cls="badge bg-primary badge-list">{{i.effect}}</popover>
                       }
                       @if (i.effect    && i.essence) {
-                        <popover [template]="effPopover" display="inline-block" title="Synth Data" cls="badge bg-secondary badge-list">{{i.effect}}</popover>
+                        <popover [template]="effPopover" display="inline-block" name="Synth Data" cls="badge bg-secondary badge-list">{{i.effect}}</popover>
                       }
                       @if (i.morph) {
                         <a class="badge bg-success badge-list" routerLink="/{{gameURL}}/items/{{i.morph.slug}}/{{language}}">{{i.morph.name}}</a>

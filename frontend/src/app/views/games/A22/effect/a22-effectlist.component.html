@@ -6,7 +6,7 @@
   <filter-list
     [list]="filteredEffects"
     [(hide)]="hide"
-    [title]="normal ? 'Effects' : ev ? 'EV Effects' : 'Forge Effects'"
+    [name]="normal ? 'Effects' : ev ? 'EV Effects' : 'Forge Effects'"
     [template]="template">
     <form [formGroup]="pageForm" class="form-horizontal">
       <div class="row">

@@ -58,7 +58,7 @@
             <popover
               [template]="fragitPopover"
               [context]="{frag: evt.fragment[0]}"
-              title="{{evt.fragment[0].eff}}">
+              name="{{evt.fragment[0].eff}}">
               {{evt.fragment[0].eff}}
             </popover>
             <br />Size: {{evt.fragment[0].size}}
@@ -70,7 +70,7 @@
             <popover
               [template]="fragitPopover"
               [context]="{frag: evt.fragment[1]}"
-              title="{{evt.fragment[1].eff}}">
+              name="{{evt.fragment[1].eff}}">
               {{evt.fragment[1].eff}}
             </popover>
             <br />Size: {{evt.fragment[1].size}}
@@ -84,7 +84,7 @@
           @for (frag of evt.fragment; track frag) {
             <tr>
               <td>{{frag.name}}<br />
-                <popover [template]="fragitPopover" [context]="{frag:frag}" title="{{frag.eff}}">
+                <popover [template]="fragitPopover" [context]="{frag:frag}" name="{{frag.eff}}">
                   {{frag.eff}}
                 </popover>
                 <br />Size: {{frag.size}}
@@ -118,7 +118,7 @@
   </ng-template>
   <filter-list
     [list]="filteredEvents"
-    title="Fragments &amp; Dates"
+    name="Fragments &amp; Dates"
     [(hide)]="hide"
     [template]="template">
     <p>Dates give one of two possible fragments. The first listed will always be from two top choices; the second will always be two bottom choices. A handful of fragments come from DLC and a choice you make later in the game.</p>

@@ -14,7 +14,7 @@ import { Observable, takeUntil } from 'rxjs';
 })
 export class FilterListComponent implements AfterViewInit, OnDestroy {
   @Input()
-  title: string;
+  name: string;
 
   @Input()
   list: Observable<any[]>;

@@ -5,10 +5,15 @@
     background-image: url(/media/main/images/clean_textile.webp);
     margin-right: 1rem;
     max-height: 80vh;
+    min-width: 300px;
     overflow: auto;
+    box-shadow: 1px 2px 4px 1px gray;
 
     @media screen and (max-width: 800px) {
-        margin-right: 0;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 
     >h4 {
@@ -19,8 +24,9 @@
 
     .popoverContents {
         padding: 0 1rem 1rem 1rem;
-        @media screen and (max-width: 800px) {
-            max-width: 70vw;
-        }
     }
+}
+
+.dotted-link {
+    text-decoration: underline dotted 1px;
 }
