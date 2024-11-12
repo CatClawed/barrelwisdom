@@ -12,7 +12,7 @@
       @if (monster.isDLC) {
         <br />
         }@if (monster.isDLC) {
-        <span class="badge bg-secondary">DLC</span>
+        <span class="badge bg-primary">DLC</span>
       }
     </div>
     <img class="image-display" src="{{imgURL}}monsters/{{monster.slug}}.webp?v=1"
@@ -23,8 +23,8 @@
     @if (monster.note) {
       <p><b>Note:</b> {{monster.note}}</p>
     }
-    <div class="row">
-      <div class="col-md-6">
+    <div class="grid">
+      <div class="grid-6">
         @if (monster.location) {
           <b>Locations:</b>
         }
@@ -50,7 +50,7 @@
           </ul>
         }
       </div>
-      <div class="col-md-6">
+      <div class="grid-6">
         <table style="width:auto;" class="table-item-data" ><tbody>
           <tr>
             <td style="border-top:transparent;padding:0;"><b>HP: </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">@for (i of  hp; track i) {

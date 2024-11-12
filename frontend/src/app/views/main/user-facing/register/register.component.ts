@@ -1,4 +1,4 @@
-import { NgClass } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
@@ -8,25 +8,28 @@ import { DestroyService } from '@app/services/destroy.service';
 import { ErrorCodeService } from '@app/views/main/_services/errorcode.service';
 import { SeoService } from '@app/services/seo.service';
 import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { takeUntil } from 'rxjs/operators';
+import { mergeMap, takeUntil } from 'rxjs/operators';
 
 @Component({
-  templateUrl: 'login.component.html',
+  templateUrl: 'register.component.html',
+  selector: 'register',
+  styleUrl: '../user-facing.scss',
   providers: [DestroyService],
   standalone: true,
-  imports: [ReactiveFormsModule, NgClass]
+  imports: [ReactiveFormsModule, CommonModule]
 })
-export class LoginComponent {
-  loginForm: UntypedFormGroup;
+export class RegisterComponent {
+  registerForm: UntypedFormGroup;
   loading = false;
   submitted = false;
   returnUrl: string;
   errorMsg: string;
-  error: boolean = false;
+  code: string;
+  hasInvite = false;
 
   constructor(
-    private formBuilder: UntypedFormBuilder,
     private readonly destroy$: DestroyService,
+    private formBuilder: UntypedFormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
@@ -35,40 +38,49 @@ export class LoginComponent {
     protected breadcrumbService: BreadcrumbService,
     private metaService: Meta,
     private titleService: Title
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     // honestly I have no idea if I need this junk but I don't want this in search
-    this.titleService.setTitle(`Login - Barrel Wisdom`);
+    this.titleService.setTitle(`Register - Barrel Wisdom`);
     this.metaService.updateTag({ name: `robots`, content: `noindex` }, `name="robots"`);
     this.seoService.removeCanonicalURL();
     this.breadcrumbService.setBreadcrumbs([], undefined)
-    this.error = this.breadcrumbService.setStatus(200);
 
-    this.loginForm = this.formBuilder.nonNullable.group({
+    this.registerForm = this.formBuilder.nonNullable.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      email: ['', [Validators.email, Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(8)]]
     });
+
+    if (this.route.snapshot.queryParamMap.get('invite')) {
+      this.hasInvite = true;
+    }
 
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
 
-  get f() { return this.loginForm.controls; }
+  get f() { return this.registerForm.controls; }
 
   onSubmit() {
     this.submitted = true;
-    if (this.loginForm.invalid) {
+
+    if (this.registerForm.invalid) {
       return;
     }
-
     this.loading = true;
-    this.authenticationService.login(this.f.username.value, this.f.password.value)
-      .pipe(takeUntil(this.destroy$))
+    this.authenticationService.register(this.f.username.value, this.f.email.value, this.f.password.value, this.f.confirmPassword.value, this.route.snapshot.queryParamMap.get('invite'))
+      .pipe(
+        mergeMap(() => {
+          return this.authenticationService.login(this.f.username.value, this.f.password.value)
+        }),
+        takeUntil(this.destroy$)
+      )
       .subscribe({
-        next: () => {
-          this.router.navigateByUrl(this.returnUrl);
-        },
+        next: () => this.router.navigateByUrl('/'),
         error: error => {
           this.loading = false;
           this.errorMsg = this.errorCodeService.errorMessage(error);

@@ -17,42 +17,40 @@
         @if (mon.isDLC) {
           <br />
           }@if (mon.isDLC) {
-          <span class="badge bg-secondary">DLC</span>
+          <span class="badge bg-primary">DLC</span>
         }
       </ng-container>
     </item>
   </ng-template>
   <filter-list [list]="filteredMonsters" name="Monsters" [(hide)]="hide" [template]="template">
-    <form [formGroup]="pageForm" class="form-horizontal">
-      <div class="row">
-        <mat-form-field class="col-md-8" appearance="outline">
-          <mat-label>Filter...</mat-label>
-          <input style="height: 100%;" matInput formControlName="filtertext">
-          <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
-        </mat-form-field>
-        <mat-form-field class="col-md-4" appearance="outline">
-          <mat-label>Type</mat-label>
-          <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
-            <mat-option value="1" selected><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"   ></mat-icon> Any</mat-option>
-            <mat-option value="puni"      ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-puni"      ></mat-icon> Puni</mat-option>
-            <mat-option value="weasel"    ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-weasel"    ></mat-icon> Weasel</mat-option>
-            <mat-option value="spirit"    ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-spirit"    ></mat-icon> Spirit</mat-option>
-            <mat-option value="golem"     ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-golem"     ></mat-icon> Golem</mat-option>
-            <mat-option value="sheep"     ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-sheep"     ></mat-icon> Sheep</mat-option>
-            <mat-option value="knight"    ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-knight"    ></mat-icon> Knight</mat-option>
-            <mat-option value="scorpion"  ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-scorpion"  ></mat-icon> Scorpion</mat-option>
-            <mat-option value="hedgehog"  ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-hedgehog"  ></mat-icon> Hedgehog</mat-option>
-            <mat-option value="wyrm"      ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-wyrm"      ></mat-icon> Wyrm</mat-option>
-            <mat-option value="roadrunner"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-roadrunner"></mat-icon> Roadrunner</mat-option>
-            <mat-option value="beetle"    ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-beetle"    ></mat-icon> Beetle</mat-option>
-            <mat-option value="shark"     ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-shark"     ></mat-icon> Shark</mat-option>
-            <mat-option value="Small"     ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-small-enemy"    ></mat-icon> Small</mat-option>
-            <mat-option value="Medium"    ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-medium-enemy"   ></mat-icon> Medium</mat-option>
-            <mat-option value="Large"     ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-large-enemy"    ></mat-icon> Large</mat-option>
-            <mat-option value="boss"      ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-boss-enemy"     ></mat-icon> Boss</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+    <form [formGroup]="pageForm" class="grid">
+      <mat-form-field class="grid-8" appearance="outline">
+        <mat-label>Filter...</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtertext">
+        <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="grid-4" appearance="outline">
+        <mat-label>Type</mat-label>
+        <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
+          <mat-option value="1" selected><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"   ></mat-icon> Any</mat-option>
+          <mat-option value="puni"      ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-puni"      ></mat-icon> Puni</mat-option>
+          <mat-option value="weasel"    ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-weasel"    ></mat-icon> Weasel</mat-option>
+          <mat-option value="spirit"    ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-spirit"    ></mat-icon> Spirit</mat-option>
+          <mat-option value="golem"     ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-golem"     ></mat-icon> Golem</mat-option>
+          <mat-option value="sheep"     ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-sheep"     ></mat-icon> Sheep</mat-option>
+          <mat-option value="knight"    ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-knight"    ></mat-icon> Knight</mat-option>
+          <mat-option value="scorpion"  ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-scorpion"  ></mat-icon> Scorpion</mat-option>
+          <mat-option value="hedgehog"  ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-hedgehog"  ></mat-icon> Hedgehog</mat-option>
+          <mat-option value="wyrm"      ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-wyrm"      ></mat-icon> Wyrm</mat-option>
+          <mat-option value="roadrunner"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-roadrunner"></mat-icon> Roadrunner</mat-option>
+          <mat-option value="beetle"    ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-beetle"    ></mat-icon> Beetle</mat-option>
+          <mat-option value="shark"     ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-race-shark"     ></mat-icon> Shark</mat-option>
+          <mat-option value="Small"     ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-small-enemy"    ></mat-icon> Small</mat-option>
+          <mat-option value="Medium"    ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-medium-enemy"   ></mat-icon> Medium</mat-option>
+          <mat-option value="Large"     ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-large-enemy"    ></mat-icon> Large</mat-option>
+          <mat-option value="boss"      ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-boss-enemy"     ></mat-icon> Boss</mat-option>
+        </mat-select>
+      </mat-form-field>
     </form>
   </filter-list>
 }

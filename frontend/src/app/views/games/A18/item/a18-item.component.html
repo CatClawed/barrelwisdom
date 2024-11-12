@@ -6,10 +6,10 @@
         <b style="padding-right:0.5em;">LV {{item.level}}</b>
       }
       @if (item.isDLC) {
-        <br /><span class="badge bg-secondary">DLC</span>
+        <br /><span class="badge bg-primary">DLC</span>
       }
       @if (item.isDX) {
-        <br /><span class="badge bg-secondary">DX</span>
+        <br /><span class="badge bg-primary">DX</span>
       }
     </div>
     <img class="card-item-display" src="{{imgURL}}items/{{item.slug}}.webp?v=1"
@@ -56,16 +56,14 @@
         </tr>
       }
     </tbody></table>
-    <div class="row">
-      <table style="margin-top:1rem;" class="table-item-data col"><tbody>
-        @for (cat of item.categories; track cat) {
-          <tr>
-            <td style="text-align: center;"><i class="atelier atelier-{{cat.icon}}"></i></td>
-            <td><a routerLink="/{{gameURL}}/categories/{{cat.slug}}/{{language}}">{{cat.name}}</a></td>
-          </tr>
-        }
-      </tbody></table>
-    </div>
+    <table style="margin-top:1rem;" class="table-item-data col"><tbody>
+      @for (cat of item.categories; track cat) {
+        <tr>
+          <td style="text-align: center;"><i class="atelier atelier-{{cat.icon}}"></i></td>
+          <td><a routerLink="/{{gameURL}}/categories/{{cat.slug}}/{{language}}">{{cat.name}}</a></td>
+        </tr>
+      }
+    </tbody></table>
     @if (item.trait) {
       <p><b>Trait: </b><a routerLink="/{{gameURL}}/traits/{{item.trait.slug}}/{{language}}">{{item.trait.name}}</a></p>
     }

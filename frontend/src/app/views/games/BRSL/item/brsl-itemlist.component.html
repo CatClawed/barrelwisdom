@@ -8,7 +8,7 @@
       dimension="256">
       <ng-container icon>
         @if (item.isDLC) {
-          <span class="badge bg-secondary">DLC</span>
+          <span class="badge bg-primary">DLC</span>
         }
       </ng-container>
       <ul style="list-style-type:none;padding-left:0;">
@@ -23,38 +23,34 @@
     name="Items"
     [(hide)]="hide"
     [template]="template">
-    <form [formGroup]="pageForm" class="form-horizontal">
-      <div class="row">
-        <mat-form-field class="col-md-12" appearance="outline">
-          <mat-label>Filter...</mat-label>
-          <input matInput formControlName="filtertext">
-        </mat-form-field>
-      </div>
-      <div class="row">
-        <mat-form-field class="col-md-4" appearance="outline">
-          <mat-label>Category</mat-label>
-          <mat-select matNativeControl formControlName="category" disableOptionCentering="true" class="mat-select-icon">
-            <mat-option value="Any" selected>Any</mat-option>
-            @if (data) {
-              @for (cat of data.categories; track cat) {
-                <mat-option value="{{cat.name}}">
-                  {{cat.name}}
-                </mat-option>
-              }
+    <form [formGroup]="pageForm" class="grid">
+      <mat-form-field class="grid-12" appearance="outline">
+        <mat-label>Filter...</mat-label>
+        <input matInput formControlName="filtertext">
+      </mat-form-field>
+      <mat-form-field class="grid-4" appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select matNativeControl formControlName="category" disableOptionCentering="true" class="mat-select-icon">
+          <mat-option value="Any" selected>Any</mat-option>
+          @if (data) {
+            @for (cat of data.categories; track cat) {
+              <mat-option value="{{cat.name}}">
+                {{cat.name}}
+              </mat-option>
             }
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field class="col-md-4" appearance="outline">
-          <mat-label>Type</mat-label>
-          <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
-            <mat-option value="Any" selected>Any</mat-option>
-            <mat-option value="Materials">Materials</mat-option>
-            <mat-option value="Use">Use</mat-option>
-            <mat-option value="Craft">Craft</mat-option>
-            <mat-option value="Key Items">Key Items</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="grid-4" appearance="outline">
+        <mat-label>Type</mat-label>
+        <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
+          <mat-option value="Any" selected>Any</mat-option>
+          <mat-option value="Materials">Materials</mat-option>
+          <mat-option value="Use">Use</mat-option>
+          <mat-option value="Craft">Craft</mat-option>
+          <mat-option value="Key Items">Key Items</mat-option>
+        </mat-select>
+      </mat-form-field>
     </form>
   </filter-list>
 }

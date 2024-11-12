@@ -25,33 +25,29 @@
     name="Items"
     [(hide)]="hide"
     [template]="template">
-    <form [formGroup]="pageForm" class="form-horizontal">
-      <div class="row">
-        <mat-form-field class="col-md-8" appearance="outline">
-          <mat-label>Filter...</mat-label>
-          <input style="height: 100%;" matInput formControlName="filtertext">
-        </mat-form-field>
-        <mat-form-field class="col-md-4" appearance="outline">
-          <mat-label>Category</mat-label>
-          <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
-            <mat-option value="Any"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"   ></mat-icon> Any</mat-option>
-            @if (data) {
-              @for (cat of data.categories; track cat) {
-                <mat-option value="{{cat.name}}">
-                  <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-{{cat.icon_name}}"></mat-icon>
-                  {{cat.name}}
-                </mat-option>
-              }
+    <form [formGroup]="pageForm" class="grid">
+      <mat-form-field appearance="outline" class="grid-8">
+        <mat-label>Filter...</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtertext">
+      </mat-form-field>
+      <mat-form-field  appearance="outline" class="grid-4">
+        <mat-label>Category</mat-label>
+        <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
+          <mat-option value="Any"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"   ></mat-icon> Any</mat-option>
+          @if (data) {
+            @for (cat of data.categories; track cat) {
+              <mat-option value="{{cat.name}}">
+                <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-{{cat.icon_name}}"></mat-icon>
+                {{cat.name}}
+              </mat-option>
             }
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="row">
-        <mat-form-field class="col-md-5" appearance="outline">
-          <mat-label>Has ingredient...</mat-label>
-          <input style="height: 100%;" matInput formControlName="filtering">
-        </mat-form-field>
-      </div>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="grid-4">
+        <mat-label>Has ingredient...</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtering">
+      </mat-form-field>
     </form>
   </filter-list>
 }

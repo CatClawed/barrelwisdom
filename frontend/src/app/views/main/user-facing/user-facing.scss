@@ -1,0 +1,47 @@
+@use 'variables' as v;
+
+.login-form {
+  width: 100%;
+  display: inline-flex;
+  background-color: lightgray;
+  border-radius: 4px;
+  border: 1px solid lightgray;
+
+  >input {
+    width: 100%;
+    border: none;
+  }
+}
+
+.text-danger {
+  color: v.$danger;
+}
+
+.text-success {
+  color: v.$success;
+}
+
+.settings {
+  display: grid;
+  margin-top: 1rem;
+
+  .settings-row {
+    display: inline-flex;
+
+    >label {
+      width: 20%;
+    }
+
+    .settings-form {
+      width: 80%;
+
+      >input,
+      textarea {
+        width: 100%;
+      }
+    }
+  }
+  >button {
+    width: fit-content;
+  }
+}

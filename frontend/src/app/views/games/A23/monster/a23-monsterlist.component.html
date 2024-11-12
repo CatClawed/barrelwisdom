@@ -12,26 +12,24 @@
     </item>
   </ng-template>
   <filter-list [list]="filteredMonsters" name="Monsters" [(hide)]="hide" [template]="template">
-    <form [formGroup]="pageForm" class="form-horizontal">
-      <div class="row">
-        <mat-form-field class="col-md-8" appearance="outline">
-          <mat-label>Filter...</mat-label>
-          <input style="height: 100%;" matInput formControlName="filtertext">
-        </mat-form-field>
-        <mat-form-field class="col-md-4" appearance="outline">
-          <mat-label>Type</mat-label>
-          <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon"       >
-            <mat-option value="1" selected><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"           ></mat-icon> Any</mat-option>
-            <mat-option value="2"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-race-puni"            ></mat-icon> Puni</mat-option>
-            <mat-option value="3"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-race-magical-creature"></mat-icon> Magical Creature</mat-option>
-            <mat-option value="4"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-race-beast"           ></mat-icon> Beast</mat-option>
-            <mat-option value="5"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-race-apparition"      ></mat-icon> Apparition</mat-option>
-            <mat-option value="6"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-race-plant"           ></mat-icon> Plant</mat-option>
-            <mat-option value="7"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-race-dragon"          ></mat-icon> Dragon</mat-option>
-            <mat-option value="8"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-race-erde-wiege"      ></mat-icon> Erde Wiege</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+    <form [formGroup]="pageForm" class="grid">
+      <mat-form-field class="grid-8" appearance="outline">
+        <mat-label>Filter...</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtertext">
+      </mat-form-field>
+      <mat-form-field class="grid-4" appearance="outline">
+        <mat-label>Type</mat-label>
+        <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon"       >
+          <mat-option value="1" selected><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"           ></mat-icon> Any</mat-option>
+          <mat-option value="2"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-race-puni"            ></mat-icon> Puni</mat-option>
+          <mat-option value="3"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-race-magical-creature"></mat-icon> Magical Creature</mat-option>
+          <mat-option value="4"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-race-beast"           ></mat-icon> Beast</mat-option>
+          <mat-option value="5"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-race-apparition"      ></mat-icon> Apparition</mat-option>
+          <mat-option value="6"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-race-plant"           ></mat-icon> Plant</mat-option>
+          <mat-option value="7"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-race-dragon"          ></mat-icon> Dragon</mat-option>
+          <mat-option value="8"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-race-erde-wiege"      ></mat-icon> Erde Wiege</mat-option>
+        </mat-select>
+      </mat-form-field>
     </form>
   </filter-list>
 }

@@ -34,7 +34,8 @@
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "./node_modules"
+                "./node_modules",
+                "src/scss"
               ]
             },
             "scripts": [],
@@ -63,6 +64,12 @@
               "styles": [
                 "src/scss/style.scss"
               ],
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "./node_modules",
+                  "src/scss"
+                ]
+              },
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": true,
@@ -112,6 +119,12 @@
             "styles": [
               "src/scss/style.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "./node_modules",
+                "src/scss"
+              ]
+            },
             "scripts": []
           }
         },

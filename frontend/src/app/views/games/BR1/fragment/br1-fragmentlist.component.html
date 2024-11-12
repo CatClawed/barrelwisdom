@@ -24,13 +24,11 @@
     [template]="template"
     [loadAll]="loadAll">
     <p>See <a routerLink="/{{gameURL}}/fragment-episodes">Fragment Episodes</a> for acqusition data.
-    <form [formGroup]="pageForm" class="form-horizontal">
-      <div class="row">
-        <mat-form-field class="col-md-12" appearance="outline">
-          <mat-label>Filter...</mat-label>
-          <input matInput formControlName="filtertext">
-        </mat-form-field>
-      </div>
+    <form [formGroup]="pageForm" class="grid">
+      <mat-form-field class="grid-12" appearance="outline">
+        <mat-label>Filter...</mat-label>
+        <input matInput formControlName="filtertext">
+      </mat-form-field>
     </form>
   </filter-list>
 }

@@ -1,184 +1,178 @@
 @if (data; as region) {
-  <div>
-    <h1>{{region.name}}</h1>
-    <div style="margin-left: 0.5em; margin-right: 0.5em;" class="row">
-      <div class="table-of-contents">
-        <b>Table of Contents</b>
-        <ol class="toc-list">
-          @for (area of region.areas; track area) {
+  <h1>{{region.name}}</h1>
+  <div style="margin-left: 0.5em; margin-right: 0.5em;">
+    <div class="table-of-contents">
+      <b>Table of Contents</b>
+      <ol class="toc-list">
+        @for (area of region.areas; track area) {
+          <li>
+            <a href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}"
+              (click)="$event.preventDefault();scroll(area.slug,region.slug)">
+              {{area.name}}
+            </a>
+            @if (area.climate.length > 1) {
+              <ul>
+                @for (climate of area.climate; track climate) {
+                  <li>
+                    @if (climate.weather == 'sun') {
+                      <a     href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather,'locations/'+region.slug)">Sun</a>
+                    }
+                    @if (climate.weather == 'rain') {
+                      <a    href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather,'locations/'+region.slug)">Rain</a>
+                    }
+                    @if (climate.weather == 'snow') {
+                      <a    href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather,'locations/'+region.slug)">Snow</a>
+                    }
+                    @if (climate.weather == 'thunder') {
+                      <a href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather,'locations/'+region.slug)">Thunder</a>
+                    }
+                  </li>
+                }
+              </ul>
+            }
+          </li>
+        }
+      </ol>
+    </div>
+  </div>
+  <form [formGroup]="pageForm" class="grid">
+    <mat-form-field class="grid-12" appearance="outline">
+      <mat-label>Filter...</mat-label>
+      <input matInput formControlName="filtertext">
+    </mat-form-field>
+  </form>
+  @for (area of region.areas; track area) {
+    <div id="{{area.slug}}">
+      <h2>{{area.name}}</h2>
+      @if (area.chests) {
+        <b>Chest:</b>
+      }
+      @if (area.chests) {
+        <ul>
+          @for (chest of area.chests; track chest) {
             <li>
-              <a href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}"
-                (click)="$event.preventDefault();scroll(area.slug,region.slug)">
-                {{area.name}}
-              </a>
-              @if (area.climate.length > 1) {
-                <ul>
-                  @for (climate of area.climate; track climate) {
-                    <li>
-                      @if (climate.weather == 'sun') {
-                        <a     href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather,'locations/'+region.slug)">Sun</a>
-                      }
-                      @if (climate.weather == 'rain') {
-                        <a    href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather,'locations/'+region.slug)">Rain</a>
-                      }
-                      @if (climate.weather == 'snow') {
-                        <a    href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather,'locations/'+region.slug)">Snow</a>
-                      }
-                      @if (climate.weather == 'thunder') {
-                        <a href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather,'locations/'+region.slug)">Thunder</a>
-                      }
-                    </li>
-                  }
-                </ul>
+              @if (chest.item) {
+                <a routerLink="/{{gameURL}}/items/{{chest.item.slug}}/{{language}}">{{chest.item.name}}</a>
+              }
+              @if (chest.book) {
+                <a routerLink="/{{gameURL}}/items/books/{{chest.book.slug}}/{{language}}">{{chest.book.name}}</a>
               }
             </li>
           }
-        </ol>
-      </div>
-    </div>
-    <div class="col-md-10 mx-auto" style="margin-top:1.5rem;">
-      <form [formGroup]="pageForm" class="form-horizontal">
-        <div class="row">
-          <mat-form-field class="col-md-12" appearance="outline">
-            <mat-label>Filter...</mat-label>
-            <input matInput formControlName="filtertext">
-          </mat-form-field>
-        </div>
-      </form>
-    </div>
-    @for (area of region.areas; track area) {
-      <div id="{{area.slug}}">
-        <h2>{{area.name}}</h2>
-        @if (area.chests) {
-          <b>Chest:</b>
+        </ul>
+      }
+      @for (climate of area.climate; track climate) {
+        @if (climate.weather == 'sun') {
+          <h3 id="{{area.slug}}-{{climate.weather}}"    >Sun</h3>
         }
-        @if (area.chests) {
+        @if (climate.weather == 'rain') {
+          <h3 id="{{area.slug}}-{{climate.weather}}"   >Rain</h3>
+        }
+        @if (climate.weather == 'snow') {
+          <h3 id="{{area.slug}}-{{climate.weather}}"   >Snow</h3>
+        }
+        @if (climate.weather == 'thunder') {
+          <h3 id="{{area.slug}}-{{climate.weather}}">Thunder</h3>
+        }
+        @if (climate.mons) {
+          <b>Monsters:</b>
+        }
+        @if (climate.mons) {
           <ul>
-            @for (chest of area.chests; track chest) {
+            @for (mon of climate.mons; track mon) {
               <li>
-                @if (chest.item) {
-                  <a routerLink="/{{gameURL}}/items/{{chest.item.slug}}/{{language}}">{{chest.item.name}}</a>
-                }
-                @if (chest.book) {
-                  <a routerLink="/{{gameURL}}/items/books/{{chest.book.slug}}/{{language}}">{{chest.book.name}}</a>
-                }
+                <a routerLink="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a>
               </li>
             }
           </ul>
         }
-        @for (climate of area.climate; track climate) {
-          @if (climate.weather == 'sun') {
-            <h3 id="{{area.slug}}-{{climate.weather}}"    >Sun</h3>
-          }
-          @if (climate.weather == 'rain') {
-            <h3 id="{{area.slug}}-{{climate.weather}}"   >Rain</h3>
-          }
-          @if (climate.weather == 'snow') {
-            <h3 id="{{area.slug}}-{{climate.weather}}"   >Snow</h3>
-          }
-          @if (climate.weather == 'thunder') {
-            <h3 id="{{area.slug}}-{{climate.weather}}">Thunder</h3>
-          }
-          @if (climate.mons) {
-            <b>Monsters:</b>
-          }
-          @if (climate.mons) {
-            <ul>
-              @for (mon of climate.mons; track mon) {
-                <li>
-                  <a routerLink="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a>
-                </li>
-              }
-            </ul>
-          }
-          <table class="tbl table-shrink border" ><tbody>
-            <tr style="text-align:center;">
-              <th>Tool</th>
-              <th><i class="fas fa-star"></i></th>
-              <th><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
-              <th><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
-            </tr>
-            @for (node of climate.nodes; track node) {
-              @if (validNode(node)) {
-                <tr>
-                  <ng-template #typePopover>
-                    {{node.kind}}
-                  </ng-template>
-                  @if (!node.kind.startsWith('major')) {
-                    <td style="text-align: center;vertical-align: middle;">
-                      @if (node.tool == 'HAND') {
-                        <i    class="atelier atelier-lg atelier-ryza2-tool-gather"     ></i>
-                      }
-                      @if (node.tool == 'ROD') {
-                        <i     class="atelier atelier-lg atelier-ryza2-tool-staff"      ></i>
-                      }
-                      @if (node.tool == 'FISH') {
-                        <i    class="atelier atelier-lg atelier-ryza2-tool-fishing-rod"></i>
-                      }
-                      @if (node.tool == 'SICKLE') {
-                        <i  class="atelier atelier-lg atelier-ryza2-tool-sickle"     ></i>
-                      }
-                      @if (node.tool == 'NET') {
-                        <i     class="atelier atelier-lg atelier-ryza2-tool-bug-net"    ></i>
-                      }
-                      @if (node.tool == 'PICKAXE') {
-                        <i class="atelier atelier-lg atelier-sophie2-tool-pickaxe"  ></i>
-                      }
-                      @if (node.tool == 'HAMMER') {
-                        <i  class="atelier atelier-lg atelier-sophie2-tool-hammer"   ></i>
-                      }
-                      @if (node.tool == 'SHOT') {
-                        <i    class="atelier atelier-lg atelier-sophie2-tool-slingshot"></i>
-                      }
-                      <popover name="Gather Type"
-                        [template]="typePopover"
-                        cls="fas fa-plus-square">
-                      </popover>
-                    </td>
-                  }
-                  @if (node.kind.startsWith('major')) {
-                    <td style="text-align: center;vertical-align: middle;color:darkorange;">
-                      @if (node.tool == 'HAND') {
-                        <i    class="atelier atelier-lg atelier-ryza2-tool-gather"     ></i>
-                      }
-                      @if (node.tool == 'ROD') {
-                        <i     class="atelier atelier-lg atelier-ryza2-tool-staff"      ></i>
-                      }
-                      @if (node.tool == 'FISH') {
-                        <i    class="atelier atelier-lg atelier-ryza2-tool-fishing-rod"></i>
-                      }
-                      @if (node.tool == 'SICKLE') {
-                        <i  class="atelier atelier-lg atelier-ryza2-tool-sickle"     ></i>
-                      }
-                      @if (node.tool == 'NET') {
-                        <i     class="atelier atelier-lg atelier-ryza2-tool-bug-net"    ></i>
-                      }
-                      @if (node.tool == 'PICKAXE') {
-                        <i class="atelier atelier-lg atelier-sophie2-tool-pickaxe"  ></i>
-                      }
-                      @if (node.tool == 'HAMMER') {
-                        <i  class="atelier atelier-lg atelier-sophie2-tool-hammer"   ></i>
-                      }
-                      @if (node.tool == 'SHOT') {
-                        <i    class="atelier atelier-lg atelier-sophie2-tool-slingshot"></i>
-                      }
-                      <popover name="Gather Type"
-                        [template]="typePopover"
-                        cls="fas fa-plus-square">
-                      </popover>
-                    </td>
-                  }
-                  @for (item of node.items; track item) {
-                    <td>
-                      <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a><br/>{{item.priority}}%
-                    </td>
-                  }
-                </tr>
-              }
+        <table class="tbl table-shrink border" ><tbody>
+          <tr style="text-align:center;">
+            <th>Tool</th>
+            <th><i class="fas fa-star"></i></th>
+            <th><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
+            <th><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
+          </tr>
+          @for (node of climate.nodes; track node) {
+            @if (validNode(node)) {
+              <tr>
+                <ng-template #typePopover>
+                  {{node.kind}}
+                </ng-template>
+                @if (!node.kind.startsWith('major')) {
+                  <td style="text-align: center;vertical-align: middle;">
+                    @if (node.tool == 'HAND') {
+                      <i    class="atelier atelier-lg atelier-ryza2-tool-gather"     ></i>
+                    }
+                    @if (node.tool == 'ROD') {
+                      <i     class="atelier atelier-lg atelier-ryza2-tool-staff"      ></i>
+                    }
+                    @if (node.tool == 'FISH') {
+                      <i    class="atelier atelier-lg atelier-ryza2-tool-fishing-rod"></i>
+                    }
+                    @if (node.tool == 'SICKLE') {
+                      <i  class="atelier atelier-lg atelier-ryza2-tool-sickle"     ></i>
+                    }
+                    @if (node.tool == 'NET') {
+                      <i     class="atelier atelier-lg atelier-ryza2-tool-bug-net"    ></i>
+                    }
+                    @if (node.tool == 'PICKAXE') {
+                      <i class="atelier atelier-lg atelier-sophie2-tool-pickaxe"  ></i>
+                    }
+                    @if (node.tool == 'HAMMER') {
+                      <i  class="atelier atelier-lg atelier-sophie2-tool-hammer"   ></i>
+                    }
+                    @if (node.tool == 'SHOT') {
+                      <i    class="atelier atelier-lg atelier-sophie2-tool-slingshot"></i>
+                    }
+                    <popover name="Gather Type"
+                      [template]="typePopover"
+                      cls="fas fa-plus-square">
+                    </popover>
+                  </td>
+                }
+                @if (node.kind.startsWith('major')) {
+                  <td style="text-align: center;vertical-align: middle;color:darkorange;">
+                    @if (node.tool == 'HAND') {
+                      <i    class="atelier atelier-lg atelier-ryza2-tool-gather"     ></i>
+                    }
+                    @if (node.tool == 'ROD') {
+                      <i     class="atelier atelier-lg atelier-ryza2-tool-staff"      ></i>
+                    }
+                    @if (node.tool == 'FISH') {
+                      <i    class="atelier atelier-lg atelier-ryza2-tool-fishing-rod"></i>
+                    }
+                    @if (node.tool == 'SICKLE') {
+                      <i  class="atelier atelier-lg atelier-ryza2-tool-sickle"     ></i>
+                    }
+                    @if (node.tool == 'NET') {
+                      <i     class="atelier atelier-lg atelier-ryza2-tool-bug-net"    ></i>
+                    }
+                    @if (node.tool == 'PICKAXE') {
+                      <i class="atelier atelier-lg atelier-sophie2-tool-pickaxe"  ></i>
+                    }
+                    @if (node.tool == 'HAMMER') {
+                      <i  class="atelier atelier-lg atelier-sophie2-tool-hammer"   ></i>
+                    }
+                    @if (node.tool == 'SHOT') {
+                      <i    class="atelier atelier-lg atelier-sophie2-tool-slingshot"></i>
+                    }
+                    <popover name="Gather Type"
+                      [template]="typePopover"
+                      cls="fas fa-plus-square">
+                    </popover>
+                  </td>
+                }
+                @for (item of node.items; track item) {
+                  <td>
+                    <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a><br/>{{item.priority}}%
+                  </td>
+                }
+              </tr>
             }
-          </tbody></table>
-        }
-      </div>
-    }
-  </div>
+          }
+        </tbody></table>
+      }
+    </div>
+  }
 }

@@ -19,6 +19,7 @@ import { takeUntil } from 'rxjs/operators';
 @Component({
   templateUrl: 'settings.component.html',
   providers: [DestroyService],
+  styleUrl: '../user-facing.scss',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, MatTabsModule, MatMenuModule,
     MatSelectModule]

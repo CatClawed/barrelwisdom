@@ -1,6 +1,6 @@
 <h1>{{name}}</h1>
-<div class="mx-auto row">
-  <div class="col-md-6">
+<div class="grid">
+  <div class="grid-6">
     <table style="border:1px solid #c8ced3;" class="tbl"><tbody>
       <tr class="table-dark-center">
         <th style="border:none;" colspan=2>Items in Category</th>
@@ -9,7 +9,7 @@
     </tbody></table>
   </div>
   @if (using) {
-    <div class="col-md-6">
+    <div class="grid-6">
       <table style="border:1px solid #c8ced3;" class="tbl"><tbody>
         <tr class="table-dark-center">
           <th style="border:none;" [attr.colspan]="colspan">Items Using Category</th>

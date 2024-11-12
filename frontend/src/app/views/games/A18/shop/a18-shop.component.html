@@ -17,8 +17,7 @@
   </div>
   @if (shops) {
     @for (shop of shops; track shop) {
-      <div class="row spacer">
-        <div class="card col-md-8" style="margin-left:auto;margin-right:auto;">
+        <div class="card card-medium spacer">
           <h4 class="card-title card-icon-space" id="{{shop.slug}}">
             {{shop.name}}
           </h4>
@@ -33,7 +32,6 @@
             }
           </ul>
         </div>
-      </div>
     }
   }
 }

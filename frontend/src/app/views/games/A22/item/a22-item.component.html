@@ -6,7 +6,7 @@
       <i class="atelier atelier-np atelier-ryza2-{{icons[item.itemtype]}}"></i>
       @if (item.isDLC) {
         <br />
-        <span class="badge bg-secondary">DLC</span>
+        <span class="badge bg-primary">DLC</span>
       }
     </div>
     <img src="{{imgURL}}items/{{item.slug}}.webp?v=1" class="card-item-display"
@@ -103,14 +103,14 @@
                 @if (default[index][0]) {
                   @if (default[index][1] != 'none') {
                     <a routerLink="/{{gameURL}}/effects/{{default[index][1]}}/{{language}}"
-                      class="badge bg-secondary badge-list">{{default[index][0]}}</a>
+                      class="badge bg-primary badge-list">{{default[index][0]}}</a>
                   }
                   @if (default[index][1] == 'none') {
-                    <span class="badge bg-secondary badge-list">{{default[index][0]}}</span>
+                    <span class="badge bg-primary badge-list">{{default[index][0]}}</span>
                   }
                 }
                 @for (e of eff; track e) {
-                  <a class="badge bg-primary badge-list" routerLink="/{{gameURL}}/effects/{{e[1]}}/{{language}}">{{e[0]}}</a>
+                  <a class="badge bg-secondary badge-list" routerLink="/{{gameURL}}/effects/{{e[1]}}/{{language}}">{{e[0]}}</a>
                 }
                 </td>
               </tr>
@@ -180,16 +180,16 @@
                         }
                       </ng-template>
                       @if (i.noneffect && !i.essence) {
-                        <popover [template]="effPopover" display="inline-block" name="Synth Data" cls="badge bg-primary badge-list">{{i.noneffect}}</popover>
+                        <popover [template]="effPopover" display="inline-block" name="Synth Data" cls="badge bg-secondary badge-list">{{i.noneffect}}</popover>
                       }
                       @if (i.noneffect && i.essence) {
-                        <popover [template]="effPopover" display="inline-block" name="Synth Data" cls="badge-list badge bg-secondary">{{i.noneffect}}</popover>
+                        <popover [template]="effPopover" display="inline-block" name="Synth Data" cls="badge-list badge bg-primary">{{i.noneffect}}</popover>
                       }
                       @if (i.effect    && !i.essence) {
-                        <popover [template]="effPopover" display="inline-block" name="Synth Data" cls="badge bg-primary badge-list">{{i.effect}}</popover>
+                        <popover [template]="effPopover" display="inline-block" name="Synth Data" cls="badge bg-secondary badge-list">{{i.effect}}</popover>
                       }
                       @if (i.effect    && i.essence) {
-                        <popover [template]="effPopover" display="inline-block" name="Synth Data" cls="badge bg-secondary badge-list">{{i.effect}}</popover>
+                        <popover [template]="effPopover" display="inline-block" name="Synth Data" cls="badge bg-primary badge-list">{{i.effect}}</popover>
                       }
                       @if (i.morph) {
                         <a class="badge bg-success badge-list" routerLink="/{{gameURL}}/items/{{i.morph.slug}}/{{language}}">{{i.morph.name}}</a>

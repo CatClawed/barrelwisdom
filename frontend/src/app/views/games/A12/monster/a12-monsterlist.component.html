@@ -9,7 +9,7 @@
       <ng-container icon>
         <span>{{mon.race}}</span>
         @if (mon.isDX) {
-          <br /><span class="badge bg-secondary">DX</span>
+          <br /><span class="badge bg-primary">DX</span>
         }
       </ng-container>
     </item>
@@ -19,13 +19,11 @@
     name="Monsters"
     [(hide)]="hide"
     [template]="template">
-    <form [formGroup]="pageForm" class="form-horizontal">
-      <div class="row">
-        <mat-form-field class="col-md-12" appearance="outline">
-          <mat-label>Filter...</mat-label>
-          <input style="height: 100%;" matInput formControlName="filtertext">
-        </mat-form-field>
-      </div>
+    <form [formGroup]="pageForm" class="grid">
+      <mat-form-field class="grid-12" appearance="outline">
+        <mat-label>Filter...</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtertext">
+      </mat-form-field>
     </form>
   </filter-list>
 }

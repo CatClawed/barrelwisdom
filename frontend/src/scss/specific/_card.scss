@@ -1,0 +1,109 @@
+@use 'variables' as v;
+
+/* Background pattern from Toptal Subtle Patterns */
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: white;
+    background-image: v.$bg-card;
+    box-shadow: 1px 2px 4px 1px grey;
+    box-sizing: border-box;
+  }
+
+  .card-dialog {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+
+    @media screen and (max-width: 1280px) {
+      max-height: calc(100dvh - 6.1rem);
+      overflow-y: auto;
+    }
+  }
+
+  .card::-webkit-scrollbar {
+    display: none;
+  }
+
+  .card>*:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  .card-icon-space {
+    margin-right: 2em;
+    padding-right: 1.5em;
+  }
+
+  .card-title {
+    >a {
+      color: black;
+    }
+
+    >a:hover {
+      color: black !important;
+    }
+  }
+
+  .card-icon-position {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    text-align: center;
+  }
+
+  .card-icon-position span {
+    float: right;
+  }
+
+  .card-read-more-position {
+    box-shadow: none !important;
+    font-size: 20px !important;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    margin-left: auto;
+    position: absolute !important;
+  }
+
+  .card-read-more-spacer {
+    margin-bottom: 0;
+  }
+
+  .card-read-more-spacer::after {
+    float: right;
+    height: 48px;
+    width: 48px;
+    content: '';
+    margin-bottom: -0.5rem;
+    margin-right: -0.5rem;
+    margin-left: auto;
+  }
+
+  .card-small {
+    width: 60%;
+    min-width: 320px;
+
+    @media screen and (max-width: 1280px) {
+      width: 100%;
+      max-width: 600px;
+    }
+
+    @media screen and (max-width: 800px) {
+      width: 100%;
+    }
+  }
+
+  .card-medium {
+    width: 75%;
+    min-width: 320px;
+
+    @media screen and (max-width: 1280px) {
+      width: 100%;
+      max-width: 900px;
+    }
+
+    @media screen and (max-width: 800px) {
+      width: 100%;
+    }
+  }

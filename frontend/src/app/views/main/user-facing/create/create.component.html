@@ -1,39 +1,41 @@
 <h1>{{currentTitle}}</h1>
 
-<form [formGroup]="pageForm" (ngSubmit)="onSubmit()" class="form-horizontal">
-  <div class="form-group row">
-    <label class="col-md-2 col-form-label" for="text-input">Title</label>
-    <div class="col-md-10">
-      <input type="text" formControlName="title" class="form-control" placeholder="Shorter is better."
+<form [formGroup]="pageForm" (ngSubmit)="onSubmit()" class="settings">
+  <div class="settings-row">
+    <label for="text-input">Title</label>
+    <div class="settings-form">
+      <input type="text" formControlName="title"
+        placeholder="Shorter is better."
         [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
       @if (submitted && f.title.errors) {
-        <div class="invalid-feedback">
+        <div class="text-danger">
           @if (f.title.errors.maxlength) {
-            <div>Title too long. 100 chars max.</div>
+            Title too long. 100 chars max.
           }
         </div>
       }
     </div>
   </div>
-  <div class="form-group row">
-    <label class="col-md-2 col-form-label" for="textarea-input">SEO Description</label>
-    <div class="col-md-10">
-      <textarea id="textarea-input" name="textarea-input" rows="2" class="form-control" formControlName="seoDesc"
+  <div class="settings-row">
+    <label for="textarea-input">SEO Description</label>
+    <div class="settings-form">
+      <textarea  id="textarea-input" name="textarea-input"
+        rows="2" formControlName="seoDesc"
         [ngClass]="{ 'is-invalid': submitted && f.seoDesc.errors }"
-      placeholder="This helps google describe the post. Shows on main page if blog."></textarea>
+        placeholder="This helps google describe the post. Shows on main page if blog."></textarea>
       @if (submitted && f.seoDesc.errors) {
-        <div class="invalid-feedback">
+        <div class="text-danger">
           @if (f.seoDesc.errors.maxlength) {
-            <div>Too long. 200 chars max.</div>
+            Too long. 200 chars max.
           }
         </div>
       }
     </div>
   </div>
-  <div class="form-group row">
-    <label class="col-md-2 col-form-label" for="text-input">Post Image URL</label>
-    <div class="col-md-10">
-      <input type="text" class="form-control" formControlName="imgURL"
+  <div class="settings-row">
+    <label for="text-input">Post Image URL</label>
+    <div class="settings-form">
+      <input type="text" formControlName="imgURL"
         [ngClass]="{ 'is-invalid': submitted && f.imgURL.errors }"
         placeholder="Required for blog posts. Shows on main page.">
       @if (submitted && f.imgURL.errors) {
@@ -52,10 +54,10 @@
       }
     </div>
   </div>
-  <div class="form-group row">
-    <label class="col-md-2 col-form-label" for="select1">Section</label>
-    <div class="col-md-10">
-      <select class="form-select" formControlName="section"
+  <div class="settings-row">
+    <label for="select1">Section</label>
+    <div class="settings-form">
+      <select formControlName="section"
         [ngClass]="{ 'is-invalid': submitted && f.section.errors }">
         @for (section of sectionList; track section) {
           <option [value]="section.id">{{section.name}}</option>
@@ -63,22 +65,22 @@
       </select>
     </div>
   </div>
-  <div class="form-group row">
-    <label class="col-md-2 col-form-label">Author Lock?</label>
-    <div class="col-md-10 col-form-label">
+  <div class="settings-row">
+    <label>Author Lock?</label>
+    <div class="settings-form">
       @if (!disableAuthorLock) {
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" formControlName="authorLock">
-          <label class="form-check-label">Make me sole author. This disables others from editing the page.<br />This
+        <div style="display: inline-flex; vertical-align: middle;">
+          <input type="checkbox" style="margin-right: 1rem;" formControlName="authorLock">
+          <label>Make me sole author. This disables others from editing the page.<br />This
           option is preferred for blog posts, but you should have admin agreement otherwise.</label>
         </div>
       }
     </div>
   </div>
   @if (sectionIsBlog) {
-    <div class="form-group row">
-      <label class="col-md-2 col-form-label" for="text-input">Tags</label>
-      <div class="col-md-10">
+    <div class="settings-row">
+      <label for="text-input">Tags</label>
+      <div class="settings-form">
         <mat-chip-grid #chipList>
           @for (tag of currentTags; track tag) {
             <mat-chip color="primary"
@@ -91,7 +93,6 @@
             </mat-chip>
           }
           <input placeholder="pls don't add your own if you can avoid it"
-            class="form-control"
             #tagInput
             formControlName="tags"
             [matAutocomplete]="auto"
@@ -110,14 +111,14 @@
     </div>
   }
 
-  <h1>Content</h1>
-  <textarea id="textarea-input" name="textarea-input" rows="20" class="form-control"
+  <h2>Content</h2>
+  <textarea id="textarea-input" name="textarea-input" rows="20" class="spacer"
     [ngClass]="{ 'is-invalid': submitted && f.body.errors }" placeholder="Content."
   formControlName="body"></textarea>
   @if (!disableSubmit) {
-    <button [disabled]="loading" class="btn btn-lg btn-primary">
+    <button [disabled]="loading" class="btn btn-primary spacer" style="width: 20%;">
       @if (loading) {
-        <span class="loader"></span>
+        Attempting
       }
       Submit
     </button>
@@ -126,6 +127,6 @@
     <div class="text-danger">{{errorMsg}}</div>
   }
 
-  <h1>Preview</h1>
+  <h2>Preview</h2>
 
   <div markdown [disableSanitizer]="true" [data]="preview"></div>

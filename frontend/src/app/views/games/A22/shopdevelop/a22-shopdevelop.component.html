@@ -2,39 +2,35 @@
   <h1>Shop Development</h1>
 }
 @if (data; as shopdevelop) {
-  <div class="mx-auto row">
-    <div class="col-md-6">
-      <table style="border:2px solid lightgray;" class="tbl table-compress table-shrink"><tbody>
-        <tr>
-          <th>Item</th>
-          <th>Categories</th>
-          <th>Bonus</th>
-        </tr>
-        @for (dev of shopdevelop; track dev) {
-          <tr>
-            <td><a routerLink="/{{gameURL}}/items/{{dev.item.slug}}/{{language}}">{{dev.item.name}}</a></td>
-            <td>
-              <a routerLink="/{{gameURL}}/categories/{{dev.cat1.slug}}/{{language}}">{{dev.cat1.name}}</a>
-              @if (dev.cat2) {
-                <br />
-                } @if (dev.cat2) {
-                <a routerLink="/{{gameURL}}/categories/{{dev.cat2.slug}}/{{language}}">{{dev.cat2.name}}</a>
-              }
-            </td>
-            <td>
-              @if (dev.addProd) {
-                <a routerLink="/{{gameURL}}/items/{{dev.addProd.slug}}/{{language}}">{{dev.addProd.name}}</a>
-              }
-              @if (dev.addProd && dev.addCat) {
-                <br />
-              }
-              @if (dev.addCat) {
-                <a routerLink="/{{gameURL}}/categories/{{dev.addCat.slug}}/{{language}}">{{dev.addCat.name}}</a>
-              }
-            </td>
-          </tr>
-        }
-      </tbody></table>
-    </div>
-  </div>
+  <table style="border:2px solid lightgray;" class="table-compress table-shrink"><tbody>
+    <tr>
+      <th>Item</th>
+      <th>Categories</th>
+      <th>Bonus</th>
+    </tr>
+    @for (dev of shopdevelop; track dev) {
+      <tr>
+        <td><a routerLink="/{{gameURL}}/items/{{dev.item.slug}}/{{language}}">{{dev.item.name}}</a></td>
+        <td>
+          <a routerLink="/{{gameURL}}/categories/{{dev.cat1.slug}}/{{language}}">{{dev.cat1.name}}</a>
+          @if (dev.cat2) {
+            <br />
+            } @if (dev.cat2) {
+            <a routerLink="/{{gameURL}}/categories/{{dev.cat2.slug}}/{{language}}">{{dev.cat2.name}}</a>
+          }
+        </td>
+        <td>
+          @if (dev.addProd) {
+            <a routerLink="/{{gameURL}}/items/{{dev.addProd.slug}}/{{language}}">{{dev.addProd.name}}</a>
+          }
+          @if (dev.addProd && dev.addCat) {
+            <br />
+          }
+          @if (dev.addCat) {
+            <a routerLink="/{{gameURL}}/categories/{{dev.addCat.slug}}/{{language}}">{{dev.addCat.name}}</a>
+          }
+        </td>
+      </tr>
+    }
+  </tbody></table>
 }

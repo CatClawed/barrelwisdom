@@ -1,0 +1,88 @@
+<div style="margin:auto;" class="card card-small">
+    <h2>Register</h2>
+    @if (!hasInvite) {
+      <p>You need a valid invite to join this party; only the admin hands those out. We're looking for experienced and trustworthy folks.</p>
+    }
+    @if (hasInvite) {
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="spacer">
+          <div class="login-form">
+            <i class="fas fa-user" style="margin: auto; padding: 0.5em;"></i>
+            <input type="text" formControlName="username"
+              placeholder="Username" autocomplete="username"
+              [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+          </div>
+          @if (submitted && f.username.errors) {
+            <div class="text-danger">
+              @if (f.username.errors.required) {
+                Username is required
+              }
+            </div>
+          }
+        </div>
+        <div class="spacer">
+          <div class="login-form">
+            <i style="margin: auto; padding: 0.5em;" class="fa-solid fa-at"></i>
+            <input type="text" formControlName="email"
+              placeholder="Email" autocomplete="email"
+              [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+          </div>
+          @if (submitted && f.email.errors) {
+            <div class="text-danger">
+              @if (f.email.errors.required) {
+                Email is required
+              }
+              @if (f.email.errors.email) {
+                Does not appear to be an email
+              }
+            </div>
+          }
+        </div>
+        <div class="spacer">
+          <div class="login-form">
+            <i class="fas fa-lock" style="margin: auto; padding: 0.5em;"></i>
+            <input type="password" formControlName="password"
+              placeholder="Password"
+              [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+          </div>
+          @if (submitted && f.password.errors) {
+            <div class="text-danger">
+              @if (f.password.errors.required) {
+                Password is required
+              }
+              @if (f.password.errors.minlength) {
+                8 characters or more
+              }
+            </div>
+          }
+        </div>
+        <div class="spacer">
+          <div class="login-form">
+            <i class="fas fa-lock" style="margin: auto; padding: 0.5em;"></i>
+            <input type="password" formControlName="confirmPassword"
+              placeholder="Repeat password"
+              [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+          </div>
+          @if (submitted && f.confirmPassword.errors) {
+            <div class="text-danger">
+              @if (f.confirmPassword.errors.required) {
+                Password is required
+              }
+              @if (f.confirmPassword.errors.minlength) {
+                8 characters or more
+              }
+            </div>
+          }
+        </div>
+        <button [disabled]="loading" class="btn btn-primary">
+          @if (loading) {
+            Attempting
+          }
+          Login
+        </button>
+        @if (errorMsg) {
+          <div class="text-danger">{{errorMsg}}</div>
+        }
+      </form>
+    }
+</div>

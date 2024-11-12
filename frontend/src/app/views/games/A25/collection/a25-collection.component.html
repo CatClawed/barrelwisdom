@@ -2,178 +2,175 @@
 @if (editMode) { <h1>My Collection</h1> }
 @else { <h1>View Collection</h1> }
 @if (!bad_data) {
-<ng-template #forms>
-  <form [formGroup]="pageForm" class="form-horizontal" style="overflow: hidden;">
-    @if (openTab === 0) {
-    <div class="row" style="margin-top:0.8rem;">
-      <mat-form-field class="col-md-4" appearance="outline">
-        <mat-label>Filter...</mat-label>
-        <input style="height: 100%;" matInput formControlName="filtertext">
-        <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
-      </mat-form-field>
-      <mat-form-field class="col-md-4" appearance="outline">
-        <mat-label>Role</mat-label>
-        <mat-select matNativeControl formControlName="roles" disableOptionCentering="true" class="mat-select-icon">
-          <mat-option value="any" selected>
-            Any
-          </mat-option>
-          @if (data) {
-          @for (role of data.roles; track role) {
-          <mat-option [value]="role.slug">
-            {{role.name}}
-          </mat-option>
-          }
-          }
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field class="col-md-4" appearance="outline">
-        <mat-label>Element</mat-label>
-        <mat-select matNativeControl formControlName="elems" disableOptionCentering="true" class="mat-select-icon">
-          <mat-option value="any" selected>
-            Any
-          </mat-option>
-          @if (data) {
-          @for (elem of data.elems; track elem) {
-          <mat-option [value]="elem.slug">
-            {{elem.name}}
-          </mat-option>
-          }
-          }
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div class="row">
-      <div class="col-md-4" style="display:flex;padding-bottom:1rem;">
-        <button [matMenuTriggerFor]="menuLeft" style="width:2rem;background:none;border:none;padding-right:0.1rem;">
-          <svg viewBox="0 0 125 250" style="max-width:2rem;">
-            <path [attr.fill]="changeFill(pageForm.get('colorL').value)"
-              d="M128.315904 232.287744H122.368L24.448 134.368256V122.399744L122.368 24.479744H128.34304L128.34304 6.144H121.31328L6.11328 121.344V135.424L121.31328 250.624H128.3072zM128.335872 227.199488H124.000256L29.536256 132.735488V124.031488L124.000256 29.567488H128.326656z" />
-          </svg>
-        </button>
-        <button [matMenuTriggerFor]="menuRight" style="width:2rem;background:none;border:none;padding-left:0.1rem;">
-          <svg viewBox="0 0 125 250" style="max-width:2rem;transform:scale(-1,1)">
-            <path [attr.fill]="changeFill(pageForm.get('colorR').value)"
-              d="M128.315904 232.287744H122.368L24.448 134.368256V122.399744L122.368 24.479744H128.34304L128.34304 6.144H121.31328L6.11328 121.344V135.424L121.31328 250.624H128.3072zM128.335872 227.199488H124.000256L29.536256 132.735488V124.031488L124.000256 29.567488H128.326656z" />
-          </svg>
-        </button>
-        <mat-menu #menuLeft="matMenu">
-          <button mat-menu-item (click)="pageForm.controls['colorL'].setValue('any')">
-            Any
+  <ng-template #forms>
+    <form [formGroup]="pageForm" class="form-horizontal" style="overflow: hidden;">
+      @if (openTab === 0) {
+      <div class="grid" style="margin-top:0.8rem;">
+        <mat-form-field class="grid-4" appearance="outline">
+          <mat-label>Filter...</mat-label>
+          <input style="height: 100%;" matInput formControlName="filtertext">
+          <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
+        </mat-form-field>
+        <mat-form-field class="grid-4" appearance="outline">
+          <mat-label>Role</mat-label>
+          <mat-select matNativeControl formControlName="roles" disableOptionCentering="true" class="mat-select-icon">
+            <mat-option value="any" selected>
+              Any
+            </mat-option>
+            @if (data) {
+              @for (role of data.roles; track role) {
+                <mat-option [value]="role.slug">
+                  {{role.name}}
+                </mat-option>
+              }
+            }
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="grid-4" appearance="outline">
+          <mat-label>Element</mat-label>
+          <mat-select matNativeControl formControlName="elems" disableOptionCentering="true" class="mat-select-icon">
+            <mat-option value="any" selected>
+              Any
+            </mat-option>
+            @if (data) {
+              @for (elem of data.elems; track elem) {
+                <mat-option [value]="elem.slug">
+                  {{elem.name}}
+                </mat-option>
+              }
+            }
+          </mat-select>
+        </mat-form-field>
+        <div class="grid-4" style="display:flex;padding-bottom:1rem;">
+          <button [matMenuTriggerFor]="menuLeft" style="width:2rem;background:none;border:none;padding-right:0.1rem;">
+            <svg viewBox="0 0 125 250" style="max-width:2rem;">
+              <path [attr.fill]="changeFill(pageForm.get('colorL').value)"
+                d="M128.315904 232.287744H122.368L24.448 134.368256V122.399744L122.368 24.479744H128.34304L128.34304 6.144H121.31328L6.11328 121.344V135.424L121.31328 250.624H128.3072zM128.335872 227.199488H124.000256L29.536256 132.735488V124.031488L124.000256 29.567488H128.326656z" />
+            </svg>
           </button>
-          @if (data) {
-          @for (color of data.colors; track color) {
-          <button mat-menu-item (click)="pageForm.controls['colorL'].setValue(color.slug)">
-            {{color.name}}
+          <button [matMenuTriggerFor]="menuRight" style="width:2rem;background:none;border:none;padding-left:0.1rem;">
+            <svg viewBox="0 0 125 250" style="max-width:2rem;transform:scale(-1,1)">
+              <path [attr.fill]="changeFill(pageForm.get('colorR').value)"
+                d="M128.315904 232.287744H122.368L24.448 134.368256V122.399744L122.368 24.479744H128.34304L128.34304 6.144H121.31328L6.11328 121.344V135.424L121.31328 250.624H128.3072zM128.335872 227.199488H124.000256L29.536256 132.735488V124.031488L124.000256 29.567488H128.326656z" />
+            </svg>
           </button>
+          <mat-menu #menuLeft="matMenu">
+            <button mat-menu-item (click)="pageForm.controls['colorL'].setValue('any')">
+              Any
+            </button>
+            @if (data) {
+              @for (color of data.colors; track color) {
+                <button mat-menu-item (click)="pageForm.controls['colorL'].setValue(color.slug)">
+                  {{color.name}}
+                </button>
+              }
+            }
+          </mat-menu>
+          <mat-menu #menuRight="matMenu">
+            <button mat-menu-item (click)="pageForm.controls['colorR'].setValue('any')">
+              Any
+            </button>
+            @if (data) {
+              @for (color of data.colors; track color) {
+                <button mat-menu-item (click)="pageForm.controls['colorR'].setValue(color.slug)">
+                  {{color.name}}
+                </button>
+              }
+            }
+          </mat-menu>
+        </div>
+        @if (editMode) {
+          @if (language != 'ja') {
+            <mat-checkbox class="grid-4" formControlName="show_jp">
+              Show JP
+            </mat-checkbox>
           }
-          }
-        </mat-menu>
-        <mat-menu #menuRight="matMenu">
-          <button mat-menu-item (click)="pageForm.controls['colorR'].setValue('any')">
-            Any
-          </button>
-          @if (data) {
-          @for (color of data.colors; track color) {
-          <button mat-menu-item (click)="pageForm.controls['colorR'].setValue(color.slug)">
-            {{color.name}}
-          </button>
-          }
-          }
-        </mat-menu>
+          <mat-checkbox class="grid-4" formControlName="hide_missing">
+            Hide Missing
+          </mat-checkbox>
+        }
+      </div>
+      }
+      @if (openTab == 1) {
+      <div class="grid" style="margin-top:0.8rem;">
+        <mat-form-field class="grid-8" appearance="outline">
+          <mat-label>Filter...</mat-label>
+          <input style="height: 100%;" matInput formControlName="filtertext">
+          <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
+        </mat-form-field>
+        <mat-form-field class="grid-4" appearance="outline">
+          <mat-label>Sort by...</mat-label>
+          <mat-select matNativeControl formControlName="stats">
+            @for (stat of a25service.stats | keyvalue; track stat) {
+            <mat-option [value]="stat.key">
+              {{stat.value[language]}}
+            </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
       </div>
       @if (editMode) {
-      @if (language != 'ja') {
-      <mat-checkbox class="col-md-4" formControlName="show_jp">
-        Show JP
-      </mat-checkbox>
+      <div class="grid" style="padding-bottom:1rem;">
+        @if (language != 'ja') {
+        <mat-checkbox formControlName="show_jp" class="grid-4">
+          Show JP
+        </mat-checkbox>
+        }
+        <mat-checkbox class="grid-4" formControlName="hide_missing">
+          Hide Missing
+        </mat-checkbox>
+      </div>
       }
-      <mat-checkbox class="col-md-4" formControlName="hide_missing">
-        Hide Missing
-      </mat-checkbox> }
-    </div>
-    }
-    @if (openTab == 1) {
-    <div class="row" style="margin-top:0.8rem;">
-      <mat-form-field class="col-md-8" appearance="outline">
-        <mat-label>Filter...</mat-label>
-        <input style="height: 100%;" matInput formControlName="filtertext">
-        <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
-      </mat-form-field>
-      <mat-form-field class="col-md-4" appearance="outline">
-        <mat-label>Sort by...</mat-label>
-        <mat-select matNativeControl formControlName="stats">
-          @for (stat of a25service.stats | keyvalue; track stat) {
-          <mat-option [value]="stat.key">
-            {{stat.value[language]}}
-          </mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-    </div>
-    @if (editMode) {
-    <div class="row" style="padding-bottom:1rem;">
-      @if (language != 'ja') {
-      <mat-checkbox formControlName="show_jp" class="col-md-4">
-        Show JP
-      </mat-checkbox>
       }
-      <mat-checkbox class="col-md-4" formControlName="hide_missing">
-        Hide Missing
-      </mat-checkbox>
-    </div>
-    }
-    }
-    @if (openTab === 2 && editMode) {
-      @if (language != 'ja') {
-      <mat-checkbox class="col-md-4" formControlName="show_jp">
-        Show JP
-      </mat-checkbox>
+      @if (openTab === 2 && editMode) {
+        @if (language != 'ja') {
+        <mat-checkbox class="grid-4" formControlName="show_jp">
+          Show JP
+        </mat-checkbox>
+        }
       }
-    }
-  </form>
-</ng-template>
-@if (editMode) {
-<div style="width:100%; height: 2.5rem; display: flex;" class="spacer">
-  <input type="text" (click)="openSnackBar();" readonly value="{{shareUrl}}"
-    [cdkCopyToClipboard]="shareUrl" style="width: 100%; margin-right: 0.5rem; border-radius: 5px; border-style: ridge; outline: none;;">
-  <button [cdkCopyToClipboard]="shareUrl" mat-fab extended color="primary"
-    (click)="openSnackBar();" style="height:100%;" class="input-group-text">
-    <i class="fa-solid fa-link"></i> Share
-  </button>
-</div>
-}
-@else {
-<div style="margin-bottom: 1rem;" class="row spacer">
-  <div class="col-md-4">
-    <button mat-fab extended color="primary" style="height: 2.5rem;"
-      (click)="router.navigateByUrl('/resleri/collect/'+language)">
-      <mat-icon fontSet="fa-solid" [fontIcon]="has_collection ? 'fa-pen-to-square' : 'fa-plus'"
-        style="font-size: 1.3rem;"></mat-icon> {{has_collection ? 'Edit my collection' : 'Create new'}}
-    </button>
-  </div>
-  <div class="col-md-4"></div>
-  <div class="col-md-4" style="display: grid;">
-    <button mat-fab extended color="accent" style="margin-left: auto; margin-right: 0; height: 2.5rem;" (click)="import()">
-      <mat-icon fontSet="fa-solid" fontIcon="fa-file-import" style="font-size: 1.3rem;"></mat-icon> Import
-    </button>
-    @if (areyousure) {
-    <div>
-      This will overwrite your data with the current collection. Are you sure?
-      <div>
-        <button mat-flat-button color="primary" (click)="import(true)">
-          Yes
-        </button>
-        <button (click)="import(false)" mat-flat-button style="margin-left: 3rem; background-color: lightgray;">
-          Cancel
+    </form>
+  </ng-template>
+  @if (editMode) {
+    <div style="width:100%; height: 2.5rem; display: flex;" class="spacer">
+      <input type="text" (click)="openSnackBar();" readonly value="{{shareUrl}}"
+        [cdkCopyToClipboard]="shareUrl" style="width: 100%; margin-right: 0.5rem; border-radius: 5px; border-style: ridge; outline: none;;">
+      <button [cdkCopyToClipboard]="shareUrl" mat-fab extended color="primary"
+        (click)="openSnackBar();" style="height:100%;" class="input-group-text">
+        <i class="fa-solid fa-link"></i> Share
+      </button>
+    </div>
+  }
+  @else {
+    <div style="margin-bottom: 1rem;" class="grid spacer">
+      <div class="grid-6">
+        <button mat-fab extended color="primary" style="height: 2.5rem;"
+          (click)="router.navigateByUrl('/resleri/collect/'+language)">
+          <mat-icon fontSet="fa-solid" [fontIcon]="has_collection ? 'fa-pen-to-square' : 'fa-plus'"
+            style="font-size: 1.3rem;"></mat-icon> {{has_collection ? 'Edit my collection' : 'Create new'}}
         </button>
       </div>
+      <div class="grid-6" style="display: grid;">
+        <button mat-fab extended color="accent" style="margin-left: auto; margin-right: 0; height: 2.5rem;" (click)="import()">
+          <mat-icon fontSet="fa-solid" fontIcon="fa-file-import" style="font-size: 1.3rem;"></mat-icon> Import
+        </button>
+        @if (areyousure) {
+        <div>
+          This will overwrite your data with the current collection. Are you sure?
+          <div>
+            <button mat-flat-button color="primary" (click)="import(true)">
+              Yes
+            </button>
+            <button (click)="import(false)" mat-flat-button style="margin-left: 3rem; background-color: lightgray;">
+              Cancel
+            </button>
+          </div>
+        </div>
+        }
+      </div>
     </div>
-    }
-  </div>
-</div>
-}
+   }
 
-@defer {
 @if (data) {
   <div style="column-count: 2;">
     <ul style="list-style-type: none; padding-left: 0;">
@@ -201,61 +198,73 @@
   </div>
 <mat-tab-group (selectedTabChange)="changeTab($event)" class="tabs-overflow2">
   <mat-tab label="Characters" style="overflow-x:visible;">
-    <ng-container *ngTemplateOutlet="forms"></ng-container>
-    <div class="char-grid">
-      @for (chara of filteredCharas | async; track chara) {
-        <a25-charaframe
-          [collection]="collection"
-          [chara]="chara"
-          [collectionMode]="true"
-          (buttonClicked)="changeChar(chara)">
-        </a25-charaframe>
-      }
-    </div>
-  </mat-tab>
-  <mat-tab label="Memoria">
-    <ng-container *ngTemplateOutlet="forms"></ng-container>
-    <div class="mem-grid">
-      @for (memoria of filteredMemoria | async; track memoria) {
-      <div style="aspect-ratio:256/410;position: relative;cursor: pointer;">
-        <img src="{{imgURL}}memoria/{{memoria.slug}}.webp" (click)="changeMemoria(memoria.id, memoria.slug, $event)" loading="lazy"
-          [style]="collection.memoria[memoria.id] ? 'width:100%' : 'width:100%;filter:grayscale(1)'">
-        @if (collection.memoria[memoria.id] !== undefined) {
-        <div
-          style="position:absolute;bottom:0%;left:50%;transform:translate(-50%,0);font-size:2rem;text-align:center;width:100%;color:white;background:linear-gradient(270deg, rgba(0,0,0,0.5) 0%, rgb(0, 0, 0) 50%, rgba(0,0,0,0.5) 100%);">
-          {{ranks[collection.memoria[memoria.id]]}}</div>
+    @defer (on immediate) {
+      <ng-container *ngTemplateOutlet="forms"></ng-container>
+      <div class="char-grid">
+        @for (chara of filteredCharas | async; track chara) {
+          <a25-charaframe
+            [collection]="collection"
+            [chara]="chara"
+            [collectionMode]="true"
+            (buttonClicked)="changeChar(chara)">
+          </a25-charaframe>
         }
       </div>
-      }
-    </div>
+    }
+  </mat-tab>
+  <mat-tab label="Memoria">
+    @defer (on viewport) {
+      <ng-container *ngTemplateOutlet="forms"></ng-container>
+      <div class="mem-grid">
+        @for (memoria of filteredMemoria | async; track memoria) {
+        <div style="aspect-ratio:256/410;position: relative;cursor: pointer;">
+          <img src="{{imgURL}}memoria/{{memoria.slug}}.webp" (click)="changeMemoria(memoria.id, memoria.slug, $event)" loading="lazy"
+            [style]="collection.memoria[memoria.id] ? 'width:100%' : 'width:100%;filter:grayscale(1)'">
+          @if (collection.memoria[memoria.id] !== undefined) {
+          <div
+            style="position:absolute;bottom:0%;left:50%;transform:translate(-50%,0);font-size:2rem;text-align:center;width:100%;color:white;background:linear-gradient(270deg, rgba(0,0,0,0.5) 0%, rgb(0, 0, 0) 50%, rgba(0,0,0,0.5) 100%);">
+            {{ranks[collection.memoria[memoria.id]]}}</div>
+          }
+        </div>
+        }
+      </div>
+    }
+    @placeholder {
+      <b>Loading...</b>
+    }
   </mat-tab>
   <mat-tab label="Emblems">
-    <ng-container *ngTemplateOutlet="forms"></ng-container>
-    <h2>Permanent</h2>
-    @for (emblem of filteredEmblems | async; track emblem) {
-      @if (emblem.kind === 1) {
-        @if (!editMode) {
-          <popover [name]="emblem.name" [template]="emblemPopover" [context]="{ emblem: emblem }">
+    @defer (on viewport) {
+      <ng-container *ngTemplateOutlet="forms"></ng-container>
+      <h2>Permanent</h2>
+      @for (emblem of filteredEmblems | async; track emblem) {
+        @if (emblem.kind === 1) {
+          @if (!editMode) {
+            <popover [name]="emblem.name" [template]="emblemPopover" [context]="{ emblem: emblem }">
+              <ng-content *ngTemplateOutlet="emblemDisplay;context:{emblem:emblem}"></ng-content>
+            </popover>
+          }
+          @else {
             <ng-content *ngTemplateOutlet="emblemDisplay;context:{emblem:emblem}"></ng-content>
-          </popover>
+          }
         }
-        @else {
-          <ng-content *ngTemplateOutlet="emblemDisplay;context:{emblem:emblem}"></ng-content>
+      }
+      <h2>Limited</h2>
+      @for (emblem of filteredEmblems | async; track emblem) {
+        @if (emblem.kind === 2) {
+          @if (!editMode) {
+            <popover [name]="emblem.name" [template]="emblemPopover" [context]="{ emblem: emblem }">
+              <ng-content *ngTemplateOutlet="emblemDisplay;context:{emblem:emblem}"></ng-content>
+            </popover>
+          }
+          @else {
+            <ng-content *ngTemplateOutlet="emblemDisplay;context:{emblem:emblem}"></ng-content>
+          }
         }
       }
     }
-    <h2>Limited</h2>
-    @for (emblem of filteredEmblems | async; track emblem) {
-      @if (emblem.kind === 2) {
-        @if (!editMode) {
-          <popover [name]="emblem.name" [template]="emblemPopover" [context]="{ emblem: emblem }">
-            <ng-content *ngTemplateOutlet="emblemDisplay;context:{emblem:emblem}"></ng-content>
-          </popover>
-        }
-        @else {
-          <ng-content *ngTemplateOutlet="emblemDisplay;context:{emblem:emblem}"></ng-content>
-        }
-      }
+    @placeholder {
+      <b>Loading...</b>
     }
   </mat-tab>
 </mat-tab-group>
@@ -277,4 +286,3 @@ Corrupt data detected.
       class="a25-emblem" loading="lazy">
   </div>
 </ng-template>
-}

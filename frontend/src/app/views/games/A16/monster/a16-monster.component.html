@@ -10,8 +10,8 @@
     @if (monster.note) {
       <p>{{monster.note}}</p>
     }
-    <div class="row">
-      <div class="col-md-6">
+    <div class="grid">
+      <div class="grid-6">
         @if (monster.locations) {
           <b>Locations:</b>
           <ul>
@@ -29,7 +29,7 @@
           </ul>
         }
       </div>
-      <div class="col-md-6">
+      <div class="grid-6">
         <table class="tbl" ><tbody>
           <tr>
             <td style="border-top:transparent;padding:0;"><b>LV </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.level}}</td>

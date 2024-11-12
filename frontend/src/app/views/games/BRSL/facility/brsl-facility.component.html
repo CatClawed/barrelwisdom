@@ -2,7 +2,7 @@
   <div [class]="inputSlug ? 'card card-dialog' : 'card card-medium'">
     <h4 class="card-title card-icon-space">{{facility.name}}</h4>
     @if (facility.isDLC) {
-      <span class="card-icon-position badge bg-secondary">DLC</span>
+      <span class="card-icon-position badge bg-primary">DLC</span>
     }
     <img class="image-display" src="{{imgURL}}facilities/{{facility.slug}}.webp?v=1"
       alt="{{facility.name}}" style="aspect-ratio: 1; width: 253px;">

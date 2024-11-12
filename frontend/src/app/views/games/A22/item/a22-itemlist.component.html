@@ -11,7 +11,7 @@
         @if (item.isDLC) {
           <br />
           }@if (item.isDLC) {
-          <span style="margin-top: 0.5rem;" class="badge bg-secondary">DLC</span>
+          <span style="margin-top: 0.5rem;" class="badge bg-primary">DLC</span>
         }
       </ng-container>
       <div class="two-column" style="padding-top: 0.5rem;">
@@ -39,53 +39,49 @@
     name="Items"
     [(hide)]="hide"
     [template]="template">
-    <form [formGroup]="pageForm" class="form-horizontal">
-      <div class="row">
-        <mat-form-field class="col-md-8" appearance="outline">
-          <mat-label>Filter...</mat-label>
-          <input style="height: 100%;" matInput formControlName="filtertext">
-          <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
-        </mat-form-field>
-        <mat-form-field class="col-md-4" appearance="outline">
-          <mat-label>Category</mat-label>
-          <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
-            <mat-option value="Any" selected><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"   ></mat-icon> Any</mat-option>
-            @if (data) {
-              @for (cat of data.categories; track cat) {
-                <mat-option value="{{cat.name}}">
-                  <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-category-{{cat.slug}}"></mat-icon>
-                  {{cat.name}}
-                </mat-option>
-              }
+    <form [formGroup]="pageForm" class="grid">
+      <mat-form-field class="grid-8" appearance="outline">
+        <mat-label>Filter...</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtertext">
+        <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="grid-4" appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
+          <mat-option value="Any" selected><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"   ></mat-icon> Any</mat-option>
+          @if (data) {
+            @for (cat of data.categories; track cat) {
+              <mat-option value="{{cat.name}}">
+                <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-category-{{cat.slug}}"></mat-icon>
+                {{cat.name}}
+              </mat-option>
             }
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="row">
-        <mat-form-field class="col-md-5" appearance="outline">
-          <mat-label>Has ingredient...</mat-label>
-          <input style="height: 100%;" matInput formControlName="filtering">
-        </mat-form-field>
-        <mat-form-field class="col-md-3" appearance="outline">
-          <mat-label>Element</mat-label>
-          <mat-select matNativeControl formControlName="element" disableOptionCentering="true" class="mat-select-icon">
-            <mat-option value="Any" selected>Any</mat-option>
-            <mat-option value="Fire">     <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-fire"></mat-icon>Fire</mat-option>
-            <mat-option value="Ice">      <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-ice"></mat-icon>Ice</mat-option>
-            <mat-option value="Lightning"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-lightning"></mat-icon>Lightning</mat-option>
-            <mat-option value="Wind">     <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-wind"></mat-icon>Wind</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field class="col-md-4" appearance="outline">
-          <mat-label>Element Value</mat-label>
-          <mat-select matNativeControl formControlName="elementval" disableOptionCentering="true" class="mat-select-icon">
-            <mat-option value="1" type="number" selected>1+</mat-option>
-            <mat-option value="2" type="number">2+</mat-option>
-            <mat-option value="3" type="number">3+</mat-option>
-            <mat-option value="4" type="number">4+</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="grid-5" appearance="outline">
+        <mat-label>Has ingredient...</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtering">
+      </mat-form-field>
+      <mat-form-field class="grid-3" appearance="outline">
+        <mat-label>Element</mat-label>
+        <mat-select matNativeControl formControlName="element" disableOptionCentering="true" class="mat-select-icon">
+          <mat-option value="Any" selected>Any</mat-option>
+          <mat-option value="Fire">     <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-fire"></mat-icon>Fire</mat-option>
+          <mat-option value="Ice">      <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-ice"></mat-icon>Ice</mat-option>
+          <mat-option value="Lightning"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-lightning"></mat-icon>Lightning</mat-option>
+          <mat-option value="Wind">     <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-wind"></mat-icon>Wind</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="grid-4" appearance="outline">
+        <mat-label>Element Value</mat-label>
+        <mat-select matNativeControl formControlName="elementval" disableOptionCentering="true" class="mat-select-icon">
+          <mat-option value="1" type="number" selected>1+</mat-option>
+          <mat-option value="2" type="number">2+</mat-option>
+          <mat-option value="3" type="number">3+</mat-option>
+          <mat-option value="4" type="number">4+</mat-option>
+        </mat-select>
+      </mat-form-field>
     </form>
   </filter-list>
 }

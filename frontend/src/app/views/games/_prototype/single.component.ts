@@ -40,7 +40,7 @@ export abstract class SingleComponent extends DataComponent {
         super(destroy$, route, breadcrumbService, seoService)
         this.slug = this.inputSlug ? this.inputSlug : this.route.snapshot.params.subject;
         this.data = this.inputData ? this.inputData : undefined;
-        if (this.showNav) this.colset = "col-md-9 mx-auto ";
+        if (this.showNav) this.colset = "grid-9 mx-auto ";
     }
 
     paramWatch(): void {

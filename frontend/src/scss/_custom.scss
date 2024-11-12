@@ -1,6 +1,5 @@
-@import 'specific/navigation';
-@import 'specific/material-fix';
-@import "icons";
+@use 'variables' as v;
+@use 'sass:math';
 
 // generic stuff
 
@@ -14,6 +13,7 @@ a:focus {
 
 a {
   text-decoration: none;
+  color: v.$secondary;
 }
 
 a:hover {
@@ -23,20 +23,21 @@ a:hover {
 .main {
   padding-left: 1em;
   padding-right: 1em;
-  font-size: calc(1rem + 0.1vw);
   margin: 65px 22%  1rem calc(22% - 200px) ; // 55 px for the navbar and an extra 10 as a spacer
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: v.$breakpoint-lg) {
   .main {
     margin: 65px 0 1rem 0;
   }
 }
 
-/* Background pattern from Toptal Subtle Patterns */
 body {
-  background: url("/media/main/images/ricepaper2.webp");
+  background: v.$bg-main;
   background-color: #faf6f5;
+  font-family: v.$font-family-sans-serif;
+  font-size: 1.1rem;
+  margin: 0;
 }
 
 h1 {
@@ -53,29 +54,41 @@ h3 {
   padding-top: 0.5em;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+  font-family: v.$headings-font-family;
+  margin: 0;
+}
+
+@mixin headers {
+  @for $i from 0 through 5 {
+  h#{$i+1} {
+    font-size: #{math.max(2.5-$i*0.4, 1)}rem;
+   }
+  }
+}
+
+@mixin headers-sm {
+  @for $i from 0 through 5 {
+  h#{$i+1} {
+    font-size: #{math.max(1.7-$i*0.15, 1)}rem;
+   }
+  }
+}
+
+@include headers;
+
+@media screen and (max-width: v.$breakpoint-md) {
+  @include headers-sm;
+}
+
 img {
   max-width: 100%;
-}
-
-// For lists of things
-.item-grid {
-  display: grid;
-  column-gap: 2%;
-  row-gap: 1rem;
-  grid-auto-rows: max-content;
-  //margin-bottom: 1rem;
-}
-
-@media screen and (min-width: 800px) {
-  .item-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .item-grid {
-    grid-template-columns: auto;
-  }
 }
 
 .spacer {
@@ -92,121 +105,9 @@ img {
   justify-content: space-between;
 }
 
-/* Background pattern from Toptal Subtle Patterns */
-.card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  border-radius: 5px;
-  background-color: white;
-  background-image: url("/media/main/images/clean_textile.webp");
-  border: none; //2px solid lightgray !important;
-  //margin-bottom: 0 !important;c
-  //filter: drop-shadow(0px 5px 3px rgba(0,0,0,.5)) drop-shadow(0px -1px 1px rgba(0,0,0,.2));
-  box-shadow: 1px 2px 4px 1px grey;
-  //margin-bottom: 1rem;
-}
-
-.card-dialog {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-
-  @media screen and (max-width: 1280px) {
-    max-height: calc(100vh - 4.7rem);
-    overflow: auto;
-  }
-}
-
-.card::-webkit-scrollbar {
-  display: none;
-}
-
-.card>*:last-child {
-  margin-bottom: 0 !important;
-}
-
-.card-icon-space {
-  margin-right: 2em;
-  padding-right: 1.5em;
-}
-
-.card-title {
-  >a {
-    color: black;
-  }
-
-  >a:hover {
-    color: black !important;
-  }
-}
-
-.card-icon-position {
-  position: absolute;
-  top: 1em;
-  right: 1em;
-  text-align: center;
-}
-
-.card-icon-position span {
-  float: right;
-}
-
-.card-read-more-position {
-  box-shadow: none !important;
-  font-size: 20px !important;
-  bottom: 0.5rem;
-  right: 0.5rem;
-  margin-left: auto;
-  position: absolute !important;
-}
-
-.card-read-more-spacer {
-  margin-bottom: 0;
-}
-
-.card-read-more-spacer::after {
-  float: right;
-  height: 48px;
-  width: 48px;
-  content: '';
-  margin-bottom: -0.5rem;
-  margin-right: -0.5rem;
-  margin-left: auto;
-}
-
-.card-small {
-  width: 60%;
-  min-width: 320px;
-
-  @media screen and (max-width: 1280px) {
-    width: 100%;
-    max-width: 600px;
-  }
-
-  @media screen and (max-width: 800px) {
-    width: 100%;
-  }
-}
-
-.card-medium {
-  width: 75%;
-  min-width: 320px;
-
-  @media screen and (max-width: 1280px) {
-    width: 100%;
-    max-width: 900px;
-  }
-
-  @media screen and (max-width: 800px) {
-    width: 100%;
-  }
-}
-
-/* Background pattern from Toptal Subtle Patterns */
 .tbl {
   background-color: white;
-  background-image: url("/media/main/images/clean_textile.webp");
+  background-image: v.$bg-card;
   width: 100%;
   margin-bottom: 1rem;
 }
@@ -253,7 +154,7 @@ th {
 
 .table-compress {
   background-color: white;
-  background-image: url("/media/main/images/clean_textile.webp");
+  background-image: v.$bg-card;
   border: 1px lightgray solid;
   margin-bottom: 1rem;
 }
@@ -280,7 +181,7 @@ th {
 .table-of-contents {
   border: 2px solid lightgray;
   background-color: white;
-  background-image: url("/media/main/images/clean_textile.webp");
+  background-image: v.$bg-card;
   padding: 0.8em;
   border-radius: 10px;
   width: max-content;
@@ -352,53 +253,13 @@ th {
   justify-content: space-around;
 }
 
-// Settings, Create, Login, Register pages
-// Tempting to throw this out.
-
-.form-group {
-  margin: 1rem;
-}
-
-// list behavior
-
-.two-column {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-column-gap: 1rem;
-
-  >li {
-    break-inside: avoid-column;
-  }
-}
-
-.breadcrumb {
-    margin-bottom: 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    padding-left: 0; // needed because of reboot
-
-  >li {
-    list-style: none;
-    display: inline;
-  }
-  .active {
-    color: rgba(33, 37, 41, .75);
-  }
-
-  >li+li:before {
-    padding: 8px;
-    color: rgba(33, 37, 41, .75);
-    content: "/\00a0";
-  }
-}
-
 // https://css-loaders.com/spinner/
 .loader {
   width: 50px;
   padding: 8px;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: $secondary;
+  background: v.$primary;
   --_m:
     conic-gradient(#0000 10%,#000),
     linear-gradient(#000 0 0) content-box;
@@ -410,18 +271,28 @@ th {
 }
 @keyframes l3 {to{transform: rotate(1turn)}}
 
-/* Badges */
-
-.badge {
-  display: inline-block;
-  padding: .35em .65em;
-  font-weight: 700;
+.btn {
   color: white;
-  line-height: 1;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: baseline;
+  padding: .375rem .75rem;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  font-weight: 400;
   border-radius: .375rem;
-  font-size: .75em;
-  text-decoration: none !important;
+  border: none;
+}
+
+.btn:hover {
+  filter: brightness(115%)
+}
+
+.btn-primary {
+  background-color: v.$primary;
+}
+
+.btn-secondary {
+  background-color: v.$secondary;
+}
+
+.btn-danger {
+  background-color: v.$danger;
 }

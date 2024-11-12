@@ -50,30 +50,26 @@
     name="Memoria"
     [(hide)]="hide"
     [template]="template">
-    <form [formGroup]="pageForm" class="form-horizontal">
-      <div class="row">
-        <mat-form-field class="col-md-8" appearance="outline">
-          <mat-label>Filter...</mat-label>
-          <input style="height: 100%;" matInput formControlName="filtertext">
-          <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
-        </mat-form-field>
-        <mat-form-field class="col-md-4" appearance="outline">
-          <mat-label>Sort by...</mat-label>
-          <mat-select matNativeControl formControlName="stats">
-            @for (stat of a25service.stats | keyvalue; track stat) {
-              <mat-option [value]="stat.key">
-                {{stat.value[language]}}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
+    <form [formGroup]="pageForm" class="grid">
+      <mat-form-field class="grid-8" appearance="outline">
+        <mat-label>Filter...</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtertext">
+        <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="grid-4" appearance="outline">
+        <mat-label>Sort by...</mat-label>
+        <mat-select matNativeControl formControlName="stats">
+          @for (stat of a25service.stats | keyvalue; track stat) {
+            <mat-option [value]="stat.key">
+              {{stat.value[language]}}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
       @if (language != 'ja') {
-        <div class="row">
-          <mat-checkbox formControlName="show_jp" style="padding-bottom:1rem;">
-            Show Japanese Memoria (untranslated)
-          </mat-checkbox>
-        </div>
+        <mat-checkbox formControlName="show_jp" class="grid-4" style="padding-bottom:1rem;">
+          Show Japanese Memoria (untranslated)
+        </mat-checkbox>
       }
     </form>
   </filter-list>

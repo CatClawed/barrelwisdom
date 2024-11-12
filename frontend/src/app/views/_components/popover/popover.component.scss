@@ -4,7 +4,7 @@
     border: solid 1px #ccc;
     background-image: url(/media/main/images/clean_textile.webp);
     margin-right: 1rem;
-    max-height: 80vh;
+    max-height: 80dvh;
     min-width: 300px;
     overflow: auto;
     box-shadow: 1px 2px 4px 1px gray;
@@ -28,5 +28,7 @@
 }
 
 .dotted-link {
-    text-decoration: underline dotted 1px;
+    text-decoration-style: dotted;
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
 }

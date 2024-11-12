@@ -1,0 +1,230 @@
+<h1>Settings</h1>
+
+<mat-tab-group>
+  <mat-tab label="Profile">
+    <form [formGroup]="profileForm" (ngSubmit)="submitProfile()" class="settings">
+      <div class="settings-row">
+        <label for="textarea-input">Bio</label>
+        <div class="settings-form">
+          <textarea id="textarea-input" name="textarea-input" rows="3" formControlName="bio"
+            [ngClass]="{ 'is-invalid': submitted && profilef.bio.errors }"
+          placeholder="Tell us about you pls."></textarea>
+          @if (submitted && profilef.bio.errors) {
+            <div class="text-danger">
+              @if (profilef.bio.errors.maxlength) {
+                <div>Too long. 500 chars max.</div>
+              }
+            </div>
+          }
+        </div>
+      </div>
+      <div class="settings-row">
+        <label for="text-input">Website</label>
+        <div class="settings-form">
+          <input type="text" formControlName="website"
+            [ngClass]="{ 'is-invalid': submitted && profilef.website.errors }"
+            placeholder="Shows if sole author or on user page.">
+          @if (submitted && profilef.website.errors) {
+            <div class="text-danger">
+              @if (profilef.website.errors.pattern) {
+                <div>Doesn't look like a URL.</div>
+              }
+              @if (profilef.website.errors.maxlength) {
+                <div>Too long. 200 chars max.</div>
+              }
+            </div>
+          }
+        </div>
+      </div>
+      <div class="settings-row">
+        <label for="text-input">Avatar URL</label>
+        <div class="settings-form">
+          <input type="text" formControlName="avatar"
+            [ngClass]="{ 'is-invalid': submitted && profilef.avatar.errors }"
+            placeholder="Admin can help. Shows if sole author.">
+          @if (submitted && profilef.avatar.errors) {
+            <div class="text-danger">
+              @if (profilef.avatar.errors.pattern) {
+                Image URL must be PNG/JPG using the format
+                /media/*.
+              }
+              @if (profilef.avatar.errors.maxlength) {
+                Too long. 200 chars max.
+              }
+            </div>
+          }
+        </div>
+      </div>
+      <button [disabled]="loading" class="btn btn-primary">
+        @if (loading) {
+          Attempting
+        }
+        Save
+      </button>
+      @if (errorMsg) {
+        <div class="text-danger">{{errorMsg}}</div>
+      }
+      @if (successProfile) {
+        <div class="text-success">Success!</div>
+      }
+    </form>
+  </mat-tab>
+  <mat-tab label="Change Password">
+    <form [formGroup]="passwordForm" (ngSubmit)="submitPassword()" class="settings">
+      <div class="settings-row">
+        <label for="text-input">New Password</label>
+        <div class="settings-form">
+          <input type="password" formControlName="newPass" placeholder="New Password"
+            [ngClass]="{ 'is-invalid': submittedPass && passwordf.newPass.errors }" />
+          @if (submittedPass && passwordf.newPass.errors) {
+            <div class="text-danger">
+              @if (passwordf.newPass.errors.minlength) {
+                <div>At least 8 characters</div>
+              }
+            </div>
+          }
+        </div>
+      </div>
+      <div class="settings-row">
+        <label for="text-input">Repeat Password</label>
+        <div class="settings-form">
+          <input type="password" formControlName="repeatPass" placeholder="Repeat Password"
+            [ngClass]="{ 'is-invalid': submittedPass && passwordf.repeatPass.errors }" />
+          @if (submittedPass && passwordf.repeatPass.errors) {
+            <div class="text-danger">
+              heck
+            </div>
+          }
+        </div>
+      </div>
+      <div class="settings-row">
+        <label for="text-input">Current Password</label>
+        <div class="settings-form">
+          <input type="password" formControlName="currentPass" placeholder="Current Password"
+            [ngClass]="{ 'is-invalid': submittedPass && passwordf.currentPass.errors }" />
+          @if (submittedPass && passwordf.currentPass.errors) {
+            <div class="text-danger">
+              heck 2
+            </div>
+          }
+        </div>
+      </div>
+      <button [disabled]="loading" class="btn btn-primary">
+        @if (loading) {
+          Attempting
+        }
+        Save
+      </button>
+      @if (errorPass) {
+        <div class="text-danger">{{errorPass}}</div>
+      }
+      @if (successPassword) {
+        <div class="text-success">Success!</div>
+      }
+    </form>
+  </mat-tab>
+  @if (user.group == 'admin') {
+    <mat-tab label="Create Invite">
+      <button (click)="createInvite()" [disabled]="loading" class="btn btn-primary">
+        @if (loading) {
+          Attempting
+        }
+        Create
+      </button>
+      @if (errorInvite) {
+        <div class="text-danger">{{errorInvite}}</div>
+      }
+      @if (invite) {
+        <div class="text-success">{{invite}}</div>
+      }
+    </mat-tab>
+  }
+  @if (user.group == 'admin') {
+    <mat-tab label="Create Section">
+      <form [formGroup]="sectionForm" (ngSubmit)="createSection()" class="settings">
+        <div class="settings-row">
+          <label for="text-input">URL Name</label>
+          <div class="settings-form">
+            <input type="text" formControlName="name"
+              [ngClass]="{ 'is-invalid': submittedSection && sectionf.name.errors }" />
+            @if (submittedSection && sectionf.name.errors) {
+              <div class="text-danger">
+              </div>
+            }
+          </div>
+        </div>
+        <div class="settings-row">
+          <label for="text-input">Game Name</label>
+          <div class="settings-form">
+            <input type="text" formControlName="fullname"
+              [ngClass]="{ 'is-invalid': submittedSection && sectionf.fullname.errors }" />
+            @if (submittedSection && sectionf.fullname.errors) {
+              <div class="text-danger">
+              </div>
+            }
+          </div>
+        </div>
+        <button [disabled]="loading" class="btn btn-primary">
+          @if (loading) {
+            <span class="loader"></span>
+          }
+          Save
+        </button>
+        @if (errorSection) {
+          <div class="text-danger">{{errorSection}}</div>
+        }
+        @if (successSection) {
+          <div class="text-success">Success!</div>
+        }
+      </form>
+    </mat-tab>
+  }
+  @if (user.group == 'admin') {
+    <mat-tab label="Nav">
+      <form [formGroup]="navigationForm" (ngSubmit)="submitNav()" class="settings">
+        <mat-form-field appearance="outline">
+          <mat-label>Section</mat-label>
+          <mat-select matNativeControl formControlName="nav">
+            @for (section of sections; track section) {
+              <mat-option value="section.name" (click)="loadNav(section.name)">{{section.name}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <div class="settings-row">
+          <label for="text-input">Section</label>
+          <div class="settings-form">
+            <input type="text" formControlName="section"
+              [ngClass]="{ 'is-invalid': submittedNavigation && navigationf.section.errors }" />
+            @if (submittedNavigation && navigationf.section.errors) {
+              <div class="text-danger">
+              </div>
+            }
+          </div>
+        </div>
+        <div class="settings-row">
+          <label for="text-input">Data</label>
+          <div class="settings-form">
+            <textarea rows="10" formControlName="data"
+            [ngClass]="{ 'is-invalid': submittedNavigation && navigationf.data.errors }"></textarea>
+            @if (submittedNavigation && navigationf.data.errors) {
+              <div class="text-danger">
+              </div>
+            }
+          </div>
+        </div>
+        <button [disabled]="loading" class="btn btn-primary">
+          @if (loading) {
+            <span class="loader"></span>
+          }
+          Save
+        </button>
+        @if (errorNavigation) {
+          <div class="text-danger">{{errorNavigation}}</div>
+        }
+        @if (successNavigation) {
+          <div class="text-success">Success!</div>
+        }
+      </form>
+    </mat-tab>
+  }
+</mat-tab-group>

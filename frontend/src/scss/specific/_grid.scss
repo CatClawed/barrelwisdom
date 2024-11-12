@@ -1,0 +1,62 @@
+// list behavior
+
+.two-column {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-column-gap: 1rem;
+
+    >li {
+      break-inside: avoid-column;
+    }
+  }
+
+  .grid {
+    display: grid;
+    grid-column-gap: 1rem;
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  @mixin grid-x {
+    @for $i from 1 through 12 {
+    .grid-#{$i} { grid-column: span $i; }
+    }
+  }
+
+  @mixin grid-x-sm {
+    @for $i from 1 through 12 {
+    .grid-#{$i} { grid-column: 1; }
+    }
+  }
+
+  @include grid-x;
+
+
+
+  @media screen and (max-width: 800px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+
+    @include grid-x-sm;
+  }
+
+  // For lists of things
+.item-grid {
+    display: grid;
+    column-gap: 2%;
+    row-gap: 1rem;
+    grid-auto-rows: max-content;
+    //margin-bottom: 1rem;
+  }
+
+  @media screen and (min-width: 800px) {
+    .item-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    .item-grid {
+      grid-template-columns: auto;
+    }
+  }

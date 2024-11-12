@@ -1,7 +1,9 @@
+@use 'variables' as v;
+
 .customTooltip {
     background: none;
     border: none;
-    color: rgba(var(--bs-link-color-rgb),var(--bs-link-opacity, 1));
+    color: v.$secondary;
     border-bottom: 2px dotted;
     padding: 0;
 }

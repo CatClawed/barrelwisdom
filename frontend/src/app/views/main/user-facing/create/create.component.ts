@@ -7,7 +7,7 @@ import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { SafeHtml } from '@angular/platform-browser';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from "@app/services/authentication.service";
 import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
@@ -17,7 +17,7 @@ import { User } from "@app/views/main/_interfaces/user";
 import { ErrorCodeService } from "@app/views/main/_services/errorcode.service";
 import { UserService } from '@app/views/main/_services/user.service';
 import { environment } from '@environments/environment';
-import { MarkdownComponent, MarkdownPipe, MarkdownService, provideMarkdown } from 'ngx-markdown';
+import { MarkdownComponent, MarkdownService, provideMarkdown } from 'ngx-markdown';
 import { Observable, of } from 'rxjs';
 import { catchError, first, map, mergeMap, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import slugify from 'slugify';
@@ -26,8 +26,9 @@ import slugify from 'slugify';
   templateUrl: 'create.component.html',
   providers: [DestroyService, provideMarkdown({sanitize: SecurityContext.NONE})],
   standalone: true,
+  styleUrl: '../user-facing.scss',
   imports: [MatFormFieldModule, MatInputModule,
-    ReactiveFormsModule, RouterLink, MarkdownComponent, MarkdownPipe,
+    ReactiveFormsModule, MarkdownComponent,
     CommonModule, MatChipsModule, MatAutocompleteModule]
 })
 

@@ -1,0 +1,20 @@
+.breadcrumb {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0; // needed because of reboot
+
+  >li {
+    list-style: none;
+    display: inline;
+  }
+  .active {
+    color: rgba(33, 37, 41, .75);
+  }
+
+  >li+li:before {
+    padding: 8px;
+    color: rgba(33, 37, 41, .75);
+    content: "/\00a0";
+  }
+}

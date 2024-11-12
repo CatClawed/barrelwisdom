@@ -10,32 +10,30 @@
     [(hide)]="hide"
     name="Traits"
     [template]="template">
-    <form [formGroup]="pageForm" class="form-horizontal">
-      <div class="row">
-        <mat-form-field class="col-md-8" appearance="outline">
-          <mat-label>Filter...</mat-label>
-          <input style="height: 100%;" matInput formControlName="filtertext">
-          <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
-        </mat-form-field>
-        <mat-form-field class="col-md-4" appearance="outline">
-          <mat-label>Transfers to...</mat-label>
-          <mat-select matNativeControl formControlName="transfers" disableOptionCentering="true" class="mat-select-icon">
-            <mat-option value="any" selected>
-              Any
-            </mat-option>
-            @if (data) {
-              @for (trans of data.transfer; track trans) {
-                <mat-option [value]="trans.slug">
-                  {{trans.name}}
-                </mat-option>
-              }
-              <mat-option value="equipment" selected>
-                {{a25service.equipment[language]}}
+    <form [formGroup]="pageForm" class="grid">
+      <mat-form-field class="grid-8" appearance="outline">
+        <mat-label>Filter...</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtertext">
+        <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="grid-4" appearance="outline">
+        <mat-label>Transfers to...</mat-label>
+        <mat-select matNativeControl formControlName="transfers" disableOptionCentering="true" class="mat-select-icon">
+          <mat-option value="any" selected>
+            Any
+          </mat-option>
+          @if (data) {
+            @for (trans of data.transfer; track trans) {
+              <mat-option [value]="trans.slug">
+                {{trans.name}}
               </mat-option>
             }
-          </mat-select>
-        </mat-form-field>
-      </div>
+            <mat-option value="equipment" selected>
+              {{a25service.equipment[language]}}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
     </form>
   </filter-list>
 }

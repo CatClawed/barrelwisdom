@@ -1,0 +1,24 @@
+$atelier-font-path: "/media/main/font/atelier" !default;
+$atelier-background-color: #eee !default;
+$atelier-li-margin-right: 0.4em !default;
+
+$sidebar: #14293b;
+$navbar: #5e4c3f;
+$primary: $navbar;
+$secondary: #20a8d8;
+$success: #4dbd74;
+$danger: darkred;
+/* Background pattern from Toptal Subtle Patterns */
+$bg-main: url("/media/main/images/ricepaper2.webp");
+$bg-card: url("/media/main/images/clean_textile.webp");
+$headings-font-family: Merriweather, serif;
+$font-family-sans-serif: Lato,
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  "Roboto",
+  "Helvetica Neue", Arial, sans-serif,
+  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+
+$breakpoint-md: 800px;
+$breakpoint-lg: 1280px;

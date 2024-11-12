@@ -9,33 +9,31 @@
       <ng-container icon>
         <i class="atelier atelier-{{mon.kind}}"></i>
         @if (mon.isDX) {
-          <br /><span class="badge bg-secondary">DX</span>
+          <br /><span class="badge bg-primary">DX</span>
         }
       </ng-container>
     </item>
   </ng-template>
   <filter-list [list]="filteredMonsters" name="Monsters" [(hide)]="hide" [template]="template">
-    <form [formGroup]="pageForm" class="form-horizontal">
-      <div class="row">
-        <mat-form-field class="col-md-8" appearance="outline">
-          <mat-label>Filter...</mat-label>
-          <input style="height: 100%;" matInput formControlName="filtertext">
+    <form [formGroup]="pageForm" class="grid">
+      <mat-form-field class="grid-8" appearance="outline">
+        <mat-label>Filter...</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtertext">
+      </mat-form-field>
+      @if (data) {
+        <mat-form-field class="grid-4" appearance="outline">
+          <mat-label>Type</mat-label>
+          <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
+            <mat-option value="Any" selected><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"   ></mat-icon> Any</mat-option>
+            @for (race of data.races; track race) {
+              <mat-option value="{{race.name}}">
+                <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-{{race.icon}}"></mat-icon>
+                {{race.name}}
+              </mat-option>
+            }
+          </mat-select>
         </mat-form-field>
-        @if (data) {
-          <mat-form-field class="col-md-4" appearance="outline">
-            <mat-label>Type</mat-label>
-            <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
-              <mat-option value="Any" selected><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"   ></mat-icon> Any</mat-option>
-              @for (race of data.races; track race) {
-                <mat-option value="{{race.name}}">
-                  <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-{{race.icon}}"></mat-icon>
-                  {{race.name}}
-                </mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
-        }
-      </div>
+      }
     </form>
   </filter-list>
 }

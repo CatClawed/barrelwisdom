@@ -123,41 +123,37 @@
     [template]="template">
     <p>Dates give one of two possible fragments. The first listed will always be from two top choices; the second will always be two bottom choices. A handful of fragments come from DLC and a choice you make later in the game.</p>
     <p><b>Note:</b> There may be inaccuracies for anything labelled as DLC.</p>
-    <form [formGroup]="pageForm" class="form-horizontal">
-      <div class="row">
-        <mat-form-field class="col-md-12" appearance="outline">
-          <mat-label>Filter any fragment data...</mat-label>
-          <input matInput formControlName="filtertext">
-        </mat-form-field>
-      </div>
-      <div class="row">
-        <mat-form-field class="col-md-4" appearance="outline">
-          <mat-label>Character</mat-label>
-          <mat-select matNativeControl formControlName="character" disableOptionCentering="true">
-            <mat-option value="Any" selected>Any</mat-option>
-            @if (data) {
-              @for (char of data.character; track char) {
-                <mat-option value="{{char.name}}">
-                  {{char.name}}
-                </mat-option>
-              }
+    <form [formGroup]="pageForm" class="grid">
+      <mat-form-field class="grid-12" appearance="outline">
+        <mat-label>Filter any fragment data...</mat-label>
+        <input matInput formControlName="filtertext">
+      </mat-form-field>
+      <mat-form-field class="grid-4" appearance="outline">
+        <mat-label>Character</mat-label>
+        <mat-select matNativeControl formControlName="character" disableOptionCentering="true">
+          <mat-option value="Any" selected>Any</mat-option>
+          @if (data) {
+            @for (char of data.character; track char) {
+              <mat-option value="{{char.name}}">
+                {{char.name}}
+              </mat-option>
             }
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field class="col-md-4" appearance="outline">
-          <mat-label>Location</mat-label>
-          <mat-select matNativeControl formControlName="location" disableOptionCentering="true">
-            <mat-option value="Any" selected>Any</mat-option>
-            @if (data) {
-              @for (loc of data.location; track loc) {
-                <mat-option value="{{loc.loc}}">
-                  {{loc.loc}}
-                </mat-option>
-              }
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="grid-4" appearance="outline">
+        <mat-label>Location</mat-label>
+        <mat-select matNativeControl formControlName="location" disableOptionCentering="true">
+          <mat-option value="Any" selected>Any</mat-option>
+          @if (data) {
+            @for (loc of data.location; track loc) {
+              <mat-option value="{{loc.loc}}">
+                {{loc.loc}}
+              </mat-option>
             }
-          </mat-select>
-        </mat-form-field>
-      </div>
+          }
+        </mat-select>
+      </mat-form-field>
     </form>
   </filter-list>
 }

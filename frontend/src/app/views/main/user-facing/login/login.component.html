@@ -1,0 +1,48 @@
+  <div class="card card-small" style="margin:auto;">
+    <h2>Sign In</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="spacer">
+        <div class="login-form">
+          <i class="fas fa-user" style="margin: auto; padding: 0.5em;"></i>
+          <input
+            type="text" formControlName="username"
+            placeholder="Username"
+            autocomplete="username"
+            [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+        </div>
+        @if (submitted && f.username.errors) {
+          <div class="text-danger">
+            @if (f.username.errors.required) {
+              Username is required
+            }
+          </div>
+        }
+      </div>
+      <div class="spacer">
+        <div class="login-form">
+          <i class="fas fa-lock" style="margin: auto; padding: 0.5em;"></i>
+          <input
+            type="password" formControlName="password"
+            placeholder="Password"
+            autocomplete="current-password"
+            [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+        </div>
+        @if (submitted && f.password.errors) {
+          <div class="text-danger">
+            @if (f.password.errors.required) {
+              Password is required
+            }
+          </div>
+        }
+      </div>
+        <button [disabled]="loading" class="btn btn-primary">
+          @if (loading) {
+            Attempting
+          }
+          Login
+        </button>
+        @if (errorMsg) {
+          <div class="text-danger">{{errorMsg}}</div>
+        }
+    </form>
+  </div>

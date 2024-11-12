@@ -31,47 +31,43 @@
     name="Synthesis Items"
     [(hide)]="hide"
     [template]="template">
-    <form [formGroup]="pageForm" class="form-horizontal">
-      <div class="row">
-        <mat-form-field class="col-md-8" appearance="outline">
-          <mat-label>Filter...</mat-label>
-          <input style="height: 100%;" matInput formControlName="filtertext">
-        </mat-form-field>
-        <mat-form-field class="col-md-4" appearance="outline">
-          <mat-label>Type</mat-label>
-          <mat-select matNativeControl formControlName="kind">
-            <mat-option value="Any">Any</mat-option>
-            @if (data) {
-              @for (type of data.combat_type; track type) {
-                <mat-option value="{{type.slug}}">
-                  {{type.name}}
-                </mat-option>
-              }
-              @for (type of data.equipment_type; track type) {
-                <mat-option value="{{type.slug}}">
-                  {{type.name}}
-                </mat-option>
-              }
+    <form [formGroup]="pageForm" class="grid">
+      <mat-form-field class="grid-8" appearance="outline">
+        <mat-label>Filter...</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtertext">
+      </mat-form-field>
+      <mat-form-field class="grid-4" appearance="outline">
+        <mat-label>Type</mat-label>
+        <mat-select matNativeControl formControlName="kind">
+          <mat-option value="Any">Any</mat-option>
+          @if (data) {
+            @for (type of data.combat_type; track type) {
+              <mat-option value="{{type.slug}}">
+                {{type.name}}
+              </mat-option>
             }
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="row">
-        <mat-form-field class="col-md-5" appearance="outline">
-          <mat-label>Has ingredient...</mat-label>
-          <input style="height: 100%;" matInput formControlName="filtering">
-        </mat-form-field>
-        <mat-form-field class="col-md-3" appearance="outline">
-          <mat-label>Rarity</mat-label>
-          <mat-select matNativeControl formControlName="rarity" disableOptionCentering="true" class="mat-select-icon">
-            <mat-option value="0">Any</mat-option>
-            <mat-option value="4">UR</mat-option>
-            <mat-option value="3">SSR</mat-option>
-            <mat-option value="2">SR</mat-option>
-            <mat-option value="1">R</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+            @for (type of data.equipment_type; track type) {
+              <mat-option value="{{type.slug}}">
+                {{type.name}}
+              </mat-option>
+            }
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="grid-5" appearance="outline">
+        <mat-label>Has ingredient...</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtering">
+      </mat-form-field>
+      <mat-form-field class="grid-3" appearance="outline">
+        <mat-label>Rarity</mat-label>
+        <mat-select matNativeControl formControlName="rarity" disableOptionCentering="true" class="mat-select-icon">
+          <mat-option value="0">Any</mat-option>
+          <mat-option value="4">UR</mat-option>
+          <mat-option value="3">SSR</mat-option>
+          <mat-option value="2">SR</mat-option>
+          <mat-option value="1">R</mat-option>
+        </mat-select>
+      </mat-form-field>
     </form>
   </filter-list>
 }
