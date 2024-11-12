@@ -17,10 +17,12 @@
   align-items: center;
   width: 155px;
   height: 55px;
-  padding: 0;
-  margin-right: 0;
   justify-content: center;
   margin-right: 1rem;
+
+  >picture {
+    display: inline-flex;
+  }
 }
 
 .nav-items {
@@ -41,7 +43,6 @@
 
 .nav-lang {
   display: inline;
-  //margin-right: 0.5rem;
   width: 150px;
 }
 
@@ -127,6 +128,7 @@
 .sidenav {
   background-color: v.$sidebar !important;
   width: 200px !important;
+  font-size: 1rem;
 }
 
 .sidenav-items {
@@ -136,22 +138,24 @@
 }
 
 .sidenav-item {
-  padding: 0.6rem;
+  padding: 0.6rem 0 0.6rem 0.3rem;
+  margin-right: 0.2rem;
+  margin-left: auto;
   color: white;
   border-radius: 0.25rem;
-  width: 95%;
+  width: 80%;
   display: flex;
   align-items: center;
-  font-size: 16px;
+  position: relative;
 
   >i {
-    margin-right: 0.5rem;
-    width: 1.3rem;
-    text-align: center;
+    position: absolute;
+    left: -24px;
   }
 
   >b {
     margin-left: auto;
+    margin-right: 0.1rem;
   }
 }
 
@@ -163,10 +167,6 @@
 
 .sidenav-item.active {
   background-color: #3c4e5e;
-}
-
-.sidenav-child {
-  padding-left: 2.4rem;
 }
 
 .sidenav-bottom {

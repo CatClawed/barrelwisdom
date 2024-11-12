@@ -1,0 +1,68 @@
+@use 'variables' as v;
+
+.tbl {
+    background-color: white;
+    background-image: v.$bg-card;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .tbl td,
+  .tbl th {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #c8ced3;
+  }
+
+  @media screen and (max-width: 576px) {
+    .table-shrink {
+      font-size: 2.5vw;
+    }
+  }
+
+  .border td,
+  th {
+    border: 1px solid lightgray;
+  }
+
+  .table-item-data {
+    display: block;
+    width: fit-content;
+
+    >tr {
+      vertical-align: top;
+    }
+
+    >tr,
+    span {
+      vertical-align: top;
+      padding-left: 0.5rem;
+    }
+  }
+
+  .table-dark-center {
+    >th {
+      text-align: center;
+      background-color: rgba(211, 211, 211, 0.3);
+    }
+  }
+
+  .table-compress {
+    background-color: white;
+    background-image: v.$bg-card;
+    border: 1px lightgray solid;
+    margin-bottom: 1rem;
+  }
+
+  .table-compress th {
+    border: 1px lightgray solid;
+    padding: 0.5rem;
+    text-align: center;
+    background-color: rgba(211, 211, 211, 0.3);
+    height: 2rem;
+  }
+
+  .table-compress td {
+    border: 1px lightgray solid;
+    padding: 0.3rem;
+  }

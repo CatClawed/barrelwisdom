@@ -1,0 +1,95 @@
+@use 'variables' as v;
+@use 'sass:math';
+
+a:active,
+a:focus {
+    outline: 0;
+    border: none;
+    -moz-outline-style: none;
+    outline-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: v.$secondary;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+body {
+    background: v.$bg-main;
+    background-color: #faf6f5;
+    font-family: v.$font-family-sans-serif;
+    font-size: 1.1rem;
+    margin: 0;
+    line-height: 1.5;
+}
+
+img {
+    max-width: 100%;
+}
+
+h1 {
+    padding-top: 0;
+    border-bottom: 1px dotted black;
+}
+
+h2 {
+    padding-top: 0.5em;
+    border-bottom: 1px dotted black;
+}
+
+h3 {
+    padding-top: 0.5em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 500;
+    font-family: v.$headings-font-family;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+@mixin headers {
+    @for $i from 0 through 5 {
+        h#{$i+1} {
+            font-size: #{math.max(2.5-$i*0.4, 1)}rem;
+        }
+    }
+}
+
+@mixin headers-sm {
+    @for $i from 0 through 5 {
+        h#{$i+1} {
+            font-size: #{math.max(1.7-$i*0.15, 1)}rem;
+        }
+    }
+}
+
+@include headers;
+
+@media screen and (max-width: v.$breakpoint-md) {
+    @include headers-sm;
+}
+
+ol,
+ul {
+    margin-top: 0;
+    padding-left: 2rem;
+}
+
+table {
+    border-spacing: 0;
+}

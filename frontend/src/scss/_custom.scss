@@ -1,24 +1,6 @@
 @use 'variables' as v;
-@use 'sass:math';
 
 // generic stuff
-
-a:active,
-a:focus {
-  outline: 0;
-  border: none;
-  -moz-outline-style: none;
-  outline-style: none;
-}
-
-a {
-  text-decoration: none;
-  color: v.$secondary;
-}
-
-a:hover {
-  text-decoration: underline;
-}
 
 .main {
   padding-left: 1em;
@@ -30,65 +12,6 @@ a:hover {
   .main {
     margin: 65px 0 1rem 0;
   }
-}
-
-body {
-  background: v.$bg-main;
-  background-color: #faf6f5;
-  font-family: v.$font-family-sans-serif;
-  font-size: 1.1rem;
-  margin: 0;
-}
-
-h1 {
-  padding-top: 0;
-  border-bottom: 1px dotted black;
-}
-
-h2 {
-  padding-top: 0.5em;
-  border-bottom: 1px dotted black;
-}
-
-h3 {
-  padding-top: 0.5em;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 500;
-  font-family: v.$headings-font-family;
-  margin: 0;
-}
-
-@mixin headers {
-  @for $i from 0 through 5 {
-  h#{$i+1} {
-    font-size: #{math.max(2.5-$i*0.4, 1)}rem;
-   }
-  }
-}
-
-@mixin headers-sm {
-  @for $i from 0 through 5 {
-  h#{$i+1} {
-    font-size: #{math.max(1.7-$i*0.15, 1)}rem;
-   }
-  }
-}
-
-@include headers;
-
-@media screen and (max-width: v.$breakpoint-md) {
-  @include headers-sm;
-}
-
-img {
-  max-width: 100%;
 }
 
 .spacer {
@@ -103,73 +26,6 @@ img {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-}
-
-.tbl {
-  background-color: white;
-  background-image: v.$bg-card;
-  width: 100%;
-  margin-bottom: 1rem;
-}
-
-.tbl td,
-.tbl th {
-  padding: 0.75rem;
-  vertical-align: top;
-  border-top: 1px solid #c8ced3;
-}
-
-@media screen and (max-width: 576px) {
-  .table-shrink {
-    font-size: 2.5vw;
-  }
-}
-
-.border td,
-th {
-  border: 1px solid lightgray;
-}
-
-.table-item-data {
-  display: block;
-  width: fit-content;
-
-  >tr {
-    vertical-align: top;
-  }
-
-  >tr,
-  span {
-    vertical-align: top;
-    padding-left: 0.5rem;
-  }
-}
-
-.table-dark-center {
-  >th {
-    text-align: center;
-    background-color: rgba(211, 211, 211, 0.3);
-  }
-}
-
-.table-compress {
-  background-color: white;
-  background-image: v.$bg-card;
-  border: 1px lightgray solid;
-  margin-bottom: 1rem;
-}
-
-.table-compress th {
-  border: 1px lightgray solid;
-  padding: 0.5rem;
-  text-align: center;
-  background-color: rgba(211, 211, 211, 0.3);
-  height: 2rem;
-}
-
-.table-compress td {
-  border: 1px lightgray solid;
-  padding: 0.3rem;
 }
 
 .hide-bullets {
