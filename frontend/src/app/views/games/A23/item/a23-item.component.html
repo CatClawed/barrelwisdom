@@ -144,7 +144,7 @@
     }
     @if (item.ingredient) {
       <table class="tbl"><tbody>
-        <tr class="table-dark-center"><th>Ingredients</th></tr>
+        <tr><th>Ingredients</th></tr>
         <tr>
           <td>
             <ul>
@@ -172,7 +172,7 @@
     }
     @if (item.effects && item.ingredient) {
       <table class="tbl"><tbody>
-        <tr class="table-dark-center"><th colspan=2>Effects</th></tr>
+        <tr><th colspan=2>Effects</th></tr>
         @for (eff of item.effects; track eff) {
           <tr>
             <td style="vertical-align:middle;">
@@ -227,7 +227,7 @@
     }
     @if (item.components) {
       <table class="tbl"><tbody>
-        <tr class="table-dark-center"><th>Components</th></tr>
+        <tr><th>Components</th></tr>
         <tr>
           <td>
             <div style="display:grid; grid-template-columns: auto auto auto auto;grid-gap:1em;">
@@ -253,7 +253,7 @@
     }
     @if (item.equip) {
       <table class="tbl"><tbody>
-        <tr class="table-dark-center"><th colspan=2>Stats</th></tr>
+        <tr><th colspan=2>Stats</th></tr>
         <tr><td style="padding-top:0.2rem;text-align:right;width:50%;"><b>HP </b></td> <td style="padding-top:0.2rem;padding-left:0.5em;">{{item.equip.hp}}</td></tr>
         <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>MP </b></td> <td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip.mp}}</td></tr>
         <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>ATK </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip.atk}}</td></tr>
@@ -263,7 +263,7 @@
     }
     @if (item.chars) {
       <table class="tbl"><tbody>
-        <tr class="table-dark-center"><th>Characters</th></tr>
+        <tr><th>Characters</th></tr>
         <tr>
           <td>
             @for (char of item.chars; track char) {

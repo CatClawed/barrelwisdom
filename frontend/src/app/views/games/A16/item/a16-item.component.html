@@ -92,7 +92,7 @@
     }
     @if (item.ingredient_set) {
       <table class="tbl"><tbody>
-        <tr  class="table-dark-center"><th>Ingredients</th></tr>
+        <tr ><th>Ingredients</th></tr>
         <tr><td>
           <ul>
             @for (ing of item.ingredient_set; track ing) {
@@ -108,7 +108,7 @@
     }
     @if (item.effectlines_set) {
       <table class="tbl"><tbody>
-        <tr  class="table-dark-center"><th colspan=2>Effects</th></tr>
+        <tr ><th colspan=2>Effects</th></tr>
         @for (effline of item.effectlines_set; track effline) {
           <tr>
             <td style="vertical-align:middle">
@@ -162,7 +162,7 @@
     }
     @if (item.equip_set) {
       <table class="tbl"><tbody>
-        <tr class="table-dark-center"><th colspan=2>Stats</th></tr>
+        <tr><th colspan=2>Stats</th></tr>
         <tr><td style="padding-top:0.2rem;text-align:right;width:50%;"><b>HP </b></td> <td style="padding-top:0.2rem;padding-left:0.5em;">{{item.equip_set[0].hp}}   </td></tr>
         <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>MP </b></td> <td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].mp}}   </td></tr>
         <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>ATK </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip_set[0].atk}}  </td></tr>
@@ -172,7 +172,7 @@
     }
     @if (item.characterequip_set) {
       <table class="tbl"><tbody>
-        <tr class="table-dark-center"><th>Characters</th></tr>
+        <tr><th>Characters</th></tr>
         <tr><td>@for (char of item.characterequip_set[0].chars; track char) {
           <img src="{{imgURL}}equip/equip-{{char.name}}.webp"
             alt="Can equip: {{char.name}}" style="aspect-ratio: 111/44; width: 111px;">

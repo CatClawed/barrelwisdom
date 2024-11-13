@@ -5,7 +5,7 @@
 .main {
   padding-left: 1em;
   padding-right: 1em;
-  margin: 65px 22%  1rem calc(22% - 200px) ; // 55 px for the navbar and an extra 10 as a spacer
+  margin: 65px 22% 1rem calc(22% - 200px); // 55 px for the navbar and an extra 10 as a spacer
 }
 
 @media screen and (max-width: v.$breakpoint-lg) {
@@ -62,18 +62,6 @@
   margin: 0 auto 0 auto;
 }
 
-// Not used by everything, wtf is this for
-.image-display {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 100%;
-  display: block;
-}
-
-.image-display img {
-  max-width: 100%;
-}
-
 // Trait specific
 .trait-color {
   color: lightgray;
@@ -117,16 +105,22 @@
   border-radius: 50%;
   background: v.$primary;
   --_m:
-    conic-gradient(#0000 10%,#000),
+    conic-gradient(#0000 10%, #000),
     linear-gradient(#000 0 0) content-box;
   -webkit-mask: var(--_m);
-          mask: var(--_m);
+  mask: var(--_m);
   -webkit-mask-composite: source-out;
-          mask-composite: subtract;
+  mask-composite: subtract;
   animation: l3 1s infinite linear;
 }
-@keyframes l3 {to{transform: rotate(1turn)}}
 
+@keyframes l3 {
+  to {
+    transform: rotate(1turn)
+  }
+}
+
+// often used for fake buttons
 .btn {
   color: white;
   padding: .375rem .75rem;
@@ -138,17 +132,42 @@
 }
 
 .btn:hover {
-  filter: brightness(115%)
+  filter: brightness(115%);
 }
 
-.btn-primary {
+@each $w in 25 33 40 50 66 75 {
+  .w-#{$w} {
+    width: #{$w + '%'};
+  }
+}
+
+@media screen and (max-width: v.$breakpoint-md) {
+
+  @each $w in 25 33 {
+    .w-#{$w} {
+      width: 50%;
+    }
+  }
+
+  @each $w in 40 50 66 75 {
+    .w-#{$w} {
+      width: 100%;
+    }
+  }
+}
+
+.bg-primary {
   background-color: v.$primary;
 }
 
-.btn-secondary {
+.bg-secondary {
   background-color: v.$secondary;
 }
 
-.btn-danger {
+.bg-danger {
   background-color: v.$danger;
+}
+
+.bg-success {
+  background-color: v.$success;
 }

@@ -4,7 +4,7 @@
     @if (facility.isDLC) {
       <span class="card-icon-position badge bg-primary">DLC</span>
     }
-    <img class="image-display" src="{{imgURL}}facilities/{{facility.slug}}.webp?v=1"
+    <img class="card-item-display" src="{{imgURL}}facilities/{{facility.slug}}.webp?v=1"
       alt="{{facility.name}}" style="aspect-ratio: 1; width: 253px;">
     <table class="tbl" style="margin-top:1rem;"><tbody>
       <tr>
@@ -16,8 +16,8 @@
       </tr>
     </tbody></table>
     @if (facility.facilityeffline_set) {
-      <table class="tbl table-shrink"><tbody>
-        <tr class="table-dark-center"><th colspan=2>Effects</th></tr>
+      <table class="tbl"><tbody>
+        <tr><th colspan=2>Effects</th></tr>
         @for (eline of facility.facilityeffline_set; track eline) {
           <tr>
             <td>{{eline.line}}</td>
@@ -41,8 +41,8 @@
       </tbody></table>
     }
     @if (facility.facilitying_set) {
-      <table class="tbl table-shrink"><tbody>
-        <tr class="table-dark-center"><th colspan=2>Ingredients</th></tr>
+      <table class="tbl"><tbody>
+        <tr><th colspan=2>Ingredients</th></tr>
         @for (line of facility.facilitying_set; track line) {
           <tr>
             <td>{{line.level}}</td>

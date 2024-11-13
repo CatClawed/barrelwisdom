@@ -67,7 +67,7 @@
           </ul>
         @if (item.ingredient_set) {
           <table class="tbl"><tbody>
-            <tr class="table-dark-center">
+            <tr>
               <th>Ingredients</th>
             </tr>
             <tr><td>
@@ -85,7 +85,7 @@
         }
         @if (item.effectline_set) {
           <table class="tbl"><tbody>
-            <tr class="table-dark-center"><th colspan=2>Effects</th></tr>
+            <tr><th colspan=2>Effects</th></tr>
             @if (itemone) {
               <tr><td>Item 1</td><td>
                 <ul style="margin-bottom:0;">
@@ -123,7 +123,7 @@
   }
   @if (item.equip_set) {
     <table class="tbl"><tbody>
-      <tr class="table-dark-center"><th>Materials</th></tr>
+      <tr><th>Materials</th></tr>
       <tr><td>
         <ul>
           @for (item of item.equip_set[0].material; track item) {
@@ -135,7 +135,7 @@
   }
   @if (item.equip_set) {
     <table class="tbl"><tbody>
-      <tr class="table-dark-center">
+      <tr>
         <th colspan=2>Stats</th>
       </tr>
       <tr>
@@ -171,7 +171,7 @@
 }
 @if (item.equip_set) {
   <table class="tbl"><tbody>
-    <tr class="table-dark-center"><th>Characters</th></tr>
+    <tr><th>Characters</th></tr>
     <tr><td>@for (char of item.equip_set[0].chars; track char) {
       <img src="{{imgURL}}resources/equip_{{char.name}}.webp"
         alt="Can equip: {{char.name}}"

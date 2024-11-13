@@ -14,7 +14,7 @@
       }
       <table class="tbl"><tbody>
         @if (recipe.book) {
-          <tr class="table-dark-center">
+          <tr>
             <th colspan="2" style="text-align:center;">Book</th>
           </tr>
         }
@@ -29,7 +29,7 @@
           </tr>
         }
         @for (idea of recipe.ideas; track idea; let i = $index) {
-          <tr class="table-dark-center">
+          <tr>
             <th colspan="2" style="text-align:center;">Group {{i+1}}</th>
           </tr>
           @for (unlock of idea.unlocks; track unlock) {

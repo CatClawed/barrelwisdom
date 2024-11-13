@@ -139,7 +139,7 @@
     @if (item.ideas) {
       <table class="tbl"><tbody>
         @if (item.book) {
-          <tr class="table-dark-center">
+          <tr>
             <th colspan="2">Book</th>
           </tr>
         }
@@ -154,7 +154,7 @@
           </tr>
         }
         @for (idea of item.ideas; track idea; let i = $index) {
-          <tr class="table-dark-center">
+          <tr>
             <th colspan="2">Idea {{i+1}}</th>
           </tr>
           @for (unlock of idea.unlocks; track unlock) {
@@ -206,7 +206,7 @@
     }
     @if (item.ingredients) {
       <table class="tbl"><tbody>
-        <tr class="table-dark-center"><th>Ingredients</th></tr>
+        <tr><th>Ingredients</th></tr>
         <tr>
           <td>
             <ul>
@@ -228,7 +228,7 @@
     }
     @if (item.effectlines_set) {
       <table class="tbl"><tbody>
-        <tr class="table-dark-center"><th colspan=2>Effects</th></tr>
+        <tr><th colspan=2>Effects</th></tr>
         @for (eff of item.effectlines_set; track eff) {
           <tr>
             @if (item.ingredients) {
@@ -272,7 +272,7 @@
     @if (item.fixed_components || item.random_components) {
       <table class="tbl"><tbody>
         @if (item.fixed_components) {
-          <tr class="table-dark-center">
+          <tr>
             <th>
               Fixed Components
             </th>
@@ -290,7 +290,7 @@
           </tr>
         }
         @if (item.random_components) {
-          <tr class="table-dark-center">
+          <tr>
             <th>
               Random Components
             </th>
@@ -311,7 +311,7 @@
     }
     @if (item.equip) {
       <table class="tbl"><tbody>
-        <tr class="table-dark-center"><th colspan=2>Stats</th></tr>
+        <tr><th colspan=2>Stats</th></tr>
         <tr><td style="padding-top:0.2rem;text-align:right;width:50%;"><b>HP </b></td> <td style="padding-top:0.2rem;padding-left:0.5em;">{{item.equip.hp}}</td></tr>
         <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>MP </b></td> <td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip.mp}}</td></tr>
         <tr><td style="border-top:transparent;padding-top:0;text-align:right;width:50%;"><b>ATK </b></td><td style="border-top:transparent;padding-top:0;padding-left:0.5em;">{{item.equip.atk}}</td></tr>
@@ -327,7 +327,7 @@
     }
     @if (item.chars) {
       <table class="tbl"><tbody>
-        <tr class="table-dark-center"><th>Characters</th></tr>
+        <tr><th>Characters</th></tr>
         <tr><td>@for (char of item.chars; track char) {
           <img src="{{imgURL}}characters/{{char.slug}}.webp?v=1" style="aspect-ratio: 1; width: 82px;" alt="{{char.slug}}">
         }</td></tr>
@@ -335,7 +335,7 @@
     }
     @if (item.catalysts) {
       <table class="tbl"><tbody>
-        <tr class="table-dark-center"><th colspan="2">Catalysts Used</th></tr>
+        <tr><th colspan="2">Catalysts Used</th></tr>
         <tr>
           <td>
             <ul class="two-column" style="list-style: none; padding-left: 0;">
@@ -355,7 +355,7 @@
     }
     @if (item.catalyst) {
       <table class="tbl"><tbody>
-        <tr class="table-dark-center"><th colspan="2">Catalyst Data ({{item.catalyst.size}}x{{item.catalyst.size}})</th></tr>
+        <tr><th colspan="2">Catalyst Data ({{item.catalyst.size}}x{{item.catalyst.size}})</th></tr>
         <tr>
           <td>
             <ul class="two-column" style="list-style: none; padding-left: 0;">
@@ -372,7 +372,7 @@
     }
     @if (item.masteryline_set && item.ingredients) {
       <table class="tbl"><tbody>
-        <tr class="table-dark-center"><th colspan="2">Proficiency Data</th></tr>
+        <tr><th colspan="2">Proficiency Data</th></tr>
         @for (masteryline of item.masteryline_set; track masteryline) {
           <tr>
             <td style="vertical-align:middle;text-align:center;width:15%;">{{masteryline.level}}</td>

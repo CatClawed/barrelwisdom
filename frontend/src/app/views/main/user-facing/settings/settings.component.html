@@ -55,7 +55,7 @@
           }
         </div>
       </div>
-      <button [disabled]="loading" class="btn btn-primary">
+      <button [disabled]="loading" class="btn bg-primary">
         @if (loading) {
           Attempting
         }
@@ -109,7 +109,7 @@
           }
         </div>
       </div>
-      <button [disabled]="loading" class="btn btn-primary">
+      <button [disabled]="loading" class="btn bg-primary">
         @if (loading) {
           Attempting
         }
@@ -125,7 +125,7 @@
   </mat-tab>
   @if (user.group == 'admin') {
     <mat-tab label="Create Invite">
-      <button (click)="createInvite()" [disabled]="loading" class="btn btn-primary">
+      <button (click)="createInvite()" [disabled]="loading" class="btn bg-primary">
         @if (loading) {
           Attempting
         }
@@ -164,7 +164,7 @@
             }
           </div>
         </div>
-        <button [disabled]="loading" class="btn btn-primary">
+        <button [disabled]="loading" class="btn bg-primary">
           @if (loading) {
             <span class="loader"></span>
           }
@@ -212,7 +212,7 @@
             }
           </div>
         </div>
-        <button [disabled]="loading" class="btn btn-primary">
+        <button [disabled]="loading" class="btn bg-primary">
           @if (loading) {
             <span class="loader"></span>
           }

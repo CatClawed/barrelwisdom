@@ -66,6 +66,7 @@ p {
     @for $i from 0 through 5 {
         h#{$i+1} {
             font-size: #{math.max(2.5-$i*0.4, 1)}rem;
+            line-height: #{math.max(2.5-$i*0.4, 1)}rem;
         }
     }
 }
@@ -74,6 +75,7 @@ p {
     @for $i from 0 through 5 {
         h#{$i+1} {
             font-size: #{math.max(1.7-$i*0.15, 1)}rem;
+            line-height: #{math.max(1.7-$i*0.15, 1)}rem;
         }
     }
 }
@@ -91,5 +93,33 @@ ul {
 }
 
 table {
-    border-spacing: 0;
+    background-color: white;
+    background-image: v.$bg-card;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+
+    ul,
+    ol {
+        margin-bottom: 0;
+    }
+
+    @media screen and (max-width: v.$breakpoint-md) {
+        font-size: 0.95rem;
+    }
+}
+
+th {
+    text-align: center;
+    background-color: rgba(211, 211, 211, 0.3);
+    border: 1px solid lightgray;
+}
+
+td,
+th {
+    vertical-align: top;
+}
+
+code {
+    font-size: 0.9rem;
+    color: darkslategray;
 }

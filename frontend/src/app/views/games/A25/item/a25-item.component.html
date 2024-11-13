@@ -90,7 +90,7 @@
     }
     @if (item.equip) {
       <table class="tbl"><tbody>
-        <tr class="table-dark-center"><th colspan="4">Stats</th></tr>
+        <tr><th colspan="4">Stats</th></tr>
         <tr>
           <td style="width:25%;">{{a25service.stats['hp'][language]}} </td>
           <td style="width:25%;">@if (item.equip[0].bad_hp) {
@@ -125,7 +125,7 @@
     }
     @if (item.recipe) {
       <table class="tbl"><tbody>
-        <tr class="table-dark-center"><th>Ingredients</th></tr>
+        <tr><th>Ingredients</th></tr>
         <tr>
           <td>
             <ul>
@@ -137,7 +137,7 @@
             </ul>
           </td>
         </tr>
-        <tr class="table-dark-center"><th>Unlock Condition</th></tr>
+        <tr><th>Unlock Condition</th></tr>
         <tr>
           <td>
             <ul>

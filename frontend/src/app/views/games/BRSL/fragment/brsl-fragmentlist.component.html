@@ -50,8 +50,8 @@
         </h4>
       }
       @if (evt.fragment.length == 2) {
-        <table class="tbl table-shrink"><tbody>
-          <tr class="table-dark-center"><th>Fragments</th></tr>
+        <table class="tbl"><tbody>
+          <tr><th>Fragments</th></tr>
           <tr><td>
             <i class="fas fa-arrow-up"></i><i class="fas fa-arrow-up"></i>
             {{evt.fragment[0].name}}<br />
@@ -79,8 +79,8 @@
         </tbody></table>
       }
       @if (evt.fragment.length != 2) {
-        <table class="tbl table-shrink"><tbody>
-          <tr class="table-dark-center"><th>Fragments</th></tr>
+        <table class="tbl"><tbody>
+          <tr><th>Fragments</th></tr>
           @for (frag of evt.fragment; track frag) {
             <tr>
               <td>{{frag.name}}<br />
@@ -95,8 +95,8 @@
         </tbody></table>
       }
       @if (evt.choices) {
-        <table class="tbl table-shrink"><tbody>
-          <tr class="table-dark-center"><th style="position:relative;">Choices@if (!evt.expand) {
+        <table class="tbl"><tbody>
+          <tr><th style="position:relative;">Choices@if (!evt.expand) {
             <a href="javascript:void(0)" style="color:black;text-decoration:none;position:absolute;right:1rem;top:50%;transform: translate(-50%,-50%);" (click)="evt.expand=!evt.expand;$event.preventDefault();" class="fas fa-chevron-up"></a>
             }@if (evt.expand) {
             <a href="javascript:void(0)" style="color:black;text-decoration:none;position:absolute;right:1rem;top:50%;transform: translate(-50%,-50%);" (click)="evt.expand=!evt.expand;$event.preventDefault();" class="fas fa-chevron-down"></a>

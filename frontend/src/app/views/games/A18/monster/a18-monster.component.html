@@ -7,7 +7,7 @@
         <br /><span class="badge bg-primary">DX</span>
       }
     </div>
-    <img class="image-display" src="{{imgURL}}monsters/{{monster.slug}}.webp?v=1"
+    <img class="card-item-display" src="{{imgURL}}monsters/{{monster.slug}}.webp?v=1"
       alt="{{monster.name}}" style="aspect-ratio: 1; width: 288px;">
     <table><tbody>
       @if (monster.char[0]) {
@@ -80,55 +80,55 @@
         }
       </div>
       <div class="grid-6">
-        <table class="tbl" ><tbody>
+        <table class="tbl noborder" ><tbody>
           <tr>
-            <td style="border-top:transparent;padding:0;"><b>LV </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.level}}</td>
+            <td style="padding:0;"><b>LV </b></td>  <td style="padding:0;padding-left:0.5em;">{{monster.level}}</td>
           </tr>
           <tr>
-            <td style="border-top:transparent;padding:0;"><b>HP </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.hp}}</td>
+            <td style="padding:0;"><b>HP </b></td>  <td style="padding:0;padding-left:0.5em;">{{monster.hp}}</td>
           </tr>
           <tr>
-            <td style="border-top:transparent;padding:0;"><b>ATK </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.atk}}</td>
+            <td style="padding:0;"><b>ATK </b></td> <td style="padding:0;padding-left:0.5em;">{{monster.atk}}</td>
           </tr>
           <tr>
-            <td style="border-top:transparent;padding:0;"><b>DEF </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.defen}}</td>
+            <td style="padding:0;"><b>DEF </b></td> <td style="padding:0;padding-left:0.5em;">{{monster.defen}}</td>
           </tr>
           <tr>
-            <td style="border-top:transparent;padding:0;"><b>SPD </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.spd}}</td>
+            <td style="padding:0;"><b>SPD </b></td> <td style="padding:0;padding-left:0.5em;">{{monster.spd}}</td>
           </tr>
           <tr>
-            <td style="border-top:transparent;padding:0;"><b>Exp </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.exp}}</td>
+            <td style="padding:0;"><b>Exp </b></td>  <td style="padding:0;padding-left:0.5em;">{{monster.exp}}</td>
           </tr>
           <tr>
-            <td style="border-top:transparent;padding:0;"><b>Cole </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.cole}}</td>
+            <td style="padding:0;"><b>Cole </b></td>  <td style="padding:0;padding-left:0.5em;">{{monster.cole}}</td>
           </tr>
         </tbody></table>
       </div>
     </div>
-    <table class="tbl table-shrink" ><tbody>
+    <table class="tbl noborder" ><tbody>
       <tr>
-        <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-slash"></i></th>
-        <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-impact"></i></th>
-        <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-pierce"></i></th>
-        <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-magic"></i></th>
+        <td style="text-align: center;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-slash"></i></td>
+        <td style="text-align: center;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-impact"></i></td>
+        <td style="text-align: center;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-pierce"></i></td>
+        <td style="text-align: center;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-magic"></i></td>
       </tr>
       <tr>
-        <td style="text-align: center;border:transparent;padding:0;" innerHTML="{{chart[monster.slash]}}"></td>
-        <td style="text-align: center;border:transparent;padding:0;" innerHTML="{{chart[monster.impact]}} "></td>
-        <td style="text-align: center;border:transparent;padding:0;" innerHTML="{{chart[monster.pierce]}}"></td>
-        <td style="text-align: center;border:transparent;padding:0;" innerHTML="{{chart[monster.magic]}}"></td>
+        <td style="text-align: center;padding:0;" innerHTML="{{chart[monster.slash]}}"></td>
+        <td style="text-align: center;padding:0;" innerHTML="{{chart[monster.impact]}} "></td>
+        <td style="text-align: center;padding:0;" innerHTML="{{chart[monster.pierce]}}"></td>
+        <td style="text-align: center;padding:0;" innerHTML="{{chart[monster.magic]}}"></td>
       </tr>
       <tr>
-        <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-fire"></i></th>
-        <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-ice"></i></th>
-        <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-lightning"></i></th>
-        <th style="text-align: center;border:transparent;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-ailment"></i></th>
+        <td style="text-align: center;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-fire"></i></td>
+        <td style="text-align: center;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-ice"></i></td>
+        <td style="text-align: center;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-lightning"></i></td>
+        <td style="text-align: center;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-ailment"></i></td>
       </tr>
       <tr>
-        <td style="text-align: center;border:transparent;padding:0;" innerHTML="{{chart[monster.fire]}}"></td>
-        <td style="text-align: center;border:transparent;padding:0;" innerHTML="{{chart[monster.ice]}} "></td>
-        <td style="text-align: center;border:transparent;padding:0;" innerHTML="{{chart[monster.light]}}"></td>
-        <td style="text-align: center;border:transparent;padding:0;" innerHTML="{{chart[monster.ail]}}"></td>
+        <td style="text-align: center;padding:0;" innerHTML="{{chart[monster.fire]}}"></td>
+        <td style="text-align: center;padding:0;" innerHTML="{{chart[monster.ice]}} "></td>
+        <td style="text-align: center;padding:0;" innerHTML="{{chart[monster.light]}}"></td>
+        <td style="text-align: center;padding:0;" innerHTML="{{chart[monster.ail]}}"></td>
       </tr>
     </tbody></table>
 </div>

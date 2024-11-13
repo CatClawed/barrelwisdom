@@ -11,20 +11,17 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
 @Component({
   templateUrl: 'a22-item.component.html',
   selector: 'a22-item',
+  encapsulation: ViewEncapsulation.None,
   styles: [
-    `.badge-list {
-      margin-right: 0.4em;
-      margin-top: 0.3em;
-      font-size: calc(0.9rem + 0.1vw) !important;
-      cursor: pointer;
-    }
-      @media screen and (max-width: 576px) {
-      .badge-list {
-        font-size: 2.5vw !important;
-      }
+    `.btn-ryza2 {
+      display: inline-flex;
+      max-width: 100%;
+      margin-top: 0.3rem;
+      margin-left: 0.3rem;
+      text-decoration: none !important;
+      font-size: 1rem;
     }`
   ],
-  encapsulation: ViewEncapsulation.None,
   providers: [DestroyService],
   standalone: true,
   imports: [...CommonImports, Popover]

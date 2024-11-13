@@ -1,6 +1,6 @@
 @if (!error) {
   <ng-template #template let-item="item">
-    <a23-effect (buttonClicked)="openDialog($event)" [inputData]="item"
+    <a23-effect (buttonClicked)="openDialog($event)" [inputData]="item" [gameURL]="gameURL"
       [hideContents]="true"></a23-effect>
   </ng-template>
   <filter-list

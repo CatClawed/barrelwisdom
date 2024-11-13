@@ -1,6 +1,5 @@
 @if (!error) {
   <h1>Seeds</h1>
-  <div style="margin-top: 1em;" class="grid-3" ></div>
   <p><b>Key things to know:</b></p>
   <ul>
     <li>The better your seed's rank (quality + traits), the rarer the items you get.</li>
@@ -12,8 +11,8 @@
   }
   @if (data; as seeds) {
     <div class="grid">
-      <table class="tbl border table-shrink grid-6"><tbody>
-        <tr class="table-dark-center">
+      <table class="tbl borders grid-6"><tbody>
+        <tr>
           <th><a routerLink="/{{gameURL}}/items/{{seeds[0].slug}}/{{language}}">{{seeds[0].name}}</a></th>
           <th><a routerLink="/{{gameURL}}/items/{{seeds[1].slug}}/{{language}}">{{seeds[1].name}}</a></th>
         </tr>
@@ -36,8 +35,8 @@
           </td>
         </tr>
       </tbody></table>
-      <table class="tbl border table-shrink grid-6"><tbody>
-        <tr class="table-dark-center">
+      <table class="tbl borders grid-6"><tbody>
+        <tr>
           <th><a routerLink="/{{gameURL}}/items/{{seeds[2].slug}}/{{language}}">{{seeds[2].name}}</a></th>
           <th><a routerLink="/{{gameURL}}/items/{{seeds[3].slug}}/{{language}}">{{seeds[3].name}}</a></th>
         </tr>
@@ -60,8 +59,8 @@
           </td>
         </tr>
       </tbody></table>
-      <table class="tbl border table-shrink grid-12"><tbody>
-        <tr class="table-dark-center">
+      <table class="tbl borders grid-12"><tbody>
+        <tr>
           <th><a routerLink="/{{gameURL}}/items/{{seeds[4].slug}}/{{language}}">{{seeds[4].name}}</a></th>
           <th><a routerLink="/{{gameURL}}/items/{{seeds[5].slug}}/{{language}}">{{seeds[5].name}}</a></th>
           <th><a routerLink="/{{gameURL}}/items/{{seeds[6].slug}}/{{language}}">{{seeds[6].name}}</a></th>

@@ -116,7 +116,7 @@
     [ngClass]="{ 'is-invalid': submitted && f.body.errors }" placeholder="Content."
   formControlName="body"></textarea>
   @if (!disableSubmit) {
-    <button [disabled]="loading" class="btn btn-primary spacer" style="width: 20%;">
+    <button [disabled]="loading" class="btn bg-primary spacer" style="width: 20%;">
       @if (loading) {
         Attempting
       }

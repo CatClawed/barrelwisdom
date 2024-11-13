@@ -4,10 +4,10 @@
 @if (fixit) {
   <div style="margin-top: 1em;" class="grid-3" ></div>
   <div style="display:flex;justify-content:space-between;flex-wrap:wrap">
-    <button style="margin-right:1em;margin-bottom:1em;" class="btn btn-primary" (click)="toggle(true, false, false, false, 'sophie')"   ><img style="max-height:3em;height:125px;aspect-ratio: 128/125;" src="/media/games/sophie2/characters/sophie.webp" alt="Sophie"></button>
-    <button style="margin-right:1em;margin-bottom:1em;" class="btn btn-primary" (click)="toggle(false, true, false, false, 'plachta')"  ><img style="max-height:3em;height:125px;aspect-ratio: 128/125;" src="/media/games/sophie2/characters/plachta.webp" alt="Plachta"></button>
-    <button style="margin-right:1em;margin-bottom:1em;" class="btn btn-primary" (click)="toggle(false, false, true, false, 'shared')"   ><img style="max-height:3em;height:125px;aspect-ratio: 128/125;" src="/media/games/sophie2/characters/sophie.webp" alt="Shared"><img style="max-height:3em;height:125px;aspect-ratio: 128/125;" src="/media/games/sophie2/characters/plachta.webp" alt=""></button>
-    <button style="margin-right:1em;margin-bottom:1em;" class="btn btn-primary" (click)="toggle(false, false, false, true, 'reference')"><i class="atelier atelier-np atelier-ryza2-book"></i></button>
+    <button style="margin-right:1em;margin-bottom:1em;" class="btn bg-primary" (click)="toggle(true, false, false, false, 'sophie')"   ><img style="max-height:3em;height:125px;aspect-ratio: 128/125;" src="/media/games/sophie2/characters/sophie.webp" alt="Sophie"></button>
+    <button style="margin-right:1em;margin-bottom:1em;" class="btn bg-primary" (click)="toggle(false, true, false, false, 'plachta')"  ><img style="max-height:3em;height:125px;aspect-ratio: 128/125;" src="/media/games/sophie2/characters/plachta.webp" alt="Plachta"></button>
+    <button style="margin-right:1em;margin-bottom:1em;" class="btn bg-primary" (click)="toggle(false, false, true, false, 'shared')"   ><img style="max-height:3em;height:125px;aspect-ratio: 128/125;" src="/media/games/sophie2/characters/sophie.webp" alt="Shared"><img style="max-height:3em;height:125px;aspect-ratio: 128/125;" src="/media/games/sophie2/characters/plachta.webp" alt=""></button>
+    <button style="margin-right:1em;margin-bottom:1em;" class="btn bg-primary" (click)="toggle(false, false, false, true, 'reference')"><i class="atelier atelier-np atelier-ryza2-book"></i></button>
   </div>
   <ng-template #itemPopover>
     @for (idea of ctx.item.ideas; track idea) {

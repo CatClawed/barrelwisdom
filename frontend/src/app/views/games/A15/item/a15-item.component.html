@@ -97,7 +97,7 @@
     }
     @if (item.ingredient_set) {
       <table class="tbl"><tbody>
-        <tr class="table-dark-center"><th>Ingredients</th></tr>
+        <tr><th>Ingredients</th></tr>
         <tr><td>
           <ul>
             @for (ing of item.ingredient_set; track ing) {
@@ -113,7 +113,7 @@
     }
     @if (item.effectline_set) {
       <table class="tbl"><tbody>
-        <tr class="table-dark-center"><th colspan=2>Effects</th></tr>
+        <tr><th colspan=2>Effects</th></tr>
         @if (fire) {
           <tr>
             <td style="vertical-align:middle"><i style="color:#ac504f;" class="atelier atelier-np atelier-shallie-fire"></i></td>
@@ -194,7 +194,7 @@
     }
     @if (item.equip_set) {
       <table class="tbl"><tbody>
-        <tr class="table-dark-center"><th colspan=4>Stats</th></tr>
+        <tr><th colspan=4>Stats</th></tr>
         <tr><td style="padding-top:0.2rem;padding-bottom:0;width:25%;"><b>HP </b></td> <td style="padding-top:0.2rem;padding-left:0;padding-bottom:0;width:25%">{{item.equip_set[0].hp}}   </td><td style="padding-top:0.2rem;padding-left:0;padding-bottom:0;width:25%"><i style="color:#ac504f;" class="atelier atelier-shallie-fire"></i></td>  <td style="padding-top:0.2rem;padding-left:0;padding-bottom:0;width:25%;">{{item.equip_set[0].fire}}</td></tr>
         <tr><td style="border-top:transparent;padding-bottom:0;padding-top:0;width:25%;"><b>MP </b></td> <td style="border-top:transparent;padding:0;width:25%">{{item.equip_set[0].mp}}   </td><td style="border-top:transparent;padding:0;width:25%"><i style="color:#427389;" class="atelier atelier-shallie-water"></i></td> <td style="border-top:transparent;padding:0;width:25%;">{{item.equip_set[0].water}}</td></tr>
         <tr><td style="border-top:transparent;padding-bottom:0;padding-top:0;width:25%;"><b>ATK </b></td><td style="border-top:transparent;padding:0;width:25%">{{item.equip_set[0].atk}}  </td><td style="border-top:transparent;padding:0;width:25%"><i style="color:#5a843c;" class="atelier atelier-shallie-wind"></i></td>  <td style="border-top:transparent;padding:0;width:25%;">{{item.equip_set[0].wind}}</td></tr>
@@ -204,7 +204,7 @@
     }
     @if (item.characterequip_set) {
       <table class="tbl"><tbody>
-        <tr class="table-dark-center"><th>Characters</th></tr>
+        <tr><th>Characters</th></tr>
         <tr><td>@for (char of item.characterequip_set[0].chars; track char) {
           <img src="{{imgURL}}equip/equip-{{char.name}}.webp"
             alt="Can equip: {{char.name}}" style="aspect-ratio: 69/70; width: 69px;">

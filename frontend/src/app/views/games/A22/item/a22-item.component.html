@@ -6,7 +6,7 @@
       <i class="atelier atelier-np atelier-ryza2-{{icons[item.itemtype]}}"></i>
       @if (item.isDLC) {
         <br />
-        <span class="badge bg-primary">DLC</span>
+        <span class="btn btn-ryza2 bg-primary">DLC</span>
       }
     </div>
     <img src="{{imgURL}}items/{{item.slug}}.webp?v=1" class="card-item-display"
@@ -96,21 +96,21 @@
         }
         @if (item.effectline_set) {
           <table class="tbl"><tbody>
-            <tr class="table-dark-center"><th colspan=2 >Effects</th></tr>
+            <tr><th colspan=2 >Effects</th></tr>
             @for (eff of effs; track eff; let index=$index) {
               <tr>
                 <td style="vertical-align: middle;"><b>{{index+1}}</b></td><td>
                 @if (default[index][0]) {
                   @if (default[index][1] != 'none') {
                     <a routerLink="/{{gameURL}}/effects/{{default[index][1]}}/{{language}}"
-                      class="badge bg-primary badge-list">{{default[index][0]}}</a>
+                      class="btn btn-ryza2 bg-primary">{{default[index][0]}}</a>
                   }
                   @if (default[index][1] == 'none') {
-                    <span class="badge bg-primary badge-list">{{default[index][0]}}</span>
+                    <span class="btn btn-ryza2 bg-primary">{{default[index][0]}}</span>
                   }
                 }
                 @for (e of eff; track e) {
-                  <a class="badge bg-secondary badge-list" routerLink="/{{gameURL}}/effects/{{e[1]}}/{{language}}">{{e[0]}}</a>
+                  <a class="btn btn-ryza2 bg-secondary" routerLink="/{{gameURL}}/effects/{{e[1]}}/{{language}}">{{e[0]}}</a>
                 }
                 </td>
               </tr>
@@ -118,8 +118,8 @@
           </tbody></table>
         }
         @if (item.usableitem_set) {
-          <table class="tbl table-shrink"><tbody>
-            <tr class="table-dark-center">
+          <table class="tbl"><tbody>
+            <tr>
               <th>WT</th>
               <th>Stun</th>
               <th>CC</th>
@@ -136,8 +136,8 @@
           </tbody></table>
         }
         @if (item.ingredient_set) {
-          <table class="tbl table-shrink"><tbody>
-            <tr class="table-dark-center"><th colspan=2>Synthesis</th></tr>
+          <table class="tbl"><tbody>
+            <tr><th colspan=2>Synthesis</th></tr>
             @for (ing of item.ingredient_set; track ing) {
               <tr>
                 <td style="text-align: center;">
@@ -180,19 +180,19 @@
                         }
                       </ng-template>
                       @if (i.noneffect && !i.essence) {
-                        <popover [template]="effPopover" display="inline-block" name="Synth Data" cls="badge bg-secondary badge-list">{{i.noneffect}}</popover>
+                        <popover [template]="effPopover" display="inline-block" name="Synth Data" cls="btn btn-ryza2 bg-secondary">{{i.noneffect}}</popover>
                       }
                       @if (i.noneffect && i.essence) {
-                        <popover [template]="effPopover" display="inline-block" name="Synth Data" cls="badge-list badge bg-primary">{{i.noneffect}}</popover>
+                        <popover [template]="effPopover" display="inline-block" name="Synth Data" cls="btn btn-ryza2 bg-primary">{{i.noneffect}}</popover>
                       }
                       @if (i.effect    && !i.essence) {
-                        <popover [template]="effPopover" display="inline-block" name="Synth Data" cls="badge bg-secondary badge-list">{{i.effect}}</popover>
+                        <popover [template]="effPopover" display="inline-block" name="Synth Data" cls="btn btn-ryza2 bg-secondary">{{i.effect}}</popover>
                       }
                       @if (i.effect    && i.essence) {
-                        <popover [template]="effPopover" display="inline-block" name="Synth Data" cls="badge bg-primary badge-list">{{i.effect}}</popover>
+                        <popover [template]="effPopover" display="inline-block" name="Synth Data" cls="btn btn-ryza2 bg-primary">{{i.effect}}</popover>
                       }
                       @if (i.morph) {
-                        <a class="badge bg-success badge-list" routerLink="/{{gameURL}}/items/{{i.morph.slug}}/{{language}}">{{i.morph.name}}</a>
+                        <a class="btn btn-ryza2 bg-success" routerLink="/{{gameURL}}/items/{{i.morph.slug}}/{{language}}">{{i.morph.name}}</a>
                       }
                     }
                   </td>

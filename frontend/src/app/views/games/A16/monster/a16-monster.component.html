@@ -2,7 +2,7 @@
   <div [class]="inputSlug ? 'card card-dialog' : 'card card-medium'">
     <h4 class="card-title card-icon-space">{{monster.name}}</h4>
     <i class="card-icon-position atelier atelier-np atelier-shallie-race-{{monster.kind}}"></i>
-    <img class="image-display" src="{{imgURL}}monsters/{{monster.slug}}.webp"
+    <img class="card-item-display" src="{{imgURL}}monsters/{{monster.slug}}.webp"
       alt="{{monster.name}}" style="aspect-ratio: 1; width: 218px;">
     @if (monster.desc) {
       <p>{{monster.desc}}</p>
@@ -30,27 +30,27 @@
         }
       </div>
       <div class="grid-6">
-        <table class="tbl" ><tbody>
+        <table class="table-item-data" ><tbody>
           <tr>
-            <td style="border-top:transparent;padding:0;"><b>LV </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.level}}</td>
+            <td style="padding:0;"><b>LV </b></td>  <td style="padding:0;padding-left:0.5em;">{{monster.level}}</td>
           </tr>
           <tr>
-            <td style="border-top:transparent;padding:0;"><b>HP </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.hp}}</td>
+            <td style="padding:0;"><b>HP </b></td>  <td style="padding:0;padding-left:0.5em;">{{monster.hp}}</td>
           </tr>
           <tr>
-            <td style="border-top:transparent;padding:0;"><b>ATK </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.atk}}</td>
+            <td style="padding:0;"><b>ATK </b></td> <td style="padding:0;padding-left:0.5em;">{{monster.atk}}</td>
           </tr>
           <tr>
-            <td style="border-top:transparent;padding:0;"><b>DEF </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.defen}}</td>
+            <td style="padding:0;"><b>DEF </b></td> <td style="padding:0;padding-left:0.5em;">{{monster.defen}}</td>
           </tr>
           <tr>
-            <td style="border-top:transparent;padding:0;"><b>SPD </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.spd}}</td>
+            <td style="padding:0;"><b>SPD </b></td> <td style="padding:0;padding-left:0.5em;">{{monster.spd}}</td>
           </tr>
           <tr>
-            <td style="border-top:transparent;padding:0;"><b>Exp </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.exp}}</td>
+            <td style="padding:0;"><b>Exp </b></td>  <td style="padding:0;padding-left:0.5em;">{{monster.exp}}</td>
           </tr>
           <tr>
-            <td style="border-top:transparent;padding:0;"><b>Cole </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">{{monster.cole}}</td>
+            <td style="padding:0;"><b>Cole </b></td>  <td style="padding:0;padding-left:0.5em;">{{monster.cole}}</td>
           </tr>
         </tbody></table>
       </div>

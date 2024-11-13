@@ -4,7 +4,7 @@
     @if (demon.isDLC) {
       <span class="card-icon-position badge bg-primary">DLC</span>
     }
-    <img class="image-display" src="{{imgURL}}demons/{{demon.slug}}.webp?v=1"
+    <img class="card-item-display" src="{{imgURL}}demons/{{demon.slug}}.webp?v=1"
       alt="{{demon.name}}" style="aspect-ratio: 1; width: 256px;">
     <table class="tbl" style="margin-top:1rem;"><tbody>
       <tr>
@@ -39,23 +39,23 @@
         }
       </div>
       <div class="grid-6">
-        <table class="tbl" ><tbody>
+        <table class="table-item-data"><tbody>
           <tr>
-            <td style="border-top:transparent;padding:0;"><b>Vitality: </b></td>  <td style="border-top:transparent;padding:0;padding-left:0.5em;">@for (i of [].constructor(demon.vit); track i) {
+            <td style="padding:0;"><b>Vitality: </b></td>  <td style="padding:0;padding-left:0.5em;">@for (i of [].constructor(demon.vit); track i) {
               <i class="fas fa-square" style="padding-right:0.1rem"> </i>
               }@for (i of [].constructor(5-demon.vit); track i) {
               <i class="far fa-square" style="padding-right:0.1rem"></i>
             }</td>
           </tr>
           <tr>
-            <td style="border-top:transparent;padding:0;"><b>Attack: </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">@for (i of [].constructor(demon.atk); track i) {
+            <td style="padding:0;"><b>Attack: </b></td> <td style="padding:0;padding-left:0.5em;">@for (i of [].constructor(demon.atk); track i) {
               <i    class="fas fa-square" style="padding-right:0.1rem"></i>
               }@for (i of [].constructor(5-demon.atk); track i) {
               <i class="far fa-square" style="padding-right:0.1rem"></i>
             }</td>
             </tr>
             <tr>
-              <td style="border-top:transparent;padding:0;"><b>Defense: </b></td> <td style="border-top:transparent;padding:0;padding-left:0.5em;">@for (i of [].constructor(demon.dfn); track i) {
+              <td style="padding:0;"><b>Defense: </b></td> <td style="padding:0;padding-left:0.5em;">@for (i of [].constructor(demon.dfn); track i) {
                 <i   class="fas fa-square" style="padding-right:0.1rem"></i>
                 }@for (i of [].constructor(5-demon.dfn); track i) {
                 <i class="far fa-square" style="padding-right:0.1rem"></i>
@@ -64,36 +64,36 @@
         </tbody></table>
       </div>
     </div>
-    <table class="tbl table-shrink" ><tbody>
+    <table class="tbl noborder" ><tbody>
       <tr>
-        <th style="text-align: center;border:transparent;padding-bottom:0;width:20%"><img src="/media/games/second-light/icons/slash.webp"  alt="Slash attribute"  style="max-width: 120px; width:100%; aspect-ratio: 1;"></th>
-        <th style="text-align: center;border:transparent;padding-bottom:0;width:20%"><img src="/media/games/second-light/icons/pierce.webp" alt="Pierce attribute" style="max-width: 120px; width:100%; aspect-ratio: 1;"></th>
-        <th style="text-align: center;border:transparent;padding-bottom:0;width:20%"><img src="/media/games/second-light/icons/shock.webp"  alt="Shock attribute"  style="max-width: 120px; width:100%; aspect-ratio: 1;"></th>
-        <th style="text-align: center;border:transparent;padding-bottom:0;width:20%"><img src="/media/games/second-light/icons/tremor.webp" alt="Tremor attribute" style="max-width: 120px; width:100%; aspect-ratio: 1;"></th>
-        <th style="text-align: center;border:transparent;padding-bottom:0;width:20%"><img src="/media/games/second-light/icons/warp.webp"   alt="Warp attribute"   style="max-width: 120px; width:100%; aspect-ratio: 1;"></th>
+        <td style="text-align: center;padding-bottom:0;width:20%"><img src="/media/games/second-light/icons/slash.webp"  alt="Slash attribute"  style="max-width: 120px; width:100%; aspect-ratio: 1;"></td>
+        <td style="text-align: center;padding-bottom:0;width:20%"><img src="/media/games/second-light/icons/pierce.webp" alt="Pierce attribute" style="max-width: 120px; width:100%; aspect-ratio: 1;"></td>
+        <td style="text-align: center;padding-bottom:0;width:20%"><img src="/media/games/second-light/icons/shock.webp"  alt="Shock attribute"  style="max-width: 120px; width:100%; aspect-ratio: 1;"></td>
+        <td style="text-align: center;padding-bottom:0;width:20%"><img src="/media/games/second-light/icons/tremor.webp" alt="Tremor attribute" style="max-width: 120px; width:100%; aspect-ratio: 1;"></td>
+        <td style="text-align: center;padding-bottom:0;width:20%"><img src="/media/games/second-light/icons/warp.webp"   alt="Warp attribute"   style="max-width: 120px; width:100%; aspect-ratio: 1;"></td>
       </tr>
       <tr>
-        <td style="text-align: center;border:transparent;padding:0;">@if (demon.slash   == 'HALF') {
+        <td style="text-align: center;padding:0;">@if (demon.slash   == 'HALF') {
           <i class="fas fa-arrow-down"></i>
           }@if (demon.slash   == 'WEAK') {
           <i class="fas fa-arrow-up"></i>
         }</td>
-        <td style="text-align: center;border:transparent;padding:0;">@if (demon.pierce  == 'HALF') {
+        <td style="text-align: center;padding:0;">@if (demon.pierce  == 'HALF') {
           <i class="fas fa-arrow-down"></i>
           }@if (demon.pierce  == 'WEAK') {
           <i class="fas fa-arrow-up"></i>
         }</td>
-        <td style="text-align: center;border:transparent;padding:0;">@if (demon.shock   == 'HALF') {
+        <td style="text-align: center;padding:0;">@if (demon.shock   == 'HALF') {
           <i class="fas fa-arrow-down"></i>
           }@if (demon.shock   == 'WEAK') {
           <i class="fas fa-arrow-up"></i>
         }</td>
-        <td style="text-align: center;border:transparent;padding:0;">@if (demon.tremor  == 'HALF') {
+        <td style="text-align: center;padding:0;">@if (demon.tremor  == 'HALF') {
           <i class="fas fa-arrow-down"></i>
           }@if (demon.tremor  == 'WEAK') {
           <i class="fas fa-arrow-up"></i>
         }</td>
-        <td style="text-align: center;border:transparent;padding:0;">@if (demon.warp    == 'HALF') {
+        <td style="text-align: center;padding:0;">@if (demon.warp    == 'HALF') {
           <i class="fas fa-arrow-down"></i>
           }@if (demon.warp    == 'WEAK') {
           <i class="fas fa-arrow-up"></i>

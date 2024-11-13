@@ -1,8 +1,8 @@
 @if (data) {
   <h1>Research</h1>
   <ng-template #research let-data="data" let-offset="offset" let-kind="kind">
-    <table class="tbl spacer" style="margin-top:1rem;"><tbody>
-      <tr class="table-dark-center"><th colspan="2">{{kind}}</th></tr>
+    <table class="tbl" style="margin-top:1rem;"><tbody>
+      <tr><th colspan="2">{{kind}}</th></tr>
       @for (it of [].constructor(150); track it; let i = $index) {
         <tr>
           <td>{{i+1}}</td>
