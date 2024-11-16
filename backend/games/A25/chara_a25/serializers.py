@@ -118,10 +118,11 @@ class A25MemoriaSerializer(A25DefaultSerializer):
     skill_name = serializers.SerializerMethodField()
     skill_desc = serializers.SerializerMethodField()
     limit = serializers.SerializerMethodField()
+    illustrator = serializers.SerializerMethodField()
     class Meta:
         model = Memoria
         fields = [
-            'slug', 'name', 'skill_name', 'skill_desc', 'rarity', 'limit',
+            'slug', 'name', 'skill_name', 'skill_desc', 'rarity', 'limit', 'illustrator',
             'note', 'gbl', 'lv1', 'lv2', 'lv3', 'lv4', 'lv5', 'date',
             "hp30", "spd30", "patk30", "pdef30", "matk30", "mdef30", 'gbl', 'id'
         ]
@@ -132,6 +133,8 @@ class A25MemoriaSerializer(A25DefaultSerializer):
     def get_limit(self, obj):
         if obj.limit:
             return A25DefaultSerializer.get_text(self,obj.limit)
+    def get_illustrator(self, obj):
+        return A25DefaultSerializer.get_text_gbl(self,obj.illustrator,obj.gbl)
 
 class A25EmblemSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()

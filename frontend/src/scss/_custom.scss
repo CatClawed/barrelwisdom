@@ -171,3 +171,15 @@
 .bg-success {
   background-color: v.$success;
 }
+
+.text-danger {
+  color: v.$danger;
+}
+
+.text-success {
+  color: v.$success;
+}
+
+.text-muted {
+  color: rgba(33, 37, 41, .75);
+}

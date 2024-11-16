@@ -217,9 +217,11 @@
       <ng-container *ngTemplateOutlet="forms"></ng-container>
       <div class="mem-grid">
         @for (memoria of filteredMemoria | async; track memoria) {
-        <div style="aspect-ratio:256/410;position: relative;cursor: pointer;">
-          <img src="{{imgURL}}memoria/{{memoria.slug}}.webp" (click)="changeMemoria(memoria.id, memoria.slug, $event)" loading="lazy"
-            [style]="collection.memoria[memoria.id] ? 'width:100%' : 'width:100%;filter:grayscale(1)'">
+        <div style="position: relative; cursor: pointer;"
+          (click)="changeMemoria(memoria.id, memoria.slug, $event)">
+          <img src="{{imgURL}}memoria/{{memoria.slug}}.webp" loading="lazy"
+            class="mem-img"
+            [style]="collection.memoria[memoria.id] ? null : 'filter:grayscale(1);'">
           @if (collection.memoria[memoria.id] !== undefined) {
           <div
             style="position:absolute;bottom:0%;left:50%;transform:translate(-50%,0);font-size:2rem;text-align:center;width:100%;color:white;background:linear-gradient(270deg, rgba(0,0,0,0.5) 0%, rgb(0, 0, 0) 50%, rgba(0,0,0,0.5) 100%);">

@@ -3,7 +3,7 @@
     <h1>{{blog.title}}</h1>
     <div class="author">
       <span style="display: inline-block;">
-        <i class="far fa-calendar-alt"></i> <time class="updated" dateTime="{{blog.modified}}"> {{blog.modified |
+        <i class="far fa-calendar-alt"></i> <time class="updated" dateTime="{{blog.created}}"> {{blog.created |
       date:'longDate' }} </time>
     </span>
     <span style="display: inline-block;">
@@ -36,8 +36,11 @@
       (click)="historyService.hrefClicked($event);"
       [data]="body">
     </div>
+    @if (blog.created != blog.modified) {
+      <p>Last Updated: {{blog.modified | date:'longDate' }}</p>
+    }
     @if (blog.tags.length > 0) {
-      <div class="blog-tags clearfix">
+      <div class="blog-tags">
         <i style="margin-right: 1em; margin-top: 0.5em; font-size: 1rem;" class="badge bg-primary"><i
         class="fas fa-tag"></i></i>
         @for (tag of blog.tags; track tag) {

@@ -11,16 +11,29 @@
     td {
         border-top: v.$table-border;
     }
+
+}
+
+.tbl-shrink {
+
+    // I do not want this behavior most of the time if not tbl-min
+    @media screen and (max-width: 1000px) {
+        font-size: 0.95rem;
+    }
 }
 
 
 .tbl-min {
+    height: min-content;
     th {
         padding: 0.5rem;
     }
 
     td {
         padding: 0.3rem;
+    }
+    @media screen and (max-width: 1000px) {
+        font-size: 0.95rem;
     }
 }
 

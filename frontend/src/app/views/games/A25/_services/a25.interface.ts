@@ -235,6 +235,7 @@ export interface Memoria {
     gbl: boolean;
     id: number;
     date: Date;
+    illustrator: string;
 }
 
 export interface Research {

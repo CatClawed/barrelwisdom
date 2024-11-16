@@ -1,7 +1,7 @@
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { Dialog } from '@angular/cdk/dialog';
 import { KeyValuePipe, Location, NgTemplateOutlet } from '@angular/common';
-import { Component, inject, ViewEncapsulation } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -31,7 +31,7 @@ import { A25CharaFrameComponent } from '../character/a25-charaframe.component';
   standalone: true,
   imports: [...CommonImports, ...MaterialFormImports, MatTabsModule, KeyValuePipe,
     MatButtonModule, MatCheckboxModule, MatMenuModule, NgTemplateOutlet,
-    A25MemoriaComponent, A25CharaComponent, Popover, ClipboardModule, A25CharaFrameComponent],
+    Popover, ClipboardModule, A25CharaFrameComponent],
   styles: [
     `.char-grid {
       display: grid;
@@ -53,7 +53,7 @@ import { A25CharaFrameComponent } from '../character/a25-charaframe.component';
         grid-template-columns:repeat(6,16%);
       }
       .mem-grid {
-        grid-template-columns:repeat(6,16%);
+        grid-template-columns:repeat(6,1fr);
       }
       .a25-mem-font {
         font-size:1.4vw
@@ -65,7 +65,7 @@ import { A25CharaFrameComponent } from '../character/a25-charaframe.component';
         grid-template-columns:repeat(3,31%);
       }
       .mem-grid {
-        grid-template-columns:repeat(3,33%);
+        grid-template-columns:repeat(3,1fr);
       }
       .a25-mem-font {
         font-size:1.4vw
@@ -75,6 +75,11 @@ import { A25CharaFrameComponent } from '../character/a25-charaframe.component';
       .mat-mdc-tab-body-content {
           overflow: hidden;
       }
+    }`,
+    `.mem-img {
+      aspect-ratio: 256/410;
+      width: 256px;
+      display: block;
     }`
   ]
 })

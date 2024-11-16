@@ -120,6 +120,8 @@ class Memoria(models.Model):
     note  = models.CharField(max_length=200, blank=True)
     gbl   = models.BooleanField(default=False)
     date = models.DateField(blank=True, null=True)
+    illustrator = models.ForeignKey(Name, on_delete=models.CASCADE, blank=True, null=True, related_name="illust")
+
 
     lv1  = models.IntegerField()
     lv2  = models.IntegerField()

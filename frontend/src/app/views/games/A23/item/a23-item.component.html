@@ -18,7 +18,7 @@
         @case ('important') { <i class="atelier atelier-np atelier-ryza2-category-key-items"></i> }
       }
       @if (item.char) {
-        <br /><img style="max-height:3em;height:125px;aspect-ratio: 128/125;" src="/media/games/sophie2/characters/{{item.char}}.webp" alt="{{item.char}}">
+        <br /><img style="width:128px;aspect-ratio: 128/125;" src="/media/games/sophie2/characters/{{item.char}}.webp" alt="{{item.char}}">
       }
       @if (item.isDLC) {
         <br /><span class="badge bg-primary">DLC</span>
@@ -30,9 +30,9 @@
       @if (item.char1) {
         <tr>
           <td style="width:10%">
-            <img style="max-height:3em;height:125px;aspect-ratio: 128/125;" src="/media/games/sophie2/characters/{{item.char1}}.webp" alt="{{item.char1}}">
+            <img style="width:128px;aspect-ratio: 128/125;" src="/media/games/sophie2/characters/{{item.char1}}.webp" alt="{{item.char1}}">
           </td>
-          <td>
+          <td style="width:90%">
             {{item.desc1}}
           </td>
         </tr>
@@ -40,9 +40,9 @@
       @if (item.char2) {
         <tr>
           <td style="width:10%">
-            <img style="max-height:3em;height:125px;aspect-ratio: 128/125;" src="/media/games/sophie2/characters/{{item.char2}}.webp" alt="{{item.char2}}">
+            <img style="width:128px;aspect-ratio: 128/125;" src="/media/games/sophie2/characters/{{item.char2}}.webp" alt="{{item.char2}}">
           </td>
-          <td>
+          <td style="width:90%">
             {{item.desc2}}
           </td>
         </tr>
@@ -50,9 +50,9 @@
       @if (item.char3) {
         <tr>
           <td style="width:10%">
-            <img style="max-height:3em;height:125px;aspect-ratio: 128/125;" src="/media/games/sophie2/characters/{{item.char3}}.webp" alt="{{item.char3}}">
+            <img style="width:128px;aspect-ratio: 128/125;" src="/media/games/sophie2/characters/{{item.char3}}.webp" alt="{{item.char3}}">
           </td>
-          <td>
+          <td style="width:90%">
             {{item.desc3}}
           </td>
         </tr>
@@ -60,9 +60,9 @@
       @if (item.char4) {
         <tr>
           <td style="width:10%">
-            <img style="max-height:3em;height:125px;aspect-ratio: 128/125;" src="/media/games/sophie2/characters/{{item.char4}}.webp" alt="{{item.char4}}">
+            <img style="width:128px;aspect-ratio: 128/125;" src="/media/games/sophie2/characters/{{item.char4}}.webp" alt="{{item.char4}}">
           </td>
-          <td>
+          <td style="width:90%">
             {{item.desc4}}
           </td>
         </tr>
@@ -267,7 +267,7 @@
         <tr>
           <td>
             @for (char of item.chars; track char) {
-              <img src="{{imgURL}}characters/{{char.slug}}.webp" alt="{{char.slug}}" style="max-height:3em;height:125px;aspect-ratio: 128/125;">
+              <img src="{{imgURL}}characters/{{char.slug}}.webp" alt="{{char.slug}}" style="width:128px;aspect-ratio: 128/125;">
             }
           </td>
         </tr>

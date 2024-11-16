@@ -10,12 +10,12 @@ BASE_URL = 'https://raw.githubusercontent.com/theBowja/resleriana-db/main/data/'
 
 names =     ['ability', 'base_enemy', 'battle', 'battle_hint', 'battle_tool', 'battle_tool_trait', 'character',
              'character_tag', 'effect', 'emblem', 'emblem_rarity', 'enemy', 'enemy_ai_unit', 'equipment_tool',
-             'equipment_tool_trait', 'hyperlink', 'item', 'leader_skill_condition', 'memoria',
+             'equipment_tool_trait', 'hyperlink', 'illustrator', 'item', 'leader_skill_condition', 'memoria',
              'memoria_buff_growth', 'quest', 'recipe', 'recipe_plan', 'research', 'research_effect',
              'research_effect_level', 'reward_set', 'skill', 'species', 'timeline_panel', 'wave']
 names_gbl = ['ability', 'base_enemy', 'battle_hint', 'battle_tool', 'battle_tool_trait', 'character',
              'character_tag', 'effect', 'emblem', 'emblem_rarity', 'enemy', 'equipment_tool',
-             'equipment_tool_trait', 'item', 'memoria',
+             'equipment_tool_trait', 'illustrator', 'item', 'memoria',
              'quest', 'recipe', 'recipe_plan', 'research', 'research_effect',
              'skill', 'species']
 jsons = {}
@@ -667,6 +667,16 @@ def import_memoria(memoria_index, event=None):
         obj.pdef30 = search(mem['status_buffs'][4]['growth_id'],jsons['memoria_buff_growth'])[0]['values'][29]
         obj.mdef30 = search(mem['status_buffs'][5]['growth_id'],jsons['memoria_buff_growth'])[0]['values'][29]
 
+        illust = search(mem['illustrator_id'],jsons['illustrator'])[0]
+
+        obj.illustrator = checkName(
+            text_ja=illust['name'],
+            text_en=illust['name_en']    if 'name_en'    in illust else '',
+            text_sc=illust['name_zh_cn'] if 'name_zh_cn' in illust else '',
+            text_tc=illust['name_zh_tw'] if 'name_zh_tw' in illust else '',
+            volatile=True
+        )
+
         obj.save()
 
         if create:
@@ -818,9 +828,7 @@ def import_equipment():
             print("Creating Equipment", name.text_ja)
             create = True
 
-        obj.name = name
-        if obj not in prev_item:
-            obj.rarity = item['rarity']
+        obj.name = namememoria
         if not create:
             if obj.rarity == item['rarity']: # skip SR text when SSR exists
                 obj.desc = desc
@@ -1443,7 +1451,7 @@ def global_additions():
     score_battle_chapter = None
     tower_floor_max = None
     elem_tower_floor_max = None
-    events = ['アトリエサマー第2弾 LEGEND FES', 'アトリエサマー2024 第2弾']
+    events = ['アトリエサマー第3弾 LEGEND FES', 'アトリエサマー2024 第3弾']
     recipe_pages = [] #[[rStory, 44], [rStory, 45]] # refer to recipepage db for numbers
     traits = []
 
@@ -1554,20 +1562,19 @@ def cleanup():
 
 # for setting slugs
 additions = {
-    "ミーケ": "mieke-1",
-    "ディオーナ": "diona-1"
+    "マクダ": "magda-1"
 }
-memoria_index = 124 # lara groupies
-base_enemy_index = 87
+memoria_index = 125 # magda
+base_enemy_index = 88
 
-gacha = create_event(ja='渇きの中で咲く花たち LEGEND FES', en="Flowers Blooming LEGEND FES")
+gacha = create_event(ja='踊る混沌 マクダ LEGEND FES', en="Dancing Chaos Magda LEGEND FES")
 
 #createUpdate()
-#retrieve_all_jsons()
+retrieve_all_jsons()
 #import_combat_traits()
 #import_equipment_traits()
 #import_characters(event=gacha, additions=additions)
-#memoria_index = import_memoria(memoria_index, event=gacha)
+memoria_index = import_memoria(memoria_index, event=gacha)
 #import_material()
 #import_combat_items()
 #import_equipment()

@@ -13,7 +13,7 @@ import { SeoService } from '@app/services/seo.service';
 import { Blog, Comment } from '@app/views/main/_interfaces/blog';
 import { User } from '@app/views/main/_interfaces/user';
 import { BlogService } from '@app/views/main/_services/blog.service';
-import { MarkdownComponent, MarkdownPipe, MarkdownService, provideMarkdown } from 'ngx-markdown';
+import { MarkdownComponent, MarkdownService, provideMarkdown } from 'ngx-markdown';
 import { of } from 'rxjs';
 import { catchError, switchMap, takeUntil } from 'rxjs/operators';
 
@@ -23,7 +23,7 @@ import { catchError, switchMap, takeUntil } from 'rxjs/operators';
   providers: [DestroyService, provideMarkdown({sanitize: SecurityContext.NONE})],
   standalone: true,
   imports: [MatFormFieldModule, MatInputModule,
-    ReactiveFormsModule, RouterLink, MarkdownComponent, MarkdownPipe,
+    ReactiveFormsModule, RouterLink, MarkdownComponent,
     CommonModule]
 })
 

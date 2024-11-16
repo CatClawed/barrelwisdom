@@ -62,28 +62,20 @@ p {
     margin-bottom: 1rem;
 }
 
-@mixin headers {
-    @for $i from 0 through 5 {
-        h#{$i+1} {
-            font-size: #{math.max(2.5-$i*0.4, 1)}rem;
-            line-height: #{math.max(2.5-$i*0.4, 1)}rem;
-        }
+@for $i from 0 through 5 {
+    h#{$i+1} {
+        font-size: #{math.max(2.5-$i*0.4, 1)}rem;
+        line-height: #{math.max(2.5-$i*0.4, 1)}rem;
     }
 }
 
-@mixin headers-sm {
+@media screen and (max-width: v.$breakpoint-md) {
     @for $i from 0 through 5 {
         h#{$i+1} {
             font-size: #{math.max(1.7-$i*0.15, 1)}rem;
             line-height: #{math.max(1.7-$i*0.15, 1)}rem;
         }
     }
-}
-
-@include headers;
-
-@media screen and (max-width: v.$breakpoint-md) {
-    @include headers-sm;
 }
 
 ol,
@@ -101,10 +93,6 @@ table {
     ul,
     ol {
         margin-bottom: 0;
-    }
-
-    @media screen and (max-width: v.$breakpoint-md) {
-        font-size: 0.95rem;
     }
 }
 
