@@ -2,7 +2,7 @@
   <ng-template #template let-recipe="item">
     <item
       [item]="recipe"
-      url="/{{gameURL}}/recipe-ideas/{{recipe.slug}}/{{language}}"
+      url="/{{gameURL}}/items/{{recipe.slug}}/{{language}}"
       (buttonClicked)="openDialog($event, undefined, 'items')"
       dimension="280"
       [hideButton]="true"

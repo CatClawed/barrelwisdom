@@ -58,6 +58,11 @@ export class BlogComponent implements OnInit {
     this.authenticationService.user.pipe(takeUntil(this.destroy$)).subscribe(x => this.user = x);
     this.route.paramMap.pipe(
       switchMap(params => {
+        if (/[A-Z]+/.test(params.get('title') + params.get('section'))) {
+          this.blog = null;
+          this.error = this.breadcrumbService.setStatus(404);;
+          return of(undefined)
+        }
         return this.blogService.getBlog(params.get('title'), params.get('section'))
           .pipe(
             catchError(error => {

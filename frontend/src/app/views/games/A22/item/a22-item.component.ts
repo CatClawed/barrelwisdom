@@ -98,7 +98,6 @@ export class A22ItemComponent extends SingleComponent {
         if (this.eff2.length > 0) this.effs.push(this.eff2);
         if (this.eff3.length > 0) this.effs.push(this.eff3);
         if (this.eff4.length > 0) this.effs.push(this.eff4);
-        console.log(this.default)
       }
     }
   }

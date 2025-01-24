@@ -10,12 +10,12 @@ BASE_URL = 'https://raw.githubusercontent.com/theBowja/resleriana-db/main/data/'
 
 names =     ['ability', 'base_enemy', 'battle', 'battle_hint', 'battle_tool', 'battle_tool_trait', 'character',
              'character_tag', 'effect', 'emblem', 'emblem_rarity', 'enemy', 'enemy_ai_unit', 'equipment_tool',
-             'equipment_tool_trait', 'hyperlink', 'illustrator', 'item', 'leader_skill_condition', 'memoria',
+             'equipment_tool_trait', 'gacha', 'hyperlink', 'illustrator', 'item', 'leader_skill_condition', 'memoria',
              'memoria_buff_growth', 'quest', 'recipe', 'recipe_plan', 'research', 'research_effect',
              'research_effect_level', 'reward_set', 'skill', 'species', 'timeline_panel', 'wave']
 names_gbl = ['ability', 'base_enemy', 'battle_hint', 'battle_tool', 'battle_tool_trait', 'character',
              'character_tag', 'effect', 'emblem', 'emblem_rarity', 'enemy', 'equipment_tool',
-             'equipment_tool_trait', 'illustrator', 'item', 'memoria',
+             'equipment_tool_trait', 'gacha', 'illustrator', 'item', 'memoria',
              'quest', 'recipe', 'recipe_plan', 'research', 'research_effect',
              'skill', 'species']
 jsons = {}
@@ -183,6 +183,19 @@ def createUpdateGBL():
     obj = LatestUpdateGBL()
     obj.save()
     print('Update Created')
+
+def update_gacha():
+    for gach in jsons['gacha']:
+        if 'name_en' in gach:
+            try:
+                desc = Desc.objects.get(text_ja=gach['name'])
+                desc.text_en = gach['name_en']
+                desc.text_sc = gach['name_zh_cn']
+                desc.text_tc = gach['name_zh_tw']
+                print(gach['name_en'])
+                desc.save()
+            except:
+                pass
 
 def import_research():
     for res in jsons['research']:
@@ -817,8 +830,6 @@ def import_equipment():
             text_tc = item["description_zh_tw"] if 'description_zh_tw' in item else '',
         )
 
-
-
         try:
             obj = Item.objects.get(name=name)
             print("Updating Equipment", name.text_ja)
@@ -828,7 +839,9 @@ def import_equipment():
             print("Creating Equipment", name.text_ja)
             create = True
 
-        obj.name = namememoria
+        obj.name = name
+        if obj not in prev_item:
+            obj.rarity = item['rarity']
         if not create:
             if obj.rarity == item['rarity']: # skip SR text when SSR exists
                 obj.desc = desc
@@ -1447,12 +1460,12 @@ def global_additions():
     rStory = RecipeTab.objects.get(order=1)
     rTower = RecipeTab.objects.get(order=2)
 
-    dungeons = [] #["Spiral into Another World", "Bottomless Pit"]
+    dungeons = [] # done
     score_battle_chapter = None
     tower_floor_max = None
     elem_tower_floor_max = None
-    events = ['アトリエサマー第3弾 LEGEND FES', 'アトリエサマー2024 第3弾']
-    recipe_pages = [] #[[rStory, 44], [rStory, 45]] # refer to recipepage db for numbers
+    events = [] #['1周年 星礼祭 LEGEND FES 暁の風雲児', '1周年 星礼祭 LEGEND FES 極夜に解ける呼び声', '旋風！！ユーディーからの試練']
+    recipe_pages =[] #[[rStory, 63]]
     traits = []
 
     if tower_floor_max:
@@ -1470,7 +1483,7 @@ def global_additions():
                 tower.save()
                 print(tower.kind.text_en, tower.floor)
     if score_battle_chapter:
-        score_battles = ScoreBattle.objects.filter(chapter=score_battle_chapter)
+        score_battles = ScoreBattle.objects.filter(chap=score_battle_chapter)
         for sb in score_battles:
             sb.gbl = True
             sb.save()
@@ -1479,7 +1492,7 @@ def global_additions():
                     if not reward.item.gbl:
                         reward.item.gbl = True
                         reward.item.save()
-                        print("Score Battle Reward", sb.chapter, sb.section, diff.difficulty, reward.item.name.text_en, reward.item.name.text_ja)
+                        print("Score Battle Reward", sb.chap, sb.sect, diff.difficulty, reward.item.name.text_en, reward.item.name.text_ja)
                         update.items.add(reward.item)
     for dungeon in dungeons:
         n = Name.objects.get(text_en=dungeon)
@@ -1562,19 +1575,20 @@ def cleanup():
 
 # for setting slugs
 additions = {
-    "マクダ": "magda-1"
+    "フィリス": "firis-3",
 }
-memoria_index = 125 # magda
-base_enemy_index = 88
+memoria_index = 147 # firis
+base_enemy_index = 100
 
-gacha = create_event(ja='踊る混沌 マクダ LEGEND FES', en="Dancing Chaos Magda LEGEND FES")
+gacha = create_event(ja='親友と歩む未来 フィリス LEGEND FES', en="Firis LEGEND FES")
 
 #createUpdate()
 retrieve_all_jsons()
+#update_gacha()
 #import_combat_traits()
 #import_equipment_traits()
 #import_characters(event=gacha, additions=additions)
-memoria_index = import_memoria(memoria_index, event=gacha)
+#memoria_index = import_memoria(memoria_index, event=gacha)
 #import_material()
 #import_combat_items()
 #import_equipment()
@@ -1582,8 +1596,8 @@ memoria_index = import_memoria(memoria_index, event=gacha)
 #base_enemy_index = import_enemy(base_enemy_index)
 #import_quest()
 #import_emblem()
-#scan_update_images()
-#enemy_images()
+scan_update_images()
+enemy_images()
 #print(f'Memoria: {memoria_index}\tEnemy: {base_enemy_index}')
 
 #global_additions()
