@@ -1431,21 +1431,31 @@ def scan_update_images():
     for item in update.items.all():
         if item.kind.text_en == 'Material':
             im = search(item.name.text_ja, material_dict, 'name')[0]['large_still_path_hash']
-            print(item.slug, jsons['path_hash_to_name'][im])
         elif item.kind.text_en == 'Equipment':
             im = search(item.name.text_ja, equip_dict, 'name')[0]['still_path_hash']
-            print(item.slug, jsons['path_hash_to_name'][im])
         else:
             im = search(item.name.text_ja, battle_dict, 'name')[0]['still_path_hash']
+        try:
             print(item.slug, jsons['path_hash_to_name'][im])
+        except:
+            print("ERROR:", item.slug)
     for memoria in update.memoria.all():
         im = search(memoria.name.text_ja, jsons['memoria'], 'name')[0]['still_path_hash']
-        print(memoria.slug, jsons['path_hash_to_name'][im])
+        try:
+            print(memoria.slug, jsons['path_hash_to_name'][im])
+        except:
+            print("ERROR:", memoria.slug)
     for character in update.characters.all():
         im = search(character.title.text_ja, jsons['character'], 'another_name')[0]['large_still_path_hash']
-        print(character.slug, jsons['path_hash_to_name'][im])
+        try:
+            print(character.slug, jsons['path_hash_to_name'][im])
+        except:
+            print("ERROR:", character.slug)
         im = search(character.title.text_ja, jsons['character'], 'another_name')[0]['large_narrow_still_path_hash']
-        print(character.slug, jsons['path_hash_to_name'][im])
+        try:
+            print(character.slug, jsons['path_hash_to_name'][im])
+        except:
+            print("ERROR:", character.slug)
 
 def enemy_images():
     for e in jsons['base_enemy']:
@@ -1454,7 +1464,7 @@ def enemy_images():
 
 
 def global_additions():
-    createUpdateGBL()
+    #createUpdateGBL()
     update = LatestUpdateGBL.objects.first()
 
     rStory = RecipeTab.objects.get(order=1)
@@ -1464,8 +1474,8 @@ def global_additions():
     score_battle_chapter = None
     tower_floor_max = None
     elem_tower_floor_max = None
-    events = [] #['1周年 星礼祭 LEGEND FES 暁の風雲児', '1周年 星礼祭 LEGEND FES 極夜に解ける呼び声', '旋風！！ユーディーからの試練']
-    recipe_pages =[] #[[rStory, 63]]
+    events = ['HALLOWEEN2024 LEGEND FES']
+    recipe_pages = [[rStory, 65], [rStory, 69], [rStory, 71]]
     traits = []
 
     if tower_floor_max:
@@ -1575,15 +1585,15 @@ def cleanup():
 
 # for setting slugs
 additions = {
-    "フィリス": "firis-3",
+    "プラフタ": "plachta-3",
 }
-memoria_index = 147 # firis
-base_enemy_index = 100
+memoria_index = 151 # valentine
+base_enemy_index = 101
 
-gacha = create_event(ja='親友と歩む未来 フィリス LEGEND FES', en="Firis LEGEND FES")
+gacha = create_event(ja='VALENTINE 2025 プラフタ LEGEND FES')
 
 #createUpdate()
-retrieve_all_jsons()
+#retrieve_all_jsons()
 #update_gacha()
 #import_combat_traits()
 #import_equipment_traits()
@@ -1596,11 +1606,11 @@ retrieve_all_jsons()
 #base_enemy_index = import_enemy(base_enemy_index)
 #import_quest()
 #import_emblem()
-scan_update_images()
-enemy_images()
+#scan_update_images()
+#enemy_images()
 #print(f'Memoria: {memoria_index}\tEnemy: {base_enemy_index}')
 
-#global_additions()
+global_additions()
 #import_research()
 
 """

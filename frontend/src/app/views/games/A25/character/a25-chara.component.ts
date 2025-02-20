@@ -62,8 +62,8 @@ export class A25CharaComponent extends SingleComponent {
 
   replaceDesc(skill) {
     let desc = skill.desc;
-    const skillval =  [skill.val0,   skill.val1,   skill.val2,   skill.val3];
-    const skillval2 = [skill.val0_2, skill.val1_2, skill.val2_2, skill.val3_2];
+    const skillval =  [skill.val0,   skill.val1,   skill.val2,   skill.val3,   skill.val4,   skill.val4,   skill.val6];
+    const skillval2 = [skill.val0_2, skill.val1_2, skill.val2_2, skill.val3_2, skill.val4_2, skill.val4_2, skill.val6_2,];
     for (let i = 0; i < skillval.length; i++) {
       if (skillval[i]) {
         desc = skillval2[i]
