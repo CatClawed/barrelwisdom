@@ -18,29 +18,28 @@ import { A25CharaComponent } from './a25-chara.component';
 import { A25CharaFrameComponent } from './a25-charaframe.component';
 
 @Component({
-  templateUrl: 'a25-charalist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, NgTemplateOutlet,
-    A25CharaComponent, MatMenuModule, MatCheckboxModule, A25CharaFrameComponent],
-  styles: [
-    `.char-grid {
+    templateUrl: 'a25-charalist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, NgTemplateOutlet,
+        A25CharaComponent, MatMenuModule, MatCheckboxModule, A25CharaFrameComponent],
+    styles: [
+        `.char-grid {
       display: grid;
       gap: 1rem;
       margin-bottom: 1rem;
       grid-column-gap:0.8%;
     }`,
-    `@media screen and (min-width: 800px) {
+        `@media screen and (min-width: 800px) {
       .char-grid {
         grid-template-columns:repeat(6,16%);
       }
     }`,
-    `@media screen and (max-width: 800px) {
+        `@media screen and (max-width: 800px) {
       .char-grid {
         grid-template-columns:repeat(3,31%);
       }
     }`
-  ],
+    ]
 })
 
 export class A25CharalistComponent extends DialogUseComponent {

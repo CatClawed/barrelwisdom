@@ -16,11 +16,10 @@ import { map, startWith } from 'rxjs/operators';
 import { A16PropertyComponent } from './a16-property.component';
 
 @Component({
-  templateUrl: 'a16-propertylist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
-    A16PropertyComponent]
+    templateUrl: 'a16-propertylist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
+        A16PropertyComponent]
 })
 export class A16PropertylistComponent extends DialogUseComponent {
   filteredProperties: Observable<Property[]>;

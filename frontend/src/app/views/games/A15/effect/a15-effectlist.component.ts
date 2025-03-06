@@ -16,11 +16,10 @@ import { map, startWith } from 'rxjs/operators';
 import { A15EffectComponent } from './a15-effect.component';
 
 @Component({
-  templateUrl: 'a15-effectlist.component.html',
-  selector: 'a15-effectlist',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, A15EffectComponent, FilterListComponent]
+    templateUrl: 'a15-effectlist.component.html',
+    selector: 'a15-effectlist',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, A15EffectComponent, FilterListComponent]
 })
 
 export class A15EffectlistComponent extends DialogUseComponent {

@@ -16,11 +16,10 @@ import { map, startWith } from 'rxjs/operators';
 import { A23EffectComponent } from './a23-effect.component';
 
 @Component({
-  templateUrl: 'a23-effectlist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports,
-    A23EffectComponent, FilterListComponent]
+    templateUrl: 'a23-effectlist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports,
+        A23EffectComponent, FilterListComponent]
 })
 
 export class A23EffectlistComponent extends DialogUseComponent {

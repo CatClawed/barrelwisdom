@@ -10,7 +10,8 @@ import { DataComponent } from './data.component';
 
 @Component({
     template: '',
-    providers: [DestroyService]
+    providers: [DestroyService],
+    standalone: false
 })
 
 export abstract class FilterableComponent extends DataComponent {

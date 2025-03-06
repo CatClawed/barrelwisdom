@@ -9,11 +9,10 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'brsl-item.component.html',
-  selector: 'brsl-item',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, Popover]
+    templateUrl: 'brsl-item.component.html',
+    selector: 'brsl-item',
+    providers: [DestroyService],
+    imports: [...CommonImports, Popover]
 })
 export class BRSLItemComponent extends SingleComponent {
   expand = false;

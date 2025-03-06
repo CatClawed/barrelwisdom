@@ -9,11 +9,10 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a18-trait.component.html',
-  selector: 'a18-trait',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, Tooltip]
+    templateUrl: 'a18-trait.component.html',
+    selector: 'a18-trait',
+    providers: [DestroyService],
+    imports: [...CommonImports, Tooltip]
 })
 export class A18TraitComponent extends SingleComponent {
   constructor(

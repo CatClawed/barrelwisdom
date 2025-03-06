@@ -17,10 +17,9 @@ import { DialogUseComponent } from '../../_prototype/dialog-use.component';
 import { A18ItemComponent } from '../item/a18-item.component';
 
 @Component({
-  templateUrl: 'a18-catalystlist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, FilterListComponent, ItemComponent]
+    templateUrl: 'a18-catalystlist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, FilterListComponent, ItemComponent]
 })
 
 export class A18CatalystlistComponent extends DialogUseComponent {

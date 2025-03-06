@@ -8,11 +8,10 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a15-monster.component.html',
-  selector: 'a15-monster',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports]
+    templateUrl: 'a15-monster.component.html',
+    selector: 'a15-monster',
+    providers: [DestroyService],
+    imports: [...CommonImports]
 })
 export class A15MonsterComponent extends SingleComponent {
   constructor(

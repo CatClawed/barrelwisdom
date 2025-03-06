@@ -10,10 +10,9 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a22-category.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, CategoryComponent, NgTemplateOutlet]
+    templateUrl: 'a22-category.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, CategoryComponent, NgTemplateOutlet]
 })
 export class A22CategoryComponent extends SingleComponent {
   constructor(

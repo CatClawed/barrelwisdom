@@ -12,15 +12,17 @@ import { LanguageData } from '@environments/language-data';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-layout',
-  templateUrl: './layout.component.html',
-  providers: [DestroyService]
+    selector: 'app-layout',
+    templateUrl: './layout.component.html',
+    providers: [DestroyService],
+    standalone: false
 })
 export class LayoutComponent implements OnInit {
   public sidebarMinimized = false;
   public navItems: NavItems[];
   user: User;
-  mobileView = true;
+  desktopView = false;
+  mode = 'over';
   languages;
   codes;
   currentLang = "en";
@@ -72,10 +74,10 @@ export class LayoutComponent implements OnInit {
       });
 
     this.breakpointObserver.observe([
-      '(max-width: 800px)'])
+      '(min-width: 800px)'])
       .pipe(takeUntil(this.destroy$))
       .subscribe(result => {
-      this.mobileView = result.matches;
+      this.desktopView = result.matches;
     });
   }
 

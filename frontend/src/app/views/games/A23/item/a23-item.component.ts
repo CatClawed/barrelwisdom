@@ -11,11 +11,10 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a23-item.component.html',
-  selector: 'a23-item',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, Popover]
+    templateUrl: 'a23-item.component.html',
+    selector: 'a23-item',
+    providers: [DestroyService],
+    imports: [...CommonImports, Popover]
 })
 export class A23ItemComponent extends SingleComponent {
   colors = {

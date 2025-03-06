@@ -18,11 +18,10 @@ import { A25ItemComponent } from '../item/a25-item.component';
 import { A25TraitComponent } from './a25-trait.component';
 
 @Component({
-  templateUrl: 'a25-traitlist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports,
-    A25ItemComponent, A25TraitComponent, A25CharaComponent, FilterListComponent]
+    templateUrl: 'a25-traitlist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports,
+        A25ItemComponent, A25TraitComponent, A25CharaComponent, FilterListComponent]
 })
 
 export class A25TraitlistComponent extends DialogUseComponent {

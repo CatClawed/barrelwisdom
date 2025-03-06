@@ -18,11 +18,10 @@ import { map, startWith } from 'rxjs/operators';
 import { A12ItemComponent } from './a12-item.component';
 
 @Component({
-  templateUrl: 'a12-itemlist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, ItemComponent,
-    MatButtonModule, FilterListComponent]
+    templateUrl: 'a12-itemlist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, ItemComponent,
+        MatButtonModule, FilterListComponent]
 })
 
 export class A12ItemlistComponent extends DialogUseComponent {

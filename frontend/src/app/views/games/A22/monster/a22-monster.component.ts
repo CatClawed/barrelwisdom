@@ -8,11 +8,10 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a22-monster.component.html',
-  selector: 'a22-monster',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports]
+    templateUrl: 'a22-monster.component.html',
+    selector: 'a22-monster',
+    providers: [DestroyService],
+    imports: [...CommonImports]
 })
 export class A22MonsterComponent extends SingleComponent {
   hp: boolean[] = [];

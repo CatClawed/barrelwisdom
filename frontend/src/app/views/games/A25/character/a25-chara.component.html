@@ -79,9 +79,9 @@
             <mat-slider
               color="accent"
               style="width:100%;"
-              [max]="7"
+              [max]="chara.six_star ? 8 : 7"
               [min]="chara.rarity">
-              <input matSliderThumb value="7" #starSlider>
+              <input matSliderThumb value="{{chara.six_star ? 8 : 7}}" #starSlider>
             </mat-slider>
           </div>
         </td>
@@ -114,6 +114,9 @@
           <tr>
             <td>
               <b>{{skill.name}}</b>
+              @if (skill.evol) {
+                (6 <i class="fa-solid fa-star"></i>)
+              }
               <i class="atelier atelier-np atelier-resleri-{{skill.elem}} resleri-element-icon"
                 style="float:right;background-color:{{a25service.elements[skill.elem]}};"></i>
               <p [innerHTML]="replaceDesc(skill)"></p>
@@ -144,6 +147,9 @@
                 @for (passive of chara.passives; track passive) {
                   <li>
                     {{passive.name}}
+                    @if (passive.evol) {
+                      (6 <i class="fa-solid fa-star"></i>)
+                    }
                     <ul>
                       <li [innerHTML]="replacePassive(passive)"></li>
                     </ul>

@@ -9,11 +9,11 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a22-item.component.html',
-  selector: 'a22-item',
-  encapsulation: ViewEncapsulation.None,
-  styles: [
-    `.btn-ryza2 {
+    templateUrl: 'a22-item.component.html',
+    selector: 'a22-item',
+    encapsulation: ViewEncapsulation.None,
+    styles: [
+        `.btn-ryza2 {
       display: inline-flex;
       max-width: 100%;
       margin-top: 0.3rem;
@@ -21,10 +21,9 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
       text-decoration: none !important;
       font-size: 1rem;
     }`
-  ],
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, Popover]
+    ],
+    providers: [DestroyService],
+    imports: [...CommonImports, Popover]
 })
 export class A22ItemComponent extends SingleComponent {
   default: any[] = [];

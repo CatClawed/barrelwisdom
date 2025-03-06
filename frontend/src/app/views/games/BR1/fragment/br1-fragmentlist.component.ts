@@ -14,10 +14,9 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
 @Component({
-  templateUrl: 'br1-fragmentlist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, FilterListComponent]
+    templateUrl: 'br1-fragmentlist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, FilterListComponent]
 })
 
 export class BR1FragmentEffectlistComponent extends FragmentedComponent {

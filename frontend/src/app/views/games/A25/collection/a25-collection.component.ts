@@ -25,30 +25,29 @@ import { forkJoin, map, Observable, startWith } from 'rxjs';
 import { A25CharaFrameComponent } from '../character/a25-charaframe.component';
 
 @Component({
-  templateUrl: 'a25-collection.component.html',
-  selector: 'a25-collection',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, MatTabsModule, KeyValuePipe,
-    MatButtonModule, MatCheckboxModule, MatMenuModule, NgTemplateOutlet,
-    Popover, ClipboardModule, A25CharaFrameComponent],
-  styles: [
-    `.char-grid {
+    templateUrl: 'a25-collection.component.html',
+    selector: 'a25-collection',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, MatTabsModule, KeyValuePipe,
+        MatButtonModule, MatCheckboxModule, MatMenuModule, NgTemplateOutlet,
+        Popover, ClipboardModule, A25CharaFrameComponent],
+    styles: [
+        `.char-grid {
       display: grid;
       gap: 1rem;
       margin-bottom: 1rem;
       grid-column-gap:0.8%;
     }`,
-    `.a25-emblem {
+        `.a25-emblem {
       cursor: pointer;
       display: inline-block;
       width: 180px;
       aspect-ratio: 180/540;
     }`,
-    `.mem-grid {
+        `.mem-grid {
       display: grid;
     }`,
-    `@media screen and (min-width: 800px) {
+        `@media screen and (min-width: 800px) {
       .char-grid {
         grid-template-columns:repeat(6,16%);
       }
@@ -58,9 +57,8 @@ import { A25CharaFrameComponent } from '../character/a25-charaframe.component';
       .a25-mem-font {
         font-size:1.4vw
       }
-    }`
-    ,
-    `@media screen and (max-width: 800px) {
+    }`,
+        `@media screen and (max-width: 800px) {
       .char-grid {
         grid-template-columns:repeat(3,31%);
       }
@@ -71,17 +69,17 @@ import { A25CharaFrameComponent } from '../character/a25-charaframe.component';
         font-size:1.4vw
       }
     }`,
-    `.tabs-overflow2 {
+        `.tabs-overflow2 {
       .mat-mdc-tab-body-content {
           overflow: hidden;
       }
     }`,
-    `.mem-img {
+        `.mem-img {
       aspect-ratio: 256/410;
       width: 256px;
       display: block;
     }`
-  ]
+    ]
 })
 export class A25CollectionComponent extends DialogUseComponent {
   collection = {

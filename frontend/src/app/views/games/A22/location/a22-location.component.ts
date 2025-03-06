@@ -9,10 +9,9 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
 
 @Component({
-  templateUrl: 'a22-location.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports]
+    templateUrl: 'a22-location.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports]
 })
 
 export class A22LocationComponent extends FragmentedComponent {

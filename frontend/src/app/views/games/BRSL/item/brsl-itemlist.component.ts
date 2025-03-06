@@ -18,11 +18,10 @@ import { map, startWith } from 'rxjs/operators';
 import { BRSLItemComponent } from './brsl-item.component';
 
 @Component({
-  templateUrl: 'brsl-itemlist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
-    ItemComponent, MatButtonModule]
+    templateUrl: 'brsl-itemlist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
+        ItemComponent, MatButtonModule]
 })
 
 export class BRSLItemlistComponent extends DialogUseComponent {

@@ -5,11 +5,10 @@ import { Component, Input, TemplateRef } from '@angular/core';
 // TODO: Fix fake link style to appear as real link. adding 'wtf' fixes wut.
 
 @Component({
-  selector: 'popover',
-  templateUrl: 'popover.component.html',
-  styleUrl: 'popover.component.scss',
-  standalone: true,
-  imports: [OverlayModule, NgTemplateOutlet],
+    selector: 'popover',
+    templateUrl: 'popover.component.html',
+    styleUrl: 'popover.component.scss',
+    imports: [OverlayModule, NgTemplateOutlet]
 })
 export class Popover {
   isOpen = false;

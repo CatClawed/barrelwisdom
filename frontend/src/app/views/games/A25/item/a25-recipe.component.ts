@@ -13,12 +13,11 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a25-recipe.component.html',
-  styleUrls: ['../resleri.scss'],
-  encapsulation: ViewEncapsulation.None,
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, MatTabsModule, MatIconModule, MatButtonModule, Popover]
+    templateUrl: 'a25-recipe.component.html',
+    styleUrls: ['../resleri.scss'],
+    encapsulation: ViewEncapsulation.None,
+    providers: [DestroyService],
+    imports: [...CommonImports, MatTabsModule, MatIconModule, MatButtonModule, Popover]
 })
 export class A25RecipeComponent extends SingleComponent {
   constructor(

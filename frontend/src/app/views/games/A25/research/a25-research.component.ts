@@ -10,10 +10,9 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a25-research.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [CommonImports, MatTabsModule, NgTemplateOutlet]
+    templateUrl: 'a25-research.component.html',
+    providers: [DestroyService],
+    imports: [CommonImports, MatTabsModule, NgTemplateOutlet]
 })
 export class A25ResearchComponent extends SingleComponent {
   constructor(

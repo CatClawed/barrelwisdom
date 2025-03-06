@@ -13,10 +13,9 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
 @Component({
-  templateUrl: 'brsl-facilityset.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, FilterListComponent]
+    templateUrl: 'brsl-facilityset.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, FilterListComponent]
 })
 
 export class BRSLFacilitySetComponent extends FilterableComponent {

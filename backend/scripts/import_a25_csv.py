@@ -403,11 +403,26 @@ def import_skills(char_dict, char, index):
     for s in char_dict["burst_skill_ids"]:
         s3.append(search(s, jsons['skill'])[0])
     s3 = s3[2:]
-
     skills = [s1, s2, s3]
 
-    for skill in skills:
+    if len(char_dict["evolved_burst_skill_ids"]) > 0:
+        s4 = []
+        s5 = []
+        s6 = []
+        for s in char_dict["evolved_normal1_skill_ids"]:
+            s4.append(search(s, jsons['skill'])[0])
+        for s in char_dict["evolved_normal2_skill_ids"]:
+            s5.append(search(s, jsons['skill'])[0])
+        for s in char_dict["evolved_burst_skill_ids"]:
+            s6.append(search(s, jsons['skill'])[0])
+        s6 = s6[2:]
+        skills = [s1, s2, s3, s4, s5, s6]
+
+    for i in range(0, len(skills)):
+        skill = skills[i]
         fix_hyperlink(skill[0]['description'])
+        length = len(skill) # sigh
+        evol = True if i >= 3 else False
 
         name = checkName(
             text_ja=skill[0]['name'],
@@ -423,7 +438,7 @@ def import_skills(char_dict, char, index):
             text_tc=fix_hyperlink(skill[0]['description_zh_tw'], lang="_zh_tw") if 'description_zh_tw' in skill[0] else '',
         )
         try:
-            obj = Skill.objects.get(char=char, name=name)
+            obj = Skill.objects.get(char=char, name=name, evol=evol)
             print("Updating Skill", name.text_ja)
         except:
             print("Creating Skill", name.text_ja)
@@ -431,13 +446,14 @@ def import_skills(char_dict, char, index):
 
         obj.name = name
         obj.desc = desc
+        obj.evol = evol
         obj.elem = elems[skill[0]['attack_attributes'][0]]
         obj.area = area[skill[0]['skill_target_type']]
         obj.wt = skill[0]['wait']+200
         obj.index = index
 
         effects1 = skill[0]['effects']
-        effects5 = skill[4]['effects']
+        effects5 = skill[length-1]['effects']
 
         if len(effects1) >= 1:
             obj.val0 = effects1[0]['value']
@@ -466,12 +482,14 @@ def import_skills(char_dict, char, index):
         obj.pow3 = skill[2]['power']
         obj.pow4 = skill[3]['power']
         obj.pow5 = skill[4]['power']
+        obj.pow6 = skill[5]['power'] if length > 5 else None
 
         obj.break1 = skill[0]['break_power']
         obj.break2 = skill[1]['break_power']
         obj.break3 = skill[2]['break_power']
         obj.break4 = skill[3]['break_power']
         obj.break5 = skill[4]['break_power']
+        obj.break6 = skill[5]['break_power'] if length > 5 else None
 
         obj.save()
         index = index + 1
@@ -481,7 +499,8 @@ def import_passives(char_dict, char, num):
     for a in char_dict['ability_ids']:
         passives.append(search(a, jsons['ability'])[0])
 
-    for passive in passives:
+    for i in range(0, len(passives)):
+        passive = passives[i]
         name = checkName(
             text_ja=passive['name'],
             text_en=passive['name_en'] if 'name_en' in passive else '',
@@ -503,6 +522,7 @@ def import_passives(char_dict, char, num):
             obj = Passive(char=char, num=num)
         obj.name = name
         obj.desc = desc
+        obj.evol = True if i == 2 else False
         obj.val = passive['effects'][0]['value']
         obj.val2 = passive['effects'][1]['value'] if len(passive['effects']) > 1 else None
         obj.val3 = passive['effects'][2]['value'] if len(passive['effects']) > 2 else None
@@ -593,6 +613,7 @@ def import_characters(event=None, additions=None):
         obj.trait1=Trait.objects.get(name__text_ja=t1['name'])
         obj.trait2=Trait.objects.get(name__text_ja=t2['name'])
         obj.trait3=Trait.objects.get(name__text_ja=t3['name'])
+        obj.six_star = True if len(char['evolved_burst_skill_ids']) > 0 else False
 
         skill_tag = search(char['leader_skill']['abilities'][0]['condition_ids'][0],
             jsons['leader_skill_condition'])[0]['character_tag_ids']
@@ -618,8 +639,15 @@ def import_characters(event=None, additions=None):
             update = LatestUpdate.objects.first()
             update.characters.add(obj)
 
-        import_skills(char, obj, 4 if char['change'] else 1)
-        import_passives(char, obj, 3 if char['change'] else 1)
+        indSkill = 1
+        indPass = 1
+
+        if char['change']:
+            indSkill += 6
+            indPass += 3
+
+        import_skills(char, obj, indSkill)
+        import_passives(char, obj, indPass)
 
 def import_memoria(memoria_index, event=None):
     for mem in jsons['memoria']:
@@ -906,6 +934,10 @@ def import_recipes():
     rTower = RecipeTab.objects.get(order=2)
     rEvent = RecipeTab.objects.get(order=3)
     for recipe in jsons['recipe']:
+        chara = None
+        if recipe['character_id'] != None:
+            entry = search(recipe['character_id'], jsons['character'])[0]
+            chara = Character.objects.get(title__text_ja=entry['another_name'], name__text_ja=entry['name'])
         item = Item.objects.get(name__text_ja=recipe['name'])
         plan = search(recipe['recipe_plan_id'], jsons['recipe_plan'])[0]
 
@@ -965,6 +997,7 @@ def import_recipes():
             print("Creating Recipe", item.name.text_ja)
             obj = Recipe(item=item)
 
+        obj.chara=chara
         obj.page=rPage
         obj.order=recipe['id']
         obj.book=recipe['recipe_plan_id']
@@ -974,12 +1007,12 @@ def import_recipes():
         obj.unlock1=unlock1
         obj.unlock2=unlock2
         obj.unlock3=unlock3
-        obj.quant1=recipe['ingredient_costs'][0]['quantity']
-        obj.quant2=recipe['ingredient_costs'][1]['quantity'] if len(recipe['ingredient_costs']) > 1 else None
-        obj.quant3=recipe['ingredient_costs'][2]['quantity'] if len(recipe['ingredient_costs']) > 2 else None
-        obj.ing1=Item.objects.get(name__text_ja=search(recipe['ingredient_costs'][0]['id'], jsons['item'])[0]['name'])
-        obj.ing2=Item.objects.get(name__text_ja=search(recipe['ingredient_costs'][1]['id'], jsons['item'])[0]['name']) if len(recipe['ingredient_costs']) > 1 else None
-        obj.ing3=Item.objects.get(name__text_ja=search(recipe['ingredient_costs'][2]['id'], jsons['item'])[0]['name']) if len(recipe['ingredient_costs']) > 2 else None
+        obj.quant1=recipe['costs'][0]['quantity']
+        obj.quant2=recipe['costs'][1]['quantity'] if len(recipe['costs']) > 1 else None
+        obj.quant3=recipe['costs'][2]['quantity'] if len(recipe['costs']) > 2 else None
+        obj.ing1=Item.objects.get(name__text_ja=search(recipe['costs'][0]['id'], jsons['item'])[0]['name']) if not chara else None
+        obj.ing2=Item.objects.get(name__text_ja=search(recipe['costs'][1]['id'], jsons['item'])[0]['name']) if len(recipe['costs']) > 1 else None
+        obj.ing3=Item.objects.get(name__text_ja=search(recipe['costs'][2]['id'], jsons['item'])[0]['name']) if len(recipe['costs']) > 2 else None
         obj.save()
 
         if plan['recipe_plan_category_id'] == 2:
@@ -1446,12 +1479,12 @@ def scan_update_images():
         except:
             print("ERROR:", memoria.slug)
     for character in update.characters.all():
-        im = search(character.title.text_ja, jsons['character'], 'another_name')[0]['large_still_path_hash']
+        im = search(character.title.text_ja, jsons['character'], 'another_name')[0]['still_sets'][0]['large_still_path_hash']
         try:
             print(character.slug, jsons['path_hash_to_name'][im])
         except:
             print("ERROR:", character.slug)
-        im = search(character.title.text_ja, jsons['character'], 'another_name')[0]['large_narrow_still_path_hash']
+        im = search(character.title.text_ja, jsons['character'], 'another_name')[0]['still_sets'][0]['large_narrow_still_path_hash']
         try:
             print(character.slug, jsons['path_hash_to_name'][im])
         except:
@@ -1585,16 +1618,16 @@ def cleanup():
 
 # for setting slugs
 additions = {
-    "プラフタ": "plachta-3",
+    "アルビーナ": "alvina-1",
+    "ベップ": "bepp-1"
 }
-memoria_index = 151 # valentine
-base_enemy_index = 101
+memoria_index = 157 # alvina
+base_enemy_index = 111
 
-gacha = create_event(ja='VALENTINE 2025 プラフタ LEGEND FES')
+gacha = create_event(ja='シーズン2開幕！ 新たなる導き アルビーナ LEGEND FES')
 
 #createUpdate()
 #retrieve_all_jsons()
-#update_gacha()
 #import_combat_traits()
 #import_equipment_traits()
 #import_characters(event=gacha, additions=additions)
@@ -1610,8 +1643,9 @@ gacha = create_event(ja='VALENTINE 2025 プラフタ LEGEND FES')
 #enemy_images()
 #print(f'Memoria: {memoria_index}\tEnemy: {base_enemy_index}')
 
-global_additions()
+#global_additions()
 #import_research()
+#update_gacha()
 
 """
 python manage.py dumpdata chara_a25 items_a25 misc_a25 quest_a25 -o dump.json.gz

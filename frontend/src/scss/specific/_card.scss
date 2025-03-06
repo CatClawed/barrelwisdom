@@ -21,6 +21,10 @@
       max-height: calc(100dvh - 6.1rem);
       overflow-y: auto;
     }
+
+    @media screen and (min-width: 1280px) {
+      max-width: calc(85dvw);
+    }
   }
 
   .card::-webkit-scrollbar {

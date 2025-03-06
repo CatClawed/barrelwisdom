@@ -9,11 +9,10 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a18-effect.component.html',
-  selector: 'a18-effect',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, EffectComponent]
+    templateUrl: 'a18-effect.component.html',
+    selector: 'a18-effect',
+    providers: [DestroyService],
+    imports: [...CommonImports, EffectComponent]
 })
 export class A18EffectComponent extends SingleComponent {
   constructor(

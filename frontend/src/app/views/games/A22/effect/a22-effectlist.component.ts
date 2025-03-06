@@ -17,11 +17,10 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 import { A22EffectComponent } from './a22-effect.component';
 
 @Component({
-  templateUrl: 'a22-effectlist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports,
-    A22EffectComponent, Tooltip, FilterListComponent]
+    templateUrl: 'a22-effectlist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports,
+        A22EffectComponent, Tooltip, FilterListComponent]
 })
 
 export class A22EffectlistComponent extends DialogUseComponent {

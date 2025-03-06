@@ -6,18 +6,17 @@ import { Character } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 
 @Component({
-  templateUrl: 'a25-charaframe.component.html',
-  selector: 'a25-charaframe',
-  providers: [DestroyService],
-  standalone: true,
-  encapsulation: ViewEncapsulation.None,
-  styles: [
-    `.a25-star-font {
+    templateUrl: 'a25-charaframe.component.html',
+    selector: 'a25-charaframe',
+    providers: [DestroyService],
+    encapsulation: ViewEncapsulation.None,
+    styles: [
+        `.a25-star-font {
       -webkit-text-stroke-color:black;
       color:yellow;
       padding-top:0.3rem;
     }`,
-    `.a25-char-font {
+        `.a25-char-font {
       height: 24%;
       width: 24%;
       aspect-ratio:1;
@@ -30,7 +29,7 @@ import { A25Service } from '@app/views/games/A25/_services/a25.service';
       bottom:0;
       right:3%;
     }`,
-    `@media screen and (min-width: 800px) {
+        `@media screen and (min-width: 800px) {
       .a25-char-font {
         font-size:1.3vw
       }
@@ -44,7 +43,7 @@ import { A25Service } from '@app/views/games/A25/_services/a25.service';
         width:1vw;
       }
     }`,
-    `@media screen and (max-width: 800px) {
+        `@media screen and (max-width: 800px) {
       .a25-char-font {
         font-size:3.8vw
       }
@@ -58,8 +57,8 @@ import { A25Service } from '@app/views/games/A25/_services/a25.service';
         width: 3vw;
       }
     }`,
-  ],
-  imports: [...CommonImports, NgTemplateOutlet]
+    ],
+    imports: [...CommonImports, NgTemplateOutlet]
 })
 export class A25CharaFrameComponent {
     fillL = 'grey';
@@ -114,13 +113,13 @@ export class A25CharaFrameComponent {
     if (this.collectionMode) {
         if (this.collection.characters[id]) {
             if (this.starMap[this.collection.characters[id]][1]) {
-              stars[1] = `<div class="a25-half-star"><span class="fa-star-half"></span></div>`;
+              stars[1] = `<div class="a25-half-star"><span class="fa-solid fa-star-half"></span></div>`;
             }
             limit = this.starMap[this.collection.characters[id]][0]
           }
     }
     for (let i = 0; i < limit; i++) {
-      stars[0] += '<span class="fa-star"></span>'
+      stars[0] += '<i class="fa-solid fa-star"></i>'
     }
     return stars[0]+stars[1];
   }

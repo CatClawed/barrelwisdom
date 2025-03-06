@@ -9,10 +9,9 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
 
 @Component({
-  templateUrl: 'a23-majorgather.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports]
+    templateUrl: 'a23-majorgather.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports]
 })
 
 export class A23MajorGatherComponent extends FragmentedComponent {

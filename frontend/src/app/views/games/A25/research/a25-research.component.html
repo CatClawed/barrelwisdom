@@ -3,7 +3,7 @@
   <ng-template #research let-data="data" let-offset="offset" let-kind="kind">
     <table class="tbl" style="margin-top:1rem;"><tbody>
       <tr><th colspan="2">{{kind}}</th></tr>
-      @for (it of [].constructor(150); track it; let i = $index) {
+      @for (it of [].constructor(200); track it; let i = $index) {
         <tr>
           <td>{{i+1}}</td>
           <td>
@@ -22,7 +22,7 @@
       <ng-content *ngTemplateOutlet="research; context: {data:data, offset:0, kind:kind[language][0]}"></ng-content>
     </mat-tab>
     <mat-tab label="{{kind[language][1]}}">
-      <ng-content *ngTemplateOutlet="research; context: {data:data, offset:150, kind:kind[language][1]}"></ng-content>
+      <ng-content *ngTemplateOutlet="research; context: {data:data, offset:200, kind:kind[language][1]}"></ng-content>
     </mat-tab>
   </mat-tab-group>
 }

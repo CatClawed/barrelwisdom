@@ -10,10 +10,9 @@ import { UserService } from '@app/views/main/_services/user.service';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  templateUrl: 'moderate.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [DatePipe]
+    templateUrl: 'moderate.component.html',
+    providers: [DestroyService],
+    imports: [DatePipe]
 })
 
 export class ModerateComponent implements OnInit {

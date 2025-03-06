@@ -10,10 +10,16 @@ export const AuthGuard = (route: ActivatedRouteSnapshot, state: RouterStateSnaps
 
     if (accountService.userValue) {
         if(cookieService.get('access')) {
-            const jwtToken = JSON.parse(atob(cookieService.get('access').split('.')[1]));
-            const expires = new Date(jwtToken.exp * 1000);
-            if(expires.getTime() > Date.now()) {
-                return true;
+            try {
+                const jwtToken = JSON.parse(atob(cookieService.get('access').split('.')[1]));
+                const expires = new Date(jwtToken.exp * 1000);
+                if(expires.getTime() > Date.now()) {
+                    return true;
+                }
+            }
+            catch (err) {
+                console.log('AuthGuard Error: ', err.message);
+                return router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url }});
             }
         }
     }

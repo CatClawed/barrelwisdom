@@ -18,11 +18,10 @@ import { map, startWith } from 'rxjs/operators';
 import { A23MonsterComponent } from './a23-monster.component';
 
 @Component({
-  templateUrl: 'a23-monsterlist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
-    ItemComponent, MatButtonModule]
+    templateUrl: 'a23-monsterlist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
+        ItemComponent, MatButtonModule]
 })
 
 export class A23MonsterlistComponent extends DialogUseComponent {

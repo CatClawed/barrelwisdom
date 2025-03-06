@@ -1,6 +1,7 @@
 @use '@angular/material' as mat;
 
-@include mat.core();
+@include mat.elevation-classes();
+@include mat.app-background();
 
 $frontend-theme: mat.m2-define-light-theme((color: (
         primary: mat.m2-define-palette(mat.$m2-brown-palette),
@@ -21,7 +22,8 @@ $frontend-theme: mat.m2-define-light-theme((color: (
 // hue. Available color palettes: https://material.io/design/color/
 
 //@include mat.all-component-themes($frontend-theme);
-@include mat.core-theme($frontend-theme);
+@include mat.elevation-classes();
+@include mat.app-background();
 @include mat.button-theme($frontend-theme);
 @include mat.fab-theme($frontend-theme);
 @include mat.autocomplete-theme($frontend-theme);

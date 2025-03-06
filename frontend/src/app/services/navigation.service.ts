@@ -44,8 +44,13 @@ export class NavigationService implements OnDestroy {
       )
       .subscribe(data => {
         this.previousSection = this.section;
-        this.n = JSON.parse(data.data);
-        this.navSubject.next(this.n);
+        try {
+          this.n = JSON.parse(data.data);
+          this.navSubject.next(this.n);
+        }
+        catch (err) {
+          console.log('Nav Error: ', err.message)
+        }
       })
   }
 

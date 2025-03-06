@@ -4,11 +4,10 @@ import { MatIcon } from '@angular/material/icon';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 
 @Component({
-  templateUrl: 'item.component.html',
-  selector: 'item',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [...CommonImports, MatIcon, MatButtonModule]
+    templateUrl: 'item.component.html',
+    selector: 'item',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [...CommonImports, MatIcon, MatButtonModule]
 })
 export class ItemComponent {
   @Input()

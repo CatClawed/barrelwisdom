@@ -17,12 +17,11 @@ import { environment } from '@environments/environment';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  templateUrl: 'settings.component.html',
-  providers: [DestroyService],
-  styleUrl: '../user-facing.scss',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatTabsModule, MatMenuModule,
-    MatSelectModule]
+    templateUrl: 'settings.component.html',
+    providers: [DestroyService],
+    styleUrl: '../user-facing.scss',
+    imports: [CommonModule, ReactiveFormsModule, MatTabsModule, MatMenuModule,
+        MatSelectModule]
 })
 export class SettingsComponent {
   currentSection: string = 'Section'

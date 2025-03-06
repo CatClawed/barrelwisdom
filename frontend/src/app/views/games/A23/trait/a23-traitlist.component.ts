@@ -16,11 +16,10 @@ import { map, startWith } from 'rxjs/operators';
 import { A23TraitComponent } from './a23-trait.component';
 
 @Component({
-  templateUrl: 'a23-traitlist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports,
-    A23TraitComponent, FilterListComponent]
+    templateUrl: 'a23-traitlist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports,
+        A23TraitComponent, FilterListComponent]
 })
 
 export class A23TraitlistComponent extends DialogUseComponent {

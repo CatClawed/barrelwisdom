@@ -10,10 +10,9 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
 
 @Component({
-  templateUrl: 'br1-skilllist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, NgTemplateOutlet]
+    templateUrl: 'br1-skilllist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, NgTemplateOutlet]
 })
 export class BR1SkilllistComponent extends FragmentedComponent {
   constructor(

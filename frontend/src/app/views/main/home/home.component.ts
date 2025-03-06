@@ -10,11 +10,10 @@ import { BlogService } from '@app/views/main/_services/blog.service';
 import { catchError, mergeMap, of, takeUntil } from 'rxjs';
 
 @Component({
-  templateUrl: 'home.component.html',
-  styleUrls: ['home.scss'],
-  providers: [DestroyService],
-  standalone: true,
-  imports: [RouterLink, DatePipe, MatPaginatorModule]
+    templateUrl: 'home.component.html',
+    styleUrls: ['home.scss'],
+    providers: [DestroyService],
+    imports: [RouterLink, DatePipe, MatPaginatorModule]
 })
 
 export class HomeComponent implements OnInit {

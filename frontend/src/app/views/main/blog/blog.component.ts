@@ -18,13 +18,12 @@ import { of } from 'rxjs';
 import { catchError, switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
-  templateUrl: 'blog.component.html',
-  styleUrls: ['blog.scss'],
-  providers: [DestroyService, provideMarkdown({sanitize: SecurityContext.NONE})],
-  standalone: true,
-  imports: [MatFormFieldModule, MatInputModule,
-    ReactiveFormsModule, RouterLink, MarkdownComponent,
-    CommonModule]
+    templateUrl: 'blog.component.html',
+    styleUrls: ['blog.scss'],
+    providers: [DestroyService, provideMarkdown({ sanitize: SecurityContext.NONE })],
+    imports: [MatFormFieldModule, MatInputModule,
+        ReactiveFormsModule, RouterLink, MarkdownComponent,
+        CommonModule]
 })
 
 export class BlogComponent implements OnInit {

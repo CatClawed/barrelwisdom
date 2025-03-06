@@ -85,6 +85,7 @@ class Recipe(models.Model):
     item  = models.ForeignKey(Item, on_delete=models.CASCADE)
     order = models.IntegerField(default=0)
     book  = models.IntegerField()
+    chara = models.ForeignKey(Character, null=True, blank=True, on_delete=models.CASCADE)
 
     color1 = models.ForeignKey(Filterable, on_delete=models.CASCADE, related_name="recipe_color1")
     color2 = models.ForeignKey(Filterable, on_delete=models.CASCADE, related_name="recipe_color2")
@@ -94,7 +95,7 @@ class Recipe(models.Model):
     unlock2 = models.ForeignKey(Desc, on_delete=models.CASCADE, blank=True, null=True, related_name="unlock2")
     unlock3 = models.ForeignKey(Desc, on_delete=models.CASCADE, blank=True, null=True, related_name="unlock3")
 
-    ing1 = models.ForeignKey(Item, on_delete=models.CASCADE, related_name="ing1")
+    ing1 = models.ForeignKey(Item, on_delete=models.CASCADE, blank=True, null=True, related_name="ing1")
     ing2 = models.ForeignKey(Item, on_delete=models.CASCADE, blank=True, null=True, related_name="ing2")
     ing3 = models.ForeignKey(Item, on_delete=models.CASCADE, blank=True, null=True, related_name="ing3")
 

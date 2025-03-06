@@ -8,11 +8,10 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a25-memoria.component.html',
-  selector: 'a25-memoria',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports]
+    templateUrl: 'a25-memoria.component.html',
+    selector: 'a25-memoria',
+    providers: [DestroyService],
+    imports: [...CommonImports]
 })
 export class A25MemoriaComponent extends SingleComponent {
   constructor(

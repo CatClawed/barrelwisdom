@@ -11,12 +11,11 @@ import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { mergeMap, takeUntil } from 'rxjs/operators';
 
 @Component({
-  templateUrl: 'register.component.html',
-  selector: 'register',
-  styleUrl: '../user-facing.scss',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule]
+    templateUrl: 'register.component.html',
+    selector: 'register',
+    styleUrl: '../user-facing.scss',
+    providers: [DestroyService],
+    imports: [ReactiveFormsModule, CommonModule]
 })
 export class RegisterComponent {
   registerForm: UntypedFormGroup;

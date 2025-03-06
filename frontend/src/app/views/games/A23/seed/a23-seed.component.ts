@@ -8,10 +8,9 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a23-seed.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports]
+    templateUrl: 'a23-seed.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports]
 })
 export class A23SeedComponent extends SingleComponent {
   constructor(

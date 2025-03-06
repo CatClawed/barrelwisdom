@@ -41,11 +41,13 @@ class Character(models.Model):
     res_sla = models.IntegerField(default=0)
     res_wnd = models.IntegerField(default=0)
 
+    six_star = models.BooleanField(default=False)
+
     class Meta:
         ordering = [
+            "-date",
             "role",
             "-rarity",
-            "-date",
             "slug"
         ]
 
@@ -58,6 +60,8 @@ class Skill(models.Model):
 
     wt = models.IntegerField(default=0)
     index = models.IntegerField(default=0)
+
+    evol = models.BooleanField(default=False)
 
     # currently up to 3 is used but might as well futureproof
     val0  = models.IntegerField(blank=True, null=True)
@@ -81,12 +85,14 @@ class Skill(models.Model):
     pow3  = models.IntegerField()
     pow4  = models.IntegerField()
     pow5  = models.IntegerField()
+    pow6  = models.IntegerField(blank=True, null=True)
 
     break1  = models.IntegerField()
     break2  = models.IntegerField()
     break3  = models.IntegerField()
     break4  = models.IntegerField()
     break5  = models.IntegerField()
+    break6  = models.IntegerField(blank=True, null=True)
 
     class Meta:
         ordering = [
@@ -103,6 +109,7 @@ class Passive(models.Model):
     val3  = models.IntegerField(blank=True, null=True)
     val4  = models.IntegerField(blank=True, null=True)
     num   = models.IntegerField(default=3) # heck resna and val
+    evol = models.BooleanField(default=False)
 
     class Meta:
         ordering = [

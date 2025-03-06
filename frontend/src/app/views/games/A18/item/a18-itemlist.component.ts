@@ -19,11 +19,10 @@ import { A18ItemComponent } from './a18-item.component';
 
 
 @Component({
-  templateUrl: 'a18-itemlist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, ItemComponent,
-    FilterListComponent, MatButtonModule]
+    templateUrl: 'a18-itemlist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, ItemComponent,
+        FilterListComponent, MatButtonModule]
 })
 
 export class A18ItemlistComponent extends DialogUseComponent {

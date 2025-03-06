@@ -9,11 +9,10 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a25-update.component.html',
-  selector: 'a25-update',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, DatePipe]
+    templateUrl: 'a25-update.component.html',
+    selector: 'a25-update',
+    providers: [DestroyService],
+    imports: [...CommonImports, DatePipe]
 })
 export class A25UpdateComponent extends SingleComponent {
   constructor(

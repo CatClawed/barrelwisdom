@@ -12,10 +12,9 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a23-recipe.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, Popover, NgTemplateOutlet]
+    templateUrl: 'a23-recipe.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, Popover, NgTemplateOutlet]
 })
 export class A23RecipeComponent extends SingleComponent {
   sophie_num: number = 28;

@@ -17,11 +17,10 @@ import { map, startWith } from 'rxjs/operators';
 import { A25MemoriaComponent } from './a25-memoria.component';
 
 @Component({
-  templateUrl: 'a25-memorialist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
-    A25MemoriaComponent, KeyValuePipe, MatCheckboxModule]
+    templateUrl: 'a25-memorialist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
+        A25MemoriaComponent, KeyValuePipe, MatCheckboxModule]
 })
 
 export class A25MemorialistComponent extends DialogUseComponent {

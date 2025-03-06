@@ -8,11 +8,10 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a23-monster.component.html',
-  selector: 'a23-monster',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports]
+    templateUrl: 'a23-monster.component.html',
+    selector: 'a23-monster',
+    providers: [DestroyService],
+    imports: [...CommonImports]
 })
 export class A23MonsterComponent extends SingleComponent {
   chart = {

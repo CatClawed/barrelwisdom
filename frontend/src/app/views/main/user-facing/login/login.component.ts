@@ -11,11 +11,10 @@ import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  templateUrl: 'login.component.html',
-  providers: [DestroyService],
-  styleUrl: '../user-facing.scss',
-  standalone: true,
-  imports: [ReactiveFormsModule, NgClass]
+    templateUrl: 'login.component.html',
+    providers: [DestroyService],
+    styleUrl: '../user-facing.scss',
+    imports: [ReactiveFormsModule, NgClass]
 })
 export class LoginComponent {
   loginForm: UntypedFormGroup;

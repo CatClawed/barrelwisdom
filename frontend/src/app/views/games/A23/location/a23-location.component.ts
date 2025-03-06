@@ -13,10 +13,9 @@ import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.comp
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  templateUrl: 'a23-location.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, Popover]
+    templateUrl: 'a23-location.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, Popover]
 })
 
 export class A23LocationComponent extends FragmentedComponent {

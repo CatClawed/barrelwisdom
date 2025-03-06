@@ -18,11 +18,10 @@ import { map, startWith } from 'rxjs/operators';
 import { A16MonsterComponent } from './a16-monster.component';
 
 @Component({
-  templateUrl: 'a16-monsterlist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
-    ItemComponent, MatButtonModule]
+    templateUrl: 'a16-monsterlist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
+        ItemComponent, MatButtonModule]
 })
 
 export class A16MonsterlistComponent extends DialogUseComponent {

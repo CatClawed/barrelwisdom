@@ -8,10 +8,9 @@ import { BlogService } from '../_services/blog.service';
 import { SeoService } from '@app/services/seo.service';
 
 @Component({
-  templateUrl: 'user.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [RouterLink]
+    templateUrl: 'user.component.html',
+    providers: [DestroyService],
+    imports: [RouterLink]
 })
 
 export class UserComponent implements OnInit {

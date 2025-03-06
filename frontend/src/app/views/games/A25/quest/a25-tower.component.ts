@@ -11,13 +11,12 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
 
 @Component({
-  templateUrl: 'a25-tower.component.html',
-  styleUrls: ['../resleri.scss'],
-  encapsulation: ViewEncapsulation.None,
-  selector: 'a25-tower',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, NgTemplateOutlet]
+    templateUrl: 'a25-tower.component.html',
+    styleUrls: ['../resleri.scss'],
+    encapsulation: ViewEncapsulation.None,
+    selector: 'a25-tower',
+    providers: [DestroyService],
+    imports: [...CommonImports, NgTemplateOutlet]
 })
 export class A25TowerComponent extends FragmentedComponent {
   title: string;

@@ -16,11 +16,10 @@ import { map, startWith } from 'rxjs/operators';
 import { A12TraitComponent } from './a12-trait.component';
 
 @Component({
-  templateUrl: 'a12-traitlist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports,
-    A12TraitComponent, FilterListComponent]
+    templateUrl: 'a12-traitlist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports,
+        A12TraitComponent, FilterListComponent]
 })
 export class A12TraitlistComponent extends DialogUseComponent {
   filteredTraits: Observable<Trait[]>;

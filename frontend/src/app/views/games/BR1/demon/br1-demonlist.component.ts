@@ -16,10 +16,9 @@ import { map, startWith } from 'rxjs/operators';
 import { BR1DemonComponent } from './br1-demon.component';
 
 @Component({
-  templateUrl: 'br1-demonlist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, BR1DemonComponent, FilterListComponent]
+    templateUrl: 'br1-demonlist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, BR1DemonComponent, FilterListComponent]
 })
 
 export class BR1DemonlistComponent extends DialogUseComponent {

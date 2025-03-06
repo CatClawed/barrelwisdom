@@ -9,7 +9,8 @@ import { FilterableComponent } from './filterable.component';
 
 @Component({
     template: '',
-    providers: [DestroyService]
+    providers: [DestroyService],
+    standalone: false
 })
 
 // Fragments extending Filterables is a compromise of sorts.

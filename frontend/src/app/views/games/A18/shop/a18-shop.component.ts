@@ -9,10 +9,9 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
 
 @Component({
-  templateUrl: 'a18-shop.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports]
+    templateUrl: 'a18-shop.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports]
 })
 
 export class A18ShopComponent extends FragmentedComponent {

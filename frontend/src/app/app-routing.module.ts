@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CanMatchFn, ExtraOptions, Route, RouterModule, Routes, UrlSegment } from '@angular/router';
 import { LayoutComponent } from '@app/containers';
+import { AuthGuard } from './_helpers/auth.guard';
 
 const canMatchNumber: CanMatchFn = (route: Route, segments: UrlSegment[]) => {
   return !isNaN(Number(segments[segments.length - 1].path));
@@ -31,6 +32,7 @@ const routes: Routes = [
       {
         path: '',
         loadComponent: ()=> import('@app/views/main/user-facing/settings/settings.component').then(m=>m.SettingsComponent),
+        canActivate: [AuthGuard]
       },
     ]
   },
@@ -51,6 +53,7 @@ const routes: Routes = [
       {
         path: '',
         loadComponent: ()=> import('@app/views/main/user-facing/create/create.component').then(m=>m.CreateComponent),
+        canActivate: [AuthGuard]
       },
     ]
   },
@@ -61,6 +64,7 @@ const routes: Routes = [
       {
         path: 'comment',
         loadComponent: ()=> import('@app/views/main/user-facing/moderate/moderate.component').then(m=>m.ModerateComponent),
+        canActivate: [AuthGuard]
       },
     ]
   },

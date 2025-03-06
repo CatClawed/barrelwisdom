@@ -18,13 +18,12 @@ import { map, startWith } from 'rxjs/operators';
 import { A25ItemComponent } from './a25-item.component';
 
 @Component({
-  templateUrl: 'a25-materiallist.component.html',
-  styleUrls: ['../resleri.scss'],
-  encapsulation: ViewEncapsulation.None,
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
-    A25ItemComponent, MatButtonModule, Popover]
+    templateUrl: 'a25-materiallist.component.html',
+    styleUrls: ['../resleri.scss'],
+    encapsulation: ViewEncapsulation.None,
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
+        A25ItemComponent, MatButtonModule, Popover]
 })
 
 export class A25MaterialListComponent extends DialogUseComponent {

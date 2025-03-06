@@ -23,13 +23,12 @@ import { catchError, first, map, mergeMap, startWith, switchMap, takeUntil } fro
 import slugify from 'slugify';
 
 @Component({
-  templateUrl: 'create.component.html',
-  providers: [DestroyService, provideMarkdown({sanitize: SecurityContext.NONE})],
-  standalone: true,
-  styleUrl: '../user-facing.scss',
-  imports: [MatFormFieldModule, MatInputModule,
-    ReactiveFormsModule, MarkdownComponent,
-    CommonModule, MatChipsModule, MatAutocompleteModule]
+    templateUrl: 'create.component.html',
+    providers: [DestroyService, provideMarkdown({ sanitize: SecurityContext.NONE })],
+    styleUrl: '../user-facing.scss',
+    imports: [MatFormFieldModule, MatInputModule,
+        ReactiveFormsModule, MarkdownComponent,
+        CommonModule, MatChipsModule, MatAutocompleteModule]
 })
 
 export class CreateComponent {

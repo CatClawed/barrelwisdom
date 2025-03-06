@@ -16,10 +16,9 @@ import { map, startWith } from 'rxjs/operators';
 import { A12EffectComponent } from './a12-effect.component';
 
 @Component({
-  templateUrl: 'a12-effectlist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, A12EffectComponent, FilterListComponent]
+    templateUrl: 'a12-effectlist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, A12EffectComponent, FilterListComponent]
 })
 
 export class A12EffectlistComponent extends DialogUseComponent {

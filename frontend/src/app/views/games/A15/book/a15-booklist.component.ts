@@ -16,12 +16,11 @@ import { map, startWith } from 'rxjs/operators';
 import { A15BookComponent } from './a15-book.component';
 
 @Component({
-  templateUrl: 'a15-booklist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, A15BookComponent,
-    FilterListComponent
-  ]
+    templateUrl: 'a15-booklist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, A15BookComponent,
+        FilterListComponent
+    ]
 })
 
 export class A15BooklistComponent extends DialogUseComponent {

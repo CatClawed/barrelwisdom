@@ -10,11 +10,10 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a18-item.component.html',
-  selector: 'a18-item',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, Popover]
+    templateUrl: 'a18-item.component.html',
+    selector: 'a18-item',
+    providers: [DestroyService],
+    imports: [...CommonImports, Popover]
 })
 export class A18ItemComponent extends SingleComponent {
   colors = {

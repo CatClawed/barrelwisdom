@@ -4,8 +4,9 @@ import { SwUpdate } from '@angular/service-worker';
 import { BehaviorSubject, concat, first, interval } from 'rxjs';
 
 @Component({
-  selector: 'app-root',
-  template: '<router-outlet></router-outlet>'
+    selector: 'app-root',
+    template: '<router-outlet></router-outlet>',
+    standalone: false
 })
 export class AppComponent {
   title = 'frontend';

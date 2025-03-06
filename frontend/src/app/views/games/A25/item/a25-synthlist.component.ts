@@ -18,13 +18,12 @@ import { A25IconComponent } from './a25-icon.component';
 import { A25ItemComponent } from './a25-item.component';
 
 @Component({
-  templateUrl: 'a25-synthlist.component.html',
-  styleUrls: ['../resleri.scss'],
-  encapsulation: ViewEncapsulation.None,
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
-    A25ItemComponent, A25IconComponent, MatButtonModule]
+    templateUrl: 'a25-synthlist.component.html',
+    styleUrls: ['../resleri.scss'],
+    encapsulation: ViewEncapsulation.None,
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
+        A25ItemComponent, A25IconComponent, MatButtonModule]
 })
 
 export class A25SynthesisListComponent extends DialogUseComponent {

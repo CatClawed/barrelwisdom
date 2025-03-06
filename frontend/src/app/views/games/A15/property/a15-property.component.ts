@@ -10,11 +10,10 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a15-property.component.html',
-  selector: 'a15-property',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, Tooltip, NgTemplateOutlet]
+    templateUrl: 'a15-property.component.html',
+    selector: 'a15-property',
+    providers: [DestroyService],
+    imports: [...CommonImports, Tooltip, NgTemplateOutlet]
 })
 export class A15PropertyComponent extends SingleComponent {
   constructor(

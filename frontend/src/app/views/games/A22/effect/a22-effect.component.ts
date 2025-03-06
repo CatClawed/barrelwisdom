@@ -10,11 +10,10 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a22-effect.component.html',
-  selector: 'a22-effect',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, Tooltip, EffectComponent]
+    templateUrl: 'a22-effect.component.html',
+    selector: 'a22-effect',
+    providers: [DestroyService],
+    imports: [...CommonImports, Tooltip, EffectComponent]
 })
 export class A22EffectComponent extends SingleComponent {
   constructor(

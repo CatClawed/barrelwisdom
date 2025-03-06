@@ -6,7 +6,8 @@ import { SeoService } from '@app/services/seo.service';
 
 @Component({
     template: '',
-    providers: [DestroyService]
+    providers: [DestroyService],
+    standalone: false
 })
 
 export abstract class DataComponent implements OnInit {

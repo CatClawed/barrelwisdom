@@ -12,13 +12,12 @@ import { of } from 'rxjs';
 import { A25IconComponent } from './a25-icon.component';
 
 @Component({
-  templateUrl: 'a25-item.component.html',
-  styleUrls: ['../resleri.scss'],
-  encapsulation: ViewEncapsulation.None,
-  selector: 'a25-item',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, A25IconComponent, Popover]
+    templateUrl: 'a25-item.component.html',
+    styleUrls: ['../resleri.scss'],
+    encapsulation: ViewEncapsulation.None,
+    selector: 'a25-item',
+    providers: [DestroyService],
+    imports: [...CommonImports, A25IconComponent, Popover]
 })
 export class A25ItemComponent extends SingleComponent {
   @Input()

@@ -15,11 +15,10 @@ import { Observable, forkJoin } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
 @Component({
-  templateUrl: 'brsl-fragmentlist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, PipeModule, Popover,
-    FilterListComponent]
+    templateUrl: 'brsl-fragmentlist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, PipeModule, Popover,
+        FilterListComponent]
 })
 
 export class BRSLFragmentComponent extends FilterableComponent {

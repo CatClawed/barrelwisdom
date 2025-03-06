@@ -4,11 +4,10 @@ import { MatIcon } from '@angular/material/icon';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 
 @Component({
-  templateUrl: 'effect.component.html',
-  selector: 'effect',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [...CommonImports, MatIcon, MatButtonModule]
+    templateUrl: 'effect.component.html',
+    selector: 'effect',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [...CommonImports, MatIcon, MatButtonModule]
 })
 export class EffectComponent {
   @Input()

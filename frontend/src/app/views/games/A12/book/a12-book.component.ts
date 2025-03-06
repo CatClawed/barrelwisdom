@@ -9,11 +9,10 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a12-book.component.html',
-  selector: 'a12-book',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ItemComponent]
+    templateUrl: 'a12-book.component.html',
+    selector: 'a12-book',
+    providers: [DestroyService],
+    imports: [...CommonImports, ItemComponent]
 })
 export class A12BookComponent extends SingleComponent {
   constructor(
