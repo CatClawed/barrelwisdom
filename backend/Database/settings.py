@@ -231,8 +231,8 @@ JWT_AUTH_COOKIE = 'bw-auth'
 JWT_AUTH_REFRESH_COOKIE = 'bw-refresh'
 
 CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
-        'LOCATION': 'memcached:11211',
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://redis:6379",
     }
 }
