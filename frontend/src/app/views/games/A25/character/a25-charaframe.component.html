@@ -30,5 +30,5 @@
             <ng-content *ngTemplateOutlet="contents"></ng-content>
         }
     </div>
-    <div class="a25-star-font" [innerHTML]="fetchStars(chara.id, chara.rarity)"></div>
+    <div [class]="chara.six_star ? 'a25-star-font a25-star-font-six' : 'a25-star-font'" [innerHTML]="fetchStars(chara.id, chara.rarity)"></div>
 </div>

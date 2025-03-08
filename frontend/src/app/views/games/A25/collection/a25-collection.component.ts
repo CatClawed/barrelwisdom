@@ -318,7 +318,7 @@ export class A25CollectionComponent extends DialogUseComponent {
     if (this.editMode) {
       let kind = this.collection.characters[char.id]
       kind = (kind===undefined) ? char.rarity : kind + 1;
-      if (kind <= 7) {
+      if ((kind <= 8 && char.six_star) || kind <= 7) {
         this.collection.characters[char.id]=kind;
       }
       else {
@@ -431,7 +431,7 @@ export class A25CollectionComponent extends DialogUseComponent {
       for (let i = start; i < data[0]*2+start; i += 2) {
         this.collection['characters'][data[i]]=data[i+1]
         this.totals['characters'] += 1;
-        if (data[i+1] > 7 && data[i+i] <= 0) this.bad_data = true;
+        if (data[i+1] > 8 && data[i+i] <= 0) this.bad_data = true;
       }
       start += data[0]*2;
       for (let i = start; i < data[1]*2+start; i += 2) {

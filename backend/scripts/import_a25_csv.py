@@ -9,7 +9,7 @@ from datetime import datetime
 BASE_URL = 'https://raw.githubusercontent.com/theBowja/resleriana-db/main/data/'
 
 names =     ['ability', 'base_enemy', 'battle', 'battle_hint', 'battle_tool', 'battle_tool_trait', 'character',
-             'character_tag', 'effect', 'emblem', 'emblem_rarity', 'enemy', 'enemy_ai_unit', 'equipment_tool',
+             'character_tag', 'effect', 'emblem', 'emblem_rarity', 'enemy', 'enemy_ai_unit', 'episode', 'equipment_tool',
              'equipment_tool_trait', 'gacha', 'hyperlink', 'illustrator', 'item', 'leader_skill_condition', 'memoria',
              'memoria_buff_growth', 'quest', 'recipe', 'recipe_plan', 'research', 'research_effect',
              'research_effect_level', 'reward_set', 'skill', 'species', 'timeline_panel', 'wave']
@@ -527,6 +527,8 @@ def import_passives(char_dict, char, num):
         obj.val2 = passive['effects'][1]['value'] if len(passive['effects']) > 1 else None
         obj.val3 = passive['effects'][2]['value'] if len(passive['effects']) > 2 else None
         obj.val4 = passive['effects'][3]['value'] if len(passive['effects']) > 3 else None
+        obj.val5 = passive['effects'][4]['value'] if len(passive['effects']) > 4 else None
+        obj.val6 = passive['effects'][5]['value'] if len(passive['effects']) > 5 else None
         obj.save()
         num = num + 1
 
@@ -933,6 +935,7 @@ def import_recipes():
     rStory = RecipeTab.objects.get(order=1)
     rTower = RecipeTab.objects.get(order=2)
     rEvent = RecipeTab.objects.get(order=3)
+    rChara = RecipeTab.objects.get(order=4)
     for recipe in jsons['recipe']:
         chara = None
         if recipe['character_id'] != None:
@@ -943,7 +946,7 @@ def import_recipes():
 
         limited = checkDesc(
             text_ja=plan['name'],
-            text_en=plan['name_en']    if 'name_en' in plan    else plan['name'],
+            text_en=plan['name_en']    if 'name_en'    in plan else plan['name'],
             text_sc=plan['name_zh_cn'] if 'name_zh_cn' in plan else plan['name'],
             text_tc=plan['name_zh_tw'] if 'name_zh_tw' in plan else plan['name'],
         )
@@ -952,6 +955,8 @@ def import_recipes():
             tab = rEvent
         if plan['recipe_plan_category_id'] == 3:
             tab = rTower
+        if plan['recipe_plan_category_id'] == 5:
+            tab = rChara
 
         try:
             rPage = RecipePage.objects.get(book=recipe['recipe_plan_id'])
@@ -964,7 +969,10 @@ def import_recipes():
             )
             if plan['recipe_plan_category_id'] == 2:
                 for i in LatestUpdate.objects.first().items.all():
-                    if i.rarity == 4 or i.kind.slug == 'material':
+                    if i.rarity == 4 and len(i.recipe_set.all()) == 0:
+                        i.limit = limited
+                        i.save()
+                    elif i.kind.slug == 'material':
                         i.limit = limited
                         i.save()
         rPage.save()
@@ -1010,7 +1018,7 @@ def import_recipes():
         obj.quant1=recipe['costs'][0]['quantity']
         obj.quant2=recipe['costs'][1]['quantity'] if len(recipe['costs']) > 1 else None
         obj.quant3=recipe['costs'][2]['quantity'] if len(recipe['costs']) > 2 else None
-        obj.ing1=Item.objects.get(name__text_ja=search(recipe['costs'][0]['id'], jsons['item'])[0]['name']) if not chara else None
+        obj.ing1=Item.objects.get(name__text_ja=search(recipe['costs'][0]['id'], jsons['item'])[0]['name']) if recipe['costs'][0]['type'] != 8 else None
         obj.ing2=Item.objects.get(name__text_ja=search(recipe['costs'][1]['id'], jsons['item'])[0]['name']) if len(recipe['costs']) > 1 else None
         obj.ing3=Item.objects.get(name__text_ja=search(recipe['costs'][2]['id'], jsons['item'])[0]['name']) if len(recipe['costs']) > 2 else None
         obj.save()
@@ -1032,8 +1040,8 @@ def import_recipes():
 
 def get_quest_name(quest):
     name = checkName(
-        text_ja=quest['name'],
-        text_en=quest['name_en'] if 'name_en' in quest else '',
+        text_ja=quest['name'].split('【')[0],
+        text_en=quest['name_en']    if 'name_en' in quest else '',
         text_sc=quest['name_zh_cn'] if 'name_zh_cn' in quest else '',
         text_tc=quest['name_zh_tw'] if 'name_zh_tw' in quest else '',
         volatile=True
@@ -1063,18 +1071,22 @@ def get_floor_effects(ability_ids):
         effects.append(eff)
     return effects
 
-def import_score_battle(quest, difficulty, chapter, section):
-    if difficulty != quest['difficulty']:
-        if difficulty == 3:
-            chapter = chapter + 1
-        difficulty = quest['difficulty']
-        section = 1
+def import_score_battle(quest, old_chapter, quest_names):
+    chapter = int(search(quest['episode_id'], jsons['episode'])[0]['name'][6:-1])
+    difficulty = quest['difficulty']
+    qname = quest['name'].split('【')[0]
+    if old_chapter != chapter:
+        quest_names = []
+    if qname not in quest_names:
+        quest_names.append(qname)
+    section = quest_names.index(qname)+1
 
-    print('score battle', quest['name'], f'{chapter}-{section} {difficulty}')
+    print('score battle', qname, f'{chapter}-{section} {difficulty}')
 
     try:
         sb = ScoreBattle.objects.get(chap=chapter, sect=section)
-        get_quest_name(quest)
+        sb.name = get_quest_name(quest)
+        sb.save()
     except:
         sb = ScoreBattle(
             name=get_quest_name(quest),
@@ -1102,8 +1114,7 @@ def import_score_battle(quest, difficulty, chapter, section):
             obj.rewards.add(GetReward(reward[i], i))
         sb.difficulties.add(obj)
 
-    section = section + 1
-    return difficulty, chapter, section
+    return chapter, quest_names
 
 def wave(data, order):
     try:
@@ -1246,13 +1257,12 @@ def import_dungeon(quest):
 
 def import_quest():
     count = 0
-    difficulty = 1
-    chapter = 1
-    section = 1
+    old_chapter = 1
+    section = []
 
     for quest in jsons['quest']:
-        if quest['id'] >= 204100000 and quest['id'] < 204200000 and quest['skippable_type'] != 1:
-            difficulty, chapter, section = import_score_battle(quest, difficulty, chapter, section)
+        if quest['id'] >= 204100000 and quest['id'] < 204200000 and quest['score_battle'] != None:
+            old_chapter, section = import_score_battle(quest, old_chapter, section)
             count = count + 1
         if quest['id'] >= 204200000 and quest['id'] < 204300000  and quest['skippable_type'] != 1:
             import_dungeon(quest)

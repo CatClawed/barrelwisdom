@@ -79,9 +79,9 @@
             <mat-slider
               color="accent"
               style="width:100%;"
-              [max]="chara.six_star ? 8 : 7"
+              [max]="chara.six_star && language == 'ja' ? 8 : 7"
               [min]="chara.rarity">
-              <input matSliderThumb value="{{chara.six_star ? 8 : 7}}" #starSlider>
+              <input matSliderThumb value="{{chara.six_star && language == 'ja' ? 8 : 7}}" #starSlider>
             </mat-slider>
           </div>
         </td>
@@ -111,31 +111,33 @@
       <table class="tbl"><tbody>
         <tr><th>Skills</th></tr>
         @for (skill of chara.skills; track skill) {
-          <tr>
-            <td>
-              <b>{{skill.name}}</b>
-              @if (skill.evol) {
-                (6 <i class="fa-solid fa-star"></i>)
-              }
-              <i class="atelier atelier-np atelier-resleri-{{skill.elem}} resleri-element-icon"
-                style="float:right;background-color:{{a25service.elements[skill.elem]}};"></i>
-              <p [innerHTML]="replaceDesc(skill)"></p>
-              <ul style="list-style: none; padding-left: 0;">
-                @if (skill.wt) {
-                  <li><b>WT: </b>{{skill.wt}}</li>
+          @if (skill.desc) {
+            <tr>
+              <td>
+                <b>{{skill.name}}</b>
+                @if (skill.evol) {
+                  (6 <i class="fa-solid fa-star"></i>)
                 }
-                @if (skill.area) {
-                  <li><b>Range: </b>{{skill.area}}</li>
-                }
-                @if (skill.pow1) {
-                  <li><b>Power: </b>{{skill.pow1}} > {{skill.pow2}} > {{skill.pow3}} > {{skill.pow4}} > {{skill.pow5}}</li>
-                }
-                @if (skill.break1) {
-                  <li><b>Break: </b>{{skill.break1}} > {{skill.break2}} > {{skill.break3}} > {{skill.break4}} > {{skill.break5}}</li>
-                }
-              </ul>
-            </td>
-          </tr>
+                <i class="atelier atelier-np atelier-resleri-{{skill.elem}} resleri-element-icon"
+                  style="float:right;background-color:{{a25service.elements[skill.elem]}};"></i>
+                <p [innerHTML]="replaceDesc(skill)"></p>
+                <ul style="list-style: none; padding-left: 0;">
+                  @if (skill.wt) {
+                    <li><b>WT: </b>{{skill.wt}}</li>
+                  }
+                  @if (skill.area) {
+                    <li><b>Range: </b>{{skill.area}}</li>
+                  }
+                  @if (skill.pow1) {
+                    <li><b>Power: </b>{{skill.pow1}} > {{skill.pow2}} > {{skill.pow3}} > {{skill.pow4}} > {{skill.pow5}} @if (skill.pow6 && language == 'ja') { > {{skill.pow6}}  } </li>
+                  }
+                  @if (skill.break1) {
+                    <li><b>Break: </b>{{skill.break1}} > {{skill.break2}} > {{skill.break3}} > {{skill.break4}} > {{skill.break5}} @if (skill.break6 && language == 'ja') { > {{skill.break6}}  }</li>
+                  }
+                </ul>
+              </td>
+            </tr>
+          }
         }
         <tr>
       </tbody></table>
@@ -145,15 +147,17 @@
             <td>
               <ul>
                 @for (passive of chara.passives; track passive) {
-                  <li>
-                    {{passive.name}}
-                    @if (passive.evol) {
-                      (6 <i class="fa-solid fa-star"></i>)
-                    }
-                    <ul>
-                      <li [innerHTML]="replacePassive(passive)"></li>
-                    </ul>
-                  </li>
+                  @if (passive.name) {
+                    <li>
+                      {{passive.name}}
+                      @if (passive.evol) {
+                        (6 <i class="fa-solid fa-star"></i>)
+                      }
+                      <ul>
+                        <li [innerHTML]="replacePassive(passive)"></li>
+                      </ul>
+                    </li>
+                  }
                 }
               </ul>
             </td>

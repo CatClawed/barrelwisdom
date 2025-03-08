@@ -34,6 +34,7 @@ export class AppComponent {
         try {
           const up = await updates.checkForUpdate();
           if (up) {
+            console.log('reload')
             window.location.reload();
           }
         } catch (err) {

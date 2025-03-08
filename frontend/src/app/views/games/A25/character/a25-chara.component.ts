@@ -76,7 +76,7 @@ export class A25CharaComponent extends SingleComponent {
 
   replacePassive(passive) {
     let desc = passive.desc;
-    const skillval = [passive.val, passive.val2, passive.val3, passive.val4]
+    const skillval = [passive.val, passive.val2, passive.val3, passive.val4, passive.val5, passive.val6]
     for (let i = 0; i < skillval.length; i++) {
       if (skillval[i]) {
         desc = desc.replaceAll(`{${i}}`, skillval[i]/100)

@@ -66,7 +66,8 @@ export class A25CharalistComponent extends DialogUseComponent {
       elems: "any",
       show_jp: this.language === 'ja',
       colorL: 'any',
-      colorR: 'any'
+      colorR: 'any',
+      six_star: false
     })
   }
 
@@ -87,15 +88,17 @@ export class A25CharalistComponent extends DialogUseComponent {
     this.filteredCharas = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Character[]>),
       map((search: any) => search ?
-        this.filterT(search.filtertext, search.roles, search.elems, search.show_jp, search.colorL, search.colorR)
-        : this.filterT('', 'any', 'any', this.language === 'ja', 'any', 'any')),
+        this.filterT(search.filtertext, search.roles, search.elems, search.show_jp, search.colorL, search.colorR, search.six_star)
+        : this.filterT('', 'any', 'any', this.language === 'ja', 'any', 'any', false)),
     );
   }
 
-  private filterT(value: string, role: string, elem: string, show_jp: boolean, colorL: string, colorR: string): Character[] {
+  private filterT(value: string, role: string, elem: string, show_jp: boolean, colorL: string, colorR: string, six_star: boolean): Character[] {
     let charalist: Character[] = this.data.charas;
 
     if (!show_jp) charalist = charalist.filter(chara => chara.gbl === true)
+
+    if (six_star) charalist = charalist.filter(chara => chara.six_star === true)
 
     if (role != 'any') {
       charalist = charalist.filter(chara => chara.role == role)

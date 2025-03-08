@@ -108,6 +108,8 @@ class Passive(models.Model):
     val2  = models.IntegerField(blank=True, null=True)
     val3  = models.IntegerField(blank=True, null=True)
     val4  = models.IntegerField(blank=True, null=True)
+    val5  = models.IntegerField(blank=True, null=True)
+    val6  = models.IntegerField(blank=True, null=True)
     num   = models.IntegerField(default=3) # heck resna and val
     evol = models.BooleanField(default=False)
 

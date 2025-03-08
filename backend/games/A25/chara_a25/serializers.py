@@ -8,7 +8,8 @@ class A25PassiveSerializer(A25DefaultSerializer):
     desc = serializers.SerializerMethodField()
     class Meta:
         model =  Passive
-        fields = ['name', 'desc', 'val', 'val2', 'val3', 'val4', 'evol']
+        fields = ['name', 'desc', 'evol',
+                  'val', 'val2', 'val3', 'val4', 'val5', 'val6']
     def get_name(self, obj):
         return A25DefaultSerializer.get_text_gbl(self,obj.name,obj.char.gbl)
     def get_desc(self, obj):
@@ -56,7 +57,7 @@ class A25CharaListSerializer(A25DefaultSerializer):
         model = Character
         fields = [
             'slug', 'name', 'title', 'role', 'elem', 'rarity', 'gbl',
-            'color1', 'color2', 'id', 'date'
+            'color1', 'color2', 'id', 'date', 'six_star'
         ]
     def get_title(self, obj):
         return A25DefaultSerializer.get_text_gbl(self,obj.title,obj.gbl)

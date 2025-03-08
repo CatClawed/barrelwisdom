@@ -4,16 +4,18 @@
     <table class="tbl" style="margin-top:1rem;"><tbody>
       <tr><th colspan="2">{{kind}}</th></tr>
       @for (it of [].constructor(200); track it; let i = $index) {
-        <tr>
-          <td>{{i+1}}</td>
-          <td>
-            <p><b>{{data[i+offset].name}}: </b> {{data[i+offset].desc}} ({{data[i+offset].val/100}}%)</p>
-            @if (data[i+offset].req) {
-              <p><b>Requirement: </b>{{data[i+offset].req}}</p>
-            }
-            <p><b>Cole: </b> {{data[i+offset].cole}}</p>
-          </td>
-        </tr>
+        @if (i < 150 || language == 'ja') {
+          <tr>
+            <td>{{i+1}}</td>
+            <td>
+              <p><b>{{data[i+offset].name}}: </b> {{data[i+offset].desc}} ({{data[i+offset].val/100}}%)</p>
+              @if (data[i+offset].req) {
+                <p><b>Requirement: </b>{{data[i+offset].req}}</p>
+              }
+              <p><b>Cole: </b> {{data[i+offset].cole}}</p>
+            </td>
+          </tr>
+        }
       }
     </tbody></table>
   </ng-template>

@@ -15,7 +15,10 @@ import { A25Service } from '@app/views/games/A25/_services/a25.service';
       -webkit-text-stroke-color:black;
       color:yellow;
       padding-top:0.3rem;
-    }`,
+      }`,
+      `.a25-star-font-six {
+        color:orange !important;
+      }`,
         `.a25-char-font {
       height: 24%;
       width: 24%;
@@ -34,7 +37,7 @@ import { A25Service } from '@app/views/games/A25/_services/a25.service';
         font-size:1.3vw
       }
       .a25-star-font {
-        font-size:1.5vw;
+        font-size:1.3vw;
         -webkit-text-stroke-width:.15vw;
       }
       .a25-half-star {
@@ -97,7 +100,8 @@ export class A25CharaFrameComponent {
     4: [3, true],
     5: [4, false],
     6: [4, true],
-    7: [5, false]
+    7: [5, false],
+    8: [6, false]
   }
 
   inCollection() {
