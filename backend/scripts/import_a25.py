@@ -363,7 +363,7 @@ def import_equipment_traits():
         obj.index=trait['id']+99
         obj.kind=kind
         obj.cat=trait_cat[trait['category_id']]
-        obj.trans_web=True
+        obj.trans_wep=True
         obj.trans_arm=True
         obj.trans_acc=True
         obj.save()
@@ -1628,13 +1628,14 @@ def cleanup():
 
 # for setting slugs
 additions = {
-    "アルビーナ": "alvina-1",
-    "ベップ": "bepp-1"
+    "ヴァレリア": "valeria-7",
+    "レスナ": "resna-7",
+    "ヤンネ": "janne-1"
 }
-memoria_index = 157 # alvina
-base_enemy_index = 111
+memoria_index = 161 # alvina
+base_enemy_index = 115
 
-gacha = create_event(ja='シーズン2開幕！ 新たなる導き アルビーナ LEGEND FES')
+gacha = None #create_event(ja='シーズン2開幕！ 新たなる導き アルビーナ LEGEND FES')
 
 #createUpdate()
 #retrieve_all_jsons()

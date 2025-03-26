@@ -172,6 +172,11 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'yumia',
+    redirectTo: '/yumia/treasure-trove-key-locations',
+    pathMatch: 'full'
+  },
+  {
     path: 'ryza3',
     redirectTo: '/ryza3/how-to-get-infinite-gems',
     pathMatch: 'full'
