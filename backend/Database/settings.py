@@ -96,6 +96,10 @@ INSTALLED_APPS = [
     'games.A25.chara_a25.apps.A25CharaConfig',
     'games.A25.items_a25.apps.A25ItemConfig',
     'games.A25.quest_a25.apps.A25QuestConfig',
+    # A26 Yumia
+    'games.A26.misc_a26.apps.A26MiscConfig',
+    'games.A26.items_a26.apps.A26ItemConfig',
+    'games.A26.monsters_a26.apps.A26MonsterConfig',
     # Blue Reflection
     'games.BR1.missions_br1.apps.BR1MissionConfig',
     'games.BR1.areas_br1.apps.BR1AreaConfig',

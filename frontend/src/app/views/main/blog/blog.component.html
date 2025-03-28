@@ -1,5 +1,6 @@
 @if (blog) {
   <header>
+    <cringe-ad-responsive></cringe-ad-responsive>
     <h1>{{blog.title}}</h1>
     <div class="author">
       <span style="display: inline-block;">
@@ -49,6 +50,7 @@
         }
       </div>
     }
+    <cringe-ad-responsive></cringe-ad-responsive>
     <h2>Comments</h2>
     @if (!blog.closed && success === undefined) {
       <ng-container

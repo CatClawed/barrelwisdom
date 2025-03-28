@@ -16,6 +16,7 @@ import { BlogService } from '@app/views/main/_services/blog.service';
 import { MarkdownComponent, MarkdownService, provideMarkdown } from 'ngx-markdown';
 import { of } from 'rxjs';
 import { catchError, switchMap, takeUntil } from 'rxjs/operators';
+import { CringeAdComponent } from '@app/views/_components/cringe/cringe.component';
 
 @Component({
     templateUrl: 'blog.component.html',
@@ -23,7 +24,7 @@ import { catchError, switchMap, takeUntil } from 'rxjs/operators';
     providers: [DestroyService, provideMarkdown({ sanitize: SecurityContext.NONE })],
     imports: [MatFormFieldModule, MatInputModule,
         ReactiveFormsModule, RouterLink, MarkdownComponent,
-        CommonModule]
+        CommonModule, CringeAdComponent]
 })
 
 export class BlogComponent implements OnInit {

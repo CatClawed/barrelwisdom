@@ -3,7 +3,7 @@ from rest_framework import serializers
 
 def remove_empty(serializer, self, instance):
     result = super(serializer, self).to_representation(instance)
-    return OrderedDict((k, v) for k, v in result.items() 
+    return OrderedDict((k, v) for k, v in result.items()
                            if v not in [None, [], '', {}])
 
 def language_match(context, **kwargs):
@@ -19,6 +19,12 @@ def language_match(context, **kwargs):
                 return kwargs['ko']
             case 'fr':
                 return kwargs['fr']
+            case 'de':
+                return kwargs['de']
+            case 'ru':
+                return kwargs['ru']
+            case 'es':
+                return kwargs['es']
             case _:
                 return kwargs['en']
     except KeyError:
@@ -27,7 +33,7 @@ def language_match(context, **kwargs):
 class DefaultSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         result = super(DefaultSerializer, self).to_representation(instance)
-        return OrderedDict((k, v) for k, v in result.items() 
+        return OrderedDict((k, v) for k, v in result.items()
                             if v not in [None, [], '', {}, False])
 
     def language_match(self, **kwargs):
@@ -43,6 +49,12 @@ class DefaultSerializer(serializers.ModelSerializer):
                     return kwargs['ko']
                 case 'fr':
                     return kwargs['fr']
+                case 'de':
+                    return kwargs['de']
+                case 'ru':
+                    return kwargs['ru']
+                case 'es':
+                    return kwargs['es']
                 case _:
                     return kwargs['en']
         except KeyError:
