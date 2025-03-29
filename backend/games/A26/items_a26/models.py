@@ -85,6 +85,7 @@ class Item(models.Model):
 
     location = models.ManyToManyField(Coordinate)
     comfort_goal = models.IntegerField(blank=True, null=True)
+    hidden = models.BooleanField(default=False)
 
 class IngredientEffect(models.Model):
     lv = models.IntegerField()

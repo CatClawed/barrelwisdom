@@ -1,0 +1,107 @@
+@if (data; as monster) {
+  <div [class]="inputSlug ? 'card card-dialog' : 'card card-medium'">
+    <h4 class="card-title  card-icon-space">{{monster.name}}</h4>
+    <!--
+    <div class="card-icon-position">
+      <i class="atelier atelier-{{monster.kind}}"></i>
+    </div>
+    <img class="card-item-display" src="{{imgURL}}monsters/{{monster.id}}.webp?v=1"
+      alt="{{monster.name}}" style="aspect-ratio: 1; width: 288px;">
+    -->
+    <div class="grid">
+      <div class="grid-6">
+        @if (monster.drop || monster.rare || monster.trait) {
+          <b>Drops:</b>
+          <ul>
+            @if (monster.drop) {
+              <li><a routerLink="/{{gameURL}}/items/{{monster.drop.id}}/{{language}}">{{monster.drop.name}}</a></li>
+            }
+            @if (monster.rare) {
+              <li><a routerLink="/{{gameURL}}/items/{{monster.rare.id}}/{{language}}">{{monster.rare.name}}</a> (Rare)</li>
+            }
+            @if (monster.trait) {
+              <li><a routerLink="/{{gameURL}}/traits/{{monster.trait.id}}/{{language}}">{{monster.trait.name}}</a> (Trait)</li>
+            }
+          </ul>
+        }
+      </div>
+      <div class="grid-6">
+        <table class="table-item-data" ><tbody>
+          <tr>
+            <td style="padding:0;">
+              <b>HP: </b>
+            </td>
+            <td style="padding:0;padding-left:0.5em;">
+              @for (i of [].constructor(monster.hp); track i) {
+                <i   class="fas fa-star" style="color:gold;-webkit-text-stroke: 0.1rem black;padding-right:0.1rem"></i>
+              }
+              @for (i of [].constructor(5-monster.hp); track i) {
+                <i class="fas fa-star" style="padding-right:0.1rem"             ></i>
+              }
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:0;">
+              <b>ATK: </b>
+            </td>
+            <td style="padding:0;padding-left:0.5em;">
+              @for (i of [].constructor(monster.atk); track i) {
+                <i   class="fas fa-star" style="color:gold;-webkit-text-stroke: 0.1rem black;padding-right:0.1rem"></i>
+              }
+              @for (i of [].constructor(5-monster.atk); track i) {
+                <i class="fas fa-star" style="padding-right:0.1rem"             ></i>
+              }
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:0;">
+              <b>DEF: </b>
+            </td>
+            <td style="padding:0;padding-left:0.5em;">
+              @for (i of [].constructor(monster.dfn); track i) {
+                <i   class="fas fa-star" style="color:gold;-webkit-text-stroke: 0.1rem black;padding-right:0.1rem"></i>
+              }
+              @for (i of [].constructor(5-monster.dfn); track i) {
+                <i class="fas fa-star" style="padding-right:0.1rem"             ></i>
+              }
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:0;">
+              <b>SPD: </b>
+            </td>
+            <td style="padding:0;padding-left:0.5em;">
+              @for (i of [].constructor(monster.spd); track i) {
+                <i   class="fas fa-star" style="color:gold;-webkit-text-stroke: 0.1rem black;padding-right:0.1rem"></i>
+              }
+              @for (i of [].constructor(5-monster.spd); track i) {
+                <i class="fas fa-star" style="padding-right:0.1rem"             ></i>
+              }
+            </td>
+          </tr>
+        </tbody></table>
+      </div>
+    </div>
+    <table class="tbl noborder" ><tbody>
+      <tr>
+        @if (monster.break_phys) {
+          <td style="text-align: center;padding-bottom:0;"><i style="color:#c88401;" class="yumia-element-icon atelier atelier-np atelier-ryza2-physical"></i></td>
+        }
+        @else {
+          <td style="text-align: center;padding-bottom:0;"><i style="color:#5f49ec;" class="yumia-element-icon atelier atelier-np atelier-sophie2-element-magic"></i></td>
+        }
+        <td style="text-align: center;padding-bottom:0;"><i style="color:{{monster.fire ? a26service.elements['fire'] : 'gray'}};" class="yumia-element-icon atelier atelier-np atelier-sophie2-element-fire"></i></td>
+        <td style="text-align: center;padding-bottom:0;"><i style="color:{{monster.ice  ? a26service.elements['ice']  : 'gray'}};" class="yumia-element-icon atelier atelier-np atelier-sophie2-element-ice"></i></td>
+        <td style="text-align: center;padding-bottom:0;"><i style="color:{{monster.bolt ? a26service.elements['bolt'] : 'gray'}};" class="yumia-element-icon atelier atelier-np atelier-sophie2-element-lightning"></i></td>
+        <td style="text-align: center;padding-bottom:0;"><i style="color:{{monster.air  ? a26service.elements['air']  : 'gray'}};" class="yumia-element-icon atelier atelier-np atelier-sophie2-element-wind"></i></td>
+      </tr>
+      <tr>
+        <td style="text-align: center;padding:0;">{{monster.break_hits}}</td>
+        <td style="text-align: center;padding:0;" innerHTML="{{chart[monster.fire]}}"></td>
+        <td style="text-align: center;padding:0;" innerHTML="{{chart[monster.ice]}} "></td>
+        <td style="text-align: center;padding:0;" innerHTML="{{chart[monster.bolt]}}"></td>
+        <td style="text-align: center;padding:0;" innerHTML="{{chart[monster.air]}}"></td>
+      </tr>
+    </tbody></table>
+</div>
+}

@@ -152,6 +152,17 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'yumia',
+    component: LayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: ()=> import('@app/views/games/A26/a26-routing.module').then(m=>m.A26RoutingModule),
+      },
+
+    ]
+  },
+  {
     path: 'bluereflection',
     component: LayoutComponent,
     children: [
@@ -170,11 +181,6 @@ const routes: Routes = [
         loadChildren: ()=> import('@app/views/games/BRSL/brsl-routing.module').then(m=>m.BRSLRoutingModule),
       },
     ]
-  },
-  {
-    path: 'yumia',
-    redirectTo: '/yumia/treasure-trove-key-locations',
-    pathMatch: 'full'
   },
   {
     path: 'ryza3',

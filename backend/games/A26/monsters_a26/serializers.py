@@ -7,17 +7,16 @@ class A26RaceSerializer(A26DefaultSerializer):
     class Meta:
         model = Race
         fields = [
-            'name'
+            'id', 'name',
         ]
 
 class A26MonsterListSerializer(A26DefaultSerializer):
     name = serializers.SerializerMethodField()
-    desc = serializers.SerializerMethodField()
     race = A26RaceSerializer()
     class Meta:
         model = Monster
         fields = [
-            'id', 'name', 'desc', 'race',
+            'id', 'name', 'race',
         ]
 
 class A26MonsterSerializer(A26DefaultSerializer):

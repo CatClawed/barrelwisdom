@@ -42,7 +42,7 @@ class A26MonsterViewSet(DefaultViewSetID):
 
 class A26MonsterRaceViewSet(DefaultViewSetID):
     queryset = (
-        Monster.objects
+        Race.objects
         .select_related(
             'name',
         )

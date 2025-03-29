@@ -5,6 +5,8 @@ from games.A18.monsters_a18.models import Monster as A18Monster
 from games.A25.misc_a25.models import Trait as A25Trait
 from games.A25.chara_a25.models import Character as A25Character, Memoria as A25Memoria
 from games.A25.items_a25.models import Item as A25Item
+from games.A26.items_a26.models import Item as A26Item, Trait as A26Trait, Effect as A26Effect
+from games.A26.monsters_a26.models import Monster as A26Monster
 import xml.etree.cElementTree as ET
 import datetime
 
@@ -21,7 +23,10 @@ def sitemap(langs=['en'], pages=[], game='error'):
         "ko":"ko",
         "ja":"ja",
         "sc":"zh-Hans",
-        "tc":"zh-Hant"
+        "tc":"zh-Hant",
+        "de":"de",
+        "es":"es",
+        "ru":"ru"
     }
     urlset = ET.Element("urlset")
     urlset.set('xmlns','http://www.sitemaps.org/schemas/sitemap/0.9')
@@ -39,6 +44,30 @@ def sitemap(langs=['en'], pages=[], game='error'):
     tree = ET.ElementTree(urlset)
     tree.write("scripts/sitemaps/"+game+".xml", encoding='utf-8', xml_declaration=True)
 
+def yumia():
+    langs = ["en", "ja", 'sc', 'tc', 'de', 'fr', 'ko', 'es', 'ru']
+    pages = []
+    for obj in A26Item.objects.filter(hidden=False):
+        pages.append(f'items/{obj.id}')
+
+    for obj in A26Trait.objects.all():
+        pages.append(f'traits/{obj.id}')
+
+    for obj in A26Effect.objects.all():
+        pages.append(f'effects/{obj.id}')
+
+    for obj in A26Monster.objects.all():
+        pages.append(f'monsters/{obj.id}')
+
+    for obj in A26Item.objects.filter(hidden=False):
+        pages.append(f'items/{obj.id}')
+
+    pages.append('items')
+    pages.append('traits')
+    pages.append('effects')
+    pages.append('monsters')
+
+    sitemap(langs, pages, 'yumia')
 
 def resleri():
     langs = ["en", "ja", 'sc', 'tc']
@@ -109,7 +138,7 @@ def firis():
 def blog():
     pages = []
     for obj in Blog.objects.all():
-        pages.append(f'{obj.section.name}/{obj.slugtitle}')
+        pages.append(f'{obj.section.name}/{obj.slug}')
 
     urlset = ET.Element("urlset")
     urlset.set('xmlns','http://www.sitemaps.org/schemas/sitemap/0.9')
@@ -134,7 +163,8 @@ def sitemap_index():
         'firis', 'sophie2',
         'ryza2',
         'bluereflection', 'second-light',
-        'resleri'
+        'resleri',
+        'yumia'
     ]
 
     index = ET.Element("sitemapindex")
@@ -148,7 +178,8 @@ def sitemap_index():
         tree = ET.ElementTree(index)
         tree.write('scripts/sitemaps/sitemap.xml',encoding='utf-8', xml_declaration=True)
 
-resleri()
+#yumia()
+#resleri()
 #firis()
 #blog()
 #sitemap_index()

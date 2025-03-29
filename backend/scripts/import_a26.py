@@ -17,7 +17,7 @@ def get_text(row, kind='text'):
     text_en=row[f'{kind}_eng']
     text_ja=row[f'{kind}_jpn']
     text_tc=row[f'{kind}_cht']
-    text_sc=row[f'{kind}_cht']
+    text_sc=row[f'{kind}_chs']
     text_ko=row[f'{kind}_kor']
     text_fr=row[f'{kind}_fra']
     text_ru=row[f'{kind}_rus']
@@ -450,4 +450,16 @@ def coord(row, index):
     else:
         obj.save()
 
-#import_generic(trait)
+def hide_fake():
+    items = Item.objects.filter(cats=38)
+    for i in items:
+        try:
+            i.recipematerial
+        except:
+            print("Hiding ", i.name.text_en)
+            i.hidden = True
+            i.save()
+
+#import_generic(neat_strings)
+
+#hide_fake()

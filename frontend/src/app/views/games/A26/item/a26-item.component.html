@@ -1,0 +1,161 @@
+@if (data; as item) {
+  <div [class]="inputSlug ? 'card card-dialog' : 'card card-medium'">
+    <h4 class="card-title card-icon-space">{{item.name}}</h4>
+    <div class="card-icon-position">
+      @if (item.isDLC) {
+        <br /><span class="badge bg-primary">DLC</span>
+      }
+    </div>
+    <!--
+    <img class="card-item-display" src="{{imgURL}}items/{{item.id}}.webp?v=1"
+      alt="{{item.name}}" style="aspect-ratio: 1; width: 280px;">
+    -->
+
+    @if (item.desc) {
+      <p>{{item.desc}}</p>
+    }
+    <div class="two-column">
+      <table class="table-item-data"><tbody>
+        @for (cat of item.cats; track cat) {
+          <tr>
+            <!-- <td style="text-align:center;"><i class="atelier atelier-{{cat.icon}}"></i></td> -->
+            <td><a routerLink="/{{gameURL}}/categories/{{cat.id}}/{{language}}">{{cat.name}}</a></td>
+          </tr>
+        }
+        @for (mat of item.mats; track mat) {
+          <tr>
+            <!-- <td style="text-align:center;"><i class="atelier atelier-{{cat.icon}}"></i></td> -->
+            <td>{{mat.name}}</td>
+          </tr>
+        }
+      </tbody></table>
+      <div style="break-inside: avoid-column;">
+        <i style="color:{{item.fire ? a26service.elements['fire'] : 'gray'}};" class="yumia-element-icon atelier atelier-np atelier-sophie2-element-fire"></i>
+        <i style="color:{{item.ice  ? a26service.elements['ice']  : 'gray'}};" class="yumia-element-icon atelier atelier-np atelier-sophie2-element-ice"></i>
+        <i style="color:{{item.bolt ? a26service.elements['bolt'] : 'gray'}};" class="yumia-element-icon atelier atelier-np atelier-sophie2-element-lightning"></i>
+        <i style="color:{{item.air  ? a26service.elements['air']  : 'gray'}};" class="yumia-element-icon atelier atelier-np atelier-sophie2-element-wind"></i>
+        @if (item.resonance) { {{item.resonance}} }
+      </div>
+    </div>
+
+    @if (item.atk || item.dfn || item.spd) {
+      <b>Stats:</b>
+      <ul>
+        @if (item.atk) { <li><b>ATK: </b>{{item.atk}}</li> }
+        @if (item.dfn) { <li><b>DEF: </b>{{item.dfn}}</li> }
+        @if (item.spd) { <li><b>SPD: </b>{{item.spd}}</li> }
+      </ul>
+    }
+
+    @if (item.mons) {
+      <b>Dropped By:</b>
+      <ul>
+        @for (mon of item.mons; track mon) {
+          <li>
+            <a routerLink="/{{gameURL}}/monsters/{{mon.id}}/{{language}}">{{mon.name}}</a>
+          </li>
+        }
+      </ul>
+    }
+
+    @if (item.material) {
+      <b>Materials:</b>
+      <ul>
+        @for (r of item.material.recipe; track r) {
+          <li>
+            {{r.mat.name}} x{{r.num}}
+          </li>
+        }
+      </ul>
+    }
+
+    @if (item.rank) {
+      <table class="tbl"><tbody>
+        <tr><th colspan=2>Rank Data</th></tr>
+        @for (rank of item.rank; track rank) {
+          <tr>
+            <td>{{rank.rank}}</td>
+            <td>
+              <ul>
+                <li><b>Quality: </b>{{rank.quality}}</li>
+                @if (rank.eff) {
+                  @for (e of rank.eff; track e) {
+                    <li>
+                      <popover [template]="effPopover"
+                        [name]="e.eff.name"
+                        [context]="{eff:e.eff}"
+                        url="/{{gameURL}}/effects/{{e.eff.id}}/{{language}}">
+                        {{e.eff.name}} {{e.lv}}
+                      </popover>
+                    </li>
+                  }
+                }
+              </ul>
+            </td>
+          </tr>
+        }
+      </tbody></table>
+    }
+
+    @if (item.recipe) {
+      <ul>
+        <li><b>Amount Made:</b> {{item.recipe.num}}</li>
+        <li><b>SP:</b> {{item.recipe.sp}}</li>
+      </ul>
+      <table class="tbl"><tbody>
+        <tr><th colspan=2>Recipe</th></tr>
+        @for (ing of item.recipe.recipe; track ing) {
+          <tr>
+            @if (ing.item) {
+              <td><a routerLink="/{{gameURL}}/items/{{ing.item.id}}/{{language}}">{{ing.item.name}}</a></td>
+            }
+            @else {
+              <td><a routerLink="/{{gameURL}}/categories/{{ing.cat.id}}/{{language}}">{{ing.cat.name}}</a></td>
+            }
+            @if (ing.eff) {
+              <td>
+                <popover [template]="effPopover"
+                  [name]="ing.eff.name"
+                  [context]="{eff:ing.eff}"
+                  url="/{{gameURL}}/effects/{{ing.eff.id}}/{{language}}">
+                  {{ing.eff.name}}
+                </popover>
+              </td>
+            }
+            @else {
+              @if (ing.item) {
+                Needed for unlocking only.
+              }
+            }
+          </tr>
+        }
+      </tbody></table>
+      <table class="tbl"><tbody>
+        <tr><th colspan=2>
+          Level Data
+          @if (item.recipe.level[0].fire) { <i style="color:{{a26service.elements['fire']}};" class="yumia-element-icon atelier atelier-np atelier-sophie2-element-fire"></i> }
+          @if (item.recipe.level[0].ice)  { <i style="color:{{a26service.elements['ice']}};"  class="yumia-element-icon atelier atelier-np atelier-sophie2-element-ice"></i> }
+          @if (item.recipe.level[0].bolt) { <i style="color:{{a26service.elements['bolt']}};" class="yumia-element-icon atelier atelier-np atelier-sophie2-element-lightning"></i> }
+          @if (item.recipe.level[0].air)  { <i style="color:{{a26service.elements['air']}};"  class="yumia-element-icon atelier atelier-np atelier-sophie2-element-wind"></i> }
+        </th></tr>
+        @for (level of item.recipe.level; track level) {
+          <tr>
+            <td>{{level.lv}}</td>
+            <td>{{level.reward}} @if(level.amt) { {{level.amt}} } </td>
+          </tr>
+        }
+      </tbody></table>
+    }
+  </div>
+  <ng-template #effPopover let-eff="eff">
+    @if (!eff.desc2) {
+      <p>{{eff.desc1}}</p>
+    }
+    @else {
+      <p><b>Inner: </b>{{eff.desc1}}</p>
+      <p><b>Outer: </b>{{eff.desc2}}</p>
+    }
+    <p><b>Max: </b>{{eff.max_level}}</p>
+    <a routerLink="/{{gameURL}}/effects/{{eff.id}}/{{language}}">More info...</a>
+  </ng-template>
+}

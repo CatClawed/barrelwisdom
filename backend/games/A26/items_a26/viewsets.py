@@ -91,7 +91,7 @@ class A26ItemViewSet(DefaultViewSetID):
         .prefetch_related(
             'cats__name',
             'mats__name',
-        )
+        ).filter(hidden=False)
     )
     serializer_class = A26ItemListSerializer
 

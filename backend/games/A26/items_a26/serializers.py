@@ -188,8 +188,9 @@ class A26RecipeEffectCatSerializer(A26DefaultSerializer):
         fields = ['recipe']
 
 class A26CategoryFullSerializer(A26DefaultSerializer):
+    name = serializers.SerializerMethodField()
     in_cat = A26ItemSimpleSerializer(source='item_set', many=True)
     used = A26RecipeEffectCatSerializer(source='recipeeffect_set', many=True)
     class Meta:
         model = Category
-        fields = ['in_cat', 'used']
+        fields = ['in_cat', 'used', 'name']

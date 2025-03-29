@@ -132,6 +132,7 @@
     </div>
   }
   @else if (bread.current) {
+    <cringe-ad-responsive></cringe-ad-responsive>
     <nav style="margin-top: 1em;" aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a routerLink="/">Barrel Wisdom</a></li>
@@ -140,8 +141,14 @@
         }
         <li class="breadcrumb-item active" aria-current="page">{{bread.current}}</li>
       </ol>
+      @if (bread.breadcrumbs.length > 0) {
+        @if (bread.breadcrumbs[0][1].includes('yumia')) {
+          <p><i style="margin-right:0.5em;" class="fa-solid fa-screwdriver-wrench"></i><b>Page is under construction. Maps next update.</b></p>
+        }
+      }
     </nav>
   }
   <router-outlet></router-outlet>
+  <cringe-ad-responsive></cringe-ad-responsive>
 </div>
 </mat-sidenav-container>
