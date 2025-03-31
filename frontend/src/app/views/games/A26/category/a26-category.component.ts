@@ -20,7 +20,7 @@ export class A26CategoryComponent extends SingleComponent {
     protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
-    private a26service: A26Service) {
+    protected a26service: A26Service) {
     super(destroy$, route, breadcrumbService, seoService);
   }
 

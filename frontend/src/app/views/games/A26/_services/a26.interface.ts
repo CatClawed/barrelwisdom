@@ -6,6 +6,7 @@ export interface NameLink {
 export interface Coord {
     x: number;
     z: number;
+    label: number;
 }
 
 export interface Trait {

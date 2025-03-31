@@ -31,7 +31,8 @@
               "src/ads.txt"
             ],
             "styles": [
-              "src/scss/style.scss"
+              "src/scss/style.scss",
+              "node_modules/leaflet/dist/leaflet.css"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -63,7 +64,8 @@
                 }
               ],
               "styles": [
-                "src/scss/style.scss"
+                "src/scss/style.scss",
+                "node_modules/leaflet/dist/leaflet.css"
               ],
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -118,7 +120,8 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "styles": [
-              "src/scss/style.scss"
+              "src/scss/style.scss",
+              "node_modules/leaflet/dist/leaflet.css"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [

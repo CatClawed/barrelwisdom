@@ -41,16 +41,20 @@
     @if (item.atk || item.dfn || item.spd) {
       <b>Stats:</b>
       <ul>
-        @if (item.atk) { <li><b>ATK: </b>{{item.atk}}</li> }
-        @if (item.dfn) { <li><b>DEF: </b>{{item.dfn}}</li> }
-        @if (item.spd) { <li><b>SPD: </b>{{item.spd}}</li> }
+        @if (item.atk) { <li><b>{{a26service.statStrings['atk'][language]}}: </b>{{item.atk}}</li> }
+        @if (item.dfn) { <li><b>{{a26service.statStrings['dfn'][language]}}: </b>{{item.dfn}}</li> }
+        @if (item.spd) { <li><b>{{a26service.statStrings['spd'][language]}}: </b>{{item.spd}}</li> }
       </ul>
     }
-
-    @if (item.mons) {
+    @if (item.mons || item.rare) {
       <b>Dropped By:</b>
       <ul>
         @for (mon of item.mons; track mon) {
+          <li>
+            <a routerLink="/{{gameURL}}/monsters/{{mon.id}}/{{language}}">{{mon.name}}</a>
+          </li>
+        }
+        @for (mon of item.rare; track mon) {
           <li>
             <a routerLink="/{{gameURL}}/monsters/{{mon.id}}/{{language}}">{{mon.name}}</a>
           </li>
@@ -67,6 +71,10 @@
           </li>
         }
       </ul>
+    }
+
+    @if (item.comfort_goal) {
+      <p><b>{{a26service.comfortString[language]}} </b>{{item.comfort_goal}} (see map) <i class="fa-solid fa-arrow-down"></i></p>
     }
 
     @if (item.rank) {
@@ -96,7 +104,6 @@
         }
       </tbody></table>
     }
-
     @if (item.recipe) {
       <ul>
         <li><b>Amount Made:</b> {{item.recipe.num}}</li>
@@ -147,6 +154,9 @@
       </tbody></table>
     }
   </div>
+  @if (item.location) {
+    <a26-map [data]="item.location"></a26-map>
+  }
   <ng-template #effPopover let-eff="eff">
     @if (!eff.desc2) {
       <p>{{eff.desc1}}</p>

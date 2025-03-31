@@ -20,7 +20,7 @@ export class A26EffectComponent extends SingleComponent {
     protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
-    private a26service: A26Service) {
+    protected a26service: A26Service) {
     super(destroy$, route, breadcrumbService, seoService);
   }
 
@@ -29,7 +29,7 @@ export class A26EffectComponent extends SingleComponent {
     return this.a26service.getEffect(this.slug, this.language);
   }
   afterAssignment(): void {
-    this.genericSettings(this.data.name, this.data.desc,
+    this.genericSettings(this.data.name, this.data.desc1,
       'Effects',
       false,
       this.inputSlug ? false : true);

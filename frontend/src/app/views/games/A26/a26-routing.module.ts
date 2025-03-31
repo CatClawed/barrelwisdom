@@ -103,6 +103,15 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'map',
+    children: [
+      {
+        path: '',
+        loadComponent: ()=> import('@app/views/games/A26/map/a26-map.component').then(m=>m.A26MapComponent),
+      },
+    ]
+  },
+  {
     path: '',
     redirectTo: '/yumia/treasure-trove-key-locations',
     pathMatch: 'full'

@@ -7,12 +7,13 @@ import { Tooltip } from '@app/views/_components/tooltip/tooltip.component';
 import { A26Service } from '@app/views/games/A26/_services/a26.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
+import { A26MapComponent } from '../map/a26-map.component';
 
 @Component({
     templateUrl: 'a26-trait.component.html',
     selector: 'a26-trait',
     providers: [DestroyService],
-    imports: [...CommonImports, Tooltip]
+    imports: [...CommonImports, Tooltip, A26MapComponent]
 })
 export class A26TraitComponent extends SingleComponent {
   constructor(
@@ -20,7 +21,7 @@ export class A26TraitComponent extends SingleComponent {
     protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
-    private a26service: A26Service) {
+    protected a26service: A26Service) {
     super(destroy$, route, breadcrumbService, seoService);
   }
 
@@ -30,6 +31,7 @@ export class A26TraitComponent extends SingleComponent {
   }
 
   afterAssignment(): void {
+    console.log(this.data.chests)
     this.genericSettings(this.data.name, this.data.desc1,
       'Traits',
       false,

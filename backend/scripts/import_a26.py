@@ -410,7 +410,11 @@ def coord(row, index):
         'Chest (Minigame)': 5,
         'Chest (Gun)': 6,
         'Monsters': 7,
-        'Building Area': 8
+        'Building Area': 8,
+        'Fish': 9,
+        'Campsite': 10,
+        'Well': 11,
+        'Gather (Crate)': 12,
     }
     try:
         obj = Coordinate.objects.get(cid=row['id'])
@@ -460,6 +464,6 @@ def hide_fake():
             i.hidden = True
             i.save()
 
-#import_generic(neat_strings)
+import_generic(coord)
 
 #hide_fake()

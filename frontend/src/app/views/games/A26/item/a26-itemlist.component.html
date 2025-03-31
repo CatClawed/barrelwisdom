@@ -40,7 +40,7 @@
   </ng-template>
   <filter-list
     [list]="filteredItems"
-    name="Items"
+    name="{{a26service.itemString[language]}}"
     [(hide)]="hide"
     [template]="template">
     <form [formGroup]="pageForm" class="grid">

@@ -9,7 +9,7 @@
   </ng-template>
   <filter-list
     [list]="filteredTraits"
-    name="Traits"
+    name="{{a26service.traitString[language]}}"
     [(hide)]="hide"
     [template]="template">
     <form [formGroup]="pageForm" class="grid">

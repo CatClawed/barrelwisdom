@@ -89,4 +89,7 @@
         <i style="width:1.5rem" class="trait-color{{trait.acc}}  atelier atelier-np atelier-ryza2-type-accessory"></i>
       </div>
     </div>
+    @if (trait.chests) {
+      <a26-map [data]="trait.chests"></a26-map>
+    }
 }

@@ -69,7 +69,7 @@ class A26DefaultSerializer(DefaultSerializer):
 class A26CoordinateSerializer(A26DefaultSerializer):
     class Meta:
         model = Coordinate
-        fields = ['x', 'z']
+        fields = ['x', 'z', 'label']
 
 class A26TraitSimpleSerializer(A26DefaultSerializer):
     name = serializers.SerializerMethodField()

@@ -8,12 +8,13 @@ import { Popover } from '@app/views/_components/popover/popover.component';
 import { A26Service } from '@app/views/games/A26/_services/a26.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
+import { A26MapComponent } from '../map/a26-map.component';
 
 @Component({
     templateUrl: 'a26-item.component.html',
     selector: 'a26-item',
     providers: [DestroyService],
-    imports: [...CommonImports, Popover]
+    imports: [...CommonImports, Popover, A26MapComponent]
 })
 export class A26ItemComponent extends SingleComponent {
   colors = {

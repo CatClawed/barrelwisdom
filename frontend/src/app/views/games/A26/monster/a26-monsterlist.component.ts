@@ -36,7 +36,7 @@ export class A26MonsterlistComponent extends DialogUseComponent {
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
-    private a26service: A26Service,
+    protected a26service: A26Service,
   ) {
     super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A26MonsterComponent;
