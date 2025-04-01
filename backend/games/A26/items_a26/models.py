@@ -1,5 +1,5 @@
 from django.db import models
-from games.A26.misc_a26.models import Text, Coordinate
+from games.A26.misc_a26.models import Text, Coordinate, QuestData
 
 # hello yes ez prefetching where you at
 class TraitGroup(models.Model):
@@ -86,6 +86,8 @@ class Item(models.Model):
     location = models.ManyToManyField(Coordinate)
     comfort_goal = models.IntegerField(blank=True, null=True)
     hidden = models.BooleanField(default=False)
+
+    quest = models.ForeignKey(QuestData, blank=True, null=True, on_delete=models.CASCADE)
 
 class IngredientEffect(models.Model):
     lv = models.IntegerField()

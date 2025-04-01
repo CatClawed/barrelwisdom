@@ -103,11 +103,32 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'map',
+    path: 'memory-vial-locations',
     children: [
       {
         path: '',
-        loadComponent: ()=> import('@app/views/games/A26/map/a26-map.component').then(m=>m.A26MapComponent),
+        loadComponent: ()=> import('@app/views/games/A26/map/a26-memory-vial.component').then(m=>m.A26MemoryVialComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language',
+        loadComponent: ()=> import('@app/views/games/A26/map/a26-memory-vial.component').then(m=>m.A26MemoryVialComponent),
+        canActivate: [LanguageGuard],
+      },
+    ]
+  },
+  {
+    path: 'treasure-trove-key-locations',
+    children: [
+      {
+        path: '',
+        loadComponent: ()=> import('@app/views/games/A26/map/a26-treasure-trove.component').then(m=>m.A26TreasureTroveComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
+        path: ':language',
+        loadComponent: ()=> import('@app/views/games/A26/map/a26-treasure-trove.component').then(m=>m.A26TreasureTroveComponent),
+        canActivate: [LanguageGuard],
       },
     ]
   },

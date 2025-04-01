@@ -69,7 +69,7 @@ export class A26Service {
     "es": "Partículas"
   };
   public readonly memoryVialString = {
-    "en": "Memory Vial",
+    "en": "Memory Vial Map",
     "ja": "伝想器",
     "sc": "传忆器",
     "tc": "傳憶器",

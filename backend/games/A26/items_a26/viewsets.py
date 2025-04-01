@@ -105,6 +105,8 @@ class A26ItemViewSet(DefaultViewSetID):
                 .select_related(
                     'name',
                     'desc',
+                    'quest__name',
+                    'quest__extra',
                 )
                 .prefetch_related(
                     'location',

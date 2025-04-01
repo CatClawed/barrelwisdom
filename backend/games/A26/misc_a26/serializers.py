@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from games._helpers.serializer_helper import DefaultSerializer
-from games.A26.misc_a26.models import Coordinate
+from games.A26.misc_a26.models import Coordinate, QuestData
 from games.A26.items_a26.models import Trait, Item
 from games.A26.monsters_a26.models import Monster
 
@@ -94,3 +94,15 @@ class A26MonsterSimpleSerializer(A26DefaultSerializer):
         fields = [
             'id', 'name'
         ]
+
+class A26QuestDataSerializer(A26DefaultSerializer):
+    name = serializers.SerializerMethodField()
+    extra = serializers.SerializerMethodField()
+    class Meta:
+        model = QuestData
+        fields = [
+            'name', 'extra'
+        ]
+    def get_extra(self, obj):
+        if obj.extra:
+            return A26DefaultSerializer.get_text(self,obj.extra)

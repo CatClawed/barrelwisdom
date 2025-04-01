@@ -415,6 +415,8 @@ def coord(row, index):
         'Campsite': 10,
         'Well': 11,
         'Gather (Crate)': 12,
+        'Shop': 13,
+        'Monsters (2)': 14,
     }
     try:
         obj = Coordinate.objects.get(cid=row['id'])
@@ -442,6 +444,10 @@ def coord(row, index):
                     if 'potential_0' in thing:
                         obj2 = Trait.objects.get(tag=thing['potential_0'])
                         obj2.chests.add(obj)
+                    elif 'craft_recipe' in thing:
+                        for c in thing['craft_recipe']:
+                            obj2 = Item.objects.get(tag=c)
+                            obj2.location.add(obj)
                     else:
                         obj2 = Item.objects.get(tag=thing['item_id'])
                         obj2.location.add(obj)
@@ -463,6 +469,31 @@ def hide_fake():
             print("Hiding ", i.name.text_en)
             i.hidden = True
             i.save()
+
+def quest(row, index):
+    try:
+        obj = QuestData.objects.get(tag=row['id'])
+        print("Update Quest: ", row['id'])
+    except:
+        obj = QuestData(tag=row['id'])
+        print("Create Quest: ", row['id'])
+    if row['extra']:
+        eval_objects(row, ['quest_name', 'extra', 'reward'])
+    else:
+        eval_objects(row, ['quest_name', 'reward'])
+    obj.name  = get_text(row['quest_name'])
+    obj.extra = get_text(row['extra']) if row['extra'] else None
+    obj.save()
+    if type(row['reward']) is dict:
+        obj2 = Item.objects.get(tag=row['reward']['reward'])
+        obj2.quest = obj
+        obj2.save()
+    else:
+        for r in row['reward']:
+            obj2 = Item.objects.get(tag=r['reward_hash'])
+            obj2.quest = obj
+            obj2.save()
+
 
 import_generic(coord)
 

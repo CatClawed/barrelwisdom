@@ -15,13 +15,14 @@ import * as L from 'leaflet';
     }
 
     .map-icon {
-        height: 2vw;
-        width: 2vw;
-        fill: white;
-        //filter: drop-shadow(1vw 1vw 1vw black);
+        height: 2rem;
+        width: 2rem;
         margin-top: 6px;
         margin-left: 6px;
         transform: translate(-50%, -50%)
+    }
+    .white-icon {
+        fill: white;
     }
     `,
     template: `
@@ -43,21 +44,25 @@ export class A26MapComponent implements AfterViewInit {
     }
 
     ic = L.divIcon({
-        html: `<svg class="map-icon"><use href="${this.a26service.imgURL}spritesheet.svg#chest"></use></svg>`,
+        html: `<svg class="map-icon"><use href="${this.a26service.imgURL}sprites.svg?v=3#chest"></use></svg>`,
         className: 'dummy'
     })
 
     if = L.divIcon({
-        html: `<svg class="map-icon"><use href="${this.a26service.imgURL}spritesheet.svg#fish"></use></svg>`,
+        html: `<svg class="map-icon white-icon"><use href="${this.a26service.imgURL}sprites.svg?v=3#fish"></use></svg>`,
         className: 'dummy'
     })
 
     ib = L.divIcon({
-        html: `<svg class="map-icon"><use href="${this.a26service.imgURL}spritesheet.svg#building"></use></svg>`,
+        html: `<svg class="map-icon"><use href="${this.a26service.imgURL}sprites.svg?v=3#building"></use></svg>`,
         className: 'dummy'
     })
     ics = L.divIcon({
-        html: `<svg class="map-icon"><use href="${this.a26service.imgURL}spritesheet.svg#campsite"></use></svg>`,
+        html: `<svg class="map-icon"><use href="${this.a26service.imgURL}sprites.svg?v=3#campsite"></use></svg>`,
+        className: 'dummy'
+    })
+    is = L.divIcon({
+        html: `<svg class="map-icon"><use href="${this.a26service.imgURL}sprites.svg?v=3#shop"></use></svg>`,
         className: 'dummy'
     })
 
@@ -70,16 +75,9 @@ export class A26MapComponent implements AfterViewInit {
             case 8:  return new L.Marker(loc, { icon: this.ib });
             case 9:  return new L.Marker(loc, { icon: this.if });
             case 10: return new L.Marker(loc, { icon: this.ics });
+            case 13: return new L.Marker(loc, { icon: this.is });
         }
         return new L.CircleMarker(loc, { radius: 7, color: 'black', fillColor: 'white', fillOpacity: 1 })
-    }
-
-    chest(d) {
-        new L.Marker([-this.height * d.z, this.width * d.x], { icon: this.ic }).addTo(this.map)
-    }
-
-    fish(d) {
-        new L.Marker([-this.height * d.z, this.width * d.x], { icon: this.if }).addTo(this.map)
     }
 
     ngAfterViewInit(): void {

@@ -14,6 +14,14 @@
     @if (item.desc) {
       <p>{{item.desc}}</p>
     }
+    @if (item.quest) {
+      <p>
+        @if (item.quest.extra) {
+          <b>{{item.quest.extra}} </b>
+        }
+        {{item.quest.name}}
+      </p>
+    }
     <div class="two-column">
       <table class="table-item-data"><tbody>
         @for (cat of item.cats; track cat) {

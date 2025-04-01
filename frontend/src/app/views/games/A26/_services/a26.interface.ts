@@ -120,6 +120,11 @@ export interface MaterialRecipe {
     recipe: MaterialRecipeData[];
 }
 
+export interface QuestData {
+    name: string;
+    extra: string;
+}
+
 export interface Item {
     id: number;
     name: string;
@@ -144,6 +149,7 @@ export interface Item {
     location: Coord[];
     recipe: Recipe;
     material: MaterialRecipe;
+    quest: QuestData;
 }
 
 export interface CategoryHelper {

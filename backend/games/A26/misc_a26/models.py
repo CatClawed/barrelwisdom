@@ -21,3 +21,8 @@ class Coordinate(models.Model):
         indexes = [
             models.Index(fields=['label']),
         ]
+
+class QuestData(models.Model):
+    tag   = models.CharField(unique=True)
+    name  = models.ForeignKey(Text, on_delete=models.CASCADE)
+    extra = models.ForeignKey(Text, on_delete=models.CASCADE, null=True, blank=True, related_name='questextra')

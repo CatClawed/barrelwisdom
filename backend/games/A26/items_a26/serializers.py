@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from games.A26.misc_a26.serializers import A26DefaultSerializer, A26CoordinateSerializer, A26ItemSimpleSerializer, A26TraitSimpleSerializer, A26MonsterSimpleSerializer
+from games.A26.misc_a26.serializers import A26DefaultSerializer, A26CoordinateSerializer, A26ItemSimpleSerializer, A26TraitSimpleSerializer, A26MonsterSimpleSerializer, A26QuestDataSerializer
 from games.A26.items_a26.models import Trait, TraitGroup, Effect, Item, IngredientEffect, Category, Material, ItemStatus, Recipe, RecipeEffect, RecipeLevel, RecipeMaterial, NecessaryMaterial
 
 class A26TraitGroupSerializer(A26DefaultSerializer):
@@ -164,6 +164,7 @@ class A26ItemSerializer(A26DefaultSerializer):
     material = A26RecipeMaterial(source='recipematerial')
     mons = A26MonsterSimpleSerializer(source='monster_set', many=True)
     rare = A26MonsterSimpleSerializer(source='raredrop', many=True)
+    quest = A26QuestDataSerializer()
     class Meta:
         model = Item
         fields = [
@@ -172,7 +173,7 @@ class A26ItemSerializer(A26DefaultSerializer):
             'isDLC', 'resonance',
             'atk', 'dfn', 'spd', 'ct', 'aoe', 'comfort_goal',
             'mats', 'cats', 'rank', 'location', 'recipe', 'material',
-            'mons', 'rare',
+            'mons', 'rare', 'quest',
         ]
 
 class A26RecipeCatSerializer(A26DefaultSerializer):
