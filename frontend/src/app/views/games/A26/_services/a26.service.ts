@@ -7,7 +7,7 @@ import { Category, Coord, Effect, Item, Monster, NameLink, Trait } from '@app/vi
 
 @Injectable({ providedIn: 'root' })
 export class A26Service {
-  private readonly version = '2';
+  private readonly version = '3';
 
   constructor(
     private http: HttpClient,
@@ -188,10 +188,11 @@ export class A26Service {
   public readonly imgURL = `${environment.mediaURL}games/${this.gameURL}/`;
 
   public readonly elements = {
-    'air':  '#3b853d',
-    'fire': '#b23e36',
-    'ice':  '#2089bc',
-    'bolt': '#9e8a1a',
+    'air':  '#75ff76',
+    'fire': '#fcbc72',
+    'ice':  '#7dfffa',
+    'bolt': '#ffff7b',
+    'none': '#969696'
   }
 
   getMemoryVials(): Observable<Coord[]> {

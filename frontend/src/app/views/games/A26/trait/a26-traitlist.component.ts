@@ -39,13 +39,20 @@ export class A26TraitlistComponent extends DialogUseComponent {
     this.component = A26TraitComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
-      transfers: 0
+      transfers: 0,
+      atk: false,
+      heal: false,
+      buff: false,
+      dbf: false,
+      wep: false,
+      arm: false,
+      acc: false,
     })
   }
 
   changeData() {
     this.gameService(this.a26service, 'traits');
-    this.genericSettings(`Traits`, `The list of traits in ${this.gameTitle}.`);
+    this.genericSettings(this.a26service.traitString[this.language], `The list of traits in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a26service.getTraitList(this.language);
   }
@@ -53,40 +60,21 @@ export class A26TraitlistComponent extends DialogUseComponent {
   afterAssignment(): void {
     this.filteredTraits = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Trait[]>),
-      map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.data.slice())
+      map((search: any) => search ? this.filterT(search.filtertext, search.atk, search.heal, search.buff, search.dbf, search.wep, search.arm, search.acc) : this.data.slice())
     );
   }
 
-  private filterT(value: string, transfer: number): Trait[] {
+  private filterT(value: string, atk, heal, buff, dbf, wep, arm, acc): Trait[] {
     this.hide = false;
     let traitlist: Trait[] = this.data;
-    if (transfer != 0) {
-      traitlist = traitlist.filter(trait => !(trait.wep === trait.arm === trait.acc === trait.atk === trait.heal === trait.buff === trait.dbf));
-    }
+    traitlist = atk  ? traitlist.filter(trait => trait.atk) : traitlist;
+    traitlist = heal ? traitlist.filter(trait => trait.heal) : traitlist;
+    traitlist = buff ? traitlist.filter(trait => trait.buff) : traitlist;
+    traitlist = dbf  ? traitlist.filter(trait => trait.dbf) : traitlist;
+    traitlist = wep  ? traitlist.filter(trait => trait.wep) : traitlist;
+    traitlist = arm  ? traitlist.filter(trait => trait.arm) : traitlist;
+    traitlist = acc  ? traitlist.filter(trait => trait.acc) : traitlist;
 
-    switch (transfer) {
-      case 1:
-        traitlist = traitlist.filter(trait => trait.atk);
-        break;
-      case 2:
-        traitlist = traitlist.filter(trait => trait.heal);
-        break;
-      case 3:
-        traitlist = traitlist.filter(trait => trait.buff);
-        break;
-      case 4:
-        traitlist = traitlist.filter(trait => trait.dbf);
-        break;
-      case 5:
-        traitlist = traitlist.filter(trait => trait.wep);
-        break;
-      case 6:
-        traitlist = traitlist.filter(trait => trait.arm);
-        break;
-      case 7:
-        traitlist = traitlist.filter(trait => trait.acc);
-        break;
-    }
     if (!value) {
       return traitlist;
     }

@@ -78,7 +78,7 @@ def trait(row, index):
         obj.acc  = True if row['acc'] else False
         obj.atk  = True if row['atk'] else False
         obj.heal = True if row['heal'] else False
-        obj.buff = True if row['subPar'] else False
+        obj.buff = True if row['supPar'] else False
         obj.dbf  = True if row['supEne'] else False
         obj.fire = True if row['fire'] else False
         obj.ice  = True if row['ice'] else False
@@ -224,7 +224,7 @@ def effect(row, index):
         obj.save()
 
 def item(row, index):
-    if ('(Interior)' in row['category'] and row['item_id'] != 'ITEM_INTERIOR_489') or (row['disp_flag'] and int(row['disp_flag']) > 0):
+    if '(Interior)' in row['category'] or (row['disp_flag'] and int(row['disp_flag']) > 0):
         try:
             obj = Item.objects.get(tag=row['item_id'])
             print("Update Item: ", row['item_id'], row['text_eng'])
@@ -239,10 +239,11 @@ def item(row, index):
 
         if '(Key Items)' not in row['category'] and '(Exploration Equip.)' not in row['category'] and '(Interior)' not in row['category']:
             obj.resonance = row['range']
-            obj.fire = True if row['fire'] == "TRUE" else False
-            obj.ice  = True if row['ice']  == "TRUE" else False
-            obj.bolt = True if row['bolt'] == "TRUE" else False
-            obj.air  = True if row['air']  == "TRUE" else False
+            print(row['fire'])
+            obj.fire = True if row['fire'] == "True" else False
+            obj.ice  = True if row['ice']  == "True" else False
+            obj.bolt = True if row['bolt'] == "True" else False
+            obj.air  = True if row['air']  == "True" else False
         else:
             obj.resonance = 0
             obj.fire = False
@@ -256,6 +257,7 @@ def item(row, index):
         obj.spd = row['spd'] if row['spd'] else None
         obj.ct  = row['cool_time'] if row['cool_time'] else None
         obj.aoe = True if row['aoe'] == 'SKILL_RANGE_AREA' else None
+        obj.index = index
 
         obj.save()
 
@@ -345,34 +347,33 @@ def item_recipe(row, index):
 
 # also quick craft
 def furniture_recipe(row, index):
-    if row['energy_core_cost'] or row['category']:
+    try:
+        item = Item.objects.get(tag=row['item_tag'])
+        create = False
         try:
-            item = Item.objects.get(tag=row['item_tag'])
-            create = False
-            try:
-                obj = RecipeMaterial.objects.get(item=item)
-                print("Update FRecipe: ", row['item_tag'], row['name'])
-            except:
-                obj = RecipeMaterial(item=item)
-                print("Create FRecipe: ", row['item_tag'], row['name'])
-                create = True
-            obj.core = row['energy_core_cost'] if row['energy_core_cost'] else None
-            obj.comfort = row['comfort_level'] if row['comfort_level'] else None
-            obj.cost = row['cost'] if row['cost'] else None
-            obj.kind = row['category'][24:].lower()
-            obj.save()
-
-            if create:
-                for i in range(0,3):
-                    if row[f'need_item_{i}']:
-                        obj2  = NecessaryMaterial(
-                            mat=Material.objects.get(name__text_en=row[f'need_item_{i}']),
-                            num=row[f'need_num_{i}']
-                        )
-                        obj2.save()
-                        obj.recipe.add(obj2)
+            obj = RecipeMaterial.objects.get(item=item)
+            print("Update FRecipe: ", row['item_tag'], row['name'])
         except:
-            print('error', row['item_tag'], row['name']) # expected for impact orb
+            obj = RecipeMaterial(item=item)
+            print("Create FRecipe: ", row['item_tag'], row['name'])
+            create = True
+        obj.core = row['energy_core_cost'] if row['energy_core_cost'] else None
+        obj.comfort = row['comfort_level'] if row['comfort_level'] else None
+        obj.cost = row['cost'] if row['cost'] else None
+        obj.kind = row['category'][24:].lower()
+        obj.save()
+
+        if create:
+            for i in range(0,3):
+                if row[f'need_item_{i}']:
+                    obj2  = NecessaryMaterial(
+                        mat=Material.objects.get(name__text_en=row[f'need_item_{i}']),
+                        num=row[f'need_num_{i}']
+                    )
+                    obj2.save()
+                    obj.recipe.add(obj2)
+    except:
+        print('error', row['item_tag'], row['name']) # expected for impact orb
 
 def monster(row, index):
     if row['disp_flag'] and int(row['disp_flag']) > 0:
@@ -386,7 +387,7 @@ def monster(row, index):
         obj.desc = get_text(row, 'desc')
         obj.race = Race.objects.get(name__text_en=row['race'])
         obj.break_hits =row['break_symbol']
-        obj.break_phys = True if row['break_weak_phys'] == 'TRUE' else False
+        obj.break_phys = True if row['break_weak_phys'] == 'True' else False
         obj.hp  = row['star_hp']
         obj.atk = row['star_atk']
         obj.dfn = row['star_def']
@@ -417,6 +418,7 @@ def coord(row, index):
         'Gather (Crate)': 12,
         'Shop': 13,
         'Monsters (2)': 14,
+        'Gather (Scan)': 15
     }
     try:
         obj = Coordinate.objects.get(cid=row['id'])
@@ -485,9 +487,10 @@ def quest(row, index):
     obj.extra = get_text(row['extra']) if row['extra'] else None
     obj.save()
     if type(row['reward']) is dict:
-        obj2 = Item.objects.get(tag=row['reward']['reward'])
-        obj2.quest = obj
-        obj2.save()
+        for r in row['reward']['reward']:
+            obj2 = Item.objects.get(tag=r)
+            obj2.quest = obj
+            obj2.save()
     else:
         for r in row['reward']:
             obj2 = Item.objects.get(tag=r['reward_hash'])
@@ -495,6 +498,6 @@ def quest(row, index):
             obj2.save()
 
 
-import_generic(coord)
+#import_generic(furniture_recipe)
 
 #hide_fake()

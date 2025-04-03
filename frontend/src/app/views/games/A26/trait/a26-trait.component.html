@@ -80,14 +80,13 @@
         </ul>
       }
       <div class="flex bottom" style="text-align:center;height: 100%;">
-        <i style="width:1.5rem" class="trait-color{{trait.atk}}  atelier atelier-np atelier-ryza2-type-attack"></i>
-        <i style="width:1.5rem" class="trait-color{{trait.heal}} atelier atelier-np atelier-ryza2-type-heal"></i>
-        <i style="width:1.5rem" class="trait-color{{trait.buff}} atelier atelier-np atelier-ryza2-type-buff"></i>
-        <i style="width:1.5rem" class="trait-color{{trait.dbf}}  atelier atelier-np atelier-ryza2-type-debuff"></i>
-        <i style="width:1.5rem" class="trait-color{{trait.wep}}  atelier atelier-np atelier-ryza2-type-weapon"></i>
-        <i style="width:1.5rem" class="trait-color{{trait.arm}}  atelier atelier-np atelier-ryza2-type-armor"></i>
-        <i style="width:1.5rem" class="trait-color{{trait.acc}}  atelier atelier-np atelier-ryza2-type-accessory"></i>
-      </div>
+        <svg style="width:1.8em;height:1.8em;fill:{{trait.atk  ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=2#category-bombs"></use></svg>
+        <svg style="width:1.8em;height:1.8em;fill:{{trait.heal ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=2#trait-heal"></use></svg>
+        <svg style="width:1.8em;height:1.8em;fill:{{trait.buff ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=2#trait-buff"></use></svg>
+        <svg style="width:1.8em;height:1.8em;fill:{{trait.dbf  ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=2#trait-debuff"></use></svg>
+        <svg style="width:1.8em;height:1.8em;fill:{{trait.wep  ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=2#category-weapons"></use></svg>
+        <svg style="width:1.8em;height:1.8em;fill:{{trait.arm  ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=2#category-armor"></use></svg>
+        <svg style="width:1.8em;height:1.8em;fill:{{trait.acc  ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=2#category-accessories"></use></svg>      </div>
     </div>
     @if (trait.chests) {
       <a26-map [data]="trait.chests"></a26-map>

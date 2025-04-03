@@ -141,11 +141,6 @@
         }
         <li class="breadcrumb-item active" aria-current="page">{{bread.current}}</li>
       </ol>
-      @if (bread.breadcrumbs.length > 0) {
-        @if (bread.breadcrumbs[0][1].includes('yumia')) {
-          <p><i style="margin-right:0.5em;" class="fa-solid fa-screwdriver-wrench"></i><b>Page is under construction. Next update: Images, other finishing touches.</b></p>
-        }
-      }
     </nav>
   }
   <router-outlet></router-outlet>

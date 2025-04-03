@@ -13,29 +13,41 @@
           <span class="badge bg-primary">DLC</span>
         }
       </ng-container>
-      <div class="two-column">
-        <table class="table-item-data"><tbody>
+      <div class="two-column" style="height:100%;">
+        <ul style="padding-left: 0;">
           @for (cat of item.cats; track cat) {
-            <tr>
-              <!-- <td style="text-align:center;"><i class="atelier atelier-{{cat.icon}}"></i></td> -->
-              <td>{{cat.name}}</td>
-            </tr>
+            <li style="display: flex;">
+              <svg class="a26-icon"><use attr.href="{{imgURL}}spritesheet.svg?v=2#{{category_to_icon[cat.id]}}"></use></svg>
+              {{cat.name}}
+            </li>
           }
-          @for (mat of item.mats; track mat) {
-            <tr>
-              <!-- <td style="text-align:center;"><i class="atelier atelier-{{cat.icon}}"></i></td> -->
-              <td>{{mat.name}}</td>
-            </tr>
-          }
-        </tbody></table>
-        <div style="break-inside: avoid-column; margin-right:2rem;">
-          <i style="color:{{item.fire ? a26service.elements['fire'] : 'gray'}};" class="yumia-element-icon atelier atelier-np atelier-sophie2-element-fire"></i>
-          <i style="color:{{item.ice  ? a26service.elements['ice']  : 'gray'}};" class="yumia-element-icon atelier atelier-np atelier-sophie2-element-ice"></i>
-          <i style="color:{{item.bolt ? a26service.elements['bolt'] : 'gray'}};" class="yumia-element-icon atelier atelier-np atelier-sophie2-element-lightning"></i>
-          <i style="color:{{item.air  ? a26service.elements['air']  : 'gray'}};" class="yumia-element-icon atelier atelier-np atelier-sophie2-element-wind"></i>
-          @if (item.resonance) { {{item.resonance}} }
-        </div>
+        </ul>
+        @if (item.mats) {
+          <ul style="padding-left: 0;">
+            @for (mat of item.mats; track mat) {
+              <li style="display: flex;">
+                <svg class="a26-icon"><use attr.href="{{imgURL}}spritesheet.svg?v=2#material-{{mat.id}}"></use></svg>
+                {{mat.name}}
+              </li>
+            }
+          </ul>
+        }
       </div>
+      @if (item.resonance) {
+        <div class="two-column">
+          <div style="break-inside: avoid-column;">
+            <svg style="background-color:{{item.fire ? a26service.elements['fire'] : a26service.elements['none']}};" class="a26-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=2#fire"></use></svg>
+            <svg style="background-color:{{item.ice  ? a26service.elements['ice']  : a26service.elements['none']}};" class="a26-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=2#ice" ></use></svg>
+            <svg style="background-color:{{item.bolt ? a26service.elements['bolt'] : a26service.elements['none']}};" class="a26-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=2#bolt"></use></svg>
+            <svg style="background-color:{{item.air  ? a26service.elements['air']  : a26service.elements['none']}};" class="a26-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=2#air" ></use></svg>
+          </div>
+            @if (item.resonance) {
+              <div style="display:flex;">
+                <svg class="a26-icon"><use attr.href="{{imgURL}}spritesheet.svg?v=2#resonance"></use></svg> {{item.resonance}} - {{item.resonance+5}}
+              </div>
+            }
+        </div>
+      }
     </item>
   </ng-template>
   <filter-list
@@ -77,16 +89,12 @@
           }
         </mat-select>
       </mat-form-field>
-      <mat-form-field class="grid-3" appearance="outline">
-        <mat-label>Element</mat-label>
-        <mat-select matNativeControl formControlName="element" disableOptionCentering="true" class="mat-select-icon">
-          <mat-option value="Any" selected>Any</mat-option>
-          <mat-option value="Fire"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-element-fire"></mat-icon>Fire</mat-option>
-          <mat-option value="Ice"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-element-ice"></mat-icon>Ice</mat-option>
-          <mat-option value="Bolt"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-element-lightning"></mat-icon>Bolt</mat-option>
-          <mat-option value="Air"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-element-wind"></mat-icon>Air</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <div class="grid-6 svg-filter">
+        <svg (click)="toggle(this.pageForm.controls.fire)" class="a26-elements" style="margin-right:0.8em;width:2.3em;height:2.3em;background-color:{{pageForm.controls.fire.value ? a26service.elements['fire'] : a26service.elements['none']}};"><use attr.href="{{imgURL}}spritesheet.svg?v=2#fire"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.ice)"  class="a26-elements" style="margin-right:0.8em;width:2.3em;height:2.3em;background-color:{{pageForm.controls.ice.value  ? a26service.elements['ice']  : a26service.elements['none']}};"><use attr.href="{{imgURL}}spritesheet.svg?v=2#ice"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.bolt)" class="a26-elements" style="margin-right:0.8em;width:2.3em;height:2.3em;background-color:{{pageForm.controls.bolt.value ? a26service.elements['bolt'] : a26service.elements['none']}};"><use attr.href="{{imgURL}}spritesheet.svg?v=2#bolt"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.air)"  class="a26-elements" style="margin-right:0.8em;width:2.3em;height:2.3em;background-color:{{pageForm.controls.air.value  ? a26service.elements['air']  : a26service.elements['none']}};"><use attr.href="{{imgURL}}spritesheet.svg?v=2#air"></use></svg>
+      </div>
     </form>
   </filter-list>
 }

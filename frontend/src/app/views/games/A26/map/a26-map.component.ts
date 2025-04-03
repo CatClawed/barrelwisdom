@@ -44,25 +44,25 @@ export class A26MapComponent implements AfterViewInit {
     }
 
     ic = L.divIcon({
-        html: `<svg class="map-icon"><use href="${this.a26service.imgURL}sprites.svg?v=3#chest"></use></svg>`,
+        html: `<svg class="map-icon white-icon"><use href="${this.a26service.imgURL}spritesheet.svg?v=2#chest"></use></svg>`,
         className: 'dummy'
     })
 
     if = L.divIcon({
-        html: `<svg class="map-icon white-icon"><use href="${this.a26service.imgURL}sprites.svg?v=3#fish"></use></svg>`,
+        html: `<svg class="map-icon white-icon"><use href="${this.a26service.imgURL}spritesheet.svg?v=2#fish"></use></svg>`,
         className: 'dummy'
     })
 
     ib = L.divIcon({
-        html: `<svg class="map-icon"><use href="${this.a26service.imgURL}sprites.svg?v=3#building"></use></svg>`,
+        html: `<svg class="map-icon"><use href="${this.a26service.imgURL}spritesheet.svg?v=2#building"></use></svg>`,
         className: 'dummy'
     })
     ics = L.divIcon({
-        html: `<svg class="map-icon"><use href="${this.a26service.imgURL}sprites.svg?v=3#campsite"></use></svg>`,
+        html: `<svg class="map-icon"><use href="${this.a26service.imgURL}spritesheet.svg?v=2#campsite"></use></svg>`,
         className: 'dummy'
     })
     is = L.divIcon({
-        html: `<svg class="map-icon"><use href="${this.a26service.imgURL}sprites.svg?v=3#shop"></use></svg>`,
+        html: `<svg class="map-icon"><use href="${this.a26service.imgURL}spritesheet.svg?v=2#shop"></use></svg>`,
         className: 'dummy'
     })
 

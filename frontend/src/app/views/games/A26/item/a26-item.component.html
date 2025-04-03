@@ -22,29 +22,42 @@
         {{item.quest.name}}
       </p>
     }
+
     <div class="two-column">
-      <table class="table-item-data"><tbody>
+      <ul style="padding-left: 0;">
         @for (cat of item.cats; track cat) {
-          <tr>
-            <!-- <td style="text-align:center;"><i class="atelier atelier-{{cat.icon}}"></i></td> -->
-            <td><a routerLink="/{{gameURL}}/categories/{{cat.id}}/{{language}}">{{cat.name}}</a></td>
-          </tr>
+          <li style="display: flex;">
+            <svg class="a26-icon"><use attr.href="{{imgURL}}spritesheet.svg?v=2#{{category_to_icon[cat.id]}}"></use></svg>
+            <a routerLink="/{{gameURL}}/categories/{{cat.id}}/{{language}}">{{cat.name}}</a>
+          </li>
         }
-        @for (mat of item.mats; track mat) {
-          <tr>
-            <!-- <td style="text-align:center;"><i class="atelier atelier-{{cat.icon}}"></i></td> -->
-            <td>{{mat.name}}</td>
-          </tr>
-        }
-      </tbody></table>
-      <div style="break-inside: avoid-column;">
-        <i style="color:{{item.fire ? a26service.elements['fire'] : 'gray'}};" class="yumia-element-icon atelier atelier-np atelier-sophie2-element-fire"></i>
-        <i style="color:{{item.ice  ? a26service.elements['ice']  : 'gray'}};" class="yumia-element-icon atelier atelier-np atelier-sophie2-element-ice"></i>
-        <i style="color:{{item.bolt ? a26service.elements['bolt'] : 'gray'}};" class="yumia-element-icon atelier atelier-np atelier-sophie2-element-lightning"></i>
-        <i style="color:{{item.air  ? a26service.elements['air']  : 'gray'}};" class="yumia-element-icon atelier atelier-np atelier-sophie2-element-wind"></i>
-        @if (item.resonance) { {{item.resonance}} }
-      </div>
+      </ul>
+      @if (item.mats) {
+        <ul style="padding-left: 0;">
+          @for (mat of item.mats; track mat) {
+            <li style="display: flex;">
+              <svg class="a26-icon"><use attr.href="{{imgURL}}spritesheet.svg?v=2#material-{{mat.id}}"></use></svg>
+              {{mat.name}}
+            </li>
+          }
+        </ul>
+      }
     </div>
+    @if (item.resonance) {
+      <div class="two-column">
+        <div style="break-inside: avoid-column;">
+          <svg style="background-color:{{item.fire ? a26service.elements['fire'] : a26service.elements['none']}};" class="a26-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=2#fire"></use></svg>
+          <svg style="background-color:{{item.ice  ? a26service.elements['ice']  : a26service.elements['none']}};" class="a26-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=2#ice" ></use></svg>
+          <svg style="background-color:{{item.bolt ? a26service.elements['bolt'] : a26service.elements['none']}};" class="a26-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=2#bolt"></use></svg>
+          <svg style="background-color:{{item.air  ? a26service.elements['air']  : a26service.elements['none']}};" class="a26-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=2#air" ></use></svg>
+        </div>
+          @if (item.resonance) {
+            <div style="display:flex;">
+              <svg class="a26-icon"><use attr.href="{{imgURL}}spritesheet.svg?v=2#resonance"></use></svg> {{item.resonance}} - {{item.resonance+5}}
+            </div>
+          }
+      </div>
+    }
 
     @if (item.atk || item.dfn || item.spd) {
       <b>Stats:</b>
@@ -55,7 +68,7 @@
       </ul>
     }
     @if (item.mons || item.rare) {
-      <b>Dropped By:</b>
+      <b>{{a26service.monsterString[language]}}</b>
       <ul>
         @for (mon of item.mons; track mon) {
           <li>
@@ -118,40 +131,48 @@
         <li><b>SP:</b> {{item.recipe.sp}}</li>
       </ul>
       <table class="tbl"><tbody>
-        <tr><th colspan=2>Recipe</th></tr>
-        @for (ing of item.recipe.recipe; track ing) {
-          <tr>
-            @if (ing.item) {
-              <td><a routerLink="/{{gameURL}}/items/{{ing.item.id}}/{{language}}">{{ing.item.name}}</a></td>
-            }
-            @else {
-              <td><a routerLink="/{{gameURL}}/categories/{{ing.cat.id}}/{{language}}">{{ing.cat.name}}</a></td>
-            }
-            @if (ing.eff) {
-              <td>
-                <popover [template]="effPopover"
-                  [name]="ing.eff.name"
-                  [context]="{eff:ing.eff}"
-                  url="/{{gameURL}}/effects/{{ing.eff.id}}/{{language}}">
-                  {{ing.eff.name}}
-                </popover>
-              </td>
-            }
-            @else {
-              @if (ing.item) {
-                Needed for unlocking only.
+        <tr><th style="width: 50%;">{{a26service.itemString[language]}}</th><th style="width: 50%;">{{a26service.effectString[language]}}</th></tr>
+        <tr>
+          <td>
+            <ul>
+              @for (ing of item.recipe.recipe; track ing) {
+                <li>
+                  @if (ing.item) {
+                    <a routerLink="/{{gameURL}}/items/{{ing.item.id}}/{{language}}">{{ing.item.name}}</a>
+                  }
+                  @else {
+                    <a routerLink="/{{gameURL}}/categories/{{ing.cat.id}}/{{language}}">{{ing.cat.name}}</a>
+                  }
+                </li>
               }
-            }
-          </tr>
-        }
+            </ul>
+          </td>
+          <td>
+              <ul>
+                @for (ing of item.recipe.recipe; track ing) {
+                  @if (ing.eff) {
+                    <li>
+                      <popover [template]="effPopover"
+                        [name]="ing.eff.name"
+                        [context]="{eff:ing.eff}"
+                        url="/{{gameURL}}/effects/{{ing.eff.id}}/{{language}}">
+                        {{ing.eff.name}}
+                      </popover>
+                    </li>
+                  }
+                }
+              </ul>
+          </td>
+        </tr>
       </tbody></table>
       <table class="tbl"><tbody>
         <tr><th colspan=2>
-          Level Data
-          @if (item.recipe.level[0].fire) { <i style="color:{{a26service.elements['fire']}};" class="yumia-element-icon atelier atelier-np atelier-sophie2-element-fire"></i> }
-          @if (item.recipe.level[0].ice)  { <i style="color:{{a26service.elements['ice']}};"  class="yumia-element-icon atelier atelier-np atelier-sophie2-element-ice"></i> }
-          @if (item.recipe.level[0].bolt) { <i style="color:{{a26service.elements['bolt']}};" class="yumia-element-icon atelier atelier-np atelier-sophie2-element-lightning"></i> }
-          @if (item.recipe.level[0].air)  { <i style="color:{{a26service.elements['air']}};"  class="yumia-element-icon atelier atelier-np atelier-sophie2-element-wind"></i> }
+          <div style="display:inline-flex"><span style="padding-right: 0.2em;">Level Data</span>
+          @if (item.recipe.level[0].fire) { <svg style="background-color:{{a26service.elements['fire']}};" class="a26-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=2#fire"></use></svg> }
+          @if (item.recipe.level[0].ice)  { <svg style="background-color:{{a26service.elements['ice'] }};" class="a26-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=2#ice" ></use></svg> }
+          @if (item.recipe.level[0].bolt) { <svg style="background-color:{{a26service.elements['bolt']}};" class="a26-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=2#bolt"></use></svg> }
+          @if (item.recipe.level[0].air)  { <svg style="background-color:{{a26service.elements['air'] }};" class="a26-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=2#air" ></use></svg> }
+          </div>
         </th></tr>
         @for (level of item.recipe.level; track level) {
           <tr>

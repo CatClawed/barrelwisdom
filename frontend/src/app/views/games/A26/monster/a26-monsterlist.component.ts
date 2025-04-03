@@ -19,6 +19,7 @@ import { A26MonsterComponent } from './a26-monster.component';
 
 @Component({
     templateUrl: 'a26-monsterlist.component.html',
+    styleUrls: ['../yumia.scss'],
     providers: [DestroyService],
     imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
         ItemComponent, MatButtonModule]
@@ -42,13 +43,13 @@ export class A26MonsterlistComponent extends DialogUseComponent {
     this.component = A26MonsterComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
-      type: 'Any'
+      type: ''
     })
   }
 
   changeData() {
     this.gameService(this.a26service, 'monsters');
-    this.genericSettings(`Monsters`, `The list of monsters in ${this.gameTitle}.`);
+    this.genericSettings(this.a26service.monsterString[this.language], `The list of monsters in ${this.gameTitle}.`);
     this.pageForm.reset();
     return forkJoin({
       monsters: this.a26service.getMonsterList(this.language),

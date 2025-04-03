@@ -37,6 +37,9 @@ class Trait(models.Model):
     trait_hash        = models.CharField(blank=True, null=True)
     chests = models.ManyToManyField(Coordinate)
 
+    class Meta:
+        ordering = ['id']
+
 class Effect(models.Model):
     tag = models.CharField(max_length=70, unique=True)
     name  = models.ForeignKey(Text, on_delete=models.CASCADE)
@@ -52,6 +55,9 @@ class Effect(models.Model):
     att_tag                = models.CharField(blank=True, null=True)
     act_tag                = models.CharField(blank=True, null=True)
     effect_hash            = models.CharField(blank=True, null=True)
+
+    class Meta:
+        ordering = ['id']
 
 class Category(models.Model):
     tag = models.CharField(max_length=70, unique=True)
@@ -88,6 +94,10 @@ class Item(models.Model):
     hidden = models.BooleanField(default=False)
 
     quest = models.ForeignKey(QuestData, blank=True, null=True, on_delete=models.CASCADE)
+    index = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['index']
 
 class IngredientEffect(models.Model):
     lv = models.IntegerField()
@@ -101,7 +111,7 @@ class ItemStatus(models.Model):
     quality = models.IntegerField()
 
     class Meta:
-        ordering = ['item', 'quality']
+        ordering = ['item', '-quality']
 
 class RecipeLevel(models.Model):
     lv = models.IntegerField()

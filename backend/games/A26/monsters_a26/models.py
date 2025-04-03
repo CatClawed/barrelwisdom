@@ -30,3 +30,6 @@ class Monster(models.Model):
     trait = models.ForeignKey(Trait, null=True, blank=True, on_delete=models.CASCADE)
 
     location = models.ManyToManyField(Coordinate)
+
+    class Meta:
+        ordering = ['id']

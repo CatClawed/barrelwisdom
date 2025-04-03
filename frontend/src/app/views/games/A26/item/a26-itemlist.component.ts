@@ -16,17 +16,20 @@ import { DialogUseComponent } from '@app/views/games/_prototype/dialog-use.compo
 import { Observable, forkJoin } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { A26ItemComponent } from './a26-item.component';
+import { category_to_icon } from './a26-item-icons';
 
 
 @Component({
     templateUrl: 'a26-itemlist.component.html',
     providers: [DestroyService],
+    styleUrls: ['../yumia.scss'],
     imports: [...CommonImports, ...MaterialFormImports, ItemComponent,
         FilterListComponent, MatButtonModule]
 })
 
 export class A26ItemlistComponent extends DialogUseComponent {
   filteredItems: Observable<Item[]>;
+  category_to_icon = category_to_icon
 
   constructor(
     protected cdkDialog: Dialog,
@@ -44,13 +47,17 @@ export class A26ItemlistComponent extends DialogUseComponent {
       filtertext: '',
       cat: 'Any',
       mat: 'Any',
-      element: 'Any'
+      element: 'Any',
+      fire: false,
+      ice: false,
+      bolt: false,
+      air: false,
     })
   }
 
   changeData() {
     this.gameService(this.a26service, 'items');
-    this.genericSettings(`Items`, `The list of items in ${this.gameTitle}.`);
+    this.genericSettings(this.a26service.itemString[this.language], `The list of items in ${this.gameTitle}.`);
     this.pageForm.reset();
     return forkJoin({
       items: this.a26service.getItemList(this.language),
@@ -62,11 +69,11 @@ export class A26ItemlistComponent extends DialogUseComponent {
   afterAssignment(): void {
     this.filteredItems = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Item[]>),
-      map((search: any) => search ? this.filterT(search.filtertext, search.cat, search.mat, search.element) : this.data.items.slice())
+      map((search: any) => search ? this.filterT(search.filtertext, search.cat, search.mat, search.fire, search.ice, search.bolt, search.air) : this.data.items.slice())
     );
   }
 
-  private filterT(value: string, cat: string, mat: string, element: string): Item[] {
+  private filterT(value: string, cat: string, mat: string, fire, ice, bolt, air): Item[] {
     this.hide = false;
     let list: Item[] = this.data.items;
     if (cat != 'Any') {
@@ -75,20 +82,10 @@ export class A26ItemlistComponent extends DialogUseComponent {
     if (mat != 'Any') {
       list = list.filter(item => item.mats ? item.mats.some(c => c.name == mat) : false);
     }
-    switch (element) {
-      case "Fire":
-        list = list.filter(item => item.fire)
-        break;
-      case "Ice":
-        list = list.filter(item => item.ice)
-        break;
-      case "Bolt":
-        list = list.filter(item => item.bolt)
-        break;
-      case "Air":
-        list = list.filter(item => item.air)
-        break;
-    }
+    list = fire ? list.filter(trait => trait.fire) : list;
+    list = ice  ? list.filter(trait => trait.ice)  : list;
+    list = bolt ? list.filter(trait => trait.bolt) : list;
+    list = air  ? list.filter(trait => trait.air)  : list;
     if (!value) {
       return list
     }

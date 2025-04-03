@@ -89,7 +89,7 @@ class A26MaterialSerializer(A26DefaultSerializer):
     class Meta:
         model = Material
         fields = [
-            'name'
+            'name', 'id'
         ]
 
 class A26IngredientEffectSerializer(A26DefaultSerializer):

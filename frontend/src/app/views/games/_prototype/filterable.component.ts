@@ -59,4 +59,8 @@ export abstract class FilterableComponent extends DataComponent {
     identify2(index, item) {
         return item.slug;
     }
+
+    toggle(thing) {
+        thing.setValue(!thing.value)
+    }
 }
