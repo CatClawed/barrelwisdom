@@ -61,18 +61,30 @@
       @for (n of navItems; track n) {
         @if (!n.children) {
           <a class="sidenav-item" routerLink="{{n.url}}">
-            <i class="{{n.icon}}"></i>{{n.name}}
+            @if (n.svg) {
+              <svg><use attr.href="{{n.svg}}"></use></svg>
+            }
+            @else {
+              <i class="{{n.icon}}"></i>
+            }
+            {{n.name}}
           </a>
         }
         @if (n.children) {
           <a class="sidenav-item" style="color:white;cursor:pointer;"
             (click)="n.expand=!n.expand;">
-            <i class="{{n.icon}}"></i>{{n.name}}@if (!n.expand) {
-            <b class="fas fa-caret-down"></b>
-            }@if (n.expand) {
-            <b
-            class="fas fa-caret-up"></b>
-          }
+            @if (n.svg) {
+              <svg><use attr.href="{{n.svg}}"></use></svg>
+            }
+            @else {
+              <i class="{{n.icon}}"></i>{{n.name}}
+            }
+            @if (!n.expand) {
+              <b class="fas fa-caret-down"></b>
+            }
+            @if (n.expand) {
+              <b class="fas fa-caret-up"></b>
+            }
         </a>
       }
       @if (n.expand) {

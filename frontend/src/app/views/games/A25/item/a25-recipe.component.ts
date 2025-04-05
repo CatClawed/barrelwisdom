@@ -36,14 +36,6 @@ export class A25RecipeComponent extends SingleComponent {
     return this.a25service.getRecipeList(this.language)
   }
 
-  afterAssignment(): void {
-    if (this.language !== 'ja') {
-      for (let i = 0; i < this.data.length; i++) {
-        this.data[i].pages = this.data[i].pages.filter(x => { return x.gbl })
-      }
-    }
-  }
-
   getEmptySpace(page, index) {
     if (index == 0) {
       return page.recipes[index].y - 1;

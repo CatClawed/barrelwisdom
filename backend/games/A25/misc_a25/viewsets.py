@@ -21,22 +21,6 @@ class A25TraitViewSet(viewsets.ModelViewSet):
             'cat',
         )
         .prefetch_related(
-            Prefetch(
-                'chara_trait1',
-                queryset=Character.objects.filter(gbl=True)
-            ),
-            Prefetch(
-                'chara_trait2',
-                queryset=Character.objects.filter(gbl=True)
-            ),
-            Prefetch(
-                'chara_trait3',
-                queryset=Character.objects.filter(gbl=True)
-            ),
-            Prefetch(
-                'material_set',
-                queryset=Material.objects.filter(item__gbl=True)
-            ),
             'chara_trait1__name',
             'chara_trait1__title',
             'chara_trait1__color1',
@@ -59,35 +43,32 @@ class A25TraitViewSet(viewsets.ModelViewSet):
     lookup_field = 'slug'
 
     def get_query(self, slug=None, lang="en"):
-        if lang != 'ja':
-            queryset = self.queryset if slug else self.queryset.filter(gbl=True)
-        else:
-            queryset = (
-                Trait.objects
-                .select_related(
-                    'desc',
-                    'name',
-                    'kind',
-                    'cat',
-                )
-                .prefetch_related(
-                    'chara_trait1__name',
-                    'chara_trait1__title',
-                    'chara_trait1__color1',
-                    'chara_trait1__color2',
-                    'chara_trait2__name',
-                    'chara_trait2__title',
-                    'chara_trait2__color1',
-                    'chara_trait2__color2',
-                    'chara_trait3__name',
-                    'chara_trait3__title',
-                    'chara_trait3__color1',
-                    'chara_trait3__color2',
-                    'material_set__item__name',
-                    'material_set__color'
-                )
+        queryset = (
+            Trait.objects
+            .select_related(
+                'desc',
+                'name',
+                'kind',
+                'cat',
             )
-        
+            .prefetch_related(
+                'chara_trait1__name',
+                'chara_trait1__title',
+                'chara_trait1__color1',
+                'chara_trait1__color2',
+                'chara_trait2__name',
+                'chara_trait2__title',
+                'chara_trait2__color1',
+                'chara_trait2__color2',
+                'chara_trait3__name',
+                'chara_trait3__title',
+                'chara_trait3__color1',
+                'chara_trait3__color2',
+                'material_set__item__name',
+                'material_set__color'
+            )
+        )
+
         if not slug:
             return Response(A25TraitSerializer(
                 queryset, many=True, context={'language': lang}).data)

@@ -34,17 +34,17 @@ class A25TowerViewSet(viewsets.ModelViewSet):
 
     @action(detail=False)
     def en(self, request):
-        return Response(A25TowerSerializer(self.queryset.filter(kind__slug="elemental-tower", gbl=True),
+        return Response(A25TowerSerializer(self.queryset.filter(kind__slug="elemental-tower"),
             many=True, context={'language': 'en'}).data)
 
     @action(detail=False)
     def sc(self, request):
-        return Response(A25TowerSerializer(self.queryset.filter(kind__slug="elemental-tower", gbl=True),
+        return Response(A25TowerSerializer(self.queryset.filter(kind__slug="elemental-tower"),
             many=True, context={'language': 'sc'}).data)
 
     @action(detail=False)
     def tc(self, request):
-        return Response(A25TowerSerializer(self.queryset.filter(kind__slug="elemental-tower", gbl=True),
+        return Response(A25TowerSerializer(self.queryset.filter(kind__slug="elemental-tower"),
             many=True, context={'language': 'tc'}).data)
 
     @action(detail=False)
@@ -54,17 +54,17 @@ class A25TowerViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, url_path="en")
     def en_kind(self, request, kind):
-        return Response(A25TowerSerializer(self.queryset.filter(kind__slug=kind, gbl=True),
+        return Response(A25TowerSerializer(self.queryset.filter(kind__slug=kind),
             many=True, context={'language': 'en'}).data)
 
     @action(detail=True, url_path="sc")
     def sc_kind(self, request, kind):
-        return Response(A25TowerSerializer(self.queryset.filter(kind__slug=kind, gbl=True),
+        return Response(A25TowerSerializer(self.queryset.filter(kind__slug=kind),
             many=True, context={'language': 'sc'}).data)
 
     @action(detail=True, url_path="tc")
     def tc_kind(self, request, kind):
-        return Response(A25TowerSerializer(self.queryset.filter(kind__slug=kind, gbl=True),
+        return Response(A25TowerSerializer(self.queryset.filter(kind__slug=kind),
             many=True, context={'language': 'tc'}).data)
 
     @action(detail=True, url_path="ja")
@@ -124,17 +124,17 @@ class A25ScoreBattleViewSet(viewsets.ModelViewSet):
 
     @action(detail=False)
     def en(self, request):
-        return Response(A25ScoreBattleSerializer(self.queryset.filter(gbl=True),
+        return Response(A25ScoreBattleSerializer(self.queryset,
             many=True, context={'language': 'en'}).data)
 
     @action(detail=False)
     def sc(self, request):
-        return Response(A25ScoreBattleSerializer(self.queryset.filter(gbl=True),
+        return Response(A25ScoreBattleSerializer(self.queryset,
             many=True, context={'language': 'sc'}).data)
 
     @action(detail=False)
     def tc(self, request):
-        return Response(A25ScoreBattleSerializer(self.queryset.filter(gbl=True),
+        return Response(A25ScoreBattleSerializer(self.queryset,
             many=True, context={'language': 'tc'}).data)
 
     @action(detail=False)
@@ -159,17 +159,17 @@ class A25DungeonViewSet(viewsets.ModelViewSet):
 
     @action(detail=False)
     def en(self, request):
-        return Response(A25DungeonSerializer(self.queryset.filter(gbl=True),
+        return Response(A25DungeonSerializer(self.queryset,
             many=True, context={'language': 'en'}).data)
 
     @action(detail=False)
     def sc(self, request):
-        return Response(A25DungeonSerializer(self.queryset.filter(gbl=True),
+        return Response(A25DungeonSerializer(self.queryset,
             many=True, context={'language': 'sc'}).data)
 
     @action(detail=False)
     def tc(self, request):
-        return Response(A25DungeonSerializer(self.queryset.filter(gbl=True),
+        return Response(A25DungeonSerializer(self.queryset,
             many=True, context={'language': 'tc'}).data)
 
     @action(detail=False)

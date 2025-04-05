@@ -75,6 +75,10 @@ class A26EffectViewSet(DefaultViewSetID):
                     'desc1',
                     'desc2',
                 )
+                .prefetch_related(
+                    'ingredienteffect_set__itemstatus_set__item__name',
+                    'recipeeffect_set__recipe_set__item__name',
+                )
                 .get(id=id)
             )
         except ObjectDoesNotExist:

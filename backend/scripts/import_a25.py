@@ -2,7 +2,7 @@ from games.A25.misc_a25.models import *
 from games.A25.chara_a25.models import *
 from games.A25.items_a25.models import *
 from games.A25.quest_a25.models import *
-import csv, codecs, sys, urllib.request, json
+import ast, urllib.request, json
 from scripts.util import import_generic, slug_me
 from datetime import datetime
 
@@ -385,8 +385,8 @@ def import_tags():
 #heck rose val
 def fix_hyperlink(desc, lang=''):
     if "hyperlink_id" in desc:
-        d = desc.split('{hyperlink_id ')
-        d2 = d[1].split('}')
+        d = desc.split('{hyperlink_id ') if '{{hyperlink' not in desc else desc.split('{{hyperlink_id ')
+        d2 = d[1].split('}') if  '{{hyperlink' not in desc else d[1].split('}}')
         num = int(d2[0])
         skill = search(search(num, jsons['hyperlink'])[0]['skill_id'], jsons['skill'])[0][f'name{lang}']
         desc = d[0] + skill + d2[1]
@@ -404,6 +404,24 @@ def import_skills(char_dict, char, index):
         s3.append(search(s, jsons['skill'])[0])
     s3 = s3[2:]
     skills = [s1, s2, s3]
+    evols = [False, False, False]
+
+    if len(char_dict["extra_skill_ids"]) > 0:
+        extra = sorted(char_dict["extra_skill_ids"])
+        es = []
+        id = 0
+        s = []
+        for i in range(0, len(extra)):
+            if id != extra[i]:
+                thing = []
+                s = thing
+                es.append(s)
+                id = extra[i]
+            s.append(search(extra[i], jsons['skill'])[0])
+            id += 1
+        skills = [*skills, *es]
+        for e in es:
+            evols.append(False)
 
     if len(char_dict["evolved_burst_skill_ids"]) > 0:
         s4 = []
@@ -416,13 +434,15 @@ def import_skills(char_dict, char, index):
         for s in char_dict["evolved_burst_skill_ids"]:
             s6.append(search(s, jsons['skill'])[0])
         s6 = s6[2:]
-        skills = [s1, s2, s3, s4, s5, s6]
+        skills = [*skills, s4, s5, s6]
+        evols.append(True)
+        evols.append(True)
+        evols.append(True)
 
     for i in range(0, len(skills)):
         skill = skills[i]
         fix_hyperlink(skill[0]['description'])
         length = len(skill) # sigh
-        evol = True if i >= 3 else False
 
         name = checkName(
             text_ja=skill[0]['name'],
@@ -438,7 +458,7 @@ def import_skills(char_dict, char, index):
             text_tc=fix_hyperlink(skill[0]['description_zh_tw'], lang="_zh_tw") if 'description_zh_tw' in skill[0] else '',
         )
         try:
-            obj = Skill.objects.get(char=char, name=name, evol=evol)
+            obj = Skill.objects.get(char=char, name=name, evol=evols[i])
             print("Updating Skill", name.text_ja)
         except:
             print("Creating Skill", name.text_ja)
@@ -446,11 +466,11 @@ def import_skills(char_dict, char, index):
 
         obj.name = name
         obj.desc = desc
-        obj.evol = evol
+        obj.evol = evols[i]
         obj.elem = elems[skill[0]['attack_attributes'][0]]
         obj.area = area[skill[0]['skill_target_type']]
         obj.wt = skill[0]['wait']+200
-        obj.index = index
+        obj.index = i
 
         effects1 = skill[0]['effects']
         effects5 = skill[length-1]['effects']
@@ -476,19 +496,25 @@ def import_skills(char_dict, char, index):
         if len(effects1) >= 7:
             obj.val6 = effects1[6]['value']
             obj.val6_2 = effects5[6]['value'] if effects5[6]['value'] != obj.val6 else None
+        if len(effects1) >= 8:
+            obj.val7 = effects1[7]['value']
+            obj.val7_2 = effects5[7]['value'] if effects5[7]['value'] != obj.val7 else None
+        if len(effects1) >= 9:
+            obj.val8 = effects1[8]['value']
+            obj.val8_2 = effects5[8]['value'] if effects5[8]['value'] != obj.val8 else None
 
         obj.pow1 = skill[0]['power']
-        obj.pow2 = skill[1]['power']
-        obj.pow3 = skill[2]['power']
-        obj.pow4 = skill[3]['power']
-        obj.pow5 = skill[4]['power']
+        obj.pow2 = skill[1]['power'] if length > 1 else None
+        obj.pow3 = skill[2]['power'] if length > 2 else None
+        obj.pow4 = skill[3]['power'] if length > 3 else None
+        obj.pow5 = skill[4]['power'] if length > 4 else None
         obj.pow6 = skill[5]['power'] if length > 5 else None
 
         obj.break1 = skill[0]['break_power']
-        obj.break2 = skill[1]['break_power']
-        obj.break3 = skill[2]['break_power']
-        obj.break4 = skill[3]['break_power']
-        obj.break5 = skill[4]['break_power']
+        obj.break2 = skill[1]['break_power'] if length > 1 else None
+        obj.break3 = skill[2]['break_power'] if length > 2 else None
+        obj.break4 = skill[3]['break_power'] if length > 3 else None
+        obj.break5 = skill[4]['break_power'] if length > 4 else None
         obj.break6 = skill[5]['break_power'] if length > 5 else None
 
         obj.save()
@@ -509,10 +535,10 @@ def import_passives(char_dict, char, num):
             volatile=True
         )
         desc = checkDesc(
-            text_ja=passive['description'],
-            text_en=passive['description_en'] if 'description_en' in passive else '',
-            text_sc=passive['description_zh_cn'] if 'description_zh_cn' in passive else '',
-            text_tc=passive['description_zh_tw'] if 'description_zh_tw' in passive else '',
+            text_ja=fix_hyperlink(passive['description']),
+            text_en=fix_hyperlink(passive['description_en']) if 'description_en' in passive else '',
+            text_sc=fix_hyperlink(passive['description_zh_cn']) if 'description_zh_cn' in passive else '',
+            text_tc=fix_hyperlink(passive['description_zh_tw']) if 'description_zh_tw' in passive else '',
         )
         try:
             obj = Passive.objects.get(num=num, char=char)
@@ -870,10 +896,11 @@ def import_equipment():
             create = True
 
         obj.name = name
+        rare = item['rarity'] if item['rarity'] != 5 else 4
         if obj not in prev_item:
-            obj.rarity = item['rarity']
+            obj.rarity = rare
         if not create:
-            if obj.rarity == item['rarity']: # skip SR text when SSR exists
+            if obj.rarity == rare: # skip SR text when SSR exists
                 obj.desc = desc
         obj.kind = Filterable.objects.get(slug="equipment", kind="item_type")
         obj.save()
@@ -970,9 +997,6 @@ def import_recipes():
             if plan['recipe_plan_category_id'] == 2:
                 for i in LatestUpdate.objects.first().items.all():
                     if i.rarity == 4 and len(i.recipe_set.all()) == 0:
-                        i.limit = limited
-                        i.save()
-                    elif i.kind.slug == 'material':
                         i.limit = limited
                         i.save()
         rPage.save()
@@ -1628,12 +1652,12 @@ def cleanup():
 
 # for setting slugs
 additions = {
-    "ヴァレリア": "valeria-7",
-    "レスナ": "resna-7",
-    "ヤンネ": "janne-1"
+    "ユミア": "yumia-1",
+    "ヴィクトル": "viktor-1",
+    "レイニャ": "lenja-1"
 }
-memoria_index = 161 # alvina
-base_enemy_index = 115
+memoria_index = 164 # lenja
+base_enemy_index = 116
 
 gacha = None #create_event(ja='シーズン2開幕！ 新たなる導き アルビーナ LEGEND FES')
 

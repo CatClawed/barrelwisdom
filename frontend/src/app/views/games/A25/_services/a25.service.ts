@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class A25Service {
-  private readonly version = '03-26-25';
+  private readonly version = '04-05-25';
 
   constructor(
     private http: HttpClient,
@@ -132,7 +132,7 @@ export class A25Service {
   }
 
   getUpdate(language: string): Observable<Update> {
-    return this.http.get<Update>(`${environment.apiUrl}/A25/update/${language}/?v=${this.version}`);
+    return this.http.get<Update>(`${environment.apiUrl}/A25/update/ja/?v=${this.version}`);
   }
 
   getDungeons(language: string): Observable<Dungeon[]> {

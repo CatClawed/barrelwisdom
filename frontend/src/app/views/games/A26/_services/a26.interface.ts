@@ -74,6 +74,7 @@ export interface Effect {
     prm1_lv_max_rand_range: string;
     prm2_lv_min_rand_range: string;
     prm2_lv_max_rand_range: string;
+    items: NameLink[];
 }
 
 export interface EffData {

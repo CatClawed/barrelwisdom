@@ -72,7 +72,9 @@ class A25CharaNameSerializer(A25DefaultSerializer):
         model = Character
         fields = ['slug', 'name', 'title', 'color1', 'color2']
     def get_title(self,obj):
-        return A25DefaultSerializer.get_text(self,obj.title)
+        if obj.gbl:
+            return A25DefaultSerializer.get_text(self,obj.title)
+        return obj.title.text_ja
 
 class A25TraitSimpleSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()

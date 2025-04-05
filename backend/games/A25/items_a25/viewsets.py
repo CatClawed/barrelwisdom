@@ -70,79 +70,38 @@ class A25MaterialViewSet(viewsets.ModelViewSet):
 
     def get_query(self, slug=None, lang="en"):
         try:
-            if lang == 'ja':
-                queryset = (
-                    Item.objects
-                    .select_related(
-                        'name',
-                        'desc',
-                        'limit',
-                    )
-                    .prefetch_related(
-                        Prefetch(
-                            'reward_set',
-                            queryset=Reward.objects.filter(scorebattledifficulties__isnull=False)
-                                | Reward.objects.filter(dungeon__isnull=False)
-                        ),
-                        'material_set__color',
-                        'material_set__traits__name',
-                        'material_set__traits__desc',
-                        'material_set__traits__kind',
-                        'ing1__item__name',
-                        'ing2__item__name',
-                        'ing3__item__name',
-                        'reward_set__dungeon_set__name',
-                        'reward_set__scorebattledifficulties_set__scorebattle_set',
-                    )
-                    .get(slug=slug, combatitem__isnull=True, equipment__isnull=True)
+            queryset = (
+                Item.objects
+                .select_related(
+                    'name',
+                    'desc',
+                    'limit',
                 )
-            else:
-                qr = Recipe.objects.filter(item__gbl=True)
-                queryset = (
-                    Item.objects
-                    .select_related(
-                        'name',
-                        'desc',
-                        'limit',
-                    )
-                    .prefetch_related(
-                        Prefetch(
-                            'reward_set',
-                            queryset=Reward.objects.filter(scorebattledifficulties__isnull=False)
-                                | Reward.objects.filter(dungeon__isnull=False)
-                        ),
-                        Prefetch(
-                            'ing1',
-                            queryset=qr
-                        ),
-                        Prefetch(
-                            'ing2',
-                            queryset=qr
-                        ),
-                        Prefetch(
-                            'ing3',
-                            queryset=qr
-                        ),
-                        'material_set__color',
-                        'material_set__traits__name',
-                        'material_set__traits__desc',
-                        'material_set__traits__kind',
-                        'ing1__item__name',
-                        'ing2__item__name',
-                        'ing3__item__name',
-                        'reward_set__dungeon_set__name',
-                        'reward_set__scorebattledifficulties_set__scorebattle_set',
-                    )
-                    .get(slug=slug, combatitem__isnull=True, equipment__isnull=True)
+                .prefetch_related(
+                    Prefetch(
+                        'reward_set',
+                        queryset=Reward.objects.filter(scorebattledifficulties__isnull=False)
+                            | Reward.objects.filter(dungeon__isnull=False)
+                    ),
+                    'material_set__color',
+                    'material_set__traits__name',
+                    'material_set__traits__desc',
+                    'material_set__traits__kind',
+                    'ing1__item__name',
+                    'ing2__item__name',
+                    'ing3__item__name',
+                    'reward_set__dungeon_set__name',
+                    'reward_set__scorebattledifficulties_set__scorebattle_set',
                 )
+                .get(slug=slug, combatitem__isnull=True, equipment__isnull=True)
+            )
         except ObjectDoesNotExist:
             raise Http404
         return Response(A25ItemFullSerializer(queryset, context={'language': lang}).data)
 
     @action(detail=False)
     def en(self, request):
-        return Response(A25MaterialListSerializer(
-            self.queryset.filter(gbl=True),
+        return Response(A25MaterialListSerializer(self.queryset,
             many=True,context={'language': "en"}).data)
 
     @action(detail=True, url_path="en")
@@ -151,8 +110,7 @@ class A25MaterialViewSet(viewsets.ModelViewSet):
 
     @action(detail=False)
     def sc(self, request):
-        return Response(A25MaterialListSerializer(
-            self.queryset.filter(gbl=True),
+        return Response(A25MaterialListSerializer(self.queryset,
             many=True,context={'language': "sc"}).data)
 
     @action(detail=True, url_path="sc")
@@ -161,8 +119,7 @@ class A25MaterialViewSet(viewsets.ModelViewSet):
 
     @action(detail=False)
     def tc(self, request):
-        return Response(A25MaterialListSerializer(
-            self.queryset.filter(gbl=True),
+        return Response(A25MaterialListSerializer(self.queryset,
             many=True,context={'language': "tc"}).data)
 
     @action(detail=True, url_path="tc")
@@ -238,8 +195,7 @@ class A25SynthViewSet(viewsets.ModelViewSet):
 
     @action(detail=False)
     def en(self, request):
-        return Response(A25SynthesisItemListSerializer(
-            self.queryset.filter(gbl=True),
+        return Response(A25SynthesisItemListSerializer(self.queryset,
             many=True, context={'language': "en"}).data)
 
     @action(detail=True, url_path="en")
@@ -248,8 +204,7 @@ class A25SynthViewSet(viewsets.ModelViewSet):
 
     @action(detail=False)
     def sc(self, request):
-        return Response(A25SynthesisItemListSerializer(
-            self.queryset.filter(gbl=True),
+        return Response(A25SynthesisItemListSerializer(self.queryset,
             many=True, context={'language': "sc"}).data)
 
     @action(detail=True, url_path="sc")
@@ -258,8 +213,7 @@ class A25SynthViewSet(viewsets.ModelViewSet):
 
     @action(detail=False)
     def tc(self, request):
-        return Response(A25SynthesisItemListSerializer(
-            self.queryset.filter(gbl=True),
+        return Response(A25SynthesisItemListSerializer(self.queryset,
             many=True, context={'language': "tc"}).data)
 
     @action(detail=True, url_path="tc")

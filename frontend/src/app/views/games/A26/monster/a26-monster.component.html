@@ -106,6 +106,9 @@
     </tbody></table>
 </div>
 @if (monster.location) {
-  <a26-map [data]="monster.location"></a26-map>
+  @defer {
+    <a26-map [data]="monster.location"></a26-map>
+  }
+
 }
 }

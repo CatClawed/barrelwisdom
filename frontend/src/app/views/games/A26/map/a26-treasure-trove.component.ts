@@ -14,7 +14,9 @@ import { A26MapComponent } from '../map/a26-map.component';
     @if (data) {
         <h1>{{data.name}} Map</h1>
         <p>A map to ease your suffering. There are 50 Treasure Troves and 50 keys.</p>
-        <a26-map [data]="data.location"></a26-map>
+        @defer {
+          <a26-map [data]="data"></a26-map>
+        }
     }
     `,
     providers: [DestroyService],

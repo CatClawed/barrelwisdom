@@ -186,6 +186,8 @@ export interface Skill {
     val4: number;
     val5: number;
     val6: number;
+    val7: number;
+    val8: number;
     val0_2: number;
     val1_2: number;
     val2_2: number;
@@ -193,6 +195,8 @@ export interface Skill {
     val4_2: number;
     val5_2: number;
     val6_2: number;
+    val7_2: number;
+    val8_2: number;
     pow1: number;
     pow2: number;
     pow3: number;

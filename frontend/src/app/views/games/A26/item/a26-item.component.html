@@ -184,7 +184,9 @@
     }
   </div>
   @if (item.location) {
-    <a26-map [data]="item.location"></a26-map>
+    @defer {
+      <a26-map [data]="item.location"></a26-map>
+    }
   }
   <ng-template #effPopover let-eff="eff">
     @if (!eff.desc2) {

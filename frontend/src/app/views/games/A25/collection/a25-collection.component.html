@@ -80,11 +80,6 @@
           </mat-menu>
         </div>
         @if (editMode) {
-          @if (language != 'ja') {
-            <mat-checkbox class="grid-4" formControlName="show_jp">
-              Show JP
-            </mat-checkbox>
-          }
           <mat-checkbox class="grid-4" formControlName="hide_missing">
             Hide Missing
           </mat-checkbox>
@@ -111,23 +106,11 @@
       </div>
       @if (editMode) {
       <div class="grid" style="padding-bottom:1rem;">
-        @if (language != 'ja') {
-        <mat-checkbox formControlName="show_jp" class="grid-4">
-          Show JP
-        </mat-checkbox>
-        }
         <mat-checkbox class="grid-4" formControlName="hide_missing">
           Hide Missing
         </mat-checkbox>
       </div>
       }
-      }
-      @if (openTab === 2 && editMode) {
-        @if (language != 'ja') {
-        <mat-checkbox class="grid-4" formControlName="show_jp">
-          Show JP
-        </mat-checkbox>
-        }
       }
     </form>
   </ng-template>
@@ -239,7 +222,7 @@
     @defer (on viewport) {
       <ng-container *ngTemplateOutlet="forms"></ng-container>
       <h2>Permanent</h2>
-      @for (emblem of filteredEmblems | async; track emblem) {
+      @for (emblem of data.emblems; track emblem) {
         @if (emblem.kind === 1) {
           @if (!editMode) {
             <popover [name]="emblem.name" [template]="emblemPopover" [context]="{ emblem: emblem }">
@@ -252,7 +235,7 @@
         }
       }
       <h2>Limited</h2>
-      @for (emblem of filteredEmblems | async; track emblem) {
+      @for (emblem of data.emblems; track emblem) {
         @if (emblem.kind === 2) {
           @if (!editMode) {
             <popover [name]="emblem.name" [template]="emblemPopover" [context]="{ emblem: emblem }">

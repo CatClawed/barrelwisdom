@@ -67,6 +67,7 @@ class A26EffectSerializer(A26DefaultSerializer):
     name = serializers.SerializerMethodField()
     desc1 = serializers.SerializerMethodField()
     desc2 = serializers.SerializerMethodField()
+    items = serializers.SerializerMethodField()
     class Meta:
         model = Effect
         fields = [
@@ -74,7 +75,17 @@ class A26EffectSerializer(A26DefaultSerializer):
             'max_level', 'att_tag', 'act_tag', 'effect_hash',
             'prm1_lv_min_rand_range', 'prm1_lv_max_rand_range',
             'prm2_lv_min_rand_range', 'prm2_lv_max_rand_range',
+            'items'
         ]
+    def get_items(self, obj):
+        arr = []
+        for i in obj.ingredienteffect_set.all():
+            for j in i.itemstatus_set.all():
+                arr.append(j.item)
+        for i in obj.recipeeffect_set.all():
+            for j in i.recipe_set.all():
+                arr.append(j.item)
+        return A26ItemSimpleSerializer(set(arr), many=True).data
 
 class A26CategorySerializer(A26DefaultSerializer):
     name = serializers.SerializerMethodField()

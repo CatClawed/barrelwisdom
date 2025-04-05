@@ -1,6 +1,9 @@
 @if (data; as update) {
   <h1>Home</h1>
   <p><time dateTime="{{update.time}}">Last Updated: {{update.time | date:'mediumDate' }} </time></p>
+  @if (language != 'ja') {
+    <p><b>Global has ended service. Newer data is untranslated JP only.</b></p>
+  }
   @if (update.characters) {
     <h2>Characters</h2>
     <div style="display:grid;grid-template-columns:repeat(4,23%);grid-row-gap:1rem;grid-column-gap:2%;">

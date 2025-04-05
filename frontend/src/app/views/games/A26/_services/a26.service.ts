@@ -7,7 +7,7 @@ import { Category, Coord, Effect, Item, Monster, NameLink, Trait } from '@app/vi
 
 @Injectable({ providedIn: 'root' })
 export class A26Service {
-  private readonly version = '3';
+  private readonly version = '04-05-25';
 
   constructor(
     private http: HttpClient,

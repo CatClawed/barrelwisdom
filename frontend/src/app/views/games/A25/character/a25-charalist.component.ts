@@ -21,7 +21,7 @@ import { A25CharaFrameComponent } from './a25-charaframe.component';
     templateUrl: 'a25-charalist.component.html',
     providers: [DestroyService],
     imports: [...CommonImports, ...MaterialFormImports, NgTemplateOutlet,
-        A25CharaComponent, MatMenuModule, MatCheckboxModule, A25CharaFrameComponent],
+        MatMenuModule, MatCheckboxModule, A25CharaFrameComponent],
     styles: [
         `.char-grid {
       display: grid;
@@ -64,7 +64,6 @@ export class A25CharalistComponent extends DialogUseComponent {
       filtertext: '',
       roles: "any",
       elems: "any",
-      show_jp: this.language === 'ja',
       colorL: 'any',
       colorR: 'any',
       six_star: false
@@ -75,7 +74,6 @@ export class A25CharalistComponent extends DialogUseComponent {
     this.gameService(this.a25service, 'characters');
     this.genericSettings(`Characters`, `The list of characters in ${this.gameTitle}.`);
     this.pageForm.reset()
-    this.pageForm.get('show_jp').setValue(this.language === 'ja')
     return forkJoin({
       charas: this.a25service.getCharaList(this.language),
       roles: this.a25service.getFilter("role", this.language),
@@ -88,15 +86,13 @@ export class A25CharalistComponent extends DialogUseComponent {
     this.filteredCharas = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Character[]>),
       map((search: any) => search ?
-        this.filterT(search.filtertext, search.roles, search.elems, search.show_jp, search.colorL, search.colorR, search.six_star)
-        : this.filterT('', 'any', 'any', this.language === 'ja', 'any', 'any', false)),
+        this.filterT(search.filtertext, search.roles, search.elems, search.colorL, search.colorR, search.six_star)
+        : this.filterT('', 'any', 'any', 'any', 'any', false)),
     );
   }
 
-  private filterT(value: string, role: string, elem: string, show_jp: boolean, colorL: string, colorR: string, six_star: boolean): Character[] {
+  private filterT(value: string, role: string, elem: string, colorL: string, colorR: string, six_star: boolean): Character[] {
     let charalist: Character[] = this.data.charas;
-
-    if (!show_jp) charalist = charalist.filter(chara => chara.gbl === true)
 
     if (six_star) charalist = charalist.filter(chara => chara.six_star === true)
 

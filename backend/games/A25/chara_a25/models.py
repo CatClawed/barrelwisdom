@@ -63,7 +63,6 @@ class Skill(models.Model):
 
     evol = models.BooleanField(default=False)
 
-    # currently up to 3 is used but might as well futureproof
     val0  = models.IntegerField(blank=True, null=True)
     val1  = models.IntegerField(blank=True, null=True)
     val2  = models.IntegerField(blank=True, null=True)
@@ -71,6 +70,8 @@ class Skill(models.Model):
     val4  = models.IntegerField(blank=True, null=True)
     val5  = models.IntegerField(blank=True, null=True)
     val6  = models.IntegerField(blank=True, null=True)
+    val7  = models.IntegerField(blank=True, null=True)
+    val8  = models.IntegerField(blank=True, null=True)
 
     val0_2  = models.IntegerField(blank=True, null=True)
     val1_2  = models.IntegerField(blank=True, null=True)
@@ -79,19 +80,21 @@ class Skill(models.Model):
     val4_2  = models.IntegerField(blank=True, null=True)
     val5_2  = models.IntegerField(blank=True, null=True)
     val6_2  = models.IntegerField(blank=True, null=True)
+    val7_2  = models.IntegerField(blank=True, null=True)
+    val8_2  = models.IntegerField(blank=True, null=True)
 
-    pow1  = models.IntegerField()
-    pow2  = models.IntegerField()
-    pow3  = models.IntegerField()
-    pow4  = models.IntegerField()
-    pow5  = models.IntegerField()
+    pow1  = models.IntegerField(blank=True, null=True)
+    pow2  = models.IntegerField(blank=True, null=True)
+    pow3  = models.IntegerField(blank=True, null=True)
+    pow4  = models.IntegerField(blank=True, null=True)
+    pow5  = models.IntegerField(blank=True, null=True)
     pow6  = models.IntegerField(blank=True, null=True)
 
-    break1  = models.IntegerField()
-    break2  = models.IntegerField()
-    break3  = models.IntegerField()
-    break4  = models.IntegerField()
-    break5  = models.IntegerField()
+    break1  = models.IntegerField(blank=True, null=True)
+    break2  = models.IntegerField(blank=True, null=True)
+    break3  = models.IntegerField(blank=True, null=True)
+    break4  = models.IntegerField(blank=True, null=True)
+    break5  = models.IntegerField(blank=True, null=True)
     break6  = models.IntegerField(blank=True, null=True)
 
     class Meta:

@@ -14,6 +14,17 @@
   <span><b>Max: </b>{{effect.max_level}}</span>
 
     @if (!hideContents) {
+      @if (effect.items) {
+        <b style="margin-top: 1em;">{{a26service.itemString[language]}}:</b>
+        <ul class="two-column">
+          @for (i of effect.items; track i) {
+            <li>
+              <a routerLink="/{{gameURL}}/items/{{i.id}}/{{language}}">{{i.name}}</a>
+            </li>
+          }
+        </ul>
+      }
+
       <b >Advanced Data:</b>
       <ul>
         @if (effect.act_tag) { <li>{{effect.act_tag}}</li> }

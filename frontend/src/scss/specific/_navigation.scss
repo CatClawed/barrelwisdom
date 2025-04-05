@@ -159,6 +159,14 @@
     margin-left: auto;
     margin-right: 0.1rem;
   }
+
+  >svg {
+    position: absolute;
+    left: -24px;
+    fill: white;
+    width: 1.5em;
+    height: 1.5em;
+  }
 }
 
 .sidenav-item:hover {

@@ -54,7 +54,6 @@ export class A25MemorialistComponent extends DialogUseComponent {
     this.gameService(this.a25service, 'memoria');
     this.genericSettings(`Memoria`, `The list of memoria in ${this.gameTitle}.`);
     this.pageForm.reset();
-    this.pageForm.get('show_jp').setValue(this.language === 'ja');
     return this.a25service.getMemoriaList(this.language);
   }
 
@@ -62,16 +61,14 @@ export class A25MemorialistComponent extends DialogUseComponent {
     this.filteredMemoria = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Memoria[]>),
       map((search: any) => search ?
-        this.filterT(search.filtertext, search.stats, search.show_jp)
-        : this.filterT('', 'date', this.language === 'ja'))
+        this.filterT(search.filtertext, search.stats)
+        : this.filterT('', 'date'))
     );
   }
 
-  private filterT(value: string, stat: string, show_jp: boolean): Memoria[] {
+  private filterT(value: string, stat: string): Memoria[] {
     this.hide = false;
     let memorialist: Memoria[] = this.data;
-
-    if (!show_jp) memorialist = memorialist.filter(mem => mem.gbl === true)
 
     switch (stat) {
       case "hp": {

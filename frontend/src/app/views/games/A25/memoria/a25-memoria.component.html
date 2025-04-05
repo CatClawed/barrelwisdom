@@ -14,7 +14,7 @@
       src="{{imgURL}}memoria/{{memoria.slug}}.webp"
       alt="{{memoria.name}}" />
     @if (language == 'en' && !memoria.gbl) {
-      <p>This Memoria is not in global. Displaying Japanese text.</p>
+      <p>This Memoria is not in Global. Displaying Japanese text.</p>
     }
     <p style="margin-top:1rem;" [innerHTML]="'<b>' + memoria.skill_name + ': </b>' + memoria.skill_desc.replaceAll('{0}', memoria.lv1 + ' ~ ' + memoria.lv5).replaceAll('{1}', memoria.lv1 + ' ~ ' + memoria.lv5)">
     </p>

@@ -73,6 +73,7 @@ export interface NavItems {
   name: string;
   url: string;
   icon: string;
+  svg: string;
   children: NavItems[];
   expand: boolean;
 }

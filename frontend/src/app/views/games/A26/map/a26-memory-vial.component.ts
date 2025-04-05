@@ -13,7 +13,9 @@ import { A26MapComponent } from './a26-map.component';
     @if (data) {
         <h1>{{title}}</h1>
         <p>Need help with Pioneering in Sivash? Want to just collect them all?</p>
-        <a26-map [data]="data"></a26-map>
+        @defer {
+          <a26-map [data]="data"></a26-map>
+        }
     }
     `,
     providers: [DestroyService],

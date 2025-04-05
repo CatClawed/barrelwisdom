@@ -89,6 +89,8 @@
         <svg style="width:1.8em;height:1.8em;fill:{{trait.acc  ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=2#category-accessories"></use></svg>      </div>
     </div>
     @if (trait.chests) {
-      <a26-map [data]="trait.chests"></a26-map>
+      @defer {
+        <a26-map [data]="trait.chests"></a26-map>
+      }
     }
 }

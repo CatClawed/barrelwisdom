@@ -128,11 +128,17 @@
                   @if (skill.area) {
                     <li><b>Range: </b>{{skill.area}}</li>
                   }
-                  @if (skill.pow1) {
+                  @if (skill.pow2) {
                     <li><b>Power: </b>{{skill.pow1}} > {{skill.pow2}} > {{skill.pow3}} > {{skill.pow4}} > {{skill.pow5}} @if (skill.pow6 && language == 'ja') { > {{skill.pow6}}  } </li>
                   }
-                  @if (skill.break1) {
+                  @else {
+                    <li><b>Power: </b>{{skill.pow1}}</li>
+                  }
+                  @if (skill.break2) {
                     <li><b>Break: </b>{{skill.break1}} > {{skill.break2}} > {{skill.break3}} > {{skill.break4}} > {{skill.break5}} @if (skill.break6 && language == 'ja') { > {{skill.break6}}  }</li>
+                  }
+                  @else {
+                    <li><b>Break: </b>{{skill.break1}}</li>
                   }
                 </ul>
               </td>

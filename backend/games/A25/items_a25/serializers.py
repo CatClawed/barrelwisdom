@@ -180,10 +180,13 @@ class A25RecipeBookSerializer(serializers.ModelSerializer):
         arr = []
         for thing in [obj.unlock1, obj.unlock2, obj.unlock3]:
             if thing:
-                arr.append(A25DefaultSerializer.get_text(self,thing))
+                if thing.text_en:
+                    arr.append(A25DefaultSerializer.get_text(self,thing))
+                else:
+                    arr.append(thing.text_ja)
         return arr
     def get_name(self,obj):
-        return A25DefaultSerializer.get_text(self,obj.item.name)
+        return A25DefaultSerializer.get_text(self,obj.item.name) if obj.item.gbl else obj.item.name.text_ja
 
 class A25RecipePageSerializer(A25DefaultSerializer):
     desc = serializers.SerializerMethodField()
