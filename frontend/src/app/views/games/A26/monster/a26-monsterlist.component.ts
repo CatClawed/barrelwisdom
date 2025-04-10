@@ -67,7 +67,7 @@ export class A26MonsterlistComponent extends DialogUseComponent {
   private filterT(value: string, type: string): Monster[] {
     this.hide = false;
     let list: Monster[] = this.data.monsters;
-    if (type != 'Any') {
+    if (type != 'Any' && type !== '') {
       list = list.filter(mon => type == mon.race.name)
     }
     if (!value) {

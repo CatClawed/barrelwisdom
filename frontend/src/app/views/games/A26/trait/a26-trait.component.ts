@@ -31,7 +31,6 @@ export class A26TraitComponent extends SingleComponent {
   }
 
   afterAssignment(): void {
-    console.log(this.data.chests)
     this.genericSettings(this.data.name, this.data.desc1,
       this.a26service.traitString[this.language],
       false,

@@ -418,7 +418,10 @@ def coord(row, index):
         'Gather (Crate)': 12,
         'Shop': 13,
         'Monsters (2)': 14,
-        'Gather (Scan)': 15
+        'Gather (Scan)': 15,
+        'Animal': 16,
+        'NPC': 17,
+        'Giant': 18,
     }
     try:
         obj = Coordinate.objects.get(cid=row['id'])
@@ -498,6 +501,6 @@ def quest(row, index):
             obj2.save()
 
 
-#import_generic(furniture_recipe)
+#import_generic(coord)
 
 #hide_fake()

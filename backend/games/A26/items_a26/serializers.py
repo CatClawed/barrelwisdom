@@ -85,7 +85,7 @@ class A26EffectSerializer(A26DefaultSerializer):
         for i in obj.recipeeffect_set.all():
             for j in i.recipe_set.all():
                 arr.append(j.item)
-        return A26ItemSimpleSerializer(set(arr), many=True).data
+        return A26ItemSimpleSerializer(set(arr), many=True, context=self.context).data
 
 class A26CategorySerializer(A26DefaultSerializer):
     name = serializers.SerializerMethodField()

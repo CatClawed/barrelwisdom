@@ -12,9 +12,10 @@ import { A26MapComponent } from './a26-map.component';
     template: `
     @if (data) {
         <h1>{{title}}</h1>
-        <p>Need help with Pioneering in Sivash? Want to just collect them all?</p>
+        <p>Need help with Pioneering in Sivash? Want to just collect them all?
+          This map shows all non-story vials.</p>
         @defer {
-          <a26-map [data]="data"></a26-map>
+          <a26-map [data]="data" [tracker]="true"></a26-map>
         }
     }
     `,

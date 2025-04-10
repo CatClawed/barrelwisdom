@@ -2,7 +2,7 @@
   <div [class]="inputSlug ? 'card card-dialog' : 'card card-medium'">
     <h4 class="card-title  card-icon-space">{{monster.name}}</h4>
     <div class="card-icon-position">
-      <svg class="a26-monster-icon"><use attr.href="{{imgURL}}spritesheet.svg?v=2#race-{{monster.race.id}}"></use></svg>
+      <svg class="a26-monster-icon"><use attr.href="{{imgURL}}spritesheet.svg?v=3.2#race-{{monster.race.id}}"></use></svg>
     </div>
     <!--
     <img class="card-item-display" src="{{imgURL}}monsters/{{monster.id}}.webp?v=1"
@@ -86,15 +86,15 @@
     <table class="tbl noborder" ><tbody>
       <tr>
         @if (monster.break_phys) {
-          <td style="text-align: center;padding-bottom:0;"><svg style="background-color:#c88401;" class="a26-monster-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=2#physical"></use></svg></td>
+          <td style="text-align: center;padding-bottom:0;"><svg style="background-color:#c88401;" class="a26-monster-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=3.2#physical"></use></svg></td>
         }
         @else {
-          <td style="text-align: center;padding-bottom:0;"><svg style="background-color:#5f49ec;" class="a26-monster-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=2#magical"></use></svg></td>
+          <td style="text-align: center;padding-bottom:0;"><svg style="background-color:#5f49ec;" class="a26-monster-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=3.2#magical"></use></svg></td>
         }
-        <td style="text-align: center;padding-bottom:0;"><svg style="background-color:{{monster.fire ? a26service.elements['fire'] : a26service.elements['none']}};" class="a26-monster-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=2#fire"></use></svg></td>
-        <td style="text-align: center;padding-bottom:0;"><svg style="background-color:{{monster.ice  ? a26service.elements['ice']  : a26service.elements['none']}};" class="a26-monster-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=2#ice" ></use></svg></td>
-        <td style="text-align: center;padding-bottom:0;"><svg style="background-color:{{monster.bolt ? a26service.elements['bolt'] : a26service.elements['none']}};" class="a26-monster-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=2#bolt"></use></svg></td>
-        <td style="text-align: center;padding-bottom:0;"><svg style="background-color:{{monster.air  ? a26service.elements['air']  : a26service.elements['none']}};" class="a26-monster-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=2#air" ></use></svg></td>
+        <td style="text-align: center;padding-bottom:0;"><svg style="background-color:{{monster.fire ? a26service.elements['fire'] : a26service.elements['none']}};" class="a26-monster-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=3.2#fire"></use></svg></td>
+        <td style="text-align: center;padding-bottom:0;"><svg style="background-color:{{monster.ice  ? a26service.elements['ice']  : a26service.elements['none']}};" class="a26-monster-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=3.2#ice" ></use></svg></td>
+        <td style="text-align: center;padding-bottom:0;"><svg style="background-color:{{monster.bolt ? a26service.elements['bolt'] : a26service.elements['none']}};" class="a26-monster-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=3.2#bolt"></use></svg></td>
+        <td style="text-align: center;padding-bottom:0;"><svg style="background-color:{{monster.air  ? a26service.elements['air']  : a26service.elements['none']}};" class="a26-monster-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=3.2#air" ></use></svg></td>
       </tr>
       <tr>
         <td style="text-align: center;padding:0;">{{monster.break_hits}}</td>

@@ -1652,12 +1652,10 @@ def cleanup():
 
 # for setting slugs
 additions = {
-    "ユミア": "yumia-1",
-    "ヴィクトル": "viktor-1",
-    "レイニャ": "lenja-1"
+    "アイラ": "isla-1",
 }
-memoria_index = 164 # lenja
-base_enemy_index = 116
+memoria_index = 166 # isla
+base_enemy_index = 117
 
 gacha = None #create_event(ja='シーズン2開幕！ 新たなる導き アルビーナ LEGEND FES')
 
