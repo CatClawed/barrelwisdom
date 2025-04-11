@@ -30,6 +30,7 @@ import { category_to_icon } from './a26-item-icons';
 export class A26ItemlistComponent extends DialogUseComponent {
   filteredItems: Observable<Item[]>;
   category_to_icon = category_to_icon
+  things;
 
   constructor(
     protected cdkDialog: Dialog,
@@ -45,14 +46,31 @@ export class A26ItemlistComponent extends DialogUseComponent {
     this.component = A26ItemComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
-      cat: 'Any',
-      mat: 'Any',
+      cat: '',
+      mat: '',
       element: 'Any',
       fire: false,
       ice: false,
       bolt: false,
       air: false,
+      gather: false,
+      consumable: false,
+      synth: false,
+      equip: false,
+      explore: false,
+      key: false,
+      furniture: false,
     })
+
+    this.things = [
+      this.pageForm.controls.gather,
+      this.pageForm.controls.consumable,
+      this.pageForm.controls.synth,
+      this.pageForm.controls.equip,
+      this.pageForm.controls.explore,
+      this.pageForm.controls.key,
+      this.pageForm.controls.furniture,
+    ]
   }
 
   changeData() {
@@ -69,23 +87,31 @@ export class A26ItemlistComponent extends DialogUseComponent {
   afterAssignment(): void {
     this.filteredItems = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Item[]>),
-      map((search: any) => search ? this.filterT(search.filtertext, search.cat, search.mat, search.fire, search.ice, search.bolt, search.air) : this.data.items.slice())
+      map((search: any) => search ? this.filterT(search.filtertext, search.cat, search.mat, search.fire, search.ice, search.bolt, search.air, search.gather, search.consumable, search.synth, search.equip, search.explore, search.key, search.furniture) : this.data.items.slice())
     );
   }
 
-  private filterT(value: string, cat: string, mat: string, fire, ice, bolt, air): Item[] {
+  private filterT(value: string, cat: string, mat: string, fire, ice, bolt, air, gather, consumable, synth, equip, explore, key, furniture,): Item[] {
     this.hide = false;
     let list: Item[] = this.data.items;
-    if (cat != 'Any') {
+    if (cat != '--' && cat !== '') {
       list = list.filter(item => item.cats.some(c => c.name == cat));
     }
-    if (mat != 'Any') {
+    if (mat != '--' && mat !== '') {
       list = list.filter(item => item.mats ? item.mats.some(c => c.name == mat) : false);
     }
     list = fire ? list.filter(trait => trait.fire) : list;
     list = ice  ? list.filter(trait => trait.ice)  : list;
     list = bolt ? list.filter(trait => trait.bolt) : list;
     list = air  ? list.filter(trait => trait.air)  : list;
+
+    list = gather     ? list.filter(item => item.mats) : list;
+    list = consumable ? list.filter(item => item.cats.some(c => c.id == '31' || c.id == '29')) : list;
+    list = synth      ? list.filter(item => item.mats === undefined && item.cats.some(c => c.id != '31' && c.id != '29' && c.id != '38' && c.id != '37' && c.id != '40' && c.id != '34' && c.id != '35' && c.id != '36')) : list;
+    list = equip      ? list.filter(item => item.cats.some(c => c.id == '34' || c.id == '35' || c.id == '36')) : list;
+    list = explore    ? list.filter(item => item.cats.some(c => c.id == '37')) : list;
+    list = key        ? list.filter(item => item.cats.some(c => c.id == '40')) : list;
+    list = furniture  ? list.filter(item => item.cats.some(c => c.id == '38')) : list;
     if (!value) {
       return list
     }

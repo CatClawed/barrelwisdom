@@ -1,4 +1,4 @@
-import os
+import os, sys
 from django.core.exceptions import ImproperlyConfigured
 from datetime import timedelta
 from pathlib import Path
@@ -8,6 +8,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ['DEBUG'])
+
+ENABLE_DEBUG_TOOLBAR = DEBUG and "test" not in sys.argv
 
 ALLOWED_HOSTS = ['barrelwisdom.com', 'localhost', '127.0.0.1', 'backend']
 
@@ -136,8 +138,9 @@ MIDDLEWARE = [
 if DEBUG:
     SESSION_ENGINE = 'django.contrib.sessions.backends.db'
     ALLOWED_HOSTS = ['*']
-    INSTALLED_APPS.append('debug_toolbar')
-    MIDDLEWARE.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
+    if ENABLE_DEBUG_TOOLBAR:
+        INSTALLED_APPS.append('debug_toolbar')
+        MIDDLEWARE.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
     # very annoying to have cache on during development
     # but did this ever come back to bite me
     MIDDLEWARE.remove('django.middleware.cache.UpdateCacheMiddleware')

@@ -15,18 +15,18 @@
     [template]="template">
     <form [formGroup]="pageForm" class="grid">
       <mat-form-field class="grid-6" appearance="outline">
-        <mat-label>Filter...</mat-label>
+        <mat-label>{{a26service.filterString[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtertext">
         <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
       </mat-form-field>
       <div class="grid-6 svg-filter">
-        <svg (click)="toggle(this.pageForm.controls.atk)"  style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.atk.value  ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=3.2#category-bombs"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.heal)" style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.heal.value ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=3.2#trait-heal"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.buff)" style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.buff.value ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=3.2#trait-buff"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.dbf)"  style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.dbf.value  ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=3.2#trait-debuff"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.wep)"  style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.wep.value  ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=3.2#category-weapons"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.arm)"  style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.arm.value  ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=3.2#category-armor"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.acc)"  style="width:2.3em;height:2.3em;fill:{{pageForm.controls.acc.value  ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=3.2#category-accessories"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.atk)"  style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.atk.value  ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=4.2#category-bombs"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.heal)" style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.heal.value ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=4.2#trait-heal"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.buff)" style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.buff.value ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=4.2#trait-buff"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.dbf)"  style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.dbf.value  ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=4.2#trait-debuff"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.wep)"  style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.wep.value  ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=4.2#category-weapons"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.arm)"  style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.arm.value  ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=4.2#category-armor"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.acc)"  style="width:2.3em;height:2.3em;fill:{{pageForm.controls.acc.value  ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=4.2#category-accessories"></use></svg>
       </div>
     </form>
   </filter-list>

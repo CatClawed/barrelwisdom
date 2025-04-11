@@ -183,6 +183,54 @@ export class A26Service {
     "es": "Nivel de comodidad:"
   }
 
+  public readonly materialString = {
+    "en": "Materials",
+    "ja": "資材",
+    "sc": "原材料",
+    "tc": "原材料",
+    "de": "Materialien",
+    "fr": "Matériaux",
+    "ko": "자재",
+    "ru": "Материалы",
+    "es": "Materiales"
+  }
+
+  public readonly categoryString = {
+    "en": "Category",
+    "ja": "カテゴリ",
+    "sc": "类别",
+    "tc": "類別",
+    "de": "Kategorie",
+    "fr": "Catégorie",
+    "ko": "카테고리",
+    "ru": "Категория",
+    "es": "Categoría"
+  }
+
+  public readonly filterString = {
+    "en": "Filter",
+    "ja": "フィルタ",
+    "sc": "筛选",
+    "tc": "篩選",
+    "de": "Filter",
+    "fr": "Filtrer",
+    "ko": "필터",
+    "ru": "Фильтр",
+    "es": "Filtro"
+  }
+
+  public readonly speciesString = {
+    "en": "Monster Species",
+    "ja": "魔物種族",
+    "sc": "魔物种族",
+    "tc": "魔物種族",
+    "de": "Monsterspezies",
+    "fr": "Espèces de monstre",
+    "ko": "몬스터 종족",
+    "ru": "Виды чудовищ",
+    "es": "Especies de monstruos"
+  }
+
   // other stats also have localizations, this is a pain so maybe later
   public readonly gameURL = "yumia";
   public readonly imgURL = `${environment.mediaURL}games/${this.gameURL}/`;

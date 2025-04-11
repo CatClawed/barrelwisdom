@@ -24,7 +24,9 @@
     </ng-container>
     <ng-container usingCategory>
       @for (item of category.used; track item) {
-        <ng-content *ngTemplateOutlet="cat2;context:{item:item}"></ng-content>
+        @if (item.recipe) {
+          <ng-content *ngTemplateOutlet="cat2;context:{item:item}"></ng-content>
+        }
       }
     </ng-container>
   </category>

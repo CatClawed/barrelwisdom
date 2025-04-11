@@ -60,7 +60,20 @@ export abstract class FilterableComponent extends DataComponent {
         return item.slug;
     }
 
-    toggle(thing) {
-        thing.setValue(!thing.value)
+    // things implies that only one thing is allowed to be active at a time
+    // to a list to toggle off is provided
+    toggle(thing, things?) {
+        if (things) {
+            let og = thing.value
+            for (let t of things) {
+                t.setValue(false)
+            }
+            if (og == thing.value) {
+                thing.setValue(!thing.value)
+            }
+        }
+        else {
+            thing.setValue(!thing.value)
+        }
     }
 }

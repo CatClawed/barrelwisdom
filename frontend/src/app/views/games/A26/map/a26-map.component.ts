@@ -44,10 +44,10 @@ import * as L from 'leaflet';
         @if (tracker) {
             <div style="display:inline-flex;line-height:2em;align-content:center;">
                 @if (data[0].label) {
-                    <svg style="fill:white; height:2em; width: 2em; padding-right:0.5em;"><use attr.href="{{this.a26service.imgURL}}spritesheet.svg?v=3.2#chest"></use></svg>
+                    <svg style="fill:white; height:2em; width: 2em; padding-right:0.5em;"><use attr.href="{{this.a26service.imgURL}}spritesheet.svg?v=4.2#chest"></use></svg>
                 }
                 @else {
-                    <svg style="fill:yellow; height:2em; width: 2em; padding-right:0.5em;"><use attr.href="{{this.a26service.imgURL}}spritesheet.svg?v=3.2#memory-vial"></use></svg>
+                    <svg style="fill:yellow; height:2em; width: 2em; padding-right:0.5em;"><use attr.href="{{this.a26service.imgURL}}spritesheet.svg?v=4.2#memory-vial"></use></svg>
                 }
                 {{count()}} / {{data.length}}
             </div>
@@ -86,33 +86,33 @@ export class A26MapComponent implements AfterViewInit {
     })
 
     ic = L.divIcon({
-        html: `<svg class="map-icon"><use href="${this.a26service.imgURL}spritesheet.svg?v=3.2#chest"></use></svg>`,
+        html: `<svg class="map-icon"><use href="${this.a26service.imgURL}spritesheet.svg?v=4.2#chest"></use></svg>`,
         className: 'white-icon'
     })
 
     if = L.divIcon({
-        html: `<svg class="map-icon white-icon"><use href="${this.a26service.imgURL}spritesheet.svg?v=3.2#fish"></use></svg>`,
+        html: `<svg class="map-icon white-icon"><use href="${this.a26service.imgURL}spritesheet.svg?v=4.2#fish"></use></svg>`,
         className: 'dummy'
     })
 
     ib = L.divIcon({
-        html: `<svg class="map-icon"><use href="${this.a26service.imgURL}spritesheet.svg?v=3.2#building"></use></svg>`,
+        html: `<svg class="map-icon"><use href="${this.a26service.imgURL}spritesheet.svg?v=4.2#building"></use></svg>`,
         className: 'dummy'
     })
     ics = L.divIcon({
-        html: `<svg class="map-icon"><use href="${this.a26service.imgURL}spritesheet.svg?v=3.2#campsite"></use></svg>`,
+        html: `<svg class="map-icon"><use href="${this.a26service.imgURL}spritesheet.svg?v=4.2#campsite"></use></svg>`,
         className: 'dummy'
     })
     is = L.divIcon({
-        html: `<svg class="map-icon"><use href="${this.a26service.imgURL}spritesheet.svg?v=3.2#shop"></use></svg>`,
+        html: `<svg class="map-icon"><use href="${this.a26service.imgURL}spritesheet.svg?v=4.2#shop"></use></svg>`,
         className: 'dummy'
     })
     inpc = L.divIcon({
-        html: `<svg class="map-icon white-icon"><use href="${this.a26service.imgURL}spritesheet.svg?v=3.2#npc"></use></svg>`,
+        html: `<svg class="map-icon white-icon"><use href="${this.a26service.imgURL}spritesheet.svg?v=4.2#npc"></use></svg>`,
         className: 'dummy'
     })
     ia = L.divIcon({
-        html: `<svg class="map-icon"><use href="${this.a26service.imgURL}spritesheet.svg?v=3.2#animal"></use></svg>`,
+        html: `<svg class="map-icon"><use href="${this.a26service.imgURL}spritesheet.svg?v=4.2#animal"></use></svg>`,
         className: 'dummy'
     })
 

@@ -10,7 +10,7 @@ export class NavigationService implements OnDestroy {
   private navSubject: BehaviorSubject<NavItems[]>;
   public nav: Observable<NavItems[]>;
   public n: NavItems[];
-  public blogNav = ['user', 'settings', 'tag', 'login', 'register', 'moderate'];
+  public blogNav = ['user', 'settings', 'tag', 'login', 'register', 'moderate', 'create'];
   previousSection = "";
   section = "blog";
   private destroy$ = new Subject<void>();
@@ -29,8 +29,8 @@ export class NavigationService implements OnDestroy {
       .pipe(takeUntil(this.destroy$),
         filter(val => val instanceof NavigationEnd),
         tap(() => {
-          this.section = this.router.url.split('/')[1];
-          if (/^\d+/.test(this.section) || /^create.*/.test(this.section) || this.blogNav.includes(this.section) || !this.section) {
+          this.section = this.router.url.split('/')[1].split('?')[0];
+          if (/^\d+/.test(this.section) || this.blogNav.includes(this.section) || !this.section) {
             this.section = 'blog'
           }
         }),
