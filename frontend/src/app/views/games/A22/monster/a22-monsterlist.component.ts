@@ -36,19 +36,19 @@ export class A22MonsterlistComponent extends DialogUseComponent {
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
-    private a22service: A22Service,
+    protected a22service: A22Service,
   ) {
     super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A22MonsterComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
-      type: '1'
+      type: ''
     })
   }
 
   changeData() {
     this.gameService(this.a22service, 'monsters');
-    this.genericSettings(`Monsters`, `The list of monsters in ${this.gameTitle}.`);
+    this.genericSettings(this.a22service.monster_translation[this.language], `The list of monsters in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a22service.getMonsterList(this.language);
   }
@@ -66,6 +66,9 @@ export class A22MonsterlistComponent extends DialogUseComponent {
 
     switch (type) {
       case "1":
+        list = this.data;
+        break;
+      case undefined:
         list = this.data;
         break;
       case "Small":

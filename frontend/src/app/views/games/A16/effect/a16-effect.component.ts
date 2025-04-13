@@ -18,7 +18,7 @@ export class A16EffectComponent extends SingleComponent {
   constructor(
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
-    private a16service: A16Service,
+    protected a16service: A16Service,
     protected breadcrumbService: BreadcrumbService,
     protected seoService: SeoService) {
     super(destroy$, route, breadcrumbService, seoService);

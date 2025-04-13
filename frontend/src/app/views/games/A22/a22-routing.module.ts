@@ -181,7 +181,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/ryza2/faq',
+    redirectTo: '/ryza2/items',
     pathMatch: 'full'
   },
 ];

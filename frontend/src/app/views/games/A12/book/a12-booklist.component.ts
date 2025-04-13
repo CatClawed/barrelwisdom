@@ -34,7 +34,7 @@ export class A12BooklistComponent extends DialogUseComponent {
     protected breadcrumbService: BreadcrumbService,
     protected cdkDialog: Dialog,
     private formBuilder: UntypedFormBuilder,
-    private a12service: A12Service) {
+    protected a12service: A12Service) {
     super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A12BookComponent
     this.pageForm = this.formBuilder.nonNullable.group({

@@ -30,14 +30,14 @@ export class A26MemoryVialComponent extends SingleComponent {
     protected breadcrumbService: BreadcrumbService,
     protected a26service: A26Service) {
     super(destroy$, route, breadcrumbService, seoService);
-    this.title = this.a26service.memoryVialString[this.language]
+    this.title = this.a26service.memoryvial_translation[this.language]
   }
 
   title: string;
 
   changeData() {
     this.gameService(this.a26service, 'memory-vial-locations');
-    this.title = this.a26service.memoryVialString[this.language]
+    this.title = this.a26service.memoryvial_translation[this.language]
     return this.a26service.getMemoryVials()
   }
 

@@ -6,18 +6,18 @@
   <filter-list
     [list]="filteredEffects"
     [(hide)]="hide"
-    [name]="normal ? 'Effects' : ev ? 'EV Effects' : 'Forge Effects'"
+    [name]="normal ? a22service.effect_translation[language] : ev ? a22service.eveffect_translation[language] : a22service.forgeeffect_translation[language]"
     [template]="template">
     <form [formGroup]="pageForm" class="grid">
       <mat-form-field class="grid-8" appearance="outline">
-        <mat-label>Filter...</mat-label>
+        <mat-label>{{a22service.filter_translation[language]}}</mat-label>
         <input matInput formControlName="filtertext">
       </mat-form-field>
       <mat-form-field class="grid-4" appearance="outline">
         <mat-label>Type</mat-label>
         <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
           <mat-option value="1" selected> <mat-icon fontSet="atelier atelier-sm"
-              fontIcon="atelier-ryza2-type-synthesis"></mat-icon> Any</mat-option>
+              fontIcon="atelier-ryza2-type-synthesis"></mat-icon>--</mat-option>
           @if (forge) {
             <mat-option value="Weapon"><mat-icon fontSet="atelier atelier-sm"
                 fontIcon="atelier-ryza2-type-weapon"></mat-icon> Weapon</mat-option>

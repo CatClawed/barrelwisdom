@@ -50,22 +50,22 @@ export class A22ItemlistComponent extends DialogUseComponent {
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
-    private a22service: A22Service,
+    protected a22service: A22Service,
   ) {
     super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A22ItemComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       filtering: '',
-      type: 'Any',
+      type: '',
       elementval: 1,
-      element: "Any"
+      element: ""
     })
   }
 
   changeData() {
     this.gameService(this.a22service, 'items');
-    this.genericSettings(`Items`, `The list of items in ${this.gameTitle}.`);
+    this.genericSettings(this.a22service.item_translation[this.language], `The list of items in ${this.gameTitle}.`);
     this.pageForm.reset();
     return forkJoin({
       items: this.a22service.getItemList(this.language),
@@ -84,7 +84,7 @@ export class A22ItemlistComponent extends DialogUseComponent {
     this.hide = false;
     let list: Item[] = this.data.items;
 
-    if (type != 'Any') {
+    if (type != 'Any' && type) {
       list = list.filter(item => item.category.some(c => c.name == type));
     }
     if (elementV > 1) {

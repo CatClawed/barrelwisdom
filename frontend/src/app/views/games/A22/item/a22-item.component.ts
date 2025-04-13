@@ -52,7 +52,7 @@ export class A22ItemComponent extends SingleComponent {
     protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
-    private a22service: A22Service) {
+    protected a22service: A22Service) {
     super(destroy$, route, breadcrumbService, seoService);
   }
 
@@ -70,7 +70,7 @@ export class A22ItemComponent extends SingleComponent {
     this.effs = [];
     this.seoImage = `${this.imgURL}${this.section}/${this.data.slug}.webp`;
     this.genericSettings(this.data.name, this.data.desc,
-      'Items',
+      this.a22service.item_translation[this.language],
       false,
       this.inputSlug ? false : true);
 

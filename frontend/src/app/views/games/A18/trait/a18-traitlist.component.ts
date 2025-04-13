@@ -34,7 +34,7 @@ export class A18TraitlistComponent extends DialogUseComponent {
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
-    private a18service: A18Service,) {
+    protected a18service: A18Service,) {
     super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A18TraitComponent;
     this.pageForm = this.formBuilder.nonNullable.group({

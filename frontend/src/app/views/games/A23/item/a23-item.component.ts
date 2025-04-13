@@ -37,7 +37,7 @@ export class A23ItemComponent extends SingleComponent {
     protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
-    private a23service: A23Service,
+    protected a23service: A23Service,
     public historyService: HistoryService) {
     super(destroy$, route, breadcrumbService, seoService);
   }
@@ -51,7 +51,7 @@ export class A23ItemComponent extends SingleComponent {
     let name = (this.language === 'en') ? this.data.name.normalize('NFD').replace(/[\u0300-\u036f]/g, "") : this.data.name;
     this.seoImage = `${this.imgURL}${this.section}/${this.data.slug}.webp`
     this.genericSettings(name, this.data.desc1,
-      'Items',
+      this.a23service.item_translation[this.language],
       false,
       this.inputSlug ? false : true);
   }
@@ -68,4 +68,4 @@ export class A23ItemComponent extends SingleComponent {
     }
     return 0;
   }
-} 
+}

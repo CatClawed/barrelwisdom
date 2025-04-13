@@ -75,7 +75,7 @@ export class A26ItemlistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.a26service, 'items');
-    this.genericSettings(this.a26service.itemString[this.language], `The list of items in ${this.gameTitle}.`);
+    this.genericSettings(this.a26service.item_translation[this.language], `The list of items in ${this.gameTitle}.`);
     this.pageForm.reset();
     return forkJoin({
       items: this.a26service.getItemList(this.language),

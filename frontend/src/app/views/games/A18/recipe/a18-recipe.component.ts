@@ -33,7 +33,7 @@ export class A18RecipeComponent extends DialogUseComponent {
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
-    private a18service: A18Service,
+    protected a18service: A18Service,
     protected readonly destroy$: DestroyService) {
       super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
       this.component = A18ItemComponent

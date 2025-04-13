@@ -19,7 +19,7 @@ export class A23BookComponent extends SingleComponent {
     protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
-    private a23service: A23Service) {
+    protected a23service: A23Service) {
     super(destroy$, route, breadcrumbService, seoService);
   }
 
@@ -31,6 +31,6 @@ export class A23BookComponent extends SingleComponent {
   afterAssignment(): void {
     this.seoImage = `${this.imgURL}items/${this.data.slug}.webp`
     this.genericSEO(this.data.name, `Recipe book in ${this.gameTitle}`)
-    this.breadcrumbService.setBreadcrumbs([[this.gameTitle, `/${this.gameURL}`], ['Items', `/${this.gameURL}/items/${this.language}`]], this.data.name)
+    this.breadcrumbService.setBreadcrumbs([[this.gameTitle, `/${this.gameURL}`], [this.a23service.item_translation[this.language], `/${this.gameURL}/items/${this.language}`]], this.data.name)
   }
 }

@@ -32,7 +32,7 @@ export class A23RecipeComponent extends SingleComponent {
     protected route: ActivatedRoute,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
-    private a23service: A23Service,
+    protected a23service: A23Service,
     protected readonly destroy$: DestroyService,
     private location: Location,
     public historyService: HistoryService,
@@ -58,7 +58,7 @@ export class A23RecipeComponent extends SingleComponent {
 
   changeData() {
     this.gameService(this.a23service, 'recipe-ideas');
-    this.genericSettings(`Recipe Ideas`, `All recipe ideas in ${this.gameTitle}.`);
+    this.genericSettings(this.a23service.recipeidea_translation[this.language], `All recipe ideas in ${this.gameTitle}.`);
     return this.a23service.getRecipeList(this.language);
   }
 

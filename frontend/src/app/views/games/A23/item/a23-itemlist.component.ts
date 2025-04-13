@@ -36,21 +36,21 @@ export class A23ItemlistComponent extends DialogUseComponent {
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
-    private a23service: A23Service,
+    protected a23service: A23Service,
   ) {
     super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A23ItemComponent,
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       filtering: '',
-      cat: 'Any',
-      kind: 'Any',
+      cat: '',
+      kind: '',
     })
   }
 
   changeData() {
     this.gameService(this.a23service, 'items');
-    this.genericSettings(`Items`, `The list of items in ${this.gameTitle}.`);
+    this.genericSettings(this.a23service.item_translation[this.language], `The list of items in ${this.gameTitle}.`);
     this.pageForm.reset();
     return forkJoin({
       items: this.a23service.getItemList(this.language),
@@ -69,10 +69,10 @@ export class A23ItemlistComponent extends DialogUseComponent {
     this.hide = false;
     let list: Item[] = this.data.items;
 
-    if (cat != 'Any') {
+    if (cat != 'Any' && cat) {
       list = list.filter(item => item.categories.some(c => c.name == cat) || (item.add ? item.add.some(c => c.name == cat) : false));
     }
-    if (kind != 'Any') {
+    if (kind != 'Any' && kind) {
       list = list.filter(item => item.kind == kind)
     }
     if (ingt) {

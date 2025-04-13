@@ -3,11 +3,9 @@
     <item
       [item]="item"
       url="/{{gameURL}}/items/{{item.id}}/{{language}}"
-      (buttonClicked)="openDialog($event)">
-      <!--
-      imgURL="{{imgURL}}items/{{item.slug}}.webp?v=1"
-      dimension="280">
-      -->
+      (buttonClicked)="openDialog($event)"
+      [imgURL]=" item.cats[0].id != 38 ? `${imgURL}items/${item.id}.webp?v=1` : ''"
+      dimension="256">
       <ng-container icon>
         @if (item.isDLC) {
           <span class="badge bg-primary">DLC</span>
@@ -52,17 +50,17 @@
   </ng-template>
   <filter-list
     [list]="filteredItems"
-    name="{{a26service.itemString[language]}}"
+    name="{{a26service.item_translation[language]}}"
     [(hide)]="hide"
     [template]="template">
     <form [formGroup]="pageForm" class="grid">
       <mat-form-field class="grid-12" appearance="outline">
-        <mat-label>{{a26service.filterString[language]}}</mat-label>
+        <mat-label>{{a26service.filter_translation[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtertext">
         <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
       </mat-form-field>
       <mat-form-field class="grid-4" appearance="outline">
-        <mat-label>{{a26service.categoryString[language]}}</mat-label>
+        <mat-label>{{a26service.category_translation[language]}}</mat-label>
         <mat-select matNativeControl formControlName="cat" disableOptionCentering="true" class="mat-select-icon">
           <mat-option value="--" selected><div class="a26-icon-text-vertical-center"><div class="a26-icon"></div>--</div></mat-option>
           @if (data) {
@@ -78,7 +76,7 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field class="grid-4" appearance="outline">
-        <mat-label>{{a26service.materialString[language]}}</mat-label>
+        <mat-label>{{a26service.material_translation[language]}}</mat-label>
         <mat-select matNativeControl formControlName="mat" disableOptionCentering="true" class="mat-select-icon">
           <mat-option value="--" selected><div class="a26-icon-text-vertical-center"><div class="a26-icon"></div>--</div></mat-option>
           @if (data) {

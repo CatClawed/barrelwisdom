@@ -24,7 +24,7 @@ export class A22MonsterComponent extends SingleComponent {
     protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
-    private a22service: A22Service) {
+    protected a22service: A22Service) {
     super(destroy$, route, breadcrumbService, seoService);
   }
 
@@ -62,8 +62,8 @@ export class A22MonsterComponent extends SingleComponent {
 
     this.seoImage = `${this.imgURL}${this.section}/${this.data.slug}.webp`
     this.genericSettings(this.data.name, this.data.desc,
-      'Monsters',
+      this.a22service.monster_translation[this.language],
       false,
       this.inputSlug ? false : true);
   }
-} 
+}

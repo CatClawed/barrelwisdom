@@ -58,7 +58,7 @@
       <a class="navigation-hide-large sidenav-item" routerLink="/blog/atelier-series-guide">
         <i class="fas fa-star"></i>Atelier Series Guide
       </a>
-      @for (n of navItems; track n) {
+      @for (n of nav; track n) {
         @if (!n.children) {
           <a class="sidenav-item" routerLink="{{n.url}}">
             @if (n.svg) {
@@ -85,25 +85,25 @@
             @if (n.expand) {
               <b class="fas fa-caret-up"></b>
             }
-        </a>
-      }
-      @if (n.expand) {
-        @for (c of n.children; track c) {
-          @if (router.url.indexOf(c.url) < 0) {
-            <a class="sidenav-item sidenav-child"
-              routerLink="{{c.url}}">
-              {{c.name}}
-            </a>
-          }
-          @if (router.url.indexOf(c.url) > -1) {
-            <a class="sidenav-item sidenav-child active"
-              routerLink="{{c.url}}">
-              {{c.name}}
-            </a>
+          </a>
+        }
+        @if (n.expand) {
+          @for (c of n.children; track c) {
+            @if (router.url.indexOf(c.url) < 0) {
+              <a class="sidenav-item sidenav-child"
+                routerLink="{{c.url}}">
+                {{c.name}}
+              </a>
+            }
+            @if (router.url.indexOf(c.url) > -1) {
+              <a class="sidenav-item sidenav-child active"
+                routerLink="{{c.url}}">
+                {{c.name}}
+              </a>
+            }
           }
         }
       }
-    }
   </div>
   <div class="sidenav-bottom">
     <a class="sidenav-item sidenav-social-media" href="https://discord.gg/utRynRKxwh" rel="noopener" target="_blank">

@@ -4,10 +4,8 @@
     <div class="card-icon-position">
       <svg class="a26-monster-icon"><use attr.href="{{imgURL}}spritesheet.svg?v=4.2#race-{{monster.race.id}}"></use></svg>
     </div>
-    <!--
     <img class="card-item-display" src="{{imgURL}}monsters/{{monster.id}}.webp?v=1"
-      alt="{{monster.name}}" style="aspect-ratio: 1; width: 288px;">
-    -->
+      alt="{{monster.name}}" style="aspect-ratio: 1; width: 256px;">
     <p style="margin-top:1em;">{{monster.desc}}</p>
     <div class="grid">
       <div class="grid-6">
@@ -21,7 +19,7 @@
               <li><a routerLink="/{{gameURL}}/items/{{monster.rare.id}}/{{language}}">{{monster.rare.name}}</a> (Rare)</li>
             }
             @if (monster.trait) {
-              <li><a routerLink="/{{gameURL}}/traits/{{monster.trait.id}}/{{language}}">{{monster.trait.name}}</a> (Trait)</li>
+              <li><a routerLink="/{{gameURL}}/traits/{{monster.trait.id}}/{{language}}">{{monster.trait.name}}</a> ({{a26service.trait_translation[language]}})</li>
             }
           </ul>
         }
@@ -30,7 +28,7 @@
         <table class="table-item-data" ><tbody>
           <tr>
             <td style="padding:0;">
-              <b>HP: </b>
+              <b>{{a26service.stat_translation['hp'][language]}}</b>
             </td>
             <td style="padding:0;padding-left:0.5em;">
               @for (i of [].constructor(monster.hp); track i) {
@@ -43,7 +41,7 @@
           </tr>
           <tr>
             <td style="padding:0;">
-              <b>ATK: </b>
+              <b>{{a26service.stat_translation['atk'][language]}}</b>
             </td>
             <td style="padding:0;padding-left:0.5em;">
               @for (i of [].constructor(monster.atk); track i) {
@@ -56,7 +54,7 @@
           </tr>
           <tr>
             <td style="padding:0;">
-              <b>DEF: </b>
+              <b>{{a26service.stat_translation['dfn'][language]}}</b>
             </td>
             <td style="padding:0;padding-left:0.5em;">
               @for (i of [].constructor(monster.dfn); track i) {
@@ -69,7 +67,7 @@
           </tr>
           <tr>
             <td style="padding:0;">
-              <b>SPD: </b>
+              <b>{{a26service.stat_translation['spd'][language]}}</b>
             </td>
             <td style="padding:0;padding-left:0.5em;">
               @for (i of [].constructor(monster.spd); track i) {

@@ -6,11 +6,11 @@
   <filter-list
     [list]="filteredEffects"
     [(hide)]="hide"
-    name="{{a26service.effectString[language]}}"
+    name="{{a26service.effect_translation[language]}}"
     [template]="template">
     <form [formGroup]="pageForm" class="grid">
       <mat-form-field class="grid-12" appearance="outline">
-        <mat-label>{{a26service.filterString[language]}}</mat-label>
+        <mat-label>{{a26service.filter_translation[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtertext">
       </mat-form-field>
     </form>

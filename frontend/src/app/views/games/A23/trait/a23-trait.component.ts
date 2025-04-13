@@ -20,7 +20,7 @@ export class A23TraitComponent extends SingleComponent {
     protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
-    private a23service: A23Service) {
+    protected a23service: A23Service) {
     super(destroy$, route, breadcrumbService, seoService);
   }
   changeData() {
@@ -29,8 +29,8 @@ export class A23TraitComponent extends SingleComponent {
   }
   afterAssignment(): void {
     this.genericSettings(this.data.name, this.data.desc,
-      'Traits',
+      this.a23service.trait_translation[this.language],
       false,
       this.inputSlug ? false : true);
   }
-} 
+}

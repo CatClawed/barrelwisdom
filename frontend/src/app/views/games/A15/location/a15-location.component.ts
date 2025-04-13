@@ -19,7 +19,7 @@ export class A15LocationComponent extends FragmentedComponent {
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
     protected loc: Location,
-    private a15service: A15Service,
+    protected a15service: A15Service,
     public historyService: HistoryService,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
@@ -34,4 +34,4 @@ export class A15LocationComponent extends FragmentedComponent {
   afterAssignment(): void {
     this.genericSettings(this.data.name, `All items in ${this.data.name}`, '', true);
   }
-} 
+}

@@ -45,7 +45,7 @@ export class A26EffectlistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.a26service, 'effects');
-    this.genericSettings(`Effects`, `The list of effects in ${this.gameTitle}.`);
+    this.genericSettings(this.a26service.effect_translation[this.language], `The list of effects in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a26service.getEffectList(this.language);
   }

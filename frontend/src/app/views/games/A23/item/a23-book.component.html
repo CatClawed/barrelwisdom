@@ -11,7 +11,7 @@
         <br /><span class="badge bg-primary">DLC</span>
       }
     </ng-container>
-    <b>Item:</b>
+    <b>{{a23service.item_translation[language]}}</b>
     <ul>
       @for (it of item.items; track it) {
         <li><a routerLink="/{{gameURL}}/items/{{it.slug}}/{{language}}">{{it.name}}</a></li>

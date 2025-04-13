@@ -28,7 +28,7 @@ export class A23LocationComponent extends FragmentedComponent {
     protected route: ActivatedRoute,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
-    private a23service: A23Service,
+    protected a23service: A23Service,
     protected readonly destroy$: DestroyService,
     protected loc: Location,
     protected viewportScroller: ViewportScroller,

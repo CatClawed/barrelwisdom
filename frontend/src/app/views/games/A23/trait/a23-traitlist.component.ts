@@ -34,7 +34,7 @@ export class A23TraitlistComponent extends DialogUseComponent {
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
-    private a23service: A23Service,) {
+    protected a23service: A23Service,) {
     super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A23TraitComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
@@ -44,7 +44,7 @@ export class A23TraitlistComponent extends DialogUseComponent {
   }
   changeData() {
     this.gameService(this.a23service, 'traits');
-    this.genericSettings(`Traits`, `The list of traits in ${this.gameTitle}.`);
+    this.genericSettings(this.a23service.trait_translation[this.language], `The list of traits in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a23service.getTraitList(this.language);
   }

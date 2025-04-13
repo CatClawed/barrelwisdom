@@ -34,7 +34,7 @@ export class A23EffectlistComponent extends DialogUseComponent {
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
-    private a23service: A23Service,
+    protected a23service: A23Service,
   ) {
     super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A23EffectComponent;
@@ -45,7 +45,7 @@ export class A23EffectlistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.a23service, 'effects');
-    this.genericSettings(`Effects`, `The list of effects in ${this.gameTitle}.`);
+    this.genericSettings(this.a23service.effect_translation[this.language], `The list of effects in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a23service.getEffectList(this.language);
   }

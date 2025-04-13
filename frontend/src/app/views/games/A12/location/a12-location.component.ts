@@ -18,7 +18,7 @@ export class A12LocationComponent extends FragmentedComponent {
     protected route: ActivatedRoute,
     protected loc: Location,
     protected readonly destroy$: DestroyService,
-    private a12service: A12Service,
+    protected a12service: A12Service,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
     protected viewportScroller: ViewportScroller) {
@@ -36,4 +36,4 @@ export class A12LocationComponent extends FragmentedComponent {
       true
     );
   }
-} 
+}

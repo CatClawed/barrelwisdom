@@ -17,7 +17,7 @@ export class A12TraitComponent extends SingleComponent {
   constructor(
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
-    private a12service: A12Service,
+    protected a12service: A12Service,
     protected breadcrumbService: BreadcrumbService,
     protected seoService: SeoService) {
     super(destroy$, route, breadcrumbService, seoService);
@@ -33,4 +33,4 @@ export class A12TraitComponent extends SingleComponent {
       this.inputSlug ? false : true
     );
   }
-} 
+}

@@ -18,7 +18,7 @@ export class A15CategoryComponent extends SingleComponent {
   constructor(
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
-    private a15service: A15Service,
+    protected a15service: A15Service,
     protected breadcrumbService: BreadcrumbService,
     protected seoService: SeoService) {
     super(destroy$, route, breadcrumbService, seoService);

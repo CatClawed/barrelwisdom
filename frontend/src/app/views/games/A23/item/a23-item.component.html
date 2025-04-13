@@ -83,7 +83,7 @@
       }
     </tbody></table>
     @if (item.traits) {
-      <b >Trait:</b>
+      <b>{{a23service.trait_translation[language]}}</b>
       <ul>
         @for (trait of item.traits; track trait) {
           <li>
@@ -93,10 +93,10 @@
       </ul>
     }
     @if (item.book) {
-      <p><b>Book: </b> <a routerLink="/{{gameURL}}/items/books/{{item.book[0].slug}}/{{language}}">{{item.book[0].name}}</a></p>
+      <p><b>{{a23service.recipebook_translation[language]}}: </b> <a routerLink="/{{gameURL}}/items/books/{{item.book[0].slug}}/{{language}}">{{item.book[0].name}}</a></p>
     }
     @if (item.seed) {
-      <p><b>Seed: </b> <a routerLink="/{{gameURL}}/items/{{item.seed.slug}}/{{language}}">{{item.seed.name}}</a></p>
+      <p><b>{{a23service.seed_translation[language]}}: </b> <a routerLink="/{{gameURL}}/items/{{item.seed.slug}}/{{language}}">{{item.seed.name}}</a></p>
     }
     @if (item.chest) {
       <p><b>Chest: </b>{{item.chest[0].region}} &gt; {{item.chest[0].subregion}}</p>
@@ -105,7 +105,7 @@
       <p><b>Shop: </b>{{item.shop}}</p>
     }
     @if (item.locations) {
-      <b >Location:</b>
+      <b>{{a23service.location_translation[language]}}</b>
       <ul style="padding-left:1.1em;margin-bottom:0;column-count: 2;">
         @for (loc of item.locations; track loc) {
           <li><a routerLink="/{{gameURL}}/locations/{{loc.slug}}/{{language}}" [queryParams]="{item: item.name}">{{loc.name}}</a>
@@ -113,10 +113,10 @@
       </ul>
     }
     @if (item.ideas && item.char) {
-      <a routerLink="/{{gameURL}}/recipe-ideas/{{language}}" [queryParams]="{tab: item.char}"><b>Recipe Idea:</b></a>
+      <a routerLink="/{{gameURL}}/recipe-ideas/{{language}}" [queryParams]="{tab: item.char}"><b>{{a23service.recipeidea_translation[language]}}</b></a>
     }
     @if (item.ideas && !item.char) {
-      <a routerLink="/{{gameURL}}/recipe-ideas/{{language}}" [queryParams]="{tab: 'shared'}" ><b>Recipe Idea:</b></a>
+      <a routerLink="/{{gameURL}}/recipe-ideas/{{language}}" [queryParams]="{tab: 'shared'}" ><b>{{a23service.recipeidea_translation[language]}}</b></a>
     }
     @if (item.ideas) {
       <ul>
@@ -135,7 +135,7 @@
       </ul>
     }
     @if (item.monsters) {
-      <b>Dropped by:</b>
+      <b>{{a23service.monster_translation[language]}}</b>
       <ul style="padding-left:1.1em;margin-bottom:0;column-count: 2;">
         @for (mon of item.monsters; track mon) {
           <li><a routerLink="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a></li>
@@ -144,7 +144,7 @@
     }
     @if (item.ingredient) {
       <table class="tbl"><tbody>
-        <tr><th>Ingredients</th></tr>
+        <tr><th>{{a23service.ingredient_translation[language]}}</th></tr>
         <tr>
           <td>
             <ul>
@@ -161,7 +161,7 @@
       </tbody></table>
     }
     @if (item.effects && !item.ingredient) {
-      <b>Effects:</b>
+      <b>{{a23service.effect_translation[language]}}</b>
       <ul>
         @for (eff of item.effects[0].data; track eff) {
           <li>
@@ -172,7 +172,7 @@
     }
     @if (item.effects && item.ingredient) {
       <table class="tbl"><tbody>
-        <tr><th colspan=2>Effects</th></tr>
+        <tr><th colspan=2>{{a23service.effect_translation[language]}}</th></tr>
         @for (eff of item.effects; track eff) {
           <tr>
             <td style="vertical-align:middle;">
@@ -227,7 +227,7 @@
     }
     @if (item.components) {
       <table class="tbl"><tbody>
-        <tr><th>Components</th></tr>
+        <tr><th>{{a23service.component_translation[language]}}</th></tr>
         <tr>
           <td>
             <div style="display:grid; grid-template-columns: auto auto auto auto;grid-gap:1em;">
@@ -263,7 +263,7 @@
     }
     @if (item.chars) {
       <table class="tbl"><tbody>
-        <tr><th>Characters</th></tr>
+        <tr><th>{{a23service.character_translation[language]}}</th></tr>
         <tr>
           <td>
             @for (char of item.chars; track char) {

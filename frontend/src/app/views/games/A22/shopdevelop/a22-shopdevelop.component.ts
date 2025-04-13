@@ -18,13 +18,13 @@ export class A22ShopDevelopComponent extends SingleComponent {
     protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
-    private a22service: A22Service) {
+    protected a22service: A22Service) {
     super(destroy$, route, breadcrumbService, seoService);
   }
 
   changeData() {
     this.gameService(this.a22service, 'shopdevelop');
-    this.genericSettings(`Shop Development`, `The full shop develop list.`);
+    this.genericSettings(this.a22service.develop_translation[this.language], `The full shop develop list.`);
     return this.a22service.getShopDevList(this.language);
   }
-} 
+}

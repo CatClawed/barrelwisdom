@@ -9,19 +9,19 @@
   </ng-template>
   <filter-list
     [list]="filteredTraits"
-    name="Traits"
+    name="{{a22service.trait_translation[language]}}"
     [(hide)]="hide"
     [template]="template">
     <form [formGroup]="pageForm" class="grid">
       <mat-form-field class="grid-8" appearance="outline">
-        <mat-label>Filter...</mat-label>
+        <mat-label>{{a22service.filter_translation[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtertext">
         <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
       </mat-form-field>
       <mat-form-field class="grid-4" appearance="outline">
         <mat-label>Transfers to...</mat-label>
         <mat-select matNativeControl formControlName="transfers" disableOptionCentering="true" class="mat-select-icon">
-          <mat-option value="1" selected> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-synthesis"></mat-icon> Any</mat-option>
+          <mat-option value="1" selected> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-synthesis"></mat-icon>--</mat-option>
           <mat-option value="2"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-attack"  ></mat-icon> Attack</mat-option>
           <mat-option value="3"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-heal"    ></mat-icon> Heal</mat-option>
           <mat-option value="4"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-debuff"  ></mat-icon> Debuff</mat-option>

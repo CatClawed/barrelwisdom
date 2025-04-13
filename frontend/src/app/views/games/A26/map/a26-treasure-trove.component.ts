@@ -12,7 +12,7 @@ import { A26MapComponent } from '../map/a26-map.component';
 @Component({
     template: `
     @if (data) {
-        <h1>{{data.name}} Map</h1>
+        <h1>{{language == 'en' ? data.name + " Map" : data.name}}</h1>
         <p>A map to ease your suffering. There are 50 Treasure Troves and 50 keys.</p>
         @defer {
           <a26-map [data]="data.location" [tracker]="true"></a26-map>
@@ -41,6 +41,7 @@ export class A26TreasureTroveComponent extends SingleComponent {
   }
 
   afterAssignment(): void {
-    this.genericSettings(`${this.data.name} Map`, "A map to ease your suffering. There are 50 Treasure Troves and 50 keys.");
+
+    this.genericSettings(`${this.language == 'en' ? this.data.name + " Map" : this.data.name}`, "A map to ease your suffering. There are 50 Treasure Troves and 50 keys.");
   }
 }

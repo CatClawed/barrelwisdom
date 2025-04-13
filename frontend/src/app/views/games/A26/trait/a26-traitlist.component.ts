@@ -52,7 +52,7 @@ export class A26TraitlistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.a26service, 'traits');
-    this.genericSettings(this.a26service.traitString[this.language], `The list of traits in ${this.gameTitle}.`);
+    this.genericSettings(this.a26service.trait_translation[this.language], `The list of traits in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a26service.getTraitList(this.language);
   }

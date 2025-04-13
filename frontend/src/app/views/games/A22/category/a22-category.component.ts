@@ -20,7 +20,7 @@ export class A22CategoryComponent extends SingleComponent {
     protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
-    private a22service: A22Service) {
+    protected a22service: A22Service) {
     super(destroy$, route, breadcrumbService, seoService);
   }
 

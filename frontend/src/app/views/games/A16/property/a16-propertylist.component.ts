@@ -33,7 +33,7 @@ export class A16PropertylistComponent extends DialogUseComponent {
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
-    private a16service: A16Service) {
+    protected a16service: A16Service) {
     super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A16PropertyComponent;
     this.pageForm = this.formBuilder.nonNullable.group({

@@ -20,16 +20,16 @@
         }
       </div>
       @if (trait.desc1 && trait.desc2) {
-        <p><b>Inner: </b>{{trait.desc1}}</p>
+        <p><b>{{a26service.inner_translation[language]}}: </b>{{trait.desc1}}</p>
       }
       @else {
         <p>{{trait.desc1}}</p>
       }
       @if (trait.desc2) {
-        <p><b>Outer: </b>{{trait.desc2}}</p>
+        <p><b>{{a26service.outer_translation[language]}}: </b>{{trait.desc2}}</p>
       }
       @if (trait.combo1) {
-        <b>Blend:</b>
+        <b>{{a26service.blending_translation[language]}}</b>
         <ul class="two-column">
           @if (url) {
             <li><a (click)="$event.preventDefault(); buttonClicked.emit(trait.combo1.id);" href="/{{gameURL}}/traits/{{trait.combo1.id}}/{{language}}">{{trait.combo1.name}}</a></li>

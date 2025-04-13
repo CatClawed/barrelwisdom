@@ -21,7 +21,7 @@ export class A22EffectComponent extends SingleComponent {
     protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
-    private a22service: A22Service) {
+    protected a22service: A22Service) {
     super(destroy$, route, breadcrumbService, seoService);
   }
 
@@ -46,7 +46,7 @@ export class A22EffectComponent extends SingleComponent {
         switch(this.data.efftype) {
           case 'Normal': {
             this.breadcrumbService.setBreadcrumbs(
-              [[this.gameTitle, `/${this.gameURL}`], ['Effects', `/${this.gameURL}/effects/${this.language}`]],
+              [[this.gameTitle, `/${this.gameURL}`], [this.a22service.effect_translation[this.language], `/${this.gameURL}/effects/${this.language}`]],
               this.data.name
             );
             this.efftype = 'Normal';
@@ -54,7 +54,7 @@ export class A22EffectComponent extends SingleComponent {
           }
           case 'EV': {
             this.breadcrumbService.setBreadcrumbs(
-              [[this.gameTitle, `/${this.gameURL}`], ['EV Effects', `/${this.gameURL}/ev-effects/${this.language}`]],
+              [[this.gameTitle, `/${this.gameURL}`], [this.a22service.eveffect_translation[this.language], `/${this.gameURL}/ev-effects/${this.language}`]],
               this.data.name
             );
             this.efftype = 'EV';
@@ -62,7 +62,7 @@ export class A22EffectComponent extends SingleComponent {
           }
           default: {
             this.breadcrumbService.setBreadcrumbs(
-              [[this.gameTitle, `/${this.gameURL}`], ['Forge Effects',`/${this.gameURL}/forge-effects/${this.language}`]],
+              [[this.gameTitle, `/${this.gameURL}`], [this.a22service.forgeeffect_translation[this.language],`/${this.gameURL}/forge-effects/${this.language}`]],
               this.data.name
             );
             this.efftype = 'Forge';
@@ -72,4 +72,4 @@ export class A22EffectComponent extends SingleComponent {
       }
     }
   }
-} 
+}

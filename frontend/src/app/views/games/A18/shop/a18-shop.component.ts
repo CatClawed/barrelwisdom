@@ -20,7 +20,7 @@ export class A18ShopComponent extends FragmentedComponent {
     protected route: ActivatedRoute,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
-    private a18service: A18Service,
+    protected a18service: A18Service,
     protected viewportScroller: ViewportScroller,
     protected loc: Location) {
     super(destroy$, route, seoService, breadcrumbService, viewportScroller, loc);

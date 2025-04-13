@@ -33,7 +33,7 @@ export class A12EffectlistComponent extends DialogUseComponent {
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
-    private a12service: A12Service) {
+    protected a12service: A12Service) {
     super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A12EffectComponent;
     this.pageForm = this.formBuilder.nonNullable.group({

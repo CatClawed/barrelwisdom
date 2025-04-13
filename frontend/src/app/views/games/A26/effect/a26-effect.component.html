@@ -8,14 +8,14 @@
     <p [class]="hideContents ? 'card-read-more-spacer' : null">{{effect.desc1}}</p>
   }
   @if (effect.desc2) {
-    <p [class]="hideContents ? 'card-read-more-spacer' : null"><b>Inner: </b>{{effect.desc1}}</p>
-    <p [class]="hideContents ? 'card-read-more-spacer' : null"><b>Outer: </b>{{effect.desc2}}</p>
+    <p [class]="hideContents ? 'card-read-more-spacer' : null"><b>{{a26service.inner_translation[language]}}: </b>{{effect.desc1}}</p>
+    <p [class]="hideContents ? 'card-read-more-spacer' : null"><b>{{a26service.outer_translation[language]}}: </b>{{effect.desc2}}</p>
   }
   <span><b>Max: </b>{{effect.max_level}}</span>
 
     @if (!hideContents) {
       @if (effect.items) {
-        <b style="margin-top: 1em;">{{a26service.itemString[language]}}:</b>
+        <b style="margin-top: 1em;">{{a26service.item_translation[language]}}:</b>
         <ul class="two-column">
           @for (i of effect.items; track i) {
             <li>

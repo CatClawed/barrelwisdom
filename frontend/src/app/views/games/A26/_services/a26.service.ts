@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '@environments/environment';
-import { Observable } from 'rxjs';
 import { Category, Coord, Effect, Item, Monster, NameLink, Trait } from '@app/views/games/A26/_services/a26.interface';
+import { environment } from '@environments/environment';
+import { category_translation, effect_translation, filter_translation, item_translation, monster_translation, quality_translation, race_translation, stat_translation, trait_translation } from '@environments/localization';
+import { Observable } from 'rxjs';
 
 
 @Injectable({ providedIn: 'root' })
@@ -12,6 +13,16 @@ export class A26Service {
   constructor(
     private http: HttpClient,
   ) { }
+
+  public readonly item_translation = item_translation
+  public readonly monster_translation = monster_translation
+  public readonly stat_translation = stat_translation
+  public readonly effect_translation = effect_translation
+  public readonly trait_translation = trait_translation
+  public readonly category_translation = category_translation
+  public readonly filter_translation = filter_translation
+  public readonly race_translation = race_translation
+  public readonly quality_translation = quality_translation
 
   public readonly gameTitle = {
     "en": "Atelier Yumia",
@@ -24,51 +35,8 @@ export class A26Service {
     "ru": "Ателье Юмия",
     "ko": "유미아의 아틀리에",
   };
-  public readonly itemString = {
-    "en": "Items",
-    "de": "Gegenstände",
-    "fr": "Objets",
-    "es": "Objetos",
-    "ja": "アイテム",
-    "sc": "道具",
-    "tc": "道具",
-    "ru": "Предметы",
-    "ko": "아이템",
-  };
-  public readonly treasureString = {
-    "en": "Treasure Trove",
-    "ja": "宝物庫",
-    "sc": "宝物库",
-    "tc": "寶物庫",
-    "de": "Schatzkammer",
-    "fr": "Salle aux trésors",
-    "ko": "보물고",
-    "ru": "Сокровищница",
-    "es": "Tesoro oculto"
-  };
-  public readonly manaGeysterString = {
-    "en": "Mana Geyser",
-    "ja": "マナ間欠泉",
-    "sc": "玛那间歇泉",
-    "tc": "瑪那間歇泉",
-    "de": "Mana-Geysir",
-    "fr": "Geyser de mana",
-    "ko": "마나 간헐천",
-    "ru": "Гейзер маны",
-    "es": "Géiser de maná"
-  };
-  public readonly particleString = {
-    "en": "Particles",
-    "ja": "残響片",
-    "sc": "余音断片",
-    "tc": "餘音斷片",
-    "de": "Partikel",
-    "fr": "Particules",
-    "ko": "잔향입자",
-    "ru": "Частицы",
-    "es": "Partículas"
-  };
-  public readonly memoryVialString = {
+
+  public readonly memoryvial_translation = {
     "en": "Memory Vial Map",
     "ja": "伝想器",
     "sc": "传忆器",
@@ -79,99 +47,20 @@ export class A26Service {
     "ru": "Сосуд памяти",
     "es": "Vial de recuerdos"
   }
-  public readonly monsterString = {
-    "en": "Monsters",
-    "ja": "魔物",
-    "sc": "魔物",
-    "tc": "魔物",
-    "de": "Monster",
-    "fr": "Monstres",
-    "ko": "몬스터",
-    "ru": "Чудовища",
-    "es": "Monstruos"
-  }
-  public readonly statStrings = {
-    "hp": {
-      "en": "HP",
-      "ja": "体力",
-      "sc": "体力",
-      "tc": "體力",
-      "de": "LP",
-      "fr": "PV",
-      "ko": "체력",
-      "ru": "ОЗ",
-      "es": "PS"
-    },
-    "atk": {
-      "en": "ATK",
-      "ja": "攻撃力",
-      "sc": "攻击力",
-      "tc": "攻擊力",
-      "de": "ANG",
-      "fr": "ATQ",
-      "ko": "공격력",
-      "ru": "АТК",
-      "es": "ATQ"
-    },
-    "dfn": {
-      "en": "DEF",
-      "ja": "防御力",
-      "sc": "防御力",
-      "tc": "防禦力",
-      "de": "VRT",
-      "fr": "DÉF",
-      "ko": "방어력",
-      "ru": "ЗЩТ",
-      "es": "DEF"
-    },
-    "spd": {
-      "en": "SPD",
-      "ja": "素早さ",
-      "sc": "敏捷",
-      "tc": "敏捷",
-      "de": "TMP",
-      "fr": "VIT",
-      "ko": "민첩성",
-      "ru": "СКР",
-      "es": "VEL"
-    }
+
+  public readonly sp_translation = {
+    "en": "SP",
+    "ja": "SP",
+    "sc": "SP",
+    "tc": "SP",
+    "de": "FP",
+    "fr": "PC",
+    "ko": "SP",
+    "ru": "ОН",
+    "es": "PH"
   }
 
-  public readonly effectString = {
-    "en": "Effects",
-    "ja": "効果",
-    "sc": "效果",
-    "tc": "效果",
-    "de": "Effekte",
-    "fr": "Effets",
-    "ko": "효과",
-    "ru": "Эффекты",
-    "es": "Efectos"
-  }
-  public readonly traitString = {
-    "en": "Traits",
-    "ja": "特性",
-    "sc": "特性",
-    "tc": "特性",
-    "de": "Eigenschaften",
-    "fr": "Caract.",
-    "ko": "특성",
-    "ru": "Черты",
-    "es": "Atributos"
-  }
-  public readonly qualityString = {
-    "en": "Quality",
-    "ja": "品質",
-    "sc": "品质",
-    "tc": "品質",
-    "de": "Qualität",
-    "fr": "Qualité",
-    "ko": "품질",
-    "ru": "Качество",
-    "es": "Calidad"
-  }
-
-  public readonly comfortString = {
+  public readonly comfort_translation = {
     "en": "Comfort Level:",
     "ja": "快適度：",
     "sc": "舒适度：",
@@ -183,7 +72,7 @@ export class A26Service {
     "es": "Nivel de comodidad:"
   }
 
-  public readonly materialString = {
+  public readonly material_translation = {
     "en": "Materials",
     "ja": "資材",
     "sc": "原材料",
@@ -195,40 +84,40 @@ export class A26Service {
     "es": "Materiales"
   }
 
-  public readonly categoryString = {
-    "en": "Category",
-    "ja": "カテゴリ",
-    "sc": "类别",
-    "tc": "類別",
-    "de": "Kategorie",
-    "fr": "Catégorie",
-    "ko": "카테고리",
-    "ru": "Категория",
-    "es": "Categoría"
+  public readonly blending_translation = {
+    "en": "Trait Blending",
+    "ja": "特性合成",
+    "sc": "特性合成",
+    "tc": "特性合成",
+    "de": "Eigenschaftenverschmelzung",
+    "fr": "Mélange de caractéristiques",
+    "ko": "특성합성",
+    "ru": "Смешение",
+    "es": "Mezcla de atributos"
   }
 
-  public readonly filterString = {
-    "en": "Filter",
-    "ja": "フィルタ",
-    "sc": "筛选",
-    "tc": "篩選",
-    "de": "Filter",
-    "fr": "Filtrer",
-    "ko": "필터",
-    "ru": "Фильтр",
-    "es": "Filtro"
+  public readonly inner_translation = {
+    "en": "Inner Range",
+    "ja": "インレンジ",
+    "sc": "近距离",
+    "tc": "近距離",
+    "de": "Innere Reichweite",
+    "fr": "À courte portée",
+    "ko": "근거리",
+    "ru": "Ближнее расстояние",
+    "es": "Alcance cercano"
   }
 
-  public readonly speciesString = {
-    "en": "Monster Species",
-    "ja": "魔物種族",
-    "sc": "魔物种族",
-    "tc": "魔物種族",
-    "de": "Monsterspezies",
-    "fr": "Espèces de monstre",
-    "ko": "몬스터 종족",
-    "ru": "Виды чудовищ",
-    "es": "Especies de monstruos"
+  public readonly outer_translation = {
+    "en": "Outer Range",
+    "ja": "アウトレンジ",
+    "sc": "远距离",
+    "tc": "遠距離",
+    "de": "Äußere Reichweite",
+    "fr": "À longue portée",
+    "ko": "원거리",
+    "ru": "Дальнее расстояние",
+    "es": "Alcance exterior"
   }
 
   // other stats also have localizations, this is a pain so maybe later
@@ -236,9 +125,9 @@ export class A26Service {
   public readonly imgURL = `${environment.mediaURL}games/${this.gameURL}/`;
 
   public readonly elements = {
-    'air':  '#75ff76',
+    'air': '#75ff76',
     'fire': '#fcbc72',
-    'ice':  '#7dfffa',
+    'ice': '#7dfffa',
     'bolt': '#ffff7b',
     'none': '#969696'
   }

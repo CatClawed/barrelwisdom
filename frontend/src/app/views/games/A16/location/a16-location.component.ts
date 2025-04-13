@@ -19,7 +19,7 @@ export class A16LocationComponent extends FragmentedComponent {
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
     protected loc: Location,
-    private a16service: A16Service,
+    protected a16service: A16Service,
     public historyService: HistoryService,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,

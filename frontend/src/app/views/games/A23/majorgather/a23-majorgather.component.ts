@@ -19,7 +19,7 @@ export class A23MajorGatherComponent extends FragmentedComponent {
     protected route: ActivatedRoute,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
-    private a23service: A23Service,
+    protected a23service: A23Service,
     protected readonly destroy$: DestroyService,
     protected loc: Location,
     protected viewportScroller: ViewportScroller) {
@@ -28,7 +28,7 @@ export class A23MajorGatherComponent extends FragmentedComponent {
 
   changeData() {
     this.gameService(this.a23service, 'major-gathering');
-    this.genericSettings(`Major Gathering Spots`, `All major gathering items in ${this.gameTitle}.`);
+    this.genericSettings(this.a23service.majorgathering_translation[this.language], `All major gathering items in ${this.gameTitle}.`);
     return this.a23service.getMajorGather(this.language)
   }
 }

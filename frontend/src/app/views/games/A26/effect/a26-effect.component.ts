@@ -30,7 +30,7 @@ export class A26EffectComponent extends SingleComponent {
   }
   afterAssignment(): void {
     this.genericSettings(this.data.name, this.data.desc1,
-      this.a26service.effectString[this.language],
+      this.a26service.effect_translation[this.language],
       false,
       this.inputSlug ? false : true);
   }

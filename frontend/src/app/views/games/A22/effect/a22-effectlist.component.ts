@@ -40,13 +40,13 @@ export class A22EffectlistComponent extends DialogUseComponent {
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
-    private a22service: A22Service,
+    protected a22service: A22Service,
   ) {
     super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A22EffectComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
-      type: '1'
+      type: ''
     })
     this.route.data.pipe(takeUntil(this.destroy$)).subscribe(data => this.kind = data.type)
   }
@@ -58,21 +58,21 @@ export class A22EffectlistComponent extends DialogUseComponent {
         this.normal = true;
         this.efftype = 'Normal';
         this.gameService(this.a22service, 'effects');
-        this.genericSettings('Effects', `The list of effects in ${this.gameTitle}.`)
+        this.genericSettings(this.a22service.effect_translation[this.language], `The list of effects in ${this.gameTitle}.`)
         break;
       }
       case "forge": {
         this.forge = true;
         this.efftype = 'Forge';
         this.gameService(this.a22service, 'forge-effects');
-        this.genericSettings('Forge Effects', `The list of forge effects in ${this.gameTitle}.`)
+        this.genericSettings(this.a22service.forgeeffect_translation[this.language], `The list of forge effects in ${this.gameTitle}.`)
         break;
       }
       case "ev": {
         this.ev = true;
         this.efftype = 'EV';
         this.gameService(this.a22service, 'ev-effects');
-        this.genericSettings('EV Effects', `The list of EV effects in ${this.gameTitle}.`)
+        this.genericSettings(this.a22service.eveffect_translation[this.language], `The list of EV effects in ${this.gameTitle}.`)
         break;
       }
     }
@@ -89,7 +89,7 @@ export class A22EffectlistComponent extends DialogUseComponent {
   private filterT(value: string, type: string): Effect[] {
     this.hide = false;
     let effectlist: Effect[] = this.data;
-    if (type != "1") {
+    if (type != "1" && type) {
       effectlist = effectlist.filter(effect => effect.effsub == type)
     }
     if (!value) {

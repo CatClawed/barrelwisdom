@@ -33,7 +33,7 @@ export class A15PropertylistComponent extends DialogUseComponent {
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
-    private a15service: A15Service,) {
+    protected a15service: A15Service,) {
     super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A15PropertyComponent;
     this.pageForm = this.formBuilder.nonNullable.group({

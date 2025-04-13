@@ -21,7 +21,7 @@ export class A22LocationComponent extends FragmentedComponent {
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
     protected loc: Location,
-    private a22service: A22Service,
+    protected a22service: A22Service,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
     protected viewportScroller: ViewportScroller) {

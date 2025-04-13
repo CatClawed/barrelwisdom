@@ -37,9 +37,10 @@ export class A26ItemComponent extends SingleComponent {
   }
 
   afterAssignment(): void {
-    //this.seoImage = `${this.imgURL}${this.section}/${this.data.slug}.webp`
+
+    this.seoImage = this.data.cats[0].id != 38 ? `${this.imgURL}${this.section}/${this.data.id}.webp` : '';
     this.genericSettings(this.data.name, this.data.desc ? this.data.desc : this.data.cats[0].name,
-      this.a26service.itemString[this.language],
+      this.a26service.item_translation[this.language],
       false,
       this.inputSlug ? false : true);
   }

@@ -15,7 +15,7 @@
       {{trait.grade}}
     </div>
     @if ( trait.item_set) {
-      <b>Item:</b>
+      <b>{{a23service.item_translation[language]}}</b>
       <ul>
         @for (item of trait.item_set; track item) {
           <li><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>

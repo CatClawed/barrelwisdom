@@ -143,7 +143,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/escha/faq',
+    redirectTo: '/escha/items',
     pathMatch: 'full'
   },
 ];

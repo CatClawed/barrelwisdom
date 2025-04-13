@@ -20,7 +20,7 @@ export class A18TraitComponent extends SingleComponent {
     protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
-    private a18service: A18Service) {
+    protected a18service: A18Service) {
     super(destroy$, route, breadcrumbService, seoService);
   }
 
@@ -35,4 +35,4 @@ export class A18TraitComponent extends SingleComponent {
       false,
       this.inputSlug ? false : true);
   }
-} 
+}

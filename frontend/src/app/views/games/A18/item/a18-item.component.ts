@@ -31,7 +31,7 @@ export class A18ItemComponent extends SingleComponent {
     protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
-    private a18service: A18Service) {
+    protected a18service: A18Service) {
     super(destroy$, route, breadcrumbService, seoService);
   }
 

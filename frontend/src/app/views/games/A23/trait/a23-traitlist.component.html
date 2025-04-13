@@ -9,12 +9,12 @@
   </ng-template>
   <filter-list
     [list]="filteredTraits"
-    name="Traits"
+    name="{{a23service.trait_translation[language]}}"
     [(hide)]="hide"
     [template]="template">
     <form [formGroup]="pageForm" class="grid">
       <mat-form-field class="grid-8" appearance="outline">
-        <mat-label>Filter...</mat-label>
+        <mat-label>{{a23service.filter_translation[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtertext">
         <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
       </mat-form-field>

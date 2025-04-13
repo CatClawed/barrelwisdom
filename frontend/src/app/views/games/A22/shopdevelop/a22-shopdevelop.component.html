@@ -1,11 +1,11 @@
 @if (!error) {
-  <h1>Shop Development</h1>
+  <h1>{{a22service.develop_translation[language]}}</h1>
 }
 @if (data; as shopdevelop) {
   <table class="tbl-min borders"><tbody>
     <tr>
-      <th>Item</th>
-      <th>Categories</th>
+      <th>{{a22service.item_translation[language]}}</th>
+      <th>{{a22service.category_translation[language]}}</th>
       <th>Bonus</th>
     </tr>
     @for (dev of shopdevelop; track dev) {

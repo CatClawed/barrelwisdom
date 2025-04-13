@@ -6,11 +6,10 @@
         <br /><span class="badge bg-primary">DLC</span>
       }
     </div>
-    <!--
-    <img class="card-item-display" src="{{imgURL}}items/{{item.id}}.webp?v=1"
-      alt="{{item.name}}" style="aspect-ratio: 1; width: 280px;">
-    -->
-
+    @if (item.cats[0].id != 38) {
+      <img class="card-item-display" src="{{imgURL}}items/{{item.id}}.webp?v=1"
+        alt="{{item.name}}" style="aspect-ratio: 1; width: 256;">
+    }
     @if (item.desc) {
       <p>{{item.desc}}</p>
     }
@@ -62,13 +61,13 @@
     @if (item.atk || item.dfn || item.spd) {
       <b>Stats:</b>
       <ul>
-        @if (item.atk) { <li><b>{{a26service.statStrings['atk'][language]}}: </b>{{item.atk}}</li> }
-        @if (item.dfn) { <li><b>{{a26service.statStrings['dfn'][language]}}: </b>{{item.dfn}}</li> }
-        @if (item.spd) { <li><b>{{a26service.statStrings['spd'][language]}}: </b>{{item.spd}}</li> }
+        @if (item.atk) { <li><b>{{a26service.stat_translation['atk'][language]}}: </b>{{item.atk}}</li> }
+        @if (item.dfn) { <li><b>{{a26service.stat_translation['dfn'][language]}}: </b>{{item.dfn}}</li> }
+        @if (item.spd) { <li><b>{{a26service.stat_translation['spd'][language]}}: </b>{{item.spd}}</li> }
       </ul>
     }
     @if (item.mons || item.rare) {
-      <b>{{a26service.monsterString[language]}}</b>
+      <b>{{a26service.monster_translation[language]}}</b>
       <ul>
         @for (mon of item.mons; track mon) {
           <li>
@@ -84,7 +83,7 @@
     }
 
     @if (item.material) {
-      <b>Materials:</b>
+      <b>{{a26service.material_translation[language]}}</b>
       <ul>
         @for (r of item.material.recipe; track r) {
           <li>
@@ -95,7 +94,7 @@
     }
 
     @if (item.comfort_goal) {
-      <p><b>{{a26service.comfortString[language]}} </b>{{item.comfort_goal}} (see map) <i class="fa-solid fa-arrow-down"></i></p>
+      <p><b>{{a26service.comfort_translation[language]}} </b>{{item.comfort_goal}} (see map) <i class="fa-solid fa-arrow-down"></i></p>
     }
 
     @if (item.rank) {
@@ -106,7 +105,7 @@
             <td>{{rank.rank}}</td>
             <td>
               <ul>
-                <li><b>Quality: </b>{{rank.quality}}</li>
+                <li><b>{{a26service.quality_translation[language]}}: </b>{{rank.quality}}</li>
                 @if (rank.eff) {
                   @for (e of rank.eff; track e) {
                     <li>
@@ -128,10 +127,10 @@
     @if (item.recipe) {
       <ul>
         <li><b>Amount Made:</b> {{item.recipe.num}}</li>
-        <li><b>SP:</b> {{item.recipe.sp}}</li>
+        <li><b>{{a26service.sp_translation[language]}}</b> {{item.recipe.sp}}</li>
       </ul>
       <table class="tbl"><tbody>
-        <tr><th style="width: 50%;">{{a26service.itemString[language]}}</th><th style="width: 50%;">{{a26service.effectString[language]}}</th></tr>
+        <tr><th style="width: 50%;">{{a26service.item_translation[language]}}</th><th style="width: 50%;">{{a26service.effect_translation[language]}}</th></tr>
         <tr>
           <td>
             <ul>
@@ -193,8 +192,8 @@
       <p>{{eff.desc1}}</p>
     }
     @else {
-      <p><b>Inner: </b>{{eff.desc1}}</p>
-      <p><b>Outer: </b>{{eff.desc2}}</p>
+      <p><b>{{a26service.inner_translation[language]}}: </b>{{eff.desc1}}</p>
+      <p><b>{{a26service.outer_translation[language]}}: </b>{{eff.desc2}}</p>
     }
     <p><b>Max: </b>{{eff.max_level}}</p>
     <a routerLink="/{{gameURL}}/effects/{{eff.id}}/{{language}}">More info...</a>

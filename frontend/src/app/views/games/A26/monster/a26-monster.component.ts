@@ -35,9 +35,9 @@ export class A26MonsterComponent extends SingleComponent {
     return this.a26service.getMonster(this.slug, this.language);
   }
   afterAssignment(): void {
-    //this.seoImage = `${this.imgURL}${this.section}/${this.data.id}.webp`
+    this.seoImage = `${this.imgURL}${this.section}/${this.data.id}.webp`
     this.genericSettings(this.data.name, this.data.desc,
-      this.a26service.monsterString[this.language],
+      this.a26service.monster_translation[this.language],
       false,
       this.inputSlug ? false : true);
   }

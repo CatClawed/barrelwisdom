@@ -32,7 +32,7 @@ export class A26TraitComponent extends SingleComponent {
 
   afterAssignment(): void {
     this.genericSettings(this.data.name, this.data.desc1,
-      this.a26service.traitString[this.language],
+      this.a26service.trait_translation[this.language],
       false,
       this.inputSlug ? false : true);
   }

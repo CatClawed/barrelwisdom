@@ -36,7 +36,7 @@ export class A23MonsterlistComponent extends DialogUseComponent {
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
-    private a23service: A23Service,) {
+    protected a23service: A23Service,) {
     super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A23MonsterComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
@@ -47,7 +47,7 @@ export class A23MonsterlistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.a23service, 'monsters');
-    this.genericSettings(`Monsters`, `The list of monsters in ${this.gameTitle}.`);
+    this.genericSettings(this.a23service.monster_translation[this.language], `The list of monsters in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a23service.getMonsterList(this.language);
   }
