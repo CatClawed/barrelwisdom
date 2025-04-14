@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Character, Dungeon, Emblem, Item, Memoria, NameLink, RecipeTab, Research, ScoreBattle, Tower, Trait, Update } from '@app/views/games/A25/_services/a25.interface';
 import { environment } from '@environments/environment';
 import { Observable } from 'rxjs';
+import { category_translation, character_translation, effect_translation, filter_translation, ingredient_translation, item_translation, location_translation, monster_translation, race_translation, recipebook_translation, trait_translation } from '@environments/localization';
 
 
 @Injectable({ providedIn: 'root' })
@@ -12,6 +13,12 @@ export class A25Service {
   constructor(
     private http: HttpClient,
   ) { }
+
+  public readonly item_translation = item_translation
+  public readonly trait_translation = trait_translation
+  public readonly filter_translation = filter_translation
+  public readonly character_translation = character_translation
+  public readonly ingredient_translation = ingredient_translation
 
   public readonly gameTitle = {
     "en": "Atelier Resleriana",
@@ -45,6 +52,85 @@ export class A25Service {
       "en": "Date", "ja": "日付", "sc": "日期", "tc": "日期"
     },
   }
+
+  public readonly material_translation = {
+    "en": "Materials",
+    "ja": "素材",
+    "sc": "素材",
+    "tc": "素材"
+  };
+  public readonly synthitem_translation = {
+    "en": "Synthesis Items",
+    "ja": "調合アイテム",
+    "sc": "调合道具",
+    "tc": "調合道具"
+  };
+  public readonly memoria_translation = {
+    "en": "Memoria",
+    "ja": "メモリア",
+    "sc": "回忆",
+    "tc": "回憶"
+  };
+  public readonly recipe_translation = {
+    "en": "Recipes",
+    "ja": "レシピ発想",
+    "sc": "构思配方",
+    "tc": "構思配方"
+  };
+  public readonly research_translation = {
+    "en": "Research",
+    "ja": "研究",
+    "sc": "研究",
+    "tc": "研究"
+  };
+  public readonly role_translation = {
+    "en": "Role",
+    "ja": "ロール",
+    "sc": "职种",
+    "tc": "職種"
+  };
+  public readonly gift_translation = {
+    "en": "Gifts",
+    "ja": "ギフト",
+    "sc": "天赋",
+    "tc": "天賦"
+  };
+  public readonly order_translation = {
+    "en": "Order by",
+    "ja": "順",
+    "sc": "顺序",
+    "tc": "順序"
+  };
+  public readonly skill_translation = {
+    "en": "Skills",
+    "ja": "スキル",
+    "sc": "技能",
+    "tc": "技能"
+  };
+  public readonly stat_translation = {
+    "en": "Stats",
+    "ja": "ステータス",
+    "sc": "状态",
+    "tc": "狀態"
+  };
+  public readonly leader_translation = {
+    "en": "Leader",
+    "ja": "リーダースキル",
+    "sc": "队长技能",
+    "tc": "隊長技能"
+  };
+  public readonly scorebattle_translation = {
+    "en": "Score Battle",
+    "ja": "スコアバトル",
+    "sc": "積分戰蟩",
+    "tc": "积分战斗蟩"
+  };
+  public readonly emblem_translation = {
+    "en": "Emblems",
+    "ja": "エンブレム",
+    "sc": "徽章",
+    "tc": "徽章"
+  };
 
   public readonly colors = {
     'red':    '#b63c3c',

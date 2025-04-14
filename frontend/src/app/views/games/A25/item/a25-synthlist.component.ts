@@ -23,7 +23,7 @@ import { A25ItemComponent } from './a25-item.component';
     encapsulation: ViewEncapsulation.None,
     providers: [DestroyService],
     imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
-        A25ItemComponent, A25IconComponent, MatButtonModule]
+        A25IconComponent, MatButtonModule]
 })
 
 export class A25SynthesisListComponent extends DialogUseComponent {
@@ -44,14 +44,14 @@ export class A25SynthesisListComponent extends DialogUseComponent {
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       filtering: '',
-      kind: 'Any',
+      kind: '',
       rarity: '0'
     })
   }
 
   changeData() {
     this.gameService(this.a25service, 'items/synthesis');
-    this.genericSettings(`Synthesis Items`, `The list of synthesis items in ${this.gameTitle}.`);
+    this.genericSettings(this.a25service.synthitem_translation[this.language], `The list of synthesis items in ${this.gameTitle}.`);
     this.pageForm.reset();
     return forkJoin({
       items: this.a25service.getSynthList(this.language),
@@ -102,7 +102,7 @@ export class A25SynthesisListComponent extends DialogUseComponent {
     this.hide = false;
     let list: Item[] = this.data.items;
 
-    if (kind != 'Any') {
+    if (kind != 'Any' && kind) {
       list = list.filter(item => item.equip ? item.equip[0].kind == kind : item.combat[0].kind == kind);
     }
     if (rarity > 0) {

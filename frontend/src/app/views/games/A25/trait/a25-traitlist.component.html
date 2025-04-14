@@ -8,11 +8,11 @@
   <filter-list
     [list]="filteredTraits"
     [(hide)]="hide"
-    name="Traits"
+    name="{{a25service.trait_translation[language]}}"
     [template]="template">
     <form [formGroup]="pageForm" class="grid">
       <mat-form-field class="grid-8" appearance="outline">
-        <mat-label>Filter...</mat-label>
+        <mat-label>{{a25service.filter_translation[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtertext">
         <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
       </mat-form-field>
@@ -20,7 +20,7 @@
         <mat-label>Transfers to...</mat-label>
         <mat-select matNativeControl formControlName="transfers" disableOptionCentering="true" class="mat-select-icon">
           <mat-option value="any" selected>
-            Any
+            --
           </mat-option>
           @if (data) {
             @for (trans of data.transfer; track trans) {

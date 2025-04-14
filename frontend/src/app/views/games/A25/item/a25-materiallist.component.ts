@@ -23,7 +23,7 @@ import { A25ItemComponent } from './a25-item.component';
     encapsulation: ViewEncapsulation.None,
     providers: [DestroyService],
     imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
-        A25ItemComponent, MatButtonModule, Popover]
+        MatButtonModule, Popover]
 })
 
 export class A25MaterialListComponent extends DialogUseComponent {
@@ -51,15 +51,15 @@ export class A25MaterialListComponent extends DialogUseComponent {
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       filtertrait: '',
-      color: 'Any',
+      color: '',
       rarity: '0',
-      traittype: 'Any'
+      traittype: ''
     })
   }
 
   changeData() {
     this.gameService(this.a25service, 'items/materials');
-    this.genericSettings(`Materials`, `The list of materials in ${this.gameTitle}.`);
+    this.genericSettings(this.a25service.material_translation[this.language], `The list of materials in ${this.gameTitle}.`);
     this.pageForm.reset()
     return forkJoin({
       items: this.a25service.getMaterialList(this.language),
@@ -82,13 +82,13 @@ export class A25MaterialListComponent extends DialogUseComponent {
     this.hide = false;
     let list: Item[] = this.data.items;
 
-    if (color != 'Any') {
+    if (color != 'Any' && color) {
       list = list.filter(item => item.material[0].color == color);
     }
     if (rarity > 0) {
       list = list.filter(item => item.rarity == rarity)
     }
-    if (traittype !== 'Any') {
+    if (traittype !== 'Any' && traittype) {
       list = list.filter(item => item.material[0].traits ? item.material[0].traits[0].kind === traittype : false)
     }
     if (filter) {

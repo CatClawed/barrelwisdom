@@ -41,18 +41,18 @@
   </ng-template>
   <filter-list
     [list]="filteredItems"
-    name="Materials"
+    name="{{a25service.material_translation[language]}}"
     [(hide)]="hide"
     [template]="template">
     <form [formGroup]="pageForm" class="grid">
       <mat-form-field class="grid-8" appearance="outline">
-        <mat-label>Filter...</mat-label>
+        <mat-label>{{a25service.filter_translation[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtertext">
       </mat-form-field>
       <mat-form-field class="grid-4" appearance="outline">
         <mat-label>Color</mat-label>
         <mat-select matNativeControl formControlName="color">
-          <mat-option value="Any">Any</mat-option>
+          <mat-option value="Any">--</mat-option>
           @if (data) {
             @for (color of data.colors; track color) {
               <mat-option value="{{color.slug}}">
@@ -63,13 +63,13 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field class="grid-6" appearance="outline">
-        <mat-label>Has trait...</mat-label>
+        <mat-label>{{a25service.trait_translation[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtertrait">
       </mat-form-field>
       <mat-form-field class="grid-3" appearance="outline">
         <mat-label>Trait Type</mat-label>
         <mat-select matNativeControl formControlName="traittype">
-          <mat-option value="Any">Any</mat-option>
+          <mat-option value="Any">--</mat-option>
           <mat-option value="equipment">{{a25service.equipment[language]}}</mat-option>
           <mat-option value="combat">{{combat[language]}}</mat-option>
         </mat-select>
@@ -77,7 +77,7 @@
       <mat-form-field class="grid-3" appearance="outline">
         <mat-label>Rarity</mat-label>
         <mat-select matNativeControl formControlName="rarity">
-          <mat-option value="0">Any</mat-option>
+          <mat-option value="0">--</mat-option>
           <mat-option value="3">SSR</mat-option>
           <mat-option value="2">SR</mat-option>
           <mat-option value="1">R</mat-option>

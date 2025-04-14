@@ -62,17 +62,17 @@ export class A25CharalistComponent extends DialogUseComponent {
     this.component = A25CharaComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
-      roles: "any",
-      elems: "any",
-      colorL: 'any',
-      colorR: 'any',
+      roles: "",
+      elems: "",
+      colorL: '',
+      colorR: '',
       six_star: false
     })
   }
 
   changeData() {
     this.gameService(this.a25service, 'characters');
-    this.genericSettings(`Characters`, `The list of characters in ${this.gameTitle}.`);
+    this.genericSettings(this.a25service.character_translation[this.language], `The list of characters in ${this.gameTitle}.`);
     this.pageForm.reset()
     return forkJoin({
       charas: this.a25service.getCharaList(this.language),
@@ -96,16 +96,16 @@ export class A25CharalistComponent extends DialogUseComponent {
 
     if (six_star) charalist = charalist.filter(chara => chara.six_star === true)
 
-    if (role != 'any') {
+    if (role != 'any' && role) {
       charalist = charalist.filter(chara => chara.role == role)
     }
-    if (elem != 'any') {
+    if (elem != 'any' && elem) {
       charalist = charalist.filter(chara => chara.elem == elem)
     }
-    if (colorL !== 'any') {
+    if (colorL !== 'any' && colorL) {
       charalist = charalist.filter(chara => chara.color1 == colorL)
     }
-    if (colorR !== 'any') {
+    if (colorR !== 'any' && colorR) {
       charalist = charalist.filter(chara => chara.color2 == colorR)
     }
     if (!value) {
@@ -119,7 +119,7 @@ export class A25CharalistComponent extends DialogUseComponent {
   }
 
   changeFill(color) {
-    if (color === 'any') return 'grey';
+    if (color === 'any' || !color) return 'grey';
     return this.a25service.colors[color];
   }
 }

@@ -24,7 +24,7 @@
       <p style="margin-top:1rem;" [innerHTML]="chara.note"></p>
     }
     <table class="tbl" style="margin-bottom:0;margin-top:1rem;"><tbody>
-      <tr><th>Gifts</th></tr>
+      <tr><th>{{a25service.gift_translation[language]}}</th></tr>
       <tr>
         <td>
           <div style="display:inline-flex;float:right;">
@@ -62,7 +62,7 @@
       <tr>
     </tbody></table>
     <table class="tbl"><tbody>
-      <tr><th colspan="4">Stats</th></tr>
+      <tr><th colspan="4">{{a25service.stat_translation[language]}}</th></tr>
       <tr>
         <td colspan="4">
           <div style="width:45%;float:left;">
@@ -109,7 +109,7 @@
       </tr>
     </tbody></table>
       <table class="tbl"><tbody>
-        <tr><th>Skills</th></tr>
+        <tr><th>{{a25service.skill_translation[language]}}</th></tr>
         @for (skill of chara.skills; track skill) {
           @if (skill.desc) {
             <tr>
@@ -171,7 +171,7 @@
         <tr>
       </tbody></table>
       <table class="tbl"><tbody>
-        <tr><th>Leader</th></tr>
+        <tr><th>{{a25service.leader_translation[language]}}</th></tr>
           <tr>
             <td>
               <p>

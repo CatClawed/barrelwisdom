@@ -86,7 +86,7 @@ export class NavigationService implements OnDestroy {
   }
 
   getNav(section: string): Observable<Nav> {
-    return this.http.get<Nav>(`${environment.apiUrl}/nav/${section}/`, this.httpOptions);
+    return this.http.get<Nav>(`${environment.apiUrl}/nav/${section}/?v=2`, this.httpOptions);
   }
 
   ngOnDestroy() {

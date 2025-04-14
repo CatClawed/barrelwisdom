@@ -63,7 +63,7 @@
             }
             @if (quest.scorebattle) {
               <li>
-                Score Battle:
+                {{a25service.scorebattle_translation[language]}}
                 <a routerLink="/{{gameURL}}/quests/scorebattles/{{language}}"
                   fragment="{{quest.scorebattle[0].scorebattle[0].chapter}}-{{quest.scorebattle[0].scorebattle[0].section}}">
                   {{quest.scorebattle[0].scorebattle[0].chapter}}-{{quest.scorebattle[0].scorebattle[0].section}} {{difficulties[quest.scorebattle[0].difficulty]}}
@@ -90,7 +90,7 @@
     }
     @if (item.equip) {
       <table class="tbl"><tbody>
-        <tr><th colspan="4">Stats</th></tr>
+        <tr><th colspan="4">{{a25service.stat_translation[language]}}</th></tr>
         <tr>
           <td style="width:25%;">{{a25service.stats['hp'][language]}} </td>
           <td style="width:25%;">@if (item.equip[0].bad_hp) {
@@ -125,7 +125,7 @@
     }
     @if (item.recipe) {
       <table class="tbl"><tbody>
-        <tr><th>Ingredients</th></tr>
+        <tr><th>{{a25service.ingredient_translation[language]}}</th></tr>
         <tr>
           <td>
             <ul>

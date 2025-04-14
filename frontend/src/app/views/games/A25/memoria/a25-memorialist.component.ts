@@ -46,13 +46,12 @@ export class A25MemorialistComponent extends DialogUseComponent {
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       stats: 'date',
-      show_jp: this.language === 'ja',
     })
   }
 
   changeData() {
     this.gameService(this.a25service, 'memoria');
-    this.genericSettings(`Memoria`, `The list of memoria in ${this.gameTitle}.`);
+    this.genericSettings(this.a25service.memoria_translation[this.language], `The list of memoria in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a25service.getMemoriaList(this.language);
   }

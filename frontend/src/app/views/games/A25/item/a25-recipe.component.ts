@@ -32,7 +32,7 @@ export class A25RecipeComponent extends SingleComponent {
 
   changeData() {
     this.gameService(this.a25service, 'items/recipes');
-    this.genericSettings(`Recipes`, `All recipes in ${this.gameTitle}.`);
+    this.genericSettings(this.a25service.recipe_translation[this.language], `All recipes in ${this.gameTitle}.`);
     return this.a25service.getRecipeList(this.language)
   }
 

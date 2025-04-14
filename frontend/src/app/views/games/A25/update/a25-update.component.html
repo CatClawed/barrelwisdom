@@ -5,7 +5,7 @@
     <p><b>Global has ended service. Newer data is untranslated JP only.</b></p>
   }
   @if (update.characters) {
-    <h2>Characters</h2>
+    <h2>{{a25service.character_translation[language]}}</h2>
     <div style="display:grid;grid-template-columns:repeat(4,23%);grid-row-gap:1rem;grid-column-gap:2%;">
       @for (chara of update.characters; track chara) {
         <a
@@ -19,7 +19,7 @@
     </div>
   }
   @if (update.memoria) {
-    <h2>Memoria</h2>
+    <h2>{{a25service.memoria_translation[language]}}</h2>
     <div style="display:grid;grid-template-columns:repeat(4,23%);grid-row-gap:1rem;grid-column-gap:2%;">
       @for (memoria of update.memoria; track memoria) {
         <a
@@ -34,9 +34,9 @@
     </div>
   }
   @if (update.items) {
-    <h2>Items</h2>
+    <h2>{{a25service.item_translation[language]}}</h2>
     <table class="tbl"><tbody>
-      <tr><th>Materials</th></tr>
+      <tr><th>{{a25service.material_translation[language]}}</th></tr>
       <tr>
         <td>
           <ul style="columns:2;">
@@ -52,7 +52,7 @@
           </ul>
         </td>
       </tr>
-      <tr><th>Synthesis</th></tr>
+      <tr><th>{{a25service.synthitem_translation[language]}}</th></tr>
       <tr>
         <td>
           <ul style="columns:2;">

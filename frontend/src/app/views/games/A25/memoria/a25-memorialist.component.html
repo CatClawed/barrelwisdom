@@ -47,17 +47,17 @@
   </ng-template>
   <filter-list
     [list]="filteredMemoria"
-    name="Memoria"
+    name="{{a25service.memoria_translation[language]}}"
     [(hide)]="hide"
     [template]="template">
     <form [formGroup]="pageForm" class="grid">
       <mat-form-field class="grid-8" appearance="outline">
-        <mat-label>Filter...</mat-label>
+        <mat-label>{{a25service.filter_translation[language]}}.</mat-label>
         <input style="height: 100%;" matInput formControlName="filtertext">
         <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
       </mat-form-field>
       <mat-form-field class="grid-4" appearance="outline">
-        <mat-label>Sort by...</mat-label>
+        <mat-label>{{a25service.order_translation[language]}}</mat-label>
         <mat-select matNativeControl formControlName="stats">
           @for (stat of a25service.stats | keyvalue; track stat) {
             <mat-option [value]="stat.key">

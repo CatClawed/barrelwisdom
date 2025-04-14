@@ -26,7 +26,7 @@
       <p [innerHTML]="trait.note"></p>
     }
     @if ( trait.items) {
-      <b>Item:</b>
+      <b>{{a25service.material_translation[language]}}</b>
       <ul style="list-style-type: none;padding-left:1rem;">
         @for (item of trait.items; track item) {
           <li>
@@ -45,7 +45,7 @@
       </ul>
     }
     @if ( trait.char1 || trait.char2 || trait.char3) {
-      <b>Characters:</b>
+      <b>{{a25service.character_translation[language]}}</b>
       <ul style="list-style-type: none;padding-left:0.8rem;">
         @for (char of trait.char1; track char) {
           <ng-container *ngTemplateOutlet="charTemplate; context: {char:char}"></ng-container>

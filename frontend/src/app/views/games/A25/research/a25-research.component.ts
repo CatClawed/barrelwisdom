@@ -33,7 +33,7 @@ export class A25ResearchComponent extends SingleComponent {
 
   changeData() {
     this.gameService(this.a25service, 'research');
-    this.genericSettings('Research', `All research in ${this.gameTitle}`);
+    this.genericSettings(this.a25service.research_translation[this.language], `All research in ${this.gameTitle}`);
     return this.a25service.getResearch(this.language)
   }
 }

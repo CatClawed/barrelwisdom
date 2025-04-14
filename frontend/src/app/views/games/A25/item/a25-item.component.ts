@@ -61,7 +61,7 @@ export class A25ItemComponent extends SingleComponent {
     this.seoImage = `${this.imgURL}items/${this.data.slug}.webp`
     this.genericSettings(name,
       this.data.desc ? this.data.desc.replaceAll('<br>', ' -- ') : `Material from ${this.gameTitle}`,
-      this.data.material ? 'Materials' : 'Synthesis Items', false, this.inputSlug ? false : true);
+      this.data.material ? this.a25service.material_translation[this.language] : this.a25service.synthitem_translation[this.language], false, this.inputSlug ? false : true);
   }
 
   replaceVal(item: Item): string {

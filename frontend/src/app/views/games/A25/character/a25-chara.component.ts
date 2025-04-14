@@ -53,7 +53,7 @@ export class A25CharaComponent extends SingleComponent {
     this.seoImage = `${this.imgURL}characters/full/${this.data.slug}.webp`
     this.genericSettings(`${this.data.name} ${this.data.title}`,
         `Gifts: ${this.data.trait1.name} • ${this.data.trait2.name} • ${this.data.trait3.name}`,
-        'Characters', false, this.inputSlug ? false : true);
+        this.a25service.character_translation[this.language], false, this.inputSlug ? false : true);
   }
 
   getStat(stat: number, stars: number, level: number): number {
