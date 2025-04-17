@@ -470,6 +470,8 @@ def hide_fake():
     for i in items:
         try:
             i.recipematerial
+            i.hidden = False
+            i.save()
         except:
             print("Hiding ", i.name.text_en)
             i.hidden = True

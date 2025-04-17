@@ -66,6 +66,8 @@ def yumia():
     pages.append('traits')
     pages.append('effects')
     pages.append('monsters')
+    pages.append('treasure-trove-key-locations')
+    pages.append('memory-vial-locations')
 
     sitemap(langs, pages, 'yumia')
 
@@ -178,7 +180,7 @@ def sitemap_index():
         tree = ET.ElementTree(index)
         tree.write('scripts/sitemaps/sitemap.xml',encoding='utf-8', xml_declaration=True)
 
-#yumia()
+yumia()
 #resleri()
 #firis()
 #blog()

@@ -1652,29 +1652,29 @@ def cleanup():
 
 # for setting slugs
 additions = {
-    "アイラ": "isla-1",
+    "ルトガー": "rutger-1",
 }
-memoria_index = 166 # isla
+memoria_index = 167 # rutger
 base_enemy_index = 117
 
 gacha = None #create_event(ja='シーズン2開幕！ 新たなる導き アルビーナ LEGEND FES')
 
-#createUpdate()
-#retrieve_all_jsons()
-#import_combat_traits()
-#import_equipment_traits()
-#import_characters(event=gacha, additions=additions)
-#memoria_index = import_memoria(memoria_index, event=gacha)
-#import_material()
-#import_combat_items()
-#import_equipment()
-#import_recipes()
-#base_enemy_index = import_enemy(base_enemy_index)
-#import_quest()
-#import_emblem()
-#scan_update_images()
-#enemy_images()
-#print(f'Memoria: {memoria_index}\tEnemy: {base_enemy_index}')
+createUpdate()
+retrieve_all_jsons()
+import_combat_traits()
+import_equipment_traits()
+import_characters(event=gacha, additions=additions)
+memoria_index = import_memoria(memoria_index, event=gacha)
+import_material()
+import_combat_items()
+import_equipment()
+import_recipes()
+base_enemy_index = import_enemy(base_enemy_index)
+import_quest()
+import_emblem()
+scan_update_images()
+enemy_images()
+print(f'Memoria: {memoria_index}\tEnemy: {base_enemy_index}')
 
 #global_additions()
 #import_research()

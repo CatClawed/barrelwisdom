@@ -2,13 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Character, Dungeon, Emblem, Item, Memoria, NameLink, RecipeTab, Research, ScoreBattle, Tower, Trait, Update } from '@app/views/games/A25/_services/a25.interface';
 import { environment } from '@environments/environment';
+import { character_translation, filter_translation, ingredient_translation, item_translation, trait_translation } from '@environments/localization';
 import { Observable } from 'rxjs';
-import { category_translation, character_translation, effect_translation, filter_translation, ingredient_translation, item_translation, location_translation, monster_translation, race_translation, recipebook_translation, trait_translation } from '@environments/localization';
 
 
 @Injectable({ providedIn: 'root' })
 export class A25Service {
-  private readonly version = '04-10-25';
+  private readonly version = '04-17-25';
 
   constructor(
     private http: HttpClient,

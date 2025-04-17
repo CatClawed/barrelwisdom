@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class A26Service {
-  private readonly version = '04-10-25';
+  private readonly version = '04-17-25';
 
   constructor(
     private http: HttpClient,
