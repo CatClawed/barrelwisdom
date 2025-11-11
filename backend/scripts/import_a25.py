@@ -568,6 +568,8 @@ def import_characters(event=None, additions=None):
         4: Filterable.objects.get(text_en="Supporter", kind="role"),
     }
     for char in jsons['character']:
+        if char['id'] == 43599:
+            continue
         name = checkName(
             text_ja = char["name"],
             text_en = char["name_en"] if 'name_en' in char else '',
@@ -966,8 +968,11 @@ def import_recipes():
     for recipe in jsons['recipe']:
         chara = None
         if recipe['character_id'] != None:
-            entry = search(recipe['character_id'], jsons['character'])[0]
-            chara = Character.objects.get(title__text_ja=entry['another_name'], name__text_ja=entry['name'])
+            try:
+                entry = search(recipe['character_id'], jsons['character'])[0]
+                chara = Character.objects.get(title__text_ja=entry['another_name'], name__text_ja=entry['name'])
+            except:
+                continue # quit including spoilers pls
         item = Item.objects.get(name__text_ja=recipe['name'])
         plan = search(recipe['recipe_plan_id'], jsons['recipe_plan'])[0]
 
@@ -1652,29 +1657,32 @@ def cleanup():
 
 # for setting slugs
 additions = {
-    "ルトガー": "rutger-1",
+    "プラフタ": "plachta-4",
+    "ユナ": "juna-4",
+    "ハイディ": "heidi-4",
+    "フロッケ": "flocke-3"
 }
-memoria_index = 167 # rutger
-base_enemy_index = 117
+memoria_index = 174 # juna
+base_enemy_index = 126
 
 gacha = None #create_event(ja='シーズン2開幕！ 新たなる導き アルビーナ LEGEND FES')
 
-createUpdate()
-retrieve_all_jsons()
-import_combat_traits()
-import_equipment_traits()
-import_characters(event=gacha, additions=additions)
-memoria_index = import_memoria(memoria_index, event=gacha)
-import_material()
-import_combat_items()
-import_equipment()
-import_recipes()
-base_enemy_index = import_enemy(base_enemy_index)
-import_quest()
-import_emblem()
-scan_update_images()
-enemy_images()
-print(f'Memoria: {memoria_index}\tEnemy: {base_enemy_index}')
+#createUpdate()
+#retrieve_all_jsons()
+#import_combat_traits()
+#import_equipment_traits()
+#import_characters(event=gacha, additions=additions)
+#memoria_index = import_memoria(memoria_index, event=gacha)
+#import_material()
+#import_combat_items()
+#import_equipment()
+#import_recipes()
+#base_enemy_index = import_enemy(base_enemy_index)
+#import_quest()
+#import_emblem()
+#scan_update_images()
+#enemy_images()
+#print(f'Memoria: {memoria_index}\tEnemy: {base_enemy_index}')
 
 #global_additions()
 #import_research()

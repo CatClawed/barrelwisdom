@@ -98,6 +98,7 @@ INSTALLED_APPS = [
     'games.A25.chara_a25.apps.A25CharaConfig',
     'games.A25.items_a25.apps.A25ItemConfig',
     'games.A25.quest_a25.apps.A25QuestConfig',
+    'games.A25RW.apps.A25RWConfig',
     # A26 Yumia
     'games.A26.misc_a26.apps.A26MiscConfig',
     'games.A26.items_a26.apps.A26ItemConfig',
