@@ -19,7 +19,6 @@ class JapaneseMixin(models.Model):
 
 class TraditionalChineseMixin(models.Model):
     text_tc = models.CharField(blank=True)
-    text_sc = models.CharField(blank=True)
     class Meta:
         abstract = True
 
@@ -73,6 +72,15 @@ class DescMixin(models.Model):
     class Meta:
         abstract = True
 
+def generate_stats_mixin(stats=['hp', 'atk', 'dfn', 'spd']):
+    attrs = {
+        '__module__': __name__,
+        'Meta': type('Meta', (), {'abstract': True})
+    }
+    for stat in stats:
+        attrs[stat] = models.SmallIntegerField()
+    return type(f'Stats{len(stats)}Mixin', (models.Model,), attrs)
+
 def generate_transfer_mixin(transfers):
     attrs = {
         '__module__': __name__,
@@ -106,6 +114,22 @@ def generate_value_pair_mixin(pairs, numeric = False):
         attrs[f'val{i}_1'] = models.CharField(max_length=100, blank=True) if not numeric else models.IntegerField(null=True, blank=True)
         attrs[f'val{i}_2'] = models.CharField(max_length=100, blank=True) if not numeric else models.IntegerField(null=True, blank=True)
     return type(f'ValuePair{pairs}Mixin', (models.Model,), attrs)
+
+# use cases: char blabber for items/monsters (default), yumia inner/outer (2)
+def generate_multi_desc_mixin(number=4):
+    attrs = {
+        '__module__': __name__,
+        'Meta': type('Meta', (), {'abstract': True})
+    }
+    for i in range(1,number+1):
+        attrs[f'desc{i}'] = models.ForeignKey(
+            "Text",
+            blank=True,
+            null=True,
+            on_delete=models.CASCADE,
+            related_name=f'%(class)s_desc{i}'
+        )
+    return type(f'Desc{number}Mixin', (models.Model,), attrs)
 
 class TextSerializer(DefaultSerializer):
     text = serializers.SerializerMethodField()

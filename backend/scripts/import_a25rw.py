@@ -13,7 +13,8 @@ def desc_replace(row, values, values2, kind='desc'):
 
 def eval_objects(row, fields):
     for field in fields:
-        row[field] = ast.literal_eval(row[field])
+        if row[field]:
+            row[field] = ast.literal_eval(row[field])
 
 def get_text(row, kind='text'):
     text_en=row[f'{kind}_ENG']
@@ -312,7 +313,238 @@ def gatherdata(row, index):
                     obj.save()
                     print("Create GatherData: ", row['Area'], row[f'ItemName{i}'])
 
-def neat_strings(row, index):
-    get_text(row, 'text')
+def clean_effects():
+    eff = Effect.objects.all()
+    for e in eff:
+        if len(e.item_set.all()) == 0 and e.flag:
+            print(e.name.text_en, e.gid)
+            e.flag = False
+            e.save()
 
-import_generic()
+def recipe(row, index):
+    if row['ItemName']:
+        item = Item.objects.get(gid=row['ItemId'])
+        item.quantity = row['Quantity']
+        item.uses = row['Uses'] if row['Uses'] != '0' else None
+        item.save()
+        for i in range(1,5):
+            if row[f'IngredientName{i}']:
+                ing = Item.objects.get(gid=row[f'IngredientId{i}'])
+                try:
+                    obj = Ingredient.objects.get(item=item, order=i)
+                    print("Update Ingredient: ", row['ItemName'], row[f'IngredientName{i}'])
+                except:
+                    obj = Ingredient(item=item, order=i)
+                    print("Create Ingredient: ", row['ItemName'], row[f'IngredientName{i}'])
+                obj.ing = ing
+                obj.save()
+            if i < 4 and row[f'Category{i}']:
+                cat = Category.objects.get(name__text_en=row[f'Category{i}'])
+                try:
+                    obj = Ingredient.objects.get(item=item, order=i+4)
+                    print("Update Ingredient: ", row['ItemName'], row[f'Category{i}'])
+                except:
+                    obj = Ingredient(item=item, order=i+4)
+                    print("Create Ingredient: ", row['ItemName'], row[f'Category{i}'])
+                obj.cat = cat
+                obj.save()
+
+def recipe_book(row, index):
+    if row['Book']:
+        book = Item.objects.get(gid=row['ItemId'])
+        for i in range(1,4):
+            if row[f'RecipeName{i}']:
+                print('Updating Item:', row['Book'], row[f'RecipeName{i}'])
+                obj = Item.objects.get(name__text_en=row[f'RecipeName{i}'])
+                obj.book = book
+                obj.save()
+
+def recipe_builder(tree, col, row, RecipeName=None, IngredientName=None,
+                   UnlockChar=None, AncientRecipe=False, down=False, left=False):
+    try:
+        obj = RecipeNode.objects.get(tree=tree, col=col, row=row)
+        print("Updating Tree", tree, RecipeName, IngredientName, row, col)
+    except:
+        obj = RecipeNode(tree=tree, col=col, row=row)
+        print("Creating Tree", tree, RecipeName, IngredientName, row, col)
+    if RecipeName:
+        obj.recipe = Item.objects.get(name__text_en=RecipeName)
+    if IngredientName:
+        obj.ing = Item.objects.get(name__text_en=IngredientName)
+    if UnlockChar:
+        obj.char = Text.objects.get(text_en=UnlockChar)
+    obj.ancient = AncientRecipe
+    obj.down = down
+    obj.left = left
+    obj.save()
+
+def recipe_tree(row, index):
+    global col
+    if row['Index'] != '0':
+        rrow=0
+        eval_objects(row, [r for r in list(row) if row[r]])
+        tree=row['Index']
+        if row['Node0']:
+            col=4
+        for i in range(0,5):
+            rrow += 1
+            recipe_builder(
+                tree=tree,
+                col=col,
+                row=rrow,
+                down=row['RightArrows'][i] if i < 4 else False,
+                left=row['DownArrows'][i] if i < 4 else False,
+                IngredientName=row[f'Node{i}']['IngredientName'] if 'IngredientName' in row[f'Node{i}'] else None,
+                RecipeName=row[f'Node{i}']['RecipeName'] if 'RecipeName' in row[f'Node{i}'] else None,
+                UnlockChar=row[f'Node{i}']['UnlockChar'] if 'UnlockChar' in row[f'Node{i}'] else None,
+                AncientRecipe=row[f'Node{i}']['AncientRecipe'] if 'AncientRecipe' in row[f'Node{i}'] else False,
+            )
+        col -= 1
+
+def itemmix(row, index):
+    if row['Item1']:
+        try:
+            obj = ItemMix.objects.get(gid=row['ItemMixId'])
+            print("Update Mix", row['ItemMixId'], row['text_ENG'])
+        except:
+            obj = ItemMix(gid=row['ItemMixId'])
+            print("Create Mix", row['ItemMixId'], row['text_ENG'])
+        obj.name = get_text(row)
+        obj.save()
+        for i in range(1,4):
+            if row[f'Item{i}']:
+                obj.combo.add(Item.objects.get(gid=row[f'ItemId{i}']))
+
+def shops(row, index):
+    if row['text_ENG']:
+        try:
+            s = Shop.objects.get(name=get_text(row))
+        except:
+            s = Shop(name=get_text(row))
+            s.save()
+        try:
+            obj = ShopSlot.objects.get(item=Item.objects.get(gid=row['ItemId']), shop=s)
+            print("Update Shop", row['text_ENG'], row['ItemName'])
+        except:
+            obj = ShopSlot(item=Item.objects.get(gid=row['ItemId']), shop=s)
+            print("Create Shop", row['text_ENG'], row['ItemName'])
+        obj.price = row['Price']
+        obj.level_min = row['LevelMin'] if row['LevelMin'] != '0' else None
+        obj.level_max = row['LevelMax'] if row['LevelMax'] != '0' else None
+        obj.grade = row['GradeMax'] if row['GradeMax'] else None
+        obj.index = index
+        obj.save()
+
+def quest(row, index):
+    if row['Flag'] == '1' and row['Char'] != '0':
+        try:
+            obj = Quest.objects.get(name=get_text(row))
+            print("Update Quest", row['text_ENG'])
+        except:
+            obj = Quest(name=get_text(row))
+            print("Create Quest", row['text_ENG'])
+        obj.char = Text.objects.get(text_en=row['Char'])
+        obj.save()
+        for i in range(1,4):
+            if row[f'Gift{i}']:
+                obj.items.add(Item.objects.get(name__text_en=row[f'Gift{i}']))
+
+def enemies(row, index):
+    if row['text_ENG']:
+        eval_objects(row, ['Number', 'FlavorText',
+                           'DropReward0', 'DropReward1', 'DropReward2', 'DropReward3', 'DropReward4',
+                           'DropGift0', 'DropGift1', 'DropGift2', 'DropGift3', 'DropGift4'])
+        try:
+            obj = Enemy.objects.get(gid=row['EnemyLibraryInfoId'])
+            print("Update Enemy", row['text_ENG'])
+        except:
+            obj = Enemy(gid=row['EnemyLibraryInfoId'])
+            print("Create Enemy", row['text_ENG'])
+
+        obj.race = get_text(row, 'Race')
+        obj.index = row['Number2']
+        obj.name = get_text(row)
+
+        obj.hp  = row['Number'][0]
+        obj.atk = row['Number'][1]
+        obj.dfn = row['Number'][2]
+        obj.spd = row['Number'][3]
+
+        obj.physical = row['Physical']
+        obj.magic = row['Magic']
+        obj.fire = row['Fire']
+        obj.ice = row['Ice']
+        obj.air = row['Air']
+        obj.bolt = row['Bolt']
+
+        obj.blind = row['Blind']
+        obj.paralysis = row['Paralysis']
+        obj.poison = row['Poison']
+        obj.burn = row['Burn']
+        obj.taunt = row['Taunt']
+        obj.sleep = row['Sleep']
+        obj.daze = row['Daze']
+        obj.frostbite = row['Frostbite']
+
+        if 'flavor1' in row['FlavorText']:
+            obj.desc1 = get_text(row['FlavorText']['flavor1'])
+            obj.char1 = Text.objects.get(text_en=row['FlavorText']['char1'])
+        if 'flavor2' in row['FlavorText']:
+            obj.desc2 = get_text(row['FlavorText']['flavor2'])
+            obj.char2 = Text.objects.get(text_en=row['FlavorText']['char2'])
+        if 'flavor3' in row['FlavorText']:
+            obj.desc3 = get_text(row['FlavorText']['flavor3'])
+            obj.char3 = Text.objects.get(text_en=row['FlavorText']['char3'])
+        if 'flavor4' in row['FlavorText']:
+            obj.desc4 = get_text(row['FlavorText']['flavor4'])
+            obj.char4 = Text.objects.get(text_en=row['FlavorText']['char4'])
+
+        obj.save()
+
+        for i in range(0,5):
+            if row[f'DropReward{i}']:
+                obj.drops.add(Item.objects.get(gid=row[f'DropReward{i}']['ItemId']))
+            if row[f'DropGift{i}']:
+                obj.drops.add(Item.objects.get(gid=row[f'DropGift{i}']['ItemId']))
+
+def enemyareas(row, index):
+    if row['Area'] and row['Area'] != '????':
+        if row['Floors']:
+            eval_objects(row, ['Floors'])
+        for i in range(1,6):
+            if row[f'EnemyName{i}']:
+                enemy = Enemy.objects.get(name__text_en=row[f'EnemyName{i}'])
+                try:
+                    obj = EnemyArea.objects.get(
+                        area__text_en=row['Area'],
+                        enemy=enemy,
+                        floor_min=row['Floors'][0] if row['Floors'] else None,
+                        floor_max=row['Floors'][1] if row['Floors'] else None,
+                    )
+                except:
+                    obj = EnemyArea(
+                        area=Text.objects.get(text_en=row['Area']),
+                        enemy=enemy,
+                        floor_min=row['Floors'][0] if row['Floors'] else None,
+                        floor_max=row['Floors'][1] if row['Floors'] else None,
+                    )
+                    obj.save()
+                    print("Create EnemyArea: ", row['Area'], row[f'EnemyName{i}'])
+
+#import_generic(neat_strings)
+#import_generic(category)
+#import_generic(trait)
+#import_generic(gift)
+#import_generic(usable_effect)
+#import_generic(other_effect)
+#import_generic(item)
+#import_generic(itemeffect, post_function=clean_effects)
+#import_generic(gatherdata)
+#import_generic(recipe)
+#import_generic(recipe_book)
+#import_generic(recipe_tree)
+#import_generic(itemmix)
+#import_generic(shops)
+#import_generic(quest)
+#import_generic(enemies)
+#import_generic(enemyareas)
