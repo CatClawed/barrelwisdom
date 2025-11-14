@@ -46,6 +46,7 @@ class Effect(GameIdMixin, NameMixin, DescMixin, IndexMixin,
 
 class Item(GameIdMixin, NameMixin, IndexMixin, FlavorTextMixin):
     categories = models.ManyToManyField(Category)
+    add = models.ManyToManyField(Category, related_name='addcat')
     # colors
     c1l = models.SlugField(max_length=10, blank=True)
     c1r = models.SlugField(max_length=10, blank=True)
@@ -95,12 +96,16 @@ class Ingredient(models.Model):
         ordering = ['order']
         unique_together = [['item', 'order']]
 
+class RecipeTree(NameMixin):
+    pass
+
 class RecipeNode(models.Model):
+    tree_model = models.ForeignKey(RecipeTree, null=True, blank=True, on_delete=models.CASCADE)
     tree = models.SmallIntegerField(db_index=True)
     ancient = models.BooleanField(default=False)
     char = models.ForeignKey(Text, blank=True, null=True, on_delete=models.CASCADE)
-    recipe = models.ForeignKey(Item, blank=True, null=True, on_delete=models.CASCADE)
-    ing = models.ForeignKey(Item, blank=True, null=True, on_delete=models.CASCADE, related_name='recipeingredient')
+    recipe = models.OneToOneField(Item, blank=True, null=True, on_delete=models.CASCADE)
+    ing = models.ForeignKey(Item, blank=True, null=True, on_delete=models.CASCADE, related_name='+')
     row = models.SmallIntegerField()
     col = models.SmallIntegerField()
     down = models.BooleanField(default=False)
@@ -130,7 +135,6 @@ class ShopSlot(IndexMixin):
 class Quest(NameMixin):
     char = models.ForeignKey(Text, on_delete=models.CASCADE, related_name='+')
     items = models.ManyToManyField(Item)
-
 
 class Enemy(GameIdMixin, NameMixin, IndexMixin, FlavorTextMixin,
             generate_stats_mixin(stats=['hp', 'atk', 'dfn', 'spd',

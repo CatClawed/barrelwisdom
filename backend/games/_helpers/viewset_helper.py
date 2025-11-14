@@ -12,3 +12,9 @@ class DefaultViewSetID(viewsets.ModelViewSet):
     @action(detail=True, url_path=r'(?P<lang>\w\w)')
     def lang_full(self, request, id, lang='en'):
         return self.get_query(lang=lang, id=id)
+
+class DefaultViewSet(viewsets.ModelViewSet):
+    lookup_field = 'id'
+    def get_serializer_context(self):
+        return {**super().get_serializer_context(),
+                'language': self.request.query_params.get('lang', 'en')}

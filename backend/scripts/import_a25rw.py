@@ -172,12 +172,12 @@ def other_effect(row, index):
         obj.save()
     elif row['Index'] != '0' and row['desc_ENG']:
         try:
-            obj = Effect.objects.get(gid=row['EffectId'], usable=True)
+            obj = Effect.objects.get(gid=row['EffectId'], usable=False)
             print("Update OtherEffect: ", row['EffectId'], row['text_ENG'])
         except:
             obj = Effect(
                 gid=row['EffectId'],
-                usable=True,
+                usable=False,
             )
             print("Create OtherEffect: ", row['EffectId'], row['text_ENG'])
         obj.name = get_text(row)
@@ -205,7 +205,7 @@ def other_effect(row, index):
 
         obj.flag = True if row['Flag'] != '0' else False
         obj.index = row['Index']
-        obj.dlc = True if row['DlcId'] else False
+        obj.dlc = True if row['DlcId'] != '0' else False
         obj.save()
 
 def item(row, index):
@@ -265,13 +265,12 @@ def itemeffect(row, index):
     if row['Item'] and row['Name1'] != 'Learn Recipe':
         item = Item.objects.get(gid=row['ItemId'])
         efftype = 'Skill' if row['SkillId1'] else 'Effect'
-        dlc = True if row['DlcId'] != 0 else False
+        dlc = True if row['DlcId'] != '0' else False
         for i in range(1,6):
             if row[f'{efftype}Id{i}']:
                 eff = Effect.objects.get(gid=row[f'{efftype}Id{i}']) if row[f'Name{i}'] != 'No Effect' else Effect.objects.get(name__text_en='No Effect')
-                if dlc:
-                    eff.dlc = dlc
-                    eff.save()
+                eff.dlc = dlc
+                eff.save()
                 try:
                     obj = ItemEffect.objects.get(item=item, order=i)
                     print("Update ItemEffect: ", row['ItemId'], row['Item'], row[f'Name{i}'])
@@ -320,6 +319,12 @@ def clean_effects():
             print(e.name.text_en, e.gid)
             e.flag = False
             e.save()
+        if 'Applies' in e.name.text_en:
+            items = e.item_set.all()
+            cat = Category.objects.get(name__text_en=f'({e.name.text_en.split('Applies ')[1]})')
+            for i in items:
+                i.add.add(cat)
+                print(i.name.text_en, cat.name.text_en)
 
 def recipe(row, index):
     if row['ItemName']:
@@ -359,13 +364,21 @@ def recipe_book(row, index):
                 obj.book = book
                 obj.save()
 
-def recipe_builder(tree, col, row, RecipeName=None, IngredientName=None,
+def recipe_builder(check_tree, tree, col, row, RecipeName=None, IngredientName=None,
                    UnlockChar=None, AncientRecipe=False, down=False, left=False):
     try:
         obj = RecipeNode.objects.get(tree=tree, col=col, row=row)
+        tree_model = obj.tree_model
+        if check_tree:
+            tree_model.name=Text.objects.get(text_en=RecipeName)
+            tree_model.save()
         print("Updating Tree", tree, RecipeName, IngredientName, row, col)
     except:
         obj = RecipeNode(tree=tree, col=col, row=row)
+        if check_tree:
+            tree_model = RecipeTree(name=Text.objects.get(text_en=RecipeName))
+            tree_model.save()
+            obj.tree_model = tree_model
         print("Creating Tree", tree, RecipeName, IngredientName, row, col)
     if RecipeName:
         obj.recipe = Item.objects.get(name__text_en=RecipeName)
@@ -382,13 +395,16 @@ def recipe_tree(row, index):
     global col
     if row['Index'] != '0':
         rrow=0
+        check_tree = False
         eval_objects(row, [r for r in list(row) if row[r]])
         tree=row['Index']
         if row['Node0']:
             col=4
+            check_tree = True
         for i in range(0,5):
             rrow += 1
             recipe_builder(
+                check_tree=check_tree,
                 tree=tree,
                 col=col,
                 row=rrow,
@@ -399,6 +415,7 @@ def recipe_tree(row, index):
                 UnlockChar=row[f'Node{i}']['UnlockChar'] if 'UnlockChar' in row[f'Node{i}'] else None,
                 AncientRecipe=row[f'Node{i}']['AncientRecipe'] if 'AncientRecipe' in row[f'Node{i}'] else False,
             )
+            check_tree = False
         col -= 1
 
 def itemmix(row, index):

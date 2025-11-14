@@ -130,20 +130,3 @@ def generate_multi_desc_mixin(number=4):
             related_name=f'%(class)s_desc{i}'
         )
     return type(f'Desc{number}Mixin', (models.Model,), attrs)
-
-class TextSerializer(DefaultSerializer):
-    text = serializers.SerializerMethodField()
-
-    def get_text(self, obj):
-        language = self.context.get('language', 'en')
-        field_name = f'text_{language}'
-        text = getattr(obj, field_name, None) if hasattr(obj, field_name) else ''
-        return text
-    def get_name(self,obj):
-        return self.get_text(self,obj)
-    def get_desc(self,obj):
-        return self.get_text(self,obj)
-
-    class Meta:
-        abstract = True
-        fields = ['text']
