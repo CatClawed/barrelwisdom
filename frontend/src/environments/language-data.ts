@@ -7,6 +7,7 @@ export const LanguageData = {
       "ryza2":          ["en", "fr", "ja", "ko", "sc", "tc"],
       "sophie2":        ["en", "ja", "ko", "sc", "tc"],
       "resleri":        ["en", "ja", "sc", "tc"],
+      "resleriana-red-white": ["en", "ja", "ko", "sc", "tc"],
       "yumia":          ["en", "de", "es", "fr", "ja", "ko", "ru", "sc", "tc"],
       "bluereflection": ["en"],
       "second-light":   ["en", "ja", "sc", "tc"],

@@ -97,10 +97,10 @@ def trait(row, index):
         obj.index = row['Index']
         if row['Combo1']:
             try:
-                obj.combo1 = Trait.objects.get(name__text_en=row['Combo1'])
-                obj.combo2 = Trait.objects.get(name__text_en=row['Combo2'])
-            except:
-                pass # probably just run twice
+                obj.combo1 = Trait.objects.get(gid=row['ComboId1'])
+                obj.combo2 = Trait.objects.get(gid=row['ComboId2'])
+            except Exception as e:
+                print(e)
         obj.save()
 
 def gift(row, index):
@@ -137,16 +137,16 @@ def usable_effect(row, index):
             [row['Values2'][0],row['Values2'][2],row['Values2'][4],row['Values2'][6],row['Values2'][8],]
         )
         obj.desc = get_text(row, 'desc')
-        obj.val0_1 = row['Values1'][0]
-        obj.val0_2 = row['Values2'][0] if row['Values1'][0] != row['Values2'][0] else None
-        obj.val1_1 = row['Values1'][2] if row['Values1'][2] else None
-        obj.val1_2 = row['Values2'][2] if row['Values1'][2] != row['Values2'][2] else None
-        obj.val2_1 = row['Values1'][4] if row['Values1'][4] else None
-        obj.val2_2 = row['Values2'][4] if row['Values1'][4] != row['Values2'][4] else None
-        obj.val3_1 = row['Values1'][6] if row['Values1'][6] else None
-        obj.val3_2 = row['Values2'][6] if row['Values1'][6] != row['Values2'][6] else None
-        obj.val4_1 = row['Values1'][8] if row['Values1'][8] else None
-        obj.val4_2 = row['Values2'][8] if row['Values1'][8] != row['Values2'][8] else None
+        obj.val1_1 = row['Values1'][0]
+        obj.val1_2 = row['Values2'][0] if row['Values1'][0] != row['Values2'][0] else None
+        obj.val2_1 = row['Values1'][2] if row['Values1'][2] else None
+        obj.val2_2 = row['Values2'][2] if row['Values1'][2] != row['Values2'][2] else None
+        obj.val3_1 = row['Values1'][4] if row['Values1'][4] else None
+        obj.val3_2 = row['Values2'][4] if row['Values1'][4] != row['Values2'][4] else None
+        obj.val4_1 = row['Values1'][6] if row['Values1'][6] else None
+        obj.val4_2 = row['Values2'][6] if row['Values1'][6] != row['Values2'][6] else None
+        obj.val5_1 = row['Values1'][8] if row['Values1'][8] else None
+        obj.val5_2 = row['Values2'][8] if row['Values1'][8] != row['Values2'][8] else None
         obj.flag = True if row['Flag'] != '0' else False
         obj.index = row['Index']
         obj.save()
@@ -166,7 +166,7 @@ def other_effect(row, index):
             print("Create OtherEffect: ", row['EffectId'], row['text_ENG'])
         obj.name = get_text(row)
         obj.desc = get_text(row, 'desc')
-        obj.val0_1 = 0
+        obj.val1_1 = 0
         obj.index = 0
         obj.flag = False
         obj.save()
@@ -186,21 +186,21 @@ def other_effect(row, index):
                                'Value1_1', 'Value1_2',
                                'Value2_1', 'Value2_2',
                                'Value3_1', 'Value3_2',])
-            obj.val0_1 = row['Value0_1']
-            obj.val0_2 = row['Value0_2'] if row['Value0_1'] != row['Value0_2'] else None
-            obj.val1_1 = row['Value1_1'] if row['Value1_1'] else None
-            obj.val1_2 = row['Value1_2'] if row['Value1_1'] != row['Value1_2'] else None
-            obj.val2_1 = row['Value2_1'] if row['Value2_1'] else None
-            obj.val2_2 = row['Value2_2'] if row['Value2_1'] != row['Value2_2'] else None
-            obj.val3_1 = row['Value3_1'] if row['Value3_1'] else None
-            obj.val3_2 = row['Value3_2'] if row['Value3_1'] != row['Value3_2'] else None
+            obj.val1_1 = row['Value0_1']
+            obj.val1_2 = row['Value0_2'] if row['Value0_1'] != row['Value0_2'] else None
+            obj.val2_1 = row['Value1_1'] if row['Value1_1'] else None
+            obj.val2_2 = row['Value1_2'] if row['Value1_1'] != row['Value1_2'] else None
+            obj.val3_1 = row['Value2_1'] if row['Value2_1'] else None
+            obj.val3_2 = row['Value2_2'] if row['Value2_1'] != row['Value2_2'] else None
+            obj.val4_1 = row['Value3_1'] if row['Value3_1'] else None
+            obj.val4_2 = row['Value3_2'] if row['Value3_1'] != row['Value3_2'] else None
 
             desc_replace(row,
                 [row['Value0_1'],row['Value1_1'],row['Value2_1'],row['Value3_1'],],
                 [row['Value0_2'],row['Value1_2'],row['Value2_2'],row['Value3_2'],]
             )
         else:
-            obj.val0_1 = 0
+            obj.val1_1 = 0
         obj.desc = get_text(row, 'desc')
 
         obj.flag = True if row['Flag'] != '0' else False
@@ -565,3 +565,12 @@ def enemyareas(row, index):
 #import_generic(quest)
 #import_generic(enemies)
 #import_generic(enemyareas)
+"""
+obj = Item.objects.filter(visible=True)
+for o in obj:
+    print(f'{o.gid}\t{o.id}\t{o.name.text_en}')
+
+obj = Enemy.objects.all()
+for o in obj:
+    print(f'{o.gid}\t{o.id}\t{o.name.text_en}')
+"""

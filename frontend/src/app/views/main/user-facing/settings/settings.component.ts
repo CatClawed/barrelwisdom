@@ -93,7 +93,7 @@ export class SettingsComponent {
 
     this.sectionForm = this.formBuilder.nonNullable.group({
       name: ['', [Validators.required, Validators.maxLength(30)]],
-      fullname: ['', [Validators.required, Validators.maxLength(30)]]
+      fullname: ['', [Validators.required]]
     });
 
     this.navigationForm = this.formBuilder.nonNullable.group({

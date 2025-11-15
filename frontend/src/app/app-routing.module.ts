@@ -152,6 +152,17 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'resleriana-red-white',
+    component: LayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: ()=> import('@app/views/games/A25RW/a25rw-routing.module').then(m=>m.A25RWRoutingModule),
+      },
+
+    ]
+  },
+  {
     path: 'yumia',
     component: LayoutComponent,
     children: [
