@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Effect, Trait } from '@app/views/games/A25RW/_services/a25rw.interface';
+import { Category, Effect, Monster, Trait } from '@app/views/games/A25RW/_services/a25rw.interface';
 import { environment } from '@environments/environment';
 import { category_translation, effect_translation, filter_translation, item_translation, monster_translation, race_translation, stat_translation, trait_translation } from '@environments/localization';
 import { Observable } from 'rxjs';
@@ -50,12 +50,12 @@ export class A25RWService {
   }
 
   public readonly elements = {
-    'air': '#3b853d',
-    'fire': '#b23e36',
-    'ice': '#2089bc',
-    'bolt': '#9e8a1a',
-    'physical': '#72543b',
-    'magic': '#647189',
+    'air': '#4f7939',
+    'fire': '#a64521',
+    'ice': '#4d7acf',
+    'bolt': '#9c8c18',
+    'physical': '#735129',
+    'magic': '#6d2ca3',
   }
 
   getTraitList(language: string): Observable<Trait[]> {
@@ -72,5 +72,21 @@ export class A25RWService {
 
   getEffect(slug: string, language: string): Observable<Effect> {
     return this.http.get<Effect>(`${environment.apiUrl}/A25RW/effect/${slug}/?lang=${language}&v=${this.version}`);
+  }
+
+  getMonsterList(language: string): Observable<Monster[]> {
+    return this.http.get<Monster[]>(`${environment.apiUrl}/A25RW/enemy/?lang=${language}&v=${this.version}`);
+  }
+
+  getMonster(slug: string, language: string): Observable<Monster> {
+    return this.http.get<Monster>(`${environment.apiUrl}/A25RW/enemy/${slug}/?lang=${language}&v=${this.version}`);
+  }
+
+  getCategoryList(language: string): Observable<Category[]> {
+    return this.http.get<Category[]>(`${environment.apiUrl}/A25RW/category/?lang=${language}&v=${this.version}`);
+  }
+
+  getCategory(slug: string, language: string): Observable<Category> {
+    return this.http.get<Category>(`${environment.apiUrl}/A25RW/category/${slug}/?lang=${language}&v=${this.version}`);
   }
 }

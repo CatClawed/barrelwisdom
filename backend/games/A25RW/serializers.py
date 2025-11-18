@@ -142,11 +142,13 @@ class A25RWRecipeSerializer(DefaultSerializer):
         model = Ingredient
         fields = ['cat', 'ing']
 
-class A25RWIngredientSerializer(DefaultSerializer):
-    item = A25RWItemSimpleSerializer()
-    class Meta:
-        model = Ingredient
-        fields = ['item']
+class A25RWIngredientSerializer(serializers.Field):
+    def to_representation(self, ingredient_instance):
+        return A25RWItemSimpleSerializer(
+            instance=ingredient_instance.item,
+            read_only=True,
+            context=self.context # Pass the context explicitly
+        ).data
 
 class A25RWItemListSerializer(DefaultSerializer):
     categories = A25RWCategorySimpleSerializer(many=True, read_only=True)
@@ -191,7 +193,10 @@ class A25RWItemSerializer(DefaultSerializer):
 class A25RWCategorySerializer(DefaultSerializer):
     items = A25RWItemSimpleSerializer(source='item_set', many=True, read_only=True)
     addcat = A25RWItemSimpleSerializer(many=True, read_only=True)
-    used = A25RWIngredientSerializer(source='ingredient_set', many=True, read_only=True)
+    used = serializers.ListSerializer(
+        child=A25RWIngredientSerializer(),
+        source='ingredient_set', read_only=True
+    )
     class Meta:
         model = Category
         auto_translated_fields = ['name']

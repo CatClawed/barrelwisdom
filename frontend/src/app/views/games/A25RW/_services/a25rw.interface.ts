@@ -51,3 +51,49 @@ export interface Effect {
     items: NameLink[];
     dlc: boolean;
 }
+
+export type IndexedDescriptions = {
+    [key: `desc${number}`]: string;
+    [key: `char${number}`]: string;
+}
+
+export interface Area {
+    floor_min: number;
+    floor_max: number;
+    area: string;
+    tool: string;
+    rank: number;
+}
+
+export interface Monster extends IndexedDescriptions {
+    id: number;
+    name: string;
+    race: string;
+    index: number;
+    area: Area[];
+    hp: number;
+    atk: number;
+    dfn: number;
+    spd: number;
+    physical: number;
+    magic: number;
+    fire: number;
+    ice: number;
+    air: number;
+    bolt: number;
+    blind: number;
+    paralysis: number;
+    poison: number;
+    burn: number;
+    taunt: number;
+    sleep: number;
+    daze: number;
+    frostbite: number;
+    drops: NameLink[];
+}
+
+export interface Category {
+    items: NameLink[];
+    addcat: NameLink[];
+    used: NameLink[];
+}

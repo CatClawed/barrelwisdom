@@ -1,0 +1,24 @@
+@if (!error) {
+  <ng-template #template let-mon="item">
+    <item
+      [item]="mon"
+      url="/{{gameURL}}/monsters/{{mon.id}}/{{language}}"
+      (buttonClicked)="openDialog($event)"
+      dimension="256"
+      imgURL="{{imgURL}}monsters/{{mon.id}}.webp?v=1">
+    </item>
+  </ng-template>
+  <filter-list [list]="filteredMonsters" name="Monsters" [(hide)]="hide" [template]="template">
+    <form [formGroup]="pageForm" class="grid">
+      <mat-form-field class="grid-8" appearance="outline">
+        <mat-label>Filter...</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtertext">
+      </mat-form-field>
+      <div class="grid-4 svg-filter">
+        <svg (click)="toggle(this.pageForm.controls.small, this.things)"  style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.small.value ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}test.svg?v=4#enemy-small"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.large, this.things)"  style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.large.value ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}test.svg?v=4#enemy-large"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.boss, this.things)"   style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.boss.value  ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}test.svg?v=4#enemy-boss" ></use></svg>
+      </div>
+    </form>
+  </filter-list>
+}

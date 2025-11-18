@@ -67,7 +67,8 @@ class A25RWEnemyViewSet(DefaultViewSet):
                 'race',
             )
         )
-        return Response(A25RWEnemySimpleSerializer(queryset, many=True).data)
+        return Response(A25RWEnemySimpleSerializer(queryset,
+            many=True, context=self.get_serializer_context()).data)
 
 class A25RWItemViewSet(DefaultViewSet):
     queryset = (
@@ -122,7 +123,8 @@ class A25RWItemViewSet(DefaultViewSet):
                 'add__name',
             )
         )
-        return Response(A25RWItemListSerializer(queryset, many=True).data)
+        return Response(A25RWItemListSerializer(queryset,
+            many=True, context=self.get_serializer_context()).data)
 
 class A25RWShopViewSet(DefaultViewSet):
     queryset = (
@@ -177,4 +179,5 @@ class A25RWCategoryViewSet(DefaultViewSet):
                 'name',
             )
         )
-        return Response(A25RWCategorySimpleSerializer(queryset, many=True).data)
+        return Response(A25RWCategorySimpleSerializer(queryset,
+            many=True, context=self.get_serializer_context()).data)

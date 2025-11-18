@@ -44,6 +44,45 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'monsters',
+    children: [
+      {
+        path: ':subject/:language',
+        loadComponent: ()=> import('@app/views/games/A25RW/monster/a25rw-monster.component').then(m=>m.A25RWMonsterComponent),
+        canActivate: [LanguageGuard]
+      },
+      {
+        path: ':language',
+        loadComponent: ()=> import('@app/views/games/A25RW/monster/a25rw-monsterlist.component').then(m=>m.A25RWMonsterlistComponent),
+        canActivate: [LanguageGuard]
+      },
+      {
+        path: '',
+        loadComponent: ()=> import('@app/views/games/A25RW/monster/a25rw-monsterlist.component').then(m=>m.A25RWMonsterlistComponent),
+        canActivate: [LanguageGuard]
+      }
+    ]
+  },
+  {
+    path: 'categories',
+    children: [
+      {
+        path: ':subject',
+        loadComponent: ()=> import('@app/views/games/A25RW/category/a25rw-category.component').then(m=>m.A25RWCategoryComponent),
+        canActivate: [LanguageGuard]
+      },
+      {
+        path: ':subject/:language',
+        loadComponent: ()=> import('@app/views/games/A25RW/category/a25rw-category.component').then(m=>m.A25RWCategoryComponent),
+        canActivate: [LanguageGuard]
+      },
+      {
+        path: '',
+        loadComponent: () => import('@app/views/_components/error/error.component').then(m=>m.ErrorComponent)
+      }
+    ]
+  },
+  {
     path: '',
     redirectTo: '/resleriana-red-white/items',
     pathMatch: 'full'
