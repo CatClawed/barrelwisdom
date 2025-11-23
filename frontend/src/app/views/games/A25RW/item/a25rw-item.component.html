@@ -1,0 +1,284 @@
+@if (data; as item) {
+<div [class]="inputSlug ? 'card card-dialog' : 'card card-medium'">
+  <h4 class="card-title card-icon-space">{{item.name}}</h4>
+  <div class="card-icon-position">
+    <svg class="svg-icon">
+      <use attr.href="{{imgURL}}test.svg?v=4#{{item.icon}}"></use>
+    </svg>
+    @if (item.dlc) {
+    <br /><span class="badge bg-primary">DLC</span>
+    }
+  </div>
+  <img class="card-item-display" src="{{imgURL}}items/{{item.id}}.webp?v=1" alt="{{item.name}}"
+    style="aspect-ratio: 1; width: 200;">
+  <table>
+    <tbody>
+      @if (item.char1) {
+      <tr>
+        <td style="white-space: nowrap;"> <b>{{item.char1}}</b> </td>
+        <td style="padding-left: 0.5em;"> {{item.desc1}} </td>
+      </tr>
+      }
+      @if (item.char2) {
+      <tr>
+        <td style="white-space: nowrap;"> <b>{{item.char2}}</b> </td>
+        <td style="padding-left: 0.5em;"> {{item.desc2}} </td>
+      </tr>
+      }
+      @if (item.char3) {
+      <tr>
+        <td style="white-space: nowrap;"> <b>{{item.char3}}</b> </td>
+        <td style="padding-left: 0.5em;"> {{item.desc3}} </td>
+      </tr>
+      }
+      @if (item.char4) {
+      <tr>
+        <td style="white-space: nowrap;"> <b>{{item.char4}}</b> </td>
+        <td style="padding-left: 0.5em;"> {{item.desc4}} </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+  <div class="two-column" style="height:100%;">
+    @if (item.colors && item.colors.length > 1) {
+    <div style="display: flex; line-height: 1.8em;">
+      @for (c of item.colors; track c) {
+      <svg style="width:0.9em;height:1.8em;fill:{{a25rwservice.colors[c.l]}};">
+        <use attr.href="{{imgURL}}test.svg?v=4#color-l"></use>
+      </svg>
+      <svg style="width:0.9em;height:1.8em;fill:{{a25rwservice.colors[c.r]}};">
+        <use attr.href="{{imgURL}}test.svg?v=4#color-r"></use>
+      </svg>
+      }
+    </div>
+    }
+    <ul style="padding-left: 0;">
+      @for (cat of item.categories; track cat) {
+      <li style="display: flex;">
+        <svg class="svg-icon">
+          <use attr.href="{{imgURL}}test.svg?v=4#category-{{cat.id}}"></use>
+        </svg>
+        <a routerLink="/{{gameURL}}/categories/{{cat.id}}/{{language}}">
+          {{cat.name}}
+        </a>
+      </li>
+      }
+      @for (cat of item.add; track cat) {
+      <li style="display: flex;">
+        <svg class="svg-icon" style="fill:gray;">
+          <use attr.href="{{imgURL}}test.svg?v=4#category-{{cat.id}}"></use>
+        </svg>
+        <a routerLink="/{{gameURL}}/categories/{{cat.id}}/{{language}}">
+          {{cat.name}}
+        </a>
+      </li>
+      }
+    </ul>
+  </div>
+  @if (item.shop) {
+  <b><svg class="svg-icon" style="vertical-align:middle;">
+      <use attr.href="{{imgURL}}test.svg?v=4#shop"></use>
+    </svg> {{a25rwservice.shop_translation[language]}}</b>
+  <ul>
+    @for (shop of item.shop; track shop) {
+    <li>
+      <a routerLink="/{{gameURL}}/shops/{{language}}" fragment="{{shop.name}}">{{shop.name}}</a>
+    </li>
+    }
+  </ul>
+  }
+  @if (item.quest) {
+  <p><b>{{a25rwservice.orders[language]}}</b> {{item.quest[0].char}} - {{item.quest[0].name}}</p>
+  }
+  @if (item.drop) {
+  <b>{{a25rwservice.monster_translation[language]}}</b>
+  <ul>
+    @for (mon of item.drop; track mon) {
+    <li>
+      <a routerLink="/{{gameURL}}/monsters/{{mon.id}}/{{language}}">{{mon.name}}</a>
+    </li>
+    }
+  </ul>
+  }
+  @if (item.book) {
+  <b>{{a25rwservice.recipebook_translation[language]}}:</b>
+  <ul style="list-style: none;">
+    <li>
+      {{item.book.name}}
+    </li>
+    <li>
+      @if (item.book.shop) {
+      <svg class="svg-icon" style="vertical-align:middle;">
+        <use attr.href="{{imgURL}}test.svg?v=4#shop"></use>
+      </svg>
+      <a routerLink="/{{gameURL}}/shops/{{language}}" fragment="{{item.book.shop[0].name}}">{{item.book.shop[0].name}}</a>
+      }
+      @if (item.book.areas) {
+      <svg class="svg-icon" style="vertical-align:middle;">
+        <use attr.href="{{imgURL}}test.svg?v=4#{{item.book.areas[0].tool}}"></use>
+      </svg>
+      {{item.book.areas[0].area}} @if (item.book.areas[0].floor_max) { ({{item.book.areas[0].floor_min}} -
+      {{item.book.areas[0].floor_max}}) }
+      }
+    </li>
+  </ul>
+  }
+  @if (item.areas) {
+  <table class="tbl">
+    <tbody>
+      <tr>
+        <th colspan="2">{{a25rwservice.location_translation[language]}}</th>
+      </tr>
+      @for (area of item.areas; track area) {
+      <tr>
+        <td>
+          @if (area.tool !== 'chest') {
+            @for (i of [].constructor(3); let index = $index; track i) {
+              <svg class="svg-icon" [style]="area.rank >= index + 1 ? `` : `fill:lightgray;`">
+                <use attr.href="{{imgURL}}test.svg?v=4#{{area.tool}}"></use>
+              </svg>
+            }
+          }
+          @else {
+          <svg class="svg-icon">
+            <use attr.href="{{imgURL}}test.svg?v=4#{{area.tool}}"></use>
+          </svg>
+          }
+        </td>
+        <td>
+          {{area.area}} @if (area.floor_max) { ({{area.floor_min}} - {{area.floor_max}}) }
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+  }
+  @if (item.tree) {
+    <table class="tbl"><tbody>
+      <tr><th>{{a25rwservice.recipe_tree[language]}}</th></tr>
+      <tr><td>
+        <a25rw-tree [tree]="item.tree" [imgURL]="imgURL" [gameURL]="gameURL" [language]="language"></a25rw-tree>
+      </td></tr>
+    </tbody></table>
+  }
+  @if (item.effects) {
+  <table class="tbl">
+    <tbody>
+      <tr>
+        <th colspan=2>{{a25rwservice.effect_translation[language]}}</th>
+      </tr>
+      <tr>
+        <td>
+          <ol>
+            @for (eff of item.effects; track eff) {
+            <li>
+              <ng-template #effPopover>
+                <p>{{eff.desc}}</p>
+                @if (eff.val1_1) {
+                  <b>Advanced Data:</b>
+                  <ul>
+                    @if (eff.val1_1) { <li><b>Value 1: </b>{{eff.val1_1}} @if (eff.val1_2) { ~ {{eff.val1_2}}} </li> }
+                    @if (eff.val2_1) { <li><b>Value 2: </b>{{eff.val2_1}} @if (eff.val2_2) { ~ {{eff.val2_2}}} </li> }
+                    @if (eff.val3_1) { <li><b>Value 3: </b>{{eff.val3_1}} @if (eff.val3_2) { ~ {{eff.val3_2}}} </li> }
+                    @if (eff.val4_1) { <li><b>Value 4: </b>{{eff.val4_1}} @if (eff.val4_2) { ~ {{eff.val4_2}}} </li> }
+                    @if (eff.val5_1) { <li><b>Value 5: </b>{{eff.val5_1}} @if (eff.val5_2) { ~ {{eff.val5_2}}} </li> }
+                  </ul>
+                }
+                @if (eff.flag) {
+                  <a routerLink="/{{gameURL}}/effects/{{eff.id}}/{{language}}">Permalink</a>
+                }
+              </ng-template>
+              @if (eff.id != 761) {
+              <popover [template]="effPopover" [name]="eff.name"
+                [url]="eff.flag ? `/${gameURL}/effects/${eff.id}/${language}` : ``">
+                {{eff.name}}
+              </popover>
+              }
+              @else {
+              {{eff.name}}
+              }
+            </li>
+            }
+          </ol>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  }
+  @if (item.recipe) {
+    <table class="tbl"><tbody>
+      <tr>
+        <th colspan=2>{{a25rwservice.synthesis_recipe[language]}}</th>
+      </tr>
+      <tr>
+        <td style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; padding-top: 1.4em;">
+          <div style="display: flex; margin: -1.5em auto 1.5em auto;">
+            <svg style="width:50%; aspect-ratio:1/2; max-width:100px; fill:{{a25rwservice.colors[item.colors[0].l]}};">
+              <use attr.href="{{imgURL}}test.svg?v=4#color-l"></use>
+            </svg>
+            <svg style="width:50%; aspect-ratio:1/2; max-width:100px; fill:{{a25rwservice.colors[item.colors[0].r]}};">
+              <use attr.href="{{imgURL}}test.svg?v=4#color-r"></use>
+            </svg>
+          </div>
+
+          @for (ing of item.recipe; track ing) {
+            @if (ing.cat) {
+            <a routerLink="/{{gameURL}}/categories/{{ing.cat.id}}/{{language}}"
+              style="display: flex; flex-direction: column; text-align: center; align-items: center; font-size: min(1em, 3vw);">
+              <div style="display: flex; aspect-ratio: 1; max-width: 200px; border: 3px solid #44444455; background: radial-gradient(circle,rgba(142, 148, 173, 1) 0%, rgba(210, 212, 213, 1) 100%); border-radius:12%; width:calc(100%/1.41421356237);  transform: rotate(45deg); margin-bottom: 1.5em;">
+                <svg style='width: 70%; margin: auto; transform: rotate(-45deg); aspect-ratio:1; fill:white; filter: drop-shadow(4px 6px 8px gray);'>
+                  <use attr.href="{{imgURL}}test.svg?v=4#category-{{ing.cat.id}}"></use>
+                </svg>
+              </div>
+              {{ing.cat.name}}
+            </a>
+            }
+          }
+        </td>
+      </tr>
+      <tr>
+        <th colspan=2>{{a25rwservice.required_ing[language]}}</th>
+      </tr>
+      <tr>
+        <td style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; column-gap: 1em;">
+          @for (ing of item.recipe; track ing) {
+          @if (ing.ing) {
+          <a routerLink="/{{gameURL}}/items/{{ing.ing.id}}/{{language}}"
+            style="display: flex; flex-direction: column; text-align: center; font-size: min(1em, 3vw);">
+            <div
+              style="display: flex; aspect-ratio: 1; max-width: 200px; border-radius: 50%; background-image: url({{imgURL}}item-frame.svg); background-size: contain; background-repeat: no-repeat; background-color: #fff5cf; filter: drop-shadow(2px 4px 6px black); margin-bottom: 1.5em;">
+              <img src="{{imgURL}}items/{{ing.ing.id}}.webp?v=1" alt="{{ing.ing.name}}"
+                style="aspect-ratio: 1; width: 90%; max-width: 200px; margin: auto;">
+            </div>
+            {{ing.ing.name}}
+          </a>
+          }
+          }
+        </td>
+      </tr>
+    </tbody></table>
+  }
+  @if (item.mix) {
+    <table class="tbl"><tbody>
+      <tr>
+        <th colspan=2>{{a25rwservice.item_mix[language]}}</th>
+      </tr>
+      @for (m of item.mix; track m) {
+        <tr>
+          <td>{{m.name}}</td>
+          <td>
+            <ul>
+              @for (combo of m.combo; track combo) {
+                <li>
+                  <a routerLink="/{{gameURL}}/items/{{combo.id}}/{{language}}">{{combo.name}}</a>
+                </li>
+              }
+            </ul>
+          </td>
+        </tr>
+      }
+    </tbody></table>
+  }
+
+</div>
+}

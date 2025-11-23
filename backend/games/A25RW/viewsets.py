@@ -122,6 +122,7 @@ class A25RWItemViewSet(DefaultViewSet):
                 'categories__name',
                 'add__name',
             )
+            .filter(visible=True)
         )
         return Response(A25RWItemListSerializer(queryset,
             many=True, context=self.get_serializer_context()).data)

@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Category, Effect, Monster, Trait } from '@app/views/games/A25RW/_services/a25rw.interface';
+import { Category, Effect, Item, Monster, Shop, Trait, Trees } from '@app/views/games/A25RW/_services/a25rw.interface';
 import { environment } from '@environments/environment';
-import { category_translation, effect_translation, filter_translation, item_translation, monster_translation, race_translation, stat_translation, trait_translation } from '@environments/localization';
+import { shop_translation, category_translation, effect_translation, filter_translation, ingredient_translation, item_translation, location_translation, monster_translation, race_translation, recipebook_translation, stat_translation, trait_translation, drop_translation } from '@environments/localization';
 import { Observable } from 'rxjs';
 
 
@@ -22,6 +22,10 @@ export class A25RWService {
   public readonly category_translation = category_translation
   public readonly filter_translation = filter_translation
   public readonly race_translation = race_translation
+  public readonly location_translation = location_translation
+  public readonly recipebook_translation = recipebook_translation
+  public readonly ingredient_translation = ingredient_translation
+  public readonly shop_translation = shop_translation
 
   public readonly gameTitle = {
     "en": "Atelier Resleriana: The Red Alchemist & the White Guardian",
@@ -38,7 +42,56 @@ export class A25RWService {
     'blue':   '#3883ad',
     'green':  '#3eb880',
     'yellow': '#c9af47',
-    'purple': '#ac48b9'
+    'purple': '#ac48b9',
+    '--': 'gray',
+  }
+
+  public readonly orders = {
+    'en': 'Order',
+    'ja': '依頼発注',
+    'tc': '發送委託',
+    'sc': '发起委托',
+    'ko': '발주 의뢰',
+  }
+
+  public readonly synthesis_recipe = {
+    'en': 'Synthesis Recipes',
+    'ja': '調合レシピ',
+    'tc': '調合配方',
+    'sc': '调合配方',
+    'ko': '조합 레시피',
+  };
+
+  public readonly required_ing = {
+    'en': 'Required Ingredients',
+    'ja': '必要素材',
+    'tc': '所需素材',
+    'sc': '所需素材',
+    'ko': '필요 소재',
+  };
+
+  public readonly recipe_tree = {
+    'en': 'Recipe Tree',
+    'ja': 'レシピ派生図',
+    'tc': '配方衍生圖',
+    'sc': '配方衍生图',
+    'ko': '레시피 파생도',
+  };
+
+  public readonly item_mix = {
+    'en': 'Item Mix',
+    'ja': 'アイテムミックス',
+    'tc': '道具混搭',
+    'sc': '道具混搭',
+    'ko': '아이템 믹스',
+  };
+
+  public readonly colorNames = {
+    'red':    {'en': 'Red',    'ja':'赤', 'tc':'紅', 'sc':'红', 'ko':'적'},
+    'blue':   {'en': 'Blue',   'ja':'青', 'tc':'藍', 'sc':'蓝', 'ko':'청'},
+    'green':  {'en': 'Green',  'ja':'緑', 'tc':'綠', 'sc':'绿', 'ko':'녹'},
+    'yellow': {'en': 'Yellow', 'ja':'黄', 'tc':'黃', 'sc':'黄', 'ko':'황'},
+    'purple': {'en': 'Purple', 'ja':'紫', 'tc':'紫', 'sc':'紫', 'ko':'자'},
   }
 
   public readonly colorList = {
@@ -88,5 +141,21 @@ export class A25RWService {
 
   getCategory(slug: string, language: string): Observable<Category> {
     return this.http.get<Category>(`${environment.apiUrl}/A25RW/category/${slug}/?lang=${language}&v=${this.version}`);
+  }
+
+  getItemList(language: string): Observable<Item[]> {
+    return this.http.get<Item[]>(`${environment.apiUrl}/A25RW/item/?lang=${language}&v=${this.version}`);
+  }
+
+  getItem(slug: string, language: string): Observable<Item> {
+    return this.http.get<Item>(`${environment.apiUrl}/A25RW/item/${slug}/?lang=${language}&v=${this.version}`);
+  }
+
+  getTreeList(language: string): Observable<Trees[]> {
+    return this.http.get<Trees[]>(`${environment.apiUrl}/A25RW/tree/?lang=${language}&v=${this.version}`);
+  }
+
+  getShopList(language: string): Observable<Shop[]> {
+    return this.http.get<Shop[]>(`${environment.apiUrl}/A25RW/shop/?lang=${language}&v=${this.version}`);
   }
 }

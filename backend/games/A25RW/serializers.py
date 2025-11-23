@@ -4,6 +4,7 @@ from games.A25RW.models import Category, Trait, Item, Enemy, Effect, EnemyArea, 
 
 A25RWCategorySimpleSerializer = create_simple_serializer(Category)
 A25RWItemSimpleSerializer = create_simple_serializer(Item)
+A25RWItemSimpleVisibleSerializer = create_simple_serializer(Item, fields=['id', 'name', 'visible'])
 A25RWTraitSimpleSerializer = create_simple_serializer(Trait)
 
 A25RWEnemySimpleSerializer = create_simple_serializer(Enemy,
@@ -19,7 +20,7 @@ A25RWGatherDataSerializer = create_simple_serializer(GatherData,
 
 A25RWEffectBasicSerializer = create_simple_serializer(Effect,
     auto_translated_fields = ['name', 'desc'],
-    fields = ['id', 'dlc', 'usable',
+    fields = ['id', 'dlc', 'usable', 'flag',
         'val1_1', 'val1_2', 'val2_1', 'val2_2',
         'val3_1', 'val3_2', 'val4_1', 'val4_2',
         'val5_1', 'val5_2',])
@@ -75,23 +76,16 @@ class A25RWEnemySerializer(DefaultSerializer):
             'areas', 'drops',
         ]
 
-class A25RWBookSerializer(DefaultSerializer):
-    areas = A25RWGatherDataSerializer(source='gatherdata_set', many=True, read_only=True)
-    class Meta:
-        model = Item
-        auto_translated_fields = ['name']
-        fields = ['areas']
-
 class A25RWShopSlotBasicSerializer(DefaultSerializer):
     name = TranslatedTextField(source='shop.name')
     class Meta:
         model = ShopSlot
         fields = [
-            'name'
+            'name', 'id'
         ]
 
 class A25RWShopSlotSerializer(DefaultSerializer):
-    item = A25RWItemSimpleSerializer(read_only=True)
+    item = A25RWItemSimpleVisibleSerializer(read_only=True)
     class Meta:
         model = ShopSlot
         fields = [
@@ -107,15 +101,25 @@ class A25RWShopSerializer(DefaultSerializer):
             'slots',
         ]
 
+class A25RWBookSerializer(DefaultSerializer):
+    areas = A25RWGatherDataSerializer(source='gatherdata_set', many=True, read_only=True)
+    shop = A25RWShopSlotBasicSerializer(source='shopslot_set', many=True, read_only=True)
+    class Meta:
+        model = Item
+        auto_translated_fields = ['name']
+        fields = ['areas', 'shop']
+
 class A25RWRecipeNodeSerializer(DefaultSerializer):
     ing = A25RWItemSimpleSerializer()
     recipe = A25RWItemSimpleSerializer()
+    char = serializers.SerializerMethodField()
     class Meta:
         model = RecipeNode
-        auto_translated_fields = ['char']
         fields = [
-            'ancient', 'ing', 'recipe', 'row', 'down', 'left',
+            'ancient', 'ing', 'recipe', 'row', 'down', 'left', 'char',
         ]
+    def get_char(self, obj):
+        return obj.char.text_en if obj.char else None
 
 class A25RWRecipeTreeSerializer(DefaultSerializer):
     nodes = A25RWRecipeNodeSerializer(source='recipenode_set', many=True, read_only=True)
@@ -142,22 +146,27 @@ class A25RWRecipeSerializer(DefaultSerializer):
         model = Ingredient
         fields = ['cat', 'ing']
 
-class A25RWIngredientSerializer(serializers.Field):
-    def to_representation(self, ingredient_instance):
-        return A25RWItemSimpleSerializer(
-            instance=ingredient_instance.item,
-            read_only=True,
-            context=self.context # Pass the context explicitly
-        ).data
-
 class A25RWItemListSerializer(DefaultSerializer):
     categories = A25RWCategorySimpleSerializer(many=True, read_only=True)
     add = A25RWCategorySimpleSerializer(many=True, read_only=True)
+    colors = serializers.SerializerMethodField()
     class Meta:
         model = Item
         auto_translated_fields = ['name']
-        fields = ['id', 'icon', 'dlc', 'categories', 'add',
-            'c1l', 'c1r', 'c2l', 'c2r', 'c3l', 'c3r', 'c4l', 'c4r', 'c5l', 'c5r',
+        fields = ['id', 'icon', 'dlc', 'categories', 'add', 'colors',]
+    def get_colors(self, obj):
+        if not obj.c1l:
+            return
+        elif obj.c2l:
+            return [
+                {'l': obj.c1l, 'r': obj.c1r},
+                {'l': obj.c2l, 'r': obj.c2r},
+                {'l': obj.c3l, 'r': obj.c3r},
+                {'l': obj.c4l, 'r': obj.c4r},
+                {'l': obj.c5l, 'r': obj.c5r},
+            ]
+        return [
+            {'l': obj.c1l, 'r': obj.c1r},
         ]
 
 class A25RWItemSerializer(DefaultSerializer):
@@ -173,6 +182,7 @@ class A25RWItemSerializer(DefaultSerializer):
     mix = A25RWItemMixSerializer(source='itemmix_set', many=True, read_only=True)
     quest = A25RWQuestSerializer(source='quest_set', many=True, read_only=True)
     drop = A25RWEnemySimpleSerializer(source='enemy_set', many=True)
+    colors = serializers.SerializerMethodField()
 
     class Meta:
         model = Item
@@ -180,8 +190,7 @@ class A25RWItemSerializer(DefaultSerializer):
             'char1', 'char2', 'char3', 'char4',
             'desc1', 'desc2', 'desc3', 'desc4',
         ]
-        fields = ['id', 'icon', 'dlc', 'categories', 'add', 'effects',
-            'c1l', 'c1r', 'c2l', 'c2r', 'c3l', 'c3r', 'c4l', 'c4r', 'c5l', 'c5r',
+        fields = ['id', 'icon', 'dlc', 'categories', 'add', 'effects', 'colors',
             'quantity', 'uses', 'areas', 'book', 'trait', 'shop', 'drop',
             'tree', 'mix', 'quest', 'recipe',
         ]
@@ -189,15 +198,33 @@ class A25RWItemSerializer(DefaultSerializer):
         if not hasattr(obj, 'recipenode'):
             return
         return A25RWRecipeNodeSerializer(obj.recipenode.tree_model.recipenode_set.all(), many=True, context=self.context).data
+    def get_colors(self, obj):
+        if not obj.c1l:
+            return
+        elif obj.c2l:
+            return [
+                {'l': obj.c1l, 'r': obj.c1r},
+                {'l': obj.c2l, 'r': obj.c2r},
+                {'l': obj.c3l, 'r': obj.c3r},
+                {'l': obj.c4l, 'r': obj.c4r},
+                {'l': obj.c5l, 'r': obj.c5r},
+            ]
+        return [
+            {'l': obj.c1l, 'r': obj.c1r},
+        ]
 
 class A25RWCategorySerializer(DefaultSerializer):
-    items = A25RWItemSimpleSerializer(source='item_set', many=True, read_only=True)
+    items = serializers.SerializerMethodField()
     addcat = A25RWItemSimpleSerializer(many=True, read_only=True)
-    used = serializers.ListSerializer(
-        child=A25RWIngredientSerializer(),
-        source='ingredient_set', read_only=True
-    )
+    used = serializers.SerializerMethodField()
     class Meta:
         model = Category
         auto_translated_fields = ['name']
         fields = ['items', 'addcat', 'used']
+
+    def get_items(self,obj):
+        return A25RWItemSimpleSerializer([item for item in obj.item_set.all()
+            if item.visible], many=True, context=self.context).data
+    def get_used(self, obj):
+        return A25RWItemSimpleSerializer([ing.item for ing in
+        obj.ingredient_set.all()], many=True, context=self.context).data

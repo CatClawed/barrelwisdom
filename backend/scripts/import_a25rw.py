@@ -296,7 +296,7 @@ def gatherdata(row, index):
                         area__text_en=row['Area'],
                         item=item,
                         rank=i,
-                        tool=row['GatherType'].lower(),
+                        tool=row['GatherType'].lower().replace(' ', '-'),
                         floor_min=row['Floors'][0] if row['Floors'] else None,
                         floor_max=row['Floors'][1] if row['Floors'] else None,
                     )

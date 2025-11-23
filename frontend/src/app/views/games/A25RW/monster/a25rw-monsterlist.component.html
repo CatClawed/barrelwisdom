@@ -8,7 +8,7 @@
       imgURL="{{imgURL}}monsters/{{mon.id}}.webp?v=1">
     </item>
   </ng-template>
-  <filter-list [list]="filteredMonsters" name="Monsters" [(hide)]="hide" [template]="template">
+  <filter-list [list]="filteredMonsters" [name]="a25rwservice.monster_translation[language]" [(hide)]="hide" [template]="template">
     <form [formGroup]="pageForm" class="grid">
       <mat-form-field class="grid-8" appearance="outline">
         <mat-label>Filter...</mat-label>

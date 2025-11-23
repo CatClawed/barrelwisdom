@@ -172,3 +172,23 @@ export const recipebook_translation = {
     "tc": "配方書",
     "ko": "레시피책",
 }
+
+export const shop_translation = {
+    "en": "Shop",
+    "ja": "ショップ",
+    "sc": "商店",
+    "tc": "商店",
+    "de": "Laden",
+    "fr": "Boutique",
+    "ko": "상점",
+    "ru": "Лавка",
+    "es": "Tienda"
+}
+
+export const drop_translation = {
+    "en": "Dropped by",
+    "ja": "落とす魔物",
+    "sc": "掉落的魔物",
+    "tc": "掉落的魔物",
+    "ko": "떨어뜨리는 몬스터",
+}

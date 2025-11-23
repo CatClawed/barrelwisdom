@@ -1,0 +1,107 @@
+@if (!error) {
+  <ng-template #template let-item="item">
+    <item
+      [item]="item"
+      url="/{{gameURL}}/items/{{item.id}}/{{language}}"
+      (buttonClicked)="openDialog($event)"
+      [imgURL]="`${imgURL}items/${item.id}.webp?v=1`"
+      dimension="200">
+      <ng-container icon>
+        <svg class="svg-icon"><use attr.href="{{imgURL}}test.svg?v=4#{{item.icon}}"></use></svg>
+        @if (item.dlc) {
+          <br /><span class="badge bg-primary">DLC</span>
+        }
+      </ng-container>
+      <div class="two-column" style="height:100%;">
+        @if (item.colors) {
+          <div style="display: flex; line-height: 1.8em;">
+            @for (c of item.colors; track c) {
+              <svg style="width:0.9em;height:1.8em;fill:{{a25rwservice.colors[c.l]}};"><use attr.href="{{imgURL}}test.svg?v=4#color-l"></use></svg>
+              <svg style="width:0.9em;height:1.8em;fill:{{a25rwservice.colors[c.r]}};"><use attr.href="{{imgURL}}test.svg?v=4#color-r"></use></svg>
+            }
+          </div>
+        }
+        <ul style="padding-left: 0;">
+          @for (cat of item.categories; track cat) {
+            <li style="display: flex;">
+              <svg class="svg-icon"><use attr.href="{{imgURL}}test.svg?v=4#category-{{cat.id}}"></use></svg>
+              {{cat.name}}
+            </li>
+          }
+          @for (cat of item.add; track cat) {
+            <li style="display: flex;">
+              <svg class="svg-icon" style="fill:gray;"><use attr.href="{{imgURL}}test.svg?v=4#category-{{cat.id}}"></use></svg>
+              {{cat.name}}
+            </li>
+          }
+        </ul>
+      </div>
+    </item>
+  </ng-template>
+  <filter-list
+    [list]="filteredItems"
+    name="{{a25rwservice.item_translation[language]}}"
+    [(hide)]="hide"
+    [template]="template">
+    <form [formGroup]="pageForm" class="grid">
+      <mat-form-field class="grid-10" appearance="outline">
+        <mat-label>{{a25rwservice.filter_translation[language]}}</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtertext">
+        <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
+      </mat-form-field>
+      <div class="grid-2 svg-filter">
+        <button [matMenuTriggerFor]="menuLeft" style="background:none;border:none;padding-right:0.1rem;">
+          <svg style="width:3em;height:3em;fill:{{a25rwservice.colors[pageForm.get('colorL').value]}};"><use attr.href="{{imgURL}}test.svg?v=4#color-l"></use></svg>
+        </button>
+        <button [matMenuTriggerFor]="menuRight" style="background:none;border:none;padding-left:0.1rem;">
+          <svg style="width:3em;height:3em;fill:{{a25rwservice.colors[pageForm.get('colorR').value]}};"><use attr.href="{{imgURL}}test.svg?v=4#color-r"></use></svg>
+        </button>
+        <mat-menu #menuLeft="matMenu">
+          <button mat-menu-item (click)="pageForm.controls['colorL'].setValue('--')">
+            --
+          </button>
+          @for (color of ['red', 'blue', 'green', 'yellow', 'purple']; track color) {
+            <button mat-menu-item (click)="pageForm.controls['colorL'].setValue(color)">
+              {{a25rwservice.colorNames[color][language]}}
+            </button>
+          }
+        </mat-menu>
+        <mat-menu #menuRight="matMenu">
+          <button mat-menu-item (click)="pageForm.controls['colorR'].setValue('--')">
+            --
+          </button>
+          @for (color of ['red', 'blue', 'green', 'yellow', 'purple']; track color) {
+            <button mat-menu-item (click)="pageForm.controls['colorR'].setValue(color)">
+              {{a25rwservice.colorNames[color][language]}}
+            </button>
+          }
+        </mat-menu>
+      </div>
+      <mat-form-field class="grid-4" appearance="outline">
+        <mat-label>{{a25rwservice.category_translation[language]}}</mat-label>
+        <mat-select matNativeControl formControlName="cat" disableOptionCentering="true" class="mat-select-icon">
+          <mat-option value="--" selected><div class="svg-icon-text-vertical-center"><div class="svg-icon"></div>--</div></mat-option>
+          @if (data) {
+            @for (cat of data.categories; track cat) {
+              <mat-option value="{{cat.name}}">
+                <div class="svg-icon-text-vertical-center">
+                  <svg class="svg-icon"><use attr.href="{{imgURL}}test.svg?v=4#category-{{cat.id}}"></use></svg>
+                  {{cat.name}}
+                </div>
+              </mat-option>
+            }
+          }
+        </mat-select>
+      </mat-form-field>
+      <div class="grid-6 svg-filter">
+        <svg (click)="toggle(this.pageForm.controls.ingredients, things)" style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.ingredients.value  ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}test.svg?v=4#guide-ingredients"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.catalyst, things)"    style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.catalyst.value     ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}test.svg?v=4#category-41"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.consumable, things)"  style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.consumable.value   ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}test.svg?v=4#guide-consumable-color"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.equip, things)"       style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.equip.value        ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}test.svg?v=4#guide-equip"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.search, things)"      style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.search.value       ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}test.svg?v=4#guide-search-color"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.synthesis, things)"   style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.synthesis.value    ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}test.svg?v=4#guide-synthesis-color"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.important, things)"   style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.important.value    ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}test.svg?v=4#guide-important-color"></use></svg>
+      </div>
+    </form>
+  </filter-list>
+}

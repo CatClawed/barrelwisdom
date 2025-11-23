@@ -189,3 +189,16 @@
   align-items: center;
   margin-bottom: 1em;
 }
+
+.svg-icon {
+  height: 1.7em;
+  width: 1.7em;
+  fill: black;
+  margin-right: 0.3em;
+}
+
+.svg-icon-text-vertical-center {
+  display:inline-flex;
+  line-height:1.7em;
+  align-content:center;
+}

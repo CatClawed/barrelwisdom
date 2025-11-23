@@ -1,6 +1,7 @@
 export interface NameLink {
     id: string;
     name: string;
+    visible: boolean;
 }
 
 export interface Gift {a
@@ -70,7 +71,7 @@ export interface Monster extends IndexedDescriptions {
     name: string;
     race: string;
     index: number;
-    area: Area[];
+    areas: Area[];
     hp: number;
     atk: number;
     dfn: number;
@@ -96,4 +97,80 @@ export interface Category {
     items: NameLink[];
     addcat: NameLink[];
     used: NameLink[];
+}
+
+export interface Book {
+    name: string;
+    areas: Area[];
+    shop: NameLink[];
+}
+
+export interface Recipe {
+    ing: NameLink;
+    cat: NameLink;
+}
+
+export interface ItemMix {
+    combo: NameLink[];
+    name: string;
+}
+
+export interface QuestData {
+    name: string;
+    char: string;
+}
+
+export interface Tree {
+    row: number;
+    down: boolean;
+    left: boolean;
+    recipe: NameLink;
+    ing: NameLink;
+    ancient: boolean;
+    char: string;
+    hide: boolean;
+}
+
+export interface Trees {
+    name: string;
+    nodes: Tree[];
+}
+
+export interface Color {
+    l: string;
+    r: string;
+}
+
+export interface Item extends IndexedDescriptions {
+    id: number;
+    name: string;
+    colors: Color[];
+    icon: string;
+    categories: NameLink[];
+    add: NameLink[];
+    dlc: boolean;
+    effects: Effect[];
+    quantity: number;
+    uses: number;
+    book: Book;
+    recipe: Recipe[];
+    trait: NameLink;
+    shop: NameLink[];
+    drop: NameLink[];
+    mix: ItemMix[];
+    quest: QuestData[];
+    tree: Tree[];
+}
+
+export interface Slot {
+    item: NameLink;
+    price: number;
+    level_min: number;
+    level_max: number;
+    grade: number;
+}
+
+export interface Shop {
+    name: string;
+    slots: Slot[];
 }

@@ -11,23 +11,23 @@
       alt="{{monster.name}}" style="aspect-ratio: 1; width: 256px;">
     <table><tbody>
       @if (monster.char1) {
-        <tr><td> <b>{{monster.char1}}</b> </td><td style="padding-left: 0.5em;">  {{monster.desc1}} </td></tr>
+        <tr><td style="white-space: nowrap;"> <b>{{monster.char1}}</b> </td><td style="padding-left: 0.5em;">  {{monster.desc1}} </td></tr>
       }
       @if (monster.char2) {
-        <tr><td> <b>{{monster.char2}}</b> </td><td style="padding-left: 0.5em;">  {{monster.desc2}} </td></tr>
+        <tr><td style="white-space: nowrap;"> <b>{{monster.char2}}</b> </td><td style="padding-left: 0.5em;">  {{monster.desc2}} </td></tr>
       }
       @if (monster.char3) {
-        <tr><td> <b>{{monster.char3}}</b> </td><td style="padding-left: 0.5em;">  {{monster.desc3}} </td></tr>
+        <tr><td style="white-space: nowrap;"> <b>{{monster.char3}}</b> </td><td style="padding-left: 0.5em;">  {{monster.desc3}} </td></tr>
       }
       @if (monster.char4) {
-        <tr><td> <b>{{monster.char4}}</b> </td><td style="padding-left: 0.5em;">  {{monster.desc4}} </td></tr>
+        <tr><td style="white-space: nowrap;"> <b>{{monster.char4}}</b> </td><td style="padding-left: 0.5em;">  {{monster.desc4}} </td></tr>
       }
     </tbody></table>
 
     <div class="grid">
       <div class="grid-6">
         @if (monster.areas) {
-          <b>Locations:</b>
+          <b>{{a25rwservice.location_translation[language]}}</b>
           <ul>
             @for (loc of monster.areas; track loc) {
               <li>{{loc.area}} @if(loc.floor_min) { ({{loc.floor_min}} - {{loc.floor_max}}) }</li>
@@ -35,7 +35,7 @@
           </ul>
         }
         @if (monster.drops) {
-          <b>Drops:</b>
+          <b>{{a25rwservice.item_translation[language]}}</b>
           <ul>
             @for (drop of monster.drops; track drop) {
               <li><a routerLink="/{{gameURL}}/items/{{drop.id}}/{{language}}">{{drop.name}}</a></li>

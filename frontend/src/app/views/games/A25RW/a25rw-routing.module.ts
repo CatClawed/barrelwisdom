@@ -64,6 +64,26 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'items',
+    children: [
+      {
+        path: ':subject/:language',
+        loadComponent: ()=> import('@app/views/games/A25RW/item/a25rw-item.component').then(m=>m.A25RWItemComponent),
+        canActivate: [LanguageGuard]
+      },
+      {
+        path: ':language',
+        loadComponent: ()=> import('@app/views/games/A25RW/item/a25rw-itemlist.component').then(m=>m.A25RWItemlistComponent),
+        canActivate: [LanguageGuard]
+      },
+      {
+        path: '',
+        loadComponent: ()=> import('@app/views/games/A25RW/item/a25rw-itemlist.component').then(m=>m.A25RWItemlistComponent),
+        canActivate: [LanguageGuard]
+      }
+    ]
+  },
+  {
     path: 'categories',
     children: [
       {
@@ -80,6 +100,36 @@ const routes: Routes = [
         path: '',
         loadComponent: () => import('@app/views/_components/error/error.component').then(m=>m.ErrorComponent)
       }
+    ]
+  },
+  {
+    path: 'recipe-trees',
+    children: [
+      {
+        path: ':language',
+        loadComponent: ()=> import('@app/views/games/A25RW/item/a25rw-recipe.component').then(m=>m.A25RWRecipeComponent),
+        canActivate: [LanguageGuard]
+      },
+      {
+        path: '',
+        loadComponent: ()=> import('@app/views/games/A25RW/item/a25rw-recipe.component').then(m=>m.A25RWRecipeComponent),
+        canActivate: [LanguageGuard]
+      },
+    ]
+  },
+  {
+    path: 'shops',
+    children: [
+      {
+        path: ':language',
+        loadComponent: ()=> import('@app/views/games/A25RW/shop/a25rw-shop.component').then(m=>m.A25RWShopComponent),
+        canActivate: [LanguageGuard]
+      },
+      {
+        path: '',
+        loadComponent: ()=> import('@app/views/games/A25RW/shop/a25rw-shop.component').then(m=>m.A25RWShopComponent),
+        canActivate: [LanguageGuard]
+      },
     ]
   },
   {

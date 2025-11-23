@@ -43,7 +43,7 @@ export class A25RWMonsterlistComponent extends DialogUseComponent {
     this.component = A25RWMonsterComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
-      small: true,
+      small: false,
       large: false,
       boss: false,
     })
