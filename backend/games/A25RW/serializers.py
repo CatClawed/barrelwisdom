@@ -3,12 +3,12 @@ from games._helpers.serializer_helper import DefaultSerializer, TranslatedTextFi
 from games.A25RW.models import Category, Trait, Item, Enemy, Effect, EnemyArea, GatherData, Shop, ShopSlot, RecipeNode, ItemMix, Quest, Ingredient, Gift, RecipeTree
 
 A25RWCategorySimpleSerializer = create_simple_serializer(Category)
-A25RWItemSimpleSerializer = create_simple_serializer(Item)
-A25RWItemSimpleVisibleSerializer = create_simple_serializer(Item, fields=['id', 'name', 'visible'])
+A25RWItemSimpleSerializer = create_simple_serializer(Item, fields=['id', 'name', 'dlc'])
+A25RWItemSimpleVisibleSerializer = create_simple_serializer(Item, fields=['id', 'name', 'visible', 'dlc'])
 A25RWTraitSimpleSerializer = create_simple_serializer(Trait)
 
 A25RWEnemySimpleSerializer = create_simple_serializer(Enemy,
-    fields=['id', 'name', 'index'])
+    fields=['id', 'name', 'index', 'dlc'])
 
 A25RWGiftSerializer = create_simple_serializer(Gift,
     fields = ['rc', 'lc',],
@@ -41,7 +41,7 @@ class A25RWTraitSerializer(DefaultSerializer):
     class Meta:
         model = Trait
         auto_translated_fields = ['name', 'desc']
-        fields = ['id', 'icon', 'gatherable',
+        fields = ['id', 'icon', 'gatherable', 'dlc',
             'syn', 'com', 'res', 'inh', 'boo',
             'wep', 'arm', 'acc', 'sta', 'exp',
             'val1_1', 'val1_2', 'val2_1', 'val2_2',
@@ -56,7 +56,8 @@ class A25RWEffectSerializer(DefaultSerializer):
         fields = ['id', 'dlc', 'usable',
             'val1_1', 'val1_2', 'val2_1', 'val2_2',
             'val3_1', 'val3_2', 'val4_1', 'val4_2',
-            'val5_1', 'val5_2', 'items'
+            'val5_1', 'val5_2', 'val6_1', 'val6_2',
+            'val7_1', 'val7_2', 'items'
         ]
 
 class A25RWEnemySerializer(DefaultSerializer):
@@ -68,7 +69,7 @@ class A25RWEnemySerializer(DefaultSerializer):
             'char1', 'char2', 'char3', 'char4',
             'desc1', 'desc2', 'desc3', 'desc4',
         ]
-        fields = ['id',
+        fields = ['id', 'dlc',
             'hp', 'atk', 'dfn', 'spd',
             'physical', 'magic', 'fire', 'ice', 'air', 'bolt',
             'blind', 'paralysis','poison','burn',
@@ -197,7 +198,7 @@ class A25RWItemSerializer(DefaultSerializer):
     def get_tree(self, obj):
         if not hasattr(obj, 'recipenode'):
             return
-        return A25RWRecipeNodeSerializer(obj.recipenode.tree_model.recipenode_set.all(), many=True, context=self.context).data
+        return A25RWRecipeNodeSerializer(obj.recipenode.tree_model.recipenode_set.filter(hide=False), many=True, context=self.context).data
     def get_colors(self, obj):
         if not obj.c1l:
             return

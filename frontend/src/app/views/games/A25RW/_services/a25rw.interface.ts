@@ -4,7 +4,7 @@ export interface NameLink {
     visible: boolean;
 }
 
-export interface Gift {a
+export interface Gift {
     rc: string;
     lc: string;
     character: string;
@@ -32,6 +32,7 @@ export interface Trait {
     item: NameLink;
     combo1: NameLink;
     combo2: NameLink;
+    dlc: boolean;
 }
 
 export interface Effect {
@@ -49,6 +50,10 @@ export interface Effect {
     val4_2: number;
     val5_1: number;
     val5_2: number;
+    val6_1: number;
+    val6_2: number;
+    val7_1: number;
+    val7_2: number;
     items: NameLink[];
     dlc: boolean;
 }
@@ -91,6 +96,7 @@ export interface Monster extends IndexedDescriptions {
     daze: number;
     frostbite: number;
     drops: NameLink[];
+    dlc: boolean;
 }
 
 export interface Category {

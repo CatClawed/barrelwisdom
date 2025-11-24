@@ -5,7 +5,7 @@
     <ol>
       @for (tree of trees; track tree) {
         <li>
-          <a href="/{{gameURL}}/recipe-ideas/{{language}}#{{tree.name}}"
+          <a href="/{{gameURL}}/recipe-trees/{{language}}#{{tree.name}}"
             (click)="$event.preventDefault();scroll(tree.name)">
             {{tree.name}}
           </a>

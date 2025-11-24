@@ -149,6 +149,9 @@ class A25RWTreeViewSet(DefaultViewSet):
             'name',
         )
         .prefetch_related(
+            Prefetch('recipenode_set',
+                queryset=RecipeNode.objects.filter(hide=False)
+            ),
             'recipenode_set__char',
             'recipenode_set__ing__name',
             'recipenode_set__recipe__name',

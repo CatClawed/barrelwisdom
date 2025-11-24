@@ -35,7 +35,7 @@ export class A25RWItemComponent extends SingleComponent {
 
   afterAssignment(): void {
     this.seoImage = `${this.imgURL}${this.section}/${this.data.id}.webp`;
-    this.genericSettings(this.data.name, this.data.desc ? this.data.desc : '',
+    this.genericSettings(this.data.name, this.data.desc1 ? this.data.desc1 : '',
       this.a25rwservice.item_translation[this.language],
       false,
       this.inputSlug ? false : true);

@@ -3,7 +3,7 @@
       [style]="url ? 'height:100%;' : null">
       <h4 class="card-title" style="margin-right:6rem;">
         @if (url) {
-          <svg style="width:1em;height:1em;margin-right:0.5em;"><use attr.href="{{imgURL}}test.svg?v=4#{{trait.icon}}"></use></svg>
+          <svg style="width:1em;height:1em;margin-right:0.5em;"><use attr.href="{{imgURL}}spritesheet.svg?v=1#{{trait.icon}}"></use></svg>
           <a (click)="$event.preventDefault(); buttonClicked.emit(trait.id);"
             href="{{url}}">{{trait.name}}</a>
         }
@@ -12,6 +12,9 @@
         }
       </h4>
       <div class="card-icon-position">
+        @if (trait.dlc) {
+          <span class="badge bg-primary">DLC</span><br />
+        }
         <tooltip tip="A measure of rarity. This number determines where traits appear.">Grade: </tooltip>
         @if (trait.grade) {
           {{trait.grade}}
@@ -30,15 +33,15 @@
           </div>
       }
       @if (trait.item) {
-        <a routerLink="/{{gameURL}}/items/{{trait.item.id}}/{{language}}"><svg style="width:1em;height:1em;"><use attr.href="{{imgURL}}test.svg?v=4#guide-ingredients"></use></svg> {{trait.item.name}}</a>
+        <a routerLink="/{{gameURL}}/items/{{trait.item.id}}/{{language}}"><svg style="width:1em;height:1em;"><use attr.href="{{imgURL}}spritesheet.svg?v=1#guide-ingredients"></use></svg> {{trait.item.name}}</a>
       }
       <p>{{trait.desc}}</p>
       @if (trait.gift) {
         <ul style="list-style-type:none; padding: 0;">
           @for (g of trait.gift; track g) {
             <li style="display: flex; line-height: 1.8em;">
-              <svg style="width:0.9em;height:1.8em;fill:{{a25rwservice.colors[g.lc]}};"><use attr.href="{{imgURL}}test.svg?v=4#color-l"></use></svg>
-              <svg style="margin-right: 0.5em;width:0.9em;height:1.8em;fill:{{a25rwservice.colors[g.rc]}};"><use attr.href="{{imgURL}}test.svg?v=4#color-r"></use></svg>
+              <svg style="width:0.9em;height:1.8em;fill:{{a25rwservice.colors[g.lc]}};"><use attr.href="{{imgURL}}spritesheet.svg?v=1#color-l"></use></svg>
+              <svg style="margin-right: 0.5em;width:0.9em;height:1.8em;fill:{{a25rwservice.colors[g.rc]}};"><use attr.href="{{imgURL}}spritesheet.svg?v=1#color-r"></use></svg>
               {{g.character}}
             </li>
           }
@@ -57,18 +60,18 @@
         </ul>
       }
       <div class="flex bottom" style="text-align:center;height: 100%;">
-        <svg style="width:1.8em;height:1.8em;fill:{{trait.com  ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}test.svg?v=4#trait-combat-items"></use></svg>
-        <svg style="width:1.8em;height:1.8em;fill:{{trait.res  ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}test.svg?v=4#trait-heal"></use></svg>
-        <svg style="width:1.8em;height:1.8em;fill:{{trait.inh  ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}test.svg?v=4#trait-inhibitors"></use></svg>
-        <svg style="width:1.8em;height:1.8em;fill:{{trait.boo  ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}test.svg?v=4#trait-boost-items"></use></svg>
-        <svg style="width:1.8em;height:1.8em;fill:{{trait.wep  ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}test.svg?v=4#trait-weapons"></use></svg>
+        <svg style="width:1.8em;height:1.8em;fill:{{trait.com  ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=1#trait-combat-items"></use></svg>
+        <svg style="width:1.8em;height:1.8em;fill:{{trait.res  ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=1#trait-heal"></use></svg>
+        <svg style="width:1.8em;height:1.8em;fill:{{trait.inh  ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=1#trait-inhibitors"></use></svg>
+        <svg style="width:1.8em;height:1.8em;fill:{{trait.boo  ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=1#trait-boost-items"></use></svg>
+        <svg style="width:1.8em;height:1.8em;fill:{{trait.wep  ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=1#trait-weapons"></use></svg>
       </div>
       <div class="flex bottom" style="text-align:center;margin-top:0.4rem;">
-        <svg style="width:1.8em;height:1.8em;fill:{{trait.arm  ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}test.svg?v=4#category-38"></use></svg>
-        <svg style="width:1.8em;height:1.8em;fill:{{trait.acc  ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}test.svg?v=4#category-39"></use></svg>
-        <svg style="width:1.8em;height:1.8em;fill:{{trait.exp  ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}test.svg?v=4#gather"></use></svg>
-        <svg style="width:1.8em;height:1.8em;fill:{{trait.syn  ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}test.svg?v=4#trait-synthesis"></use></svg>
-        <svg style="width:1.8em;height:1.8em;fill:{{trait.sta  ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}test.svg?v=4#category-40"></use></svg>
+        <svg style="width:1.8em;height:1.8em;fill:{{trait.arm  ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=1#category-38"></use></svg>
+        <svg style="width:1.8em;height:1.8em;fill:{{trait.acc  ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=1#category-39"></use></svg>
+        <svg style="width:1.8em;height:1.8em;fill:{{trait.exp  ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=1#gather"></use></svg>
+        <svg style="width:1.8em;height:1.8em;fill:{{trait.syn  ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=1#trait-synthesis"></use></svg>
+        <svg style="width:1.8em;height:1.8em;fill:{{trait.sta  ? 'black' : 'lightgray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=1#category-40"></use></svg>
     </div>
   </div>
 }

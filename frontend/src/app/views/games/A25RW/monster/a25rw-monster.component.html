@@ -2,9 +2,9 @@
   <div [class]="inputSlug ? 'card card-dialog' : 'card card-medium'">
     <h4 class="card-title  card-icon-space">{{monster.name}}</h4>
     <div class="card-icon-position">
-      <i class="atelier atelier-{{monster.kind}}"></i>
-      @if (monster.isDX) {
-        <br /><span class="badge bg-primary">DX</span>
+      {{monster.race}}
+      @if (monster.dlc) {
+        <br /><span class="badge bg-primary">DLC</span>
       }
     </div>
     <img class="card-item-display" src="{{imgURL}}monsters/{{monster.id}}.webp?v=1"
@@ -104,23 +104,23 @@
       <tr>
         <td style="width:25%;">
           <div class="a25rw-attribute">
-            <div class="a25rw-element" style="background-color:{{a25rwservice.elements['physical']}};"> <svg><use attr.href="{{imgURL}}test.svg?v=4#element-physical"></use></svg></div>
+            <div class="a25rw-element" style="background-color:{{a25rwservice.elements['physical']}};"> <svg><use attr.href="{{imgURL}}spritesheet.svg?v=1#element-physical"></use></svg></div>
             {{monster.physical ? monster.physical : 0}}%
           </div>
         </td>
         <td style="width:25%;">
           <div class="a25rw-attribute">
-            <div class="a25rw-element" style="background-color:{{a25rwservice.elements['magic']}};"> <svg><use attr.href="{{imgURL}}test.svg?v=4#element-magic"></use></svg></div>
+            <div class="a25rw-element" style="background-color:{{a25rwservice.elements['magic']}};"> <svg><use attr.href="{{imgURL}}spritesheet.svg?v=1#element-magic"></use></svg></div>
             {{monster.magic ? monster.magic : 0}}%
           </div>
         </td><td style="width:25%;">
           <div class="a25rw-attribute">
-            <div class="a25rw-element" style="background-color:{{a25rwservice.elements['fire']}};"> <svg><use attr.href="{{imgURL}}test.svg?v=4#element-fire"></use></svg></div>
+            <div class="a25rw-element" style="background-color:{{a25rwservice.elements['fire']}};"> <svg><use attr.href="{{imgURL}}spritesheet.svg?v=1#element-fire"></use></svg></div>
             {{monster.fire ? monster.fire : 0}}%
           </div>
         </td><td style="width:25%;">
           <div class="a25rw-attribute">
-            <div class="a25rw-element" style="background-color:{{a25rwservice.elements['ice']}};"> <svg><use attr.href="{{imgURL}}test.svg?v=4#element-ice"></use></svg></div>
+            <div class="a25rw-element" style="background-color:{{a25rwservice.elements['ice']}};"> <svg><use attr.href="{{imgURL}}spritesheet.svg?v=1#element-ice"></use></svg></div>
             {{monster.ice ? monster.ice : 0}}%
           </div>
         </td>
@@ -128,13 +128,13 @@
       <tr>
         <td style="width:25%;">
           <div class="a25rw-attribute">
-            <div class="a25rw-element" style="background-color:{{a25rwservice.elements['air']}};"> <svg><use attr.href="{{imgURL}}test.svg?v=4#element-air"></use></svg></div>
+            <div class="a25rw-element" style="background-color:{{a25rwservice.elements['air']}};"> <svg><use attr.href="{{imgURL}}spritesheet.svg?v=1#element-air"></use></svg></div>
             {{monster.air ? monster.air : 0}}%
           </div>
         </td>
         <td style="width:25%;">
           <div class="a25rw-attribute">
-            <div class="a25rw-element" style="background-color:{{a25rwservice.elements['bolt']}};"> <svg><use attr.href="{{imgURL}}test.svg?v=4#element-bolt"></use></svg></div>
+            <div class="a25rw-element" style="background-color:{{a25rwservice.elements['bolt']}};"> <svg><use attr.href="{{imgURL}}spritesheet.svg?v=1#element-bolt"></use></svg></div>
             {{monster.bolt ? monster.bolt : 0}}%
           </div>
         </td>
@@ -142,25 +142,25 @@
       <tr>
         <td style="width:25%;">
           <div class="a25rw-attribute">
-            <div class="a25rw-ailment"> <svg><use attr.href="{{imgURL}}test.svg?v=4#ailment-blind"></use></svg></div>
+            <div class="a25rw-ailment"> <svg><use attr.href="{{imgURL}}spritesheet.svg?v=1#ailment-blind"></use></svg></div>
             {{monster.blind ? monster.blind : 0}}%
           </div>
         </td>
         <td style="width:25%;">
           <div class="a25rw-attribute">
-            <div class="a25rw-ailment"> <svg><use attr.href="{{imgURL}}test.svg?v=4#ailment-paralysis"></use></svg></div>
+            <div class="a25rw-ailment"> <svg><use attr.href="{{imgURL}}spritesheet.svg?v=1#ailment-paralysis"></use></svg></div>
             {{monster.paralysis ? monster.paralysis : 0}}%
           </div>
         </td>
         <td style="width:25%;">
           <div class="a25rw-attribute">
-            <div class="a25rw-ailment"> <svg><use attr.href="{{imgURL}}test.svg?v=4#ailment-poison"></use></svg></div>
+            <div class="a25rw-ailment"> <svg><use attr.href="{{imgURL}}spritesheet.svg?v=1#ailment-poison"></use></svg></div>
             {{monster.poison ? monster.poison : 0}}%
           </div>
         </td>
         <td style="width:25%;">
           <div class="a25rw-attribute">
-            <div class="a25rw-ailment"> <svg><use attr.href="{{imgURL}}test.svg?v=4#ailment-burn"></use></svg></div>
+            <div class="a25rw-ailment"> <svg><use attr.href="{{imgURL}}spritesheet.svg?v=1#ailment-burn"></use></svg></div>
             {{monster.burn ? monster.burn : 0}}%
           </div>
         </td>
@@ -168,25 +168,25 @@
       <tr>
         <td style="width:25%;">
           <div class="a25rw-attribute">
-            <div class="a25rw-ailment"> <svg><use attr.href="{{imgURL}}test.svg?v=4#ailment-taunt"></use></svg></div>
+            <div class="a25rw-ailment"> <svg><use attr.href="{{imgURL}}spritesheet.svg?v=1#ailment-taunt"></use></svg></div>
             {{monster.taunt ? monster.taunt : 0}}%
           </div>
         </td>
         <td style="width:25%;">
           <div class="a25rw-attribute">
-            <div class="a25rw-ailment"> <svg><use attr.href="{{imgURL}}test.svg?v=4#ailment-sleep"></use></svg></div>
+            <div class="a25rw-ailment"> <svg><use attr.href="{{imgURL}}spritesheet.svg?v=1#ailment-sleep"></use></svg></div>
             {{monster.sleep ? monster.sleep : 0}}%
           </div>
         </td>
         <td style="width:25%;">
           <div class="a25rw-attribute">
-            <div class="a25rw-ailment"> <svg><use attr.href="{{imgURL}}test.svg?v=4#ailment-daze"></use></svg></div>
+            <div class="a25rw-ailment"> <svg><use attr.href="{{imgURL}}spritesheet.svg?v=1#ailment-daze"></use></svg></div>
             {{monster.daze ? monster.daze : 0}}%
           </div>
         </td>
         <td style="width:25%;">
           <div class="a25rw-attribute">
-            <div class="a25rw-ailment"> <svg><use attr.href="{{imgURL}}test.svg?v=4#ailment-frostbite"></use></svg></div>
+            <div class="a25rw-ailment"> <svg><use attr.href="{{imgURL}}spritesheet.svg?v=1#ailment-frostbite"></use></svg></div>
             {{monster.frostbite ? monster.frostbite : 0}}%
           </div>
         </td>

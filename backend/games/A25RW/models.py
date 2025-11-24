@@ -25,6 +25,7 @@ class Trait(GameIdMixin, NameMixin, DescMixin, IndexMixin,
     grade  = models.IntegerField()
     gatherable = models.BooleanField(default=True)
     icon = models.CharField()
+    dlc = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['index']
@@ -37,7 +38,7 @@ class Gift(GameIdMixin):
 
 # Can also be skill
 class Effect(GameIdMixin, NameMixin, DescMixin, IndexMixin,
-             generate_value_pair_mixin(5, numeric=True)):
+             generate_value_pair_mixin(7, numeric=True)):
     flag = models.BooleanField()
     dlc = models.BooleanField(default=False)
     usable = models.BooleanField()
@@ -110,6 +111,7 @@ class RecipeNode(models.Model):
     col = models.SmallIntegerField()
     down = models.BooleanField(default=False)
     left = models.BooleanField(default=False)
+    hide = models.BooleanField(default=False)
     class Meta:
         unique_together = [['tree', 'row', 'col']]
         ordering = ['tree', 'row', 'col']
@@ -143,6 +145,7 @@ class Enemy(GameIdMixin, NameMixin, IndexMixin, FlavorTextMixin,
                 'taunt', 'sleep', 'daze', 'frostbite'])):
     race = models.ForeignKey(Text, on_delete=models.CASCADE, related_name="+")
     drops = models.ManyToManyField(Item)
+    dlc = models.BooleanField(default=False)
     class Meta:
         ordering = ['index']
 

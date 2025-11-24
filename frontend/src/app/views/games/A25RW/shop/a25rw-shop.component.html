@@ -29,6 +29,9 @@
               @else {
                 {{slot.item.name}}
               }
+              @if (slot.item.dlc) {
+                <span style="margin-left: 0.5em;" class="badge bg-primary">DLC</span>
+              }
               <ul>
                 <li>Cole: {{slot.price}}</li>
                 @if (slot.level_min) {

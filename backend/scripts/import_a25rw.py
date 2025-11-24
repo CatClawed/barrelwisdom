@@ -60,7 +60,7 @@ def category(row, index):
         obj.save()
 
 def trait(row, index):
-    if row['text_ENG'] and row['EnabledFlag'] == '1' and row['DlcId'] == '0':
+    if row['text_ENG'] and row['EnabledFlag'] == '1':
         try:
             obj = Trait.objects.get(gid=row['TraitId'])
             print("Update Trait: ", row['TraitId'], row['text_ENG'])
@@ -95,6 +95,7 @@ def trait(row, index):
         obj.gatherable = True if row['GatherableFlag'] == '0' else False
         obj.icon = row['Icon']
         obj.index = row['Index']
+        obj.dlc = True if row['DlcId'] != '0' else False
         if row['Combo1']:
             try:
                 obj.combo1 = Trait.objects.get(gid=row['ComboId1'])
@@ -185,7 +186,10 @@ def other_effect(row, index):
             eval_objects(row, ['Value0_1', 'Value0_2',
                                'Value1_1', 'Value1_2',
                                'Value2_1', 'Value2_2',
-                               'Value3_1', 'Value3_2',])
+                               'Value3_1', 'Value3_2',
+                               'Value4_1', 'Value4_2',
+                               'Value5_1', 'Value5_2',
+                               'Value6_1', 'Value6_2',])
             obj.val1_1 = row['Value0_1']
             obj.val1_2 = row['Value0_2'] if row['Value0_1'] != row['Value0_2'] else None
             obj.val2_1 = row['Value1_1'] if row['Value1_1'] else None
@@ -194,10 +198,16 @@ def other_effect(row, index):
             obj.val3_2 = row['Value2_2'] if row['Value2_1'] != row['Value2_2'] else None
             obj.val4_1 = row['Value3_1'] if row['Value3_1'] else None
             obj.val4_2 = row['Value3_2'] if row['Value3_1'] != row['Value3_2'] else None
+            obj.val5_1 = row['Value4_1'] if row['Value4_1'] else None
+            obj.val5_2 = row['Value4_2'] if row['Value4_1'] != row['Value4_2'] else None
+            obj.val6_1 = row['Value5_1'] if row['Value5_1'] else None
+            obj.val6_2 = row['Value5_2'] if row['Value5_1'] != row['Value5_2'] else None
+            obj.val7_1 = row['Value6_1'] if row['Value6_1'] else None
+            obj.val7_2 = row['Value6_2'] if row['Value6_1'] != row['Value6_2'] else None
 
             desc_replace(row,
-                [row['Value0_1'],row['Value1_1'],row['Value2_1'],row['Value3_1'],],
-                [row['Value0_2'],row['Value1_2'],row['Value2_2'],row['Value3_2'],]
+                [row['Value0_1'],row['Value1_1'],row['Value2_1'],row['Value3_1'],row['Value4_1'],row['Value5_1'],row['Value6_1'],],
+                [row['Value0_2'],row['Value1_2'],row['Value2_2'],row['Value3_2'],row['Value4_2'],row['Value5_2'],row['Value6_2'],]
             )
         else:
             obj.val1_1 = 0
@@ -305,7 +315,7 @@ def gatherdata(row, index):
                         area=Text.objects.get(text_en=row['Area']),
                         item=item,
                         rank=i,
-                        tool=row['GatherType'].lower(),
+                        tool=row['GatherType'].lower().replace(' ', '-'),
                         floor_min=row['Floors'][0] if row['Floors'] else None,
                         floor_max=row['Floors'][1] if row['Floors'] else None,
                     )
@@ -366,19 +376,25 @@ def recipe_book(row, index):
 
 def recipe_builder(check_tree, tree, col, row, RecipeName=None, IngredientName=None,
                    UnlockChar=None, AncientRecipe=False, down=False, left=False):
+    global treeroot
+    if check_tree:
+        try:
+            treeroot = RecipeTree.objects.get(name__text_en=RecipeName)
+        except:
+            treeroot = RecipeTree(name=Text.objects.get(text_en=RecipeName))
+            treeroot.save()
     try:
         obj = RecipeNode.objects.get(tree=tree, col=col, row=row)
         tree_model = obj.tree_model
-        if check_tree:
-            tree_model.name=Text.objects.get(text_en=RecipeName)
-            tree_model.save()
+        #if check_tree:
+        #    tree_model.name=Text.objects.get(text_en=RecipeName)
+        #    tree_model.save()
         print("Updating Tree", tree, RecipeName, IngredientName, row, col)
     except:
         obj = RecipeNode(tree=tree, col=col, row=row)
-        if check_tree:
-            tree_model = RecipeTree(name=Text.objects.get(text_en=RecipeName))
-            tree_model.save()
-            obj.tree_model = tree_model
+        #if check_tree:
+        #    tree_model = RecipeTree(name=Text.objects.get(text_en=RecipeName))
+        #    tree_model.save()
         print("Creating Tree", tree, RecipeName, IngredientName, row, col)
     if RecipeName:
         obj.recipe = Item.objects.get(name__text_en=RecipeName)
@@ -389,10 +405,12 @@ def recipe_builder(check_tree, tree, col, row, RecipeName=None, IngredientName=N
     obj.ancient = AncientRecipe
     obj.down = down
     obj.left = left
+    obj.tree_model = treeroot
     obj.save()
 
 def recipe_tree(row, index):
     global col
+    global treeroot
     if row['Index'] != '0':
         rrow=0
         check_tree = False
@@ -548,6 +566,52 @@ def enemyareas(row, index):
                     obj.save()
                     print("Create EnemyArea: ", row['Area'], row[f'EnemyName{i}'])
 
+def dlc_enemies():
+    obj = Enemy.objects.filter(id__gt=147)
+    for o in obj:
+        print(f'{o.gid}\t{o.id}\t{o.name.text_en}')
+        o.dlc = True
+        o.save()
+
+def manual_fix_trees():
+    obj = RecipeNode.objects.get(row=4, col=1, tree=1)
+    obj.down = False
+    obj.save()
+    obj = RecipeNode.objects.get(row=2, col=3, tree=6)
+    obj.down = False
+    obj.save()
+    obj = RecipeNode.objects.get(row=4, col=3, tree=6)
+    obj.down = False
+    obj.save()
+    obj = RecipeNode.objects.get(row=4, col=3, tree=13)
+    obj.down = False
+    obj.save()
+    obj = RecipeNode.objects.get(row=4, col=3, tree=19)
+    obj.down = False
+    obj.save()
+
+    trees = len(RecipeTree.objects.all())
+    for i in range(1, trees+1):
+        for row in range(5, 0, -1):
+            dead = True
+            for column in range(0,5):
+                try:
+                    obj = RecipeNode.objects.get(tree=i, row=row, col=column)
+                    dead = False if obj.recipe != None else True
+                    if not dead:
+                        break
+                except:
+                    pass
+            if dead:
+                for column in range(0,5):
+                    try:
+                        obj = RecipeNode.objects.get(tree=i, row=row, col=column)
+                        obj.hide = True
+                        obj.save()
+                    except:
+                        pass
+
+
 #import_generic(neat_strings)
 #import_generic(category)
 #import_generic(trait)
@@ -559,18 +623,18 @@ def enemyareas(row, index):
 #import_generic(gatherdata)
 #import_generic(recipe)
 #import_generic(recipe_book)
-#import_generic(recipe_tree)
+#import_generic(recipe_tree, post_function=manual_fix_trees)
 #import_generic(itemmix)
 #import_generic(shops)
 #import_generic(quest)
-#import_generic(enemies)
+#import_generic(enemies, post_function=dlc_enemies)
 #import_generic(enemyareas)
 """
-obj = Item.objects.filter(visible=True)
+obj = Item.objects.filter(visible=True).order_by('id')
 for o in obj:
     print(f'{o.gid}\t{o.id}\t{o.name.text_en}')
 
-obj = Enemy.objects.all()
+obj = Enemy.objects.all().order_by('id')
 for o in obj:
     print(f'{o.gid}\t{o.id}\t{o.name.text_en}')
 """

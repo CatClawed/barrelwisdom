@@ -31,7 +31,7 @@ export class A25RWRecipeComponent extends FragmentedComponent {
   }
 
   changeData() {
-    this.gameService(this.a25rwservice, 'recipe-ideas');
+    this.gameService(this.a25rwservice, 'recipe-trees');
     this.genericSettings(this.a25rwservice.recipe_tree[this.language], `All recipe trees in ${this.gameTitle}.`);
     return this.a25rwservice.getTreeList(this.language);
   }
