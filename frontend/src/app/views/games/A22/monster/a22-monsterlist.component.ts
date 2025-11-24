@@ -4,9 +4,11 @@ import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
+import { ItemComponent } from '@app/views/_components/item/item.component';
 import { Monster } from '@app/views/games/A22/_services/a22.interface';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -16,11 +18,10 @@ import { map, startWith } from 'rxjs/operators';
 import { A22MonsterComponent } from './a22-monster.component';
 
 @Component({
-  templateUrl: 'a22-monsterlist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports,
-    A22MonsterComponent, MatButtonModule]
+    templateUrl: 'a22-monsterlist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
+        ItemComponent, MatButtonModule]
 })
 
 export class A22MonsterlistComponent extends DialogUseComponent {
@@ -35,19 +36,19 @@ export class A22MonsterlistComponent extends DialogUseComponent {
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
-    private a22service: A22Service,
+    protected a22service: A22Service,
   ) {
     super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A22MonsterComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
-      type: '1'
+      type: ''
     })
   }
 
   changeData() {
     this.gameService(this.a22service, 'monsters');
-    this.genericSettings(`Monsters`, `The list of monsters in ${this.gameTitle}.`);
+    this.genericSettings(this.a22service.monster_translation[this.language], `The list of monsters in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a22service.getMonsterList(this.language);
   }
@@ -60,10 +61,14 @@ export class A22MonsterlistComponent extends DialogUseComponent {
   }
 
   private filterT(value: string, type: string): Monster[] {
+    this.hide = false;
     let list: Monster[];
 
     switch (type) {
       case "1":
+        list = this.data;
+        break;
+      case undefined:
         list = this.data;
         break;
       case "Small":

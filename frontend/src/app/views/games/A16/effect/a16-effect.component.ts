@@ -9,17 +9,16 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a16-effect.component.html',
-  selector: 'a16-effect',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, EffectComponent]
+    templateUrl: 'a16-effect.component.html',
+    selector: 'a16-effect',
+    providers: [DestroyService],
+    imports: [...CommonImports, EffectComponent]
 })
 export class A16EffectComponent extends SingleComponent {
   constructor(
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
-    private a16service: A16Service,
+    protected a16service: A16Service,
     protected breadcrumbService: BreadcrumbService,
     protected seoService: SeoService) {
     super(destroy$, route, breadcrumbService, seoService);

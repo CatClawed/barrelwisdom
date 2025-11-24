@@ -13,12 +13,11 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a25-recipe.component.html',
-  styleUrls: ['../resleri.scss'],
-  encapsulation: ViewEncapsulation.None,
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, MatTabsModule, MatIconModule, MatButtonModule, Popover]
+    templateUrl: 'a25-recipe.component.html',
+    styleUrls: ['../resleri.scss'],
+    encapsulation: ViewEncapsulation.None,
+    providers: [DestroyService],
+    imports: [...CommonImports, MatTabsModule, MatIconModule, MatButtonModule, Popover]
 })
 export class A25RecipeComponent extends SingleComponent {
   constructor(
@@ -33,16 +32,8 @@ export class A25RecipeComponent extends SingleComponent {
 
   changeData() {
     this.gameService(this.a25service, 'items/recipes');
-    this.genericSettings(`Recipes`, `All recipes in ${this.gameTitle}.`);
+    this.genericSettings(this.a25service.recipe_translation[this.language], `All recipes in ${this.gameTitle}.`);
     return this.a25service.getRecipeList(this.language)
-  }
-
-  afterAssignment(): void {
-    if (this.language !== 'ja') {
-      for (let i = 0; i < this.data.length; i++) {
-        this.data[i].pages = this.data[i].pages.filter(x => { return x.gbl })
-      }
-    }
   }
 
   getEmptySpace(page, index) {

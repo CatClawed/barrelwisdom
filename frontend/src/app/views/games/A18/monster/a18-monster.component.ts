@@ -8,11 +8,10 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a18-monster.component.html',
-  selector: 'a18-monster',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports]
+    templateUrl: 'a18-monster.component.html',
+    selector: 'a18-monster',
+    providers: [DestroyService],
+    imports: [...CommonImports]
 })
 export class A18MonsterComponent extends SingleComponent {
   chart = {
@@ -29,7 +28,7 @@ export class A18MonsterComponent extends SingleComponent {
     protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
-    private a18service: A18Service) {
+    protected a18service: A18Service) {
     super(destroy$, route, breadcrumbService, seoService);
   }
 
@@ -44,4 +43,4 @@ export class A18MonsterComponent extends SingleComponent {
       false,
       this.inputSlug ? false : true);
   }
-} 
+}

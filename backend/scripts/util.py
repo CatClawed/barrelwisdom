@@ -16,9 +16,11 @@ def slug_me(item, existing_slugs=None):
     return item
 
 
-def import_generic(function, index=1, **kwargs):
+def import_generic(function, index=1, post_function=None, **kwargs):
     with open('scripts/data.txt', newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile, delimiter='\t')
         for row in reader:
             function(row, index, **kwargs)
             index = index + 1
+    if post_function:
+        post_function()

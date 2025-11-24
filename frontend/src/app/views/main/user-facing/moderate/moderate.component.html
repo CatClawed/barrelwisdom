@@ -1,0 +1,40 @@
+@if (comments) {
+  @for (comment of comments; track comment) {
+    @if (!comment.approved) {
+      <div class="card comment-card">
+        <div>
+          @if (comment.name) {
+            <b>{{comment.name}}</b>
+          }
+          @if (!comment.name) {
+            <b>Anonymous</b>
+          }
+          <time class="updated text-muted"
+            style="margin-left:0.75rem;font-size: calc(0.8rem + 0.1vw);"
+            dateTime="{{comment.created}}">
+            {{comment.created | date:'mediumDate' }}
+          </time>
+        </div>
+        {{comment.body}}
+        <div>
+          @if (comment.parent) {
+            Child: https://barrelwisdom.com/{{comment.parent_blog.sec}}/{{comment.parent_blog.slug}}
+          }
+          @if (comment.blog) {
+            https://barrelwisdom.com/{{comment.blog.sec}}/{{comment.blog.slug}}
+          }
+          <button style="float:right;"
+            class="btn bg-primary"
+            (click)="comment.approved=true;approveComment(comment.id);">
+            Approve
+          </button>
+          <button style="float:right;"
+            class="btn bg-danger"
+            (click)="comment.approved=true;deleteComment(comment.id);">
+            Delete
+          </button>
+        </div>
+      </div>
+    }
+  }
+}

@@ -8,11 +8,10 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a22-monster.component.html',
-  selector: 'a22-monster',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports]
+    templateUrl: 'a22-monster.component.html',
+    selector: 'a22-monster',
+    providers: [DestroyService],
+    imports: [...CommonImports]
 })
 export class A22MonsterComponent extends SingleComponent {
   hp: boolean[] = [];
@@ -25,7 +24,7 @@ export class A22MonsterComponent extends SingleComponent {
     protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
-    private a22service: A22Service) {
+    protected a22service: A22Service) {
     super(destroy$, route, breadcrumbService, seoService);
   }
 
@@ -63,8 +62,8 @@ export class A22MonsterComponent extends SingleComponent {
 
     this.seoImage = `${this.imgURL}${this.section}/${this.data.slug}.webp`
     this.genericSettings(this.data.name, this.data.desc,
-      'Monsters',
+      this.a22service.monster_translation[this.language],
       false,
       this.inputSlug ? false : true);
   }
-} 
+}

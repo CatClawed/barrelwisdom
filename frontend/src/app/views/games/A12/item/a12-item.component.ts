@@ -8,11 +8,10 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a12-item.component.html',
-  selector: 'a12-item',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports]
+    templateUrl: 'a12-item.component.html',
+    selector: 'a12-item',
+    providers: [DestroyService],
+    imports: [...CommonImports]
 })
 export class A12ItemComponent extends SingleComponent {
   itemone: boolean = false;
@@ -22,7 +21,7 @@ export class A12ItemComponent extends SingleComponent {
   constructor(
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
-    private a12service: A12Service,
+    protected a12service: A12Service,
     protected breadcrumbService: BreadcrumbService,
     protected seoService: SeoService) {
     super(destroy$, route, breadcrumbService, seoService);
@@ -47,4 +46,4 @@ export class A12ItemComponent extends SingleComponent {
       this.inputSlug ? false : true
     );
   }
-} 
+}

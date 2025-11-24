@@ -1,15 +1,11 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable} from 'rxjs';
+import { Book, Category, CategoryData, Effect, ItemFull, ItemList, MonsterFull, MonsterList, Property, RegionData } from '@app/views/games/A15/_services/a15.interface';
 import { environment } from '@environments/environment';
-import { Property, RegionData, Effect, MonsterList, MonsterFull, Book, ItemList, ItemFull, Category, CategoryData } from '@app/views/games/A15/_services/a15.interface';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class A15Service {
-    httpOptions = {
-        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-      };
-    
     constructor(
       private http: HttpClient,
     ) { }
@@ -17,7 +13,7 @@ export class A15Service {
     public readonly gameTitle = {"en": "Atelier Escha & Logy", "ja":"エスカ＆ロジーのアトリエ"};
     public readonly gameURL = "escha";
     public readonly imgURL = `${environment.mediaURL}games/${this.gameURL}/`;
-    
+
     getPropertyList(language: string): Observable<Property[]> {
       return this.http.get<Property[]>(`${environment.apiUrl}/A15/property/${language}/`);
     }
@@ -69,5 +65,5 @@ export class A15Service {
     getRegion(slug: string, language: string): Observable<RegionData> {
       return this.http.get<RegionData>(`${environment.apiUrl}/A15/regiondata/${slug}/${language}/`);
     }
-    
+
 }

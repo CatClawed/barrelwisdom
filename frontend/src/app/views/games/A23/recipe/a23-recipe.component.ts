@@ -1,4 +1,4 @@
-import { Location } from '@angular/common';
+import { Location, NgTemplateOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyService } from '@app/services/destroy.service';
@@ -12,10 +12,9 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a23-recipe.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, Popover]
+    templateUrl: 'a23-recipe.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, Popover, NgTemplateOutlet]
 })
 export class A23RecipeComponent extends SingleComponent {
   sophie_num: number = 28;
@@ -33,7 +32,7 @@ export class A23RecipeComponent extends SingleComponent {
     protected route: ActivatedRoute,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
-    private a23service: A23Service,
+    protected a23service: A23Service,
     protected readonly destroy$: DestroyService,
     private location: Location,
     public historyService: HistoryService,
@@ -59,7 +58,7 @@ export class A23RecipeComponent extends SingleComponent {
 
   changeData() {
     this.gameService(this.a23service, 'recipe-ideas');
-    this.genericSettings(`Recipe Ideas`, `All recipe ideas in ${this.gameTitle}.`);
+    this.genericSettings(this.a23service.recipeidea_translation[this.language], `All recipe ideas in ${this.gameTitle}.`);
     return this.a23service.getRecipeList(this.language);
   }
 
@@ -93,4 +92,4 @@ export class A23RecipeComponent extends SingleComponent {
   context(r: RecipeIdea) {
     this.ctx = r;
   }
-} 
+}

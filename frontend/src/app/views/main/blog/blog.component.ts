@@ -13,18 +13,18 @@ import { SeoService } from '@app/services/seo.service';
 import { Blog, Comment } from '@app/views/main/_interfaces/blog';
 import { User } from '@app/views/main/_interfaces/user';
 import { BlogService } from '@app/views/main/_services/blog.service';
-import { MarkdownComponent, MarkdownPipe, MarkdownService, provideMarkdown } from 'ngx-markdown';
+import { MarkdownComponent, MarkdownService, provideMarkdown } from 'ngx-markdown';
 import { of } from 'rxjs';
 import { catchError, switchMap, takeUntil } from 'rxjs/operators';
+import { CringeAdComponent } from '@app/views/_components/cringe/cringe.component';
 
 @Component({
-  templateUrl: 'blog.component.html',
-  styleUrls: ['blog.scss'],
-  providers: [DestroyService, provideMarkdown({sanitize: SecurityContext.NONE})],
-  standalone: true,
-  imports: [MatFormFieldModule, MatInputModule,
-    ReactiveFormsModule, RouterLink, MarkdownComponent, MarkdownPipe,
-    CommonModule]
+    templateUrl: 'blog.component.html',
+    styleUrls: ['blog.scss'],
+    providers: [DestroyService, provideMarkdown({ sanitize: SecurityContext.NONE })],
+    imports: [MatFormFieldModule, MatInputModule,
+        ReactiveFormsModule, RouterLink, MarkdownComponent,
+        CommonModule, CringeAdComponent]
 })
 
 export class BlogComponent implements OnInit {
@@ -58,6 +58,11 @@ export class BlogComponent implements OnInit {
     this.authenticationService.user.pipe(takeUntil(this.destroy$)).subscribe(x => this.user = x);
     this.route.paramMap.pipe(
       switchMap(params => {
+        if (/[A-Z]+/.test(params.get('title') + params.get('section'))) {
+          this.blog = null;
+          this.error = this.breadcrumbService.setStatus(404);;
+          return of(undefined)
+        }
         return this.blogService.getBlog(params.get('title'), params.get('section'))
           .pipe(
             catchError(error => {

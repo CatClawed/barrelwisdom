@@ -8,11 +8,10 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a23-monster.component.html',
-  selector: 'a23-monster',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports]
+    templateUrl: 'a23-monster.component.html',
+    selector: 'a23-monster',
+    providers: [DestroyService],
+    imports: [...CommonImports]
 })
 export class A23MonsterComponent extends SingleComponent {
   chart = {
@@ -29,7 +28,7 @@ export class A23MonsterComponent extends SingleComponent {
     protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
-    private a23service: A23Service) {
+    protected a23service: A23Service) {
     super(destroy$, route, breadcrumbService, seoService);
   }
   changeData() {
@@ -40,8 +39,8 @@ export class A23MonsterComponent extends SingleComponent {
   afterAssignment(): void {
     this.seoImage = `${this.imgURL}${this.section}/${this.data.slug}.webp`
     this.genericSettings(this.data.name, this.data.desc1,
-      'Monsters',
+      this.a23service.monster_translation[this.language],
       false,
       this.inputSlug ? false : true);
   }
-} 
+}

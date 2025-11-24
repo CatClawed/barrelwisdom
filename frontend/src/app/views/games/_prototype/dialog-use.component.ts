@@ -11,7 +11,8 @@ import { FilterableComponent } from './filterable.component';
 
 @Component({
     template: '',
-    providers: [DestroyService]
+    providers: [DestroyService],
+    standalone: false
 })
 
 export abstract class DialogUseComponent extends FilterableComponent {

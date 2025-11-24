@@ -9,17 +9,16 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
 
 @Component({
-  templateUrl: 'a12-location.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports]
+    templateUrl: 'a12-location.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports]
 })
 export class A12LocationComponent extends FragmentedComponent {
   constructor(
     protected route: ActivatedRoute,
     protected loc: Location,
     protected readonly destroy$: DestroyService,
-    private a12service: A12Service,
+    protected a12service: A12Service,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
     protected viewportScroller: ViewportScroller) {
@@ -37,4 +36,4 @@ export class A12LocationComponent extends FragmentedComponent {
       true
     );
   }
-} 
+}

@@ -41,11 +41,13 @@ class Character(models.Model):
     res_sla = models.IntegerField(default=0)
     res_wnd = models.IntegerField(default=0)
 
+    six_star = models.BooleanField(default=False)
+
     class Meta:
         ordering = [
+            "-date",
             "role",
             "-rarity",
-            "-date",
             "slug"
         ]
 
@@ -59,7 +61,8 @@ class Skill(models.Model):
     wt = models.IntegerField(default=0)
     index = models.IntegerField(default=0)
 
-    # currently up to 3 is used but might as well futureproof
+    evol = models.BooleanField(default=False)
+
     val0  = models.IntegerField(blank=True, null=True)
     val1  = models.IntegerField(blank=True, null=True)
     val2  = models.IntegerField(blank=True, null=True)
@@ -67,6 +70,8 @@ class Skill(models.Model):
     val4  = models.IntegerField(blank=True, null=True)
     val5  = models.IntegerField(blank=True, null=True)
     val6  = models.IntegerField(blank=True, null=True)
+    val7  = models.IntegerField(blank=True, null=True)
+    val8  = models.IntegerField(blank=True, null=True)
 
     val0_2  = models.IntegerField(blank=True, null=True)
     val1_2  = models.IntegerField(blank=True, null=True)
@@ -75,18 +80,22 @@ class Skill(models.Model):
     val4_2  = models.IntegerField(blank=True, null=True)
     val5_2  = models.IntegerField(blank=True, null=True)
     val6_2  = models.IntegerField(blank=True, null=True)
+    val7_2  = models.IntegerField(blank=True, null=True)
+    val8_2  = models.IntegerField(blank=True, null=True)
 
-    pow1  = models.IntegerField()
-    pow2  = models.IntegerField()
-    pow3  = models.IntegerField()
-    pow4  = models.IntegerField()
-    pow5  = models.IntegerField()
+    pow1  = models.IntegerField(blank=True, null=True)
+    pow2  = models.IntegerField(blank=True, null=True)
+    pow3  = models.IntegerField(blank=True, null=True)
+    pow4  = models.IntegerField(blank=True, null=True)
+    pow5  = models.IntegerField(blank=True, null=True)
+    pow6  = models.IntegerField(blank=True, null=True)
 
-    break1  = models.IntegerField()
-    break2  = models.IntegerField()
-    break3  = models.IntegerField()
-    break4  = models.IntegerField()
-    break5  = models.IntegerField()
+    break1  = models.IntegerField(blank=True, null=True)
+    break2  = models.IntegerField(blank=True, null=True)
+    break3  = models.IntegerField(blank=True, null=True)
+    break4  = models.IntegerField(blank=True, null=True)
+    break5  = models.IntegerField(blank=True, null=True)
+    break6  = models.IntegerField(blank=True, null=True)
 
     class Meta:
         ordering = [
@@ -102,7 +111,10 @@ class Passive(models.Model):
     val2  = models.IntegerField(blank=True, null=True)
     val3  = models.IntegerField(blank=True, null=True)
     val4  = models.IntegerField(blank=True, null=True)
+    val5  = models.IntegerField(blank=True, null=True)
+    val6  = models.IntegerField(blank=True, null=True)
     num   = models.IntegerField(default=3) # heck resna and val
+    evol = models.BooleanField(default=False)
 
     class Meta:
         ordering = [
@@ -120,6 +132,8 @@ class Memoria(models.Model):
     note  = models.CharField(max_length=200, blank=True)
     gbl   = models.BooleanField(default=False)
     date = models.DateField(blank=True, null=True)
+    illustrator = models.ForeignKey(Name, on_delete=models.CASCADE, blank=True, null=True, related_name="illust")
+
 
     lv1  = models.IntegerField()
     lv2  = models.IntegerField()

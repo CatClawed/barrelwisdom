@@ -146,7 +146,7 @@ class A25ScoreBattleDiffItemSerializer(A25DefaultSerializer):
 
 class A25ItemRewardSerializer(A25DefaultSerializer):
     scorebattle = A25ScoreBattleDiffItemSerializer(many=True, source='scorebattledifficulties_set')
-    dungeon = A25DungeonItemSerializer(many=True, source='dungeon_set')
+    #dungeon = A25DungeonItemSerializer(many=True, source='dungeon_set')
     class Meta:
         model = Reward
-        fields = ['scorebattle', 'dungeon']
+        fields = ['scorebattle']

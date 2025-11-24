@@ -9,11 +9,10 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a23-effect.component.html',
-  selector: 'a23-effect',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, EffectComponent]
+    templateUrl: 'a23-effect.component.html',
+    selector: 'a23-effect',
+    providers: [DestroyService],
+    imports: [...CommonImports, EffectComponent]
 })
 export class A23EffectComponent extends SingleComponent {
   constructor(
@@ -21,7 +20,7 @@ export class A23EffectComponent extends SingleComponent {
     protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
-    private a23service: A23Service) {
+    protected a23service: A23Service) {
     super(destroy$, route, breadcrumbService, seoService);
   }
 
@@ -32,7 +31,7 @@ export class A23EffectComponent extends SingleComponent {
 
   afterAssignment(): void {
     this.genericSettings(this.data.name, this.data.desc,
-      'Effects',
+      this.a23service.effect_translation[this.language],
       false,
       this.inputSlug ? false : true);
   }

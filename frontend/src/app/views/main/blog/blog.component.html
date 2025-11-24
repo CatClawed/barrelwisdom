@@ -3,7 +3,7 @@
     <h1>{{blog.title}}</h1>
     <div class="author">
       <span style="display: inline-block;">
-        <i class="far fa-calendar-alt"></i> <time class="updated" dateTime="{{blog.modified}}"> {{blog.modified |
+        <i class="far fa-calendar-alt"></i> <time class="updated" dateTime="{{blog.created}}"> {{blog.created |
       date:'longDate' }} </time>
     </span>
     <span style="display: inline-block;">
@@ -36,16 +36,20 @@
       (click)="historyService.hrefClicked($event);"
       [data]="body">
     </div>
+    @if (blog.created != blog.modified) {
+      <p>Last Updated: {{blog.modified | date:'longDate' }}</p>
+    }
     @if (blog.tags.length > 0) {
-      <div class="blog-tags clearfix">
-        <i style="margin-right: 1em; margin-top: 0.5em; font-size: 1rem;" class="badge bg-secondary"><i
+      <div class="blog-tags">
+        <i style="margin-right: 1em; margin-top: 0.5em; font-size: 1rem;" class="badge bg-primary"><i
         class="fas fa-tag"></i></i>
         @for (tag of blog.tags; track tag) {
           <a rel="tag" style="margin-right: 1em; margin-top: 0.5em; font-size: 1rem;"
-          class="badge bg-primary" routerLink="/tag/{{tag.slug}}">{{tag.name}} </a>
+          class="badge bg-secondary" routerLink="/tag/{{tag.slug}}">{{tag.name}} </a>
         }
       </div>
     }
+    <cringe-ad-responsive></cringe-ad-responsive>
     <h2>Comments</h2>
     @if (!blog.closed && success === undefined) {
       <ng-container
@@ -73,14 +77,14 @@
   </article>
 }
 <ng-template #comment let-comment="comment">
-  <div class="card card-body comment-card">
+  <div class="card comment-card">
     <div>
       @if (comment.author) {
         <b><a routerLink="/user/{{comment.author.username}}" style="color:black;">{{comment.author.username}}</a></b>
         @if (checkAuthor(comment.author.username)) {
-          <div class="badge bg-secondary" style="margin-left:0.5rem;">Author</div>
+          <div class="badge bg-primary" style="margin-left:0.5rem;">Author</div>
         } @else {
-          <div class="badge bg-secondary" style="margin-left:0.5rem;">Staff</div>
+          <div class="badge bg-primary" style="margin-left:0.5rem;">Staff</div>
         }
       }
       @if (comment.name) {
@@ -136,7 +140,7 @@
     <button class="btn comment-button" (click)="switchState(parent)">
       Cancel
     </button>
-    <button class="btn btn-secondary" style="font-weight:bold;margin-left:0.2rem;" (click)="postComment(parent);">
+    <button class="btn bg-primary" style="font-weight:bold;margin-left:0.2rem;" (click)="postComment(parent);">
       Submit
     </button>
   </div>
@@ -158,7 +162,7 @@
     </form>
   </div>
   <div style="text-align:right;margin-bottom:0.5rem">
-    <button class="btn btn-secondary" style="font-weight:bold;margin-left:0.2rem;" (click)="postComment();">
+    <button class="btn bg-primary" style="font-weight:bold;margin-left:0.2rem;" (click)="postComment();">
       Submit
     </button>
   </div>

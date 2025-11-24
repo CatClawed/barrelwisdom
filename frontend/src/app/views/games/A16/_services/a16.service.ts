@@ -1,15 +1,11 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable} from 'rxjs';
+import { AreaData, Book, Category, CategoryData, Effect, ItemFull, ItemList, MonsterFull, MonsterList, Property } from '@app/views/games/A16/_services/a16.interface';
 import { environment } from '@environments/environment';
-import { Property, AreaData, Effect, MonsterList, MonsterFull, Book, ItemList, ItemFull, Category, CategoryData } from '@app/views/games/A16/_services/a16.interface';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class A16Service {
-    httpOptions = {
-        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-      };
-    
     constructor(
       private http: HttpClient,
     ) { }
@@ -17,7 +13,7 @@ export class A16Service {
     public readonly gameTitle = {"en": "Atelier Shallie", "ja":"シャリーのアトリエ"};
     public readonly gameURL = "shallie";
     public readonly imgURL = `${environment.mediaURL}games/${this.gameURL}/`;
-    
+
     getPropertyList(language: string): Observable<Property[]> {
       return this.http.get<Property[]>(`${environment.apiUrl}/A16/property/${language}/`);
     }
@@ -69,5 +65,5 @@ export class A16Service {
     getRegion(slug: string, language: string): Observable<AreaData> {
       return this.http.get<AreaData>(`${environment.apiUrl}/A16/area/${slug}/${language}/`);
     }
-    
+
 }

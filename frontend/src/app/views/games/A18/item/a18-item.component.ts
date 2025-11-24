@@ -1,20 +1,19 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { Popover } from '@app/views/_components/popover/popover.component';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a18-item.component.html',
-  selector: 'a18-item',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, Popover]
+    templateUrl: 'a18-item.component.html',
+    selector: 'a18-item',
+    providers: [DestroyService],
+    imports: [...CommonImports, Popover]
 })
 export class A18ItemComponent extends SingleComponent {
   colors = {
@@ -32,7 +31,7 @@ export class A18ItemComponent extends SingleComponent {
     protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
-    private a18service: A18Service) {
+    protected a18service: A18Service) {
     super(destroy$, route, breadcrumbService, seoService);
   }
 
@@ -49,4 +48,4 @@ export class A18ItemComponent extends SingleComponent {
       false,
       this.inputSlug ? false : true);
   }
-} 
+}

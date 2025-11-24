@@ -9,5 +9,6 @@ dj-rest-auth
 djangorestframework
 djangorestframework-simplejwt
 gunicorn
-pylibmc
 python-slugify
+redis
+requests

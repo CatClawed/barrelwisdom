@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Memoria } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -16,11 +17,10 @@ import { map, startWith } from 'rxjs/operators';
 import { A25MemoriaComponent } from './a25-memoria.component';
 
 @Component({
-  templateUrl: 'a25-memorialist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports,
-    A25MemoriaComponent, KeyValuePipe, MatCheckboxModule]
+    templateUrl: 'a25-memorialist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
+        KeyValuePipe, MatCheckboxModule]
 })
 
 export class A25MemorialistComponent extends DialogUseComponent {
@@ -46,15 +46,13 @@ export class A25MemorialistComponent extends DialogUseComponent {
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       stats: 'date',
-      show_jp: this.language === 'ja',
     })
   }
 
   changeData() {
     this.gameService(this.a25service, 'memoria');
-    this.genericSettings(`Memoria`, `The list of memoria in ${this.gameTitle}.`);
+    this.genericSettings(this.a25service.memoria_translation[this.language], `The list of memoria in ${this.gameTitle}.`);
     this.pageForm.reset();
-    this.pageForm.get('show_jp').setValue(this.language === 'ja');
     return this.a25service.getMemoriaList(this.language);
   }
 
@@ -62,15 +60,14 @@ export class A25MemorialistComponent extends DialogUseComponent {
     this.filteredMemoria = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Memoria[]>),
       map((search: any) => search ?
-        this.filterT(search.filtertext, search.stats, search.show_jp)
-        : this.filterT('', 'date', this.language === 'ja'))
+        this.filterT(search.filtertext, search.stats)
+        : this.filterT('', 'date'))
     );
   }
 
-  private filterT(value: string, stat: string, show_jp: boolean): Memoria[] {
+  private filterT(value: string, stat: string): Memoria[] {
+    this.hide = false;
     let memorialist: Memoria[] = this.data;
-
-    if (!show_jp) memorialist = memorialist.filter(mem => mem.gbl === true)
 
     switch (stat) {
       case "hp": {

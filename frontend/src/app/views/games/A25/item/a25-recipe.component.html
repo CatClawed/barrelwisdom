@@ -1,5 +1,5 @@
 @if (data; as recipes) {
-  <h1 id="0">Recipes</h1>
+  <h1 id="0">{{a25service.recipe_translation[language]}}</h1>
   <button (click)="scroll(0)" mat-mini-fab color="primary"  style="position:fixed;bottom:3%;right:10%;z-index:10;">
     <mat-icon fontSet="fas" fontIcon="fa-arrow-up" ></mat-icon>
   </button>
@@ -22,15 +22,10 @@
           </ol>
         </div>
         @for (page of tab.pages; track page; let chapter = $index) {
-          @if (page.desc) {
-            <h2  id="{{chapter+1}}">{{page.desc}}</h2>
-          }
-          @else {
-            <h2 id="{{chapter+1}}">Page {{chapter+1}}</h2>
-          }
+          <h2  id="{{chapter+1}}">{{page.desc}}</h2>
           <div style="display:grid;gap:0;grid-template-columns:20% 20% 20% 20% 20%;max-width:600px;margin-left:auto;margin-right:auto;">
             @for (recipe of page.recipes; track recipe; let num = $index) {
-              <popover [title]="recipe.name"
+              <popover [name]="recipe.name"
                 [template]="popoverContent"
                 url="/{{gameURL}}/items/synthesis/{{recipe.slug}}/{{language}}">
                 <img class="resleri-item-frame" loading="lazy"
@@ -57,6 +52,4 @@
         </mat-tab>
       }
     </mat-tab-group>
-    <ng-template #grid let-tab="tab">
-    </ng-template>
   }

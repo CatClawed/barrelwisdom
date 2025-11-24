@@ -11,12 +11,14 @@ import { AppRoutingModule } from '@app/app-routing.module';
 import { AppComponent } from '@app/app.component';
 import { LayoutComponent } from '@app/containers';
 import { CookieService } from 'ngx-cookie-service';
+import { CringeAdComponent } from "./views/_components/cringe/cringe.component";
 
 const APP_CONTAINERS = [
-  LayoutComponent
+    LayoutComponent
 ];
 
-@NgModule({ declarations: [
+@NgModule({
+    declarations: [
         AppComponent,
         ...APP_CONTAINERS
     ],
@@ -26,11 +28,13 @@ const APP_CONTAINERS = [
         MatMenuModule,
         AppRoutingModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
-          enabled: !isDevMode(),
-          // Register the ServiceWorker as soon as the application is stable
-          // or after 30 seconds (whichever comes first).
-          registrationStrategy: 'registerWhenStable:30000'
-        })], providers: [
+            enabled: !isDevMode(),
+            // Register the ServiceWorker as soon as the application is stable
+            // or after 30 seconds (whichever comes first).
+            registrationStrategy: 'registerWhenStable:30000'
+        }),
+        CringeAdComponent],
+    providers: [
         provideClientHydration(),
         {
             provide: APP_ID,
@@ -48,5 +52,6 @@ const APP_CONTAINERS = [
             multi: true
         },
         provideHttpClient(withInterceptorsFromDi())
-    ] })
+    ]
+})
 export class AppModule { }

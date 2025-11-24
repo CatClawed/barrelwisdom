@@ -27,14 +27,17 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "src/robots.txt"
+              "src/robots.txt",
+              "src/ads.txt"
             ],
             "styles": [
-              "src/scss/style.scss"
+              "src/scss/style.scss",
+              "node_modules/leaflet/dist/leaflet.css"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "./node_modules"
+                "./node_modules",
+                "src/scss"
               ]
             },
             "scripts": [],
@@ -61,8 +64,15 @@
                 }
               ],
               "styles": [
-                "src/scss/style.scss"
+                "src/scss/style.scss",
+                "node_modules/leaflet/dist/leaflet.css"
               ],
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "./node_modules",
+                  "src/scss"
+                ]
+              },
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": true,
@@ -110,8 +120,15 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "styles": [
-              "src/scss/style.scss"
+              "src/scss/style.scss",
+              "node_modules/leaflet/dist/leaflet.css"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "./node_modules",
+                "src/scss"
+              ]
+            },
             "scripts": []
           }
         },

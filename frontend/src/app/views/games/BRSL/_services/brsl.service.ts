@@ -1,15 +1,11 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable} from 'rxjs';
+import { DemonFull, DemonList, Event, FacilityFull, FacilityList, FacilitySet, ItemFull, ItemList, NameLink, NameOnly, Region, SchoolLocation, Skill, Unit } from '@app/views/games/BRSL/_services/brsl.interface';
 import { environment } from '@environments/environment';
-import { Event, Unit, NameLink, NameOnly, SchoolLocation, DemonList, DemonFull, ItemList, ItemFull, FacilityFull, FacilityList, FacilitySet, Skill, Region } from '@app/views/games/BRSL/_services/brsl.interface';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class BRSLService {
-    httpOptions = {
-        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-      };
-    
     constructor(
       private http: HttpClient,
     ) { }
@@ -73,5 +69,5 @@ export class BRSLService {
     getRegion(slug: string, language: string): Observable<Region> {
       return this.http.get<Region>(`${environment.apiUrl}/BRSL/region/${slug}/${language}/`);
     }
-    
+
 }

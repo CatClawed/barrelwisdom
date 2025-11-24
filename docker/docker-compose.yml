@@ -42,15 +42,11 @@ services:
     extra_hosts:
       - "localhost:host-gateway"
 
-  memcached:
-    container_name: memcached
-    image: memcached:1.6.32-alpine
+  redis:
+    container_name: redis
+    image: redis:8.0-M03-alpine
     ports:
-      - "11211:11211"
-    entrypoint:
-      - memcached
-      - -m 64
-
+      - "6379:6379"
 
 # For local testing of production build
   frontend_prod:

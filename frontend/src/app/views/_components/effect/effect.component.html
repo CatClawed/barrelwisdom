@@ -1,10 +1,10 @@
 <div
-  [class]="small ? 'card card-body card-small' : 'card card-body'"
+  [class]="small ? 'card card-small' : url ? 'card' : 'card card-dialog'"
   [style]="hideContents ? 'height:100%;' : null">
   @if (url && hideContents) {
     <h4 class="card-title" style="margin-right:6rem;">
-      <a (click)="$event.preventDefault(); buttonClicked.emit(effect.slug);"
-      href="{{url}}/{{language}}">{{effect.name}}</a>
+      <a (click)="$event.preventDefault(); buttonClicked.emit(effect.slug ? effect.slug : effect.id);"
+      href="{{url}}">{{effect.name}}</a>
     </h4>
   }
   @else {
@@ -23,7 +23,7 @@
     @if (hideContents) {
       <button class="card-read-more-position"
         mat-mini-fab color="primary"
-        (click)="buttonClicked.emit(effect.slug)">
+        (click)="buttonClicked.emit(effect.slug ? effect.slug : effect.id)">
         <mat-icon fontSet="fas" fontIcon="fa-ellipsis-v"></mat-icon>
       </button>
     }

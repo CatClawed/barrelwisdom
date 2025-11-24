@@ -12,13 +12,12 @@ import { of } from 'rxjs';
 import { A25IconComponent } from './a25-icon.component';
 
 @Component({
-  templateUrl: 'a25-item.component.html',
-  styleUrls: ['../resleri.scss'],
-  encapsulation: ViewEncapsulation.None,
-  selector: 'a25-item',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, A25IconComponent, Popover]
+    templateUrl: 'a25-item.component.html',
+    styleUrls: ['../resleri.scss'],
+    encapsulation: ViewEncapsulation.None,
+    selector: 'a25-item',
+    providers: [DestroyService],
+    imports: [...CommonImports, A25IconComponent, Popover]
 })
 export class A25ItemComponent extends SingleComponent {
   @Input()
@@ -62,7 +61,7 @@ export class A25ItemComponent extends SingleComponent {
     this.seoImage = `${this.imgURL}items/${this.data.slug}.webp`
     this.genericSettings(name,
       this.data.desc ? this.data.desc.replaceAll('<br>', ' -- ') : `Material from ${this.gameTitle}`,
-      this.data.material ? 'Materials' : 'Synthesis Items', false, this.inputSlug ? false : true);
+      this.data.material ? this.a25service.material_translation[this.language] : this.a25service.synthitem_translation[this.language], false, this.inputSlug ? false : true);
   }
 
   replaceVal(item: Item): string {
@@ -95,6 +94,6 @@ export class A25ItemComponent extends SingleComponent {
   insertStyle(item: Item): string {
     if (!item.material) return;
     if (!item.material[0].color) return;
-    return `box-shadow: inset 0 0px 30px 4px ${this.a25service.colorList[item.material[0].color]}`
+    return `box-shadow: 1px 2px 4px 1px grey, inset 0 0px 30px 4px ${this.a25service.colorList[item.material[0].color]}`
   }
 }

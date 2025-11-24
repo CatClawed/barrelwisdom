@@ -1,4 +1,4 @@
-import os
+import os, sys
 from django.core.exceptions import ImproperlyConfigured
 from datetime import timedelta
 from pathlib import Path
@@ -8,6 +8,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ['DEBUG'])
+
+ENABLE_DEBUG_TOOLBAR = DEBUG and "test" not in sys.argv
 
 ALLOWED_HOSTS = ['barrelwisdom.com', 'localhost', '127.0.0.1', 'backend']
 
@@ -96,6 +98,11 @@ INSTALLED_APPS = [
     'games.A25.chara_a25.apps.A25CharaConfig',
     'games.A25.items_a25.apps.A25ItemConfig',
     'games.A25.quest_a25.apps.A25QuestConfig',
+    'games.A25RW.apps.A25RWConfig',
+    # A26 Yumia
+    'games.A26.misc_a26.apps.A26MiscConfig',
+    'games.A26.items_a26.apps.A26ItemConfig',
+    'games.A26.monsters_a26.apps.A26MonsterConfig',
     # Blue Reflection
     'games.BR1.missions_br1.apps.BR1MissionConfig',
     'games.BR1.areas_br1.apps.BR1AreaConfig',
@@ -132,12 +139,13 @@ MIDDLEWARE = [
 if DEBUG:
     SESSION_ENGINE = 'django.contrib.sessions.backends.db'
     ALLOWED_HOSTS = ['*']
-    INSTALLED_APPS.append('debug_toolbar')
-    MIDDLEWARE.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
+    if ENABLE_DEBUG_TOOLBAR:
+        INSTALLED_APPS.append('debug_toolbar')
+        MIDDLEWARE.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
     # very annoying to have cache on during development
     # but did this ever come back to bite me
-    #MIDDLEWARE.remove('django.middleware.cache.UpdateCacheMiddleware')
-    #MIDDLEWARE.remove('django.middleware.cache.FetchFromCacheMiddleware')
+    MIDDLEWARE.remove('django.middleware.cache.UpdateCacheMiddleware')
+    MIDDLEWARE.remove('django.middleware.cache.FetchFromCacheMiddleware')
     DEBUG_TOOLBAR_CONFIG = {
         "SHOW_TOOLBAR_CALLBACK": lambda request: True,
     }
@@ -231,8 +239,8 @@ JWT_AUTH_COOKIE = 'bw-auth'
 JWT_AUTH_REFRESH_COOKIE = 'bw-refresh'
 
 CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
-        'LOCATION': 'memcached:11211',
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://redis:6379",
     }
 }

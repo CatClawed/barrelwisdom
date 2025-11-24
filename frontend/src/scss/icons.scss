@@ -1,9 +1,11 @@
+@use 'variables' as v;
+
 // Font
 
 @font-face {
   font-family: 'Atelier';
-  src: url('#{$atelier-font-path}/Atelier.woff2') format('woff2'),
-  url('#{$atelier-font-path}/Atelier.woff') format('woff');
+  src: url('#{v.$atelier-font-path}/Atelier.woff2') format('woff2'),
+  url('#{v.$atelier-font-path}/Atelier.woff') format('woff');
   font-display: swap;
   font-weight: normal;
   font-style: normal;
@@ -18,6 +20,7 @@
   flex-shrink: 0;
   speak: none;
   text-transform: none;
+  vertical-align: middle;
   /* Better Font Rendering */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

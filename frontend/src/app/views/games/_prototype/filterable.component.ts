@@ -10,12 +10,14 @@ import { DataComponent } from './data.component';
 
 @Component({
     template: '',
-    providers: [DestroyService]
+    providers: [DestroyService],
+    standalone: false
 })
 
 export abstract class FilterableComponent extends DataComponent {
     pageForm: UntypedFormGroup;
     hide: boolean = false;
+    loadAll: boolean = false;
 
     constructor(
         protected readonly destroy$: DestroyService,
@@ -56,5 +58,22 @@ export abstract class FilterableComponent extends DataComponent {
 
     identify2(index, item) {
         return item.slug;
+    }
+
+    // things implies that only one thing is allowed to be active at a time
+    // to a list to toggle off is provided
+    toggle(thing, things?) {
+        if (things) {
+            let og = thing.value
+            for (let t of things) {
+                t.setValue(false)
+            }
+            if (og == thing.value) {
+                thing.setValue(!thing.value)
+            }
+        }
+        else {
+            thing.setValue(!thing.value)
+        }
     }
 }

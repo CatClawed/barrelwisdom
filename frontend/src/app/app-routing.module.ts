@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CanMatchFn, ExtraOptions, Route, RouterModule, Routes, UrlSegment } from '@angular/router';
 import { LayoutComponent } from '@app/containers';
+import { AuthGuard } from './_helpers/auth.guard';
 
 const canMatchNumber: CanMatchFn = (route: Route, segments: UrlSegment[]) => {
   return !isNaN(Number(segments[segments.length - 1].path));
@@ -20,7 +21,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadComponent: ()=> import('@app/views/main/login/login.component').then(m=>m.LoginComponent),
+        loadComponent: ()=> import('@app/views/main/user-facing/login/login.component').then(m=>m.LoginComponent),
       },
     ]
   },
@@ -30,7 +31,8 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadComponent: ()=> import('@app/views/main/settings/settings.component').then(m=>m.SettingsComponent),
+        loadComponent: ()=> import('@app/views/main/user-facing/settings/settings.component').then(m=>m.SettingsComponent),
+        canActivate: [AuthGuard]
       },
     ]
   },
@@ -40,7 +42,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadComponent: ()=> import('@app/views/main/register/register.component').then(m=>m.RegisterComponent),
+        loadComponent: ()=> import('@app/views/main/user-facing/register/register.component').then(m=>m.RegisterComponent),
       },
     ]
   },
@@ -50,7 +52,8 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadComponent: ()=> import('@app/views/main/create/create.component').then(m=>m.CreateComponent),
+        loadComponent: ()=> import('@app/views/main/user-facing/create/create.component').then(m=>m.CreateComponent),
+        canActivate: [AuthGuard]
       },
     ]
   },
@@ -60,7 +63,8 @@ const routes: Routes = [
     children: [
       {
         path: 'comment',
-        loadComponent: ()=> import('@app/views/main/moderate/moderate.component').then(m=>m.ModerateComponent),
+        loadComponent: ()=> import('@app/views/main/user-facing/moderate/moderate.component').then(m=>m.ModerateComponent),
+        canActivate: [AuthGuard]
       },
     ]
   },
@@ -69,7 +73,7 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        path: '', 
+        path: '',
         loadComponent: ()=> import('@app/views/main/user/user.component').then(m=>m.UserComponent),
       },
     ]
@@ -79,7 +83,7 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        path: '', 
+        path: '',
         loadChildren: ()=> import('@app/views/games/A12/a12-routing.module').then(m=>m.A12RoutingModule),
       },
     ]
@@ -89,7 +93,7 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        path: '', 
+        path: '',
         loadChildren: ()=> import('@app/views/games/A15/a15-routing.module').then(m=>m.A15RoutingModule),
       },
     ]
@@ -99,17 +103,17 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        path: '', 
+        path: '',
         loadChildren: ()=> import('@app/views/games/A16/a16-routing.module').then(m=>m.A16RoutingModule),
       },
     ]
   },
   {
-    path: 'firis',  
+    path: 'firis',
     component: LayoutComponent,
     children: [
       {
-        path: '', 
+        path: '',
         loadChildren: ()=> import('@app/views/games/A18/a18-routing.module').then(m=>m.A18RoutingModule),
       },
     ]
@@ -119,10 +123,10 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        path: '', 
+        path: '',
         loadChildren: ()=> import('@app/views/games/A22/a22-routing.module').then(m=>m.A22RoutingModule),
       },
-      
+
     ]
   },
   {
@@ -130,10 +134,10 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        path: '', 
+        path: '',
         loadChildren: ()=> import('@app/views/games/A23/a23-routing.module').then(m=>m.A23RoutingModule),
       },
-      
+
     ]
   },
   {
@@ -141,10 +145,32 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        path: '', 
+        path: '',
         loadChildren: ()=> import('@app/views/games/A25/a25-routing.module').then(m=>m.A25RoutingModule),
       },
-      
+
+    ]
+  },
+  {
+    path: 'resleriana-red-white',
+    component: LayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: ()=> import('@app/views/games/A25RW/a25rw-routing.module').then(m=>m.A25RWRoutingModule),
+      },
+
+    ]
+  },
+  {
+    path: 'yumia',
+    component: LayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: ()=> import('@app/views/games/A26/a26-routing.module').then(m=>m.A26RoutingModule),
+      },
+
     ]
   },
   {
@@ -152,7 +178,7 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        path: '', 
+        path: '',
         loadChildren: ()=> import('@app/views/games/BR1/br1-routing.module').then(m=>m.BR1RoutingModule),
       },
     ]
@@ -162,7 +188,7 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        path: '', 
+        path: '',
         loadChildren: ()=> import('@app/views/games/BRSL/brsl-routing.module').then(m=>m.BRSLRoutingModule),
       },
     ]
@@ -197,7 +223,7 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        path: 'tag/:tagname', 
+        path: 'tag/:tagname',
         loadComponent: ()=> import('@app/views/main/home/home.component').then(m=>m.HomeComponent),
       },
       {
@@ -206,7 +232,7 @@ const routes: Routes = [
         canMatch: [canMatchNumber]
       },
       {
-        path: '', 
+        path: '',
         loadComponent: ()=> import('@app/views/main/home/home.component').then(m=>m.HomeComponent),
       },
       {
@@ -221,7 +247,7 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        path: '', 
+        path: '',
         loadComponent: ()=> import('@app/views/main/blog/blog.component').then(m=>m.BlogComponent),
       },
     ]

@@ -4,9 +4,10 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Popover } from '@app/views/_components/popover/popover.component';
 import { Item } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
@@ -17,13 +18,12 @@ import { map, startWith } from 'rxjs/operators';
 import { A25ItemComponent } from './a25-item.component';
 
 @Component({
-  templateUrl: 'a25-materiallist.component.html',
-  styleUrls: ['../resleri.scss'],
-  encapsulation: ViewEncapsulation.None,
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports,
-    A25ItemComponent, MatButtonModule, Popover]
+    templateUrl: 'a25-materiallist.component.html',
+    styleUrls: ['../resleri.scss'],
+    encapsulation: ViewEncapsulation.None,
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
+        MatButtonModule, Popover]
 })
 
 export class A25MaterialListComponent extends DialogUseComponent {
@@ -51,15 +51,15 @@ export class A25MaterialListComponent extends DialogUseComponent {
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       filtertrait: '',
-      color: 'Any',
+      color: '',
       rarity: '0',
-      traittype: 'Any'
+      traittype: ''
     })
   }
 
   changeData() {
     this.gameService(this.a25service, 'items/materials');
-    this.genericSettings(`Materials`, `The list of materials in ${this.gameTitle}.`);
+    this.genericSettings(this.a25service.material_translation[this.language], `The list of materials in ${this.gameTitle}.`);
     this.pageForm.reset()
     return forkJoin({
       items: this.a25service.getMaterialList(this.language),
@@ -79,15 +79,16 @@ export class A25MaterialListComponent extends DialogUseComponent {
   }
 
   private filterT(value: string, color: string, rarity: number, filter: string, traittype: string): Item[] {
+    this.hide = false;
     let list: Item[] = this.data.items;
 
-    if (color != 'Any') {
+    if (color != 'Any' && color) {
       list = list.filter(item => item.material[0].color == color);
     }
     if (rarity > 0) {
       list = list.filter(item => item.rarity == rarity)
     }
-    if (traittype !== 'Any') {
+    if (traittype !== 'Any' && traittype) {
       list = list.filter(item => item.material[0].traits ? item.material[0].traits[0].kind === traittype : false)
     }
     if (filter) {
@@ -110,6 +111,6 @@ export class A25MaterialListComponent extends DialogUseComponent {
 
   insertStyle(item: Item): string {
     if (!item.material[0].color) return;
-    return `box-shadow: inset 0 0px 30px 4px ${this.a25service.colorList[item.material[0].color]}`
+    return `box-shadow: 1px 2px 4px 1px grey, inset 0 0px 30px 4px ${this.a25service.colorList[item.material[0].color]};`
   }
 }

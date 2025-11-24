@@ -3,10 +3,10 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { Tooltip } from '@app/views/_components/tooltip/tooltip.component';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Trait } from '@app/views/games/A18/_services/a18.interface';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -16,11 +16,10 @@ import { map, startWith } from 'rxjs/operators';
 import { A18TraitComponent } from './a18-trait.component';
 
 @Component({
-  templateUrl: 'a18-traitlist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports,
-    A18TraitComponent, Tooltip]
+    templateUrl: 'a18-traitlist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports,
+        A18TraitComponent, FilterListComponent]
 })
 
 export class A18TraitlistComponent extends DialogUseComponent {
@@ -35,7 +34,7 @@ export class A18TraitlistComponent extends DialogUseComponent {
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
-    private a18service: A18Service,) {
+    protected a18service: A18Service,) {
     super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A18TraitComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
@@ -59,6 +58,7 @@ export class A18TraitlistComponent extends DialogUseComponent {
   }
 
   private filterT(value: string, transfer: number): Trait[] {
+    this.hide = false;
     let traitlist: Trait[] = this.data;
     if (transfer != 0) {
       traitlist = traitlist.filter(trait => !(trait.trans_atk === trait.trans_heal === trait.trans_wpn === trait.trans_arm === trait.trans_acc === trait.trans_syn));

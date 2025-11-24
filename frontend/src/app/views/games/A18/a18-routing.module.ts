@@ -7,17 +7,17 @@ const routes: Routes = [
     path: 'traits',
     children: [
       {
-        path: '', 
+        path: '',
         loadComponent: ()=> import('@app/views/games/A18/trait/a18-traitlist.component').then(m=>m.A18TraitlistComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':language', 
+        path: ':language',
         loadComponent: ()=> import('@app/views/games/A18/trait/a18-traitlist.component').then(m=>m.A18TraitlistComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':subject/:language', 
+        path: ':subject/:language',
         loadComponent: ()=> import('@app/views/games/A18/trait/a18-trait.component').then(m=>m.A18TraitComponent),
         canActivate: [LanguageGuard],
       },
@@ -27,17 +27,17 @@ const routes: Routes = [
     path: 'effects',
     children: [
       {
-        path: '', 
+        path: '',
         loadComponent: ()=> import('@app/views/games/A18/effect/a18-effectlist.component').then(m=>m.A18EffectlistComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':language', 
+        path: ':language',
         loadComponent: ()=> import('@app/views/games/A18/effect/a18-effectlist.component').then(m=>m.A18EffectlistComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':subject/:language', 
+        path: ':subject/:language',
         loadComponent: ()=> import('@app/views/games/A18/effect/a18-effect.component').then(m=>m.A18EffectComponent),
         canActivate: [LanguageGuard],
       },
@@ -47,17 +47,17 @@ const routes: Routes = [
     path: 'monsters',
     children: [
       {
-        path: '', 
+        path: '',
         loadComponent: ()=> import('@app/views/games/A18/monster/a18-monsterlist.component').then(m=>m.A18MonsterlistComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':language', 
+        path: ':language',
         loadComponent: ()=> import('@app/views/games/A18/monster/a18-monsterlist.component').then(m=>m.A18MonsterlistComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':subject/:language', 
+        path: ':subject/:language',
         loadComponent: ()=> import('@app/views/games/A18/monster/a18-monster.component').then(m=>m.A18MonsterComponent),
         canActivate: [LanguageGuard],
       },
@@ -67,12 +67,12 @@ const routes: Routes = [
     path: 'categories',
     children: [
       {
-        path: ':subject', 
+        path: ':subject',
         loadComponent: ()=> import('@app/views/games/A18/category/a18-category.component').then(m=>m.A18CategoryComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':subject/:language', 
+        path: ':subject/:language',
         loadComponent: ()=> import('@app/views/games/A18/category/a18-category.component').then(m=>m.A18CategoryComponent),
         canActivate: [LanguageGuard],
       },
@@ -86,12 +86,12 @@ const routes: Routes = [
     path: 'catalysts',
     children: [
       {
-        path: '', 
+        path: '',
         loadComponent: ()=> import('@app/views/games/A18/catalyst/a18-catalystlist.component').then(m=>m.A18CatalystlistComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':language', 
+        path: ':language',
         loadComponent: ()=> import('@app/views/games/A18/catalyst/a18-catalystlist.component').then(m=>m.A18CatalystlistComponent),
         canActivate: [LanguageGuard],
       },
@@ -101,12 +101,12 @@ const routes: Routes = [
     path: 'recipe-ideas',
     children: [
       {
-        path: '', 
+        path: '',
         loadComponent: ()=> import('@app/views/games/A18/recipe/a18-recipe.component').then(m=>m.A18RecipeComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':language', 
+        path: ':language',
         loadComponent: ()=> import('@app/views/games/A18/recipe/a18-recipe.component').then(m=>m.A18RecipeComponent),
         canActivate: [LanguageGuard],
       },
@@ -116,17 +116,17 @@ const routes: Routes = [
     path: 'items',
     children: [
       {
-        path: '', 
+        path: '',
         loadComponent: ()=> import('@app/views/games/A18/item/a18-itemlist.component').then(m=>m.A18ItemlistComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':language', 
+        path: ':language',
         loadComponent: ()=> import('@app/views/games/A18/item/a18-itemlist.component').then(m=>m.A18ItemlistComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':subject/:language', 
+        path: ':subject/:language',
         loadComponent: ()=> import('@app/views/games/A18/item/a18-item.component').then(m=>m.A18ItemComponent),
         canActivate: [LanguageGuard],
       },
@@ -136,12 +136,12 @@ const routes: Routes = [
     path: 'shops',
     children: [
       {
-        path: '', 
+        path: '',
         loadComponent: ()=> import('@app/views/games/A18/shop/a18-shop.component').then(m=>m.A18ShopComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':language', 
+        path: ':language',
         loadComponent: ()=> import('@app/views/games/A18/shop/a18-shop.component').then(m=>m.A18ShopComponent),
         canActivate: [LanguageGuard],
       },
@@ -149,7 +149,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/firis/ultimate-setups',
+    redirectTo: '/firis/items',
     pathMatch: 'full'
   },
 ];

@@ -18,18 +18,23 @@ export class AuthenticationService implements OnDestroy {
         let refresh = false;
         if(this.cookieService.get('refresh'))
         {
-            const jwtToken = JSON.parse(atob(this.cookieService.get('refresh').split('.')[1]));
-            const expires = new Date(jwtToken.exp * 1000);
-            if(expires.getTime() > Date.now())
-            {
-                this.u = new User;
-                this.u.username = jwtToken.name;
-                this.u.id = jwtToken.user_id;
-                this.u.group = jwtToken.group;
-                refresh = true;
+            try {
+                const jwtToken = JSON.parse(atob(this.cookieService.get('refresh').split('.')[1]));
+                const expires = new Date(jwtToken.exp * 1000);
+                if(expires.getTime() > Date.now())
+                    {
+                        this.u = new User;
+                        this.u.username = jwtToken.name;
+                        this.u.id = jwtToken.user_id;
+                        this.u.group = jwtToken.group;
+                        refresh = true;
+                    }
+                    else {
+                        this.logout();
+                    }
             }
-            else {
-                this.logout(); 
+            catch (err) {
+                console.log('Auth Error: ', err.message);
             }
         }
         this.userSubject = new BehaviorSubject<User>(this.u);
@@ -48,18 +53,23 @@ export class AuthenticationService implements OnDestroy {
     login(username, password) {
         return this.http.post<any>(`${environment.authUrl}/token/`, { username, password })
             .pipe(map(jwt => {
-                const jwtToken = JSON.parse(atob(jwt.refresh.split('.')[1]));
-                const expires = new Date(jwtToken.exp * 1000);
-            
-                this.u = new User;
-                this.cookieService.set('refresh', jwt.refresh, {path: '/', expires: expires});
-                this.cookieService.set('access', jwt.access, {path: '/'});
-                this.u.username = jwtToken.name;
-                this.u.id = jwtToken.user_id;
-                this.u.group = jwtToken.group;
-                this.userSubject.next(this.u);
-                this.startRefreshTokenTimer();
-                return jwt;
+                try {
+                    const jwtToken = JSON.parse(atob(jwt.refresh.split('.')[1]));
+                    const expires = new Date(jwtToken.exp * 1000);
+
+                    this.u = new User;
+                    this.cookieService.set('refresh', jwt.refresh, {path: '/', expires: expires});
+                    this.cookieService.set('access', jwt.access, {path: '/'});
+                    this.u.username = jwtToken.name;
+                    this.u.id = jwtToken.user_id;
+                    this.u.group = jwtToken.group;
+                    this.userSubject.next(this.u);
+                    this.startRefreshTokenTimer();
+                    return jwt;
+                }
+                catch (err) {
+                    console.log('Auth Error: ', err.message);
+                }
             }));
     }
 
@@ -91,9 +101,15 @@ export class AuthenticationService implements OnDestroy {
         let timeout = Date.now(); // if something weird happens then the refresh will be attempted immediately
         if(this.cookieService.get('access'))
         {
-            const jwtToken = JSON.parse(atob(this.cookieService.get('access').split('.')[1]));
-            const expires = new Date(jwtToken.exp * 1000);
-            timeout = expires.getTime() - Date.now() - (60 * 1000);
+            try {
+                const jwtToken = JSON.parse(atob(this.cookieService.get('access').split('.')[1]));
+                const expires = new Date(jwtToken.exp * 1000);
+                timeout = expires.getTime() - Date.now() - (60 * 1000);
+            }
+            catch (err) {
+                console.log('Auth Error: ', err.message);
+            }
+
         }
         this.refreshTokenTimeout = setTimeout(() => this.refreshToken().pipe(takeUntil(this.destroy$)).subscribe(), timeout);
     }

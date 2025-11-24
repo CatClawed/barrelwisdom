@@ -11,10 +11,9 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
 
 @Component({
-  templateUrl: 'br1-missionlist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports]
+    templateUrl: 'br1-missionlist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports]
 })
 export class BR1MissionlistComponent extends FragmentedComponent {
   constructor(

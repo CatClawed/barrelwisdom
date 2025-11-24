@@ -9,25 +9,21 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a22-item.component.html',
-  selector: 'a22-item',
-  styles: [
-    `.badge-list {
-      margin-right: 0.4em;
-      margin-top: 0.3em;
-      font-size: calc(0.9rem + 0.1vw) !important;
-      cursor: pointer;
-    }
-      @media screen and (max-width: 576px) {
-      .badge-list {
-        font-size: 2.5vw !important;
-      }
+    templateUrl: 'a22-item.component.html',
+    selector: 'a22-item',
+    encapsulation: ViewEncapsulation.None,
+    styles: [
+        `.btn-ryza2 {
+      display: inline-flex;
+      max-width: 100%;
+      margin-top: 0.3rem;
+      margin-left: 0.3rem;
+      text-decoration: none !important;
+      font-size: 1rem;
     }`
-  ],
-  encapsulation: ViewEncapsulation.None,
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, Popover]
+    ],
+    providers: [DestroyService],
+    imports: [...CommonImports, Popover]
 })
 export class A22ItemComponent extends SingleComponent {
   default: any[] = [];
@@ -35,6 +31,7 @@ export class A22ItemComponent extends SingleComponent {
   eff2: any[] = [];
   eff3: any[] = [];
   eff4: any[] = [];
+  effs: any[] = [];
   icons = {
     'Attack':    'type-attack',
     'Heal':      'type-heal',
@@ -55,7 +52,7 @@ export class A22ItemComponent extends SingleComponent {
     protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
-    private a22service: A22Service) {
+    protected a22service: A22Service) {
     super(destroy$, route, breadcrumbService, seoService);
   }
 
@@ -70,9 +67,10 @@ export class A22ItemComponent extends SingleComponent {
     this.eff2 = [];
     this.eff3 = [];
     this.eff4 = [];
+    this.effs = [];
     this.seoImage = `${this.imgURL}${this.section}/${this.data.slug}.webp`;
     this.genericSettings(this.data.name, this.data.desc,
-      'Items',
+      this.a22service.item_translation[this.language],
       false,
       this.inputSlug ? false : true);
 
@@ -95,7 +93,11 @@ export class A22ItemComponent extends SingleComponent {
             if (e.line == 4) { this.eff4.push([e.name, e.slug]); }
           }
         }
+        if (this.eff1.length > 0) this.effs.push(this.eff1);
+        if (this.eff2.length > 0) this.effs.push(this.eff2);
+        if (this.eff3.length > 0) this.effs.push(this.eff3);
+        if (this.eff4.length > 0) this.effs.push(this.eff4);
       }
     }
   }
-} 
+}

@@ -1,5 +1,5 @@
 @if (data; as trait) {
-  <div [class]="!inputData ? 'card card-body card-small' : 'card card-body'"
+  <div [class]="inputData ? 'card' : inputSlug ? 'card card-dialog' : 'card card-small'"
     [style]="inputData ? 'height:100%;' : null">
     <h4 class="card-title card-icon-space">
       @if (inputData) {
@@ -12,7 +12,7 @@
     </h4>
     <div class="card-icon-position">
       @if (trait.trans_wep) {
-        <img  style="width:3rem;" src="{{imgURL}}svg/equipment.svg" alt="equipment"/>
+        <img style="width:3rem;" src="{{imgURL}}svg/equipment.svg" alt="equipment"/>
       }
       @else {
         <img style="width:3rem;" src="{{imgURL}}svg/combat.svg"    alt="combat"/>
@@ -26,7 +26,7 @@
       <p [innerHTML]="trait.note"></p>
     }
     @if ( trait.items) {
-      <b>Item:</b>
+      <b>{{a25service.material_translation[language]}}</b>
       <ul style="list-style-type: none;padding-left:1rem;">
         @for (item of trait.items; track item) {
           <li>
@@ -45,7 +45,7 @@
       </ul>
     }
     @if ( trait.char1 || trait.char2 || trait.char3) {
-      <b>Characters:</b>
+      <b>{{a25service.character_translation[language]}}</b>
       <ul style="list-style-type: none;padding-left:0.8rem;">
         @for (char of trait.char1; track char) {
           <ng-container *ngTemplateOutlet="charTemplate; context: {char:char}"></ng-container>

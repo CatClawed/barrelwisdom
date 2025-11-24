@@ -6,15 +6,14 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { Observable, takeUntil } from 'rxjs';
 
 @Component({
-  templateUrl: 'filter-list.component.html',
-  selector: 'filter-list',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [...CommonImports, NgTemplateOutlet, AsyncPipe]
+    templateUrl: 'filter-list.component.html',
+    selector: 'filter-list',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [...CommonImports, NgTemplateOutlet, AsyncPipe]
 })
 export class FilterListComponent implements AfterViewInit, OnDestroy {
   @Input()
-  title: string;
+  name: string;
 
   @Input()
   list: Observable<any[]>;
@@ -27,6 +26,9 @@ export class FilterListComponent implements AfterViewInit, OnDestroy {
 
   @Input()
   template: TemplateRef<any>;
+
+  @Input()
+  loadAll: boolean = false;
 
   skip: boolean = false;
   intersectionObserver: IntersectionObserver;

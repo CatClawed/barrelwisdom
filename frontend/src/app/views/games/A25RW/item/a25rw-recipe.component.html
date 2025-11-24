@@ -1,0 +1,20 @@
+@if (data; as trees) {
+  <h1>{{a25rwservice.recipe_tree[language]}}</h1>
+  <div class="table-of-contents">
+    <b>Table of Contents</b>
+    <ol>
+      @for (tree of trees; track tree) {
+        <li>
+          <a href="/{{gameURL}}/recipe-trees/{{language}}#{{tree.name}}"
+            (click)="$event.preventDefault();scroll(tree.name)">
+            {{tree.name}}
+          </a>
+        </li>
+      }
+    </ol>
+  </div>
+  @for (tree of trees; track tree) {
+    <h2 id="{{tree.name}}">{{tree.name}}</h2>
+    <a25rw-tree [tree]="tree.nodes" [imgURL]="imgURL" [gameURL]="gameURL" [language]="language"></a25rw-tree>
+  }
+}

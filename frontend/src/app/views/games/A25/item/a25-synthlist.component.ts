@@ -4,9 +4,10 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Item } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -17,13 +18,12 @@ import { A25IconComponent } from './a25-icon.component';
 import { A25ItemComponent } from './a25-item.component';
 
 @Component({
-  templateUrl: 'a25-synthlist.component.html',
-  styleUrls: ['../resleri.scss'],
-  encapsulation: ViewEncapsulation.None,
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports,
-    A25ItemComponent, A25IconComponent, MatButtonModule]
+    templateUrl: 'a25-synthlist.component.html',
+    styleUrls: ['../resleri.scss'],
+    encapsulation: ViewEncapsulation.None,
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
+        A25IconComponent, MatButtonModule]
 })
 
 export class A25SynthesisListComponent extends DialogUseComponent {
@@ -44,14 +44,14 @@ export class A25SynthesisListComponent extends DialogUseComponent {
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       filtering: '',
-      kind: 'Any',
+      kind: '',
       rarity: '0'
     })
   }
 
   changeData() {
     this.gameService(this.a25service, 'items/synthesis');
-    this.genericSettings(`Synthesis Items`, `The list of synthesis items in ${this.gameTitle}.`);
+    this.genericSettings(this.a25service.synthitem_translation[this.language], `The list of synthesis items in ${this.gameTitle}.`);
     this.pageForm.reset();
     return forkJoin({
       items: this.a25service.getSynthList(this.language),
@@ -99,9 +99,10 @@ export class A25SynthesisListComponent extends DialogUseComponent {
   }
 
   private filterT(value: string, kind: string, rarity: number, filter: string): Item[] {
+    this.hide = false;
     let list: Item[] = this.data.items;
 
-    if (kind != 'Any') {
+    if (kind != 'Any' && kind) {
       list = list.filter(item => item.equip ? item.equip[0].kind == kind : item.combat[0].kind == kind);
     }
     if (rarity > 0) {

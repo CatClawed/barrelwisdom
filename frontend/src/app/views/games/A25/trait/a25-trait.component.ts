@@ -9,11 +9,10 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a25-trait.component.html',
-  selector: 'a25-trait',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, NgTemplateOutlet]
+    templateUrl: 'a25-trait.component.html',
+    selector: 'a25-trait',
+    providers: [DestroyService],
+    imports: [...CommonImports, NgTemplateOutlet]
 })
 export class A25TraitComponent extends SingleComponent {
   constructor(
@@ -39,7 +38,7 @@ export class A25TraitComponent extends SingleComponent {
   afterAssignment(): void {
     this.genericSettings(this.data.name,
       this.data.desc.replaceAll('{0}', this.data.val[0] + ' ~ ' + this.data.val[4]),
-      'Traits',
+      this.a25service.trait_translation[this.language],
       false,
       this.inputSlug ? false : true);
   }

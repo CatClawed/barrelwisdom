@@ -4,9 +4,11 @@ import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
+import { ItemComponent } from '@app/views/_components/item/item.component';
 import { Item } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -16,11 +18,10 @@ import { map, startWith } from 'rxjs/operators';
 import { A23ItemComponent } from './a23-item.component';
 
 @Component({
-  templateUrl: 'a23-itemlist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports,
-    A23ItemComponent, MatButtonModule]
+    templateUrl: 'a23-itemlist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
+        ItemComponent, MatButtonModule]
 })
 
 export class A23ItemlistComponent extends DialogUseComponent {
@@ -35,21 +36,21 @@ export class A23ItemlistComponent extends DialogUseComponent {
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
-    private a23service: A23Service,
+    protected a23service: A23Service,
   ) {
     super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A23ItemComponent,
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       filtering: '',
-      cat: 'Any',
-      kind: 'Any',
+      cat: '',
+      kind: '',
     })
   }
 
   changeData() {
     this.gameService(this.a23service, 'items');
-    this.genericSettings(`Items`, `The list of items in ${this.gameTitle}.`);
+    this.genericSettings(this.a23service.item_translation[this.language], `The list of items in ${this.gameTitle}.`);
     this.pageForm.reset();
     return forkJoin({
       items: this.a23service.getItemList(this.language),
@@ -65,12 +66,13 @@ export class A23ItemlistComponent extends DialogUseComponent {
   }
 
   private filterT(value: string, cat: string, ingt: string, kind: string): Item[] {
+    this.hide = false;
     let list: Item[] = this.data.items;
 
-    if (cat != 'Any') {
+    if (cat != 'Any' && cat) {
       list = list.filter(item => item.categories.some(c => c.name == cat) || (item.add ? item.add.some(c => c.name == cat) : false));
     }
-    if (kind != 'Any') {
+    if (kind != 'Any' && kind) {
       list = list.filter(item => item.kind == kind)
     }
     if (ingt) {

@@ -1,8 +1,11 @@
+
+@use '../variables' as v;
+
 .navigation {
   position: fixed;
   z-index: 1000;
   border-bottom: transparent !important;
-  background: $navbar linear-gradient(0deg, rgba(71, 58, 48, 1) 0%, rgba(94, 76, 63, 0.8687675753895308) 100%);
+  background: v.$navbar linear-gradient(0deg, rgba(71, 58, 48, 1) 0%, rgba(94, 76, 63, 0.8687675753895308) 100%);
   height: 55px;
   padding: 0;
   width: 100%;
@@ -14,10 +17,12 @@
   align-items: center;
   width: 155px;
   height: 55px;
-  padding: 0;
-  margin-right: 0;
   justify-content: center;
   margin-right: 1rem;
+
+  >picture {
+    display: inline-flex;
+  }
 }
 
 .nav-items {
@@ -38,8 +43,7 @@
 
 .nav-lang {
   display: inline;
-  margin-right: 0.5rem;
-  width: 135px;
+  width: 150px;
 }
 
 .nav-lang button {
@@ -122,8 +126,9 @@
 }
 
 .sidenav {
-  background-color: $sidebar !important;
+  background-color: v.$sidebar !important;
   width: 200px !important;
+  font-size: 1rem;
 }
 
 .sidenav-items {
@@ -133,22 +138,34 @@
 }
 
 .sidenav-item {
-  padding: 0.6rem;
+  padding: 0.6rem 0 0.6rem 0.3rem;
+  margin-right: 0.2rem;
+  margin-left: auto;
   color: white;
   border-radius: 0.25rem;
-  width: 95%;
+  width: 80%;
   display: flex;
   align-items: center;
-  font-size: 16px;
+  position: relative;
 
   >i {
-    margin-right: 0.5rem;
-    width: 1.3rem;
+    position: absolute;
+    left: -24px;
+    width: 1.5rem;
     text-align: center;
   }
 
   >b {
     margin-left: auto;
+    margin-right: 0.1rem;
+  }
+
+  >svg {
+    position: absolute;
+    left: -24px;
+    fill: white;
+    width: 1.5em;
+    height: 1.5em;
   }
 }
 
@@ -160,10 +177,6 @@
 
 .sidenav-item.active {
   background-color: #3c4e5e;
-}
-
-.sidenav-child {
-  padding-left: 2.4rem;
 }
 
 .sidenav-bottom {

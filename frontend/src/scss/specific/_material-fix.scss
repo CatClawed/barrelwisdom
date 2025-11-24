@@ -1,3 +1,5 @@
+@use '../variables' as v;
+
 // Form stuff
 
 .mdc-text-field--outlined {
@@ -18,11 +20,18 @@
 
 .mat-drawer-container {
     background: transparent !important;
+    min-height: 100dvh;
 }
 
 .mat-sidenav-content {
-    margin-left: 0 !important;
+    margin-left: 200px; // prevents a layout shift
 }
+
+@media screen and (max-width: 800px) {
+    .mat-sidenav-content {
+        margin-left: 0;
+    }
+  }
 
 // Create page
 
@@ -49,7 +58,7 @@
 .mat-raised-button.mat-accent,
 .mat-fab.mat-accent,
 .mat-mini-fab.mat-accent {
-    background-color: $navbar !important;
+    background-color: v.$navbar !important;
 }
 
 .mat-flat-button.mat-accent,
@@ -74,7 +83,7 @@
     content: "\274c";
     color: rgb(180, 0, 0);
     cursor: pointer;
-    top: 57px;
+    top: 10px;
     right: 10px;
     font-size: 1.8rem;
     background-color: white;
@@ -91,27 +100,24 @@
 
 @media screen and (min-width: 1100px) {
     .dialog-margin {
-        margin-top: 0;
-        //max-height: 95vh;
-        //margin-left: auto;
-        //margin-right: auto;
+        margin-top: 1rem;
         max-width: 50vw;
         min-width: 500px;
         overflow-y: auto; // heck webkit
         -ms-overflow-style: none;  /* IE and Edge */
         scrollbar-width: none;  /* Firefox */
+        padding-bottom: 1rem;
     }
 }
 
 @media screen and (max-width: 1100px) {
     .dialog-margin {
-        margin-top: 210px;
-        //margin-left: auto;
-        //margin-right: auto;
+        margin-top: 5rem;
         max-width: min(95vw, 800px);
         min-width: max(40vw, 320px);
         overflow-y: auto; // heck webkit
         -ms-overflow-style: none;  /* IE and Edge */
         scrollbar-width: none;  /* Firefox */
+        padding-bottom: 1rem;
     }
 }

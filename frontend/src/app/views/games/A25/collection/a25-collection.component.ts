@@ -1,7 +1,7 @@
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { Dialog } from '@angular/cdk/dialog';
 import { KeyValuePipe, Location, NgTemplateOutlet } from '@angular/common';
-import { Component, inject, ViewEncapsulation } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -22,107 +22,64 @@ import { A25CharaComponent } from '@app/views/games/A25/character/a25-chara.comp
 import { A25MemoriaComponent } from '@app/views/games/A25/memoria/a25-memoria.component';
 import * as FastIntCompress from 'fastintcompression';
 import { forkJoin, map, Observable, startWith } from 'rxjs';
+import { A25CharaFrameComponent } from '../character/a25-charaframe.component';
 
 @Component({
-  templateUrl: 'a25-collection.component.html',
-  selector: 'a25-collection',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, MatTabsModule, KeyValuePipe,
-    MatButtonModule, MatCheckboxModule, MatMenuModule, NgTemplateOutlet,
-    A25MemoriaComponent, A25CharaComponent, Popover, ClipboardModule],
-  encapsulation: ViewEncapsulation.None,
-  styles: [
-    `.char-grid {
+    templateUrl: 'a25-collection.component.html',
+    selector: 'a25-collection',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, MatTabsModule, KeyValuePipe,
+        MatButtonModule, MatCheckboxModule, MatMenuModule, NgTemplateOutlet,
+        Popover, ClipboardModule, A25CharaFrameComponent],
+    styles: [
+        `.char-grid {
       display: grid;
       gap: 1rem;
       margin-bottom: 1rem;
       grid-column-gap:0.8%;
     }`,
-    `.a25-star-font {
-      -webkit-text-stroke-color:black;
-      color:yellow;
-      padding-top:0.3rem;
-    }`,
-    `.a25-char-font {
-      height: 20%;
-      width: 20%;
-      aspect-ratio:1;
-      color:white;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      border-radius:50%;
-      position:absolute;
-      bottom:0;
-      right:9%;
-    }`,
-    `@media screen and (min-width: 800px) {
-      .char-grid {
-        grid-template-columns:repeat(6,16%);
-      }
-      .a25-char-font {
-        font-size:1.4vw
-      }
-      .a25-star-font {
-        font-size:1.5vw;
-        -webkit-text-stroke-width:.15vw;
-      }
-      .a25-half-star {
-        display:inline-block;
-        overflow-x:clip;
-        width:1vw;
-      }
-    }`,
-    `@media screen and (max-width: 800px) {
-      .char-grid {
-        grid-template-columns:repeat(3,31%);
-      }
-      .a25-char-font {
-        font-size:4vw
-      }
-      .a25-star-font {
-        font-size:4vw;
-        -webkit-text-stroke-width:.4vw;
-      }
-      .a25-half-star {
-        display: inline-block;
-        overflow-x: clip;
-        width: 3vw;
-      }
-    }`,
-    `.a25-emblem {
+        `.a25-emblem {
       cursor: pointer;
       display: inline-block;
       width: 180px;
       aspect-ratio: 180/540;
     }`,
-    `.mem-grid {
+        `.mem-grid {
       display: grid;
     }`,
-    `@media screen and (min-width: 800px) {
-      .mem-grid {
+        `@media screen and (min-width: 800px) {
+      .char-grid {
         grid-template-columns:repeat(6,16%);
       }
-      .a25-mem-font {
-        font-size:1.4vw
-      }
-    }`
-    ,
-    `@media screen and (max-width: 800px) {
       .mem-grid {
-        grid-template-columns:repeat(3,33%);
+        grid-template-columns:repeat(6,1fr);
       }
       .a25-mem-font {
         font-size:1.4vw
       }
     }`,
-    `.tabs-overflow2 {
+        `@media screen and (max-width: 800px) {
+      .char-grid {
+        grid-template-columns:repeat(3,31%);
+      }
+      .mem-grid {
+        grid-template-columns:repeat(3,1fr);
+      }
+      .a25-mem-font {
+        font-size:1.4vw
+      }
+    }`,
+        `.tabs-overflow2 {
       .mat-mdc-tab-body-content {
           overflow: hidden;
       }
+    }`,
+        `.mem-img {
+      aspect-ratio: 256/410;
+      width: 256px;
+      display: block;
     }`
-  ]
+    ]
 })
 export class A25CollectionComponent extends DialogUseComponent {
   collection = {
@@ -135,7 +92,6 @@ export class A25CollectionComponent extends DialogUseComponent {
   openTab = 0;
   filteredCharas: Observable<Character[]>;
   filteredMemoria: Observable<Memoria[]>;
-  filteredEmblems: Observable<Emblem[]>;
   editMode: boolean = true;
   ranks = {
     1: 'I',
@@ -145,7 +101,6 @@ export class A25CollectionComponent extends DialogUseComponent {
     5: 'V',
   }
   enc = new TextEncoder();
-  dec = new TextDecoder();
   bad_data = false;
   areyousure = false;
   private _snackBar = inject(MatSnackBar);
@@ -187,7 +142,6 @@ export class A25CollectionComponent extends DialogUseComponent {
       this.shareCode = this.LocalStorage.getItem('a25collect')
     }
     this.pageForm = this.formBuilder.nonNullable.group({
-      show_jp: this.editMode ? this.language === 'ja' : true,
       hide_missing: !this.editMode,
       filtertext: '',
       roles: "any",
@@ -205,7 +159,6 @@ export class A25CollectionComponent extends DialogUseComponent {
     this.genericSettings(`Collection`, `Show off your collectibles in ${this.gameTitle}.`);
     this.pageForm.reset();
     this.areyousure = false;
-    this.pageForm.get('show_jp').setValue(this.editMode ? this.language === 'ja' : true)
     return forkJoin({
         characters: this.a25service.getCharaList(this.language),
         memoria: this.a25service.getMemoriaList(this.language),
@@ -217,37 +170,28 @@ export class A25CollectionComponent extends DialogUseComponent {
   }
 
   changeTab(event) {
-    let jp = this.pageForm.get('show_jp').value
     let missing = this.pageForm.get('hide_missing').value
     this.pageForm.reset();
-    this.pageForm.get('show_jp').setValue(jp)
     this.pageForm.get('hide_missing').setValue(missing)
     this.openTab = event['index'];
   }
 
   afterAssignment(): void {
     this.use_global_count = this.detect_global();
-    if (this.language !== 'ja' && !this.use_global_count) this.pageForm.get('show_jp').setValue(true)
     this.filteredCharas = this.pageForm.valueChanges.pipe(
         startWith(null as Observable<Character[]>),
         map((search: any) => search ?
-        this.filterT(search.filtertext, search.roles, search.elems, search.show_jp, search.colorL, search.colorR, search.hide_missing)
-        : this.filterT('', 'any', 'any', this.editMode ? this.language === 'ja' || !this.use_global_count : true, 'any', 'any', !this.editMode)),
+        this.filterT(search.filtertext, search.roles, search.elems, search.colorL, search.colorR, search.hide_missing)
+        : this.filterT('', 'any', 'any', 'any', 'any', !this.editMode)),
       );
 
       this.filteredMemoria = this.pageForm.valueChanges.pipe(
         startWith(null as Observable<Memoria[]>),
         map((search: any) => search ?
-        this.filterB(search.filtertext, search.stats, search.show_jp, search.hide_missing)
-        : this.filterB('', 'date', this.editMode ? this.language === 'ja' || !this.use_global_count : true, !this.editMode))
+        this.filterB(search.filtertext, search.stats, search.hide_missing)
+        : this.filterB('', 'date', !this.editMode))
       );
 
-      this.filteredEmblems = this.pageForm.valueChanges.pipe(
-        startWith(null as Observable<Emblem[]>),
-        map((search: any) => search ?
-        this.filterC(search.show_jp)
-        : this.filterC(this.editMode ? this.language === 'ja' || !this.use_global_count : true)),
-      );
       this.totals['emblem_total'] = this.data.emblems.length;
       this.totals['memoria_gbl'] = this.data.memoria.filter(obj => obj.gbl === true).length
       this.totals['memoria_total'] = this.data.memoria.length
@@ -256,10 +200,9 @@ export class A25CollectionComponent extends DialogUseComponent {
       this.totals['emblem_gbl'] = this.data.emblems.filter(obj => obj.gbl === true).length
   }
 
-  private filterT(value: string, role: string, elem: string, show_jp: boolean, colorL: string, colorR: string, hide_missing: boolean): Character[] {
+  private filterT(value: string, role: string, elem: string, colorL: string, colorR: string, hide_missing: boolean): Character[] {
     let charalist: Character[] = this.data.characters;
 
-    if (!show_jp) charalist = charalist.filter(chara => chara.gbl === true)
     if (hide_missing) charalist = charalist.filter(mem => this.collection.characters[mem.id])
 
     if (role != 'any') {
@@ -284,10 +227,9 @@ export class A25CollectionComponent extends DialogUseComponent {
     });
   }
 
-  private filterB(value: string, stat: string, show_jp: boolean, hide_missing: boolean): Memoria[] {
+  private filterB(value: string, stat: string, hide_missing: boolean): Memoria[] {
     let memorialist: Memoria[] = this.data.memoria;
 
-    if (!show_jp) memorialist = memorialist.filter(mem => mem.gbl === true)
     if (hide_missing) memorialist = memorialist.filter(mem => this.collection.memoria[mem.id])
 
     switch (stat) {
@@ -327,13 +269,6 @@ export class A25CollectionComponent extends DialogUseComponent {
     });
   }
 
-  private filterC(show_jp: boolean): Emblem[] {
-    let emblemlist: Emblem[] = this.data.emblems;
-
-    if (!show_jp || (!this.editMode && this.use_global_count)) emblemlist = emblemlist.filter(obj => obj.gbl === true)
-    return emblemlist;
-  }
-
   detect_global(): boolean {
     if (this.language === 'ja') return false;
     let temp = this.data.memoria.filter(obj => obj.gbl !== true && this.collection.memoria[obj.id]).length
@@ -357,46 +292,21 @@ export class A25CollectionComponent extends DialogUseComponent {
     this.save();
   }
 
-  changeCharacter(id: number, rarity: number, slug :string, event) {
+  changeChar(char) {
     if (this.editMode) {
-      let kind = this.collection.characters[id]
-      kind = (kind===undefined) ? rarity : kind + 1;
-      if (kind <= 7) {
-        this.collection.characters[id]=kind;
+      let kind = this.collection.characters[char.id]
+      kind = (kind===undefined) ? char.rarity : kind + 1;
+      if ((kind <= 8 && char.six_star) || kind <= 7) {
+        this.collection.characters[char.id]=kind;
       }
       else {
-        delete this.collection.characters[id];
+        delete this.collection.characters[char.id];
       }
       this.save();
     }
     else {
-      this.openDialog(slug, event, 'characters', A25CharaComponent)
+      this.openDialog(char.slug, undefined, 'characters', A25CharaComponent)
     }
-  }
-
-  starMap = {
-    1: [1, false],
-    2: [2, false],
-    3: [3, false],
-    4: [3, true],
-    5: [4, false],
-    6: [4, true],
-    7: [5, false]
-  }
-
-  fetchStars(id: number, rarity: number) {
-    let stars = ['', '']
-    let limit = rarity;
-    if (this.collection.characters[id]) {
-      if (this.starMap[this.collection.characters[id]][1]) {
-        stars[1] = `<div class="a25-half-star"><span class="fa-star-half"></span></div>`;
-      }
-      limit = this.starMap[this.collection.characters[id]][0]
-    }
-    for (let i = 0; i < limit; i++) {
-      stars[0] += '<span class="fa-star"></span>'
-    }
-    return stars[0]+stars[1];
   }
 
   changeMemoria(id: number, slug: string, event) {
@@ -455,26 +365,89 @@ export class A25CollectionComponent extends DialogUseComponent {
     this.shareUrl = `https://barrelwisdom.com/resleri/collect/${this.shareCode}/en`;
   }
 
+  ab2str(buf) {
+    return String.fromCharCode.apply(null, new Uint16Array(buf));
+}
+str2ab(str) {
+    var buf = new ArrayBuffer(str.length*2); // 2 bytes for each char
+    var bufView = new Uint16Array(buf);
+    for (var i=0, strLen=str.length; i < strLen; i++) {
+    bufView[i] = str.charCodeAt(i);
+    }
+    return buf;
+}
+
   // These stupid functions just to not use a deprecated function...
   // ...which totally works, but the nag in my brain wouldn't shut up
   encodeB64(data) {
-    return btoa(encodeURIComponent(this.dec.decode(FastIntCompress.compress(data))).replace(/%([0-9A-F]{2})/g, function(match, p1) {
-        return String.fromCharCode(parseInt(p1, 16))
+    let f = FastIntCompress.compress(data)
+    if (f.byteLength % 2 != 0) {
+      data.push(0)
+      f = FastIntCompress.compress(data)
+    }
+
+    let dec = this.ab2str(FastIntCompress.compress(data))
+    return btoa(encodeURIComponent(dec).replace(/%([0-9A-F]{2})/g, function (match, p1) {
+      return String.fromCharCode(parseInt(p1, 16))
     })).replace(/\+/g, '-').replace(/\//g, '_').replace(/\=+$/, '');
   }
 
   decodeB64(str) {
     try {
+      if (str.length % 4 != 0) {
+        str += ('===').slice(0, 4 - (str.length % 4));
+      }
+      let uri = decodeURIComponent(Array.prototype.map.call(atob(str.replace(/-/g, '+').replace(/_/g, '/')), function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+      }).join(''))
+      let enc = FastIntCompress.uncompress(this.str2ab(uri))
+      if (enc[enc.length - 1] == 0) enc.pop()
+      return enc
+    } catch (e) {
+      this.bad_data = true;
+    }
+    return '';
+  }
+
+  decodeOldB64(str) {
+    try {
       if (str.length % 4 != 0){
         str += ('===').slice(0, 4 - (str.length % 4));
       }
-      return FastIntCompress.uncompress(this.enc.encode(decodeURIComponent(Array.prototype.map.call(atob(str.replace(/-/g, '+').replace(/_/g, '/')), function(c) {
+      let data = FastIntCompress.uncompress(this.enc.encode(decodeURIComponent(Array.prototype.map.call(atob(str.replace(/-/g, '+').replace(/_/g, '/')), function(c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
       }).join(''))))
+      let removals = []
+      let change = 0;
+      let start = 3;
+      for (let i = start; i < data[0]*2+start; i += 2) {
+        if (data[i] == 3104751) { removals.push(i); change++; }
+      }
+      start += data[0]*2;
+      data[0] -= change;
+      change = 0
+      for (let i = start; i < data[1]*2+start; i += 2) {
+        if (data[i] == 3104751) { removals.push(i); change++; }
+      }
+      start += data[1]*2;
+      data[1] -= change;
+      change=0
+      for (let i = start; i < data.length; i += 2) {
+        if (data[i] == 3104751) { removals.push(i); change++; }
+      }
+      data[2] -= change;
+      for (let i of removals.reverse()) {
+        data.splice(i, 2)
+      }
+      return data
     } catch(e) {
       this.bad_data = true;
     }
     return '';
+  }
+
+  check_bad_data(data) {
+    this.bad_data = data.length % 2 === 0 || (data[0]+data[1]+data[2])*2+3 !== data.length;
   }
 
   load() {
@@ -493,13 +466,20 @@ export class A25CollectionComponent extends DialogUseComponent {
     }
     this.shareUrl = `https://barrelwisdom.com/resleri/collect/${this.shareCode}/en`;
     let data = this.decodeB64(this.shareCode)
-    this.bad_data = data.length % 2 === 0 || (data[0]+data[1]+data[2])*2+3 !== data.length;
+    this.check_bad_data(data)
+    if (this.bad_data) { // legacy support
+      data = this.decodeOldB64(this.shareCode)
+      this.check_bad_data(data)
+      if (!this.bad_data) {
+        this.shareCode = this.encodeB64(data); // purge the bad
+      }
+    }
     if (!this.bad_data) {
       let start = 3;
       for (let i = start; i < data[0]*2+start; i += 2) {
         this.collection['characters'][data[i]]=data[i+1]
         this.totals['characters'] += 1;
-        if (data[i+1] > 7 && data[i+i] <= 0) this.bad_data = true;
+        if (data[i+1] > 8 && data[i+i] <= 0) this.bad_data = true;
       }
       start += data[0]*2;
       for (let i = start; i < data[1]*2+start; i += 2) {

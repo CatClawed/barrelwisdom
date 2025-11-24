@@ -9,10 +9,9 @@ import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.comp
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 
 @Component({
-  templateUrl: 'brsl-location.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports]
+    templateUrl: 'brsl-location.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports]
 })
 
 export class BRSLLocationComponent extends FragmentedComponent {

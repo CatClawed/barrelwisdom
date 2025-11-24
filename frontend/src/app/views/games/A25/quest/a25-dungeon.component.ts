@@ -1,21 +1,20 @@
-import { Location, ViewportScroller } from '@angular/common';
+import { Location, NgTemplateOutlet, ViewportScroller } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
 
 @Component({
-  templateUrl: 'a25-dungeon.component.html',
-  styleUrls: ['../resleri.scss'],
-  encapsulation: ViewEncapsulation.None,
-  selector: 'a25-dungeon',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports]
+    templateUrl: 'a25-dungeon.component.html',
+    styleUrls: ['../resleri.scss'],
+    encapsulation: ViewEncapsulation.None,
+    selector: 'a25-dungeon',
+    providers: [DestroyService],
+    imports: [...CommonImports, NgTemplateOutlet]
 })
 export class A25DungeonComponent extends FragmentedComponent {
   title: string;
@@ -42,4 +41,4 @@ export class A25DungeonComponent extends FragmentedComponent {
     this.genericSettings(this.title, `All dungeons in ${this.gameTitle}`);
     return this.a25service.getDungeons(this.language);
   }
-} 
+}

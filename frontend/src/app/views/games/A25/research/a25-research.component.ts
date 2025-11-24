@@ -1,18 +1,18 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ActivatedRoute } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a25-research.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [CommonImports, MatTabsModule]
+    templateUrl: 'a25-research.component.html',
+    providers: [DestroyService],
+    imports: [CommonImports, MatTabsModule, NgTemplateOutlet]
 })
 export class A25ResearchComponent extends SingleComponent {
   constructor(
@@ -33,7 +33,7 @@ export class A25ResearchComponent extends SingleComponent {
 
   changeData() {
     this.gameService(this.a25service, 'research');
-    this.genericSettings('Research', `All research in ${this.gameTitle}`);
+    this.genericSettings(this.a25service.research_translation[this.language], `All research in ${this.gameTitle}`);
     return this.a25service.getResearch(this.language)
   }
-} 
+}

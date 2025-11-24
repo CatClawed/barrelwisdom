@@ -170,6 +170,7 @@ export interface Character {
     tags: Tag[];
     id: number;
     date: Date;
+    six_star: boolean;
 }
 
 export interface Skill {
@@ -185,6 +186,8 @@ export interface Skill {
     val4: number;
     val5: number;
     val6: number;
+    val7: number;
+    val8: number;
     val0_2: number;
     val1_2: number;
     val2_2: number;
@@ -192,16 +195,21 @@ export interface Skill {
     val4_2: number;
     val5_2: number;
     val6_2: number;
+    val7_2: number;
+    val8_2: number;
     pow1: number;
     pow2: number;
     pow3: number;
     pow4: number;
     pow5: number;
+    pow6: number;
     break1: number;
     break2: number;
     break3: number;
     break4: number;
     break5: number;
+    break6: number;
+    evol: boolean;
 }
 
 export interface Passive {
@@ -211,6 +219,9 @@ export interface Passive {
     val2: number;
     val3: number;
     val4: number;
+    val5: number;
+    val6: number;
+    evol: boolean;
 }
 
 export interface Memoria {
@@ -235,6 +246,7 @@ export interface Memoria {
     gbl: boolean;
     id: number;
     date: Date;
+    illustrator: string;
 }
 
 export interface Research {

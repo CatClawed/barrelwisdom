@@ -1,37 +1,24 @@
 @if (data; as category) {
-  <h1>{{category.name}}</h1>
-  <div style="margin-top: 1em;" class="col-md-3" ></div>
-  <div class="mx-auto row">
-    <div class="col-md-6">
-      <table style="border:1px solid #c8ced3;" class="tbl"><tbody>
-        <tr class="table-dark-center"><th style="border:none;" colspan=2>Items in Category</th></tr>
-        @for (item of category.items; track item) {
-          <tr>
-            <td>
-              <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
-            </td>
-          </tr>
-        }
-        @for (item of category.add; track item) {
-          <tr>
-            <td>
-              <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a> (Add)
-            </td>
-          </tr>
-        }
-      </tbody></table>
-    </div>
-    <div class="col-md-6">
-      <table style="border:1px solid #c8ced3;" class="tbl"><tbody>
-        <tr class="table-dark-center"><th style="border:none;" colspan=2>Items Using Category</th></tr>
-        @for (item of category.used; track item) {
-          <tr>
-            <td>
-              <a routerLink="/{{gameURL}}/items/{{item.synth.slug}}/{{language}}">{{item.synth.name}}</a>
-            </td>
-          </tr>
-        }
-      </tbody></table>
-    </div>
-  </div>
+  <ng-template #cat let-item="item">
+    <tr>
+      <td>
+        <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
+      </td>
+    </tr>
+  </ng-template>
+  <category
+    [name]="category.name"
+    [using]="category.used !== undefined"
+    [colspan]="1">
+    <ng-container inCategory>
+      @for (item of category.items; track item) {
+        <ng-content *ngTemplateOutlet="cat;context:{item:item}"></ng-content>
+      }
+    </ng-container>
+    <ng-container usingCategory>
+      @for (item of category.used; track item) {
+        <ng-content *ngTemplateOutlet="cat;context:{item:item.synth}"></ng-content>
+      }
+    </ng-container>
+  </category>
 }

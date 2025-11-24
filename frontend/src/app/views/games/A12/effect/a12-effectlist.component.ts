@@ -16,10 +16,9 @@ import { map, startWith } from 'rxjs/operators';
 import { A12EffectComponent } from './a12-effect.component';
 
 @Component({
-  templateUrl: 'a12-effectlist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, A12EffectComponent, FilterListComponent]
+    templateUrl: 'a12-effectlist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, A12EffectComponent, FilterListComponent]
 })
 
 export class A12EffectlistComponent extends DialogUseComponent {
@@ -34,7 +33,7 @@ export class A12EffectlistComponent extends DialogUseComponent {
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
-    private a12service: A12Service) {
+    protected a12service: A12Service) {
     super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A12EffectComponent;
     this.pageForm = this.formBuilder.nonNullable.group({

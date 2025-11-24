@@ -9,11 +9,10 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a23-trait.component.html',
-  selector: 'a23-trait',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, Tooltip]
+    templateUrl: 'a23-trait.component.html',
+    selector: 'a23-trait',
+    providers: [DestroyService],
+    imports: [...CommonImports, Tooltip]
 })
 export class A23TraitComponent extends SingleComponent {
   constructor(
@@ -21,7 +20,7 @@ export class A23TraitComponent extends SingleComponent {
     protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
-    private a23service: A23Service) {
+    protected a23service: A23Service) {
     super(destroy$, route, breadcrumbService, seoService);
   }
   changeData() {
@@ -30,8 +29,8 @@ export class A23TraitComponent extends SingleComponent {
   }
   afterAssignment(): void {
     this.genericSettings(this.data.name, this.data.desc,
-      'Traits',
+      this.a23service.trait_translation[this.language],
       false,
       this.inputSlug ? false : true);
   }
-} 
+}

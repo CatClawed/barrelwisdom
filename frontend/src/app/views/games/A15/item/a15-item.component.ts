@@ -8,12 +8,11 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a15-item.component.html',
-  selector: 'a15-item',
-  styleUrls: ['../../_scss/dusk.scss'],
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports]
+    templateUrl: 'a15-item.component.html',
+    selector: 'a15-item',
+    styleUrls: ['../../_scss/dusk.scss'],
+    providers: [DestroyService],
+    imports: [...CommonImports]
 })
 export class A15ItemComponent extends SingleComponent {
   fire = false;
@@ -24,7 +23,7 @@ export class A15ItemComponent extends SingleComponent {
   constructor(
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
-    private a15service: A15Service,
+    protected a15service: A15Service,
     protected breadcrumbService: BreadcrumbService,
     protected seoService: SeoService) {
     super(destroy$, route, breadcrumbService, seoService);
@@ -60,4 +59,4 @@ export class A15ItemComponent extends SingleComponent {
       }
     }
   }
-} 
+}

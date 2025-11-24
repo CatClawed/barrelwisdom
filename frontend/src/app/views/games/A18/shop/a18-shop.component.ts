@@ -9,10 +9,9 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
 
 @Component({
-  templateUrl: 'a18-shop.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports]
+    templateUrl: 'a18-shop.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports]
 })
 
 export class A18ShopComponent extends FragmentedComponent {
@@ -21,7 +20,7 @@ export class A18ShopComponent extends FragmentedComponent {
     protected route: ActivatedRoute,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
-    private a18service: A18Service,
+    protected a18service: A18Service,
     protected viewportScroller: ViewportScroller,
     protected loc: Location) {
     super(destroy$, route, seoService, breadcrumbService, viewportScroller, loc);

@@ -8,11 +8,10 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a25-memoria.component.html',
-  selector: 'a25-memoria',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports]
+    templateUrl: 'a25-memoria.component.html',
+    selector: 'a25-memoria',
+    providers: [DestroyService],
+    imports: [...CommonImports]
 })
 export class A25MemoriaComponent extends SingleComponent {
   constructor(
@@ -35,7 +34,7 @@ export class A25MemoriaComponent extends SingleComponent {
   }
   afterAssignment(): void {
     this.seoImage = `${this.imgURL}memoria/${this.data.slug}.webp`
-    this.genericSettings(this.data.name, this.data.skill_desc.replaceAll('{0}', this.data.lv1 + ' ~ ' + this.data.lv5).replaceAll('{1}', this.data.lv1 + ' ~ ' + this.data.lv5), 'Memoria', false, this.inputSlug ? false : true);
+    this.genericSettings(this.data.name, this.data.skill_desc.replaceAll('{0}', this.data.lv1 + ' ~ ' + this.data.lv5).replaceAll('{1}', this.data.lv1 + ' ~ ' + this.data.lv5), this.a25service.memoria_translation[this.language], false, this.inputSlug ? false : true);
   }
 
 }

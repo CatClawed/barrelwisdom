@@ -24,7 +24,7 @@ export const LanguageGuard = (route: ActivatedRouteSnapshot, state: RouterStateS
     }
 
     if (LanguageData.languages[section].includes(language)) return true;
-    
+
     // go to the default EN page if all else fails
     segments.pop();
     let newUrl = "";

@@ -3,7 +3,7 @@ from django.conf import settings
 
 class Section(models.Model):
     name = models.CharField(max_length=30, unique=True)
-    fullname = models.CharField(max_length=30, unique=True, blank=True)
+    fullname = models.CharField(unique=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -32,7 +32,7 @@ class Blog(models.Model):
     class Meta:
         ordering = ['created']
         unique_together = ['slug', 'section']
-        
+
 class Comment(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True) # if I need it
@@ -52,5 +52,4 @@ class Comment(models.Model):
             if self.parent.parent:
                 self.parent = self.parent.parent
         return super().save(**kwargs)
-    
-    
+

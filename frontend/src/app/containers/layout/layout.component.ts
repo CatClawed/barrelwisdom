@@ -6,24 +6,26 @@ import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { LanguageService } from '@app/services/language.service';
 import { NavItems, NavigationService } from '@app/services/navigation.service';
-import { TranslationService } from '@app/services/translation.service';
 import { User } from '@app/views/main/_interfaces/user';
 import { LanguageData } from '@environments/language-data';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-layout',
-  templateUrl: './layout.component.html',
-  providers: [DestroyService]
+    selector: 'app-layout',
+    templateUrl: './layout.component.html',
+    providers: [DestroyService],
+    standalone: false
 })
 export class LayoutComponent implements OnInit {
-  public sidebarMinimized = false; 
+  public sidebarMinimized = false;
+  public nav;
   public navItems: NavItems[];
   user: User;
-  mobileView = true;
+  desktopView = false;
+  mode = 'over';
   languages;
   codes;
-  currentLang = "en";
+  currentLang;
   breadcrumbs = [['hiya', '/papaya']];
   current = 'heyo';
   bread;
@@ -32,7 +34,6 @@ export class LayoutComponent implements OnInit {
   constructor(
     private breadcrumbService: BreadcrumbService,
     private languageService: LanguageService,
-    private translationService: TranslationService,
     private authenticationService: AuthenticationService,
     private readonly destroy$: DestroyService,
     public navService: NavigationService,
@@ -45,20 +46,20 @@ export class LayoutComponent implements OnInit {
     this.authenticationService.user
       .pipe(takeUntil(this.destroy$))
       .subscribe(x => this.user = x);
-    this.navService.nav
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(x => {
-        this.navItems = x;
-      });
-    this.translationService.langObserve
+    this.navService.langObserve
       .pipe(takeUntil(this.destroy$))
       .subscribe(x => {
         this.languages = x;
       });
-    this.translationService.currentLangObserve
+    this.navService.currentLangObserve
       .pipe(takeUntil(this.destroy$))
       .subscribe(x => {
-        this.currentLang = this.translationService.currentLang;
+        this.currentLang = x;
+      });
+    this.navService.nav
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(x => {
+        this.nav = x;
       });
     this.breadcrumbService.breadcrumbObserve
       .pipe(takeUntil(this.destroy$))
@@ -72,10 +73,10 @@ export class LayoutComponent implements OnInit {
       });
 
     this.breakpointObserver.observe([
-      '(max-width: 800px)'])
+      '(min-width: 800px)'])
       .pipe(takeUntil(this.destroy$))
       .subscribe(result => {
-      this.mobileView = result.matches;
+      this.desktopView = result.matches;
     });
   }
 

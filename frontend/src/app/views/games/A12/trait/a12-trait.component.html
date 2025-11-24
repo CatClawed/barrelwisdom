@@ -1,22 +1,26 @@
 @if (data; as trait) {
-  <div class="mx-auto row spacer">
-    <div class="{{colset}} card card-body">
-      <div class="flex">
-        <h4 class="card-title">{{trait.name}}</h4>
-        @if (trait.cost) {
-          <span><b>Cost: </b>{{trait.cost}}</span>
+    <div [class]="url ? 'card' : inputSlug ? 'card card-dialog' : 'card card-small'"
+      [style]="url ? 'height:100%;' : null">
+      <h4 class="card-title" style="margin-right:6rem;">
+        @if (url) {
+          <a (click)="$event.preventDefault(); buttonClicked.emit(trait.slug);"
+            href="{{url}}">{{trait.name}}</a>
         }
-      </div>
-      <p>{{trait.desc}}</p>
+        @else {
+          {{trait.name}}
+        }
+      </h4>
+      @if (trait.cost) {
+        <div class="card-icon-position"><b>Cost: </b>{{trait.cost}}</div>
+      }
+      <p [style]="url ? 'height:100%;' : null">{{trait.desc}}</p>
       @if (trait.item_set) {
-        <div>
-          <b>Items:</b>
-          <ul>
-            @for (item of trait.item_set; track item) {
-              <li><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
-            }
-          </ul>
-        </div>
+        <b>Items:</b>
+        <ul>
+          @for (item of trait.item_set; track item) {
+            <li><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
+          }
+        </ul>
       }
       <div class="flex bottom">
         <i class="trait-color{{trait.synth}}     atelier atelier-np atelier-ryza2-type-synthesis"></i>
@@ -26,8 +30,4 @@
         <i class="trait-color{{trait.accessory}} atelier atelier-np atelier-escha-accessory"></i>
       </div>
     </div>
-    @if (showNav) {
-      <div class="col-md-3" ></div>
-    }
-  </div>
 }

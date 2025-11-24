@@ -8,17 +8,16 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a16-monster.component.html',
-  selector: 'a16-monster',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports]
+    templateUrl: 'a16-monster.component.html',
+    selector: 'a16-monster',
+    providers: [DestroyService],
+    imports: [...CommonImports]
 })
 export class A16MonsterComponent extends SingleComponent {
   constructor(
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
-    private a16service: A16Service,
+    protected a16service: A16Service,
     protected breadcrumbService: BreadcrumbService,
     protected seoService: SeoService) {
     super(destroy$, route, breadcrumbService, seoService);
@@ -35,4 +34,4 @@ export class A16MonsterComponent extends SingleComponent {
       false,
       this.inputSlug ? false : true);
   }
-} 
+}

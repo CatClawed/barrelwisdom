@@ -7,12 +7,12 @@ const routes: Routes = [
     path: 'fragments-and-dates',
     children: [
       {
-        path: '', 
+        path: '',
         loadComponent: ()=> import('@app/views/games/BRSL/fragment/brsl-fragmentlist.component').then(m=>m.BRSLFragmentComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':language', 
+        path: ':language',
         loadComponent: ()=> import('@app/views/games/BRSL/fragment/brsl-fragmentlist.component').then(m=>m.BRSLFragmentComponent),
         canActivate: [LanguageGuard],
       },
@@ -22,17 +22,17 @@ const routes: Routes = [
     path: 'demons',
     children: [
       {
-        path: '', 
+        path: '',
         loadComponent: ()=> import('@app/views/games/BRSL/demon/brsl-demonlist.component').then(m=>m.BRSLDemonlistComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':language', 
+        path: ':language',
         loadComponent: ()=> import('@app/views/games/BRSL/demon/brsl-demonlist.component').then(m=>m.BRSLDemonlistComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':subject/:language', 
+        path: ':subject/:language',
         loadComponent: ()=> import('@app/views/games/BRSL/demon/brsl-demon.component').then(m=>m.BRSLDemonComponent),
         canActivate: [LanguageGuard],
       },
@@ -42,17 +42,17 @@ const routes: Routes = [
     path: 'items',
     children: [
       {
-        path: '', 
+        path: '',
         loadComponent: ()=> import('@app/views/games/BRSL/item/brsl-itemlist.component').then(m=>m.BRSLItemlistComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':language', 
+        path: ':language',
         loadComponent: ()=> import('@app/views/games/BRSL/item/brsl-itemlist.component').then(m=>m.BRSLItemlistComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':subject/:language', 
+        path: ':subject/:language',
         loadComponent: ()=> import('@app/views/games/BRSL/item/brsl-item.component').then(m=>m.BRSLItemComponent),
         canActivate: [LanguageGuard],
       },
@@ -62,12 +62,12 @@ const routes: Routes = [
     path: 'units',
     children: [
       {
-        path: '', 
+        path: '',
         loadComponent: ()=> import('@app/views/games/BRSL/unit/brsl-unit.component').then(m=>m.BRSLUnitComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':language', 
+        path: ':language',
         loadComponent: ()=> import('@app/views/games/BRSL/unit/brsl-unit.component').then(m=>m.BRSLUnitComponent),
         canActivate: [LanguageGuard],
       },
@@ -77,27 +77,27 @@ const routes: Routes = [
     path: 'facilities',
     children: [
       {
-        path: '', 
+        path: '',
         loadComponent: ()=> import('@app/views/games/BRSL/facility/brsl-facilitylist.component').then(m=>m.BRSLFacilitylistComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':language', 
+        path: ':language',
         loadComponent: ()=> import('@app/views/games/BRSL/facility/brsl-facilitylist.component').then(m=>m.BRSLFacilitylistComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: 'sets', 
+        path: 'sets',
         loadComponent: ()=> import('@app/views/games/BRSL/facility/brsl-facilityset.component').then(m=>m.BRSLFacilitySetComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: 'sets/:language', 
+        path: 'sets/:language',
         loadComponent: ()=> import('@app/views/games/BRSL/facility/brsl-facilityset.component').then(m=>m.BRSLFacilitySetComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':subject/:language', 
+        path: ':subject/:language',
         loadComponent: ()=> import('@app/views/games/BRSL/facility/brsl-facility.component').then(m=>m.BRSLFacilityComponent),
         canActivate: [LanguageGuard],
       },
@@ -107,12 +107,12 @@ const routes: Routes = [
     path: 'skills',
     children: [
       {
-        path: '', 
+        path: '',
         loadComponent: ()=> import('@app/views/games/BRSL/skill/brsl-skill.component').then(m=>m.BRSLSkillComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':language', 
+        path: ':language',
         loadComponent: ()=> import('@app/views/games/BRSL/skill/brsl-skill.component').then(m=>m.BRSLSkillComponent),
         canActivate: [LanguageGuard],
       },
@@ -122,12 +122,12 @@ const routes: Routes = [
     path: 'locations',
     children: [
       {
-        path: ':subject', 
+        path: ':subject',
         loadComponent: ()=> import('@app/views/games/BRSL/location/brsl-location.component').then(m=>m.BRSLLocationComponent),
         canActivate: [LanguageGuard],
       },
       {
-        path: ':subject/:language', 
+        path: ':subject/:language',
         loadComponent: ()=> import('@app/views/games/BRSL/location/brsl-location.component').then(m=>m.BRSLLocationComponent),
         canActivate: [LanguageGuard],
       },
@@ -139,7 +139,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/second-light/faq',
+    redirectTo: '/second-light/items',
     pathMatch: 'full'
   }
 ];

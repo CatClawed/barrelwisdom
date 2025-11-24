@@ -16,11 +16,10 @@ import { map, startWith } from 'rxjs/operators';
 import { A18EffectComponent } from './a18-effect.component';
 
 @Component({
-  templateUrl: 'a18-effectlist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports,
-    A18EffectComponent, FilterListComponent]
+    templateUrl: 'a18-effectlist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports,
+        A18EffectComponent, FilterListComponent]
 })
 
 export class A18EffectlistComponent extends DialogUseComponent {
@@ -35,7 +34,7 @@ export class A18EffectlistComponent extends DialogUseComponent {
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
-    private a18service: A18Service,
+    protected a18service: A18Service,
   ) {
     super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A18EffectComponent;

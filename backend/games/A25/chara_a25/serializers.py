@@ -8,11 +8,16 @@ class A25PassiveSerializer(A25DefaultSerializer):
     desc = serializers.SerializerMethodField()
     class Meta:
         model =  Passive
-        fields = ['name', 'desc', 'val', 'val2', 'val3', 'val4']
+        fields = ['name', 'desc', 'evol',
+                  'val', 'val2', 'val3', 'val4', 'val5', 'val6']
     def get_name(self, obj):
-        return A25DefaultSerializer.get_text_gbl(self,obj.name,obj.char.gbl)
+        if not obj.evol:
+            return A25DefaultSerializer.get_text_gbl(self,obj.name,obj.char.gbl)
+        return obj.name.text_ja
     def get_desc(self, obj):
-        return A25DefaultSerializer.get_text_gbl(self,obj.desc,obj.char.gbl)
+        if not obj.evol:
+            return A25DefaultSerializer.get_text_gbl(self,obj.desc,obj.char.gbl)
+        return obj.desc.text_ja
 
 class A25SkillSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()
@@ -21,18 +26,20 @@ class A25SkillSerializer(A25DefaultSerializer):
     area = serializers.SerializerMethodField()
     class Meta:
         model =  Skill
-        fields = ['name', 'desc', 'elem', 'area', 'wt',
-            'val0','val1','val2','val3','val4','val5','val6',
-            'val0_2','val1_2','val2_2','val3_2','val4_2','val5_2','val6_2',
-            'break1','break2','break3','break4','break5',
-            'pow1','pow2','pow3','pow4','pow5',
+        fields = ['name', 'desc', 'elem', 'area', 'wt', 'evol',
+            'val0','val1','val2','val3','val4','val5','val6','val7','val8',
+            'val0_2','val1_2','val2_2','val3_2','val4_2','val5_2','val6_2','val7_2','val8_2',
+            'break1','break2','break3','break4','break5', 'break6',
+            'pow1','pow2','pow3','pow4','pow5', 'pow6',
         ]
     def get_area(self, obj):
         return A25DefaultSerializer.get_text(self,obj.area)
     def get_name(self, obj):
         return A25DefaultSerializer.get_text_gbl(self,obj.name,obj.char.gbl)
     def get_desc(self, obj):
-        return A25DefaultSerializer.get_text_gbl(self,obj.desc,obj.char.gbl)
+        if not obj.evol:
+            return A25DefaultSerializer.get_text_gbl(self,obj.desc,obj.char.gbl)
+        return obj.desc.text_ja
 
 class A25CharaUpdateSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()
@@ -56,7 +63,7 @@ class A25CharaListSerializer(A25DefaultSerializer):
         model = Character
         fields = [
             'slug', 'name', 'title', 'role', 'elem', 'rarity', 'gbl',
-            'color1', 'color2', 'id', 'date'
+            'color1', 'color2', 'id', 'date', 'six_star'
         ]
     def get_title(self, obj):
         return A25DefaultSerializer.get_text_gbl(self,obj.title,obj.gbl)
@@ -82,7 +89,7 @@ class A25CharaSerializer(A25DefaultSerializer):
         model = Character
         fields = [
             'slug', 'name', 'title', 'role', 'elem', 'rarity', 'color1', 'color2',
-            'trait1', 'trait2', 'trait3',
+            'trait1', 'trait2', 'trait3', 'six_star',
             'hp', 'spd', 'patk', 'pdfn', 'matk', 'mdfn',
             "passives", 'limit', 'skills', 'note', 'gbl',
             'leader_skill_name', 'leader_skill_desc', 'leader_skill_chars', 'tags'
@@ -118,10 +125,11 @@ class A25MemoriaSerializer(A25DefaultSerializer):
     skill_name = serializers.SerializerMethodField()
     skill_desc = serializers.SerializerMethodField()
     limit = serializers.SerializerMethodField()
+    illustrator = serializers.SerializerMethodField()
     class Meta:
         model = Memoria
         fields = [
-            'slug', 'name', 'skill_name', 'skill_desc', 'rarity', 'limit',
+            'slug', 'name', 'skill_name', 'skill_desc', 'rarity', 'limit', 'illustrator',
             'note', 'gbl', 'lv1', 'lv2', 'lv3', 'lv4', 'lv5', 'date',
             "hp30", "spd30", "patk30", "pdef30", "matk30", "mdef30", 'gbl', 'id'
         ]
@@ -132,6 +140,8 @@ class A25MemoriaSerializer(A25DefaultSerializer):
     def get_limit(self, obj):
         if obj.limit:
             return A25DefaultSerializer.get_text(self,obj.limit)
+    def get_illustrator(self, obj):
+        return A25DefaultSerializer.get_text_gbl(self,obj.illustrator,obj.gbl)
 
 class A25EmblemSerializer(A25DefaultSerializer):
     name = serializers.SerializerMethodField()

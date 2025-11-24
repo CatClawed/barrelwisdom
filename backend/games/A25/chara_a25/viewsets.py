@@ -104,7 +104,7 @@ class A25MemoriaViewSet(viewsets.ModelViewSet):
             'skill_name',
             'skill_desc',
         )
-    ).exclude(slug="69")
+    ).exclude(slug__in=["69", "146"])
     serializer_class = A25MemoriaSerializer
     filter_backends = [filters.SearchFilter,
                        DjangoFilterBackend, filters.OrderingFilter]

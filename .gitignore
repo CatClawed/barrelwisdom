@@ -21,3 +21,4 @@ Thumbs.db
 .scannerwork/*
 sonar-project.properties
 backend/scripts/data.txt
+frontend/src/ads.txt

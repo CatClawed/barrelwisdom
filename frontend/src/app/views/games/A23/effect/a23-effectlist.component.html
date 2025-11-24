@@ -1,20 +1,18 @@
 @if (!error) {
   <ng-template #template let-item="item">
-    <a23-effect (buttonClicked)="openDialog($event)" [inputData]="item"
+    <a23-effect (buttonClicked)="openDialog($event)" [inputData]="item" [gameURL]="gameURL"
       [hideContents]="true"></a23-effect>
   </ng-template>
   <filter-list
     [list]="filteredEffects"
     [(hide)]="hide"
-    title="Effects"
+    name="{{a23service.effect_translation[language]}}"
     [template]="template">
-    <form [formGroup]="pageForm" class="form-horizontal">
-      <div class="row">
-        <mat-form-field class="col-md-12" appearance="outline">
-          <mat-label>Filter...</mat-label>
-          <input style="height: 100%;" matInput formControlName="filtertext">
-        </mat-form-field>
-      </div>
+    <form [formGroup]="pageForm" class="grid">
+      <mat-form-field class="grid-12" appearance="outline">
+        <mat-label>{{a23service.filter_translation[language]}}</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtertext">
+      </mat-form-field>
     </form>
   </filter-list>
 }

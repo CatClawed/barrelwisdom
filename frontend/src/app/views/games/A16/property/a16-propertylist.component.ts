@@ -3,10 +3,10 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { Tooltip } from '@app/views/_components/tooltip/tooltip.component';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Property } from '@app/views/games/A16/_services/a16.interface';
 import { A16Service } from '@app/views/games/A16/_services/a16.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -16,11 +16,10 @@ import { map, startWith } from 'rxjs/operators';
 import { A16PropertyComponent } from './a16-property.component';
 
 @Component({
-  templateUrl: 'a16-propertylist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports,
-    Tooltip, A16PropertyComponent]
+    templateUrl: 'a16-propertylist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
+        A16PropertyComponent]
 })
 export class A16PropertylistComponent extends DialogUseComponent {
   filteredProperties: Observable<Property[]>;
@@ -34,7 +33,7 @@ export class A16PropertylistComponent extends DialogUseComponent {
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
-    private a16service: A16Service) {
+    protected a16service: A16Service) {
     super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A16PropertyComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
@@ -57,6 +56,7 @@ export class A16PropertylistComponent extends DialogUseComponent {
   }
 
   private filterT(value: string, transfer: string): Property[] {
+    this.hide = false;
     let propertylist: Property[] = this.data;
     switch (transfer) {
       case "2":

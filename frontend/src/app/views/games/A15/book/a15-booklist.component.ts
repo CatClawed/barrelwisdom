@@ -3,9 +3,10 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Book } from '@app/views/games/A15/_services/a15.interface';
 import { A15Service } from '@app/views/games/A15/_services/a15.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -15,10 +16,11 @@ import { map, startWith } from 'rxjs/operators';
 import { A15BookComponent } from './a15-book.component';
 
 @Component({
-  templateUrl: 'a15-booklist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports, A15BookComponent]
+    templateUrl: 'a15-booklist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, A15BookComponent,
+        FilterListComponent
+    ]
 })
 
 export class A15BooklistComponent extends DialogUseComponent {
@@ -33,7 +35,7 @@ export class A15BooklistComponent extends DialogUseComponent {
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
-    private a15service: A15Service) {
+    protected a15service: A15Service) {
     super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A15BookComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
@@ -56,6 +58,7 @@ export class A15BooklistComponent extends DialogUseComponent {
   }
 
   private filterT(value: string): Book[] {
+    this.hide = false;
     let list: Book[] = this.data;
     if (!value) {
       return list;

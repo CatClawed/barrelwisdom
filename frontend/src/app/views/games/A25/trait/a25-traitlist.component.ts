@@ -18,11 +18,10 @@ import { A25ItemComponent } from '../item/a25-item.component';
 import { A25TraitComponent } from './a25-trait.component';
 
 @Component({
-  templateUrl: 'a25-traitlist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports,
-    A25ItemComponent, A25TraitComponent, A25CharaComponent, FilterListComponent]
+    templateUrl: 'a25-traitlist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports,
+        A25TraitComponent, FilterListComponent]
 })
 
 export class A25TraitlistComponent extends DialogUseComponent {
@@ -52,7 +51,7 @@ export class A25TraitlistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.a25service, 'traits');
-    this.genericSettings(`Traits`, `The list of traits in ${this.gameTitle}.`);
+    this.genericSettings(this.a25service.trait_translation[this.language], `The list of traits in ${this.gameTitle}.`);
     this.pageForm.reset();
     return forkJoin({
       traits: this.a25service.getTraitList(this.language),

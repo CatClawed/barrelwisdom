@@ -48,8 +48,8 @@
   </div>
 </div>
 
-<mat-sidenav-container [hasBackdrop]="mobileView">
-  <mat-sidenav #snav [mode]="mobileView ? 'over' : 'side'" [opened]="!mobileView"
+<mat-sidenav-container [hasBackdrop]="!desktopView">
+  <mat-sidenav #snav [mode]="desktopView ? 'side' : 'over'" [opened]="desktopView"
     [fixedInViewport]="true" fixedTopGap="55" class="sidenav">
     <div class="sidenav-items">
       <a class="navigation-hide-large sidenav-item" routerLink="/blog/donate">
@@ -58,40 +58,52 @@
       <a class="navigation-hide-large sidenav-item" routerLink="/blog/atelier-series-guide">
         <i class="fas fa-star"></i>Atelier Series Guide
       </a>
-      @for (n of navItems; track n) {
+      @for (n of nav; track n) {
         @if (!n.children) {
           <a class="sidenav-item" routerLink="{{n.url}}">
-            <i class="{{n.icon}}"></i>{{n.name}}
+            @if (n.svg) {
+              <svg><use attr.href="{{n.svg}}"></use></svg>
+            }
+            @else {
+              <i class="{{n.icon}}"></i>
+            }
+            {{n.name}}
           </a>
         }
         @if (n.children) {
           <a class="sidenav-item" style="color:white;cursor:pointer;"
             (click)="n.expand=!n.expand;">
-            <i class="{{n.icon}}"></i>{{n.name}}@if (!n.expand) {
-            <b class="fas fa-caret-down"></b>
-            }@if (n.expand) {
-            <b
-            class="fas fa-caret-up"></b>
-          }
-        </a>
-      }
-      @if (n.expand) {
-        @for (c of n.children; track c) {
-          @if (router.url.indexOf(c.url) < 0) {
-            <a class="sidenav-item sidenav-child"
-              routerLink="{{c.url}}">
-              {{c.name}}
-            </a>
-          }
-          @if (router.url.indexOf(c.url) > -1) {
-            <a class="sidenav-item sidenav-child active"
-              routerLink="{{c.url}}">
-              {{c.name}}
-            </a>
+            @if (n.svg) {
+              <svg><use attr.href="{{n.svg}}"></use></svg>
+            }
+            @else {
+              <i class="{{n.icon}}"></i>{{n.name}}
+            }
+            @if (!n.expand) {
+              <b class="fas fa-caret-down"></b>
+            }
+            @if (n.expand) {
+              <b class="fas fa-caret-up"></b>
+            }
+          </a>
+        }
+        @if (n.expand) {
+          @for (c of n.children; track c) {
+            @if (router.url.indexOf(c.url) < 0) {
+              <a class="sidenav-item sidenav-child"
+                routerLink="{{c.url}}">
+                {{c.name}}
+              </a>
+            }
+            @if (router.url.indexOf(c.url) > -1) {
+              <a class="sidenav-item sidenav-child active"
+                routerLink="{{c.url}}">
+                {{c.name}}
+              </a>
+            }
           }
         }
       }
-    }
   </div>
   <div class="sidenav-bottom">
     <a class="sidenav-item sidenav-social-media" href="https://discord.gg/utRynRKxwh" rel="noopener" target="_blank">
@@ -113,44 +125,37 @@
     </a>
   </div>
 </mat-sidenav>
-<div style="display:flex;">
-  <div class="main">
-    @if (error.code !== 200) {
-      <div class="flex-row align-items-center" style="min-height:90vh;display:flex;">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-md-6">
-              <div class="row">
-                <div class="col">
-                  <h1 style="float:right;height:min-content;width:min-content;font-size:calc(4rem + 0.1vw) !important;font-weight:300;">
-                    {{error.code}}</h1>
-                </div>
-                <div class="col">
-                  <h4 class="pt-3">{{error.title}}</h4>
-                  <p class="text-muted">{{error.desc}}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row justify-content-center" style="margin:10px">
-            <img src="/media/main/punidead.svg" alt="" loading="lazy" style="width:30%;">
+<div class="main">
+  @if (error.code !== 200) {
+    <div style="display: flex; height: calc(100dvh - 65px - 1rem);">
+      <div style="width: 100%; margin: auto;">
+        <div style="display: flex; justify-content: center;">
+          <h1 style="height:min-content;font-size:calc(4rem + 0.1vw) !important;font-weight:300;">
+            {{error.code}}
+          </h1>
+          <div style="margin-left: 1rem;">
+            <h4 class="pt-3">{{error.title}}</h4>
+            <p class="text-muted">{{error.desc}}</p>
           </div>
         </div>
+        <img src="/media/main/punidead.svg" alt=""
+          style="width:40%; position: relative; left: 50%; transform: translate(-50%); aspect-ratio: 511/670;">
       </div>
-    }
-    @else if (bread.current) {
-      <nav style="margin-top: 1em;" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a routerLink="/">Barrel Wisdom</a></li>
-          @for (crumb of bread.breadcrumbs; track crumb) {
-            <li class="breadcrumb-item"><a routerLink="/{{crumb[1]}}">{{crumb[0]}}</a></li>
-          }
-          <li class="breadcrumb-item active" aria-current="page">{{bread.current}}</li>
-        </ol>
-      </nav>
-    }
-    <router-outlet></router-outlet>
-  </div>
+    </div>
+  }
+  @else if (bread.current) {
+    <cringe-ad-responsive></cringe-ad-responsive>
+    <nav style="margin-top: 1em;" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Barrel Wisdom</a></li>
+        @for (crumb of bread.breadcrumbs; track crumb) {
+          <li class="breadcrumb-item"><a routerLink="/{{crumb[1]}}">{{crumb[0]}}</a></li>
+        }
+        <li class="breadcrumb-item active" aria-current="page">{{bread.current}}</li>
+      </ol>
+    </nav>
+  }
+  <router-outlet></router-outlet>
+  <cringe-ad-responsive></cringe-ad-responsive>
 </div>
-
 </mat-sidenav-container>

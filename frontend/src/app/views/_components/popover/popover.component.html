@@ -2,7 +2,7 @@
     [attr.href]="url ? url : null"
     cdkOverlayOrigin
     #trigger="cdkOverlayOrigin"
-    class="{{cls}} wtf"
+    class="{{cls}} dotted-link"
     style="display:{{display}};cursor:pointer;">
     <ng-content />
 </a>
@@ -13,8 +13,8 @@
     [cdkConnectedOverlayOrigin]="trigger"
     [cdkConnectedOverlayOpen]="isOpen">
     <div class="popover2">
-        @if (title) {
-            <h4>{{title}}</h4>
+        @if (name) {
+            <h4>{{name}}</h4>
         }
         <div class="popoverContents">
             <ng-container *ngTemplateOutlet="template; context: context"></ng-container>

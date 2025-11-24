@@ -8,10 +8,9 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
-  templateUrl: 'a23-seed.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports]
+    templateUrl: 'a23-seed.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports]
 })
 export class A23SeedComponent extends SingleComponent {
   constructor(
@@ -19,12 +18,12 @@ export class A23SeedComponent extends SingleComponent {
     protected readonly destroy$: DestroyService,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
-    private a23service: A23Service) {
+    protected a23service: A23Service) {
     super(destroy$, route, breadcrumbService, seoService);
   }
   changeData() {
     this.gameService(this.a23service, 'seeds');
-    this.genericSettings(`Seeds`, `About growing seeds, and the list of items you can get.`);
+    this.genericSettings(this.a23service.seed_translation[this.language], `About growing seeds, and the list of items you can get.`);
     return this.a23service.getSeeds(this.language);
   }
-} 
+}

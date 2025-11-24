@@ -1,20 +1,60 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Book, Category, Effect, Item, MajorGather, Monster, RecipeIdea, Region, Seed, Trait } from '@app/views/games/A23/_services/a23.interface';
 import { environment } from '@environments/environment';
-import { Trait, Effect, Region, Monster, Category, Item, Book, RecipeIdea, MajorGather, Seed } from '@app/views/games/A23/_services/a23.interface'
+import { category_translation, character_translation, effect_translation, filter_translation, ingredient_translation, item_translation, location_translation, monster_translation, race_translation, recipebook_translation, trait_translation } from '@environments/localization';
+import { Observable } from 'rxjs';
 
 
 @Injectable({ providedIn: 'root' })
 export class A23Service {
-
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
-
   constructor(
     private http: HttpClient,
   ) { }
+
+  public readonly item_translation = item_translation
+  public readonly monster_translation = monster_translation
+  public readonly effect_translation = effect_translation
+  public readonly trait_translation = trait_translation
+  public readonly category_translation = category_translation
+  public readonly filter_translation = filter_translation
+  public readonly race_translation = race_translation
+  public readonly character_translation = character_translation
+  public readonly location_translation = location_translation
+  public readonly ingredient_translation = ingredient_translation
+  public readonly recipebook_translation = recipebook_translation
+
+  public readonly component_translation = {
+    "en": "Components",
+    "ja": "錬金成分",
+    "sc": "炼金成分",
+    "tc": "鍊金成分",
+    "ko": "연금성분",
+  }
+
+  public readonly recipeidea_translation = {
+    "en": "Recipe Idea",
+    "ja": "レシピ発想",
+    "sc": "构思配方",
+    "tc": "構思配方",
+    "ko": "레시피 발상",
+  }
+
+  public readonly seed_translation = {
+    "en": "Seed",
+    "ja": "種",
+    "sc": "种子",
+    "tc": "種子",
+    "ko": "씨앗",
+  }
+
+  public readonly majorgathering_translation = {
+    "en": "Major Gathering Spots",
+    "ja": "大採取",
+    "sc": "大采集",
+    "tc": "大採集",
+    "ko": "대채집",
+  }
 
   public readonly gameTitle = { "en": "Atelier Sophie 2", "ja": "ソフィーのアトリエ２", "ko": "소피의 아틀리에2", "sc": "苏菲的炼金工房２", "tc": "蘇菲的鍊金工房２" };
   public readonly gameURL = "sophie2";

@@ -5,11 +5,12 @@ a.badge:hover {
 }
 
 .blog-head-img {
-    max-height: 500px;
-    max-width: 100%;
+    width: 1400px;
     display: block;
     margin-left: auto;
     margin-right: auto;
+    aspect-ratio: 16/9;
+    border-radius: 5px;
 }
 
 .author {

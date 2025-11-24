@@ -1,16 +1,15 @@
 @if (data; as effect) {
   <effect [effect]="effect"
-  [small]="inputSlug ? false : hideContents ? false : true"
+  [small]="inputData || inputSlug ? false : hideContents ? false : true"
   [hideContents]="hideContents"
-  url="/shallie/effects/{{effect.slug}}"
-  [language]="language"
+  [url]="inputData ? '/' + gameURL + '/effects/' + effect.slug + '/' + language : undefined"
   (buttonClicked)="buttonClicked.emit($event)">
 
     @if (!hideContents && effect.effectdata_set) {
       <b>From Item:</b>
     }
     @if (effect.effectdata_set) {
-      <ul [style]="hideContents ? 'float: left;margin-bottom: 0;' : null">
+      <ul class="two-column" [style]="inputData ? 'margin-right:1.7rem;' : null">
         @for (e of effect.effectdata_set; track e; let index=$index) {
           @if (index == 3 && effect.effectdata_set.length > 4 && hideContents) {
             <li>

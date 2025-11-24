@@ -10,17 +10,16 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
 import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
 
 @Component({
-  templateUrl: 'a15-location.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports]
+    templateUrl: 'a15-location.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports]
 })
 export class A15LocationComponent extends FragmentedComponent {
   constructor(
     protected route: ActivatedRoute,
     protected readonly destroy$: DestroyService,
     protected loc: Location,
-    private a15service: A15Service,
+    protected a15service: A15Service,
     public historyService: HistoryService,
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
@@ -35,4 +34,4 @@ export class A15LocationComponent extends FragmentedComponent {
   afterAssignment(): void {
     this.genericSettings(this.data.name, `All items in ${this.data.name}`, '', true);
   }
-} 
+}

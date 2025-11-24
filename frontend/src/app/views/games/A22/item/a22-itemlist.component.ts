@@ -4,9 +4,11 @@ import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
+import { ItemComponent } from '@app/views/_components/item/item.component';
 import { Item } from '@app/views/games/A22/_services/a22.interface';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -16,11 +18,10 @@ import { map, startWith } from 'rxjs/operators';
 import { A22ItemComponent } from './a22-item.component';
 
 @Component({
-  templateUrl: 'a22-itemlist.component.html',
-  providers: [DestroyService],
-  standalone: true,
-  imports: [...CommonImports, ...MaterialFormImports,
-    A22ItemComponent, MatButtonModule]
+    templateUrl: 'a22-itemlist.component.html',
+    providers: [DestroyService],
+    imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
+        ItemComponent, MatButtonModule]
 })
 
 export class A22ItemlistComponent extends DialogUseComponent {
@@ -49,22 +50,22 @@ export class A22ItemlistComponent extends DialogUseComponent {
     protected seoService: SeoService,
     protected breadcrumbService: BreadcrumbService,
     private formBuilder: UntypedFormBuilder,
-    private a22service: A22Service,
+    protected a22service: A22Service,
   ) {
     super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
     this.component = A22ItemComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       filtering: '',
-      type: 'Any',
+      type: '',
       elementval: 1,
-      element: "Any"
+      element: ""
     })
   }
 
   changeData() {
     this.gameService(this.a22service, 'items');
-    this.genericSettings(`Items`, `The list of items in ${this.gameTitle}.`);
+    this.genericSettings(this.a22service.item_translation[this.language], `The list of items in ${this.gameTitle}.`);
     this.pageForm.reset();
     return forkJoin({
       items: this.a22service.getItemList(this.language),
@@ -80,9 +81,10 @@ export class A22ItemlistComponent extends DialogUseComponent {
   }
 
   private filterT(value: string, type: string, elementV: number, element: string, ingt: string): Item[] {
+    this.hide = false;
     let list: Item[] = this.data.items;
 
-    if (type != 'Any') {
+    if (type != 'Any' && type) {
       list = list.filter(item => item.category.some(c => c.name == type));
     }
     if (elementV > 1) {
