@@ -1,9 +1,8 @@
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { APP_ID, ErrorHandler, NgModule, isDevMode } from '@angular/core';
+import { APP_ID, ErrorHandler, isDevMode, NgModule } from '@angular/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { HttpErrorInterceptor } from '@app/_helpers/interceptor/http-error.interceptor';
 import { JwtInterceptor } from '@app/_helpers/interceptor/jwt_interceptor';
@@ -11,8 +10,8 @@ import { AppRoutingModule } from '@app/app-routing.module';
 import { AppComponent } from '@app/app.component';
 import { LayoutComponent } from '@app/containers';
 import { CookieService } from 'ngx-cookie-service';
-import { CringeAdComponent } from "./views/_components/cringe/cringe.component";
 import { GlobalErrorHandler } from './_helpers/errorhandler';
+import { CringeAdComponent } from "./views/_components/cringe/cringe.component";
 
 const APP_CONTAINERS = [
     LayoutComponent
@@ -24,12 +23,11 @@ const APP_CONTAINERS = [
         ...APP_CONTAINERS
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
-        BrowserAnimationsModule,
         MatSidenavModule,
         MatMenuModule,
         AppRoutingModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
-            enabled: !isDevMode(),
+            enabled: isDevMode(),
             // Register the ServiceWorker as soon as the application is stable
             // or after 30 seconds (whichever comes first).
             registrationStrategy: 'registerWhenStable:30000'
@@ -56,7 +54,7 @@ const APP_CONTAINERS = [
             useClass: JwtInterceptor,
             multi: true
         },
-        provideHttpClient(withInterceptorsFromDi())
+        provideHttpClient(withInterceptorsFromDi()),
     ]
 })
 export class AppModule { }

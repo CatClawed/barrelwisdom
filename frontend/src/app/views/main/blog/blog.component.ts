@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, SecurityContext } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -10,18 +10,18 @@ import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
+import { CringeAdComponent } from '@app/views/_components/cringe/cringe.component';
 import { Blog, Comment } from '@app/views/main/_interfaces/blog';
 import { User } from '@app/views/main/_interfaces/user';
 import { BlogService } from '@app/views/main/_services/blog.service';
-import { MarkdownComponent, MarkdownService, provideMarkdown } from 'ngx-markdown';
+import { MarkdownComponent, provideMarkdown } from 'ngx-markdown';
 import { of } from 'rxjs';
 import { catchError, switchMap, takeUntil } from 'rxjs/operators';
-import { CringeAdComponent } from '@app/views/_components/cringe/cringe.component';
 
 @Component({
     templateUrl: 'blog.component.html',
     styleUrls: ['blog.scss'],
-    providers: [DestroyService, provideMarkdown({ sanitize: SecurityContext.NONE })],
+    providers: [DestroyService, provideMarkdown()],
     imports: [MatFormFieldModule, MatInputModule,
         ReactiveFormsModule, RouterLink, MarkdownComponent,
         CommonModule, CringeAdComponent]
@@ -31,7 +31,6 @@ export class BlogComponent implements OnInit {
   user: User;
   blog: Blog;
   error: boolean = false;
-  body: SafeHtml;
   allowedToEdit = false;
   gameName = "";
   pageForm: UntypedFormGroup;
@@ -45,7 +44,6 @@ export class BlogComponent implements OnInit {
     private blogService: BlogService,
     private authenticationService: AuthenticationService,
     private formBuilder: UntypedFormBuilder,
-    private markdownService: MarkdownService,
     protected breadcrumbService: BreadcrumbService,
     protected seoService: SeoService) {
     this.pageForm = this.formBuilder.nonNullable.group({
@@ -135,7 +133,6 @@ export class BlogComponent implements OnInit {
   setBlog(blog) {
     this.blog = blog;
     this.gameName = (this.blog.section.name) ? `${this.blog.section.name} - ` : ""; // gotta make sure google sees the game name...
-    this.body = this.markdownService.parse(this.blog.body);
     if (this.user) {
       if (this.blog.authorlock && this.user.username === this.blog.author[0]) {
         this.allowedToEdit = true;

@@ -31,11 +31,11 @@
         <img class="blog-head-img" src="{{blog.image}}" alt="" role="presentation">
       </div>
     }
-    <div markdown
+    <markdown
       [disableSanitizer]="true"
       (click)="historyService.hrefClicked($event);"
-      [data]="body">
-    </div>
+      [data]="blog.body">
+  </markdown>
     @if (blog.created != blog.modified) {
       <p>Last Updated: {{blog.modified | date:'longDate' }}</p>
     }
@@ -96,7 +96,7 @@
       <time class="updated text-muted" style="margin-left:0.75rem;font-size: calc(0.8rem + 0.1vw);"
       dateTime="{{comment.created}}"> {{comment.created | date:'mediumDate' }} </time>
     </div>
-    <div markdown [data]="lineBreak(comment.body)"></div>
+    <markdown [data]="lineBreak(comment.body)" [disableSanitizer]="true"></markdown>
     <div>
       @if (!comment.open && !blog.closed && !comment.success) {
         <button

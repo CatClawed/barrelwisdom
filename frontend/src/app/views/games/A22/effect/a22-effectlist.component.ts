@@ -7,7 +7,6 @@ import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
-import { Tooltip } from '@app/views/_components/tooltip/tooltip.component';
 import { Effect } from '@app/views/games/A22/_services/a22.interface';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -20,7 +19,7 @@ import { A22EffectComponent } from './a22-effect.component';
     templateUrl: 'a22-effectlist.component.html',
     providers: [DestroyService],
     imports: [...CommonImports, ...MaterialFormImports,
-        A22EffectComponent, Tooltip, FilterListComponent]
+        A22EffectComponent, FilterListComponent]
 })
 
 export class A22EffectlistComponent extends DialogUseComponent {

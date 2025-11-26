@@ -1,6 +1,6 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, SecurityContext, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatAutocomplete, MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
@@ -17,13 +17,13 @@ import { User } from "@app/views/main/_interfaces/user";
 import { ErrorCodeService } from "@app/views/main/_services/errorcode.service";
 import { UserService } from '@app/views/main/_services/user.service';
 import { environment } from '@environments/environment';
-import { MarkdownComponent, MarkdownService, provideMarkdown } from 'ngx-markdown';
+import { MarkdownComponent, provideMarkdown } from 'ngx-markdown';
 import { forkJoin, Observable, of } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
 
 @Component({
     templateUrl: 'create.component.html',
-    providers: [DestroyService, provideMarkdown({ sanitize: SecurityContext.NONE })],
+    providers: [DestroyService, provideMarkdown()],
     styleUrl: '../user-facing.scss',
     imports: [MatFormFieldModule, MatInputModule,
         ReactiveFormsModule, MarkdownComponent,
@@ -72,7 +72,6 @@ export class CreateComponent {
     private formBuilder: UntypedFormBuilder,
     private errorService: ErrorCodeService,
     private authenticationService: AuthenticationService,
-    private markdownService: MarkdownService,
     private breadcrumbService: BreadcrumbService,
     private userService: UserService) {
     this.authenticationService.user
@@ -169,7 +168,7 @@ export class CreateComponent {
     this.pageForm.get('body').valueChanges
       .pipe(takeUntil(this.destroy$))
       .subscribe(value => {
-        this.preview = this.markdownService.parse(value);
+        this.preview = value;
       });
   }
 

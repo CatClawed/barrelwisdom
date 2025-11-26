@@ -8,13 +8,9 @@
     "declaration": false,
     "experimentalDecorators": true,
     "module": "ES2022",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
     "paths": {
       "@app/*": [
         "src/app/*"
