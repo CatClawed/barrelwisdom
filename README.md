@@ -52,15 +52,14 @@ python manage.py loaddata dump.json.gz
 
 ### Update Postgres
 
-Overall process: back up whole database, delete docker volume, then can start fresh.
-
-Or, y'know, just make a db dump with django and let that do the work.
-
 ```bash
-docker exec -it postgres psql -U [username] < dumpfile
-docker cp dumpfile postgres:/home
-# within new postgres container
-psql -U [username] barrelwisdom < home/dumpfile
+docker exec -it postgres pg_dumpall -U USER > dump.sql
+docker compose down postgres
+# can check for full name at docker volume list
+# worst case scenario, I have a backup
+docker volume rm docker_bw_database
+docker compose up postgres -d
+docker exec -i postgres psql -U USER DATABASE < dump.sql
 ```
 
 ### Build frontend

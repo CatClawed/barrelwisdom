@@ -1,5 +1,3 @@
-# just build in the normal docker instance
-
 FROM node:24-alpine3.21
 COPY /dist /dist
 RUN adduser -D user

@@ -1,5 +1,4 @@
 import os, sys
-from django.core.exceptions import ImproperlyConfigured
 from datetime import timedelta
 from pathlib import Path
 

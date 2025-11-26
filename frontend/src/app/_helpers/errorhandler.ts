@@ -1,15 +1,25 @@
 import { ErrorHandler, Injectable, Injector } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationError } from '@angular/router';
 
 @Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
-  constructor(private injector: Injector) {}
+  private lastAttemptedUrl: string = '/';
+
+  constructor(private injector: Injector) {
+    const router = this.injector.get(Router);
+
+    router.events.subscribe(event => {
+      if (event instanceof NavigationError) {
+        this.lastAttemptedUrl = event.url;
+      }
+    });
+  }
 
   handleError(error: Error): void {
     const router = this.injector.get(Router);
-    const currentRoute = router.url;
-
-    console.error(`Error on route: ${currentRoute}`);
+    console.error(`Error on route: ${this.lastAttemptedUrl}`);
+    console.error('Registered routes:', router.config);
+    console.error(`here have this ${router.url}`)
     console.error(error);
   }
 }

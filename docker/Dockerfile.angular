@@ -1,8 +1,7 @@
-FROM node:22.14-alpine3.20
+FROM node:24-alpine3.21
 WORKDIR /frontend
 COPY package*.json /frontend
 RUN npm ci
 RUN npm install -g @angular/cli
 COPY . /frontend
-#CMD npm run dev:ssr
 CMD npm start
