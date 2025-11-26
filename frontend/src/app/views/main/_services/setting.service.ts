@@ -40,8 +40,8 @@ export class SettingService {
     return this.http.put(`${environment.apiUrl}/nav/${section}/`, { section, data });
   }
 
-  createSection(name: string, fullname: string) {
-    return this.http.post(`${environment.apiUrl}/section/`, { name, fullname });
+  createSection(slug: string, name: string) {
+    return this.http.post(`${environment.apiUrl}/section/`, { slug, name });
   }
 
   getSections() {

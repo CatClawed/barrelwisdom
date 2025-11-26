@@ -11,16 +11,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from "@app/services/authentication.service";
 import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { DestroyService } from '@app/services/destroy.service';
-import { EditBlog, Tag } from "@app/views/main/_interfaces/blog";
+import { Blog, EditBlog, Tag } from "@app/views/main/_interfaces/blog";
 import { Section } from '@app/views/main/_interfaces/section';
 import { User } from "@app/views/main/_interfaces/user";
 import { ErrorCodeService } from "@app/views/main/_services/errorcode.service";
 import { UserService } from '@app/views/main/_services/user.service';
 import { environment } from '@environments/environment';
 import { MarkdownComponent, MarkdownService, provideMarkdown } from 'ngx-markdown';
-import { Observable, of } from 'rxjs';
-import { catchError, first, map, mergeMap, startWith, switchMap, takeUntil } from 'rxjs/operators';
-import slugify from 'slugify';
+import { forkJoin, Observable, of } from 'rxjs';
+import { map, startWith, takeUntil } from 'rxjs/operators';
 
 @Component({
     templateUrl: 'create.component.html',
@@ -37,28 +36,26 @@ export class CreateComponent {
   pageForm: UntypedFormGroup;
   loading = false;
   submitted = false;
-  returnUrl: string;
   errorMsg: string;
   user: User;
-  blog: EditBlog;
   sectionIsBlog: boolean = false;
   preview: SafeHtml;
-  currentTags: string[] = [];
   filteredTags: Observable<string[]>;
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  selectable = true;
-  removable = true;
   tagControl: UntypedFormControl;
-  allTags: Tag[];
-  tagList: string[] = [];
-  tagIDList: number[] = [];
   sectionList: Section[] = [];
-  blogID: number;
   currentTitle: string;
   editMode: boolean;
   disableSubmit: boolean = false;
   disableAuthorLock: boolean = false;
-  section: string = "blog";
+  section: string;
+  slug: string;
+  data: any;
+  blog: Blog;
+  post: EditBlog = {title: '', body: '', image: '', desc: '', authorlock: undefined, author: [], section: undefined, closed: false, tags: undefined };
+  allTags: string[];
+  appliedTags: Tag[] = [];
+
 
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -78,8 +75,6 @@ export class CreateComponent {
     private markdownService: MarkdownService,
     private breadcrumbService: BreadcrumbService,
     private userService: UserService) {
-    slugify.extend({ "'": "-" })
-    this.getTags();
     this.authenticationService.user
       .pipe(takeUntil(this.destroy$))
       .subscribe(x => this.user = x);
@@ -92,17 +87,16 @@ export class CreateComponent {
       seoDesc: ['', [Validators.required, Validators.maxLength(200)]],
       imgURL: ['', this.imgValidators],
       authorLock: [false],
-      tags: this.tagControl
+      closed: [false],
+      tags: this.tagControl,
     });
   }
 
   ngOnInit() {
     this.breadcrumbService.setBreadcrumbs([], undefined)
-    this.filteredTags = this.tagControl.valueChanges.pipe(
-      startWith(null as Observable<string[]>),
-      map((tag: string | null) => tag ? this._filter(tag) : this.tagList.slice()));
-
-    if (this.route.snapshot.queryParamMap.get('id')) {
+    if (this.route.snapshot.queryParamMap.get('slug') && this.route.snapshot.queryParamMap.get('section')) {
+      this.slug = this.route.snapshot.queryParamMap.get('slug')
+      this.section = this.route.snapshot.queryParamMap.get('section')
       this.currentTitle = "Edit Page";
       this.editMode = true;
     }
@@ -111,10 +105,54 @@ export class CreateComponent {
       this.editMode = false;
     }
 
+    forkJoin({
+      tags: this.userService.getTags(),
+      sections: this.userService.getSections(),
+      blog: this.slug && this.section ? this.userService.getBlog(this.slug, this.section) : of(null)
+    }).subscribe(({tags, sections, blog}) => {
+      this.allTags = tags.map(t => t.name);
+      this.sectionList = sections;
+      this.blog = blog;
+
+      if (this.user.group !== 'admin' && this.user.group !== 'trusted') {
+        this.sectionList = this.sectionList.filter(obj => obj.name !== 'blog');
+      }
+
+      if (this.blog) {
+        if (this.canEditBlog(this.blog.authorlock,
+            this.blog.author.includes(this.user.username),
+            this.user.group,
+            this.blog.section.slug)) {
+              this.pageForm.patchValue({
+                title: blog.title,
+                body: blog.body,
+                section: blog.section.slug,
+                seoDesc: blog.desc,
+                imgURL: blog.image,
+                authorLock: blog.authorlock,
+                closed: blog.closed,
+              })
+              this.appliedTags = blog.tags;
+
+              if (blog.section.slug === 'blog') this.sectionIsBlog = true;
+              if (this.blog.author.length > 1) this.disableAuthorLock = true;
+        }
+        else {
+          this.errorMsg = "Not allowed to edit this.";
+          this.disableSubmit = true;
+        }
+      }
+    });
+
+
+    this.filteredTags = this.tagControl.valueChanges.pipe(
+      startWith(null as Observable<string[]>),
+      map((tag: string | null) => tag ? this._filter(tag) : this.allTags.slice()));
+
     this.pageForm.get('section').valueChanges
       .pipe(takeUntil(this.destroy$))
       .subscribe(value => {
-        if (value == this.blogID) {
+        if (value === 'blog') {
           this.pageForm.get('imgURL').setValidators(this.imgValidators.concat(Validators.required));
           this.pageForm.get('imgURL').updateValueAndValidity();
           this.sectionIsBlog = true;
@@ -124,17 +162,15 @@ export class CreateComponent {
           this.pageForm.get('imgURL').updateValueAndValidity();
           this.sectionIsBlog = false;
         }
-        this.section = this.sectionList.find(obj => obj.id === +value).name
+        this.section = value;
       }
       );
 
     this.pageForm.get('body').valueChanges
       .pipe(takeUntil(this.destroy$))
       .subscribe(value => {
-        this.preview = this.markdownService.parse(this.customLink(<string>value));
+        this.preview = this.markdownService.parse(value);
       });
-
-    this.getSections();
   }
 
   get f() { return this.pageForm.controls; }
@@ -143,7 +179,7 @@ export class CreateComponent {
     this.submitted = true;
     if (!this.disableSubmit || !this.pageForm.invalid) {
       this.loading = true;
-      this.blogPost();
+      this.postBlog();
       this.loading = false;
     }
   }
@@ -153,58 +189,46 @@ export class CreateComponent {
     return idList
   }
 
-  blogPost() {
-    const slug = this.slug(this.pageForm.get("title").value);
-    const nextURL = this.sectionList.find(obj => obj.id === +this.pageForm.get("section").value).name
-      + '/' + slug;
-    let authors = [];
-    if (this.blog && this.editMode) {
-      authors = this.blog.author;
-      if (authors.indexOf(this.user.id) < 0) {
-        // admins can edit authorlocked stuff but not get names added to list
-        if (!this.pageForm.get("authorLock").value) {
-          authors.push(this.user.id);
+  postBlog() {
+    this.post.body       = this.pageForm.get("body").value
+    this.post.title      = this.pageForm.get("title").value;
+    this.post.authorlock = this.pageForm.get("authorLock").value;
+    this.post.section    = this.pageForm.get("section").value;
+    this.post.desc       = this.pageForm.get("seoDesc").value;
+    this.post.image      = this.pageForm.get("imgURL").value;
+    this.post.tags       = this.appliedTags;
+    this.post.author     = this.blog ? this.blog.author : [];
+    this.post.closed     = this.pageForm.get("closed").value;
+
+    if (this.slug) {
+      this.post.slug = this.slug;
+    }
+    if (!this.post.author.includes(this.user.username) && !this.post.authorlock) {
+      this.post.author.push(this.user.username);
+    }
+    else if (this.post.authorlock && this.post.author.length == 0) {
+      this.post.author.push(this.user.username);
+    }
+    this.userService.blogPost(this.post)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: blog => {
+          this.router.navigateByUrl(`${blog.section.slug}/${blog.slug}`)
+        },
+        error: error => {
+          console.error(error); // I'm leaving this because I can't be bothered
+          this.errorMsg = this.errorService.errorMessage(error);
         }
-      }
-    }
-    let idList = [];
-    let newList = [];
-    for (let tag of this.currentTags) {
-      let index = this.tagList.indexOf(tag);
-      if (index < 0) {
-        newList.push({ name: tag, slug: this.slug(tag) });
-      }
-      else {
-        idList.push(this.tagIDList[index]);
-      }
-    }
-    this.userService.addTags(newList)
-      .pipe(first(),
-        mergeMap(data => {
-          idList = this.handleTags(data, idList)
-          return this.userService.blogPost(
-            this.pageForm.get("title").value,
-            slug,
-            this.customLink(this.pageForm.get("body").value),
-            this.pageForm.get("imgURL").value,
-            this.pageForm.get("seoDesc").value,
-            this.pageForm.get("authorLock").value,
-            this.editMode ? authors : [this.user.id],
-            this.pageForm.get("section").value,
-            idList,
-            this.editMode ? this.route.snapshot.queryParamMap.get('id') : undefined
-          ).pipe(first())
-        })
-      )
-      .subscribe(() => this.router.navigateByUrl(`/${nextURL}`));
+      })
+
   }
 
   // add to chip list
   add(event: MatChipInputEvent): void {
     const value = event.value;
     if ((value || '').trim()) {
-      if (this.currentTags.indexOf(value.trim()) == -1 && value.trim().length <= 100) {
-        this.currentTags.push(value.trim());
+      if (this.appliedTags.filter(t => t.name === value.trim()).length === 0 && value.trim().length <= 100) {
+        this.appliedTags.push({name: value});
       }
     }
     event.chipInput!.clear();
@@ -213,16 +237,13 @@ export class CreateComponent {
 
   // remove from chip list
   remove(tag: string): void {
-    const index = this.currentTags.indexOf(tag);
-    if (index >= 0) {
-      this.currentTags.splice(index, 1);
-    }
+    this.appliedTags = this.appliedTags.filter(t => t.name !== tag);
   }
 
   // selected from chip list
   selected(event: MatAutocompleteSelectedEvent): void {
-    if (this.currentTags.indexOf(event.option.viewValue) == -1) {
-      this.currentTags.push(event.option.viewValue);
+    if (this.appliedTags.filter(t => t.name === event.option.viewValue).length === 0) {
+      this.appliedTags.push({name: event.option.viewValue});
     }
     this.tagInput.nativeElement.value = '';
     this.tagControl.setValue(null);
@@ -230,136 +251,19 @@ export class CreateComponent {
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-    return this.tagList.filter(tag => tag.toLowerCase().indexOf(filterValue) === 0);
+    return this.allTags.filter(tag => tag.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  // get all the tags
-  getTags(): void {
-    this.userService.getTags()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(tags => {
-        this.allTags = tags;
-        this.allTags.forEach(tag => {
-          this.tagList.push(tag.name);
-          this.tagIDList.push(tag.id);
-        });
-      }
-      );
-  }
+  private canEditBlog(isLocked: boolean, isAuthor: boolean, group: string, section: string): boolean {
+    const isAdmin = group === 'admin';
+    const isTrusted = group === 'trusted';
+    const sectionIsBlog = section === 'blog';
 
-  // get the sections that apply to the user group
-  getSections() {
-    this.userService.getSections()
-      .pipe(
-        first(),
-        switchMap(sections => {
-          this.sectionList = sections;
-          if (this.user.group !== 'admin' && this.user.group !== 'trusted') {
-            this.sectionList = this.sectionList.filter(obj => obj.name !== 'blog')
-          }
-          this.blogID = this.sectionList.filter(obj => obj.name === 'blog')[0].id // gross
-          return this.route.snapshot.queryParamMap.get('id') ? this.userService.getBlogByID(this.route.snapshot.queryParamMap.get('id')) : of(undefined)
-            .pipe(first(),
-              catchError(error => this.errorMsg = this.errorService.errorMessage(error)))
-        })
-      )
-      .subscribe(blog =>
-        this.setBlog(blog)
-      );
-  }
+    if (isAdmin) return true;
+    if (!isLocked && !sectionIsBlog) return true;
+    if (!isLocked && isTrusted) return true;
+    if (isAuthor) return true;
 
-  setBlog(blog) {
-    if (blog !== undefined) {
-      this.blog = blog;
-      // if the section is blog and you ain't trusted
-      if (this.sectionList.filter(sec => sec.name === 'blog').length == 0 && this.blog.section === this.blogID) {
-        this.errorMsg = "Not allowed to edit this.";
-        this.disableSubmit = true;
-      }
-
-      // if the page is locked and you are either author or admin
-      // or if the page is just not authorlocked
-      else if (!this.blog.authorlock || (this.blog.authorlock && ((this.blog.author.indexOf(this.user.id) > -1) || this.user.group == 'admin'))) {
-        this.pageForm.get('title').setValue(this.blog.title);
-        this.pageForm.get('body').setValue(this.blog.body);
-        this.pageForm.get('section').setValue(this.blog.section);
-        this.pageForm.get('seoDesc').setValue(this.blog.desc);
-        this.pageForm.get('imgURL').setValue(this.blog.image);
-        this.pageForm.get('authorLock').setValue(this.blog.authorlock);
-
-        for (let tag of this.blog.tags) {
-          let index = this.tagIDList.indexOf(tag);
-          // if the tag is deleted from the database for whatever reason
-          // there's no reason to keep it
-          if (index != -1) {
-            this.currentTags.push(this.tagList[index]);
-          }
-          this.sectionIsBlog = true;
-        }
-        if (this.blog.author.length > 1) { // we've established you're allowed to be here sooo
-          this.disableAuthorLock = true;
-        }
-
-      }
-      else {
-        this.errorMsg = "Not allowed to edit this.";
-        this.disableSubmit = true;
-      }
-    }
-  }
-
-  customLink(markdown: string): string {
-    let section = this.section;
-
-    return markdown.replace(/\[\[([^\]]+)\]\]/g, function (allPattern, link) {
-      let text = link.replace(/\|([^\|]+)/, "").split("|")[0]
-      let category = link.replace(/([^\|]+)\|/, "")
-      let page = category.split('|')
-      if (page.length > 1) {
-        category = page[1]
-        page = page[0];
-      }
-      else {
-        page = text;
-      }
-
-      switch (category) {
-        case "t":
-          category = "traits"
-          break;
-        case "e":
-          category = "effects"
-          break;
-        case "i":
-          category = "items"
-          break;
-        case "b":
-          category = "books"
-          break;
-        case "p":
-          category = "properties"
-          break;
-      }
-
-      link = slugify(page, {
-        replacement: '-',
-        remove: undefined,
-        lower: true,
-        strict: true,
-        locale: 'en'
-      });
-      if (category != text) return `[${text}](/${section}/${category}/${link})`;
-      return `[${text}](/${section}/${link})`;
-    })
-  }
-
-  slug(title: string): string {
-    return slugify(title, {
-      replacement: '-',
-      remove: undefined,
-      lower: true,
-      strict: true,
-      locale: 'en'
-    });
+    return false;
   }
 }

@@ -11,14 +11,14 @@
         <i class="fas fa-user"></i>
       }
       @if (blog.authorlock) {
-        <a class="url" routerLink="/user/{{blog.author[0].username}}">
-        {{blog.author[0].username}} </a>
+        <a class="url" routerLink="/user/{{blog.author[0]}}">
+        {{blog.author[0]}} </a>
       }
     </span>
     @if (allowedToEdit) {
       <span style="display: inline-block;">
         <i class="fas fa-edit"></i>
-        <a routerLink="/create" [queryParams]="{ id: blog.id }"> Edit</a>
+        <a routerLink="/create" [queryParams]="{ section: blog.section.slug, slug: blog.slug }"> Edit</a>
       </span>
     }
   </div>

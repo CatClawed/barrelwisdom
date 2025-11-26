@@ -7,14 +7,22 @@ export const LanguageGuard = (route: ActivatedRouteSnapshot, state: RouterStateS
     const languageService = inject(LanguageService);
     const router = inject(Router);
     const language = route.paramMap.get('language') ? route.paramMap.get('language').toLowerCase() : "";
-    let segments = state.url.split('/');
+    const segs = state.url.split('#');
+    let fragment = segs.length > 1 ? segs[1] : undefined;
+    let segments = segs[0].split('/');
     const section = segments[1];
+
 
     if(!language || language.length >= 3) {
         if(!languageService.languageValue) {
             languageService.setLanguage("en");
         }
-        router.navigateByUrl(state.url + `/` + languageService.languageValue);
+        if (fragment) {
+            router.navigateByUrl(segs[0] + `/` + languageService.languageValue + '#' + fragment);
+        }
+        else {
+            router.navigateByUrl(state.url + `/` + languageService.languageValue);
+        }
         return true;
     }
 
@@ -33,6 +41,11 @@ export const LanguageGuard = (route: ActivatedRouteSnapshot, state: RouterStateS
             newUrl += '/' + s;
         }
     }
-    router.navigateByUrl(newUrl + "/en");
+    if (fragment) {
+            router.navigateByUrl(newUrl + "/en" + '#' + fragment);
+    }
+    else {
+        router.navigateByUrl(newUrl + "/en");
+    }
     return false;
 }

@@ -16,15 +16,15 @@ export class BlogService {
     private http: HttpClient) { }
 
   getBlog(slug: string, section: string): Observable<Blog> {
-    return this.http.get<Blog>(`${environment.apiUrl}/blog/${slug}/${section}/`)
+    return this.http.get<Blog>(`${environment.apiUrl}/blog/${section}/${slug}/`)
   }
 
   getMainPageBlogs(num: number, limit: number, tag?: string): Observable<BlogPaginator> {
     const offset = num == 0 ? 1 : limit * (num - 1);
     if (tag) {
-      return this.http.get<BlogPaginator>(`${environment.apiUrl}/blog/?ordering=-created&tags__slug=${tag}&limit=${limit}&offset=${offset}`)
+      return this.http.get<BlogPaginator>(`${environment.apiUrl}/blog/blog/tag/${tag}?limit=${limit}&offset=${offset}`)
     }
-    return this.http.get<BlogPaginator>(`${environment.apiUrl}/blog/?ordering=-created&limit=${limit}&offset=${offset}`)
+    return this.http.get<BlogPaginator>(`${environment.apiUrl}/blog/blog/?limit=${limit}&offset=${offset}`)
   }
 
   postComment(body: string, blog: number, name: string, parent?: number) {

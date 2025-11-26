@@ -55,7 +55,9 @@ export class BlogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authenticationService.user.pipe(takeUntil(this.destroy$)).subscribe(x => this.user = x);
+    this.authenticationService.user
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(x => this.user = x);
     this.route.paramMap.pipe(
       switchMap(params => {
         if (/[A-Z]+/.test(params.get('title') + params.get('section'))) {
@@ -90,7 +92,7 @@ export class BlogComponent implements OnInit {
   }
 
   checkAuthor(commentAuthor: string) {
-    return this.blog.author.filter(author => author.username === commentAuthor)
+    return this.blog.author.includes(commentAuthor)
   }
 
   postComment(parent?: Comment): void {
@@ -132,24 +134,24 @@ export class BlogComponent implements OnInit {
 
   setBlog(blog) {
     this.blog = blog;
-    this.gameName = (this.blog.section.fullname) ? `${this.blog.section.fullname} - ` : ""; // gotta make sure google sees the game name...
+    this.gameName = (this.blog.section.name) ? `${this.blog.section.name} - ` : ""; // gotta make sure google sees the game name...
     this.body = this.markdownService.parse(this.blog.body);
     if (this.user) {
-      if (this.blog.authorlock && this.user.id === this.blog.author[0].id) {
+      if (this.blog.authorlock && this.user.username === this.blog.author[0]) {
         this.allowedToEdit = true;
       }
       else if (this.user.group === 'admin') {
         this.allowedToEdit = true;
       }
       else if (!this.blog.authorlock) {
-        if (this.user.group === 'trusted' || this.blog.section.name !== 'blog') {
+        if (this.user.group === 'trusted' || this.blog.section.slug !== 'blog') {
           this.allowedToEdit = true;
         }
       }
     }
-    if (this.blog.section.name !== "blog") {
+    if (this.blog.section.slug !== "blog") {
       this.breadcrumbService.setBreadcrumbs(
-        [[this.blog.section.fullname, `/${this.blog.section.name}`]],
+        [[this.blog.section.name, `/${this.blog.section.slug}`]],
         this.blog.title);
     }
     else {
@@ -158,8 +160,8 @@ export class BlogComponent implements OnInit {
         this.blog.title);
     }
     this.seoService.SEOSettings(
-      `${this.blog.section.name}/${this.blog.slug}`,
-      this.blog.section.fullname ? `${this.blog.title} - ${this.blog.section.fullname}` : this.blog.title,
+      `${this.blog.section.slug}/${this.blog.slug}`,
+      this.blog.section.name ? `${this.blog.title} - ${this.blog.section.name}` : this.blog.title,
       this.blog.desc,
       this.blog.image
     );

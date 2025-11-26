@@ -1,21 +1,6 @@
 import { Section } from "./section";
 import { SimpleUser } from "./user";
 
-export interface EditBlog {
-    id: number
-    created: Date;
-    modified: Date;
-    title: string;
-    slug: string
-    body: string;
-    image: string;
-    desc: string;
-    authorlock: boolean;
-    author: number[];
-    section: number;
-    tags: number[];
-}
-
 export interface CommentBlog{
     slug: string;
     sec: string;
@@ -37,21 +22,29 @@ export interface Comment {
     parent_blog: CommentBlog;
 }
 
-export interface Blog {
-    id: number
-    created: Date;
-    modified: Date;
+export interface BlogBase {
     title: string;
-    slug: string
     body: string;
     image: string;
     desc: string;
     authorlock: boolean;
-    author: SimpleUser[];
-    section: Section;
-    tags: Tag[];
-    comments: Comment[]
+    author: string[];
+    tags?: Tag[];
     closed: boolean;
+}
+
+export interface EditBlog extends BlogBase {
+    slug?: string;
+    section: string;
+}
+
+export interface Blog extends BlogBase {
+    id?: number;
+    created: Date;
+    modified: Date;
+    slug: string
+    section: Section;
+    comments: Comment[];
 }
 
 export interface BlogPaginator {
@@ -63,7 +56,7 @@ export interface BlogPaginator {
 }
 
 export interface Tag {
-    id: number;
+    id?: number;
     name: string;
-    slug: string;
+    slug?: string;
 }

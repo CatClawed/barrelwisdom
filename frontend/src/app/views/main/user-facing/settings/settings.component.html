@@ -145,9 +145,9 @@
         <div class="settings-row">
           <label for="text-input">URL Name</label>
           <div class="settings-form">
-            <input type="text" formControlName="name"
-              [ngClass]="{ 'is-invalid': submittedSection && sectionf.name.errors }" />
-            @if (submittedSection && sectionf.name.errors) {
+            <input type="text" formControlName="slug"
+              [ngClass]="{ 'is-invalid': submittedSection && sectionf.slug.errors }" />
+            @if (submittedSection && sectionf.slug.errors) {
               <div class="text-danger">
               </div>
             }
@@ -156,9 +156,9 @@
         <div class="settings-row">
           <label for="text-input">Game Name</label>
           <div class="settings-form">
-            <input type="text" formControlName="fullname"
-              [ngClass]="{ 'is-invalid': submittedSection && sectionf.fullname.errors }" />
-            @if (submittedSection && sectionf.fullname.errors) {
+            <input type="text" formControlName="name"
+              [ngClass]="{ 'is-invalid': submittedSection && sectionf.name.errors }" />
+            @if (submittedSection && sectionf.name.errors) {
               <div class="text-danger">
               </div>
             }
@@ -186,7 +186,7 @@
           <mat-label>Section</mat-label>
           <mat-select matNativeControl formControlName="nav">
             @for (section of sections; track section) {
-              <mat-option value="section.name" (click)="loadNav(section.name)">{{section.name}}</mat-option>
+              <mat-option value="section.slug" (click)="loadNav(section.slug)">{{section.name}}</mat-option>
             }
           </mat-select>
         </mat-form-field>

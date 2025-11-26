@@ -92,8 +92,8 @@ export class SettingsComponent {
     });
 
     this.sectionForm = this.formBuilder.nonNullable.group({
-      name: ['', [Validators.required, Validators.maxLength(30)]],
-      fullname: ['', [Validators.required]]
+      slug: ['', [Validators.required, Validators.maxLength(30)]],
+      name: ['', [Validators.required]]
     });
 
     this.navigationForm = this.formBuilder.nonNullable.group({
@@ -215,7 +215,7 @@ export class SettingsComponent {
     }
 
     this.loading = true;
-    this.settingService.createSection(this.sectionf.name.value, this.sectionf.fullname.value)
+    this.settingService.createSection(this.sectionf.slug.value, this.sectionf.name.value)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {

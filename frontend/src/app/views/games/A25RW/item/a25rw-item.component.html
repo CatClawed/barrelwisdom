@@ -217,15 +217,16 @@
       </tr>
       <tr>
         <td style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; padding-top: 1.4em;">
-          <div style="display: flex; margin: -1.5em auto 1.5em auto;">
-            <svg style="width:50%; aspect-ratio:1/2; max-width:100px; fill:{{a25rwservice.colors[item.colors[0].l]}};">
-              <use attr.href="{{imgURL}}spritesheet.svg?v=1#color-l"></use>
-            </svg>
-            <svg style="width:50%; aspect-ratio:1/2; max-width:100px; fill:{{a25rwservice.colors[item.colors[0].r]}};">
-              <use attr.href="{{imgURL}}spritesheet.svg?v=1#color-r"></use>
-            </svg>
-          </div>
-
+          @if (item.colors) {
+            <div style="display: flex; margin: -1.5em auto 1.5em auto;">
+              <svg style="width:50%; aspect-ratio:1/2; max-width:100px; fill:{{a25rwservice.colors[item.colors[0].l]}};">
+                <use attr.href="{{imgURL}}spritesheet.svg?v=1#color-l"></use>
+              </svg>
+              <svg style="width:50%; aspect-ratio:1/2; max-width:100px; fill:{{a25rwservice.colors[item.colors[0].r]}};">
+                <use attr.href="{{imgURL}}spritesheet.svg?v=1#color-r"></use>
+              </svg>
+            </div>
+          }
           @for (ing of item.recipe; track ing) {
             @if (ing.cat) {
             <a routerLink="/{{gameURL}}/categories/{{ing.cat.id}}/{{language}}"

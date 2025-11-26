@@ -1,86 +1,78 @@
-from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import viewsets, filters, status
+from rest_framework import viewsets
 from rest_framework.pagination import LimitOffsetPagination
-from rest_framework.response import Response
 from rest_framework.decorators import action
-from rest_framework.permissions import AllowAny
-from blog.serializers import BlogSerializer, TagSerializer, SectionSerializer, MainBlogSerializer, NewCommentSerializer, ModerateCommentSerializer, MainBlogListSerializer
+from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly
+from blog.serializers import BlogSerializer, TagSerializer, SectionSerializer,  NewCommentSerializer, ModerateCommentSerializer, MainBlogListSerializer
 from blog.models import Blog, Tags, Section, Comment
-
-class BlogViewSet(viewsets.ModelViewSet):
-    queryset = Blog.objects.all()
-    serializer_class = BlogSerializer
-    filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    search_fields = ['title','body']
-    ordering_fields = ['created']
-    filterset_fields = ['slug', 'section', 'tags']
-    pagination_class = LimitOffsetPagination
+from django.db.models import Prefetch
+from django.shortcuts import get_object_or_404
 
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tags.objects.all()
     serializer_class = TagSerializer
     lookup_field = 'slug'
 
-    # https://stackoverflow.com/questions/67151379/create-multiple-instances-at-once-django-rest-framework
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data, many=True)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response(
-            serializer.data,
-            status=status.HTTP_201_CREATED,
-            headers=headers
-        )
-
 class SectionViewSet(viewsets.ModelViewSet):
     queryset = Section.objects.all()
     serializer_class = SectionSerializer
-    lookup_field = 'name'
-
-class MainBlogViewSet(viewsets.ModelViewSet):
-    queryset = (
-            Blog.objects
-            .filter(section__name="blog")
-        )
-    serializer_class = MainBlogListSerializer
-    filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
-    search_fields = ['title','body']
-    ordering_fields = ['created']
-    filterset_fields = ['slug', 'section', 'tags__slug']
-    pagination_class = LimitOffsetPagination
     lookup_field = 'slug'
 
-    @action(detail=True, methods=['get'], url_path=r"(?P<section>[a-z-0-9]+)")
-    def blog(self, request, section, slug):
-        try:
-            queryset = (
-                Blog.objects
-                .select_related(
-                    'section'
-                )
-                .prefetch_related(
-                    'tags',
-                    'author'
-                )
-                .get(slug=slug, section__name=section)
+class BlogViewSet(viewsets.ModelViewSet):
+    serializer_class = BlogSerializer
+    pagination_class = LimitOffsetPagination
+    lookup_field = 'slug'
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    queryset = (Blog.objects
+            .select_related('section')
+            .prefetch_related(
+                'author',
+                'tags',
+                Prefetch('comment_set',
+                    queryset=Comment.objects
+                        .select_related('author')
+                        .prefetch_related(
+                            Prefetch('comment_set',
+                                Comment.objects.select_related('author')
+                                .filter(approved=True)))
+                        .filter(approved=True)),
             )
-        except ObjectDoesNotExist:
-            raise Http404
-        serializer = MainBlogSerializer(queryset)
-        return Response(serializer.data)
+        )
 
-    def list(self, request, *args, **kwargs):
-        response = super().list(request, args, kwargs)
-        if request.query_params.get('tags__slug'):
-            try:
-                response.data['tagname'] = Tags.objects.get(slug=request.query_params.get('tags__slug')).name # Or wherever you get this values from
-            except ObjectDoesNotExist:
-                raise Http404
-        return response
-    
+    def get_queryset(self):
+        section_slug = self.kwargs.get('section_slug')
+        tag_slug = self.kwargs.get('tag_slug')
+        if self.action in ['list', 'by_tag'] and section_slug != 'blog':
+            raise Http404
+        if self.action =='list' and section_slug:
+            return Blog.objects.select_related('section').filter(section__slug=section_slug)
+        if self.action == 'by_tag' and tag_slug:
+            return Blog.objects.select_related('section').filter(tags__slug=tag_slug)
+        return self.queryset
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        slug = self.kwargs.get('slug')
+        section_slug = self.kwargs.get('section_slug')
+        if not slug or not section_slug:
+            raise AttributeError("Blog lookup requires both 'slug' and 'section_slug' URL parameters.")
+        obj = get_object_or_404(
+            queryset,
+            slug=slug,
+            section__slug=section_slug
+        )
+        self.check_object_permissions(self.request, obj)
+        return obj
+
+    def get_serializer_class(self):
+        if self.action in ['list', 'by_tag']:
+            return MainBlogListSerializer
+        return super().get_serializer_class()
+
+    @action(detail=False, methods=['get'], url_path='tag/(?P<tag_slug>[a-z-0-9]+)')
+    def by_tag(self, request, section_slug=None, tag_slug=None):
+        return super().list(request)
+
 class NewCommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     ordering_fields = ['created']

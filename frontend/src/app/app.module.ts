@@ -1,5 +1,5 @@
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { APP_ID, NgModule, isDevMode } from '@angular/core';
+import { APP_ID, ErrorHandler, NgModule, isDevMode } from '@angular/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
@@ -12,6 +12,7 @@ import { AppComponent } from '@app/app.component';
 import { LayoutComponent } from '@app/containers';
 import { CookieService } from 'ngx-cookie-service';
 import { CringeAdComponent } from "./views/_components/cringe/cringe.component";
+import { GlobalErrorHandler } from './_helpers/errorhandler';
 
 const APP_CONTAINERS = [
     LayoutComponent
@@ -35,6 +36,10 @@ const APP_CONTAINERS = [
         }),
         CringeAdComponent],
     providers: [
+        {
+            provide: ErrorHandler,
+            useClass: GlobalErrorHandler
+        },
         provideClientHydration(),
         {
             provide: APP_ID,
