@@ -44,7 +44,7 @@ export class SettingsComponent {
   successPassword = false;
   successSection = false;
   successNavigation = false;
-  user: User;
+  user; //: User;
   invite: string;
   sections: any[];
 
@@ -60,9 +60,7 @@ export class SettingsComponent {
     private metaService: Meta,
     private titleService: Title
   ) {
-    this.authenticationService.user
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(x => this.user = x);
+    this.user = this.authenticationService.userSignal;
   }
 
   ngOnInit() {

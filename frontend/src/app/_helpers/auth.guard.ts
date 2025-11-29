@@ -23,7 +23,5 @@ export const AuthGuard = (route: ActivatedRouteSnapshot, state: RouterStateSnaps
             }
         }
     }
-    else {
-        return router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url }});
-    }
+    return router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url }});
 }

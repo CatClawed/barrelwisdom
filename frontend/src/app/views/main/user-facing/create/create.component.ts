@@ -37,9 +37,9 @@ export class CreateComponent {
   loading = false;
   submitted = false;
   errorMsg: string;
-  user: User;
+  user; //: User;
   sectionIsBlog: boolean = false;
-  preview: SafeHtml;
+  preview: string;
   filteredTags: Observable<string[]>;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tagControl: UntypedFormControl;
@@ -74,9 +74,7 @@ export class CreateComponent {
     private authenticationService: AuthenticationService,
     private breadcrumbService: BreadcrumbService,
     private userService: UserService) {
-    this.authenticationService.user
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(x => this.user = x);
+    this.user = this.authenticationService.userSignal;
     this.tagControl = new UntypedFormControl();
 
     this.pageForm = this.formBuilder.nonNullable.group({

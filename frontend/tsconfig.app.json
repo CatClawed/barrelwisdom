@@ -1,3 +1,5 @@
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
@@ -6,13 +8,10 @@
       "node"
     ]
   },
-  "files": [
-    "src/main.ts",
-    "src/polyfills.ts",
-    "src/main.server.ts",
-    "server.ts"
-  ],
   "include": [
-    "src/**/*.d.ts"
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/**/*.spec.ts"
   ]
 }

@@ -27,7 +27,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
     this.breadcrumbService.setBreadcrumbs([], undefined)
-    this.blogService.getUserProfile(this.route.snapshot.params.username)
+    this.blogService.getUserProfile(this.route.snapshot.params['username'])
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: x => {

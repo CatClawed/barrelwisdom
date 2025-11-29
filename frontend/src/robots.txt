@@ -1,3 +1,0 @@
-User-agent: *
-Disallow: /login
-Sitemap: https://barrelwisdom.com/media/sitemaps/sitemap.xml

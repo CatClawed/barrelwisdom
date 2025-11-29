@@ -1,17 +1,14 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy, signal } from '@angular/core';
 import { User } from '@app/views/main/_interfaces/user';
 import { environment } from "@environments/environment";
 import { CookieService } from 'ngx-cookie-service';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService implements OnDestroy {
-    private userSubject: BehaviorSubject<User>;
-    public user: Observable<User>;
+    userSignal = signal<User>(null)
     public u: User = null;
-    private destroy$ = new Subject<void>();
 
     constructor(private http: HttpClient,
         private cookieService: CookieService) {
@@ -37,8 +34,7 @@ export class AuthenticationService implements OnDestroy {
                 console.log('Auth Error: ', err.message);
             }
         }
-        this.userSubject = new BehaviorSubject<User>(this.u);
-        this.user = this.userSubject.asObservable();
+        this.userSignal.set(this.u)
 
         if(refresh)
         {
@@ -47,7 +43,7 @@ export class AuthenticationService implements OnDestroy {
     }
 
     public get userValue(): User {
-        return this.userSubject.value;
+        return this.userSignal();
     }
 
     login(username, password) {
@@ -63,7 +59,7 @@ export class AuthenticationService implements OnDestroy {
                     this.u.username = jwtToken.name;
                     this.u.id = jwtToken.user_id;
                     this.u.group = jwtToken.group;
-                    this.userSubject.next(this.u);
+                    this.userSignal.set(this.u)
                     this.startRefreshTokenTimer();
                     return jwt;
                 }
@@ -79,8 +75,8 @@ export class AuthenticationService implements OnDestroy {
         this.cookieService.delete('refresh');
         this.cookieService.delete('access');
         this.stopRefreshTokenTimer();
-        if(this.userSubject) {
-            this.userSubject.next(null);
+        if(this.userSignal()) {
+            this.userSignal.set(null);
         }
     }
 
@@ -107,11 +103,13 @@ export class AuthenticationService implements OnDestroy {
                 timeout = expires.getTime() - Date.now() - (60 * 1000);
             }
             catch (err) {
-                console.log('Auth Error: ', err.message);
+                console.error('Auth Error: ', err.message);
             }
 
         }
-        this.refreshTokenTimeout = setTimeout(() => this.refreshToken().pipe(takeUntil(this.destroy$)).subscribe(), timeout);
+        this.refreshTokenTimeout = setTimeout(() =>
+            this.refreshToken()
+            .subscribe(), timeout);
     }
 
     private stopRefreshTokenTimer() {
@@ -123,7 +121,6 @@ export class AuthenticationService implements OnDestroy {
     }
 
     ngOnDestroy() {
-        this.destroy$.next();
-        this.destroy$.complete();
+        this.stopRefreshTokenTimer();
       }
 }

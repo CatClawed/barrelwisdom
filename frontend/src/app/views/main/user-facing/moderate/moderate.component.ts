@@ -16,7 +16,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 
 export class ModerateComponent implements OnInit {
-  user: User;
+  user; //: User;
   comments: Comment[];
   error: boolean = false;
 
@@ -30,9 +30,7 @@ export class ModerateComponent implements OnInit {
 
   ngOnInit(): void {
     this.breadcrumbService.setBreadcrumbs([], undefined)
-    this.authenticationService.user
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(x => this.user = x);
+    this.user = this.authenticationService.userSignal;
     this.getComments();
   }
 

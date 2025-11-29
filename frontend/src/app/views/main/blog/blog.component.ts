@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AuthenticationService } from '@app/services/authentication.service';
 import { BreadcrumbService } from '@app/services/breadcrumb.service';
@@ -15,27 +14,27 @@ import { Blog, Comment } from '@app/views/main/_interfaces/blog';
 import { User } from '@app/views/main/_interfaces/user';
 import { BlogService } from '@app/views/main/_services/blog.service';
 import { MarkdownComponent, provideMarkdown } from 'ngx-markdown';
-import { of } from 'rxjs';
-import { catchError, switchMap, takeUntil } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
-    templateUrl: 'blog.component.html',
-    styleUrls: ['blog.scss'],
-    providers: [DestroyService, provideMarkdown()],
-    imports: [MatFormFieldModule, MatInputModule,
-        ReactiveFormsModule, RouterLink, MarkdownComponent,
-        CommonModule, CringeAdComponent]
+  templateUrl: 'blog.component.html',
+  styleUrls: ['blog.scss'],
+  providers: [DestroyService, provideMarkdown()],
+  imports: [MatFormFieldModule, MatInputModule,
+    ReactiveFormsModule, RouterLink, MarkdownComponent,
+    CommonModule, CringeAdComponent,]
 })
 
 export class BlogComponent implements OnInit {
-  user: User;
+  user; //: User;
   blog: Blog;
   error: boolean = false;
   allowedToEdit = false;
   gameName = "";
   pageForm: UntypedFormGroup;
-  fakeComment: Comment = null;
   success: boolean;
+  blog$: Observable<Blog | null>;
 
   constructor(
     private route: ActivatedRoute,
@@ -50,13 +49,13 @@ export class BlogComponent implements OnInit {
       name: "",
       comment: ""
     })
+    this.user = this.authenticationService.userSignal;
   }
 
   ngOnInit(): void {
-    this.authenticationService.user
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(x => this.user = x);
-    this.route.paramMap.pipe(
+
+
+    this.blog$ = this.route.paramMap.pipe(
       switchMap(params => {
         if (/[A-Z]+/.test(params.get('title') + params.get('section'))) {
           this.blog = null;
@@ -65,21 +64,19 @@ export class BlogComponent implements OnInit {
         }
         return this.blogService.getBlog(params.get('title'), params.get('section'))
           .pipe(
+            tap(data => {
+              this.setBlog(data);
+            }),
+            tap(() => this.error = this.breadcrumbService.setStatus(200)),
             catchError(error => {
-              this.blog = null;
               this.error = this.breadcrumbService.setStatus(error.status);
-              return of(undefined)
+              return of(null);
             })
-          )
+          );
       }),
       takeUntil(this.destroy$)
     )
-      .subscribe(data => {
-        if (data) {
-          this.setBlog(data)
-          this.error = this.breadcrumbService.setStatus(200);
-        }
-      });
+
   }
 
   newForm(parent: Comment): void {
@@ -133,15 +130,15 @@ export class BlogComponent implements OnInit {
   setBlog(blog) {
     this.blog = blog;
     this.gameName = (this.blog.section.name) ? `${this.blog.section.name} - ` : ""; // gotta make sure google sees the game name...
-    if (this.user) {
-      if (this.blog.authorlock && this.user.username === this.blog.author[0]) {
+    if (this.user()) {
+      if (this.blog.authorlock && this.user().username === this.blog.author[0]) {
         this.allowedToEdit = true;
       }
-      else if (this.user.group === 'admin') {
+      else if (this.user().group === 'admin') {
         this.allowedToEdit = true;
       }
       else if (!this.blog.authorlock) {
-        if (this.user.group === 'trusted' || this.blog.section.slug !== 'blog') {
+        if (this.user().group === 'trusted' || this.blog.section.slug !== 'blog') {
           this.allowedToEdit = true;
         }
       }

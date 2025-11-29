@@ -1,7 +1,7 @@
 // https://obscountdown.com/article/121-complete-guide-to-inject-google-ad-units-in-you-angular-18-application
 
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
-import { AppComponent } from '@app/app.component';
+import { isPlatformBrowser } from '@angular/common';
+import { AfterViewInit, Component, inject, PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'cringe-ad-responsive',
@@ -15,43 +15,15 @@ import { AppComponent } from '@app/app.component';
         data-full-width-responsive="true"></ins>
   `,
 })
-export class CringeAdComponent implements AfterViewInit, OnDestroy {
-  private scriptId = generateRandomString(10); // Unique ID for the script element
-  browser = false;
+export class CringeAdComponent implements AfterViewInit {
+  private platformId = inject(PLATFORM_ID);
 
   ngAfterViewInit() {
-
-    AppComponent.isBrowser
-      .subscribe(isBrowser => {
-        this.browser = isBrowser;
-        if (isBrowser) {
-          if (!document.getElementById(this.scriptId)) { // Prevent script duplication
-            const script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.id = this.scriptId; // Assign unique ID
-            script.text = `(adsbygoogle = window.adsbygoogle || []).push({});`;
-            document.body.appendChild(script);
-          }
-        }
-      });
-  }
-
-  ngOnDestroy() {
-    if (this.browser) {
-      const script = document.getElementById(this.scriptId);
-      if (script) {
-        document.body.removeChild(script);
-      }
+    if (isPlatformBrowser(this.platformId)) {
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.text = `(adsbygoogle = window.adsbygoogle || []).push({});`;
+      document.body.appendChild(script);
     }
   }
-}
-
-export function generateRandomString(length: number): string {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-    for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-      result += characters.charAt(randomIndex);
-    }
-    return result;
 }
