@@ -21,7 +21,6 @@ export class HomeComponent implements OnInit {
   path: number;
   limit: number = 10;
   error: boolean = false;
-  totalPages: number;
   baseUrl: string;
   blogs$: Observable<BlogPaginator | null>;
 
@@ -43,7 +42,6 @@ export class HomeComponent implements OnInit {
       switchMap(() => this.initializePage()),
       tap(data => {
         this.error = this.breadcrumbService.setStatus(200);
-        this.totalPages = Math.ceil(data.count / this.limit);
       }),
       catchError(error => {
         this.error = this.breadcrumbService.setStatus(error.status);
@@ -52,12 +50,11 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  initializePage() {
-    this.baseUrl = this.route.snapshot.params.tagname ?
-      `tag/${this.route.snapshot.params.tagname}` : '/'
-    this.path = this.route.snapshot.params.number ?
-      this.route.snapshot.params.number : 1;
-    return this.blogService.getMainPageBlogs(this.path, this.limit, this.route.snapshot.params.tagname)
+  private initializePage() {
+    const tagname = this.route.snapshot.params['tagname'] || '';
+    this.baseUrl = tagname ? `tag/${tagname}` : '/'
+    this.path = Number(this.route.snapshot.params['number']) || 1;
+    return this.blogService.getMainPageBlogs(this.path, this.limit, tagname);
   }
 
   changePage(e) {

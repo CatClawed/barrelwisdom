@@ -1,138 +1,134 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, DestroyRef, effect, ElementRef, inject, ViewChild } from '@angular/core';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatAutocomplete, MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from "@app/services/authentication.service";
 import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { Blog, EditBlog, Tag } from "@app/views/main/_interfaces/blog";
-import { Section } from '@app/views/main/_interfaces/section';
-import { User } from "@app/views/main/_interfaces/user";
+import { EditBlog, Tag } from "@app/views/main/_interfaces/blog";
 import { ErrorCodeService } from "@app/views/main/_services/errorcode.service";
 import { UserService } from '@app/views/main/_services/user.service';
 import { environment } from '@environments/environment';
 import { MarkdownComponent, provideMarkdown } from 'ngx-markdown';
 import { forkJoin, Observable, of } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
-    templateUrl: 'create.component.html',
-    providers: [DestroyService, provideMarkdown()],
-    styleUrl: '../user-facing.scss',
-    imports: [MatFormFieldModule, MatInputModule,
-        ReactiveFormsModule, MarkdownComponent,
-        CommonModule, MatChipsModule, MatAutocompleteModule]
+  templateUrl: 'create.component.html',
+  providers: [provideMarkdown()],
+  styleUrl: '../user-facing.scss',
+  imports: [MatFormFieldModule, MatInputModule,
+    ReactiveFormsModule, MarkdownComponent,
+    CommonModule, MatChipsModule, MatAutocompleteModule]
 })
 
 export class CreateComponent {
-  error: string = '';
-  errorVars: any[];
-  pageForm: UntypedFormGroup;
-  loading = false;
-  submitted = false;
-  errorMsg: string;
-  user; //: User;
-  sectionIsBlog: boolean = false;
-  preview: string;
-  filteredTags: Observable<string[]>;
-  separatorKeysCodes: number[] = [ENTER, COMMA];
-  tagControl: UntypedFormControl;
-  sectionList: Section[] = [];
-  currentTitle: string;
-  editMode: boolean;
-  disableSubmit: boolean = false;
-  disableAuthorLock: boolean = false;
-  section: string;
-  slug: string;
-  data: any;
-  blog: Blog;
-  post: EditBlog = {title: '', body: '', image: '', desc: '', authorlock: undefined, author: [], section: undefined, closed: false, tags: undefined };
-  allTags: string[];
-  appliedTags: Tag[] = [];
-
+  private route = inject(ActivatedRoute)
+  private router = inject(Router)
+  private formBuilder = inject(UntypedFormBuilder)
+  private errorService = inject(ErrorCodeService)
+  private authenticationService = inject(AuthenticationService)
+  private breadcrumbService = inject(BreadcrumbService)
+  private userService = inject(UserService)
+  private destroyRef = inject(DestroyRef)
 
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
+  errorVars: any[];
+  loading = false;
+  submitted = false;
+  errorMsg: string;
+  sectionIsBlog: boolean = false;
+  preview: string;
+  filteredTags: Observable<string[]>;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  currentTitle: string;
+  disableSubmit: boolean = false;
+  disableAuthorLock: boolean = false;
+  section: string;
+  slug: string;
+  data;
+  post: EditBlog = { title: '', body: '', image: '', desc: '', authorlock: undefined, author: [], section: undefined, closed: false, tags: undefined };
+  allTags: string[];
+  appliedTags: Tag[] = [];
+  user = this.authenticationService.userSignal;
+  tagControl: UntypedFormControl = new UntypedFormControl();
   private imgValidators = [
     Validators.pattern(environment.imageRegex + '.+\\.(png|jpg|webp)'),
     Validators.maxLength(255),
   ]
+  pageForm: UntypedFormGroup = this.formBuilder.nonNullable.group({
+    title: ['', [Validators.required, Validators.maxLength(100)]],
+    body: ['', Validators.required],
+    section: ['', Validators.required],
+    seoDesc: ['', [Validators.required, Validators.maxLength(200)]],
+    imgURL: ['', this.imgValidators],
+    authorLock: [false],
+    closed: [false],
+    tags: this.tagControl,
+  });
 
-  constructor(
-    private route: ActivatedRoute,
-    private readonly destroy$: DestroyService,
-    private router: Router,
-    private formBuilder: UntypedFormBuilder,
-    private errorService: ErrorCodeService,
-    private authenticationService: AuthenticationService,
-    private breadcrumbService: BreadcrumbService,
-    private userService: UserService) {
-    this.user = this.authenticationService.userSignal;
-    this.tagControl = new UntypedFormControl();
-
-    this.pageForm = this.formBuilder.nonNullable.group({
-      title: ['', [Validators.required, Validators.maxLength(100)]],
-      body: ['', Validators.required],
-      section: ['', Validators.required],
-      seoDesc: ['', [Validators.required, Validators.maxLength(200)]],
-      imgURL: ['', this.imgValidators],
-      authorLock: [false],
-      closed: [false],
-      tags: this.tagControl,
-    });
-  }
-
-  ngOnInit() {
+  constructor() {
     this.breadcrumbService.setBreadcrumbs([], undefined)
     if (this.route.snapshot.queryParamMap.get('slug') && this.route.snapshot.queryParamMap.get('section')) {
       this.slug = this.route.snapshot.queryParamMap.get('slug')
       this.section = this.route.snapshot.queryParamMap.get('section')
       this.currentTitle = "Edit Page";
-      this.editMode = true;
     }
     else {
       this.currentTitle = "Create Page";
-      this.editMode = false;
     }
 
-    forkJoin({
-      tags: this.userService.getTags(),
-      sections: this.userService.getSections(),
-      blog: this.slug && this.section ? this.userService.getBlog(this.slug, this.section) : of(null)
-    }).subscribe(({tags, sections, blog}) => {
-      this.allTags = tags.map(t => t.name);
-      this.sectionList = sections;
-      this.blog = blog;
+    this.data = toSignal(
+      forkJoin({
+        tags: this.userService.getTags(),
+        sections: this.userService.getSections(),
+        blog: this.slug && this.section ? this.userService.getBlog(this.slug, this.section) : of(null)
+      }).pipe(
+        map(({ tags, sections, blog }) => {
+          let filteredSections = sections;
+          if (this.user().group !== 'admin' && this.user().group !== 'trusted') {
+            filteredSections = sections.filter(obj => obj.name !== 'blog');
+          }
+          return {
+            tags: tags.map(t => t.name),
+            sections: filteredSections,
+            blog
+          };
+        })
+      )
+    );
 
-      if (this.user.group !== 'admin' && this.user.group !== 'trusted') {
-        this.sectionList = this.sectionList.filter(obj => obj.name !== 'blog');
-      }
+    effect(() => {
+      const data = this.data();
+      if (!data) return;
 
-      if (this.blog) {
-        if (this.canEditBlog(this.blog.authorlock,
-            this.blog.author.includes(this.user.username),
-            this.user.group,
-            this.blog.section.slug)) {
-              this.pageForm.patchValue({
-                title: blog.title,
-                body: blog.body,
-                section: blog.section.slug,
-                seoDesc: blog.desc,
-                imgURL: blog.image,
-                authorLock: blog.authorlock,
-                closed: blog.closed,
-              })
-              this.appliedTags = blog.tags;
+      if (data.blog) {
+        if (this.canEditBlog(
+          data.blog.authorlock,
+          data.blog.author.includes(this.user().username),
+          this.user().group,
+          data.blog.section.slug
+        )) {
+          this.pageForm.patchValue({
+            title: data.blog.title,
+            body: data.blog.body,
+            section: data.blog.section.slug,
+            seoDesc: data.blog.desc,
+            imgURL: data.blog.image,
+            authorLock: data.blog.authorlock,
+            closed: data.blog.closed,
+          });
+          this.appliedTags = data.blog.tags;
 
-              if (blog.section.slug === 'blog') this.sectionIsBlog = true;
-              if (this.blog.author.length > 1) this.disableAuthorLock = true;
+          if (data.blog.section.slug === 'blog') this.sectionIsBlog = true;
+          if (data.blog.author.length > 1) this.disableAuthorLock = true;
         }
         else {
           this.errorMsg = "Not allowed to edit this.";
@@ -141,33 +137,29 @@ export class CreateComponent {
       }
     });
 
-
     this.filteredTags = this.tagControl.valueChanges.pipe(
       startWith(null as Observable<string[]>),
-      map((tag: string | null) => tag ? this._filter(tag) : this.allTags.slice()));
+      map((tag: string | null) => tag ? this._filter(tag) : this.data().tags.slice()));
 
     this.pageForm.get('section').valueChanges
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(value => {
-        if (value === 'blog') {
-          this.pageForm.get('imgURL').setValidators(this.imgValidators.concat(Validators.required));
-          this.pageForm.get('imgURL').updateValueAndValidity();
-          this.sectionIsBlog = true;
-        }
-        else {
-          this.pageForm.get('imgURL').setValidators(this.imgValidators);
-          this.pageForm.get('imgURL').updateValueAndValidity();
-          this.sectionIsBlog = false;
-        }
+        const validators = value === 'blog'
+          ? this.imgValidators.concat(Validators.required)
+          : this.imgValidators;
+
+        this.pageForm.get('imgURL').setValidators(validators);
+        this.pageForm.get('imgURL').updateValueAndValidity();
+        this.sectionIsBlog = value === 'blog';
         this.section = value;
-      }
-      );
+      });
 
     this.pageForm.get('body').valueChanges
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(value => {
         this.preview = value;
       });
+
   }
 
   get f() { return this.pageForm.controls; }
@@ -187,27 +179,27 @@ export class CreateComponent {
   }
 
   postBlog() {
-    this.post.body       = this.pageForm.get("body").value
-    this.post.title      = this.pageForm.get("title").value;
+    this.post.body = this.pageForm.get("body").value
+    this.post.title = this.pageForm.get("title").value;
     this.post.authorlock = this.pageForm.get("authorLock").value;
-    this.post.section    = this.pageForm.get("section").value;
-    this.post.desc       = this.pageForm.get("seoDesc").value;
-    this.post.image      = this.pageForm.get("imgURL").value;
-    this.post.tags       = this.appliedTags;
-    this.post.author     = this.blog ? this.blog.author : [];
-    this.post.closed     = this.pageForm.get("closed").value;
+    this.post.section = this.pageForm.get("section").value;
+    this.post.desc = this.pageForm.get("seoDesc").value;
+    this.post.image = this.pageForm.get("imgURL").value;
+    this.post.tags = this.appliedTags;
+    this.post.author = this.data().blog ? this.data().blog.author : [];
+    this.post.closed = this.pageForm.get("closed").value;
 
     if (this.slug) {
       this.post.slug = this.slug;
     }
-    if (!this.post.author.includes(this.user.username) && !this.post.authorlock) {
-      this.post.author.push(this.user.username);
+    if (!this.post.author.includes(this.user().username) && !this.post.authorlock) {
+      this.post.author.push(this.user().username);
     }
     else if (this.post.authorlock && this.post.author.length == 0) {
-      this.post.author.push(this.user.username);
+      this.post.author.push(this.user().username);
     }
     this.userService.blogPost(this.post)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: blog => {
           this.router.navigateByUrl(`${blog.section.slug}/${blog.slug}`)
@@ -217,7 +209,6 @@ export class CreateComponent {
           this.errorMsg = this.errorService.errorMessage(error);
         }
       })
-
   }
 
   // add to chip list
@@ -225,7 +216,7 @@ export class CreateComponent {
     const value = event.value;
     if ((value || '').trim()) {
       if (this.appliedTags.filter(t => t.name === value.trim()).length === 0 && value.trim().length <= 100) {
-        this.appliedTags.push({name: value});
+        this.appliedTags.push({ name: value });
       }
     }
     event.chipInput!.clear();
@@ -240,7 +231,7 @@ export class CreateComponent {
   // selected from chip list
   selected(event: MatAutocompleteSelectedEvent): void {
     if (this.appliedTags.filter(t => t.name === event.option.viewValue).length === 0) {
-      this.appliedTags.push({name: event.option.viewValue});
+      this.appliedTags.push({ name: event.option.viewValue });
     }
     this.tagInput.nativeElement.value = '';
     this.tagControl.setValue(null);
@@ -248,7 +239,7 @@ export class CreateComponent {
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-    return this.allTags.filter(tag => tag.toLowerCase().indexOf(filterValue) === 0);
+    return this.data().tags.filter(tag => tag.toLowerCase().indexOf(filterValue) === 0);
   }
 
   private canEditBlog(isLocked: boolean, isAuthor: boolean, group: string, section: string): boolean {

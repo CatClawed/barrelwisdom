@@ -1,9 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { getApiUrl } from '@app/_helpers/interceptor/http.interceptor';
+import { getApiUrl } from '@app/_helpers/api-url';
 import { Blog, BlogPaginator } from '@app/views/main/_interfaces/blog';
 import { UserProfile } from '@app/views/main/_interfaces/user';
-import { environment } from '@environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -29,17 +28,17 @@ export class BlogService {
     return this.http.get<BlogPaginator>(`${this.apiUrl}/blog/blog/?limit=${limit}&offset=${offset}`)
   }
 
-  postComment(body: string, blog: number, name: string, parent?: number) {
-    if (parent && name) {
-      return this.http.post(`${this.apiUrl}/new/comment/`, { body, parent, name })
-    }
-    if (parent && !name) {
-      return this.http.post(`${this.apiUrl}/new/comment/`, { body, parent })
-    }
-    if (!name) {
-      return this.http.post(`${this.apiUrl}/new/comment/`, { body, blog, parent })
-    }
-    return this.http.post(`${this.apiUrl}/new/comment/`, { body, blog, parent, name })
+  postComment(body: string, blog?: number, name?: string, parent?: number) {
+    const payload: any = {
+      body: body,
+    };
+    if (name) payload.name = name;
+    if (blog) payload.blog = blog;
+    if (parent) payload.parent = parent;
+
+    console.log(payload);
+
+    return this.http.post(`${this.apiUrl}/new/comment/`, payload)
   }
 
   getUserProfile(username: string): Observable<UserProfile> {

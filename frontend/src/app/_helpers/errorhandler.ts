@@ -4,11 +4,12 @@ import { Router, NavigationError } from '@angular/router';
 @Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
   private lastAttemptedUrl: string = '/';
+  private router: Router;
 
   constructor(private injector: Injector) {
-    const router = this.injector.get(Router);
+    this.router = this.injector.get(Router);
 
-    router.events.subscribe(event => {
+    this.router.events.subscribe(event => {
       if (event instanceof NavigationError) {
         this.lastAttemptedUrl = event.url;
       }
@@ -16,10 +17,7 @@ export class GlobalErrorHandler implements ErrorHandler {
   }
 
   handleError(error: Error): void {
-    const router = this.injector.get(Router);
     console.error(`Error on route: ${this.lastAttemptedUrl}`);
-    console.error('Registered routes:', router.config);
-    console.error(`here have this ${router.url}`)
     console.error(error);
   }
 }

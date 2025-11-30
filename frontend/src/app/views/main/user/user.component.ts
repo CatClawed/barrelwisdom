@@ -1,44 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { UserProfile } from '@app/views/main/_interfaces/user';
-import { takeUntil } from 'rxjs';
-import { BlogService } from '../_services/blog.service';
 import { SeoService } from '@app/services/seo.service';
+import { catchError, of, switchMap, tap } from 'rxjs';
+import { BlogService } from '../_services/blog.service';
 
 @Component({
-    templateUrl: 'user.component.html',
-    providers: [DestroyService],
-    imports: [RouterLink]
+  templateUrl: 'user.component.html',
+  imports: [RouterLink, AsyncPipe]
 })
-
-export class UserComponent implements OnInit {
-  userprofile: UserProfile;
+export class UserComponent {
+  private route = inject(ActivatedRoute);
+  private breadcrumbService = inject(BreadcrumbService);
+  private blogService = inject(BlogService);
+  private seoService = inject(SeoService);
   error: boolean = false;
-  errorVars: any[];
 
-  constructor(
-    private readonly destroy$: DestroyService,
-    private route: ActivatedRoute,
-    private breadcrumbService: BreadcrumbService,
-    private blogService: BlogService,
-    protected seoService: SeoService) { }
+  user$ = this.route.paramMap.pipe(
+    switchMap(params => {
+      const username = params.get('username');
+      if (username) {
+        return this.blogService.getUserProfile(username).pipe(
+          tap(data => {
+            this.error = this.breadcrumbService.setStatus(200);
+            const userSlug = `/user/${data.user.username}`;
+            const title = `User: ${data.user.username}`;
+            this.breadcrumbService.setBreadcrumbs([], title);
+            this.seoService.SEOSettings(userSlug, title, data.bio, '');
+          }),
+          catchError(error => {
+            this.error = this.breadcrumbService.setStatus(error.status);
+            return of(null)
+          })
+        )
+      }
+      return of(null)
+    })
+  )
 
-  ngOnInit(): void {
-    this.breadcrumbService.setBreadcrumbs([], undefined)
-    this.blogService.getUserProfile(this.route.snapshot.params['username'])
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: x => {
-          this.userprofile = x
-          this.error = this.breadcrumbService.setStatus(200);
-          this.breadcrumbService.setBreadcrumbs([], `User: ${this.userprofile.user.username}`)
-          this.seoService.SEOSettings(`/user/${this.userprofile.user.username}`, `User: ${this.userprofile.user.username}`, this.userprofile.bio, '')
-        },
-        error: error => {
-          this.error = this.breadcrumbService.setStatus(error.status);
-        }
-      });
+  constructor() {
+    this.breadcrumbService.setBreadcrumbs([], undefined);
   }
 }

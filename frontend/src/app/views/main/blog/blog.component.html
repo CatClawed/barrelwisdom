@@ -23,8 +23,6 @@
     }
   </div>
 </header>
-}
-@if (blog) {
   <article>
     @if (blog.image) {
       <div class="blog-image">
@@ -54,7 +52,8 @@
     @if (!blog.closed && success === undefined) {
       <ng-container
         style="margin-bottom:0.5rem;"
-        [ngTemplateOutlet]="maincommentbox">
+        [ngTemplateOutlet]="commentbox"
+        [ngTemplateOutletContext]="{parent: undefined}">
       </ng-container>
     }
     @if (success) {
@@ -75,95 +74,76 @@
       </div>
     }
   </article>
-}
-<ng-template #comment let-comment="comment">
-  <div class="card comment-card">
-    <div>
-      @if (comment.author) {
-        <b><a routerLink="/user/{{comment.author.username}}" style="color:black;">{{comment.author.username}}</a></b>
-        @if (checkAuthor(comment.author.username)) {
-          <div class="badge bg-primary" style="margin-left:0.5rem;">Author</div>
-        } @else {
-          <div class="badge bg-primary" style="margin-left:0.5rem;">Staff</div>
+
+  <ng-template #comment let-comment="comment">
+    <div class="card comment-card">
+      <div>
+        @if (comment.author) {
+          <b><a routerLink="/user/{{comment.author.username}}" style="color:black;">{{comment.author.username}}</a></b>
+          @if (blog.author.includes(comment.author.username)) {
+            <div class="badge bg-primary" style="margin-left:0.5rem;">Author</div>
+          } @else {
+            <div class="badge bg-primary" style="margin-left:0.5rem;">Staff</div>
+          }
         }
-      }
-      @if (comment.name) {
-        <b>{{comment.name}}</b>
-      }
-      @if (!comment.name && !comment.author) {
-        <b>Anonymous</b>
-      }
-      <time class="updated text-muted" style="margin-left:0.75rem;font-size: calc(0.8rem + 0.1vw);"
-      dateTime="{{comment.created}}"> {{comment.created | date:'mediumDate' }} </time>
+        @if (comment.name) {
+          <b>{{comment.name}}</b>
+        }
+        @if (!comment.name && !comment.author) {
+          <b>Anonymous</b>
+        }
+        <time class="updated text-muted" style="margin-left:0.75rem;font-size: calc(0.8rem + 0.1vw);"
+        dateTime="{{comment.created}}"> {{comment.created | date:'mediumDate' }} </time>
+      </div>
+      <markdown [data]="lineBreak(comment.body)" [disableSanitizer]="true"></markdown>
+      <div>
+        @if (!comment.open && !blog.closed && !comment.success) {
+          <button
+            style="float:right;"
+            class="btn comment-button"
+            (click)="comment.open=true;newForm(comment);">
+            Reply
+          </button>
+        }
+        @if (comment.open && !blog.closed) {
+          <div>
+            <ng-container [ngTemplateOutlet]="commentbox" [ngTemplateOutletContext]="{parent: comment}">
+            </ng-container>
+          </div>
+        }
+        @if (comment.success) {
+          <span class="text-success">Comment will be displayed upon human review, thank you!</span>
+        }
+        @if (comment.success === false) {
+          <span class="is-invalid">There was an error in submitting your comment.</span>
+        }
+      </div>
     </div>
-    <markdown [data]="lineBreak(comment.body)" [disableSanitizer]="true"></markdown>
-    <div>
-      @if (!comment.open && !blog.closed && !comment.success) {
-        <button
-          style="float:right;"
-          class="btn comment-button"
-          (click)="comment.open=true;newForm(comment);">
-          Reply
+  </ng-template>
+  <ng-template #commentbox let-parent="parent">
+    <div style="font-size:calc(0.75rem + 0.1vw)">
+      <form [formGroup]="parent ? parent.form : pageForm">
+        @if (!user()) {
+          <mat-form-field appearance="outline" style="margin-bottom:-1rem;">
+            <mat-label>Name (Optional)</mat-label>
+            <input matInput formControlName="name">
+          </mat-form-field>
+        }
+        <mat-form-field appearance="outline" style="width:100%;margin-bottom:-1rem;">
+          <textarea matInput formControlName="comment"></textarea>
+          <mat-label>Leave a comment...</mat-label>
+        </mat-form-field>
+      </form>
+    </div>
+    <div style="text-align:right">
+      @if (parent) {
+        <button class="btn comment-button" (click)="switchState(parent)">
+          Cancel
         </button>
       }
-      @if (comment.open && !blog.closed) {
-        <div>
-          <ng-container [ngTemplateOutlet]="commentbox" [ngTemplateOutletContext]="{parent: comment}">
-          </ng-container>
-        </div>
-      }
-      @if (comment.success) {
-        <span class="text-success">Comment will be displayed upon human review, thank you!</span>
-      }
-      @if (comment.success === false) {
-        <span class="is-invalid">There was an error in submitting your comment.</span>
-      }
+      <button class="btn bg-primary" style="font-weight:bold;margin-left:0.2rem;" (click)="postComment(parent);">
+        Submit
+      </button>
     </div>
-  </div>
-</ng-template>
-<ng-template #commentbox let-parent="parent">
-  <div style="font-size:calc(0.75rem + 0.1vw)">
-    <form [formGroup]="parent.form">
-      @if (!user) {
-        <mat-form-field appearance="outline" style="margin-bottom:-1rem;">
-          <mat-label>Name (Optional)</mat-label>
-          <input matInput formControlName="name">
-        </mat-form-field>
-      }
-      <mat-form-field appearance="outline" style="width:100%;margin-bottom:-1rem;">
-        <textarea matInput formControlName="comment"></textarea>
-        <mat-label>Leave a comment...</mat-label>
-      </mat-form-field>
-    </form>
-  </div>
-  <div style="text-align:right">
-    <button class="btn comment-button" (click)="switchState(parent)">
-      Cancel
-    </button>
-    <button class="btn bg-primary" style="font-weight:bold;margin-left:0.2rem;" (click)="postComment(parent);">
-      Submit
-    </button>
-  </div>
-</ng-template>
-
-<ng-template #maincommentbox>
-  <div style="font-size:calc(0.75rem + 0.1vw)">
-    <form [formGroup]="pageForm">
-      @if (!user) {
-        <mat-form-field appearance="outline" style="margin-bottom:-1rem;">
-          <mat-label>Name (Optional)</mat-label>
-          <input matInput formControlName="name">
-        </mat-form-field>
-      }
-      <mat-form-field appearance="outline" style="width:100%;margin-bottom:-1rem;">
-        <textarea matInput formControlName="comment"></textarea>
-        <mat-label>Leave a comment...</mat-label>
-      </mat-form-field>
-    </form>
-  </div>
-  <div style="text-align:right;margin-bottom:0.5rem">
-    <button class="btn bg-primary" style="font-weight:bold;margin-left:0.2rem;" (click)="postComment();">
-      Submit
-    </button>
-  </div>
-</ng-template>
+  </ng-template>
+}

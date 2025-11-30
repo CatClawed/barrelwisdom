@@ -2,7 +2,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { getApiUrl } from '@app/_helpers/interceptor/http.interceptor';
+import { getApiUrl } from '@app/_helpers/api-url';
 import { environment } from '@environments/environment';
 import { Observable } from 'rxjs';
 

@@ -2,7 +2,7 @@ from django.http import Http404
 from rest_framework import viewsets
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.decorators import action
-from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly
+from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly, IsAuthenticated
 from blog.serializers import BlogSerializer, TagSerializer, SectionSerializer,  NewCommentSerializer, ModerateCommentSerializer, MainBlogListSerializer
 from blog.models import Blog, Tags, Section, Comment
 from django.db.models import Prefetch
@@ -33,9 +33,10 @@ class BlogViewSet(viewsets.ModelViewSet):
                         .select_related('author')
                         .prefetch_related(
                             Prefetch('comment_set',
-                                Comment.objects.select_related('author')
+                                Comment.objects
+                                .select_related('author')
                                 .filter(approved=True)))
-                        .filter(approved=True)),
+                        .filter(approved=True, parent__isnull=True)),
             )
         )
 
@@ -90,3 +91,4 @@ class ModerateCommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.filter(approved=False)
     ordering_fields = ['created']
     serializer_class = ModerateCommentSerializer
+    permission_classes = [IsAuthenticated]

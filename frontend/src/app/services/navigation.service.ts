@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { computed, inject, Injectable } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
+import { getApiUrl } from '@app/_helpers/api-url';
 import { environment } from '@environments/environment';
 import { LanguageData } from '@environments/language-data';
 import { Observable, of } from 'rxjs';
@@ -9,7 +10,7 @@ import { catchError, distinctUntilChanged, filter, map, switchMap } from 'rxjs/o
 
 @Injectable({ providedIn: 'root' })
 export class NavigationService {
-
+  private apiUrl = getApiUrl();
   private router = inject(Router);
   private http = inject(HttpClient);
   public blogNav = ['user', 'settings', 'tag', 'login', 'register', 'moderate', 'create'];
@@ -76,7 +77,7 @@ export class NavigationService {
   }
 
   getNav(section: string): Observable<Nav> {
-    return this.http.get<Nav>(`${environment.apiUrl}/nav/${section}/?v=2`, this.httpOptions);
+    return this.http.get<Nav>(`${this.apiUrl}/nav/${section}/?v=2`, this.httpOptions);
   }
 }
 

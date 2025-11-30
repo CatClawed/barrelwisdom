@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { getApiUrl } from '@app/_helpers/interceptor/http.interceptor';
+import { getApiUrl } from '@app/_helpers/api-url';
 import { Comment, Blog, Tag, EditBlog } from '@app/views/main/_interfaces/blog';
 import { Section } from '@app/views/main/_interfaces/section';
 import { environment } from '@environments/environment';

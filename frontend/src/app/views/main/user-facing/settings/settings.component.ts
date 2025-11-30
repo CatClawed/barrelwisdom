@@ -1,40 +1,46 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { ChangeDetectorRef, Component, DestroyRef, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { Meta, Title } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
-import { User } from "@app/views/main/_interfaces/user";
 import { AuthenticationService } from "@app/services/authentication.service";
-import { DestroyService } from '@app/services/destroy.service';
-import { ErrorCodeService } from '@app/views/main/_services/errorcode.service';
-import { SeoService } from '@app/services/seo.service';
 import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { DestroyService } from '@app/services/destroy.service';
+import { SeoService } from '@app/services/seo.service';
+import { ErrorCodeService } from '@app/views/main/_services/errorcode.service';
 import { SettingService } from '@app/views/main/_services/setting.service';
 import { environment } from '@environments/environment';
-import { takeUntil } from 'rxjs/operators';
+import { forkJoin, of } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 
 @Component({
-    templateUrl: 'settings.component.html',
-    providers: [DestroyService],
-    styleUrl: '../user-facing.scss',
-    imports: [CommonModule, ReactiveFormsModule, MatTabsModule, MatMenuModule,
-        MatSelectModule]
+  templateUrl: 'settings.component.html',
+  providers: [DestroyService],
+  styleUrl: '../user-facing.scss',
+  imports: [CommonModule, ReactiveFormsModule, MatTabsModule, MatMenuModule,
+    MatSelectModule, AsyncPipe]
 })
 export class SettingsComponent {
+  private formBuilder = inject(UntypedFormBuilder)
+  private settingService = inject(SettingService)
+  private errorCodeService = inject(ErrorCodeService)
+  private authenticationService = inject(AuthenticationService)
+  protected seoService = inject(SeoService)
+  protected breadcrumbService = inject(BreadcrumbService)
+  private metaService = inject(Meta)
+  private titleService = inject(Title)
+  private destroyRef = inject(DestroyRef)
+  private cdr = inject(ChangeDetectorRef)
+
   currentSection: string = 'Section'
-  profileForm: UntypedFormGroup;
-  passwordForm: UntypedFormGroup;
-  sectionForm: UntypedFormGroup;
-  navigationForm: UntypedFormGroup;
   loading = false;
   submitted = false;
   submittedPass = false;
   submittedSection = false;
   submittedNavigation = false;
-  returnUrl: string;
   errorMsg: string;
   errorPass: string;
   errorInvite: string;
@@ -44,90 +50,73 @@ export class SettingsComponent {
   successPassword = false;
   successSection = false;
   successNavigation = false;
-  user; //: User;
+  user = this.authenticationService.userSignal;
   invite: string;
-  sections: any[];
 
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private readonly destroy$: DestroyService,
-    private route: ActivatedRoute,
-    private settingService: SettingService,
-    private errorCodeService: ErrorCodeService,
-    private authenticationService: AuthenticationService,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    private metaService: Meta,
-    private titleService: Title
-  ) {
-    this.user = this.authenticationService.userSignal;
-  }
+  passwordForm: UntypedFormGroup = this.formBuilder.nonNullable.group({
+    newPass: ['', [Validators.required, Validators.minLength(8)]],
+    repeatPass: ['', Validators.required],
+    currentPass: ['', [Validators.required]],
+  });
 
-  ngOnInit() {
+  profileForm: UntypedFormGroup = this.formBuilder.nonNullable.group({
+    bio: ['', [Validators.maxLength(500)]],
+    website: ['', [Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?'), Validators.maxLength(200)]],
+    avatar: ['', [Validators.pattern(environment.imageRegex + '.+\\.(png|jpg)'), Validators.maxLength(200)]],
+  });
+
+  sectionForm: UntypedFormGroup = this.formBuilder.nonNullable.group({
+    slug: ['', [Validators.required, Validators.maxLength(30)]],
+    name: ['', [Validators.required]]
+  });
+
+  navigationForm: UntypedFormGroup = this.formBuilder.nonNullable.group({
+    nav: [],
+    section: [''],
+    data: ['', [Validators.required]]
+  });
+
+  data$ = forkJoin({
+    sections: this.user().group == "admin" ? this.settingService.getSections() : null,
+    profile: this.settingService.getProfile(this.user().id)
+  }).pipe(
+    tap(data => {
+      this.profileForm.get('bio').setValue(data.profile.bio);
+      this.profileForm.get('website').setValue(data.profile.website);
+      this.profileForm.get('avatar').setValue(data.profile.avatar);
+      this.loading = false;
+    }),
+    catchError(error => {
+      this.loading = false;
+      this.errorCodeService.errorMessage(error);
+      return of(null)
+    })
+  )
+
+  constructor() {
     this.seoService.removeCanonicalURL();
     this.titleService.setTitle(`Settings - Barrel Wisdom`);
     this.metaService.updateTag({ name: `robots`, content: `noindex` }, `name="robots"`);
-
     this.breadcrumbService.setBreadcrumbs([], undefined)
-    if (this.user.group == "admin") {
-      this.settingService.getSections()
-        .pipe(takeUntil(this.destroy$))
-        .subscribe(sections => {
-          this.sections = sections;
-        });
-    }
-
-    this.passwordForm = this.formBuilder.nonNullable.group({
-      newPass: ['', [Validators.required, Validators.minLength(8)]],
-      repeatPass: ['', Validators.required],
-      currentPass: ['', [Validators.required]],
-    });
-
-    this.profileForm = this.formBuilder.nonNullable.group({
-      bio: ['', [Validators.maxLength(500)]],
-      website: ['', [Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?'), Validators.maxLength(200)]],
-      avatar: ['', [Validators.pattern(environment.imageRegex + '.+\\.(png|jpg)'), Validators.maxLength(200)]],
-    });
-
-    this.sectionForm = this.formBuilder.nonNullable.group({
-      slug: ['', [Validators.required, Validators.maxLength(30)]],
-      name: ['', [Validators.required]]
-    });
-
-    this.navigationForm = this.formBuilder.nonNullable.group({
-      nav: [],
-      section: [''],
-      data: ['', [Validators.required]]
-    });
-
-    this.loadProfile(this.user.id);
-
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.breadcrumbService.setStatus(200);
   }
-
 
   get profilef() { return this.profileForm.controls; }
   get passwordf() { return this.passwordForm.controls; }
   get sectionf() { return this.sectionForm.controls; }
   get navigationf() { return this.navigationForm.controls; }
 
-  loadProfile(id: number) {
-    if (id != null) {
-      this.settingService.getProfile(id)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe({
-          next: profile => {
-            this.profileForm.get('bio').setValue(profile.bio);
-            this.profileForm.get('website').setValue(profile.website);
-            this.profileForm.get('avatar').setValue(profile.avatar);
-            this.loading = false;
-          },
-          error: error => {
-            this.loading = false;
-            this.errorCodeService.errorMessage(error);
-          }
-        });
+  setLoadState(error?) {
+    this.loading = false;
+    if (error) {
+      if (error.status === 400) {
+        this.errorPass = "Invalid Password."
+      }
+      else {
+        this.errorMsg = error ? this.errorCodeService.errorMessage(error) : "";
+      }
     }
+    this.cdr.markForCheck();
   }
 
   submitProfile() {
@@ -139,17 +128,15 @@ export class SettingsComponent {
     }
 
     this.loading = true;
-    this.settingService.updateProfile(this.user.id, this.profilef.bio.value, this.profilef.website.value, this.profilef.avatar.value)
-      .pipe(takeUntil(this.destroy$))
+    this.settingService.updateProfile(this.user().id, this.profilef.bio.value, this.profilef.website.value, this.profilef.avatar.value)
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: () => {
           this.successProfile = true;
-          this.loading = false;
-          this.errorMsg = "";
+          this.setLoadState()
         },
         error: error => {
-          this.loading = false;
-          this.errorMsg = this.errorCodeService.errorMessage(error);
+          this.setLoadState(error)
         }
       });
   }
@@ -165,21 +152,14 @@ export class SettingsComponent {
 
     this.loading = true;
     this.settingService.updatePassword(this.passwordf.newPass.value, this.passwordf.repeatPass.value, this.passwordf.currentPass.value)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: () => {
           this.successPassword = true;
-          this.loading = false;
-          this.errorPass = "";
+          this.setLoadState();
         },
         error: error => {
-          this.loading = false;
-          if (error.status == 400) {
-            this.errorPass = "Invalid Password."
-          }
-          else {
-            this.errorPass = this.errorCodeService.errorMessage(error);
-          }
+          this.setLoadState(error)
         }
       });
   }
@@ -188,17 +168,15 @@ export class SettingsComponent {
     this.loading = true;
 
     this.settingService.createInvite()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next:
           data => {
-            this.loading = false;
             this.invite = `https://barrelwisdom.com/register?invite=${data['code']}`;
-            this.errorInvite = "";
+            this.setLoadState();
           },
         error: error => {
-          this.loading = false;
-          this.errorInvite = this.errorCodeService.errorMessage(error);
+          this.setLoadState()
         }
       });
   }
@@ -214,23 +192,21 @@ export class SettingsComponent {
 
     this.loading = true;
     this.settingService.createSection(this.sectionf.slug.value, this.sectionf.name.value)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: () => {
           this.successSection = true;
-          this.loading = false;
-          this.errorSection = "";
+          this.setLoadState()
         },
         error: error => {
-          this.loading = false;
-          this.errorSection = this.errorCodeService.errorMessage(error);
+          this.setLoadState(error)
         }
       });
   }
 
   loadNav(section: string) {
     this.settingService.getNavigation(section)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(nav => {
         this.navigationForm.get('section').setValue(nav.section);
         this.navigationForm.get('data').setValue(nav.data);
@@ -249,16 +225,14 @@ export class SettingsComponent {
 
     this.loading = true;
     this.settingService.updateNavigation(this.navigationf.section.value, this.navigationf.data.value)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: () => {
           this.successNavigation = true;
-          this.loading = false;
-          this.errorNavigation = "";
+          this.setLoadState();
         },
         error: error => {
-          this.loading = false;
-          this.errorNavigation = this.errorCodeService.errorMessage(error);
+          this.setLoadState(error)
         }
       });
   }

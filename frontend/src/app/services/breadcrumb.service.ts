@@ -1,54 +1,41 @@
 import { Injectable, signal } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class BreadcrumbService {
-    private breadcrumbSubject: BehaviorSubject<any>;
-    public breadcrumbObserve: Observable<any>
-    private errorSubject: BehaviorSubject<any>;
-    public errorObserve: Observable<any>
+  breadcrumbs = signal<any>({});
+  error = signal<any>({ code: 200 })
 
-    breadcrumbs = signal<any>({});
-    error = signal<any>({code:200})
+  public get errorValue(): string {
+    return this.error();
+  }
 
-    constructor() {
-        this.breadcrumbSubject = new BehaviorSubject<any>({})
-        this.breadcrumbObserve = this.breadcrumbSubject.asObservable()
-        this.errorSubject = new BehaviorSubject<any>({code: 200})
-        this.errorObserve = this.errorSubject.asObservable()
+  setStatus(code: number): boolean {
+    switch (code) {
+      case 200:
+        this.error.set({ code: code })
+        return false;
+      case 404:
+        this.error.set({
+          code: code,
+          title: "Oops! You're lost.",
+          desc: "Our puni told us that the page you're looking for doesn't exist."
+        })
+        break;
+      default:
+        this.error.set({
+          code: code,
+          title: "The server puni died.",
+          desc: "We'll replace that puni soon. The site is either broken or under maintenance."
+        })
     }
+    return true;
+  }
 
-    public get errorValue(): string {
-        return this.error();
-    }
+  public get breadcrumbValue(): string {
+    return this.breadcrumbs()
+  }
 
-    setStatus(code: number): boolean {
-        if (code === 200) {
-            this.error.set({code: code})
-            return false;
-        }
-        else if (code === 404) {
-            this.error.set({
-                code:  code,
-                title: "Oops! You're lost.",
-                desc:  "Our puni told us that the page you're looking for doesn't exist."
-            })
-        }
-        else {
-            this.error.set({
-                code:  code,
-                title: "The server puni died.",
-                desc:  "We'll replace that puni soon. The site is either broken or under maintenance."
-            })
-        }
-        return true;
-    }
-
-    public get breadcrumbValue(): string {
-        return this.breadcrumbs()
-    }
-
-    setBreadcrumbs(breadcrumbs, current: string) {
-        this.breadcrumbs.set({breadcrumbs: breadcrumbs, current: current})
-    }
+  setBreadcrumbs(breadcrumbs, current: string) {
+    this.breadcrumbs.set({ breadcrumbs: breadcrumbs, current: current })
+  }
 }

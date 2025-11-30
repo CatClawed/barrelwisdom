@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -11,11 +12,10 @@ import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
 import { CringeAdComponent } from '@app/views/_components/cringe/cringe.component';
 import { Blog, Comment } from '@app/views/main/_interfaces/blog';
-import { User } from '@app/views/main/_interfaces/user';
 import { BlogService } from '@app/views/main/_services/blog.service';
 import { MarkdownComponent, provideMarkdown } from 'ngx-markdown';
 import { Observable, of } from 'rxjs';
-import { catchError, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { catchError, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'blog.component.html',
@@ -26,39 +26,30 @@ import { catchError, switchMap, takeUntil, tap } from 'rxjs/operators';
     CommonModule, CringeAdComponent,]
 })
 
-export class BlogComponent implements OnInit {
-  user; //: User;
-  blog: Blog;
+export class BlogComponent {
+  private destroyRef = inject(DestroyRef);
+  private cdr = inject(ChangeDetectorRef)
+  private route = inject(ActivatedRoute)
+  public historyService = inject(HistoryService)
+  private blogService = inject(BlogService)
+  private authenticationService = inject(AuthenticationService)
+  private formBuilder = inject(UntypedFormBuilder)
+  protected breadcrumbService = inject(BreadcrumbService)
+  protected seoService = inject(SeoService)
+
+  user = this.authenticationService.userSignal;
+  //blog: Blog;
   error: boolean = false;
   allowedToEdit = false;
-  gameName = "";
-  pageForm: UntypedFormGroup;
+  pageForm: UntypedFormGroup = this.formBuilder.nonNullable.group({
+    name: "",
+    comment: ""
+  })
+  id: number = null;
   success: boolean;
-  blog$: Observable<Blog | null>;
-
-  constructor(
-    private route: ActivatedRoute,
-    private readonly destroy$: DestroyService,
-    public historyService: HistoryService,
-    private blogService: BlogService,
-    private authenticationService: AuthenticationService,
-    private formBuilder: UntypedFormBuilder,
-    protected breadcrumbService: BreadcrumbService,
-    protected seoService: SeoService) {
-    this.pageForm = this.formBuilder.nonNullable.group({
-      name: "",
-      comment: ""
-    })
-    this.user = this.authenticationService.userSignal;
-  }
-
-  ngOnInit(): void {
-
-
-    this.blog$ = this.route.paramMap.pipe(
+  blog$: Observable<Blog | null> = this.route.paramMap.pipe(
       switchMap(params => {
         if (/[A-Z]+/.test(params.get('title') + params.get('section'))) {
-          this.blog = null;
           this.error = this.breadcrumbService.setStatus(404);;
           return of(undefined)
         }
@@ -74,10 +65,7 @@ export class BlogComponent implements OnInit {
             })
           );
       }),
-      takeUntil(this.destroy$)
     )
-
-  }
 
   newForm(parent: Comment): void {
     parent.form = this.formBuilder.nonNullable.group({
@@ -86,22 +74,19 @@ export class BlogComponent implements OnInit {
     })
   }
 
-  checkAuthor(commentAuthor: string) {
-    return this.blog.author.includes(commentAuthor)
-  }
-
   postComment(parent?: Comment): void {
-    let body = this.pageForm.controls['comment'].value;
-    let name = this.pageForm.controls['name'].value
-    let id = undefined
-    if (parent !== undefined) {
-      body = parent.form.controls['comment'].value;
-      name = parent.form.controls['name'].value;
-      id = parent.id
+    const sourceForm = parent?.form ?? this.pageForm;
+    const body = sourceForm.controls['comment'].value;
+    const name = sourceForm.controls['name'].value
+    const parentId: number | undefined = parent?.id;
+    if (parent) {
+      parent.success = undefined;
+    } else {
+      this.success = undefined;
     }
 
-    this.blogService.postComment(body, this.blog.id, name, id)
-      .pipe(takeUntil(this.destroy$))
+    this.blogService.postComment(body, this.id, name, parentId)
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: () => {
           if (parent) {
@@ -111,6 +96,7 @@ export class BlogComponent implements OnInit {
           else {
             this.success = true;
           }
+          this.cdr.markForCheck()
         },
         error: () => {
           if (parent) {
@@ -119,6 +105,7 @@ export class BlogComponent implements OnInit {
           else {
             this.success = false
           }
+          this.cdr.markForCheck()
         }
       });
   }
@@ -128,36 +115,35 @@ export class BlogComponent implements OnInit {
   }
 
   setBlog(blog) {
-    this.blog = blog;
-    this.gameName = (this.blog.section.name) ? `${this.blog.section.name} - ` : ""; // gotta make sure google sees the game name...
+    this.id = blog.id;
     if (this.user()) {
-      if (this.blog.authorlock && this.user().username === this.blog.author[0]) {
+      if (blog.authorlock && this.user().username === blog.author[0]) {
         this.allowedToEdit = true;
       }
       else if (this.user().group === 'admin') {
         this.allowedToEdit = true;
       }
-      else if (!this.blog.authorlock) {
-        if (this.user().group === 'trusted' || this.blog.section.slug !== 'blog') {
+      else if (!blog.authorlock) {
+        if (this.user().group === 'trusted' || blog.section.slug !== 'blog') {
           this.allowedToEdit = true;
         }
       }
     }
-    if (this.blog.section.slug !== "blog") {
+    if (blog.section.slug !== "blog") {
       this.breadcrumbService.setBreadcrumbs(
-        [[this.blog.section.name, `/${this.blog.section.slug}`]],
-        this.blog.title);
+        [[blog.section.name, `/${blog.section.slug}`]],
+        blog.title);
     }
     else {
       this.breadcrumbService.setBreadcrumbs(
         [],
-        this.blog.title);
+        blog.title);
     }
     this.seoService.SEOSettings(
-      `${this.blog.section.slug}/${this.blog.slug}`,
-      this.blog.section.name ? `${this.blog.title} - ${this.blog.section.name}` : this.blog.title,
-      this.blog.desc,
-      this.blog.image
+      `${blog.section.slug}/${blog.slug}`,
+      blog.section.name ? `${blog.title} - ${blog.section.name}` : blog.title,
+      blog.desc,
+      blog.image
     );
   }
   lineBreak(str): string {
