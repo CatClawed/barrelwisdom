@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -40,7 +40,7 @@ export class BlogComponent {
   user = this.authenticationService.userSignal;
   //blog: Blog;
   error: boolean = false;
-  allowedToEdit = false;
+  allowedToEdit = signal<boolean>(false);
   pageForm: UntypedFormGroup = this.formBuilder.nonNullable.group({
     name: "",
     comment: ""
@@ -118,16 +118,17 @@ export class BlogComponent {
     this.id = blog.id;
     if (this.user()) {
       if (blog.authorlock && this.user().username === blog.author[0]) {
-        this.allowedToEdit = true;
+        this.allowedToEdit.set(true);
       }
       else if (this.user().group === 'admin') {
-        this.allowedToEdit = true;
+        this.allowedToEdit.set(true);
       }
       else if (!blog.authorlock) {
         if (this.user().group === 'trusted' || blog.section.slug !== 'blog') {
-          this.allowedToEdit = true;
+          this.allowedToEdit.set(true);
         }
       }
+      this.cdr.detectChanges();
     }
     if (blog.section.slug !== "blog") {
       this.breadcrumbService.setBreadcrumbs(

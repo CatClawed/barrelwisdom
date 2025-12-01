@@ -1,4 +1,3 @@
-
 @use '../variables' as v;
 
 .navigation {
@@ -10,6 +9,8 @@
   padding: 0;
   width: 100%;
   top: 0;
+  display: flex;
+  align-items: center;
 }
 
 .navigation-brand {
@@ -42,51 +43,30 @@
 }
 
 .nav-lang {
-  display: inline;
+  display: flex;
   width: 150px;
-}
-
-.nav-lang button {
+  height: 45px;
+  fill: white;
   color: white;
   background-color: transparent;
   font-size: 1rem;
-  border-color: transparent;
   line-height: 2rem;
+  border: none;
+  padding: 0;
+  margin-right: 0.2em;
+
+  span {
+    margin: auto;
+  }
+
+  svg {
+    margin: auto;
+  }
 }
 
-.nav-lang i {
-  font-size: 2rem;
-}
-
-.nav-lang div {
-  display: inline;
-  width: 80px;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.nav-lang span {
-  vertical-align: top;
-  display: inline-block;
-  width: 73px;
-}
-
-.nav-lang b {
-  vertical-align: super;
-}
-
-.nav-lang button:hover {
-  text-decoration: none;
+.nav-lang:hover {
   background-color: #2f1d12;
   border-radius: 0.25rem;
-}
-
-.nav-lang button:disabled {
-  background-color: transparent;
-}
-
-.nav-lang span:disabled {
-  color: gray;
 }
 
 @media screen and (min-width: 800px) {
@@ -103,6 +83,13 @@
 
 .nav-social-media {
   margin-left: auto;
+  display: flex;
+
+  svg {
+    height: 40px;
+    width: 40px;
+    fill: white;
+  }
 }
 
 @media screen and (max-width: 720px) {
@@ -142,30 +129,24 @@
   margin-right: 0.2rem;
   margin-left: auto;
   color: white;
+  fill: white;
   border-radius: 0.25rem;
   width: 80%;
   display: flex;
   align-items: center;
   position: relative;
 
-  >i {
+  svg:first-child {
     position: absolute;
     left: -24px;
-    width: 1.5rem;
-    text-align: center;
-  }
-
-  >b {
-    margin-left: auto;
-    margin-right: 0.1rem;
-  }
-
-  >svg {
-    position: absolute;
-    left: -24px;
-    fill: white;
     width: 1.5em;
     height: 1.5em;
+  }
+
+  svg:last-child {
+    width: 1.5em;
+    height: 1.5em;
+    margin-left: auto;
   }
 }
 

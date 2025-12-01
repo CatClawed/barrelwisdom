@@ -20,8 +20,7 @@ a.badge:hover {
 }
 
 .blog-tags {
-    padding-bottom: 1em;
-    border-bottom: 1px dotted black;
+    display: flex;
 }
 
 // comment related, not an actual tab

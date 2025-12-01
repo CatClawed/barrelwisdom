@@ -3,7 +3,6 @@ import { computed, inject, Injectable } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
 import { getApiUrl } from '@app/_helpers/api-url';
-import { environment } from '@environments/environment';
 import { LanguageData } from '@environments/language-data';
 import { Observable, of } from 'rxjs';
 import { catchError, distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';

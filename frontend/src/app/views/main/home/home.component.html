@@ -11,8 +11,8 @@
         <a routerLink="/blog/{{b.slug}}" style="margin-top: 1rem;">
           <h3 style="padding-top: 0.5rem;">{{b.title}}</h3>
         </a>
-        <span class="text-muted" style="font-size: calc(0.8rem + 0.1vw);">
-          <i style="margin-right:0.2rem;" class="far fa-calendar-alt"></i>
+        <span class="text-muted svg-inline-text" style="font-size: calc(0.8rem + 0.1vw);">
+          <svg><use href="/media/spritesheets/main.svg?v=0#fa-calendar"></use></svg>
           <time class="updated" dateTime="{{b.created}}">{{b.created | date:'longDate' }} </time>
         </span>
         <span style="margin-top: 0.8em;">{{b.desc}}</span>

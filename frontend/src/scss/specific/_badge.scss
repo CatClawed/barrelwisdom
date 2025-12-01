@@ -1,13 +1,12 @@
 .badge {
-    display: inline-block;
+    display: inline-flex;
     padding: .35em .65em;
     font-weight: 700;
     color: white;
     line-height: 1;
     text-align: center;
+    align-items: center;
     white-space: nowrap;
-    vertical-align: baseline;
     border-radius: .375rem;
-    font-size: .75em;
     text-decoration: none !important;
 }

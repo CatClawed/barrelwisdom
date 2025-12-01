@@ -64,6 +64,15 @@ export const routes: Routes = [
     ]
   },
   {
+    path: '.well_known',
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('@app/views/_components/error/error.component').then(m=>m.ErrorComponent)
+      },
+    ]
+  },
+  {
     path: '',
     children: [
       {
