@@ -1,0 +1,34 @@
+.popover2 {
+    background: #fff;
+    border-radius: 5px;
+    border: solid 1px #ccc;
+    background-image: url(/media/main/images/clean_textile.webp);
+    margin-right: 1rem;
+    max-height: 80dvh;
+    min-width: 300px;
+    overflow: auto;
+    box-shadow: 1px 2px 4px 1px gray;
+
+    @media screen and (max-width: 800px) {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    >h4 {
+        background-color: #d3d3d34d;
+        padding: 0.5rem 1rem 0.1rem 1rem;
+        border-bottom: solid 1px #ccc;
+    }
+
+    .popoverContents {
+        padding: 0 1rem 1rem 1rem;
+    }
+}
+
+.dotted-link {
+    text-decoration-style: dotted;
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+}

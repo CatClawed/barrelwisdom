@@ -69,6 +69,17 @@
     right: 0.5rem;
     margin-left: auto;
     position: absolute !important;
+
+    span {
+      display: flex;
+    }
+
+    svg {
+      width: 1.5em;
+      height: 1.5em;
+      fill: white;
+      margin: auto;
+    }
   }
 
   .card-read-more-spacer {
@@ -112,3 +123,9 @@
       width: 100%;
     }
   }
+
+// Game Data Pages
+
+.card-item-display {
+  margin: 0 auto 0 auto;
+}

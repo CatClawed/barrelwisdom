@@ -1,6 +1,6 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { Location } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationStart, Router } from '@angular/router';
 import { FilterableComponent } from './filterable.component';
@@ -10,6 +10,7 @@ export abstract class DialogUseComponent extends FilterableComponent {
     protected router = inject(Router)
     protected location = inject(Location)
     protected cdkDialog = inject(Dialog)
+    protected cdr = inject(ChangeDetectorRef)
 
     selected: string = "thing";
     dialogLink;

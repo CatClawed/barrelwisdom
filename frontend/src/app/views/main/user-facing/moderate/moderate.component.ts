@@ -3,7 +3,6 @@ import { Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthenticationService } from '@app/services/authentication.service';
 import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { UserService } from '@app/views/main/_services/user.service';
 import { of } from 'rxjs';
@@ -11,7 +10,6 @@ import { catchError } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'moderate.component.html',
-  providers: [DestroyService],
   imports: [DatePipe, AsyncPipe]
 })
 

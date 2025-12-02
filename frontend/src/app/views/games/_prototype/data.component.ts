@@ -15,25 +15,15 @@ export abstract class DataComponent implements OnInit {
   section: string;
   language: string = "";
   slug: string;
-
   seoTitle: string;
   seoDesc: string;
   seoImage: string;
   seoURL: string;
-
   gameTitle: string;
-
-  @Input()
-  gameURL: string;
-
-  @Input()
-  imgURL: string;
-
-  @Input()
-  inputData?: any;
-
-  @Input()
-  hideContents: boolean = false;
+  @Input() gameURL: string;
+  @Input() imgURL: string;
+  @Input() inputData?: any;
+  @Input() hideContents: boolean = false;
 
   constructor() {
     this.language = this.route.snapshot.params.language;

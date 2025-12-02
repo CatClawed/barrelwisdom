@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
 import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { BlogPaginator } from '@app/views/main/_interfaces/blog';
 import { BlogService } from '@app/views/main/_services/blog.service';
@@ -12,7 +11,6 @@ import { catchError, filter, Observable, of, startWith, switchMap, tap } from 'r
 @Component({
   templateUrl: 'home.component.html',
   styleUrls: ['home.scss'],
-  providers: [DestroyService],
   imports: [RouterLink, DatePipe, MatPaginatorModule, AsyncPipe]
 })
 

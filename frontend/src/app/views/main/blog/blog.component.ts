@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -7,7 +7,6 @@ import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AuthenticationService } from '@app/services/authentication.service';
 import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
 import { HistoryService } from '@app/services/history.service';
 import { SeoService } from '@app/services/seo.service';
 import { CringeAdComponent } from '@app/views/_components/cringe/cringe.component';
@@ -20,7 +19,7 @@ import { catchError, switchMap, tap } from 'rxjs/operators';
 @Component({
   templateUrl: 'blog.component.html',
   styleUrls: ['blog.scss'],
-  providers: [DestroyService, provideMarkdown()],
+  providers: [provideMarkdown()],
   imports: [MatFormFieldModule, MatInputModule,
     ReactiveFormsModule, RouterLink, MarkdownComponent,
     CommonModule, CringeAdComponent,]

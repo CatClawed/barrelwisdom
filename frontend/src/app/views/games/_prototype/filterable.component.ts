@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { UntypedFormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { of } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { DataComponent } from './data.component';
 
 @Component({ template: '' })
 export abstract class FilterableComponent extends DataComponent {
+    protected formBuilder: UntypedFormBuilder = inject(UntypedFormBuilder)
     pageForm: UntypedFormGroup;
     hide: boolean = false;
     loadAll: boolean = false;

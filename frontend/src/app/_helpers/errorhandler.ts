@@ -1,23 +1,23 @@
-import { ErrorHandler, Injectable, Injector } from '@angular/core';
+import { ErrorHandler, inject, Injectable, Injector } from '@angular/core';
 import { Router, NavigationError } from '@angular/router';
 
 @Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
   private lastAttemptedUrl: string = '/';
-  private router: Router;
+  private router: Router = inject(Router);
 
-  constructor(private injector: Injector) {
-    this.router = this.injector.get(Router);
+  /*
+  constructor() {
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationError) {
         this.lastAttemptedUrl = event.url;
       }
     });
-  }
+  }*/
 
   handleError(error: Error): void {
-    console.error(`Error on route: ${this.lastAttemptedUrl}`);
-    console.error(error);
+    console.error(`Error on route: ${this.router.url}`);
+    console.error(GlobalErrorHandler.name, { error });
   }
 }

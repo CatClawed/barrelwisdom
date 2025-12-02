@@ -76,6 +76,10 @@ export const routes: Routes = [
     path: '',
     children: [
       {
+        path: 'resleriana-red-white',
+        loadChildren: ()=> import('@app/views/games/A25RW/a25rw-routing.module').then(m=>m.A25RWRoutingModule),
+      },
+      {
         path: 'tag/:tagname',
         loadComponent: ()=> import('@app/views/main/home/home.component').then(m=>m.HomeComponent),
       },

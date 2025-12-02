@@ -1,0 +1,21 @@
+<h1>{{name}}</h1>
+<div class="grid">
+  <div class="grid-6">
+    <table class="tbl outer-borders"><tbody>
+      <tr>
+        <th colspan=2>Items in Category</th>
+      </tr>
+      <ng-content select="[inCategory]"></ng-content>
+    </tbody></table>
+  </div>
+  @if (using) {
+    <div class="grid-6">
+      <table class="tbl outer-borders"><tbody>
+        <tr>
+          <th [attr.colspan]="colspan">Items Using Category</th>
+        </tr>
+        <ng-content select="[usingCategory]"></ng-content>
+      </tbody></table>
+    </div>
+  }
+</div>

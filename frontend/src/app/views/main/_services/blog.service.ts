@@ -36,8 +36,6 @@ export class BlogService {
     if (blog) payload.blog = blog;
     if (parent) payload.parent = parent;
 
-    console.log(payload);
-
     return this.http.post(`${this.apiUrl}/new/comment/`, payload)
   }
 

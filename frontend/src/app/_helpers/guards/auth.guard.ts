@@ -18,7 +18,7 @@ export const AuthGuard = (route: ActivatedRouteSnapshot, state: RouterStateSnaps
                 }
             }
             catch (err) {
-                console.log('AuthGuard Error: ', err.message);
+                console.error('AuthGuard Error: ', err.message);
                 return router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url }});
             }
         }

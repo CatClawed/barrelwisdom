@@ -31,7 +31,7 @@ export class AuthenticationService implements OnDestroy {
                     }
             }
             catch (err) {
-                console.log('Auth Error: ', err.message);
+                console.error('Auth Error: ', err.message);
             }
         }
         this.userSignal.set(this.u)
@@ -64,7 +64,7 @@ export class AuthenticationService implements OnDestroy {
                     return jwt;
                 }
                 catch (err) {
-                    console.log('Auth Error: ', err.message);
+                    console.error('Auth Error: ', err.message);
                 }
             }));
     }

@@ -8,7 +8,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { Meta, Title } from '@angular/platform-browser';
 import { AuthenticationService } from "@app/services/authentication.service";
 import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 import { ErrorCodeService } from '@app/views/main/_services/errorcode.service';
 import { SettingService } from '@app/views/main/_services/setting.service';
@@ -18,7 +17,6 @@ import { catchError, tap } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'settings.component.html',
-  providers: [DestroyService],
   styleUrl: '../user-facing.scss',
   imports: [CommonModule, ReactiveFormsModule, MatTabsModule, MatMenuModule,
     MatSelectModule, AsyncPipe]

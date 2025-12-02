@@ -1,6 +1,5 @@
 import { Location, ViewportScroller } from '@angular/common';
 import { AfterViewChecked, Component, inject } from '@angular/core';
-import { first } from 'rxjs/operators';
 import { FilterableComponent } from './filterable.component';
 
 @Component({ template: '' })
@@ -17,7 +16,6 @@ export abstract class FragmentedComponent extends FilterableComponent implements
         if (this.isStarting && this.data) {
             setTimeout(() => {
                 this.route.fragment
-                    .pipe(first())
                     .subscribe(fragment => {
                         if (fragment) {
                             this.loadAll = true;
