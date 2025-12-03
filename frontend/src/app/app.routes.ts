@@ -80,6 +80,10 @@ export const routes: Routes = [
         loadChildren: ()=> import('@app/views/games/A25RW/a25rw-routing.module').then(m=>m.A25RWRoutingModule),
       },
       {
+        path: 'yumia',
+        loadChildren: ()=> import('@app/views/games/A26/a26-routing.module').then(m=>m.A26RoutingModule),
+      },
+      {
         path: 'tag/:tagname',
         loadComponent: ()=> import('@app/views/main/home/home.component').then(m=>m.HomeComponent),
       },

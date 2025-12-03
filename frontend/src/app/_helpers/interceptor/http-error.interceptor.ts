@@ -9,9 +9,9 @@ export const httpErrorInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(req).pipe(
     retry({
-      count: 2,
+      count: 1,
       delay: (error) => {
-        if (error.status >= 400 && error.status < 500) {
+        if ((error.status >= 400 && error.status < 500) || error.status == 0) {
           throw error;
         }
         return timer(1000);

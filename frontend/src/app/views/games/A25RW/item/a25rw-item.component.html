@@ -3,7 +3,7 @@
   <h4 class="card-title card-icon-space">{{item.name}}</h4>
   <div class="card-icon-position">
     <svg class="svg-icon">
-      <use attr.href="{{imgURL}}spritesheet.svg?v=1#{{item.icon}}"></use>
+      <use attr.href="/media/spritesheets/A25RW.svg?v=1#{{item.icon}}"></use>
     </svg>
     @if (item.dlc) {
     <br /><span class="badge bg-primary">DLC</span>
@@ -44,10 +44,10 @@
     <div style="display: flex; line-height: 1.8em;">
       @for (c of item.colors; track c) {
       <svg style="width:0.9em;height:1.8em;fill:{{a25rwservice.colors[c.l]}};">
-        <use attr.href="{{imgURL}}spritesheet.svg?v=1#color-l"></use>
+        <use href="/media/spritesheets/A25RW.svg?v=1#color-l"></use>
       </svg>
       <svg style="width:0.9em;height:1.8em;fill:{{a25rwservice.colors[c.r]}};">
-        <use attr.href="{{imgURL}}spritesheet.svg?v=1#color-r"></use>
+        <use href="/media/spritesheets/A25RW.svg?v=1#color-r"></use>
       </svg>
       }
     </div>
@@ -56,7 +56,7 @@
       @for (cat of item.categories; track cat) {
       <li style="display: flex;">
         <svg class="svg-icon">
-          <use attr.href="{{imgURL}}spritesheet.svg?v=1#category-{{cat.id}}"></use>
+          <use attr.href="/media/spritesheets/A25RW.svg?v=1#category-{{cat.id}}"></use>
         </svg>
         <a routerLink="/{{gameURL}}/categories/{{cat.id}}/{{language}}">
           {{cat.name}}
@@ -66,7 +66,7 @@
       @for (cat of item.add; track cat) {
       <li style="display: flex;">
         <svg class="svg-icon" style="fill:gray;">
-          <use attr.href="{{imgURL}}spritesheet.svg?v=1#category-{{cat.id}}"></use>
+          <use attr.href="/media/spritesheets/A25RW.svg?v=1#category-{{cat.id}}"></use>
         </svg>
         <a routerLink="/{{gameURL}}/categories/{{cat.id}}/{{language}}">
           {{cat.name}}
@@ -80,7 +80,7 @@
   }
   @if (item.shop) {
   <b><svg class="svg-icon" style="vertical-align:middle;">
-      <use attr.href="{{imgURL}}spritesheet.svg?v=1#shop"></use>
+      <use href="/media/spritesheets/A25RW.svg?v=1#shop"></use>
     </svg> {{a25rwservice.shop_translation[language]}}</b>
   <ul>
     @for (shop of item.shop; track shop) {
@@ -112,13 +112,13 @@
     <li>
       @if (item.book.shop) {
       <svg class="svg-icon" style="vertical-align:middle;">
-        <use attr.href="{{imgURL}}spritesheet.svg?v=1#shop"></use>
+        <use href="/media/spritesheets/A25RW.svg?v=1#shop"></use>
       </svg>
       <a routerLink="/{{gameURL}}/shops/{{language}}" fragment="{{item.book.shop[0].name}}">{{item.book.shop[0].name}}</a>
       }
       @if (item.book.areas) {
       <svg class="svg-icon" style="vertical-align:middle;">
-        <use attr.href="{{imgURL}}spritesheet.svg?v=1#{{item.book.areas[0].tool}}"></use>
+        <use attr.href="/media/spritesheets/A25RW.svg?v=1#{{item.book.areas[0].tool}}"></use>
       </svg>
       {{item.book.areas[0].area}} @if (item.book.areas[0].floor_max) { ({{item.book.areas[0].floor_min}} -
       {{item.book.areas[0].floor_max}}) }
@@ -138,13 +138,13 @@
           @if (area.tool !== 'chest') {
             @for (i of [].constructor(3); let index = $index; track i) {
               <svg class="svg-icon" [style]="area.rank >= index + 1 ? `` : `fill:lightgray;`">
-                <use attr.href="{{imgURL}}spritesheet.svg?v=1#{{area.tool}}"></use>
+                <use attr.href="/media/spritesheets/A25RW.svg?v=1#{{area.tool}}"></use>
               </svg>
             }
           }
           @else {
           <svg class="svg-icon">
-            <use attr.href="{{imgURL}}spritesheet.svg?v=1#{{area.tool}}"></use>
+            <use attr.href="/media/spritesheets/A25RW.svg?v=1#{{area.tool}}"></use>
           </svg>
           }
         </td>
@@ -220,10 +220,10 @@
           @if (item.colors) {
             <div style="display: flex; margin: -1.5em auto 1.5em auto;">
               <svg style="width:50%; aspect-ratio:1/2; max-width:100px; fill:{{a25rwservice.colors[item.colors[0].l]}};">
-                <use attr.href="{{imgURL}}spritesheet.svg?v=1#color-l"></use>
+                <use href="/media/spritesheets/A25RW.svg?v=1#color-l"></use>
               </svg>
               <svg style="width:50%; aspect-ratio:1/2; max-width:100px; fill:{{a25rwservice.colors[item.colors[0].r]}};">
-                <use attr.href="{{imgURL}}spritesheet.svg?v=1#color-r"></use>
+                <use href="/media/spritesheets/A25RW.svg?v=1#color-r"></use>
               </svg>
             </div>
           }
@@ -233,7 +233,7 @@
               style="display: flex; flex-direction: column; text-align: center; align-items: center; font-size: min(1em, 3vw);">
               <div style="display: flex; aspect-ratio: 1; max-width: 200px; border: 3px solid #44444455; background: radial-gradient(circle,rgba(142, 148, 173, 1) 0%, rgba(210, 212, 213, 1) 100%); border-radius:12%; width:calc(100%/1.41421356237);  transform: rotate(45deg); margin-bottom: 1.5em;">
                 <svg style='width: 70%; margin: auto; transform: rotate(-45deg); aspect-ratio:1; fill:white; filter: drop-shadow(4px 6px 8px gray);'>
-                  <use attr.href="{{imgURL}}spritesheet.svg?v=1#category-{{ing.cat.id}}"></use>
+                  <use attr.href="/media/spritesheets/A25RW.svg?v=1#category-{{ing.cat.id}}"></use>
                 </svg>
               </div>
               {{ing.cat.name}}

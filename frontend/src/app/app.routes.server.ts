@@ -1,8 +1,10 @@
 import { RenderMode, ServerRoute } from '@angular/ssr';
 import { a25rwServerRoutes } from './views/games/A25RW/a25rw-server-routing';
+import { a26ServerRoutes } from './views/games/A26/a26-server-routing';
 
 export const serverRoutes: ServerRoute[] = [
   ...a25rwServerRoutes,
+  ...a26ServerRoutes,
   {
     path: 'login',
     renderMode: RenderMode.Client

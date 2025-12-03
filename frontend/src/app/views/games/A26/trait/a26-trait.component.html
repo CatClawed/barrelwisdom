@@ -1,0 +1,96 @@
+@if (data; as trait) {
+    <div [class]="url ? 'card' : inputSlug ? 'card card-dialog' : 'card card-small'"
+      [style]="url ? 'height:100%;' : null">
+      <h4 class="card-title" style="margin-right:6rem;">
+        @if (url) {
+          <a (click)="$event.preventDefault(); buttonClicked.emit(trait.id);"
+            href="{{url}}">{{trait.name}}</a>
+        }
+        @else {
+          {{trait.name}}
+        }
+      </h4>
+      <div class="card-icon-position">
+        <tooltip tip="A measure of rarity. This number determines where traits appear.">Grade: </tooltip>
+        @if (!trait.grade_max) {
+          {{trait.grade_min}}
+        }
+        @else {
+          {{trait.grade_min}} - {{trait.grade_max}}
+        }
+      </div>
+      @if (trait.desc1 && trait.desc2) {
+        <p><b>{{a26service.inner_translation[language]}}: </b>{{trait.desc1}}</p>
+      }
+      @else {
+        <p>{{trait.desc1}}</p>
+      }
+      @if (trait.desc2) {
+        <p><b>{{a26service.outer_translation[language]}}: </b>{{trait.desc2}}</p>
+      }
+      @if (trait.combo1) {
+        <b>{{a26service.blending_translation[language]}}</b>
+        <ul class="two-column">
+          @if (url) {
+            <li><a (click)="$event.preventDefault(); buttonClicked.emit(trait.combo1.id);" href="/{{gameURL}}/traits/{{trait.combo1.id}}/{{language}}">{{trait.combo1.name}}</a></li>
+            <li><a (click)="$event.preventDefault(); buttonClicked.emit(trait.combo2.id);" href="/{{gameURL}}/traits/{{trait.combo2.id}}/{{language}}">{{trait.combo2.name}}</a></li>
+            <li><a (click)="$event.preventDefault(); buttonClicked.emit(trait.combo3.id);" href="/{{gameURL}}/traits/{{trait.combo3.id}}/{{language}}">{{trait.combo3.name}}</a></li>
+            <li><a (click)="$event.preventDefault(); buttonClicked.emit(trait.combo4.id);" href="/{{gameURL}}/traits/{{trait.combo4.id}}/{{language}}">{{trait.combo4.name}}</a></li>
+          }
+          @else {
+            <li><a routerLink="/{{gameURL}}/traits/{{trait.combo1.id}}/{{language}}">{{trait.combo1.name}}</a></li>
+            <li><a routerLink="/{{gameURL}}/traits/{{trait.combo2.id}}/{{language}}">{{trait.combo2.name}}</a></li>
+            <li><a routerLink="/{{gameURL}}/traits/{{trait.combo3.id}}/{{language}}">{{trait.combo3.name}}</a></li>
+            <li><a routerLink="/{{gameURL}}/traits/{{trait.combo4.id}}/{{language}}">{{trait.combo4.name}}</a></li>
+          }
+        </ul>
+      }
+      <!--
+      @if (trait.group) {
+        @if (trait.group.traits.length > 1) {
+          <b>Trait Group:</b>
+          <ul class="two-column">
+            @for (t of trait.group.traits; track t) {
+              @if (url && t.id !== trait.id) {
+                <li><a (click)="$event.preventDefault(); buttonClicked.emit(t.id);" href="/{{gameURL}}/traits/{{t.id}}/{{language}}">{{t.name}}</a></li>
+              }
+              @else if (t.id !== trait.id) {
+                <li><a routerLink="/{{gameURL}}/traits/{{t.id}}/{{language}}">{{t.name}}</a></li>
+              }
+            }
+          </ul>
+        }
+      }
+      -->
+      @if (trait.trait_base && !url) {
+        <b>Advanced Data:</b>
+        <ul>
+          @if (trait.trait_base) {
+            <li>{{trait.trait_base}}</li>
+          }
+          @if (trait.trait_hash) {
+            <li>{{trait.trait_hash}}</li>
+          }
+          @if (trait.lv_min_rand_range) {
+            <li>{{trait.lv_min_rand_range}}</li>
+          }
+          @if (trait.lv_max_rand_range) {
+            <li>{{trait.lv_max_rand_range}}</li>
+          }
+        </ul>
+      }
+      <div class="flex bottom" style="text-align:center;height: 100%;">
+        <svg style="width:1.8em;height:1.8em;fill:{{trait.atk  ? 'black' : 'lightgray'}};"><use href="/media/spritesheets/A26.svg?v=2#category-bombs"></use></svg>
+        <svg style="width:1.8em;height:1.8em;fill:{{trait.heal ? 'black' : 'lightgray'}};"><use href="/media/spritesheets/A26.svg?v=2#trait-heal"></use></svg>
+        <svg style="width:1.8em;height:1.8em;fill:{{trait.buff ? 'black' : 'lightgray'}};"><use href="/media/spritesheets/A26.svg?v=2#trait-buff"></use></svg>
+        <svg style="width:1.8em;height:1.8em;fill:{{trait.dbf  ? 'black' : 'lightgray'}};"><use href="/media/spritesheets/A26.svg?v=2#trait-debuff"></use></svg>
+        <svg style="width:1.8em;height:1.8em;fill:{{trait.wep  ? 'black' : 'lightgray'}};"><use href="/media/spritesheets/A26.svg?v=2#category-weapons"></use></svg>
+        <svg style="width:1.8em;height:1.8em;fill:{{trait.arm  ? 'black' : 'lightgray'}};"><use href="/media/spritesheets/A26.svg?v=2#category-armor"></use></svg>
+        <svg style="width:1.8em;height:1.8em;fill:{{trait.acc  ? 'black' : 'lightgray'}};"><use href="/media/spritesheets/A26.svg?v=2#category-accessories"></use></svg>      </div>
+    </div>
+    @if (trait.chests) {
+      @defer {
+        <a26-map [data]="trait.chests"></a26-map>
+      }
+    }
+}

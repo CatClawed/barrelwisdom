@@ -7,8 +7,7 @@ export const a25rwServerRoutes: ServerRoute[] = [
     renderMode: RenderMode.Prerender,
     fallback: PrerenderFallback.Client,
     async getPrerenderParams() {
-        const languages = LanguageData.languages['resleriana-red-white']
-        return languages.map(language => ({language}))
+        return LanguageData.languages['resleriana-red-white'].map(language => ({language}))
     }
   },
   {
@@ -16,8 +15,7 @@ export const a25rwServerRoutes: ServerRoute[] = [
     renderMode: RenderMode.Prerender,
     fallback: PrerenderFallback.Client,
     async getPrerenderParams() {
-        const languages = LanguageData.languages['resleriana-red-white']
-        return languages.map(language => ({language}))
+        return LanguageData.languages['resleriana-red-white'].map(language => ({language}))
     }
   },
   {
@@ -25,8 +23,7 @@ export const a25rwServerRoutes: ServerRoute[] = [
     renderMode: RenderMode.Prerender,
     fallback: PrerenderFallback.Client,
     async getPrerenderParams() {
-        const languages = LanguageData.languages['resleriana-red-white']
-        return languages.map(language => ({language}))
+        return LanguageData.languages['resleriana-red-white'].map(language => ({language}))
     }
   },
   {
@@ -34,8 +31,7 @@ export const a25rwServerRoutes: ServerRoute[] = [
     renderMode: RenderMode.Prerender,
     fallback: PrerenderFallback.Client,
     async getPrerenderParams() {
-        const languages = LanguageData.languages['resleriana-red-white']
-        return languages.map(language => ({language}))
+        return LanguageData.languages['resleriana-red-white'].map(language => ({language}))
     }
   },
   {
@@ -43,8 +39,7 @@ export const a25rwServerRoutes: ServerRoute[] = [
     renderMode: RenderMode.Prerender,
     fallback: PrerenderFallback.Client,
     async getPrerenderParams() {
-        const languages = LanguageData.languages['resleriana-red-white']
-        return languages.map(language => ({language}))
+        return LanguageData.languages['resleriana-red-white'].map(language => ({language}))
     }
   },
   { path: 'resleriana-red-white/items', renderMode: RenderMode.Client },
