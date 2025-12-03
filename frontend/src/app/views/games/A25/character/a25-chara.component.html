@@ -1,0 +1,223 @@
+@if (data; as chara) {
+  <div [class]="inputSlug ? 'card card-dialog' : 'card card-medium'">
+    <h4 class="card-title card-icon-space">
+      {{chara.name}} {{chara.title}}
+    </h4>
+    <div class="card-icon-position">
+      <img style="width:3rem;aspect-ratio:48/45" src="{{imgURL}}characters/{{chara.role}}.webp" alt="{{chara.role}}" />
+      <div class="resleri-element-icon" style="background-color:{{a25service.elements[chara.elem]}};">
+        <svg><use attr.href="/media/spritesheets/A25.svg?v=2#resleri-{{chara.elem}}"></use></svg>
+      </div>
+    </div>
+    <div style="aspect-ratio: 1; max-width: 100%; width: 400px; margin: auto; max-height: 400px;"> <!-- This stupid div is for webkit. -->
+      <div style="{{gradients[chara.rarity]}}border-radius:50%;overflow:clip;height:100%;">
+        <img  style="aspect-ratio:680/724;width:400px;max-width:100%;position:relative;"
+          src="{{imgURL}}characters/full/{{chara.slug}}.webp" alt="{{chara.name}} {{chara.title}}" />
+      </div>
+    </div>
+    @if (chara.limit) {
+      <p style="margin-top:1rem;"><b>Event: </b>{{chara.limit}}</p>
+    }
+    @if (language == 'en' && !chara.gbl) {
+      <p style="margin-top:1rem;">This character is not in Global. Displaying Japanese text.</p>
+    }
+    @if (chara.note) {
+      <p style="margin-top:1rem;" [innerHTML]="chara.note"></p>
+    }
+    <table class="tbl" style="margin-bottom:0;margin-top:1rem;"><tbody>
+      <tr><th>{{a25service.gift_translation[language]}}</th></tr>
+      <tr>
+        <td>
+          <div style="display:inline-flex;float:right;">
+            <svg style="height:5rem;width:2.5rem;vertical-align:-0.5rem;fill:{{a25service.colors[chara.color1]}};display:inline;">
+              <use href="/media/spritesheets/A25.svg?v=2#color-l"></use>
+            </svg>
+            <svg style="height:5rem;width:2.5rem;vertical-align:-0.5rem;fill:{{a25service.colors[chara.color2]}};display:inline;">
+              <use href="/media/spritesheets/A25.svg?v=2#color-r"></use>
+            </svg>
+          </div>
+          <ul>
+            <li>
+              <popover [name]="chara.trait1.name"
+                [template]="traitPopover"
+                [context]="{ trait : chara.trait1 }"
+                url="/{{gameURL}}/traits/{{chara.trait1.slug}}/{{language}}">
+                {{chara.trait1.name}}
+              </popover>
+            </li>
+            <li>
+              <popover [name]="chara.trait2.name"
+                [template]="traitPopover"
+                [context]="{ trait : chara.trait2 }"
+                url="/{{gameURL}}/traits/{{chara.trait2.slug}}/{{language}}">
+                {{chara.trait2.name}}
+              </popover>
+            </li>
+            <li>
+              <popover [name]="chara.trait3.name"
+                [template]="traitPopover"
+                [context]="{ trait : chara.trait3 }"
+                url="/{{gameURL}}/traits/{{chara.trait3.slug}}/{{language}}">
+                {{chara.trait3.name}}
+              </popover>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+    </tbody></table>
+    <table class="tbl"><tbody>
+      <tr><th colspan="4">{{a25service.stat_translation[language]}}</th></tr>
+      <tr>
+        <td colspan="4">
+          <div style="width:45%;float:left;">
+            <b>Level: </b>{{slider.value}}<br />
+            <mat-slider
+              style="width:100%;"
+              [max]="100"
+              [min]="1">
+              <input matSliderThumb value="100" #slider>
+            </mat-slider>
+          </div>
+          <div style="width:45%;float:right;">
+            <b>Stars: </b>{{stars[+starSlider.value-1]}}<br />
+            <mat-slider
+              color="accent"
+              style="width:100%;"
+              [max]="chara.six_star && language == 'ja' ? 8 : 7"
+              [min]="chara.rarity">
+              <input matSliderThumb value="{{chara.six_star && language == 'ja' ? 8 : 7}}" #starSlider>
+            </mat-slider>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td style="width:25%;">{{a25service.stats['hp'][language]}} </td>
+        <td style="width:25%;">{{getStat(chara.hp, stars[+starSlider.value-1], +slider.value)}}</td>
+        <td style="width:25%;">{{a25service.stats['agi'][language]}}</td>
+        <td style="width:25%;">{{chara.spd}}</td>
+      </tr>
+      <tr>
+        <td style="width:25%;">{{a25service.stats['patk'][language]}} </td>
+        <td style="width:25%;">{{getStat(chara.patk, stars[+starSlider.value-1], +slider.value)}}</td>
+        <td style="width:25%;">{{a25service.stats['pdef'][language]}}</td>
+        <td style="width:25%;">{{getStat(chara.pdfn, stars[+starSlider.value-1], +slider.value)}}</td>
+      </tr>
+      <tr>
+        <td style="width:25%;">{{a25service.stats['matk'][language]}} </td>
+        <td style="width:25%;">{{getStat(chara.matk, stars[+starSlider.value-1], +slider.value)}}</td>
+        <td style="width:25%;">{{a25service.stats['mdef'][language]}}</td>
+        <td style="width:25%;">{{getStat(chara.mdfn, stars[+starSlider.value-1], +slider.value)}}</td>
+      </tr>
+      <tr>
+        <td colspan="4">Does not include Grow Board</td>
+      </tr>
+    </tbody></table>
+      <table class="tbl"><tbody>
+        <tr><th>{{a25service.skill_translation[language]}}</th></tr>
+        @for (skill of chara.skills; track skill) {
+          @if (skill.desc) {
+            <tr>
+              <td>
+                <b class="svg-inline-text">{{skill.name}}
+                @if (skill.evol) {
+                    (6 <svg><use href="/media/spritesheets/main.svg?v=-1#fa-star"></use></svg>)
+                }
+                </b>
+                <div class="resleri-element-icon-s" style="float:right;background-color:{{a25service.elements[skill.elem]}};">
+                  <svg><use attr.href="/media/spritesheets/A25.svg?v=2#resleri-{{skill.elem}}"></use></svg>
+                </div>
+                <p [innerHTML]="replaceDesc(skill)"></p>
+                <ul style="list-style: none; padding-left: 0;">
+                  @if (skill.wt) {
+                    <li><b>WT: </b>{{skill.wt}}</li>
+                  }
+                  @if (skill.area) {
+                    <li><b>Range: </b>{{skill.area}}</li>
+                  }
+                  @if (skill.pow2) {
+                    <li><b>Power: </b>{{skill.pow1}} > {{skill.pow2}} > {{skill.pow3}} > {{skill.pow4}} > {{skill.pow5}} @if (skill.pow6 && language == 'ja') { > {{skill.pow6}}  } </li>
+                  }
+                  @else {
+                    <li><b>Power: </b>{{skill.pow1}}</li>
+                  }
+                  @if (skill.break2) {
+                    <li><b>Break: </b>{{skill.break1}} > {{skill.break2}} > {{skill.break3}} > {{skill.break4}} > {{skill.break5}} @if (skill.break6 && language == 'ja') { > {{skill.break6}}  }</li>
+                  }
+                  @else {
+                    <li><b>Break: </b>{{skill.break1}}</li>
+                  }
+                </ul>
+              </td>
+            </tr>
+          }
+        }
+        <tr>
+      </tbody></table>
+      <table class="tbl"><tbody>
+        <tr><th>Passives</th></tr>
+          <tr>
+            <td>
+              <ul>
+                @for (passive of chara.passives; track passive) {
+                  @if (passive.name) {
+                    <li>
+                      <span class="svg-inline-text">
+                        {{passive.name}}
+                        @if (passive.evol) {
+                          (6 <svg><use href="/media/spritesheets/main.svg?v=-1#fa-star"></use></svg>)
+                        }
+                      </span>
+                      <ul>
+                        <li [innerHTML]="replacePassive(passive)"></li>
+                      </ul>
+                    </li>
+                  }
+                }
+              </ul>
+            </td>
+          </tr>
+        <tr>
+      </tbody></table>
+      <table class="tbl"><tbody>
+        <tr><th>{{a25service.leader_translation[language]}}</th></tr>
+          <tr>
+            <td>
+              <p>
+                <b>{{chara.leader_skill_name}}</b><br />
+                {{chara.leader_skill_desc}}
+              </p>
+              <div>
+                @for (char of chara.leader_skill_chars; track char) {
+                  <a routerLink="/{{gameURL}}/characters/{{char}}/{{language}}">
+                    <img src="{{imgURL}}characters/face/{{char}}.webp" loading="lazy" style="aspect-ratio:1;max-width:110px;border-radius:50%;">
+                  </a>
+                }
+              </div>
+              <b>Type: </b>
+              <ul>
+                @for (tag of chara.tags; track tag) {
+                  <li><popover [name]="tag.name"
+                    [template]="tagPopover"
+                    [context]="{ chars : tag.char }">
+                    {{tag.name}}
+                  </popover></li>
+                }
+              </ul>
+            </td>
+          </tr>
+        <tr>
+      </tbody></table>
+  </div>
+  <ng-template #traitPopover let-trait="trait">
+    <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5).replaceAll('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
+    <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
+  </ng-template>
+  <ng-template #tagPopover let-chars="chars">
+    @for (char of chars; track char) {
+      <a routerLink="/{{gameURL}}/characters/{{char}}/{{language}}">
+        <img src="{{imgURL}}characters/face/{{char}}.webp" style="aspect-ratio:1;max-width:110px;border-radius:50%;">
+      </a>
+    }
+  </ng-template>
+}

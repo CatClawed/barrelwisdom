@@ -12,7 +12,6 @@ import { mergeMap } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'register.component.html',
-  selector: 'register',
   styleUrl: '../user-facing.scss',
   imports: [ReactiveFormsModule, CommonModule]
 })

@@ -13,8 +13,8 @@ import { A26MapComponent } from '../map/a26-map.component';
 export class A26MonsterComponent extends SingleComponent {
   protected a26service = inject(A26Service);
   chart = {
-    "resist": `<i class="fa-solid fa-caret-up"></i>`,
-    "weak":   `<i class="fa-solid fa-caret-down"></i>`,
+    "resist": `<svg><use href="/media/spritesheets/main.svg?v=-1#fa-caret-up"></use></svg>`,
+    "weak":   `<svg><use href="/media/spritesheets/main.svg?v=-1#fa-caret-down"></use></svg>`,
   }
 
   changeData() {

@@ -51,10 +51,10 @@
             </td>
             <td style="padding:0;padding-left:0.5em;">
               @for (i of [].constructor(star(monster.hp)); track i) {
-                <i class="fas fa-star" style="color:gold;-webkit-text-stroke: 0.1rem black;padding-right:0.1rem"></i>
+                <svg class="standard-stat-star"><use href="/media/spritesheets/main.svg?v=-1#fa-star"></use></svg>
               }
               @if (monster.hp % 2 == 1) {
-                <div class="a25-half-star"><i class="fa-solid fa-star-half"></i></div>
+                <svg class="standard-stat-star"><use href="/media/spritesheets/main.svg?v=-1#fa-half-star"></use></svg>
               }
             </td>
           </tr>
@@ -64,10 +64,10 @@
             </td>
             <td style="padding:0;padding-left:0.5em;">
               @for (i of [].constructor(star(monster.atk)); track i) {
-                <i class="fas fa-star" style="color:gold;-webkit-text-stroke: 0.1rem black;padding-right:0.1rem"></i>
+                <svg class="standard-stat-star"><use href="/media/spritesheets/main.svg?v=-1#fa-star"></use></svg>
               }
               @if (monster.atk % 2 == 1) {
-                <div class="a25-half-star"><i class="fa-solid fa-star-half"></i></div>
+                <svg class="standard-stat-star"><use href="/media/spritesheets/main.svg?v=-1#fa-half-star"></use></svg>
               }
             </td>
           </tr>
@@ -77,10 +77,10 @@
             </td>
             <td style="padding:0;padding-left:0.5em;">
               @for (i of [].constructor(star(monster.dfn)); track i) {
-                <i class="fas fa-star" style="color:gold;-webkit-text-stroke: 0.1rem black;padding-right:0.1rem"></i>
+                <svg class="standard-stat-star"><use href="/media/spritesheets/main.svg?v=-1#fa-star"></use></svg>
               }
               @if (monster.dfn % 2 == 1) {
-                <div class="a25-half-star"><i class="fa-solid fa-star-half"></i></div>
+                <svg class="standard-stat-star"><use href="/media/spritesheets/main.svg?v=-1#fa-half-star"></use></svg>
               }
             </td>
           </tr>
@@ -90,10 +90,10 @@
             </td>
             <td style="padding:0;padding-left:0.5em;">
               @for (i of [].constructor(star(monster.spd)); track i) {
-                <i class="fas fa-star" style="color:gold;-webkit-text-stroke: 0.1rem black;padding-right:0.1rem"></i>
+                <svg class="standard-stat-star"><use href="/media/spritesheets/main.svg?v=-1#fa-star"></use></svg>
               }
               @if (monster.spd % 2 == 1) {
-                <div class="a25-half-star"><i class="fa-solid fa-star-half"></i></div>
+                <svg class="standard-stat-star"><use href="/media/spritesheets/main.svg?v=-1#fa-half-star"></use></svg>
               }
             </td>
           </tr>

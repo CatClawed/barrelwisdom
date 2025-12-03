@@ -1,0 +1,121 @@
+@if (data; as tower) {
+  <h1>{{title}}</h1>
+  <div class="table-of-contents">
+    <b>Table of Contents</b>
+    <ol>
+      @for (floor of tower; track floor) {
+        <li>
+          <a href="/{{gameURL}}/quests/tower/{{slug}}/{{language}}#{{floor.floor}}"
+            (click)="$event.preventDefault();scroll(floor.floor, slug)">
+            Floor {{floor.floor}}
+          </a>
+        </li>
+      }
+    </ol>
+  </div>
+  <ng-template #tow let-floor="floor">
+    <h2 id="{{floor.floor}}">Floor {{floor.floor}}</h2>
+    @if (floor.rewards) {
+      <div style="display:grid;grid-template-columns:repeat(4,23%);grid-row-gap:1rem;grid-column-gap:2%;margin-bottom:1rem;">
+        @for (reward of floor.rewards; track reward) {
+          <a style="position: relative; text-align: center;"
+            routerLink="/{{gameURL}}/items/materials/{{reward.item.slug}}/{{language}}">
+            <svg class="f{{reward.item.rarity}} resleri-item-bg-sm">
+                <use href="/media/spritesheets/A25.svg?v=-2#item-frame"></use>
+            </svg>
+            <img loading="lazy" class="resleri-item-frame-sm"
+              src="{{imgURL}}items/{{reward.item.slug}}.webp" alt="{{reward.item.name}}">
+            {{reward.item.name}} x{{reward.num}}
+          </a>
+          }
+        </div>
+      }
+      <p>
+        <b>Combat Level: </b>{{floor.combat_level}}
+      </p>
+      @if (floor.effects) {
+        <b>Floor Effects:</b>
+        <ul>
+          @for (effect of floor.effects; track effect) {
+            <li>
+              {{effect}}
+            </li>
+          }
+        </ul>
+      }
+      @for (panel of floor.battle.panels; track panel;) {
+        <img loading="lazy"
+          style="aspect-ratio:1;width:100px;"
+          src="{{imgURL}}panels/{{panel}}.webp">
+      }
+      @for (wave of floor.battle.waves; track wave; let index = $index) {
+        @if (index > 0) {
+          <h3>Wave {{index+1}}</h3>
+        }
+        <div style="display:grid;grid-row-gap:1rem;grid-column-gap:1rem;grid-template-columns:repeat(auto-fit, 350px);">
+        @for (enemy of wave.enemies; track enemy) {
+          <div class="card" style="min-width:350px;max-width:450px;">
+            <img loading="lazy"
+              style="aspect-ratio: 1;width:128px;height:128px;margin-left:auto;margin-right:auto;"
+              src="{{imgURL}}enemy/{{enemy.base_enemy}}.webp">
+            <h4>{{enemy.name}}</h4>
+            <table style="margin-bottom:0.7rem;">
+              <tbody>
+                <tr>
+                  <td><div class="resleri-element-icon-s" style="background-color:{{a25service.elements['fire']}}"><svg><use href="/media/spritesheets/A25.svg?v=2#resleri-fire"></use></svg></div></td><td>{{enemy.res_fir ? enemy.res_fir : 0}}%</td>
+                  <td><div class="resleri-element-icon-s" style="background-color:{{a25service.elements['ice']}}"><svg><use href="/media/spritesheets/A25.svg?v=2#resleri-ice"></use></svg></div></td><td>{{enemy.res_ice ? enemy.res_ice : 0}}%</td>
+                  <td><div class="resleri-element-icon-s" style="background-color:{{a25service.elements['lightning']}}"><svg><use href="/media/spritesheets/A25.svg?v=2#resleri-lightning"></use></svg></div></td><td>{{enemy.res_blt ? enemy.res_blt : 0}}%</td>
+                  <td><div class="resleri-element-icon-s" style="background-color:{{a25service.elements['wind']}}"><svg><use href="/media/spritesheets/A25.svg?v=2#resleri-wind"></use></svg></div></td><td>{{enemy.res_air ? enemy.res_air : 0}}%</td>
+                </tr>
+                <tr>
+                  <td><div class="resleri-element-icon-s" style="background-color:{{a25service.elements['slash']}}"><svg><use href="/media/spritesheets/A25.svg?v=2#resleri-slash"></use></svg></div></td><td>{{enemy.res_sla ? enemy.res_sla : 0}}%</td>
+                  <td><div class="resleri-element-icon-s" style="background-color:{{a25service.elements['impact']}}"><svg><use href="/media/spritesheets/A25.svg?v=2#resleri-impact"></use></svg></div></td><td>{{enemy.res_str ? enemy.res_str : 0}}%</td>
+                  <td><div class="resleri-element-icon-s" style="background-color:{{a25service.elements['pierce']}}"><svg><use href="/media/spritesheets/A25.svg?v=2#resleri-pierce"></use></svg></div></td><td>{{enemy.res_sta ? enemy.res_sta : 0}}%</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            <b>Skills</b>
+            <ul>
+              @for (skill of enemy.skills; track skill) {
+                <li>
+                  {{skill.skill.name}}
+                  @if (skill.kind == 'burst') {
+                    <b>(Burst)</b>
+                  }
+                  @if (skill.skill.elem) {
+                    <div class="resleri-element-icon-s" style="float: right; background-color:{{a25service.elements[skill.skill.elem]}}"><svg><use attr.href="/media/spritesheets/A25.svg?v=2#resleri-{{skill.skill.elem}}"></use></svg></div>
+                  }
+                  @if (skill.skill.wt) {
+                    <br />WT: {{skill.skill.wt+200}}
+                  }
+                  @if (skill.skill.pow1) {
+                    <br />Power: {{skill.skill.pow1}}
+                  }
+                  @if (skill.skill.area) {
+                    <br />Range: {{skill.skill.area}}
+                  }
+
+                </li>
+              }
+            </ul>
+            @if (getHint(floor.battle.hints, enemy.base_enemy)) {
+              <b>Hints</b>
+              <span [innerHTML]="getHint(floor.battle.hints, enemy.base_enemy)"></span>
+            }
+          </div>
+        }
+      </div>
+    }
+  </ng-template>
+  @for (floor of tower; track floor; let index=$index) {
+    @if (index < 10) {
+      <ng-content *ngTemplateOutlet="tow; context: {floor:floor}"></ng-content>
+    }
+    @else {
+      @defer {
+        <ng-content *ngTemplateOutlet="tow; context: {floor:floor}"></ng-content>
+      }
+    }
+  }
+}

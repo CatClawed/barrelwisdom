@@ -1,7 +1,7 @@
 <div class="navigation">
   <button (click)="snav.toggle();" class="navigation-hide-large" aria-label="Toggle navigation"
     style="padding-left:0.5rem;background:none;border:none; height: 55px; width: 55px;">
-    <svg style="fill:white; height: 100%; width: 100%;"><use href="/media/spritesheets/main.svg?v=0#fa-bars"></use></svg>
+    <svg style="fill:white; height: 100%; width: 100%;"><use href="/media/spritesheets/main.svg?v=-1#fa-bars"></use></svg>
   </button>
   <a aria-label="homepage" routerLink="/" class="navigation-brand">
     <picture>
@@ -16,7 +16,7 @@
   <a class="nav-items" routerLink="/blog/atelier-series-guide">Atelier Series Guide</a>
   <a class="nav-items" routerLink="/blog/donate">Donate</a>
   <a class="nav-social-media" aria-label="Discord" target="_blank" rel="noopener" href="https://discord.gg/utRynRKxwh">
-    <svg><use href="/media/spritesheets/main.svg?v=0#fa-discord"></use></svg>
+    <svg><use href="/media/spritesheets/main.svg?v=-1#fa-discord"></use></svg>
   </a>
   <button mat-icon-button
     [disabled]="languages().length == 1"
@@ -24,9 +24,9 @@
     aria-label="Language select"
     [style]="languages().length == 1 ? `background: none !important;` : null"
     class="nav-lang">
-      <svg style="height: 40px; aspect-ratio: 1;"><use href="/media/spritesheets/main.svg?v=0#fa-globe"></use></svg>
+      <svg style="height: 40px; aspect-ratio: 1;"><use href="/media/spritesheets/main.svg?v=-1#fa-globe"></use></svg>
       <span>{{codes[currentLang()]}}</span>
-      <svg style="height:20px; aspect-ratio: 1;{{languages().length > 1 ? `` : `fill: transparent;`}}"><use href="/media/spritesheets/main.svg?v=0#fa-caret-down"></use></svg>
+      <svg style="height:20px; aspect-ratio: 1;{{languages().length > 1 ? `` : `fill: transparent;`}}"><use href="/media/spritesheets/main.svg?v=-1#fa-caret-down"></use></svg>
   </button>
   <mat-menu #menu="matMenu">
     @for (language of languages(); track language) {
@@ -43,11 +43,11 @@
     [fixedInViewport]="true" fixedTopGap="55" class="sidenav">
     <div class="sidenav-items">
       <a class="navigation-hide-large sidenav-item" routerLink="/blog/donate">
-        <svg><use href="/media/spritesheets/main.svg?v=0#fa-donate"></use></svg>
+        <svg><use href="/media/spritesheets/main.svg?v=-1#fa-donate"></use></svg>
         Donate
       </a>
       <a class="navigation-hide-large sidenav-item" routerLink="/blog/atelier-series-guide">
-        <svg><use href="/media/spritesheets/main.svg?v=0#fa-star"></use></svg>
+        <svg><use href="/media/spritesheets/main.svg?v=-1#fa-star"></use></svg>
         Atelier Series Guide
       </a>
       @for (n of nav(); track n) {
@@ -67,10 +67,10 @@
             }
             {{n.name}}
             @if (!n.expand) {
-              <svg><use href="/media/spritesheets/main.svg?v=0#fa-caret-down"></use></svg>
+              <svg><use href="/media/spritesheets/main.svg?v=-1#fa-caret-down"></use></svg>
             }
             @if (n.expand) {
-              <svg><use href="/media/spritesheets/main.svg?v=0#fa-caret-up"></use></svg>
+              <svg><use href="/media/spritesheets/main.svg?v=-1#fa-caret-up"></use></svg>
             }
           </span>
         }
@@ -94,37 +94,37 @@
   </div>
   <div class="sidenav-bottom">
     <a class="sidenav-item sidenav-social-media" href="https://discord.gg/utRynRKxwh" rel="noopener" target="_blank">
-      <svg><use href="/media/spritesheets/main.svg?v=0#fa-discord"></use></svg>
+      <svg><use href="/media/spritesheets/main.svg?v=-1#fa-discord"></use></svg>
       Discord
     </a>
     @if (user() !== null) {
       <a class="sidenav-item svg-inline-text" routerLink="/user/{{user().username}}">
-        <svg><use href="/media/spritesheets/main.svg?v=0#fa-user"></use></svg>
+        <svg><use href="/media/spritesheets/main.svg?v=-1#fa-user"></use></svg>
         {{user().username}}
       </a>
       <a class="sidenav-item svg-inline-text" routerLink="/settings">
-        <svg><use href="/media/spritesheets/main.svg?v=0#fa-wrench"></use></svg>
+        <svg><use href="/media/spritesheets/main.svg?v=-1#fa-wrench"></use></svg>
         Settings
       </a>
       <a class="sidenav-item svg-inline-text" routerLink="/create">
-        <svg><use href="/media/spritesheets/main.svg?v=0#fa-file"></use></svg>
+        <svg><use href="/media/spritesheets/main.svg?v=-1#fa-file"></use></svg>
         Create Page
       </a>
       <a class="sidenav-item svg-inline-text" routerLink="/moderate/comment">
-        <svg><use href="/media/spritesheets/main.svg?v=0#fa-comment"></use></svg>
+        <svg><use href="/media/spritesheets/main.svg?v=-1#fa-comment"></use></svg>
         Comments
       </a>
       <a class="sidenav-item svg-inline-text" routerLink="/" (click)="logout()">
-        <svg><use href="/media/spritesheets/main.svg?v=0#fa-unlock"></use></svg>
+        <svg><use href="/media/spritesheets/main.svg?v=-1#fa-unlock"></use></svg>
         Logout
       </a>
     }
     <a class="sidenav-item svg-inline-text" routerLink="/blog/legal">
-      <svg><use href="/media/spritesheets/main.svg?v=0#fa-legal"></use></svg>
+      <svg><use href="/media/spritesheets/main.svg?v=-1#fa-legal"></use></svg>
       Legal
     </a>
     <a class="sidenav-item svg-inline-text" href="https://github.com/CatClawed/barrelwisdom" rel="noopener" target="_blank">
-      <svg><use href="/media/spritesheets/main.svg?v=0#fa-github"></use></svg>
+      <svg><use href="/media/spritesheets/main.svg?v=-1#fa-github"></use></svg>
       Source
     </a>
   </div>

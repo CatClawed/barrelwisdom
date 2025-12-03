@@ -1,0 +1,50 @@
+@if (data; as scorebattles) {
+  <h1>{{title}}</h1>
+  <div class="table-of-contents">
+    <b>Table of Contents</b>
+    <ol>
+      @for (scorebattle of scorebattles; track scorebattle) {
+        <li>
+          <a href="/{{gameURL}}/quests/scorebattles/{{language}}#{{scorebattle.chapter}}-{{scorebattle.section}}"
+            (click)="$event.preventDefault();scroll(scorebattle.chapter+'-'+scorebattle.section)">
+            {{scorebattle.chapter}}-{{scorebattle.section}}: {{scorebattle.name}}
+          </a>
+        </li>
+      }
+    </ol>
+  </div>
+  <ng-template #sb let-scorebattle="scorebattle">
+    <h2 id="{{scorebattle.chapter}}-{{scorebattle.section}}">{{scorebattle.chapter}}-{{scorebattle.section}}: {{scorebattle.name}}</h2>
+    @for (diff of scorebattle.difficulties; track diff) {
+      <h3>{{difficulties[diff.difficulty]}}</h3>
+      <p>
+        <b>Combat Level: </b>{{diff.combat_level}}<br/>
+        <b>EXP: </b>{{diff.exp}}<br/>
+        <b>Cole: </b>{{diff.cole}}
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(4,23%);grid-row-gap:1rem;grid-column-gap:2%;">
+        @for (reward of diff.rewards; track reward) {
+          <a style="position: relative; text-align: center;"
+            routerLink="/{{gameURL}}/items/materials/{{reward.item.slug}}/{{language}}">
+            <svg class="f{{reward.item.rarity}} resleri-item-bg-sm">
+                <use href="/media/spritesheets/A25.svg?v=-2#item-frame"></use>
+            </svg>
+            <img loading="lazy" class="resleri-item-frame-sm"
+              src="{{imgURL}}items/{{reward.item.slug}}.webp" alt="{{reward.item.name}}">
+            {{reward.item.name}} x{{reward.num}}
+          </a>
+        }
+      </div>
+    }
+  </ng-template>
+  @for (scorebattle of scorebattles; track scorebattle; let index=$index) {
+    @if (index < 10) {
+      <ng-content *ngTemplateOutlet="sb; context: {scorebattle:scorebattle}"></ng-content>
+    }
+    @else {
+      @defer {
+        <ng-content *ngTemplateOutlet="sb; context: {scorebattle:scorebattle}"></ng-content>
+      }
+    }
+  }
+}

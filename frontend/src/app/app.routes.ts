@@ -76,6 +76,10 @@ export const routes: Routes = [
     path: '',
     children: [
       {
+        path: 'resleri',
+        loadChildren: ()=> import('@app/views/games/A25/a25-routing.module').then(m=>m.A25RoutingModule),
+      },
+      {
         path: 'resleriana-red-white',
         loadChildren: ()=> import('@app/views/games/A25RW/a25rw-routing.module').then(m=>m.A25RWRoutingModule),
       },

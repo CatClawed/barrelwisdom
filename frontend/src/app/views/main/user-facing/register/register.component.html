@@ -7,7 +7,7 @@
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <div class="spacer">
           <div class="login-form">
-            <i class="fas fa-user" style="margin: auto; padding: 0.5em;"></i>
+            <svg class="form-svg"><use href="/media/spritesheets/main.svg?v=-1#fa-user"></use></svg>
             <input type="text" formControlName="username"
               placeholder="Username" autocomplete="username"
               [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
@@ -22,7 +22,7 @@
         </div>
         <div class="spacer">
           <div class="login-form">
-            <i style="margin: auto; padding: 0.5em;" class="fa-solid fa-at"></i>
+            <b class="form-svg">@</b>
             <input type="text" formControlName="email"
               placeholder="Email" autocomplete="email"
               [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
@@ -40,7 +40,7 @@
         </div>
         <div class="spacer">
           <div class="login-form">
-            <i class="fas fa-lock" style="margin: auto; padding: 0.5em;"></i>
+            <svg class="form-svg"><use href="/media/spritesheets/main.svg?v=-1#fa-lock"></use></svg>
             <input type="password" formControlName="password"
               placeholder="Password"
               [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
@@ -58,7 +58,7 @@
         </div>
         <div class="spacer">
           <div class="login-form">
-            <i class="fas fa-lock" style="margin: auto; padding: 0.5em;"></i>
+            <svg class="form-svg"><use href="/media/spritesheets/main.svg?v=-1#fa-lock"></use></svg>
             <input type="password" formControlName="confirmPassword"
               placeholder="Repeat password"
               [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />

@@ -32,7 +32,7 @@ export abstract class DialogUseComponent extends FilterableComponent {
     // intentionally blank
     extraSettings(): void {}
 
-    openDialog(slug: string, event?: Event, destination?: string, otherComp?) {
+    openDialog(slug: string, event?: any, destination?: string, otherComp?) {
         if (event !== undefined) {
             event.preventDefault()
         }

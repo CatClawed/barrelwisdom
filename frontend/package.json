@@ -36,6 +36,7 @@
     "@angular/ssr": "^21.0.1",
     "@fortawesome/fontawesome-free": "^7.1.0",
     "express": "^5.1.0",
+    "fastintcompression": "^0.1.0",
     "leaflet": "^1.9.4",
     "ngx-cookie-service": "^21.1.0",
     "ngx-markdown": "^21.0.0",

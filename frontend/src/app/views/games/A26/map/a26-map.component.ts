@@ -1,5 +1,4 @@
-import { isPlatformBrowser } from '@angular/common';
-import { AfterViewInit, Component, inject, Input, PLATFORM_ID, signal, ViewEncapsulation } from '@angular/core';
+import { afterNextRender, AfterViewInit, Component, inject, Input, signal, ViewEncapsulation } from '@angular/core';
 import { Coord } from '@app/views/games/A26/_services/a26.interface';
 import { A26Service } from '@app/views/games/A26/_services/a26.service';
 import * as L from 'leaflet';
@@ -62,9 +61,8 @@ import * as L from 'leaflet';
   standalone: true,
   encapsulation: ViewEncapsulation.None
 })
-export class A26MapComponent implements AfterViewInit {
+export class A26MapComponent {
   protected a26service = inject(A26Service);
-  protected platformId = inject(PLATFORM_ID);
   private map;
   width: number = 136; // 8704 / 128 * 2
   height: number = 56; // -3584/8704 * 136
@@ -147,36 +145,35 @@ export class A26MapComponent implements AfterViewInit {
     }
   }
 
-  ngAfterViewInit(): void {
-    if (!isPlatformBrowser(this.platformId)) return;
+  constructor() {
+   afterNextRender(() => {
+      setTimeout(() => {
+        this.map = L.map('leafletmap', {
+          center: [-this.height / 2, this.width / 2],
+          zoom: 3,
+          crs: L.CRS.Simple,
+          infinite: false,
+          attributionControl: false,
+        })
 
-    setTimeout(() => {
-      this.map = L.map('leafletmap', {
-        center: [-this.height / 2, this.width / 2],
-        zoom: 3,
-        crs: L.CRS.Simple,
-        infinite: false,
-        attributionControl: false,
+        const tiles = L.tileLayer(this.a26service.imgURL + 'maps/{z}/{x}/{y}.png', {
+          tms: true,
+          tileSize: 256,
+          maxZoom: 6,
+          minZoom: 3,
+          bounds: this.bounds,
+          infinite: false,
+
+        });
+
+        this.map.setMaxBounds(this.bounds)
+        tiles.addTo(this.map);
+
+        this.map.setView([-this.height * this.data[0].z, this.width * this.data[0].x])
+        for (let d of this.data) {
+          this.marker(d).addTo(this.map)
+        }
       })
-
-      const tiles = L.tileLayer(this.a26service.imgURL + 'maps/{z}/{x}/{y}.png', {
-        tms: true,
-        tileSize: 256,
-        maxZoom: 6,
-        minZoom: 3,
-        bounds: this.bounds,
-        infinite: false,
-
-      });
-
-      this.map.setMaxBounds(this.bounds)
-      tiles.addTo(this.map);
-
-      this.map.setView([-this.height * this.data[0].z, this.width * this.data[0].x])
-      for (let d of this.data) {
-        this.marker(d).addTo(this.map)
-      }
     })
-
   }
 }

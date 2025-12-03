@@ -3,19 +3,19 @@
     <h1>{{blog.title}}</h1>
     <div class="author">
       <span class="svg-inline-text">
-        <svg><use href="/media/spritesheets/main.svg?v=0#fa-calendar"></use></svg>
+        <svg><use href="/media/spritesheets/main.svg?v=-1#fa-calendar"></use></svg>
         <time class="updated" dateTime="{{blog.created}}"> {{blog.created | date:'longDate' }} </time>
       </span>
       <span class="svg-inline-text">
         @if (blog.authorlock) {
-          <svg><use href="/media/spritesheets/main.svg?v=0#fa-user"></use></svg>
+          <svg><use href="/media/spritesheets/main.svg?v=-1#fa-user"></use></svg>
           <a class="url" routerLink="/user/{{blog.author[0]}}">
           {{blog.author[0]}} </a>
         }
       </span>
       @if (allowedToEdit()) {
         <span class="svg-inline-text">
-          <svg><use href="/media/spritesheets/main.svg?v=0#fa-edit"></use></svg>
+          <svg><use href="/media/spritesheets/main.svg?v=-1#fa-edit"></use></svg>
           <a routerLink="/create" [queryParams]="{ section: blog.section.slug, slug: blog.slug }"> Edit</a>
         </span>
       }
@@ -37,7 +37,7 @@
     }
     @if (blog.tags.length > 0) {
       <div class="blog-tags">
-          <svg class="badge bg-primary" style="margin-right: 1em; height: 1.3em; width: 1.3em; fill:white;"><use href="/media/spritesheets/main.svg?v=0#fa-tag"></use></svg>
+          <svg class="badge bg-primary" style="margin-right: 1em; height: 1.3em; width: 1.3em; fill:white;"><use href="/media/spritesheets/main.svg?v=-1#fa-tag"></use></svg>
         @for (tag of blog.tags; track tag) {
           <a rel="tag" style="margin-right: 1em;"
             class="badge bg-secondary" routerLink="/tag/{{tag.slug}}">{{tag.name}} </a>

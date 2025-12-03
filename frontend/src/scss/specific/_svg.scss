@@ -1,3 +1,5 @@
+@use 'variables' as v;
+
 .svg-inline-text {
     display: flex;
     svg {
@@ -6,4 +8,20 @@
         margin-top: auto;
         margin-bottom: auto;
     }
+}
+
+.svg-inline-link {
+    display: flex;
+    fill: v.$secondary;
+    svg {
+        width: 1em;
+        height: 1em;
+        margin-left: 0.3em;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+}
+
+.svg-color {
+  opacity: 35%;
 }

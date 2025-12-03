@@ -14,23 +14,12 @@ export class Popover {
   isOpen = false;
   noRun = false;
 
-  @Input()
-  name?: string;
-
-  @Input()
-  url?: string;
-
-  @Input()
-  template: TemplateRef<any>;
-
-  @Input()
-  context?: any = {};
-
-  @Input()
-  cls?: string = '';
-
-  @Input()
-  display?: string = 'inherit'
+  @Input() name?: string;
+  @Input() url?: string;
+  @Input() template: TemplateRef<any>;
+  @Input() context?: any = {};
+  @Input() cls?: string = '';
+  @Input() display?: string = 'inherit'
 
   toggle() {
     if (!this.noRun) {

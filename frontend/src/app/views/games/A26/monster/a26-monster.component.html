@@ -32,10 +32,10 @@
             </td>
             <td style="padding:0;padding-left:0.5em;">
               @for (i of [].constructor(monster.hp); track i) {
-                <i   class="fas fa-star" style="color:gold;-webkit-text-stroke: 0.1rem black;padding-right:0.1rem"></i>
+                <svg class="standard-stat-star"><use href="/media/spritesheets/main.svg?v=-1#fa-star"></use></svg>
               }
               @for (i of [].constructor(5-monster.hp); track i) {
-                <i class="fas fa-star" style="padding-right:0.1rem"             ></i>
+                <svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=-1#fa-star"></use></svg>
               }
             </td>
           </tr>
@@ -45,10 +45,10 @@
             </td>
             <td style="padding:0;padding-left:0.5em;">
               @for (i of [].constructor(monster.atk); track i) {
-                <i   class="fas fa-star" style="color:gold;-webkit-text-stroke: 0.1rem black;padding-right:0.1rem"></i>
+                <svg class="standard-stat-star"><use href="/media/spritesheets/main.svg?v=-1#fa-star"></use></svg>
               }
               @for (i of [].constructor(5-monster.atk); track i) {
-                <i class="fas fa-star" style="padding-right:0.1rem"             ></i>
+                <svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=-1#fa-star"></use></svg>
               }
             </td>
           </tr>
@@ -58,10 +58,10 @@
             </td>
             <td style="padding:0;padding-left:0.5em;">
               @for (i of [].constructor(monster.dfn); track i) {
-                <i   class="fas fa-star" style="color:gold;-webkit-text-stroke: 0.1rem black;padding-right:0.1rem"></i>
+                <svg class="standard-stat-star"><use href="/media/spritesheets/main.svg?v=-1#fa-star"></use></svg>
               }
               @for (i of [].constructor(5-monster.dfn); track i) {
-                <i class="fas fa-star" style="padding-right:0.1rem"             ></i>
+                <svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=-1#fa-star"></use></svg>
               }
             </td>
           </tr>
@@ -71,10 +71,10 @@
             </td>
             <td style="padding:0;padding-left:0.5em;">
               @for (i of [].constructor(monster.spd); track i) {
-                <i   class="fas fa-star" style="color:gold;-webkit-text-stroke: 0.1rem black;padding-right:0.1rem"></i>
+                <svg class="standard-stat-star"><use href="/media/spritesheets/main.svg?v=-1#fa-star"></use></svg>
               }
               @for (i of [].constructor(5-monster.spd); track i) {
-                <i class="fas fa-star" style="padding-right:0.1rem"             ></i>
+                <svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=-1#fa-star"></use></svg>
               }
             </td>
           </tr>

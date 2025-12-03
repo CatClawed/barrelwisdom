@@ -65,10 +65,6 @@
   color: black;
 }
 
-.svg-color {
-  opacity: 35%;
-}
-
 // universal styles for blog pages
 .center {
   margin-left: auto;
@@ -196,4 +192,16 @@
   display:inline-flex;
   line-height:1.7em;
   align-content:center;
+}
+
+// appears on monsters often enough
+.standard-stat-star {
+    width: 1.3em;
+    height: 1.3em;
+    fill: gold;
+    use {
+        stroke: black;
+        stroke-width: 8%;
+        stroke-linejoin: round;
+    }
 }

@@ -1,0 +1,71 @@
+@if (!error) {
+  <ng-template #template let-memoria="item">
+    <div style="max-width: 512px;">
+      <div style="aspect-ratio:512/410;max-width:512px;display:flex;margin:auto;">
+        <a style="width:50%;position:relative;"
+          (click)="openDialog(memoria.slug, $event);"
+          href="/{{gameURL}}/memoria/{{memoria.slug}}/{{language}}">
+            <img loading="lazy"
+              src="{{imgURL}}memoria/{{memoria.slug}}.webp"
+              alt="{{memoria.name}}"
+              style="max-height:100%;aspect-ratio:256/410;">
+              <div style="position:absolute;bottom:10%;left:50%;transform:translate(-50%,0);font-size:2rem;text-align:center;width:100%;color:white;background:linear-gradient(270deg, rgba(0,0,0,0.5) 0%, rgb(0, 0, 0) 50%, rgba(0,0,0,0.5) 100%);">{{rarity[memoria.rarity]}}</div>
+          </a>
+          <table class="tbl tbl-min borders"
+            style="width:50%;height:100%;text-align:center;"><tbody>
+            <tr>
+              <th>{{a25service.stats['hp'][language]}}</th>
+              <td>{{memoria.hp30/100}}%</td>
+            </tr>
+            <tr>
+              <th>{{a25service.stats['agi'][language]}}</th>
+              <td>{{memoria.spd30/100}}%</td>
+            </tr>
+            <tr>
+              <th>{{a25service.stats['patk'][language]}}</th>
+              <td>{{memoria.patk30/100}}%</td>
+            </tr>
+            <tr>
+              <th>{{a25service.stats['pdef'][language]}}</th>
+              <td>{{memoria.pdef30/100}}%</td>
+            </tr>
+            <tr>
+              <th>{{a25service.stats['matk'][language]}}</th>
+              <td>{{memoria.matk30/100}}%</td>
+            </tr>
+            <tr>
+              <th>{{a25service.stats['mdef'][language]}}</th>
+              <td>{{memoria.mdef30/100}}%</td>
+            </tr>
+          </tbody></table>
+        </div>
+        <p [innerHTML]="memoria.skill_desc.replaceAll('{0}', memoria.lv1 + ' ~ ' + memoria.lv5).replaceAll('{1}', memoria.lv1 + ' ~ ' + memoria.lv5)"></p>
+        @if (memoria.note) {
+          <p [innerHTML]="memoria.note"></p>
+        }
+      </div>
+  </ng-template>
+  <filter-list
+    [list]="filteredMemoria"
+    name="{{a25service.memoria_translation[language]}}"
+    [(hide)]="hide"
+    [template]="template">
+    <form [formGroup]="pageForm" class="grid">
+      <mat-form-field class="grid-8" appearance="outline">
+        <mat-label>{{a25service.filter_translation[language]}}.</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtertext">
+        <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="grid-4" appearance="outline">
+        <mat-label>{{a25service.order_translation[language]}}</mat-label>
+        <mat-select matNativeControl formControlName="stats">
+          @for (stat of a25service.stats | keyvalue; track stat) {
+            <mat-option [value]="stat.key">
+              {{stat.value[language]}}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </filter-list>
+}

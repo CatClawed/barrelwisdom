@@ -1,0 +1,90 @@
+@if (!error) {
+  <ng-template #template let-it="item">
+    <div class="card"  style="{{insertStyle(it)}}">
+      <h4 class="card-title card-icon-space">
+        <a (click)="openDialog(it.slug, $event);" href="/{{gameURL}}/items/materials/{{it.slug}}/{{language}}">{{it.name}}</a>
+      </h4>
+      <div class="card-icon-position">
+        @if (it.material[0].traits) {
+          <svg style="width:3rem;height:3rem;"><use attr.href="/media/spritesheets/A25.svg?v=2#{{it.material[0].traits[0].kind}}"></use></svg>
+        }
+      </div>
+      <a class="card-item-display" style="position: relative;" (click)="openDialog(it.slug, $event);" href="/{{gameURL}}/items/materials/{{it.slug}}/{{language}}">
+        <svg class="f{{it.rarity}} resleri-item-bg">
+            <use href="/media/spritesheets/A25.svg?v=-2#item-frame"></use>
+        </svg>
+        <img loading="lazy" class="resleri-item-frame" height="256" width="256"
+          src="{{imgURL}}items/{{it.slug}}.webp" alt="{{it.name}}">
+        </a>
+        @if (it.limit) {
+          <p><b>Event: </b>{{it.limit}}</p>
+        }
+        @if (it.material[0].traits) {
+          <ul>
+            @for (trait of it.material[0].traits; track trait) {
+              <li>
+                <popover [name]="trait.name"
+                  [template]="popoverContent"
+                  url="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">
+                  {{trait.name}}
+                </popover>
+                <ng-template #popoverContent>
+                  <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5).replaceAll('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
+                  <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
+                </ng-template>
+              </li>
+            }
+          </ul>
+        }
+        <button (click)="openDialog(it.slug)" class="card-read-more-position" mat-mini-fab color="primary">
+          <svg><use href="/media/spritesheets/main.svg?v=-1#fa-vertical-ellipsis"></use></svg>
+        </button>
+      </div>
+  </ng-template>
+  <filter-list
+    [list]="filteredItems"
+    name="{{a25service.material_translation[language]}}"
+    [(hide)]="hide"
+    [template]="template">
+    <form [formGroup]="pageForm" class="grid">
+      <mat-form-field class="grid-8" appearance="outline">
+        <mat-label>{{a25service.filter_translation[language]}}</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtertext">
+      </mat-form-field>
+      <mat-form-field class="grid-4" appearance="outline">
+        <mat-label>Color</mat-label>
+        <mat-select matNativeControl formControlName="color">
+          <mat-option value="Any">--</mat-option>
+          @if (data) {
+            @for (color of data.colors; track color) {
+              <mat-option value="{{color.slug}}">
+                {{color.name}}
+              </mat-option>
+            }
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="grid-6" appearance="outline">
+        <mat-label>{{a25service.trait_translation[language]}}</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtertrait">
+      </mat-form-field>
+      <mat-form-field class="grid-3" appearance="outline">
+        <mat-label>Trait Type</mat-label>
+        <mat-select matNativeControl formControlName="traittype">
+          <mat-option value="Any">--</mat-option>
+          <mat-option value="equipment">{{a25service.equipment[language]}}</mat-option>
+          <mat-option value="combat">{{combat[language]}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="grid-3" appearance="outline">
+        <mat-label>Rarity</mat-label>
+        <mat-select matNativeControl formControlName="rarity">
+          <mat-option value="0">--</mat-option>
+          <mat-option value="3">SSR</mat-option>
+          <mat-option value="2">SR</mat-option>
+          <mat-option value="1">R</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </filter-list>
+}

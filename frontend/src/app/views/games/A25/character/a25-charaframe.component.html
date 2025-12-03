@@ -1,0 +1,35 @@
+<ng-template #contents>
+    <img loading="lazy" width="100%" class="image-pentagon"
+        src="{{imgURL}}characters/face/{{chara.slug}}.webp"
+        alt="{{chara.name + ' ' + chara.title}}">
+    <div class="svg-wrapper">
+        <svg class="background-diamond" style="fill:{{a25service.colors[chara.color1]}};">
+            <use href="/media/spritesheets/A25.svg?v=2#color-l"></use>
+        </svg>
+        <svg class="background-diamond" style="fill:{{a25service.colors[chara.color2]}};">
+            <use href="/media/spritesheets/A25.svg?v=2#color-r"></use>
+        </svg>
+    </div>
+    <img class="role"
+        src="{{imgURL}}characters/{{chara.role}}.webp" alt="{{chara.role}}" />
+    <div class="a25-elem-icon" style="background-color:{{a25service.elements[chara.elem]}};">
+        <svg>
+            <use attr.href="/media/spritesheets/A25.svg?v=2#resleri-{{chara.elem}}"></use>
+        </svg>
+    </div>
+</ng-template>
+
+<div [style]="!collectionMode || inCollection() ? 'text-align:center;cursor: pointer;' : 'text-align:center;filter:grayscale(.8);cursor: pointer;'"
+    (click)="$event.preventDefault(); buttonClicked.emit($event)">
+    <div style="aspect-ratio:1;position:relative;">
+        @if (!collectionMode) {
+            <a href="/{{gameURL}}/characters/{{chara.slug}}/{{language}}">
+                <ng-content *ngTemplateOutlet="contents"></ng-content>
+            </a>
+        }
+        @else {
+            <ng-content *ngTemplateOutlet="contents"></ng-content>
+        }
+    </div>
+    <div [class]="chara.six_star ? 'a25-star a25-star-six' : 'a25-star'" [innerHTML]="fetchStars(chara.id, chara.rarity)"></div>
+</div>

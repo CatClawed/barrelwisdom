@@ -1,0 +1,38 @@
+@if (!error) {
+  <ng-template #template let-item="item">
+    <a25-trait [inputData]="item" [imgURL]="imgURL"
+      (buttonClicked)="openDialog($event)"
+      (charClicked)="openDialog($event, undefined, 'characters', c2);"
+      (itemClicked)="openDialog($event, undefined, 'items/materials', c3);"></a25-trait>
+  </ng-template>
+  <filter-list
+    [list]="filteredTraits"
+    [(hide)]="hide"
+    name="{{a25service.trait_translation[language]}}"
+    [template]="template">
+    <form [formGroup]="pageForm" class="grid">
+      <mat-form-field class="grid-8" appearance="outline">
+        <mat-label>{{a25service.filter_translation[language]}}</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtertext">
+      </mat-form-field>
+      <mat-form-field class="grid-4" appearance="outline">
+        <mat-label>Transfers to...</mat-label>
+        <mat-select matNativeControl formControlName="transfers" disableOptionCentering="true" class="mat-select-icon">
+          <mat-option value="any" selected>
+            --
+          </mat-option>
+          @if (data) {
+            @for (trans of data.transfer; track trans) {
+              <mat-option [value]="trans.slug">
+                {{trans.name}}
+              </mat-option>
+            }
+            <mat-option value="equipment" selected>
+              {{a25service.equipment[language]}}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </filter-list>
+}
