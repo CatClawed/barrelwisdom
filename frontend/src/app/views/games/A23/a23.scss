@@ -1,0 +1,33 @@
+@use 'variables' as v;
+
+.a23-talk-table {
+  tbody {
+    tr {
+      td:first-child {
+        width: 10%;
+
+        img {
+          width: 128px;
+          aspect-ratio: 128/125;
+        }
+      }
+
+      td:last-child {
+        width: 90%;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+.a23-plus-icon {
+  height: 1.5em;
+  width: 1.5em;
+  fill: v.$secondary;
+}
+
+.a23-weather {
+  height: 1.3em;
+  width: 1.3em;
+  fill: black;
+}

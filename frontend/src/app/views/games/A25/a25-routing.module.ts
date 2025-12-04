@@ -41,6 +41,11 @@ const routes: Routes = [
         canActivate: [LanguageGuard],
       },
       {
+        path: 'materials/:subject/:language',
+        loadComponent: ()=> import('@app/views/games/A25/item/a25-item.component').then(m=>m.A25ItemComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
         path: 'synthesis',
         loadComponent: ()=> import('@app/views/games/A25/item/a25-synthlist.component').then(m=>m.A25SynthesisListComponent),
         canActivate: [LanguageGuard],
@@ -51,6 +56,11 @@ const routes: Routes = [
         canActivate: [LanguageGuard],
       },
       {
+        path: 'synthesis/:subject/:language',
+        loadComponent: ()=> import('@app/views/games/A25/item/a25-item.component').then(m=>m.A25ItemComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
         path: 'recipes',
         loadComponent: ()=> import('@app/views/games/A25/item/a25-recipe.component').then(m=>m.A25RecipeComponent),
         canActivate: [LanguageGuard],
@@ -58,16 +68,6 @@ const routes: Routes = [
       {
         path: 'recipes/:language',
         loadComponent: ()=> import('@app/views/games/A25/item/a25-recipe.component').then(m=>m.A25RecipeComponent),
-        canActivate: [LanguageGuard],
-      },
-      {
-        path: ':itemkind/:subject',
-        loadComponent: ()=> import('@app/views/games/A25/item/a25-item.component').then(m=>m.A25ItemComponent),
-        canActivate: [LanguageGuard],
-      },
-      {
-        path: ':itemkind/:subject/:language',
-        loadComponent: ()=> import('@app/views/games/A25/item/a25-item.component').then(m=>m.A25ItemComponent),
         canActivate: [LanguageGuard],
       },
     ]

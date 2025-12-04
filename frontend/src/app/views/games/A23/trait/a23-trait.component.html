@@ -1,0 +1,57 @@
+@if (data; as trait) {
+  <div [class]="url ? 'card' : inputSlug ? 'card card-dialog' : 'card card-small'"
+    [style]="url ? 'height:100%;' : null">
+    <h4 class="card-title" style="margin-right:6rem;">
+      @if (url) {
+        <a (click)="$event.preventDefault(); buttonClicked.emit(trait.slug);"
+          href="{{url}}">{{trait.name}}</a>
+      }
+      @else {
+        {{trait.name}}
+      }
+    </h4>
+    <div class="card-icon-position">
+      <tooltip tip="Influences rank. A measure of rarity. This number determines where traits appear.">Grade: </tooltip>
+      {{trait.grade}}
+    </div>
+    @if ( trait.item_set) {
+      <b>{{a23service.item_translation[language]}}</b>
+      <ul>
+        @for (item of trait.item_set; track item) {
+          <li><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
+          }
+        </ul>
+    }
+    @if (trait.combo1) {
+      <p>
+        @if (url) {
+          <a (click)="$event.preventDefault(); buttonClicked.emit(trait.combo1.slug);" href="/{{gameURL}}/traits/{{trait.combo1.slug}}/{{language}}">{{trait.combo1.name}}</a> x
+          <a (click)="$event.preventDefault(); buttonClicked.emit(trait.combo2.slug);" href="/{{gameURL}}/traits/{{trait.combo2.slug}}/{{language}}">{{trait.combo2.name}}</a>
+        }
+        @else {
+          <a routerLink="/{{gameURL}}/traits/{{trait.combo1.slug}}/{{language}}">{{trait.combo1.name}}</a> x
+          <a routerLink="/{{gameURL}}/traits/{{trait.combo2.slug}}/{{language}}">{{trait.combo2.name}}</a>
+        }
+      </p>
+    }
+    <p>{{trait.desc}}</p>
+    <div class="trait-grid" style="grid-template-columns: auto auto auto auto auto;">
+      @for (t of [
+          [trait.trans_syn,  'type-synthesis'],
+          [trait.trans_atk,  'type-attack'],
+          [trait.trans_heal, 'type-heal'],
+          [trait.trans_dbf,  'type-debuff'],
+          [trait.trans_buff, 'type-buff'],
+          [trait.trans_wpn,  'type-weapon'],
+          [trait.trans_arm,  'type-armor'],
+          [trait.trans_acc,  'type-accessory'],
+          [trait.trans_tal,  'category-talismans'],
+          [trait.trans_exp,  'type-exploration'],
+        ]; track $index) {
+        <svg [style]="!t[0] ? 'fill:lightgray;' : null">
+          <use attr.href="/media/spritesheets/A23.svg?v=1#{{t[1]}}"></use>
+        </svg>
+      }
+    </div>
+  </div>
+}

@@ -1,0 +1,80 @@
+@if (!error) {
+  <ng-template #template let-item="item">
+    <item
+      [item]="item"
+      url="/{{gameURL}}/items/{{item.slug}}/{{language}}"
+      imgURL="{{imgURL}}items/{{item.slug}}.webp?v=1"
+      (buttonClicked)="openDialog($event)"
+      dimension="256">
+      <ng-container icon>
+        <svg class="svg-icon"><use attr.href="/media/spritesheets/{{itemkinds[item.kind]}}"></use></svg>
+        @if (item.isDLC) {
+          <br /><span class="badge bg-primary">DLC</span>
+        }
+      </ng-container>
+      <ul class="two-column" style="padding-left: 0; height: 100%;">
+        @for (cat of item.categories; track cat) {
+          <li style="display: flex;">
+            <svg class="svg-icon"><use attr.href="/media/spritesheets/A23.svg?v=1#category-{{cat.slug}}"></use></svg>
+            {{cat.name}}
+          </li>
+        }
+        @for (cat of item.add; track cat) {
+          <li style="display: flex;">
+            <svg class="svg-icon" style="fill:lightgray"><use attr.href="/media/spritesheets/A23.svg?v=1#category-{{cat.slug}}"></use></svg>
+            {{cat.name}}
+          </li>
+        }
+      </ul>
+    </item>
+  </ng-template>
+  <filter-list
+    [list]="filteredItems"
+    name="{{a23service.item_translation[language]}}"
+    [(hide)]="hide"
+    [template]="template">
+    <form [formGroup]="pageForm" class="grid">
+      <mat-form-field class="grid-8" appearance="outline">
+        <mat-label>{{a23service.filter_translation[language]}}</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtertext">
+        <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="grid-4" appearance="outline">
+        <mat-label>{{a23service.category_translation[language]}}</mat-label>
+        <mat-select matNativeControl formControlName="cat" disableOptionCentering="true" class="mat-select-icon">
+          <mat-option value="Any"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"   ></mat-icon>--</mat-option>
+          @if (data) {
+            @for (cat of data.categories; track cat) {
+              <mat-option value="{{cat.name}}" class="svg-icon-text-vertical-center">
+                <svg class="svg-icon"><use attr.href="/media/spritesheets/A23.svg?v=1#category-{{cat.slug}}"></use></svg>
+                {{cat.name}}
+              </mat-option>
+            }
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="grid-5" appearance="outline">
+        <mat-label>{{a23service.ingredient_translation[language]}}</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtering">
+      </mat-form-field>
+      <mat-form-field class="grid-4" appearance="outline">
+        <mat-label>Type</mat-label>
+        <mat-select matNativeControl formControlName="kind" disableOptionCentering="true" class="mat-select-icon">
+          <mat-option class="svg-icon-text-vertical-center" value="Any"        ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#book"></use></svg>--</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="attack"     ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#type-attack"></use></svg>Attack</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="heal"       ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#type-heal"></use></svg>Heal</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="debuffer"   ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#type-debuff"></use></svg>Debuff</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="buffer"     ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#type-buff"></use></svg>Buff</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="weapon"     ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#type-weapon"></use></svg>Weapon</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="armor"      ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#type-armor"></use></svg>Armor</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="accessory"  ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#type-accessory"></use></svg>Accessory</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="mix"        ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#type-synthesis"></use></svg>Synthesis</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="material"   ><svg class="svg-icon"><use href="/media/spritesheets/main.svg?v=1#ryza2-material"></use></svg>Material</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="field"      ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#type-exploration"></use></svg>Exploration</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="amulet"     ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#category-talismans"></use></svg>Talisman</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="important"  ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#category-key-items"></use></svg>Key Item</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </filter-list>
+}

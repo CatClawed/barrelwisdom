@@ -6,12 +6,12 @@
       </h4>
       <div class="card-icon-position">
         @if (it.material[0].traits) {
-          <svg style="width:3rem;height:3rem;"><use attr.href="/media/spritesheets/A25.svg?v=2#{{it.material[0].traits[0].kind}}"></use></svg>
+          <svg style="width:3rem;height:3rem;"><use attr.href="/media/spritesheets/A25.svg?v=1#{{it.material[0].traits[0].kind}}"></use></svg>
         }
       </div>
       <a class="card-item-display" style="position: relative;" (click)="openDialog(it.slug, $event);" href="/{{gameURL}}/items/materials/{{it.slug}}/{{language}}">
         <svg class="f{{it.rarity}} resleri-item-bg">
-            <use href="/media/spritesheets/A25.svg?v=-2#item-frame"></use>
+            <use href="/media/spritesheets/A25.svg?v=1#item-frame"></use>
         </svg>
         <img loading="lazy" class="resleri-item-frame" height="256" width="256"
           src="{{imgURL}}items/{{it.slug}}.webp" alt="{{it.name}}">
@@ -37,7 +37,7 @@
           </ul>
         }
         <button (click)="openDialog(it.slug)" class="card-read-more-position" mat-mini-fab color="primary">
-          <svg><use href="/media/spritesheets/main.svg?v=-1#fa-vertical-ellipsis"></use></svg>
+          <svg><use href="/media/spritesheets/main.svg?v=1#fa-vertical-ellipsis"></use></svg>
         </button>
       </div>
   </ng-template>

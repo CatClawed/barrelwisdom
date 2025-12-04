@@ -55,13 +55,13 @@ export class A25CharaFrameComponent {
     if (this.collectionMode) {
       if (this.collection.characters[id]) {
         if (this.starMap[this.collection.characters[id]][1]) {
-          stars[1] = `<svg><use href="/media/spritesheets/main.svg?v=-1#fa-half-star"></use></svg>`;
+          stars[1] = `<svg><use href="/media/spritesheets/main.svg?v=1#fa-half-star"></use></svg>`;
         }
         limit = this.starMap[this.collection.characters[id]][0]
       }
     }
     for (let i = 0; i < limit; i++) {
-      stars[0] += '<svg><use href="/media/spritesheets/main.svg?v=-1#fa-star"></use></svg>'
+      stars[0] += '<svg><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg>'
     }
     return this.sanitizer.bypassSecurityTrustHtml(stars[0] + stars[1]);
   }

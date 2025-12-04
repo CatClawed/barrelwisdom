@@ -76,6 +76,10 @@ export const routes: Routes = [
     path: '',
     children: [
       {
+        path: 'sophie2',
+        loadChildren: ()=> import('@app/views/games/A23/a23-routing.module').then(m=>m.A23RoutingModule),
+      },
+      {
         path: 'resleri',
         loadChildren: ()=> import('@app/views/games/A25/a25-routing.module').then(m=>m.A25RoutingModule),
       },

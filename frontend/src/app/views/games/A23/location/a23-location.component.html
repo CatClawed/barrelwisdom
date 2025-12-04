@@ -1,0 +1,121 @@
+@if (data; as region) {
+  <h1>{{region.name}}</h1>
+  <div style="margin-left: 0.5em; margin-right: 0.5em;">
+    <div class="table-of-contents">
+      <b>Table of Contents</b>
+      <ol class="toc-list">
+        @for (area of region.areas; track area) {
+          <li>
+            <a href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}"
+              (click)="$event.preventDefault();scroll(area.slug,region.slug)">
+              {{area.name}}
+            </a>
+            @if (area.climate.length > 1) {
+              <ul>
+                @for (climate of area.climate; track climate) {
+                  <li>
+                    @if (climate.weather == 'sun') {
+                      <a     href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather,'locations/'+region.slug)">Sun</a>
+                    }
+                    @if (climate.weather == 'rain') {
+                      <a    href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather,'locations/'+region.slug)">Rain</a>
+                    }
+                    @if (climate.weather == 'snow') {
+                      <a    href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather,'locations/'+region.slug)">Snow</a>
+                    }
+                    @if (climate.weather == 'thunder') {
+                      <a href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}-{{climate.weather}}" (click)="$event.preventDefault();scroll(area.slug+'-'+climate.weather,'locations/'+region.slug)">Thunder</a>
+                    }
+                  </li>
+                }
+              </ul>
+            }
+          </li>
+        }
+      </ol>
+    </div>
+  </div>
+  <form [formGroup]="pageForm" class="grid">
+    <mat-form-field class="grid-12" appearance="outline">
+      <mat-label>{{a23service.filter_translation[language]}}</mat-label>
+      <input matInput formControlName="filtertext">
+    </mat-form-field>
+  </form>
+  @for (area of region.areas; track area) {
+    <div id="{{area.slug}}">
+      <h2>{{area.name}}</h2>
+      @if (area.chests) {
+        <b>Chest:</b>
+      }
+      @if (area.chests) {
+        <ul>
+          @for (chest of area.chests; track chest) {
+            <li>
+              @if (chest.item) {
+                <a routerLink="/{{gameURL}}/items/{{chest.item.slug}}/{{language}}">{{chest.item.name}}</a>
+              }
+              @if (chest.book) {
+                <a routerLink="/{{gameURL}}/items/books/{{chest.book.slug}}/{{language}}">{{chest.book.name}}</a>
+              }
+            </li>
+          }
+        </ul>
+      }
+      @for (climate of area.climate; track climate) {
+        @if (climate.weather == 'sun') {
+          <h3 id="{{area.slug}}-{{climate.weather}}"    >Sun</h3>
+        }
+        @if (climate.weather == 'rain') {
+          <h3 id="{{area.slug}}-{{climate.weather}}"   >Rain</h3>
+        }
+        @if (climate.weather == 'snow') {
+          <h3 id="{{area.slug}}-{{climate.weather}}"   >Snow</h3>
+        }
+        @if (climate.weather == 'thunder') {
+          <h3 id="{{area.slug}}-{{climate.weather}}">Thunder</h3>
+        }
+        @if (climate.mons) {
+          <b>Monsters:</b>
+        }
+        @if (climate.mons) {
+          <ul>
+            @for (mon of climate.mons; track mon) {
+              <li>
+                <a routerLink="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a>
+              </li>
+            }
+          </ul>
+        }
+        <table class="tbl borders" ><tbody>
+          <tr>
+            <th>Tool</th>
+            <th><svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg></th>
+            <th><svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg><svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg></th>
+            <th><svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg><svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg><svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg></th>
+          </tr>
+          @for (node of climate.nodes; track node) {
+            @if (validNode(node)) {
+              <tr>
+                <ng-template #typePopover>
+                  {{node.kind}}
+                </ng-template>
+                  <td style="text-align: center;vertical-align: middle;">
+                    <svg class="svg-icon" [style]="node.kind.startsWith('major') ? `fill:darkorange;` : null"><use attr.href="/media/spritesheets/A23.svg?v=1#{{gather[node.tool]}}"></use></svg>
+                    <popover name="Gather Type"
+                      [template]="typePopover">
+                      <svg class="a23-plus-icon"><use href="/media/spritesheets/A23.svg?v=1#fa-square-plus"></use></svg>
+                    </popover>
+                  </td>
+                @for (item of node.items; track item) {
+                  <td>
+                    <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a><br/>{{item.priority}}%
+                  </td>
+                }
+              </tr>
+            }
+          }
+        </tbody></table>
+      }
+    </div>
+  }
+}

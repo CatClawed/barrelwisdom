@@ -1,0 +1,30 @@
+@if (data; as category) {
+  <ng-template #cat let-item="item" let-add="add">
+    <tr>
+      <td>
+        <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a> @if(add) { (Add) }
+        @if (item.isDLC) {
+          <span class="badge bg-primary" style="margin-left:0.2rem;">DLC</span>
+        }
+      </td>
+    </tr>
+  </ng-template>
+  <category
+    [name]="category.name"
+    [using]="category.used !== undefined"
+    [colspan]="2">
+    <ng-container inCategory>
+      @for (item of category.items; track item) {
+        <ng-content *ngTemplateOutlet="cat;context:{item:item,add:false}"></ng-content>
+      }
+      @for (item of category.add; track item) {
+        <ng-content *ngTemplateOutlet="cat;context:{item:item,add:true}"></ng-content>
+      }
+    </ng-container>
+    <ng-container usingCategory>
+      @for (item of category.used; track item) {
+        <ng-content *ngTemplateOutlet="cat;context:{item:item.synth,add:false}"></ng-content>
+      }
+    </ng-container>
+  </category>
+}

@@ -26,7 +26,7 @@
       <ul style="padding-left: 0;">
         @for (cat of item.cats; track cat) {
           <li style="display: flex;">
-            <svg class="a26-icon"><use attr.href="/media/spritesheets/A26.svg?v=2#{{category_to_icon[cat.id]}}"></use></svg>
+            <svg class="a26-icon"><use attr.href="/media/spritesheets/A26.svg?v=1#{{category_to_icon[cat.id]}}"></use></svg>
             <a routerLink="/{{gameURL}}/categories/{{cat.id}}/{{language}}">{{cat.name}}</a>
           </li>
         }
@@ -35,7 +35,7 @@
         <ul style="padding-left: 0;">
           @for (mat of item.mats; track mat) {
             <li style="display: flex;">
-              <svg class="a26-icon"><use attr.href="/media/spritesheets/A26.svg?v=2#material-{{mat.id}}"></use></svg>
+              <svg class="a26-icon"><use attr.href="/media/spritesheets/A26.svg?v=1#material-{{mat.id}}"></use></svg>
               {{mat.name}}
             </li>
           }
@@ -45,14 +45,14 @@
     @if (item.resonance) {
       <div class="two-column">
         <div style="break-inside: avoid-column;">
-          <svg style="background-color:{{item.fire ? a26service.elements['fire'] : a26service.elements['none']}};" class="a26-elements"><use href="/media/spritesheets/A26.svg?v=2#fire"></use></svg>
-          <svg style="background-color:{{item.ice  ? a26service.elements['ice']  : a26service.elements['none']}};" class="a26-elements"><use href="/media/spritesheets/A26.svg?v=2#ice" ></use></svg>
-          <svg style="background-color:{{item.bolt ? a26service.elements['bolt'] : a26service.elements['none']}};" class="a26-elements"><use href="/media/spritesheets/A26.svg?v=2#bolt"></use></svg>
-          <svg style="background-color:{{item.air  ? a26service.elements['air']  : a26service.elements['none']}};" class="a26-elements"><use href="/media/spritesheets/A26.svg?v=2#air" ></use></svg>
+          <svg style="background-color:{{item.fire ? a26service.elements['fire'] : a26service.elements['none']}};" class="a26-elements"><use href="/media/spritesheets/A26.svg?v=1#fire"></use></svg>
+          <svg style="background-color:{{item.ice  ? a26service.elements['ice']  : a26service.elements['none']}};" class="a26-elements"><use href="/media/spritesheets/A26.svg?v=1#ice" ></use></svg>
+          <svg style="background-color:{{item.bolt ? a26service.elements['bolt'] : a26service.elements['none']}};" class="a26-elements"><use href="/media/spritesheets/A26.svg?v=1#bolt"></use></svg>
+          <svg style="background-color:{{item.air  ? a26service.elements['air']  : a26service.elements['none']}};" class="a26-elements"><use href="/media/spritesheets/A26.svg?v=1#air" ></use></svg>
         </div>
           @if (item.resonance) {
             <div style="display:flex;">
-              <svg class="a26-icon"><use href="/media/spritesheets/A26.svg?v=2#resonance"></use></svg> {{item.resonance}} - {{item.resonance+5}}
+              <svg class="a26-icon"><use href="/media/spritesheets/A26.svg?v=1#resonance"></use></svg> {{item.resonance}} - {{item.resonance+5}}
             </div>
           }
       </div>
@@ -94,7 +94,7 @@
     }
 
     @if (item.comfort_goal) {
-      <p><b>{{a26service.comfort_translation[language]}} </b>{{item.comfort_goal}} (see map) <svg><use href="/media/spritesheets/main.svg?v=-1#fa-arrow-down"></use></svg></p>
+      <p><b>{{a26service.comfort_translation[language]}} </b>{{item.comfort_goal}} (see map) <svg><use href="/media/spritesheets/main.svg?v=1#fa-arrow-down"></use></svg></p>
     }
 
     @if (item.rank) {
@@ -167,10 +167,10 @@
       <table class="tbl"><tbody>
         <tr><th colspan=2>
           <div style="display:inline-flex"><span style="padding-right: 0.2em;">Level Data</span>
-          @if (item.recipe.level[0].fire) { <svg style="background-color:{{a26service.elements['fire']}};" class="a26-elements"><use href="/media/spritesheets/A26.svg?v=2#fire"></use></svg> }
-          @if (item.recipe.level[0].ice)  { <svg style="background-color:{{a26service.elements['ice'] }};" class="a26-elements"><use href="/media/spritesheets/A26.svg?v=2#ice" ></use></svg> }
-          @if (item.recipe.level[0].bolt) { <svg style="background-color:{{a26service.elements['bolt']}};" class="a26-elements"><use href="/media/spritesheets/A26.svg?v=2#bolt"></use></svg> }
-          @if (item.recipe.level[0].air)  { <svg style="background-color:{{a26service.elements['air'] }};" class="a26-elements"><use href="/media/spritesheets/A26.svg?v=2#air" ></use></svg> }
+          @if (item.recipe.level[0].fire) { <svg style="background-color:{{a26service.elements['fire']}};" class="a26-elements"><use href="/media/spritesheets/A26.svg?v=1#fire"></use></svg> }
+          @if (item.recipe.level[0].ice)  { <svg style="background-color:{{a26service.elements['ice'] }};" class="a26-elements"><use href="/media/spritesheets/A26.svg?v=1#ice" ></use></svg> }
+          @if (item.recipe.level[0].bolt) { <svg style="background-color:{{a26service.elements['bolt']}};" class="a26-elements"><use href="/media/spritesheets/A26.svg?v=1#bolt"></use></svg> }
+          @if (item.recipe.level[0].air)  { <svg style="background-color:{{a26service.elements['air'] }};" class="a26-elements"><use href="/media/spritesheets/A26.svg?v=1#air" ></use></svg> }
           </div>
         </th></tr>
         @for (level of item.recipe.level; track level) {

@@ -7,7 +7,7 @@
       dimension="256"
       imgURL="media/games/yumia/monsters/{{mon.id}}.webp?v=1">
       <ng-container icon>
-        <svg class="a26-monster-icon"><use attr.href="/media/spritesheets/A26.svg?v=2#race-{{mon.race.id}}"></use></svg>
+        <svg class="a26-monster-icon"><use attr.href="/media/spritesheets/A26.svg?v=1#race-{{mon.race.id}}"></use></svg>
       </ng-container>
     </item>
   </ng-template>
@@ -25,7 +25,7 @@
             @for (race of data.races; track race) {
               <mat-option value="{{race.name}}">
                 <div class="a26-icon-text-vertical-center">
-                  <svg class="a26-icon"><use attr.href="/media/spritesheets/A26.svg?v=2#race-{{race.id}}"></use></svg>
+                  <svg class="a26-icon"><use attr.href="/media/spritesheets/A26.svg?v=1#race-{{race.id}}"></use></svg>
                   {{race.name}}
                 </div>
               </mat-option>

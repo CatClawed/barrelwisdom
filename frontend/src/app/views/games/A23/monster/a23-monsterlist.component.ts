@@ -1,0 +1,83 @@
+import { Component, inject } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
+import { ItemComponent } from '@app/views/_components/item/item.component';
+import { Monster } from '@app/views/games/A23/_services/a23.interface';
+import { A23Service } from '@app/views/games/A23/_services/a23.service';
+import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
+import { DialogUseComponent } from '@app/views/games/_prototype/dialog-use.component';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { A23MonsterComponent } from './a23-monster.component';
+
+@Component({
+    templateUrl: 'a23-monsterlist.component.html',
+    imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
+        ItemComponent, MatButtonModule]
+})
+
+export class A23MonsterlistComponent extends DialogUseComponent {
+  protected a23service = inject(A23Service);
+  filteredMonsters: Observable<Monster[]>;
+
+  constructor() {
+    super();
+    this.component = A23MonsterComponent;
+    this.pageForm = this.formBuilder.nonNullable.group({
+      filtertext: '',
+      type: ''
+    })
+  }
+
+  changeData() {
+    this.gameService(this.a23service, 'monsters');
+    this.genericSettings(this.a23service.monster_translation[this.language], `The list of monsters in ${this.gameTitle}.`);
+    this.pageForm.reset();
+    return this.a23service.getMonsterList(this.language);
+  }
+
+  override afterAssignment(): void {
+    this.filteredMonsters = this.pageForm.valueChanges.pipe(
+      startWith(null as Observable<Monster[]>),
+      map((search: any) => search ? this.filterT(search.filtertext, search.type) : this.data.slice())
+    );
+  }
+
+  private filterT(value: string, type: string): Monster[] {
+    this.hide = false;
+    let list: Monster[];
+    switch (type) {
+      case "2":
+        list = this.data.filter(mon => mon.kind == 'puni');
+        break;
+      case "3":
+        list = this.data.filter(mon => ["golem", "jellyfish"].includes(mon.kind));
+        break;
+      case "4":
+        list = this.data.filter(mon => ["rabbit", "bat", "bird", "dream-eater"].includes(mon.kind));
+        break;
+      case "5":
+        list = this.data.filter(mon => ["ghost", "apostle"].includes(mon.kind));
+        break;
+      case "6":
+        list = this.data.filter(mon => ["mushroom", "dryad"].includes(mon.kind));
+        break;
+      case "7":
+        list = this.data.filter(mon => ["dragonaire", "sea-serpent"].includes(mon.kind));
+        break;
+      case "8":
+        list = this.data.filter(mon => ["small-groll", "medium-groll", "elvira"].includes(mon.kind));
+        break;
+      default:
+        list = this.data;
+        break;
+    }
+    if (!value) {
+      return list;
+    }
+    const filterValue = value.toLowerCase();
+    return list.filter(mon => {
+      return mon.name.toLowerCase().includes(filterValue);
+    });
+  }
+}

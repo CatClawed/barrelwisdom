@@ -39,12 +39,12 @@
     <div class="grid-4" style="display:flex;padding-bottom:1rem;">
       <button [matMenuTriggerFor]="menuLeft" style="background:none;border:none;padding-right:0.3rem;">
         <svg style="width:2em;height:4em;" style="fill:{{changeFill(pageForm.get('colorL').value)}};">
-            <use href="/media/spritesheets/A25.svg?v=2#color-l"></use>
+            <use href="/media/spritesheets/A25.svg?v=1#color-l"></use>
         </svg>
       </button>
       <button [matMenuTriggerFor]="menuRight" style="background:none;border:none;padding-left:0.3rem;">
         <svg style="width:2em;height:4em;" style="fill:{{changeFill(pageForm.get('colorR').value)}};">
-            <use href="/media/spritesheets/A25.svg?v=2#color-r"></use>
+            <use href="/media/spritesheets/A25.svg?v=1#color-r"></use>
         </svg>
       </button>
       <mat-menu #menuLeft="matMenu">
@@ -74,7 +74,7 @@
     </div>
     <mat-checkbox class="grid-4" formControlName="six_star">
       <span class="svg-inline-text">
-      6 <svg><use href="/media/spritesheets/main.svg?v=-1#fa-star"></use></svg> Only
+      6 <svg><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg> Only
       </span>
     </mat-checkbox>
   </form>

@@ -1,7 +1,7 @@
 import { ServerRoute, RenderMode, PrerenderFallback } from '@angular/ssr';
 import { LanguageData } from '@environments/language-data';
 
-export const a26ServerRoutes: ServerRoute[] = [
+export const a25ServerRoutes: ServerRoute[] = [
   {
     path: 'resleri/characters/:language',
     renderMode: RenderMode.Prerender,
@@ -42,26 +42,16 @@ export const a26ServerRoutes: ServerRoute[] = [
         return LanguageData.languages['resleri'].map(language => ({language}))
     }
   },
-  { path: 'resleri/:itemkind/:subject', renderMode: RenderMode.Client },
-  { path: 'resleri/materials/:subject/:language', renderMode: RenderMode.Server },
-  { path: 'resleri/synthesis/:subject/:language', renderMode: RenderMode.Server },
-  { path: 'resleri/recipes/:subject/:language', renderMode: RenderMode.Server },
-  { path: 'resleri/traits', renderMode: RenderMode.Client },
+  { path: 'resleri/items/materials/:subject/:language', renderMode: RenderMode.Server },
+  { path: 'resleri/items/synthesis/:subject/:language', renderMode: RenderMode.Server },
   { path: 'resleri/traits/:subject/:language', renderMode: RenderMode.Server },
-  { path: 'resleri/characters', renderMode: RenderMode.Client },
   { path: 'resleri/characters/:subject/:language', renderMode: RenderMode.Server },
-  { path: 'resleri/research', renderMode: RenderMode.Client },
   { path: 'resleri/research/:language', renderMode: RenderMode.Server },
-  { path: 'resleri/home', renderMode: RenderMode.Client },
   { path: 'resleri/home/:language', renderMode: RenderMode.Server },
-  { path: 'resleri/memoria', renderMode: RenderMode.Client },
   { path: 'resleri/memoria/:language', renderMode: RenderMode.Server },
   { path: 'resleri/memoria/:subject/:language', renderMode: RenderMode.Server },
   { path: 'resleri/collect/*', renderMode: RenderMode.Client },
-  { path: 'resleri/quests/dungeons', renderMode: RenderMode.Client },
   { path: 'resleri/quests/dungeons/:language', renderMode: RenderMode.Server },
-  { path: 'resleri/quests/scorebattles', renderMode: RenderMode.Client },
   { path: 'resleri/quests/scorebattles/:language', renderMode: RenderMode.Server },
-  { path: 'resleri/quests/tower/:language', renderMode: RenderMode.Client },
-  { path: 'resleri/quests/tower/:language/:subject', renderMode: RenderMode.Server },
+  { path: 'resleri/quests/tower/:subject/:language', renderMode: RenderMode.Server },
 ];

@@ -15,7 +15,7 @@
         <ul style="padding-left: 0;">
           @for (cat of item.cats; track cat) {
             <li style="display: flex;">
-              <svg class="a26-icon"><use attr.href="/media/spritesheets/A26.svg?v=2#{{category_to_icon[cat.id]}}"></use></svg>
+              <svg class="a26-icon"><use attr.href="/media/spritesheets/A26.svg?v=1#{{category_to_icon[cat.id]}}"></use></svg>
               {{cat.name}}
             </li>
           }
@@ -24,7 +24,7 @@
           <ul style="padding-left: 0;">
             @for (mat of item.mats; track mat) {
               <li style="display: flex;">
-                <svg class="a26-icon"><use attr.href="/media/spritesheets/A26.svg?v=2#material-{{mat.id}}"></use></svg>
+                <svg class="a26-icon"><use attr.href="/media/spritesheets/A26.svg?v=1#material-{{mat.id}}"></use></svg>
                 {{mat.name}}
               </li>
             }
@@ -34,14 +34,14 @@
       @if (item.resonance) {
         <div class="two-column">
           <div style="break-inside: avoid-column;">
-            <svg style="background-color:{{item.fire ? a26service.elements['fire'] : a26service.elements['none']}};" class="a26-elements"><use href="/media/spritesheets/A26.svg?v=2#fire"></use></svg>
-            <svg style="background-color:{{item.ice  ? a26service.elements['ice']  : a26service.elements['none']}};" class="a26-elements"><use href="/media/spritesheets/A26.svg?v=2#ice" ></use></svg>
-            <svg style="background-color:{{item.bolt ? a26service.elements['bolt'] : a26service.elements['none']}};" class="a26-elements"><use href="/media/spritesheets/A26.svg?v=2#bolt"></use></svg>
-            <svg style="background-color:{{item.air  ? a26service.elements['air']  : a26service.elements['none']}};" class="a26-elements"><use href="/media/spritesheets/A26.svg?v=2#air" ></use></svg>
+            <svg style="background-color:{{item.fire ? a26service.elements['fire'] : a26service.elements['none']}};" class="a26-elements"><use href="/media/spritesheets/A26.svg?v=1#fire"></use></svg>
+            <svg style="background-color:{{item.ice  ? a26service.elements['ice']  : a26service.elements['none']}};" class="a26-elements"><use href="/media/spritesheets/A26.svg?v=1#ice" ></use></svg>
+            <svg style="background-color:{{item.bolt ? a26service.elements['bolt'] : a26service.elements['none']}};" class="a26-elements"><use href="/media/spritesheets/A26.svg?v=1#bolt"></use></svg>
+            <svg style="background-color:{{item.air  ? a26service.elements['air']  : a26service.elements['none']}};" class="a26-elements"><use href="/media/spritesheets/A26.svg?v=1#air" ></use></svg>
           </div>
             @if (item.resonance) {
               <div style="display:flex;">
-                <svg class="a26-icon"><use href="/media/spritesheets/A26.svg?v=2#resonance"></use></svg> {{item.resonance}} - {{item.resonance+5}}
+                <svg class="a26-icon"><use href="/media/spritesheets/A26.svg?v=1#resonance"></use></svg> {{item.resonance}} - {{item.resonance+5}}
               </div>
             }
         </div>
@@ -66,7 +66,7 @@
             @for (cat of data.categories; track cat) {
               <mat-option value="{{cat.name}}">
                 <div class="a26-icon-text-vertical-center">
-                  <svg class="a26-icon"><use attr.href="/media/spritesheets/A26.svg?v=2#{{category_to_icon[cat.id]}}"></use></svg>
+                  <svg class="a26-icon"><use attr.href="/media/spritesheets/A26.svg?v=1#{{category_to_icon[cat.id]}}"></use></svg>
                   {{cat.name}}
                 </div>
               </mat-option>
@@ -80,30 +80,28 @@
           <mat-option value="--" selected><div class="a26-icon-text-vertical-center"><div class="a26-icon"></div>--</div></mat-option>
           @if (data) {
             @for (mat of data.materials; track mat) {
-              <mat-option value="{{mat.name}}">
-                <div class="a26-icon-text-vertical-center">
-                  <svg class="a26-icon"><use attr.href="/media/spritesheets/A26.svg?v=2#material-{{mat.id}}"></use></svg>
-                  {{mat.name}}
-                </div>
+              <mat-option value="{{mat.name}}" class="svg-icon-text-vertical-center">
+                <svg class="a26-icon"><use attr.href="/media/spritesheets/A26.svg?v=1#material-{{mat.id}}"></use></svg>
+                {{mat.name}}
               </mat-option>
             }
           }
         </mat-select>
       </mat-form-field>
       <div class="grid-6 svg-filter">
-        <svg (click)="toggle(this.pageForm.controls.fire)" class="a26-elements" style="margin-right:0.8em;width:2.3em;height:2.3em;background-color:{{pageForm.controls.fire.value ? a26service.elements['fire'] : a26service.elements['none']}};"><use href="/media/spritesheets/A26.svg?v=2#fire"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.ice)"  class="a26-elements" style="margin-right:0.8em;width:2.3em;height:2.3em;background-color:{{pageForm.controls.ice.value  ? a26service.elements['ice']  : a26service.elements['none']}};"><use href="/media/spritesheets/A26.svg?v=2#ice"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.bolt)" class="a26-elements" style="margin-right:0.8em;width:2.3em;height:2.3em;background-color:{{pageForm.controls.bolt.value ? a26service.elements['bolt'] : a26service.elements['none']}};"><use href="/media/spritesheets/A26.svg?v=2#bolt"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.air)"  class="a26-elements" style="margin-right:0.8em;width:2.3em;height:2.3em;background-color:{{pageForm.controls.air.value  ? a26service.elements['air']  : a26service.elements['none']}};"><use href="/media/spritesheets/A26.svg?v=2#air"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.fire)" class="a26-elements" style="margin-right:0.8em;width:2.3em;height:2.3em;background-color:{{pageForm.controls.fire.value ? a26service.elements['fire'] : a26service.elements['none']}};"><use href="/media/spritesheets/A26.svg?v=1#fire"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.ice)"  class="a26-elements" style="margin-right:0.8em;width:2.3em;height:2.3em;background-color:{{pageForm.controls.ice.value  ? a26service.elements['ice']  : a26service.elements['none']}};"><use href="/media/spritesheets/A26.svg?v=1#ice"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.bolt)" class="a26-elements" style="margin-right:0.8em;width:2.3em;height:2.3em;background-color:{{pageForm.controls.bolt.value ? a26service.elements['bolt'] : a26service.elements['none']}};"><use href="/media/spritesheets/A26.svg?v=1#bolt"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.air)"  class="a26-elements" style="margin-right:0.8em;width:2.3em;height:2.3em;background-color:{{pageForm.controls.air.value  ? a26service.elements['air']  : a26service.elements['none']}};"><use href="/media/spritesheets/A26.svg?v=1#air"></use></svg>
       </div>
       <div class="grid-6 svg-filter">
-        <svg (click)="toggle(this.pageForm.controls.gather, things)"     style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.gather.value  ? 'black' : 'gray'}};"><use href="/media/spritesheets/A26.svg?v=2#items"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.consumable, things)" style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.consumable.value ? 'black' : 'gray'}};"><use href="/media/spritesheets/A26.svg?v=2#category-bombs"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.synth, things)"      style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.synth.value ? 'black' : 'gray'}};"><use href="/media/spritesheets/A26.svg?v=2#synth"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.equip, things)"      style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.equip.value ? 'black' : 'gray'}};"><use href="/media/spritesheets/A26.svg?v=2#equip"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.explore, things)"    style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.explore.value  ? 'black' : 'gray'}};"><use href="/media/spritesheets/A26.svg?v=2#exploration"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.key, things)"        style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.key.value  ? 'black' : 'gray'}};"><use href="/media/spritesheets/A26.svg?v=2#category-key-items"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.furniture, things)"                     style="width:2.3em;height:2.3em;fill:{{pageForm.controls.furniture.value  ? 'black' : 'gray'}};"><use href="/media/spritesheets/A26.svg?v=2#category-interior"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.gather, things)"     style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.gather.value  ? 'black' : 'gray'}};"><use href="/media/spritesheets/A26.svg?v=1#items"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.consumable, things)" style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.consumable.value ? 'black' : 'gray'}};"><use href="/media/spritesheets/A26.svg?v=1#category-bombs"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.synth, things)"      style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.synth.value ? 'black' : 'gray'}};"><use href="/media/spritesheets/A26.svg?v=1#synth"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.equip, things)"      style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.equip.value ? 'black' : 'gray'}};"><use href="/media/spritesheets/A26.svg?v=1#equip"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.explore, things)"    style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.explore.value  ? 'black' : 'gray'}};"><use href="/media/spritesheets/A26.svg?v=1#exploration"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.key, things)"        style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.key.value  ? 'black' : 'gray'}};"><use href="/media/spritesheets/A26.svg?v=1#category-key-items"></use></svg>
+        <svg (click)="toggle(this.pageForm.controls.furniture, things)"                     style="width:2.3em;height:2.3em;fill:{{pageForm.controls.furniture.value  ? 'black' : 'gray'}};"><use href="/media/spritesheets/A26.svg?v=1#category-interior"></use></svg>
       </div>
     </form>
   </filter-list>
