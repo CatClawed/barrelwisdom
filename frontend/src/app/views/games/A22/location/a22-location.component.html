@@ -1,0 +1,72 @@
+@if (data; as region) {
+  <div>
+    <h1>{{region.name}}</h1>
+    <div class="table-of-contents">
+      <b>Table of Contents</b>
+      <ol class="toc-list">
+        @for (area of region.areas; track area) {
+          <li>
+            <a href="/{{gameURL}}/locations/{{region.slug}}/{{language}}#{{area.slug}}"
+              (click)="$event.preventDefault();scroll(area.slug, region.slug)">
+              {{area.name}}
+            </a>
+          </li>
+        }
+      </ol>
+    </div>
+    @for (area of region.areas; track area) {
+      <div id="{{area.slug}}">
+        <h2>{{area.name}}</h2>
+        <table class="tbl borders a22-gather-table" ><tbody>
+          <tr>
+            <th>Tool</th>
+            <th><svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg></th>
+            <th><svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg><svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg></th>
+            <th><svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg><svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg><svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg></th>
+          </tr>
+          @for (node of area.gatherdata; track node) {
+            <tr>
+              @if (node.tool != 'Dig') {
+                <td>
+                  @if (node.tool == 'All' || node.tool == 'Staff') { <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=0#tool-staff"></use></svg> }
+                  @if (node.tool == 'Hand' || !node.tool)          { <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=0#tool-gather"></use></svg> }
+                  @if (node.tool == 'Axe')                         { <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=0#tool-axe"></use></svg> }
+                  @if (node.tool == 'Sickle')                      { <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=0#tool-sickle"></use></svg> }
+                  @if (node.tool == 'Bomb Rod')                    { <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=0#tool-bomb-rod"></use></svg> }
+                  @if (node.tool == 'Bug Net')                     { <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=0#tool-bug-net"></use></svg> }
+                  @if (node.tool == 'Fishing Rod')                 { <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=0#tool-fishing-rod"></use></svg> }
+                </td>
+                <td>
+                  <a routerLink="/{{gameURL}}/items/{{node.rank1.slug}}/{{language}}">{{node.rank1.name}}</a><br/>{{node.priority1}}
+                </td>
+                <td>
+                  @if (node.rank2) { <a routerLink="/{{gameURL}}/items/{{node.rank2.slug}}/{{language}}">{{node.rank2.name}}</a><br/>{{node.priority2}} }
+                </td>
+                <td>
+                  @if (node.rank3) { <a routerLink="/{{gameURL}}/items/{{node.rank3.slug}}/{{language}}">{{node.rank3.name}}</a><br/>{{node.priority3}} }
+                </td>
+              }
+            </tr>
+          }
+          @if (dig) {
+            <tr>
+              <td>
+                <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=0#race-weasel-king"></use></svg>
+              </td>
+              <td colspan="3">
+                <div style="column-count: 3;">
+                  <ul style="padding-left:1em;">
+                    @for (node of area.gatherdata; track node) {
+                      @if (node.tool == 'Dig') {
+                        <li><a routerLink="/{{gameURL}}/items/{{node.rank1.slug}}/{{language}}">{{node.rank1.name}}</a></li>
+                      }
+                    }
+                  </ul>
+                </div>
+              </tr>
+            }
+          </tbody></table>
+        </div>
+      }
+    </div>
+  }

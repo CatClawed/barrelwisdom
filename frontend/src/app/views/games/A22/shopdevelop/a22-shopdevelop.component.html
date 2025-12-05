@@ -1,0 +1,36 @@
+@if (!error) {
+  <h1>{{a22service.develop_translation[language]}}</h1>
+}
+@if (data; as shopdevelop) {
+  <table class="tbl-min borders"><tbody>
+    <tr>
+      <th>{{a22service.item_translation[language]}}</th>
+      <th>{{a22service.category_translation[language]}}</th>
+      <th>Bonus</th>
+    </tr>
+    @for (dev of shopdevelop; track dev) {
+      <tr>
+        <td><a routerLink="/{{gameURL}}/items/{{dev.item.slug}}/{{language}}">{{dev.item.name}}</a></td>
+        <td>
+          <a routerLink="/{{gameURL}}/categories/{{dev.cat1.slug}}/{{language}}">{{dev.cat1.name}}</a>
+          @if (dev.cat2) {
+            <br />
+            } @if (dev.cat2) {
+            <a routerLink="/{{gameURL}}/categories/{{dev.cat2.slug}}/{{language}}">{{dev.cat2.name}}</a>
+          }
+        </td>
+        <td>
+          @if (dev.addProd) {
+            <a routerLink="/{{gameURL}}/items/{{dev.addProd.slug}}/{{language}}">{{dev.addProd.name}}</a>
+          }
+          @if (dev.addProd && dev.addCat) {
+            <br />
+          }
+          @if (dev.addCat) {
+            <a routerLink="/{{gameURL}}/categories/{{dev.addCat.slug}}/{{language}}">{{dev.addCat.name}}</a>
+          }
+        </td>
+      </tr>
+    }
+  </tbody></table>
+}

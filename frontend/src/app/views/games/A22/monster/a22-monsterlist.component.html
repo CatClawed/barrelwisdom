@@ -1,0 +1,56 @@
+@if (!error) {
+  <ng-template #template let-mon="item">
+    <item
+      [item]="mon"
+      url="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}"
+      (buttonClicked)="openDialog($event)"
+      dimension="256"
+      imgURL="{{imgURL}}monsters/{{mon.slug}}.webp?v=1">
+      <ng-container icon>
+        @if (mon.montype != 'boss') {
+          <svg class="svg-icon-standard right-spacer"><use attr.href="/media/spritesheets/A22.svg?v=0#race-{{mon.montype}}"></use></svg>
+        }
+        @if (mon.montype == 'boss') {
+          <svg class="svg-icon-standard right-spacer"><use href="/media/spritesheets/A22.svg?v=0#boss-enemy"></use></svg>
+        }
+        <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A22.svg?v=0#{{mon.size.toLowerCase()}}-enemy"></use></svg>
+        @if (mon.isDLC) {
+          <br />
+          }@if (mon.isDLC) {
+          <span class="badge bg-primary">DLC</span>
+        }
+      </ng-container>
+    </item>
+  </ng-template>
+  <filter-list [list]="filteredMonsters" name="{{a22service.monster_translation[language]}}" [(hide)]="hide" [template]="template">
+    <form [formGroup]="pageForm" class="grid">
+      <mat-form-field class="grid-8" appearance="outline">
+        <mat-label>{{a22service.filter_translation[language]}}</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtertext">
+        <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="grid-4" appearance="outline">
+        <mat-label>{{a22service.race_translation[language]}}</mat-label>
+        <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
+          <mat-option class="svg-icon-text-vertical-center" value="1" selected><svg class="svg-icon-standard right-spacer"><use href="/media/spritesheets/A22.svg?v=0#book"></use></svg>--</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="puni"      ><svg class="svg-icon-standard right-spacer"><use href="/media/spritesheets/A22.svg?v=0#race-puni"></use></svg> Puni</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="weasel"    ><svg class="svg-icon-standard right-spacer"><use href="/media/spritesheets/A22.svg?v=0#race-weasel"></use></svg> Weasel</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="spirit"    ><svg class="svg-icon-standard right-spacer"><use href="/media/spritesheets/A22.svg?v=0#race-spirit"></use></svg> Spirit</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="golem"     ><svg class="svg-icon-standard right-spacer"><use href="/media/spritesheets/A22.svg?v=0#race-golem"></use></svg> Golem</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="sheep"     ><svg class="svg-icon-standard right-spacer"><use href="/media/spritesheets/A22.svg?v=0#race-sheep"></use></svg> Sheep</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="knight"    ><svg class="svg-icon-standard right-spacer"><use href="/media/spritesheets/A22.svg?v=0#race-knight"></use></svg> Knight</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="scorpion"  ><svg class="svg-icon-standard right-spacer"><use href="/media/spritesheets/A22.svg?v=0#race-scorpion"></use></svg> Scorpion</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="hedgehog"  ><svg class="svg-icon-standard right-spacer"><use href="/media/spritesheets/A22.svg?v=0#race-hedgehog"></use></svg> Hedgehog</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="wyrm"      ><svg class="svg-icon-standard right-spacer"><use href="/media/spritesheets/A22.svg?v=0#race-wyrm"></use></svg> Wyrm</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="roadrunner"><svg class="svg-icon-standard right-spacer"><use href="/media/spritesheets/A22.svg?v=0#race-roadrunner"></use></svg> Roadrunner</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="beetle"    ><svg class="svg-icon-standard right-spacer"><use href="/media/spritesheets/A22.svg?v=0#race-beetle"></use></svg> Beetle</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="shark"     ><svg class="svg-icon-standard right-spacer"><use href="/media/spritesheets/A22.svg?v=0#race-shark"></use></svg> Shark</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="Small"     ><svg class="svg-icon-standard right-spacer"><use href="/media/spritesheets/A22.svg?v=0#small-enemy"></use></svg> Small</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="Medium"    ><svg class="svg-icon-standard right-spacer"><use href="/media/spritesheets/A22.svg?v=0#medium-enemy"></use></svg> Medium</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="Large"     ><svg class="svg-icon-standard right-spacer"><use href="/media/spritesheets/A22.svg?v=0#large-enemy"></use></svg> Large</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="boss"      ><svg class="svg-icon-standard right-spacer"><use href="/media/spritesheets/A22.svg?v=0#boss-enemy"></use></svg> Boss</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </filter-list>
+}

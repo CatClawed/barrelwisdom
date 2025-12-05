@@ -1,0 +1,38 @@
+@if (!error) {
+  <ng-template #template let-item="item">
+    <a22-effect (buttonClicked)="openDialog($event)" [inputData]="item" [gameURL]="gameURL"
+      [hideContents]="true" [efftype]="efftype"></a22-effect>
+  </ng-template>
+  <filter-list
+    [list]="filteredEffects"
+    [(hide)]="hide"
+    [name]="normal ? a22service.effect_translation[language] : ev ? a22service.eveffect_translation[language] : a22service.forgeeffect_translation[language]"
+    [template]="template">
+    <form [formGroup]="pageForm" class="grid">
+      <mat-form-field class="grid-8" appearance="outline">
+        <mat-label>{{a22service.filter_translation[language]}}</mat-label>
+        <input matInput formControlName="filtertext">
+      </mat-form-field>
+      <mat-form-field class="grid-4" appearance="outline">
+        <mat-label>Type</mat-label>
+        <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
+          <mat-option class="svg-icon-text-vertical-center" value="1"><svg class="svg-icon"><use href="/media/spritesheets/A22.svg?v=0#type-synthesis"></use></svg>--</mat-option>
+          @if (forge) {
+            <mat-option class="svg-icon-text-vertical-center" value="Weapon"><svg class="svg-icon"><use href="/media/spritesheets/A22.svg?v=0#type-weapon"></use></svg>Weapon</mat-option>
+            <mat-option class="svg-icon-text-vertical-center" value="Armor" ><svg class="svg-icon"><use href="/media/spritesheets/A22.svg?v=0#type-armor"></use></svg>Armor</mat-option>
+          }
+          @if (ev) {
+            <mat-option class="svg-icon-text-vertical-center" value="Attack"><svg class="svg-icon"><use href="/media/spritesheets/A22.svg?v=0#type-attack"></use></svg>Attack</mat-option>
+            <mat-option class="svg-icon-text-vertical-center" value="Heal"  ><svg class="svg-icon"><use href="/media/spritesheets/A22.svg?v=0#type-heal"></use></svg>Heal</mat-option>
+          }
+          @if (forge || ev) {
+            <mat-option class="svg-icon-text-vertical-center" value="Accessory"><svg class="svg-icon"><use href="/media/spritesheets/A22.svg?v=0#type-accessory"></use></svg>Accessory</mat-option>
+          }
+          @if (normal) {
+            <mat-option class="svg-icon-text-vertical-center" value="Material"><svg class="svg-icon"><use href="/media/spritesheets/A22.svg?v=0#material"></use></svg>Material</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </filter-list>
+}

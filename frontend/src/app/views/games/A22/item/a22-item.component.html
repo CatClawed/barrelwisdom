@@ -1,0 +1,188 @@
+@if (data; as item) {
+  <div [class]="inputSlug ? 'card card-dialog' : 'card card-medium'">
+    <h4 class="card-title card-icon-space">{{item.name}}</h4>
+    <div class="card-icon-position">
+      <b style="padding-right:0.5em;">LV {{item.level}}</b>
+      <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A22.svg?v=0#{{icons[item.itemtype]}}"></use></svg>
+      @if (item.isDLC) {
+        <br />
+        <span class="btn btn-ryza2 bg-primary">DLC</span>
+      }
+    </div>
+    <img src="{{imgURL}}items/{{item.slug}}.webp?v=1" class="card-item-display"
+      alt="{{item.name}}" style="aspect-ratio: 1; width: 256px;">
+      <p>{{item.desc}}</p>
+      @if (item.note) {
+        <p><b>Note:</b> {{item.note}}</p>
+      }
+      <div class="two-column">
+        <ul>
+          @for (cat of item.category; track cat) {
+            <li>
+              <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A22.svg?v=0#category-{{cat.slug}}"></use></svg>
+              <a routerLink="/{{gameURL}}/categories/{{cat.slug}}">{{cat.name}}</a>
+            </li>
+          }
+        </ul>
+        <div>
+          <svg class="a22-element-icon" [style]="item.fire      ? 'fill:#f03a02;' : 'fill:lightgrey'"><use href="/media/spritesheets/A22.svg?v=0#fire"></use></svg>
+          <svg class="a22-element-icon" [style]="item.ice       ? 'fill:#04b5db;' : 'fill:lightgrey'"><use href="/media/spritesheets/A22.svg?v=0#ice"></use></svg>
+          <svg class="a22-element-icon" [style]="item.lightning ? 'fill:#e3bb05;' : 'fill:lightgrey'"><use href="/media/spritesheets/A22.svg?v=0#lightning"></use></svg>
+          <svg class="a22-element-icon" [style]="item.wind      ? 'fill:#589b1d;' : 'fill:lightgrey'"><use href="/media/spritesheets/A22.svg?v=0#wind"></use></svg>
+          @if (item.fire || item.wind || item.ice || item.lightning) {
+            {{item.elementvalue}}
+          }
+        </div>
+      </div>
+      @if (item.shop) {
+        <p><svg class="svg-inline-text"><use href="/media/spritesheets/A22.svg?v=0#category-shop"></use></svg><b>Shop:</b> {{item.shop.name}}</p>
+      }
+      @if (item.location) {
+        <b>{{a22service.location_translation[language]}}</b>
+      }
+      @if (item.location) {
+        <div style="column-count: 2;">
+          <ul style="padding-left:1.1em;margin-bottom:0">
+            @for (loc of item.location; track loc) {
+              <li>@if (loc.reg) {
+                <a routerLink="/{{gameURL}}/locations/{{loc.reg}}/{{language}}">{{loc.name}}</a>
+                }@if (!loc.reg) {
+                <a routerLink="/{{gameURL}}/locations/{{loc.slug}}/{{language}}">{{loc.name}}</a>
+              }</li>
+            }
+          </ul>
+        </div>
+      }
+      @if (item.monster_set) {
+        <b>{{a22service.monster_translation[language]}}</b>
+      }
+      @if (item.monster_set) {
+        <div style="column-count: 2;">
+          <ul style="padding-left:1.1em;margin-bottom:0">
+            @for (mon of item.monster_set; track mon) {
+              <li><a routerLink="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a></li>
+            }
+          </ul>
+        </div>
+      }
+      @if (item.itemtype == 'Material') {
+        @if (item.trait) {
+          <b>{{a22service.trait_translation[language]}}</b>
+          <ul style="padding-left:1.1em;margin-bottom:0">
+            @for (trait of item.trait; track trait) {
+              <li><a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">{{trait.name}}</a></li>
+            }
+          </ul>
+        }
+        @if (item.effectline_set) {
+          <b>{{a22service.effect_translation[language]}}</b> <a routerLink="/{{gameURL}}/effects/{{item.effectline_set[0].slug}}/{{language}}">{{item.effectline_set[0].name}}</a>
+        }
+      }
+      @if (item.itemtype != 'Material' && item.ingredient_set) {
+        @if (item.skilltree) {
+          <p><b>Acquired from skill tree.</b></p>
+        }
+        @if (item.evlinkitems_set) {
+          <p><b>EV Link: <a routerLink="/{{gameURL}}/items/{{item.evlinkitems_set[0].item1.slug}}">{{item.evlinkitems_set[0].item1.name}}</a> + <a routerLink="/{{gameURL}}/items/{{item.evlinkitems_set[0].item2.slug}}">{{item.evlinkitems_set[0].item2.name}}</a></b></p>
+        }
+        @if (item.recipemorphs_set) {
+          <b>Morph Chain:</b>
+          <div style="column-count: 2;">
+            <ol style="padding-left:1.1em;">
+              @for (recipe of item.recipemorphs_set; track recipe) {
+                <li><a routerLink="/{{gameURL}}/items/{{recipe.parent.slug}}/{{language}}">{{recipe.parent.name}}</a></li>
+              }
+            </ol>
+          </div>
+        }
+        @if (item.effectline_set) {
+          <table class="tbl"><tbody>
+            <tr><th colspan=2 >{{a22service.effect_translation[language]}}</th></tr>
+            @for (eff of effs; track eff; let index=$index) {
+              <tr>
+                <td style="vertical-align: middle;"><b>{{index+1}}</b></td><td>
+                @if (default[index][0]) {
+                  @if (default[index][1] != 'none') {
+                    <a routerLink="/{{gameURL}}/effects/{{default[index][1]}}/{{language}}"
+                      class="btn btn-ryza2 bg-primary">{{default[index][0]}}</a>
+                  }
+                  @if (default[index][1] == 'none') {
+                    <span class="btn btn-ryza2 bg-primary">{{default[index][0]}}</span>
+                  }
+                }
+                @for (e of eff; track e) {
+                  <a class="btn btn-ryza2 bg-secondary" routerLink="/{{gameURL}}/effects/{{e[1]}}/{{language}}">{{e[0]}}</a>
+                }
+                </td>
+              </tr>
+            }
+          </tbody></table>
+        }
+        @if (item.usableitem_set) {
+          <table class="tbl"><tbody>
+            <tr>
+              <th>WT</th>
+              <th>Stun</th>
+              <th>CC</th>
+              <th>Cool Time</th>
+              <th>Range</th>
+            </tr>
+            <tr style="text-align:center;">
+              <td>{{item.usableitem_set[0].wt}}</td>
+              <td>{{item.usableitem_set[0].stun}}</td>
+              <td>{{item.usableitem_set[0].cc}}</td>
+              <td>{{item.usableitem_set[0].cooltime}}</td>
+              <td>{{item.usableitem_set[0].effrange}}</td>
+            </tr>
+          </tbody></table>
+        }
+        @if (item.ingredient_set) {
+          <table class="tbl"><tbody>
+            <tr><th colspan=2>Synthesis</th></tr>
+            @for (ing of item.ingredient_set; track ing) {
+              <tr>
+                <td style="text-align: center;">
+                  @if (ing.item) {
+                    <a routerLink="/{{gameURL}}/items/{{ing.item.slug}}/{{language}}">{{ing.item.name}}</a>
+                  }
+                  @if (ing.category) {
+                    <a routerLink="/{{gameURL}}/categories/{{ing.category.slug}}/{{language}}">{{ing.category.name}}</a>
+                    }<br />
+                    @if (ing.fire     ) { <svg class="a22-element-icon" style="fill:#f03a02;"><use href="/media/spritesheets/A22.svg?v=0#fire"></use></svg> }
+                    @if (ing.ice      ) { <svg class="a22-element-icon" style="fill:#04b5db;"><use href="/media/spritesheets/A22.svg?v=0#ice"></use></svg> }
+                    @if (ing.lightning) { <svg class="a22-element-icon" style="fill:#e3bb05;"><use href="/media/spritesheets/A22.svg?v=0#lightning"></use></svg> }
+                    @if (ing.wind     ) { <svg class="a22-element-icon" style="fill:#589b1d;"><use href="/media/spritesheets/A22.svg?v=0#wind"></use></svg> }
+                  </td>
+                  <td>
+                    @for (i of ing.ingeffects_set; track i) {
+                      <ng-template #effPopover>
+                        @if (ing.fire     ) { <div style="display: flex;"><svg class="svg-icon-standard right-spacer" style="fill:#f03a02;"><use href="/media/spritesheets/A22.svg?v=0#fire"></use></svg> x {{i.value}}</div> }
+                        @if (ing.ice      ) { <div style="display: flex;"><svg class="svg-icon-standard right-spacer" style="fill:#04b5db;"><use href="/media/spritesheets/A22.svg?v=0#ice"></use></svg> x {{i.value}}</div> }
+                        @if (ing.lightning) { <div style="display: flex;"><svg class="svg-icon-standard right-spacer" style="fill:#e3bb05;"><use href="/media/spritesheets/A22.svg?v=0#lightning"></use></svg> x {{i.value}}</div> }
+                        @if (ing.wind     ) { <div style="display: flex;"><svg class="svg-icon-standard right-spacer" style="fill:#589b1d;"><use href="/media/spritesheets/A22.svg?v=0#wind"></use></svg> x {{i.value}}</div> }
+                        @if (i.essence    ) { <div style="display: flex;"><svg class="svg-icon-standard right-spacer" style="fill:black;" ><use href="/media/spritesheets/A22.svg?v=0#category-essence"></use></svg> Essence Required</div> }
+                      </ng-template>
+                      @if (i.noneffect && !i.essence) {
+                        <popover [template]="effPopover" display="inline-block" name="Synth Data" cls="btn btn-ryza2 bg-secondary">{{i.noneffect}}</popover>
+                      }
+                      @if (i.noneffect && i.essence) {
+                        <popover [template]="effPopover" display="inline-block" name="Synth Data" cls="btn btn-ryza2 bg-primary">{{i.noneffect}}</popover>
+                      }
+                      @if (i.effect    && !i.essence) {
+                        <popover [template]="effPopover" display="inline-block" name="Synth Data" cls="btn btn-ryza2 bg-secondary">{{i.effect}}</popover>
+                      }
+                      @if (i.effect    && i.essence) {
+                        <popover [template]="effPopover" display="inline-block" name="Synth Data" cls="btn btn-ryza2 bg-primary">{{i.effect}}</popover>
+                      }
+                      @if (i.morph) {
+                        <a class="btn btn-ryza2 bg-success" routerLink="/{{gameURL}}/items/{{i.morph.slug}}/{{language}}">{{i.morph.name}}</a>
+                      }
+                    }
+                  </td>
+                </tr>
+              }
+          </tbody></table>
+        }
+      }
+  </div>
+}
