@@ -2,23 +2,8 @@
 
 .two-column {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: auto auto;
   grid-column-gap: 1rem;
-
-  ul {
-    list-style: none;
-    padding-left: 0;
-  }
-
-  li {
-    break-inside: avoid-column;
-    vertical-align: middle;
-    display: flex;
-
-    svg {
-      margin-right: 0.5em;
-    }
-  }
 }
 
 .grid {
@@ -46,6 +31,7 @@
         grid-column: span 12;
       }
     }
+
     @else {
       .grid-#{$i} {
         grid-column: span #{$i+2};

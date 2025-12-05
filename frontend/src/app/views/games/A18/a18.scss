@@ -1,0 +1,75 @@
+.a18-item-data {
+    list-style: none;
+    padding-left: 0;
+
+    li {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-top: 0.15em;
+    }
+
+    svg {
+        margin-right: 0.5em;
+    }
+}
+
+.a18-talk-table {
+    tbody {
+        tr {
+            td:first-child {
+                width: 10%;
+
+                img {
+                    width: 82px;
+                    aspect-ratio: 1;
+                }
+            }
+
+            td:last-child {
+                width: 90%;
+                vertical-align: middle;
+            }
+        }
+    }
+}
+
+.a18-recipe-idea {
+    tr {
+        td:first-child {
+            text-align: center;
+            width: 15%;
+            vertical-align: middle;
+        }
+    }
+
+    ul {
+        margin-bottom: 0;
+    }
+}
+
+.a18-stats {
+    tr {
+        td:first-child {
+            padding: 0;
+        }
+        td:last-child {
+            padding: 0 0 0 0.5em;
+        }
+    }
+}
+
+.a18-weaknesses {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    justify-content: space-around;
+    row-gap: 0.5em;
+
+    svg {
+        height: 2em;
+        width: 2em;
+    }
+    span {
+        text-align: center;
+    }
+}

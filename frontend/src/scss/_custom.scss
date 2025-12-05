@@ -188,3 +188,18 @@
     width: 1.5em;
   }
 }
+
+.category-list {
+  list-style: none;
+  padding-left: 0;
+
+  li {
+    break-inside: avoid-column;
+    vertical-align: middle;
+    display: flex;
+
+    svg {
+      margin-right: 0.5em;
+    }
+  }
+}

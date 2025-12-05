@@ -1,0 +1,61 @@
+@if (!error) {
+  <ng-template #template let-item="item">
+    <item
+      [item]="item"
+      url="/{{gameURL}}/items/{{item.slug}}/{{language}}"
+      imgURL="{{imgURL}}items/{{item.slug}}.webp?v=1"
+      (buttonClicked)="openDialog($event)"
+      dimension="280">
+      <ng-container icon>
+        @if (item.isDLC) {
+          <span class="badge bg-primary">DLC</span>
+        }
+        @if (item.isDX) {
+          <span class="badge bg-primary">DX</span>
+        }
+      </ng-container>
+      <ul class="two-column category-list">
+        @for (cat of item.categories; track cat) {
+          <li>
+            <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=0#category-{{cat.slug}}"></use></svg>
+            {{cat.name}}
+          </li>
+        }
+      </ul>
+    </item>
+  </ng-template>
+  <filter-list
+    [list]="filteredItems"
+    name="Items"
+    [(hide)]="hide"
+    [template]="template">
+    <form [formGroup]="pageForm" class="grid">
+      <mat-form-field class="grid-8" appearance="outline">
+        <mat-label>Filter...</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtertext">
+        <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="grid-4" appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select matNativeControl formControlName="cat" disableOptionCentering="true" class="mat-select-icon">
+          <mat-option class="svg-icon-text-vertical-center" value="Any" selected>
+            <svg class="svg-icon"><use href="/media/spritesheets/A18.svg?v=0#book"></use></svg>
+            Any
+          </mat-option>
+          @if (data) {
+            @for (cat of data.categories; track cat) {
+              <mat-option class="svg-icon-text-vertical-center" value="{{cat.name}}">
+                <svg class="svg-icon"><use attr.href="/media/spritesheets/A18.svg?v=0#category-{{cat.slug}}"></use></svg>
+                {{cat.name}}
+              </mat-option>
+            }
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="grid-5" appearance="outline">
+        <mat-label>Has ingredient...</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtering">
+      </mat-form-field>
+    </form>
+  </filter-list>
+}

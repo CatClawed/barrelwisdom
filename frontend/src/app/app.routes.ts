@@ -96,11 +96,11 @@ export const routes: Routes = [
         path: 'shallie',
         loadChildren: ()=> import('@app/views/games/A16/a16-routing.module').then(m=>m.A16RoutingModule),
       },
+      */
       {
         path: 'firis',
         loadChildren: ()=> import('@app/views/games/A18/a18-routing.module').then(m=>m.A18RoutingModule),
       },
-      */
       {
         path: 'lulua',
         redirectTo: '/lulua/easy-final-boss-guide',
