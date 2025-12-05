@@ -1,0 +1,59 @@
+@if (data; as monster) {
+  <div [class]="inputSlug ? 'card card-dialog' : 'card card-medium'">
+    <h4 class="card-title card-icon-space">{{monster.name}}</h4>
+    <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A16.svg?v=0#race-{{monster.kind}}"></use></svg>
+    <img class="card-item-display" src="{{imgURL}}monsters/{{monster.slug}}.webp"
+      alt="{{monster.name}}" style="aspect-ratio: 1; width: 218px;">
+    @if (monster.desc) {
+      <p>{{monster.desc}}</p>
+    }
+    @if (monster.note) {
+      <p>{{monster.note}}</p>
+    }
+    <div class="grid">
+      <div class="grid-6">
+        @if (monster.locations) {
+          <b>Locations:</b>
+          <ul>
+            @for (loc of monster.locations; track loc) {
+              <li><a routerLink="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}" fragment="{{loc.slug}}">{{loc.name}}</a></li>
+            }
+          </ul>
+        }
+        @if (monster.item_set) {
+          <b>Drops:</b>
+          <ul>
+            @for (drop of monster.item_set; track drop) {
+              <li><a routerLink="/{{gameURL}}/items/{{drop.slug}}/{{language}}">{{drop.name}}</a></li>
+            }
+          </ul>
+        }
+      </div>
+      <div class="grid-6">
+        <table class="table-item-data a16-stats" ><tbody>
+          <tr>
+            <td><b>LV </b></td>  <td>{{monster.level}}</td>
+          </tr>
+          <tr>
+            <td><b>HP </b></td>  <td>{{monster.hp}}</td>
+          </tr>
+          <tr>
+            <td><b>ATK </b></td> <td>{{monster.atk}}</td>
+          </tr>
+          <tr>
+            <td><b>DEF </b></td> <td>{{monster.defen}}</td>
+          </tr>
+          <tr>
+            <td><b>SPD </b></td> <td>{{monster.spd}}</td>
+          </tr>
+          <tr>
+            <td><b>Exp </b></td>  <td>{{monster.exp}}</td>
+          </tr>
+          <tr>
+            <td><b>Cole </b></td>  <td>{{monster.cole}}</td>
+          </tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+}

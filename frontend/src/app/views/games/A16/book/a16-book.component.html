@@ -1,0 +1,21 @@
+@if (data; as book) {
+  <item
+    [item]="book"
+    [url]="inputData ? '/' + gameURL + '/recipe-books/' + book.slug + '/' + language : undefined"
+    imgURL="{{imgURL}}items/{{book.slug}}.webp?v=1"
+    (buttonClicked)="buttonClicked.emit($event)"
+    dimension="192"
+    [small]="inputData || inputSlug ? false : true"
+    [hideButton]="true">
+    @if (book.desc && !inputData) {
+      <p>{{book.desc}}</p>
+    }
+    <p><b>Acquisition: </b>{{book.note}}</p>
+    <b>Items:</b>
+    <ul class="two-column">
+      @for (item of book.items; track item) {
+        <li><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
+      }
+    </ul>
+  </item>
+}

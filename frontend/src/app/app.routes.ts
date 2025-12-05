@@ -92,11 +92,11 @@ export const routes: Routes = [
         path: 'escha',
         loadChildren: ()=> import('@app/views/games/A15/a15-routing.module').then(m=>m.A15RoutingModule),
       },
+      */
       {
         path: 'shallie',
         loadChildren: ()=> import('@app/views/games/A16/a16-routing.module').then(m=>m.A16RoutingModule),
       },
-      */
       {
         path: 'firis',
         loadChildren: ()=> import('@app/views/games/A18/a18-routing.module').then(m=>m.A18RoutingModule),

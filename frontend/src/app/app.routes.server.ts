@@ -1,4 +1,5 @@
 import { RenderMode, ServerRoute } from '@angular/ssr';
+import { a16ServerRoutes } from '@app/views/games/A16/a16-server-routing';
 import { a18ServerRoutes } from '@app/views/games/A18/a18-server-routing';
 import { a22ServerRoutes } from '@app/views/games/A22/a22-server-routing';
 import { a23ServerRoutes } from '@app/views/games/A23/a23-server-routing';
@@ -11,7 +12,7 @@ export const serverRoutes: ServerRoute[] = [
   //...brslServerRoutes,
   //...a12ServerRoutes,
   //...a15ServerRoutes,
-  //...a16ServerRoutes,
+  ...a16ServerRoutes,
   ...a18ServerRoutes,
   ...a22ServerRoutes,
   ...a23ServerRoutes,
