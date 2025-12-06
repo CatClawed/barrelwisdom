@@ -1,11 +1,11 @@
 @if (!error) {
   <ng-template #template let-trait="item">
-    <a18-trait
+    <a12-trait
       (buttonClicked)="openDialog($event)"
       [inputData]="trait"
       url="/{{gameURL}}/traits/{{trait.slug}}/{{language}}"
       [gameURL]="gameURL">
-    </a18-trait>
+    </a12-trait>
   </ng-template>
   <filter-list
     [list]="filteredTraits"
@@ -16,27 +16,24 @@
       <mat-form-field class="grid-8" appearance="outline">
         <mat-label>Filter...</mat-label>
         <input style="height: 100%;" matInput formControlName="filtertext">
-
       </mat-form-field>
       <mat-form-field class="grid-4" appearance="outline">
         <mat-label>Transfers to...</mat-label>
         <mat-select matNativeControl formControlName="transfers" disableOptionCentering="true" class="mat-select-icon">
-          <mat-option value="0" class="svg-icon-text-vertical-center" selected> <svg class="svg-icon"><use href="/media/spritesheets/A22.svg?v=1#type-synthesis"></use></svg>--</mat-option>
+          <mat-option value="1" selected> --</mat-option>
           @for (t of [
-              ['1',  'synthesis', 'Synthesis'],
-              ['2',  'attack', 'Attack'],
-              ['3',  'heal', 'Heal'],
-              ['6',  'weapon', 'Weapon'],
-              ['7',  'armor', 'Armor'],
-              ['8',  'accessory', 'Accessory'],
+              ['3',  'bomb', 'Heal'],
+              ['5',  'weapon', 'Weapon'],
+              ['6',  'armor', 'Armor'],
+              ['7',  'accessory', 'Accessory'],
             ]; track $index) {
-              <mat-option [value]="t[0]" class="svg-icon-text-vertical-center">
-                <svg class="svg-icon-standard right-spacer">
-                  <use attr.href="/media/spritesheets/A18.svg?v=1#{{t[1]}}"></use>
-                </svg>
-                {{t[2]}}
-              </mat-option>
-            }
+            <mat-option [value]="t[0]" class="svg-icon-text-vertical-center">
+              <svg class="svg-icon-standard right-spacer">
+                <use attr.href="/media/spritesheets/A15.svg?v=1#{{t[1]}}"></use>
+              </svg>
+              {{t[2]}}
+            </mat-option>
+          }
         </mat-select>
       </mat-form-field>
     </form>

@@ -1,6 +1,5 @@
 import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { Popover } from '@app/views/_components/popover/popover.component';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
@@ -11,7 +10,7 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
     templateUrl: 'a25-recipe.component.html',
     styleUrls: ['../resleri.scss'],
     encapsulation: ViewEncapsulation.None,
-    imports: [...CommonImports, MatTabsModule, MatIconModule, MatButtonModule, Popover]
+    imports: [...CommonImports, MatTabsModule, MatButtonModule, Popover]
 })
 export class A25RecipeComponent extends SingleComponent {
   protected a25service = inject(A25Service);

@@ -84,11 +84,11 @@ export const routes: Routes = [
         path: 'second-light',
         loadChildren: ()=> import('@app/views/games/BRSL/brsl-routing.module').then(m=>m.BRSLRoutingModule),
       },
+      */
       {
         path: 'totori',
         loadChildren: ()=> import('@app/views/games/A12/a12-routing.module').then(m=>m.A12RoutingModule),
       },
-      */
       {
         path: 'escha',
         loadChildren: ()=> import('@app/views/games/A15/a15-routing.module').then(m=>m.A15RoutingModule),

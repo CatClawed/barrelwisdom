@@ -30,7 +30,7 @@ class A12IngredientSimpleSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         result = super(A12IngredientSimpleSerializer, self).to_representation(instance)
-        return OrderedDict((k, v) for k, v in result.items() 
+        return OrderedDict((k, v) for k, v in result.items()
                            if v not in [None, [], '', False, {}])
     def get_ing(self,obj):
         if obj.category is None:
@@ -53,7 +53,7 @@ class A12IngredientSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         result = super(A12IngredientSerializer, self).to_representation(instance)
-        return OrderedDict((k, v) for k, v in result.items() 
+        return OrderedDict((k, v) for k, v in result.items()
                            if v not in [None, [], '', False, {}])
 
 class A12CharacterSerializer(serializers.ModelSerializer):
@@ -76,7 +76,7 @@ class A12EffectLineSerializer(serializers.ModelSerializer):
         fields = ['effect', 'number', 'itemnum', 'min_elem', 'max_elem']
     def to_representation(self, instance):
         result = super(A12EffectLineSerializer, self).to_representation(instance)
-        return OrderedDict((k, v) for k, v in result.items() 
+        return OrderedDict((k, v) for k, v in result.items()
                            if v not in [None, [], '', False, {}])
 
 class A12BookNameSerializer(serializers.ModelSerializer):
@@ -95,7 +95,7 @@ class A12BookNameSerializer(serializers.ModelSerializer):
 
 class A12ItemSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
-    categories = A12CategorySerializerName(many=True)
+    categories = A12CategorySerializerLink(many=True)
     ingredient_set = A12IngredientSimpleSerializer(many=True, read_only=True)
 
     class Meta:
@@ -104,7 +104,7 @@ class A12ItemSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         result = super(A12ItemSerializer, self).to_representation(instance)
-        return OrderedDict((k, v) for k, v in result.items() 
+        return OrderedDict((k, v) for k, v in result.items()
                            if v not in [None, [], '', False, {}])
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -131,7 +131,7 @@ class A12ItemFullSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         result = super(A12ItemFullSerializer, self).to_representation(instance)
-        return OrderedDict((k, v) for k, v in result.items() 
+        return OrderedDict((k, v) for k, v in result.items()
                            if v not in [None, [], '', False, {}])
     def get_name(self,obj):
         if 'language' not in self.context:

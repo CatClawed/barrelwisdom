@@ -1,0 +1,29 @@
+@if (data; as book) {
+  <item
+    [item]="book"
+    [url]="inputData ? '/' + gameURL + '/recipe-books/' + book.slug + '/' + language : undefined"
+    imgURL="{{imgURL}}items/{{book.slug}}.webp?v=1"
+    (buttonClicked)="buttonClicked.emit($event)"
+    dimension="240"
+    [small]="inputData || inputSlug ? false : true"
+    [hideButton]="true">
+    <ng-container icon>
+      @if (book.isDLC) {
+        <span class="badge bg-primary">DLC</span>
+      }
+      @if (book.isDX) {
+        <span class="badge bg-primary">DX</span>
+      }
+    </ng-container>
+    @if (book.desc && !inputData) {
+      <p>{{book.desc}}</p>
+    }
+    <p><b>Acquisition: </b>{{book.note}}</p>
+    <b>Items:</b>
+    <ul class="two-column">
+      @for (item of book.items; track item) {
+        <li><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
+      }
+    </ul>
+  </item>
+}

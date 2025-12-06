@@ -5,23 +5,22 @@
       url="/{{gameURL}}/items/{{item.slug}}/{{language}}"
       imgURL="{{imgURL}}items/{{item.slug}}.webp?v=1"
       (buttonClicked)="openDialog($event)"
-      dimension="280">
+      dimension="240">
       <ng-container icon>
-        @if (item.isDLC) {
-          <span class="badge bg-primary">DLC</span>
-        }
-        @if (item.isDX) {
-          <span class="badge bg-primary">DX</span>
+        @if (item.level) {
+          <b>LV {{item.level}}</b>
         }
       </ng-container>
-      <ul class="two-column category-list">
+      <table class="table-item-data"><tbody>
         @for (cat of item.categories; track cat) {
-          <li>
-            <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=0#category-{{cat.slug}}"></use></svg>
-            {{cat.name}}
-          </li>
+          <tr>
+            <td>
+              <svg class="svg-icon"><use attr.href="/media/spritesheets/A12.svg?v=0#category-{{cat.slug}}"></use></svg>
+            </td>
+            <td>{{cat.name}}</td>
+          </tr>
         }
-      </ul>
+      </tbody></table>
     </item>
   </ng-template>
   <filter-list
@@ -30,29 +29,25 @@
     [(hide)]="hide"
     [template]="template">
     <form [formGroup]="pageForm" class="grid">
-      <mat-form-field class="grid-8" appearance="outline">
+      <mat-form-field appearance="outline" class="grid-8">
         <mat-label>Filter...</mat-label>
         <input style="height: 100%;" matInput formControlName="filtertext">
-
       </mat-form-field>
-      <mat-form-field class="grid-4" appearance="outline">
+      <mat-form-field  appearance="outline" class="grid-4">
         <mat-label>Category</mat-label>
-        <mat-select matNativeControl formControlName="cat" disableOptionCentering="true" class="mat-select-icon">
-          <mat-option class="svg-icon-text-vertical-center" value="Any" selected>
-            <svg class="svg-icon"><use href="/media/spritesheets/A18.svg?v=0#book"></use></svg>
-            Any
-          </mat-option>
+        <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
+          <mat-option value="Any">--</mat-option>
           @if (data) {
             @for (cat of data.categories; track cat) {
               <mat-option class="svg-icon-text-vertical-center" value="{{cat.name}}">
-                <svg class="svg-icon"><use attr.href="/media/spritesheets/A18.svg?v=0#category-{{cat.slug}}"></use></svg>
+                <svg class="svg-icon"><use attr.href="/media/spritesheets/A12.svg?v=0#category-{{cat.slug}}"></use></svg>
                 {{cat.name}}
               </mat-option>
             }
           }
         </mat-select>
       </mat-form-field>
-      <mat-form-field class="grid-5" appearance="outline">
+      <mat-form-field appearance="outline" class="grid-4">
         <mat-label>Has ingredient...</mat-label>
         <input style="height: 100%;" matInput formControlName="filtering">
       </mat-form-field>
