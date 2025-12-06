@@ -88,11 +88,11 @@ export const routes: Routes = [
         path: 'totori',
         loadChildren: ()=> import('@app/views/games/A12/a12-routing.module').then(m=>m.A12RoutingModule),
       },
+      */
       {
         path: 'escha',
         loadChildren: ()=> import('@app/views/games/A15/a15-routing.module').then(m=>m.A15RoutingModule),
       },
-      */
       {
         path: 'shallie',
         loadChildren: ()=> import('@app/views/games/A16/a16-routing.module').then(m=>m.A16RoutingModule),

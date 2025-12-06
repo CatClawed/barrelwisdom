@@ -1,0 +1,43 @@
+@if (!error) {
+  <ng-template #template let-prop="item">
+    <a15-property
+      (buttonClicked)="openDialog($event)"
+      [inputData]="prop"
+      [gameURL]="gameURL"
+      url="/{{gameURL}}/properties/{{prop.slug}}/{{language}}">
+    </a15-property>
+  </ng-template>
+  <filter-list
+    [list]="filteredProperties"
+    name="Properties"
+    [(hide)]="hide"
+    [template]="template">
+    <form [formGroup]="pageForm" class="grid">
+      <mat-form-field class="grid-8" appearance="outline">
+        <mat-label>Filter...</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtertext">
+      </mat-form-field>
+      <mat-form-field class="grid-4" appearance="outline">
+        <mat-label>Transfers to...</mat-label>
+        <mat-select matNativeControl formControlName="transfers" disableOptionCentering="true" class="mat-select-icon">
+          <mat-option value="1" selected> --</mat-option>
+          @for (t of [
+              ['2',  'bomb', 'Attack'],
+              ['3',  'heal', 'Heal'],
+              ['4',  'buff', 'Buff'],
+              ['5',  'weapon', 'Weapon'],
+              ['6',  'armor', 'Armor'],
+              ['7',  'accessory', 'Accessory'],
+            ]; track $index) {
+            <mat-option [value]="t[0]" class="svg-icon-text-vertical-center">
+              <svg class="svg-icon-standard right-spacer">
+                <use attr.href="/media/spritesheets/A15.svg?v=1#{{t[1]}}"></use>
+              </svg>
+              {{t[2]}}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </filter-list>
+}

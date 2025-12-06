@@ -11,6 +11,14 @@ export const a16ServerRoutes: ServerRoute[] = [
     }
   },
   {
+    path: 'shallie/recipe-books/:language',
+    renderMode: RenderMode.Prerender,
+    fallback: PrerenderFallback.Client,
+    async getPrerenderParams() {
+        return LanguageData.languages['shallie'].map(language => ({language}))
+    }
+  },
+  {
     path: 'shallie/properties/:language',
     renderMode: RenderMode.Prerender,
     fallback: PrerenderFallback.Client,

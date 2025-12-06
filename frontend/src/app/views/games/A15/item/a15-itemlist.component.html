@@ -1,0 +1,98 @@
+@if (!error) {
+  <ng-template #template let-item="item">
+    <item
+      [item]="item"
+      url="/{{gameURL}}/items/{{item.slug}}/{{language}}"
+      imgURL="{{imgURL}}items/{{item.slug}}.webp?v=1"
+      (buttonClicked)="openDialog($event)"
+      dimension="192">
+      <ng-container icon>
+        <b>LV {{item.level}}</b>
+        @if (item.isDLC) {
+          <br />
+          <span class="badge bg-primary">DLC</span>
+        }
+        @if (item.isDX) {
+          <br />
+          <span class="badge bg-primary">DX</span>
+        }
+      </ng-container>
+      <div class="two-column" style="padding-top: 0.5rem;">
+        <table class="table-item-data"><tbody>
+          @for (cat of item.categories; track cat) {
+            <tr>
+              <td style="text-align: center;">
+                <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A15.svg?v=0#{{cat.icon_name}}"></use></svg>
+              </td>
+              <td>{{cat.name}}</td>
+            </tr>
+          }
+        </tbody></table>
+        <div>
+          @if (item.fire) {
+            <svg class="a15-element" style="background-color:#ac504f;"><use href="/media/spritesheets/A15.svg?v=0#element-fire"></use></svg>
+          }
+          @if (item.water) {
+            <svg class="a15-element" style="background-color:#427389;"><use href="/media/spritesheets/A15.svg?v=0#element-water"></use></svg>
+          }
+          @if (item.wind) {
+            <svg class="a15-element" style="background-color:#5a843c;"><use href="/media/spritesheets/A15.svg?v=0#element-wind"></use></svg>
+          }
+          @if (item.earth) {
+            <svg class="a15-element" style="background-color:#8f7939;"><use href="/media/spritesheets/A15.svg?v=0#element-earth"></use></svg>
+          }
+          {{item.evalue}}
+        </div>
+      </div>
+    </item>
+  </ng-template>
+  <filter-list
+    [list]="filteredItems"
+    name="Items"
+    [(hide)]="hide"
+    [template]="template">
+    <form [formGroup]="pageForm" class="grid">
+      <mat-form-field class="grid-8" appearance="outline">
+        <mat-label>Filter...</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtertext">
+      </mat-form-field>
+      <mat-form-field class="grid-4" appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
+          <mat-option class="svg-icon-text-vertical-center" value="Any">--</mat-option>
+          @if (data) {
+            @for (cat of data.categories; track cat) {
+              <mat-option class="svg-icon-text-vertical-center" value="{{cat.name}}">
+                <svg class="svg-icon"><use attr.href="/media/spritesheets/A15.svg?v=0#{{cat.icon_name}}"></use></svg>
+                {{cat.name}}
+              </mat-option>
+            }
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="grid-5" appearance="outline">
+        <mat-label>Has ingredient...</mat-label>
+        <input style="height: 100%;" matInput formControlName="filtering">
+      </mat-form-field>
+      <mat-form-field class="grid-3" appearance="outline">
+        <mat-label>Element</mat-label>
+        <mat-select matNativeControl formControlName="element" disableOptionCentering="true" class="mat-select-icon">
+          <mat-option class="svg-icon-text-vertical-center" value="Any">Any</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="Fire"> <svg class="svg-icon"><use href="/media/spritesheets/A15.svg?v=0#element-fire"></use></svg>Fire</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="Water"><svg class="svg-icon"><use href="/media/spritesheets/A15.svg?v=0#element-water"></use></svg>Water</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="Wind"> <svg class="svg-icon"><use href="/media/spritesheets/A15.svg?v=0#element-wind"></use></svg>Wind</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="Earth"><svg class="svg-icon"><use href="/media/spritesheets/A15.svg?v=0#element-earth"></use></svg>Earth</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="grid-4" appearance="outline">
+        <mat-label>Element Value</mat-label>
+        <mat-select matNativeControl formControlName="elementval" disableOptionCentering="true" class="mat-select-icon">
+          <mat-option value="0" type="number">Any</mat-option>
+          <mat-option value="20" type="number">20+</mat-option>
+          <mat-option value="30" type="number">30+</mat-option>
+          <mat-option value="40" type="number">40+</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </filter-list>
+}
