@@ -203,3 +203,21 @@
     }
   }
 }
+
+.chevron-button {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  padding: 0;
+  display: flex;
+
+  svg {
+    height: 1.7em;
+    width: 1.7em;
+    fill: black;
+  }
+}

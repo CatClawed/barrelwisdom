@@ -75,16 +75,14 @@ export const routes: Routes = [
   {
     path: '',
     children: [
-      /*
       {
-        path: 'bluefeflection',
+        path: 'bluereflection',
         loadChildren: ()=> import('@app/views/games/BR1/br1-routing.module').then(m=>m.BR1RoutingModule),
       },
       {
         path: 'second-light',
         loadChildren: ()=> import('@app/views/games/BRSL/brsl-routing.module').then(m=>m.BRSLRoutingModule),
       },
-      */
       {
         path: 'totori',
         loadChildren: ()=> import('@app/views/games/A12/a12-routing.module').then(m=>m.A12RoutingModule),

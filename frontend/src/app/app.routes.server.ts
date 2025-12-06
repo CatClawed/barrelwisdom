@@ -8,10 +8,12 @@ import { a23ServerRoutes } from '@app/views/games/A23/a23-server-routing';
 import { a25ServerRoutes } from '@app/views/games/A25/a25-server-routing';
 import { a25rwServerRoutes } from '@app/views/games/A25RW/a25rw-server-routing';
 import { a26ServerRoutes } from '@app/views/games/A26/a26-server-routing';
+import { br1ServerRoutes } from '@app/views/games/BR1/br1-server-routing';
+import { brslServerRoutes } from '@app/views/games/BRSL/brsl-server-routing';
 
 export const serverRoutes: ServerRoute[] = [
-  //...br1ServerRoutes,
-  //...brslServerRoutes,
+  ...br1ServerRoutes,
+  ...brslServerRoutes,
   ...a12ServerRoutes,
   ...a15ServerRoutes,
   ...a16ServerRoutes,

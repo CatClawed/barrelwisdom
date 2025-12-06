@@ -1,0 +1,28 @@
+@if (!error) {
+  <ng-template #template let-facility="item">
+    <item
+      [item]="facility"
+      url="/{{gameURL}}/facilities{{facility.slug}}/{{language}}"
+      (buttonClicked)="openDialog($event)"
+      dimension="253"
+      imgURL="{{imgURL}}facilities/{{facility.slug}}.webp?v=1">
+      <ng-container icon>
+        @if (facility.isDLC) {
+          <span class="badge bg-primary">DLC</span>
+        }
+      </ng-container>
+    </item>
+  </ng-template>
+  <filter-list
+    [list]="filteredFacilities"
+    name="Facilities"
+    [(hide)]="hide"
+    [template]="template">
+    <form [formGroup]="pageForm" class="grid">
+      <mat-form-field class="grid-12" appearance="outline">
+        <mat-label>Filter...</mat-label>
+        <input matInput formControlName="filtertext">
+      </mat-form-field>
+    </form>
+  </filter-list>
+}

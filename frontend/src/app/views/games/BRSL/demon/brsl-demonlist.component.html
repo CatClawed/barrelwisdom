@@ -1,0 +1,23 @@
+@if (!error) {
+  <ng-template #template let-mon="item">
+    <item
+      [item]="mon"
+      url="/{{gameURL}}/demons/{{mon.slug}}/{{language}}"
+      (buttonClicked)="openDialog($event)"
+      dimension="256"
+      imgURL="{{imgURL}}demons/{{mon.slug}}.webp?v=1">
+    </item>
+  </ng-template>
+  <filter-list
+    [list]="filteredDemons"
+    name="Demons"
+    [(hide)]="hide"
+    [template]="template">
+    <form [formGroup]="pageForm" class="grid">
+      <mat-form-field class="grid-12" appearance="outline">
+        <mat-label>Filter...</mat-label>
+        <input matInput formControlName="filtertext">
+      </mat-form-field>
+    </form>
+  </filter-list>
+}

@@ -1,0 +1,92 @@
+@if (!error) {
+  <h1>Skills</h1>
+}
+@if (data; as skills) {
+  <div>
+    @if (skills) {
+      <div class="table-of-contents">
+        <b>Table of Contents</b>
+        <ol>
+          @for (skill of skills; track skill) {
+            @if (skill.skill_set) {
+              <li>
+                <a href="/{{gameURL}}/skills/{{language}}#{{skill.slug}}"
+                  (click)="$event.preventDefault();scroll(skill.slug)">
+                  {{skill.name}}
+                </a>
+              </li>
+            }
+          }
+        </ol>
+      </div>
+      @for (skill of skills; track skill) {
+        <div>
+          @if (skill.skill_set) {
+            <h2 id="{{skill.slug}}">{{skill.name}}</h2>
+          }
+          @if (skill.skill_set) {
+            <table class="tbl borders"><tbody>
+              @for (data of skill.skill_set; track data) {
+                <tr>
+                  <td><b>{{data.name}}</b></td>
+                  <td>[{{data.range}}]<br />
+                    @if (data.desc) {
+                      <p>{{data.desc}}</p>
+                    }
+                    <div style="column-count:2;margin-bottom:1rem;">
+                      @if (data.ether) {
+                        <b>Ether: </b> {{data.ether}}<br />
+                      }
+                      @if (data.ether_rec) {
+                        <b>Ether Recovery: </b> {{data.ether_rec}}<br />
+                      }
+                      @if (data.level) {
+                        <b>Gear: </b> {{data.level}}<br />
+                      }
+                      @if (data.knockback) {
+                        <b>Knockback: </b> {{data.knockback}}<br />
+                      }
+                    </div>
+                    @if (data.actTag0) {
+                      {{data.actTag0}} @if (data.attTag0) {
+                      / {{data.attTag0}}
+                    }
+                    @if (data.actTag0) {
+                      <ul>
+                        @if (data.min_1_0) {
+                          <li>Value 1: {{data.min_1_0}} @if (data.max_1_0) {
+                            - {{data.max_1_0}}
+                          }</li>
+                        }
+                        @if (data.min_2_0) {
+                          <li>Value 2: {{data.min_2_0}} @if (data.max_2_0) {
+                            - {{data.max_2_0}}
+                          }</li>
+                        }
+                      </ul>
+                    }
+                  }
+                  @if (data.actTag1) {
+                    {{data.actTag1}} @if (data.attTag1) {
+                    / {{data.attTag1}}
+                  }
+                  @if (data.actTag1) {
+                    <ul>
+                      @if (data.min_1_1) {
+                        <li>Value 1: {{data.min_1_1}} @if (data.max_1_1) {
+                          - {{data.max_1_1}}
+                        }</li>
+                      }
+                    </ul>
+                  }
+                }
+              </td>
+            </tr>
+          }
+        </tbody></table>
+      }
+    </div>
+  }
+}
+</div>
+}
