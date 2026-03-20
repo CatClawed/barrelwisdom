@@ -15,7 +15,7 @@ Thumbs.db
 .history/*
 *.log
 *.bak
-.env
+*.env
 .dccache
 .sonar_lock
 .scannerwork/*

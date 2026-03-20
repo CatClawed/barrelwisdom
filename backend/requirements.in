@@ -8,7 +8,7 @@ django-filter
 dj-rest-auth
 djangorestframework
 djangorestframework-simplejwt
+django-valkey[libvalkey]
 gunicorn
 python-slugify
-redis
 requests

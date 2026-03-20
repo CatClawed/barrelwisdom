@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host 0.0.0.0 --live-reload=true --proxy-config proxy.conf.json --poll 2000",
+    "start": "ng serve --host 0.0.0.0 --live-reload=true --proxy-config proxy.conf.json --poll 2000 --allowed-hosts frontend",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",

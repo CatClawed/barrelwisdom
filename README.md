@@ -15,12 +15,15 @@ Create `docker/.env` with the following format:
 
 ```bash
 SECRET_KEY=50 rando character string of your choice goes here
-DB_PASSWORD=
-DB_USER=
+POSTGRES_PASSWORD=
+POSTGRES_USER=
+POSTGRES_DB=barrelwisdom
 DEBUG=1
+UID=1000
+GID=1000
 ```
 
-DEBUG must be set to 0 in production environments.
+DEBUG must be set to 0 in production environments. UID/GID are up to your preferences, this is to prevent docker creating things as root.
 
 In `backend`, you will also want to run:
 
@@ -85,9 +88,6 @@ Angular commands
 ```bash
 # Begin development
 npm start
-
-# Begin development in server-side rendering mode
-npm run dev:ssr
 ```
 
 Django model changes.
