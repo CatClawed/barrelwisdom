@@ -19,12 +19,26 @@ a:hover {
 }
 
 body {
-    background: v.$bg-main;
+    background-image: v.$bg-main;
     background-color: #faf6f5;
-    font-family: v.$font-family-sans-serif;
+    font-family: 'Noto Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     font-size: 1.1rem;
     margin: 0;
     line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+:lang(ja) body {
+    font-family: 'Noto Sans', 'Noto Sans CJK JP', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', system-ui, sans-serif;
+}
+:lang(zh-Hans) body {
+    font-family: 'Noto Sans', 'Noto Sans CJK SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+}
+:lang(zh-Hant) body {
+  font-family: 'Noto Sans', 'Noto Sans CJK TC', 'PingFang TC', 'Microsoft JhengHei', system-ui, sans-serif;
+}
+:lang(ko) body {
+  font-family: 'Noto Sans', 'Noto Sans CJK KR','Apple SD Gothic Neo', 'Malgun Gothic', system-ui, sans-serif;
 }
 
 img {
@@ -45,16 +59,24 @@ h3 {
     padding-top: 0.5em;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-weight: 500;
-    font-family: v.$headings-font-family;
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Merriweather', 'Noto Serif', Georgia, serif;
     margin-top: 0;
     margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+:lang(ja) :is(h1, h2, h3, h4, h5, h6) {
+    font-family: 'Noto Serif CJK JP', 'Hiragino Mincho ProN', 'Yu Mincho', 'MS Mincho', serif;
+}
+:lang(zh-Hans) :is(h1, h2, h3, h4, h5, h6) {
+    font-family: 'Noto Serif CJK SC', 'Songti SC', 'SimSun', serif;
+}
+:lang(zh-Hant) :is(h1, h2, h3, h4, h5, h6) {
+    font-family: 'Noto Serif CJK TC', 'Songti TC', 'MingLiU', serif;
+}
+:lang(ko) :is(h1, h2, h3, h4, h5, h6) {
+    font-family: 'Noto Serif CJK KR', 'AppleMyungjo', 'Batang', serif;
 }
 
 p {

@@ -27,7 +27,7 @@ export class UserComponent {
             const userSlug = `/user/${data.user.username}`;
             const title = `User: ${data.user.username}`;
             this.breadcrumbService.setBreadcrumbs([], title);
-            this.seoService.SEOSettings(userSlug, title, data.bio, '');
+            this.seoService.updateSEOSettings({url: userSlug, title:title, description:data.bio});
           }),
           catchError(error => {
             this.error = this.breadcrumbService.setStatus(error.status);

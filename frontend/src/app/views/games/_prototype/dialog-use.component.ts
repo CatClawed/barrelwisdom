@@ -54,7 +54,13 @@ export abstract class DialogUseComponent extends FilterableComponent {
             .subscribe(returnToPage => {
                 if (returnToPage !== false) {
                     this.location.go(`${this.gameURL}/${this.section}/${this.language}`);
-                    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+                    this.seoService.updateSEOSettings({
+                        url:this.seoURL,
+                        title:this.seoTitle,
+                        description:this.seoDesc,
+                        image:this.seoImage,
+                        lang:this.language
+                    });
                 }
                 this.dialogLink.unsubscribe();
             })

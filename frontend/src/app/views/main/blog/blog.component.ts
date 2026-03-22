@@ -139,12 +139,12 @@ export class BlogComponent {
         [],
         blog.title);
     }
-    this.seoService.SEOSettings(
-      `${blog.section.slug}/${blog.slug}`,
-      blog.section.name ? `${blog.title} - ${blog.section.name}` : blog.title,
-      blog.desc,
-      blog.image
-    );
+    this.seoService.updateSEOSettings({
+      url:`${blog.section.slug}/${blog.slug}`,
+      title:blog.section.name ? `${blog.title} - ${blog.section.name}` : blog.title,
+      description:blog.desc,
+      image:blog.image
+    });
   }
   lineBreak(str): string {
     return str.replace(/\n/g, '</br>');

@@ -33,7 +33,10 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.breadcrumbService.setBreadcrumbs([], undefined)
 
-    this.seoService.SEOSettings('', '', 'The source for all things Atelier.', '/media/blog/placeholder.webp');
+    this.seoService.updateSEOSettings({
+      url:'',
+      image:'/media/blog/placeholder.webp'
+    });
     this.blogs$ = this.router.events.pipe(
       filter(val => val instanceof NavigationEnd),
       startWith(null),
