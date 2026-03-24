@@ -155,6 +155,7 @@ export const ingredient_translation = {
     "sc": "材料",
     "tc": "材料",
     "ko": "재료",
+    "fr": "Ingrédients",
 }
 
 export const location_translation = {
@@ -174,16 +175,16 @@ export const recipebook_translation = {
 }
 
 export const shop_translation = {
-    "en": "Shop",
+    "en": "Shops",
     "ja": "ショップ",
     "sc": "商店",
     "tc": "商店",
-    "de": "Laden",
-    "fr": "Boutique",
+    "de": "Läden",
+    "fr": "Boutiques",
     "ko": "상점",
-    "ru": "Лавка",
-    "es": "Tienda"
-}
+    "ru": "Лавки",
+    "es": "Tiendas"
+};
 
 export const drop_translation = {
     "en": "Dropped by",
@@ -192,3 +193,55 @@ export const drop_translation = {
     "tc": "掉落的魔物",
     "ko": "떨어뜨리는 몬스터",
 }
+
+export const details_translation = {
+    "en": "Details",
+    "ja": "詳細",
+    "sc": "详情",
+    "tc": "詳情",
+    "ko": "자세히 보기",
+    "ru": "Подробнее",
+    "fr": "Détails",
+    "de": "Details",
+    "es": "Detalles"
+}
+
+export const permalink_translation = {
+    "en": "Permalink",
+    "ja": "固定リンク",
+    "sc": "永久链接",
+    "tc": "永久連結",
+    "ko": "고유링크",
+    "ru": "Постоянная ссылка",
+    "de": "Permalink",
+    "fr": "Permalien",
+    "es": "Enlace permanente"
+};
+
+export const recipe_ideas_translation = {
+    "en": "Recipe Ideas",
+    "ja": "レシピ発想",
+    "sc": "构思配方",
+    "tc": "構思配方",
+    "ko": "레시피 발상",
+};
+
+export const catalyst_translation = {
+    "en": "Catalysts",
+    "ja": "触媒",
+    "sc": "触媒",
+    "tc": "觸媒",
+    "ko": "촉매",
+};
+
+export const level_translation = {
+    "en": "Level",
+    "ja": "レベル",
+    "sc": "等级",
+    "tc": "等級",
+    "ko": "레벨",
+    "de": "Stufe",
+    "fr": "Niveau",
+    "es": "Nivel",
+    "ru": "Уровень"
+};

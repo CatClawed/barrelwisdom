@@ -6,7 +6,7 @@
   <filter-list
     [list]="filteredEffects"
     [(hide)]="hide"
-    name="Effects"
+    name="{{a18service.effect_translation[language]}}"
     [template]="template">
     <form [formGroup]="pageForm" class="grid">
       <mat-form-field class="grid-12" appearance="outline">

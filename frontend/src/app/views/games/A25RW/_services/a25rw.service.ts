@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { getApiUrl } from '@app/_helpers/api-url';
 import { Category, Effect, Item, Monster, Shop, Trait, Trees } from '@app/views/games/A25RW/_services/a25rw.interface';
 import { environment } from '@environments/environment';
-import { category_translation, effect_translation, filter_translation, ingredient_translation, item_translation, location_translation, monster_translation, race_translation, recipebook_translation, shop_translation, stat_translation, trait_translation } from '@environments/localization';
+import { category_translation, effect_translation, filter_translation, ingredient_translation, item_translation, level_translation, location_translation, monster_translation, permalink_translation, race_translation, recipebook_translation, shop_translation, stat_translation, trait_translation } from '@environments/localization';
 import { Observable } from 'rxjs';
 
 
@@ -28,6 +28,8 @@ export class A25RWService {
   public readonly recipebook_translation = recipebook_translation
   public readonly ingredient_translation = ingredient_translation
   public readonly shop_translation = shop_translation
+  public readonly permalink_translation = permalink_translation
+  public readonly level_translation = level_translation
 
   public readonly gameTitle = {
     "en": "Atelier Resleriana: The Red Alchemist & the White Guardian",

@@ -17,7 +17,7 @@ export class A12TraitComponent extends SingleComponent {
   }
   override afterAssignment(): void {
     this.genericSettings(this.data.name, this.data.desc,
-      'Traits',
+      this.a12service.trait_translation[this.language],
       false,
       this.inputSlug ? false : true
     );

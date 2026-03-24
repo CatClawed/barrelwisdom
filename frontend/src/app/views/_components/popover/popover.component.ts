@@ -16,7 +16,8 @@ export class Popover {
 
   @Input() name?: string;
   @Input() url?: string;
-  @Input() template: TemplateRef<any>;
+  @Input() template?: TemplateRef<any>;
+  @Input() text?: string = 'I am an error';
   @Input() context?: any = {};
   @Input() cls?: string = '';
   @Input() display?: string = 'inherit'

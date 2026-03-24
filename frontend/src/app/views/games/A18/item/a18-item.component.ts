@@ -32,7 +32,7 @@ export class A18ItemComponent extends SingleComponent {
     let name = (this.language === 'en') ? this.data.name.normalize('NFD').replace(/[\u0300-\u036f]/g, "") : this.data.name;
     this.seoImage = `${this.imgURL}${this.section}/${this.data.slug}.webp`
     this.genericSettings(name, this.data.desc[0],
-      'Items',
+      this.a18service.item_translation[this.language],
       false,
       this.inputSlug ? false : true);
   }

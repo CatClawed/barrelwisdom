@@ -40,7 +40,8 @@ export class A18CatalystlistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.a18service, 'catalysts');
-    this.genericSettings(`Catalysts`, `The list of catalysts in ${this.gameTitle}.`);
+    this.genericSettings(this.a18service.catalyst_translation[this.language],
+      `The list of catalysts in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a18service.getCatalystList(this.language);
   }

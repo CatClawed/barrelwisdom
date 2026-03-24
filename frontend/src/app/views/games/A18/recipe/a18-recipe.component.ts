@@ -30,7 +30,8 @@ export class A18RecipeComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.a18service, 'recipe-ideas');
-    this.genericSettings(`Recipe Ideas`, `The list of recipes ideas in ${this.gameTitle}.`);
+    this.genericSettings(this.a18service.recipe_ideas_translation[this.language],
+      `The list of recipes ideas in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a18service.getRecipeList(this.language);
   }

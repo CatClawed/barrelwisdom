@@ -69,7 +69,7 @@
       <p><b>Book: </b> <a routerLink="/{{gameURL}}/items/{{item.book.slug}}/{{language}}">{{item.book.name}}</a></p>
     }
     @if (item.shopslot_set) {
-      <b>Shop:</b>
+      <b>{{a18service.shop_translation[language]}}</b>
     }
     @if (item.shopslot_set) {
       <ul>
@@ -81,7 +81,7 @@
       </ul>
     }
     @if (item.recipes) {
-      <b>Recipes:</b>
+      <b>{{a18service.item_translation[language]}}</b>
     }
     @if (item.recipes) {
       <ul>
@@ -93,7 +93,7 @@
       </ul>
     }
     @if (item.locations) {
-      <b>Location:</b>
+      <b>{{a18service.location_translation[language]}}</b>
     }
     @if (item.locations) {
       <ul class="two-column">
@@ -125,7 +125,7 @@
       </ul>
     }
     @if (item.monsters) {
-      <b >Dropped by:</b>
+      <b >{{a18service.drop_translation[language]}}</b>
     }
     @if (item.monsters) {
       <ul class="two-column">
@@ -138,7 +138,7 @@
       <table class="tbl a18-recipe-idea"><tbody>
         @if (item.book) {
           <tr>
-            <th colspan="2">Book</th>
+            <th colspan="2">{{a18service.recipebook_translation[language]}}</th>
           </tr>
           <tr>
             <td>
@@ -151,7 +151,7 @@
         }
         @for (idea of item.ideas; track idea; let i = $index) {
           <tr>
-            <th colspan="2">Idea {{i+1}}</th>
+            <th colspan="2">{{a18service.recipe_ideas_translation[language]}} {{i+1}}</th>
           </tr>
           @for (unlock of idea.unlocks; track unlock) {
             <tr>
@@ -205,7 +205,7 @@
     }
     @if (item.ingredients) {
       <table class="tbl"><tbody>
-        <tr><th>Ingredients</th></tr>
+        <tr><th>{{a18service.ingredient_translation[language]}}</th></tr>
         <tr>
           <td>
             <ul>
@@ -227,7 +227,7 @@
     }
     @if (item.effectlines_set) {
       <table class="tbl"><tbody>
-        <tr><th colspan=2>Effects</th></tr>
+        <tr><th colspan=2>{{a18service.effect_translation[language]}}</th></tr>
         @for (eff of item.effectlines_set; track eff) {
           <tr>
             @if (item.ingredients) {
@@ -244,7 +244,7 @@
                         <p>{{e.effect.desc}}</p>
                       }
                       @if (e.effect) {
-                        <a routerLink="/{{gameURL}}/effects/{{e.effect.slug}}/{{language}}">More info...</a>
+                        <a routerLink="/{{gameURL}}/effects/{{e.effect.slug}}/{{language}}">{{a18service.details_translation[language]}}</a>
                       }
                     </ng-template>
                     @if (e.effect) {
@@ -329,7 +329,7 @@
     }
     @if (item.chars) {
       <table class="tbl"><tbody>
-        <tr><th>Characters</th></tr>
+        <tr><th>{{a18service.character_translation[language]}}</th></tr>
         <tr><td>@for (char of item.chars; track char) {
           <img src="{{imgURL}}characters/{{char.slug}}.webp?v=1" style="aspect-ratio: 1; width: 82px;" alt="{{char.slug}}">
         }</td></tr>
@@ -337,7 +337,7 @@
     }
     @if (item.catalysts) {
       <table class="tbl"><tbody>
-        <tr><th colspan="2">Catalysts Used</th></tr>
+        <tr><th colspan="2">{{a18service.catalyst_translation[language]}}</th></tr>
         <tr>
           <td>
             <ul class="two-column" style="list-style: none; padding-left: 0;">

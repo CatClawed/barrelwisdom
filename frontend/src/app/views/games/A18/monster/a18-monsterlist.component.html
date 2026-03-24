@@ -14,19 +14,19 @@
       </ng-container>
     </item>
   </ng-template>
-  <filter-list [list]="filteredMonsters" name="Monsters" [(hide)]="hide" [template]="template">
+  <filter-list [list]="filteredMonsters" name="{{a18service.monster_translation[language]}}" [(hide)]="hide" [template]="template">
     <form [formGroup]="pageForm" class="grid">
       <mat-form-field class="grid-8" appearance="outline">
-        <mat-label>Filter...</mat-label>
+        <mat-label>{{a18service.filter_translation[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtertext">
       </mat-form-field>
       @if (data) {
         <mat-form-field class="grid-4" appearance="outline">
-          <mat-label>Type</mat-label>
+          <mat-label>{{a18service.race_translation[language]}}</mat-label>
           <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
-            <mat-option class="svg-icon-text-vertical-center" value="Any" selected>
+            <mat-option class="svg-icon-text-vertical-center" value="--" selected>
             <svg class="svg-icon"><use href="/media/spritesheets/A18.svg?v=0#book"></use></svg>
-              Any
+              --
             </mat-option>
             @for (race of data.races; track race) {
               <mat-option value="{{race.name}}">

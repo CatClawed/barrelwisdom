@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { getApiUrl } from '@app/_helpers/api-url';
 import { Character, Dungeon, Emblem, Item, Memoria, NameLink, RecipeTab, Research, ScoreBattle, Tower, Trait, Update } from '@app/views/games/A25/_services/a25.interface';
 import { environment } from '@environments/environment';
-import { character_translation, filter_translation, ingredient_translation, item_translation, trait_translation } from '@environments/localization';
+import { character_translation, details_translation, filter_translation, ingredient_translation, item_translation, trait_translation } from '@environments/localization';
 import { Observable } from 'rxjs';
 
 
@@ -21,6 +21,7 @@ export class A25Service {
   public readonly filter_translation = filter_translation
   public readonly character_translation = character_translation
   public readonly ingredient_translation = ingredient_translation
+  public readonly details_translation = details_translation
 
   public readonly gameTitle = {
     "en": "Atelier Resleriana",

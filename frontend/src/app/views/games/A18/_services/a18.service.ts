@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { getApiUrl } from '@app/_helpers/api-url';
 import { Catalyst, Category, Effect, Item, Monster, Race, RecipeIdeaList, Shop, Trait } from '@app/views/games/A18/_services/a18.interface';
 import { environment } from '@environments/environment';
+import { catalyst_translation, category_translation, character_translation, details_translation, drop_translation, effect_translation, filter_translation, ingredient_translation, item_translation, level_translation, location_translation, monster_translation, race_translation, recipe_ideas_translation, recipebook_translation, shop_translation, trait_translation } from '@environments/localization';
 import { Observable } from 'rxjs';
 
 
@@ -12,6 +13,24 @@ export class A18Service {
   constructor(
     private http: HttpClient,
   ) { }
+
+  public readonly details_translation = details_translation
+  public readonly filter_translation = filter_translation
+  public readonly recipe_ideas_translation = recipe_ideas_translation
+  public readonly item_translation = item_translation
+  public readonly effect_translation = effect_translation
+  public readonly trait_translation = trait_translation
+  public readonly monster_translation = monster_translation
+  public readonly catalyst_translation = catalyst_translation
+  public readonly shop_translation = shop_translation
+  public readonly category_translation = category_translation
+  public readonly ingredient_translation = ingredient_translation
+  public readonly location_translation = location_translation
+  public readonly recipebook_translation = recipebook_translation
+  public readonly character_translation = character_translation
+  public readonly drop_translation = drop_translation
+  public readonly race_translation = race_translation
+  public readonly level_translation = level_translation
 
   public readonly gameTitle = { "en": "Atelier Firis", "ja": "フィリスのアトリエ", "sc": "菲利丝的炼金工房", "tc": "菲莉絲的鍊金工房" };
   public readonly gameURL = "firis";

@@ -10,7 +10,7 @@
     }
   </div>
   <img class="card-item-display" src="{{imgURL}}items/{{item.id}}.webp?v=1" alt="{{item.name}}"
-    style="aspect-ratio: 1; width: 200;">
+    style="aspect-ratio: 1; width: 200px;">
   <table>
     <tbody>
       @if (item.char1) {
@@ -182,7 +182,7 @@
                   </ul>
                 }
                 @if (eff.flag) {
-                  <a routerLink="/{{gameURL}}/effects/{{eff.id}}/{{language}}">Permalink</a>
+                  <a routerLink="/{{gameURL}}/effects/{{eff.id}}/{{language}}">{{a25rwservice.permalink_translation[language]}}</a>
                 }
               </ng-template>
               @if (eff.id != 761) {

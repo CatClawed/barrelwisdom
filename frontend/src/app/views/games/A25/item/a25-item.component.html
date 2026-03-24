@@ -47,7 +47,7 @@
               </popover>
               <ng-template #popoverContent>
                 <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5).replaceAll('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
-                <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
+                <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">{{a25service.details_translation[language]}}</a>
               </ng-template>
             </li>
           }

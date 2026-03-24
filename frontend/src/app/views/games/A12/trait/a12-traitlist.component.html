@@ -9,33 +9,31 @@
   </ng-template>
   <filter-list
     [list]="filteredTraits"
-    name="Traits"
+    [name]="a12service.trait_translation[language]"
     [(hide)]="hide"
     [template]="template">
     <form [formGroup]="pageForm" class="grid">
-      <mat-form-field class="grid-8" appearance="outline">
-        <mat-label>Filter...</mat-label>
+      <mat-form-field class="grid-6" appearance="outline">
+        <mat-label>{{a12service.filter_translation[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtertext">
       </mat-form-field>
-      <mat-form-field class="grid-4" appearance="outline">
-        <mat-label>Transfers to...</mat-label>
-        <mat-select matNativeControl formControlName="transfers" disableOptionCentering="true" class="mat-select-icon">
-          <mat-option value="1" selected> --</mat-option>
-          @for (t of [
-              ['3',  'bomb', 'Heal'],
-              ['5',  'weapon', 'Weapon'],
-              ['6',  'armor', 'Armor'],
-              ['7',  'accessory', 'Accessory'],
-            ]; track $index) {
-            <mat-option [value]="t[0]" class="svg-icon-text-vertical-center">
-              <svg class="svg-icon-standard right-spacer">
-                <use attr.href="/media/spritesheets/A15.svg?v=1#{{t[1]}}"></use>
-              </svg>
-              {{t[2]}}
-            </mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
+      <div class="grid-6">
+        @for (btn of [
+          { ctrl: pageForm.controls.atk,  icon: 'bomb' },
+          { ctrl: pageForm.controls.wep,  icon: 'weapon' },
+          { ctrl: pageForm.controls.arm,  icon: 'armor' },
+          { ctrl: pageForm.controls.acc,  icon: 'accessory' }
+        ]; track $index) {
+          <button type="button" 
+                  class="icon-button" 
+                  (click)="toggle(btn.ctrl)"
+                  [class.active]="btn.ctrl.value">
+            <svg>
+              <use attr.href="/media/spritesheets/A12.svg?v=1#{{btn.icon}}"></use>
+            </svg>
+          </button>
+        }
+      </div>
     </form>
   </filter-list>
 }

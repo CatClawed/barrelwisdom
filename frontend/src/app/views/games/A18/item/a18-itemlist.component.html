@@ -26,21 +26,21 @@
   </ng-template>
   <filter-list
     [list]="filteredItems"
-    name="Items"
+    name="{{a18service.item_translation[language]}}"
     [(hide)]="hide"
     [template]="template">
     <form [formGroup]="pageForm" class="grid">
       <mat-form-field class="grid-8" appearance="outline">
-        <mat-label>Filter...</mat-label>
+        <mat-label>{{a18service.filter_translation[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtertext">
 
       </mat-form-field>
       <mat-form-field class="grid-4" appearance="outline">
-        <mat-label>Category</mat-label>
+        <mat-label>{{a18service.category_translation[language]}}</mat-label>
         <mat-select matNativeControl formControlName="cat" disableOptionCentering="true" class="mat-select-icon">
-          <mat-option class="svg-icon-text-vertical-center" value="Any" selected>
+          <mat-option class="svg-icon-text-vertical-center" value="--" selected>
             <svg class="svg-icon"><use href="/media/spritesheets/A18.svg?v=0#book"></use></svg>
-            Any
+            --
           </mat-option>
           @if (data) {
             @for (cat of data.categories; track cat) {
@@ -53,7 +53,7 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field class="grid-5" appearance="outline">
-        <mat-label>Has ingredient...</mat-label>
+        <mat-label>{{a18service.ingredient_translation[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtering">
       </mat-form-field>
     </form>

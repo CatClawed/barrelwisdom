@@ -156,7 +156,7 @@
                     <ng-template #effPopover>
                       @if (e.effect) {
                         <p>{{e.effect.desc}}</p>
-                        <a routerLink="/{{gameURL}}/effects/{{e.effect.slug}}/{{language}}">More info...</a>
+                        <a routerLink="/{{gameURL}}/effects/{{e.effect.slug}}/{{language}}">{{a23service.details_translation[language]}}</a>
                       }
                       @if (e.component) {
                         <ng-content *ngTemplateOutlet="componentmaker;context:{'component':e.component}"></ng-content>

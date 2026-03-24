@@ -26,14 +26,15 @@ export class A12ItemlistComponent extends DialogUseComponent {
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       filtering: '',
-      type: 'Any',
+      type: '--',
       level: 0,
     })
   }
 
   changeData() {
     this.gameService(this.a12service, 'items');
-    this.genericSettings(`Items`, `The list of items in ${this.gameTitle}.`);
+    this.genericSettings(this.a12service.item_translation[this.language],
+      `The list of items in ${this.gameTitle}.`);
     this.pageForm.reset();
     return forkJoin({
       items: this.a12service.getItemList(this.language),
@@ -52,7 +53,7 @@ export class A12ItemlistComponent extends DialogUseComponent {
     this.hide = false;
     let list: ItemList[] = this.data.items;
 
-    if (type != 'Any') {
+    if (type != '--') {
       list = list.filter(item => item.item_type != 'Equipment');
       list = list.filter(item => item.categories.some(c => c.name == type));
     }

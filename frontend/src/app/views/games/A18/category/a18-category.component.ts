@@ -18,6 +18,7 @@ export class A18CategoryComponent extends SingleComponent {
   }
 
   override afterAssignment(): void {
-    this.genericSettings(this.data.name, `All items in ${this.data.name}`, '', true);
+    this.genericSettings(this.data.name,
+      `${this.a18service.category_translation[this.language]} ${this.data.name}`, '', true);
   }
 }

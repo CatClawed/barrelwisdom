@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { getApiUrl } from '@app/_helpers/api-url';
 import { AreaData, Book, Category, CategoryData, Effect, ItemFull, ItemList, MonsterFull, MonsterList, Property } from '@app/views/games/A16/_services/a16.interface';
 import { environment } from '@environments/environment';
+import { level_translation } from '@environments/localization';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -11,6 +12,8 @@ export class A16Service {
   constructor(
     private http: HttpClient,
   ) { }
+
+  public readonly level_translation = level_translation
 
   public readonly gameTitle = { "en": "Atelier Shallie", "ja": "シャリーのアトリエ" };
   public readonly gameURL = "shallie";

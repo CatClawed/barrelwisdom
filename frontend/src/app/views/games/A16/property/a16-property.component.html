@@ -46,9 +46,10 @@
         </ul>
       }
       @if (property.grade != -1) {
-        <p>
-          <tooltip tip="A measure of rarity. This number determines where properties appear.">Grade: </tooltip>
-        {{property.grade}}
+        <p><popover
+            [text]="`A measure of rarity. This number determines where properties appear.`">
+            {{a16service.level_translation[language]}}</popover>:
+          {{property.grade}}
         </p>
       }
 

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { getApiUrl } from '@app/_helpers/api-url';
 import { Category, Coord, Effect, Item, Monster, NameLink, Trait } from '@app/views/games/A26/_services/a26.interface';
 import { environment } from '@environments/environment';
-import { category_translation, effect_translation, filter_translation, item_translation, monster_translation, quality_translation, race_translation, stat_translation, trait_translation } from '@environments/localization';
+import { category_translation, details_translation, effect_translation, filter_translation, item_translation, level_translation, monster_translation, quality_translation, race_translation, stat_translation, trait_translation } from '@environments/localization';
 import { Observable } from 'rxjs';
 
 
@@ -25,6 +25,8 @@ export class A26Service {
   public readonly filter_translation = filter_translation
   public readonly race_translation = race_translation
   public readonly quality_translation = quality_translation
+  public readonly details_translation = details_translation
+  public readonly level_translation = level_translation
 
   public readonly gameTitle = {
     "en": "Atelier Yumia",
@@ -128,7 +130,7 @@ export class A26Service {
 
   public readonly elements = {
     'air': '#75ff76',
-    'fire': '#fcbc72',
+    'fire': '#fcbc72', 
     'ice': '#7dfffa',
     'bolt': '#ffff7b',
     'none': '#969696'

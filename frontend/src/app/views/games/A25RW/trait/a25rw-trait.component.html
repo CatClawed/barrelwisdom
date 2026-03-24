@@ -15,7 +15,9 @@
         @if (trait.dlc) {
           <span class="badge bg-primary">DLC</span><br />
         }
-        <tooltip tip="A measure of rarity. This number determines where traits appear.">Grade: </tooltip>
+        <popover
+          [text]="`A measure of rarity. This number determines where traits appear.`">
+          {{a25rwservice.level_translation[language]}}</popover>:
         @if (trait.grade) {
           {{trait.grade}}
         }

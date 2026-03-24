@@ -25,13 +25,14 @@ export class A18MonsterlistComponent extends DialogUseComponent {
     this.component = A18MonsterComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
-      type: 'Any'
+      type: '--'
     })
   }
 
   changeData() {
     this.gameService(this.a18service, 'monsters');
-    this.genericSettings(`Monsters`, `The list of monsters in ${this.gameTitle}.`);
+    this.genericSettings(this.a18service.monster_translation[this.language],
+      `The list of monsters in ${this.gameTitle}.`);
     this.pageForm.reset();
     return forkJoin({
       monsters: this.a18service.getMonsterList(this.language),
@@ -49,7 +50,7 @@ export class A18MonsterlistComponent extends DialogUseComponent {
   private filterT(value: string, type: string): Monster[] {
     this.hide = false;
     let list: Monster[] = this.data.monsters;
-    if (type != 'Any') {
+    if (type != '--') {
       list = list.filter(mon => type == mon.race)
     }
     if (!value) {

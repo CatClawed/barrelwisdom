@@ -30,7 +30,8 @@ export class A12MonsterlistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.a12service, 'monsters');
-    this.genericSettings(`Monsters`, `The list of monsters in ${this.gameTitle}.`);
+    this.genericSettings(this.a12service.monster_translation[this.language],
+      `The list of monsters in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a12service.getMonsterList(this.language);
   }

@@ -11,7 +11,9 @@
         }
       </h4>
       <div class="card-icon-position">
-        <tooltip tip="A measure of rarity. This number determines where traits appear.">Grade: </tooltip>
+        <popover
+          [text]="`A measure of rarity. This number determines where traits appear.`">
+          {{a26service.level_translation[language]}}</popover>:
         @if (!trait.grade_max) {
           {{trait.grade_min}}
         }

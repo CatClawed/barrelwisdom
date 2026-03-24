@@ -9,36 +9,34 @@
   </ng-template>
   <filter-list
     [list]="filteredTraits"
-    name="Traits"
+    name="{{a18service.trait_translation[language]}}"
     [(hide)]="hide"
     [template]="template">
     <form [formGroup]="pageForm" class="grid">
-      <mat-form-field class="grid-8" appearance="outline">
-        <mat-label>Filter...</mat-label>
+      <mat-form-field class="grid-6" appearance="outline">
+        <mat-label>{{a18service.filter_translation[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtertext">
 
       </mat-form-field>
-      <mat-form-field class="grid-4" appearance="outline">
-        <mat-label>Transfers to...</mat-label>
-        <mat-select matNativeControl formControlName="transfers" disableOptionCentering="true" class="mat-select-icon">
-          <mat-option value="0" class="svg-icon-text-vertical-center" selected> <svg class="svg-icon"><use href="/media/spritesheets/A22.svg?v=1#type-synthesis"></use></svg>--</mat-option>
-          @for (t of [
-              ['1',  'synthesis', 'Synthesis'],
-              ['2',  'attack', 'Attack'],
-              ['3',  'heal', 'Heal'],
-              ['6',  'weapon', 'Weapon'],
-              ['7',  'armor', 'Armor'],
-              ['8',  'accessory', 'Accessory'],
-            ]; track $index) {
-              <mat-option [value]="t[0]" class="svg-icon-text-vertical-center">
-                <svg class="svg-icon-standard right-spacer">
-                  <use attr.href="/media/spritesheets/A18.svg?v=1#{{t[1]}}"></use>
-                </svg>
-                {{t[2]}}
-              </mat-option>
-            }
-        </mat-select>
-      </mat-form-field>
+      <div class="grid-6">
+        @for (btn of [
+          { ctrl: pageForm.controls.syn,  icon: 'synthesis' },
+          { ctrl: pageForm.controls.atk,  icon: 'attack' },
+          { ctrl: pageForm.controls.heal, icon: 'heal' },
+          { ctrl: pageForm.controls.wep,  icon: 'weapon' },
+          { ctrl: pageForm.controls.arm,  icon: 'armor' },
+          { ctrl: pageForm.controls.acc,  icon: 'accessory' }
+        ]; track $index) {
+          <button type="button" 
+                  class="icon-button" 
+                  (click)="toggle(btn.ctrl)"
+                  [class.active]="btn.ctrl.value">
+            <svg>
+              <use attr.href="/media/spritesheets/A18.svg?v=1#{{btn.icon}}"></use>
+            </svg>
+          </button>
+        }
+      </div>
     </form>
   </filter-list>
 }

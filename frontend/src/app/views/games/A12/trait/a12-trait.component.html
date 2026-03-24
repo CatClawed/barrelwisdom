@@ -15,7 +15,7 @@
       }
       <p [style]="url ? 'height:100%;' : null">{{trait.desc}}</p>
       @if (trait.item_set) {
-        <b>Items:</b>
+        <b>{{a12service.item_translation[language]}}</b>
         <ul>
           @for (item of trait.item_set; track item) {
             <li><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>

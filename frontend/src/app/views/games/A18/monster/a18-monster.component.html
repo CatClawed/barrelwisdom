@@ -59,7 +59,7 @@
     <div class="grid">
       <div class="grid-6">
         @if (monster.locations) {
-          <b>Locations:</b>
+          <b>{{a18service.location_translation[language]}}</b>
         }
         @if (monster.locations) {
           <ul>
@@ -69,7 +69,7 @@
           </ul>
         }
         @if (monster.item_set) {
-          <b>Drops:</b>
+          <b>{{a18service.item_translation[language]}}</b>
         }
         @if (monster.item_set) {
           <ul>

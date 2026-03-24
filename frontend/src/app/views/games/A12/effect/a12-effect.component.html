@@ -6,7 +6,7 @@
     [url]="inputData ? '/' + gameURL + '/effects/' + effect.slug + '/' + language : undefined"
     (buttonClicked)="buttonClicked.emit($event)">
     @if (!hideContents) {
-      <b>From Item:</b>
+      <b>{{a12service.item_translation[language]}}</b>
     }
     <ul class="two-column" [style]="hideContents ? 'float: left;margin-bottom: 0;' : null">
       @for (e of effect.effectline_set; track e) {

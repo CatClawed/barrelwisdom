@@ -13,7 +13,8 @@ export class A18ShopComponent extends FragmentedComponent {
 
   changeData() {
     this.gameService(this.a18service, 'shops');
-    this.genericSettings(`Shops`, `The list of shops in ${this.gameTitle}.`);
+    this.genericSettings(this.a18service.shop_translation[this.language],
+      `The list of shops in ${this.gameTitle}.`);
     return this.a18service.getShopList(this.language);
   }
 }

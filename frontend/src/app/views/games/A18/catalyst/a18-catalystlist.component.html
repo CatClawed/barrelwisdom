@@ -33,7 +33,7 @@
   </ng-template>
   <filter-list
     [list]="filteredCatalysts"
-    name="Catalysts"
+    name="{{a18service.catalyst_translation[language]}}"
     [(hide)]="hide"
     [template]="template">
     <form [formGroup]="pageForm" class="grid">

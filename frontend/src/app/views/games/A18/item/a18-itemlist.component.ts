@@ -34,7 +34,8 @@ export class A18ItemlistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.a18service, 'items');
-    this.genericSettings(`Items`, `The list of items in ${this.gameTitle}.`);
+    this.genericSettings(this.a18service.item_translation[this.language]
+      , `The list of items in ${this.gameTitle}.`);
     this.pageForm.reset();
     return forkJoin({
       items: this.a18service.getItemList(this.language),
@@ -52,7 +53,7 @@ export class A18ItemlistComponent extends DialogUseComponent {
   private filterT(value: string, cat: string, ingt: string): Item[] {
     this.hide = false;
     let list: Item[] = this.data.items;
-    if (cat != 'Any') {
+    if (cat != '--') {
       list = list.filter(item => item.categories.some(c => c.name == cat) || (item.add ? item.add.some(c => c.name == cat) : false));
     }
     if (ingt) {

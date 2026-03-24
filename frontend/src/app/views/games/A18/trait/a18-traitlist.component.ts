@@ -23,13 +23,19 @@ export class A18TraitlistComponent extends DialogUseComponent {
     this.component = A18TraitComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
-      transfers: 0
+      syn: false,
+      atk: false,
+      heal: false,
+      wep: false,
+      arm: false,
+      acc: false,
     })
   }
 
   changeData() {
     this.gameService(this.a18service, 'traits');
-    this.genericSettings(`Traits`, `The list of traits in ${this.gameTitle}.`);
+    this.genericSettings(this.a18service.trait_translation[this.language],
+      `The list of traits in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a18service.getTraitList(this.language);
   }
@@ -37,37 +43,24 @@ export class A18TraitlistComponent extends DialogUseComponent {
   override afterAssignment(): void {
     this.filteredTraits = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Trait[]>),
-      map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.data.slice())
+      map((search: any) => search ? this.filterT(search.filtertext, search.syn, search.atk, search.heal, search.wep, search.arm, search.acc) : this.data.slice())
     );
   }
 
-  private filterT(value: string, transfer: string): Trait[] {
+  private filterT(value: string, syn: boolean, atk: boolean, heal: boolean, wep: boolean, arm: boolean, acc: boolean): Trait[] {
     this.hide = false;
     let traitlist: Trait[] = this.data;
-    if (transfer != '0') {
+    if (syn || atk || heal || wep || arm || acc) {
       traitlist = traitlist.filter(trait => !(trait.trans_atk === trait.trans_heal === trait.trans_wpn === trait.trans_arm === trait.trans_acc === trait.trans_syn));
     }
 
-    switch (transfer) {
-      case '1':
-        traitlist = traitlist.filter(trait => trait.trans_syn);
-        break;
-      case '2':
-        traitlist = traitlist.filter(trait => trait.trans_atk);
-        break;
-      case '3':
-        traitlist = traitlist.filter(trait => trait.trans_heal);
-        break;
-      case '6':
-        traitlist = traitlist.filter(trait => trait.trans_wpn);
-        break;
-      case '7':
-        traitlist = traitlist.filter(trait => trait.trans_arm);
-        break;
-      case '8':
-        traitlist = traitlist.filter(trait => trait.trans_acc);
-        break;
-    }
+      if (syn) traitlist = traitlist.filter(trait => trait.trans_syn);
+      if (atk) traitlist = traitlist.filter(trait => trait.trans_atk);
+      if (heal) traitlist = traitlist.filter(trait => trait.trans_heal);
+      if (wep) traitlist = traitlist.filter(trait => trait.trans_wpn);
+      if (arm) traitlist = traitlist.filter(trait => trait.trans_arm);
+      if (acc) traitlist = traitlist.filter(trait => trait.trans_acc);
+
     if (!value) {
       return traitlist;
     }

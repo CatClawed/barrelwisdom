@@ -11,7 +11,9 @@
       }
     </h4>
     <div class="card-icon-position">
-      <tooltip tip="Influences rank. A measure of rarity. This number determines where traits appear.">Grade: </tooltip>
+      <popover
+          [text]="`Influences rank. A measure of rarity. This number determines where traits appear.`">
+          {{a23service.level_translation[language]}}</popover>:
       {{trait.grade}}
     </div>
     @if ( trait.item_set) {

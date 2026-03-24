@@ -1,7 +1,6 @@
 @if (data; as location) {
   <h1>{{location.name}}</h1>
   <div class="table-of-contents">
-    <b>Table of Contents</b>
     <ol>
       @for (area of location.fields; track area) {
         <li>
@@ -22,10 +21,10 @@
     <table class="tbl borders"><tbody>
       <tr>
         @if (area.ingredients) {
-          <th >Items</th>
+          <th >{{a12service.item_translation[language]}}</th>
         }
         @if (area.monsters) {
-          <th>Monsters</th>
+          <th>{{a12service.monster_translation[language]}}</th>
         }
       </tr>
       <tr>
