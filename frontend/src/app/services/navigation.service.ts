@@ -19,6 +19,7 @@ export class NavigationService {
     map(() => this.parseUrl(this.router.url))
   );
   public section = toSignal(this.routeState$.pipe(map(s => s.section)), { initialValue: 'default' });
+  // TODO: Fix me
   public currentLang = toSignal(this.routeState$.pipe(map(s => s.lang)), { initialValue: 'en' });
 
   public langOptions = computed(() => {

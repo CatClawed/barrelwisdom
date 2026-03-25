@@ -5,9 +5,6 @@
   [url]="inputData ? '/' + gameURL + '/effects/' + effect.slug + '/' + language : undefined"
   (buttonClicked)="buttonClicked.emit($event)">
 
-    @if (!hideContents && effect.effectdata_set) {
-      <b>From Item:</b>
-    }
     @if (effect.effectdata_set) {
       <ul class="two-column" [style]="inputData ? 'margin-right:1.7rem;' : null">
         @for (e of effect.effectdata_set; track e; let index=$index) {

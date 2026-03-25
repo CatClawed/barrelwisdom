@@ -19,7 +19,7 @@ export class A16ItemComponent extends SingleComponent {
   override afterAssignment(): void {
     this.seoImage = `${this.imgURL}${this.section}/${this.data.slug}.webp`
     this.genericSettings(this.data.name, this.data.desc,
-      'Items',
+      this.a16service.item_translation[this.language],
       false,
       this.inputSlug ? false : true);
   }

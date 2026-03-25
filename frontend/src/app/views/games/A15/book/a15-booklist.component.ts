@@ -29,7 +29,8 @@ export class A15BooklistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.a15service, 'recipe-books');
-    this.genericSettings(`Recipe Books`, `The list of recipe books in ${this.gameTitle}.`);
+    this.genericSettings(this.a15service.recipebook_translation[this.language],
+      `The list of recipe books in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a15service.getBookList(this.language)
   }

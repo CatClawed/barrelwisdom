@@ -3,7 +3,7 @@
     <tr>
       <td>
         <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
-        <br /><b>LV {{item.level}}</b><br />
+        <br /><b>{{a15service.level_translation[language]}} {{item.level}}</b><br />
         @if (item.fire) {
           <svg class="a15-element" style="background-color:#ac504f;"><use href="/media/spritesheets/A15.svg?v=0#element-fire"></use></svg>
         }

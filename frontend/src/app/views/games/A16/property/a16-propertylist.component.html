@@ -9,34 +9,32 @@
   </ng-template>
   <filter-list
     [list]="filteredProperties"
-    name="Properties"
+    [name]="a16service.properties_translation[language]"
     [(hide)]="hide"
     [template]="template">
     <form [formGroup]="pageForm" class="grid">
-      <mat-form-field class="grid-8" appearance="outline">
-        <mat-label>Filter...</mat-label>
+      <mat-form-field class="grid-6" appearance="outline">
+        <mat-label>{{a16service.filter_translation[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtertext">
       </mat-form-field>
-      <mat-form-field class="grid-4" appearance="outline">
-        <mat-label>Transfers to...</mat-label>
-        <mat-select matNativeControl formControlName="transfers" disableOptionCentering="true" class="mat-select-icon">
-          <mat-option value="1" selected> --</mat-option>
-          @for (t of [
-              ['2',  'bomb', 'Attack'],
-              ['3',  'heal', 'Heal'],
-              ['5',  'weapon', 'Weapon'],
-              ['6',  'armor', 'Armor'],
-              ['7',  'accessory', 'Accessory'],
-            ]; track $index) {
-            <mat-option [value]="t[0]" class="svg-icon-text-vertical-center">
-              <svg class="svg-icon-standard right-spacer">
-                <use attr.href="/media/spritesheets/A16.svg?v=1#{{t[1]}}"></use>
-              </svg>
-              {{t[2]}}
-            </mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
+      <div class="grid-6">
+        @for (btn of [
+          { ctrl: pageForm.controls.bomb,  icon: 'bomb' },
+          { ctrl: pageForm.controls.heal,  icon: 'heal' },
+          { ctrl: pageForm.controls.weapon,  icon: 'weapon' },
+          { ctrl: pageForm.controls.armor,  icon: 'armor' },
+          { ctrl: pageForm.controls.accessory,  icon: 'accessory' }
+        ]; track $index) {
+          <button type="button" 
+                  class="icon-button" 
+                  (click)="toggle(btn.ctrl)"
+                  [class.active]="btn.ctrl.value">
+            <svg>
+              <use attr.href="/media/spritesheets/A16.svg?v=1#{{btn.icon}}"></use>
+            </svg>
+          </button>
+        }
+      </div>
     </form>
   </filter-list>
 }

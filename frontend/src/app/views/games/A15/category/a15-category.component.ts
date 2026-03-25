@@ -18,6 +18,6 @@ export class A15CategoryComponent extends SingleComponent {
     return this.a15service.getCategory(this.slug, this.language);
   }
   override afterAssignment(): void {
-    this.genericSettings(this.data.name, `All items in ${this.data.name}`, '', true);
+    this.genericSettings(this.data.name, this.a15service.category_translation[this.language], '', true);
   }
 }

@@ -16,7 +16,7 @@
   <filter-list [list]="filteredMonsters" [name]="a25rwservice.monster_translation[language]" [(hide)]="hide" [template]="template">
     <form [formGroup]="pageForm" class="grid">
       <mat-form-field class="grid-8" appearance="outline">
-        <mat-label>Filter...</mat-label>
+        <mat-label>{{a25rwservice.filter_translation[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtertext">
       </mat-form-field>
       <div class="grid-4 svg-filter">

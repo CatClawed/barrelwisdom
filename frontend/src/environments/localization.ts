@@ -245,3 +245,8 @@ export const level_translation = {
     "es": "Nivel",
     "ru": "Уровень"
 };
+
+export const properties_translation = {
+    "en": "Properties",
+    "ja": "潜在能力",
+}

@@ -9,9 +9,9 @@ import { map, startWith } from 'rxjs/operators';
 import { A15PropertyComponent } from './a15-property.component';
 
 @Component({
-    templateUrl: 'a15-propertylist.component.html',
-    imports: [...CommonImports, ...MaterialFormImports, A15PropertyComponent,
-        FilterListComponent]
+  templateUrl: 'a15-propertylist.component.html',
+  imports: [...CommonImports, ...MaterialFormImports, A15PropertyComponent,
+    FilterListComponent]
 })
 export class A15PropertylistComponent extends DialogUseComponent {
   protected a15service = inject(A15Service);
@@ -22,45 +22,49 @@ export class A15PropertylistComponent extends DialogUseComponent {
     this.component = A15PropertyComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
-      transfers: ''
+      bomb: false,
+      heal: false,
+      buff: false,
+      weapon: false,
+      armor: false,
+      accessory: false,
     })
   }
 
   changeData() {
     this.gameService(this.a15service, 'properties');
-    this.genericSettings(`Properties`, `The list of properties in ${this.gameTitle}.`);
+    this.genericSettings(this.a15service.properties_translation[this.language],
+      `The list of properties in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a15service.getPropertyList(this.language);
   }
   override afterAssignment(): void {
     this.filteredProperties = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Property[]>),
-      map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.data.slice())
+      map((search: any) => search ? this.filterT(search.filtertext, search.bomb, search.heal, search.buff, search.weapon, search.armor, search.accessory) : this.data.slice())
     );
   }
 
-  private filterT(value: string, transfer: string): Property[] {
+  private filterT(value: string, bomb: boolean, heal: boolean, buff: boolean, weapon: boolean, armor: boolean, accessory: boolean): Property[] {
     this.hide = false;
     let propertylist: Property[] = this.data;
-    switch (transfer) {
-      case "2":
-        propertylist = propertylist.filter(property => property.bomb);
-        break;
-      case "3":
-        propertylist = propertylist.filter(property => property.heal);
-        break;
-      case "4":
-        propertylist = propertylist.filter(property => property.buff);
-        break;
-      case "5":
-        propertylist = propertylist.filter(property => property.weapon);
-        break;
-      case "6":
-        propertylist = propertylist.filter(property => property.armor);
-        break;
-      case "7":
-        propertylist = propertylist.filter(property => property.accessory);
-        break;
+    if (bomb) {
+      propertylist = propertylist.filter(property => property.bomb);
+    }
+    if (heal) {
+      propertylist = propertylist.filter(property => property.heal);
+    }
+    if (buff) {
+      propertylist = propertylist.filter(property => property.buff);
+    }
+    if (weapon) {
+      propertylist = propertylist.filter(property => property.weapon);
+    }
+    if (armor) {
+      propertylist = propertylist.filter(property => property.armor);
+    }
+    if (accessory) {
+      propertylist = propertylist.filter(property => property.accessory);
     }
     if (!value) {
       return propertylist;

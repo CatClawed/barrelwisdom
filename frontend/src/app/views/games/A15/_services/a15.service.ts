@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { getApiUrl } from '@app/_helpers/api-url';
 import { Book, Category, CategoryData, Effect, ItemFull, ItemList, MonsterFull, MonsterList, Property, RegionData } from '@app/views/games/A15/_services/a15.interface';
 import { environment } from '@environments/environment';
-import { level_translation } from '@environments/localization';
+import { category_translation, character_translation, effect_translation, filter_translation, ingredient_translation, item_translation, level_translation, location_translation, monster_translation, properties_translation, recipebook_translation } from '@environments/localization';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -13,7 +13,17 @@ export class A15Service {
       private http: HttpClient,
     ) { }
 
+    public readonly item_translation = item_translation
+    public readonly monster_translation = monster_translation
+    public readonly properties_translation = properties_translation
+    public readonly category_translation = category_translation
+    public readonly filter_translation = filter_translation
+    public readonly location_translation = location_translation
+    public readonly recipebook_translation = recipebook_translation
+    public readonly ingredient_translation = ingredient_translation
     public readonly level_translation = level_translation
+    public readonly character_translation = character_translation
+    public readonly effect_translation = effect_translation
 
     public readonly gameTitle = {"en": "Atelier Escha & Logy", "ja":"エスカ＆ロジーのアトリエ"};
     public readonly gameURL = "escha";

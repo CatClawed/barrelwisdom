@@ -22,42 +22,45 @@ export class A16PropertylistComponent extends DialogUseComponent {
     this.component = A16PropertyComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
-      transfers: ''
+      bomb: false,
+      heal: false,
+      weapon: false,
+      armor: false,
+      accessory: false,
     })
   }
 
   changeData() {
     this.gameService(this.a16service, 'properties');
-    this.genericSettings(`Properties`, `The list of properties in ${this.gameTitle}.`);
+    this.genericSettings(this.a16service.properties_translation[this.language],
+      `The list of properties in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a16service.getPropertyList(this.language);
   }
   override afterAssignment(): void {
     this.filteredProperties = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Property[]>),
-      map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.data.slice())
+      map((search: any) => search ? this.filterT(search.filtertext, search.bomb, search.heal, search.weapon, search.armor, search.accessory) : this.data.slice())
     );
   }
 
-  private filterT(value: string, transfer: string): Property[] {
+  private filterT(value: string, bomb: boolean, heal: boolean, weapon: boolean, armor: boolean, accessory: boolean): Property[] {
     this.hide = false;
     let propertylist: Property[] = this.data;
-    switch (transfer) {
-      case "2":
-        propertylist = propertylist.filter(property => property.bomb);
-        break;
-      case "3":
-        propertylist = propertylist.filter(property => property.heal);
-        break;
-      case "5":
-        propertylist = propertylist.filter(property => property.weapon);
-        break;
-      case "6":
-        propertylist = propertylist.filter(property => property.armor);
-        break;
-      case "7":
-        propertylist = propertylist.filter(property => property.accessory);
-        break;
+    if (bomb) {
+      propertylist = propertylist.filter(property => property.bomb);
+    }
+    if (heal) {
+      propertylist = propertylist.filter(property => property.heal);
+    }
+    if (weapon) {
+      propertylist = propertylist.filter(property => property.weapon);
+    }
+    if (armor) {
+      propertylist = propertylist.filter(property => property.armor);
+    }
+    if (accessory) {
+      propertylist = propertylist.filter(property => property.accessory);
     }
     if (value) {
       const filterValue = value.toLowerCase();

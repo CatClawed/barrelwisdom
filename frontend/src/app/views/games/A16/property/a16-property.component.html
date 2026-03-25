@@ -33,7 +33,6 @@
       }
       <p>{{property.desc}}</p>
       @if (property.item_set) {
-        <b>Items:</b>
         <ul class="two-column">
           @for (item of property.item_set; track item; let index=$index) {
             @if (index < 3 || !url) {

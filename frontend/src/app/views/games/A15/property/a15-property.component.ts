@@ -19,7 +19,7 @@ export class A15PropertyComponent extends SingleComponent {
   }
   override afterAssignment(): void {
     this.genericSettings(this.data.name, this.data.desc,
-      'Properties',
+      this.a15service.properties_translation[this.language],
       false,
       this.inputSlug ? false : true);
   }

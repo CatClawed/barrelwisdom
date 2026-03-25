@@ -30,7 +30,8 @@ export class A16MonsterlistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.a16service, 'monsters');
-    this.genericSettings(`Monsters`, `The list of monsters in ${this.gameTitle}.`);
+    this.genericSettings(this.a16service.monster_translation[this.language],
+      `The list of monsters in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a16service.getMonsterList(this.language);
   }

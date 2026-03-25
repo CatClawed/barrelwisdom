@@ -20,7 +20,7 @@ export class A15MonsterComponent extends SingleComponent {
   override afterAssignment(): void {
     this.seoImage = `${this.imgURL}${this.section}/${this.data.slug}.webp`
     this.genericSettings(this.data.name, this.data.desc,
-      'Monsters',
+      this.a15service.monster_translation[this.language],
       false,
       this.inputSlug ? false : true);
   }

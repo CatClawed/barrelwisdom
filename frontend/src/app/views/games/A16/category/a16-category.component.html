@@ -1,9 +1,9 @@
 @if (data; as category) {
   <ng-template #cat let-item="item">
-    <tr>
+    <tr> 
       <td>
         <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
-        <br /><b>LV {{item.level}}</b><br />
+        <br /><b>{{a16service.level_translation[language]}} {{item.level}}</b><br />
         @if (item.fire) {
           <svg class="a16-element" style="background-color:#ac504f;"><use href="/media/spritesheets/A16.svg?v=0#element-fire"></use></svg>
         }

@@ -18,7 +18,7 @@ export class A15EffectComponent extends SingleComponent {
   }
   override afterAssignment(): void {
     this.genericSettings(this.data.name, this.data.desc,
-      'Effects',
+      this.a15service.effect_translation[this.language],
       false,
       this.inputSlug ? false : true);
   }

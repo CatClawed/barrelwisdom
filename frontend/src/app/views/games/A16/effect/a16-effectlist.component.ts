@@ -27,7 +27,8 @@ export class A16EffectlistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.a16service, 'effects');
-    this.genericSettings(`Effects`, `The list of effects in ${this.gameTitle}.`);
+    this.genericSettings(this.a16service.effect_translation[this.language],
+      `The list of effects in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a16service.getEffectList(this.language);
   }

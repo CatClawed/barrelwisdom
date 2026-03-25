@@ -30,7 +30,7 @@
       }
       <p>{{property.desc}}</p>
       @if (property.item_set) {
-        <b>Items:</b>
+        <b>{{a15service.item_translation[language]}}</b>
         <ul class="two-column">
           @for (item of property.item_set; track item; let index=$index) {
             @if (index < 3 || !url) {

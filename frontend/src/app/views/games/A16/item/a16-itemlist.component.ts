@@ -27,15 +27,19 @@ export class A16ItemlistComponent extends DialogUseComponent {
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       filtering: '',
-      type: 'Any',
+      type: '--',
       elementval: 0,
-      element: "Any"
+      fire: false,
+      water: false,
+      wind: false,
+      earth: false,
     })
   }
 
   changeData() {
     this.gameService(this.a16service, 'items');
-    this.genericSettings(`Items`, `The list of items in ${this.gameTitle}.`);
+    this.genericSettings(this.a16service.item_translation[this.language],
+      `The list of items in ${this.gameTitle}.`);
     this.pageForm.reset();
     return forkJoin({
       items: this.a16service.getItemList(this.language),
@@ -46,32 +50,30 @@ export class A16ItemlistComponent extends DialogUseComponent {
   override afterAssignment(): void {
     this.filteredItems = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<ItemList[]>),
-      map((search: any) => search ? this.filterT(search.filtertext, search.type, search.elementval, search.element, search.filtering) : this.data.items.slice())
+      map((search: any) => search ? this.filterT(search.filtertext, search.type, search.elementval, search.fire, search.water, search.wind, search.earth, search.filtering) : this.data.items.slice())
     );
   }
 
-  private filterT(value: string, type: string, elementV: number, element: string, ing: string): ItemList[] {
+  private filterT(value: string, type: string, elementV: number, fire: boolean, water: boolean, wind: boolean, earth: boolean, ing: string): ItemList[] {
     this.hide = false;
     let list: ItemList[] = this.data.items;
-    if (type != 'Any') {
+    if (type != '--') {
       list = list.filter(item => item.categories.some(c => c.name == type));
     }
     if (elementV > 1) {
       list = list.filter(item => item.evalue >= elementV);
     }
-    switch (element) {
-      case "Fire":
-        list = list.filter(item => item.fire)
-        break;
-      case "Water":
-        list = list.filter(item => item.water)
-        break;
-      case "Wind":
-        list = list.filter(item => item.wind)
-        break;
-      case "Earth":
-        list = list.filter(item => item.earth)
-        break;
+    if (fire) {
+      list = list.filter(item => item.fire)
+    }
+    if (water) {
+      list = list.filter(item => item.water)
+    }
+    if (wind) {
+      list = list.filter(item => item.wind)
+    }
+    if (earth) {
+      list = list.filter(item => item.earth)
     }
     if (ing) {
       const filterValue = ing.toLowerCase();

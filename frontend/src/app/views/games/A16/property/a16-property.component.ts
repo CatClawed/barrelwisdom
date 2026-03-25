@@ -19,7 +19,7 @@ export class A16PropertyComponent extends SingleComponent {
   }
   override afterAssignment(): void {
     this.genericSettings(this.data.name, this.data.desc,
-      'Properties',
+      this.a16service.properties_translation[this.language],
       false,
       this.inputSlug ? false : true);
   }

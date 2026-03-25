@@ -7,7 +7,7 @@
       (buttonClicked)="openDialog($event)"
       dimension="192">
       <ng-container icon>
-        <b>LV {{item.level}}</b>
+        <b>{{a15service.level_translation[language]}} {{item.level}}</b>
         @if (item.isDLC) {
           <br />
           <span class="badge bg-primary">DLC</span>
@@ -48,18 +48,18 @@
   </ng-template>
   <filter-list
     [list]="filteredItems"
-    name="Items"
+    [name]="a15service.item_translation[language]"
     [(hide)]="hide"
     [template]="template">
     <form [formGroup]="pageForm" class="grid">
       <mat-form-field class="grid-8" appearance="outline">
-        <mat-label>Filter...</mat-label>
+        <mat-label>{{a15service.filter_translation[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtertext">
       </mat-form-field>
       <mat-form-field class="grid-4" appearance="outline">
-        <mat-label>Category</mat-label>
+        <mat-label>{{a15service.category_translation[language]}}</mat-label>
         <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
-          <mat-option class="svg-icon-text-vertical-center" value="Any">--</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="--">--</mat-option>
           @if (data) {
             @for (cat of data.categories; track cat) {
               <mat-option class="svg-icon-text-vertical-center" value="{{cat.name}}">
@@ -71,23 +71,30 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field class="grid-5" appearance="outline">
-        <mat-label>Has ingredient...</mat-label>
+        <mat-label>{{a15service.ingredient_translation[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtering">
       </mat-form-field>
+      <div class="grid-4">
+        @for (btn of [
+          { ctrl: pageForm.controls.fire,   icon: 'element-fire' },
+          { ctrl: pageForm.controls.water,  icon: 'element-water' },
+          { ctrl: pageForm.controls.wind ,  icon: 'element-wind' },
+          { ctrl: pageForm.controls.earth,  icon: 'element-earth' },
+        ]; track $index) {
+          <button type="button" 
+                  class="icon-button" 
+                  (click)="toggle(btn.ctrl)"
+                  [class.active]="btn.ctrl.value">
+            <svg>
+              <use attr.href="/media/spritesheets/A15.svg?v=1#{{btn.icon}}"></use>
+            </svg>
+          </button>
+        }
+      </div>
       <mat-form-field class="grid-3" appearance="outline">
-        <mat-label>Element</mat-label>
-        <mat-select matNativeControl formControlName="element" disableOptionCentering="true" class="mat-select-icon">
-          <mat-option class="svg-icon-text-vertical-center" value="Any">Any</mat-option>
-          <mat-option class="svg-icon-text-vertical-center" value="Fire"> <svg class="svg-icon"><use href="/media/spritesheets/A15.svg?v=0#element-fire"></use></svg>Fire</mat-option>
-          <mat-option class="svg-icon-text-vertical-center" value="Water"><svg class="svg-icon"><use href="/media/spritesheets/A15.svg?v=0#element-water"></use></svg>Water</mat-option>
-          <mat-option class="svg-icon-text-vertical-center" value="Wind"> <svg class="svg-icon"><use href="/media/spritesheets/A15.svg?v=0#element-wind"></use></svg>Wind</mat-option>
-          <mat-option class="svg-icon-text-vertical-center" value="Earth"><svg class="svg-icon"><use href="/media/spritesheets/A15.svg?v=0#element-earth"></use></svg>Earth</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field class="grid-4" appearance="outline">
         <mat-label>Element Value</mat-label>
-        <mat-select matNativeControl formControlName="elementval" disableOptionCentering="true" class="mat-select-icon">
-          <mat-option value="0" type="number">Any</mat-option>
+        <mat-select matNativeControl formControlName="elementval">
+          <mat-option value="0" type="number">0+</mat-option>
           <mat-option value="20" type="number">20+</mat-option>
           <mat-option value="30" type="number">30+</mat-option>
           <mat-option value="40" type="number">40+</mat-option>

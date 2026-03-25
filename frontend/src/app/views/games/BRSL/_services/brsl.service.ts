@@ -12,6 +12,62 @@ export class BRSLService {
     private http: HttpClient,
   ) { }
 
+  public readonly fragments_translation = {
+    "en": "Fragments",
+    "ja": "フラグメント",
+    "sc": "意念碎片",
+    "tc": "意念碎片"
+  };
+
+  public readonly dates_translation = {
+    "en": "Dates",
+    "ja": "デート",
+    "sc": "约会",
+    "tc": "約會"
+  };
+
+  public readonly fragments_dates_translation = {
+    "en": "Fragments & Dates",
+    "ja": "フラグメント & デート",
+    "sc": "意念碎片 & 约会",
+    "tc": "意念碎片 & 約會"
+  };
+
+  public readonly demons_translation = {
+    "en": "Demons",
+    "ja": "モンスター",
+    "sc": "魔物",
+    "tc": "魔物"
+  };
+
+  public readonly facilities_translation = {
+    "en": "School Facilities",
+    "ja": "学校開発",
+    "sc": "关于学校开发",
+    "tc": "關於學校開發"
+  };
+
+  public readonly facility_sets_translation = {
+    "en": "Facility Sets",
+    "ja": "セット",
+    "sc": "套组",
+    "tc": "套組"
+  };
+
+  public readonly units_translation = {
+    "en": "Units",
+    "ja": "ユニット",
+    "sc": "团队",
+    "tc": "團隊"
+  };
+
+  public readonly skills_translation = {
+    "en": "Skills",
+    "ja": "スキル",
+    "sc": "技能",
+    "tc": "技能"
+  };
+
   public readonly gameTitle = { "en": "Blue Reflection: Second Light", "ja": "BLUE REFLECTION TIE/帝", "sc": "BLUE REFLECTION: 帝", "tc": "BLUE REFLECTION: 帝" };
   public readonly gameURL = "second-light";
   public readonly imgURL = `${environment.mediaURL}games/${this.gameURL}/`;

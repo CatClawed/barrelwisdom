@@ -19,7 +19,7 @@ export class A15BookComponent extends SingleComponent {
   override afterAssignment(): void {
     this.seoImage = `${this.imgURL}items/${this.data.slug}.webp`
     this.genericSettings(this.data.name, this.data.desc,
-      'Recipe Books',
+      this.a15service.recipebook_translation[this.language],
       false,
       this.inputSlug ? false : true);
   }

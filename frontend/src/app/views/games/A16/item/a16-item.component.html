@@ -8,7 +8,7 @@
     </div>
     <p>{{item.desc}}</p>
     @if (item.book_set) {
-      <p><b>Recipe Book: </b><a routerLink="/{{gameURL}}/recipe-books/{{item.book_set[0].slug}}/{{language}}">{{item.book_set[0].name}}</a></p>
+      <p><b>{{a16service.recipebook_translation[language]}}: </b><a routerLink="/{{gameURL}}/recipe-books/{{item.book_set[0].slug}}/{{language}}">{{item.book_set[0].name}}</a></p>
     }
     @if (item.size) {
       <p><b>Size: </b>{{item.size}}</p>
@@ -70,7 +70,7 @@
       </ul>
     }
     @if (item.locations) {
-      <b>Locations:</b>
+      <b>{{a16service.location_translation[language]}}</b>
       <ul>
         @for (loc of item.locations; track loc) {
           <li><a routerLink="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}" fragment="{{loc.slug}}">{{loc.name}}</a></li>
@@ -78,7 +78,7 @@
       </ul>
     }
     @if (item.monsters) {
-      <b>Monsters:</b>
+      <b>{{a16service.monster_translation[language]}}</b>
       <ul>
         @for (mon of item.monsters; track mon) {
           <li><a routerLink="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a></li>
@@ -86,7 +86,7 @@
       </ul>
     }
     @if (item.properties) {
-      <b>Properties:</b>
+      <b>{{a16service.properties_translation[language]}}</b>
       <ul>
         @for (prop of item.properties; track prop) {
           <li><a routerLink="/{{gameURL}}/properties/{{prop.slug}}/{{language}}">{{prop.name}}</a></li>
@@ -95,7 +95,7 @@
     }
     @if (item.ingredient_set) {
       <table class="tbl"><tbody>
-        <tr ><th>Ingredients</th></tr>
+        <tr ><th>{{a16service.ingredient_translation[language]}}</th></tr>
         <tr><td>
           <ul>
             @for (ing of item.ingredient_set; track ing) {
@@ -111,7 +111,7 @@
     }
     @if (item.effectlines_set) {
       <table class="tbl"><tbody>
-        <tr ><th colspan=2>Effects</th></tr>
+        <tr ><th colspan=2>{{a16service.effect_translation[language]}}</th></tr>
         @for (effline of item.effectlines_set; track effline) {
           <tr>
             <td style="vertical-align:middle">
@@ -163,7 +163,7 @@
     }
     @if (item.characterequip_set) {
       <table class="tbl"><tbody>
-        <tr><th>Characters</th></tr>
+        <tr><th>{{a16service.character_translation[language]}}</th></tr>
         <tr><td>@for (char of item.characterequip_set[0].chars; track char) {
           <img src="{{imgURL}}equip/equip-{{char.name}}.webp"
             alt="Can equip: {{char.name}}" style="aspect-ratio: 111/44; width: 111px;">

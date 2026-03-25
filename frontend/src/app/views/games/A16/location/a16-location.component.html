@@ -19,7 +19,7 @@
     <table class="tbl borders"><tbody>
       <tr>
         @if (area.ingredients) {
-          <th>Items</th>
+          <th>{{a16service.item_translation[language]}}</th>
         }
         @if (area.rare) {
           <th>Rare</th>
@@ -28,7 +28,7 @@
           <th>Relic</th>
         }
         @if (area.monsters) {
-          <th>Monsters</th>
+          <th>{{a16service.monster_translation[language]}}</th>
         }
       </tr>
       <tr>

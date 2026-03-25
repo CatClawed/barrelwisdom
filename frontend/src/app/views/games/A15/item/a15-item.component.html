@@ -8,7 +8,7 @@
     </div>
     <p>{{item.desc}}</p>
     @if (item.book_set) {
-      <p><b>Recipe Book: </b><a routerLink="/{{gameURL}}/recipe-books/{{item.book_set[0].slug}}/{{language}}">{{item.book_set[0].name}}</a></p>
+      <p><b>{{a15service.recipebook_translation[language]}}: </b><a routerLink="/{{gameURL}}/recipe-books/{{item.book_set[0].slug}}/{{language}}">{{item.book_set[0].name}}</a></p>
     }
     @if (item.size) {
       <p><b>Size: </b>{{item.size}}</p>
@@ -67,7 +67,7 @@
       </ul>
     }
     @if (item.locations) {
-      <b>Locations:</b>
+      <b>{{a15service.location_translation[language]}}</b>
     }
     @if (item.locations) {
       <ul>
@@ -81,7 +81,7 @@
       </ul>
     }
     @if (item.monsters) {
-      <b>Monsters:</b>
+      <b>{{a15service.monster_translation[language]}}</b>
       <ul>
         @for (mon of item.monsters; track mon) {
           <li><a routerLink="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a></li>
@@ -89,7 +89,7 @@
       </ul>
     }
     @if (item.properties) {
-      <b>Properties:</b>
+      <b>{{a15service.properties_translation[language]}}</b>
       <ul>
         @for (prop of item.properties; track prop) {
           <li><a routerLink="/{{gameURL}}/properties/{{prop.slug}}/{{language}}">{{prop.name}}</a></li>
@@ -98,7 +98,7 @@
     }
     @if (item.ingredient_set) {
       <table class="tbl"><tbody>
-        <tr><th>Ingredients</th></tr>
+        <tr><th>{{a15service.ingredient_translation[language]}}</th></tr>
         <tr><td>
           <ul>
             @for (ing of item.ingredient_set; track ing) {
@@ -114,7 +114,7 @@
     }
     @if (item.effectline_set) {
       <table class="tbl"><tbody>
-        <tr><th colspan=2>Effects</th></tr>
+        <tr><th colspan=2>{{a15service.effect_translation[language]}}</th></tr>
         @if (fire) {
           <tr>
             <td style="vertical-align:middle">
@@ -201,7 +201,7 @@
     }
     @if (item.characterequip_set) {
       <table class="tbl"><tbody>
-        <tr><th>Characters</th></tr>
+        <tr><th>{{a15service.character_translation[language]}}</th></tr>
         <tr><td>@for (char of item.characterequip_set[0].chars; track char) {
           <img src="{{imgURL}}equip/equip-{{char.name}}.webp"
             alt="Can equip: {{char.name}}" style="aspect-ratio: 69/70; width: 69px;">
