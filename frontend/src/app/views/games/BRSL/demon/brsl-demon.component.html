@@ -18,7 +18,7 @@
     <div class="grid">
       <div class="grid-6">
         @if (demon.region_set) {
-          <b>Locations:</b>
+          <b>{{brslservice.location_translation[language]}}</b>
         }
         @if (demon.region_set) {
           <ul>
@@ -28,7 +28,7 @@
           </ul>
         }
         @if (demon.drops) {
-          <b>Drops:</b>
+          <b>{{brslservice.item_translation[language]}}</b>
         }
         @if (demon.drops) {
           <ul>

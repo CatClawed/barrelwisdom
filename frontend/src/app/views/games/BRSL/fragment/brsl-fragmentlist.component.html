@@ -51,7 +51,7 @@
       }
       @if (evt.fragment.length == 2) {
         <table class="tbl"><tbody>
-          <tr><th>Fragments</th></tr>
+          <tr><th>{{brslservice.fragments_translation[language]}}</th></tr>
           <tr><td>
             <svg style="width:1em; height:1em;"><use href="/media/spritesheets/main.svg?v=-1#fa-arrow-up"></use></svg>
             <svg style="width:1em; height:1em;"><use href="/media/spritesheets/main.svg?v=-1#fa-arrow-up"></use></svg>
@@ -131,20 +131,20 @@
   </ng-template>
   <filter-list
     [list]="filteredEvents"
-    name="Fragments &amp; Dates"
+    [name]="brslservice.fragments_dates_translation[language]"
     [(hide)]="hide"
     [template]="template">
     <p>Dates give one of two possible fragments. The first listed will always be from two top choices; the second will always be two bottom choices. A handful of fragments come from DLC and a choice you make later in the game.</p>
     <p><b>Note:</b> There may be inaccuracies for anything labelled as DLC.</p>
     <form [formGroup]="pageForm" class="grid">
       <mat-form-field class="grid-12" appearance="outline">
-        <mat-label>Filter any fragment data...</mat-label>
+        <mat-label>{{brslservice.filter_translation[language]}}</mat-label>
         <input matInput formControlName="filtertext">
       </mat-form-field>
       <mat-form-field class="grid-4" appearance="outline">
-        <mat-label>Character</mat-label>
+        <mat-label>{{brslservice.character_translation[language]}}</mat-label>
         <mat-select matNativeControl formControlName="character" disableOptionCentering="true">
-          <mat-option value="Any" selected>Any</mat-option>
+          <mat-option value="--" selected>--</mat-option>
           @if (data) {
             @for (char of data.character; track char) {
               <mat-option value="{{char.name}}">
@@ -155,9 +155,9 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field class="grid-4" appearance="outline">
-        <mat-label>Location</mat-label>
+        <mat-label>{{brslservice.location_translation[language]}}</mat-label>
         <mat-select matNativeControl formControlName="location" disableOptionCentering="true">
-          <mat-option value="Any" selected>Any</mat-option>
+          <mat-option value="--" selected>--</mat-option>
           @if (data) {
             @for (loc of data.location; track loc) {
               <mat-option value="{{loc.loc}}">

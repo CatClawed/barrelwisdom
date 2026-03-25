@@ -30,7 +30,8 @@ export class BRSLFacilitylistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.brslservice, 'facilities');
-    this.genericSettings(`Facilities`, `The list of facilities in ${this.gameTitle}.`);
+    this.genericSettings(this.brslservice.facilities_translation[this.language],
+      `The list of facilities in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.brslservice.getFacilityList(this.language);
   }

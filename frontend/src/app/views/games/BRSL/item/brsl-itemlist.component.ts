@@ -25,14 +25,15 @@ export class BRSLItemlistComponent extends DialogUseComponent {
     this.component = BRSLItemComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
-      category: 'Any',
-      type: 'Any'
+      category: '--',
+      type: '--'
     })
   }
 
   changeData() {
     this.gameService(this.brslservice, 'items');
-    this.genericSettings(`Items`, `The list of items in ${this.gameTitle}.`);
+    this.genericSettings(this.brslservice.item_translation[this.language],
+      `The list of items in ${this.gameTitle}.`);
     this.pageForm.reset();
     return forkJoin({
       items: this.brslservice.getItemList(this.language),
@@ -50,10 +51,10 @@ export class BRSLItemlistComponent extends DialogUseComponent {
   private filterT(value: string, type: string, category: string): ItemList[] {
     this.hide = false;
     let list: ItemList[] = this.data.items;
-    if (type != 'Any') {
+    if (type != '--') {
       list = list.filter(item => item.itemtype == type);
     }
-    if (category != 'Any') {
+    if (category != '--') {
       list = list.filter(item => item.category.some(c => c.name == category));
     }
     if (!value) {

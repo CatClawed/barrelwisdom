@@ -15,12 +15,12 @@
   </ng-template>
   <filter-list
     [list]="filteredFacilities"
-    name="Facilities"
+    [name]="brslservice.facilities_translation[language]"
     [(hide)]="hide"
     [template]="template">
     <form [formGroup]="pageForm" class="grid">
       <mat-form-field class="grid-12" appearance="outline">
-        <mat-label>Filter...</mat-label>
+        <mat-label>{{brslservice.filter_translation[language]}}</mat-label>
         <input matInput formControlName="filtertext">
       </mat-form-field>
     </form>

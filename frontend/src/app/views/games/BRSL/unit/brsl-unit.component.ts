@@ -13,7 +13,8 @@ export class BRSLUnitComponent extends SingleComponent {
 
   changeData() {
     this.gameService(this.brslservice, 'locations');
-    this.genericSettings(`Units`, `All crafting units in ${this.gameTitle}.`);
+    this.genericSettings(this.brslservice.units_translation[this.language],
+      `All crafting units in ${this.gameTitle}.`);
     return this.brslservice.getUnit(this.language);
   }
 }

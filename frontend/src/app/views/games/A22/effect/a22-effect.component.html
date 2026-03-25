@@ -28,7 +28,7 @@
   <ul [style]="hideContents ? 'float:left;margin-bottom:0;' : null">
     @for (e of effect.effects; track e) {
     <li>
-      <tooltip [tip]="e.desc">{{e.name}}</tooltip>
+      <popover [text]="e.desc">{{e.name}}</popover>
     </li>
     }
   </ul>

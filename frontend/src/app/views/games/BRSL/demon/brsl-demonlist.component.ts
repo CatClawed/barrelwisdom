@@ -30,7 +30,8 @@ export class BRSLDemonlistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.brslservice, 'demons');
-    this.genericSettings(`Demons`, `The list of demons in ${this.gameTitle}.`);
+    this.genericSettings(this.brslservice.demons_translation[this.language],
+      `The list of demons in ${this.gameTitle}.`);
     this.pageForm.reset()
     return this.brslservice.getDemonList(this.language)
   }

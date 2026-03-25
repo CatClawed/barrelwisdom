@@ -1,6 +1,6 @@
 import { Component, inject, Input } from '@angular/core';
 import { EffectComponent } from '@app/views/_components/effect/effect.component';
-import { Tooltip } from '@app/views/_components/tooltip/tooltip.component';
+import { Popover } from '@app/views/_components/popover/popover.component';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
@@ -8,7 +8,7 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
 @Component({
     templateUrl: 'a22-effect.component.html',
     selector: 'a22-effect',
-    imports: [...CommonImports, Tooltip, EffectComponent]
+    imports: [...CommonImports, Popover, EffectComponent]
 })
 export class A22EffectComponent extends SingleComponent {
   protected a22service = inject(A22Service);

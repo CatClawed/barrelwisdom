@@ -20,7 +20,7 @@ export class BRSLDemonComponent extends SingleComponent {
   override afterAssignment(): void {
     this.seoImage = `${this.imgURL}${this.section}/${this.data.slug}.webp`
     this.genericSettings(this.data.name, this.data.desc,
-      'Demons',
+      this.brslservice.demons_translation[this.language],
       false,
       this.inputSlug ? false : true);
   }

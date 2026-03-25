@@ -12,7 +12,8 @@ export class BRSLSkillComponent extends FragmentedComponent {
 
   changeData() {
     this.gameService(this.brslservice, 'skills');
-    this.genericSettings(`Skills`, `All skills in ${this.gameTitle}.`);
+    this.genericSettings(this.brslservice.skills_translation[this.language],
+      `All skills in ${this.gameTitle}.`);
     return this.brslservice.getSkillList(this.language);
   }
 }

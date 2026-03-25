@@ -20,7 +20,7 @@ export class BRSLFacilityComponent extends SingleComponent {
   override afterAssignment(): void {
     this.seoImage = `${this.imgURL}${this.section}/${this.data.slug}.webp`;
     this.genericSettings(this.data.name, this.data.desc,
-      'Facilities',
+      this.brslservice.facilities_translation[this.language],
       false,
       this.inputSlug ? false : true);
   }

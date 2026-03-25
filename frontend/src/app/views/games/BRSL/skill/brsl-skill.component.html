@@ -1,11 +1,10 @@
 @if (!error) {
-  <h1>Skills</h1>
+  <h1>{{brslservice.skills_translation[language]}}</h1>
 }
 @if (data; as skills) {
   <div>
     @if (skills) {
       <div class="table-of-contents">
-        <b>Table of Contents</b>
         <ol>
           @for (skill of skills; track skill) {
             @if (skill.skill_set) {

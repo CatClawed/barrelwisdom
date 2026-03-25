@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { getApiUrl } from '@app/_helpers/api-url';
 import { DemonFull, DemonList, Event, FacilityFull, FacilityList, FacilitySet, ItemFull, ItemList, NameLink, NameOnly, Region, SchoolLocation, Skill, Unit } from '@app/views/games/BRSL/_services/brsl.interface';
 import { environment } from '@environments/environment';
+import { category_translation, character_translation, effect_translation, filter_translation, ingredient_translation, item_translation, location_translation } from '@environments/localization';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -11,6 +12,14 @@ export class BRSLService {
   constructor(
     private http: HttpClient,
   ) { }
+
+  public readonly item_translation = item_translation;
+  public readonly filter_translation = filter_translation;
+  public readonly location_translation = location_translation;
+  public readonly effect_translation = effect_translation;
+  public readonly ingredient_translation = ingredient_translation;
+  public readonly character_translation = character_translation;
+  public readonly category_translation = category_translation;
 
   public readonly fragments_translation = {
     "en": "Fragments",
@@ -41,7 +50,7 @@ export class BRSLService {
   };
 
   public readonly facilities_translation = {
-    "en": "School Facilities",
+    "en": "Facilities",
     "ja": "学校開発",
     "sc": "关于学校开发",
     "tc": "關於學校開發"

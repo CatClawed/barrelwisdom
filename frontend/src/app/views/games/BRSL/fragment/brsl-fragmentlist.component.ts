@@ -22,14 +22,15 @@ export class BRSLFragmentComponent extends FilterableComponent {
     super();
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
-      character: 'Any',
-      location: 'Any'
+      character: '--',
+      location: '--'
     })
   }
 
   changeData() {
     this.gameService(this.brslservice, 'fragments-and-dates');
-    this.genericSettings(`Fragments & Dates`, `All fragments and dates in ${this.gameTitle}.`);
+    this.genericSettings(this.brslservice.fragments_dates_translation[this.language],
+      `All fragments and dates in ${this.gameTitle}.`);
     this.pageForm.reset();
     return forkJoin({
       character: this.brslservice.getCharacterList(this.language),
@@ -49,10 +50,10 @@ export class BRSLFragmentComponent extends FilterableComponent {
   private filterT(value: string, char: string, loc: string): Event[] {
     this.hide = false;
     let list: Event[] = this.data.fragment;
-    if (char != "Any") {
+    if (char != "--") {
       list = list.filter(evt => (evt.character) ? evt.character.name == char : false)
     }
-    if (loc != "Any") {
+    if (loc != "--") {
       list = list.filter(evt => (evt.location) ? evt.location.loc == loc : false)
     }
     if (value) {

@@ -25,7 +25,8 @@ export class BRSLFacilitySetComponent extends FilterableComponent {
 
   changeData() {
     this.gameService(this.brslservice, 'facilities/sets');
-    this.genericSettings(`Facility Sets`, `All facility sets in ${this.gameTitle}.`);
+    this.genericSettings(this.brslservice.facility_sets_translation[this.language],
+      `All facility sets in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.brslservice.getFacilitySetList(this.language);
   }

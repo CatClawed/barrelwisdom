@@ -7,7 +7,6 @@
     @for (tab of recipes; track tab) {
       <mat-tab label="{{tab.name}}" style="overflow-x:visible;">
         <div class="table-of-contents" style="margin-top:1rem;">
-          <b>Table of Contents</b>
           <ol>
             @for (page of tab.pages; track page; let chapter = $index) {
               <li>
