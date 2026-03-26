@@ -74,23 +74,14 @@
         <mat-label>{{a15service.ingredient_translation[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtering">
       </mat-form-field>
-      <div class="grid-4">
-        @for (btn of [
+      <filter-buttons svg="A15.svg?v=1" class="grid-4"
+          [list]="[
           { ctrl: pageForm.controls.fire,   icon: 'element-fire' },
           { ctrl: pageForm.controls.water,  icon: 'element-water' },
           { ctrl: pageForm.controls.wind ,  icon: 'element-wind' },
           { ctrl: pageForm.controls.earth,  icon: 'element-earth' },
-        ]; track $index) {
-          <button type="button" 
-                  class="icon-button" 
-                  (click)="toggle(btn.ctrl)"
-                  [class.active]="btn.ctrl.value">
-            <svg>
-              <use attr.href="/media/spritesheets/A15.svg?v=1#{{btn.icon}}"></use>
-            </svg>
-          </button>
-        }
-      </div>
+        ]">
+      </filter-buttons>
       <mat-form-field class="grid-3" appearance="outline">
         <mat-label>Element Value</mat-label>
         <mat-select matNativeControl formControlName="elementval">

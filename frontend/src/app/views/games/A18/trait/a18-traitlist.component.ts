@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { FilterButtonsComponent } from '@app/views/_components/filter-buttons/filter-buttons.component';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Trait } from '@app/views/games/A18/_services/a18.interface';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
@@ -11,7 +12,7 @@ import { A18TraitComponent } from './a18-trait.component';
 @Component({
     templateUrl: 'a18-traitlist.component.html',
     imports: [...CommonImports, ...MaterialFormImports,
-        A18TraitComponent, FilterListComponent]
+        A18TraitComponent, FilterListComponent, FilterButtonsComponent]
 })
 
 export class A18TraitlistComponent extends DialogUseComponent {

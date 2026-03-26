@@ -65,13 +65,13 @@ export class A25MaterialListComponent extends DialogUseComponent {
     this.hide = false;
     let list: Item[] = this.data.items;
 
-    if (color != 'Any' && color) {
+    if (color != '--' && color) {
       list = list.filter(item => item.material[0].color == color);
     }
     if (rarity > 0) {
       list = list.filter(item => item.rarity == rarity)
     }
-    if (traittype !== 'Any' && traittype) {
+    if (traittype !== '--' && traittype) {
       list = list.filter(item => item.material[0].traits ? item.material[0].traits[0].kind === traittype : false)
     }
     if (filter) {

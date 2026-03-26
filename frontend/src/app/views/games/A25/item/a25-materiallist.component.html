@@ -54,7 +54,7 @@
       <mat-form-field class="grid-4" appearance="outline">
         <mat-label>Color</mat-label>
         <mat-select matNativeControl formControlName="color">
-          <mat-option value="Any">--</mat-option>
+          <mat-option value="--">--</mat-option>
           @if (data) {
             @for (color of data.colors; track color) {
               <mat-option value="{{color.slug}}">
@@ -71,7 +71,7 @@
       <mat-form-field class="grid-3" appearance="outline">
         <mat-label>Trait Type</mat-label>
         <mat-select matNativeControl formControlName="traittype">
-          <mat-option value="Any">--</mat-option>
+          <mat-option value="--">--</mat-option>
           <mat-option value="equipment">{{a25service.equipment[language]}}</mat-option>
           <mat-option value="combat">{{combat[language]}}</mat-option>
         </mat-select>

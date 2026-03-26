@@ -18,25 +18,16 @@
         <input style="height: 100%;" matInput formControlName="filtertext">
 
       </mat-form-field>
-      <div class="grid-6">
-        @for (btn of [
+      <filter-buttons class="grid-6" svg="A18.svg?v=1"
+        [list]="[
           { ctrl: pageForm.controls.syn,  icon: 'synthesis' },
           { ctrl: pageForm.controls.atk,  icon: 'attack' },
           { ctrl: pageForm.controls.heal, icon: 'heal' },
           { ctrl: pageForm.controls.wep,  icon: 'weapon' },
           { ctrl: pageForm.controls.arm,  icon: 'armor' },
           { ctrl: pageForm.controls.acc,  icon: 'accessory' }
-        ]; track $index) {
-          <button type="button" 
-                  class="icon-button" 
-                  (click)="toggle(btn.ctrl)"
-                  [class.active]="btn.ctrl.value">
-            <svg>
-              <use attr.href="/media/spritesheets/A18.svg?v=1#{{btn.icon}}"></use>
-            </svg>
-          </button>
-        }
-      </div>
+        ]">
+      </filter-buttons>
     </form>
   </filter-list>
 }

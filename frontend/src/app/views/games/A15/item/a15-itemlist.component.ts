@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { FilterButtonsComponent } from '@app/views/_components/filter-buttons/filter-buttons.component';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { ItemComponent } from '@app/views/_components/item/item.component';
 import { ItemList } from '@app/views/games/A15/_services/a15.interface';
@@ -14,7 +15,7 @@ import { A15ItemComponent } from './a15-item.component';
   templateUrl: 'a15-itemlist.component.html',
   styleUrl: '../a15.scss',
   imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
-    ItemComponent, MatButtonModule]
+    ItemComponent, MatButtonModule, FilterButtonsComponent]
 })
 
 export class A15ItemlistComponent extends DialogUseComponent {

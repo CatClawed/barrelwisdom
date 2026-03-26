@@ -41,7 +41,7 @@
       <mat-form-field class="grid-4" appearance="outline">
         <mat-label>Type</mat-label>
         <mat-select matNativeControl formControlName="kind">
-          <mat-option value="Any">--</mat-option>
+          <mat-option value="--">--</mat-option>
           @if (data) {
             @for (type of data.combat_type; track type) {
               <mat-option value="{{type.slug}}">

@@ -19,14 +19,14 @@
     <svg><use href="/media/spritesheets/main.svg?v=1#fa-discord"></use></svg>
   </a>
   <button mat-icon-button
-    [disabled]="languages().length == 1"
+    [disabled]="languages().length == 1 || en_only()"
     [matMenuTriggerFor]="menu"
     aria-label="Language select"
-    [style]="languages().length == 1 ? `background: none !important;` : null"
+    [style]="languages().length == 1 || en_only() ? `background: none !important;` : null"
     class="nav-lang">
       <svg style="height: 40px; aspect-ratio: 1;"><use href="/media/spritesheets/main.svg?v=1#fa-globe"></use></svg>
       <span>{{codes[currentLang()]}}</span>
-      <svg style="height:20px; aspect-ratio: 1;{{languages().length > 1 ? `` : `fill: transparent;`}}"><use href="/media/spritesheets/main.svg?v=1#fa-caret-down"></use></svg>
+      <svg style="height:20px; aspect-ratio: 1;{{languages().length > 1 && !en_only() ? `` : `fill: transparent;`}}"><use href="/media/spritesheets/main.svg?v=1#fa-caret-down"></use></svg>
   </button>
   <mat-menu #menu="matMenu">
     @for (language of languages(); track language) {

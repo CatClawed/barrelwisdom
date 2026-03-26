@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { FilterButtonsComponent } from '@app/views/_components/filter-buttons/filter-buttons.component';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Property } from '@app/views/games/A15/_services/a15.interface';
 import { A15Service } from '@app/views/games/A15/_services/a15.service';
@@ -11,7 +12,7 @@ import { A15PropertyComponent } from './a15-property.component';
 @Component({
   templateUrl: 'a15-propertylist.component.html',
   imports: [...CommonImports, ...MaterialFormImports, A15PropertyComponent,
-    FilterListComponent]
+    FilterListComponent, FilterButtonsComponent]
 })
 export class A15PropertylistComponent extends DialogUseComponent {
   protected a15service = inject(A15Service);

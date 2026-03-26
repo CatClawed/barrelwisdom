@@ -19,8 +19,8 @@ export class NavigationService {
     map(() => this.parseUrl(this.router.url))
   );
   public section = toSignal(this.routeState$.pipe(map(s => s.section)), { initialValue: 'default' });
-  // TODO: Fix me
   public currentLang = toSignal(this.routeState$.pipe(map(s => s.lang)), { initialValue: 'en' });
+  public en_only = toSignal(this.routeState$.pipe(map(s => s.en_only)), { initialValue: false });
 
   public langOptions = computed(() => {
     return LanguageData.languages[this.section()] ?? LanguageData.languages['default'];
@@ -70,10 +70,15 @@ export class NavigationService {
       section = 'blog';
     }
     let lang = 'en';
+    let en_only = false;
     if (sections.length > 3) {
       lang = sections[sections.length - 1];
     }
-    return { section, lang };
+    else {
+      en_only = true;
+    }
+
+    return { section, lang, en_only };
   }
 
   getNav(section: string): Observable<Nav> {

@@ -23,6 +23,10 @@
     min-height: 100dvh;
 }
 
+.mat-drawer-content {
+    height: 100dvh !important;
+}
+
 .mat-sidenav-content {
     margin-left: 200px; // prevents a layout shift
 }

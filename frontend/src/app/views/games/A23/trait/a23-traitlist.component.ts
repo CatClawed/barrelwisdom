@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { FilterButtonsComponent } from '@app/views/_components/filter-buttons/filter-buttons.component';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Trait } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
@@ -9,9 +10,9 @@ import { map, startWith } from 'rxjs/operators';
 import { A23TraitComponent } from './a23-trait.component';
 
 @Component({
-    templateUrl: 'a23-traitlist.component.html',
-    imports: [...CommonImports, ...MaterialFormImports,
-        A23TraitComponent, FilterListComponent]
+  templateUrl: 'a23-traitlist.component.html',
+  imports: [...CommonImports, ...MaterialFormImports,
+    A23TraitComponent, FilterListComponent, FilterButtonsComponent]
 })
 
 export class A23TraitlistComponent extends DialogUseComponent {
@@ -23,7 +24,15 @@ export class A23TraitlistComponent extends DialogUseComponent {
     this.component = A23TraitComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
-      transfers: 1
+      atk: false,
+      heal: false,
+      dbf: false,
+      buff: false,
+      wpn: false,
+      arm: false,
+      acc: false,
+      tal: false,
+      exp: false,
     })
   }
   changeData() {
@@ -36,44 +45,42 @@ export class A23TraitlistComponent extends DialogUseComponent {
   override afterAssignment(): void {
     this.filteredTraits = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Trait[]>),
-      map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.data.slice())
+      map((search: any) => search ? this.filterT(search.filtertext, search.atk, search.heal, search.dbf, search.buff, search.wpn, search.arm, search.acc, search.tal, search.exp) : this.data.slice())
     );
   }
 
-  private filterT(value: string, transfer: number): Trait[] {
+  private filterT(value: string, atk: boolean, heal: boolean, dbf: boolean, buff: boolean, wpn: boolean, arm: boolean, acc: boolean, tal: boolean, exp: boolean): Trait[] {
     this.hide = false;
     let traitlist: Trait[] = this.data;
-    if (transfer !== 1) {
+    if (atk || heal || dbf || buff || wpn || arm || acc || tal || exp) {
       traitlist = traitlist.filter(trait => trait.trans_atk !== trait.trans_heal !== trait.trans_dbf !== trait.trans_buff !== trait.trans_wpn !== trait.trans_arm !== trait.trans_acc !== trait.trans_tal !== trait.trans_syn !== trait.trans_exp);
     }
-    switch (transfer) {
-      case 2:
-        traitlist = traitlist.filter(trait => trait.trans_atk);
-        break;
-      case 3:
-        traitlist = traitlist.filter(trait => trait.trans_heal);
-        break;
-      case 4:
-        traitlist = traitlist.filter(trait => trait.trans_dbf);
-        break;
-      case 5:
-        traitlist = traitlist.filter(trait => trait.trans_buff);
-        break;
-      case 6:
-        traitlist = traitlist.filter(trait => trait.trans_wpn);
-        break;
-      case 7:
-        traitlist = traitlist.filter(trait => trait.trans_arm);
-        break;
-      case 8:
-        traitlist = traitlist.filter(trait => trait.trans_acc);
-        break;
-      case 9:
-        traitlist = traitlist.filter(trait => trait.trans_tal);
-        break;
-      case 10:
-        traitlist = traitlist.filter(trait => trait.trans_exp);
-        break;
+    if (atk) {
+      traitlist = traitlist.filter(trait => trait.trans_atk);
+    }
+    if (heal) {
+      traitlist = traitlist.filter(trait => trait.trans_heal);
+    }
+    if (dbf) {
+      traitlist = traitlist.filter(trait => trait.trans_dbf);
+    }
+    if (buff) {
+      traitlist = traitlist.filter(trait => trait.trans_buff);
+    }
+    if (wpn) {
+      traitlist = traitlist.filter(trait => trait.trans_wpn);
+    }
+    if (arm) {
+      traitlist = traitlist.filter(trait => trait.trans_arm);
+    }
+    if (acc) {
+      traitlist = traitlist.filter(trait => trait.trans_acc);
+    }
+    if (tal) {
+      traitlist = traitlist.filter(trait => trait.trans_tal);
+    }
+    if (exp) {
+      traitlist = traitlist.filter(trait => trait.trans_exp);
     }
     if (!value) {
       return traitlist;

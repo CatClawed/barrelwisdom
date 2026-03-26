@@ -16,9 +16,9 @@
         <p><b>Note:</b> {{item.note}}</p>
       }
       <div class="two-column">
-        <ul>
+        <ul style="padding-left: 0;">
           @for (cat of item.category; track cat) {
-            <li>
+            <li style="display: flex;">
               <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A22.svg?v=0#category-{{cat.slug}}"></use></svg>
               <a routerLink="/{{gameURL}}/categories/{{cat.slug}}">{{cat.name}}</a>
             </li>
@@ -35,7 +35,7 @@
         </div>
       </div>
       @if (item.shop) {
-        <p><svg class="svg-inline-text"><use href="/media/spritesheets/A22.svg?v=0#category-shop"></use></svg><b>Shop:</b> {{item.shop.name}}</p>
+        <p><svg class="svg-icon" style="vertical-align:middle;"><use href="/media/spritesheets/A22.svg?v=0#shop"></use></svg><b>{{a22service.shop_translation[language]}}:</b> {{item.shop.name}}</p>
       }
       @if (item.location) {
         <b>{{a22service.location_translation[language]}}</b>

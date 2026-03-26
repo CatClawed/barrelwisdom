@@ -28,7 +28,7 @@ export class A18ItemlistComponent extends DialogUseComponent {
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       filtering: '',
-      cat: 'Any',
+      cat: '--',
     })
   }
 

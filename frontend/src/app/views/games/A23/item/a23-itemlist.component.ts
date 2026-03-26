@@ -54,10 +54,10 @@ export class A23ItemlistComponent extends DialogUseComponent {
     this.hide = false;
     let list: Item[] = this.data.items;
 
-    if (cat != 'Any' && cat) {
+    if (cat != '--' && cat) {
       list = list.filter(item => item.categories.some(c => c.name == cat) || (item.add ? item.add.some(c => c.name == cat) : false));
     }
-    if (kind != 'Any' && kind) {
+    if (kind != '--' && kind) {
       list = list.filter(item => item.kind == kind)
     }
     if (ingt) {

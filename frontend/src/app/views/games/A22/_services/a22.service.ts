@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { getApiUrl } from '@app/_helpers/api-url';
 import { CategoryItem, Effect, Item, ItemFull, Monster, MonsterFull, NameLink, Region, ShopDevelop, Trait } from '@app/views/games/A22/_services/a22.interface';
 import { environment } from '@environments/environment';
-import { category_translation, character_translation, effect_translation, filter_translation, ingredient_translation, item_translation, level_translation, location_translation, monster_translation, race_translation, recipebook_translation, trait_translation } from '@environments/localization';
+import { category_translation, character_translation, effect_translation, filter_translation, ingredient_translation, item_translation, level_translation, location_translation, monster_translation, race_translation, recipebook_translation, shop_translation, trait_translation } from '@environments/localization';
 import { Observable } from 'rxjs';
 
 
@@ -26,6 +26,7 @@ export class A22Service {
   public readonly ingredient_translation = ingredient_translation
   public readonly recipebook_translation = recipebook_translation
   public readonly level_translation = level_translation
+  public readonly shop_translation = shop_translation
 
   public readonly eveffect_translation = {
     "en": "EV Effects",

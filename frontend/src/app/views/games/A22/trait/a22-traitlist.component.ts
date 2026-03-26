@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { FilterButtonsComponent } from '@app/views/_components/filter-buttons/filter-buttons.component';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Trait } from '@app/views/games/A22/_services/a22.interface';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
@@ -11,7 +12,7 @@ import { A22TraitComponent } from './a22-trait.component';
 @Component({
     templateUrl: 'a22-traitlist.component.html',
     imports: [...CommonImports, ...MaterialFormImports,
-        A22TraitComponent, FilterListComponent]
+        A22TraitComponent, FilterListComponent, FilterButtonsComponent]
 })
 export class A22TraitlistComponent extends DialogUseComponent {
   protected a22service = inject(A22Service);
@@ -22,7 +23,13 @@ export class A22TraitlistComponent extends DialogUseComponent {
     this.component = A22TraitComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
-      transfers: ''
+      attack: false,
+      heal: false,
+      debuff: false,
+      buff: false,
+      weapon: false,
+      armor: false,
+      accessory: false,
     })
   }
 
@@ -36,36 +43,34 @@ export class A22TraitlistComponent extends DialogUseComponent {
   override afterAssignment(): void {
     this.filteredTraits = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Trait[]>),
-      map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.data.slice())
+      map((search: any) => search ? this.filterT(search.filtertext, search.attack, search.heal, search.debuff, search.buff, search.weapon, search.armor, search.accessory) : this.data.slice())
     );
   }
 
-  private filterT(value: string, transfer: string): Trait[] {
+  private filterT(value: string, attack: boolean, heal: boolean, debuff: boolean, buff: boolean, weapon: boolean, armor: boolean, accessory: boolean): Trait[] {
     this.hide = false;
     let traitlist: Trait[] = this.data;
-    switch (transfer) {
-      case "2":
-        traitlist = this.data.filter(trait => trait.trans_atk);
-        break;
-      case "3":
-        traitlist = this.data.filter(trait => trait.trans_heal);
-        break;
-      case "4":
-        traitlist = this.data.filter(trait => trait.trans_dbf);
-        break;
-      case "5":
-        traitlist = this.data.filter(trait => trait.trans_buff);
-        break;
-      case "6":
-        traitlist = this.data.filter(trait => trait.trans_wpn);
-        break;
-      case "7":
-        traitlist = this.data.filter(trait => trait.trans_arm);
-        break;
-      case "8":
-        traitlist = this.data.filter(trait => trait.trans_acc);
-        break;
-    }
+      if (attack) {
+        traitlist = traitlist.filter(trait => trait.trans_atk);
+        }
+      if (heal) {
+        traitlist = traitlist.filter(trait => trait.trans_heal);
+        }
+      if (debuff) {
+        traitlist = traitlist.filter(trait => trait.trans_dbf);
+        }
+      if (buff) {
+        traitlist = traitlist.filter(trait => trait.trans_buff);
+        }
+      if (weapon) {
+        traitlist = traitlist.filter(trait => trait.trans_wpn);
+        }
+      if (armor) {
+        traitlist = traitlist.filter(trait => trait.trans_arm);
+        }
+      if (accessory) {
+        traitlist = traitlist.filter(trait => trait.trans_acc);
+        }
     if (!value) {
       return traitlist;
     }

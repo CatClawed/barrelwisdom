@@ -17,25 +17,16 @@
         <mat-label>{{a15service.filter_translation[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtertext">
       </mat-form-field>
-      <div class="grid-6">
-        @for (btn of [
+      <filter-buttons svg="A15.svg?v=1" class="grid-6"
+        [list]="[
           { ctrl: pageForm.controls.bomb,  icon: 'bomb' },
           { ctrl: pageForm.controls.heal,  icon: 'heal' },
           { ctrl: pageForm.controls.buff,  icon: 'buff' },
           { ctrl: pageForm.controls.weapon,  icon: 'weapon' },
           { ctrl: pageForm.controls.armor,  icon: 'armor' },
           { ctrl: pageForm.controls.accessory,  icon: 'accessory' }
-        ]; track $index) {
-          <button type="button" 
-                  class="icon-button" 
-                  (click)="toggle(btn.ctrl)"
-                  [class.active]="btn.ctrl.value">
-            <svg>
-              <use attr.href="/media/spritesheets/A15.svg?v=1#{{btn.icon}}"></use>
-            </svg>
-          </button>
-        }
-      </div>
+        ]">
+      </filter-buttons>
     </form>
   </filter-list>
 }

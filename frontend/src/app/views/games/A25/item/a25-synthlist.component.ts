@@ -86,7 +86,7 @@ export class A25SynthesisListComponent extends DialogUseComponent {
     this.hide = false;
     let list: Item[] = this.data.items;
 
-    if (kind != 'Any' && kind) {
+    if (kind != '' && kind) {
       list = list.filter(item => item.equip ? item.equip[0].kind == kind : item.combat[0].kind == kind);
     }
     if (rarity > 0) {

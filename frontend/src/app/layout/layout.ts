@@ -42,6 +42,7 @@ export class LayoutComponent {
   currentLang = this.navService.currentLang;
   bread = this.breadcrumbService.breadcrumbs;
   error = this.breadcrumbService.error;
+  en_only = this.navService.en_only;
 
   logout() {
     this.authenticationService.logout();

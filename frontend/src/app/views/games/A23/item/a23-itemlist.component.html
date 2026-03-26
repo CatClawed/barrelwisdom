@@ -42,7 +42,7 @@
       <mat-form-field class="grid-4" appearance="outline">
         <mat-label>{{a23service.category_translation[language]}}</mat-label>
         <mat-select matNativeControl formControlName="cat" disableOptionCentering="true" class="mat-select-icon">
-          <mat-option value="Any">--</mat-option>
+          <mat-option value="--">--</mat-option>
           @if (data) {
             @for (cat of data.categories; track cat) {
               <mat-option value="{{cat.name}}" class="svg-icon-text-vertical-center">
@@ -60,7 +60,7 @@
       <mat-form-field class="grid-4" appearance="outline">
         <mat-label>Type</mat-label>
         <mat-select matNativeControl formControlName="kind" disableOptionCentering="true" class="mat-select-icon">
-          <mat-option class="svg-icon-text-vertical-center" value="Any"        ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#book"></use></svg>--</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="--"        ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#book"></use></svg>--</mat-option>
           <mat-option class="svg-icon-text-vertical-center" value="attack"     ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#type-attack"></use></svg>Attack</mat-option>
           <mat-option class="svg-icon-text-vertical-center" value="heal"       ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#type-heal"></use></svg>Heal</mat-option>
           <mat-option class="svg-icon-text-vertical-center" value="debuffer"   ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#type-debuff"></use></svg>Debuff</mat-option>

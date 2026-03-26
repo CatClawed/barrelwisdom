@@ -19,11 +19,13 @@
         <mat-label>{{a25rwservice.filter_translation[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtertext">
       </mat-form-field>
-      <div class="grid-4 svg-filter">
-        <svg (click)="toggle(this.pageForm.controls.small, this.things)"  style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.small.value ? 'black' : 'gray'}};"><use href="/media/spritesheets/A25RW.svg?v=1#enemy-small"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.large, this.things)"  style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.large.value ? 'black' : 'gray'}};"><use href="/media/spritesheets/A25RW.svg?v=1#enemy-large"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.boss, this.things)"   style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.boss.value  ? 'black' : 'gray'}};"><use href="/media/spritesheets/A25RW.svg?v=1#enemy-boss" ></use></svg>
-      </div>
+      <filter-buttons svg="A25RW.svg?v=1" class="grid-4" [single_only]="true"
+          [list]="[
+            { ctrl: pageForm.controls.small, icon: 'enemy-small' },
+            { ctrl: pageForm.controls.large, icon: 'enemy-large' },
+            { ctrl: pageForm.controls.boss,  icon: 'enemy-boss' },
+          ]">
+      </filter-buttons>
     </form>
   </filter-list>
 }

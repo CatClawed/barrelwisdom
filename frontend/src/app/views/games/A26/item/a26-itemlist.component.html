@@ -88,21 +88,25 @@
           }
         </mat-select>
       </mat-form-field>
-      <div class="grid-6 svg-filter">
-        <svg (click)="toggle(this.pageForm.controls.fire)" class="a26-elements" style="margin-right:0.8em;width:2.3em;height:2.3em;background-color:{{pageForm.controls.fire.value ? a26service.elements['fire'] : a26service.elements['none']}};"><use href="/media/spritesheets/A26.svg?v=1#fire"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.ice)"  class="a26-elements" style="margin-right:0.8em;width:2.3em;height:2.3em;background-color:{{pageForm.controls.ice.value  ? a26service.elements['ice']  : a26service.elements['none']}};"><use href="/media/spritesheets/A26.svg?v=1#ice"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.bolt)" class="a26-elements" style="margin-right:0.8em;width:2.3em;height:2.3em;background-color:{{pageForm.controls.bolt.value ? a26service.elements['bolt'] : a26service.elements['none']}};"><use href="/media/spritesheets/A26.svg?v=1#bolt"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.air)"  class="a26-elements" style="margin-right:0.8em;width:2.3em;height:2.3em;background-color:{{pageForm.controls.air.value  ? a26service.elements['air']  : a26service.elements['none']}};"><use href="/media/spritesheets/A26.svg?v=1#air"></use></svg>
-      </div>
-      <div class="grid-6 svg-filter">
-        <svg (click)="toggle(this.pageForm.controls.gather, things)"     style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.gather.value  ? 'black' : 'gray'}};"><use href="/media/spritesheets/A26.svg?v=1#items"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.consumable, things)" style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.consumable.value ? 'black' : 'gray'}};"><use href="/media/spritesheets/A26.svg?v=1#category-bombs"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.synth, things)"      style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.synth.value ? 'black' : 'gray'}};"><use href="/media/spritesheets/A26.svg?v=1#synth"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.equip, things)"      style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.equip.value ? 'black' : 'gray'}};"><use href="/media/spritesheets/A26.svg?v=1#equip"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.explore, things)"    style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.explore.value  ? 'black' : 'gray'}};"><use href="/media/spritesheets/A26.svg?v=1#exploration"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.key, things)"        style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.key.value  ? 'black' : 'gray'}};"><use href="/media/spritesheets/A26.svg?v=1#category-key-items"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.furniture, things)"                     style="width:2.3em;height:2.3em;fill:{{pageForm.controls.furniture.value  ? 'black' : 'gray'}};"><use href="/media/spritesheets/A26.svg?v=1#category-interior"></use></svg>
-      </div>
+      <filter-buttons svg="A26.svg?v=1" extra_class="a26-elements2" class="grid-6"
+        [list]="[
+          { ctrl: this.pageForm.controls.fire, icon: 'fire', activeColor: this.a26service.elements['fire'] },
+          { ctrl: this.pageForm.controls.ice,  icon: 'ice',  activeColor: this.a26service.elements['ice']  },
+          { ctrl: this.pageForm.controls.bolt, icon: 'bolt', activeColor: this.a26service.elements['bolt'] },
+          { ctrl: this.pageForm.controls.air,  icon: 'air',  activeColor: this.a26service.elements['air']  },
+        ]">
+      </filter-buttons>
+      <filter-buttons svg="A26.svg?v=1" [single_only]="true" class="grid-6"
+        [list]="[
+          { ctrl: pageForm.controls.gather,     icon: 'items' },
+          { ctrl: pageForm.controls.consumable, icon: 'category-bombs' },
+          { ctrl: pageForm.controls.synth,      icon: 'synth' },
+          { ctrl: pageForm.controls.equip,      icon: 'equip' },
+          { ctrl: pageForm.controls.explore,    icon: 'exploration' },
+          { ctrl: pageForm.controls.key,        icon: 'category-key-items' },
+          { ctrl: pageForm.controls.furniture,  icon: 'category-interior' },
+        ]">
+      </filter-buttons>
     </form>
   </filter-list>
 }

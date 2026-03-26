@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { FilterButtonsComponent } from '@app/views/_components/filter-buttons/filter-buttons.component';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { ItemComponent } from '@app/views/_components/item/item.component';
 import { Item } from '@app/views/games/A26/_services/a26.interface';
@@ -16,7 +17,7 @@ import { A26ItemComponent } from './a26-item.component';
     templateUrl: 'a26-itemlist.component.html',
     styleUrls: ['../yumia.scss'],
     imports: [...CommonImports, ...MaterialFormImports, ItemComponent,
-        FilterListComponent, MatButtonModule]
+        FilterListComponent, MatButtonModule, FilterButtonsComponent],
 })
 
 export class A26ItemlistComponent extends DialogUseComponent {
@@ -32,7 +33,7 @@ export class A26ItemlistComponent extends DialogUseComponent {
       filtertext: '',
       cat: '',
       mat: '',
-      element: 'Any',
+      element: '',
       fire: false,
       ice: false,
       bolt: false,

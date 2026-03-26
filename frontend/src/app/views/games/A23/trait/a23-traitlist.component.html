@@ -13,35 +13,29 @@
     [(hide)]="hide"
     [template]="template">
     <form [formGroup]="pageForm" class="grid">
-      <mat-form-field class="grid-8" appearance="outline">
+      <mat-form-field class="grid-12" appearance="outline">
         <mat-label>{{a23service.filter_translation[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtertext">
-
       </mat-form-field>
-      <mat-form-field class="grid-4" appearance="outline">
-        <mat-label>Transfers to...</mat-label>
-        <mat-select matNativeControl formControlName="transfers" disableOptionCentering="true" class="mat-select-icon">
-          <mat-option [value]="1" class="svg-icon-text-vertical-center" selected> <svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#type-synthesis"></use></svg>Synthesis</mat-option>
-          @for (t of [
-              [2,  'type-attack', 'Attack'],
-              [3,  'type-heal', 'Heal'],
-              [4,  'type-debuff', 'Debuff'],
-              [5,  'type-buff', 'Buff'],
-              [6,  'type-weapon', 'Weapon'],
-              [7,  'type-armor', 'Armor'],
-              [8,  'type-accessory', 'Accessory'],
-              [9,  'category-talismans', 'Talisman'],
-              [10, 'type-exploration', 'Exploration'],
-            ]; track $index) {
-              <mat-option [value]="t[0]" class="svg-icon-text-vertical-center">
-                <svg class="svg-icon">
-                  <use attr.href="/media/spritesheets/A23.svg?v=1#{{t[1]}}"></use>
-                </svg>
-                {{t[2]}}
-              </mat-option>
-            }
-        </mat-select>
-      </mat-form-field>
+      <div class="grid-12">
+        <filter-buttons svg="A23.svg?v=1" style="float:left"
+          [list]="[
+            { ctrl: pageForm.controls.atk,  icon: 'type-attack' },
+            { ctrl: pageForm.controls.heal, icon: 'type-heal' },
+            { ctrl: pageForm.controls.dbf,  icon: 'type-debuff' },
+            { ctrl: pageForm.controls.buff, icon: 'type-buff' },
+          ]">
+        </filter-buttons>
+        <filter-buttons svg="A23.svg?v=1" style="float:left"
+          [list]="[
+            { ctrl: pageForm.controls.wpn, icon: 'type-weapon' },
+            { ctrl: pageForm.controls.arm, icon: 'type-armor' },
+            { ctrl: pageForm.controls.acc, icon: 'type-accessory' },
+            { ctrl: pageForm.controls.tal, icon: 'category-talismans' },
+            { ctrl: pageForm.controls.exp, icon: 'type-exploration' },
+          ]">
+        </filter-buttons>
+      </div>
     </form>
   </filter-list>
 }

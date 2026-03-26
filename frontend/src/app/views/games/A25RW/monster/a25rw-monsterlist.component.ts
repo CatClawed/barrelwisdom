@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { FilterButtonsComponent } from '@app/views/_components/filter-buttons/filter-buttons.component';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { ItemComponent } from '@app/views/_components/item/item.component';
 import { Monster } from '@app/views/games/A25RW/_services/a25rw.interface';
@@ -13,7 +14,7 @@ import { A25RWMonsterComponent } from './a25rw-monster.component';
 @Component({
     templateUrl: 'a25rw-monsterlist.component.html',
     imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
-        ItemComponent, MatButtonModule]
+        ItemComponent, MatButtonModule, FilterButtonsComponent]
 })
 
 export class A25RWMonsterlistComponent extends DialogUseComponent {

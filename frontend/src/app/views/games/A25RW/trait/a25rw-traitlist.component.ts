@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { FilterButtonsComponent } from '@app/views/_components/filter-buttons/filter-buttons.component';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Trait } from '@app/views/games/A25RW/_services/a25rw.interface';
 import { A25RWService } from '@app/views/games/A25RW/_services/a25rw.service';
@@ -11,7 +12,7 @@ import { A25RWTraitComponent } from './a25rw-trait.component';
 @Component({
     templateUrl: 'a25rw-traitlist.component.html',
     imports: [...CommonImports, ...MaterialFormImports,
-        A25RWTraitComponent, FilterListComponent]
+        A25RWTraitComponent, FilterListComponent, FilterButtonsComponent]
 })
 
 export class A25RWTraitlistComponent extends DialogUseComponent {

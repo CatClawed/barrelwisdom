@@ -21,7 +21,7 @@
         <mat-form-field class="grid-4" appearance="outline">
           <mat-label>{{a26service.race_translation[language]}}</mat-label>
           <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
-            <mat-option value="Any" selected><div class="a26-icon-text-vertical-center"><div class="a26-icon"></div>--</div></mat-option>
+            <mat-option value="" selected><div class="a26-icon-text-vertical-center"><div class="a26-icon"></div>--</div></mat-option>
             @for (race of data.races; track race) {
               <mat-option value="{{race.name}}">
                 <div class="a26-icon-text-vertical-center">

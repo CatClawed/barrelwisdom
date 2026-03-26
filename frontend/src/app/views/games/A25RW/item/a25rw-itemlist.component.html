@@ -92,15 +92,17 @@
           }
         </mat-select>
       </mat-form-field>
-      <div class="grid-6 svg-filter">
-        <svg (click)="toggle(this.pageForm.controls.ingredients, things)" style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.ingredients.value  ? 'black' : 'gray'}};"><use href="/media/spritesheets/A25RW.svg?v=1#guide-ingredients"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.catalyst, things)"    style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.catalyst.value     ? 'black' : 'gray'}};"><use href="/media/spritesheets/A25RW.svg?v=1#category-41"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.consumable, things)"  style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.consumable.value   ? 'black' : 'gray'}};"><use href="/media/spritesheets/A25RW.svg?v=1#guide-consumable-color"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.equip, things)"       style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.equip.value        ? 'black' : 'gray'}};"><use href="/media/spritesheets/A25RW.svg?v=1#guide-equip"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.search, things)"      style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.search.value       ? 'black' : 'gray'}};"><use href="/media/spritesheets/A25RW.svg?v=1#guide-search-color"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.synthesis, things)"   style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.synthesis.value    ? 'black' : 'gray'}};"><use href="/media/spritesheets/A25RW.svg?v=1#guide-synthesis-color"></use></svg>
-        <svg (click)="toggle(this.pageForm.controls.important, things)"   style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.important.value    ? 'black' : 'gray'}};"><use href="/media/spritesheets/A25RW.svg?v=1#guide-important-color"></use></svg>
-      </div>
+      <filter-buttons svg="A25RW.svg?v=1" [single_only]="true" class="grid-6"
+        [list]="[
+          { ctrl: pageForm.controls.ingredients, icon: 'guide-ingredients' },
+          { ctrl: pageForm.controls.catalyst,    icon: 'category-41' },
+          { ctrl: pageForm.controls.consumable,  icon: 'guide-consumable-color' },
+          { ctrl: pageForm.controls.equip,       icon: 'guide-equip' },
+          { ctrl: pageForm.controls.search,      icon: 'guide-search-color' },
+          { ctrl: pageForm.controls.synthesis,   icon: 'guide-synthesis-color' },
+          { ctrl: pageForm.controls.important,   icon: 'guide-important-color' },
+        ]">
+      </filter-buttons>
     </form>
   </filter-list>
 }
