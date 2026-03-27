@@ -12,20 +12,15 @@ export class FilterButtonsComponent {
     @Input() svg: string;
     @Input() single_only: boolean = false;
     @Input() extra_class: string = '';
-    @Input() grid: number = 6;
 
     toggle(thing) {
+        const og = thing.value
         if (this.single_only) {
-            let og = thing.value
-            for (let t of this.list) {
+
+            for (const t of this.list) {
                 t.ctrl.setValue(false)
             }
-            if (og == thing.value) {
-                thing.setValue(!thing.value)
-            }
         }
-        else {
-            thing.setValue(!thing.value)
-        }
+        thing.setValue(!og)
     }
 }
