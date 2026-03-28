@@ -42,8 +42,7 @@ export const a25ServerRoutes: ServerRoute[] = [
         return LanguageData.languages['resleri'].map(language => ({language}))
     }
   },
-  { path: 'resleri/items/materials/:subject/:language', renderMode: RenderMode.Server },
-  { path: 'resleri/items/synthesis/:subject/:language', renderMode: RenderMode.Server },
+  { path: 'resleri/items/:itemkind/:subject/:language', renderMode: RenderMode.Server },
   { path: 'resleri/traits/:subject/:language', renderMode: RenderMode.Server },
   { path: 'resleri/characters/:subject/:language', renderMode: RenderMode.Server },
   { path: 'resleri/research/:language', renderMode: RenderMode.Server },

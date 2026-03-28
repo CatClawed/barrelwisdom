@@ -19,6 +19,7 @@ export abstract class FragmentedComponent extends FilterableComponent implements
                     .subscribe(fragment => {
                         if (fragment) {
                             this.loadAll = true;
+                            this.viewportScroller.setOffset([0,64]);
                             this.viewportScroller.scrollToAnchor(fragment);
                         }
                     });
@@ -28,6 +29,7 @@ export abstract class FragmentedComponent extends FilterableComponent implements
     }
     scroll(id: string, subsection?: string) {
         this.loadAll = true;
+        this.viewportScroller.setOffset([0,64]);
         this.viewportScroller.scrollToAnchor(id)
         if(subsection) {
             this.loc.replaceState(`${this.gameURL}/${this.section}/${subsection}/${this.language}#${id}`);

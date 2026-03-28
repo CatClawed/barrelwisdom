@@ -240,10 +240,6 @@ JWT_AUTH_REFRESH_COOKIE = 'bw-refresh'
 CACHES = {
     "default": {
         "BACKEND": "django_valkey.cache.ValkeyCache",
-        "LOCATION": "valkey://127.0.0.1:6379",
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_valkey.client.DefaultClient",
-            "PROTOCOL": 3, 
-        }
+        "LOCATION": "valkey://valkey:6379",
     }
 }

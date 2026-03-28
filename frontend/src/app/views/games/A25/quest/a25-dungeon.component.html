@@ -26,12 +26,12 @@
         </tr>
       }
     </tbody></table>
-    <div style="display:grid;grid-template-columns:repeat(3,33%);grid-row-gap:1rem;text-align:center;">
+    <div style="display:grid;grid-template-columns:repeat(3,33%);grid-row-gap:1rem;">
       @for (reward of dungeon.rewards; track reward) {
-        <a style="position: relative;"
+        <a style="position: relative;text-align:center; max-width: 256px;"
           routerLink="/{{gameURL}}/items/materials/{{reward.item.slug}}/{{language}}">
           <svg class="f{{reward.item.rarity}} resleri-item-bg-sm">
-              <use href="/media/spritesheets/A25.svg?v=1#item-frame"></use>
+              <use href="/media/spritesheets/A25.svg?v=2#item-frame"></use>
           </svg>
           <img loading="lazy" class="resleri-item-frame-sm"
             src="{{imgURL}}items/{{reward.item.slug}}.webp" alt="{{reward.item.name}}">

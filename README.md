@@ -77,7 +77,7 @@ ng build --configuration=production
 For the final docker image:
 
 ```bash
-docker build -t frontend_prod -f Dockerfile.prod .
+docker buildx build -t frontend_prod -f Dockerfile.prod .
 docker tag frontend_prod barrelwisdom/frontend:tag
 ```
 

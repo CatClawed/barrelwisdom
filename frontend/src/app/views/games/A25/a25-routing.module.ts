@@ -41,11 +41,6 @@ const routes: Routes = [
         canActivate: [LanguageGuard],
       },
       {
-        path: 'materials/:subject/:language',
-        loadComponent: ()=> import('@app/views/games/A25/item/a25-item.component').then(m=>m.A25ItemComponent),
-        canActivate: [LanguageGuard],
-      },
-      {
         path: 'synthesis',
         loadComponent: ()=> import('@app/views/games/A25/item/a25-synthlist.component').then(m=>m.A25SynthesisListComponent),
         canActivate: [LanguageGuard],
@@ -56,7 +51,7 @@ const routes: Routes = [
         canActivate: [LanguageGuard],
       },
       {
-        path: 'synthesis/:subject/:language',
+        path: ':itemkind/:subject/:language',
         loadComponent: ()=> import('@app/views/games/A25/item/a25-item.component').then(m=>m.A25ItemComponent),
         canActivate: [LanguageGuard],
       },

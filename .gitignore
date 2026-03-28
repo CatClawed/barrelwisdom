@@ -22,3 +22,4 @@ Thumbs.db
 sonar-project.properties
 backend/scripts/data.txt
 frontend/src/ads.txt
+.angular/

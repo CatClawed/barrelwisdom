@@ -6,7 +6,7 @@
     <div class="card-icon-position">
       <img style="width:3rem;aspect-ratio:48/45" src="{{imgURL}}characters/{{chara.role}}.webp" alt="{{chara.role}}" />
       <div class="resleri-element-icon" style="background-color:{{a25service.elements[chara.elem]}};">
-        <svg><use attr.href="/media/spritesheets/A25.svg?v=1#resleri-{{chara.elem}}"></use></svg>
+        <svg><use attr.href="/media/spritesheets/A25.svg?v=2#resleri-{{chara.elem}}"></use></svg>
       </div>
     </div>
     <div style="aspect-ratio: 1; max-width: 100%; width: 400px; margin: auto; max-height: 400px;"> <!-- This stupid div is for webkit. -->
@@ -30,10 +30,10 @@
         <td>
           <div style="display:inline-flex;float:right;">
             <svg style="height:5rem;width:2.5rem;vertical-align:-0.5rem;fill:{{a25service.colors[chara.color1]}};display:inline;">
-              <use href="/media/spritesheets/A25.svg?v=1#color-l"></use>
+              <use href="/media/spritesheets/A25.svg?v=2#color-l"></use>
             </svg>
             <svg style="height:5rem;width:2.5rem;vertical-align:-0.5rem;fill:{{a25service.colors[chara.color2]}};display:inline;">
-              <use href="/media/spritesheets/A25.svg?v=1#color-r"></use>
+              <use href="/media/spritesheets/A25.svg?v=2#color-r"></use>
             </svg>
           </div>
           <ul>
@@ -125,7 +125,7 @@
                 }
                 </b>
                 <div class="resleri-element-icon-s" style="float:right;background-color:{{a25service.elements[skill.elem]}};">
-                  <svg><use attr.href="/media/spritesheets/A25.svg?v=1#resleri-{{skill.elem}}"></use></svg>
+                  <svg><use attr.href="/media/spritesheets/A25.svg?v=2#resleri-{{skill.elem}}"></use></svg>
                 </div>
                 <p [innerHTML]="replaceDesc(skill)"></p>
                 <ul style="list-style: none; padding-left: 0;">
