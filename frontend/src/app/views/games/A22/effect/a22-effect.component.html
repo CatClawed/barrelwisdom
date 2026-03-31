@@ -6,19 +6,19 @@
   (buttonClicked)="buttonClicked.emit($event)">
   <ng-container icon>
     @if (efftype == 'Normal' && !effect.effsub) {
-      <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=0#type-synthesis"></use></svg>
+      <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=1#type-synthesis"></use></svg>
     }
     @if (effect.effsub == 'Material') {
-      <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=0#material"></use></svg>
+      <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=1#material"></use></svg>
     }
     @if (efftype != 'Normal') {
-      <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A22.svg?v=0#type-{{effect.effsub.toLowerCase()}}"></use></svg>
+      <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A22.svg?v=1#type-{{effect.effsub.toLowerCase()}}"></use></svg>
     }
     @if (efftype == 'EV') {
       <span class="badge bg-primary">EV</span>
     }
     @if (efftype == 'Forge') {
-      <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=0#forge"></use></svg>
+      <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=1#forge"></use></svg>
     }
   </ng-container>
   @if (efftype == 'EV' && !hideContents) {

@@ -22,7 +22,7 @@
           @for (cat of item.categories; track cat) {
             <tr>
               <td style="text-align: center;">
-                <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A15.svg?v=0#{{cat.icon_name}}"></use></svg>
+                <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A15.svg?v=1#{{cat.icon_name}}"></use></svg>
               </td>
               <td>{{cat.name}}</td>
             </tr>
@@ -30,16 +30,16 @@
         </tbody></table>
         <div>
           @if (item.fire) {
-            <svg class="a15-element" style="background-color:#ac504f;"><use href="/media/spritesheets/A15.svg?v=0#element-fire"></use></svg>
+            <svg class="a15-element" style="background-color:#ac504f;"><use href="/media/spritesheets/A15.svg?v=1#element-fire"></use></svg>
           }
           @if (item.water) {
-            <svg class="a15-element" style="background-color:#427389;"><use href="/media/spritesheets/A15.svg?v=0#element-water"></use></svg>
+            <svg class="a15-element" style="background-color:#427389;"><use href="/media/spritesheets/A15.svg?v=1#element-water"></use></svg>
           }
           @if (item.wind) {
-            <svg class="a15-element" style="background-color:#5a843c;"><use href="/media/spritesheets/A15.svg?v=0#element-wind"></use></svg>
+            <svg class="a15-element" style="background-color:#5a843c;"><use href="/media/spritesheets/A15.svg?v=1#element-wind"></use></svg>
           }
           @if (item.earth) {
-            <svg class="a15-element" style="background-color:#8f7939;"><use href="/media/spritesheets/A15.svg?v=0#element-earth"></use></svg>
+            <svg class="a15-element" style="background-color:#8f7939;"><use href="/media/spritesheets/A15.svg?v=1#element-earth"></use></svg>
           }
           {{item.evalue}}
         </div>
@@ -63,7 +63,7 @@
           @if (data) {
             @for (cat of data.categories; track cat) {
               <mat-option class="svg-icon-text-vertical-center" value="{{cat.name}}">
-                <svg class="svg-icon"><use attr.href="/media/spritesheets/A15.svg?v=0#{{cat.icon_name}}"></use></svg>
+                <svg class="svg-icon"><use attr.href="/media/spritesheets/A15.svg?v=1#{{cat.icon_name}}"></use></svg>
                 {{cat.name}}
               </mat-option>
             }

@@ -17,7 +17,7 @@
       <ul class="two-column category-list">
         @for (cat of item.categories; track cat) {
           <li>
-            <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=0#category-{{cat.slug}}"></use></svg>
+            <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=1#category-{{cat.slug}}"></use></svg>
             {{cat.name}}
           </li>
         }
@@ -39,13 +39,13 @@
         <mat-label>{{a18service.category_translation[language]}}</mat-label>
         <mat-select matNativeControl formControlName="cat" disableOptionCentering="true" class="mat-select-icon">
           <mat-option class="svg-icon-text-vertical-center" value="--" selected>
-            <svg class="svg-icon"><use href="/media/spritesheets/A18.svg?v=0#book"></use></svg>
+            <svg class="svg-icon"><use href="/media/spritesheets/A18.svg?v=1#book"></use></svg>
             --
           </mat-option>
           @if (data) {
             @for (cat of data.categories; track cat) {
               <mat-option class="svg-icon-text-vertical-center" value="{{cat.name}}">
-                <svg class="svg-icon"><use attr.href="/media/spritesheets/A18.svg?v=0#category-{{cat.slug}}"></use></svg>
+                <svg class="svg-icon"><use attr.href="/media/spritesheets/A18.svg?v=1#category-{{cat.slug}}"></use></svg>
                 {{cat.name}}
               </mat-option>
             }

@@ -20,7 +20,7 @@
           <a style="position: relative; text-align: center;"
             routerLink="/{{gameURL}}/items/materials/{{reward.item.slug}}/{{language}}">
             <svg class="f{{reward.item.rarity}} resleri-item-bg-sm">
-                <use href="/media/spritesheets/A25.svg?v=2#item-frame"></use>
+                <use href="/media/spritesheets/A25.svg?v=1#item-frame"></use>
             </svg>
             <img loading="lazy" class="resleri-item-frame-sm"
               src="{{imgURL}}items/{{reward.item.slug}}.webp" alt="{{reward.item.name}}">
@@ -61,15 +61,15 @@
             <table style="margin-bottom:0.7rem;">
               <tbody>
                 <tr>
-                  <td><div class="resleri-element-icon-s" style="background-color:{{a25service.elements['fire']}}"><svg><use href="/media/spritesheets/A25.svg?v=2#resleri-fire"></use></svg></div></td><td>{{enemy.res_fir ? enemy.res_fir : 0}}%</td>
-                  <td><div class="resleri-element-icon-s" style="background-color:{{a25service.elements['ice']}}"><svg><use href="/media/spritesheets/A25.svg?v=2#resleri-ice"></use></svg></div></td><td>{{enemy.res_ice ? enemy.res_ice : 0}}%</td>
-                  <td><div class="resleri-element-icon-s" style="background-color:{{a25service.elements['lightning']}}"><svg><use href="/media/spritesheets/A25.svg?v=2#resleri-lightning"></use></svg></div></td><td>{{enemy.res_blt ? enemy.res_blt : 0}}%</td>
-                  <td><div class="resleri-element-icon-s" style="background-color:{{a25service.elements['wind']}}"><svg><use href="/media/spritesheets/A25.svg?v=2#resleri-wind"></use></svg></div></td><td>{{enemy.res_air ? enemy.res_air : 0}}%</td>
+                  <td><div class="resleri-element-icon-s" style="background-color:{{a25service.elements['fire']}}"><svg><use href="/media/spritesheets/A25.svg?v=1#resleri-fire"></use></svg></div></td><td>{{enemy.res_fir ? enemy.res_fir : 0}}%</td>
+                  <td><div class="resleri-element-icon-s" style="background-color:{{a25service.elements['ice']}}"><svg><use href="/media/spritesheets/A25.svg?v=1#resleri-ice"></use></svg></div></td><td>{{enemy.res_ice ? enemy.res_ice : 0}}%</td>
+                  <td><div class="resleri-element-icon-s" style="background-color:{{a25service.elements['lightning']}}"><svg><use href="/media/spritesheets/A25.svg?v=1#resleri-lightning"></use></svg></div></td><td>{{enemy.res_blt ? enemy.res_blt : 0}}%</td>
+                  <td><div class="resleri-element-icon-s" style="background-color:{{a25service.elements['wind']}}"><svg><use href="/media/spritesheets/A25.svg?v=1#resleri-wind"></use></svg></div></td><td>{{enemy.res_air ? enemy.res_air : 0}}%</td>
                 </tr>
                 <tr>
-                  <td><div class="resleri-element-icon-s" style="background-color:{{a25service.elements['slash']}}"><svg><use href="/media/spritesheets/A25.svg?v=2#resleri-slash"></use></svg></div></td><td>{{enemy.res_sla ? enemy.res_sla : 0}}%</td>
-                  <td><div class="resleri-element-icon-s" style="background-color:{{a25service.elements['impact']}}"><svg><use href="/media/spritesheets/A25.svg?v=2#resleri-impact"></use></svg></div></td><td>{{enemy.res_str ? enemy.res_str : 0}}%</td>
-                  <td><div class="resleri-element-icon-s" style="background-color:{{a25service.elements['pierce']}}"><svg><use href="/media/spritesheets/A25.svg?v=2#resleri-pierce"></use></svg></div></td><td>{{enemy.res_sta ? enemy.res_sta : 0}}%</td>
+                  <td><div class="resleri-element-icon-s" style="background-color:{{a25service.elements['slash']}}"><svg><use href="/media/spritesheets/A25.svg?v=1#resleri-slash"></use></svg></div></td><td>{{enemy.res_sla ? enemy.res_sla : 0}}%</td>
+                  <td><div class="resleri-element-icon-s" style="background-color:{{a25service.elements['impact']}}"><svg><use href="/media/spritesheets/A25.svg?v=1#resleri-impact"></use></svg></div></td><td>{{enemy.res_str ? enemy.res_str : 0}}%</td>
+                  <td><div class="resleri-element-icon-s" style="background-color:{{a25service.elements['pierce']}}"><svg><use href="/media/spritesheets/A25.svg?v=1#resleri-pierce"></use></svg></div></td><td>{{enemy.res_sta ? enemy.res_sta : 0}}%</td>
                   <td></td>
                 </tr>
               </tbody>
@@ -83,7 +83,7 @@
                     <b>(Burst)</b>
                   }
                   @if (skill.skill.elem) {
-                    <div class="resleri-element-icon-s" style="float: right; background-color:{{a25service.elements[skill.skill.elem]}}"><svg><use attr.href="/media/spritesheets/A25.svg?v=2#resleri-{{skill.skill.elem}}"></use></svg></div>
+                    <div class="resleri-element-icon-s" style="float: right; background-color:{{a25service.elements[skill.skill.elem]}}"><svg><use attr.href="/media/spritesheets/A25.svg?v=1#resleri-{{skill.skill.elem}}"></use></svg></div>
                   }
                   @if (skill.skill.wt) {
                     <br />WT: {{skill.skill.wt+200}}

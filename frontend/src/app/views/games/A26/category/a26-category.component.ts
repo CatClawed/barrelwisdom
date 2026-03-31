@@ -18,6 +18,6 @@ export class A26CategoryComponent extends SingleComponent {
   }
 
   override afterAssignment(): void {
-    this.genericSettings(this.data.name, `All items in ${this.data.name}`, '', true);
+    this.genericSettings(this.data.name, this.a26service.category_translation[this.language], '', true);
   }
 }

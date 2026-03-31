@@ -7,7 +7,7 @@
       (buttonClicked)="openDialog($event)"
       dimension="256">
       <ng-container icon>
-        <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A22.svg?v=0#{{icons[item.itemtype]}}"></use></svg>
+        <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A22.svg?v=1#{{icons[item.itemtype]}}"></use></svg>
         @if (item.isDLC) {
           <br />
           }@if (item.isDLC) {
@@ -18,16 +18,16 @@
         <ul style="padding-left: 0;">
           @for (cat of item.category; track cat) {
             <li style="display: flex;">
-              <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A22.svg?v=0#category-{{cat.slug}}"></use></svg>
+              <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A22.svg?v=1#category-{{cat.slug}}"></use></svg>
               {{cat.name}}
             </li>
           }
         </ul>
         <div style="break-inside: avoid-column; margin-right:2rem;">
-          <svg class="a22-element-icon" [style]="item.fire      ? 'fill:#f03a02;' : 'fill:lightgrey'"><use href="/media/spritesheets/A22.svg?v=0#fire"></use></svg>
-          <svg class="a22-element-icon" [style]="item.ice       ? 'fill:#04b5db;' : 'fill:lightgrey'"><use href="/media/spritesheets/A22.svg?v=0#ice"></use></svg>
-          <svg class="a22-element-icon" [style]="item.lightning ? 'fill:#e3bb05;' : 'fill:lightgrey'"><use href="/media/spritesheets/A22.svg?v=0#lightning"></use></svg>
-          <svg class="a22-element-icon" [style]="item.wind      ? 'fill:#589b1d;' : 'fill:lightgrey'"><use href="/media/spritesheets/A22.svg?v=0#wind"></use></svg>
+          <svg class="a22-element-icon" [style]="item.fire      ? 'fill:#f03a02;' : 'fill:lightgrey'"><use href="/media/spritesheets/A22.svg?v=1#fire"></use></svg>
+          <svg class="a22-element-icon" [style]="item.ice       ? 'fill:#04b5db;' : 'fill:lightgrey'"><use href="/media/spritesheets/A22.svg?v=1#ice"></use></svg>
+          <svg class="a22-element-icon" [style]="item.lightning ? 'fill:#e3bb05;' : 'fill:lightgrey'"><use href="/media/spritesheets/A22.svg?v=1#lightning"></use></svg>
+          <svg class="a22-element-icon" [style]="item.wind      ? 'fill:#589b1d;' : 'fill:lightgrey'"><use href="/media/spritesheets/A22.svg?v=1#wind"></use></svg>
           @if (item.fire || item.wind || item.ice || item.lightning) {
             {{item.elementvalue}}
           }
@@ -50,12 +50,12 @@
         <mat-label>{{a22service.category_translation[language]}}</mat-label>
         <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
           <mat-option value="--" class="svg-icon-text-vertical-center" selected>
-            <svg class="svg-icon"><use href="/media/spritesheets/A22.svg?v=0#book"></use></svg>
+            <svg class="svg-icon"><use href="/media/spritesheets/A22.svg?v=1#book"></use></svg>
             --</mat-option>
           @if (data) {
             @for (cat of data.categories; track cat) {
               <mat-option value="{{cat.name}}" class="svg-icon-text-vertical-center">
-                <svg class="svg-icon"><use attr.href="/media/spritesheets/A22.svg?v=0#category-{{cat.slug}}"></use></svg>
+                <svg class="svg-icon"><use attr.href="/media/spritesheets/A22.svg?v=1#category-{{cat.slug}}"></use></svg>
                 {{cat.name}}
               </mat-option>
             }

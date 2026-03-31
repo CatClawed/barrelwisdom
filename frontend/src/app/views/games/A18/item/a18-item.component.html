@@ -51,13 +51,13 @@
     <ul class="a18-item-data">
       @for (c of item.categories; track c) {
         <li>
-          <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=0#category-{{c.slug}}"></use></svg>
+          <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=1#category-{{c.slug}}"></use></svg>
           <a routerLink="/{{gameURL}}/categories/{{c.slug}}/{{language}}">{{c.name}}</a>
         </li>
       }
       @for (c of item.add; track c) {
         <li>
-          <svg style="fill:lightgray;" class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=0#category-{{c.slug}}"></use></svg>
+          <svg style="fill:lightgray;" class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=1#category-{{c.slug}}"></use></svg>
           <a routerLink="/{{gameURL}}/categories/{{c.slug}}/{{language}}">{{c.name}}</a>
         </li>
       }
@@ -142,7 +142,7 @@
           </tr>
           <tr>
             <td>
-              <svg class="svg-icon-standard"><use href="/media/spritesheets/A18.svg?v=0#book"></use></svg>
+              <svg class="svg-icon-standard"><use href="/media/spritesheets/A18.svg?v=1#book"></use></svg>
             </td>
             <td>
               <a routerLink="/{{gameURL}}/items/{{item.book.slug}}/{{language}}">{{item.book.name}}</a>
@@ -157,11 +157,11 @@
             <tr>
               @if (unlock.level == 1) {
                 <td>
-                  <svg class="svg-icon-standard"><use href="/media/spritesheets/A18.svg?v=0#fa-quest"></use></svg></td>
+                  <svg class="svg-icon-standard"><use href="/media/spritesheets/A18.svg?v=1#fa-quest"></use></svg></td>
               }
               @if (unlock.level == 4) {
                 <td>
-                  <svg class="svg-icon-standard"><use href="/media/spritesheets/main.svg?v=0#fa-unlock"></use></svg>
+                  <svg class="svg-icon-standard"><use href="/media/spritesheets/main.svg?v=1#fa-unlock"></use></svg>
                   </td>
               }
               @if (unlock.level == 1 || unlock.level == 4) {
@@ -232,7 +232,7 @@
           <tr>
             @if (item.ingredients) {
               <td style="vertical-align:middle;text-align:center;">
-                <svg style="fill:{{colors[eff.color][1]}}" class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=0#{{colors[eff.color][0]}}"></use></svg>
+                <svg style="fill:{{colors[eff.color][1]}}" class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=1#{{colors[eff.color][0]}}"></use></svg>
               </td>
             }
             <td>
@@ -255,7 +255,7 @@
                       </popover>
                     }
                     @if (e.component) {
-                      <svg style="fill:{{colors[e.component.color][1]}}" class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=0#{{colors[e.component.color][0]}}"></use></svg>
+                      <svg style="fill:{{colors[e.component.color][1]}}" class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=1#{{colors[e.component.color][0]}}"></use></svg>
                        {{e.component.name}} {{e.component.value}}
                     }
                     @if (e.num && item.ingredients) {
@@ -282,7 +282,7 @@
               <ul class="two-column category-list">
                 @for (comp of item.fixed_components; track comp) {
                   <li>
-                    <svg style="fill:{{colors[comp.color][1]}}" class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=0#{{colors[comp.color][0]}}"></use></svg>
+                    <svg style="fill:{{colors[comp.color][1]}}" class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=1#{{colors[comp.color][0]}}"></use></svg>
                      {{comp.name}} {{comp.value}}
                   </li>
                 }
@@ -301,7 +301,7 @@
               <ul class="two-column category-list">
                 @for (comp of item.random_components; track comp) {
                   <li>
-                    <svg style="fill:{{colors[comp.color][1]}}" class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=0#{{colors[comp.color][0]}}"></use></svg>
+                    <svg style="fill:{{colors[comp.color][1]}}" class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=1#{{colors[comp.color][0]}}"></use></svg>
                      {{comp.name}} {{comp.value}}
                   </li>
                 }
@@ -343,7 +343,7 @@
             <ul class="two-column" style="list-style: none; padding-left: 0;">
               @for (cat of item.catalysts; track cat) {
                 <li>
-                  <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=0#category-{{cat.slug}}"></use></svg>
+                  <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=1#category-{{cat.slug}}"></use></svg>
                   <a routerLink="/{{gameURL}}/catalysts/{{language}}"
                     [queryParams]="{search: cat.name}">
                     {{cat.name}}
@@ -363,7 +363,7 @@
             <ul class="two-column category-list" style="list-style: none; padding-left: 0;">
               @for (j of [].constructor(item.catalyst.color.length); track j; let i = $index) {
                 <li>
-                  <svg style="fill:{{colors[item.catalyst.color[i]][1]}}" class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=0#{{colors[item.catalyst.color[i]][0]}}"></use></svg>
+                  <svg style="fill:{{colors[item.catalyst.color[i]][1]}}" class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=1#{{colors[item.catalyst.color[i]][0]}}"></use></svg>
                   {{item.catalyst.action[i]}}
                 </li>
               }

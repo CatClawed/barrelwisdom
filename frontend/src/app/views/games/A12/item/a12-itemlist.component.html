@@ -15,7 +15,7 @@
         @for (cat of item.categories; track cat) {
           <tr>
             <td>
-              <svg class="svg-icon"><use attr.href="/media/spritesheets/A12.svg?v=0#category-{{cat.slug}}"></use></svg>
+              <svg class="svg-icon"><use attr.href="/media/spritesheets/A12.svg?v=1#category-{{cat.slug}}"></use></svg>
             </td>
             <td>{{cat.name}}</td>
           </tr>
@@ -40,7 +40,7 @@
           @if (data) {
             @for (cat of data.categories; track cat) {
               <mat-option class="svg-icon-text-vertical-center" value="{{cat.name}}">
-                <svg class="svg-icon"><use attr.href="/media/spritesheets/A12.svg?v=0#category-{{cat.slug}}"></use></svg>
+                <svg class="svg-icon"><use attr.href="/media/spritesheets/A12.svg?v=1#category-{{cat.slug}}"></use></svg>
                 {{cat.name}}
               </mat-option>
             }

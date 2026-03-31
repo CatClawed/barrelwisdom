@@ -23,7 +23,9 @@
           "options": {
             "security": {
               "allowedHosts": [
-                "localhost"
+                "localhost",
+                "test.barrelwisdom.com",
+                "barrelwisdom.com"
               ]
             },
             "browser": "src/main.ts",

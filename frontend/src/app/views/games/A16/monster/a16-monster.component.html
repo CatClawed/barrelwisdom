@@ -1,7 +1,7 @@
 @if (data; as monster) {
   <div [class]="inputSlug ? 'card card-dialog' : 'card card-medium'">
     <h4 class="card-title card-icon-space">{{monster.name}}</h4>
-    <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A16.svg?v=0#race-{{monster.kind}}"></use></svg>
+    <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A16.svg?v=1#race-{{monster.kind}}"></use></svg>
     <img class="card-item-display" src="{{imgURL}}monsters/{{monster.slug}}.webp"
       alt="{{monster.name}}" style="aspect-ratio: 1; width: 218px;">
     @if (monster.desc) {

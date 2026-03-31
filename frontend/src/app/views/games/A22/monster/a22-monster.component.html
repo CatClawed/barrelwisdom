@@ -3,12 +3,12 @@
     <h4 class="card-title  card-icon-space">{{monster.name}}</h4>
     <div class="card-icon-position">
       @if (monster.montype != 'boss') {
-          <svg class="svg-icon-standard right-spacer"><use attr.href="/media/spritesheets/A22.svg?v=0#race-{{monster.montype}}"></use></svg>
+          <svg class="svg-icon-standard right-spacer"><use attr.href="/media/spritesheets/A22.svg?v=1#race-{{monster.montype}}"></use></svg>
         }
         @if (monster.montype == 'boss') {
-          <svg class="svg-icon-standard right-spacer"><use href="/media/spritesheets/A22.svg?v=0#boss-enemy"></use></svg>
+          <svg class="svg-icon-standard right-spacer"><use href="/media/spritesheets/A22.svg?v=1#boss-enemy"></use></svg>
         }
-        <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A22.svg?v=0#{{monster.size.toLowerCase()}}-enemy"></use></svg>
+        <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A22.svg?v=1#{{monster.size.toLowerCase()}}-enemy"></use></svg>
         @if (monster.isDLC) {
           <br />
           }@if (monster.isDLC) {

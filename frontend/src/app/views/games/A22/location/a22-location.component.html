@@ -27,13 +27,13 @@
             <tr>
               @if (node.tool != 'Dig') {
                 <td>
-                  @if (node.tool == 'All' || node.tool == 'Staff') { <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=0#tool-staff"></use></svg> }
-                  @if (node.tool == 'Hand' || !node.tool)          { <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=0#tool-gather"></use></svg> }
-                  @if (node.tool == 'Axe')                         { <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=0#tool-axe"></use></svg> }
-                  @if (node.tool == 'Sickle')                      { <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=0#tool-sickle"></use></svg> }
-                  @if (node.tool == 'Bomb Rod')                    { <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=0#tool-bomb-rod"></use></svg> }
-                  @if (node.tool == 'Bug Net')                     { <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=0#tool-bug-net"></use></svg> }
-                  @if (node.tool == 'Fishing Rod')                 { <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=0#tool-fishing-rod"></use></svg> }
+                  @if (node.tool == 'All' || node.tool == 'Staff') { <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=1#tool-staff"></use></svg> }
+                  @if (node.tool == 'Hand' || !node.tool)          { <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=1#tool-gather"></use></svg> }
+                  @if (node.tool == 'Axe')                         { <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=1#tool-axe"></use></svg> }
+                  @if (node.tool == 'Sickle')                      { <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=1#tool-sickle"></use></svg> }
+                  @if (node.tool == 'Bomb Rod')                    { <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=1#tool-bomb-rod"></use></svg> }
+                  @if (node.tool == 'Bug Net')                     { <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=1#tool-bug-net"></use></svg> }
+                  @if (node.tool == 'Fishing Rod')                 { <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=1#tool-fishing-rod"></use></svg> }
                 </td>
                 <td>
                   <a routerLink="/{{gameURL}}/items/{{node.rank1.slug}}/{{language}}">{{node.rank1.name}}</a><br/>{{node.priority1}}
@@ -50,7 +50,7 @@
           @if (dig) {
             <tr>
               <td>
-                <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=0#race-weasel-king"></use></svg>
+                <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=1#race-weasel-king"></use></svg>
               </td>
               <td colspan="3">
                 <div style="column-count: 3;">

@@ -12,12 +12,12 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
 export class A18MonsterComponent extends SingleComponent {
   protected a18service = inject(A18Service);
   chart = {
-    1: `A18.svg?v=0#fa-x`,
-    2: `A18.svg?v=0#fa-minus`,
-    3: `main.svg?v=0#fa-caret-up`,
-    4: `A18.svg?v=0#fa-circle`,
-    5: `A18.svg?v=0#fa-circle-dot`,
-    6: `A18.svg?v=0#fa-empty-star`
+    1: `A18.svg?v=1#fa-x`,
+    2: `A18.svg?v=1#fa-minus`,
+    3: `main.svg?v=1#fa-caret-up`,
+    4: `A18.svg?v=1#fa-circle`,
+    5: `A18.svg?v=1#fa-circle-dot`,
+    6: `A18.svg?v=1#fa-empty-star`
   }
 
   changeData() {

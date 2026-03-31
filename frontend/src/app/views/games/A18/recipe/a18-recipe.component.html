@@ -21,7 +21,7 @@
         @if (recipe.book) {
           <tr>
             <td>
-              <svg class="svg-icon-standard"><use href="/media/spritesheets/A18.svg?v=0#book"></use></svg>
+              <svg class="svg-icon-standard"><use href="/media/spritesheets/A18.svg?v=1#book"></use></svg>
             </td>
             <td>
               <a routerLink="/{{gameURL}}/items/{{recipe.book.slug}}/{{language}}">{{recipe.book.name}}</a>
@@ -35,10 +35,10 @@
           @for (unlock of idea.unlocks; track unlock) {
             <tr>
               @if (unlock.level == 1) {
-                <td><svg class="svg-icon-standard"><use href="/media/spritesheets/A18.svg?v=0#fa-quest"></use></svg></td>
+                <td><svg class="svg-icon-standard"><use href="/media/spritesheets/A18.svg?v=1#fa-quest"></use></svg></td>
               }
               @if (unlock.level == 4) {
-                <td><svg class="svg-icon-standard"><use href="/media/spritesheets/main.svg?v=0#fa-unlock"></use></svg></td>
+                <td><svg class="svg-icon-standard"><use href="/media/spritesheets/main.svg?v=1#fa-unlock"></use></svg></td>
               }
               @if (unlock.level == 1 || unlock.level == 4) {
                 <td>

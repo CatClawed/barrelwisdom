@@ -8,11 +8,11 @@ import { AfterViewInit, Component, inject, PLATFORM_ID } from '@angular/core';
   standalone: true,
   template: `
     <ins class="adsbygoogle"
-        style="display:block"
-        data-ad-client="ca-pub-6107930038683704"
-        data-ad-slot="3893440132"
-        data-ad-format="auto"
-        data-full-width-responsive="true"></ins>
+         style="display:block"
+         data-ad-client="ca-pub-6107930038683704"
+         data-ad-slot="3893440132"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
   `,
 })
 export class CringeAdComponent implements AfterViewInit {
@@ -20,10 +20,20 @@ export class CringeAdComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
-      const script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.text = `(adsbygoogle = window.adsbygoogle || []).push({});`;
-      document.body.appendChild(script);
+      this.pushAd();
+    }
+  }
+
+  private pushAd(retries = 0) {
+    if (retries > 10) return;
+    try {
+      const adsbygoogle = (window as any).adsbygoogle;      
+      if (adsbygoogle && typeof adsbygoogle.push === 'function') {
+        adsbygoogle.push({});
+      } else {
+        setTimeout(() => this.pushAd(retries + 1), 200);
+      }
+    } catch (e) {
     }
   }
 }

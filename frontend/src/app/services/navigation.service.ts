@@ -82,7 +82,7 @@ export class NavigationService {
   }
 
   getNav(section: string): Observable<Nav> {
-    return this.http.get<Nav>(`${this.apiUrl}/nav/${section}/?v=2`, this.httpOptions);
+    return this.http.get<Nav>(`${this.apiUrl}/nav/${section}/?v=1`, this.httpOptions);
   }
 }
 

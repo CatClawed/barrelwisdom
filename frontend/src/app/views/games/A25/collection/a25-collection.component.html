@@ -129,14 +129,14 @@
       <div class="grid-6">
         <button mat-fab extended color="primary" style="height: 2.5rem;" class="svg-inline-text"
           (click)="router.navigateByUrl('/resleri/collect/'+language)">
-          <svg><use attr.href="/media/spritesheets/{{has_collection ? `main.svg#fa-edit` : `A25.svg?v=2#fa-plus`}}"></use></svg>
+          <svg><use attr.href="/media/spritesheets/{{has_collection ? `main.svg#fa-edit` : `A25.svg?v=1#fa-plus`}}"></use></svg>
            {{has_collection ? 'Edit my collection' : 'Create new'}}
         </button>
       </div>
       <div class="grid-6" style="display: grid;">
         <button mat-fab extended color="accent" style="margin-left: auto; margin-right: 0; height: 2.5rem;" (click)="import()"
           class="svg-inline-text">
-          <svg><use href="/media/spritesheets/A25.svg?v=2#fa-import"></use></svg>
+          <svg><use href="/media/spritesheets/A25.svg?v=1#fa-import"></use></svg>
           Import Collection
         </button>
         @if (areyousure) {
@@ -161,7 +161,7 @@
     <ul style="list-style-type: none; padding-left: 0;">
       <li style="display: flex; align-items: center;">
         <svg style="width:2.4rem; height: 2.4rem; padding-right: 0.5rem;">
-          <use href="/media/spritesheets/A25.svg?v=2#char"></use>\
+          <use href="/media/spritesheets/A25.svg?v=1#char"></use>\
         </svg>
         <span style="vertical-align: middle;">
           {{totals['characters']}} / {{use_global_count ? totals['character_gbl'] : totals['character_total']}}
@@ -169,7 +169,7 @@
       </li>
       <li style="display: flex; align-items: center;">
         <svg style="width:2.4rem; height: 2.4rem; padding-right: 0.5rem;">
-          <use href="/media/spritesheets/A25.svg?v=2#memoria"></use>
+          <use href="/media/spritesheets/A25.svg?v=1#memoria"></use>
         </svg>
         <span style="vertical-align: middle;">
           {{totals['memoria']}} / {{use_global_count ? totals['memoria_gbl'] : totals['memoria_total']}}
@@ -178,11 +178,11 @@
     </ul>
     <div>
       <ul style="list-style-type: none; padding-left: 0; float: right;">
-        <li><svg class="standard-stat-star" style="fill: #a17b4c; vertical-align: bottom;"><use href="/media/spritesheets/A25.svg?v=2#fa-shield"></use></svg>
+        <li><svg class="standard-stat-star" style="fill: #a17b4c; vertical-align: bottom;"><use href="/media/spritesheets/A25.svg?v=1#fa-shield"></use></svg>
           {{totals['emblems_1']+totals['emblems_2']+totals['emblems_3']}} / {{use_global_count ? totals['emblem_gbl'] : totals['emblem_total']}}</li>
-        <li><svg class="standard-stat-star" style="fill: #c1c3c2; vertical-align: bottom;"><use href="/media/spritesheets/A25.svg?v=2#fa-shield"></use></svg>
+        <li><svg class="standard-stat-star" style="fill: #c1c3c2; vertical-align: bottom;"><use href="/media/spritesheets/A25.svg?v=1#fa-shield"></use></svg>
           {{totals['emblems_2']+totals['emblems_3']}} / {{use_global_count ? totals['emblem_gbl'] : totals['emblem_total']}}</li>
-        <li><svg class="standard-stat-star" style="fill: #e9c82d; vertical-align: bottom;"><use href="/media/spritesheets/A25.svg?v=2#fa-shield"></use></svg>
+        <li><svg class="standard-stat-star" style="fill: #e9c82d; vertical-align: bottom;"><use href="/media/spritesheets/A25.svg?v=1#fa-shield"></use></svg>
           {{totals['emblems_3']}} / {{use_global_count ? totals['emblem_gbl'] : totals['emblem_total']}}</li>
       </ul>
     </div>
