@@ -1,14 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { getApiUrl } from '@app/_helpers/api-url';
 import { Category, Coord, Effect, Item, Monster, NameLink, Trait } from '@app/views/games/A26/_services/a26.interface';
 import { environment } from '@environments/environment';
-import { category_translation, effect_translation, filter_translation, item_translation, monster_translation, quality_translation, race_translation, stat_translation, trait_translation } from '@environments/localization';
+import { category_translation, details_translation, effect_translation, filter_translation, item_translation, level_translation, monster_translation, quality_translation, race_translation, stat_translation, trait_translation } from '@environments/localization';
 import { Observable } from 'rxjs';
 
 
 @Injectable({ providedIn: 'root' })
 export class A26Service {
   private readonly version = '04-17-25';
+  private apiUrl = getApiUrl();
 
   constructor(
     private http: HttpClient,
@@ -23,6 +25,8 @@ export class A26Service {
   public readonly filter_translation = filter_translation
   public readonly race_translation = race_translation
   public readonly quality_translation = quality_translation
+  public readonly details_translation = details_translation
+  public readonly level_translation = level_translation
 
   public readonly gameTitle = {
     "en": "Atelier Yumia",
@@ -126,61 +130,61 @@ export class A26Service {
 
   public readonly elements = {
     'air': '#75ff76',
-    'fire': '#fcbc72',
+    'fire': '#fcbc72', 
     'ice': '#7dfffa',
     'bolt': '#ffff7b',
     'none': '#969696'
   }
 
   getMemoryVials(): Observable<Coord[]> {
-    return this.http.get<Coord[]>(`${environment.apiUrl}/A26/memory-vials/?v=${this.version}`);
+    return this.http.get<Coord[]>(`${this.apiUrl}/A26/memory-vials/?v=${this.version}`);
   }
 
   getTraitList(language: string): Observable<Trait[]> {
-    return this.http.get<Trait[]>(`${environment.apiUrl}/A26/trait/${language}/?v=${this.version}`);
+    return this.http.get<Trait[]>(`${this.apiUrl}/A26/trait/${language}/?v=${this.version}`);
   }
 
   getTrait(slug: string, language: string): Observable<Trait> {
-    return this.http.get<Trait>(`${environment.apiUrl}/A26/trait/${slug}/${language}/?v=${this.version}`);
+    return this.http.get<Trait>(`${this.apiUrl}/A26/trait/${slug}/${language}/?v=${this.version}`);
   }
 
   getRaceList(language: string): Observable<NameLink[]> {
-    return this.http.get<NameLink[]>(`${environment.apiUrl}/A26/race/${language}/?v=${this.version}`);
+    return this.http.get<NameLink[]>(`${this.apiUrl}/A26/race/${language}/?v=${this.version}`);
   }
 
   getMonsterList(language: string): Observable<Monster[]> {
-    return this.http.get<Monster[]>(`${environment.apiUrl}/A26/monster/${language}/?v=${this.version}`);
+    return this.http.get<Monster[]>(`${this.apiUrl}/A26/monster/${language}/?v=${this.version}`);
   }
 
   getMonster(slug: string, language: string): Observable<Monster> {
-    return this.http.get<Monster>(`${environment.apiUrl}/A26/monster/${slug}/${language}/?v=${this.version}`);
+    return this.http.get<Monster>(`${this.apiUrl}/A26/monster/${slug}/${language}/?v=${this.version}`);
   }
 
   getEffectList(language: string): Observable<Effect[]> {
-    return this.http.get<Effect[]>(`${environment.apiUrl}/A26/effect/${language}/?v=${this.version}`);
+    return this.http.get<Effect[]>(`${this.apiUrl}/A26/effect/${language}/?v=${this.version}`);
   }
 
   getEffect(slug: string, language: string): Observable<Effect> {
-    return this.http.get<Effect>(`${environment.apiUrl}/A26/effect/${slug}/${language}/?v=${this.version}`);
+    return this.http.get<Effect>(`${this.apiUrl}/A26/effect/${slug}/${language}/?v=${this.version}`);
   }
 
   getCategoryList(language: string): Observable<NameLink[]> {
-    return this.http.get<NameLink[]>(`${environment.apiUrl}/A26/category/${language}/?v=${this.version}`);
+    return this.http.get<NameLink[]>(`${this.apiUrl}/A26/category/${language}/?v=${this.version}`);
   }
 
   getCategory(slug: string, language: string): Observable<Category> {
-    return this.http.get<Category>(`${environment.apiUrl}/A26/category/${slug}/${language}/?v=${this.version}`);
+    return this.http.get<Category>(`${this.apiUrl}/A26/category/${slug}/${language}/?v=${this.version}`);
   }
 
   getMaterialList(language: string): Observable<NameLink[]> {
-    return this.http.get<NameLink[]>(`${environment.apiUrl}/A26/material/${language}/?v=${this.version}`);
+    return this.http.get<NameLink[]>(`${this.apiUrl}/A26/material/${language}/?v=${this.version}`);
   }
 
   getItemList(language: string): Observable<Item[]> {
-    return this.http.get<Item[]>(`${environment.apiUrl}/A26/item/${language}/?v=${this.version}`);
+    return this.http.get<Item[]>(`${this.apiUrl}/A26/item/${language}/?v=${this.version}`);
   }
 
   getItem(slug: string, language: string): Observable<Item> {
-    return this.http.get<Item>(`${environment.apiUrl}/A26/item/${slug}/${language}/?v=${this.version}`);
+    return this.http.get<Item>(`${this.apiUrl}/A26/item/${slug}/${language}/?v=${this.version}`);
   }
 }

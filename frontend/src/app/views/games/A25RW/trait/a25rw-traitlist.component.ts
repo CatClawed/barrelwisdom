@@ -1,11 +1,5 @@
-import { Dialog } from '@angular/cdk/dialog';
-import { Location } from '@angular/common';
-import { Component } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
+import { Component, inject } from '@angular/core';
+import { FilterButtonsComponent } from '@app/views/_components/filter-buttons/filter-buttons.component';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Trait } from '@app/views/games/A25RW/_services/a25rw.interface';
 import { A25RWService } from '@app/views/games/A25RW/_services/a25rw.service';
@@ -17,25 +11,16 @@ import { A25RWTraitComponent } from './a25rw-trait.component';
 
 @Component({
     templateUrl: 'a25rw-traitlist.component.html',
-    providers: [DestroyService],
     imports: [...CommonImports, ...MaterialFormImports,
-        A25RWTraitComponent, FilterListComponent]
+        A25RWTraitComponent, FilterListComponent, FilterButtonsComponent]
 })
 
 export class A25RWTraitlistComponent extends DialogUseComponent {
+  protected a25rwservice: A25RWService = inject(A25RWService)
   filteredTraits: Observable<Trait[]>;
 
-  constructor(
-    protected cdkDialog: Dialog,
-    protected readonly destroy$: DestroyService,
-    protected router: Router,
-    protected route: ActivatedRoute,
-    protected location: Location,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    private formBuilder: UntypedFormBuilder,
-    protected a25rwservice: A25RWService,) {
-    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
+  constructor() {
+    super();
     this.component = A25RWTraitComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -59,7 +44,7 @@ export class A25RWTraitlistComponent extends DialogUseComponent {
     return this.a25rwservice.getTraitList(this.language);
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.filteredTraits = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Trait[]>),
       map((search: any) => search ? this.filterT(search.filtertext, search.com, search.res, search.inh, search.boo, search.wep, search.arm, search.acc, search.exp, search.syn, search.sta) : this.data.slice())

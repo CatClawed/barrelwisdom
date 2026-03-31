@@ -1,29 +1,27 @@
-import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
+import { HttpEvent, HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { AuthenticationService } from '@app/services/authentication.service';
+import { environment } from '@environments/environment';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 
-import { environment } from '@environments/environment';
-import { AuthenticationService } from '@app/services/authentication.service';
-import { CookieService } from 'ngx-cookie-service';
+export const JwtInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>,
+    next: HttpHandlerFn): Observable<HttpEvent<unknown>> => {
+    const authService = inject(AuthenticationService);
+    const cookieService = inject(CookieService);
 
-@Injectable()
-export class JwtInterceptor implements HttpInterceptor {
-    constructor(private authenticationService: AuthenticationService,
-        private cookieService: CookieService) { }
+    const user = authService.userValue;
+    const access = cookieService.get('access');
+    const isLoggedIn = !!user && !!access;
+    const isApiUrl = req.url.startsWith(environment.apiUrl);
+    const isAuthUrl = req.url.startsWith(environment.authUrl);
 
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        // add auth header with jwt if user is logged in and request is to the api url
-        const user = this.authenticationService.userValue;
-        const isLoggedIn = user && this.cookieService.get('access');
-        const isApiUrl = request.url.startsWith(environment.apiUrl);
-        const isAuthUrl = request.url.startsWith(environment.authUrl);
-        if (isLoggedIn && (isApiUrl || isAuthUrl)) {
-            let access = this.cookieService.get('access')
-            request = request.clone({
-                setHeaders: { Authorization: `Bearer ${access}` }
-            });
-        }
-        
-        return next.handle(request);
+    if (isLoggedIn && (isApiUrl || isAuthUrl)) {
+        req = req.clone({
+            setHeaders: {
+                Authorization: `Bearer ${access}`
+            }
+        });
     }
-}
+    return next(req);
+};

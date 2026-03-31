@@ -1,19 +1,12 @@
-import { Dialog } from '@angular/cdk/dialog';
-import { Location } from '@angular/common';
-import { Component, ViewEncapsulation } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Popover } from '@app/views/_components/popover/popover.component';
 import { Item } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { DialogUseComponent } from '@app/views/games/_prototype/dialog-use.component';
-import { Observable, forkJoin } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { A25ItemComponent } from './a25-item.component';
 
@@ -21,12 +14,12 @@ import { A25ItemComponent } from './a25-item.component';
     templateUrl: 'a25-materiallist.component.html',
     styleUrls: ['../resleri.scss'],
     encapsulation: ViewEncapsulation.None,
-    providers: [DestroyService],
     imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
         MatButtonModule, Popover]
 })
 
 export class A25MaterialListComponent extends DialogUseComponent {
+  protected a25service = inject(A25Service);
   filteredItems: Observable<Item[]>;
   combat = {
     "en":"Combat",
@@ -35,18 +28,8 @@ export class A25MaterialListComponent extends DialogUseComponent {
     "tc":"戰鬥道具"
   }
 
-  constructor(
-    protected cdkDialog: Dialog,
-    protected readonly destroy$: DestroyService,
-    protected router: Router,
-    protected route: ActivatedRoute,
-    protected location: Location,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    private formBuilder: UntypedFormBuilder,
-    protected a25service: A25Service,
-  ) {
-    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
+  constructor() {
+    super();
     this.component = A25ItemComponent
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -67,14 +50,14 @@ export class A25MaterialListComponent extends DialogUseComponent {
     })
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.filteredItems = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Item[]>),
       map((search: any) => search ? this.filterT(search.filtertext, search.color, search.rarity, search.filtertrait, search.traittype) : this.data.items.slice())
     );
   }
 
-  extraSettings(): void {
+  override extraSettings(): void {
     this.dialogref.componentInstance.itemkind = 'materials'
   }
 
@@ -82,13 +65,13 @@ export class A25MaterialListComponent extends DialogUseComponent {
     this.hide = false;
     let list: Item[] = this.data.items;
 
-    if (color != 'Any' && color) {
+    if (color != '--' && color) {
       list = list.filter(item => item.material[0].color == color);
     }
     if (rarity > 0) {
       list = list.filter(item => item.rarity == rarity)
     }
-    if (traittype !== 'Any' && traittype) {
+    if (traittype !== '--' && traittype) {
       list = list.filter(item => item.material[0].traits ? item.material[0].traits[0].kind === traittype : false)
     }
     if (filter) {
@@ -110,7 +93,7 @@ export class A25MaterialListComponent extends DialogUseComponent {
   }
 
   insertStyle(item: Item): string {
-    if (!item.material[0].color) return;
-    return `box-shadow: 1px 2px 4px 1px grey, inset 0 0px 30px 4px ${this.a25service.colorList[item.material[0].color]};`
+    if (!item.material[0].color) return '';
+    return `box-shadow: 1px 2px 4px 1px grey, inset 0 0px 30px 4px ${this.a25service.colorList[item.material[0].color]}`
   }
 }

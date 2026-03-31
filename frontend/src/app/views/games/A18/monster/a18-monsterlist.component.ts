@@ -1,12 +1,5 @@
-import { Dialog } from '@angular/cdk/dialog';
-import { Location } from '@angular/common';
-import { Component } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { ItemComponent } from '@app/views/_components/item/item.component';
 import { Monster } from '@app/views/games/A18/_services/a18.interface';
@@ -19,36 +12,27 @@ import { A18MonsterComponent } from './a18-monster.component';
 
 @Component({
     templateUrl: 'a18-monsterlist.component.html',
-    providers: [DestroyService],
     imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
         ItemComponent, MatButtonModule]
 })
 
 export class A18MonsterlistComponent extends DialogUseComponent {
+  protected a18service = inject(A18Service);
   filteredMonsters: Observable<Monster[]>;
 
-  constructor(
-    protected cdkDialog: Dialog,
-    protected readonly destroy$: DestroyService,
-    protected router: Router,
-    protected route: ActivatedRoute,
-    protected location: Location,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    private formBuilder: UntypedFormBuilder,
-    protected a18service: A18Service,
-  ) {
-    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
+  constructor() {
+    super();
     this.component = A18MonsterComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
-      type: 'Any'
+      type: '--'
     })
   }
 
   changeData() {
     this.gameService(this.a18service, 'monsters');
-    this.genericSettings(`Monsters`, `The list of monsters in ${this.gameTitle}.`);
+    this.genericSettings(this.a18service.monster_translation[this.language],
+      `The list of monsters in ${this.gameTitle}.`);
     this.pageForm.reset();
     return forkJoin({
       monsters: this.a18service.getMonsterList(this.language),
@@ -56,7 +40,7 @@ export class A18MonsterlistComponent extends DialogUseComponent {
     });
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.filteredMonsters = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Monster[]>),
       map((search: any) => search ? this.filterT(search.filtertext, search.type) : this.data.monsters.slice())
@@ -66,7 +50,7 @@ export class A18MonsterlistComponent extends DialogUseComponent {
   private filterT(value: string, type: string): Monster[] {
     this.hide = false;
     let list: Monster[] = this.data.monsters;
-    if (type != 'Any') {
+    if (type != '--') {
       list = list.filter(mon => type == mon.race)
     }
     if (!value) {

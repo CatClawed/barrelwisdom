@@ -1,27 +1,26 @@
-import { Injectable } from '@angular/core';
-import { LocalstorageService } from '@app/_helpers/local-storage';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
+import { LocalStorage } from '@app/_helpers/local-storage';
 
 @Injectable({ providedIn: 'root' })
 export class LanguageService {
-    private languageSubject: BehaviorSubject<string>;
     public l: string = "";
+    language = signal<string>('')
 
-    constructor(private LocalStorage: LocalstorageService) {
+    constructor(private LocalStorage: LocalStorage) {
         this.l = this.LocalStorage.getItem('language');
         if(this.LocalStorage.getItem('language')) {
             this.l = LocalStorage.getItem('language');
         }
-        this.languageSubject = new BehaviorSubject<string>(this.l)
+        this.language.set(this.l)
     }
 
     public get languageValue(): string {
-        return this.languageSubject.value;
+        return this.language()
     }
 
     setLanguage(language: string) {
         this.LocalStorage.setItem('language', language);
         this.l = language;
-        this.languageSubject.next(this.l);
+        this.language.set(this.l)
     }
 }

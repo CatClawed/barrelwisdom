@@ -12,29 +12,37 @@
       }
     </h4>
     <div class="card-icon-position">
-      <tooltip tip="Influences rank. A measure of rarity. This number determines where traits appear.">Grade: </tooltip>
-      {{trait.grade}}
+      <popover
+          [text]="`Influences rank. A measure of rarity. This number determines where traits appear.`">
+          {{a22service.level_translation[language]}}</popover>:
+       {{trait.grade}}
       @if (trait.grade > 50) {
         <br /><span style="float:right;margin-top: 0.4rem;" class="badge bg-primary">DLC</span>
       }
     </div>
     @if (trait.item_set) {
-      <p>
-        <i class="atelier atelier-sm atelier-ryza2-material"></i><a routerLink="/{{gameURL}}/items/{{trait.item_set[0].slug}}/{{language}}">{{trait.item_set[0].name}}</a>
+      <p class="svg-inline-text">
+        <svg class="right-spacer"><use href="/media/spritesheets/A22.svg?v=1#material"></use></svg><a routerLink="/{{gameURL}}/items/{{trait.item_set[0].slug}}/{{language}}">{{trait.item_set[0].name}}</a>
       </p>
     }
     <p [style]="trait.grade > 50 ? 'margin-right:4rem;' : null">{{trait.desc}}</p>
     @if (trait.note) {
       <p><b>Note:</b> {{trait.note}}</p>
     }
-    <div class="flex bottom" style="height: 100%;">
-      <i class="trait-color{{trait.trans_atk}}  atelier atelier-np atelier-ryza2-type-attack"></i>
-      <i class="trait-color{{trait.trans_heal}} atelier atelier-np atelier-ryza2-type-heal"></i>
-      <i class="trait-color{{trait.trans_dbf}}  atelier atelier-np atelier-ryza2-type-debuff"></i>
-      <i class="trait-color{{trait.trans_buff}} atelier atelier-np atelier-ryza2-type-buff"></i>
-      <i class="trait-color{{trait.trans_wpn}}  atelier atelier-np atelier-ryza2-type-weapon"></i>
-      <i class="trait-color{{trait.trans_arm}}  atelier atelier-np atelier-ryza2-type-armor"></i>
-      <i class="trait-color{{trait.trans_acc}}  atelier atelier-np atelier-ryza2-type-accessory"></i>
+    <div class="trait-grid" style="grid-template-columns: auto auto auto auto auto auto auto;">
+      @for (t of [
+          [trait.trans_atk,  'type-attack'],
+          [trait.trans_heal, 'type-heal'],
+          [trait.trans_dbf,  'type-debuff'],
+          [trait.trans_buff, 'type-buff'],
+          [trait.trans_wpn,  'type-weapon'],
+          [trait.trans_arm,  'type-armor'],
+          [trait.trans_acc,  'type-accessory'],
+        ]; track $index) {
+        <svg [style]="!t[0] ? 'fill:lightgray;' : null">
+          <use attr.href="/media/spritesheets/A22.svg?v=1#{{t[1]}}"></use>
+        </svg>
+      }
     </div>
   </div>
 }

@@ -1,92 +1,83 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
 import { SeoService } from '@app/services/seo.service';
 
-@Component({
-    template: '',
-    providers: [DestroyService],
-    standalone: false
-})
-
+@Component({ template: '' })
 export abstract class DataComponent implements OnInit {
-    data: any
-    error: any = '';
-    section: string;
-    language = "";
-    slug: string;
+  protected route = inject(ActivatedRoute)
+  protected breadcrumbService = inject(BreadcrumbService)
+  protected seoService = inject(SeoService)
+  protected destroyRef = inject(DestroyRef)
 
-    seoTitle: string;
-    seoDesc: string;
-    seoImage: string;
-    seoURL: string;
+  data: any
+  error: any = '';
+  section: string;
+  language: string = "";
+  slug: string;
+  seoTitle: string;
+  seoDesc: string;
+  seoImage: string;
+  seoURL: string;
+  gameTitle: string;
+  @Input() gameURL: string;
+  @Input() imgURL: string;
+  @Input() inputData?: any;
+  @Input() hideContents: boolean = false;
 
-    gameTitle: string;
+  constructor() {
+    this.language = this.route.snapshot.params.language;
+  }
 
-    @Input()
-    gameURL: string;
-
-    @Input()
-    imgURL: string;
-
-    @Input()
-    inputData?: any;
-
-    @Input()
-    hideContents: boolean = false;
-
-    constructor(
-        protected readonly destroy$: DestroyService,
-        protected route: ActivatedRoute,
-        protected breadcrumbService: BreadcrumbService,
-        protected seoService: SeoService) {
-        this.language = this.route.snapshot.params.language;
+  ngOnInit(): void {
+    if (this.inputData !== undefined) {
+      this.data = this.inputData;
     }
-
-    ngOnInit(): void {
-        if (this.inputData !== undefined) {
-            this.data = this.inputData;
-        }
-        else {
-            this.paramWatch();
-        }
+    else {
+      this.paramWatch();
     }
+  }
 
-    gameService(service: any, section: string) {
-        this.gameTitle = service.gameTitle[this.language];
-        this.gameURL = service.gameURL;
-        this.imgURL = service.imgURL;
-        this.section = section;
+  gameService(service: any, section: string) {
+    this.gameTitle = service.gameTitle[this.language];
+    this.gameURL = service.gameURL;
+    this.imgURL = service.imgURL;
+    this.section = section;
+  }
+  genericSEO(name: string, desc: string): void {
+    this.seoURL = this.slug ? `${this.gameURL}/${this.section}/${this.slug}/${this.language}` : `${this.gameURL}/${this.section}/${this.language}`;
+    this.seoTitle = `${name} - ${this.gameTitle}`;
+    this.seoDesc = `${desc}`
+    this.seoService.updateSEOSettings({
+      url:this.seoURL,
+      title:this.seoTitle,
+      description:this.seoDesc,
+      image:this.seoImage,
+      lang:this.language
+    });
+  }
+
+  genericSettings(name: string, desc: string, sectionName?: string, ignoreSection?: boolean, updateBreadcrumb?: boolean): void {
+    this.genericSEO(name, desc);
+
+    if (updateBreadcrumb !== false) {
+      if (this.slug === null || this.slug === '' || ignoreSection === true) {
+        this.breadcrumbService.setBreadcrumbs(
+          [[this.gameTitle, `/${this.gameURL}`]],
+          name);
+      }
+      else {
+        this.breadcrumbService.setBreadcrumbs(
+          [[this.gameTitle, `/${this.gameURL}`],
+          [sectionName, `/${this.gameURL}/${this.section}/${this.language}`],
+          ],
+          name);
+      }
     }
-    genericSEO(name: string, desc: string): void {
-        this.seoURL = this.slug ? `${this.gameURL}/${this.section}/${this.slug}/${this.language}` : `${this.gameURL}/${this.section}/${this.language}`;
-        this.seoTitle = `${name} - ${this.gameTitle}`;
-        this.seoDesc = `${desc}`
-        this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
-    }
+  }
 
-    genericSettings(name: string, desc: string, sectionName?: string, ignoreSection?: boolean, updateBreadcrumb?: boolean): void {
-        this.genericSEO(name, desc);
-
-        if (updateBreadcrumb !== false) {
-            if (this.slug === null || this.slug === '' || ignoreSection === true) {
-                this.breadcrumbService.setBreadcrumbs(
-                    [[this.gameTitle, `/${this.gameURL}`]],
-                    name);
-            }
-            else {
-                this.breadcrumbService.setBreadcrumbs(
-                    [[this.gameTitle, `/${this.gameURL}`],
-                        [sectionName, `/${this.gameURL}/${this.section}/${this.language}`],
-                    ],
-                    name);
-            }
-        }
-    }
-
-    abstract changeData();
-    abstract paramWatch()
-    // intentionally blank, may be overridden
-    afterAssignment(): void { }
+  abstract changeData();
+  abstract paramWatch()
+  // intentionally blank, may be overridden
+  afterAssignment(): void { }
 }

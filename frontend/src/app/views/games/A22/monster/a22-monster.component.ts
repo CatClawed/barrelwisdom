@@ -1,65 +1,24 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { NgTemplateOutlet } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
+import { A22CategoryComponent } from "../category/a22-category.component";
 
 @Component({
     templateUrl: 'a22-monster.component.html',
     selector: 'a22-monster',
-    providers: [DestroyService],
-    imports: [...CommonImports]
+    styleUrl: '../a22.scss',
+    imports: [...CommonImports, NgTemplateOutlet, A22CategoryComponent]
 })
 export class A22MonsterComponent extends SingleComponent {
-  hp: boolean[] = [];
-  atk: boolean[] = [];
-  def: boolean[] = [];
-  spd: boolean[] = [];
-
-  constructor(
-    protected route: ActivatedRoute,
-    protected readonly destroy$: DestroyService,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    protected a22service: A22Service) {
-    super(destroy$, route, breadcrumbService, seoService);
-  }
+  protected a22service = inject(A22Service);
 
   changeData() {
     this.gameService(this.a22service, 'monsters');
     return this.a22service.getMonster(this.slug, this.language);
   }
-  afterAssignment(): void {
-    for (let i = 0; i < 5; i++) {
-      if (i < this.data.hp_rank) {
-        this.hp.push(true);
-      }
-      else {
-        this.hp.push(false);
-      }
-      if (i < this.data.str_rank) {
-        this.atk.push(true);
-      }
-      else {
-        this.atk.push(false);
-      }
-      if (i < this.data.def_rank) {
-        this.def.push(true);
-      }
-      else {
-        this.def.push(false);
-      }
-      if (i < this.data.spd_rank) {
-        this.spd.push(true);
-      }
-      else {
-        this.spd.push(false);
-      }
-    }
-
+  override afterAssignment(): void {
     this.seoImage = `${this.imgURL}${this.section}/${this.data.slug}.webp`
     this.genericSettings(this.data.name, this.data.desc,
       this.a22service.monster_translation[this.language],

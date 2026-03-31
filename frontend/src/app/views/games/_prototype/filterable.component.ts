@@ -1,31 +1,16 @@
-import { Component } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
+import { Component, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { of } from 'rxjs';
-import { catchError, switchMap, takeUntil } from 'rxjs/operators';
+import { catchError, switchMap } from 'rxjs/operators';
 import { DataComponent } from './data.component';
 
-@Component({
-    template: '',
-    providers: [DestroyService],
-    standalone: false
-})
-
+@Component({ template: '' })
 export abstract class FilterableComponent extends DataComponent {
+    protected formBuilder: UntypedFormBuilder = inject(UntypedFormBuilder)
     pageForm: UntypedFormGroup;
     hide: boolean = false;
     loadAll: boolean = false;
-
-    constructor(
-        protected readonly destroy$: DestroyService,
-        protected route: ActivatedRoute,
-        protected breadcrumbService: BreadcrumbService,
-        protected seoService: SeoService) {
-        super(destroy$, route, breadcrumbService, seoService)
-    }
 
     paramWatch() {
         this.route.paramMap
@@ -39,7 +24,7 @@ export abstract class FilterableComponent extends DataComponent {
                     this.error = this.breadcrumbService.setStatus(error.status);
                     return of(undefined);
                 }),
-                takeUntil(this.destroy$)
+                takeUntilDestroyed(this.destroyRef)
             )
             .subscribe(data => {
                 this.data = data;
@@ -51,14 +36,6 @@ export abstract class FilterableComponent extends DataComponent {
     }
 
     get f() { return this.pageForm.controls; }
-
-    identify(index, item) {
-        return item.slug;
-    }
-
-    identify2(index, item) {
-        return item.slug;
-    }
 
     // things implies that only one thing is allowed to be active at a time
     // to a list to toggle off is provided

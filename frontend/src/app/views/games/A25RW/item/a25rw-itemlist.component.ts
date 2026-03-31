@@ -1,12 +1,7 @@
-import { Dialog } from '@angular/cdk/dialog';
-import { Location } from '@angular/common';
-import { Component } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
+import { MatMenuModule } from '@angular/material/menu';
+import { FilterButtonsComponent } from '@app/views/_components/filter-buttons/filter-buttons.component';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { ItemComponent } from '@app/views/_components/item/item.component';
 import { Item } from '@app/views/games/A25RW/_services/a25rw.interface';
@@ -16,30 +11,20 @@ import { DialogUseComponent } from '@app/views/games/_prototype/dialog-use.compo
 import { Observable, forkJoin } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { A25RWItemComponent } from './a25rw-item.component';
-import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
     templateUrl: 'a25rw-itemlist.component.html',
-    providers: [DestroyService],
     imports: [...CommonImports, ...MaterialFormImports, ItemComponent,
-        FilterListComponent, MatButtonModule, MatMenuModule]
+        FilterListComponent, MatButtonModule, MatMenuModule, FilterButtonsComponent]
 })
 
 export class A25RWItemlistComponent extends DialogUseComponent {
+  protected a25rwservice: A25RWService = inject(A25RWService)
   filteredItems: Observable<Item[]>;
   things;
 
-  constructor(
-    protected cdkDialog: Dialog,
-    protected readonly destroy$: DestroyService,
-    protected router: Router,
-    protected route: ActivatedRoute,
-    protected location: Location,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    private formBuilder: UntypedFormBuilder,
-    protected a25rwservice: A25RWService) {
-    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
+  constructor() {
+    super();
     this.component = A25RWItemComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -76,7 +61,7 @@ export class A25RWItemlistComponent extends DialogUseComponent {
     })
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.filteredItems = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Item[]>),
       map((search: any) => search ? this.filterT(search.filtertext, search.cat, search.ingredients, search.catalyst, search.consumable, search.equip, search.synthesis, search.important, search.search, search.colorL, search.colorR) : this.data.items.slice())

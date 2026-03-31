@@ -1,23 +1,18 @@
-@if (blog) {
+@if (blogs$ | async; as blog) {
   @if (blog.tagname) {
-    <h1>{{blog.tagname}}</h1>
+    <h1 style="padding-top: 0.5em;">{{blog.tagname}}</h1>
   }
-  @if (!blog.tagname) {
-    <div style="padding-top: 0.5em;"></div>
-  }
-  <div class="item-grid">
+  <div class="item-grid" style="padding-top: 0.5em;">
     @for (b of blog.results; track b) {
       <div class="card" style="height:100%">
-        <div class="aspect-ratio-box">
-          <a routerLink="/blog/{{b.slug}}">
-            <img loading="lazy" src="{{b.image}}" alt="" role="presentation">
-          </a>
-        </div>
+        <a class="aspect-ratio-box" routerLink="/blog/{{b.slug}}">
+          <img loading="lazy" src="{{b.image}}" alt="" role="presentation">
+        </a>
         <a routerLink="/blog/{{b.slug}}" style="margin-top: 1rem;">
           <h3 style="padding-top: 0.5rem;">{{b.title}}</h3>
         </a>
-        <span class="text-muted" style="font-size: calc(0.8rem + 0.1vw);">
-          <i style="margin-right:0.2rem;" class="far fa-calendar-alt"></i>
+        <span class="text-muted svg-inline-text" style="font-size: calc(0.8rem + 0.1vw);">
+          <svg><use href="/media/spritesheets/main.svg?v=1#fa-calendar"></use></svg>
           <time class="updated" dateTime="{{b.created}}">{{b.created | date:'longDate' }} </time>
         </span>
         <span style="margin-top: 0.8em;">{{b.desc}}</span>

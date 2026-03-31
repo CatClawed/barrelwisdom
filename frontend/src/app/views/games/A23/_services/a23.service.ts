@@ -1,13 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { getApiUrl } from '@app/_helpers/api-url';
 import { Book, Category, Effect, Item, MajorGather, Monster, RecipeIdea, Region, Seed, Trait } from '@app/views/games/A23/_services/a23.interface';
 import { environment } from '@environments/environment';
-import { category_translation, character_translation, effect_translation, filter_translation, ingredient_translation, item_translation, location_translation, monster_translation, race_translation, recipebook_translation, trait_translation } from '@environments/localization';
+import { category_translation, character_translation, details_translation, effect_translation, filter_translation, ingredient_translation, item_translation, level_translation, location_translation, monster_translation, race_translation, recipebook_translation, shop_translation, trait_translation } from '@environments/localization';
 import { Observable } from 'rxjs';
 
 
 @Injectable({ providedIn: 'root' })
 export class A23Service {
+  private apiUrl = getApiUrl();
   constructor(
     private http: HttpClient,
   ) { }
@@ -23,6 +25,9 @@ export class A23Service {
   public readonly location_translation = location_translation
   public readonly ingredient_translation = ingredient_translation
   public readonly recipebook_translation = recipebook_translation
+  public readonly details_translation = details_translation
+  public readonly level_translation = level_translation
+  public readonly shop_translation = shop_translation
 
   public readonly component_translation = {
     "en": "Components",
@@ -61,63 +66,63 @@ export class A23Service {
   public readonly imgURL = `${environment.mediaURL}games/${this.gameURL}/`;
 
   getTraitList(language: string): Observable<Trait[]> {
-    return this.http.get<Trait[]>(`${environment.apiUrl}/A23/trait/${language}/`);
+    return this.http.get<Trait[]>(`${this.apiUrl}/A23/trait/${language}/`);
   }
 
   getTrait(slug: string, language: string): Observable<Trait> {
-    return this.http.get<Trait>(`${environment.apiUrl}/A23/trait/${slug}/${language}/`);
+    return this.http.get<Trait>(`${this.apiUrl}/A23/trait/${slug}/${language}/`);
   }
 
   getEffectList(language: string): Observable<Effect[]> {
-    return this.http.get<Effect[]>(`${environment.apiUrl}/A23/effect/${language}/`);
+    return this.http.get<Effect[]>(`${this.apiUrl}/A23/effect/${language}/`);
   }
 
   getEffect(slug: string, language: string): Observable<Effect> {
-    return this.http.get<Effect>(`${environment.apiUrl}/A23/effect/${slug}/${language}/`);
+    return this.http.get<Effect>(`${this.apiUrl}/A23/effect/${slug}/${language}/`);
   }
 
   getLocation(slug: string, language: string): Observable<Region> {
-    return this.http.get<Region>(`${environment.apiUrl}/A23/region/${slug}/${language}/`);
+    return this.http.get<Region>(`${this.apiUrl}/A23/region/${slug}/${language}/`);
   }
 
   getMonsterList(language: string): Observable<Monster[]> {
-    return this.http.get<Monster[]>(`${environment.apiUrl}/A23/monster/${language}/`);
+    return this.http.get<Monster[]>(`${this.apiUrl}/A23/monster/${language}/`);
   }
 
   getMonster(slug: string, language: string): Observable<Monster> {
-    return this.http.get<Monster>(`${environment.apiUrl}/A23/monster/${slug}/${language}/`);
+    return this.http.get<Monster>(`${this.apiUrl}/A23/monster/${slug}/${language}/`);
   }
 
   getItemList(language: string): Observable<Item[]> {
-    return this.http.get<Item[]>(`${environment.apiUrl}/A23/item/${language}/`);
+    return this.http.get<Item[]>(`${this.apiUrl}/A23/item/${language}/`);
   }
 
   getItem(slug: string, language: string): Observable<Item> {
-    return this.http.get<Item>(`${environment.apiUrl}/A23/item/${slug}/${language}/`);
+    return this.http.get<Item>(`${this.apiUrl}/A23/item/${slug}/${language}/`);
   }
 
   getBook(slug: string, language: string): Observable<Book> {
-    return this.http.get<Book>(`${environment.apiUrl}/A23/book/${slug}/${language}/`);
+    return this.http.get<Book>(`${this.apiUrl}/A23/book/${slug}/${language}/`);
   }
 
   getCategoryList(language: string): Observable<Category[]> {
-    return this.http.get<Category[]>(`${environment.apiUrl}/A23/category/${language}/`);
+    return this.http.get<Category[]>(`${this.apiUrl}/A23/category/${language}/`);
   }
 
   getCategory(slug: string, language: string): Observable<Category> {
-    return this.http.get<Category>(`${environment.apiUrl}/A23/category/${slug}/${language}/`);
+    return this.http.get<Category>(`${this.apiUrl}/A23/category/${slug}/${language}/`);
   }
 
   getRecipeList(language: string): Observable<RecipeIdea[]> {
-    return this.http.get<RecipeIdea[]>(`${environment.apiUrl}/A23/recipe/${language}/`);
+    return this.http.get<RecipeIdea[]>(`${this.apiUrl}/A23/recipe/${language}/`);
   }
 
   getMajorGather(language: string): Observable<MajorGather> {
-    return this.http.get<MajorGather>(`${environment.apiUrl}/A23/majorgather/${language}/`);
+    return this.http.get<MajorGather>(`${this.apiUrl}/A23/majorgather/${language}/`);
   }
 
   getSeeds(language: string): Observable<Seed[]> {
-    return this.http.get<Seed[]>(`${environment.apiUrl}/A23/seed/${language}/`);
+    return this.http.get<Seed[]>(`${this.apiUrl}/A23/seed/${language}/`);
   }
 
 }

@@ -7,7 +7,7 @@
       dimension="256"
       imgURL="{{imgURL}}monsters/{{mon.slug}}.webp?v=1">
       <ng-container icon>
-        <i class="atelier atelier-sophie2-race-{{mon.kind}}"></i>
+        <svg class="svg-icon"><use attr.href="/media/spritesheets/A23.svg?v=1#race-{{mon.kind}}"></use></svg>
       </ng-container>
     </item>
   </ng-template>
@@ -20,14 +20,14 @@
       <mat-form-field class="grid-4" appearance="outline">
         <mat-label>{{a23service.race_translation[language]}}</mat-label>
         <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon"       >
-          <mat-option value="1" selected><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"           ></mat-icon> Any</mat-option>
-          <mat-option value="2"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-race-puni"            ></mat-icon> Puni</mat-option>
-          <mat-option value="3"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-race-magical-creature"></mat-icon> Magical Creature</mat-option>
-          <mat-option value="4"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-race-beast"           ></mat-icon> Beast</mat-option>
-          <mat-option value="5"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-race-apparition"      ></mat-icon> Apparition</mat-option>
-          <mat-option value="6"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-race-plant"           ></mat-icon> Plant</mat-option>
-          <mat-option value="7"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-race-dragon"          ></mat-icon> Dragon</mat-option>
-          <mat-option value="8"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-race-erde-wiege"      ></mat-icon> Erde Wiege</mat-option>
+          <mat-option  class="svg-icon-text-vertical-center" value="1" selected><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#book"></use></svg>--</mat-option>
+          <mat-option  class="svg-icon-text-vertical-center" value="2"         ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#race-puni"></use></svg>Puni</mat-option>
+          <mat-option  class="svg-icon-text-vertical-center" value="3"         ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#race-magical-creature"></use></svg>Magical Creature</mat-option>
+          <mat-option  class="svg-icon-text-vertical-center" value="4"         ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#race-beast"></use></svg>Beast</mat-option>
+          <mat-option  class="svg-icon-text-vertical-center" value="5"         ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#race-apparition"></use></svg>Apparition</mat-option>
+          <mat-option  class="svg-icon-text-vertical-center" value="6"         ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#race-plant"></use></svg>Plant</mat-option>
+          <mat-option  class="svg-icon-text-vertical-center" value="7"         ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#race-dragon"></use></svg>Dragon</mat-option>
+          <mat-option  class="svg-icon-text-vertical-center" value="8"         ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#race-erde-wiege"></use></svg>Erde Wiege</mat-option>
         </mat-select>
       </mat-form-field>
     </form>

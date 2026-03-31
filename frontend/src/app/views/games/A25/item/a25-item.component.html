@@ -16,9 +16,13 @@
         <a25-icon style="height:3.5rem;width:3.5rem;" [kind]="item.equip[0].kind" [colors]="item.recipe ? item.recipe[0].colors : ['black','black', 'black']"></a25-icon>
       }
     </div>
-    <img class="resleri-item-frame" height="256" width="256"
-      style="background-image:url({{imgURL}}svg/item-frame-{{item.rarity}}.svg)"
-      src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
+    <div style="position: relative;margin-left: auto; margin-right: auto;">
+      <svg class="f{{item.rarity}} resleri-item-bg">
+          <use href="/media/spritesheets/A25.svg?v=1#item-frame"></use>
+      </svg>
+      <img loading="lazy" class="resleri-item-frame" height="256" width="256"
+        src="{{imgURL}}items/{{item.slug}}.webp" alt="{{item.name}}">
+    </div>
     @if (item.limit) {
       <p><b>Event: </b>{{item.limit}}</p>
     }
@@ -43,7 +47,7 @@
               </popover>
               <ng-template #popoverContent>
                 <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5).replaceAll('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
-                <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
+                <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">{{a25service.details_translation[language]}}</a>
               </ng-template>
             </li>
           }

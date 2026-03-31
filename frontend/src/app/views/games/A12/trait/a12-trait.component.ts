@@ -1,8 +1,4 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { Component, inject } from '@angular/core';
 import { A12Service } from '@app/views/games/A12/_services/a12.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
@@ -10,25 +6,18 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
 @Component({
     templateUrl: 'a12-trait.component.html',
     selector: 'a12-trait',
-    providers: [DestroyService],
     imports: [...CommonImports]
 })
 export class A12TraitComponent extends SingleComponent {
-  constructor(
-    protected route: ActivatedRoute,
-    protected readonly destroy$: DestroyService,
-    protected a12service: A12Service,
-    protected breadcrumbService: BreadcrumbService,
-    protected seoService: SeoService) {
-    super(destroy$, route, breadcrumbService, seoService);
-  }
+  protected a12service = inject(A12Service);
+
   changeData() {
     this.gameService(this.a12service, 'traits');
     return this.a12service.getTrait(this.slug, this.language);
   }
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.genericSettings(this.data.name, this.data.desc,
-      'Traits',
+      this.a12service.trait_translation[this.language],
       false,
       this.inputSlug ? false : true
     );

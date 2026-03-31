@@ -2,7 +2,7 @@
   <div [class]="inputSlug ? 'card card-dialog' : 'card card-medium'">
     <h4 class="card-title  card-icon-space">{{monster.name}}</h4>
     <div class="card-icon-position">
-      <svg class="a26-monster-icon"><use attr.href="{{imgURL}}spritesheet.svg?v=4.2#race-{{monster.race.id}}"></use></svg>
+      <svg class="a26-monster-icon"><use attr.href="/media/spritesheets/A26.svg?v=1#race-{{monster.race.id}}"></use></svg>
     </div>
     <img class="card-item-display" src="{{imgURL}}monsters/{{monster.id}}.webp?v=1"
       alt="{{monster.name}}" style="aspect-ratio: 1; width: 256px;">
@@ -32,10 +32,10 @@
             </td>
             <td style="padding:0;padding-left:0.5em;">
               @for (i of [].constructor(monster.hp); track i) {
-                <i   class="fas fa-star" style="color:gold;-webkit-text-stroke: 0.1rem black;padding-right:0.1rem"></i>
+                <svg class="standard-stat-star"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg>
               }
               @for (i of [].constructor(5-monster.hp); track i) {
-                <i class="fas fa-star" style="padding-right:0.1rem"             ></i>
+                <svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg>
               }
             </td>
           </tr>
@@ -45,10 +45,10 @@
             </td>
             <td style="padding:0;padding-left:0.5em;">
               @for (i of [].constructor(monster.atk); track i) {
-                <i   class="fas fa-star" style="color:gold;-webkit-text-stroke: 0.1rem black;padding-right:0.1rem"></i>
+                <svg class="standard-stat-star"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg>
               }
               @for (i of [].constructor(5-monster.atk); track i) {
-                <i class="fas fa-star" style="padding-right:0.1rem"             ></i>
+                <svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg>
               }
             </td>
           </tr>
@@ -58,10 +58,10 @@
             </td>
             <td style="padding:0;padding-left:0.5em;">
               @for (i of [].constructor(monster.dfn); track i) {
-                <i   class="fas fa-star" style="color:gold;-webkit-text-stroke: 0.1rem black;padding-right:0.1rem"></i>
+                <svg class="standard-stat-star"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg>
               }
               @for (i of [].constructor(5-monster.dfn); track i) {
-                <i class="fas fa-star" style="padding-right:0.1rem"             ></i>
+                <svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg>
               }
             </td>
           </tr>
@@ -71,10 +71,10 @@
             </td>
             <td style="padding:0;padding-left:0.5em;">
               @for (i of [].constructor(monster.spd); track i) {
-                <i   class="fas fa-star" style="color:gold;-webkit-text-stroke: 0.1rem black;padding-right:0.1rem"></i>
+                <svg class="standard-stat-star"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg>
               }
               @for (i of [].constructor(5-monster.spd); track i) {
-                <i class="fas fa-star" style="padding-right:0.1rem"             ></i>
+                <svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg>
               }
             </td>
           </tr>
@@ -84,15 +84,15 @@
     <table class="tbl noborder" ><tbody>
       <tr>
         @if (monster.break_phys) {
-          <td style="text-align: center;padding-bottom:0;"><svg style="background-color:#c88401;" class="a26-monster-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=4.2#physical"></use></svg></td>
+          <td style="text-align: center;padding-bottom:0;"><svg style="background-color:#c88401;" class="a26-monster-elements"><use href="/media/spritesheets/A26.svg?v=1#physical"></use></svg></td>
         }
         @else {
-          <td style="text-align: center;padding-bottom:0;"><svg style="background-color:#5f49ec;" class="a26-monster-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=4.2#magical"></use></svg></td>
+          <td style="text-align: center;padding-bottom:0;"><svg style="background-color:#5f49ec;" class="a26-monster-elements"><use href="/media/spritesheets/A26.svg?v=1#magical"></use></svg></td>
         }
-        <td style="text-align: center;padding-bottom:0;"><svg style="background-color:{{monster.fire ? a26service.elements['fire'] : a26service.elements['none']}};" class="a26-monster-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=4.2#fire"></use></svg></td>
-        <td style="text-align: center;padding-bottom:0;"><svg style="background-color:{{monster.ice  ? a26service.elements['ice']  : a26service.elements['none']}};" class="a26-monster-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=4.2#ice" ></use></svg></td>
-        <td style="text-align: center;padding-bottom:0;"><svg style="background-color:{{monster.bolt ? a26service.elements['bolt'] : a26service.elements['none']}};" class="a26-monster-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=4.2#bolt"></use></svg></td>
-        <td style="text-align: center;padding-bottom:0;"><svg style="background-color:{{monster.air  ? a26service.elements['air']  : a26service.elements['none']}};" class="a26-monster-elements"><use attr.href="{{imgURL}}spritesheet.svg?v=4.2#air" ></use></svg></td>
+        <td style="text-align: center;padding-bottom:0;"><svg style="background-color:{{monster.fire ? a26service.elements['fire'] : a26service.elements['none']}};" class="a26-monster-elements"><use href="/media/spritesheets/A26.svg?v=1#fire"></use></svg></td>
+        <td style="text-align: center;padding-bottom:0;"><svg style="background-color:{{monster.ice  ? a26service.elements['ice']  : a26service.elements['none']}};" class="a26-monster-elements"><use href="/media/spritesheets/A26.svg?v=1#ice" ></use></svg></td>
+        <td style="text-align: center;padding-bottom:0;"><svg style="background-color:{{monster.bolt ? a26service.elements['bolt'] : a26service.elements['none']}};" class="a26-monster-elements"><use href="/media/spritesheets/A26.svg?v=1#bolt"></use></svg></td>
+        <td style="text-align: center;padding-bottom:0;"><svg style="background-color:{{monster.air  ? a26service.elements['air']  : a26service.elements['none']}};" class="a26-monster-elements"><use href="/media/spritesheets/A26.svg?v=1#air" ></use></svg></td>
       </tr>
       <tr>
         <td style="text-align: center;padding:0;">{{monster.break_hits}}</td>

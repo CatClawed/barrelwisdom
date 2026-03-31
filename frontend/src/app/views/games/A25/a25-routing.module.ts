@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LanguageGuard } from '@app/_helpers/language.guard';
+import { LanguageGuard } from '@app/_helpers/guards/language.guard';
 
 const routes: Routes = [
   {
@@ -51,6 +51,11 @@ const routes: Routes = [
         canActivate: [LanguageGuard],
       },
       {
+        path: ':itemkind/:subject/:language',
+        loadComponent: ()=> import('@app/views/games/A25/item/a25-item.component').then(m=>m.A25ItemComponent),
+        canActivate: [LanguageGuard],
+      },
+      {
         path: 'recipes',
         loadComponent: ()=> import('@app/views/games/A25/item/a25-recipe.component').then(m=>m.A25RecipeComponent),
         canActivate: [LanguageGuard],
@@ -58,16 +63,6 @@ const routes: Routes = [
       {
         path: 'recipes/:language',
         loadComponent: ()=> import('@app/views/games/A25/item/a25-recipe.component').then(m=>m.A25RecipeComponent),
-        canActivate: [LanguageGuard],
-      },
-      {
-        path: ':itemkind/:subject',
-        loadComponent: ()=> import('@app/views/games/A25/item/a25-item.component').then(m=>m.A25ItemComponent),
-        canActivate: [LanguageGuard],
-      },
-      {
-        path: ':itemkind/:subject/:language',
-        loadComponent: ()=> import('@app/views/games/A25/item/a25-item.component').then(m=>m.A25ItemComponent),
         canActivate: [LanguageGuard],
       },
     ]

@@ -1,16 +1,31 @@
-FROM python:3.13.2-alpine3.21
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
+FROM python:3.14.3-alpine3.23
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+ARG UID=1000
+ARG GID=1000
+
 WORKDIR /backend
-COPY requirements.txt /backend
-RUN \
- apk add --no-cache python3 postgresql-libs libmemcached-dev && \
- apk add --no-cache --virtual .build-deps gcc python3-dev musl-dev postgresql-dev libffi-dev zlib-dev  && \
- python3 -m pip install --upgrade pip && \
- python3 -m pip install -r requirements.txt --no-cache-dir && \
- python3 -m pip install "psycopg[binary]" && \
- apk --purge del .build-deps
-COPY . /backend
-RUN adduser -D user
+RUN addgroup -g ${GID} user && \
+    adduser -D -u ${UID} -G user user
+
+RUN apk add --no-cache postgresql-libs
+
+COPY requirements.txt .
+RUN apk add --no-cache postgresql-libs && \
+    apk add --no-cache --virtual .build-deps \
+        gcc \
+        python3-dev \
+        musl-dev \
+        postgresql-dev \
+        libffi-dev \
+        zlib-dev && \
+    python3 -m pip install --no-cache-dir --upgrade pip pip-tools && \
+    python3 -m pip install --no-cache-dir -r requirements.txt && \
+    python3 -m pip install --no-cache-dir "psycopg[binary]"  && \
+    apk --purge del .build-deps
+
 USER user
+
+COPY --chown=user:user . .
 ENTRYPOINT ./run_django.sh

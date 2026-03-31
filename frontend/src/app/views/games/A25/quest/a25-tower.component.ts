@@ -1,10 +1,6 @@
-import { Location, NgTemplateOutlet, ViewportScroller } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { Hint } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -14,11 +10,10 @@ import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.comp
     templateUrl: 'a25-tower.component.html',
     styleUrls: ['../resleri.scss'],
     encapsulation: ViewEncapsulation.None,
-    selector: 'a25-tower',
-    providers: [DestroyService],
     imports: [...CommonImports, NgTemplateOutlet]
 })
 export class A25TowerComponent extends FragmentedComponent {
+  protected a25service = inject(A25Service);
   title: string;
   translations = {
     'elemental-tower': {
@@ -69,17 +64,6 @@ export class A25TowerComponent extends FragmentedComponent {
       'sc': "打击之塔",
       'en': "Tower of Strike"
     }
-  }
-
-  constructor(
-    protected route: ActivatedRoute,
-    protected loc: Location,
-    protected readonly destroy$: DestroyService,
-    protected viewportScroller: ViewportScroller,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    protected a25service: A25Service,) {
-    super(destroy$, route, seoService, breadcrumbService, viewportScroller, loc);
   }
 
   changeData() {

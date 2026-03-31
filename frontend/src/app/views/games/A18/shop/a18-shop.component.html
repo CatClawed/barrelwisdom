@@ -1,9 +1,8 @@
 @if (!error) {
-  <h1>Shops</h1>
+  <h1>{{a18service.shop_translation[language]}}</h1>
 }
 @if (data; as shops) {
   <div class="table-of-contents">
-    <b>Table of Contents</b>
     <ol>
       @for (shop of shops; track shop) {
         <li>

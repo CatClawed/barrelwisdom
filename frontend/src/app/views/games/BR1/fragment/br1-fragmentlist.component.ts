@@ -1,10 +1,4 @@
-import { Location, ViewportScroller } from '@angular/common';
-import { Component } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
+import { Component, inject } from '@angular/core';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { FragmentEffect } from '@app/views/games/BR1/_services/br1.interface';
 import { BR1Service } from '@app/views/games/BR1/_services/br1.service';
@@ -15,23 +9,15 @@ import { map, startWith } from 'rxjs/operators';
 
 @Component({
     templateUrl: 'br1-fragmentlist.component.html',
-    providers: [DestroyService],
     imports: [...CommonImports, ...MaterialFormImports, FilterListComponent]
 })
 
 export class BR1FragmentEffectlistComponent extends FragmentedComponent {
+  protected br1service = inject(BR1Service);
   filteredFragmentEffects: Observable<FragmentEffect[]>;
 
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    protected readonly destroy$: DestroyService,
-    protected route: ActivatedRoute,
-    private br1service: BR1Service,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    protected loc: Location,
-    protected viewportScroller: ViewportScroller) {
-    super(destroy$, route, seoService, breadcrumbService, viewportScroller, loc);
+  constructor() {
+    super();
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: ''
     })
@@ -43,7 +29,7 @@ export class BR1FragmentEffectlistComponent extends FragmentedComponent {
     return this.br1service.getFragmentEffectList(this.language)
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.filteredFragmentEffects = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<FragmentEffect[]>),
       map((search: any) => search ? this.filterT(search.filtertext) : this.data.slice())

@@ -3,7 +3,7 @@ from django.urls import include, path
 from django.conf import settings
 from rest_framework import routers
 from rest_framework_simplejwt import views as jwt_views
-from blog.viewsets import BlogViewSet, TagViewSet, SectionViewSet, MainBlogViewSet, NewCommentViewSet, ModerateCommentViewSet
+from blog.viewsets import BlogViewSet, SectionViewSet, NewCommentViewSet, ModerateCommentViewSet, TagViewSet
 from invite.viewsets import InviteViewSet
 from report.viewsets import ReportViewSet
 from navigation.viewsets import NavigationViewSet
@@ -24,15 +24,13 @@ from games.BR1 import urls as BR1
 from games.BRSL import urls as BRSL
 
 router = routers.DefaultRouter()
-router.register(r'editblog', BlogViewSet, 'edit')
-router.register(r'blog', MainBlogViewSet)
-router.register(r'tags', TagViewSet)
 router.register(r'section', SectionViewSet)
 router.register(r'invite', InviteViewSet)
 router.register(r'profile', UserProfileViewSet)
 router.register(r'user', UserNameViewSet)
 router.register(r'nav', NavigationViewSet)
 router.register(r'report', ReportViewSet)
+router.register(r'tags', TagViewSet)
 router.register(r'new/comment', NewCommentViewSet)
 router.register(r'comment', ModerateCommentViewSet, 'modcomment')
 
@@ -63,6 +61,10 @@ urlpatterns = [
     path('auth/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path(r'auth/reg/', RegView.as_view(),),
     path('auth/dj-rest-auth/', include('dj_rest_auth.urls')),
+    path('api/blog/', BlogViewSet.as_view({'post': 'create'})),
+    path('api/blog/<slug:section_slug>/', BlogViewSet.as_view({'get': 'list'})),
+    path('api/blog/<slug:section_slug>/<slug:slug>/', BlogViewSet.as_view({'get': 'retrieve', 'put': 'update', 'patch': 'partial_update'})),
+    path('api/blog/<slug:section_slug>/tag/<slug:tag_slug>/', BlogViewSet.as_view({'get': 'by_tag'})),
 ]
 
 if settings.DEBUG:

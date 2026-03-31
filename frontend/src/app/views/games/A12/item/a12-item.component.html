@@ -2,23 +2,26 @@
     <div [class]="inputSlug ? 'card card-dialog' : 'card card-medium'">
       <h4 class="card-title card-icon-space">{{item.name}}</h4>
       @if (item.level) {
-        <b class="card-icon-position">LV {{item.level}}</b>
+        <b class="card-icon-position">{{a12service.level_translation[language]}} {{item.level}}</b>
       }
       <img class="card-item-display" src="{{imgURL}}items/{{item.slug}}.webp?v=1"
         alt="{{item.name}}" style="aspect-ratio: 1; width: 240px;">
       <p>{{item.desc}}</p>
       @if (item.book_set) {
-        <p><b>Recipe Book: </b><a routerLink="/{{gameURL}}/recipe-books/{{item.book_set[0].slug}}/{{language}}">{{item.book_set[0].name}}</a></p>
+        <p><b>{{a12service.recipebook_translation[language]}} </b><a routerLink="/{{gameURL}}/recipe-books/{{item.book_set[0].slug}}/{{language}}">{{item.book_set[0].name}}</a></p>
       }
       <table class="table-item-data"><tbody>
         @for (cat of item.categories; track cat) {
           <tr>
-            <td><i class="atelier atelier-{{cat.icon_name}}"></i></td><td><a routerLink="/{{gameURL}}/categories/{{cat.slug}}/{{language}}">{{cat.name}}</a></td>
+            <td>
+              <svg class="svg-icon"><use attr.href="/media/spritesheets/A12.svg?v=1#category-{{cat.slug}}"></use></svg>
+            </td>
+            <td><a routerLink="/{{gameURL}}/categories/{{cat.slug}}/{{language}}">{{cat.name}}</a></td>
           </tr>
         }
       </tbody></table>
       @if (item.locations) {
-        <b>Locations:</b>
+        <b>{{a12service.location_translation[language]}}</b>
       }
       @if (item.locations) {
         <ul>
@@ -34,7 +37,7 @@
           </ul>
         }
         @if (item.monsters) {
-          <b>Monsters:</b>
+          <b>{{a12service.monster_translation[language]}}</b>
         }
         @if (item.monsters) {
           <ul>
@@ -44,7 +47,7 @@
           </ul>
         }
         @if (item.traits) {
-          <b>Trait:</b>
+          <b>{{a12service.trait_translation[language]}}</b>
         }
         @if (item.traits) {
           <ul>
@@ -68,7 +71,7 @@
         @if (item.ingredient_set) {
           <table class="tbl"><tbody>
             <tr>
-              <th>Ingredients</th>
+              <th>{{a12service.ingredient_translation[language]}}</th>
             </tr>
             <tr><td>
               <ul>
@@ -85,7 +88,7 @@
         }
         @if (item.effectline_set) {
           <table class="tbl"><tbody>
-            <tr><th colspan=2>Effects</th></tr>
+            <tr><th colspan=2>{{a12service.effect_translation[language]}}</th></tr>
             @if (itemone) {
               <tr><td>Item 1</td><td>
                 <ul style="margin-bottom:0;">
@@ -171,7 +174,7 @@
 }
 @if (item.equip_set) {
   <table class="tbl"><tbody>
-    <tr><th>Characters</th></tr>
+    <tr><th>{{a12service.character_translation[language]}}</th></tr>
     <tr><td>@for (char of item.equip_set[0].chars; track char) {
       <img src="{{imgURL}}resources/equip_{{char.name}}.webp"
         alt="Can equip: {{char.name}}"

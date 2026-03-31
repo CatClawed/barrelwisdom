@@ -3,22 +3,20 @@
     <tr>
       <td>
         <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
-        <br /><b>LV {{item.level}}</b>
-      </td>
-      <td>
+        <br /><b>{{a15service.level_translation[language]}} {{item.level}}</b><br />
         @if (item.fire) {
-          <i style="color:#ac504f;"  class="atelier atelier-np atelier-shallie-fire"></i>
+          <svg class="a15-element" style="background-color:#ac504f;"><use href="/media/spritesheets/A15.svg?v=1#element-fire"></use></svg>
         }
         @if (item.water) {
-          <i style="color:#427389;" class="atelier atelier-np atelier-shallie-water"></i>
+          <svg class="a15-element" style="background-color:#427389;"><use href="/media/spritesheets/A15.svg?v=1#element-water"></use></svg>
         }
         @if (item.wind) {
-          <i style="color:#5a843c;"  class="atelier atelier-np atelier-shallie-wind"></i>
+          <svg class="a15-element" style="background-color:#5a843c;"><use href="/media/spritesheets/A15.svg?v=1#element-wind"></use></svg>
         }
         @if (item.earth) {
-          <i style="color:#8f7939;" class="atelier atelier-np atelier-shallie-earth"></i>
+          <svg class="a15-element" style="background-color:#8f7939;"><use href="/media/spritesheets/A15.svg?v=1#element-earth"></use></svg>
         }
-        <span style="vertical-align:top;padding-left:0.5rem;">{{item.evalue}}</span>
+        {{item.evalue}}
       </td>
     </tr>
   </ng-template>

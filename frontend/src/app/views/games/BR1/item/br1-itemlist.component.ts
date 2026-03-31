@@ -1,11 +1,4 @@
-import { Dialog } from '@angular/cdk/dialog';
-import { Location } from '@angular/common';
-import { Component } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
+import { Component, inject } from '@angular/core';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Item } from '@app/views/games/BR1/_services/br1.interface';
 import { BR1Service } from '@app/views/games/BR1/_services/br1.service';
@@ -17,25 +10,15 @@ import { BR1ItemComponent } from './br1-item.component';
 
 @Component({
     templateUrl: 'br1-itemlist.component.html',
-    providers: [DestroyService],
     imports: [...CommonImports, ...MaterialFormImports, BR1ItemComponent, FilterListComponent]
 })
 
 export class BR1ItemlistComponent extends DialogUseComponent {
+  protected br1service = inject(BR1Service);
   filteredItems: Observable<Item[]>;
 
-  constructor(
-    protected cdkDialog: Dialog,
-    protected readonly destroy$: DestroyService,
-    protected router: Router,
-    protected route: ActivatedRoute,
-    protected location: Location,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    private formBuilder: UntypedFormBuilder,
-    private br1service: BR1Service,
-  ) {
-    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
+  constructor() {
+    super();
     this.component = BR1ItemComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: ''
@@ -48,7 +31,7 @@ export class BR1ItemlistComponent extends DialogUseComponent {
     return this.br1service.getItemList(this.language);
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.filteredItems = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Item[]>),
       map((search: any) => search ? this.filterT(search.filtertext) : this.data.slice())

@@ -10,18 +10,10 @@ import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-
   imports: [...CommonImports, NgTemplateOutlet],
 })
 export class A25RWTreeComponent {
-  @Input()
-  tree: Tree[];
-
-  @Input()
-  gameURL: string;
-
-  @Input()
-  language: string;
-
-  @Input()
-  imgURL: string;
-
+  @Input() tree: Tree[];
+  @Input() gameURL: string;
+  @Input() language: string;
+  @Input() imgURL: string;
   max_width: number = 640;
 
   getColumns():  number {

@@ -1,12 +1,5 @@
-import { Dialog } from '@angular/cdk/dialog';
-import { Location } from '@angular/common';
-import { Component } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { ItemComponent } from '@app/views/_components/item/item.component';
 import { FacilityList } from '@app/views/games/BRSL/_services/brsl.interface';
@@ -19,26 +12,16 @@ import { BRSLFacilityComponent } from './brsl-facility.component';
 
 @Component({
     templateUrl: 'brsl-facilitylist.component.html',
-    providers: [DestroyService],
     imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
         ItemComponent, MatButtonModule]
 })
 
 export class BRSLFacilitylistComponent extends DialogUseComponent {
+  protected brslservice = inject(BRSLService);
   filteredFacilities: Observable<FacilityList[]>;
 
-  constructor(
-    protected cdkDialog: Dialog,
-    protected readonly destroy$: DestroyService,
-    protected router: Router,
-    protected route: ActivatedRoute,
-    protected location: Location,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    private formBuilder: UntypedFormBuilder,
-    private brslservice: BRSLService,
-  ) {
-    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
+  constructor() {
+    super();
     this.component = BRSLFacilityComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -47,11 +30,12 @@ export class BRSLFacilitylistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.brslservice, 'facilities');
-    this.genericSettings(`Facilities`, `The list of facilities in ${this.gameTitle}.`);
+    this.genericSettings(this.brslservice.facilities_translation[this.language],
+      `The list of facilities in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.brslservice.getFacilityList(this.language);
   }
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.data = this.data.slice(0, 44)
     this.filteredFacilities = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<FacilityList[]>),

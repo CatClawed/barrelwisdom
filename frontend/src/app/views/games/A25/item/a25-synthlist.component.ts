@@ -1,18 +1,11 @@
-import { Dialog } from '@angular/cdk/dialog';
-import { Location } from '@angular/common';
-import { Component, ViewEncapsulation } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Item } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { DialogUseComponent } from '@app/views/games/_prototype/dialog-use.component';
-import { Observable, forkJoin } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { A25IconComponent } from './a25-icon.component';
 import { A25ItemComponent } from './a25-item.component';
@@ -21,25 +14,16 @@ import { A25ItemComponent } from './a25-item.component';
     templateUrl: 'a25-synthlist.component.html',
     styleUrls: ['../resleri.scss'],
     encapsulation: ViewEncapsulation.None,
-    providers: [DestroyService],
     imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
         A25IconComponent, MatButtonModule]
 })
 
 export class A25SynthesisListComponent extends DialogUseComponent {
+  protected a25service = inject(A25Service);
   filteredItems: Observable<Item[]>;
 
-  constructor(
-    protected cdkDialog: Dialog,
-    protected readonly destroy$: DestroyService,
-    protected router: Router,
-    protected route: ActivatedRoute,
-    protected location: Location,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    private formBuilder: UntypedFormBuilder,
-    protected a25service: A25Service) {
-    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
+  constructor() {
+    super();
     this.component = A25ItemComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -60,14 +44,14 @@ export class A25SynthesisListComponent extends DialogUseComponent {
     })
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.filteredItems = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Item[]>),
       map((search: any) => search ? this.filterT(search.filtertext, search.kind, search.rarity, search.filtering) : this.data.items.slice())
     );
   }
 
-  extraSettings(): void {
+  override extraSettings(): void {
     this.dialogref.componentInstance.itemkind = 'synthesis'
   }
 
@@ -102,7 +86,7 @@ export class A25SynthesisListComponent extends DialogUseComponent {
     this.hide = false;
     let list: Item[] = this.data.items;
 
-    if (kind != 'Any' && kind) {
+    if (kind != '' && kind) {
       list = list.filter(item => item.equip ? item.equip[0].kind == kind : item.combat[0].kind == kind);
     }
     if (rarity > 0) {

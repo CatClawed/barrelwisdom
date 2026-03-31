@@ -1,4 +1,4 @@
-@if (comments) {
+@if (!error && user && comments$ | async; as comments) {
   @for (comment of comments; track comment) {
     @if (!comment.approved) {
       <div class="card comment-card">

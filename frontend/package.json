@@ -1,77 +1,57 @@
 {
   "name": "frontend",
   "version": "0.0.0",
-  "description": "Barrel Wisdom site remake, pretty side.",
-  "author": {
-    "name": "Chloe B",
-    "url": "https://barrelwisdom.com",
-    "github": "https://github.com/catclawed"
-  },
   "scripts": {
     "ng": "ng",
-    "start": "node --max_old_space_size=5120 node_modules/@angular/cli/bin/ng serve --host 0.0.0.0 --live-reload=true --proxy-config proxy.conf.json --poll 2000",
-    "build": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --configuration=production",
+    "start": "ng serve --host 0.0.0.0 --live-reload=true --proxy-config proxy.conf.json --poll 2000 --allowed-hosts frontend",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
     "serve:ssr:frontend": "node dist/frontend/server/server.mjs"
   },
-  "private": true,
-  "browser": {
-    "fs": false,
-    "path": false,
-    "os": false
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
   },
+  "private": true,
+  "packageManager": "npm@11.6.2",
   "dependencies": {
-    "@angular/animations": "^19.2.0",
-    "@angular/cdk": "^19.2.1",
-    "@angular/common": "^19.2.0",
-    "@angular/compiler": "^19.2.0",
-    "@angular/core": "^19.2.0",
-    "@angular/forms": "^19.2.0",
-    "@angular/material": "^19.2.1",
-    "@angular/platform-browser": "^19.2.0",
-    "@angular/platform-browser-dynamic": "^19.2.0",
-    "@angular/platform-server": "^19.2.0",
-    "@angular/router": "^19.2.0",
-    "@angular/service-worker": "^19.2.0",
-    "@angular/ssr": "^19.2.0",
-    "@fortawesome/fontawesome-free": "^6.5.1",
-    "express": "^4.18.2",
+    "@angular/cdk": "^21.0.1",
+    "@angular/common": "^21.0.0",
+    "@angular/compiler": "^21.0.0",
+    "@angular/core": "^21.0.0",
+    "@angular/forms": "^21.0.0",
+    "@angular/material": "^21.0.1",
+    "@angular/platform-browser": "^21.0.0",
+    "@angular/platform-server": "^21.0.0",
+    "@angular/router": "^21.0.0",
+    "@angular/service-worker": "^21.2.5",
+    "@angular/ssr": "^21.0.1",
+    "@fortawesome/fontawesome-free": "^7.1.0",
+    "express": "^5.1.0",
     "fastintcompression": "^0.1.0",
     "leaflet": "^1.9.4",
-    "ngx-cookie-service": "^19.0.0",
-    "ngx-markdown": "^19.0.0",
-    "node": "^22.0.0",
-    "rxjs": "^7.8.0",
-    "slugify": "^1.6.5",
-    "tslib": "^2.4.0",
-    "web-animations-js": "^2.3.2",
-    "zone.js": "^0.15.0"
+    "ngx-cookie-service": "^21.1.0",
+    "ngx-markdown": "^21.0.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^19.2.0",
-    "@angular-eslint/builder": "^19.2.0",
-    "@angular-eslint/eslint-plugin": "^19.2.0",
-    "@angular-eslint/eslint-plugin-template": "^19.2.0",
-    "@angular-eslint/schematics": "^19.2.0",
-    "@angular-eslint/template-parser": "^19.2.0",
-    "@angular/cli": "^19.2.0",
-    "@angular/compiler-cli": "19.2.0",
-    "@angular/language-service": "^19.2.0",
-    "@types/express": "^5.0.0",
-    "@types/jasmine": "^5.1.2",
-    "@types/jasminewd2": "^2.0.12",
-    "@types/node": "^22.0.0",
-    "@typescript-eslint/eslint-plugin": "^8.0.0",
-    "@typescript-eslint/parser": "^8.0.0",
-    "@typescript-eslint/types": "^8.0.0",
-    "@typescript-eslint/utils": "^8.0.0",
-    "eslint": "^9.0.0",
-    "typescript": "^5.6.0"
-  },
-  "engines": {
-    "node": ">= 18.0",
-    "npm": ">= 10"
+    "@angular/build": "^21.0.1",
+    "@angular/cli": "^21.0.1",
+    "@angular/compiler-cli": "^21.0.0",
+    "@types/express": "^5.0.1",
+    "@types/node": "^20.17.19",
+    "jsdom": "^27.1.0",
+    "typescript": "~5.9.2",
+    "vitest": "^4.0.8"
   }
 }

@@ -1,96 +1,34 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
-import { DestroyService } from '@app/services/destroy.service';
+import { Component, EventEmitter, inject, Input, Output, ViewEncapsulation } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { Character } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 
 @Component({
-    templateUrl: 'a25-charaframe.component.html',
-    selector: 'a25-charaframe',
-    providers: [DestroyService],
-    encapsulation: ViewEncapsulation.None,
-    styles: [
-        `.a25-star-font {
-      -webkit-text-stroke-color:black;
-      color:yellow;
-      padding-top:0.3rem;
-      }`,
-      `.a25-star-font-six {
-        color:orange !important;
-      }`,
-        `.a25-char-font {
-      height: 24%;
-      width: 24%;
-      aspect-ratio:1;
-      color:white;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      border-radius:50%;
-      position:absolute;
-      bottom:0;
-      right:3%;
-    }`,
-        `@media screen and (min-width: 800px) {
-      .a25-char-font {
-        font-size:1.3vw
-      }
-      .a25-star-font {
-        font-size:1.3vw;
-        -webkit-text-stroke-width:.15vw;
-      }
-      .a25-half-star {
-        display:inline-block;
-        overflow-x:clip;
-        width:1vw;
-      }
-    }`,
-        `@media screen and (max-width: 800px) {
-      .a25-char-font {
-        font-size:3.8vw
-      }
-      .a25-star-font {
-        font-size:4vw;
-        -webkit-text-stroke-width:.4vw;
-      }
-      .a25-half-star {
-        display: inline-block;
-        overflow-x: clip;
-        width: 3vw;
-      }
-    }`,
-    ],
-    imports: [...CommonImports, NgTemplateOutlet]
+  templateUrl: 'a25-charaframe.component.html',
+  selector: 'a25-charaframe',
+  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['charaframe.scss', '../resleri.scss'],
+  imports: [...CommonImports, NgTemplateOutlet]
 })
 export class A25CharaFrameComponent {
-    fillL = 'grey';
-    fillR = 'grey';
-    colors = ['red', 'green', 'yellow', 'blue', 'purple']
+  protected a25service = inject(A25Service);
+  protected sanitizer = inject(DomSanitizer)
+  fillL = 'grey';
+  fillR = 'grey';
+  colors = ['red', 'green', 'yellow', 'blue', 'purple']
+  @Input() collectionMode: boolean = false;
+  @Input() chara: Character;
+  @Input() collection: any;
+  @Output() buttonClicked = new EventEmitter();
+  imgURL;
+  gameURL;
+  @Input() language: string;
 
-    @Input()
-    collectionMode: boolean = false;
-
-    @Input()
-    chara: Character;
-
-    @Input()
-    collection: any;
-
-    @Output()
-    buttonClicked = new EventEmitter<string>();
-
-    imgURL;
-    gameURL;
-
-    @Input()
-    language: string;
-
-  constructor(
-    protected readonly destroy$: DestroyService,
-    protected a25service: A25Service) {
-        this.imgURL = a25service.imgURL;
-        this.gameURL = a25service.gameURL;
+  constructor() {
+    this.imgURL = this.a25service.imgURL;
+    this.gameURL = this.a25service.gameURL;
   }
 
   starMap = {
@@ -106,7 +44,7 @@ export class A25CharaFrameComponent {
 
   inCollection() {
     if (this.collectionMode) {
-        if (this.collection.characters[this.chara.id]) return true
+      if (this.collection.characters[this.chara.id]) return true
     }
     return false
   }
@@ -115,16 +53,16 @@ export class A25CharaFrameComponent {
     let stars = ['', '']
     let limit = rarity;
     if (this.collectionMode) {
-        if (this.collection.characters[id]) {
-            if (this.starMap[this.collection.characters[id]][1]) {
-              stars[1] = `<div class="a25-half-star"><span class="fa-solid fa-star-half"></span></div>`;
-            }
-            limit = this.starMap[this.collection.characters[id]][0]
-          }
+      if (this.collection.characters[id]) {
+        if (this.starMap[this.collection.characters[id]][1]) {
+          stars[1] = `<svg><use href="/media/spritesheets/main.svg?v=1#fa-half-star"></use></svg>`;
+        }
+        limit = this.starMap[this.collection.characters[id]][0]
+      }
     }
     for (let i = 0; i < limit; i++) {
-      stars[0] += '<i class="fa-solid fa-star"></i>'
+      stars[0] += '<svg><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg>'
     }
-    return stars[0]+stars[1];
+    return this.sanitizer.bypassSecurityTrustHtml(stars[0] + stars[1]);
   }
 }

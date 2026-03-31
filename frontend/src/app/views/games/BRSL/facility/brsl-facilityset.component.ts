@@ -1,9 +1,4 @@
-import { Component } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
+import { Component, inject } from '@angular/core';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { FacilitySet } from '@app/views/games/BRSL/_services/brsl.interface';
 import { BRSLService } from '@app/views/games/BRSL/_services/brsl.service';
@@ -14,22 +9,15 @@ import { map, startWith } from 'rxjs/operators';
 
 @Component({
     templateUrl: 'brsl-facilityset.component.html',
-    providers: [DestroyService],
     imports: [...CommonImports, ...MaterialFormImports, FilterListComponent]
 })
 
 export class BRSLFacilitySetComponent extends FilterableComponent {
+  protected brslservice = inject(BRSLService);
   filteredSets: Observable<FacilitySet[]>;
 
-  constructor(
-    protected readonly destroy$: DestroyService,
-    private formBuilder: UntypedFormBuilder,
-    protected route: ActivatedRoute,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    private brslservice: BRSLService,
-  ) {
-    super(destroy$, route, breadcrumbService, seoService);
+  constructor() {
+    super();
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: ''
     })
@@ -37,12 +25,13 @@ export class BRSLFacilitySetComponent extends FilterableComponent {
 
   changeData() {
     this.gameService(this.brslservice, 'facilities/sets');
-    this.genericSettings(`Facility Sets`, `All facility sets in ${this.gameTitle}.`);
+    this.genericSettings(this.brslservice.facility_sets_translation[this.language],
+      `All facility sets in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.brslservice.getFacilitySetList(this.language);
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.filteredSets = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<FacilitySet[]>),
       map((search: any) => search ? this.filterT(search.filtertext) : this.data.slice())

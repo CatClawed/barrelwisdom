@@ -23,6 +23,10 @@
     min-height: 100dvh;
 }
 
+.mat-drawer-content {
+    overflow-y: hidden !important;
+}
+
 .mat-sidenav-content {
     margin-left: 200px; // prevents a layout shift
 }
@@ -121,3 +125,4 @@
         padding-bottom: 1rem;
     }
 }
+

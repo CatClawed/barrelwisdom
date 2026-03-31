@@ -1,54 +1,46 @@
-import { Dialog } from '@angular/cdk/dialog';
-import { Location } from '@angular/common';
-import { Component } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
+import { Component, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FilterButtonsComponent } from '@app/views/_components/filter-buttons/filter-buttons.component';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
-import { Tooltip } from '@app/views/_components/tooltip/tooltip.component';
 import { Effect } from '@app/views/games/A22/_services/a22.interface';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { DialogUseComponent } from '@app/views/games/_prototype/dialog-use.component';
 import { Observable } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 import { A22EffectComponent } from './a22-effect.component';
 
 @Component({
     templateUrl: 'a22-effectlist.component.html',
-    providers: [DestroyService],
     imports: [...CommonImports, ...MaterialFormImports,
-        A22EffectComponent, Tooltip, FilterListComponent]
+        A22EffectComponent, FilterListComponent, FilterButtonsComponent]
 })
 
 export class A22EffectlistComponent extends DialogUseComponent {
+  protected a22service = inject(A22Service);
   filteredEffects: Observable<Effect[]>;
   normal = false;
   ev = false;
   forge = false;
   kind: string;
   efftype: string;
+  types: any[];
 
-  constructor(
-    protected cdkDialog: Dialog,
-    protected readonly destroy$: DestroyService,
-    protected router: Router,
-    protected route: ActivatedRoute,
-    protected location: Location,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    private formBuilder: UntypedFormBuilder,
-    protected a22service: A22Service,
-  ) {
-    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
+  constructor() {
+    super();
     this.component = A22EffectComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
-      type: ''
+      weapon: false,
+      armor: false,
+      attack: false,
+      heal: false,
+      accessory: false,
+      material: false,
     })
-    this.route.data.pipe(takeUntil(this.destroy$)).subscribe(data => this.kind = data.type)
+    this.route.data
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(data => this.kind = data.type)
   }
 
   changeData() {
@@ -57,6 +49,9 @@ export class A22EffectlistComponent extends DialogUseComponent {
       case "normal": {
         this.normal = true;
         this.efftype = 'Normal';
+        this.types = [
+          { ctrl: this.pageForm.controls.material, icon: 'material' },
+        ]
         this.gameService(this.a22service, 'effects');
         this.genericSettings(this.a22service.effect_translation[this.language], `The list of effects in ${this.gameTitle}.`)
         break;
@@ -64,6 +59,11 @@ export class A22EffectlistComponent extends DialogUseComponent {
       case "forge": {
         this.forge = true;
         this.efftype = 'Forge';
+        this.types = [
+          { ctrl: this.pageForm.controls.weapon, icon: 'type-weapon' },
+          { ctrl: this.pageForm.controls.armor, icon: 'type-armor' },
+          { ctrl: this.pageForm.controls.accessory, icon: 'type-accessory' },
+        ]
         this.gameService(this.a22service, 'forge-effects');
         this.genericSettings(this.a22service.forgeeffect_translation[this.language], `The list of forge effects in ${this.gameTitle}.`)
         break;
@@ -71,6 +71,11 @@ export class A22EffectlistComponent extends DialogUseComponent {
       case "ev": {
         this.ev = true;
         this.efftype = 'EV';
+        this.types = [
+          { ctrl: this.pageForm.controls.attack, icon: 'type-attack' },
+          { ctrl: this.pageForm.controls.heal, icon: 'type-heal' },
+          { ctrl: this.pageForm.controls.accessory, icon: 'type-accessory' },
+        ]
         this.gameService(this.a22service, 'ev-effects');
         this.genericSettings(this.a22service.eveffect_translation[this.language], `The list of EV effects in ${this.gameTitle}.`)
         break;
@@ -79,18 +84,33 @@ export class A22EffectlistComponent extends DialogUseComponent {
     return this.a22service.getEffectList(this.language, this.ev, this.forge);
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.filteredEffects = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Effect[]>),
-      map((search: any) => search ? this.filterT(search.filtertext, search.type) : this.data.slice())
+      map((search: any) => search ? this.filterT(search.filtertext, search.weapon, search.armor, search.attack, search.heal, search.accessory, search.material) : this.data.slice())
     );
   }
 
-  private filterT(value: string, type: string): Effect[] {
+  private filterT(value: string, weapon: boolean, armor: boolean, attack: boolean, heal: boolean, accessory: boolean, material: boolean): Effect[] {
     this.hide = false;
     let effectlist: Effect[] = this.data;
-    if (type != "1" && type) {
-      effectlist = effectlist.filter(effect => effect.effsub == type)
+    if (weapon) {
+      effectlist = effectlist.filter(effect => effect.effsub == "Weapon")
+    }
+    if (armor) {
+      effectlist = effectlist.filter(effect => effect.effsub == "Armor")
+    }
+    if (attack) {
+      effectlist = effectlist.filter(effect => effect.effsub == "Attack")
+    }
+    if (heal) {
+      effectlist = effectlist.filter(effect => effect.effsub == "Heal")
+    }
+    if (accessory) {
+      effectlist = effectlist.filter(effect => effect.effsub == "Accessory")
+    }
+    if (material) {
+      effectlist = effectlist.filter(effect => effect.effsub == "Material")
     }
     if (!value) {
       return effectlist;

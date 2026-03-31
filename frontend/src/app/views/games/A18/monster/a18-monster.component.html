@@ -2,18 +2,18 @@
   <div [class]="inputSlug ? 'card card-dialog' : 'card card-medium'">
     <h4 class="card-title  card-icon-space">{{monster.name}}</h4>
     <div class="card-icon-position">
-      <i class="atelier atelier-{{monster.kind}}"></i>
+     <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=1#race-{{monster.kind}}"></use></svg>
       @if (monster.isDX) {
         <br /><span class="badge bg-primary">DX</span>
       }
     </div>
     <img class="card-item-display" src="{{imgURL}}monsters/{{monster.slug}}.webp?v=1"
       alt="{{monster.name}}" style="aspect-ratio: 1; width: 288px;">
-    <table><tbody>
+    <table class="a18-talk-table"><tbody>
       @if (monster.char[0]) {
         <tr>
           <td>
-            <img style="aspect-ratio: 1; width: 82px;" src="/media/games/firis/characters/{{monster.char[0]}}.webp?v=1" alt="{{monster.char[0]}}">
+            <img src="/media/games/firis/characters/{{monster.char[0]}}.webp?v=1" alt="{{monster.char[0]}}">
           </td>
           <td>
             {{monster.desc[0]}}
@@ -23,7 +23,7 @@
       @if (monster.char[1]) {
         <tr>
           <td>
-            <img style="aspect-ratio: 1; width: 82px;" src="/media/games/firis/characters/{{monster.char[1]}}.webp?v=1" alt="{{monster.char[1]}}">
+            <img src="/media/games/firis/characters/{{monster.char[1]}}.webp?v=1" alt="{{monster.char[1]}}">
           </td>
           <td>
             {{monster.desc[1]}}
@@ -33,7 +33,7 @@
       @if (monster.char[2]) {
         <tr>
           <td>
-            <img style="aspect-ratio: 1; width: 82px;" src="/media/games/firis/characters/{{monster.char[2]}}.webp?v=1" alt="{{monster.char[2]}}">
+            <img src="/media/games/firis/characters/{{monster.char[2]}}.webp?v=1" alt="{{monster.char[2]}}">
           </td>
           <td>
             {{monster.desc[2]}}
@@ -43,7 +43,7 @@
       @if (monster.char[3]) {
         <tr>
           <td>
-            <img style="aspect-ratio: 1; width: 82px;" src="/media/games/firis/characters/{{monster.char[3]}}.webp?v=1" alt="{{monster.char[3]}}">
+            <img  src="/media/games/firis/characters/{{monster.char[3]}}.webp?v=1" alt="{{monster.char[3]}}">
           </td>
           <td>
             {{monster.desc[3]}}
@@ -59,7 +59,7 @@
     <div class="grid">
       <div class="grid-6">
         @if (monster.locations) {
-          <b>Locations:</b>
+          <b>{{a18service.location_translation[language]}}</b>
         }
         @if (monster.locations) {
           <ul>
@@ -69,7 +69,7 @@
           </ul>
         }
         @if (monster.item_set) {
-          <b>Drops:</b>
+          <b>{{a18service.item_translation[language]}}</b>
         }
         @if (monster.item_set) {
           <ul>
@@ -80,56 +80,48 @@
         }
       </div>
       <div class="grid-6">
-        <table class="tbl noborder" ><tbody>
+        <table class="tbl noborder a18-stats"><tbody>
           <tr>
-            <td style="padding:0;"><b>LV </b></td>  <td style="padding:0;padding-left:0.5em;">{{monster.level}}</td>
+            <td><b>LV </b></td>  <td>{{monster.level}}</td>
           </tr>
           <tr>
-            <td style="padding:0;"><b>HP </b></td>  <td style="padding:0;padding-left:0.5em;">{{monster.hp}}</td>
+            <td><b>HP </b></td>  <td>{{monster.hp}}</td>
           </tr>
           <tr>
-            <td style="padding:0;"><b>ATK </b></td> <td style="padding:0;padding-left:0.5em;">{{monster.atk}}</td>
+            <td><b>ATK </b></td> <td>{{monster.atk}}</td>
           </tr>
           <tr>
-            <td style="padding:0;"><b>DEF </b></td> <td style="padding:0;padding-left:0.5em;">{{monster.defen}}</td>
+            <td><b>DEF </b></td> <td>{{monster.defen}}</td>
           </tr>
           <tr>
-            <td style="padding:0;"><b>SPD </b></td> <td style="padding:0;padding-left:0.5em;">{{monster.spd}}</td>
+            <td><b>SPD </b></td> <td>{{monster.spd}}</td>
           </tr>
           <tr>
-            <td style="padding:0;"><b>Exp </b></td>  <td style="padding:0;padding-left:0.5em;">{{monster.exp}}</td>
+            <td><b>Exp </b></td>  <td>{{monster.exp}}</td>
           </tr>
           <tr>
-            <td style="padding:0;"><b>Cole </b></td>  <td style="padding:0;padding-left:0.5em;">{{monster.cole}}</td>
+            <td><b>Cole </b></td>  <td>{{monster.cole}}</td>
           </tr>
         </tbody></table>
       </div>
     </div>
-    <table class="tbl noborder" ><tbody>
-      <tr>
-        <td style="text-align: center;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-slash"></i></td>
-        <td style="text-align: center;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-impact"></i></td>
-        <td style="text-align: center;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-pierce"></i></td>
-        <td style="text-align: center;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-magic"></i></td>
-      </tr>
-      <tr>
-        <td style="text-align: center;padding:0;" innerHTML="{{chart[monster.slash]}}"></td>
-        <td style="text-align: center;padding:0;" innerHTML="{{chart[monster.impact]}} "></td>
-        <td style="text-align: center;padding:0;" innerHTML="{{chart[monster.pierce]}}"></td>
-        <td style="text-align: center;padding:0;" innerHTML="{{chart[monster.magic]}}"></td>
-      </tr>
-      <tr>
-        <td style="text-align: center;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-fire"></i></td>
-        <td style="text-align: center;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-ice"></i></td>
-        <td style="text-align: center;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-lightning"></i></td>
-        <td style="text-align: center;padding-bottom:0;"><i style="padding:0;" class="atelier atelier-lg atelier-firis-resist-ailment"></i></td>
-      </tr>
-      <tr>
-        <td style="text-align: center;padding:0;" innerHTML="{{chart[monster.fire]}}"></td>
-        <td style="text-align: center;padding:0;" innerHTML="{{chart[monster.ice]}} "></td>
-        <td style="text-align: center;padding:0;" innerHTML="{{chart[monster.light]}}"></td>
-        <td style="text-align: center;padding:0;" innerHTML="{{chart[monster.ail]}}"></td>
-      </tr>
-    </tbody></table>
+    <div class="a18-weaknesses">
+      <svg><use href="/media/spritesheets/A18.svg?v=1#resist-slash"></use></svg>
+      <svg><use href="/media/spritesheets/A18.svg?v=1#resist-impact"></use></svg>
+      <svg><use href="/media/spritesheets/A18.svg?v=1#resist-pierce"></use></svg>
+      <svg><use href="/media/spritesheets/A18.svg?v=1#resist-magic"></use></svg>
+      <svg><use attr.href="/media/spritesheets/{{chart[monster.slash]}}"></use></svg>
+      <svg><use attr.href="/media/spritesheets/{{chart[monster.impact]}}"></use></svg>
+      <svg><use attr.href="/media/spritesheets/{{chart[monster.pierce]}}"></use></svg>
+      <svg><use attr.href="/media/spritesheets/{{chart[monster.magic]}}"></use></svg>
+      <svg><use href="/media/spritesheets/A18.svg?v=1#resist-fire"></use></svg>
+      <svg><use href="/media/spritesheets/A18.svg?v=1#resist-ice"></use></svg>
+      <svg><use href="/media/spritesheets/A18.svg?v=1#resist-lightning"></use></svg>
+      <svg><use href="/media/spritesheets/A18.svg?v=1#resist-ailment"></use></svg>
+      <svg><use attr.href="/media/spritesheets/{{chart[monster.fire]}}"></use></svg>
+      <svg><use attr.href="/media/spritesheets/{{chart[monster.ice]}}"></use></svg>
+      <svg><use attr.href="/media/spritesheets/{{chart[monster.light]}}"></use></svg>
+      <svg><use attr.href="/media/spritesheets/{{chart[monster.ail]}}"></use></svg>
+    </div>
 </div>
 }

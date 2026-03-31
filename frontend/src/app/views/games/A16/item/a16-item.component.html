@@ -8,7 +8,7 @@
     </div>
     <p>{{item.desc}}</p>
     @if (item.book_set) {
-      <p><b>Recipe Book: </b><a routerLink="/{{gameURL}}/recipe-books/{{item.book_set[0].slug}}/{{language}}">{{item.book_set[0].name}}</a></p>
+      <p><b>{{a16service.recipebook_translation[language]}}: </b><a routerLink="/{{gameURL}}/recipe-books/{{item.book_set[0].slug}}/{{language}}">{{item.book_set[0].name}}</a></p>
     }
     @if (item.size) {
       <p><b>Size: </b>{{item.size}}</p>
@@ -17,7 +17,10 @@
       <table class="table-item-data"><tbody>
         @for (cat of item.categories; track cat) {
           <tr>
-            <td><i class="atelier atelier-{{cat.icon_name}}"></i></td><td><a routerLink="/{{gameURL}}/categories/{{cat.slug}}/{{language}}">{{cat.name}}</a></td>
+            <td>
+              <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A16.svg?v=1#{{cat.icon_name}}"></use></svg>
+            </td>
+            <td><a routerLink="/{{gameURL}}/categories/{{cat.slug}}/{{language}}">{{cat.name}}</a></td>
           </tr>
         }
       </tbody></table>
@@ -25,16 +28,16 @@
         <tr>
           <td colspan=2>
             @if (item.fire) {
-              <i style="color:#ac504f;"  class="atelier atelier-np atelier-shallie-fire"></i>
+              <svg class="a16-element" style="background-color:#ac504f;"><use href="/media/spritesheets/A16.svg?v=1#element-fire"></use></svg>
             }
             @if (item.water) {
-              <i style="color:#427389;" class="atelier atelier-np atelier-shallie-water"></i>
+              <svg class="a16-element" style="background-color:#427389;"><use href="/media/spritesheets/A16.svg?v=1#element-water"></use></svg>
             }
             @if (item.wind) {
-              <i style="color:#5a843c;"  class="atelier atelier-np atelier-shallie-wind"></i>
+              <svg class="a16-element" style="background-color:#5a843c;"><use href="/media/spritesheets/A16.svg?v=1#element-wind"></use></svg>
             }
             @if (item.earth) {
-              <i style="color:#8f7939;" class="atelier atelier-np atelier-shallie-earth"></i>
+              <svg class="a16-element" style="background-color:#8f7939;"><use href="/media/spritesheets/A16.svg?v=1#element-earth"></use></svg>
             }
             {{item.evalue}}
           </td>
@@ -67,7 +70,7 @@
       </ul>
     }
     @if (item.locations) {
-      <b>Locations:</b>
+      <b>{{a16service.location_translation[language]}}</b>
       <ul>
         @for (loc of item.locations; track loc) {
           <li><a routerLink="/{{gameURL}}/locations/{{loc.parentslug}}/{{language}}" fragment="{{loc.slug}}">{{loc.name}}</a></li>
@@ -75,7 +78,7 @@
       </ul>
     }
     @if (item.monsters) {
-      <b>Monsters:</b>
+      <b>{{a16service.monster_translation[language]}}</b>
       <ul>
         @for (mon of item.monsters; track mon) {
           <li><a routerLink="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a></li>
@@ -83,7 +86,7 @@
       </ul>
     }
     @if (item.properties) {
-      <b>Properties:</b>
+      <b>{{a16service.properties_translation[language]}}</b>
       <ul>
         @for (prop of item.properties; track prop) {
           <li><a routerLink="/{{gameURL}}/properties/{{prop.slug}}/{{language}}">{{prop.name}}</a></li>
@@ -92,7 +95,7 @@
     }
     @if (item.ingredient_set) {
       <table class="tbl"><tbody>
-        <tr ><th>Ingredients</th></tr>
+        <tr ><th>{{a16service.ingredient_translation[language]}}</th></tr>
         <tr><td>
           <ul>
             @for (ing of item.ingredient_set; track ing) {
@@ -108,33 +111,21 @@
     }
     @if (item.effectlines_set) {
       <table class="tbl"><tbody>
-        <tr ><th colspan=2>Effects</th></tr>
+        <tr ><th colspan=2>{{a16service.effect_translation[language]}}</th></tr>
         @for (effline of item.effectlines_set; track effline) {
           <tr>
             <td style="vertical-align:middle">
-              @if (effline.elem == 'fire'  && !effline.hidden) {
-                <i style="color:#ac504f;"  class="atelier atelier-np atelier-shallie-fire"></i>
+              @if (effline.elem == 'fire') {
+                <svg class="a16-element" style="background-color:{{effline.hidden ? 'gray' : '#ac504f'}};"><use href="/media/spritesheets/A16.svg?v=1#element-fire"></use></svg>
               }
-              @if (effline.elem == 'fire'  &&  effline.hidden) {
-                <i style="color:gray;"     class="atelier atelier-np atelier-shallie-fire"></i>
+              @if (effline.elem == 'water') {
+                <svg class="a16-element" style="background-color:{{effline.hidden ? 'gray' : '#427389'}};"><use href="/media/spritesheets/A16.svg?v=1#element-water"></use></svg>
               }
-              @if (effline.elem == 'water' && !effline.hidden) {
-                <i style="color:#427389;"  class="atelier atelier-np atelier-shallie-water"></i>
+              @if (effline.elem == 'wind') {
+                <svg class="a16-element" style="background-color:{{effline.hidden ? 'gray' : '#5a843c'}};"><use href="/media/spritesheets/A16.svg?v=1#element-wind"></use></svg>
               }
-              @if (effline.elem == 'water' &&  effline.hidden) {
-                <i style="color:gray;"     class="atelier atelier-np atelier-shallie-water"></i>
-              }
-              @if (effline.elem == 'wind'  && !effline.hidden) {
-                <i style="color:#5a843c;"  class="atelier atelier-np atelier-shallie-wind"></i>
-              }
-              @if (effline.elem == 'wind'  &&  effline.hidden) {
-                <i style="color:gray;"     class="atelier atelier-np atelier-shallie-wind"></i>
-              }
-              @if (effline.elem == 'earth' && !effline.hidden) {
-                <i style="color:#8f7939;"  class="atelier atelier-np atelier-shallie-earth"></i>
-              }
-              @if (effline.elem == 'earth' &&  effline.hidden) {
-                <i style="color:gray;"     class="atelier atelier-np atelier-shallie-earth"></i>
+              @if (effline.elem == 'earth') {
+                <svg class="a16-element" style="background-color:{{effline.hidden ? 'gray' : '#8f7939'}};"><use href="/media/spritesheets/A16.svg?v=1#element-earth"></use></svg>
               }
             </td>
             <td>
@@ -172,7 +163,7 @@
     }
     @if (item.characterequip_set) {
       <table class="tbl"><tbody>
-        <tr><th>Characters</th></tr>
+        <tr><th>{{a16service.character_translation[language]}}</th></tr>
         <tr><td>@for (char of item.characterequip_set[0].chars; track char) {
           <img src="{{imgURL}}equip/equip-{{char.name}}.webp"
             alt="Can equip: {{char.name}}" style="aspect-ratio: 111/44; width: 111px;">

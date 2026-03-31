@@ -1,10 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
+import { Component, inject, Input } from '@angular/core';
 import { EffectComponent } from '@app/views/_components/effect/effect.component';
-import { Tooltip } from '@app/views/_components/tooltip/tooltip.component';
+import { Popover } from '@app/views/_components/popover/popover.component';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
@@ -12,27 +8,17 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
 @Component({
     templateUrl: 'a22-effect.component.html',
     selector: 'a22-effect',
-    providers: [DestroyService],
-    imports: [...CommonImports, Tooltip, EffectComponent]
+    imports: [...CommonImports, Popover, EffectComponent]
 })
 export class A22EffectComponent extends SingleComponent {
-  constructor(
-    protected route: ActivatedRoute,
-    protected readonly destroy$: DestroyService,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    protected a22service: A22Service) {
-    super(destroy$, route, breadcrumbService, seoService);
-  }
-
-  @Input()
-  efftype: string;
+  protected a22service = inject(A22Service);
+  @Input() efftype: string;
 
   changeData() {
     this.gameService(this.a22service, 'effects');
     return this.a22service.getEffect(this.slug, this.language);
   }
-  afterAssignment(): void {
+  override afterAssignment(): void {
     if (this.data.efftype) {
       this.efftype = this.data.efftype;
     }

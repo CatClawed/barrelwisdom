@@ -1,11 +1,5 @@
-import { Dialog } from '@angular/cdk/dialog';
-import { Location } from '@angular/common';
-import { Component } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
+import { Component, inject } from '@angular/core';
+import { FilterButtonsComponent } from '@app/views/_components/filter-buttons/filter-buttons.component';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Trait } from '@app/views/games/A18/_services/a18.interface';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
@@ -17,73 +11,57 @@ import { A18TraitComponent } from './a18-trait.component';
 
 @Component({
     templateUrl: 'a18-traitlist.component.html',
-    providers: [DestroyService],
     imports: [...CommonImports, ...MaterialFormImports,
-        A18TraitComponent, FilterListComponent]
+        A18TraitComponent, FilterListComponent, FilterButtonsComponent]
 })
 
 export class A18TraitlistComponent extends DialogUseComponent {
+  protected a18service = inject(A18Service);
   filteredTraits: Observable<Trait[]>;
 
-  constructor(
-    protected cdkDialog: Dialog,
-    protected readonly destroy$: DestroyService,
-    protected router: Router,
-    protected route: ActivatedRoute,
-    protected location: Location,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    private formBuilder: UntypedFormBuilder,
-    protected a18service: A18Service,) {
-    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
+  constructor() {
+    super();
     this.component = A18TraitComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
-      transfers: 0
+      syn: false,
+      atk: false,
+      heal: false,
+      wep: false,
+      arm: false,
+      acc: false,
     })
   }
 
   changeData() {
     this.gameService(this.a18service, 'traits');
-    this.genericSettings(`Traits`, `The list of traits in ${this.gameTitle}.`);
+    this.genericSettings(this.a18service.trait_translation[this.language],
+      `The list of traits in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a18service.getTraitList(this.language);
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.filteredTraits = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Trait[]>),
-      map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.data.slice())
+      map((search: any) => search ? this.filterT(search.filtertext, search.syn, search.atk, search.heal, search.wep, search.arm, search.acc) : this.data.slice())
     );
   }
 
-  private filterT(value: string, transfer: number): Trait[] {
+  private filterT(value: string, syn: boolean, atk: boolean, heal: boolean, wep: boolean, arm: boolean, acc: boolean): Trait[] {
     this.hide = false;
     let traitlist: Trait[] = this.data;
-    if (transfer != 0) {
+    if (syn || atk || heal || wep || arm || acc) {
       traitlist = traitlist.filter(trait => !(trait.trans_atk === trait.trans_heal === trait.trans_wpn === trait.trans_arm === trait.trans_acc === trait.trans_syn));
     }
 
-    switch (transfer) {
-      case 1:
-        traitlist = traitlist.filter(trait => trait.trans_syn);
-        break;
-      case 2:
-        traitlist = traitlist.filter(trait => trait.trans_atk);
-        break;
-      case 3:
-        traitlist = traitlist.filter(trait => trait.trans_heal);
-        break;
-      case 6:
-        traitlist = traitlist.filter(trait => trait.trans_wpn);
-        break;
-      case 7:
-        traitlist = traitlist.filter(trait => trait.trans_arm);
-        break;
-      case 8:
-        traitlist = traitlist.filter(trait => trait.trans_acc);
-        break;
-    }
+      if (syn) traitlist = traitlist.filter(trait => trait.trans_syn);
+      if (atk) traitlist = traitlist.filter(trait => trait.trans_atk);
+      if (heal) traitlist = traitlist.filter(trait => trait.trans_heal);
+      if (wep) traitlist = traitlist.filter(trait => trait.trans_wpn);
+      if (arm) traitlist = traitlist.filter(trait => trait.trans_arm);
+      if (acc) traitlist = traitlist.filter(trait => trait.trans_acc);
+
     if (!value) {
       return traitlist;
     }

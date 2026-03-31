@@ -15,10 +15,11 @@ Thumbs.db
 .history/*
 *.log
 *.bak
-.env
+*.env
 .dccache
 .sonar_lock
 .scannerwork/*
 sonar-project.properties
 backend/scripts/data.txt
 frontend/src/ads.txt
+.angular/

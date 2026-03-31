@@ -15,12 +15,15 @@ Create `docker/.env` with the following format:
 
 ```bash
 SECRET_KEY=50 rando character string of your choice goes here
-DB_PASSWORD=
-DB_USER=
+POSTGRES_PASSWORD=
+POSTGRES_USER=
+POSTGRES_DB=barrelwisdom
 DEBUG=1
+UID=1000
+GID=1000
 ```
 
-DEBUG must be set to 0 in production environments.
+DEBUG must be set to 0 in production environments. UID/GID are up to your preferences, this is to prevent docker creating things as root.
 
 In `backend`, you will also want to run:
 
@@ -52,15 +55,14 @@ python manage.py loaddata dump.json.gz
 
 ### Update Postgres
 
-Overall process: back up whole database, delete docker volume, then can start fresh.
-
-Or, y'know, just make a db dump with django and let that do the work.
-
 ```bash
-docker exec -it postgres psql -U [username] < dumpfile
-docker cp dumpfile postgres:/home
-# within new postgres container
-psql -U [username] barrelwisdom < home/dumpfile
+docker exec -it postgres pg_dumpall -U USER > dump.sql
+docker compose down postgres
+# can check for full name at docker volume list
+# worst case scenario, I have a backup
+docker volume rm docker_bw_database
+docker compose up postgres -d
+docker exec -i postgres psql -U USER DATABASE < dump.sql
 ```
 
 ### Build frontend
@@ -75,7 +77,7 @@ ng build --configuration=production
 For the final docker image:
 
 ```bash
-docker build -t frontend_prod -f Dockerfile.prod .
+docker buildx build -t frontend_prod -f Dockerfile.prod .
 docker tag frontend_prod barrelwisdom/frontend:tag
 ```
 
@@ -86,9 +88,6 @@ Angular commands
 ```bash
 # Begin development
 npm start
-
-# Begin development in server-side rendering mode
-npm run dev:ssr
 ```
 
 Django model changes.

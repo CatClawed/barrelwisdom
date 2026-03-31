@@ -1,10 +1,4 @@
-import { Component } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { PipeModule } from '@app/_helpers/pipes/pipes.module';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
+import { Component, inject } from '@angular/core';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Popover } from '@app/views/_components/popover/popover.component';
 import { Event } from '@app/views/games/BRSL/_services/brsl.interface';
@@ -16,33 +10,27 @@ import { map, startWith } from 'rxjs/operators';
 
 @Component({
     templateUrl: 'brsl-fragmentlist.component.html',
-    providers: [DestroyService],
-    imports: [...CommonImports, ...MaterialFormImports, PipeModule, Popover,
+    imports: [...CommonImports, ...MaterialFormImports, Popover,
         FilterListComponent]
 })
 
 export class BRSLFragmentComponent extends FilterableComponent {
+  protected brslservice = inject(BRSLService);
   filteredEvents: Observable<Event[]>;
 
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    protected route: ActivatedRoute,
-    protected readonly destroy$: DestroyService,
-    private brslservice: BRSLService,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-  ) {
-    super(destroy$, route, breadcrumbService, seoService);
+  constructor() {
+    super();
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
-      character: 'Any',
-      location: 'Any'
+      character: '--',
+      location: '--'
     })
   }
 
   changeData() {
     this.gameService(this.brslservice, 'fragments-and-dates');
-    this.genericSettings(`Fragments & Dates`, `All fragments and dates in ${this.gameTitle}.`);
+    this.genericSettings(this.brslservice.fragments_dates_translation[this.language],
+      `All fragments and dates in ${this.gameTitle}.`);
     this.pageForm.reset();
     return forkJoin({
       character: this.brslservice.getCharacterList(this.language),
@@ -51,7 +39,7 @@ export class BRSLFragmentComponent extends FilterableComponent {
     })
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.data.character = this.data.character.slice(2);
     this.filteredEvents = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Event[]>),
@@ -62,10 +50,10 @@ export class BRSLFragmentComponent extends FilterableComponent {
   private filterT(value: string, char: string, loc: string): Event[] {
     this.hide = false;
     let list: Event[] = this.data.fragment;
-    if (char != "Any") {
+    if (char != "--") {
       list = list.filter(evt => (evt.character) ? evt.character.name == char : false)
     }
-    if (loc != "Any") {
+    if (loc != "--") {
       list = list.filter(evt => (evt.location) ? evt.location.loc == loc : false)
     }
     if (value) {

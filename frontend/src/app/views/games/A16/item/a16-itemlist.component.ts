@@ -1,12 +1,6 @@
-import { Dialog } from '@angular/cdk/dialog';
-import { Location } from '@angular/common';
-import { Component } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
+import { FilterButtonsComponent } from '@app/views/_components/filter-buttons/filter-buttons.component';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { ItemComponent } from '@app/views/_components/item/item.component';
 import { ItemList } from '@app/views/games/A16/_services/a16.interface';
@@ -19,39 +13,34 @@ import { A16ItemComponent } from './a16-item.component';
 
 @Component({
     templateUrl: 'a16-itemlist.component.html',
-    providers: [DestroyService],
+    styleUrl: '../a16.scss',
     imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
-        ItemComponent, MatButtonModule]
+        ItemComponent, MatButtonModule, FilterButtonsComponent]
 })
 
 export class A16ItemlistComponent extends DialogUseComponent {
+  protected a16service = inject(A16Service);
   filteredItems: Observable<ItemList[]>;
 
-  constructor(
-    protected cdkDialog: Dialog,
-    protected readonly destroy$: DestroyService,
-    protected router: Router,
-    protected route: ActivatedRoute,
-    protected location: Location,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    private formBuilder: UntypedFormBuilder,
-    protected a16service: A16Service,
-  ) {
-    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
+  constructor() {
+    super();
     this.component = A16ItemComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       filtering: '',
-      type: 'Any',
+      type: '--',
       elementval: 0,
-      element: "Any"
+      fire: false,
+      water: false,
+      wind: false,
+      earth: false,
     })
   }
 
   changeData() {
     this.gameService(this.a16service, 'items');
-    this.genericSettings(`Items`, `The list of items in ${this.gameTitle}.`);
+    this.genericSettings(this.a16service.item_translation[this.language],
+      `The list of items in ${this.gameTitle}.`);
     this.pageForm.reset();
     return forkJoin({
       items: this.a16service.getItemList(this.language),
@@ -59,35 +48,33 @@ export class A16ItemlistComponent extends DialogUseComponent {
     })
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.filteredItems = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<ItemList[]>),
-      map((search: any) => search ? this.filterT(search.filtertext, search.type, search.elementval, search.element, search.filtering) : this.data.items.slice())
+      map((search: any) => search ? this.filterT(search.filtertext, search.type, search.elementval, search.fire, search.water, search.wind, search.earth, search.filtering) : this.data.items.slice())
     );
   }
 
-  private filterT(value: string, type: string, elementV: number, element: string, ing: string): ItemList[] {
+  private filterT(value: string, type: string, elementV: number, fire: boolean, water: boolean, wind: boolean, earth: boolean, ing: string): ItemList[] {
     this.hide = false;
     let list: ItemList[] = this.data.items;
-    if (type != 'Any') {
+    if (type != '--') {
       list = list.filter(item => item.categories.some(c => c.name == type));
     }
     if (elementV > 1) {
       list = list.filter(item => item.evalue >= elementV);
     }
-    switch (element) {
-      case "Fire":
-        list = list.filter(item => item.fire)
-        break;
-      case "Water":
-        list = list.filter(item => item.water)
-        break;
-      case "Wind":
-        list = list.filter(item => item.wind)
-        break;
-      case "Earth":
-        list = list.filter(item => item.earth)
-        break;
+    if (fire) {
+      list = list.filter(item => item.fire)
+    }
+    if (water) {
+      list = list.filter(item => item.water)
+    }
+    if (wind) {
+      list = list.filter(item => item.wind)
+    }
+    if (earth) {
+      list = list.filter(item => item.earth)
     }
     if (ing) {
       const filterValue = ing.toLowerCase();

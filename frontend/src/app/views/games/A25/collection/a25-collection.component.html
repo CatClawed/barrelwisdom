@@ -9,7 +9,7 @@
         <mat-form-field class="grid-4" appearance="outline">
           <mat-label>{{a25service.filter_translation[language]}}</mat-label>
           <input style="height: 100%;" matInput formControlName="filtertext">
-          <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
+
         </mat-form-field>
         <mat-form-field class="grid-4" appearance="outline">
           <mat-label>{{a25service.role_translation[language]}}</mat-label>
@@ -91,7 +91,7 @@
         <mat-form-field class="grid-8" appearance="outline">
           <mat-label>{{a25service.filter_translation[language]}}</mat-label>
           <input style="height: 100%;" matInput formControlName="filtertext">
-          <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
+
         </mat-form-field>
         <mat-form-field class="grid-4" appearance="outline">
           <mat-label>{{a25service.order_translation[language]}}</mat-label>
@@ -119,23 +119,25 @@
       <input type="text" (click)="openSnackBar();" readonly value="{{shareUrl}}"
         [cdkCopyToClipboard]="shareUrl" style="width: 100%; margin-right: 0.5rem; border-radius: 5px; border-style: ridge; outline: none;;">
       <button [cdkCopyToClipboard]="shareUrl" mat-fab extended color="primary"
-        (click)="openSnackBar();" style="height:100%;" class="input-group-text">
-        <i class="fa-solid fa-link"></i> Share
+        (click)="openSnackBar();" style="height:100%;" class="input-group-text svg-inline-text">
+        <svg><use href="/media/spritesheets/main.svg?v=1#fa-link"></use></svg> Share
       </button>
     </div>
   }
   @else {
     <div style="margin-bottom: 1rem;" class="grid spacer">
       <div class="grid-6">
-        <button mat-fab extended color="primary" style="height: 2.5rem;"
+        <button mat-fab extended color="primary" style="height: 2.5rem;" class="svg-inline-text"
           (click)="router.navigateByUrl('/resleri/collect/'+language)">
-          <mat-icon fontSet="fa-solid" [fontIcon]="has_collection ? 'fa-pen-to-square' : 'fa-plus'"
-            style="font-size: 1.3rem;"></mat-icon> {{has_collection ? 'Edit my collection' : 'Create new'}}
+          <svg><use attr.href="/media/spritesheets/{{has_collection ? `main.svg#fa-edit` : `A25.svg?v=1#fa-plus`}}"></use></svg>
+           {{has_collection ? 'Edit my collection' : 'Create new'}}
         </button>
       </div>
       <div class="grid-6" style="display: grid;">
-        <button mat-fab extended color="accent" style="margin-left: auto; margin-right: 0; height: 2.5rem;" (click)="import()">
-          <mat-icon fontSet="fa-solid" fontIcon="fa-file-import" style="font-size: 1.3rem;"></mat-icon> Import
+        <button mat-fab extended color="accent" style="margin-left: auto; margin-right: 0; height: 2.5rem;" (click)="import()"
+          class="svg-inline-text">
+          <svg><use href="/media/spritesheets/A25.svg?v=1#fa-import"></use></svg>
+          Import Collection
         </button>
         @if (areyousure) {
         <div>
@@ -157,24 +159,30 @@
 @if (data) {
   <div style="column-count: 2;">
     <ul style="list-style-type: none; padding-left: 0;">
-      <li>
-        <i class="atelier atelier-np atelier-resleri-char"
-          style="font-size: 2.4rem; vertical-align: middle; padding-right: 0.5rem;"></i>
-          <span style="vertical-align: middle;">{{totals['characters']}} / {{use_global_count ? totals['character_gbl'] : totals['character_total']}}</span>
-        </li>
-      <li>
-        <i class="atelier atelier-np atelier-resleri-memoria"
-          style="font-size: 2.4rem; vertical-align: middle; padding-right: 0.5rem;"></i>
-        <span style="vertical-align: middle;">{{totals['memoria']}} / {{use_global_count ? totals['memoria_gbl'] : totals['memoria_total']}}</span>
+      <li style="display: flex; align-items: center;">
+        <svg style="width:2.4rem; height: 2.4rem; padding-right: 0.5rem;">
+          <use href="/media/spritesheets/A25.svg?v=1#char"></use>\
+        </svg>
+        <span style="vertical-align: middle;">
+          {{totals['characters']}} / {{use_global_count ? totals['character_gbl'] : totals['character_total']}}
+        </span>
+      </li>
+      <li style="display: flex; align-items: center;">
+        <svg style="width:2.4rem; height: 2.4rem; padding-right: 0.5rem;">
+          <use href="/media/spritesheets/A25.svg?v=1#memoria"></use>
+        </svg>
+        <span style="vertical-align: middle;">
+          {{totals['memoria']}} / {{use_global_count ? totals['memoria_gbl'] : totals['memoria_total']}}
+        </span>
       </li>
     </ul>
     <div>
       <ul style="list-style-type: none; padding-left: 0; float: right;">
-        <li><i class="fa-solid fa-shield" style="color:#a17b4c; font-size: 1.3rem; -webkit-text-stroke-color: black; -webkit-text-stroke-width: 0.1rem; padding-right: 0.5rem;"></i>
+        <li><svg class="standard-stat-star" style="fill: #a17b4c; vertical-align: bottom;"><use href="/media/spritesheets/A25.svg?v=1#fa-shield"></use></svg>
           {{totals['emblems_1']+totals['emblems_2']+totals['emblems_3']}} / {{use_global_count ? totals['emblem_gbl'] : totals['emblem_total']}}</li>
-        <li><i class="fa-solid fa-shield" style="color:#c1c3c2; font-size: 1.3rem; -webkit-text-stroke-color: black; -webkit-text-stroke-width: 0.1rem; padding-right: 0.5rem;"></i>
+        <li><svg class="standard-stat-star" style="fill: #c1c3c2; vertical-align: bottom;"><use href="/media/spritesheets/A25.svg?v=1#fa-shield"></use></svg>
           {{totals['emblems_2']+totals['emblems_3']}} / {{use_global_count ? totals['emblem_gbl'] : totals['emblem_total']}}</li>
-        <li><i class="fa-solid fa-shield" style="color:#e9c82d; font-size: 1.3rem; -webkit-text-stroke-color: black; -webkit-text-stroke-width: 0.1rem; padding-right: 0.5rem;"></i>
+        <li><svg class="standard-stat-star" style="fill: #e9c82d; vertical-align: bottom;"><use href="/media/spritesheets/A25.svg?v=1#fa-shield"></use></svg>
           {{totals['emblems_3']}} / {{use_global_count ? totals['emblem_gbl'] : totals['emblem_total']}}</li>
       </ul>
     </div>

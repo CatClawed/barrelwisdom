@@ -1,12 +1,5 @@
-import { Dialog } from '@angular/cdk/dialog';
-import { Location } from '@angular/common';
-import { Component } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { ItemComponent } from '@app/views/_components/item/item.component';
 import { MonsterList } from '@app/views/games/A12/_services/a12.interface';
@@ -19,25 +12,16 @@ import { A12MonsterComponent } from './a12-monster.component';
 
 @Component({
     templateUrl: 'a12-monsterlist.component.html',
-    providers: [DestroyService],
     imports: [...CommonImports, ...MaterialFormImports,
-        A12MonsterComponent, MatButtonModule, FilterListComponent, ItemComponent]
+        MatButtonModule, FilterListComponent, ItemComponent]
 })
 
 export class A12MonsterlistComponent extends DialogUseComponent {
+  protected a12service = inject(A12Service);
   filteredMonsters: Observable<MonsterList[]>;
 
-  constructor(
-    protected cdkDialog: Dialog,
-    protected readonly destroy$: DestroyService,
-    protected router: Router,
-    protected route: ActivatedRoute,
-    protected location: Location,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    private formBuilder: UntypedFormBuilder,
-    protected a12service: A12Service,) {
-    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
+  constructor() {
+    super();
     this.component = A12MonsterComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -46,12 +30,13 @@ export class A12MonsterlistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.a12service, 'monsters');
-    this.genericSettings(`Monsters`, `The list of monsters in ${this.gameTitle}.`);
+    this.genericSettings(this.a12service.monster_translation[this.language],
+      `The list of monsters in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a12service.getMonsterList(this.language);
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.filteredMonsters = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<MonsterList[]>),
       map((search: any) => search ? this.filterT(search.filtertext) : this.data.slice())

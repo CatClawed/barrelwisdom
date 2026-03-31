@@ -7,26 +7,27 @@
       (buttonClicked)="openDialog($event)"
       dimension="256">
       <ng-container icon>
-        <i class="atelier atelier-np atelier-ryza2-{{icons[item.itemtype]}}"></i>
+        <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A22.svg?v=1#{{icons[item.itemtype]}}"></use></svg>
         @if (item.isDLC) {
           <br />
           }@if (item.isDLC) {
           <span style="margin-top: 0.5rem;" class="badge bg-primary">DLC</span>
         }
       </ng-container>
-      <div class="two-column" style="padding-top: 0.5rem;">
-        <table class="table-item-data"><tbody>
+      <div class="two-column">
+        <ul style="padding-left: 0;">
           @for (cat of item.category; track cat) {
-            <tr>
-              <td style="text-align:center;"><i class="atelier atelier-ryza2-category-{{cat.slug}}"></i></td><td>{{cat.name}}</td>
-            </tr>
+            <li style="display: flex;">
+              <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A22.svg?v=1#category-{{cat.slug}}"></use></svg>
+              {{cat.name}}
+            </li>
           }
-        </tbody></table>
+        </ul>
         <div style="break-inside: avoid-column; margin-right:2rem;">
-          <i [style]="item.fire      ? 'color:#f03a02;' : 'color:lightgrey'" class="atelier atelier-np atelier-ryza2-fire"></i>
-          <i [style]="item.ice       ? 'color:#04b5db;' : 'color:lightgrey'" class="atelier atelier-np atelier-ryza2-ice"></i>
-          <i [style]="item.lightning ? 'color:#e3bb05;' : 'color:lightgrey'" class="atelier atelier-np atelier-ryza2-lightning"></i>
-          <i [style]="item.wind      ? 'color:#589b1d;' : 'color:lightgrey'" class="atelier atelier-np atelier-ryza2-wind"></i>
+          <svg class="a22-element-icon" [style]="item.fire      ? 'fill:#f03a02;' : 'fill:lightgrey'"><use href="/media/spritesheets/A22.svg?v=1#fire"></use></svg>
+          <svg class="a22-element-icon" [style]="item.ice       ? 'fill:#04b5db;' : 'fill:lightgrey'"><use href="/media/spritesheets/A22.svg?v=1#ice"></use></svg>
+          <svg class="a22-element-icon" [style]="item.lightning ? 'fill:#e3bb05;' : 'fill:lightgrey'"><use href="/media/spritesheets/A22.svg?v=1#lightning"></use></svg>
+          <svg class="a22-element-icon" [style]="item.wind      ? 'fill:#589b1d;' : 'fill:lightgrey'"><use href="/media/spritesheets/A22.svg?v=1#wind"></use></svg>
           @if (item.fire || item.wind || item.ice || item.lightning) {
             {{item.elementvalue}}
           }
@@ -36,23 +37,25 @@
   </ng-template>
   <filter-list
     [list]="filteredItems"
-    name="{{a22service.item_translation[language]}}"
+    [name]="a22service.item_translation[language]"
     [(hide)]="hide"
     [template]="template">
     <form [formGroup]="pageForm" class="grid">
       <mat-form-field class="grid-8" appearance="outline">
         <mat-label>{{a22service.filter_translation[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtertext">
-        <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
+
       </mat-form-field>
       <mat-form-field class="grid-4" appearance="outline">
         <mat-label>{{a22service.category_translation[language]}}</mat-label>
         <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
-          <mat-option value="Any" selected><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"   ></mat-icon>--</mat-option>
+          <mat-option value="--" class="svg-icon-text-vertical-center" selected>
+            <svg class="svg-icon"><use href="/media/spritesheets/A22.svg?v=1#book"></use></svg>
+            --</mat-option>
           @if (data) {
             @for (cat of data.categories; track cat) {
-              <mat-option value="{{cat.name}}">
-                <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-category-{{cat.slug}}"></mat-icon>
+              <mat-option value="{{cat.name}}" class="svg-icon-text-vertical-center">
+                <svg class="svg-icon"><use attr.href="/media/spritesheets/A22.svg?v=1#category-{{cat.slug}}"></use></svg>
                 {{cat.name}}
               </mat-option>
             }
@@ -63,17 +66,15 @@
         <mat-label>{{a22service.ingredient_translation[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtering">
       </mat-form-field>
+      <filter-buttons class="grid-4" svg="A22.svg?v=1"
+        [list]="[
+          { ctrl: pageForm.controls.fire,      icon: 'fire' },
+          { ctrl: pageForm.controls.ice,       icon: 'ice' },
+          { ctrl: pageForm.controls.lightning, icon: 'lightning' },
+          { ctrl: pageForm.controls.wind,      icon: 'wind' },
+        ]">
+      </filter-buttons>
       <mat-form-field class="grid-3" appearance="outline">
-        <mat-label>Element</mat-label>
-        <mat-select matNativeControl formControlName="element" disableOptionCentering="true" class="mat-select-icon">
-          <mat-option value="Any" selected>--</mat-option>
-          <mat-option value="Fire">     <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-fire"></mat-icon>Fire</mat-option>
-          <mat-option value="Ice">      <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-ice"></mat-icon>Ice</mat-option>
-          <mat-option value="Lightning"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-lightning"></mat-icon>Lightning</mat-option>
-          <mat-option value="Wind">     <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-wind"></mat-icon>Wind</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field class="grid-4" appearance="outline">
         <mat-label>Element Value</mat-label>
         <mat-select matNativeControl formControlName="elementval" disableOptionCentering="true" class="mat-select-icon">
           <mat-option value="1" type="number" selected>1+</mat-option>

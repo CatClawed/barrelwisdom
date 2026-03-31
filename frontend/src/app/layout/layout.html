@@ -1,0 +1,165 @@
+<div class="navigation">
+  <button (click)="snav.toggle();" class="navigation-hide-large" aria-label="Toggle navigation"
+    style="padding-left:0.5rem;background:none;border:none; height: 55px; width: 55px;">
+    <svg style="fill:white; height: 100%; width: 100%;"><use href="/media/spritesheets/main.svg?v=1#fa-bars"></use></svg>
+  </button>
+  <a aria-label="homepage" routerLink="/" class="navigation-brand">
+    <picture>
+      <source
+        srcset="/media/main/barrelwisdom.svg"
+        media="(min-width: 721px)"
+        height="45"
+        width="135"/>
+      <img src="/media/main/barrel.svg" height="45" width="35" alt="Barrel Wisdom">
+    </picture>
+  </a>
+  <a class="nav-items" routerLink="/blog/atelier-series-guide">Atelier Series Guide</a>
+  <a class="nav-items" routerLink="/blog/donate">Donate</a>
+  <a class="nav-social-media" aria-label="Discord" target="_blank" rel="noopener" href="https://discord.gg/utRynRKxwh">
+    <svg><use href="/media/spritesheets/main.svg?v=1#fa-discord"></use></svg>
+  </a>
+  <button mat-icon-button
+    [disabled]="languages().length == 1 || en_only()"
+    [matMenuTriggerFor]="menu"
+    aria-label="Language select"
+    [style]="languages().length == 1 || en_only() ? `background: none !important;` : null"
+    class="nav-lang">
+      <svg style="height: 40px; aspect-ratio: 1;"><use href="/media/spritesheets/main.svg?v=1#fa-globe"></use></svg>
+      <span>{{codes[currentLang()]}}</span>
+      <svg style="height:20px; aspect-ratio: 1;{{languages().length > 1 && !en_only() ? `` : `fill: transparent;`}}"><use href="/media/spritesheets/main.svg?v=1#fa-caret-down"></use></svg>
+  </button>
+  <mat-menu #menu="matMenu">
+    @for (language of languages(); track language) {
+      <button mat-menu-item
+        (click)="changeLanguage(language)">
+        <span>{{codes[language]}}</span>
+      </button>
+    }
+  </mat-menu>
+</div>
+
+<mat-sidenav-container [hasBackdrop]="!desktopView">
+  <mat-sidenav #snav [mode]="desktopView ? 'side' : 'over'" [opened]="desktopView"
+    [fixedInViewport]="true" fixedTopGap="55" class="sidenav">
+    <div class="sidenav-items">
+      <a class="navigation-hide-large sidenav-item" routerLink="/blog/donate">
+        <svg><use href="/media/spritesheets/main.svg?v=1#fa-donate"></use></svg>
+        Donate
+      </a>
+      <a class="navigation-hide-large sidenav-item" routerLink="/blog/atelier-series-guide">
+        <svg><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg>
+        Atelier Series Guide
+      </a>
+      @for (n of nav(); track n) {
+        @if (!n.children) {
+          <a class="sidenav-item" routerLink="{{n.url}}">
+            @if (n.svg) {
+              <svg><use attr.href="/media/spritesheets/{{n.svg}}"></use></svg>
+            }
+            {{n.name}}
+          </a>
+        }
+        @if (n.children) {
+          <span class="sidenav-item" style="color:white;cursor:pointer;"
+            (click)="n.expand=!n.expand;">
+            @if (n.svg) {
+              <svg><use attr.href="/media/spritesheets/{{n.svg}}"></use></svg>
+            }
+            {{n.name}}
+            @if (!n.expand) {
+              <svg><use href="/media/spritesheets/main.svg?v=1#fa-caret-down"></use></svg>
+            }
+            @if (n.expand) {
+              <svg><use href="/media/spritesheets/main.svg?v=1#fa-caret-up"></use></svg>
+            }
+          </span>
+        }
+        @if (n.expand) {
+          @for (c of n.children; track c) {
+            @if (router.url.indexOf(c.url) < 0) {
+              <a class="sidenav-item sidenav-child"
+                routerLink="{{c.url}}">
+                {{c.name}}
+              </a>
+            }
+            @if (router.url.indexOf(c.url) > -1) {
+              <a class="sidenav-item sidenav-child active"
+                routerLink="{{c.url}}">
+                {{c.name}}
+              </a>
+            }
+          }
+        }
+      }
+  </div>
+  <div class="sidenav-bottom">
+    <a class="sidenav-item sidenav-social-media" href="https://discord.gg/utRynRKxwh" rel="noopener" target="_blank">
+      <svg><use href="/media/spritesheets/main.svg?v=1#fa-discord"></use></svg>
+      Discord
+    </a>
+    @if (user() !== null) {
+      <a class="sidenav-item svg-inline-text" routerLink="/user/{{user().username}}">
+        <svg><use href="/media/spritesheets/main.svg?v=1#fa-user"></use></svg>
+        {{user().username}}
+      </a>
+      <a class="sidenav-item svg-inline-text" routerLink="/settings">
+        <svg><use href="/media/spritesheets/main.svg?v=1#fa-wrench"></use></svg>
+        Settings
+      </a>
+      <a class="sidenav-item svg-inline-text" routerLink="/create">
+        <svg><use href="/media/spritesheets/main.svg?v=1#fa-file"></use></svg>
+        Create Page
+      </a>
+      <a class="sidenav-item svg-inline-text" routerLink="/moderate/comment">
+        <svg><use href="/media/spritesheets/main.svg?v=1#fa-comment"></use></svg>
+        Comments
+      </a>
+      <a class="sidenav-item svg-inline-text" routerLink="/" (click)="logout()">
+        <svg><use href="/media/spritesheets/main.svg?v=1#fa-unlock"></use></svg>
+        Logout
+      </a>
+    }
+    <a class="sidenav-item svg-inline-text" routerLink="/blog/legal">
+      <svg><use href="/media/spritesheets/main.svg?v=1#fa-legal"></use></svg>
+      Legal
+    </a>
+    <a class="sidenav-item svg-inline-text" href="https://github.com/CatClawed/barrelwisdom" rel="noopener" target="_blank">
+      <svg><use href="/media/spritesheets/main.svg?v=1#fa-github"></use></svg>
+      Source
+    </a>
+  </div>
+</mat-sidenav>
+<div class="main">
+  @if (error().code !== 200) {
+    <div style="display: flex; height: calc(100dvh - 65px - 1rem);">
+      <div style="width: 100%; margin: auto;">
+        <div style="display: flex; justify-content: center;">
+          <h1 style="height:min-content;font-size:calc(4rem + 0.1vw) !important;font-weight:300;">
+            {{error().code}}
+          </h1>
+          <div style="margin-left: 1rem;">
+            <h4 class="pt-3">{{error().title}}</h4>
+            <p class="text-muted">{{error().desc}}</p>
+          </div>
+        </div>
+        <img src="/media/main/punidead.svg" alt=""
+          style="width:40%; position: relative; left: 50%; transform: translate(-50%); aspect-ratio: 511/670;">
+      </div>
+    </div>
+  }
+  @else if (bread().current) {
+    <cringe-ad-responsive></cringe-ad-responsive>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Barrel Wisdom</a></li>
+        @for (crumb of bread().breadcrumbs; track crumb) {
+          <li class="breadcrumb-item"><a routerLink="/{{crumb[1]}}">{{crumb[0]}}</a></li>
+        }
+        <li class="breadcrumb-item active" aria-current="page">{{bread().current}}</li>
+      </ol>
+    </nav>
+  }
+  <router-outlet></router-outlet>
+  <cringe-ad-responsive></cringe-ad-responsive>
+</div>
+</mat-sidenav-container>

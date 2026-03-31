@@ -51,9 +51,10 @@
       }
       @if (evt.fragment.length == 2) {
         <table class="tbl"><tbody>
-          <tr><th>Fragments</th></tr>
+          <tr><th>{{brslservice.fragments_translation[language]}}</th></tr>
           <tr><td>
-            <i class="fas fa-arrow-up"></i><i class="fas fa-arrow-up"></i>
+            <svg style="width:1em; height:1em;"><use href="/media/spritesheets/main.svg?v=-1#fa-arrow-up"></use></svg>
+            <svg style="width:1em; height:1em;"><use href="/media/spritesheets/main.svg?v=-1#fa-arrow-up"></use></svg>
             {{evt.fragment[0].name}}<br />
             <popover
               [template]="fragitPopover"
@@ -65,7 +66,8 @@
             <br />Gear: {{evt.fragment[0].gear}}
           </td></tr>
           <tr><td>
-            <i class="fas fa-arrow-down"></i><i class="fas fa-arrow-down"></i>
+            <svg style="width:1em; height:1em;"><use href="/media/spritesheets/main.svg?v=-1#fa-arrow-down"></use></svg>
+            <svg style="width:1em; height:1em;"><use href="/media/spritesheets/main.svg?v=-1#fa-arrow-down"></use></svg>
             {{evt.fragment[1].name}}<br />
             <popover
               [template]="fragitPopover"
@@ -96,21 +98,32 @@
       }
       @if (evt.choices) {
         <table class="tbl"><tbody>
-          <tr><th style="position:relative;">Choices@if (!evt.expand) {
-            <a href="javascript:void(0)" style="color:black;text-decoration:none;position:absolute;right:1rem;top:50%;transform: translate(-50%,-50%);" (click)="evt.expand=!evt.expand;$event.preventDefault();" class="fas fa-chevron-up"></a>
-            }@if (evt.expand) {
-            <a href="javascript:void(0)" style="color:black;text-decoration:none;position:absolute;right:1rem;top:50%;transform: translate(-50%,-50%);" (click)="evt.expand=!evt.expand;$event.preventDefault();" class="fas fa-chevron-down"></a>
-          }</th></tr>
+          <tr><th style="position:relative;">Choices
+            @if (!evt.expand) {
+              <button  (click)="evt.expand=!evt.expand;$event.preventDefault();" class="chevron-button">
+                <svg><use href="/media/spritesheets/main.svg?v=1#fa-chevron-up"></use></svg>
+              </button>
+            }
+            @else {
+              <button (click)="evt.expand=!evt.expand;$event.preventDefault();" class="chevron-button">
+                <svg><use href="/media/spritesheets/main.svg?v=1#fa-chevron-down"></use></svg>
+              </button>
+            }
+          </th></tr>
           @if (evt.expand) {
-            @for (p of evt.choices | pair; track p) {
+            @for (i of [].constructor(3); let index = $index; track $index) {
               <tr><td>
-                <ul>@for (choice of p; track choice) {
+                <ul>
                   <li>
-                    {{choice.choice}}
+                    {{evt.choices[index*2].choice}}
                   </li>
-                }</ul>
+                  <li>
+                    {{evt.choices[index*2+1].choice}}
+                  </li>
+                </ul>
               </td></tr>
             }
+
           }
         </tbody></table>
       }
@@ -118,20 +131,20 @@
   </ng-template>
   <filter-list
     [list]="filteredEvents"
-    name="Fragments &amp; Dates"
+    [name]="brslservice.fragments_dates_translation[language]"
     [(hide)]="hide"
     [template]="template">
     <p>Dates give one of two possible fragments. The first listed will always be from two top choices; the second will always be two bottom choices. A handful of fragments come from DLC and a choice you make later in the game.</p>
     <p><b>Note:</b> There may be inaccuracies for anything labelled as DLC.</p>
     <form [formGroup]="pageForm" class="grid">
       <mat-form-field class="grid-12" appearance="outline">
-        <mat-label>Filter any fragment data...</mat-label>
+        <mat-label>{{brslservice.filter_translation[language]}}</mat-label>
         <input matInput formControlName="filtertext">
       </mat-form-field>
       <mat-form-field class="grid-4" appearance="outline">
-        <mat-label>Character</mat-label>
+        <mat-label>{{brslservice.character_translation[language]}}</mat-label>
         <mat-select matNativeControl formControlName="character" disableOptionCentering="true">
-          <mat-option value="Any" selected>Any</mat-option>
+          <mat-option value="--" selected>--</mat-option>
           @if (data) {
             @for (char of data.character; track char) {
               <mat-option value="{{char.name}}">
@@ -142,9 +155,9 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field class="grid-4" appearance="outline">
-        <mat-label>Location</mat-label>
+        <mat-label>{{brslservice.location_translation[language]}}</mat-label>
         <mat-select matNativeControl formControlName="location" disableOptionCentering="true">
-          <mat-option value="Any" selected>Any</mat-option>
+          <mat-option value="--" selected>--</mat-option>
           @if (data) {
             @for (loc of data.location; track loc) {
               <mat-option value="{{loc.loc}}">

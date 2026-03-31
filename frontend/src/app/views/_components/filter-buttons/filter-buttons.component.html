@@ -1,0 +1,16 @@
+<div style="height:80%; grid-template-columns: repeat({{list.length}}, minmax(1.5em, 4em)); display: grid; padding: 0 0 1em 0;">
+    @for (btn of list; track $index) {
+        <button
+            type="button"
+            class="icon-button"
+            (click)="toggle(btn.ctrl)"
+            [class.active]="btn.ctrl.value">
+            <svg preserveAspectRatio="xMidYMid meet"
+                [style.background-color]="btn.ctrl.value && btn.activeColor ? btn.activeColor : btn.activeColor ? 'rgb(150, 150, 150)' : 'transparent'"
+                [class]="extra_class"
+                >
+                <use attr.href="/media/spritesheets/{{svg}}#{{btn.icon}}"></use>
+            </svg>
+        </button>
+    }
+</div>

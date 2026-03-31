@@ -17,7 +17,10 @@
             <h4>{{name}}</h4>
         }
         <div class="popoverContents">
-            <ng-container *ngTemplateOutlet="template; context: context"></ng-container>
+            @if (template) {
+                <ng-container *ngTemplateOutlet="template; context: context"></ng-container>
+            }
+            @else { {{text}} }
         </div>
     </div>
 </ng-template>

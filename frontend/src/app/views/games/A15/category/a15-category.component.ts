@@ -1,9 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
+import { Component, inject } from '@angular/core';
 import { CategoryComponent } from '@app/views/_components/category/category.component';
 import { A15Service } from '@app/views/games/A15/_services/a15.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -11,23 +7,17 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
     templateUrl: 'a15-category.component.html',
-    providers: [DestroyService],
+    styleUrl: '../a15.scss',
     imports: [...CommonImports, CategoryComponent, NgTemplateOutlet]
 })
 export class A15CategoryComponent extends SingleComponent {
-  constructor(
-    protected route: ActivatedRoute,
-    protected readonly destroy$: DestroyService,
-    protected a15service: A15Service,
-    protected breadcrumbService: BreadcrumbService,
-    protected seoService: SeoService) {
-    super(destroy$, route, breadcrumbService, seoService);
-  }
+  protected a15service = inject(A15Service);
+
   changeData() {
     this.gameService(this.a15service, 'categories');
     return this.a15service.getCategory(this.slug, this.language);
   }
-  afterAssignment(): void {
-    this.genericSettings(this.data.name, `All items in ${this.data.name}`, '', true);
+  override afterAssignment(): void {
+    this.genericSettings(this.data.name, this.a15service.category_translation[this.language], '', true);
   }
 }

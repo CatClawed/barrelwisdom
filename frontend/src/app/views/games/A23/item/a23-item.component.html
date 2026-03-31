@@ -3,22 +3,9 @@
     <h4 class="card-title card-icon-space">{{item.name}}</h4>
     <div class="card-icon-position">
       <b style="padding-right:0.5em;">LV {{item.level}}</b>
-      @switch (item.kind) {
-        @case ('attack')    { <i class="atelier atelier-np atelier-ryza2-type-attack"></i> }
-        @case ('heal')      { <i class="atelier atelier-np atelier-ryza2-type-heal"></i> }
-        @case ('debuffer')  { <i class="atelier atelier-np atelier-ryza2-type-debuff"></i> }
-        @case ('buffer')    { <i class="atelier atelier-np atelier-ryza2-type-buff"></i> }
-        @case ('weapon')    { <i class="atelier atelier-np atelier-ryza2-type-weapon"></i> }
-        @case ('armor')     { <i class="atelier atelier-np atelier-ryza2-type-armor"></i> }
-        @case ('accessory') { <i class="atelier atelier-np atelier-ryza2-type-accessory"></i> }
-        @case ('mix')       { <i class="atelier atelier-np atelier-ryza2-type-synthesis"></i> }
-        @case ('material')  { <i class="atelier atelier-np atelier-ryza2-material"></i> }
-        @case ('field')     { <i class="atelier atelier-np atelier-sophie2-type-exploration"></i> }
-        @case ('amulet')    { <i class="atelier atelier-np atelier-sophie2-category-talismans"></i> }
-        @case ('important') { <i class="atelier atelier-np atelier-ryza2-category-key-items"></i> }
-      }
+      <svg class="svg-icon"><use attr.href="/media/spritesheets/{{itemkinds[item.kind]}}"></use></svg>
       @if (item.char) {
-        <br /><img style="width:128px;aspect-ratio: 128/125;" src="/media/games/sophie2/characters/{{item.char}}.webp" alt="{{item.char}}">
+        <br /><img style="width:4em;aspect-ratio: 128/125;" src="/media/games/sophie2/characters/{{item.char}}.webp" alt="{{item.char}}">
       }
       @if (item.isDLC) {
         <br /><span class="badge bg-primary">DLC</span>
@@ -26,62 +13,46 @@
     </div>
     <img class="card-item-display" style="aspect-ratio: 1; width: 256px;"
       src="{{imgURL}}items/{{item.slug}}.webp?v=1" alt="{{item.name}}">
-    <table><tbody>
+    <table class="a23-talk-table"><tbody>
       @if (item.char1) {
         <tr>
-          <td style="width:10%">
-            <img style="width:128px;aspect-ratio: 128/125;" src="/media/games/sophie2/characters/{{item.char1}}.webp" alt="{{item.char1}}">
-          </td>
-          <td style="width:90%">
-            {{item.desc1}}
-          </td>
+          <td><img src="/media/games/sophie2/characters/{{item.char1}}.webp" alt="{{item.char1}}"></td>
+          <td>{{item.desc1}}</td>
         </tr>
       }
       @if (item.char2) {
         <tr>
-          <td style="width:10%">
-            <img style="width:128px;aspect-ratio: 128/125;" src="/media/games/sophie2/characters/{{item.char2}}.webp" alt="{{item.char2}}">
-          </td>
-          <td style="width:90%">
-            {{item.desc2}}
-          </td>
+          <td><img src="/media/games/sophie2/characters/{{item.char2}}.webp" alt="{{item.char2}}"></td>
+          <td>{{item.desc2}}</td>
         </tr>
       }
       @if (item.char3) {
         <tr>
-          <td style="width:10%">
-            <img style="width:128px;aspect-ratio: 128/125;" src="/media/games/sophie2/characters/{{item.char3}}.webp" alt="{{item.char3}}">
-          </td>
-          <td style="width:90%">
-            {{item.desc3}}
-          </td>
+          <td><img src="/media/games/sophie2/characters/{{item.char3}}.webp" alt="{{item.char3}}"></td>
+          <td>{{item.desc3}}</td>
         </tr>
       }
       @if (item.char4) {
         <tr>
-          <td style="width:10%">
-            <img style="width:128px;aspect-ratio: 128/125;" src="/media/games/sophie2/characters/{{item.char4}}.webp" alt="{{item.char4}}">
-          </td>
-          <td style="width:90%">
-            {{item.desc4}}
-          </td>
+          <td><img src="/media/games/sophie2/characters/{{item.char4}}.webp" alt="{{item.char4}}"></td>
+          <td>{{item.desc4}}</td>
         </tr>
       }
     </tbody></table>
-    <table style="margin-top:1rem;" class="table-item-data col"><tbody>
-      @for (cat of item.categories; track cat) {
-        <tr>
-          <td style="text-align: center;"><i class="atelier atelier-{{cat.icon}}"></i></td>
-          <td><a routerLink="/{{gameURL}}/categories/{{cat.slug}}">{{cat.name}}</a></td>
-        </tr>
-      }
-      @for (cat of item.add; track cat) {
-        <tr>
-          <td style="text-align: center;"><i style="color:lightgrey;" class="atelier atelier-{{cat.icon}}"></i></td>
-          <td><a routerLink="/{{gameURL}}/categories/{{cat.slug}}">{{cat.name}}</a></td>
-        </tr>
-      }
-    </tbody></table>
+    <ul class="two-column" style="padding-left: 0; height: 100%;">
+        @for (cat of item.categories; track cat) {
+          <li style="display: flex;">
+            <svg class="svg-icon"><use attr.href="/media/spritesheets/A23.svg?v=1#category-{{cat.slug}}"></use></svg>
+            <a routerLink="/{{gameURL}}/categories/{{cat.slug}}/{{language}}">{{cat.name}}</a>
+          </li>
+        }
+        @for (cat of item.add; track cat) {
+          <li style="display: flex;">
+            <svg class="svg-icon" style="fill:lightgray"><use attr.href="/media/spritesheets/A23.svg?v=1#category-{{cat.slug}}"></use></svg>
+            <a routerLink="/{{gameURL}}/categories/{{cat.slug}}/{{language}}">{{cat.name}}</a>
+          </li>
+        }
+      </ul>
     @if (item.traits) {
       <b>{{a23service.trait_translation[language]}}</b>
       <ul>
@@ -102,7 +73,7 @@
       <p><b>Chest: </b>{{item.chest[0].region}} &gt; {{item.chest[0].subregion}}</p>
     }
     @if (item.shop) {
-      <p><b>Shop: </b>{{item.shop}}</p>
+      <p><b>{{a23service.shop_translation[language]}}: </b>{{item.shop}}</p>
     }
     @if (item.locations) {
       <b>{{a23service.location_translation[language]}}</b>
@@ -176,7 +147,7 @@
         @for (eff of item.effects; track eff) {
           <tr>
             <td style="vertical-align:middle;">
-              <i style="color:#{{colors[eff.elem]}}" class="atelier atelier-np atelier-sophie2-element-{{icons[eff.elem]}}"></i>
+              <svg class="svg-icon" style="fill:#{{colors[eff.elem]}}"><use attr.href="/media/spritesheets/A23.svg?v=1#element-{{icons[eff.elem]}}"></use></svg>
             </td>
             <td>
               <ul style="list-style:none;">
@@ -185,20 +156,10 @@
                     <ng-template #effPopover>
                       @if (e.effect) {
                         <p>{{e.effect.desc}}</p>
-                        <a routerLink="/{{gameURL}}/effects/{{e.effect.slug}}/{{language}}">More info...</a>
+                        <a routerLink="/{{gameURL}}/effects/{{e.effect.slug}}/{{language}}">{{a23service.details_translation[language]}}</a>
                       }
                       @if (e.component) {
-                        <div style="color:#{{colors[e.component.code[0]]}};border:1px solid #392d23;background-color:#392d23;display:inline-block;border-radius:3px;">
-                          @for (thing of [].constructor(3); track thing; let i = $index) {
-                            <div style="display:flex;">
-                              @for (thingy of [].constructor(3); track thingy; let j = $index) {
-                                @if (e.component.code[i*3+j+1]==2)      { <div style="border:1px solid #392d23;height:1em;width:1em;display:flex;"><i style="font-size:0.75em;margin:auto;" class="fas fa-star"></i></div> }
-                                @else if (e.component.code[i*3+j+1]==1) { <div style="border:1px solid #392d23;height:1em;width:1em;display:flex;"><i style="font-size:0.8em;margin:auto;" class="fas fa-square"></i></div> }
-                                @else                                   { <div style="border:1px solid #392d23;height:1em;width:1em;display:flex;"><i style="color:#635552;font-size:0.8em;margin:auto;" class="fas fa-square"></i></div> }
-                              }
-                            </div>
-                          }
-                        </div>
+                        <ng-content *ngTemplateOutlet="componentmaker;context:{'component':e.component}"></ng-content>
                       }
                     </ng-template>
                     @if (e.effect) {
@@ -232,19 +193,7 @@
           <td>
             <div style="display:grid; grid-template-columns: auto auto auto auto;grid-gap:1em;">
               @for (component of item.components; track component) {
-                <div style="display:flex;">
-                  <div style="margin:auto;color:#{{colors[component.code[0]]}};border:1px solid #392d23;background-color:#392d23;display:inline-block;border-radius:3px;">
-                    @for (thing of [].constructor(3); track thing; let i = $index) {
-                      <div style="display:flex;">
-                        @for (thingy of [].constructor(3); track thingy; let j = $index) {
-                          @if      (component.code[i*3+j+1]==2) { <div style="border:1px solid #392d23;height:1em;width:1em;display:flex;"><i style="font-size:0.75em;margin:auto;" class="fas fa-star"></i></div> }
-                          @else if (component.code[i*3+j+1]==1) { <div style="border:1px solid #392d23;height:1em;width:1em;display:flex;"><i style="font-size:0.8em;margin:auto;" class="fas fa-square"></i></div> }
-                          @else                                 { <div style="border:1px solid #392d23;height:1em;width:1em;display:flex;"><i style="color:#635552;font-size:0.8em;margin:auto;" class="fas fa-square"></i></div> }
-                        }
-                      </div>
-                    }
-                  </div>
-                </div>
+                <ng-content *ngTemplateOutlet="componentmaker;context:{component:component}"></ng-content>
               }
             </div>
           </td>
@@ -274,4 +223,13 @@
       </tbody></table>
     }
   </div>
+  <ng-template #componentmaker let-component="component">
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 1px;background-color:#392d23; border-radius: 5%; width:calc(2.4em + 3px); border: 1px #392d23 solid; margin: auto;">
+      @for (thing of [].constructor(9); track thing; let i = $index) {
+        <svg style="fill:#{{component.code[i+1]== 0 ? '635552' : colors[component.code[0]]}}; height: 0.8em; width: 0.8em;">
+          <use attr.href="/media/spritesheets/{{component.code[i+1]<2 ? 'A23.svg?v=1#fa-square' : 'main.svg?v=1#fa-star'}}"></use>
+        </svg>
+      }
+    </div>
+  </ng-template>
 }

@@ -8,7 +8,7 @@
     </div>
     <p>{{item.desc}}</p>
     @if (item.book_set) {
-      <p><b>Recipe Book: </b><a routerLink="/{{gameURL}}/recipe-books/{{item.book_set[0].slug}}/{{language}}">{{item.book_set[0].name}}</a></p>
+      <p><b>{{a15service.recipebook_translation[language]}}: </b><a routerLink="/{{gameURL}}/recipe-books/{{item.book_set[0].slug}}/{{language}}">{{item.book_set[0].name}}</a></p>
     }
     @if (item.size) {
       <p><b>Size: </b>{{item.size}}</p>
@@ -17,7 +17,8 @@
       <table class="table-item-data"><tbody>
         @for (cat of item.categories; track cat) {
           <tr>
-            <td><i class="atelier atelier-{{cat.icon_name}}"></i></td><td><a routerLink="/{{gameURL}}/categories/{{cat.slug}}/{{language}}">{{cat.name}}</a></td>
+            <td><svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A15.svg?v=1#{{cat.icon_name}}"></use></svg></td>
+            <td><a routerLink="/{{gameURL}}/categories/{{cat.slug}}/{{language}}">{{cat.name}}</a></td>
           </tr>
         }
       </tbody></table>
@@ -25,18 +26,18 @@
         <tr>
           <td colspan=2>
             @if (item.fire) {
-              <i style="color:#ac504f;"  class="atelier atelier-np atelier-shallie-fire"></i>
+              <svg class="a15-element" style="background-color:#ac504f;"><use href="/media/spritesheets/A15.svg?v=1#element-fire"></use></svg>
             }
             @if (item.water) {
-              <i style="color:#427389;" class="atelier atelier-np atelier-shallie-water"></i>
+              <svg class="a15-element" style="background-color:#427389;"><use href="/media/spritesheets/A15.svg?v=1#element-water"></use></svg>
             }
             @if (item.wind) {
-              <i style="color:#5a843c;"  class="atelier atelier-np atelier-shallie-wind"></i>
+              <svg class="a15-element" style="background-color:#5a843c;"><use href="/media/spritesheets/A15.svg?v=1#element-wind"></use></svg>
             }
             @if (item.earth) {
-              <i style="color:#8f7939;" class="atelier atelier-np atelier-shallie-earth"></i>
+              <svg class="a15-element" style="background-color:#8f7939;"><use href="/media/spritesheets/A15.svg?v=1#element-earth"></use></svg>
             }
-            <span>{{item.evalue}}</span>
+            {{item.evalue}}
           </td>
         </tr>
       </tbody></table>
@@ -66,7 +67,7 @@
       </ul>
     }
     @if (item.locations) {
-      <b>Locations:</b>
+      <b>{{a15service.location_translation[language]}}</b>
     }
     @if (item.locations) {
       <ul>
@@ -80,7 +81,7 @@
       </ul>
     }
     @if (item.monsters) {
-      <b>Monsters:</b>
+      <b>{{a15service.monster_translation[language]}}</b>
       <ul>
         @for (mon of item.monsters; track mon) {
           <li><a routerLink="/{{gameURL}}/monsters/{{mon.slug}}/{{language}}">{{mon.name}}</a></li>
@@ -88,7 +89,7 @@
       </ul>
     }
     @if (item.properties) {
-      <b>Properties:</b>
+      <b>{{a15service.properties_translation[language]}}</b>
       <ul>
         @for (prop of item.properties; track prop) {
           <li><a routerLink="/{{gameURL}}/properties/{{prop.slug}}/{{language}}">{{prop.name}}</a></li>
@@ -97,7 +98,7 @@
     }
     @if (item.ingredient_set) {
       <table class="tbl"><tbody>
-        <tr><th>Ingredients</th></tr>
+        <tr><th>{{a15service.ingredient_translation[language]}}</th></tr>
         <tr><td>
           <ul>
             @for (ing of item.ingredient_set; track ing) {
@@ -113,18 +114,17 @@
     }
     @if (item.effectline_set) {
       <table class="tbl"><tbody>
-        <tr><th colspan=2>Effects</th></tr>
+        <tr><th colspan=2>{{a15service.effect_translation[language]}}</th></tr>
         @if (fire) {
           <tr>
-            <td style="vertical-align:middle"><i style="color:#ac504f;" class="atelier atelier-np atelier-shallie-fire"></i></td>
+            <td style="vertical-align:middle">
+              <svg class="a15-element" style="background-color:#ac504f;"><use href="/media/spritesheets/A15.svg?v=1#element-fire"></use></svg>
+            </td>
             <td>
               @for (eff of item.effectline_set; track eff) {
                 @if (eff.elem == 'fire') {
                   <a routerLink="/{{gameURL}}/effects/{{eff.effect.slug}}/{{language}}">{{eff.effect.name}}</a>
-                  }@if (eff.elem == 'fire') {
                   <span> ({{eff.min_elem}}-{{eff.max_elem}})</span>
-                }
-                @if (eff.elem == 'fire') {
                   <div class="effect-bar">
                     <div class="elemental-bar" style="background:#ac504f;left:{{eff.min_elem}}%;width:{{eff.max_elem-eff.min_elem}}%;"></div>
                   </div>
@@ -135,15 +135,14 @@
         }
         @if (water) {
           <tr>
-            <td style="vertical-align:middle"><i style="color:#427389;" class="atelier atelier-np atelier-shallie-water"></i></td>
+            <td style="vertical-align:middle">
+              <svg class="a15-element" style="background-color:#427389;"><use href="/media/spritesheets/A15.svg?v=1#element-water"></use></svg>
+            </td>
             <td>
               @for (eff of item.effectline_set; track eff) {
                 @if (eff.elem == 'water') {
                   <a routerLink="/{{gameURL}}/effects/{{eff.effect.slug}}/{{language}}">{{eff.effect.name}}</a>
-                  }@if (eff.elem == 'water') {
                   <span> ({{eff.min_elem}}-{{eff.max_elem}})</span>
-                }
-                @if (eff.elem == 'water') {
                   <div class='effect-bar'>
                     <div class="elemental-bar" style="background:#427389;left:{{eff.min_elem}}%;width:{{eff.max_elem-eff.min_elem}}%;"></div>
                   </div>
@@ -154,15 +153,14 @@
         }
         @if (wind) {
           <tr>
-            <td style="vertical-align:middle"><i style="color:#5a843c;"  class="atelier atelier-np atelier-shallie-wind"></i></td>
+            <td style="vertical-align:middle">
+              <svg class="a15-element" style="background-color:#5a843c;"><use href="/media/spritesheets/A15.svg?v=1#element-wind"></use></svg>
+            </td>
             <td>
               @for (eff of item.effectline_set; track eff) {
                 @if (eff.elem == 'wind') {
                   <a routerLink="/{{gameURL}}/effects/{{eff.effect.slug}}/{{language}}">{{eff.effect.name}}</a>
-                  }@if (eff.elem == 'wind') {
                   <span> ({{eff.min_elem}}-{{eff.max_elem}})</span>
-                }
-                @if (eff.elem == 'wind') {
                   <div class='effect-bar'>
                     <div class="elemental-bar" style="background:#5a843c;left:{{eff.min_elem}}%;width:{{eff.max_elem-eff.min_elem}}%;"></div>
                   </div>
@@ -173,15 +171,14 @@
         }
         @if (earth) {
           <tr>
-            <td style="vertical-align:middle"><i style="color:#8f7939;" class="atelier atelier-np atelier-shallie-earth"></i></td>
+            <td style="vertical-align:middle">
+              <svg class="a15-element" style="background-color:#8f7939;"><use href="/media/spritesheets/A15.svg?v=1#element-earth"></use></svg>
+            </td>
             <td>
               @for (eff of item.effectline_set; track eff) {
                 @if (eff.elem == 'earth') {
                   <a routerLink="/{{gameURL}}/effects/{{eff.effect.slug}}/{{language}}">{{eff.effect.name}}</a>
-                  }@if (eff.elem == 'earth') {
                   <span> ({{eff.min_elem}}-{{eff.max_elem}})</span>
-                }
-                @if (eff.elem == 'earth') {
                   <div class='effect-bar'>
                     <div class="elemental-bar" style="background:#8f7939;left:{{eff.min_elem}}%;width:{{eff.max_elem-eff.min_elem}}%;"></div>
                   </div>
@@ -193,18 +190,18 @@
       </tbody></table>
     }
     @if (item.equip_set) {
-      <table class="tbl"><tbody>
+      <table class="tbl a15-stats"><tbody>
         <tr><th colspan=4>Stats</th></tr>
-        <tr><td style="padding-top:0.2rem;padding-bottom:0;width:25%;"><b>HP </b></td> <td style="padding-top:0.2rem;padding-left:0;padding-bottom:0;width:25%">{{item.equip_set[0].hp}}   </td><td style="padding-top:0.2rem;padding-left:0;padding-bottom:0;width:25%"><i style="color:#ac504f;" class="atelier atelier-shallie-fire"></i></td>  <td style="padding-top:0.2rem;padding-left:0;padding-bottom:0;width:25%;">{{item.equip_set[0].fire}}</td></tr>
-        <tr><td style="border-top:transparent;padding-bottom:0;padding-top:0;width:25%;"><b>MP </b></td> <td style="border-top:transparent;padding:0;width:25%">{{item.equip_set[0].mp}}   </td><td style="border-top:transparent;padding:0;width:25%"><i style="color:#427389;" class="atelier atelier-shallie-water"></i></td> <td style="border-top:transparent;padding:0;width:25%;">{{item.equip_set[0].water}}</td></tr>
-        <tr><td style="border-top:transparent;padding-bottom:0;padding-top:0;width:25%;"><b>ATK </b></td><td style="border-top:transparent;padding:0;width:25%">{{item.equip_set[0].atk}}  </td><td style="border-top:transparent;padding:0;width:25%"><i style="color:#5a843c;" class="atelier atelier-shallie-wind"></i></td>  <td style="border-top:transparent;padding:0;width:25%;">{{item.equip_set[0].wind}}</td></tr>
-        <tr><td style="border-top:transparent;padding-bottom:0;padding-top:0;width:25%;"><b>DEF </b></td><td style="border-top:transparent;padding:0;width:25%">{{item.equip_set[0].defen}}</td><td style="border-top:transparent;padding:0;width:25%"><i style="color:#8f7939;" class="atelier atelier-shallie-earth"></i></td> <td style="border-top:transparent;padding:0;width:25%;">{{item.equip_set[0].earth}}</td></tr>
-        <tr><td style="border-top:transparent;padding-bottom:0;padding-top:0;width:25%;"><b>SPD </b></td><td style="border-top:transparent;padding:0;width:25%">{{item.equip_set[0].spd}}  </td></tr>
+        <tr><td><b>HP  </b></td><td>{{item.equip_set[0].hp}}   </td><td><svg class="a15-element" style="background-color:#ac504f;"><use href="/media/spritesheets/A15.svg?v=1#element-fire"></use></svg></td> <td>{{item.equip_set[0].fire}}</td></tr>
+        <tr><td><b>MP  </b></td><td>{{item.equip_set[0].mp}}   </td><td><svg class="a15-element" style="background-color:#427389;"><use href="/media/spritesheets/A15.svg?v=1#element-water"></use></svg></td><td>{{item.equip_set[0].water}}</td></tr>
+        <tr><td><b>ATK </b></td><td>{{item.equip_set[0].atk}}  </td><td><svg class="a15-element" style="background-color:#5a843c;"><use href="/media/spritesheets/A15.svg?v=1#element-wind"></use></svg></td> <td>{{item.equip_set[0].wind}}</td></tr>
+        <tr><td><b>DEF </b></td><td>{{item.equip_set[0].defen}}</td><td><svg class="a15-element" style="background-color:#8f7939;"><use href="/media/spritesheets/A15.svg?v=1#element-earth"></use></svg></td><td>{{item.equip_set[0].earth}}</td></tr>
+        <tr><td><b>SPD </b></td><td>{{item.equip_set[0].spd}}  </td></tr>
       </tbody></table>
     }
     @if (item.characterequip_set) {
       <table class="tbl"><tbody>
-        <tr><th>Characters</th></tr>
+        <tr><th>{{a15service.character_translation[language]}}</th></tr>
         <tr><td>@for (char of item.characterequip_set[0].chars; track char) {
           <img src="{{imgURL}}equip/equip-{{char.name}}.webp"
             alt="Can equip: {{char.name}}" style="aspect-ratio: 69/70; width: 69px;">

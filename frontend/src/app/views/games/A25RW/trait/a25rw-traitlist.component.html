@@ -19,20 +19,24 @@
         <input style="height: 100%;" matInput formControlName="filtertext">
       </mat-form-field>
       <div class="grid-12">
-        <div class="svg-filter" style="float:left">
-          <svg (click)="toggle(this.pageForm.controls.com)"  style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.com.value  ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=1#trait-combat-items"></use></svg>
-          <svg (click)="toggle(this.pageForm.controls.res)"  style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.res.value  ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=1#trait-heal"></use></svg>
-          <svg (click)="toggle(this.pageForm.controls.inh)"  style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.inh.value  ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=1#trait-inhibitors"></use></svg>
-          <svg (click)="toggle(this.pageForm.controls.boo)"  style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.boo.value  ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=1#trait-boost-items"></use></svg>
-          <svg (click)="toggle(this.pageForm.controls.wep)"  style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.wep.value  ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=1#trait-weapons"></use></svg>
-        </div>
-        <div class="svg-filter" style="float:left">
-          <svg (click)="toggle(this.pageForm.controls.arm)"  style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.arm.value  ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=1#category-38"></use></svg>
-          <svg (click)="toggle(this.pageForm.controls.acc)"  style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.acc.value  ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=1#category-39"></use></svg>
-          <svg (click)="toggle(this.pageForm.controls.exp)"  style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.exp.value  ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=1#gather"></use></svg>
-          <svg (click)="toggle(this.pageForm.controls.syn)"  style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.syn.value  ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=1#trait-synthesis"></use></svg>
-          <svg (click)="toggle(this.pageForm.controls.sta)"  style="margin-right:0.8em;width:2.3em;height:2.3em;fill:{{pageForm.controls.sta.value  ? 'black' : 'gray'}};"><use attr.href="{{imgURL}}spritesheet.svg?v=1#category-40"></use></svg>
-        </div>
+        <filter-buttons svg="A25RW.svg?v=1" style="float:left"
+          [list]="[
+            { ctrl: pageForm.controls.com, icon: 'trait-combat-items' },
+            { ctrl: pageForm.controls.res, icon: 'trait-heal' },
+            { ctrl: pageForm.controls.inh, icon: 'trait-inhibitors' },
+            { ctrl: pageForm.controls.boo, icon: 'trait-boost-items' },
+            { ctrl: pageForm.controls.wep, icon: 'trait-weapons' },
+          ]">
+        </filter-buttons>
+        <filter-buttons svg="A25RW.svg?v=1" style="float:left"
+          [list]="[
+            { ctrl: pageForm.controls.arm, icon: 'category-38' },
+            { ctrl: pageForm.controls.acc, icon: 'category-39' },
+            { ctrl: pageForm.controls.exp, icon: 'gather' },
+            { ctrl: pageForm.controls.syn, icon: 'trait-synthesis' },
+            { ctrl: pageForm.controls.sta, icon: 'category-40' },
+          ]">
+        </filter-buttons>
       </div>
     </form>
   </filter-list>

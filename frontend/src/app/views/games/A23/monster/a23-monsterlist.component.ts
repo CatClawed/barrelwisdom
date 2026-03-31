@@ -1,12 +1,5 @@
-import { Dialog } from '@angular/cdk/dialog';
-import { Location } from '@angular/common';
-import { Component } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { ItemComponent } from '@app/views/_components/item/item.component';
 import { Monster } from '@app/views/games/A23/_services/a23.interface';
@@ -19,25 +12,16 @@ import { A23MonsterComponent } from './a23-monster.component';
 
 @Component({
     templateUrl: 'a23-monsterlist.component.html',
-    providers: [DestroyService],
     imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
         ItemComponent, MatButtonModule]
 })
 
 export class A23MonsterlistComponent extends DialogUseComponent {
+  protected a23service = inject(A23Service);
   filteredMonsters: Observable<Monster[]>;
 
-  constructor(
-    protected cdkDialog: Dialog,
-    protected readonly destroy$: DestroyService,
-    protected router: Router,
-    protected route: ActivatedRoute,
-    protected location: Location,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    private formBuilder: UntypedFormBuilder,
-    protected a23service: A23Service,) {
-    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
+  constructor() {
+    super();
     this.component = A23MonsterComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -52,7 +36,7 @@ export class A23MonsterlistComponent extends DialogUseComponent {
     return this.a23service.getMonsterList(this.language);
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.filteredMonsters = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Monster[]>),
       map((search: any) => search ? this.filterT(search.filtertext, search.type) : this.data.slice())

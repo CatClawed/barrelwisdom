@@ -1,51 +1,36 @@
-import { Dialog } from '@angular/cdk/dialog';
-import { Location } from '@angular/common';
-import { Component } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
+import { Component, inject } from '@angular/core';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { ItemComponent } from '@app/views/_components/item/item.component';
+import { DialogUseComponent } from '@app/views/games/_prototype/dialog-use.component';
+import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { Catalyst } from '@app/views/games/A18/_services/a18.interface';
 import { A18Service } from '@app/views/games/A18/_services/a18.service';
-import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
+import { A18ItemComponent } from '@app/views/games/A18/item/a18-item.component';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { DialogUseComponent } from '../../_prototype/dialog-use.component';
-import { A18ItemComponent } from '../item/a18-item.component';
 
 @Component({
     templateUrl: 'a18-catalystlist.component.html',
-    providers: [DestroyService],
-    imports: [...CommonImports, ...MaterialFormImports, FilterListComponent, ItemComponent]
+    styleUrl: '../a18.scss',
+    imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
+      ItemComponent]
 })
 
 export class A18CatalystlistComponent extends DialogUseComponent {
+  protected a18service = inject(A18Service);
   filteredCatalysts: Observable<Catalyst[]>;
   query: string = null;
   colors = {
-    "white": [`regular fa-circle`, `black`],
-    "yellow": [`solid fa-circle`, `#edc200`],
-    "violet": [`solid fa-circle`, `#ac07bb`],
-    "red": [`solid fa-circle`, `#ae4641`],
-    "blue": [`solid fa-circle`, `#445e7b`],
-    "green": [`solid fa-circle`, `#42b600`],
+    "white": [`fa-empty-circle`, `black`],
+    "yellow": [`fa-circle`, `#edc200`],
+    "violet": [`fa-circle`, `#ac07bb`],
+    "red": [`fa-circle`, `#ae4641`],
+    "blue": [`fa-circle`, `#445e7b`],
+    "green": [`fa-circle`, `#42b600`],
   }
 
-  constructor(
-    protected cdkDialog: Dialog,
-    protected router: Router,
-    protected route: ActivatedRoute,
-    protected location: Location,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    private formBuilder: UntypedFormBuilder,
-    protected a18service: A18Service,
-    protected readonly destroy$: DestroyService,
-  ) {
-    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
+  constructor() {
+    super();
     this.component = A18ItemComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -55,12 +40,13 @@ export class A18CatalystlistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.a18service, 'catalysts');
-    this.genericSettings(`Catalysts`, `The list of catalysts in ${this.gameTitle}.`);
+    this.genericSettings(this.a18service.catalyst_translation[this.language],
+      `The list of catalysts in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a18service.getCatalystList(this.language);
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.filteredCatalysts = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Catalyst[]>),
       map((search: any) => search || this.query ? this.filterT(search ? search.filtertext : "") : this.data.slice())

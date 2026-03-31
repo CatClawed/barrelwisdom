@@ -7,53 +7,25 @@
       (buttonClicked)="openDialog($event)"
       dimension="256">
       <ng-container icon>
-        @if (item.kind == 'attack') {
-          <i class="atelier atelier-np atelier-ryza2-type-attack"></i>
-        }
-        @if (item.kind == 'heal') {
-          <i class="atelier atelier-np atelier-ryza2-type-heal"></i>
-        }
-        @if (item.kind == 'debuffer') {
-          <i class="atelier atelier-np atelier-ryza2-type-debuff"></i>
-        }
-        @if (item.kind == 'buffer') {
-          <i class="atelier atelier-np atelier-ryza2-type-buff"></i>
-        }
-        @if (item.kind == 'weapon') {
-          <i class="atelier atelier-np atelier-ryza2-type-weapon"></i>
-        }
-        @if (item.kind == 'armor') {
-          <i class="atelier atelier-np atelier-ryza2-type-armor"></i>
-        }
-        @if (item.kind == 'accessory') {
-          <i class="atelier atelier-np atelier-ryza2-type-accessory"></i>
-        }
-        @if (item.kind == 'mix') {
-          <i class="atelier atelier-np atelier-ryza2-type-synthesis"></i>
-        }
-        @if (item.kind == 'material') {
-          <i class="atelier atelier-np atelier-ryza2-material"></i>
-        }
-        @if (item.kind == 'field') {
-          <i class="atelier atelier-np atelier-sophie2-type-exploration"></i>
-        }
-        @if (item.kind == 'amulet') {
-          <i class="atelier atelier-np atelier-sophie2-category-talismans"></i>
-        }
-        @if (item.kind == 'important') {
-          <i class="atelier atelier-np atelier-ryza2-category-key-items"></i>
-        }
+        <svg class="svg-icon"><use attr.href="/media/spritesheets/{{itemkinds[item.kind]}}"></use></svg>
         @if (item.isDLC) {
           <br /><span class="badge bg-primary">DLC</span>
         }
       </ng-container>
-      <table class="table-item-data"><tbody>
+      <ul class="two-column" style="padding-left: 0; height: 100%;">
         @for (cat of item.categories; track cat) {
-          <tr>
-            <td style="text-align:center;"><i class="atelier atelier-{{cat.icon}}"></i></td><td>{{cat.name}}</td>
-          </tr>
+          <li style="display: flex;">
+            <svg class="svg-icon"><use attr.href="/media/spritesheets/A23.svg?v=1#category-{{cat.slug}}"></use></svg>
+            {{cat.name}}
+          </li>
         }
-      </tbody></table>
+        @for (cat of item.add; track cat) {
+          <li style="display: flex;">
+            <svg class="svg-icon" style="fill:lightgray"><use attr.href="/media/spritesheets/A23.svg?v=1#category-{{cat.slug}}"></use></svg>
+            {{cat.name}}
+          </li>
+        }
+      </ul>
     </item>
   </ng-template>
   <filter-list
@@ -65,16 +37,16 @@
       <mat-form-field class="grid-8" appearance="outline">
         <mat-label>{{a23service.filter_translation[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtertext">
-        <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
+
       </mat-form-field>
       <mat-form-field class="grid-4" appearance="outline">
         <mat-label>{{a23service.category_translation[language]}}</mat-label>
         <mat-select matNativeControl formControlName="cat" disableOptionCentering="true" class="mat-select-icon">
-          <mat-option value="Any"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"   ></mat-icon>--</mat-option>
+          <mat-option value="--">--</mat-option>
           @if (data) {
             @for (cat of data.categories; track cat) {
-              <mat-option value="{{cat.name}}">
-                <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-{{cat.icon}}"></mat-icon>
+              <mat-option value="{{cat.name}}" class="svg-icon-text-vertical-center">
+                <svg class="svg-icon"><use attr.href="/media/spritesheets/A23.svg?v=1#category-{{cat.slug}}"></use></svg>
                 {{cat.name}}
               </mat-option>
             }
@@ -88,19 +60,19 @@
       <mat-form-field class="grid-4" appearance="outline">
         <mat-label>Type</mat-label>
         <mat-select matNativeControl formControlName="kind" disableOptionCentering="true" class="mat-select-icon">
-          <mat-option value="Any"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"   ></mat-icon>--</mat-option>
-          <mat-option value="attack"     ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-attack"></mat-icon>Attack</mat-option>
-          <mat-option value="heal"       ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-heal"></mat-icon>Heal</mat-option>
-          <mat-option value="debuffer"   ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-debuff"></mat-icon>Debuff</mat-option>
-          <mat-option value="buffer"     ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-buff"></mat-icon>Buff</mat-option>
-          <mat-option value="weapon"     ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-weapon"></mat-icon>Weapon</mat-option>
-          <mat-option value="armor"      ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-armor"></mat-icon>Armor</mat-option>
-          <mat-option value="accessory"  ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-accessory"></mat-icon>Accessory</mat-option>
-          <mat-option value="mix"        ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-type-synthesis"></mat-icon>Synthesis</mat-option>
-          <mat-option value="material"   ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-material"></mat-icon>Material</mat-option>
-          <mat-option value="field"      ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-type-exploration"></mat-icon>Exploration</mat-option>
-          <mat-option value="amulet"     ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-sophie2-category-talismans"></mat-icon>Talisman</mat-option>
-          <mat-option value="important"  ><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-category-key-items"></mat-icon>Key Item</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="--"        ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#book"></use></svg>--</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="attack"     ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#type-attack"></use></svg>Attack</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="heal"       ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#type-heal"></use></svg>Heal</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="debuffer"   ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#type-debuff"></use></svg>Debuff</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="buffer"     ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#type-buff"></use></svg>Buff</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="weapon"     ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#type-weapon"></use></svg>Weapon</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="armor"      ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#type-armor"></use></svg>Armor</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="accessory"  ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#type-accessory"></use></svg>Accessory</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="mix"        ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#type-synthesis"></use></svg>Synthesis</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="material"   ><svg class="svg-icon"><use href="/media/spritesheets/main.svg?v=1#ryza2-material"></use></svg>Material</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="field"      ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#type-exploration"></use></svg>Exploration</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="amulet"     ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#category-talismans"></use></svg>Talisman</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="important"  ><svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#category-key-items"></use></svg>Key Item</mat-option>
         </mat-select>
       </mat-form-field>
     </form>

@@ -26,7 +26,7 @@
     }
   </ul>
   @if (item.ingredient_set) {
-  <b>Ingredients:</b>
+  <b>{{brslservice.ingredient_translation[language]}}</b>
   <ul>
     @for (ing of item.ingredient_set; track ing) {
     <li>
@@ -41,7 +41,7 @@
   </ul>
   }
   @if (item.region_set) {
-  <b>Locations:</b>
+  <b>{{brslservice.location_translation[language]}}</b>
   <ul>
     @for (loc of item.region_set; track loc) {
     <li><a routerLink="/{{gameURL}}/locations/{{loc.slug}}/{{language}}">{{loc.name}}</a></li>
@@ -49,7 +49,7 @@
   </ul>
   }
   @if (item.demon_set) {
-  <b>Demons:</b>
+  <b>{{brslservice.demons_translation[language]}}</b>
   <ul>
     @for (drop of item.demon_set; track drop) {
     <li><a routerLink="/{{gameURL}}/demons/{{drop.slug}}/{{language}}">{{drop.name}}</a></li>
@@ -60,7 +60,7 @@
   <table class="tbl">
     <tbody>
       <tr>
-        <th colspan=2>Effects</th>
+        <th colspan=2>{{brslservice.effect_translation[language]}}</th>
       </tr>
       @for (eline of item.effline_set; track eline) {
       <tr>
@@ -119,15 +119,15 @@
       <tr>
         <th colspan=2 style="position:relative;">Skill Effects
           @if (!expand) {
-          <a href="javascript:void(0)"
-            style="color:black;text-decoration:none;position:absolute;right:1rem;top:50%;transform: translate(-50%,-50%);"
-            (click)="expand=!expand;$event.preventDefault();" class="fas fa-chevron-up"></a>
-          }
-          @if (expand) {
-          <a href="javascript:void(0)"
-            style="color:black;text-decoration:none;position:absolute;right:1rem;top:50%;transform: translate(-50%,-50%);"
-            (click)="expand=!expand;$event.preventDefault();" class="fas fa-chevron-down"></a>
-          }
+              <button  (click)="expand=!expand;$event.preventDefault();" class="chevron-button">
+                <svg><use href="/media/spritesheets/main.svg?v=1#fa-chevron-up"></use></svg>
+              </button>
+            }
+            @else {
+              <button (click)="expand=!expand;$event.preventDefault();" class="chevron-button">
+                <svg><use href="/media/spritesheets/main.svg?v=1#fa-chevron-down"></use></svg>
+              </button>
+            }
         </th>
       </tr>
       @if (expand) {

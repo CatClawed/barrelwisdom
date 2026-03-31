@@ -7,28 +7,30 @@
       (buttonClicked)="openDialog($event)"
       dimension="192">
       <ng-container icon>
-        <b>LV {{item.level}}</b>
+        <b>{{a16service.level_translation[language]}} {{item.level}}</b>
       </ng-container>
       <div style="column-count: 2; padding-top: 0.5rem;">
         <table class="table-item-data"><tbody>
           @for (cat of item.categories; track cat) {
             <tr>
-              <td style="text-align: center;"><i class="atelier atelier-{{cat.icon_name}}"></i></td><td>{{cat.name}}</td>
+              <td style="text-align: center;">
+                <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A16.svg?v=1#{{cat.icon_name}}"></use></svg>
+              </td><td>{{cat.name}}</td>
             </tr>
           }
           </tbody></table>
           <div style="break-inside: avoid-column;">
             @if (item.fire) {
-              <i style="color:#ac504f;"  class="atelier atelier-np atelier-shallie-fire"></i>
+              <svg class="a16-element" style="background-color:#ac504f;"><use href="/media/spritesheets/A16.svg?v=1#element-fire"></use></svg>
             }
             @if (item.water) {
-              <i style="color:#427389;" class="atelier atelier-np atelier-shallie-water"></i>
+              <svg class="a16-element" style="background-color:#427389;"><use href="/media/spritesheets/A16.svg?v=1#element-water"></use></svg>
             }
             @if (item.wind) {
-              <i style="color:#5a843c;"  class="atelier atelier-np atelier-shallie-wind"></i>
+              <svg class="a16-element" style="background-color:#5a843c;"><use href="/media/spritesheets/A16.svg?v=1#element-wind"></use></svg>
             }
             @if (item.earth) {
-              <i style="color:#8f7939;" class="atelier atelier-np atelier-shallie-earth"></i>
+              <svg class="a16-element" style="background-color:#8f7939;"><use href="/media/spritesheets/A16.svg?v=1#element-earth"></use></svg>
             }
             {{item.evalue}}
             @if (item.slots > 0) {
@@ -43,22 +45,22 @@
   </ng-template>
   <filter-list
     [list]="filteredItems"
-    name="Items"
+    [name]="a16service.item_translation[language]"
     [(hide)]="hide"
     [template]="template">
     <form [formGroup]="pageForm" class="grid">
       <mat-form-field class="grid-8" appearance="outline">
-        <mat-label>Filter...</mat-label>
+        <mat-label>{{a16service.filter_translation[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtertext">
       </mat-form-field>
       <mat-form-field class="grid-4" appearance="outline">
-        <mat-label>Category</mat-label>
-        <mat-select matNativeControl formControlName="type" disableOptionCentering="true" class="mat-select-icon">
-          <mat-option value="Any"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"   ></mat-icon> Any</mat-option>
+        <mat-label>{{a16service.category_translation[language]}}</mat-label>
+        <mat-select matNativeControl formControlName="type">
+          <mat-option class="svg-icon-text-vertical-center" value="--">--</mat-option>
           @if (data) {
             @for (cat of data.categories; track cat) {
-              <mat-option value="{{cat.name}}">
-                <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-{{cat.icon_name}}"></mat-icon>
+              <mat-option class="svg-icon-text-vertical-center" value="{{cat.name}}">
+                <svg class="svg-icon"><use attr.href="/media/spritesheets/A16.svg?v=1#{{cat.icon_name}}"></use></svg>
                 {{cat.name}}
               </mat-option>
             }
@@ -66,23 +68,21 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field class="grid-5" appearance="outline">
-        <mat-label>Has ingredient...</mat-label>
+        <mat-label>{{a16service.ingredient_translation[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtering">
       </mat-form-field>
+      <filter-buttons svg="A16.svg?v=1" class="grid-4"
+          [list]="[
+          { ctrl: pageForm.controls.fire,   icon: 'element-fire' },
+          { ctrl: pageForm.controls.water,  icon: 'element-water' },
+          { ctrl: pageForm.controls.wind ,  icon: 'element-wind' },
+          { ctrl: pageForm.controls.earth,  icon: 'element-earth' },
+        ]">
+      </filter-buttons>
       <mat-form-field class="grid-3" appearance="outline">
-        <mat-label>Element</mat-label>
-        <mat-select matNativeControl formControlName="element" disableOptionCentering="true" class="mat-select-icon">
-          <mat-option value="Any">Any</mat-option>
-          <mat-option value="Fire"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-shallie-fire"></mat-icon>Fire</mat-option>
-          <mat-option value="Water"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-shallie-water"></mat-icon>Water</mat-option>
-          <mat-option value="Wind"> <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-shallie-wind"></mat-icon>Wind</mat-option>
-          <mat-option value="Earth"><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-shallie-earth"></mat-icon>Earth</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field class="grid-4" appearance="outline">
         <mat-label>Element Value</mat-label>
-        <mat-select matNativeControl formControlName="elementval" disableOptionCentering="true" class="mat-select-icon">
-          <mat-option value="0" type="number">Any</mat-option>
+        <mat-select matNativeControl formControlName="elementval">
+          <mat-option value="0" type="number">0+</mat-option>
           <mat-option value="20" type="number">20+</mat-option>
           <mat-option value="30" type="number">30+</mat-option>
           <mat-option value="40" type="number">40+</mat-option>

@@ -1,69 +1,51 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
+import { ChangeDetectorRef, Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { of } from 'rxjs';
-import { catchError, switchMap, takeUntil } from 'rxjs/operators';
+import { catchError, switchMap, tap } from 'rxjs/operators';
 import { DataComponent } from './data.component';
 
-@Component({
-    template: '',
-    providers: [DestroyService],
-    standalone: false
-})
-
+@Component({ template: '' })
 export abstract class SingleComponent extends DataComponent {
-    colset: string;
+  protected cdr = inject(ChangeDetectorRef)
+  colset: string;
+  small: boolean = false;
+  @Input() inputSlug: string;
+  @Input() showNav: boolean = true
+  @Input() inputLang?: string;
+  @Input() url: string;
+  @Output() buttonClicked = new EventEmitter<string>();
 
-    @Input()
-    inputSlug: string;
+  constructor() {
+    super()
+    this.slug = this.inputSlug ? this.inputSlug : this.route.snapshot.params.subject;
+    this.data = this.inputData ? this.inputData : undefined;
+    if (this.showNav) this.colset = "grid-9 mx-auto ";
+  }
 
-    @Input()
-    showNav: boolean = true
-
-    @Input()
-    inputLang?: string;
-
-    @Input()
-    url: string;
-
-    small: boolean = false;
-
-    @Output()
-    buttonClicked = new EventEmitter<string>();
-
-    constructor(
-        protected readonly destroy$: DestroyService,
-        protected route: ActivatedRoute,
-        protected breadcrumbService: BreadcrumbService,
-        protected seoService: SeoService) {
-        super(destroy$, route, breadcrumbService, seoService)
-        this.slug = this.inputSlug ? this.inputSlug : this.route.snapshot.params.subject;
-        this.data = this.inputData ? this.inputData : undefined;
-        if (this.showNav) this.colset = "grid-9 mx-auto ";
-    }
-
-    paramWatch(): void {
-        this.route.paramMap
-        .pipe(
-            switchMap(params => {
-                this.language = this.inputLang ? this.inputLang : params.get('language');
-                this.slug = this.inputSlug ? this.inputSlug : params.get('subject');
-                return this.changeData()
-            }),
-            catchError(error => {
-                this.error = this.breadcrumbService.setStatus(error.status);
-                return of(undefined);
-            }),
-            takeUntil(this.destroy$)
-        )
-        .subscribe(data => {
-            this.data = data;
-            if (this.data) {
-                this.error = this.breadcrumbService.setStatus(200);
-                this.afterAssignment();
-            }
-        })
-    }
+  paramWatch(): void {
+    this.route.paramMap
+      .pipe(
+        switchMap(params => {
+          this.language = this.inputLang ? this.inputLang : params.get('language');
+          this.slug = this.inputSlug ? this.inputSlug : params.get('subject');
+          return this.changeData().pipe(
+            tap(() => {
+              if (this.inputSlug) this.cdr.markForCheck();
+            })
+          )
+        }),
+        catchError(error => {
+          this.error = this.breadcrumbService.setStatus(error.status);
+          return of(undefined);
+        }),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe(data => {
+        this.data = data;
+        if (this.data) {
+          this.error = this.breadcrumbService.setStatus(200);
+          this.afterAssignment();
+        }
+      })
+  }
 }

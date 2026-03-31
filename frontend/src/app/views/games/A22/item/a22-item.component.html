@@ -3,7 +3,7 @@
     <h4 class="card-title card-icon-space">{{item.name}}</h4>
     <div class="card-icon-position">
       <b style="padding-right:0.5em;">LV {{item.level}}</b>
-      <i class="atelier atelier-np atelier-ryza2-{{icons[item.itemtype]}}"></i>
+      <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A22.svg?v=1#{{icons[item.itemtype]}}"></use></svg>
       @if (item.isDLC) {
         <br />
         <span class="btn btn-ryza2 bg-primary">DLC</span>
@@ -16,25 +16,26 @@
         <p><b>Note:</b> {{item.note}}</p>
       }
       <div class="two-column">
-        <table class="table-item-data col"><tbody>
+        <ul style="padding-left: 0;">
           @for (cat of item.category; track cat) {
-            <tr>
-              <td style="text-align: center;"><i class="atelier atelier-ryza2-category-{{cat.slug}}"></i></td><td><a routerLink="/{{gameURL}}/categories/{{cat.slug}}">{{cat.name}}</a></td>
-            </tr>
+            <li style="display: flex;">
+              <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A22.svg?v=1#category-{{cat.slug}}"></use></svg>
+              <a routerLink="/{{gameURL}}/categories/{{cat.slug}}">{{cat.name}}</a>
+            </li>
           }
-        </tbody></table>
-        <div style="break-inside: avoid-column;">
-          <i [style]="item.fire      ? 'color:#f03a02;' : 'color:lightgrey'" class="atelier atelier-np atelier-ryza2-fire"></i>
-              <i [style]="item.ice       ? 'color:#04b5db;' : 'color:lightgrey'" class="atelier atelier-np atelier-ryza2-ice"></i>
-              <i [style]="item.lightning ? 'color:#e3bb05;' : 'color:lightgrey'" class="atelier atelier-np atelier-ryza2-lightning"></i>
-              <i [style]="item.wind      ? 'color:#589b1d;' : 'color:lightgrey'" class="atelier atelier-np atelier-ryza2-wind"></i>
-              @if (item.fire || item.wind || item.ice || item.lightning) {
-                {{item.elementvalue}}
-              }
+        </ul>
+        <div>
+          <svg class="a22-element-icon" [style]="item.fire      ? 'fill:#f03a02;' : 'fill:lightgrey'"><use href="/media/spritesheets/A22.svg?v=1#fire"></use></svg>
+          <svg class="a22-element-icon" [style]="item.ice       ? 'fill:#04b5db;' : 'fill:lightgrey'"><use href="/media/spritesheets/A22.svg?v=1#ice"></use></svg>
+          <svg class="a22-element-icon" [style]="item.lightning ? 'fill:#e3bb05;' : 'fill:lightgrey'"><use href="/media/spritesheets/A22.svg?v=1#lightning"></use></svg>
+          <svg class="a22-element-icon" [style]="item.wind      ? 'fill:#589b1d;' : 'fill:lightgrey'"><use href="/media/spritesheets/A22.svg?v=1#wind"></use></svg>
+          @if (item.fire || item.wind || item.ice || item.lightning) {
+            {{item.elementvalue}}
+          }
         </div>
       </div>
       @if (item.shop) {
-        <p><i class="atelier atelier-ryza2-shop"></i><b>Shop:</b> {{item.shop.name}}</p>
+        <p><svg class="svg-icon" style="vertical-align:middle;"><use href="/media/spritesheets/A22.svg?v=1#shop"></use></svg><b>{{a22service.shop_translation[language]}}:</b> {{item.shop.name}}</p>
       }
       @if (item.location) {
         <b>{{a22service.location_translation[language]}}</b>
@@ -53,7 +54,7 @@
         </div>
       }
       @if (item.monster_set) {
-        <b >{{a22service.monster_translation[language]}}</b>
+        <b>{{a22service.monster_translation[language]}}</b>
       }
       @if (item.monster_set) {
         <div style="column-count: 2;">
@@ -147,37 +148,19 @@
                   @if (ing.category) {
                     <a routerLink="/{{gameURL}}/categories/{{ing.category.slug}}/{{language}}">{{ing.category.name}}</a>
                     }<br />
-                    @if (ing.fire) {
-                      <i style="color:#f03a02;" class="atelier atelier-np atelier-ryza2-fire"></i>
-                    }
-                    @if (ing.ice) {
-                      <i style="color:#04b5db;" class="atelier atelier-np atelier-ryza2-ice"></i>
-                    }
-                    @if (ing.lightning) {
-                      <i style="color:#e3bb05;" class="atelier atelier-np atelier-ryza2-lightning"></i>
-                    }
-                    @if (ing.wind) {
-                      <i style="color:#589b1d;" class="atelier atelier-np atelier-ryza2-wind"></i>
-                    }
+                    @if (ing.fire     ) { <svg class="a22-element-icon" style="fill:#f03a02;"><use href="/media/spritesheets/A22.svg?v=1#fire"></use></svg> }
+                    @if (ing.ice      ) { <svg class="a22-element-icon" style="fill:#04b5db;"><use href="/media/spritesheets/A22.svg?v=1#ice"></use></svg> }
+                    @if (ing.lightning) { <svg class="a22-element-icon" style="fill:#e3bb05;"><use href="/media/spritesheets/A22.svg?v=1#lightning"></use></svg> }
+                    @if (ing.wind     ) { <svg class="a22-element-icon" style="fill:#589b1d;"><use href="/media/spritesheets/A22.svg?v=1#wind"></use></svg> }
                   </td>
                   <td>
                     @for (i of ing.ingeffects_set; track i) {
                       <ng-template #effPopover>
-                        @if (ing.fire) {
-                          <i style="color:#f03a02;" class="atelier atelier-ryza2-fire"     ></i> x {{i.value}}
-                        }
-                        @if (ing.ice) {
-                          <i style="color:#04b5db;" class="atelier atelier-ryza2-ice"      ></i> x {{i.value}}
-                        }
-                        @if (ing.lightning) {
-                          <i style="color:#e3bb05;" class="atelier atelier-ryza2-lightning"></i> x {{i.value}}
-                        }
-                        @if (ing.wind) {
-                          <i style="color:#589b1d;" class="atelier atelier-ryza2-wind"     ></i> x {{i.value}}
-                        }
-                        @if (i.essence) {
-                          <br /><i class="atelier atelier-ryza2-category-essence"></i> Essence Required
-                        }
+                        @if (ing.fire     ) { <div style="display: flex;"><svg class="svg-icon-standard right-spacer" style="fill:#f03a02;"><use href="/media/spritesheets/A22.svg?v=1#fire"></use></svg> x {{i.value}}</div> }
+                        @if (ing.ice      ) { <div style="display: flex;"><svg class="svg-icon-standard right-spacer" style="fill:#04b5db;"><use href="/media/spritesheets/A22.svg?v=1#ice"></use></svg> x {{i.value}}</div> }
+                        @if (ing.lightning) { <div style="display: flex;"><svg class="svg-icon-standard right-spacer" style="fill:#e3bb05;"><use href="/media/spritesheets/A22.svg?v=1#lightning"></use></svg> x {{i.value}}</div> }
+                        @if (ing.wind     ) { <div style="display: flex;"><svg class="svg-icon-standard right-spacer" style="fill:#589b1d;"><use href="/media/spritesheets/A22.svg?v=1#wind"></use></svg> x {{i.value}}</div> }
+                        @if (i.essence    ) { <div style="display: flex;"><svg class="svg-icon-standard right-spacer" style="fill:black;" ><use href="/media/spritesheets/A22.svg?v=1#category-essence"></use></svg> Essence Required</div> }
                       </ng-template>
                       @if (i.noneffect && !i.essence) {
                         <popover [template]="effPopover" display="inline-block" name="Synth Data" cls="btn btn-ryza2 bg-secondary">{{i.noneffect}}</popover>

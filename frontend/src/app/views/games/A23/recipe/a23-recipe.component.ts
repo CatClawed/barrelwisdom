@@ -1,10 +1,6 @@
 import { Location, NgTemplateOutlet } from '@angular/common';
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { DestroyService } from '@app/services/destroy.service';
+import { Component, inject } from '@angular/core';
 import { HistoryService } from '@app/services/history.service';
-import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { Popover } from '@app/views/_components/popover/popover.component';
 import { RecipeIdea } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
@@ -13,10 +9,12 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
 
 @Component({
     templateUrl: 'a23-recipe.component.html',
-    providers: [DestroyService],
     imports: [...CommonImports, Popover, NgTemplateOutlet]
 })
 export class A23RecipeComponent extends SingleComponent {
+  protected a23service = inject(A23Service);
+  protected location = inject(Location);
+  protected historyService = inject(HistoryService);
   sophie_num: number = 28;
   plachta_num: number = 53;
   shared_num: number = 75;
@@ -28,16 +26,8 @@ export class A23RecipeComponent extends SingleComponent {
   ctx: RecipeIdea;
   fixit;
 
-  constructor(
-    protected route: ActivatedRoute,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    protected a23service: A23Service,
-    protected readonly destroy$: DestroyService,
-    private location: Location,
-    public historyService: HistoryService,
-  ) {
-    super(destroy$, route, breadcrumbService, seoService);
+  constructor() {
+    super();
     switch (this.route.snapshot.queryParamMap.get('tab')) {
       case 'sophie':
         this.sophie = true;
@@ -62,7 +52,7 @@ export class A23RecipeComponent extends SingleComponent {
     return this.a23service.getRecipeList(this.language);
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.fixit = [];
     let col = 1
     for (let i = 0; i < this.data.length;) {

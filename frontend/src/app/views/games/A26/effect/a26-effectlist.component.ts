@@ -1,11 +1,4 @@
-import { Dialog } from '@angular/cdk/dialog';
-import { Location } from '@angular/common';
-import { Component } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
+import { Component, inject } from '@angular/core';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Effect } from '@app/views/games/A26/_services/a26.interface';
 import { A26Service } from '@app/views/games/A26/_services/a26.service';
@@ -17,26 +10,16 @@ import { A26EffectComponent } from './a26-effect.component';
 
 @Component({
     templateUrl: 'a26-effectlist.component.html',
-    providers: [DestroyService],
     imports: [...CommonImports, ...MaterialFormImports,
         A26EffectComponent, FilterListComponent]
 })
 
 export class A26EffectlistComponent extends DialogUseComponent {
+  protected a26service = inject(A26Service);
   filteredEffects: Observable<Effect[]>;
 
-  constructor(
-    protected cdkDialog: Dialog,
-    protected readonly destroy$: DestroyService,
-    protected router: Router,
-    protected route: ActivatedRoute,
-    protected location: Location,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    private formBuilder: UntypedFormBuilder,
-    protected a26service: A26Service,
-  ) {
-    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
+  constructor() {
+    super()
     this.component = A26EffectComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -50,7 +33,7 @@ export class A26EffectlistComponent extends DialogUseComponent {
     return this.a26service.getEffectList(this.language);
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.filteredEffects = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Effect[]>),
       map((search: any) => search ? this.filterT(search.filtertext) : this.data.slice())

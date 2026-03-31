@@ -1,10 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
-import { Tooltip } from '@app/views/_components/tooltip/tooltip.component';
+import { Component, inject } from '@angular/core';
+import { Popover } from '@app/views/_components/popover/popover.component';
 import { A15Service } from '@app/views/games/A15/_services/a15.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
@@ -12,26 +8,18 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
 @Component({
     templateUrl: 'a15-property.component.html',
     selector: 'a15-property',
-    providers: [DestroyService],
-    imports: [...CommonImports, Tooltip, NgTemplateOutlet]
+    imports: [...CommonImports, Popover, NgTemplateOutlet]
 })
 export class A15PropertyComponent extends SingleComponent {
-  constructor(
-    protected route: ActivatedRoute,
-    protected readonly destroy$: DestroyService,
-    protected a15service: A15Service,
-    protected breadcrumbService: BreadcrumbService,
-    protected seoService: SeoService) {
-    super(destroy$, route, breadcrumbService, seoService);
-  }
+  protected a15service = inject(A15Service);
 
   changeData() {
     this.gameService(this.a15service, 'properties');
     return this.a15service.getProperty(this.slug, this.language);
   }
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.genericSettings(this.data.name, this.data.desc,
-      'Properties',
+      this.a15service.properties_translation[this.language],
       false,
       this.inputSlug ? false : true);
   }

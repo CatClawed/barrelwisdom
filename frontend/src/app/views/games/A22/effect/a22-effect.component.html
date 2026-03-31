@@ -6,19 +6,19 @@
   (buttonClicked)="buttonClicked.emit($event)">
   <ng-container icon>
     @if (efftype == 'Normal' && !effect.effsub) {
-    <i class="atelier atelier-np atelier-ryza2-type-synthesis"></i>
+      <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=1#type-synthesis"></use></svg>
     }
     @if (effect.effsub == 'Material') {
-    <i class="atelier atelier-np atelier-ryza2-material"></i>
+      <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=1#material"></use></svg>
     }
     @if (efftype != 'Normal') {
-    <i class="atelier atelier-ryza2-type-{{effect.effsub.toLowerCase()}}"></i>
+      <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A22.svg?v=1#type-{{effect.effsub.toLowerCase()}}"></use></svg>
     }
     @if (efftype == 'EV') {
-    <span class="badge bg-primary">EV</span>
+      <span class="badge bg-primary">EV</span>
     }
     @if (efftype == 'Forge') {
-    <i class="atelier atelier-np atelier-ryza2-forge"></i>
+      <svg class="svg-icon-standard"><use href="/media/spritesheets/A22.svg?v=1#forge"></use></svg>
     }
   </ng-container>
   @if (efftype == 'EV' && !hideContents) {
@@ -28,7 +28,7 @@
   <ul [style]="hideContents ? 'float:left;margin-bottom:0;' : null">
     @for (e of effect.effects; track e) {
     <li>
-      <tooltip [tip]="e.desc">{{e.name}}</tooltip>
+      <popover [text]="e.desc">{{e.name}}</popover>
     </li>
     }
   </ul>

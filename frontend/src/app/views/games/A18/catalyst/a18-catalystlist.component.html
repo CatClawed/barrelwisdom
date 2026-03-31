@@ -9,38 +9,36 @@
       <ng-container icon>
         {{cat.size}} x {{cat.size}}
       </ng-container>
-      <table class="table-item-data"><tbody>
+      <ul class="a18-item-data">
         @for (c of cat.item.categories; track c) {
-          <tr>
-            <td style="text-align:center;padding-right: 0.4em;"><i class="atelier atelier-np atelier-{{c.icon}}"></i></td><td>{{c.name}}</td>
-          </tr>
+          <li>
+            <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=1#category-{{c.slug}}"></use></svg>
+            {{c.name}}
+          </li>
         }
         @for (c of cat.item.add; track c) {
-          <tr>
-            <td style="text-align:center;padding-right: 0.4em;"><i style="color:lightgray;" class="atelier atelier-np atelier-{{c.icon}}"></i></td><td>{{c.name}}</td>
-          </tr>
+          <li>
+            <svg style="fill:lightgray;" class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=1#category-{{c.slug}}"></use></svg>
+            {{c.name}}
+          </li>
         }
         @for (j of [].constructor(cat.color.length); track j; let i = $index) {
-          <tr>
-            <td style="text-align: center; padding-right: 0.4em;">
-              <i class="fa-{{colors[cat.color[i]][0]}}" style="color:{{colors[cat.color[i]][1]}}"></i>
-            </td>
-            <td>
-              {{cat.action[i]}}
-            </td>
-          </tr>
+          <li>
+            <svg style="fill:{{colors[cat.color[i]][1]}}" class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=1#{{colors[cat.color[i]][0]}}"></use></svg>
+            {{cat.action[i]}}
+          </li>
         }
-      </tbody></table>
+      </ul>
     </item>
   </ng-template>
   <filter-list
     [list]="filteredCatalysts"
-    name="Catalysts"
+    name="{{a18service.catalyst_translation[language]}}"
     [(hide)]="hide"
     [template]="template">
     <form [formGroup]="pageForm" class="grid">
       <mat-form-field class="grid-12" appearance="outline">
-        <mat-label>Filter...</mat-label>
+        <mat-label>{{a18service.filter_translation[language]}}</mat-label>
         <input matInput formControlName="filtertext">
       </mat-form-field>
     </form>

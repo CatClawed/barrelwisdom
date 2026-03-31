@@ -1,5 +1,4 @@
 import os, sys
-from django.core.exceptions import ImproperlyConfigured
 from datetime import timedelta
 from pathlib import Path
 
@@ -178,9 +177,9 @@ SECRET_KEY = os.environ['SECRET_KEY']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'barrelwisdom',
-        'USER': os.environ['DB_USER'],
-        'PASSWORD': os.environ['DB_PASSWORD'],
+        'NAME': os.environ['POSTGRES_DB'],
+        'USER': os.environ['POSTGRES_USER'],
+        'PASSWORD': os.environ['POSTGRES_PASSWORD'],
         'HOST': 'postgres',
     },
 }
@@ -240,7 +239,7 @@ JWT_AUTH_REFRESH_COOKIE = 'bw-refresh'
 
 CACHES = {
     "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": "redis://redis:6379",
+        "BACKEND": "django_valkey.cache.ValkeyCache",
+        "LOCATION": "valkey://valkey:6379",
     }
 }

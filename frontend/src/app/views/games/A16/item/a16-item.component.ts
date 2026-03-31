@@ -1,8 +1,4 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { Component, inject } from '@angular/core';
 import { A16Service } from '@app/views/games/A16/_services/a16.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
@@ -10,28 +6,20 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
 @Component({
     templateUrl: 'a16-item.component.html',
     selector: 'a16-item',
-    styleUrls: ['../../_scss/dusk.scss'],
-    providers: [DestroyService],
+    styleUrl: '../a16.scss',
     imports: [...CommonImports]
 })
 export class A16ItemComponent extends SingleComponent {
-  constructor(
-    protected route: ActivatedRoute,
-    protected readonly destroy$: DestroyService,
-    protected a16service: A16Service,
-    protected breadcrumbService: BreadcrumbService,
-    protected seoService: SeoService) {
-    super(destroy$, route, breadcrumbService, seoService);
-  }
+  protected a16service = inject(A16Service);
 
   changeData() {
     this.gameService(this.a16service, 'items');
     return this.a16service.getItem(this.slug, this.language);
   }
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.seoImage = `${this.imgURL}${this.section}/${this.data.slug}.webp`
     this.genericSettings(this.data.name, this.data.desc,
-      'Items',
+      this.a16service.item_translation[this.language],
       false,
       this.inputSlug ? false : true);
   }

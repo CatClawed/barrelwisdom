@@ -14,34 +14,38 @@
           <span class="badge bg-primary">DX</span>
         }
       </ng-container>
-      <table class="table-item-data"><tbody>
+      <ul class="two-column category-list">
         @for (cat of item.categories; track cat) {
-          <tr>
-            <td style="text-align:center;"><i class="atelier atelier-{{cat.icon}}"></i></td><td>{{cat.name}}</td>
-          </tr>
+          <li>
+            <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=1#category-{{cat.slug}}"></use></svg>
+            {{cat.name}}
+          </li>
         }
-      </tbody></table>
+      </ul>
     </item>
   </ng-template>
   <filter-list
     [list]="filteredItems"
-    name="Items"
+    name="{{a18service.item_translation[language]}}"
     [(hide)]="hide"
     [template]="template">
     <form [formGroup]="pageForm" class="grid">
       <mat-form-field class="grid-8" appearance="outline">
-        <mat-label>Filter...</mat-label>
+        <mat-label>{{a18service.filter_translation[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtertext">
-        <mat-icon matSuffix fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book">&nbsp;</mat-icon>
+
       </mat-form-field>
       <mat-form-field class="grid-4" appearance="outline">
-        <mat-label>Category</mat-label>
+        <mat-label>{{a18service.category_translation[language]}}</mat-label>
         <mat-select matNativeControl formControlName="cat" disableOptionCentering="true" class="mat-select-icon">
-          <mat-option value="Any" selected><mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-ryza2-book"   ></mat-icon> Any</mat-option>
+          <mat-option class="svg-icon-text-vertical-center" value="--" selected>
+            <svg class="svg-icon"><use href="/media/spritesheets/A18.svg?v=1#book"></use></svg>
+            --
+          </mat-option>
           @if (data) {
             @for (cat of data.categories; track cat) {
-              <mat-option value="{{cat.name}}">
-                <mat-icon fontSet="atelier atelier-sm" fontIcon="atelier-{{cat.icon}}"></mat-icon>
+              <mat-option class="svg-icon-text-vertical-center" value="{{cat.name}}">
+                <svg class="svg-icon"><use attr.href="/media/spritesheets/A18.svg?v=1#category-{{cat.slug}}"></use></svg>
                 {{cat.name}}
               </mat-option>
             }
@@ -49,7 +53,7 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field class="grid-5" appearance="outline">
-        <mat-label>Has ingredient...</mat-label>
+        <mat-label>{{a18service.ingredient_translation[language]}}</mat-label>
         <input style="height: 100%;" matInput formControlName="filtering">
       </mat-form-field>
     </form>

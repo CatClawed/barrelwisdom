@@ -1,22 +1,23 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { DestroyService } from '@app/services/destroy.service';
+import { NgTemplateOutlet } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { HistoryService } from '@app/services/history.service';
-import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
 import { Popover } from '@app/views/_components/popover/popover.component';
 import { EffectData, EffectLine } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
+import { itemkinds } from '@app/views/games/A23/a23-map-svg';
 
 @Component({
     templateUrl: 'a23-item.component.html',
     selector: 'a23-item',
-    providers: [DestroyService],
-    imports: [...CommonImports, Popover]
+    styleUrl: '../a23.scss',
+    imports: [...CommonImports, Popover, NgTemplateOutlet]
 })
 export class A23ItemComponent extends SingleComponent {
+  protected a23service = inject(A23Service);
+  protected historyService = inject(HistoryService);
+  itemkinds = itemkinds;
   colors = {
     1: "39b4f6",
     2: "34d80d",
@@ -32,22 +33,12 @@ export class A23ItemComponent extends SingleComponent {
     5: "light"
   }
 
-  constructor(
-    protected route: ActivatedRoute,
-    protected readonly destroy$: DestroyService,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    protected a23service: A23Service,
-    public historyService: HistoryService) {
-    super(destroy$, route, breadcrumbService, seoService);
-  }
-
   changeData() {
     this.gameService(this.a23service, 'items');
     return this.a23service.getItem(this.slug, this.language);
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     let name = (this.language === 'en') ? this.data.name.normalize('NFD').replace(/[\u0300-\u036f]/g, "") : this.data.name;
     this.seoImage = `${this.imgURL}${this.section}/${this.data.slug}.webp`
     this.genericSettings(name, this.data.desc1,

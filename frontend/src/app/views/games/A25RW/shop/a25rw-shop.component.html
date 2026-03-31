@@ -3,7 +3,6 @@
 }
 @if (data; as shops) {
   <div class="table-of-contents">
-    <b>Table of Contents</b>
     <ol>
       @for (shop of shops; track shop) {
         <li>
@@ -35,10 +34,10 @@
               <ul>
                 <li>Cole: {{slot.price}}</li>
                 @if (slot.level_min) {
-                  <li>Level: {{slot.level_min}} - {{slot.level_max}}</li>
+                  <li>{{a25rwservice.level_translation[language]}}: {{slot.level_min}} - {{slot.level_max}}</li>
                 }
                 @if (slot.grade) {
-                  <li>Grade: {{slot.grade}}</li>
+                  <li>{{a25rwservice.trait_translation[language]}} {{a25rwservice.level_translation[language]}}: {{slot.grade}}</li>
                 }
               </ul>
             </li>

@@ -1,8 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { Popover } from '@app/views/_components/popover/popover.component';
 import { A22Service } from '@app/views/games/A22/_services/a22.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -12,20 +8,11 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
     templateUrl: 'a22-item.component.html',
     selector: 'a22-item',
     encapsulation: ViewEncapsulation.None,
-    styles: [
-        `.btn-ryza2 {
-      display: inline-flex;
-      max-width: 100%;
-      margin-top: 0.3rem;
-      margin-left: 0.3rem;
-      text-decoration: none !important;
-      font-size: 1rem;
-    }`
-    ],
-    providers: [DestroyService],
+    styleUrl: '../a22.scss',
     imports: [...CommonImports, Popover]
 })
 export class A22ItemComponent extends SingleComponent {
+  protected a22service = inject(A22Service);
   default: any[] = [];
   eff1: any[] = [];
   eff2: any[] = [];
@@ -47,21 +34,12 @@ export class A22ItemComponent extends SingleComponent {
     "Field":     'category-tools'
   }
 
-  constructor(
-    protected route: ActivatedRoute,
-    protected readonly destroy$: DestroyService,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    protected a22service: A22Service) {
-    super(destroy$, route, breadcrumbService, seoService);
-  }
-
   changeData() {
     this.gameService(this.a22service, 'items');
     return this.a22service.getItem(this.slug, this.language);
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.default = [];
     this.eff1 = [];
     this.eff2 = [];

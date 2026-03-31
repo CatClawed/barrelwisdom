@@ -1,11 +1,4 @@
-import { Dialog } from '@angular/cdk/dialog';
-import { Location } from '@angular/common';
-import { Component } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
+import { Component, inject } from '@angular/core';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Book } from '@app/views/games/A12/_services/a12.interface';
 import { A12Service } from '@app/views/games/A12/_services/a12.service';
@@ -17,25 +10,16 @@ import { A12BookComponent } from './a12-book.component';
 
 @Component({
     templateUrl: 'a12-booklist.component.html',
-    providers: [DestroyService],
     imports: [...CommonImports, ...MaterialFormImports,
         A12BookComponent, FilterListComponent]
 })
 
 export class A12BooklistComponent extends DialogUseComponent {
+  protected a12service = inject(A12Service);
   filteredBooks: Observable<Book[]>;
 
-  constructor(
-    protected readonly destroy$: DestroyService,
-    protected router: Router,
-    protected route: ActivatedRoute,
-    protected location: Location,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    protected cdkDialog: Dialog,
-    private formBuilder: UntypedFormBuilder,
-    protected a12service: A12Service) {
-    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
+  constructor() {
+    super();
     this.component = A12BookComponent
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -44,12 +28,13 @@ export class A12BooklistComponent extends DialogUseComponent {
 
   changeData() {
     this.gameService(this.a12service, 'recipe-books');
-    this.genericSettings(`Recipe Books`, `The list of recipe books in ${this.gameTitle}.`);
+    this.genericSettings(this.a12service.recipebook_translation[this.language],
+      `The list of recipe books in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a12service.getBookList(this.language);
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.filteredBooks = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Book[]>),
       map((search: any) => search ? this.filterT(search.filtertext) : this.data.slice())

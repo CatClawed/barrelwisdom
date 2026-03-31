@@ -1,11 +1,4 @@
-import { Dialog } from '@angular/cdk/dialog';
-import { Location } from '@angular/common';
-import { Component } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
+import { Component, inject } from '@angular/core';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Demon } from '@app/views/games/BR1/_services/br1.interface';
 import { BR1Service } from '@app/views/games/BR1/_services/br1.service';
@@ -17,25 +10,15 @@ import { BR1DemonComponent } from './br1-demon.component';
 
 @Component({
     templateUrl: 'br1-demonlist.component.html',
-    providers: [DestroyService],
     imports: [...CommonImports, ...MaterialFormImports, BR1DemonComponent, FilterListComponent]
 })
 
 export class BR1DemonlistComponent extends DialogUseComponent {
+  protected br1service = inject(BR1Service);
   filteredDemons: Observable<Demon[]>;
 
-  constructor(
-    protected cdkDialog: Dialog,
-    protected readonly destroy$: DestroyService,
-    protected router: Router,
-    protected route: ActivatedRoute,
-    protected location: Location,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    private formBuilder: UntypedFormBuilder,
-    private br1service: BR1Service,
-  ) {
-    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
+  constructor() {
+    super();
     this.component = BR1DemonComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: ''
@@ -48,7 +31,7 @@ export class BR1DemonlistComponent extends DialogUseComponent {
     return this.br1service.getDemonList(this.language);
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.filteredDemons = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Demon[]>),
       map((search: any) => search ? this.filterT(search.filtertext) : this.data.slice())

@@ -1,0 +1,15 @@
+@use 'material';
+@use 'specific/badge';
+@use 'specific/breadcrumb';
+@use 'specific/card';
+@use 'specific/grid';
+@use 'specific/navigation';
+@use 'specific/material-fix';
+@use 'custom';
+@use 'specific/table';
+@use 'specific/tag';
+@use 'specific/svg';
+
+html {
+  scroll-behavior: auto !important;
+}

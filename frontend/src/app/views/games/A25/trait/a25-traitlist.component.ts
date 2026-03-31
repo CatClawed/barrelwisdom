@@ -1,11 +1,4 @@
-import { Dialog } from '@angular/cdk/dialog';
-import { Location } from '@angular/common';
-import { Component } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
+import { Component, inject } from '@angular/core';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Trait } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
@@ -19,27 +12,18 @@ import { A25TraitComponent } from './a25-trait.component';
 
 @Component({
     templateUrl: 'a25-traitlist.component.html',
-    providers: [DestroyService],
     imports: [...CommonImports, ...MaterialFormImports,
         A25TraitComponent, FilterListComponent]
 })
 
 export class A25TraitlistComponent extends DialogUseComponent {
+  protected a25service = inject(A25Service);
   filteredTraits: Observable<Trait[]>;
   c2;
   c3;
 
-  constructor(
-    protected cdkDialog: Dialog,
-    protected readonly destroy$: DestroyService,
-    protected router: Router,
-    protected route: ActivatedRoute,
-    protected location: Location,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    private formBuilder: UntypedFormBuilder,
-    protected a25service: A25Service,) {
-    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
+  constructor() {
+    super();
     this.component = A25TraitComponent;
     this.c2 = A25CharaComponent;
     this.c3 = A25ItemComponent;
@@ -59,14 +43,14 @@ export class A25TraitlistComponent extends DialogUseComponent {
     })
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.filteredTraits = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Trait[]>),
       map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.data.traits.slice())
     );
   }
 
-  extraSettings(): void {
+  override extraSettings(): void {
     this.dialogref.componentInstance.itemkind = 'materials'
   }
 

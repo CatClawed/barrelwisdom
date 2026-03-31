@@ -14,6 +14,9 @@ export class ErrorCodeService {
         else if("non_field_errors" in error.error) {
           return error.error['non_field_errors'];
         }
+        else if("code" in error.error) {
+          return error.error['code'];
+        }
         else if(error.status == 400) {
           let problem = "";
           for(let e of Object.values(error.error)) {

@@ -17,7 +17,7 @@
     </tbody></table>
     @if (facility.facilityeffline_set) {
       <table class="tbl"><tbody>
-        <tr><th colspan=2>Effects</th></tr>
+        <tr><th colspan=2>{{brslservice.effect_translation[language]}}</th></tr>
         @for (eline of facility.facilityeffline_set; track eline) {
           <tr>
             <td>{{eline.line}}</td>
@@ -42,7 +42,7 @@
     }
     @if (facility.facilitying_set) {
       <table class="tbl"><tbody>
-        <tr><th colspan=2>Ingredients</th></tr>
+        <tr><th colspan=2>{{brslservice.ingredient_translation[language]}}</th></tr>
         @for (line of facility.facilitying_set; track line) {
           <tr>
             <td>{{line.level}}</td>

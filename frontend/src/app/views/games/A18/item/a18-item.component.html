@@ -14,56 +14,54 @@
     </div>
     <img class="card-item-display" src="{{imgURL}}items/{{item.slug}}.webp?v=1"
       alt="{{item.name}}" style="aspect-ratio: 1; width: 280px;">
-    <table><tbody>
+    <table class="a18-talk-table"><tbody>
       @if (item.char[0]) {
         <tr>
-          <td style="width:10%">
-            <img style="aspect-ratio: 1; width: 82px;" src="/media/games/firis/characters/{{item.char[0]}}.webp?v=1" alt="{{item.char[0]}}">
-          </td>
           <td>
-            {{item.desc[0]}}
+            <img src="/media/games/firis/characters/{{item.char[0]}}.webp?v=1" alt="{{item.char[0]}}">
           </td>
+          <td>{{item.desc[0]}}</td>
         </tr>
       }
       @if (item.char[1]) {
         <tr>
-          <td style="width:10%">
-            <img style="aspect-ratio: 1; width: 82px;" src="/media/games/firis/characters/{{item.char[1]}}.webp?v=1" alt="{{item.char[1]}}">
-          </td>
           <td>
-            {{item.desc[1]}}
+            <img src="/media/games/firis/characters/{{item.char[1]}}.webp?v=1" alt="{{item.char[1]}}">
           </td>
+          <td>{{item.desc[1]}}</td>
         </tr>
       }
       @if (item.char[2]) {
         <tr>
-          <td style="width:10%">
-            <img style="aspect-ratio: 1; width: 82px;" src="/media/games/firis/characters/{{item.char[2]}}.webp?v=1" alt="{{item.char[2]}}">
-          </td>
           <td>
-            {{item.desc[2]}}
+            <img src="/media/games/firis/characters/{{item.char[2]}}.webp?v=1" alt="{{item.char[2]}}">
           </td>
+          <td>{{item.desc[2]}}</td>
         </tr>
       }
       @if (item.char[3]) {
         <tr>
-          <td style="width:10%">
-            <img style="aspect-ratio: 1; width: 82px;" src="/media/games/firis/characters/{{item.char[3]}}.webp?v=1" alt="{{item.char[3]}}">
-          </td>
           <td>
-            {{item.desc[3]}}
+            <img src="/media/games/firis/characters/{{item.char[3]}}.webp?v=1" alt="{{item.char[3]}}">
           </td>
+          <td>{{item.desc[3]}}</td>
         </tr>
       }
     </tbody></table>
-    <table style="margin-top:1rem;" class="table-item-data col"><tbody>
-      @for (cat of item.categories; track cat) {
-        <tr>
-          <td style="text-align: center;"><i class="atelier atelier-{{cat.icon}}"></i></td>
-          <td><a routerLink="/{{gameURL}}/categories/{{cat.slug}}/{{language}}">{{cat.name}}</a></td>
-        </tr>
+    <ul class="a18-item-data">
+      @for (c of item.categories; track c) {
+        <li>
+          <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=1#category-{{c.slug}}"></use></svg>
+          <a routerLink="/{{gameURL}}/categories/{{c.slug}}/{{language}}">{{c.name}}</a>
+        </li>
       }
-    </tbody></table>
+      @for (c of item.add; track c) {
+        <li>
+          <svg style="fill:lightgray;" class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=1#category-{{c.slug}}"></use></svg>
+          <a routerLink="/{{gameURL}}/categories/{{c.slug}}/{{language}}">{{c.name}}</a>
+        </li>
+      }
+    </ul>
     @if (item.trait) {
       <p><b>Trait: </b><a routerLink="/{{gameURL}}/traits/{{item.trait.slug}}/{{language}}">{{item.trait.name}}</a></p>
     }
@@ -71,7 +69,7 @@
       <p><b>Book: </b> <a routerLink="/{{gameURL}}/items/{{item.book.slug}}/{{language}}">{{item.book.name}}</a></p>
     }
     @if (item.shopslot_set) {
-      <b>Shop:</b>
+      <b>{{a18service.shop_translation[language]}}</b>
     }
     @if (item.shopslot_set) {
       <ul>
@@ -83,7 +81,7 @@
       </ul>
     }
     @if (item.recipes) {
-      <b>Recipes:</b>
+      <b>{{a18service.item_translation[language]}}</b>
     }
     @if (item.recipes) {
       <ul>
@@ -95,7 +93,7 @@
       </ul>
     }
     @if (item.locations) {
-      <b >Location:</b>
+      <b>{{a18service.location_translation[language]}}</b>
     }
     @if (item.locations) {
       <ul class="two-column">
@@ -127,7 +125,7 @@
       </ul>
     }
     @if (item.monsters) {
-      <b >Dropped by:</b>
+      <b >{{a18service.drop_translation[language]}}</b>
     }
     @if (item.monsters) {
       <ul class="two-column">
@@ -137,16 +135,14 @@
       </ul>
     }
     @if (item.ideas) {
-      <table class="tbl"><tbody>
+      <table class="tbl a18-recipe-idea"><tbody>
         @if (item.book) {
           <tr>
-            <th colspan="2">Book</th>
+            <th colspan="2">{{a18service.recipebook_translation[language]}}</th>
           </tr>
-        }
-        @if (item.book) {
           <tr>
-            <td style="text-align:center;width:15%;">
-              <i class="atelier atelier-ryza2-book" style="padding-right:0;"></i>
+            <td>
+              <svg class="svg-icon-standard"><use href="/media/spritesheets/A18.svg?v=1#book"></use></svg>
             </td>
             <td>
               <a routerLink="/{{gameURL}}/items/{{item.book.slug}}/{{language}}">{{item.book.name}}</a>
@@ -155,19 +151,22 @@
         }
         @for (idea of item.ideas; track idea; let i = $index) {
           <tr>
-            <th colspan="2">Idea {{i+1}}</th>
+            <th colspan="2">{{a18service.recipe_ideas_translation[language]}} {{i+1}}</th>
           </tr>
           @for (unlock of idea.unlocks; track unlock) {
             <tr>
               @if (unlock.level == 1) {
-                <td  style="text-align:center;width:15%;vertical-align:middle;"><i class="fa-solid fa-question"></i></td>
+                <td>
+                  <svg class="svg-icon-standard"><use href="/media/spritesheets/A18.svg?v=1#fa-quest"></use></svg></td>
               }
               @if (unlock.level == 4) {
-                <td  style="text-align:center;width:15%;vertical-align:middle;"><i class="fa-solid fa-lock-open"></i></td>
+                <td>
+                  <svg class="svg-icon-standard"><use href="/media/spritesheets/main.svg?v=1#fa-unlock"></use></svg>
+                  </td>
               }
               @if (unlock.level == 1 || unlock.level == 4) {
                 <td>
-                  <ul style="margin-bottom: 0;">
+                  <ul>
                     @for (condition of unlock.condition; track condition) {
                       <li>
                         {{condition.condition}}
@@ -206,7 +205,7 @@
     }
     @if (item.ingredients) {
       <table class="tbl"><tbody>
-        <tr><th>Ingredients</th></tr>
+        <tr><th>{{a18service.ingredient_translation[language]}}</th></tr>
         <tr>
           <td>
             <ul>
@@ -228,16 +227,16 @@
     }
     @if (item.effectlines_set) {
       <table class="tbl"><tbody>
-        <tr><th colspan=2>Effects</th></tr>
+        <tr><th colspan=2>{{a18service.effect_translation[language]}}</th></tr>
         @for (eff of item.effectlines_set; track eff) {
           <tr>
             @if (item.ingredients) {
               <td style="vertical-align:middle;text-align:center;">
-                <i style="color:{{colors[eff.color][1]}}" class="fa-{{colors[eff.color][0]}}"></i>
+                <svg style="fill:{{colors[eff.color][1]}}" class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=1#{{colors[eff.color][0]}}"></use></svg>
               </td>
             }
             <td>
-              <ul style="list-style:none;margin-top: auto; margin-bottom: auto;">
+              <ul class="category-list">
                 @for (e of eff.data; track e) {
                   <li>
                     <ng-template #effPopover>
@@ -245,7 +244,7 @@
                         <p>{{e.effect.desc}}</p>
                       }
                       @if (e.effect) {
-                        <a routerLink="/{{gameURL}}/effects/{{e.effect.slug}}/{{language}}">More info...</a>
+                        <a routerLink="/{{gameURL}}/effects/{{e.effect.slug}}/{{language}}">{{a18service.details_translation[language]}}</a>
                       }
                     </ng-template>
                     @if (e.effect) {
@@ -256,10 +255,11 @@
                       </popover>
                     }
                     @if (e.component) {
-                      <i class="fa-{{colors[e.component.color][0]}}" style="color:{{colors[e.component.color][1]}};"></i> {{e.component.name}} {{e.component.value}}
+                      <svg style="fill:{{colors[e.component.color][1]}}" class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=1#{{colors[e.component.color][0]}}"></use></svg>
+                       {{e.component.name}} {{e.component.value}}
                     }
                     @if (e.num && item.ingredients) {
-                      ({{e.num}})
+                      &nbsp;({{e.num}})
                     }
                   </li>
                 }
@@ -279,10 +279,11 @@
           </tr>
           <tr>
             <td>
-              <ul class="two-column" style="list-style: none; padding-left: 0;">
+              <ul class="two-column category-list">
                 @for (comp of item.fixed_components; track comp) {
                   <li>
-                    <i class="fa-{{colors[comp.color][0]}}" style="color:{{colors[comp.color][1]}};"></i> {{comp.name}} {{comp.value}}
+                    <svg style="fill:{{colors[comp.color][1]}}" class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=1#{{colors[comp.color][0]}}"></use></svg>
+                     {{comp.name}} {{comp.value}}
                   </li>
                 }
               </ul>
@@ -297,10 +298,11 @@
           </tr>
           <tr>
             <td>
-              <ul class="two-column" style="list-style: none; padding-left: 0;">
+              <ul class="two-column category-list">
                 @for (comp of item.random_components; track comp) {
                   <li>
-                    <i class="fa-{{colors[comp.color][0]}}" style="color:{{colors[comp.color][1]}};"></i> {{comp.name}} {{comp.value}}
+                    <svg style="fill:{{colors[comp.color][1]}}" class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=1#{{colors[comp.color][0]}}"></use></svg>
+                     {{comp.name}} {{comp.value}}
                   </li>
                 }
               </ul>
@@ -327,7 +329,7 @@
     }
     @if (item.chars) {
       <table class="tbl"><tbody>
-        <tr><th>Characters</th></tr>
+        <tr><th>{{a18service.character_translation[language]}}</th></tr>
         <tr><td>@for (char of item.chars; track char) {
           <img src="{{imgURL}}characters/{{char.slug}}.webp?v=1" style="aspect-ratio: 1; width: 82px;" alt="{{char.slug}}">
         }</td></tr>
@@ -335,13 +337,13 @@
     }
     @if (item.catalysts) {
       <table class="tbl"><tbody>
-        <tr><th colspan="2">Catalysts Used</th></tr>
+        <tr><th colspan="2">{{a18service.catalyst_translation[language]}}</th></tr>
         <tr>
           <td>
             <ul class="two-column" style="list-style: none; padding-left: 0;">
               @for (cat of item.catalysts; track cat) {
                 <li>
-                  <i class="atelier atelier-{{cat.icon}}"></i>
+                  <svg class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=1#category-{{cat.slug}}"></use></svg>
                   <a routerLink="/{{gameURL}}/catalysts/{{language}}"
                     [queryParams]="{search: cat.name}">
                     {{cat.name}}
@@ -358,10 +360,10 @@
         <tr><th colspan="2">Catalyst Data ({{item.catalyst.size}}x{{item.catalyst.size}})</th></tr>
         <tr>
           <td>
-            <ul class="two-column" style="list-style: none; padding-left: 0;">
+            <ul class="two-column category-list" style="list-style: none; padding-left: 0;">
               @for (j of [].constructor(item.catalyst.color.length); track j; let i = $index) {
                 <li>
-                  <i class="fa-{{colors[item.catalyst.color[i]][0]}}" style="color:{{colors[item.catalyst.color[i]][1]}}"></i>
+                  <svg style="fill:{{colors[item.catalyst.color[i]][1]}}" class="svg-icon-standard"><use attr.href="/media/spritesheets/A18.svg?v=1#{{colors[item.catalyst.color[i]][0]}}"></use></svg>
                   {{item.catalyst.action[i]}}
                 </li>
               }

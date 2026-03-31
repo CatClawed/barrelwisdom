@@ -21,7 +21,7 @@
     <div class="grid">
       <div class="grid-6">
         @if (monster.locations) {
-          <b>Locations:</b>
+          <b>{{a15service.location_translation[language]}}</b>
           <ul>
             @for (loc of monster.locations; track loc) {
               <li>
@@ -31,7 +31,7 @@
           </ul>
         }
         @if (monster.item_set) {
-          <b>Drops:</b>
+          <b>{{a15service.item_translation[language]}}</b>
           <ul>
             @for (drop of monster.item_set; track drop) {
               <li><a routerLink="/{{gameURL}}/items/{{drop.slug}}/{{language}}">{{drop.name}}</a></li>
@@ -40,25 +40,13 @@
         }
       </div>
       <div class="grid-6">
-        <table class="table-item-data"><tbody>
-          <tr>
-            <td style="padding:0;"><b>LV </b></td>  <td style="padding:0;padding-left:0.5em;">{{monster.level}}</td>
-          </tr>
-          <tr>
-            <td style="padding:0;"><b>HP </b></td>  <td style="padding:0;padding-left:0.5em;">{{monster.hp}}</td><td style="padding:0;padding-left:1em;"><i style="color:#ac504f;" class="atelier atelier-shallie-fire"></i></td> <td style="padding:0;padding-left:0.5em;">{{monster.fire}}</td>
-          </tr>
-          <tr>
-            <td style="padding:0;"><b>ATK </b></td> <td style="padding:0;padding-left:0.5em;">{{monster.atk}}</td><td style="padding:0;padding-left:1em;"><i style="color:#427389;" class="atelier atelier-shallie-water"></i></td> <td style="padding:0;padding-left:0.5em;">{{monster.water}}</td>
-          </tr>
-          <tr>
-            <td style="padding:0;"><b>DEF </b></td> <td style="padding:0;padding-left:0.5em;">{{monster.defen}}</td><td style="padding:0;padding-left:1em;"><i style="color:#5a843c;" class="atelier atelier-shallie-wind"></i></td> <td style="padding:0;padding-left:0.5em;">{{monster.wind}}</td>
-          </tr>
-          <tr>
-            <td style="padding:0;"><b>SPD </b></td> <td style="padding:0;padding-left:0.5em;">{{monster.spd}}</td><td style="padding:0;padding-left:1em;"><i style="color:#8f7939;" class="atelier atelier-shallie-earth"></i></td> <td style="padding:0;padding-left:0.5em;">{{monster.earth}}</td>
-          </tr>
-          <tr>
-            <td style="padding:0;"><b>Exp </b></td>  <td style="padding:0;padding-left:0.5em;">{{monster.exp}}</td><td style="padding:0;padding-left:1em;"><b>Cole </b></td>  <td style="padding:0;padding-left:0.5em;">{{monster.cole}}</td>
-          </tr>
+        <table class="a15-enemy-stats"><tbody>
+          <tr><td><b>LV </b></td>  <td>{{monster.level}}</td></tr>
+          <tr><td><b>HP  </b></td><td>{{monster.hp}}   </td><td><svg class="a15-element" style="background-color:#ac504f;"><use href="/media/spritesheets/A15.svg?v=1#element-fire"></use></svg></td> <td>{{monster.fire}}</td></tr>
+          <tr><td><b>ATK </b></td><td>{{monster.atk}}   </td><td><svg class="a15-element" style="background-color:#427389;"><use href="/media/spritesheets/A15.svg?v=1#element-water"></use></svg></td><td>{{monster.water}}</td></tr>
+          <tr><td><b>DEF </b></td><td>{{monster.defen}}  </td><td><svg class="a15-element" style="background-color:#5a843c;"><use href="/media/spritesheets/A15.svg?v=1#element-wind"></use></svg></td> <td>{{monster.wind}}</td></tr>
+          <tr><td><b>SPD </b></td><td>{{monster.spd}}</td><td><svg class="a15-element" style="background-color:#8f7939;"><use href="/media/spritesheets/A15.svg?v=1#element-earth"></use></svg></td><td>{{monster.earth}}</td></tr>
+          <tr><td><b>EXP </b></td><td>{{monster.exp}}  </td><td><b>Cole </b></td><td>{{monster.cole}}  </td></tr>
         </tbody></table>
       </div>
     </div>

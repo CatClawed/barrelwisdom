@@ -1,0 +1,94 @@
+@use 'variables' as v;
+
+.svg-inline-text {
+    display: flex;
+
+    svg {
+        width: 1.3em;
+        height: 1.3em;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+}
+
+.svg-inline-link {
+    display: flex;
+    fill: v.$secondary;
+
+    svg {
+        width: 1em;
+        height: 1em;
+        margin-left: 0.3em;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+}
+
+.svg-color {
+    opacity: 35%;
+}
+
+.svg-icon {
+    height: 1.7em;
+    width: 1.7em;
+    fill: black;
+    margin-right: 0.5em;
+}
+
+.svg-icon-standard {
+    height: 1.7em;
+    width: 1.7em;
+    fill: black;
+}
+
+.right-spacer {
+    margin-right: 0.5em;
+}
+
+.svg-filter {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.svg-icon-text-vertical-center {
+    span {
+        display: inline-flex;
+        line-height: 1.7em;
+        align-content: center;
+    }
+}
+
+// appears on monsters often enough
+.standard-stat-star {
+    width: 1.3em;
+    height: 1.3em;
+    fill: gold;
+
+    use {
+        stroke: black;
+        stroke-width: 8%;
+        stroke-linejoin: round;
+    }
+}
+
+.icon-button {
+  aspect-ratio: 1;
+  background: none;
+  border: none;
+  margin-bottom: auto;
+  margin-top: auto;
+  cursor: pointer;
+  outline: none;
+
+  svg {
+    width: 100%;
+    max-height: 100%;
+    fill: gray;
+    aspect-ratio: 1;
+  }
+
+  &.active svg {
+    fill: black;
+  }
+}

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LanguageGuard } from '@app/_helpers/language.guard';
+import { LanguageGuard } from '@app/_helpers/guards/language.guard';
 
 const routes: Routes = [
   {

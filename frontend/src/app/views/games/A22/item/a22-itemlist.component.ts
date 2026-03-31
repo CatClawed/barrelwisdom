@@ -1,12 +1,6 @@
-import { Dialog } from '@angular/cdk/dialog';
-import { Location } from '@angular/common';
-import { Component } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
+import { FilterButtonsComponent } from '@app/views/_components/filter-buttons/filter-buttons.component';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { ItemComponent } from '@app/views/_components/item/item.component';
 import { Item } from '@app/views/games/A22/_services/a22.interface';
@@ -19,12 +13,13 @@ import { A22ItemComponent } from './a22-item.component';
 
 @Component({
     templateUrl: 'a22-itemlist.component.html',
-    providers: [DestroyService],
+    styleUrl: '../a22.scss',
     imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
-        ItemComponent, MatButtonModule]
+        ItemComponent, MatButtonModule, FilterButtonsComponent]
 })
 
 export class A22ItemlistComponent extends DialogUseComponent {
+  protected a22service = inject(A22Service);
   filteredItems: Observable<Item[]>;
   icons = {
     'Attack':    'type-attack',
@@ -41,25 +36,18 @@ export class A22ItemlistComponent extends DialogUseComponent {
     "Field":     'category-tools'
   }
 
-  constructor(
-    protected cdkDialog: Dialog,
-    protected readonly destroy$: DestroyService,
-    protected router: Router,
-    protected route: ActivatedRoute,
-    protected location: Location,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    private formBuilder: UntypedFormBuilder,
-    protected a22service: A22Service,
-  ) {
-    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
+  constructor() {
+    super();
     this.component = A22ItemComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       filtering: '',
-      type: '',
+      type: '--',
       elementval: 1,
-      element: ""
+      fire: false,
+      ice: false,
+      lightning: false,
+      wind: false,
     })
   }
 
@@ -73,36 +61,34 @@ export class A22ItemlistComponent extends DialogUseComponent {
     });
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.filteredItems = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Item[]>),
-      map((search: any) => search ? this.filterT(search.filtertext, search.type, search.elementval, search.element, search.filtering) : this.data.items.slice())
+      map((search: any) => search ? this.filterT(search.filtertext, search.type, search.elementval, search.fire, search.ice, search.lightning, search.wind, search.filtering) : this.data.items.slice())
     );
   }
 
-  private filterT(value: string, type: string, elementV: number, element: string, ingt: string): Item[] {
+  private filterT(value: string, type: string, elementV: number, fire: boolean, ice: boolean, lightning: boolean, wind: boolean, ingt: string): Item[] {
     this.hide = false;
     let list: Item[] = this.data.items;
 
-    if (type != 'Any' && type) {
+    if (type != '--' && type) {
       list = list.filter(item => item.category.some(c => c.name == type));
     }
     if (elementV > 1) {
       list = list.filter(item => item.elementvalue >= elementV);
     }
-    switch (element) {
-      case "Fire":
-        list = list.filter(item => item.fire)
-        break;
-      case "Ice":
-        list = list.filter(item => item.ice)
-        break;
-      case "Lightning":
-        list = list.filter(item => item.lightning)
-        break;
-      case "Wind":
-        list = list.filter(item => item.wind)
-        break;
+    if (fire) {
+      list = list.filter(item => item.fire)
+    }
+    if (ice) {
+      list = list.filter(item => item.ice)
+    }
+    if (lightning) {
+      list = list.filter(item => item.lightning)
+    }
+    if (wind) {
+      list = list.filter(item => item.wind)
     }
     if (ingt) {
       const filterValue = ingt.toLowerCase();

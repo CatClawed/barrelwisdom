@@ -3,225 +3,96 @@
 }
 @if (data; as major) {
   <div class="table-of-contents">
-    <b>Table of Contents</b>
     <ol class="toc-list">
       <li>
         <a href="/{{gameURL}}/major-gathering/{{language}}#sickle"
-          (click)="$event.preventDefault();scroll('sickle')">Sickle <i class="atelier atelier-sm atelier-ryza2-tool-sickle"></i></a>
-        </li>
-        <li>
-          <a href="/{{gameURL}}/major-gathering/{{language}}#fish"
-            (click)="$event.preventDefault();scroll('fish')">Fish <i class="atelier atelier-sm atelier-ryza2-tool-fishing-rod"></i></a>
-          </li>
-          <li>
-            <a href="/{{gameURL}}/major-gathering/{{language}}#net"
-              (click)="$event.preventDefault();scroll('net')">Bug Net <i class="atelier atelier-sm atelier-ryza2-tool-bug-net"></i></a>
-            </li>
-            <li>
-              <a href="/{{gameURL}}/major-gathering/{{language}}#pickaxe"
-                (click)="$event.preventDefault();scroll('pickaxe')">Pickaxe <i class="atelier atelier-sm atelier-sophie2-tool-pickaxe"></i></a>
-              </li>
-              <li>
-                <a href="/{{gameURL}}/major-gathering/{{language}}#slingshot"
-                  (click)="$event.preventDefault();scroll('slingshot')">Slingshot <i class="atelier atelier-sm atelier-sophie2-tool-slingshot"></i></a>
-                </li>
-                <li>
-                  <a href="/{{gameURL}}/major-gathering/{{language}}#hammer"
-                    (click)="$event.preventDefault();scroll('hammer')">Hammer <i class="atelier atelier-sm atelier-sophie2-tool-hammer"></i></a>
-                  </li>
-                </ol>
-              </div>
-              <h2 id="sickle">Sickle <i class="atelier atelier-ryza2-tool-sickle"></i></h2>
-              <table class="tbl borders"><tbody>
-                <tr style="text-align:center;">
-                  <th>Area</th>
-                  <th><i class="fas fa-star"></i></th>
-                  <th><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
-                  <th><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
-                </tr>
-                @for (thing of major.sickle; track thing) {
-                  <tr>
-                    <td>{{thing.region}}
-                      @if (thing.weather == 'sun') {
-                        <i     class="fas fa-sun"></i>
-                      }
-                      @if (thing.weather == 'rain') {
-                        <i    class="fas fa-tint"></i>
-                      }
-                      @if (thing.weather == 'snow') {
-                        <i    class="fas fa-snowflake"></i>
-                      }
-                      @if (thing.weather == 'thunder') {
-                        <i class="fas fa-bolt"></i>
-                      }
-                    <br />{{thing.area}}</td>
-                    @for (item of thing.items; track item) {
-                      <td>
-                        <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
-                      </td>
-                    }
-                  </tr>
-                }
-              </tbody></table>
-              <h2 id="fish">Fishing Rod <i class="atelier atelier-ryza2-tool-fishing-rod"></i></h2>
-              <table class="tbl borders"><tbody>
-                <tr style="text-align:center;">
-                  <th>Area</th>
-                  <th><i class="fas fa-star"></i></th>
-                  <th><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
-                  <th><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
-                </tr>
-                @for (thing of major.fish; track thing) {
-                  <tr>
-                    <td>{{thing.region}}
-                      @if (thing.weather == 'sun') {
-                        <i     class="fas fa-sun"></i>
-                      }
-                      @if (thing.weather == 'rain') {
-                        <i    class="fas fa-tint"></i>
-                      }
-                      @if (thing.weather == 'snow') {
-                        <i    class="fas fa-snowflake"></i>
-                      }
-                      @if (thing.weather == 'thunder') {
-                        <i class="fas fa-bolt"></i>
-                      }
-                      <br />{{thing.area}}
-                    </td>
-                    @for (item of thing.items; track item) {
-                      <td>
-                        <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
-                      </td>
-                    }
-                  </tr>
-                }
-              </tbody></table>
-              <h2 id="net">Bug Net <i class="atelier atelier-ryza2-tool-bug-net"></i></h2>
-              <table class="tbl borders"><tbody>
-                <tr style="text-align:center;">
-                  <th>Area</th>
-                  <th><i class="fas fa-star"></i></th>
-                  <th><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
-                  <th><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
-                </tr>
-                @for (thing of major.net; track thing) {
-                  <tr>
-                    <td>{{thing.region}}
-                      @if (thing.weather == 'sun') {
-                        <i     class="fas fa-sun"></i>
-                      }
-                      @if (thing.weather == 'rain') {
-                        <i    class="fas fa-tint"></i>
-                      }
-                      @if (thing.weather == 'snow') {
-                        <i    class="fas fa-snowflake"></i>
-                      }
-                      @if (thing.weather == 'thunder') {
-                        <i class="fas fa-bolt"></i>
-                      }
-                    <br />{{thing.area}}</td>
-                    @for (item of thing.items; track item) {
-                      <td>
-                        <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
-                      </td>
-                    }
-                  </tr>
-                }
-              </tbody></table>
-              <h2 id="pickaxe">Pickaxe <i class="atelier atelier-sophie2-tool-pickaxe"></i></h2>
-              <table class="tbl borders"><tbody>
-                <tr style="text-align:center;">
-                  <th>Area</th>
-                  <th><i class="fas fa-star"></i></th>
-                  <th><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
-                  <th><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
-                </tr>
-                @for (thing of major.pickaxe; track thing) {
-                  <tr>
-                    <td>{{thing.region}}
-                      @if (thing.weather == 'sun') {
-                        <i     class="fas fa-sun"></i>
-                      }
-                      @if (thing.weather == 'rain') {
-                        <i    class="fas fa-tint"></i>
-                      }
-                      @if (thing.weather == 'snow') {
-                        <i    class="fas fa-snowflake"></i>
-                      }
-                      @if (thing.weather == 'thunder') {
-                        <i class="fas fa-bolt"></i>
-                      }
-                    <br />{{thing.area}}</td>
-                    @for (item of thing.items; track item) {
-                      <td>
-                        <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
-                      </td>
-                    }
-                  </tr>
-                }
-              </tbody></table>
-              <h2 id="slingshot">Slingshot <i class="atelier atelier-sophie2-tool-slingshot"></i></h2>
-              <table class="tbl borders"><tbody>
-                <tr style="text-align:center;">
-                  <th>Area</th>
-                  <th><i class="fas fa-star"></i></th>
-                  <th><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
-                  <th><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
-                </tr>
-                @for (thing of major.shot; track thing) {
-                  <tr>
-                    <td>{{thing.region}}
-                      @if (thing.weather == 'sun') {
-                        <i     class="fas fa-sun"></i>
-                      }
-                      @if (thing.weather == 'rain') {
-                        <i    class="fas fa-tint"></i>
-                      }
-                      @if (thing.weather == 'snow') {
-                        <i    class="fas fa-snowflake"></i>
-                      }
-                      @if (thing.weather == 'thunder') {
-                        <i class="fas fa-bolt"></i>
-                      }
-                    <br />{{thing.area}}</td>
-                    @for (item of thing.items; track item) {
-                      <td>
-                        <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
-                      </td>
-                    }
-                  </tr>
-                }
-              </tbody></table>
-              <h2 id="hammer">Hammer <i class="atelier atelier-sophie2-tool-hammer"></i></h2>
-              <table class="tbl borders"><tbody>
-                <tr style="text-align:center;">
-                  <th>Area</th>
-                  <th><i class="fas fa-star"></i></th>
-                  <th><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
-                  <th><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
-                </tr>
-                @for (thing of major.hammer; track thing) {
-                  <tr>
-                    <td>{{thing.region}}
-                      @if (thing.weather == 'sun') {
-                        <i     class="fas fa-sun"></i>
-                      }
-                      @if (thing.weather == 'rain') {
-                        <i    class="fas fa-tint"></i>
-                      }
-                      @if (thing.weather == 'snow') {
-                        <i    class="fas fa-snowflake"></i>
-                      }
-                      @if (thing.weather == 'thunder') {
-                        <i class="fas fa-bolt"></i>
-                      }
-                    <br />{{thing.area}}</td>
-                    @for (item of thing.items; track item) {
-                      <td>
-                        <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
-                      </td>
-                    }
-                  </tr>
-                }
-              </tbody></table>
+          (click)="$event.preventDefault();scroll('sickle')">Sickle
+          <svg class="a23-weather"><use href="/media/spritesheets/A23.svg?v=1#tool-sickle"></use></svg>
+        </a>
+      </li>
+      <li>
+        <a href="/{{gameURL}}/major-gathering/{{language}}#fish"
+          (click)="$event.preventDefault();scroll('fish')">Fish
+          <svg class="a23-weather"><use href="/media/spritesheets/A23.svg?v=1#tool-fishing-rod"></use></svg>
+        </a>
+      </li>
+      <li>
+        <a href="/{{gameURL}}/major-gathering/{{language}}#net"
+          (click)="$event.preventDefault();scroll('net')">Bug Net
+          <svg class="a23-weather"><use href="/media/spritesheets/A23.svg?v=1#tool-bug-net"></use></svg>
+        </a>
+      </li>
+      <li>
+        <a href="/{{gameURL}}/major-gathering/{{language}}#pickaxe"
+          (click)="$event.preventDefault();scroll('pickaxe')">Pickaxe
+          <svg class="a23-weather"><use href="/media/spritesheets/A23.svg?v=1#tool-pickaxe"></use></svg>
+        </a>
+      </li>
+      <li>
+        <a href="/{{gameURL}}/major-gathering/{{language}}#slingshot"
+          (click)="$event.preventDefault();scroll('slingshot')">Slingshot
+          <svg class="a23-weather"><use href="/media/spritesheets/A23.svg?v=1#tool-slingshot"></use></svg>
+        </a>
+      </li>
+      <li>
+        <a href="/{{gameURL}}/major-gathering/{{language}}#hammer"
+          (click)="$event.preventDefault();scroll('hammer')">Hammer
+          <svg class="a23-weather"><use href="/media/spritesheets/A23.svg?v=1#tool-hammer"></use></svg>
+        </a>
+      </li>
+    </ol>
+  </div>
+  <ng-template #majorgather let-major="major">
+    <table class="tbl borders">
+      <tbody>
+        <tr style="text-align:center;">
+          <th>Area</th>
+          <th><svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg></th>
+          <th><svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg><svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg></th>
+          <th><svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg><svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg><svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg></th>
+        </tr>
+        @for (thing of major; track thing) {
+        <tr>
+          <td>{{thing.region}}
+            @if (thing.weather == 'sun') {
+            <svg class="a23-weather"><use href="/media/spritesheets/A23.svg?v=1#fa-sun"></use></svg>
             }
+            @if (thing.weather == 'rain') {
+            <svg class="a23-weather"><use href="/media/spritesheets/A23.svg?v=1#fa-rain"></use></svg>
+            }
+            @if (thing.weather == 'snow') {
+            <svg class="a23-weather"><use href="/media/spritesheets/A23.svg?v=1#fa-snow"></use></svg>
+            }
+            @if (thing.weather == 'thunder') {
+            <svg class="a23-weather"><use href="/media/spritesheets/A23.svg?v=1#fa-lightning"></use></svg>
+            }
+            <br />{{thing.area}}
+          </td>
+          @for (item of thing.items; track item) {
+          <td>
+            <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a>
+          </td>
+          }
+        </tr>
+        }
+      </tbody>
+    </table>
+  </ng-template>
+  <h2 id="sickle">Sickle <svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#tool-sickle"></use></svg></h2>
+  <ng-content *ngTemplateOutlet="majorgather;context:{major:major.sickle}"></ng-content>
+
+  <h2 id="fish">Fishing Rod <svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#tool-fishing-rod"></use></svg></h2>
+  <ng-content *ngTemplateOutlet="majorgather;context:{major:major.fish}"></ng-content>
+
+  <h2 id="net">Bug Net <svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#tool-bug-net"></use></svg></h2>
+  <ng-content *ngTemplateOutlet="majorgather;context:{major:major.net}"></ng-content>
+
+  <h2 id="pickaxe">Pickaxe <svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#tool-pickaxe"></use></svg></h2>
+  <ng-content *ngTemplateOutlet="majorgather;context:{major:major.pickaxe}"></ng-content>
+
+  <h2 id="slingshot">Slingshot <svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#tool-slingshot"></use></svg></h2>
+  <ng-content *ngTemplateOutlet="majorgather;context:{major:major.slingshot}"></ng-content>
+
+  <h2 id="hammer">Hammer <svg class="svg-icon"><use href="/media/spritesheets/A23.svg?v=1#tool-hammer"></use></svg></h2>
+  <ng-content *ngTemplateOutlet="majorgather;context:{major:major.hammer}"></ng-content>
+}

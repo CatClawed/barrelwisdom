@@ -1,11 +1,5 @@
-import { Dialog } from '@angular/cdk/dialog';
-import { Location } from '@angular/common';
-import { Component } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
+import { Component, inject } from '@angular/core';
+import { FilterButtonsComponent } from '@app/views/_components/filter-buttons/filter-buttons.component';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Trait } from '@app/views/games/A12/_services/a12.interface';
 import { A12Service } from '@app/views/games/A12/_services/a12.service';
@@ -17,64 +11,54 @@ import { A12TraitComponent } from './a12-trait.component';
 
 @Component({
     templateUrl: 'a12-traitlist.component.html',
-    providers: [DestroyService],
     imports: [...CommonImports, ...MaterialFormImports,
-        A12TraitComponent, FilterListComponent]
+        A12TraitComponent, FilterListComponent, FilterButtonsComponent]
 })
 export class A12TraitlistComponent extends DialogUseComponent {
+  protected a12service = inject(A12Service);
   filteredTraits: Observable<Trait[]>;
 
-  constructor(
-    protected cdkDialog: Dialog,
-    protected readonly destroy$: DestroyService,
-    protected router: Router,
-    protected route: ActivatedRoute,
-    protected location: Location,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    private formBuilder: UntypedFormBuilder,
-    protected a12service: A12Service) {
-    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
+  constructor() {
+    super();
     this.component = A12TraitComponent
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
-      transfers: ''
+      atk: false,
+      wep: false,
+      arm: false,
+      acc: false,
     })
   }
 
   changeData() {
     this.gameService(this.a12service, 'traits');
-    this.genericSettings(`Traits`, `The list of traits in ${this.gameTitle}.`);
+    this.genericSettings(this.a12service.trait_translation[this.language],
+      `The list of traits in ${this.gameTitle}.`);
     this.pageForm.reset();
     return this.a12service.getTraitList(this.language);
   }
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.filteredTraits = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Trait[]>),
-      map((search: any) => search ? this.filterT(search.filtertext, search.transfers) : this.data.slice())
+      map((search: any) => search ? this.filterT(search.filtertext, search.atk, search.wep, search.arm, search.acc) : this.data.slice())
     );
   }
 
-  private filterT(value: string, transfer: string): Trait[] {
+  private filterT(value: string, atk: boolean, wep: boolean, arm: boolean, acc: boolean): Trait[] {
     this.hide = false;
     let traitlist: Trait[] = this.data;
-    switch (transfer) {
-      case "3": {
-        traitlist = traitlist.filter(trait => trait.usable);
-        break;
-      }
-      case "5": {
-        traitlist = traitlist.filter(trait => trait.ingot);
-        break;
-      }
-      case "6": {
-        traitlist = traitlist.filter(trait => trait.cloth);
-        break;
-      }
-      case "7": {
-        traitlist = traitlist.filter(trait => trait.accessory);
-        break;
-      }
+
+    if (atk) {
+      traitlist = traitlist.filter(trait => trait.usable);
+    }
+    if (wep) {
+      traitlist = traitlist.filter(trait => trait.ingot);
+    }
+    if (arm) {
+      traitlist = traitlist.filter(trait => trait.cloth);
+    }
+    if (acc) {
+      traitlist = traitlist.filter(trait => trait.accessory);
     }
     if (value) {
       const filterValue = value.toLowerCase();

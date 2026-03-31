@@ -1,41 +1,25 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { Location } from '@angular/common';
-import { Component } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
-import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { takeUntil } from 'rxjs/operators';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NavigationStart, Router } from '@angular/router';
 import { FilterableComponent } from './filterable.component';
 
-@Component({
-    template: '',
-    providers: [DestroyService],
-    standalone: false
-})
-
+@Component({ template: '' })
 export abstract class DialogUseComponent extends FilterableComponent {
-    pageForm: UntypedFormGroup;
+    protected router = inject(Router)
+    protected location = inject(Location)
+    protected cdkDialog = inject(Dialog)
+    protected cdr = inject(ChangeDetectorRef)
+
     selected: string = "thing";
     dialogLink;
     dialogref;
     component;
 
-    constructor(
-        protected readonly destroy$: DestroyService,
-        protected router: Router,
-        protected route: ActivatedRoute,
-        protected location: Location,
-        protected seoService: SeoService,
-        protected breadcrumbService: BreadcrumbService,
-        protected cdkDialog: Dialog) {
-        super(destroy$, route, breadcrumbService, seoService);
-    }
-
     dialogEvent() {
         this.dialogLink = this.router.events
-            .pipe(takeUntil(this.destroy$))
+            .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe(event => {
                 if (event instanceof NavigationStart) {
                     this.dialogref.close(false);
@@ -48,7 +32,7 @@ export abstract class DialogUseComponent extends FilterableComponent {
     // intentionally blank
     extraSettings(): void {}
 
-    openDialog(slug: string, event?: Event, destination?: string, otherComp?) {
+    openDialog(slug: string, event?: any, destination?: string, otherComp?) {
         if (event !== undefined) {
             event.preventDefault()
         }
@@ -66,11 +50,17 @@ export abstract class DialogUseComponent extends FilterableComponent {
         this.extraSettings();
         this.dialogEvent();
         this.dialogref.closed
-            .pipe(takeUntil(this.destroy$))
+            .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe(returnToPage => {
                 if (returnToPage !== false) {
                     this.location.go(`${this.gameURL}/${this.section}/${this.language}`);
-                    this.seoService.SEOSettings(this.seoURL, this.seoTitle, this.seoDesc, this.seoImage);
+                    this.seoService.updateSEOSettings({
+                        url:this.seoURL,
+                        title:this.seoTitle,
+                        description:this.seoDesc,
+                        image:this.seoImage,
+                        lang:this.language
+                    });
                 }
                 this.dialogLink.unsubscribe();
             })

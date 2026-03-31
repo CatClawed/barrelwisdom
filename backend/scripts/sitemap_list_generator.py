@@ -5,6 +5,7 @@ from games.A18.monsters_a18.models import Monster as A18Monster
 from games.A25.misc_a25.models import Trait as A25Trait
 from games.A25.chara_a25.models import Character as A25Character, Memoria as A25Memoria
 from games.A25.items_a25.models import Item as A25Item
+from games.A25RW.models import Item as A25RWItem, Enemy as A25RWEnemy, Trait as A25RWTrait
 from games.A26.items_a26.models import Item as A26Item, Trait as A26Trait, Effect as A26Effect
 from games.A26.monsters_a26.models import Monster as A26Monster
 import xml.etree.cElementTree as ET
@@ -111,6 +112,20 @@ def resleri():
 
     sitemap(langs, pages, 'resleri')
 
+def resleri_rw():
+    langs = ["en", "ja", 'sc', 'tc', 'ko']
+    pages = []
+    for obj in A25RWItem.objects.filter(visible=True):
+        pages.append(f'items/{obj.id}')
+    for obj in A25RWEnemy.objects.all():
+        pages.append(f'monsters/{obj.id}')
+    for obj in A25RWTrait.objects.all():
+        pages.append(f'traits/{obj.id}')
+    pages.append(f'shops')
+    pages.append(f'recipe-trees')
+
+    sitemap(langs, pages, 'resleriana-red-white')
+
 def firis():
     langs = ["en", "ja", 'sc', 'tc']
     pages = []
@@ -165,7 +180,7 @@ def sitemap_index():
         'firis', 'sophie2',
         'ryza2',
         'bluereflection', 'second-light',
-        'resleri',
+        'resleri', 'resleriana-red-white',
         'yumia'
     ]
 
@@ -180,8 +195,9 @@ def sitemap_index():
         tree = ET.ElementTree(index)
         tree.write('scripts/sitemaps/sitemap.xml',encoding='utf-8', xml_declaration=True)
 
-yumia()
+#yumia()
 #resleri()
+#resleri_rw()
 #firis()
 #blog()
 #sitemap_index()

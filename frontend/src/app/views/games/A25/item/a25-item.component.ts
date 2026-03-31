@@ -1,8 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { Component, inject, Input, ViewEncapsulation } from '@angular/core';
 import { Popover } from '@app/views/_components/popover/popover.component';
 import { Item } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
@@ -16,28 +12,17 @@ import { A25IconComponent } from './a25-icon.component';
     styleUrls: ['../resleri.scss'],
     encapsulation: ViewEncapsulation.None,
     selector: 'a25-item',
-    providers: [DestroyService],
     imports: [...CommonImports, A25IconComponent, Popover]
 })
 export class A25ItemComponent extends SingleComponent {
-  @Input()
-  itemkind: string = "";
-
+  protected a25service = inject(A25Service);
+  @Input() itemkind: string = "";
   itemkind2: string = "";
 
   difficulties = {
     1: "Normal",
     2: "Hard",
     3: "Very Hard",
-  }
-
-  constructor(
-    protected route: ActivatedRoute,
-    protected readonly destroy$: DestroyService,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    protected a25service: A25Service) {
-    super(destroy$, route, breadcrumbService, seoService);
   }
 
   changeData() {
@@ -53,7 +38,7 @@ export class A25ItemComponent extends SingleComponent {
     }
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     let name = (this.language === 'en') ? this.data.name.normalize('NFD').replace(/[\u0300-\u036f]/g, "") : this.data.name;
     if (this.data.equip || this.data.combat) {
       this.data.desc = this.replaceVal(this.data)
@@ -92,8 +77,8 @@ export class A25ItemComponent extends SingleComponent {
   }
 
   insertStyle(item: Item): string {
-    if (!item.material) return;
-    if (!item.material[0].color) return;
+    if (!item.material) return '';
+    if (!item.material[0].color) return '';
     return `box-shadow: 1px 2px 4px 1px grey, inset 0 0px 30px 4px ${this.a25service.colorList[item.material[0].color]}`
   }
 }

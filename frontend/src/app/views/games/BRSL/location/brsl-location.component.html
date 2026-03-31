@@ -1,7 +1,6 @@
   @if (data; as location) {
     <h1>{{location.name}}</h1>
     <div class="table-of-contents">
-      <b>Table of Contents</b>
       <ol>
         @for (area of location.areas; track area) {
           <li>
@@ -22,10 +21,10 @@
       <table class="tbl borders"><tbody>
         <tr>
           @if (area.items) {
-            <th  style="width:50%;">Items</th>
+            <th  style="width:50%;">{{brslservice.item_translation[language]}}</th>
           }
           @if (area.demons) {
-            <th style="width:50%;">Demons</th>
+            <th style="width:50%;">{{brslservice.demons_translation[language]}}</th>
           }
         </tr>
         <tr>

@@ -1,16 +1,10 @@
-import { Dialog } from '@angular/cdk/dialog';
-import { Location } from '@angular/common';
-import { Component } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { ItemComponent } from '@app/views/_components/item/item.component';
 import { Item } from '@app/views/games/A23/_services/a23.interface';
 import { A23Service } from '@app/views/games/A23/_services/a23.service';
+import { itemkinds } from '@app/views/games/A23/a23-map-svg';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { DialogUseComponent } from '@app/views/games/_prototype/dialog-use.component';
 import { Observable, forkJoin } from 'rxjs';
@@ -19,26 +13,17 @@ import { A23ItemComponent } from './a23-item.component';
 
 @Component({
     templateUrl: 'a23-itemlist.component.html',
-    providers: [DestroyService],
     imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
         ItemComponent, MatButtonModule]
 })
 
 export class A23ItemlistComponent extends DialogUseComponent {
+  protected a23service = inject(A23Service);
   filteredItems: Observable<Item[]>;
+  itemkinds = itemkinds;
 
-  constructor(
-    protected cdkDialog: Dialog,
-    protected readonly destroy$: DestroyService,
-    protected router: Router,
-    protected route: ActivatedRoute,
-    protected location: Location,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    private formBuilder: UntypedFormBuilder,
-    protected a23service: A23Service,
-  ) {
-    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
+  constructor() {
+    super();
     this.component = A23ItemComponent,
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -58,7 +43,7 @@ export class A23ItemlistComponent extends DialogUseComponent {
     });
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.filteredItems = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Item[]>),
       map((search: any) => search ? this.filterT(search.filtertext, search.cat, search.filtering, search.kind) : this.data.items.slice())
@@ -69,10 +54,10 @@ export class A23ItemlistComponent extends DialogUseComponent {
     this.hide = false;
     let list: Item[] = this.data.items;
 
-    if (cat != 'Any' && cat) {
+    if (cat != '--' && cat) {
       list = list.filter(item => item.categories.some(c => c.name == cat) || (item.add ? item.add.some(c => c.name == cat) : false));
     }
-    if (kind != 'Any' && kind) {
+    if (kind != '--' && kind) {
       list = list.filter(item => item.kind == kind)
     }
     if (ingt) {

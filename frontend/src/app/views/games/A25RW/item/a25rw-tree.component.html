@@ -1,7 +1,7 @@
 <div style="display: grid; grid-template-columns: repeat({{getColumns()}}, 1fr); gap: 50px 10px; margin: auto; max-width: {{max_width}}px; padding-bottom: 2em;">
     @for (node of tree; track node) {
         @if (!node.recipe) {
-            <div style="aspect-ratio: 1; max-width: 120px; position: relative; {{node.row == 1 ? 'aspect-ratio: 1;' : 'aspect-ratio: 1/2.1;'}};">
+            <div style="max-width: 120px; position: relative; {{node.row == 1 ? 'aspect-ratio: 1;' : 'aspect-ratio: 1/2.1;'}}">
                 @if (node.left) {
                     <ng-container *ngTemplateOutlet="left"></ng-container>
                 }
@@ -35,7 +35,7 @@
                     @if (node.ancient) {
                         <div style="position:absolute; top:-25%; left: -15%; z-index: 20; width: 2em; height: 2em; border-radius: 50%; background-color: gray; display: flex; border: 1px solid black;">
                             <svg style="width: 75%; height: 75%; margin: auto;">
-                                <use attr.href="{{imgURL}}spritesheet.svg?v=1#pedestal-2"></use>
+                                <use href="/media/spritesheets/A25RW.svg?v=1#pedestal-2"></use>
                             </svg>
                         </div>
                     }

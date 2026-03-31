@@ -1,11 +1,4 @@
-import { Dialog } from '@angular/cdk/dialog';
-import { Location } from '@angular/common';
-import { Component } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
+import { Component, inject } from '@angular/core';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Effect } from '@app/views/games/A25RW/_services/a25rw.interface';
 import { A25RWService } from '@app/views/games/A25RW/_services/a25rw.service';
@@ -17,26 +10,16 @@ import { A25RWEffectComponent } from './a25rw-effect.component';
 
 @Component({
     templateUrl: 'a25rw-effectlist.component.html',
-    providers: [DestroyService],
     imports: [...CommonImports, ...MaterialFormImports,
         A25RWEffectComponent, FilterListComponent]
 })
 
 export class A25RWEffectlistComponent extends DialogUseComponent {
+  protected a25rwservice: A25RWService = inject(A25RWService)
   filteredEffects: Observable<Effect[]>;
 
-  constructor(
-    protected cdkDialog: Dialog,
-    protected readonly destroy$: DestroyService,
-    protected router: Router,
-    protected route: ActivatedRoute,
-    protected location: Location,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    private formBuilder: UntypedFormBuilder,
-    protected a25rwservice: A25RWService,
-  ) {
-    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
+  constructor() {
+    super();
     this.component = A25RWEffectComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -50,7 +33,7 @@ export class A25RWEffectlistComponent extends DialogUseComponent {
     return this.a25rwservice.getEffectList(this.language);
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.filteredEffects = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Effect[]>),
       map((search: any) => search ? this.filterT(search.filtertext) : this.data.slice())

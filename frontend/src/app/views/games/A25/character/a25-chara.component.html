@@ -5,8 +5,9 @@
     </h4>
     <div class="card-icon-position">
       <img style="width:3rem;aspect-ratio:48/45" src="{{imgURL}}characters/{{chara.role}}.webp" alt="{{chara.role}}" />
-      <i class="atelier atelier-np atelier-resleri-{{chara.elem}} resleri-element-icon"
-        style="background-color:{{a25service.elements[chara.elem]}};display:flex;"></i>
+      <div class="resleri-element-icon" style="background-color:{{a25service.elements[chara.elem]}};">
+        <svg><use attr.href="/media/spritesheets/A25.svg?v=1#resleri-{{chara.elem}}"></use></svg>
+      </div>
     </div>
     <div style="aspect-ratio: 1; max-width: 100%; width: 400px; margin: auto; max-height: 400px;"> <!-- This stupid div is for webkit. -->
       <div style="{{gradients[chara.rarity]}}border-radius:50%;overflow:clip;height:100%;">
@@ -28,8 +29,12 @@
       <tr>
         <td>
           <div style="display:inline-flex;float:right;">
-            <i style="font-size:5rem;vertical-align:-0.5rem;color:{{a25service.colors[chara.color1]}};display:inline;" class="atelier atelier-np atelier-resleri-color-l"></i>
-            <i style="font-size:5rem;vertical-align:-0.5rem;color:{{a25service.colors[chara.color2]}};display:inline;" class="atelier atelier-np atelier-resleri-color-r"></i>
+            <svg style="height:5rem;width:2.5rem;vertical-align:-0.5rem;fill:{{a25service.colors[chara.color1]}};display:inline;">
+              <use href="/media/spritesheets/A25.svg?v=1#color-l"></use>
+            </svg>
+            <svg style="height:5rem;width:2.5rem;vertical-align:-0.5rem;fill:{{a25service.colors[chara.color2]}};display:inline;">
+              <use href="/media/spritesheets/A25.svg?v=1#color-r"></use>
+            </svg>
           </div>
           <ul>
             <li>
@@ -75,7 +80,7 @@
             </mat-slider>
           </div>
           <div style="width:45%;float:right;">
-            <b>Stars: </b>{{stars[starSlider.value-1]}}<br />
+            <b>Stars: </b>{{stars[+starSlider.value-1]}}<br />
             <mat-slider
               color="accent"
               style="width:100%;"
@@ -88,21 +93,21 @@
       </tr>
       <tr>
         <td style="width:25%;">{{a25service.stats['hp'][language]}} </td>
-        <td style="width:25%;">{{getStat(chara.hp, stars[starSlider.value-1], slider.value)}}</td>
+        <td style="width:25%;">{{getStat(chara.hp, stars[+starSlider.value-1], +slider.value)}}</td>
         <td style="width:25%;">{{a25service.stats['agi'][language]}}</td>
         <td style="width:25%;">{{chara.spd}}</td>
       </tr>
       <tr>
         <td style="width:25%;">{{a25service.stats['patk'][language]}} </td>
-        <td style="width:25%;">{{getStat(chara.patk, stars[starSlider.value-1], slider.value)}}</td>
+        <td style="width:25%;">{{getStat(chara.patk, stars[+starSlider.value-1], +slider.value)}}</td>
         <td style="width:25%;">{{a25service.stats['pdef'][language]}}</td>
-        <td style="width:25%;">{{getStat(chara.pdfn, stars[starSlider.value-1], slider.value)}}</td>
+        <td style="width:25%;">{{getStat(chara.pdfn, stars[+starSlider.value-1], +slider.value)}}</td>
       </tr>
       <tr>
         <td style="width:25%;">{{a25service.stats['matk'][language]}} </td>
-        <td style="width:25%;">{{getStat(chara.matk, stars[starSlider.value-1], slider.value)}}</td>
+        <td style="width:25%;">{{getStat(chara.matk, stars[+starSlider.value-1], +slider.value)}}</td>
         <td style="width:25%;">{{a25service.stats['mdef'][language]}}</td>
-        <td style="width:25%;">{{getStat(chara.mdfn, stars[starSlider.value-1], slider.value)}}</td>
+        <td style="width:25%;">{{getStat(chara.mdfn, stars[+starSlider.value-1], +slider.value)}}</td>
       </tr>
       <tr>
         <td colspan="4">Does not include Grow Board</td>
@@ -114,12 +119,14 @@
           @if (skill.desc) {
             <tr>
               <td>
-                <b>{{skill.name}}</b>
+                <b class="svg-inline-text">{{skill.name}}
                 @if (skill.evol) {
-                  (6 <i class="fa-solid fa-star"></i>)
+                    (6 <svg><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg>)
                 }
-                <i class="atelier atelier-np atelier-resleri-{{skill.elem}} resleri-element-icon"
-                  style="float:right;background-color:{{a25service.elements[skill.elem]}};"></i>
+                </b>
+                <div class="resleri-element-icon-s" style="float:right;background-color:{{a25service.elements[skill.elem]}};">
+                  <svg><use attr.href="/media/spritesheets/A25.svg?v=1#resleri-{{skill.elem}}"></use></svg>
+                </div>
                 <p [innerHTML]="replaceDesc(skill)"></p>
                 <ul style="list-style: none; padding-left: 0;">
                   @if (skill.wt) {
@@ -155,10 +162,12 @@
                 @for (passive of chara.passives; track passive) {
                   @if (passive.name) {
                     <li>
-                      {{passive.name}}
-                      @if (passive.evol) {
-                        (6 <i class="fa-solid fa-star"></i>)
-                      }
+                      <span class="svg-inline-text">
+                        {{passive.name}}
+                        @if (passive.evol) {
+                          (6 <svg><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg>)
+                        }
+                      </span>
                       <ul>
                         <li [innerHTML]="replacePassive(passive)"></li>
                       </ul>
@@ -202,7 +211,7 @@
   </div>
   <ng-template #traitPopover let-trait="trait">
     <p [innerHTML]="trait.desc.replaceAll('{0}', trait.val1 + ' ~ ' + trait.val5).replaceAll('{1}', trait.val1 + ' ~ ' + trait.val5)">{{trait.desc}}</p>
-    <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">More info...</a>
+    <a routerLink="/{{gameURL}}/traits/{{trait.slug}}/{{language}}">{{a25service.details_translation[language]}}</a>
   </ng-template>
   <ng-template #tagPopover let-chars="chars">
     @for (char of chars; track char) {

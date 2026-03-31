@@ -1,13 +1,7 @@
-import { Dialog } from '@angular/cdk/dialog';
-import { Location, NgTemplateOutlet } from '@angular/common';
-import { Component } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
+import { NgTemplateOutlet } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMenuModule } from '@angular/material/menu';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
 import { Character } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -18,47 +12,38 @@ import { A25CharaComponent } from './a25-chara.component';
 import { A25CharaFrameComponent } from './a25-charaframe.component';
 
 @Component({
-    templateUrl: 'a25-charalist.component.html',
-    providers: [DestroyService],
-    imports: [...CommonImports, ...MaterialFormImports, NgTemplateOutlet,
-        MatMenuModule, MatCheckboxModule, A25CharaFrameComponent],
-    styles: [
-        `.char-grid {
+  templateUrl: 'a25-charalist.component.html',
+  imports: [...CommonImports, ...MaterialFormImports, NgTemplateOutlet,
+    MatMenuModule, MatCheckboxModule, A25CharaFrameComponent],
+  styles: [
+    `.char-grid {
       display: grid;
       gap: 1rem;
       margin-bottom: 1rem;
       grid-column-gap:0.8%;
     }`,
-        `@media screen and (min-width: 800px) {
+    `@media screen and (min-width: 800px) {
       .char-grid {
         grid-template-columns:repeat(6,16%);
       }
     }`,
-        `@media screen and (max-width: 800px) {
+    `@media screen and (max-width: 800px) {
       .char-grid {
         grid-template-columns:repeat(3,31%);
       }
     }`
-    ]
+  ]
 })
 
 export class A25CharalistComponent extends DialogUseComponent {
+  protected a25service = inject(A25Service);
   filteredCharas: Observable<Character[]>;
   fillL = 'grey';
   fillR = 'grey';
   colors = ['red', 'green', 'yellow', 'blue', 'purple']
 
-  constructor(
-    protected cdkDialog: Dialog,
-    protected readonly destroy$: DestroyService,
-    protected router: Router,
-    protected route: ActivatedRoute,
-    protected location: Location,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    private formBuilder: UntypedFormBuilder,
-    protected a25service: A25Service,) {
-    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
+  constructor() {
+    super();
     this.component = A25CharaComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -82,7 +67,7 @@ export class A25CharalistComponent extends DialogUseComponent {
     });
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.filteredCharas = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Character[]>),
       map((search: any) => search ?

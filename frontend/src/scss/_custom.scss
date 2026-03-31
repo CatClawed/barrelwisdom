@@ -56,12 +56,6 @@
   padding-left: 0.2rem;
 }
 
-// Game Data Pages
-
-.card-item-display {
-  margin: 0 auto 0 auto;
-}
-
 // Trait specific
 .trait-color {
   color: lightgray;
@@ -69,10 +63,6 @@
 
 .trait-colortrue {
   color: black;
-}
-
-.svg-color {
-  opacity: 35%;
 }
 
 // universal styles for blog pages
@@ -182,23 +172,52 @@
 
 .text-muted {
   color: rgba(33, 37, 41, .75);
+  fill: rgba(33, 37, 41, .75);
 }
 
-.svg-filter {
+.trait-grid {
+  display: grid;
+  row-gap: 1em;
+  justify-content: space-between;
+  height: 100%;
+  align-content: end;
+
+  svg {
+    aspect-ratio: 1;
+    margin: auto;
+    width: 1.5em;
+  }
+}
+
+.category-list {
+  list-style: none;
+  padding-left: 0;
+
+  li {
+    break-inside: avoid-column;
+    vertical-align: middle;
+    display: flex;
+
+    svg {
+      margin-right: 0.5em;
+    }
+  }
+}
+
+.chevron-button {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  padding: 0;
   display: flex;
-  align-items: center;
-  margin-bottom: 1em;
-}
 
-.svg-icon {
-  height: 1.7em;
-  width: 1.7em;
-  fill: black;
-  margin-right: 0.3em;
-}
-
-.svg-icon-text-vertical-center {
-  display:inline-flex;
-  line-height:1.7em;
-  align-content:center;
+  svg {
+    height: 1.7em;
+    width: 1.7em;
+    fill: black;
+  }
 }

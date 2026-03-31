@@ -12,16 +12,16 @@
           <b class="card-icon-position" style="right:100%; top: 0;">{{recipe.recipe_points}} points</b>
         </ng-container>
       }
-      <table class="tbl"><tbody>
+      <table class="tbl a18-recipe-idea"><tbody>
         @if (recipe.book) {
           <tr>
-            <th colspan="2" style="text-align:center;">Book</th>
+            <th colspan="2">{{a18service.recipebook_translation[language]}}</th>
           </tr>
         }
         @if (recipe.book) {
           <tr>
-            <td style="text-align:center;width:15%;">
-              <i class="atelier atelier-ryza2-book" style="padding-right:0;"></i>
+            <td>
+              <svg class="svg-icon-standard"><use href="/media/spritesheets/A18.svg?v=1#book"></use></svg>
             </td>
             <td>
               <a routerLink="/{{gameURL}}/items/{{recipe.book.slug}}/{{language}}">{{recipe.book.name}}</a>
@@ -30,15 +30,15 @@
         }
         @for (idea of recipe.ideas; track idea; let i = $index) {
           <tr>
-            <th colspan="2" style="text-align:center;">Group {{i+1}}</th>
+            <th colspan="2">{{i+1}}</th>
           </tr>
           @for (unlock of idea.unlocks; track unlock) {
             <tr>
               @if (unlock.level == 1) {
-                <td  style="text-align:center;width:15%;vertical-align: middle;"><i class="fa-solid fa-question"></i></td>
+                <td><svg class="svg-icon-standard"><use href="/media/spritesheets/A18.svg?v=1#fa-quest"></use></svg></td>
               }
               @if (unlock.level == 4) {
-                <td style="text-align:center;width:15%;vertical-align: middle;"><i class="fa-solid fa-lock-open"></i></td>
+                <td><svg class="svg-icon-standard"><use href="/media/spritesheets/main.svg?v=1#fa-unlock"></use></svg></td>
               }
               @if (unlock.level == 1 || unlock.level == 4) {
                 <td>
@@ -82,12 +82,12 @@
   </ng-template>
   <filter-list
     [list]="filteredRecipes"
-    name="Recipe Ideas"
+    name="{{a18service.recipe_ideas_translation[language]}}"
     [(hide)]="hide"
     [template]="template">
     <form [formGroup]="pageForm" class="grid">
       <mat-form-field class="grid-12" appearance="outline">
-        <mat-label>Filter...</mat-label>
+        <mat-label>{{a18service.filter_translation[language]}}</mat-label>
         <input matInput formControlName="filtertext">
       </mat-form-field>
     </form>

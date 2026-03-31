@@ -1,4 +1,4 @@
-@use 'variables' as v;
+@use '../../../../scss/variables' as v;
 
 .login-form {
   width: 100%;
@@ -15,7 +15,8 @@
 
 .settings {
   display: grid;
-  margin-top: 1rem;
+  margin-top: 1em;
+  margin-right: 1em;
 
   .settings-row {
     display: inline-flex;
@@ -36,4 +37,11 @@
   >button {
     width: fit-content;
   }
+}
+
+.form-svg {
+  width: 1.5em;
+  height: 1.5em;
+  padding: 0.2em;
+  text-align: center;
 }

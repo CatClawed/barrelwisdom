@@ -1,12 +1,6 @@
-import { Dialog } from '@angular/cdk/dialog';
-import { KeyValuePipe, Location } from '@angular/common';
-import { Component } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
+import { KeyValuePipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { Memoria } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
@@ -18,12 +12,12 @@ import { A25MemoriaComponent } from './a25-memoria.component';
 
 @Component({
     templateUrl: 'a25-memorialist.component.html',
-    providers: [DestroyService],
     imports: [...CommonImports, ...MaterialFormImports, FilterListComponent,
         KeyValuePipe, MatCheckboxModule]
 })
 
 export class A25MemorialistComponent extends DialogUseComponent {
+  protected a25service = inject(A25Service);
   filteredMemoria: Observable<Memoria[]>;
   rarity = {
     1: "R",
@@ -31,17 +25,8 @@ export class A25MemorialistComponent extends DialogUseComponent {
     3: "SSR"
   }
 
-  constructor(
-    protected cdkDialog: Dialog,
-    protected readonly destroy$: DestroyService,
-    protected router: Router,
-    protected route: ActivatedRoute,
-    protected location: Location,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    private formBuilder: UntypedFormBuilder,
-    protected a25service: A25Service,) {
-    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
+  constructor() {
+    super();
     this.component = A25MemoriaComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
@@ -56,7 +41,7 @@ export class A25MemorialistComponent extends DialogUseComponent {
     return this.a25service.getMemoriaList(this.language);
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.filteredMemoria = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Memoria[]>),
       map((search: any) => search ?

@@ -1,9 +1,5 @@
-import { Location, NgTemplateOutlet, ViewportScroller } from '@angular/common';
-import { Component, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
+import { NgTemplateOutlet } from '@angular/common';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.component';
@@ -12,27 +8,15 @@ import { FragmentedComponent } from '@app/views/games/_prototype/fragmented.comp
     templateUrl: 'a25-scorebattle.component.html',
     styleUrls: ['../resleri.scss'],
     encapsulation: ViewEncapsulation.None,
-    selector: 'a25-scorebattle',
-    providers: [DestroyService],
     imports: [...CommonImports, NgTemplateOutlet]
 })
 export class A25ScoreBattleComponent extends FragmentedComponent {
+  protected a25service = inject(A25Service);
   title: string;
   difficulties = {
     1: "Normal",
     2: "Hard",
     3: "Very Hard",
-  }
-
-  constructor(
-    protected route: ActivatedRoute,
-    protected loc: Location,
-    protected readonly destroy$: DestroyService,
-    protected viewportScroller: ViewportScroller,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    protected a25service: A25Service,) {
-    super(destroy$, route, seoService, breadcrumbService, viewportScroller, loc);
   }
 
   changeData() {

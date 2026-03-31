@@ -1,9 +1,7 @@
-@if (userprofile) {
+@if (user$ | async; as userprofile) {
   <header>
     <h1>User: {{userprofile.user.username}}</h1>
   </header>
-}
-@if (userprofile) {
   <article>
     @if (userprofile.avatar) {
       <div class="blog-image">

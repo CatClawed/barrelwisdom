@@ -19,7 +19,7 @@
       <p>{{book.desc}}</p>
     }
     <p><b>Acquisition: </b>{{book.note}}</p>
-    <b>Items:</b>
+    <b>{{a12service.item_translation[language]}}</b>
     <ul class="two-column">
       @for (item of book.items; track item) {
         <li><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>

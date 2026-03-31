@@ -2,7 +2,6 @@
   <h1>{{region.name}}</h1>
   <div style="margin-left: 0.5em; margin-right: 0.5em;">
     <div class="table-of-contents">
-      <b>Table of Contents</b>
       <ol class="toc-list">
         @for (area of region.areas; track area) {
           <li>
@@ -89,9 +88,9 @@
         <table class="tbl borders" ><tbody>
           <tr>
             <th>Tool</th>
-            <th><i class="fas fa-star"></i></th>
-            <th><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
-            <th><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></th>
+            <th><svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg></th>
+            <th><svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg><svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg></th>
+            <th><svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg><svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg><svg class="standard-stat-star" style="fill:black;"><use href="/media/spritesheets/main.svg?v=1#fa-star"></use></svg></th>
           </tr>
           @for (node of climate.nodes; track node) {
             @if (validNode(node)) {
@@ -99,70 +98,13 @@
                 <ng-template #typePopover>
                   {{node.kind}}
                 </ng-template>
-                @if (!node.kind.startsWith('major')) {
                   <td style="text-align: center;vertical-align: middle;">
-                    @if (node.tool == 'HAND') {
-                      <i    class="atelier atelier-lg atelier-ryza2-tool-gather"     ></i>
-                    }
-                    @if (node.tool == 'ROD') {
-                      <i     class="atelier atelier-lg atelier-ryza2-tool-staff"      ></i>
-                    }
-                    @if (node.tool == 'FISH') {
-                      <i    class="atelier atelier-lg atelier-ryza2-tool-fishing-rod"></i>
-                    }
-                    @if (node.tool == 'SICKLE') {
-                      <i  class="atelier atelier-lg atelier-ryza2-tool-sickle"     ></i>
-                    }
-                    @if (node.tool == 'NET') {
-                      <i     class="atelier atelier-lg atelier-ryza2-tool-bug-net"    ></i>
-                    }
-                    @if (node.tool == 'PICKAXE') {
-                      <i class="atelier atelier-lg atelier-sophie2-tool-pickaxe"  ></i>
-                    }
-                    @if (node.tool == 'HAMMER') {
-                      <i  class="atelier atelier-lg atelier-sophie2-tool-hammer"   ></i>
-                    }
-                    @if (node.tool == 'SHOT') {
-                      <i    class="atelier atelier-lg atelier-sophie2-tool-slingshot"></i>
-                    }
+                    <svg class="svg-icon" [style]="node.kind.startsWith('major') ? `fill:darkorange;` : null"><use attr.href="/media/spritesheets/A23.svg?v=1#{{gather[node.tool]}}"></use></svg>
                     <popover name="Gather Type"
-                      [template]="typePopover"
-                      cls="fas fa-plus-square">
+                      [template]="typePopover">
+                      <svg class="a23-plus-icon"><use href="/media/spritesheets/A23.svg?v=1#fa-square-plus"></use></svg>
                     </popover>
                   </td>
-                }
-                @if (node.kind.startsWith('major')) {
-                  <td style="text-align: center;vertical-align: middle;color:darkorange;">
-                    @if (node.tool == 'HAND') {
-                      <i    class="atelier atelier-lg atelier-ryza2-tool-gather"     ></i>
-                    }
-                    @if (node.tool == 'ROD') {
-                      <i     class="atelier atelier-lg atelier-ryza2-tool-staff"      ></i>
-                    }
-                    @if (node.tool == 'FISH') {
-                      <i    class="atelier atelier-lg atelier-ryza2-tool-fishing-rod"></i>
-                    }
-                    @if (node.tool == 'SICKLE') {
-                      <i  class="atelier atelier-lg atelier-ryza2-tool-sickle"     ></i>
-                    }
-                    @if (node.tool == 'NET') {
-                      <i     class="atelier atelier-lg atelier-ryza2-tool-bug-net"    ></i>
-                    }
-                    @if (node.tool == 'PICKAXE') {
-                      <i class="atelier atelier-lg atelier-sophie2-tool-pickaxe"  ></i>
-                    }
-                    @if (node.tool == 'HAMMER') {
-                      <i  class="atelier atelier-lg atelier-sophie2-tool-hammer"   ></i>
-                    }
-                    @if (node.tool == 'SHOT') {
-                      <i    class="atelier atelier-lg atelier-sophie2-tool-slingshot"></i>
-                    }
-                    <popover name="Gather Type"
-                      [template]="typePopover"
-                      cls="fas fa-plus-square">
-                    </popover>
-                  </td>
-                }
                 @for (item of node.items; track item) {
                   <td>
                     <a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a><br/>{{item.priority}}%

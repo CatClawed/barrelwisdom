@@ -15,19 +15,25 @@
       }
       <p [style]="url ? 'height:100%;' : null">{{trait.desc}}</p>
       @if (trait.item_set) {
-        <b>Items:</b>
+        <b>{{a12service.item_translation[language]}}</b>
         <ul>
           @for (item of trait.item_set; track item) {
             <li><a routerLink="/{{gameURL}}/items/{{item.slug}}/{{language}}">{{item.name}}</a></li>
           }
         </ul>
       }
-      <div class="flex bottom">
-        <i class="trait-color{{trait.synth}}     atelier atelier-np atelier-ryza2-type-synthesis"></i>
-        <i class="trait-color{{trait.usable}}    atelier atelier-np atelier-escha-bomb"></i>
-        <i class="trait-color{{trait.ingot}}     atelier atelier-np atelier-escha-weapon"></i>
-        <i class="trait-color{{trait.cloth}}     atelier atelier-np atelier-escha-armor"></i>
-        <i class="trait-color{{trait.accessory}} atelier atelier-np atelier-escha-accessory"></i>
+      <div class="trait-grid" style="grid-template-columns: auto auto auto auto auto;">
+        @for (t of [
+            [trait.synth,  'synthesis'],
+            [trait.usable, 'bomb'],
+            [trait.ingot, 'weapon'],
+            [trait.cloth,  'armor'],
+            [trait.accessory,  'accessory'],
+          ]; track $index) {
+          <svg [style]="!t[0] ? 'fill:lightgray;' : null">
+            <use attr.href="/media/spritesheets/A12.svg?v=1#{{t[1]}}"></use>
+          </svg>
+        }
       </div>
     </div>
 }

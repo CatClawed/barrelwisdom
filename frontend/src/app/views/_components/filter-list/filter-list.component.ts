@@ -1,73 +1,54 @@
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnDestroy, Output, TemplateRef, ViewChild } from '@angular/core';
-import { AppComponent } from '@app/app.component';
-import { DestroyService } from '@app/services/destroy.service';
+import { AsyncPipe, isPlatformBrowser, NgTemplateOutlet } from '@angular/common';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, inject, Input, OnDestroy, Output, PLATFORM_ID, TemplateRef, ViewChild } from '@angular/core';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
-import { Observable, takeUntil } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
-    templateUrl: 'filter-list.component.html',
-    selector: 'filter-list',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [...CommonImports, NgTemplateOutlet, AsyncPipe]
+  templateUrl: 'filter-list.component.html',
+  selector: 'filter-list',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [...CommonImports, NgTemplateOutlet, AsyncPipe]
 })
 export class FilterListComponent implements AfterViewInit, OnDestroy {
-  @Input()
-  name: string;
+  private platformId = inject(PLATFORM_ID);
 
-  @Input()
-  list: Observable<any[]>;
-
-  @Input()
-  hide: boolean = false;
-
-  @Output()
-  hideChange = new EventEmitter<boolean>();
-
-  @Input()
-  template: TemplateRef<any>;
-
-  @Input()
-  loadAll: boolean = false;
-
-  skip: boolean = false;
-  intersectionObserver: IntersectionObserver;
+  @Input() name: string;
+  @Input() list: Observable<any[]>;
+  @Input() hide: boolean = false;
+  @Output() hideChange = new EventEmitter<boolean>();
+  @Input() template: TemplateRef<any>;
+  @Input() loadAll: boolean = false;
+  intersectionObserver?: IntersectionObserver;
   waitingOver: boolean = false;
 
   @ViewChild('loadingSpinner')
   loadingSpinner: ElementRef;
 
-  constructor(protected readonly destroy$: DestroyService) {
-    AppComponent.isBrowser
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(isBrowser => {
-      if (!isBrowser) {
-        this.skip = true;
-      }
-    });
-  }
-
   ngAfterViewInit(): void {
-    if (this.skip) return;
+    if (!isPlatformBrowser(this.platformId)) return;
+
     setTimeout(() => {
       this.waitingOver = true;
-    }, 300); // probably enough time to stop certain behaviors
-      this.intersectionObserver = new IntersectionObserver (
-        (entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting && this.list !== undefined && this.waitingOver) {
-                    this.hide = true;
-                    this.hideChange.emit(this.hide)
-                }
-            });
-        },
-        { threshold: 0.2}
-    );
-    this.intersectionObserver.observe(this.loadingSpinner.nativeElement);
+    }, 300);
 
+    this.intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && this.list !== undefined && this.waitingOver) {
+            this.hide = true;
+            this.hideChange.emit(this.hide);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    if (this.loadingSpinner) {
+      this.intersectionObserver.observe(this.loadingSpinner.nativeElement);
+    }
   }
 
   ngOnDestroy(): void {
-   if (!this.skip) this.intersectionObserver.disconnect();
+    this.intersectionObserver?.disconnect();
   }
 }

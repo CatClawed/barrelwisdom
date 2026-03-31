@@ -11,7 +11,9 @@
         }
       </h4>
       <div class="card-icon-position">
-        <tooltip tip="Influences rank. A measure of rarity. This number determines where traits appear.">Grade: </tooltip>
+        <popover
+          [text]="`Influences rank. A measure of rarity. This number determines where traits appear.`">
+          {{a18service.level_translation[language]}}</popover>:
         @if (trait.grade == -1) {
           N/A
         }
@@ -73,13 +75,19 @@
           }
         </ul>
       }
-      <div class="flex bottom" style="text-align:center; height: 100%;">
-        <i style="width:1.5rem" class="trait-color{{trait.trans_syn}}  atelier atelier-np atelier-firis-synthesis"></i>
-        <i style="width:1.5rem" class="trait-color{{trait.trans_atk}}  atelier atelier-np atelier-firis-attack"></i>
-        <i style="width:1.5rem" class="trait-color{{trait.trans_heal}} atelier atelier-np atelier-firis-heal"></i>
-        <i style="width:1.5rem" class="trait-color{{trait.trans_wpn}}  atelier atelier-np atelier-firis-weapon"></i>
-        <i style="width:1.5rem" class="trait-color{{trait.trans_arm}}  atelier atelier-np atelier-firis-armor"></i>
-        <i style="width:1.5rem" class="trait-color{{trait.trans_acc}}  atelier atelier-np atelier-firis-accessory"></i>
+      <div class="trait-grid" style="grid-template-columns: auto auto auto auto auto auto;">
+        @for (t of [
+            [trait.trans_syn,  'synthesis'],
+            [trait.trans_atk,  'attack'],
+            [trait.trans_heal, 'heal'],
+            [trait.trans_wpn,  'weapon'],
+            [trait.trans_arm,  'armor'],
+            [trait.trans_acc,  'accessory'],
+          ]; track $index) {
+          <svg [style]="!t[0] ? 'fill:lightgray;' : null">
+            <use attr.href="/media/spritesheets/A18.svg?v=1#{{t[1]}}"></use>
+          </svg>
+        }
       </div>
     </div>
 }

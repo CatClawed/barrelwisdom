@@ -207,4 +207,4 @@ class A26CategoryFullSerializer(A26DefaultSerializer):
         model = Category
         fields = ['in_cat', 'used', 'name']
     def get_in_cat(self, obj):
-        return A26ItemSimpleSerializer(obj.item_set.filter(hidden=False), many=True).data
+        return A26ItemSimpleSerializer(obj.item_set.filter(hidden=False), context=self.context, many=True).data

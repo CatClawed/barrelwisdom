@@ -1,7 +1,6 @@
 @if (data; as dungeons) {
   <h1>{{title}}</h1>
   <div class="table-of-contents">
-    <b>Table of Contents</b>
     <ol>
       @for (dungeon of dungeons; track dungeon) {
         <li>
@@ -27,13 +26,17 @@
         </tr>
       }
     </tbody></table>
-    <div style="display:grid;grid-template-columns:repeat(3,33%);grid-row-gap:1rem;text-align:center;">
+    <div style="display:grid;grid-template-columns:repeat(3,33%);grid-row-gap:1rem;">
       @for (reward of dungeon.rewards; track reward) {
-        <a routerLink="/{{gameURL}}/items/materials/{{reward.item.slug}}/{{language}}">
+        <a style="position: relative;text-align:center; max-width: 256px;"
+          routerLink="/{{gameURL}}/items/materials/{{reward.item.slug}}/{{language}}">
+          <svg class="f{{reward.item.rarity}} resleri-item-bg-sm">
+              <use href="/media/spritesheets/A25.svg?v=1#item-frame"></use>
+          </svg>
           <img loading="lazy" class="resleri-item-frame-sm"
-            style="aspect-ratio:1;width:150px;background-image:url({{imgURL}}svg/item-frame-{{reward.item.rarity}}.svg)"
-            src="{{imgURL}}items/{{reward.item.slug}}.webp" alt="{{reward.item.name}}"><br />
-          {{reward.item.name}}</a>
+            src="{{imgURL}}items/{{reward.item.slug}}.webp" alt="{{reward.item.name}}">
+          {{reward.item.name}}
+        </a>
         }
     </div>
   </ng-template>

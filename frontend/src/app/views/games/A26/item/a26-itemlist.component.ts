@@ -1,12 +1,6 @@
-import { Dialog } from '@angular/cdk/dialog';
-import { Location } from '@angular/common';
-import { Component } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
+import { FilterButtonsComponent } from '@app/views/_components/filter-buttons/filter-buttons.component';
 import { FilterListComponent } from '@app/views/_components/filter-list/filter-list.component';
 import { ItemComponent } from '@app/views/_components/item/item.component';
 import { Item } from '@app/views/games/A26/_services/a26.interface';
@@ -15,40 +9,31 @@ import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/
 import { DialogUseComponent } from '@app/views/games/_prototype/dialog-use.component';
 import { Observable, forkJoin } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { A26ItemComponent } from './a26-item.component';
 import { category_to_icon } from './a26-item-icons';
+import { A26ItemComponent } from './a26-item.component';
 
 
 @Component({
     templateUrl: 'a26-itemlist.component.html',
-    providers: [DestroyService],
     styleUrls: ['../yumia.scss'],
     imports: [...CommonImports, ...MaterialFormImports, ItemComponent,
-        FilterListComponent, MatButtonModule]
+        FilterListComponent, MatButtonModule, FilterButtonsComponent],
 })
 
 export class A26ItemlistComponent extends DialogUseComponent {
+  protected a26service = inject(A26Service);
   filteredItems: Observable<Item[]>;
   category_to_icon = category_to_icon
   things;
 
-  constructor(
-    protected cdkDialog: Dialog,
-    protected readonly destroy$: DestroyService,
-    protected router: Router,
-    protected route: ActivatedRoute,
-    protected location: Location,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    private formBuilder: UntypedFormBuilder,
-    protected a26service: A26Service) {
-    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
+  constructor() {
+    super();
     this.component = A26ItemComponent;
     this.pageForm = this.formBuilder.nonNullable.group({
       filtertext: '',
       cat: '',
       mat: '',
-      element: 'Any',
+      element: '',
       fire: false,
       ice: false,
       bolt: false,
@@ -84,7 +69,7 @@ export class A26ItemlistComponent extends DialogUseComponent {
     })
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.filteredItems = this.pageForm.valueChanges.pipe(
       startWith(null as Observable<Item[]>),
       map((search: any) => search ? this.filterT(search.filtertext, search.cat, search.mat, search.fire, search.ice, search.bolt, search.air, search.gather, search.consumable, search.synth, search.equip, search.explore, search.key, search.furniture) : this.data.items.slice())

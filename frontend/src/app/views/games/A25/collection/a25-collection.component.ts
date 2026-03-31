@@ -1,22 +1,16 @@
 import { ClipboardModule } from '@angular/cdk/clipboard';
-import { Dialog } from '@angular/cdk/dialog';
-import { KeyValuePipe, Location, NgTemplateOutlet } from '@angular/common';
+import { KeyValuePipe, NgTemplateOutlet } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
-import { ActivatedRoute, Router } from '@angular/router';
-import { LocalstorageService } from '@app/_helpers/local-storage';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
+import { LocalStorage } from '@app/_helpers/local-storage';
 import { Popover } from '@app/views/_components/popover/popover.component';
 import { DialogUseComponent } from '@app/views/games/_prototype/dialog-use.component';
 import { CommonImports, MaterialFormImports } from '@app/views/games/_prototype/SharedModules/common-imports';
-import { Character, Emblem, Memoria } from '@app/views/games/A25/_services/a25.interface';
+import { Character, Memoria } from '@app/views/games/A25/_services/a25.interface';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { A25CharaComponent } from '@app/views/games/A25/character/a25-chara.component';
 import { A25MemoriaComponent } from '@app/views/games/A25/memoria/a25-memoria.component';
@@ -27,7 +21,6 @@ import { A25CharaFrameComponent } from '../character/a25-charaframe.component';
 @Component({
     templateUrl: 'a25-collection.component.html',
     selector: 'a25-collection',
-    providers: [DestroyService],
     imports: [...CommonImports, ...MaterialFormImports, MatTabsModule, KeyValuePipe,
         MatButtonModule, MatCheckboxModule, MatMenuModule, NgTemplateOutlet,
         Popover, ClipboardModule, A25CharaFrameComponent],
@@ -82,6 +75,8 @@ import { A25CharaFrameComponent } from '../character/a25-charaframe.component';
     ]
 })
 export class A25CollectionComponent extends DialogUseComponent {
+  protected a25service = inject(A25Service);
+  protected LocalStorage = inject(LocalStorage);
   collection = {
     emblems: {},
     characters: {},
@@ -120,18 +115,8 @@ export class A25CollectionComponent extends DialogUseComponent {
   use_global_count: boolean;
   has_collection: boolean = false;
 
-  constructor(
-    protected LocalStorage: LocalstorageService,
-    protected cdkDialog: Dialog,
-    protected readonly destroy$: DestroyService,
-    protected router: Router,
-    protected route: ActivatedRoute,
-    protected location: Location,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    private formBuilder: UntypedFormBuilder,
-    protected a25service: A25Service,) {
-    super(destroy$, router, route, location, seoService, breadcrumbService, cdkDialog);
+  constructor() {
+    super();
     this.has_collection = false;
     if (this.route.snapshot.params.code) {
       this.shareCode = this.route.snapshot.params.code;
@@ -176,7 +161,7 @@ export class A25CollectionComponent extends DialogUseComponent {
     this.openTab = event['index'];
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.use_global_count = this.detect_global();
     this.filteredCharas = this.pageForm.valueChanges.pipe(
         startWith(null as Observable<Character[]>),

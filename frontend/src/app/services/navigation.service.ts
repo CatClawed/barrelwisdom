@@ -1,103 +1,89 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, OnDestroy } from '@angular/core';
+import { computed, inject, Injectable } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
-import { environment } from '@environments/environment';
+import { getApiUrl } from '@app/_helpers/api-url';
 import { LanguageData } from '@environments/language-data';
-import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
-import { catchError, filter, first, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
-export class NavigationService implements OnDestroy {
-  private navSubject: BehaviorSubject<NavLanguages>;
-  public nav: Observable<any>;
-  public n: any;
+export class NavigationService {
+  private apiUrl = getApiUrl();
+  private router = inject(Router);
+  private http = inject(HttpClient);
   public blogNav = ['user', 'settings', 'tag', 'login', 'register', 'moderate', 'create'];
-  previousSection = "";
-  previousLanguage = "";
-  section = "blog";
-  private destroy$ = new Subject<void>();
 
-  private langSubject: BehaviorSubject<any>;
-  public langObserve: Observable<any>;
-  public langOptions = LanguageData.languages['default'];
-  public currentLang = "en";
-  private currentLangSubject: BehaviorSubject<string>;
-  public currentLangObserve: Observable<string>;
+  private routeState$ = this.router.events.pipe(
+    filter(e => e instanceof NavigationEnd),
+    map(() => this.parseUrl(this.router.url))
+  );
+  public section = toSignal(this.routeState$.pipe(map(s => s.section)), { initialValue: 'default' });
+  public currentLang = toSignal(this.routeState$.pipe(map(s => s.lang)), { initialValue: 'en' });
+  public en_only = toSignal(this.routeState$.pipe(map(s => s.en_only)), { initialValue: false });
+
+  public langOptions = computed(() => {
+    return LanguageData.languages[this.section()] ?? LanguageData.languages['default'];
+  });
+
+  private rawNavData = toSignal(
+    this.routeState$.pipe(
+      map(s => ({ section: s.section, lang: s.lang })),
+      distinctUntilChanged((prev, curr) =>
+        prev.section === curr.section && prev.lang === curr.lang
+      ),
+
+      switchMap(state =>
+        this.getNav(state.section).pipe(
+          catchError(err => {
+            console.error('Nav Error:', err);
+            return of({ data: '[]' });
+          })
+        )
+      ),
+      map(response => {
+        try {
+          return JSON.parse(response.data);
+        } catch {
+          return {};
+        }
+      })
+    ),
+    { initialValue: {} }
+  );
+
+  public navigation = computed(() => {
+    const data = this.rawNavData();
+    const lang = this.currentLang();
+    return data[lang] !== undefined ? data[lang] : data['en'];
+  });
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(
-    private http: HttpClient,
-    private router: Router) {
-    this.navSubject = new BehaviorSubject<any>(this.n);
-    this.nav = this.navSubject.asObservable();
-    this.langSubject = new BehaviorSubject<any>(this.langOptions);
-    this.langObserve = this.langSubject.asObservable();
-    this.currentLangSubject = new BehaviorSubject<string>(this.currentLang);
-    this.currentLangObserve = this.currentLangSubject.asObservable();
+  private parseUrl(url: string) {
+    let sections = url.split('?')[0].split('#')[0].split('/');
+    let section = sections[1];
 
-    this.router.events
-      .pipe(takeUntil(this.destroy$),
-        filter(val => val instanceof NavigationEnd),
-        tap(() => {
-          let sections = this.router.url.split('?')[0].split('#')[0].split('/')
-          this.section = sections[1]
-          if (/^\d+/.test(this.section) || this.blogNav.includes(this.section) || !this.section) {
-            this.section = 'blog'
-          }
-          if (sections.length > 3) {
-            this.langOptions = LanguageData.languages[this.section] === undefined ? LanguageData.languages['default'] : LanguageData.languages[this.section];
-            this.langSubject.next(this.langOptions)
-            this.currentLang = sections[sections.length-1]
-            this.currentLangSubject.next(this.currentLang)
-        }
-        else {
-            this.langOptions = LanguageData.languages['default'];
-            this.langSubject.next(this.langOptions)
-            this.currentLang = "en"
-            this.currentLangSubject.next(this.currentLang)
-        }
-        if (this.n !== undefined) {
-          if(this.previousLanguage != this.currentLang) {
-            this.navSubject.next(this.n[this.currentLang] !== undefined ? this.n[this.currentLang] : this.n["en"]);
-          }
-        }
-        }),
-        filter(() => this.section != this.previousSection),
-        switchMap(() =>
-          this.getNav(this.section).pipe(
-            first(),
-            catchError(() => { return of({ data: '[]' }) })
-          )
-        )
-      )
-      .subscribe(data => {
-        this.previousSection = this.section;
-        try {
-          this.n = JSON.parse(data.data);
-          this.navSubject.next(this.n[this.currentLang] !== undefined ? this.n[this.currentLang] : this.n["en"]);
-        }
-        catch (err) {
-          console.log('Nav Error: ', err.message)
-        }
-      })
+    if (/^\d+/.test(section) || this.blogNav.includes(section) || !section) {
+      section = 'blog';
+    }
+    let lang = 'en';
+    let en_only = false;
+    if (sections.length > 3) {
+      lang = sections[sections.length - 1];
+    }
+    else {
+      en_only = true;
+    }
+
+    return { section, lang, en_only };
   }
 
   getNav(section: string): Observable<Nav> {
-    return this.http.get<Nav>(`${environment.apiUrl}/nav/${section}/?v=2`, this.httpOptions);
+    return this.http.get<Nav>(`${this.apiUrl}/nav/${section}/?v=1`, this.httpOptions);
   }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-}
-
-export interface NavLanguages {
-  en: NavItems[];
-  ja: NavItems[]
 }
 
 export interface Nav {

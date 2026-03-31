@@ -1,8 +1,4 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
+import { Component, inject } from '@angular/core';
 import { A15Service } from '@app/views/games/A15/_services/a15.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
 import { SingleComponent } from '@app/views/games/_prototype/single.component';
@@ -10,33 +6,24 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
 @Component({
     templateUrl: 'a15-item.component.html',
     selector: 'a15-item',
-    styleUrls: ['../../_scss/dusk.scss'],
-    providers: [DestroyService],
+    styleUrl: '../a15.scss',
     imports: [...CommonImports]
 })
 export class A15ItemComponent extends SingleComponent {
+  protected a15service = inject(A15Service);
   fire = false;
   water = false;
   wind = false;
   earth = false;
 
-  constructor(
-    protected route: ActivatedRoute,
-    protected readonly destroy$: DestroyService,
-    protected a15service: A15Service,
-    protected breadcrumbService: BreadcrumbService,
-    protected seoService: SeoService) {
-    super(destroy$, route, breadcrumbService, seoService);
-  }
-
   changeData() {
     this.gameService(this.a15service, 'items');
     return this.a15service.getItem(this.slug, this.language);
   }
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.seoImage = `${this.imgURL}${this.section}/${this.data.slug}.webp`
     this.genericSettings(this.data.name, this.data.desc,
-      'Items',
+      this.a15service.item_translation[this.language],
       false,
       this.inputSlug ? false : true);
 

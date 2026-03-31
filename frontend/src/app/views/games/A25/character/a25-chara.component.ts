@@ -1,10 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSliderModule } from '@angular/material/slider';
-import { ActivatedRoute } from '@angular/router';
-import { BreadcrumbService } from '@app/services/breadcrumb.service';
-import { DestroyService } from '@app/services/destroy.service';
-import { SeoService } from '@app/services/seo.service';
 import { Popover } from '@app/views/_components/popover/popover.component';
 import { A25Service } from '@app/views/games/A25/_services/a25.service';
 import { CommonImports } from '@app/views/games/_prototype/SharedModules/common-imports';
@@ -14,10 +10,10 @@ import { SingleComponent } from '@app/views/games/_prototype/single.component';
     templateUrl: 'a25-chara.component.html',
     selector: 'a25-chara',
     styleUrls: ['../resleri.scss'],
-    providers: [DestroyService],
     imports: [...CommonImports, Popover, MatSliderModule, MatCheckboxModule]
 })
 export class A25CharaComponent extends SingleComponent {
+  protected a25service = inject(A25Service);
   stars: number[] = [1, 2, 3, 3.5, 4, 4.5, 5, 6];
   gradients = {
     1: "background: linear-gradient(0deg, rgba(81,53,40,1) 0%, rgba(10,32,47,1) 50%, rgba(22,60,73,1) 100%);",
@@ -35,21 +31,12 @@ export class A25CharaComponent extends SingleComponent {
     6: 1.5
   }
 
-  constructor(
-    protected route: ActivatedRoute,
-    protected readonly destroy$: DestroyService,
-    protected seoService: SeoService,
-    protected breadcrumbService: BreadcrumbService,
-    protected a25service: A25Service) {
-    super(destroy$, route, breadcrumbService, seoService);
-  }
-
   changeData() {
     this.gameService(this.a25service, 'characters');
     return this.a25service.getChara(this.slug, this.language)
   }
 
-  afterAssignment(): void {
+  override afterAssignment(): void {
     this.seoImage = `${this.imgURL}characters/full/${this.data.slug}.webp`
     this.genericSettings(`${this.data.name} ${this.data.title}`,
         `Gifts: ${this.data.trait1.name} • ${this.data.trait2.name} • ${this.data.trait3.name}`,

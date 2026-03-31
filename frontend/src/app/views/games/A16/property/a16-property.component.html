@@ -33,7 +33,6 @@
       }
       <p>{{property.desc}}</p>
       @if (property.item_set) {
-        <b>Items:</b>
         <ul class="two-column">
           @for (item of property.item_set; track item; let index=$index) {
             @if (index < 3 || !url) {
@@ -46,17 +45,25 @@
         </ul>
       }
       @if (property.grade != -1) {
-        <p>
-          <tooltip tip="A measure of rarity. This number determines where properties appear.">Grade: </tooltip>
-        {{property.grade}}
+        <p><popover
+            [text]="`A measure of rarity. This number determines where properties appear.`">
+            {{a16service.level_translation[language]}}</popover>:
+          {{property.grade}}
         </p>
       }
-    <div class="flex bottom" style="height:100%;">
-      <i class="trait-color{{property.bomb}}      atelier atelier-np atelier-escha-bomb"></i>
-      <i class="trait-color{{property.heal}}      atelier atelier-np atelier-escha-heal"></i>
-      <i class="trait-color{{property.weapon}}    atelier atelier-np atelier-escha-weapon"></i>
-      <i class="trait-color{{property.armor}}     atelier atelier-np atelier-escha-armor"></i>
-      <i class="trait-color{{property.accessory}} atelier atelier-np atelier-escha-accessory"></i>
+
+    <div class="trait-grid" style="grid-template-columns: auto auto auto auto auto;">
+      @for (t of [
+          [property.bomb,  'bomb'],
+          [property.heal, 'heal'],
+          [property.weapon,  'weapon'],
+          [property.armor,  'armor'],
+          [property.accessory,  'accessory'],
+        ]; track $index) {
+        <svg [style]="!t[0] ? 'fill:lightgray;' : null">
+          <use attr.href="/media/spritesheets/A16.svg?v=1#{{t[1]}}"></use>
+        </svg>
+      }
     </div>
   </div>
 }

@@ -1,4 +1,4 @@
-@use 'variables' as v;
+@use '../variables' as v;
 @use 'sass:math';
 
 a:active,
@@ -19,12 +19,30 @@ a:hover {
 }
 
 body {
-    background: v.$bg-main;
+    background-image: v.$bg-main;
     background-color: #faf6f5;
-    font-family: v.$font-family-sans-serif;
+    font-family: v.$font-family;
     font-size: 1.1rem;
     margin: 0;
     line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+:lang(ja) body {
+    font-family: v.$font-family-jp;
+}
+
+:lang(zh-Hans) body {
+    font-family: v.$font-family-sc;
+}
+
+:lang(zh-Hant) body {
+    font-family: v.$font-family-tc;
+}
+
+:lang(ko) body {
+    font-family: v.$font-family-ko;
 }
 
 img {
@@ -51,10 +69,30 @@ h3,
 h4,
 h5,
 h6 {
-    font-weight: 500;
     font-family: v.$headings-font-family;
     margin-top: 0;
     margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+:lang(ja) :is(h1, h2, h3, h4, h5, h6) {
+    font-family: v.$headings-font-family-jp;
+    font-weight: 700;
+}
+
+:lang(zh-Hans) :is(h1, h2, h3, h4, h5, h6) {
+    font-family: v.$headings-font-family-sc;
+    font-weight: 700;
+}
+
+:lang(zh-Hant) :is(h1, h2, h3, h4, h5, h6) {
+    font-family: v.$headings-font-family-tc;
+    font-weight: 700;
+}
+
+:lang(ko) :is(h1, h2, h3, h4, h5, h6) {
+    font-family: v.$headings-font-family-ko;
+    font-weight: 700;
 }
 
 p {
