@@ -1,9 +1,0 @@
-FROM node:24-alpine3.23
-ENV NPM_CONFIG_UPDATE_NOTIFIER=false
-WORKDIR /frontend
-RUN npm install -g @angular/cli
-COPY package*.json /frontend
-RUN npm ci --no-audit --no-fund
-USER node
-COPY --chown=node:node . /frontend
-CMD ["npm", "start"]

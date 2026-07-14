@@ -1,11 +1,7 @@
 .DS_Store
 Thumbs.db
 .vscode
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-/.idea
+.idea/
 .project
 .classpath
 .c9/
@@ -15,7 +11,7 @@ Thumbs.db
 .history/*
 *.log
 *.bak
-*.env
+.env
 .dccache
 .sonar_lock
 .scannerwork/*
@@ -23,3 +19,11 @@ sonar-project.properties
 backend/scripts/data.txt
 frontend/src/ads.txt
 .angular/
+
+.astro/
+.wrangler
+dist/
+node_modules/
+
+backend
+frontend
