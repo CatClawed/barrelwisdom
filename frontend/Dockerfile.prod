@@ -1,4 +1,0 @@
-FROM node:24-alpine3.23
-COPY /dist /dist
-USER node
-CMD node dist/frontend/server/server.mjs
