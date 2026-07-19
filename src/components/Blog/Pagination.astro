@@ -1,0 +1,19 @@
+---
+const { prevUrl, nextUrl, current, last } = Astro.props;
+---
+
+<nav class="pagination">
+  {prevUrl ? <a href={prevUrl}>&larr; Previous</a> : <div />}
+
+  {
+    current && last ? (
+      <span>
+        Page {current} of {last}
+      </span>
+    ) : (
+      <div />
+    )
+  }
+
+  {nextUrl ? <a href={nextUrl}>Next &rarr;</a> : <div />}
+</nav>

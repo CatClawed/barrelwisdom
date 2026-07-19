@@ -1,0 +1,22 @@
+---
+import { Image } from "astro:assets";
+import FormattedDate from "@components/MainLayout/FormattedDate.astro";
+import { getFolderSlug } from "@app/utils/get-slug";
+
+const { post } = Astro.props;
+const slug = getFolderSlug(post);
+---
+
+<li>
+  <a href={`/${slug}`}>
+    {
+      post.data.heroImage && (
+        <Image width={720} height={360} src={post.data.heroImage} alt="" />
+      )
+    }
+    <h4 class="list-title">{post.data.title}</h4>
+    <p class="list-date">
+      <FormattedDate date={post.data.pubDate} />
+    </p>
+  </a>
+</li>

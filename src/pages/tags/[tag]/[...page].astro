@@ -1,0 +1,31 @@
+---
+import { POSTS_PER_PAGE } from '@app/consts';
+import BlogList from '@components/Blog/BlogList.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths({ paginate }: any) {
+  const allPosts = (await getCollection('blog'))
+    .filter((p) => p.data.pubDate && p.id.startsWith('blog'))
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+  const uniqueTags = [
+    ...new Set(allPosts.map((post) => post.data.tags).flat()),
+  ];
+
+  return uniqueTags.flatMap((tag) => {
+    const filteredPosts = allPosts.filter((post) =>
+      post.data.tags.includes(tag),
+    );
+
+    return paginate(filteredPosts, {
+      params: { tag: tag.toLowerCase().replace(/\s+/g, '-') },
+      props: { tagName: tag },
+      pageSize: POSTS_PER_PAGE,
+    });
+  });
+}
+
+const { page, tagName } = Astro.props;
+---
+
+<BlogList page={page} tag={tagName} />

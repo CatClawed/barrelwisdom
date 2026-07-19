@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content';
+import { POSTS_PER_PAGE } from '@app/consts';
+import BlogList from '@components/Blog/BlogList.astro';
+
+export async function getStaticPaths({ paginate }: any) {
+  const allPosts = await getCollection('blog');
+  const filteredPosts = allPosts
+    .filter((p) => p.data.pubDate && p.id.startsWith('blog'))
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+  return paginate(filteredPosts.slice(1), {
+    pageSize: POSTS_PER_PAGE,
+  });
+}
+
+const { page } = Astro.props;
+---
+
+<BlogList page={page} />

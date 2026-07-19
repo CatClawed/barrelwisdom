@@ -1,0 +1,34 @@
+---
+import { SITE_DESCRIPTION, SITE_TITLE } from '@app/consts';
+import Pagination from '@components/Blog/Pagination.astro';
+import PostCard from '@components/Blog/PostCard.astro';
+import MainLayout from '@layouts/MainLayout.astro';
+
+const { page, isMain = false, tag = undefined } = Astro.props;
+const title = isMain
+  ? SITE_TITLE
+  : tag !== undefined
+    ? 'Archive: ' + tag
+    : SITE_TITLE + ' Page ' + page.currentPage;
+---
+
+<MainLayout title={title} description={SITE_DESCRIPTION}>
+  {tag && <h1>Archive: {tag}</h1>}
+  <section class="post-card">
+    <ul>
+      {page.data.map((post: any) => <PostCard post={post} />)}
+    </ul>
+  </section>
+  {
+    isMain ? (
+      <Pagination nextUrl="/2" />
+    ) : (
+      <Pagination
+        prevUrl={page.url.prev}
+        nextUrl={page.url.next}
+        current={page.currentPage}
+        last={page.lastPage}
+      />
+    )
+  }
+</MainLayout>
