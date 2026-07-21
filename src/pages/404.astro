@@ -1,0 +1,49 @@
+---
+import MainLayout from '@layouts/MainLayout.astro';
+---
+
+<MainLayout title="404 - Page Not Found">
+  <div class="error-container">
+    <div class="error-content">
+      <h1 class="error-code">404</h1>
+      <div class="error-text">
+        <h4 class="pt-3">Oops! You're lost.</h4>
+        <p class="text-muted">
+          Our puni told us that the page you're looking for doesn't exist.
+        </p>
+      </div>
+    </div>
+    <img src="/media/main/punidead.svg" alt="Dead Puni" class="error-image" />
+  </div>
+</MainLayout>
+
+<style>
+  .error-container {
+    display: flex;
+    height: calc(100vh - var(--header-height) - 2rem);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .error-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .error-code {
+    font-size: clamp(4rem, 10vw, 8rem);
+    font-weight: 300;
+    margin: 0;
+    border: none;
+  }
+  .error-text {
+    margin: 0 1rem;
+  }
+  .error-image {
+    width: 40%;
+    max-width: 300px;
+    display: block;
+    margin: 2rem auto 0;
+    aspect-ratio: 511 / 670;
+  }
+</style>

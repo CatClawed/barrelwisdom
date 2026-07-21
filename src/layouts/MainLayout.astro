@@ -1,6 +1,7 @@
 ---
-import BaseHead from "@components/MainLayout/BaseHead.astro";
-import Header from "@components/MainLayout/Header.astro";
+import BaseHead from '@components/MainLayout/BaseHead.astro';
+import Header from '@components/MainLayout/Header.astro';
+import Sidebar from '@components/MainLayout/Sidebar.astro';
 
 const { title, description, image } = Astro.props;
 ---
@@ -11,8 +12,11 @@ const { title, description, image } = Astro.props;
   </head>
   <body>
     <Header />
-    <main>
-      <slot />
-    </main>
+    <div class="layout-wrapper">
+      <Sidebar />
+      <main>
+        <slot />
+      </main>
+    </div>
   </body>
 </html>

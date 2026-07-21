@@ -1,0 +1,31 @@
+$breakpoint-md: 800px;
+$breakpoint-lg: 1280px;
+
+:root {
+  /* Colors */
+  --sidebar-color: #14293b;
+  --navbar-color: #5e4c3f;
+  --primary-color: var(--navbar-color);
+  --secondary-color: #20a8d8;
+  --success-color: #4dbd74;
+  --danger-color: darkred;
+
+  /* Layout */
+  --header-height: 55px;
+  --sidebar-width: 200px;
+
+  /* Typography (Fonts) */
+  --font-family: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  --font-family-jp: 'Noto Sans JP', 'Source Han Sans JP', 'Noto Sans CJK JP', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', system-ui, sans-serif;
+  --font-family-sc: 'Noto Sans SC', 'Source Han Sans SC', 'Noto Sans CJK SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --font-family-tc: 'Noto Sans TC', 'Source Han Sans TC', 'Noto Sans CJK TC', 'PingFang TC', 'Microsoft JhengHei', system-ui, sans-serif;
+  --font-family-ko: 'Noto Sans KR', 'Source Han Sans KR', 'Noto Sans CJK KR', 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, sans-serif;
+  --headings-font-family: 'Merriweather', Georgia, serif;
+
+  /* Tables */
+  --table-border: 1px solid lightgray;
+
+  /* Background */
+  --bg-main: url("/media/main/images/ricepaper2.webp");
+  --bg-card: url("/media/main/images/clean_textile.webp");
+}

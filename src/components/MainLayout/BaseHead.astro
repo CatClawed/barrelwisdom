@@ -1,24 +1,23 @@
 ---
-// Import the global.css file here so that it is included on
-// all pages through the use of the <BaseHead /> component.
-import "@styles/global.css";
-import type { ImageMetadata } from "astro";
-import FallbackImage from "@app/assets/placeholder.webp";
-import { SITE_TITLE } from "@app/consts";
-import { Font } from "astro:assets";
+import '@styles/global.scss';
+import { SITE_TITLE } from '@app/consts';
+import { Font } from 'astro:assets';
 
 interface Props {
   title: string;
   description: string;
-  image?: ImageMetadata;
+  image?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = FallbackImage } = Astro.props;
+const {
+  title,
+  description,
+  image = '/media/blog/placeholder.webp',
+} = Astro.props;
 ---
 
-<!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" href="/favicon.ico" />
@@ -27,7 +26,7 @@ const { title, description, image = FallbackImage } = Astro.props;
   rel="alternate"
   type="application/rss+xml"
   title={SITE_TITLE}
-  href={new URL("rss.xml", Astro.site)}
+  href={new URL('rss.xml', Astro.site)}
 />
 <meta name="generator" content={Astro.generator} />
 
@@ -45,7 +44,7 @@ const { title, description, image = FallbackImage } = Astro.props;
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image.src, Astro.url)} />
+<meta property="og:image" content={image} />
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />

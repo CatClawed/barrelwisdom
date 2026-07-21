@@ -1,0 +1,141 @@
+@use 'variables' as v;
+
+.layout-wrapper {
+  display: flex;
+  transition: margin-left 0.3s ease-in-out;
+  margin-left: var(--sidebar-width);
+  margin-right: auto;
+}
+
+.layout-wrapper.sidenav-hidden {
+  transition: margin-left 0.3s ease-in-out;
+  margin-left: 0;
+}
+
+.sidenav {
+  background-color: var(--sidebar-color);
+  width: var(--sidebar-width);
+  font-size: 1rem;
+  z-index: 500;
+  transition: transform 0.3s ease-in-out;
+  position: fixed;
+  height: 100%;
+  left: 0;
+}
+
+.sidenav {
+  /* Logic for hidden state */
+  position: fixed;
+  height: 100%;
+  left: 0;
+  transform: translateX(0); /* Visible by default */
+}
+
+.sidenav.hidden {
+  transform: translateX(-100%);
+}
+
+@media (max-width: v.$breakpoint-md) {
+  .layout-wrapper {
+    margin-left: 0;
+  }
+
+  .sidenav {
+    margin-left: calc(-1 * var(--sidebar-width));
+  }
+
+  .sidenav.hidden {
+    transform: translateX(100%);
+  }
+}
+
+.sidenav-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidenav-item {
+  svg:first-child {
+      width: 1.5em;
+      height: 1.5em;
+      margin-right: 0.5rem; /* Better than absolute positioning */
+    }
+
+    /* Text alignment */
+    span {
+      flex: 1; /* Pushes everything else to the right */
+      text-align: left;
+    }
+}
+
+.sidenav-item:hover {
+  color: white;
+  background-color: #20a8d8 !important;
+  text-decoration: none;
+}
+
+.sidenav-item.active {
+  background-color: #3c4e5e;
+}
+
+.sidenav-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1em;
+}
+
+.sidenav-children {
+  display: none;
+  list-style: none;
+  padding: 0;
+}
+
+.nav-group[data-expand="true"] .sidenav-children {
+  display: block;
+}
+
+.nav-group[data-expand="true"] .caret-down { display: none; }
+.nav-group[data-expand="false"] .caret-up { display: none; }
+
+.sidenav-child {
+  padding-left: 2.1rem !important;
+  &.active { font-weight: bold; }
+}
+
+.expand-toggle {
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: auto;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: white;
+  width: 100%;
+  width: -webkit-fill-available;
+  width: -moz-available;
+  width: stretch;
+}
+.expand-toggle {
+  .caret-down, .caret-up {
+    width: 1.5em;
+    height: 1.5em;
+    margin-left: auto;
+  }
+}
+
+.sidenav-item, .expand-toggle {
+  padding: 0.6rem 0.1rem;
+  margin-right: 0.4rem;
+  margin-left: 0.4rem;
+  color: white;
+  fill: white;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+}

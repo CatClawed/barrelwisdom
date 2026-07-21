@@ -1,0 +1,83 @@
+---
+import type { NavItem } from '@app/localization/localization';
+import { getNavForGame } from '@app/utils/navigation';
+const pathSegments = Astro.url.pathname.split('/');
+
+const navItems = await getNavForGame(Astro.url.pathname);
+---
+
+<aside class="sidenav" id="sidebar">
+  <nav>
+    {
+      navItems.map((n: NavItem) => {
+        const isExpandable = !!n.children;
+        const Tag = isExpandable ? 'button' : 'a';
+
+        const props = {
+          class: isExpandable ? 'sidenav-item expand-toggle' : 'sidenav-item',
+          href: !isExpandable ? n.url : undefined,
+          'aria-expanded': isExpandable
+            ? n.expand
+              ? 'true'
+              : 'false'
+            : undefined,
+        };
+
+        return (
+          <div class="nav-group" data-expand={n.expand ? 'true' : 'false'}>
+            <Tag {...props}>
+              {n.svg && (
+                <svg>
+                  <use href={`/media/spritesheets/${n.svg}`} />
+                </svg>
+              )}
+              {n.name}
+              {isExpandable && (
+                <>
+                  <svg class="caret-down">
+                    <use href="/media/spritesheets/main.svg?v=1#fa-caret-down" />
+                  </svg>
+                  <svg class="caret-up">
+                    <use href="/media/spritesheets/main.svg?v=1#fa-caret-up" />
+                  </svg>
+                </>
+              )}
+            </Tag>
+
+            {n.children && (
+              <div class="sidenav-children">
+                {n.children.map((c) => (
+                  <a
+                    class={`sidenav-child sidenav-item ${Astro.url.pathname.includes(c.url) ? 'active' : ''}`}
+                    href={c.url}
+                  >
+                    {c.name}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        );
+      })
+    }
+  </nav>
+</aside>
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const wrapper = document.getElementsByClassName('layout-wrapper')[0];
+  const toggleBtn = document.getElementById('hamburger');
+
+  toggleBtn?.addEventListener('click', () => {
+    sidebar?.classList.toggle('hidden');
+    wrapper?.classList.toggle('sidenav-hidden');
+  });
+
+  document.querySelectorAll('.expand-toggle').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const parent = btn.parentElement;
+      const isexpand = parent?.getAttribute('data-expand') === 'true';
+      parent?.setAttribute('data-expand', (!isexpand).toString());
+      btn.setAttribute('aria-expanded', (!isexpand).toString());
+    });
+  });
+</script>
