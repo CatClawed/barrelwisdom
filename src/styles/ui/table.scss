@@ -1,0 +1,69 @@
+.tbl {
+    width: 100%;
+
+    td,
+    th {
+        padding: 0.75rem;
+    }
+
+    td {
+        border-top: var(--table-border);
+    }
+
+}
+
+.tbl-shrink {
+
+    // I do not want this behavior most of the time if not tbl-min
+    @media screen and (max-width: 1000px) {
+        font-size: 0.95rem;
+    }
+}
+
+
+.tbl-min {
+    height: min-content;
+    th {
+        padding: 0.5rem;
+    }
+
+    td {
+        padding: 0.3rem;
+    }
+    @media screen and (max-width: 1000px) {
+        font-size: 0.95rem;
+    }
+}
+
+.borders {
+    td {
+        border: var(--table-border);
+    }
+
+    tr:last-child td {
+        border: var(--table-border);
+    }
+}
+
+.outer-borders {
+
+    border: var(--table-border);
+}
+
+.noborder {
+    td {
+        border: none;
+    }
+}
+
+.table-item-data {
+    display: block;
+    width: fit-content;
+    margin-bottom: 0;
+
+    >tr,
+    span {
+        vertical-align: top;
+        padding-left: 0.5rem;
+    }
+}

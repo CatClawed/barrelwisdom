@@ -15,7 +15,11 @@ const title = isMain
 <MainLayout title={title} description={SITE_DESCRIPTION} mainClass="blog-list">
   {tag && <h1>Archive: {tag}</h1>}
   <section class={`blog-list-grid${isMain ? ' blog-list-hero' : ''}`}>
-    {page.data.map((post: any) => <PostCard post={post} />)}
+    {
+      page.data.map((post: any, index: number) => (
+        <PostCard post={post} index={index} />
+      ))
+    }
   </section>
   {
     isMain ? (

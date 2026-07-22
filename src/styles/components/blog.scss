@@ -1,3 +1,119 @@
+@use '../variables' as v;
+
 .blog-post {
   max-width: var(--blog-width);
+}
+
+.hero-image {
+  border-radius: 5px;
+  margin: 0.5rem 0;
+}
+
+.tags {
+    padding: 1em 0;
+    flex-wrap: wrap;
+    display: flex;
+    gap: 0.5em 0.5em;
+
+    svg {
+        height: 2em;
+        width: 2em;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    a {
+        background-color: var(--primary-color);
+        padding: 0.3em 0.6em;
+        border-radius: 10px;
+        color: white;
+        font-weight: 500;
+    }
+
+    a:hover {
+        color: white;
+        text-decoration: underline;
+    }
+}
+
+// universal styles for blog pages
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.right {
+  float: right;
+  margin-left: 1em;
+  text-align: left;
+}
+
+.left {
+  float: left;
+  margin-right: 1em;
+}
+
+.spread-apart {
+  justify-content: space-around;
+}
+
+// often used for fake buttons
+.btn {
+  color: white;
+  padding: .375rem .75rem;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  font-weight: 400;
+  border-radius: .375rem;
+  border: none;
+}
+
+.btn:hover {
+  filter: brightness(115%);
+}
+
+@each $w in 25 33 40 50 66 75 {
+  .w-#{$w} {
+    width: #{$w + '%'};
+  }
+}
+
+@media screen and (max-width: v.$breakpoint-md) {
+
+  @each $w in 25 33 {
+    .w-#{$w} {
+      width: 50%;
+    }
+  }
+
+  @each $w in 40 50 66 75 {
+    .w-#{$w} {
+      width: 100%;
+    }
+  }
+}
+
+.bg-primary {
+  background-color: var(--primary-color);
+}
+
+.bg-secondary {
+  background-color: var(--secondary-color);
+}
+
+.bg-danger {
+  background-color: var(--danger-color);
+}
+
+.bg-success {
+  background-color: var(--success-color);
+}
+
+.text-danger {
+  color: var(--danger-color);
+}
+
+.text-success {
+  color: var(--success-color);
 }

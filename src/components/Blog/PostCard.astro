@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import FormattedDate from '@components/MainLayout/FormattedDate.astro';
 import { getFolderSlug } from '@app/utils/get-slug';
 
-const { post } = Astro.props;
+const { post, index } = Astro.props;
 const slug = getFolderSlug(post);
 ---
 
@@ -11,7 +11,12 @@ const slug = getFolderSlug(post);
   <a href={`/${slug}`}>
     {
       post.data.heroImage && (
-        <Image width={720} height={360} src={post.data.heroImage} alt="" />
+        <img
+          src={post.data.heroImage}
+          alt=""
+          loading={index < 3 ? 'eager' : 'lazy'}
+          fetchpriority={index == 0 ? 'high' : 'auto'}
+        />
       )
     }
     <h4>{post.data.title}</h4>
