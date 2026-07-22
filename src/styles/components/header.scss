@@ -24,22 +24,6 @@
   }
 }
 
-.nav-items {
-  color: white;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  font-size: 1rem;
-}
-
-.nav-items:hover {
-  color: white;
-  text-decoration: none;
-  background-color: #2f1d12;
-  border-radius: 0.25rem;
-}
-
 .nav-lang {
   display: flex;
   width: 150px;
@@ -52,6 +36,7 @@
   border: none;
   padding: 0;
   margin-right: 0.2em;
+  margin-left: auto;
 
   span {
     margin: auto;
@@ -59,6 +44,7 @@
 
   svg {
     margin: auto;
+    aspect-ratio: 1;
   }
 }
 
@@ -67,33 +53,24 @@
   border-radius: 0.25rem;
 }
 
-@media screen and (max-width: 600px) {
-  .nav-items {
-    display: none;
-  }
-}
-
-.nav-social-media {
-  margin-left: auto;
-  display: flex;
-
-  svg {
-    height: 40px;
-    width: 40px;
-    fill: white;
-  }
-}
 
 @media screen and (max-width: 720px) {
-  .nav-social-media {
-    display: none;
-  }
-
-  .nav-lang {
-    margin-left: auto;
-  }
-
   .navigation-brand {
     width: 55px !important;
+  }
+}
+
+.nav-hamburger {
+  padding-left: 0.5rem;
+  background: none;
+  border: none;
+  height: var(--header-height);
+  width: var(--header-height);
+  cursor: pointer;
+
+  >svg {
+    fill: white;
+    height: 100%;
+    width: 100%;
   }
 }

@@ -1,0 +1,22 @@
+.pagination {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  > * {
+    flex: 1;
+  }
+
+  span {
+    text-align: center;
+  }
+
+  a:first-child {
+    text-align: left;
+  }
+
+  a:last-child {
+    text-align: right;
+  }
+}

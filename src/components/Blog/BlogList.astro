@@ -12,12 +12,10 @@ const title = isMain
     : SITE_TITLE + ' Page ' + page.currentPage;
 ---
 
-<MainLayout title={title} description={SITE_DESCRIPTION}>
+<MainLayout title={title} description={SITE_DESCRIPTION} mainClass="blog-list">
   {tag && <h1>Archive: {tag}</h1>}
-  <section class="post-card">
-    <ul>
-      {page.data.map((post: any) => <PostCard post={post} />)}
-    </ul>
+  <section class={`blog-list-grid${isMain ? ' blog-list-hero' : ''}`}>
+    {page.data.map((post: any) => <PostCard post={post} />)}
   </section>
   {
     isMain ? (

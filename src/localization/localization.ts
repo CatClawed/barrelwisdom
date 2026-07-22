@@ -4,6 +4,7 @@ export interface NavItem {
   svg?: string;
   children?: NavItem[];
   expand?: boolean;
+  external?: boolean;
 }
 
 export const LanguageData = {

@@ -1,0 +1,54 @@
+---
+// src/components/MainLayout/Breadcrumb.astro
+import { getBreadcrumbs } from '@app/utils/breadcrumbs';
+import { parseUrl } from '@app/utils/navigation';
+
+interface Props {
+  title?: string; // can be set to undefined to turn off breadcrumbs
+}
+
+const { title } = Astro.props;
+const { lang } = parseUrl(Astro.url.pathname);
+const allCrumbs = getBreadcrumbs(Astro.url.pathname, lang);
+
+if (allCrumbs.length === 0) return null;
+
+const crumbs = allCrumbs.slice(0, -1);
+const current = title || allCrumbs[allCrumbs.length - 1].label;
+---
+
+{
+  title !== undefined && (
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="/">Home</a>
+        </li>
+        {crumbs.map((crumb) => (
+          <li class="breadcrumb-item">
+            <a href={crumb.url}>{crumb.label}</a>
+          </li>
+        ))}
+        <li class="breadcrumb-item active" aria-current="page">
+          {current}
+        </li>
+      </ol>
+    </nav>
+  )
+}
+
+<style>
+  .breadcrumb {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    gap: 0.5rem;
+  }
+  .breadcrumb-item + .breadcrumb-item::before {
+    content: '/';
+    margin-right: 0.5rem;
+  }
+  .active {
+    color: gray;
+  }
+</style>

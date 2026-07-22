@@ -1,0 +1,41 @@
+.blog-list {
+  max-width: var(--main-page-width);
+}
+
+.blog-list-hero {
+  .card:first-child {
+    grid-column: span 2;
+  }
+}
+
+.blog-list-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+
+  .card {
+    overflow: hidden;
+    padding: 0 0 0.5rem 0;
+
+    .text-muted {
+      font-size: 0.9rem;
+    }
+
+    h4 {
+      padding: 0 1rem;
+    }
+
+    span {
+      padding: 0 1rem 0.5rem 1rem;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      padding-bottom: 1rem;
+    }
+  }
+}

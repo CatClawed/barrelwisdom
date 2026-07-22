@@ -13,6 +13,8 @@ $breakpoint-lg: 1280px;
   /* Layout */
   --header-height: 55px;
   --sidebar-width: 200px;
+  --blog-width: 720px;
+  --main-page-width: 800px;
 
   /* Typography (Fonts) */
   --font-family: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
@@ -21,11 +23,17 @@ $breakpoint-lg: 1280px;
   --font-family-tc: 'Noto Sans TC', 'Source Han Sans TC', 'Noto Sans CJK TC', 'PingFang TC', 'Microsoft JhengHei', system-ui, sans-serif;
   --font-family-ko: 'Noto Sans KR', 'Source Han Sans KR', 'Noto Sans CJK KR', 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, sans-serif;
   --headings-font-family: 'Merriweather', Georgia, serif;
+  --headings-font-family-jp: 'Noto Serif JP', 'Source Han Serif JP', 'Noto Serif CJK JP', 'Hiragino Mincho ProN', 'Yu Mincho', 'MS Mincho', serif;
+  --headings-font-family-sc: 'Noto Serif SC', 'Source Han Serif SC', 'Noto Serif CJK SC', 'Songti SC', 'SimSun', serif;
+  --headings-font-family-tc: 'Noto Serif TC', 'Source Han Serif TC', 'Noto Serif CJK TC', 'Songti TC', 'MingLiU', serif;
+  --headings-font-family-ko: 'Noto Serif KR', 'Source Han Serif KR', 'Noto Serif CJK KR', 'AppleMyungjo', 'Batang', serif;
+
 
   /* Tables */
   --table-border: 1px solid lightgray;
 
   /* Background */
+  /* Background patterns from Toptal Subtle Patterns */
   --bg-main: url("/media/main/images/ricepaper2.webp");
   --bg-card: url("/media/main/images/clean_textile.webp");
 }

@@ -1,8 +1,8 @@
 @use 'sass:math';
 @use 'variables' as v;
-@import 'variables.scss';
-@import 'header.scss';
-@import 'sidebar.scss';
+@use 'components/_index' as c;
+@use 'ui/_index' as u;
+@import "@fontsource/merriweather/500.css";
 
 a:active,
 a:focus {
@@ -153,10 +153,12 @@ code {
     color: darkslategray;
 }
 
-aside, main {
+aside {
   padding-top: var(--header-height);
 }
 
 main {
-  margin: 1rem auto;
+  padding: calc(var(--header-height) + 1rem) clamp(1rem, 5vw, 3rem) 1rem clamp(1rem, 5vw, 3rem);
+  margin: 0 auto;
+  width: 100%;
 }

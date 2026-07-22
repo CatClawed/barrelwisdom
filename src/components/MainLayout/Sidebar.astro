@@ -4,6 +4,7 @@ import { getNavForGame } from '@app/utils/navigation';
 const pathSegments = Astro.url.pathname.split('/');
 
 const navItems = await getNavForGame(Astro.url.pathname);
+const globalItems = await getNavForGame('global');
 ---
 
 <aside class="sidenav" id="sidebar">
@@ -26,12 +27,14 @@ const navItems = await getNavForGame(Astro.url.pathname);
         return (
           <div class="nav-group" data-expand={n.expand ? 'true' : 'false'}>
             <Tag {...props}>
-              {n.svg && (
+              {n.svg ? (
                 <svg>
                   <use href={`/media/spritesheets/${n.svg}`} />
                 </svg>
+                <span>{n.name}</span>
+              ) : (
+              <span class="sidebar-spacer">{n.name}</span>
               )}
-              {n.name}
               {isExpandable && (
                 <>
                   <svg class="caret-down">
@@ -48,7 +51,7 @@ const navItems = await getNavForGame(Astro.url.pathname);
               <div class="sidenav-children">
                 {n.children.map((c) => (
                   <a
-                    class={`sidenav-child sidenav-item ${Astro.url.pathname.includes(c.url) ? 'active' : ''}`}
+                    class={`sidebar-spacer sidenav-item ${Astro.url.pathname.includes(c.url) ? 'active' : ''}`}
                     href={c.url}
                   >
                     {c.name}
@@ -60,6 +63,25 @@ const navItems = await getNavForGame(Astro.url.pathname);
         );
       })
     }
+    <div class="nav-global">
+      {
+        globalItems.map((n: NavItem) => (
+          <a
+            class="sidenav-item"
+            href={n.url}
+            target={n.external ? '_blank' : undefined}
+            rel={n.external ? 'noopener noreferrer' : undefined}
+          >
+            {n.svg && (
+              <svg>
+                <use href={`/media/spritesheets/${n.svg}`} />
+              </svg>
+            )}
+            {n.name}
+          </a>
+        ))
+      }
+    </div>
   </nav>
 </aside>
 <script>

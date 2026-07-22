@@ -4,14 +4,8 @@
 
 <header>
   <nav class="navigation">
-    <button
-      id="hamburger"
-      aria-label="Toggle navigation"
-      style="padding-left:0.5rem;background:none;border:none; height: 55px; width: 55px;"
-    >
-      <svg style="fill:white; height: 100%; width: 100%;"
-        ><use href="/media/spritesheets/main.svg?v=1#fa-bars"></use></svg
-      >
+    <button id="hamburger" aria-label="Toggle navigation" class="nav-hamburger">
+      <svg><use href="/media/spritesheets/main.svg?v=1#fa-bars"></use></svg>
     </button>
     <a aria-label="homepage" href="/" class="navigation-brand">
       <picture>
@@ -29,19 +23,6 @@
         />
       </picture>
     </a>
-    <a class="nav-items" href="/blog/atelier-series-guide"
-      >Atelier Series Guide</a
-    >
-    <a class="nav-items" href="/blog/donate">Donate</a>
-    <a
-      class="nav-social-media"
-      aria-label="Discord"
-      target="_blank"
-      rel="noopener"
-      href="https://discord.gg/utRynRKxwh"
-    >
-      <svg><use href="/media/spritesheets/main.svg?v=1#fa-discord"></use></svg>
-    </a>
     <button
       mat-icon-button
       [disabled]="languages().length == 1 || en_only()"
@@ -49,12 +30,12 @@
       [style]="languages().length == 1 || en_only() ? `background: none !important;` : null"
       class="nav-lang"
     >
-      <svg style="height: 40px; aspect-ratio: 1;"
+      <svg style="height: 40px;"
         ><use href="/media/spritesheets/main.svg?v=1#fa-globe"></use></svg
       >
       <span>EN</span>
       <svg
-        style="height:20px; aspect-ratio: 1;{{languages().length > 1 && !en_only() ? `` : `fill: transparent;`}}"
+        style="height:20px;{{languages().length > 1 && !en_only() ? `` : `fill: transparent;`}}"
         ><use href="/media/spritesheets/main.svg?v=1#fa-caret-down"></use></svg
       >
     </button>

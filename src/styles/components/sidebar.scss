@@ -1,4 +1,4 @@
-@use 'variables' as v;
+@use '../variables' as v;
 
 .layout-wrapper {
   display: flex;
@@ -21,14 +21,6 @@
   position: fixed;
   height: 100%;
   left: 0;
-}
-
-.sidenav {
-  /* Logic for hidden state */
-  position: fixed;
-  height: 100%;
-  left: 0;
-  transform: translateX(0); /* Visible by default */
 }
 
 .sidenav.hidden {
@@ -59,13 +51,7 @@
   svg:first-child {
       width: 1.5em;
       height: 1.5em;
-      margin-right: 0.5rem; /* Better than absolute positioning */
-    }
-
-    /* Text alignment */
-    span {
-      flex: 1; /* Pushes everything else to the right */
-      text-align: left;
+      margin-right: 0.5rem;
     }
 }
 
@@ -77,13 +63,6 @@
 
 .sidenav-item.active {
   background-color: #3c4e5e;
-}
-
-.sidenav-bottom {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 1em;
 }
 
 .sidenav-children {
@@ -99,9 +78,8 @@
 .nav-group[data-expand="true"] .caret-down { display: none; }
 .nav-group[data-expand="false"] .caret-up { display: none; }
 
-.sidenav-child {
+.sidebar-spacer {
   padding-left: 2.1rem !important;
-  &.active { font-weight: bold; }
 }
 
 .expand-toggle {
@@ -119,6 +97,7 @@
   width: -webkit-fill-available;
   width: -moz-available;
   width: stretch;
+  text-align: left;
 }
 .expand-toggle {
   .caret-down, .caret-up {
@@ -138,4 +117,8 @@
   display: flex;
   align-items: center;
   position: relative;
+}
+
+.nav-global {
+  margin-top: 1rem;
 }
