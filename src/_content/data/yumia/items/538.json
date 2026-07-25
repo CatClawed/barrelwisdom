@@ -1,0 +1,28 @@
+{
+  "id": 538,
+  "name": "Classic Shelf",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "comfort": 10,
+    "cost": 5,
+    "kind": "shelf",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Wood",
+          "id": 1
+        }
+      }
+    ]
+  },
+  "quest": {
+    "name": "Sleeping Like a Baby",
+    "extra": "Viktor"
+  }
+}

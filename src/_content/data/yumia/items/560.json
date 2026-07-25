@@ -1,0 +1,31 @@
+{
+  "id": 560,
+  "name": "Display Stand",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.5712295013850416,
+      "z": 0.5417996632996633,
+      "label": 4
+    }
+  ],
+  "material": {
+    "comfort": 5,
+    "cost": 1,
+    "kind": "small_other",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Stone",
+          "id": 2
+        }
+      }
+    ]
+  }
+}

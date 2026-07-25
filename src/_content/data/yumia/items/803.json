@@ -1,0 +1,24 @@
+{
+  "id": 803,
+  "name": "Wooden Stairs B",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "comfort": 1,
+    "cost": 1,
+    "kind": "step",
+    "recipe": [
+      {
+        "num": 1,
+        "mat": {
+          "name": "Wood",
+          "id": 1
+        }
+      }
+    ]
+  }
+}

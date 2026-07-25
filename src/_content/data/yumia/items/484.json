@@ -1,0 +1,28 @@
+{
+  "id": 484,
+  "name": "Antique Desk",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "comfort": 10,
+    "cost": 3,
+    "kind": "desk",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Wood",
+          "id": 1
+        }
+      }
+    ]
+  },
+  "quest": {
+    "name": "A Mercenary's Search 2",
+    "extra": "Nina"
+  }
+}

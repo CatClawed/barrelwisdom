@@ -1,0 +1,32 @@
+{
+  "id": 544,
+  "name": "Wooden Shelf C",
+  "comfort_goal": 400,
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.12472631578947367,
+      "z": 0.11561212121212122,
+      "label": 8
+    }
+  ],
+  "material": {
+    "comfort": 5,
+    "cost": 5,
+    "kind": "shelf",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Wood",
+          "id": 1
+        }
+      }
+    ]
+  }
+}

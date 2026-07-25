@@ -1,0 +1,24 @@
+{
+  "id": 746,
+  "name": "Stone Chimney A",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "comfort": 1,
+    "cost": 1,
+    "kind": "building_other",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Stone",
+          "id": 2
+        }
+      }
+    ]
+  }
+}

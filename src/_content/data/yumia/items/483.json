@@ -1,0 +1,31 @@
+{
+  "id": 483,
+  "name": "Ceiling Fixture B",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.8330692520775623,
+      "z": 0.7858141414141414,
+      "label": 4
+    }
+  ],
+  "material": {
+    "comfort": 5,
+    "cost": 5,
+    "kind": "ceiling_accessory",
+    "recipe": [
+      {
+        "num": 1,
+        "mat": {
+          "name": "Fiber",
+          "id": 5
+        }
+      }
+    ]
+  }
+}

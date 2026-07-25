@@ -1,0 +1,183 @@
+{
+  "id": 198,
+  "name": "Lasting Armor Shard",
+  "desc": "An armor shard from a set that had once seen many battles. Riddled with nicks or scratches, it would be easy to assume this was simple scrap metal. However, it carries a substantial grudge within.",
+  "fire": true,
+  "resonance": 4,
+  "mats": [
+    {
+      "name": "Stone",
+      "id": 2
+    }
+  ],
+  "cats": [
+    {
+      "id": 27,
+      "name": "(Metal)"
+    }
+  ],
+  "rank": [
+    {
+      "rank": "S",
+      "eff": [
+        {
+          "lv": 3,
+          "eff": {
+            "id": 240,
+            "name": "Metals - Quality Boost",
+            "desc1": "Boosts quality by [Lv. x 1] when used as an ingredient for a metal category synthesized item.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 130
+    },
+    {
+      "rank": "A",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 240,
+            "name": "Metals - Quality Boost",
+            "desc1": "Boosts quality by [Lv. x 1] when used as an ingredient for a metal category synthesized item.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 109
+    },
+    {
+      "rank": "B",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 240,
+            "name": "Metals - Quality Boost",
+            "desc1": "Boosts quality by [Lv. x 1] when used as an ingredient for a metal category synthesized item.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 90
+    },
+    {
+      "rank": "C",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 240,
+            "name": "Metals - Quality Boost",
+            "desc1": "Boosts quality by [Lv. x 1] when used as an ingredient for a metal category synthesized item.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 70
+    },
+    {
+      "rank": "D",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 240,
+            "name": "Metals - Quality Boost",
+            "desc1": "Boosts quality by [Lv. x 1] when used as an ingredient for a metal category synthesized item.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 52
+    },
+    {
+      "rank": "E",
+      "quality": 36
+    }
+  ],
+  "location": [
+    {
+      "x": 0.46083905817174514,
+      "z": 0.15344309764309766,
+      "label": 4
+    },
+    {
+      "x": 0.5483393351800554,
+      "z": 0.45237037037037037,
+      "label": 13
+    },
+    {
+      "x": 0.5526315789473685,
+      "z": 0.2865319865319865,
+      "label": 13
+    },
+    {
+      "x": 0.4717229916897507,
+      "z": 0.6776346801346801,
+      "label": 17
+    },
+    {
+      "x": 0.48696537396121886,
+      "z": 0.8118306397306397,
+      "label": 17
+    },
+    {
+      "x": 0.48241689750692524,
+      "z": 0.7034723905723905,
+      "label": 17
+    },
+    {
+      "x": 0.45444362880886424,
+      "z": 0.5728255892255892,
+      "label": 17
+    },
+    {
+      "x": 0.5119403047091413,
+      "z": 0.6579501683501684,
+      "label": 17
+    },
+    {
+      "x": 0.5157465373961219,
+      "z": 0.6275377104377104,
+      "label": 17
+    },
+    {
+      "x": 0.5348094182825485,
+      "z": 0.3614090909090909,
+      "label": 17
+    },
+    {
+      "x": 0.5331858725761773,
+      "z": 0.3861686868686869,
+      "label": 17
+    }
+  ],
+  "mons": [
+    {
+      "id": 43,
+      "name": "Rage Kong"
+    },
+    {
+      "id": 44,
+      "name": "Armored Giant"
+    },
+    {
+      "id": 45,
+      "name": "Beast Warrior"
+    },
+    {
+      "id": 46,
+      "name": "Crimson Brute"
+    },
+    {
+      "id": 47,
+      "name": "Bloody Fighter"
+    },
+    {
+      "id": 48,
+      "name": "Continental Lifter"
+    }
+  ]
+}

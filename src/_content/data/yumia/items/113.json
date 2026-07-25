@@ -1,0 +1,459 @@
+{
+  "id": 113,
+  "name": "Energy Powder",
+  "desc": "Metal that's been crushed into a powder. The mixture of various metals causes a chemical reaction that emits an electrical discharge.",
+  "bolt": true,
+  "resonance": 4,
+  "mats": [
+    {
+      "name": "Powder",
+      "id": 6
+    }
+  ],
+  "cats": [
+    {
+      "id": 5,
+      "name": "(Medicinal)"
+    },
+    {
+      "id": 12,
+      "name": "(Gunpowder)"
+    }
+  ],
+  "rank": [
+    {
+      "rank": "S",
+      "eff": [
+        {
+          "lv": 3,
+          "eff": {
+            "id": 223,
+            "name": "Increase Resonance Area - 1st Stratum",
+            "desc1": "When used as an ingredient for a slot on the line closest to the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 2,
+          "eff": {
+            "id": 236,
+            "name": "Element Resonance - Bolt",
+            "desc1": "Increases the resonance area by [Lv. x 1] when used as an ingredient for a bolt element synthesized item.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 136
+    },
+    {
+      "rank": "A",
+      "eff": [
+        {
+          "lv": 3,
+          "eff": {
+            "id": 223,
+            "name": "Increase Resonance Area - 1st Stratum",
+            "desc1": "When used as an ingredient for a slot on the line closest to the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 236,
+            "name": "Element Resonance - Bolt",
+            "desc1": "Increases the resonance area by [Lv. x 1] when used as an ingredient for a bolt element synthesized item.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 115
+    },
+    {
+      "rank": "B",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 223,
+            "name": "Increase Resonance Area - 1st Stratum",
+            "desc1": "When used as an ingredient for a slot on the line closest to the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 236,
+            "name": "Element Resonance - Bolt",
+            "desc1": "Increases the resonance area by [Lv. x 1] when used as an ingredient for a bolt element synthesized item.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 96
+    },
+    {
+      "rank": "C",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 223,
+            "name": "Increase Resonance Area - 1st Stratum",
+            "desc1": "When used as an ingredient for a slot on the line closest to the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 76
+    },
+    {
+      "rank": "D",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 223,
+            "name": "Increase Resonance Area - 1st Stratum",
+            "desc1": "When used as an ingredient for a slot on the line closest to the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 58
+    },
+    {
+      "rank": "E",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 223,
+            "name": "Increase Resonance Area - 1st Stratum",
+            "desc1": "When used as an ingredient for a slot on the line closest to the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 42
+    }
+  ],
+  "location": [
+    {
+      "x": 0.46252202216066485,
+      "z": 0.6140703703703705,
+      "label": 4
+    },
+    {
+      "x": 0.5351220221606647,
+      "z": 0.5596855218855219,
+      "label": 12
+    },
+    {
+      "x": 0.4871012465373961,
+      "z": 0.612397643097643,
+      "label": 12
+    },
+    {
+      "x": 0.4891883656509695,
+      "z": 0.6121740740740741,
+      "label": 12
+    },
+    {
+      "x": 0.4909293628808864,
+      "z": 0.6121057239057239,
+      "label": 12
+    },
+    {
+      "x": 0.48714030470914127,
+      "z": 0.6119195286195286,
+      "label": 12
+    },
+    {
+      "x": 0.535330055401662,
+      "z": 0.5596592592592592,
+      "label": 12
+    },
+    {
+      "x": 0.5353216066481995,
+      "z": 0.5608023569023569,
+      "label": 12
+    },
+    {
+      "x": 0.5355004155124654,
+      "z": 0.5607690235690236,
+      "label": 12
+    },
+    {
+      "x": 0.5354585872576177,
+      "z": 0.556739393939394,
+      "label": 12
+    },
+    {
+      "x": 0.5358270083102493,
+      "z": 0.5553505050505051,
+      "label": 12
+    },
+    {
+      "x": 0.535403462603878,
+      "z": 0.5554094276094276,
+      "label": 12
+    },
+    {
+      "x": 0.5354001385041551,
+      "z": 0.5551171717171717,
+      "label": 12
+    },
+    {
+      "x": 0.5336556786703601,
+      "z": 0.5523471380471381,
+      "label": 12
+    },
+    {
+      "x": 0.5323903047091413,
+      "z": 0.5570067340067341,
+      "label": 12
+    },
+    {
+      "x": 0.532186565096953,
+      "z": 0.5596969696969697,
+      "label": 12
+    },
+    {
+      "x": 0.5302027700831026,
+      "z": 0.5568232323232323,
+      "label": 12
+    },
+    {
+      "x": 0.5294457063711911,
+      "z": 0.5609074074074074,
+      "label": 12
+    },
+    {
+      "x": 0.5296815789473683,
+      "z": 0.5608653198653198,
+      "label": 12
+    },
+    {
+      "x": 0.5298876731301939,
+      "z": 0.5608905723905724,
+      "label": 12
+    },
+    {
+      "x": 0.48496246537396126,
+      "z": 0.5906383838383837,
+      "label": 12
+    },
+    {
+      "x": 0.486164404432133,
+      "z": 0.5908457912457913,
+      "label": 12
+    },
+    {
+      "x": 0.5314689750692521,
+      "z": 0.5509016835016834,
+      "label": 12
+    },
+    {
+      "x": 0.5323051246537396,
+      "z": 0.5589447811447812,
+      "label": 12
+    },
+    {
+      "x": 0.532493351800554,
+      "z": 0.5589380471380472,
+      "label": 12
+    },
+    {
+      "x": 0.5304018005540165,
+      "z": 0.5567986531986533,
+      "label": 12
+    },
+    {
+      "x": 0.5320263157894737,
+      "z": 0.5596016835016835,
+      "label": 12
+    },
+    {
+      "x": 0.532253324099723,
+      "z": 0.5567892255892256,
+      "label": 12
+    },
+    {
+      "x": 0.40587146814404435,
+      "z": 0.5908612794612794,
+      "label": 12
+    },
+    {
+      "x": 0.5454080332409972,
+      "z": 0.6102686868686868,
+      "label": 12
+    },
+    {
+      "x": 0.5454506925207756,
+      "z": 0.6106245791245791,
+      "label": 12
+    },
+    {
+      "x": 0.545527700831025,
+      "z": 0.6109430976430975,
+      "label": 12
+    },
+    {
+      "x": 0.545697783933518,
+      "z": 0.611019191919192,
+      "label": 12
+    },
+    {
+      "x": 0.5078950138504156,
+      "z": 0.6371454545454546,
+      "label": 12
+    },
+    {
+      "x": 0.507573268698061,
+      "z": 0.6369646464646465,
+      "label": 12
+    },
+    {
+      "x": 0.5113613573407203,
+      "z": 0.6365619528619529,
+      "label": 12
+    },
+    {
+      "x": 0.5042980609418283,
+      "z": 0.6228141414141414,
+      "label": 12
+    },
+    {
+      "x": 0.5042536011080332,
+      "z": 0.6224313131313131,
+      "label": 12
+    },
+    {
+      "x": 0.4981645429362881,
+      "z": 0.6423488215488214,
+      "label": 12
+    },
+    {
+      "x": 0.49810941828254846,
+      "z": 0.6419882154882155,
+      "label": 12
+    },
+    {
+      "x": 0.4979916897506925,
+      "z": 0.6430508417508417,
+      "label": 12
+    },
+    {
+      "x": 0.4057836565096953,
+      "z": 0.5915565656565657,
+      "label": 12
+    },
+    {
+      "x": 0.404663296398892,
+      "z": 0.5874589225589225,
+      "label": 12
+    },
+    {
+      "x": 0.4020315789473684,
+      "z": 0.5878047138047138,
+      "label": 12
+    },
+    {
+      "x": 0.4072545706371191,
+      "z": 0.5877232323232323,
+      "label": 12
+    },
+    {
+      "x": 0.40576675900277004,
+      "z": 0.5849616161616161,
+      "label": 12
+    },
+    {
+      "x": 0.4046130193905817,
+      "z": 0.5866037037037036,
+      "label": 12
+    },
+    {
+      "x": 0.4022074792243767,
+      "z": 0.5880868686868687,
+      "label": 12
+    },
+    {
+      "x": -0.1247242105263158,
+      "z": -0.3034009764309764,
+      "label": 12
+    },
+    {
+      "x": 0.4574015235457064,
+      "z": 0.7062161616161616,
+      "label": 12
+    },
+    {
+      "x": 0.4573581717451523,
+      "z": 0.7056505050505051,
+      "label": 12
+    },
+    {
+      "x": 0.4549639889196676,
+      "z": 0.7071134680134681,
+      "label": 12
+    },
+    {
+      "x": 0.4862347645429363,
+      "z": 0.7342124579124578,
+      "label": 12
+    },
+    {
+      "x": 0.4549639889196676,
+      "z": 0.7065902356902356,
+      "label": 12
+    },
+    {
+      "x": 0.4541364265927978,
+      "z": 0.7125043771043771,
+      "label": 12
+    },
+    {
+      "x": 0.4717229916897507,
+      "z": 0.6776346801346801,
+      "label": 17
+    },
+    {
+      "x": 0.48696537396121886,
+      "z": 0.8118306397306397,
+      "label": 17
+    },
+    {
+      "x": 0.48241689750692524,
+      "z": 0.7034723905723905,
+      "label": 17
+    },
+    {
+      "x": 0.45444362880886424,
+      "z": 0.5728255892255892,
+      "label": 17
+    },
+    {
+      "x": 0.5119403047091413,
+      "z": 0.6579501683501684,
+      "label": 17
+    },
+    {
+      "x": 0.5157465373961219,
+      "z": 0.6275377104377104,
+      "label": 17
+    },
+    {
+      "x": 0.5348094182825485,
+      "z": 0.3614090909090909,
+      "label": 17
+    },
+    {
+      "x": 0.5331858725761773,
+      "z": 0.3861686868686869,
+      "label": 17
+    }
+  ]
+}

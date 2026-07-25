@@ -1,0 +1,289 @@
+{
+  "id": 24,
+  "name": "Color-Changing Leaf",
+  "desc": "The leaf of a rainbow-colored plant. The order of the colors seems to change depending on the angle one looks at it, but exactly seven colors are always visible. It has an iridescent glow in the dark.",
+  "fire": true,
+  "bolt": true,
+  "resonance": 5,
+  "mats": [
+    {
+      "name": "Fiber",
+      "id": 5
+    }
+  ],
+  "cats": [
+    {
+      "id": 2,
+      "name": "(Plants)"
+    },
+    {
+      "id": 25,
+      "name": "(Magical)"
+    }
+  ],
+  "rank": [
+    {
+      "rank": "S",
+      "eff": [
+        {
+          "lv": 5,
+          "eff": {
+            "id": 204,
+            "name": "Synthesis: Quality Up",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's quality by [Lv. x 1].",
+            "max_level": 10
+          }
+        },
+        {
+          "lv": 3,
+          "eff": {
+            "id": 248,
+            "name": "Resonance Boost",
+            "desc1": "Using this as an ingredient for synthesis increases the Resonance Count by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 135
+    },
+    {
+      "rank": "A",
+      "eff": [
+        {
+          "lv": 5,
+          "eff": {
+            "id": 204,
+            "name": "Synthesis: Quality Up",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's quality by [Lv. x 1].",
+            "max_level": 10
+          }
+        },
+        {
+          "lv": 2,
+          "eff": {
+            "id": 248,
+            "name": "Resonance Boost",
+            "desc1": "Using this as an ingredient for synthesis increases the Resonance Count by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 115
+    },
+    {
+      "rank": "B",
+      "eff": [
+        {
+          "lv": 4,
+          "eff": {
+            "id": 204,
+            "name": "Synthesis: Quality Up",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's quality by [Lv. x 1].",
+            "max_level": 10
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 248,
+            "name": "Resonance Boost",
+            "desc1": "Using this as an ingredient for synthesis increases the Resonance Count by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 98
+    },
+    {
+      "rank": "C",
+      "eff": [
+        {
+          "lv": 3,
+          "eff": {
+            "id": 204,
+            "name": "Synthesis: Quality Up",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's quality by [Lv. x 1].",
+            "max_level": 10
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 248,
+            "name": "Resonance Boost",
+            "desc1": "Using this as an ingredient for synthesis increases the Resonance Count by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 80
+    },
+    {
+      "rank": "D",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 204,
+            "name": "Synthesis: Quality Up",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's quality by [Lv. x 1].",
+            "max_level": 10
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 248,
+            "name": "Resonance Boost",
+            "desc1": "Using this as an ingredient for synthesis increases the Resonance Count by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 64
+    },
+    {
+      "rank": "E",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 204,
+            "name": "Synthesis: Quality Up",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's quality by [Lv. x 1].",
+            "max_level": 10
+          }
+        }
+      ],
+      "quality": 50
+    }
+  ],
+  "location": [
+    {
+      "x": 0.42536509695290853,
+      "z": 0.6339747474747475,
+      "label": 4
+    },
+    {
+      "x": 0.4538109418282548,
+      "z": 0.6214040404040404,
+      "label": 4
+    },
+    {
+      "x": 0.5147170360110803,
+      "z": 0.8570636363636365,
+      "label": 1
+    },
+    {
+      "x": 0.5136893351800554,
+      "z": 0.8643326599326598,
+      "label": 1
+    },
+    {
+      "x": 0.5120847645429363,
+      "z": 0.8593474747474747,
+      "label": 1
+    },
+    {
+      "x": 0.5121232686980609,
+      "z": 0.8593518518518518,
+      "label": 1
+    },
+    {
+      "x": 0.5033825484764544,
+      "z": 0.862880808080808,
+      "label": 1
+    },
+    {
+      "x": 0.503414404432133,
+      "z": 0.862873063973064,
+      "label": 1
+    },
+    {
+      "x": 0.5009290858725761,
+      "z": 0.8593424242424242,
+      "label": 1
+    },
+    {
+      "x": 0.5009494459833795,
+      "z": 0.8593518518518518,
+      "label": 1
+    },
+    {
+      "x": 0.49528850415512465,
+      "z": 0.8602659932659933,
+      "label": 1
+    },
+    {
+      "x": 0.4927308864265928,
+      "z": 0.876573063973064,
+      "label": 1
+    },
+    {
+      "x": 0.4927310249307479,
+      "z": 0.876506734006734,
+      "label": 1
+    },
+    {
+      "x": 0.4916252077562327,
+      "z": 0.8781801346801347,
+      "label": 1
+    },
+    {
+      "x": 0.49194806094182825,
+      "z": 0.8647562289562288,
+      "label": 1
+    },
+    {
+      "x": 0.4919927977839335,
+      "z": 0.8647461279461278,
+      "label": 1
+    },
+    {
+      "x": 0.4717229916897507,
+      "z": 0.6776346801346801,
+      "label": 17
+    },
+    {
+      "x": 0.48696537396121886,
+      "z": 0.8118306397306397,
+      "label": 17
+    },
+    {
+      "x": 0.48241689750692524,
+      "z": 0.7034723905723905,
+      "label": 17
+    },
+    {
+      "x": 0.45444362880886424,
+      "z": 0.5728255892255892,
+      "label": 17
+    },
+    {
+      "x": 0.5119403047091413,
+      "z": 0.6579501683501684,
+      "label": 17
+    },
+    {
+      "x": 0.5157465373961219,
+      "z": 0.6275377104377104,
+      "label": 17
+    },
+    {
+      "x": 0.5348094182825485,
+      "z": 0.3614090909090909,
+      "label": 17
+    },
+    {
+      "x": 0.5331858725761773,
+      "z": 0.3861686868686869,
+      "label": 17
+    }
+  ],
+  "rare": [
+    {
+      "id": 9,
+      "name": "Rainbow Puni"
+    }
+  ]
+}

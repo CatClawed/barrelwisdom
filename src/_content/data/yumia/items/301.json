@@ -1,0 +1,142 @@
+{
+  "id": 301,
+  "name": "Prosperous Spellbook",
+  "desc": "A magical tome detailing techniques to draw out the power of plants. You could always sit down and read it, but using it as an alchemical ingredient is a much easier way to release its power.",
+  "ice": true,
+  "resonance": 7,
+  "cats": [
+    {
+      "id": 28,
+      "name": "(Jewels)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.1663168975069252,
+      "z": 0.448416835016835,
+      "label": 4
+    },
+    {
+      "x": 0.04337894736842106,
+      "z": 0.23314107744107743,
+      "label": 5
+    },
+    {
+      "x": 0.06539058171745152,
+      "z": 0.3470875420875421,
+      "label": 13
+    },
+    {
+      "x": 0.060217451523545705,
+      "z": 0.3427070707070707,
+      "label": 13
+    }
+  ],
+  "recipe": {
+    "num": 3,
+    "level": [
+      {
+        "lv": 1,
+        "ice": 2,
+        "air": 4,
+        "reward": "Learn Recipe"
+      },
+      {
+        "lv": 2,
+        "amt": 15,
+        "ice": 4,
+        "air": 6,
+        "reward": "Quality Up"
+      },
+      {
+        "lv": 3,
+        "amt": 2,
+        "ice": 6,
+        "air": 8,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 4,
+        "amt": 5,
+        "ice": 8,
+        "reward": "Increase Base Resonance Count"
+      },
+      {
+        "lv": 5,
+        "amt": 1,
+        "ice": 10,
+        "air": 12,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 6,
+        "amt": 2,
+        "ice": 12,
+        "air": 14,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 7,
+        "amt": 2,
+        "ice": 3,
+        "air": 5,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 8,
+        "amt": 1,
+        "ice": 6,
+        "air": 7,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 9,
+        "amt": 1,
+        "ice": 7,
+        "air": 9,
+        "reward": "Increase Resonance Area"
+      },
+      {
+        "lv": 10,
+        "amt": 3,
+        "ice": 9,
+        "air": 12,
+        "reward": "Increase Quantity"
+      }
+    ],
+    "sp": 48,
+    "kind": "alchemy",
+    "recipe": [
+      {
+        "item": {
+          "id": 101,
+          "name": "Dryad Jade"
+        },
+        "eff": {
+          "id": 226,
+          "name": "Core Boost - Quality",
+          "desc1": "Boosts quality by [Lv. x 2] when added to a core.",
+          "max_level": 10
+        }
+      },
+      {
+        "item": {
+          "id": 42,
+          "name": "Verdant Moonflower"
+        },
+        "eff": {
+          "id": 227,
+          "name": "Core Boost - HP",
+          "desc1": "Boosts HP by [Lv. x 2] when added to a core.",
+          "max_level": 10
+        }
+      },
+      {
+        "item": {
+          "id": 167,
+          "name": "Spirit Isopod"
+        }
+      }
+    ]
+  }
+}

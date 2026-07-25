@@ -1,0 +1,32 @@
+{
+  "id": 535,
+  "name": "Round Carpet B",
+  "comfort_goal": 200,
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.41240747922437676,
+      "z": 0.26319124579124575,
+      "label": 8
+    }
+  ],
+  "material": {
+    "comfort": 3,
+    "cost": 1,
+    "kind": "carpet",
+    "recipe": [
+      {
+        "num": 1,
+        "mat": {
+          "name": "Fiber",
+          "id": 5
+        }
+      }
+    ]
+  }
+}

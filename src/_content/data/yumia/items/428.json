@@ -1,0 +1,40 @@
+{
+  "id": 428,
+  "name": "Animal Food",
+  "desc": "Food for animals, just like the name suggests. It has been prepared in a way that makes it suitable for any animal.",
+  "cats": [
+    {
+      "id": 37,
+      "name": "(Exploration Equip.)"
+    }
+  ],
+  "material": {
+    "core": 2,
+    "recipe": [
+      {
+        "num": 3,
+        "mat": {
+          "name": "Fruit",
+          "id": 10
+        }
+      },
+      {
+        "num": 2,
+        "mat": {
+          "name": "Fiber",
+          "id": 5
+        }
+      },
+      {
+        "num": 1,
+        "mat": {
+          "name": "Water",
+          "id": 4
+        }
+      }
+    ]
+  },
+  "quest": {
+    "name": "Pet Finder 3"
+  }
+}

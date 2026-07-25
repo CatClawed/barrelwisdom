@@ -1,0 +1,31 @@
+{
+  "id": 401,
+  "name": "Flumme Necklace",
+  "desc": "A customary necklace of the Flumme, Lenja's clan, given to those who have completed their journey of atonement as a sign of accomplishment. Made by Yumia after hearing Lenja's story.",
+  "cats": [
+    {
+      "id": 40,
+      "name": "(Key Items)"
+    }
+  ],
+  "recipe": {
+    "num": 1,
+    "level": [
+      {
+        "lv": 1,
+        "air": 3,
+        "reward": "Learn Recipe"
+      }
+    ],
+    "sp": 100,
+    "kind": "material",
+    "recipe": [
+      {
+        "cat": {
+          "id": 11,
+          "name": "(Gemstones)"
+        }
+      }
+    ]
+  }
+}

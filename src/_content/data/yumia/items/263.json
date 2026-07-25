@@ -1,0 +1,133 @@
+{
+  "id": 263,
+  "name": "Stellar Plajig",
+  "desc": "An enhanced version of a Plajig. The lightning dancing along the halberd crackles in anticipation, landing powerful bolt-like attacks on targets.",
+  "bolt": true,
+  "resonance": 5,
+  "ct": 15,
+  "cats": [
+    {
+      "id": 31,
+      "name": "(Magic Tools)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.4268247922437673,
+      "z": 0.7235760942760942,
+      "label": 4
+    },
+    {
+      "x": 0.4910720221606648,
+      "z": 0.6126700336700337,
+      "label": 13
+    }
+  ],
+  "recipe": {
+    "num": 1,
+    "level": [
+      {
+        "lv": 1,
+        "bolt": 7,
+        "reward": "Learn Recipe"
+      },
+      {
+        "lv": 2,
+        "amt": 15,
+        "bolt": 10,
+        "reward": "Quality Up"
+      },
+      {
+        "lv": 3,
+        "amt": 1,
+        "bolt": 13,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 4,
+        "amt": 2,
+        "bolt": 10,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 5,
+        "amt": 2,
+        "bolt": 13,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 6,
+        "amt": 1,
+        "bolt": 16,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 7,
+        "amt": 3,
+        "bolt": 11,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 8,
+        "amt": 1,
+        "bolt": 14,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 9,
+        "amt": 5,
+        "bolt": 17,
+        "reward": "Increase Base Resonance Count"
+      },
+      {
+        "lv": 10,
+        "amt": 30,
+        "bolt": 22,
+        "reward": "Quality Up"
+      }
+    ],
+    "sp": 120,
+    "kind": "attack",
+    "recipe": [
+      {
+        "item": {
+          "id": 192,
+          "name": "Steronze"
+        },
+        "eff": {
+          "id": 36,
+          "name": "Thunder Spear",
+          "desc1": "Deals [50 + (Lv. x 10)] power bolt damage. Damage is increased by [Lv. x 3]% when environmental mana gauge is at 50% or higher.",
+          "desc2": "Deals [50 + (Lv. x 10)] power bolt damage and grants a [Lv. x 5]% chance to Daze the target.",
+          "max_level": 10
+        }
+      },
+      {
+        "item": {
+          "id": 129,
+          "name": "Electromelon"
+        },
+        "eff": {
+          "id": 37,
+          "name": "High-Voltage Current",
+          "desc1": "Increases acquirable environmental mana by [Lv. x 1]% if the target is inflicted with Paralysis.",
+          "desc2": "Grants a [Lv. x 10]% chance to inflict 1 stack(s) of Paralysis on the target.",
+          "max_level": 10
+        }
+      },
+      {
+        "cat": {
+          "id": 25,
+          "name": "(Magical)"
+        },
+        "eff": {
+          "id": 38,
+          "name": "Dazzling Dwarf Star",
+          "desc1": "Reduces target's critical rate by [Lv. x 30]%.",
+          "desc2": "Lowers target's bolt resistance by [Lv. x 1] stage(s).",
+          "max_level": 3
+        }
+      }
+    ]
+  }
+}

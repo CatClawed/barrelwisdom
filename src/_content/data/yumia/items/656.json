@@ -1,0 +1,38 @@
+{
+  "id": 656,
+  "name": "Floral Arch",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.10300623268698061,
+      "z": 0.22427205387205384,
+      "label": 4
+    }
+  ],
+  "material": {
+    "comfort": 10,
+    "cost": 5,
+    "kind": "nature",
+    "recipe": [
+      {
+        "num": 3,
+        "mat": {
+          "name": "Fiber",
+          "id": 5
+        }
+      },
+      {
+        "num": 2,
+        "mat": {
+          "name": "Wood",
+          "id": 1
+        }
+      }
+    ]
+  }
+}

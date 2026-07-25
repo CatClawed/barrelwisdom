@@ -1,0 +1,31 @@
+{
+  "id": 681,
+  "name": "Skylight",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.510964404432133,
+      "z": 0.5637097643097643,
+      "label": 4
+    }
+  ],
+  "material": {
+    "comfort": 5,
+    "cost": 1,
+    "kind": "roof",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Powder",
+          "id": 6
+        }
+      }
+    ]
+  }
+}

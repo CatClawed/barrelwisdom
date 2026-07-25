@@ -1,0 +1,34 @@
+{
+  "id": 425,
+  "name": "Lure",
+  "desc": "A necessary tool when fishing. This is a basic lure with absolutely no special features. But, for some reason, fish still seem to love nibbling on it.",
+  "cats": [
+    {
+      "id": 37,
+      "name": "(Exploration Equip.)"
+    }
+  ],
+  "material": {
+    "core": 2,
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Iron",
+          "id": 3
+        }
+      },
+      {
+        "num": 3,
+        "mat": {
+          "name": "Fiber",
+          "id": 5
+        }
+      }
+    ]
+  },
+  "quest": {
+    "name": "Ligneus Region",
+    "extra": "Pioneering Reward"
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "id": 280,
+  "name": "Eternal Astral Clock",
+  "desc": "An hourglass with an interior that seems to hold an entire universe. When the stars inside it move, a divine power is invoked to protect the user. It cannot be used to tell time.",
+  "ice": true,
+  "resonance": 5,
+  "ct": 30,
+  "cats": [
+    {
+      "id": 31,
+      "name": "(Magic Tools)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.31828573407202215,
+      "z": 0.185573063973064,
+      "label": 4
+    },
+    {
+      "x": 0.3031052631578947,
+      "z": 0.20624242424242425,
+      "label": 13
+    }
+  ],
+  "recipe": {
+    "num": 1,
+    "level": [
+      {
+        "lv": 1,
+        "bolt": 3,
+        "air": 3,
+        "reward": "Learn Recipe"
+      },
+      {
+        "lv": 2,
+        "amt": 15,
+        "bolt": 5,
+        "air": 4,
+        "reward": "Quality Up"
+      },
+      {
+        "lv": 3,
+        "amt": 1,
+        "bolt": 7,
+        "air": 5,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 4,
+        "amt": 2,
+        "bolt": 9,
+        "air": 6,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 5,
+        "amt": 1,
+        "bolt": 11,
+        "air": 7,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 6,
+        "amt": 1,
+        "bolt": 4,
+        "air": 4,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 7,
+        "amt": 3,
+        "bolt": 6,
+        "air": 5,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 8,
+        "amt": 1,
+        "bolt": 8,
+        "air": 6,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 9,
+        "amt": 5,
+        "bolt": 5,
+        "air": 5,
+        "reward": "Increase Base Resonance Count"
+      },
+      {
+        "lv": 10,
+        "amt": 30,
+        "bolt": 7,
+        "air": 5,
+        "reward": "Quality Up"
+      }
+    ],
+    "sp": 75,
+    "kind": "assist",
+    "recipe": [
+      {
+        "item": {
+          "id": 72,
+          "name": "Emerald Glass"
+        },
+        "eff": {
+          "id": 13,
+          "name": "SPD Up",
+          "desc1": "Boosts target's SPD by [Lv. x 10]%.",
+          "max_level": 10
+        }
+      },
+      {
+        "item": {
+          "id": 81,
+          "name": "Ashen Stone"
+        },
+        "eff": {
+          "id": 63,
+          "name": "Reduce Cooldown",
+          "desc1": "Reduces cooldowns by [Lv. x 3]%.",
+          "max_level": 10
+        }
+      },
+      {
+        "cat": {
+          "id": 25,
+          "name": "(Magical)"
+        },
+        "eff": {
+          "id": 55,
+          "name": "Extend Positive Effect Duration",
+          "desc1": "Extends the duration of the target's positive effects by [Lv. x 3] second(s).",
+          "max_level": 10
+        }
+      }
+    ]
+  }
+}

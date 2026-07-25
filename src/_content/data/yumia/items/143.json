@@ -1,0 +1,223 @@
+{
+  "id": 143,
+  "name": "Sabersol",
+  "desc": "A mushroom with a sword-like cap. It might have grown in metal-rich soil and developed the sword as a defense against predators, but no one knows for sure. It's just one of those natural mysteries.",
+  "fire": true,
+  "resonance": 4,
+  "mats": [
+    {
+      "name": "Powder",
+      "id": 6
+    }
+  ],
+  "cats": [
+    {
+      "id": 17,
+      "name": "(Mushrooms)"
+    },
+    {
+      "id": 27,
+      "name": "(Metal)"
+    }
+  ],
+  "rank": [
+    {
+      "rank": "S",
+      "eff": [
+        {
+          "lv": 3,
+          "eff": {
+            "id": 248,
+            "name": "Resonance Boost",
+            "desc1": "Using this as an ingredient for synthesis increases the Resonance Count by [Lv. x 1].",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 2,
+          "eff": {
+            "id": 245,
+            "name": "Rebuild Boost - ATK",
+            "desc1": "Boosts the synthesized item's ATK by [Lv. x 1] when used as an ingredient during rebuilding.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 141
+    },
+    {
+      "rank": "A",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 248,
+            "name": "Resonance Boost",
+            "desc1": "Using this as an ingredient for synthesis increases the Resonance Count by [Lv. x 1].",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 245,
+            "name": "Rebuild Boost - ATK",
+            "desc1": "Boosts the synthesized item's ATK by [Lv. x 1] when used as an ingredient during rebuilding.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 120
+    },
+    {
+      "rank": "B",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 248,
+            "name": "Resonance Boost",
+            "desc1": "Using this as an ingredient for synthesis increases the Resonance Count by [Lv. x 1].",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 245,
+            "name": "Rebuild Boost - ATK",
+            "desc1": "Boosts the synthesized item's ATK by [Lv. x 1] when used as an ingredient during rebuilding.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 101
+    },
+    {
+      "rank": "C",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 248,
+            "name": "Resonance Boost",
+            "desc1": "Using this as an ingredient for synthesis increases the Resonance Count by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 81
+    },
+    {
+      "rank": "D",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 248,
+            "name": "Resonance Boost",
+            "desc1": "Using this as an ingredient for synthesis increases the Resonance Count by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 63
+    },
+    {
+      "rank": "E",
+      "quality": 47
+    }
+  ],
+  "location": [
+    {
+      "x": 0.44132036011080333,
+      "z": 0.7829996632996634,
+      "label": 4
+    },
+    {
+      "x": 0.5406074792243767,
+      "z": 0.4306888888888889,
+      "label": 2
+    },
+    {
+      "x": 0.540533379501385,
+      "z": 0.43038383838383837,
+      "label": 2
+    },
+    {
+      "x": 0.5411152354570637,
+      "z": 0.4187239057239057,
+      "label": 2
+    },
+    {
+      "x": 0.5410930747922438,
+      "z": 0.4191353535353536,
+      "label": 2
+    },
+    {
+      "x": 0.538293351800554,
+      "z": 0.42412828282828285,
+      "label": 2
+    },
+    {
+      "x": 0.5570801939058172,
+      "z": 0.4058589225589226,
+      "label": 2
+    },
+    {
+      "x": 0.5569828254847645,
+      "z": 0.4060117845117845,
+      "label": 2
+    },
+    {
+      "x": 0.43975069252077564,
+      "z": 0.5447811447811448,
+      "label": 13
+    },
+    {
+      "x": 0.4877631578947368,
+      "z": 0.6244141414141414,
+      "label": 13
+    },
+    {
+      "x": 0.4717229916897507,
+      "z": 0.6776346801346801,
+      "label": 17
+    },
+    {
+      "x": 0.48696537396121886,
+      "z": 0.8118306397306397,
+      "label": 17
+    },
+    {
+      "x": 0.48241689750692524,
+      "z": 0.7034723905723905,
+      "label": 17
+    },
+    {
+      "x": 0.45444362880886424,
+      "z": 0.5728255892255892,
+      "label": 17
+    },
+    {
+      "x": 0.5119403047091413,
+      "z": 0.6579501683501684,
+      "label": 17
+    },
+    {
+      "x": 0.5157465373961219,
+      "z": 0.6275377104377104,
+      "label": 17
+    },
+    {
+      "x": 0.5348094182825485,
+      "z": 0.3614090909090909,
+      "label": 17
+    },
+    {
+      "x": 0.5331858725761773,
+      "z": 0.3861686868686869,
+      "label": 17
+    }
+  ]
+}

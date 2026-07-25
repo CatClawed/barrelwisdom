@@ -1,0 +1,31 @@
+{
+  "id": 830,
+  "name": "Ruin Stairs B",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.8194371191135734,
+      "z": 0.8829259259259259,
+      "label": 4
+    }
+  ],
+  "material": {
+    "comfort": 1,
+    "cost": 1,
+    "kind": "step",
+    "recipe": [
+      {
+        "num": 1,
+        "mat": {
+          "name": "Stone",
+          "id": 2
+        }
+      }
+    ]
+  }
+}

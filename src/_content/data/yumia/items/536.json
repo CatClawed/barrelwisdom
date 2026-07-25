@@ -1,0 +1,31 @@
+{
+  "id": 536,
+  "name": "Round Carpet C",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.06360221606648198,
+      "z": 0.12618350168350168,
+      "label": 4
+    }
+  ],
+  "material": {
+    "comfort": 3,
+    "cost": 1,
+    "kind": "carpet",
+    "recipe": [
+      {
+        "num": 1,
+        "mat": {
+          "name": "Fiber",
+          "id": 5
+        }
+      }
+    ]
+  }
+}

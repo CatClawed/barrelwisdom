@@ -1,0 +1,24 @@
+{
+  "id": 743,
+  "name": "Wooden Wall with Door Frame",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "comfort": 1,
+    "cost": 30,
+    "kind": "wall",
+    "recipe": [
+      {
+        "num": 3,
+        "mat": {
+          "name": "Wood",
+          "id": 1
+        }
+      }
+    ]
+  }
+}

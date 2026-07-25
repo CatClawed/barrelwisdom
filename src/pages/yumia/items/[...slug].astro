@@ -1,0 +1,55 @@
+---
+import { getCollection } from 'astro:content';
+import { LanguageData } from '@app/localization/localization';
+import MainLayout from '@layouts/MainLayout.astro';
+import ItemList from '@components/Games/yumia/ItemList.astro';
+import ItemDetail from '@components/Games/yumia/ItemDetail.astro';
+
+const allItems = await getCollection('yumia_items');
+
+export async function getStaticPaths() {
+  const items = await getCollection('yumia_items');
+  const langs = LanguageData.languages.yumia;
+  const paths: any[] = [];
+
+  // List pages
+  langs.forEach((lang) => {
+    paths.push({
+      params: { slug: lang },
+      props: { type: 'list', lang },
+    });
+  });
+
+  // Detail and fragment pages
+  items.forEach((item) => {
+    const itemId = item.id;
+    langs.forEach((lang) => {
+      paths.push({
+        params: { slug: `${itemId}/${lang}` },
+        props: { type: 'detail', item, lang },
+      });
+      paths.push({
+        params: { slug: `${itemId}/fragment/${lang}` },
+        props: { type: 'fragment', item, lang },
+      });
+    });
+  });
+  return paths;
+}
+
+const { type, item, lang } = Astro.props;
+---
+
+{
+  type === 'list' ? (
+    <MainLayout title="Item List">
+      <ItemList items={allItems} lang={lang} />
+    </MainLayout>
+  ) : type === 'detail' ? (
+    <MainLayout title={item.data.name}>
+      <ItemDetail item={item.data} lang={lang} />
+    </MainLayout>
+  ) : (
+    <ItemDetail item={item.data} lang={lang} />
+  )
+}

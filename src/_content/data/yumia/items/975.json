@@ -1,0 +1,45 @@
+{
+  "id": 975,
+  "name": "Alstahlia Flower",
+  "comfort_goal": 100,
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.3623286703601108,
+      "z": 0.5146868686868686,
+      "label": 8
+    }
+  ],
+  "material": {
+    "cost": 5,
+    "kind": "module",
+    "recipe": [
+      {
+        "num": 10,
+        "mat": {
+          "name": "Saltpeter",
+          "id": 8
+        }
+      },
+      {
+        "num": 10,
+        "mat": {
+          "name": "Wood",
+          "id": 1
+        }
+      },
+      {
+        "num": 10,
+        "mat": {
+          "name": "Powder",
+          "id": 6
+        }
+      }
+    ]
+  }
+}

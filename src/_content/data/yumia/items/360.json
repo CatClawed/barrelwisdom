@@ -1,0 +1,131 @@
+{
+  "id": 360,
+  "name": "Doombringer",
+  "desc": "A shield made with offensive attacks in mind. The pile power has been pushed to the utmost limit, resulting in almost explosive attacks with accompanying kickback. Only the strongest, most tenacious folks can master one of these.",
+  "fire": true,
+  "resonance": 7,
+  "atk": 25,
+  "dfn": 10,
+  "cats": [
+    {
+      "id": 34,
+      "name": "(Weapons)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.5222461218836565,
+      "z": 0.6349888888888889,
+      "label": 4
+    },
+    {
+      "x": 0.4910720221606648,
+      "z": 0.6126700336700337,
+      "label": 13
+    }
+  ],
+  "recipe": {
+    "num": 1,
+    "level": [
+      {
+        "lv": 1,
+        "fire": 5,
+        "reward": "Learn Recipe"
+      },
+      {
+        "lv": 2,
+        "amt": 15,
+        "fire": 7,
+        "reward": "Quality Up"
+      },
+      {
+        "lv": 3,
+        "amt": 10,
+        "fire": 9,
+        "reward": "ATK Up"
+      },
+      {
+        "lv": 4,
+        "amt": 2,
+        "fire": 8,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 5,
+        "amt": 2,
+        "fire": 10,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 6,
+        "amt": 5,
+        "fire": 12,
+        "reward": "Increase Base Resonance Count"
+      },
+      {
+        "lv": 7,
+        "amt": 3,
+        "fire": 9,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 8,
+        "amt": 1,
+        "fire": 11,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 9,
+        "amt": 20,
+        "fire": 13,
+        "reward": "HP Up"
+      },
+      {
+        "lv": 10,
+        "amt": 20,
+        "fire": 18,
+        "reward": "ATK Up"
+      }
+    ],
+    "sp": 120,
+    "kind": "weapon",
+    "recipe": [
+      {
+        "item": {
+          "id": 157,
+          "name": "Mace Fish"
+        },
+        "eff": {
+          "id": 128,
+          "name": "Avenger",
+          "desc1": "Increases damage by [Lv. x 3]% when your HP is at 50% or lower.",
+          "max_level": 10
+        }
+      },
+      {
+        "item": {
+          "id": 325,
+          "name": "Bismuthene"
+        },
+        "eff": {
+          "id": 129,
+          "name": "Piercing Pile",
+          "desc1": "Increases damage by [Lv. x 4]% when attacking a stunned enemy.",
+          "max_level": 10
+        }
+      },
+      {
+        "cat": {
+          "id": 12,
+          "name": "(Gunpowder)"
+        },
+        "eff": {
+          "id": 130,
+          "name": "Sanguine Crystal",
+          "desc1": "Consumes 10 HP when attacking to increase damage by [Lv. x 2]%.",
+          "max_level": 10
+        }
+      }
+    ]
+  }
+}

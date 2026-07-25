@@ -1,0 +1,32 @@
+{
+  "id": 529,
+  "name": "Basic Carpet B",
+  "comfort_goal": 100,
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.8017614958448754,
+      "z": 0.7740242424242425,
+      "label": 10
+    }
+  ],
+  "material": {
+    "comfort": 3,
+    "cost": 1,
+    "kind": "carpet",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Fiber",
+          "id": 5
+        }
+      }
+    ]
+  }
+}

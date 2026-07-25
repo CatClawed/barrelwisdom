@@ -1,0 +1,28 @@
+{
+  "id": 879,
+  "name": "Sivash Floor B",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "comfort": 1,
+    "cost": 1,
+    "kind": "floor",
+    "recipe": [
+      {
+        "num": 1,
+        "mat": {
+          "name": "Stone",
+          "id": 2
+        }
+      }
+    ]
+  },
+  "quest": {
+    "name": "Sivash Region",
+    "extra": "Pioneering Reward"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": 652,
+  "name": "Anvil",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "cost": 1,
+    "kind": "module",
+    "recipe": [
+      {
+        "num": 3,
+        "mat": {
+          "name": "Iron",
+          "id": 3
+        }
+      }
+    ]
+  },
+  "quest": {
+    "name": "The Fake Harvest Project",
+    "extra": "Main Quest"
+  }
+}

@@ -1,0 +1,99 @@
+---
+interface Props {
+  data: { x: number; z: number; label: number }[];
+  tracker?: boolean;
+  mapId?: string;
+}
+
+const { data, tracker = false, mapId = 'leafletmap' } = Astro.props;
+
+const width = 136; // 8704 / 128 * 2
+const height = 56; // -3584/8704 * 136
+const bounds = [
+  [-height, 0],
+  [0, width],
+];
+
+const initialCount = 0;
+const showChestIcon = tracker && !!data[0]?.label;
+---
+
+<div class="a26-map-wrapper">
+  {
+    tracker && (
+      <div class="tracker-count">
+        {showChestIcon ? (
+          <svg class="tracker-icon white-icon">
+            <use href="/media/spritesheets/A26.svg?v=1#chest" />
+          </svg>
+        ) : (
+          <svg class="tracker-icon yellow-icon">
+            <use href="/media/spritesheets/A26.svg?v=1#memory-vial" />
+          </svg>
+        )}
+        <span id={`${mapId}-count`}>{initialCount}</span> / {data.length}
+      </div>
+    )
+  }
+
+  <div
+    id={mapId}
+    class="a26-map"
+    data-tracker={tracker}
+    data-bounds={JSON.stringify(bounds)}
+    data-width={width}
+    data-height={height}
+    data-points={JSON.stringify(data)}
+  >
+  </div>
+
+  {tracker && <p>Note: Changes made to map do not save between sessions.</p>}
+</div>
+
+<style is:global>
+  .a26-map {
+    height: max(50vh, 600px);
+    width: 100%;
+    margin-top: 1em;
+    border-radius: 10px;
+  }
+  .tracker-count {
+    display: inline-flex;
+    line-height: 2em;
+    align-content: center;
+  }
+  .tracker-icon {
+    height: 2em;
+    width: 2em;
+    padding-right: 0.5em;
+  }
+  .map-icon {
+    height: 2rem;
+    width: 2rem;
+    margin-top: 6px;
+    margin-left: 6px;
+    transform: translate(-50%, -50%);
+  }
+  .white-icon {
+    fill: white;
+  }
+  .yellow-icon {
+    fill: yellow;
+  }
+  .white-div {
+    background-color: white;
+  }
+  .yellow-div {
+    background-color: yellow;
+  }
+  .circle {
+    border: 2px solid black;
+    height: 1em;
+    width: 1em;
+    border-radius: 50%;
+  }
+</style>
+
+<script>
+  import './map_client';
+</script>

@@ -1,0 +1,131 @@
+{
+  "id": 308,
+  "name": "Fettle Cloth",
+  "desc": "A very tough cloth. It was created for people who want to make sturdy clothing with unique designs.",
+  "ice": true,
+  "resonance": 6,
+  "cats": [
+    {
+      "id": 17,
+      "name": "(Mushrooms)"
+    },
+    {
+      "id": 33,
+      "name": "(Cloth)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.38941135734072024,
+      "z": 0.106720202020202,
+      "label": 4
+    },
+    {
+      "x": 0.4090929362880886,
+      "z": 0.32080336700336703,
+      "label": 4
+    },
+    {
+      "x": 0.310803324099723,
+      "z": 0.13468013468013468,
+      "label": 13
+    },
+    {
+      "x": 0.3031052631578947,
+      "z": 0.20624242424242425,
+      "label": 13
+    }
+  ],
+  "recipe": {
+    "num": 3,
+    "level": [
+      {
+        "lv": 1,
+        "ice": 6,
+        "reward": "Learn Recipe"
+      },
+      {
+        "lv": 2,
+        "amt": 15,
+        "ice": 9,
+        "reward": "Quality Up"
+      },
+      {
+        "lv": 3,
+        "amt": 2,
+        "ice": 12,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 4,
+        "amt": 5,
+        "ice": 15,
+        "reward": "Increase Base Resonance Count"
+      },
+      {
+        "lv": 5,
+        "amt": 1,
+        "ice": 18,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 6,
+        "amt": 2,
+        "ice": 9,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 7,
+        "amt": 2,
+        "ice": 12,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 8,
+        "amt": 1,
+        "ice": 15,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 9,
+        "amt": 1,
+        "ice": 10,
+        "reward": "Increase Resonance Area"
+      },
+      {
+        "lv": 10,
+        "amt": 3,
+        "ice": 15,
+        "reward": "Increase Quantity"
+      }
+    ],
+    "sp": 75,
+    "kind": "alchemy",
+    "recipe": [
+      {
+        "item": {
+          "id": 176,
+          "name": "Slimy String"
+        },
+        "eff": {
+          "id": 201,
+          "name": "Synthesis: DEF Up",
+          "desc1": "Using this as an ingredient for synthesis increases the synthesized item's DEF by [Lv. x 1].",
+          "max_level": 5
+        }
+      },
+      {
+        "cat": {
+          "id": 2,
+          "name": "(Plants)"
+        },
+        "eff": {
+          "id": 253,
+          "name": "Synthesis: ATK & DEF Up",
+          "desc1": "Using this as an ingredient for synthesis boosts the synthesized item's ATK and DEF by [Lv. x 1].",
+          "max_level": 7
+        }
+      }
+    ]
+  }
+}

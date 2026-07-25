@@ -1,0 +1,127 @@
+{
+  "id": 273,
+  "name": "Warding Sunny",
+  "desc": "A sunny paper doll said to chase away all things bad and evil. People believe that illnesses and evil spirits are expelled the moment this doll is hung in a room. But it has no effect on bad weather.",
+  "ice": true,
+  "resonance": 5,
+  "ct": 30,
+  "cats": [
+    {
+      "id": 31,
+      "name": "(Magic Tools)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.26292271468144046,
+      "z": 0.06427912457912456,
+      "label": 4
+    }
+  ],
+  "recipe": {
+    "num": 1,
+    "level": [
+      {
+        "lv": 1,
+        "ice": 6,
+        "reward": "Learn Recipe"
+      },
+      {
+        "lv": 2,
+        "amt": 15,
+        "ice": 9,
+        "reward": "Quality Up"
+      },
+      {
+        "lv": 3,
+        "amt": 1,
+        "ice": 12,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 4,
+        "amt": 2,
+        "ice": 15,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 5,
+        "amt": 1,
+        "ice": 18,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 6,
+        "amt": 1,
+        "ice": 9,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 7,
+        "amt": 3,
+        "ice": 12,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 8,
+        "amt": 1,
+        "ice": 15,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 9,
+        "amt": 5,
+        "ice": 10,
+        "reward": "Increase Base Resonance Count"
+      },
+      {
+        "lv": 10,
+        "amt": 30,
+        "ice": 15,
+        "reward": "Quality Up"
+      }
+    ],
+    "sp": 75,
+    "kind": "heal",
+    "recipe": [
+      {
+        "item": {
+          "id": 30,
+          "name": "Smoldering Uni"
+        },
+        "eff": {
+          "id": 59,
+          "name": "Fair Weather Field",
+          "desc1": "Grants [Lv. x 1] stack(s) of Damage Restoration to the target.",
+          "desc2": "Restores [Lv. x 1] stun symbol(s).",
+          "max_level": 10
+        }
+      },
+      {
+        "item": {
+          "id": 138,
+          "name": "Onmbrella"
+        },
+        "eff": {
+          "id": 60,
+          "name": "Illuminating Sunlight",
+          "desc1": "Restores [Lv. x 1] stun symbol(s).",
+          "desc2": "Removes 1 of target's negative effects. If a negative effect is removed, then target's HP is also restored with [Lv. x 20] power.",
+          "max_level": 10
+        }
+      },
+      {
+        "cat": {
+          "id": 25,
+          "name": "(Magical)"
+        },
+        "eff": {
+          "id": 14,
+          "name": "Max HP Up",
+          "desc1": "Boosts target's maximum HP by [Lv. x 5]%.",
+          "max_level": 10
+        }
+      }
+    ]
+  }
+}

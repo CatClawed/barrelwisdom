@@ -1,0 +1,27 @@
+{
+  "id": 683,
+  "name": "Greenhouse",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "cost": 50,
+    "kind": "module",
+    "recipe": [
+      {
+        "num": 10,
+        "mat": {
+          "name": "Great Tree Root",
+          "id": 13
+        }
+      }
+    ]
+  },
+  "quest": {
+    "name": "Ligneus Region",
+    "extra": "Pioneering Reward"
+  }
+}

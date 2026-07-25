@@ -1,0 +1,28 @@
+{
+  "id": 443,
+  "name": "Wild Wall Lamp",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "comfort": 10,
+    "cost": 3,
+    "kind": "wall_light",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Powder",
+          "id": 6
+        }
+      }
+    ]
+  },
+  "quest": {
+    "name": "Cute and Timid 1",
+    "extra": "Lenja"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "id": 719,
+  "name": "Basic Wall with Window Frame B",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "comfort": 1,
+    "cost": 1,
+    "kind": "wall",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Wood",
+          "id": 1
+        }
+      },
+      {
+        "num": 2,
+        "mat": {
+          "name": "Stone",
+          "id": 2
+        }
+      },
+      {
+        "num": 1,
+        "mat": {
+          "name": "Powder",
+          "id": 6
+        }
+      }
+    ]
+  }
+}

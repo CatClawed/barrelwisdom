@@ -1,0 +1,28 @@
+{
+  "id": 651,
+  "name": "Diffuser",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "comfort": 20,
+    "cost": 1,
+    "kind": "module",
+    "recipe": [
+      {
+        "num": 3,
+        "mat": {
+          "name": "Fiber",
+          "id": 5
+        }
+      }
+    ]
+  },
+  "quest": {
+    "name": "In Search of Relaxation",
+    "extra": "Main Quest"
+  }
+}

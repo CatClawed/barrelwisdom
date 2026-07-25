@@ -1,0 +1,28 @@
+{
+  "id": 466,
+  "name": "Antique Lamp",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "comfort": 10,
+    "cost": 5,
+    "kind": "ceiling_light",
+    "recipe": [
+      {
+        "num": 3,
+        "mat": {
+          "name": "Powder",
+          "id": 6
+        }
+      }
+    ]
+  },
+  "quest": {
+    "name": "A Mercenary's Search 1",
+    "extra": "Nina"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": 657,
+  "name": "Stone Path (Straight)",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.05947160664819945,
+      "z": 0.29195252525252524,
+      "label": 4
+    }
+  ],
+  "material": {
+    "comfort": 1,
+    "cost": 1,
+    "kind": "artifact",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Stone",
+          "id": 2
+        }
+      }
+    ]
+  }
+}

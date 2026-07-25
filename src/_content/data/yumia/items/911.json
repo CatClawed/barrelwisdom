@@ -1,0 +1,28 @@
+{
+  "id": 911,
+  "name": "Auruma Pillar A",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "comfort": 1,
+    "cost": 1,
+    "kind": "pillar",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Stone",
+          "id": 2
+        }
+      }
+    ]
+  },
+  "quest": {
+    "name": "Auruma Region",
+    "extra": "Pioneering Reward"
+  }
+}

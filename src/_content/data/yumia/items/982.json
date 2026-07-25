@@ -1,0 +1,24 @@
+{
+  "id": 982,
+  "name": "Pioneering Memories",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "comfort": 50,
+    "cost": 5,
+    "kind": "picture",
+    "recipe": [
+      {
+        "num": 5,
+        "mat": {
+          "name": "Wood",
+          "id": 1
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "id": 255,
+  "name": "Lehrune",
+  "desc": "A massive ice hammer swirling with cold air. Though it is made of ice, this particular kind doesn't melt in fire or heat.",
+  "ice": true,
+  "resonance": 4,
+  "ct": 15,
+  "cats": [
+    {
+      "id": 31,
+      "name": "(Magic Tools)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.16120567867036012,
+      "z": 0.32918956228956225,
+      "label": 4
+    },
+    {
+      "x": 0.06466426592797785,
+      "z": 0.34634343434343434,
+      "label": 13
+    }
+  ],
+  "recipe": {
+    "num": 1,
+    "level": [
+      {
+        "lv": 1,
+        "ice": 3,
+        "reward": "Learn Recipe"
+      },
+      {
+        "lv": 2,
+        "amt": 15,
+        "ice": 5,
+        "reward": "Quality Up"
+      },
+      {
+        "lv": 3,
+        "amt": 1,
+        "ice": 7,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 4,
+        "amt": 2,
+        "ice": 9,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 5,
+        "amt": 1,
+        "ice": 11,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 6,
+        "amt": 1,
+        "ice": 13,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 7,
+        "amt": 3,
+        "ice": 6,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 8,
+        "amt": 1,
+        "ice": 8,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 9,
+        "amt": 5,
+        "ice": 10,
+        "reward": "Increase Base Resonance Count"
+      },
+      {
+        "lv": 10,
+        "amt": 30,
+        "ice": 15,
+        "reward": "Quality Up"
+      }
+    ],
+    "sp": 30,
+    "kind": "attack",
+    "recipe": [
+      {
+        "item": {
+          "id": 88,
+          "name": "Glacial Stone"
+        },
+        "eff": {
+          "id": 3,
+          "name": "Ice Damage",
+          "desc1": "Deals ice damage.",
+          "max_level": 10
+        }
+      },
+      {
+        "cat": {
+          "id": 1,
+          "name": "(Water)"
+        },
+        "eff": {
+          "id": 91,
+          "name": "Ice Follow-Up",
+          "desc1": "Deals ice damage.",
+          "max_level": 10
+        }
+      },
+      {
+        "cat": {
+          "id": 4,
+          "name": "(Flowers)"
+        },
+        "eff": {
+          "id": 17,
+          "name": "SPD Down",
+          "desc1": "Reduces target's SPD by [Lv. x 5]%.",
+          "max_level": 10
+        }
+      }
+    ]
+  }
+}

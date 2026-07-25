@@ -1,0 +1,114 @@
+{
+  "id": 245,
+  "name": "Giant Puniball",
+  "desc": "A strange ball gathered from inside a giant Puni. It's as squishy as a Puni and feels a bit cold when hugged. Throwing it makes it bounce really high, but doing so is dangerous due to its large size.",
+  "ice": true,
+  "resonance": 5,
+  "mats": [
+    {
+      "name": "Water",
+      "id": 4
+    }
+  ],
+  "cats": [
+    {
+      "id": 23,
+      "name": "(Puni)"
+    }
+  ],
+  "rank": [
+    {
+      "rank": "S",
+      "eff": [
+        {
+          "lv": 5,
+          "eff": {
+            "id": 212,
+            "name": "Synthesis: Quality Up+",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's quality by [Lv. x 2].",
+            "max_level": 10
+          }
+        }
+      ],
+      "quality": 140
+    },
+    {
+      "rank": "A",
+      "eff": [
+        {
+          "lv": 4,
+          "eff": {
+            "id": 212,
+            "name": "Synthesis: Quality Up+",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's quality by [Lv. x 2].",
+            "max_level": 10
+          }
+        }
+      ],
+      "quality": 118
+    },
+    {
+      "rank": "B",
+      "eff": [
+        {
+          "lv": 3,
+          "eff": {
+            "id": 212,
+            "name": "Synthesis: Quality Up+",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's quality by [Lv. x 2].",
+            "max_level": 10
+          }
+        }
+      ],
+      "quality": 101
+    },
+    {
+      "rank": "C",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 212,
+            "name": "Synthesis: Quality Up+",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's quality by [Lv. x 2].",
+            "max_level": 10
+          }
+        }
+      ],
+      "quality": 86
+    },
+    {
+      "rank": "D",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 212,
+            "name": "Synthesis: Quality Up+",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's quality by [Lv. x 2].",
+            "max_level": 10
+          }
+        }
+      ],
+      "quality": 64
+    },
+    {
+      "rank": "E",
+      "quality": 45
+    }
+  ],
+  "mons": [
+    {
+      "id": 10,
+      "name": "Big Puni"
+    },
+    {
+      "id": 11,
+      "name": "Precious Puni"
+    },
+    {
+      "id": 12,
+      "name": "Shining Puni"
+    }
+  ]
+}

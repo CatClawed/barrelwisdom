@@ -1,0 +1,31 @@
+{
+  "id": 402,
+  "name": "Anti-Mana Shatter Ammo",
+  "desc": "Bullets made of Stirium designed to counter Corleonis's ice attacks. By pinpointing a massive amount of mana into one point, they boast high penetrative power, but cannot be mass-produced due to the rarity of the materials needed.",
+  "cats": [
+    {
+      "id": 40,
+      "name": "(Key Items)"
+    }
+  ],
+  "recipe": {
+    "num": 1,
+    "level": [
+      {
+        "lv": 1,
+        "ice": 3,
+        "reward": "Learn Recipe"
+      }
+    ],
+    "sp": 100,
+    "kind": "material",
+    "recipe": [
+      {
+        "item": {
+          "id": 399,
+          "name": "Stirium"
+        }
+      }
+    ]
+  }
+}

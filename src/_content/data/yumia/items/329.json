@@ -1,0 +1,137 @@
+{
+  "id": 329,
+  "name": "Ancient Peril",
+  "desc": "A hazardous substance from long ago that was so dangerous it was lost to time. Hopefully reviving this in the modern age doesn't prove to be a terrible mistake ...",
+  "air": true,
+  "resonance": 7,
+  "cats": [
+    {
+      "id": 6,
+      "name": "(Poisons)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.5342019390581717,
+      "z": 0.6224148148148149,
+      "label": 4
+    },
+    {
+      "x": 0.5384788088642659,
+      "z": 0.723923569023569,
+      "label": 4
+    },
+    {
+      "x": 0.48870637119113575,
+      "z": 0.6132188552188552,
+      "label": 13
+    },
+    {
+      "x": 0.4908739612188365,
+      "z": 0.6356531986531987,
+      "label": 13
+    }
+  ],
+  "recipe": {
+    "num": 3,
+    "level": [
+      {
+        "lv": 1,
+        "fire": 4,
+        "air": 4,
+        "reward": "Learn Recipe"
+      },
+      {
+        "lv": 2,
+        "amt": 15,
+        "fire": 6,
+        "air": 5,
+        "reward": "Quality Up"
+      },
+      {
+        "lv": 3,
+        "amt": 2,
+        "fire": 8,
+        "air": 5,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 4,
+        "amt": 5,
+        "fire": 5,
+        "air": 5,
+        "reward": "Increase Base Resonance Count"
+      },
+      {
+        "lv": 5,
+        "amt": 2,
+        "fire": 7,
+        "air": 6,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 6,
+        "amt": 2,
+        "fire": 9,
+        "air": 7,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 7,
+        "amt": 2,
+        "fire": 6,
+        "air": 6,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 8,
+        "amt": 1,
+        "fire": 8,
+        "air": 7,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 9,
+        "amt": 1,
+        "fire": 10,
+        "air": 8,
+        "reward": "Increase Resonance Area"
+      },
+      {
+        "lv": 10,
+        "amt": 3,
+        "fire": 12,
+        "air": 8,
+        "reward": "Increase Quantity"
+      }
+    ],
+    "sp": 108,
+    "kind": "alchemy",
+    "recipe": [
+      {
+        "item": {
+          "id": 106,
+          "name": "Puni Fossil"
+        },
+        "eff": {
+          "id": 227,
+          "name": "Core Boost - HP",
+          "desc1": "Boosts HP by [Lv. x 2] when added to a core.",
+          "max_level": 10
+        }
+      },
+      {
+        "cat": {
+          "id": 4,
+          "name": "(Flowers)"
+        },
+        "eff": {
+          "id": 230,
+          "name": "Core Boost - SPD",
+          "desc1": "Boosts SPD by [Lv. x 2] when added to a core.",
+          "max_level": 10
+        }
+      }
+    ]
+  }
+}

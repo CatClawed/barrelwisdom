@@ -1,0 +1,98 @@
+---
+import { category_to_icon, element_map } from './yumia_constants';
+
+interface Props {
+  cats: { id: string; name: string }[];
+  mats?: { id: string; name: string }[];
+  isLink?: boolean;
+  lang?: string;
+  resonance?: number;
+  fire?: boolean;
+  ice?: boolean;
+  bolt?: boolean;
+  air?: boolean;
+}
+
+const {
+  cats,
+  mats,
+  lang,
+  isLink = false,
+  resonance,
+  fire = false,
+  ice = false,
+  bolt = false,
+  air = false,
+} = Astro.props;
+
+const getColor = (active: boolean | undefined, type: string) =>
+  active ? element_map[type] : element_map['none'];
+
+const elements = [
+  { id: 'fire', active: fire },
+  { id: 'ice', active: ice },
+  { id: 'bolt', active: bolt },
+  { id: 'air', active: air },
+];
+---
+
+<div class="two-column" style={isLink ? undefined : 'height: 100%;'}>
+  <ul style="padding-left: 0; list-style: none;">
+    {
+      cats.map((item) => (
+        <li style="display: flex; align-items: center;">
+          <svg class="a26-icon">
+            <use
+              href={`/media/spritesheets/A26.svg?v=1#${category_to_icon[item.id] ?? 'default-icon'}`}
+            />
+          </svg>
+
+          {isLink ? (
+            <a href={`/yumia/categories/${item.id}/${lang}`}>{item.name}</a>
+          ) : (
+            <span>{item.name}</span>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+  <ul style="padding-left: 0; list-style: none;">
+    {
+      mats?.map((item) => (
+        <li style="display: flex; align-items: center;">
+          <svg class="a26-icon">
+            <use href={`/media/spritesheets/A26.svg?v=1#material-${item.id}`} />
+          </svg>
+          {item.name}
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+{
+  resonance && (
+    <div class="two-column" style="padding-top: 0.5rem;">
+      <div style="break-inside: avoid-column;">
+        {elements.map((el) => (
+          <svg
+            class="a26-elements"
+            style={`background-color: ${getColor(el.active, el.id)};`}
+          >
+            <use href={`/media/spritesheets/A26.svg?v=1#${el.id}`} />
+          </svg>
+        ))}
+      </div>
+
+      <div style="display: flex; align-items: center;">
+        <svg class="a26-icon">
+          <use href="/media/spritesheets/A26.svg?v=1#resonance" />
+        </svg>
+        {resonance} - {resonance + 5}
+      </div>
+    </div>
+  )
+}
+<style lang="scss">
+  @use '@styles/games/yumia';
+</style>

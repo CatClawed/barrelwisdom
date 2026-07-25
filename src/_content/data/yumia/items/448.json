@@ -1,0 +1,32 @@
+{
+  "id": 448,
+  "name": "Wall Lamp D",
+  "comfort_goal": 400,
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.04576828254847645,
+      "z": 0.24640942760942763,
+      "label": 8
+    }
+  ],
+  "material": {
+    "comfort": 5,
+    "cost": 2,
+    "kind": "wall_light",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Powder",
+          "id": 6
+        }
+      }
+    ]
+  }
+}

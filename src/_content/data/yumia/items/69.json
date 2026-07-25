@@ -1,0 +1,293 @@
+{
+  "id": 69,
+  "name": "Dunkelheit",
+  "desc": "A potent medicinal flower capable of bringing someone back from the brink of death. Because the flower must first be processed using alchemy, most people aren't aware of its use as a medicine.",
+  "ice": true,
+  "bolt": true,
+  "resonance": 10,
+  "mats": [
+    {
+      "name": "Medicine",
+      "id": 11
+    }
+  ],
+  "cats": [
+    {
+      "id": 4,
+      "name": "(Flowers)"
+    },
+    {
+      "id": 5,
+      "name": "(Medicinal)"
+    },
+    {
+      "id": 7,
+      "name": "(Elixirs)"
+    },
+    {
+      "id": 25,
+      "name": "(Magical)"
+    }
+  ],
+  "rank": [
+    {
+      "rank": "S",
+      "eff": [
+        {
+          "lv": 5,
+          "eff": {
+            "id": 233,
+            "name": "Omnipotent Flower",
+            "desc1": "Boosts quality and all stats when added to a core.",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 232,
+            "name": "Omnipotent Drop",
+            "desc1": "Doubles the resonance value and amount of drifting mana acquired.",
+            "max_level": 1
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 205,
+            "name": "Synthesis: Quantity Up",
+            "desc1": "Using this as an ingredient for synthesis increases the number of items synthesized by [Lv. x 1].",
+            "max_level": 10
+          }
+        }
+      ],
+      "quality": 200
+    },
+    {
+      "rank": "A",
+      "eff": [
+        {
+          "lv": 4,
+          "eff": {
+            "id": 233,
+            "name": "Omnipotent Flower",
+            "desc1": "Boosts quality and all stats when added to a core.",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 232,
+            "name": "Omnipotent Drop",
+            "desc1": "Doubles the resonance value and amount of drifting mana acquired.",
+            "max_level": 1
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 205,
+            "name": "Synthesis: Quantity Up",
+            "desc1": "Using this as an ingredient for synthesis increases the number of items synthesized by [Lv. x 1].",
+            "max_level": 10
+          }
+        }
+      ],
+      "quality": 162
+    },
+    {
+      "rank": "B",
+      "eff": [
+        {
+          "lv": 3,
+          "eff": {
+            "id": 233,
+            "name": "Omnipotent Flower",
+            "desc1": "Boosts quality and all stats when added to a core.",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 232,
+            "name": "Omnipotent Drop",
+            "desc1": "Doubles the resonance value and amount of drifting mana acquired.",
+            "max_level": 1
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 205,
+            "name": "Synthesis: Quantity Up",
+            "desc1": "Using this as an ingredient for synthesis increases the number of items synthesized by [Lv. x 1].",
+            "max_level": 10
+          }
+        }
+      ],
+      "quality": 147
+    },
+    {
+      "rank": "C",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 233,
+            "name": "Omnipotent Flower",
+            "desc1": "Boosts quality and all stats when added to a core.",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 232,
+            "name": "Omnipotent Drop",
+            "desc1": "Doubles the resonance value and amount of drifting mana acquired.",
+            "max_level": 1
+          }
+        }
+      ],
+      "quality": 125
+    },
+    {
+      "rank": "D",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 233,
+            "name": "Omnipotent Flower",
+            "desc1": "Boosts quality and all stats when added to a core.",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 232,
+            "name": "Omnipotent Drop",
+            "desc1": "Doubles the resonance value and amount of drifting mana acquired.",
+            "max_level": 1
+          }
+        }
+      ],
+      "quality": 102
+    },
+    {
+      "rank": "E",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 233,
+            "name": "Omnipotent Flower",
+            "desc1": "Boosts quality and all stats when added to a core.",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 232,
+            "name": "Omnipotent Drop",
+            "desc1": "Doubles the resonance value and amount of drifting mana acquired.",
+            "max_level": 1
+          }
+        }
+      ],
+      "quality": 88
+    }
+  ],
+  "location": [
+    {
+      "x": 0.7837326869806094,
+      "z": 0.7823430976430977,
+      "label": 4
+    },
+    {
+      "x": 0.6013403047091412,
+      "z": 0.43251885521885525,
+      "label": 4
+    },
+    {
+      "x": 0.7005929362880886,
+      "z": 0.7536454545454546,
+      "label": 1
+    },
+    {
+      "x": 0.6993292243767313,
+      "z": 0.8760114478114479,
+      "label": 1
+    },
+    {
+      "x": 0.7283339335180055,
+      "z": 0.631676430976431,
+      "label": 1
+    },
+    {
+      "x": 0.7357382271468144,
+      "z": 0.6402986531986532,
+      "label": 1
+    },
+    {
+      "x": 0.7780123268698061,
+      "z": 0.6153259259259258,
+      "label": 1
+    },
+    {
+      "x": 0.8148047091412742,
+      "z": 0.6711952861952862,
+      "label": 1
+    },
+    {
+      "x": 0.8154858725761773,
+      "z": 0.6668077441077442,
+      "label": 1
+    },
+    {
+      "x": 0.8058772853185596,
+      "z": 0.8676087542087542,
+      "label": 1
+    },
+    {
+      "x": 0.8115831024930747,
+      "z": 0.8589289562289563,
+      "label": 1
+    },
+    {
+      "x": 0.8069803324099724,
+      "z": 0.8789653198653199,
+      "label": 1
+    },
+    {
+      "x": 0.8133203601108034,
+      "z": 0.8339279461279461,
+      "label": 1
+    },
+    {
+      "x": 0.8115565096952909,
+      "z": 0.8780387205387206,
+      "label": 1
+    },
+    {
+      "x": 0.7546951523545706,
+      "z": 0.7806077441077441,
+      "label": 1
+    },
+    {
+      "x": 0.7510555401662049,
+      "z": 0.7716161616161616,
+      "label": 1
+    }
+  ],
+  "rare": [
+    {
+      "id": 116,
+      "name": "Masked Punisher"
+    }
+  ]
+}

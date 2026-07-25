@@ -1,0 +1,227 @@
+{
+  "id": 68,
+  "name": "Evolved Sacred Silver",
+  "desc": "Silvery liquid nestled in a chalice. Said to have been created by an alchemist, this fluid is brimming with mysterious power. While it supposedly grants beneficial properties to whatever it's being used to make, it's also incredibly difficult to handle.",
+  "fire": true,
+  "resonance": 8,
+  "mats": [
+    {
+      "name": "Medicine",
+      "id": 11
+    }
+  ],
+  "cats": [
+    {
+      "id": 1,
+      "name": "(Water)"
+    },
+    {
+      "id": 7,
+      "name": "(Elixirs)"
+    },
+    {
+      "id": 27,
+      "name": "(Metal)"
+    }
+  ],
+  "rank": [
+    {
+      "rank": "S",
+      "eff": [
+        {
+          "lv": 5,
+          "eff": {
+            "id": 204,
+            "name": "Synthesis: Quality Up",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's quality by [Lv. x 1].",
+            "max_level": 10
+          }
+        },
+        {
+          "lv": 3,
+          "eff": {
+            "id": 248,
+            "name": "Resonance Boost",
+            "desc1": "Using this as an ingredient for synthesis increases the Resonance Count by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 175
+    },
+    {
+      "rank": "A",
+      "eff": [
+        {
+          "lv": 4,
+          "eff": {
+            "id": 204,
+            "name": "Synthesis: Quality Up",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's quality by [Lv. x 1].",
+            "max_level": 10
+          }
+        },
+        {
+          "lv": 2,
+          "eff": {
+            "id": 248,
+            "name": "Resonance Boost",
+            "desc1": "Using this as an ingredient for synthesis increases the Resonance Count by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 150
+    },
+    {
+      "rank": "B",
+      "eff": [
+        {
+          "lv": 3,
+          "eff": {
+            "id": 204,
+            "name": "Synthesis: Quality Up",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's quality by [Lv. x 1].",
+            "max_level": 10
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 248,
+            "name": "Resonance Boost",
+            "desc1": "Using this as an ingredient for synthesis increases the Resonance Count by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 133
+    },
+    {
+      "rank": "C",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 204,
+            "name": "Synthesis: Quality Up",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's quality by [Lv. x 1].",
+            "max_level": 10
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 248,
+            "name": "Resonance Boost",
+            "desc1": "Using this as an ingredient for synthesis increases the Resonance Count by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 118
+    },
+    {
+      "rank": "D",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 204,
+            "name": "Synthesis: Quality Up",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's quality by [Lv. x 1].",
+            "max_level": 10
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 248,
+            "name": "Resonance Boost",
+            "desc1": "Using this as an ingredient for synthesis increases the Resonance Count by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 96
+    },
+    {
+      "rank": "E",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 204,
+            "name": "Synthesis: Quality Up",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's quality by [Lv. x 1].",
+            "max_level": 10
+          }
+        }
+      ],
+      "quality": 77
+    }
+  ],
+  "location": [
+    {
+      "x": 0.8998103878116344,
+      "z": 0.7834622895622895,
+      "label": 4
+    },
+    {
+      "x": 0.9056736842105263,
+      "z": 0.7607956228956229,
+      "label": 4
+    },
+    {
+      "x": 0.7315412742382272,
+      "z": 0.780963973063973,
+      "label": 4
+    },
+    {
+      "x": 0.7013639889196677,
+      "z": 0.811186531986532,
+      "label": 4
+    },
+    {
+      "x": 0.768112326869806,
+      "z": 0.7438703703703704,
+      "label": 1
+    },
+    {
+      "x": 0.7665285318559556,
+      "z": 0.8141868686868687,
+      "label": 1
+    },
+    {
+      "x": 0.7527981994459835,
+      "z": 0.7801555555555556,
+      "label": 1
+    },
+    {
+      "x": 0.7528228531855955,
+      "z": 0.772510101010101,
+      "label": 1
+    },
+    {
+      "x": 0.7586926592797784,
+      "z": 0.7475882154882155,
+      "label": 1
+    },
+    {
+      "x": 0.7448113573407202,
+      "z": 0.7769734006734006,
+      "label": 1
+    },
+    {
+      "x": 0.7537567867036011,
+      "z": 0.8037848484848484,
+      "label": 1
+    }
+  ],
+  "rare": [
+    {
+      "id": 111,
+      "name": "Faceless Hugger"
+    }
+  ]
+}

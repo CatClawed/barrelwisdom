@@ -1,0 +1,31 @@
+{
+  "id": 643,
+  "name": "Shed",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.8196648199445984,
+      "z": 0.8835747474747475,
+      "label": 4
+    }
+  ],
+  "material": {
+    "comfort": 20,
+    "cost": 1,
+    "kind": "artifact",
+    "recipe": [
+      {
+        "num": 3,
+        "mat": {
+          "name": "Wood",
+          "id": 1
+        }
+      }
+    ]
+  }
+}

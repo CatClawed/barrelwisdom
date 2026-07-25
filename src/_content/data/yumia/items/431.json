@@ -1,0 +1,11 @@
+{
+  "id": 431,
+  "name": "Filled Nectar Bottle",
+  "desc": "A bottle packed full of Alstahlia nectar. The nectar can be used as a substitute for energy.",
+  "cats": [
+    {
+      "id": 37,
+      "name": "(Exploration Equip.)"
+    }
+  ]
+}

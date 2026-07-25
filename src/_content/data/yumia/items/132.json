@@ -1,0 +1,322 @@
+{
+  "id": 132,
+  "name": "Pine Fruit",
+  "desc": "A fruit with leaves that make it look like it's flying. Its unique appearance has popularized it as a sort of good luck charm, so it is often given as a celebratory present.",
+  "air": true,
+  "resonance": 6,
+  "mats": [
+    {
+      "name": "Fruit",
+      "id": 10
+    }
+  ],
+  "cats": [
+    {
+      "id": 1,
+      "name": "(Water)"
+    },
+    {
+      "id": 14,
+      "name": "(Edibles)"
+    }
+  ],
+  "rank": [
+    {
+      "rank": "S",
+      "eff": [
+        {
+          "lv": 5,
+          "eff": {
+            "id": 204,
+            "name": "Synthesis: Quality Up",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's quality by [Lv. x 1].",
+            "max_level": 10
+          }
+        },
+        {
+          "lv": 3,
+          "eff": {
+            "id": 247,
+            "name": "Rebuild Boost - SPD",
+            "desc1": "Boosts the synthesized item's SPD by [Lv. x 1] when used as an ingredient during rebuilding.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 155
+    },
+    {
+      "rank": "A",
+      "eff": [
+        {
+          "lv": 4,
+          "eff": {
+            "id": 204,
+            "name": "Synthesis: Quality Up",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's quality by [Lv. x 1].",
+            "max_level": 10
+          }
+        },
+        {
+          "lv": 2,
+          "eff": {
+            "id": 247,
+            "name": "Rebuild Boost - SPD",
+            "desc1": "Boosts the synthesized item's SPD by [Lv. x 1] when used as an ingredient during rebuilding.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 132
+    },
+    {
+      "rank": "B",
+      "eff": [
+        {
+          "lv": 3,
+          "eff": {
+            "id": 204,
+            "name": "Synthesis: Quality Up",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's quality by [Lv. x 1].",
+            "max_level": 10
+          }
+        },
+        {
+          "lv": 2,
+          "eff": {
+            "id": 247,
+            "name": "Rebuild Boost - SPD",
+            "desc1": "Boosts the synthesized item's SPD by [Lv. x 1] when used as an ingredient during rebuilding.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 117
+    },
+    {
+      "rank": "C",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 204,
+            "name": "Synthesis: Quality Up",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's quality by [Lv. x 1].",
+            "max_level": 10
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 247,
+            "name": "Rebuild Boost - SPD",
+            "desc1": "Boosts the synthesized item's SPD by [Lv. x 1] when used as an ingredient during rebuilding.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 95
+    },
+    {
+      "rank": "D",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 204,
+            "name": "Synthesis: Quality Up",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's quality by [Lv. x 1].",
+            "max_level": 10
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 247,
+            "name": "Rebuild Boost - SPD",
+            "desc1": "Boosts the synthesized item's SPD by [Lv. x 1] when used as an ingredient during rebuilding.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 72
+    },
+    {
+      "rank": "E",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 204,
+            "name": "Synthesis: Quality Up",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's quality by [Lv. x 1].",
+            "max_level": 10
+          }
+        }
+      ],
+      "quality": 58
+    }
+  ],
+  "location": [
+    {
+      "x": 0.7219094182825484,
+      "z": 0.8626451178451178,
+      "label": 4
+    },
+    {
+      "x": 0.782640997229917,
+      "z": 0.6668255892255892,
+      "label": 2
+    },
+    {
+      "x": 0.7838594182825485,
+      "z": 0.6707801346801348,
+      "label": 2
+    },
+    {
+      "x": 0.7835340720221606,
+      "z": 0.6706430976430976,
+      "label": 2
+    },
+    {
+      "x": 0.7827750692520775,
+      "z": 0.6708080808080809,
+      "label": 2
+    },
+    {
+      "x": 0.7976572022160665,
+      "z": 0.702082154882155,
+      "label": 2
+    },
+    {
+      "x": 0.7998058171745153,
+      "z": 0.6977097643097643,
+      "label": 2
+    },
+    {
+      "x": 0.7957009695290859,
+      "z": 0.6376080808080807,
+      "label": 2
+    },
+    {
+      "x": 0.7941725761772853,
+      "z": 0.6368346801346803,
+      "label": 2
+    },
+    {
+      "x": 0.7937283933518006,
+      "z": 0.6396407407407407,
+      "label": 2
+    },
+    {
+      "x": 0.7944738227146814,
+      "z": 0.6406508417508417,
+      "label": 2
+    },
+    {
+      "x": 0.8003450138504155,
+      "z": 0.6323986531986533,
+      "label": 2
+    },
+    {
+      "x": 0.8018196675900278,
+      "z": 0.6287508417508417,
+      "label": 2
+    },
+    {
+      "x": 0.8003505540166205,
+      "z": 0.6298723905723905,
+      "label": 2
+    },
+    {
+      "x": 0.8010727146814405,
+      "z": 0.6328393939393939,
+      "label": 2
+    },
+    {
+      "x": 0.8005993074792244,
+      "z": 0.6323111111111112,
+      "label": 2
+    },
+    {
+      "x": 0.7949818559556787,
+      "z": 0.6375316498316499,
+      "label": 2
+    },
+    {
+      "x": 0.7957990304709142,
+      "z": 0.6385979797979797,
+      "label": 2
+    },
+    {
+      "x": 0.7416722991689751,
+      "z": 0.6635185185185185,
+      "label": 2
+    },
+    {
+      "x": 0.7422083102493076,
+      "z": 0.6656151515151516,
+      "label": 2
+    },
+    {
+      "x": 0.7409491689750693,
+      "z": 0.666530303030303,
+      "label": 2
+    },
+    {
+      "x": 0.741295429362881,
+      "z": 0.6664198653198654,
+      "label": 2
+    },
+    {
+      "x": 0.8000191135734073,
+      "z": 0.6994777777777779,
+      "label": 2
+    },
+    {
+      "x": 0.7845084487534626,
+      "z": 0.6073494949494949,
+      "label": 2
+    },
+    {
+      "x": 0.7838332409972298,
+      "z": 0.6085212121212121,
+      "label": 2
+    },
+    {
+      "x": 0.7830869806094184,
+      "z": 0.613169696969697,
+      "label": 2
+    },
+    {
+      "x": 0.7756078947368421,
+      "z": 0.6105447811447811,
+      "label": 2
+    },
+    {
+      "x": 0.7759101108033241,
+      "z": 0.6079619528619529,
+      "label": 2
+    },
+    {
+      "x": 0.7822185595567868,
+      "z": 0.6150387205387206,
+      "label": 2
+    },
+    {
+      "x": 0.7987912742382272,
+      "z": 0.6975888888888889,
+      "label": 2
+    },
+    {
+      "x": 0.7996476454293628,
+      "z": 0.7020636363636364,
+      "label": 2
+    },
+    {
+      "x": 0.7842480609418282,
+      "z": 0.669043771043771,
+      "label": 2
+    }
+  ]
+}

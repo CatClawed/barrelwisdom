@@ -1,0 +1,31 @@
+{
+  "id": 618,
+  "name": "Flowering Plant",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "comfort": 3,
+    "cost": 5,
+    "kind": "goods",
+    "recipe": [
+      {
+        "num": 1,
+        "mat": {
+          "name": "Stone",
+          "id": 2
+        }
+      },
+      {
+        "num": 1,
+        "mat": {
+          "name": "Fiber",
+          "id": 5
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": 621,
+  "name": "Teddy Bear",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.5767171745152354,
+      "z": 0.2926521885521886,
+      "label": 4
+    }
+  ],
+  "material": {
+    "comfort": 3,
+    "cost": 3,
+    "kind": "goods",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Fiber",
+          "id": 5
+        }
+      }
+    ]
+  }
+}

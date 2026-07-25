@@ -1,0 +1,140 @@
+{
+  "id": 384,
+  "name": "Brash Bangle",
+  "desc": "A bangle made for physical combatants. It assists with muscle movement, increasing the wearer's overall ease of motion. That being said, even wearing a large number of bangles does not allow one to surpass their body's limitations.",
+  "fire": true,
+  "resonance": 5,
+  "atk": 20,
+  "cats": [
+    {
+      "id": 36,
+      "name": "(Accessories)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.28903116343490304,
+      "z": 0.407526936026936,
+      "label": 4
+    },
+    {
+      "x": 0.3275087257617728,
+      "z": 0.15993164983164987,
+      "label": 4
+    }
+  ],
+  "recipe": {
+    "num": 1,
+    "level": [
+      {
+        "lv": 1,
+        "fire": 3,
+        "bolt": 3,
+        "reward": "Learn Recipe"
+      },
+      {
+        "lv": 2,
+        "amt": 15,
+        "fire": 4,
+        "bolt": 5,
+        "reward": "Quality Up"
+      },
+      {
+        "lv": 3,
+        "amt": 10,
+        "fire": 5,
+        "bolt": 7,
+        "reward": "SPD Up"
+      },
+      {
+        "lv": 4,
+        "amt": 2,
+        "fire": 6,
+        "bolt": 9,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 5,
+        "amt": 1,
+        "fire": 7,
+        "bolt": 11,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 6,
+        "amt": 5,
+        "fire": 4,
+        "bolt": 4,
+        "reward": "Increase Base Resonance Count"
+      },
+      {
+        "lv": 7,
+        "amt": 3,
+        "fire": 5,
+        "bolt": 6,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 8,
+        "amt": 1,
+        "fire": 6,
+        "bolt": 8,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 9,
+        "amt": 20,
+        "fire": 5,
+        "bolt": 5,
+        "reward": "HP Up"
+      },
+      {
+        "lv": 10,
+        "amt": 20,
+        "fire": 5,
+        "bolt": 7,
+        "reward": "SPD Up"
+      }
+    ],
+    "sp": 90,
+    "kind": "accessory",
+    "recipe": [
+      {
+        "item": {
+          "id": 169,
+          "name": "Cutlass"
+        },
+        "eff": {
+          "id": 184,
+          "name": "Combative Spirit",
+          "desc1": "Reduces skill cooldowns by [Lv. x 2]% and restores HP by [Lv. x 1]% of the damage dealt on a successful hit.",
+          "max_level": 10
+        }
+      },
+      {
+        "item": {
+          "id": 197,
+          "name": "Kong Plate"
+        },
+        "eff": {
+          "id": 185,
+          "name": "Adrenaline Rush",
+          "desc1": "Increases skill damage by [Lv x 2]% and critical damage by [Lv. x 2]%.",
+          "max_level": 10
+        }
+      },
+      {
+        "cat": {
+          "id": 27,
+          "name": "(Metal)"
+        },
+        "eff": {
+          "id": 110,
+          "name": "Resist KO",
+          "desc1": "Grants a [Lv. x 2]% chance to survive an attack with 1 HP that otherwise would have been a KO.",
+          "max_level": 10
+        }
+      }
+    ]
+  }
+}

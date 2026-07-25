@@ -1,0 +1,38 @@
+{
+  "id": 694,
+  "name": "Fireplace",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.46095429362880885,
+      "z": 0.2209373737373737,
+      "label": 4
+    }
+  ],
+  "material": {
+    "comfort": 10,
+    "cost": 5,
+    "kind": "large_other",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Stone",
+          "id": 2
+        }
+      },
+      {
+        "num": 2,
+        "mat": {
+          "name": "Powder",
+          "id": 6
+        }
+      }
+    ]
+  }
+}

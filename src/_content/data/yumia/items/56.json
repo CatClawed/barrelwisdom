@@ -1,0 +1,421 @@
+{
+  "id": 56,
+  "name": "Medicinal Sap",
+  "desc": "An effective cure for sickness and injury. Despite being more potent than any medicine provided by a clinic, it's so bitter that even the most stalwart adult struggles to get it down. Any attempts to make the sap easier to drink only make it taste even worse.",
+  "resonance": 5,
+  "mats": [
+    {
+      "name": "Medicine",
+      "id": 11
+    }
+  ],
+  "cats": [
+    {
+      "id": 2,
+      "name": "(Plants)"
+    },
+    {
+      "id": 5,
+      "name": "(Medicinal)"
+    }
+  ],
+  "rank": [
+    {
+      "rank": "S",
+      "eff": [
+        {
+          "lv": 3,
+          "eff": {
+            "id": 224,
+            "name": "Increase Resonance Area - 2nd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line second closest to the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 3,
+          "eff": {
+            "id": 238,
+            "name": "Neutralizers - Quality Boost",
+            "desc1": "Boosts quality by [Lv. x 1] when used as an ingredient for a neutralizer category synthesized item.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 135
+    },
+    {
+      "rank": "A",
+      "eff": [
+        {
+          "lv": 3,
+          "eff": {
+            "id": 224,
+            "name": "Increase Resonance Area - 2nd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line second closest to the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 2,
+          "eff": {
+            "id": 238,
+            "name": "Neutralizers - Quality Boost",
+            "desc1": "Boosts quality by [Lv. x 1] when used as an ingredient for a neutralizer category synthesized item.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 115
+    },
+    {
+      "rank": "B",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 224,
+            "name": "Increase Resonance Area - 2nd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line second closest to the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 2,
+          "eff": {
+            "id": 238,
+            "name": "Neutralizers - Quality Boost",
+            "desc1": "Boosts quality by [Lv. x 1] when used as an ingredient for a neutralizer category synthesized item.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 98
+    },
+    {
+      "rank": "C",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 224,
+            "name": "Increase Resonance Area - 2nd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line second closest to the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 238,
+            "name": "Neutralizers - Quality Boost",
+            "desc1": "Boosts quality by [Lv. x 1] when used as an ingredient for a neutralizer category synthesized item.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 80
+    },
+    {
+      "rank": "D",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 224,
+            "name": "Increase Resonance Area - 2nd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line second closest to the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 238,
+            "name": "Neutralizers - Quality Boost",
+            "desc1": "Boosts quality by [Lv. x 1] when used as an ingredient for a neutralizer category synthesized item.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 64
+    },
+    {
+      "rank": "E",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 224,
+            "name": "Increase Resonance Area - 2nd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line second closest to the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 50
+    }
+  ],
+  "location": [
+    {
+      "x": 0.688273268698061,
+      "z": 0.835085521885522,
+      "label": 4
+    },
+    {
+      "x": 0.8092570637119113,
+      "z": 0.8618181818181818,
+      "label": 1
+    },
+    {
+      "x": 0.8087362880886426,
+      "z": 0.862863973063973,
+      "label": 1
+    },
+    {
+      "x": 0.808688781163435,
+      "z": 0.8595996632996632,
+      "label": 1
+    },
+    {
+      "x": 0.8072056786703601,
+      "z": 0.8629154882154882,
+      "label": 1
+    },
+    {
+      "x": 0.8071373961218836,
+      "z": 0.8643185185185185,
+      "label": 1
+    },
+    {
+      "x": 0.8058728531855955,
+      "z": 0.8653037037037038,
+      "label": 1
+    },
+    {
+      "x": 0.810761218836565,
+      "z": 0.8680111111111111,
+      "label": 1
+    },
+    {
+      "x": 0.8074070637119114,
+      "z": 0.8708491582491583,
+      "label": 1
+    },
+    {
+      "x": 0.8065549861495844,
+      "z": 0.871622558922559,
+      "label": 1
+    },
+    {
+      "x": 0.8068745152354571,
+      "z": 0.8734993265993266,
+      "label": 1
+    },
+    {
+      "x": 0.8072883656509695,
+      "z": 0.8766875420875422,
+      "label": 1
+    },
+    {
+      "x": 0.8064984764542936,
+      "z": 0.875026936026936,
+      "label": 1
+    },
+    {
+      "x": 0.8064463988919668,
+      "z": 0.8752488215488217,
+      "label": 1
+    },
+    {
+      "x": 0.8080638504155124,
+      "z": 0.879977441077441,
+      "label": 1
+    },
+    {
+      "x": 0.8097961218836566,
+      "z": 0.8796006734006735,
+      "label": 1
+    },
+    {
+      "x": 0.8104450138504156,
+      "z": 0.8811616161616161,
+      "label": 1
+    },
+    {
+      "x": 0.8105351800554017,
+      "z": 0.8527996632996633,
+      "label": 1
+    },
+    {
+      "x": 0.8100752077562328,
+      "z": 0.8558087542087542,
+      "label": 1
+    },
+    {
+      "x": 0.8101096952908586,
+      "z": 0.8555215488215488,
+      "label": 1
+    },
+    {
+      "x": 0.8095301939058173,
+      "z": 0.8652222222222222,
+      "label": 1
+    },
+    {
+      "x": 0.8103782548476454,
+      "z": 0.8731875420875421,
+      "label": 1
+    },
+    {
+      "x": 0.8105060941828255,
+      "z": 0.8809057239057239,
+      "label": 1
+    },
+    {
+      "x": 0.8097797783933518,
+      "z": 0.8835131313131314,
+      "label": 1
+    },
+    {
+      "x": 0.8080595567867036,
+      "z": 0.8802414141414142,
+      "label": 1
+    },
+    {
+      "x": 0.8079308864265927,
+      "z": 0.8798360269360269,
+      "label": 1
+    },
+    {
+      "x": 0.8103045706371191,
+      "z": 0.8734424242424244,
+      "label": 1
+    },
+    {
+      "x": 0.8087081717451524,
+      "z": 0.8668713804713805,
+      "label": 1
+    },
+    {
+      "x": 0.8072598337950139,
+      "z": 0.864384175084175,
+      "label": 1
+    },
+    {
+      "x": 0.8058286703601109,
+      "z": 0.8647925925925927,
+      "label": 1
+    },
+    {
+      "x": 0.8059092797783933,
+      "z": 0.8620107744107744,
+      "label": 1
+    },
+    {
+      "x": 0.8059800554016621,
+      "z": 0.8620117845117845,
+      "label": 1
+    },
+    {
+      "x": 0.8064224376731302,
+      "z": 0.8665178451178451,
+      "label": 1
+    },
+    {
+      "x": 0.8094087257617728,
+      "z": 0.8613430976430977,
+      "label": 1
+    },
+    {
+      "x": 0.8093042936288088,
+      "z": 0.8611222222222222,
+      "label": 1
+    },
+    {
+      "x": 0.8099988919667589,
+      "z": 0.8555895622895622,
+      "label": 1
+    },
+    {
+      "x": 0.8104890581717451,
+      "z": 0.8524774410774411,
+      "label": 1
+    },
+    {
+      "x": 0.8152002770083102,
+      "z": 0.8657606060606061,
+      "label": 1
+    },
+    {
+      "x": 0.8156936288088643,
+      "z": 0.866902356902357,
+      "label": 1
+    },
+    {
+      "x": 0.8152930747922438,
+      "z": 0.8653959595959595,
+      "label": 1
+    },
+    {
+      "x": 0.8110646814404432,
+      "z": 0.8616188552188552,
+      "label": 1
+    },
+    {
+      "x": 0.8087321329639889,
+      "z": 0.8732323232323232,
+      "label": 1
+    },
+    {
+      "x": 0.8075081717451524,
+      "z": 0.8709387205387205,
+      "label": 1
+    },
+    {
+      "x": 0.8112793628808863,
+      "z": 0.8680666666666667,
+      "label": 1
+    },
+    {
+      "x": 0.8151815789473684,
+      "z": 0.8654397306397306,
+      "label": 1
+    },
+    {
+      "x": 0.8157590027700831,
+      "z": 0.8670983164983166,
+      "label": 1
+    },
+    {
+      "x": 0.8115427977839336,
+      "z": 0.871037037037037,
+      "label": 1
+    },
+    {
+      "x": 0.8103216066481994,
+      "z": 0.872924579124579,
+      "label": 1
+    },
+    {
+      "x": 0.8111458448753464,
+      "z": 0.8620471380471381,
+      "label": 1
+    },
+    {
+      "x": 0.8096391966759002,
+      "z": 0.8653457912457913,
+      "label": 1
+    },
+    {
+      "x": 0.8088656509695291,
+      "z": 0.866994276094276,
+      "label": 1
+    },
+    {
+      "x": 0.6220567867036011,
+      "z": 0.768976430976431,
+      "label": 13
+    }
+  ]
+}

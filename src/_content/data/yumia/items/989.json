@@ -1,0 +1,31 @@
+{
+  "id": 989,
+  "name": "Tree E",
+  "comfort_goal": 50,
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.7432090027700832,
+      "z": 0.7147946127946128,
+      "label": 10
+    }
+  ],
+  "material": {
+    "cost": 5,
+    "kind": "nature",
+    "recipe": [
+      {
+        "num": 8,
+        "mat": {
+          "name": "Wood",
+          "id": 1
+        }
+      }
+    ]
+  }
+}

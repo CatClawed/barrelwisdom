@@ -23,4 +23,6 @@ All commands are run from the root of the project, from a terminal:
 
 Code is under GPL-3.0. Content within `src/content` and any other game data is under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) unless a different license is indicated on the page.
 
-Bear in mind, just because you CAN use my stuff doesn't mean I won't think you're a dickhead for using it. This applies mostly to Fandom.
+Bear in mind, just because you CAN use my stuff doesn't mean I won't think you're a dickhead for using it.
+
+If you are copying my data for a Fandom wiki, one of my primary regrets for the licensing of this site is that I did not craft a specific 'Fuck Fandom' license. Don't support Fandom.

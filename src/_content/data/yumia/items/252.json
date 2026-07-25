@@ -1,0 +1,161 @@
+{
+  "id": 252,
+  "name": "Pristine Ancient Relic",
+  "desc": "This strange sort of metal looks as though it was newly forged. In actuality, this relic was made several hundreds of years ago, but has seemingly escaped the ravages of time. It is an unusual specimen even among relic treasures.",
+  "fire": true,
+  "resonance": 4,
+  "mats": [
+    {
+      "name": "Part",
+      "id": 9
+    },
+    {
+      "name": "Quartz Cluster",
+      "id": 16
+    }
+  ],
+  "cats": [
+    {
+      "id": 41,
+      "name": "(Relics)"
+    }
+  ],
+  "rank": [
+    {
+      "rank": "S",
+      "eff": [
+        {
+          "lv": 3,
+          "eff": {
+            "id": 225,
+            "name": "Increase Resonance Area - 3rd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line farthest from the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 146
+    },
+    {
+      "rank": "A",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 225,
+            "name": "Increase Resonance Area - 3rd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line farthest from the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 123
+    },
+    {
+      "rank": "B",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 225,
+            "name": "Increase Resonance Area - 3rd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line farthest from the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 108
+    },
+    {
+      "rank": "C",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 225,
+            "name": "Increase Resonance Area - 3rd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line farthest from the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 86
+    },
+    {
+      "rank": "D",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 225,
+            "name": "Increase Resonance Area - 3rd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line farthest from the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 63
+    },
+    {
+      "rank": "E",
+      "quality": 49
+    }
+  ],
+  "location": [
+    {
+      "x": 0.7247861495844875,
+      "z": 0.8988387205387205,
+      "label": 15
+    },
+    {
+      "x": 0.7191840720221607,
+      "z": 0.8776276094276095,
+      "label": 15
+    },
+    {
+      "x": 0.7155998614958449,
+      "z": 0.9161582491582492,
+      "label": 15
+    },
+    {
+      "x": 0.712151108033241,
+      "z": 0.8967360269360268,
+      "label": 15
+    },
+    {
+      "x": 0.7417195290858726,
+      "z": 0.6102360269360269,
+      "label": 15
+    },
+    {
+      "x": 0.7367941828254848,
+      "z": 0.6057124579124579,
+      "label": 15
+    },
+    {
+      "x": 0.7432080332409972,
+      "z": 0.5945471380471381,
+      "label": 15
+    },
+    {
+      "x": 0.7391247922437673,
+      "z": 0.5886040404040405,
+      "label": 15
+    },
+    {
+      "x": 0.8222668975069252,
+      "z": 0.804469696969697,
+      "label": 15
+    },
+    {
+      "x": 0.826805540166205,
+      "z": 0.8231205387205387,
+      "label": 15
+    },
+    {
+      "x": 0.819197783933518,
+      "z": 0.8156936026936027,
+      "label": 15
+    }
+  ]
+}

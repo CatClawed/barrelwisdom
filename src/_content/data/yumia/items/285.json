@@ -1,0 +1,125 @@
+{
+  "id": 285,
+  "name": "Never Open",
+  "desc": "A dangerous chest full of poisonous mushroom spores. No other explanation is needed. It's simple and dangerous. It's simply dangerous.",
+  "fire": true,
+  "resonance": 5,
+  "ct": 30,
+  "cats": [
+    {
+      "id": 31,
+      "name": "(Magic Tools)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.3892844875346261,
+      "z": 0.10592828282828282,
+      "label": 4
+    }
+  ],
+  "recipe": {
+    "num": 1,
+    "level": [
+      {
+        "lv": 1,
+        "fire": 4,
+        "reward": "Learn Recipe"
+      },
+      {
+        "lv": 2,
+        "amt": 15,
+        "fire": 6,
+        "reward": "Quality Up"
+      },
+      {
+        "lv": 3,
+        "amt": 1,
+        "fire": 8,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 4,
+        "amt": 2,
+        "fire": 10,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 5,
+        "amt": 1,
+        "fire": 12,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 6,
+        "amt": 1,
+        "fire": 7,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 7,
+        "amt": 3,
+        "fire": 9,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 8,
+        "amt": 1,
+        "fire": 11,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 9,
+        "amt": 5,
+        "fire": 8,
+        "reward": "Increase Base Resonance Count"
+      },
+      {
+        "lv": 10,
+        "amt": 30,
+        "fire": 13,
+        "reward": "Quality Up"
+      }
+    ],
+    "sp": 75,
+    "kind": "assist",
+    "recipe": [
+      {
+        "item": {
+          "id": 5,
+          "name": "Black Water"
+        },
+        "eff": {
+          "id": 8,
+          "name": "Inflict Poison",
+          "desc1": "Grants a [Lv. x 10]% chance to inflict 1 stack(s) of Poison on the target.",
+          "max_level": 10
+        }
+      },
+      {
+        "item": {
+          "id": 141,
+          "name": "Danger Mushroom"
+        },
+        "eff": {
+          "id": 9,
+          "name": "Inflict Sleep",
+          "desc1": "Grants a [Lv. x 10]% chance to inflict 1 stack(s) of Sleep on the target.",
+          "max_level": 10
+        }
+      },
+      {
+        "cat": {
+          "id": 6,
+          "name": "(Poisons)"
+        },
+        "eff": {
+          "id": 15,
+          "name": "ATK Down",
+          "desc1": "Reduces target's ATK by [Lv. x 5]%.",
+          "max_level": 10
+        }
+      }
+    ]
+  }
+}

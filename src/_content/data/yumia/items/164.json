@@ -1,0 +1,169 @@
+{
+  "id": 164,
+  "name": "Soaring Spearfish",
+  "desc": "A fish with a large horn protruding from its head. It evolved this barbed horn for hunting and uses it to attack not only other fish but also to spear birds out of the sky.",
+  "ice": true,
+  "bolt": true,
+  "air": true,
+  "resonance": 6,
+  "mats": [
+    {
+      "name": "Water",
+      "id": 4
+    }
+  ],
+  "cats": [
+    {
+      "id": 7,
+      "name": "(Elixirs)"
+    },
+    {
+      "id": 18,
+      "name": "(Marine)"
+    }
+  ],
+  "rank": [
+    {
+      "rank": "S",
+      "eff": [
+        {
+          "lv": 5,
+          "eff": {
+            "id": 200,
+            "name": "Synthesis: ATK Up",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's ATK by [Lv. x 1].",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 3,
+          "eff": {
+            "id": 248,
+            "name": "Resonance Boost",
+            "desc1": "Using this as an ingredient for synthesis increases the Resonance Count by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 175
+    },
+    {
+      "rank": "A",
+      "eff": [
+        {
+          "lv": 4,
+          "eff": {
+            "id": 200,
+            "name": "Synthesis: ATK Up",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's ATK by [Lv. x 1].",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 2,
+          "eff": {
+            "id": 248,
+            "name": "Resonance Boost",
+            "desc1": "Using this as an ingredient for synthesis increases the Resonance Count by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 152
+    },
+    {
+      "rank": "B",
+      "eff": [
+        {
+          "lv": 3,
+          "eff": {
+            "id": 200,
+            "name": "Synthesis: ATK Up",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's ATK by [Lv. x 1].",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 248,
+            "name": "Resonance Boost",
+            "desc1": "Using this as an ingredient for synthesis increases the Resonance Count by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 137
+    },
+    {
+      "rank": "C",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 200,
+            "name": "Synthesis: ATK Up",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's ATK by [Lv. x 1].",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 248,
+            "name": "Resonance Boost",
+            "desc1": "Using this as an ingredient for synthesis increases the Resonance Count by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 115
+    },
+    {
+      "rank": "D",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 200,
+            "name": "Synthesis: ATK Up",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's ATK by [Lv. x 1].",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 248,
+            "name": "Resonance Boost",
+            "desc1": "Using this as an ingredient for synthesis increases the Resonance Count by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 92
+    },
+    {
+      "rank": "E",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 200,
+            "name": "Synthesis: ATK Up",
+            "desc1": "Using this as an ingredient for synthesis increases the synthesized item's ATK by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 78
+    }
+  ],
+  "location": [
+    {
+      "x": 0.8176252077562327,
+      "z": 0.6982296296296296,
+      "label": 9
+    }
+  ]
+}

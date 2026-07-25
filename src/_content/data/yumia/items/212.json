@@ -1,0 +1,204 @@
+{
+  "id": 212,
+  "name": "Ether Core",
+  "desc": "A jewel found inside golems. It contains more energy than regular golem cores and can even generate its own energy. Golems with these types of cores can live forever unless they're destroyed.",
+  "ice": true,
+  "bolt": true,
+  "resonance": 6,
+  "mats": [
+    {
+      "name": "Part",
+      "id": 9
+    }
+  ],
+  "cats": [
+    {
+      "id": 9,
+      "name": "(Stone)"
+    },
+    {
+      "id": 25,
+      "name": "(Magical)"
+    },
+    {
+      "id": 27,
+      "name": "(Metal)"
+    }
+  ],
+  "rank": [
+    {
+      "rank": "S",
+      "eff": [
+        {
+          "lv": 3,
+          "eff": {
+            "id": 243,
+            "name": "Rebuild Boost - Resonance Area",
+            "desc1": "Increases the resonance area by [Lv. x 1] when used as an ingredient during rebuilding.",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 218,
+            "name": "Drifting Mana Return",
+            "desc1": "Boosts quality when drifting mana is acquired.",
+            "max_level": 1
+          }
+        }
+      ],
+      "quality": 163
+    },
+    {
+      "rank": "A",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 243,
+            "name": "Rebuild Boost - Resonance Area",
+            "desc1": "Increases the resonance area by [Lv. x 1] when used as an ingredient during rebuilding.",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 218,
+            "name": "Drifting Mana Return",
+            "desc1": "Boosts quality when drifting mana is acquired.",
+            "max_level": 1
+          }
+        }
+      ],
+      "quality": 140
+    },
+    {
+      "rank": "B",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 243,
+            "name": "Rebuild Boost - Resonance Area",
+            "desc1": "Increases the resonance area by [Lv. x 1] when used as an ingredient during rebuilding.",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 218,
+            "name": "Drifting Mana Return",
+            "desc1": "Boosts quality when drifting mana is acquired.",
+            "max_level": 1
+          }
+        }
+      ],
+      "quality": 123
+    },
+    {
+      "rank": "C",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 243,
+            "name": "Rebuild Boost - Resonance Area",
+            "desc1": "Increases the resonance area by [Lv. x 1] when used as an ingredient during rebuilding.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 108
+    },
+    {
+      "rank": "D",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 243,
+            "name": "Rebuild Boost - Resonance Area",
+            "desc1": "Increases the resonance area by [Lv. x 1] when used as an ingredient during rebuilding.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 86
+    },
+    {
+      "rank": "E",
+      "quality": 67
+    }
+  ],
+  "location": [
+    {
+      "x": 0.9357448753462605,
+      "z": 0.7834074074074074,
+      "label": 4
+    },
+    {
+      "x": 0.4614865650969529,
+      "z": 0.15875084175084175,
+      "label": 4
+    },
+    {
+      "x": 0.49889196675900277,
+      "z": 0.8138047138047138,
+      "label": 13
+    },
+    {
+      "x": 0.5483393351800554,
+      "z": 0.45237037037037037,
+      "label": 13
+    },
+    {
+      "x": 0.4717229916897507,
+      "z": 0.6776346801346801,
+      "label": 17
+    },
+    {
+      "x": 0.48696537396121886,
+      "z": 0.8118306397306397,
+      "label": 17
+    },
+    {
+      "x": 0.48241689750692524,
+      "z": 0.7034723905723905,
+      "label": 17
+    },
+    {
+      "x": 0.45444362880886424,
+      "z": 0.5728255892255892,
+      "label": 17
+    },
+    {
+      "x": 0.5119403047091413,
+      "z": 0.6579501683501684,
+      "label": 17
+    },
+    {
+      "x": 0.5157465373961219,
+      "z": 0.6275377104377104,
+      "label": 17
+    },
+    {
+      "x": 0.5348094182825485,
+      "z": 0.3614090909090909,
+      "label": 17
+    },
+    {
+      "x": 0.5331858725761773,
+      "z": 0.3861686868686869,
+      "label": 17
+    }
+  ],
+  "mons": [
+    {
+      "id": 84,
+      "name": "Sentry Commander"
+    }
+  ]
+}

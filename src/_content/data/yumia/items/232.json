@@ -1,0 +1,290 @@
+{
+  "id": 232,
+  "name": "Hunter's Training Feather",
+  "desc": "A special feather obtained from a leader among monsters. It is durable and emits faint air energy. These feathers are buried deep within the wing and are seldom seen as a result.",
+  "air": true,
+  "resonance": 5,
+  "mats": [
+    {
+      "name": "Scrap Fabric",
+      "id": 12
+    }
+  ],
+  "cats": [
+    {
+      "id": 24,
+      "name": "(Animal Mat.)"
+    }
+  ],
+  "rank": [
+    {
+      "rank": "S",
+      "eff": [
+        {
+          "lv": 3,
+          "eff": {
+            "id": 237,
+            "name": "Element Resonance - Air",
+            "desc1": "Increases the resonance area by [Lv. x 1] when used as an ingredient for an air element synthesized item.",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 3,
+          "eff": {
+            "id": 247,
+            "name": "Rebuild Boost - SPD",
+            "desc1": "Boosts the synthesized item's SPD by [Lv. x 1] when used as an ingredient during rebuilding.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 137
+    },
+    {
+      "rank": "A",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 237,
+            "name": "Element Resonance - Air",
+            "desc1": "Increases the resonance area by [Lv. x 1] when used as an ingredient for an air element synthesized item.",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 2,
+          "eff": {
+            "id": 247,
+            "name": "Rebuild Boost - SPD",
+            "desc1": "Boosts the synthesized item's SPD by [Lv. x 1] when used as an ingredient during rebuilding.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 115
+    },
+    {
+      "rank": "B",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 237,
+            "name": "Element Resonance - Air",
+            "desc1": "Increases the resonance area by [Lv. x 1] when used as an ingredient for an air element synthesized item.",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 247,
+            "name": "Rebuild Boost - SPD",
+            "desc1": "Boosts the synthesized item's SPD by [Lv. x 1] when used as an ingredient during rebuilding.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 100
+    },
+    {
+      "rank": "C",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 237,
+            "name": "Element Resonance - Air",
+            "desc1": "Increases the resonance area by [Lv. x 1] when used as an ingredient for an air element synthesized item.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 78
+    },
+    {
+      "rank": "D",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 237,
+            "name": "Element Resonance - Air",
+            "desc1": "Increases the resonance area by [Lv. x 1] when used as an ingredient for an air element synthesized item.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 55
+    },
+    {
+      "rank": "E",
+      "quality": 41
+    }
+  ],
+  "location": [
+    {
+      "x": 0.0645202216066482,
+      "z": 0.19880875420875424,
+      "label": 17
+    },
+    {
+      "x": 0.14371024930747922,
+      "z": 0.4375717171717171,
+      "label": 17
+    },
+    {
+      "x": 0.1874432132963989,
+      "z": 0.0848138047138047,
+      "label": 17
+    },
+    {
+      "x": 0.0645202216066482,
+      "z": 0.19880875420875424,
+      "label": 17
+    },
+    {
+      "x": 0.05470360110803324,
+      "z": 0.4264676767676768,
+      "label": 17
+    },
+    {
+      "x": 0.053766343490304715,
+      "z": 0.2757794612794613,
+      "label": 17
+    },
+    {
+      "x": 0.10056786703601107,
+      "z": 0.4043026936026936,
+      "label": 17
+    },
+    {
+      "x": 0.1274184210526316,
+      "z": 0.34558148148148154,
+      "label": 17
+    },
+    {
+      "x": 0.07946371191135733,
+      "z": 0.3093424242424243,
+      "label": 17
+    },
+    {
+      "x": 0.06912022160664819,
+      "z": 0.302549494949495,
+      "label": 17
+    },
+    {
+      "x": 0.04196024930747923,
+      "z": 0.32904107744107747,
+      "label": 17
+    },
+    {
+      "x": 0.059130055401662045,
+      "z": 0.4428861952861953,
+      "label": 17
+    },
+    {
+      "x": 0.07907659279778392,
+      "z": 0.4759340067340067,
+      "label": 17
+    },
+    {
+      "x": 0.15601385041551247,
+      "z": 0.3987306397306397,
+      "label": 17
+    },
+    {
+      "x": 0.08357520775623267,
+      "z": 0.1852367003367003,
+      "label": 17
+    },
+    {
+      "x": 0.033567590027700836,
+      "z": 0.1020016835016835,
+      "label": 17
+    },
+    {
+      "x": 0.07839459833795014,
+      "z": 0.07897441077441075,
+      "label": 17
+    },
+    {
+      "x": 0.13015401662049864,
+      "z": 0.15810673400673406,
+      "label": 17
+    },
+    {
+      "x": 0.03643324099722992,
+      "z": 0.18293400673400673,
+      "label": 17
+    },
+    {
+      "x": 0.16007229916897509,
+      "z": 0.198937037037037,
+      "label": 17
+    },
+    {
+      "x": 0.18013919667590028,
+      "z": 0.35452121212121207,
+      "label": 17
+    },
+    {
+      "x": 0.11222063711911355,
+      "z": 0.15452929292929296,
+      "label": 17
+    },
+    {
+      "x": 0.05614445983379502,
+      "z": 0.31712659932659937,
+      "label": 17
+    },
+    {
+      "x": 0.5711887811634349,
+      "z": 0.2936309764309764,
+      "label": 17
+    },
+    {
+      "x": 0.560554432132964,
+      "z": 0.29476531986531984,
+      "label": 17
+    },
+    {
+      "x": 0.5599574792243767,
+      "z": 0.2654882154882155,
+      "label": 17
+    },
+    {
+      "x": 0.5416603878116343,
+      "z": 0.25790168350168347,
+      "label": 17
+    },
+    {
+      "x": 0.5305565096952909,
+      "z": 0.22308215488215485,
+      "label": 17
+    },
+    {
+      "x": 0.48200747922437676,
+      "z": 0.19784848484848486,
+      "label": 17
+    },
+    {
+      "x": 0.49621343490304703,
+      "z": 0.21977037037037034,
+      "label": 17
+    },
+    {
+      "x": 0.4589080332409972,
+      "z": 0.16561750841750839,
+      "label": 17
+    }
+  ],
+  "mons": [
+    {
+      "id": 37,
+      "name": "Midnight Owl"
+    }
+  ]
+}

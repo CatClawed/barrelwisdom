@@ -1,0 +1,125 @@
+{
+  "id": 286,
+  "name": "Enfer Cube",
+  "desc": "A cube containing an ancient, horrifying monster. While the exact identity of the creature contained within is unknown, breaking the seal to sate one's curiosity is extremely ill-advised.",
+  "fire": true,
+  "resonance": 6,
+  "ct": 30,
+  "cats": [
+    {
+      "id": 31,
+      "name": "(Magic Tools)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.439609972299169,
+      "z": 0.6867104377104377,
+      "label": 4
+    }
+  ],
+  "recipe": {
+    "num": 1,
+    "level": [
+      {
+        "lv": 1,
+        "air": 5,
+        "reward": "Learn Recipe"
+      },
+      {
+        "lv": 2,
+        "amt": 15,
+        "air": 7,
+        "reward": "Quality Up"
+      },
+      {
+        "lv": 3,
+        "amt": 1,
+        "air": 9,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 4,
+        "amt": 2,
+        "air": 8,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 5,
+        "amt": 2,
+        "air": 10,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 6,
+        "amt": 1,
+        "air": 12,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 7,
+        "amt": 3,
+        "air": 9,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 8,
+        "amt": 1,
+        "air": 11,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 9,
+        "amt": 5,
+        "air": 13,
+        "reward": "Increase Base Resonance Count"
+      },
+      {
+        "lv": 10,
+        "amt": 30,
+        "air": 18,
+        "reward": "Quality Up"
+      }
+    ],
+    "sp": 105,
+    "kind": "assist",
+    "recipe": [
+      {
+        "item": {
+          "id": 7,
+          "name": "Aqua Soda"
+        },
+        "eff": {
+          "id": 19,
+          "name": "All Stats Down",
+          "desc1": "Reduces target's ATK, DEF, and SPD by [Lv. x 5]%.",
+          "max_level": 10
+        }
+      },
+      {
+        "item": {
+          "id": 84,
+          "name": "Cobalt Stone"
+        },
+        "eff": {
+          "id": 21,
+          "name": "Negative Effect Resistance Down",
+          "desc1": "Lowers target's Negative Effect resistance by [Lv. x 5]%.",
+          "max_level": 10
+        }
+      },
+      {
+        "cat": {
+          "id": 25,
+          "name": "(Magical)"
+        },
+        "eff": {
+          "id": 20,
+          "name": "Critical Rate Down",
+          "desc1": "Reduces target's critical rate by [Lv. x 10]%.",
+          "max_level": 10
+        }
+      }
+    ]
+  }
+}

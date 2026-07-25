@@ -1,0 +1,45 @@
+{
+  "id": 472,
+  "name": "Lamp B",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.3321236842105263,
+      "z": 0.3252232323232323,
+      "label": 4
+    }
+  ],
+  "material": {
+    "comfort": 5,
+    "cost": 3,
+    "kind": "ceiling_light",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Powder",
+          "id": 6
+        }
+      },
+      {
+        "num": 1,
+        "mat": {
+          "name": "Wood",
+          "id": 1
+        }
+      },
+      {
+        "num": 1,
+        "mat": {
+          "name": "Wood",
+          "id": 1
+        }
+      }
+    ]
+  }
+}

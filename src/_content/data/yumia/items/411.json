@@ -1,0 +1,66 @@
+{
+  "id": 411,
+  "name": "Repair Kit - Liquid",
+  "desc": "A toolbox with everything needed to fix liquids and their related items. While obviously suited to liquid repair, it can also mend whatever it was contained in without any issues.",
+  "cats": [
+    {
+      "id": 37,
+      "name": "(Exploration Equip.)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.20077894736842106,
+      "z": 0.24471649831649828,
+      "label": 17
+    },
+    {
+      "x": 0.02656260387811634,
+      "z": 0.40826565656565655,
+      "label": 17
+    },
+    {
+      "x": 0.15576842105263156,
+      "z": 0.41330269360269356,
+      "label": 17
+    },
+    {
+      "x": 0.27993254847645427,
+      "z": 0.3728683501683501,
+      "label": 17
+    },
+    {
+      "x": 0.2548139889196676,
+      "z": 0.2915410774410775,
+      "label": 17
+    },
+    {
+      "x": 0.5295346260387812,
+      "z": 0.5468552188552188,
+      "label": 17
+    }
+  ],
+  "material": {
+    "core": 5,
+    "recipe": [
+      {
+        "num": 3,
+        "mat": {
+          "name": "Part",
+          "id": 9
+        }
+      },
+      {
+        "num": 3,
+        "mat": {
+          "name": "Water",
+          "id": 4
+        }
+      }
+    ]
+  },
+  "quest": {
+    "name": "The Mystery of the Alber",
+    "extra": "Main Quest"
+  }
+}

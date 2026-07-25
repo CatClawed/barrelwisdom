@@ -1,0 +1,31 @@
+{
+  "id": 461,
+  "name": "Small Wall Decor C",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.28692825484764545,
+      "z": 0.27851750841750844,
+      "label": 4
+    }
+  ],
+  "material": {
+    "comfort": 5,
+    "cost": 3,
+    "kind": "wall_accessory",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Wood",
+          "id": 1
+        }
+      }
+    ]
+  }
+}

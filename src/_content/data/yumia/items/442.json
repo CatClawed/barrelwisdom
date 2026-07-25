@@ -1,0 +1,28 @@
+{
+  "id": 442,
+  "name": "Fancy Wall Lamp",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "comfort": 10,
+    "cost": 3,
+    "kind": "wall_light",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Powder",
+          "id": 6
+        }
+      }
+    ]
+  },
+  "quest": {
+    "name": "Our Special Connection 1",
+    "extra": "Isla"
+  }
+}

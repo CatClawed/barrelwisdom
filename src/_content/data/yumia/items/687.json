@@ -1,0 +1,27 @@
+{
+  "id": 687,
+  "name": "Duplication Machine",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "cost": 50,
+    "kind": "module",
+    "recipe": [
+      {
+        "num": 10,
+        "mat": {
+          "name": "Metal Board",
+          "id": 15
+        }
+      }
+    ]
+  },
+  "quest": {
+    "name": "Auruma Region",
+    "extra": "Pioneering Reward"
+  }
+}

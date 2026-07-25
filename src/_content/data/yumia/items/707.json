@@ -1,0 +1,24 @@
+{
+  "id": 707,
+  "name": "Basic Pillar B",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "comfort": 1,
+    "cost": 1,
+    "kind": "pillar",
+    "recipe": [
+      {
+        "num": 1,
+        "mat": {
+          "name": "Wood",
+          "id": 1
+        }
+      }
+    ]
+  }
+}

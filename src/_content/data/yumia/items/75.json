@@ -1,0 +1,487 @@
+{
+  "id": 75,
+  "name": "Fallen Stardust",
+  "desc": "Shimmering particles said to have rained down from the sky during a meteor shower. A number of unknown minerals are mixed in, so they are widely believed to have come from beyond the stars.",
+  "ice": true,
+  "air": true,
+  "resonance": 5,
+  "mats": [
+    {
+      "name": "Powder",
+      "id": 6
+    },
+    {
+      "name": "Saltpeter",
+      "id": 8
+    }
+  ],
+  "cats": [
+    {
+      "id": 8,
+      "name": "(Sand)"
+    },
+    {
+      "id": 25,
+      "name": "(Magical)"
+    }
+  ],
+  "rank": [
+    {
+      "rank": "S",
+      "eff": [
+        {
+          "lv": 3,
+          "eff": {
+            "id": 222,
+            "name": "Increase Resonance Area - Star",
+            "desc1": "When used as an ingredient for a star-shaped Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 3,
+          "eff": {
+            "id": 225,
+            "name": "Increase Resonance Area - 3rd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line farthest from the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 140
+    },
+    {
+      "rank": "A",
+      "eff": [
+        {
+          "lv": 3,
+          "eff": {
+            "id": 222,
+            "name": "Increase Resonance Area - Star",
+            "desc1": "When used as an ingredient for a star-shaped Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 2,
+          "eff": {
+            "id": 225,
+            "name": "Increase Resonance Area - 3rd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line farthest from the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 115
+    },
+    {
+      "rank": "B",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 222,
+            "name": "Increase Resonance Area - Star",
+            "desc1": "When used as an ingredient for a star-shaped Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 2,
+          "eff": {
+            "id": 225,
+            "name": "Increase Resonance Area - 3rd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line farthest from the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 98
+    },
+    {
+      "rank": "C",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 222,
+            "name": "Increase Resonance Area - Star",
+            "desc1": "When used as an ingredient for a star-shaped Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 225,
+            "name": "Increase Resonance Area - 3rd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line farthest from the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 83
+    },
+    {
+      "rank": "D",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 222,
+            "name": "Increase Resonance Area - Star",
+            "desc1": "When used as an ingredient for a star-shaped Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 225,
+            "name": "Increase Resonance Area - 3rd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line farthest from the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 61
+    },
+    {
+      "rank": "E",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 222,
+            "name": "Increase Resonance Area - Star",
+            "desc1": "When used as an ingredient for a star-shaped Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 42
+    }
+  ],
+  "location": [
+    {
+      "x": 0.7635657894736843,
+      "z": 0.8283720538720539,
+      "label": 4
+    },
+    {
+      "x": 0.7825461218836566,
+      "z": 0.8072235690235691,
+      "label": 2
+    },
+    {
+      "x": 0.7810171745152354,
+      "z": 0.8087925925925926,
+      "label": 2
+    },
+    {
+      "x": 0.7257292243767313,
+      "z": 0.7679185185185184,
+      "label": 2
+    },
+    {
+      "x": 0.7288382271468143,
+      "z": 0.7499259259259259,
+      "label": 2
+    },
+    {
+      "x": 0.7282408587257618,
+      "z": 0.7395383838383839,
+      "label": 2
+    },
+    {
+      "x": 0.7334121883656509,
+      "z": 0.7272818181818183,
+      "label": 2
+    },
+    {
+      "x": 0.7399416897506925,
+      "z": 0.7312734006734007,
+      "label": 2
+    },
+    {
+      "x": 0.7392986149584487,
+      "z": 0.7261589225589226,
+      "label": 2
+    },
+    {
+      "x": 0.7435717451523547,
+      "z": 0.7241235690235691,
+      "label": 2
+    },
+    {
+      "x": 0.743969944598338,
+      "z": 0.7078286195286194,
+      "label": 2
+    },
+    {
+      "x": 0.746440997229917,
+      "z": 0.7098663299663299,
+      "label": 2
+    },
+    {
+      "x": 0.7489027700831026,
+      "z": 0.7217558922558922,
+      "label": 2
+    },
+    {
+      "x": 0.751674376731302,
+      "z": 0.7146750841750842,
+      "label": 2
+    },
+    {
+      "x": 0.7541537396121883,
+      "z": 0.7003781144781145,
+      "label": 2
+    },
+    {
+      "x": 0.7566506925207757,
+      "z": 0.7015993265993266,
+      "label": 2
+    },
+    {
+      "x": 0.7552346260387812,
+      "z": 0.7058127946127947,
+      "label": 2
+    },
+    {
+      "x": 0.7604704986149584,
+      "z": 0.7208202020202019,
+      "label": 2
+    },
+    {
+      "x": 0.7628353185595568,
+      "z": 0.7209084175084175,
+      "label": 2
+    },
+    {
+      "x": 0.765346675900277,
+      "z": 0.708417845117845,
+      "label": 2
+    },
+    {
+      "x": 0.7692343490304708,
+      "z": 0.7148979797979799,
+      "label": 2
+    },
+    {
+      "x": 0.7646653739612189,
+      "z": 0.7237710437710437,
+      "label": 2
+    },
+    {
+      "x": 0.7760462603878117,
+      "z": 0.7307656565656566,
+      "label": 2
+    },
+    {
+      "x": 0.7799804709141275,
+      "z": 0.7383249158249158,
+      "label": 2
+    },
+    {
+      "x": 0.7815810249307479,
+      "z": 0.7397865319865319,
+      "label": 2
+    },
+    {
+      "x": 0.7833004155124654,
+      "z": 0.7684424242424244,
+      "label": 2
+    },
+    {
+      "x": 0.7853502770083103,
+      "z": 0.7950087542087542,
+      "label": 2
+    },
+    {
+      "x": 0.7797009695290859,
+      "z": 0.8101289562289562,
+      "label": 2
+    },
+    {
+      "x": 0.7798041551246537,
+      "z": 0.8141043771043771,
+      "label": 2
+    },
+    {
+      "x": 0.7783393351800554,
+      "z": 0.8147336700336701,
+      "label": 2
+    },
+    {
+      "x": 0.7754558171745152,
+      "z": 0.8237491582491583,
+      "label": 2
+    },
+    {
+      "x": 0.7678303324099723,
+      "z": 0.8445468013468014,
+      "label": 2
+    },
+    {
+      "x": 0.7651937673130195,
+      "z": 0.8444525252525253,
+      "label": 2
+    },
+    {
+      "x": 0.7570307479224376,
+      "z": 0.8459148148148149,
+      "label": 2
+    },
+    {
+      "x": 0.7546872576177285,
+      "z": 0.8523700336700337,
+      "label": 2
+    },
+    {
+      "x": 0.7525171745152355,
+      "z": 0.8358595959595959,
+      "label": 2
+    },
+    {
+      "x": 0.7506192520775623,
+      "z": 0.8334063973063973,
+      "label": 2
+    },
+    {
+      "x": 0.7463149584487535,
+      "z": 0.8400127946127945,
+      "label": 2
+    },
+    {
+      "x": 0.7471192520775622,
+      "z": 0.8474488215488215,
+      "label": 2
+    },
+    {
+      "x": 0.7418681440443214,
+      "z": 0.8408690235690235,
+      "label": 2
+    },
+    {
+      "x": 0.7376049861495846,
+      "z": 0.827115824915825,
+      "label": 2
+    },
+    {
+      "x": 0.7366078947368422,
+      "z": 0.8196417508417507,
+      "label": 2
+    },
+    {
+      "x": 0.7280463988919668,
+      "z": 0.8123565656565658,
+      "label": 2
+    },
+    {
+      "x": 0.7292484764542937,
+      "z": 0.8049333333333334,
+      "label": 2
+    },
+    {
+      "x": 0.7323023545706372,
+      "z": 0.7974343434343434,
+      "label": 2
+    },
+    {
+      "x": 0.734097783933518,
+      "z": 0.799904377104377,
+      "label": 2
+    },
+    {
+      "x": 0.7307986149584487,
+      "z": 0.7849976430976431,
+      "label": 2
+    },
+    {
+      "x": 0.7271994459833795,
+      "z": 0.7856367003367003,
+      "label": 2
+    },
+    {
+      "x": 0.7260272853185595,
+      "z": 0.7859919191919191,
+      "label": 2
+    },
+    {
+      "x": 0.7267401662049862,
+      "z": 0.7844919191919191,
+      "label": 2
+    },
+    {
+      "x": 0.7283141274238227,
+      "z": 0.7911272727272727,
+      "label": 2
+    },
+    {
+      "x": 0.730902216066482,
+      "z": 0.8152595959595959,
+      "label": 2
+    },
+    {
+      "x": 0.7381682825484764,
+      "z": 0.8245437710437711,
+      "label": 2
+    },
+    {
+      "x": 0.7421088642659279,
+      "z": 0.8453767676767677,
+      "label": 2
+    },
+    {
+      "x": 0.7520940443213296,
+      "z": 0.8324838383838384,
+      "label": 2
+    },
+    {
+      "x": 0.7597519390581717,
+      "z": 0.8522296296296297,
+      "label": 2
+    },
+    {
+      "x": 0.7591325484764543,
+      "z": 0.8535350168350169,
+      "label": 2
+    },
+    {
+      "x": 0.7768350415512466,
+      "z": 0.8307787878787879,
+      "label": 2
+    },
+    {
+      "x": 0.774245567867036,
+      "z": 0.8299626262626263,
+      "label": 2
+    },
+    {
+      "x": 0.7813829639889197,
+      "z": 0.8155040404040405,
+      "label": 2
+    },
+    {
+      "x": 0.7796653739612188,
+      "z": 0.8169060606060605,
+      "label": 2
+    },
+    {
+      "x": 0.7825486149584487,
+      "z": 0.7763878787878788,
+      "label": 2
+    },
+    {
+      "x": 0.7835409972299169,
+      "z": 0.7920303030303031,
+      "label": 2
+    },
+    {
+      "x": 0.6220567867036011,
+      "z": 0.768976430976431,
+      "label": 13
+    }
+  ]
+}

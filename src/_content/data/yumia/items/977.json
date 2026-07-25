@@ -1,0 +1,38 @@
+{
+  "id": 977,
+  "name": "Fruit Tree",
+  "comfort_goal": 100,
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.12472631578947367,
+      "z": 0.11561212121212122,
+      "label": 8
+    }
+  ],
+  "material": {
+    "cost": 5,
+    "kind": "module",
+    "recipe": [
+      {
+        "num": 20,
+        "mat": {
+          "name": "Fruit",
+          "id": 10
+        }
+      },
+      {
+        "num": 10,
+        "mat": {
+          "name": "Wood",
+          "id": 1
+        }
+      }
+    ]
+  }
+}

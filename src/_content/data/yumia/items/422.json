@@ -1,0 +1,52 @@
+{
+  "id": 422,
+  "name": "Amazing Cooking Ingredients",
+  "desc": "A box full of fine ingredients used by first-class chefs. Even fancy restaurants hardly stock these ingredients, and regular people have never seen half of the contents. Truly a box for the chosen few.",
+  "cats": [
+    {
+      "id": 37,
+      "name": "(Exploration Equip.)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.19109487534626038,
+      "z": 0.09322659932659934,
+      "label": 17
+    },
+    {
+      "x": 0.27021232686980606,
+      "z": 0.19371481481481478,
+      "label": 17
+    }
+  ],
+  "material": {
+    "core": 5,
+    "recipe": [
+      {
+        "num": 5,
+        "mat": {
+          "name": "Fruit",
+          "id": 10
+        }
+      },
+      {
+        "num": 3,
+        "mat": {
+          "name": "Water",
+          "id": 4
+        }
+      },
+      {
+        "num": 3,
+        "mat": {
+          "name": "Charcoal",
+          "id": 7
+        }
+      }
+    ]
+  },
+  "quest": {
+    "name": "Gourmet Travel Log 3"
+  }
+}

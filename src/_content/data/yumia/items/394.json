@@ -1,0 +1,31 @@
+{
+  "id": 394,
+  "name": "Refurbished Replacement Parts",
+  "desc": "Parts for the transportation device which were adjusted by Yumia into something she can use. This was made possible by using Flammi as a replacement for the power source.",
+  "cats": [
+    {
+      "id": 40,
+      "name": "(Key Items)"
+    }
+  ],
+  "recipe": {
+    "num": 1,
+    "level": [
+      {
+        "lv": 1,
+        "fire": 3,
+        "reward": "Learn Recipe"
+      }
+    ],
+    "sp": 100,
+    "kind": "material",
+    "recipe": [
+      {
+        "item": {
+          "id": 393,
+          "name": "Old Replacement Parts"
+        }
+      }
+    ]
+  }
+}

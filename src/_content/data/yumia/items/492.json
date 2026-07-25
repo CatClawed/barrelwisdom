@@ -1,0 +1,24 @@
+{
+  "id": 492,
+  "name": "Stone Table",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "comfort": 5,
+    "cost": 1,
+    "kind": "desk",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Stone",
+          "id": 2
+        }
+      }
+    ]
+  }
+}

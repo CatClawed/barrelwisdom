@@ -1,0 +1,28 @@
+{
+  "id": 525,
+  "name": "Fancy Carpet",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "comfort": 10,
+    "cost": 1,
+    "kind": "carpet",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Fiber",
+          "id": 5
+        }
+      }
+    ]
+  },
+  "quest": {
+    "name": "Friend to the Alber",
+    "extra": "Isla"
+  }
+}

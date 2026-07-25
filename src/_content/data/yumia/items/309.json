@@ -1,0 +1,131 @@
+{
+  "id": 309,
+  "name": "Violet Erz",
+  "desc": "Metal that resembles a transparent jewel. It's divided into two layers, but this isn't two separate pieces of the same metal stacked on top of each other. It's quite heavy, so it's not an ideal replacement for real jewels.",
+  "air": true,
+  "resonance": 6,
+  "cats": [
+    {
+      "id": 27,
+      "name": "(Metal)"
+    },
+    {
+      "id": 32,
+      "name": "(Ingots)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.28883268698060943,
+      "z": 0.40672457912457916,
+      "label": 4
+    },
+    {
+      "x": 0.2885145429362881,
+      "z": 0.40738148148148146,
+      "label": 4
+    },
+    {
+      "x": 0.33788684210526315,
+      "z": 0.15105892255892256,
+      "label": 5
+    },
+    {
+      "x": 0.3031052631578947,
+      "z": 0.20624242424242425,
+      "label": 13
+    }
+  ],
+  "recipe": {
+    "num": 3,
+    "level": [
+      {
+        "lv": 1,
+        "air": 4,
+        "reward": "Learn Recipe"
+      },
+      {
+        "lv": 2,
+        "amt": 15,
+        "air": 6,
+        "reward": "Quality Up"
+      },
+      {
+        "lv": 3,
+        "amt": 2,
+        "air": 8,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 4,
+        "amt": 5,
+        "air": 10,
+        "reward": "Increase Base Resonance Count"
+      },
+      {
+        "lv": 5,
+        "amt": 1,
+        "air": 12,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 6,
+        "amt": 2,
+        "air": 7,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 7,
+        "amt": 2,
+        "air": 9,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 8,
+        "amt": 1,
+        "air": 11,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 9,
+        "amt": 1,
+        "air": 8,
+        "reward": "Increase Resonance Area"
+      },
+      {
+        "lv": 10,
+        "amt": 3,
+        "air": 13,
+        "reward": "Increase Quantity"
+      }
+    ],
+    "sp": 75,
+    "kind": "alchemy",
+    "recipe": [
+      {
+        "item": {
+          "id": 102,
+          "name": "Lilac Gemstone"
+        },
+        "eff": {
+          "id": 200,
+          "name": "Synthesis: ATK Up",
+          "desc1": "Using this as an ingredient for synthesis increases the synthesized item's ATK by [Lv. x 1].",
+          "max_level": 5
+        }
+      },
+      {
+        "cat": {
+          "id": 25,
+          "name": "(Magical)"
+        },
+        "eff": {
+          "id": 255,
+          "name": "Synthesis: ATK & SPD Up",
+          "desc1": "Using this as an ingredient for synthesis boosts the synthesized item's ATK and SPD by [Lv. x 1].",
+          "max_level": 7
+        }
+      }
+    ]
+  }
+}

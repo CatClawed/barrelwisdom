@@ -1,0 +1,38 @@
+{
+  "id": 436,
+  "name": "Picture B",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.13389542936288087,
+      "z": 0.18699797979797977,
+      "label": 4
+    }
+  ],
+  "material": {
+    "comfort": 3,
+    "cost": 1,
+    "kind": "picture",
+    "recipe": [
+      {
+        "num": 1,
+        "mat": {
+          "name": "Fiber",
+          "id": 5
+        }
+      },
+      {
+        "num": 2,
+        "mat": {
+          "name": "Wood",
+          "id": 1
+        }
+      }
+    ]
+  }
+}

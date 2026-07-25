@@ -1,0 +1,35 @@
+{
+  "id": 453,
+  "name": "Fancy Wall Decor",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "comfort": 10,
+    "cost": 1,
+    "kind": "wall_accessory",
+    "recipe": [
+      {
+        "num": 1,
+        "mat": {
+          "name": "Wood",
+          "id": 1
+        }
+      },
+      {
+        "num": 2,
+        "mat": {
+          "name": "Saltpeter",
+          "id": 8
+        }
+      }
+    ]
+  },
+  "quest": {
+    "name": "Our Special Connection 2",
+    "extra": "Isla"
+  }
+}

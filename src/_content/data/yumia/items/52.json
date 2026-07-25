@@ -1,0 +1,278 @@
+{
+  "id": 52,
+  "name": "Alluring Dew",
+  "desc": "Extremely sweet liquid oozed by a plant that evolved alongside pollinating insects. The liquid has a sugar content so high that eating even small amounts can have you gasping for air. It's far too sweet to eat.",
+  "fire": true,
+  "resonance": 2,
+  "mats": [
+    {
+      "name": "Medicine",
+      "id": 11
+    }
+  ],
+  "cats": [
+    {
+      "id": 5,
+      "name": "(Medicinal)"
+    },
+    {
+      "id": 13,
+      "name": "(Fuel)"
+    }
+  ],
+  "rank": [
+    {
+      "rank": "S",
+      "eff": [
+        {
+          "lv": 3,
+          "eff": {
+            "id": 224,
+            "name": "Increase Resonance Area - 2nd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line second closest to the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 213,
+            "name": "Slot Element Change - Fire",
+            "desc1": "Changes the element of slots within the resonance area to fire.",
+            "max_level": 1
+          }
+        }
+      ],
+      "quality": 133
+    },
+    {
+      "rank": "A",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 224,
+            "name": "Increase Resonance Area - 2nd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line second closest to the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 213,
+            "name": "Slot Element Change - Fire",
+            "desc1": "Changes the element of slots within the resonance area to fire.",
+            "max_level": 1
+          }
+        }
+      ],
+      "quality": 110
+    },
+    {
+      "rank": "B",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 224,
+            "name": "Increase Resonance Area - 2nd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line second closest to the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 213,
+            "name": "Slot Element Change - Fire",
+            "desc1": "Changes the element of slots within the resonance area to fire.",
+            "max_level": 1
+          }
+        }
+      ],
+      "quality": 91
+    },
+    {
+      "rank": "C",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 224,
+            "name": "Increase Resonance Area - 2nd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line second closest to the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 71
+    },
+    {
+      "rank": "D",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 224,
+            "name": "Increase Resonance Area - 2nd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line second closest to the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 53
+    },
+    {
+      "rank": "E",
+      "quality": 37
+    }
+  ],
+  "location": [
+    {
+      "x": 0.26403670360110804,
+      "z": 0.37732491582491584,
+      "label": 4
+    },
+    {
+      "x": 0.30086592797783934,
+      "z": 0.3073740740740741,
+      "label": 4
+    },
+    {
+      "x": 0.3917306094182825,
+      "z": 0.10354511784511783,
+      "label": 1
+    },
+    {
+      "x": 0.3962653739612188,
+      "z": 0.12466835016835016,
+      "label": 1
+    },
+    {
+      "x": 0.3806943213296399,
+      "z": 0.1258848484848485,
+      "label": 1
+    },
+    {
+      "x": 0.38047105263157893,
+      "z": 0.12586632996633,
+      "label": 1
+    },
+    {
+      "x": 0.39613171745152354,
+      "z": 0.12483737373737373,
+      "label": 1
+    },
+    {
+      "x": 0.4091008310249307,
+      "z": 0.1227922558922559,
+      "label": 1
+    },
+    {
+      "x": 0.3918547091412742,
+      "z": 0.10400303030303028,
+      "label": 1
+    },
+    {
+      "x": 0.4092995844875346,
+      "z": 0.12263939393939392,
+      "label": 1
+    },
+    {
+      "x": 0.3026315789473684,
+      "z": 0.13421885521885527,
+      "label": 13
+    },
+    {
+      "x": 0.2728897506925208,
+      "z": 0.14044747474747474,
+      "label": 17
+    },
+    {
+      "x": 0.3341930747922438,
+      "z": 0.10860572390572389,
+      "label": 17
+    },
+    {
+      "x": 0.31273587257617724,
+      "z": 0.27548754208754206,
+      "label": 17
+    },
+    {
+      "x": 0.3833815789473684,
+      "z": 0.26486498316498314,
+      "label": 17
+    },
+    {
+      "x": 0.3451209141274238,
+      "z": 0.37114478114478117,
+      "label": 17
+    },
+    {
+      "x": 0.32318891966759006,
+      "z": 0.1980380471380471,
+      "label": 17
+    },
+    {
+      "x": 0.28460332409972294,
+      "z": 0.21315824915824916,
+      "label": 17
+    },
+    {
+      "x": 0.23668531855955677,
+      "z": 0.5497700336700337,
+      "label": 17
+    },
+    {
+      "x": 0.1879202216066482,
+      "z": 0.5877643097643097,
+      "label": 17
+    },
+    {
+      "x": 0.5654385041551246,
+      "z": 0.33349696969696974,
+      "label": 17
+    },
+    {
+      "x": 0.5510783933518005,
+      "z": 0.21241851851851848,
+      "label": 17
+    },
+    {
+      "x": 0.4529775623268698,
+      "z": 0.19511481481481482,
+      "label": 17
+    }
+  ],
+  "rare": [
+    {
+      "id": 71,
+      "name": "Blue Tentacle"
+    },
+    {
+      "id": 72,
+      "name": "Soaring Vine"
+    },
+    {
+      "id": 73,
+      "name": "Violet Lotus"
+    },
+    {
+      "id": 74,
+      "name": "Ogre Face"
+    },
+    {
+      "id": 75,
+      "name": "Mud Cluster"
+    },
+    {
+      "id": 76,
+      "name": "Alpha Synapse"
+    },
+    {
+      "id": 77,
+      "name": "Discharger"
+    }
+  ]
+}

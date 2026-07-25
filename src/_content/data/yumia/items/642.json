@@ -1,0 +1,37 @@
+{
+  "id": 642,
+  "name": "Weapon Rack",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.5412047091412743,
+      "z": 0.6435121212121211,
+      "label": 4
+    }
+  ],
+  "material": {
+    "cost": 1,
+    "kind": "module",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Fiber",
+          "id": 5
+        }
+      },
+      {
+        "num": 2,
+        "mat": {
+          "name": "Stone",
+          "id": 2
+        }
+      }
+    ]
+  }
+}

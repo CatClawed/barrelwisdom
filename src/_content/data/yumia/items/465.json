@@ -1,0 +1,31 @@
+{
+  "id": 465,
+  "name": "Tapestry C",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.5715331024930749,
+      "z": 0.5414164983164984,
+      "label": 4
+    }
+  ],
+  "material": {
+    "comfort": 5,
+    "cost": 1,
+    "kind": "wall_accessory",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Fiber",
+          "id": 5
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": 679,
+  "name": "Glass Pane A",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.26292271468144046,
+      "z": 0.06427912457912456,
+      "label": 4
+    }
+  ],
+  "material": {
+    "comfort": 5,
+    "cost": 1,
+    "kind": "building_other",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Powder",
+          "id": 6
+        }
+      }
+    ]
+  }
+}

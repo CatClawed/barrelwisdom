@@ -1,0 +1,137 @@
+{
+  "id": 332,
+  "name": "Assist Afford",
+  "desc": "A potion packed full of condensed mana. Although it's highly poisonous for human beings, scattering this liquid over arid land revitalizes it, making it capable of supporting plant life once more.",
+  "bolt": true,
+  "air": true,
+  "resonance": 8,
+  "cats": [
+    {
+      "id": 1,
+      "name": "(Water)"
+    },
+    {
+      "id": 2,
+      "name": "(Plants)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.7903490304709141,
+      "z": 0.9378696969696969,
+      "label": 5
+    },
+    {
+      "x": 0.6213130193905817,
+      "z": 0.7618855218855218,
+      "label": 13
+    },
+    {
+      "x": 0.6175914127423823,
+      "z": 0.7804579124579124,
+      "label": 13
+    }
+  ],
+  "recipe": {
+    "num": 3,
+    "level": [
+      {
+        "lv": 1,
+        "bolt": 5,
+        "air": 5,
+        "reward": "Learn Recipe"
+      },
+      {
+        "lv": 2,
+        "amt": 15,
+        "bolt": 6,
+        "air": 7,
+        "reward": "Quality Up"
+      },
+      {
+        "lv": 3,
+        "amt": 2,
+        "bolt": 6,
+        "air": 6,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 4,
+        "amt": 5,
+        "bolt": 7,
+        "air": 8,
+        "reward": "Increase Base Resonance Count"
+      },
+      {
+        "lv": 5,
+        "amt": 2,
+        "bolt": 7,
+        "air": 10,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 6,
+        "amt": 2,
+        "bolt": 7,
+        "air": 7,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 7,
+        "amt": 2,
+        "bolt": 8,
+        "air": 9,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 8,
+        "amt": 1,
+        "bolt": 9,
+        "air": 11,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 9,
+        "amt": 1,
+        "bolt": 10,
+        "air": 13,
+        "reward": "Increase Resonance Area"
+      },
+      {
+        "lv": 10,
+        "amt": 3,
+        "bolt": 10,
+        "air": 15,
+        "reward": "Increase Quantity"
+      }
+    ],
+    "sp": 120,
+    "kind": "alchemy",
+    "recipe": [
+      {
+        "item": {
+          "id": 9,
+          "name": "Ancient Blue Water"
+        },
+        "eff": {
+          "id": 212,
+          "name": "Synthesis: Quality Up+",
+          "desc1": "Using this as an ingredient for synthesis increases the synthesized item's quality by [Lv. x 2].",
+          "max_level": 10
+        }
+      },
+      {
+        "item": {
+          "id": 25,
+          "name": "Pellucid"
+        },
+        "eff": {
+          "id": 252,
+          "name": "Synthesis: HP Up+",
+          "desc1": "Using this as an ingredient for synthesis increases the synthesized item's HP by [Lv. x 1].",
+          "max_level": 10
+        }
+      }
+    ]
+  }
+}

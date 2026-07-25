@@ -1,0 +1,38 @@
+{
+  "id": 956,
+  "name": "Treasure",
+  "comfort_goal": 50,
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.687614404432133,
+      "z": 0.7516454545454546,
+      "label": 10
+    }
+  ],
+  "material": {
+    "cost": 5,
+    "kind": "module",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Wood",
+          "id": 1
+        }
+      },
+      {
+        "num": 1,
+        "mat": {
+          "name": "Iron",
+          "id": 3
+        }
+      }
+    ]
+  }
+}

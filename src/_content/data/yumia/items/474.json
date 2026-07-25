@@ -1,0 +1,46 @@
+{
+  "id": 474,
+  "name": "Lamp D",
+  "comfort_goal": 50,
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.2569382271468144,
+      "z": 0.2457265993265993,
+      "label": 10
+    }
+  ],
+  "material": {
+    "comfort": 5,
+    "cost": 3,
+    "kind": "ceiling_light",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Powder",
+          "id": 6
+        }
+      },
+      {
+        "num": 1,
+        "mat": {
+          "name": "Wood",
+          "id": 1
+        }
+      },
+      {
+        "num": 1,
+        "mat": {
+          "name": "Wood",
+          "id": 1
+        }
+      }
+    ]
+  }
+}

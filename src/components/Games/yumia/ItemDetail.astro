@@ -1,0 +1,19 @@
+---
+import ItemAttributeList from './ItemAttributeList.astro';
+import Map from './Map.astro';
+const { item, lang } = Astro.props;
+---
+
+<h1>{item.name}</h1>
+<ItemAttributeList
+  cats={item.cats}
+  mats={item.mats}
+  lang={lang}
+  isLink={true}
+  resonance={item.resonance}
+  fire={item.fire}
+  ice={item.ice}
+  bolt={item.bolt}
+  air={item.air}
+/>
+<Map data={item.location} />

@@ -1,0 +1,38 @@
+{
+  "id": 481,
+  "name": "Ceiling Fan",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.06400152354570637,
+      "z": 0.12637373737373736,
+      "label": 4
+    }
+  ],
+  "material": {
+    "comfort": 10,
+    "cost": 5,
+    "kind": "ceiling_accessory",
+    "recipe": [
+      {
+        "num": 1,
+        "mat": {
+          "name": "Iron",
+          "id": 3
+        }
+      },
+      {
+        "num": 2,
+        "mat": {
+          "name": "Saltpeter",
+          "id": 8
+        }
+      }
+    ]
+  }
+}

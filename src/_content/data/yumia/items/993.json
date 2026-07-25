@@ -1,0 +1,31 @@
+{
+  "id": 993,
+  "name": "Stone F",
+  "comfort_goal": 50,
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.49900318559556783,
+      "z": 0.5768542087542088,
+      "label": 10
+    }
+  ],
+  "material": {
+    "cost": 5,
+    "kind": "nature",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Stone",
+          "id": 2
+        }
+      }
+    ]
+  }
+}

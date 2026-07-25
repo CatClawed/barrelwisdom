@@ -1,0 +1,176 @@
+{
+  "id": 250,
+  "name": "Decayed Land Relic",
+  "desc": "A battered, rusted relic treasure that was abandoned ages ago. Only the rust is a relatively new addition—the chips and scratches on it are actually part of the original design.",
+  "air": true,
+  "resonance": 4,
+  "mats": [
+    {
+      "name": "Part",
+      "id": 9
+    },
+    {
+      "name": "Metal Board",
+      "id": 15
+    }
+  ],
+  "cats": [
+    {
+      "id": 41,
+      "name": "(Relics)"
+    }
+  ],
+  "rank": [
+    {
+      "rank": "S",
+      "eff": [
+        {
+          "lv": 3,
+          "eff": {
+            "id": 225,
+            "name": "Increase Resonance Area - 3rd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line farthest from the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 140
+    },
+    {
+      "rank": "A",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 225,
+            "name": "Increase Resonance Area - 3rd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line farthest from the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 120
+    },
+    {
+      "rank": "B",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 225,
+            "name": "Increase Resonance Area - 3rd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line farthest from the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 103
+    },
+    {
+      "rank": "C",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 225,
+            "name": "Increase Resonance Area - 3rd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line farthest from the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 85
+    },
+    {
+      "rank": "D",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 225,
+            "name": "Increase Resonance Area - 3rd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line farthest from the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 69
+    },
+    {
+      "rank": "E",
+      "quality": 55
+    }
+  ],
+  "location": [
+    {
+      "x": 0.47934764542936287,
+      "z": 0.7236508417508417,
+      "label": 15
+    },
+    {
+      "x": 0.47916565096952907,
+      "z": 0.7209138047138048,
+      "label": 15
+    },
+    {
+      "x": 0.4890247922437673,
+      "z": 0.587169696969697,
+      "label": 15
+    },
+    {
+      "x": 0.4857239612188366,
+      "z": 0.578037037037037,
+      "label": 15
+    },
+    {
+      "x": 0.48478462603878114,
+      "z": 0.5873885521885522,
+      "label": 15
+    },
+    {
+      "x": 0.4273247922437673,
+      "z": 0.6412969696969697,
+      "label": 15
+    },
+    {
+      "x": 0.42828670360110804,
+      "z": 0.6425242424242424,
+      "label": 15
+    },
+    {
+      "x": 0.42608864265927976,
+      "z": 0.6457569023569023,
+      "label": 15
+    },
+    {
+      "x": 0.42623919667590027,
+      "z": 0.638542760942761,
+      "label": 15
+    },
+    {
+      "x": 0.5590289473684211,
+      "z": 0.530449494949495,
+      "label": 15
+    },
+    {
+      "x": 0.5533236842105264,
+      "z": 0.3972030303030303,
+      "label": 15
+    },
+    {
+      "x": 0.547180055401662,
+      "z": 0.3951363636363636,
+      "label": 15
+    },
+    {
+      "x": 0.5457206371191136,
+      "z": 0.39512828282828283,
+      "label": 15
+    },
+    {
+      "x": 0.5494620498614958,
+      "z": 0.39404377104377103,
+      "label": 15
+    }
+  ]
+}

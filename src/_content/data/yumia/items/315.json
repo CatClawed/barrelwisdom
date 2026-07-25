@@ -1,0 +1,179 @@
+{
+  "id": 315,
+  "name": "Prasiolite",
+  "desc": "A transparent, bright cyan jewel. It was originally purple, but exposure to strong light has turned it cyan. This seems to be the best form to tap into the full power of this jewel.",
+  "ice": true,
+  "air": true,
+  "resonance": 8,
+  "cats": [
+    {
+      "id": 25,
+      "name": "(Magical)"
+    },
+    {
+      "id": 28,
+      "name": "(Jewels)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.8974425207756233,
+      "z": 0.7736444444444445,
+      "label": 4
+    },
+    {
+      "x": 0.9035573407202216,
+      "z": 0.7468050505050504,
+      "label": 4
+    },
+    {
+      "x": 0.28692825484764545,
+      "z": 0.27851750841750844,
+      "label": 4
+    },
+    {
+      "x": 0.3321236842105263,
+      "z": 0.3252232323232323,
+      "label": 4
+    },
+    {
+      "x": 0.36343656509695293,
+      "z": 0.49452558922558926,
+      "label": 4
+    },
+    {
+      "x": 0.3266702216066482,
+      "z": 0.45197744107744103,
+      "label": 5
+    },
+    {
+      "x": 0.36418282548476455,
+      "z": 0.32731986531986534,
+      "label": 13
+    },
+    {
+      "x": 0.3013490304709141,
+      "z": 0.2041010101010101,
+      "label": 13
+    },
+    {
+      "x": 0.30019390581717453,
+      "z": 0.21185521885521885,
+      "label": 13
+    }
+  ],
+  "recipe": {
+    "num": 3,
+    "level": [
+      {
+        "lv": 1,
+        "bolt": 3,
+        "air": 3,
+        "reward": "Learn Recipe"
+      },
+      {
+        "lv": 2,
+        "amt": 15,
+        "bolt": 5,
+        "air": 4,
+        "reward": "Quality Up"
+      },
+      {
+        "lv": 3,
+        "amt": 2,
+        "bolt": 7,
+        "air": 5,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 4,
+        "amt": 2,
+        "bolt": 9,
+        "air": 6,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 5,
+        "amt": 1,
+        "bolt": 11,
+        "air": 7,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 6,
+        "amt": 2,
+        "bolt": 4,
+        "air": 4,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 7,
+        "amt": 3,
+        "bolt": 6,
+        "air": 5,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 8,
+        "amt": 1,
+        "bolt": 8,
+        "air": 6,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 9,
+        "amt": 1,
+        "bolt": 5,
+        "air": 5,
+        "reward": "Increase Resonance Area"
+      },
+      {
+        "lv": 10,
+        "amt": 3,
+        "bolt": 7,
+        "air": 5,
+        "reward": "Increase Quantity"
+      }
+    ],
+    "sp": 90,
+    "kind": "alchemy",
+    "recipe": [
+      {
+        "item": {
+          "id": 190,
+          "name": "Hollowcrysta"
+        },
+        "eff": {
+          "id": 204,
+          "name": "Synthesis: Quality Up",
+          "desc1": "Using this as an ingredient for synthesis increases the synthesized item's quality by [Lv. x 1].",
+          "max_level": 10
+        }
+      },
+      {
+        "item": {
+          "id": 91,
+          "name": "Pentanite"
+        },
+        "eff": {
+          "id": 255,
+          "name": "Synthesis: ATK & SPD Up",
+          "desc1": "Using this as an ingredient for synthesis boosts the synthesized item's ATK and SPD by [Lv. x 1].",
+          "max_level": 7
+        }
+      },
+      {
+        "cat": {
+          "id": 8,
+          "name": "(Sand)"
+        },
+        "eff": {
+          "id": 206,
+          "name": "Increase Resonance Area",
+          "desc1": "Increases the item's resonance area by [Lv. x 1].",
+          "max_level": 10
+        }
+      }
+    ]
+  }
+}

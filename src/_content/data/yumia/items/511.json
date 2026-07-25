@@ -1,0 +1,38 @@
+{
+  "id": 511,
+  "name": "Chair D",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.5109354570637119,
+      "z": 0.5626488215488216,
+      "label": 4
+    }
+  ],
+  "material": {
+    "comfort": 10,
+    "cost": 1,
+    "kind": "chair",
+    "recipe": [
+      {
+        "num": 1,
+        "mat": {
+          "name": "Wood",
+          "id": 1
+        }
+      },
+      {
+        "num": 1,
+        "mat": {
+          "name": "Fiber",
+          "id": 5
+        }
+      }
+    ]
+  }
+}

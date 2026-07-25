@@ -1,0 +1,133 @@
+{
+  "id": 261,
+  "name": "Sharp Flamme",
+  "desc": "An enhanced version of a Flamme. The raging flames enveloping the sword are hot enough to reduce whatever they touch to cinders.",
+  "fire": true,
+  "resonance": 5,
+  "ct": 15,
+  "cats": [
+    {
+      "id": 31,
+      "name": "(Magic Tools)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.4265130193905817,
+      "z": 0.723993265993266,
+      "label": 4
+    },
+    {
+      "x": 0.4910720221606648,
+      "z": 0.6126700336700337,
+      "label": 13
+    }
+  ],
+  "recipe": {
+    "num": 1,
+    "level": [
+      {
+        "lv": 1,
+        "fire": 5,
+        "reward": "Learn Recipe"
+      },
+      {
+        "lv": 2,
+        "amt": 15,
+        "fire": 7,
+        "reward": "Quality Up"
+      },
+      {
+        "lv": 3,
+        "amt": 1,
+        "fire": 9,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 4,
+        "amt": 2,
+        "fire": 8,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 5,
+        "amt": 2,
+        "fire": 10,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 6,
+        "amt": 1,
+        "fire": 12,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 7,
+        "amt": 3,
+        "fire": 9,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 8,
+        "amt": 1,
+        "fire": 11,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 9,
+        "amt": 5,
+        "fire": 13,
+        "reward": "Increase Base Resonance Count"
+      },
+      {
+        "lv": 10,
+        "amt": 30,
+        "fire": 18,
+        "reward": "Quality Up"
+      }
+    ],
+    "sp": 120,
+    "kind": "attack",
+    "recipe": [
+      {
+        "item": {
+          "id": 117,
+          "name": "Ore Flame"
+        },
+        "eff": {
+          "id": 30,
+          "name": "Searing Sword",
+          "desc1": "Deals [50 + (Lv. x 10)] power fire damage. Damage is increased by [Lv. x 3]% when the target's HP is at 80% or higher.",
+          "desc2": "Deals [50 + (Lv. x 10)] power fire damage. Damage is increased by [Lv. x 5]% when the target's HP is at 20% or lower.",
+          "max_level": 10
+        }
+      },
+      {
+        "item": {
+          "id": 113,
+          "name": "Energy Powder"
+        },
+        "eff": {
+          "id": 31,
+          "name": "Linked Explosions",
+          "desc1": "Increases damage by [Lv. x 5]% if the target is inflicted with Burns.",
+          "desc2": "Grants a [Lv. x 10]% chance to inflict 1 stack(s) of Burns on the target.",
+          "max_level": 10
+        }
+      },
+      {
+        "cat": {
+          "id": 12,
+          "name": "(Gunpowder)"
+        },
+        "eff": {
+          "id": 32,
+          "name": "Overflowing Hellfire",
+          "desc1": "Reduces cooldowns by [Lv. x 10]% when you defeat an enemy.",
+          "desc2": "Lowers target's fire resistance by [Lv. x 1] stage(s).",
+          "max_level": 3
+        }
+      }
+    ]
+  }
+}

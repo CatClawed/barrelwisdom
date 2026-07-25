@@ -1,0 +1,31 @@
+{
+  "id": 954,
+  "name": "Shooting Target B",
+  "comfort_goal": 100,
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.5240839335180055,
+      "z": 0.6925006734006734,
+      "label": 8
+    }
+  ],
+  "material": {
+    "cost": 5,
+    "kind": "module",
+    "recipe": [
+      {
+        "num": 3,
+        "mat": {
+          "name": "Wood",
+          "id": 1
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": 892,
+  "name": "Auruma Wall with Window Frame",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "comfort": 1,
+    "cost": 1,
+    "kind": "wall",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Stone",
+          "id": 2
+        }
+      }
+    ]
+  },
+  "quest": {
+    "name": "Auruma Region",
+    "extra": "Pioneering Reward"
+  }
+}

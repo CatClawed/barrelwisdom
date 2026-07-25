@@ -1,0 +1,38 @@
+{
+  "id": 976,
+  "name": "Well",
+  "comfort_goal": 100,
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.16117216066481993,
+      "z": 0.30962626262626264,
+      "label": 8
+    }
+  ],
+  "material": {
+    "cost": 5,
+    "kind": "module",
+    "recipe": [
+      {
+        "num": 20,
+        "mat": {
+          "name": "Water",
+          "id": 4
+        }
+      },
+      {
+        "num": 10,
+        "mat": {
+          "name": "Stone",
+          "id": 2
+        }
+      }
+    ]
+  }
+}

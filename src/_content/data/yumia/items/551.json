@@ -1,0 +1,32 @@
+{
+  "id": 551,
+  "name": "Dresser B",
+  "comfort_goal": 600,
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.12472631578947367,
+      "z": 0.11561212121212122,
+      "label": 8
+    }
+  ],
+  "material": {
+    "comfort": 3,
+    "cost": 1,
+    "kind": "shelf",
+    "recipe": [
+      {
+        "num": 1,
+        "mat": {
+          "name": "Wood",
+          "id": 1
+        }
+      }
+    ]
+  }
+}

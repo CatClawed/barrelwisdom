@@ -1,0 +1,28 @@
+{
+  "id": 928,
+  "name": "Royal Capital Wall C",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "comfort": 1,
+    "cost": 1,
+    "kind": "wall",
+    "recipe": [
+      {
+        "num": 1,
+        "mat": {
+          "name": "Stone",
+          "id": 2
+        }
+      }
+    ]
+  },
+  "quest": {
+    "name": "Lacuna Region",
+    "extra": "Pioneering Reward"
+  }
+}

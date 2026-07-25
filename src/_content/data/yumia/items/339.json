@@ -1,0 +1,133 @@
+{
+  "id": 339,
+  "name": "Heavenly Thread",
+  "desc": "Strands so beautiful, they may well have drifted down from the heavens. The clear blue threads shimmer in a way that makes it look like stars are held inside them.",
+  "ice": true,
+  "air": true,
+  "resonance": 8,
+  "cats": [
+    {
+      "id": 20,
+      "name": "(Threads)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.7182186980609419,
+      "z": 0.8809878787878789,
+      "label": 5
+    },
+    {
+      "x": 0.6213130193905817,
+      "z": 0.7618855218855218,
+      "label": 13
+    },
+    {
+      "x": 0.6175914127423823,
+      "z": 0.7804579124579124,
+      "label": 13
+    }
+  ],
+  "recipe": {
+    "num": 3,
+    "level": [
+      {
+        "lv": 1,
+        "ice": 5,
+        "air": 5,
+        "reward": "Learn Recipe"
+      },
+      {
+        "lv": 2,
+        "amt": 15,
+        "ice": 6,
+        "air": 7,
+        "reward": "Quality Up"
+      },
+      {
+        "lv": 3,
+        "amt": 2,
+        "ice": 6,
+        "air": 6,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 4,
+        "amt": 5,
+        "ice": 7,
+        "air": 8,
+        "reward": "Increase Base Resonance Count"
+      },
+      {
+        "lv": 5,
+        "amt": 2,
+        "ice": 7,
+        "air": 10,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 6,
+        "amt": 2,
+        "ice": 7,
+        "air": 7,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 7,
+        "amt": 2,
+        "ice": 8,
+        "air": 9,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 8,
+        "amt": 1,
+        "ice": 9,
+        "air": 11,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 9,
+        "amt": 1,
+        "ice": 10,
+        "air": 13,
+        "reward": "Increase Resonance Area"
+      },
+      {
+        "lv": 10,
+        "amt": 3,
+        "ice": 10,
+        "air": 15,
+        "reward": "Increase Quantity"
+      }
+    ],
+    "sp": 147,
+    "kind": "alchemy",
+    "recipe": [
+      {
+        "item": {
+          "id": 178,
+          "name": "Heavenly Rain Thread"
+        },
+        "eff": {
+          "id": 251,
+          "name": "Synthesis: SPD Up+",
+          "desc1": "Using this as an ingredient for synthesis increases the synthesized item's SPD by [Lv. x 1].",
+          "max_level": 10
+        }
+      },
+      {
+        "cat": {
+          "id": 1,
+          "name": "(Water)"
+        },
+        "eff": {
+          "id": 235,
+          "name": "Element Resonance - Ice",
+          "desc1": "Increases the resonance area by [Lv. x 1] when used as an ingredient for an ice element synthesized item.",
+          "max_level": 5
+        }
+      }
+    ]
+  }
+}

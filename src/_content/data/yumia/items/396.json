@@ -1,0 +1,31 @@
+{
+  "id": 396,
+  "name": "Welleks Bow & Quiver",
+  "desc": "A new set of bows and quivers for the Welleks. Care has been taken to ensure their sturdiness after hearing that their old ones had broken.",
+  "cats": [
+    {
+      "id": 40,
+      "name": "(Key Items)"
+    }
+  ],
+  "recipe": {
+    "num": 3,
+    "level": [
+      {
+        "lv": 1,
+        "ice": 3,
+        "reward": "Learn Recipe"
+      }
+    ],
+    "sp": 100,
+    "kind": "material",
+    "recipe": [
+      {
+        "cat": {
+          "id": 21,
+          "name": "(Lumber)"
+        }
+      }
+    ]
+  }
+}

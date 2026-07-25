@@ -1,0 +1,34 @@
+{
+  "id": 650,
+  "name": "Crystal Flower",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "cost": 1,
+    "kind": "module",
+    "recipe": [
+      {
+        "num": 1,
+        "mat": {
+          "name": "Saltpeter",
+          "id": 8
+        }
+      },
+      {
+        "num": 1,
+        "mat": {
+          "name": "Fiber",
+          "id": 5
+        }
+      }
+    ]
+  },
+  "quest": {
+    "name": "Homunculus Documents",
+    "extra": "Main Quest"
+  }
+}

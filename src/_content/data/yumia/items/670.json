@@ -1,0 +1,38 @@
+{
+  "id": 670,
+  "name": "Decorative Pillar",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.4645759002770083,
+      "z": 0.7560144781144781,
+      "label": 4
+    }
+  ],
+  "material": {
+    "comfort": 5,
+    "cost": 1,
+    "kind": "artifact",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Saltpeter",
+          "id": 8
+        }
+      },
+      {
+        "num": 2,
+        "mat": {
+          "name": "Stone",
+          "id": 2
+        }
+      }
+    ]
+  }
+}

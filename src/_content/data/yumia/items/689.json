@@ -1,0 +1,27 @@
+{
+  "id": 689,
+  "name": "Mana Converter",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "cost": 50,
+    "kind": "module",
+    "recipe": [
+      {
+        "num": 10,
+        "mat": {
+          "name": "Quartz Cluster",
+          "id": 16
+        }
+      }
+    ]
+  },
+  "quest": {
+    "name": "Lacuna Region",
+    "extra": "Pioneering Reward"
+  }
+}

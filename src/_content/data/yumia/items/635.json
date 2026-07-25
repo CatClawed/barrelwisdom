@@ -1,0 +1,41 @@
+{
+  "id": 635,
+  "name": "Forge",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "cost": 10,
+    "kind": "module",
+    "recipe": [
+      {
+        "num": 10,
+        "mat": {
+          "name": "Wood",
+          "id": 1
+        }
+      },
+      {
+        "num": 10,
+        "mat": {
+          "name": "Powder",
+          "id": 6
+        }
+      },
+      {
+        "num": 3,
+        "mat": {
+          "name": "Iron",
+          "id": 3
+        }
+      }
+    ]
+  },
+  "quest": {
+    "name": "Sivash Region",
+    "extra": "Pioneering Reward"
+  }
+}

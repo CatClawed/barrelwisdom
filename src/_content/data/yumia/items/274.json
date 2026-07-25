@@ -1,0 +1,132 @@
+{
+  "id": 274,
+  "name": "Panacea Sphere",
+  "desc": "A crystal ball that projects an image of a field of flowers beneath a blue sky. Looking into it heals all wounds. People believe this item was a blessing gifted to soldiers from a divine source.",
+  "bolt": true,
+  "resonance": 5,
+  "ct": 30,
+  "cats": [
+    {
+      "id": 31,
+      "name": "(Magic Tools)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.5194126038781164,
+      "z": 0.6972370370370371,
+      "label": 4
+    },
+    {
+      "x": 0.4910720221606648,
+      "z": 0.6126700336700337,
+      "label": 13
+    }
+  ],
+  "recipe": {
+    "num": 1,
+    "level": [
+      {
+        "lv": 1,
+        "bolt": 7,
+        "reward": "Learn Recipe"
+      },
+      {
+        "lv": 2,
+        "amt": 15,
+        "bolt": 10,
+        "reward": "Quality Up"
+      },
+      {
+        "lv": 3,
+        "amt": 1,
+        "bolt": 13,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 4,
+        "amt": 2,
+        "bolt": 10,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 5,
+        "amt": 2,
+        "bolt": 13,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 6,
+        "amt": 1,
+        "bolt": 16,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 7,
+        "amt": 3,
+        "bolt": 11,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 8,
+        "amt": 1,
+        "bolt": 14,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 9,
+        "amt": 5,
+        "bolt": 17,
+        "reward": "Increase Base Resonance Count"
+      },
+      {
+        "lv": 10,
+        "amt": 30,
+        "bolt": 22,
+        "reward": "Quality Up"
+      }
+    ],
+    "sp": 120,
+    "kind": "heal",
+    "recipe": [
+      {
+        "item": {
+          "id": 73,
+          "name": "Harmonic Sand"
+        },
+        "eff": {
+          "id": 61,
+          "name": "Project the Ideal",
+          "desc1": "Restores target's HP with a power of [Lv. x 15].",
+          "desc2": "Restores [Lv. x 8]% of target's HP.",
+          "max_level": 10
+        }
+      },
+      {
+        "item": {
+          "id": 191,
+          "name": "Diamond Chunk"
+        },
+        "eff": {
+          "id": 62,
+          "name": "Fluttering Petal Rain",
+          "desc1": "Grants [Lv. x 1] stack(s) of Damage Reduction to the target.",
+          "desc2": "Boosts target's ATK and SPD by [Lv. x 10]%.",
+          "max_level": 10
+        }
+      },
+      {
+        "cat": {
+          "id": 5,
+          "name": "(Medicinal)"
+        },
+        "eff": {
+          "id": 63,
+          "name": "Reduce Cooldown",
+          "desc1": "Reduces cooldowns by [Lv. x 3]%.",
+          "max_level": 10
+        }
+      }
+    ]
+  }
+}

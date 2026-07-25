@@ -1,0 +1,28 @@
+{
+  "id": 941,
+  "name": "Royal Capital Floor C",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "comfort": 1,
+    "cost": 1,
+    "kind": "floor",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Stone",
+          "id": 2
+        }
+      }
+    ]
+  },
+  "quest": {
+    "name": "Lacuna Region",
+    "extra": "Pioneering Reward"
+  }
+}

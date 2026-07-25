@@ -1,0 +1,28 @@
+{
+  "id": 770,
+  "name": "Log House Floor C",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "material": {
+    "comfort": 1,
+    "cost": 1,
+    "kind": "floor",
+    "recipe": [
+      {
+        "num": 1,
+        "mat": {
+          "name": "Wood",
+          "id": 1
+        }
+      }
+    ]
+  },
+  "quest": {
+    "name": "Ligneus Region",
+    "extra": "Pioneering Reward"
+  }
+}

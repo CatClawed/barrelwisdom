@@ -1,0 +1,38 @@
+{
+  "id": 654,
+  "name": "Street Light",
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.46819002770083107,
+      "z": 0.6762447811447811,
+      "label": 4
+    }
+  ],
+  "material": {
+    "comfort": 5,
+    "cost": 10,
+    "kind": "artifact",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Iron",
+          "id": 3
+        }
+      },
+      {
+        "num": 2,
+        "mat": {
+          "name": "Powder",
+          "id": 6
+        }
+      }
+    ]
+  }
+}

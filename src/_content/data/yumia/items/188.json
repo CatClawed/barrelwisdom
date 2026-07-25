@@ -1,0 +1,379 @@
+{
+  "id": 188,
+  "name": "Air Chime",
+  "desc": "A fluffy, glittering bubble composed of incredibly tiny particles of metal. The metal particles are so small that it might be more accurate to call this a gas rather than a metal.",
+  "bolt": true,
+  "resonance": 4,
+  "mats": [
+    {
+      "name": "Iron",
+      "id": 3
+    }
+  ],
+  "cats": [
+    {
+      "id": 22,
+      "name": "(Gases)"
+    },
+    {
+      "id": 27,
+      "name": "(Metal)"
+    }
+  ],
+  "rank": [
+    {
+      "rank": "S",
+      "eff": [
+        {
+          "lv": 3,
+          "eff": {
+            "id": 240,
+            "name": "Metals - Quality Boost",
+            "desc1": "Boosts quality by [Lv. x 1] when used as an ingredient for a metal category synthesized item.",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 2,
+          "eff": {
+            "id": 247,
+            "name": "Rebuild Boost - SPD",
+            "desc1": "Boosts the synthesized item's SPD by [Lv. x 1] when used as an ingredient during rebuilding.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 125
+    },
+    {
+      "rank": "A",
+      "eff": [
+        {
+          "lv": 3,
+          "eff": {
+            "id": 240,
+            "name": "Metals - Quality Boost",
+            "desc1": "Boosts quality by [Lv. x 1] when used as an ingredient for a metal category synthesized item.",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 247,
+            "name": "Rebuild Boost - SPD",
+            "desc1": "Boosts the synthesized item's SPD by [Lv. x 1] when used as an ingredient during rebuilding.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 105
+    },
+    {
+      "rank": "B",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 240,
+            "name": "Metals - Quality Boost",
+            "desc1": "Boosts quality by [Lv. x 1] when used as an ingredient for a metal category synthesized item.",
+            "max_level": 5
+          }
+        },
+        {
+          "lv": 1,
+          "eff": {
+            "id": 247,
+            "name": "Rebuild Boost - SPD",
+            "desc1": "Boosts the synthesized item's SPD by [Lv. x 1] when used as an ingredient during rebuilding.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 88
+    },
+    {
+      "rank": "C",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 240,
+            "name": "Metals - Quality Boost",
+            "desc1": "Boosts quality by [Lv. x 1] when used as an ingredient for a metal category synthesized item.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 70
+    },
+    {
+      "rank": "D",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 240,
+            "name": "Metals - Quality Boost",
+            "desc1": "Boosts quality by [Lv. x 1] when used as an ingredient for a metal category synthesized item.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 54
+    },
+    {
+      "rank": "E",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 240,
+            "name": "Metals - Quality Boost",
+            "desc1": "Boosts quality by [Lv. x 1] when used as an ingredient for a metal category synthesized item.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 40
+    }
+  ],
+  "location": [
+    {
+      "x": 0.4658094182825485,
+      "z": 0.5859629629629629,
+      "label": 6
+    },
+    {
+      "x": 0.5483788088642659,
+      "z": 0.2942693602693603,
+      "label": 4
+    },
+    {
+      "x": 0.47706814404432135,
+      "z": 0.6952993265993267,
+      "label": 1
+    },
+    {
+      "x": 0.4894749307479225,
+      "z": 0.7242198653198653,
+      "label": 1
+    },
+    {
+      "x": 0.4948968144044321,
+      "z": 0.6455555555555555,
+      "label": 1
+    },
+    {
+      "x": 0.5373012465373961,
+      "z": 0.6446407407407407,
+      "label": 1
+    },
+    {
+      "x": 0.5476394736842105,
+      "z": 0.6315521885521885,
+      "label": 1
+    },
+    {
+      "x": 0.5039936288088643,
+      "z": 0.5753973063973064,
+      "label": 1
+    },
+    {
+      "x": 0.4740530470914127,
+      "z": 0.8178383838383838,
+      "label": 1
+    },
+    {
+      "x": 0.47364736842105265,
+      "z": 0.8258188552188552,
+      "label": 1
+    },
+    {
+      "x": 0.4580983379501385,
+      "z": 0.7899033670033669,
+      "label": 1
+    },
+    {
+      "x": 0.46805567867036013,
+      "z": 0.8239185185185185,
+      "label": 1
+    },
+    {
+      "x": 0.46837326869806095,
+      "z": 0.8159989898989899,
+      "label": 1
+    },
+    {
+      "x": 0.46438656509695286,
+      "z": 0.7972841750841752,
+      "label": 1
+    },
+    {
+      "x": 0.46835775623268694,
+      "z": 0.850877441077441,
+      "label": 1
+    },
+    {
+      "x": 0.4801472299168975,
+      "z": 0.8151515151515152,
+      "label": 1
+    },
+    {
+      "x": 0.4721876731301939,
+      "z": 0.8105013468013469,
+      "label": 1
+    },
+    {
+      "x": 0.4537806094182825,
+      "z": 0.8193848484848485,
+      "label": 1
+    },
+    {
+      "x": 0.4654398891966759,
+      "z": 0.845943771043771,
+      "label": 1
+    },
+    {
+      "x": 0.4654398891966759,
+      "z": 0.8350535353535354,
+      "label": 1
+    },
+    {
+      "x": 0.4547423822714681,
+      "z": 0.7937400673400673,
+      "label": 1
+    },
+    {
+      "x": 0.48720637119113575,
+      "z": 0.8342602693602693,
+      "label": 1
+    },
+    {
+      "x": 0.4564058171745152,
+      "z": 0.8437033670033671,
+      "label": 1
+    },
+    {
+      "x": 0.46546689750692516,
+      "z": 0.8271235690235691,
+      "label": 1
+    },
+    {
+      "x": 0.4752771468144044,
+      "z": 0.8338306397306398,
+      "label": 1
+    },
+    {
+      "x": 0.47225692520775625,
+      "z": 0.84109898989899,
+      "label": 1
+    },
+    {
+      "x": 0.4707281163434903,
+      "z": 0.8450343434343435,
+      "label": 1
+    },
+    {
+      "x": 0.4612396121883657,
+      "z": 0.8459925925925925,
+      "label": 1
+    },
+    {
+      "x": 0.46118767313019393,
+      "z": 0.8357474747474748,
+      "label": 1
+    },
+    {
+      "x": 0.45734432132963987,
+      "z": 0.8461222222222222,
+      "label": 1
+    },
+    {
+      "x": 0.45729224376731303,
+      "z": 0.8358397306397307,
+      "label": 1
+    },
+    {
+      "x": 0.4697454293628809,
+      "z": 0.8343569023569024,
+      "label": 1
+    },
+    {
+      "x": 0.47180083102493076,
+      "z": 0.8287286195286196,
+      "label": 1
+    },
+    {
+      "x": 0.49349127423822714,
+      "z": 0.8455161616161616,
+      "label": 1
+    },
+    {
+      "x": 0.4916206371191135,
+      "z": 0.8270481481481481,
+      "label": 1
+    },
+    {
+      "x": 0.4966518005540166,
+      "z": 0.20441010101010096,
+      "label": 1
+    },
+    {
+      "x": 0.47005927977839335,
+      "z": 0.19373232323232323,
+      "label": 1
+    },
+    {
+      "x": 0.47006108033240995,
+      "z": 0.19373232323232323,
+      "label": 1
+    },
+    {
+      "x": 0.49889196675900277,
+      "z": 0.8138047138047138,
+      "label": 13
+    },
+    {
+      "x": 0.4717229916897507,
+      "z": 0.6776346801346801,
+      "label": 17
+    },
+    {
+      "x": 0.48696537396121886,
+      "z": 0.8118306397306397,
+      "label": 17
+    },
+    {
+      "x": 0.48241689750692524,
+      "z": 0.7034723905723905,
+      "label": 17
+    },
+    {
+      "x": 0.45444362880886424,
+      "z": 0.5728255892255892,
+      "label": 17
+    },
+    {
+      "x": 0.5119403047091413,
+      "z": 0.6579501683501684,
+      "label": 17
+    },
+    {
+      "x": 0.5157465373961219,
+      "z": 0.6275377104377104,
+      "label": 17
+    },
+    {
+      "x": 0.5348094182825485,
+      "z": 0.3614090909090909,
+      "label": 17
+    },
+    {
+      "x": 0.5331858725761773,
+      "z": 0.3861686868686869,
+      "label": 17
+    }
+  ]
+}

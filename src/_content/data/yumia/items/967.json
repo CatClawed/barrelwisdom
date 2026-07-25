@@ -1,0 +1,31 @@
+{
+  "id": 967,
+  "name": "Music Box K",
+  "comfort_goal": 400,
+  "cats": [
+    {
+      "id": 38,
+      "name": "(Interior)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.7582984764542936,
+      "z": 0.6459983164983165,
+      "label": 8
+    }
+  ],
+  "material": {
+    "cost": 5,
+    "kind": "module",
+    "recipe": [
+      {
+        "num": 2,
+        "mat": {
+          "name": "Iron",
+          "id": 3
+        }
+      }
+    ]
+  }
+}

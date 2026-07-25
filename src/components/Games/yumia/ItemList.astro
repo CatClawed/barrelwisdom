@@ -1,0 +1,81 @@
+---
+import ItemAttributeList from './ItemAttributeList.astro';
+const { items, lang } = Astro.props;
+---
+
+<input type="text" id="filter" placeholder="Search items..." />
+
+<div class="master-detail">
+  <ul class="list" id="item-list">
+    {
+      items.map((i) => (
+        <li class="list-container" data-id={i.id}>
+          {i.data.cats[0].id != 38 && (
+            <img
+              class="item-image-display"
+              src={`/media/games/yumia/items/${i.id}.webp`}
+              alt={i.data.name}
+              loading="lazy"
+            />
+          )}
+          <div class="card">
+            <a class="card-title" href={`/yumia/items/${i.id}/${lang}`}>
+              <h4 class="item-trigger">{i.data.name}</h4>
+              {i.data.isDLC && <span class="badge bg-primary">DLC</span>}
+            </a>
+            <ItemAttributeList
+              cats={i.data.cats}
+              mats={i.data.mats}
+              resonance={i.data.resonance}
+              fire={i.data.fire}
+              ice={i.data.ice}
+              bolt={i.data.bolt}
+              air={i.data.air}
+            />
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+
+  <div id="detail-pane" class="detail-pane">
+    <p>Select an item to view details</p>
+  </div>
+</div>
+<script>
+  import { initMap, destroyMap } from './map_client';
+  window.initMap = initMap;
+  window.destroyMap = destroyMap;
+</script>
+
+<script is:inline define:vars={{ lang }}>
+  const filterInput = document.getElementById('filter');
+  const list = document.getElementById('item-list');
+  const pane = document.getElementById('detail-pane');
+
+  // Filter Logic
+  filterInput?.addEventListener('input', (e) => {
+    const term = e.target.value.toLowerCase();
+
+    document.querySelectorAll('#item-list .list-container').forEach((card) => {
+      const name = card.querySelector('h4')?.textContent.toLowerCase() || '';
+      card.style.display = name.includes(term) ? '' : 'none';
+    });
+  });
+
+  // Master-Detail injection
+  list?.addEventListener('click', async (e) => {
+    const card = e.target.closest('.list-container');
+    if (!card) return;
+    if (e.button === 0 && !e.ctrlKey && !e.metaKey) {
+      e.preventDefault();
+      window.destroyMap?.();
+      const id = card.getAttribute('data-id');
+      pane.innerHTML = '<p class="loading">Loading...</p>';
+      const response = await fetch(`/yumia/items/${id}/fragment/${lang}`);
+      const html = await response.text();
+      pane.innerHTML = html;
+      window.initMap?.(pane.querySelector('.a26-map[data-points]'));
+    }
+  });
+</script>

@@ -1,0 +1,191 @@
+{
+  "id": 249,
+  "name": "Fungal Valley Relic",
+  "desc": "Some sort of fragments buried in fungus, mushrooms, and more fungus. Despite being a relic treasure of relative value, the degree to which they have been covered makes them exceedingly difficult to spot.",
+  "ice": true,
+  "resonance": 3,
+  "mats": [
+    {
+      "name": "Part",
+      "id": 9
+    },
+    {
+      "name": "Ancient Bone",
+      "id": 14
+    }
+  ],
+  "cats": [
+    {
+      "id": 41,
+      "name": "(Relics)"
+    }
+  ],
+  "rank": [
+    {
+      "rank": "S",
+      "eff": [
+        {
+          "lv": 3,
+          "eff": {
+            "id": 224,
+            "name": "Increase Resonance Area - 2nd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line second closest to the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 140
+    },
+    {
+      "rank": "A",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 224,
+            "name": "Increase Resonance Area - 2nd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line second closest to the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 115
+    },
+    {
+      "rank": "B",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 224,
+            "name": "Increase Resonance Area - 2nd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line second closest to the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 98
+    },
+    {
+      "rank": "C",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 224,
+            "name": "Increase Resonance Area - 2nd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line second closest to the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 83
+    },
+    {
+      "rank": "D",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 224,
+            "name": "Increase Resonance Area - 2nd Stratum",
+            "desc1": "When used as an ingredient for a slot on the line second closest to the Alchemy Core, increases the resonance area by [Lv. x 1].",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 61
+    },
+    {
+      "rank": "E",
+      "quality": 42
+    }
+  ],
+  "location": [
+    {
+      "x": 0.27348351800554016,
+      "z": 0.07486296296296298,
+      "label": 15
+    },
+    {
+      "x": 0.2741426592797784,
+      "z": 0.08116902356902356,
+      "label": 15
+    },
+    {
+      "x": 0.27993365650969526,
+      "z": 0.0865181818181818,
+      "label": 15
+    },
+    {
+      "x": 0.27883878116343486,
+      "z": 0.06994343434343434,
+      "label": 15
+    },
+    {
+      "x": 0.4048337950138504,
+      "z": 0.10028080808080807,
+      "label": 15
+    },
+    {
+      "x": 0.3996824099722992,
+      "z": 0.09212323232323234,
+      "label": 15
+    },
+    {
+      "x": 0.4042150969529086,
+      "z": 0.08608080808080808,
+      "label": 15
+    },
+    {
+      "x": 0.4048531855955679,
+      "z": 0.0972905723905724,
+      "label": 15
+    },
+    {
+      "x": 0.39833781163434906,
+      "z": 0.08648552188552187,
+      "label": 15
+    },
+    {
+      "x": 0.39789764542936285,
+      "z": 0.24801279461279457,
+      "label": 15
+    },
+    {
+      "x": 0.24420955678670359,
+      "z": 0.5334646464646464,
+      "label": 15
+    },
+    {
+      "x": 0.24200193905817177,
+      "z": 0.5320962962962963,
+      "label": 15
+    },
+    {
+      "x": 0.2437545706371191,
+      "z": 0.5307420875420875,
+      "label": 15
+    },
+    {
+      "x": 0.24239930747922436,
+      "z": 0.5289286195286195,
+      "label": 15
+    },
+    {
+      "x": 0.4676800554016621,
+      "z": 0.15768754208754213,
+      "label": 15
+    },
+    {
+      "x": 0.4603041551246537,
+      "z": 0.15363333333333334,
+      "label": 15
+    },
+    {
+      "x": 0.46994099722991695,
+      "z": 0.15112491582491586,
+      "label": 15
+    }
+  ]
+}

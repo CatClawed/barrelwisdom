@@ -1,0 +1,142 @@
+{
+  "id": 299,
+  "name": "Spun Thread",
+  "desc": "Spider's silk spun together to be as thick as regular thread. The silk used to spin this thread was already tough and hard to cut, so this thread is practically impossible to cut.",
+  "bolt": true,
+  "resonance": 6,
+  "cats": [
+    {
+      "id": 20,
+      "name": "(Threads)"
+    }
+  ],
+  "location": [
+    {
+      "x": 0.2074218836565097,
+      "z": 0.1916619528619529,
+      "label": 4
+    },
+    {
+      "x": 0.17724349030470912,
+      "z": 0.36167777777777776,
+      "label": 5
+    },
+    {
+      "x": 0.310803324099723,
+      "z": 0.13468013468013468,
+      "label": 13
+    },
+    {
+      "x": 0.06539058171745152,
+      "z": 0.3470875420875421,
+      "label": 13
+    },
+    {
+      "x": 0.060217451523545705,
+      "z": 0.3427070707070707,
+      "label": 13
+    }
+  ],
+  "recipe": {
+    "num": 3,
+    "level": [
+      {
+        "lv": 1,
+        "fire": 2,
+        "bolt": 2,
+        "reward": "Learn Recipe"
+      },
+      {
+        "lv": 2,
+        "amt": 15,
+        "fire": 3,
+        "bolt": 3,
+        "reward": "Quality Up"
+      },
+      {
+        "lv": 3,
+        "amt": 2,
+        "fire": 4,
+        "bolt": 4,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 4,
+        "amt": 5,
+        "fire": 5,
+        "bolt": 5,
+        "reward": "Increase Base Resonance Count"
+      },
+      {
+        "lv": 5,
+        "amt": 1,
+        "fire": 6,
+        "bolt": 6,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 6,
+        "amt": 2,
+        "fire": 7,
+        "bolt": 7,
+        "reward": "Increase Quantity"
+      },
+      {
+        "lv": 7,
+        "amt": 2,
+        "fire": 3,
+        "bolt": 3,
+        "reward": "Add Effect"
+      },
+      {
+        "lv": 8,
+        "amt": 1,
+        "fire": 4,
+        "bolt": 4,
+        "reward": "Add Slot"
+      },
+      {
+        "lv": 9,
+        "amt": 1,
+        "fire": 5,
+        "bolt": 5,
+        "reward": "Increase Resonance Area"
+      },
+      {
+        "lv": 10,
+        "amt": 3,
+        "fire": 6,
+        "bolt": 6,
+        "reward": "Increase Quantity"
+      }
+    ],
+    "sp": 36,
+    "kind": "alchemy",
+    "recipe": [
+      {
+        "item": {
+          "id": 175,
+          "name": "Restraint Silk"
+        },
+        "eff": {
+          "id": 220,
+          "name": "Increase Resonance Area - Triangle",
+          "desc1": "When used as an ingredient for a triangular Alchemy Core, increases the resonance area by [Lv. x 1].",
+          "max_level": 5
+        }
+      },
+      {
+        "item": {
+          "id": 137,
+          "name": "Mushedroom"
+        },
+        "eff": {
+          "id": 223,
+          "name": "Increase Resonance Area - 1st Stratum",
+          "desc1": "When used as an ingredient for a slot on the line closest to the Alchemy Core, increases the resonance area by [Lv. x 1].",
+          "max_level": 5
+        }
+      }
+    ]
+  }
+}

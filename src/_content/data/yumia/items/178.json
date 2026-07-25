@@ -1,0 +1,333 @@
+{
+  "id": 178,
+  "name": "Heavenly Rain Thread",
+  "desc": "Hugely absorbent spider silk. Any rain that touches these threads is immediately absorbed and subsequently released on sunny days.",
+  "fire": true,
+  "bolt": true,
+  "resonance": 5,
+  "mats": [
+    {
+      "name": "Fiber",
+      "id": 5
+    }
+  ],
+  "cats": [
+    {
+      "id": 1,
+      "name": "(Water)"
+    },
+    {
+      "id": 20,
+      "name": "(Threads)"
+    }
+  ],
+  "rank": [
+    {
+      "rank": "S",
+      "eff": [
+        {
+          "lv": 5,
+          "eff": {
+            "id": 235,
+            "name": "Element Resonance - Ice",
+            "desc1": "Increases the resonance area by [Lv. x 1] when used as an ingredient for an ice element synthesized item.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 150
+    },
+    {
+      "rank": "A",
+      "eff": [
+        {
+          "lv": 4,
+          "eff": {
+            "id": 235,
+            "name": "Element Resonance - Ice",
+            "desc1": "Increases the resonance area by [Lv. x 1] when used as an ingredient for an ice element synthesized item.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 126
+    },
+    {
+      "rank": "B",
+      "eff": [
+        {
+          "lv": 3,
+          "eff": {
+            "id": 235,
+            "name": "Element Resonance - Ice",
+            "desc1": "Increases the resonance area by [Lv. x 1] when used as an ingredient for an ice element synthesized item.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 109
+    },
+    {
+      "rank": "C",
+      "eff": [
+        {
+          "lv": 2,
+          "eff": {
+            "id": 235,
+            "name": "Element Resonance - Ice",
+            "desc1": "Increases the resonance area by [Lv. x 1] when used as an ingredient for an ice element synthesized item.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 94
+    },
+    {
+      "rank": "D",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 235,
+            "name": "Element Resonance - Ice",
+            "desc1": "Increases the resonance area by [Lv. x 1] when used as an ingredient for an ice element synthesized item.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 72
+    },
+    {
+      "rank": "E",
+      "eff": [
+        {
+          "lv": 1,
+          "eff": {
+            "id": 235,
+            "name": "Element Resonance - Ice",
+            "desc1": "Increases the resonance area by [Lv. x 1] when used as an ingredient for an ice element synthesized item.",
+            "max_level": 5
+          }
+        }
+      ],
+      "quality": 53
+    }
+  ],
+  "location": [
+    {
+      "x": 0.6479121883656509,
+      "z": 0.825353872053872,
+      "label": 1
+    },
+    {
+      "x": 0.663805540166205,
+      "z": 0.7219299663299664,
+      "label": 1
+    },
+    {
+      "x": 0.6649620498614958,
+      "z": 0.6821373737373737,
+      "label": 1
+    },
+    {
+      "x": 0.664985595567867,
+      "z": 0.6820498316498316,
+      "label": 1
+    },
+    {
+      "x": 0.6485957063711911,
+      "z": 0.8268824915824915,
+      "label": 1
+    },
+    {
+      "x": 0.6657157894736843,
+      "z": 0.8175646464646465,
+      "label": 1
+    },
+    {
+      "x": 0.6651908587257619,
+      "z": 0.7460872053872055,
+      "label": 1
+    },
+    {
+      "x": 0.6638117728531856,
+      "z": 0.7219131313131314,
+      "label": 1
+    },
+    {
+      "x": 0.663778808864266,
+      "z": 0.6882424242424242,
+      "label": 1
+    },
+    {
+      "x": 0.6660152354570638,
+      "z": 0.6866178451178451,
+      "label": 1
+    },
+    {
+      "x": 0.6659624653739612,
+      "z": 0.679963973063973,
+      "label": 1
+    },
+    {
+      "x": 0.661023268698061,
+      "z": 0.6288104377104378,
+      "label": 1
+    },
+    {
+      "x": 0.6615247922437674,
+      "z": 0.6234367003367004,
+      "label": 1
+    },
+    {
+      "x": 0.660873268698061,
+      "z": 0.6222265993265993,
+      "label": 1
+    },
+    {
+      "x": 0.6419062326869807,
+      "z": 0.5852326599326598,
+      "label": 1
+    },
+    {
+      "x": 0.6418962603878116,
+      "z": 0.5852437710437711,
+      "label": 1
+    },
+    {
+      "x": 0.6448076177285318,
+      "z": 0.5827703703703704,
+      "label": 1
+    },
+    {
+      "x": 0.6448637119113573,
+      "z": 0.583068686868687,
+      "label": 1
+    },
+    {
+      "x": 0.6462998614958448,
+      "z": 0.5796481481481481,
+      "label": 1
+    },
+    {
+      "x": 0.6463127423822715,
+      "z": 0.5796417508417507,
+      "label": 1
+    },
+    {
+      "x": 0.6610349030470913,
+      "z": 0.6288835016835017,
+      "label": 1
+    },
+    {
+      "x": 0.665665650969529,
+      "z": 0.817417845117845,
+      "label": 1
+    },
+    {
+      "x": 0.6710324099722992,
+      "z": 0.8259501683501684,
+      "label": 1
+    },
+    {
+      "x": 0.6671405817174515,
+      "z": 0.8155744107744107,
+      "label": 1
+    },
+    {
+      "x": 0.6639055401662051,
+      "z": 0.7443239057239057,
+      "label": 1
+    },
+    {
+      "x": 0.6647864265927979,
+      "z": 0.7462326599326599,
+      "label": 1
+    },
+    {
+      "x": 0.7765912742382272,
+      "z": 0.6212696969696969,
+      "label": 1
+    },
+    {
+      "x": 0.7778297783933518,
+      "z": 0.6233255892255892,
+      "label": 1
+    },
+    {
+      "x": 0.7760603878116343,
+      "z": 0.6218249158249158,
+      "label": 1
+    },
+    {
+      "x": 0.812224376731302,
+      "z": 0.6595454545454545,
+      "label": 1
+    },
+    {
+      "x": 0.8125790858725761,
+      "z": 0.6545700336700336,
+      "label": 1
+    },
+    {
+      "x": 0.8111347645429363,
+      "z": 0.6566804713804713,
+      "label": 1
+    },
+    {
+      "x": 0.8101668975069252,
+      "z": 0.6494602693602693,
+      "label": 1
+    },
+    {
+      "x": 0.7911297783933517,
+      "z": 0.6798767676767677,
+      "label": 1
+    },
+    {
+      "x": 0.7951677285318559,
+      "z": 0.67809898989899,
+      "label": 1
+    },
+    {
+      "x": 0.7924717451523545,
+      "z": 0.6724245791245791,
+      "label": 1
+    },
+    {
+      "x": 0.7906858725761772,
+      "z": 0.6739774410774411,
+      "label": 1
+    },
+    {
+      "x": 0.7900386426592798,
+      "z": 0.679539393939394,
+      "label": 1
+    },
+    {
+      "x": 0.793592243767313,
+      "z": 0.6839740740740741,
+      "label": 1
+    },
+    {
+      "x": 0.7953436288088642,
+      "z": 0.6827158249158248,
+      "label": 1
+    },
+    {
+      "x": 0.7613713296398892,
+      "z": 0.60746632996633,
+      "label": 1
+    },
+    {
+      "x": 0.7997020775623269,
+      "z": 0.6297888888888888,
+      "label": 1
+    },
+    {
+      "x": 0.781382132963989,
+      "z": 0.6082616161616162,
+      "label": 1
+    }
+  ]
+}
