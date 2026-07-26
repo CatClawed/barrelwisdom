@@ -43,7 +43,7 @@ const elements = [
         <li style="display: flex; align-items: center;">
           <svg class="a26-icon">
             <use
-              href={`/media/spritesheets/A26.svg?v=1#${category_to_icon[item.id] ?? 'default-icon'}`}
+              href={`/spritesheets/A26.svg?v=1#${category_to_icon[item.id]}`}
             />
           </svg>
 
@@ -61,7 +61,7 @@ const elements = [
       mats?.map((item) => (
         <li style="display: flex; align-items: center;">
           <svg class="a26-icon">
-            <use href={`/media/spritesheets/A26.svg?v=1#material-${item.id}`} />
+            <use href={`/spritesheets/A26.svg?v=1#material-${item.id}`} />
           </svg>
           {item.name}
         </li>
@@ -79,14 +79,14 @@ const elements = [
             class="a26-elements"
             style={`background-color: ${getColor(el.active, el.id)};`}
           >
-            <use href={`/media/spritesheets/A26.svg?v=1#${el.id}`} />
+            <use href={`/spritesheets/A26.svg?v=1#${el.id}`} />
           </svg>
         ))}
       </div>
 
       <div style="display: flex; align-items: center;">
         <svg class="a26-icon">
-          <use href="/media/spritesheets/A26.svg?v=1#resonance" />
+          <use href="/spritesheets/A26.svg?v=1#resonance" />
         </svg>
         {resonance} - {resonance + 5}
       </div>

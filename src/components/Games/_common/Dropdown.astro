@@ -1,0 +1,167 @@
+---
+interface Option {
+  id: string;
+  label: string;
+  icon?: string;
+}
+interface Props {
+  name: string;
+  options: Option[];
+  selected?: string;
+  placeholder: string;
+  id?: string;
+  cls?: string;
+}
+const {
+  name,
+  options,
+  selected,
+  id = name,
+  cls = 'grid-4',
+  placeholder = 'Filter',
+} = Astro.props;
+
+options.splice(0, 0, { id: '-1', label: '--' });
+---
+
+<div class={`searchable-select ${cls}`} data-name={placeholder}>
+  <select name={name} id={id} class="ss-native" autocomplete="off">
+    <option value="" disabled selected={!selected}>{placeholder}</option>
+    {
+      options.map((o) => (
+        <option
+          value={o.id}
+          selected={o.id === selected}
+          data-icon={o.icon ?? ''}
+        >
+          {o.label}
+        </option>
+      ))
+    }
+  </select>
+</div>
+
+<style is:global>
+  .searchable-select {
+    position: relative;
+    display: inline-block;
+    width: var(--ss-width, 100%);
+    font-size: var(--ss-font-size, 1rem);
+  }
+
+  /* Real select stays in the DOM (form semantics, no-JS fallback),
+     visually hidden once JS enhances it. */
+  .ss-native {
+    width: 100%;
+    padding: var(--ss-padding, 0.5rem 0.75rem);
+    border: 1px solid var(--ss-border, #ccc);
+    border-radius: var(--ss-radius, 6px);
+    background: var(--ss-bg, white);
+    font-size: inherit;
+  }
+  .searchable-select.is-enhanced .ss-native {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+  }
+
+  .ss-trigger {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border: 1px solid var(--ss-border, #ccc);
+    border-radius: var(--ss-radius, 6px);
+    background: var(--ss-bg, white);
+    cursor: pointer;
+    user-select: none;
+    font: inherit;
+  }
+  .ss-trigger:focus-within {
+    outline: 2px solid var(--ss-focus, #3b82f6);
+    outline-offset: 1px;
+  }
+  .ss-trigger img,
+  .ss-trigger svg {
+    width: var(--ss-icon-size, 1.1em);
+    height: var(--ss-icon-size, 1.1em);
+    flex-shrink: 0;
+  }
+  .ss-trigger .ss-label {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: left;
+    padding-left: 0.5rem;
+  }
+  .ss-trigger .ss-caret {
+    flex-shrink: 0;
+    opacity: 0.6;
+    transition: transform 0.15s ease;
+  }
+  .searchable-select[data-open='true'] .ss-caret {
+    transform: rotate(180deg);
+  }
+
+  .ss-search {
+    border: 1px solid var(--ss-border, #ccc);
+    border-radius: var(--ss-radius, 6px);
+    font-size: inherit;
+    width: 100%;
+    width: -webkit-fill-available;
+    width: -moz-available;
+    width: stretch;
+  }
+
+  .ss-listbox {
+    position: absolute;
+    z-index: var(--ss-z, 20);
+    top: calc(100% + 0.25rem);
+    left: 0;
+    right: 0;
+    max-height: var(--ss-list-max-height, 280px);
+    overflow-y: auto;
+    background: var(--ss-bg, white);
+    border: 1px solid var(--ss-border, #ccc);
+    border-radius: var(--ss-radius, 6px);
+    box-shadow: var(--ss-shadow, 0 4px 12px rgba(0, 0, 0, 0.1));
+    padding: 0.25rem;
+    margin: 0.25rem 0 0;
+    list-style: none;
+  }
+  .ss-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .ss-option.is-active,
+  li.ss-option:hover {
+    background: var(--ss-hover-bg);
+  }
+
+  .ss-option img,
+  .ss-option svg {
+    width: var(--ss-icon-size, 1.1em);
+    height: var(--ss-icon-size, 1.1em);
+    flex-shrink: 0;
+  }
+
+  .ss-option[aria-selected='true'] {
+    background: var(--ss-selected-bg);
+  }
+  .ss-empty {
+    padding: 0.5rem;
+    color: var(--gray, #888);
+    font-style: italic;
+  }
+</style>
+
+<script>
+  import './dropdown_client';
+</script>

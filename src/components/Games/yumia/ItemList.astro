@@ -1,81 +1,150 @@
 ---
+import { getCollection } from 'astro:content';
 import ItemAttributeList from './ItemAttributeList.astro';
+import Dropdown from '@components/Games/_common/Dropdown.astro';
+import { category_to_icon } from './yumia_constants';
+import { category_translation } from '@app/localization/translations/common-strings';
+
 const { items, lang } = Astro.props;
+
+const categories = await getCollection('yumia_categories');
+
+const categoryOptions = categories.map((cat) => ({
+  id: cat.id,
+  label: cat.data.name,
+  icon: `/spritesheets/A26.svg?v=1#${category_to_icon[cat.id]}`,
+}));
 ---
 
-<input type="text" id="filter" placeholder="Search items..." />
-
 <div class="master-detail">
-  <ul class="list" id="item-list">
-    {
-      items.map((i) => (
-        <li class="list-container" data-id={i.id}>
-          {i.data.cats[0].id != 38 && (
-            <img
-              class="item-image-display"
-              src={`/media/games/yumia/items/${i.id}.webp`}
-              alt={i.data.name}
-              loading="lazy"
-            />
-          )}
-          <div class="card">
-            <a class="card-title" href={`/yumia/items/${i.id}/${lang}`}>
-              <h4 class="item-trigger">{i.data.name}</h4>
-              {i.data.isDLC && <span class="badge bg-primary">DLC</span>}
-            </a>
-            <ItemAttributeList
-              cats={i.data.cats}
-              mats={i.data.mats}
-              resonance={i.data.resonance}
-              fire={i.data.fire}
-              ice={i.data.ice}
-              bolt={i.data.bolt}
-              air={i.data.air}
-            />
-          </div>
-        </li>
-      ))
-    }
-  </ul>
+  <div>
+    <div class="filters">
+      <input
+        class="grid-12"
+        type="text"
+        id="filter"
+        placeholder="Search items..."
+        autocomplete="off"
+      />
+      <Dropdown
+        options={categoryOptions}
+        name="category"
+        placeholder={category_translation[lang]}
+      />
+    </div>
+    <ul class="list" id="item-list">
+      {
+        items.map((i) => (
+          <li
+            class="list-container"
+            data-id={i.id}
+            data-category={i.data.cats.map((c) => c.id).join(',')}
+          >
+            {i.data.cats[0].id != 38 && (
+              <img
+                class="item-image-display"
+                src={`/media/games/yumia/items/${i.id}.webp`}
+                alt={i.data.name}
+                loading="lazy"
+              />
+            )}
+            <div class="card">
+              <a class="card-title" href={`/yumia/items/${i.id}/${lang}`}>
+                <h4 class="item-trigger">{i.data.name}</h4>
+                {i.data.isDLC && <span class="badge bg-primary">DLC</span>}
+              </a>
+              <ItemAttributeList
+                cats={i.data.cats}
+                mats={i.data.mats}
+                resonance={i.data.resonance}
+                fire={i.data.fire}
+                ice={i.data.ice}
+                bolt={i.data.bolt}
+                air={i.data.air}
+              />
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 
   <div id="detail-pane" class="detail-pane">
-    <p>Select an item to view details</p>
+    <svg class="placeholder-icon">
+      <use href="/spritesheets/main.svg#flask"></use>
+    </svg>
   </div>
 </div>
 <script>
   import { initMap, destroyMap } from './map_client';
+  import { initSearchableSelects } from '@components/Games/_common/dropdown_client';
   window.initMap = initMap;
   window.destroyMap = destroyMap;
+  window.initSearchableSelects = initSearchableSelects;
 </script>
 
 <script is:inline define:vars={{ lang }}>
   const filterInput = document.getElementById('filter');
+  const categorySelect = document.getElementById('category');
   const list = document.getElementById('item-list');
   const pane = document.getElementById('detail-pane');
 
-  // Filter Logic
-  filterInput?.addEventListener('input', (e) => {
-    const term = e.target.value.toLowerCase();
+  function applyFilters() {
+    const term = filterInput?.value.toLowerCase() ?? '';
+    const category = categorySelect?.value ?? '-1';
 
     document.querySelectorAll('#item-list .list-container').forEach((card) => {
       const name = card.querySelector('h4')?.textContent.toLowerCase() || '';
-      card.style.display = name.includes(term) ? '' : 'none';
+      const cats = card.dataset.category?.split(',') ?? [];
+
+      const matchesName = name.includes(term);
+      const matchesCategory = category === '-1' || cats.includes(category);
+
+      card.style.display = matchesName && matchesCategory ? '' : 'none';
     });
-  });
+  }
+
+  filterInput?.addEventListener('input', applyFilters);
+  categorySelect?.addEventListener('change', applyFilters);
 
   // Master-Detail injection
   list?.addEventListener('click', async (e) => {
     const card = e.target.closest('.list-container');
     if (!card) return;
+
     if (e.button === 0 && !e.ctrlKey && !e.metaKey) {
       e.preventDefault();
+
+      // If mobile, show the modal
+      if (window.innerWidth <= 760) {
+        pane.classList.add('is-open');
+        if (!pane.querySelector('.close-btn')) {
+          pane.insertAdjacentHTML(
+            'afterbegin',
+            `<button class="close-btn"><svg>
+              <use href="/media/spritesheets/main.svg?v=1#fa-arrow-left" />
+            </svg></button>`,
+          );
+          pane
+            .querySelector('.close-btn')
+            .addEventListener('click', () => pane.classList.remove('is-open'));
+        }
+      }
+      pane.classList.add('hide-placeholder');
+
       window.destroyMap?.();
       const id = card.getAttribute('data-id');
-      pane.innerHTML = '<p class="loading">Loading...</p>';
+      pane.querySelector('.content-area')?.remove(); // Clear old content
+
       const response = await fetch(`/yumia/items/${id}/fragment/${lang}`);
       const html = await response.text();
-      pane.innerHTML = html;
+
+      pane.insertAdjacentHTML(
+        'beforeend',
+        `<div class="content-area">${html}</div>`,
+      );
       window.initMap?.(pane.querySelector('.a26-map[data-points]'));
+      window.initSearchableSelects?.(pane);
     }
   });
 </script>

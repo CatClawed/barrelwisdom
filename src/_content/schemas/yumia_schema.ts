@@ -156,6 +156,7 @@ export const categoryHelperSchema = z.object({
 });
 
 export const categorySchema = z.object({
+  name: z.string(),
   in_cat: z.array(nameLinkSchema).optional(),
   used: z.array(categoryHelperSchema).optional(),
 });
@@ -163,7 +164,8 @@ export const categorySchema = z.object({
 
 export const yumiaData = [
   //{ game: 'yumia', type: 'effects',  schema: effectSchema },
-  { game: 'yumia', type: 'items',    schema: itemSchema },
+  { game: 'yumia', type: 'items', schema: itemSchema },
+  { game: 'yumia', type: 'categories',    schema: categorySchema },
   //{ game: 'yumia', type: 'monsters', schema: monsterSchema },
   //{ game: 'yumia', type: 'traits',   schema: traitSchema },
 ]

@@ -4,22 +4,19 @@
   gap: 1rem;
   align-items: start;
 
+  @media(max-width: 760px) {
+    grid-template-columns: 1fr;
+  }
+
   ul {
     padding: 0;
-  }
-}
-
-
-@media(max-width: 760px) {
-  .master-detail {
-    grid-template-columns: 1fr;
   }
 }
 
 .detail-pane {
   position: sticky;
   top: calc(var(--header-height) + 1rem);
-  max-height: calc(100vh - var(--header-height) - 2rem);
+  max-height: calc(100vh - var(--header-height));
   overflow-y: auto;
   width: 100%;
   min-width: 350px;
@@ -27,14 +24,34 @@
   flex-direction: column;
 }
 
-.list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+/* Add/Update these in data_list.scss */
+@media (max-width: 760px) {
+  .detail-pane {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 200;
+    background: var(--bg-card);
+    padding: 2rem;
+    box-sizing: border-box;
+    display: none; /* Hidden by default */
+    flex-shrink: 0;
+
+    /* Add a close button inside the detail pane for mobile */
+    &.is-open {
+      display: block;
+    }
+  }
 }
 
-@media(max-width: 1000px) {
-  .list {
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 1rem;
+
+  @media(max-width: 1000px) {
     grid-template-columns: 1fr;
   }
 }
@@ -74,4 +91,61 @@
   aspect-ratio: 1;
   width: 25%;
   object-fit: contain;
+}
+
+.close-btn {
+  background: none;
+  border: 1px solid gray;
+  border-radius: 5px;
+
+  @media (min-width: 760px) {
+    display: none;
+  }
+
+  svg {
+    height: 3em;
+    width: 3em;
+  }
+}
+
+.placeholder-icon {
+  fill: hotpink;
+  margin: auto;
+  height: 80dvh;
+  filter: drop-shadow(7px 5px 3px);
+}
+.hide-placeholder {
+  .placeholder-icon {
+    display: none;
+  }
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  padding-bottom: 1rem;
+  max-width: 800px;
+  margin: auto;
+  gap: 0.5rem;
+
+
+  input, div>button {
+    height: 3rem;
+    border-radius: 5px;
+    border: 2px solid gray;
+    font-size: 1.3rem;
+    padding: 0 0.5rem;
+  }
+  div>button {
+    height: 3.25rem;
+  }
+  input:hover, div>button:hover {
+    border: 2px solid dimgray;
+  }
+  input:active, input:focus-visible, div>button:active, div>button:focus-visible {
+    border: 2px solid black;
+  }
+  input:focus, div>button {
+    outline: none;
+  }
 }
