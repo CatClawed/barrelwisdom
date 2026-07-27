@@ -10,21 +10,21 @@ interface Props {
   selected?: string;
   placeholder: string;
   id?: string;
-  cls?: string;
+  gridSpan?: number;
 }
 const {
   name,
   options,
   selected,
   id = name,
-  cls = 'grid-4',
+  gridSpan = '4',
   placeholder = 'Filter',
 } = Astro.props;
 
 options.splice(0, 0, { id: '-1', label: '--' });
 ---
 
-<div class={`searchable-select ${cls}`} data-name={placeholder}>
+<div class={`searchable-select grid-${gridSpan}`} data-name={placeholder}>
   <select name={name} id={id} class="ss-native" autocomplete="off">
     <option value="" disabled selected={!selected}>{placeholder}</option>
     {

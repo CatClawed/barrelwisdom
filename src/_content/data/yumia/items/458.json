@@ -1,10 +1,1 @@
-{
-  "id": 458,
-  "name": "Switch C",
-  "cats": [
-    {
-      "id": 38,
-      "name": "(Interior)"
-    }
-  ]
-}
+{"id":458,"name":"Switch C","cats":[{"id":38,"name":"(Interior)"}],"kind":"furniture"}

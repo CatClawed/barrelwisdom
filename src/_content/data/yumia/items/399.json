@@ -1,17 +1,1 @@
-{
-  "id": 399,
-  "name": "Stirium",
-  "desc": "A rare mineral with special properties that distorts the flow of mana around it. It is said to have been used in various devices and facilities in Aladiss.",
-  "cats": [
-    {
-      "id": 40,
-      "name": "(Key Items)"
-    }
-  ],
-  "rank": [
-    {
-      "rank": "B",
-      "quality": 100
-    }
-  ]
-}
+{"id":399,"name":"Stirium","desc":"A rare mineral with special properties that distorts the flow of mana around it. It is said to have been used in various devices and facilities in Aladiss.","cats":[{"id":40,"name":"(Key Items)"}],"rank":[{"rank":"B","quality":100}],"kind":"key"}

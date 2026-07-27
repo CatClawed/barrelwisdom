@@ -1,10 +1,1 @@
-{
-  "id": 684,
-  "name": "Greenhouse Base",
-  "cats": [
-    {
-      "id": 38,
-      "name": "(Interior)"
-    }
-  ]
-}
+{"id":684,"name":"Greenhouse Base","cats":[{"id":38,"name":"(Interior)"}],"kind":"furniture"}

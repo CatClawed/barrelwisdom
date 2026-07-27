@@ -1,0 +1,65 @@
+---
+interface Props {
+  title?: string;
+  href?: string;
+  cls?: string;
+}
+const { title, href, cls = '' } = Astro.props;
+---
+
+<span class={`popover-wrapper`}>
+  <a
+    class={`popover-trigger ${cls}`}
+    role="button"
+    aria-haspopup="dialog"
+    aria-expanded="false"
+    href={href ?? undefined}
+  >
+    <slot name="trigger" />
+  </a>
+  <div class="popover-panel" role="dialog" hidden>
+    {title && <h4 class="popover-title">{title}</h4>}
+    <div class="popover-content">
+      <slot />
+    </div>
+  </div>
+</span>
+
+<style is:global>
+  .popover-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+  .popover-trigger {
+    cursor: pointer;
+  }
+  .popover-trigger.dotted-link {
+    text-decoration: underline dotted;
+  }
+  .popover-content {
+    padding: 0 1rem 0.5rem;
+  }
+  .popover-panel {
+    position: absolute;
+    z-index: 1100;
+    top: calc(100% + 0.4rem);
+    left: 0;
+    min-width: var(--popover-min-width, 220px);
+    max-width: var(--popover-max-width, 500px);
+    background: var(--bg-card, white);
+    border: 1px solid var(--popover-border, #ccc);
+    border-radius: var(--popover-radius, 5px);
+    box-shadow: var(--popover-shadow, 0 4px 12px rgba(0, 0, 0, 0.15));
+    font-size: 0.9em;
+
+    > h4 {
+      background-color: #d3d3d34d;
+      padding: 0.5rem 1rem 0.1rem;
+      margin: 0 0 0.4rem;
+    }
+  }
+</style>
+
+<script>
+  import './popover_client';
+</script>

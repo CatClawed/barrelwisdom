@@ -2,8 +2,9 @@
 
 .two-column {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 1fr 1fr;
   grid-column-gap: 1rem;
+  grid-row-gap: 0.5rem;
 }
 
 .grid {
@@ -37,7 +38,6 @@
         grid-column: span #{$i+2};
       }
     }
-
   }
 }
 

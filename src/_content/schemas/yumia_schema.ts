@@ -49,13 +49,13 @@ export const recipeLevelSchema = z.object({
   reward: z.string().optional(),
 });
 
-export const recipeSchema: z.ZodType<any> = z.lazy(() => z.object({
+export const recipeSchema = z.object({
   num: z.number().optional(),
   sp: z.number().optional(),
   kind: z.string().optional(),
   level: z.array(recipeLevelSchema).optional(),
-  recipe: z.array(recipeSchema).optional(),
-}));
+  recipe: z.array(recipeDataSchema).optional(),
+});
 
 export const materialRecipeDataSchema = z.object({
   num: z.number().optional(),
@@ -97,6 +97,7 @@ export const itemSchema = z.object({
   recipe: recipeSchema.optional(),
   material: materialRecipeSchema.optional(),
   quest: questDataSchema.optional(),
+  kind: z.string().optional(),
 });
 
 export const traitSchema = z.object({
@@ -165,7 +166,8 @@ export const categorySchema = z.object({
 export const yumiaData = [
   //{ game: 'yumia', type: 'effects',  schema: effectSchema },
   { game: 'yumia', type: 'items', schema: itemSchema },
-  { game: 'yumia', type: 'categories',    schema: categorySchema },
+  { game: 'yumia', type: 'categories', schema: categorySchema },
+  { game: 'yumia', type: 'materials',    schema: nameLinkSchema },
   //{ game: 'yumia', type: 'monsters', schema: monsterSchema },
   //{ game: 'yumia', type: 'traits',   schema: traitSchema },
 ]

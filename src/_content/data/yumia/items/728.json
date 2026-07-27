@@ -1,10 +1,1 @@
-{
-  "id": 728,
-  "name": "Wooden Floor E",
-  "cats": [
-    {
-      "id": 38,
-      "name": "(Interior)"
-    }
-  ]
-}
+{"id":728,"name":"Wooden Floor E","cats":[{"id":38,"name":"(Interior)"}],"kind":"furniture"}

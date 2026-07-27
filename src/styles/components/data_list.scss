@@ -124,28 +124,27 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   padding-bottom: 1rem;
-  max-width: 800px;
   margin: auto;
   gap: 0.5rem;
+  width: min(100%, 800px);
 
-
-  input, div>button {
+  input, .searchable-select>button {
     height: 3rem;
     border-radius: 5px;
     border: 2px solid gray;
     font-size: 1.3rem;
     padding: 0 0.5rem;
   }
-  div>button {
+  .searchable-select>button {
     height: 3.25rem;
   }
-  input:hover, div>button:hover {
+  input:hover, .searchable-select>button:hover {
     border: 2px solid dimgray;
   }
-  input:active, input:focus-visible, div>button:active, div>button:focus-visible {
+  input:active, input:focus-visible, .searchable-select>button:active, .searchable-select>button:focus-visible {
     border: 2px solid black;
   }
-  input:focus, div>button {
+  input:focus, .searchable-select>button {
     outline: none;
   }
 }

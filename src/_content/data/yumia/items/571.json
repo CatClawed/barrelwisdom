@@ -1,10 +1,1 @@
-{
-  "id": 571,
-  "name": "Hanging Scroll",
-  "cats": [
-    {
-      "id": 38,
-      "name": "(Interior)"
-    }
-  ]
-}
+{"id":571,"name":"Hanging Scroll","cats":[{"id":38,"name":"(Interior)"}],"kind":"furniture"}

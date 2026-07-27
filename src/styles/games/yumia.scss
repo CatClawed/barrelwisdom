@@ -47,8 +47,17 @@
 }
 
 .a26-elements2 {
-  fill: black !important;
-  border-radius: 50%;
-  border: #00000044 1px solid;
-  padding: 0.1em;
+  >svg {
+    fill: black !important;
+    border-radius: 50%;
+    border: #00000044 1px solid;
+    padding: 0.1em;
+    background-color: gray;
+  }
+}
+
+.a26-elements2.active {
+  >svg {
+    background-color: var(--active-button-bg);
+  }
 }

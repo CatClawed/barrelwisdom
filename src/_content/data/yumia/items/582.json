@@ -1,10 +1,1 @@
-{
-  "id": 582,
-  "name": "Wooden Fan",
-  "cats": [
-    {
-      "id": 38,
-      "name": "(Interior)"
-    }
-  ]
-}
+{"id":582,"name":"Wooden Fan","cats":[{"id":38,"name":"(Interior)"}],"kind":"furniture"}

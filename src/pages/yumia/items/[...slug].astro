@@ -46,7 +46,7 @@ const { type, item, lang } = Astro.props;
       <ItemList items={allItems} lang={lang} />
     </MainLayout>
   ) : type === 'detail' ? (
-    <MainLayout title={item.data.name}>
+    <MainLayout title={item.data.name} mainClass="blog-post">
       <ItemDetail item={item.data} lang={lang} />
     </MainLayout>
   ) : (

@@ -1,11 +1,1 @@
-{
-  "id": 407,
-  "name": "Energy Prism",
-  "desc": "An artificial crystal that activates the latent potential in mana. It could be of great help on your journey if used properly.",
-  "cats": [
-    {
-      "id": 40,
-      "name": "(Key Items)"
-    }
-  ]
-}
+{"id":407,"name":"Energy Prism","desc":"An artificial crystal that activates the latent potential in mana. It could be of great help on your journey if used properly.","cats":[{"id":40,"name":"(Key Items)"}],"kind":"key"}

@@ -40,7 +40,7 @@ const elements = [
   <ul style="padding-left: 0; list-style: none;">
     {
       cats.map((item) => (
-        <li style="display: flex; align-items: center;">
+        <li class="neat-display">
           <svg class="a26-icon">
             <use
               href={`/spritesheets/A26.svg?v=1#${category_to_icon[item.id]}`}
@@ -59,21 +59,19 @@ const elements = [
   <ul style="padding-left: 0; list-style: none;">
     {
       mats?.map((item) => (
-        <li style="display: flex; align-items: center;">
+        <li class="neat-display">
           <svg class="a26-icon">
             <use href={`/spritesheets/A26.svg?v=1#material-${item.id}`} />
           </svg>
-          {item.name}
+          <span>{item.name}</span>
         </li>
       ))
     }
   </ul>
-</div>
 
 {
   resonance && (
-    <div class="two-column" style="padding-top: 0.5rem;">
-      <div style="break-inside: avoid-column;">
+      <div class="neat-display" style="break-inside: avoid-column;">
         {elements.map((el) => (
           <svg
             class="a26-elements"
@@ -84,15 +82,22 @@ const elements = [
         ))}
       </div>
 
-      <div style="display: flex; align-items: center;">
+      <div class="neat-display">
         <svg class="a26-icon">
           <use href="/spritesheets/A26.svg?v=1#resonance" />
         </svg>
-        {resonance} - {resonance + 5}
+        <span>{resonance} - {resonance + 5}</span>
       </div>
-    </div>
   )
 }
+</div>
+
 <style lang="scss">
   @use '@styles/games/yumia';
+
+  .neat-display {
+    margin: auto auto 0 0;
+    display: flex;
+    align-items: center;
+  }
 </style>

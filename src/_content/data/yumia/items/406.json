@@ -1,11 +1,1 @@
-{
-  "id": 406,
-  "name": "Research Notes",
-  "desc": "Important documents that were dropped by a Research Team member. They contain information pertaining to the investigation of the Sivash region.",
-  "cats": [
-    {
-      "id": 40,
-      "name": "(Key Items)"
-    }
-  ]
-}
+{"id":406,"name":"Research Notes","desc":"Important documents that were dropped by a Research Team member. They contain information pertaining to the investigation of the Sivash region.","cats":[{"id":40,"name":"(Key Items)"}],"kind":"key"}

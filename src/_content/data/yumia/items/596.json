@@ -1,10 +1,1 @@
-{
-  "id": 596,
-  "name": "Stone Lantern B",
-  "cats": [
-    {
-      "id": 38,
-      "name": "(Interior)"
-    }
-  ]
-}
+{"id":596,"name":"Stone Lantern B","cats":[{"id":38,"name":"(Interior)"}],"kind":"furniture"}

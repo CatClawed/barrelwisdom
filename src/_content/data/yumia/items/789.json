@@ -1,10 +1,1 @@
-{
-  "id": 789,
-  "name": "Wall with Door Frame",
-  "cats": [
-    {
-      "id": 38,
-      "name": "(Interior)"
-    }
-  ]
-}
+{"id":789,"name":"Wall with Door Frame","cats":[{"id":38,"name":"(Interior)"}],"kind":"furniture"}

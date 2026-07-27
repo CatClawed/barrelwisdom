@@ -1,11 +1,1 @@
-{
-  "id": 393,
-  "name": "Old Replacement Parts",
-  "desc": "Replacement parts that Yumia found which are believed to be used for a transportation device. At the present, Yumia cannot make sense of how to use them.",
-  "cats": [
-    {
-      "id": 40,
-      "name": "(Key Items)"
-    }
-  ]
-}
+{"id":393,"name":"Old Replacement Parts","desc":"Replacement parts that Yumia found which are believed to be used for a transportation device. At the present, Yumia cannot make sense of how to use them.","cats":[{"id":40,"name":"(Key Items)"}],"kind":"key"}

@@ -1,10 +1,1 @@
-{
-  "id": 605,
-  "name": "Counter Table A",
-  "cats": [
-    {
-      "id": 38,
-      "name": "(Interior)"
-    }
-  ]
-}
+{"id":605,"name":"Counter Table A","cats":[{"id":38,"name":"(Interior)"}],"kind":"furniture"}

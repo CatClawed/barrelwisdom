@@ -1,11 +1,1 @@
-{
-  "id": 405,
-  "name": "Letter to the Human",
-  "desc": "A letter written by a Neru as thanks for the letter sent by the member of the Research Team. There is some question as to whether the writing can be read, but maybe the feeling will still be conveyed.",
-  "cats": [
-    {
-      "id": 40,
-      "name": "(Key Items)"
-    }
-  ]
-}
+{"id":405,"name":"Letter to the Human","desc":"A letter written by a Neru as thanks for the letter sent by the member of the Research Team. There is some question as to whether the writing can be read, but maybe the feeling will still be conveyed.","cats":[{"id":40,"name":"(Key Items)"}],"kind":"key"}

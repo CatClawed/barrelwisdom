@@ -1,4 +1,4 @@
-export const item_translation = {
+export const item_translation: Record<string, string> = {
     "en": "Items",
     "de": "Gegenstände",
     "fr": "Objets",
@@ -10,7 +10,7 @@ export const item_translation = {
     "ko": "아이템",
 };
 
-export const monster_translation = {
+export const monster_translation: Record<string, string> = {
     "en": "Monsters",
     "ja": "魔物",
     "sc": "魔物",
@@ -22,7 +22,7 @@ export const monster_translation = {
     "es": "Monstruos"
 }
 
-export const effect_translation = {
+export const effect_translation: Record<string, string> = {
     "en": "Effects",
     "ja": "効果",
     "sc": "效果",
@@ -34,7 +34,7 @@ export const effect_translation = {
     "es": "Efectos"
 }
 
-export const trait_translation = {
+export const trait_translation: Record<string, string> = {
     "en": "Traits",
     "ja": "特性",
     "sc": "特性",
@@ -46,7 +46,7 @@ export const trait_translation = {
     "es": "Atributos"
 }
 
-export const stat_translation = {
+export const stat_translation: Record<string, Record<string, string>> = {
     "hp": {
         "en": "HP",
         "ja": "体力",
@@ -93,7 +93,7 @@ export const stat_translation = {
     }
 }
 
-export const quality_translation = {
+export const quality_translation: Record<string, string> = {
     "en": "Quality",
     "ja": "品質",
     "sc": "品质",
@@ -105,7 +105,7 @@ export const quality_translation = {
     "es": "Calidad"
 }
 
-export const category_translation = {
+export const category_translation: Record<string, string> = {
     "en": "Category",
     "ja": "カテゴリ",
     "sc": "类别",
@@ -117,7 +117,7 @@ export const category_translation = {
     "es": "Categoría"
 }
 
-export const filter_translation = {
+export const filter_translation: Record<string, string> = {
     "en": "Filter",
     "ja": "フィルタ",
     "sc": "筛选",
@@ -129,7 +129,7 @@ export const filter_translation = {
     "es": "Filtro"
 }
 
-export const race_translation = {
+export const race_translation: Record<string, string> = {
     "en": "Monster Species",
     "ja": "魔物種族",
     "sc": "魔物种族",
@@ -141,7 +141,7 @@ export const race_translation = {
     "es": "Especies de monstruos"
 }
 
-export const character_translation = {
+export const character_translation: Record<string, string> = {
     "en": "Characters",
     "ja": "キャラクター",
     "sc": "角色",
@@ -149,7 +149,7 @@ export const character_translation = {
     "ko": "캐릭터",
 }
 
-export const ingredient_translation = {
+export const ingredient_translation: Record<string, string> = {
     "en": "Ingredients",
     "ja": "材料",
     "sc": "材料",
@@ -158,7 +158,7 @@ export const ingredient_translation = {
     "fr": "Ingrédients",
 }
 
-export const location_translation = {
+export const location_translation: Record<string, string> = {
     "en": "Locations",
     "ja": "地区",
     "sc": "地区",
@@ -166,7 +166,7 @@ export const location_translation = {
     "ko": "지역",
 }
 
-export const recipebook_translation = {
+export const recipebook_translation: Record<string, string> = {
     "en": "Recipe Book",
     "ja": "レシピブック",
     "sc": "配方书",
@@ -174,7 +174,7 @@ export const recipebook_translation = {
     "ko": "레시피책",
 }
 
-export const shop_translation = {
+export const shop_translation: Record<string, string> = {
     "en": "Shops",
     "ja": "ショップ",
     "sc": "商店",
@@ -186,7 +186,7 @@ export const shop_translation = {
     "es": "Tiendas"
 };
 
-export const drop_translation = {
+export const drop_translation: Record<string, string> = {
     "en": "Dropped by",
     "ja": "落とす魔物",
     "sc": "掉落的魔物",
@@ -194,7 +194,7 @@ export const drop_translation = {
     "ko": "떨어뜨리는 몬스터",
 }
 
-export const details_translation = {
+export const details_translation: Record<string, string> = {
     "en": "Details",
     "ja": "詳細",
     "sc": "详情",
@@ -206,7 +206,7 @@ export const details_translation = {
     "es": "Detalles"
 }
 
-export const permalink_translation = {
+export const permalink_translation: Record<string, string> = {
     "en": "Permalink",
     "ja": "固定リンク",
     "sc": "永久链接",
@@ -218,7 +218,7 @@ export const permalink_translation = {
     "es": "Enlace permanente"
 };
 
-export const recipe_ideas_translation = {
+export const recipe_ideas_translation: Record<string, string> = {
     "en": "Recipe Ideas",
     "ja": "レシピ発想",
     "sc": "构思配方",
@@ -226,7 +226,7 @@ export const recipe_ideas_translation = {
     "ko": "레시피 발상",
 };
 
-export const catalyst_translation = {
+export const catalyst_translation: Record<string, string> = {
     "en": "Catalysts",
     "ja": "触媒",
     "sc": "触媒",
@@ -234,7 +234,7 @@ export const catalyst_translation = {
     "ko": "촉매",
 };
 
-export const level_translation = {
+export const level_translation: Record<string, string> = {
     "en": "Level",
     "ja": "レベル",
     "sc": "等级",
@@ -246,7 +246,7 @@ export const level_translation = {
     "ru": "Уровень"
 };
 
-export const properties_translation = {
+export const properties_translation: Record<string, string> = {
     "en": "Properties",
     "ja": "潜在能力",
 }

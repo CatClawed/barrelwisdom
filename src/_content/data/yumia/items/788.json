@@ -1,10 +1,1 @@
-{
-  "id": 788,
-  "name": "Outer Wall",
-  "cats": [
-    {
-      "id": 38,
-      "name": "(Interior)"
-    }
-  ]
-}
+{"id":788,"name":"Outer Wall","cats":[{"id":38,"name":"(Interior)"}],"kind":"furniture"}

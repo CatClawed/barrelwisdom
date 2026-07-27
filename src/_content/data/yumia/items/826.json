@@ -1,10 +1,1 @@
-{
-  "id": 826,
-  "name": "Ruin Floor F",
-  "cats": [
-    {
-      "id": 38,
-      "name": "(Interior)"
-    }
-  ]
-}
+{"id":826,"name":"Ruin Floor F","cats":[{"id":38,"name":"(Interior)"}],"kind":"furniture"}

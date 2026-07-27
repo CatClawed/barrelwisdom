@@ -2,17 +2,26 @@
 import { getCollection } from 'astro:content';
 import ItemAttributeList from './ItemAttributeList.astro';
 import Dropdown from '@components/Games/_common/Dropdown.astro';
-import { category_to_icon } from './yumia_constants';
+import FilterButton from '@components/Games/_common/FilterButton.astro';
+import { category_to_icon, element_map } from './yumia_constants';
 import { category_translation } from '@app/localization/translations/common-strings';
+import { material_translation } from '@app/localization/translations/yumia';
 
 const { items, lang } = Astro.props;
 
 const categories = await getCollection('yumia_categories');
+const materials = await getCollection('yumia_materials');
 
 const categoryOptions = categories.map((cat) => ({
   id: cat.id,
   label: cat.data.name,
   icon: `/spritesheets/A26.svg?v=1#${category_to_icon[cat.id]}`,
+}));
+
+const materialOptions = materials.map((o) => ({
+  id: o.id,
+  label: o.data.name,
+  icon: `/spritesheets/A26.svg?v=1#material-${o.id}`,
 }));
 ---
 
@@ -20,16 +29,46 @@ const categoryOptions = categories.map((cat) => ({
   <div>
     <div class="filters">
       <input
-        class="grid-12"
         type="text"
         id="filter"
         placeholder="Search items..."
         autocomplete="off"
+        class="grid-12"
       />
       <Dropdown
         options={categoryOptions}
         name="category"
         placeholder={category_translation[lang]}
+      />
+      <Dropdown
+        options={materialOptions}
+        name="material"
+        placeholder={material_translation[lang]}
+      />
+      <FilterButton
+        svg="A26.svg?v=1"
+        extraClass="a26-elements2"
+        name="elements"
+        list={[
+          { filterKey: 'fire', icon: 'fire', activeColor: element_map.fire },
+          { filterKey: 'ice', icon: 'ice', activeColor: element_map.ice },
+          { filterKey: 'bolt', icon: 'bolt', activeColor: element_map.bolt },
+          { filterKey: 'air', icon: 'air', activeColor: element_map.air },
+        ]}
+      />
+      <FilterButton
+        svg="A26.svg?v=1"
+        name="kind"
+        singleOnly={true}
+        list={[
+          { filterKey: 'gather', icon: 'items' },
+          { filterKey: 'consumable', icon: 'category-bombs' },
+          { filterKey: 'synth', icon: 'synth' },
+          { filterKey: 'equip', icon: 'equip' },
+          { filterKey: 'explore', icon: 'exploration' },
+          { filterKey: 'key', icon: 'category-key-items' },
+          { filterKey: 'furniture', icon: 'category-interior' },
+        ]}
       />
     </div>
     <ul class="list" id="item-list">
@@ -39,6 +78,16 @@ const categoryOptions = categories.map((cat) => ({
             class="list-container"
             data-id={i.id}
             data-category={i.data.cats.map((c) => c.id).join(',')}
+            data-material={i.data.mats?.map((c) => c.id).join(',')}
+            data-elements={[
+              i.data.fire && 'fire',
+              i.data.ice && 'ice',
+              i.data.bolt && 'bolt',
+              i.data.air && 'air',
+            ]
+              .filter(Boolean)
+              .join(',')}
+            data-kind={i.data.kind}
           >
             {i.data.cats[0].id != 38 && (
               <img
@@ -86,26 +135,65 @@ const categoryOptions = categories.map((cat) => ({
 <script is:inline define:vars={{ lang }}>
   const filterInput = document.getElementById('filter');
   const categorySelect = document.getElementById('category');
+  const materialSelect = document.getElementById('material');
+  const elementsGroup = document.querySelector(
+    '[data-filter-group="elements"]',
+  );
+  const kindGroup = document.querySelector('[data-filter-group="kind"]');
   const list = document.getElementById('item-list');
   const pane = document.getElementById('detail-pane');
 
+  let activeElements = [];
+  let activeKinds = [];
+
   function applyFilters() {
     const term = filterInput?.value.toLowerCase() ?? '';
-    const category = categorySelect?.value ?? '-1';
+    const catVal = categorySelect?.value;
+    const matVal = materialSelect?.value;
+    const category = !catVal || catVal === '-1' ? '-1' : catVal;
+    const material = !matVal || matVal === '-1' ? '-1' : matVal;
 
     document.querySelectorAll('#item-list .list-container').forEach((card) => {
       const name = card.querySelector('h4')?.textContent.toLowerCase() || '';
-      const cats = card.dataset.category?.split(',') ?? [];
-
       const matchesName = name.includes(term);
+
+      const cats = card.dataset.category?.split(',') ?? [];
       const matchesCategory = category === '-1' || cats.includes(category);
 
-      card.style.display = matchesName && matchesCategory ? '' : 'none';
+      const mats = card.dataset.material?.split(',') ?? [];
+      const matchesMaterial = material === '-1' || mats.includes(material);
+
+      const elements = card.dataset.elements?.split(',').filter(Boolean) ?? [];
+      const matchesElements =
+        activeElements.length === 0 ||
+        activeElements.every((el) => elements.includes(el));
+
+      const kind = card.dataset.kind;
+      const matchesKind =
+        activeKinds.length === 0 || activeKinds.includes(kind);
+
+      card.style.display =
+        matchesName &&
+        matchesCategory &&
+        matchesMaterial &&
+        matchesElements &&
+        matchesKind
+          ? ''
+          : 'none';
     });
   }
 
   filterInput?.addEventListener('input', applyFilters);
   categorySelect?.addEventListener('change', applyFilters);
+  materialSelect?.addEventListener('change', applyFilters);
+  elementsGroup?.addEventListener('filterchange', (e) => {
+    activeElements = e.detail.active;
+    applyFilters();
+  });
+  kindGroup?.addEventListener('filterchange', (e) => {
+    activeKinds = e.detail.active;
+    applyFilters();
+  });
 
   // Master-Detail injection
   list?.addEventListener('click', async (e) => {

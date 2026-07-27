@@ -1,10 +1,1 @@
-{
-  "id": 570,
-  "name": "Decorative Alcove",
-  "cats": [
-    {
-      "id": 38,
-      "name": "(Interior)"
-    }
-  ]
-}
+{"id":570,"name":"Decorative Alcove","cats":[{"id":38,"name":"(Interior)"}],"kind":"furniture"}

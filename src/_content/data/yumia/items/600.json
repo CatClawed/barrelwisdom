@@ -1,10 +1,1 @@
-{
-  "id": 600,
-  "name": "Exhibition Stand",
-  "cats": [
-    {
-      "id": 38,
-      "name": "(Interior)"
-    }
-  ]
-}
+{"id":600,"name":"Exhibition Stand","cats":[{"id":38,"name":"(Interior)"}],"kind":"furniture"}

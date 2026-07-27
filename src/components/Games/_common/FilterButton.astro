@@ -1,0 +1,73 @@
+---
+interface FilterItem {
+  icon: string;
+  activeColor?: string;
+  filterKey: string;
+}
+interface Props {
+  svg: string;
+  list: FilterItem[];
+  name: string; // used to identify the filter group
+  singleOnly?: boolean;
+  extraClass?: string;
+  gridSpan?: number;
+}
+const {
+  svg,
+  list,
+  name,
+  singleOnly = false,
+  extraClass = '',
+  gridSpan = '6',
+} = Astro.props;
+---
+
+<div
+  class={`filter-buttons-grid grid-${gridSpan}`}
+  data-filter-group={name}
+  style={`grid-template-columns: repeat(${list.length}, minmax(1.5em, 4em));`}
+>
+  {
+    list.map((btn) => (
+      <button
+        type="button"
+        class={'icon-button ' + extraClass}
+        data-filter-key={btn.filterKey}
+        data-single={singleOnly ? 'true' : 'false'}
+        style={`--active-button-bg: ${btn.activeColor || 'black'}`}
+      >
+        <svg preserveAspectRatio="xMidYMid meet">
+          <use href={`/media/spritesheets/${svg}#${btn.icon}`} />
+        </svg>
+      </button>
+    ))
+  }
+</div>
+<style lang="scss">
+  @use '@styles/games/yumia';
+  .filter-buttons-grid {
+    display: grid;
+    padding: 0 0 0.1em 0;
+  }
+  .icon-button {
+    aspect-ratio: 1;
+    background: none;
+    border: none;
+    margin-bottom: auto;
+    margin-top: auto;
+    cursor: pointer;
+    outline: none;
+    svg {
+      width: 100%;
+      max-height: 100%;
+      fill: gray;
+      aspect-ratio: 1;
+    }
+    &.active svg {
+      fill: var(--active-fill, black);
+    }
+  }
+</style>
+<script>
+  import './filter_buttons_client';
+</script>

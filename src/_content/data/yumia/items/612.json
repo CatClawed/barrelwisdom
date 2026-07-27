@@ -1,10 +1,1 @@
-{
-  "id": 612,
-  "name": "Porcelain Doll",
-  "cats": [
-    {
-      "id": 38,
-      "name": "(Interior)"
-    }
-  ]
-}
+{"id":612,"name":"Porcelain Doll","cats":[{"id":38,"name":"(Interior)"}],"kind":"furniture"}

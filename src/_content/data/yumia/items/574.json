@@ -1,10 +1,1 @@
-{
-  "id": 574,
-  "name": "Paper Umbrella",
-  "cats": [
-    {
-      "id": 38,
-      "name": "(Interior)"
-    }
-  ]
-}
+{"id":574,"name":"Paper Umbrella","cats":[{"id":38,"name":"(Interior)"}],"kind":"furniture"}

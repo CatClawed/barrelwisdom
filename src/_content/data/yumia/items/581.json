@@ -1,10 +1,1 @@
-{
-  "id": 581,
-  "name": "Wicker Table",
-  "cats": [
-    {
-      "id": 38,
-      "name": "(Interior)"
-    }
-  ]
-}
+{"id":581,"name":"Wicker Table","cats":[{"id":38,"name":"(Interior)"}],"kind":"furniture"}

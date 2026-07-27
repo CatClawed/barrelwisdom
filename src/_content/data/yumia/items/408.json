@@ -1,11 +1,1 @@
-{
-  "id": 408,
-  "name": "Energy Shard",
-  "desc": "A crystal fragment that contains the power of mana.",
-  "cats": [
-    {
-      "id": 40,
-      "name": "(Key Items)"
-    }
-  ]
-}
+{"id":408,"name":"Energy Shard","desc":"A crystal fragment that contains the power of mana.","cats":[{"id":40,"name":"(Key Items)"}],"kind":"key"}

@@ -1,10 +1,1 @@
-{
-  "id": 554,
-  "name": "Wall-Mounted Shelf",
-  "cats": [
-    {
-      "id": 38,
-      "name": "(Interior)"
-    }
-  ]
-}
+{"id":554,"name":"Wall-Mounted Shelf","cats":[{"id":38,"name":"(Interior)"}],"kind":"furniture"}
