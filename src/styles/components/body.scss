@@ -1,0 +1,19 @@
+@use '@styles/variables' as v;
+
+.layout-wrapper {
+  display: flex;
+  transition: margin-left 0.3s ease-in-out;
+  margin-left: var(--sidebar-width);
+  margin-right: auto;
+}
+
+@media (max-width: v.$breakpoint-md) {
+  .layout-wrapper {
+    margin-left: 0;
+  }
+}
+
+.layout-wrapper.sidebar-hidden {
+  transition: margin-left 0.3s ease-in-out;
+  margin-left: 0;
+}

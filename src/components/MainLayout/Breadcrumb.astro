@@ -1,5 +1,4 @@
 ---
-// src/components/MainLayout/Breadcrumb.astro
 import { getBreadcrumbs } from '@app/utils/breadcrumbs';
 import { parseUrl } from '@app/utils/navigation';
 
@@ -13,7 +12,7 @@ const allCrumbs = getBreadcrumbs(Astro.url.pathname, lang);
 
 if (allCrumbs.length === 0) return null;
 
-const crumbs = allCrumbs.slice(0, -1);
+const crumbs = allCrumbs.filter((f) => f.label !== '' && f.label !== title);
 const current = title || allCrumbs[allCrumbs.length - 1].label;
 ---
 
@@ -43,6 +42,10 @@ const current = title || allCrumbs[allCrumbs.length - 1].label;
     list-style: none;
     padding: 0;
     gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .breadcrumb-item {
+    word-wrap: anywhere;
   }
   .breadcrumb-item + .breadcrumb-item::before {
     content: '/';

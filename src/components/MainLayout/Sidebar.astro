@@ -7,7 +7,7 @@ const navItems = await getNavForGame(Astro.url.pathname);
 const globalItems = await getNavForGame('global');
 ---
 
-<aside class="sidenav" id="sidebar">
+<aside class="sidebar" id="sidebar">
   <nav>
     {
       navItems.map((n: NavItem) => {
@@ -15,7 +15,7 @@ const globalItems = await getNavForGame('global');
         const Tag = isExpandable ? 'button' : 'a';
 
         const props = {
-          class: isExpandable ? 'sidenav-item expand-toggle' : 'sidenav-item',
+          class: isExpandable ? 'sidebar-item expand-toggle' : 'sidebar-item',
           href: !isExpandable ? n.url : undefined,
           'aria-expanded': isExpandable
             ? n.expand
@@ -48,10 +48,10 @@ const globalItems = await getNavForGame('global');
             </Tag>
 
             {n.children && (
-              <div class="sidenav-children">
+              <div class="sidebar-children">
                 {n.children.map((c) => (
                   <a
-                    class={`sidebar-spacer sidenav-item ${Astro.url.pathname.includes(c.url) ? 'active' : ''}`}
+                    class={`sidebar-spacer sidebar-item ${Astro.url.pathname.includes(c.url) ? 'active' : ''}`}
                     href={c.url}
                   >
                     {c.name}
@@ -67,7 +67,7 @@ const globalItems = await getNavForGame('global');
       {
         globalItems.map((n: NavItem) => (
           <a
-            class="sidenav-item"
+            class="sidebar-item"
             href={n.url}
             target={n.external ? '_blank' : undefined}
             rel={n.external ? 'noopener noreferrer' : undefined}
@@ -91,7 +91,7 @@ const globalItems = await getNavForGame('global');
 
   toggleBtn?.addEventListener('click', () => {
     sidebar?.classList.toggle('hidden');
-    wrapper?.classList.toggle('sidenav-hidden');
+    wrapper?.classList.toggle('sidebar-hidden');
   });
 
   document.querySelectorAll('.expand-toggle').forEach((btn) => {
@@ -103,3 +103,114 @@ const globalItems = await getNavForGame('global');
     });
   });
 </script>
+<style lang="scss">
+@use '@styles/variables' as v;
+
+.sidebar {
+  background-color: var(--sidebar-color);
+  width: var(--sidebar-width);
+  font-size: 1rem;
+  z-index: 1500;
+  transition: transform 0.3s ease-in-out;
+  position: fixed;
+  height: 100%;
+  left: 0;
+}
+
+.sidebar.hidden {
+  transform: translateX(-100%);
+}
+
+@media (max-width: v.$breakpoint-md) {
+  .sidebar {
+    margin-left: calc(-1 * var(--sidebar-width));
+  }
+
+  .sidebar.hidden {
+    transform: translateX(100%);
+  }
+}
+
+.sidebar-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar-item {
+  svg:first-child {
+      width: 1.5em;
+      height: 1.5em;
+      margin-right: 0.5rem;
+    }
+}
+
+.sidebar-item:hover {
+  color: white;
+  background-color: #20a8d8 !important;
+  text-decoration: none;
+}
+
+.sidebar-item.active {
+  background-color: #3c4e5e;
+}
+
+.sidebar-children {
+  display: none;
+  list-style: none;
+  padding: 0;
+}
+
+.nav-group[data-expand="true"] .sidebar-children {
+  display: block;
+}
+
+.nav-group[data-expand="true"] .caret-down { display: none; }
+.nav-group[data-expand="false"] .caret-up { display: none; }
+
+.sidebar-spacer {
+  padding-left: 2.1rem !important;
+}
+
+.expand-toggle {
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: auto;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: white;
+  width: 100%;
+  width: -webkit-fill-available;
+  width: -moz-available;
+  width: stretch;
+  text-align: left;
+}
+.expand-toggle {
+  .caret-down, .caret-up {
+    width: 1.5em;
+    height: 1.5em;
+    margin-left: auto;
+  }
+}
+
+.sidebar-item, .expand-toggle {
+  padding: 0.6rem 0.1rem;
+  margin-right: 0.4rem;
+  margin-left: 0.4rem;
+  color: white;
+  fill: white;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.nav-global {
+  margin-top: 1rem;
+}
+
+</style>

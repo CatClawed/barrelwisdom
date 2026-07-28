@@ -4,6 +4,7 @@ import { LanguageData } from '@app/localization/localization';
 import MainLayout from '@layouts/MainLayout.astro';
 import ItemList from '@components/Games/yumia/ItemList.astro';
 import ItemDetail from '@components/Games/yumia/ItemDetail.astro';
+import { item_translation } from '@app/localization/translations/common-strings';
 
 const allItems = await getCollection('yumia_items');
 
@@ -42,11 +43,16 @@ const { type, item, lang } = Astro.props;
 
 {
   type === 'list' ? (
-    <MainLayout title="Item List">
+    <MainLayout title={item_translation[lang]}>
       <ItemList items={allItems} lang={lang} />
     </MainLayout>
   ) : type === 'detail' ? (
-    <MainLayout title={item.data.name} mainClass="blog-post">
+    <MainLayout
+      title={item.data.name[lang]}
+      description={item.data.desc[lang]}
+      image={`/media/games/yumia/items/${item.id}.webp`}
+      mainClass="blog-post"
+    >
       <ItemDetail item={item.data} lang={lang} card={true} />
     </MainLayout>
   ) : (

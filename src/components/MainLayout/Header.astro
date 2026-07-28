@@ -1,5 +1,28 @@
 ---
+import { parseUrl } from '@app/utils/navigation';
+import { LanguageData } from '@app/localization/localization';
 
+const { pathname } = Astro.url;
+const { gameId, lang: currentLang } = parseUrl(pathname);
+
+// Get available languages for this game, fallback to default (en)
+const availableLangs =
+  (LanguageData.languages as any)[gameId] || LanguageData.languages.default;
+const hasMultipleLangs = availableLangs.length > 1;
+
+// Helper to generate the URL for a different language
+function getLangUrl(targetLang: string) {
+  const parts = pathname.split('/').filter(Boolean);
+
+  // If the last part is the current language code, replace it
+  if (parts.length > 0 && parts[parts.length - 1] === currentLang) {
+    parts[parts.length - 1] = targetLang;
+  } else {
+    // Otherwise, append the new language code
+    parts.push(targetLang);
+  }
+  return '/' + parts.join('/');
+}
 ---
 
 <header>
@@ -24,20 +47,170 @@
       </picture>
     </a>
     <button
-      mat-icon-button
-      [disabled]="languages().length == 1 || en_only()"
-      aria-label="Language select"
-      [style]="languages().length == 1 || en_only() ? `background: none !important;` : null"
       class="nav-lang"
+      aria-label="Language select"
+      disabled={!hasMultipleLangs}
+      popovertarget={hasMultipleLangs ? 'lang-popover' : undefined}
     >
-      <svg style="height: 40px;"
+      <svg class="globe-icon"
         ><use href="/media/spritesheets/main.svg?v=1#fa-globe"></use></svg
       >
-      <span>EN</span>
-      <svg
-        style="height:20px;{{languages().length > 1 && !en_only() ? `` : `fill: transparent;`}}"
-        ><use href="/media/spritesheets/main.svg?v=1#fa-caret-down"></use></svg
-      >
+      <span>{LanguageData.language_codes[currentLang]}</span>
+      {
+        hasMultipleLangs ? (
+          <svg class="caret-icon">
+            <use href="/media/spritesheets/main.svg?v=1#fa-caret-down" />
+          </svg>
+        ) : (
+          <div class="caret-icon" />
+        )
+      }
     </button>
+    {
+      hasMultipleLangs && (
+        <div id="lang-popover" popover class="lang-dropdown">
+          <ul>
+            {availableLangs.map((l: string) => (
+              <li>
+                <a
+                  href={getLangUrl(l)}
+                  class={l === currentLang ? 'active' : ''}
+                >
+                  {(LanguageData.language_codes as any)[l]}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
   </nav>
 </header>
+<style>
+  .navigation {
+    position: fixed;
+    z-index: 2000;
+    border-bottom: transparent !important;
+    background: var(--navbar-color)
+      linear-gradient(
+        0deg,
+        rgba(71, 58, 48, 1) 0%,
+        rgba(94, 76, 63, 0.8687675753895308) 100%
+      );
+    height: var(--header-height);
+    padding: 0;
+    width: 100%;
+    top: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .navigation-brand {
+    display: inline-flex;
+    align-items: center;
+    width: 155px;
+    height: 55px;
+    justify-content: center;
+    margin-right: 1rem;
+
+    > picture {
+      display: inline-flex;
+    }
+  }
+
+  @media screen and (max-width: 720px) {
+    .navigation-brand {
+      width: 55px;
+    }
+  }
+
+  .nav-hamburger {
+    padding-left: 0.5rem;
+    background: none;
+    border: none;
+    height: var(--header-height);
+    width: var(--header-height);
+    cursor: pointer;
+
+    > svg {
+      fill: white;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  .nav-lang {
+    display: flex;
+    width: 150px;
+    height: 45px;
+    fill: white;
+    color: white;
+    background-color: transparent;
+    font-size: 1rem;
+    border: none;
+    margin: auto 0.2rem auto auto;
+
+    span {
+      margin: auto;
+    }
+
+    svg {
+      margin: auto;
+      aspect-ratio: 1;
+    }
+  }
+
+  .nav-lang:hover {
+    background-color: #2f1d12;
+    border-radius: 0.25rem;
+  }
+
+  .nav-lang:disabled {
+    cursor: default;
+    background: none !important;
+  }
+
+  .lang-dropdown[popover] {
+    border: var(--table-border);
+    border-radius: 5px;
+    padding: 0.5rem;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: var(--header-height);
+    right: 1rem;
+    left: auto;
+    margin: 0.5rem 0 0 0;
+    min-width: 150px;
+    background: white;
+    border: var(--table-border);
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .lang-dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li:hover {
+      background: #f0f0f0;
+    }
+  }
+
+  .lang-dropdown a {
+    display: block;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: black;
+  }
+
+  .globe-icon {
+    height: 40px;
+  }
+
+  .caret-icon {
+    height: 20px;
+    width: 20px;
+  }
+</style>

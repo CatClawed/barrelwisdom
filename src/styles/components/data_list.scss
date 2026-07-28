@@ -7,10 +7,6 @@
   @media(max-width: 760px) {
     grid-template-columns: 1fr;
   }
-
-  ul {
-    padding: 0;
-  }
 }
 
 .detail-pane {
@@ -26,6 +22,9 @@
   -ms-overflow-style: none;
   ::-webkit-scrollbar {
     display: none;
+  }
+  .tbl {
+    border: var(--table-border);
   }
 }
 
@@ -53,6 +52,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
   gap: 1rem;
+  padding: 0;
 
   @media(max-width: 1000px) {
     grid-template-columns: 1fr;
@@ -153,4 +153,8 @@
   input:focus, .searchable-select>button {
     outline: none;
   }
+}
+
+.content-area {
+  margin-top: 0.5rem; // fixes characters like É
 }

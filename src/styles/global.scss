@@ -140,7 +140,7 @@ table {
 th {
     text-align: center;
     background-color: rgba(211, 211, 211, 0.3);
-    border: 1px solid lightgray;
+    border: var(--table-border);
 }
 
 code {

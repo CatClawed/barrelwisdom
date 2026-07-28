@@ -1,5 +1,5 @@
-import { gameNames } from '@app/localization/game-names';
 import { crumbDictionary } from '@app/localization/breadcrumbs';
+import { gameNames } from '@app/localization/game-names';
 
 // the boolean just asks whether to tack on the language code
 const defaultLinks: Record<string, [string, boolean]> = {
@@ -24,6 +24,7 @@ export function getBreadcrumbs(pathname: string, lang: string) {
   const parts = pathname.split('/').filter(Boolean);
 
   if (parts.length === 0) return [];
+  if (parts[0] === 'tags') return [];
 
   const crumbs = [];
   let currentPath = '';
@@ -32,24 +33,24 @@ export function getBreadcrumbs(pathname: string, lang: string) {
     const part = parts[i];
     if (part.length <= 2) continue;
     currentPath += `/${part}`;
-    if (part === 'tags') return [];
     if (part === 'blog') continue;
 
     let url = currentPath;
     if (defaultLinks[part]) {
-      url = defaultLinks[part][0];
-      if (defaultLinks[part][1]) url += `/${lang}`
+      url = `/${part}/${defaultLinks[part][0]}`;
+    }
+    if (defaultLinks[parts[0]]) {
+      if (defaultLinks[parts[0]][1]) url += `/${lang}`;
     }
 
-    let label = part.charAt(0).toUpperCase() + part.slice(1);
+    let label = '';
     if ((gameNames as any)[part]?.[lang]) {
           label = (gameNames as any)[part][lang];
-        } else if (crumbDictionary[part]?.[lang]) {
+    }
+    else if (crumbDictionary[part]?.[lang]) {
           label = crumbDictionary[part][lang];
-        }
-
+    }
         crumbs.push({ label, url });
   }
-
   return crumbs;
 }

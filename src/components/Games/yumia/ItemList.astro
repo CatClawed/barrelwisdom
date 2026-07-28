@@ -4,7 +4,10 @@ import ItemAttributeList from './ItemAttributeList.astro';
 import Dropdown from '@components/Games/_common/Dropdown.astro';
 import FilterButton from '@components/Games/_common/FilterButton.astro';
 import { category_to_icon, element_map } from './yumia_constants';
-import { category_translation } from '@app/localization/translations/common-strings';
+import {
+  category_translation,
+  filter_translation,
+} from '@app/localization/translations/common-strings';
 import { material_translation } from '@app/localization/translations/yumia';
 
 const { items, lang } = Astro.props;
@@ -14,15 +17,17 @@ const materials = await getCollection('yumia_materials');
 
 const categoryOptions = categories.map((cat) => ({
   id: cat.id,
-  label: cat.data.name,
+  label: cat.data.name[lang],
   icon: `/spritesheets/A26.svg?v=1#${category_to_icon[cat.id]}`,
 }));
 
 const materialOptions = materials.map((o) => ({
   id: o.id,
-  label: o.data.name,
+  label: o.data.name[lang],
   icon: `/spritesheets/A26.svg?v=1#material-${o.id}`,
 }));
+
+items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
 ---
 
 <div class="master-detail">
@@ -31,7 +36,7 @@ const materialOptions = materials.map((o) => ({
       <input
         type="text"
         id="filter"
-        placeholder="Search items..."
+        placeholder={filter_translation[lang]}
         autocomplete="off"
         class="grid-12"
       />
@@ -93,13 +98,13 @@ const materialOptions = materials.map((o) => ({
               <img
                 class="item-image-display"
                 src={`/media/games/yumia/items/${i.id}.webp`}
-                alt={i.data.name}
+                alt={i.data.name[lang]}
                 loading={index < 25 ? 'eager' : 'lazy'}
               />
             )}
             <div class="card">
               <a class="card-title" href={`/yumia/items/${i.id}/${lang}`}>
-                <h4 class="item-trigger">{i.data.name}</h4>
+                <h4 class="item-trigger">{i.data.name[lang]}</h4>
                 {i.data.isDLC && <span class="badge bg-primary">DLC</span>}
               </a>
               <ItemAttributeList
@@ -110,6 +115,7 @@ const materialOptions = materials.map((o) => ({
                 ice={i.data.ice}
                 bolt={i.data.bolt}
                 air={i.data.air}
+                lang={lang}
               />
             </div>
           </li>
@@ -125,9 +131,9 @@ const materialOptions = materials.map((o) => ({
   </div>
 </div>
 <script>
-  import { initMap, destroyMap } from './map_client';
   import { initSearchableSelects } from '@components/Games/_common/dropdown_client';
   import { initPopovers } from '@components/Games/_common/popover_client';
+  import { destroyMap, initMap } from './map_client';
   window.initMap = initMap;
   window.destroyMap = destroyMap;
   window.initSearchableSelects = initSearchableSelects;

@@ -48,9 +48,9 @@ const elements = [
           </svg>
 
           {isLink ? (
-            <a href={`/yumia/categories/${item.id}/${lang}`}>{item.name}</a>
+            <a href={`/yumia/categories/${item.id}/${lang}`}>{item.name[lang]}</a>
           ) : (
-            <span>{item.name}</span>
+            <span>{item.name[lang]}</span>
           )}
         </li>
       ))
@@ -63,7 +63,7 @@ const elements = [
           <svg class="a26-icon">
             <use href={`/spritesheets/A26.svg?v=1#material-${item.id}`} />
           </svg>
-          <span>{item.name}</span>
+          <span>{item.name[lang]}</span>
         </li>
       ))
     }

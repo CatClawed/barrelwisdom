@@ -47,7 +47,7 @@ function enhance(root: HTMLElement) {
     searchInput = document.createElement('input');
     searchInput.type = 'text';
     searchInput.className = 'ss-search';
-    searchInput.placeholder = 'Type to search…';
+    searchInput.placeholder = fieldName;
     searchInput.setAttribute('role', 'combobox');
     searchInput.setAttribute('aria-expanded', 'true');
 

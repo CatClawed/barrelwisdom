@@ -1,5 +1,5 @@
 import { z } from 'astro:content';
-import { nameLinkSchema, baseItemSchema } from '@app/_content/schemas/common_schema';
+import { nameLinkSchema, languageSchema } from '@app/_content/schemas/common_schema';
 
 export const coordSchema = z.object({
   x: z.number(),
@@ -8,10 +8,10 @@ export const coordSchema = z.object({
 });
 
 export const effectSchema = z.object({
-  id: z.coerce.string().optional(),
-  name: z.string().optional(),
-  desc1: z.string().optional(),
-  desc2: z.string().optional(),
+  id: z.number().optional(),
+  name: languageSchema.optional(),
+  desc1: languageSchema.optional(),
+  desc2: languageSchema.optional(),
   max_level: z.number().optional(),
   att_tag: z.string().optional(),
   act_tag: z.string().optional(),
@@ -46,7 +46,7 @@ export const recipeLevelSchema = z.object({
   ice: z.number().optional(),
   bolt: z.number().optional(),
   air: z.number().optional(),
-  reward: z.string().optional(),
+  reward: languageSchema.optional(),
 });
 
 export const recipeSchema = z.object({
@@ -68,14 +68,14 @@ export const materialRecipeSchema = z.object({
 });
 
 export const questDataSchema = z.object({
-  name: z.string().optional(),
-  extra: z.string().optional(),
+  name: languageSchema.optional(),
+  extra: languageSchema.optional(),
 });
 
 export const itemSchema = z.object({
-  id: z.coerce.string().optional(),
-  name: z.string().optional(),
-  desc: z.string().optional(),
+  id: z.number().optional(),
+  name: languageSchema.optional(),
+  desc: languageSchema.optional(),
   isDLC: z.boolean().optional(),
   mats: z.array(nameLinkSchema).optional(),
   cats: z.array(nameLinkSchema).optional(),
@@ -101,10 +101,10 @@ export const itemSchema = z.object({
 });
 
 export const traitSchema = z.object({
-  id: z.coerce.string().optional(),
-  name: z.string().optional(),
-  desc1: z.string().optional(),
-  desc2: z.string().optional(),
+  id: z.number().optional(),
+  name: languageSchema.optional(),
+  desc1: languageSchema.optional(),
+  desc2: languageSchema.optional(),
   wep: z.boolean().optional(),
   arm: z.boolean().optional(),
   acc: z.boolean().optional(),
@@ -133,8 +133,8 @@ export const traitSchema = z.object({
 });
 
 export const monsterSchema = z.object({
-  id: z.coerce.string().optional(),
-  name: z.string().optional(),
+  id: z.number().optional(),
+  name: languageSchema.optional(),
   race: nameLinkSchema.optional(),
   fire: z.string().optional(),
   ice: z.string().optional(),
@@ -157,7 +157,7 @@ export const categoryHelperSchema = z.object({
 });
 
 export const categorySchema = z.object({
-  name: z.string(),
+  name: languageSchema,
   in_cat: z.array(nameLinkSchema).optional(),
   used: z.array(categoryHelperSchema).optional(),
 });

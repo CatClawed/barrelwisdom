@@ -16,7 +16,7 @@ const activeElements = level0 ? [
 ].filter((el) => el.active) : [];
 ---
 <div class={card ? `card` : undefined}>
-  <div class="data-title"><h1>{item.name}</h1> {item.isDLC && <span class="badge bg-primary">DLC</span>}</div>
+  <div class="data-title"><h3>{item.name[lang]}</h3> {item.isDLC && <span class="badge bg-primary">DLC</span>}</div>
 
   <div class="image-desc-display">
     {
@@ -24,19 +24,19 @@ const activeElements = level0 ? [
         <img
           class="card-item-display"
           src={`/media/games/yumia/items/${item.id}.webp`}
-          alt={item.name}
+          alt={item.name[lang]}
         />
       )
     }
 
-    {item.desc && <p>{item.desc}</p>}
+    {item.desc && <p>{item.desc[lang]}</p>}
   </div>
 
   {
     item.quest && (
       <p>
-        {item.quest.extra && <b>{item.quest.extra} </b>}
-        {item.quest.name}
+        {item.quest.extra && <b>{item.quest.extra[lang]} </b>}
+        {item.quest.name[lang]}
       </p>
     )
   }
@@ -51,6 +51,7 @@ const activeElements = level0 ? [
     ice={item.ice}
     bolt={item.bolt}
     air={item.air}
+    lang={lang}
   />
 
   {
@@ -85,12 +86,12 @@ const activeElements = level0 ? [
     <ul>
       {item.mons?.map((mon) => (
         <li>
-          <a href={`/yumia/monsters/${mon.id}/${lang}`}>{mon.name}</a>
+          <a href={`/yumia/monsters/${mon.id}/${lang}`}>{mon.name[lang]}</a>
         </li>
       ))}
       {item.rare?.map((mon) => (
         <li>
-          <a href={`/yumia/monsters/${mon.id}/${lang}`}>{mon.name}</a>
+          <a href={`/yumia/monsters/${mon.id}/${lang}`}>{mon.name[lang]}</a>
         </li>
       ))}
     </ul>
@@ -101,7 +102,7 @@ const activeElements = level0 ? [
       <ul>
         {item.material.recipe.map((r) => (
           <li>
-            {r.mat.name} x{r.num}
+            {r.mat.name[lang]} x{r.num}
           </li>
         ))}
       </ul>
@@ -109,10 +110,9 @@ const activeElements = level0 ? [
   )}
 
   {item.comfort_goal && (
-    <p>
-      <b>{comfort_translation[lang]} </b>
-      {item.comfort_goal} (see map)
-      <svg class="icon">
+    <p class="display-map-icon">
+      <b>{comfort_translation[lang]}</b> {item.comfort_goal} (see map)
+      <svg>
         <use href="/media/spritesheets/main.svg?v=1#fa-arrow-down" />
       </svg>
     </p>
@@ -137,17 +137,17 @@ const activeElements = level0 ? [
                 {rank.eff?.map((e) => (
                   <li>
                     <Popover
-                      title={e.eff.name}
+                      title={e.eff.name[lang]}
                       href={`/yumia/effects/${e.eff.id}/${lang}`}
                     >
-                      <span slot="trigger">{e.eff.name} {e.lv}</span>
+                      <span slot="trigger">{e.eff.name[lang]} {e.lv}</span>
 
                       {!e.eff.desc2 ? (
-                        <p>{e.eff.desc1}</p>
+                        <p>{e.eff.desc1[lang]}</p>
                       ) : (
                         <>
-                          <p><b>{inner_translation[lang]}: </b>{e.eff.desc1}</p>
-                          <p><b>{outer_translation[lang]}: </b>{e.eff.desc2}</p>
+                          <p><b>{inner_translation[lang]}: </b>{e.eff.desc1[lang]}</p>
+                          <p><b>{outer_translation[lang]}: </b>{e.eff.desc2[lang]}</p>
                         </>
                       )}
 
@@ -187,9 +187,9 @@ const activeElements = level0 ? [
               {item.recipe.recipe.map((ing: any) => (
                 <li>
                   {ing.item ? (
-                    <a href={`/yumia/items/${ing.item.id}/${lang}`}>{ing.item.name}</a>
+                    <a href={`/yumia/items/${ing.item.id}/${lang}`}>{ing.item.name[lang]}</a>
                   ) : (
-                    <a href={`/yumia/categories/${ing.cat.id}/${lang}`}>{ing.cat.name}</a>
+                    <a href={`/yumia/categories/${ing.cat.id}/${lang}`}>{ing.cat.name[lang]}</a>
                   )}
                 </li>
               ))}
@@ -201,16 +201,16 @@ const activeElements = level0 ? [
                 ing.eff && (
                   <li>
                     <Popover
-                      title={ing.eff.name}
+                      title={ing.eff.name[lang]}
                       href={`/yumia/effects/${ing.eff.id}/${lang}`}
                     >
-                      <span slot="trigger">{ing.eff.name}</span>
+                      <span slot="trigger">{ing.eff.name[lang]}</span>
                       {!ing.eff.desc2 ? (
-                        <p>{ing.eff.desc1}</p>
+                        <p>{ing.eff.desc1[lang]}</p>
                       ) : (
                         <>
-                          <p><b>{inner_translation[lang]}: </b>{ing.eff.desc1}</p>
-                          <p><b>{outer_translation[lang]}: </b>{ing.eff.desc2}</p>
+                          <p><b>{inner_translation[lang]}: </b>{ing.eff.desc1[lang]}</p>
+                          <p><b>{outer_translation[lang]}: </b>{ing.eff.desc2[lang]}</p>
                         </>
                       )}
 
@@ -249,7 +249,7 @@ const activeElements = level0 ? [
         {item.recipe.level.map((lvl) => (
           <tr>
             <td>{lvl.lv}</td>
-            <td>{lvl.reward}</td>
+            <td>{lvl.reward[lang]}</td>
           </tr>
         ))}
       </table>
@@ -258,5 +258,17 @@ const activeElements = level0 ? [
 </div>
 <Map data={item.location} />
 <style lang="scss">
-  @use '@styles/games/yumia'
+  @use '@styles/games/yumia';
+  // jank
+  .display-map-icon {
+    display: flex;
+    align-items: center;
+    >b {
+      padding-right: 0.2rem;
+    }
+    >svg {
+      width: 2rem;
+      aspect-ratio: 1;
+    }
+  }
 </style>
