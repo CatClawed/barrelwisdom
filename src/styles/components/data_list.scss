@@ -22,9 +22,13 @@
   min-width: 350px;
   display: flex;
   flex-direction: column;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }
 
-/* Add/Update these in data_list.scss */
 @media (max-width: 760px) {
   .detail-pane {
     position: fixed;
@@ -34,12 +38,11 @@
     height: 100vh;
     z-index: 200;
     background: var(--bg-card);
-    padding: 2rem;
+    padding: 1rem;
     box-sizing: border-box;
     display: none; /* Hidden by default */
     flex-shrink: 0;
 
-    /* Add a close button inside the detail pane for mobile */
     &.is-open {
       display: block;
     }
@@ -97,6 +100,9 @@
   background: none;
   border: 1px solid gray;
   border-radius: 5px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
 
   @media (min-width: 760px) {
     display: none;

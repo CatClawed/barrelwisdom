@@ -1,0 +1,19 @@
+.data-title {
+  display: flex;
+  .badge {
+    margin: 0.5rem 0 auto auto;
+  }
+}
+
+.image-desc-display {
+  display: flex;
+  margin-bottom: 1rem;
+  >p {
+    margin: auto;
+  }
+  >img {
+    aspect-ratio: 1;
+    max-width: 33%;
+    object-fit: contain;
+  }
+}

@@ -73,7 +73,7 @@ const materialOptions = materials.map((o) => ({
     </div>
     <ul class="list" id="item-list">
       {
-        items.map((i) => (
+        items.map((i, index) => (
           <li
             class="list-container"
             data-id={i.id}
@@ -94,7 +94,7 @@ const materialOptions = materials.map((o) => ({
                 class="item-image-display"
                 src={`/media/games/yumia/items/${i.id}.webp`}
                 alt={i.data.name}
-                loading="lazy"
+                loading={index < 25 ? 'eager' : 'lazy'}
               />
             )}
             <div class="card">
@@ -127,9 +127,11 @@ const materialOptions = materials.map((o) => ({
 <script>
   import { initMap, destroyMap } from './map_client';
   import { initSearchableSelects } from '@components/Games/_common/dropdown_client';
+  import { initPopovers } from '@components/Games/_common/popover_client';
   window.initMap = initMap;
   window.destroyMap = destroyMap;
   window.initSearchableSelects = initSearchableSelects;
+  window.initPopovers = initPopovers;
 </script>
 
 <script is:inline define:vars={{ lang }}>
@@ -233,6 +235,7 @@ const materialOptions = materials.map((o) => ({
       );
       window.initMap?.(pane.querySelector('.a26-map[data-points]'));
       window.initSearchableSelects?.(pane);
+      window.initPopovers?.(pane);
     }
   });
 </script>

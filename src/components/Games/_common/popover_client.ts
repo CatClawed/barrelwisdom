@@ -8,6 +8,15 @@ function enhance(root: HTMLElement) {
   function open() {
     panel.hidden = false;
     trigger.setAttribute('aria-expanded', 'true');
+
+    const triggerRect = trigger.getBoundingClientRect();
+    const panelWidth = panel.offsetWidth || parseInt(getComputedStyle(panel).maxWidth);
+    const spaceRight = window.innerWidth - triggerRect.left;
+
+    console.log(spaceRight, panelWidth, triggerRect.left)
+
+    panel.classList.toggle('popover-panel--left', spaceRight - 10 < panelWidth);
+
     document.addEventListener('click', onOutsideClick, { capture: true });
     document.addEventListener('keydown', onKeydown);
   }
