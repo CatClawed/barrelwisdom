@@ -1,21 +1,28 @@
 ---
 import '@styles/global.scss';
-import { SITE_TITLE } from '@app/consts';
-import { Font } from 'astro:assets';
+import { SITE_TITLE, SITE_DESCRIPTION } from '@app/consts';
 
 interface Props {
   title: string;
   description: string;
   image?: string;
+  game?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const {
   title,
-  description,
+  description = SITE_DESCRIPTION,
   image = '/media/blog/placeholder.webp',
+  game,
 } = Astro.props;
+
+const metaTitle = title
+  ? game
+    ? `${title} | ${game} | ${SITE_TITLE}`
+    : `${title} | ${SITE_TITLE}`
+  : SITE_TITLE;
 ---
 
 <meta charset="utf-8" />
@@ -30,11 +37,11 @@ const {
 />
 <meta name="generator" content={Astro.generator} />
 <link rel="canonical" href={canonicalURL} />
-<title>{title}</title>
+<title>{metaTitle}</title>
 <meta name="description" content={description} />
 <meta property="og:type" content="website" />
 <meta property="og:url" content={Astro.url} />
-<meta property="og:title" content={title} />
+<meta property="og:title" content={metaTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={image} />
 <meta name="twitter:card" content="summary_large_image" />

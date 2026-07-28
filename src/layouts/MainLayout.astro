@@ -5,13 +5,24 @@ import Sidebar from '@components/MainLayout/Sidebar.astro';
 import Breadcrumb from '@components/MainLayout/Breadcrumb.astro';
 import { getHtmlLang } from '@app/utils/navigation';
 
-const { title, description, image, mainClass = undefined } = Astro.props;
+const {
+  title,
+  description,
+  image,
+  mainClass = undefined,
+  game = undefined,
+} = Astro.props;
 const lang = getHtmlLang(Astro.url.pathname);
 ---
 
 <html lang={lang}>
   <head>
-    <BaseHead title={title} description={description} image={image} />
+    <BaseHead
+      title={title}
+      description={description}
+      image={image}
+      game={game}
+    />
   </head>
   <body>
     <Header />

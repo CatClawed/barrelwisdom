@@ -130,9 +130,7 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   padding-bottom: 1rem;
-  margin: auto;
   gap: 0.5rem;
-  width: min(100%, 800px);
 
   input, .searchable-select>button {
     height: 3rem;

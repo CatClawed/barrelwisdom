@@ -10,7 +10,7 @@ import {
 } from '@app/localization/translations/common-strings';
 import { material_translation } from '@app/localization/translations/yumia';
 
-const { items, lang } = Astro.props;
+const { items, lang, title } = Astro.props;
 
 const categories = await getCollection('yumia_categories');
 const materials = await getCollection('yumia_materials');
@@ -30,6 +30,7 @@ const materialOptions = materials.map((o) => ({
 items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
 ---
 
+<h1>{title}</h1>
 <div class="master-detail">
   <div>
     <div class="filters">

@@ -1,4 +1,4 @@
-export const gameNames = {
+export const gameNames: Record<string, Record<string, string>> = {
   totori: { "en": "Atelier Totori", "ja": "トトリのアトリエ" },
   escha: { "en": "Atelier Escha & Logy", "ja": "エスカ＆ロジーのアトリエ" },
   shallie: { "en": "Atelier Shallie", "ja": "シャリーのアトリエ" },

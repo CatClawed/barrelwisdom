@@ -5,6 +5,7 @@ import MainLayout from '@layouts/MainLayout.astro';
 import ItemList from '@components/Games/yumia/ItemList.astro';
 import ItemDetail from '@components/Games/yumia/ItemDetail.astro';
 import { item_translation } from '@app/localization/translations/common-strings';
+import { gameNames } from '@app/localization/game-names';
 
 const allItems = await getCollection('yumia_items');
 
@@ -43,15 +44,22 @@ const { type, item, lang } = Astro.props;
 
 {
   type === 'list' ? (
-    <MainLayout title={item_translation[lang]}>
-      <ItemList items={allItems} lang={lang} />
+    <MainLayout
+      title={item_translation[lang]}
+      game={gameNames['yumia'][lang]}
+      description={lang == 'en' ? 'The list of items.' : ''}
+    >
+      <ItemList items={allItems} lang={lang} title={item_translation[lang]} />
     </MainLayout>
   ) : type === 'detail' ? (
     <MainLayout
       title={item.data.name[lang]}
-      description={item.data.desc[lang]}
+      description={
+        item.data.desc ? item.data.desc[lang] : item.data.cats[0].name[lang]
+      }
       image={`/media/games/yumia/items/${item.id}.webp`}
       mainClass="blog-post"
+      game={gameNames['yumia'][lang]}
     >
       <ItemDetail item={item.data} lang={lang} card={true} />
     </MainLayout>
