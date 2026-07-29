@@ -6,7 +6,7 @@ import MainLayout from '@layouts/MainLayout.astro';
 
 const { page, isMain = false, tag = undefined } = Astro.props;
 const title = isMain
-  ? SITE_TITLE
+  ? undefined
   : tag !== undefined
     ? 'Archive: ' + tag
     : SITE_TITLE + ' Page ' + page.currentPage;

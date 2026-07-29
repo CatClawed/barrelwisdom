@@ -2,9 +2,12 @@ import { LanguageData } from "@app/localization/localization";
 
 export function parseUrl(pathname: string) {
   const parts = pathname.split('/').filter(Boolean);
-  const gameId = parts[0] || 'default';
+  const gameId = parts[0]
+    ? parts[0] === 'tags' || parts[0] === 'blog' || !isNaN(parts[0])
+      ? 'default' : parts[0]
+    : 'default';
   const lastPart = parts[parts.length - 1];
-  const supported = (LanguageData.languages as any)[gameId] ||
+  const supported = LanguageData.languages[gameId] ||
     LanguageData.languages.default;
 
   let lang = "en"

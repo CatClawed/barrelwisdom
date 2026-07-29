@@ -7,7 +7,7 @@ export interface NavItem {
   external?: boolean;
 }
 
-export const LanguageData = {
+export const LanguageData: Record<string, Record<string,string[]|string>> = {
     languages: {
       "totori":         ["en", "ja"],
       "escha":          ["en", "ja"],

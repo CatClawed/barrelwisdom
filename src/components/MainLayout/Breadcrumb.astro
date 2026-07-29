@@ -1,23 +1,57 @@
 ---
-import { getBreadcrumbs } from '@app/utils/breadcrumbs';
 import { parseUrl } from '@app/utils/navigation';
+import {
+  crumbDictionary,
+  defaultBreadcrumbs,
+} from '@app/localization/breadcrumbs';
+import { gameNames } from '@app/localization/game-names';
+
+interface Breadcrumb {
+  label: string;
+  url: string;
+}
 
 interface Props {
   title?: string; // can be set to undefined to turn off breadcrumbs
+  specificBreadcrumbs?: Breadcrumb[];
 }
 
-const { title } = Astro.props;
-const { lang } = parseUrl(Astro.url.pathname);
-const allCrumbs = getBreadcrumbs(Astro.url.pathname, lang);
+const { title, specificBreadcrumbs } = Astro.props;
 
-if (allCrumbs.length === 0) return null;
+const url = Astro.url.pathname;
+const parts = url.split('/').filter(Boolean);
+const isBlog = (parts[0] ?? '') === 'blog';
+const { lang, gameId } = parseUrl(url);
 
-const crumbs = allCrumbs.filter((f) => f.label !== '' && f.label !== title);
-const current = title || allCrumbs[allCrumbs.length - 1].label;
+function getBreadcrumbs() {
+  const gameCrumb: Breadcrumb[] = [];
+  if (gameId !== 'default') {
+    let langCode = defaultBreadcrumbs[gameId][1] ? `/${lang}` : '';
+    gameCrumb.push({
+      label: (gameNames as any)[gameId][lang],
+      url: `/${gameId}/${defaultBreadcrumbs[gameId][0]}${langCode}`,
+    });
+  } else if (!isBlog) return [];
+
+  let baseUrl = `/${gameId}`;
+
+  for (let i = 1; i < parts.length - 1; i++) {
+    baseUrl = `${baseUrl}/${parts[i]}`;
+    let label = crumbDictionary[parts[i]]?.[lang];
+    if (label) gameCrumb.push({ label, url: `${baseUrl}/${lang}` });
+  }
+  return gameCrumb;
+}
+
+const crumbs: Breadcrumb[] =
+  specificBreadcrumbs ??
+  getBreadcrumbs().filter((f) => f.label !== '' && f.label !== title);
+if (!isBlog && gameId === 'default') return;
+const current = title || crumbs[crumbs.length - 1].label;
 ---
 
 {
-  title !== undefined && (
+  (title !== undefined || isBlog) && (
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">

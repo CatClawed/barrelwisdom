@@ -1,26 +1,27 @@
 ---
 import '@styles/global.scss';
 import { SITE_TITLE, SITE_DESCRIPTION } from '@app/consts';
+import { parseUrl } from '@app/utils/navigation';
+import { gameNames } from '@app/localization/game-names';
 
 interface Props {
   title: string;
   description: string;
   image?: string;
-  game?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const { lang, gameId } = parseUrl(Astro.url.pathname);
 
 const {
   title,
   description = SITE_DESCRIPTION,
   image = '/media/blog/placeholder.webp',
-  game,
 } = Astro.props;
 
 const metaTitle = title
-  ? game
-    ? `${title} | ${game} | ${SITE_TITLE}`
+  ? gameId !== 'default'
+    ? `${title} | ${gameNames[gameId][lang]} | ${SITE_TITLE}`
     : `${title} | ${SITE_TITLE}`
   : SITE_TITLE;
 ---
