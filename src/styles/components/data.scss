@@ -20,3 +20,27 @@
     object-fit: contain;
   }
 }
+
+.tbl {
+    width: 100%;
+    td,
+    th {
+        padding: 0.75rem;
+    }
+    td {
+        border-top: var(--table-border);
+    }
+
+}
+
+.table-item-data {
+    display: block;
+    width: fit-content;
+    margin-bottom: 0;
+
+    >tr,
+    span {
+        vertical-align: top;
+        padding-left: 0.5rem;
+    }
+}

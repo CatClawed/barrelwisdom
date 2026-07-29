@@ -13,8 +13,6 @@ function enhance(root: HTMLElement) {
     const panelWidth = panel.offsetWidth || parseInt(getComputedStyle(panel).maxWidth);
     const spaceRight = window.innerWidth - triggerRect.left;
 
-    console.log(spaceRight, panelWidth, triggerRect.left)
-
     panel.classList.toggle('popover-panel--left', spaceRight - 10 < panelWidth);
 
     document.addEventListener('click', onOutsideClick, { capture: true });

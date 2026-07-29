@@ -8,6 +8,10 @@
     background-image: var(--bg-card);
     box-shadow: 1px 2px 4px 1px grey;
     box-sizing: border-box;
-    overflow: hidden;
     min-width: 0;
   }
+.list-container {
+  .card {
+    overflow: hidden;
+  }
+}

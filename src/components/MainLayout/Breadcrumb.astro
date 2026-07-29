@@ -5,6 +5,7 @@ import {
   defaultBreadcrumbs,
 } from '@app/localization/breadcrumbs';
 import { gameNames } from '@app/localization/game-names';
+import { undefined } from 'astro:schema';
 
 interface Breadcrumb {
   label: string;
@@ -25,6 +26,7 @@ const { lang, gameId } = parseUrl(url);
 
 function getBreadcrumbs() {
   const gameCrumb: Breadcrumb[] = [];
+
   if (gameId !== 'default') {
     let langCode = defaultBreadcrumbs[gameId][1] ? `/${lang}` : '';
     gameCrumb.push({
@@ -43,6 +45,8 @@ function getBreadcrumbs() {
   return gameCrumb;
 }
 
+if (!isBlog && !defaultBreadcrumbs[gameId]) return;
+
 const crumbs: Breadcrumb[] =
   specificBreadcrumbs ??
   getBreadcrumbs().filter((f) => f.label !== '' && f.label !== title);
@@ -51,7 +55,7 @@ const current = title || crumbs[crumbs.length - 1].label;
 ---
 
 {
-  (title !== undefined || isBlog) && (
+  (title || isBlog) && (
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
