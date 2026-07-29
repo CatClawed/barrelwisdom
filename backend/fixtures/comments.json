@@ -1,0 +1,1310 @@
+[
+  {
+    "id": 1,
+    "created": "2022-12-24T16:55:56.186000+00:00",
+    "body": "The anime failed? Also thanks a lot for the review and the locations gudie! I loved this game a lot too, I havent really played a gust game besides sophie, and mk1-2 and iris3, but i defo plan to play sophie2 on release after br1 and tie, i shall look foreward to referencing yout resources then!",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "the-deep-dive-blue-reflection-second-light",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 4,
+    "created": "2022-12-24T17:09:11.046000+00:00",
+    "body": "My one peeve is when people do \"give headpats\" to people pulled in by Ryza but they feel the need to add \"They're the best games in the series period.\" Because they aren't... they really aren't...",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "on-recommending-games",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 5,
+    "created": "2022-12-24T17:10:00.519000+00:00",
+    "body": "If you get any problems with CSS and / or styling things, DM me on /r/Atelier Discord, I'm Doko#3635\n\nOr better yet, have a channel about technical on Discord?",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "barrel-wisdom-20-is-here",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 6,
+    "created": "2022-12-24T17:12:03.680000+00:00",
+    "body": "Some things to note on the PC DX versions (Mysterious, haven't tested others yet): - Graphic options are pointless. Decreasing graphic options won't increase your FPS at all. - Default FXAA is horrible. I suggest disabling game FXAA and use Reshade SMAA instead. - For god knows reason, if you block the game from connecting to internet in Windows Firewall, the game will display white screen (freeze) for 5-10 secs everytime you boot it up. - KB&M is kinda playable but feels very, very awkward. Controller is strongly recommended.",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "atelier-series-guide",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 7,
+    "created": "2022-12-24T17:13:08.989000+00:00",
+    "body": "Great resource, thank you for making it. I just got a Switch so I am finally going to jump in to this series, and keep referring to this guide if I like it. There's two things I'd like to see, though. Which games are available physically? I really only play physical games and I have to go back and forth with PriceCharting to figure out which are available. Metascores would be nice too, I am not taking a chance on a 70 when a few of these got at least an 80.",
+    "approved": true,
+    "author": "M",
+    "parent_id": null,
+    "blog": {
+      "slug": "atelier-series-guide",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 8,
+    "created": "2022-12-24T17:14:12.843000+00:00",
+    "body": "I guess I'm not sure what you mean, I thought Ryza's reputation was just that her character design is sexy, which it is. If people think it's a heavy fanservice game they might be disappointed I suppose. I guess I just think that having that good of a design, along with other great designs like Lila's swimsuit skin, is fanservice enough itself to keep them mostly satisfied. Even if doesn't go as hard as something like Senran Kagura or Moero or others like that. This is mostly a tangent though, thanks very much for the guide, as soon as I get time (and after I play Sophie 2 most likely) it helped me decide that I want to go back and try the Arland series next.",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "atelier-series-guide",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 9,
+    "created": "2022-12-24T17:14:43.395000+00:00",
+    "body": "I really like your style of writing. Will probably try A1..then jump to Iris1 or Mana Khemia if I'm not having a ton of fun.\n\n\"Where should I go next? Pick the oldest game you can stomach and go forward from there. If you just want someone to pick for you, Dusk.\"\n\nmade me laugh",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "atelier-series-guide",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 10,
+    "created": "2022-12-24T17:15:03.651000+00:00",
+    "body": "Why avoid Vita? Arland/Dusk Vita games ran just fine for me.",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "atelier-series-guide",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 11,
+    "created": "2022-12-24T17:21:36.725000+00:00",
+    "body": "Metascore is not an appreciable indicator of how much the average person will like these games; they're mostly 70 range, not high budget, and fairly niche.\n\nEverything has a physical copy except Vita games (except Escha & Logy and Shallie), Ryza 2 PS5, and Arland DX. For Dusk DX and Mysterious DX these copies are limited to Switch.",
+    "approved": true,
+    "author": "Curry",
+    "parent_id": 7,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 12,
+    "created": "2022-12-24T17:21:54.062000+00:00",
+    "body": "During the Ryza explosion, I have seen some people think Atelier was more adult oriented. People see the porn and expect more from the games than there is, and the horny crowd the porn led in furthered that reputation. Then there's stuff like the 'sexual content' tag that's on Steam (which is user voted, but someone new can't know it's a meme tag). So, yes, the character herself is hot (I personally quite appreciate her and Klaudia both), but the game not as much as people might be led to believe.\n\nAs for where this is coming from: a lot of people come to Atelier for wholesome experiences, so I tell them what matches that more. Contrary to their expectations, Ryza is rather wholesome. Meanwhile Arland, contrary to its own reputation, is not all wholesome (it's mild as far as anime goes), and there are definitely people who get angry about its content. This is not the majority, but the people who are sensitive to these things appreciate the heads up.\n\nHope you enjoy Arland!",
+    "approved": true,
+    "author": "Curry",
+    "parent_id": 8,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 13,
+    "created": "2022-12-24T17:22:20.887000+00:00",
+    "body": "Firis Vita was the most unstable version, Shallie had significant framerate issues, there have been framerate/performance issues on other games as well, and it's simply hard to recommend over the modern equivalent, Switch. Vita is less of a problem for Arland, as I recall.",
+    "approved": true,
+    "author": "Curry",
+    "parent_id": 10,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 14,
+    "created": "2022-12-24T17:23:54.638000+00:00",
+    "body": "Yeah, they cancelled the bluray release which is basically death for an anime. Japan's model is basically that they sell relatively few copies of an anime across multiple discs. Compared to western releases this is a lot of discs and a lot of money, but it doesn't actually take a ton of people to print anime (we're talking less than a thousand, I believe).",
+    "approved": true,
+    "author": "Curry",
+    "parent_id": 1,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 15,
+    "created": "2022-12-24T17:24:14.996000+00:00",
+    "body": "I never knew how much I needed to read something like these to articulate my feelings into words. Bless this entire thing and you.",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "the-deep-dive-blue-reflection-second-light",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 16,
+    "created": "2022-12-24T17:27:55.226000+00:00",
+    "body": "I'd argue whether it's best doesn't really matter. Better to let it go. Ryza really resonates with a greater audience, I don't really consider this a bad thing even if I wouldn't personally call it a top tier subseries.",
+    "approved": true,
+    "author": "Curry",
+    "parent_id": 4,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 17,
+    "created": "2022-12-24T17:28:22.745000+00:00",
+    "body": "Thank you for the offer but I'm all set for now.",
+    "approved": true,
+    "author": "Curry",
+    "parent_id": 5,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 18,
+    "created": "2022-12-24T17:28:58.009000+00:00",
+    "body": "Oh so that basically mean that less than 1k people pre-ordered the Blu-rays, and they decided that there wasn't enough people interested in the show? Oof Hope the game at least did better in sales.",
+    "approved": true,
+    "author": "",
+    "parent_id": 1,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 19,
+    "created": "2022-12-24T17:29:19.008000+00:00",
+    "body": "I feel like you're discrediting how much a good design can be inherent fanservice when it comes to Ryza lol. I get what you mean though, personally I'd like to see them lean into it.",
+    "approved": true,
+    "author": "",
+    "parent_id": 8,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 20,
+    "created": "2022-12-24T17:46:11.212000+00:00",
+    "body": "I'm not discrediting so much as people are overstating. Ryza has a very undeserved reputation.",
+    "approved": true,
+    "author": "Curry",
+    "parent_id": 8,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 21,
+    "created": "2023-01-04T19:29:45.568000+00:00",
+    "body": "This is a really thorough and comprehensive guide! Thank you, I appreciate it greatly",
+    "approved": true,
+    "author": "Anonymous",
+    "parent_id": null,
+    "blog": {
+      "slug": "atelier-series-guide",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 22,
+    "created": "2023-01-19T07:27:44.303000+00:00",
+    "body": "The problem with using Metascores (at this time of writing) as the basis for this franchise is how reviewers don't really set themselves with the gameplay mechanics the games show off— especially with crafting. They would only mention vague words about how they think about the crafting systems an entry provides but never go into detail on what sets it apart from other JRPGs so it always ends up with people judging the games with comparisons towards unrelated JRPGs. There is one persistent problem with Atelier games before Ryza: and it's how the tutorials are always lacking explanation towards mechanics which leads to players having to experiment with what they're playing and asking questions online on how the game works.",
+    "approved": true,
+    "author": "",
+    "parent_id": 7,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 23,
+    "created": "2023-01-19T07:30:36.571000+00:00",
+    "body": "Are the Dusk games the only ones that don't have the cute puni? Did they replace it with something else?",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "atelier-series-guide",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 24,
+    "created": "2023-01-19T19:52:12.798000+00:00",
+    "body": "They have slags instead. I always thought the little ones were cute.",
+    "approved": true,
+    "author": "Curry",
+    "parent_id": 23,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 25,
+    "created": "2023-02-09T01:05:24.710000+00:00",
+    "body": "Very nice write up. I played this series in my teens. I started with Atelier Iris 1 up to 3 and eventually Mana Kemia 1 and 2. I really enjoyed all of them and I'm now looking forward to playing all the other titles. I already purchased all the Atelier series I can find on Steam but I can't find the time to play any of them, lol.",
+    "approved": true,
+    "author": "MJ",
+    "parent_id": null,
+    "blog": {
+      "slug": "atelier-series-guide",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 26,
+    "created": "2023-02-15T22:17:28.097000+00:00",
+    "body": "shop items change as story progresses, so some accessories are missable. These accessories come with 2 blank effect slots, which are optional for ultimate building.",
+    "approved": true,
+    "author": "db",
+    "parent_id": null,
+    "blog": {
+      "slug": "faq",
+      "section_slug": "ryza2"
+    }
+  },
+  {
+    "id": 27,
+    "created": "2023-03-04T04:46:46.545000+00:00",
+    "body": "Nice writeup!  I agree with a lot of what you said.  I've only played Arland and Dusk so far (not Lulua yet), I've been kinda scared to go further but your writeup has me reconsidering.  Ayesha is my favorite but Dusk trilogy as a whole feels very disconnected from one another.  Arland was so cohesive that Dusk felt jarring when hopping from one to the other.  \n\nAlso, am I the only one that enjoyed the time management mechanic?  I feel like having \"time looking over my back\" drove me to make progress and spent my time wisely.  E&L in comparison had quite a few boring parts due to how relaxed it is and it took me 3 tries to finish Shallie even though starting from \"New Rorona\" all the way to E&L, I didn't stop and plat each one on the PS3.  I don't know, the lack of time restriction and the ability to just go out and get whatever you want without any limitations somehow killed my motivation.  It's definitely not about the laid back story too as I loved the Arland trilogy (New Rorona was what hooked me into the series after all and even though it had similar structure to E&L, I never once felt \"bored\" playing it).  Even Meruru which I felt had the weakest story out of the Arland trilogy (I feel that Totori had the best story while Rorona had the best cast/characters in the trilogy) was enjoyable due to how connected it was with Rorona and Totori.\n\nNow I'm on the Switch and have all the games already, but finding it hard to start Sophie as I'm scared of running into the same motivation issue with Shallie.  Do you think it'd be better to dip back into the game with Lulua first since I am already familiar with Arland or should I try to keep trucking with the mysterious trilogy?",
+    "approved": true,
+    "author": "Ein",
+    "parent_id": null,
+    "blog": {
+      "slug": "atelier-series-guide",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 28,
+    "created": "2023-03-04T05:26:23.051000+00:00",
+    "body": "Just FYI, Shiho and Kirara are from the mobile game, Blue Reflection Sun.  There's clear references in Tie/Second Light about how Shiho was in a team of reflectors with a few girls including Kirara and also some scenes where they referenced a character that did not have reflector power (referring to the protagonist/player of Sun).",
+    "approved": true,
+    "author": "Ein",
+    "parent_id": null,
+    "blog": {
+      "slug": "the-deep-dive-blue-reflection-second-light",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 30,
+    "created": "2023-03-06T06:54:19.288000+00:00",
+    "body": "Lulua sort of has its own identity, but should give you a decent feel for whether the other games will be for you; it definitely was created in a more Mysterious mindset.",
+    "approved": true,
+    "author": "Curry",
+    "parent_id": 27,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 34,
+    "created": "2023-03-30T19:50:06.056000+00:00",
+    "body": "This trophy it hard to understand this you mean all role or just one of each type role \nI mean 1.supporter 2. High supporter or 1 supporter/high supporter(anyone) 2.attacker/hi attacker .....",
+    "approved": true,
+    "author": "RRR",
+    "parent_id": null,
+    "blog": {
+      "slug": "how-to-get-the-being-versatile-achievement",
+      "section_slug": "ryza3"
+    }
+  },
+  {
+    "id": 37,
+    "created": "2023-04-01T02:59:38.089000+00:00",
+    "body": "Each role equipped once, not even at the same time.",
+    "approved": true,
+    "author": "Curry",
+    "parent_id": 34,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 38,
+    "created": "2023-04-03T00:40:35.223000+00:00",
+    "body": "Recipe morph is a good way to use other material with the trait. Kark Isles -> Erupting hill with a rank 1 hammer gives lots of amatite ore. Just remember to use a different amatite ore to morph, then put the one with swordmaster in",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "how-to-get-the-ultimate-swordsmanship-achievement",
+      "section_slug": "ryza3"
+    }
+  },
+  {
+    "id": 39,
+    "created": "2023-04-03T06:55:56.624000+00:00",
+    "body": "I appreciate this and all your other guides so much. Seriously you have no idea. I’m so glad someone’s making these guides for a game which is quite obscure and under appreciated in the West. Thanks!",
+    "approved": true,
+    "author": "Miles",
+    "parent_id": null,
+    "blog": {
+      "slug": "how-to-get-the-ultimate-swordsmanship-achievement",
+      "section_slug": "ryza3"
+    }
+  },
+  {
+    "id": 42,
+    "created": "2023-04-08T15:12:49.672000+00:00",
+    "body": "Thanks for the guide! The Radiant Plate recipe is found in Kurken area, not in Orim. Don't waste your super rare keys there if you don't get any other recipes.",
+    "approved": true,
+    "author": "Chris",
+    "parent_id": null,
+    "blog": {
+      "slug": "how-to-get-the-ultimate-swordsmanship-achievement",
+      "section_slug": "ryza3"
+    }
+  },
+  {
+    "id": 43,
+    "created": "2023-04-08T21:26:11.013000+00:00",
+    "body": "Oh heck my bad",
+    "approved": true,
+    "author": "Curry",
+    "parent_id": 42,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 44,
+    "created": "2023-04-08T21:27:49.225000+00:00",
+    "body": "You meant link morph, but this is correct yes.",
+    "approved": true,
+    "author": "Curry",
+    "parent_id": 38,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 51,
+    "created": "2023-04-16T10:00:54.695000+00:00",
+    "body": "Howdy, I just wanted to say thank you. Barrel Wisdom has been the website to use when I've gone through Sophie's trilogy and Ryza's, so you just having this page is greatly appreciated.",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "how-to-get-the-ultimate-swordsmanship-achievement",
+      "section_slug": "ryza3"
+    }
+  },
+  {
+    "id": 55,
+    "created": "2023-04-21T03:25:09.991000+00:00",
+    "body": "I grew up with a DS and no home consoles, so Annie was actually my first Atelier game.  Looking back at it for what it is, in my opinion it is worthy of some discussion, if not on the level of the rest of the series.  As a game on weaker hardware, it's interesting to puzzle out what was intended design vs what was a design limitation.  Interestingly, though you primarily interact with the world through small, walkable environments, they all take up exactly one screen - no scrolling.  Gathering consists of mashing the 'A' button to collect resources from designated spots, with RNG playing a huge role.  The light business-sim component is a really neat diversion from the series' core mechanics.  However, some of the requirements for the True Ending are downright brutal with the time limit given, and it's easy to get locked out of things if you go in unaware.",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "atelier-series-guide",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 56,
+    "created": "2023-04-26T13:52:24.775000+00:00",
+    "body": "\"...Most of the time. Check your duplication/reduction costs before committing.\"\n\nThis is definitely true for weapons/armor. I tried adding Ultra Purity to a piece of armor. Duplication cost was 20k while reduction was around 9k.",
+    "approved": true,
+    "author": "duraz0rz",
+    "parent_id": null,
+    "blog": {
+      "slug": "how-to-get-infinite-gems",
+      "section_slug": "ryza3"
+    }
+  },
+  {
+    "id": 59,
+    "created": "2023-05-02T10:43:48.683000+00:00",
+    "body": "Personally, I farm magical super trait at Nemed Region -> Portta Hills -> Island Below the Cliff,\nWith Lv 1 Axe, Max Gathering effect, and only chopping for ancient branch. \nI felt that it is more efficient than farming the lantern fly on traveler's road.",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "how-to-get-the-ultimate-swordsmanship-achievement",
+      "section_slug": "ryza3"
+    }
+  },
+  {
+    "id": 61,
+    "created": "2023-05-09T17:55:41.968000+00:00",
+    "body": "\"Get Rich\" is only available as Lotte",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "chapter-6",
+      "section_slug": "shallie"
+    }
+  },
+  {
+    "id": 62,
+    "created": "2023-05-11T20:51:35.811000+00:00",
+    "body": "I can confirm that I have unlocked the trophy by making lower tier weapons. You do not need to make the highest tier weapons.\nJust make one sword with the icon for Tao, Lent and Bos (total 3) and turn them in.\nYou just need to make sure you have that icon and you’re good to go.",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "how-to-get-the-ultimate-swordsmanship-achievement",
+      "section_slug": "ryza3"
+    }
+  },
+  {
+    "id": 63,
+    "created": "2023-05-14T02:13:27.018000+00:00",
+    "body": "Thanks Bro.  You are awesome!",
+    "approved": true,
+    "author": "La sopa",
+    "parent_id": null,
+    "blog": {
+      "slug": "how-to-get-the-being-versatile-achievement",
+      "section_slug": "ryza3"
+    }
+  },
+  {
+    "id": 64,
+    "created": "2023-06-06T01:21:19.101000+00:00",
+    "body": "the 3rd way of getting the elixir is absent from the guide when comparing to the one nuked from other websites",
+    "approved": true,
+    "author": "chibihien",
+    "parent_id": null,
+    "blog": {
+      "slug": "ultimate-items",
+      "section_slug": "shallie"
+    }
+  },
+  {
+    "id": 65,
+    "created": "2023-06-25T22:45:28.824000+00:00",
+    "body": "I personally prefer an Operation Plan Board with Enhance Skill/Enhance Burst/DMG Absorb/Enhance Break, as Solle is more of a support character. The recipe: Operational Plan Board with 2 properties + Skill slot increase; Zettel with the 3rd property + skill slot increase; Medical Solution with Traditional Soul, PP frame max and skill slot increase; and the secret ingredient: a Fish Lord, which can be gathered in the DLC dungeon. Spam wind, and it's done!",
+    "approved": true,
+    "author": "Z Tetriminos",
+    "parent_id": null,
+    "blog": {
+      "slug": "ultimate-equipment",
+      "section_slug": "shallie"
+    }
+  },
+  {
+    "id": 68,
+    "created": "2023-08-04T11:41:29.400000+00:00",
+    "body": "Thanks for the Poison Cube strat. I was looking for good gem farming guide because I still want to face the last boss with full items but farming is difficult.",
+    "approved": true,
+    "author": "Jin-sama",
+    "parent_id": null,
+    "blog": {
+      "slug": "gem-farming",
+      "section_slug": "ryza"
+    }
+  },
+  {
+    "id": 70,
+    "created": "2023-09-25T00:05:19.773000+00:00",
+    "body": "Thank you so much for this!\n\nMana totally had me hooked by the description (I love school magic games that are well done and it sounds fantastic; sad it isn't ported to the switch tho)",
+    "approved": true,
+    "author": "AGer",
+    "parent_id": null,
+    "blog": {
+      "slug": "atelier-series-guide",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 72,
+    "created": "2023-10-03T05:31:18.105000+00:00",
+    "body": "For those who never experience JRPG or Jap ACG culture, watching a anime girl acorss a colorful open world seems strange enough to be a \"Japanese sexy travel\". But the point is the difference of narrative and character creation. when you enter the game at a very beginning(or even outside the game just suffering some NSFW  artworks), you would notcie the character external performance. And in fact the character desgin by artist トリダモノ is a random success, if you notcie the early design book. the huge legs is to depict farmer lives of Ryza. But the success of Ryza's character creation makes Gust and トリダモノ put more attention on her legs and butt. And this even leads a agitation of huge legs on Japanese anime industry. Yes, it is about \"protagonist and its marketing\". So no worder some lesser fans think Ryza is fanservice. But when we notice the Ryza game narrative, not just a design, we would find the Spiritual core of Ryza is totally a classial JRPG, which means some topics like youth, growth, parting, more like fairy tales for teens. In fact some early games of Atelier contains more \"adult oriented\" like bad ends or something. So Ryza game is anything but \"adult oriented\", and sexual content is unimaginable. someone mentions swimsuits in game, very good, in Japanese anime industry, swimsuit is a sercet contract between anime producer and fans, which means one episode of 13 episodes anime would be \"swimsuit eposode\".  you can call this fanservice, but it contains more than that. Back into games, another game of Gust Blue Reflection can explain more: you can make you character wear school swimsuit(スクール), but it does not Influence any narrative. the chosen of you character wearing is up to you, depends on your role play needs or you just want to treat yourself. But remember it is a sercet contract. You enjoy the anime industry, but you cannot stop thinking. And if you ask me Ryza is fanservice or not, I will say yes, or not(after all long and minute statement),but the analyse process is more important.\np.s. about the reputation and meme tags, I think every JRPG which attracts enough attention would be treated unfairly. Just like Tifa in FF7,  Xenoblade3 or something more. I won't say NSFW porn ruins them, I just think the new game players that attracted by artworks need more time to play more games and improve their aesthetic level, as we all have a young stage of JRPG or any other games.",
+    "approved": true,
+    "author": "",
+    "parent_id": 8,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 73,
+    "created": "2023-10-03T07:22:14.580000+00:00",
+    "body": "when mention Blue Reflection, it is a common to ignore Blue Reflection Sun for my friends, or defame it, for Blue Reflection Sun not only betrayed yuri lovers, but it destroyed the continuity of the narrative. You know what, they added too many fanservice sence. I heard they want to add 詩 into game. If Ray is just a mediocrity in business(someone mention BD sales? In Japanese anime industry, Blu-rays is the classical source of funds for anime. 3000 is the least limit to cover the anime making cost.However some anime will continue sell BD although their sales is lesser than 1000. ), Sun is a totally mammonish mobile game. I am quite disappointed for Blue Reflection Sun and Ray after a good game series. I mean I really like Tie QAQ",
+    "approved": true,
+    "author": "",
+    "parent_id": 28,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 75,
+    "created": "2023-11-05T13:05:02.531000+00:00",
+    "body": "Why should I avoid Vita? I can't see any problems with that.",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "atelier-series-guide",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 76,
+    "created": "2023-11-16T04:08:03.835000+00:00",
+    "body": "I basically started with Annie... \n\nStrictly speaking, I started with Iris 2, because a friend worked on it and said it was good, but I bounced off it completely (my college roommate got really into it, though). Then later I got Annie and thought it was really fun, cute, and charming. I had a ball hanging out with that cast of dorks. Then I picked up Escha and Logy and while I enjoyed it, the relaxed time limit did leave me at loose ends a lot of the time. But both of those made me get the Arland Trilogy on Switch and I had a great time with those. So yeah, Annie might be a lesser game, but I'm still gonna wave a flag for it.",
+    "approved": true,
+    "author": "MarsDragon",
+    "parent_id": null,
+    "blog": {
+      "slug": "atelier-series-guide",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 78,
+    "created": "2023-12-24T08:14:14.089000+00:00",
+    "body": "I will die on this hill: Annie is such an underrated game. All lovable and hilarious characters. The quirkiest and least cliche of its kind and a great non mainline entry.",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "atelier-series-guide",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 79,
+    "created": "2024-01-04T05:30:02.247000+00:00",
+    "body": "On the subject of writers, what happened to the translation quality in Escha & Logy. A lot of dialogue is either mistranslated or omitted from the Japanese audio... I didn't notice anything strange like this when I played Ayesha, so it's kind of jarring",
+    "approved": true,
+    "author": "Newbie",
+    "parent_id": null,
+    "blog": {
+      "slug": "the-many-many-writers-of-gust",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 80,
+    "created": "2024-01-10T03:26:25.762000+00:00",
+    "body": "Heads up its called \"Mighty Master\" in the modern English Ryza 3 not \"Mighty Lord\" , idk what this guide is saying.",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "how-to-get-the-being-versatile-achievement",
+      "section_slug": "ryza3"
+    }
+  },
+  {
+    "id": 82,
+    "created": "2024-04-15T12:43:16.870000+00:00",
+    "body": "i got demon soul at herb garden",
+    "approved": true,
+    "author": "Vinsen",
+    "parent_id": null,
+    "blog": {
+      "slug": "ultimate-item-guide",
+      "section_slug": "escha"
+    }
+  },
+  {
+    "id": 83,
+    "created": "2024-05-10T07:40:39.531000+00:00",
+    "body": "Thank you for your hard work and dedication.",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "donate",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 85,
+    "created": "2024-05-29T22:14:29.890000+00:00",
+    "body": "Serious performance issues.  Firis is basically unplayable (even the original console release of Firis barely worked though)",
+    "approved": true,
+    "author": "",
+    "parent_id": 75,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 86,
+    "created": "2024-07-05T00:53:00.845000+00:00",
+    "body": "Yeah, I quit the Atelier game with Boltrend a long time ago because they double charged me and refused to refund me. Google also refused to refund me because Boltrend had already received the funds. I'm not playing the new mobage because of that.",
+    "approved": true,
+    "author": "Nol",
+    "parent_id": null,
+    "blog": {
+      "slug": "charging-for-refunds-boltrend-s-mistreatment-of-atelier-online",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 87,
+    "created": "2024-08-13T17:31:44.641000+00:00",
+    "body": "Really fantastic assessment of the game. I was trying to figure out how to accurately describe how I felt about this game and this review really did it.",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "the-deep-dive-blue-reflection-second-light",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 88,
+    "created": "2024-08-16T00:38:52.773000+00:00",
+    "body": "Seems to be outdated for DX version Elixir, effect values have changed, MP Recovery XL is now impossible without sacrificing Recover KO L. Can get it only with MP recovery L. Here's an updated guide for getting best effects in DX\n\nElixir\nSuper Pure Water - 1property / traditional soul / skill frame increase\nCost Down 0\nDouble Skill\nEquip Frame-\nNumber/Count Frame+\n\nTravel Gate - 2 properties / skill frame increase\nChain Effect\n\nDunkeiheit\nAbsorb Attribute\n\nNectar Spiritwater - traditional soul / skill frame increase / elemental wind\nadd earth\nskill frame+",
+    "approved": true,
+    "author": "jrmtsx",
+    "parent_id": null,
+    "blog": {
+      "slug": "ultimate-items",
+      "section_slug": "shallie"
+    }
+  },
+  {
+    "id": 89,
+    "created": "2024-08-19T15:47:48.090000+00:00",
+    "body": "Although I don’t have the Ao outfit either despite having Blue Reflection 2 save data on my PC. I’m really not sure how you unlock that outfit. I don’t even have the Sophie DX, Firis DX or Lydie and Suelle DX outfits either despite having save data for those so I don’t know how to unlock more outfits.",
+    "approved": true,
+    "author": "Nero",
+    "parent_id": null,
+    "blog": {
+      "slug": "atelier-series-guide",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 93,
+    "created": "2024-09-28T04:59:09.572000+00:00",
+    "body": "Playing on Plus and I had Amazing Breaker instead of Red Skin at the Searing Wastes.",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "assignment-8",
+      "section_slug": "escha"
+    }
+  },
+  {
+    "id": 94,
+    "created": "2024-09-30T22:33:43.111000+00:00",
+    "body": "So, what's up with the Resleriana title in the left panel? Is it also part of the series?",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "atelier-series-guide",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 95,
+    "created": "2024-10-01T07:40:22.325000+00:00",
+    "body": "It is in fact the 25th game of the series, but it's a gacha so whether you pick that up entirely depends on your feelings about that. I enjoy it personally, the original characters are quite charming!",
+    "approved": true,
+    "author": "Curry",
+    "parent_id": 94,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 96,
+    "created": "2024-10-12T13:48:06.822000+00:00",
+    "body": "About Motion Intensity?\nNot just jiggle physics only, all physics has experienced (Hair & Costume) after test record videos\nduring Resna run away from insect/bug at chapter 13\nI actual used mobile, i did setting highest quality then low fps, it's happened...\n\n\nThis is my first ask on comment.\n(¬`‸´¬)",
+    "approved": true,
+    "author": "Cindy Chan",
+    "parent_id": null,
+    "blog": {
+      "slug": "the-newbie-s-guide-to-resleriana",
+      "section_slug": "resleri"
+    }
+  },
+  {
+    "id": 97,
+    "created": "2024-11-18T16:33:09.513000+00:00",
+    "body": "Interesting. I know how \"fantasy names based on Japanese katakana\" often work but I never looked at her original kana spelling and always assumed its pronounced like ヴィ・オ・ラ・テ (those silent ends in names often trips me up!). Thanks for the informative article!",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "viorate-not-pronounced-how-you-think",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 98,
+    "created": "2024-11-21T10:55:19.292000+00:00",
+    "body": "I started with Ryza 1-3 and really love them. Then play Sophie 1 for an hour but didn't like it. Skipped to Sophie 2 and love it. Went back to Firis for story and couldn't help but asked for refund because of \"limited time but no direction given\" design choice.\n\nHonestly for experienced JRPG players that want to get into the series there's no reason not to start with Ryza. It literally made for such an audience. All the arguments I found when I was choosing an entry to the series that say Ryza is not the best Atelier game felt more like \"back in the day there is no electricity so modern day is so bad\" kind of arguments. Ryza trilogy may not be the best Atelier games, but they are by far the best video games in all Atelier series. Sophie 2 may be a better video game maybe but playing it first give incentive to play Sophie 1 and Firis. And there's a lot bigger chance that people will not like them than Ryza.",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "on-recommending-games",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 102,
+    "created": "2024-12-28T22:55:57.641000+00:00",
+    "body": "Are you considering adding the locations of the Traveler's Memoirs from the DLC areas at some point?  I am still missing two from the Rosca Island area.",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "traveler-s-memoir-guide-rumor-chasing-adventurer-achievement",
+      "section_slug": "ryza3"
+    }
+  },
+  {
+    "id": 103,
+    "created": "2025-01-16T10:22:32.333000+00:00",
+    "body": "Thank you, finding well written guides on this game seems rare. And it is up to date!",
+    "approved": true,
+    "author": "Romen",
+    "parent_id": null,
+    "blog": {
+      "slug": "the-newbie-s-guide-to-resleriana",
+      "section_slug": "resleri"
+    }
+  },
+  {
+    "id": 104,
+    "created": "2025-01-19T20:10:51.848000+00:00",
+    "body": "Just get High Price from elsewhere on Stera",
+    "approved": true,
+    "author": "",
+    "parent_id": 61,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 105,
+    "created": "2025-02-20T04:06:35.242000+00:00",
+    "body": "Whats that about using a controller reducing the cpu usage? Is that a common thing in other games as well? Never heard of that",
+    "approved": true,
+    "author": "Paimon",
+    "parent_id": null,
+    "blog": {
+      "slug": "atelier-series-guide",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 107,
+    "created": "2025-02-28T07:11:07.592000+00:00",
+    "body": "Sorry for my bad english, my mother language is Spanish. As an Atelier fan i really loved Resleri design and was ready to depart on an adventure in her world. I have been an Atelier fan since the first release of Rorona. \nAS an Atelier fan and as a gamer who enjoys gatcha games, i felt Resleriana had potential but felt like a \"meh\" game without any real identity. Maybe i can't really explain myself using complex term but usually Atelier games have some feeling that makes them unique, small details in the art style, designs of the characters and even the UI, sadly Resleriana had that on the characters but sadly not in the UI. \nWhen a player sees a boring dull User Interface that feels cheap, usually starts to boring a lot and that happend to me, even before to see the auto-gathering, the bad-unexistent dungeon explotarion and the boring battle system, the sole UI was enough to make me feel that im in a \"Cheap\" game. \nI forced Myself a lot to play Resleriana cause everytime she shines in the story, i loved her, for real y like her as a character but her game didn't helped. \nTo this, we add that, even in gatcha terms, the game was so freaking predatory and they tryed so hard to promote Ryza to atract a mayor audience.\n6 hours were enough for me and then i unninstalled the game, i even had more fun with Atelier Online and im quite sad cause this is the 3rd try they do to make a \"celebration\" of the whole Atelier franchise. Nelke was a really bad management game that felt like a smarphone game, Atelier Online did a lot of mistakes and now Resleriana that has some really REALLY good 3D models but the gameplay is so bad and the censorship on some designs is really questionable (i like the fanservice the franchise has, is small but with good taste, some designs look weird being censored like Patcha and everyone having black spats feels weird, i mean... at least give them other kind of underwear to avoid pantyshots) make me stay away from the game. \n\nAnd, like i said, i even play some of the worst gatchas on the market (FateGrand Order, grablue Fantasy) and have fun with them, something that Resleriana couldn't do. \nI hope we see a REAL Resleriana mainline game in the future",
+    "approved": true,
+    "author": "Luis",
+    "parent_id": null,
+    "blog": {
+      "slug": "resleriana-what-happened",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 108,
+    "created": "2025-02-28T15:53:29.219000+00:00",
+    "body": "I only played this for the first 3-4 months, and while I loved it, it was too hardcore for someone already invested in effing Grindblue. You've basically nailed everything I found wrong with the game out the gate, and it's almost horrifying to realize it got worse, Except KT are nothing if not consistent.\nGreat article.",
+    "approved": true,
+    "author": "Absurd",
+    "parent_id": null,
+    "blog": {
+      "slug": "resleriana-what-happened",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 109,
+    "created": "2025-02-28T19:04:03.435000+00:00",
+    "body": "Cool article, very detailed, good job, mate.",
+    "approved": true,
+    "author": "Nol",
+    "parent_id": null,
+    "blog": {
+      "slug": "resleriana-what-happened",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 111,
+    "created": "2025-03-01T21:10:48.686000+00:00",
+    "body": "It's one of the most known and widespread issues in Atelier games, could be an issue with KT's internal engine.",
+    "approved": true,
+    "author": "Curry",
+    "parent_id": 105,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 112,
+    "created": "2025-03-03T17:12:25.875000+00:00",
+    "body": "I consider this one to be the most overrated subseries (in the West) that Gust has produced, to the point it gets more praise than games that surpass it in several categories.",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "revisiting-my-first-atelier-mana-khemia",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 113,
+    "created": "2025-03-03T19:35:15.120000+00:00",
+    "body": "I will never forgive the mobile game.\n\nBut also, great review, Second Light is honestly my favorite of GUSTs games as well.",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "the-deep-dive-blue-reflection-second-light",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 114,
+    "created": "2025-03-04T22:10:17.049000+00:00",
+    "body": "How do you make Philosopher's Stone, to make the Rarity Up - 2 Keys?",
+    "approved": true,
+    "author": "Ladybug",
+    "parent_id": null,
+    "blog": {
+      "slug": "how-to-get-the-being-versatile-achievement",
+      "section_slug": "ryza3"
+    }
+  },
+  {
+    "id": 115,
+    "created": "2025-03-07T04:24:22.037000+00:00",
+    "body": "Will we have the translated wiki keep updating? In-context translation will be accurate and more than helpful, as shown in https://www.reddit.com/r/Atelier_Resleriana/comments/1izdulf/localization_plugin_story/",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "resleriana-what-happened",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 116,
+    "created": "2025-03-11T17:39:27.469000+00:00",
+    "body": "I loved all the characters, it was so good to see old characters in 3d, but EoS of global and recent state of JP server is really bad. I am just sick of this.",
+    "approved": true,
+    "author": "Sad",
+    "parent_id": null,
+    "blog": {
+      "slug": "resleriana-what-happened",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 117,
+    "created": "2025-03-19T04:47:34.743000+00:00",
+    "body": "Save for Yumia?",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "atelier-pc-saves",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 118,
+    "created": "2025-03-19T18:52:20.483000+00:00",
+    "body": "Thank you for the detailed write-up! I also hopped on the Resleriana train when it first launched in JP and I was stunned by the terrific character designs and animations that were in this \"mobile game\". Unfortunately, my grasp of Japanese is rather elementary so there were major hurdles in enjoying the story or fully understanding the complexities of team-building. Additionally, the crafting system did not seem as fun as any of the other iterations I had tried in other Atelier games that I have played - I guess I just was not the target audience so I dropped the game after being a very casual player for about 3-4 months.\n\nIn my eyes, KT has always been rather heavy-handed in its DLC practices so I kept my financial investment in this gacha game to a minimum (given that gacha games are already notorious for scary monetization). Reading your analysis of the horrors of the Memoria, speed tuning, and whale competitors made me realize just how devious these systems can get if they really want to squeeze every last dime for their audience. I really hope they bring back Resna and the rest of the cast into another game or series because this iteration and the systems in it don't do these characters justice.",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "resleriana-what-happened",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 119,
+    "created": "2025-03-21T02:20:28.387000+00:00",
+    "body": "got it",
+    "approved": true,
+    "author": "Curry",
+    "parent_id": 117,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 120,
+    "created": "2025-03-22T00:55:19.239000+00:00",
+    "body": "I really liked Resleri and this coming from someone who stays away from gacha or online-only games waiting to hit EOS. It had what I would consider the best 3D anime girls outside of GFL2, the animations were superb, voice acting was amazing and the overall cuteness and energy was off the charts. I even have the full soundtrack! Once you got the combat right, had a solid party; you could enter a comfy flow state while watching your cute girls doing cute things. It felt like a full Atelier Mahou Shojou game, a blend of two things I love dearly.\n \nDespite this, I hated it a lot. I knew one day this would hit EOS and it's gone forever, never to be experienced again. I played for a couple months, had a ton of fun, but then as expected; EOS hit. \nI would've paid full price for Resleri if it meant eventually getting access to all characters, and having it playable locally without worrying about the dreaded EOS. I would've paid for DLC content too! But spending the thousands it would require to get everything I wanted is just not something I do for a game. \n\nBut alas, it's gone for good globally, and I'm finding it really hard to get the energy to move over to JP and start all over again after losing the characters I loved and grinded so hard for. I hope with the upcoming resleri game, and subsequent ones, they continue the artstyle, animations, aesthetic and energy. They seriously nailed it with the gacha.",
+    "approved": true,
+    "author": "Awakened Resna's Husband",
+    "parent_id": null,
+    "blog": {
+      "slug": "resleriana-what-happened",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 121,
+    "created": "2025-03-23T12:50:07.431000+00:00",
+    "body": "Blue reflection is for the girls i love it smmm. I need another game like this FAWWK THE MOBILE GAME it sucked. Honestly tho, this game is so much to me i played during summer break and that made it all the more special!! ^^",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "the-deep-dive-blue-reflection-second-light",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 124,
+    "created": "2025-03-27T07:45:39.104000+00:00",
+    "body": "Clicking the image you get the map for the treasure troves instead",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "memory-vial-locations",
+      "section_slug": "yumia"
+    }
+  },
+  {
+    "id": 125,
+    "created": "2025-03-28T11:32:59.489000+00:00",
+    "body": "I was playing and loving Resna's story in global from Day 1 til now (hey, at time of writing, my GLResna is still open in photo mode as I'm photoing Sophie as they can't boot me out as long as I don't quit Photo Mode!)\nI agree with everything you say as a 400+ hours player. The story is REAL good but the other stuffs are nightmare.\n\nSome points I hate from the GLResna end:\n1) They could have offered an account migration to JP servers. They never did.\n2) Theh could have given more QoLs to try every character you want or love as the server is ending. They never did (No, making ads 10 times a day with a guaranteed min 30 gems doesn't fix your trash gacha rates)\n3) They had the gall to end the server BEFORE the climax of first big arc (Chapter 21-1) while the first arc ends at Ch22. Such nasty decision to people who genuinely love the story like me. No, I'm not going to go to JP just to redo all my hard grind.\n\nSad the game is like this. I love the 3D renditions of old chatacters. I love Sophie's all 3 variants, and the unreleased Sophie2. I love Klaudia's armpits. I love Rorona and all her variants. I love Resna and especially her XMas variant. I love Flocke, Heidi, and the other goofs of Lantarna too. I love almost everyone. Sucks I never even tried any of them because of the predatory gachas.",
+    "approved": true,
+    "author": "FurieRaey",
+    "parent_id": null,
+    "blog": {
+      "slug": "resleriana-what-happened",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 126,
+    "created": "2025-03-29T20:05:13.847000+00:00",
+    "body": "Oops!",
+    "approved": true,
+    "author": "Curry",
+    "parent_id": 124,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 127,
+    "created": "2025-04-02T00:15:14.501000+00:00",
+    "body": "\"You wanna start with Yumia? Start with Yumia\" is actually advice I would *not* proffer to newcomers to the franchise. The crafting system, relative to any other Atelier game, is so far removed from any others than it can barely be called such. The crafting and synthesis is the defining feature of the games around which all else is built; Yumia has essentially ripped out the core of what makes an Atelier game an Atelier game, because the crafting system is so simplified and streamlined that it's essentially been destroyed. It's by far the weakest entry and it's not representative of what Atelier is supposed to be. By suggesting Yumia to someone who's never played Atelier, there's a pretty elevated risk of said newcomer distinctly getting the wrong impression about what Atelier is, which could be bad twice over: first they may think that Atelier is \"just another\" JRPG franchise and be turned off if that isn't what they're looking for, *or* they think \"hey this is my jam!\" and then play another Atelier game and be turned off by the crafting emphasis.\n\nHave you played it? I would be pretty worried about someone getting the wrong idea about Atelier if Yumia is their first impression and would suggest literally anything else.",
+    "approved": true,
+    "author": "Kaz",
+    "parent_id": null,
+    "blog": {
+      "slug": "atelier-series-guide",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 128,
+    "created": "2025-04-06T16:26:57.116000+00:00",
+    "body": "\"Have you played it?\" I only poured over two weeks of my life into making content for it. What an outrageous question.\n\nNever turn people away from a game they're interested in. People new to the series are not bound by past ideas, it literally does not matter what the series before Yumia was to the people who are interested in playing it. Further, you cannot say that Arland, Dusk, Mysterious, and Ryza are unified in what they are and who they appeal to. Let people pick the games they think they will enjoy.",
+    "approved": true,
+    "author": "Curry",
+    "parent_id": 127,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 129,
+    "created": "2025-04-16T06:00:29.468000+00:00",
+    "body": "Uhh so i wanna see if i'd like the series, i like the company cause one of my favorite series is Monster Rancher...ive been waiting for a sale and leaning into Ryza cause its highly rated and its really cheap, 15 bucks...and you described it as more jrpg oriented which is what i like and honestly thought the games were ?_? ...but then i read your comment about Sophie and you mention that it has the better alchemy system. That mechanic, in general across the games, is something im super interested about because Koei Tecmo does a great job at making \"loops\" at least in my opinion like they do with Monster Rancher. Its a simple game but the loop of raising your monster in a limited amount of time and managing and fighting is done so well its addicting. Im willing to guess that they make alchemy in a just as addicting \"loop\". So not to write too much but im a bit stuck now...i want a jrpg but also want a good alchemy system thats addicting...would Ryza be enough...or is there a game that has both? I can prob afford 1 to 3 games tomorrow so i feel like i can either branch out or even get a full trilogy...plz help lol",
+    "approved": true,
+    "author": "OmgitsonSALE!",
+    "parent_id": 127,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 131,
+    "created": "2025-04-26T00:22:27.597000+00:00",
+    "body": "I think Ryza is enough to start with, yeah. Sophie is more complex, but it's not like Ryza is a lacking experience.",
+    "approved": true,
+    "author": "Curry",
+    "parent_id": 127,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 133,
+    "created": "2025-04-29T12:53:34.224000+00:00",
+    "body": "I'm pretty sure that Ryza got a localization adjustment at some point between this guide and your comment that changed certain words like \"Lord\" to \"Master\" and several other things.",
+    "approved": true,
+    "author": "",
+    "parent_id": 80,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 135,
+    "created": "2025-05-04T17:27:11.420000+00:00",
+    "body": "A fully charged swing with the Scythe Axe on one of the trees in Limewick Hill gives you 35k gems worth of materials if you prefer chopping trees instead of doing alchemy.",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "gem-farming",
+      "section_slug": "ryza"
+    }
+  },
+  {
+    "id": 136,
+    "created": "2025-05-05T23:11:30.887000+00:00",
+    "body": "Sad to say being a Gacha game means you need to make money. And for me I never spent any of it and enjoyed the story, usually logging on once a day to knock off all the grinding. Was pretty excited about the new training option even if I couldn't auto-clear it right away. And then the game says it's ending service, here's your pity gems if you bought a pass, have a great day. Suppose people outside JP just weren't spending enough money for them to justify translation costs. Atelier stories was never about the cash though, excluding the literal money endings in some.",
+    "approved": true,
+    "author": "Tric",
+    "parent_id": null,
+    "blog": {
+      "slug": "resleriana-what-happened",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 138,
+    "created": "2025-05-14T05:16:33.602000+00:00",
+    "body": "I love this page. Recently discovered Barrel Wisdom, but I started playing the series with Iris.\n\nI want to add that Sophie DX seems to have issues with longer play sessions and is prone to crashing if you've kept it running for a few hours. Lacking an auto-save, this can be absolutely debilitating for any desire to play it further (cries in 10+ hours of progress lost)",
+    "approved": true,
+    "author": "Metafalica",
+    "parent_id": null,
+    "blog": {
+      "slug": "atelier-series-guide",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 139,
+    "created": "2025-05-19T05:40:53.176000+00:00",
+    "body": "Ah, maan, this takes me down memory lane(s). Both for when I first played it and when I replayed it at an older age. Good/Great game to me, but I also liked the humor XD",
+    "approved": true,
+    "author": "Metafalica",
+    "parent_id": null,
+    "blog": {
+      "slug": "revisiting-my-first-atelier-mana-khemia",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 140,
+    "created": "2025-06-05T03:54:58.878000+00:00",
+    "body": "The only Atelier I've tried and failed to get far in was Atelier Annie on the DS, and I was a kid at that time (how many years back). I did kind of like the idea but was having a hard time, so I'm glad to hear that the series has definitely more to offer. Might finally try the first Sophie game while it's on sale.",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "atelier-series-guide",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 399,
+    "created": "2025-07-17T06:11:48.502000+00:00",
+    "body": "Thank you for the writeup. I've been curious about the series for a while now and as an enjoyer of slice-of-life anime, this really seems up my alley. I just want to ask if the games that are available on the PS4 runs just fine? I haven't seen it mentioned above with regards to what system is good to run the games and what not. I'm thinking of playing it there since most of them are on sale right now.",
+    "approved": true,
+    "author": "Kai",
+    "parent_id": null,
+    "blog": {
+      "slug": "atelier-series-guide",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 600,
+    "created": "2025-11-17T04:50:59.378000+00:00",
+    "body": "How do I fight the Shadows (Restraint, Greed, Acceptance, Indolence, Revelry and Freedom) in the Hidden Island DLC as shown in this site's Encyclopedia? I already finished the lvl 50 boss rush and all you get is a small cutscene, and talking to Ao's Shadow again just loops back to the first boss, while the rest just say their same fluff text.",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "faq",
+      "section_slug": "second-light"
+    }
+  },
+  {
+    "id": 601,
+    "created": "2025-11-17T17:41:11.055000+00:00",
+    "body": "ryza dx soon prayged",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "atelier-pc-saves",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 602,
+    "created": "2025-11-22T21:52:19.194000+00:00",
+    "body": "Thank you for this! This is amazing and is saving me a bit as when you look at them all on a store it can get overwhelming. I'm trying to pick the most slice of life/comfy one (I've got Ryza 1 and Yumia but sales!) and I was leaning Sophie or Lulua as I adore Lulua's design. With Lulua was connected to Arland as a whole I probably shouldn't skip ahead to it?",
+    "approved": true,
+    "author": "Z",
+    "parent_id": null,
+    "blog": {
+      "slug": "atelier-series-guide",
+      "section_slug": "blog"
+    }
+  },
+  {
+    "id": 604,
+    "created": "2025-12-01T07:17:43.758000+00:00",
+    "body": "Truth be told, this project was intended to have another run by me to clean up remaining data issues. I never played DLC, not even sure I bought any, but I know there are some issues with things marked as DLC.",
+    "approved": true,
+    "author": "Curry",
+    "parent_id": 600,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 605,
+    "created": "2025-12-01T07:25:39.465000+00:00",
+    "body": "If you're looking for comfy, the answer simplifies to Sophie. Lulua is in an awkward position because of its relation to Arland yes. You can if you really want, but it's not what I would suggest. I've recommended Lulua first to a couple people, and they were hyper focused getting the best gameplay.",
+    "approved": true,
+    "author": "Curry",
+    "parent_id": 602,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 606,
+    "created": "2025-12-02T22:20:11.510000+00:00",
+    "body": "Thanks for the feedback! I decided to get Sophie and Rorona so I can get the start of each series and see how I like them. Rorona has just such adorable vibes about the whole thing (I'm on month 4 so far) and I love her. Can't wait to get to Sophie and the rest now!",
+    "approved": true,
+    "author": "Z",
+    "parent_id": 602,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 607,
+    "created": "2025-12-12T01:11:13.301000+00:00",
+    "body": "Recipe Morph from a Crystal Element, which is morphed from a Spirit Bottle.",
+    "approved": true,
+    "author": "",
+    "parent_id": 114,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 608,
+    "created": "2025-12-12T01:22:24.307000+00:00",
+    "body": "Not to mention Play Maker is two words, not one.",
+    "approved": true,
+    "author": "",
+    "parent_id": 80,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  },
+  {
+    "id": 609,
+    "created": "2026-01-09T06:05:37.377000+00:00",
+    "body": "I found out Precious Stone has better selling price (8400) rather than Supplement - White (1670)",
+    "approved": true,
+    "author": "Deni",
+    "parent_id": null,
+    "blog": {
+      "slug": "chapter-6",
+      "section_slug": "shallie"
+    }
+  },
+  {
+    "id": 610,
+    "created": "2026-01-22T16:35:26.517000+00:00",
+    "body": "The golden silk you gather to get an idea how to make the golden armor apparently must be gathered after you have landed on the Skyfaring Stone Ark. Golden silk gathered earlier in game in other areas doesn't trigger this idea.",
+    "approved": true,
+    "author": "darling_no_baka",
+    "parent_id": null,
+    "blog": {
+      "slug": "ultimate-setups",
+      "section_slug": "firis"
+    }
+  },
+  {
+    "id": 611,
+    "created": "2026-02-07T19:57:32.883000+00:00",
+    "body": "Jumbo Blessing and Super Properties can both be gotten from Dragon's secrets at Blooming Path in the Lab of Eternity",
+    "approved": true,
+    "author": "",
+    "parent_id": null,
+    "blog": {
+      "slug": "ultimate-item-guide",
+      "section_slug": "escha"
+    }
+  },
+  {
+    "id": 612,
+    "created": "2026-02-15T04:25:29.445000+00:00",
+    "body": "You need a core as a morph item on a crystal element",
+    "approved": true,
+    "author": "PRO758",
+    "parent_id": 114,
+    "blog": {
+      "slug": null,
+      "section_slug": null
+    }
+  }
+]

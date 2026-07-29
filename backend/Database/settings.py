@@ -10,7 +10,7 @@ DEBUG = int(os.environ['DEBUG'])
 
 ENABLE_DEBUG_TOOLBAR = DEBUG and "test" not in sys.argv
 
-ALLOWED_HOSTS = ['barrelwisdom.com', 'localhost', '127.0.0.1', 'backend']
+ALLOWED_HOSTS = ['*']
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
@@ -39,13 +39,6 @@ INSTALLED_APPS = [
     'django_filters',
     'django.contrib.sites',
     'dj_rest_auth',
-    # Major parts
-    'blog.apps.BlogConfig',
-    'invite.apps.InviteConfig',
-    'navigation.apps.NavigationConfig',
-    'userprofile.apps.UserProfileConfig',
-    'report.apps.ReportConfig',
-    # A01 Marie
     # A12 Totori
     'games.A12.traits_a12.apps.A12TraitConfig',
     'games.A12.effects_a12.apps.A12EffectConfig',
@@ -74,8 +67,6 @@ INSTALLED_APPS = [
     'games.A18.misc_a18.apps.A18MiscConfig',
     'games.A18.items_a18.apps.A18ItemConfig',
     'games.A18.monsters_a18.apps.A18MonsterConfig',
-    # A21 Ryza 1
-    'games.A21.effects_traits_a21.apps.A21EffectTraitConfig',
     # A22 Ryza 2
     'games.A22.effects_a22.apps.A22EffectConfig',
     'games.A22.traits_a22.apps.A22TraitConfig',
@@ -223,23 +214,3 @@ REST_FRAMEWORK = {
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
-
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=14),
-    'ALGORITHM': 'RS256',
-    'SIGNING_KEY': Path('jwt-key').read_text(),
-    'VERIFYING_KEY': Path('jwt-key.pub').read_text(),
-    'AUTH_HEADER_TYPES': ('Bearer',),
-}
-
-REST_USE_JWT = True
-JWT_AUTH_COOKIE = 'bw-auth'
-JWT_AUTH_REFRESH_COOKIE = 'bw-refresh'
-
-CACHES = {
-    "default": {
-        "BACKEND": "django_valkey.cache.ValkeyCache",
-        "LOCATION": "valkey://valkey:6379",
-    }
-}

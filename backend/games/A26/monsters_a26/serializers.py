@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from games.A26.misc_a26.serializers import A26DefaultSerializer, A26CoordinateSerializer, A26ItemSimpleSerializer, A26TraitSimpleSerializer
+from games.A26.misc_a26.serializers import A26DefaultSerializer2, A26CoordinateSerializer, A26ItemSimpleSerializer, A26TraitSimpleSerializer
 from games.A26.monsters_a26.models import Monster, Race
 
-class A26RaceSerializer(A26DefaultSerializer):
+class A26RaceSerializer(A26DefaultSerializer2):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Race
@@ -10,7 +10,7 @@ class A26RaceSerializer(A26DefaultSerializer):
             'id', 'name',
         ]
 
-class A26MonsterListSerializer(A26DefaultSerializer):
+class A26MonsterListSerializer(A26DefaultSerializer2):
     name = serializers.SerializerMethodField()
     race = A26RaceSerializer()
     class Meta:
@@ -19,7 +19,7 @@ class A26MonsterListSerializer(A26DefaultSerializer):
             'id', 'name', 'race',
         ]
 
-class A26MonsterSerializer(A26DefaultSerializer):
+class A26MonsterSerializer(A26DefaultSerializer2):
     name = serializers.SerializerMethodField()
     desc = serializers.SerializerMethodField()
     race = A26RaceSerializer()

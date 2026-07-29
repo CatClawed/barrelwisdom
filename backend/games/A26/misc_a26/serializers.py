@@ -66,12 +66,45 @@ class A26DefaultSerializer(DefaultSerializer):
             es=obj.desc2.text_es,
         ) if obj.desc2 else None
 
-class A26CoordinateSerializer(A26DefaultSerializer):
+class A26DefaultSerializer2(DefaultSerializer):
+    def _get_all_langs(self, obj):
+        """Helper to return all languages for a given text-like object."""
+        if not obj:
+            return None
+        return {
+            "en": obj.text_en,
+            "ja": obj.text_ja,
+            "tc": obj.text_tc,
+            "sc": obj.text_sc,
+            "ko": obj.text_ko,
+            "fr": obj.text_fr,
+            "ru": obj.text_ru,
+            "de": obj.text_de,
+            "es": obj.text_es,
+        }
+
+    def get_text(self, obj):
+        return self._get_all_langs(obj)
+
+    def get_name(self, obj):
+        return self._get_all_langs(obj.name)
+
+    def get_desc(self, obj):
+        return self._get_all_langs(obj.desc) if obj.desc else None
+
+    def get_desc1(self, obj):
+        return self._get_all_langs(obj.desc1)
+
+    def get_desc2(self, obj):
+        return self._get_all_langs(obj.desc2) if obj.desc2 else None
+
+
+class A26CoordinateSerializer(A26DefaultSerializer2):
     class Meta:
         model = Coordinate
         fields = ['x', 'z', 'label']
 
-class A26TraitSimpleSerializer(A26DefaultSerializer):
+class A26TraitSimpleSerializer(A26DefaultSerializer2):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Trait
@@ -79,7 +112,7 @@ class A26TraitSimpleSerializer(A26DefaultSerializer):
             'id', 'name'
         ]
 
-class A26ItemSimpleSerializer(A26DefaultSerializer):
+class A26ItemSimpleSerializer(A26DefaultSerializer2):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Item
@@ -87,7 +120,7 @@ class A26ItemSimpleSerializer(A26DefaultSerializer):
             'id', 'name'
         ]
 
-class A26MonsterSimpleSerializer(A26DefaultSerializer):
+class A26MonsterSimpleSerializer(A26DefaultSerializer2):
     name = serializers.SerializerMethodField()
     class Meta:
         model = Monster
@@ -95,7 +128,7 @@ class A26MonsterSimpleSerializer(A26DefaultSerializer):
             'id', 'name'
         ]
 
-class A26QuestDataSerializer(A26DefaultSerializer):
+class A26QuestDataSerializer(A26DefaultSerializer2):
     name = serializers.SerializerMethodField()
     extra = serializers.SerializerMethodField()
     class Meta:
@@ -105,4 +138,4 @@ class A26QuestDataSerializer(A26DefaultSerializer):
         ]
     def get_extra(self, obj):
         if obj.extra:
-            return A26DefaultSerializer.get_text(self,obj.extra)
+            return A26DefaultSerializer2.get_text(self,obj.extra)

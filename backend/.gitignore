@@ -24,3 +24,4 @@ coverage.xml
 .env
 data.txt
 scripts/sitemaps
+scripts/exports
