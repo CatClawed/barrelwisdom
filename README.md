@@ -1,11 +1,4 @@
-# barrelwisdom
-A fansite for the long running Atelier series, as well as other Gust games.
-
-https://barrelwisdom.com
-
-![barrel](https://barrelwisdom.com/media/main/barrelwisdom.svg)
-
-To see how this is deployed and updated in a real world environment, see the [deployment repo](https://github.com/CatClawed/barrelwisdom_deployment/).
+This branch is to help me kill V2 of the site.
 
 ## Docker usage
 
@@ -23,13 +16,6 @@ UID=1000
 GID=1000
 ```
 
-DEBUG must be set to 0 in production environments. UID/GID are up to your preferences, this is to prevent docker creating things as root.
-
-In `backend`, you will also want to run:
-
-```bash
-ssh-keygen -t rsa -b 4096 -m PEM -f jwt-key
-```
 
 With that setup done, you can run:
 
@@ -53,42 +39,8 @@ python manage.py dumpdata app_name -o dump.json.gz
 python manage.py loaddata dump.json.gz
 ```
 
-### Update Postgres
-
-```bash
-docker exec -it postgres pg_dumpall -U USER > dump.sql
-docker compose down postgres
-# can check for full name at docker volume list
-# worst case scenario, I have a backup
-docker volume rm docker_bw_database
-docker compose up postgres -d
-docker exec -i postgres psql -U USER DATABASE < dump.sql
-```
-
-### Build frontend
-
-Be sure backend is running, as prerendering requires DB access.
-
-```bash
-docker exec -it frontend bash
-ng build --configuration=production
-```
-
-For the final docker image:
-
-```bash
-docker buildx build -t frontend_prod -f Dockerfile.prod .
-docker tag frontend_prod barrelwisdom/frontend:tag
-```
-
 ### Other Commands
 
-Angular commands
-
-```bash
-# Begin development
-npm start
-```
 
 Django model changes.
 
