@@ -5,7 +5,7 @@ import Map from './Map.astro';
 import { element_map } from './yumia_constants';
 import { outer_translation, sp_translation, comfort_translation, material_translation, inner_translation } from '@app/localization/translations/yumia';
 import { stat_translation, details_translation, quality_translation, monster_translation, effect_translation, item_translation } from '@app/localization/translations/common-strings';
-const { item, lang, card = false } = Astro.props;
+const { item, lang, mode } = Astro.props;
 
 const level0 = item.recipe?.level[0];
 const activeElements = level0 ? [
@@ -15,7 +15,7 @@ const activeElements = level0 ? [
   { id: 'air', active: level0.air },
 ].filter((el) => el.active) : [];
 ---
-<div class={card ? `card` : undefined}>
+<div class={mode === 'detail' ? `card` : undefined}>
   <div class="data-title"><h3>{item.name[lang]}</h3> {item.isDLC && <span class="badge bg-primary">DLC</span>}</div>
 
   <div class="image-desc-display">
@@ -45,7 +45,7 @@ const activeElements = level0 ? [
     cats={item.cats}
     mats={item.mats}
     lang={lang}
-    isLink={true}
+    mode={mode}
     resonance={item.resonance}
     fire={item.fire}
     ice={item.ice}

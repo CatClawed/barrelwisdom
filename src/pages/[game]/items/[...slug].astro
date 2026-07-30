@@ -68,9 +68,9 @@ const ItemDetail = gameComponents[game].detail;
       image={`/media/games/${game}/items/${item.id}.webp`}
       mainClass="blog-post"
     >
-      <ItemDetail item={item.data} lang={lang} card={true} />
+      <ItemDetail item={item.data} lang={lang} card={true} mode={type} />
     </MainLayout>
   ) : (
-    <ItemDetail item={item.data} lang={lang} />
+    <ItemDetail item={item.data} lang={lang} mode={type} />
   )
 }

@@ -4,8 +4,8 @@ import { category_to_icon, element_map } from './yumia_constants';
 interface Props {
   cats: { id: string; name: string }[];
   mats?: { id: string; name: string }[];
-  isLink?: boolean;
-  lang?: string;
+  mode: string;
+  lang: string;
   resonance?: number;
   fire?: boolean;
   ice?: boolean;
@@ -17,7 +17,7 @@ const {
   cats,
   mats,
   lang,
-  isLink = false,
+  mode,
   resonance,
   fire = false,
   ice = false,
@@ -36,7 +36,7 @@ const elements = [
 ];
 ---
 
-<div class="two-column" style={isLink ? 'margin-bottom: 1rem;' : 'height: 100%;'}>
+<div class="two-column" style={mode !== 'list' ? 'margin-bottom: 1rem;' : 'height: 100%;'}>
   <ul style="padding-left: 0; list-style: none;">
     {
       cats.map((item) => (
@@ -47,7 +47,7 @@ const elements = [
             />
           </svg>
 
-          {isLink ? (
+          {mode !== 'list' ? (
             <a href={`/yumia/categories/${item.id}/${lang}`}>{item.name[lang]}</a>
           ) : (
             <span>{item.name[lang]}</span>

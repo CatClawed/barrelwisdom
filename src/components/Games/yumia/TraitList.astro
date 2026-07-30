@@ -50,13 +50,18 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
           .filter(Boolean)
           .join(',')}
       >
-        <TraitDetail item={i.data} lang={lang} />
+        <TraitDetail item={i.data} lang={lang} mode="list" />
       </li>
     ))
   }
 </ul>
+<dialog id="map-modal" class="map-modal">
+  <div id="modal-content"></div>
+</dialog>
 <script>
   import { initListFilters } from '@app/utils/filter-controller';
+  import { initMap, destroyMap } from './map_client';
+
   const lang = document.getElementById('item-list')!.dataset.lang!;
   initListFilters({
     lang,
@@ -64,4 +69,46 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
       { type: 'buttons', key: 'traits', groupName: 'traits', mode: 'all' },
     ],
   });
+
+  const list = document.getElementById('item-list');
+  const modal = document.getElementById('map-modal') as HTMLDialogElement;
+  const modalContent = document.getElementById('modal-content')!;
+
+  list?.addEventListener('click', async (e) => {
+    const trigger = (e.target as HTMLElement).closest('.show-map-btn');
+    if (!trigger) return;
+
+    destroyMap();
+
+    const id = trigger.getAttribute('data-id');
+    modalContent.innerHTML = '<p>Loading Map...</p>';
+    modal.showModal();
+
+    const response = await fetch(`/yumia/traits/${id}/fragment/${lang}`);
+    const html = await response.text();
+    modalContent.innerHTML = html;
+
+    initMap(modalContent.querySelector('.a26-map[data-points]')!);
+  });
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      destroyMap();
+      modal.close();
+    }
+  });
 </script>
+<style>
+  .map-modal {
+    width: 90vw;
+    max-width: 800px;
+    height: 80vh;
+    padding: 2rem;
+    border: none;
+    background-color: transparent;
+
+    &::backdrop {
+      background: rgba(0, 0, 0, 0.7);
+    }
+  }
+</style>

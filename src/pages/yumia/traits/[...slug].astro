@@ -29,10 +29,10 @@ export async function getStaticPaths() {
         params: { slug: `${itemId}/${lang}` },
         props: { type: 'detail', item, lang },
       });
-      //paths.push({
-      //  params: { slug: `${itemId}/fragment/${lang}` },
-      //  props: { type: 'fragment', item, lang },
-      //});
+      paths.push({
+        params: { slug: `${itemId}/fragment/${lang}` },
+        props: { type: 'fragment', item, lang },
+      });
     });
   });
   return paths;
@@ -47,7 +47,12 @@ const { type, item, lang } = Astro.props;
       title={trait_translation[lang]}
       description={lang == 'en' ? 'The list of traits.' : ''}
     >
-      <TraitList items={allItems} lang={lang} title={trait_translation[lang]} />
+      <TraitList
+        items={allItems}
+        lang={lang}
+        title={trait_translation[lang]}
+        mode={type}
+      />
     </MainLayout>
   ) : type === 'detail' ? (
     <MainLayout
@@ -55,9 +60,9 @@ const { type, item, lang } = Astro.props;
       description={item.data.desc1[lang]}
       mainClass="blog-post"
     >
-      <TraitDetail item={item.data} lang={lang} detail={true} />
+      <TraitDetail item={item.data} lang={lang} mode={type} />
     </MainLayout>
   ) : (
-    <TraitDetail item={item.data} lang={lang} />
+    <TraitDetail item={item.data} lang={lang} mode={type} />
   )
 }

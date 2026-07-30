@@ -1,4 +1,6 @@
 ---
+import { sortByLocale } from '@app/utils/collator';
+
 interface Option {
   id: string;
   label: string;
@@ -11,6 +13,7 @@ interface Props {
   placeholder: string;
   id?: string;
   gridSpan?: number;
+  lang: string;
 }
 const {
   name,
@@ -19,16 +22,18 @@ const {
   id = name,
   gridSpan = '4',
   placeholder = 'Filter',
+  lang,
 } = Astro.props;
 
-options.splice(0, 0, { id: '-1', label: '--' });
+let options2 = sortByLocale(options, lang, (item) => item.label);
+options2.splice(0, 0, { id: '-1', label: '--' });
 ---
 
 <div class={`searchable-select grid-${gridSpan}`} data-name={placeholder}>
   <select name={name} id={id} class="ss-native" autocomplete="off">
     <option value="" disabled selected={!selected}>{placeholder}</option>
     {
-      options.map((o) => (
+      options2.map((o) => (
         <option
           value={o.id}
           selected={o.id === selected}

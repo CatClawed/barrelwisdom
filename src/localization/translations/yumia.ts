@@ -81,3 +81,15 @@ export const outer_translation: Record<string, string> = {
   "ru": "Дальнее расстояние",
   "es": "Alcance exterior"
 }
+
+export const view_map_translation: Record<string, string> = {
+  en: 'View Map',
+  ja: '地図を表示',
+  ko: '지도 보기',
+  de: 'Karte anzeigen',
+  es: 'Ver mapa',
+  fr: 'Voir la carte',
+  ru: 'Посмотреть карту',
+  sc: '查看地图',
+  tc: '查看地圖',
+};

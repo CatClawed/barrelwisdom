@@ -45,11 +45,13 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
         options={categoryOptions}
         name="category"
         placeholder={category_translation[lang]}
+        lang={lang}
       />
       <Dropdown
         options={materialOptions}
         name="material"
         placeholder={material_translation[lang]}
+        lang={lang}
       />
       <FilterButton
         svg="A26.svg?v=1"
@@ -118,6 +120,7 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
                 bolt={i.data.bolt}
                 air={i.data.air}
                 lang={lang}
+                mode="list"
               />
             </div>
           </li>

@@ -1,9 +1,9 @@
 ---
 import Popover from '@app/components/Games/_common/Popover.astro';
 import Map from './Map.astro';
-import { outer_translation, inner_translation, blending_translation } from '@app/localization/translations/yumia';
+import { view_map_translation, outer_translation, inner_translation, blending_translation } from '@app/localization/translations/yumia';
 import { level_translation } from '@app/localization/translations/common-strings';
-const { item, lang, detail = false } = Astro.props;
+const { item, lang, mode } = Astro.props;
 const traitIcons = [
   { key: 'atk',  icon: 'category-bombs' },
   { key: 'heal', icon: 'trait-heal' },
@@ -14,9 +14,11 @@ const traitIcons = [
   { key: 'acc',  icon: 'category-accessories' },
 ];
 ---
+{mode !== 'fragment' && (
+
 <div class="card">
   <div class="card-title">
-    {detail ? (
+    {mode !== 'list' ? (
     <h4>{item.name[lang]}</h4>
     ) : (
     <a href={`/yumia/traits/${item.id}/${lang}`} target="_blank">
@@ -50,21 +52,9 @@ const traitIcons = [
     </ul>
   )}
   {item.trait_base && (
-      <>
-    {detail ? (
-    <b>Advanced Data:</b>
-    <ul>
-      {[item.trait_base, item.trait_hash, item.lv_min_rand_range, item.lv_max_rand_range]
-        .filter(val => val)
-        .map((val) => (
-          <li>{val}</li>
-        ))
-      }
-    </ul>
-    )
-    : (
-    <Popover cls="dashed">
-      <span slot="trigger">Advanced Data</span>
+    <>
+      {mode !== 'list' ? (
+      <b>Advanced Data:</b>
       <ul>
         {[item.trait_base, item.trait_hash, item.lv_min_rand_range, item.lv_max_rand_range]
           .filter(val => val)
@@ -73,9 +63,31 @@ const traitIcons = [
           ))
         }
       </ul>
-    </Popover>
-
-    )}
+      )
+      : (
+      <Popover cls="dashed">
+        <span slot="trigger">Advanced Data</span>
+        <ul>
+          {[item.trait_base, item.trait_hash, item.lv_min_rand_range, item.lv_max_rand_range]
+            .filter(val => val)
+            .map((val) => (
+              <li>{val}</li>
+            ))
+          }
+        </ul>
+      </Popover>
+      <>
+        { item.chests && mode === 'list' && (
+        <button
+          type="button"
+          class="show-map-btn"
+          data-id={item.id}
+        >
+          {view_map_translation[lang]}
+        </button>
+        )}
+      </>
+      )}
     </>
   )}
   <div class="trait-display">
@@ -88,4 +100,18 @@ const traitIcons = [
     ))}
   </div>
 </div>
-{detail && <Map data={item.chests} /> }
+
+)}
+{mode !== 'list' && item.chests && <Map data={item.chests} /> }
+<style>
+.show-map-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 5px;
+  border: transparent;
+  width: fit-content;
+  padding: 0.2rem 0.5rem;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+</style>
