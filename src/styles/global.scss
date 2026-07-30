@@ -1,7 +1,7 @@
 @use 'sass:math';
 @use 'variables' as v;
-@use 'components/_index' as c;
 @use 'ui/_index' as u;
+@use 'components/_index' as c;
 @import "@fontsource/merriweather/500.css";
 
 a:active,
@@ -123,6 +123,10 @@ ol,
 ul {
     margin-top: 0;
     padding-left: 1.5rem;
+
+    > b {
+      margin-left: -1.5rem;
+    }
 }
 
 table {

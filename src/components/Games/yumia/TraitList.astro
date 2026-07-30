@@ -1,0 +1,67 @@
+---
+import TraitDetail from './TraitDetail.astro';
+import FilterButton from '@components/Games/_common/FilterButton.astro';
+import { filter_translation } from '@app/localization/translations/common-strings';
+
+const { items, lang, title } = Astro.props;
+
+items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
+---
+
+<h1>{title}</h1>
+<div class="filters">
+  <input
+    type="text"
+    id="filter"
+    placeholder={filter_translation[lang]}
+    autocomplete="off"
+    class="grid-6"
+  />
+  <FilterButton
+    svg="A26.svg?v=1"
+    name="traits"
+    list={[
+      { filterKey: 'atk', icon: 'category-bombs' },
+      { filterKey: 'heal', icon: 'trait-heal' },
+      { filterKey: 'buff', icon: 'trait-buff' },
+      { filterKey: 'dbf', icon: 'trait-debuff' },
+      { filterKey: 'wep', icon: 'category-weapons' },
+      { filterKey: 'arm', icon: 'category-armor' },
+      { filterKey: 'acc', icon: 'category-accessories' },
+    ]}
+  />
+</div>
+<ul class="list" id="item-list" data-lang={lang}>
+  {
+    items.map((i, index) => (
+      <li
+        class="list-container"
+        data-id={i.id}
+        data-search={`${i.data.name[lang].toLowerCase()} ${i.data.desc1[lang].toLowerCase()} ${i.data.desc2?.[lang]?.toLowerCase() ?? ''}`}
+        data-traits={[
+          i.data.wep && 'wep',
+          i.data.arm && 'arm',
+          i.data.acc && 'acc',
+          i.data.atk && 'atk',
+          i.data.heal && 'heal',
+          i.data.buff && 'buff',
+          i.data.dbf && 'dbf',
+        ]
+          .filter(Boolean)
+          .join(',')}
+      >
+        <TraitDetail item={i.data} lang={lang} />
+      </li>
+    ))
+  }
+</ul>
+<script>
+  import { initListFilters } from '@app/utils/filter-controller';
+  const lang = document.getElementById('item-list')!.dataset.lang!;
+  initListFilters({
+    lang,
+    filters: [
+      { type: 'buttons', key: 'traits', groupName: 'traits', mode: 'all' },
+    ],
+  });
+</script>

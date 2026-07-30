@@ -1,3 +1,5 @@
+import { onCompositionSafeInput } from "@app/utils/composition-safe-input";
+
 const RESET_VALUE = '-1';
 
 function enhance(root: HTMLElement) {
@@ -47,7 +49,7 @@ function enhance(root: HTMLElement) {
     searchInput = document.createElement('input');
     searchInput.type = 'text';
     searchInput.className = 'ss-search';
-    searchInput.placeholder = fieldName;
+    searchInput.placeholder = 'Type to search…';
     searchInput.setAttribute('role', 'combobox');
     searchInput.setAttribute('aria-expanded', 'true');
 
@@ -61,7 +63,8 @@ function enhance(root: HTMLElement) {
 
     renderOptions('');
 
-    searchInput.addEventListener('input', () => renderOptions(searchInput!.value));
+    onCompositionSafeInput(searchInput, () => renderOptions(searchInput!.value))
+
     searchInput.addEventListener('keydown', onKeydown);
     searchInput.addEventListener('blur', () => {
       setTimeout(() => {

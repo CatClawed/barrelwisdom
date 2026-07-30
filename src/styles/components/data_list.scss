@@ -59,6 +59,12 @@
   }
 }
 
+.shrink-text {
+  .card {
+    font-size: 0.8rem;
+  }
+}
+
 .list-container {
   list-style: none;
   display: flex;
@@ -66,7 +72,15 @@
 
   .card {
     flex: 1;
-    font-size: 0.8rem;
+
+    .data-title {
+      a {
+      color: black;
+      }
+      a:hover {
+        color: black;
+      }
+    }
 
     .card-title {
       display: inline-flex;

@@ -77,12 +77,13 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
         ]}
       />
     </div>
-    <ul class="list" id="item-list">
+    <ul class="list" id="item-list" data-lang={lang}>
       {
         items.map((i, index) => (
           <li
-            class="list-container"
+            class="list-container shrink-text"
             data-id={i.id}
+            data-search={i.data.name[lang]}
             data-category={i.data.cats.map((c) => c.id).join(',')}
             data-material={i.data.mats?.map((c) => c.id).join(',')}
             data-elements={[
@@ -132,117 +133,61 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
   </div>
 </div>
 <script>
+  import { initListFilters } from '@app/utils/filter-controller';
   import { initSearchableSelects } from '@components/Games/_common/dropdown_client';
   import { initPopovers } from '@components/Games/_common/popover_client';
   import { destroyMap, initMap } from './map_client';
-  window.initMap = initMap;
-  window.destroyMap = destroyMap;
-  window.initSearchableSelects = initSearchableSelects;
-  window.initPopovers = initPopovers;
-</script>
 
-<script is:inline define:vars={{ lang }}>
-  const filterInput = document.getElementById('filter');
-  const categorySelect = document.getElementById('category');
-  const materialSelect = document.getElementById('material');
-  const elementsGroup = document.querySelector(
-    '[data-filter-group="elements"]',
-  );
-  const kindGroup = document.querySelector('[data-filter-group="kind"]');
-  const list = document.getElementById('item-list');
-  const pane = document.getElementById('detail-pane');
+  const list = document.getElementById('item-list')!;
+  const lang = list.dataset.lang!;
+  const pane = document.getElementById('detail-pane')!;
 
-  let activeElements = [];
-  let activeKinds = [];
-
-  function applyFilters() {
-    const term = filterInput?.value.toLowerCase() ?? '';
-    const catVal = categorySelect?.value;
-    const matVal = materialSelect?.value;
-    const category = !catVal || catVal === '-1' ? '-1' : catVal;
-    const material = !matVal || matVal === '-1' ? '-1' : matVal;
-
-    document.querySelectorAll('#item-list .list-container').forEach((card) => {
-      const name = card.querySelector('h4')?.textContent.toLowerCase() || '';
-      const matchesName = name.includes(term);
-
-      const cats = card.dataset.category?.split(',') ?? [];
-      const matchesCategory = category === '-1' || cats.includes(category);
-
-      const mats = card.dataset.material?.split(',') ?? [];
-      const matchesMaterial = material === '-1' || mats.includes(material);
-
-      const elements = card.dataset.elements?.split(',').filter(Boolean) ?? [];
-      const matchesElements =
-        activeElements.length === 0 ||
-        activeElements.every((el) => elements.includes(el));
-
-      const kind = card.dataset.kind;
-      const matchesKind =
-        activeKinds.length === 0 || activeKinds.includes(kind);
-
-      card.style.display =
-        matchesName &&
-        matchesCategory &&
-        matchesMaterial &&
-        matchesElements &&
-        matchesKind
-          ? ''
-          : 'none';
-    });
-  }
-
-  filterInput?.addEventListener('input', applyFilters);
-  categorySelect?.addEventListener('change', applyFilters);
-  materialSelect?.addEventListener('change', applyFilters);
-  elementsGroup?.addEventListener('filterchange', (e) => {
-    activeElements = e.detail.active;
-    applyFilters();
-  });
-  kindGroup?.addEventListener('filterchange', (e) => {
-    activeKinds = e.detail.active;
-    applyFilters();
+  initListFilters({
+    lang,
+    filters: [
+      { type: 'select', key: 'category', elementId: 'category' },
+      { type: 'select', key: 'material', elementId: 'material' },
+      { type: 'buttons', key: 'elements', groupName: 'elements', mode: 'all' },
+      { type: 'buttons', key: 'kind', groupName: 'kind', mode: 'any' },
+    ],
   });
 
-  // Master-Detail injection
-  list?.addEventListener('click', async (e) => {
-    const card = e.target.closest('.list-container');
+  list.addEventListener('click', async (e) => {
+    const card = (e.target as HTMLElement).closest<HTMLElement>(
+      '.list-container',
+    );
     if (!card) return;
-
     if (e.button === 0 && !e.ctrlKey && !e.metaKey) {
       e.preventDefault();
 
-      // If mobile, show the modal
       if (window.innerWidth <= 760) {
         pane.classList.add('is-open');
         if (!pane.querySelector('.close-btn')) {
           pane.insertAdjacentHTML(
             'afterbegin',
-            `<button class="close-btn"><svg>
-              <use href="/media/spritesheets/main.svg?v=1#fa-arrow-left" />
-            </svg></button>`,
+            `<button class="close-btn"><svg><use href="/media/spritesheets/main.svg?v=1#fa-arrow-left" /></svg></button>`,
           );
           pane
-            .querySelector('.close-btn')
+            .querySelector('.close-btn')!
             .addEventListener('click', () => pane.classList.remove('is-open'));
         }
       }
       pane.classList.add('hide-placeholder');
 
-      window.destroyMap?.();
+      destroyMap();
       const id = card.getAttribute('data-id');
-      pane.querySelector('.content-area')?.remove(); // Clear old content
+      pane.querySelector('.content-area')?.remove();
 
       const response = await fetch(`/yumia/items/${id}/fragment/${lang}`);
       const html = await response.text();
-
       pane.insertAdjacentHTML(
         'beforeend',
         `<div class="content-area">${html}</div>`,
       );
-      window.initMap?.(pane.querySelector('.a26-map[data-points]'));
-      window.initSearchableSelects?.(pane);
-      window.initPopovers?.(pane);
+
+      initMap(pane.querySelector('.a26-map[data-points]')!);
+      initSearchableSelects(pane);
+      initPopovers(pane);
     }
   });
 </script>

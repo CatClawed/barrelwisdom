@@ -29,7 +29,7 @@ export async function getNavForGame(pathname: string) {
   }
 }
 
-const HTML_LANG_MAP: Record<string, string> = {
+export const HTML_LANG_MAP: Record<string, string> = {
   en: 'en',
   ja: 'ja',
   ko: 'ko',

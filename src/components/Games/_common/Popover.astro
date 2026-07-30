@@ -17,7 +17,11 @@ const { title, href, cls = '' } = Astro.props;
   >
     <slot name="trigger" />
   </a>
-  <div class="popover-panel" role="dialog" hidden>
+  <div
+    class={'popover-panel ' + (title ? '' : 'popover-no-title')}
+    role="dialog"
+    hidden
+  >
     {title && <h4 class="popover-title">{title}</h4>}
     <div class="popover-content">
       <slot />
@@ -65,6 +69,18 @@ const { title, href, cls = '' } = Astro.props;
   .popover-panel--left {
     left: auto;
     right: 0;
+  }
+  .popover-no-title {
+    padding: 1rem 0.5rem;
+    .popover-content {
+      margin: auto;
+      > p {
+        margin: 0;
+      }
+    }
+  }
+  .dashed {
+    text-decoration: underline dashed;
   }
 </style>
 

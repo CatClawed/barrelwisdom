@@ -1,0 +1,91 @@
+---
+import Popover from '@app/components/Games/_common/Popover.astro';
+import Map from './Map.astro';
+import { outer_translation, inner_translation, blending_translation } from '@app/localization/translations/yumia';
+import { level_translation } from '@app/localization/translations/common-strings';
+const { item, lang, detail = false } = Astro.props;
+const traitIcons = [
+  { key: 'atk',  icon: 'category-bombs' },
+  { key: 'heal', icon: 'trait-heal' },
+  { key: 'buff', icon: 'trait-buff' },
+  { key: 'dbf',  icon: 'trait-debuff' },
+  { key: 'wep',  icon: 'category-weapons' },
+  { key: 'arm',  icon: 'category-armor' },
+  { key: 'acc',  icon: 'category-accessories' },
+];
+---
+<div class="card">
+  <div class="card-title">
+    {detail ? (
+    <h4>{item.name[lang]}</h4>
+    ) : (
+    <a href={`/yumia/traits/${item.id}/${lang}`} target="_blank">
+      <h4>{item.name[lang]}</h4>
+    </a>
+    )}
+    <div class="card-icon-position">
+      <Popover cls="dashed">
+        <span slot="trigger">{level_translation[lang]}:</span>
+        <p>A measure of rarity. This number determines where traits appear.</p>
+      </Popover>
+
+      {!item.grade_max ? ` ${item.grade_min}` : ` ${item.grade_min} - ${item.grade_max}`}
+    </div>
+  </div>
+
+  {!item.desc2 ? (<p>{item.desc1[lang]}</p>)
+    : (
+      <p><b>{inner_translation[lang]}: </b>{item.desc1[lang]}<br />
+      <b>{outer_translation[lang]}: </b>{item.desc2[lang]}</p>
+    )
+  }
+  {item.combo1 && (
+    <b>{blending_translation[lang]}</b>
+    <ul class="two-column">
+      {[item.combo1, item.combo2, item.combo3, item.combo4].filter(Boolean).map((combo) => (
+        <li>
+          <a href={`/yumia/traits/${combo.id}/${lang}`}>{combo.name[lang]}</a>
+        </li>
+      ))}
+    </ul>
+  )}
+  {item.trait_base && (
+      <>
+    {detail ? (
+    <b>Advanced Data:</b>
+    <ul>
+      {[item.trait_base, item.trait_hash, item.lv_min_rand_range, item.lv_max_rand_range]
+        .filter(val => val)
+        .map((val) => (
+          <li>{val}</li>
+        ))
+      }
+    </ul>
+    )
+    : (
+    <Popover cls="dashed">
+      <span slot="trigger">Advanced Data</span>
+      <ul>
+        {[item.trait_base, item.trait_hash, item.lv_min_rand_range, item.lv_max_rand_range]
+          .filter(val => val)
+          .map((val) => (
+            <li>{val}</li>
+          ))
+        }
+      </ul>
+    </Popover>
+
+    )}
+    </>
+  )}
+  <div class="trait-display">
+    {traitIcons.map((t) => (
+      <svg
+        style={`width:1.8em; height:1.8em; fill: ${item[t.key] ? 'black' : 'lightgray'};`}
+      >
+        <use href={`/media/spritesheets/A26.svg?v=1#${t.icon}`} />
+      </svg>
+    ))}
+  </div>
+</div>
+{detail && <Map data={item.chests} /> }

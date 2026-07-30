@@ -1,11 +1,5 @@
-.data-title {
-  display: flex;
-  .badge {
-    margin: 0.5rem 0 auto auto;
-  }
-  >h3 {
-    padding-top: 0;
-  }
+.card-top-right {
+  text-align: right;
 }
 
 .image-desc-display {
@@ -30,7 +24,16 @@
     td {
         border-top: var(--table-border);
     }
+}
 
+.trait-display {
+  display: flex;
+  height: 100%;
+  text-align: center;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: 1rem;
+  padding-top: 0.4rem;
 }
 
 .table-item-data {

@@ -10,8 +10,16 @@
     box-sizing: border-box;
     min-width: 0;
   }
-.list-container {
-  .card {
-    overflow: hidden;
+
+.card-title {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+
+  > :nth-child(1) {
+    color: black;
+  }
+  h3 {
+    padding-top: 0;
   }
 }

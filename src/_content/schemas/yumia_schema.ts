@@ -100,6 +100,10 @@ export const itemSchema = z.object({
   kind: z.string().optional(),
 });
 
+export const traitGroupSchema = z.object({
+  trait: z.array(nameLinkSchema).optional(),
+})
+
 export const traitSchema = z.object({
   id: z.number().optional(),
   name: languageSchema.optional(),
@@ -124,7 +128,7 @@ export const traitSchema = z.object({
   combo3: nameLinkSchema.optional(),
   combo4: nameLinkSchema.optional(),
   chests: z.array(coordSchema).optional(),
-  group: z.array(nameLinkSchema).optional(),
+  group: traitGroupSchema.optional(),
   mon: nameLinkSchema.optional(),
   lv_min_rand_range: z.string().optional(),
   lv_max_rand_range: z.string().optional(),
@@ -169,5 +173,5 @@ export const yumiaData = [
   { game: 'yumia', type: 'categories', schema: categorySchema },
   { game: 'yumia', type: 'materials',    schema: nameLinkSchema },
   //{ game: 'yumia', type: 'monsters', schema: monsterSchema },
-  //{ game: 'yumia', type: 'traits',   schema: traitSchema },
+  { game: 'yumia', type: 'traits',   schema: traitSchema },
 ]

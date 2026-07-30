@@ -3,7 +3,7 @@ export const crumbDictionary: Record<string, Record<string, string>> = {
   items: item_translation,
   monsters: monster_translation,
   effects: effect_translation,
-  trait: trait_translation,
+  traits: trait_translation,
   properties: properties_translation,
 };
 
