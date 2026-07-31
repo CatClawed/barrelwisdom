@@ -3,8 +3,9 @@ interface Props {
   title?: string;
   href?: string;
   cls?: string;
+  restrainWidth: boolean;
 }
-const { title, href, cls = '' } = Astro.props;
+const { title, href, cls = '', restrainWidth = false } = Astro.props;
 ---
 
 <span class={`popover-wrapper`}>
@@ -18,7 +19,9 @@ const { title, href, cls = '' } = Astro.props;
     <slot name="trigger" />
   </a>
   <div
-    class={'popover-panel ' + (title ? '' : 'popover-no-title')}
+    class={'popover-panel ' +
+      (title ? '' : 'popover-no-title') +
+      (restrainWidth ? ' restrain-width' : '')}
     role="dialog"
     hidden
   >
@@ -29,7 +32,7 @@ const { title, href, cls = '' } = Astro.props;
   </div>
 </span>
 
-<style is:global>
+<style>
   .popover-wrapper {
     position: relative;
     display: inline-block;
@@ -45,15 +48,11 @@ const { title, href, cls = '' } = Astro.props;
   }
   .popover-panel {
     position: absolute;
-    z-index: 1100;
+    z-index: 2100;
     top: calc(100% + 0.4rem);
     left: 0;
-    min-width: 250px;
-    width: 100%;
-    width: -webkit-fill-available;
-    width: -moz-available;
-    width: stretch;
-    max-width: min(90dvh, 500px);
+    min-width: min(250px, 80dvw);
+    width: min(70dvw, 600px);
     background: var(--bg-card, white);
     border: var(--table-border);
     border-radius: 5px;
@@ -69,6 +68,12 @@ const { title, href, cls = '' } = Astro.props;
   .popover-panel--left {
     left: auto;
     right: 0;
+  }
+  .restrain-width {
+    width: 100%;
+    width: -webkit-fill-available;
+    width: -moz-available;
+    width: stretch;
   }
   .popover-no-title {
     padding: 1rem 0.5rem;

@@ -10,7 +10,7 @@ export const pathData = [
   { game: 'yumia', section: 'items', fragment: true },
   { game: 'yumia', section: 'traits', fragment: true },
   //{ game: 'yumia', section: 'monsters', fragment: true },
-  //{ game: 'yumia', section: 'effects', fragment: false },
+  { game: 'yumia', section: 'effects', fragment: false },
 ]
 
 export async function getComponentRegistry() {

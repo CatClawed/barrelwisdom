@@ -1,4 +1,4 @@
-import { z } from 'astro:content';
+import { z } from 'astro/zod';
 import { nameLinkSchema, languageSchema } from '@app/_content/schemas/common_schema';
 
 export const coordSchema = z.object({
@@ -165,7 +165,7 @@ export const categorySchema = z.object({
 
 
 export const yumiaData = [
-  //{ game: 'yumia', type: 'effects',  schema: effectSchema },
+  { game: 'yumia', type: 'effects',  schema: effectSchema },
   { game: 'yumia', type: 'items', schema: itemSchema },
   { game: 'yumia', type: 'categories', schema: categorySchema },
   { game: 'yumia', type: 'materials',    schema: nameLinkSchema },

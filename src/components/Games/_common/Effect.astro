@@ -1,0 +1,41 @@
+---
+interface Props {
+  name: string;
+  desc?: string;
+  note?: string;
+  mode?: string;
+  game?: string;
+  id?: string;
+  lang?: string;
+}
+const { name, desc, note, mode, game, id, lang } = Astro.props;
+---
+
+<div class={mode === 'detail' || mode === 'list' ? `card` : undefined}>
+  <div class="card-title">
+    {
+      mode === 'list' ? (
+        <a href={`/${game}/effects/${id}/${lang}`}>
+          <h3>{name}</h3>
+        </a>
+      ) : (
+        <h3>{name}</h3>
+      )
+    }
+    <div class="card-icon-position">
+      <slot name="icon" />
+    </div>
+  </div>
+  {
+    note && (
+      <p>
+        <b>Note:</b> {note}
+      </p>
+    )
+  }
+  {desc && <p>{desc}</p>}
+
+  <div class="card-content">
+    <slot />
+  </div>
+</div>

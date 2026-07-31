@@ -73,33 +73,9 @@
   .card {
     flex: 1;
 
-    .data-title {
-      a {
-      color: black;
-      }
-      a:hover {
-        color: black;
-      }
-    }
-
     .card-title {
       display: inline-flex;
       gap: 0.5rem;
-      align-items: center;
-
-      .badge {
-        font-size: 0.8rem;
-        margin: 0 0 auto auto;
-      }
-    }
-
-    a:hover {
-      color: black;
-    }
-
-    .card-title {
-      color: black;
-      font-size: 1.2rem;
     }
   }
 }

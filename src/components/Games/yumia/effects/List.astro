@@ -1,0 +1,41 @@
+---
+import Detail from './Detail.astro';
+import { filter_translation } from '@app/localization/translations/common-strings';
+
+const { items, lang, title } = Astro.props;
+---
+
+<h1>{title}</h1>
+<div class="filters">
+  <input
+    type="text"
+    id="filter"
+    placeholder={filter_translation[lang]}
+    autocomplete="off"
+    class="grid-6"
+  />
+</div>
+<ul class="list" id="item-list" data-lang={lang}>
+  {
+    items.map((i, index) => (
+      <li
+        class="list-container"
+        data-id={i.id}
+        data-search={`${i.data.name[lang].toLowerCase()} ${i.data.desc1[lang].toLowerCase()} ${i.data.desc2?.[lang]?.toLowerCase() ?? ''}`}
+      >
+        <Detail item={i.data} lang={lang} mode="list" />
+      </li>
+    ))
+  }
+</ul>
+<dialog id="map-modal" class="map-modal">
+  <div id="modal-content"></div>
+</dialog>
+<script>
+  import { initListFilters } from '@app/utils/filter-controller';
+
+  const lang = document.getElementById('item-list')!.dataset.lang!;
+  initListFilters({
+    lang,
+  });
+</script>

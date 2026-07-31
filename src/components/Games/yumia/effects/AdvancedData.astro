@@ -1,0 +1,41 @@
+---
+const { item } = Astro.props;
+---
+
+<ul>
+  {item.act_tag && <li>{item.act_tag}</li>}
+  {item.att_tag && <li>{item.att_tag}</li>}
+  {item.effect_hash && <li>{item.effect_hash}</li>}
+  {
+    item.prm1_lv_min_rand_range && (
+      <li>
+        <b>Value 1-1: </b>
+        {item.prm1_lv_min_rand_range}
+      </li>
+    )
+  }
+  {
+    item.prm1_lv_max_rand_range && (
+      <li>
+        <b>Value 1-2: </b>
+        {item.prm1_lv_max_rand_range}
+      </li>
+    )
+  }
+  {
+    item.prm2_lv_min_rand_range && (
+      <li>
+        <b>Value 2-1: </b>
+        {item.prm2_lv_min_rand_range}
+      </li>
+    )
+  }
+  {
+    item.prm2_lv_max_rand_range && (
+      <li>
+        <b>Value 2-2: </b>
+        {item.prm2_lv_max_rand_range}
+      </li>
+    )
+  }
+</ul>

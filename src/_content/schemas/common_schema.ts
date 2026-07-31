@@ -1,4 +1,4 @@
-import { z } from 'astro:content';
+import { z } from 'astro/zod';
 import { LanguageData } from '@app/localization/localization';
 
 const langKeys = Object.keys(LanguageData.language_codes);

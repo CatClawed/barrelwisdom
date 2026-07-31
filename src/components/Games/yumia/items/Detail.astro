@@ -16,7 +16,7 @@ const activeElements = level0 ? [
 ].filter((el) => el.active) : [];
 ---
 <div class={mode === 'detail' ? `card` : undefined}>
-  <div class="data-title"><h3>{item.name[lang]}</h3> {item.isDLC && <span class="badge bg-primary">DLC</span>}</div>
+  <div class="card-title"><h3>{item.name[lang]}</h3> {item.isDLC && <span class="badge bg-primary">DLC</span>}</div>
 
   <div class="image-desc-display">
     {
@@ -139,6 +139,7 @@ const activeElements = level0 ? [
                     <Popover
                       title={e.eff.name[lang]}
                       href={`/yumia/effects/${e.eff.id}/${lang}`}
+                      restrainWidth={mode === 'fragment'}
                     >
                       <span slot="trigger">{e.eff.name[lang]} {e.lv}</span>
 

@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css';
 let currentMap: L.Map | null = null;
 
 export function initMap(el: HTMLDivElement) {
+  if (!el) return;
   if ((el as any)._a26Initialized) return;
   (el as any)._a26Initialized = true;
 

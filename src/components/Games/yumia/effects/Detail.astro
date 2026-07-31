@@ -1,0 +1,47 @@
+---
+import Effect from '@app/components/Games/_common/Effect.astro';
+import AdvancedData from './AdvancedData.astro'
+import {
+  inner_translation,
+  outer_translation,
+} from '@app/localization/translations/yumia';
+import { item_translation } from '@app/localization/translations/common-strings';
+import Popover from '@app/components/Games/_common/Popover.astro';
+
+const { item, lang, mode, game = 'yumia' } = Astro.props;
+---
+
+<Effect
+  name={item.name[lang]}
+  game={game}
+  mode={mode}
+  desc={item.desc2 ? undefined : item.desc1[lang]}
+  id={item.id}
+  lang={lang}
+>
+  <span slot="icon">
+    <b>Max: </b>{item.max_level}
+  </span>
+
+  {item.desc2 && (
+      <p><b>{inner_translation[lang]}: </b>{item.desc1[lang]}</p>
+      <p><b>{outer_translation[lang]}: </b>{item.desc2[lang]}</p>
+  )}
+
+  {item.items?.length > 0 && (
+      <b style="margin-top: 1em;">{item_translation[lang]}:</b>
+      <ul class="two-column">
+        {item.items.map((i: any) => (
+          <li><a href={`/${game}/items/${i.id}/${lang}`}>{i.name[lang]}</a></li>
+        ))}
+      </ul>
+  )}
+
+  {mode === 'list' ? (
+  <Popover cls="dashed">
+    <span slot="trigger">Advanced Data</span>
+    <AdvancedData item={item} />
+  </Popover>
+  ) :
+  ( <b>Advanced Data:</b><AdvancedData item={item} /> )}
+</Effect>

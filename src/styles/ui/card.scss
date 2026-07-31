@@ -15,11 +15,20 @@
   display: flex;
   gap: 0.5rem;
   justify-content: space-between;
+  box-sizing: border-box;
 
-  > :nth-child(1) {
+  > :first-child {
     color: black;
   }
   h3 {
     padding-top: 0;
+  }
+
+  .card-icon-position {
+    align-self: start;
+  }
+
+  .badge {
+    margin: 0 0 auto auto;
   }
 }
