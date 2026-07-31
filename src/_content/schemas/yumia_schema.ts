@@ -4,8 +4,12 @@ import { nameLinkSchema, languageSchema } from '@app/_content/schemas/common_sch
 export const coordSchema = z.object({
   x: z.number(),
   z: z.number(),
-  label: z.number(),
+  label: z.number().optional(),
 });
+
+export const coordSchema2 = z.array(
+  coordSchema
+);
 
 export const effectSchema = z.object({
   id: z.number().optional(),
@@ -139,6 +143,7 @@ export const traitSchema = z.object({
 export const monsterSchema = z.object({
   id: z.number().optional(),
   name: languageSchema.optional(),
+  desc: languageSchema.optional(),
   race: nameLinkSchema.optional(),
   fire: z.string().optional(),
   ice: z.string().optional(),
@@ -169,6 +174,8 @@ export const yumiaData = [
   { game: 'yumia', type: 'items', schema: itemSchema },
   { game: 'yumia', type: 'categories', schema: categorySchema },
   { game: 'yumia', type: 'materials',    schema: nameLinkSchema },
-  //{ game: 'yumia', type: 'monsters', schema: monsterSchema },
-  { game: 'yumia', type: 'traits',   schema: traitSchema },
+  { game: 'yumia', type: 'monsters', schema: monsterSchema },
+  { game: 'yumia', type: 'races', schema: nameLinkSchema },
+  { game: 'yumia', type: 'traits', schema: traitSchema },
+  { game: 'yumia', type: 'maps',   schema: coordSchema2 },
 ]

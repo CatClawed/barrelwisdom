@@ -30,7 +30,6 @@
 }
 
 .outer-borders {
-
     border: var(--table-border);
 }
 
@@ -38,4 +37,12 @@
     td {
         border: none;
     }
+}
+
+.tbl-transparent {
+  background: transparent;
+  border: none !important;
+  td {
+    border: none !important;
+  }
 }

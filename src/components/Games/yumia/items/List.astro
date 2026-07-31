@@ -110,10 +110,12 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
               />
             )}
             <div class="card">
-              <a class="card-title" href={`/yumia/items/${i.id}/${lang}`}>
-                <h4 class="item-trigger">{i.data.name[lang]}</h4>
+              <div class="card-title">
+                <a href={`/yumia/items/${i.id}/${lang}`}>
+                  <h4 class="item-trigger">{i.data.name[lang]}</h4>
+                </a>
                 {i.data.isDLC && <span class="badge bg-primary">DLC</span>}
-              </a>
+              </div>
               <ItemAttributeList
                 cats={i.data.cats}
                 mats={i.data.mats}

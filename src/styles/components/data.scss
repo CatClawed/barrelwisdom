@@ -47,3 +47,15 @@
         padding-left: 0.5rem;
     }
 }
+
+.standard-stat-star {
+  height: 1.3rem;
+  aspect-ratio: 1;
+  fill: gold;
+
+  use {
+      stroke: black;
+      stroke-width: 8%;
+      stroke-linejoin: round;
+  }
+}

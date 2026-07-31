@@ -1,0 +1,180 @@
+---
+import { element_map } from '@components/Games/yumia/yumia_constants';
+import {
+  stat_translation,
+  trait_translation,
+} from '@app/localization/translations/common-strings';
+import Map from '@app/components/Games/yumia/map/Map.astro';
+
+const { item, lang, game = 'yumia', mode } = Astro.props;
+
+// Helper to generate star arrays
+const stars = (count: number) => ({
+  filled: Array.from({ length: count }),
+  empty: Array.from({ length: 5 - count }),
+});
+
+const elements: string[] = ['fire', 'ice', 'bolt', 'air'];
+
+const arrows = {
+  resist: 'fa-arrow-down',
+  weak: 'fa-arrow-up',
+};
+---
+
+<div class={mode !== 'fragment' ? 'card' : undefined}>
+  <div class="card-title">
+    <h3>{item.name[lang]}</h3>
+    <div class="card-icon-position">
+      <svg class="a26-monster-icon">
+        <use href={`/spritesheets/A26.svg?v=1#race-${item.race.id}`}></use>
+      </svg>
+    </div>
+  </div>
+  <div class="image-desc-display">
+    <img
+      class="card-item-display"
+      src={`/media/games/${game}/monsters/${item.id}.webp?v=1`}
+      alt={item.name[lang]}
+      style="aspect-ratio: 1; width: 256px;"
+    />
+    {item.desc && <p>{item.desc[lang]}</p>}
+  </div>
+
+  <div class="grid">
+    <div class="grid-6">
+      {
+        (item.drop || item.rare || item.trait) && (
+          <>
+            <b>Drops:</b>
+            <ul>
+              {item.drop && (
+                <li>
+                  <a href={`/${game}/items/${item.drop.id}/${lang}`}>
+                    {item.drop.name[lang]}
+                  </a>
+                </li>
+              )}
+              {item.rare && (
+                <li>
+                  <a href={`/${game}/items/${item.rare.id}/${lang}`}>
+                    {item.rare.name[lang]}
+                  </a>{' '}
+                  (Rare)
+                </li>
+              )}
+              {item.trait && (
+                <li>
+                  <a href={`/${game}/traits/${item.trait.id}/${lang}`}>
+                    {item.trait.name[lang]}
+                  </a>{' '}
+                  ({trait_translation[lang]})
+                </li>
+              )}
+            </ul>
+          </>
+        )
+      }
+    </div>
+
+    <div class="grid-6">
+      <table class="table-item-data tbl-transparent">
+        <tbody>
+          {
+            [
+              { label: stat_translation['hp'][lang], val: item.hp },
+              { label: stat_translation['atk'][lang], val: item.atk },
+              { label: stat_translation['dfn'][lang], val: item.dfn },
+              { label: stat_translation['spd'][lang], val: item.spd },
+            ].map((stat) => (
+              <tr>
+                <td style="padding:0;">
+                  <b>{stat.label}</b>
+                </td>
+                <td style="padding:0; padding-left:0.5em;">
+                  {stars(stat.val).filled.map(() => (
+                    <svg class="standard-stat-star">
+                      <use href="/spritesheets/main.svg?v=1#fa-star" />
+                    </svg>
+                  ))}
+                  {stars(stat.val).empty.map(() => (
+                    <svg class="standard-stat-star" style="fill:black;">
+                      <use href="/spritesheets/main.svg?v=1#fa-star" />
+                    </svg>
+                  ))}
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <table class="tbl noborder tbl-transparent element-icons">
+    <tbody>
+      <tr>
+        <td>
+          <svg
+            class="colored-icon"
+            style={`background-color:${item.break_phys ? '#c88401' : '#5f49ec'};`}
+          >
+            <use
+              href={`/spritesheets/A26.svg?v=1#${item.break_phys ? 'physical' : 'magical'}`}
+            ></use>
+          </svg>
+        </td>
+        {
+          elements.map((e) => (
+            <td>
+              <svg
+                class="colored-icon"
+                style={`background-color:${item[e] ? element_map[e] : element_map['none']};`}
+              >
+                <use href={`/spritesheets/A26.svg?v=1#${e}`} />
+              </svg>
+            </td>
+          ))
+        }
+      </tr>
+      <tr>
+        <td>{item.break_hits}</td>
+        {
+          elements.map((e) => (
+            <td>
+              {item[e] && (
+                <svg>
+                  <use href={`/spritesheets/main.svg?v=1#${arrows[item[e]]}`} />
+                </svg>
+              )}
+            </td>
+          ))
+        }
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+{item.location && <Map data={item.location} />}
+<style lang="scss">
+  @use '@styles/games/yumia';
+  .element-icons {
+    td {
+      text-align: center;
+      padding: 0;
+      width: 20%;
+
+      svg {
+        height: 1.5em;
+        aspect-ratio: 1;
+        fill: black;
+        padding: 0.2em;
+      }
+      .colored-icon {
+        border: 1px solid #0004;
+        border-radius: 50%;
+        height: 3em;
+      }
+    }
+  }
+</style>

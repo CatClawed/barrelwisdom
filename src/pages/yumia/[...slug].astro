@@ -1,0 +1,69 @@
+---
+import { LanguageData } from '@app/localization/localization';
+import Map from '@components/Games/yumia/map/Map.astro';
+import MainLayout from '@layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
+
+export const treasure_trove_translation: Record<string, string> = {
+  de: 'Schatzkammer-Schlüssel',
+  en: 'Treasure Trove Key Map',
+  es: 'Llave del tesoro oculto',
+  fr: 'Clé de salle aux trésors',
+  ja: '宝物庫の鍵',
+  ko: '보물고 열쇠',
+  ru: 'Ключ от сокровищницы',
+  sc: '宝物库钥匙',
+  tc: '寶物庫鑰匙',
+};
+
+export const memory_vial_translation: Record<string, string> = {
+  de: 'Erinnerungsphiole',
+  en: 'Memory Vial Map',
+  es: 'Vial de recuerdos',
+  fr: 'Fiole de mémoire',
+  ja: '伝想器',
+  ko: '전상기',
+  ru: 'Сосуд памяти',
+  sc: '传忆器',
+  tc: '傳憶器',
+};
+
+export async function getStaticPaths() {
+  const paths: any[] = [];
+
+  const items = await getCollection(`yumia_maps` as any);
+  const langs = LanguageData.languages['yumia'];
+
+  items.forEach((item) => {
+    const itemId = (item as any).id;
+    (langs as string[]).forEach((lang) => {
+      paths.push({
+        params: { slug: `${itemId}/${lang}` },
+        props: { item, lang },
+      });
+    });
+  });
+  return paths;
+}
+const { item, lang } = Astro.props;
+
+const title =
+  item.id === 'memory-vial-locations'
+    ? memory_vial_translation[lang]
+    : treasure_trove_translation[lang];
+
+const description =
+  lang !== 'en'
+    ? ''
+    : item.id === 'memory-vial-locations'
+      ? 'Need help with Pioneering in Sivash? Want to just collect them all? This map shows all non-story vials.'
+      : 'A map to ease your suffering. There are 50 Treasure Troves and 50 keys.';
+
+console.log(item.id);
+---
+
+<MainLayout title={title} description={description} mainClass="medium-page">
+  <h1>{title}</h1>
+  <p>{description}</p>
+  <Map data={item.data} tracker={true} />
+</MainLayout>
