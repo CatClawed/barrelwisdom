@@ -1,8 +1,8 @@
 ---
 import ItemAttributeList from './ItemAttributeList.astro';
 import Popover from '@app/components/Games/_common/Popover.astro';
-import Map from './Map.astro';
-import { element_map } from './yumia_constants';
+import Map from '@app/components/Games/yumia/map/Map.astro';
+import { element_map } from '@app/components/Games/yumia/yumia_constants';
 import { outer_translation, sp_translation, comfort_translation, material_translation, inner_translation } from '@app/localization/translations/yumia';
 import { stat_translation, details_translation, quality_translation, monster_translation, effect_translation, item_translation } from '@app/localization/translations/common-strings';
 const { item, lang, mode } = Astro.props;

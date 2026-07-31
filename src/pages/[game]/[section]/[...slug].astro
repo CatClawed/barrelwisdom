@@ -1,0 +1,81 @@
+---
+import MainLayout from '@layouts/MainLayout.astro';
+import type { GetStaticPathsResult } from 'astro';
+import { LanguageData } from '@app/localization/localization';
+import { getCollection } from 'astro:content';
+import { pathData, getComponentRegistry, pageTitles } from './path-builder';
+
+export interface sectionConfig {
+  game: string;
+  section: string;
+  fragment?: boolean;
+}
+
+export async function buildsectionPaths(
+  configs: sectionConfig[],
+): Promise<GetStaticPathsResult> {
+  const paths: any[] = [];
+  for (const { game, section, fragment } of configs) {
+    const collectionName = `${game}_${section}`;
+    const items = await getCollection(collectionName as any);
+    const langs = LanguageData.languages[game];
+
+    (langs as string[]).forEach((lang) => {
+      paths.push({
+        params: { game, section: section, slug: lang },
+        props: { mode: 'list', lang, allItems: items, game },
+      });
+    });
+
+    (items as any[]).forEach((item) => {
+      (langs as string[]).forEach((lang) => {
+        paths.push({
+          params: { game, section: section, slug: `${item.id}/${lang}` },
+          props: { mode: 'detail', item, lang, game },
+        });
+        if (fragment) {
+          paths.push({
+            params: {
+              game,
+              section: section,
+              slug: `${item.id}/fragment/${lang}`,
+            },
+            props: { mode: 'fragment', item, lang, game },
+          });
+        }
+      });
+    });
+  }
+  return paths;
+}
+
+export async function getStaticPaths() {
+  return buildsectionPaths(pathData);
+}
+
+const { game, section } = Astro.params;
+const { mode, item, lang, allItems } = Astro.props;
+
+const registry = await getComponentRegistry();
+const ListComponent = registry[game][section].list;
+const DetailComponent = registry[game][section].detail;
+const title: string = pageTitles[section][lang];
+---
+
+{
+  mode === 'list' ? (
+    <MainLayout title={title}>
+      <ListComponent items={allItems} lang={lang} title={title} />
+    </MainLayout>
+  ) : mode === 'detail' ? (
+    <MainLayout
+      title={item.data.name[lang]}
+      description={item.data.desc?.[lang] ?? ''}
+      mainClass="small-page"
+    >
+      <DetailComponent item={item.data} lang={lang} mode={mode} />
+    </MainLayout>
+  ) : (
+    <DetailComponent item={item.data} lang={lang} mode={mode} />
+  )
+}

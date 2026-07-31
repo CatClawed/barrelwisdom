@@ -12,7 +12,11 @@ const title = isMain
     : SITE_TITLE + ' Page ' + page.currentPage;
 ---
 
-<MainLayout title={title} description={SITE_DESCRIPTION} mainClass="blog-list">
+<MainLayout
+  title={title}
+  description={SITE_DESCRIPTION}
+  mainClass="medium-page"
+>
   {tag && <h1>Archive: {tag}</h1>}
   <section class={`blog-list-grid${isMain ? ' blog-list-hero' : ''}`}>
     {

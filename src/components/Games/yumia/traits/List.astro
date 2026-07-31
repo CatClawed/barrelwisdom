@@ -1,5 +1,5 @@
 ---
-import TraitDetail from './TraitDetail.astro';
+import Detail from './Detail.astro';
 import FilterButton from '@components/Games/_common/FilterButton.astro';
 import { filter_translation } from '@app/localization/translations/common-strings';
 
@@ -50,7 +50,7 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
           .filter(Boolean)
           .join(',')}
       >
-        <TraitDetail item={i.data} lang={lang} mode="list" />
+        <Detail item={i.data} lang={lang} mode="list" />
       </li>
     ))
   }
@@ -60,7 +60,10 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
 </dialog>
 <script>
   import { initListFilters } from '@app/utils/filter-controller';
-  import { initMap, destroyMap } from './map_client';
+  import {
+    initMap,
+    destroyMap,
+  } from '@app/components/Games/yumia/map/map_client';
 
   const lang = document.getElementById('item-list')!.dataset.lang!;
   initListFilters({

@@ -156,14 +156,11 @@ export const monsterSchema = z.object({
   rare: nameLinkSchema.optional(),
 });
 
-export const categoryHelperSchema = z.object({
-  recipe: z.array(itemSchema).optional(),
-});
 
 export const categorySchema = z.object({
   name: languageSchema,
-  in_cat: z.array(nameLinkSchema).optional(),
-  used: z.array(categoryHelperSchema).optional(),
+  in_cat: z.array(itemSchema).optional(),
+  used: z.array(itemSchema).optional(),
 });
 
 

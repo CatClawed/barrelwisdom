@@ -1,0 +1,10 @@
+---
+const { item, lang } = Astro.props;
+---
+
+<tr>
+  <td>
+    <a href={`/yumia/items/${item.id}/${lang}`}>{item.name[lang]}</a>
+    {item.isDLC && <span class="badge bg-primary">DLC</span>}
+  </td>
+</tr>

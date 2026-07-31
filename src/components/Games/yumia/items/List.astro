@@ -3,7 +3,10 @@ import { getCollection } from 'astro:content';
 import ItemAttributeList from './ItemAttributeList.astro';
 import Dropdown from '@components/Games/_common/Dropdown.astro';
 import FilterButton from '@components/Games/_common/FilterButton.astro';
-import { category_to_icon, element_map } from './yumia_constants';
+import {
+  category_to_icon,
+  element_map,
+} from '@app/components/Games/yumia/yumia_constants';
 import {
   category_translation,
   filter_translation,
@@ -139,7 +142,10 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
   import { initListFilters } from '@app/utils/filter-controller';
   import { initSearchableSelects } from '@components/Games/_common/dropdown_client';
   import { initPopovers } from '@components/Games/_common/popover_client';
-  import { destroyMap, initMap } from './map_client';
+  import {
+    destroyMap,
+    initMap,
+  } from '@app/components/Games/yumia/map/map_client';
 
   const list = document.getElementById('item-list')!;
   const lang = list.dataset.lang!;

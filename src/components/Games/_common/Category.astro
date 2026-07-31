@@ -1,0 +1,37 @@
+---
+interface Props {
+  name: string;
+  using?: boolean;
+  colspan?: number;
+}
+const { name, using = false, colspan = 1 } = Astro.props;
+---
+
+<h1>{name}</h1>
+<div class="grid">
+  <div class="grid-6">
+    <table class="tbl outer-borders">
+      <thead><tr><th colspan="2">Items in Category</th></tr></thead>
+      <tbody>
+        <slot name="inCategory" />
+      </tbody>
+    </table>
+  </div>
+
+  {
+    using && (
+      <div class="grid-6">
+        <table class="tbl outer-borders">
+          <thead>
+            <tr>
+              <th colspan={colspan}>Items Using Category</th>
+            </tr>
+          </thead>
+          <tbody>
+            <slot name="usingCategory" />
+          </tbody>
+        </table>
+      </div>
+    )
+  }
+</div>
