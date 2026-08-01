@@ -6,15 +6,22 @@ import type { CollectionEntry } from 'astro:content';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage, tags } =
-  Astro.props;
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  heroImage,
+  tags,
+  mainClass = 'small-page',
+} = Astro.props;
 ---
 
-<MainLayout title={title} description={description} mainClass="small-page">
+<MainLayout title={title} description={description} mainClass={mainClass}>
   <article>
     <h1>{title}</h1>
     <span class="svg-inline-text">
-      <svg><use href="/media/spritesheets/main.svg?v=1#fa-calendar"></use></svg>
+      <svg><use href="/spritesheets/main.svg?v=1#fa-calendar"></use></svg>
       <FormattedDate date={pubDate} />
     </span>
     {

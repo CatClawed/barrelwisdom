@@ -1,18 +1,9 @@
 ---
 import Category from '@app/components/Games/_common/Category.astro';
-
 import { LanguageData } from '@app/localization/localization';
 import { category_translation } from '@app/localization/translations/common-strings';
 import MainLayout from '@layouts/MainLayout.astro';
 import { getCollection } from 'astro:content';
-
-const gameComponents: Record<string, { list?: any; detail: any }> = {
-  yumia: {
-    detail: (
-      await import('@components/Games/yumia/categories/CategoryRow.astro')
-    ).default,
-  },
-};
 
 export async function getStaticPaths() {
   const games: string[] = ['yumia'];
@@ -22,7 +13,6 @@ export async function getStaticPaths() {
     const items = await getCollection(`${gameId}_categories` as any);
     const langs = LanguageData.languages[gameId];
 
-    // Detail pages: /yumia/items/344/en
     items.forEach((item) => {
       const itemId = (item as any).id;
       (langs as string[]).forEach((lang) => {
@@ -38,24 +28,29 @@ export async function getStaticPaths() {
 const { game } = Astro.params;
 const { type, item, lang } = Astro.props;
 
-const ItemList = gameComponents[game].list;
-const ItemDetail = gameComponents[game].detail;
+const ItemDetail = (
+  await import(`@components/Games/${game}/categories/CategoryRow.astro`)
+).default;
 ---
 
 <MainLayout
-  title={item.data.name[lang]}
+  title={`${category_translation[lang]} ${item.data.name[lang]}`}
   description={category_translation[lang]}
   mainClass="medium-page"
 >
   <Category name={item.data.name[lang]} using={item.data.used !== undefined}>
     <Fragment slot="inCategory">
-      {item.data.in_cat.map((i) => <ItemDetail item={i} lang={lang} />)}
+      {
+        item.data.in_cat.map((i) => (
+          <ItemDetail item={i} lang={lang} game={game} />
+        ))
+      }
     </Fragment>
     {
       item.data.used && (
         <Fragment slot="usingCategory">
           {item.data.used.map((u) => (
-            <ItemDetail item={u} lang={lang} />
+            <ItemDetail item={u} lang={lang} game={game} />
           ))}
         </Fragment>
       )

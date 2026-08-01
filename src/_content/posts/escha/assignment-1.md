@@ -3,6 +3,7 @@ title: "Assignment 1"
 pubDate: "2021-06-16"
 updatedDate: "2024-11-14"
 description: "Guide for Assignment 1, including recipes, events, and other things of note."
+mainClass: "medium-page"
 ---
 
 <div class="grid">

@@ -2,7 +2,7 @@
 import Detail from './Detail.astro';
 import { filter_translation } from '@app/localization/translations/common-strings';
 
-const { items, lang, title } = Astro.props;
+const { items, lang, title, game, section } = Astro.props;
 ---
 
 <h1>{title}</h1>
@@ -12,10 +12,16 @@ const { items, lang, title } = Astro.props;
     id="filter"
     placeholder={filter_translation[lang]}
     autocomplete="off"
-    class="grid-6"
+    class="grid-12"
   />
 </div>
-<ul class="list" id="item-list" data-lang={lang}>
+<ul
+  class="list"
+  id="item-list"
+  data-lang={lang}
+  data-game={game}
+  data-section={section}
+>
   {
     items.map((i, index) => (
       <li
@@ -23,7 +29,13 @@ const { items, lang, title } = Astro.props;
         data-id={i.id}
         data-search={`${i.data.name[lang].toLowerCase()} ${i.data.desc1[lang].toLowerCase()} ${i.data.desc2?.[lang]?.toLowerCase() ?? ''}`}
       >
-        <Detail item={i.data} lang={lang} mode="list" />
+        <Detail
+          item={i.data}
+          lang={lang}
+          mode="list"
+          game={game}
+          section={section}
+        />
       </li>
     ))
   }
@@ -33,9 +45,5 @@ const { items, lang, title } = Astro.props;
 </dialog>
 <script>
   import { initListFilters } from '@app/utils/filter-controller';
-
-  const lang = document.getElementById('item-list')!.dataset.lang!;
-  initListFilters({
-    lang,
-  });
+  initListFilters({});
 </script>

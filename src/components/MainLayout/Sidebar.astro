@@ -29,7 +29,7 @@ const globalItems = await getNavForGame('global');
             <Tag {...props}>
               {n.svg ? (
                 <svg>
-                  <use href={`/media/spritesheets/${n.svg}`} />
+                  <use href={`/spritesheets/${n.svg}`} />
                 </svg>
                 <span>{n.name}</span>
               ) : (
@@ -38,10 +38,10 @@ const globalItems = await getNavForGame('global');
               {isExpandable && (
                 <>
                   <svg class="caret-down">
-                    <use href="/media/spritesheets/main.svg?v=1#fa-caret-down" />
+                    <use href="/spritesheets/main.svg?v=1#fa-caret-down" />
                   </svg>
                   <svg class="caret-up">
-                    <use href="/media/spritesheets/main.svg?v=1#fa-caret-up" />
+                    <use href="/spritesheets/main.svg?v=1#fa-caret-up" />
                   </svg>
                 </>
               )}
@@ -74,7 +74,7 @@ const globalItems = await getNavForGame('global');
           >
             {n.svg && (
               <svg>
-                <use href={`/media/spritesheets/${n.svg}`} />
+                <use href={`/spritesheets/${n.svg}`} />
               </svg>
             )}
             {n.name}

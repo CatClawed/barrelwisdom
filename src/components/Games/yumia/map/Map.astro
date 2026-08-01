@@ -24,11 +24,11 @@ const showChestIcon = tracker && !!data[0]?.label;
       <div class="tracker-count">
         {showChestIcon ? (
           <svg class="tracker-icon white-icon">
-            <use href="/media/spritesheets/A26.svg?v=1#chest" />
+            <use href="/spritesheets/yumia.svg?v=1#chest" />
           </svg>
         ) : (
           <svg class="tracker-icon yellow-icon">
-            <use href="/media/spritesheets/A26.svg?v=1#memory-vial" />
+            <use href="/spritesheets/yumia.svg?v=1#memory-vial" />
           </svg>
         )}
         <span id={`${mapId}-count`}>{initialCount}</span> / {data.length}

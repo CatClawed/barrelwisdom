@@ -19,13 +19,13 @@ export function initMap(el: HTMLDivElement) {
   let count = 0;
 
   const ig = L.divIcon({ html: `<div></div>`, className: 'circle white-div' });
-  const ic = L.divIcon({ html: `<svg class="map-icon"><use href="/media/spritesheets/A26.svg?v=1#chest"></use></svg>`, className: 'white-icon' });
-  const iff = L.divIcon({ html: `<svg class="map-icon white-icon"><use href="/media/spritesheets/A26.svg?v=1#fish"></use></svg>`, className: 'dummy' });
-  const ib = L.divIcon({ html: `<svg class="map-icon"><use href="/media/spritesheets/A26.svg?v=1#building"></use></svg>`, className: 'dummy' });
-  const ics = L.divIcon({ html: `<svg class="map-icon"><use href="/media/spritesheets/A26.svg?v=1#campsite"></use></svg>`, className: 'dummy' });
-  const is = L.divIcon({ html: `<svg class="map-icon"><use href="/media/spritesheets/A26.svg?v=1#shop"></use></svg>`, className: 'dummy' });
-  const inpc = L.divIcon({ html: `<svg class="map-icon white-icon"><use href="/media/spritesheets/A26.svg?v=1#npc"></use></svg>`, className: 'dummy' });
-  const ia = L.divIcon({ html: `<svg class="map-icon"><use href="/media/spritesheets/A26.svg?v=1#animal"></use></svg>`, className: 'dummy' });
+  const ic = L.divIcon({ html: `<svg class="map-icon"><use href="/spritesheets/yumia.svg?v=1#chest"></use></svg>`, className: 'white-icon' });
+  const iff = L.divIcon({ html: `<svg class="map-icon white-icon"><use href="/spritesheets/yumia.svg?v=1#fish"></use></svg>`, className: 'dummy' });
+  const ib = L.divIcon({ html: `<svg class="map-icon"><use href="/spritesheets/yumia.svg?v=1#building"></use></svg>`, className: 'dummy' });
+  const ics = L.divIcon({ html: `<svg class="map-icon"><use href="/spritesheets/yumia.svg?v=1#campsite"></use></svg>`, className: 'dummy' });
+  const is = L.divIcon({ html: `<svg class="map-icon"><use href="/spritesheets/yumia.svg?v=1#shop"></use></svg>`, className: 'dummy' });
+  const inpc = L.divIcon({ html: `<svg class="map-icon white-icon"><use href="/spritesheets/yumia.svg?v=1#npc"></use></svg>`, className: 'dummy' });
+  const ia = L.divIcon({ html: `<svg class="map-icon"><use href="/spritesheets/yumia.svg?v=1#animal"></use></svg>`, className: 'dummy' });
 
   function toggleColor(e: L.LeafletMouseEvent) {
     const icon = (e.target as any)._icon as HTMLElement;

@@ -80,7 +80,7 @@ export const en: NavItem[] = [
   },
   {
     name: "Encyclopedia",
-    svg: "A16.svg?v=1#race-slag",
+    svg: "shallie.svg?v=1#race-slag",
     expand: true,
     children: [
       {
@@ -163,7 +163,7 @@ export const ja: NavItem[] = [
   {
     name: "アイテム",
     url: "/shallie/items/ja",
-    svg: "A16.svg?v=1#race-slag"
+    svg: "shallie.svg?v=1#race-slag"
   },
   {
     name: "レシピブック",

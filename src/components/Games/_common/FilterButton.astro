@@ -37,14 +37,13 @@ const {
         style={`--active-button-bg: ${btn.activeColor || 'black'}`}
       >
         <svg preserveAspectRatio="xMidYMid meet">
-          <use href={`/media/spritesheets/${svg}#${btn.icon}`} />
+          <use href={`/spritesheets/${svg}#${btn.icon}`} />
         </svg>
       </button>
     ))
   }
 </div>
 <style lang="scss">
-  @use '@styles/games/yumia';
   .filter-buttons-grid {
     display: grid;
     padding: 0 0 0.1em 0;
@@ -65,6 +64,31 @@ const {
     }
     &.active svg {
       fill: var(--active-fill, black);
+    }
+  }
+  .elements {
+    height: 1.5em;
+    width: 1.5em;
+    fill: black;
+    border-radius: 50%;
+    border: #00000044 1px solid;
+    padding: 0.1em;
+    margin-right: 0.1em;
+  }
+
+  .elements2 {
+    > svg {
+      fill: black !important;
+      border-radius: 50%;
+      border: #00000044 1px solid;
+      padding: 0.1em;
+      background-color: gray;
+    }
+  }
+
+  .elements2.active {
+    > svg {
+      background-color: var(--active-button-bg);
     }
   }
 </style>

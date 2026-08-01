@@ -1,10 +1,10 @@
 ---
-const { item, lang } = Astro.props;
+const { item, lang, game } = Astro.props;
 ---
 
 <tr>
   <td>
-    <a href={`/yumia/items/${item.id}/${lang}`}>{item.name[lang]}</a>
+    <a href={`/${game}/items/${item.id}/${lang}`}>{item.name[lang]}</a>
     {item.isDLC && <span class="badge bg-primary">DLC</span>}
   </td>
 </tr>

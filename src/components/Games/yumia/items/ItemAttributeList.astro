@@ -11,6 +11,7 @@ interface Props {
   ice?: boolean;
   bolt?: boolean;
   air?: boolean;
+  game: string;
 }
 
 const {
@@ -23,6 +24,7 @@ const {
   ice = false,
   bolt = false,
   air = false,
+  game,
 } = Astro.props;
 
 const getColor = (active: boolean | undefined, type: string) =>
@@ -41,14 +43,14 @@ const elements = [
     {
       cats.map((item) => (
         <li class="neat-display">
-          <svg class="a26-icon">
+          <svg class="medium-icon">
             <use
-              href={`/spritesheets/A26.svg?v=1#${category_to_icon[item.id]}`}
+              href={`/spritesheets/${game}.svg?v=1#${category_to_icon[item.id]}`}
             />
           </svg>
 
           {mode !== 'list' ? (
-            <a href={`/yumia/categories/${item.id}/${lang}`}>{item.name[lang]}</a>
+            <a href={`/${game}/categories/${item.id}/${lang}`}>{item.name[lang]}</a>
           ) : (
             <span>{item.name[lang]}</span>
           )}
@@ -60,8 +62,8 @@ const elements = [
     {
       mats?.map((item) => (
         <li class="neat-display">
-          <svg class="a26-icon">
-            <use href={`/spritesheets/A26.svg?v=1#material-${item.id}`} />
+          <svg class="medium-icon">
+            <use href={`/spritesheets/${game}.svg?v=1#material-${item.id}`} />
           </svg>
           <span>{item.name[lang]}</span>
         </li>
@@ -74,17 +76,17 @@ const elements = [
       <div class="neat-display" style="break-inside: avoid-column;">
         {elements.map((el) => (
           <svg
-            class="a26-elements"
+            class="elements"
             style={`background-color: ${getColor(el.active, el.id)};`}
           >
-            <use href={`/spritesheets/A26.svg?v=1#${el.id}`} />
+            <use href={`/spritesheets/${game}.svg?v=1#${el.id}`} />
           </svg>
         ))}
       </div>
 
       <div class="neat-display">
-        <svg class="a26-icon">
-          <use href="/spritesheets/A26.svg?v=1#resonance" />
+        <svg class="medium-icon">
+          <use href={`/spritesheets/${game}.svg?v=1#resonance`} />
         </svg>
         <span>{resonance} - {resonance + 5}</span>
       </div>
@@ -93,11 +95,12 @@ const elements = [
 </div>
 
 <style lang="scss">
-  @use '@styles/games/yumia';
-
   .neat-display {
     margin: auto auto 0 0;
     display: flex;
     align-items: center;
+    svg {
+      margin-right: 0.3em;
+    }
   }
 </style>

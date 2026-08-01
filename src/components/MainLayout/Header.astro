@@ -28,7 +28,7 @@ function getLangUrl(targetLang: string) {
 <header>
   <nav class="navigation">
     <button id="hamburger" aria-label="Toggle navigation" class="nav-hamburger">
-      <svg><use href="/media/spritesheets/main.svg?v=1#fa-bars"></use></svg>
+      <svg><use href="/spritesheets/main.svg?v=1#fa-bars"></use></svg>
     </button>
     <a aria-label="homepage" href="/" class="navigation-brand">
       <picture>
@@ -53,13 +53,13 @@ function getLangUrl(targetLang: string) {
       popovertarget={hasMultipleLangs ? 'lang-popover' : undefined}
     >
       <svg class="globe-icon"
-        ><use href="/media/spritesheets/main.svg?v=1#fa-globe"></use></svg
+        ><use href="/spritesheets/main.svg?v=1#fa-globe"></use></svg
       >
       <span>{LanguageData.language_codes[currentLang]}</span>
       {
         hasMultipleLangs ? (
           <svg class="caret-icon">
-            <use href="/media/spritesheets/main.svg?v=1#fa-caret-down" />
+            <use href="/spritesheets/main.svg?v=1#fa-caret-down" />
           </svg>
         ) : (
           <div class="caret-icon" />

@@ -25,13 +25,13 @@ interface ListFilterOptions {
 
 export function initListFilters(opts: ListFilterOptions) {
   const {
-    lang,
     listSelector = '#item-list .list-container',
     searchInputId = 'filter',
     searchAttr = 'search',
     filters = [],
   } = opts;
 
+  const lang = document.getElementById('item-list')!.dataset.lang;
   const searchInput = document.getElementById(searchInputId) as HTMLInputElement | null;
   const selectEls = new Map<string, HTMLSelectElement>();
   const activeState = new Map<string, string[]>();

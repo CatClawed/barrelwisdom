@@ -6,7 +6,7 @@ import {
 } from '@app/localization/translations/common-strings';
 import Map from '@app/components/Games/yumia/map/Map.astro';
 
-const { item, lang, game = 'yumia', mode } = Astro.props;
+const { item, lang, mode, game, section } = Astro.props;
 
 // Helper to generate star arrays
 const stars = (count: number) => ({
@@ -26,15 +26,15 @@ const arrows = {
   <div class="card-title">
     <h3>{item.name[lang]}</h3>
     <div class="card-icon-position">
-      <svg class="a26-monster-icon">
-        <use href={`/spritesheets/A26.svg?v=1#race-${item.race.id}`}></use>
+      <svg class="large-icon">
+        <use href={`/spritesheets/${game}.svg?v=1#race-${item.race.id}`}></use>
       </svg>
     </div>
   </div>
   <div class="image-desc-display">
     <img
       class="card-item-display"
-      src={`/media/games/${game}/monsters/${item.id}.webp?v=1`}
+      src={`/media/games/${game}/${section}/${item.id}.webp?v=1`}
       alt={item.name[lang]}
       style="aspect-ratio: 1; width: 256px;"
     />
@@ -120,7 +120,7 @@ const arrows = {
             style={`background-color:${item.break_phys ? '#c88401' : '#5f49ec'};`}
           >
             <use
-              href={`/spritesheets/A26.svg?v=1#${item.break_phys ? 'physical' : 'magical'}`}
+              href={`/spritesheets/${game}.svg?v=1#${item.break_phys ? 'physical' : 'magical'}`}
             ></use>
           </svg>
         </td>
@@ -131,7 +131,7 @@ const arrows = {
                 class="colored-icon"
                 style={`background-color:${item[e] ? element_map[e] : element_map['none']};`}
               >
-                <use href={`/spritesheets/A26.svg?v=1#${e}`} />
+                <use href={`/spritesheets/${game}.svg?v=1#${e}`} />
               </svg>
             </td>
           ))
@@ -157,7 +157,6 @@ const arrows = {
 
 {item.location && <Map data={item.location} />}
 <style lang="scss">
-  @use '@styles/games/yumia';
   .element-icons {
     td {
       text-align: center;
