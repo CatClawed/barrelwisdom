@@ -46,6 +46,6 @@ Spend a certain amount of cole refilling items. (Not sure how much currently, ma
 
 ## Is there an easy way to get money?
 
-Per <a href="https://www.youtube.com/watch?v=F76b937bV-Q" target="_blank">this video (Japanese)</a>, you can take advantage of the basic four neutralizer's low base cost. You will need duplication price reductions; you need at least two from Alette's ability menu to begin to turn a profit, but more is better. You get [Overpriced](/sophie2/traits/overpriced), [One of a Kind](/sophie2/traits/one-of-a-kind), and [Golden Glow](/sophie2/traits/golden-glow) on a Red Neutralizer that is as low quality as you can make it. With duplication reductions, you will make a profit selling duplicated neutralizer.
+Per <a href="https://www.youtube.com/watch?v=F76b937bV-Q" target="_blank">this video (Japanese)</a>, you can take advantage of the basic four neutralizer's low base cost. You will need duplication price reductions; you need at least two from Alette's ability menu to begin to turn a profit, but more is better. You get [Overpriced](/sophie2/traits/overpriced/en), [One of a Kind](/sophie2/traits/one-of-a-kind/en), and [Golden Glow](/sophie2/traits/golden-glow/en) on a Red Neutralizer that is as low quality as you can make it. With duplication reductions, you will make a profit selling duplicated neutralizer.
 
 I am unsure how well it sells, but you can synth an item like this: Overpriced/Rare Item/Expensive/Expensive+ and it will result in Overpriced/Rare Item/Finest. This would be the earliest version of this item that you can make.

@@ -3,6 +3,7 @@ title: "Assignment 6"
 pubDate: "2021-06-17"
 updatedDate: "2024-11-14"
 description: "Guide for Assignment 6, including recipes, events, and other things of note."
+mainClass: "medium-page"
 ---
 
 <div class="grid">
@@ -12,10 +13,10 @@ description: "Guide for Assignment 6, including recipes, events, and other thing
 </th></tr>
 <tr>
 <td rowspan="2"> <b>Save the Orchard </b> </td>
-<td> Deliver <a href="/escha/items/plant-nutrients">Plant Nutrients</a> to Faul at the Apple Orchard
+<td> Deliver <a href="/escha/items/plant-nutrients/en">Plant Nutrients</a> to Faul at the Apple Orchard
 </td></tr>
 <tr>
-<td> Then deliver a <a href="/escha/items/fertilizer">Fertilizer</a> to Faul.
+<td> Then deliver a <a href="/escha/items/fertilizer/en">Fertilizer</a> to Faul.
 </td></tr>
 <tr>
 <td> <b>Check Withering Plains</b> </td>
@@ -27,7 +28,7 @@ description: "Guide for Assignment 6, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> <b>Plant Nutrients </b> </td>
-<td> Synth <a href="/escha/items/plant-nutrients">Plant Nutrients</a>
+<td> Synth <a href="/escha/items/plant-nutrients/en">Plant Nutrients</a>
 </td></tr>
 <tr>
 <td> <b>Search </b> </td>
@@ -39,7 +40,7 @@ description: "Guide for Assignment 6, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> <b>Wilderness Subjugation</b> </td>
-<td> Slay <a href="/escha/monsters/lava-rat">Lava Rat</a>, <a href="/escha/monsters/red-spirit">Red Spirit</a>, <a href="/escha/monsters/fairydrake">Fairydrake</a>
+<td> Slay <a href="/escha/monsters/lava-rat/en">Lava Rat</a>, <a href="/escha/monsters/red-spirit/en">Red Spirit</a>, <a href="/escha/monsters/fairydrake/en">Fairydrake</a>
 </td></tr>
 <tr>
 <td> <b>Wilderness Materials </b> </td>
@@ -56,15 +57,15 @@ description: "Guide for Assignment 6, including recipes, events, and other thing
 </th></tr>
 <tr>
 <td> <b>Bloodstained Saber </b> </td>
-<td> Slay <a href="/escha/monsters/blood-saber">Blood Saber</a> at Slag Graveyard (Graveyard Center)
+<td> Slay <a href="/escha/monsters/blood-saber/en">Blood Saber</a> at Slag Graveyard (Graveyard Center)
 </td></tr>
 <tr>
 <td> <b>Wilderness Boar </b> </td>
-<td> Slay <a href="/escha/monsters/red-skin">Red Skin</a> at Searing Wastes (Burning River)
+<td> Slay <a href="/escha/monsters/red-skin/en">Red Skin</a> at Searing Wastes (Burning River)
 </td></tr>
 <tr>
 <td> <b>Water Research </b> </td>
-<td> Gather <a href="/escha/items/water">Water</a>, <a href="/escha/items/black-water">Black Water</a>, <a href="/escha/items/river-water">River Water</a> during term.
+<td> Gather <a href="/escha/items/water/en">Water</a>, <a href="/escha/items/black-water/en">Black Water</a>, <a href="/escha/items/river-water/en">River Water</a> during term.
 </td></tr>
 <tr>
 <td> <b>Beast Hunting Research</b> </td>
@@ -72,27 +73,27 @@ description: "Guide for Assignment 6, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> <b>Medical Bandages </b> </td>
-<td> Synth a <a href="/escha/items/medical-bandage">Medical Bandage</a>
+<td> Synth a <a href="/escha/items/medical-bandage/en">Medical Bandage</a>
 </td></tr>
 <tr>
 <td> <b>Cooling Item Delivery</b> </td>
-<td> Deliver <a href="/escha/items/eis-ice-bomb">Eis Ice Bomb</a> x1, <a href="/escha/items/squash-tea">Squash Tea</a> x2 (w/ <a href="/escha/effects/cool">Cool</a>), or <a href="/escha/items/freezing-gas">Freezing Gas</a> x10 to Crimson Cliffs.
+<td> Deliver <a href="/escha/items/eis-ice-bomb/en">Eis Ice Bomb</a> x1, <a href="/escha/items/squash-tea/en">Squash Tea</a> x2 (w/ <a href="/escha/effects/cool/en">Cool</a>), or <a href="/escha/items/freezing-gas/en">Freezing Gas</a> x10 to Crimson Cliffs.
 </td></tr>
 <tr>
 <td> <b>Searing Heart Synthesis</b> </td>
-<td> Synth a <a href="/escha/items/heart-of-flame">Heart of Flame</a>
+<td> Synth a <a href="/escha/items/heart-of-flame/en">Heart of Flame</a>
 </td></tr>
 <tr>
 <td> <b>Bomb Delivery </b> </td>
-<td> Deliver <a href="/escha/items/bomb">Bomb</a> x5, <a href="/escha/items/dire-bomb">Dire Bomb</a> x3, or <a href="/escha/categories/bomb">(Bomb)</a> x10 to Southern Ruins (Ruins Courtyard).
+<td> Deliver <a href="/escha/items/bomb/en">Bomb</a> x5, <a href="/escha/items/dire-bomb/en">Dire Bomb</a> x3, or <a href="/escha/categories/bomb/en">(Bomb)</a> x10 to Southern Ruins (Ruins Courtyard).
 </td></tr>
 <tr>
 <td> <b>Three Magic Items </b> </td>
-<td> Enter a field with <a href="/escha/items/divine-jar">Divine Jar</a>, <a href="/escha/items/living-bomb">Living Bomb</a> and <a href="/escha/items/lava-cube">Lava Cube</a> equipped.
+<td> Enter a field with <a href="/escha/items/divine-jar/en">Divine Jar</a>, <a href="/escha/items/living-bomb/en">Living Bomb</a> and <a href="/escha/items/lava-cube/en">Lava Cube</a> equipped.
 </td></tr>
 <tr>
 <td> <b>Ring Delivery </b> </td>
-<td> Deliver <a href="/escha/items/gunade-ring">Gunade Ring</a> x2 to Town Entrance, or only one if it has <a href="/escha/effects/divine-speed">Divine Speed</a>.
+<td> Deliver <a href="/escha/items/gunade-ring/en">Gunade Ring</a> x2 to Town Entrance, or only one if it has <a href="/escha/effects/divine-speed/en">Divine Speed</a>.
 </td></tr>
 <tr>
 <td> <b>Gathering Requests </b> </td>
@@ -100,19 +101,19 @@ description: "Guide for Assignment 6, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> <b>Animal Material </b> </td>
-<td> Deliver <a href="/escha/categories/animal">(Animal)</a> x20 or some kind of Feather.
+<td> Deliver <a href="/escha/categories/animal/en">(Animal)</a> x20 or some kind of Feather.
 </td></tr>
 <tr>
 <td> <b>Warm Food Delivery </b> </td>
-<td> Deliver <a href="/escha/items/veggie-soup">Veggie Soup</a> x5 (w/ <a href="/escha/effects/warm">Warm</a>), <a href="/escha/items/rich-potage">Rich Potage</a> x1, or <a href="/escha/items/fruit-pie">Fruit Pie</a> x1 to Plaza.
+<td> Deliver <a href="/escha/items/veggie-soup/en">Veggie Soup</a> x5 (w/ <a href="/escha/effects/warm/en">Warm</a>), <a href="/escha/items/rich-potage/en">Rich Potage</a> x1, or <a href="/escha/items/fruit-pie/en">Fruit Pie</a> x1 to Plaza.
 </td></tr>
 <tr>
 <td> <b>Music Box Delivery </b> </td>
-<td> Deliver <a href="/escha/items/music-box">Music Box</a> x3 to Balloon Docks, or just one if it has <a href="/escha/effects/terrible-tone">Terrible Tone</a>.
+<td> Deliver <a href="/escha/items/music-box/en">Music Box</a> x3 to Balloon Docks, or just one if it has <a href="/escha/effects/terrible-tone/en">Terrible Tone</a>.
 </td></tr>
 <tr>
 <td> <b>Bag Delivery </b> </td>
-<td> Deliver <a href="/escha/items/explorer-s-pack">Explorer's Pack</a> x4 or <a href="/escha/items/medical-bag">Medical Bag</a> x2 to Urban Area.
+<td> Deliver <a href="/escha/items/explorer-s-pack/en">Explorer's Pack</a> x4 or <a href="/escha/items/medical-bag/en">Medical Bag</a> x2 to Urban Area.
 </td></tr>
 <tr>
 <td> <b>Requests </b> </td>
@@ -135,7 +136,7 @@ description: "Guide for Assignment 6, including recipes, events, and other thing
 <tr>
 <td> <b>Harry </b> </td>
 <td> Atelier </td>
-<td> You get <a href="/escha/recipe-books/from-the-wild">From the Wild</a>.
+<td> You get <a href="/escha/recipe-books/from-the-wild/en">From the Wild</a>.
 </td></tr>
 <tr>
 <td rowspan="2"> <b>Katla </b> </td>
@@ -196,57 +197,57 @@ description: "Guide for Assignment 6, including recipes, events, and other thing
 <th colspan="3"> Recipes
 </th></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/from-the-wild">From the Wild</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/from-the-wild/en">From the Wild</a> </b> </td>
 <td> Harry event </td>
-<td> <a href="/escha/items/ancient-scroll">Ancient Scroll</a>, <a href="/escha/items/slag-statue">Slag Statue</a>, <a href="/escha/items/mystery-lantern">Mystery Lantern</a>
+<td> <a href="/escha/items/ancient-scroll/en">Ancient Scroll</a>, <a href="/escha/items/slag-statue/en">Slag Statue</a>, <a href="/escha/items/mystery-lantern/en">Mystery Lantern</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/great-gardener">Great Gardener</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/great-gardener/en">Great Gardener</a> </b> </td>
 <td> Katla's Shop </td>
-<td> <a href="/escha/items/medical-bandage">Medical Bandage</a>, <a href="/escha/items/healthy-ration">Healthy Ration</a>, <a href="/escha/items/fruit-pie">Fruit Pie</a>, <a href="/escha/items/rich-potage">Rich Potage</a>, <a href="/escha/items/plant-nutrients">Plant Nutrients</a>, <a href="/escha/items/green-crystal">Green Crystal</a>
+<td> <a href="/escha/items/medical-bandage/en">Medical Bandage</a>, <a href="/escha/items/healthy-ration/en">Healthy Ration</a>, <a href="/escha/items/fruit-pie/en">Fruit Pie</a>, <a href="/escha/items/rich-potage/en">Rich Potage</a>, <a href="/escha/items/plant-nutrients/en">Plant Nutrients</a>, <a href="/escha/items/green-crystal/en">Green Crystal</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/sp-fertilizer">SP Fertilizer</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/sp-fertilizer/en">SP Fertilizer</a> </b> </td>
 <td> Automatic </td>
-<td> <a href="/escha/items/fertilizer">Fertilizer</a>
+<td> <a href="/escha/items/fertilizer/en">Fertilizer</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/searing-men">Searing Men</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/searing-men/en">Searing Men</a> </b> </td>
 <td> Searing Waste (Smoking Wastes) </td>
-<td> <a href="/escha/items/black-powder">Black Powder</a>, <a href="/escha/items/burning-gas">Burning Gas</a>, <a href="/escha/items/heart-of-flame">Heart of Flame</a>, <a href="/escha/items/melty-metal">Melty Metal</a>
+<td> <a href="/escha/items/black-powder/en">Black Powder</a>, <a href="/escha/items/burning-gas/en">Burning Gas</a>, <a href="/escha/items/heart-of-flame/en">Heart of Flame</a>, <a href="/escha/items/melty-metal/en">Melty Metal</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/rare-armor">Rare Armor</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/rare-armor/en">Rare Armor</a> </b> </td>
 <td> 1 assignment line </td>
-<td> <a href="/escha/items/fur-shirt">Fur Shirt</a>, <a href="/escha/items/chain-shirt">Chain Shirt</a>, <a href="/escha/items/crystal-plate">Crystal Plate</a>, <a href="/escha/items/jewel-plate">Jewel Plate</a>, <a href="/escha/items/assassin-s-coat">Assassin's Coat</a>
+<td> <a href="/escha/items/fur-shirt/en">Fur Shirt</a>, <a href="/escha/items/chain-shirt/en">Chain Shirt</a>, <a href="/escha/items/crystal-plate/en">Crystal Plate</a>, <a href="/escha/items/jewel-plate/en">Jewel Plate</a>, <a href="/escha/items/assassin-s-coat/en">Assassin's Coat</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/tales-of-lucard">Tales of Lucard</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/tales-of-lucard/en">Tales of Lucard</a> </b> </td>
 <td> 4 assignment lines </td>
-<td> <a href="/escha/items/titan-hammer">Titan Hammer</a>, <a href="/escha/items/demon-eye">Demon Eye</a>, <a href="/escha/items/ziegel-nugget">Ziegel Nugget</a>, <a href="/escha/items/gunade-ring">Gunade Ring</a>, <a href="/escha/items/heavenly-spirits">Heavenly Spirits</a>
+<td> <a href="/escha/items/titan-hammer/en">Titan Hammer</a>, <a href="/escha/items/demon-eye/en">Demon Eye</a>, <a href="/escha/items/ziegel-nugget/en">Ziegel Nugget</a>, <a href="/escha/items/gunade-ring/en">Gunade Ring</a>, <a href="/escha/items/heavenly-spirits/en">Heavenly Spirits</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/element-core">Element Core</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/element-core/en">Element Core</a> </b> </td>
 <td> From Wilbell, after meeting the Fire Lord </td>
-<td> <a href="/escha/items/spirit-gem">Spirit Gem</a>
+<td> <a href="/escha/items/spirit-gem/en">Spirit Gem</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/engine-blueprints">Engine Blueprints</a></b> </td>
+<td> <b><a href="/escha/recipe-books/engine-blueprints/en">Engine Blueprints</a></b> </td>
 <td> After revisiting the Fire Lord </td>
-<td> <a href="/escha/items/automatic-drive">Automatic Drive</a>, <a href="/escha/items/3rd-gen-engine">3rd Gen Engine</a>
+<td> <a href="/escha/items/automatic-drive/en">Automatic Drive</a>, <a href="/escha/items/3rd-gen-engine/en">3rd Gen Engine</a>
 </td></tr>
 </table>
 </div>
-<p>While you're out at Withering Plains, make sure to get a River Water. And when you go to Searing Wastes, be sure to drop by the <a href="/escha/locations/slag-graveyard">Slag Graveyard</a> to fetch Black Water.
-</p><p>Plus -- Avoid the hell out of the <a href="/escha/monsters/thirsty-water-god">Thirsty Water God</a> at Withering Plains. It's a level 100 monstrosity you aren't ready for.
+<p>While you're out at Withering Plains, make sure to get a River Water. And when you go to Searing Wastes, be sure to drop by the <a href="/escha/locations/slag-graveyard/en">Slag Graveyard</a> to fetch Black Water.
+</p><p>Plus -- Avoid the hell out of the <a href="/escha/monsters/thirsty-water-god/en">Thirsty Water God</a> at Withering Plains. It's a level 100 monstrosity you aren't ready for.
 </p>
 <ul><li> Area
-<ul><li> <a href="/escha/locations/searing-wastes">Searing Wastes</a></li>
+<ul><li> <a href="/escha/locations/searing-wastes/en">Searing Wastes</a></li>
 <li> You'll have to visit it in two chunks thanks to the plot.</li>
-<li> You should absolutely have a <a href="/escha/items/heavenly-spirits">Heavenly Spirits</a> before going back; it instant-warps you back to the Atelier.</li></ul></li></ul>
+<li> You should absolutely have a <a href="/escha/items/heavenly-spirits/en">Heavenly Spirits</a> before going back; it instant-warps you back to the Atelier.</li></ul></li></ul>
 <p>In the Apple House, you'll get a plot-related event with Clone. You'll be seeing a series of Bumblebee Princess events. The Apple Orchard event
-is also plot-related, and you get <a href="/escha/recipe-books/sp-fertilizer">SP Fertilizer</a>.
-</p><p>After visiting the new area, Wilbell directs you back after making the Flight Gas Jar (you need Buoyant Gas from the wastes to make it). You'll need to visit a new area in the Wastes... to basically be kicked out again by the <b>Fire LOOOORD</b>. After consulting Wilbell *again* for the <a href="/escha/recipe-books/element-core">Element Core</a> recipe, you can progress that part of the plot. 
+is also plot-related, and you get <a href="/escha/recipe-books/sp-fertilizer/en">SP Fertilizer</a>.
+</p><p>After visiting the new area, Wilbell directs you back after making the Flight Gas Jar (you need Buoyant Gas from the wastes to make it). You'll need to visit a new area in the Wastes... to basically be kicked out again by the <b>Fire LOOOORD</b>. After consulting Wilbell *again* for the <a href="/escha/recipe-books/element-core/en">Element Core</a> recipe, you can progress that part of the plot. 
 </p><p>After you visit Withering Plains, you can enter the well at Village Well. Do so for a Lithograph Piece and document.
 </p><p>From now on, if you have an idle moment, make a Mystery Lantern. You need to reduce its equip cost to one slot (the wind skill, Compress, will do this),
 and preferably increase its uses as much as possible AND you want the best effect. You'll want about 20 uses, in total, for high end synthesis.
@@ -270,9 +271,9 @@ Failure to comply may result in missing an entire dungeon.
  <h4>Item Time</h4>
 <p>The following are less about the properties (I leave that to you) and more about the effects.
 </p>
-<ul><li> <a href="/escha/items/eis-ice-bomb">Eis Ice Bomb</a></li>
-<li> This requires disassembling a <a href="/escha/items/demon-eye">Demon Eye</a> from Searing Wastes for an SP Neutralizer. You will need all of your traits to be on a Ice Bomb.
-<ul><li> Ingredients: Water Crystal, Ice Bomb, <a href="/escha/items/bubbling-water">Bubbling Water</a> (mainly for Earth skills; feel free to modify), SP Neutralizer</li>
+<ul><li> <a href="/escha/items/eis-ice-bomb/en">Eis Ice Bomb</a></li>
+<li> This requires disassembling a <a href="/escha/items/demon-eye/en">Demon Eye</a> from Searing Wastes for an SP Neutralizer. You will need all of your traits to be on a Ice Bomb.
+<ul><li> Ingredients: Water Crystal, Ice Bomb, <a href="/escha/items/bubbling-water/en">Bubbling Water</a> (mainly for Earth skills; feel free to modify), SP Neutralizer</li>
 <li> Toss in everything but your Ice Bomb.</li>
 <li> Use Conversion LV1 on Fire, then Power+ LV1 on Ice Bomb. Use Crafting Help LV2 on Ice Bomb, then Conversion LV2 to Wind.</li>
 <li> Toss in your Ice Bomb, then use Perfect Division to toss it in again.</li>
@@ -282,6 +283,6 @@ Failure to comply may result in missing an entire dungeon.
 <li> Keep Super Destructive, Endow Cold, and Count Boost or whatever you like.</li></ul></li></ul>
 <p>Yes, this item takes your MP. There's no avoiding it.
 </p>
-<p><a href="/escha/items/titan-hammer">Titan Hammer</a> - Zero wind. Lots of water and fire. I used Purple Crystal, Iron Plate, <a href="/escha/items/antique-moss">Antique Moss</a> and Slag Memory. With Power+ LV1 on the Slag Memory. That should be all you need to get started.</p>
+<p><a href="/escha/items/titan-hammer/en">Titan Hammer</a> - Zero wind. Lots of water and fire. I used Purple Crystal, Iron Plate, <a href="/escha/items/antique-moss/en">Antique Moss</a> and Slag Memory. With Power+ LV1 on the Slag Memory. That should be all you need to get started.</p>
  </div>
  </div>

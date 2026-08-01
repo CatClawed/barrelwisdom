@@ -10,7 +10,7 @@ description: "General info about Totori's ending system, and how to manage saves
     * Characters
         * Adjust friendship values to get the desired ending, if you let your friends go above 60 you can hold off on final event triggers instead
     * Chim
-        * Get your Chims to eat 35 large pies by putting them to work. 10 small pies = 1 large pie. See [Chim End Requirements](totori/chim-end-requirements).
+        * Get your Chims to eat 35 large pies by putting them to work. 10 small pies = 1 large pie. See [Chim End Requirements](/totori/chim-end-requirements).
     * Wealth
         * Cooking Class + Specialty Liquor events, and you need 500,000 Cole
     * Normal

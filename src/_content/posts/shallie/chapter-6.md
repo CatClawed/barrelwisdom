@@ -3,6 +3,7 @@ title: "Chapter 6"
 pubDate: "2021-06-25"
 updatedDate: "2025-11-24"
 description: "Walkthrough/guide for Chapter 1, including events, recipes, and other things of note."
+mainClass: "medium-page"
 ---
 
 <table class="tbl-min borders">
@@ -69,7 +70,7 @@ description: "Walkthrough/guide for Chapter 1, including events, recipes, and ot
 </td></tr>
 <tr>
 <td rowspan="2"> <i>Read Next Generation Craftwork </i> </td>
-<td> Obtain <a href="/shallie/recipe-books/next-generation-craftwork">Next Generation Craftwork</a> </td>
+<td> Obtain <a href="/shallie/recipe-books/next-generation-craftwork/en">Next Generation Craftwork</a> </td>
 <td rowspan="2"> Synthesis Exp +10
 </td></tr>
 <tr>
@@ -77,7 +78,7 @@ description: "Walkthrough/guide for Chapter 1, including events, recipes, and ot
 </td></tr>
 <tr>
 <td rowspan="2"> <i>Read Walking in Dusk - Continuation </i> </td>
-<td> (After above) Obtain <a href="/shallie/recipe-books/walking-in-dusk-continuation">Walking in Dusk - Continuation</a> </td>
+<td> (After above) Obtain <a href="/shallie/recipe-books/walking-in-dusk-continuation/en">Walking in Dusk - Continuation</a> </td>
 <td rowspan="2"> Synthesis Exp +20
 </td></tr>
 <tr>
@@ -85,7 +86,7 @@ description: "Walkthrough/guide for Chapter 1, including events, recipes, and ot
 </td></tr>
 <tr>
 <td> <i>Synthesize magic items </i> </td>
-<td> (After above) <a href="/shallie/categories/magic-tool">(Magic Tool)</a> </td>
+<td> (After above) <a href="/shallie/categories/magic-tool/en">(Magic Tool)</a> </td>
 <td> Synthesis Exp +30
 </td></tr>
 <tr>
@@ -98,7 +99,7 @@ description: "Walkthrough/guide for Chapter 1, including events, recipes, and ot
 </td></tr>
 <tr>
 <td> <i>Synthesize magic items </i> </td>
-<td> (After above) <a href="/shallie/categories/magic-tool">(Magic Tool)</a> </td>
+<td> (After above) <a href="/shallie/categories/magic-tool/en">(Magic Tool)</a> </td>
 <td> Synthesis Exp +30
 </td></tr>
 <tr>
@@ -128,20 +129,20 @@ description: "Walkthrough/guide for Chapter 1, including events, recipes, and ot
 </td></tr>
 <tr>
 <td rowspan="2"> <i>Make some stylish equipment </i> </td>
-<td> Synth <a href="/shallie/items/angel-ribbon">Angel Ribbon</a> </td>
+<td> Synth <a href="/shallie/items/angel-ribbon/en">Angel Ribbon</a> </td>
 <td rowspan="2"> Synthesis Exp +10
 </td></tr>
 <tr>
-<td> OR Synth <a href="/shallie/items/aroma-pouch">Aroma Pouch</a>
+<td> OR Synth <a href="/shallie/items/aroma-pouch/en">Aroma Pouch</a>
 </td></tr>
 <tr>
 <td> <i>Rumors of special regional jewels </i> </td>
-<td> Gather 15 <a href="/shallie/categories/jewel">(Jewel)</a> at <a href="/shallie/locations/dusk-sea">Dusk Sea</a> </td>
+<td> Gather 15 <a href="/shallie/categories/jewel/en">(Jewel)</a> at <a href="/shallie/locations/dusk-sea">Dusk Sea</a> </td>
 <td> Combat Exp +150
 </td></tr>
 <tr>
 <td> <i>Rumors of special regional animals </i> </td>
-<td> Gather 15 <a href="/shallie/categories/animal">(Animal)</a> at <a href="/shallie/locations/dusk-sea">Dusk Sea</a> </td>
+<td> Gather 15 <a href="/shallie/categories/animal/en">(Animal)</a> at <a href="/shallie/locations/dusk-sea">Dusk Sea</a> </td>
 <td> Combat Exp +150
 </td></tr>
 <tr>
@@ -198,7 +199,7 @@ description: "Walkthrough/guide for Chapter 1, including events, recipes, and ot
 <tr>
 <td rowspan="2"> Gerhard </td>
 <td> Corporation </td>
-<td> (Stera) Linca wants you to make <a href="/shallie/items/formal-dinner-suit">Formal Dinner Suit</a>
+<td> (Stera) Linca wants you to make <a href="/shallie/items/formal-dinner-suit/en">Formal Dinner Suit</a>
 </td></tr>
 <tr>
 <td> Corporation </td>
@@ -310,30 +311,30 @@ description: "Walkthrough/guide for Chapter 1, including events, recipes, and ot
 </th></tr>
 
 <tr>
-<td> <i><a href="/shallie/recipe-books/the-remnants">The Remnants</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/the-remnants/en">The Remnants</a> </i> </td>
 <td> Rose's Shop </td>
-<td> <a href="/shallie/items/electrical-discharge-tube">Electrical Discharge Tube</a>, <a href="/shallie/items/unbreakable-glass">Unbreakable Glass</a>, <a href="/shallie/items/polarized-gem">Polarized Gem</a>, <a href="/shallie/items/ziegel-nugget">Ziegel Nugget</a>
+<td> <a href="/shallie/items/electrical-discharge-tube/en">Electrical Discharge Tube</a>, <a href="/shallie/items/unbreakable-glass/en">Unbreakable Glass</a>, <a href="/shallie/items/polarized-gem/en">Polarized Gem</a>, <a href="/shallie/items/ziegel-nugget/en">Ziegel Nugget</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/engineer-becketts">Techniques of Engineer Becketts</a></i> </td>
+<td> <i><a href="/shallie/recipe-books/engineer-becketts/en">Techniques of Engineer Becketts</a></i> </td>
 <td> Linca's Shop </td>
-<td> <a href="/shallie/items/dimension-bomb">Dimension Bomb</a>, <a href="/shallie/items/dragon-shield">Dragon Shield</a>, <a href="/shallie/items/twin-color-corundum">Twin Color Corundum</a>, <a href="/shallie/items/dark-steel-plate">Dark Steel Plate</a>, <a href="/shallie/items/demon-warding-charm">Demon Warding Charm</a>
+<td> <a href="/shallie/items/dimension-bomb/en">Dimension Bomb</a>, <a href="/shallie/items/dragon-shield/en">Dragon Shield</a>, <a href="/shallie/items/twin-color-corundum/en">Twin Color Corundum</a>, <a href="/shallie/items/dark-steel-plate/en">Dark Steel Plate</a>, <a href="/shallie/items/demon-warding-charm/en">Demon Warding Charm</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/stylish-central">Stylish Central</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/stylish-central/en">Stylish Central</a> </i> </td>
 <td> Linca's Shop </td>
-<td> <a href="/shallie/items/gunade-ring">Gunade Ring</a>, <a href="/shallie/items/blue-crystal-ring">Blue Crystal Ring</a>, <a href="/shallie/items/alto-cloth">Alto Cloth</a>, <a href="/shallie/items/scale-cloth">Scale Cloth</a>, <a href="/shallie/items/precious-stone">Precious Stone</a>
+<td> <a href="/shallie/items/gunade-ring/en">Gunade Ring</a>, <a href="/shallie/items/blue-crystal-ring/en">Blue Crystal Ring</a>, <a href="/shallie/items/alto-cloth/en">Alto Cloth</a>, <a href="/shallie/items/scale-cloth/en">Scale Cloth</a>, <a href="/shallie/items/precious-stone/en">Precious Stone</a>
 </td></tr>
 <tr>
 <td> <i>Weapon Batch 3 </i> </td>
 <td> - </td>
-<td> <a href="/shallie/items/white-winged-bell">White Winged Bell</a>, <a href="/shallie/items/magia-sumonitora">Magia Sumonitora</a>, <a href="/shallie/items/lunic-charm">Lunic Charm</a>, <a href="/shallie/items/demonkin-ring">Demonkin Ring</a>, <a href="/shallie/items/bloody-claws">Bloody Claws</a>, <a href="/shallie/items/ancient-heat-bunker">Ancient Heat Bunker</a>, <a href="/shallie/items/mythical-beast-sword">Mythical Beast Sword</a>
+<td> <a href="/shallie/items/white-winged-bell/en">White Winged Bell</a>, <a href="/shallie/items/magia-sumonitora/en">Magia Sumonitora</a>, <a href="/shallie/items/lunic-charm/en">Lunic Charm</a>, <a href="/shallie/items/demonkin-ring/en">Demonkin Ring</a>, <a href="/shallie/items/bloody-claws/en">Bloody Claws</a>, <a href="/shallie/items/ancient-heat-bunker/en">Ancient Heat Bunker</a>, <a href="/shallie/items/mythical-beast-sword/en">Mythical Beast Sword</a>
 </td></tr>
 </table>
 
 <ul><li> <i>Areas Unlocked:</i> <a href="/shallie/locations/eastern-continent/en#nomad-camp">Nomad Camp</a>, <a href="/shallie/locations/eastern-continent/en#hidden-forest">Hidden Forest</a>, <a href="/shallie/locations/eastern-continent/en#crystal-valley">Crystal Valley</a>, <a href="/shallie/locations/eastern-continent/en#hole-of-the-dead">Hole of the Dead</a></li></ul>
 <ul><li> <i>Lotte</i>
-<ul><li> At the Nomad Camp (I think you need to have Bait?), you'll be informed about the existence of the <a href="/shallie/items/fish-lord">Fish Lord</a> at <a href="/shallie/locations/baskes-region/en#filled-cave">Green Desert</a>. You'll need 100+ effect bait to get it.</li>
+<ul><li> At the Nomad Camp (I think you need to have Bait?), you'll be informed about the existence of the <a href="/shallie/items/fish-lord/en">Fish Lord</a> at <a href="/shallie/locations/baskes-region/en#filled-cave">Green Desert</a>. You'll need 100+ effect bait to get it.</li>
 <li> You get an exclusive trophy on Lotte's side after finding Faav Village.</li></ul></li></ul>
 <dl><dd></dd></dl>
 <ul><li> <i>Stera</i>
@@ -355,11 +356,11 @@ If you must buy it on your first run, note that she'll later sell it for 20,000 
  <div class="grid-6 card spacer">
  <h4>Money!</h4>
 <p>Start by making a Plant Fertilizer with High Price + (the LV2 property). Then make a second
-one with High Price +, and use the Get Rich skill to make <a href="/shallie/items/high-class-item">High Class Item</a>. Make a
+one with High Price +, and use the Get Rich skill to make <a href="/shallie/items/high-class-item/en">High Class Item</a>. Make a
 Supplement - Blue using both fertilizers (you may need Ingredient Zero).
-</p><p>Transfer all to a Plant Oil, then make a <a href="/shallie/items/holinic-steel-plate">Holinic Steel Plate</a>. Get the LV3 property. Keep Premium Price.
+</p><p>Transfer all to a Plant Oil, then make a <a href="/shallie/items/holinic-steel-plate/en">Holinic Steel Plate</a>. Get the LV3 property. Keep Premium Price.
 Do not keep High Price if you see it. Holinics are kind of a pain, though, so let's find something else.
-</p><p>As it turns out, you can make an <a href="/shallie/items/uni">Uni</a> using a steel plate and supplement. You know what to do.
+</p><p>As it turns out, you can make an <a href="/shallie/items/uni/en">Uni</a> using a steel plate and supplement. You know what to do.
 Disassemble with Miruca, then toss that Broken Item into a Supplement - White.
 </p><p>You are free to optimize this if you wish, but this version is good enough and easy to reproduce via Plant Oil.
 </p>

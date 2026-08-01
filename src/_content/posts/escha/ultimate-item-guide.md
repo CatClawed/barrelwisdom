@@ -9,7 +9,7 @@ description: "Step by step on creating the best items."
 
 The usage of this build isn't straightforward, so let's start with the results. Theoretically you can get max damage. Even with slightly less ideal setup, you can clear most enemies in your path.
 
-To see the set in action, see [this video](https://www.youtube.com/watch?v=qpgJEAhTVoI) (Micie/Katla required) or [this video](https://www.youtube.com/watch?v=_WtNvOD_B14) (non-DLC characters). This build is by [darknite01](https://www.gamefaqs.com/boards/709407-atelier-escha-and-logy-alchemists-of-the-dusk-sky/69432083).
+To see the set in action, see <a href="https://www.youtube.com/watch?v=qpgJEAhTVoI" target="_blank">this video</a> (Micie/Katla required) or <a href="https://www.youtube.com/watch?v=_WtNvOD_B14" target="_blank">this video</a> (non-DLC characters). This build is by <a href="https://www.gamefaqs.com/boards/709407-atelier-escha-and-logy-alchemists-of-the-dusk-sky/69432083" target="_blank">darknite01</a>.
 
 The generic process is:
 
@@ -28,75 +28,75 @@ The generic process is:
 </th></tr>
 <tr>
 <td> Brave Soul </td>
-<td> <a href="/escha/locations/fallen-ruins">Fallen Ruins</a>
+<td> <a href="/escha/locations/fallen-ruins/en">Fallen Ruins</a>
 </td></tr>
 <tr>
 <td> Forceful Soul </td>
-<td> <a href="/escha/locations/fallen-ruins">Fallen Ruins</a>
+<td> <a href="/escha/locations/fallen-ruins/en">Fallen Ruins</a>
 </td></tr>
 <tr>
 <td> Awakened Soul </td>
-<td> <a href="/escha/locations/fallen-ruins">Fallen Ruins</a>
+<td> <a href="/escha/locations/fallen-ruins/en">Fallen Ruins</a>
 </td></tr>
 <tr>
 <td> Evolve Body </td>
-<td> <a href="/escha/locations/fallen-ruins">Fallen Ruins</a>
+<td> <a href="/escha/locations/fallen-ruins/en">Fallen Ruins</a>
 </td></tr>
 <tr>
 <td> Loving Soul </td>
-<td> <a href="/escha/locations/fallen-ruins">Fallen Ruins</a>
+<td> <a href="/escha/locations/fallen-ruins/en">Fallen Ruins</a>
 </td></tr>
 <tr>
 <td> Heroic Soul </td>
-<td> <a href="/escha/locations/fallen-ruins">Fallen Ruins</a>
+<td> <a href="/escha/locations/fallen-ruins/en">Fallen Ruins</a>
 </td></tr>
 <tr>
 <td> Robust Body </td>
-<td> <a href="/escha/locations/ends-of-the-earth">Ends of the Earth</a>,  <a href="/escha/locations/lab-of-eternity">Lab of Eternity</a>
+<td> <a href="/escha/locations/ends-of-the-earth/en">Ends of the Earth</a>,  <a href="/escha/locations/lab-of-eternity/en">Lab of Eternity</a>
 </td></tr>
 <tr>
 <td> Wind Soul </td>
-<td>  <a href="/escha/locations/lab-of-eternity">Lab of Eternity</a>
+<td>  <a href="/escha/locations/lab-of-eternity/en">Lab of Eternity</a>
 </td></tr>
 <tr>
 <td> Night Lord Soul </td>
-<td> <a href="/escha/locations/lab-of-eternity">Lab of Eternity</a>
+<td> <a href="/escha/locations/lab-of-eternity/en">Lab of Eternity</a>
 </td></tr>
 <tr>
 <td> Demon Soul </td>
-<td> <a href="/escha/locations/ends-of-the-earth">Ends of the Earth</a>
+<td> <a href="/escha/locations/ends-of-the-earth/en">Ends of the Earth</a>
 </td></tr>
 <tr>
 <td> Fire Soul </td>
-<td> <a href="/escha/locations/lab-of-eternity">Lab of Eternity</a>
+<td> <a href="/escha/locations/lab-of-eternity/en">Lab of Eternity</a>
 </td></tr>
 <tr>
 <td> Power Overwhelm </td>
-<td> <a href="/escha/locations/searing-wastes">Searing Wastes</a>,  <a href="/escha/locations/dragon-s-nest">Dragon's Nest</a>,  <a href="/escha/locations/fallen-ruins">Fallen Ruins</a>
+<td> <a href="/escha/locations/searing-wastes/en">Searing Wastes</a>,  <a href="/escha/locations/dragon-s-nest/en">Dragon's Nest</a>,  <a href="/escha/locations/fallen-ruins/en">Fallen Ruins</a>
 </td></tr>
 <tr>
 <td> Super Properties </td>
-<td> <a href="/escha/locations/fallen-ruins">Fallen Ruins</a>
+<td> <a href="/escha/locations/fallen-ruins/en">Fallen Ruins</a>
 </td></tr>
 <tr>
 <td> Jumbo Blessing </td>
-<td> <a href="/escha/locations/ends-of-the-earth">Ends of the Earth</a>,  <a href="/escha/locations/fallen-ruins">Fallen Ruins</a>
+<td> <a href="/escha/locations/ends-of-the-earth/en">Ends of the Earth</a>,  <a href="/escha/locations/fallen-ruins/en">Fallen Ruins</a>
 </td></tr>
 <tr>
 <td> Cost Bonus </td>
-<td> <a href="/escha/locations/searing-wastes">Searing Wastes</a>,  <a href="/escha/locations/lab-of-eternity">Lab of Eternity</a>
+<td> <a href="/escha/locations/searing-wastes/en">Searing Wastes</a>,  <a href="/escha/locations/lab-of-eternity/en">Lab of Eternity</a>
 </td></tr>
 <tr>
 <td> Mach Throw </td>
-<td> <a href="/escha/locations/dragon-s-nest">Dragon's Nest</a>,  <a href="/escha/locations/lab-of-eternity">Lab of Eternity</a>,  <a href="/escha/locations/ends-of-the-earth">Ends of the Earth</a>,  <a href="/escha/locations/fallen-ruins">Fallen Ruins</a>
+<td> <a href="/escha/locations/dragon-s-nest/en">Dragon's Nest</a>,  <a href="/escha/locations/lab-of-eternity/en">Lab of Eternity</a>,  <a href="/escha/locations/ends-of-the-earth/en">Ends of the Earth</a>,  <a href="/escha/locations/fallen-ruins/en">Fallen Ruins</a>
 </td></tr>
 <tr>
 <td> All Around Boost </td>
-<td> <a href="/escha/locations/lab-of-eternity">Lab of Eternity</a>,  <a href="/escha/locations/ends-of-the-earth">Ends of the Earth</a>
+<td> <a href="/escha/locations/lab-of-eternity/en">Lab of Eternity</a>,  <a href="/escha/locations/ends-of-the-earth/en">Ends of the Earth</a>
 </td></tr>
 <tr>
 <td> Traditional Soul </td>
-<td><a href="/escha/locations/searing-wastes">Searing Wastes</a>,  <a href="/escha/locations/lab-of-eternity">Lab of Eternity</a>
+<td><a href="/escha/locations/searing-wastes/en">Searing Wastes</a>,  <a href="/escha/locations/lab-of-eternity/en">Lab of Eternity</a>
 </td></tr></table>
 <p>You do have more options than just these, and if you're playing Plus you may want to consider a more 'solid' setup for Cursed Saber, at least for some allies, as you can't use items for that fight. This setup is designed for item damage.
 </p><p>It should be noted that recorded locations are just that -- places that have been observed directly. These are not the only locations you can get these properties at.
@@ -104,7 +104,7 @@ The generic process is:
 
 ### Relics
 
-Principles: Use the field effect <i>Check relic change</i>, then use a <a href="/escha/items/dowsing-rod">Dowsing Rod</a> with <a href="/escha/items/amazing-relics">Amazing Relics</a>. You'll want lots of <a href="/escha/items/mystery-lantern">Mystery Lanterns</a>, with lots of uses, to help you farm.
+Principles: Use the field effect <i>Check relic change</i>, then use a <a href="/escha/items/dowsing-rod/en">Dowsing Rod</a> with <a href="/escha/items/amazing-relics/en">Amazing Relics</a>. You'll want lots of <a href="/escha/items/mystery-lantern/en">Mystery Lanterns</a>, with lots of uses, to help you farm.
 
 
 There are a handful of properties listed that are considered 'lesser'. Instead of raising the relic level to max, try using only a Dowsing Rod.
@@ -117,25 +117,25 @@ There are a handful of properties listed that are considered 'lesser'. Instead o
 <th> Material
 </th></tr>
 <tr>
-<td> <a href="/escha/locations/searing-wastes">Searing Wastes</a> </td>
+<td> <a href="/escha/locations/searing-wastes/en">Searing Wastes</a> </td>
 <td> Crimson Cliffs </td>
 <td> Crimson Cliffs </td>
 <td> Ziegel Nuggets
 </td></tr>
 <tr>
-<td> <a href="/escha/locations/lab-of-eternity">Lab of Eternity</a> </td>
+<td> <a href="/escha/locations/lab-of-eternity/en">Lab of Eternity</a> </td>
 <td> Entrance </td>
 <td> Herb Garden </td>
 <td> Natural Extracts
 </td></tr>
 <tr>
-<td> <a href="/escha/locations/ends-of-the-earth">Ends of the Earth</a> </td>
+<td> <a href="/escha/locations/ends-of-the-earth/en">Ends of the Earth</a> </td>
 <td> Structure - Upper </td>
 <td> Second Rise </td>
 <td> Natural Extracts
 </td></tr>
 <tr>
-<td> <a href="/escha/locations/fallen-ruins">Fallen Ruins</a> </td>
+<td> <a href="/escha/locations/fallen-ruins/en">Fallen Ruins</a> </td>
 <td> Area 1 </td>
 <td> Area 1/2 </td>
 <td> Green Crystals
@@ -148,38 +148,38 @@ There are a handful of properties listed that are considered 'lesser'. Instead o
 
 <p>If you coincidentally got a PP Maximization Ziegel Nugget, skip to Iron Clay.
 </p>
-<ul><li> <a href="/escha/items/concealing-skin" title="Concealing Skin">Concealing Skin</a>
+<ul><li> <a href="/escha/items/concealing-skin/en" title="Concealing Skin">Concealing Skin</a>
 <ul><li> No ingredient should have PP +3.</li>
 <li> Feel free to use Effect+ LV3.</li>
 <li> Keep Inherit PP +5. This is the LV3 Property.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/medical-solution" title="Medical Solution">Medical Solution</a>
+<ul><li> <a href="/escha/items/medical-solution/en" title="Medical Solution">Medical Solution</a>
 <ul><li> Use Trio Taun (PP Expansion) and Concealing Skin.</li>
 <li> Keep PP Maximization.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/iron-clay" title="Iron Clay">Iron Clay</a>
+<ul><li> <a href="/escha/items/iron-clay/en" title="Iron Clay">Iron Clay</a>
 <ul><li> Use Ziegel Nugget (Traditional Soul), keep Traditional Soul.</li>
 <li> If you got a PP Maximization Ziegel Nugget, throw BOTH your items with Traditional Soul and PP Maximization and keep those traits.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/neutralizer-g" title="Neutralizer-G">Neutralizer-G</a>
+<ul><li> <a href="/escha/items/neutralizer-g/en" title="Neutralizer-G">Neutralizer-G</a>
 <ul><li> Use Trio Taun (PP Expansion) and Medical Solution (PP Maximization). Keep both.</li>
 <li> If you got the PP Maximization Ziegel Nugget, all you need is PP Expansion.</li></ul></li></ul>
 <p><b>HENCEFORTH, TRY TO USE BOTH QUANTITY SKILLS.</b>
 </p>
-<ul><li><a href="/escha/items/moon-tablet" title="Moon Tablet">Moon Tablet</a>
+<ul><li><a href="/escha/items/moon-tablet/en" title="Moon Tablet">Moon Tablet</a>
 <ul><li> Use Iron Clay and Neutralizer-G. Keep PP Maximization, PP Expansion, Traditional Soul.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/comet-crest-stone" title="Comet Crest Stone">Comet Crest Stone</a>
+<ul><li> <a href="/escha/items/comet-crest-stone/en" title="Comet Crest Stone">Comet Crest Stone</a>
 <ul><li> Use Moon Tablet. Yes, the one you just made. Keep everything on it.</li>
 <li> Take care to not have PP Enhancement on anything.</li>
 <li> Get your Homonculi busy duplicating this. Just do a bunch of requests for one item.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/sp-neutralizer" title="SP Neutralizer">SP Neutralizer</a> with the Comet Crest Stone. Keep all its properties.</li></ul>
-<ul><li> <a href="/escha/items/cardboard" title="Cardboard">Cardboard</a> with the SP Neutralizer. Keep all its properties.</li></ul>
-<ul><li> <a href="/escha/items/distilled-water" title="Distilled Water">Distilled Water</a> with the Cardboard. Yada yada, you get the point now.</li></ul>
-<ul><li> <a href="/escha/items/medical-solution" title="Medical Solution">Medical Solution</a> using Distilled Water.</li></ul>
-<ul><li> <a href="/escha/items/colseit-fiber" title="Colseit Fiber">Colseit Fiber</a> using Cardboard.</li></ul>
-<ul><li> <a href="/escha/items/ziegel-nugget" title="Ziegel Nugget">Ziegel Nugget</a> using SP Neutralizer</li></ul>
-<ul><li> <a href="/escha/items/iron-clay" title="Iron Clay">Iron Clay</a> using Ziegel Nugget.</li></ul>
-<ul><li> <a href="/escha/items/automatic-drive" title="Automatic Drive">Automatic Drive</a> using Iron Clay. Try to use Compression.</li></ul>
-<ul><li> <a href="/escha/items/magic-fiber" title="Magic Fiber">Magic Fiber</a> using Colseit Fiber.</li></ul>
-<ul><li> <a href="/escha/items/treasure-grimoire" title="Treasure Grimoire">Treasure Grimoire</a> using Cardboard.</li></ul>
-<ul><li> <a href="/escha/items/dragoon-cape" title="Dragoon Cape">Dragoon Cape</a> using Colseit Fiber.</li></ul>
+<ul><li> <a href="/escha/items/sp-neutralizer/en" title="SP Neutralizer">SP Neutralizer</a> with the Comet Crest Stone. Keep all its properties.</li></ul>
+<ul><li> <a href="/escha/items/cardboard/en" title="Cardboard">Cardboard</a> with the SP Neutralizer. Keep all its properties.</li></ul>
+<ul><li> <a href="/escha/items/distilled-water/en" title="Distilled Water">Distilled Water</a> with the Cardboard. Yada yada, you get the point now.</li></ul>
+<ul><li> <a href="/escha/items/medical-solution/en" title="Medical Solution">Medical Solution</a> using Distilled Water.</li></ul>
+<ul><li> <a href="/escha/items/colseit-fiber/en" title="Colseit Fiber">Colseit Fiber</a> using Cardboard.</li></ul>
+<ul><li> <a href="/escha/items/ziegel-nugget/en" title="Ziegel Nugget">Ziegel Nugget</a> using SP Neutralizer</li></ul>
+<ul><li> <a href="/escha/items/iron-clay/en" title="Iron Clay">Iron Clay</a> using Ziegel Nugget.</li></ul>
+<ul><li> <a href="/escha/items/automatic-drive/en" title="Automatic Drive">Automatic Drive</a> using Iron Clay. Try to use Compression.</li></ul>
+<ul><li> <a href="/escha/items/magic-fiber/en" title="Magic Fiber">Magic Fiber</a> using Colseit Fiber.</li></ul>
+<ul><li> <a href="/escha/items/treasure-grimoire/en" title="Treasure Grimoire">Treasure Grimoire</a> using Cardboard.</li></ul>
+<ul><li> <a href="/escha/items/dragoon-cape/en" title="Dragoon Cape">Dragoon Cape</a> using Colseit Fiber.</li></ul>
 <p>Remake or duplicate anything that you're low on. Moon Tablet is a notable one.
 </p>
 
@@ -195,55 +195,55 @@ There are a handful of properties listed that are considered 'lesser'. Instead o
 </th></tr>
 <tr>
 <td> Escha/Logy </td>
-<td> <a href="/escha/properties/brave-soul">Brave Soul</a>, <a href="/escha/properties/absolute-senses">Absolute Senses</a>, <a href="/escha/properties/sharpened-senses">Sharpened Senses</a>
+<td> <a href="/escha/properties/brave-soul/en">Brave Soul</a>, <a href="/escha/properties/absolute-senses/en">Absolute Senses</a>, <a href="/escha/properties/sharpened-senses/en">Sharpened Senses</a>
 </td></tr>
 <tr>
 <td> Lucille/Threia/Awin/Linca/Micie </td>
-<td> <a href="/escha/properties/brave-soul">Brave Soul</a>, <a href="/escha/properties/attack-surge">Attack Surge</a>, <a href="/escha/properties/power-overwhelm">Power Overwhelm</a>
+<td> <a href="/escha/properties/brave-soul/en">Brave Soul</a>, <a href="/escha/properties/attack-surge/en">Attack Surge</a>, <a href="/escha/properties/power-overwhelm/en">Power Overwhelm</a>
 </td></tr>
 <tr>
 <td> Reyfer/Wilbell/Katla </td>
-<td> <a href="/escha/properties/comet-attack">Comet Attack</a>, <a href="/escha/properties/verdant-gold">Verdant Gold</a>, <a href="/escha/properties/forceful-soul">Forceful Soul</a>
+<td> <a href="/escha/properties/comet-attack/en">Comet Attack</a>, <a href="/escha/properties/verdant-gold/en">Verdant Gold</a>, <a href="/escha/properties/forceful-soul/en">Forceful Soul</a>
 </td></tr>
 </table>
 <p>For simpler builds, you will find you can reuse some weapons if you are sure to use quantity.
 </p>
-<ul><li> <a href="/escha/items/ziegel-nugget">Ziegel Nugget</a> 1
-<ul><li> <a href="/escha/items/green-gemstone">Green Gemstone</a> -&gt; Purple Crystal, keep Wind Damage.</li>
+<ul><li> <a href="/escha/items/ziegel-nugget/en">Ziegel Nugget</a> 1
+<ul><li> <a href="/escha/items/green-gemstone/en">Green Gemstone</a> -&gt; Purple Crystal, keep Wind Damage.</li>
 <li> Earth Stone + Purple Crystal -&gt; Dowsing Rod, keep Verdant Gold.</li>
 <li> Aurora Stone -&gt; Purple Crystal, keep Comet Attack.</li>
 <li> PP Boosting Liquid + Purple Crystal + Green Crystal (Forceful Soul) -&gt; White Neutralizer, keep Forceful Soul and Comet Attack.</li>
 <li> Toss into Ziegel Nugget, along with PP boosting.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/ziegel-nugget">Ziegel Nugget</a> 2
+<ul><li> <a href="/escha/items/ziegel-nugget/en">Ziegel Nugget</a> 2
 <ul><li> Green Crystal -&gt; White Neutralizer, keep Brave Soul.</li>
 <li> Create a Brave Soul Ziegel Nugget.</li>
 <li> Sky King Fossil + Ziegel Nugget -&gt; Iron Clay, keep Absolute Senses, Brave Soul</li>
 <li> Crystal Claw -&gt; Black Neutralizer, keep Sharpened Senses.</li>
 <li> Create a second Ziegel Nugget Iron Clay, Black Neutralizer, and a PP Boost.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/ziegel-nugget">Ziegel Nugget</a> 3
+<ul><li> <a href="/escha/items/ziegel-nugget/en">Ziegel Nugget</a> 3
 <ul><li> Green Crystal -&gt; White Neutralizer, keep Power Overwhelm.</li>
 <li> Create a Golt Board, keep Attack Power +9. Toss into Metal Chips, keep Attack Reinforce, Attack Power +9.</li>
 <li> Use that Brave Soul Iron Clay + White Neutralizer + Metal Chips, keep Brave Soul, Attack Surge, Power Overwhelm.</li>
 <li> What just happened is that the attack power properties stacked with a property native to the Ziegel Nugget.</li></ul></li></ul>
 <p><br />
 </p>
-<ul><li> <a href="/escha/items/humming-quasar">Humming Quasar</a>
+<ul><li> <a href="/escha/items/humming-quasar/en">Humming Quasar</a>
 <ul><li> Use Linca's Ziegel Nugget and a PP boosting Comet Crest Stone (or Moon Tablet; just be sure to max all elements out for the weapon's effects)</li>
 <li> Use a Quantity skill. You can basically toss this in Awin/Threia's sets.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/lifetree-staff">Lifetree Staff</a>
-<ul><li> Create a <a href="/escha/items/golden-wing-staff">Golden Wing Staff</a> using a Ziegel Nugget.</li>
-<li> Create a <a href="/escha/items/spirit-garland">Spirit Garland</a> using a PP Boosting Colseit Fiber. Keep its properties. (Truth be told it's overkill for this set, but if you're doing something a bit different you'll want it.)</li>
+<ul><li> <a href="/escha/items/lifetree-staff/en">Lifetree Staff</a>
+<ul><li> Create a <a href="/escha/items/golden-wing-staff/en">Golden Wing Staff</a> using a Ziegel Nugget.</li>
+<li> Create a <a href="/escha/items/spirit-garland/en">Spirit Garland</a> using a PP Boosting Colseit Fiber. Keep its properties. (Truth be told it's overkill for this set, but if you're doing something a bit different you'll want it.)</li>
 <li> Toss both of those into the Lifetree Staff.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/brave-bunker">Brave Bunker</a>, <a href="/escha/items/holy-talisman">Holy Talisman</a> and <a href="/escha/items/proto-phantom">Proto Phantom</a> take a (Metal) directly.
+<ul><li> <a href="/escha/items/brave-bunker/en">Brave Bunker</a>, <a href="/escha/items/holy-talisman/en">Holy Talisman</a> and <a href="/escha/items/proto-phantom/en">Proto Phantom</a> take a (Metal) directly.
 <ul><li> For the first two, you can use Humming Quasar.</li>
 <li> For Proto Phantom, consider using Time Flower, Dunkelheit, or Sun Flower to max all elements.</li>
 <li> You will need PP Boosting Comet Crest Stones and a Dragoon Cape.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/peerless-sabre">Peerless Sabre</a>, <a href="/escha/items/traveling-doctor">Traveling Doctor</a>, <a href="/escha/items/meteor-broom">Meteor Broom</a>, <a href="/escha/items/fantasy-stick">Fantasy Stick</a>
+<ul><li> <a href="/escha/items/peerless-sabre/en">Peerless Sabre</a>, <a href="/escha/items/traveling-doctor/en">Traveling Doctor</a>, <a href="/escha/items/meteor-broom/en">Meteor Broom</a>, <a href="/escha/items/fantasy-stick/en">Fantasy Stick</a>
 <ul><li> Ziegel Nugget -&gt; Iron Clay -&gt; Moon Tablet</li>
 <li> PP Boosting Medical Solution for Lucille.</li>
 <li> Bear in mind the first two and last two are different sets.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/white-feather-9">White Feather 9</a>
-<ul><li> Create a <a href="/escha/items/silver-arm">Silver Arm</a> using a Ziegel Nugget a PP Boosting Iron Clay.</li>
+<ul><li> <a href="/escha/items/white-feather-9/en">White Feather 9</a>
+<ul><li> Create a <a href="/escha/items/silver-arm/en">Silver Arm</a> using a Ziegel Nugget a PP Boosting Iron Clay.</li>
 <li> Use a PP Boosting Colseit Fiber or Cardboard. You know what to keep.</li></ul></li></ul>
 
 ## Ultimate Armor
@@ -258,25 +258,25 @@ There are a handful of properties listed that are considered 'lesser'. Instead o
 </th></tr>
 <tr>
 <td> Logy </td>
-<td> <a href="/escha/properties/evolve-body">Evolve Body</a>, <a href="/escha/properties/awakened-soul">Awakened Soul</a>, <a href="/escha/properties/heroic-soul">Heroic Soul</a>
+<td> <a href="/escha/properties/evolve-body/en">Evolve Body</a>, <a href="/escha/properties/awakened-soul/en">Awakened Soul</a>, <a href="/escha/properties/heroic-soul/en">Heroic Soul</a>
 </td></tr>
 <tr>
 <td> Escha </td>
-<td> <a href="/escha/properties/awakened-soul">Awakened Soul</a>, <a href="/escha/properties/loving-soul">Loving Soul</a>, <a href="/escha/properties/heroic-soul">Heroic Soul</a>
+<td> <a href="/escha/properties/awakened-soul/en">Awakened Soul</a>, <a href="/escha/properties/loving-soul/en">Loving Soul</a>, <a href="/escha/properties/heroic-soul/en">Heroic Soul</a>
 </td></tr>
 <tr>
 <td> Lucille/Threia/Awin/Linca/Micie </td>
-<td> <a href="/escha/properties/evolve-body">Evolve Body</a>, <a href="/escha/properties/robust-body">Robust Body</a>, <a href="/escha/properties/loving-soul">Loving Soul</a>
+<td> <a href="/escha/properties/evolve-body/en">Evolve Body</a>, <a href="/escha/properties/robust-body/en">Robust Body</a>, <a href="/escha/properties/loving-soul/en">Loving Soul</a>
 </td></tr>
 <tr>
 <td> Wilbell/Reyfer/Katla </td>
-<td> <a href="/escha/properties/evolve-body">Evolve Body</a>, <a href="/escha/properties/heroic-soul">Heroic Soul</a>, <a href="/escha/properties/loving-soul">Loving Soul</a>
+<td> <a href="/escha/properties/evolve-body/en">Evolve Body</a>, <a href="/escha/properties/heroic-soul/en">Heroic Soul</a>, <a href="/escha/properties/loving-soul/en">Loving Soul</a>
 </td></tr>
 </table>
-<p>For a simpler setup, the third one will do for everyone. But Logy doesn't need Loving Soul (he's the beginning of a chain, usually), so replace with <a href="/escha/properties/enhance-body">Enhance Body</a>.
-</p><p>Everything will be a <a href="/escha/items/celestial-shirt">Celestial Shirt</a>.
+<p>For a simpler setup, the third one will do for everyone. But Logy doesn't need Loving Soul (he's the beginning of a chain, usually), so replace with <a href="/escha/properties/enhance-body/en">Enhance Body</a>.
+</p><p>Everything will be a <a href="/escha/items/celestial-shirt/en">Celestial Shirt</a>.
 </p><p>For a simpler setup, Precious Stone (two properties) -&gt; SP Neutralizer (add third property) -&gt; Moon Tablet. This is only if you have one property you need on a Natural Extract.
-</p><p>For the more complex set, make a <a href="/escha/items/magic-fiber">Magic Fiber</a> with Evolve Body and Loving Soul. As with the simpler setup, get Heroic Soul, Awakened Soul, and, if possible, Robust Body on a <a href="/escha/items/moon-tablet">Moon Tablet</a>. If Robust Body is on a Green Crystal, simply toss it into the Celestial Shirt directly, and get your PP Boosting from another shirt.
+</p><p>For the more complex set, make a <a href="/escha/items/magic-fiber/en">Magic Fiber</a> with Evolve Body and Loving Soul. As with the simpler setup, get Heroic Soul, Awakened Soul, and, if possible, Robust Body on a <a href="/escha/items/moon-tablet/en">Moon Tablet</a>. If Robust Body is on a Green Crystal, simply toss it into the Celestial Shirt directly, and get your PP Boosting from another shirt.
 </p><p><br />
 </p>
 
@@ -291,30 +291,30 @@ There are a handful of properties listed that are considered 'lesser'. Instead o
 </th></tr>
 <tr>
 <td> Escha &amp; Logy </td>
-<td> <a href="/escha/items/magic-stone">Magic Stone</a>, <a href="/escha/items/soul-binder">Soul Binder</a> (different effect for Logy!)<br /><a href="/escha/properties/wind-soul">Wind Soul</a>, <a href="/escha/properties/night-lord-soul">Night Lord Soul</a>, <a href="/escha/properties/absolute-senses">Absolute Senses</a>
+<td> <a href="/escha/items/magic-stone/en">Magic Stone</a>, <a href="/escha/items/soul-binder/en">Soul Binder</a> (different effect for Logy!)<br /><a href="/escha/properties/wind-soul/en">Wind Soul</a>, <a href="/escha/properties/night-lord-soul/en">Night Lord Soul</a>, <a href="/escha/properties/absolute-senses/en">Absolute Senses</a>
 </td></tr>
 <tr>
 <td> Lucille/Threia/Awin/Linca/Micie </td>
-<td> <a href="/escha/items/soul-binder">Soul Binder</a>, <a href="/escha/items/brother-call">Brother Call</a><br /> <a href="/escha/properties/wind-soul">Wind Soul</a>, <a href="/escha/properties/demon-soul">Demon Soul</a>, <a href="/escha/properties/fire-soul">Fire Soul</a>
+<td> <a href="/escha/items/soul-binder/en">Soul Binder</a>, <a href="/escha/items/brother-call/en">Brother Call</a><br /> <a href="/escha/properties/wind-soul/en">Wind Soul</a>, <a href="/escha/properties/demon-soul/en">Demon Soul</a>, <a href="/escha/properties/fire-soul/en">Fire Soul</a>
 </td></tr>
 <tr>
 <td> Reyfer/Katla/Wilbell </td>
-<td> <a href="/escha/items/soul-binder">Soul Binder</a>, <a href="/escha/items/glorious-note">Glorious Note</a><br /><a href="/escha/properties/wind-soul">Wind Soul</a>, <a href="/escha/properties/demon-soul">Demon Soul</a>, <a href="/escha/properties/saving-skill">Saving Skill</a>
+<td> <a href="/escha/items/soul-binder/en">Soul Binder</a>, <a href="/escha/items/glorious-note/en">Glorious Note</a><br /><a href="/escha/properties/wind-soul/en">Wind Soul</a>, <a href="/escha/properties/demon-soul/en">Demon Soul</a>, <a href="/escha/properties/saving-skill/en">Saving Skill</a>
 </td></tr></table>
 <p>Per usual, you have two essential options for transferring properties. Ziegel Nugget/Iron Clay or Moon Tablet/Comet Crest Stone, which will work for all items listed and most other accessories, if you want to make them. Wind Soul and Demon soul are the two most common properties and should be applied first, with Fire Soul, Night Lord Soul, Absolute Senses, and Saving Skill coming closer to the end.
-</p><p>Saving Skill is a rather luck based property no matter what you do, unless you happen to have DLC characters. It is formed from <a href="/escha/properties/mp-use-1-2">MP Use 1/2</a>, which can be created from scratch if need be, and <a href="/escha/properties/skill-surge">Skill Surge</a>, which relies on either relics or boss drops. You'll need either Skill Power +15% or Skill Reinforce somewhere among all your items, at minimum.
+</p><p>Saving Skill is a rather luck based property no matter what you do, unless you happen to have DLC characters. It is formed from <a href="/escha/properties/mp-use-1-2/en">MP Use 1/2</a>, which can be created from scratch if need be, and <a href="/escha/properties/skill-surge/en">Skill Surge</a>, which relies on either relics or boss drops. You'll need either Skill Power +15% or Skill Reinforce somewhere among all your items, at minimum.
 </p>
-<ul><li> <a href="/escha/items/magic-stone">Magic Stone</a>
+<ul><li> <a href="/escha/items/magic-stone/en">Magic Stone</a>
 <ul><li> Max all elements</li>
 <li> Either a Sun Flower or something like a Proto Phantom should get you water.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/soul-binder">Soul Binder</a>
+<ul><li> <a href="/escha/items/soul-binder/en">Soul Binder</a>
 <ul><li> For Logy, do not reset attribute on water. Just max all elements. Should be easy if you use Comet Crest Stone.</li>
 <li> For everyone else, reset attribute on water.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/brother-call">Brother Call</a>
+<ul><li> <a href="/escha/items/brother-call/en">Brother Call</a>
 <ul><li> Max Elements.</li>
 <li> What I did was have two Ziegel Nuggets and Lava Stone.</li>
 <li> This allowed me to use Power +1 on Jet Black Cube, as well as quantity.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/glorious-note">Glorious Note</a>
+<ul><li> <a href="/escha/items/glorious-note/en">Glorious Note</a>
 <ul><li> Max elements.</li>
 <li> This is easy to accomplish using a Dragon Tail and Comet Crest Stone.</li></ul></li></ul>
 
@@ -323,69 +323,69 @@ There are a handful of properties listed that are considered 'lesser'. Instead o
 <p>Note that some of these are for fun, some are not. Like, Eye Opener is essential, but Goddess Shield isn't.
 </p><p>As a summary of the properties you'll want:
 </p>
-<ul><li> <a href="/escha/properties/perpetual-motion">Perpetual Motion</a> -- Good for items you anticipate using a lot, but bad for power output. Basically good for your infinite use auto Elixir, but can be used elsewhere if you want.</li>
-<li> <a href="/escha/properties/super-properties">Super Properties</a> -- Always used when power is primary focus.</li>
-<li> <a href="/escha/properties/cost-bonus">Cost Bonus</a> -- To be used among high cost properties.</li>
-<li> <a href="/escha/properties/jumbo-blessing">Jumbo Blessing</a> -- For use on 5 slot items.</li>
-<li> <a href="/escha/properties/all-around-boost">All Around Boost</a> -- Use this over Jumbo Blessing on small items.</li>
-<li> <a href="/escha/properties/slag-wave">Slag Wave</a> -- Best on utility items, if slot available.</li>
-<li> <a href="/escha/properties/mach-throw">Mach Throw</a> -- Best on utility items.</li></ul>
+<ul><li> <a href="/escha/properties/perpetual-motion/en">Perpetual Motion</a> -- Good for items you anticipate using a lot, but bad for power output. Basically good for your infinite use auto Elixir, but can be used elsewhere if you want.</li>
+<li> <a href="/escha/properties/super-properties/en">Super Properties</a> -- Always used when power is primary focus.</li>
+<li> <a href="/escha/properties/cost-bonus/en">Cost Bonus</a> -- To be used among high cost properties.</li>
+<li> <a href="/escha/properties/jumbo-blessing/en">Jumbo Blessing</a> -- For use on 5 slot items.</li>
+<li> <a href="/escha/properties/all-around-boost/en">All Around Boost</a> -- Use this over Jumbo Blessing on small items.</li>
+<li> <a href="/escha/properties/slag-wave/en">Slag Wave</a> -- Best on utility items, if slot available.</li>
+<li> <a href="/escha/properties/mach-throw/en">Mach Throw</a> -- Best on utility items.</li></ul>
 
 ### Support Item Preparation
 
 <p>The properties here will not net you the most powerful item. But they will get you a great infinite use item.
 </p>
-<ul><li> <a href="/escha/items/spray">Spray</a>
-<ul><li> Use <a href="/escha/items/paper-scraps">Paper Scraps</a>.</li>
-<li> The level 4 property of Spray is Recycle; this combines with Recycle+ to give you <a href="/escha/properties/low-energy-mode">Low Energy Mode</a>.</li></ul></li></ul>
+<ul><li> <a href="/escha/items/spray/en">Spray</a>
+<ul><li> Use <a href="/escha/items/paper-scraps/en">Paper Scraps</a>.</li>
+<li> The level 4 property of Spray is Recycle; this combines with Recycle+ to give you <a href="/escha/properties/low-energy-mode/en">Low Energy Mode</a>.</li></ul></li></ul>
 <ul><li> Another Spray
-<ul><li> Use the Spray you just made, <a href="/escha/items/junk">Junk</a>, and Paper Scraps.</li>
-<li> Keep <a href="/escha/properties/Perpetual-Motion">Perpetual Motion</a> and <a href="/escha/properties/50-automatic">50% Automatic</a>.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/distilled-water">Distilled Water</a>
+<ul><li> Use the Spray you just made, <a href="/escha/items/junk/en">Junk</a>, and Paper Scraps.</li>
+<li> Keep <a href="/escha/properties/Perpetual-Motion/en">Perpetual Motion</a> and <a href="/escha/properties/50-automatic/en">50% Automatic</a>.</li></ul></li></ul>
+<ul><li> <a href="/escha/items/distilled-water/en">Distilled Water</a>
 <ul><li> Use the Spray from #2. Keep Perpetual Motion and 50% Automatic.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/slag-essence">Slag Essence</a> with the <a href="/escha/properties/slag-wave">Slag Wave</a> property.
+<ul><li> <a href="/escha/items/slag-essence/en">Slag Essence</a> with the <a href="/escha/properties/slag-wave/en">Slag Wave</a> property.
 <ul><li> It's entirely valid to just use Slag Essence to boost the gauge, thus freeing up this property slot for something else.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/cup-of-life">Cup of Life</a>
+<ul><li> <a href="/escha/items/cup-of-life/en">Cup of Life</a>
 <ul><li> Use the Slag Essence; keep Slag Wave.</li></ul></li>
 <li> <i>Note:</i> If you want to use this property elsewhere, you can duplicate your Cup, then synth Slag Wave into a Medical Solution. I will assume you do this for the Command Chime, which is by no means a necessary item. Feel Free to keep Traditional Soul and PP Maximization.</li></ul>
-<ul><li> <a href="/escha/items/medical-solution">Medical Solution</a>
+<ul><li> <a href="/escha/items/medical-solution/en">Medical Solution</a>
 <ul><li> Use Cup of Life and Distilled Water.</li>
 <li> Keep Perpetual Motion, 50% Automatic, Slag Wave.</li></ul></li></ul>
 
 #### Canned Food
 
 <p>More prepwork.
-</p><p>You need a Green Crystal with <a href="/escha/properties/super-properties">Super Properties</a>, another with <a href="/escha/properties/jumbo-blessing">Jumbo Blessing</a> and preferably a Ziegel Nugget with <a href="/escha/properties/cost-bonus">Cost Bonus</a>.
+</p><p>You need a Green Crystal with <a href="/escha/properties/super-properties/en">Super Properties</a>, another with <a href="/escha/properties/jumbo-blessing/en">Jumbo Blessing</a> and preferably a Ziegel Nugget with <a href="/escha/properties/cost-bonus/en">Cost Bonus</a>.
 </p>
-<ul><li> <a href="/escha/items/apple-jam">Apple Jam</a>
-<ul><li> Use <a href="/escha/items/medical-solution">Medical Solution</a> (Traditional Soul, PP Maximization, PP Expansion)</li></ul></li></ul>
-<ul><li> <a href="/escha/items/sp-neutralizer">SP Neutralizer</a>
-<ul><li> Make it with a <a href="/escha/items/green-crystal">Green Crystal</a> that has <a href="/escha/properties/super-properties">Super Properties</a>. Repeat process for a separate SP Neutralizer with <a href="/escha/properties/jumbo-blessing">Jumbo Blessing</a>.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/ziegel-nugget">Ziegel Nugget</a>
+<ul><li> <a href="/escha/items/apple-jam/en">Apple Jam</a>
+<ul><li> Use <a href="/escha/items/medical-solution/en">Medical Solution</a> (Traditional Soul, PP Maximization, PP Expansion)</li></ul></li></ul>
+<ul><li> <a href="/escha/items/sp-neutralizer/en">SP Neutralizer</a>
+<ul><li> Make it with a <a href="/escha/items/green-crystal/en">Green Crystal</a> that has <a href="/escha/properties/super-properties/en">Super Properties</a>. Repeat process for a separate SP Neutralizer with <a href="/escha/properties/jumbo-blessing/en">Jumbo Blessing</a>.</li></ul></li></ul>
+<ul><li> <a href="/escha/items/ziegel-nugget/en">Ziegel Nugget</a>
 <ul><li> Use SP Neutralizer (Super Properties) and Ziegel Nugget (Cost Bonus).</li>
 <li> You may need some PP boosting from Iron Clay or Cardboard &lt;-&lt;</li></ul></li></ul>
 <ul><li> Another Ziegel Nugget
 <ul><li> Use SP Neutralizer (Jumbo Blessing)</li></ul></li></ul>
-<ul><li> <a href="/escha/items/iron-plate">Iron Plate</a>
+<ul><li> <a href="/escha/items/iron-plate/en">Iron Plate</a>
 <ul><li> Use Ziegel Nugget (Super Properties, Cost Bonus), Ziegel Nugget (Jumbo Blessing), and Cardboard (Trad. Soul, PP Max., PP Exp.).</li>
 <li> Keep Super Properties, Cost Bonus, Jumbo Blessing.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/canned-food">Canned Food</a>
+<ul><li> <a href="/escha/items/canned-food/en">Canned Food</a>
 <ul><li> Use Apple Jam and Iron Plate. (Fruit Pie has a decent Earth bonus, for Quantity.)</li>
 <li> Keep Super Properties, Cost Bonus, Jumbo Blessing.</li></ul></li></ul>
 
 ### Elixir Base
 
-<p><i>End Result:</i> <a href="/escha/properties/slag-wave">Slag Wave</a>, <a href="/escha/properties/50-automatic">50% Automatic</a>, and <a href="/escha/properties/perpetual-motion">Perpetual Motion</a>. Basically an infinite use, automatic Elixir that also increases your support gauge. There are reasons to go for a more powerful Elixir Base, such as the Plus version boss, Rogue Guardian, preventing the use of auto items. It isn't necessary, however.
+<p><i>End Result:</i> <a href="/escha/properties/slag-wave/en">Slag Wave</a>, <a href="/escha/properties/50-automatic/en">50% Automatic</a>, and <a href="/escha/properties/perpetual-motion/en">Perpetual Motion</a>. Basically an infinite use, automatic Elixir that also increases your support gauge. There are reasons to go for a more powerful Elixir Base, such as the Plus version boss, Rogue Guardian, preventing the use of auto items. It isn't necessary, however.
 </p>
 <ul><li> Use PP Boosting Dragoon Cape and Slag Wave Medical Solution</li>
 <li> Keep Slag Wave, 50% Automatic, and Perpetual Motion.</li>
-<li> You will want to Reset Attribute on Wind at the end to get <a href="/escha/effects/hp-mp-recovery-s">HP/MP Recovery S</a>; the alternative is <a href="/escha/effects/hp-recovery-s3">HP Recovery S3</a>, which is also very good, but no MP. Your choice. You will want some way to deal with status effects with this setup.</li></ul>
+<li> You will want to Reset Attribute on Wind at the end to get <a href="/escha/effects/hp-mp-recovery-s/en">HP/MP Recovery S</a>; the alternative is <a href="/escha/effects/hp-recovery-s3/en">HP Recovery S3</a>, which is also very good, but no MP. Your choice. You will want some way to deal with status effects with this setup.</li></ul>
 
 ### Knowledge Book
 
-<p><i>End Result:</i> <a href="/escha/properties/super-properties">Super Properties</a>, <a href="/escha/properties/cost-bonus">Cost Bonus</a>, <a href="/escha/properties/jumbo-blessing">Jumbo Blessing</a>.
+<p><i>End Result:</i> <a href="/escha/properties/super-properties/en">Super Properties</a>, <a href="/escha/properties/cost-bonus/en">Cost Bonus</a>, <a href="/escha/properties/jumbo-blessing/en">Jumbo Blessing</a>.
 </p>
-<ul><li> Use your special Canned Food, <a href="/escha/items/treasure-grimoire">Treasure Grimoire</a> (with PP Boosting properties)</li>
+<ul><li> Use your special Canned Food, <a href="/escha/items/treasure-grimoire/en">Treasure Grimoire</a> (with PP Boosting properties)</li>
 <li> Use Reset Attribute on Earth at the end.</li>
 <li> Be sure to boost Quantity both times.</li>
 <li> <b>Do NOT use Compression.</b> It weakens your Jumbo Blessing because it reduces the size by one.</li></ul>
@@ -394,10 +394,10 @@ There are a handful of properties listed that are considered 'lesser'. Instead o
 
 ### Tauzent Blitz
 
-<p><i>End Result:</i> <a href="/escha/properties/super-properties">Super Properties</a>, <a href="/escha/properties/cost-bonus">Cost Bonus</a> or <a href="/escha/properties/light-core">Light Core</a>, <a href="/escha/properties/jumbo-blessing">Jumbo Blessing</a>.
+<p><i>End Result:</i> <a href="/escha/properties/super-properties/en">Super Properties</a>, <a href="/escha/properties/cost-bonus/en">Cost Bonus</a> or <a href="/escha/properties/light-core/en">Light Core</a>, <a href="/escha/properties/jumbo-blessing/en">Jumbo Blessing</a>.
 </p>
-<ul><li> <a href="/escha/items/sun-flower">Sun Flower</a>
-<ul><li> Use the <a href="/escha/items/canned-food">Canned Food</a> listed above, as well as the PP Boosting Dragoon Cape.</li>
+<ul><li> <a href="/escha/items/sun-flower/en">Sun Flower</a>
+<ul><li> Use the <a href="/escha/items/canned-food/en">Canned Food</a> listed above, as well as the PP Boosting Dragoon Cape.</li>
 <li> Keep Super Properties, Cost Bonus, Jumbo Blessing.</li></ul></li></ul>
 <ul><li> Use PP Boosting Dragoon Cape, Sun Flower
 <ul><li> Use Reset Attribute on Wind. Water's lowest effect is cute, but not necessary.</li>
@@ -409,9 +409,9 @@ There are a handful of properties listed that are considered 'lesser'. Instead o
 <p><i>End Result:</i> Super Properties, Cost Bonus, Jumbo Blessing.
 </p><p>Keep in mind this is nowhere near as good as a Knowledge Book or Tauzent Blitz. But if you don't have the best item for Escha or Logy, this acts as a decent stand-in. You can skip this if you like.
 </p>
-<ul><li> <a href="/escha/items/medical-solution">Medical Solution</a>
-<ul><li> Use <a href="/escha/items/canned-food">Canned Food</a> (Super Properties, Cost Bonus, Jumbo Blessing) and PP boosting Distilled Water.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/dimension-bomb">Dimension Bomb</a>
+<ul><li> <a href="/escha/items/medical-solution/en">Medical Solution</a>
+<ul><li> Use <a href="/escha/items/canned-food/en">Canned Food</a> (Super Properties, Cost Bonus, Jumbo Blessing) and PP boosting Distilled Water.</li></ul></li></ul>
+<ul><li> <a href="/escha/items/dimension-bomb/en">Dimension Bomb</a>
 <ul><li> Use Medical Solution, Cardboard with PP boosting properties.</li>
 <li> Keep Super Properties, Cost Bonus, Jumbo Blessing.</li>
 <li> <i>Do NOT use Compression.</i></li>
@@ -423,23 +423,23 @@ There are a handful of properties listed that are considered 'lesser'. Instead o
 <li> Reset Attribute on Fire. CP Recovery+ LV3.</li>
 <li> Division on Medical Solution.</li>
 <li> Absorb Attribute LV2.</li>
-<li> You now have <a href="/escha/items/4d-damage">4D Damage</a>. Yes, this is a very good Effect; that's why it's hard to get.</li></ul></li></ul>
+<li> You now have <a href="/escha/items/4d-damage/en">4D Damage</a>. Yes, this is a very good Effect; that's why it's hard to get.</li></ul></li></ul>
 
 ### Poly. Poison
 
-<p><i>End Result:</i> <a href="/escha/items/one-time-end">One Time End</a>, <a href="/escha/items/perpetual-motion">Perpetual Motion</a>, and <a href="/escha/items/mach-throw">Mach Throw</a>. You could also go for the more traditionally powerful properties, but this set is funny.
+<p><i>End Result:</i> <a href="/escha/items/one-time-end/en">One Time End</a>, <a href="/escha/items/perpetual-motion/en">Perpetual Motion</a>, and <a href="/escha/items/mach-throw/en">Mach Throw</a>. You could also go for the more traditionally powerful properties, but this set is funny.
 </p>
 <ol><li> This assumes you have a Natural Extract with Mach Throw.</li>
 <li> You should have a Ziegel Nugget with One Time End.</li>
 <li> Tauzent Blitz is probably a better debuffer, but this does well enough.</li></ol>
-<ul><li> <a href="/escha/items/spray">Spray</a>
-<ul><li> Make with Ziegel Nugget (One Time End) and <a href="/escha/items/spray">Spray</a> (Perpetual Motion). You will need PP Boosts.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/distilled-water">Distilled Water</a>
+<ul><li> <a href="/escha/items/spray/en">Spray</a>
+<ul><li> Make with Ziegel Nugget (One Time End) and <a href="/escha/items/spray/en">Spray</a> (Perpetual Motion). You will need PP Boosts.</li></ul></li></ul>
+<ul><li> <a href="/escha/items/distilled-water/en">Distilled Water</a>
 <ul><li> Make with Spray, keep those properties. You should have enough PP boosting ingredients around to do this.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/medical-solution">Medical Solution</a>
+<ul><li> <a href="/escha/items/medical-solution/en">Medical Solution</a>
 <ul><li> Use the Distilled Water you just made and a PP Boosting Colseit Fiber.</li>
 <li> Keep One Time End, Perpetual Motion, Traditional Soul (trust me on this)</li></ul></li></ul>
-<ul><li> <a href="/escha/items/poly-poison">Poly. Poison</a>
+<ul><li> <a href="/escha/items/poly-poison/en">Poly. Poison</a>
 <ul><li> Make with Natural Extract with trait of your choosing (if relevant), Cardboard (PP Boosting properties) and Medical Solution.</li>
 <li> Keep One Time End, Perpetual Motion, and whatever you want.</li>
 <li> You will want to use Power+ LV1 on Medical Solution. From there, you should have no trouble maxing out all the elements.</li>
@@ -449,17 +449,17 @@ There are a handful of properties listed that are considered 'lesser'. Instead o
 
 ### Time Watch
 
-<p><i>End Result:</i> <a href="/escha/properties/earth-armor">Earth Armor</a>, <a href="/escha/properties/perpetual-motion">Perpetual Motion</a>, and <a href="/escha/properties/mach-throw">Mach Throw</a>.
+<p><i>End Result:</i> <a href="/escha/properties/earth-armor/en">Earth Armor</a>, <a href="/escha/properties/perpetual-motion/en">Perpetual Motion</a>, and <a href="/escha/properties/mach-throw/en">Mach Throw</a>.
 </p><p>This assumes you made the Poly. Poison.
 </p>
-<ul><li> <a href="/escha/items/black-neutralizer">Black Neutralizer</a>
+<ul><li> <a href="/escha/items/black-neutralizer/en">Black Neutralizer</a>
 <ul><li> Make with Trio Taun (Frame Compress), Medical Solution (Perpetual Motion, Traditional Soul).</li>
 <li> Get the Level 3 Property (Frame Compress+).</li>
 <li> Keep Perpetual Motion, Max Compress (you'll need it later), Traditional Soul.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/moon-tablet">Moon Tablet</a>
+<ul><li> <a href="/escha/items/moon-tablet/en">Moon Tablet</a>
 <ul><li> Use Black Neutralizer, Natural Extract (Mach Throw), PP Boosting Iron Clay.</li>
 <li> Keep Perpetual Motion, Mach Throw.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/time-watch">Time Watch</a>
+<ul><li> <a href="/escha/items/time-watch/en">Time Watch</a>
 <ul><li> Use Moon Tablet you just made, PP Boosting Comet Crest Stone. I used Junk as my fourth.</li>
 <li> Use Power+ LV1 on Comet Crest Stone. And put it in last. Then use Division to put it in again.</li>
 <li> Use Reset Attribute on Wind.</li>
@@ -468,7 +468,7 @@ There are a handful of properties listed that are considered 'lesser'. Instead o
 
 ### Goddess Shield
 
-<p><i>End Result:</i> <a href="/escha/properties/perpetual-motion">Perpetual Motion</a>, <a href="/escha/properties/mach-throw">Mach Throw</a>, and <a href="/escha/properties/goddess-blessing">Goddess Blessing</a>. Do not use Golden Aegis. It does nothing on this item.
+<p><i>End Result:</i> <a href="/escha/properties/perpetual-motion/en">Perpetual Motion</a>, <a href="/escha/properties/mach-throw/en">Mach Throw</a>, and <a href="/escha/properties/goddess-blessing/en">Goddess Blessing</a>. Do not use Golden Aegis. It does nothing on this item.
 </p><p>Guess what? You can use that Moon Tablet you made with the Time Watch.
 </p>
 <ul><li> I used Iron Clay (PP Boosting stuff), Golden Apple, Moon Tablet, and Slag Cable.</li>
@@ -479,7 +479,7 @@ There are a handful of properties listed that are considered 'lesser'. Instead o
 
 ### Eye-Opener
 
-<p><i>End Result:</i> <a href="/escha/properties/jumbo-blessing">Jumbo Blessing</a>, <a href="/escha/properties/super-properties">Super Properties</a>, <a href="/escha/properties/cost-bonus">Cost Bonus</a>
+<p><i>End Result:</i> <a href="/escha/properties/jumbo-blessing/en">Jumbo Blessing</a>, <a href="/escha/properties/super-properties/en">Super Properties</a>, <a href="/escha/properties/cost-bonus/en">Cost Bonus</a>
 </p>
 <ul><li> Like Dimension Bomb, get a Medical Solution with the properties.</li>
 <li> Reset Attribute on Earth.</li>
@@ -487,19 +487,19 @@ There are a handful of properties listed that are considered 'lesser'. Instead o
 
 ### Demon Crucible
 
-<p><i>End Result:</i> <a href="/escha/properties/demon-s-crucible">Demon's Crucible</a>, <a href="/escha/properties/max-compress">Max Compress</a>, <a href="/escha/properties/mach-throw">Mach Throw</a>. Whatever modifications you make (<a href="/escha/properties/elixir-source">Elixir Source</a> isn't a bad idea, for instance), you should follow the fifth step carefully.
+<p><i>End Result:</i> <a href="/escha/properties/demon-s-crucible/en">Demon's Crucible</a>, <a href="/escha/properties/max-compress/en">Max Compress</a>, <a href="/escha/properties/mach-throw/en">Mach Throw</a>. Whatever modifications you make (<a href="/escha/properties/elixir-source/en">Elixir Source</a> isn't a bad idea, for instance), you should follow the fifth step carefully.
 </p><p>If you are just interested in the best effect, rather than all the properties, skip to the fifth step and use Moon Milk instead of Fertilizer.
 </p>
 <ul><li> Duplicate your Eye-Opener. (15 days. But if you're doing this, you should have plenty of time!)</li></ul>
-<ul><li> <a href="/escha/items/cup-of-life">Cup of Life</a>
+<ul><li> <a href="/escha/items/cup-of-life/en">Cup of Life</a>
 <ul><li> Use Eye-Opener, keep Max Compress.</li>
 <li> You are welcome to get creative here and come up with your own properties to use (Slag Wave, Spirit Medicine, etc.)</li></ul></li></ul>
-<ul><li> <a href="/escha/items/dried-herbs">Dried Herbs</a>
+<ul><li> <a href="/escha/items/dried-herbs/en">Dried Herbs</a>
 <ul><li> Make it with Natural Extract (Mach Throw) and PP Boosting Spirit Garland.</li>
 <li> Keep Traditional Soul, PP Maximization, Mach Throw.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/fertilizer">Fertilizer</a>
+<ul><li> <a href="/escha/items/fertilizer/en">Fertilizer</a>
 <ul><li> Make it with Dried Herbs. Keep all its properties.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/demon-crucible">Demon Crucible</a>
+<ul><li> <a href="/escha/items/demon-crucible/en">Demon Crucible</a>
 <ul><li> Use Dunkelheit, Cup of Life, and Fertilizer.</li>
 <li> The following is from MasterLL.</li>
 <li> Add Heart of Flame and Cup of Life.</li>
@@ -514,7 +514,7 @@ There are a handful of properties listed that are considered 'lesser'. Instead o
 
 ### Command Chime
 
-<p><i>End Result:</i> <a href="/escha/properties/mach-throw">Mach Throw</a>, <a href="/escha/properties/command-chime">Command Chime</a>, <a href="/escha/properties/slag-wave">Slag Wave</a>. Feel free to get creative on the third one. I don't think you really need Perpetual Motion here.
+<p><i>End Result:</i> <a href="/escha/properties/mach-throw/en">Mach Throw</a>, <a href="/escha/properties/command-chime/en">Command Chime</a>, <a href="/escha/properties/slag-wave/en">Slag Wave</a>. Feel free to get creative on the third one. I don't think you really need Perpetual Motion here.
 </p>
 <ul><li> Use Medical Solution with Slag Wave. See the Elixir Base section for more info on that, if you didn't do it. Also toss in Moon Tablet (Mach Throw). My final one was Corundum Stone.</li>
 <li> Do the yada yada, get your elements maxed out, Compress the crap out of your item, Quantity LV2 and whatever.</li>
@@ -523,7 +523,7 @@ There are a handful of properties listed that are considered 'lesser'. Instead o
 
 ### Dragon's Secret
 
-<p><i>End Result:</i> <a href="/escha/properties/all-around-boost">All Around Boost</a>, <a href="/escha/properties/super-properties">Super Properties</a>, <a href="/escha/properties/cost-bonus">Cost Bonus</a>
+<p><i>End Result:</i> <a href="/escha/properties/all-around-boost/en">All Around Boost</a>, <a href="/escha/properties/super-properties/en">Super Properties</a>, <a href="/escha/properties/cost-bonus/en">Cost Bonus</a>
 </p>
 <ul><li> At this point, you should know the tricks to transferring All Around Boost.</li>
 <li> Use Medical Solution (Super Properties, Cost Bonus) and Purifying Liquid (All Around Boost). I also used a plain Distilled Water and Dragon Tail.</li>

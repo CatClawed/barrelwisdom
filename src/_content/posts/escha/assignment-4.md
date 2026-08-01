@@ -3,6 +3,7 @@ title: "Assignment 4"
 pubDate: "2021-06-17"
 updatedDate: "2024-11-14"
 description: "Guide for Assignment 4, including recipes, events, and other things of note."
+mainClass: "medium-page"
 ---
 
 <div class="grid">
@@ -24,7 +25,7 @@ description: "Guide for Assignment 4, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> <b>New Weapons </b> </td>
-<td> Make <a href="/escha/items/medical-bag">Medical Bag</a>, <a href="/escha/items/glass-shaker">Glass Shaker</a>, <a href="/escha/items/golden-wing-staff">Golden Wing Staff</a>, <a href="/escha/items/graviton-gale">Graviton Gale</a>
+<td> Make <a href="/escha/items/medical-bag/en">Medical Bag</a>, <a href="/escha/items/glass-shaker/en">Glass Shaker</a>, <a href="/escha/items/golden-wing-staff/en">Golden Wing Staff</a>, <a href="/escha/items/graviton-gale/en">Graviton Gale</a>
 </td></tr>
 <tr>
 <td> <b>Gather </b> </td>
@@ -40,19 +41,19 @@ description: "Guide for Assignment 4, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td rowspan="5"> <b>Upland Riverbed </b> </td>
-<td> Slay <a href="/escha/monsters/yellow-element">Yellow Element</a> at Abandoned River (Upland Riverbed)
+<td> Slay <a href="/escha/monsters/yellow-element/en">Yellow Element</a> at Abandoned River (Upland Riverbed)
 </td></tr>
 <tr>
 <td> Gather at Old Ponds twice
 </td></tr>
 <tr>
-<td> Slay <a href="/escha/monsters/howling-beast">Howling Beast</a> at Still Creek.
+<td> Slay <a href="/escha/monsters/howling-beast/en">Howling Beast</a> at Still Creek.
 </td></tr>
 <tr>
 <td> Gather at Forest River Source
 </td></tr>
 <tr>
-<td> Slay a <a href="/escha/monsters/yellow-element">Yellow Element</a> at River Waterfall.
+<td> Slay a <a href="/escha/monsters/yellow-element/en">Yellow Element</a> at River Waterfall.
 </td></tr>
 <tr>
 <td> <b>Search </b> </td>
@@ -65,19 +66,19 @@ description: "Guide for Assignment 4, including recipes, events, and other thing
 </th></tr>
 <tr>
 <td> <b>Disassemble Fireball </b> </td>
-<td> Disassemble a <a href="/escha/items/lava-cube">Lava Cube</a>. You can find it at the Abandoned River.
+<td> Disassemble a <a href="/escha/items/lava-cube/en">Lava Cube</a>. You can find it at the Abandoned River.
 </td></tr>
 <tr>
 <td> <b>Falling Fireball </b> </td>
-<td> Synth a <a href="/escha/items/lava-cube">Lava Cube</a> with <a href="/escha/effects/falling-stars">Falling Stars</a>. See note below.
+<td> Synth a <a href="/escha/items/lava-cube/en">Lava Cube</a> with <a href="/escha/effects/falling-stars/en">Falling Stars</a>. See note below.
 </td></tr>
 <tr>
 <td> <b>Defeat Rampaging Slag</b> </td>
-<td> Slay the <a href="/escha/monsters/carrier">Carrier</a> in Souther Ruins (Sector One)
+<td> Slay the <a href="/escha/monsters/carrier/en">Carrier</a> in Souther Ruins (Sector One)
 </td></tr>
 <tr>
 <td> <b>Plains Grass </b> </td>
-<td> Gather <a href="/escha/items/lethe-grass">Lethe Grass</a> at Withering Plains. (Ugh.)
+<td> Gather <a href="/escha/items/lethe-grass/en">Lethe Grass</a> at Withering Plains. (Ugh.)
 </td></tr>
 <tr>
 <td> <b>Document Recovery </b> </td>
@@ -85,11 +86,11 @@ description: "Guide for Assignment 4, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> <b>Explorer's Kit </b> </td>
-<td> Equip a <a href="/escha/items/dowsing-rod">Dowsing Rod</a>, gather somewhere, return to Colseit.
+<td> Equip a <a href="/escha/items/dowsing-rod/en">Dowsing Rod</a>, gather somewhere, return to Colseit.
 </td></tr>
 <tr>
 <td> <b>Creatures of the Deep</b> </td>
-<td> Slay the <a href="/escha/items/flounder">Flounder</a> at Abandoned River (River Waterfall).
+<td> Slay the <a href="/escha/items/flounder/en">Flounder</a> at Abandoned River (River Waterfall).
 </td></tr>
 <tr>
 <td> <b>New Ally </b> </td>
@@ -97,7 +98,7 @@ description: "Guide for Assignment 4, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> <b>Clear Water Source </b> </td>
-<td> Slay <a href="/escha/monsters/yellow-element" class="new">Yellow Element</a>, <a href="/escha/items/howling-beast">Howling Beast</a>, <a href="/escha/items/blue-spirit">Blue Spirit</a> at Abandoned River.
+<td> Slay <a href="/escha/monsters/yellow-element/en" class="new">Yellow Element</a>, <a href="/escha/items/howling-beast/en">Howling Beast</a>, <a href="/escha/items/blue-spirit/en">Blue Spirit</a> at Abandoned River.
 </td></tr>
 <tr>
 <td> <b>Requests </b> </td>
@@ -105,7 +106,7 @@ description: "Guide for Assignment 4, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> <b>3 Water Sources </b> </td>
-<td> Gather <a href="/escha/items/lotus">Lotus</a>, <a href="/escha/items/lady-s-whiskers">Lady's Whiskers</a>, <a href="/escha/items/bubbling-water">Bubbling Water</a> at Abandoned River.
+<td> Gather <a href="/escha/items/lotus/en">Lotus</a>, <a href="/escha/items/lady-s-whiskers/en">Lady's Whiskers</a>, <a href="/escha/items/bubbling-water/en">Bubbling Water</a> at Abandoned River.
 </td></tr>
 <tr>
 <td> <b>Synthesis Requests </b> </td>
@@ -113,19 +114,19 @@ description: "Guide for Assignment 4, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> <b>Antique Delivery </b> </td>
-<td> Deliver <a href="/escha/items/dowsing-rod">Dowsing Rod</a> x1, <a href="/escha/items/abrasive">Abrasive</a> x5, or <a href="/escha/categories/antique">(Antique)</a> x30 to Town Entrance.
+<td> Deliver <a href="/escha/items/dowsing-rod/en">Dowsing Rod</a> x1, <a href="/escha/items/abrasive/en">Abrasive</a> x5, or <a href="/escha/categories/antique/en">(Antique)</a> x30 to Town Entrance.
 </td></tr>
 <tr>
 <td> <b>Passing Civilization </b> </td>
-<td> Synth <a href="/escha/items/tarot-of-fate">Tarot of Fate</a>
+<td> Synth <a href="/escha/items/tarot-of-fate/en">Tarot of Fate</a>
 </td></tr>
 <tr>
 <td> <b>Deliver Rations </b> </td>
-<td> Deliver <a href="/escha/items/traveler-s-ration">Traveler's Ration</a> x1 or <a href="/escha/items/five-grain-flour">Five Grain Flour</a> x5 to Town Entrance.
+<td> Deliver <a href="/escha/items/traveler-s-ration/en">Traveler's Ration</a> x1 or <a href="/escha/items/five-grain-flour/en">Five Grain Flour</a> x5 to Town Entrance.
 </td></tr>
 <tr>
 <td> <b>Healing Properties </b> </td>
-<td> Make an item with <a href="/escha/properties/healing-up">Healing Up</a>. Probably.
+<td> Make an item with <a href="/escha/properties/healing-up/en">Healing Up</a>. Probably.
 </td></tr>
 </table>
 <table class="tbl-min borders grid-6">
@@ -234,29 +235,29 @@ description: "Guide for Assignment 4, including recipes, events, and other thing
 <th colspan="3"> Recipes
 </th></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/fortune-teller">Fortune Teller</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/fortune-teller/en">Fortune Teller</a> </b> </td>
 <td> Katla's Shop </td>
-<td> <a href="/escha/items/crystal-ball">Crystal Ball</a>, <a href="/escha/items/crystal-ring">Crystal Ring</a>, <a href="/escha/items/tarot-of-fate">Tarot of Fate</a>, <a href="/escha/items/dowsing-rod">Dowsing Rod</a>, <a href="/escha/items/purple-crystal">Purple Crystal</a>
+<td> <a href="/escha/items/crystal-ball/en">Crystal Ball</a>, <a href="/escha/items/crystal-ring/en">Crystal Ring</a>, <a href="/escha/items/tarot-of-fate/en">Tarot of Fate</a>, <a href="/escha/items/dowsing-rod/en">Dowsing Rod</a>, <a href="/escha/items/purple-crystal/en">Purple Crystal</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/walking-twilight">Walking Twilight</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/walking-twilight/en">Walking Twilight</a> </b> </td>
 <td> Duke's Shop </td>
-<td> <a href="/escha/items/dark-night-cape">Dark Night Cape</a>, <a href="/escha/items/acrobatic-armor">Acrobatic Armor</a>, <a href="/escha/items/exceed-belt">Exceed Belt</a>, <a href="/escha/items/traveler-s-ration">Traveler's Ration</a>
+<td> <a href="/escha/items/dark-night-cape/en">Dark Night Cape</a>, <a href="/escha/items/acrobatic-armor/en">Acrobatic Armor</a>, <a href="/escha/items/exceed-belt/en">Exceed Belt</a>, <a href="/escha/items/traveler-s-ration/en">Traveler's Ration</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/theory-of-relics">Theory of Relics</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/theory-of-relics/en">Theory of Relics</a> </b> </td>
 <td> 1 assignment line </td>
-<td> <a href="/escha/items/lava-cube">Lava Cube</a>, <a href="/escha/items/divine-jar">Divine Jar</a>, <a href="/escha/items/flava-blitz">Flava Blitz</a>, <a href="/escha/items/black-neutralizer">Black Neutralizer</a>, <a href="/escha/items/white-neutralizer">White Neutralizer</a>, <a href="/escha/items/polarized-gem">Polarized Gem</a>
+<td> <a href="/escha/items/lava-cube/en">Lava Cube</a>, <a href="/escha/items/divine-jar/en">Divine Jar</a>, <a href="/escha/items/flava-blitz/en">Flava Blitz</a>, <a href="/escha/items/black-neutralizer/en">Black Neutralizer</a>, <a href="/escha/items/white-neutralizer/en">White Neutralizer</a>, <a href="/escha/items/polarized-gem/en">Polarized Gem</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/forged-armor">Forged Armor</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/forged-armor/en">Forged Armor</a> </b> </td>
 <td> 3 assignment lines </td>
-<td> <a href="/escha/items/knitted-shirt">Knitted Shirt</a>, <a href="/escha/items/stylish-shirt">Stylish Shirt</a>, <a href="/escha/items/leather-shirt">Leather Shirt</a>, <a href="/escha/items/bone-plate">Bone Plate</a>, <a href="/escha/items/magic-plate">Magic Plate</a>
+<td> <a href="/escha/items/knitted-shirt/en">Knitted Shirt</a>, <a href="/escha/items/stylish-shirt/en">Stylish Shirt</a>, <a href="/escha/items/leather-shirt/en">Leather Shirt</a>, <a href="/escha/items/bone-plate/en">Bone Plate</a>, <a href="/escha/items/magic-plate/en">Magic Plate</a>
 </td></tr>
 </table>
 </div>
 <ul><li> Area
-<ul><li> <a href="/escha/locations/abandoned-river">Abandoned River</a></li>
+<ul><li> <a href="/escha/locations/abandoned-river/en">Abandoned River</a></li>
 <li> There's a boss fight here. If you have a semi-decent Omega Craft and upgraded equipment it shouldn't be too bad.</li>
 <li> You get your first Lithograph Fragment after beating it. You need five for the final boss.</li></ul></li></ul>
 <p>Right at the beginning, Lucille joins you. Naturally, you'll want to put her up front in your party if

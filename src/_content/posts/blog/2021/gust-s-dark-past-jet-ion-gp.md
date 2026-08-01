@@ -13,7 +13,7 @@ Nope! Racing aficionados in PAL regions may be familiar with Jet Ion GP, known i
 
 However, a fascinating historical context surrounds the subpar racer. Hresvelgr was initially released in June of 2000, with the international version following in December of the same year. This makes it Gust’s first PS2 game, and the last of three releases in the gap between Elie and Lilie. Gust wasn’t established as the Atelier machine it is today. Aside from Marie and Elie, their portfolio consisted of two strategy games, another RPG, and a handful of adventure games. You wouldn’t think a company like that would suddenly branch into racing, but they sure did. Note that they haven’t made that mistake again!
 
-Fittingly enough, this game was picked up for an international release by the now defunct shovelware extraordinaire, Crave Entertainment. Because nobody can spell or pronounce Hresvelgr (I sure can’t!), the game was at first known as Fusion GT. Bear in mind, this was in the works before the PS2 was even released outside Japan. This [adorably optimistic](https://www.ign.com/articles/2000/06/08/the-racing-explosion-on-ps2) article even predates the Japanese release of Hresvelgr:
+Fittingly enough, this game was picked up for an international release by the now defunct shovelware extraordinaire, Crave Entertainment. Because nobody can spell or pronounce Hresvelgr (I sure can’t!), the game was at first known as Fusion GT. Bear in mind, this was in the works before the PS2 was even released outside Japan. This <a href="https://www.ign.com/articles/2000/06/08/the-racing-explosion-on-ps2" target="_blank">adorably optimistic</a> article even predates the Japanese release of Hresvelgr:
 
 <div class="card"> 
 <b>Fusion GT</b>
@@ -21,9 +21,9 @@ Fittingly enough, this game was picked up for an international release by the no
 Titled Hresvelgr in Japan, Fusion GT has been picked up for release in North America by Crave Entertainment. The game is a futuristic racing game that is set in the year 2040 and features these futuristic high-powered racing vehicles that hover in the air. This is definitely one of the PS2 racing games that you might want to keep your eyes on.
 </div>
 
-Soon after, Crave was making big promises, so IGN released [another article](https://www.ign.com/articles/2000/06/29/fusion-gt). To summarize: the international release would bring framerate closer to 60, improve controls, add a two-player mode, and be a generally better game. As of that article, Crave had already been working with Gust to fix it up for three months, which means well before the initial Japanese release.
+Soon after, Crave was making big promises, so IGN released <a href="https://www.ign.com/articles/2000/06/29/fusion-gt" target="_blank">another article</a>. To summarize: the international release would bring framerate closer to 60, improve controls, add a two-player mode, and be a generally better game. As of that article, Crave had already been working with Gust to fix it up for three months, which means well before the initial Japanese release.
 
-Not long after that, Fusion GT renamed to Jet Ion GP, and Crave [made a rather interesting promise](https://www.gamespot.com/articles/qanda-jet-ion-gp/1100-2610634/).
+Not long after that, Fusion GT renamed to Jet Ion GP, and Crave <a href="https://www.gamespot.com/articles/qanda-jet-ion-gp/1100-2610634/" target="_blank">made a rather interesting promise</a>.
 
 <div class="card"> 
 Paul: We won’t release the game until we’re satisfied that its quality and entertainment value is worthy of the PS2.
@@ -49,7 +49,7 @@ As you win races, you unlock new ships and “new” courses. I did not bother u
 
 <div class="center"><img  src="/media/blog/2021/06/jet-ion-gp/debug.webp" alt="Debug Menu"></div>
 
-Rather, I settled for [hacking the game instead](https://tcrf.net/Jet_Ion_Grand_Prix), and I saw a couple other track variants while looking at the new ships, as well as demo stuff for Famitsu and others. Most importantly I forced the credits to look at the staff!
+Rather, I settled for <a href="https://tcrf.net/Jet_Ion_Grand_Prix" target="_blank">hacking the game instead</a>, and I saw a couple other track variants while looking at the new ships, as well as demo stuff for Famitsu and others. Most importantly I forced the credits to look at the staff!
 
 <div class="grid">
 <div class="grid-6"><img src="/media/blog/2021/06/jet-ion-gp/gust.webp" alt="AKA the Atelier Marie ship"></div>

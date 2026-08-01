@@ -3,6 +3,7 @@ title: "Chapter 3"
 pubDate: "2021-06-25"
 updatedDate: "2024-11-14"
 description: "Walkthrough/guide for Chapter 3, including events, recipes, and other things of note."
+mainClass: "medium-page"
 ---
 
 <div class="grid">
@@ -145,7 +146,7 @@ description: "Walkthrough/guide for Chapter 3, including events, recipes, and ot
 </td></tr>
 <tr>
 <td> <i>Synthesize bombs </i> </td>
-<td> (After above) Synth <a href="/shallie/categories/bomb">(Bomb)</a> x2 </td>
+<td> (After above) Synth <a href="/shallie/categories/bomb/en">(Bomb)</a> x2 </td>
 <td> Synthesis Exp +10
 </td></tr>
 <tr>
@@ -166,29 +167,29 @@ description: "Walkthrough/guide for Chapter 3, including events, recipes, and ot
 </td></tr>
 <tr>
 <td> <i>Rumors of special regional grains </i> </td>
-<td> Gather <a href="/shallie/categories/grain">(Grain)</a> at <a href="/shallie//locations/stellard-southern-archipelago">Stellard Southern Archipelago</a> </td>
+<td> Gather <a href="/shallie/categories/grain/en">(Grain)</a> at <a href="/shallie//locations/stellard-southern-archipelago">Stellard Southern Archipelago</a> </td>
 <td> Combat Exp +20
 </td></tr>
 <tr>
 <td> <i>Rumors of special regional ores </i> </td>
-<td> Gather <a href="/shallie/categories/ore">(Ore)</a> at <a href="/shallie/locations/baskes-region">Baskes Region</a> </td>
+<td> Gather <a href="/shallie/categories/ore/en">(Ore)</a> at <a href="/shallie/locations/baskes-region">Baskes Region</a> </td>
 <td> Combat Exp +20
 </td></tr>
 <tr>
 <td rowspan="2"> <i>Want new equipment </i> </td>
-<td> Imbue <a href="/shallie/items/convenient-broom">Convenient Broom</a> / <a href="/shallie/items/ship-clan-s-bell">Ship Clan's Bell</a> </td>
+<td> Imbue <a href="/shallie/items/convenient-broom/en">Convenient Broom</a> / <a href="/shallie/items/ship-clan-s-bell/en">Ship Clan's Bell</a> </td>
 <td rowspan="2"> Enhance Lumber
 </td></tr>
 <tr>
-<td> OR Imbue <a href="/shallie/items/cotton-shirt">Cotton Shirt</a>
+<td> OR Imbue <a href="/shallie/items/cotton-shirt/en">Cotton Shirt</a>
 </td></tr>
 <tr>
 <td rowspan="2"> <i>Prepare new equipment for everyone </i> </td>
-<td> (After above) Imbue <a href="/shallie/items/magician-s-ring">Magician's Ring</a> / <a href="/shallie/items/sea-clan-s-charm">Sea Clan's Charm</a> </td>
+<td> (After above) Imbue <a href="/shallie/items/magician-s-ring/en">Magician's Ring</a> / <a href="/shallie/items/sea-clan-s-charm/en">Sea Clan's Charm</a> </td>
 <td rowspan="2"> Enhance Fabric
 </td></tr>
 <tr>
-<td> OR Imbue <a href="/shallie/items/flame-bunker">Flame Bunker</a> / <a href="/shallie/items/crystal-twin-swords">Crystal Twin Swords</a>
+<td> OR Imbue <a href="/shallie/items/flame-bunker/en">Flame Bunker</a> / <a href="/shallie/items/crystal-twin-swords/en">Crystal Twin Swords</a>
 </td></tr>
 <tr>
 <td> <i>Want to do some Synthesis </i> </td>
@@ -212,11 +213,11 @@ description: "Walkthrough/guide for Chapter 3, including events, recipes, and ot
 <tr>
 <td rowspan="3"> Jurie </td>
 <td> Union </td>
-<td> (Stera) She'll request <a href="/shallie/categories/medicine">(Medicine)</a> x2 through Raoul.
+<td> (Stera) She'll request <a href="/shallie/categories/medicine/en">(Medicine)</a> x2 through Raoul.
 </td></tr>
 <tr>
 <td> Hunter's Hangout </td>
-<td> (Stera) She gives you a <a href="/shallie/items/small-relic">Small Relic</a> for fulfilling her request
+<td> (Stera) She gives you a <a href="/shallie/items/small-relic/en">Small Relic</a> for fulfilling her request
 </td></tr>
 <tr>
 <td> Hunger's Hangout </td>
@@ -267,44 +268,44 @@ description: "Walkthrough/guide for Chapter 3, including events, recipes, and ot
 <th colspan="3"> Recipes
 </th></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/miruca-s-reference-book">Miruca's Reference Book</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/miruca-s-reference-book/en">Miruca's Reference Book</a> </i> </td>
 <td> Auto - Lotte </td>
-<td><a href="/shallie/items/ingot">Ingot</a>, <a href="/shallie/items/cloth">Cloth</a>, <a href="/shallie/items/lumber">Lumber</a>, <a href="/shallie/items/palma-board">Palma Board</a>, <a href="/shallie/items/supplement-blue">Supplement - Blue</a>
+<td><a href="/shallie/items/ingot/en">Ingot</a>, <a href="/shallie/items/cloth/en">Cloth</a>, <a href="/shallie/items/lumber/en">Lumber</a>, <a href="/shallie/items/palma-board/en">Palma Board</a>, <a href="/shallie/items/supplement-blue/en">Supplement - Blue</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/shiny-zappy">Shiny Zappy</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/shiny-zappy/en">Shiny Zappy</a> </i> </td>
 <td> Katla's Shop </td>
-<td> <a href="/shallie/items/lightning-bomb">Lightning Bomb</a>, <a href="/shallie/items/uni">Uni</a>, <a href="/shallie/items/powdered-glass">Powdered Glass</a>, <a href="/shallie/items/glass-tube">Glass Tube</a>, <a href="/shallie/items/water-crystal">Water Crystal</a>
+<td> <a href="/shallie/items/lightning-bomb/en">Lightning Bomb</a>, <a href="/shallie/items/uni/en">Uni</a>, <a href="/shallie/items/powdered-glass/en">Powdered Glass</a>, <a href="/shallie/items/glass-tube/en">Glass Tube</a>, <a href="/shallie/items/water-crystal/en">Water Crystal</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/skillful-woodworking">Skillful Woodworking</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/skillful-woodworking/en">Skillful Woodworking</a> </i> </td>
 <td> Katla's Shop </td>
-<td> <a href="/shallie/items/healing-aroma">Healing Aroma</a>, <a href="/shallie/items/algemein-plywood">Algemein Plywood</a>, <a href="/shallie/items/holinicait">Holinicait</a>, <a href="/shallie/items/palma-wood">Palma Wood</a>
+<td> <a href="/shallie/items/healing-aroma/en">Healing Aroma</a>, <a href="/shallie/items/algemein-plywood/en">Algemein Plywood</a>, <a href="/shallie/items/holinicait/en">Holinicait</a>, <a href="/shallie/items/palma-wood/en">Palma Wood</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/cutting-edge-fashions">Cutting-Edge Fashions</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/cutting-edge-fashions/en">Cutting-Edge Fashions</a> </i> </td>
 <td> Katla's Shop </td>
-<td> <a href="/shallie/items/ritual-powder">Ritual Powder</a>, <a href="/shallie/items/slag-soup">Slag Soup</a>, <a href="/shallie/items/stellard-medicine">Stellard Medicine</a>, <a href="/shallie/items/angel-ribbon">Angel Ribbon</a>, <a href="/shallie/items/aroma-pouch">Aroma Pouch</a>
+<td> <a href="/shallie/items/ritual-powder/en">Ritual Powder</a>, <a href="/shallie/items/slag-soup/en">Slag Soup</a>, <a href="/shallie/items/stellard-medicine/en">Stellard Medicine</a>, <a href="/shallie/items/angel-ribbon/en">Angel Ribbon</a>, <a href="/shallie/items/aroma-pouch/en">Aroma Pouch</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/the-fearsome-power-of-nature">The Fearsome Power of Nature</a></i> </td>
+<td> <i><a href="/shallie/recipe-books/the-fearsome-power-of-nature/en">The Fearsome Power of Nature</a></i> </td>
 <td> Rose's Shop </td>
-<td> <a href="/shallie/items/ice-bomb">Ice Bomb</a>, <a href="/shallie/items/slag-essence">Slag Essence</a>, <a href="/shallie/items/electric-orb">Electric Orb</a>, <a href="/shallie/items/mofcott">Mofcott</a>
+<td> <a href="/shallie/items/ice-bomb/en">Ice Bomb</a>, <a href="/shallie/items/slag-essence/en">Slag Essence</a>, <a href="/shallie/items/electric-orb/en">Electric Orb</a>, <a href="/shallie/items/mofcott/en">Mofcott</a>
 </td></tr>
 <tr>
 <td> <i>Weapon Batch 1 (Stera) </i> </td>
 <td> - </td>
-<td> <a href="/shallie/items/ship-clan-s-bell">Ship Clan's Bell</a>, <a href="/shallie/items/sea-clan-s-charm">Sea Clan's Charm</a>, <a href="/shallie/items/crystal-twin-swords">Crystal Twin Swords</a>, <a href="/shallie/items/hayate">Hayate</a>
+<td> <a href="/shallie/items/ship-clan-s-bell/en">Ship Clan's Bell</a>, <a href="/shallie/items/sea-clan-s-charm/en">Sea Clan's Charm</a>, <a href="/shallie/items/crystal-twin-swords/en">Crystal Twin Swords</a>, <a href="/shallie/items/hayate/en">Hayate</a>
 </td></tr>
 <tr>
 <td> <i>Weapon Batch 1 (Lotte) </i> </td>
 <td> - </td>
-<td> <a href="/shallie/items/convenient-broom">Convenient Broom</a>, <a href="/shallie/items/magician-s-ring">Magician's Ring</a>, <a href="/shallie/items/flame-bunker">Flame Bunker</a>, <a href="/shallie/items/hayate">Hayate</a>
+<td> <a href="/shallie/items/convenient-broom/en">Convenient Broom</a>, <a href="/shallie/items/magician-s-ring/en">Magician's Ring</a>, <a href="/shallie/items/flame-bunker/en">Flame Bunker</a>, <a href="/shallie/items/hayate/en">Hayate</a>
 </td></tr>
 <tr>
 <td> <i>Armor Batch 1 </i> </td>
 <td> - </td>
-<td> <a href="/shallie/items/cotton-shirt">Cotton Shirt</a>, <a href="/shallie/items/thick-shirt">Thick Shirt</a>, <a href="/shallie/items/chain-armor">Chain Armor</a>, <a href="/shallie/items/bone-plate">Bone Plate</a>, <a href="/shallie/items/windbreaker">Windbreaker</a>, <a href="/shallie/items/leather-coat">Leather Coat</a>
+<td> <a href="/shallie/items/cotton-shirt/en">Cotton Shirt</a>, <a href="/shallie/items/thick-shirt/en">Thick Shirt</a>, <a href="/shallie/items/chain-armor/en">Chain Armor</a>, <a href="/shallie/items/bone-plate/en">Bone Plate</a>, <a href="/shallie/items/windbreaker/en">Windbreaker</a>, <a href="/shallie/items/leather-coat/en">Leather Coat</a>
 </td></tr>
 </table>
 </div>

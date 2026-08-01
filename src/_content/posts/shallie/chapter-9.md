@@ -3,6 +3,7 @@ title: "Chapter 9"
 pubDate: "2021-06-25"
 updatedDate: "2024-11-14"
 description: "Walkthrough/guide for Chapter 9, including events, recipes, and other things of note."
+mainClass: "medium-page"
 ---
 
 <table class="tbl-min borders">
@@ -117,12 +118,12 @@ description: "Walkthrough/guide for Chapter 9, including events, recipes, and ot
 </th></tr>
 <tr>
 <td> <i>Let's synthesisze adventures </i> </td>
-<td> (After LV50 - Stera) Synth <a href="/shallie/categories/adventure">(Adventure)</a> </td>
+<td> (After LV50 - Stera) Synth <a href="/shallie/categories/adventure/en">(Adventure)</a> </td>
 <td> Synthesis Exp +30
 </td></tr>
 <tr>
 <td> <i>Synthesize food </i> </td>
-<td> (After LV50 - Lotte) Synth <a href="/shallie/categories/food">(Food)</a> </td>
+<td> (After LV50 - Lotte) Synth <a href="/shallie/categories/food/en">(Food)</a> </td>
 <td> Synthesis Exp +30
 </td></tr>
 <tr>
@@ -153,7 +154,7 @@ description: "Walkthrough/guide for Chapter 9, including events, recipes, and ot
 </td></tr>
 <tr>
 <td rowspan="2"> <i>Read Forgotten Arts </i> </td>
-<td> Obtain <a href="/shallie/recipe-books/forgotten-arts">Forgotten Arts</a> </td>
+<td> Obtain <a href="/shallie/recipe-books/forgotten-arts/en">Forgotten Arts</a> </td>
 <td rowspan="2"> Synthesis Exp +100
 </td></tr>
 <tr>
@@ -240,7 +241,7 @@ description: "Walkthrough/guide for Chapter 9, including events, recipes, and ot
 </td></tr>
 <tr>
 <td> City Water Source </td>
-<td> Running low on them pipe drugs. Life task for <a href="/shallie/items/forgetful-grass">Forgetful Grass</a>, <a href="/shallie/items/evergreen-leaf">Evergreen Leaf</a>, <a href="/shallie/items/verdant-taun">Verdant Taun</a>, <a href="/shallie/items/ultramarine-root">Ultramarine Root</a>
+<td> Running low on them pipe drugs. Life task for <a href="/shallie/items/forgetful-grass/en">Forgetful Grass</a>, <a href="/shallie/items/evergreen-leaf/en">Evergreen Leaf</a>, <a href="/shallie/items/verdant-taun/en">Verdant Taun</a>, <a href="/shallie/items/ultramarine-root/en">Ultramarine Root</a>
 </td></tr>
 <tr>
 <td> City Water Source </td>
@@ -252,11 +253,11 @@ description: "Walkthrough/guide for Chapter 9, including events, recipes, and ot
 </td></tr>
 <tr>
 <td> City Water Source </td>
-<td> When they approach him, he gives a life task for <a href="/shallie/items/travel-gate">Travel Gate</a>.
+<td> When they approach him, he gives a life task for <a href="/shallie/items/travel-gate/en">Travel Gate</a>.
 </td></tr>
 <tr>
 <td> City Water Source </td>
-<td> Show it to him for a brief scene and life task for <a href="/shallie/items/medicine-of-the-four-beasts">Medicine of the Four Beasts</a>
+<td> Show it to him for a brief scene and life task for <a href="/shallie/items/medicine-of-the-four-beasts/en">Medicine of the Four Beasts</a>
 </td></tr>
 <tr>
 <td> City Water Source </td>
@@ -269,7 +270,7 @@ description: "Walkthrough/guide for Chapter 9, including events, recipes, and ot
 </td></tr>
 <tr>
 <td> <a href="/shallie/locations/eastern-continent/en#heaven-s-vine-root-division">Heaven's Vine - Root Division</a> </td>
-<td> (Trophy event) <a href="/shallie/items/altegewalt">Altegewalt</a> (He's strong, come prepared.)
+<td> (Trophy event) <a href="/shallie/items/altegewalt/en">Altegewalt</a> (He's strong, come prepared.)
 </td></tr>
 <tr>
 <td> Ship's Cabin </td>
@@ -422,34 +423,34 @@ description: "Walkthrough/guide for Chapter 9, including events, recipes, and ot
 <th colspan="3"> Recipes
 </th></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/secret-book-of-the-clan">Secret Book of the Clan</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/secret-book-of-the-clan/en">Secret Book of the Clan</a> </i> </td>
 <td> Stera - Alch LV70 </td>
-<td> <a href="/shallie/items/shepherd-s-flute">Shepherd's Flute</a>, <a href="/shallie/items/talisman-of-ancient-beasts">Talisman of Ancient Beasts</a>, <a href="/shallie/items/mirage-talisman">Mirage Talisman</a>
+<td> <a href="/shallie/items/shepherd-s-flute/en">Shepherd's Flute</a>, <a href="/shallie/items/talisman-of-ancient-beasts/en">Talisman of Ancient Beasts</a>, <a href="/shallie/items/mirage-talisman/en">Mirage Talisman</a>
 </td></tr>
 <tr>
 <td> <i>Flying Board </i> </td>
 <td> Lotte Events </td>
-<td> <a href="/shallie/items/flying-board">Flying Board</a>
+<td> <a href="/shallie/items/flying-board/en">Flying Board</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/wilbell-s-special-book">Wilbell's Special Book</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/wilbell-s-special-book/en">Wilbell's Special Book</a> </i> </td>
 <td> Wilbell Event (Lotte) </td>
-<td> <a href="/shallie/items/living-trash-can">Living Trash Can</a>
+<td> <a href="/shallie/items/living-trash-can/en">Living Trash Can</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/dad-s-reference-book">Dad's Reference Book</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/dad-s-reference-book/en">Dad's Reference Book</a> </i> </td>
 <td> Lotte - Alch LV70 </td>
-<td> <a href="/shallie/items/mirage-talisman">Mirage Talisman</a>
+<td> <a href="/shallie/items/mirage-talisman/en">Mirage Talisman</a>
 </td></tr>
 <tr>
 <td> <i>Armor - Final </i> </td>
 <td> - </td>
-<td> <a href="/shallie/items/silver-threaded-shirt">Silver Threaded Shirt</a>, <a href="/shallie/items/divine-shirt">Divine Shirt</a>, <a href="/shallie/items/magic-plate">Magic Plate</a>, <a href="/shallie/items/dragoon-mail">Dragoon Mail</a>, <a href="/shallie/items/divine-coat">Divine Coat</a>
+<td> <a href="/shallie/items/silver-threaded-shirt/en">Silver Threaded Shirt</a>, <a href="/shallie/items/divine-shirt/en">Divine Shirt</a>, <a href="/shallie/items/magic-plate/en">Magic Plate</a>, <a href="/shallie/items/dragoon-mail/en">Dragoon Mail</a>, <a href="/shallie/items/divine-coat/en">Divine Coat</a>
 </td></tr>
 <tr>
 <td> <i>Weapon - Final </i> </td>
 <td> - </td>
-<td> <a href="/shallie/items/sea-alchemist-s-bell">Sea Alchemist's Bell</a>, <a href="/shallie/items/alchemist-s-broom">Alchemist's Broom</a>, <a href="/shallie/items/dragon-scale-charm">Dragon Scale Charm</a>, <a href="/shallie/items/orbis-spiritis">Orbis Spiritis</a>, <a href="/shallie/items/air-foecutters">Air Foecutters</a>, <a href="/shallie/items/chronicle-bunker">Chronicle Bunker</a>, <a href="/shallie/items/diabolos-gem">Diabolos Gem</a>, <a href="/shallie/items/meteorite-sword">Meteorite Sword</a>, <a href="/shallie/items/lifetree-staff">Lifetree Staff</a>
+<td> <a href="/shallie/items/sea-alchemist-s-bell/en">Sea Alchemist's Bell</a>, <a href="/shallie/items/alchemist-s-broom/en">Alchemist's Broom</a>, <a href="/shallie/items/dragon-scale-charm/en">Dragon Scale Charm</a>, <a href="/shallie/items/orbis-spiritis/en">Orbis Spiritis</a>, <a href="/shallie/items/air-foecutters/en">Air Foecutters</a>, <a href="/shallie/items/chronicle-bunker/en">Chronicle Bunker</a>, <a href="/shallie/items/diabolos-gem/en">Diabolos Gem</a>, <a href="/shallie/items/meteorite-sword/en">Meteorite Sword</a>, <a href="/shallie/items/lifetree-staff/en">Lifetree Staff</a>
 </td></tr>
 </table>
 
@@ -464,10 +465,10 @@ So worry about the Indirect Bypass area instead. Continue exploring for a big pl
 about Linca as well. As for the event that happens at Hidden Cave -- pick whoever you want. Miruca gives you a Double Foot Component, if you super care.
 </p>
 <ul><li> <i>Optional Bosses</i>:
-<ul><li> <a href="/shallie/monsters/silver-dragon">Silver Dragon</a> at Geofront (warning: transforms into one of two forms on turn four, will kick your ass if unprepared)</li>
-<li> <a href="/shallie/monsters/fran-pfeil">Fran Pfeil</a> when you cross the Dusk Sea via the northern route (be careful).
+<ul><li> <a href="/shallie/monsters/silver-dragon/en">Silver Dragon</a> at Geofront (warning: transforms into one of two forms on turn four, will kick your ass if unprepared)</li>
+<li> <a href="/shallie/monsters/fran-pfeil/en">Fran Pfeil</a> when you cross the Dusk Sea via the northern route (be careful).
 <ul><li> Plus version players: Beating this leads to the much stronger Cobalt Dragon the next time you take that route.</li></ul></li>
-<li> <a href="/shallie/monsters/prototype-0">Prototype trio</a> at Ruins of Frozen Time</li>
-<li> <a href="/shallie/monsters/servant-of-the-beast-king">Servant of the Beast King</a> at Herb Garden - Depths</li>
-<li> <a href="/shallie/monsters/phoenix-of-the-sea">Phoenix of the Sea</a> at Altar of Spirits</li>
-<li> <a href="/shallie/monsters/rage-guardian">Rage Guardian</a> at Crystal Valley</li></ul></li></ul>
+<li> <a href="/shallie/monsters/prototype-0/en">Prototype trio</a> at Ruins of Frozen Time</li>
+<li> <a href="/shallie/monsters/servant-of-the-beast-king/en">Servant of the Beast King</a> at Herb Garden - Depths</li>
+<li> <a href="/shallie/monsters/phoenix-of-the-sea/en">Phoenix of the Sea</a> at Altar of Spirits</li>
+<li> <a href="/shallie/monsters/rage-guardian/en">Rage Guardian</a> at Crystal Valley</li></ul></li></ul>

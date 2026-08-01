@@ -3,6 +3,7 @@ title: "Chapter 1"
 pubDate: "2021-06-25"
 updatedDate: "2024-11-13"
 description: "Walkthrough/guide for Chapter 1, including events, recipes, and other things of note."
+mainClass: "medium-page"
 ---
 
 <div class="grid">
@@ -100,22 +101,22 @@ description: "Walkthrough/guide for Chapter 1, including events, recipes, and ot
 <tr>
 <td> <i>Default Items</i> </td>
 <td> Auto </td>
-<td> <a href="/shallie/items/craft">Craft</a>, <a href="/shallie/items/refuel-pads">Refuel Pads</a>, <a href="/shallie/items/shelbani-flour">Shelbani Flour</a>, <a href="/shallie/items/supplement-red">Supplement - Red</a>
+<td> <a href="/shallie/items/craft/en">Craft</a>, <a href="/shallie/items/refuel-pads/en">Refuel Pads</a>, <a href="/shallie/items/shelbani-flour/en">Shelbani Flour</a>, <a href="/shallie/items/supplement-red/en">Supplement - Red</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/the-man-charmed-by-fire">The Man Charmed by Fire</a></i> </td>
+<td> <i><a href="/shallie/recipe-books/the-man-charmed-by-fire/en">The Man Charmed by Fire</a></i> </td>
 <td> Katla's Shop </td>
-<td> <a href="/shallie/items/bomb">Bomb</a>, <a href="/shallie/items/zettel">Zettel</a>, <a href="/shallie/items/black-powder">Black Powder</a>, <a href="/shallie/items/supplement-green">Supplement - Green</a>
+<td> <a href="/shallie/items/bomb/en">Bomb</a>, <a href="/shallie/items/zettel/en">Zettel</a>, <a href="/shallie/items/black-powder/en">Black Powder</a>, <a href="/shallie/items/supplement-green/en">Supplement - Green</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/cooking-for-beginners">Cooking for Beginners</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/cooking-for-beginners/en">Cooking for Beginners</a> </i> </td>
 <td> Katla's Shop </td>
-<td> <a href="/shallie/items/herbal-soup">Herbal Soup</a>, <a href="/shallie/items/healing-salve">Healing Salve</a>, <a href="/shallie/items/refresh-medicine">Refresh Medicine</a>, <a href="/shallie/items/dried-herbs">Dried Herbs</a>
+<td> <a href="/shallie/items/herbal-soup/en">Herbal Soup</a>, <a href="/shallie/items/healing-salve/en">Healing Salve</a>, <a href="/shallie/items/refresh-medicine/en">Refresh Medicine</a>, <a href="/shallie/items/dried-herbs/en">Dried Herbs</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/craftwork-for-beginners">Craftwork for Beginners</a></i> </td>
+<td> <i><a href="/shallie/recipe-books/craftwork-for-beginners/en">Craftwork for Beginners</a></i> </td>
 <td> Katla's Shop </td>
-<td> <a href="/shallie/items/plant-oil">Plant Oil</a>, <a href="/shallie/items/abrasive">Abrasive</a>, <a href="/shallie/items/leather">Leather</a>
+<td> <a href="/shallie/items/plant-oil/en">Plant Oil</a>, <a href="/shallie/items/abrasive/en">Abrasive</a>, <a href="/shallie/items/leather/en">Leather</a>
 </td></tr>
 </table>
 </div>
@@ -145,7 +146,7 @@ description: "Walkthrough/guide for Chapter 1, including events, recipes, and ot
 </td></tr>
 <tr>
 <td> <i>Want to Synthesize Food </i> </td>
-<td> (After above) Synthesize <a href="/shallie/categories/sundry">(Sundry)</a> </td>
+<td> (After above) Synthesize <a href="/shallie/categories/sundry/en">(Sundry)</a> </td>
 <td> Synthesis Exp +10
 </td></tr>
 <tr>
@@ -206,7 +207,7 @@ description: "Walkthrough/guide for Chapter 1, including events, recipes, and ot
 <td rowspan="2"> Combat Exp +10
 </td></tr>
 <tr>
-<td> Use <a href="/shallie/items/craft">Craft</a>
+<td> Use <a href="/shallie/items/craft/en">Craft</a>
 </td></tr>
 <tr>
 <td rowspan="2"> <i>Get even more used to fighting </i> </td>

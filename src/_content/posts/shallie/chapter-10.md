@@ -3,6 +3,7 @@ title: "Chapter 10"
 pubDate: "2021-06-25"
 updatedDate: "2025-11-24"
 description: "Walkthrough/guide for Chapter 10, including events, recipes, and other things of note."
+mainClass: "medium-page"
 ---
 
 <table class="tbl-min borders">
@@ -22,9 +23,9 @@ description: "Walkthrough/guide for Chapter 10, including events, recipes, and o
 <th colspan="3"> Recipes
 </th></tr>
 <tr>
-<td> <b><a href="/shallie/recipe-books/hero-s-book">Hero Book</a> </b> </td>
+<td> <b><a href="/shallie/recipe-books/hero-s-book/en">Hero Book</a> </b> </td>
 <td> DLC Dungeon </td>
-<td> <a href="/shallie/items/stone-coin">Stone Coin</a>, <a href="/shallie/items/heart-of-fire">Heart of Fire</a>, <a href="/shallie/items/planet-sphere">Planet Sphere</a>, <a href="/shallie/items/chronicle-shield">Chronicle Shield</a>, <a href="/shallie/items/escape-jewel">Escape Jewel</a>, <a href="/shallie/items/thunder-outfit">Thunder Outfit</a>, <a href="/shallie/items/divine-soul">Divine Soul</a>
+<td> <a href="/shallie/items/stone-coin/en">Stone Coin</a>, <a href="/shallie/items/heart-of-fire/en">Heart of Fire</a>, <a href="/shallie/items/planet-sphere/en">Planet Sphere</a>, <a href="/shallie/items/chronicle-shield/en">Chronicle Shield</a>, <a href="/shallie/items/escape-jewel/en">Escape Jewel</a>, <a href="/shallie/items/thunder-outfit/en">Thunder Outfit</a>, <a href="/shallie/items/divine-soul/en">Divine Soul</a>
 </td></tr>
 </table>
 <p><br />
@@ -41,7 +42,7 @@ a decent level, with pretty mediocre (stat boosting) equipment. I know because I
 This is for those of you who want the game to end ASAP.
 </p><p>Lead off with Kortes in the back, possibly Jurie as well. Do not use Wilbell's Volcano skill.
 Make sure you get 110% when you activate burst, and pick Kortes and/or Jurie. Preferably, you can
-swap someone out to get 120+ for both. On top of that, I had a Lava Cube with <a href="/shallie/properties/Carries-Heat">Carries Heat</a>
+swap someone out to get 120+ for both. On top of that, I had a Lava Cube with <a href="/shallie/properties/carries-heat/en">Carries Heat</a>
 going. But that's about it. He went down.
 </p><p>My equipment? The stuff I made in the chapter 8. Zero changes. But to give a full rundown... (it isn't that special):
 </p>

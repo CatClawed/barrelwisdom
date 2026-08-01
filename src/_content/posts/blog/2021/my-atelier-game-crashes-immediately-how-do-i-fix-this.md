@@ -35,11 +35,11 @@ Usually you have multple EXE files, you'll be looking for any that don't have la
 If you don't see any particular errors, you can try all this stuff. These are listed in increasing order of 'throw everything at the wall and see what sticks'.
 
 1. In Steam, right click your game -> properties -> local files -> verify integrity
-2. If you are on a version of Windows that does not come with Media Player, [download the Media Feature Pack](https://www.microsoft.com/en-us/software-download/mediafeaturepack)
+2. If you are on a version of Windows that does not come with Media Player, <a href="https://www.microsoft.com/en-us/software-download/mediafeaturepack" target="_blank">download the Media Feature Pack</a>
 3. Update your graphics driver. Do not rely on Windows; go to the manufacturer website.
-4. Install the [C++ Redistributables](https://github.com/abbodi1406/vcredist/releases/download/v0.61.0/VisualCppRedist_AIO_x86_x64_61.zip). 
-5. Install the latest version of [DirectX](https://support.microsoft.com/en-us/topic/how-to-install-the-latest-version-of-directx-d1f5ffa5-dae2-246c-91b1-ee1e973ed8c2).
-6. Install the latest [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework).
+4. Install the <a href="https://github.com/abbodi1406/vcredist/releases/download/v0.61.0/VisualCppRedist_AIO_x86_x64_61.zip" target="_blank">C++ Redistributables</a>. 
+5. Install the latest version of <a href="https://support.microsoft.com/en-us/topic/how-to-install-the-latest-version-of-directx-d1f5ffa5-dae2-246c-91b1-ee1e973ed8c2" target="_blank">DirectX</a>.
+6. Install the latest <a href="https://dotnet.microsoft.com/download/dotnet-framework" target="_blank">.NET Framework</a>.
 7. If you are on really old GPUs, they may not support the  video encoding. You can take the whole movies folder and move it; the game will skip movies safely. The location of movies vary by game, but they won't be far from the EXE location.
 
 # My game crashes immediately after 'start game' or in the first few minutes

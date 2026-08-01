@@ -3,6 +3,7 @@ title: "Chapter 2"
 pubDate: "2021-06-25"
 updatedDate: "2024-11-14"
 description: "Walkthrough/guide for Chapter 2, including events, recipes, and other things of note."
+mainClass: "medium-page"
 ---
 
 <div class="grid">
@@ -97,29 +98,29 @@ description: "Walkthrough/guide for Chapter 2, including events, recipes, and ot
 <th colspan="3"> Recipes
 </th></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/supplement-revolution">Supplement Revolution!</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/supplement-revolution/en">Supplement Revolution!</a> </i> </td>
 <td> Linca's Shop </td>
-<td> <a href="/shallie/items/supplement-blue">Supplement - Blue</a>, <a href="/shallie/items/supplement-green">Supplement - Green</a>, <a href="/shallie/items/supplement-yellow">Supplement - Yellow</a>, <a href="/shallie/items/supplement-white">Supplement - White</a>, <a href="/shallie/items/supplement-black">Supplement - Black</a>
+<td> <a href="/shallie/items/supplement-blue/en">Supplement - Blue</a>, <a href="/shallie/items/supplement-green/en">Supplement - Green</a>, <a href="/shallie/items/supplement-yellow/en">Supplement - Yellow</a>, <a href="/shallie/items/supplement-white/en">Supplement - White</a>, <a href="/shallie/items/supplement-black/en">Supplement - Black</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/introduction-to-leather">Introduction to Leather</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/introduction-to-leather/en">Introduction to Leather</a> </i> </td>
 <td> Linca's Shop </td>
-<td> <a href="/shallie/items/leather-gloves">Leather Gloves</a>, <a href="/shallie/items/leather-boots">Leather Boots</a>
+<td> <a href="/shallie/items/leather-gloves/en">Leather Gloves</a>, <a href="/shallie/items/leather-boots/en">Leather Boots</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/local-history-of-stellard">Local History of Stellard</a></i> </td>
+<td> <i><a href="/shallie/recipe-books/local-history-of-stellard/en">Local History of Stellard</a></i> </td>
 <td> Linca's Shop </td>
-<td> <a href="/shallie/items/honey">Honey</a>, <a href="/shallie/items/stellard-fabric">Stellard Fabric</a>
+<td> <a href="/shallie/items/honey/en">Honey</a>, <a href="/shallie/items/stellard-fabric/en">Stellard Fabric</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/knowledge-of-a-housewife">Knowledge of a Housewife</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/knowledge-of-a-housewife/en">Knowledge of a Housewife</a> </i> </td>
 <td> Katla's Shop </td>
-<td> <a href="/shallie/items/medicine-bread">Medicine Bread</a>, <a href="/shallie/items/stellapearl">Stellapearl</a>, <a href="/shallie/items/handmade-jam">Handmade Jam</a>, <a href="/shallie/items/plant-syrup">Plant Syrup</a>, <a href="/shallie/items/handspun-rabbit-yarn">Handspun Rabbit Yarn</a>
+<td> <a href="/shallie/items/medicine-bread/en">Medicine Bread</a>, <a href="/shallie/items/stellapearl/en">Stellapearl</a>, <a href="/shallie/items/handmade-jam/en">Handmade Jam</a>, <a href="/shallie/items/plant-syrup/en">Plant Syrup</a>, <a href="/shallie/items/handspun-rabbit-yarn/en">Handspun Rabbit Yarn</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/ancient-formulas">Ancient Formulas</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/ancient-formulas/en">Ancient Formulas</a> </i> </td>
 <td> Auto - Stera </td>
-<td> <a href="/shallie/items/ingot">Ingot</a>, <a href="/shallie/items/cloth">Cloth</a>, <a href="/shallie/items/lumber">Lumber</a>, <a href="/shallie/items/palma-board">Palma Board</a>, <a href="/shallie/items/supplement-blue">Supplement - Blue</a>
+<td> <a href="/shallie/items/ingot/en">Ingot</a>, <a href="/shallie/items/cloth/en">Cloth</a>, <a href="/shallie/items/lumber/en">Lumber</a>, <a href="/shallie/items/palma-board/en">Palma Board</a>, <a href="/shallie/items/supplement-blue/en">Supplement - Blue</a>
 </td></tr>
 </table>
 </div>
@@ -169,7 +170,7 @@ description: "Walkthrough/guide for Chapter 2, including events, recipes, and ot
 </td></tr>
 <tr>
 <td> <i>Synthesize sundries </i> </td>
-<td> (After above) Synth <a href="/shallie/categories/sundry">(Sundry)</a> </td>
+<td> (After above) Synth <a href="/shallie/categories/sundry/en">(Sundry)</a> </td>
 <td> Synthesis Exp +10
 </td></tr>
 <tr>
@@ -197,7 +198,7 @@ description: "Walkthrough/guide for Chapter 2, including events, recipes, and ot
 
 <tr>
 <td rowspan="2"> <i>Read a history book </i> </td>
-<td> Obtain <a href="/shallie/recipe-books/local-history-of-stellard">Local History of Stellard</a> </td>
+<td> Obtain <a href="/shallie/recipe-books/local-history-of-stellard/en">Local History of Stellard</a> </td>
 <td rowspan="2"> Synthesis Exp +10
 </td></tr>
 <tr>
@@ -213,11 +214,11 @@ description: "Walkthrough/guide for Chapter 2, including events, recipes, and ot
 </td></tr>
 <tr>
 <td rowspan="2"> <i>Want to make a bomb </i> </td>
-<td> Obtain <a href="/shallie/recipe-books/the-man-charmed-by-fire">The Man Charmed by Fire</a> </td>
+<td> Obtain <a href="/shallie/recipe-books/the-man-charmed-by-fire/en">The Man Charmed by Fire</a> </td>
 <td rowspan="2"> Synthyesis Exp +10
 </td></tr>
 <tr>
-<td> Use <a href="/shallie/items/bomb">Bomb</a>
+<td> Use <a href="/shallie/items/bomb/en">Bomb</a>
 </td></tr>
 <tr>
 <td> <i>Complete Requests </i> </td>
@@ -255,15 +256,15 @@ description: "Walkthrough/guide for Chapter 2, including events, recipes, and ot
 </td></tr>
 </table>
 </div></div>
-<ul><li> <i>Areas Unlocked:</i> <a href="/shallie/locations/baskes-region/en#woods-of-eternal-night">Woods of Eternal Night</a>, <a href="/shallie/locations/baskes-region/en#land-of-the-dead">Land of the Dead</a>, <a href="/shallie/locations/baskes-region/en#ancient-ruins">Ancient Ruins</a>, <a href="/shallie/items/index.php?title=Ruins-of-Frozen-Time&amp;action=edit&amp;redlink=1">Ruins of Frozen Time</a>, <a href="/shallie/locations/baskes-region/en#facility-ruins">Facility Ruins</a>, <a href="/shallie/locations/baskes-region/en#ruins-of-frozen-time">Hill of Silence</a>, <a href="/shallie/locations/baskes-region/en#abandoned-factory">Abandoned Factory</a></li></ul>
+<ul><li> <i>Areas Unlocked:</i> <a href="/shallie/locations/baskes-region/en#woods-of-eternal-night">Woods of Eternal Night</a>, <a href="/shallie/locations/baskes-region/en#land-of-the-dead">Land of the Dead</a>, <a href="/shallie/locations/baskes-region/en#ancient-ruins">Ancient Ruins</a>, <a href="/shallie/items/index.php?title=Ruins-of-Frozen-Time&amp;action=edit&amp;redlink=1/en">Ruins of Frozen Time</a>, <a href="/shallie/locations/baskes-region/en#facility-ruins">Facility Ruins</a>, <a href="/shallie/locations/baskes-region/en#ruins-of-frozen-time">Hill of Silence</a>, <a href="/shallie/locations/baskes-region/en#abandoned-factory">Abandoned Factory</a></li></ul>
 <ul><li> <i>Lotte</i>
 <ul><li> WILBELL AT THE HARBOR GET GET GET. She's the powerhouse you NEED.</li>
 <li> You'll get ambushed when you try to approach the automaton.
 <ul><li> Bring some crafts, activate Burst ASAP, use any attacks that hit multiple enemies, and you'll be fine. Hopefully.</li>
 <li> Basically, take them out as fast as possible. I was about level 10 for this fight (hardcore).</li></ul></li>
-<li> Once you clear the plot, Nady will give you a life task. Get <a href="/shallie/items/leather">Leather</a> x50. THANKS MOM.
-<ul><li> You can buy <a href="/shallie/items/wild-pelt">Wild Pelts</a> from Linca and Rosemia (she's coming soon).</li>
-<li> You make 4 leathers at a time, and using a wind skill on <a href="/shallie/items/sand-runner-tailfeather">Sand Runner Tailfeather</a> you can make a fifth.</li>
+<li> Once you clear the plot, Nady will give you a life task. Get <a href="/shallie/items/leather/en">Leather</a> x50. THANKS MOM.
+<ul><li> You can buy <a href="/shallie/items/wild-pelt/en">Wild Pelts</a> from Linca and Rosemia (she's coming soon).</li>
+<li> You make 4 leathers at a time, and using a wind skill on <a href="/shallie/items/sand-runner-tailfeather/en">Sand Runner Tailfeather</a> you can make a fifth.</li>
 <li> That's a minimum of 10 synths, 30 pelts, and a maximum of 13 synths, 39 pelts. Try to get this done by about Chapter 4.</li></ul></li>
 <li> Purchase all the recipes you can; you should spend over 1000 Cole. That'll unlock a life task.</li></ul></li></ul>
 <dl><dd></dd></dl>
@@ -273,7 +274,7 @@ description: "Walkthrough/guide for Chapter 2, including events, recipes, and ot
 </p><p>You may have noticed by now, but Raoul will periodically give you better jobs for doing requests. Eventually, you get more equipment slots out of him as well (I got my first
 expansion in the next chapter), so just keep doing jobs and good things will happen. And it's really your only way to get money for a long, long time.
 </p><p>As for the Stera events... yeah, each Shallie gets her own icon on the menu, so they have personal events. They are exclusive to their own routes.
-</p><p>Want to level up super fast? Get 50 <a href="/shallie/categories/liquid">(Liquid)</a>, <a href="/shallie/categories/fuel">(Fuel)</a>, and <a href="/shallie/categories/plant">(Plant)</a> to unlock three life tasks, make the required <a href="/shallie/categories/medicine">(Medicine)</a> to finish all three tasks, fight one battle, and HOLY CRAP.
+</p><p>Want to level up super fast? Get 50 <a href="/shallie/categories/liquid/en">(Liquid)</a>, <a href="/shallie/categories/fuel/en">(Fuel)</a>, and <a href="/shallie/categories/plant/en">(Plant)</a> to unlock three life tasks, make the required <a href="/shallie/categories/medicine/en">(Medicine)</a> to finish all three tasks, fight one battle, and HOLY CRAP.
 I accidentally shot to level 21 this way. Along with some other body life tasks. On top of that, you should gather 600 items per region to get the full gathering benefits.
 Well, you can start with the 100/200 item bonuses; don't do it all now! Just take a glance at <a href="/shallie/life-tasks">body life tasks</a> to see some of the stuff to do. Some of it really is good to know,
 and at this point can get you a mass exp boost if you want it.

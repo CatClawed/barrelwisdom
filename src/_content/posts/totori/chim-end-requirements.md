@@ -7,7 +7,7 @@ description: "Exact details on getting the Chim ending."
 
 * Feed Chims 35 large pies in total. If you want to avoid triggering this end, don't make the Chims work. (No work, no pie consumption.)
 * You need 5 Chims. You get more by getting Water of Life. Locations:
-    * Part of the [Cooking Class](totori/cooking-class) events
+    * Part of the [Cooking Class](/totori/cooking-class) events
     * When Sterk's friendship hits 50, he'll bring in all Astrid's junk.
     * Pamela's Shop
     * Cobalt Rank reward

@@ -46,7 +46,7 @@ Get Synthesis Skill Frame Increase on these:
 
 #### Sea Alchemist's Bell
 
-[Item Information](shallie/items/sea-alchemist-s-bell) @ Enhance Burst, Accuracy, Enhance Item, Enhance Skill
+[Item Information](/shallie/items/sea-alchemist-s-bell/en) @ Enhance Burst, Accuracy, Enhance Item, Enhance Skill
 
  Do not use Chain Attribute. Everything else will go in.
 
@@ -61,7 +61,7 @@ Get Synthesis Skill Frame Increase on these:
 
 #### Dragon Scale Charm
 
-[Item Information](shallie/items/dragon-scale-charm) @ Enhance Skill, Enhance Burst, Attack Power +10, Accuracy
+[Item Information](/shallie/items/dragon-scale-charm/en) @ Enhance Skill, Enhance Burst, Attack Power +10, Accuracy
 
  Earth spam. Do not use Chain Attribute.
 
@@ -78,7 +78,7 @@ Get Synthesis Skill Frame Increase on these:
 
 #### Magia Sumonitora
 
-[Item Information](shallie/items/magia-sumonitora) @ Enhance Burst, Shorten Item, Enhance Crit, Enhance Skill
+[Item Information](/shallie/items/magia-sumonitora/en) @ Enhance Burst, Shorten Item, Enhance Crit, Enhance Skill
 
  Yes, do NOT use her final tier broom. This one has better effects. Make Dragon Scale Charm first.
 
@@ -95,7 +95,7 @@ Get Synthesis Skill Frame Increase on these:
 
 #### Orbis Spiritis
 
-[Item Information](shallie/items/orbis-spiritis) @ Enhance Skill, Enhance Burst, Enhance Crit, Accuracy
+[Item Information](/shallie/items/orbis-spiritis/en) @ Enhance Skill, Enhance Burst, Enhance Crit, Accuracy
 
  Use all your earths except chain attribute. (If you want Break instead, you'll need a Skill Frame + Elemental Attribute - Water Polarized Gem.)
 
@@ -112,7 +112,7 @@ I like to make two of these for Escha's weapon.
 
 #### Air Foecutters
 
-[Item Information](shallie/items/air-foecutters) @ Enhance Skill, Enhance Burst, Attack Power +10, Accuracy
+[Item Information](/shallie/items/air-foecutters/en) @ Enhance Skill, Enhance Burst, Attack Power +10, Accuracy
 
  Earth everything except chain attribute.
 
@@ -127,7 +127,7 @@ I like to make two of these for Escha's weapon.
 
 #### Chronicle Bunker
 
-[Item Information](shallie/items/chronicle-bunker) @ Enhance Skill, Enhance Burst, Enhance Crit, Accuracy
+[Item Information](/shallie/items/chronicle-bunker/en) @ Enhance Skill, Enhance Burst, Enhance Crit, Accuracy
 
  Make a Ziegel Nugget with Elemental Attribute - Wind (Twin Color Corundum LV3 Property -> Supplement White) and one of your weapon properties. Disassemble to Old Stone. Then make a Halmolium with the other two properties and Synthesis Skill Frame Increase. Make a Flame Bunker with Synthesis Skill Frame Increase and Elemental Attribute - Water.
  Spam earth, except Chain Attribute.
@@ -143,7 +143,7 @@ I like to make two of these for Escha's weapon.
 
 #### Diabolos Gem
 
-[Item Information](shallie/items/diabolos-gem) @ Enhance Skill, Enhance Burst, Attack Power +10, Accuracy
+[Item Information](/shallie/items/diabolos-gem/en) @ Enhance Skill, Enhance Burst, Attack Power +10, Accuracy
 
  Spam earth, but don't touch Chain Attribute.
 
@@ -158,7 +158,7 @@ I like to make two of these for Escha's weapon.
 
 #### Meteorite Sword
 
-[Item Information](shallie/items/meteorite-sword) @ Enhance Skill, Enhance Burst, Enhance Crit, Accuracy
+[Item Information](/shallie/items/meteorite-sword/en) @ Enhance Skill, Enhance Burst, Enhance Crit, Accuracy
 
  Spam earth, except Chain Attribute.
 
@@ -173,7 +173,7 @@ I like to make two of these for Escha's weapon.
 
 #### Lifetree Staff
 
-[Item Information](shallie/items/lifetree-staff) @ Enhance Skill, Enhance Burst, Enhance Crit, Accuracy
+[Item Information](/shallie/items/lifetree-staff/en) @ Enhance Skill, Enhance Burst, Enhance Crit, Accuracy
 
  The three weapon properties should be on a Golden Blue Staff. You can use Orbis Spiritus, or any metal weapon you like.
 
@@ -190,7 +190,7 @@ I like to make two of these for Escha's weapon.
 
 #### Operation Plan Board
 
-[Item Information](shallie/items/operation-plan-board) @ Enhance Skill, Enhance Burst, Attack Power +10, Accuracy
+[Item Information](/shallie/items/operation-plan-board/en) @ Enhance Skill, Enhance Burst, Attack Power +10, Accuracy
 
  You'll want to put all your properties onto another Operation Plan Board.
 
@@ -206,7 +206,7 @@ I like to make two of these for Escha's weapon.
 
 #### Fairy Queen Staff
 
-[Item Information](shallie/items/fairy-queen-staff) @ Enhance Skill, Enhance Burst, Attack Power +10, Accuracy
+[Item Information](/shallie/items/fairy-queen-staff/en) @ Enhance Skill, Enhance Burst, Attack Power +10, Accuracy
 
 You'll want your properties on Yggdras.
 
@@ -222,7 +222,7 @@ Spam earth, except chain attribute.
 
 #### Proto Phantom
 
-[Item Information](shallie/items/proto-phantom) @ Enhance Skill, Enhance Burst, Enhance Crit, Accuracy
+[Item Information](/shallie/items/proto-phantom/en) @ Enhance Skill, Enhance Burst, Enhance Crit, Accuracy
 
 Spam earth, except chain attribute.
 
@@ -242,20 +242,20 @@ Everybody else: Awakened Soul, Evolving Body, Evolves the Body
 For this, you have two sets you need to make, and you're going to scatter these things across several items. This recipe
 is stolen from Uryvichk, because he keeps posting nice stuff online and I can't unsee it.
 
-1.  [Handspun Rabbit Yarn](shallie/items/handspun-rabbit-yarn)
+1.  [Handspun Rabbit Yarn](/shallie/items/handspun-rabbit-yarn/en)
      * Create with Synthesis Skill Frame Increase, Synthesis Chain Increase, and PP Frame Maximization.
      * You'll need a bunch of these.
-2.  [Herbal Shirt](shallie/items/herbal-shirt)
-     * Make a [Moffcot](shallie/items/moffcot) using that Yarn you just made, as well as something with Evolving Body (probably via Medical Solution).
+2.  [Herbal Shirt](/shallie/items/herbal-shirt/en)
+     * Make a [Moffcot](/shallie/items/moffcot/en) using that Yarn you just made, as well as something with Evolving Body (probably via Medical Solution).
      * Keep Synthesis Skill Frame Increase, Synthesis Chain Increase, and Evolving Body. Transfer all to your Herbal Shirt.
-3.  [Dragoon Coat](shallie/items/dragoon-coat)
-     * Create an [Unbreakable Glass](shallie/) with Traditional Soul and Evolving Body.
+3.  [Dragoon Coat](/shallie/items/dragoon-coat/en)
+     * Create an [Unbreakable Glass](/shallie/) with Traditional Soul and Evolving Body.
      * Now make the Dragoon Coat using it and one of your Yarns.
      * Keep Evolving Body, Synthesis Skill Frame Increase, Synthesis Chain Increase.
-4.  [Mysterious Cloth](shallie/items/mysterious-cloth)
+4.  [Mysterious Cloth](/shallie/items/mysterious-cloth/en)
      * Use another of those Yarns and something with Traditional Soul.
      * Keep Traditional Soul, Synthesis Chain Increase, Synthesis Skill Frame Increase.
-5.  [Velvetis](shallie/items/velvetis)
+5.  [Velvetis](/shallie/items/velvetis/en)
      * Make a Supplement - Rainbow or any liquid with Awakened Soul and Evolves the Body.
      * Use that, and a Mysterious Cloth, in a Velvetis.
      * Keep Awakened Soul, Evolves the Body, Synthesis Skill Frame Increase.
@@ -267,11 +267,11 @@ is stolen from Uryvichk, because he keeps posting nice stuff online and I can't 
 
 #### Divine Coat
 
-[Item Information](shallie/items/divine-coat) @ Max MP, Assist Recovery, Defense, Less Action Chance
+[Item Information](/shallie/items/divine-coat/en) @ Max MP, Assist Recovery, Defense, Less Action Chance
 
  This is only for Wilbell (and a particular Keith build). Spam earth, except Absorb Attribute and Chain Attribute.
 
- You have some freedom on whether you want HP or MP +30, Enhance Rear Regen or Assist Recovery. I suggest MP +30 (if you use [Star Soul](shallie/properties/star-soul) on your accessory) and Assist Recovery.
+ You have some freedom on whether you want HP or MP +30, Enhance Rear Regen or Assist Recovery. I suggest MP +30 (if you use [Star Soul](/shallie/properties/star-soul/en) on your accessory) and Assist Recovery.
 
  *  Dragoon Coat -- Late Addition or Early Addition. The final slot must be any earth skill.
  *  Velvetis
@@ -283,7 +283,7 @@ is stolen from Uryvichk, because he keeps posting nice stuff online and I can't 
 
 #### Divine Shirt
 
-[Item Information](shallie/items/divine-shirt) @ Max MP, Enhance Crit, Defense, DMG Cut
+[Item Information](/shallie/items/divine-shirt/en) @ Max MP, Enhance Crit, Defense, DMG Cut
 
  *  Mysterious Cloth -- Your choice, earth whatever
  *  Herbal Shirt
@@ -297,7 +297,7 @@ is stolen from Uryvichk, because he keeps posting nice stuff online and I can't 
 
 #### Dragoon Mail
 
-[Item Information](shallie/items/dragoon-mail) @ Max MP, Enhance Crit, Defense, DMG Cut
+[Item Information](/shallie/items/dragoon-mail/en) @ Max MP, Enhance Crit, Defense, DMG Cut
 
  You don't really need to make this (shirts are better except defense), but this section is here if you want it.
 
@@ -316,13 +316,13 @@ is stolen from Uryvichk, because he keeps posting nice stuff online and I can't 
 
 You have a loooooot of freedom here. Some things to consider:
 
-* [Wind Spirit Soul](shallie/properties/wind-spirit-soul) boosts critical damage. It caps at 2x damage. Only Stera, Kortes, Jurie, and Solle need this (and only once).
-* [Lord of Night Soul](shallie/properties/lord-of-night-soul) boosts crit rates. But it also has a chance of lowering wait speed (quick). It's extremely useful, so use it twice.
-* [Earth Spirit Soul](shallie/properties/earth-spirit-soul) increases assist recovery rate. It's good to have twice, though you can probably replace one of them if you really wanted to.
-* [Star Soul](shallie/properties/star-soul) can work on some characters, as it switches HP and MP. Wilbell will probably benefit the most. Kortes will die with it. Alchemists will become more dodgy with it, but you sort of want them getting hit to trip infinite use Elixirs.
-* [Skill Savings](shallie/properties/skill-savings) and [Skill Huge Enhance](shallie/properties/skill-huge-enhance) are decent filler options. But NEVER on alchemists unless you are specifically building a Mix damage set.
-* For stats, you have [All Stats Power Up](shallie/properties/all-stats-power-up). I don't generally suggest it, but it's your best raw stat boost.
-* As a defensive option, there's [Holy Soul](shallie/properties/holy-soul) and [Light God Soul](shallie/).
+* [Wind Spirit Soul](/shallie/properties/wind-spirit-soul/en) boosts critical damage. It caps at 2x damage. Only Stera, Kortes, Jurie, and Solle need this (and only once).
+* [Lord of Night Soul](/shallie/properties/lord-of-night-soul/en) boosts crit rates. But it also has a chance of lowering wait speed (quick). It's extremely useful, so use it twice.
+* [Earth Spirit Soul](/shallie/properties/earth-spirit-soul/en) increases assist recovery rate. It's good to have twice, though you can probably replace one of them if you really wanted to.
+* [Star Soul](/shallie/properties/star-soul/en) can work on some characters, as it switches HP and MP. Wilbell will probably benefit the most. Kortes will die with it. Alchemists will become more dodgy with it, but you sort of want them getting hit to trip infinite use Elixirs.
+* [Skill Savings](/shallie/properties/skill-savings/en) and [Skill Huge Enhance](/shallie/properties/skill-huge-enhance/en) are decent filler options. But NEVER on alchemists unless you are specifically building a Mix damage set.
+* For stats, you have [All Stats Power Up](/shallie/properties/all-stats-power-up/en). I don't generally suggest it, but it's your best raw stat boost.
+* As a defensive option, there's [Holy Soul](/shallie/properties/holy-soul/en) and [Light God Soul](/shallie/).
 
 Extremely generically, you can go for this: Earth Spirit Soul x 2, Lord of Night Soul x2, and the last two are your choice.
 
@@ -335,7 +335,7 @@ to PP Frame Maximization. You should have both on thousands of items anyway.
 
 #### Thunder Outfit
 
-[Item Information](shallie/items/thunder-outfit)
+[Item Information](/shallie/items/thunder-outfit/en)
 
 You have a choice with this one. You can go for pure offense (low fire) or you can select a more defensive setup (middle fire).
 I recommend the latter for your alchemists, at least. The main reason you want this is for the low wind effect.
@@ -357,7 +357,7 @@ Spam earth.
 
 #### Mirage Talisman
 
-[Item information](shallie/items/mirage-talisman) @ Soul Evolution
+[Item information](/shallie/items/mirage-talisman/en) @ Soul Evolution
 
 You'll need Synthesis Skill Frame Increase on both items you can make, and you'll need to spread your properties and Traditional Soul through the four remaining slots available.
 
@@ -371,7 +371,7 @@ You'll need Synthesis Skill Frame Increase on both items you can make, and you'l
 
 #### Spirit Belt
 
-[Item information](shallie/items/spirit-belt)
+[Item information](/shallie/items/spirit-belt/en)
 
 Put your properties on a Sun Flower. Synthesis Skill Frame Increase on the others, PP Boost on something as always. Spam earth.
 
@@ -389,7 +389,7 @@ however you like.
 
 #### Meteor Boots
 
-[Item Information](shallie/items/meteor-boots) @ Tireless Legs, Quick Action, Resists Impacts, Speed +25
+[Item Information](/shallie/items/meteor-boots/en) @ Tireless Legs, Quick Action, Resists Impacts, Speed +25
 
 Put all your properties onto a Meteonite, and have PP boosting and Skill Frame on Velvetis. Or vice versa.
 
@@ -405,7 +405,7 @@ Spam earth.
 
 #### Divine Soul
 
-[Item Information](shallie/items/divine-soul) @ Ultimate Revive, Ultimate Fastness
+[Item Information](/shallie/items/divine-soul/en) @ Ultimate Revive, Ultimate Fastness
 
 Abrasive should have PP boosting and Skill Frame, Aroma Materia should have all your properties.
 
@@ -421,7 +421,7 @@ You do have some freedom in this setup; spam Wind and absorb attribute on Wind R
 
 #### Heart of Fire
 
-[Item Information](shallie/items/heart-of-fire) @ Hide Figure, Powers of Light
+[Item Information](/shallie/items/heart-of-fire/en) @ Hide Figure, Powers of Light
 
 You need PP on your Supplement and properties on your Cole Medapaids, or vice versa. Spam earth.
 

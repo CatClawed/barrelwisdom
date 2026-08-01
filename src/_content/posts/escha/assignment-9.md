@@ -3,6 +3,7 @@ title: "Assignment 9"
 pubDate: "2021-06-17"
 updatedDate: "2025-11-24"
 description: "Guide for Assignment 9, including recipes, events, and other things of note."
+mainClass: "medium-page"
 ---
 
 <div class="grid">
@@ -12,7 +13,7 @@ description: "Guide for Assignment 9, including recipes, events, and other thing
 </th></tr>
 <tr>
 <td> <b>Survey Team's Visit </b> </td>
-<td> Deliver <a href="/escha/items/canned-food">Canned Food</a> x4 or <a href="/escha/categories/food">(Food)</a> x30.
+<td> Deliver <a href="/escha/items/canned-food/en">Canned Food</a> x4 or <a href="/escha/categories/food/en">(Food)</a> x30.
 </td></tr>
 <tr>
 <td> <b>Environmental Researcher</b> </td>
@@ -53,7 +54,7 @@ description: "Guide for Assignment 9, including recipes, events, and other thing
 </th></tr>
 <tr>
 <td> <b>Legendary Panacea </b> </td>
-<td> Disassemble an <a href="/escha/items/elixir-base">Elixir Base</a> (Postgame only)
+<td> Disassemble an <a href="/escha/items/elixir-base/en">Elixir Base</a> (Postgame only)
 </td></tr>
 <tr>
 <td> <b>Legendary Investigator</b> </td>
@@ -69,7 +70,7 @@ description: "Guide for Assignment 9, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> <b>Child of Disaster </b> </td>
-<td> Slay <a href="/escha/monsters/child-of-terror">Child of Terror</a> at Ends of the Earth. (I suggest waiting till Postgame.)
+<td> Slay <a href="/escha/monsters/child-of-terror/en">Child of Terror</a> at Ends of the Earth. (I suggest waiting till Postgame.)
 </td></tr>
 <tr>
 <td> <b>Effect Specialist </b> </td>
@@ -97,7 +98,7 @@ description: "Guide for Assignment 9, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> <b>Limits Giant Slag </b> </td>
-<td> Slay the <a href="/escha/monsters/dreadnought">Dreadnought</a> at Ends of the Earth. (I suggest waiting till Postgame.)
+<td> Slay the <a href="/escha/monsters/dreadnought/en">Dreadnought</a> at Ends of the Earth. (I suggest waiting till Postgame.)
 </td></tr>
 <tr>
 <td> <b>Walking Dictionary </b> </td>
@@ -236,29 +237,29 @@ description: "Guide for Assignment 9, including recipes, events, and other thing
 <th colspan="3"> Recipes
 </th></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/emergency-rations">Emergency Rations</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/emergency-rations/en">Emergency Rations</a> </b> </td>
 <td> Automatic </td>
-<td> <a href="/escha/items/canned-food">Canned Food</a>
+<td> <a href="/escha/items/canned-food/en">Canned Food</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/the-billionaire">The Billionaire</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/the-billionaire/en">The Billionaire</a> </b> </td>
 <td> Katla's Shop </td>
-<td> <a href="/escha/items/blessed-ring">Blessed Ring</a>, <a href="/escha/items/gold-dust">Gold Dust</a>, <a href="/escha/items/precious-stone">Precious Stone</a>, <a href="/escha/items/sp-neutralizer">SP Neutralizer</a>
+<td> <a href="/escha/items/blessed-ring/en">Blessed Ring</a>, <a href="/escha/items/gold-dust/en">Gold Dust</a>, <a href="/escha/items/precious-stone/en">Precious Stone</a>, <a href="/escha/items/sp-neutralizer/en">SP Neutralizer</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/a-forgotten-tale">A Forgotten Tale</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/a-forgotten-tale/en">A Forgotten Tale</a> </b> </td>
 <td> Nio's Shop </td>
-<td> <a href="/escha/items/forbidden-candy">Forbidden Candy</a>, <a href="/escha/items/brother-call">Brother Call</a>, <a href="/escha/items/phoenix-bracelet">Phoenix Bracelet</a>, <a href="/escha/items/command-chime">Command Chime</a>
+<td> <a href="/escha/items/forbidden-candy/en">Forbidden Candy</a>, <a href="/escha/items/brother-call/en">Brother Call</a>, <a href="/escha/items/phoenix-bracelet/en">Phoenix Bracelet</a>, <a href="/escha/items/command-chime/en">Command Chime</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/third-twilight">Third Twilight</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/third-twilight/en">Third Twilight</a> </b> </td>
 <td> Ends of the Earth (Structure - Upper) </td>
-<td> <a href="/escha/items/dimension-bomb">Dimension Bomb</a>, <a href="/escha/items/golt-board">Golt Board</a>, <a href="/escha/items/soul-binder">Soul Binder</a>
+<td> <a href="/escha/items/dimension-bomb/en">Dimension Bomb</a>, <a href="/escha/items/golt-board/en">Golt Board</a>, <a href="/escha/items/soul-binder/en">Soul Binder</a>
 </td></tr>
 </table>
 </div>
 <ul><li> Area
-<ul><li> <a href="/escha/locations/ends-of-the-earth">Ends of the Earth</a></li>
+<ul><li> <a href="/escha/locations/ends-of-the-earth/en">Ends of the Earth</a></li>
 <li> You may kick Awin out of the party forever.</li>
 <li> STOP. There are two bosses there. You're too weak on your first run. Feel free toexplore, just be careful. You can dodge them both.</li></ul></li></ul>
 <p>As I'm sure you noticed, there are a lot of events to do. The plot related ones are in the Apple Orchard.

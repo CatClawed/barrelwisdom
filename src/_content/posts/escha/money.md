@@ -5,15 +5,15 @@ updatedDate: "2021-06-17"
 description: "How to make a lot of money easily."
 ---
 
-This trick can be done starting from [Assignment 4](/escha/assignment-4). Just follow a few simple steps. This is modified from **[Illusionbreaker's](http://www.gamefaqs.com/boards/709407-atelier-escha-and-logy-alchemists-of-the-dusk-sky/66667100)** topic on GFAQs.
+This trick can be done starting from [Assignment 4](/escha/assignment-4). Just follow a few simple steps. This is modified from **<a href="http://www.gamefaqs.com/boards/709407-atelier-escha-and-logy-alchemists-of-the-dusk-sky/66667100" target="_blank">Illusionbreaker's</a>** topic on GFAQs.
 
-* [(Liquid)](/escha/categories/liquid) x2
+* [(Liquid)](/escha/categories/liquid) x2/en
   * Make two Leathers. The first is made with Soft Leather (High Price), and the second with Quality Fur (High Price+).
   * Make a Distilled Water using a Silver Hive (High Price++) and Leather (High Price+). Use Division on Silver Hive. Keep Rare Goods and High Price++.
   * Make a Mixed Lubricant using two Leathers with High Price and High Price+, keep High Class Item.
 
 
-* [Purple Crystal](escha/items/purple-crystal)
+* [Purple Crystal](/escha/items/purple-crystal/en)
   * You will need the LV2 properties from both upcoming items. Not too difficult. Without either, you will not be able to afford High Price++.
   * Make a Crystal Ball using the Mixed Lubricant. Keep High Class Item and Inherit PP +3.
   * Make a Purple Crystal using that Crystal Ball and the Distilled Water. Use Division on the Distilled Water. You will probably need to use CP Recovery to do this. Keep Premium Price, Rare Goods, High Price++.
