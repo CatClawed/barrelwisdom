@@ -8,3 +8,41 @@
         margin-bottom: auto;
     }
 }
+
+.medium-icon {
+  height: 1.7em;
+  width: 1.7em;
+  fill: black;
+}
+
+.large-icon {
+  height: 3em;
+  width: 3em;
+  fill: black;
+}
+
+.elements {
+  height: 1.5em;
+  width: 1.5em;
+  fill: black;
+  border-radius: 50%;
+  border: #00000044 1px solid;
+  padding: 0.1em;
+  margin-right: 0.1em;
+}
+
+.elements2 {
+  >svg {
+    fill: black !important;
+    border-radius: 50%;
+    border: #00000044 1px solid;
+    padding: 0.1em;
+    background-color: gray;
+  }
+}
+
+.elements2.active {
+  >svg {
+    background-color: var(--active-button-bg);
+  }
+}

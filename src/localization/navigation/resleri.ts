@@ -4,46 +4,46 @@ export const en: NavItem[] = [
   {
     name: "What's New?",
     url: "/resleri/home/en",
-    svg: "A25.svg?v=1#resleri-icon"
+    svg: "resleri.svg?v=1#resleri-icon"
   },
   {
     name: "Research",
     url: "/resleri/research/en",
-    svg: "A25.svg?v=1#research"
+    svg: "resleri.svg?v=1#research"
   },
   {
     name: "Characters",
     url: "/resleri/characters/en",
-    svg: "A25.svg?v=1#char"
+    svg: "resleri.svg?v=1#char"
   },
   {
     name: "Memoria",
     url: "/resleri/memoria/en",
-    svg: "A25.svg?v=1#memoria"
+    svg: "resleri.svg?v=1#memoria"
   },
   {
     name: "Materials",
     url: "/resleri/items/materials/en",
-    svg: "A25.svg?v=1#mats"
+    svg: "resleri.svg?v=1#mats"
   },
   {
     name: "Synthesis",
     url: "/resleri/items/synthesis/en",
-    svg: "A25.svg?v=1#cauldron"
+    svg: "resleri.svg?v=1#cauldron"
   },
   {
     name: "Recipe Book",
     url: "/resleri/items/recipes/en",
-    svg: "A25.svg?v=1#recipes"
+    svg: "resleri.svg?v=1#recipes"
   },
   {
     name: "Traits",
     url: "/resleri/traits/en",
-    svg: "A25.svg?v=1#alchemy"
+    svg: "resleri.svg?v=1#alchemy"
   },
   {
     name: "Quests",
-    svg: "A25.svg?v=1#quest",
+    svg: "resleri.svg?v=1#quest",
     children: [
       {
         name: "Dungeons",
@@ -98,46 +98,46 @@ export const ja: NavItem[] = [
   {
     name: "ホーム",
     url: "/resleri/home/ja",
-    svg: "A25.svg?v=1#resleri-icon"
+    svg: "resleri.svg?v=1#resleri-icon"
   },
   {
     name: "研究",
     url: "/resleri/research/ja",
-    svg: "A25.svg?v=1#research"
+    svg: "resleri.svg?v=1#research"
   },
   {
     name: "キャラクター",
     url: "/resleri/characters/ja",
-    svg: "A25.svg?v=1#char"
+    svg: "resleri.svg?v=1#char"
   },
   {
     name: "メモリア",
     url: "/resleri/memoria/ja",
-    svg: "A25.svg?v=1#memoria"
+    svg: "resleri.svg?v=1#memoria"
   },
   {
     name: "素材",
     url: "/resleri/items/materials/ja",
-    svg: "A25.svg?v=1#mats"
+    svg: "resleri.svg?v=1#mats"
   },
   {
     name: "調合アイテム",
     url: "/resleri/items/synthesis/ja",
-    svg: "A25.svg?v=1#cauldron"
+    svg: "resleri.svg?v=1#cauldron"
   },
   {
     name: "レシピ発想",
     url: "/resleri/items/recipes/ja",
-    svg: "A25.svg?v=1#recipes"
+    svg: "resleri.svg?v=1#recipes"
   },
   {
     name: "特性",
     url: "/resleri/traits/ja",
-    svg: "A25.svg?v=1#alchemy"
+    svg: "resleri.svg?v=1#alchemy"
   },
   {
     name: "クエスト",
-    svg: "A25.svg?v=1#quest",
+    svg: "resleri.svg?v=1#quest",
     children: [
       {
         name: "ダンジョン",
@@ -192,46 +192,46 @@ export const sc: NavItem[] = [
   {
     name: "Home",
     url: "/resleri/home/sc",
-    svg: "A25.svg?v=1#resleri-icon"
+    svg: "resleri.svg?v=1#resleri-icon"
   },
   {
     name: "研究",
     url: "/resleri/research/sc",
-    svg: "A25.svg?v=1#research"
+    svg: "resleri.svg?v=1#research"
   },
   {
     name: "角色",
     url: "/resleri/characters/sc",
-    svg: "A25.svg?v=1#char"
+    svg: "resleri.svg?v=1#char"
   },
   {
     name: "回忆",
     url: "/resleri/memoria/sc",
-    svg: "A25.svg?v=1#memoria"
+    svg: "resleri.svg?v=1#memoria"
   },
   {
     name: "素材",
     url: "/resleri/items/materials/sc",
-    svg: "A25.svg?v=1#mats"
+    svg: "resleri.svg?v=1#mats"
   },
   {
     name: "调合道具",
     url: "/resleri/items/synthesis/sc",
-    svg: "A25.svg?v=1#cauldron"
+    svg: "resleri.svg?v=1#cauldron"
   },
   {
     name: "构思配方",
     url: "/resleri/items/recipes/sc",
-    svg: "A25.svg?v=1#recipes"
+    svg: "resleri.svg?v=1#recipes"
   },
   {
     name: "特性",
     url: "/resleri/traits/sc",
-    svg: "A25.svg?v=1#alchemy"
+    svg: "resleri.svg?v=1#alchemy"
   },
   {
     name: "挑战",
-    svg: "A25.svg?v=1#quest",
+    svg: "resleri.svg?v=1#quest",
     children: [
       {
         name: "迷宮",
@@ -286,46 +286,46 @@ export const tc: NavItem[] = [
   {
     name: "Home",
     url: "/resleri/home/tc",
-    svg: "A25.svg?v=1#resleri-icon"
+    svg: "resleri.svg?v=1#resleri-icon"
   },
   {
     name: "研究",
     url: "/resleri/research/tc",
-    svg: "A25.svg?v=1#research"
+    svg: "resleri.svg?v=1#research"
   },
   {
     name: "角色",
     url: "/resleri/characters/tc",
-    svg: "A25.svg?v=1#char"
+    svg: "resleri.svg?v=1#char"
   },
   {
     name: "回憶",
     url: "/resleri/memoria/tc",
-    svg: "A25.svg?v=1#memoria"
+    svg: "resleri.svg?v=1#memoria"
   },
   {
     name: "素材",
     url: "/resleri/items/materials/tc",
-    svg: "A25.svg?v=1#mats"
+    svg: "resleri.svg?v=1#mats"
   },
   {
     name: "調合道具",
     url: "/resleri/items/synthesis/tc",
-    svg: "A25.svg?v=1#cauldron"
+    svg: "resleri.svg?v=1#cauldron"
   },
   {
     name: "構思配方",
     url: "/resleri/items/recipes/tc",
-    svg: "A25.svg?v=1#recipes"
+    svg: "resleri.svg?v=1#recipes"
   },
   {
     name: "特性",
     url: "/resleri/traits/tc",
-    svg: "A25.svg?v=1#alchemy"
+    svg: "resleri.svg?v=1#alchemy"
   },
   {
     name: "挑戰",
-    svg: "A25.svg?v=1#quest",
+    svg: "resleri.svg?v=1#quest",
     children: [
       {
         name: "迷宫",

@@ -5,7 +5,7 @@ import Map from '@app/components/Games/yumia/map/Map.astro';
 import { element_map } from '@app/components/Games/yumia/yumia_constants';
 import { outer_translation, sp_translation, comfort_translation, material_translation, inner_translation } from '@app/localization/translations/yumia';
 import { stat_translation, details_translation, quality_translation, monster_translation, effect_translation, item_translation } from '@app/localization/translations/common-strings';
-const { item, lang, mode } = Astro.props;
+const { item, lang, mode, game, section } = Astro.props;
 
 const level0 = item.recipe?.level[0];
 const activeElements = level0 ? [
@@ -23,7 +23,7 @@ const activeElements = level0 ? [
       item.cats[0].id != 38 && (
         <img
           class="card-item-display"
-          src={`/media/games/yumia/items/${item.id}.webp`}
+          src={`/media/games/${game}/${section}/${item.id}.webp`}
           alt={item.name[lang]}
         />
       )
@@ -52,6 +52,7 @@ const activeElements = level0 ? [
     bolt={item.bolt}
     air={item.air}
     lang={lang}
+    game={game}
   />
 
   {
@@ -86,12 +87,12 @@ const activeElements = level0 ? [
     <ul>
       {item.mons?.map((mon) => (
         <li>
-          <a href={`/yumia/monsters/${mon.id}/${lang}`}>{mon.name[lang]}</a>
+          <a href={`/${game}/monsters/${mon.id}/${lang}`}>{mon.name[lang]}</a>
         </li>
       ))}
       {item.rare?.map((mon) => (
         <li>
-          <a href={`/yumia/monsters/${mon.id}/${lang}`}>{mon.name[lang]}</a>
+          <a href={`/${game}/monsters/${mon.id}/${lang}`}>{mon.name[lang]}</a>
         </li>
       ))}
     </ul>
@@ -113,7 +114,7 @@ const activeElements = level0 ? [
     <p class="display-map-icon">
       <b>{comfort_translation[lang]}</b> {item.comfort_goal} (see map)
       <svg>
-        <use href="/media/spritesheets/main.svg?v=1#fa-arrow-down" />
+        <use href="/spritesheets/main.svg?v=1#fa-arrow-down" />
       </svg>
     </p>
   )}
@@ -138,7 +139,7 @@ const activeElements = level0 ? [
                   <li>
                     <Popover
                       title={e.eff.name[lang]}
-                      href={`/yumia/effects/${e.eff.id}/${lang}`}
+                      href={`/${game}/effects/${e.eff.id}/${lang}`}
                       restrainWidth={mode === 'fragment'}
                     >
                       <span slot="trigger">{e.eff.name[lang]} {e.lv}</span>
@@ -154,7 +155,7 @@ const activeElements = level0 ? [
 
                       <p><b>Max: </b>{e.eff.max_level}</p>
 
-                      <a href={`/yumia/effects/${e.eff.id}/${lang}`}>
+                      <a href={`/${game}/effects/${e.eff.id}/${lang}`}>
                         {details_translation[lang]}
                       </a>
                     </Popover>
@@ -188,9 +189,9 @@ const activeElements = level0 ? [
               {item.recipe.recipe.map((ing: any) => (
                 <li>
                   {ing.item ? (
-                    <a href={`/yumia/items/${ing.item.id}/${lang}`}>{ing.item.name[lang]}</a>
+                    <a href={`/${game}/items/${ing.item.id}/${lang}`}>{ing.item.name[lang]}</a>
                   ) : (
-                    <a href={`/yumia/categories/${ing.cat.id}/${lang}`}>{ing.cat.name[lang]}</a>
+                    <a href={`/${game}/categories/${ing.cat.id}/${lang}`}>{ing.cat.name[lang]}</a>
                   )}
                 </li>
               ))}
@@ -203,7 +204,7 @@ const activeElements = level0 ? [
                   <li>
                     <Popover
                       title={ing.eff.name[lang]}
-                      href={`/yumia/effects/${ing.eff.id}/${lang}`}
+                      href={`/${game}/effects/${ing.eff.id}/${lang}`}
                     >
                       <span slot="trigger">{ing.eff.name[lang]}</span>
                       {!ing.eff.desc2 ? (
@@ -217,7 +218,7 @@ const activeElements = level0 ? [
 
                       <p><b>Max: </b>{ing.eff.max_level}</p>
 
-                      <a href={`/yumia/effects/${ing.eff.id}/${lang}`}>
+                      <a href={`/${game}/effects/${ing.eff.id}/${lang}`}>
                         {details_translation[lang]}
                       </a>
                     </Popover>
@@ -238,10 +239,10 @@ const activeElements = level0 ? [
 
               {activeElements.map((el) => (
                 <svg
-                  class="a26-elements"
+                  class="elements"
                   style={`background-color: ${element_map[el.id]};`}
                 >
-                  <use href={`/media/spritesheets/A26.svg?v=1#${el.id}`} />
+                  <use href={`/spritesheets/${game}.svg?v=1#${el.id}`} />
                 </svg>
               ))}
             </div>
@@ -259,7 +260,6 @@ const activeElements = level0 ? [
 </div>
 <Map data={item.location} />
 <style lang="scss">
-  @use '@styles/games/yumia';
   // jank
   .display-map-icon {
     display: flex;

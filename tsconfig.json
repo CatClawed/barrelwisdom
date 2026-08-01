@@ -4,6 +4,7 @@
   "exclude": ["dist"],
   "compilerOptions": {
     "strictNullChecks": true,
+    "verbatimModuleSyntax": true,
     "paths": {
       "@components/*": ["./src/components/*"],
       "@layouts/*": ["./src/layouts/*"],

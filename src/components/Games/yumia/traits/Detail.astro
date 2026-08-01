@@ -3,7 +3,7 @@ import Popover from '@app/components/Games/_common/Popover.astro';
 import Map from '@app/components/Games/yumia/map/Map.astro';
 import { view_map_translation, outer_translation, inner_translation, blending_translation } from '@app/localization/translations/yumia';
 import { level_translation } from '@app/localization/translations/common-strings';
-const { item, lang, mode } = Astro.props;
+const { item, lang, mode, game, section } = Astro.props;
 const traitIcons = [
   { key: 'atk',  icon: 'category-bombs' },
   { key: 'heal', icon: 'trait-heal' },
@@ -21,7 +21,7 @@ const traitIcons = [
     {mode !== 'list' ? (
     <h4>{item.name[lang]}</h4>
     ) : (
-    <a href={`/yumia/traits/${item.id}/${lang}`} target="_blank">
+    <a href={`/${game}/traits/${item.id}/${lang}`} target="_blank">
       <h4>{item.name[lang]}</h4>
     </a>
     )}
@@ -46,7 +46,7 @@ const traitIcons = [
     <ul class="two-column">
       {[item.combo1, item.combo2, item.combo3, item.combo4].filter(Boolean).map((combo) => (
         <li>
-          <a href={`/yumia/traits/${combo.id}/${lang}`}>{combo.name[lang]}</a>
+          <a href={`/${game}/traits/${combo.id}/${lang}`}>{combo.name[lang]}</a>
         </li>
       ))}
     </ul>
@@ -95,7 +95,7 @@ const traitIcons = [
       <svg
         style={`width:1.8em; height:1.8em; fill: ${item[t.key] ? 'black' : 'lightgray'};`}
       >
-        <use href={`/media/spritesheets/A26.svg?v=1#${t.icon}`} />
+        <use href={`/spritesheets/${game}.svg?v=1#${t.icon}`} />
       </svg>
     ))}
   </div>

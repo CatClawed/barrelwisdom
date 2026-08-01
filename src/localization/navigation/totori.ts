@@ -84,7 +84,7 @@ export const en: NavItem[] = [
   },
   {
     name: "Tutorials",
-    svg: "A12.svg?v=1#synthesis",
+    svg: "totori.svg?v=1#synthesis",
     children: [
       {
         name: "Boss Preparation",
@@ -102,7 +102,7 @@ export const en: NavItem[] = [
   },
   {
     name: "Encyclopedia",
-    svg: "A12.svg?v=1#category-supplement",
+    svg: "totori.svg?v=1#category-supplement",
     expand: true,
     children: [
       {
@@ -132,7 +132,7 @@ export const en: NavItem[] = [
 export const ja: NavItem[] = [
   {
     name: "アイテム",
-    svg: "A12.svg?v=1#category-supplement",
+    svg: "totori.svg?v=1#category-supplement",
     url: "/totori/items/ja"
   },
   {

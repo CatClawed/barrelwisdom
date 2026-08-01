@@ -169,7 +169,7 @@ export const ja: NavItem[] = [
   {
     name: "アイテム",
     url: "/escha/items/ja",
-    svg: "A15.svg?v=1#category-book"
+    svg: "escha.svg?v=1#category-book"
   },
   {
     name: "レシピブック",

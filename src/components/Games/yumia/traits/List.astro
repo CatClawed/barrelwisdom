@@ -3,7 +3,7 @@ import Detail from './Detail.astro';
 import FilterButton from '@components/Games/_common/FilterButton.astro';
 import { filter_translation } from '@app/localization/translations/common-strings';
 
-const { items, lang, title } = Astro.props;
+const { items, lang, title, game, section } = Astro.props;
 
 items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
 ---
@@ -18,7 +18,7 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
     class="grid-6"
   />
   <FilterButton
-    svg="A26.svg?v=1"
+    svg="${game}.svg?v=1"
     name="traits"
     list={[
       { filterKey: 'atk', icon: 'category-bombs' },
@@ -31,7 +31,13 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
     ]}
   />
 </div>
-<ul class="list" id="item-list" data-lang={lang}>
+<ul
+  class="list"
+  id="item-list"
+  data-lang={lang}
+  data-game={game}
+  data-section={section}
+>
   {
     items.map((i, index) => (
       <li
@@ -50,7 +56,13 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
           .filter(Boolean)
           .join(',')}
       >
-        <Detail item={i.data} lang={lang} mode="list" />
+        <Detail
+          item={i.data}
+          lang={lang}
+          mode="list"
+          game={game}
+          section={section}
+        />
       </li>
     ))
   }
@@ -60,46 +72,13 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
 </dialog>
 <script>
   import { initListFilters } from '@app/utils/filter-controller';
-  import {
-    initMap,
-    destroyMap,
-  } from '@app/components/Games/yumia/map/map_client';
-
-  const lang = document.getElementById('item-list')!.dataset.lang!;
+  import { initModalMapController } from '@app/utils/modal-map-controller';
   initListFilters({
-    lang,
     filters: [
       { type: 'buttons', key: 'traits', groupName: 'traits', mode: 'all' },
     ],
   });
-
-  const list = document.getElementById('item-list');
-  const modal = document.getElementById('map-modal') as HTMLDialogElement;
-  const modalContent = document.getElementById('modal-content')!;
-
-  list?.addEventListener('click', async (e) => {
-    const trigger = (e.target as HTMLElement).closest('.show-map-btn');
-    if (!trigger) return;
-
-    destroyMap();
-
-    const id = trigger.getAttribute('data-id');
-    modalContent.innerHTML = '<p>Loading Map...</p>';
-    modal.showModal();
-
-    const response = await fetch(`/yumia/traits/${id}/fragment/${lang}`);
-    const html = await response.text();
-    modalContent.innerHTML = html;
-
-    initMap(modalContent.querySelector('.a26-map[data-points]')!);
-  });
-
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      destroyMap();
-      modal.close();
-    }
-  });
+  initModalMapController({});
 </script>
 <style>
   .map-modal {

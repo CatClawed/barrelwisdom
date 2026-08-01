@@ -65,7 +65,13 @@ const title: string = pageTitles[section][lang];
 {
   mode === 'list' ? (
     <MainLayout title={title}>
-      <ListComponent items={allItems} lang={lang} title={title} />
+      <ListComponent
+        items={allItems}
+        lang={lang}
+        title={title}
+        game={game}
+        section={section}
+      />
     </MainLayout>
   ) : mode === 'detail' ? (
     <MainLayout
@@ -73,9 +79,21 @@ const title: string = pageTitles[section][lang];
       description={item.data.desc?.[lang] ?? ''}
       mainClass="small-page"
     >
-      <DetailComponent item={item.data} lang={lang} mode={mode} />
+      <DetailComponent
+        item={item.data}
+        lang={lang}
+        mode={mode}
+        game={game}
+        section={section}
+      />
     </MainLayout>
   ) : (
-    <DetailComponent item={item.data} lang={lang} mode={mode} />
+    <DetailComponent
+      item={item.data}
+      lang={lang}
+      mode={mode}
+      game={game}
+      section={section}
+    />
   )
 }

@@ -6,14 +6,14 @@ import {
   race_translation,
 } from '@app/localization/translations/common-strings';
 
-const { items, lang, title } = Astro.props;
+const { items, lang, title, game, section } = Astro.props;
 
 const races = await getCollection('yumia_races');
 
 const raceOptions = races.map((race) => ({
   id: race.id,
   label: race.data.name[lang],
-  icon: `/spritesheets/A26.svg?v=1#race-${race.id}`,
+  icon: `/spritesheets/${game}.svg?v=1#race-${race.id}`,
 }));
 
 items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
@@ -37,7 +37,13 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
         lang={lang}
       />
     </div>
-    <ul class="list" id="item-list" data-lang={lang}>
+    <ul
+      class="list"
+      id="item-list"
+      data-lang={lang}
+      data-game={game}
+      data-section={section}
+    >
       {
         items.map((i, index) => (
           <li
@@ -59,7 +65,7 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
               {i.data.isDLC && <span class="badge bg-primary">DLC</span>}
               <svg>
                 <use
-                  href={`/spritesheets/A26.svg?v=1#race-${i.data.race.id}`}
+                  href={`/spritesheets/${game}.svg?v=1#race-${i.data.race.id}`}
                 />
               </svg>
             </div>
@@ -71,67 +77,15 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
 
   <div id="detail-pane" class="detail-pane">
     <svg class="placeholder-icon blue-placeholder">
-      <use href="/spritesheets/A26.svg#puni"></use>
+      <use href={`/spritesheets/${game}.svg#puni`}></use>
     </svg>
   </div>
 </div>
 <script>
   import { initListFilters } from '@app/utils/filter-controller';
-  import { initSearchableSelects } from '@components/Games/_common/dropdown_client';
-  import { initPopovers } from '@components/Games/_common/popover_client';
-  import {
-    destroyMap,
-    initMap,
-  } from '@app/components/Games/yumia/map/map_client';
-
-  const list = document.getElementById('item-list')!;
-  const lang = list.dataset.lang!;
-  const pane = document.getElementById('detail-pane')!;
-
+  import { initPaneController } from '@app/utils/detail-pane-controller';
   initListFilters({
-    lang,
     filters: [{ type: 'select', key: 'race', elementId: 'race' }],
   });
-
-  list.addEventListener('click', async (e) => {
-    const card = (e.target as HTMLElement).closest<HTMLElement>(
-      '.list-container',
-    );
-    if (!card) return;
-    if (e.button === 0 && !e.ctrlKey && !e.metaKey) {
-      e.preventDefault();
-
-      if (window.innerWidth <= 760) {
-        pane.classList.add('is-open');
-        if (!pane.querySelector('.close-btn')) {
-          pane.insertAdjacentHTML(
-            'afterbegin',
-            `<button class="close-btn"><svg><use href="/media/spritesheets/main.svg?v=1#fa-arrow-left" /></svg></button>`,
-          );
-          pane
-            .querySelector('.close-btn')!
-            .addEventListener('click', () => pane.classList.remove('is-open'));
-        }
-      }
-      pane.classList.add('hide-placeholder');
-
-      destroyMap();
-      const id = card.getAttribute('data-id');
-      pane.querySelector('.content-area')?.remove();
-
-      const response = await fetch(`/yumia/monsters/${id}/fragment/${lang}`);
-      const html = await response.text();
-      pane.insertAdjacentHTML(
-        'beforeend',
-        `<div class="content-area">${html}</div>`,
-      );
-
-      initMap(pane.querySelector('.a26-map[data-points]')!);
-      initSearchableSelects(pane);
-      initPopovers(pane);
-    }
-  });
+  initPaneController({ withMap: true });
 </script>
-<style lang="scss">
-  @use '@styles/games/yumia';
-</style>
