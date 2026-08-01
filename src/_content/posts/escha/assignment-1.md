@@ -13,10 +13,10 @@ mainClass: "medium-page"
 </th></tr>
 <tr>
 <td rowspan="3"> <b>Deliver the Parts </b> </td>
-<td> Gather <a href="/escha/items/wind-flower">Wind Flower</a> x3, <a href="/escha/items/rusty-cog" >Rusty Cog</a> x3, <a href="/escha/items/bent-screw">Bent Screw</a> x3
+<td> Gather <a href="/escha/items/wind-flower/en">Wind Flower</a> x3, <a href="/escha/items/rusty-cog/en" >Rusty Cog</a> x3, <a href="/escha/items/bent-screw/en">Bent Screw</a> x3
 </td></tr>
 <tr>
-<td> Make <a href="/escha/items/windmill-parts">Windmill Parts</a>
+<td> Make <a href="/escha/items/windmill-parts/en">Windmill Parts</a>
 </td></tr>
 <tr>
 <td> Deliver to Clone
@@ -31,7 +31,7 @@ mainClass: "medium-page"
 </td></tr>
 <tr>
 <td> <b>Basics of Synthesis</b> </td>
-<td> Synth <a href="/escha/items/neutralizer-r">Neutralizer-R</a>
+<td> Synth <a href="/escha/items/neutralizer-r/en">Neutralizer-R</a>
 </td></tr>
 <tr>
 <td> <b>Combat </b> </td>
@@ -43,17 +43,17 @@ mainClass: "medium-page"
 </td></tr>
 <tr>
 <td> <b>Highway Subjugation</b> </td>
-<td> Slay <a href="/escha/monsters/green-spirit">Green Spirit</a> and <a href="/escha/monsters/poison-squirrel">Poison Squirrel</a> at Old Highway
+<td> Slay <a href="/escha/monsters/green-spirit/en">Green Spirit</a> and <a href="/escha/monsters/poison-squirrel/en">Poison Squirrel</a> at Old Highway
 </td></tr>
 <tr>
 <td rowspan="4"> <b>Inclined Slope </b> </td>
-<td> Slay <a href="/escha/monsters/sreen-spirit">Green Spirit</a> at Old Highway (Northern Road)
+<td> Slay <a href="/escha/monsters/sreen-spirit/en">Green Spirit</a> at Old Highway (Northern Road)
 </td></tr>
 <tr>
 <td> Gather at the Old Highway (Checkpoint)
 </td></tr>
 <tr>
-<td> Slay <a href="/escha/monsters/poison-squirrel">Poison Squirrel</a> at Old Highway (Former Market)
+<td> Slay <a href="/escha/monsters/poison-squirrel/en">Poison Squirrel</a> at Old Highway (Former Market)
 </td></tr>
 <tr>
 <td> Gather at Old Highway (Inclined Slope)
@@ -77,15 +77,15 @@ mainClass: "medium-page"
 </td></tr>
 <tr>
 <td> <b>Alpha Wolf </b> </td>
-<td> Slay the <a href="/escha/monsters/flesh-eater" >Flesh Eater</a> in Twilight Forest (Forest Point).
+<td> Slay the <a href="/escha/monsters/flesh-eater/en" >Flesh Eater</a> in Twilight Forest (Forest Point).
 </td></tr>
 <tr>
 <td> <b>Forest Slicer Bug </b> </td>
-<td> Slay the <a href="/escha/monsters/scissor-beast" >Scissor Beast</a> in Twilight Forest (Forest Point).
+<td> Slay the <a href="/escha/monsters/scissor-beast/en" >Scissor Beast</a> in Twilight Forest (Forest Point).
 </td></tr>
 <tr>
 <td> <b>Attack Items </b> </td>
-<td> Use a <a href="/escha/items/craft">Craft</a> 5 times in battle.
+<td> Use a <a href="/escha/items/craft/en">Craft</a> 5 times in battle.
 </td></tr>
 <tr>
 <td> <b>Maximizing Search </b> </td>
@@ -97,7 +97,7 @@ mainClass: "medium-page"
 </td></tr>
 <tr>
 <td> <b>Synthesize Bombs </b> </td>
-<td> Synth <a href="/escha/items/bomb" >Bomb</a> from <a href="/escha/recipe-books/let-s-make-a-bom">Let's Make A Bomb</a>.
+<td> Synth <a href="/escha/items/bomb/en" >Bomb</a> from <a href="/escha/recipe-books/let-s-make-a-bom/en">Let's Make A Bomb</a>.
 </td></tr>
 <tr>
 <td> <b>Gather Water </b> </td>
@@ -113,15 +113,15 @@ mainClass: "medium-page"
 </td></tr>
 <tr>
 <td> <b>Bursting Craft </b> </td>
-<td> Synth a <a href="escha/items/craft">Craft</a> with <a href="escha/effects/bursting">Bursting</a>. <a href="/escha/items/spiky-fruit" >Spiky Fruit</a> x2 from Nio's shop.
+<td> Synth a <a href="/escha/items/craft/en">Craft</a> with <a href="/escha/effects/bursting/en">Bursting</a>. <a href="/escha/items/spiky-fruit/en" >Spiky Fruit</a> x2 from Nio's shop.
 </td></tr>
 <tr>
 <td> <b>Indoor Search </b> </td>
-<td> Gather <a href="/escha/items/grain-scraps" >Grain Scraps</a> inside the buildings in Twilight Forest.
+<td> Gather <a href="/escha/items/grain-scraps/en" >Grain Scraps</a> inside the buildings in Twilight Forest.
 </td></tr>
 <tr>
 <td> <b>Heal Allies </b> </td>
-<td> Use <a href="/escha/items/healing-salve" >Healing Salve</a> during combat.
+<td> Use <a href="/escha/items/healing-salve/en" >Healing Salve</a> during combat.
 </td></tr>
 <tr>
 <td> <b>Support Attacks </b> </td>
@@ -221,34 +221,34 @@ mainClass: "medium-page"
 <th colspan="3"> Recipes
 </th></tr>
 <tr>
-<td> <a href="/escha/recipe-books/escha-s-book" >Escha's Book</a> </td>
+<td> <a href="/escha/recipe-books/escha-s-book/en" >Escha's Book</a> </td>
 <td> Default </td>
-<td> <a href="/escha/items/healing-salve" >Healing Salve</a>, <a href="/escha/items/craft" >Craft</a>, <a href="/escha/items/neutralizer-r" >Neutralizer-R</a>, <a href="/escha/items/neutralizer-Y" >Neutralizer-Y</a>, <a href="/escha/items/neutralizer-b" >Neutralizer-B</a>, <a href="/escha/items/neutralizer-G" >Neutralizer-G</a>, 
+<td> <a href="/escha/items/healing-salve/en" >Healing Salve</a>, <a href="/escha/items/craft/en" >Craft</a>, <a href="/escha/items/neutralizer-r/en" >Neutralizer-R</a>, <a href="/escha/items/neutralizer-Y/en" >Neutralizer-Y</a>, <a href="/escha/items/neutralizer-b/en" >Neutralizer-B</a>, <a href="/escha/items/neutralizer-G/en" >Neutralizer-G</a>, 
 </td></tr>
 <tr>
-<td> <a href="/escha/recipe-books/windmill-parts" >Windmill Parts</a> </td>
+<td> <a href="/escha/recipe-books/windmill-parts/en" >Windmill Parts</a> </td>
 <td> Default </td>
-<td> <a href="/escha/items/windmill-parts" >Windmill Parts</a>
+<td> <a href="/escha/items/windmill-parts/en" >Windmill Parts</a>
 </td></tr>
 <tr>
-<td> <a href="/escha/recipe-books/cook-book" >Cook Book</a> </td>
+<td> <a href="/escha/recipe-books/cook-book/en" >Cook Book</a> </td>
 <td> Duke's Shop </td>
-<td> <a href="/escha/items/honey" >Honey</a>, <a href="/escha/items/five-grain-flour" >Five Grain Flour</a>, <a href="/escha/items/squash-tea" >Squash Tea</a>, <a href="/escha/items/veggie-soup" >Veggie Soup</a>, <a href="/escha/items/pressed-oil" >Pressed Oil</a>,
+<td> <a href="/escha/items/honey/en" >Honey</a>, <a href="/escha/items/five-grain-flour/en" >Five Grain Flour</a>, <a href="/escha/items/squash-tea/en" >Squash Tea</a>, <a href="/escha/items/veggie-soup/en" >Veggie Soup</a>, <a href="/escha/items/pressed-oil/en" >Pressed Oil</a>,
 </td></tr>
 <tr>
-<td> <a href="/escha/recipe-books/newlywed" >Newlywed</a> </td>
+<td> <a href="/escha/recipe-books/newlywed/en" >Newlywed</a> </td>
 <td> Nio's Shop </td>
-<td> <a href="/escha/items/purifying-liquid" >Purifying Liquid</a>, <a href="/escha/items/dried-herbs" >Dried Herbs</a>, <a href="/escha/items/curing-powder" >Curing Powder</a>, <a href="/escha/items/fluffy-whip" >Fluffy Whip</a>,
+<td> <a href="/escha/items/purifying-liquid/en" >Purifying Liquid</a>, <a href="/escha/items/dried-herbs/en" >Dried Herbs</a>, <a href="/escha/items/curing-powder/en" >Curing Powder</a>, <a href="/escha/items/fluffy-whip/en" >Fluffy Whip</a>,
 </td></tr>
 <tr>
-<td> <a href="/escha/recipe-books/let-s-make-a-bomb" >Let's Make A Bomb</a> </td>
+<td> <a href="/escha/recipe-books/let-s-make-a-bomb/en" >Let's Make A Bomb</a> </td>
 <td> 1 assignment line </td>
-<td> <a href="/escha/items/bomb" >Bomb</a>, <a href="/escha/items/mixed-lubricant" >Mixed Lubricant</a>, <a href="/escha/items/abrasive" >Abrasive</a>,, <a href="/escha/items/zettel" >Zettel</a>,
+<td> <a href="/escha/items/bomb/en" >Bomb</a>, <a href="/escha/items/mixed-lubricant/en" >Mixed Lubricant</a>, <a href="/escha/items/abrasive/en" >Abrasive</a>,, <a href="/escha/items/zettel/en" >Zettel</a>,
 </td></tr>
 <tr>
-<td> <a href="/escha/recipe-books/craft-secrets" >Craft Secrets</a> </td>
+<td> <a href="/escha/recipe-books/craft-secrets/en" >Craft Secrets</a> </td>
 <td> 5 assignment lines </td>
-<td> <a href="/escha/items/Omega-Craft" >Omega Craft</a>
+<td> <a href="/escha/items/Omega-Craft/en" >Omega Craft</a>
 </td></tr>
 </table>
 </div>
@@ -262,11 +262,11 @@ go out exploring.
 </p><p>Do note that you can use up ALL your items outside town, and you'll get them back when you return to
 town. So don't be shy about item usage! In fact, I'm going to put this out here right now: <b>Use every single attack and healing item at least once in battle.</b> And keep track of what you've used. This is part of a minor assignment waaaaay
 later in the game (so you don't <i>have</i> to do this), but you WILL thank me later if you're the super completionist sort.
-</p><p>At the Town Entrance, you can gather <a href="/escha/items/water" >Water</a>. At the Apple Orchard, you can gather <a href="/escha/items/apple">Apple</a>.
+</p><p>At the Town Entrance, you can gather <a href="/escha/items/water/en" >Water</a>. At the Apple Orchard, you can gather <a href="/escha/items/apple/en">Apple</a>.
 </p>
 <ul><li> Areas
-<ul><li> <a href="/escha/locations/twilight-forest" >Twilight Forest</a></li>
-<li> <a href="/escha/locations/old-highway" >Old Highway</a></li></ul></li></ul>
+<ul><li> <a href="/escha/locations/twilight-forest/en" >Twilight Forest</a></li>
+<li> <a href="/escha/locations/old-highway/en" >Old Highway</a></li></ul></li></ul>
 <p>And I do seriously suggest checking area sections out; it'll help you gather rare stuff and find documents
 (you need all 20 for an assignment). For the time being, explore till you fill your basket, then return to Colseit; you can collect
 more on a second trip. You have plenty of time to waste, trust me. If time is making you anxious... The final year gives you a single
@@ -274,7 +274,7 @@ goal: beat the final boss. Aside from that, you can finish any assignments you m
 </p><p>After you finished the major assignment for the term, enjoy Haruka Shimotsuki's singing. Personally, I love the vocal themes in this
 game. At some point, you'll get an event with Solle that will open up the request system. Requests get you treats (and rank points,
 actually) you'll eventually be using to pay the Homonculi to duplicate items.
-</p><p>Once you get to <a href="/escha/locations/old-highway" >Old Highway</a>, the game will introduce
+</p><p>Once you get to <a href="/escha/locations/old-highway/en" >Old Highway</a>, the game will introduce
 Field Events to you. You probably noticed that I listed Field Events in my Twilight Forest section; using certain Events can get you
 powerful monsters (which you will not find otherwise), rare materials, and so on. Some of these events are used once, then disappear
 (such as "Check relic"), others change the field itself (e.g. "Check rare materials"). As long as you do not leave to the world map,

@@ -3,6 +3,7 @@ title: "Chapter 7"
 pubDate: "2021-06-25"
 updatedDate: "2025-11-24"
 description: "Walkthrough/guide for Chapter 7, including events, recipes, and other things of note."
+mainClass: "medium-page"
 ---
 
 <div class="grid">
@@ -25,10 +26,10 @@ description: "Walkthrough/guide for Chapter 7, including events, recipes, and ot
 </td></tr>
 <tr>
 <td rowspan="2"> <i>Go home and work </i> </td>
-<td> Make <a href="/shallie/items/holinic-steel-plate">Holinic Steel Plate</a> x5
+<td> Make <a href="/shallie/items/holinic-steel-plate/en">Holinic Steel Plate</a> x5
 </td></tr>
 <tr>
-<td> OR Make <a href="/shallie/items/stellard-fabric">Stellard Fabric</a> x10
+<td> OR Make <a href="/shallie/items/stellard-fabric/en">Stellard Fabric</a> x10
 </td></tr>
 <tr>
 <td> <i>Report the work </i> </td>
@@ -63,7 +64,7 @@ description: "Walkthrough/guide for Chapter 7, including events, recipes, and ot
 </td></tr>
 <tr>
 <td> <i>Synthesize requested item </i> </td>
-<td> <a href="/shallie/items/mini-sound-machine">Mini Sound Machine</a>
+<td> <a href="/shallie/items/mini-sound-machine/en">Mini Sound Machine</a>
 </td></tr>
 <tr>
 <td> <i>Deliver Synthesized item </i> </td>
@@ -118,7 +119,7 @@ description: "Walkthrough/guide for Chapter 7, including events, recipes, and ot
 </td></tr>
 <tr>
 <td> <i>Synthesize magic items </i> </td>
-<td> Synth <a href="/shallie/categories/magic-tool">(Magic Tool)</a> </td>
+<td> Synth <a href="/shallie/categories/magic-tool/en">(Magic Tool)</a> </td>
 <td> Synthesis Exp +20
 </td></tr>
 <tr>
@@ -146,19 +147,19 @@ description: "Walkthrough/guide for Chapter 7, including events, recipes, and ot
 </th></tr>
 <tr>
 <td rowspan="2"> <i>Want new equipment </i> </td>
-<td> Imbue <a href="/shallie/items/white-winged-bell">White Winged Bell</a> / <a href="/shallie/items/magia-sumonitora">Magia Sumonitora</a> </td>
+<td> Imbue <a href="/shallie/items/white-winged-bell/en">White Winged Bell</a> / <a href="/shallie/items/magia-sumonitora/en">Magia Sumonitora</a> </td>
 <td rowspan="2"> Synthesis Exp +10
 </td></tr>
 <tr>
-<td> OR Imbue <a href="/shallie/items/splint-mail">Splint Mail</a>
+<td> OR Imbue <a href="/shallie/items/splint-mail/en">Splint Mail</a>
 </td></tr>
 <tr>
 <td rowspan="2"> <i>Prepare equipment for everyone </i> </td>
-<td> Imbue <a href="/shallie/items/lunic-charm">Lunic Charm</a> / <a href="/shallie/items/demonkin-ring">Demonkin Ring</a> </td>
+<td> Imbue <a href="/shallie/items/lunic-charm/en">Lunic Charm</a> / <a href="/shallie/items/demonkin-ring/en">Demonkin Ring</a> </td>
 <td rowspan="2"> Synthesis Exp +10
 </td></tr>
 <tr>
-<td> OR Imbue <a href="/shallie/items/bloody-claws">Bloody Claws</a> / <a href="/shallie/items/Ancient-Heat-Bunker">Ancient Heat Bunker</a>
+<td> OR Imbue <a href="/shallie/items/bloody-claws/en">Bloody Claws</a> / <a href="/shallie/items/Ancient-Heat-Bunker/en">Ancient Heat Bunker</a>
 </td></tr>
 <tr>
 <td> <i>Want to do some Synthesis </i> </td>
@@ -167,12 +168,12 @@ description: "Walkthrough/guide for Chapter 7, including events, recipes, and ot
 </td></tr>
 <tr>
 <td> <i>Rumors of special regional clay </i> </td>
-<td> Gather <a href="/shallie/categories/clay">(Clay)</a> x15 at the <a href="/shallie/locations/eastern-continent">Eastern Continent</a> </td>
+<td> Gather <a href="/shallie/categories/clay/en">(Clay)</a> x15 at the <a href="/shallie/locations/eastern-continent">Eastern Continent</a> </td>
 <td> Combat Exp +250
 </td></tr>
 <tr>
 <td> <i>Rumors of special regional naturals </i> </td>
-<td> Gather <a href="/shallie/categories/natural">(Natural)</a> x15 at the <a href="/shallie/locations/eastern-continent">Eastern Continent</a> </td>
+<td> Gather <a href="/shallie/categories/natural/en">(Natural)</a> x15 at the <a href="/shallie/locations/eastern-continent">Eastern Continent</a> </td>
 <td> Combat Exp +250
 </td></tr>
 <tr>
@@ -269,7 +270,7 @@ description: "Walkthrough/guide for Chapter 7, including events, recipes, and ot
 <tr>
 <td rowspan="4"> Katla </td>
 <td> Union </td>
-<td> She requests <a href="/shallie/items/slag-coin">Slag Coin</a> x6 through Raoul. These are found in chests in the Baskes Region.
+<td> She requests <a href="/shallie/items/slag-coin/en">Slag Coin</a> x6 through Raoul. These are found in chests in the Baskes Region.
 </td></tr>
 <tr>
 <td> Hilt Street </td>
@@ -281,7 +282,7 @@ description: "Walkthrough/guide for Chapter 7, including events, recipes, and ot
 </td></tr>
 <tr>
 <td> Hilt Street </td>
-<td> Katla ropes you into a life task for <a href="/shallie/categories/water">(Water)</a> x12
+<td> Katla ropes you into a life task for <a href="/shallie/categories/water/en">(Water)</a> x12
 </td></tr>
 <tr>
 <td rowspan="4"> Kortes </td>
@@ -294,11 +295,11 @@ description: "Walkthrough/guide for Chapter 7, including events, recipes, and ot
 </td></tr>
 <tr>
 <td> <a href="/shallie/locations/baskes-region/en#land-of-the-dead">Land of the Dead</a> </td>
-<td> <a href="/shallie/monsters/bio-dragon">Bio Dragon</a>
+<td> <a href="/shallie/monsters/bio-dragon/en">Bio Dragon</a>
 </td></tr>
 <tr>
 <td> <a href="/shallie/locations/dusk-sea/en#sandy-ruins">Sandy Ruins</a> </td>
-<td> <a href="/shallie/monsters/grand-dragon">Grand Dragon</a>
+<td> <a href="/shallie/monsters/grand-dragon/en">Grand Dragon</a>
 </td></tr>
 <tr>
 <td rowspan="3"> Logy </td>
@@ -323,7 +324,7 @@ description: "Walkthrough/guide for Chapter 7, including events, recipes, and ot
 <tr>
 <td rowspan="6"> Miruca </td>
 <td> Union </td>
-<td> She wants <a href="/shallie/categories/ancient-relic">(Ancient Relic)</a> x5 delivered. (Life task.) Just do it immediately.
+<td> She wants <a href="/shallie/categories/ancient-relic/en">(Ancient Relic)</a> x5 delivered. (Life task.) Just do it immediately.
 </td></tr>
 <tr>
 <td> Miruca's Workshop </td>
@@ -421,39 +422,39 @@ description: "Walkthrough/guide for Chapter 7, including events, recipes, and ot
 <th colspan="3"> Recipes
 </th></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/keithgriff-s-memo">Keithgriff's Memo</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/keithgriff-s-memo/en">Keithgriff's Memo</a> </i> </td>
 <td> Auto - Stera </td>
-<td> <a href="/shallie/items/mini-sound-machine">Mini Sound Machine</a>
+<td> <a href="/shallie/items/mini-sound-machine/en">Mini Sound Machine</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/lugion-village-tradition">Lugion Village Tradition</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/lugion-village-tradition/en">Lugion Village Tradition</a> </i> </td>
 <td> Auto - Stera </td>
-<td> <a href="/shallie/items/wonder-drug-of-tranquillity">Wonder Drug of Tranquillity</a>
+<td> <a href="/shallie/items/wonder-drug-of-tranquillity/en">Wonder Drug of Tranquillity</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/starlight-of-the-heavens">Starlight of the Heavens</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/starlight-of-the-heavens/en">Starlight of the Heavens</a> </i> </td>
 <td> Rose's Shop </td>
-<td> <a href="/shallie/items/meteor">Meteor</a>, <a href="/shallie/items/one-angle-mascara">One Angle Mascara</a>, <a href="/shallie/items/supplement-rainbow">Supplement - Rainbow</a>, <a href="/shallie/items/comet-crest-stone">Comet Crest Stone</a>, <a href="/shallie/items/medicine-of-the-four-beasts">Medicine of the Four Beasts</a>
+<td> <a href="/shallie/items/meteor/en">Meteor</a>, <a href="/shallie/items/one-angle-mascara/en">One Angle Mascara</a>, <a href="/shallie/items/supplement-rainbow/en">Supplement - Rainbow</a>, <a href="/shallie/items/comet-crest-stone/en">Comet Crest Stone</a>, <a href="/shallie/items/medicine-of-the-four-beasts/en">Medicine of the Four Beasts</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/health-conscious-medicine">Medicine for the Health-Conscious</a></i> </td>
+<td> <i><a href="/shallie/recipe-books/health-conscious-medicine/en">Medicine for the Health-Conscious</a></i> </td>
 <td> Harry's Shop </td>
-<td> <a href="/shallie/items/healthy-ration">Healthy Ration</a>, <a href="/shallie/items/sp-medicine">SP Medicine</a>, <a href="/shallie/items/awakening-medicine">Awakening Medicine</a>
+<td> <a href="/shallie/items/healthy-ration/en">Healthy Ration</a>, <a href="/shallie/items/sp-medicine/en">SP Medicine</a>, <a href="/shallie/items/awakening-medicine/en">Awakening Medicine</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/the-way-of-the-world">The Way of the World</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/the-way-of-the-world/en">The Way of the World</a> </i> </td>
 <td> Harry's Shop </td>
-<td> <a href="/shallie/items/pumpkin-doll">Pumpkin Doll</a>, <a href="/shallie/items/time-watch">Time Watch</a>, <a href="/shallie/items/mysterious-cloth">Mysterious Cloth</a>, <a href="/shallie/items/medical-solution">Medical Solution</a>
+<td> <a href="/shallie/items/pumpkin-doll/en">Pumpkin Doll</a>, <a href="/shallie/items/time-watch/en">Time Watch</a>, <a href="/shallie/items/mysterious-cloth/en">Mysterious Cloth</a>, <a href="/shallie/items/medical-solution/en">Medical Solution</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/the-legendary-traveler">The Legendary Traveler</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/the-legendary-traveler/en">The Legendary Traveler</a> </i> </td>
 <td> Harry's Shop </td>
-<td> <a href="/shallie/items/travel-gate">Travel Gate</a>, <a href="/shallie/items/treasure-grimoire">Treasure Grimoire</a>, <a href="/shallie/items/spirit-belt">Spirit Belt</a>, <a href="/shallie/items/gold-coin-of-fortune">Gold Coin of Fortune</a>, <a href="/shallie/items/goddess-shield">Goddess Shield</a>
+<td> <a href="/shallie/items/travel-gate/en">Travel Gate</a>, <a href="/shallie/items/treasure-grimoire/en">Treasure Grimoire</a>, <a href="/shallie/items/spirit-belt/en">Spirit Belt</a>, <a href="/shallie/items/gold-coin-of-fortune/en">Gold Coin of Fortune</a>, <a href="/shallie/items/goddess-shield/en">Goddess Shield</a>
 </td></tr>
 <tr>
 <td> <i>Armor - Batch 4 </i> </td>
 <td> - </td>
-<td> <a href="/shallie/items/combat-shirt">Combat Shirt</a>, <a href="/shallie/items/riveted-shirt">Riveted Shirt</a>, <a href="/shallie/items/splint-mail">Splint Mail</a>, <a href="/shallie/items/meteorite-armor">Meteorite Armor</a>, <a href="/shallie/items/dragoon-coat">Dragoon Coat</a>
+<td> <a href="/shallie/items/combat-shirt/en">Combat Shirt</a>, <a href="/shallie/items/riveted-shirt/en">Riveted Shirt</a>, <a href="/shallie/items/splint-mail/en">Splint Mail</a>, <a href="/shallie/items/meteorite-armor/en">Meteorite Armor</a>, <a href="/shallie/items/dragoon-coat/en">Dragoon Coat</a>
 </td></tr>
 </table>
 

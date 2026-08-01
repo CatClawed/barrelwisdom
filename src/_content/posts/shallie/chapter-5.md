@@ -3,6 +3,7 @@ title: "Chapter 5"
 pubDate: "2021-06-25"
 updatedDate: "2025-11-24"
 description: "Walkthrough/guide for Chapter 5, including events, recipes, and other things of note."
+mainClass: "medium-page"
 ---
 
 <table class="tbl-min borders">
@@ -85,7 +86,7 @@ description: "Walkthrough/guide for Chapter 5, including events, recipes, and ot
 </td></tr>
 <tr>
 <td> <i>Synthesize daily goods </i> </td>
-<td> (After above) Synth <a href="/shallie/categories/sundry">(Sundry)</a> </td>
+<td> (After above) Synth <a href="/shallie/categories/sundry/en">(Sundry)</a> </td>
 <td> Synthesis Exp +10
 </td></tr>
 <tr>
@@ -112,25 +113,25 @@ description: "Walkthrough/guide for Chapter 5, including events, recipes, and ot
 </th></tr>
 <tr>
 <td rowspan="2"> <i>I want new equipment </i> </td>
-<td> Imbue <a href="/shallie/items/resonance-chime">Resonance Chime</a> / <a href="/shallie/items/stylish-broom">Stylish Broom</a> </td>
+<td> Imbue <a href="/shallie/items/resonance-chime/en">Resonance Chime</a> / <a href="/shallie/items/stylish-broom/en">Stylish Broom</a> </td>
 <td rowspan="2"> Synthesis Exp +10
 </td></tr>
 <tr>
-<td> OR Imbue <a href="/shallie/items/leather-shirt">Leather Shirt</a>
+<td> OR Imbue <a href="/shallie/items/leather-shirt/en">Leather Shirt</a>
 </td></tr>
 <tr>
 <td rowspan="4"> <i>Prepare equipment for all </i> </td>
-<td> Imbue <a href="/shallie/items/convenient-broom">Convenient Broom</a> / <a href="/shallie/items/resonance-chime">Resonance Chime</a> </td>
+<td> Imbue <a href="/shallie/items/convenient-broom/en">Convenient Broom</a> / <a href="/shallie/items/resonance-chime/en">Resonance Chime</a> </td>
 <td rowspan="4"> Synthesis Exp +20
 </td></tr>
 <tr>
-<td> OR Imbue <a href="/shallie/items/demon-ore-sword">Demon Ore Sword</a>
+<td> OR Imbue <a href="/shallie/items/demon-ore-sword/en">Demon Ore Sword</a>
 </td></tr>
 <tr>
-<td> OR Imbue <a href="/shallie/items/armored-bunker">Armored Bunker</a> / <a href="/shallie/items/elemental-charm">Elemental Charm</a>
+<td> OR Imbue <a href="/shallie/items/armored-bunker/en">Armored Bunker</a> / <a href="/shallie/items/elemental-charm/en">Elemental Charm</a>
 </td></tr>
 <tr>
-<td> OR Imbue <a href="/shallie/items/sword-manipulation-ring">Sword Manipulation Ring</a> / <a href="/shallie/items/silver-twin-swords">Silver Twin Swords</a>
+<td> OR Imbue <a href="/shallie/items/sword-manipulation-ring/en">Sword Manipulation Ring</a> / <a href="/shallie/items/silver-twin-swords/en">Silver Twin Swords</a>
 </td></tr>
 <tr>
 <td> <i>Want to do some Synthesis </i> </td>
@@ -207,7 +208,7 @@ description: "Walkthrough/guide for Chapter 5, including events, recipes, and ot
 <tr>
 <td rowspan="2"> Gerhard </td>
 <td> Corporation </td>
-<td> (Stera) Linca wants a <a href="/shallie/items/noble-suit">Noble Suit</a>
+<td> (Stera) Linca wants a <a href="/shallie/items/noble-suit/en">Noble Suit</a>
 </td></tr>
 <tr>
 <td> Corporation </td>
@@ -324,7 +325,7 @@ description: "Walkthrough/guide for Chapter 5, including events, recipes, and ot
 <tr>
 <td rowspan="5"> Wilbell </td>
 <td> Union </td>
-<td> She requests <a href="/shallie/items/leichester-meteorite-iron">Leichester Meteorite Iron</a> x4 through Raoul
+<td> She requests <a href="/shallie/items/leichester-meteorite-iron/en">Leichester Meteorite Iron</a> x4 through Raoul
 </td></tr>
 <tr>
 <td> Edge of Town </td>
@@ -383,34 +384,34 @@ description: "Walkthrough/guide for Chapter 5, including events, recipes, and ot
 <th colspan="3"> Recipes
 </th></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/next-generation-craftwork">Next Generation Craftwork</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/next-generation-craftwork/en">Next Generation Craftwork</a> </i> </td>
 <td> Linca's Shop </td>
-<td> <a href="/shallie/items/barrel">Barrel</a>, <a href="/shallie/items/iron-clay">Iron Clay</a>, <a href="/shallie/items/holinic-steel-plate">Holinic Steel Plate</a>, <a href="/shallie/items/glass-tiara">Glass Tiara</a>, <a href="/shallie/items/feather-ornament">Feather Ornament</a>
+<td> <a href="/shallie/items/barrel/en">Barrel</a>, <a href="/shallie/items/iron-clay/en">Iron Clay</a>, <a href="/shallie/items/holinic-steel-plate/en">Holinic Steel Plate</a>, <a href="/shallie/items/glass-tiara/en">Glass Tiara</a>, <a href="/shallie/items/feather-ornament/en">Feather Ornament</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/book-of-dragon-divination">Book of Dragon Divination</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/book-of-dragon-divination/en">Book of Dragon Divination</a> </i> </td>
 <td> Linca's Shop </td>
-<td> <a href="/shallie/items/crystal-ball">Crystal Ball</a>, <a href="/shallie/items/angel-powder">Angel Powder</a>, <a href="/shallie/items/dragon-s-secret">Dragon's Secret</a>, <a href="/shallie/items/supplement-white">Supplement - White</a>, <a href="/shallie/items/supplement-black">Supplement - Black</a>
+<td> <a href="/shallie/items/crystal-ball/en">Crystal Ball</a>, <a href="/shallie/items/angel-powder/en">Angel Powder</a>, <a href="/shallie/items/dragon-s-secret/en">Dragon's Secret</a>, <a href="/shallie/items/supplement-white/en">Supplement - White</a>, <a href="/shallie/items/supplement-black/en">Supplement - Black</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/tempered-materials">Tempered Materials</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/tempered-materials/en">Tempered Materials</a> </i> </td>
 <td> Linca's Shop </td>
-<td> <a href="/shallie/items/shuvea-metal">Shuvea Metal</a>, <a href="/shallie/items/alto-metal">Alto Metal</a>, <a href="/shallie/items/mixed-wood">Mixed Wood</a>, <a href="/shallie/items/alto-wood">Alto Wood</a>
+<td> <a href="/shallie/items/shuvea-metal/en">Shuvea Metal</a>, <a href="/shallie/items/alto-metal/en">Alto Metal</a>, <a href="/shallie/items/mixed-wood/en">Mixed Wood</a>, <a href="/shallie/items/alto-wood/en">Alto Wood</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/dusk-nutrition-first-edition">Dusk Nutrition - First Edition</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/dusk-nutrition-first-edition/en">Dusk Nutrition - First Edition</a> </i> </td>
 <td> Escha's Shop </td>
-<td> <a href="/shallie/items/weight-stone">Weight Stone</a>, <a href="/shallie/items/smoked-meat">Smoked Meat</a>, <a href="/shallie/items/fruit-ration">Fruit Ration</a>, <a href="/shallie/items/dragon-cup">Dragon Cup</a>, <a href="/shallie/items/plant-fertilizer">Plant Fertilizer</a>
+<td> <a href="/shallie/items/weight-stone/en">Weight Stone</a>, <a href="/shallie/items/smoked-meat/en">Smoked Meat</a>, <a href="/shallie/items/fruit-ration/en">Fruit Ration</a>, <a href="/shallie/items/dragon-cup/en">Dragon Cup</a>, <a href="/shallie/items/plant-fertilizer/en">Plant Fertilizer</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/central-style-smithing-guide">Central Style Smithing Guide</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/central-style-smithing-guide/en">Central Style Smithing Guide</a> </i> </td>
 <td> Escha's Shop </td>
-<td> <a href="/shallie/items/dark-iron">Dark Iron</a>, <a href="/shallie/items/holinic">Holinic</a>, <a href="/shallie/items/gauntlet">Gauntlet</a>, <a href="/shallie/items/metal-boots">Metal Boots</a>
+<td> <a href="/shallie/items/dark-iron/en">Dark Iron</a>, <a href="/shallie/items/holinic/en">Holinic</a>, <a href="/shallie/items/gauntlet/en">Gauntlet</a>, <a href="/shallie/items/metal-boots/en">Metal Boots</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/walking-in-dusk-continuation">Walking in Dusk - Continuation</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/walking-in-dusk-continuation/en">Walking in Dusk - Continuation</a> </i> </td>
 <td> Escha's Shop </td>
-<td> <a href="/shallie/items/globe">Globe</a>, <a href="/shallie/items/traveler-s-ration">Traveler's Ration</a>, <a href="/shallie/items/ancient-power-belt">Ancient Power Belt</a>
+<td> <a href="/shallie/items/globe/en">Globe</a>, <a href="/shallie/items/traveler-s-ration/en">Traveler's Ration</a>, <a href="/shallie/items/ancient-power-belt/en">Ancient Power Belt</a>
 </td></tr>
 </table>
 </div>
@@ -420,39 +421,39 @@ description: "Walkthrough/guide for Chapter 5, including events, recipes, and ot
 <th colspan="3"> Recipes
 </th></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/how-to-make-tarts">How to Make Tarts</a> </i> </td>
-<td> Buy <a href="/shallie/items/colseit-apple">Colseit Apple</a> x10 </td>
-<td> <a href="/shallie/items/apple-tart">Apple Tart</a>
+<td> <i><a href="/shallie/recipe-books/how-to-make-tarts/en">How to Make Tarts</a> </i> </td>
+<td> Buy <a href="/shallie/items/colseit-apple/en">Colseit Apple</a> x10 </td>
+<td> <a href="/shallie/items/apple-tart/en">Apple Tart</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/how-to-make-tarts-revision">How to Make Tarts - Revision</a> </i> </td>
-<td> Make <a href="/shallie/items/apple-tart">Apple Tart</a> x2 </td>
-<td> <a href="/shallie/items/fruit-tart">Fruit Tart</a>
+<td> <i><a href="/shallie/recipe-books/how-to-make-tarts-revision/en">How to Make Tarts - Revision</a> </i> </td>
+<td> Make <a href="/shallie/items/apple-tart/en">Apple Tart</a> x2 </td>
+<td> <a href="/shallie/items/fruit-tart/en">Fruit Tart</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/searching-for-lost-items">Searching For Lost Items</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/searching-for-lost-items/en">Searching For Lost Items</a> </i> </td>
 <td> Event - Teo (Stera) </td>
-<td> <a href="/shallie/items/dowsing-rod">Dowsing Rod</a>
+<td> <a href="/shallie/items/dowsing-rod/en">Dowsing Rod</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/bait-production-memo">Bait Production Memo</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/bait-production-memo/en">Bait Production Memo</a> </i> </td>
 <td> Event (Lotte) </td>
-<td> <a href="/shallie/items/handmade-bait">Handmade Bait</a>
+<td> <a href="/shallie/items/handmade-bait/en">Handmade Bait</a>
 </td></tr>
 <tr>
 <td> <i>Eyedrops of Truth </i> </td>
 <td> Jurie Events </td>
-<td> <a href="/shallie/items/eyedrops-of-truth">Eyedrops of Truth</a>
+<td> <a href="/shallie/items/eyedrops-of-truth/en">Eyedrops of Truth</a>
 </td></tr>
 <tr>
 <td> <i>Weapons - DLC </i> </td>
 <td> - </td>
-<td> <a href="/shallie/items/sky-alchemy-staff">Sky Alchemy Staff</a>, <a href="/shallie/items/management-board">Management Board</a>
+<td> <a href="/shallie/items/sky-alchemy-staff/en">Sky Alchemy Staff</a>, <a href="/shallie/items/management-board/en">Management Board</a>
 </td></tr>
 <tr>
 <td> <i>Armor - Batch 3 </i> </td>
 <td> - </td>
-<td> <a href="/shallie/items/leather-shirt">Leather Shirt</a>, <a href="/shallie/items/fur-shirt">Fur Shirt</a>, <a href="/shallie/items/holinic-full-metal">Holinic Full Metal</a>, <a href="/shallie/items/scale-plate">Scale Plate</a>, <a href="/shallie/items/gold-embroidered-coat">Gold Embroidered Coat</a>
+<td> <a href="/shallie/items/leather-shirt/en">Leather Shirt</a>, <a href="/shallie/items/fur-shirt/en">Fur Shirt</a>, <a href="/shallie/items/holinic-full-metal/en">Holinic Full Metal</a>, <a href="/shallie/items/scale-plate/en">Scale Plate</a>, <a href="/shallie/items/gold-embroidered-coat/en">Gold Embroidered Coat</a>
 </td></tr>
 </table></div></div>
 
@@ -480,29 +481,29 @@ This set is somewhat overkill, but it'll (sort of) get you through one of the ha
 
  <div class="card spacer">
  <h4>PP Boosting Item</h4>
-<ul><li> Create a <a href="/shallie/items/honey">Honey</a> using an Ancient Map. Keep <a href="/shallie/properties/pp-frame-expansion">PP Frame Expansion</a>.</li>
-<li> Now make Supplement - Green using a Cactus Palm and Honey. Use the Property Lv+ skill (this will fuse with Destructive Power+ on the Cactus Palm), and you might as well Attribute Absorb too. Keep both PP expansions and <a href="/shallie/properties/big-destructive-power">Big Destructive Power</a>.</li>
+<ul><li> Create a <a href="/shallie/items/honey/en">Honey</a> using an Ancient Map. Keep <a href="/shallie/properties/pp-frame-expansion/en">PP Frame Expansion</a>.</li>
+<li> Now make Supplement - Green using a Cactus Palm and Honey. Use the Property Lv+ skill (this will fuse with Destructive Power+ on the Cactus Palm), and you might as well Attribute Absorb too. Keep both PP expansions and <a href="/shallie/properties/big-destructive-power/en">Big Destructive Power</a>.</li>
 <li> Create a Plant Oil with PP Frame Expansion &amp; PP +7.</li></ul>
  </div>
 
 <div class="grid grid-space spacer">
  <div class="grid-6 card">
- <h4><a href="/shallie/items/silkis-feather">Silkis Feather</a></h4>
-<ul><li> Make a <a href="/shallie/items/armored-bunker">Armored Bunker</a>. You will need to either toss in a Holinica Ore or get the property through <a href="/shallie/items/holinicait">Holinicait</a>. Keep <a href="/shallie/properties/attack-defense-enhance">Attack &amp; Defense Enhance</a>.</li>
-<li> Toss directly into <a href="/shallie/items/supplement-red">Supplement - Red</a>. Use the PP Boosting Plant Oil from earlier. Keep Attack &amp; Defense Enhance, Transfer PP +7, PP Frame Expansion.</li>
-<li> Transfer to <a href="/shallie/items/zettel">Zettel</a>, then <a href="/shallie/items/honey">Honey</a>, then <a href="/shallie/items/handspun-rabbit-yarn">Handspun Rabbit Yarn</a>.</li>
-<li> Create a <a href="/shallie/items/supplement-yellow">Supplement - Yellow</a> using Red Clay. Keep Speed +5.</li>
-<li> Transfer property directly to <a href="/shallie/items/plant-oil">Plant Oil</a>.</li>
-<li> Make a Silkis Feather using that Plant Oil and <a href="/shallie/items/sand-runner-tailfeather">Sand Runner Tailfeather</a>. Use Property Lv+. Keep <a href="/shallie/properties/speed-enhance">Speed Enhance</a> and <a href="/shallie/properties/defense-5">Defense +5</a>.</li>
-<li> Imbue a <a href="/shallie/items/gold-embroidered-coat">Gold Embroidered Coat</a> using that Silkis Feather and your Handspun Rabbit Yarn. Use Property Lv+. Keep <a href="/shallie/properties/stat-enhance">Stat Enhance</a>. See why you need PP boosting?</li>
-<li> Make a Silkis Feather using that Gold Embroidered Coat, Slag Cable (so you can use Cost Down), and Honey. Keep <a href="/shallie/properties/stat-enhance">Stat Enhance</a> and <a href="/shallie/properties/attack-defense-enhance">Attack &amp; Defense Enhance</a>.</li>
+ <h4><a href="/shallie/items/silkis-feather/en">Silkis Feather</a></h4>
+<ul><li> Make a <a href="/shallie/items/armored-bunker/en">Armored Bunker</a>. You will need to either toss in a Holinica Ore or get the property through <a href="/shallie/items/holinicait/en">Holinicait</a>. Keep <a href="/shallie/properties/attack-defense-enhance/en">Attack &amp; Defense Enhance</a>.</li>
+<li> Toss directly into <a href="/shallie/items/supplement-red/en">Supplement - Red</a>. Use the PP Boosting Plant Oil from earlier. Keep Attack &amp; Defense Enhance, Transfer PP +7, PP Frame Expansion.</li>
+<li> Transfer to <a href="/shallie/items/zettel/en">Zettel</a>, then <a href="/shallie/items/honey/en">Honey</a>, then <a href="/shallie/items/handspun-rabbit-yarn/en">Handspun Rabbit Yarn</a>.</li>
+<li> Create a <a href="/shallie/items/supplement-yellow/en">Supplement - Yellow</a> using Red Clay. Keep Speed +5.</li>
+<li> Transfer property directly to <a href="/shallie/items/plant-oil/en">Plant Oil</a>.</li>
+<li> Make a Silkis Feather using that Plant Oil and <a href="/shallie/items/sand-runner-tailfeather/en">Sand Runner Tailfeather</a>. Use Property Lv+. Keep <a href="/shallie/properties/speed-enhance/en">Speed Enhance</a> and <a href="/shallie/properties/defense-5/en">Defense +5</a>.</li>
+<li> Imbue a <a href="/shallie/items/gold-embroidered-coat/en">Gold Embroidered Coat</a> using that Silkis Feather and your Handspun Rabbit Yarn. Use Property Lv+. Keep <a href="/shallie/properties/stat-enhance/en">Stat Enhance</a>. See why you need PP boosting?</li>
+<li> Make a Silkis Feather using that Gold Embroidered Coat, Slag Cable (so you can use Cost Down), and Honey. Keep <a href="/shallie/properties/stat-enhance/en">Stat Enhance</a> and <a href="/shallie/properties/attack-defense-enhance/en">Attack &amp; Defense Enhance</a>.</li>
 <li> Note the PP costs (18). You'll absolutely need both PP Frame Expansion and Transfer PP +7 in the future, which gives you 25 PP.</li></ul>
  </div>
  <div class="grid-6 card">
- <h4><a href="/shallie/items/holinicait">Holinicait</a> / <a href=
-"/shallie/items/ingot">Ingot</a></h4>
-<ul><li> Take that Silkis Feather and toss everything on it into a <a href="/shallie/items/stylish-broom">Stylish Broom</a>. Be sure to include PP Boosting stuff on your Palma Wood.</li>
-<li> Toss that Stylish Broom into a <a href="/shallie/items/fire-lord-s-charcoal">Fire Lord's Charcoal</a>. Use a PP Boosting Plant Oil, and be sure to Number/Count+.</li>
+ <h4><a href="/shallie/items/holinicait/en">Holinicait</a> / <a href=
+"/shallie/items/ingot/en">Ingot</a></h4>
+<ul><li> Take that Silkis Feather and toss everything on it into a <a href="/shallie/items/stylish-broom/en">Stylish Broom</a>. Be sure to include PP Boosting stuff on your Palma Wood.</li>
+<li> Toss that Stylish Broom into a <a href="/shallie/items/fire-lord-s-charcoal/en">Fire Lord's Charcoal</a>. Use a PP Boosting Plant Oil, and be sure to Number/Count+.</li>
 <li> Transfer to all the Ingots you like. Ingots are only necessary for Miruca + Holinic Full Metal, so just one Holinica synth will get you what you need. For everything else, there are supplements.</li>
 <li> For PP, put the relevant properties onto a Lightning Bomb, disassemble with Miruca. Old Stones are fantastic. Remember to Cost Down on it.</li></ul>
  </div>
@@ -510,7 +511,7 @@ This set is somewhat overkill, but it'll (sort of) get you through one of the ha
 
 <div class="card spacer">
  <h4>Further Notes</h4>
-<ul><li> If you have <a href="/shallie/items/supplement-black">Supplement - Black</a>, you can directly toss in a <a href="/shallie/items/mantis-blade">Mantis Blade</a> for <a href="/shallie/items/barrage-attack">Barrage Attack</a>. Not a big deal if you don't have it.</li>
+<ul><li> If you have <a href="/shallie/items/supplement-black/en">Supplement - Black</a>, you can directly toss in a <a href="/shallie/items/mantis-blade/en">Mantis Blade</a> for <a href="/shallie/items/barrage-attack/en">Barrage Attack</a>. Not a big deal if you don't have it.</li>
 <li> This only applies to weapons. Go for it if you want.</li>
 <li> I leave third properties free for you to decide. I already got you two badass ones.</li>
 <li> You can try to fuse your own Defense Enhances/Speed Enhances, whatever you like, or you can just go with whatever is native to the equipment via Property Lv+.</li>
@@ -527,33 +528,33 @@ This set is somewhat overkill, but it'll (sort of) get you through one of the ha
 Always include a PP Boosting Item. Always. From Plant Oil, this should be a trivial process to get onto anything you need.
 </p><p>You should aim to get effects of all elements. Higher effects are not necessarily better, and if you don't have Supplement - Black, water attributes are tough. Here are my notes:
 </p>
-<ul><li> <a href="/shallie/items/resonance-chime">Resonance Chime</a> / <a href="/shallie/items/sword-manipulation-ring">Sword Manipulation Ring</a> / <a href="/shallie/items/silver-twin-swords">Silver Twin Swords</a> (if no Supplement - Black, otherwise just use that and ignore me!)
+<ul><li> <a href="/shallie/items/resonance-chime/en">Resonance Chime</a> / <a href="/shallie/items/sword-manipulation-ring/en">Sword Manipulation Ring</a> / <a href="/shallie/items/silver-twin-swords/en">Silver Twin Swords</a> (if no Supplement - Black, otherwise just use that and ignore me!)
 <ul><li> LV 35+</li>
-<li> Make <a href="/shallie/items/water-crystal">Water Crystal</a>, get the LV3 Property on it. Transfer <a href="/shallie/properties/elemental-attribute-w">Elemental Attribute - Water</a> to <a href="/shallie/items/media-book">Media Book</a>, then disassemble with Miruca for a <a href="/shallie/items/zettel">Zettel</a>.</li>
+<li> Make <a href="/shallie/items/water-crystal/en">Water Crystal</a>, get the LV3 Property on it. Transfer <a href="/shallie/properties/elemental-attribute-w/en">Elemental Attribute - Water</a> to <a href="/shallie/items/media-book/en">Media Book</a>, then disassemble with Miruca for a <a href="/shallie/items/zettel/en">Zettel</a>.</li>
 <li> Zettel -&gt; Honey -&gt; Supplement -&gt; Plant Oil -&gt; Palma Board (Stera)</li>
 <li> From the Supplement, transfer to a Lightning Bomb, then disassemble to Old Stone (Wilbell).</li>
 <li> From the Plant Oil, make an Abrasive (Jurie)</li></ul></li></ul>
-<ul><li> <a href="/shallie/items/stylish-broom">Stylish Broom</a>
-<ul><li> <a href="/shallie/items/verdant-taun">Verdant Taun</a> is useful. Or Umbrella Tree Strawberry.</li>
+<ul><li> <a href="/shallie/items/stylish-broom/en">Stylish Broom</a>
+<ul><li> <a href="/shallie/items/verdant-taun/en">Verdant Taun</a> is useful. Or Umbrella Tree Strawberry.</li>
 <li> Press square (or equivalent). Move Verdant Taun to the third slot. Give it Order+ 3. You win.</li></ul></li></ul>
-<ul><li> <a href="/shallie/items/elemental-charm">Elemental Charm</a>
+<ul><li> <a href="/shallie/items/elemental-charm/en">Elemental Charm</a>
 <ul><li> The Giant Fossil at Rose's Shop should prove helpful.</li>
 <li> Use that Fire Lord's Charcoal from earlier, toss into Supplement - Red. If you don't want to use that directly, toss it into a Sea Clan's Charm.</li></ul></li></ul>
-<ul><li> <a href="/shallie/items/flame-bunker">Flame Bunker</a> / <a href="/shallie/items/demon-ore-sword">Demon Ore Sword</a>
+<ul><li> <a href="/shallie/items/flame-bunker/en">Flame Bunker</a> / <a href="/shallie/items/demon-ore-sword/en">Demon Ore Sword</a>
 <ul><li> You can use the Old Stone (for Wilbell) trick above.</li>
 <li> Or you can buy Giant Triangular Fangs from Rose.</li></ul></li></ul>
  </div>
 <div class="grid-6 card">
  <h4>Armor</h4>
-<ul><li> <a href="/shallie/items/fur-shirt">Fur Shirt</a> (Stera/Lotte... and everyone else, if you want)
-<ul><li> <a href="/shallie/items/giant-scale">Giant Scale</a> and <a href="/shallie/items/slag-cable">Slag Cable</a> should be handy. Something with earth would be good as a final ingredient.</li></ul></li></ul>
-<ul><li> <a href="/shallie/items/leather-shirt">Leather Shirt</a> (Stera/Lotte... and everyone else, if you want)
+<ul><li> <a href="/shallie/items/fur-shirt/en">Fur Shirt</a> (Stera/Lotte... and everyone else, if you want)
+<ul><li> <a href="/shallie/items/giant-scale/en">Giant Scale</a> and <a href="/shallie/items/slag-cable/en">Slag Cable</a> should be handy. Something with earth would be good as a final ingredient.</li></ul></li></ul>
+<ul><li> <a href="/shallie/items/leather-shirt/en">Leather Shirt</a> (Stera/Lotte... and everyone else, if you want)
 <ul><li> High wind effects recommended. Herbal Shirt is more convenient. High Collar Shirt will net you the higher (better) wind effects.</li>
 <li> For water effect, you'll need the LV 35+ trick above, and you'll want Elemental Attribute - Water on probably Leather and/or Plant Oil.</li></ul></li></ul>
-<ul><li> <a href="/shallie/items/holinic-full-metal">Holinic Full Metal</a> (Kortes/Homura/Miruca)
+<ul><li> <a href="/shallie/items/holinic-full-metal/en">Holinic Full Metal</a> (Kortes/Homura/Miruca)
 <ul><li> This is extra costly. To soften the blow, let's use Old Stone so you can use Number+.</li>
 <li> (LV 35+) If you have Supplement - Black, then... Burning Gas (get LV3 property, Elemental Attribute - Wind) -&gt; Supplement Red -&gt; Lightning Bomb, disassemble to Old Stone.</li></ul></li></ul>
-<ul><li> <a href="/shallie/items/gold-embroidered-coat">Gold Embroidered Coat</a> (Jurie/Wilbell)
+<ul><li> <a href="/shallie/items/gold-embroidered-coat/en">Gold Embroidered Coat</a> (Jurie/Wilbell)
 <ul><li> (LV 35+) From the Honey listed with Elemental Attribute - Water, make a Handspun Rabbit Yarn. Imbue an Agile Coat.</li>
 <li> What about Fire, you ask? It's impossible.</li></ul></li></ul>
  </div>
@@ -561,9 +562,9 @@ Always include a PP Boosting Item. Always. From Plant Oil, this should be a triv
 
 <div class="card">
  <h4>Attack Items</h4>
-<ul><li> Using the Plant Oil trick, get <a href="/shallie/properties/big-destructive-power">Big Destructive Power</a> and <a href="/shallie/properties/critical">Critical</a> on whatever Supplements you like. If you want a third property, pick one now.</li>
-<li> If you super care (you really shouldn't), you can get <a href="/shallie/properties/ultimate-destruct-power">Ultimate Destructive Power</a> at level 35+... if you can make <a href="/shallie/items/burning-gas">Burning Gas</a>, anyway.</li>
-<li> Make a <a href="/shallie/items/lava-cube">Lava Cube</a> using Phlogiston, Bomb, PP Boosting Plant Oil, and Supplement - White/Red. Be sure to get all three Properties and reduce the size of the item. You'll get <a href="/shallie/properties/scorching-earth">Scorching Earth</a> as a property. You can also try carrying <a href="/shallie/properties/carries-heat">Carries Heat</a> from a <a href="/shallie/items/bomb">Bomb</a>. It's actually one of the best debuffing properties in the game.</li>
-<li> Put some effort into an <a href="/shallie/items/ice-bomb">Ice Bomb</a>. It'll help you for the boss.</li>
+<ul><li> Using the Plant Oil trick, get <a href="/shallie/properties/big-destructive-power/en">Big Destructive Power</a> and <a href="/shallie/properties/critical/en">Critical</a> on whatever Supplements you like. If you want a third property, pick one now.</li>
+<li> If you super care (you really shouldn't), you can get <a href="/shallie/properties/ultimate-destruct-power/en">Ultimate Destructive Power</a> at level 35+... if you can make <a href="/shallie/items/burning-gas/en">Burning Gas</a>, anyway.</li>
+<li> Make a <a href="/shallie/items/lava-cube/en">Lava Cube</a> using Phlogiston, Bomb, PP Boosting Plant Oil, and Supplement - White/Red. Be sure to get all three Properties and reduce the size of the item. You'll get <a href="/shallie/properties/scorching-earth/en">Scorching Earth</a> as a property. You can also try carrying <a href="/shallie/properties/carries-heat/en">Carries Heat</a> from a <a href="/shallie/items/bomb/en">Bomb</a>. It's actually one of the best debuffing properties in the game.</li>
+<li> Put some effort into an <a href="/shallie/items/ice-bomb/en">Ice Bomb</a>. It'll help you for the boss.</li>
 <li> Unlike Escha &amp; Logy, this game doesn't really give you a ton of awesome usable item options. It actually nerfed a lot of stuff to the point that items are mostly best as debuffs/buffs/healing. Equipment is where you'll want to spend most of your time.</li></ul>
 </div>

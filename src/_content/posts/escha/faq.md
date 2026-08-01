@@ -13,7 +13,7 @@ description: "Answering all the most common questions."
 <li> Japanese voices are free DLC (Plus) or included (DX)</li>
 <li> You get to see friendship values</li>
 <li> Properties now display which item types they can be equipped to</li>
-<li> Three new bosses: <a href="/escha/monsters/thirsty-water-god">Thirsty Water God</a>, <a href="/escha/monsters/cursed-saber">Cursed Saber</a>, and <a href="/escha/monsters/rogue-guardian">Rogue Guardian</a></li></ul>
+<li> Three new bosses: <a href="/escha/monsters/thirsty-water-god/en">Thirsty Water God</a>, <a href="/escha/monsters/cursed-saber/en">Cursed Saber</a>, and <a href="/escha/monsters/rogue-guardian/en">Rogue Guardian</a></li></ul>
 
 <h2>Who should I start with?</h2>
 <p>While there are some odd rumors about Logy having a more "JRPG path", the two routes play out largely the same.
@@ -40,8 +40,8 @@ description: "Answering all the most common questions."
 <p>Change your equipment. For instance, if you're in an endgame setup, try the crap you had at the beginning of the game.</p>
 
 <h2>Is anything missable?</h2>
-<p>There are three things of note. There is a monster, <a href="/escha/monsters/tracker">Tracker</a> in one of the final areas that can be missed.</p>
-<p>Without DLC in the original PS3 version, it is possible to miss the <a href="/escha/items/elixir-base" title="Elixir Base">Elixir Base</a> recipe from that same area in the PS3 version.</p>
+<p>There are three things of note. There is a monster, <a href="/escha/monsters/tracker/en">Tracker</a> in one of the final areas that can be missed.</p>
+<p>Without DLC in the original PS3 version, it is possible to miss the <a href="/escha/items/elixir-base/en" title="Elixir Base">Elixir Base</a> recipe from that same area in the PS3 version.</p>
 <p>Finally, Awin has time limited events. You will not struggle to see them as long as he is in your back row most of the game.</p>
 
 <h2>How should I manage friendship?</h2>

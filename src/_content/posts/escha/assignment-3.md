@@ -3,6 +3,7 @@ title: "Assignment 3"
 pubDate: "2021-06-17"
 updatedDate: "2025-11-24"
 description: "Guide for Assignment 3, including recipes, events, and other things of note."
+mainClass: "medium-page"
 ---
 
 <div class="grid">
@@ -15,10 +16,10 @@ description: "Guide for Assignment 3, including recipes, events, and other thing
 <td> Visit Withering Plains (Frontier Village)
 </td></tr>
 <tr>
-<td> Deliver <a href="/escha/items/purify-bottle">Purify Bottle</a> to Frontier Village
+<td> Deliver <a href="/escha/items/purify-bottle/en">Purify Bottle</a> to Frontier Village
 </td></tr>
 <tr>
-<td> Deliver <a href="/escha/items/apple-tart">Apple Tart</a> x2 or <a href="/escha/categories/food">(Food)</a> x10 to Frontier Village
+<td> Deliver <a href="/escha/items/apple-tart/en">Apple Tart</a> x2 or <a href="/escha/categories/food/en">(Food)</a> x10 to Frontier Village
 </td></tr>
 <tr>
 <td> <b>Requests </b> </td>
@@ -46,7 +47,7 @@ description: "Guide for Assignment 3, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td rowspan="3"> <b>Frontier Village </b> </td>
-<td> Slay <a href="/escha/monsters/mirage-element">Mirage Element</a> at Withering Plains (Plains Brook)
+<td> Slay <a href="/escha/monsters/mirage-element/en">Mirage Element</a> at Withering Plains (Plains Brook)
 </td></tr>
 <tr>
 <td> Gather at Muddy Lake.
@@ -68,7 +69,7 @@ description: "Guide for Assignment 3, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> <b>Armor with Effects </b> </td>
-<td> Make a <a href="/escha/items/cotton-shirt">Cotton Shirt</a> with <a href="/escha/effects/def-power-3">Def Power +3</a>. Capacitive Paper helps. You need wind.
+<td> Make a <a href="/escha/items/cotton-shirt/en">Cotton Shirt</a> with <a href="/escha/effects/def-power-3/en">Def Power +3</a>. Capacitive Paper helps. You need wind.
 </td></tr>
 <tr>
 <td> <b>Material Knowledge </b> </td>
@@ -76,19 +77,19 @@ description: "Guide for Assignment 3, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> <b>Handmade Pottery </b> </td>
-<td> Synth <a href="/escha/items/handmade-pottery">Handmade Pottery</a>
+<td> Synth <a href="/escha/items/handmade-pottery/en">Handmade Pottery</a>
 </td></tr>
 <tr>
 <td> <b>Piercing Electricity </b> </td>
-<td> Synth <a href="/escha/items/lightning-bomb">Lightning Bomb</a> with <a href="/escha/effects/piercing-damage">Piercing Damage</a>. It's the higher Earth effect.
+<td> Synth <a href="/escha/items/lightning-bomb/en">Lightning Bomb</a> with <a href="/escha/effects/piercing-damage/en">Piercing Damage</a>. It's the higher Earth effect.
 </td></tr>
 <tr>
 <td> <b>Ruins Slag </b> </td>
-<td> Slay the <a href="/escha/monsters/nano-slag">Nano-Slag</a> in Southern Ruins (Ruins Courtyard)
+<td> Slay the <a href="/escha/monsters/nano-slag/en">Nano-Slag</a> in Southern Ruins (Ruins Courtyard)
 </td></tr>
 <tr>
 <td> <b>Back Line Items </b> </td>
-<td> Use <a href="/escha/items/cup-of-life">Cup of Life</a> on back row; you need to press L1 to target the back
+<td> Use <a href="/escha/items/cup-of-life/en">Cup of Life</a> on back row; you need to press L1 to target the back
 </td></tr>
 <tr>
 <td> <b>Ruins Inspection </b> </td>
@@ -96,7 +97,7 @@ description: "Guide for Assignment 3, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> <b>Plains Subjugation </b> </td>
-<td> Slay <a href="/escha/monsters/mirage-element">Mirage Element</a>, <a href="/escha/monsters/amethyst-rat">Amethyst Rat</a>, and <a href="/escha/monsters/steel-skin">Steel Skin</a>
+<td> Slay <a href="/escha/monsters/mirage-element/en">Mirage Element</a>, <a href="/escha/monsters/amethyst-rat/en">Amethyst Rat</a>, and <a href="/escha/monsters/steel-skin/en">Steel Skin</a>
 </td></tr>
 <tr>
 <td> <b>Collect Glass Cores </b> </td>
@@ -104,11 +105,11 @@ description: "Guide for Assignment 3, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> <b>Upland Bear </b> </td>
-<td> Slay <a href="/escha/monsters/steel-skin">Steel Skin</a> at Upland Forest (Forest Atelier Ruins)
+<td> Slay <a href="/escha/monsters/steel-skin/en">Steel Skin</a> at Upland Forest (Forest Atelier Ruins)
 </td></tr>
 <tr>
 <td> <b>Ancient Charm </b> </td>
-<td> Synth <a href="/escha/items/glorious-note">Glorious Note</a>
+<td> Synth <a href="/escha/items/glorious-note/en">Glorious Note</a>
 </td></tr>
 <tr>
 <td> <b>Quantity Change </b> </td>
@@ -116,11 +117,11 @@ description: "Guide for Assignment 3, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> <b>Help the Village </b> </td>
-<td> Deliver <a href="/escha/items/distilled-water">Distilled Water</a> x3 to the guy at the Town Entrance
+<td> Deliver <a href="/escha/items/distilled-water/en">Distilled Water</a> x3 to the guy at the Town Entrance
 </td></tr>
 <tr>
 <td> <b>Glass Materials </b> </td>
-<td> Deliver <a href="/escha/items/glass-rod">Glass Rod</a> or <a href="/escha/items/glass-core">Glass Core</a> x4 to the Plaza
+<td> Deliver <a href="/escha/items/glass-rod/en">Glass Rod</a> or <a href="/escha/items/glass-core/en">Glass Core</a> x4 to the Plaza
 </td></tr>
 <tr>
 <td> <b>Apprentice Alchemist </b> </td>
@@ -160,7 +161,7 @@ description: "Guide for Assignment 3, including recipes, events, and other thing
 <td> [DLC] About finding rare items.
 </td></tr>
 <tr>
-<td> <a href="/escha/locations/upland-forest#atelier-garden-ruins">Upland Forest</a> </td>
+<td> <a href="/escha/locations/upland-forest/en#atelier-garden-ruins">Upland Forest</a> </td>
 <td> [DLC] Found something interesting
 </td></tr>
 <tr>
@@ -241,40 +242,40 @@ description: "Guide for Assignment 3, including recipes, events, and other thing
 <th colspan="3"> Recipes
 </th></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/forged-weapons">Forged Weapons</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/forged-weapons/en">Forged Weapons</a> </b> </td>
 <td> 1 assignment line </td>
-<td> <a href="/escha/items/golden-wing-staff">Golden Wing Staff</a>, <a href="/escha/items/glass-sabre">Glass Sabre</a>, <a href="/escha/items/graviton-gale">Graviton Gale</a>, <a href="/escha/items/aqua-talisman">Aqua Talisman</a>, <a href="/escha/items/silver-arm">Silver Arm</a>, <a href="/escha/items/medical-bag">Medical Bag</a>, <a href="/escha/items/cleaver">Cleaver</a>
+<td> <a href="/escha/items/golden-wing-staff/en">Golden Wing Staff</a>, <a href="/escha/items/glass-sabre/en">Glass Sabre</a>, <a href="/escha/items/graviton-gale/en">Graviton Gale</a>, <a href="/escha/items/aqua-talisman/en">Aqua Talisman</a>, <a href="/escha/items/silver-arm/en">Silver Arm</a>, <a href="/escha/items/medical-bag/en">Medical Bag</a>, <a href="/escha/items/cleaver/en">Cleaver</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/a-potter-s-life">A Potter's Life</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/a-potter-s-life/en">A Potter's Life</a> </b> </td>
 <td> 3 assignment lines </td>
-<td> <a href="/escha/items/living-bomb">Living Bomb</a>, <a href="/escha/items/handmade-pottery">Handmade Pottery</a>, <a href="/escha/items/iron-clay">Iron Clay</a>, <a href="/escha/items/iron-plate">Iron Plate</a>, <a href="/escha/items/lightning-bomb">Lightning Bomb</a>, <a href="/escha/items/glorious-note">Glorious Note</a>
+<td> <a href="/escha/items/living-bomb/en">Living Bomb</a>, <a href="/escha/items/handmade-pottery/en">Handmade Pottery</a>, <a href="/escha/items/iron-clay/en">Iron Clay</a>, <a href="/escha/items/iron-plate/en">Iron Plate</a>, <a href="/escha/items/lightning-bomb/en">Lightning Bomb</a>, <a href="/escha/items/glorious-note/en">Glorious Note</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/brutal-bombs">Brutal Bombs</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/brutal-bombs/en">Brutal Bombs</a> </b> </td>
 <td> 5 assignment lines </td>
-<td> <a href="/escha/items/dire-bomb">Dire Bomb</a>
+<td> <a href="/escha/items/dire-bomb/en">Dire Bomb</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/anatomy">Anatomy</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/anatomy/en">Anatomy</a> </b> </td>
 <td> Nio's Shop </td>
-<td> <a href="/escha/items/cup-of-life">Cup of Life</a>, <a href="/escha/items/preserved-tablet">Preserved Tablet</a>, <a href="/escha/items/reverent-incense">Reverent Incense</a>, <a href="/escha/items/sp-medicine">SP Medicine</a>, <a href="/escha/items/medicine-bread">Medicine Bread</a>
+<td> <a href="/escha/items/cup-of-life/en">Cup of Life</a>, <a href="/escha/items/preserved-tablet/en">Preserved Tablet</a>, <a href="/escha/items/reverent-incense/en">Reverent Incense</a>, <a href="/escha/items/sp-medicine/en">SP Medicine</a>, <a href="/escha/items/medicine-bread/en">Medicine Bread</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/shiny-zappy">Shiny Zappy</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/shiny-zappy/en">Shiny Zappy</a> </b> </td>
 <td> Katla's Shop </td>
-<td> <a href="/escha/items/powdered-glass">Powdered Glass</a>, <a href="/escha/items/glass-rod">Glass Rod</a>, <a href="/escha/items/glass-tiara">Glass Tiara</a>, <a href="/escha/items/polished-crystal">Polished Crystal</a>, <a href="/escha/items/capacitive-paper">Capacitive Paper</a>
+<td> <a href="/escha/items/powdered-glass/en">Powdered Glass</a>, <a href="/escha/items/glass-rod/en">Glass Rod</a>, <a href="/escha/items/glass-tiara/en">Glass Tiara</a>, <a href="/escha/items/polished-crystal/en">Polished Crystal</a>, <a href="/escha/items/capacitive-paper/en">Capacitive Paper</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/drought-supplies">Drought Supplies</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/drought-supplies/en">Drought Supplies</a> </b> </td>
 <td> Visit Frontier Village </td>
-<td> <a href="/escha/items/purify-bottle">Purify Bottle</a>
+<td> <a href="/escha/items/purify-bottle/en">Purify Bottle</a>
 </td></tr>
 </table>
 </div>
 <ul><li> Areas
-<ul><li> <a href="/escha/locations/withering-plains">Withering Plains</a></li>
-<li> Wrap up <a href="/escha/locations/upland-forest">Upland Forest</a> later on</li></ul></li></ul>
+<ul><li> <a href="/escha/locations/withering-plains/en">Withering Plains</a></li>
+<li> Wrap up <a href="/escha/locations/upland-forest/en">Upland Forest</a> later on</li></ul></li></ul>
 <p>The event list, again, assumes Threia first.
 </p><p>If you haven't already, be sure to buy the bigger basket from Marion. You may even consider upgrading twice, if you can afford it
 after recipes. Search Wisdom is something you want down the line, but Marching Skills is more or less a luxury you don't seriously

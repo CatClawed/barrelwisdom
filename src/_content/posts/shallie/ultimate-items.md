@@ -17,7 +17,7 @@ Honestly? If you aren't building a special set, just skip this entire section. M
 
 #### Living Trash Can for Mix Damage
 
-[Item Information](shallie/items/living-trash-can)
+[Item Information](/shallie/items/living-trash-can/en)
 
 If you want to use this for debuffs, Carries Heat is the best defense debuff so Defenselessness is pointless to slap on.
 
@@ -27,13 +27,13 @@ ALSO, effect doesn't matter. The properties do. This tutorial is largely for tho
 * Can 1: Deadly Strike, Curse of Powerlessness/Slowness/Defenselessness
 * Can 2: Consumes Soul, Curses
 
-Recommendation: Make [Ice Bombs](shallie/items/ice-bomb), disassemble to [Broken Item](shallie/items/broken-item). Make [Unbreakable Glass](shallie/items/unbreakable-glass), disassemble to [Trash](shallie/items/trash).
+Recommendation: Make [Ice Bombs](/shallie/items/ice-bomb/en), disassemble to [Broken Item](/shallie/items/broken-item/en). Make [Unbreakable Glass](/shallie/items/unbreakable-glass/en), disassemble to [Trash](/shallie/items/trash/en).
 
 * Broken Item x3
     * Skill Frame, Synthesis Chain
     * All three of your chosen properties across the other two
 * Trash x2
-    * Skill Frame, Synth Chain, [Elemental Attribute - Wind](shallie/properties/elemental-attribute-wd)
+    * Skill Frame, Synth Chain, [Elemental Attribute - Wind](/shallie/properties/elemental-attribute-wd/en)
     * PP Boosting
 * Old Stone
     * Skill Frame, Synth Chain, Elemental Attribute - Wind
@@ -53,7 +53,7 @@ Spam earth.
 
 #### Flying Board 
 
-[Item information](shallie/items/flying-board)
+[Item information](/shallie/items/flying-board/en)
 
 * Blitzkrieg Special / Reduces Critical / Unstable DMG
 * V1: Jumbo Blessing, Deadly Strike, Beast King's Blade / Ability Enhancement
@@ -64,14 +64,14 @@ Spam earth.
 
 This synthesis had me doing backflips trying to figure out how to have my cake... and eat it. V1 is courtesy of whimsic_al, V2 is what I came up with. You can get V2 properties on a 999 item, BUT you need to farm any PP boosting property (even +3 will work if you are sure to use the Efficiency skill) on Wind Rider Feather / King's Wing. My version is less painful than that.
 
-There are two essential properties -- [Synthesis Skill Increase](shallie/properties/synthesis-skill-increase) and [Synthesis Chain Increase](shallie/properties/synthesis-chain-increase). You will worship them.
+There are two essential properties -- [Synthesis Skill Increase](/shallie/properties/synthesis-skill-increase/en) and [Synthesis Chain Increase](/shallie/properties/synthesis-chain-increase/en). You will worship them.
 
 * Gravicrystal 1 - Synthesis Skill Frame Increase, Synthesis Chain Increase, Beast King's Blade. Use Efficiency to afford the 35 PP.
 * V1 Gravicrystal 2 - Jumbo Blessing, Deadly Strike
 * V2 Gravicrystal 2 - Property Super Enhance, PP Frame Maximization
     * Make sure your Gravicrystals average to 120 Effect (Medical Solution is helpful); you may need to make one with super high effect
 * Spirit Belt -  Skill Frame, Synthesis Chain, Traditional Soul
-* V1 Burning Gas - Skill Frame, Synthesis Chain, [Elemental Attribute - Water](shallie/properties/elemental-attribute-w) (gives the chain a boost)
+* V1 Burning Gas - Skill Frame, Synthesis Chain, [Elemental Attribute - Water](/shallie/properties/elemental-attribute-w/en) (gives the chain a boost)
 * V2 Burning Gas - Skill Frame, Synthesis Chain, Jumbo Blessing
 * King's Wing / Wind Rider Feather must be 115+ effect.
 
@@ -98,22 +98,22 @@ Replace Spirit Belt with Travel Gate. Spam Water (put relevant Order+ properties
 
 #### Talisman of Ancient Beasts
 
-[Item Information](shallie/items/talisman-of-ancient-beasts)
+[Item Information](/shallie/items/talisman-of-ancient-beasts/en)
 
 * Set 1: 1 slot, auto crit, 6 use
 ** Opens Wounds-M, MP Consume-M, Summon Beast King
 ** Property Super Enhance, Deadly Strike, Beast King's Blade (88 PP)
-** Items: Giant Fossil, Zettel ([Elemental Attribute - Fire](shallie/properties/elemental-attribute-f)), Handspun Rabbit Yarn (also fire), Dragon Scale Charm
+** Items: Giant Fossil, Zettel ([Elemental Attribute - Fire](/shallie/properties/elemental-attribute-f/en)), Handspun Rabbit Yarn (also fire), Dragon Scale Charm
 
 * Set 2: 9 slot, 6 use, max damage on broken targets
 ** Opens Wounds-M, MP Consume-M, Summon Beast King
 ** Property Super Enhance, Jumbo Blessing, Beast King's Blade (90 PP)
-** Items: Giant Fossil, Zettel ([Elemental Attribute - Fire](shallie/properties/elemental-attribute-f)), Handspun Rabbit Yarn (also fire), Dragon Scale Charm
+** Items: Giant Fossil, Zettel ([Elemental Attribute - Fire](/shallie/properties/elemental-attribute-f/en)), Handspun Rabbit Yarn (also fire), Dragon Scale Charm
 
 * Set 3: 9 slot, 4 use, max damage with ailments
 ** Opens Wounds-M, MP Consume-M, Summon Beast King, Triple Handicap
 ** Property Super Enhance, Jumbo Blessing, Beast King's Blade (90 PP)
-** Items: Giant Fossil (115+ effect), Zettel ([Elemental Attribute - Water](shallie/elemental-attribute-w)), Handspun Rabbit Yarn, Dragon Scale Charm
+** Items: Giant Fossil (115+ effect), Zettel ([Elemental Attribute - Water](/shallie/elemental-attribute-w)), Handspun Rabbit Yarn, Dragon Scale Charm
 ** Synthesis Chain Increase x3 required
 
 </div>
@@ -123,16 +123,16 @@ Replace Spirit Belt with Travel Gate. Spam Water (put relevant Order+ properties
 
 Generally synth with Stera, and you may need to get creative with synth chain and skill frame usage.
 
-* [Meteor](shallie/items/meteor), 1 slot 7 use
+* [Meteor](/shallie/items/meteor/en), 1 slot 7 use
     * Destruction Light, MP Consume-M, Falling Stars, Causes Ailments
     * Legendary Destructive Power, Deadly Strike, Beast King's Blade
     * Use Leichester Meteorite Iron, Oribis Spiritis, Shelbani Flower, Supplement - Rainbow
 
-* [Dimension Bomb](shallie/items/dimension-bomb), 1 slot, crap clearing
+* [Dimension Bomb](/shallie/items/dimension-bomb/en), 1 slot, crap clearing
     * Flames of Hell, MP Consume-M, Defense Down-L
     * Perpetual Motion, Deadly Strike, Mach Throw
 
-* [Weight Stone](shallie/items/weight-stone), 1 slot
+* [Weight Stone](/shallie/items/weight-stone/en), 1 slot
     * Blackout Attack, Quick Throw, Break Addition-M, Ignores Defense
     * Legendary Destructive Power, Deadly Strike, Beast King's Blade
     * Abrasive, Old Stone, Supplement Rainbow
@@ -148,16 +148,16 @@ Both items are worth making, though you don't need an uber Dragon Cup if you don
 
 #### Elixir
 
-[Item Information](shallie/items/elixir) @ MP Recovery-XL, Recover KO-L, Cure All, HP Recovery-XXL
+[Item Information](/shallie/items/elixir/en) @ MP Recovery-XL, Recover KO-L, Cure All, HP Recovery-XXL
 
 No matter what, you want Perpetual Motion and Auto Use, which is an infinite elixir that trips at 60% health. From there, you have some options.
-You can do Automatic Activation 50% so the elixir triggers at the slightest hint (though [Automatic Activation 30%](shallie/properties/automatic-activation-30) is a good, easy to find substitute).
-Or you can put something like [Goddess' Blessing](shallie/properties/goddess-blessing), [Approaches the Gods](shallie/properties/approaches-the-gods/), [Auto Material](shallie/properties/auto-material), whatever. I can guarantee that 60% is enough to keep you alive,
+You can do Automatic Activation 50% so the elixir triggers at the slightest hint (though [Automatic Activation 30%](/shallie/properties/automatic-activation-30/en) is a good, easy to find substitute).
+Or you can put something like [Goddess' Blessing](/shallie/properties/goddess-blessing/en), [Approaches the Gods](/shallie/properties/approaches-the-gods//en), [Auto Material](/shallie/properties/auto-material/en), whatever. I can guarantee that 60% is enough to keep you alive,
 but you need to keep an alchemist in the back at all times just in case, and you'll probably want damage reduction on your accessories.
 
 This recipe was stolen from Uryvichk.
 
-You'll want to get all your properties onto a Super Pure Water. Perpetual Motion is 33 PP, so watch out. If you don't have Perpetual Motion, you can make it via combining the [Recycle](shallie/properties/recycle) properties, or simply [Low Energy Mode](shallie/properties/low-energy-mode) + [Reuse Resources](shallie/properties/reuse-resources). Your PP boosting should probably be on the Travel Gate. As for Nectar Spring Water, you'll either need [Elemental Attribute - Wind](shallie/properties/elemental-attribute-wd) or Synthesis Skill Frame Increase. I roll with the latter in the tutorial. Make a [Dragon Cup](shallie/items/dragon-cup) and disassemble to get the Springwater of your dreams.
+You'll want to get all your properties onto a Super Pure Water. Perpetual Motion is 33 PP, so watch out. If you don't have Perpetual Motion, you can make it via combining the [Recycle](/shallie/properties/recycle/en) properties, or simply [Low Energy Mode](/shallie/properties/low-energy-mode/en) + [Reuse Resources](/shallie/properties/reuse-resources/en). Your PP boosting should probably be on the Travel Gate. As for Nectar Spring Water, you'll either need [Elemental Attribute - Wind](/shallie/properties/elemental-attribute-wd/en) or Synthesis Skill Frame Increase. I roll with the latter in the tutorial. Make a [Dragon Cup](/shallie/items/dragon-cup/en) and disassemble to get the Springwater of your dreams.
 
 Spam Earth.
 
@@ -166,7 +166,7 @@ Spam Earth.
 * Dunkelheit]  -- Attribute Absorb
 * Nectar Springwater -- Skill Frame+, Equip Frame-, Double Skill (if Stera)
 
-V2 of this item is courtesy whimsic_al. The properties are much the same, but perhaps consider [Good Medicine](shallie//properties/good-medicine).
+V2 of this item is courtesy whimsic_al. The properties are much the same, but perhaps consider [Good Medicine](/shallie//properties/good-medicine).
 
 It has Undead Power, Cure All, and HP Recovery-XXL. Can be useful on some sets. Requires Skill Frame on Mysterious Cloth and same Springwater as above.
 
@@ -183,7 +183,7 @@ Spam earth.
 
 #### Dragon Cup
 
-[Item Information](shallie/items/dragon-cup) @ Recover KO-XL, HP & MP Recovery-XL.
+[Item Information](/shallie/items/dragon-cup/en) @ Recover KO-XL, HP & MP Recovery-XL.
 
 Works on back row and thus can be used to buff the back row. Level buff is +126.
 
@@ -207,7 +207,7 @@ Four Beasts is best for max damage sets. Otherwise, it can be replaced easily en
 
 #### Medicine of the Four Beasts
 
-[Item information](shallie/items/medicine-of-the-four-beasts)
+[Item information](/shallie/items/medicine-of-the-four-beasts/en)
 
 * Forbidden Power, Crit PWR Increase-L
 * Property Super Enhance, Jumbo Blessing, High Cost Enhance
@@ -234,7 +234,7 @@ Honestly? I used a very crummy version compared to this. But if you want max dam
 
 #### Traveler's Ration 
 
-[Item Information](shallie/items/traveler-s-ration)
+[Item Information](/shallie/items/traveler-s-ration/en)
 
 * 1 slot, 6 use
 * Quick Digestion, HP Regen-XL, Temp Stamina Up-L, Eat and Recover-XL
@@ -250,15 +250,15 @@ Outside of that, use Golden Apple and two 3-slot items of your choice. Spam wind
 
 #### Time Watch 
 
-[Item Information](shallie/items/time-watch)
+[Item Information](/shallie/items/time-watch/en)
 
 * Cure Slow, Quicken Action
-* Property Super Enhance, Cost Bonus, whatever (Perpetual Motion, [Item Clone](shallie/properties/item-clone), Soul Dwelling, etc.)
+* Property Super Enhance, Cost Bonus, whatever (Perpetual Motion, [Item Clone](/shallie/properties/item-clone/en), Soul Dwelling, etc.)
 * Alternatively, (instead of using Elixir) move your turn forward every time you're hit with Perpetual Motion, Auto Use, Automatic Activation 50%
 * 1 slot
 * Only get the hidden effect if you aren't using Medicine of the Four Beasts.
 
-An easy synth, honestly. Try [Double Foot Component](shallie/items/double-foot-component), [Glass Tube](shallie/items/glass-tube), [Old Stone](shallie/items/old-stone) x2. Move Old Stone to rear, add wind, late addition. Spam earth otherwise. If you use Skill Frame you get to do more stuff, but you can make it with just one Skill Frame. You'll also need to get [Elemental Attribute - Water](shallie/properties/elemental-attribute-w) somehow
+An easy synth, honestly. Try [Double Foot Component](/shallie/items/double-foot-component/en), [Glass Tube](/shallie/items/glass-tube/en), [Old Stone](/shallie/items/old-stone/en) x2. Move Old Stone to rear, add wind, late addition. Spam earth otherwise. If you use Skill Frame you get to do more stuff, but you can make it with just one Skill Frame. You'll also need to get [Elemental Attribute - Water](/shallie/properties/elemental-attribute-w/en) somehow
 if you intend to get the hidden effect. I have faith in you.
 
 </div>
@@ -266,10 +266,10 @@ if you intend to get the hidden effect. I have faith in you.
 
 #### Goddess Shield 
 
-[Item Information](shallie/items/goddess-shield)
+[Item Information](/shallie/items/goddess-shield/en)
 
 * Goddess' Protect-L, Defense Up-L
-* Property Super Enhance, Cost Bonus, whatever (Perpetual Motion, Soul Dwelling, [Crosses Time](shallie/properties/crosses-time), Item Clone)
+* Property Super Enhance, Cost Bonus, whatever (Perpetual Motion, Soul Dwelling, [Crosses Time](/shallie/properties/crosses-time/en), Item Clone)
 * Don't use the LV3 property, though. It's weak and overrides the more powerful effect on the item.
 * If you're using Medicine of the Four Beasts, don't get either Defense Up.
 
@@ -288,7 +288,7 @@ Lightning Bomb is always worth your time. The rest? Well, if you want.
 
 #### Debuff Lightning Bomb
 
-[Item Information](shallie/items/lightning-bomb)
+[Item Information](/shallie/items/lightning-bomb/en)
 
 * Blindness, Hinders Movement-M, Wind DMG-L, Attack Power-M
 * Property Super Enhance, Cost Bonus, and Carries Heat (56 PP).
@@ -309,12 +309,12 @@ Spam wind.
 
 #### Chain Building Lava Cube
 
-[Item Information](shallie/items/lava-cube)
+[Item Information](/shallie/items/lava-cube/en)
 
 This is a min damage set, so no 999 effect necessary. As close to 0 as possible is preferable.
 
 * Rain of Fire, Continuous Damage-S, MP Consume-S
-* Perpetual Motion, [Beast King's Blade](shallie/properties/beast-king-s-blade), [Steel Thorns](shallie/properties/steel-thorns) (48 PP) (BKB could be substituted with [Weight of Stones](shallie/properties/weight-of-stones), I think, as the point is for the extra hit.)
+* Perpetual Motion, [Beast King's Blade](/shallie/properties/beast-king-s-blade/en), [Steel Thorns](/shallie/properties/steel-thorns/en) (48 PP) (BKB could be substituted with [Weight of Stones](/shallie/properties/weight-of-stones/en), I think, as the point is for the extra hit.)
 * 15 hits per use. Since items get weaker and weaker with repeated use, you'll get min damage while adding tons to the chain.
 
 You need Skill Frame on one item.
@@ -331,23 +331,23 @@ Be sure to squeak in Equip Frame- in there somewhere.
 
 #### Globe
 
-[Item Information](shallie/items/globe)
+[Item Information](/shallie/items/globe/en)
 
 Lots of sets. Personally I haven't bothered with this, so these are whimsic_al's notes directly.
 
 * Force of Mountains, Weakens Legs-M, MP Consume-M, Attack Power Down-L
-* [Carries Heat](shallie/properties/carries-heat), [Carries Cold](shallie/properties/carries-cold), Consumes Soul (40 PP)
+* [Carries Heat](/shallie/properties/carries-heat/en), [Carries Cold](/shallie/properties/carries-cold/en), Consumes Soul (40 PP)
 * 1 slot, 7 use, multi target, 983 effect
 
-Basically, you need Skill Frame and Synth Chain on [Golden Blue Staff](shallie/items/golden-blue-staff) ([Magia Sumonitora](shallie/items/magia-sumonitora) can be a non-DLC substitute... with compromises), [Zettel](shallie/items/zettel), and [Sun Flower](shallie/items/sun-flower). Scatter the the properties and Traditional Soul as necessary.
+Basically, you need Skill Frame and Synth Chain on [Golden Blue Staff](/shallie/items/golden-blue-staff/en) ([Magia Sumonitora](/shallie/items/magia-sumonitora/en) can be a non-DLC substitute... with compromises), [Zettel](/shallie/items/zettel/en), and [Sun Flower](/shallie/items/sun-flower/en). Scatter the the properties and Traditional Soul as necessary.
 
 Set 2 is much the same, but it looks more like this:
 
 * Force of Mountains, Weakens Legs-M, MP Consume-S, Speed Down-L
-* [Tone of Exhaustion](shallie/properties/tone-of-exhaustion), Consumes Soul, Property Super Enhance (76 PP)
+* [Tone of Exhaustion](/shallie/properties/tone-of-exhaustion/en), Consumes Soul, Property Super Enhance (76 PP)
 
 This time, Magia Sumonitora can be used without penalty.
 
-You can also do a set like the first with Property Super Enhance, [Multi Enhance](shallie/properties/multi-enhance), [Carries Heat](shallie/properties/carries-heat) (62 PP)
+You can also do a set like the first with Property Super Enhance, [Multi Enhance](/shallie/properties/multi-enhance/en), [Carries Heat](/shallie/properties/carries-heat/en) (62 PP)
 
 </div>

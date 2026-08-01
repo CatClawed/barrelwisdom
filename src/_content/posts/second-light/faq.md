@@ -31,7 +31,7 @@ Talk to Hinako and it should be available.
 
 Fragments you earned, half your your talent level with all the girls, and the ability to see a NG+ ending (the changes are small , you can look it up on youtube). For PC players, see [here](/blog/atelier-pc-saves) for a clear save that spares you the effort of playing twice. Bear in mind you will be fairly overpowered because of all the fragments and talent points that the save gives you.
 
-For exact true end requirements, see [here](second-light/how-to-get-true-end).
+For exact true end requirements, see [here](/second-light/how-to-get-true-end).
 
 ## How many dates are there?
 

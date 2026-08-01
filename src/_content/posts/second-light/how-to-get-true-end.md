@@ -9,7 +9,7 @@ Second Light has two endings; if you're rushing through, it is possible to miss 
 
 The requirements are as follows:
 
-1. Clear the game. The True End only shows up on NG+. See [here](blog/atelier-pc-saves) for saves if you're on PC.
+1. Clear the game. The True End only shows up on NG+. See [here](/blog/atelier-pc-saves) for saves if you're on PC.
 2. Get any girl to talent level 10.
     * Choose this girl at the final choice.
     * Be sure to have seen her final scene at her Heartscape.

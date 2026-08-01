@@ -3,6 +3,7 @@ title: "Chapter 8"
 pubDate: "2021-06-25"
 updatedDate: "2025-11-24"
 description: "Walkthrough/guide for Chapter 8, including events, recipes, and other things of note."
+mainClass: "medium-page"
 ---
 
 <p>Go to five water sources for the task. Ten for the ability to get more water at the City Water Source. Thanks to Aster Selene for this info.
@@ -153,11 +154,11 @@ description: "Walkthrough/guide for Chapter 8, including events, recipes, and ot
 </td></tr>
 <tr>
 <td rowspan="2"> <i>Want to make some stylish equipment </i> </td>
-<td> Synth <a href="/shallie/items/dragon-shield">Dragon Shield</a> </td>
+<td> Synth <a href="/shallie/items/dragon-shield/en">Dragon Shield</a> </td>
 <td rowspan="2"> Synthesis Exp +20/30
 </td></tr>
 <tr>
-<td> Synth <a href="/shallie/items/blue-crystal-ring">Blue Crystal Ring</a>
+<td> Synth <a href="/shallie/items/blue-crystal-ring/en">Blue Crystal Ring</a>
 </td></tr>
 <tr>
 <td> <i>Use synthesis skills </i> </td>
@@ -207,7 +208,7 @@ description: "Walkthrough/guide for Chapter 8, including events, recipes, and ot
 </td></tr>
 <tr>
 <td> <i>Synthesise adventures </i> </td>
-<td> (After above) Make <a href="/shallie/categories/adventure">(Adventure)</a> x2 </td>
+<td> (After above) Make <a href="/shallie/categories/adventure/en">(Adventure)</a> x2 </td>
 <td> Synthesis Exp +30
 </td></tr>
 <tr>
@@ -246,7 +247,7 @@ description: "Walkthrough/guide for Chapter 8, including events, recipes, and ot
 </td></tr>
 <tr>
 <td rowspan="2"> <i>Read Starlight of the Heavens </i> </td>
-<td> Obtain <a href="/shallie/recipe-books/starlight-of-the-heavens">Starlight of the Heavens</a> </td>
+<td> Obtain <a href="/shallie/recipe-books/starlight-of-the-heavens/en">Starlight of the Heavens</a> </td>
 <td rowspan="2"> Synthesis Exp +20
 </td></tr>
 <tr>
@@ -254,7 +255,7 @@ description: "Walkthrough/guide for Chapter 8, including events, recipes, and ot
 </td></tr>
 <tr>
 <td rowspan="2"> <i>Read The Way of the World </i> </td>
-<td> Obtain <a href="/shallie/recipe-books/the-way-of-the-world">The Way of the World</a> </td>
+<td> Obtain <a href="/shallie/recipe-books/the-way-of-the-world/en">The Way of the World</a> </td>
 <td rowspan="2"> Synthesis Exp +30
 </td></tr>
 <tr>
@@ -299,7 +300,7 @@ description: "Walkthrough/guide for Chapter 8, including events, recipes, and ot
 </td></tr>
 <tr>
 <td> Hunter's Hangout </td>
-<td> She requests <a href="/shallie/categories/fruit">(Fruit)</a> x8 (Odelia Snacks first.)
+<td> She requests <a href="/shallie/categories/fruit/en">(Fruit)</a> x8 (Odelia Snacks first.)
 </td></tr>
 <tr>
 <td> Hunter's Hangout </td>
@@ -371,7 +372,7 @@ description: "Walkthrough/guide for Chapter 8, including events, recipes, and ot
 <tr>
 <td rowspan="2"> Odelia </td>
 <td> City Water Source </td>
-<td> She gives you a life task to give her <a href="/shallie/categories/snack">(Snack)</a> x10
+<td> She gives you a life task to give her <a href="/shallie/categories/snack/en">(Snack)</a> x10
 </td></tr>
 <tr>
 <td> Stellard Plaza </td>
@@ -380,7 +381,7 @@ description: "Walkthrough/guide for Chapter 8, including events, recipes, and ot
 <tr>
 <td rowspan="4"> Kortes </td>
 <td> <a href="/shallie/locations/eastern-continent/en#heaven-s-vine-sapling">Heaven's Vine - Sapling</a> </td>
-<td> <a href="/shallie/monsters/nature-dragon">Nature Dragon</a>
+<td> <a href="/shallie/monsters/nature-dragon/en">Nature Dragon</a>
 </td></tr>
 <tr>
 <td> Ship Workshop </td>
@@ -466,39 +467,39 @@ description: "Walkthrough/guide for Chapter 8, including events, recipes, and ot
 <th colspan="3"> Recipes
 </th></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/water-extraction-methods">Water Extraction Methods</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/water-extraction-methods/en">Water Extraction Methods</a> </i> </td>
 <td> Auto </td>
-<td> <a href="/shallie/items/distilled-water">Distilled Water</a>
+<td> <a href="/shallie/items/distilled-water/en">Distilled Water</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/the-harry-chronicles">The Harry Chronicles</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/the-harry-chronicles/en">The Harry Chronicles</a> </i> </td>
 <td> Harry's events </td>
-<td> <a href="/shallie/items/cole-medapaid">Cole Medapaid</a>
+<td> <a href="/shallie/items/cole-medapaid/en">Cole Medapaid</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/legendary-forging-book">Legendary Forging Book</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/legendary-forging-book/en">Legendary Forging Book</a> </i> </td>
 <td> Rose's Shop </td>
-<td> <a href="/shallie/items/meteonite">Meteonite</a>, <a href="/shallie/items/halmolium">Halmolium</a>, <a href="/shallie/items/super-pure-water">Super Pure Water</a>, <a href="/shallie/items/meteor-gloves">Meteor Gloves</a>, <a href="/shallie/items/meteor-boots">Meteor Boots</a>
+<td> <a href="/shallie/items/meteonite/en">Meteonite</a>, <a href="/shallie/items/halmolium/en">Halmolium</a>, <a href="/shallie/items/super-pure-water/en">Super Pure Water</a>, <a href="/shallie/items/meteor-gloves/en">Meteor Gloves</a>, <a href="/shallie/items/meteor-boots/en">Meteor Boots</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/forgotten-arts">Forgotten Arts</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/forgotten-arts/en">Forgotten Arts</a> </i> </td>
 <td> Escha's Shop </td>
-<td> <a href="/shallie/items/brother-call">Brother Call</a>, <a href="/shallie/items/elixir">Elixir</a>, <a href="/shallie/items/sun-flower">Sun Flower</a>, <a href="/shallie/items/aroma-materia">Aroma Materia</a>
+<td> <a href="/shallie/items/brother-call/en">Brother Call</a>, <a href="/shallie/items/elixir/en">Elixir</a>, <a href="/shallie/items/sun-flower/en">Sun Flower</a>, <a href="/shallie/items/aroma-materia/en">Aroma Materia</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/mythical-materials">Mythical Materials</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/mythical-materials/en">Mythical Materials</a> </i> </td>
 <td> Escha's Shop </td>
-<td> <a href="/shallie/items/mystix">Mystix</a>, <a href="/shallie/items/yggdras">Yggdras</a>, <a href="/shallie/items/velvetis">Velvetis</a>
+<td> <a href="/shallie/items/mystix/en">Mystix</a>, <a href="/shallie/items/yggdras/en">Yggdras</a>, <a href="/shallie/items/velvetis/en">Velvetis</a>
 </td></tr>
 <tr>
-<td> <i><a href="/shallie/recipe-books/ultimate-stellard-cuisine">Ultimate Stellard Cuisine</a> </i> </td>
+<td> <i><a href="/shallie/recipe-books/ultimate-stellard-cuisine/en">Ultimate Stellard Cuisine</a> </i> </td>
 <td> Escha's events </td>
-<td> <a href="/shallie/items/golden-extract-soup">Golden Extract Soup</a>, <a href="/shallie/items/millionaire-s-full-course">Millionaire's Full Course</a>
+<td> <a href="/shallie/items/golden-extract-soup/en">Golden Extract Soup</a>, <a href="/shallie/items/millionaire-s-full-course/en">Millionaire's Full Course</a>
 </td></tr>
 <tr>
 <td> <i>Weapons - DLC 2 </i> </td>
 <td> - </td>
-<td> <a href="/shallie/items/golden-blue-staff">Golden Blue Staff</a>, <a href="/shallie/items/golden-wing-staff">Golden Wing Staff</a>, <a href="/shallie/items/plan-board">Plan Board</a>, <a href="/shallie/items/operation-plan-board">Operation Plan Board</a>
+<td> <a href="/shallie/items/golden-blue-staff/en">Golden Blue Staff</a>, <a href="/shallie/items/golden-wing-staff/en">Golden Wing Staff</a>, <a href="/shallie/items/plan-board/en">Plan Board</a>, <a href="/shallie/items/operation-plan-board/en">Operation Plan Board</a>
 </td></tr>
 </table>
 
@@ -519,7 +520,7 @@ description: "Walkthrough/guide for Chapter 8, including events, recipes, and ot
 </p><p>I created a set, right here, that carried me through the hardest fight in the game... on Story Watcher difficulty. This is a very viable set
 for those of you who just want the platinum.
 </p><p>This is also good for property grinding for ultimate equips. You'll want a pretty decent set like this to take care of the bosses easily.
-</p><p>You have that Gunade Ring that Raoul gave you, right? Because you need it. It has <a href="/shallie/properties/attack-huge-enhance">Attack Huge Enhance</a>, <a href="/shallie/properties/defense-huge-enhance">Defense Huge Enhance</a>, and <a href="/shallie/properties/speed-huge-enhance">Speed Huge Enhance</a>. You can create these yourself, but it's luck based, as you need to rare material farm (via bosses, perhaps) to get the properties you need.
+</p><p>You have that Gunade Ring that Raoul gave you, right? Because you need it. It has <a href="/shallie/properties/attack-huge-enhance/en">Attack Huge Enhance</a>, <a href="/shallie/properties/defense-huge-enhance/en">Defense Huge Enhance</a>, and <a href="/shallie/properties/speed-huge-enhance/en">Speed Huge Enhance</a>. You can create these yourself, but it's luck based, as you need to rare material farm (via bosses, perhaps) to get the properties you need.
 </p><p>First, toss your Gunade Ring's properties into a Blue Crystal Ring (use Ingredient Zero and Cost Down). Then transfer to Supplement - Rainbow. These properties total 24 PP, so make sure you can afford that.
 </p><p>Yep, it was that easy. Getting stuff from any supplement to about any other item is trivial and I'll leave it to you. Among the items you can create, five will directly take that supplement.
 </p><p>In the event that you're feeling more experimental (you may have some decent properties from bosses, but only a few), you can get PP Frame Maximization by using a Plant Oil (from Chapter 5) with Transfer PP +7 / PP Frame Expansion in a Supplement - Red, then getting the LV3 Property.
@@ -531,39 +532,39 @@ for those of you who just want the platinum.
 <th> Accessories
 </th></tr>
 <tr>
-<td> <a href="/shallie/items/white-winged-bell">White Winged Bell</a> </td>
-<td> <a href="/shallie/items/riveted-shirt">Riveted Shirt</a> </td>
-<td> <a href="/shallie/items/gunade-ring">Gunade Ring</a>
+<td> <a href="/shallie/items/white-winged-bell/en">White Winged Bell</a> </td>
+<td> <a href="/shallie/items/riveted-shirt/en">Riveted Shirt</a> </td>
+<td> <a href="/shallie/items/gunade-ring/en">Gunade Ring</a>
 </td></tr>
 <tr>
-<td> <a href="/shallie/items/magia-sumonitora">Magia Sumonitora</a> </td>
-<td> <a href="/shallie/items/meteorite-armor">Meteorite Armor</a> </td>
-<td> <a href="/shallie/items/dragon-shield">Dragon Shield</a>
+<td> <a href="/shallie/items/magia-sumonitora/en">Magia Sumonitora</a> </td>
+<td> <a href="/shallie/items/meteorite-armor/en">Meteorite Armor</a> </td>
+<td> <a href="/shallie/items/dragon-shield/en">Dragon Shield</a>
 </td></tr>
 <tr>
-<td> <a href="/shallie/items/lunic-charm">Lunic Charm</a> </td>
-<td rowspan="6"> <a href="/shallie/items/dragoon-coat">Dragoon Coat</a> </td>
-<td rowspan="6"> <a href="/shallie/items/spirit-belt">Spirit Belt</a>
+<td> <a href="/shallie/items/lunic-charm/en">Lunic Charm</a> </td>
+<td rowspan="6"> <a href="/shallie/items/dragoon-coat/en">Dragoon Coat</a> </td>
+<td rowspan="6"> <a href="/shallie/items/spirit-belt/en">Spirit Belt</a>
 </td></tr>
 <tr>
-<td> <a href="/shallie/items/demonkin-ring">Demonkin Ring</a>
+<td> <a href="/shallie/items/demonkin-ring/en">Demonkin Ring</a>
 </td></tr>
 <tr>
-<td> <a href="/shallie/items/bloody-claws">Bloody Claws</a>
+<td> <a href="/shallie/items/bloody-claws/en">Bloody Claws</a>
 </td></tr>
 <tr>
-<td> <a href="/shallie/items/mythical-beast-sword">Mythical Beast Sword</a>
+<td> <a href="/shallie/items/mythical-beast-sword/en">Mythical Beast Sword</a>
 </td></tr>
 <tr>
-<td> <a href="/shallie/items/ancient-heat-bunker">Ancient Heat Bunker</a>
+<td> <a href="/shallie/items/ancient-heat-bunker/en">Ancient Heat Bunker</a>
 </td></tr>
 <tr>
-<td> <a href="/shallie/items/operation-plan-board">Operation Plan Board</a>
+<td> <a href="/shallie/items/operation-plan-board/en">Operation Plan Board</a>
 </td></tr>
 </table>
 <p>Escha's weapon... just wait till free time.
 </p><p>Personally, my accessories were Gunade Ring (minus the better speed effect) and Dragon Shield (with More Explosive Power). These served me well, so actually bother getting good effects on your equipment. Trust me.
-</p><p>Also, <a href="/shallie/properties/synthesis-skill-increase">Synthesis Skill Increase</a> (Medical Solution) is very, very helpful (though 15 PP). It gives items an additional skill slot. But only experiment with this if you really want to. You'll have to use it for high end synths, but for now it's for fun.
+</p><p>Also, <a href="/shallie/properties/synthesis-skill-increase/en">Synthesis Skill Increase</a> (Medical Solution) is very, very helpful (though 15 PP). It gives items an additional skill slot. But only experiment with this if you really want to. You'll have to use it for high end synths, but for now it's for fun.
 </p><p>By the way, with this setup, I beat the Lord of Water on Despair difficulty. Which is NG+ exclusive, but I was playing on a fresh file. It was a close battle because she took out both my alchemists in one swoop, but I DID IT. I was about level 49 for the fight, which was primarily because of all the life task exp bonuses I got.
 </p>
 <h3>Chain Tutorial</h3>

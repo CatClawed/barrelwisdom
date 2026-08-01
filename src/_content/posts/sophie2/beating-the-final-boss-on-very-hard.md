@@ -100,7 +100,7 @@ Many, many of these traits are fused traits. You are assumed to either have them
 
 #### Further Help
 
-I recommend reading the [normal or easy set](sophie2/beating-any-boss) and applying that or better to your equipment. The short of it is, lots of stats, lots of HP. You do not need extreme equipment to survive a few turns against this boss. [Breezy Aromas](/sophie2/items/breezy-aroma/en) are very, very good to have around in case of emergencies.
+I recommend reading the [normal or easy set](/sophie2/beating-any-boss) and applying that or better to your equipment. The short of it is, lots of stats, lots of HP. You do not need extreme equipment to survive a few turns against this boss. [Breezy Aromas](/sophie2/items/breezy-aroma/en) are very, very good to have around in case of emergencies.
 
 If ailments in the second phase hit you hard, you can use [Warding Incense](/sophie2/items/warding-incense/en) (max light) to remove ailments from entire rows.
 

@@ -35,21 +35,21 @@ The rank depends on the energy/color/mood averages; for all except Abyss Puni (R
 
 <table class="tbl-min borders">
 <tr > <th>Condition</th><th>Item</th></tr>
-<tr><td>Rafflesia Puni</td><td><a href="/ryza2/items/puni-doll">Puni Doll</a></td></tr>
-<tr><td>Black Puni</td><td><a href="/ryza2/items/giant-manuscript">Giant Manuscript</a></td></tr>
-<tr><td>Green Puni</td><td><a href="/ryza2/items/great-elemental-s-chair">Great Elemental's Chair</a></td></tr>
-<tr><td>Blue Puni</td><td><a href="/ryza2/items/celestial-body-model">Celestial Body Model</a></td></tr>
-<tr><td>Red Puni</td><td><a href="/ryza2/items/giant-kurken-fruit">Giant Kurken Fruit</a></td></tr>
-<tr><td>81 - 100 Color</td><td><a href="/ryza2/items/resort-bed">Resort Bed</a></td></tr>
-<tr><td>61 - 80 Color</td><td><a href="/ryza2/items/resort-sofa">Resort Sofa</a></td></tr>
-<tr><td>0 - 10 Color</td><td><a href="/ryza2/items/goat">Goat</a></td></tr>
-<tr><td>81 - 100 Energy</td><td><a href="/ryza2/items/transport-cannon">Transport Cannon</a></td></tr>
-<tr><td>61 - 80 Energy</td><td><a href="/ryza2/items/piano">Piano</a></td></tr>
-<tr><td>0 - 10 Energy</td><td><a href="/ryza2/items/blackboard">Blackboard</a></td></tr>
-<tr><td>81 - 100 Mood</td><td><a href="/ryza2/items/dinner-bell">Dinner Bell</a></td></tr>
-<tr><td>61 - 80 Mood</td><td><a href="/ryza2/items/countryside-photo">Countryside Photo</a></td></tr>
-<tr><td>50 - 60 Mood</td><td><a href="/ryza2/items/farm-photo">Farm Photo</a></td></tr>
-<tr><td>0 - 10 Mood</td><td><a href="/ryza2/items/music-stand">Music Stand</a></td></tr>
+<tr><td>Rafflesia Puni</td><td><a href="/ryza2/items/puni-doll/en">Puni Doll</a></td></tr>
+<tr><td>Black Puni</td><td><a href="/ryza2/items/giant-manuscript/en">Giant Manuscript</a></td></tr>
+<tr><td>Green Puni</td><td><a href="/ryza2/items/great-elemental-s-chair/en">Great Elemental's Chair</a></td></tr>
+<tr><td>Blue Puni</td><td><a href="/ryza2/items/celestial-body-model/en">Celestial Body Model</a></td></tr>
+<tr><td>Red Puni</td><td><a href="/ryza2/items/giant-kurken-fruit/en">Giant Kurken Fruit</a></td></tr>
+<tr><td>81 - 100 Color</td><td><a href="/ryza2/items/resort-bed/en">Resort Bed</a></td></tr>
+<tr><td>61 - 80 Color</td><td><a href="/ryza2/items/resort-sofa/en">Resort Sofa</a></td></tr>
+<tr><td>0 - 10 Color</td><td><a href="/ryza2/items/goat/en">Goat</a></td></tr>
+<tr><td>81 - 100 Energy</td><td><a href="/ryza2/items/transport-cannon/en">Transport Cannon</a></td></tr>
+<tr><td>61 - 80 Energy</td><td><a href="/ryza2/items/piano/en">Piano</a></td></tr>
+<tr><td>0 - 10 Energy</td><td><a href="/ryza2/items/blackboard/en">Blackboard</a></td></tr>
+<tr><td>81 - 100 Mood</td><td><a href="/ryza2/items/dinner-bell/en">Dinner Bell</a></td></tr>
+<tr><td>61 - 80 Mood</td><td><a href="/ryza2/items/countryside-photo/en">Countryside Photo</a></td></tr>
+<tr><td>50 - 60 Mood</td><td><a href="/ryza2/items/farm-photo/en">Farm Photo</a></td></tr>
+<tr><td>0 - 10 Mood</td><td><a href="/ryza2/items/music-stand/en">Music Stand</a></td></tr>
 </table>
 
 ## Exp

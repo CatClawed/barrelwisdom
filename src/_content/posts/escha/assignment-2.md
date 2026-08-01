@@ -3,6 +3,7 @@ title: "Assignment 2"
 pubDate: "2021-06-16"
 updatedDate: "2025-11-24"
 description: "Guide for Assignment 2, including recipes, events, and other things of note."
+mainClass: "medium-page"
 ---
 
 <div class="grid">
@@ -40,20 +41,20 @@ description: "Guide for Assignment 2, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td rowspan="4"> <b>Ruins Entrance </b> </td>
-<td> Slay <a href="/escha/monsters/fake-ruin">Fake Ruin</a> at S. Ruins (Ruins Entrance)
+<td> Slay <a href="/escha/monsters/fake-ruin/en">Fake Ruin</a> at S. Ruins (Ruins Entrance)
 </td></tr>
 <tr>
 <td> Gather in Sector One!
 </td></tr>
 <tr>
-<td> Slay <a href="/escha/monsters/flatfish">Flatfish</a> at Sector Two.
+<td> Slay <a href="/escha/monsters/flatfish/en">Flatfish</a> at Sector Two.
 </td></tr>
 <tr>
 <td> Gather at Ruins Courtyard.
 </td></tr>
 <tr>
 <td> <b>New Recipe </b> </td>
-<td> Buy <a href="/escha/recipe-books/a-healthy-home">A Healthy Home</a> from Katla.
+<td> Buy <a href="/escha/recipe-books/a-healthy-home/en">A Healthy Home</a> from Katla.
 </td></tr>
 </table>
 <table class="tbl-min borders grid-6">
@@ -66,7 +67,7 @@ description: "Guide for Assignment 2, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> <b>Slowing Ice Bomb </b> </td>
-<td> Create <a href="/escha/items/ice-bomb">Ice Bomb</a> with <a href="/escha/effects/speed-down-m">Speed Down M</a>. See Attack Items box below.
+<td> Create <a href="/escha/items/ice-bomb/en">Ice Bomb</a> with <a href="/escha/effects/speed-down-m/en">Speed Down M</a>. See Attack Items box below.
 </td></tr>
 <tr>
 <td> <b>Collection Sharing </b> </td>
@@ -78,11 +79,11 @@ description: "Guide for Assignment 2, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> <b>Ornamental Decoration</b> </td>
-<td> Create <a href="/escha/items/spirit-garland">Spirit Garland</a>.
+<td> Create <a href="/escha/items/spirit-garland/en">Spirit Garland</a>.
 </td></tr>
 <tr>
 <td> <b>Three Types of Bombs</b> </td>
-<td> Enter a field with <a href="/escha/items/bomb">Bomb</a>, <a href="/escha/items/ice-bomb">Ice Bomb</a>, and <a href="/escha/items/craft">Craft</a> equipped. Then return.
+<td> Enter a field with <a href="/escha/items/bomb/en">Bomb</a>, <a href="/escha/items/ice-bomb/en">Ice Bomb</a>, and <a href="/escha/items/craft/en">Craft</a> equipped. Then return.
 </td></tr>
 <tr>
 <td> <b>Search </b> </td>
@@ -94,7 +95,7 @@ description: "Guide for Assignment 2, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> <b>Clear-Headed Foods </b> </td>
-<td> Synth <a href="/escha/items/clear-jelly">Clear Jelly</a>.
+<td> Synth <a href="/escha/items/clear-jelly/en">Clear Jelly</a>.
 </td></tr>
 <tr>
 <td> <b>Sell Unneeded Items</b> </td>
@@ -102,7 +103,7 @@ description: "Guide for Assignment 2, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> <b>Wolf and Friends </b> </td>
-<td> Slay the <a href="/escha/monsters/flesh-eater">Flesh Eater</a> at Twilight Forest (Forest Point).
+<td> Slay the <a href="/escha/monsters/flesh-eater/en">Flesh Eater</a> at Twilight Forest (Forest Point).
 </td></tr>
 <tr>
 <td> <b>Gathering Requests </b> </td>
@@ -110,11 +111,11 @@ description: "Guide for Assignment 2, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> <b>Ruins Artifacts </b> </td>
-<td>Gather <a href="/escha/items/phlogiston">Phlogiston</a>, <a href="/escha/items/aqua-light">Aqua Light</a>, and <a href="/escha/items/earth-stone">Earth Stone</a>.
+<td>Gather <a href="/escha/items/phlogiston/en">Phlogiston</a>, <a href="/escha/items/aqua-light/en">Aqua Light</a>, and <a href="/escha/items/earth-stone/en">Earth Stone</a>.
 </td></tr>
 <tr>
 <td> <b>Highway Slicer Bug </b> </td>
-<td> Slay <a href="/escha/monsters/scissor-beast">Scissor Beast</a> x3 at Old Highway (Lost Road).
+<td> Slay <a href="/escha/monsters/scissor-beast/en">Scissor Beast</a> x3 at Old Highway (Lost Road).
 </td></tr>
 <tr>
 <td> <b>Switch Lines </b> </td>
@@ -141,7 +142,7 @@ description: "Guide for Assignment 2, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> Dragon's Fist Tavern </td>
-<td> Duke has a bunch of male customers again. <br /><a href="/escha/recipe-books/pile-of-sweets">Pile of Sweets</a> is given to you.
+<td> Duke has a bunch of male customers again. <br /><a href="/escha/recipe-books/pile-of-sweets/en">Pile of Sweets</a> is given to you.
 </td></tr>
 <tr>
 <td rowspan="2"> <b>Katla </b> </td>
@@ -212,41 +213,41 @@ description: "Guide for Assignment 2, including recipes, events, and other thing
 <th colspan="3"> Recipes
 </th></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/colseit-s-history">Colseit's History</a></b> </td>
+<td> <b><a href="/escha/recipe-books/colseit-s-history/en">Colseit's History</a></b> </td>
 <td> Duke's shop </td>
-<td> <a href="/escha/items/colseit-fiber">Colseit Fiber</a>, <a href="/escha/items/leather">Leather</a>, <a href="/escha/items/multi-patch">Multi-patch</a>, <a href="/escha/items/allgemein-Board">Allgemein Board</a>, <a href="/escha/items/spirit-garland">Spirit Garland</a>
+<td> <a href="/escha/items/colseit-fiber/en">Colseit Fiber</a>, <a href="/escha/items/leather/en">Leather</a>, <a href="/escha/items/multi-patch/en">Multi-patch</a>, <a href="/escha/items/allgemein-Board/en">Allgemein Board</a>, <a href="/escha/items/spirit-garland/en">Spirit Garland</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/a-healthy-home">A Healthy Home</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/a-healthy-home/en">A Healthy Home</a> </b> </td>
 <td> Katla's shop </td>
-<td> <a href="/escha/items/clear-jelly">Clear Jelly</a>, <a href="/escha/items/heal-bandage">Heal Bandage</a>, <a href="/escha/items/trad-medicine">Trad. Medicine</a>, <a href="/escha/items/aroma-pouch">Aroma Pouch</a>, <a href="/escha/items/leather-gloves">Leather Gloves</a>
+<td> <a href="/escha/items/clear-jelly/en">Clear Jelly</a>, <a href="/escha/items/heal-bandage/en">Heal Bandage</a>, <a href="/escha/items/trad-medicine/en">Trad. Medicine</a>, <a href="/escha/items/aroma-pouch/en">Aroma Pouch</a>, <a href="/escha/items/leather-gloves/en">Leather Gloves</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/lost-ice">Lost Ice</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/lost-ice/en">Lost Ice</a> </b> </td>
 <td> 3 assignment lines </td>
-<td> <a href="/escha/items/ice-bomb">Ice Bomb</a>, <a href="/escha/items/distilled-water">Distilled Water</a>, <a href="/escha/items/freezing-gas">Freezing Gas</a>, <a href="/escha/items/guryun-blitz">Guryun Blitz</a>, <a href="/escha/items/spray">Spray</a>
+<td> <a href="/escha/items/ice-bomb/en">Ice Bomb</a>, <a href="/escha/items/distilled-water/en">Distilled Water</a>, <a href="/escha/items/freezing-gas/en">Freezing Gas</a>, <a href="/escha/items/guryun-blitz/en">Guryun Blitz</a>, <a href="/escha/items/spray/en">Spray</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/pile-of-sweets">Pile of Sweets</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/pile-of-sweets/en">Pile of Sweets</a> </b> </td>
 <td> From Duke's events </td>
-<td> <a href="/escha/items/pancake-stack">Pancake Stack</a>
+<td> <a href="/escha/items/pancake-stack/en">Pancake Stack</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/common-weapons">Common Weapons</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/common-weapons/en">Common Weapons</a> </b> </td>
 <td> Automatic when you get the Trainer </td>
-<td> <a href="/escha/items/traditional-staff">Traditional Staff</a>, <a href="/escha/items/phantom-saber">Phantom Saber</a>, <a href="/escha/items/sledge-head">Sledge Head</a>, <a href="/escha/items/ruby-talisman">Ruby Talisman</a>, <a href="/escha/items/scattershot">Scattershot</a>, <a href="/escha/items/explorer-s-pack">Explorer's Pack</a>, <a href="/escha/items/great-blade">Great Blade</a>
+<td> <a href="/escha/items/traditional-staff/en">Traditional Staff</a>, <a href="/escha/items/phantom-saber/en">Phantom Saber</a>, <a href="/escha/items/sledge-head/en">Sledge Head</a>, <a href="/escha/items/ruby-talisman/en">Ruby Talisman</a>, <a href="/escha/items/scattershot/en">Scattershot</a>, <a href="/escha/items/explorer-s-pack/en">Explorer's Pack</a>, <a href="/escha/items/great-blade/en">Great Blade</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/common-armor">Common Armor</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/common-armor/en">Common Armor</a> </b> </td>
 <td> Automatic when you get the Trainer </td>
-<td> <a href="/escha/items/cotton-shirt">Cotton Shirt</a>, <a href="/escha/items/sturdy-shirt">Sturdy Shirt</a>, <a href="/escha/items/chest-plate">Chest Plate</a>, <a href="/escha/items/alloy-plate">Alloy Plate</a>, <a href="/escha/items/leather-coat">Leather Coat</a>
+<td> <a href="/escha/items/cotton-shirt/en">Cotton Shirt</a>, <a href="/escha/items/sturdy-shirt/en">Sturdy Shirt</a>, <a href="/escha/items/chest-plate/en">Chest Plate</a>, <a href="/escha/items/alloy-plate/en">Alloy Plate</a>, <a href="/escha/items/leather-coat/en">Leather Coat</a>
 </td></tr>
 </table>
 </div>
 <ul><li> Areas
-<ul><li> <a href="/escha/locations/southern-ruins">Southern Ruins</a></li>
-<li> <a href="/escha/locations/upland-forest">Upland Forest</a></li></ul></li></ul>
-<p>Once you enter Sector One of the <a href="/escha/locations/southern-ruins">Southern Ruins</a>, you'll meet Harry, Threia, and Reyfer. Depending on your choice, either Reyfer or
+<ul><li> <a href="/escha/locations/southern-ruins/en">Southern Ruins</a></li>
+<li> <a href="/escha/locations/upland-forest/en">Upland Forest</a></li></ul></li></ul>
+<p>Once you enter Sector One of the <a href="/escha/locations/southern-ruins/en">Southern Ruins</a>, you'll meet Harry, Threia, and Reyfer. Depending on your choice, either Reyfer or
 Threia will join after you finish the assignment. This guide rolls with the assumption that you picked Threia, but if you didn't, her
 events more or less switch places with Reyfer's (that is, Reyfer's events happen earlier). Once Reyfer/Threia joins, toss your second
 alchemist into the rear.
@@ -255,7 +256,7 @@ to Research, which you pay for through Marion. These experiments allow you certa
 for recipes. Marion takes your money. Intro to Storage and Search Knowledge are not bad investments, for the moment.
 </p><p>A little while after that (I got it after finishing the assignment), Marion will pop in and give you a shiny new tool, a Trainer, and the ability to make equipment. 
 </p><p>Pro Tip: Make equipment with Water Resist, Earth Resist, etc. as you see it. Just one per element is fine. It may not be the most "useful", but you will thank me later.
-</p><p>The next thing that happens is that you get access to a blimp, and thus <a href="/escha/locations/upland-forest">Upland Forest</a>. You don't need to explore it all during the term; you have plenty of time in the next assignment to get through it; I only made it three areas in, myself. Enjoy the song!
+</p><p>The next thing that happens is that you get access to a blimp, and thus <a href="/escha/locations/upland-forest/en">Upland Forest</a>. You don't need to explore it all during the term; you have plenty of time in the next assignment to get through it; I only made it three areas in, myself. Enjoy the song!
 </p>
 <div class="grid">
  <div class="grid-6 card spacer">
@@ -272,7 +273,7 @@ for recipes. Marion takes your money. Intro to Storage and Search Knowledge are 
 <li> 70 Friendship for Lucille.</li>
 <li> 60 for Linca and Wilbell/Micie/Katla.</li>
 <li> Friendship raises at a rate of .11 per day in the front, .08 in the back, and .03 in reserve (you don't have enough characters to put one in reserve yet). It will raise any time a day passes, whether you're in Colseit or not. Just remember to shuffle them from time to time.</li>
-<li> If you feel like you need a schedule, see <a href="/escha/items/faq">this page</a>.</li></ul>
+<li> If you feel like you need a schedule, see <a href="/escha/items/faq/en">this page</a>.</li></ul>
  </div>
  <div class="grid-6 card spacer">
  <h4>Ending Stuff</h4>
@@ -292,23 +293,23 @@ pretty worthless property once you can max out Effect without it.
 <div class="grid">
  <div class="grid-6 card spacer">
  <h4>Ice Bomb</h4>
-<ul><li> <a href="/escha/items/phantom-saber">Phantom Saber</a>
-<ul><li> Create a Phantom Saber using a <a href="/escha/items/garden-stone">Garden Stone</a>. Keep PP Expansion. Be sure to unlock the Level 3 property (the bottom right box will tell you what the property level is).</li>
+<ul><li> <a href="/escha/items/phantom-saber/en">Phantom Saber</a>
+<ul><li> Create a Phantom Saber using a <a href="/escha/items/garden-stone/en">Garden Stone</a>. Keep PP Expansion. Be sure to unlock the Level 3 property (the bottom right box will tell you what the property level is).</li>
 <li> This works because you just combined Inherit PP +5 from the Garden Stone and Inherit PP +3, which is native to the Phantom Saber.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/spray">Spray</a>
-<ul><li> Make using <a href="/escha/items/charcoal-pieces">Charcoal Pieces</a> and the Phantom Saber you just made.</li>
+<ul><li> <a href="/escha/items/spray/en">Spray</a>
+<ul><li> Make using <a href="/escha/items/charcoal-pieces/en">Charcoal Pieces</a> and the Phantom Saber you just made.</li>
 <li> Keep Destruction Up+, PP Expansion, Effect Up (if you need it -- you can assume the same on future synths)</li></ul></li></ul>
-<ul><li> <a href="/escha/items/freezing-gas">Freezing Gas</a>
+<ul><li> <a href="/escha/items/freezing-gas/en">Freezing Gas</a>
 <ul><li> Use the Spray you just made.</li>
 <li> Keep Very Destructive (Destruction Up+ x Destruction Up), PP Expansion</li></ul></li></ul>
-<ul><li> <a href="/escha/items/leather">Leather</a>
-<ul><li> Use <a href="/escha/items/sea-bird-egg">Sea Bird Egg</a>, keep Destruction Up++.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/mixed-lubricant">Mixed Lubricant</a>
+<ul><li> <a href="/escha/items/leather/en">Leather</a>
+<ul><li> Use <a href="/escha/items/sea-bird-egg/en">Sea Bird Egg</a>, keep Destruction Up++.</li></ul></li></ul>
+<ul><li> <a href="/escha/items/mixed-lubricant/en">Mixed Lubricant</a>
 <ul><li> Use the Leather you just made, keep Destruction Up++, Inherit PP +3.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/neutralizer-b">Neutralizer-B</a>
+<ul><li> <a href="/escha/items/neutralizer-b/en">Neutralizer-B</a>
 <ul><li> Use Spray (Destruction Up+), Mixed Lubricant (Destruction Up++). This is because I personally had trouble getting the last step to work without doing this first.</li>
 <li> Keep Intense Blast, Inherit PP +3.</li></ul></li></ul>
-<ul><li> <a href="/escha/items/ice-bomb">Ice Bomb</a>
+<ul><li> <a href="/escha/items/ice-bomb/en">Ice Bomb</a>
 <ul><li> Use Freezing Gas, Mixed Lubricant, and Neutralizer-B.</li>
 <li> Throw in Mixed Lubricant, use Power+ LV1 on Freezing Gas.</li>
 <li> Throw in remaining items, then use Conversion LV1 on Wind.</li>
@@ -318,17 +319,17 @@ pretty worthless property once you can max out Effect without it.
  </div>
  <div class="grid-6 card spacer">
  <h4>Other Items</h4>
-<ul><li> For a <a href="/escha/items/guryun-blitz">Guryun Blitz</a>
+<ul><li> For a <a href="/escha/items/guryun-blitz/en">Guryun Blitz</a>
 <ul><li> Make a Distilled Water
 <ul><li> Use Spray (Destruction Up+, PP Expansion), Zettel, Leather, Mixed Lubricant (Destruction Up++, Inherit PP +3).</li>
 <li> Toss in all items. Use CP Recovery, then Division on Spray. Feel free to use Effect and Absorb Attribute; I did.</li>
 <li> This should net you Super Destructive, PP Expansion, and Inherit PP +3. My understanding is that tossing in Spray twice also tosses in Destruction Up+ twice, and Destruction Up is the LV1 property to Distilled Water.</li></ul></li>
 <li> Make Neutralizer-G using that Distilled Water. This allows you to focus on Earth effects.</li>
-<li> Use Blue Gemstone (you may have to use Check collection sharing in Southern Ruins...), <a href="/escha/items/shining-crystal">Shining Crystal</a>, Cloud Financier (from Solle), Neutralizer-G.
+<li> Use Blue Gemstone (you may have to use Check collection sharing in Southern Ruins...), <a href="/escha/items/shining-crystal/en">Shining Crystal</a>, Cloud Financier (from Solle), Neutralizer-G.
 <ul><li> Toss in everything except the Shining Crystal. Use Crafting Help on it.</li></ul></li>
 <li> Use both Conversions on Fire, then Power+ on the Shining Crystal. Toss it in, then use Division on it.</li>
 <li> Keep Wind Core, Super Destructive, and probably Fixed Increase.</li></ul></li></ul>
-<ul><li> For an <a href="/escha/items/omega-craft">Omega Craft</a>
+<ul><li> For an <a href="/escha/items/omega-craft/en">Omega Craft</a>
 <ul><li> If you have a bunch of Spiky Buds, the easiest way would be to toss those in every slot (at least two slots is required -- the third allows you to use Effect+ LV1 and LV2). Combine this with a Mixed Lubricant (Destruction Up++).</li>
 <li> Toss in everything. Use Power+ on the Lubricant, then use Division on it.</li>
 <li> Now use Conversion as much as possible to Earth so you can use Effect+ LV2 and hopefully LV1.</li>

@@ -3,6 +3,7 @@ title: "Farming Materials"
 pubDate: "2021-06-26"
 updatedDate: "2024-11-14"
 description: "The full list of farmable materials for anything you need."
+mainClass: ""
 ---
 
 <h2>Farming for Item Crafting</h2>

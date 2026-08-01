@@ -10,7 +10,7 @@ tags: [Atelier Series, Gramnad Series, Atelier Viorate]
 
 Not meant to be 'violet' either.
 
-To begin with, 'Viorate' has always been the official spelling, as you can see on their [official site.](http://www.salburg.com/products/a5/) It is a fantasy name, one they designed because they thought it sounded neat I'm sure. 'Violet' was introduced by NISA in Trinity Universe, likely because the name looks close to 'violate' and is pretty strange in general. It was repeated by Udon in the translation of the Atelier Series Chronicle, repeated  again by Koei Tecmo in later Atelier games (as Violette), before finally settling on the original spelling again in Nelke.
+To begin with, 'Viorate' has always been the official spelling, as you can see on their <a href="http://www.salburg.com/products/a5/" target="_blank">official site.</a> It is a fantasy name, one they designed because they thought it sounded neat I'm sure. 'Violet' was introduced by NISA in Trinity Universe, likely because the name looks close to 'violate' and is pretty strange in general. It was repeated by Udon in the translation of the Atelier Series Chronicle, repeated  again by Koei Tecmo in later Atelier games (as Violette), before finally settling on the original spelling again in Nelke.
 
 Some Japanese lessons for those of you not as familiar with the language. 'Violet' in Japanese has a few different common spellings, and you wouldn't see much outside of these spellings that often. To go over them:
 

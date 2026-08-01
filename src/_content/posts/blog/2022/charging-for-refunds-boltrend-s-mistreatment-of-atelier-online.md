@@ -18,7 +18,7 @@ Such was the reputation before release, and it continues to sink to the depths. 
 
 <img src="/media/blog/2022/08/boltrend-refund/refund.webp" loading="lazy" class="spacer">
 
-Credit to puchong of the Atelier Online discord, who bought a monthly pack of Cole and had 200 left unused. You can see this policy further corroborated [by someone else on Facebook](https://www.facebook.com/photo.php?fbid=10159356113714107&set=p.10159356113714107&type=3)
+Credit to puchong of the Atelier Online discord, who bought a monthly pack of Cole and had 200 left unused. You can see this policy further corroborated <a href="https://www.facebook.com/photo.php?fbid=10159356113714107&set=p.10159356113714107&type=3" target="_blank">by someone else on Facebook</a>
 
 They're charging 30 USD "handling fees" for refunds?! Absolutely absurd! You're shit outta luck if you aren't a whale. An amazingly scummy parting shot if I'd ever seen one, and an incredible final disservice to fans of Atelier Online.
 
@@ -26,11 +26,11 @@ But honestly, this all plays into Boltrend's MO. It's pretty clear they've been 
 
 I gotta give it to you straight, I did not play Atelier Online that much; I thought the game was bad, got to the middle and quit. Mobile is not my thing, gacha is a miserable experience to me. I cannot fully capture what was wrong with the game and how this ties into Boltrend's slapdash model, but I will do my best.
 
-AO launched a little fast compared to JP, had a bit of extra content by comparison. There were some issues that were apparent on launch. Text was left untranslated, a number of bugs were present, esepcially regarding multiplayer, and the translation was poor. I will forever be annoyed about "emerald board", as it is properly the [Emerald Tablet](https://en.wikipedia.org/wiki/Emerald_Tablet).
+AO launched a little fast compared to JP, had a bit of extra content by comparison. There were some issues that were apparent on launch. Text was left untranslated, a number of bugs were present, esepcially regarding multiplayer, and the translation was poor. I will forever be annoyed about "emerald board", as it is properly the <a href="https://en.wikipedia.org/wiki/Emerald_Tablet" target="_blank">Emerald Tablet</a>.
 
 An interesting problem I recall on launch was that they handed out Ryza. While it's cute to have her, there was a problem with this: there was no means to level her up past 10, making her unusable. If Boltrend cared about fostering a sense of community and goodwill, they could have given the boosts to level 30... but Boltrend is shortsighted and pretty greedy so they had an exchange as their solution -- trade two other gacha character candies for Ryza candy. Goodwill doesn't make them a buck directly, and they want you to pay to get the boosts instead. This feels bad as a launch bonus, doubly so because it took around two weeks to come up with any solution.
 
-There was a [FAQ](https://www.facebook.com/AtelieronlineEN/posts/pfbid0XEhVookCy3B8RPezpGE3V7uo8a9eJ4619XjKRbMxP7vgMqRXFaFipfcTGBxrAmE3l) about a number of issues near launch, and from that very FAQ came this gem:
+There was a <a href="https://www.facebook.com/AtelieronlineEN/posts/pfbid0XEhVookCy3B8RPezpGE3V7uo8a9eJ4619XjKRbMxP7vgMqRXFaFipfcTGBxrAmE3l" target="_blank">FAQ</a> about a number of issues near launch, and from that very FAQ came this gem:
 
 <div class="card card-body"> 
 

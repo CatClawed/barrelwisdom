@@ -11,7 +11,7 @@ Get all the endings and see all the events, basically.
 
 ## I'm having trouble with a boss
 
-See [Boss Preparation](totori/boss-preparation). It's okay if you get the M tier traits over the L tier, the L tier is just ideal for optional bosses. The point is, you need to learn to make items with decent traits. Make good equipment, healing items, and maybe a Lightning Quartz if you can't make an ideal N/A.
+See [Boss Preparation](/totori/boss-preparation). It's okay if you get the M tier traits over the L tier, the L tier is just ideal for optional bosses. The point is, you need to learn to make items with decent traits. Make good equipment, healing items, and maybe a Lightning Quartz if you can't make an ideal N/A.
 
 ## I'm concerned about time.
 
@@ -25,13 +25,13 @@ Finally, several characters are actually beneficial to do events with. To name t
 
 ## How do I handle character events?
 
-For endings specifically, see [Endings](totori/endings). You may want to avoid triggering ends until the very end of the game.
+For endings specifically, see [Endings](/totori/endings). You may want to avoid triggering ends until the very end of the game.
 
 For events, it's mostly a matter of showing up at the right places as your friendship raises. I would suggest checking out the event sections for details, but a lot will be fairly organic as long as you remember to visit all the areas of both towns sometimes.
 
 To get events, you need friendship. You raise it by putting them in the party and adventuring with them. It will max out at 60 this way, and that's exactly what you want (no higher -- requests will raise it above that cap). It's pretty easy to just shuffle your party around as they max out friendship.
 
-Oh and Mimi wants to be Level 50 and has some other requirements. [Do look at her event page](totori/mimi-events).
+Oh and Mimi wants to be Level 50 and has some other requirements. [Do look at her event page](/totori/mimi-events).
 
 ## Are there missables?
 

@@ -140,7 +140,7 @@ export const en: NavItem[] = [
 export const fr: NavItem[] = [
   {
     name: "Objets",
-    url: "/ryza2/items/fr",
+    url: "/ryza2/items/fr/en",
     svg: "main.svg?v=1#ryza2-material"
   },
   {
@@ -172,7 +172,7 @@ export const fr: NavItem[] = [
 export const ja: NavItem[] = [
   {
     name: "アイテム",
-    url: "/ryza2/items/ja",
+    url: "/ryza2/items/ja/en",
     svg: "main.svg?v=1#ryza2-material"
   },
   {
@@ -204,7 +204,7 @@ export const ja: NavItem[] = [
 export const ko: NavItem[] = [
   {
     name: "아이템",
-    url: "/ryza2/items/ko",
+    url: "/ryza2/items/ko/en",
     svg: "main.svg?v=1#ryza2-material"
   },
   {
@@ -236,7 +236,7 @@ export const ko: NavItem[] = [
 export const sc: NavItem[] = [
   {
     name: "道具",
-    url: "/ryza2/items/sc",
+    url: "/ryza2/items/sc/en",
     svg: "main.svg?v=1#ryza2-material"
   },
   {
@@ -268,7 +268,7 @@ export const sc: NavItem[] = [
 export const tc: NavItem[] = [
   {
     name: "道具",
-    url: "/ryza2/items/tc",
+    url: "/ryza2/items/tc/en",
     svg: "main.svg?v=1#ryza2-material"
   },
   {

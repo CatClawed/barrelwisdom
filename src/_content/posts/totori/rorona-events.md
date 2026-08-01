@@ -13,9 +13,9 @@ description: "How to get Rorona's events and ending."
     * Do not synth if you want to get all ends in one go. Synth in Atelier Totori instead. By that time, you'll have the gateway, which allows you to warp to either Atelier.
 
 * **Recipes**
-    * After she joins, synth (several times) in Atelier Rorona for [Rorona's Pie Notes](totori/recipe-books/rorona-s-pie-notes). (Alchemy Level 5+)
-    * Make a pie in Atelier Totori for [Fish Pie Recipe](totori/recipe-books/fish-pie-recipe).
-    * 30 days later, go to Atelier Rorona for [Rorona's Fish Memo](totori/recipe-book/rorona-s-fish-memo). (Alchemy Level 10+)
-    * 30 days later, go to Atelier Rorona for [Super Tool Guide](totori/recipe-books/super-tool-guide). (Alchemy Level 20+)
-    * 30 days later, and after Year 4, 6/1, go to Atelier Rorona for [Rorona Danger Book](totori/recipe-books/rorona-danger-book).
+    * After she joins, synth (several times) in Atelier Rorona for [Rorona's Pie Notes](/totori/recipe-books/rorona-s-pie-notes/en). (Alchemy Level 5+)
+    * Make a pie in Atelier Totori for [Fish Pie Recipe](/totori/recipe-books/fish-pie-recipe/en).
+    * 30 days later, go to Atelier Rorona for [Rorona's Fish Memo](/totori/recipe-book/rorona-s-fish-memo). (Alchemy Level 10+)
+    * 30 days later, go to Atelier Rorona for [Super Tool Guide](/totori/recipe-books/super-tool-guide/en). (Alchemy Level 20+)
+    * 30 days later, and after Year 4, 6/1, go to Atelier Rorona for [Rorona Danger Book](/totori/recipe-books/rorona-danger-book/en).
     * Sometime after this, you can get the Chim Pie recipe if you want it by simply not using a water of life. I suggest against it.

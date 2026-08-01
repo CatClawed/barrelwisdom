@@ -3,6 +3,7 @@ title: "Assignment 5"
 pubDate: "2021-06-17"
 updatedDate: "2025-11-24"
 description: "Guide for Assignment 5, including recipes, events, and other things of note."
+mainClass: "medium-page"
 ---
 
 <p>Ladies and gentlemen, I present to you... professional localization:
@@ -45,17 +46,17 @@ description: "Guide for Assignment 5, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> <b>Slag Parts </b> </td>
-<td> Have <a href="/escha/items/slag-antenna">Slag Antenna</a>, <a href="/escha/items/slag-memory">Slag Memory</a>, <a href="/escha/items/slag-heart">Slag Heart</a>, <a href="/escha/items/slag-cable">Slag Cable</a>
+<td> Have <a href="/escha/items/slag-antenna/en">Slag Antenna</a>, <a href="/escha/items/slag-memory/en">Slag Memory</a>, <a href="/escha/items/slag-heart/en">Slag Heart</a>, <a href="/escha/items/slag-cable/en">Slag Cable</a>
 </td></tr>
 <tr>
 <td rowspan="4"> <b>Graveyard Entrance </b> </td>
-<td> Slay <a href="/escha/monsters/bad-treasure">Bad Treasure</a> at Slag Graveyard (Graveyard Entrance)
+<td> Slay <a href="/escha/monsters/bad-treasure/en">Bad Treasure</a> at Slag Graveyard (Graveyard Entrance)
 </td></tr>
 <tr>
 <td> Gather at the Corridor.
 </td></tr>
 <tr>
-<td> Slay <a href="/escha/monsters/carrier">Carrier</a> at Graveyard Center.
+<td> Slay <a href="/escha/monsters/carrier/en">Carrier</a> at Graveyard Center.
 </td></tr>
 <tr>
 <td> Gather at Large Corridor.
@@ -75,11 +76,11 @@ description: "Guide for Assignment 5, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> <b>Bomb Disassembly </b> </td>
-<td> Disassemble a <a href="/escha/categories/bomb">(Bomb)</a> category item.
+<td> Disassemble a <a href="/escha/categories/bomb/en">(Bomb)</a> category item.
 </td></tr>
 <tr>
 <td> <b>Scorching Drake </b> </td>
-<td> Slay the <a href="/escha/monsters/scorching-dragon">Scorching Dragon</a> at Upland Forest (Atelier Garden Ruins)
+<td> Slay the <a href="/escha/monsters/scorching-dragon/en">Scorching Dragon</a> at Upland Forest (Atelier Garden Ruins)
 </td></tr>
 <tr>
 <td> <b>Take Back the Village</b> </td>
@@ -87,7 +88,7 @@ description: "Guide for Assignment 5, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> <b>Past Fashions </b> </td>
-<td> Synth <a href="/escha/items/angel-ribbon">Angel Ribbon</a>
+<td> Synth <a href="/escha/items/angel-ribbon/en">Angel Ribbon</a>
 </td></tr>
 <tr>
 <td> <b>Pioneer's Work </b> </td>
@@ -95,11 +96,11 @@ description: "Guide for Assignment 5, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> <b>Lumber Delivery </b> </td>
-<td> Deliver <a href="/escha/items/wood-chips">Wood Chips</a> x1, <a href="/escha/items/iron-plate">Iron Plate</a> x5, or <a href="/escha/categories/lumber">(Lumber)</a> x10 to the Hall.
+<td> Deliver <a href="/escha/items/wood-chips/en">Wood Chips</a> x1, <a href="/escha/items/iron-plate/en">Iron Plate</a> x5, or <a href="/escha/categories/lumber/en">(Lumber)</a> x10 to the Hall.
 </td></tr>
 <tr>
 <td> <b>Battlefield Melody </b> </td>
-<td> Use a <a href="/escha/items/music-box">Music Box</a> in battle.
+<td> Use a <a href="/escha/items/music-box/en">Music Box</a> in battle.
 </td></tr>
 <tr>
 <td> <b>Mass-Produce Items </b> </td>
@@ -107,27 +108,27 @@ description: "Guide for Assignment 5, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> <b>New Age Alchemy </b> </td>
-<td> Use <a href="/escha/items/roten-blitz">Roten Blitz</a> in battle.
+<td> Use <a href="/escha/items/roten-blitz/en">Roten Blitz</a> in battle.
 </td></tr>
 <tr>
 <td> <b>Medicine Delivery </b> </td>
-<td> Deliver <a href="/escha/items/sp-medicine">SP Medicine</a> x2, <a href="/escha/items/trad-medicine">Trad. Medicine</a> x3, or <a href="/escha/items/curing-powder">Curing Powder</a> x4 to Plaza.
+<td> Deliver <a href="/escha/items/sp-medicine/en">SP Medicine</a> x2, <a href="/escha/items/trad-medicine/en">Trad. Medicine</a> x3, or <a href="/escha/items/curing-powder/en">Curing Powder</a> x4 to Plaza.
 </td></tr>
 <tr>
 <td> <b>Animal Material </b> </td>
-<td> Synth <a href="/escha/items/beast-earmuffs">Beast Earmuffs</a>.
+<td> Synth <a href="/escha/items/beast-earmuffs/en">Beast Earmuffs</a>.
 </td></tr>
 <tr>
 <td> <b>Slag Parts Delivery </b> </td>
-<td> Deliver <a href="/escha/items/slag-figure">Slag Figure</a> x1 or <a href="/escha/categories/slag-parts">(Slag Parts)</a> x30.
+<td> Deliver <a href="/escha/items/slag-figure/en">Slag Figure</a> x1 or <a href="/escha/categories/slag-parts/en">(Slag Parts)</a> x30.
 </td></tr>
 <tr>
 <td> <b>Resistance Increase </b> </td>
-<td> Create equipment with <a href="/escha/properties/fire-resist">Fire</a>, <a href="/escha/properties/water-resist">Water</a>, <a href="/escha/properties/earth-resist">Earth</a>, and <a href="/escha/properties/wind-resist">Wind Resist</a>.
+<td> Create equipment with <a href="/escha/properties/fire-resist/en">Fire</a>, <a href="/escha/properties/water-resist/en">Water</a>, <a href="/escha/properties/earth-resist/en">Earth</a>, and <a href="/escha/properties/wind-resist/en">Wind Resist</a>.
 </td></tr>
 <tr>
 <td> <b>Clothing Delivery </b> </td>
-<td> Deliver <a href="/escha/categories/a-clothes">(A Clothes)</a> x5 to the Urban Area. At level 35, you get Quantity LV2 to help you.
+<td> Deliver <a href="/escha/categories/a-clothes/en">(A Clothes)</a> x5 to the Urban Area. At level 35, you get Quantity LV2 to help you.
 </td></tr>
 <tr>
 <td> <b>Career Alchemist </b> </td>
@@ -144,7 +145,7 @@ description: "Guide for Assignment 5, including recipes, events, and other thing
 <td> Awin still wants to renovate.
 </td></tr>
 <tr>
-<td> Deliver <a href="/escha/items/rusty-cog">Rusty Cog</a> x5 or <a href="/escha/categories/metal">(Metal)</a> x10
+<td> Deliver <a href="/escha/items/rusty-cog/en">Rusty Cog</a> x5 or <a href="/escha/categories/metal/en">(Metal)</a> x10
 </td></tr>
 <tr>
 <td> Administration Office </td>
@@ -169,7 +170,7 @@ description: "Guide for Assignment 5, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> <b>Katla</b> </td>
-<td> <a href="/escha/locations/slag-graveyard#graveyard-center">Slag Graveyard</a> </td>
+<td> <a href="/escha/locations/slag-graveyard/en#graveyard-center">Slag Graveyard</a> </td>
 <td> Talking to slags.
 </td></tr>
 <tr>
@@ -204,7 +205,7 @@ description: "Guide for Assignment 5, including recipes, events, and other thing
 </td></tr>
 <tr>
 <td> Apple House </td>
-<td> Jam. You get <a href="/escha/recipe-books/how-to-make-jam">How to Make Jam</a>.
+<td> Jam. You get <a href="/escha/recipe-books/how-to-make-jam/en">How to Make Jam</a>.
 </td></tr>
 <tr>
 <td> <b>Solle </b> </td>
@@ -244,44 +245,44 @@ description: "Guide for Assignment 5, including recipes, events, and other thing
 <th colspan="3"> Recipes
 </th></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/style-magazine">Style Magazine</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/style-magazine/en">Style Magazine</a> </b> </td>
 <td> Katla's Shop </td>
-<td> <a href="/escha/items/strong-yarn">Strong Yarn</a>, <a href="/escha/items/beast-earmuffs">Beast Earmuffs</a>, <a href="/escha/items/feather-ornament">Feather Ornament</a>, <a href="/escha/items/concealing-skin">Concealing Skin</a>, <a href="/escha/items/angel-ribbon">Angel Ribbon</a>, <a href="/escha/items/bi-color-corundum">Bi-color Corundum</a>
+<td> <a href="/escha/items/strong-yarn/en">Strong Yarn</a>, <a href="/escha/items/beast-earmuffs/en">Beast Earmuffs</a>, <a href="/escha/items/feather-ornament/en">Feather Ornament</a>, <a href="/escha/items/concealing-skin/en">Concealing Skin</a>, <a href="/escha/items/angel-ribbon/en">Angel Ribbon</a>, <a href="/escha/items/bi-color-corundum/en">Bi-color Corundum</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/how-to-make-jam">How to Make Jam</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/how-to-make-jam/en">How to Make Jam</a> </b> </td>
 <td> Nio's events </td>
-<td> <a href="/escha/items/apple-jam">Apple Jam</a>
+<td> <a href="/escha/items/apple-jam/en">Apple Jam</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/recycling-manual">Recycling Manual</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/recycling-manual/en">Recycling Manual</a> </b> </td>
 <td> Nio's Shop </td>
-<td> <a href="/escha/items/wood-chips">Wood Chips</a>, <a href="/escha/items/metal-chips">Metal Chips</a>, <a href="/escha/items/various-scraps">Various Scraps</a>, <a href="/escha/items/magic-fiber">Magic Fiber</a>, <a href="/escha/items/cardboard">Cardboard</a>
+<td> <a href="/escha/items/wood-chips/en">Wood Chips</a>, <a href="/escha/items/metal-chips/en">Metal Chips</a>, <a href="/escha/items/various-scraps/en">Various Scraps</a>, <a href="/escha/items/magic-fiber/en">Magic Fiber</a>, <a href="/escha/items/cardboard/en">Cardboard</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/rare-weapons">Rare Weapons</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/rare-weapons/en">Rare Weapons</a> </b> </td>
 <td> One assignment line </td>
-<td> <a href="/escha/items/feather-staff">Feather Staff</a>, <a href="/escha/items/black-wing-veil">Black Wing Veil</a>, <a href="/escha/items/mjolnir">Mjolnir</a>, <a href="/escha/items/magic-talisman">Magic Talisman</a>, <a href="/escha/items/red-starter">Red Starter</a>, <a href="/escha/items/teak-basket">Teak Basket</a>, <a href="/escha/items/boneshatter">Boneshatter</a>
+<td> <a href="/escha/items/feather-staff/en">Feather Staff</a>, <a href="/escha/items/black-wing-veil/en">Black Wing Veil</a>, <a href="/escha/items/mjolnir/en">Mjolnir</a>, <a href="/escha/items/magic-talisman/en">Magic Talisman</a>, <a href="/escha/items/red-starter/en">Red Starter</a>, <a href="/escha/items/teak-basket/en">Teak Basket</a>, <a href="/escha/items/boneshatter/en">Boneshatter</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/freezing-ammo">Freezing Ammo</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/freezing-ammo/en">Freezing Ammo</a> </b> </td>
 <td> 5 assignment lines </td>
-<td> <a href="/escha/items/eis-ice-bomb">Eis Ice Bomb</a>
+<td> <a href="/escha/items/eis-ice-bomb/en">Eis Ice Bomb</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/lost-kingdom">Lost Kingdom</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/lost-kingdom/en">Lost Kingdom</a> </b> </td>
 <td> Slag Graveyard (Disposal Area) </td>
-<td> <a href="/escha/items/slag-figure">Slag Figure</a>, <a href="/escha/items/dream-book">Dream Book</a>, <a href="/escha/items/magical-paint">Magical Paint</a>, <a href="/escha/items/music-box">Music Box</a>, <a href="/escha/items/roten-blitz">Roten Blitz</a>
+<td> <a href="/escha/items/slag-figure/en">Slag Figure</a>, <a href="/escha/items/dream-book/en">Dream Book</a>, <a href="/escha/items/magical-paint/en">Magical Paint</a>, <a href="/escha/items/music-box/en">Music Box</a>, <a href="/escha/items/roten-blitz/en">Roten Blitz</a>
 </td></tr>
 <tr>
-<td> <b><a href="/escha/recipe-books/dog-eared-book">Dog-Eared Book</a> </b> </td>
+<td> <b><a href="/escha/recipe-books/dog-eared-book/en">Dog-Eared Book</a> </b> </td>
 <td> Buy from Katla or get for free from Harry </td>
-<td> <a href="/escha/items/flight-gas-jar">Flight Gas Jar</a>
+<td> <a href="/escha/items/flight-gas-jar/en">Flight Gas Jar</a>
 </td></tr>
 </table>
 </div>
 <ul><li> Area
-<ul><li> <a href="/escha/locations/slag-graveyard">Slag Graveyard</a></li>
+<ul><li> <a href="/escha/locations/slag-graveyard/en">Slag Graveyard</a></li>
 <li> Boss fight at Graveyard Core. </li>
 <li> I had the second tier equipment on, as well as the Lava Cube I mentioned in the <a href="/escha/assignment-4">previous section</a> (along with Omega Craft).</li>
 <li> You should get the second lithograph piece.</li></ul></li></ul>
@@ -292,7 +293,7 @@ adventure items from your previous playthrough.
 the Town Entrance later.
 </p>
 <p>During free time, you'll get an event and song at the Hall.</p>
-<p>You are welcome to make a <a href="/escha/items/music-box">Music Box</a> as good as you can make it, but if you don't care for that item, make it with Terrible
+<p>You are welcome to make a <a href="/escha/items/music-box/en">Music Box</a> as good as you can make it, but if you don't care for that item, make it with Terrible
 Tone (the lowest wind effect). You will thank me later.
 </p>
  <div class="card">
@@ -300,10 +301,10 @@ Tone (the lowest wind effect). You will thank me later.
 <p>Don't bother making the ~best~ Eis Ice Bomb right now. Soon, but not now. (Well, technically nothing I'm telling you to do is optimal.)
 </p><p>So instead, let's make a Roten Blitz.
 </p>
-<ul><li> <a href="/escha/items/iron-plate">Iron Plate</a>
+<ul><li> <a href="/escha/items/iron-plate/en">Iron Plate</a>
 <ul><li> Use a Capactive Paper with Super Destructive.</li>
 <li> Keep Super Destructive. You are free to make this property on the Roten Blitz using Black Neutralizer, if you want.</li></ul></li>
-<li> <a href="/escha/items/roten-blitz">Roten Blitz</a>
+<li> <a href="/escha/items/roten-blitz/en">Roten Blitz</a>
 <ul><li> Ingredients: Ifrit Breath, Iron Plate, Wood Chips, Black Neutralizer.</li>
 <li> Use CP Recovery as needed.</li>
 <li> Toss in Ifrit Breath. Use Power+ LV1 on Wood Chips, then Division to toss it in again.</li>

@@ -3,6 +3,7 @@ title: "Ultimate Build Discussion"
 pubDate: "2021-06-25"
 updatedDate: "2025-11-24"
 description: "There is a lot of depth to ultimate building. You can either go with a generic set or some really specialized characters."
+mainClass: "medium-page"
 ---
 
 Here's a full rundown of the characters. This includes all passives and the base crit rate (estimated to be 25%), including those you buy through the growth system (but not the stat upgrades that you can buy).
@@ -26,10 +27,10 @@ The number in parenthesis next to crit power includes the bonus associated with 
 </table>
 
 Basically, this table is the justification for all the crazy stuff I'll have you do later. But you do have freedom. Keep in mind that crit power has a 100% cap,
-but skill power does not have a cap. See [Equipment Effects](shallie/advanced-mechanics) for more. The advanced mechanics section in general is a good read if you're interested in custom builds.
+but skill power does not have a cap. See [Equipment Effects](/shallie/advanced-mechanics) for more. The advanced mechanics section in general is a good read if you're interested in custom builds.
 Or you can just let me tell you what to do. You'll curbstomp everything.
 
-There's only one property that increases item damage -- [Valorous Soul](shallie/properties/valorous-soul). Yep, that's really it.
+There's only one property that increases item damage -- [Valorous Soul](/shallie/properties/valorous-soul/en). Yep, that's really it.
 
 There are several builds you can do. My tutorial will gear you toward a generic set. If you want to do one of these specialized sets, I'll help you to an extent,
 but not every special set is accounted for. A lot of the special sets use minor variations on the vanilla set. I'll tell you when you can follow the tutorial
@@ -48,7 +49,7 @@ Weapons will generally emphasize the following:
 
 And armor will emphasize these:
 
-* HP/MP... customize this to your build if you super care ([Star Soul](shallie/properties/star-soul) reverses them). Generally HP.
+* HP/MP... customize this to your build if you super care ([Star Soul](/shallie/properties/star-soul/en) reverses them). Generally HP.
 * Enhance Crit
 * Defense
 * DMG Cut
@@ -70,10 +71,10 @@ Alchemists are supporting roles only, and most of your damage will probably come
 
 ## Attack Alchemist Stera
 
-* [Sea Alchemist's Bell](shallie/items/sea-alchemist-s-bell) @ Enhance Burst, Accuracy, Enhance Item, Enhance Skill; w/ Valorous Soul, Champion Soul (or an all stats variant), Speed Huge Enhance
-* [Divine Shirt](shallie/items/divine-shirt) @ Max MP, Enhance Crit, Defense, DMG Cut; w/ Awakened Soul, Benevolent Soul, Heroic Soul
-* [Heart of Fire](shallie/items/heart-of-fire) @ Hide Figure, Power of Light; w/ Lord of Night Soul, Wind Spirit Soul, All Stats Power Up
-* [Thunder Outfit](shallie/items/thunder-outfit) @ Ultimate Action, Ultimate Growth; w/ Lord of Night Soul, Wind Spirit Soul, All Stats Power Up
+* [Sea Alchemist's Bell](/shallie/items/sea-alchemist-s-bell/en) @ Enhance Burst, Accuracy, Enhance Item, Enhance Skill; w/ Valorous Soul, Champion Soul (or an all stats variant), Speed Huge Enhance
+* [Divine Shirt](/shallie/items/divine-shirt/en) @ Max MP, Enhance Crit, Defense, DMG Cut; w/ Awakened Soul, Benevolent Soul, Heroic Soul
+* [Heart of Fire](/shallie/items/heart-of-fire/en) @ Hide Figure, Power of Light; w/ Lord of Night Soul, Wind Spirit Soul, All Stats Power Up
+* [Thunder Outfit](/shallie/items/thunder-outfit/en) @ Ultimate Action, Ultimate Growth; w/ Lord of Night Soul, Wind Spirit Soul, All Stats Power Up
 
 I have tutorials for all of these.
 
@@ -83,14 +84,14 @@ I'd suggest using this if Stera is your main; otherwise, give her a different bu
 
 ## Mix Lotte
 
-* [Magia Sumonitora](shallie/items/magia-sumonitora) @ Enhance Burst, Shorten Item, Enhance Crit, Enhance Skill; w/ Valorous Soul, Super Skills, Skill Huge Enhance
-* [Divine Shirt](shallie/items/divine-shirt) @ Max MP, Enhance Crit, Speed, Evade Attack; w/ Awakened Soul, Evolving Body, Evolves the Body
-* [Mirage Talisman](shallie/items/mirage-talisman) @ Soul Evolution, Awakening of Souls, Enhance Crit-XL, Awakened Soul; w/ Skill Huge Enhance, Skill Savings, Skill Boost
-* [Thunder Outfit](shallie/items/thunder-outfit) @ Ultimate Attack, Ultimate Growth; w/ Skill Huge Enhance, Skill Savings, Skill Boost
+* [Magia Sumonitora](/shallie/items/magia-sumonitora/en) @ Enhance Burst, Shorten Item, Enhance Crit, Enhance Skill; w/ Valorous Soul, Super Skills, Skill Huge Enhance
+* [Divine Shirt](/shallie/items/divine-shirt/en) @ Max MP, Enhance Crit, Speed, Evade Attack; w/ Awakened Soul, Evolving Body, Evolves the Body
+* [Mirage Talisman](/shallie/items/mirage-talisman/en) @ Soul Evolution, Awakening of Souls, Enhance Crit-XL, Awakened Soul; w/ Skill Huge Enhance, Skill Savings, Skill Boost
+* [Thunder Outfit](/shallie/items/thunder-outfit/en) @ Ultimate Attack, Ultimate Growth; w/ Skill Huge Enhance, Skill Savings, Skill Boost
 
 Tutorials for everything. You just need to change the properties to skill-related ones (which isn't recommended on alchemists except for this set).
 
-You will need a couple special [Living Trash Cans](shallie/items/living-trash-can). They look like this:
+You will need a couple special [Living Trash Cans](/shallie/items/living-trash-can/en). They look like this:
 
 * Trash @ Steals Speed, Absorbs All, MP Consume-L; w/ Deadly Strike or Consumes Soul, Curse of Powerlessness/Defenselessness/Slowness
 
@@ -101,9 +102,9 @@ I would recommend Deadly Strike for the auto-crit.
 Basically a setup alchemist. Make your non-main alchemist this.
 
 * Weapon @ Burst Bonus, Shorten Item, Enhance Skill, Accuracy or Enhance Crit; w/ Champion Soul, All Stat Boost, Speed Huge Enhance
-* [Divine Shirt](shallie/items/divine-shirt) @ Max MP, Enhance Crit, Speed, Evade Attack; w/ Awakened Soul, Evolving Body, Evolves the Body
-* [Divine Soul](shallie/items/divine-soul) @ Ultimate Revive, Ultimate Fastness; w/ Lord of Night Soul, All Stats Power Up, Lord of Day Soul
-* [Meteor Boots](shallie/items/meteor-boots) @ Tireless Legs, Quick Action, Resists Impacts, Speed +25; w/ Lord of Night Soul, All Stats Power Up, Lord of Day Soul
+* [Divine Shirt](/shallie/items/divine-shirt/en) @ Max MP, Enhance Crit, Speed, Evade Attack; w/ Awakened Soul, Evolving Body, Evolves the Body
+* [Divine Soul](/shallie/items/divine-soul/en) @ Ultimate Revive, Ultimate Fastness; w/ Lord of Night Soul, All Stats Power Up, Lord of Day Soul
+* [Meteor Boots](/shallie/items/meteor-boots/en) @ Tireless Legs, Quick Action, Resists Impacts, Speed +25; w/ Lord of Night Soul, All Stats Power Up, Lord of Day Soul
 
 Tutorials for all. This set emphasizes speed and Quick turns. It's designed to buff, debuff, then Time Watch.
 
@@ -113,10 +114,10 @@ Lord of Day Soul can be replaced with anything you like.
 
 I mean it literally; Jurie is capable of max damage. Note that her weapon is downgraded to eliminate the need for Wind Spirit Soul.
 
-* [Bloody Claws](shallie/items/bloody-claws) @ Enhance Skill, Enhance Burst, Enhance Crit, Enhance Break; w/ Valorous Soul, Force Soul, Persisting Attack
-* [Divine Shirt](shallie/items/divine-shirt) @ Max MP, Enhance Crit, Speed, Evade Attack; w/ Awakened Soul, Evolving Body, Evolves the Body
-* [Mirage Talisman](shallie/items/mirage-talisman) @ Soul Evolution, Awakenening of Souls, Enhance Crit-XL; w/ Lord of Night Soul, Sky Soul, Skill Huge Enhance
-* [Thunder Outfit](shallie/items/thunder-outfit) @ Ultimate Attack, Ultimate Growth; w/ Lord of Night Soul, Sky Soul, Skill Huge Enhance
+* [Bloody Claws](/shallie/items/bloody-claws/en) @ Enhance Skill, Enhance Burst, Enhance Crit, Enhance Break; w/ Valorous Soul, Force Soul, Persisting Attack
+* [Divine Shirt](/shallie/items/divine-shirt/en) @ Max MP, Enhance Crit, Speed, Evade Attack; w/ Awakened Soul, Evolving Body, Evolves the Body
+* [Mirage Talisman](/shallie/items/mirage-talisman/en) @ Soul Evolution, Awakenening of Souls, Enhance Crit-XL; w/ Lord of Night Soul, Sky Soul, Skill Huge Enhance
+* [Thunder Outfit](/shallie/items/thunder-outfit/en) @ Ultimate Attack, Ultimate Growth; w/ Lord of Night Soul, Sky Soul, Skill Huge Enhance
 
 You're on your own for the Bloody Claws. With good buff items, her attack should reach the cap. Evolving/Evolves may be unnecessary in that case, in which case
 Benevolent and Heroic Soul would give a bit more damage. (Yeah, experiment with that if you want.)
@@ -125,10 +126,10 @@ Benevolent and Heroic Soul would give a bit more damage. (Yeah, experiment with 
 
 Note the downgraded weapon to eliminate the need for Wind Spirit Soul.
 
-* [Zodiac Gem](shallie/items/zodiac-gem) @ Enhance Skill, Enhance Burst, Enhance Crit, Accuracy; w/ Valorous Soul, Force Soul, Persisting Attack
-* [Divine Coat](shallie/items/divine-coat) @ Max HP, Assist Recovery, Defense, Less Action Chance; w/ Awakened Soul, Evolving Body, Evolves the Body
-* [Divine Soul](shallie/items/divine-soul) @ Ultimate Revive, Ultimate Fastness; w/ Lord of Night Soul, Halve MP Consumption, Earth Spirit Soul or Skill Savings
-* [Meteor Boots](shallie/items/meteor-boots) @ Tireless Legs, Quick Action, Resists Impacts; w/ Lord of Night Soul, Halve MP Consumption, Earth Spirit Soul or Skill Savings
+* [Zodiac Gem](/shallie/items/zodiac-gem/en) @ Enhance Skill, Enhance Burst, Enhance Crit, Accuracy; w/ Valorous Soul, Force Soul, Persisting Attack
+* [Divine Coat](/shallie/items/divine-coat/en) @ Max HP, Assist Recovery, Defense, Less Action Chance; w/ Awakened Soul, Evolving Body, Evolves the Body
+* [Divine Soul](/shallie/items/divine-soul/en) @ Ultimate Revive, Ultimate Fastness; w/ Lord of Night Soul, Halve MP Consumption, Earth Spirit Soul or Skill Savings
+* [Meteor Boots](/shallie/items/meteor-boots/en) @ Tireless Legs, Quick Action, Resists Impacts; w/ Lord of Night Soul, Halve MP Consumption, Earth Spirit Soul or Skill Savings
 
 You're on your own for the Zodiac Gem.
 
@@ -141,10 +142,10 @@ Not a requirement by any means.
 
 You can still burst build somewhat, but the infinite turn setups are gone in later versions.
 
-* [Meteorite Sword](shallie/items/meteorite-sword) @ Enhance Skill, Burst Bonus, Enhance Crit, Accuracy; w/ Burst Addition++, Burst Up, Twin Burst
-* [Divine Shirt](shallie/items/divine-shirt) @ Max MP, Enhance Crit, Speed, Evade Attack; w/ Awakened Soul, Evolving Body, Evolves the Body
-* [Thunder Outfit](shallie/items/thunder-outfit) @ Ultimate Action, Ultimate Growth; w/ Lord of Night Soul, Sky Soul, Dark God Soul or All Stats Power Up
-* [Meteor Boots](shallie/items/meteor-boots) @ Tireless Legs, Quick Action, Resists Impacts, Speed +25; w/ Lord of Night Soul, Sky Soul, Dark God Soul or All Stats Power Up
+* [Meteorite Sword](/shallie/items/meteorite-sword/en) @ Enhance Skill, Burst Bonus, Enhance Crit, Accuracy; w/ Burst Addition++, Burst Up, Twin Burst
+* [Divine Shirt](/shallie/items/divine-shirt/en) @ Max MP, Enhance Crit, Speed, Evade Attack; w/ Awakened Soul, Evolving Body, Evolves the Body
+* [Thunder Outfit](/shallie/items/thunder-outfit/en) @ Ultimate Action, Ultimate Growth; w/ Lord of Night Soul, Sky Soul, Dark God Soul or All Stats Power Up
+* [Meteor Boots](/shallie/items/meteor-boots/en) @ Tireless Legs, Quick Action, Resists Impacts, Speed +25; w/ Lord of Night Soul, Sky Soul, Dark God Soul or All Stats Power Up
 
 You'll need to figure out the Metorite Sword on your own.
 
@@ -157,10 +158,10 @@ Homura will get the first few turns; use Chaos Blades to break the boss, burst, 
 
 This is a MIN DAMAGE set. Basically pure setup for someone else. The weapon needs low effect.
 
-* [Sky Alchemy Staff](shallie/items/sky-alchemy-staff) @ Enhance Break; w/ Burst Addition ++, Burst Up, Twin Burst
-* [Riveted Shirt](shallie/items/riveted-shirt) @ Max HP, Avoid KO, Speed, Evade Attack; w/ Speed Huge Enhance, Speed Boost, Defense & Speed Boost
-* [Divine Soul](shallie/items/divine-soul) @ Ultimate Revive, Ultimate Fastness; w/ Lord of Night Soul, Halve MP Consumption, Dark God Soul or All Stats Power Up
-* [Meteor Boots](shallie/items/meteor-boots) @ Tireless Legs, Quick Action, Resists Impacts, Speed +25; w/ Lord of Night Soul, Halve MP Consumption, Dark God Soul or All Stats Power Up
+* [Sky Alchemy Staff](/shallie/items/sky-alchemy-staff/en) @ Enhance Break; w/ Burst Addition ++, Burst Up, Twin Burst
+* [Riveted Shirt](/shallie/items/riveted-shirt/en) @ Max HP, Avoid KO, Speed, Evade Attack; w/ Speed Huge Enhance, Speed Boost, Defense & Speed Boost
+* [Divine Soul](/shallie/items/divine-soul/en) @ Ultimate Revive, Ultimate Fastness; w/ Lord of Night Soul, Halve MP Consumption, Dark God Soul or All Stats Power Up
+* [Meteor Boots](/shallie/items/meteor-boots/en) @ Tireless Legs, Quick Action, Resists Impacts, Speed +25; w/ Lord of Night Soul, Halve MP Consumption, Dark God Soul or All Stats Power Up
 
 This doubles as a chain building set. As with Homura, Dark God Soul is for Time Watch usage.
 
@@ -169,8 +170,8 @@ You'll have to figure out the Sky Alchemy Staff and Rivited Shirt.
 ## Assist Tank Solle
 
 * Vanilla weapon/armor
-* [Planet Sphere](shallie/items/planet-sphere) @ Ultimate Dexterity, Ultimate Doge; w/ Light God Soul, Earth Spirit Soul, Lord of Day Soul
-* [Divine Soul](shallie/items/divine-soul) @ Ultimate Assist Speed, Ultimate Evolution; w/ Light God Soul, Holy Soul, Star Soul
+* [Planet Sphere](/shallie/items/planet-sphere/en) @ Ultimate Dexterity, Ultimate Doge; w/ Light God Soul, Earth Spirit Soul, Lord of Day Soul
+* [Divine Soul](/shallie/items/divine-soul/en) @ Ultimate Assist Speed, Ultimate Evolution; w/ Light God Soul, Holy Soul, Star Soul
 
 His skills are ridiculously slow, so Planet Sphere is used. But his assist guard allows him to tank any hit for 1 HP. This set makes that his only purpose.
 His buffs aren't particularly good compared to items, so avoid them.

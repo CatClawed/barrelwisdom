@@ -5,9 +5,9 @@ updatedDate: "2021-06-25"
 description: "Totori has an ending that makes you need a ton of money. This is the easiest way to get it."
 ---
 
-<p>When Sterk hits 50 friendship, he'll bring lots items, including a <a href="/totori/items/dark-dew">Dark Dew</a>. Have a Chim gather a copy, then make a <a href="/totori/items/spring-cup">Spring Cup</a> (recipe is from <a href="/totori/rorona-events">Rorona Events</a>) with the Dark Dews to get the best effect. Let it sit till it enhances to 100 quality and 5 uses, then register with Pamela. Four/five times.
+<p>When Sterk hits 50 friendship, he'll bring lots items, including a <a href="/totori/items/dark-dew/en">Dark Dew</a>. Have a Chim gather a copy, then make a <a href="/totori/items/spring-cup/en">Spring Cup</a> (recipe is from <a href="/totori/rorona-events">Rorona Events</a>) with the Dark Dews to get the best effect. Let it sit till it enhances to 100 quality and 5 uses, then register with Pamela. Four/five times.
 </p><p>Bother selling the Milk and Dark Dew (and later liquids), but not water. Sometimes you can't sell it, and it isn't worth the whopping 1 Cole. The reason you get some waters that you can't sell is because they have price reducing traits on them, bringing their total value to, seriously, 0 Cole.
-</p><p>This technique works better after you get the boat, because you've seen <a href="/totori/items/sea-puddlle">Sea Puddle</a> and <a href="/totori/items/forest-dew">Forest Dew</a>. That means less worthless water.
+</p><p>This technique works better after you get the boat, because you've seen <a href="/totori/items/sea-puddlle/en">Sea Puddle</a> and <a href="/totori/items/forest-dew/en">Forest Dew</a>. That means less worthless water.
 </p>
 <ul><li> Tips
 <ul><li> Hold X (or A or equivalent) and drag to select items, especially when selling.</li>

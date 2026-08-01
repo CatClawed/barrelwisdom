@@ -127,7 +127,7 @@ The progression methods vary as a result of the different stances on time. Ayesh
 
 As mentioned before, Ayesha's crafting is kind of weird to get into, and you're gated heavily by level, but there is appeal for those who enjoy plotting things out several steps ahead. The combat is also rather basic. E&L's crafting is possibly one of the most accessible in the series, and it has some of the most polished combat in the series. Shallie's synthesis, similar to Lulua, has incredible depth, but you will most likely not engage with 90% of it playing normally. The combat is basically best in series, with more interesting bosses than E&L.
 
-Ayesha Plus/DX has hard mode and includes the Japanese voices, which is probably huge to some of you. PS3 Ayesha lacks JP voices. E&L Plus/DX has a few bosses and a new playable character, as well as new events between the two lead that you can choose to make more romantic or platonic. Shallie has substantial additions to story in Plus/DX. If you happen to get stuck on PS3, I made [a playlist](https://www.youtube.com/playlist?list=PLQktyFBCcQggmp87_SyHJ-et1SsOv3bzy) of the new story stuff. As with Arland DX, the DLC is included in any Plus/DX games.
+Ayesha Plus/DX has hard mode and includes the Japanese voices, which is probably huge to some of you. PS3 Ayesha lacks JP voices. E&L Plus/DX has a few bosses and a new playable character, as well as new events between the two lead that you can choose to make more romantic or platonic. Shallie has substantial additions to story in Plus/DX. If you happen to get stuck on PS3, I made <a href="https://www.youtube.com/playlist?list=PLQktyFBCcQggmp87_SyHJ-et1SsOv3bzy" target="_blank">a playlist</a> of the new story stuff. As with Arland DX, the DLC is included in any Plus/DX games.
 
 ### Mysterious
 
@@ -171,7 +171,7 @@ Despite everything you heard about the protagonist and its marketing, Ryza itsel
 
 These are the only other games available in English. I've said this before: I don't think Annie is worth your time. Nelke is best played with at least some Atelier games behind you because it's an alternate world featuring all of the protagonists up to Mysterious.
 
-For Marie + Elie, the first two games in the series, there is a fan translation from [Atelier Traduction](http://ateliertraduction.forumactif.org/t31-release-of-the-atelier-marie-elie-s-english-patch-on-ps2). The group focuses on French, but this game is indeed in English.
+For Marie + Elie, the first two games in the series, there is a fan translation from <a href="http://ateliertraduction.forumactif.org/t31-release-of-the-atelier-marie-elie-s-english-patch-on-ps2" target="_blank">Atelier Traduction</a>. The group focuses on French, but this game is indeed in English.
 
 Atelier Marie Remake is the newest the series has to offer. It does include the original release of Marie in the Digital Deluxe version, if you are so inclined. The Remake is basically a cuter, somewhat spruced up version of the original. The events are made much easier to get than in the original, and you can completely disable the time limit if the mere words make you anxious. It also lets you walk around the world; the original was a menu heavy game with no exploration whatsoever. It's a very accessible way of playing the classic that started it all.
 
@@ -194,5 +194,5 @@ Atelier Marie Remake is the newest the series has to offer. It does include the 
   * PC considerations
     * Get a controller. This applies to every game before Yumia. They have high CPU usage without one. Easy way to fake one is with vjoy.
     * The games *usually* perform okay. They aren't going to be your well optimized games, but there usually aren't massive problems.
-    * Rorona, Totori, Meruru, and Ayesha all have various forms of menu lag. You can try [this](https://steamcommunity.com/app/1152300/discussions/0/3345546664208090238/) but no promises it'll work.
+    * Rorona, Totori, Meruru, and Ayesha all have various forms of menu lag. You can try <a href="https://steamcommunity.com/app/1152300/discussions/0/3345546664208090238/" target="_blank">this</a> but no promises it'll work.
     * If you have a laptop with integrated graphics, you will need to force the games to run on GPU.
