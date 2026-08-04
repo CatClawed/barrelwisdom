@@ -34,6 +34,11 @@
   align-items: flex-end;
   font-size: 1rem;
   padding-top: 0.4rem;
+
+  svg {
+    width: 1.8em;
+    height: 1.8em;
+  }
 }
 
 .table-item-data {
@@ -49,6 +54,8 @@
 }
 
 .standard-stat-star {
+  display: inline-block;
+  vertical-align: middle;
   height: 1.3rem;
   aspect-ratio: 1;
   fill: gold;
@@ -57,5 +64,17 @@
       stroke: black;
       stroke-width: 8%;
       stroke-linejoin: round;
+  }
+}
+
+.trait-item-icon {
+  width: 1em;
+  height: 1em;
+  padding-right: 0.3em;
+}
+
+.adjust-badge {
+  .badge {
+    margin-left: 0.3rem;
   }
 }

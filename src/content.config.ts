@@ -1,7 +1,8 @@
-import { defineCollection } from 'astro:content';
+import { reslerianaRWData } from '@app/_content/schemas/resleriana-red-white_schema';
+import { yumiaData } from '@app/_content/schemas/yumia_schema';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
-import { yumiaData } from '@app/_content/schemas/yumia_schema';
+import { defineCollection } from 'astro:content';
 import path from 'path';
 
 const blog = defineCollection({
@@ -21,7 +22,8 @@ const blog = defineCollection({
 
 const collections: any = { blog };
 const gameData = [
-  ...yumiaData
+  ...yumiaData,
+  ...reslerianaRWData,
 ]
 
 for (const { game, type, schema } of gameData) {

@@ -1,0 +1,258 @@
+---
+import { elements } from '@components/Games/resleriana-red-white/rw_constants';
+import {
+  stat_translation,
+  location_translation,
+  item_translation,
+} from '@app/localization/translations/common-strings';
+
+const { item, lang, mode, game, section } = Astro.props;
+
+const getStars = (value: number) => ({
+  full: Math.floor(value / 2),
+  half: value % 2 === 1,
+});
+
+const stats = [
+  { label: stat_translation.hp[lang], key: 'hp' },
+  { label: stat_translation.atk[lang], key: 'atk' },
+  { label: stat_translation.dfn[lang], key: 'dfn' },
+  { label: stat_translation.spd[lang], key: 'spd' },
+];
+
+export const ailments = [
+  'blind',
+  'paralysis',
+  'poison',
+  'burn',
+  'taunt',
+  'sleep',
+  'daze',
+  'frostbite',
+];
+
+const elementList = Object.entries(elements).map(([id, color]) => ({
+  id,
+  color,
+}));
+
+const chunkArray = (arr: any[], size: number) =>
+  Array.from({ length: Math.ceil(arr.length / size) }, (_, i) =>
+    arr.slice(i * size, i * size + size),
+  );
+
+const elementRows = chunkArray(elementList, 4);
+const ailmentRows = chunkArray(ailments, 4);
+---
+
+<div class={mode !== 'fragment' ? 'card' : undefined}>
+  <div class="card-title">
+    <h3>{item.name[lang]}</h3>
+    <div class="card-icon-position">
+      {item.race[lang]}
+      {item.dlc && <span class="badge bg-primary">DLC</span>}
+    </div>
+  </div>
+  <div class="image-desc-display">
+    <img
+      class="card-item-display"
+      src={`/media/games/${game}/${section}/${item.id}.webp?v=1`}
+      alt={item.name[lang]}
+      style="aspect-ratio: 1; width: 256px;"
+    />
+    <table class="tbl-transparent">
+      <tbody>
+        {
+          [1, 2, 3, 4].map((n) => {
+            const charKey = `char${n}` as keyof typeof item;
+            const descKey = `desc${n}` as keyof typeof item;
+            if (item[charKey]) {
+              return (
+                <tr>
+                  <td style="white-space: nowrap;">
+                    <b>{item[charKey][lang]}</b>
+                  </td>
+                  <td style="padding-left: 0.5em;">{item[descKey][lang]}</td>
+                </tr>
+              );
+            }
+            return null;
+          })
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid">
+    <div class="grid-6">
+      {
+        item.areas && (
+          <>
+            <b>{location_translation[lang]}</b>
+            <ul>
+              {item.areas.map((loc) => (
+                <li>
+                  {loc.area[lang]}{' '}
+                  {loc.floor_min && `(${loc.floor_min} - ${loc.floor_max})`}
+                </li>
+              ))}
+            </ul>
+          </>
+        )
+      }
+      {
+        item.drops && (
+          <>
+            <b>{item_translation[lang]}</b>
+            <ul>
+              {item.drops.map((d) => (
+                <li>
+                  <a href={`/${game}/items/${d.id}/${lang}`}>{d.name[lang]}</a>
+                </li>
+              ))}
+            </ul>
+          </>
+        )
+      }
+    </div>
+
+    <div class="grid-6">
+      <table class="table-item-data tbl-transparent">
+        <tbody>
+          {
+            stats.map((s) => (
+              <tr>
+                <td>
+                  <b>{s.label}</b>
+                </td>
+                <td>
+                  {Array.from({ length: getStars(item[s.key]).full }).map(
+                    () => (
+                      <svg class="standard-stat-star">
+                        <use href="/spritesheets/main.svg#fa-star" />
+                      </svg>
+                    ),
+                  )}
+                  {getStars(item[s.key]).half && (
+                    <svg class="standard-stat-star">
+                      <use href="/spritesheets/main.svg#fa-half-star" />
+                    </svg>
+                  )}
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <table
+    class="tbl noborder tbl-transparent"
+    style={mode === 'fragment' ? 'margin-left:0.2rem' : undefined}
+  >
+    <tbody>
+      {
+        elementRows.map((row) => (
+          <tr>
+            {row.map((e) => (
+              <td style="padding:0;font-size:0.8em;">
+                <div class="a25rw-attribute">
+                  <div
+                    class="a25rw-element"
+                    style={`background-color:${e.color};`}
+                  >
+                    <svg>
+                      <use href={`/spritesheets/${game}.svg#element-${e.id}`} />
+                    </svg>
+                  </div>
+                  {item[e.id] ?? 0}%
+                </div>
+              </td>
+            ))}
+          </tr>
+        ))
+      }
+
+      {
+        ailmentRows.map((row) => (
+          <tr>
+            {row.map((a) => (
+              <td
+                style={`padding:0; ${mode === 'fragment' ? ' font-size:0.8em;' : ''}`}
+              >
+                <div class="a25rw-attribute">
+                  <div class="a25rw-ailment">
+                    <svg>
+                      <use href={`/spritesheets/${game}.svg#ailment-${a}`} />
+                    </svg>
+                  </div>
+                  {item[a] ?? 0}%
+                </div>
+              </td>
+            ))}
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+
+<style lang="scss">
+  .a25rw-attribute {
+    display: flex;
+    align-items: center;
+    margin-top: 1em;
+
+    div {
+      display: flex;
+    }
+
+    svg {
+      width: 1.8em;
+      height: 1.8em;
+      fill: white;
+      margin: auto;
+    }
+  }
+
+  .a25rw-element {
+    border-radius: 50%;
+    width: 2.5em;
+    height: 2.5em;
+    margin-right: 0.5em;
+  }
+
+  .a25rw-ailment {
+    background-color: #c43121;
+    transform: rotate(45deg);
+    width: 2.1em;
+    height: 2.1em;
+    margin-left: 0.2em;
+    margin-right: 0.7em;
+
+    svg {
+      transform: rotate(-45deg);
+    }
+  }
+
+  .element-icons {
+    td {
+      text-align: center;
+      padding: 0;
+      width: 20%;
+
+      svg {
+        height: 1.5em;
+        aspect-ratio: 1;
+        fill: black;
+        padding: 0.2em;
+      }
+      .colored-icon {
+        border: 1px solid #0004;
+        border-radius: 50%;
+        height: 3em;
+      }
+    }
+  }
+</style>

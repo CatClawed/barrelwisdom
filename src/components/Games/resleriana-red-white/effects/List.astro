@@ -27,7 +27,7 @@ const { items, lang, title, game, section } = Astro.props;
       <li
         class="list-container"
         data-id={i.id}
-        data-search={`${i.data.name[lang].toLowerCase()} ^ ${i.data.desc1[lang].toLowerCase()} ^ ${i.data.desc2?.[lang]?.toLowerCase() ?? ''}`}
+        data-search={`${i.data.name[lang].toLowerCase()} ^ ${i.data.desc[lang].toLowerCase()}`}
       >
         <Detail
           item={i.data}

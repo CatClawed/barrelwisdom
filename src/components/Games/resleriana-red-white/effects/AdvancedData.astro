@@ -1,0 +1,27 @@
+---
+const { item } = Astro.props;
+
+const values = [
+  { v1: item.val1_1, v2: item.val1_2 },
+  { v1: item.val2_1, v2: item.val2_2 },
+  { v1: item.val3_1, v2: item.val3_2 },
+  { v1: item.val4_1, v2: item.val4_2 },
+  { v1: item.val5_1, v2: item.val5_2 },
+  { v1: item.val6_1, v2: item.val6_2 },
+  { v1: item.val7_1, v2: item.val7_2 },
+].filter((item) => item.v1);
+---
+
+{
+  values.length > 0 && (
+    <ul>
+      {values.map((item, index) => (
+        <li>
+          <b>Value {index + 1}: </b>
+          {item.v1}
+          {item.v2 && ` ~ ${item.v2}`}
+        </li>
+      ))}
+    </ul>
+  )
+}

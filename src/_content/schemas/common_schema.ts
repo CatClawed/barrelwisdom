@@ -13,6 +13,7 @@ export const languageSchema = z.object(
 export const nameLinkSchema = z.object({
   id: z.coerce.string(),
   name: languageSchema,
+  visible: z.boolean().optional(),
 });
 
 export const baseItemSchema = z.object({
@@ -20,3 +21,13 @@ export const baseItemSchema = z.object({
   name: languageSchema,
   desc: languageSchema,
 });
+
+export function indexedDescriptions(count: number = 4, strings: string[]=["desc", "char"]) {
+  const fields: Record<string, z.ZodOptional<z.ZodString>> = {};
+  for (let i = 1; i <= count; i++) {
+    for (let s of strings) {
+      fields[`${s}${i}`] = languageSchema.optional()
+    }
+  }
+  return z.object(fields);
+}

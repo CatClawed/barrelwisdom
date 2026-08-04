@@ -70,11 +70,19 @@ export function initListFilters(opts: ListFilterOptions) {
           const none = f.noneValue ?? '-1';
           if (val && val !== none && !cardValues.includes(val)) matches = false;
         } else {
+          const totalKeys = document.querySelectorAll(
+              `[data-filter-group="${f.groupName}"] .icon-button`
+            ).length;
           const active = activeState.get(f.key) ?? [];
           const mode = f.mode ?? 'all';
-          const ok = active.length === 0 || (mode === 'all'
-            ? active.every((v) => cardValues.includes(v))
-            : active.some((v) => cardValues.includes(v)));
+          const ok = active.length === 0 ||
+            (mode === 'all'
+              ? (
+              cardValues.length !== totalKeys
+                ? active.every((v) => cardValues.includes(v))
+                : false
+              )
+              : active.some((v) => cardValues.includes(v)));
           if (!ok) matches = false;
         }
       }
