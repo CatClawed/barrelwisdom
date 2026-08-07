@@ -64,8 +64,8 @@ const ailmentRows = chunkArray(ailments, 4);
       <tbody>
         {
           [1, 2, 3, 4].map((n) => {
-            const charKey = `char${n}` as keyof typeof item;
-            const descKey = `desc${n}` as keyof typeof item;
+            const charKey = `char${n}`;
+            const descKey = `desc${n}`;
             if (item[charKey]) {
               return (
                 <tr>

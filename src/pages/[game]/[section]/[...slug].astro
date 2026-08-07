@@ -9,13 +9,14 @@ export interface sectionConfig {
   game: string;
   section: string;
   fragment?: boolean;
+  listOnly?: boolean;
 }
 
 export async function buildsectionPaths(
   configs: sectionConfig[],
 ): Promise<GetStaticPathsResult> {
   const paths: any[] = [];
-  for (const { game, section, fragment } of configs) {
+  for (const { game, section, fragment, listOnly } of configs) {
     const collectionName = `${game}_${section}`;
     const items = await getCollection(collectionName as any);
     const langs = LanguageData.languages[game];
@@ -23,28 +24,30 @@ export async function buildsectionPaths(
     (langs as string[]).forEach((lang) => {
       paths.push({
         params: { game, section: section, slug: lang },
-        props: { mode: 'list', lang, allItems: items, game },
+        props: { mode: 'list', lang, allItems: items, game, listOnly },
       });
     });
 
-    (items as any[]).forEach((item) => {
-      (langs as string[]).forEach((lang) => {
-        paths.push({
-          params: { game, section: section, slug: `${item.id}/${lang}` },
-          props: { mode: 'detail', item, lang, game },
-        });
-        if (fragment) {
+    if (!listOnly) {
+      (items as any[]).forEach((item) => {
+        (langs as string[]).forEach((lang) => {
           paths.push({
-            params: {
-              game,
-              section: section,
-              slug: `${item.id}/fragment/${lang}`,
-            },
-            props: { mode: 'fragment', item, lang, game },
+            params: { game, section: section, slug: `${item.id}/${lang}` },
+            props: { mode: 'detail', item, lang, game },
           });
-        }
+          if (fragment) {
+            paths.push({
+              params: {
+                game,
+                section: section,
+                slug: `${item.id}/fragment/${lang}`,
+              },
+              props: { mode: 'fragment', item, lang, game },
+            });
+          }
+        });
       });
-    });
+    }
   }
   return paths;
 }
@@ -76,7 +79,9 @@ const title: string = pageTitles[section][lang];
   ) : mode === 'detail' ? (
     <MainLayout
       title={item.data.name[lang]}
-      description={item.data.desc?.[lang] ?? ''}
+      description={
+        item.data.desc ? item.data.desc[lang] : (item.data.desc1[lang] ?? '')
+      }
       mainClass="small-page"
     >
       <DetailComponent

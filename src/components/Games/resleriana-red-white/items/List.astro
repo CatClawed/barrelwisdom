@@ -1,0 +1,120 @@
+---
+import { getCollection } from 'astro:content';
+import ItemAttributeList from './ItemAttributeList.astro';
+import Dropdown from '@components/Games/_common/Dropdown.astro';
+import FilterButton from '@components/Games/_common/FilterButton.astro';
+import {
+  category_translation,
+  filter_translation,
+} from '@app/localization/translations/common-strings';
+
+const { items, lang, title, game, section } = Astro.props;
+
+const categories = await getCollection(`${game}_categories`);
+
+const categoryOptions = categories.map((cat) => ({
+  id: cat.id,
+  label: cat.data.name[lang],
+  icon: `/spritesheets/${game}.svg?v=1#category-${cat.id}`,
+}));
+
+items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
+---
+
+<h1>{title}</h1>
+<div class="master-detail">
+  <div>
+    <div class="filters">
+      <input
+        type="text"
+        id="filter"
+        placeholder={filter_translation[lang]}
+        autocomplete="off"
+        class="grid-10"
+      />
+      <Dropdown
+        options={categoryOptions}
+        name="category"
+        placeholder={category_translation[lang]}
+        lang={lang}
+      />
+      <FilterButton
+        svg={`${game}.svg?v=1`}
+        name="kind"
+        singleOnly={true}
+        list={[
+          { filterKey: 'guide-ingredients', icon: 'guide-ingredients' },
+          { filterKey: 'category-41', icon: 'category-41' },
+          {
+            filterKey: 'guide-consumable-color',
+            icon: 'guide-consumable-color',
+          },
+          { filterKey: 'guide-equip', icon: 'guide-equip' },
+          { filterKey: 'guide-search-color', icon: 'guide-search-color' },
+          { filterKey: 'guide-synthesis-color', icon: 'guide-synthesis-color' },
+          { filterKey: 'guide-important-color', icon: 'guide-important-color' },
+        ]}
+      />
+    </div>
+    <ul
+      class="list"
+      id="item-list"
+      data-lang={lang}
+      data-game={game}
+      data-section={section}
+    >
+      {
+        items.map((i, index) => (
+          <li
+            class="list-container shrink-text"
+            data-id={i.id}
+            data-search={i.data.name[lang]}
+            data-category={i.data.categories.map((c) => c.id).join(',')}
+            data-kind={i.data.icon}
+          >
+            <img
+              class="item-image-display"
+              src={`/media/games/${game}/${section}/${i.id}.webp`}
+              alt={i.data.name[lang]}
+              loading={index < 25 ? 'eager' : 'lazy'}
+            />
+            <div class="card">
+              <div class="card-title">
+                <a href={`/${game}/items/${i.id}/${lang}`}>
+                  <h4 class="item-trigger">{i.data.name[lang]}</h4>
+                </a>
+                {i.data.dlc && <span class="badge bg-primary">DLC</span>}
+                <svg class="medium-icon">
+                  <use href={`/spritesheets/${game}.svg?v=1#${i.data.icon}`} />
+                </svg>
+              </div>
+              <ItemAttributeList
+                cats={i.data.categories}
+                colors={i.data.colors}
+                lang={lang}
+                game={game}
+              />
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <div id="detail-pane" class="detail-pane">
+    <svg class="placeholder-icon">
+      <use href="/spritesheets/main.svg#flask"></use>
+    </svg>
+  </div>
+</div>
+<script>
+  import { initListFilters } from '@app/utils/filter-controller';
+  import { initPaneController } from '@app/utils/detail-pane-controller';
+  initListFilters({
+    filters: [
+      { type: 'select', key: 'category', elementId: 'category' },
+      { type: 'buttons', key: 'kind', groupName: 'kind', mode: 'any' },
+    ],
+  });
+  initPaneController({});
+</script>

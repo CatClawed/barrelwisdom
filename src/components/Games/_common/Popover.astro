@@ -47,10 +47,8 @@ const { title, href, cls = '', restrainWidth = false } = Astro.props;
     padding: 0 1rem 0.5rem;
   }
   .popover-panel {
-    position: absolute;
+    position: fixed;
     z-index: 2100;
-    top: calc(100% + 0.4rem);
-    left: 0;
     min-width: min(250px, 80dvw);
     width: min(70dvw, 600px);
     background: var(--bg-card, white);
@@ -66,14 +64,10 @@ const { title, href, cls = '', restrainWidth = false } = Astro.props;
     }
   }
   .popover-panel--left {
-    left: auto;
     right: 0;
   }
   .restrain-width {
-    width: 100%;
-    width: -webkit-fill-available;
-    width: -moz-available;
-    width: stretch;
+    width: min(380px, 90%);
   }
   .popover-no-title {
     padding: 1rem 0.5rem;

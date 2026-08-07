@@ -46,6 +46,7 @@ export const effectSchema = z.object({
   val7_1: z.number().optional(), val7_2: z.number().optional(),
   items: z.array(nameLinkSchema).optional(),
   dlc: z.boolean().optional(),
+  flag: z.boolean().optional(),
 });
 
 const areaSchema = z.object({
@@ -91,7 +92,7 @@ const catSchema = nameLinkSchema.extend({
 
 const categorySchema = z.object({
   in_cat: z.array(catSchema).optional(),
-  used: z.array(nameLinkSchema).optional(),
+  used: z.array(catSchema).optional(),
   name: languageSchema.optional(),
 });
 
@@ -113,7 +114,7 @@ const itemMixSchema = z.object({
 
 const questDataSchema = z.object({
   name: languageSchema.optional(),
-  char: z.string().optional(),
+  char: languageSchema.optional(),
 });
 
 const treeSchema = z.object({
@@ -151,6 +152,7 @@ export const itemSchema = indexedDescriptions(4).extend({
   mix: z.array(itemMixSchema).optional(),
   quest: z.array(questDataSchema).optional(),
   tree: z.array(treeSchema).optional(),
+  areas: z.array(areaSchema).optional(),
 });
 
 const slotSchema = z.object({
@@ -175,7 +177,7 @@ export const treesSchema = z.object({
 
 export const reslerianaRWData = [
   { game: 'resleriana-red-white', type: 'effects',  schema: effectSchema },
-  //{ game: 'resleriana-red-white', type: 'items', schema: itemSchema },
+  { game: 'resleriana-red-white', type: 'items', schema: itemSchema },
   { game: 'resleriana-red-white', type: 'categories', schema: categorySchema },
   { game: 'resleriana-red-white', type: 'monsters', schema: monsterSchema },
   { game: 'resleriana-red-white', type: 'traits', schema: traitSchema },

@@ -1,0 +1,88 @@
+---
+const { tree, lang, game } = Astro.props;
+
+let max_width = 640;
+let columns = 5;
+
+for (let i = 0; i <= 5; i++) {
+  if (tree[i].row != 1) {
+    max_width = 120 * i + 10 * (i - 1);
+    columns = i;
+    break;
+  }
+}
+---
+
+<div
+  style={`display: grid; grid-template-columns: repeat(${columns}, 1fr); gap: 50px 10px; margin: auto; max-width: ${max_width}px; padding-bottom: 2em;`}
+>
+  {
+    tree.map((node) =>
+      !node.recipe ? (
+        <div
+          style={`max-width: 120px; position: relative; ${node.row == 1 ? 'aspect-ratio: 1;' : 'aspect-ratio: 1/2;'}`}
+        >
+          {node.left && (
+            <div style="position: absolute; z-index: 0; height: 1em; width: calc(100% + 15px); background-color: black; left: -65%; top: calc(100% + 15px);" />
+          )}
+        </div>
+      ) : (
+        <div
+          style={`display: flex; flex-direction: column; max-width: 120px; ${node.row == 1 ? 'aspect-ratio: 1;' : 'aspect-ratio: 1/2;'} width: 100%;`}
+        >
+          {node.ing && (
+            <a
+              href={`/${game}/items/${node.ing.id}/${lang}`}
+              style="display: flex; flex-direction: column; text-align: center; margin-bottom: 10%; position: relative;"
+            >
+              <div
+                style={`display: flex; aspect-ratio: 1; max-width: 120px; border-radius: 50%; background-image: url(/media/games/${game}/item-frame.svg); background-size: contain; background-repeat: no-repeat; background-color: #fffae7; filter: drop-shadow(2px 4px 6px black); z-index: 10;`}
+              >
+                <img
+                  src={`/media/games/${game}/items/${node.ing.id}.webp?v=1`}
+                  alt={node.ing.name[lang]}
+                  style="aspect-ratio: 1; width: 90%; margin: auto;"
+                />
+              </div>
+              <div style="position: absolute; z-index: 0; width: 1em; height: 40px; background-color: black; left: 42%; top: -35px;" />
+              <div style="position: absolute; z-index: 0; width: 1em; height: 2em; background-color: black; left: 42%; top: 100%;" />
+            </a>
+          )}
+          <a
+            href={`/${game}/items/${node.recipe.id}/${lang}`}
+            style="display: flex; flex-direction: column; text-align: center; position: relative;"
+          >
+            <div
+              style={`display: flex; aspect-ratio: 1; max-width: 120px; border-radius: 10%; background-image: url(/media/games/${game}/item-frame.svg); background-size: contain; background-repeat: no-repeat; background-color: #fff5cf; filter: drop-shadow(2px 4px 6px black); z-index: 10;`}
+            >
+              <img
+                src={`/media/games/${game}/items/${node.recipe.id}.webp?v=1`}
+                alt={node.recipe.name[lang]}
+                style="aspect-ratio: 1; width: 90%; max-width: 120px; margin: auto;"
+              />
+            </div>
+            {node.left && (
+              <div style="position: absolute; z-index: 0; height: 1em; width: calc(100% + 15px); background-color: black; left: -65%; top: calc(100% + 15px);" />
+            )}
+            {node.down && (
+              <div style="position: absolute; z-index: 0; width: 1em; height: 2em; background-color: black; left: 42%; top: 100%;" />
+            )}
+            {node.ancient && (
+              <div style="position:absolute; top:-25%; left: -15%; z-index: 20; width: 2em; height: 2em; border-radius: 50%; background-color: gray; display: flex; border: 1px solid black;">
+                <svg style="width: 75%; height: 75%; margin: auto;">
+                  <use href={`/spritesheets/${game}.svg?v=1#pedestal-2`} />
+                </svg>
+              </div>
+            )}
+            {node.char && (
+              <img
+                style="position:absolute; top:-25%; left: -15%; z-index: 20; width: 2em; height: 2em; border-radius: 50%; background-color: white; display: flex; border: 1px solid black;"
+                src={`/media/games/${game}/${node.char}.webp`}
+              />
+            )}
+          </a>
+        </div>
+      ),
+    )
+  }
+</div>

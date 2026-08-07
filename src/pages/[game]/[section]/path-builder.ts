@@ -37,7 +37,7 @@ export const pathData = [
   // { game: 'sophie2', section: 'monsters', fragment: true },
   // { game: 'sophie2', section: 'effects',  fragment: false },
   //
-  // { game: 'resleriana-red-white', section: 'items',    fragment: true },
+  { game: 'resleriana-red-white', section: 'items',    fragment: true },
   { game: 'resleriana-red-white', section: 'traits',   fragment: false },
   { game: 'resleriana-red-white', section: 'monsters', fragment: true },
   { game: 'resleriana-red-white', section: 'effects',  fragment: false },

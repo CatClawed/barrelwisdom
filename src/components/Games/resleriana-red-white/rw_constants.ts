@@ -15,7 +15,7 @@ export const colorList: Record<string, string> = {
   'purple': 'rgba(172,72,185,0.7);'
 }
 
-export const colors: Record<string, string> = {
+export const colorHex: Record<string, string> = {
   'red':    '#b63c3c',
   'blue':   '#3883ad',
   'green':  '#3eb880',
