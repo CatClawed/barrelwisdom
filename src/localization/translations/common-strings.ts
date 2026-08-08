@@ -34,6 +34,18 @@ export const effect_translation: Record<string, string> = {
     "es": "Efectos"
 }
 
+export const effect_singular_translation: Record<string, string> = {
+    "en": "Effect",
+    "ja": "効果",
+    "sc": "效果",
+    "tc": "效果",
+    "de": "Effekt",
+    "fr": "Effet",
+    "ko": "효과",
+    "ru": "Эффект",
+    "es": "Efecto"
+};
+
 export const trait_translation: Record<string, string> = {
     "en": "Traits",
     "ja": "特性",

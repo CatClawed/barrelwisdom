@@ -6,7 +6,16 @@ import MainLayout from '@layouts/MainLayout.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
-  const games: string[] = ['yumia'];
+  const games: string[] = [
+    //'totori',
+    //'escha',
+    //'shallie',
+    //'firis',
+    //'ryza2',
+    //'sophie2',
+    'resleriana-red-white',
+    'yumia',
+  ];
   const paths: any[] = [];
 
   for (const gameId of games) {

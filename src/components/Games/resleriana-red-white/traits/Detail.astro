@@ -1,0 +1,111 @@
+---
+import Popover from '@app/components/Games/_common/Popover.astro';
+import Trait from '@app/components/Games/_common/Trait.astro';
+import { level_translation } from '@app/localization/translations/common-strings';
+import { colorHex } from '@app/components/Games/resleriana-red-white/rw_constants';
+
+const { item, lang, mode, game, section } = Astro.props;
+
+const traitIcons = [
+  { key: 'com', icon: 'trait-combat-items' },
+  { key: 'res', icon: 'trait-heal' },
+  { key: 'inh', icon: 'trait-inhibitors' },
+  { key: 'boo', icon: 'trait-boost-items' },
+  { key: 'wep', icon: 'trait-weapons' },
+  { key: 'arm', icon: 'category-38' },
+  { key: 'acc', icon: 'category-39' },
+  { key: 'exp', icon: 'gather' },
+  { key: 'syn', icon: 'trait-synthesis' },
+  { key: 'sta', icon: 'category-40' },
+];
+---
+<Trait
+  trait={item}
+  mode={mode}
+  game={game}
+  lang={lang}
+  section={section}
+  icons={traitIcons}
+  chunk={5}
+>
+  <div class="card-icon-position" slot="top-level">
+    {item.dlc && <span class="badge bg-primary">DLC</span>}
+    <Popover cls="dashed">
+      <span slot="trigger">{level_translation[lang]}:</span>
+      <p>A measure of rarity. This number determines where traits appear.</p>
+    </Popover>
+    {item.grade}
+  </div>
+  {
+    item.combo1 && (
+      <div>
+        <a href={`/${game}/traits/${item.combo1.id}/${lang}`}>
+          {item.combo1.name[lang]}
+        </a>
+        x{' '}
+        <a href={`/${game}/traits/${item.combo2.id}/${lang}`}>
+          {item.combo2.name[lang]}
+        </a>
+      </div>
+    )
+  }
+
+  {
+    item.item && (
+      <a href={`/${game}/items/${item.item.id}/${lang}`}>
+        <svg class="trait-item-icon">
+          <use href={`/spritesheets/${game}.svg?v=1#guide-ingredients`} />
+        </svg>
+        {item.item.name[lang]}
+      </a>
+    )
+  }
+
+  <p>{item.desc[lang]}</p>
+
+  {
+    item.gift && (
+      <ul style="list-style-type:none; padding: 0;">
+        {item.gift.map((g) => (
+          <li style="display: flex; line-height: 1.8em;">
+            <svg class="color-frame" style={`fill:${colorHex[g.lc]};`}>
+              <use href={`/spritesheets/${game}.svg?v=1#color-l`} />
+            </svg>
+            <svg
+              class="color-frame"
+              style={`margin-right: 0.5em; fill:${colorHex[g.rc]};`}
+            >
+              <use href={`/spritesheets/${game}.svg?v=1#color-r`} />
+            </svg>
+            {g.character[lang]}
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  {
+    mode === 'list' ? (
+    <Popover cls="dashed">
+      <span slot="trigger">Advanced Data</span>
+      <ul>
+        {item.val1_1 && <li>Value 1: {item.val1_1}</li>}
+        {item.val2_1 && <li>Value 2: {item.val2_1}</li>}
+      </ul>
+    </Popover>
+    ) : (
+        <b>Advanced Data:</b>
+        <ul>
+          {item.val1_1 && <li>Value 1: {item.val1_1}</li>}
+          {item.val2_1 && <li>Value 2: {item.val2_1}</li>}
+        </ul>
+    )
+  }
+</Trait>
+
+<style>
+  .color-frame {
+    width: 0.9em;
+    height: 1.8em;
+  }
+</style>

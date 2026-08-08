@@ -1,0 +1,238 @@
+---
+import {
+  colorNames,
+  colorHex,
+} from '@components/Games/resleriana-red-white/rw_constants';
+
+interface Props {
+  lang: string;
+}
+const { lang } = Astro.props;
+const colorKeys = ['red', 'blue', 'green', 'yellow', 'purple'];
+---
+
+<div class="color-picker grid-2">
+  <button
+    type="button"
+    class="color-btn"
+    id="color-btn-l"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    <svg class="color-svg" id="color-svg-l" style={`fill: ${colorHex['--']}`}>
+      <use href="/spritesheets/resleriana-red-white.svg?v=1#color-l"></use>
+    </svg>
+  </button>
+
+  <!-- Right half trigger -->
+  <button
+    type="button"
+    class="color-btn"
+    id="color-btn-r"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    <svg class="color-svg" id="color-svg-r" style={`fill: ${colorHex['--']}`}>
+      <use href="/spritesheets/resleriana-red-white.svg?v=1#color-r"></use>
+    </svg>
+  </button>
+
+  <ul class="color-menu" id="color-menu-l" hidden role="menu">
+    <li>
+      <button
+        type="button"
+        class="color-menu-item"
+        data-side="l"
+        data-value="--">--</button
+      >
+    </li>
+    {
+      colorKeys.map((color) => (
+        <li>
+          <button
+            type="button"
+            class="color-menu-item"
+            data-side="l"
+            data-value={color}
+            style={`--swatch: ${colorHex[color]}`}
+          >
+            <span class="swatch" />
+            {colorNames[color][lang]}
+          </button>
+        </li>
+      ))
+    }
+  </ul>
+
+  <ul class="color-menu" id="color-menu-r" hidden role="menu">
+    <li>
+      <button
+        type="button"
+        class="color-menu-item"
+        data-side="r"
+        data-value="--">--</button
+      >
+    </li>
+    {
+      colorKeys.map((color) => (
+        <li>
+          <button
+            type="button"
+            class="color-menu-item"
+            data-side="r"
+            data-value={color}
+            style={`--swatch: ${colorHex[color]}`}
+          >
+            <span class="swatch" />
+            {colorNames[color][lang]}
+          </button>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .color-picker {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    width: fit-content;
+  }
+  .color-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    line-height: 0;
+  }
+  #color-btn-l {
+    padding-right: 0.1rem;
+  }
+  #color-btn-r {
+    padding-left: 0.1rem;
+  }
+  .color-svg {
+    width: 3em;
+    height: 3em;
+    transition: fill 0.15s ease;
+  }
+  .color-menu {
+    position: fixed;
+    z-index: 2100;
+    background: white;
+    border: var(--table-border, 1px solid #ccc);
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 0.25rem;
+    list-style: none;
+    margin: 0;
+    min-width: 130px;
+  }
+  .color-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 0.4rem 0.6rem;
+    cursor: pointer;
+    border-radius: 4px;
+    font: inherit;
+    text-align: left;
+    &:hover {
+      background: var(--ss-hover-bg, #f0f4ff);
+    }
+  }
+  .swatch {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    background-color: var(--swatch);
+    flex-shrink: 0;
+  }
+</style>
+
+<script>
+  const colorSvgL = document.getElementById('color-svg-l') as SVGElement;
+  const colorSvgR = document.getElementById('color-svg-r') as SVGElement;
+  const menuL = document.getElementById('color-menu-l') as HTMLUListElement;
+  const menuR = document.getElementById('color-menu-r') as HTMLUListElement;
+  const btnL = document.getElementById('color-btn-l') as HTMLButtonElement;
+  const btnR = document.getElementById('color-btn-r') as HTMLButtonElement;
+
+  function emitChange(side: 'l' | 'r', value: string) {
+    document.dispatchEvent(
+      new CustomEvent('colorchange', { detail: { side, value } }),
+    );
+  }
+
+  function positionMenu(menu: HTMLElement, trigger: HTMLElement) {
+    const rect = trigger.getBoundingClientRect();
+    const menuWidth = menu.offsetWidth || 130;
+
+    let top = rect.bottom + 4;
+    let left = rect.left;
+
+    if (left + menuWidth > window.innerWidth - 8) left = rect.right - menuWidth;
+    if (top + menu.offsetHeight > window.innerHeight - 8)
+      top = rect.top - menu.offsetHeight - 4;
+
+    menu.style.top = `${Math.max(8, top)}px`;
+    menu.style.left = `${Math.max(8, left)}px`;
+  }
+
+  function openMenu(
+    menu: HTMLUListElement,
+    trigger: HTMLButtonElement,
+    other: HTMLUListElement,
+  ) {
+    other.hidden = true;
+    const wasHidden = menu.hidden;
+    menu.hidden = !wasHidden;
+    trigger.setAttribute('aria-expanded', String(!wasHidden));
+    if (!menu.hidden) positionMenu(menu, trigger);
+  }
+
+  function closeAll() {
+    menuL.hidden = true;
+    menuR.hidden = true;
+    btnL.setAttribute('aria-expanded', 'false');
+    btnR.setAttribute('aria-expanded', 'false');
+  }
+
+  btnL.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openMenu(menuL, btnL, menuR);
+  });
+  btnR.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openMenu(menuR, btnR, menuL);
+  });
+
+  document.addEventListener('click', closeAll);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeAll();
+  });
+
+  document
+    .querySelectorAll<HTMLButtonElement>('.color-menu-item')
+    .forEach((item) => {
+      item.addEventListener('click', () => {
+        const side = item.dataset.side as 'l' | 'r';
+        const value = item.dataset.value!;
+        const svg = side === 'l' ? colorSvgL : colorSvgR;
+
+        const fill =
+          value === '--'
+            ? 'gray'
+            : getComputedStyle(item.querySelector('.swatch')!).backgroundColor;
+        svg.style.fill = fill;
+
+        emitChange(side, value);
+        closeAll();
+      });
+    });
+</script>

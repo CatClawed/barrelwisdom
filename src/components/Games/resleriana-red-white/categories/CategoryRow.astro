@@ -1,0 +1,13 @@
+---
+import { effect_singular_translation } from '@app/localization/translations/common-strings';
+
+const { item, lang, game } = Astro.props;
+---
+
+<tr>
+  <td>
+    <a href={`/${game}/items/${item.id}/${lang}`}>{item.name[lang]}</a>
+    {item.add && ` (${effect_singular_translation[lang]})`}
+    {item.dlc && <span class="badge bg-primary">DLC</span>}
+  </td>
+</tr>

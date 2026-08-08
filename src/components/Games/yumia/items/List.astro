@@ -3,14 +3,12 @@ import { getCollection } from 'astro:content';
 import ItemAttributeList from './ItemAttributeList.astro';
 import Dropdown from '@components/Games/_common/Dropdown.astro';
 import FilterButton from '@components/Games/_common/FilterButton.astro';
+import TextFilter from '@components/Games/_common/TextFilter.astro';
 import {
   category_to_icon,
   element_map,
 } from '@app/components/Games/yumia/yumia_constants';
-import {
-  category_translation,
-  filter_translation,
-} from '@app/localization/translations/common-strings';
+import { category_translation } from '@app/localization/translations/common-strings';
 import { material_translation } from '@app/localization/translations/yumia';
 
 const { items, lang, title, game, section } = Astro.props;
@@ -37,13 +35,7 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
 <div class="master-detail">
   <div>
     <div class="filters">
-      <input
-        type="text"
-        id="filter"
-        placeholder={filter_translation[lang]}
-        autocomplete="off"
-        class="grid-12"
-      />
+      <TextFilter gridSize={12} lang={lang} />
       <Dropdown
         options={categoryOptions}
         name="category"

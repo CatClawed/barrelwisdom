@@ -3,19 +3,18 @@ import MainLayout from '@layouts/MainLayout.astro';
 import type { GetStaticPathsResult } from 'astro';
 import { LanguageData } from '@app/localization/localization';
 import { getCollection } from 'astro:content';
-import { pathData, getComponentRegistry, pageTitles } from './path-builder';
-
-export interface sectionConfig {
-  game: string;
-  section: string;
-  fragment?: boolean;
-}
+import {
+  pathData,
+  getComponentRegistry,
+  pageTitles,
+  PathConfig,
+} from './path-builder';
 
 export async function buildsectionPaths(
-  configs: sectionConfig[],
+  configs: PathConfig[],
 ): Promise<GetStaticPathsResult> {
   const paths: any[] = [];
-  for (const { game, section, fragment } of configs) {
+  for (const { game, section, fragment, listOnly, mainClass } of configs) {
     const collectionName = `${game}_${section}`;
     const items = await getCollection(collectionName as any);
     const langs = LanguageData.languages[game];
@@ -23,28 +22,47 @@ export async function buildsectionPaths(
     (langs as string[]).forEach((lang) => {
       paths.push({
         params: { game, section: section, slug: lang },
-        props: { mode: 'list', lang, allItems: items, game },
+        props: {
+          mode: 'list',
+          lang,
+          allItems: items,
+          game,
+          listOnly,
+          mainClass,
+        },
       });
     });
 
-    (items as any[]).forEach((item) => {
-      (langs as string[]).forEach((lang) => {
-        paths.push({
-          params: { game, section: section, slug: `${item.id}/${lang}` },
-          props: { mode: 'detail', item, lang, game },
-        });
-        if (fragment) {
+    if (!listOnly) {
+      (items as any[]).forEach((item) => {
+        (langs as string[]).forEach((lang) => {
           paths.push({
             params: {
               game,
               section: section,
-              slug: `${item.id}/fragment/${lang}`,
+              slug: `${item.id}/${lang}`,
             },
-            props: { mode: 'fragment', item, lang, game },
+            props: {
+              mode: 'detail',
+              item,
+              lang,
+              game,
+              mainClass: 'small-page',
+            },
           });
-        }
+          if (fragment) {
+            paths.push({
+              params: {
+                game,
+                section: section,
+                slug: `${item.id}/fragment/${lang}`,
+              },
+              props: { mode: 'fragment', item, lang, game },
+            });
+          }
+        });
       });
-    });
+    }
   }
   return paths;
 }
@@ -54,7 +72,7 @@ export async function getStaticPaths() {
 }
 
 const { game, section } = Astro.params;
-const { mode, item, lang, allItems } = Astro.props;
+const { mode, item, lang, allItems, mainClass } = Astro.props;
 
 const registry = await getComponentRegistry();
 const ListComponent = registry[game][section].list;
@@ -64,7 +82,7 @@ const title: string = pageTitles[section][lang];
 
 {
   mode === 'list' ? (
-    <MainLayout title={title}>
+    <MainLayout title={title} mainClass={mainClass}>
       <ListComponent
         items={allItems}
         lang={lang}
@@ -76,8 +94,10 @@ const title: string = pageTitles[section][lang];
   ) : mode === 'detail' ? (
     <MainLayout
       title={item.data.name[lang]}
-      description={item.data.desc?.[lang] ?? ''}
-      mainClass="small-page"
+      description={
+        item.data.desc ? item.data.desc[lang] : (item.data.desc1[lang] ?? '')
+      }
+      mainClass={mainClass}
     >
       <DetailComponent
         item={item.data}

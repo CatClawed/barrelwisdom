@@ -1,0 +1,60 @@
+---
+import { colorHex } from '@components/Games/resleriana-red-white/rw_constants';
+
+interface Props {
+  cats: { id: string; name: string }[];
+  add?: { id: string; name: string }[];
+  lang: string;
+  game: string;
+  colors?: any;
+  mode?: string;
+}
+
+const {
+  cats,
+  add,
+  lang,
+  game,
+  colors,
+  mode = 'list',
+} = Astro.props;
+
+---
+<div class="two-column" style="height:100%;">
+  {
+    colors && (
+      <div style="display: flex; line-height: 1.8em;">
+        {colors.map((c: any) => (
+          <svg
+            style={`width:0.9em;height:1.8em;fill:${colorHex[c.l] || 'gray'};`}
+          >
+            <use href={`/spritesheets/${game}.svg?v=1#color-l`} />
+          </svg>
+          <svg
+            style={`width:0.9em;height:1.8em;fill:${colorHex[c.r] || 'gray'};`}
+          >
+            <use href={`/spritesheets/${game}.svg?v=1#color-r`} />
+          </svg>
+        ))}
+      </div>
+    )
+  }
+  <ul style="padding-left: 0;">
+    {
+      cats?.map((cat: any) => (
+        <li class="neat-item-display">
+          <svg class="medium-icon" style={cat.add ? 'fill:var(--add-category-color);' : undefined}>
+            <use href={`/spritesheets/${game}.svg?v=1#category-${cat.id}`} />
+          </svg>
+          {mode === 'list' ? (
+            cat.name[lang]
+          ) : (
+          <a href={`/${game}/categories/${cat.id}/${lang}`}>
+            {cat.name[lang]}
+          </a>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</div>

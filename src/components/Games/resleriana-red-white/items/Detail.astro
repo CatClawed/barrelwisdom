@@ -1,0 +1,377 @@
+---
+import { colorHex } from '@components/Games/resleriana-red-white/rw_constants';
+import Popover from '@components/Games/_common/Popover.astro';
+import Tree from '@components/Games/resleriana-red-white/items/Tree.astro';
+import ItemAttributeList from './ItemAttributeList.astro';
+import {
+  stat_translation,
+  monster_translation,
+  item_translation,
+  location_translation,
+  effect_translation,
+  trait_translation,
+  shop_translation,
+  recipebook_translation,
+  permalink_translation,
+} from '@app/localization/translations/common-strings';
+
+import {
+  item_mix_translation,
+  required_ing_translation,
+  synthesis_recipe_translation,
+  orders_translation,
+  recipe_tree_translation,
+} from '@app/localization/translations/rw';
+
+const { item, lang, mode, game, section } = Astro.props;
+---
+
+<div class={mode !== 'fragment' ? 'card' : undefined}>
+  <div class="card-title">
+    <h4>{item.name[lang]}</h4>
+      {item.dlc && <span class="badge bg-primary">DLC</span>}
+      <svg class="medium-icon">
+        <use href={`/spritesheets/${game}.svg?v=1#${item.icon}`}></use>
+      </svg>
+  </div>
+  <div class="image-desc-display">
+    <img
+      class="card-item-display"
+      src={`/media/games/${game}/${section}/${item.id}.webp?v=1`}
+      alt={item.name[lang]}
+      style="aspect-ratio: 1; width: 200px;"
+    />
+    <table class="tbl-transparent">
+      <tbody>
+        {
+          [1, 2, 3, 4].map((n) => {
+            const charKey = `char${n}`;
+            const descKey = `desc${n}`;
+            return (
+              item[charKey] && (
+                <tr>
+                  <td style="white-space: nowrap;">
+                    <b>{item[charKey][lang]}</b>
+                  </td>
+                  <td style="padding-left: 0.5em;">{item[descKey][lang]}</td>
+                </tr>
+              )
+            );
+          })
+        }
+      </tbody>
+    </table>
+  </div>
+  <ItemAttributeList
+    cats={item.categories}
+    colors={item.colors}
+    lang={lang}
+    game={game}
+    mode={mode}
+  />
+  {
+    item.trait && (
+      <p>
+        <b>{trait_translation[lang]}: </b>
+        <a href={`/${game}/traits/${item.trait.id}/${lang}`}>
+          {item.trait.name[lang]}
+        </a>
+      </p>
+    )
+  }
+
+  {
+    item.shop && (
+      <b>
+        <svg class="medium-icon svg-pad-right" style="vertical-align:middle;">
+          <use href={`/spritesheets/${game}.svg?v=1#shop`} />
+        </svg>
+        {shop_translation[lang]}
+      </b>
+      <ul>
+        {item.shop.map((shop: any) => (
+          <li>
+            <a href={`/${game}/shops/${lang}#${shop.name[lang]}`}>
+              {shop.name[lang]}
+            </a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  {
+    item.quest && item.quest.length > 0 && (
+      <p>
+        <b>{orders_translation[lang]}</b> {item.quest[0].char[lang]} -{' '}
+        {item.quest[0].name[lang]}
+      </p>
+    )
+  }
+
+  {
+    item.drop && item.drop.length > 0 && (
+        <b>{monster_translation[lang]}</b>
+        <ul>
+          {item.drop.map((mon: any) => (
+            <li>
+              <a href={`/${game}/monsters/${mon.id}/${lang}`}>
+                {mon.name[lang]}
+              </a>
+            </li>
+          ))}
+        </ul>
+    )
+  }
+
+  {
+    item.book && (
+        <b>{recipebook_translation[lang]}:</b>
+        <ul style="list-style: none;">
+          <li>{item.book.name[lang]}</li>
+          <li>
+            {item.book.shop && item.book.shop.length > 0 && (
+                <svg class="medium-icon svg-pad-right" style="vertical-align:middle;">
+                  <use href={`/spritesheets/${game}.svg?v=1#shop`} />
+                </svg>
+                <a href={`/${game}/shops/${lang}#${item.book.shop[0].name}`}>
+                  {item.book.shop[0].name[lang]}
+                </a>
+            )}
+            {item.book.areas && item.book.areas.length > 0 && (
+            <>
+                <svg class="medium-icon svg-pad-right" style="vertical-align:middle;">
+                  <use
+                    href={`/spritesheets/${game}.svg?v=1#${item.book.areas[0].tool}`}
+                  />
+                </svg>
+                {item.book.areas[0].area[lang]}
+                {item.book.areas[0].floor_max &&
+                  ` (${item.book.areas[0].floor_min} - ${item.book.areas[0].floor_max})`}
+            </>
+            )}
+          </li>
+        </ul>
+    )
+  }
+
+  {
+    item.areas && (
+      <table class="tbl">
+        <tbody>
+          <tr>
+            <th colspan="2">{location_translation[lang]}</th>
+          </tr>
+          {item.areas.map((area: any) => (
+            <tr>
+              <td style="width: 5.1em;">
+                {area.tool !== 'chest' ? (
+                  Array.from({ length: 3 }).map((_, index) => (
+                    <svg
+                      class="medium-icon"
+                      style={area.rank >= index + 1 ? '' : 'fill:lightgray;'}
+                    >
+                      <use
+                        href={`/spritesheets/${game}.svg?v=1#${area.tool}`}
+                      />
+                    </svg>
+                  ))
+                ) : (
+                  <svg class="medium-icon">
+                    <use href={`/spritesheets/${game}.svg?v=1#chest`} />
+                  </svg>
+                )}
+              </td>
+              <td>
+                {area.area[lang]}{' '}
+                {area.floor_max && ` (${area.floor_min} - ${area.floor_max})`}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    )
+  }
+
+  {
+    item.effects && item.effects.length > 0 && (
+      <table class="tbl">
+        <tbody>
+          <tr>
+            <th colspan="2">{effect_translation[lang]}</th>
+          </tr>
+          <tr>
+            <td>
+              <ol>
+                {item.effects.map((eff: any) => (
+                  <li>
+                    {eff.id != 761 ? (
+                      <Popover
+                        title={eff.name[lang]}
+                        href={
+                          eff.flag
+                            ? `/${game}/effects/${eff.id}/${lang}`
+                            : undefined
+                        }
+                      >
+                        <span slot="trigger">{eff.name[lang]}</span>
+                        <p>{eff.desc[lang]}</p>
+                        {eff.val1_1 && (
+                            <b>Advanced Data:</b>
+                            <ul>
+                              {[1, 2, 3, 4, 5, 6, 7].map((n) => {
+                                const val1 = eff[`val${n}_1`];
+                                const val2 = eff[`val${n}_2`];
+                                return (
+                                  val1 && (
+                                    <li>
+                                      <b>Value {n}: </b>
+                                      {val1} {val2 && ` ~ ${val2}`}
+                                    </li>
+                                  )
+                                );
+                              })}
+                            </ul>
+                        )}
+                        {eff.flag && <a href={`/${game}/effects/${eff.id}/${lang}`}>{permalink_translation[lang]}</a>}
+                      </Popover>
+                    ) : (
+                      eff.name[lang]
+                    )}
+                  </li>
+                ))}
+              </ol>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    )
+  }
+  {
+    item.tree && (
+      <table class="tbl"><tbody>
+        <tr><th>{recipe_tree_translation[lang]}</th></tr>
+        <tr><td>
+          <Tree tree={item.tree} game={game} lang={lang} />
+        </td></tr>
+      </tbody></table>
+    )
+  }
+  {
+    item.recipe && item.recipe.length > 0 && (
+      <table class="tbl recipe-table">
+        <tbody>
+          <tr>
+            <th colspan="2">{synthesis_recipe_translation[lang]}</th>
+          </tr>
+          <tr>
+            <td style="padding-top: 1.4em;">
+              {item.colors && item.colors.length > 0 && (
+                <div style="display: flex; margin: -1.5em auto 1.5em auto;">
+                  <svg
+                    style={`width:50%; aspect-ratio:1/2; max-width:100px; fill:${colorHex[item.colors[0].l] || 'gray'};`}
+                  >
+                    <use href={`/spritesheets/${game}.svg?v=1#color-l`} />
+                  </svg>
+                  <svg
+                    style={`width:50%; aspect-ratio:1/2; max-width:100px; fill:${colorHex[item.colors[0].r] || 'gray'};`}
+                  >
+                    <use href={`/spritesheets/${game}.svg?v=1#color-r`} />
+                  </svg>
+                </div>
+              )}
+              {item.recipe.map(
+                (ing: any) =>
+                  ing.cat && (
+                    <a
+                      href={`/${game}/categories/${ing.cat.id}/${lang}`}
+                    >
+                      <div style="display: flex; aspect-ratio: 1; max-width: 200px; border: 3px solid #44444455; background: radial-gradient(circle,rgba(142, 148, 173, 1) 0%, rgba(210, 212, 213, 1) 100%); border-radius:12%; width:calc(100%/1.41421356237);  transform: rotate(45deg); margin-bottom: 1.5em;">
+                        <svg style="width: 70%; margin: auto; transform: rotate(-45deg); aspect-ratio:1; fill:white; filter: drop-shadow(4px 6px 8px gray);">
+                          <use
+                            href={`/spritesheets/${game}.svg?v=1#category-${ing.cat.id}`}
+                          />
+                        </svg>
+                      </div>
+                      {ing.cat.name[lang]}
+                    </a>
+                  ),
+              )}
+            </td>
+          </tr>
+          <tr>
+            <th colspan="2">{required_ing_translation[lang]}</th>
+          </tr>
+          <tr>
+            <td style="column-gap: 1em;">
+              {item.recipe.map(
+                (ing: any) =>
+                  ing.ing && (
+                    <a
+                      href={`/${game}/items/${ing.ing.id}/${lang}`}
+                    >
+                      <div style={`display: flex; aspect-ratio: 1; max-width: 200px; border-radius: 50%; background-image: url(/media/games/${game}/item-frame.svg); background-size: contain; background-repeat: no-repeat; background-color: #fff5cf; filter: drop-shadow(2px 4px 6px black); margin-bottom: 1.5em;`}>
+                        <img
+                          src={`/media/games/${game}/items/${ing.ing.id}.webp?v=1`}
+                          alt={ing.ing.name[lang]}
+                          style="aspect-ratio: 1; width: 90%; max-width: 200px; margin: auto;"
+                        />
+                      </div>
+                      {ing.ing.name[lang]}
+                    </a>
+                  ),
+              )}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    )
+  }
+
+  {
+    item.mix && item.mix.length > 0 && (
+      <table class="tbl">
+        <tbody>
+          <tr>
+            <th colspan="2">{item_mix_translation[lang]}</th>
+          </tr>
+          {item.mix.map((m: any) => (
+            <tr>
+              <td>{m.name[lang]}</td>
+              <td>
+                <ul>
+                  {m.combo.map((combo: any) => (
+                    <li>
+                      <a href={`/${game}/items/${combo.id}/${lang}`}>
+                        {combo.name[lang]}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    )
+  }
+</div>
+<style lang="scss">
+.recipe-table {
+  word-break: break-word;
+  hyphens: auto;
+
+  tr>td {
+    font-size: 0.9rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  tr>td>a {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+}
+</style>

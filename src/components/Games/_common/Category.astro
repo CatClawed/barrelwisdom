@@ -8,7 +8,7 @@ const { name, using = false, colspan = 1 } = Astro.props;
 ---
 
 <h1>{name}</h1>
-<div class="grid">
+<div class="grid adjust-badge">
   <div class="grid-6">
     <table class="tbl outer-borders">
       <thead><tr><th colspan="2">Items in Category</th></tr></thead>
@@ -20,7 +20,7 @@ const { name, using = false, colspan = 1 } = Astro.props;
 
   {
     using && (
-      <div class="grid-6">
+      <div class="grid-6 adjust-badge">
         <table class="tbl outer-borders">
           <thead>
             <tr>

@@ -9,6 +9,7 @@
     box-shadow: 1px 2px 4px 1px grey;
     box-sizing: border-box;
     min-width: 0;
+    overflow: clip;
   }
 
 .card-title {
@@ -27,6 +28,8 @@
 
   .card-icon-position {
     align-self: start;
+    gap: 0.3rem;
+    display: flex;
   }
 
   .badge {

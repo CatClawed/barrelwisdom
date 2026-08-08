@@ -1,6 +1,13 @@
 import { localeIncludes } from '@app/utils/collator';
 import { onCompositionSafeInput } from './composition-safe-input';
 
+
+interface ColorFilter {
+  type: 'color';
+  keyL: string;
+  keyR: string;
+}
+
 interface SelectFilter {
   type: 'select';
   key: string;
@@ -13,7 +20,7 @@ interface ButtonGroupFilter {
   groupName: string;   // matches data-filter-group on FilterButton
   mode?: 'all' | 'any'; // AND vs OR across active selections, default 'all'
 }
-type FilterConfig = SelectFilter | ButtonGroupFilter;
+type FilterConfig = SelectFilter | ButtonGroupFilter | ColorFilter;
 
 interface ListFilterOptions {
   lang: string;
@@ -35,6 +42,8 @@ export function initListFilters(opts: ListFilterOptions) {
   const searchInput = document.getElementById(searchInputId) as HTMLInputElement | null;
   const selectEls = new Map<string, HTMLSelectElement>();
   const activeState = new Map<string, string[]>();
+  let activeColorL = '--';
+  let activeColorR = '--';
 
   filters.forEach((f) => {
     if (f.type === 'select') {
@@ -43,7 +52,7 @@ export function initListFilters(opts: ListFilterOptions) {
         selectEls.set(f.key, el);
         el.addEventListener('change', applyFilters);
       }
-    } else {
+    } else if (f.type === 'buttons') {
       activeState.set(f.key, []);
       document
         .querySelector<HTMLElement>(`[data-filter-group="${f.groupName}"]`)
@@ -51,6 +60,14 @@ export function initListFilters(opts: ListFilterOptions) {
           activeState.set(f.key, e.detail.active);
           applyFilters();
         });
+    } else if (f.type === 'color') {
+      // Listen for the custom event from ColorPicker
+      document.addEventListener('colorchange', (e: any) => {
+        const { side, value } = e.detail;
+        if (side === 'l') activeColorL = value;
+        if (side === 'r') activeColorR = value;
+        applyFilters();
+      });
     }
   });
 
@@ -69,12 +86,33 @@ export function initListFilters(opts: ListFilterOptions) {
           const val = selectEls.get(f.key)?.value;
           const none = f.noneValue ?? '-1';
           if (val && val !== none && !cardValues.includes(val)) matches = false;
-        } else {
+        }
+        else if (f.type === 'buttons') {
+          const totalKeys = document.querySelectorAll(
+              `[data-filter-group="${f.groupName}"] .icon-button`
+            ).length;
           const active = activeState.get(f.key) ?? [];
           const mode = f.mode ?? 'all';
-          const ok = active.length === 0 || (mode === 'all'
-            ? active.every((v) => cardValues.includes(v))
-            : active.some((v) => cardValues.includes(v)));
+          const ok = active.length === 0 ||
+            (mode === 'all'
+              ? (
+              cardValues.length !== totalKeys
+                ? active.every((v) => cardValues.includes(v))
+                : false
+              )
+              : active.some((v) => cardValues.includes(v)));
+          if (!ok) matches = false;
+        }
+        else if (f.type === 'color') {
+          const cardL = card.dataset[f.keyL]?.split(',').filter(Boolean) ?? [];
+          const cardR = card.dataset[f.keyR]?.split(',').filter(Boolean) ?? [];
+          const noFilter = activeColorL === '--' && activeColorR === '--';
+          const ok = noFilter || cardL.some((l, i) => {
+            const r = cardR[i];
+            const matchL = activeColorL === '--' || l === activeColorL;
+            const matchR = activeColorR === '--' || r === activeColorR;
+            return matchL && matchR;
+          });
           if (!ok) matches = false;
         }
       }

@@ -1,0 +1,78 @@
+---
+import Detail from './Detail.astro';
+import FilterButton from '@components/Games/_common/FilterButton.astro';
+import TextFilter from '@components/Games/_common/TextFilter.astro';
+
+const { items, lang, title, game, section } = Astro.props;
+
+items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
+---
+
+<h1>{title}</h1>
+<div class="filters">
+  <TextFilter gridSize={6} lang={lang} />
+  <FilterButton
+    svg={`${game}.svg?v=1`}
+    name="traits"
+    gridSpan={6}
+    list={[
+      { filterKey: 'com', icon: 'trait-combat-items' },
+      { filterKey: 'res', icon: 'trait-heal' },
+      { filterKey: 'inh', icon: 'trait-inhibitors' },
+      { filterKey: 'boo', icon: 'trait-boost-items' },
+      { filterKey: 'wep', icon: 'trait-weapons' },
+      { filterKey: 'arm', icon: 'category-38' },
+      { filterKey: 'acc', icon: 'category-39' },
+      { filterKey: 'exp', icon: 'gather' },
+      { filterKey: 'syn', icon: 'trait-synthesis' },
+      { filterKey: 'sta', icon: 'category-40' },
+    ]}
+  />
+</div>
+<ul
+  class="list"
+  id="item-list"
+  data-lang={lang}
+  data-game={game}
+  data-section={section}
+>
+  {
+    items.map((i, index) => (
+      <li
+        class="list-container"
+        data-id={i.id}
+        data-search={`${i.data.name[lang].toLowerCase()} ^ ${i.data.desc[lang].toLowerCase()} _ ${i.data.combo1 ? i.data.combo1.name[lang].toLowerCase() : ''} x ${i.data.combo2 ? i.data.combo2.name[lang].toLowerCase() : ''}`}
+        data-traits={[
+          i.data.com && 'com',
+          i.data.res && 'res',
+          i.data.inh && 'inh',
+          i.data.boo && 'boo',
+          i.data.wep && 'wep',
+          i.data.arm && 'arm',
+          i.data.acc && 'acc',
+          i.data.exp && 'exp',
+          i.data.syn && 'syn',
+          i.data.sta && 'sta',
+        ]
+          .filter(Boolean)
+          .join(',')}
+      >
+        <Detail
+          item={i.data}
+          lang={lang}
+          mode="list"
+          game={game}
+          section={section}
+        />
+      </li>
+    ))
+  }
+</ul>
+<script>
+  import { initListFilters } from '@app/utils/filter-controller';
+  initListFilters({
+    filters: [
+      { type: 'buttons', key: 'traits', groupName: 'traits', mode: 'all' },
+    ],
+  });
+</script>

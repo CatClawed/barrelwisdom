@@ -1,0 +1,203 @@
+---
+const { tree, lang, game } = Astro.props;
+
+let max_width = 640;
+let columns = 5;
+
+for (let i = 0; i <= 5; i++) {
+  if (tree[i].row != 1) {
+    max_width = 120 * i + 10 * (i - 1);
+    columns = i;
+    break;
+  }
+}
+---
+
+<div
+  class="tree-grid"
+  style={`grid-template-columns: repeat(${columns}, 1fr); max-width: ${max_width}px;`}
+>
+  {
+    tree.map((node) =>
+      !node.recipe ? (
+        <div
+          class="norecipe"
+          style={node.row == 1 ? 'aspect-ratio: 1;' : 'aspect-ratio: 1/2.1;'}
+        >
+          {node.left && <div class="tree-left" />}
+        </div>
+      ) : (
+        <div
+          class="hasrecipe"
+          style={node.row == 1 ? 'aspect-ratio: 1;' : 'aspect-ratio: 1/2.1;'}
+        >
+          {node.ing && (
+            <a
+              href={`/${game}/items/${node.ing.id}/${lang}`}
+              class="tree-ing-link"
+            >
+              <div class="tree-ing-wrapper">
+                <img
+                  src={`/media/games/${game}/items/${node.ing.id}.webp?v=1`}
+                  alt={node.ing.name[lang]}
+                  class="tree-image"
+                />
+              </div>
+              <div class="tree-up" />
+              <div class="tree-down" />
+            </a>
+          )}
+          <a
+            href={`/${game}/items/${node.recipe.id}/${lang}`}
+            class="tree-recipe-link"
+          >
+            <div class="tree-recipe-wrapper">
+              <img
+                src={`/media/games/${game}/items/${node.recipe.id}.webp?v=1`}
+                alt={node.recipe.name[lang]}
+                class="tree-image"
+              />
+            </div>
+            {node.left && <div class="tree-left" />}
+            {node.down && <div class="tree-down" />}
+            {node.ancient && (
+              <div class="tree-ancient">
+                <svg>
+                  <use href={`/spritesheets/${game}.svg?v=1#pedestal-2`} />
+                </svg>
+              </div>
+            )}
+            {node.char && (
+              <img
+                class="tree-char"
+                src={`/media/games/${game}/${node.char}.webp`}
+              />
+            )}
+          </a>
+        </div>
+      ),
+    )
+  }
+</div>
+<style lang="scss">
+  .tree-grid {
+    display: grid;
+    gap: 50px 10px;
+    margin: auto;
+    padding-bottom: 2em;
+  }
+  .norecipe {
+    max-width: 120px;
+    position: relative;
+  }
+  .hasrecipe {
+    display: flex;
+    flex-direction: column;
+    max-width: 120px;
+    width: 100%;
+  }
+  .tree-left {
+    position: absolute;
+    z-index: 0;
+    height: 1em;
+    width: calc(100% + 15px);
+    background-color: black;
+    left: -65%;
+    top: calc(100% + 15px);
+  }
+  .tree-down {
+    position: absolute;
+    z-index: 0;
+    width: 1em;
+    height: 2em;
+    background-color: black;
+    left: 42%;
+    top: 100%;
+  }
+  .tree-up {
+    position: absolute;
+    z-index: 0;
+    width: 1em;
+    height: 40px;
+    background-color: black;
+    left: 42%;
+    top: -35px;
+  }
+  .tree-char {
+    position: absolute;
+    top: -25%;
+    left: -15%;
+    z-index: 20;
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    border: 1px solid black;
+  }
+  .tree-ancient {
+    position: absolute;
+    top: -25%;
+    left: -15%;
+    z-index: 20;
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    background-color: gray;
+    display: flex;
+    border: 1px solid black;
+
+    > svg {
+      width: 75%;
+      height: 75%;
+      margin: auto;
+    }
+  }
+  .tree-image {
+    aspect-ratio: 1;
+    width: 90%;
+    margin: auto;
+    max-width: 120px;
+  }
+
+  .tree-recipe-link {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+  }
+
+  .tree-ing-link {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 10%;
+    position: relative;
+  }
+
+  .tree-recipe-wrapper {
+    display: flex;
+    aspect-ratio: 1;
+    max-width: 120px;
+    border-radius: 10%;
+    background-image: url(/media/games/resleriana-red-white/item-frame.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: #fff5cf;
+    filter: drop-shadow(2px 4px 6px black);
+    z-index: 10;
+  }
+
+  .tree-ing-wrapper {
+    display: flex;
+    aspect-ratio: 1;
+    max-width: 120px;
+    border-radius: 50%;
+    background-image: url(/media/games/resleriana-red-white/item-frame.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: #fffae7;
+    filter: drop-shadow(2px 4px 6px black);
+    z-index: 10;
+  }
+</style>

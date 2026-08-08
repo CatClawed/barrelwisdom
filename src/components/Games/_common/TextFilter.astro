@@ -1,0 +1,33 @@
+---
+import { filter_translation } from '@app/localization/translations/common-strings';
+const { gridSize = 12, lang } = Astro.props;
+---
+
+<div class={`search-container grid-${gridSize}`}>
+  <input
+    type="text"
+    id="filter"
+    placeholder={filter_translation[lang]}
+    autocomplete="off"
+  />
+  <kbd class="shortcut-hint">/</kbd>
+</div>
+<style>
+  .search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    input {
+      width: 100%;
+    }
+  }
+  .shortcut-hint {
+    position: absolute;
+    right: 10px;
+    padding: 2px 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    pointer-events: none; /* Ensure clicks pass through to the input */
+  }
+</style>
