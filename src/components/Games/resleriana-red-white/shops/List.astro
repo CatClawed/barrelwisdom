@@ -1,0 +1,65 @@
+---
+import {
+  level_translation,
+  trait_translation,
+} from '@app/localization/translations/common-strings';
+
+const { items, lang, title, game, section } = Astro.props;
+---
+
+<h1>{title}</h1>
+<div class="table-of-contents">
+  <ol>
+    {
+      items.map((shop) => (
+        <li>
+          <a href={`/${game}/${section}/${lang}#${shop.data.name[lang]}`}>
+            {shop.data.name[lang]}
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</div>
+
+{
+  items.map((shop) => (
+    <div class="card" style="max-width: 1000px; margin-top: 2em;">
+      <h4 class="card-title" id={shop.data.name[lang]}>
+        {shop.data.name[lang]}
+      </h4>
+      <ul class="two-column">
+        {shop.data.slots.map((slot) => (
+          <li>
+            {slot.item.visible ? (
+              <a href={`/${game}/items/${slot.item.id}/${lang}`}>
+                {slot.item.name[lang]}
+              </a>
+            ) : (
+              slot.item.name[lang]
+            )}
+            {slot.item.dlc && (
+              <span style="margin-left: 0.5em;" class="badge bg-primary">
+                DLC
+              </span>
+            )}
+            <ul>
+              <li>Cole: {slot.price}</li>
+              {slot.level_min && (
+                <li>
+                  {level_translation[lang]}: {slot.level_min} - {slot.level_max}
+                </li>
+              )}
+              {slot.grade && (
+                <li>
+                  {trait_translation[lang]} {level_translation[lang]}:{' '}
+                  {slot.grade}
+                </li>
+              )}
+            </ul>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ))
+}

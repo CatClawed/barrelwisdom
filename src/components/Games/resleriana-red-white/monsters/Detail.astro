@@ -5,6 +5,7 @@ import {
   location_translation,
   item_translation,
 } from '@app/localization/translations/common-strings';
+import { chunkArray } from '@app/utils/chunk-array';
 
 const { item, lang, mode, game, section } = Astro.props;
 
@@ -35,11 +36,6 @@ const elementList = Object.entries(elements).map(([id, color]) => ({
   id,
   color,
 }));
-
-const chunkArray = (arr: any[], size: number) =>
-  Array.from({ length: Math.ceil(arr.length / size) }, (_, i) =>
-    arr.slice(i * size, i * size + size),
-  );
 
 const elementRows = chunkArray(elementList, 4);
 const ailmentRows = chunkArray(ailments, 4);

@@ -1,0 +1,51 @@
+---
+import { chunkArray } from '@app/utils/chunk-array';
+
+interface Props {
+  trait: any;
+  mode: string;
+  game: string;
+  lang: string;
+  section: string;
+  icons: Record<string, string>;
+  chunk: number;
+}
+const {
+  trait,
+  mode,
+  game,
+  lang,
+  section,
+  icons,
+  chunk = undefined,
+} = Astro.props;
+const list = chunk ? chunkArray(icons, chunk) : [icons];
+---
+
+<div class={mode === 'detail' || mode === 'list' ? `card` : undefined}>
+  <div class="card-title">
+    {
+      mode === 'list' ? (
+        <a href={`/${game}/${section}/${trait.id}/${lang}`}>
+          <h4>{trait.name[lang]}</h4>
+        </a>
+      ) : (
+        <h4>{trait.name[lang]}</h4>
+      )
+    }
+    <slot name="top-level" />
+  </div>
+  <slot />
+
+  {
+    list.map((iconSet) => (
+      <div class="trait-display" style="text-align:center;">
+        {iconSet.map((t) => (
+          <svg style={`fill: ${trait[t.key] ? 'black' : 'lightgray'};`}>
+            <use href={`/spritesheets/${game}.svg?v=1#${t.icon}`} />
+          </svg>
+        ))}
+      </div>
+    ))
+  }
+</div>

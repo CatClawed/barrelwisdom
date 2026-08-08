@@ -1,6 +1,7 @@
 ---
 import Popover from '@app/components/Games/_common/Popover.astro';
 import Map from '@app/components/Games/yumia/map/Map.astro';
+import Trait from '@app/components/Games/_common/Trait.astro';
 import { view_map_translation, outer_translation, inner_translation, blending_translation } from '@app/localization/translations/yumia';
 import { level_translation } from '@app/localization/translations/common-strings';
 const { item, lang, mode, game, section } = Astro.props;
@@ -16,25 +17,22 @@ const traitIcons = [
 ---
 {mode !== 'fragment' && (
 
-<div class="card">
-  <div class="card-title">
-    {mode !== 'list' ? (
-    <h4>{item.name[lang]}</h4>
-    ) : (
-    <a href={`/${game}/traits/${item.id}/${lang}`} target="_blank">
-      <h4>{item.name[lang]}</h4>
-    </a>
-    )}
-    <div class="card-icon-position">
-      <Popover cls="dashed">
-        <span slot="trigger">{level_translation[lang]}: </span>
-        <p>A measure of rarity. This number determines where traits appear.</p>
-      </Popover>
+<Trait
+  trait={item}
+  mode={mode}
+  game={game}
+  lang={lang}
+  section={section}
+  icons={traitIcons}
+>
+  <div class="card-icon-position" slot="top-level">
+    <Popover cls="dashed">
+      <span slot="trigger">{level_translation[lang]}: </span>
+      <p>A measure of rarity. This number determines where traits appear.</p>
+    </Popover>
 
-      {!item.grade_max ? ` ${item.grade_min}` : ` ${item.grade_min} - ${item.grade_max}`}
-    </div>
+    {!item.grade_max ? ` ${item.grade_min}` : ` ${item.grade_min} - ${item.grade_max}`}
   </div>
-
   {!item.desc2 ? (<p>{item.desc1[lang]}</p>)
     : (
       <p><b>{inner_translation[lang]}: </b>{item.desc1[lang]}<br />
@@ -90,16 +88,7 @@ const traitIcons = [
       )}
     </>
   )}
-  <div class="trait-display">
-    {traitIcons.map((t) => (
-      <svg
-        style={`fill: ${item[t.key] ? 'black' : 'lightgray'};`}
-      >
-        <use href={`/spritesheets/${game}.svg?v=1#${t.icon}`} />
-      </svg>
-    ))}
-  </div>
-</div>
+</Trait>
 
 )}
 {mode !== 'list' && item.chests && <Map data={item.chests} /> }

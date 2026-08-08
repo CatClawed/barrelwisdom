@@ -3,10 +3,20 @@ import {
   item_translation,
   monster_translation,
   properties_translation,
+  shop_translation,
   trait_translation,
 } from '@app/localization/translations/common-strings';
+import { recipe_tree_translation } from '@app/localization/translations/rw';
 
-export const pathData = [
+export interface PathConfig {
+  game: string;
+  section: string;
+  fragment: boolean;
+  listOnly?: boolean;
+  mainClass?: string;
+}
+
+export const pathData: PathConfig[] = [
   // { game: 'totori', section: 'items',    fragment: true },
   // { game: 'totori', section: 'traits',   fragment: false },
   // { game: 'totori', section: 'monsters', fragment: true },
@@ -40,7 +50,9 @@ export const pathData = [
   { game: 'resleriana-red-white', section: 'items',    fragment: true },
   { game: 'resleriana-red-white', section: 'traits',   fragment: false },
   { game: 'resleriana-red-white', section: 'monsters', fragment: true },
-  { game: 'resleriana-red-white', section: 'effects',  fragment: false },
+  { game: 'resleriana-red-white', section: 'effects', fragment: false },
+  { game: 'resleriana-red-white', section: 'recipe-trees', fragment: false, listOnly: true, mainClass: "medium-page" },
+  { game: 'resleriana-red-white', section: 'shops', fragment: false, listOnly: true, mainClass: "medium-page" },
 
   { game: 'yumia', section: 'items',    fragment: true },
   { game: 'yumia', section: 'traits',   fragment: true },
@@ -51,12 +63,11 @@ export const pathData = [
 export async function getComponentRegistry() {
   const registry: Record<string, Record<string, { list: any; detail: any }>> = {};
 
-  for (const { game, section } of pathData) {
+  for (const { game, section, listOnly=false } of pathData) {
     if (!registry[game]) registry[game] = {};
 
     const list = (await import(`@components/Games/${game}/${section}/List.astro`)).default;
-    const detail = (await import(`@components/Games/${game}/${section}/Detail.astro`)).default;
-
+    const detail = listOnly ? undefined : (await import(`@components/Games/${game}/${section}/Detail.astro`)).default;
     registry[game][section] = { list, detail };
   }
   return registry;
@@ -68,4 +79,6 @@ export const pageTitles: Record<string, Record<string, string>> = {
   monsters: monster_translation,
   traits: trait_translation,
   properties: properties_translation,
+  "recipe-trees": recipe_tree_translation,
+  shops: shop_translation,
 };

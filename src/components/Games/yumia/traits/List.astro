@@ -1,7 +1,7 @@
 ---
 import Detail from './Detail.astro';
 import FilterButton from '@components/Games/_common/FilterButton.astro';
-import { filter_translation } from '@app/localization/translations/common-strings';
+import TextFilter from '@components/Games/_common/TextFilter.astro';
 
 const { items, lang, title, game, section } = Astro.props;
 
@@ -10,13 +10,7 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
 
 <h1>{title}</h1>
 <div class="filters">
-  <input
-    type="text"
-    id="filter"
-    placeholder={filter_translation[lang]}
-    autocomplete="off"
-    class="grid-6"
-  />
+  <TextFilter gridSize={8} lang={lang} />
   <FilterButton
     svg={`${game}.svg?v=1`}
     name="traits"

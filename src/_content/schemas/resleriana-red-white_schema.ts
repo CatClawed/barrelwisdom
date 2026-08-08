@@ -138,8 +138,7 @@ export const itemSchema = indexedDescriptions(4).extend({
   name: languageSchema.optional(),
   colors: z.array(colorSchema).optional(),
   icon: z.string().optional(),
-  categories: z.array(nameLinkSchema).optional(),
-  add: z.array(nameLinkSchema).optional(),
+  categories: z.array(catSchema).optional(),
   dlc: z.boolean().optional(),
   effects: z.array(effectSchema).optional(),
   quantity: z.number().optional(),
@@ -164,18 +163,18 @@ const slotSchema = z.object({
 });
 
 export const shopSchema = z.object({
-  id: z.number(),
   name: languageSchema.optional(),
   slots: z.array(slotSchema).optional(),
 });
 
 export const treesSchema = z.object({
-  id: z.number(),
   name: languageSchema.optional(),
   nodes: z.array(treeSchema).optional(),
 });
 
 export const reslerianaRWData = [
+  { game: 'resleriana-red-white', type: 'shops',  schema: shopSchema },
+  { game: 'resleriana-red-white', type: 'recipe-trees',  schema: treesSchema },
   { game: 'resleriana-red-white', type: 'effects',  schema: effectSchema },
   { game: 'resleriana-red-white', type: 'items', schema: itemSchema },
   { game: 'resleriana-red-white', type: 'categories', schema: categorySchema },

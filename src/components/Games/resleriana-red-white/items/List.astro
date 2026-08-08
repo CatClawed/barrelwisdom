@@ -3,10 +3,9 @@ import { getCollection } from 'astro:content';
 import ItemAttributeList from './ItemAttributeList.astro';
 import Dropdown from '@components/Games/_common/Dropdown.astro';
 import FilterButton from '@components/Games/_common/FilterButton.astro';
-import {
-  category_translation,
-  filter_translation,
-} from '@app/localization/translations/common-strings';
+import TextFilter from '@components/Games/_common/TextFilter.astro';
+import { category_translation } from '@app/localization/translations/common-strings';
+import ColorPicker from './ColorPicker.astro';
 
 const { items, lang, title, game, section } = Astro.props;
 
@@ -25,13 +24,8 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
 <div class="master-detail">
   <div>
     <div class="filters">
-      <input
-        type="text"
-        id="filter"
-        placeholder={filter_translation[lang]}
-        autocomplete="off"
-        class="grid-10"
-      />
+      <TextFilter gridSize={10} lang={lang} />
+      <ColorPicker lang={lang} />
       <Dropdown
         options={categoryOptions}
         name="category"
@@ -42,6 +36,7 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
         svg={`${game}.svg?v=1`}
         name="kind"
         singleOnly={true}
+        gridSpan="8"
         list={[
           { filterKey: 'guide-ingredients', icon: 'guide-ingredients' },
           { filterKey: 'category-41', icon: 'category-41' },
@@ -71,6 +66,8 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
             data-search={i.data.name[lang]}
             data-category={i.data.categories.map((c) => c.id).join(',')}
             data-kind={i.data.icon}
+            data-color-r={i.data.colors?.map((c) => c.r).join(',')}
+            data-color-l={i.data.colors?.map((c) => c.l).join(',')}
           >
             <img
               class="item-image-display"
@@ -114,6 +111,7 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
     filters: [
       { type: 'select', key: 'category', elementId: 'category' },
       { type: 'buttons', key: 'kind', groupName: 'kind', mode: 'any' },
+      { type: 'color', keyL: 'colorL', keyR: 'colorR' },
     ],
   });
   initPaneController({});

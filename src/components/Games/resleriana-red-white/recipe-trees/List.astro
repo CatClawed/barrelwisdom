@@ -1,0 +1,26 @@
+---
+import Tree from '@components/Games/resleriana-red-white/items/Tree.astro';
+
+const { items, lang, title, game, section } = Astro.props;
+---
+
+<h1>{title}</h1>
+<div class="table-of-contents">
+  <ol>
+    {
+      items.map((tree) => (
+        <li>
+          <a href={`/${game}/recipe-trees/${lang}#${tree.data.name[lang]}`}>
+            {tree.data.name[lang]}
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</div>
+{
+  items.map((tree) => (
+      <h2 id={tree.data.name[lang]}>{tree.data.name[lang]}</h2>
+      <Tree tree={tree.data.nodes} lang={lang} game={game} />
+  ))
+}

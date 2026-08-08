@@ -170,3 +170,18 @@
     aspect-ratio: 1;
   }
 }
+
+.table-of-contents {
+  border: var(--table-border);
+  background-color: white;
+  background-image: var(--bg-card);
+  padding: 0.8em;
+  border-radius: 10px;
+  width: max-content;
+  max-width: 100%;
+  margin: 0 0.5em 0.5em 0.5em;
+
+  ol {
+    margin-bottom: 0;
+  }
+}

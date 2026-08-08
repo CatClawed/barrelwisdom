@@ -1,8 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import FilterButton from '@components/Games/_common/FilterButton.astro';
-import { filter_translation } from '@app/localization/translations/common-strings';
-
+import TextFilter from '@components/Games/_common/TextFilter.astro';
 const { items, lang, title, game, section } = Astro.props;
 
 const races = await getCollection('yumia_races');
@@ -14,13 +13,7 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
 <div class="master-detail">
   <div>
     <div class="filters">
-      <input
-        type="text"
-        id="filter"
-        placeholder={filter_translation[lang]}
-        autocomplete="off"
-        class="grid-8"
-      />
+      <TextFilter gridSize={8} lang={lang} />
       <FilterButton
         svg={`${game}.svg?v=1`}
         name="kinds"
@@ -75,7 +68,7 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
 
   <div id="detail-pane" class="detail-pane">
     <svg class="placeholder-icon blue-placeholder">
-      <use href={`/spritesheets/${game}.svg#puni`}></use>
+      <use href={`/spritesheets/yumia.svg#puni`}></use>
     </svg>
   </div>
 </div>
@@ -89,3 +82,22 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
   });
   initPaneController({});
 </script>
+<style>
+  .search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    input {
+      width: 100%;
+    }
+  }
+  .shortcut-hint {
+    position: absolute;
+    right: 10px;
+    padding: 2px 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    pointer-events: none; /* Ensure clicks pass through to the input */
+  }
+</style>

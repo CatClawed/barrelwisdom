@@ -1,10 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import Dropdown from '@components/Games/_common/Dropdown.astro';
-import {
-  filter_translation,
-  race_translation,
-} from '@app/localization/translations/common-strings';
+import TextFilter from '@components/Games/_common/TextFilter.astro';
+import { race_translation } from '@app/localization/translations/common-strings';
 
 const { items, lang, title, game, section } = Astro.props;
 
@@ -23,13 +21,7 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
 <div class="master-detail">
   <div>
     <div class="filters">
-      <input
-        type="text"
-        id="filter"
-        placeholder={filter_translation[lang]}
-        autocomplete="off"
-        class="grid-8"
-      />
+      <TextFilter gridSize={8} lang={lang} />
       <Dropdown
         options={raceOptions}
         name="race"
@@ -77,7 +69,7 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
 
   <div id="detail-pane" class="detail-pane">
     <svg class="placeholder-icon blue-placeholder">
-      <use href={`/spritesheets/${game}.svg#puni`}></use>
+      <use href={`/spritesheets/yumia.svg#puni`}></use>
     </svg>
   </div>
 </div>

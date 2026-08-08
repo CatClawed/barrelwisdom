@@ -4,6 +4,10 @@
 @use 'components/_index' as c;
 @import "@fontsource/merriweather/500.css";
 
+html {
+  scroll-padding-top: calc(var(--header-height) + 20px);
+}
+
 a:active,
 a:focus {
     outline: 0;

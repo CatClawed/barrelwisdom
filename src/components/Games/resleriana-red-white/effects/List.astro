@@ -1,19 +1,13 @@
 ---
 import Detail from './Detail.astro';
-import { filter_translation } from '@app/localization/translations/common-strings';
+import TextFilter from '@components/Games/_common/TextFilter.astro';
 
 const { items, lang, title, game, section } = Astro.props;
 ---
 
 <h1>{title}</h1>
 <div class="filters">
-  <input
-    type="text"
-    id="filter"
-    placeholder={filter_translation[lang]}
-    autocomplete="off"
-    class="grid-12"
-  />
+  <TextFilter gridSize={12} lang={lang} />
 </div>
 <ul
   class="list"

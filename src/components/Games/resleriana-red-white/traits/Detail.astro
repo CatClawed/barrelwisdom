@@ -1,7 +1,8 @@
 ---
 import Popover from '@app/components/Games/_common/Popover.astro';
+import Trait from '@app/components/Games/_common/Trait.astro';
 import { level_translation } from '@app/localization/translations/common-strings';
-import { colors } from '@app/components/Games/resleriana-red-white/rw_constants';
+import { colorHex } from '@app/components/Games/resleriana-red-white/rw_constants';
 
 const { item, lang, mode, game, section } = Astro.props;
 
@@ -18,27 +19,22 @@ const traitIcons = [
   { key: 'sta', icon: 'category-40' },
 ];
 ---
-
-<div class="card">
-  <div class="card-title">
-    {
-      mode !== 'list' ? (
-        <h4>{item.name[lang]}</h4>
-      ) : (
-        <a href={`/${game}/traits/${item.id}/${lang}`} target="_blank">
-          <h4>{item.name[lang]}</h4>
-        </a>
-      )
-    }
-
-    <div class="card-icon-position">
-      {item.dlc && <span class="badge bg-primary">DLC</span>}
-      <Popover cls="dashed">
-        <span slot="trigger">{level_translation[lang]}:</span>
-        <p>A measure of rarity. This number determines where traits appear.</p>
-      </Popover>
-      {item.grade}
-    </div>
+<Trait
+  trait={item}
+  mode={mode}
+  game={game}
+  lang={lang}
+  section={section}
+  icons={traitIcons}
+  chunk={5}
+>
+  <div class="card-icon-position" slot="top-level">
+    {item.dlc && <span class="badge bg-primary">DLC</span>}
+    <Popover cls="dashed">
+      <span slot="trigger">{level_translation[lang]}:</span>
+      <p>A measure of rarity. This number determines where traits appear.</p>
+    </Popover>
+    {item.grade}
   </div>
   {
     item.combo1 && (
@@ -72,12 +68,12 @@ const traitIcons = [
       <ul style="list-style-type:none; padding: 0;">
         {item.gift.map((g) => (
           <li style="display: flex; line-height: 1.8em;">
-            <svg class="color-frame" style={`fill:${colors[g.lc]};`}>
+            <svg class="color-frame" style={`fill:${colorHex[g.lc]};`}>
               <use href={`/spritesheets/${game}.svg?v=1#color-l`} />
             </svg>
             <svg
               class="color-frame"
-              style={`margin-right: 0.5em; fill:${colors[g.rc]};`}
+              style={`margin-right: 0.5em; fill:${colorHex[g.rc]};`}
             >
               <use href={`/spritesheets/${game}.svg?v=1#color-r`} />
             </svg>
@@ -105,17 +101,8 @@ const traitIcons = [
         </ul>
     )
   }
+</Trait>
 
-  <div class="trait-display" style="text-align:center;">
-    {
-      traitIcons.map((t) => (
-        <svg style={`fill: ${item[t.key] ? 'black' : 'lightgray'};`}>
-          <use href={`/spritesheets/${game}.svg?v=1#${t.icon}`} />
-        </svg>
-      ))
-    }
-  </div>
-</div>
 <style>
   .color-frame {
     width: 0.9em;

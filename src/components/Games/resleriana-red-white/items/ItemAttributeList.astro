@@ -43,7 +43,7 @@ const {
     {
       cats?.map((cat: any) => (
         <li class="neat-item-display">
-          <svg class="medium-icon">
+          <svg class="medium-icon" style={cat.add ? 'fill:var(--add-category-color);' : undefined}>
             <use href={`/spritesheets/${game}.svg?v=1#category-${cat.id}`} />
           </svg>
           {mode === 'list' ? (
@@ -53,18 +53,6 @@ const {
             {cat.name[lang]}
           </a>
           )}
-        </li>
-      ))
-    }
-    {
-      add?.map((cat: any) => (
-        <li class="neat-item-display">
-          <svg class="medium-icon" style="fill:gray;">
-            <use href={`/spritesheets/${game}.svg?v=1#category-${cat.id}`} />
-          </svg>
-          <a href={`/${game}/categories/${cat.id}/${lang}`}>
-            {cat.name[lang]}
-          </a>
         </li>
       ))
     }

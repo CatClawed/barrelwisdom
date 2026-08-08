@@ -23,3 +23,11 @@ export const colorHex: Record<string, string> = {
   'purple': '#ac48b9',
   '--': 'gray',
 }
+
+export const colorNames = {
+  'red':    {'en': 'Red',    'ja':'赤', 'tc':'紅', 'sc':'红', 'ko':'적'},
+  'blue':   {'en': 'Blue',   'ja':'青', 'tc':'藍', 'sc':'蓝', 'ko':'청'},
+  'green':  {'en': 'Green',  'ja':'緑', 'tc':'綠', 'sc':'绿', 'ko':'녹'},
+  'yellow': {'en': 'Yellow', 'ja':'黄', 'tc':'黃', 'sc':'黄', 'ko':'황'},
+  'purple': {'en': 'Purple', 'ja':'紫', 'tc':'紫', 'sc':'紫', 'ko':'자'},
+}
