@@ -50,6 +50,22 @@ class A26TraitSerializer(A26DefaultSerializer2):
             'combo1', 'combo2', 'combo3', 'combo4',
             'chests', 'group', 'mons',
         ]
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        
+        fields_to_fix = [
+            'lv_min_rand_range', 
+            'lv_max_rand_range', 
+            'trait_base', 
+            'trait_hash'
+        ]
+        
+        for field in fields_to_fix:
+            value = data.get(field)
+            if isinstance(value, str):
+                data[field] = value.replace(',', '; ')
+                
+        return data
 
 class A26EffectListSerializer(A26DefaultSerializer2):
     name = serializers.SerializerMethodField()
@@ -77,6 +93,27 @@ class A26EffectSerializer(A26DefaultSerializer2):
             'prm2_lv_min_rand_range', 'prm2_lv_max_rand_range',
             'items'
         ]
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        
+        fields_to_fix = [
+            "prm1_lv_min_rand_range",
+            "prm1_lv_max_rand_range",
+            "prm2_lv_min_rand_range",
+            "prm2_lv_max_rand_range",
+            "att_tag",
+            "act_tag",
+            "effect_hash",
+        ]
+        
+        for field in fields_to_fix:
+            value = data.get(field)
+            if isinstance(value, str):
+                data[field] = value.replace(',', '; ')
+                
+        return data
+
     def get_items(self, obj):
         arr = []
         for i in obj.ingredienteffect_set.all():
@@ -275,10 +312,26 @@ class A26RecipeEffectCatSerializer(A26DefaultSerializer2):
 
 class A26CategoryFullSerializer(A26DefaultSerializer2):
     name = serializers.SerializerMethodField()
-    in_cat = serializers.SerializerMethodField() # A26ItemSimpleSerializer(source='item_set', many=True)
-    used = A26RecipeEffectCatSerializer(source='recipeeffect_set', many=True)
+    in_cat = serializers.SerializerMethodField()
+    used = serializers.SerializerMethodField() # Changed from nested serializer
+
     class Meta:
         model = Category
         fields = ['in_cat', 'used', 'name']
+
     def get_in_cat(self, obj):
         return A26ItemSimpleSerializer(obj.item_set.filter(hidden=False), context=self.context, many=True).data
+
+    def get_used(self, obj):
+        # 1. Start with the RecipeEffects associated with this category
+        # 2. Grab all Recipes linked to these effects
+        # 3. Extract the Item from each Recipe
+        # 4. Use a set() to ensure we don't have duplicates
+        items = set()
+        for effect in obj.recipeeffect_set.all():
+            for recipe in effect.recipe_set.all():
+                if recipe.item:
+                    items.add(recipe.item)
+        
+        # Return the flat list using your existing ItemSimpleSerializer
+        return A26ItemSimpleSerializer(list(items), context=self.context, many=True).data

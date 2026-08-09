@@ -6,43 +6,15 @@ from games.A12.monsters_a12.serializers import A12MonsterNameSerializer
 from games.A12.traits_a12.serializers import A12TraitNameSerializer
 from games.A12.categories_a12.serializers import A12CategorySerializerName, A12CategorySerializer, A12CategorySerializerLink
 from games.A12.effects_a12.serializers import A12EffectSerializerSimple
+from games._helpers.serializer_helper import LegacyTranslatedField
 
 class A12ItemNameSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
+    name = LegacyTranslatedField(obj_prefix="item", field_name="name")
+    id = serializers.CharField(source="slug")
     class Meta:
         model = Item
-        fields = ['slug', 'name']
+        fields = ['id', 'name']
 
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.item_en.name
-        elif self.context['language'] == 'ja':
-            return obj.item_ja.name
-        else:
-            return obj.item_en.name
-
-# for easy filtering by ingredient
-class A12IngredientSimpleSerializer(serializers.ModelSerializer):
-    ing = serializers.SerializerMethodField()
-    class Meta:
-        model = Ingredient
-        fields = ['ing']
-
-    def to_representation(self, instance):
-        result = super(A12IngredientSimpleSerializer, self).to_representation(instance)
-        return OrderedDict((k, v) for k, v in result.items()
-                           if v not in [None, [], '', False, {}])
-    def get_ing(self,obj):
-        if obj.category is None:
-            if self.context['language'] == 'ja':
-                return obj.item.item_ja.name
-            else:
-              return obj.item.item_en.name
-        else:
-            if self.context['language'] == 'ja':
-                return obj.category.cat_ja.name
-            else:
-                return obj.category.cat_en.name
 
 class A12IngredientSerializer(serializers.ModelSerializer):
     item = A12ItemNameSerializer()
@@ -80,10 +52,11 @@ class A12EffectLineSerializer(serializers.ModelSerializer):
                            if v not in [None, [], '', False, {}])
 
 class A12BookNameSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
+    name = LegacyTranslatedField(obj_prefix="item", field_name="name")
+    id = serializers.CharField(source="slug")
     class Meta:
         model = Book
-        fields = ['slug', 'name']
+        fields = ['id', 'name']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -94,13 +67,13 @@ class A12BookNameSerializer(serializers.ModelSerializer):
             return obj.item_en.name
 
 class A12ItemSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
+    name = LegacyTranslatedField(obj_prefix="item", field_name="name")
     categories = A12CategorySerializerLink(many=True)
-    ingredient_set = A12IngredientSimpleSerializer(many=True, read_only=True)
+    id = serializers.CharField(source="slug")
 
     class Meta:
         model = Item
-        fields = ['slug', 'name', 'level', 'categories', 'ingredient_set', 'isDX', 'isDLC', 'item_type']
+        fields = ['id', 'name', 'level', 'categories', 'isDX', 'isDLC', 'item_type']
 
     def to_representation(self, instance):
         result = super(A12ItemSerializer, self).to_representation(instance)
@@ -115,8 +88,8 @@ class A12ItemSerializer(serializers.ModelSerializer):
             return obj.item_en.name
 
 class A12ItemFullSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
-    desc = serializers.SerializerMethodField()
+    name = LegacyTranslatedField(obj_prefix="item", field_name="name")
+    desc = LegacyTranslatedField(obj_prefix="item", field_name="desc")
     locations = A12RegionNameSerializer(many=True)
     monsters = A12MonsterNameSerializer(many=True)
     traits = A12TraitNameSerializer()
@@ -125,48 +98,28 @@ class A12ItemFullSerializer(serializers.ModelSerializer):
     equip_set = A12EquipSerializer(many=True)
     effectline_set = A12EffectLineSerializer(many=True)
     book_set = A12BookNameSerializer(many=True)
+    id = serializers.CharField(source="slug")
     class Meta:
         model = Item
-        fields = ['slug', 'name', 'desc', 'note', 'level', 'locations', 'monsters', 'traits', 'categories', 'ingredient_set', 'equip_set', 'effectline_set', 'book_set', 'isDX', 'isDLC', 'time', 'mp', 'price', 'uses', 'item_type', 'item_subtype']
+        fields = [
+            'id', 'name', 'desc', 'note', 'level', 'locations',
+            'monsters', 'traits', 'categories', 'ingredient_set', 'equip_set',
+            'effectline_set', 'book_set', 'isDX', 'isDLC', 'time', 'mp', 'price',
+            'uses', 'item_type', 'item_subtype', 'index'
+        ]
 
     def to_representation(self, instance):
         result = super(A12ItemFullSerializer, self).to_representation(instance)
         return OrderedDict((k, v) for k, v in result.items()
                            if v not in [None, [], '', False, {}])
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.item_en.name
-        elif self.context['language'] == 'ja':
-            return obj.item_ja.name
-        else:
-            return obj.item_en.name
-    def get_desc(self,obj):
-        if 'language' not in self.context:
-            return obj.item_en.desc
-        elif self.context['language'] == 'ja':
-            return obj.item_ja.desc
-        else:
-            return obj.item_en.desc
+
 
 class A12BookSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
-    desc = serializers.SerializerMethodField()
+    name = LegacyTranslatedField(obj_prefix="item", field_name="name")
+    desc = LegacyTranslatedField(obj_prefix="item", field_name="desc")
     items = A12ItemNameSerializer(many=True)
+    id = serializers.CharField(source="slug")
     class Meta:
         model = Book
-        fields = ['slug', 'name', 'desc', 'items', 'note', 'isDLC', 'isDX']
+        fields = ['id', 'name', 'desc', 'items', 'note', 'isDLC', 'isDX', 'index']
 
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.item_en.name
-        elif self.context['language'] == 'ja':
-            return obj.item_ja.name
-        else:
-            return obj.item_en.name
-    def get_desc(self,obj):
-        if 'language' not in self.context:
-            return obj.item_en.desc
-        elif self.context['language'] == 'ja':
-            return obj.item_ja.desc
-        else:
-            return obj.item_en.desc

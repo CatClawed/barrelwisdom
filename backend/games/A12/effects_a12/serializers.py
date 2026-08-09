@@ -1,55 +1,28 @@
 from rest_framework import serializers
 from games.A12.effects_a12.models import Effect
 from games.A12.items_a12.models import EffectLine
+from games._helpers.serializer_helper import LegacyTranslatedField
 
 class A12EffectLineSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
-    slug = serializers.CharField(source='item.slug')
+    name = LegacyTranslatedField(obj_prefix='item', field_name='name', obj_path='item')
+    id = serializers.CharField(source='item.slug')
     class Meta:
         model = EffectLine
-        fields = ['name', 'slug']
-
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.item.item_en.name
-        elif self.context['language'] == 'ja':
-            return obj.item.item_ja.name
-        else:
-            return obj.item.item_en.name
+        fields = ['name', 'id']
 
 class A12EffectSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
-    desc = serializers.SerializerMethodField()
+    name = LegacyTranslatedField(obj_prefix='eff', field_name='name')
+    desc = LegacyTranslatedField(obj_prefix='eff', field_name='desc')
     effectline_set = A12EffectLineSerializer(many=True)
+    id = serializers.CharField(source="slug")
     class Meta:
         model = Effect
-        fields = ['slug', 'name', 'desc', "effectline_set"]
+        fields = ['id', 'name', 'desc', "effectline_set", "index"]
 
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.eff_en.name
-        elif self.context['language'] == 'ja':
-            return obj.eff_ja.name
-        else:
-            return obj.eff_en.name
-    def get_desc(self,obj):
-        if 'language' not in self.context:
-            return obj.eff_en.desc
-        elif self.context['language'] == 'ja':
-            return obj.eff_ja.desc
-        else:
-            return obj.eff_en.desc
 
 class A12EffectSerializerSimple(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
+    name = LegacyTranslatedField(obj_prefix='eff', field_name='name')
+    id = serializers.CharField(source="slug")
     class Meta:
         model = Effect
-        fields = ['slug', 'name']
-
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.eff_en.name
-        elif self.context['language'] == 'ja':
-            return obj.eff_ja.name
-        else:
-            return obj.eff_en.name
+        fields = ['id', 'name']

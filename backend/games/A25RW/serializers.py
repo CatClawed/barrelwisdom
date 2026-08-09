@@ -69,7 +69,7 @@ class A25RWEnemySerializer(DefaultSerializer):
             'char1', 'char2', 'char3', 'char4',
             'desc1', 'desc2', 'desc3', 'desc4',
         ]
-        fields = ['id', 'dlc',
+        fields = ['id', 'dlc', 'index',
             'hp', 'atk', 'dfn', 'spd',
             'physical', 'magic', 'fire', 'ice', 'air', 'bolt',
             'blind', 'paralysis','poison','burn',
@@ -171,8 +171,7 @@ class A25RWItemListSerializer(DefaultSerializer):
         ]
 
 class A25RWItemSerializer(DefaultSerializer):
-    categories = A25RWCategorySimpleSerializer(many=True, read_only=True)
-    add = A25RWCategorySimpleSerializer(many=True, read_only=True)
+    categories = serializers.SerializerMethodField()
     areas = A25RWGatherDataSerializer(source='gatherdata_set', many=True, read_only=True)
     book = A25RWBookSerializer()
     effects = A25RWEffectBasicSerializer(many=True, read_only=True)
@@ -213,19 +212,42 @@ class A25RWItemSerializer(DefaultSerializer):
         return [
             {'l': obj.c1l, 'r': obj.c1r},
         ]
+    def get_categories(self, obj):
+        # Serialize standard categories (add: False)
+        cats = A25RWCategorySimpleSerializer(obj.categories.all(), many=True, context=self.context).data
+        for cat in cats:
+            cat['add'] = False
+
+        # Serialize 'add' categories (add: True)
+        adds = A25RWCategorySimpleSerializer(obj.add.all(), many=True, context=self.context).data
+        for add in adds:
+            add['add'] = True
+
+        # Combine both lists
+        return cats + adds
 
 class A25RWCategorySerializer(DefaultSerializer):
-    items = serializers.SerializerMethodField()
-    addcat = A25RWItemSimpleSerializer(many=True, read_only=True)
+    in_cat = serializers.SerializerMethodField()
     used = serializers.SerializerMethodField()
+
     class Meta:
         model = Category
         auto_translated_fields = ['name']
-        fields = ['items', 'addcat', 'used']
+        fields = ['in_cat', 'used', 'name']
 
-    def get_items(self,obj):
-        return A25RWItemSimpleSerializer([item for item in obj.item_set.all()
-            if item.visible], many=True, context=self.context).data
+    def get_in_cat(self, obj):
+        items = [item for item in obj.item_set.filter(visible=True)]
+        items_data = A25RWItemSimpleSerializer(items, many=True, context=self.context).data
+
+        add_items = [item for item in obj.addcat.all()]
+        add_data = A25RWItemSimpleSerializer(add_items, many=True, context=self.context).data
+        for item in add_data:
+            item['add'] = True
+
+        return items_data + add_data
+
     def get_used(self, obj):
-        return A25RWItemSimpleSerializer([ing.item for ing in
-        obj.ingredient_set.all()], many=True, context=self.context).data
+        # Using a set to ensure unique items if an item appears in multiple ingredients
+        items = {ing.item for ing in obj.ingredient_set.all() if ing.item}
+        return A25RWItemSimpleSerializer(list(items), many=True, context=self.context).data
+
