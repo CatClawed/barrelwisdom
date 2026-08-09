@@ -1,15 +1,23 @@
 .master-detail {
   display: grid;
+  grid-template-areas:
+    "filters detail"
+    "list detail";
   grid-template-columns: 1fr min(500px, max(33%, 350px));
   gap: 1rem;
   align-items: start;
 
   @media (max-width: 760px) {
+    grid-template-areas:
+      "filters"
+      "list"
+      "detail";
     grid-template-columns: 1fr;
   }
 }
 
 .detail-pane {
+  grid-area: detail;
   position: sticky;
   top: calc(var(--header-height) + 1rem);
   max-height: calc(98vh - var(--header-height));
@@ -53,6 +61,7 @@
   grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
   gap: 1rem;
   padding: 0;
+  grid-area: list;
 
   @media (max-width: 1000px) {
     grid-template-columns: 1fr;
@@ -124,6 +133,7 @@
   grid-template-columns: repeat(12, 1fr);
   padding-bottom: 1rem;
   gap: 0.5rem;
+  grid-area: filters;
 
   input,
   .searchable-select > button {

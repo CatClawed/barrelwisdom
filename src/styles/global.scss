@@ -133,6 +133,14 @@ ul {
     }
 }
 
+ul {
+  list-style: inside;
+}
+
+li {
+  break-inside: avoid;
+}
+
 table {
     background-color: white;
     background-image: var(--bg-card);

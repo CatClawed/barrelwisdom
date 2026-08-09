@@ -16,12 +16,6 @@ export const nameLinkSchema = z.object({
   visible: z.boolean().optional(),
 });
 
-export const baseItemSchema = z.object({
-  id: z.number(),
-  name: languageSchema,
-  desc: languageSchema,
-});
-
 export function indexedDescriptions(count: number = 4, strings: string[]=["desc", "char"]) {
   const fields: Record<string, z.ZodOptional<z.ZodString>> = {};
   for (let i = 1; i <= count; i++) {

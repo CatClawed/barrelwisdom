@@ -1,7 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
-import Dropdown from '@components/Games/_common/Dropdown.astro';
-import TextFilter from '@components/Games/_common/TextFilter.astro';
+import PaneListWrapper from '@components/Games/_common/List/PaneListWrapper.astro';
+import MonsterList from '@components/Games/_common/List/MonsterList.astro';
+import Dropdown from '@components/Games/_common/Filter/Dropdown.astro';
+import TextFilter from '@components/Games/_common/Filter/TextFilter.astro';
 import { race_translation } from '@app/localization/translations/common-strings';
 
 const { items, lang, title, game, section } = Astro.props;
@@ -17,62 +19,43 @@ const raceOptions = races.map((race) => ({
 items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
 ---
 
-<h1>{title}</h1>
-<div class="master-detail">
-  <div>
-    <div class="filters">
-      <TextFilter gridSize={8} lang={lang} />
-      <Dropdown
-        options={raceOptions}
-        name="race"
-        placeholder={race_translation[lang]}
+<PaneListWrapper
+  title={title}
+  section={section}
+  game={game}
+  lang={lang}
+  placeholder="puni"
+>
+  <div class="filters" slot="filters">
+    <TextFilter gridSize={8} lang={lang} />
+    <Dropdown
+      options={raceOptions}
+      name="race"
+      placeholder={race_translation[lang]}
+      lang={lang}
+    />
+  </div>
+  {
+    items.map((i, index) => (
+      <MonsterList
+        item={i}
+        img={`/media/games/${game}/${section}/${i.id}.webp`}
+        game={game}
+        section={section}
         lang={lang}
-      />
-    </div>
-    <ul
-      class="list"
-      id="item-list"
-      data-lang={lang}
-      data-game={game}
-      data-section={section}
-    >
-      {
-        items.map((i, index) => (
-          <li
-            class="list-container"
-            data-id={i.id}
-            data-search={i.data.name[lang]}
-            data-race={i.data.race.id}
-          >
-            <img
-              class="item-image-display"
-              src={`/media/games/yumia/monsters/${i.id}.webp`}
-              alt={i.data.name[lang]}
-              loading={index < 25 ? 'eager' : 'lazy'}
-            />
-            <div class="card monster-display card-title">
-              <a href={`/yumia/monsters/${i.id}/${lang}`}>
-                <h3 class="item-trigger">{i.data.name[lang]}</h3>
-              </a>
-              {i.data.isDLC && <span class="badge bg-primary">DLC</span>}
-              <svg>
-                <use
-                  href={`/spritesheets/${game}.svg?v=1#race-${i.data.race.id}`}
-                />
-              </svg>
-            </div>
-          </li>
-        ))
-      }
-    </ul>
-  </div>
-
-  <div id="detail-pane" class="detail-pane">
-    <svg class="placeholder-icon blue-placeholder">
-      <use href={`/spritesheets/yumia.svg#puni`}></use>
-    </svg>
-  </div>
-</div>
+        index={index}
+        data-id={i.id}
+        data-search={i.data.name[lang]}
+        data-race={i.data.race.id}
+      >
+        {i.data.isDLC && <span class="badge bg-primary">DLC</span>}
+        <svg>
+          <use href={`/spritesheets/${game}.svg?v=1#race-${i.data.race.id}`} />
+        </svg>
+      </MonsterList>
+    ))
+  }
+</PaneListWrapper>
 <script>
   import { initListFilters } from '@app/utils/filter-controller';
   import { initPaneController } from '@app/utils/detail-pane-controller';

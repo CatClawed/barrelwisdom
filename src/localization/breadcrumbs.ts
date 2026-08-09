@@ -1,10 +1,11 @@
-import { effect_translation, item_translation, monster_translation, properties_translation, trait_translation } from "@app/localization/translations/common-strings.ts";
+import { effect_translation, item_translation, monster_translation, properties_translation, recipebook_translation, trait_translation } from "@app/localization/translations/common-strings.ts";
 export const crumbDictionary: Record<string, Record<string, string>> = {
   items: item_translation,
   monsters: monster_translation,
   effects: effect_translation,
   traits: trait_translation,
   properties: properties_translation,
+  "recipe-books": recipebook_translation,
 };
 
 // the boolean just asks whether to tack on the language code

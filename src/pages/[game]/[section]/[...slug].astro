@@ -3,12 +3,8 @@ import MainLayout from '@layouts/MainLayout.astro';
 import type { GetStaticPathsResult } from 'astro';
 import { LanguageData } from '@app/localization/localization';
 import { getCollection } from 'astro:content';
-import {
-  pathData,
-  getComponentRegistry,
-  pageTitles,
-  PathConfig,
-} from './path-builder';
+import { getComponentRegistry, pageTitles } from './path-builder';
+import { pathData, PathConfig } from '@app/consts';
 
 export async function buildsectionPaths(
   configs: PathConfig[],

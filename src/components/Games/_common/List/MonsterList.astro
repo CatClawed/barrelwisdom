@@ -1,0 +1,22 @@
+---
+const { img, game, index, section, lang, item, cls, ...attr } = Astro.props;
+---
+
+<li class={`list-container ${cls}`} {...attr}>
+  {
+    img !== undefined && (
+      <img
+        class="item-image-display"
+        src={img}
+        alt={item.data.name[lang]}
+        loading={index < 25 ? 'eager' : 'lazy'}
+      />
+    )
+  }
+  <div class="card monster-display card-title">
+    <a href={`/${game}/${section}/${item.id}/${lang}`}>
+      <h3 class="item-trigger">{item.data.name[lang]}</h3>
+    </a>
+    <slot />
+  </div>
+</li>

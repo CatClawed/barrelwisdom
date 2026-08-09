@@ -1,0 +1,21 @@
+---
+import StandardData from './StandardData.astro';
+const { item, lang, mode, game, section } = Astro.props;
+---
+
+<div class={mode !== 'fragment' ? 'card' : undefined}>
+  <div class="card-title">
+    <h4>{item.name[lang]}</h4>
+    {item.isDLC && <span class="badge bg-primary">DLC</span>}
+    {item.isDX && <span class="badge bg-primary">DX</span>}
+  </div>
+  <div class="image-desc-display">
+    <img
+      src={`/media/games/${game}/items/${item.id}.webp?v=1`}
+      alt={item.name[lang]}
+      style="aspect-ratio: 1; width: 200px;"
+    />
+    {item.desc && <p>{item.desc[lang]}</p>}
+  </div>
+  <StandardData book={item} lang={lang} game={game} />
+</div>
