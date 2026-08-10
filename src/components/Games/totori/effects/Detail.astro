@@ -17,7 +17,7 @@ const { item, lang, mode, game, section } = Astro.props;
 
   {item.effectline_set && (
       <b style="margin-top: 1em;">{item_translation[lang]}:</b>
-      <ul class="two-column">
+      <ul class="two-column-list">
         {item.effectline_set.map((i: any) => (
           <li><a href={`/${game}/items/${i.id}/${lang}`}>{i.name[lang]}</a></li>
         ))}

@@ -13,7 +13,7 @@ const { book, lang, game } = Astro.props;
   {
     book.items.map((item) => (
       <li>
-        <a href={`/${game}/items/${item.slug}/${lang}`}>{item.name[lang]}</a>
+        <a href={`/${game}/items/${item.id}/${lang}`}>{item.name[lang]}</a>
       </li>
     ))
   }

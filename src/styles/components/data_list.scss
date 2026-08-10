@@ -6,6 +6,7 @@
   grid-template-columns: 1fr min(500px, max(33%, 350px));
   gap: 1rem;
   align-items: start;
+  grid-template-rows: auto 1fr;
 
   @media (max-width: 760px) {
     grid-template-areas:
@@ -41,14 +42,17 @@
     position: fixed;
     top: var(--header-height);
     left: 0;
+    bottom: 0;
+    right: 0;
     width: 100vw;
-    height: 100vh;
+    max-height: none;
     z-index: 200;
     background: var(--bg-card);
     padding: 1rem;
     box-sizing: border-box;
     display: none; /* Hidden by default */
     flex-shrink: 0;
+    overflow-y: auto;
 
     &.is-open {
       display: block;
@@ -179,9 +183,7 @@
     aspect-ratio: 1;
   }
 
-  .badge {
-    margin: 0;
-  }
+  .badge {}
 }
 
 .content-area {

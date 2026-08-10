@@ -24,7 +24,7 @@
     "sass-embedded": "^1.100.0"
   },
   "allowScripts": {
-    "esbuild@0.28.1": true,
-    "@parcel/watcher@2.6.0": true
+    "@parcel/watcher@2.6.0": true,
+    "esbuild@0.28.2": true
   }
 }

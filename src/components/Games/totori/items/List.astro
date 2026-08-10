@@ -60,7 +60,7 @@ items.sort((a, b) => a.data.index - b.data.index);
         )}
         {i.data.level && (
           <b slot="title-matter">
-            {level_translation[lang]}: {i.data.level}
+            {level_translation[lang]} {i.data.level}
           </b>
         )}
         <ItemAttributeList cats={i.data.categories} game={game} lang={lang} />

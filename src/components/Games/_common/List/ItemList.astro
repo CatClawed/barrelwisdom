@@ -2,7 +2,7 @@
 const { img, game, index, section, lang, item, cls, ...attr } = Astro.props;
 ---
 
-<li class={`list-container ${cls}`} {...attr}>
+<li class={`list-container ${cls ? cls : ''}`} {...attr}>
   {
     img !== undefined && (
       <img

@@ -16,10 +16,10 @@ items.sort((a, b) => a.data.index - b.data.index);
     name="traits"
     gridSpan={6}
     list={[
-      { key: 'usable', icon: 'bomb' },
-      { key: 'ingot', icon: 'weapon' },
-      { key: 'cloth', icon: 'armor' },
-      { key: 'accessory', icon: 'accessory' },
+      { filterKey: 'usable', icon: 'bomb' },
+      { filterKey: 'ingot', icon: 'weapon' },
+      { filterKey: 'cloth', icon: 'armor' },
+      { filterKey: 'accessory', icon: 'accessory' },
     ]}
   />
 </div>
@@ -35,7 +35,7 @@ items.sort((a, b) => a.data.index - b.data.index);
       <li
         class="list-container"
         data-id={i.id}
-        data-search={`${i.data.name[lang].toLowerCase()} ^ ${i.data.desc[lang].toLowerCase()} _ ${i.data.combo1 ? i.data.combo1.name[lang].toLowerCase() : ''} x ${i.data.combo2 ? i.data.combo2.name[lang].toLowerCase() : ''}`}
+        data-search={`${i.data.name[lang].toLowerCase()} ^ ${i.data.desc[lang].toLowerCase()} }`}
         data-traits={[
           i.data.synth && 'synth',
           i.data.usable && 'usable',
