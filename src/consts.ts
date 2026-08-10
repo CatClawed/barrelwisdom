@@ -16,15 +16,17 @@ export interface PathConfig {
   game: string;
   section: string;
   fragment: boolean;
-  listOnly?: boolean;
+  listPath?: boolean;
+  detailPath?: boolean;
   mainClass?: string;
 }
 
 export const pathData: PathConfig[] = [
+  { game: 'totori', section: 'locations',   fragment: false, listPath: false, },
   { game: 'totori', section: 'recipe-books',   fragment: false },
-  // { game: 'totori', section: 'items',    fragment: true },
+  { game: 'totori', section: 'items',    fragment: true },
   { game: 'totori', section: 'traits',   fragment: false },
-  // { game: 'totori', section: 'monsters', fragment: true },
+  { game: 'totori', section: 'monsters', fragment: true },
   { game: 'totori', section: 'effects',  fragment: false },
   //
   // { game: 'escha', section: 'items',      fragment: true },
@@ -56,8 +58,8 @@ export const pathData: PathConfig[] = [
   { game: 'resleriana-red-white', section: 'traits',   fragment: false },
   { game: 'resleriana-red-white', section: 'monsters', fragment: true },
   { game: 'resleriana-red-white', section: 'effects', fragment: false },
-  { game: 'resleriana-red-white', section: 'recipe-trees', fragment: false, listOnly: true, mainClass: "medium-page" },
-  { game: 'resleriana-red-white', section: 'shops', fragment: false, listOnly: true, mainClass: "medium-page" },
+  { game: 'resleriana-red-white', section: 'recipe-trees', fragment: false, detailPath: false, mainClass: "medium-page" },
+  { game: 'resleriana-red-white', section: 'shops', fragment: false, detailPath: false, mainClass: "medium-page" },
 
   { game: 'yumia', section: 'items',    fragment: true },
   { game: 'yumia', section: 'traits',   fragment: true },

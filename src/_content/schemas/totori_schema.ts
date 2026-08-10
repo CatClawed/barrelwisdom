@@ -27,7 +27,7 @@ export const monsterSchema = z.object({
   id: z.string(),
   name: languageSchema.optional(),
   desc: languageSchema.optional(),
-  race: languageSchema.optional(),
+  race: z.string().optional(),
   hp: z.number().optional(),
   atk: z.number().optional(),
   defen: z.number().optional(),
@@ -36,7 +36,7 @@ export const monsterSchema = z.object({
   locations: z.array(z.object({
     name: languageSchema.optional(),
     id: z.string().optional(),
-    parentid: z.string().optional(),
+    parent: z.string().optional(),
   })).optional(),
   item_set: z.array(nameLinkSchema).optional(),
   isDX: z.boolean().optional(),
@@ -59,24 +59,24 @@ export const itemSchema = z.object({
     num: z.number().optional(),
   })).optional(),
   equip_set: z.array(z.object({
-    hp: z.number().optional(),
-    mp: z.number().optional(),
-    lp: z.number().optional(),
-    atk: z.number().optional(),
-    defen: z.number().optional(),
+    hp: z.coerce.number().optional(),
+    mp: z.coerce.number().optional(),
+    lp: z.coerce.number().optional(),
+    atk: z.coerce.number().optional(),
+    defen: z.coerce.number().optional(),
     spd: z.number().optional(),
-    chars: z.array(z.object({ name: languageSchema.optional() })).optional(),
+    chars: z.array(z.object({ name: z.string().optional() })).optional(),
     material: z.array(nameLinkSchema).optional(),
   })).optional(),
   effectline_set: z.array(z.object({
-    effects: nameLinkSchema.optional(),
+    effect: effectSchema.optional(),
     number: z.number().optional(),
     itemnum: z.number().optional(),
   })).optional(),
   locations: z.array(z.object({
     name: languageSchema.optional(),
     id: z.string().optional(),
-    parentid: z.string().optional()
+    parent: z.string().optional()
   })).optional(),
   book_set: z.array(nameLinkSchema).optional(),
   monsters: z.array(nameLinkSchema).optional(),
@@ -103,7 +103,7 @@ export const bookSchema = z.object({
 export const fieldDataSchema = z.object({
   id: z.string(),
   name: languageSchema.optional(),
-  unlock: languageSchema.optional(),
+  unlock: z.string().optional(),
   ingredients: z.array(nameLinkSchema).optional(),
   monsters: z.array(nameLinkSchema).optional(),
   note: z.string().optional(),
@@ -123,11 +123,11 @@ const categorySchema = z.object({
 });
 
 export const totoriData = [
-  //{ game: 'totori', type: 'area',  schema: areaDataSchema },
+  { game: 'totori', type: 'locations',  schema: areaDataSchema },
   { game: 'totori', type: 'recipe-books',  schema: bookSchema },
   { game: 'totori', type: 'effects',  schema: effectSchema },
-  //{ game: 'totori', type: 'items', schema: itemSchema },
+  { game: 'totori', type: 'items', schema: itemSchema },
   { game: 'totori', type: 'categories', schema: categorySchema },
-  //{ game: 'totori', type: 'monsters', schema: monsterSchema },
+  { game: 'totori', type: 'monsters', schema: monsterSchema },
   { game: 'totori', type: 'traits', schema: traitSchema },
 ]

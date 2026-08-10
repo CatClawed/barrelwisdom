@@ -1,0 +1,74 @@
+---
+import {
+  item_translation,
+  monster_translation,
+} from '@app/localization/translations/common-strings';
+
+const { item, lang, game, section } = Astro.props;
+---
+
+<h1>{item.name[lang]}</h1>
+
+<div class="table-of-contents">
+  <ol>
+    {
+      item.fields.map((area) => (
+        <li>
+          <a href={`/${game}/${section}/${item.id}/${lang}#${area.id}`}>
+            {area.name[lang]}
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</div>
+
+{
+  item.fields.map((area) => (
+    <>
+      <h2 id={area.id}>{area.name[lang]}</h2>
+      {area.unlock && (
+        <p>
+          <b>Unlock:</b> {area.unlock}
+        </p>
+      )}
+      {area.note && <p>{area.note}</p>}
+      <table class="tbl borders">
+        <tbody>
+          <tr>
+            {area.ingredients && <th>{item_translation[lang]}</th>}
+            {area.monsters && <th>{monster_translation[lang]}</th>}
+          </tr>
+          <tr>
+            {area.ingredients && (
+              <td>
+                <ul class="hide-bullets">
+                  {area.ingredients.map((it) => (
+                    <li>
+                      <a href={`/${game}/items/${it.id}/${lang}`}>
+                        {it.name[lang]}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </td>
+            )}
+            {area.monsters && (
+              <td>
+                <ul class="hide-bullets">
+                  {area.monsters.map((it) => (
+                    <li>
+                      <a href={`/${game}/monsters/${it.id}/${lang}`}>
+                        {it.name[lang]}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </td>
+            )}
+          </tr>
+        </tbody>
+      </table>
+    </>
+  ))
+}

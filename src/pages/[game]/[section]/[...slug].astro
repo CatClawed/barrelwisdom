@@ -10,26 +10,36 @@ export async function buildsectionPaths(
   configs: PathConfig[],
 ): Promise<GetStaticPathsResult> {
   const paths: any[] = [];
-  for (const { game, section, fragment, listOnly, mainClass } of configs) {
+  for (const {
+    game,
+    section,
+    fragment,
+    listPath = true,
+    detailPath = true,
+    mainClass,
+  } of configs) {
     const collectionName = `${game}_${section}`;
     const items = await getCollection(collectionName as any);
     const langs = LanguageData.languages[game];
 
-    (langs as string[]).forEach((lang) => {
-      paths.push({
-        params: { game, section: section, slug: lang },
-        props: {
-          mode: 'list',
-          lang,
-          allItems: items,
-          game,
-          listOnly,
-          mainClass,
-        },
+    if (listPath) {
+      (langs as string[]).forEach((lang) => {
+        paths.push({
+          params: { game, section: section, slug: lang },
+          props: {
+            mode: 'list',
+            lang,
+            allItems: items,
+            game,
+            mainClass,
+            listPath,
+            detailPath,
+          },
+        });
       });
-    });
+    }
 
-    if (!listOnly) {
+    if (detailPath) {
       (items as any[]).forEach((item) => {
         (langs as string[]).forEach((lang) => {
           paths.push({
@@ -44,6 +54,8 @@ export async function buildsectionPaths(
               lang,
               game,
               mainClass: 'small-page',
+              listPath,
+              detailPath,
             },
           });
           if (fragment) {
@@ -53,7 +65,14 @@ export async function buildsectionPaths(
                 section: section,
                 slug: `${item.id}/fragment/${lang}`,
               },
-              props: { mode: 'fragment', item, lang, game },
+              props: {
+                mode: 'fragment',
+                item,
+                lang,
+                game,
+                listPath,
+                detailPath,
+              },
             });
           }
         });
@@ -68,12 +87,13 @@ export async function getStaticPaths() {
 }
 
 const { game, section } = Astro.params;
-const { mode, item, lang, allItems, mainClass } = Astro.props;
+const { mode, item, lang, allItems, mainClass, listPath, detailPath } =
+  Astro.props;
 
 const registry = await getComponentRegistry();
 const ListComponent = registry[game][section].list;
 const DetailComponent = registry[game][section].detail;
-const title: string = pageTitles[section][lang];
+const title: string = listPath ? pageTitles[section][lang] : undefined;
 ---
 
 {
@@ -91,7 +111,11 @@ const title: string = pageTitles[section][lang];
     <MainLayout
       title={item.data.name[lang]}
       description={
-        item.data.desc ? item.data.desc[lang] : (item.data.desc1[lang] ?? '')
+        item.data.desc
+          ? item.data.desc[lang]
+          : item.data.desc1
+            ? item.data.desc1[lang]
+            : ''
       }
       mainClass={mainClass}
     >

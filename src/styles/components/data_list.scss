@@ -162,15 +162,14 @@
   }
 }
 
-.content-area {
-  margin-top: 0.5rem; // fixes characters like É
-}
-
 .monster-display {
   flex-direction: row;
   align-items: center;
-  word-break: break-word;
-  hyphens: auto;
+
+  h3 {
+    word-break: break-word;
+    hyphens: auto;
+  }
   a {
     width: 70%;
   }
@@ -179,6 +178,14 @@
     max-width: 256px;
     aspect-ratio: 1;
   }
+
+  .badge {
+    margin: 0;
+  }
+}
+
+.content-area {
+  margin-top: 0.5rem; // fixes characters like É
 }
 
 .table-of-contents {
