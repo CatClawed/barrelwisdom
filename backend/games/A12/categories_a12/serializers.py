@@ -9,7 +9,7 @@ class A12ItemSerializer(serializers.ModelSerializer):
     id = serializers.CharField(source="slug")
     class Meta:
         model = Item
-        fields = ['id', 'name', 'level']
+        fields = ['id', 'name', 'level', 'isDX', 'isDLC']
 
 class A12IngredientSerializer(serializers.ModelSerializer):
     synthitem = A12ItemSerializer()

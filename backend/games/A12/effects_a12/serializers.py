@@ -22,7 +22,8 @@ class A12EffectSerializer(serializers.ModelSerializer):
 
 class A12EffectSerializerSimple(serializers.ModelSerializer):
     name = LegacyTranslatedField(obj_prefix='eff', field_name='name')
+    desc = LegacyTranslatedField(obj_prefix='eff', field_name='desc')
     id = serializers.CharField(source="slug")
     class Meta:
         model = Effect
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'desc']

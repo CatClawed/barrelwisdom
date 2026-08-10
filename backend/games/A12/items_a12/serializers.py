@@ -36,9 +36,24 @@ class A12CharacterSerializer(serializers.ModelSerializer):
 class A12EquipSerializer(serializers.ModelSerializer):
     chars = A12CharacterSerializer(many=True)
     material = A12ItemNameSerializer(many=True)
+
     class Meta:
         model = Equip
         fields = ['hp', 'mp', 'lp', 'atk', 'defen', 'spd', 'chars', 'material']
+
+    def to_representation(self, instance):
+        # 1. Get the standard serialized data
+        data = super().to_representation(instance)
+        
+        # 2. Define the fields you want to force to 0 if they are None
+        stat_fields = ['hp', 'mp', 'lp', 'atk', 'defen', 'spd']
+        
+        # 3. Replace None with 0
+        for field in stat_fields:
+            if data.get(field) is None:
+                data[field] = 0
+                
+        return data
 
 
 class A12EffectLineSerializer(serializers.ModelSerializer):

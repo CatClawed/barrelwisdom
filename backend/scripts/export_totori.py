@@ -76,7 +76,7 @@ def export_categories():
             json.dump(data, f, ensure_ascii=False, separators=(',', ':'))
 
 def export_areas():
-    OUTPUT_DIR = os.path.join(os.getcwd(), 'scripts', 'exports', 'totori', 'area')
+    OUTPUT_DIR = os.path.join(os.getcwd(), 'scripts', 'exports', 'totori', 'locations')
     obj = Area.objects.all()
     for o in obj:
         data = A12AreaSerializer(o).data
