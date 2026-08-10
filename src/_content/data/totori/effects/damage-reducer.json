@@ -1,0 +1,1 @@
+{"id":"damage-reducer","name":{"en":"Damage Reducer","ja":"ダメージ幅減"},"desc":{"en":"Reduces damage received.","ja":"受けるダメージを軽減してくれる。"},"effectline_set":[{"name":{"en":"Conch Horn","ja":"シェルペルホルン"},"id":"conch-horn"}],"index":48}

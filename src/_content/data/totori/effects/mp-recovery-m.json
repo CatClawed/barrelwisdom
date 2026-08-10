@@ -1,0 +1,1 @@
+{"id":"mp-recovery-m","name":{"en":"MP Recovery M","ja":"MP回復・中"},"desc":{"en":"Recover target's MP by a fair amount.","ja":"対象のMPをそこそこ回復させる。"},"effectline_set":[{"name":{"en":"Migraine Syrup","ja":"知恵熱シロップ"},"id":"migraine-syrup"},{"name":{"en":"Mind Water","ja":"メンタルウォーター"},"id":"mind-water"}],"index":58}

@@ -1,0 +1,1 @@
+{"id":"usage-1","name":{"en":"Usage +1","ja":"使用回数・+1"},"desc":{"en":"Raises the number of uses by 1. This has no effect on items that consume quaIity per use.","ja":"アイテムの使用回数が1回分増加する。"},"cost":6,"synth":true,"usable":true,"index":79}

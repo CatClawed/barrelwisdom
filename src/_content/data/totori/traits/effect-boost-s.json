@@ -1,0 +1,1 @@
+{"id":"effect-boost-s","name":{"en":"Effect Boost S","ja":"特性で強化・小"},"desc":{"en":"Raises an item's power based on its effects. Items receive a bonus of (Total Item Effect Level ) .","ja":"特性レベルの合計×1%アイテムの威力が上がる。"},"cost":4,"synth":true,"usable":true,"note":"Item effect level means add up the cost of your traits.","index":137}

@@ -1,0 +1,1 @@
+{"id":"giant-slayer-plus","name":{"en":"Giant Slayer +","ja":"大きな敵に超有効"},"desc":{"en":"Raises item effect against large enemies. A bonus of (Monster Size)x10% will be added.","ja":"モンスターのサイズ×10%威力がアップする。"},"cost":9,"synth":true,"usable":true,"note":"Six sizes of monster","index":149}

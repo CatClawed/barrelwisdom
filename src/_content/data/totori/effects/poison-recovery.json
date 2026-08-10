@@ -1,0 +1,1 @@
+{"id":"poison-recovery","name":{"en":"Poison Recovery","ja":"毒状態を回復"},"desc":{"en":"Recover from Poison status.","ja":"ステータス異常の毒状態を回復する。"},"effectline_set":[{"name":{"en":"Passionate Soup","ja":"情熱のコンソメ"},"id":"passionate-soup"},{"name":{"en":"Mont Blanc","ja":"モンブラン"},"id":"mont-blanc"},{"name":{"en":"Black Tea","ja":"黒の香茶"},"id":"black-tea"}],"index":81}

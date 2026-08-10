@@ -1,0 +1,1 @@
+{"id":"emergency-escape","name":{"en":"Emergency Escape","ja":"緊急避難"},"desc":{"en":"Revive at a nearby place if the entire party gets KO'ed.","ja":"戦闘で全滅した時、近くの安全な場所で復活する。"},"effectline_set":[{"name":{"en":"Flying Carpet","ja":"空とぶじゅうたん"},"id":"flying-carpet"}],"index":117}

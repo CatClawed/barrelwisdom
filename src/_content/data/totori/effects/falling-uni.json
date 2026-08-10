@@ -1,0 +1,1 @@
+{"id":"falling-uni","name":{"en":"Falling Uni","ja":"うにが降ってくる"},"desc":{"en":"A falling Uni strikes the enemy. Highly poisonous.","ja":"巨大なうにが降ってきて敵に命中する。高確率で毒状態にする。"},"effectline_set":[{"name":{"en":"Meteor","ja":"メテオール"},"id":"meteor"}],"index":23}

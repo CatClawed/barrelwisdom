@@ -1,0 +1,1 @@
+{"id":"surging-power","name":{"en":"Surging Power","ja":"パワーみなぎる"},"desc":{"en":"A Seahorse effect. Temporarily raises ATK in battle.","ja":"戦闘中、一時的に攻撃力を高める。"},"usable":true,"item_set":[{"id":"seahorse","name":{"en":"Seahorse","ja":"タツノオトシゴ"}}],"index":175}

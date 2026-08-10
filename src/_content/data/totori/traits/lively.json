@@ -1,0 +1,1 @@
+{"id":"lively","name":{"en":"Lively","ja":"活きがいい"},"desc":{"en":"Auto-activates when HP drop. Effect: Item traits activate if Totori's HP is below 30%.","ja":"戦闘中、HPが50%以下になるとアイテムを自動使用。"},"cost":8,"synth":true,"usable":true,"index":71}

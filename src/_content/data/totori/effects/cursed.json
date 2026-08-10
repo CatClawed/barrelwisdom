@@ -1,0 +1,1 @@
+{"id":"cursed","name":{"en":"Cursed","ja":"暗闇状態にする"},"desc":{"en":"May inflict Curse. Weakens buffs like HP recovery.","ja":"一定の確率で暗闇状態にし、回避率と命中率が低下した状態にする。"},"effectline_set":[{"name":{"en":"Dark Water","ja":"暗黒水"},"id":"dark-water"}],"index":30}

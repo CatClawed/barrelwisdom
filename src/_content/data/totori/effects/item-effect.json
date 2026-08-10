@@ -1,0 +1,1 @@
+{"id":"item-effect","name":{"en":"Item Effect +","ja":"アイテムがよく効く"},"desc":{"en":"Temporarily increases damage dealt from item use.","ja":"対象がアイテムによって受けるダメージを、一時的に上げる。"},"effectline_set":[{"name":{"en":"Ether Ink","ja":"エーテルインキ"},"id":"ether-ink"}],"index":158}

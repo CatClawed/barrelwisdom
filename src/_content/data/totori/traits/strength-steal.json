@@ -1,0 +1,1 @@
+{"id":"strength-steal","name":{"en":"Strength Steal","ja":"力を奪う"},"desc":{"en":"The energy-absorbing property of Black Runestones. Temporarily absorbs ATK.","ja":"追加で攻撃力を奪い。自分の攻撃力に一時的に還元する。"},"usable":true,"item_set":[{"id":"black-runestone","name":{"en":"Black Runestone","ja":"黒の魔石"}}],"index":157}

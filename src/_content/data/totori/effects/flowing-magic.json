@@ -1,0 +1,1 @@
+{"id":"flowing-magic","name":{"en":"Flowing Magic","ja":"溶け出す魔力"},"desc":{"en":"Increases power and deterioration rate of targeted item.","ja":"品質の劣化速度が速くなる代わりに、対象のアイテムの持つ効果が全て強化される。"},"effectline_set":[{"name":{"en":"Bomb Ice","ja":"レヘルン"},"id":"bomb-ice"}],"index":87}

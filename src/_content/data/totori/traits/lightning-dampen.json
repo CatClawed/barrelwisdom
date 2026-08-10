@@ -1,0 +1,1 @@
+{"id":"lightning-dampen","name":{"en":"Lightning Dampen","ja":"雷ダメージ微減"},"desc":{"en":"Armor reduces Lightning damage. Effect: Reduces Lightning damage by 15%.","ja":"雷属性のダメージが15%軽減される。"},"cost":5,"synth":true,"cloth":true,"index":130}

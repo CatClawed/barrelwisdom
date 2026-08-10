@@ -1,0 +1,1 @@
+{"id":"earth-power","name":{"en":"Earth Power","ja":"大地の力"},"desc":{"en":"A property of the Gravistone. Allows equipment to deal and resist Earth damage.","ja":"装備に土属性の追加ダメージと、耐性(10)を追加する。"},"synth":true,"ingot":true,"cloth":true,"accessory":true,"item_set":[{"id":"gravistone","name":{"en":"Gravistone","ja":"グラビ石"}}],"index":168}

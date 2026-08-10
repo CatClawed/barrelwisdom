@@ -1,0 +1,1 @@
+{"id":"attack-xl","name":{"en":"Attack XL","ja":"物理ダメージ・超"},"desc":{"en":"Incredible non-elemental damage to target. Damage depends on the target's defense level.","ja":"対象に無属性の超強力なダメージを与える。与えるダメージは対象の防御力によって変化する。"},"effectline_set":[{"name":{"en":"Himmelstern","ja":"ヒンメルシュテルン"},"id":"himmelstern"}],"index":5}

@@ -1,0 +1,1 @@
+{"id":"all-heal","name":{"en":"All Heal","ja":"全ての傷を癒す"},"desc":{"en":"A property of the Moonlight Flower. Greatly heals HP.","ja":"HPを大幅に回復する。"},"usable":true,"item_set":[{"id":"moonlight-flower","name":{"en":"Moonlight Flower","ja":"月光花"}}],"index":172}

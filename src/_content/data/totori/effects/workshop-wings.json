@@ -1,0 +1,1 @@
+{"id":"workshop-wings","name":{"en":"Workshop Wings","ja":"アトリエ帰還"},"desc":{"en":"Use at a gathering spot to instantly warp to the workshop.","ja":"採取地で使うと、帰りの日数を掛けずに一瞬でアトリエに戻ることができる。"},"effectline_set":[{"name":{"en":"Warp Gate","ja":"トラベルゲート"},"id":"warp-gate"}],"index":97}

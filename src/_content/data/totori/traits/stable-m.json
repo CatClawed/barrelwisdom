@@ -1,0 +1,1 @@
+{"id":"stable-m","name":{"en":"Stable M","ja":"効果が安定・中"},"desc":{"en":"Stabilizing. Effect: Restricts random number range by 50%.","ja":"アイテムの乱数の幅が50%圧縮される。"},"cost":5,"synth":true,"usable":true,"index":59}

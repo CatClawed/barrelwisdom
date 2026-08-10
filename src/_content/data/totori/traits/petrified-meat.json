@@ -1,0 +1,1 @@
+{"id":"petrified-meat","name":{"en":"Petrified Meat","ja":"石化した肉"},"desc":{"en":"Stone Lizard's meat. Temporarily raises DEF in battle.","ja":"戦闘中、一時的に防御力を高める。"},"usable":true,"item_set":[{"id":"petrified-lizard","name":{"en":"Petrified Lizard","ja":"石化トカゲ"}}],"index":176}

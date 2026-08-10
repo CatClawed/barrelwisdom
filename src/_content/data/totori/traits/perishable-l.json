@@ -1,0 +1,1 @@
+{"id":"perishable-l","name":{"en":"Perishable L","ja":"劣化速度増・大"},"desc":{"en":"Perishable items expire a lot sooner. Effect: Increases deterioration by 75%.","ja":"日数経過による品質の減少率が75%増加する。"},"cost":6,"synth":true,"usable":true,"index":42}

@@ -1,0 +1,1 @@
+{"id":"spd-minus","name":{"en":"SPD-","ja":"速度マイナス"},"desc":{"en":"Temporary speed decrease in battle. Erased when another similar effect is appHed.","ja":"戦闘中、速度を一時的に減少させる。ただし、他の効果で速度が変化すると、打ち消される。"},"effectline_set":[{"name":{"en":"Magic Chain","ja":"魔法の鎖"},"id":"magic-chain"}],"index":40}

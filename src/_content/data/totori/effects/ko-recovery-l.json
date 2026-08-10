@@ -1,0 +1,1 @@
+{"id":"ko-recovery-l","name":{"en":"KO Recovery L","ja":"戦闘不能回復・大"},"desc":{"en":"Recover from KO. A large amount of HP is restored.","ja":"戦闘不能状態を回復する。復活した際のHPの回復量は多い。"},"effectline_set":[{"name":{"en":"Nectar","ja":"ネクタル"},"id":"nectar"},{"name":{"en":"Elixir","ja":"エリキシル剤"},"id":"elixir"}],"index":74}

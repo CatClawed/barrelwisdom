@@ -1,0 +1,1 @@
+{"id":"robust-taste","name":{"en":"Robust Taste","ja":"丈夫になる味"},"desc":{"en":"Temporary defense boost in battle. Erased when another similar effect is apphed.","ja":"戦闘中、防御力を一時的に上昇させる。ただし、他の効果で防御力が変化すると、打ち消される。"},"effectline_set":[{"name":{"en":"Veggie Pie","ja":"ベジパイ"},"id":"veggie-pie"},{"name":{"en":"Totori Brunch","ja":"トトリア風ブランチ"},"id":"totori-brunch"}],"index":43}

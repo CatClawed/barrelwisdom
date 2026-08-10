@@ -1,0 +1,1 @@
+{"id":"spd-plus","name":{"en":"SPD+","ja":"速度プラス"},"desc":{"en":"Temporary speed boost in battle. Erased when another similar effect is applied.","ja":"戦闘中、速度を一時的に上昇させる。ただし、他の効果で速度が変化すると、打ち消される。"},"effectline_set":[{"name":{"en":"Mystery Ankh","ja":"神秘のアンク"},"id":"mystery-ankh"}],"index":37}

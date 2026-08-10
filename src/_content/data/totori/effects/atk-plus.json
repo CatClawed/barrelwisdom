@@ -1,0 +1,1 @@
+{"id":"atk-plus","name":{"en":"ATK+","ja":"攻撃力プラス"},"desc":{"en":"Temporary attack boost in battle. Erased when another similar effect is applied.","ja":"戦闘中、攻撃力を一時的に上昇させる。ただし、他の効果で攻撃力が変化すると、打ち消される。"},"effectline_set":[{"name":{"en":"Drachen Elixir","ja":"妙薬ドラッヘン"},"id":"drachen-elixir"},{"name":{"en":"Mystery Ankh","ja":"神秘のアンク"},"id":"mystery-ankh"}],"index":35}

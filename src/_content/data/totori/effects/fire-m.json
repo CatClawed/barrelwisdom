@@ -1,0 +1,1 @@
+{"id":"fire-m","name":{"en":"Fire M","ja":"炎ダメージ・中"},"desc":{"en":"Medium Fire damage to target. Damage depends on target's resistance and the area's element.","ja":"対象に炎属性の中程度のダメージを与える。与えるダメージは対象の耐性によって変化する。"},"effectline_set":[{"name":{"en":"Bomb","ja":"フラム"},"id":"bomb"},{"name":{"en":"Mega Bomb","ja":"メガフラム"},"id":"mega-bomb"}],"index":7}

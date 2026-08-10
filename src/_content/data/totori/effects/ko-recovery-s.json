@@ -1,0 +1,1 @@
+{"id":"ko-recovery-s","name":{"en":"KO Recovery S","ja":"戦闘不能回復・小"},"desc":{"en":"Recover from KO. A small amount of HP is restored.","ja":"戦闘不能状態を回復する。復活した際のHPの回復量は少ない。"},"effectline_set":[{"name":{"en":"Cream Pie","ja":"ミルクパイ"},"id":"cream-pie"},{"name":{"en":"Nectar","ja":"ネクタル"},"id":"nectar"},{"name":{"en":"Mystery Ankh","ja":"神秘のアンク"},"id":"mystery-ankh"}],"index":72}

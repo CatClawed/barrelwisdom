@@ -1,0 +1,1 @@
+{"id":"lightning-s","name":{"en":"Lightning S","ja":"雷ダメージ・小"},"desc":{"en":"Minor Lightning damage to target. Damage depends on target's resistance and the area's element.","ja":"対象に雷属性の小程度のダメージを与える。与えるダメージは対象の耐性によって変化する。"},"effectline_set":[{"name":{"en":"Lightning Bomb","ja":"ドナーストーン"},"id":"lightning-bomb"}],"index":14}

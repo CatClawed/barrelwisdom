@@ -1,0 +1,1 @@
+{"id":"chain-explosion","name":{"en":"Chain Explosion","ja":"誘爆する"},"desc":{"en":"The Sea Puddle property which explodes on contact. Deals a powerful Fire damage.","ja":"追加で強力な炎ダメージを与える。"},"usable":true,"item_set":[{"id":"sea-puddle","name":{"en":"Sea Puddle","ja":"湖底の溜まり"}}],"index":156}

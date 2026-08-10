@@ -1,0 +1,1 @@
+{"id":"ice-l","name":{"en":"Ice L","ja":"氷ダメージ・大"},"desc":{"en":"High Ice damage to target. Damage depends on target's resistance and the area's element.","ja":"対象に氷属性の大きなダメージを与える。与えるダメージは対象の耐性によって変化する。"},"effectline_set":[{"name":{"en":"Bomb Ice","ja":"レヘルン"},"id":"bomb-ice"},{"name":{"en":"Bomber Ice","ja":"ラケーテレヘルン"},"id":"bomber-ice"}],"index":13}

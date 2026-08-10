@@ -1,0 +1,1 @@
+{"id":"nonthreatening","name":{"en":"Nonthreatening","ja":"攻撃されにくい"},"desc":{"en":"Enemies don't see you as a threat and target you less when equipped.","ja":"装備すると、戦闘中に攻撃の対象になる確率が低下する。"},"effectline_set":[{"name":{"en":"Talisman","ja":"厄除けおまもり"},"id":"talisman"}],"index":167}

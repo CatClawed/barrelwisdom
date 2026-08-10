@@ -1,0 +1,1 @@
+{"id":"mp-recovery-l","name":{"en":"MP Recovery L","ja":"MP回復・大"},"desc":{"en":"Recover target's MP by a large amount.","ja":"対象のMPを大きく回復させる。"},"effectline_set":[{"name":{"en":"Iksel Course","ja":"イクセルコース"},"id":"iksel-course"},{"name":{"en":"Mind Water","ja":"メンタルウォーター"},"id":"mind-water"},{"name":{"en":"Secret Remedy","ja":"ナントカの秘薬"},"id":"secret-remedy"}],"index":59}

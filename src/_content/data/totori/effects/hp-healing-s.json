@@ -1,0 +1,1 @@
+{"id":"hp-healing-s","name":{"en":"HP Healing S","ja":"HP継続回復・小"},"desc":{"en":"Regenerates HP by a small amount each turn.","ja":"戦闘中、行動が回ってくる度に、HPが少しだけ自動で回復する。"},"effectline_set":[{"name":{"en":"Auto Alarm","ja":"自動目覚まし"},"id":"auto-alarm"},{"name":{"en":"Special Meat","ja":"スペシャルミート"},"id":"special-meat"}],"index":76}

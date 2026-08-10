@@ -1,0 +1,1 @@
+{"id":"element-damage","name":{"en":"Element Damage +","ja":"全属性ダメージ"},"desc":{"en":"Adds fire, ice, lightning, and earth damage all at once.","ja":"炎・氷・雷・土属性のダメージを、連続で発生させる。"},"effectline_set":[{"name":{"en":"Armillary Sphere","ja":"天球儀"},"id":"armillary-sphere"}],"index":152}

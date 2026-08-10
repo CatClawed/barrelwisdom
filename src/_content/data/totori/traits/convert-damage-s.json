@@ -1,0 +1,1 @@
+{"id":"convert-damage-s","name":{"en":"Convert Damage S","ja":"ダメージ還元・小"},"desc":{"en":"Gives a weapon vampiric properties. Effect: Absorb 5% of damage dealt with regular attacks.","ja":"通常攻撃で与えたダメージの5%だけ自分のHPが回復する。"},"cost":3,"synth":true,"ingot":true,"index":123}

@@ -1,0 +1,1 @@
+{"id":"heavyweight","name":{"en":"Heavyweight","ja":"重量感ある"},"desc":{"en":"A property of Metal Ore. Raises attack power but decreases speed of equipment.","ja":"装備の攻撃力が上がる代わりに、速度が低下する。"},"synth":true,"ingot":true,"cloth":true,"accessory":true,"item_set":[{"id":"metal-ore","name":{"en":"Metal Ore","ja":"剛鉄鉱"}}],"index":162}

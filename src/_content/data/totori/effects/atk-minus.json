@@ -1,0 +1,1 @@
+{"id":"atk-minus","name":{"en":"ATK-","ja":"攻撃力マイナス"},"desc":{"en":"Temporary attack decrease in battle. Erased when another similar effect is apphed.","ja":"戦闘中、攻撃力を一時的に減少させる。ただし、他の効果で攻撃力が変化すると、打ち消される。"},"effectline_set":[{"name":{"en":"Diocraft","ja":"ダイオクラフト"},"id":"diocraft"}],"index":38}

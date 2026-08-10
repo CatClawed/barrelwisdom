@@ -1,0 +1,1 @@
+{"id":"inflict-poison","name":{"en":"Inflict Poison","ja":"毒を与える"},"desc":{"en":"Weapons can inflict Poison. Effect: Chance to inflict Poison status with attacks.","ja":"ダメージを与えた時、確率で毒状態にする。"},"cost":3,"synth":true,"ingot":true,"index":115}

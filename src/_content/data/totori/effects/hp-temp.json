@@ -1,0 +1,1 @@
+{"id":"hp-temp","name":{"en":"HP+ Temp","ja":"HP一時増加"},"desc":{"en":"Temporarily increases Max HP during battle.","ja":"戦闘中のHPの最大値を一時的に上昇させる。"},"effectline_set":[{"name":{"en":"Vitality Pill","ja":"強壮の丸薬"},"id":"vitality-pill"},{"name":{"en":"Mystery Ankh","ja":"神秘のアンク"},"id":"mystery-ankh"}],"index":75}

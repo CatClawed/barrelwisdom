@@ -1,0 +1,1 @@
+{"id":"teeny-cannonball","name":{"en":"Teeny Cannonball","ja":"一尺弾"},"desc":{"en":"A small cannonball inflicts equally small Fire damage.","ja":"小さな大砲の弾を発射し、炎属性の小程度のダメージを与える。"},"effectline_set":[{"name":{"en":"Cannon","ja":"大砲"},"id":"cannon"}],"index":25}

@@ -1,0 +1,1 @@
+{"id":"item-lv-up","name":{"en":"Item Lv. Up?","ja":"材料Lvアップ？"},"desc":{"en":"Use at gathering spots to increase the item trait levels found there. Maybe.","ja":"採取地で使うと、採取地のアイテムに付く特性のレベルが上がるかも。"},"effectline_set":[{"name":{"en":"Tonic","ja":"栄養剤"},"id":"tonic"}],"index":100}

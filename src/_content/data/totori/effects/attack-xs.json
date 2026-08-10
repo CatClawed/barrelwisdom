@@ -1,0 +1,1 @@
+{"id":"attack-xs","name":{"en":"Attack XS","ja":"物理ダメージ・微"},"desc":{"en":"Minor non-elemental damage to target. Damage depends on the target's defense level.","ja":"対象に無属性の微量のダメージを与える。与えるダメージは対象の防御力によって変化する。"},"effectline_set":[{"name":{"en":"Craft","ja":"クラフト"},"id":"craft"},{"name":{"en":"Fish Can","ja":"魚カン"},"id":"fish-can"}],"index":1}

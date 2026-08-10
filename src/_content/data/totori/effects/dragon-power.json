@@ -1,0 +1,1 @@
+{"id":"dragon-power","name":{"en":"Dragon Power","ja":"竜の力"},"desc":{"en":"Increases critical hit rate.","ja":"戦闘中、クリティカルの発生率が上昇する。"},"effectline_set":[{"name":{"en":"Drachen Elixir","ja":"妙薬ドラッヘン"},"id":"drachen-elixir"}],"index":34}

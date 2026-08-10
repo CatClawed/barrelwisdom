@@ -1,0 +1,1 @@
+{"id":"attack-s","name":{"en":"Attack S","ja":"物理ダメージ・小"},"desc":{"en":"Small non-elemental damage to target. Damage depends on the target's defense level.","ja":"対象に無属性の小程度のダメージを与える。与えるダメージは対象の防御力によって変化する。"},"effectline_set":[{"name":{"en":"Craft","ja":"クラフト"},"id":"craft"},{"name":{"en":"Witch Salve","ja":"魔女の秘薬"},"id":"witch-salve"}],"index":2}

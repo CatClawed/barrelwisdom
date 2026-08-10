@@ -1,0 +1,1 @@
+{"id":"hit-m","name":{"en":"Hit+ M","ja":"命中率上昇・中"},"desc":{"en":"Increases attack accuracy.","ja":"戦闘中、モンスターへの攻撃が命中する確率が少しだけ上昇する。"},"effectline_set":[{"name":{"en":"Mercurius Eye","ja":"メルクリウスの瞳"},"id":"mercurius-eye"}],"index":139}

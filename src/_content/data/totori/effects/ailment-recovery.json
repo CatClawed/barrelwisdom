@@ -1,0 +1,1 @@
+{"id":"ailment-recovery","name":{"en":"Ailment Recovery","ja":"状態異常を回復"},"desc":{"en":"Recover from all ailments.","ja":"全てのステータス異常の状態を回復する。"},"effectline_set":[{"name":{"en":"Mont Blanc","ja":"モンブラン"},"id":"mont-blanc"},{"name":{"en":"Elixir","ja":"エリキシル剤"},"id":"elixir"},{"name":{"en":"Black Tea","ja":"黒の香茶"},"id":"black-tea"}],"index":85}

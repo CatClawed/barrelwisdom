@@ -1,0 +1,1 @@
+{"id":"binding","name":{"en":"Binding","ja":"絡みつく"},"desc":{"en":"Effect of the Chainweb. Reduces SPD.","ja":"追加で速度を低下させる。"},"usable":true,"item_set":[{"id":"chainweb","name":{"en":"Chainweb","ja":"鎖グモの巣"}}],"index":159}

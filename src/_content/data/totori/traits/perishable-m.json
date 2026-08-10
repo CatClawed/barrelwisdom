@@ -1,0 +1,1 @@
+{"id":"perishable-m","name":{"en":"Perishable M","ja":"劣化速度増・中"},"desc":{"en":"Perishable items expire sooner. Effect: Increases deterioration by 50%.","ja":"日数経過による品質の減少率が50%増加する。"},"cost":4,"synth":true,"usable":true,"index":41}

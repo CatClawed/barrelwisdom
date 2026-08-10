@@ -1,0 +1,1 @@
+{"id":"hp-recovery-xs","name":{"en":"HP Recovery XS","ja":"HP回復・微"},"desc":{"en":"Recover target's HP by a negligible amount","ja":"対象のHPをわずかに回復させる。"},"effectline_set":[{"name":{"en":"Century Biscuit","ja":"百年ビスケ"},"id":"century-biscuit"},{"name":{"en":"Healing Salve","ja":"ヒーリングサルヴ"},"id":"healing-salve"}],"index":51}

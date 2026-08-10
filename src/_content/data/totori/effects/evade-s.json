@@ -1,0 +1,1 @@
+{"id":"evade-s","name":{"en":"Evade+ S","ja":"攻撃回避・小"},"desc":{"en":"Increases odds to evade attacks.","ja":"戦闘中、モンスターからの攻撃を回避する確率が少しだけ上昇する。"},"effectline_set":[{"name":{"en":"Camo Cloak","ja":"みえないクローク"},"id":"camo-cloak"}],"index":135}

@@ -1,0 +1,1 @@
+{"id":"tri-suffer","name":{"en":"Tri-Suffer","ja":"三重苦"},"desc":{"en":"May inflict three ailments: Poison. Curse, and Paralysis.","ja":"確率で毒状態・麻痺状態・呪い状態の３つの状態を一度に発生させる。"},"effectline_set":[{"name":{"en":"Dark Water","ja":"暗黒水"},"id":"dark-water"}],"index":50}

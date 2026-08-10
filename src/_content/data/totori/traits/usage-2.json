@@ -1,0 +1,1 @@
+{"id":"usage-2","name":{"en":"Usage +2","ja":"使用回数・+2"},"desc":{"en":"Raises the number of uses by 2. This has no effect on items that consume quality per use.","ja":"アイテムの使用回数が2回分増加する。"},"cost":10,"synth":true,"usable":true,"index":80}

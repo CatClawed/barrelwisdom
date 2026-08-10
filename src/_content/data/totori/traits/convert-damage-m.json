@@ -1,0 +1,1 @@
+{"id":"convert-damage-m","name":{"en":"Convert Damage M","ja":"ダメージ還元・中"},"desc":{"en":"Gives a weapon vampiric properties. Effect: Absorb 10% of damage dealt with regular attacks.","ja":"通常攻撃で与えたダメージの10%だけ自分のHPが回復する。"},"cost":6,"synth":true,"ingot":true,"index":124}

@@ -1,0 +1,1 @@
+{"id":"burning-vapor","name":{"en":"Burning Vapor","ja":"燃える気体"},"desc":{"en":"Gases found in Fuel Dirt. Deals additional Fire damage.","ja":"追加で炎ダメージを与える。"},"usable":true,"item_set":[{"id":"fuel-dirt","name":{"en":"Fuel Dirt","ja":"燃える土"}}],"index":153}

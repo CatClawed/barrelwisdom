@@ -1,0 +1,1 @@
+{"id":"auto-ko-recovery","name":{"en":"Auto-KO Recovery","ja":"戦闘不能自動回復"},"desc":{"en":"Recover from KO (0 HP) automatically on your next turn.","ja":"HPが0になって戦闘不能になると、次のターンで戦闘不能状態を回復してくれる。"},"effectline_set":[{"name":{"en":"Auto Alarm","ja":"自動目覚まし"},"id":"auto-alarm"}],"index":45}
