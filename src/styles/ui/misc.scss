@@ -25,3 +25,14 @@
     transform: rotate(1turn)
   }
 }
+
+.two-column-list {
+  columns: 2;
+  gap: 1em;
+  padding-left: 0.5rem;
+
+  li {
+    padding-left: 0.7em;
+    text-indent: -1em;
+  }
+}

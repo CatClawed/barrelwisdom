@@ -1,0 +1,1 @@
+{"id":"ice-power","name":{"en":"Ice Power","ja":"冷気の力"},"desc":{"en":"A property of the Snow Stone. Allows equipment to deal and resist Ice damage.","ja":"装備に氷属性の追加ダメージと、耐性(10)を追加する。"},"synth":true,"ingot":true,"cloth":true,"accessory":true,"item_set":[{"id":"snow-stone","name":{"en":"Snow Stone","ja":"樹氷石"}}],"index":166}

@@ -1,0 +1,1 @@
+{"id":"ailment-reducer","name":{"en":"Ailment Reducer","ja":"状態異常軽減"},"desc":{"en":"Decreased power and chance of contracting status ailments.","ja":"ステータス異常になる確率と威力を軽減してくれる。"},"effectline_set":[{"name":{"en":"Conch Horn","ja":"シェルペルホルン"},"id":"conch-horn"}],"index":46}

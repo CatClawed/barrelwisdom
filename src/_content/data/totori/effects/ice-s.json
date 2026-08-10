@@ -1,0 +1,1 @@
+{"id":"ice-s","name":{"en":"Ice S","ja":"氷ダメージ・小"},"desc":{"en":"Minor Ice damage to target. Damage depends on target's resistance and the area's element.","ja":"対象に氷属性の小程度のダメージを与える。与えるダメージは対象の耐性によって変化する。"},"effectline_set":[{"name":{"en":"Bomb Ice","ja":"レヘルン"},"id":"bomb-ice"}],"index":11}

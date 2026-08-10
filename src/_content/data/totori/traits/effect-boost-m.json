@@ -1,0 +1,1 @@
+{"id":"effect-boost-m","name":{"en":"Effect Boost M","ja":"特性で強化・中"},"desc":{"en":"Raises an item's power based on its effects. Items receive a bonus of (Total Item Effect Level )x2%.","ja":"特性レベルの合計×2%アイテムの威力が上がる。"},"cost":7,"synth":true,"usable":true,"note":"Item effect level means add up the cost of your traits.","index":138}

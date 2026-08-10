@@ -1,0 +1,1 @@
+{"id":"heat-deflect","name":{"en":"Heat Deflect","ja":"暑さを防ぐ"},"desc":{"en":"Nulls penalties of extreme heat.","ja":"猛烈な暑さによるペナルティを無効化する。"},"effectline_set":[{"name":{"en":"Heavenly Parasol","ja":"天の水傘"},"id":"heavenly-parasol"}],"index":169}

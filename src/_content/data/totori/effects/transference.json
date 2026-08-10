@@ -1,0 +1,1 @@
+{"id":"transference","name":{"en":"Transference","ja":"ダメージ変換吸収"},"desc":{"en":"HP damage or MP consumption amounts are added to random stats.","ja":"戦闘中、自分に発生したダメージやMP消費を、別のパラメータに還元して吸収する。"},"effectline_set":[{"name":{"en":"Mythical Ring","ja":"ミシカルリング"},"id":"mythical-ring"}],"index":163}

@@ -1,0 +1,1 @@
+{"id":"resist-s","name":{"en":"Resist S","ja":"確率軽減・小"},"desc":{"en":"Slight chance to avoid contracting status ailments.","ja":"戦闘中、ステータス異常になる確率を少しだけ下げる。"},"effectline_set":[{"name":{"en":"Runestone","ja":"ルーンストーン"},"id":"runestone"}],"index":144}

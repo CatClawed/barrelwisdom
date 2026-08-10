@@ -1,0 +1,1 @@
+{"id":"falling-stars","name":{"en":"Falling Stars","ja":"星が降ってくる"},"desc":{"en":"Stars fall around the enemies.","ja":"星が降ってきて敵の周りに落下する。"},"effectline_set":[{"name":{"en":"Meteor","ja":"メテオール"},"id":"meteor"}],"index":20}

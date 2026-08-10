@@ -1,0 +1,20 @@
+---
+import { item_translation } from '@app/localization/translations/common-strings';
+
+const { book, lang, game } = Astro.props;
+---
+
+<p>
+  <b>Acquisition: </b>{book.note}
+</p>
+
+<b>{item_translation[lang]}</b>
+<ul class="two-column-list">
+  {
+    book.items.map((item) => (
+      <li>
+        <a href={`/${game}/items/${item.id}/${lang}`}>{item.name[lang]}</a>
+      </li>
+    ))
+  }
+</ul>

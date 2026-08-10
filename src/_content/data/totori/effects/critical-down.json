@@ -1,0 +1,1 @@
+{"id":"critical-down","name":{"en":"Critical Down","ja":"クリティカル減少"},"desc":{"en":"Reduces critical hit rate of target.","ja":"対象がクリティカルを発生させる確率を下げる。"},"effectline_set":[{"name":{"en":"Magic Chain","ja":"魔法の鎖"},"id":"magic-chain"}],"index":156}

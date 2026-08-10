@@ -1,0 +1,1 @@
+{"id":"def-minus","name":{"en":"DEF-","ja":"防御力マイナス"},"desc":{"en":"Temporary defense decrease in battle. Erased when another similar effect is apphed.","ja":"戦闘中、防御力を一時的に減少させる。ただし、他の効果で防御力が変化すると、打ち消される。"},"effectline_set":[{"name":{"en":"Diocraft","ja":"ダイオクラフト"},"id":"diocraft"}],"index":39}

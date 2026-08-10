@@ -1,0 +1,1 @@
+{"id":"sleepy","name":{"en":"Sleepy","ja":"眠り状態にする"},"desc":{"en":"Chance of inflicting Sleep. Skips turn.","ja":"一定の確率で眠り状態にし、行動できない状態にする。"},"effectline_set":[{"name":{"en":"Witch Salve","ja":"魔女の秘薬"},"id":"witch-salve"},{"name":{"en":"Dark Water","ja":"暗黒水"},"id":"dark-water"}],"index":27}

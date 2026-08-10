@@ -1,0 +1,52 @@
+---
+import Popover from '@app/components/Games/_common/Popover.astro';
+import Trait from '@app/components/Games/_common/Detail/Trait.astro';
+import { item_translation } from '@app/localization/translations/common-strings';
+import { colorHex } from '@app/components/Games/resleriana-red-white/rw_constants';
+
+const { item, lang, mode, game, section } = Astro.props;
+
+const traitIcons = [
+  { key: 'synth', icon: 'synthesis' },
+  { key: 'usable', icon: 'bomb' },
+  { key: 'ingot', icon: 'weapon' },
+  { key: 'cloth', icon: 'armor' },
+  { key: 'accessory', icon: 'accessory' },
+];
+---
+<Trait
+  trait={item}
+  mode={mode}
+  game={game}
+  lang={lang}
+  section={section}
+  icons={traitIcons}
+  chunk={5}
+>
+  <div class="card-icon-position" slot="top-level">
+    <b>Cost: </b>{item.cost}
+  </div>
+
+
+  {item.item_set && (
+    <b>{item_translation[lang]}</b>
+    <ul>
+      {item.item_set.map((i) => (
+        <li>
+          <a href={`/${game}/items/${i.slug}/${lang}`}>
+            {i.name[lang]}
+          </a>
+        </li>
+      ))}
+    </ul>
+  )}
+
+  <p>{item.desc[lang]}</p>
+</Trait>
+
+<style>
+  .color-frame {
+    width: 0.9em;
+    height: 1.8em;
+  }
+</style>

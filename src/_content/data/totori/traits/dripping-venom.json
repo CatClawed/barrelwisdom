@@ -1,0 +1,1 @@
+{"id":"dripping-venom","name":{"en":"Dripping Venom","ja":"滴る毒液"},"desc":{"en":"Poison extracted from a Poison Gland. Chance of poisoning enemy.","ja":"追加で確率で毒状態にする。"},"usable":true,"item_set":[{"id":"venom-gland","name":{"en":"Venom Gland","ja":"蛇の毒袋"}}],"index":154}

@@ -1,0 +1,78 @@
+---
+import { getCollection } from 'astro:content';
+import ItemAttributeList from './ItemAttributeList.astro';
+import PaneListWrapper from '@components/Games/_common/List/PaneListWrapper.astro';
+import ItemList from '@components/Games/_common/List/ItemList.astro';
+import Dropdown from '@components/Games/_common/Filter/Dropdown.astro';
+import FilterButton from '@components/Games/_common/Filter/FilterButton.astro';
+import TextFilter from '@components/Games/_common/Filter/TextFilter.astro';
+import {
+  category_translation,
+  level_translation,
+} from '@app/localization/translations/common-strings';
+import ColorPicker from './ColorPicker.astro';
+
+const { items, lang, title, game, section } = Astro.props;
+
+const categories = await getCollection(`${game}_categories`);
+
+const categoryOptions = categories.map((cat) => ({
+  id: cat.id,
+  label: cat.data.name[lang],
+  icon: `/spritesheets/${game}.svg?v=1#category-${cat.id}`,
+}));
+
+items.sort((a, b) => a.data.index - b.data.index);
+---
+
+<PaneListWrapper title={title} section={section} game={game} lang={lang}>
+  <div class="filters" slot="filters">
+    <TextFilter gridSize={8} lang={lang} />
+    <Dropdown
+      options={categoryOptions}
+      name="category"
+      placeholder={category_translation[lang]}
+      lang={lang}
+    />
+  </div>
+  {
+    items.map((i, index) => (
+      <ItemList
+        item={i}
+        img={`/media/games/${game}/${section}/${i.id}.webp`}
+        index={index}
+        section={section}
+        lang={lang}
+        game={game}
+        data-id={i.id}
+        data-search={i.data.name[lang]}
+        data-category={i.data.categories?.map((c) => c.id).join(',')}
+      >
+        {i.data.isDLC && (
+          <span slot="title-matter" class="badge bg-primary">
+            DLC
+          </span>
+        )}
+        {i.data.isDX && (
+          <span slot="title-matter" class="badge bg-primary">
+            DX
+          </span>
+        )}
+        {i.data.level && (
+          <b slot="title-matter">
+            {level_translation[lang]} {i.data.level}
+          </b>
+        )}
+        <ItemAttributeList cats={i.data.categories} game={game} lang={lang} />
+      </ItemList>
+    ))
+  }
+</PaneListWrapper>
+<script>
+  import { initListFilters } from '@app/utils/filter-controller';
+  import { initPaneController } from '@app/utils/detail-pane-controller';
+  initListFilters({
+    filters: [{ type: 'select', key: 'category', elementId: 'category' }],
+  });
+  initPaneController({});
+</script>

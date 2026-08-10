@@ -1,0 +1,1 @@
+{"id":"bad-quality-m","name":{"en":"Bad Quality M","ja":"品質ダウン・中"},"desc":{"en":"Decreases quality during synthesis. Effect: Decreases item quality by 20%.","ja":"調合で完成したアイテムの品質が30%低下する。"},"cost":5,"synth":true,"usable":true,"index":47}

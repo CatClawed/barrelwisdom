@@ -1,0 +1,1 @@
+{"id":"sleep-recovery","name":{"en":"Sleep Recovery","ja":"眠り状態を回復"},"desc":{"en":"Recover from Sleep status.","ja":"ステータス異常の眠り状態を回復する。"},"effectline_set":[{"name":{"en":"Passionate Soup","ja":"情熱のコンソメ"},"id":"passionate-soup"},{"name":{"en":"Black Tea","ja":"黒の香茶"},"id":"black-tea"}],"index":80}

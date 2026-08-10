@@ -1,0 +1,88 @@
+---
+import { elements } from '@components/Games/resleriana-red-white/rw_constants';
+import {
+  stat_translation,
+  location_translation,
+  item_translation,
+} from '@app/localization/translations/common-strings';
+
+const { item, lang, mode, game, section } = Astro.props;
+---
+
+<div class={mode !== 'fragment' ? 'card' : undefined}>
+  <div class="card-title">
+    <h3>{item.name[lang]}</h3>
+    <div class="card-icon-position">
+      {item.race}
+      {item.isDLC && <span class="badge bg-primary">DLC</span>}
+      {item.isDX && <span class="badge bg-primary">DX</span>}
+    </div>
+  </div>
+  <div class="image-desc-display">
+    <img
+      src={`/media/games/${game}/${section}/${item.id}.webp?v=1`}
+      alt={item.name[lang]}
+      style="aspect-ratio: 1; width: 256px;"
+    />
+    <p>{item.desc[lang]}</p>
+  </div>
+
+  <div class="grid">
+    <div class="grid-6">
+      {
+        item.locations && (
+            <b>{location_translation[lang]}</b>
+            <ul>
+              {item.locations.map((loc) => (
+                <li>
+                  <a
+                    href={`/${game}/locations/${loc.parent ? loc.parent : loc.id}/${lang}${loc.parent ? `#${loc.id}` : ''}`}
+                  >
+                    {loc.name[lang]}
+                  </a>
+                </li>
+              ))}
+            </ul>
+        )
+      }
+
+      {
+        item.item_set && (
+            <b>{item_translation[lang]}</b>
+            <ul>
+              {item.item_set.map((drop) => (
+                <li>
+                  <a href={`/${game}/items/${drop.id}/${lang}`}>
+                    {drop.name[lang]}
+                  </a>
+                </li>
+              ))}
+            </ul>
+        )
+      }
+    </div>
+
+    <div class="grid-6">
+      <table class="table-item-data tbl-transparent">
+        <tbody>
+          {
+            [
+              { label: 'LV', value: item.level },
+              { label: 'HP', value: item.hp },
+              { label: 'ATK', value: item.atk },
+              { label: 'DEF', value: item.defen },
+              { label: 'SPD', value: item.spd },
+            ].map((stat) => (
+              <tr>
+                <td style="padding:0;">
+                  <b>{stat.label} </b>
+                </td>
+                <td style="padding:0;padding-left:0.5em;">{stat.value}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

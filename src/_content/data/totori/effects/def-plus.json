@@ -1,0 +1,1 @@
+{"id":"def-plus","name":{"en":"DEF+","ja":"防御力プラス"},"desc":{"en":"Temporary defense boost in battle. Erased when another similar effect is appHed.","ja":"戦闘中、防御力を一時的に上昇させる。ただし、他の効果で防御力が変化すると、打ち消される。"},"effectline_set":[{"name":{"en":"Mystery Ankh","ja":"神秘のアンク"},"id":"mystery-ankh"}],"index":36}

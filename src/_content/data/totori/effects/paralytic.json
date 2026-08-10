@@ -1,0 +1,1 @@
+{"id":"paralytic","name":{"en":"Paralytic","ja":"呪い状態にする"},"desc":{"en":"May inflict Paralysis. Reduces ATK/DEF/SPD.","ja":"一定の確率で呪い状態にし、HP回復などのプラス効果を弱体化させる。"},"effectline_set":[{"name":{"en":"Witch Salve","ja":"魔女の秘薬"},"id":"witch-salve"}],"index":29}

@@ -1,0 +1,1 @@
+{"id":"solvent","name":{"en":"Solvent","ja":"溶解させる"},"desc":{"en":"The property of Tar Fruit that dissolves anything. Reduces DEF.","ja":"追加で防御力を低下させる。"},"usable":true,"item_set":[{"id":"tar-fruit","name":{"en":"Tar Fruit","ja":"タールの実"}}],"index":158}

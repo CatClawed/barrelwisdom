@@ -1,0 +1,1 @@
+{"id":"falling","name":{"en":"Falling ???","ja":"???が降ってくる"},"desc":{"en":"Something strikes the enemy. Fixed extra damage applied.","ja":"謎の???が降ってきて敵に命中する。固定の追加ダメージを発生させる。"},"effectline_set":[{"name":{"en":"Meteor","ja":"メテオール"},"id":"meteor"}],"index":24}

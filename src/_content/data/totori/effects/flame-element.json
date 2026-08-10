@@ -1,0 +1,1 @@
+{"id":"flame-element","name":{"en":"Flame Element","ja":"炎耐性付与"},"desc":{"en":"Halves Fire damage for 5 turns during battle.","ja":"戦闘中、炎属性のダメージを半減する効果を追加する。効果ターンは５ターン。"},"effectline_set":[{"name":{"en":"Drachen Elixir","ja":"妙薬ドラッヘン"},"id":"drachen-elixir"}],"index":170}

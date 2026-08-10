@@ -1,0 +1,1 @@
+{"id":"healing-essence","name":{"en":"Healing Essence","ja":"癒しのエキス"},"desc":{"en":"Property of Forest Dew that revives a KO'ed ally.","ja":"戦闘不能状態を回復させる。HPを回復する。"},"usable":true,"item_set":[{"id":"forest-dew","name":{"en":"Forest Dew","ja":"森の雫"}}],"index":180}

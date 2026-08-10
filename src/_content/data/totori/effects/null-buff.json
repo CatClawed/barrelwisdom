@@ -1,0 +1,1 @@
+{"id":"null-buff","name":{"en":"Null Buff","ja":"強化を無効"},"desc":{"en":"Resets all positive stat effects.","ja":"パラメータ変化などのプラス効果を、完全にリセットしてしまう。"},"effectline_set":[{"name":{"en":"Witch Salve","ja":"魔女の秘薬"},"id":"witch-salve"}],"index":86}

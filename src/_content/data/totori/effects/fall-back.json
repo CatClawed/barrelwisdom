@@ -1,0 +1,1 @@
+{"id":"fall-back","name":{"en":"Fall Back","ja":"緊急回避付与"},"desc":{"en":"Grants a chance to survive when dealt a fatal blow.","ja":"戦闘中、戦闘不能になる攻撃を一定の確率で回避する効果を付与する。"},"effectline_set":[{"name":{"en":"Secret Remedy","ja":"ナントカの秘薬"},"id":"secret-remedy"}],"index":155}

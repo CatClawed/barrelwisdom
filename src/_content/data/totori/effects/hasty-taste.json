@@ -1,0 +1,1 @@
+{"id":"hasty-taste","name":{"en":"Hasty Taste","ja":"素早くなる味"},"desc":{"en":"Temporary speed boost in battle. Erased when another similar effect is applied.","ja":"戦闘中、速度を一時的に上昇させる。ただし、他の効果で速度が変化すると、打ち消される。"},"effectline_set":[{"name":{"en":"Fish Pie","ja":"おさかなパイ"},"id":"fish-pie"},{"name":{"en":"Totori Brunch","ja":"トトリア風ブランチ"},"id":"totori-brunch"}],"index":44}

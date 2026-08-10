@@ -1,0 +1,1 @@
+{"id":"resist-death","name":{"en":"Resist Death","ja":"一撃必殺耐性"},"desc":{"en":"Nulls the effect of an Instant KO attack.","ja":"一撃で戦闘不能になる効果を無効化する。"},"effectline_set":[{"name":{"en":"Angel Charm","ja":"エンゼルチャーム"},"id":"angel-charm"}],"index":150}

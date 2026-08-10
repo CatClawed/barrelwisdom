@@ -1,15 +1,24 @@
 .master-detail {
   display: grid;
+  grid-template-areas:
+    "filters detail"
+    "list detail";
   grid-template-columns: 1fr min(500px, max(33%, 350px));
   gap: 1rem;
   align-items: start;
+  grid-template-rows: auto 1fr;
 
   @media (max-width: 760px) {
+    grid-template-areas:
+      "filters"
+      "list"
+      "detail";
     grid-template-columns: 1fr;
   }
 }
 
 .detail-pane {
+  grid-area: detail;
   position: sticky;
   top: calc(var(--header-height) + 1rem);
   max-height: calc(98vh - var(--header-height));
@@ -33,14 +42,17 @@
     position: fixed;
     top: var(--header-height);
     left: 0;
+    bottom: 0;
+    right: 0;
     width: 100vw;
-    height: 100vh;
+    max-height: none;
     z-index: 200;
     background: var(--bg-card);
     padding: 1rem;
     box-sizing: border-box;
     display: none; /* Hidden by default */
     flex-shrink: 0;
+    overflow-y: auto;
 
     &.is-open {
       display: block;
@@ -53,6 +65,7 @@
   grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
   gap: 1rem;
   padding: 0;
+  grid-area: list;
 
   @media (max-width: 1000px) {
     grid-template-columns: 1fr;
@@ -124,6 +137,7 @@
   grid-template-columns: repeat(12, 1fr);
   padding-bottom: 1rem;
   gap: 0.5rem;
+  grid-area: filters;
 
   input,
   .searchable-select > button {
@@ -152,15 +166,14 @@
   }
 }
 
-.content-area {
-  margin-top: 0.5rem; // fixes characters like É
-}
-
 .monster-display {
   flex-direction: row;
   align-items: center;
-  word-break: break-word;
-  hyphens: auto;
+
+  h3 {
+    word-break: break-word;
+    hyphens: auto;
+  }
   a {
     width: 70%;
   }
@@ -169,6 +182,12 @@
     max-width: 256px;
     aspect-ratio: 1;
   }
+
+  .badge {}
+}
+
+.content-area {
+  margin-top: 0.5rem; // fixes characters like É
 }
 
 .table-of-contents {

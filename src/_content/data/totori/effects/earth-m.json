@@ -1,0 +1,1 @@
+{"id":"earth-m","name":{"en":"Earth M","ja":"土ダメージ・中"},"desc":{"en":"Medium Earth damage to target. Damage depends on target's resistance and the area's element.","ja":"対象に土属性の中程度のダメージを与える。与えるダメージは対象の耐性によって変化する。"},"effectline_set":[{"name":{"en":"Globe","ja":"地球儀"},"id":"globe"}],"index":18}

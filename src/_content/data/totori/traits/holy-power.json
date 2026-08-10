@@ -1,0 +1,1 @@
+{"id":"holy-power","name":{"en":"Holy Power","ja":"聖なる力"},"desc":{"en":"A property of the Wispstone. Allows equipment to reduce the damage sustained.","ja":"装備に戦闘不能効果への耐性と。被ダメージを少し軽減する効果を追加する。"},"synth":true,"ingot":true,"cloth":true,"accessory":true,"item_set":[{"id":"wispstone","name":{"en":"Wispstone","ja":"ウィスプストーン"}}],"index":169}

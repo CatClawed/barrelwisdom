@@ -1,6 +1,6 @@
 ---
 import Detail from './Detail.astro';
-import TextFilter from '@components/Games/_common/TextFilter.astro';
+import TextFilter from '@components/Games/_common/Filter/TextFilter.astro';
 
 const { items, lang, title, game, section } = Astro.props;
 ---
@@ -34,9 +34,6 @@ const { items, lang, title, game, section } = Astro.props;
     ))
   }
 </ul>
-<dialog id="map-modal" class="map-modal">
-  <div id="modal-content"></div>
-</dialog>
 <script>
   import { initListFilters } from '@app/utils/filter-controller';
   initListFilters({});

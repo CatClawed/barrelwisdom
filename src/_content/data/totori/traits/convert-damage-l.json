@@ -1,0 +1,1 @@
+{"id":"convert-damage-l","name":{"en":"Convert Damage L","ja":"ダメージ還元・大"},"desc":{"en":"Gives a weapon vampiric properties. Effect: Absorb 15% of damage dealt with regular attacks.","ja":"通常攻撃で与えたダメージの15%だけ自分のHPが回復する。"},"cost":9,"synth":true,"ingot":true,"index":125}

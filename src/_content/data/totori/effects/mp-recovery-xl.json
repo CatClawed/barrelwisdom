@@ -1,0 +1,1 @@
+{"id":"mp-recovery-xl","name":{"en":"MP Recovery XL","ja":"MP回復・超"},"desc":{"en":"Recover target's MP by an impressive amount","ja":"対象のMPをかなり強力に回復させる。"},"effectline_set":[{"name":{"en":"Elixir","ja":"エリキシル剤"},"id":"elixir"},{"name":{"en":"Mind Water","ja":"メンタルウォーター"},"id":"mind-water"}],"index":60}

@@ -178,8 +178,16 @@ export const location_translation: Record<string, string> = {
     "ko": "지역",
 }
 
-export const recipebook_translation: Record<string, string> = {
+export const recipebook_singular_translation: Record<string, string> = {
     "en": "Recipe Book",
+    "ja": "レシピブック",
+    "sc": "配方书",
+    "tc": "配方書",
+    "ko": "레시피책",
+}
+
+export const recipebook_translation: Record<string, string> = {
+    "en": "Recipe Books",
     "ja": "レシピブック",
     "sc": "配方书",
     "tc": "配方書",

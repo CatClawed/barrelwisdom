@@ -1,0 +1,1 @@
+{"id":"fire-power","name":{"en":"Fire Power","ja":"炎の力"},"desc":{"en":"A property of the Sunny Crystal. Allows equipment to deal and resist Fire damage.","ja":"装備に炎属性の追加ダメージと、耐性(10)を追加する。"},"synth":true,"ingot":true,"cloth":true,"accessory":true,"item_set":[{"id":"sunny-crystal","name":{"en":"Sunny Crystal","ja":"陽晶石"}}],"index":165}

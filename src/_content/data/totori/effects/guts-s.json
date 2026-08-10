@@ -1,0 +1,1 @@
+{"id":"guts-s","name":{"en":"Guts S","ja":"戦闘不能回避・小"},"desc":{"en":"Slight chance to survive when HP is depleted.","ja":"ダメージを受けて戦闘不能になるとき、低確率で戦闘不能になるのを防ぐ。"},"effectline_set":[{"name":{"en":"Talisman","ja":"厄除けおまもり"},"id":"talisman"}],"index":141}

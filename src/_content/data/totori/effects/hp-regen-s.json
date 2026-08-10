@@ -1,0 +1,1 @@
+{"id":"hp-regen-s","name":{"en":"HP Regen S","ja":"HP再生・小"},"desc":{"en":"Recovers HP on your turn by a small amount","ja":"戦闘中、行動が回ってきたときに、HPの値が回復する。"},"effectline_set":[{"name":{"en":"Warrior Mask","ja":"ブレイブマスク"},"id":"warrior-mask"}],"index":129}

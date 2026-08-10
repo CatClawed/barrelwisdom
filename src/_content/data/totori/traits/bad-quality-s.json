@@ -1,0 +1,1 @@
+{"id":"bad-quality-s","name":{"en":"Bad Quality S","ja":"品質ダウン・小"},"desc":{"en":"Decreases quality during synthesis. Effect: Decreases item quality by 10%.","ja":"調合で完成したアイテムの品質が20%低下する。"},"cost":2,"synth":true,"usable":true,"index":46}

@@ -1,9 +1,11 @@
 ---
 import { getCollection } from 'astro:content';
 import ItemAttributeList from './ItemAttributeList.astro';
-import Dropdown from '@components/Games/_common/Dropdown.astro';
-import FilterButton from '@components/Games/_common/FilterButton.astro';
-import TextFilter from '@components/Games/_common/TextFilter.astro';
+import PaneListWrapper from '@components/Games/_common/List/PaneListWrapper.astro';
+import ItemList from '@components/Games/_common/List/ItemList.astro';
+import Dropdown from '@components/Games/_common/Filter/Dropdown.astro';
+import FilterButton from '@components/Games/_common/Filter/FilterButton.astro';
+import TextFilter from '@components/Games/_common/Filter/TextFilter.astro';
 import {
   category_to_icon,
   element_map,
@@ -31,114 +33,96 @@ const materialOptions = materials.map((o) => ({
 items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
 ---
 
-<h1>{title}</h1>
-<div class="master-detail">
-  <div>
-    <div class="filters">
-      <TextFilter gridSize={12} lang={lang} />
-      <Dropdown
-        options={categoryOptions}
-        name="category"
-        placeholder={category_translation[lang]}
-        lang={lang}
-      />
-      <Dropdown
-        options={materialOptions}
-        name="material"
-        placeholder={material_translation[lang]}
-        lang={lang}
-      />
-      <FilterButton
-        svg={`${game}.svg?v=1`}
-        extraClass="elements2"
-        name="elements"
-        list={[
-          { filterKey: 'fire', icon: 'fire', activeColor: element_map.fire },
-          { filterKey: 'ice', icon: 'ice', activeColor: element_map.ice },
-          { filterKey: 'bolt', icon: 'bolt', activeColor: element_map.bolt },
-          { filterKey: 'air', icon: 'air', activeColor: element_map.air },
-        ]}
-      />
-      <FilterButton
-        svg={`${game}.svg?v=1`}
-        name="kind"
-        singleOnly={true}
-        list={[
-          { filterKey: 'gather', icon: 'items' },
-          { filterKey: 'consumable', icon: 'category-bombs' },
-          { filterKey: 'synth', icon: 'synth' },
-          { filterKey: 'equip', icon: 'equip' },
-          { filterKey: 'explore', icon: 'exploration' },
-          { filterKey: 'key', icon: 'category-key-items' },
-          { filterKey: 'furniture', icon: 'category-interior' },
-        ]}
-      />
-    </div>
-    <ul
-      class="list"
-      id="item-list"
-      data-lang={lang}
-      data-game={game}
-      data-section={section}
-    >
-      {
-        items.map((i, index) => (
-          <li
-            class="list-container shrink-text"
-            data-id={i.id}
-            data-search={i.data.name[lang]}
-            data-category={i.data.cats.map((c) => c.id).join(',')}
-            data-material={i.data.mats?.map((c) => c.id).join(',')}
-            data-elements={[
-              i.data.fire && 'fire',
-              i.data.ice && 'ice',
-              i.data.bolt && 'bolt',
-              i.data.air && 'air',
-            ]
-              .filter(Boolean)
-              .join(',')}
-            data-kind={i.data.kind}
-          >
-            {i.data.cats[0].id != 38 && (
-              <img
-                class="item-image-display"
-                src={`/media/games/${game}/${section}/${i.id}.webp`}
-                alt={i.data.name[lang]}
-                loading={index < 25 ? 'eager' : 'lazy'}
-              />
-            )}
-            <div class="card">
-              <div class="card-title">
-                <a href={`/yumia/items/${i.id}/${lang}`}>
-                  <h4 class="item-trigger">{i.data.name[lang]}</h4>
-                </a>
-                {i.data.isDLC && <span class="badge bg-primary">DLC</span>}
-              </div>
-              <ItemAttributeList
-                cats={i.data.cats}
-                mats={i.data.mats}
-                resonance={i.data.resonance}
-                fire={i.data.fire}
-                ice={i.data.ice}
-                bolt={i.data.bolt}
-                air={i.data.air}
-                lang={lang}
-                mode="list"
-                game={game}
-              />
-            </div>
-          </li>
-        ))
-      }
-    </ul>
+<PaneListWrapper title={title} section={section} game={game} lang={lang}>
+  <div class="filters" slot="filters">
+    <TextFilter gridSize={12} lang={lang} />
+    <Dropdown
+      options={categoryOptions}
+      name="category"
+      placeholder={category_translation[lang]}
+      lang={lang}
+    />
+    <Dropdown
+      options={materialOptions}
+      name="material"
+      placeholder={material_translation[lang]}
+      lang={lang}
+    />
+    <FilterButton
+      svg={`${game}.svg?v=1`}
+      extraClass="elements2"
+      name="elements"
+      list={[
+        { filterKey: 'fire', icon: 'fire', activeColor: element_map.fire },
+        { filterKey: 'ice', icon: 'ice', activeColor: element_map.ice },
+        { filterKey: 'bolt', icon: 'bolt', activeColor: element_map.bolt },
+        { filterKey: 'air', icon: 'air', activeColor: element_map.air },
+      ]}
+    />
+    <FilterButton
+      svg={`${game}.svg?v=1`}
+      name="kind"
+      singleOnly={true}
+      list={[
+        { filterKey: 'gather', icon: 'items' },
+        { filterKey: 'consumable', icon: 'category-bombs' },
+        { filterKey: 'synth', icon: 'synth' },
+        { filterKey: 'equip', icon: 'equip' },
+        { filterKey: 'explore', icon: 'exploration' },
+        { filterKey: 'key', icon: 'category-key-items' },
+        { filterKey: 'furniture', icon: 'category-interior' },
+      ]}
+    />
   </div>
-
-  <div id="detail-pane" class="detail-pane">
-    <svg class="placeholder-icon">
-      <use href="/spritesheets/main.svg#flask"></use>
-    </svg>
-  </div>
-</div>
+  {
+    items.map((i, index) => (
+      <ItemList
+        item={i}
+        cls="shrink-text"
+        img={
+          i.data.cats[0].id != 38
+            ? `/media/games/${game}/${section}/${i.id}.webp`
+            : undefined
+        }
+        index={index}
+        section={section}
+        lang={lang}
+        game={game}
+        data-id={i.id}
+        data-search={i.data.name[lang]}
+        data-category={i.data.cats.map((c) => c.id).join(',')}
+        data-material={i.data.mats?.map((c) => c.id).join(',')}
+        data-elements={[
+          i.data.fire && 'fire',
+          i.data.ice && 'ice',
+          i.data.bolt && 'bolt',
+          i.data.air && 'air',
+        ]
+          .filter(Boolean)
+          .join(',')}
+        data-kind={i.data.kind}
+      >
+        {i.data.isDLC && (
+          <span slot="title-matter" class="badge bg-primary">
+            DLC
+          </span>
+        )}
+        <ItemAttributeList
+          cats={i.data.cats}
+          mats={i.data.mats}
+          resonance={i.data.resonance}
+          fire={i.data.fire}
+          ice={i.data.ice}
+          bolt={i.data.bolt}
+          air={i.data.air}
+          lang={lang}
+          mode="list"
+          game={game}
+        />
+      </ItemList>
+    ))
+  }
+</PaneListWrapper>
 <script>
   import { initListFilters } from '@app/utils/filter-controller';
   import { initPaneController } from '@app/utils/detail-pane-controller';

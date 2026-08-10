@@ -1,0 +1,1 @@
+{"id":"very-stinky","name":{"en":"Very Stinky","ja":"とてもクサイ"},"desc":{"en":"Smells acidic and dangerous. Effect: Somewhat reduces price and deterioration speed.","ja":"価格がやや下がる代わりに。劣化速度がやや低下する。"},"cost":3,"synth":true,"usable":true,"item_set":[{"id":"stench-stone","name":{"en":"Stench Stone","ja":"臭い石"}}],"index":11}

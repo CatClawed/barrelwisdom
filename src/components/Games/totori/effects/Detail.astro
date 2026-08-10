@@ -1,0 +1,26 @@
+---
+import Effect from '@app/components/Games/_common/Detail/Effect.astro';
+import { item_translation } from '@app/localization/translations/common-strings';
+import Popover from '@app/components/Games/_common/Popover.astro';
+
+const { item, lang, mode, game, section } = Astro.props;
+---
+
+<Effect
+  name={item.name[lang]}
+  game={game}
+  mode={mode}
+  desc={item.desc[lang]}
+  id={item.id}
+  lang={lang}
+>
+
+  {item.effectline_set && (
+      <b style="margin-top: 1em;">{item_translation[lang]}:</b>
+      <ul class="two-column-list">
+        {item.effectline_set.map((i: any) => (
+          <li><a href={`/${game}/items/${i.id}/${lang}`}>{i.name[lang]}</a></li>
+        ))}
+      </ul>
+  )}
+</Effect>

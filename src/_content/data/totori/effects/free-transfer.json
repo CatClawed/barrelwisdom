@@ -1,0 +1,1 @@
+{"id":"free-transfer","name":{"en":"Free Transfer","ja":"出し入れ自由自在"},"desc":{"en":"Place inside Basket to freely transfer items to Container even when away from workshop.","ja":"この効果のついたアイテムをカゴに入れておくと、アトリエの外からでもコンテナにアクセスすることができる。"},"effectline_set":[{"name":{"en":"Secret Bag","ja":"秘密バッグ"},"id":"secret-bag"}],"index":94}

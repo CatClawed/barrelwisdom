@@ -1,0 +1,25 @@
+---
+import { colorHex } from '@components/Games/resleriana-red-white/rw_constants';
+
+const { cats, lang, game, mode = 'list' } = Astro.props;
+---
+
+<ul style="padding-left: 0;height:100%;columns:2;">
+  {
+    cats?.map((cat: any) => (
+      <li class="neat-item-display">
+        <svg
+          class="medium-icon"
+          style={cat.add ? 'fill:var(--add-category-color);' : undefined}
+        >
+          <use href={`/spritesheets/${game}.svg?v=1#category-${cat.id}`} />
+        </svg>
+        {mode === 'list' ? (
+          <span>{cat.name[lang]}</span>
+        ) : (
+          <a href={`/${game}/categories/${cat.id}/${lang}`}>{cat.name[lang]}</a>
+        )}
+      </li>
+    ))
+  }
+</ul>

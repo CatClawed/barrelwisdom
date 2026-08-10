@@ -1,0 +1,1 @@
+{"id":"falling-boulder","name":{"en":"Falling Boulder","ja":"岩が降ってくる"},"desc":{"en":"A boulder strikes the enemy. Small Critical Hit chance.","ja":"巨大な岩が落下してきて敵に命中する。低確率でクリティカルを発生させる。"},"effectline_set":[{"name":{"en":"Meteor","ja":"メテオール"},"id":"meteor"}],"index":22}

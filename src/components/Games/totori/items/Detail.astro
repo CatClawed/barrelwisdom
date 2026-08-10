@@ -1,0 +1,206 @@
+---
+import Popover from '@components/Games/_common/Popover.astro';
+import ItemAttributeList from './ItemAttributeList.astro';
+import {
+  monster_translation,
+  location_translation,
+  effect_translation,
+  trait_translation,
+  recipebook_singular_translation,
+  permalink_translation,
+  level_translation,
+  character_translation,
+  ingredient_translation,
+} from '@app/localization/translations/common-strings';
+
+const { item, lang, mode, game, section } = Astro.props;
+---
+
+<div class={mode !== 'fragment' ? 'card' : undefined}>
+  <div class="card-title">
+    <h4>{item.name[lang]}</h4>
+    {item.dlc && <span class="badge bg-primary">DLC</span>}
+    {item.isDLC && (
+      <span slot="title-matter" class="badge bg-primary">
+        DLC
+      </span>
+    )}
+    {item.isDX && (
+      <span slot="title-matter" class="badge bg-primary">
+        DX
+      </span>
+    )}
+    {item.level && (
+      <b slot="title-matter">
+        {level_translation[lang]} {item.level}
+      </b>
+    )}
+  </div>
+  <div class="image-desc-display">
+    <img
+      src={`/media/games/${game}/${section}/${item.id}.webp?v=1`}
+      alt={item.name[lang]}
+      style="aspect-ratio: 1; width: 200px;"
+    />
+    <p>{item.desc[lang]}</p>
+  </div>
+  <ItemAttributeList
+    cats={item.categories}
+    lang={lang}
+    game={game}
+    mode={mode}
+  />
+  {
+    item.book_set && (
+      <p>
+        <b>{recipebook_singular_translation[lang]} </b>
+        <a href={`/${game}/recipe-books/${item.book_set[0].id}/${lang}`}>
+          {item.book_set[0].name[lang]}
+        </a>
+      </p>
+    )
+  }
+  {
+    item.locations && (
+        <b>{location_translation[lang]}</b>
+        <ul>
+          {item.locations.map((loc) => (
+            <li>
+              <a
+                href={`/${game}/locations/${loc.parent ? loc.parent : loc.id}/${lang}${loc.parent ? `#${loc.id}` : ''}`}
+              >
+                {loc.name[lang]}
+              </a>
+            </li>
+          ))}
+        </ul>
+    )
+  }
+  {item.monsters && (
+    <b>{monster_translation[lang]}</b>
+    <ul>
+      {item.monsters.map((mon) => (
+        <li><a href={`/${game}/monsters/${mon.id}/${lang}`}>{mon.name[lang]}</a></li>
+      ))}
+    </ul>
+  )}
+  {item.traits && (
+    <b>{trait_translation[lang]}</b>
+    <ul>
+      <li><a href={`/${game}/traits/${item.traits.id}/${lang}`}>{item.traits.name[lang]}</a></li>
+    </ul>
+  )}
+  <ul style="list-style:none;padding:0;">
+    {item.time && <li>Time: {item.time}</li>}
+    {item.mp && <li>MP Used: {item.mp}</li>}
+    {item.price && <li>Selling Price: {item.price}</li>}
+    {item.uses && <li>Uses: {item.uses}</li>}
+  </ul>
+
+
+  {item.ingredient_set && (
+    <table class="tbl">
+      <tbody>
+        <tr><th>{ingredient_translation[lang]}</th></tr>
+        <tr>
+          <td>
+            <ul>
+              {item.ingredient_set.map((ing) => (
+                <li>
+                  {ing.item ? (
+                    <a href={`/${game}/items/${ing.item.id}/${lang}`}>{ing.item.name[lang]}</a>
+                  ) : (
+                    <a href={`/${game}/categories/${ing.category?.id}/${lang}`}>{ing.category?.name[lang]}</a>
+                  )} x{ing.num}
+                </li>
+              ))}
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  )}
+  {item.effectline_set && (
+    <table class="tbl">
+      <tbody>
+        <tr><th colspan="2">{effect_translation[lang]}</th></tr>
+        {[1, 2, 3].map((num) => {
+          const effects = item.effectline_set.filter((e) => e.itemnum === num);
+          return effects.length > 0 ? (
+            <tr>
+              <td>Item {num}</td>
+              <td>
+                <ul style="margin-bottom:0;">
+                  {effects.map((eff) => (
+                    <li>
+                      <Popover
+                        title={eff.effect.name[lang]}
+                        href={`/${game}/effects/${eff.effect.id}/${lang}`}
+                      >
+                        <span slot="trigger">{eff.effect.name[lang]}</span>
+                        <p>{eff.effect.desc[lang]}</p>
+                        <a href={`/${game}/effects/${eff.effect.id}/${lang}`}>{permalink_translation[lang]}</a>
+                      </Popover>
+                    </li>
+                  ))}
+                </ul>
+              </td>
+            </tr>
+          ) : null;
+        })}
+      </tbody>
+    </table>
+  )}
+
+
+  {item.equip_set && (
+    <>
+      <table class="tbl">
+        <tbody>
+          <tr><th>Materials</th></tr>
+          <tr>
+            <td>
+              <ul>
+                {item.equip_set[0].material.map((mat) => (
+                  <li><a href={`/${game}/items/${mat.id}/${lang}`}>{mat.name[lang]}</a></li>
+                ))}
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="tbl">
+        <tbody>
+          <tr><th colspan="2">Stats</th></tr>
+          {[
+            { l: 'HP', v: item.equip_set[0].hp },
+            { l: 'MP', v: item.equip_set[0].mp },
+            { l: 'LP', v: item.equip_set[0].lp },
+            { l: 'ATK', v: item.equip_set[0].atk },
+            { l: 'DEF', v: item.equip_set[0].defen },
+            { l: 'SPD', v: item.equip_set[0].spd },
+          ].map((s) => (
+            <tr>
+              <td style="padding-top:0.2rem;text-align:right;width:50%;"><b>{s.l} </b></td>
+              <td style="padding-top:0.2rem;padding-left:0.5em;">{s.v ?? 0}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <table class="tbl">
+        <tbody>
+          <tr><th>{character_translation[lang]}</th></tr>
+          <tr>
+            <td>
+              {item.equip_set[0].chars.map((char) => (
+                <img src={`/media/games/${game}/resources/equip_${char.name}.webp`} alt={`Can equip: ${char.name}`} style="aspect-ratio: 86/85; width: 86px;" />
+              ))}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </>
+  )}
+</div>

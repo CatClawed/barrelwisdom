@@ -1,0 +1,1 @@
+{"id":"double-move","name":{"en":"Double Move","ja":"連続行動"},"desc":{"en":"Ability to move twice consecutively in battle.","ja":"戦闘中、連続で行動できる効果を付与する。"},"effectline_set":[{"name":{"en":"Dimension Egg","ja":"時空の卵"},"id":"dimension-egg"}],"index":164}

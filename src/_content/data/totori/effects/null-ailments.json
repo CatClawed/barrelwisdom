@@ -1,0 +1,1 @@
+{"id":"null-ailments","name":{"en":"Null Ailments","ja":"状態異常耐性"},"desc":{"en":"Nulls all status ailments.","ja":"全てのステータス異常を無効化する。"},"effectline_set":[{"name":{"en":"Angel Charm","ja":"エンゼルチャーム"},"id":"angel-charm"}],"index":151}

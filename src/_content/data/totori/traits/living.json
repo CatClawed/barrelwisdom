@@ -1,0 +1,1 @@
+{"id":"living","name":{"en":"Living","ja":"生きている"},"desc":{"en":"Auto-activates in crisis. Effect: Item traits activate if Totori's HP is below 20%.","ja":"戦闘中、HPが20%以下になるとアイテムを自動使用。"},"cost":5,"synth":true,"usable":true,"item_set":[{"id":"puniball","name":{"en":"Puniball","ja":"ぷにぷに玉"}}],"index":70}

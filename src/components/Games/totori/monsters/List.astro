@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import PaneListWrapper from '@components/Games/_common/List/PaneListWrapper.astro';
+import MonsterList from '@components/Games/_common/List/MonsterList.astro';
+import TextFilter from '@components/Games/_common/Filter/TextFilter.astro';
+const { items, lang, title, game, section } = Astro.props;
+
+items.sort((a, b) => a.data.index - b.data.index);
+---
+
+<PaneListWrapper
+  title={title}
+  section={section}
+  game={game}
+  lang={lang}
+  placeholder="puni"
+>
+  <div class="filters" slot="filters">
+    <TextFilter gridSize={12} lang={lang} />
+  </div>
+  {
+    items.map((i, index) => (
+      <MonsterList
+        item={i}
+        img={`/media/games/${game}/${section}/${i.id}.webp`}
+        game={game}
+        section={section}
+        lang={lang}
+        index={index}
+        data-id={i.id}
+        data-search={i.data.name[lang]}
+        data-ind={i.index}
+      >
+        <span>{i.data.race}</span>
+        {i.data.isDLC && <span class="badge bg-primary">DLC</span>}
+        {i.data.isDX && <span class="badge bg-primary">DX</span>}
+      </MonsterList>
+    ))
+  }
+</PaneListWrapper>
+<script>
+  import { initListFilters } from '@app/utils/filter-controller';
+  import { initPaneController } from '@app/utils/detail-pane-controller';
+  initListFilters({});
+  initPaneController({});
+</script>

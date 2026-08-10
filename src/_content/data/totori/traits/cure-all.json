@@ -1,0 +1,1 @@
+{"id":"cure-all","name":{"en":"Cure-All","ja":"万病に効く"},"desc":{"en":"Medicinal property of Sage Herb. Heals all status ailments.","ja":"全ての状態異常を回復する。"},"usable":true,"item_set":[{"id":"sage-herb","name":{"en":"Sage Herb","ja":"賢者のハーブ"}}],"index":179}

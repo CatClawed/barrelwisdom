@@ -1,0 +1,1 @@
+{"id":"powerful-taste","name":{"en":"Powerful Taste","ja":"力がわく味"},"desc":{"en":"Temporary attack boost in battle. Erased when another similar effect is applied.","ja":"戦闘中、攻撃力を一時的に上昇させる。ただし、他の効果で攻撃力が変化すると、打ち消される。"},"effectline_set":[{"name":{"en":"Meat Pie","ja":"ミートパイ"},"id":"meat-pie"},{"name":{"en":"Totori Brunch","ja":"トトリア風ブランチ"},"id":"totori-brunch"}],"index":42}

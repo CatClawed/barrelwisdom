@@ -1,0 +1,1 @@
+{"id":"wound-healing","name":{"en":"Wound Healing","ja":"傷に効く"},"desc":{"en":"A property of Mandra Root. Heals some HP.","ja":"HPを微かに回復する。"},"usable":true,"item_set":[{"id":"mandra-root","name":{"en":"Mandra Root","ja":"マンドラゴラの根"}}],"index":171}

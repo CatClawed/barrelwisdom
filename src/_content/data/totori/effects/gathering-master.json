@@ -1,0 +1,1 @@
+{"id":"gathering-master","name":{"en":"Gathering Master","ja":"採取マスター"},"desc":{"en":"Greatly shortens the time required to gather items.","ja":"採取の際に経過する時間が、大きく短縮される。"},"effectline_set":[{"name":{"en":"Speed Gloves","ja":"倍速手袋"},"id":"speed-gloves"}],"index":99}

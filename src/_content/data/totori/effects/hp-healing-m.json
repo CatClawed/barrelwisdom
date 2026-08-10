@@ -1,0 +1,1 @@
+{"id":"hp-healing-m","name":{"en":"HP Healing M","ja":"HP継続回復・中"},"desc":{"en":"Regenerates HP by a fair amount each turn.","ja":"戦闘中、行動が回ってくる度に、HPがある程度自動で回復する。"},"effectline_set":[{"name":{"en":"Auto Alarm","ja":"自動目覚まし"},"id":"auto-alarm"},{"name":{"en":"Mystery Ankh","ja":"神秘のアンク"},"id":"mystery-ankh"}],"index":77}

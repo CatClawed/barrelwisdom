@@ -1,0 +1,1 @@
+{"id":"lightning-power","name":{"en":"Lightning Power","ja":"雷の力"},"desc":{"en":"A property of the Quake Crystal. Allows equipment to deal and resist Lightning damage.","ja":"装備に雷属性の追加ダメージと、耐性(10)を追加する。"},"synth":true,"ingot":true,"cloth":true,"accessory":true,"item_set":[{"id":"quake-crystal","name":{"en":"Quake Crystal","ja":"震える結晶"}}],"index":167}

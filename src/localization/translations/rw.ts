@@ -22,8 +22,16 @@ export const required_ing_translation = {
   'ko': '필요 소재',
 };
 
-export const recipe_tree_translation = {
+export const recipe_tree_singular_translation = {
   'en': 'Recipe Tree',
+  'ja': 'レシピ派生図',
+  'tc': '配方衍生圖',
+  'sc': '配方衍生图',
+  'ko': '레시피 파생도',
+};
+
+export const recipe_tree_translation = {
+  'en': 'Recipe Trees',
   'ja': 'レシピ派生図',
   'tc': '配方衍生圖',
   'sc': '配方衍生图',

@@ -1,0 +1,1 @@
+{"id":"mp-eater","name":{"en":"MP Eater","ja":"MP消費"},"desc":{"en":"Consumes more MP. Amount required depends on your Max MP.","ja":"MPを大きく消費する。消費量は自身の最大MPに依存する。"},"effectline_set":[{"name":{"en":"Dimension Egg","ja":"時空の卵"},"id":"dimension-egg"}],"index":118}

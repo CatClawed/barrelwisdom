@@ -1,0 +1,1 @@
+{"id":"sweet","name":{"en":"Sweet","ja":"シブい"},"desc":{"en":"Innate sweetness recovers HP by a tiny amount","ja":"口が痺れるほどの渋みで、確率で麻痺状態にする。"},"effectline_set":[{"name":{"en":"Honey Pie","ja":"ハニーパイ"},"id":"honey-pie"},{"name":{"en":"Migraine Syrup","ja":"知恵熱シロップ"},"id":"migraine-syrup"}],"index":66}

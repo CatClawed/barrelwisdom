@@ -1,0 +1,1 @@
+{"id":"lightweight","name":{"en":"Lightweight","ja":"軽量化された"},"desc":{"en":"A property of the Distill Stone. Raises speed of equipment.","ja":"装備の速度が上昇する。"},"synth":true,"ingot":true,"cloth":true,"accessory":true,"item_set":[{"id":"distill-stone","name":{"en":"Distill Stone","ja":"蒸留石"}}],"index":164}

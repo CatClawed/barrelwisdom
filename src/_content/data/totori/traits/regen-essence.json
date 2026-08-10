@@ -1,0 +1,1 @@
+{"id":"regen-essence","name":{"en":"Regen Essence","ja":"再生エキス"},"desc":{"en":"Rejuvenating essence of Cryptobotany. Restores some HP each turn.","ja":"戦闘中、行動が回る度にHPを少し回復する。"},"usable":true,"item_set":[{"id":"cryptobotany","name":{"en":"Cryptobotany","ja":"奇想天外"}}],"index":177}

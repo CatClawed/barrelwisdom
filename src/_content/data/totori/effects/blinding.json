@@ -1,0 +1,1 @@
+{"id":"blinding","name":{"en":"Blinding","ja":"毒状態にする"},"desc":{"en":"May Blind opponent. Decreases evasion and accuracy.","ja":"一定の確率で毒状態にし、行動の度にHPを減少させる。"},"effectline_set":[{"name":{"en":"Dark Water","ja":"暗黒水"},"id":"dark-water"}],"index":31}

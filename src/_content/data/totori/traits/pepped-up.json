@@ -1,0 +1,1 @@
+{"id":"pepped-up","name":{"en":"Pepped Up","ja":"やる気マンマン"},"desc":{"en":"Auto-activates when HP drop to half. Effect: Item traits activate it Totori's HP is below 50%.","ja":"戦闘中、HPが99%以下になるとアイテムを自動使用。"},"cost":10,"synth":true,"usable":true,"index":72}

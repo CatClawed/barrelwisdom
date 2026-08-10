@@ -1,0 +1,1 @@
+{"id":"resist-l","name":{"en":"Resist L","ja":"確率軽減・大"},"desc":{"en":"Good chance to avoid contracting status ailments.","ja":"戦闘中、ステータス異常になる確率を下げる。"},"effectline_set":[{"name":{"en":"Runestone","ja":"ルーンストーン"},"id":"runestone"}],"index":146}

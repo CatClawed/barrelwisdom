@@ -1,0 +1,55 @@
+---
+import ItemList from '@components/Games/_common/List/ItemList.astro';
+import { getCollection } from 'astro:content';
+import StandardData from './StandardData.astro';
+import TextFilter from '@components/Games/_common/Filter/TextFilter.astro';
+
+const { items, lang, title, game, section } = Astro.props;
+
+items.sort((a, b) => a.data.index - b.data.index);
+---
+
+<h1>{title}</h1>
+<div>
+  <div class="filters">
+    <TextFilter gridSize={12} lang={lang} />
+  </div>
+  <ul
+    class="list"
+    id="item-list"
+    data-lang={lang}
+    data-game={game}
+    data-section={section}
+  >
+    {
+      items.map((i, index) => (
+        <ItemList
+          item={i}
+          img={`/media/games/${game}/items/${i.id}.webp`}
+          index={index}
+          section={section}
+          lang={lang}
+          game={game}
+          data-id={i.id}
+          data-search={`${i.data.name[lang].toLowerCase()} ^ ${i.data.items.map((it) => it.name[lang].toLowerCase())}`}
+        >
+          {i.data.isDLC && (
+            <span slot="title-matter" class="badge bg-primary">
+              DLC
+            </span>
+          )}
+          {i.data.isDX && (
+            <span slot="title-matter" class="badge bg-primary">
+              DX
+            </span>
+          )}
+          <StandardData book={i.data} lang={lang} game={game} />
+        </ItemList>
+      ))
+    }
+  </ul>
+</div>
+<script>
+  import { initListFilters } from '@app/utils/filter-controller';
+  initListFilters({});
+</script>

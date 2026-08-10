@@ -1,0 +1,1 @@
+{"id":"loner-slayer-s","name":{"en":"Loner Slayer S","ja":"少ない敵に効果"},"desc":{"en":"Raises item's ranged effect. The fewer targets, the better. (20 / (Targets in range))% bonus will be added.","ja":"20÷効果範囲の対象%、威力がアップする。"},"cost":3,"synth":true,"usable":true,"index":143}

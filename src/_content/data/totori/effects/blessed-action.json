@@ -1,0 +1,1 @@
+{"id":"blessed-action","name":{"en":"Blessed Action","ja":"祝福されし行い"},"desc":{"en":"HP recovers after any action.","ja":"何か行動をする度に、HPが回復するようになる。"},"effectline_set":[{"name":{"en":"Angel Charm","ja":"エンゼルチャーム"},"id":"angel-charm"}],"index":114}

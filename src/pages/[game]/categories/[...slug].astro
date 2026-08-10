@@ -4,21 +4,12 @@ import { LanguageData } from '@app/localization/localization';
 import { category_translation } from '@app/localization/translations/common-strings';
 import MainLayout from '@layouts/MainLayout.astro';
 import { getCollection } from 'astro:content';
+import { generateCategories } from '@app/consts';
 
 export async function getStaticPaths() {
-  const games: string[] = [
-    //'totori',
-    //'escha',
-    //'shallie',
-    //'firis',
-    //'ryza2',
-    //'sophie2',
-    'resleriana-red-white',
-    'yumia',
-  ];
   const paths: any[] = [];
 
-  for (const gameId of games) {
+  for (const gameId of generateCategories) {
     const items = await getCollection(`${gameId}_categories` as any);
     const langs = LanguageData.languages[gameId];
 

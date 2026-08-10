@@ -1,0 +1,1 @@
+{"id":"falling-puni","name":{"en":"Falling Puni","ja":"ぷにが降ってくる"},"desc":{"en":"A Puni falls on the enemy. May inflict Sleep.","ja":"ぷにぷにが降ってきて敵に命中する。確率で眠り状態にする。"},"effectline_set":[{"name":{"en":"Meteor","ja":"メテオール"},"id":"meteor"}],"index":21}

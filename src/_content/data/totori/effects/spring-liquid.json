@@ -1,0 +1,1 @@
+{"id":"spring-liquid","name":{"en":"Spring Liquid","ja":"液体が湧く"},"desc":{"en":"Use to obtain liquid-related items.","ja":"使用すると液体カテゴリのアイテムが何個か手に入る。"},"effectline_set":[{"name":{"en":"Spring Cup","ja":"湧水の杯"},"id":"spring-cup"}],"index":88}

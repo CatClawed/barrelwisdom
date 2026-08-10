@@ -1,0 +1,1 @@
+{"id":"wake-up","name":{"en":"Wake Up","ja":"気付け効果"},"desc":{"en":"This Behemoth Heart effect revives and heals some HP.","ja":"戦闘不能状態を回復し、少しHPを回復する。"},"usable":true,"item_set":[{"id":"behemoth-heart","name":{"en":"Behemoth Heart","ja":"ベヒモスの心臓"}}],"index":173}

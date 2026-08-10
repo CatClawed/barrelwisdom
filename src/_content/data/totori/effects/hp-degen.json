@@ -1,0 +1,1 @@
+{"id":"hp-degen","name":{"en":"HP Degen","ja":"HP継続ダメージ"},"desc":{"en":"Reduces HP by a set amount every turn.","ja":"戦闘中、ターンが回ってくる度にダメージを受けるようになる。"},"effectline_set":[{"name":{"en":"Shadow Band","ja":"実影の腕輪"},"id":"shadow-band"}],"index":165}

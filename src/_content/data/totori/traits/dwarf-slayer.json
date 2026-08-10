@@ -1,0 +1,1 @@
+{"id":"dwarf-slayer","name":{"en":"Dwarf Slayer","ja":"小さな敵に有効"},"desc":{"en":"Raises item effect against small enemies. A bonus of (30 / (Monster Size))% will be added.","ja":"30÷モンスターのサイズ%威力がアップする。"},"cost":4,"synth":true,"usable":true,"note":"Six sizes of monster","index":150}

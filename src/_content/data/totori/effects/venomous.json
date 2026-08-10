@@ -1,0 +1,1 @@
+{"id":"venomous","name":{"en":"Venomous","ja":"猛毒状態にする"},"desc":{"en":"May inflict Poison. HP damage every turn.","ja":"高い確率で毒状態にし、行動の度にHPを減少させる。"},"effectline_set":[{"name":{"en":"Diocraft","ja":"ダイオクラフト"},"id":"diocraft"},{"name":{"en":"Healing Spore","ja":"ヒーリングスポア"},"id":"healing-spore"}],"index":32}

@@ -1,0 +1,23 @@
+---
+const { title, lang, game, section, placeholder = 'flask' } = Astro.props;
+---
+
+<h1>{title}</h1>
+<div class="master-detail">
+  <slot name="filters" />
+  <ul
+    class="list"
+    id="item-list"
+    data-lang={lang}
+    data-game={game}
+    data-section={section}
+  >
+    <slot />
+  </ul>
+
+  <div id="detail-pane" class="detail-pane">
+    <svg class={`placeholder-icon`}>
+      <use href={`/spritesheets/main.svg#${placeholder}`}></use>
+    </svg>
+  </div>
+</div>

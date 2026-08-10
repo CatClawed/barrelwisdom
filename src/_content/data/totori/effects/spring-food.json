@@ -1,0 +1,1 @@
+{"id":"spring-food","name":{"en":"Spring Food","ja":"食材が湧く"},"desc":{"en":"Use to obtain food-related items.","ja":"使用すると食材カテゴリのアイテムが何個か手に入る。"},"effectline_set":[{"name":{"en":"Happy Basket","ja":"幸せのバスケット"},"id":"happy-basket"}],"index":90}

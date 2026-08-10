@@ -1,0 +1,1 @@
+{"id":"inflict-sleep","name":{"en":"Inflict Sleep","ja":"眠りを与える"},"desc":{"en":"Weapons can inflict Sleep. Effect: Chance to inflict Sleep status with attacks.","ja":"ダメージを与えた時、確率で眠り状態にする。"},"cost":5,"synth":true,"ingot":true,"index":116}

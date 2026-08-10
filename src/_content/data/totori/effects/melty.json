@@ -1,0 +1,1 @@
+{"id":"melty","name":{"en":"Melty","ja":"あまい"},"desc":{"en":"A sweetness capable of melting brains recovers a large amount of HP.","ja":"甘みを感じて、HPがわずかに回復する。"},"effectline_set":[{"name":{"en":"Honey Pie","ja":"ハニーパイ"},"id":"honey-pie"},{"name":{"en":"Migraine Syrup","ja":"知恵熱シロップ"},"id":"migraine-syrup"}],"index":69}

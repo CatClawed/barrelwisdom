@@ -1,0 +1,1 @@
+{"id":"physical","name":{"en":"Physical +","ja":"物理攻撃がよく効く"},"desc":{"en":"Temporarily increases damage dealt from physical attacks.","ja":"対象が攻撃によって受けるダメージを、一時的に上げる。"},"effectline_set":[{"name":{"en":"Ether Ink","ja":"エーテルインキ"},"id":"ether-ink"}],"index":159}

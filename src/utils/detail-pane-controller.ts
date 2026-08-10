@@ -1,4 +1,4 @@
-import { initSearchableSelects } from '@components/Games/_common/dropdown_client';
+import { initSearchableSelects } from '@components/Games/_common/Filter/dropdown_client';
 import { initPopovers } from '@components/Games/_common/popover_client';
 
 interface PaneControllerOptions {
