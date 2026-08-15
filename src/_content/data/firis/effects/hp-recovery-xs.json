@@ -1,0 +1,1 @@
+{"id":"hp-recovery-xs","name":{"en":"HP Recovery XS","ja":"ＨＰ回復・微","tc":"ＨＰ回復‧微","sc":"HP回复‧微"},"desc":{"en":"Heals the target's HP slightly.","ja":"対象のＨＰをわずかに回復する","tc":"微量回復目標的ＨＰ。","sc":"微量回复目标的HP。"},"advanced":[{"actTag0":"ACT_HEAL_HP","min_1_0":"11","max_1_0":"15"}],"items":[{"id":"no-doc","name":{"en":"No-Doc","ja":"医者いらず","tc":"無需醫生","sc":"无需医生"}}],"index":99}

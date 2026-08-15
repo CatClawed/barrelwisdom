@@ -1,0 +1,1 @@
+{"id":"skill-enhance-m","name":{"en":"Skill Enhance M","ja":"スキル強化・中","tc":"技能強化‧中","sc":"技能强化‧中"},"desc":{"en":"Increases skill power by 7%.","ja":"スキルの威力が７％上昇する","tc":"技能威力上昇７％。","sc":"技能威力上升7%。"},"advanced":[{"actTag0":"ACT_EQUIP_ADD_POWER","min_1_0":"7"}],"items":[{"id":"blessing-staff","name":{"en":"Blessing Staff","ja":"救世と祝福の杖","tc":"救世與祝福之杖","sc":"救世与祝福之杖"}}],"index":494}

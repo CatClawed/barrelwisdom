@@ -1,0 +1,1 @@
+{"id":"speed-up-xs","name":{"en":"Speed Up XS","ja":"素早さ上昇・微","tc":"敏捷上昇‧微","sc":"敏捷上升‧微"},"desc":{"en":"Increases speed by 5.","ja":"素早さが５上昇する","tc":"敏捷上昇５。","sc":"敏捷上升5。"},"advanced":[{"actTag0":"ACT_EQUIP_ADD_PARAM_SPD","min_1_0":"3"}],"items":[{"id":"moon-caller","name":{"en":"Moon Caller","ja":"ムーンコーリング","tc":"月光呼應","sc":"月光呼应"}}],"index":475}

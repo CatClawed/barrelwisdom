@@ -1,0 +1,1 @@
+{"id":"nullify-seal","name":{"en":"Nullify Seal","ja":"封印を無効化","tc":"使封印無效","sc":"使封印无效"},"desc":{"en":"Immune to Seal ailment.","ja":"封印の状態異常を無効化する","tc":"使封印的異常狀態無效化。","sc":"使封印的异常状态无效化。"},"advanced":[{"actTag0":"ACT_AUTO_RESIST_SEAL"}],"items":[{"id":"bronze-mirror-shield","name":{"en":"Bronze Mirror Shield","ja":"青銅の鏡盾","tc":"青銅的鏡盾","sc":"青铜的镜盾"}}],"index":511}

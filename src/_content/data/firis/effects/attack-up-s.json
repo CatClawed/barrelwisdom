@@ -1,0 +1,1 @@
+{"id":"attack-up-s","name":{"en":"Attack Up S","ja":"攻撃力上昇・小","tc":"攻擊力上昇‧小","sc":"攻击力上升‧小"},"desc":{"en":"Increases attack by 10.","ja":"攻撃力が１０上昇する","tc":"攻擊力上昇１０。","sc":"攻击力上升10。"},"advanced":[{"actTag0":"ACT_EQUIP_ADD_PARAM_ATK","min_1_0":"5"}],"items":[{"id":"windspirit-talisman","name":{"en":"Windspirit Talisman","ja":"風霊のタリスマン","tc":"風靈的守護符","sc":"风灵的守护符"}}],"index":468}

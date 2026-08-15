@@ -1,0 +1,1 @@
+{"id":"healing-aroma","name":{"en":"Healing Aroma","ja":"癒しの香り","tc":"治癒的香氣","sc":"治愈的香气"},"desc":{"en":"Heals the entire party's HP.","ja":"パーティ全体のＨＰを回復する","tc":"回復隊伍全體的ＨＰ。","sc":"回复队伍全体的HP。"},"advanced":[{"actTag0":"ACT_HEAL_HP","min_1_0":"15","max_1_0":"30"}],"items":[{"id":"breezy-aroma","name":{"en":"Breezy Aroma","ja":"そよ風のアロマ","tc":"微風香精油","sc":"微风香精油"}}],"index":117}

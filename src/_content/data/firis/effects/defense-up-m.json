@@ -1,0 +1,1 @@
+{"id":"defense-up-m","name":{"en":"Defense Up M","ja":"防御力上昇・中","tc":"防禦力上昇‧中","sc":"防御力上升‧中"},"desc":{"en":"Increases defense by 15.","ja":"防御力が１５上昇する","tc":"防禦力上昇１５。","sc":"防御力上升15。"},"advanced":[{"actTag0":"ACT_EQUIP_ADD_PARAM_DEF","min_1_0":"7"}],"items":[{"id":"moon-caller","name":{"en":"Moon Caller","ja":"ムーンコーリング","tc":"月光呼應","sc":"月光呼应"}}],"index":474}

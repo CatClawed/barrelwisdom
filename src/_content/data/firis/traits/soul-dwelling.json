@@ -1,0 +1,1 @@
+{"id":"soul-dwelling","grade":60,"trans_heal":true,"trans_syn":true,"name":{"en":"Soul Dwelling","ja":"魂宿り","tc":"靈魂棲息","sc":"灵魂栖息"},"desc":{"en":"Effect: Greatly increases the target's level.","ja":"効果：対象のレベルを大きく上昇させる","tc":"效果：令目標的等級大量上昇。","sc":"效果：令目标的等级大量上升。"},"advanced":[{"actTag0":"ACT_PLUS_LEVEL","min_1_0":"10"}],"index":137}

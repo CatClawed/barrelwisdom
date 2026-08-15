@@ -1,0 +1,1 @@
+{"id":"skill-enhance-s","name":{"en":"Skill Enhance S","ja":"スキル強化・小","tc":"技能強化‧小","sc":"技能强化‧小"},"desc":{"en":"Increases skill power by 5%.","ja":"スキルの威力が５％上昇する","tc":"技能威力上昇５％。","sc":"技能威力上升5%。"},"advanced":[{"actTag0":"ACT_EQUIP_ADD_POWER","min_1_0":"5"}],"items":[{"id":"blessing-staff","name":{"en":"Blessing Staff","ja":"救世と祝福の杖","tc":"救世與祝福之杖","sc":"救世与祝福之杖"}}],"index":493}

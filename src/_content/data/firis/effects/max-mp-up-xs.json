@@ -1,0 +1,1 @@
+{"id":"max-mp-up-xs","name":{"en":"Max MP Up XS","ja":"最大ＭＰ上昇・微","tc":"ＭＰ最大值上昇‧微","sc":"MP最大值上升‧微"},"desc":{"en":"Increases maximum MP by 15.","ja":"最大ＭＰが１５上昇する","tc":"ＭＰ最大值上昇１５。","sc":"MP最大值上升15。"},"advanced":[{"actTag0":"ACT_EQUIP_ADD_PARAM_MP","min_1_0":"10"}],"items":[{"id":"cosmos-caller","name":{"en":"Cosmos Caller","ja":"コスモコーリング","tc":"宇宙呼應","sc":"宇宙呼应"}}],"index":463}

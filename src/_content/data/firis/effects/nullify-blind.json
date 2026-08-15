@@ -1,0 +1,1 @@
+{"id":"nullify-blind","name":{"en":"Nullify Blind","ja":"暗闇を無効化","tc":"使盲目無效","sc":"使盲目无效"},"desc":{"en":"Immune to Blind ailment.","ja":"暗闇の状態異常を無効化する","tc":"使盲目的異常狀態無效化。","sc":"使盲目的异常状态无效化。"},"advanced":[{"actTag0":"ACT_AUTO_RESIST_BLIND"}],"items":[{"id":"angel-ribbon","name":{"en":"Angel Ribbon","ja":"エンゼルリボン","tc":"天使緞帶","sc":"天使缎带"}}],"index":508}

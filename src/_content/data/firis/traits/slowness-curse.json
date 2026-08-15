@@ -1,0 +1,1 @@
+{"id":"slowness-curse","grade":60,"trans_atk":true,"trans_syn":true,"name":{"en":"Slowness Curse","ja":"無速の呪詛","tc":"無速的詛咒","sc":"无速的诅咒"},"desc":{"en":"Effect: Greatly reduces the target's speed.","ja":"効果：対象の素早さを大きく低下させる","tc":"效果：令目標的敏捷大量減低。","sc":"效果：令目标的敏捷大量减低。"},"advanced":[{"actTag0":"ACT_MINUS_SPD","min_1_0":"20","min_2_0":"20"}],"index":152}

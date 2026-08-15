@@ -1,0 +1,1 @@
+{"id":"attack-boost","grade":9,"trans_wpn":true,"trans_syn":true,"name":{"en":"Attack Boost","ja":"攻撃ブースト","tc":"攻擊加成","sc":"攻击加成"},"desc":{"en":"Enhances weapon attack power. Effect: Increases attack by 5.","ja":"武器の攻撃力を強化する。効果：攻撃力が５上昇する","tc":"強化武器的攻擊力。效果：攻擊力上昇５。","sc":"强化武器的攻击力。效果：攻击力上升5。"},"advanced":[{"actTag0":"ITEM_SUB_EQI_ADD_ATTACK","min_1_0":"5"}],"index":91}

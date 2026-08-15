@@ -1,0 +1,1 @@
+{"id":"peppy","name":{"en":"Peppy","ja":"シャッキリする","tc":"振作起來","sc":"振作起来"},"desc":{"en":"The target recovers stun value a lot.","ja":"対象の気絶値を大きく回復させる","tc":"使目標昏厥值大量回復。","sc":"使目标昏厥值大量回复。"},"advanced":[{"actTag0":"ACT_HEAL_STUN","min_1_0":"65","max_1_0":"90"}],"items":[{"id":"spark-mallet","name":{"en":"Spark Mallet","ja":"火花のこづち","tc":"煙火的小槌","sc":"烟火的小槌"}}],"index":157}

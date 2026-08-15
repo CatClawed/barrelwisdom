@@ -1,0 +1,1 @@
+{"id":"destruction-up-plus","grade":14,"trans_atk":true,"trans_syn":true,"name":{"en":"Destruction Up +","ja":"破壊力増加＋","tc":"破壞力增加＋","sc":"破坏力增加+"},"desc":{"en":"Effect: Raises effect of attack items by 12%.","ja":"効果：攻撃アイテムの効果が１２％上昇する","tc":"效果：攻擊道具的效果上昇１２％。","sc":"效果：攻击道具的效果上升12％。"},"advanced":[{"actTag0":"ITEM_SUB_ITM_CHANGE_POWER","min_1_0":"12"}],"index":20}

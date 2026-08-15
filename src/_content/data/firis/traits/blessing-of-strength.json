@@ -1,0 +1,1 @@
+{"id":"blessing-of-strength","grade":60,"trans_heal":true,"trans_syn":true,"name":{"en":"Blessing of Strength","ja":"剛力の祝福","tc":"剛力的祝福","sc":"刚力的祝福"},"desc":{"en":"Effect: Greatly increases the target's attack power.","ja":"効果：対象の攻撃力を大きく上昇させる","tc":"效果：令目標的攻擊力大量上昇。","sc":"效果：令目标的攻击力大量上升。"},"advanced":[{"actTag0":"ACT_PLUS_ATK","min_1_0":"20","min_2_0":"20"}],"index":138}

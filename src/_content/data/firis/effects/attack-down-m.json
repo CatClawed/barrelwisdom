@@ -1,0 +1,1 @@
+{"id":"attack-down-m","name":{"en":"Attack Down M","ja":"攻撃力ダウン・中","tc":"攻擊力下降‧中","sc":"攻击力下降‧中"},"desc":{"en":"Reduces the target's attack.","ja":"対象の攻撃力の値を低下させる","tc":"使目標的攻擊力值降低。","sc":"使目标的攻击力值降低。"},"advanced":[{"actTag0":"ACT_MINUS_ATK","min_1_0":"15","min_2_0":"7"}],"items":[{"id":"acid-cloud","name":{"en":"Acid Cloud","ja":"酸の霧雲","tc":"酸的霧雲","sc":"酸的雾云"}}],"index":253}

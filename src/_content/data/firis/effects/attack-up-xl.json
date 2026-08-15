@@ -1,0 +1,1 @@
+{"id":"attack-up-xl","name":{"en":"Attack Up XL","ja":"攻撃力上昇・超","tc":"攻擊力上昇‧超","sc":"攻击力上升‧超"},"desc":{"en":"Increases attack by 25.","ja":"攻撃力が２５上昇する","tc":"攻擊力上昇２５。","sc":"攻击力上升25。"},"advanced":[{"actTag0":"ACT_EQUIP_ADD_PARAM_ATK","min_1_0":"15"}],"items":[{"id":"windspirit-talisman","name":{"en":"Windspirit Talisman","ja":"風霊のタリスマン","tc":"風靈的守護符","sc":"风灵的守护符"}}],"index":471}

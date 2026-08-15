@@ -1,0 +1,1 @@
+{"id":"evasion-up-xs","name":{"en":"Evasion Up XS","ja":"回避率上昇・微","tc":"迴避率上昇‧微","sc":"闪避率上升‧微"},"desc":{"en":"Increases attack evasion chance by 4%.","ja":"攻撃の回避率が４％上昇する","tc":"攻擊迴避率上昇４％。","sc":"攻击闪避率上升4%。"},"advanced":[{"actTag0":"ACT_AUTO_DODGE","min_1_0":"4"}],"items":[{"id":"moon-caller","name":{"en":"Moon Caller","ja":"ムーンコーリング","tc":"月光呼應","sc":"月光呼应"}}],"index":483}

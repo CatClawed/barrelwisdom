@@ -1,0 +1,1 @@
+{"id":"bitter","name":{"en":"Bitter","ja":"にがい","tc":"苦的","sc":"苦的"},"desc":{"en":"The target recovers from Sleep status.","ja":"対象の眠りの状態異常を回復する","tc":"解除目標陷入睡眠的異常狀態。","sc":"解除目标陷入睡眠的异常状态。"},"advanced":[{"actTag0":"ACT_CURE_SLEEP"}],"items":[{"id":"hotspring-egg","name":{"en":"Hotspring Egg","ja":"温泉タマゴ","tc":"溫泉蛋","sc":"温泉蛋"}}],"index":132}

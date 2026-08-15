@@ -1,0 +1,1 @@
+{"id":"mp-regen-m-2","name":{"en":"MP Regen M","ja":"ＭＰ再生・中","tc":"ＭＰ再生‧中","sc":"MP再生‧中"},"desc":{"en":"Heal a fair bit of MP each turn.","ja":"行動時にＭＰがやや回復する","tc":"行動時回復中量ＭＰ。","sc":"行动时回复中量MP。"},"advanced":[{"actTag0":"ACT_AUTO_MP_TURN","min_1_0":"3"}],"items":[{"id":"bright-knight","name":{"en":"Bright Knight","ja":"ブライトナイト","tc":"光輝騎士","sc":"光辉骑士"}}],"index":456}

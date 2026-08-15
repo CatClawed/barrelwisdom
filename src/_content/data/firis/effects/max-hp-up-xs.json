@@ -1,0 +1,1 @@
+{"id":"max-hp-up-xs","name":{"en":"Max HP Up XS","ja":"最大ＨＰ上昇・微","tc":"ＨＰ最大值上昇‧微","sc":"HP最大值上升‧微"},"desc":{"en":"Increases maximum HP by 15.","ja":"最大ＨＰが１５上昇する","tc":"ＨＰ最大值上昇１５。","sc":"HP最大值上升15。"},"advanced":[{"actTag0":"ACT_EQUIP_ADD_PARAM_HP","min_1_0":"10"}],"items":[{"id":"cosmos-caller","name":{"en":"Cosmos Caller","ja":"コスモコーリング","tc":"宇宙呼應","sc":"宇宙呼应"}}],"index":458}

@@ -1,0 +1,1 @@
+{"id":"defense-up-xs","name":{"en":"Defense Up XS","ja":"防御力上昇・微","tc":"防禦力上昇‧微","sc":"防御力上升‧微"},"desc":{"en":"Increases defense by 5.","ja":"防御力が５上昇する","tc":"防禦力上昇５。","sc":"防御力上升5。"},"advanced":[{"actTag0":"ACT_EQUIP_ADD_PARAM_DEF","min_1_0":"3"}],"items":[{"id":"moon-caller","name":{"en":"Moon Caller","ja":"ムーンコーリング","tc":"月光呼應","sc":"月光呼应"}}],"index":472}

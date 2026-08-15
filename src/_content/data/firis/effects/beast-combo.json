@@ -1,0 +1,1 @@
+{"id":"beast-combo","name":{"en":"Beast Combo","ja":"猛獣の連撃","tc":"猛獸的連擊","sc":"猛兽的连击"},"desc":{"en":"Increases the chance of chain attacks.","ja":"連続攻撃の発生確率が上昇する","tc":"連續攻擊的發生率上昇。","sc":"连续攻击的发生率上升。"},"advanced":[{"actTag0":"ACT_PASSIVE_MULTI_ATTACK","min_1_0":"50"}],"items":[{"id":"beast-aroma","name":{"en":"Beast Aroma","ja":"獣のアロマ","tc":"獸之香精油","sc":"兽之香精油"}}],"index":382}
