@@ -140,6 +140,61 @@ def create_simple_serializer(model, fields=['id', 'name'],
         attrs
     )
 
+""" for crap like firis """
+class DirectTranslatedField(serializers.Field):
+    def __init__(self, base_name, obj_path=None, *args, **kwargs):
+        self.base_name = base_name
+        self.obj_path = obj_path
+        self.supported_langs = ['en', 'ja', 'tc', 'sc', 'ko', 'fr', 'ru', 'de', 'es']
+        kwargs['read_only'] = True
+        kwargs['source'] = '*'
+        super().__init__(*args, **kwargs)
+
+    def to_representation(self, obj):
+        base = obj
+        if self.obj_path:
+            for attr in self.obj_path.split('.'):
+                base = getattr(base, attr, None)
+                if base is None: return {}
+
+        langs = {}
+        for lang in self.supported_langs:
+            attr_name = f'{self.base_name}_{lang}'
+            value = getattr(base, attr_name, None)
+            if value:
+                langs[lang] = value
+        return langs
+
+class PathTranslatedField(serializers.Field):
+    """
+    Handles deep nested structures where the language suffix is at the end.
+    Example: obj.line.item.text.name_en
+    Path: 'line.item.text'
+    Base: 'name'
+    """
+    def __init__(self, path, base_name, *args, **kwargs):
+        self.path = path.split('.')
+        self.base_name = base_name
+        self.supported_langs = ['en', 'ja', 'tc', 'sc', 'ko', 'fr', 'ru', 'de', 'es']
+        kwargs['read_only'] = True
+        kwargs['source'] = '*'
+        super().__init__(*args, **kwargs)
+
+    def to_representation(self, obj):
+        base = obj
+        for attr in self.path:
+            base = getattr(base, attr, None)
+            if base is None:
+                return {}
+
+        langs = {}
+        for lang in self.supported_langs:
+            attr_name = f'{self.base_name}_{lang}'
+            value = getattr(base, attr_name, None)
+            if value:
+                langs[lang] = value
+        return langs
+
 
 class LegacyTranslatedField(serializers.Field):
     """
@@ -179,6 +234,7 @@ class LegacyTranslatedField(serializers.Field):
             if related_obj is None:
                 continue
             value = getattr(related_obj, self.field_name, None)
+            print(value)
             if value:
                 langs[lang] = value
         return langs
