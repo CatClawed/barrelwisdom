@@ -17,8 +17,11 @@ export async function buildsectionPaths(
     listPath = true,
     detailPath = true,
     mainClass,
+    collection,
   } of configs) {
-    const collectionName = `${game}_${section}`;
+    const collectionName = collection
+      ? `${game}_${collection}`
+      : `${game}_${section}`;
     const items = await getCollection(collectionName as any);
     const langs = LanguageData.languages[game];
 

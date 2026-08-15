@@ -1,0 +1,496 @@
+---
+import { colorHex } from '@components/Games/resleriana-red-white/rw_constants';
+import Popover from '@components/Games/_common/Popover.astro';
+import ItemAttributeList from './ItemAttributeList.astro';
+import RecipeIdeas from './RecipeIdeas.astro';
+import {
+  stat_translation,
+  monster_translation,
+  item_translation,
+  location_translation,
+  effect_translation,
+  trait_translation,
+  shop_translation,
+  recipebook_singular_translation,
+  permalink_translation,
+  character_translation,
+  recipe_ideas_translation,
+  details_translation,
+  catalyst_translation,
+  ingredient_translation,
+} from '@app/localization/translations/common-strings';
+import { colors } from '@components/Games/firis/firis_constants.ts';
+
+const { item, lang, mode, game, section } = Astro.props;
+---
+
+<div class={mode !== 'fragment' ? 'card' : undefined}>
+  <div class="card-title">
+    <h4>{item.name[lang]}</h4>
+    {item.isDLC && <span class="badge bg-primary">DLC</span>}
+    {item.isDX && <span class="badge bg-primary">DX</span>}
+    {item.level && <b>LV {item.level}</b>}
+  </div>
+  <div class="image-desc-display">
+    <img
+      src={`/media/games/${game}/${section}/${item.id}.webp?v=1`}
+      alt={item.name[lang]}
+      style="aspect-ratio: 1; width: 288px;"
+    />
+    <table class="tbl-transparent blabber-gabber">
+      <tbody>
+        {
+          [1, 2, 3, 4].map(
+            (i) =>
+              item[`char${i}`] && (
+                <tr>
+                  <td>
+                    <img
+                      src={`/media/games/firis/characters/${item[`char${i}`]}.webp?v=1`}
+                      alt={item[`char${i}`]}
+                    />
+                  </td>
+                  <td>{item[`desc${i}`][lang]}</td>
+                </tr>
+              ),
+          )
+        }
+      </tbody>
+    </table>
+  </div>
+  <ItemAttributeList
+    cats={item.categories}
+    lang={lang}
+    game={game}
+    mode={mode}
+  />
+  {
+    item.trait && (
+      <p>
+        <b>{trait_translation[lang]}: </b>
+        <a href={`/${game}/traits/${item.trait.id}/${lang}`}>
+          {item.trait.name[lang]}
+        </a>
+      </p>
+    )
+  }
+
+  {
+    item.book && !item.ideas && (
+      <p>
+        <b>{recipebook_singular_translation[lang]}: </b>
+        <a href={`/${game}/items/${item.book.id}/${lang}`}>
+          {item.book.name[lang]}
+        </a>
+      </p>
+    )
+  }
+
+  {
+    item.shopslot_set && (
+      <>
+        <b>{shop_translation[lang]}</b>
+        <ul class="two-column-list">
+          {item.shopslot_set.map((shop) => (
+            <li>
+              <a href={`/${game}/shops/${lang}#${shop.id}`}>
+                {shop.name[lang]}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
+
+  {
+    item.recipes && (
+      <>
+        <b>{item_translation[lang]}</b>
+        <ul>
+          {item.recipes.map((recipe) => (
+            <li>
+              <a href={`/${game}/items/${recipe.id}/${lang}`}>
+                {recipe.name[lang]}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
+
+  {
+    item.locations && (
+      <>
+        <b>{location_translation[lang]}</b>
+        <ul class="two-column-list">
+          {item.locations.map((loc) => (
+            <li>{loc.name[lang]}</li>
+          ))}
+        </ul>
+      </>
+    )
+  }
+
+  {
+    (item.wt || item.quantity || item.uses || item.range || item.price) && (
+      <ul style="padding-left:0;list-style:none;column-count: 2;">
+        {item.wt && <li>WT: {item.wt}</li>}
+        {item.quantity && <li>Quantity: {item.quantity}</li>}
+        {item.uses && <li>Uses: {item.uses}</li>}
+        {item.range && <li>Range: {item.range}</li>}
+        {item.dmin && !item.equip && <li>DMG Min: {item.dmin}</li>}
+        {item.dmax && !item.equip && <li>DMG Max: {item.dmax}</li>}
+      </ul>
+    )
+  }
+  {
+    item.monsters && (
+      <>
+        <b>{monster_translation[lang]}</b>
+        <ul class="two-column-list">
+          {item.monsters.map((mon) => (
+            <li>
+              <a href={`/${game}/monsters/${mon.id}/${lang}`}>
+                {mon.name[lang]}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
+  <RecipeIdeas
+    ideas={item.ideas}
+    lang={lang}
+    game={game}
+    hideTranslation={false}
+  />
+  {
+    item.ingredients && (
+      <table class="tbl">
+        <tbody>
+          <tr>
+            <th>{ingredient_translation[lang]}</th>
+          </tr>
+          <tr>
+            <td>
+              <ul>
+                {item.ingredients.map((ing) => (
+                  <li>
+                    {ing.cat && (
+                      <a href={`/${game}/categories/${ing.cat.id}/${lang}`}>
+                        {ing.cat.name[lang]}{' '}
+                      </a>
+                    )}
+                    {ing.item && (
+                      <a href={`/${game}/items/${ing.item.id}/${lang}`}>
+                        {ing.item.name[lang]}{' '}
+                      </a>
+                    )}
+                    x{ing.quantity}
+                  </li>
+                ))}
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    )
+  }
+
+  {
+    item.effectlines_set && (
+      <table class="tbl">
+        <tbody>
+          <tr>
+            <th colspan="2">{effect_translation[lang]}</th>
+          </tr>
+          {item.effectlines_set.map((eff) => (
+            <tr>
+              {item.ingredients && (
+                <td style="vertical-align:middle;text-align:center;">
+                  <svg
+                    style={`fill:${colors[eff.color][1]}`}
+                    class="medium-icon"
+                  >
+                    <use
+                      href={`/spritesheets/${game}.svg?v=1#${colors[eff.color][0]}`}
+                    />
+                  </svg>
+                </td>
+              )}
+              <td>
+                <ul>
+                  {eff.data.map((e) => (
+                    <li style="display:flex;">
+                      {e.effect && (
+                        <Popover
+                          title={e.effect.name[lang]}
+                          href={`/${game}/effects/${e.effect.id}/${lang}`}
+                        >
+                          <p>{e.effect.desc[lang]}</p>
+                          <a href={`/${game}/effects/${e.effect.id}/${lang}`}>
+                            {details_translation[lang]}
+                          </a>
+                          <span slot="trigger">{e.effect.name[lang]}</span>
+                        </Popover>
+                      )}
+                      {e.component && (
+                        <>
+                          <svg
+                            style={`fill:${colors[e.component.color][1]}`}
+                            class="medium-icon"
+                          >
+                            <use
+                              href={`/spritesheets/${game}.svg?v=1#${colors[e.component.color][0]}`}
+                            />
+                          </svg>
+                          {e.component.name[lang]} {e.component.value}
+                        </>
+                      )}
+                      {e.num && item.ingredients && <> &nbsp;({e.num})</>}
+                    </li>
+                  ))}
+                </ul>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    )
+  }
+
+  {
+    (item.fixed_components || item.random_components) && (
+      <table class="tbl">
+        <tbody>
+          {item.fixed_components && (
+            <>
+              <tr>
+                <th>Fixed Components</th>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="two-column">
+                    {item.fixed_components.map((comp) => (
+                      <li class="neat-item-display">
+                        <svg
+                          style={`fill:${colors[comp.color][1]}`}
+                          class="medium-icon"
+                        >
+                          <use
+                            href={`/spritesheets/${game}.svg?v=1#${colors[comp.color][0]}`}
+                          />
+                        </svg>
+                        {comp.name[lang]} {comp.value}
+                      </li>
+                    ))}
+                  </ul>
+                </td>
+              </tr>
+            </>
+          )}
+          {item.random_components && (
+            <>
+              <tr>
+                <th>Random Components</th>
+              </tr>
+              <tr>
+                <td>
+                  <ul class="two-column">
+                    {item.random_components.map((comp) => (
+                      <li class="neat-item-display">
+                        <svg
+                          style={`fill:${colors[comp.color][1]}`}
+                          class="medium-icon"
+                        >
+                          <use
+                            href={`/spritesheets/${game}.svg?v=1#${colors[comp.color][0]}`}
+                          />
+                        </svg>
+                        {comp.name[lang]} {comp.value}
+                      </li>
+                    ))}
+                  </ul>
+                </td>
+              </tr>
+            </>
+          )}
+        </tbody>
+      </table>
+    )
+  }
+
+  {
+    item.equip && (
+      <table class="tbl">
+        <tbody>
+          <tr>
+            <th colspan="2">Stats</th>
+          </tr>
+          {[
+            { l: 'HP', v: item.equip.hp },
+            { l: 'MP', v: item.equip.mp },
+            { l: 'ATK', v: item.equip.atk },
+            { l: 'DEF', v: item.equip.dfn },
+            { l: 'SPD', v: item.equip.spd },
+          ].map((s) => (
+            <tr>
+              <td style="padding-top:0.2rem;text-align:right;width:50%;">
+                <b>{s.l} </b>
+              </td>
+              <td style="padding-top:0.2rem;padding-left:0.5em;">{s.v}</td>
+            </tr>
+          ))}
+          {item.dmin && (
+            <tr>
+              <td style="border-top:transparent;padding-top:0;text-align:right;width:50%;">
+                <b>DMG Min </b>
+              </td>
+              <td style="padding-left:0.5em;">{item.dmin}</td>
+            </tr>
+          )}
+          {item.dmax && (
+            <tr>
+              <td style="border-top:transparent;padding-top:0;text-align:right;width:50%;">
+                <b>DMG Max </b>
+              </td>
+              <td style="padding-left:0.5em;">{item.dmax}</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    )
+  }
+  {
+    item.chars && (
+      <table class="tbl">
+        <tbody>
+          <tr>
+            <th>{character_translation[lang]}</th>
+          </tr>
+          <tr>
+            <td>
+              {item.chars.map((char) => (
+                <img
+                  src={`/media/games/${game}/characters/${char}.webp?v=1`}
+                  style="aspect-ratio: 1; width: 82px;"
+                  alt={char.name}
+                />
+              ))}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    )
+  }
+
+  {
+    item.catalysts && (
+      <table class="tbl">
+        <tbody>
+          <tr>
+            <th colspan="2">{catalyst_translation[lang]}</th>
+          </tr>
+          <tr>
+            <td>
+              <ul style="list-style: none; padding-left: 0; columns: 2;">
+                {item.catalysts.map((cat) => (
+                  <li class="neat-item-display">
+                    <svg class="medium-icon">
+                      <use
+                        href={`/spritesheets/${game}.svg?v=1#category-${cat.id}`}
+                      />
+                    </svg>
+                    <a
+                      href={`/${game}/catalysts/${lang}?search=${encodeURIComponent(cat.name[lang])}`}
+                    >
+                      {cat.name[lang]}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    )
+  }
+
+  {
+    item.catalyst && (
+      <table class="tbl">
+        <tbody>
+          <tr>
+            <th colspan="2">
+              Catalyst Data ({item.catalyst.size}x{item.catalyst.size})
+            </th>
+          </tr>
+          <tr>
+            <td>
+              <ul class="two-column" style="list-style: none; padding-left: 0;">
+                {item.catalyst.color.map((color, i) => (
+                  <li class="neat-item-display">
+                    <svg style={`fill:${colors[color][1]}`} class="medium-icon">
+                      <use
+                        href={`/spritesheets/${game}.svg?v=1#${colors[color][0]}`}
+                      />
+                    </svg>
+                    {item.catalyst.action[lang][i]}
+                  </li>
+                ))}
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    )
+  }
+
+  {
+    item.masteryline_set && item.ingredients && (
+      <table class="tbl">
+        <tbody>
+          <tr>
+            <th colspan="2">Proficiency Data</th>
+          </tr>
+          {item.masteryline_set.map((masteryline) => (
+            <tr>
+              <td style="vertical-align:middle;text-align:center;width:15%;">
+                {masteryline.level}
+              </td>
+              <td>
+                <ul style="margin-bottom: 0;">
+                  {masteryline.masteries.map((mastery) => (
+                    <li>{mastery.desc[lang]}</li>
+                  ))}
+                </ul>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    )
+  }
+</div>
+<style lang="scss">
+  .recipe-table {
+    word-break: break-word;
+    hyphens: auto;
+
+    tr > td {
+      font-size: 0.9rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+
+    tr > td > a {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+    }
+  }
+</style>

@@ -1,6 +1,7 @@
 import { totoriData } from '@app/_content/schemas/totori_schema';
 import { reslerianaRWData } from '@app/_content/schemas/resleriana-red-white_schema';
 import { yumiaData } from '@app/_content/schemas/yumia_schema';
+import { firisData } from './_content/schemas/firis_schema';
 
 export const SITE_TITLE = 'Barrel Wisdom';
 export const SITE_DESCRIPTION = 'The source for all things Atelier.';
@@ -8,6 +9,7 @@ export const POSTS_PER_PAGE = 10;
 
 export const gameData = [
   ...totoriData,
+  ...firisData,
   ...yumiaData,
   ...reslerianaRWData,
 ]
@@ -19,6 +21,7 @@ export interface PathConfig {
   listPath?: boolean;
   detailPath?: boolean;
   mainClass?: string;
+  collection?: string;
 }
 
 export const pathData: PathConfig[] = [
@@ -39,10 +42,13 @@ export const pathData: PathConfig[] = [
   // { game: 'shallie', section: 'monsters',   fragment: true },
   // { game: 'shallie', section: 'effects',    fragment: false },
   //
-  // { game: 'firis', section: 'items',    fragment: true },
-  // { game: 'firis', section: 'traits',   fragment: false },
-  // { game: 'firis', section: 'monsters', fragment: true },
-  // { game: 'firis', section: 'effects',  fragment: false },
+  { game: 'firis', section: 'items',    fragment: true },
+  { game: 'firis', section: 'traits',   fragment: false },
+  { game: 'firis', section: 'monsters', fragment: true },
+  { game: 'firis', section: 'effects', fragment: false },
+  { game: 'firis', section: 'shops', fragment: false, detailPath: false, mainClass: "medium-page" },
+  { game: 'firis', section: 'catalysts', fragment: false, detailPath: false, collection: 'items' },
+  { game: 'firis', section: 'recipe-ideas', fragment: false, detailPath: false, collection: 'items' },
   //
   // { game: 'ryza2', section: 'items',    fragment: true },
   // { game: 'ryza2', section: 'traits',   fragment: false },
@@ -72,7 +78,7 @@ export const generateCategories: string[] = [
   'totori',
   //'escha',
   //'shallie',
-  //'firis',
+  'firis',
   //'ryza2',
   //'sophie2',
   'resleriana-red-white',

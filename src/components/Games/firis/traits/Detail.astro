@@ -1,0 +1,82 @@
+---
+import Popover from '@app/components/Games/_common/Popover.astro';
+import Trait from '@app/components/Games/_common/Detail/Trait.astro';
+import AdvancedData from '@app/components/Games/firis/effects/AdvancedData.astro';
+import { level_translation } from '@app/localization/translations/common-strings';
+import { colorHex } from '@app/components/Games/resleriana-red-white/rw_constants';
+
+const { item, lang, mode, game, section } = Astro.props;
+
+const traitIcons = [
+  { key: "trans_syn",  icon: 'synthesis' },
+  { key: "trans_atk",  icon: 'attack' },
+  { key: "trans_heal", icon: 'heal' },
+  { key: "trans_wpn",  icon: 'weapon' },
+  { key: "trans_arm",  icon: 'armor' },
+  { key: "trans_acc",  icon: 'accessory' }
+];
+---
+<Trait
+  trait={item}
+  mode={mode}
+  game={game}
+  lang={lang}
+  section={section}
+  icons={traitIcons}
+>
+  {item.grade > -1 && (
+    <div class="card-icon-position" slot="top-level">
+      <Popover cls="dashed">
+        <span slot="trigger">{level_translation[lang]}:</span>
+        <p>A measure of rarity. This number determines where traits appear.</p>
+      </Popover>
+      {item.grade}
+    </div>
+  )}
+  {
+    item.combo1 && (
+      <div>
+        <a href={`/${game}/traits/${item.combo1.id}/${lang}`}>
+          {item.combo1.name[lang]}
+        </a>
+        x{' '}
+        <a href={`/${game}/traits/${item.combo2.id}/${lang}`}>
+          {item.combo2.name[lang]}
+        </a>
+      </div>
+    )
+  }
+
+  {
+    item.item_set && (
+      <a href={`/${game}/items/${item.item_set[0].id}/${lang}`}>
+        <svg class="trait-item-icon">
+          <use href={`/spritesheets/main.svg?v=1#ryza2-material`} />
+        </svg>
+        {item.item_set[0].name[lang]}
+      </a>
+    )
+  }
+
+  <p>{item.desc[lang]}</p>
+
+
+  {item.advanced && (
+    <>
+      {mode === 'list' ? (
+        <Popover cls="dashed">
+          <span slot="trigger">Advanced Data</span>
+          <AdvancedData item={item.advanced} />
+        </Popover>
+      ) :
+      ( <b>Advanced Data:</b><AdvancedData item={item.advanced} /> )}
+    </>
+  )}
+</Trait>
+
+<style>
+  .color-frame {
+    width: 0.9em;
+    height: 1.8em;
+  }
+</style>

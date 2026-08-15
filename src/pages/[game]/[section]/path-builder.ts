@@ -1,8 +1,10 @@
 import {
+  catalyst_translation,
   effect_translation,
   item_translation,
   monster_translation,
   properties_translation,
+  recipe_ideas_translation,
   recipebook_translation,
   shop_translation,
   trait_translation,
@@ -29,7 +31,9 @@ export const pageTitles: Record<string, Record<string, string>> = {
   monsters: monster_translation,
   traits: trait_translation,
   properties: properties_translation,
-  "recipe-trees": recipe_tree_translation,
   shops: shop_translation,
+  catalysts: catalyst_translation,
   "recipe-books": recipebook_translation,
+  "recipe-ideas": recipe_ideas_translation,
+  "recipe-trees": recipe_tree_translation,
 };

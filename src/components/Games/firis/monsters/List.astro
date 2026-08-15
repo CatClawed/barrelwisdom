@@ -2,11 +2,20 @@
 import { getCollection } from 'astro:content';
 import PaneListWrapper from '@components/Games/_common/List/PaneListWrapper.astro';
 import MonsterList from '@components/Games/_common/List/MonsterList.astro';
-import FilterButton from '@components/Games/_common/Filter/FilterButton.astro';
 import TextFilter from '@components/Games/_common/Filter/TextFilter.astro';
-const { items, lang, title, game, section } = Astro.props;
+import Dropdown from '@components/Games/_common/Filter/Dropdown.astro';
+import { race_translation } from '@app/localization/translations/common-strings';
 
-items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
+const { items, lang, title, game, section } = Astro.props;
+const races = await getCollection('firis_races');
+
+const raceOptions = races.map((race) => ({
+  id: race.id,
+  label: race.data.name[lang],
+  icon: `/spritesheets/${game}.svg?v=1#race-${race.data.icon}`,
+}));
+
+items.sort((a, b) => a.data.index - b.data.index);
 ---
 
 <PaneListWrapper
@@ -18,16 +27,11 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
 >
   <div class="filters" slot="filters">
     <TextFilter gridSize={8} lang={lang} />
-    <FilterButton
-      svg={`${game}.svg?v=1`}
-      name="kinds"
-      gridSpan="4"
-      singleOnly={true}
-      list={[
-        { filterKey: 'small', icon: 'enemy-small' },
-        { filterKey: 'large', icon: 'enemy-large' },
-        { filterKey: 'boss', icon: 'enemy-boss' },
-      ]}
+    <Dropdown
+      options={raceOptions}
+      name="race"
+      placeholder={race_translation[lang]}
+      lang={lang}
     />
   </div>
   {
@@ -42,11 +46,12 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
         data-id={i.id}
         data-search={i.data.name[lang]}
         data-ind={i.index}
-        data-kinds={
-          i.data.index < 500 ? 'small' : i.data.index < 1000 ? 'large' : 'boss'
-        }
+        data-race={i.data.kind}
       >
-        {i.data.dlc && <span class="badge bg-primary">DLC</span>}
+        {i.data.isDX && <span class="badge bg-primary">DX</span>}
+        <svg class="large-icon">
+          <use href={`/spritesheets/${game}.svg?v=1#race-${i.data.kind}`} />
+        </svg>
       </MonsterList>
     ))
   }
@@ -55,9 +60,7 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
   import { initListFilters } from '@app/utils/filter-controller';
   import { initPaneController } from '@app/utils/detail-pane-controller';
   initListFilters({
-    filters: [
-      { type: 'buttons', key: 'kinds', groupName: 'kinds', mode: 'any' },
-    ],
+    filters: [{ type: 'select', key: 'race', elementId: 'race' }],
   });
   initPaneController({});
 </script>

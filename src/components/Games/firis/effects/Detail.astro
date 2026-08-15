@@ -16,7 +16,7 @@ const { item, lang, mode, game, section } = Astro.props;
   lang={lang}
 >
 
-  {item.items?.length > 0 && (
+  {item.items && (
       <b style="margin-top: 1em;">{item_translation[lang]}:</b>
       <ul class="two-column-list">
         {item.items.map((i: any) => (
@@ -24,12 +24,16 @@ const { item, lang, mode, game, section } = Astro.props;
         ))}
       </ul>
   )}
+  {item.advanced && (
+    <>
+      {mode === 'list' ? (
+        <Popover cls="dashed">
+          <span slot="trigger">Advanced Data</span>
+          <AdvancedData item={item.advanced} />
+        </Popover>
+      ) :
+      ( <b>Advanced Data:</b><AdvancedData item={item.advanced} /> )}
+    </>
+  )}
 
-  {mode === 'list' ? (
-  <Popover cls="dashed">
-    <span slot="trigger">Advanced Data</span>
-    <AdvancedData item={item} />
-  </Popover>
-  ) :
-  ( <b>Advanced Data:</b><AdvancedData item={item} /> )}
 </Effect>

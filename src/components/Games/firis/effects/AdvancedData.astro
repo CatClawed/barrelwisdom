@@ -1,0 +1,31 @@
+---
+const { item } = Astro.props;
+---
+
+<ul>
+  {
+    item.map((data) => (
+      <li>
+        {data.attTag0 && <span>{data.attTag0} /</span>}
+        {data.actTag0}
+
+        <ul>
+          {data.min_1_0 && (
+            <li>
+              <b>Value 1: </b>
+              {data.min_1_0}
+              {data.max_1_0 && <span> - {data.max_1_0}</span>}
+            </li>
+          )}
+          {data.min_2_0 && (
+            <li>
+              <b>Value 2: </b>
+              {data.min_2_0}
+              {data.max_2_0 && <span> - {data.max_2_0}</span>}
+            </li>
+          )}
+        </ul>
+      </li>
+    ))
+  }
+</ul>
