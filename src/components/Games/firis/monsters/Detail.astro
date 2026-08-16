@@ -1,0 +1,158 @@
+---
+import {
+  location_translation,
+  item_translation,
+} from '@app/localization/translations/common-strings';
+
+const { item, lang, mode, game, section } = Astro.props;
+
+const chart: Record<number, string> = {
+  1: `firis.svg?v=1#fa-x`,
+  2: `firis.svg?v=1#fa-minus`,
+  3: `main.svg?v=1#fa-caret-up`,
+  4: `firis.svg?v=1#fa-circle`,
+  5: `firis.svg?v=1#fa-circle-dot`,
+  6: `firis.svg?v=1#fa-empty-star`,
+};
+---
+
+<div class="card">
+  <div class="card-title">
+    <h3>{item.name[lang]}</h3>
+    <div class="card-icon-position">
+      <svg class="medium-icon">
+        <use href={`/spritesheets/${game}.svg?v=1#race-${item.kind}`}></use>
+      </svg>
+      {
+        item.isDX && (
+          <span class="badge bg-primary">DX</span>
+        )
+      }
+    </div>
+  </div>
+  <div class="image-desc-display">
+    <img
+      src={`/media/games/${game}/monsters/${item.id}.webp?v=1`}
+      alt={item.name[lang]}
+      style="aspect-ratio: 1; width: 288px;"
+    />
+
+    <table class="tbl-transparent blabber-gabber">
+      <tbody>
+        {
+          [1, 2, 3, 4].map(
+            (i) =>
+              item[`char${i}`] && (
+                <tr>
+                  <td>
+                    <img
+                      src={`/media/games/firis/characters/${item[`char${i}`]}.webp?v=1`}
+                      alt={item[`char${i}`]}
+                    />
+                  </td>
+                  <td>{item[`desc${i}`][lang]}</td>
+                </tr>
+              ),
+          )
+        }
+      </tbody>
+    </table>
+  </div>
+  {
+    item.note && (
+      <p>
+        <b>Note: </b>
+        <span>{item.note}</span>
+      </p>
+    )
+  }
+
+  <div class="grid">
+    <div class="grid-6">
+      {
+        item.locations && (
+            <b>{location_translation[lang]}</b>
+            <ul>
+              {item.locations.map((loc) => (
+                <li>{loc.name[lang]}</li>
+              ))}
+            </ul>
+        )
+      }
+      {
+        item.item_set && (
+            <b>{item_translation[lang]}</b>
+            <ul>
+              {item.item_set.map((drop) => (
+                <li>
+                  <a href={`/${game}/items/${drop.id}/${lang}`}>{drop.name[lang]}</a>
+                </li>
+              ))}
+            </ul>
+        )
+      }
+    </div>
+    <div class="grid-6">
+      <table class="tbl-transparent noborder">
+        <tbody>
+          {
+            [
+              { l: 'LV', v: item.level },
+              { l: 'HP', v: item.hp },
+              { l: 'ATK', v: item.atk },
+              { l: 'DEF', v: item.defen },
+              { l: 'SPD', v: item.spd },
+              { l: 'Exp', v: item.exp },
+              { l: 'Cole', v: item.cole },
+            ].map((s) => (
+              <tr>
+                <td>
+                  <b>{s.l} </b>
+                </td>
+                <td>{s.v}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="a18-weaknesses">
+    {
+      ['slash', 'impact', 'pierce', 'magic'].map((r) => (
+        <svg class="medium-icon">
+          <use href={`/spritesheets/${game}.svg?v=1#resist-${r}`} />
+        </svg>
+      ))
+    }
+    {
+      ['slash', 'impact', 'pierce', 'magic'].map((r) => (
+        <svg class="medium-icon">
+          <use href={`/spritesheets/${chart[item[r]]}`} />
+        </svg>
+      ))
+    }
+    {
+      ['fire', 'ice', 'lightning', 'ailment'].map((r) => (
+        <svg class="medium-icon">
+          <use href={`/spritesheets/${game}.svg?v=1#resist-${r}`} />
+        </svg>
+      ))
+    }
+    {
+      ['fire', 'ice', 'light', 'ail'].map((r) => (
+        <svg class="medium-icon">
+          <use href={`/spritesheets/${chart[item[r]]}`} />
+        </svg>
+      ))
+    }
+  </div>
+</div>
+<style lang="scss">
+.a18-weaknesses {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  row-gap: 0.5em;
+}
+</style>

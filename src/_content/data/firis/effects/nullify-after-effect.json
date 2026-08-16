@@ -1,0 +1,1 @@
+{"id":"nullify-after-effect","name":{"en":"Nullify After Effect","ja":"後遺症を無効化","tc":"使後遺症無效","sc":"使后遗症无效"},"desc":{"en":"Immune to After Effects ailment.","ja":"後遺症の状態異常を無効化する","tc":"使後遺症的異常狀態無效化。","sc":"使后遗症的异常状态无效化。"},"advanced":[{"actTag0":"ACT_RESIST_SICKNESS"}],"items":[{"id":"angel-ribbon","name":{"en":"Angel Ribbon","ja":"エンゼルリボン","tc":"天使緞帶","sc":"天使缎带"}}],"index":512}

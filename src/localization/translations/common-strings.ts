@@ -238,6 +238,14 @@ export const permalink_translation: Record<string, string> = {
     "es": "Enlace permanente"
 };
 
+export const recipe_idea_translation: Record<string, string> = {
+    "en": "Recipe Idea",
+    "ja": "レシピ発想",
+    "sc": "构思配方",
+    "tc": "構思配方",
+    "ko": "레시피 발상",
+};
+
 export const recipe_ideas_translation: Record<string, string> = {
     "en": "Recipe Ideas",
     "ja": "レシピ発想",

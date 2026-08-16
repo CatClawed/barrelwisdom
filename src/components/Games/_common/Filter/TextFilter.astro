@@ -31,3 +31,16 @@ const { gridSize = 12, lang } = Astro.props;
     pointer-events: none; /* Ensure clicks pass through to the input */
   }
 </style>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const search = params.get('search');
+  if (search) {
+    const input = document.getElementById('filter') as HTMLInputElement | null;
+    if (input) {
+      input.value = search;
+      setTimeout(() => {
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+      }, 0);
+    }
+  }
+</script>

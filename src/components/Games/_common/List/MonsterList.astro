@@ -14,8 +14,8 @@ const { img, game, index, section, lang, item, cls, ...attr } = Astro.props;
     )
   }
   <div class="card monster-display card-title">
-    <a href={`/${game}/${section}/${item.id}/${lang}`}>
-      <h3 class="item-trigger">{item.data.name[lang]}</h3>
+    <a class="pane-trigger" href={`/${game}/${section}/${item.id}/${lang}`}>
+      <h3>{item.data.name[lang]}</h3>
     </a>
     <slot />
   </div>

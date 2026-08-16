@@ -1,0 +1,83 @@
+---
+import { recipe_idea_translation } from '@app/localization/translations/common-strings';
+
+interface Props {
+  ideas: any[];
+  lang: string;
+  game: string;
+  hideTranslation?: boolean;
+}
+
+const { ideas, lang, game, hideTranslation = false } = Astro.props;
+---
+
+{
+  ideas && (
+    <table class="tbl">
+      <tbody>
+        {ideas.map((idea, index) => (
+          <>
+            <tr>
+              <th colspan="2">
+                {!hideTranslation && `${recipe_idea_translation[lang]} `}
+                {index + 1}
+              </th>
+            </tr>
+            {idea.unlocks.map((unlock) => (
+              <>
+                {(unlock.level === 1 || unlock.level === 4) && (
+                  <tr>
+                    <td>
+                      <svg class="medium-icon">
+                        <use
+                          href={`/media/spritesheets/${unlock.level === 1 ? 'A18.svg?v=1#fa-quest' : 'main.svg?v=1#fa-unlock'}`}
+                        />
+                      </svg>
+                    </td>
+                    <td>
+                      <ul>
+                        {unlock.condition.map((condition) => (
+                          <li>
+                            {condition.condition[lang]}
+                            {lang === 'en' && <span>&nbsp;</span>}
+                            {condition.item && (
+                              <a
+                                href={`/${game}/items/${condition.item.id}/${lang}`}
+                              >
+                                {condition.item.name[lang]}
+                              </a>
+                            )}
+                            {condition.monster && (
+                              <a
+                                href={`/${game}/monsters/${condition.monster.id}/${lang}`}
+                              >
+                                {condition.monster.name[lang]}
+                              </a>
+                            )}
+                            {condition.category && (
+                              <a
+                                href={`/${game}/categories/${condition.category.id}/${lang}`}
+                              >
+                                {condition.category.name[lang]}
+                              </a>
+                            )}
+                            {condition.race && (
+                              <span>{condition.race.name[lang]}</span>
+                            )}
+                            {condition.number && (
+                              <span>x{condition.number}</span>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    </td>
+                  </tr>
+                )}
+              </>
+            ))}
+          </>
+        ))}
+      </tbody>
+    </table>
+  )
+}

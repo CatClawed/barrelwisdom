@@ -1,0 +1,1 @@
+{"id":"cures-poison","name":{"en":"Cures Poison","ja":"毒状態を治療","tc":"治療中毒狀態","sc":"治疗中毒状态"},"desc":{"en":"The target recovers from Poison status.","ja":"対象の毒の状態異常を回復する","tc":"使目標從中毒的異常狀態中回復。","sc":"使目标从中毒的异常状态中回复。"},"advanced":[{"actTag0":"ACT_CURE_POISON"}],"items":[{"id":"honey-syrup","name":{"en":"Honey Syrup","ja":"ハニーシロップ","tc":"蜂蜜糖漿","sc":"蜂蜜糖浆"}}],"index":164}

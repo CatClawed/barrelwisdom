@@ -1,0 +1,1 @@
+{"id":"mach-throw","grade":56,"trans_atk":true,"trans_heal":true,"trans_syn":true,"name":{"en":"Mach Throw","ja":"マッハスロー","tc":"馬赫投擲","sc":"马赫投掷"},"desc":{"en":"Effect: Reduces WT after using the item by 50%.","ja":"効果：アイテム使用時のＷＴの戻り値が、５０％短縮される","tc":"效果：使用道具時的ＷＴ倒數值縮短５０％。","sc":"效果：使用道具时的ＷＴ倒数值缩短50％。"},"advanced":[{"actTag0":"ITEM_SUB_BTL_QUICK_USE","min_1_0":"50"}],"index":202}

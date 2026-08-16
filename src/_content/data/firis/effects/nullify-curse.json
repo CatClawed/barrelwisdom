@@ -1,0 +1,1 @@
+{"id":"nullify-curse","name":{"en":"Nullify Curse","ja":"呪いを無効化","tc":"使詛咒無效","sc":"使诅咒无效"},"desc":{"en":"Immune to Curse ailment.","ja":"呪いの状態異常を無効化する","tc":"使詛咒的異常狀態無效化。","sc":"使诅咒的异常状态无效化。"},"advanced":[{"actTag0":"ACT_AUTO_RESIST_CURSE"}],"items":[{"id":"angel-ribbon","name":{"en":"Angel Ribbon","ja":"エンゼルリボン","tc":"天使緞帶","sc":"天使缎带"}}],"index":507}

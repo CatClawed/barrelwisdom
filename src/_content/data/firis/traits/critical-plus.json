@@ -1,0 +1,1 @@
+{"id":"critical-plus","grade":20,"trans_atk":true,"trans_heal":true,"trans_syn":true,"name":{"en":"Critical +","ja":"クリティカル＋","tc":"重擊＋","sc":"重击+"},"desc":{"en":"Effect: Gives items a 20% chance to critical hit.","ja":"効果：アイテムが２０％の確率でクリティカルする","tc":"效果：道具以２０％的機率產生重擊。","sc":"效果：道具以20％的机率产生重击。"},"advanced":[{"actTag0":"ITEM_SUB_ITM_ADD_EFFCRIT","min_1_0":"20"}],"index":51}

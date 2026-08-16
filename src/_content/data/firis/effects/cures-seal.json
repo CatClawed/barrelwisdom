@@ -1,0 +1,1 @@
+{"id":"cures-seal","name":{"en":"Cures Seal","ja":"封印状態を治療","tc":"治療封印狀態","sc":"治疗封印状态"},"desc":{"en":"The target recovers from Seal status.","ja":"対象の封印の状態異常を回復する","tc":"使目標從封印的異常狀態中回復。","sc":"使目标从封印的异常状态中回复。"},"advanced":[{"actTag0":"ACT_CURE_SEAL"}],"items":[{"id":"elixir-of-laawe","name":{"en":"Elixir of Laawe","ja":"ラアウェの秘薬","tc":"拉維的秘藥","sc":"拉维的秘药"}}],"index":170}

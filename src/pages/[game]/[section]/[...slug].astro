@@ -13,12 +13,14 @@ export async function buildsectionPaths(
   for (const {
     game,
     section,
-    fragment,
     listPath = true,
     detailPath = true,
     mainClass,
+    collection,
   } of configs) {
-    const collectionName = `${game}_${section}`;
+    const collectionName = collection
+      ? `${game}_${collection}`
+      : `${game}_${section}`;
     const items = await getCollection(collectionName as any);
     const langs = LanguageData.languages[game];
 
@@ -58,23 +60,6 @@ export async function buildsectionPaths(
               detailPath,
             },
           });
-          if (fragment) {
-            paths.push({
-              params: {
-                game,
-                section: section,
-                slug: `${item.id}/fragment/${lang}`,
-              },
-              props: {
-                mode: 'fragment',
-                item,
-                lang,
-                game,
-                listPath,
-                detailPath,
-              },
-            });
-          }
         });
       });
     }

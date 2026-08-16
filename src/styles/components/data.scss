@@ -80,10 +80,18 @@
 }
 
 .neat-item-display {
-  margin: auto auto 0 0;
+  margin: auto 0;
   display: flex;
   align-items: center;
   svg {
     margin-right: 0.3em;
+  }
+}
+
+/* it's my site I can name it what I want */
+.blabber-gabber {
+  img {
+    min-width: 3em;
+    aspect-ratio: 1;
   }
 }

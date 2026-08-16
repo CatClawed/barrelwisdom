@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import ItemAttributeList from '@components/Games/firis/items/ItemAttributeList.astro';
+import PaneListWrapper from '@components/Games/_common/List/PaneListWrapper.astro';
+import TextFilter from '@components/Games/_common/Filter/TextFilter.astro';
+import { category_translation } from '@app/localization/translations/common-strings';
+import RecipeIdeas from '@components/Games/firis/items/RecipeIdeas.astro';
+import ItemList from '@components/Games/_common/List/ItemList.astro';
+
+const { items, lang, title, game, section } = Astro.props;
+
+const final = items
+  .filter((i) => i.data.ideas !== undefined)
+  .sort((a, b) => a.data.index - b.data.index);
+---
+
+<PaneListWrapper title={title} section={section} game={game} lang={lang}>
+  <div class="filters" slot="filters">
+    <TextFilter gridSize={12} lang={lang} />
+  </div>
+  {
+    final.map((i, index) => (
+      <ItemList
+        item={i}
+        img={`/media/games/${game}/items/${i.id}.webp`}
+        index={index}
+        section="items"
+        lang={lang}
+        game={game}
+        data-id={i.id}
+        data-search={i.data.name[lang].toLowerCase()}
+        data-pane-section="items"
+      >
+        <RecipeIdeas
+          ideas={i.data.ideas}
+          lang={lang}
+          game={game}
+          hideTranslation={true}
+        />
+      </ItemList>
+    ))
+  }
+</PaneListWrapper>
+<script>
+  import { initListFilters } from '@app/utils/filter-controller';
+  import { initPaneController } from '@app/utils/detail-pane-controller';
+  initListFilters({});
+  initPaneController({});
+</script>

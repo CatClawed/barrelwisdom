@@ -1,0 +1,1 @@
+{"id":"heightened-soul","grade":-1,"trans_arm":true,"trans_syn":true,"name":{"en":"Heightened Soul","ja":"魂の高まり","tc":"靈魂的高昇","sc":"灵魂的高升"},"desc":{"en":"During battle, all stats slowly rise.","ja":"戦闘中、少しずつ全ての能力が上昇していく","tc":"戰鬥中，所有能力將持續微量上昇。","sc":"战斗中，所有能力将持续微量上升。"},"advanced":[{"actTag0":"ACT_PASSIVE_ADD_TURN_PROPOTION_POWER","min_1_0":"5","min_2_0":"100"}],"index":278}

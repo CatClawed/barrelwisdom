@@ -1,0 +1,1 @@
+{"id":"cures-slow","name":{"en":"Cures Slow","ja":"スロウ状態を治療","tc":"治療遲緩狀態","sc":"治疗迟缓状态"},"desc":{"en":"The target recovers from Slow status.","ja":"対象のスロウの状態異常を回復する","tc":"使目標從遲緩的異常狀態中回復。","sc":"使目标从迟缓的异常状态中回复。"},"advanced":[{"actTag0":"ACT_CURE_SLOW"}],"items":[{"id":"fruitea","name":{"en":"Fruitea","ja":"フルーティー","tc":"水果茶","sc":"水果茶"}}],"index":165}

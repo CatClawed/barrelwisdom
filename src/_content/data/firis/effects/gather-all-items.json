@@ -1,0 +1,1 @@
+{"id":"gather-all-items","name":{"en":"Gather All Items","ja":"根こそぎ採取","tc":"連根拔起採集","sc":"连根采集"},"desc":{"en":"Automatically gathers items touched by the gathering pointer.","ja":"採取ポインタに触れると自動的に採取する","tc":"接觸到採集點時就會自動採集。","sc":"接触到采集点时就会自动采集。"},"items":[{"id":"toydozer","name":{"en":"Toydozer","ja":"トイドーザー","tc":"玩具推土機","sc":"玩具推土机"}}],"index":345}

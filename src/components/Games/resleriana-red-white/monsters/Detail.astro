@@ -41,7 +41,7 @@ const elementRows = chunkArray(elementList, 4);
 const ailmentRows = chunkArray(ailments, 4);
 ---
 
-<div class={mode !== 'fragment' ? 'card' : undefined}>
+<div class="card">
   <div class="card-title">
     <h3>{item.name[lang]}</h3>
     <div class="card-icon-position">
@@ -142,10 +142,7 @@ const ailmentRows = chunkArray(ailments, 4);
     </div>
   </div>
 
-  <table
-    class="tbl noborder tbl-transparent"
-    style={mode === 'fragment' ? 'margin-left:0.2rem' : undefined}
-  >
+  <table class="tbl noborder tbl-transparent" style="margin-left:0.2rem;">
     <tbody>
       {
         elementRows.map((row) => (
@@ -173,9 +170,7 @@ const ailmentRows = chunkArray(ailments, 4);
         ailmentRows.map((row) => (
           <tr>
             {row.map((a) => (
-              <td
-                style={`padding:0; ${mode === 'fragment' ? ' font-size:0.8em;' : ''}`}
-              >
+              <td style="padding:0;">
                 <div class="a25rw-attribute">
                   <div class="a25rw-ailment">
                     <svg>

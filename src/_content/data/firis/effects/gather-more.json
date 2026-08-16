@@ -1,0 +1,1 @@
+{"id":"gather-more","name":{"en":"Gather More","ja":"多めに採れる","tc":"能採到比較多","sc":"能采到比较多"},"desc":{"en":"Increases the number of items obtained while gathering.","ja":"１回の採取で手に入るアイテムの数が増える","tc":"增加在１次採集中可獲得的道具數量。","sc":"增加在1次采集中可获得的道具数量。"},"advanced":[{"actTag0":"ACT_ADD_GATHER_COUNT","min_1_0":"2"}],"index":325}

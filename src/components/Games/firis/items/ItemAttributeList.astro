@@ -1,0 +1,46 @@
+---
+import { colors } from '@components/Games/firis/firis_constants.ts';
+interface Props {
+  cats: { id: string; name: string; add: boolean }[];
+  catalyst: any;
+  lang: string;
+  game: string;
+  mode?: string;
+}
+
+const { cats, catalyst, lang, game, mode = 'list' } = Astro.props;
+---
+
+<ul style="padding-left: 0;height:100%;columns:2;">
+  {
+    cats?.map((cat: any) => (
+      <li class="neat-item-display">
+        <svg
+          class="medium-icon"
+          style={cat.add ? 'fill:var(--add-category-color);' : undefined}
+        >
+          <use href={`/spritesheets/${game}.svg?v=1#category-${cat.id}`} />
+        </svg>
+        {mode === 'list' ? (
+          cat.name[lang]
+        ) : (
+          <a href={`/${game}/categories/${cat.id}/${lang}`}>{cat.name[lang]}</a>
+        )}
+      </li>
+    ))
+  }
+</ul>
+{
+  catalyst && (
+    <ul style="padding-left: 0;height:100%;columns:2;">
+      {catalyst?.color.map((color, i) => (
+        <li class="neat-item-display">
+          <svg style={`fill:${colors[color][1]}`} class="medium-icon">
+            <use href={`/spritesheets/${game}.svg?v=1#${colors[color][0]}`} />
+          </svg>
+          {catalyst.action[lang][i]}
+        </li>
+      ))}
+    </ul>
+  )
+}

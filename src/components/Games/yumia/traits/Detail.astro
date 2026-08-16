@@ -15,8 +15,6 @@ const traitIcons = [
   { key: 'acc',  icon: 'category-accessories' },
 ];
 ---
-{mode !== 'fragment' && (
-
 <Trait
   trait={item}
   mode={mode}
@@ -89,8 +87,6 @@ const traitIcons = [
     </>
   )}
 </Trait>
-
-)}
 {mode !== 'list' && item.chests && <Map data={item.chests} /> }
 <style>
 .show-map-btn {

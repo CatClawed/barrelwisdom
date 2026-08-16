@@ -1,22 +1,23 @@
 // is this file a gift to myself later? the world may never know.
 
 interface ModalMapControllerOptions {
+  id: string;
   game: string;
   section: string;
   triggerSelector?: string;
 }
 
 export async function initModalMapController({
+  game,
+  section,
   triggerSelector = '.show-map-btn',
 }: ModalMapControllerOptions) {
   const list = document.getElementById('item-list')!;
   const lang = list.dataset.lang!;
-  const game = list.dataset.game!;
-  const section = list.dataset.section!;
   const modal = document.getElementById('map-modal') as HTMLDialogElement;
   const modalContent = document.getElementById('modal-content')!;
-
   const { initMap, destroyMap } = await import(`@components/Games/${game}/map/map_client.ts`);
+  const parser = new DOMParser();
 
   list.addEventListener('click', async (e) => {
     const trigger = (e.target as HTMLElement).closest(triggerSelector);
@@ -27,9 +28,11 @@ export async function initModalMapController({
     modalContent.innerHTML = '<p>Loading Map...</p>';
     modal.showModal();
 
-    const response = await fetch(`/${game}/${section}/${id}/fragment/${lang}`);
-    const html = await response.text();
-    modalContent.innerHTML = html;
+    const response = await fetch(`/${game}/${section}/${id}/${lang}`);
+    const doc = parser.parseFromString(await response.text(), 'text/html');
+    const mapEl = doc.querySelector('.a26-map[data-points]');
+
+    modalContent.innerHTML = mapEl?.outerHTML ?? '<p>Map unavailable.</p>';
     initMap(modalContent.querySelector('.a26-map[data-points]'));
   });
 

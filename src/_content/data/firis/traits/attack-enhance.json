@@ -1,0 +1,1 @@
+{"id":"attack-enhance","grade":5,"trans_wpn":true,"trans_syn":true,"name":{"en":"Attack Enhance","ja":"攻撃強化","tc":"攻擊強化","sc":"攻击强化"},"desc":{"en":"Enhances weapon attack power. Effect: Increases attack by 3.","ja":"武器の攻撃力を強化する。効果：攻撃力が３上昇する","tc":"強化武器的攻擊力。效果：攻擊力上昇３。","sc":"强化武器的攻击力。效果：攻击力上升3。"},"advanced":[{"actTag0":"ITEM_SUB_EQI_ADD_ATTACK","min_1_0":"3"}],"index":90}

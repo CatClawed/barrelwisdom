@@ -1,0 +1,1 @@
+{"id":"damage-cut-s","name":{"en":"Damage Cut S","ja":"ダメージカット・小","tc":"傷害減少‧小","sc":"伤害减少‧小"},"desc":{"en":"Reduces damage by 5%.","ja":"ダメージを５％軽減する","tc":"傷害減輕５％。","sc":"伤害减轻5%。"},"advanced":[{"actTag0":"ACT_EQUIP_REDUCE_SUFFERDMG","min_1_0":"5"}],"items":[{"id":"bright-knight","name":{"en":"Bright Knight","ja":"ブライトナイト","tc":"光輝騎士","sc":"光辉骑士"}}],"index":525}

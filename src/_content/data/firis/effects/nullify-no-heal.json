@@ -1,0 +1,1 @@
+{"id":"nullify-no-heal","name":{"en":"Nullify No Heal","ja":"回復無効を無効化","tc":"使回復無效無效","sc":"使回复无效无效"},"desc":{"en":"Immune to No Heal ailment.","ja":"回復無効の状態異常を無効化する","tc":"使回復無效的異常狀態無效化。","sc":"使回复无效的异常状态无效化。"},"advanced":[{"actTag0":"ACT_AUTO_RESIST_ANTIHEAL"}],"items":[{"id":"angel-ribbon","name":{"en":"Angel Ribbon","ja":"エンゼルリボン","tc":"天使緞帶","sc":"天使缎带"}}],"index":510}

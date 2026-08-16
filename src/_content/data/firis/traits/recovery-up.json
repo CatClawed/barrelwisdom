@@ -1,0 +1,1 @@
+{"id":"recovery-up","grade":5,"trans_heal":true,"trans_syn":true,"name":{"en":"Recovery Up","ja":"回復力増加","tc":"回復力增加","sc":"回复力增加"},"desc":{"en":"Effect: Increases effect of recovery items by 10%.","ja":"効果：回復アイテムの効果が１０％上昇する","tc":"效果：回復道具的效果上昇１０％。","sc":"效果：回复道具的效果上升10％。"},"advanced":[{"actTag0":"ITEM_SUB_ITM_CHANGE_POWER","min_1_0":"10"}],"index":36}

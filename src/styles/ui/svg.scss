@@ -2,8 +2,9 @@
     display: flex;
 
     svg {
-        width: 1.3em;
+        min-width: 1.3em;
         height: 1.3em;
+        aspect-ratio: 1;
         margin-top: auto;
         margin-bottom: auto;
     }
@@ -11,13 +12,15 @@
 
 .medium-icon {
   height: 1.7em;
-  width: 1.7em;
+  min-width: 1.7em;
+  aspect-ratio: 1;
   fill: black;
 }
 
 .large-icon {
   height: 3em;
-  width: 3em;
+  min-width: 3em;
+  aspect-ratio: 1;
   fill: black;
 }
 

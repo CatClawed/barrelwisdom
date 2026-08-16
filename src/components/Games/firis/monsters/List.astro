@@ -1,0 +1,66 @@
+---
+import { getCollection } from 'astro:content';
+import PaneListWrapper from '@components/Games/_common/List/PaneListWrapper.astro';
+import MonsterList from '@components/Games/_common/List/MonsterList.astro';
+import TextFilter from '@components/Games/_common/Filter/TextFilter.astro';
+import Dropdown from '@components/Games/_common/Filter/Dropdown.astro';
+import { race_translation } from '@app/localization/translations/common-strings';
+
+const { items, lang, title, game, section } = Astro.props;
+const races = await getCollection('firis_races');
+
+const raceOptions = races.map((race) => ({
+  id: race.id,
+  label: race.data.name[lang],
+  icon: `/spritesheets/${game}.svg?v=1#race-${race.data.icon}`,
+}));
+
+items.sort((a, b) => a.data.index - b.data.index);
+---
+
+<PaneListWrapper
+  title={title}
+  section={section}
+  game={game}
+  lang={lang}
+  placeholder="puni"
+>
+  <div class="filters" slot="filters">
+    <TextFilter gridSize={8} lang={lang} />
+    <Dropdown
+      options={raceOptions}
+      name="race"
+      placeholder={race_translation[lang]}
+      lang={lang}
+    />
+  </div>
+  {
+    items.map((i, index) => (
+      <MonsterList
+        item={i}
+        img={`/media/games/${game}/${section}/${i.id}.webp`}
+        game={game}
+        section={section}
+        lang={lang}
+        index={index}
+        data-id={i.id}
+        data-search={i.data.name[lang]}
+        data-ind={i.index}
+        data-race={i.data.kind}
+      >
+        {i.data.isDX && <span class="badge bg-primary">DX</span>}
+        <svg class="large-icon">
+          <use href={`/spritesheets/${game}.svg?v=1#race-${i.data.kind}`} />
+        </svg>
+      </MonsterList>
+    ))
+  }
+</PaneListWrapper>
+<script>
+  import { initListFilters } from '@app/utils/filter-controller';
+  import { initPaneController } from '@app/utils/detail-pane-controller';
+  initListFilters({
+    filters: [{ type: 'select', key: 'race', elementId: 'race' }],
+  });
+  initPaneController({});
+</script>

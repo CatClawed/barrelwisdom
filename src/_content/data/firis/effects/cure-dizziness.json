@@ -1,0 +1,1 @@
+{"id":"cure-dizziness","name":{"en":"Cure Dizziness","ja":"めまいを治す","tc":"治療暈眩","sc":"治疗晕眩"},"desc":{"en":"The target recovers stun value.","ja":"対象の気絶値を回復させる","tc":"使目標昏厥值回復。","sc":"使目标昏厥值回复。"},"advanced":[{"actTag0":"ACT_HEAL_STUN","min_1_0":"50","max_1_0":"75"}],"items":[{"id":"spark-mallet","name":{"en":"Spark Mallet","ja":"火花のこづち","tc":"煙火的小槌","sc":"烟火的小槌"}}],"index":156}

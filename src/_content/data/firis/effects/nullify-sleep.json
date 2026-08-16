@@ -1,0 +1,1 @@
+{"id":"nullify-sleep","name":{"en":"Nullify Sleep","ja":"眠りを無効化","tc":"使睡眠無效","sc":"使睡眠无效"},"desc":{"en":"Immune to Sleep ailment.","ja":"眠りの状態異常を無効化する","tc":"使睡眠的異常狀態無效化。","sc":"使睡眠的异常状态无效化。"},"advanced":[{"actTag0":"ACT_AUTO_RESIST_SLEEP"}],"items":[{"id":"angel-ribbon","name":{"en":"Angel Ribbon","ja":"エンゼルリボン","tc":"天使緞帶","sc":"天使缎带"}}],"index":505}

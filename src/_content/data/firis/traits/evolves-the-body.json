@@ -1,0 +1,1 @@
+{"id":"evolves-the-body","grade":99,"trans_arm":true,"trans_syn":true,"name":{"en":"Evolves the Body","ja":"エボルブボディ","tc":"靈體進化","sc":"灵体进化"},"desc":{"en":"Effect: All base stats increase by 30%.","ja":"効果：基本のステータスが３０％上昇する","tc":"效果：基本參數狀態上昇３０％。","sc":"效果：基本参数状态上升30％。"},"advanced":[{"actTag0":"ITEM_SUB_EVOLVE_STATUS","min_1_0":"30"}],"index":89}

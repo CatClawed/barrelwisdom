@@ -1,0 +1,1 @@
+{"id":"nullify-weak","name":{"en":"Nullify Weak","ja":"弱体化を無効化","tc":"使弱體化無效","sc":"使弱体化无效"},"desc":{"en":"Immune to Weak ailment.","ja":"弱体化の状態異常を無効化する","tc":"使弱體化的異常狀態無效化。","sc":"使弱体化的异常状态无效化。"},"advanced":[{"actTag0":"ACT_AUTO_RESIST_WEAKNESS"}],"items":[{"id":"angel-ribbon","name":{"en":"Angel Ribbon","ja":"エンゼルリボン","tc":"天使緞帶","sc":"天使缎带"}}],"index":509}
