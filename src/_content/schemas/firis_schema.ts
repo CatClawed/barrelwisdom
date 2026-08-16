@@ -85,14 +85,19 @@ export const ingredientSchema: z.ZodType<any> = z.lazy(() =>
   })
 );
 
+const catItemSchema = nameLinkSchema.extend({
+  add: z.boolean().optional(),
+});
+
 export const categorySchema = z.object({
   id: z.string(),
   name: languageSchema.optional(),
   icon: z.string().optional(),
-  in_cat: z.array(nameLinkSchema).optional(),
-  used: z.array(nameLinkSchema).optional(),
-  add: z.array(nameLinkSchema).optional(),
+  in_cat: z.array(catItemSchema).optional(),
+  used: z.array(catItemSchema).optional(),
+  add: z.boolean().optional(), // yes I need both don't fuck with it
 });
+
 
 export const actionS = z.object({
   en: z.array(z.string()).optional(),
@@ -207,7 +212,6 @@ export const itemSchema = indexedSchema.extend({
   dmax: z.number().optional(),
   chars: z.array(z.string()).optional(),
   categories: z.array(categorySchema).optional(),
-  add: z.array(categorySchema).optional(),
   locations: z.array(nameLinkSchema).optional(),
   equip: equipSchema.optional(),
   book: nameLinkSchema.optional(),

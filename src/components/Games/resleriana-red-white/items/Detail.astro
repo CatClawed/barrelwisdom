@@ -26,7 +26,7 @@ import {
 const { item, lang, mode, game, section } = Astro.props;
 ---
 
-<div class={mode !== 'fragment' ? 'card' : undefined}>
+<div class="card">
   <div class="card-title">
     <h4>{item.name[lang]}</h4>
       {item.dlc && <span class="badge bg-primary">DLC</span>}

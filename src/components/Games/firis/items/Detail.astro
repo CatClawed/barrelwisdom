@@ -24,7 +24,7 @@ import { colors } from '@components/Games/firis/firis_constants.ts';
 const { item, lang, mode, game, section } = Astro.props;
 ---
 
-<div class={mode !== 'fragment' ? 'card' : undefined}>
+<div class="card">
   <div class="card-title">
     <h4>{item.name[lang]}</h4>
     {item.isDLC && <span class="badge bg-primary">DLC</span>}
