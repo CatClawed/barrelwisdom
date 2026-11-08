@@ -3,106 +3,48 @@ from collections import OrderedDict
 from games.A15.monsters_a15.models import Monster
 from games.A15.regions_a15.serializers import A15RegionNameSerializer
 from games.A15.items_a15.models import Item
+from games._helpers.serializer_helper import LegacyTranslatedField, DefaultSerializer
 
-class A15ItemNameSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
+class A15ItemNameSerializer(DefaultSerializer):
+    name = LegacyTranslatedField(obj_prefix='item', field_name='name')
+    id = serializers.CharField(source='slug')
     class Meta:
         model = Item
-        fields = ['slug', 'name']
+        fields = ['id', 'name']
 
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.item_en.name
-        elif self.context['language'] == 'ja':
-            return obj.item_ja.name
-        else:
-            return obj.item_en.name
-
-class A15MonsterNameSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
+class A15MonsterNameSerializer(DefaultSerializer):
+    name = LegacyTranslatedField(obj_prefix='mon', field_name='name')
+    id = serializers.CharField(source='slug')
     class Meta:
         model = Monster
-        fields = ['slug', 'name']
+        fields = ['id', 'name']
 
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.mon_en.name
-        elif self.context['language'] == 'ja':
-            return obj.mon_ja.name
-        else:
-            return obj.mon_en.name
-
-class A15MonsterLevelSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
+class A15MonsterLevelSerializer(DefaultSerializer):
+    name = LegacyTranslatedField(obj_prefix='mon', field_name='name')
+    id = serializers.CharField(source='slug')
     class Meta:
         model = Monster
-        fields = ['slug', 'name', 'level']
-
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.mon_en.name
-        elif self.context['language'] == 'ja':
-            return obj.mon_ja.name
-        else:
-            return obj.mon_en.name
+        fields = ['id', 'name', 'level']
         
-class A15MonsterSimpleSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
-    race = serializers.SerializerMethodField()
+class A15MonsterSimpleSerializer(DefaultSerializer):
+    name = LegacyTranslatedField(obj_prefix='mon', field_name='name')
+    race = LegacyTranslatedField(obj_prefix='mon', field_name='race')
+    id = serializers.CharField(source='slug')
     class Meta:
         model = Monster
-        fields = ['slug', 'name', 'race', 'isDLC', 'isDX', 'isStrong']
-    def to_representation(self, instance):
-        result = super(A15MonsterSimpleSerializer, self).to_representation(instance)
-        return OrderedDict((k, v) for k, v in result.items() 
-                           if v not in [None, [], '', {}])
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.mon_en.name
-        elif self.context['language'] == 'ja':
-            return obj.mon_ja.name
-        else:
-            return obj.mon_en.name
-    def get_race(self,obj):
-        if 'language' not in self.context:
-            return obj.mon_en.race
-        elif self.context['language'] == 'ja':
-            return obj.mon_ja.race
-        else:
-            return obj.mon_en.race
+        fields = ['id', 'name', 'race', 'isDLC', 'isDX', 'isStrong']
+
 
 class A15MonsterSerializer(serializers.ModelSerializer): 
-    name = serializers.SerializerMethodField()
-    desc = serializers.SerializerMethodField()
-    race = serializers.SerializerMethodField()
+    name = LegacyTranslatedField(obj_prefix='mon', field_name='name')
+    desc = LegacyTranslatedField(obj_prefix='mon', field_name='desc')
+    race = LegacyTranslatedField(obj_prefix='mon', field_name='race')
     locations = A15RegionNameSerializer(many=True)
-    item_set = A15ItemNameSerializer(many=True)
+    drops = A15ItemNameSerializer(many=True, source="item_set")
+    id = serializers.CharField(source='slug')
     class Meta:
         model = Monster
-        fields = ['slug', 'name', 'desc', 'race', 'hp', 'atk', 'defen', 'spd', 'fire', 'water', 'wind', 'earth', 'level', 'exp', 'cole', 'note', 'isDLC', 'isDX', 'isStrong', 'locations', 'item_set']
-
-    def to_representation(self, instance):
-        result = super(A15MonsterSerializer, self).to_representation(instance)
-        return OrderedDict((k, v) for k, v in result.items() 
-                           if v not in [None, [], '', {}])
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.mon_en.name
-        elif self.context['language'] == 'ja':
-            return obj.mon_ja.name
-        else:
-            return obj.mon_en.name
-    def get_desc(self,obj):
-        if 'language' not in self.context:
-            return obj.mon_en.desc
-        elif self.context['language'] == 'ja':
-            return obj.mon_ja.desc
-        else:
-            return obj.mon_en.desc
-    def get_race(self,obj):
-        if 'language' not in self.context:
-            return obj.mon_en.race
-        elif self.context['language'] == 'ja':
-            return obj.mon_ja.race
-        else:
-            return obj.mon_en.race
+        fields = ['id', 'name', 'desc', 'race',
+            'hp', 'atk', 'defen', 'spd', 'fire', 'water', 'wind', 'earth',
+            'level', 'exp', 'cole', 'note', 'isDLC', 'isDX', 'isStrong',
+            'locations', 'drops', 'index']

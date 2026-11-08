@@ -234,7 +234,6 @@ class LegacyTranslatedField(serializers.Field):
             if related_obj is None:
                 continue
             value = getattr(related_obj, self.field_name, None)
-            print(value)
             if value:
                 langs[lang] = value
         return langs

@@ -2,61 +2,35 @@ from rest_framework import serializers
 from collections import OrderedDict
 from games.A16.properties_a16.models import Property
 from games.A16.items_a16.models import Item
+from games._helpers.serializer_helper import LegacyTranslatedField
 
 class A16ItemNameSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
+    id = serializers.CharField(source='slug')
+    name = LegacyTranslatedField(obj_prefix='item', field_name='name')
     class Meta:
         model = Item
-        fields = ['slug', 'name']
-
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.item_en.name
-        elif self.context['language'] == 'ja':
-            return obj.item_ja.name
-        else:
-            return obj.item_en.name
+        fields = ['id', 'name']
 
 class A16PropertyNameSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
+    id = serializers.CharField(source='slug')
+    name = LegacyTranslatedField(obj_prefix='prop', field_name='name')
     class Meta:
         model = Property
-        fields = ['slug', 'name']
-
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.prop_en.name
-        elif self.context['language'] == 'ja':
-            return obj.prop_ja.name
-        else:
-            return obj.prop_en.name
+        fields = ['id', 'name']
 
 class A16PropertySerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
-    desc = serializers.SerializerMethodField()
+    id = serializers.CharField(source='slug')
+    name = LegacyTranslatedField(obj_prefix='prop', field_name='name')
+    desc = LegacyTranslatedField(obj_prefix='prop', field_name='desc')
     combo1 = A16PropertyNameSerializer()
     combo2 = A16PropertyNameSerializer()
     combo3 = A16PropertyNameSerializer()
-    item_set = A16ItemNameSerializer(many=True)
+    items = A16ItemNameSerializer(many=True, source='item_set')
     class Meta:
         model = Property
-        fields = ['slug', 'name', 'desc', 'grade', 'points', 'bomb', 'heal', 'weapon', 'armor', 'accessory', 'combo1', 'combo2', 'combo3', 'item_set']
+        fields = ['id', 'name', 'desc', 'grade', 'points', 'bomb', 'heal', 'weapon', 'armor', 'accessory', 'combo1', 'combo2', 'combo3', 'items']
 
     def to_representation(self, instance):
         result = super(A16PropertySerializer, self).to_representation(instance)
         return OrderedDict((k, v) for k, v in result.items() 
                            if v not in [None, [], '', False, {}])
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.prop_en.name
-        elif self.context['language'] == 'ja':
-            return obj.prop_ja.name
-        else:
-            return obj.prop_en.name
-    def get_desc(self,obj):
-        if 'language' not in self.context:
-            return obj.prop_en.desc
-        elif self.context['language'] == 'ja':
-            return obj.prop_ja.desc
-        else:
-            return obj.prop_en.desc

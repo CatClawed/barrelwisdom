@@ -2,20 +2,14 @@ from rest_framework import serializers
 from collections import OrderedDict
 from games.A16.categories_a16.models import Category
 from games.A16.items_a16.models import Item, Ingredient
+from games._helpers.serializer_helper import LegacyTranslatedField
 
 class A16ItemSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
+    id = serializers.CharField(source='slug')
+    name = LegacyTranslatedField(obj_prefix='item', field_name='name')
     class Meta:
         model = Item
-        fields = ['slug', 'name', 'level', 'evalue', 'fire', 'water', 'wind', 'earth', 'slots']
-
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.item_en.name
-        elif self.context['language'] == 'ja':
-            return obj.item_ja.name
-        else:
-            return obj.item_en.name
+        fields = ['id', 'name', 'level', 'evalue', 'fire', 'water', 'wind', 'earth', 'slots']
 
 class A16IngredientSerializer(serializers.ModelSerializer):
     synthitem = A16ItemSerializer()
@@ -24,60 +18,39 @@ class A16IngredientSerializer(serializers.ModelSerializer):
         fields = ['synthitem']
 
 class A16CategorySerializerName(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
+    name = LegacyTranslatedField(obj_prefix='cat', field_name='name')
+    icon = serializers.CharField(source='icon_name')
     class Meta:
         model = Category
-        fields = ['name', 'icon_name']
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.cat_en.name
-        elif self.context['language'] == 'ja':
-            return obj.cat_ja.name
-        else:
-            return obj.cat_en.name
+        fields = ['name', 'icon']
 
 class A16CategorySerializerLink(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
+    id = serializers.CharField(source='slug')
+    name = LegacyTranslatedField(obj_prefix='cat', field_name='name')
     class Meta:
         model = Category
-        fields = ['slug', 'name']
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.cat_en.name
-        elif self.context['language'] == 'ja':
-            return obj.cat_ja.name
-        else:
-            return obj.cat_en.name
+        fields = ['id', 'name']
 
 class A16CategorySerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
+    id = serializers.CharField(source='slug')
+    name = LegacyTranslatedField(obj_prefix='cat', field_name='name')
+    icon = serializers.CharField(source='icon_name')
+
     class Meta:
         model = Category
-        fields = ['slug', 'name', 'icon_name']
-
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.cat_en.name
-        elif self.context['language'] == 'ja':
-            return obj.cat_ja.name
-        else:
-            return obj.cat_en.name
+        fields = ['id', 'name', 'icon']
 
 class A16CategoryDataSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
-    item_set = A16ItemSerializer(many=True)
-    ingredientcat = A16IngredientSerializer(many=True, read_only=True)
+    id = serializers.CharField(source='slug')
+    name = LegacyTranslatedField(obj_prefix='cat', field_name='name')
+    icon = serializers.CharField(source='icon_name')
+    in_cat = A16ItemSerializer(many=True, source='item_set')
+    used = A16IngredientSerializer(many=True, read_only=True, source='ingredientcat')
+
     class Meta:
         model = Category
-        fields = ['slug', 'name', 'icon_name', 'item_set', 'ingredientcat']
+        fields = ['id', 'name', 'icon', 'in_cat', 'used']
 
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.cat_en.name
-        elif self.context['language'] == 'ja':
-            return obj.cat_ja.name
-        else:
-            return obj.cat_en.name
     def to_representation(self, instance):
         result = super(A16CategoryDataSerializer, self).to_representation(instance)
         return OrderedDict((k, v) for k, v in result.items() 

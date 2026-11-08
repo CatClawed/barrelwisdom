@@ -6,20 +6,14 @@ from games.A16.monsters_a16.serializers import A16MonsterNameSerializer
 from games.A16.properties_a16.serializers import A16PropertyNameSerializer
 from games.A16.categories_a16.serializers import A16CategorySerializerName, A16CategorySerializer, A16CategorySerializerLink
 from games.A16.effects_a16.serializers import A16EffectSerializerSimple
+from games._helpers.serializer_helper import LegacyTranslatedField
 
 class A16ItemNameSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
+    id = serializers.CharField(source='slug')
+    name = LegacyTranslatedField(obj_prefix='item', field_name='name')
     class Meta:
         model = Item
-        fields = ['slug', 'name']
-
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.item_en.name
-        elif self.context['language'] == 'ja':
-            return obj.item_ja.name
-        else:
-            return obj.item_en.name
+        fields = ['id', 'name']
 
 # for easy filtering by ingredient
 class A16IngredientSimpleSerializer(serializers.ModelSerializer):
@@ -34,15 +28,23 @@ class A16IngredientSimpleSerializer(serializers.ModelSerializer):
                            if v not in [None, [], '', False, {}])
     def get_ing(self,obj):
         if obj.category is None:
-            if self.context['language'] == 'ja':
-                return obj.item.item_ja.name
-            else:
-              return obj.item.item_en.name
+            return {
+                language: value
+                for language, value in (
+                    ('en', obj.item.item_en.name),
+                    ('ja', obj.item.item_ja.name),
+                )
+                if value
+            }
         else:
-            if self.context['language'] == 'ja':
-                return obj.category.cat_ja.name
-            else:
-                return obj.category.cat_en.name
+            return {
+                language: value
+                for language, value in (
+                    ('en', obj.category.cat_en.name),
+                    ('ja', obj.category.cat_ja.name),
+                )
+                if value
+            }
 
 class A16IngredientSerializer(serializers.ModelSerializer):
     item = A16ItemNameSerializer()
@@ -85,19 +87,12 @@ class A16DissasembledSerializer(serializers.ModelSerializer):
         fields = ['parent']
 
 class A16ItemNameDisSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
+    id = serializers.CharField(source='slug')
+    name = LegacyTranslatedField(obj_prefix='item', field_name='name')
     disassembly_set = A16DissasembleSerializer(many=True)
     class Meta:
         model = Item
-        fields = ['slug', 'name', 'disassembly_set']
-
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.item_en.name
-        elif self.context['language'] == 'ja':
-            return obj.item_ja.name
-        else:
-            return obj.item_en.name
+        fields = ['id', 'name', 'disassembly_set']
 
 class A16EffectDataSerializer(serializers.ModelSerializer):
     effect = A16EffectSerializerSimple()
@@ -112,43 +107,30 @@ class A16EffectLineSerializer(serializers.ModelSerializer):
         fields = ['effects', 'elem', 'hidden', 'order']
 
 class A16BookNameSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
+    id = serializers.CharField(source='slug')
+    name = LegacyTranslatedField(obj_prefix='item', field_name='name')
     class Meta:
         model = Book
-        fields = ['slug', 'name']
-
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.item_en.name
-        elif self.context['language'] == 'ja':
-            return obj.item_ja.name
-        else:
-            return obj.item_en.name
+        fields = ['id', 'name']
 
 class A16ItemSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
+    id = serializers.CharField(source='slug')
+    name = LegacyTranslatedField(obj_prefix='item', field_name='name')
     categories = A16CategorySerializerName(many=True)
     ingredient_set = A16IngredientSimpleSerializer(many=True, read_only=True)
 
     class Meta:
         model = Item
-        fields = ['slug', 'name', 'level', 'slots', 'evalue', 'fire', 'water', 'wind', 'earth', 'effect', 'kind', 'categories', 'ingredient_set']
+        fields = ['id', 'name', 'level', 'slots', 'evalue', 'fire', 'water', 'wind', 'earth', 'effect', 'kind', 'categories', 'ingredient_set']
 
     def to_representation(self, instance):
         result = super(A16ItemSerializer, self).to_representation(instance)
         return OrderedDict((k, v) for k, v in result.items() 
                            if v not in [None, [], '', False, {}])
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.item_en.name
-        elif self.context['language'] == 'ja':
-            return obj.item_ja.name
-        else:
-            return obj.item_en.name
-
 class A16ItemFullSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
-    desc = serializers.SerializerMethodField()
+    id = serializers.CharField(source='slug')
+    name = LegacyTranslatedField(obj_prefix='item', field_name='name')
+    desc = LegacyTranslatedField(obj_prefix='item', field_name='desc')
     locations = A16RegionNameSerializer(many=True)
     monsters = A16MonsterNameSerializer(many=True)
     properties = A16PropertyNameSerializer(many=True)
@@ -162,46 +144,17 @@ class A16ItemFullSerializer(serializers.ModelSerializer):
     book_set = A16BookNameSerializer(many=True)
     class Meta:
         model = Item
-        fields = ['slug', 'name', 'desc', 'level', 'slots', 'evalue', 'fire', 'water', 'wind', 'earth', 'effect', 'size', 'kind', 'locations', 'monsters', 'properties', 'categories', 'ingredient_set', 'characterequip_set', 'equip_set', 'disassembly_set', 'disassembled_set', 'effectlines_set', 'book_set']
+        fields = ['id', 'name', 'desc', 'level', 'slots', 'evalue', 'fire', 'water', 'wind', 'earth', 'effect', 'size', 'kind', 'locations', 'monsters', 'properties', 'categories', 'ingredient_set', 'characterequip_set', 'equip_set', 'disassembly_set', 'disassembled_set', 'effectlines_set', 'book_set']
 
     def to_representation(self, instance):
         result = super(A16ItemFullSerializer, self).to_representation(instance)
         return OrderedDict((k, v) for k, v in result.items() 
                            if v not in [None, [], '', False, {}])
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.item_en.name
-        elif self.context['language'] == 'ja':
-            return obj.item_ja.name
-        else:
-            return obj.item_en.name
-    def get_desc(self,obj):
-        if 'language' not in self.context:
-            return obj.item_en.desc
-        elif self.context['language'] == 'ja':
-            return obj.item_ja.desc
-        else:
-            return obj.item_en.desc
-
 class A16BookSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
-    desc = serializers.SerializerMethodField()
+    id = serializers.CharField(source='slug')
+    name = LegacyTranslatedField(obj_prefix='item', field_name='name')
+    desc = LegacyTranslatedField(obj_prefix='item', field_name='desc')
     items = A16ItemNameSerializer(many=True)
     class Meta:
         model = Book
-        fields = ['slug', 'name', 'desc', 'items', 'note']
-
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.item_en.name
-        elif self.context['language'] == 'ja':
-            return obj.item_ja.name
-        else:
-            return obj.item_en.name
-    def get_desc(self,obj):
-        if 'language' not in self.context:
-            return obj.item_en.desc
-        elif self.context['language'] == 'ja':
-            return obj.item_ja.desc
-        else:
-            return obj.item_en.desc
+        fields = ['id', 'name', 'desc', 'items', 'note']

@@ -3,52 +3,34 @@ from collections import OrderedDict
 from games.A16.areadata_a16.models import Field, Area
 from games.A16.items_a16.serializers import A16ItemNameSerializer
 from games.A16.monsters_a16.serializers import A16MonsterNameSerializer
+from games._helpers.serializer_helper import LegacyTranslatedField
 
 
 class A16FieldSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
-    slug = serializers.SerializerMethodField()
+    name = LegacyTranslatedField(obj_prefix='reg', field_name='name', obj_path='region')
+    id = serializers.CharField(source='region.slug')
     ingredients = A16ItemNameSerializer(many=True)
     rare = A16ItemNameSerializer(many=True)
     relics = A16ItemNameSerializer(many=True)
     monsters = A16MonsterNameSerializer(many=True)
     class Meta:
         model = Field
-        fields = ['slug', 'name', 'ingredients', 'rare', 'relics', 'monsters', 'note']
+        fields = ['id', 'name', 'ingredients', 'rare', 'relics', 'monsters', 'note']
 
     def to_representation(self, instance):
         result = super(A16FieldSerializer, self).to_representation(instance)
         return OrderedDict((k, v) for k, v in result.items() 
                            if v not in [None, [], '', False, {}])
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.region.reg_en.name
-        elif self.context['language'] == 'ja':
-            return obj.region.reg_ja.name
-        else:
-            return obj.region.reg_en.name
-    def get_slug(self,obj):
-        return obj.region.slug
-
 
 class A16AreaSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
-    slug = serializers.SerializerMethodField()
+    name = LegacyTranslatedField(obj_prefix='reg', field_name='name', obj_path='region')
+    id = serializers.CharField(source='region.slug')
     fields = A16FieldSerializer(many=True)
 
     class Meta:
         model = Area
-        fields = ['slug', 'name', 'fields']
+        fields = ['id', 'name', 'fields']
     def to_representation(self, instance):
         result = super(A16AreaSerializer, self).to_representation(instance)
         return OrderedDict((k, v) for k, v in result.items() 
                            if v not in [None, [], '', False, {}])
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.region.reg_en.name
-        elif self.context['language'] == 'ja':
-            return obj.region.reg_ja.name
-        else:
-            return obj.region.reg_en.name
-    def get_slug(self,obj):
-        return obj.region.slug

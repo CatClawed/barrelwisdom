@@ -26,7 +26,7 @@ class A15ItemViewSet(viewsets.ModelViewSet):
                 'ingredient_set__item__item_en'
             )
         )
-        serializer = A15ItemSerializer(queryset, many=True, context={'language': 'en'})
+        serializer = A15ItemFullSerializer(queryset, many=True, context={'language': 'en'})
         return Response(serializer.data)
 
     @action(detail=False)
@@ -42,7 +42,7 @@ class A15ItemViewSet(viewsets.ModelViewSet):
                 'ingredient_set__item__item_ja'
             )
         )
-        serializer = A15ItemSerializer(queryset, many=True, context={'language': 'ja'})
+        serializer = A15ItemFullSerializer(queryset, many=True, context={'language': 'ja'})
         return Response(serializer.data)
 
     # allows easy access via catect/slug/en

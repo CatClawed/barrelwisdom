@@ -190,7 +190,7 @@ class A18ItemSerializer(DefaultSerializer):
     char2 = serializers.CharField(source="char2.slug", allow_null=True)
     char3 = serializers.CharField(source="char3.slug", allow_null=True)
     char4 = serializers.CharField(source="char4.slug", allow_null=True)
-    categories = A18CategorySerializer(many=True)
+    categories =  serializers.SerializerMethodField()
     catalysts = A18CategorySerializer(many=True)
     trait = A18TraitNameSerializer(source='traits')
     chars = serializers.SlugRelatedField(
@@ -223,6 +223,16 @@ class A18ItemSerializer(DefaultSerializer):
             'book', 'recipes', 'equip', 'masteryline_set', 'catalyst',
             'ingredients', 'effectlines_set', 'ideas', 'shopslot_set', 'index'
         ]
+    def get_categories(self, obj):
+        cats = A18CategorySerializer(obj.categories.all(), many=True, context=self.context).data
+        for cat in cats:
+            cat['add'] = False
+
+        adds = A18CategorySerializer(obj.add.all(), many=True, context=self.context).data
+        for add in adds:
+            add['add'] = True
+
+        return cats + adds
 
 class A18IngredientNameSerializer(serializers.ModelSerializer):
     name =  PathTranslatedField(path="item.text", base_name="name")

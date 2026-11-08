@@ -1,22 +1,17 @@
 from rest_framework import serializers
 from collections import OrderedDict
 from games.A16.regions_a16.models import Region
+from games._helpers.serializer_helper import LegacyTranslatedField
 
 class A16RegionNameSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
-    parentslug = serializers.SerializerMethodField()
+    id = serializers.CharField(source='slug')
+    name = LegacyTranslatedField(obj_prefix='reg', field_name='name')
+    parent = serializers.SerializerMethodField()
     class Meta:
         model = Region
-        fields = ['slug', 'name', 'parentslug']
+        fields = ['id', 'name', 'parent']
 
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.reg_en.name
-        elif self.context['language'] == 'ja':
-            return obj.reg_ja.name
-        else:
-            return obj.reg_en.name
-    def get_parentslug(self,obj):
+    def get_parent(self,obj):
         if obj.parent:
            return obj.parent.slug
     def to_representation(self, instance):

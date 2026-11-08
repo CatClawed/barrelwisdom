@@ -7,23 +7,17 @@ from games.A15.monsters_a15.serializers import A15MonsterNameSerializer, A15Mons
 from games.A15.properties_a15.serializers import A15PropertyNameSerializer
 from games.A15.categories_a15.serializers import A15CategorySerializerName, A15CategorySerializer, A15CategorySerializerLink
 from games.A15.effects_a15.serializers import A15EffectSerializerSimple
+from games._helpers.serializer_helper import DefaultSerializer, DirectTranslatedField, PathTranslatedField, LegacyTranslatedField
 
-class A15ItemNameSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
+class A15ItemNameSerializer(DefaultSerializer):
+    name = LegacyTranslatedField(obj_prefix='item', field_name='name')
+    id = serializers.CharField(source="slug")
     class Meta:
         model = Item
-        fields = ['slug', 'name']
-
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.item_en.name
-        elif self.context['language'] == 'ja':
-            return obj.item_ja.name
-        else:
-            return obj.item_en.name
+        fields = ['id', 'name']
 
 # for easy filtering by ingredient
-class A15IngredientSimpleSerializer(serializers.ModelSerializer):
+class A15IngredientSimpleSerializer(DefaultSerializer):
     ing = serializers.SerializerMethodField()
     class Meta:
         model = Ingredient
@@ -45,52 +39,55 @@ class A15IngredientSimpleSerializer(serializers.ModelSerializer):
             else:
                 return obj.category.cat_en.name
 
-class A15IngredientSerializer(serializers.ModelSerializer):
+class A15IngredientSerializer(DefaultSerializer):
     item = A15ItemNameSerializer()
     category = A15CategorySerializerLink()
     class Meta:
         model = Ingredient
         fields = ['item', 'category', 'num']
 
-    def to_representation(self, instance):
-        result = super(A15IngredientSerializer, self).to_representation(instance)
-        return OrderedDict((k, v) for k, v in result.items() 
-                           if v not in [None, [], '', False, {}])
-
-class A15CharacterSerializer(serializers.ModelSerializer):
+class A15CharacterSerializer(DefaultSerializer):
     class Meta:
         model = Character
         fields = ['name']
 
-class A15CharacterEquipSerializer(serializers.ModelSerializer):
+class A15CharacterEquipSerializer(DefaultSerializer):
     chars = A15CharacterSerializer(many=True)
     class Meta:
         model = CharacterEquip
         fields = ['chars']
 
-class A15EquipSerializer(serializers.ModelSerializer):
+class A15EquipSerializer(DefaultSerializer):
     class Meta:
         model = Equip
         fields = ['hp', 'mp', 'atk', 'defen', 'spd', 'fire', 'water', 'wind', 'earth']
 
-class A15DissasembleSerializer(serializers.ModelSerializer):
+class A15DissasembleSerializer(DefaultSerializer):
     dis = A15ItemNameSerializer(many=True, read_only=True)
+
     class Meta:
         model = Disassembly
         fields = ['dis']
 
-class A15DissasembledSerializer(serializers.ModelSerializer):
+    def to_representation(self, instance):
+        return A15ItemNameSerializer(instance.dis.all(), many=True, context=self.context).data
+        
+
+class A15DissasembledSerializer(DefaultSerializer):
     parent = A15ItemNameSerializer(many=True, read_only=True)
     class Meta:
         model = Disassembled
         fields = ['parent']
+    def to_representation(self, instance):
+        return A15ItemNameSerializer(instance.parent.all(), many=True, context=self.context).data
 
-class A15ItemNameDisSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
+class A15ItemNameDisSerializer(DefaultSerializer):
+    name = LegacyTranslatedField(obj_prefix='item', field_name='name')
     disassembly_set = A15DissasembleSerializer(many=True)
+    id = serializers.CharField(source="slug")
     class Meta:
         model = Item
-        fields = ['slug', 'name', 'disassembly_set']
+        fields = ['id', 'name', 'disassembly_set']
 
     def get_name(self,obj):
         if 'language' not in self.context:
@@ -100,7 +97,7 @@ class A15ItemNameDisSerializer(serializers.ModelSerializer):
         else:
             return obj.item_en.name
 
-class A15RelicSerializer(serializers.ModelSerializer):
+class A15RelicSerializer(DefaultSerializer):
     item = A15ItemNameDisSerializer()
     region = A15RegionNameSerializer()
     area = A15RegionNameSerializer(many=True)
@@ -108,19 +105,19 @@ class A15RelicSerializer(serializers.ModelSerializer):
         model = Relic
         fields = ['region', 'area', 'item']
 
-class A15RelicAreaSerializer(serializers.ModelSerializer):
+class A15RelicAreaSerializer(DefaultSerializer):
     region = A15RegionNameSerializer()
     class Meta:
         model = Relic
         fields = ['region']
 
-class A15EffectLineSerializer(serializers.ModelSerializer):
+class A15EffectLineSerializer(DefaultSerializer):
     effect = A15EffectSerializerSimple()
     class Meta:
         model = EffectLine
         fields = ['effect', 'elem', 'number', 'min_elem', 'max_elem']
 
-class A15AreaDataSerializer(serializers.ModelSerializer):
+class A15AreaDataSerializer(DefaultSerializer):
     monsters = A15MonsterNameSerializer(many=True)
     items = A15ItemNameSerializer(many=True)
     rare = A15ItemNameSerializer(many=True)
@@ -134,110 +131,81 @@ class A15AreaDataSerializer(serializers.ModelSerializer):
         return OrderedDict((k, v) for k, v in result.items() 
                            if v not in [None, [], '', False, {}])
 
-class A15BookNameSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
+class A15BookNameSerializer(DefaultSerializer):
+    name = LegacyTranslatedField(obj_prefix='item', field_name='name')
+    id = serializers.CharField(source="slug")
     class Meta:
         model = Book
-        fields = ['slug', 'name']
+        fields = ['id', 'name']
 
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.item_en.name
-        elif self.context['language'] == 'ja':
-            return obj.item_ja.name
-        else:
-            return obj.item_en.name
 
-class A15ItemSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
+class A15ItemSerializer(DefaultSerializer):
+    name = LegacyTranslatedField(obj_prefix='item', field_name='name')
     categories = A15CategorySerializerName(many=True)
     ingredient_set = A15IngredientSimpleSerializer(many=True, read_only=True)
+    id = serializers.CharField(source="slug")
 
     class Meta:
         model = Item
-        fields = ['slug', 'name', 'level', 'evalue', 'fire', 'water', 'wind', 'earth', 'effect', 'itype', 'isDLC', 'isDX', 'categories', 'ingredient_set']
+        fields = ['id', 'name', 'level', 'evalue', 'fire', 'water', 'wind', 'earth', 'effect', 'itype', 'isDLC', 'isDX', 'categories', 'ingredient_set']
 
-    def to_representation(self, instance):
-        result = super(A15ItemSerializer, self).to_representation(instance)
-        return OrderedDict((k, v) for k, v in result.items() 
-                           if v not in [None, [], '', False, {}])
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.item_en.name
-        elif self.context['language'] == 'ja':
-            return obj.item_ja.name
-        else:
-            return obj.item_en.name
 
-class A15ItemFullSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
-    desc = serializers.SerializerMethodField()
+class A15ItemFullSerializer(DefaultSerializer):
+    name = LegacyTranslatedField(obj_prefix='item', field_name='name')
+    desc = LegacyTranslatedField(obj_prefix='item', field_name='desc')
     locations = A15RegionNameSerializer(many=True)
     monsters = A15MonsterNameSerializer(many=True)
     properties = A15PropertyNameSerializer(many=True)
     categories = A15CategorySerializer(many=True)
-    ingredient_set = A15IngredientSerializer(many=True)
-    characterequip_set = A15CharacterEquipSerializer(read_only=True, many=True)
-    equip_set = A15EquipSerializer(many=True)
-    disassembly_set = A15DissasembleSerializer(many=True)
-    disassembled_set = A15DissasembledSerializer(many=True)
-    relic_set = A15RelicAreaSerializer(many=True)
-    effectline_set = A15EffectLineSerializer(many=True)
-    book_set = A15BookNameSerializer(many=True)
+    ingredients = A15IngredientSerializer(many=True, source="ingredient_set")
+    chars = serializers.SerializerMethodField()
+    stats = A15EquipSerializer(many=True, source="equip_set")
+    disassembled_by = A15DissasembleSerializer(many=True, source="disassembly_set")
+    disassembles_to = serializers.SerializerMethodField()
+    relic_in = A15RelicAreaSerializer(many=True, source="relic_set")
+    effectlines = A15EffectLineSerializer(many=True, source="effectline_set")
+    book = A15BookNameSerializer(many=True, source="book_set")
+    id = serializers.CharField(source="slug")
     class Meta:
         model = Item
-        fields = ['slug', 'name', 'desc', 'level', 'evalue', 'fire', 'water', 'wind', 'earth', 'effect', 'size', 'itype', 'isDLC', 'isDX', 'locations', 'monsters', 'properties', 'categories', 'ingredient_set', 'characterequip_set', 'equip_set', 'disassembly_set', 'disassembled_set', 'relic_set', 'effectline_set', 'book_set']
+        fields = ['id', 'name', 'desc', 'level', 'evalue',
+            'fire', 'water', 'wind', 'earth', 'effect', 'size', 'itype',
+            'isDLC', 'isDX', 'locations', 'monsters', 'properties',
+            'categories', 'ingredients', 'chars', 'stats',
+            'disassembled_by', 'disassembles_to', 'relic_in',
+            'effectlines', 'book', 'index']
+    def get_disassembles_to(self, obj):
+        all_items = []
+        for entry in obj.disassembled_set.all():
+            all_items.extend(list(entry.parent.all()))
+        unique_items = list(set(all_items))
+        return A15ItemNameSerializer(unique_items, many=True, context=self.context).data
+    
+    def get_chars(self, obj):
+        slugs = []
+        for ce in obj.characterequip_set.all():
+            slugs.extend([c.name for c in ce.chars.all()])
+            
+        return list(set(slugs))
 
-    def to_representation(self, instance):
-        result = super(A15ItemFullSerializer, self).to_representation(instance)
-        return OrderedDict((k, v) for k, v in result.items() 
-                           if v not in [None, [], '', False, {}])
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.item_en.name
-        elif self.context['language'] == 'ja':
-            return obj.item_ja.name
-        else:
-            return obj.item_en.name
-    def get_desc(self,obj):
-        if 'language' not in self.context:
-            return obj.item_en.desc
-        elif self.context['language'] == 'ja':
-            return obj.item_ja.desc
-        else:
-            return obj.item_en.desc
 
-class A15BookSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
-    desc = serializers.SerializerMethodField()
+class A15BookSerializer(DefaultSerializer):
+    name = LegacyTranslatedField(obj_prefix='item', field_name='name')
+    desc = LegacyTranslatedField(obj_prefix='item', field_name='desc')
     items = A15ItemNameSerializer(many=True)
+    id = serializers.CharField(source="slug")
     class Meta:
         model = Book
-        fields = ['slug', 'name', 'desc', 'items', 'acquisition']
+        fields = ['id', 'name', 'desc', 'items', 'acquisition', 'index']
 
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.item_en.name
-        elif self.context['language'] == 'ja':
-            return obj.item_ja.name
-        else:
-            return obj.item_en.name
-    def get_desc(self,obj):
-        if 'language' not in self.context:
-            return obj.item_en.desc
-        elif self.context['language'] == 'ja':
-            return obj.item_ja.desc
-        else:
-            return obj.item_en.desc
-
-class A15FieldEventSerializer(serializers.ModelSerializer):
+class A15FieldEventSerializer(DefaultSerializer):
     class Meta:
         model = FieldEvent
         fields = ['name']
 
-class A15AreaDataSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
-    slug = serializers.SerializerMethodField()
+class A15AreaDataSerializer(DefaultSerializer):
+    name = LegacyTranslatedField(obj_prefix='reg', field_name='name', obj_path='area')
+    id = serializers.SerializerMethodField()
     items = A15ItemNameSerializer(many=True)
     rare = A15ItemNameSerializer(many=True)
     maxitem = A15ItemNameSerializer(many=True)
@@ -246,49 +214,28 @@ class A15AreaDataSerializer(serializers.ModelSerializer):
     note = serializers.SerializerMethodField()
     class Meta:
         model = AreaData
-        fields = ['slug', 'name', 'subarea', 'items', 'rare', 'maxitem', 'fieldevent', 'monsters', 'note']
+        fields = ['id', 'name', 'subarea', 'items', 'rare', 'maxitem', 'fieldevent', 'monsters', 'note']
 
-    def to_representation(self, instance):
-        result = super(A15AreaDataSerializer, self).to_representation(instance)
-        return OrderedDict((k, v) for k, v in result.items() 
-                           if v not in [None, [], '', False, {}])
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.area.reg_en.name
-        elif self.context['language'] == 'ja':
-            return obj.area.reg_ja.name
-        else:
-            return obj.area.reg_en.name
-    def get_slug(self,obj):
+    def get_id(self,obj):
         return obj.area.slug
     def get_note(self,obj):
         return obj.area.note
 
 
-class A15RegionDataSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
-    slug = serializers.SerializerMethodField()
+class A15RegionDataSerializer(DefaultSerializer):
+    name = LegacyTranslatedField(obj_prefix='reg', field_name='name', obj_path='region')
+    id = serializers.SerializerMethodField()
     areas = A15AreaDataSerializer(many=True)
-    relic_set = A15RelicSerializer(many=True)
+    relics = A15RelicSerializer(many=True, source="relic_set")
     strong = A15MonsterLevelSerializer(many=True)
     note = serializers.SerializerMethodField()
     grade = serializers.SerializerMethodField()
 
     class Meta:
         model = RegionData
-        fields = ['slug', 'name', 'areas', 'relic_set', 'strong', 'note', 'grade']
-    def to_representation(self, instance):
-        result = super(A15RegionDataSerializer, self).to_representation(instance)
-        return OrderedDict((k, v) for k, v in result.items() 
-                           if v not in [None, [], '', False, {}])
-    def get_name(self,obj):
-        if 'language' not in self.context:
-            return obj.region.reg_en.name
-        elif self.context['language'] == 'ja':
-            return obj.region.reg_ja.name
-        else:
-            return obj.region.reg_en.name
-    def get_slug(self,obj):
+        fields = ['id', 'name', 'areas', 'relics', 'strong', 'note', 'grade']
+
+    def get_id(self,obj):
         return obj.region.slug
     def get_note(self,obj):
         return obj.region.note

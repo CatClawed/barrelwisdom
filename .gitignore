@@ -23,3 +23,5 @@ sonar-project.properties
 backend/scripts/data.txt
 frontend/src/ads.txt
 .angular/
+backend/scripts/shallie_data
+backend/scripts/escha_data
