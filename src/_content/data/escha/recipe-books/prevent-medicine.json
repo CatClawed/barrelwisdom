@@ -1,0 +1,1 @@
+{"id":"prevent-medicine","name":{"en":"Prevent Medicine","ja":"予防薬のレシピ","sc":"预防药的配方","tc":"預防藥的配方"},"desc":{"en":"A list of techniques for preventing the spread of disease.","ja":"かつて、病気予防を広く促すために記されたレシピ"},"items":[{"id":"immune-medicine","name":{"en":"Immune Medicine","ja":"予防接種薬"}}],"acquisition":"Lucille's Events","index":47,"enum":"ITEM_BOOK_RECIPE_47"}

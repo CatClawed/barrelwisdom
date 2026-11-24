@@ -2,14 +2,12 @@ import { initSearchableSelects } from '@components/Games/_common/Filter/dropdown
 import { initPopovers } from '@components/Games/_common/popover_client';
 
 interface PaneControllerOptions {
-  game: string;
-  section: string;
   withMap?: boolean;
 }
 
 export async function initPaneController({
   withMap = false,
-}: PaneControllerOptions) {
+}: PaneControllerOptions = {}) {
   const list = document.getElementById('item-list')!;
   const lang = list.dataset.lang!;
   const game = list.dataset.game!;

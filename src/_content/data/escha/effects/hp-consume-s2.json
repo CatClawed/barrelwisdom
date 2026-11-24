@@ -1,0 +1,1 @@
+{"id":"hp-consume-s2","name":{"en":"HP Consume S2","ja":"ＨＰ消費・超"},"desc":{"en":"Consumes a massive percentage of max HP.","ja":"ＨＰを非常に大きく消費する。消費する値は最大ＨＰによって変化する"},"items":[{"name":{"en":"Demon Crucible","ja":"小悪魔の坩堝"},"id":"demon-crucible"}],"index":185,"enum":"ITEM_EFF_COST_HP_4","advanced":{"actTag":"ACT_CONSUME_HP","min_1":"50"}}

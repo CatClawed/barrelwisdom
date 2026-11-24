@@ -1,0 +1,1 @@
+{"id":"divine-strength","name":{"en":"Divine Strength","ja":"剛力を与える"},"desc":{"en":"Increases attack power by 10.","ja":"攻撃力の値が１０上昇する"},"items":[{"name":{"en":"Gunade Ring","ja":"グナーデリング"},"id":"gunade-ring"}],"index":286,"enum":"ITEM_EFF_MOVE_FAST","advanced":{"actTag":"ACT_EQUIP_ADD_PARAM_ATK","min_1":"10"}}

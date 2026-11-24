@@ -1,0 +1,331 @@
+---
+import Popover from '@app/components/Games/_common/Popover.astro';
+import ItemAttributeList from './ItemAttributeList.astro';
+import { itemElements } from '@app/components/Games/escha/escha_constants';
+import {
+  character_translation,
+  details_translation,
+  effect_translation,
+  ingredient_translation,
+  shop_translation,
+  location_translation,
+  monster_translation,
+  properties_translation,
+  recipebook_singular_translation,
+  stat_translation,
+} from '@app/localization/translations/common-strings';
+
+const { item, lang, mode, game, section } = Astro.props as any;
+const stats = item.stats?.[0];
+const statRows = [
+  { key: 'hp', label: stat_translation.hp[lang] },
+  { key: 'mp', label: stat_translation.mp?.[lang] ?? 'MP' },
+  { key: 'atk', label: stat_translation.atk[lang] },
+  { key: 'defen', label: stat_translation.dfn[lang] },
+  { key: 'spd', label: stat_translation.spd[lang] },
+];
+const statElements = itemElements.map((element) => ({
+  ...element,
+  value: stats?.[element.id] ?? 0,
+}));
+const elementGroups = itemElements.map((element) => ({
+  ...element,
+  effects: item.effectlines?.filter((line: any) => line.elem === element.id) ?? [],
+})).filter((group) => group.effects.length > 0);
+const disassembledFrom = item.disassembled_by?.flat() ?? [];
+---
+
+<div class={mode === 'detail' ? 'card' : undefined}>
+  <div class="card-title">
+    <h3>{item.name[lang]}</h3>
+    {item.level !== undefined && <b>LV {item.level}</b>}
+  </div>
+  <div class="image-desc-display">
+    <img
+      src={`/media/games/${game}/${section}/${item.id}.webp?v=1`}
+      alt={item.name[lang]}
+      style="aspect-ratio: 1; width: 200px;"
+    />
+    <p>{item.desc[lang]}</p>
+  </div>
+
+  <ItemAttributeList
+    cats={item.categories}
+    lang={lang}
+    game={game}
+    mode={mode}
+    evalue={item.evalue}
+    fire={item.fire}
+    water={item.water}
+    wind={item.wind}
+    earth={item.earth}
+  />
+
+  <ul style="list-style: none; padding: 0;">
+    {item.size !== undefined && <li><b>Size: </b>{item.size}</li>}
+    {item.book?.map((book: any) => (
+      <li>
+        <b>{recipebook_singular_translation[lang]}: </b>
+        <a href={`/${game}/recipe-books/${book.id}/${lang}`}>{book.name[lang]}</a>
+      </li>
+    ))}
+  </ul>
+
+  {item.properties && item.properties.length > 0 && (
+    <>
+      <b>{properties_translation[lang]}</b>
+      <ul>
+        {item.properties.map((property: any) => (
+          <li>
+            <Popover
+              title={property.name[lang]}
+              href={`/${game}/properties/${property.id}/${lang}`}
+              restrainWidth={true}
+            >
+              <span slot="trigger">{property.name[lang]}</span>
+              <p>{property.desc[lang]}</p>
+              <a href={`/${game}/properties/${property.id}/${lang}`}>
+                {details_translation[lang]}
+              </a>
+            </Popover>
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  {item.ingredients && item.ingredients.length > 0 && (
+    <>
+      <b>{ingredient_translation[lang]}</b>
+      <ul>
+        {item.ingredients.map((ingredient: any) => (
+          <li>
+            {ingredient.item && (
+              <a href={`/${game}/items/${ingredient.item.id}/${lang}`}>
+                {ingredient.item.name[lang]}
+              </a>
+            )}
+            {ingredient.category && (
+              <a href={`/${game}/categories/${ingredient.category.id}/${lang}`}>
+                {ingredient.category.name[lang]}
+              </a>
+            )}
+            {ingredient.num !== undefined && <> x{ingredient.num}</>}
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  {item.traits && item.traits.length > 0 && (
+    <>
+      <b>Traits</b>
+      <ul class="two-column">
+        {item.traits.map((trait: any) => (
+          <li>
+            {trait[lang]}
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  {elementGroups.length > 0 && (
+    <table class="tbl">
+      <thead><tr><th colspan="2">{effect_translation[lang]}</th></tr></thead>
+      <tbody>
+        {elementGroups.map((group) => (
+          <tr>
+            <td class="element-cell">
+              <svg
+                class="dusk-elements"
+                style={`background-color:${group.color};`}
+                aria-label={group.id}
+              >
+                <use href={`/spritesheets/${game}.svg?v=1#element-${group.id}`} />
+              </svg>
+            </td>
+            <td>
+              <ul class="effect-list">
+                {group.effects.map((line: any) => (
+                  <li>
+                    {line.effect && (
+                      <Popover
+                        title={line.effect.name[lang]}
+                        href={`/${game}/effects/${line.effect.id}/${lang}`}
+                        restrainWidth={true}
+                      >
+                        <span slot="trigger">{line.effect.name[lang]}</span>
+                        {line.effect.desc?.[lang] && <p>{line.effect.desc[lang]}</p>}
+                        <a href={`/${game}/effects/${line.effect.id}/${lang}`}>
+                          {details_translation[lang]}
+                        </a>
+                      </Popover>
+                    )}
+                    {(line.min_elem !== undefined || line.max_elem !== undefined) && (
+                      <>
+                        <span> ({line.min_elem ?? 0}-{line.max_elem ?? 100})</span>
+                        <div
+                          class="effect-bar"
+                          aria-label={`Element range ${line.min_elem ?? 0} to ${line.max_elem ?? 100}`}
+                        >
+                          <div
+                            class="elemental-bar"
+                            style={`background:${group.color};left:${line.min_elem ?? 0}%;width:${(line.max_elem ?? 100) - (line.min_elem ?? 0)}%;`}
+                          />
+                        </div>
+                      </>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )}
+
+  {stats && (
+    <table class="tbl item-stats">
+      <thead><tr><th colspan="4">Stats</th></tr></thead>
+      <tbody>
+        {statRows.map((stat, index) => {
+          const element = statElements[index];
+          return (
+          <tr>
+            <td><b>{stat.label}</b></td>
+            <td>{stats[stat.key] ?? 0}</td>
+            <td>
+              {element && (
+                <svg
+                  class="dusk-elements"
+                  style={`background-color:${element.color};`}
+                  aria-label={element.id}
+                >
+                  <use href={`/spritesheets/${game}.svg?v=1#element-${element.id}`} />
+                </svg>
+              )}
+            </td>
+            <td>{element?.value}</td>
+          </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  )}
+
+  {item.chars && item.chars.length > 0 && (
+    <table class="tbl">
+      <thead><tr><th>{character_translation[lang]}</th></tr></thead>
+      <tbody><tr><td>
+        {item.chars.map((character: any) => <img 
+          src={`/media/games/${game}/equip/equip-${character}.webp?v=1`}
+            alt={`Can equip: ${character}`} style="aspect-ratio: 69/70; width: 69px;">)}
+        </td></tr>
+      </tbody>
+    </table>
+  )}
+
+  {item.locations && item.locations.length > 0 && (
+    <>
+      <b>{location_translation[lang]}</b>
+      <ul class="two-column-list">
+        {item.locations.map((location: any) => (
+          <li><a href={`/${game}/locations/${location.id}/${lang}`}>{location.name[lang]}</a></li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  {item.relic_in && item.relic_in.length > 0 && (
+    <>
+      <b>Relic Locations:</b>
+      <ul>
+        {item.relic_in.map((relic: any) => relic.region && (
+          <li>
+            <a href={`/${game}/locations/${relic.region.id}/${lang}`}>
+              {relic.region.name[lang]}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  {item.monsters && item.monsters.length > 0 && (
+    <>
+      <b>{monster_translation[lang]}</b>
+      <ul class="two-column-list">
+        {item.monsters.map((monster: any) => (
+          <li><a href={`/${game}/monsters/${monster.id}/${lang}`}>{monster.name[lang]}</a></li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  {item.disassembles_to && item.disassembles_to.length > 0 && (
+    <>
+      <b>Disassembles to:</b>
+      <ul>
+        {item.disassembles_to.map((result: any) => (
+          <li><a href={`/${game}/items/${result.id}/${lang}`}>{result.name[lang]}</a></li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  {disassembledFrom.length > 0 && (
+    <>
+      <b>Disassembled from:</b>
+      <ul>
+        {disassembledFrom.map((source: any) => (
+          <li><a href={`/${game}/items/${source.id}/${lang}`}>{source.name[lang]}</a></li>
+        ))}
+      </ul>
+    </>
+  )}
+  {item.shop?.[lang] && <p><b>{shop_translation[lang]}: </b>{item.shop[lang]}</p>}
+  {item.homunculus && (
+    <p>
+      <b>Homunculus: </b>
+      {item.homunculus.days && <>Every {item.homunculus.days} days</>}
+      {item.homunculus.sweet && (
+        <>
+          {' — '}
+          <a href={`/${game}/items/${item.homunculus.sweet.id}/${lang}`}>
+            {item.homunculus.sweet.name[lang]}
+          </a>
+        </>
+      )}
+    </p>
+  )}
+</div>
+
+<style>
+  .effect-list {
+    list-style: none;
+    padding: 0;
+  }
+  .effect-list li {
+    margin-bottom: 0.5rem;
+  }
+  .element-cell {
+    text-align: center;
+    vertical-align: middle;
+  }
+  .effect-bar {
+    position: relative;
+    height: 0.4rem;
+    width: 100%;
+    margin-top: 0.25rem;
+    background: #00000018;
+  }
+  .elemental-bar {
+    position: absolute;
+    height: 100%;
+  }
+  .item-stats td {
+    vertical-align: middle;
+  }
+</style>

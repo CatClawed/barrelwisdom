@@ -1,0 +1,1 @@
+{"id":"expert-wisdom","name":{"en":"Expert Wisdom","ja":"識者の知恵"},"desc":{"en":"Exchanges up to 50% of max HP and max MP.","ja":"ＨＰとＭＰの最大値の値を、５０％ぶんだけ入れ替える"},"items":[{"name":{"en":"Glass Tiara","ja":"ガラスのティアラ"},"id":"glass-tiara"}],"index":256,"enum":"ITEM_EFF_WISDOM_LEARNED","advanced":{"actTag":"ACT_PASSIVE_CHANGE_HP_MP","min_1":"50"}}

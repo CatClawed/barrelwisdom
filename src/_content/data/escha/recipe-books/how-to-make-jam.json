@@ -1,0 +1,1 @@
+{"id":"how-to-make-jam","name":{"en":"How to Make Jam","ja":"ジャムの作り方","sc":"果酱制作方法","tc":"果醬製作方法"},"desc":{"en":"This describes how to make sweet jam out of apples and other items.","ja":"リンゴなどから甘いジャムを作る製法がまとめられている"},"items":[{"id":"apple-jam","name":{"en":"Apple Jam","ja":"リンゴジャム"}}],"acquisition":"Nio's Events","index":58,"enum":"ITEM_BOOK_RECIPE_60"}

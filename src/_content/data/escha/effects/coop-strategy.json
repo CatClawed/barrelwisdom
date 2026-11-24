@@ -1,0 +1,1 @@
+{"id":"coop-strategy","name":{"en":"Coop Strategy","ja":"協力の心得"},"desc":{"en":"Increases effectiveness of all support actions by 15%.","ja":"全てのサポート行動の効果が１５％上昇する"},"items":[{"name":{"en":"Brother Call","ja":"ブラザーコール"},"id":"brother-call"}],"index":325,"enum":"ITEM_EFF_SUPPOURT_GUIDE","advanced":{"actTag":"ACT_PASSIVE_ASSIST_ALLUP","min_1":"15"}}

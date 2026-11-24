@@ -1,0 +1,1 @@
+{"id":"forge-body","name":{"en":"Forge Body","ja":"体を鍛える"},"desc":{"en":"Increases maximum HP by 15.","ja":"最大ＨＰの値が１５上昇する"},"items":[{"name":{"en":"Exceed Belt","ja":"イクシードベルト"},"id":"exceed-belt"}],"index":280,"enum":"ITEM_EFF_ADD_HP_1","advanced":{"actTag":"ACT_EQUIP_ADD_PARAM_HP","min_1":"15"}}

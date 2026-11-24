@@ -1,0 +1,1 @@
+{"id":"last-strike","name":{"en":"Last Strike","ja":"ラストストライク"},"desc":{"en":"Item power increases by 150% when only 1 use remains.","ja":"効果：使用回数が１回の時に、威力が１５０％アップする。"},"grade":50,"points":17,"bomb":true,"heal":true,"buff":true,"index":282,"enum":"ITEM_POTENTIAL_LAST_UP_EX","advanced":{"PotBase":"ITEM_SUB_BTL_LAST_BONUS","min":"150"}}

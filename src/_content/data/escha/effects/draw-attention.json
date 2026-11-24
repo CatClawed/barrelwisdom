@@ -1,0 +1,1 @@
+{"id":"draw-attention","name":{"en":"Draw Attention","ja":"注目を集める"},"desc":{"en":"Increases chance to be targeted during battle.","ja":"戦闘中、攻撃対象になりやすくなる"},"items":[{"name":{"en":"Feather Ornament","ja":"羽根飾り"},"id":"feather-ornament"}],"index":291,"enum":"ITEM_EFF_TAUNT_TARGET","advanced":{"actTag":"ACT_EQUIP_CHANGE_TARGETRATE","min_1":"30"}}

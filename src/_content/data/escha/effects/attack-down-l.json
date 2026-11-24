@@ -1,0 +1,1 @@
+{"id":"attack-down-l","name":{"en":"Attack Down L","ja":"攻撃力ダウン・弱"},"desc":{"en":"Decreases the target's attack power by a small amount.","ja":"対象の攻撃力の値を少しだけ低下させる"},"items":[{"name":{"en":"Roten Blitz","ja":"ローテンブリッツ"},"id":"roten-blitz"}],"index":57,"enum":"ITEM_EFF_POWER_DOWN_1","advanced":{"actTag":"ACT_MINUS_ATK","min_1":"7"}}

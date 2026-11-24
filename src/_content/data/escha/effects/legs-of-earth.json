@@ -1,0 +1,1 @@
+{"id":"legs-of-earth","name":{"en":"Legs of Earth","ja":"大地の足"},"desc":{"en":"Halves the duration of turn-delaying effects.","ja":"行動順を遅らせる効果を受けたとき、その効果を半減させる"},"items":[{"name":{"en":"Exceed Belt","ja":"イクシードベルト"},"id":"exceed-belt"}],"index":347,"enum":"ITEM_EFF_YOBI_006","advanced":{"actTag":"ACT_RESIST_KNOCKBACK","min_1":"50"}}

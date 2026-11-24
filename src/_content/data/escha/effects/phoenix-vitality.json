@@ -1,0 +1,1 @@
+{"id":"phoenix-vitality","name":{"en":"Phoenix Vitality","ja":"不死鳥の生命力"},"desc":{"en":"Increases maximum HP by 50.","ja":"最大ＨＰの値が５０上昇する"},"items":[{"name":{"en":"Phoenix Bracelet","ja":"不死鳥の腕輪"},"id":"phoenix-bracelet"}],"index":371,"enum":"ITEM_EFF_TOTEM_GUARD","advanced":{"actTag":"ACT_EQUIP_ADD_PARAM_HP","min_1":"50"}}

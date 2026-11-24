@@ -1,0 +1,1 @@
+{"id":"atk-power-up-s","name":{"en":"ATK Power Up S","ja":"攻撃力アップ・強"},"desc":{"en":"Increases the target's attack power a large amount for the next 5 turns.","ja":"対象の攻撃力を大きく上昇させる。効果は５回行動するまで持続する"},"index":188,"enum":"ITEM_EFF_POWER_UP_3","advanced":{"actTag":"ACT_PLUS_ATK","min_1":"15"}}

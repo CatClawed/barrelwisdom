@@ -1,0 +1,1 @@
+{"id":"dmg-reduction-s","name":{"en":"DMG Reduction S","ja":"ダメージ軽減・強"},"desc":{"en":"Greatly decreases physical damage taken by the target by a set amount.","ja":"対象が受ける物理ダメージの値を、一定の割合で軽減する。効果は大きい"},"items":[{"name":{"en":"Strong Powder","ja":"強壮の粉末"},"id":"strong-powder"}],"index":221,"enum":"ITEM_EFF_REDUCE_DAMAGE_3","advanced":{"actTag":"ACT_MITIGATE_DAMAGE","min_1":"15"}}

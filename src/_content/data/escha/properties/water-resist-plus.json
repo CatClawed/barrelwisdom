@@ -1,0 +1,1 @@
+{"id":"water-resist-plus","name":{"en":"Water Resist+","ja":"水耐性＋"},"desc":{"en":"Reduces Water damage by 25%.","ja":"効果：水属性のダメージが２５％軽減される。"},"grade":8,"points":3,"armor":true,"accessory":true,"items":[{"id":"crystal-plate","name":{"en":"Crystal Plate","ja":"水晶のプレート"}}],"index":172,"enum":"ITEM_POTENTIAL_RESIST_ICE_2","advanced":{"PotBase":"ITEM_SUB_RESIST_WATER","min":"25"}}

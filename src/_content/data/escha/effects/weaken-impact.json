@@ -1,0 +1,1 @@
+{"id":"weaken-impact","name":{"en":"Weaken Impact","ja":"衝撃を弱める"},"desc":{"en":"Reduces physical damage by 7%.","ja":"物理ダメージの値を７％軽減する"},"items":[{"name":{"en":"Royal Crest","ja":"王家の紋章"},"id":"royal-crest"}],"index":331,"enum":"ITEM_EFF_REDUCE_1","advanced":{"actTag":"ACT_EQUIP_REDUCE_SUFFERDMG","min_1":"7"}}

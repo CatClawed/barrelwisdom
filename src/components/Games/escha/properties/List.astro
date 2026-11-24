@@ -1,0 +1,70 @@
+---
+import Detail from './Detail.astro';
+import FilterButton from '@components/Games/_common/Filter/FilterButton.astro';
+import TextFilter from '@components/Games/_common/Filter/TextFilter.astro';
+
+const { items, lang, title, game, section } = Astro.props;
+items.sort((a, b) => (a.data.index ?? 0) - (b.data.index ?? 0));
+---
+
+<h1>{title}</h1>
+<div class="filters">
+  <TextFilter gridSize={6} lang={lang} />
+  <FilterButton
+    svg={`${game}.svg?v=1`}
+    name="traits"
+    gridSpan={6}
+    list={[
+      { filterKey: "bomb",       icon: 'bomb' },
+      { filterKey: "heal",       icon: 'heal' },
+      { filterKey: "buff",       icon: 'buff' },
+      { filterKey: "weapon",     icon: 'weapon' },
+      { filterKey: "armor",      icon: 'armor' },
+      { filterKey: "accessory",  icon: 'accessory' }
+    ]}
+  />
+</div>
+<ul
+  class="list"
+  id="item-list"
+  data-lang={lang}
+  data-game={game}
+  data-section={section}
+>
+  {
+    items.map((i) => (
+      <li
+        class="list-container"
+        data-id={i.id}
+        data-search={`${i.data.name[lang].toLowerCase()} ^ ${i.data.desc?.[lang]?.toLowerCase() ?? ''}`}
+        data-traits={[
+          i.data.bomb      && 'bomb',
+          i.data.heal      && 'heal',
+          i.data.buff      && 'buff',
+          i.data.weapon    && 'weapon',
+          i.data.armor     && 'armor',
+          i.data.accessory && 'accessory',
+        ]
+          .filter(Boolean)
+          .join(',')}
+      >
+        <Detail
+          item={i.data}
+          lang={lang}
+          mode="list"
+          game={game}
+          section={section}
+        />
+      </li>
+    ))
+  }
+</ul>
+
+<script>
+  import { initListFilters } from '@app/utils/filter-controller';
+  initListFilters({
+    filters: [
+      { type: 'buttons', key: 'traits', groupName: 'traits', mode: 'all', excludeFullMatch: true },
+    ],
+  });
+</script>

@@ -1,0 +1,1 @@
+{"id":"hp-recovery-s2","name":{"en":"HP Recovery S2","ja":"ＨＰ回復・超"},"desc":{"en":"Restores a great amount of the target's HP.","ja":"対象のＨＰを大幅に回復する"},"items":[{"name":{"en":"Refuel Ointment","ja":"リフュール軟膏"},"id":"refuel-ointment"}],"index":111,"enum":"ITEM_EFF_HEAL_HP_4","advanced":{"actTag":"ACT_HEAL_HP","min_1":"63","max_1":"90"}}

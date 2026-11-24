@@ -1,0 +1,1 @@
+{"id":"recovery-bonus-m","name":{"en":"Recovery Bonus M","ja":"回復ボーナス・中"},"desc":{"en":"Causes a fair HP recovery bonus.","ja":"対象のＨＰ回復にボーナスが発生する"},"items":[{"name":{"en":"Cup of Life","ja":"生命の杯"},"id":"cup-of-life"},{"name":{"en":"Healing Aroma","ja":"癒しのアロマ"},"id":"healing-aroma"}],"index":115,"enum":"ITEM_EFF_HEAL_BONUS_2","advanced":{"actTag":"ACT_HEAL_HP","min_1":"23"}}

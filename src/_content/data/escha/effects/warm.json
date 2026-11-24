@@ -1,0 +1,1 @@
+{"id":"warm","name":{"en":"Warm","ja":"あったか～い"},"desc":{"en":"Warms the body, increasing water resistance.","ja":"身体が温まり、水耐性が上昇する"},"items":[{"name":{"en":"Veggie Soup","ja":"ベジスープ"},"id":"veggie-soup"}],"index":179,"enum":"ITEM_EFF_BLESS_MENTAL","advanced":{"actTag":"ACT_PLUS_RESIST","min_1":"ELEMENT_WATER","min_2":"15"}}

@@ -1,0 +1,1 @@
+{"id":"multi-bonus","name":{"en":"Multi Bonus","ja":"マルチボーナス"},"desc":{"en":"Increases item power by (number of targets in area x60)%.","ja":"効果：効果範囲の対象×６０％、威力がアップする。"},"grade":50,"points":17,"bomb":true,"heal":true,"buff":true,"index":279,"enum":"ITEM_POTENTIAL_MULTI_UP_EX","advanced":{"PotBase":"ITEM_SUB_BTL_LARGE_ENEMYBONUS","min":"60"}}

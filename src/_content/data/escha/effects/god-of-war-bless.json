@@ -1,0 +1,1 @@
+{"id":"god-of-war-bless","name":{"en":"God of War Bless","ja":"戦神の祝福"},"desc":{"en":"Absorbs a portion of damage dealt into HP.","ja":"攻撃時に与えたダメージの一部を自分のＨＰに還元する"},"items":[{"name":{"en":"Blessed Ring","ja":"ブレスドリング"},"id":"blessed-ring"}],"index":363,"enum":"ITEM_EFF_YOBI_021","advanced":{"actTag":"ACT_EQUIP_ADD_DMGCONVERT","min_1":"15"}}

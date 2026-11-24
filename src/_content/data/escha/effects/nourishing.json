@@ -1,0 +1,1 @@
+{"id":"nourishing","name":{"en":"Nourishing","ja":"栄養満点"},"desc":{"en":"The highly nutritious flavor increases all stats.","ja":"栄養満点の味わいで、全ての能力の値を上昇させる"},"items":[{"name":{"en":"Traveler's Ration","ja":"旅人の糧食"},"id":"traveler-s-ration"}],"index":178,"enum":"ITEM_EFF_KAGO_LARGE","advanced":{"actTag":"ACT_PLUS_ALL","min_1":"6","min_2":"10"}}

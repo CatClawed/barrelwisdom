@@ -1,7 +1,8 @@
-import { totoriData } from '@app/_content/schemas/totori_schema';
 import { reslerianaRWData } from '@app/_content/schemas/resleriana-red-white_schema';
+import { totoriData } from '@app/_content/schemas/totori_schema';
 import { yumiaData } from '@app/_content/schemas/yumia_schema';
-import { firisData } from './_content/schemas/firis_schema';
+import { eschaData } from '@app/_content/schemas/escha_schema';
+import { firisData } from '@app/_content/schemas/firis_schema';
 
 export const SITE_TITLE = 'Barrel Wisdom';
 export const SITE_DESCRIPTION = 'The source for all things Atelier.';
@@ -9,6 +10,7 @@ export const POSTS_PER_PAGE = 10;
 
 export const gameData = [
   ...totoriData,
+  ...eschaData,
   ...firisData,
   ...yumiaData,
   ...reslerianaRWData,
@@ -30,11 +32,13 @@ export const pathData: PathConfig[] = [
   { game: 'totori', section: 'traits' },
   { game: 'totori', section: 'monsters' },
   { game: 'totori', section: 'effects' },
-  //
-  // { game: 'escha', section: 'items' },
-  // { game: 'escha', section: 'properties' },
-  // { game: 'escha', section: 'monsters' },
-  // { game: 'escha', section: 'effects' },
+  
+  { game: 'escha', section: 'items' },
+  { game: 'escha', section: 'properties' },
+  { game: 'escha', section: 'monsters' },
+  { game: 'escha', section: 'effects' },
+  { game: 'escha', section: 'recipe-books' },
+  { game: 'escha', section: 'locations', listPath: false },
   //
   // { game: 'shallie', section: 'items' },
   // { game: 'shallie', section: 'properties' },
@@ -75,7 +79,7 @@ export const pathData: PathConfig[] = [
 
 export const generateCategories: string[] = [
   'totori',
-  //'escha',
+  'escha',
   //'shallie',
   'firis',
   //'ryza2',

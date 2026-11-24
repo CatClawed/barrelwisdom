@@ -5,6 +5,7 @@
   "compilerOptions": {
     "strictNullChecks": true,
     "verbatimModuleSyntax": true,
+    "noImplicitAny": false,
     "paths": {
       "@components/*": ["./src/components/*"],
       "@layouts/*": ["./src/layouts/*"],

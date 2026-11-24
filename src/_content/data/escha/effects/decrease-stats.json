@@ -1,0 +1,1 @@
+{"id":"decrease-stats","name":{"en":"Decrease Stats","ja":"全ての能力を下げる"},"desc":{"en":"Decreases all of the target's stats by a large amount.","ja":"対象の全ての能力の値を大きく低下させる"},"items":[{"name":{"en":"Poly. Poison","ja":"ポリフォニー毒瓶"},"id":"poly-poison"}],"index":45,"enum":"ITEM_EFF_DMG_WEAKNESS_1","advanced":{"actTag":"ACT_MINUS_ALL","min_1":"10","min_2":"10"}}

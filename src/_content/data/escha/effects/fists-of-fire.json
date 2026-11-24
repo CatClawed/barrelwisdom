@@ -1,0 +1,1 @@
+{"id":"fists-of-fire","name":{"en":"Fists of Fire","ja":"火に包まれた拳"},"desc":{"en":"Adds additional fire damage to attacks. Effect is small.","ja":"火属性の追加ダメージを発生させる。効果は小さい"},"items":[{"name":{"en":"Glorious Note","ja":"栄光の手形"},"id":"glorious-note"}],"index":359,"enum":"ITEM_EFF_YOBI_074","advanced":{"actTag":"ACT_EQUIP_ADD_FIRE_DMG","min_1":"5"}}

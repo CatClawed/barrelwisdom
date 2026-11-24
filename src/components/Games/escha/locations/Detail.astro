@@ -1,0 +1,175 @@
+---
+import {
+  item_translation,
+  monster_translation,
+} from '@app/localization/translations/common-strings';
+
+const { item, lang, game } = Astro.props as any;
+const areas = item.areas ?? [];
+const relics = item.relic_set ?? [];
+const strongMonsters = item.strong ?? [];
+---
+
+<h1>{item.name[lang]}</h1>
+<div class="table-of-contents">
+  <ol>
+    {areas.filter((area: any) => !area.subarea).map((area: any) => (
+      <li><a href={`#${area.id}`}>{area.name?.[lang]}</a></li>
+    ))}
+  </ol>
+</div>
+
+{item.note && <div set:html={item.note} />}
+{item.grade && (
+  <p><b>Property Levels from Relic Farming:</b> {item.grade}</p>
+)}
+
+<table class="tbl borders">
+  <tbody>
+    <tr>
+      <th>Relic</th>
+      <th>Disassembly</th>
+      <th>Area</th>
+    </tr>
+    {relics.map((relic: any) => {
+      const disassembly = (relic.item?.disassembly_set ?? []).flat();
+      return (
+        <tr>
+          <td>
+            {relic.item && (
+              <a href={`/${game}/items/${relic.item.id}/${lang}`}>
+                {relic.item.name?.[lang]}
+              </a>
+            )}
+          </td>
+          <td>
+            {disassembly.length > 0 && (
+              <ul class="hide-bullets">
+                {disassembly.map((material: any) => (
+                  <li>
+                    <a href={`/${game}/items/${material.id}/${lang}`}>
+                      {material.name?.[lang]}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </td>
+          <td>
+            {relic.area?.length > 0 && (
+              <ul class="hide-bullets">
+                {relic.area.map((area: any) => <li>{area.name?.[lang]}</li>)}
+              </ul>
+            )}
+          </td>
+        </tr>
+      );
+    })}
+  </tbody>
+</table>
+
+<table class="tbl borders">
+  <tbody>
+    <tr><th>Strong Monsters</th></tr>
+    <tr>
+      <td>
+        <ul class="hide-bullets" style="column-count: 3;">
+          {strongMonsters.map((monster: any) => (
+            <li>
+              <a href={`/${game}/monsters/${monster.id}/${lang}`}>
+                {monster.name?.[lang]}
+              </a>
+              {monster.level !== undefined && ` (${monster.level})`}
+            </li>
+          ))}
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+{areas.map((area: any) => {
+  const hasItems = area.items?.length || area.rare?.length || area.maxitem?.length;
+  return (
+    <>
+      {!area.subarea ? (
+        <h2 id={area.id}>{area.name?.[lang]}</h2>
+      ) : (
+        <h3>{area.subarea}</h3>
+      )}
+      {area.note && <div set:html={area.note} />}
+      <table class="tbl borders">
+        <tbody>
+          <tr>
+            {hasItems && <th>{item_translation[lang]}</th>}
+            {area.monsters?.length > 0 && <th>{monster_translation[lang]}</th>}
+            {area.fieldevent?.length > 0 && <th>Field Effects</th>}
+          </tr>
+          <tr>
+            {hasItems && (
+              <td>
+                <ul class="hide-bullets">
+                  {(area.items ?? []).map((material: any) => (
+                    <li>
+                      <a href={`/${game}/items/${material.id}/${lang}`}>
+                        {material.name?.[lang]}
+                      </a>
+                    </li>
+                  ))}
+                  {(area.rare ?? []).map((material: any) => (
+                    <li>
+                      <a href={`/${game}/items/${material.id}/${lang}`}>
+                        {material.name?.[lang]}
+                      </a> (Rare)
+                    </li>
+                  ))}
+                  {(area.maxitem ?? []).map((material: any) => (
+                    <li>
+                      <a href={`/${game}/items/${material.id}/${lang}`}>
+                        {material.name?.[lang]}
+                      </a> (Max)
+                    </li>
+                  ))}
+                </ul>
+              </td>
+            )}
+            {area.monsters?.length > 0 && (
+              <td>
+                <ul class="hide-bullets">
+                  {area.monsters.map((monster: any) => (
+                    <li>
+                      <a href={`/${game}/monsters/${monster.id}/${lang}`}>
+                        {monster.name?.[lang]}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </td>
+            )}
+            {area.fieldevent?.length > 0 && (
+              <td>
+                <ul class="hide-bullets">
+                  {area.fieldevent.map((event: any) => <li>{event.name}</li>)}
+                </ul>
+              </td>
+            )}
+          </tr>
+        </tbody>
+      </table>
+    </>
+  );
+})}
+
+<style>
+  .tbl td {
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .hide-bullets {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+  }
+</style>

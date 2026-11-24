@@ -1,0 +1,1 @@
+{"id":"talisman-of-luck","name":{"en":"Talisman of Luck","ja":"幸運の札"},"desc":{"en":"Increases the chances of getting items from battle by a small amount.","ja":"戦闘でアイテムを入手する確率が少しだけ上昇する"},"items":[{"name":{"en":"Tarot of Fate","ja":"運命のタロット"},"id":"tarot-of-fate"}],"index":298,"enum":"ITEM_EFF_DROP_UP_1","advanced":{"actTag":"ACT_EQUIP_ADD_DROPRATE","min_1":"10"}}

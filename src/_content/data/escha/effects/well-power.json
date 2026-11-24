@@ -1,0 +1,1 @@
+{"id":"well-power","name":{"en":"Well Power","ja":"窮地に強い"},"desc":{"en":"When HP drops below 25%, critical hit and dodge chances increase.","ja":"ＨＰの残量が２５％以下になったとき、クリティカルの発生確率や回避率などの値が上昇する"},"items":[{"name":{"en":"Beast Earmuffs","ja":"獣の耳あて"},"id":"beast-earmuffs"}],"index":324,"enum":"ITEM_EFF_PINCH_HITTER_1","advanced":{"actTag":"ACT_PASSIVE_PINCH_HITTER","min_1":"15"}}

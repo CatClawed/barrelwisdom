@@ -1,0 +1,1 @@
+{"id":"gathering-signal","name":{"en":"Gathering Signal","ja":"集合の合図"},"desc":{"en":"Gathers allies around the user.","ja":"味方を使用した者の周りに集める"},"items":[{"name":{"en":"Command Chime","ja":"号令チャイム"},"id":"command-chime"}],"index":158,"enum":"ITEM_EFF_CHIME_1","advanced":{"actTag":"ACT_MOVE_GATHERS"}}

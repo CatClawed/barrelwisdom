@@ -1,0 +1,1 @@
+{"id":"god-s-blessing","name":{"en":"God's Blessing","ja":"古き神々の加護"},"desc":{"en":"15% of damage taken is subtracted from MP instead.","ja":"受けるダメージの１５％が、ＭＰダメージに変換される"},"items":[{"name":{"en":"Angel Ribbon","ja":"エンゼルリボン"},"id":"angel-ribbon"}],"index":264,"enum":"ITEM_EFF_QUICK_GODLY","advanced":{"actTag":"ACT_PASSIVE_REVERSE_DAMAGE","min_1":"15"}}

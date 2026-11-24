@@ -1,0 +1,1 @@
+{"id":"substitution","name":{"en":"Substitution","ja":"身代わり強化"},"desc":{"en":"Increases effect of guard support by 50%.","ja":"サポート防御の効果が５０％上昇する"},"items":[{"name":{"en":"Brother Call","ja":"ブラザーコール"},"id":"brother-call"}],"index":327,"enum":"ITEM_EFF_SUPPOURT_UP","advanced":{"actTag":"ACT_PASSIVE_ASSIST_DEFUP","min_1":"50"}}

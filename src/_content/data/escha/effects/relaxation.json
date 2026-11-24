@@ -1,0 +1,1 @@
+{"id":"relaxation","name":{"en":"Relaxation","ja":"完全なる休息"},"desc":{"en":"Increases MP regeneration by 100% while in the back line.","ja":"後衛で待機している間のＭＰの回復量が１００％上昇する"},"items":[{"name":{"en":"Concealing Skin","ja":"かくれずきん"},"id":"concealing-skin"}],"index":345,"enum":"ITEM_EFF_YOBI_004","advanced":{"actTag":"ACT_PASSIVE_HEAL_GROW_BACKMENBER","min_1":"100"}}

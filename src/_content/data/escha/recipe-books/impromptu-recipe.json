@@ -1,0 +1,1 @@
+{"id":"impromptu-recipe","name":{"en":"Impromptu Recipe","ja":"即興レシピ","sc":"即兴配方","tc":"即興配方"},"desc":{"en":"A recipe thought up by Logy after reading a strange book.","ja":"珍しい内容の本を読んで、ロジーがふと思いついたレシピ"},"items":[{"id":"flowing-metal","name":{"en":"Flowing Metal","ja":"流れ動く金属"}}],"acquisition":"Reyfer's Events (Logy)","index":57,"enum":"ITEM_BOOK_RECIPE_58"}

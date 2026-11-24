@@ -1,0 +1,1 @@
+{"id":"magic-stone-ray","name":{"en":"Magic Stone Ray","ja":"魔石の光"},"desc":{"en":"Halves the chance of being afflicted by status ailments.","ja":"状態異常に掛かる確率を半減させる"},"items":[{"name":{"en":"Magic Stone","ja":"魔石の円環"},"id":"magic-stone"}],"index":352,"enum":"ITEM_EFF_YOBI_012","advanced":{"actTag":"ACT_EQUIP_REDUCE_CHECKRATE","min_1":"50"}}

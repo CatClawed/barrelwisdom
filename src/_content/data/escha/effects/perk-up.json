@@ -1,0 +1,1 @@
+{"id":"perk-up","name":{"en":"Perk Up","ja":"目が覚める"},"desc":{"en":"Energizes the mind, restoring a fair amount of MP.","ja":"目をパッチリ覚めさせて、ＭＰを回復させる"},"items":[{"name":{"en":"Healing Aroma","ja":"癒しのアロマ"},"id":"healing-aroma"},{"name":{"en":"Cup of Life","ja":"生命の杯"},"id":"cup-of-life"}],"index":148,"enum":"ITEM_EFF_HEAL_MPBONUS_3","advanced":{"actTag":"ACT_HEAL_MP","min_1":"15"}}

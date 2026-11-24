@@ -1,0 +1,1 @@
+{"id":"brutal-bombs","name":{"en":"Brutal Bombs","ja":"凶暴なばくだん","sc":"凶暴的炸弹","tc":"兇暴的炸彈"},"desc":{"en":"It describes a method for improving the explosive output of a bomb.","ja":"フラムをより高威力、高炸裂力にするための極意について触れられている"},"items":[{"id":"dire-bomb","name":{"en":"Dire Bomb","ja":"ダイアフラム"}}],"acquisition":"Assignment 3","index":43,"enum":"ITEM_BOOK_RECIPE_43"}

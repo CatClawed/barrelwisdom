@@ -1,0 +1,1 @@
+{"id":"rest-efficiency","name":{"en":"Rest Efficiency","ja":"休息効率強化"},"desc":{"en":"Increases MP regeneration by 50% while in the back line.","ja":"後衛で待機している間のＭＰの回復量が５０％上昇する"},"items":[{"name":{"en":"Concealing Skin","ja":"かくれずきん"},"id":"concealing-skin"}],"index":344,"enum":"ITEM_EFF_YOBI_003","advanced":{"actTag":"ACT_PASSIVE_HEAL_GROW_BACKMENBER","min_1":"50"}}

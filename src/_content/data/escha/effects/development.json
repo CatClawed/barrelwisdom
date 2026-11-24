@@ -1,0 +1,1 @@
+{"id":"development","name":{"en":"Development","ja":"成長の力"},"desc":{"en":"Increases expected value of damage slightly. The effect increases at higher levels.","ja":"ダメージの期待値がわずかに上昇する。レベルが高くなるほど効果は大きくなる"},"items":[{"name":{"en":"Spirit Garland","ja":"霊花のガーランド"},"id":"spirit-garland"}],"index":366,"enum":"ITEM_EFF_YOBI_024","advanced":{"actTag":"ACT_EQUIP_PARAM_LEVEL","min_1":"5"}}

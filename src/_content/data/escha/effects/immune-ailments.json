@@ -1,0 +1,1 @@
+{"id":"immune-ailments","name":{"en":"Immune: Ailments","ja":"全てを無効化"},"desc":{"en":"Immunity to all status ailments.","ja":"全ての状態異常を無効化する"},"items":[{"name":{"en":"Angel Ribbon","ja":"エンゼルリボン"},"id":"angel-ribbon"}],"index":338,"enum":"ITEM_EFF_ANTI_ALL","advanced":{"actTag":"ACT_AUTO_RESIST_ALL"}}

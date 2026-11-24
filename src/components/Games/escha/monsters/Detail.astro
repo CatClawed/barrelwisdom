@@ -1,0 +1,118 @@
+---
+import {
+  itemElements,
+} from '@app/components/Games/escha/escha_constants';
+import {
+  item_translation,
+  location_translation,
+  stat_translation,
+} from '@app/localization/translations/common-strings';
+
+const { item, lang, game, section } = Astro.props;
+
+const stats = [
+  { key: 'hp', label: stat_translation.hp[lang] },
+  { key: 'atk', label: stat_translation.atk[lang] },
+  { key: 'defen', label: stat_translation.dfn[lang] },
+  { key: 'spd', label: stat_translation.spd[lang] },
+];
+---
+
+<div class="card">
+  <div class="card-title">
+    <h3>{item.name[lang]}</h3>
+    <div class="card-icon-position">
+      {item.race?.[lang]}
+      {item.isDLC && <span class="badge bg-primary">DLC</span>}
+      {item.isStrong && <span class="badge bg-primary">Strong</span>}
+      {item.isDX && <span class="badge bg-primary">DX</span>}
+    </div>
+  </div>
+
+  <div class="image-desc-display">
+    <img
+      src={`/media/games/${game}/${section}/${item.id}.webp?v=1`}
+      alt={item.name[lang]}
+      style="aspect-ratio: 1; width: 288px;"
+    />
+    {item.desc?.[lang] && <p>{item.desc[lang]}</p>}
+  </div>
+
+  <div class="grid">
+    <div class="grid-6">
+      {item.locations?.length > 0 && (
+        <>
+          <b>{location_translation[lang]}</b>
+          <ul>
+            {item.locations.map((location) => (
+              <li>
+                <a href={`/${game}/locations/${location.id}/${lang}`}>
+                  {location.name[lang]}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+      {item.drops?.length > 0 && (
+        <>
+          <b>{item_translation[lang]}</b>
+          <ul>
+            {item.drops.map((drop) => (
+              <li>
+                <a href={`/${game}/items/${drop.id}/${lang}`}>
+                  {drop.name[lang]}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+    </div>
+
+    <div class="grid-6">
+      <table class="tbl-transparent">
+        <tbody>
+          <tr>
+            <td><b>LV</b></td>
+            <td>{item.level ?? 0}</td>
+          </tr>
+          {stats.map((stat, index) => {
+            const element = itemElements[index];
+            return (
+              <tr>
+                <td><b>{stat.label}</b></td>
+                <td>{item[stat.key] ?? 0}</td>
+                {element ? (
+                  <>
+                    <td style="padding-left:0.5em;">
+                      <svg
+                        class="dusk-elements"
+                        style={`background-color:${element.color};`}
+                        aria-label={element.id}
+                      >
+                        <use href={`/spritesheets/${game}.svg?v=1#element-${element.id}`} />
+                      </svg>
+                    </td>
+                    <td>{item[element.id] ?? 0}</td>
+                  </>
+                ) : (
+                  <>
+                    <td></td>
+                    <td></td>
+                  </>
+                )}
+              </tr>
+            );
+          })}
+          <tr>
+            <td><b>EXP</b></td>
+            <td>{item.exp ?? 0}</td>
+            <td style="padding-left: 0.5em;"><b>Cole</b></td>
+            <td>{item.cole ?? 0}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

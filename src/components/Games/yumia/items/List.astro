@@ -130,7 +130,7 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
     filters: [
       { type: 'select', key: 'category', elementId: 'category' },
       { type: 'select', key: 'material', elementId: 'material' },
-      { type: 'buttons', key: 'elements', groupName: 'elements', mode: 'all' },
+      { type: 'buttons', key: 'elements', groupName: 'elements', mode: 'all', excludeFullMatch: false },
       { type: 'buttons', key: 'kind', groupName: 'kind', mode: 'any' },
     ],
   });

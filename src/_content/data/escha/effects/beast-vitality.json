@@ -1,0 +1,1 @@
+{"id":"beast-vitality","name":{"en":"Beast Vitality","ja":"魔獣の生命力"},"desc":{"en":"Increases maximum HP by 35.","ja":"最大ＨＰの値が３５上昇する"},"items":[{"name":{"en":"Heart of Flame","ja":"灼熱の心臓"},"id":"heart-of-flame"}],"index":370,"enum":"ITEM_EFF_TOTEM_SPEED","advanced":{"actTag":"ACT_EQUIP_ADD_PARAM_HP","min_1":"35"}}

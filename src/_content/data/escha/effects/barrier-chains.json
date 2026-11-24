@@ -1,0 +1,1 @@
+{"id":"barrier-chains","name":{"en":"Barrier Chains","ja":"障壁の鎖"},"desc":{"en":"Reduces physical damage by 10%.","ja":"物理ダメージの値を１０％軽減する"},"items":[{"name":{"en":"Soul Binder","ja":"魂縛のチェイン"},"id":"soul-binder"}],"index":333,"enum":"ITEM_EFF_REDUCE_3","advanced":{"actTag":"ACT_EQUIP_REDUCE_SUFFERDMG","min_1":"10"}}

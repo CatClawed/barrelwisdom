@@ -1,0 +1,1 @@
+{"id":"crit-power-up-s","name":{"en":"Crit Power Up S","ja":"大打撃力上昇・強"},"desc":{"en":"Increases the target's critical bonus by a large amount.","ja":"対象がクリティカルを発生させたときの補正の値を、大きく上昇させる"},"items":[{"name":{"en":"Eye-Opener","ja":"開眼の目薬"},"id":"eye-opener"}],"index":230,"enum":"ITEM_EFF_REGEN_MOLD","advanced":{"actTag":"ACT_INCREASE_CRITICAL_DAMAGE","min_1":"20"}}

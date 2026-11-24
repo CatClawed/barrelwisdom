@@ -1,0 +1,76 @@
+---
+import { level_translation } from '@app/localization/translations/common-strings';
+import { itemElements } from '@app/components/Games/escha/escha_constants';
+
+interface Item {
+  id: string;
+  name: Record<string, string | undefined>;
+  level?: number;
+  evalue?: number;
+  fire?: boolean;
+  water?: boolean;
+  wind?: boolean;
+  earth?: boolean;
+}
+
+interface Props {
+  item: Item;
+  lang: string;
+  game: string;
+}
+
+const { item, lang, game }: Props = Astro.props;
+const activeElements = {
+  fire: item.fire,
+  water: item.water,
+  wind: item.wind,
+  earth: item.earth,
+};
+---
+
+<tr>
+  <td>
+    <div class="category-item-row">
+      <div class="item-info">
+        <a href={`/${game}/items/${item.id}/${lang}`}>{item.name[lang]}</a>
+        <b>{level_translation[lang]} {item.level}</b>
+      </div>
+      <div class="item-elements">
+        {itemElements.map((element) => activeElements[element.id] && (
+          <svg
+            class="dusk-elements"
+            style={`background-color:${element.color};`}
+            aria-label={element.id}
+          >
+            <use href={`/spritesheets/${game}.svg?v=1#element-${element.id}`} />
+          </svg>
+        ))}
+        <span>{item.evalue}</span>
+      </div>
+    </div>
+  </td>
+</tr>
+
+<style>
+  .category-item-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+  }
+  .item-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .item-elements {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: auto;
+
+    span {
+      padding-left: 0.2em;
+    }
+  }
+</style>

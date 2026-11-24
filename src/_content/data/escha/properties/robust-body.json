@@ -1,0 +1,1 @@
+{"id":"robust-body","name":{"en":"Robust Body","ja":"頑強な身体"},"desc":{"en":"Increases defense power by 50, and all stats by 25%.","ja":"効果：防御力が５０上昇し、基本のステータスが２５％上昇する。"},"grade":60,"points":20,"armor":true,"index":276,"enum":"ITEM_POTENTIAL_MAXLPDEF_EX","advanced":{"PotBase":"ITEM_SUB_EVOLVE_STATUS","PotBase2":"ITEM_SUB_EQI_ADD_DEFENSE","min":"25","min2":"50"}}

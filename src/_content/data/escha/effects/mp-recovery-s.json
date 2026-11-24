@@ -1,0 +1,1 @@
+{"id":"mp-recovery-s","name":{"en":"MP Recovery S","ja":"ＭＰ回復・強"},"desc":{"en":"Restores a large amount of MP.","ja":"対象のＭＰを大きく回復する"},"items":[{"name":{"en":"Forbidden Candy","ja":"禁断のドロップ"},"id":"forbidden-candy"},{"name":{"en":"Elixir","ja":"エリキシル剤"},"id":"elixir"}],"index":119,"enum":"ITEM_EFF_HEAL_MP_3","advanced":{"actTag":"ACT_HEAL_MP","min_1":"35","max_1":"50"}}

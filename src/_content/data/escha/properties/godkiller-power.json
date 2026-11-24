@@ -1,0 +1,1 @@
+{"id":"godkiller-power","name":{"en":"Godkiller Power","ja":"神を破壊せし力"},"desc":{"en":"Increases item effect by 125%.","ja":"効果：アイテムの効果が、１２５％上昇する。"},"grade":60,"points":20,"bomb":true,"index":272,"enum":"ITEM_POTENTIAL_DMGPLUS_EX","advanced":{"PotBase":"ITEM_SUB_ITM_CHANGE_POWER","min":"125"}}

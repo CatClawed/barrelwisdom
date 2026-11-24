@@ -1,0 +1,1 @@
+{"id":"dragon-slayer","name":{"en":"Dragon Slayer","ja":"ドラゴン特効"},"desc":{"en":"Always deal critical hits against Dragon type monsters.","ja":"ドラゴンの種族に、必ずクリティカルが発生するようになる"},"items":[{"name":{"en":"Royal Crest","ja":"王家の紋章"},"id":"royal-crest"}],"index":279,"enum":"ITEM_EFF_KILLER_DRAGON","advanced":{"actTag":"ACT_EQUIP_RACEATTACK","min_1":"RACE_DRAGON"}}

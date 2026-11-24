@@ -1,0 +1,1 @@
+{"id":"hp-regen-m-3","name":{"en":"HP Regen M","ja":"ＨＰ再生・中"},"desc":{"en":"Recovers a moderate amount of HP every turn.","ja":"行動時にＨＰが回復する"},"index":375,"enum":"ITEM_EFF_YOBI_031","advanced":{"actTag":"ACT_AUTO_HP_TURN","min_1":"7"}}

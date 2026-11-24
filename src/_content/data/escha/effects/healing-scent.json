@@ -1,0 +1,1 @@
+{"id":"healing-scent","name":{"en":"Healing Scent","ja":"癒される香り"},"desc":{"en":"Restores a small amount of HP every turn.","ja":"行動時にＨＰが少しだけ回復する"},"items":[{"name":{"en":"Aroma Pouch","ja":"アロマポーチ"},"id":"aroma-pouch"}],"index":295,"enum":"ITEM_EFF_REGEN_SMELL","advanced":{"actTag":"ACT_EQUIP_HEALING_ACTION","min_1":"4"}}

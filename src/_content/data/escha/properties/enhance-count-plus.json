@@ -1,0 +1,1 @@
+{"id":"enhance-count-plus","name":{"en":"Enhance Count+","ja":"回数ぶん超強化"},"desc":{"en":"Item power increases by (use count x15)%.","ja":"効果：アイテムの威力が、使用回数×１５％増加する。"},"grade":75,"points":25,"bomb":true,"heal":true,"buff":true,"index":285,"enum":"ITEM_POTENTIAL_COUNT_POWER_EX","advanced":{"PotBase":"ITEM_SUB_BTL_COUNT_POWER","min":"15"}}

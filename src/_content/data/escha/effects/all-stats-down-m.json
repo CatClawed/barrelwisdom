@@ -1,0 +1,1 @@
+{"id":"all-stats-down-m","name":{"en":"All Stats Down M","ja":"全能力ダウン・中"},"desc":{"en":"Decreases all of the target's stats by a fair amount.","ja":"対象の全ての能力の値を低下させる"},"items":[{"name":{"en":"Airto Blitz","ja":"エアトブリッツ"},"id":"airto-blitz"}],"index":55,"enum":"ITEM_EFF_SVDOWN_ALL_2","advanced":{"actTag":"ACT_MINUS_ALL","min_1":"7","min_2":"7"}}

@@ -1,0 +1,1 @@
+{"id":"recover-ko-l","name":{"en":"Recover KO L","ja":"戦闘不能も回復・弱"},"desc":{"en":"Revives the target and restores a small amount of HP.","ja":"対象の戦闘不能を回復し、ＨＰを少しだけ回復する"},"items":[{"name":{"en":"Cup of Life","ja":"生命の杯"},"id":"cup-of-life"}],"index":121,"enum":"ITEM_EFF_REVIVE_2","advanced":{"actTag":"ACT_CURE_REVIVE","actTag2":"ACT_HEAL_HP_TURN","min_1":"16","max_1":"23"}}

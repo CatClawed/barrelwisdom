@@ -1,0 +1,1 @@
+{"id":"swift-knowledge","name":{"en":"Swift Knowledge","ja":"速攻の心得"},"desc":{"en":"Reduces waiting time after using skills by 7%.","ja":"スキル使用時の行動後の待ち時間が、７％短縮される"},"items":[{"name":{"en":"Acrobatic Armor","ja":"軽業師の具足"},"id":"acrobatic-armor"}],"index":265,"enum":"ITEM_EFF_HASTE_GUIDE","advanced":{"actTag":"ACT_PASSIVE_REDUCE_WT_SKILL","min_1":"7"}}

@@ -1,0 +1,1 @@
+{"id":"health-prayer","name":{"en":"Health Prayer","ja":"頑健の願い"},"desc":{"en":"Transfers 15% of attack power and speed to defense power.","ja":"防御力の値に、攻撃力と素早さの値の１５％の数値が移し変えられる"},"items":[{"name":{"en":"Dusk Talisman","ja":"黄昏の魔除け"},"id":"dusk-talisman"}],"index":269,"enum":"ITEM_EFF_PRAY_GUARD","advanced":{"actTag":"ACT_EQUIP_PARAM_SPECILIZED","min_1":"1","min_2":"15"}}

@@ -1,0 +1,1 @@
+{"id":"all-stats-up-l","name":{"en":"All Stats Up L","ja":"全能力アップ・弱"},"desc":{"en":"Increases all the target's stats by a small amount for the next 5 turns.","ja":"対象の全ての能力の値を少しだけ上昇させる。効果は５回行動するまで持続する"},"items":[{"name":{"en":"Healing Cloud","ja":"癒しの浮雲"},"id":"healing-cloud"}],"index":195,"enum":"ITEM_EFF_ALL_UP_1","advanced":{"actTag":"ACT_PLUS_ALL","min_1":"5","min_2":"10"}}
