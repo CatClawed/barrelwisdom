@@ -42,7 +42,10 @@ const traitIcons = [
 {item.desc?.[lang] && <p>{item.desc[lang]} </p>}
   {item.grade && (
     <div style="margin-bottom: 1rem;">
-      <LevelPopover lang={lang} />
+      <LevelPopover
+        lang={lang}
+        description="A measure of rarity. This number determines where properties appear."
+      />
       {item.grade}
     </div>
   )}
@@ -50,7 +53,7 @@ const traitIcons = [
   {item.items && item.items.length > 0 && (
     <>
       <ul class="two-column-list">
-        {item.items.map((linkedItem: LinkData) => (
+        {item.items.map((linkedItem) => (
           <li><a href={`/${game}/items/${linkedItem.id}/${lang}`}>{linkedItem.name[lang]}</a></li>
         ))}
       </ul>

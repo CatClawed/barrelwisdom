@@ -41,7 +41,10 @@ const traitIcons = [
 {item.desc?.[lang] && <p>{item.desc[lang]} </p>}
   {item.grade && (
     <div style="margin-bottom: 1rem;">
-      <LevelPopover lang={lang} />
+      <LevelPopover
+        lang={lang}
+        description="A measure of rarity. This number determines where properties appear."
+      />
       {item.grade}
     </div>
   )}
