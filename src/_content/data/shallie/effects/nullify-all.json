@@ -1,0 +1,1 @@
+{"id":"nullify-all","name":{"en":"Nullify All","ja":"全てを無効化","sc":"使全部状态无效","tc":"使全部狀態無效"},"desc":{"en":"Nullifies all conditions.","ja":"全ての状態異常を無効化する"},"items":[{"name":{"en":"Angel Ribbon","ja":"エンゼルリボン"},"id":"angel-ribbon"}],"index":374,"enum":"ITEM_EFF_ANTI_ALL","advanced":{"actTag":"ACT_AUTO_RESIST_ALL"}}

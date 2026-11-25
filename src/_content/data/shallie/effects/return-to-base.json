@@ -1,0 +1,1 @@
+{"id":"return-to-base","name":{"en":"Return to Base","ja":"拠点に戻る","sc":"返回据点","tc":"返回據點"},"desc":{"en":"Instantly return to the workshop upon use.","ja":"使用すると、一瞬でアトリエに帰還することができるようになる"},"items":[{"name":{"en":"Travel Gate","ja":"トラベルゲート"},"id":"travel-gate"}],"index":237,"enum":"ITEM_EFF_RETURN","advanced":{"actTag":"ACT_RETURN_ATELIER"}}

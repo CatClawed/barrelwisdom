@@ -1,0 +1,1 @@
+{"id":"assist-recovery-m","name":{"en":"Assist Recovery-M","ja":"アシスト回復・中","sc":"支援恢复‧中","tc":"支援回復‧中"},"desc":{"en":"The recovery speed of assist actions increases by a fair amount.","ja":"アシスト行動の回復速度がやや上昇する"},"items":[],"index":258,"enum":"ITEM_EFF_ARM_SP_04","advanced":{"actTag":"ACT_PASSIVE_ADD_ASSIST_RECOVER","min_1":"2"}}

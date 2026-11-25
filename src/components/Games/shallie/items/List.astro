@@ -1,0 +1,115 @@
+---
+import { category_translation, level_translation } from '@app/localization/translations/common-strings';
+import Dropdown from '@components/Games/_common/Filter/Dropdown.astro';
+import FilterButton from '@components/Games/_common/Filter/FilterButton.astro';
+import ItemList from '@components/Games/_common/List/ItemList.astro';
+import PaneListWrapper from '@components/Games/_common/List/PaneListWrapper.astro';
+import TextFilter from '@components/Games/_common/Filter/TextFilter.astro';
+import ItemAttributeList from './ItemAttributeList.astro';
+import { itemElements } from '@app/components/Games/escha/escha_constants';
+
+const { items, lang, title, game, section } = Astro.props;
+const categories = new Map<string, { id: string; label: string; icon?: string }>();
+for (const item of items) {
+  for (const category of item.data.categories ?? []) {
+    const label = category.name[lang];
+    if (label && !categories.has(category.id)) {
+      categories.set(category.id, {
+        id: category.id,
+        label,
+        icon: category.icon
+          ? `/spritesheets/${game}.svg?v=1#${category.icon}`
+          : undefined,
+      });
+    }
+  }
+}
+const categoryOptions = [...categories.values()];
+items.sort((a, b) => (a.data.index ?? 0) - (b.data.index ?? 0));
+---
+
+<PaneListWrapper title={title} section={section} game={game} lang={lang}>
+  <div class="filters" slot="filters">
+    <TextFilter gridSize={8} lang={lang} />
+    <Dropdown
+      options={categoryOptions}
+      name="category"
+      placeholder={category_translation[lang]}
+      lang={lang}
+    />
+    <FilterButton
+      svg={`${game}.svg?v=1`}
+      name="elements"
+      gridSpan={8}
+      list={itemElements.map((element) => ({
+        filterKey: element.id,
+        icon: `element-${element.id}`,
+      }))}
+    />
+  </div>
+
+  {items.map((entry, index) => {
+    const item = entry.data;
+    const searchText = [
+      item.name[lang],
+      item.desc?.[lang],
+      ...(item.properties ?? []).map((property) => property.name[lang]),
+      ...(item.ingredients ?? []).flatMap((ingredient) => [
+        ingredient.item?.name[lang],
+        ingredient.category?.name[lang],
+      ]),
+      ...(item.effectlines ?? []).map((line) => line.effect?.name[lang]),
+    ].filter(Boolean).join(' ').toLowerCase();
+
+    return (
+      <ItemList
+        item={entry}
+        img={`/media/games/${game}/${section}/${entry.id}.webp`}
+        index={index}
+        section={section}
+        lang={lang}
+        game={game}
+        data-id={entry.id}
+        data-search={searchText}
+        data-category={item.categories?.map((category) => category.id).join(',')}
+        data-elements={itemElements
+          .filter((element) => item[element.id])
+          .map((element) => element.id)
+          .join(',')}
+        data-fire={item.fire ? 'fire' : ''}
+        data-water={item.water ? 'water' : ''}
+        data-wind={item.wind ? 'wind' : ''}
+        data-earth={item.earth ? 'earth' : ''}
+      >
+        {item.level !== undefined && (
+          <b slot="title-matter">{level_translation[lang]} {item.level}</b>
+        )}
+        <ItemAttributeList
+          cats={item.categories}
+          lang={lang}
+          game={game}
+          evalue={item.evalue}
+          fire={item.fire}
+          water={item.water}
+          wind={item.wind}
+          earth={item.earth}
+          slots={item.slots}
+        />
+      </ItemList>
+    );
+  })}
+</PaneListWrapper>
+
+<script>
+  import { initListFilters } from '@app/utils/filter-controller';
+  import { initPaneController } from '@app/utils/detail-pane-controller';
+  const list = document.getElementById('item-list');
+  initListFilters({
+    lang: list?.dataset.lang ?? '',
+    filters: [
+      { type: 'select', key: 'category', elementId: 'category' },
+      { type: 'buttons', key: 'elements', groupName: 'elements', mode: 'all', excludeFullMatch: false },
+    ],
+  });
+  initPaneController();
+</script>

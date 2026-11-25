@@ -1,0 +1,1 @@
+{"id":"clears-the-mind","name":{"en":"Clears the Mind","ja":"頭がさえる","sc":"灵光一现","tc":"靈光一現"},"desc":{"en":"Clears the mind, recovering a small amount of Break value.","ja":"頭をさえさせ、ブレイク値を少しだけ回復させる"},"items":[{"name":{"en":"Healing Aroma","ja":"癒やしのアロマ"},"id":"healing-aroma"}],"index":155,"enum":"ITEM_EFF_HEAL_MPBONUS_2","advanced":{"actTag":"ACT_HEAL_STUN","min_1":"75"}}

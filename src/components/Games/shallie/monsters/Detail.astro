@@ -1,0 +1,78 @@
+---
+import {
+  item_translation,
+  location_translation,
+} from '@app/localization/translations/common-strings';
+
+const { item, lang, game, section } = Astro.props as any;
+---
+
+<div class="card">
+  <div class="card-title">
+    <h3>{item.name[lang]}</h3>
+    <svg class="medium-icon" aria-label={item.kind}>
+      <use href={`/spritesheets/${game}.svg?v=1#race-${item.kind}`} />
+    </svg>
+  </div>
+
+  <div class="image-desc-display">
+    <img
+      src={`/media/games/${game}/${section}/${item.id}.webp?v=1`}
+      alt={item.name[lang]}
+      style="aspect-ratio: 1; width: 218px;"
+    />
+    <div>
+      {item.desc?.[lang] && <p>{item.desc[lang]}</p>}
+      {item.note && <p>{item.note}</p>}
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="grid-6">
+      {item.locations?.length > 0 && (
+        <>
+          <b>{location_translation[lang]}</b>
+          <ul>
+            {item.locations.map((location: any) => (
+              <li>
+                <a
+                  href={`/${game}/locations/${location.parent ?? location.id}/${lang}${location.parent ? `#${location.id}` : ''}`}
+                >
+                  {location.name[lang]}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+      {item.drops?.length > 0 && (
+        <>
+          <b>{item_translation[lang]}</b>
+          <ul>
+            {item.drops.map((drop: any) => (
+              <li>
+                <a href={`/${game}/items/${drop.id}/${lang}`}>
+                  {drop.name[lang]}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+    </div>
+
+    <div class="grid-6">
+      <table class="table-item-data tbl-transparent">
+        <tbody>
+          <tr><td><b>LV</b></td><td>{item.level}</td></tr>
+          <tr><td><b>HP</b></td><td>{item.hp}</td></tr>
+          <tr><td><b>ATK</b></td><td>{item.atk}</td></tr>
+          <tr><td><b>DEF</b></td><td>{item.defen}</td></tr>
+          <tr><td><b>SPD</b></td><td>{item.spd}</td></tr>
+          <tr><td><b>Exp</b></td><td>{item.exp}</td></tr>
+          <tr><td><b>Cole</b></td><td>{item.cole}</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

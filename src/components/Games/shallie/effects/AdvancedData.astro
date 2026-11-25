@@ -1,0 +1,35 @@
+---
+
+const { item } = Astro.props;
+const entries = Object.entries(item).filter(
+  (entry): entry is [string, string] =>
+    entry[0] !== 'effects' && typeof entry[1] === 'string' && Boolean(entry[1]),
+);
+---
+
+<ul>
+  {
+    entries.map(([key, value]) => (
+      <li>
+        <b>{key}: </b>{value}
+      </li>
+    ))
+  }
+  {item.effects && item.effects.length > 0 && (
+    <li>
+      <b>Effects:</b>
+      <ul>
+        {item.effects.map((effect, index: number) => (
+          <li>
+            <b>Effect {index + 1}:</b>
+            <ul>
+              {Object.entries(effect.advanced).filter((entry): entry is [string, string] => Boolean(entry[1])).map(([key, value]) => (
+                <li><b>{key}: </b>{value}</li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ul>
+    </li>
+  )}
+</ul>

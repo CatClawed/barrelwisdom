@@ -1,0 +1,1 @@
+{"id":"soul-dwelling","name":{"en":"Soul Dwelling","ja":"魂宿り","sc":"宿魂","tc":"宿魂"},"desc":{"en":"Effect: Greatly increases the target's level.","ja":"効果：対象のレベルを大幅に上昇させる"},"grade":120,"points":30,"heal":true,"index":283,"enum":"ITEM_POTENTIAL_YOBI_102","advanced":{"PotBase":"ITEM_SUB_BTL_ADD_USEEFFECT","effects":[{"advanced":{"actTag":"ACT_PLUS_LEVEL","min_1":"10"}}]}}

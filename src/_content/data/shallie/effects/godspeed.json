@@ -1,0 +1,1 @@
+{"id":"godspeed","name":{"en":"Godspeed","ja":"迅速を与える","sc":"给予迅速","tc":"給予迅速"},"desc":{"en":"Increases speed by 25.","ja":"素早さの値が２５上昇する"},"items":[{"name":{"en":"Gunade Ring","ja":"グナーデリング"},"id":"gunade-ring"}],"index":327,"enum":"ITEM_EFF_ADD_SPEED_2","advanced":{"actTag":"ACT_EQUIP_ADD_PARAM_SPD","min_1":"25"}}

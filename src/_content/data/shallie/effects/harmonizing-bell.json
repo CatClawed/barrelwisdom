@@ -1,0 +1,1 @@
+{"id":"harmonizing-bell","name":{"en":"Harmonizing Bell","ja":"調和の鈴音","sc":"谐和的铃音","tc":"諧和的鈴音"},"desc":{"en":"Increases fill rate of Burst gauge by 4％.","ja":"行動時のバーストゲージの増加量が４％増える"},"items":[{"name":{"en":"Brother Call","ja":"ブラザーコール"},"id":"brother-call"}],"index":297,"enum":"ITEM_EFF_RING_HARMONY","advanced":{"actTag":"ACT_PASSIVE_BURST_BONUS","min_1":"40"}}

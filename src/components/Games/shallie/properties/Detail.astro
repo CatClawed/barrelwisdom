@@ -1,0 +1,76 @@
+---
+import AdvancedData from '../effects/AdvancedData.astro';
+import Popover from '@app/components/Games/_common/Popover.astro';
+import Trait from '@app/components/Games/_common/Detail/Trait.astro';
+import { level_translation } from '@app/localization/translations/common-strings';
+
+const { item, lang, mode, game, section } = Astro.props;
+const combos = [item.combo1, item.combo2, item.combo3].filter(
+  (combo) => Boolean(combo),
+);
+const traitIcons = [
+  { key: "bomb",       icon: 'bomb' },
+  { key: "heal",       icon: 'heal' },
+  { key: "weapon",     icon: 'weapon' },
+  { key: "armor",      icon: 'armor' },
+  { key: "accessory",  icon: 'accessory' }
+];
+---
+<Trait
+  trait={item}
+  mode={mode}
+  game={game}
+  lang={lang}
+  section={section}
+  icons={traitIcons}
+>
+<div class="card-icon-position" slot="top-level">
+  {item.points !== undefined && <span>PP {item.points}</span>}
+</div>
+{combos.length > 0 && (
+    <p>
+      {combos.map((combo, index) => (
+        <>
+          {index > 0 && ' x '}
+          <a href={`/${game}/properties/${combo.id}/${lang}`}>{combo.name[lang]}</a>
+        </>
+      ))}
+    </p>
+  )}
+  
+{item.desc?.[lang] && <p>{item.desc[lang]} </p>}
+  {item.grade && (
+    <div style="margin-bottom: 1rem;">
+      <Popover cls="dashed">
+        <span style="padding-right: 0.3rem;" slot="trigger">{level_translation[lang]}:</span>
+        <p>A measure of rarity. This number determines where traits appear.</p>
+      </Popover>
+      {item.grade}
+    </div>
+  )}
+
+  {item.items && item.items.length > 0 && (
+    <>
+      <ul class="two-column-list">
+        {item.items.map((linkedItem: LinkData) => (
+          <li><a href={`/${game}/items/${linkedItem.id}/${lang}`}>{linkedItem.name[lang]}</a></li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  {item.advanced && Object.keys(item.advanced).length > 0 && (
+    mode === 'list' ? (
+      <Popover cls="dashed" restrainWidth={true}>
+        <span slot="trigger">Advanced Data</span>
+        <AdvancedData item={item.advanced} />
+      </Popover>
+    ) : (
+      <>
+        <b>Advanced Data:</b>
+        <AdvancedData item={item.advanced} />
+      </>
+    )
+  )}
+</Trait>
+

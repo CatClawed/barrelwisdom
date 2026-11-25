@@ -1,0 +1,1 @@
+{"id":"nullify-one-hit-ko","name":{"en":"Nullify One Hit KO","ja":"一撃ダウンを無効化","sc":"使一击倒地无效","tc":"使一擊倒地無效"},"desc":{"en":"Nullifies instant KO condition.","ja":"戦闘不能効果を無効化する"},"items":[{"name":{"en":"Angel Ribbon","ja":"エンゼルリボン"},"id":"angel-ribbon"}],"index":373,"enum":"ITEM_EFF_ANTI_DEAD","advanced":{"actTag":"ACT_AUTO_RESIST_DEATH"}}

@@ -1,0 +1,1 @@
+{"id":"mp-recovery-xxl","name":{"en":"MP Recovery-XXL","ja":"ＭＰ回復・超大","sc":"ＭＰ恢复‧超大","tc":"ＭＰ回復‧超大"},"desc":{"en":"The target recovers a huge amount of MP.","ja":"対象のＭＰを非常に大きく回復する"},"items":[{"name":{"en":"Elixir","ja":"エリキシル剤"},"id":"elixir"}],"index":126,"enum":"ITEM_EFF_DELIVERY_14","advanced":{"actTag":"ACT_HEAL_MP","min_1":"53","max_1":"75"}}

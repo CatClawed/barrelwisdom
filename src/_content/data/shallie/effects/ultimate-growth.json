@@ -1,0 +1,1 @@
+{"id":"ultimate-growth","name":{"en":"Ultimate Growth","ja":"究極の成長力","sc":"终极的成长力","tc":"終極的成長力"},"desc":{"en":"Gain ultimate growth. Damage increases by a large amount.","ja":"究極の成長力を得る。ダメージの期待値が大幅に上昇する"},"items":[{"name":{"en":"Thunder Outfit","ja":"雷神のころも"},"id":"thunder-outfit"}],"index":442,"enum":"ITEM_EFF_YOBI_120","advanced":{"actTag":"ACT_EQUIP_PARAM_LEVEL","min_1":"8"}}

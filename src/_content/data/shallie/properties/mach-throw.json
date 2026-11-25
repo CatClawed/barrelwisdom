@@ -1,0 +1,1 @@
+{"id":"mach-throw","name":{"en":"Mach Throw","ja":"マッハスロー","sc":"马赫投掷","tc":"馬赫投擲"},"desc":{"en":"Effect: Wait time after using the item is reduced by 50％.","ja":"効果：アイテム使用時のＷＴの戻り値が、５０％短縮される"},"grade":75,"points":25,"bomb":true,"heal":true,"index":260,"enum":"ITEM_POTENTIAL_QUICK_USE_3_EX","advanced":{"PotBase":"ITEM_SUB_BTL_QUICK_USE","min":"50"}}

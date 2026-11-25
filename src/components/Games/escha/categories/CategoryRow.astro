@@ -1,20 +1,10 @@
 ---
-import { level_translation } from '@app/localization/translations/common-strings';
 import { itemElements } from '@app/components/Games/escha/escha_constants';
+import { level_translation } from '@app/localization/translations/common-strings';
 
-interface Item {
-  id: string;
-  name: Record<string, string | undefined>;
-  level?: number;
-  evalue?: number;
-  fire?: boolean;
-  water?: boolean;
-  wind?: boolean;
-  earth?: boolean;
-}
 
 interface Props {
-  item: Item;
+  item;
   lang: string;
   game: string;
 }

@@ -1,0 +1,1 @@
+{"id":"ultimate-reduction","name":{"en":"Ultimate Reduction","ja":"究極の軽減力","sc":"终极的减轻力","tc":"終極的減輕力"},"desc":{"en":"Gain ultimate reduction. Reduce all damage by 10％.","ja":"究極の軽減力を得る。全てのダメージを１０％軽減する"},"items":[{"name":{"en":"Escape Jewel","ja":"逃げ足のアクセ"},"id":"escape-jewel"}],"index":453,"enum":"ITEM_EFF_YOBI_132","advanced":{"actTag":"ACT_AUTO_DAMAGE_REDUCE","min_1":"10"}}

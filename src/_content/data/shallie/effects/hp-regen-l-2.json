@@ -1,0 +1,1 @@
+{"id":"hp-regen-l-2","name":{"en":"HP Regen-L","ja":"ＨＰ再生・強","sc":"ＨＰ再生‧强","tc":"ＨＰ再生‧強"},"desc":{"en":"Recover HP every turn.","ja":"行動時にＨＰが回復する"},"items":[],"index":404,"enum":"ITEM_EFF_YOBI_031","advanced":{"actTag":"ACT_AUTO_HP_TURN","min_1":"10"}}

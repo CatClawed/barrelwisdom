@@ -1,0 +1,1 @@
+{"id":"tempers-the-mind","name":{"en":"Tempers the Mind","ja":"精心を鍛える","sc":"锻炼精心","tc":"鍛鍊精心"},"desc":{"en":"Increases maximum MP value by 25.","ja":"最大ＭＰの値が２５上昇する"},"items":[{"name":{"en":"One Angle Mascara","ja":"一つ角のマスケラ"},"id":"one-angle-mascara"}],"index":320,"enum":"ITEM_EFF_ADD_MP_2","advanced":{"actTag":"ACT_EQUIP_ADD_PARAM_MP","min_1":"25"}}

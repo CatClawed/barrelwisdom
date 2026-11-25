@@ -1,0 +1,1 @@
+{"id":"speed-15","name":{"en":"Speed +15","ja":"素早さ＋１５","sc":"敏捷＋１５","tc":"敏捷＋１５"},"desc":{"en":"Causes accessory to increase speed. Effect: Increases speed by 15.","ja":"装飾品に素早さを上げる効果を付与する。効果：素早さが１５上昇する"},"grade":8,"points":3,"weapon":true,"armor":true,"accessory":true,"index":108,"enum":"ITEM_POTENTIAL_SPD_3","advanced":{"PotBase":"ITEM_SUB_EQI_ADD_SPEED","min":"15"}}

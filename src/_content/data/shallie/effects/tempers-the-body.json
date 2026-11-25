@@ -1,0 +1,1 @@
+{"id":"tempers-the-body","name":{"en":"Tempers the Body","ja":"体を鍛える","sc":"锻炼身体","tc":"鍛鍊身體"},"desc":{"en":"Increases maximum HP value by 15.","ja":"最大ＨＰの値が１５上昇する"},"items":[{"name":{"en":"One Angle Mascara","ja":"一つ角のマスケラ"},"id":"one-angle-mascara"}],"index":317,"enum":"ITEM_EFF_ADD_HP_1","advanced":{"actTag":"ACT_EQUIP_ADD_PARAM_HP","min_1":"15"}}

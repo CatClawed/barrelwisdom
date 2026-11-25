@@ -1,0 +1,1 @@
+{"id":"force-soul","name":{"en":"Force Soul","ja":"理力のソウル","sc":"理力之魂","tc":"理力之魂"},"desc":{"en":"A force soul enhances the material it inhabits. Effect: Adds extra damage.","ja":"理力のソウルが、宿った物質を強化する。効果：追加ダメージ発生"},"grade":120,"points":40,"weapon":true,"index":242,"enum":"ITEM_POTENTIAL_FORCE_AURA_ESP","advanced":{"PotBase":"ITEM_SUB_ADD_PLUS_DAMAGE","min":"100"}}

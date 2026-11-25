@@ -1,0 +1,1 @@
+{"id":"mp-consume-xs","name":{"en":"MP Consume-XS","ja":"ＭＰ消費・微","sc":"ＭＰ消耗‧微","tc":"ＭＰ消耗‧微"},"desc":{"en":"Consumes a minute amount of MP. The effect is weakened if there is not enough MP.","ja":"ＭＰを微量消費する。ＭＰが足りなかった場合、効果が弱くなってしまう"},"items":[{"name":{"en":"Uni","ja":"ウニ"},"id":"uni"}],"index":193,"enum":"ITEM_EFF_COST_MP_0","advanced":{"actTag":"ACT_CONSUME_MP","min_1":"15"}}

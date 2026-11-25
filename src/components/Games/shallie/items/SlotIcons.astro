@@ -1,0 +1,47 @@
+---
+interface Props {
+  count?: number;
+  game: string;
+}
+
+const { count = 0, game } = Astro.props;
+---
+
+{count > 0 && (
+  <div class="slot-icons">
+    {Array.from({ length: count }, () => (
+      <>
+        <span class="slot-card" aria-hidden="true" />
+      </>
+    ))}
+  </div>
+)}
+
+<style>
+  .slot-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+  }
+  .slot-card {
+    position: relative;
+    display: inline-block;
+    width: 1em;
+    height: 1.5em;
+    box-sizing: border-box;
+    border-radius: 0.2em;
+    background: #6b93a6;
+  }
+  .slot-card::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.6em;
+    height: 0.6em;
+    border-radius: 50%;
+    background: #ead090;
+    content: '';
+    transform: translate(-50%, -50%);
+  }
+</style>

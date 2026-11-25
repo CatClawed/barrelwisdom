@@ -1,0 +1,1 @@
+{"id":"ultimate-resistance","name":{"en":"Ultimate Resistance","ja":"究極の耐性力","sc":"终极的耐性力","tc":"終極的耐性力"},"desc":{"en":"Gain ultimate resistance. Resistance against all ailments.","ja":"究極の耐性力を得る。全ての状態異常への耐性を得る"},"items":[{"name":{"en":"Escape Jewel","ja":"逃げ足のアクセ"},"id":"escape-jewel"}],"index":449,"enum":"ITEM_EFF_YOBI_128","advanced":{"actTag":"ACT_AUTO_RESIST_ALL"}}

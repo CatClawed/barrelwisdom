@@ -1,0 +1,1 @@
+{"id":"draws-attention-2","name":{"en":"Draws Attention","ja":"注意を引きつける","sc":"引来注意","tc":"引來注意"},"desc":{"en":"Greatly increases the chance that enemies will decide to attack the user of this effect.","ja":"対象がこの効果の使用者を攻撃対象にする確率を大きく上昇させる"},"items":[],"index":96,"enum":"ITEM_EFF_REVIVE_BONUS_1","advanced":{"actTag":"ACT_AVOID_TARGET","min_1":"50"}}

@@ -1,0 +1,1 @@
+{"id":"attack-power-down-m","name":{"en":"Attack Power Down-M","ja":"攻撃力ダウン・中","sc":"攻击力下降‧中","tc":"攻擊力下降‧中"},"desc":{"en":"Reduces attack power of the target.","ja":"対象の攻撃力の値を低下させる"},"items":[{"name":{"en":"Lightning Bomb","ja":"ドナーストーン"},"id":"lightning-bomb"}],"index":71,"enum":"ITEM_EFF_POWER_DOWN_2","advanced":{"actTag":"ACT_MINUS_ATK","min_1":"15"}}

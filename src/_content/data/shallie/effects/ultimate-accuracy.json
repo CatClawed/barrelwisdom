@@ -1,0 +1,1 @@
+{"id":"ultimate-accuracy","name":{"en":"Ultimate Accuracy","ja":"究極の命中力","sc":"终极的命中力","tc":"終極的命中力"},"desc":{"en":"Gain ultimate accuracy. Accuracy increases by 50％.","ja":"究極の命中力を得る。命中率が５０％上昇する"},"items":[{"name":{"en":"Chronicle Shield","ja":"クロニクルシールド"},"id":"chronicle-shield"}],"index":447,"enum":"ITEM_EFF_YOBI_126","advanced":{"actTag":"ACT_EQUIP_ADD_HITRATE","min_1":"50"}}

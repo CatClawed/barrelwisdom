@@ -1,0 +1,1 @@
+{"id":"ultimate-power-up","name":{"en":"Ultimate Power Up","ja":"究極の強化力","sc":"终极的强化力","tc":"終極的強化力"},"desc":{"en":"Gain ultimate power up. Maximum HP and MP increases by 35.","ja":"究極の強化力を得る。最大ＨＰとＭＰが３５上昇する"},"items":[],"index":439,"enum":"ITEM_EFF_YOBI_117","advanced":{"actTag":"ACT_EQUIP_ADD_PARAM_HP","actTag2":"ACT_EQUIP_ADD_PARAM_MP","min_1":"35","min_3":"35"}}

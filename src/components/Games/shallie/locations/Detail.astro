@@ -1,0 +1,80 @@
+---
+import {
+  item_translation,
+  monster_translation,
+} from '@app/localization/translations/common-strings';
+
+const { item, lang, game, section } = Astro.props as any;
+const fields = item.fields ?? [];
+---
+
+<h1>{item.name[lang]}</h1>
+
+{fields.length > 0 && (
+  <div class="table-of-contents">
+    <ol>
+      {fields.map((field: any) => (
+        <li>
+          <a href={`/${game}/${section}/${item.id}/${lang}#${field.id}`}>
+            {field.name?.[lang]}
+          </a>
+        </li>
+      ))}
+    </ol>
+  </div>
+)}
+
+{fields.map((field: any) => {
+  const columns = [
+    { key: 'ingredients', label: item_translation[lang] },
+    { key: 'rare', label: 'Rare' },
+    { key: 'relics', label: 'Relic' },
+    { key: 'monsters', label: monster_translation[lang] },
+  ].filter(({ key }) => field[key]?.length > 0);
+
+  return (
+    <>
+      <h2 id={field.id}>{field.name?.[lang]}</h2>
+      {field.note && <div set:html={field.note} />}
+      {columns.length > 0 && (
+        <table class="tbl borders">
+          <thead>
+            <tr>{columns.map((column) => <th>{column.label}</th>)}</tr>
+          </thead>
+          <tbody>
+            <tr>
+              {columns.map((column) => (
+                <td>
+                  <ul class="hide-bullets">
+                    {field[column.key].map((entry: any) => (
+                      <li>
+                        <a
+                          href={`/${game}/${column.key === 'monsters' ? 'monsters' : 'items'}/${entry.id}/${lang}`}
+                        >
+                          {entry.name?.[lang]}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </td>
+              ))}
+            </tr>
+          </tbody>
+        </table>
+      )}
+    </>
+  );
+})}
+
+<style>
+  .tbl td {
+    text-align: left;
+    vertical-align: top;
+  }
+  .hide-bullets {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+  }
+</style>

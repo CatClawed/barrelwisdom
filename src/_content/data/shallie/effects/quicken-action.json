@@ -1,0 +1,1 @@
+{"id":"quicken-action","name":{"en":"Quicken Action","ja":"行動を速める","sc":"加快行动","tc":"加快行動"},"desc":{"en":"Moves the target's turn ahead by a small amount.","ja":"対象の行動順を少しだけ先に進める"},"items":[{"name":{"en":"Time Watch","ja":"時操の懐中時計"},"id":"time-watch"}],"index":217,"enum":"ITEM_EFF_YOBI_092","advanced":{"actTag":"ACT_ACCELARATE_WT","min_1":"200"}}

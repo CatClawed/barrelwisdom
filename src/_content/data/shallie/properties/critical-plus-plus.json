@@ -1,0 +1,1 @@
+{"id":"critical-plus-plus","name":{"en":"Critical++","ja":"クリティカル＋＋","sc":"重击＋＋","tc":"重擊＋＋"},"desc":{"en":"Effect: Increases the item's critical chance by 35％.","ja":"効果：アイテムが３５％の確率でクリティカルする"},"grade":35,"points":12,"bomb":true,"heal":true,"index":48,"enum":"ITEM_POTENTIAL_CRITICAL_3","advanced":{"PotBase":"ITEM_SUB_ITM_ADD_EFFCRIT","min":"35"}}

@@ -1,0 +1,1 @@
+{"id":"speed-up-s","name":{"en":"Speed Up-S","ja":"素早さアップ・弱","sc":"提升敏捷‧弱","tc":"提升敏捷‧弱"},"desc":{"en":"Increases the target's speed by a small amount. The effect lasts for 5 turns.","ja":"対象の素早さを少しだけ上昇させる。効果は５回行動するまで持続する"},"items":[],"index":202,"enum":"ITEM_EFF_SPEED_UP_1","advanced":{"actTag":"ACT_PLUS_SPD","min_1":"25"}}

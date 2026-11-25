@@ -1,0 +1,1 @@
+{"id":"ultimate-dodge","name":{"en":"Ultimate Dodge","ja":"究極の回避力","sc":"终极的回避力","tc":"終極的迴避力"},"desc":{"en":"Gain ultimate dodge. Ability to dodge enemy attacks increase by 15％.","ja":"究極の回避力を得る。回避率が１５％上昇する"},"items":[{"name":{"en":"Planet Sphere","ja":"プラネットスフィア"},"id":"planet-sphere"}],"index":456,"enum":"ITEM_EFF_YOBI_139","advanced":{"actTag":"ACT_AUTO_DODGE","min_1":"15"}}

@@ -1,0 +1,1 @@
+{"id":"hp-recovery-l","name":{"en":"HP Recovery-L","ja":"ＨＰ回復・強","sc":"ＨＰ恢复‧强","tc":"ＨＰ回復‧強"},"desc":{"en":"The target recovers a large amount of HP.","ja":"対象のＨＰを大きく回復する"},"items":[{"name":{"en":"Elixir","ja":"エリキシル剤"},"id":"elixir"}],"index":118,"enum":"ITEM_EFF_HEAL_HP_3","advanced":{"actTag":"ACT_HEAL_HP","min_1":"74","max_1":"105"}}

@@ -1,0 +1,1 @@
+{"id":"last-strike","name":{"en":"Last Strike","ja":"ラストストライク","sc":"最后的强击","tc":"最後的強擊"},"desc":{"en":"Effect: Increases power by 45％ when there is 1 use count left.","ja":"効果：使用回数が１回の時に、威力が４５％アップする"},"grade":50,"points":17,"bomb":true,"heal":true,"index":259,"enum":"ITEM_POTENTIAL_LAST_UP_EX","advanced":{"PotBase":"ITEM_SUB_BTL_LAST_BONUS","min":"45"}}

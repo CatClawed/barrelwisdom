@@ -1,0 +1,1 @@
+{"id":"tempers-the-heart","name":{"en":"Tempers the Heart","ja":"心を鍛える","sc":"锻炼心志","tc":"鍛鍊心志"},"desc":{"en":"Increases maximum MP value by 15.","ja":"最大ＭＰの値が１５上昇する"},"items":[{"name":{"en":"One Angle Mascara","ja":"一つ角のマスケラ"},"id":"one-angle-mascara"}],"index":319,"enum":"ITEM_EFF_ADD_MP_1","advanced":{"actTag":"ACT_EQUIP_ADD_PARAM_MP","min_1":"15"}}

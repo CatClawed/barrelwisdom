@@ -1,0 +1,1 @@
+{"id":"evade-attack-m","name":{"en":"Evade Attack-M","ja":"攻撃回避・中","sc":"攻击回避‧中","tc":"攻擊迴避‧中"},"desc":{"en":"Increases evasion rate by 5％.","ja":"攻撃の回避率が５％上昇する"},"items":[{"name":{"en":"Feather Ornament","ja":"羽根飾りのアクセ"},"id":"feather-ornament"}],"index":411,"enum":"ITEM_EFF_YOBI_040","advanced":{"actTag":"ACT_AUTO_DODGE","min_1":"5"}}

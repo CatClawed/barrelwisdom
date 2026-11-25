@@ -1,0 +1,1 @@
+{"id":"jumbo-blessing","name":{"en":"Jumbo Blessing","ja":"ジャンボな祝福","sc":"巨大的祝福","tc":"巨大的祝福"},"desc":{"en":"Effect: Item's effect is enhanced by equipment frames x 10％.","ja":"効果：アイテムの効果を装備枠×７％強化する"},"grade":120,"points":40,"bomb":true,"heal":true,"index":269,"enum":"ITEM_POTENTIAL_PROTECT_ICE","advanced":{"PotBase":"ITEM_SUB_COST_PROPORTION_BONUS","min":"7"}}

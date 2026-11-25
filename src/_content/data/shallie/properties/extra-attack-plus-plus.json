@@ -1,0 +1,1 @@
+{"id":"extra-attack-plus-plus","name":{"en":"Extra Attack++","ja":"追加攻撃＋＋","sc":"追加攻击＋＋","tc":"追加攻擊＋＋"},"desc":{"en":"Effect: Adds a fair amount of extra damage to attacks.","ja":"効果：攻撃時にやや小さな追加ダメージを発生させる"},"grade":10,"points":4,"weapon":true,"index":300,"enum":"ITEM_POTENTIAL_YOBI_111","advanced":{"PotBase":"ITEM_SUB_ADD_PLUS_DAMAGE","min":"15"}}

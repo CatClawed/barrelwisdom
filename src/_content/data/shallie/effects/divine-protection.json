@@ -1,0 +1,1 @@
+{"id":"divine-protection","name":{"en":"Divine Protection","ja":"加護を与える","sc":"给予庇护","tc":"給予庇護"},"desc":{"en":"Increases defense by 25.","ja":"防御力の値が２５上昇する"},"items":[{"name":{"en":"Gunade Ring","ja":"グナーデリング"},"id":"gunade-ring"}],"index":325,"enum":"ITEM_EFF_ADD_PHY_2","advanced":{"actTag":"ACT_EQUIP_ADD_PARAM_DEF","min_1":"25"}}

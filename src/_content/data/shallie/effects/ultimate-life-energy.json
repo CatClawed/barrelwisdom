@@ -1,0 +1,1 @@
+{"id":"ultimate-life-energy","name":{"en":"Ultimate Life Energy","ja":"究極の生命力","sc":"终极的生命力","tc":"終極的生命力"},"desc":{"en":"Gain ultimate life energy. Increases maximum HP by 50.","ja":"究極の生命力を得る。最大ＨＰが５０上昇する"},"items":[{"name":{"en":"Stone Coin","ja":"貴石のコイン"},"id":"stone-coin"}],"index":427,"enum":"ITEM_EFF_YOBI_105","advanced":{"actTag":"ACT_EQUIP_ADD_PARAM_HP","min_1":"50"}}

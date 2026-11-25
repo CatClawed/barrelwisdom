@@ -1,0 +1,1 @@
+{"id":"resonating-bell","name":{"en":"Resonating Bell","ja":"共鳴の鈴音","sc":"共鸣的铃音","tc":"共鳴的鈴音"},"desc":{"en":"Increases fill rate of Burst gauge by 3.","ja":"行動時のバーストゲージの増加量が３％増える"},"items":[{"name":{"en":"Brother Call","ja":"ブラザーコール"},"id":"brother-call"}],"index":296,"enum":"ITEM_EFF_RING_ECHO","advanced":{"actTag":"ACT_PASSIVE_BURST_BONUS","min_1":"30"}}

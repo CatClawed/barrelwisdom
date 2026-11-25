@@ -1,0 +1,1 @@
+{"id":"evolving-body","name":{"en":"Evolving Body","ja":"エボルブボディ","sc":"灵体进化","tc":"靈體進化"},"desc":{"en":"Effect: Increases all base stats by 33％.","ja":"効果：基本のステータスが３３％上昇する"},"grade":120,"points":40,"armor":true,"index":272,"enum":"ITEM_POTENTIAL_PROTECT_MYSTIC","advanced":{"PotBase":"ITEM_SUB_EVOLVE_STATUS","min":"33"}}

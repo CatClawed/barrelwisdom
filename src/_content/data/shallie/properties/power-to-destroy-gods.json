@@ -1,0 +1,1 @@
+{"id":"power-to-destroy-gods","name":{"en":"Power to Destroy Gods","ja":"神を破壊せし力","sc":"破坏神之力","tc":"破壞神之力"},"desc":{"en":"Effect: Increases item's effect by 40％.","ja":"効果：アイテムの効果が、４０％上昇する"},"grade":99,"points":33,"bomb":true,"index":249,"enum":"ITEM_POTENTIAL_DMGPLUS_EX","advanced":{"PotBase":"ITEM_SUB_ITM_CHANGE_POWER","min":"40"}}

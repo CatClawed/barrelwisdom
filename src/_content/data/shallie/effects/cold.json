@@ -1,0 +1,1 @@
+{"id":"cold","name":{"en":"Cold","ja":"つめた～い","sc":"清凉凉～","tc":"清涼涼～"},"desc":{"en":"Coldness dulls the body, reducing the target's speed by a small amount.","ja":"冷たさで体の動きが鈍り、対象の素早さが少し下がる"},"items":[{"name":{"en":"Herbal Soup","ja":"香草のスープ"},"id":"herbal-soup"}],"index":218,"enum":"ITEM_EFF_RESIST_FIRE_1","advanced":{"actTag":"ACT_MINUS_SPD","min_1":"10"}}

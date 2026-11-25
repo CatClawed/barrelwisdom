@@ -1,0 +1,1 @@
+{"id":"multi-bonus","name":{"en":"Multi Bonus","ja":"マルチボーナス","sc":"团体奖励","tc":"團體獎勵"},"desc":{"en":"Effect: Increases power by number of targets affected x 20％.","ja":"効果：効果範囲の対象×２０％、威力がアップする"},"grade":50,"points":17,"bomb":true,"heal":true,"index":256,"enum":"ITEM_POTENTIAL_MULTI_UP_EX","advanced":{"PotBase":"ITEM_SUB_BTL_LARGE_ENEMYBONUS","min":"20"}}

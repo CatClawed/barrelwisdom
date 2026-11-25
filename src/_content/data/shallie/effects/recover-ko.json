@@ -1,0 +1,1 @@
+{"id":"recover-ko","name":{"en":"Recover KO","ja":"気絶値を回復","sc":"恢复昏迷值","tc":"回復昏迷值"},"desc":{"en":"The target recovers from KO.","ja":"対象の行動不能の状態異常を回復する"},"items":[{"name":{"en":"Medicine Bread","ja":"ドラッグブレッド"},"id":"medicine-bread"}],"index":148,"enum":"ITEM_EFF_CURE_HOLD","advanced":{"actTag":"ACT_HEAL_STUN","min_1":"150"}}

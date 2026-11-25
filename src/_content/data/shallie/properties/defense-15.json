@@ -1,0 +1,1 @@
+{"id":"defense-15","name":{"en":"Defense +15","ja":"防御力＋１５","sc":"防御力＋１５","tc":"防禦力＋１５"},"desc":{"en":"Causes armor to enhance defense. Effect: Increases defense by 15.","ja":"防具の防御力を強化する。効果：防御力が１５上昇する"},"grade":9,"points":3,"weapon":true,"armor":true,"accessory":true,"index":102,"enum":"ITEM_POTENTIAL_DEF_3","advanced":{"PotBase":"ITEM_SUB_EQI_ADD_DEFENSE","min":"15"}}
