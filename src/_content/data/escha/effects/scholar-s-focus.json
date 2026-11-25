@@ -1,0 +1,1 @@
+{"id":"scholar-s-focus","name":{"en":"Scholar's Focus","ja":"学者の精神力"},"desc":{"en":"Increases maximum MP by 25.","ja":"最大ＭＰの値が２５上昇する"},"items":[{"name":{"en":"Treasure Grimoire","ja":"探宝のグリモア"},"id":"treasure-grimoire"}],"index":372,"enum":"ITEM_EFF_BARRIER_MAGIC","advanced":{"actTag":"ACT_EQUIP_ADD_PARAM_MP","min_1":"25"}}

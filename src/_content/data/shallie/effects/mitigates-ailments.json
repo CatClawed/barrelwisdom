@@ -1,0 +1,1 @@
+{"id":"mitigates-ailments","name":{"en":"Mitigates Ailments","ja":"異常を緩和する","sc":"缓和异常","tc":"緩和異常"},"desc":{"en":"Reduces the effect of status ailments by 15％.","ja":"状態異常に掛かる確率を１５％低下させる"},"items":[{"name":{"en":"Aroma Pouch","ja":"アロマポーチ"},"id":"aroma-pouch"}],"index":357,"enum":"ITEM_EFF_REDUCE_PERCENT_1","advanced":{"actTag":"ACT_EQUIP_REDUCE_CHECKRATE","min_1":"15"}}

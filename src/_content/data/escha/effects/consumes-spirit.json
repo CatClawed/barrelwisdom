@@ -1,0 +1,1 @@
+{"id":"consumes-spirit","name":{"en":"Consumes Spirit","ja":"魂がけずれる"},"desc":{"en":"Reduces HP by a large amount every turn.","ja":"行動時にＨＰが大きく減少する"},"items":[{"name":{"en":"Magic Stone","ja":"魔石の円環"},"id":"magic-stone"}],"index":294,"enum":"ITEM_EFF_SOUL_SLIP","advanced":{"actTag":"ACT_EQUIP_HEALING_ACTION","min_1":"-30"}}

@@ -1,0 +1,1 @@
+{"id":"coop-up","name":{"en":"Coop Up","ja":"連携強化"},"desc":{"en":"Increases coordination value by 10% when attacking.","ja":"攻撃を行ったときの連携率の値が１０％上昇する"},"items":[{"name":{"en":"Soul Binder","ja":"魂縛のチェイン"},"id":"soul-binder"}],"index":342,"enum":"ITEM_EFF_YOBI_002","advanced":{"actTag":"ACT_ADD_CHAIN","min_1":"10"}}

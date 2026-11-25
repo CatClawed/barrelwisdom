@@ -1,0 +1,1 @@
+{"id":"resonant-bell","name":{"en":"Resonant Bell","ja":"共鳴の鈴音"},"desc":{"en":"Actions increase the gauge by an extra 10%.","ja":"行動時のゲージの増加量が１０％増える"},"items":[{"name":{"en":"Brother Call","ja":"ブラザーコール"},"id":"brother-call"}],"index":254,"enum":"ITEM_EFF_RING_ECHO","advanced":{"actTag":"ACT_PASSIVE_CHANGE_SUPPORTGAUGE","min_1":"10"}}

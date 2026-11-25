@@ -1,0 +1,41 @@
+---
+import { itemElements } from '@app/components/Games/escha/escha_constants';
+
+const { cats, lang, game, evalue, fire, water, wind, earth, mode = 'list' } = Astro.props;
+const activeElements = { fire, water, wind, earth };
+---
+
+<div class="two-column" style="height: 100%;">
+  {cats && cats.length > 0 && (
+    <ul style="padding-left: 0;">
+      {
+      cats?.map((cat: any) => (
+        <li class="neat-item-display">
+          <svg class="medium-icon" style={cat.add ? 'fill:var(--add-category-color);' : undefined}>
+            <use href={`/spritesheets/${game}.svg?v=1#${cat.icon}`} />
+          </svg>
+          {mode === 'list' ? (
+            cat.name[lang]
+          ) : (
+          <a href={`/${game}/categories/${cat.id}/${lang}`}>
+            {cat.name[lang]}
+          </a>
+          )}
+        </li>
+      ))
+    }
+    </ul>
+  )}
+  <div style="display: flex; line-height: 1.3em;">
+    {itemElements.map((element) => activeElements[element.id] && (
+      <svg
+        class="dusk-elements"
+        style={`background-color:${element.color};`}
+        aria-label={element.id}
+      >
+        <use href={`/spritesheets/${game}.svg?v=1#element-${element.id}`} />
+      </svg>
+    ))}
+    {evalue !== undefined && <span style="padding-left: 0.2em;">{evalue}</span>}
+  </div>
+</div>

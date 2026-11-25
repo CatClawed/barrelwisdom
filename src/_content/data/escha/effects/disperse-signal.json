@@ -1,0 +1,1 @@
+{"id":"disperse-signal","name":{"en":"Disperse Signal","ja":"散開の合図"},"desc":{"en":"Spreads allies out.","ja":"味方をばらばらの場所に散開させる"},"items":[{"name":{"en":"Command Chime","ja":"号令チャイム"},"id":"command-chime"}],"index":159,"enum":"ITEM_EFF_CHIME_2","advanced":{"actTag":"ACT_MOVE_ADJOURNS"}}

@@ -1,0 +1,1 @@
+{"id":"all-stats-down-l","name":{"en":"All Stats Down L","ja":"全能力ダウン・弱"},"desc":{"en":"Decreases all of the target's stats by a small amount.","ja":"対象の全ての能力の値を少しだけ低下させる"},"items":[{"name":{"en":"Omega Craft","ja":"オメガクラフト"},"id":"omega-craft"}],"index":54,"enum":"ITEM_EFF_SVDOWN_ALL_1","advanced":{"actTag":"ACT_MINUS_ALL","min_1":"5","min_2":"5"}}

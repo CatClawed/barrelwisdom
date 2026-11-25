@@ -1,0 +1,1 @@
+{"id":"evolve-body","name":{"en":"Evolve Body","ja":"エボルブボディ"},"desc":{"en":"All base stats increased by 50%.","ja":"効果：基本のステータスが５０％上昇する。"},"grade":99,"points":33,"armor":true,"index":300,"enum":"ITEM_POTENTIAL_PROTECT_MYSTIC","advanced":{"PotBase":"ITEM_SUB_EVOLVE_STATUS","min":"50"}}

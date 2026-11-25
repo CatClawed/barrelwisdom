@@ -1,0 +1,1 @@
+{"id":"warm","name":{"en":"Warm","ja":"あったか～い","sc":"热呼呼～","tc":"熱呼呼～"},"desc":{"en":"Warms the body, increasing the target's speed by a small amount.","ja":"体が温まり、対象の素早さが少し上がる"},"items":[{"name":{"en":"Herbal Soup","ja":"香草のスープ"},"id":"herbal-soup"}],"index":219,"enum":"ITEM_EFF_RESIST_WATER_1","advanced":{"actTag":"ACT_PLUS_SPD","min_1":"10"}}

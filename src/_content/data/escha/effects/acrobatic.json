@@ -1,0 +1,1 @@
+{"id":"acrobatic","name":{"en":"Acrobatic","ja":"軽業師の動き"},"desc":{"en":"Increases dodge chance by 7%.","ja":"攻撃を回避する確率が７％上昇する"},"items":[{"name":{"en":"Acrobatic Armor","ja":"軽業師の具足"},"id":"acrobatic-armor"},{"name":{"en":"Feather Ornament","ja":"羽根飾り"},"id":"feather-ornament"}],"index":328,"enum":"ITEM_EFF_DODGE_1","advanced":{"actTag":"ACT_AUTO_DODGE","min_1":"7"}}

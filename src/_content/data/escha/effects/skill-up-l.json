@@ -1,0 +1,1 @@
+{"id":"skill-up-l","name":{"en":"Skill Up L","ja":"スキル強化・弱"},"desc":{"en":"Increases skill power by 10%.","ja":"スキルの威力が１０％上昇する"},"items":[{"name":{"en":"Glass Tiara","ja":"ガラスのティアラ"},"id":"glass-tiara"},{"name":{"en":"Beast Earmuffs","ja":"獣の耳あて"},"id":"beast-earmuffs"}],"index":317,"enum":"ITEM_EFF_POTENCY_1","advanced":{"actTag":"ACT_EQUIP_ADD_POWER","min_1":"10"}}

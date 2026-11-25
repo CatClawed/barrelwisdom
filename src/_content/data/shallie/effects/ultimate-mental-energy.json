@@ -1,0 +1,1 @@
+{"id":"ultimate-mental-energy","name":{"en":"Ultimate Mental Energy","ja":"究極の精神力","sc":"终极的精神力","tc":"終極的精神力"},"desc":{"en":"Gain ultimate life energy. Increases maximum HP by 50.","ja":"究極の精神力を得る。最大ＭＰが５０上昇する"},"items":[{"name":{"en":"Stone Coin","ja":"貴石のコイン"},"id":"stone-coin"}],"index":428,"enum":"ITEM_EFF_YOBI_106","advanced":{"actTag":"ACT_EQUIP_ADD_PARAM_MP","min_1":"50"}}

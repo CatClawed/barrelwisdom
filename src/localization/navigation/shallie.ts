@@ -170,7 +170,7 @@ export const ja: NavItem[] = [
     url: "/shallie/recipe-books/ja"
   },
   {
-    name: "潜在能力",
+    name: "潜力",
     url: "/shallie/properties/ja"
   },
   {
@@ -178,7 +178,7 @@ export const ja: NavItem[] = [
     url: "/shallie/effects/ja"
   },
   {
-    name: "魔物",
+    name: "モンスター",
     url: "/shallie/monsters/ja"
   }
 ];

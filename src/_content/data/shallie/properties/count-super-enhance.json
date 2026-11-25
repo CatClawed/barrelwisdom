@@ -1,0 +1,1 @@
+{"id":"count-super-enhance","name":{"en":"Count Super Enhance","ja":"回数ぶん超強化","sc":"次数威力超强化","tc":"次數威力超強化"},"desc":{"en":"Effect: Item power increases by use count x 5％.","ja":"効果：アイテムの威力が、使用回数×５％増加する"},"grade":75,"points":25,"bomb":true,"heal":true,"index":262,"enum":"ITEM_POTENTIAL_COUNT_POWER_EX","advanced":{"PotBase":"ITEM_SUB_BTL_COUNT_POWER","min":"5"}}

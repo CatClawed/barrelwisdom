@@ -20,3 +20,4 @@ dist/
 node_modules/
 
 frontend
+src/_content/posts/blog/drafts

@@ -13,6 +13,7 @@ export const languageSchema = z.object(
 export const nameLinkSchema = z.object({
   id: z.coerce.string(),
   name: languageSchema,
+  desc: languageSchema.optional(),
   visible: z.boolean().optional(),
 });
 

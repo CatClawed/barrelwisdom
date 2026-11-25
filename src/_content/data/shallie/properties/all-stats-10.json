@@ -1,0 +1,1 @@
+{"id":"all-stats-10","name":{"en":"All Stats +10","ja":"全能力＋１０","sc":"全能力＋１０","tc":"全能力＋１０"},"desc":{"en":"Effect: Increases all stats except resistances by 10.","ja":"効果：耐性以外の全ての能力が１０上がる"},"grade":9,"points":3,"accessory":true,"index":141,"enum":"ITEM_POTENTIAL_ALLPRM_3","advanced":{"PotBase":"ITEM_SUB_EQI_ADD_ALLPARAM","min":"10"}}

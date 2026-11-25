@@ -1,0 +1,1 @@
+{"id":"wealth-talisman","name":{"en":"Wealth Talisman","ja":"富豪の札"},"desc":{"en":"Increases money earned from battle by a small amount.","ja":"戦闘で手に入るお金の金額が少し増える"},"items":[{"name":{"en":"Tarot of Fate","ja":"運命のタロット"},"id":"tarot-of-fate"}],"index":300,"enum":"ITEM_EFF_CASH_UP_1","advanced":{"actTag":"ACT_EQUIP_BONUS_MONEY","min_1":"25"}}

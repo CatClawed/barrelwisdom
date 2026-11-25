@@ -1,0 +1,1 @@
+{"id":"nullify-poison","name":{"en":"Nullify Poison","ja":"毒を無効化","sc":"使毒无效","tc":"使毒無效"},"desc":{"en":"Nullifies poison condition.","ja":"毒の状態異常を無効化する"},"items":[{"name":{"en":"Aroma Pouch","ja":"アロマポーチ"},"id":"aroma-pouch"},{"name":{"en":"Bone Plate","ja":"ボーンプレート"},"id":"bone-plate"}],"index":370,"enum":"ITEM_EFF_ANTI_POISON","advanced":{"actTag":"ACT_AUTO_RESIST_POISON"}}

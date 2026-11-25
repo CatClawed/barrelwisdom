@@ -1,0 +1,1 @@
+{"id":"angel-s-blessing","name":{"en":"Angel's Blessing","ja":"守護天使の加護"},"desc":{"en":"10% of damage taken is subtracted from MP instead.","ja":"受けるダメージの１０％が、ＭＰダメージに変換される"},"items":[{"name":{"en":"Angel Ribbon","ja":"エンゼルリボン"},"id":"angel-ribbon"}],"index":263,"enum":"ITEM_EFF_QUICK_LIGHTLY","advanced":{"actTag":"ACT_PASSIVE_REVERSE_DAMAGE","min_1":"10"}}

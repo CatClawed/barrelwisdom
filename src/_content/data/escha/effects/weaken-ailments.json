@@ -1,0 +1,1 @@
+{"id":"weaken-ailments","name":{"en":"Weaken Ailments","ja":"状態を弱める"},"desc":{"en":"Reduces chances of being afflicted with status effects.","ja":"状態異常に掛かる確率を下げる"},"items":[{"name":{"en":"Angel Ribbon","ja":"エンゼルリボン"},"id":"angel-ribbon"}],"index":312,"enum":"ITEM_EFF_REDUCE_PERCENT_2","advanced":{"actTag":"ACT_EQUIP_REDUCE_CHECKRATE","min_1":"33"}}

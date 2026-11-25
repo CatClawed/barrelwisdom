@@ -1,0 +1,1 @@
+{"id":"cooperation-mastery","name":{"en":"Cooperation Mastery","ja":"協力の極意","sc":"合作的精髓","tc":"合作的精髓"},"desc":{"en":"The effect of all assist actions increases by 10％.","ja":"全てのアシスト行動の効果が１０％上昇する"},"items":[{"name":{"en":"Brother Call","ja":"ブラザーコール"},"id":"brother-call"}],"index":367,"enum":"ITEM_EFF_SUPPOURT_SECRET","advanced":{"actTag":"ACT_PASSIVE_ASSIST_ALLUP","min_1":"10"}}

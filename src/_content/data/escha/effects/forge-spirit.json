@@ -1,0 +1,1 @@
+{"id":"forge-spirit","name":{"en":"Forge Spirit","ja":"心を鍛える"},"desc":{"en":"Increases maximum MP by 10.","ja":"最大ＭＰの値が１０上昇する"},"items":[{"name":{"en":"Exceed Belt","ja":"イクシードベルト"},"id":"exceed-belt"}],"index":282,"enum":"ITEM_EFF_ADD_MP_1","advanced":{"actTag":"ACT_EQUIP_ADD_PARAM_MP","min_1":"10"}}

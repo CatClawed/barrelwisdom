@@ -1,0 +1,1 @@
+{"id":"hp-recovery-m","name":{"en":"HP Recovery-M","ja":"ＨＰ回復・中","sc":"ＨＰ恢复‧中","tc":"ＨＰ回復‧中"},"desc":{"en":"The target recovers HP.","ja":"対象のＨＰを回復する"},"items":[{"name":{"en":"Healing Salve","ja":"ヒーリングサルブ"},"id":"healing-salve"}],"index":117,"enum":"ITEM_EFF_HEAL_HP_2","advanced":{"actTag":"ACT_HEAL_HP","min_1":"53","max_1":"75"}}

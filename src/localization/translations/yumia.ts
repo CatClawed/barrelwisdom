@@ -93,3 +93,15 @@ export const view_map_translation: Record<string, string> = {
   sc: '查看地图',
   tc: '查看地圖',
 };
+
+export const monster_translation: Record<string, string> = {
+    "en": "Monsters",
+    "ja": "魔物",
+    "sc": "魔物",
+    "tc": "魔物",
+    "de": "Monster",
+    "fr": "Monstres",
+    "ko": "몬스터",
+    "ru": "Чудовища",
+    "es": "Monstruos"
+}

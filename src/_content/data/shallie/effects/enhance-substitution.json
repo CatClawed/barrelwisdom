@@ -1,0 +1,1 @@
+{"id":"enhance-substitution","name":{"en":"Enhance Substitution","ja":"身代わり強化","sc":"强化替身抵挡","tc":"強化替身抵擋"},"desc":{"en":"Increases assist guard effect by 50％.","ja":"アシスト防御の効果が５０％上昇する"},"items":[{"name":{"en":"Brother Call","ja":"ブラザーコール"},"id":"brother-call"}],"index":368,"enum":"ITEM_EFF_SUPPOURT_UP","advanced":{"actTag":"ACT_PASSIVE_ASSIST_DEFUP","min_1":"50"}}

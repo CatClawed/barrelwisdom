@@ -1,0 +1,1 @@
+{"id":"silencing","name":{"en":"Silencing","ja":"消音"},"desc":{"en":"Greatly increases chance of success when using the \"Run\" command.","ja":"「逃げる」コマンド実行時の成功率が大きく上昇する"},"items":[{"name":{"en":"Dark Night Cape","ja":"闇夜のマント"},"id":"dark-night-cape"}],"index":293,"enum":"ITEM_EFF_PERFECT_WALK","advanced":{"actTag":"ACT_EQUIP_RUNNING_SUCCESS","min_1":"50"}}

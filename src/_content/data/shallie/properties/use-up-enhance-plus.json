@@ -1,0 +1,1 @@
+{"id":"use-up-enhance-plus","name":{"en":"Use Up Enhance+","ja":"使い切り強化＋","sc":"一次性使用强化＋","tc":"一次性使用強化＋"},"desc":{"en":"Effect: Increases power when use count remaining is 1 by 20％.","ja":"効果：使用回数が１回の時に、威力が２０％アップする"},"grade":12,"points":4,"bomb":true,"heal":true,"index":210,"enum":"ITEM_POTENTIAL_LAST_UP_2","advanced":{"PotBase":"ITEM_SUB_BTL_LAST_BONUS","min":"20"}}

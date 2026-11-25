@@ -1,0 +1,1 @@
+{"id":"attack-power-25","name":{"en":"Attack Power +25","ja":"攻撃力＋２５","sc":"攻击力＋２５","tc":"攻擊力＋２５"},"desc":{"en":"Increases attack power by 25.","ja":"攻撃力の値が２５上昇する"},"items":[{"name":{"en":"Meteor Gloves","ja":"メテオグラブ"},"id":"meteor-gloves"}],"index":285,"enum":"ITEM_EFF_EQUIP_ATK_PLUS_04","advanced":{"actTag":"ACT_EQUIP_ADD_PARAM_ATK","min_1":"25"}}

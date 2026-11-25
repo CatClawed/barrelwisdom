@@ -1,0 +1,1 @@
+{"id":"champ-possession","name":{"en":"Champ Possession","ja":"覇者の憑依"},"desc":{"en":"Increases expected damage by a fair amount. The effect increases with level.","ja":"ダメージの期待値がそこそこ上昇する。レベルが高くなるほど効果は大きくなる"},"items":[{"name":{"en":"Royal Crest","ja":"王家の紋章"},"id":"royal-crest"}],"index":274,"enum":"ITEM_EFF_FAKE_LVUP_2","advanced":{"actTag":"ACT_EQUIP_PARAM_LEVEL","min_1":"20"}}

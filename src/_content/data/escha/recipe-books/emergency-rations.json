@@ -1,0 +1,1 @@
+{"id":"emergency-rations","name":{"en":"Emergency Rations","ja":"食糧備蓄の手順","sc":"储备粮食指南","tc":"儲備糧食指南"},"desc":{"en":"A manifest prepared by Marion for expeditions into the Unknown Ruins.","ja":"マリオンが用意した、未踏遺跡の調査隊を迎えるための計画書"},"items":[{"id":"canned-food","name":{"en":"Canned Food","ja":"主食保存缶"}}],"acquisition":"Assignment 9","index":55,"enum":"ITEM_BOOK_RECIPE_56"}

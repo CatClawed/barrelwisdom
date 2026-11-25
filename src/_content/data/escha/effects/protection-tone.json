@@ -1,0 +1,1 @@
+{"id":"protection-tone","name":{"en":"Protection Tone","ja":"守りの音色"},"desc":{"en":"A gentle tune increases the target's defense power. The effect lasts for 5 turns.","ja":"優しい音色で、対象の防御力を上昇させる。効果は５回行動するまで持続する"},"items":[{"name":{"en":"Music Box","ja":"音手箱"},"id":"music-box"}],"index":153,"enum":"ITEM_EFF_TONE_2","advanced":{"actTag":"ACT_PLUS_DEF","min_1":"20"}}

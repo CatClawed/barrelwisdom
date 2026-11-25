@@ -1,9 +1,10 @@
 ---
 import Popover from '@app/components/Games/_common/Popover.astro';
 import Map from '@app/components/Games/yumia/map/Map.astro';
+import AdvancedDataDisplay from '@app/components/Games/_common/Detail/AdvancedDataDisplay.astro';
+import LevelPopover from '@app/components/Games/_common/Detail/LevelPopover.astro';
 import Trait from '@app/components/Games/_common/Detail/Trait.astro';
 import { view_map_translation, outer_translation, inner_translation, blending_translation } from '@app/localization/translations/yumia';
-import { level_translation } from '@app/localization/translations/common-strings';
 const { item, lang, mode, game, section } = Astro.props;
 const traitIcons = [
   { key: 'atk',  icon: 'category-bombs' },
@@ -24,10 +25,7 @@ const traitIcons = [
   icons={traitIcons}
 >
   <div class="card-icon-position" slot="top-level">
-    <Popover cls="dashed">
-      <span slot="trigger">{level_translation[lang]}: </span>
-      <p>A measure of rarity. This number determines where traits appear.</p>
-    </Popover>
+    <LevelPopover lang={lang} />
 
     {!item.grade_max ? ` ${item.grade_min}` : ` ${item.grade_min} - ${item.grade_max}`}
   </div>
@@ -49,31 +47,14 @@ const traitIcons = [
   )}
   {item.trait_base && (
     <>
-      {mode !== 'list' ? (
-      <b>Advanced Data:</b>
-      <ul>
-        {[item.trait_base, item.trait_hash, item.lv_min_rand_range, item.lv_max_rand_range]
-          .filter(val => val)
-          .map((val) => (
-            <li>{val}</li>
-          ))
-        }
-      </ul>
-      )
-      : (
-      <Popover cls="dashed">
-        <span slot="trigger">Advanced Data</span>
+      <AdvancedDataDisplay mode={mode}>
         <ul>
           {[item.trait_base, item.trait_hash, item.lv_min_rand_range, item.lv_max_rand_range]
-            .filter(val => val)
-            .map((val) => (
-              <li>{val}</li>
-            ))
-          }
+            .filter((val) => val)
+            .map((val) => <li>{val}</li>)}
         </ul>
-      </Popover>
-      <>
-        { item.chests && mode === 'list' && (
+      </AdvancedDataDisplay>
+      {item.chests && mode === 'list' && (
         <button
           type="button"
           class="show-map-btn"
@@ -81,8 +62,6 @@ const traitIcons = [
         >
           {view_map_translation[lang]}
         </button>
-        )}
-      </>
       )}
     </>
   )}

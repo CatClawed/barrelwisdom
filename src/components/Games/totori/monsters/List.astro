@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import PaneListWrapper from '@components/Games/_common/List/PaneListWrapper.astro';
 import MonsterList from '@components/Games/_common/List/MonsterList.astro';
 import TextFilter from '@components/Games/_common/Filter/TextFilter.astro';
+import Badge from '@components/Games/_common/Badge.astro';
 const { items, lang, title, game, section } = Astro.props;
 
 items.sort((a, b) => a.data.index - b.data.index);
@@ -32,8 +33,8 @@ items.sort((a, b) => a.data.index - b.data.index);
         data-ind={i.index}
       >
         <span>{i.data.race}</span>
-        {i.data.isDLC && <span class="badge bg-primary">DLC</span>}
-        {i.data.isDX && <span class="badge bg-primary">DX</span>}
+        {i.data.isDLC && <Badge text="DLC" />}
+        {i.data.isDX && <Badge text="DX" />}
       </MonsterList>
     ))
   }
@@ -42,5 +43,5 @@ items.sort((a, b) => a.data.index - b.data.index);
   import { initListFilters } from '@app/utils/filter-controller';
   import { initPaneController } from '@app/utils/detail-pane-controller';
   initListFilters({});
-  initPaneController({});
+  initPaneController();
 </script>

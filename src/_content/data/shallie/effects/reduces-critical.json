@@ -1,0 +1,1 @@
+{"id":"reduces-critical","name":{"en":"Reduces Critical","ja":"大打撃率低下","sc":"大打击率低下","tc":"大打擊率低下"},"desc":{"en":"Reduces the target's chance to score a critical hit.","ja":"対象のクリティカル発生率を低下させる"},"items":[{"name":{"en":"Flying Board","ja":"フライングボード"},"id":"flying-board"}],"index":95,"enum":"ITEM_EFF_BLESS_HEAL_3","advanced":{"actTag":"ACT_CHANGE_CRITICAL","min_1":"-25"}}

@@ -113,8 +113,11 @@ const globalItems = await getNavForGame('global');
   z-index: 1500;
   transition: transform 0.3s ease-in-out;
   position: fixed;
-  height: 100%;
+  height: calc(100vh - var(--header-height));
+  height: calc(100dvh - var(--header-height));
   left: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .sidebar.hidden {

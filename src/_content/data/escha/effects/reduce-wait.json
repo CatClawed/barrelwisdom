@@ -1,0 +1,1 @@
+{"id":"reduce-wait","name":{"en":"Reduce Wait","ja":"待機時間短縮"},"desc":{"en":"Reduces the wait after the target's next turn by a small amount.","ja":"対象が次に行動したとき、行動後の待機時間を少し短縮する"},"items":[{"name":{"en":"Command Chime","ja":"号令チャイム"},"id":"command-chime"}],"index":167,"enum":"ITEM_EFF_DISPELL","advanced":{"actTag":"ACT_REDUCE_WT","min_1":"10","min_2":"1"}}

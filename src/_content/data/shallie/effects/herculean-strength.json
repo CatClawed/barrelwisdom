@@ -1,0 +1,1 @@
+{"id":"herculean-strength","name":{"en":"Herculean Strength","ja":"剛力を与える","sc":"给予刚力","tc":"給予剛力"},"desc":{"en":"Increases attack power by 25.","ja":"攻撃力の値が２５上昇する"},"items":[{"name":{"en":"Gunade Ring","ja":"グナーデリング"},"id":"gunade-ring"}],"index":323,"enum":"ITEM_EFF_ADD_ATTACK_2","advanced":{"actTag":"ACT_EQUIP_ADD_PARAM_ATK","min_1":"25"}}

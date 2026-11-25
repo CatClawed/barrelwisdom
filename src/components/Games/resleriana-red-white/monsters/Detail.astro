@@ -5,6 +5,7 @@ import {
   location_translation,
   item_translation,
 } from '@app/localization/translations/common-strings';
+import Badge from '@components/Games/_common/Badge.astro';
 import { chunkArray } from '@app/utils/chunk-array';
 
 const { item, lang, mode, game, section } = Astro.props;
@@ -46,7 +47,7 @@ const ailmentRows = chunkArray(ailments, 4);
     <h3>{item.name[lang]}</h3>
     <div class="card-icon-position">
       {item.race[lang]}
-      {item.dlc && <span class="badge bg-primary">DLC</span>}
+      {item.dlc && <Badge text="DLC" />}
     </div>
   </div>
   <div class="image-desc-display">

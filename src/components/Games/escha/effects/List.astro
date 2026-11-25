@@ -1,0 +1,18 @@
+---
+import Detail from './Detail.astro';
+import EffectList from '@components/Games/_common/List/EffectList.astro';
+
+const { items, lang, title, game, section } = Astro.props;
+items.sort((a, b) => a.data.index - b.data.index);
+---
+
+<EffectList
+  items={items}
+  lang={lang}
+  title={title}
+  game={game}
+  section={section}
+  DetailComponent={Detail}
+  getSearchText={(data: any, language: string) =>
+    `${data.name[language].toLowerCase()} ^ ${data.desc[language].toLowerCase()}`}
+/>

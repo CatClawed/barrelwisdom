@@ -1,0 +1,1 @@
+{"id":"consumes-soul","name":{"en":"Consumes Soul","ja":"魂削り","sc":"削魂","tc":"削魂"},"desc":{"en":"Reduces level","ja":" "},"grade":120,"points":30,"bomb":true,"index":280,"enum":"ITEM_POTENTIAL_EVOLVE_QUALITY","advanced":{"PotBase":"ITEM_SUB_BTL_ADD_USEEFFECT","effects":[{"advanced":{"actTag":"ACT_MINUS_LEVEL","min_1":"9"}}]}}

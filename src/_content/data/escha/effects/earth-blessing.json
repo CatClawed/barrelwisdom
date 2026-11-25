@@ -1,0 +1,1 @@
+{"id":"earth-blessing","name":{"en":"Earth Blessing","ja":"土の精の加護"},"desc":{"en":"Increases earth resistance by 33.","ja":"土耐性が３３上昇する"},"items":[{"name":{"en":"Seven Star Medal","ja":"七星のメダル"},"id":"seven-star-medal"}],"index":309,"enum":"ITEM_EFF_HARD_ENEMY_KILLER","advanced":{"actTag":"ACT_EQUIP_ADD_RESIST","min_1":"ELEMENT_EARTH","min_2":"33"}}

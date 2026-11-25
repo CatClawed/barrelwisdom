@@ -148,7 +148,7 @@ export const ja: NavItem[] = [
     url: "/totori/effects/ja"
   },
   {
-    name: "魔物",
+    name: "モンスター",
     url: "/totori/monsters/ja"
   }
 ];

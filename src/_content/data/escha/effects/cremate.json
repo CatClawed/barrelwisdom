@@ -1,0 +1,1 @@
+{"id":"cremate","name":{"en":"Cremate","ja":"やきつくす"},"desc":{"en":"The target is engulfed in searing hellfire, with a chance of killing it instantly.","ja":"灼熱の業火が対象を包み込み、一定の確率で一撃で倒してしまう"},"items":[{"name":{"en":"Dire Bomb","ja":"ダイアフラム"},"id":"dire-bomb"}],"index":31,"enum":"ITEM_EFF_COPY_4","advanced":{"actTag":"ACT_PERCENT_DEATH","min_1":"25"}}

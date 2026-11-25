@@ -1,0 +1,1 @@
+{"id":"all-stats-down-s","name":{"en":"All Stats Down S","ja":"全能力ダウン・強"},"desc":{"en":"Decreases all of the target's stats by a large amount.","ja":"対象の全ての能力の値を大きく低下させる"},"items":[{"name":{"en":"Tauzent Blitz","ja":"タウゼントブリッツ"},"id":"tauzent-blitz"}],"index":56,"enum":"ITEM_EFF_SVDOWN_ALL_3","advanced":{"actTag":"ACT_MINUS_ALL","min_1":"10","min_2":"10"}}

@@ -1,0 +1,1 @@
+{"id":"parameters-10","name":{"en":"Parameters +10%","ja":"パラメータ＋１０％","sc":"参数＋１０％","tc":"參數＋１０％"},"desc":{"en":"Causes armor to enhance all stats. Effect: Increases value of base stats by 10％.","ja":"防具に能力を強化する効果を付与する。効果：素の能力値を１０％上昇させる"},"grade":15,"points":5,"armor":true,"index":90,"enum":"ITEM_POTENTIAL_STATUS_EVO_3","advanced":{"PotBase":"ITEM_SUB_EVOLVE_STATUS","min":"10"}}

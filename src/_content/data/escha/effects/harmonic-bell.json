@@ -1,0 +1,1 @@
+{"id":"harmonic-bell","name":{"en":"Harmonic Bell","ja":"調和の鈴音"},"desc":{"en":"Actions increase the gauge by an extra 25%.","ja":"行動時のゲージの増加量が２５％増える"},"items":[{"name":{"en":"Brother Call","ja":"ブラザーコール"},"id":"brother-call"}],"index":255,"enum":"ITEM_EFF_RING_HARMONY","advanced":{"actTag":"ACT_PASSIVE_CHANGE_SUPPORTGAUGE","min_1":"25"}}

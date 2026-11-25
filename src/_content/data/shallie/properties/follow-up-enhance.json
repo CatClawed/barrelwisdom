@@ -1,0 +1,1 @@
+{"id":"follow-up-enhance","name":{"en":"Follow Up Enhance","ja":"追い討ち強化","sc":"追击强化","tc":"追擊強化"},"desc":{"en":"Effect: Increases damage done to Broken enemies by 10％.","ja":"効果：ブレイク中の敵に与えるダメージが１０％上昇する"},"grade":3,"points":1,"bomb":true,"index":292,"enum":"ITEM_POTENTIAL_YOBI_103","advanced":{"PotBase":"ITEM_SUB_BREAKING_BONUS","min":"10"}}

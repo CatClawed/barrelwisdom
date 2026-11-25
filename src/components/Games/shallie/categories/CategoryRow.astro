@@ -1,0 +1,75 @@
+---
+import { itemElements } from '@app/components/Games/escha/escha_constants';
+import SlotIcons from '@app/components/Games/shallie/items/SlotIcons.astro';
+import { level_translation } from '@app/localization/translations/common-strings';
+
+interface Props {
+  item;
+  lang: string;
+  game: string;
+}
+
+const { item, lang, game }: Props = Astro.props;
+const activeElements = {
+  fire: item.fire,
+  water: item.water,
+  wind: item.wind,
+  earth: item.earth,
+};
+---
+
+<tr>
+  <td>
+    <div class="category-item-row">
+      <div class="item-info">
+        <a href={`/${game}/items/${item.id}/${lang}`}>{item.name[lang]}</a>
+        <b>{level_translation[lang]} {item.level}</b>
+      </div>
+      <div class="item-elements">
+        <div>
+          {itemElements.map((element) => activeElements[element.id] && (
+            <svg
+              class="dusk-elements"
+              style={`background-color:${element.color};`}
+              aria-label={element.id}
+            >
+              <use href={`/spritesheets/${game}.svg?v=1#element-${element.id}`} />
+            </svg>
+          ))}
+          <span>{item.evalue}</span>
+        </div>
+        <SlotIcons count={item.slots} game={game} />
+      </div>
+    </div>
+  </td>
+</tr>
+
+<style>
+  .category-item-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+  }
+  .item-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .item-elements {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: max-content;
+    margin-left: auto;
+
+    span {
+      padding-left: 0.2em;
+    }
+  }
+  .item-elements :global(.slot-icons) {
+    width: 100%;
+    justify-content: flex-end;
+  }
+</style>

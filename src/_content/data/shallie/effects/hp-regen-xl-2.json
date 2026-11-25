@@ -1,0 +1,1 @@
+{"id":"hp-regen-xl-2","name":{"en":"HP Regen-XL","ja":"ＨＰ再生・超","sc":"ＨＰ再生‧超","tc":"ＨＰ再生‧超"},"desc":{"en":"Recover a large amount of HP every turn.","ja":"行動時にＨＰが大きく回復する"},"items":[],"index":405,"enum":"ITEM_EFF_YOBI_032","advanced":{"actTag":"ACT_AUTO_HP_TURN","min_1":"15"}}

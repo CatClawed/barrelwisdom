@@ -1,0 +1,1 @@
+{"id":"can-catch-fish","name":{"en":"Can Catch Fish","ja":"魚が釣れる","sc":"能钓到鱼","tc":"能釣到魚"},"desc":{"en":"Allows you to catch fish in waters where fish are present.","ja":"魚がいる水場で魚を釣ることができるようになる"},"items":[{"name":{"en":"Handmade Bait","ja":"手作りエサ"},"id":"handmade-bait"}],"index":238,"enum":"ITEM_EFF_FISHING","advanced":{}}

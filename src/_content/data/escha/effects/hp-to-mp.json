@@ -1,0 +1,1 @@
+{"id":"hp-to-mp","name":{"en":"HP to MP","ja":"ＨＰ→ＭＰ変換"},"desc":{"en":"Consumes HP to restore a large amount of MP.","ja":"ＨＰを消費し、ＭＰを大きく回復させる"},"items":[{"name":{"en":"Slag Essence","ja":"スラグのエッセンス"},"id":"slag-essence"}],"index":170,"enum":"ITEM_EFF_SECONDARY_2","advanced":{"actTag":"ACT_HEAL_MP","actTag2":"ACT_CONSUME_HP","min_1":"50","min_3":"33"}}

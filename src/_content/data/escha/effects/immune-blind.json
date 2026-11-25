@@ -1,0 +1,1 @@
+{"id":"immune-blind","name":{"en":"Immune: Blind","ja":"暗闇を無効化"},"desc":{"en":"Immunity to blindness.","ja":"暗闇の状態異常を無効化する"},"items":[{"name":{"en":"Angel Ribbon","ja":"エンゼルリボン"},"id":"angel-ribbon"},{"name":{"en":"Dark Night Cape","ja":"闇夜のマント"},"id":"dark-night-cape"}],"index":336,"enum":"ITEM_EFF_ANTI_DARKNESS","advanced":{"actTag":"ACT_AUTO_RESIST_BLIND"}}

@@ -1,0 +1,1 @@
+{"id":"less-action-time-s","name":{"en":"Less Action Time-S","ja":"行動時間短縮・弱","sc":"行动时间短缩‧弱","tc":"行動時間短縮‧弱"},"desc":{"en":"Reduces the wait time after using skills by 5％.","ja":"スキル使用時の行動後の待ち時間が、５％短縮される"},"items":[{"name":{"en":"Agile Coat","ja":"敏捷のコート"},"id":"agile-coat"}],"index":263,"enum":"ITEM_EFF_ARM_SP_09","advanced":{"actTag":"ACT_PASSIVE_REDUCE_WT_SKILL","min_1":"5"}}

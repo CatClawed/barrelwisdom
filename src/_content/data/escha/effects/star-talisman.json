@@ -1,0 +1,1 @@
+{"id":"star-talisman","name":{"en":"Star Talisman","ja":"発見の星の札"},"desc":{"en":"Increases the chances of getting items from battle by a fair amount.","ja":"戦闘でアイテムを入手する確率が上昇する"},"items":[{"name":{"en":"Tarot of Fate","ja":"運命のタロット"},"id":"tarot-of-fate"}],"index":299,"enum":"ITEM_EFF_DROP_UP_2","advanced":{"actTag":"ACT_EQUIP_ADD_DROPRATE","min_1":"15"}}

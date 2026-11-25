@@ -1,0 +1,1 @@
+{"id":"alignment","name":{"en":"Alignment","ja":"同調のオーラ"},"desc":{"en":"Increases coordination value by 7% when attacking.","ja":"攻撃を行ったときの連携率の値が７％上昇する"},"items":[{"name":{"en":"Brother Call","ja":"ブラザーコール"},"id":"brother-call"}],"index":343,"enum":"ITEM_EFF_YOBI_015","advanced":{"actTag":"ACT_ADD_CHAIN","min_1":"7"}}

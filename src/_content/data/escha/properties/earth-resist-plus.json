@@ -1,0 +1,1 @@
+{"id":"earth-resist-plus","name":{"en":"Earth Resist+","ja":"土耐性＋"},"desc":{"en":"Reduces Earth damage by 25%.","ja":"効果：土属性のダメージが２５％軽減される。"},"grade":8,"points":3,"armor":true,"accessory":true,"items":[{"id":"jewel-plate","name":{"en":"Jewel Plate","ja":"ジュエルプレート"}}],"index":176,"enum":"ITEM_POTENTIAL_RESIST_EARTH_2","advanced":{"PotBase":"ITEM_SUB_RESIST_EARTH","min":"25"}}

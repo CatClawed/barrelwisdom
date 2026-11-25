@@ -1,14 +1,19 @@
 ---
 import { chunkArray } from '@app/utils/chunk-array';
 
+interface TraitIcon {
+  key: string;
+  icon: string;
+}
+
 interface Props {
   trait: any;
   mode: string;
   game: string;
   lang: string;
   section: string;
-  icons: Record<string, string>;
-  chunk: number;
+  icons: TraitIcon[];
+  chunk?: number;
 }
 const {
   trait,

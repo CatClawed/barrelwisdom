@@ -1,0 +1,1 @@
+{"id":"survey-eff-up","name":{"en":"Survey Eff. Up","ja":"調査効率アップ","sc":"提升调查效率","tc":"提升調查效率"},"desc":{"en":"Increases the field gauge by 25％.","ja":"フィールドゲージの値を２５％上昇させる"},"items":[{"name":{"en":"Mysterious Monocle","ja":"不可思議モノクル"},"id":"mysterious-monocle"}],"index":235,"enum":"ITEM_EFF_ADD_FIELLD_GAUGE_1","advanced":{"actTag":"ACT_ADD_FIELDGAUGE","min_1":"25"}}

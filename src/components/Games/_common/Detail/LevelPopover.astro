@@ -1,0 +1,25 @@
+---
+import Popover from '@app/components/Games/_common/Popover.astro';
+import { level_translation } from '@app/localization/translations/common-strings';
+
+interface Props {
+  lang: string;
+  description?: string;
+}
+
+const {
+  lang,
+  description = 'A measure of rarity. This number determines where traits appear.',
+} = Astro.props;
+---
+
+<Popover cls="dashed">
+  <span slot="trigger">{level_translation[lang]}:</span>
+  <p>{description}</p>
+</Popover>
+
+<style>
+  span {
+    padding-right: 0.3rem;
+  }
+</style>

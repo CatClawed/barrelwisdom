@@ -1,0 +1,275 @@
+---
+import Popover from '@app/components/Games/_common/Popover.astro';
+import ItemAttributeList from './ItemAttributeList.astro';
+import { itemElements } from '@app/components/Games/escha/escha_constants';
+import {
+  character_translation,
+  details_translation,
+  effect_translation,
+  ingredient_translation,
+  location_translation,
+  monster_translation,
+  properties_translation,
+  recipebook_singular_translation,
+  stat_translation,
+} from '@app/localization/translations/common-strings';
+
+const { item, lang, mode, game, section } = Astro.props as any;
+const stats = item.stats?.[0];
+const elementGroups = item.effectlines?.map((line: any) => ({
+  ...line,
+  ...itemElements.find((element) => element.id === line.elem),
+})).filter((line: any) => line.id) ?? [];
+const statRows = [
+  { key: 'hp', label: 'HP' },
+  { key: 'mp', label: 'MP' },
+  { key: 'atk', label: stat_translation.atk[lang] },
+  { key: 'defen', label: stat_translation.dfn[lang] },
+  { key: 'spd', label: stat_translation.spd[lang] },
+];
+---
+
+<div class={mode === 'detail' ? 'card' : undefined}>
+  <div class="card-title">
+    <h3>{item.name[lang]}</h3>
+    {item.level !== undefined && <b>LV {item.level}</b>}
+  </div>
+  <div class="image-desc-display">
+    <img
+      src={`/media/games/${game}/${section}/${item.id}.webp?v=1`}
+      alt={item.name[lang]}
+      style="aspect-ratio: 1; width: 192px;"
+    />
+    <p>{item.desc?.[lang]}</p>
+  </div>
+
+  {item.book?.length > 0 && (
+    <p>
+      <b>{recipebook_singular_translation[lang]}: </b>
+      {item.book.map((book: any, index: number) => (
+        <span>
+          {index > 0 && ', '}
+          <a href={`/${game}/recipe-books/${book.id}/${lang}`}>{book.name[lang]}</a>
+        </span>
+      ))}
+    </p>
+  )}
+  {item.size !== undefined && <p><b>Size: </b>{item.size}</p>}
+
+  <ItemAttributeList
+    cats={item.categories}
+    lang={lang}
+    game={game}
+    mode={mode}
+    evalue={item.evalue}
+    slots={item.slots}
+    fire={item.fire}
+    water={item.water}
+    wind={item.wind}
+    earth={item.earth}
+  />
+
+  {item.disassembles_to?.length > 0 && (
+    <>
+      <b>Disassembles to:</b>
+      <ul>
+        {item.disassembles_to.map((result: any) => (
+          <li><a href={`/${game}/items/${result.id}/${lang}`}>{result.name[lang]}</a></li>
+        ))}
+      </ul>
+    </>
+  )}
+  {item.disassembled_by?.length > 0 && (
+    <>
+      <b>Disassembled from:</b>
+      <ul>
+        {item.disassembled_by.map((source: any) => (
+          <li><a href={`/${game}/items/${source.id}/${lang}`}>{source.name[lang]}</a></li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  {item.locations?.length > 0 && (
+    <>
+      <b>{location_translation[lang]}</b>
+      <ul>
+        {item.locations.map((location: any) => (
+          <li>
+            <a href={`/${game}/locations/${location.parent}/${lang}#${location.id}`}>
+              {location.name[lang]}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+  {item.monsters?.length > 0 && (
+    <>
+      <b>{monster_translation[lang]}</b>
+      <ul>
+        {item.monsters.map((monster: any) => (
+          <li><a href={`/${game}/monsters/${monster.id}/${lang}`}>{monster.name[lang]}</a></li>
+        ))}
+      </ul>
+    </>
+  )}
+  {item.properties?.length > 0 && (
+    <>
+      <b>{properties_translation[lang]}</b>
+      <ul>
+        {item.properties.map((property: any) => (
+          <li>
+            <Popover
+              title={property.name[lang]}
+              href={`/${game}/properties/${property.id}/${lang}`}
+              restrainWidth={true}
+            >
+              <span slot="trigger">{property.name[lang]}</span>
+              {property.desc?.[lang] && <p>{property.desc[lang]}</p>}
+              <a href={`/${game}/properties/${property.id}/${lang}`}>
+                {details_translation[lang]}
+              </a>
+            </Popover>
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+  {item.ingredients?.length > 0 && (
+    <table class="tbl">
+      <thead><tr><th>{ingredient_translation[lang]}</th></tr></thead>
+      <tbody>
+        <tr><td>
+          <ul>
+            {item.ingredients.map((ingredient: any) => (
+              <li>
+                {ingredient.item && (
+                  <a href={`/${game}/items/${ingredient.item.id}/${lang}`}>
+                    {ingredient.item.name[lang]}
+                  </a>
+                )}
+                {ingredient.category && (
+                  <a href={`/${game}/categories/${ingredient.category.id}/${lang}`}>
+                    {ingredient.category.name[lang]}
+                  </a>
+                )}
+                {ingredient.num !== undefined && <> x{ingredient.num}</>}
+              </li>
+            ))}
+          </ul>
+        </td></tr>
+      </tbody>
+    </table>
+  )}
+
+  {elementGroups.length > 0 && (
+    <table class="tbl">
+      <thead><tr><th colspan="2">{effect_translation[lang]}</th></tr></thead>
+      <tbody>
+        {elementGroups.map((line: any) => (
+          <tr>
+            <td class="element-cell">
+              <svg
+                class="dusk-elements"
+                style={`background-color:${line.hidden ? 'gray' : line.color};`}
+                aria-label={line.elem}
+              >
+                <use href={`/spritesheets/${game}.svg?v=1#element-${line.elem}`} />
+              </svg>
+            </td>
+            <td>
+              <ul class="effect-list">
+                {line.effects?.map((effect: any) => {
+                  const min = effect.min_elem ?? 0;
+                  const max = effect.max_elem ?? 100;
+                  return (
+                    <li>
+                      {effect.effect && (
+                        <Popover
+                          title={effect.effect.name[lang]}
+                          href={`/${game}/effects/${effect.effect.id}/${lang}`}
+                          restrainWidth={true}
+                        >
+                          <span slot="trigger">{effect.effect.name[lang]}</span>
+                          {effect.effect.desc?.[lang] && <p>{effect.effect.desc[lang]}</p>}
+                          <a href={`/${game}/effects/${effect.effect.id}/${lang}`}>
+                            {details_translation[lang]}
+                          </a>
+                        </Popover>
+                      )}
+                      <span> ({effect.min_elem ?? ''}-{effect.max_elem ?? ''})</span>
+                      <div class="effect-bar">
+                        <div
+                          class="elemental-bar"
+                          style={`background:${line.color};left:${min}%;width:${max - min}%;`}
+                        />
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )}
+
+  {stats && (
+    <table class="tbl item-stats">
+      <thead><tr><th colspan="2">Stats</th></tr></thead>
+      <tbody>
+        {statRows.map((stat) => (
+          <tr>
+            <td><b>{stat.label}</b></td>
+            <td>{stats[stat.key] ?? 0}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )}
+
+  {item.chars?.length > 0 && (
+    <table class="tbl">
+      <thead><tr><th>{character_translation[lang]}</th></tr></thead>
+      <tbody><tr><td>
+        {item.chars.map((character: string) => (
+          <img
+            src={`/media/games/${game}/equip/equip-${character}.webp?v=1`}
+            alt={`Can equip: ${character}`}
+            style="aspect-ratio: 111/44; width: 111px;"
+          />
+        ))}
+      </td></tr></tbody>
+    </table>
+  )}
+</div>
+
+<style>
+  .effect-list {
+    list-style: none;
+    padding: 0;
+  }
+  .effect-list li {
+    margin-bottom: 0.5rem;
+  }
+  .element-cell {
+    text-align: center;
+    vertical-align: middle;
+  }
+  .effect-bar {
+    position: relative;
+    height: 0.4rem;
+    width: 100%;
+    margin-top: 0.25rem;
+    background: #00000018;
+  }
+  .elemental-bar {
+    position: absolute;
+    height: 100%;
+  }
+  .item-stats td {
+    vertical-align: middle;
+  }
+</style>

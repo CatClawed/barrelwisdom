@@ -1,0 +1,1 @@
+{"id":"defense-down-m","name":{"en":"Defense Down-M","ja":"防御力ダウン・中","sc":"防御力下降‧中","tc":"防禦力下降‧中"},"desc":{"en":"Reduces defense of the target.","ja":"対象の防御力の値を低下させる"},"items":[{"name":{"en":"Barrel","ja":"たる"},"id":"barrel"}],"index":74,"enum":"ITEM_EFF_DEFENSE_DOWN_2","advanced":{"actTag":"ACT_MINUS_DEF","min_1":"15"}}

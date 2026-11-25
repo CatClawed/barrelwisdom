@@ -1,0 +1,1 @@
+{"id":"chains-of-dest","name":{"en":"Chains of Dest.","ja":"破壊の鎖"},"desc":{"en":"Increases damage bonus from critical hits by 10%.","ja":"クリティカル発生時のダメージボーナスが１０％上昇する"},"items":[{"name":{"en":"Soul Binder","ja":"魂縛のチェイン"},"id":"soul-binder"}],"index":315,"enum":"ITEM_EFF_CRIT_BONUS_3","advanced":{"actTag":"ACT_EQUIP_ADD_CRITBONUS","min_1":"10"}}

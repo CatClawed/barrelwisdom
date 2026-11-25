@@ -1,0 +1,1 @@
+{"id":"jumbo-blessing","name":{"en":"Jumbo Blessing","ja":"ジャンボな祝福"},"desc":{"en":"Strengthens item effect by (equip cost squared x8)%.","ja":"効果：アイテムの効果を装備枠の２乗×８％強化する"},"grade":99,"points":33,"bomb":true,"heal":true,"buff":true,"index":297,"enum":"ITEM_POTENTIAL_PROTECT_ICE","advanced":{"PotBase":"ITEM_SUB_COST_PROPORTION_BONUS","min":"8"}}

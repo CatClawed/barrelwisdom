@@ -1,0 +1,1 @@
+{"id":"movement-bonus","name":{"en":"Movement Bonus","ja":"行動ボーナス強化"},"desc":{"en":"Increases support gauge by an extra 25% when taking actions.","ja":"行動時のサポートゲージの増加量が２５％上昇する"},"items":[{"name":{"en":"Brother Call","ja":"ブラザーコール"},"id":"brother-call"}],"index":349,"enum":"ITEM_EFF_YOBI_007","advanced":{"actTag":"ACT_PASSIVE_CHANGE_SUPPORTGAUGE","min_1":"25"}}

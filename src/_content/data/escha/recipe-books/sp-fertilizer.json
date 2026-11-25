@@ -1,0 +1,1 @@
+{"id":"sp-fertilizer","name":{"en":"SP Fertilizer","ja":"良い肥料づくり","sc":"制作优良肥料","tc":"製作優良肥料"},"desc":{"en":"A memo written by Clone that describes methods for creating highly effective fertilizer.","ja":"クローネが考えた、効果の高い肥料を作るための方法がまとめられたメモ"},"items":[{"id":"fertilizer","name":{"en":"Fertilizer","ja":"濃縮栄養土"}}],"acquisition":"Assignment 6","index":54,"enum":"ITEM_BOOK_RECIPE_55"}

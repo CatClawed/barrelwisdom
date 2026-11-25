@@ -1,0 +1,1 @@
+{"id":"ultimate-action","name":{"en":"Ultimate Action","ja":"究極の行動力","sc":"终极的行动力","tc":"終極的行動力"},"desc":{"en":"Gain ultimate action. Increases speed by 35.","ja":"究極の行動力を得る。素早さが３５上昇する"},"items":[{"name":{"en":"Thunder Outfit","ja":"雷神のころも"},"id":"thunder-outfit"}],"index":450,"enum":"ITEM_EFF_YOBI_129","advanced":{"actTag":"ACT_EQUIP_ADD_PARAM_SPD","min_1":"35"}}

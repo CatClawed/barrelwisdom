@@ -1,0 +1,1 @@
+{"id":"water-blessing","name":{"en":"Water Blessing","ja":"水の精の加護"},"desc":{"en":"Increases water resistance by 33.","ja":"水耐性が３３上昇する"},"items":[{"name":{"en":"Seven Star Medal","ja":"七星のメダル"},"id":"seven-star-medal"}],"index":307,"enum":"ITEM_EFF_ADD_ACCURACY_1","advanced":{"actTag":"ACT_EQUIP_ADD_RESIST","min_1":"ELEMENT_WATER","min_2":"33"}}

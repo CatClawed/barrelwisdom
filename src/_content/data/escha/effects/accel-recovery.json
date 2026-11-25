@@ -1,0 +1,1 @@
+{"id":"accel-recovery","name":{"en":"Accel. Recovery","ja":"再生力促進"},"desc":{"en":"Restores a fair amount of HP every turn.","ja":"行動時にＨＰが回復する"},"items":[{"name":{"en":"Phoenix Bracelet","ja":"不死鳥の腕輪"},"id":"phoenix-bracelet"}],"index":296,"enum":"ITEM_EFF_REGEN_PLUS","advanced":{"actTag":"ACT_EQUIP_HEALING_ACTION","min_1":"8"}}

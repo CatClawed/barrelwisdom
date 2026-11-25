@@ -19,11 +19,12 @@ interface ButtonGroupFilter {
   key: string;
   groupName: string;   // matches data-filter-group on FilterButton
   mode?: 'all' | 'any'; // AND vs OR across active selections, default 'all'
+  excludeFullMatch?: boolean;
 }
 type FilterConfig = SelectFilter | ButtonGroupFilter | ColorFilter;
 
 interface ListFilterOptions {
-  lang: string;
+  lang?: string;
   listSelector?: string;
   searchInputId?: string;
   searchAttr?: string;   // card's data-{searchAttr}; falls back to h4 text if absent
@@ -80,14 +81,15 @@ export function initListFilters(opts: ListFilterOptions) {
 
       for (const f of filters) {
         if (!matches) break;
-        const cardValues = card.dataset[f.key]?.split(',').filter(Boolean) ?? [];
 
         if (f.type === 'select') {
+          const cardValues = card.dataset[f.key]?.split(',').filter(Boolean) ?? [];
           const val = selectEls.get(f.key)?.value;
           const none = f.noneValue ?? '-1';
           if (val && val !== none && !cardValues.includes(val)) matches = false;
         }
         else if (f.type === 'buttons') {
+          const cardValues = card.dataset[f.key]?.split(',').filter(Boolean) ?? [];
           const totalKeys = document.querySelectorAll(
               `[data-filter-group="${f.groupName}"] .icon-button`
             ).length;
@@ -95,11 +97,8 @@ export function initListFilters(opts: ListFilterOptions) {
           const mode = f.mode ?? 'all';
           const ok = active.length === 0 ||
             (mode === 'all'
-              ? (
-              cardValues.length !== totalKeys
-                ? active.every((v) => cardValues.includes(v))
-                : false
-              )
+              ? active.every((v) => cardValues.includes(v)) &&
+                (!f.excludeFullMatch || cardValues.length !== totalKeys)
               : active.some((v) => cardValues.includes(v)));
           if (!ok) matches = false;
         }

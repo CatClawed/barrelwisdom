@@ -1,0 +1,1 @@
+{"id":"hard-to-notice","name":{"en":"Hard to Notice","ja":"気付かれ難い","sc":"不容易被发现","tc":"不容易被發現"},"desc":{"en":"Become targeted in battle less often.","ja":"戦闘中、攻撃対象になりにくくなる"},"items":[{"name":{"en":"Feather Ornament","ja":"羽根飾りのアクセ"},"id":"feather-ornament"}],"index":330,"enum":"ITEM_EFF_IGNORE_TARGET","advanced":{"actTag":"ACT_EQUIP_CHANGE_TARGETRATE","min_1":"-30"}}

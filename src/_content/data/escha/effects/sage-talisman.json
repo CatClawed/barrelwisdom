@@ -1,0 +1,1 @@
+{"id":"sage-talisman","name":{"en":"Sage Talisman","ja":"知恵ある者の札"},"desc":{"en":"Increases experience gained from battle by a fair amount.","ja":"戦闘で手に入る経験値が増える"},"items":[{"name":{"en":"Tarot of Fate","ja":"運命のタロット"},"id":"tarot-of-fate"}],"index":303,"enum":"ITEM_EFF_EXP_UP_2","advanced":{"actTag":"ACT_EQUIP_BONUS_EXP","min_1":"15"}}

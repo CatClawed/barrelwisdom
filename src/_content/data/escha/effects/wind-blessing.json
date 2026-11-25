@@ -1,0 +1,1 @@
+{"id":"wind-blessing","name":{"en":"Wind Blessing","ja":"風の精の加護"},"desc":{"en":"Increases wind resistance by 33.","ja":"風耐性が３３上昇する"},"items":[{"name":{"en":"Seven Star Medal","ja":"七星のメダル"},"id":"seven-star-medal"}],"index":308,"enum":"ITEM_EFF_ADD_CRITICAL_1","advanced":{"actTag":"ACT_EQUIP_ADD_RESIST","min_1":"ELEMENT_WIND","min_2":"33"}}

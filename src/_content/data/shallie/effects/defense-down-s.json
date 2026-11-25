@@ -1,0 +1,1 @@
+{"id":"defense-down-s","name":{"en":"Defense Down-S","ja":"防御力ダウン・弱","sc":"防御力下降‧弱","tc":"防禦力下降‧弱"},"desc":{"en":"Reduces defense of the target by a small amount.","ja":"対象の防御力の値を少しだけ低下させる"},"items":[{"name":{"en":"Bomb","ja":"フラム"},"id":"bomb"}],"index":73,"enum":"ITEM_EFF_DEFENSE_DOWN_1","advanced":{"actTag":"ACT_MINUS_DEF","min_1":"10"}}

@@ -1,0 +1,1 @@
+{"id":"speed-down-s","name":{"en":"Speed Down-S","ja":"素早さダウン・弱","sc":"敏捷度下降‧弱","tc":"敏捷度下降‧弱"},"desc":{"en":"Reduces speed of the target by a small amount.","ja":"対象の素早さの値を少しだけ低下させる"},"items":[{"name":{"en":"Ice Bomb","ja":"レヘルン"},"id":"ice-bomb"}],"index":76,"enum":"ITEM_EFF_SPD_DOWN_1","advanced":{"actTag":"ACT_MINUS_SPD","min_1":"10"}}

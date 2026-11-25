@@ -1,0 +1,1 @@
+{"id":"freezing-ammo","name":{"en":"Freezing ammo","ja":"雪操る氷結弾","sc":"操控冰雪的结冰弹","tc":"操控冰雪的結冰彈"},"desc":{"en":"It details a technique for creating a more effective Ice Bomb.","ja":"レヘルンの持つ周囲の大気に影響を与える力をより強化させる方法が書かれている"},"items":[{"id":"eis-ice-bomb","name":{"en":"Eis Ice Bomb","ja":"スニーレヘルン"}}],"acquisition":"Assignment 5","index":44,"enum":"ITEM_BOOK_RECIPE_44"}

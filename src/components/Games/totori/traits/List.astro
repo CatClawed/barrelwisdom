@@ -61,7 +61,7 @@ items.sort((a, b) => a.data.index - b.data.index);
   import { initListFilters } from '@app/utils/filter-controller';
   initListFilters({
     filters: [
-      { type: 'buttons', key: 'traits', groupName: 'traits', mode: 'all' },
+      { type: 'buttons', key: 'traits', groupName: 'traits', mode: 'all', excludeFullMatch: true },
     ],
   });
 </script>

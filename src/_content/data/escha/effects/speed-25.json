@@ -1,0 +1,1 @@
+{"id":"speed-25","name":{"en":"Speed +25","ja":"素早さ＋２５"},"desc":{"en":"Increases speed by 25.","ja":"素早さの値が２５上昇する"},"items":[{"name":{"en":"Acrobatic Armor","ja":"軽業師の具足"},"id":"acrobatic-armor"}],"index":253,"enum":"ITEM_EFF_EQUIP_SPD_PLUS_04","advanced":{"actTag":"ACT_EQUIP_ADD_PARAM_SPD","min_1":"25"}}

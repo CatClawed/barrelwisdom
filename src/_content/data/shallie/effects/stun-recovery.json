@@ -1,0 +1,1 @@
+{"id":"stun-recovery","name":{"en":"Stun Recovery","ja":"気絶回復","sc":"昏迷恢复","tc":"昏迷回復"},"desc":{"en":"Recover faster from Break condition.","ja":"ブレイク状態からの回復が早くなる"},"items":[{"name":{"en":"Aroma Pouch","ja":"アロマポーチ"},"id":"aroma-pouch"}],"index":337,"enum":"ITEM_EFF_STUN_RECOVERY_1","advanced":{"actTag":"ACT_PASSIVE_ADD_STUN_HEAL","min_1":"5"}}

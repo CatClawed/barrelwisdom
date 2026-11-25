@@ -1,0 +1,1 @@
+{"id":"power-of-gods-blessings","name":{"en":"Power of Gods' Blessings","ja":"神に祝福されし力","sc":"受神祝福之力","tc":"受神祝福之力"},"desc":{"en":"Effect: Increases item's effect by 40％.","ja":"効果：アイテムの効果が、４０％上昇する"},"grade":99,"points":33,"heal":true,"index":250,"enum":"ITEM_POTENTIAL_HEALPLUS_EX","advanced":{"PotBase":"ITEM_SUB_ITM_CHANGE_POWER","min":"40"}}

@@ -1,0 +1,1 @@
+{"id":"quick-throw","name":{"en":"Quick Throw","ja":"素早く投げられる","sc":"快速投掷","tc":"快速投擲"},"desc":{"en":"Can be thrown quickly, reducing wait time after using the item.","ja":"素早く投げられるため、使用後の待ち時間が少なくてすむ"},"items":[{"name":{"en":"Weight Stone","ja":"つけもの石"},"id":"weight-stone"}],"index":59,"enum":"ITEM_EFF_MIST_MEDICAL","advanced":{}}

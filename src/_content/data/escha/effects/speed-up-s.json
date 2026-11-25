@@ -1,0 +1,1 @@
+{"id":"speed-up-s","name":{"en":"Speed Up S","ja":"素早さアップ・強"},"desc":{"en":"Increases the target's speed a large amount for the next 5 turns.","ja":"対象の素早さを大きく上昇させる。効果は５回行動するまで持続する"},"items":[{"name":{"en":"Strong Powder","ja":"強壮の粉末"},"id":"strong-powder"}],"index":191,"enum":"ITEM_EFF_SPEED_UP_3","advanced":{"actTag":"ACT_PLUS_SPD","min_1":"50"}}

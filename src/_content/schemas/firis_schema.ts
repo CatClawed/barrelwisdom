@@ -1,4 +1,4 @@
-import { z } from 'astro:content';
+import { z } from 'astro/zod';
 import { languageSchema, nameLinkSchema, indexedDescriptions } from './common_schema';
 
 const descSchema = indexedDescriptions(4, ["desc"]);

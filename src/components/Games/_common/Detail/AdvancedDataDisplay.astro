@@ -1,0 +1,22 @@
+---
+import Popover from '@app/components/Games/_common/Popover.astro';
+
+interface Props {
+  mode: string;
+  restrainWidth?: boolean;
+}
+
+const { mode, restrainWidth = false } = Astro.props;
+---
+
+{mode === 'list' ? (
+  <Popover cls="dashed" restrainWidth={restrainWidth}>
+    <span slot="trigger">Advanced Data</span>
+    <slot />
+  </Popover>
+) : (
+  <>
+    <b>Advanced Data:</b>
+    <slot />
+  </>
+)}

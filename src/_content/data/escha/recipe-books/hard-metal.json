@@ -1,0 +1,1 @@
+{"id":"hard-metal","name":{"en":"Hard Metal","ja":"最硬の金属","sc":"最硬的金属","tc":"最硬的金屬"},"desc":{"en":"A recipe with a detailed analysis of rare metals found in the Dragon's Nest.","ja":"竜の巣で手に入れた希少金属の成分を、詳細に分析したレシピ"},"items":[{"id":"einzel-steel","name":{"en":"Einzel Steel","ja":"アインツェル鋼"}}],"acquisition":"After visiting Dragon's Nest","index":52,"enum":"ITEM_BOOK_RECIPE_53"}

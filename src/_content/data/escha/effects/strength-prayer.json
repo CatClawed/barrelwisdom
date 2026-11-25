@@ -1,0 +1,1 @@
+{"id":"strength-prayer","name":{"en":"Strength Prayer","ja":"剛力の願い"},"desc":{"en":"Transfers 15% of defense power and speed to attack power.","ja":"攻撃力の値に、防御力と素早さの値の１５％の数値が移し変えられる"},"items":[{"name":{"en":"Dusk Talisman","ja":"黄昏の魔除け"},"id":"dusk-talisman"}],"index":268,"enum":"ITEM_EFF_PRAY_POWER","advanced":{"actTag":"ACT_EQUIP_PARAM_SPECILIZED","min_2":"15"}}

@@ -1,0 +1,1 @@
+{"id":"speed-down-m","name":{"en":"Speed Down-M","ja":"素早さダウン・中","sc":"敏捷度下降‧中","tc":"敏捷度下降‧中"},"desc":{"en":"Reduces speed of the target.","ja":"対象の素早さの値を低下させる"},"items":[{"name":{"en":"Glass Rose","ja":"ガラスのバラ"},"id":"glass-rose"},{"name":{"en":"Ice Bomb","ja":"レヘルン"},"id":"ice-bomb"}],"index":77,"enum":"ITEM_EFF_SPD_DOWN_2","advanced":{"actTag":"ACT_MINUS_SPD","min_1":"15"}}

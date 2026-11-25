@@ -4,6 +4,7 @@ import PaneListWrapper from '@components/Games/_common/List/PaneListWrapper.astr
 import MonsterList from '@components/Games/_common/List/MonsterList.astro';
 import FilterButton from '@components/Games/_common/Filter/FilterButton.astro';
 import TextFilter from '@components/Games/_common/Filter/TextFilter.astro';
+import Badge from '@components/Games/_common/Badge.astro';
 const { items, lang, title, game, section } = Astro.props;
 
 items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
@@ -46,7 +47,7 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
           i.data.index < 500 ? 'small' : i.data.index < 1000 ? 'large' : 'boss'
         }
       >
-        {i.data.dlc && <span class="badge bg-primary">DLC</span>}
+        {i.data.dlc && <Badge text="DLC" />}
       </MonsterList>
     ))
   }
@@ -59,5 +60,5 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
       { type: 'buttons', key: 'kinds', groupName: 'kinds', mode: 'any' },
     ],
   });
-  initPaneController({});
+  initPaneController();
 </script>

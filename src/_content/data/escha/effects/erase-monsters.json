@@ -1,0 +1,1 @@
+{"id":"erase-monsters","name":{"en":"Erase Monsters","ja":"魔物を消し去る"},"desc":{"en":"Erases all enemy symbols from the Field Map when used. This has no effect on powerful foes.","ja":"使用すると、フィールドにいる敵シンボルを全て消し去ることができる。ただし、強敵には効かない"},"items":[{"name":{"en":"Beast King Relief","ja":"獣王のレリーフ"},"id":"beast-king-relief"}],"index":392,"enum":"ITEM_EFF_YOBI_088","advanced":{}}

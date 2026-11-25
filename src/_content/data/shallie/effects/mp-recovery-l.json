@@ -1,0 +1,1 @@
+{"id":"mp-recovery-l","name":{"en":"MP Recovery-L","ja":"ＭＰ回復・強","sc":"ＭＰ恢复‧强","tc":"ＭＰ回復‧強"},"desc":{"en":"The target recovers a large amount of MP.","ja":"対象のＭＰを大きく回復する"},"items":[{"name":{"en":"Media Book","ja":"メディアの書"},"id":"media-book"}],"index":124,"enum":"ITEM_EFF_DELIVERY_12","advanced":{"actTag":"ACT_HEAL_MP","min_1":"25","max_1":"35"}}

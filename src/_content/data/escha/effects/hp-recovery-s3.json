@@ -1,0 +1,1 @@
+{"id":"hp-recovery-s3","name":{"en":"HP Recovery S3","ja":"ＨＰ回復・超大"},"desc":{"en":"Restores a massive amount of the target's HP.","ja":"対象のＨＰを非常に大きく回復する"},"items":[{"name":{"en":"Elixir Base","ja":"エリキシル源薬"},"id":"elixir-base"}],"index":112,"enum":"ITEM_EFF_HEAL_HP_5","advanced":{"actTag":"ACT_HEAL_HP","min_1":"95","max_1":"135"}}

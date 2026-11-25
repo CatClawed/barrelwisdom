@@ -1,8 +1,8 @@
 ---
 import Effect from '@app/components/Games/_common/Detail/Effect.astro';
 import AdvancedData from './AdvancedData.astro'
+import AdvancedDataDisplay from '@app/components/Games/_common/Detail/AdvancedDataDisplay.astro';
 import { item_translation } from '@app/localization/translations/common-strings';
-import Popover from '@app/components/Games/_common/Popover.astro';
 
 const { item, lang, mode, game, section } = Astro.props;
 ---
@@ -25,15 +25,9 @@ const { item, lang, mode, game, section } = Astro.props;
       </ul>
   )}
   {item.advanced && (
-    <>
-      {mode === 'list' ? (
-        <Popover cls="dashed">
-          <span slot="trigger">Advanced Data</span>
-          <AdvancedData item={item.advanced} />
-        </Popover>
-      ) :
-      ( <b>Advanced Data:</b><AdvancedData item={item.advanced} /> )}
-    </>
+    <AdvancedDataDisplay mode={mode}>
+      <AdvancedData item={item.advanced} />
+    </AdvancedDataDisplay>
   )}
 
 </Effect>

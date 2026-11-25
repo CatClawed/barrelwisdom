@@ -1,16 +1,15 @@
 ---
+import {
+category_translation,
+level_translation,
+} from '@app/localization/translations/common-strings';
+import Dropdown from '@components/Games/_common/Filter/Dropdown.astro';
+import TextFilter from '@components/Games/_common/Filter/TextFilter.astro';
+import ItemList from '@components/Games/_common/List/ItemList.astro';
+import PaneListWrapper from '@components/Games/_common/List/PaneListWrapper.astro';
 import { getCollection } from 'astro:content';
 import ItemAttributeList from './ItemAttributeList.astro';
-import PaneListWrapper from '@components/Games/_common/List/PaneListWrapper.astro';
-import ItemList from '@components/Games/_common/List/ItemList.astro';
-import Dropdown from '@components/Games/_common/Filter/Dropdown.astro';
-import FilterButton from '@components/Games/_common/Filter/FilterButton.astro';
-import TextFilter from '@components/Games/_common/Filter/TextFilter.astro';
-import {
-  category_translation,
-  level_translation,
-} from '@app/localization/translations/common-strings';
-import ColorPicker from './ColorPicker.astro';
+import Badge from '@components/Games/_common/Badge.astro';
 
 const { items, lang, title, game, section } = Astro.props;
 
@@ -49,14 +48,10 @@ items.sort((a, b) => a.data.index - b.data.index);
         data-category={i.data.categories?.map((c) => c.id).join(',')}
       >
         {i.data.isDLC && (
-          <span slot="title-matter" class="badge bg-primary">
-            DLC
-          </span>
+          <Badge slot="title-matter" text="DLC" />
         )}
         {i.data.isDX && (
-          <span slot="title-matter" class="badge bg-primary">
-            DX
-          </span>
+          <Badge slot="title-matter" text="DX" />
         )}
         {i.data.level && (
           <b slot="title-matter">
@@ -74,5 +69,5 @@ items.sort((a, b) => a.data.index - b.data.index);
   initListFilters({
     filters: [{ type: 'select', key: 'category', elementId: 'category' }],
   });
-  initPaneController({});
+  initPaneController();
 </script>

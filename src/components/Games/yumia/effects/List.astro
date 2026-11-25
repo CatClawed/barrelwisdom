@@ -1,43 +1,34 @@
 ---
 import Detail from './Detail.astro';
-import TextFilter from '@components/Games/_common/Filter/TextFilter.astro';
+import EffectList from '@components/Games/_common/List/EffectList.astro';
 
 const { items, lang, title, game, section } = Astro.props;
 ---
 
-<h1>{title}</h1>
-<div class="filters">
-  <TextFilter gridSize={12} lang={lang} />
-</div>
-<ul
-  class="list"
-  id="item-list"
-  data-lang={lang}
-  data-game={game}
-  data-section={section}
->
-  {
-    items.map((i, index) => (
-      <li
-        class="list-container"
-        data-id={i.id}
-        data-search={`${i.data.name[lang].toLowerCase()} ^ ${i.data.desc1[lang].toLowerCase()} ^ ${i.data.desc2?.[lang]?.toLowerCase() ?? ''}`}
-      >
-        <Detail
-          item={i.data}
-          lang={lang}
-          mode="list"
-          game={game}
-          section={section}
-        />
-      </li>
-    ))
-  }
-</ul>
+<EffectList
+  items={items}
+  lang={lang}
+  title={title}
+  game={game}
+  section={section}
+  DetailComponent={Detail}
+  getSearchText={(data: any, language: string) =>
+    `${data.name[language].toLowerCase()} ^ ${data.desc1[language].toLowerCase()} ^ ${data.desc2?.[language]?.toLowerCase() ?? ''}`}
+/>
 <dialog id="map-modal" class="map-modal">
   <div id="modal-content"></div>
 </dialog>
-<script>
-  import { initListFilters } from '@app/utils/filter-controller';
-  initListFilters({});
-</script>
+<style>
+  .map-modal {
+    width: 90vw;
+    max-width: 800px;
+    height: 80vh;
+    padding: 2rem;
+    border: none;
+    background-color: transparent;
+
+    &::backdrop {
+      background: rgba(0, 0, 0, 0.7);
+    }
+  }
+</style>

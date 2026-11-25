@@ -4,6 +4,7 @@ import PaneListWrapper from '@components/Games/_common/List/PaneListWrapper.astr
 import MonsterList from '@components/Games/_common/List/MonsterList.astro';
 import Dropdown from '@components/Games/_common/Filter/Dropdown.astro';
 import TextFilter from '@components/Games/_common/Filter/TextFilter.astro';
+import Badge from '@components/Games/_common/Badge.astro';
 import { race_translation } from '@app/localization/translations/common-strings';
 
 const { items, lang, title, game, section } = Astro.props;
@@ -48,7 +49,7 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
         data-search={i.data.name[lang]}
         data-race={i.data.race.id}
       >
-        {i.data.isDLC && <span class="badge bg-primary">DLC</span>}
+        {i.data.isDLC && <Badge text="DLC" />}
         <svg>
           <use href={`/spritesheets/${game}.svg?v=1#race-${i.data.race.id}`} />
         </svg>

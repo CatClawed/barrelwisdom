@@ -5,6 +5,7 @@ import Map from '@app/components/Games/yumia/map/Map.astro';
 import { element_map } from '@app/components/Games/yumia/yumia_constants';
 import { outer_translation, sp_translation, comfort_translation, material_translation, inner_translation } from '@app/localization/translations/yumia';
 import { stat_translation, details_translation, quality_translation, monster_translation, effect_translation, item_translation } from '@app/localization/translations/common-strings';
+import Badge from '@components/Games/_common/Badge.astro';
 const { item, lang, mode, game, section } = Astro.props;
 
 const level0 = item.recipe?.level[0];
@@ -16,7 +17,7 @@ const activeElements = level0 ? [
 ].filter((el) => el.active) : [];
 ---
 <div class={mode === 'detail' ? `card` : undefined}>
-  <div class="card-title"><h3>{item.name[lang]}</h3> {item.isDLC && <span class="badge bg-primary">DLC</span>}</div>
+  <div class="card-title"><h3>{item.name[lang]}</h3> {item.isDLC && <Badge text="DLC" />}</div>
 
   <div class="image-desc-display">
     {

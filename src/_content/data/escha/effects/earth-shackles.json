@@ -1,0 +1,1 @@
+{"id":"earth-shackles","name":{"en":"Earth Shackles","ja":"大地の枷"},"desc":{"en":"Immunity to turn-delaying effects.","ja":"行動順を遅らせる効果を受けたとき、その効果を完全に無効化する"},"items":[{"name":{"en":"Exceed Belt","ja":"イクシードベルト"},"id":"exceed-belt"}],"index":348,"enum":"ITEM_EFF_YOBI_013","advanced":{"actTag":"ACT_RESIST_KNOCKBACK","min_1":"100"}}

@@ -1,0 +1,1 @@
+{"id":"ultimate-attack","name":{"en":"Ultimate Attack","ja":"究極の攻撃力","sc":"终极的攻击力","tc":"終極的攻擊力"},"desc":{"en":"Gain ultimate attack. Attack increases by 35.","ja":"究極の攻撃力を得る。攻撃力が３５上昇する"},"items":[{"name":{"en":"Thunder Outfit","ja":"雷神のころも"},"id":"thunder-outfit"}],"index":436,"enum":"ITEM_EFF_YOBI_114","advanced":{"actTag":"ACT_EQUIP_ADD_PARAM_ATK","min_1":"50"}}

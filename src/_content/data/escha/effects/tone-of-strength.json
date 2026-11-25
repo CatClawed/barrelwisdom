@@ -1,0 +1,1 @@
+{"id":"tone-of-strength","name":{"en":"Tone of Strength","ja":"力の音色"},"desc":{"en":"A strong tune increases the target's attack power. The effect lasts for 5 turns.","ja":"力強い音色で、対象の攻撃力を上昇させる。効果は５回行動するまで持続する"},"items":[{"name":{"en":"Music Box","ja":"音手箱"},"id":"music-box"}],"index":152,"enum":"ITEM_EFF_TONE_1","advanced":{"actTag":"ACT_PLUS_ATK","min_1":"10"}}

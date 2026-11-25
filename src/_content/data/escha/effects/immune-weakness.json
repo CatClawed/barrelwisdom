@@ -1,0 +1,1 @@
+{"id":"immune-weakness","name":{"en":"Immune: Weakness","ja":"弱体化を無効化"},"desc":{"en":"Immunity to weakness.","ja":"弱体化の状態異常を無効化する"},"items":[{"name":{"en":"Angel Ribbon","ja":"エンゼルリボン"},"id":"angel-ribbon"}],"index":335,"enum":"ITEM_EFF_ANTI_WEAKNESS","advanced":{"actTag":"ACT_AUTO_RESIST_CURSE"}}

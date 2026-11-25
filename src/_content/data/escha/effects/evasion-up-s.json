@@ -1,0 +1,1 @@
+{"id":"evasion-up-s","name":{"en":"Evasion Up S","ja":"回避率アップ・強"},"desc":{"en":"Increases the target's dodge chance by a large amount for the next 5 turns.","ja":"対象の攻撃回避率を大きく上昇させる。効果は５回行動するまで持続する"},"items":[{"name":{"en":"Eye-Opener","ja":"開眼の目薬"},"id":"eye-opener"}],"index":200,"enum":"ITEM_EFF_AVOID_UP_3","advanced":{"actTag":"ACT_ADD_EVADE","min_1":"25"}}

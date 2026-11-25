@@ -1,0 +1,1 @@
+{"id":"cure-slow","name":{"en":"Cure Slow","ja":"スロウ状態を治療","sc":"治疗迟缓状态","tc":"治療遲緩狀態"},"desc":{"en":"The target recovers from slow.","ja":"対象のスロウの状態異常を回復する"},"items":[{"name":{"en":"Time Watch","ja":"時操の懐中時計"},"id":"time-watch"}],"index":152,"enum":"ITEM_EFF_CURE_SLOW","advanced":{"actTag":"ACT_CURE_SLOW","min_1":"100"}}

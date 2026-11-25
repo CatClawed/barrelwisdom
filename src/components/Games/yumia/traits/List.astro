@@ -69,7 +69,7 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
   import { initModalMapController } from '@app/utils/modal-map-controller';
   initListFilters({
     filters: [
-      { type: 'buttons', key: 'traits', groupName: 'traits', mode: 'all' },
+      { type: 'buttons', key: 'traits', groupName: 'traits', mode: 'all', excludeFullMatch: true },
     ],
   });
   initModalMapController({ game: 'yumia', section: 'traits' });

@@ -1,0 +1,1 @@
+{"id":"enhance-crit-s","name":{"en":"Enhance Crit-S","ja":"会心強化・弱","sc":"重击强化‧弱","tc":"自信強化‧弱"},"desc":{"en":"Increases the damage bonus of critical hits by 5％.","ja":"クリティカル発生時のダメージボーナスが５％上昇する"},"items":[{"name":{"en":"Combat Shirt","ja":"コンバットシャツ"},"id":"combat-shirt"}],"index":393,"enum":"ITEM_EFF_YOBI_025","advanced":{"actTag":"ACT_EQUIP_ADD_CRITBONUS","min_1":"5"}}

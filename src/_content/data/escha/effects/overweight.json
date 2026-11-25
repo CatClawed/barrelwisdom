@@ -1,0 +1,1 @@
+{"id":"overweight","name":{"en":"Overweight","ja":"重量オーバー"},"desc":{"en":"Reduces speed by 25.","ja":"素早さの値が２５低下する"},"items":[{"name":{"en":"Exceed Belt","ja":"イクシードベルト"},"id":"exceed-belt"}],"index":357,"enum":"ITEM_EFF_YOBI_068","advanced":{"actTag":"ACT_EQUIP_ADD_PARAM_SPD","min_1":"-25"}}

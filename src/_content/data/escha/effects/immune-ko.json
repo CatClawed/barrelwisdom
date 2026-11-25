@@ -1,0 +1,1 @@
+{"id":"immune-ko","name":{"en":"Immune: KO","ja":"一撃ダウンを無効化"},"desc":{"en":"Immunity to instant death.","ja":"戦闘不能効果を無効化する"},"items":[{"name":{"en":"Dusk Talisman","ja":"黄昏の魔除け"},"id":"dusk-talisman"},{"name":{"en":"Angel Ribbon","ja":"エンゼルリボン"},"id":"angel-ribbon"}],"index":337,"enum":"ITEM_EFF_ANTI_DEAD","advanced":{"actTag":"ACT_AUTO_RESIST_DEATH"}}
