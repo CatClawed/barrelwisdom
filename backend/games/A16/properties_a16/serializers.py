@@ -18,6 +18,14 @@ class A16PropertyNameSerializer(serializers.ModelSerializer):
         model = Property
         fields = ['id', 'name']
 
+class A16PropertySimpleSerializer(serializers.ModelSerializer):
+    id = serializers.CharField(source='slug')
+    name = LegacyTranslatedField(obj_prefix='prop', field_name='name')
+    desc = LegacyTranslatedField(obj_prefix='prop', field_name='desc')
+    class Meta:
+        model = Property
+        fields = ['id', 'name', 'desc']
+
 class A16PropertySerializer(serializers.ModelSerializer):
     id = serializers.CharField(source='slug')
     name = LegacyTranslatedField(obj_prefix='prop', field_name='name')
@@ -28,7 +36,7 @@ class A16PropertySerializer(serializers.ModelSerializer):
     items = A16ItemNameSerializer(many=True, source='item_set')
     class Meta:
         model = Property
-        fields = ['id', 'name', 'desc', 'grade', 'points', 'bomb', 'heal', 'weapon', 'armor', 'accessory', 'combo1', 'combo2', 'combo3', 'items']
+        fields = ['id', 'name', 'desc', 'grade', 'points', 'bomb', 'heal', 'weapon', 'armor', 'accessory', 'combo1', 'combo2', 'combo3', 'items', 'index']
 
     def to_representation(self, instance):
         result = super(A16PropertySerializer, self).to_representation(instance)

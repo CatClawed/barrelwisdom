@@ -4,7 +4,7 @@ from games.A15.items_a15.models import Item, Ingredient, Disassembly, Disassembl
 from games.A15.regions_a15.models import FieldEvent
 from games.A15.regions_a15.serializers import A15RegionNameSerializer, A15FieldEventSerializer
 from games.A15.monsters_a15.serializers import A15MonsterNameSerializer, A15MonsterLevelSerializer
-from games.A15.properties_a15.serializers import A15PropertyNameSerializer
+from games.A15.properties_a15.serializers import A15PropertySimpleSerializer
 from games.A15.categories_a15.serializers import A15CategorySerializerName, A15CategorySerializer, A15CategorySerializerLink
 from games.A15.effects_a15.serializers import A15EffectSerializerSimple
 from games._helpers.serializer_helper import DefaultSerializer, DirectTranslatedField, PathTranslatedField, LegacyTranslatedField
@@ -155,12 +155,12 @@ class A15ItemFullSerializer(DefaultSerializer):
     desc = LegacyTranslatedField(obj_prefix='item', field_name='desc')
     locations = A15RegionNameSerializer(many=True)
     monsters = A15MonsterNameSerializer(many=True)
-    properties = A15PropertyNameSerializer(many=True)
+    properties = A15PropertySimpleSerializer(many=True)
     categories = A15CategorySerializer(many=True)
     ingredients = A15IngredientSerializer(many=True, source="ingredient_set")
     chars = serializers.SerializerMethodField()
     stats = A15EquipSerializer(many=True, source="equip_set")
-    disassembled_by = A15DissasembleSerializer(many=True, source="disassembly_set")
+    disassembled_by = serializers.SerializerMethodField()
     disassembles_to = serializers.SerializerMethodField()
     relic_in = A15RelicAreaSerializer(many=True, source="relic_set")
     effectlines = A15EffectLineSerializer(many=True, source="effectline_set")
@@ -174,12 +174,18 @@ class A15ItemFullSerializer(DefaultSerializer):
             'categories', 'ingredients', 'chars', 'stats',
             'disassembled_by', 'disassembles_to', 'relic_in',
             'effectlines', 'book', 'index']
-    def get_disassembles_to(self, obj):
+    def get_disassembled_by(self, obj):
         all_items = []
         for entry in obj.disassembled_set.all():
             all_items.extend(list(entry.parent.all()))
         unique_items = list(set(all_items))
         return A15ItemNameSerializer(unique_items, many=True, context=self.context).data
+
+    def get_disassembles_to(self, obj):
+        all_items = []
+        for entry in obj.disassembly_set.all():
+            all_items.extend(entry.dis.all())
+        return A15ItemNameSerializer(all_items, many=True, context=self.context).data
     
     def get_chars(self, obj):
         slugs = []

@@ -18,7 +18,7 @@ class A15EffectSerializer(DefaultSerializer):
     id = serializers.CharField(source="slug")
     class Meta:
         model = Effect
-        fields = ['id', 'name', 'desc', "items"]
+        fields = ['id', 'name', 'desc', "items", "index"]
 
 class A15EffectSerializerSimple(DefaultSerializer):
     name = LegacyTranslatedField(obj_prefix="eff", field_name="name")

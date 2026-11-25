@@ -32,10 +32,10 @@ class A16MonsterSerializer(serializers.ModelSerializer):
     desc = LegacyTranslatedField(obj_prefix='mon', field_name='desc')
     race = LegacyTranslatedField(obj_prefix='mon', field_name='race')
     locations = A16RegionNameSerializer(many=True)
-    item_set = A16ItemNameSerializer(many=True)
+    drops = A16ItemNameSerializer(many=True, source='item_set')
     class Meta:
         model = Monster
-        fields = ['id', 'name', 'desc', 'race', 'hp', 'atk', 'defen', 'spd', 'level', 'exp', 'cole', 'note', 'locations', 'item_set', 'kind']
+        fields = ['id', 'name', 'desc', 'race', 'hp', 'atk', 'defen', 'spd', 'level', 'exp', 'cole', 'note', 'locations', 'drops', 'kind', 'index']
 
     def to_representation(self, instance):
         result = super(A16MonsterSerializer, self).to_representation(instance)

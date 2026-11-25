@@ -17,6 +17,9 @@ class A16IngredientSerializer(serializers.ModelSerializer):
         model = Ingredient
         fields = ['synthitem']
 
+    def to_representation(self, instance):
+        return A16ItemSerializer(instance.synthitem, context=self.context).data
+
 class A16CategorySerializerName(serializers.ModelSerializer):
     name = LegacyTranslatedField(obj_prefix='cat', field_name='name')
     icon = serializers.CharField(source='icon_name')

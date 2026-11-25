@@ -18,6 +18,15 @@ class A15PropertyNameSerializer(DefaultSerializer):
         model = Property
         fields = ['id', 'name']
 
+class A15PropertySimpleSerializer(DefaultSerializer):
+    name = LegacyTranslatedField(obj_prefix='prop', field_name='name')
+    desc = LegacyTranslatedField(obj_prefix='prop', field_name='desc')
+    id = serializers.CharField(source="slug")
+    class Meta:
+        model = Property
+        fields = ['id', 'name', 'desc']
+
+
 class A15PropertySerializer(DefaultSerializer):
     name = LegacyTranslatedField(obj_prefix='prop', field_name='name')
     desc = LegacyTranslatedField(obj_prefix='prop', field_name='desc')

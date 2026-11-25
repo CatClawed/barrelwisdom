@@ -260,7 +260,8 @@ def export_items():
             )
         if shops:
             data['shop'] = shops[0]
-        for field, trait_field in (('ESP_00', 'trait1'), ('ESP_01', 'trait2')):
+        traits = []
+        for field in ('ESP_00', 'ESP_01'):
             trait_enum = item_data_row[field].strip()
             if not trait_enum:
                 continue
@@ -270,10 +271,11 @@ def export_items():
                     f"item_mat_pot.tsv has no trait matching {trait_enum!r} "
                     f"for item {o.item_ja.name!r}"
                 )
-            data[trait_field] = {
+            traits.append({
                 language: trait_row[f'name_{language}']
                 for language in ('en', 'ja', 'sc', 'tc')
-            }
+            })
+        data['traits'] = traits
         exported_items_by_enum[enum] = (o.slug, data)
 
     homunculus_items = set()
@@ -353,7 +355,10 @@ def export_books():
         data['name']['sc'] = book_row['name_sc']
         data['name']['tc'] = book_row['name_tc']
         acquisition = data.get('acquisition')
-        if isinstance(acquisition, str) and 'shop' in acquisition.casefold():
+        acquisition_is_shop = (
+            isinstance(acquisition, str) and 'shop' in acquisition.casefold()
+        )
+        if acquisition_is_shop:
             del data['acquisition']
 
         shops = shops_by_item_enum.get(enum, [])
@@ -362,7 +367,7 @@ def export_books():
                 f"Book {name_ja!r} ({enum}) is listed in multiple shops: "
                 f"{[shop['ja'] for shop in shops]}"
             )
-        if shops:
+        if shops and (acquisition is None or acquisition_is_shop):
             data['shop'] = shops[0]
         exported_books.append((o.slug, data))
 
@@ -393,10 +398,10 @@ def export_regions():
             json.dump(data, f, ensure_ascii=False, separators=(',', ':'))
 
 
-#export_properties()
-#export_effects()
-#export_items()
-#export_categories()
-#export_monsters()
-#export_regions()
-#export_books()
+export_properties()
+export_effects()
+export_items()
+export_categories()
+export_monsters()
+export_regions()
+export_books()
