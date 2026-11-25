@@ -1,7 +1,7 @@
 ---
-import Popover from '@app/components/Games/_common/Popover.astro';
+import AdvancedDataDisplay from '@app/components/Games/_common/Detail/AdvancedDataDisplay.astro';
+import LevelPopover from '@app/components/Games/_common/Detail/LevelPopover.astro';
 import Trait from '@app/components/Games/_common/Detail/Trait.astro';
-import { level_translation } from '@app/localization/translations/common-strings';
 import { colorHex } from '@app/components/Games/resleriana-red-white/rw_constants';
 import Badge from '@components/Games/_common/Badge.astro';
 
@@ -31,10 +31,7 @@ const traitIcons = [
 >
   <div class="card-icon-position" slot="top-level">
     {item.dlc && <Badge text="DLC" />}
-    <Popover cls="dashed">
-      <span slot="trigger">{level_translation[lang]}:</span>
-      <p>A measure of rarity. This number determines where traits appear.</p>
-    </Popover>
+    <LevelPopover lang={lang} />
     {item.grade}
   </div>
   {
@@ -85,23 +82,12 @@ const traitIcons = [
     )
   }
 
-  {
-    mode === 'list' ? (
-    <Popover cls="dashed">
-      <span slot="trigger">Advanced Data</span>
+  <AdvancedDataDisplay mode={mode}>
       <ul>
         {item.val1_1 && <li>Value 1: {item.val1_1}</li>}
         {item.val2_1 && <li>Value 2: {item.val2_1}</li>}
       </ul>
-    </Popover>
-    ) : (
-        <b>Advanced Data:</b>
-        <ul>
-          {item.val1_1 && <li>Value 1: {item.val1_1}</li>}
-          {item.val2_1 && <li>Value 2: {item.val2_1}</li>}
-        </ul>
-    )
-  }
+  </AdvancedDataDisplay>
 </Trait>
 
 <style>

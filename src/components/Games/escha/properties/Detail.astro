@@ -1,8 +1,8 @@
 ---
 import AdvancedData from '../effects/AdvancedData.astro';
-import Popover from '@app/components/Games/_common/Popover.astro';
+import AdvancedDataDisplay from '@app/components/Games/_common/Detail/AdvancedDataDisplay.astro';
+import LevelPopover from '@app/components/Games/_common/Detail/LevelPopover.astro';
 import Trait from '@app/components/Games/_common/Detail/Trait.astro';
-import { level_translation } from '@app/localization/translations/common-strings';
 
 const { item, lang, mode, game, section } = Astro.props;
 const combos = [item.combo1, item.combo2, item.combo3].filter(
@@ -42,10 +42,7 @@ const traitIcons = [
 {item.desc?.[lang] && <p>{item.desc[lang]} </p>}
   {item.grade && (
     <div style="margin-bottom: 1rem;">
-      <Popover cls="dashed">
-        <span style="padding-right: 0.3rem;" slot="trigger">{level_translation[lang]}:</span>
-        <p>A measure of rarity. This number determines where traits appear.</p>
-      </Popover>
+      <LevelPopover lang={lang} />
       {item.grade}
     </div>
   )}
@@ -61,17 +58,8 @@ const traitIcons = [
   )}
 
   {item.advanced && Object.keys(item.advanced).length > 0 && (
-    mode === 'list' ? (
-      <Popover cls="dashed" restrainWidth={true}>
-        <span slot="trigger">Advanced Data</span>
-        <AdvancedData item={item.advanced} />
-      </Popover>
-    ) : (
-      <>
-        <b>Advanced Data:</b>
-        <AdvancedData item={item.advanced} />
-      </>
-    )
+    <AdvancedDataDisplay mode={mode} restrainWidth={true}>
+      <AdvancedData item={item.advanced} />
+    </AdvancedDataDisplay>
   )}
 </Trait>
-
