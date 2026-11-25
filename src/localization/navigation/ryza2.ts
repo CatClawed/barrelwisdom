@@ -192,7 +192,7 @@ export const ja: NavItem[] = [
     url: "/ryza2/ev-effects/ja"
   },
   {
-    name: "魔物",
+    name: "モンスター",
     url: "/ryza2/monsters/ja"
   },
   {

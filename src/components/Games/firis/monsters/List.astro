@@ -5,6 +5,7 @@ import MonsterList from '@components/Games/_common/List/MonsterList.astro';
 import TextFilter from '@components/Games/_common/Filter/TextFilter.astro';
 import Dropdown from '@components/Games/_common/Filter/Dropdown.astro';
 import { race_translation } from '@app/localization/translations/common-strings';
+import Badge from '@components/Games/_common/Badge.astro';
 
 const { items, lang, title, game, section } = Astro.props;
 const races = await getCollection('firis_races');
@@ -48,7 +49,7 @@ items.sort((a, b) => a.data.index - b.data.index);
         data-ind={i.index}
         data-race={i.data.kind}
       >
-        {i.data.isDX && <span class="badge bg-primary">DX</span>}
+        {i.data.isDX && <Badge text="DX" />}
         <svg class="large-icon">
           <use href={`/spritesheets/${game}.svg?v=1#race-${i.data.kind}`} />
         </svg>

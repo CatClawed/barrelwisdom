@@ -1,0 +1,7 @@
+---
+const { text, className = '', style } = Astro.props;
+---
+
+<span class={`badge bg-primary${className ? ` ${className}` : ''}`} style={style}>
+  {text}
+</span>

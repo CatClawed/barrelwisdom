@@ -1,10 +1,11 @@
 ---
+import Badge from '@components/Games/_common/Badge.astro';
 const { item, lang, game } = Astro.props;
 ---
 
 <tr>
   <td>
     <a href={`/${game}/items/${item.id}/${lang}`}>{item.name[lang]}</a>
-    {item.isDLC && <span class="badge bg-primary">DLC</span>}
+    {item.isDLC && <Badge text="DLC" />}
   </td>
 </tr>

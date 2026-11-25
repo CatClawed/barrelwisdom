@@ -3,6 +3,7 @@ import { colorHex } from '@components/Games/resleriana-red-white/rw_constants';
 import Popover from '@components/Games/_common/Popover.astro';
 import Tree from '@components/Games/resleriana-red-white/items/Tree.astro';
 import ItemAttributeList from './ItemAttributeList.astro';
+import Badge from '@components/Games/_common/Badge.astro';
 import {
   stat_translation,
   monster_translation,
@@ -29,7 +30,7 @@ const { item, lang, mode, game, section } = Astro.props;
 <div class="card">
   <div class="card-title">
     <h4>{item.name[lang]}</h4>
-      {item.dlc && <span class="badge bg-primary">DLC</span>}
+      {item.dlc && <Badge text="DLC" />}
       <svg class="medium-icon">
         <use href={`/spritesheets/${game}.svg?v=1#${item.icon}`}></use>
       </svg>

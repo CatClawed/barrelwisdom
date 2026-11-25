@@ -7,11 +7,12 @@ import {
   location_translation,
   stat_translation,
 } from '@app/localization/translations/common-strings';
+import Badge from '@components/Games/_common/Badge.astro';
 
 const { item, lang, game, section } = Astro.props;
 
 const stats = [
-  { key: 'hp', label: stat_translation.hp[lang] },
+  { key: 'hp', label: 'HP' },
   { key: 'atk', label: stat_translation.atk[lang] },
   { key: 'defen', label: stat_translation.dfn[lang] },
   { key: 'spd', label: stat_translation.spd[lang] },
@@ -23,9 +24,9 @@ const stats = [
     <h3>{item.name[lang]}</h3>
     <div class="card-icon-position">
       {item.race?.[lang]}
-      {item.isDLC && <span class="badge bg-primary">DLC</span>}
-      {item.isStrong && <span class="badge bg-primary">Strong</span>}
-      {item.isDX && <span class="badge bg-primary">DX</span>}
+      {item.isDLC && <Badge text="DLC" />}
+      {item.isStrong && <Badge text="Strong" />}
+      {item.isDX && <Badge text="DX" />}
     </div>
   </div>
 

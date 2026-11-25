@@ -3,6 +3,7 @@ import Popover from '@app/components/Games/_common/Popover.astro';
 import Trait from '@app/components/Games/_common/Detail/Trait.astro';
 import { level_translation } from '@app/localization/translations/common-strings';
 import { colorHex } from '@app/components/Games/resleriana-red-white/rw_constants';
+import Badge from '@components/Games/_common/Badge.astro';
 
 const { item, lang, mode, game, section } = Astro.props;
 
@@ -29,7 +30,7 @@ const traitIcons = [
   chunk={5}
 >
   <div class="card-icon-position" slot="top-level">
-    {item.dlc && <span class="badge bg-primary">DLC</span>}
+    {item.dlc && <Badge text="DLC" />}
     <Popover cls="dashed">
       <span slot="trigger">{level_translation[lang]}:</span>
       <p>A measure of rarity. This number determines where traits appear.</p>

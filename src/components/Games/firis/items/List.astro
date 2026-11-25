@@ -1,11 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
-import ItemAttributeList from './ItemAttributeList.astro';
-import PaneListWrapper from '@components/Games/_common/List/PaneListWrapper.astro';
-import ItemList from '@components/Games/_common/List/ItemList.astro';
+import { category_translation } from '@app/localization/translations/common-strings';
 import Dropdown from '@components/Games/_common/Filter/Dropdown.astro';
 import TextFilter from '@components/Games/_common/Filter/TextFilter.astro';
-import { category_translation } from '@app/localization/translations/common-strings';
+import ItemList from '@components/Games/_common/List/ItemList.astro';
+import PaneListWrapper from '@components/Games/_common/List/PaneListWrapper.astro';
+import { getCollection } from 'astro:content';
+import ItemAttributeList from './ItemAttributeList.astro';
 
 const { items, lang, title, game, section } = Astro.props;
 

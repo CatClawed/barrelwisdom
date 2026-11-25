@@ -149,7 +149,7 @@ export const sc: NavItem[] = [
     url: "/second-light/items/sc"
   },
   {
-    name: "魔物",
+    name: "モンスター",
     url: "/second-light/demons/sc"
   },
   {

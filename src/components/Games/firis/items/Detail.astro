@@ -1,25 +1,22 @@
 ---
-import { colorHex } from '@components/Games/resleriana-red-white/rw_constants';
+import {
+catalyst_translation,
+character_translation,
+details_translation,
+effect_translation,
+ingredient_translation,
+item_translation,
+location_translation,
+monster_translation,
+recipebook_singular_translation,
+shop_translation,
+trait_translation
+} from '@app/localization/translations/common-strings';
 import Popover from '@components/Games/_common/Popover.astro';
+import { colors } from '@components/Games/firis/firis_constants.ts';
 import ItemAttributeList from './ItemAttributeList.astro';
 import RecipeIdeas from './RecipeIdeas.astro';
-import {
-  stat_translation,
-  monster_translation,
-  item_translation,
-  location_translation,
-  effect_translation,
-  trait_translation,
-  shop_translation,
-  recipebook_singular_translation,
-  permalink_translation,
-  character_translation,
-  recipe_ideas_translation,
-  details_translation,
-  catalyst_translation,
-  ingredient_translation,
-} from '@app/localization/translations/common-strings';
-import { colors } from '@components/Games/firis/firis_constants.ts';
+import Badge from '@components/Games/_common/Badge.astro';
 
 const { item, lang, mode, game, section } = Astro.props;
 ---
@@ -27,8 +24,8 @@ const { item, lang, mode, game, section } = Astro.props;
 <div class="card">
   <div class="card-title">
     <h4>{item.name[lang]}</h4>
-    {item.isDLC && <span class="badge bg-primary">DLC</span>}
-    {item.isDX && <span class="badge bg-primary">DX</span>}
+    {item.isDLC && <Badge text="DLC" />}
+    {item.isDX && <Badge text="DX" />}
     {item.level && <b>LV {item.level}</b>}
   </div>
   <div class="image-desc-display">

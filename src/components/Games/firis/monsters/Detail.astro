@@ -3,6 +3,7 @@ import {
   location_translation,
   item_translation,
 } from '@app/localization/translations/common-strings';
+import Badge from '@components/Games/_common/Badge.astro';
 
 const { item, lang, mode, game, section } = Astro.props;
 
@@ -25,7 +26,7 @@ const chart: Record<number, string> = {
       </svg>
       {
         item.isDX && (
-          <span class="badge bg-primary">DX</span>
+          <Badge text="DX" />
         )
       }
     </div>

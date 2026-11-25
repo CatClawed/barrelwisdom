@@ -157,7 +157,7 @@ export const ja: NavItem[] = [
     url: "/sophie2/items/ja"
   },
   {
-    name: "魔物",
+    name: "モンスター",
     url: "/sophie2/monsters/ja"
   },
   {

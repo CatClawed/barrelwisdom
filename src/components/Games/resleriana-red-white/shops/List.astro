@@ -3,6 +3,7 @@ import {
   level_translation,
   trait_translation,
 } from '@app/localization/translations/common-strings';
+import Badge from '@components/Games/_common/Badge.astro';
 
 const { items, lang, title, game, section } = Astro.props;
 ---
@@ -39,9 +40,7 @@ const { items, lang, title, game, section } = Astro.props;
               slot.item.name[lang]
             )}
             {slot.item.dlc && (
-              <span style="margin-left: 0.5em;" class="badge bg-primary">
-                DLC
-              </span>
+              <Badge text="DLC" style="margin-left: 0.5em;" />
             )}
             <ul>
               <li>Cole: {slot.price}</li>

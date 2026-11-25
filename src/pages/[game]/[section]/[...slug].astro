@@ -3,7 +3,8 @@ import MainLayout from '@layouts/MainLayout.astro';
 import type { GetStaticPathsResult } from 'astro';
 import { LanguageData } from '@app/localization/localization';
 import { getCollection } from 'astro:content';
-import { getComponentRegistry, pageTitles } from './path-builder';
+import { getComponentRegistry } from './path-builder';
+import { getSectionLabel } from '@app/localization/translations/section-labels';
 import { pathData, PathConfig } from '@app/consts';
 
 export async function buildsectionPaths(
@@ -78,7 +79,9 @@ const { mode, item, lang, allItems, mainClass, listPath, detailPath } =
 const registry = await getComponentRegistry();
 const ListComponent = registry[game][section].list;
 const DetailComponent = registry[game][section].detail;
-const title: string = listPath ? pageTitles[section][lang] : undefined;
+const title: string | undefined = listPath
+  ? getSectionLabel(game, section, lang)
+  : undefined;
 ---
 
 {

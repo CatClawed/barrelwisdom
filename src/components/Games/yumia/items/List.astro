@@ -12,6 +12,7 @@ import {
 } from '@app/components/Games/yumia/yumia_constants';
 import { category_translation } from '@app/localization/translations/common-strings';
 import { material_translation } from '@app/localization/translations/yumia';
+import Badge from '@components/Games/_common/Badge.astro';
 
 const { items, lang, title, game, section } = Astro.props;
 
@@ -103,9 +104,7 @@ items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
         data-kind={i.data.kind}
       >
         {i.data.isDLC && (
-          <span slot="title-matter" class="badge bg-primary">
-            DLC
-          </span>
+          <Badge slot="title-matter" text="DLC" />
         )}
         <ItemAttributeList
           cats={i.data.cats}

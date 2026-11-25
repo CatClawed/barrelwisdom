@@ -13,13 +13,14 @@ import {
   properties_translation,
   recipebook_singular_translation,
   stat_translation,
+  trait_translation,
 } from '@app/localization/translations/common-strings';
 
 const { item, lang, mode, game, section } = Astro.props as any;
 const stats = item.stats?.[0];
 const statRows = [
-  { key: 'hp', label: stat_translation.hp[lang] },
-  { key: 'mp', label: stat_translation.mp?.[lang] ?? 'MP' },
+  { key: 'hp', label: "HP" },
+  { key: 'mp', label: "MP" },
   { key: 'atk', label: stat_translation.atk[lang] },
   { key: 'defen', label: stat_translation.dfn[lang] },
   { key: 'spd', label: stat_translation.spd[lang] },
@@ -119,7 +120,7 @@ const disassembledFrom = item.disassembled_by?.flat() ?? [];
 
   {item.traits && item.traits.length > 0 && (
     <>
-      <b>Traits</b>
+      <b>{trait_translation[lang]}</b>
       <ul class="two-column">
         {item.traits.map((trait: any) => (
           <li>

@@ -1,0 +1,46 @@
+---
+import TextFilter from '@components/Games/_common/Filter/TextFilter.astro';
+
+const {
+  items,
+  lang,
+  title,
+  game,
+  section,
+  DetailComponent,
+  getSearchText,
+} = Astro.props;
+---
+
+<h1>{title}</h1>
+<div class="filters">
+  <TextFilter gridSize={12} lang={lang} />
+</div>
+<ul
+  class="list"
+  id="item-list"
+  data-lang={lang}
+  data-game={game}
+  data-section={section}
+>
+  {items.map((entry: any) => (
+    <li
+      class="list-container"
+      data-id={entry.id}
+      data-search={getSearchText(entry.data, lang)}
+    >
+      <DetailComponent
+        item={entry.data}
+        lang={lang}
+        mode="list"
+        game={game}
+        section={section}
+      />
+    </li>
+  ))}
+</ul>
+
+<script>
+  import { initListFilters } from '@app/utils/filter-controller';
+  initListFilters({});
+</script>

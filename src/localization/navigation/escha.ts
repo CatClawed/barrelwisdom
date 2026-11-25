@@ -176,7 +176,7 @@ export const ja: NavItem[] = [
     url: "/escha/recipe-books/ja"
   },
   {
-    name: "潜在能力",
+    name: "潜力",
     url: "/escha/properties/ja"
   },
   {
@@ -184,7 +184,7 @@ export const ja: NavItem[] = [
     url: "/escha/effects/ja"
   },
   {
-    name: "魔物",
+    name: "モンスター",
     url: "/escha/monsters/ja"
   }
 ];

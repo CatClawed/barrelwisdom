@@ -1,15 +1,3 @@
-import {
-  catalyst_translation,
-  effect_translation,
-  item_translation,
-  monster_translation,
-  properties_translation,
-  recipe_ideas_translation,
-  recipebook_translation,
-  shop_translation,
-  trait_translation,
-} from '@app/localization/translations/common-strings';
-import { recipe_tree_translation } from '@app/localization/translations/rw';
 import { pathData } from '@app/consts';
 
 export async function getComponentRegistry() {
@@ -24,16 +12,3 @@ export async function getComponentRegistry() {
   }
   return registry;
 }
-
-export const pageTitles: Record<string, Record<string, string>> = {
-  items: item_translation,
-  effects: effect_translation,
-  monsters: monster_translation,
-  traits: trait_translation,
-  properties: properties_translation,
-  shops: shop_translation,
-  catalysts: catalyst_translation,
-  "recipe-books": recipebook_translation,
-  "recipe-ideas": recipe_ideas_translation,
-  "recipe-trees": recipe_tree_translation,
-};

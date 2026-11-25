@@ -1,6 +1,7 @@
 ---
 import ItemList from '@components/Games/_common/List/ItemList.astro';
 import StandardData from './StandardData.astro';
+import Badge from '@components/Games/_common/Badge.astro';
 import TextFilter from '@components/Games/_common/Filter/TextFilter.astro';
 
 const { items, lang, title, game, section } = Astro.props;
@@ -33,14 +34,10 @@ items.sort((a, b) => a.data.index - b.data.index);
           data-search={`${i.data.name[lang].toLowerCase()} ^ ${i.data.items.map((it) => it.name[lang].toLowerCase())}`}
         >
           {i.data.isDLC && (
-            <span slot="title-matter" class="badge bg-primary">
-              DLC
-            </span>
+            <Badge slot="title-matter" text="DLC" />
           )}
           {i.data.isDX && (
-            <span slot="title-matter" class="badge bg-primary">
-              DX
-            </span>
+            <Badge slot="title-matter" text="DX" />
           )}
           <StandardData book={i.data} lang={lang} game={game} />
         </ItemList>

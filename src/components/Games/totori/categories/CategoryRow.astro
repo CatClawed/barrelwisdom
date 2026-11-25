@@ -1,4 +1,5 @@
 ---
+import Badge from '@components/Games/_common/Badge.astro';
 import { level_translation } from '@app/localization/translations/common-strings';
 
 const { item, lang, game } = Astro.props;
@@ -8,7 +9,7 @@ const { item, lang, game } = Astro.props;
   <td>
     <a href={`/${game}/items/${item.id}/${lang}`}>{item.name[lang]}</a>
     {item.level && ` (${level_translation[lang]} ${item.level})`}
-    {item.isDLC && <span class="badge bg-primary">DLC</span>}
-    {item.isDX && <span class="badge bg-primary">DX</span>}
+    {item.isDLC && <Badge text="DLC" />}
+    {item.isDX && <Badge text="DX" />}
   </td>
 </tr>

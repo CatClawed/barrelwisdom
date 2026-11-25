@@ -1,10 +1,10 @@
 ---
 import { parseUrl } from '@app/utils/navigation';
 import {
-  crumbDictionary,
   defaultBreadcrumbs,
 } from '@app/localization/breadcrumbs';
 import { gameNames } from '@app/localization/game-names';
+import { getSectionLabel } from '@app/localization/translations/section-labels';
 
 interface Breadcrumb {
   label: string;
@@ -38,7 +38,7 @@ function getBreadcrumbs() {
 
   for (let i = 1; i < parts.length - 1; i++) {
     baseUrl = `${baseUrl}/${parts[i]}`;
-    let label = crumbDictionary[parts[i]]?.[lang];
+    let label = getSectionLabel(gameId, parts[i], lang);
     if (label) gameCrumb.push({ label, url: `${baseUrl}/${lang}` });
   }
   return gameCrumb;

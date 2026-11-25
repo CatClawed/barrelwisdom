@@ -63,7 +63,7 @@ export const ja: NavItem[] = [
     url: "/firis/items/ja"
   },
   {
-    name: "魔物",
+    name: "モンスター",
     url: "/firis/monsters/ja"
   },
   {

@@ -12,7 +12,7 @@ export const item_translation: Record<string, string> = {
 
 export const monster_translation: Record<string, string> = {
     "en": "Monsters",
-    "ja": "魔物",
+    "ja": "モンスター",
     "sc": "魔物",
     "tc": "魔物",
     "de": "Monster",
@@ -274,7 +274,12 @@ export const level_translation: Record<string, string> = {
     "ru": "Уровень"
 };
 
-export const properties_translation: Record<string, string> = {
+export const properties_translation_ayesha: Record<string, string> = {
     "en": "Properties",
     "ja": "潜在能力",
+}
+
+export const properties_translation: Record<string, string> = {
+    "en": "Properties",
+    "ja": "潜力",
 }

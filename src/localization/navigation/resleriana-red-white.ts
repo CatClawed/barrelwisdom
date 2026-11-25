@@ -55,7 +55,7 @@ export const ja: NavItem[] = [
     svg: "resleriana-red-white.svg?v=1#guide-effects"
   },
   {
-    name: "魔物",
+    name: "モンスター",
     url: "/resleriana-red-white/monsters/ja",
     svg: "resleriana-red-white.svg?v=1#enemy-large"
   },
