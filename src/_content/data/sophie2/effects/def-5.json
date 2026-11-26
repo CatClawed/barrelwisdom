@@ -1,0 +1,1 @@
+{"id":"def-5","index":2072,"name":{"en":"DEF +5","ja":"防御力＋５","tc":"防禦力+5","sc":"防御力+5","ko":"방어력＋5"},"desc":{"en":"Increases DEF by 5.","ja":"防御力が５上昇する","tc":"防禦力上升5。","sc":"防御力提升5。","ko":"방어력 5 상승"},"advanced":[{"actTag0":"ACT_EQUIP_ADD_PARAM_DEF","min_1_0":"5"}],"items":[{"id":"scrap-armor","name":{"en":"Scrap Armor","ja":"スクラップアーマー","tc":"鐵屑鎧甲","sc":"铁屑铠甲","ko":"스크랩 아머"}}]}

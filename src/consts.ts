@@ -4,6 +4,7 @@ import { yumiaData } from '@app/_content/schemas/yumia_schema';
 import { eschaData } from '@app/_content/schemas/escha_schema';
 import { firisData } from '@app/_content/schemas/firis_schema';
 import { shallieData } from '@app/_content/schemas/shallie_schema';
+import { sophie2Data } from '@app/_content/schemas/sophie2_schema';
 
 export const SITE_TITLE = 'Barrel Wisdom';
 export const SITE_DESCRIPTION = 'The source for all things Atelier.';
@@ -13,6 +14,7 @@ export const gameData = [
   ...totoriData,
   ...eschaData,
   ...shallieData,
+  ...sophie2Data,
   ...firisData,
   ...yumiaData,
   ...reslerianaRWData,
@@ -63,9 +65,13 @@ export const pathData: PathConfig[] = [
   // { game: 'ryza2', section: 'effects' },
   //
   // { game: 'sophie2', section: 'items' },
-  // { game: 'sophie2', section: 'traits' },
+  { game: 'sophie2', section: 'traits' },
   // { game: 'sophie2', section: 'monsters' },
-  // { game: 'sophie2', section: 'effects' },
+  { game: 'sophie2', section: 'effects' },
+  // { game: 'sophie2', section: 'major-gathering' },
+  // { game: 'sophie2', section: 'recipe-ideas' },
+  // { game: 'sophie2', section: 'seeds' },
+  // { game: 'sophie2', section: 'locations', listPath: false },
   //
   { game: 'resleriana-red-white', section: 'items' },
   { game: 'resleriana-red-white', section: 'traits' },

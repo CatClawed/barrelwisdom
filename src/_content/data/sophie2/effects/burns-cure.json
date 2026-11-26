@@ -1,0 +1,1 @@
+{"id":"burns-cure","index":411,"name":{"en":"Burns Cure","ja":"火傷を治療","tc":"治療燒傷","sc":"治疗火伤","ko":"화상 치료"},"desc":{"en":"Cures Burns.","ja":"対象の火傷を解除する","tc":"解除目標的燒傷狀態。","sc":"解除目标的火伤状态。","ko":"대상의 화상상태를 해제"},"advanced":[{"actTag0":"ACT_CURE_BURN"}],"items":[{"id":"sedative-ointment","name":{"en":"Sedative Ointment","ja":"安らぎの塗り薬","tc":"安寧藥膏","sc":"安宁药膏","ko":"안정약"}}]}
