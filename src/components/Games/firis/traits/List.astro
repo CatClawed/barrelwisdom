@@ -2,6 +2,7 @@
 import Detail from './Detail.astro';
 import FilterButton from '@components/Games/_common/Filter/FilterButton.astro';
 import TextFilter from '@components/Games/_common/Filter/TextFilter.astro';
+import { traitFilterButtonsFor, traitFilterValues } from '@components/Games/_common/trait-filter-config';
 
 const { items, lang, title, game, section } = Astro.props;
 items.sort((a, b) => a.data.index - b.data.index);
@@ -14,14 +15,7 @@ items.sort((a, b) => a.data.index - b.data.index);
     svg={`${game}.svg?v=1`}
     name="traits"
     gridSpan={6}
-    list={[
-      { filterKey: 'syn', icon: 'synthesis' },
-      { filterKey: 'atk', icon: 'attack' },
-      { filterKey: 'heal', icon: 'heal' },
-      { filterKey: 'wep', icon: 'weapon' },
-      { filterKey: 'arm', icon: 'armor' },
-      { filterKey: 'acc', icon: 'accessory' },
-    ]}
+    list={traitFilterButtonsFor(game)}
   />
 </div>
 <ul
@@ -37,16 +31,7 @@ items.sort((a, b) => a.data.index - b.data.index);
         class="list-container"
         data-id={i.id}
         data-search={`${i.data.name[lang].toLowerCase()} ^ ${i.data.desc[lang].toLowerCase()} _ ${i.data.combo1 ? i.data.combo1.name[lang].toLowerCase() : ''} x ${i.data.combo2 ? i.data.combo2.name[lang].toLowerCase() : ''}`}
-        data-traits={[
-          i.data.trans_heal && 'heal',
-          i.data.trans_wpn && 'wep',
-          i.data.trans_arm && 'arm',
-          i.data.trans_acc && 'acc',
-          i.data.trans_syn && 'syn',
-          i.data.trans_atk && 'atk',
-        ]
-          .filter(Boolean)
-          .join(',')}
+        data-traits={traitFilterValues(i.data, game)}
       >
         <Detail
           item={i.data}

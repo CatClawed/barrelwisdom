@@ -3,16 +3,10 @@ import Popover from '@app/components/Games/_common/Popover.astro';
 import Trait from '@app/components/Games/_common/Detail/Trait.astro';
 import { item_translation } from '@app/localization/translations/common-strings';
 import { colorHex } from '@app/components/Games/resleriana-red-white/rw_constants';
+import { traitIconsFor } from '@app/components/Games/_common/trait-filter-config';
 
 const { item, lang, mode, game, section } = Astro.props;
-
-const traitIcons = [
-  { key: 'synth', icon: 'synthesis' },
-  { key: 'usable', icon: 'bomb' },
-  { key: 'ingot', icon: 'weapon' },
-  { key: 'cloth', icon: 'armor' },
-  { key: 'accessory', icon: 'accessory' },
-];
+const traitIcons = traitIconsFor(game);
 ---
 <Trait
   trait={item}

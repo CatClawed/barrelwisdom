@@ -2,6 +2,7 @@
 import Detail from './Detail.astro';
 import FilterButton from '@components/Games/_common/Filter/FilterButton.astro';
 import TextFilter from '@components/Games/_common/Filter/TextFilter.astro';
+import { traitFilterButtonsFor, traitFilterValues } from '@components/Games/_common/trait-filter-config';
 
 const { items, lang, title, game, section } = Astro.props;
 
@@ -15,17 +16,7 @@ items.sort((a, b) => a.data.index - b.data.index);
     svg={`${game}.svg?v=1`}
     name="traits"
     gridSpan={6}
-    list={[
-      { filterKey: 'trans_atk', icon: 'type-attack' },
-      { filterKey: 'trans_heal', icon: 'type-heal' },
-      { filterKey: 'trans_dbf', icon: 'type-debuff' },
-      { filterKey: 'trans_buff', icon: 'type-buff' },
-      { filterKey: 'trans_wpn', icon: 'type-weapon' },
-      { filterKey: 'trans_arm', icon: 'type-armor' },
-      { filterKey: 'trans_acc', icon: 'type-accessory' },
-      { filterKey: 'trans_tal', icon: 'category-talismans' },
-      { filterKey: 'trans_exp', icon: 'type-exploration' },
-    ]}
+    list={traitFilterButtonsFor(game)}
   />
 </div>
 <ul
@@ -43,17 +34,7 @@ items.sort((a, b) => a.data.index - b.data.index);
       trait.combo1?.name?.[lang],
       trait.combo2?.name?.[lang],
     ].filter(Boolean).join(' ');
-    const filterValues = [
-      trait.trans_atk && 'trans_atk',
-      trait.trans_heal && 'trans_heal',
-      trait.trans_dbf && 'trans_dbf',
-      trait.trans_buff && 'trans_buff',
-      trait.trans_wpn && 'trans_wpn',
-      trait.trans_arm && 'trans_arm',
-      trait.trans_acc && 'trans_acc',
-      trait.trans_tal && 'trans_tal',
-      trait.trans_exp && 'trans_exp',
-    ].filter(Boolean).join(',');
+    const filterValues = traitFilterValues(trait, game);
 
     return (
       <li

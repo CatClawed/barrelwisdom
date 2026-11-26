@@ -3,19 +3,13 @@ import AdvancedData from '../effects/AdvancedData.astro';
 import AdvancedDataDisplay from '@app/components/Games/_common/Detail/AdvancedDataDisplay.astro';
 import LevelPopover from '@app/components/Games/_common/Detail/LevelPopover.astro';
 import Trait from '@app/components/Games/_common/Detail/Trait.astro';
+import { traitIconsFor } from '@app/components/Games/_common/trait-filter-config';
 
 const { item, lang, mode, game, section } = Astro.props;
 const combos = [item.combo1, item.combo2, item.combo3].filter(
   (combo) => Boolean(combo),
 );
-const traitIcons = [
-  { key: "bomb",       icon: 'bomb' },
-  { key: "heal",       icon: 'heal' },
-  { key: "buff",       icon: 'buff' },
-  { key: "weapon",     icon: 'weapon' },
-  { key: "armor",      icon: 'armor' },
-  { key: "accessory",  icon: 'accessory' }
-];
+const traitIcons = traitIconsFor(game);
 ---
 <Trait
   trait={item}
