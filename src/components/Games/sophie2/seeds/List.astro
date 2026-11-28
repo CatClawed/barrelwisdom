@@ -58,7 +58,8 @@ const seedGroups = [seeds.slice(0, 2), seeds.slice(2, 4), seeds.slice(4)];
   }
 </div>
 
-<style>
+<style lang="scss">
+  @use '@styles/variables' as v;
   .seed-groups {
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -78,7 +79,7 @@ const seedGroups = [seeds.slice(0, 2), seeds.slice(2, 4), seeds.slice(4)];
     padding-left: 0;
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: v.$breakpoint-md) {
     .seed-groups table,
     .seed-groups table:last-child {
       grid-column: span 12;

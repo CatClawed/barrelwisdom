@@ -8,6 +8,7 @@ import Dropdown from '@components/Games/_common/Filter/Dropdown.astro';
 import FilterButton from '@components/Games/_common/Filter/FilterButton.astro';
 import TextFilter from '@components/Games/_common/Filter/TextFilter.astro';
 import { category_translation } from '@app/localization/translations/common-strings';
+import { filterButtons } from '@components/Games/sophie2/sophie2_constants';
 
 const { items, lang, title, game, section } = Astro.props;
 
@@ -18,21 +19,6 @@ const categoryOptions = categories.map((cat) => ({
   label: cat.data.name[lang],
   icon: `/spritesheets/${game}.svg?v=1#category-${cat.id}`,
 }));
-
-const filterButtons = [
-  { filterKey: 'attack', icon: 'type-attack' },
-  { filterKey: 'heal', icon: 'type-heal' },
-  { filterKey: 'debuffer', icon: 'type-debuff' },
-  { filterKey: 'buffer', icon: 'type-buff' },
-  { filterKey: 'weapon', icon: 'type-weapon' },
-  { filterKey: 'armor', icon: 'type-armor' },
-  { filterKey: 'accessory', icon: 'type-accessory' },
-  { filterKey: 'amulet', icon: 'category-talismans' },
-  { filterKey: 'field', icon: 'type-exploration' },
-  { filterKey: 'mix', icon: 'type-synthesis' },
-  { filterKey: 'material', icon: 'ryza2-material', diffsvg: 'main.svg?v=1' },
-  { filterKey: 'important', icon: 'category-key-items' },
-];
 
 items.sort((a, b) => (a.data.index ?? 0) - (b.data.index ?? 0));
 ---
