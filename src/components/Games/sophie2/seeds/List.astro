@@ -1,0 +1,88 @@
+---
+import { seed_translation } from '@app/localization/translations/common-strings';
+
+const { items, lang, game } = Astro.props;
+const seeds = items.sort((a, b) => a.data.index - b.data.index);
+const seedGroups = [seeds.slice(0, 2), seeds.slice(2, 4), seeds.slice(4)];
+---
+
+<h1>{seed_translation[lang]}</h1>
+<p><b>Key things to know:</b></p>
+<ul>
+  <li>The better your seed's rank (quality + traits), the rarer the items you get.</li>
+  <li>Seed-grown items may have effects, such as Synth Quantity +1 or (Element) Lv. +2.</li>
+  <li>
+    The traits you get are determined by the traits on your seeds. For the highest
+    level traits, you need to use seeds with traits that have at least level 50.
+    What's level? A hidden value every trait has; the values are listed{' '}
+    <a href={`/${game}/traits/${lang}`}>here</a>.
+  </li>
+  <li>
+    Need more greenhouses? Grow more seeds. I didn’t count, but it should be less
+    than 20 for all four. Story progress matters too.
+  </li>
+</ul>
+
+<div class="seed-groups">
+  {
+    seedGroups.map((group) => (
+      <table class="tbl borders">
+        <tbody>
+          <tr>
+            {group.map((seed) => (
+              <th>
+                <a href={`/${game}/items/${seed.id}/${lang}`}>
+                  {seed.data.name[lang]}
+                </a>
+              </th>
+            ))}
+          </tr>
+          <tr>
+            {group.map((seed) => (
+              <td>
+                <ul>
+                  {seed.data.items?.map((item) => (
+                    <li>
+                      <a href={`/${game}/items/${item.id}/${lang}`}>
+                        {item.name[lang]}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </td>
+            ))}
+          </tr>
+        </tbody>
+      </table>
+    ))
+  }
+</div>
+
+<style lang="scss">
+  @use '@styles/variables' as v;
+  .seed-groups {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .seed-groups table {
+    grid-column: span 6;
+  }
+
+  .seed-groups table:last-child {
+    grid-column: span 12;
+  }
+
+  .seed-groups ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  @media (max-width: v.$breakpoint-md) {
+    .seed-groups table,
+    .seed-groups table:last-child {
+      grid-column: span 12;
+    }
+  }
+</style>

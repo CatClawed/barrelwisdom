@@ -1,0 +1,56 @@
+---
+import LevelPopover from '@app/components/Games/_common/Detail/LevelPopover.astro';
+import Trait from '@app/components/Games/_common/Detail/Trait.astro';
+import { traitIconsFor } from '@app/components/Games/_common/trait-filter-config';
+import { item_translation } from '@app/localization/translations/common-strings';
+
+const { item, lang, mode, game, section } = Astro.props;
+const traitIcons = traitIconsFor(game);
+---
+
+<Trait
+  trait={item}
+  mode={mode}
+  game={game}
+  lang={lang}
+  section={section}
+  icons={traitIcons}
+  chunk={5}
+>
+  <div class="card-icon-position" slot="top-level">
+    <LevelPopover
+      lang={lang}
+      description="Influences rank. A measure of rarity. This number determines where traits appear."
+    />
+    {item.grade}
+  </div>
+
+  {item.item_set?.length > 0 && (
+    <>
+      <b>{item_translation[lang]}</b>
+      <ul>
+        {item.item_set.map((linkedItem: any) => (
+          <li>
+            <a href={`/${game}/items/${linkedItem.id}/${lang}`}>
+              {linkedItem.name[lang]}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  {item.combo1 && item.combo2 && (
+    <p>
+      <a href={`/${game}/traits/${item.combo1.id}/${lang}`}>
+        {item.combo1.name[lang]}
+      </a>
+      {' x '}
+      <a href={`/${game}/traits/${item.combo2.id}/${lang}`}>
+        {item.combo2.name[lang]}
+      </a>
+    </p>
+  )}
+
+  {item.desc?.[lang] && <p>{item.desc[lang]}</p>}
+</Trait>

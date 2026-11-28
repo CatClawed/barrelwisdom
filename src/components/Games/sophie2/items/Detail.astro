@@ -1,0 +1,348 @@
+---
+import {
+character_translation,
+details_translation,
+effect_translation,
+ingredient_translation,
+location_translation,
+monster_translation,
+recipe_idea_translation,
+recipebook_singular_translation,
+seed_translation,
+shop_translation,
+stat_translation,
+trait_translation,
+} from '@app/localization/translations/common-strings';
+import Badge from '@components/Games/_common/Badge.astro';
+import Popover from '@components/Games/_common/Popover.astro';
+import { filterButtons, effectColors, effectIcons } from '@components/Games/sophie2/sophie2_constants';
+import Component from './Component.astro';
+import ItemAttributeList from './ItemAttributeList.astro';
+
+const { item, lang, mode, game, section } = Astro.props;
+
+const allCats = [
+  ...(item.categories ?? []).map((c: any) => ({ ...c, add: false })),
+  ...(item.add ?? []).map((c: any) => ({ ...c, add: true })),
+];
+
+const kindMatch = filterButtons.find((btn) => btn.filterKey === item.kind);
+const spritesheet = kindMatch?.diffsvg || `${game}.svg?v=1`;
+const iconName = kindMatch?.icon;
+---
+
+<div class="card">
+  <div class="card-title">
+    <h4>{item.name?.[lang]}</h4>
+    {item.isDLC && <Badge text="DLC" />}
+    {iconName && (
+      <svg class="medium-icon">
+        <use href={`/spritesheets/${spritesheet}#${iconName}`} />
+      </svg>
+    )}
+  </div>
+
+  <div class="image-desc-display">
+    <img
+      src={`/media/games/${game}/${section}/${item.id}.webp?v=1`}
+      alt={item.name?.[lang] ?? item.id}
+      style="aspect-ratio: 1; width: 200px;"
+    />
+    <table class="tbl-transparent blabber-gabber">
+      <tbody>
+        {[1, 2, 3, 4].map(
+          (i) =>
+            item[`char${i}`] && (
+              <tr>
+                <td>
+                  <img
+                    src={`/media/games/${game}/characters/${item[`char${i}`].id}.webp?v=1`}
+                    alt={item[`char${i}`].name[lang]}
+                  />
+                </td>
+                <td>{item[`desc${i}`][lang]}</td>
+              </tr>
+            ),
+        )}
+      </tbody>
+    </table>
+  </div>
+
+  <ItemAttributeList cats={allCats} lang={lang} game={game} mode={mode} />
+
+  {item.traits?.length > 0 && (
+    <p>
+      <b>{trait_translation[lang]}: </b>
+      {item.traits.map((trait: any, index: number) => (
+        <>
+          <a href={`/${game}/traits/${trait.id}/${lang}`}>
+            {trait.name?.[lang]}
+          </a>
+          {index < item.traits.length - 1 && ', '}
+        </>
+      ))}
+    </p>
+  )}
+
+  {item.book?.[0] && (
+    <p>
+      <b>{recipebook_singular_translation[lang]}: </b>
+      <a href={`/${game}/items/books/${item.book[0].id}/${lang}`}>
+        {item.book[0].name?.[lang]}
+      </a>
+    </p>
+  )}
+
+  {item.seed && (
+    <p>
+      <b>{seed_translation[lang]}: </b>
+      <a href={`/${game}/items/${item.seed.id}/${lang}`}>
+        {item.seed.name?.[lang]}
+      </a>
+    </p>
+  )}
+
+  {item.chest?.[0] && (
+    <p>
+      <b>Chest: </b>
+      {item.chest[0].region?.[lang]}
+      {item.chest[0].subregion?.[lang] && ` > ${item.chest[0].subregion[lang]}`}
+    </p>
+  )}
+
+  {item.shop && (
+    <p>
+      <b>{shop_translation[lang]}: </b>
+      {item.shop[lang]}
+    </p>
+  )}
+
+  {(item.price || item.wt || item.quantity || item.uses || item.range) && (
+    <ul style="list-style:none;padding-left:0;column-count:2;">
+      {item.price && <li>Cole: {item.price}</li>}
+      {item.wt && <li>WT: {item.wt}</li>}
+      {item.quantity && <li>Quantity: {item.quantity}</li>}
+      {item.uses && <li>Uses: {item.uses}</li>}
+      {item.range && <li>Range: {item.range}</li>}
+    </ul>
+  )}
+
+  {item.locations?.length > 0 && (
+    <>
+      <b>{location_translation[lang]}</b>
+      <ul class="two-column">
+        {item.locations.map((location: any) => (
+          <li>
+            <a
+              href={`/${game}/locations/${location.id}/${lang}?item=${encodeURIComponent(item.name?.[lang] ?? '')}`}
+            >
+              {location.name?.[lang]}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  {item.ideas?.length > 0 && (
+    <>
+      <a
+        href={`/${game}/recipe-ideas/${lang}?tab=${item.char?.id ?? 'shared'}`}
+      >
+        <b>{recipe_idea_translation[lang]}</b>
+      </a>
+      <ul>
+        {item.ideas.map(
+          (idea: any) => idea.text?.[lang] && <li set:html={idea.text[lang]} />,
+        )}
+      </ul>
+    </>
+  )}
+
+  {item.monsters?.length > 0 && (
+    <>
+      <b>{monster_translation[lang]}</b>
+      <ul class="two-column">
+        {item.monsters.map((monster: any) => (
+          <li>
+            <a href={`/${game}/monsters/${monster.id}/${lang}`}>
+              {monster.name?.[lang]}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  {item.ingredient?.length > 0 && (
+    <table class="tbl">
+      <tbody>
+        <tr>
+          <th>{ingredient_translation[lang]}</th>
+        </tr>
+        <tr>
+          <td>
+            <ul>
+              {item.ingredient.map((ingredient: any) => (
+                <li>
+                  {ingredient.cat ? (
+                    <a
+                      href={`/${game}/categories/${ingredient.cat.id}/${lang}`}
+                    >
+                      {ingredient.cat.name?.[lang]}
+                    </a>
+                  ) : ingredient.item ? (
+                    <a href={`/${game}/items/${ingredient.item.id}/${lang}`}>
+                      {ingredient.item.name?.[lang]}
+                    </a>
+                  ) : ingredient.synth?.item ? (
+                    <a
+                      href={`/${game}/items/${ingredient.synth.item.id}/${lang}`}
+                    >
+                      {ingredient.synth.item.name?.[lang]}
+                    </a>
+                  ) : null}
+                  {ingredient.quantity ? ` x${ingredient.quantity}` : ''}
+                </li>
+              ))}
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  )}
+
+  {item.effects?.length > 0 && (
+    <table class="tbl">
+      <tbody>
+        <tr>
+          <th colspan="2">{effect_translation[lang]}</th>
+        </tr>
+        {item.effects.map((effectLine: any) => (
+          <tr>
+            <td style="vertical-align:middle;width:2rem;">
+              <svg
+                class="medium-icon"
+                style={`fill:#${effectColors[effectLine.elem] ?? '777'}`}
+              >
+                <use
+                  href={`/spritesheets/${game}.svg?v=1#element-${effectIcons[effectLine.elem] ?? 'light'}`}
+                />
+              </svg>
+            </td>
+            <td>
+              <ul style="list-style:none;padding-left:0;">
+                {effectLine.data?.map((entry: any, index: number) => (
+                  <li>
+                    {entry.effect ? (
+                      <Popover
+                        title={entry.effect.name[lang]}
+                        href={`/${game}/effects/${entry.effect.id}/${lang}`}
+                      >
+                        <p>{entry.effect.desc[lang]}</p>
+                        <a href={`/${game}/effects/${entry.effect.id}/${lang}`}>
+                          {details_translation[lang]}
+                        </a>
+                        <span slot="trigger">{entry.effect.name[lang]}</span>
+                      </Popover>
+                    ) : (
+                      <Popover title={entry.component.name[lang]}>
+                        <Component
+                          components={[entry.component]}
+                          game={game}
+                        />
+                        <span slot="trigger">{entry.component.name[lang]}</span>
+                      </Popover>
+                    )}
+                    <span
+                      class:list={{
+                        maxed:
+                          effectLine.maxlv && entry.num >= effectLine.maxlv,
+                        restricted:
+                          effectLine.restrict != null &&
+                          index >= effectLine.restrict,
+                      }}
+                    >
+                      {entry.num !== undefined && ` (${entry.num})`}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )}
+
+  {item.components?.length > 0 && (
+    <table class="tbl">
+      <tbody>
+        <tr>
+          <th>Components</th>
+        </tr>
+        <tr>
+          <td>
+            <Component
+              components={item.components}
+              game={game}
+              lang={lang}
+              effectColors={effectColors}
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  )}
+
+  {item.equip && (
+    <table class="tbl">
+      <tbody>
+        <tr>
+          <th colspan="2">Stats</th>
+        </tr>
+        {(['hp', 'mp', 'atk', 'dfn', 'spd'] as const).map((stat) => (
+          <tr>
+            <td style="text-align:right;width:50%;padding-top:0.2rem;">
+              <b>{stat_translation[stat]?.[lang] ?? stat.toUpperCase()} </b>
+            </td>
+            <td style="padding-left:0.5em;padding-top:0.2rem;">
+              {item.equip[stat] ?? 0}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )}
+
+  {item.chars?.length > 0 && (
+    <table class="tbl">
+      <tbody>
+        <tr>
+          <th>{character_translation[lang]}</th>
+        </tr>
+        <tr>
+          <td>
+            {item.chars.map((character: any) => (
+              <img
+                src={`/media/games/${game}/characters/${character.id}.webp`}
+                alt={character.id}
+                style="aspect-ratio:1;width:82px;"
+                loading="lazy"
+              />
+            ))}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  )}
+</div>
+
+<style lang="scss">
+  .maxed {
+    color: darkgray;
+  }
+  .restricted {
+    color: red;
+  }
+</style>

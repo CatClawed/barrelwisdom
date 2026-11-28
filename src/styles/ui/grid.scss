@@ -1,4 +1,5 @@
 // list behavior
+@use '@styles/variables' as v;
 
 .two-column {
   display: grid;
@@ -43,7 +44,7 @@
 
 @include grid-x;
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: v.$breakpoint-md) {
   @include grid-x-sm;
 }
 
@@ -56,13 +57,13 @@
   //margin-bottom: 1rem;
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: v.$breakpoint-md) {
   .item-grid {
     grid-template-columns: 1fr 1fr;
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: v.$breakpoint-md) {
   .item-grid {
     grid-template-columns: auto;
   }

@@ -1,0 +1,1 @@
+{"id":"paralysis-cure","index":413,"name":{"en":"Paralysis Cure","ja":"麻痺を治療","tc":"治療麻痺","sc":"治疗麻痹","ko":"마비 치료"},"desc":{"en":"Cures Paralysis.","ja":"対象の麻痺を解除する","tc":"解除目標的麻痺狀態。","sc":"解除目标的麻痹状态。","ko":"대상의 마비상태를 해제"},"advanced":[{"actTag0":"ACT_CURE_PARALYSIS"}],"items":[{"id":"rest-bubbles","name":{"en":"Rest Bubbles","ja":"レストバブル","tc":"休養泡泡","sc":"休养泡泡","ko":"레스트 버블"}}]}

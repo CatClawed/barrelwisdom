@@ -1,0 +1,74 @@
+---
+import FilterButton from '@components/Games/_common/Filter/FilterButton.astro';
+import TextFilter from '@components/Games/_common/Filter/TextFilter.astro';
+import MonsterList from '@components/Games/_common/List/MonsterList.astro';
+import PaneListWrapper from '@components/Games/_common/List/PaneListWrapper.astro';
+
+const { items, lang, title, game, section } = Astro.props;
+
+const filterButtons = [
+  { filterKey: 'puni', icon: 'race-puni' },
+  { filterKey: 'ghost', icon: 'race-ghost' },
+  { filterKey: 'bat', icon: 'race-bat' },
+  { filterKey: 'rabbit', icon: 'race-rabbit' },
+  { filterKey: 'mushroom', icon: 'race-mushroom' },
+  { filterKey: 'small-groll', icon: 'race-small-groll' },
+  { filterKey: 'jellyfish', icon: 'race-jellyfish' },
+  { filterKey: 'bird', icon: 'race-bird' },
+  { filterKey: 'apostle', icon: 'race-apostle' },
+  { filterKey: 'dryad', icon: 'race-dryad' },
+  { filterKey: 'medium-groll', icon: 'race-medium-groll' },
+  { filterKey: 'golem', icon: 'race-golem' },
+  { filterKey: 'dragonaire', icon: 'race-dragonaire' },
+  { filterKey: 'sea-serpent', icon: 'race-sea-serpent' },
+  { filterKey: 'dream-eater', icon: 'race-dream-eater' },
+  { filterKey: 'elvira', icon: 'race-elvira' },
+];
+
+items.sort((a, b) => a.data.index - b.data.index);
+---
+
+<PaneListWrapper
+  title={title}
+  section={section}
+  game={game}
+  lang={lang}
+  placeholder="puni"
+>
+  <div class="filters" slot="filters">
+    <TextFilter gridSize={12} lang={lang} />
+    <FilterButton
+      svg={`${game}.svg?v=1`}
+      name="kind"
+      singleOnly={true}
+      gridSpan={12}
+      list={filterButtons}
+    />
+  </div>
+  {items.map((i, index) => (
+    <MonsterList
+      item={i}
+      img={`/media/games/${game}/${section}/${i.id}.webp`}
+      game={game}
+      section={section}
+      lang={lang}
+      index={index}
+      data-id={i.id}
+      data-search={i.data.name[lang]}
+      data-ind={i.index}
+      data-kind={i.data.kind}
+    >
+      <svg class="large-icon">
+        <use href={`/spritesheets/${game}.svg?v=1#race-${i.data.kind}`} />
+      </svg>
+    </MonsterList>
+  ))}
+</PaneListWrapper>
+<script>
+  import { initListFilters } from '@app/utils/filter-controller';
+  import { initPaneController } from '@app/utils/detail-pane-controller';
+  initListFilters({
+    filters: [{ type: 'buttons', key: 'kind', groupName: 'kind' }],
+  });
+  initPaneController();
+</script>

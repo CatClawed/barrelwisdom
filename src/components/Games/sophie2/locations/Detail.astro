@@ -1,0 +1,244 @@
+---
+import TextFilter from '@app/components/Games/_common/Filter/TextFilter.astro';
+import Popover from '@app/components/Games/_common/Popover.astro';
+
+const { item: region, lang, game } = Astro.props;
+const weatherIcons: Record<string, { icon: string; label: string }> = {
+  sun: { icon: 'fa-sun', label: 'Sun' },
+  rain: { icon: 'fa-rain', label: 'Rain' },
+  snow: { icon: 'fa-snow', label: 'Snow' },
+  thunder: { icon: 'fa-lightning', label: 'Thunder' },
+};
+const toolIcons: Record<string, string> = {
+  HAND: 'tool-gather',
+  ROD: 'tool-staff',
+  FISH: 'tool-fishing-rod',
+  SICKLE: 'tool-sickle',
+  NET: 'tool-bug-net',
+  PICKAXE: 'tool-pickaxe',
+  HAMMER: 'tool-hammer',
+  SHOT: 'tool-slingshot',
+};
+---
+
+<h1>{region.name[lang]}</h1>
+
+<nav class="table-of-contents" aria-label="Areas">
+  <ol>
+    {
+      region.areas?.map((area) => (
+        <li>
+          <a href={`#${area.id}`}>{area.name[lang]}</a>
+          {area.climate && area.climate.length > 1 && (
+            <ul>
+              {area.climate.map((climate) => {
+                const weather = weatherIcons[climate.weather ?? ''];
+                return (
+                  weather && (
+                    <li>
+                      <a href={`#${area.id}-${climate.weather}`}>
+                        {weather.label}{' '}
+                        <svg class="small-icon" aria-hidden="true">
+                          <use
+                            href={`/spritesheets/${game}.svg?v=1#${weather.icon}`}
+                          />
+                        </svg>
+                      </a>
+                    </li>
+                  )
+                );
+              })}
+            </ul>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</nav>
+
+<div class="filters">
+  <TextFilter lang={lang} inputId="location-item-filter" queryParam="item" />
+</div>
+
+{
+  region.areas?.map((area) => (
+    <section class="location-area" id={area.id}>
+      <h2>{area.name[lang]}</h2>
+      {area.chests && area.chests.length > 0 && (
+        <>
+          <b>Chest:</b>
+          <ul>
+            {area.chests.map((chest) => (
+              <li>
+                {chest.item && (
+                  <a href={`/${game}/items/${chest.item.id}/${lang}`}>
+                    {chest.item.name?.[lang]}
+                  </a>
+                )}
+                {chest.book && (
+                  <a href={`/${game}/items/books/${chest.book.id}/${lang}`}>
+                    {chest.book.name?.[lang]}
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+
+      {area.climate?.map((climate) => {
+        const weather = weatherIcons[climate.weather ?? ''];
+        return (
+          <>
+            {weather && (
+              <h3 id={`${area.id}-${climate.weather}`}>
+                {weather.label}{' '}
+                <svg class="small-icon" aria-hidden="true">
+                  <use href={`/spritesheets/${game}.svg?v=1#${weather.icon}`} />
+                </svg>
+              </h3>
+            )}
+          {climate.mons && climate.mons.length > 0 && (
+            <>
+              <b>Monsters:</b>
+              <ul>
+                {climate.mons.map((monster) => (
+                  <li>
+                    <a href={`/${game}/monsters/${monster.id}/${lang}`}>
+                      {monster.name?.[lang]}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+          <table class="tbl borders gathering-table">
+            <thead>
+              <tr>
+                <th>Tool</th>
+                {[1, 2, 3].map((rank) => (
+                  <th aria-label={`Rank ${rank}`}>
+                    {Array.from({ length: rank }, () => (
+                      <svg class="small-icon" aria-hidden="true">
+                        <use href="/spritesheets/main.svg?v=1#fa-star" />
+                      </svg>
+                    ))}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {climate.nodes?.map((node) => {
+                const itemNames = node.items?.map((gatheredItem) =>
+                  (gatheredItem.name?.[lang] ?? '').toLowerCase(),
+                ) ?? [];
+                const toolIcon = toolIcons[node.tool ?? ''];
+
+                return (
+                  <tr
+                    data-gathering-node
+                    data-item-names={JSON.stringify(itemNames)}
+                  >
+                    <td class="gathering-tool">
+                      {toolIcon ? (
+                        <svg
+                          class:list={[
+                            'svg-icon',
+                            { 'major-tool': node.kind?.startsWith('major') },
+                          ]}
+                          aria-label={node.tool}
+                        >
+                          <use href={`/spritesheets/${game}.svg?v=1#${toolIcon}`} />
+                        </svg>
+                      ) : (
+                        node.tool
+                      )}
+                      <Popover title="Gather Type" restrainWidth={false}>
+                        <svg
+                          slot="trigger"
+                          class="a23-plus-icon"
+                          aria-label="Gather type details"
+                        >
+                          <use href={`/spritesheets/${game}.svg?v=1#fa-square-plus`} />
+                        </svg>
+                        {node.kind}
+                      </Popover>
+                    </td>
+                    {node.items?.map((gatheredItem) => (
+                      <td>
+                        <a href={`/${game}/items/${gatheredItem.id}/${lang}`}>
+                          {gatheredItem.name?.[lang]}
+                        </a>
+                        <br />
+                        {gatheredItem.priority}%
+                      </td>
+                    ))}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </>
+        );
+      })}
+    </section>
+  ))
+}
+
+<script>
+  const input = document.getElementById(
+    'location-item-filter',
+  ) as HTMLInputElement | null;
+  const nodes = Array.from(
+    document.querySelectorAll<HTMLTableRowElement>('[data-gathering-node]'),
+  );
+
+  function applyFilter() {
+    const query = input?.value.toLowerCase() ?? '';
+    nodes.forEach((node) => {
+      const itemNames = JSON.parse(node.dataset.itemNames ?? '[]') as string[];
+      node.hidden =
+        query.length > 0 && !itemNames.some((name) => name.includes(query));
+    });
+  }
+
+  input?.addEventListener('input', applyFilter);
+  applyFilter();
+</script>
+
+<style>
+  .table-of-contents a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .location-area h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .gathering-table th,
+  .gathering-tool {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .gathering-tool .svg-icon {
+    width: 2rem;
+    height: 2rem;
+    vertical-align: middle;
+  }
+
+  .gathering-tool .major-tool {
+    fill: darkorange;
+  }
+
+  .a23-plus-icon {
+    width: 1.5em;
+    height: 1.5em;
+    fill: var(--secondary-color);
+    vertical-align: middle;
+  }
+</style>

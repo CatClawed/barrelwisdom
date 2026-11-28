@@ -1,0 +1,357 @@
+---
+import Popover from '@app/components/Games/_common/Popover.astro';
+
+const { items, lang, title, game } = Astro.props;
+const columns = 5;
+const groups = [
+  { id: 'sophie', character: 'sophie', image: 'sophie' },
+  { id: 'plachta', character: 'plachta', image: 'plachta' },
+  { id: 'shared', character: 'shared' },
+  { id: 'reference', character: 'references' },
+];
+
+const recipeGroups = groups.map((group) => {
+  const entries = items
+    .filter((entry) => entry.data.char?.id === group.character)
+    .sort(
+      (a, b) =>
+        a.data.row - b.data.row ||
+        a.data.col - b.data.col,
+    );
+  const firstRow = entries[0]?.data.row ?? 1;
+  const lastRow = entries.at(-1)?.data.row ?? firstRow;
+  const rows = Array.from({ length: lastRow - firstRow + 1 }, (_, rowIndex) => {
+    const row = firstRow + rowIndex;
+    return Array.from({ length: columns }, (_, columnIndex) =>
+      entries.find(
+        (entry) =>
+          entry.data.row === row && entry.data.col === columnIndex + 1,
+      ),
+    );
+  });
+
+  return { ...group, rows };
+});
+
+const requestedTab = Astro.url.searchParams.get('tab');
+const normalizedTab = requestedTab === 'references' ? 'reference' : requestedTab;
+const initialTab = groups.some((group) => group.id === normalizedTab)
+  ? normalizedTab
+  : 'sophie';
+---
+
+<h1>{title}</h1>
+<div class="recipe-idea-browser" data-default-tab={initialTab}>
+  <div class="recipe-tabs" role="tablist" aria-label="Recipe characters">
+    {
+      groups.map((group) => (
+        <button
+          type="button"
+          class="recipe-tab"
+          role="tab"
+          id={`recipe-tab-${group.id}`}
+          aria-controls={`recipe-panel-${group.id}`}
+          aria-selected={initialTab === group.id ? 'true' : 'false'}
+          tabindex={initialTab === group.id ? 0 : -1}
+          data-tab={group.id}
+        >
+          {group.id === 'reference' ? (
+            <svg class="reference-book-icon" aria-label="References">
+              <use href={`/spritesheets/${game}.svg?v=1#book`} />
+            </svg>
+          ) : group.id === 'shared' ? (
+            <>
+              <img
+                src="/media/games/sophie2/characters/sophie.webp"
+                alt="Sophie"
+              />
+              <img
+                src="/media/games/sophie2/characters/plachta.webp"
+                alt="Plachta"
+              />
+            </>
+          ) : (
+            <img
+              src={`/media/games/sophie2/characters/${group.image}.webp`}
+              alt={group.character}
+            />
+          )}
+        </button>
+      ))
+    }
+  </div>
+
+  {
+    recipeGroups.map((group) => (
+      <div
+        class="recipe-grid"
+        role="tabpanel"
+        id={`recipe-panel-${group.id}`}
+        aria-labelledby={`recipe-tab-${group.id}`}
+        data-panel={group.id}
+        hidden={initialTab !== group.id}
+      >
+        {group.rows.flatMap((row) =>
+          row.map((entry) =>
+            entry ? (
+              <Popover
+                title={entry.data.item.name[lang]}
+                cls="recipe-cell-trigger"
+                restrainWidth={false}
+              >
+                <span slot="trigger" class="recipe-cell">
+                  <img
+                    class="recipe-item-image"
+                    src={`/media/games/${game}/items/${entry.data.item.id}.webp?v=1`}
+                    alt={entry.data.item.name[lang]}
+                    loading="lazy"
+                  />
+                  <svg
+                    class="recipe-cell-frame"
+                    viewBox="0 0 230 230"
+                    aria-hidden="true"
+                  >
+                    <path d="M69.3275 2.88664L161.554 2.88665L226.768 68.1008L226.768 160.327L161.554 225.542L69.3275 225.542L4.11336 160.327L4.11336 68.1008L69.3275 2.88664Z" fill="#7CA790" />
+                    <path d="M115 0L196.317 33.6827L230 115L196.317 196.317L115 230L33.6827 196.317L0 115L33.6827 33.6827L115 0Z" fill="#F0FAF4" />
+                    <path d="M26.3883 26.3883L114.777 27.2767L203.165 26.3883L202.277 114.777L203.165 203.165L114.777 202.277L26.3883 203.165L27.2767 114.777L26.3883 26.3883Z" fill="#F0FAF4" />
+                    <path d="M114.712 5.74643L191.762 37.6616L223.677 114.712L191.762 191.762L114.712 223.677L37.6616 191.762L5.74644 114.712L37.6616 37.6616L114.712 5.74643Z" fill="#7CA790" />
+                    <path d="M30.75 30.75L114.5 31.5917L198.25 30.75L197.408 114.5L198.25 198.25L114.5 197.408L30.75 198.25L31.5917 114.5L30.75 30.75Z" fill="#7CA790" />
+                    <path d="M114.709 7.04498L190.839 38.5791L222.373 114.709L190.839 190.839L114.709 222.373L38.5791 190.839L7.04499 114.709L38.5791 38.5791L114.709 7.04498Z" fill="#F0FAF4" />
+                    <path d="M31.75 31.75L114.5 32.5817L197.25 31.75L196.418 114.5L197.25 197.25L114.5 196.418L31.75 197.25L32.5817 114.5L31.75 31.75Z" fill="#F0FAF4" />
+                  </svg>
+                  {entry.data.hor && <span class="recipe-connection horizontal" />}
+                  {entry.data.ver && <span class="recipe-connection vertical" />}
+                </span>
+
+                {
+                  entry.data.item.ideas?.map((idea) => (
+                    <p set:html={idea.text?.[lang] ?? ''} />
+                  ))
+                }
+                {
+                  entry.data.item.book?.[0] && (
+                    <>
+                      <p>
+                        <b>Book: </b>
+                        <a href={`/sophie2/items/books/${entry.data.item.book[0].id}/${lang}`}>
+                          {entry.data.item.book[0].name?.[lang]}
+                        </a>
+                      </p>
+                      <p>
+                        <b>Acquisition: </b>
+                        {entry.data.item.book[0].shop?.name?.[lang]}
+                        {entry.data.item.book[0].note}
+                        {entry.data.item.book[0].chest?.[0]?.region?.[lang]}
+                        {entry.data.item.book[0].chest?.[0]?.subregion && ' > '}
+                        {entry.data.item.book[0].chest?.[0]?.subregion?.[lang]}
+                      </p>
+                    </>
+                  )
+                }
+                <a href={`/${game}/items/${entry.data.item.id}/${lang}`}>
+                  Item Info
+                </a>
+              </Popover>
+            ) : (
+              <span class="recipe-cell-empty" aria-hidden="true" />
+            ),
+          ),
+        )}
+      </div>
+    ))
+  }
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.recipe-idea-browser').forEach((browser) => {
+    const tabs = Array.from(
+      browser.querySelectorAll<HTMLButtonElement>('[data-tab]'),
+    );
+    const panels = Array.from(
+      browser.querySelectorAll<HTMLElement>('[data-panel]'),
+    );
+    const defaultTab = browser.dataset.defaultTab ?? 'sophie';
+
+    function selectTab(tabId: string, updateUrl = false) {
+      const normalizedTab = tabId === 'references' ? 'reference' : tabId;
+      const tabExists = tabs.some((tab) => tab.dataset.tab === normalizedTab);
+      const selectedTab = tabExists ? normalizedTab : defaultTab;
+
+      tabs.forEach((tab) => {
+        const selected = tab.dataset.tab === selectedTab;
+        tab.setAttribute('aria-selected', String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+      });
+      panels.forEach((panel) => {
+        panel.hidden = panel.dataset.panel !== selectedTab;
+      });
+
+      if (updateUrl) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('tab', selectedTab);
+        window.history.replaceState(null, '', url);
+      }
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        selectTab(tab.dataset.tab ?? defaultTab, true);
+      });
+      tab.addEventListener('keydown', (event) => {
+        const currentIndex = tabs.indexOf(tab);
+        const nextIndex =
+          event.key === 'ArrowRight'
+            ? (currentIndex + 1) % tabs.length
+            : event.key === 'ArrowLeft'
+              ? (currentIndex - 1 + tabs.length) % tabs.length
+              : event.key === 'Home'
+                ? 0
+                : event.key === 'End'
+                  ? tabs.length - 1
+                  : -1;
+        if (nextIndex === -1) return;
+
+        event.preventDefault();
+        tabs[nextIndex].focus();
+        selectTab(tabs[nextIndex].dataset.tab ?? defaultTab, true);
+      });
+    });
+
+    window.addEventListener('popstate', () => {
+      selectTab(new URL(window.location.href).searchParams.get('tab') ?? defaultTab);
+    });
+
+    selectTab(new URL(window.location.href).searchParams.get('tab') ?? defaultTab);
+  });
+</script>
+
+<style lang="scss">
+  @use '@styles/variables' as v;
+
+  .recipe-idea-browser {
+    width: 100%;
+  }
+
+  @media (min-width: v.$breakpoint-md) {
+    .recipe-idea-browser {
+      width: 70%;
+      margin-inline: auto;
+    }
+  }
+
+  .recipe-tabs {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1rem 0;
+  }
+
+  .recipe-tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 4rem;
+    min-height: 4rem;
+    margin: 0;
+    padding: 0.25rem;
+    border: 0;
+    border-radius: 0.25rem;
+    background: var(--primary-color);
+    cursor: pointer;
+  }
+
+  .recipe-tab[aria-selected='true'] {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
+  }
+
+  .recipe-tab img {
+    width: auto;
+    height: 3.75rem;
+    aspect-ratio: 128 / 125;
+  }
+
+  .reference-book-icon {
+    width: 3rem;
+    height: 3rem;
+    fill: white;
+  }
+
+  .recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .recipe-grid[hidden] {
+    display: none;
+  }
+
+  .recipe-cell-empty {
+    display: block;
+    aspect-ratio: 1;
+  }
+
+  :global(.recipe-grid > .popover-wrapper) {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+  }
+
+  :global(.recipe-cell-trigger) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
+    position: relative;
+    text-decoration: none;
+  }
+
+  .recipe-cell {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .recipe-item-image {
+    z-index: 1;
+    width: 75%;
+    height: 75%;
+    max-width: 256px;
+    max-height: 256px;
+    aspect-ratio: 1;
+    object-fit: contain;
+  }
+
+  .recipe-cell-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform: scale(0.85);
+  }
+
+  .recipe-connection {
+    position: absolute;
+    z-index: -1;
+    background: black;
+  }
+
+  .recipe-connection.horizontal {
+    top: 46%;
+    left: 50%;
+    width: 100%;
+    height: 8%;
+  }
+
+  .recipe-connection.vertical {
+    bottom: 50%;
+    left: 46%;
+    width: 8%;
+    height: 100%;
+  }
+</style>

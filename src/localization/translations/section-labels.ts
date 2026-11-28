@@ -2,10 +2,12 @@ import {
   catalyst_translation,
   effect_translation,
   item_translation,
+  major_gathering_translation,
   monster_translation,
   properties_translation,
   recipe_ideas_translation,
   recipebook_translation,
+  seed_translation,
   shop_translation,
   trait_translation,
 } from './common-strings';
@@ -24,6 +26,8 @@ const commonSectionLabels: Record<string, Translation> = {
   catalysts: catalyst_translation,
   'recipe-books': recipebook_translation,
   'recipe-ideas': recipe_ideas_translation,
+  seeds: seed_translation,
+  'major-gathering': major_gathering_translation,
   'recipe-trees': recipe_tree_translation,
 };
 

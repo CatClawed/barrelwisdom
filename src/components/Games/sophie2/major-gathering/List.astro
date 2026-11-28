@@ -1,0 +1,152 @@
+---
+import TextFilter from '@app/components/Games/_common/Filter/TextFilter.astro';
+
+const { items, lang, title, game } = Astro.props;
+const major = items[0]?.data ?? {};
+
+const tools = [
+  { key: 'sickle', id: 'sickle', label: 'Sickle', icon: 'tool-sickle' },
+  { key: 'fish', id: 'fish', label: 'Fishing Rod', icon: 'tool-fishing-rod' },
+  { key: 'net', id: 'net', label: 'Bug Net', icon: 'tool-bug-net' },
+  { key: 'pickaxe', id: 'pickaxe', label: 'Pickaxe', icon: 'tool-pickaxe' },
+  { key: 'shot', id: 'slingshot', label: 'Slingshot', icon: 'tool-slingshot' },
+  { key: 'hammer', id: 'hammer', label: 'Hammer', icon: 'tool-hammer' },
+] as const;
+
+const weatherIcons: Record<string, { icon: string; label: string }> = {
+  sun: { icon: 'fa-sun', label: 'Sun' },
+  rain: { icon: 'fa-rain', label: 'Rain' },
+  snow: { icon: 'fa-snow', label: 'Snow' },
+  thunder: { icon: 'fa-lightning', label: 'Thunder' },
+};
+---
+
+<h1>{title}</h1>
+
+<nav class="table-of-contents" aria-label="Tools">
+  <ol>
+    {
+      tools.map((tool) => (
+        <li>
+          <a href={`#${tool.id}`}>
+            {tool.label}
+            <svg class="small-icon" aria-hidden="true">
+              <use href={`/spritesheets/${game}.svg?v=1#${tool.icon}`} />
+            </svg>
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</nav>
+
+<div class="filters">
+  <TextFilter lang={lang} inputId="major-gathering-item-filter" queryParam="item" />
+</div>
+
+{
+  tools.map((tool) => {
+    const nodes = major[tool.key] ?? [];
+    if (nodes.length === 0) return null;
+
+    return (
+      <section class="major-gathering-section" id={tool.id}>
+        <h2>
+          {tool.label}{' '}
+          <svg class="svg-icon" aria-hidden="true">
+            <use href={`/spritesheets/${game}.svg?v=1#${tool.icon}`} />
+          </svg>
+        </h2>
+        <table class="tbl borders">
+          <thead>
+            <tr>
+              <th>Area</th>
+              {[1, 2, 3].map((rank) => (
+                <th aria-label={`Rank ${rank}`}>
+                  {Array.from({ length: rank }, () => (
+                    <svg class="small-icon" aria-hidden="true">
+                      <use href="/spritesheets/main.svg?v=1#fa-star" />
+                    </svg>
+                  ))}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {nodes.map((node: any) => {
+              const itemNames =
+                node.items?.map((gatheredItem: any) =>
+                  (gatheredItem.name?.[lang] ?? '').toLowerCase(),
+                ) ?? [];
+              const weather = weatherIcons[node.weather ?? ''];
+
+              return (
+                <tr
+                  data-gathering-node
+                  data-item-names={JSON.stringify(itemNames)}
+                >
+                  <td>
+                    <a href={`/${game}/locations/${node.region?.id}/${lang}`}>
+                      {node.region?.name?.[lang]}
+                    </a>
+                    {weather && (
+                      <>
+                        {' '}
+                        <svg class="small-icon" aria-label={weather.label}>
+                          <use
+                            href={`/spritesheets/${game}.svg?v=1#${weather.icon}`}
+                          />
+                        </svg>
+                      </>
+                    )}
+                    <br />
+                    <a
+                      href={`/${game}/locations/${node.region?.id}/${lang}#${node.area?.id}`}
+                    >
+                      {node.area?.name?.[lang]}
+                    </a>
+                  </td>
+                  {node.items?.map((gatheredItem: any) => (
+                    <td>
+                      <a href={`/${game}/items/${gatheredItem.id}/${lang}`}>
+                        {gatheredItem.name?.[lang]}
+                      </a>
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </section>
+    );
+  })
+}
+
+<script>
+  const input = document.getElementById(
+    'major-gathering-item-filter',
+  ) as HTMLInputElement | null;
+  const nodes = Array.from(
+    document.querySelectorAll<HTMLTableRowElement>('[data-gathering-node]'),
+  );
+
+  function applyFilter() {
+    const query = input?.value.toLowerCase() ?? '';
+    nodes.forEach((node) => {
+      const itemNames = JSON.parse(node.dataset.itemNames ?? '[]') as string[];
+      node.hidden =
+        query.length > 0 && !itemNames.some((name) => name.includes(query));
+    });
+  }
+
+  input?.addEventListener('input', applyFilter);
+  applyFilter();
+</script>
+
+<style>
+  .major-gathering-section h2 .svg-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+</style>

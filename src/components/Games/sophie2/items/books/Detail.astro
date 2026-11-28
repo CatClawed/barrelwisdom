@@ -1,0 +1,55 @@
+---
+import Badge from '@components/Games/_common/Badge.astro';
+import {
+  item_translation,
+  shop_translation,
+} from '@app/localization/translations/common-strings';
+
+const { item, lang, mode, game, section } = Astro.props;
+---
+
+<div class="card">
+  <div class="card-title">
+    <h4>{item.name?.[lang]}</h4>
+    {item.isDLC && <Badge text="DLC" />}
+  </div>
+  <div class="image-desc-display">
+    <img src={`/media/games/sophie2/items/${item.id}.webp?v=1`} alt="" />
+    <div>
+      {item.items?.length > 0 && (
+        <>
+          <b>{item_translation[lang]}</b>
+          <ul>
+            {item.items.map((item: any) => (
+              <li>
+                <a href={`/sophie2/items/${item.id}/${lang}`}>
+                  {item.name?.[lang]}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+
+      {(item.shop || item.note || item.chest?.length > 0) && (
+        <p>
+          <b>Acquisition: </b>
+          {item.shop && (
+            <>
+              <b>{shop_translation[lang]}: </b>
+              {item.shop.name?.[lang]}
+            </>
+          )}
+          {item.note && <>{item.note}</>}
+          {item.chest?.map((chest: any, index: number) => (
+            <>
+              {index > 0 && ', '}
+              {chest.region?.[lang]}
+              {chest.subregion?.[lang] && ` > ${chest.subregion[lang]}`}
+            </>
+          ))}
+        </p>
+      )}
+    </div>
+  </div>
+</div>

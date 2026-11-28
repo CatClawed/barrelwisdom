@@ -1,12 +1,21 @@
 ---
 import { filter_translation } from '@app/localization/translations/common-strings';
-const { gridSize = 12, lang } = Astro.props;
+const {
+  gridSize = 12,
+  lang,
+  inputId = 'filter',
+  queryParam = 'search',
+} = Astro.props;
 ---
 
-<div class={`search-container grid-${gridSize}`}>
+<div
+  class={`search-container grid-${gridSize}`}
+  data-input-id={inputId}
+  data-query-param={queryParam}
+>
   <input
     type="text"
-    id="filter"
+    id={inputId}
     placeholder={filter_translation[lang]}
     autocomplete="off"
   />
@@ -32,15 +41,39 @@ const { gridSize = 12, lang } = Astro.props;
   }
 </style>
 <script>
-  const params = new URLSearchParams(window.location.search);
-  const search = params.get('search');
-  if (search) {
-    const input = document.getElementById('filter') as HTMLInputElement | null;
+  document.addEventListener('keydown', (event) => {
+    if (
+      event.key !== '/' ||
+      event.target instanceof HTMLInputElement ||
+      event.target instanceof HTMLTextAreaElement ||
+      (event.target instanceof HTMLElement && event.target.isContentEditable)
+    ) {
+      return;
+    }
+
+    const customSearch = document.querySelector<HTMLElement>(
+      '.search-container[data-input-id]:not([data-input-id="filter"])',
+    );
+    const input = customSearch?.querySelector<HTMLInputElement>('input');
+    if (!input) return;
+
+    event.preventDefault();
+    input.focus();
+  });
+
+  document.querySelectorAll<HTMLElement>('.search-container').forEach((container) => {
+    const params = new URLSearchParams(window.location.search);
+    const search = params.get(container.dataset.queryParam ?? 'search');
+    if (!search) return;
+
+    const input = document.getElementById(
+      container.dataset.inputId ?? 'filter',
+    ) as HTMLInputElement | null;
     if (input) {
       input.value = search;
       setTimeout(() => {
         input.dispatchEvent(new Event('input', { bubbles: true }));
       }, 0);
     }
-  }
+  });
 </script>

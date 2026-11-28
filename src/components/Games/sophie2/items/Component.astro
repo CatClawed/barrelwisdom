@@ -1,0 +1,65 @@
+---
+import { effectColors } from '@components/Games/sophie2/sophie2_constants';
+interface Props {
+  components: any[];
+  game: string;
+}
+
+const {
+  components = [],
+  game,
+} = Astro.props;
+---
+
+{components.length > 0 && (
+  <div class="component-grid">
+    {components.map((component: any) => (
+      <div class="component">
+        {component.code && (
+          <span class="component-icon" aria-hidden="true">
+            {Array.from({ length: 9 }, (_, index) => {
+              const value = Number(component.code[index + 1] ?? 0);
+              const color =
+                value === 0
+                  ? '635552'
+                  : (effectColors[component.code[0]] ?? '777');
+              return (
+                <svg style={`fill:#${color}; color:#${color};`}>
+                  <use
+                    href={`/spritesheets/${value < 2 ? `${game}.svg?v=1#fa-square` : 'main.svg?v=1#fa-star'}`}
+                  />
+                </svg>
+              );
+            })}
+          </span>
+        )}
+      </div>
+    ))}
+  </div>
+)}
+
+<style lang="scss">
+  .component-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+    gap: 0.75rem;
+  }
+  .component {
+    display: grid;
+    justify-items: center;
+    gap: 0.25rem;
+  }
+  .component-icon {
+    display: grid;
+    grid-template-columns: repeat(3, 0.8em);
+    gap: 1px;
+    padding: 2px;
+    border: 1px solid #392d23;
+    border-radius: 5%;
+    background: #392d23;
+  }
+  .component-icon svg {
+    width: 0.8em;
+    height: 0.8em;
+  }
+</style>

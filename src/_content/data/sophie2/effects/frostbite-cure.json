@@ -1,0 +1,1 @@
+{"id":"frostbite-cure","index":412,"name":{"en":"Frostbite Cure","ja":"凍傷を治療","tc":"治療凍傷","sc":"治疗冻伤","ko":"동상 치료"},"desc":{"en":"Cures Frostbite.","ja":"対象の凍傷を解除する","tc":"解除目標的凍傷狀態。","sc":"解除目标的冻伤状态。","ko":"대상의 동상상태를 해제"},"advanced":[{"actTag0":"ACT_CURE_FROSTBITE"}],"items":[{"id":"honey-syrup","name":{"en":"Honey Syrup","ja":"ハニーシロップ","tc":"蜂蜜糖漿","sc":"蜂蜜糖浆","ko":"허니 시럽"}}]}

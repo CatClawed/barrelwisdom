@@ -1,0 +1,33 @@
+---
+import Effect from '@app/components/Games/_common/Detail/Effect.astro';
+import AdvancedData from './AdvancedData.astro'
+import AdvancedDataDisplay from '@app/components/Games/_common/Detail/AdvancedDataDisplay.astro';
+import { item_translation } from '@app/localization/translations/common-strings';
+
+const { item, lang, mode, game, section } = Astro.props;
+---
+
+<Effect
+  name={item.name[lang]}
+  game={game}
+  mode={mode}
+  desc={item.desc[lang]}
+  id={item.id}
+  lang={lang}
+>
+
+  {item.items && (
+      <b style="margin-top: 1em;">{item_translation[lang]}:</b>
+      <ul class="two-column-list">
+        {item.items.map((i: any) => (
+          <li><a href={`/${game}/items/${i.id}/${lang}`}>{i.name[lang]}</a></li>
+        ))}
+      </ul>
+  )}
+  {item.advanced && (
+    <AdvancedDataDisplay mode={mode}>
+      <AdvancedData item={item.advanced} />
+    </AdvancedDataDisplay>
+  )}
+
+</Effect>
