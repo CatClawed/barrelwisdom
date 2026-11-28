@@ -1,0 +1,188 @@
+---
+import {
+  location_translation,
+  item_translation,
+} from '@app/localization/translations/common-strings';
+
+const { item, lang, game, section } = Astro.props;
+
+const stats = [
+  { label: 'HP:', value: item.hp_rank ?? 0 },
+  { label: 'ATK:', value: item.str_rank ?? 0 },
+  { label: 'DEF:', value: item.def_rank ?? 0 },
+  { label: 'SPD:', value: item.spd_rank ?? 0 },
+];
+
+const elements = [
+  { key: 'resist_phys', icon: 'element-physical', color: '#c88401', label: 'Physical' },
+  { key: 'resist_mag', icon: 'element-magic', color: '#5f49ec', label: 'Magic' },
+  { key: 'resist_fire', icon: 'element-fire', color: '#f03a02', label: 'Fire' },
+  { key: 'resist_ice', icon: 'element-ice', color: '#04b5db', label: 'Ice' },
+  { key: 'resist_thun', icon: 'element-lightning', color: '#e3bb05', label: 'Lightning' },
+  { key: 'resist_wind', icon: 'element-wind', color: '#589b1d', label: 'Wind' },
+];
+
+const resistMap: Record<string, { icon: string; count: number; label: string }> = {
+  RESIST: { icon: 'fa-chevron-up', count: 1, label: 'Resist' },
+  SUPER_RESIST: { icon: 'fa-chevron-up', count: 2, label: 'Super Resist' },
+  NOEFFECT: { icon: 'fa-chevron-up', count: 3, label: 'No Effect' },
+  WEAK: { icon: 'fa-chevron-down', count: 1, label: 'Weak' },
+  GREAT_WEAK: { icon: 'fa-chevron-down', count: 2, label: 'Great Weak' },
+  SUPER_WEAK: { icon: 'fa-chevron-down', count: 3, label: 'Super Weak' },
+};
+---
+
+<div class="card">
+  <div class="card-title">
+    <h4>{item.name?.[lang]}</h4>
+    {item.kind && (
+      <svg class="medium-icon" aria-label={item.kind}>
+        <use href={`/spritesheets/${game}.svg?v=1#race-${item.kind}`} />
+      </svg>
+    )}
+  </div>
+
+  <div class="image-desc-display">
+    <img
+      src={`/media/games/${game}/${section}/${item.id}.webp?v=1`}
+      alt={item.name?.[lang] ?? item.id}
+      style="aspect-ratio: 1; width: 256px;"
+    />
+    <table class="tbl-transparent blabber-gabber">
+      <tbody>
+        {[1, 2, 3, 4].map(
+          (i) =>
+            item[`char${i}`] && (
+              <tr>
+                <td>
+                  <img
+                    src={`/media/games/${game}/characters/${item[`char${i}`].id}.webp?v=1`}
+                    alt={item[`char${i}`].name?.[lang] ?? item[`char${i}`].id}
+                  />
+                </td>
+                <td>{item[`desc${i}`]?.[lang]}</td>
+              </tr>
+            ),
+        )}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid">
+    <div class="grid-6">
+      {item.locations?.length > 0 && (
+        <>
+          <b>{location_translation[lang]}</b>
+          <ul>
+            {item.locations.map((loc: any) => (
+              <li>
+                <a href={`/${game}/locations/${loc.id}/${lang}`}>
+                  {loc.name?.[lang]}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+      {item.drops?.length > 0 && (
+        <>
+          <b>{item_translation[lang]}</b>
+          <ul>
+            {item.drops.map((drop: any) => (
+              <li>
+                <a href={`/${game}/items/${drop.id}/${lang}`}>
+                  {drop.name?.[lang]}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+    </div>
+
+    <div class="grid-6">
+      <table class="table-item-data tbl-transparent">
+        <tbody>
+          {stats.map((stat) => (
+            <tr>
+              <td style="padding: 0;">
+                <b>{stat.label}</b>
+              </td>
+              <td style="padding: 0; padding-left: 0.5em;">
+                {Array.from({ length: stat.value }, () => (
+                  <svg class="standard-stat-star" aria-hidden="true">
+                    <use href="/spritesheets/main.svg?v=1#fa-star" />
+                  </svg>
+                ))}
+                {Array.from({ length: Math.max(0, 5 - stat.value) }, () => (
+                  <svg
+                    class="standard-stat-star"
+                    style="fill: black;"
+                    aria-hidden="true"
+                  >
+                    <use href="/spritesheets/main.svg?v=1#fa-star" />
+                  </svg>
+                ))}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <table class="tbl-transparent monster-resist-table">
+    <tbody>
+      <tr>
+        {elements.map((el) => (
+          <td>
+            <svg
+              class="resist-element-icon"
+              style={`fill: ${el.color};`}
+              aria-label={el.label}
+            >
+              <use href={`/spritesheets/${game}.svg?v=1#${el.icon}`} />
+            </svg>
+          </td>
+        ))}
+      </tr>
+      <tr>
+        {elements.map((el) => {
+          const resist = resistMap[item[el.key] ?? ''];
+          return (
+            <td>
+              {resist &&
+                Array.from({ length: resist.count }, () => (
+                  <svg class="resist-chevron-icon" aria-label={resist.label}>
+                    <use href={`/spritesheets/main.svg?v=1#${resist.icon}`} />
+                  </svg>
+                ))}
+            </td>
+          );
+        })}
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .monster-resist-table {
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .monster-resist-table td {
+    text-align: center;
+  }
+
+  .resist-element-icon {
+    width: 2em;
+    height: 2em;
+  }
+
+  .resist-chevron-icon {
+    width: 0.7em;
+    height: 0.7em;
+    fill: black;
+  }
+</style>

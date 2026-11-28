@@ -3,6 +3,7 @@ import { languageSchema, nameLinkSchema } from './common_schema';
 
 const categoryNameLinkSchema = nameLinkSchema.extend({
   isDLC: z.boolean().optional(),
+  add: z.boolean().optional(),
 });
 
 export const nameOnlySchema = z.object({
@@ -134,9 +135,8 @@ export const categorySchema: z.ZodType = z.lazy(() =>
     id: z.string(),
     name: languageSchema.optional(),
     icon: z.string().optional(),
-    items: z.array(categoryNameLinkSchema).optional(),
-    used: z.array(z.lazy(() => ingredientSchema)).optional(),
-    add: z.array(categoryNameLinkSchema).optional(),
+    in_cat: z.array(categoryNameLinkSchema).optional(),
+    used: z.array(categoryNameLinkSchema).optional(),
   }),
 );
 
@@ -148,7 +148,7 @@ export const chestDataSchema = z.object({
 export const bookSchema = z.object({
   id: z.string(),
   name: languageSchema.optional(),
-  shop: languageSchema.optional(),
+  shop: nameLinkSchema.optional(),
   note: z.string().optional(),
   items: z.array(nameLinkSchema).optional(),
   chest: z.array(chestDataSchema).optional(),
@@ -168,7 +168,7 @@ export const characterSchema = z.object({
 });
 
 export const recipeTextSchema = z.object({
-  text: z.string().optional(),
+  text: languageSchema.optional(),
 });
 
 export const componentSchema = z.object({
@@ -194,7 +194,7 @@ export const synthItemSchema = z.object({
   item: nameLinkSchema.optional(),
 });
 
-export const ingredientSchema: z.ZodTypeAny = z.lazy(() =>
+export const ingredientSchema: z.ZodType = z.lazy(() =>
   z.object({
     quantity: z.number().optional(),
     cat: categorySchema.optional(),
@@ -203,7 +203,7 @@ export const ingredientSchema: z.ZodTypeAny = z.lazy(() =>
   }),
 );
 
-export const recipeIdeaSchema: z.ZodTypeAny = z.object({
+export const recipeIdeaSchema: z.ZodType = z.object({
   row: z.number().optional(),
   col: z.number().optional(),
   hor: z.boolean().optional(),
@@ -239,7 +239,7 @@ export const itemSchema: z.ZodType = z.lazy(() =>
     book: z.array(bookSchema).optional(),
     chars: z.array(characterSchema).optional(),
     monsters: z.array(nameLinkSchema).optional(),
-    ideas: z.array(recipeIdeaSchema).optional(),
+    ideas: z.array(recipeTextSchema).optional(),
     ingredient: z.array(ingredientSchema).optional(),
     effects: z.array(effectLineSchema).optional(),
     components: z.array(componentSchema).optional(),

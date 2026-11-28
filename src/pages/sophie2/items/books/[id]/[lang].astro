@@ -1,0 +1,30 @@
+---
+import MainLayout from '@layouts/MainLayout.astro';
+import BookDetail from '@components/Games/sophie2/items/books/Detail.astro';
+import { LanguageData } from '@app/localization/localization';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const books = await getCollection('sophie2_recipe-books');
+  const langs = LanguageData.languages.sophie2;
+
+  return books.flatMap((item) =>
+    langs.map((lang) => ({
+      params: { id: item.id, lang },
+      props: { item, lang },
+    })),
+  );
+}
+
+const { item, lang } = Astro.props;
+---
+
+<MainLayout title={item.data.name?.[lang]} mainClass="small-page">
+  <BookDetail
+    item={item.data}
+    lang={lang}
+    mode="detail"
+    game="sophie2"
+    section="items"
+  />
+</MainLayout>

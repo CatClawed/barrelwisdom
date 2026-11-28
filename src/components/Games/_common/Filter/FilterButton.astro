@@ -27,21 +27,21 @@ const {
   data-filter-group={name}
   style={`grid-template-columns: repeat(auto-fit, 4em);`}
 >
-  {
-    list.map((btn) => (
-      <button
-        type="button"
-        class={'icon-button ' + extraClass}
-        data-filter-key={btn.filterKey}
-        data-single={singleOnly ? 'true' : 'false'}
-        style={`--active-button-bg: ${btn.activeColor || 'black'}`}
-      >
-        <svg preserveAspectRatio="xMidYMid meet">
-          <use href={`/spritesheets/${svg}#${btn.icon}`} />
-        </svg>
-      </button>
-    ))
-  }
+  {list.map((btn) => (
+    <button
+      type="button"
+      class={'icon-button ' + extraClass}
+      data-filter-key={btn.filterKey}
+      data-single={singleOnly ? 'true' : 'false'}
+      style={`--active-button-bg: ${btn.activeColor || 'black'}`}
+    >
+      <svg preserveAspectRatio="xMidYMid meet">
+        <use
+          href={`/spritesheets/${btn.diffsvg ? btn.diffsvg : svg}#${btn.icon}`}
+        />
+      </svg>
+    </button>
+  ))}
 </div>
 <style lang="scss">
   .filter-buttons-grid {

@@ -254,6 +254,14 @@ export const recipe_ideas_translation: Record<string, string> = {
     "ko": "레시피 발상",
 };
 
+export const seed_translation: Record<string, string> = {
+    "en": "Seeds",
+    "ja": "種",
+    "sc": "种子",
+    "tc": "種子",
+    "ko": "씨앗",
+};
+
 export const catalyst_translation: Record<string, string> = {
     "en": "Catalysts",
     "ja": "触媒",
@@ -283,3 +291,11 @@ export const properties_translation: Record<string, string> = {
     "en": "Properties",
     "ja": "潜力",
 }
+
+export const major_gathering_translation: Record<string, string> = {
+    "en": "Major Gathering Spots",
+    "ja": "大採取",
+    "sc": "大采集",
+    "tc": "大採集",
+    "ko": "대채집",
+};
